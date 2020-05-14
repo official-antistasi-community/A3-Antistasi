@@ -59,3 +59,15 @@ if (_typeX == "tier") then
 	incomeRep = false;
 	[] spawn A3A_fnc_statistics;
 	};
+if (_typeX == "localChat") then {
+	_units = [_unit];
+	// TODO: For efficiency, go through `allPlayers` instead of entities
+	_nearUnits = _unit nearEntities ["Man", 10]; // TODO: Balance radius
+	if(count _nearUnits == 0) exitWith {
+		diag_log "nobody in the vicinity to hear the localChat";
+	};
+	_units append _nearUnits; // TODO: Filter out the non-player units?
+	_channelIndex = radioChannelCreate [[1.0,1.0,1.0,1.0], "", "%UNIT_NAME", _units];
+	_unit customChat [_channelIndex, _textX];
+	_channelIndex radioChannelRemove _units; // Don't need it anymore
+};

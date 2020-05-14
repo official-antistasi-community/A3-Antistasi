@@ -268,5 +268,67 @@ if (_typeX == "CONVOY") then
 		[petros,"hint","Convoy Missions require a calmed status around the island, and now it is not the proper time.", "Missions"] remoteExec ["A3A_fnc_commsMP",theBoss];
 		};
 	};
+if (_typeX == "FND") then {
+	_sites = citiesX;
+
+	if (count _sites > 0) then {
+		for "_i" from 0 to ((count _sites) - 1) do {
+			_siteX = _sites select _i;
+			
+			if (_siteX in markersX) then {
+				_pos = getMarkerPos _siteX;
+			} else {
+				_pos = getPos _siteX;
+			};
+			
+			if (_pos distance _posbase < distanceMission) then {
+				_nearOutposts = 
+				if (_siteX in citiesX) then {
+					_dataX = server getVariable _siteX;
+					_prestigeOPFOR = _dataX select 2;
+					_prestigeBLUFOR = _dataX select 3;
+					if (_prestigeOPFOR + _prestigeBLUFOR < 90) then {
+						_potentials pushBack _siteX;
+					};
+				} else {
+					if ([_pos,_posbase] call A3A_fnc_isTheSameIsland) then {_potentials pushBack _siteX};
+				};
+			};
+		};
+	};
+
+	if (count _potentials == 0) then {
+		if (!_silencio) then {
+			[petros,"globalChat","I have no find missions for you. Move our HQ closer to the enemy or finish some other find missions in order to have better intel"] remoteExec ["A3A_fnc_commsMP",theBoss];
+			[petros,"hint","Find Missions require Cities closer than 4Km from your HQ."] remoteExec ["A3A_fnc_commsMP",theBoss];
+		};
+	} else {
+		// Don't spawn inside outposts, only cities
+		_siteX = "";
+		_siteValid = false;
+		while { _siteValid isEqualTo false } do {
+			_siteX = selectRandom _potentials;
+			_foundNearbyOutpost = false;
+			{
+				if (count _potentials == 0) exitWith {
+					_siteValid = true; // No "safe" city found, good luck!
+				};
+
+				_distance = (getMarkerPos _siteX) distance (getMarkerPos _x);
+
+				if (_distance < 500) exitWith {
+					_potentials = _potentials - [_siteX]; // Don't want to process sites multiple times
+					_foundNearbyOutpost = true;
+				};		
+			} forEach outposts;
+
+			if (!_foundNearbyOutpost) exitWith {
+				_siteValid = true; // "safe" city found (city with no outpost in a X meter radius)
+			};
+		};
+
+		[[_siteX],"A3A_fnc_FND_Dealer"] remoteExec ["A3A_fnc_scheduler",2];
+	};
+};
 
 if ((count _potentials > 0) and (!_silencio)) then {[petros,"globalChat","I have a mission for you"] remoteExec ["A3A_fnc_commsMP",theBoss]};

@@ -616,6 +616,140 @@
         <German>Helikopter</German>
       </Key>
     </Container>
+    <Container name="dialog_dealer_menu">
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_some_charges">
+        <Original>Some Charges</Original>
+        <English>Some Charges</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_some_charges_tooltip">
+        <Original>Spend 300 Euros on a small bag of explosives.</Original>
+        <English>Spend 300 Euros on a small bag of explosives.</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_many_charges">
+        <Original>Many Charges</Original>
+        <English>Many Charges</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_many_charges_tooltip">
+        <Original>Spend 800 Euros on a large bag of explosives.</Original>
+        <English>Spend 800 Euros on a large bag of explosives.</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_some_weapons">
+        <Original>Some Weapons</Original>
+        <English>Some Weapons</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_some_weapons_tooltip">
+        <Original>Spend 1000 Euros on a small cache of weapons (you can choose the weapon type)</Original>
+        <English>Spend 1000 Euros on a small cache of weapons (you can choose the weapon type)</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_many_weapons">
+        <Original>Many Weapons</Original>
+        <English>Many Weapons</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_many_weapons_tooltip">
+        <Original>Spend 2500 Euros on a large cache of weapons (you can choose the weapon type)</Original>
+        <English>Spend 2500 Euros on a large cache of weapons (you can choose the weapon type)</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_some_mines">
+        <Original>Some Mines</Original>
+        <English>Some Mines</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_some_mines_tooltip">
+        <Original>Spend 300 Euros on a small bag of mines.</Original>
+        <English>Spend 300 Euros on a small bag of mines.</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_many_mines">
+        <Original>Many Mines</Original>
+        <English>Many Mines</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_many_mines_tooltip">
+        <Original>Spend 800 Euros on a large bag of mines.</Original>
+        <English>Spend 800 Euros on a large bag of mines.</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_some_accessories">
+        <Original>Some Accessories</Original>
+        <English>Some Accessories</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_some_accessories_tooltip">
+        <Original>Spend 500 Euros on a small cache of weapon accessories.</Original>
+        <English>Spend 500 Euros on a small cache of weapon accessories.</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_many_accessories">
+        <Original>Many Accessories</Original>
+        <English>Many Accessories</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_many_accessories_tooltip">
+        <Original>Spend 5000 Euros on a large cache of weapon accessories.</Original>
+        <English>Spend 5000 Euros on a large cache of weapon accessories.</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_assault_rifles">
+        <Original>Assault Rifles</Original>
+        <English>Assault Rifles</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_machineguns">
+        <Original>Machineguns</Original>
+        <English>Machineguns</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_launchers">
+        <Original>Launchers</Original>
+        <English>Launchers</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_pistols">
+        <Original>Pistols</Original>
+        <English>Pistols</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_sniper_rifles">
+        <Original>Sniper Rifles</Original>
+        <English>Sniper Rifles</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_dialog_dealer_menu_random">
+        <Original>Random</Original>
+        <English>Random</English>
+        <French></French>
+        <Russian></Russian>
+      </Key>
+    </Container>
     <Container name="mission_info">
       <Key ID="STR_antistasi_mission_info_altis_description_text">
         <Original>Be the Resistance Leader. Fight against a superior enemy in technology, number, assets and vehicles. Use guerrilla tactics in a totally dynamic world, with around 18 sidemissions, everywhere, anytime, anything.</Original>
@@ -1480,6 +1614,22 @@
       </Key>
       <Key ID="STR_antistasi_journal_entry_text_Credits_3">
         <Original>LanCommi for his artwork.&lt;br/&gt;Goon and jw custom: Part of the code for the NAPALM script.&lt;br/&gt;rebel12340: Radio Jam script&lt;br/&gt;Manko: Earplug snippet&lt;br/&gt;bobchaos: Managing the community despite all difficulties.&lt;br/&gt;And all those players who spend their time on making comments, suggestions and reports on Steam, Github and BIS forums.</Original>
+      </Key>
+    </Container>
+    <Container name="tasks">
+      <Key ID="STR_antistasi_task_title_FND_Dealer">
+        <Original>Find the Crazy Irishman</Original>
+        <English>Find the Crazy Irishman</English>
+      </Key>
+      <Key ID="STR_antistasi_task_desc_FND_Dealer">
+        <Original>Black Market dealer Devin Connell has been spotted near %1. He's scheduled for a flight to Metavira or Arulco at %2, so you better hurry up if you wish to acquire some of his fine products. From our recent meetings with him, he has agreed to meet with FIA overt soldiers only, apparently he doesnt like civilians all that much. </Original>
+        <English>Black Market dealer Devin Connell has been spotted near %1. He's scheduled for a flight to Metavira or Arulco at %2, so you better hurry up if you wish to acquire some of his fine products. From our recent meetings with him, he has agreed to meet with FIA overt soldiers only, apparently he doesnt like civilians all that much. </English>
+      </Key>
+    </Container>
+    <Container name="actions">
+      <Key ID="STR_antistasi_action_buy_dealer">
+        <Original>&lt;img size='1.2' image='\A3\ui_f\data\IGUI\Cfg\Actions\talk_ca.paa' /&gt; Buy</Original>
+        <English>&lt;img size='1.2' image='\A3\ui_f\data\IGUI\Cfg\Actions\talk_ca.paa' /&gt; Buy</English>
       </Key>
     </Container>
   </Package>

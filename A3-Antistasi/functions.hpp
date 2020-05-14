@@ -333,6 +333,8 @@ class A3A
 		class DES_Vehicle {};
 		class LOG_Ammo {};
 		class LOG_Bank {};
+		class FND_Dealer {};
+		class buyGear {};
 		class LOG_Supplies {};
 		class LOG_Salvage {};
 		class missionRequest {};

@@ -129,6 +129,8 @@ markersChanging = [];
 
 playerHasBeenPvP = [];
 
+dealerCrate = ""; // Crate for the FND_Dealer mission
+
 ///////////////////////////////////////////
 //     INITIALISING ITEM CATEGORIES     ///
 ///////////////////////////////////////////

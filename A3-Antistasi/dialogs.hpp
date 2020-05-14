@@ -2848,6 +2848,388 @@ class NATO_player {
 	};
 };
 
+//Dealer menu
+class dealer_menu {
+	idd=-1;
+	movingenable=false;
+
+	class controls {
+		#define A_CLOSE "closeDialog 0"
+
+		class DEALER_box: BOX
+		{
+			idc = -1;
+			text = "";
+			x = 0.244979 * safezoneW + safezoneX;
+			y = 0.223941 * safezoneH + safezoneY;
+			w = 0.445038 * safezoneW;
+			h = 0.492103 * safezoneH;
+		};
+
+		class DEALER_frame: RscFrame
+		{
+			idc = -1;
+			text = "Buy Ordnance"; // TODO: Localize
+			x = 0.254979 * safezoneW + safezoneX;
+			y = 0.233941 * safezoneH + safezoneY;
+			w = 0.425038 * safezoneW;
+			h = 0.462103 * safezoneH;
+		};
+
+		class DEALER_button_back: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_generic_button_back_text;
+			x = 0.61 * safezoneW + safezoneX;
+			y = 0.251941 * safezoneH + safezoneY;
+			w = 0.06 * safezoneW;
+			h = 0.05 * safezoneH;
+			action = A_CLOSE;
+		};
+
+		#define STR_DEALER_SCH "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""expLight"", ""some""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_MCH "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""expLight"", ""many""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+
+		#define STR_DEALER_SWP "closeDialog 0; createDialog ""dealer_menu_weapons_small"";"
+		#define STR_DEALER_MWP "closeDialog 0; createDialog ""dealer_menu_weapons_large"";"
+
+		#define STR_DEALER_SMS "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""expHeavy"", ""some""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_MMS "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""expHeavy"", ""many""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+
+		#define STR_DEALER_SAC "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""aCache"", ""some""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_MAC "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""aCache"", ""many""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+
+		class DEALER_button_L1: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_some_charges;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.317959 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = $STR_antistasi_dialogs_dialog_dealer_menu_some_charges_tooltip;
+			action = STR_DEALER_SCH;
+		};
+
+		class DEALER_button_L2: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_many_charges;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.415981 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = $STR_antistasi_dialogs_dialog_dealer_menu_many_charges_tooltip;
+			action = STR_DEALER_MCH;
+		};
+
+		class DEALER_button_L3: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_some_weapons;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.514003 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = $STR_antistasi_dialogs_dialog_dealer_menu_some_weapons_tooltip;
+			action = STR_DEALER_SWP;
+		};
+
+		class DEALER_button_L4: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_many_weapons;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.612025 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = $STR_antistasi_dialogs_dialog_dealer_menu_many_weapons_tooltip;
+			action = STR_DEALER_MWP;
+		};
+
+		class DEALER_button_R1: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_some_mines;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.317959 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = $STR_antistasi_dialogs_dialog_dealer_menu_some_mines_tooltip;
+			action = STR_DEALER_SMS;
+		};
+
+		class DEALER_button_R2: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_many_mines;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.415981 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = $STR_antistasi_dialogs_dialog_dealer_menu_many_mines_tooltip;
+			action = STR_DEALER_MMS;
+		};
+
+		class DEALER_button_R3: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_some_accessories;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.514003 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = $STR_antistasi_dialogs_dialog_dealer_menu_some_accessories_tooltip;
+			action = STR_DEALER_SAC;
+		};
+		
+		class DEALER_button_R4: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_many_accessories;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.612025 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = $STR_antistasi_dialogs_dialog_dealer_menu_many_accessories_tooltip;
+			action = STR_DEALER_MAC;
+		};
+	};
+};
+
+class dealer_menu_weapons_small {
+	idd=-1;
+	movingenable=false;
+
+	class controls {
+		class DEALER_box: BOX
+		{
+			idc = -1;
+			text = "";
+			x = 0.244979 * safezoneW + safezoneX;
+			y = 0.223941 * safezoneH + safezoneY;
+			w = 0.445038 * safezoneW;
+			h = 0.40 * safezoneH;
+		};
+
+		class DEALER_frame: RscFrame
+		{
+			idc = -1;
+			text = "Weapon Options"; // TODO: Localize
+			x = 0.254979 * safezoneW + safezoneX;
+			y = 0.233941 * safezoneH + safezoneY;
+			w = 0.425038 * safezoneW;
+			h = 0.37 * safezoneH;
+		};
+
+		class DEALER_button_back: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_generic_button_back_text;
+			x = 0.61 * safezoneW + safezoneX;
+			y = 0.251941 * safezoneH + safezoneY;
+			w = 0.06 * safezoneW;
+			h = 0.05 * safezoneH;
+			action = "closeDialog 0; createDialog ""dealer_menu"";";
+		};
+
+		#define STR_DEALER_ASS_S "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""ASRifles"", ""some""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_PIS_S "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""Pistols"", ""some""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_MGS_S "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""Machineguns"", ""some""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_SNP_S "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""Sniper Rifles"", ""some""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_LCH_S "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""Launchers"", ""some""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_RND_S "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""Random"", ""some""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+
+		class DEALER_button_L1: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_assault_rifles;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.317959 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_ASS_S;
+		};
+
+		class DEALER_button_L2: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_machineguns;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.415981 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_MGS_S;
+		};
+
+		class DEALER_button_L3: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_launchers;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.514003 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_LCH_S;
+		};
+
+		class DEALER_button_R1: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_pistols;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.317959 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_PIS_S;
+		};
+
+		class DEALER_button_R2: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_sniper_rifles;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.415981 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_SNP_S;
+		};
+
+		class DEALER_button_R3: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_random;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.514003 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_RND_S;
+		};
+	};
+};
+
+class dealer_menu_weapons_large {
+	idd=-1;
+	movingenable=false;
+
+	class controls {
+		class DEALER_box: BOX
+		{
+			idc = -1;
+			text = "";
+			x = 0.244979 * safezoneW + safezoneX;
+			y = 0.223941 * safezoneH + safezoneY;
+			w = 0.445038 * safezoneW;
+			h = 0.40 * safezoneH;
+		};
+
+		class DEALER_frame: RscFrame
+		{
+			idc = -1;
+			text = "Weapon Options"; // TODO: Localize
+			x = 0.254979 * safezoneW + safezoneX;
+			y = 0.233941 * safezoneH + safezoneY;
+			w = 0.425038 * safezoneW;
+			h = 0.37 * safezoneH;
+		};
+
+		class DEALER_button_back: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_generic_button_back_text;
+			x = 0.61 * safezoneW + safezoneX;
+			y = 0.251941 * safezoneH + safezoneY;
+			w = 0.06 * safezoneW;
+			h = 0.05 * safezoneH;
+			action = "closeDialog 0; createDialog ""dealer_menu"";";
+		};
+
+		#define STR_DEALER_ASS_L "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""ASRifles"", ""many""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_PIS_L "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""Pistols"", ""many""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_MGS_L "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""Machineguns"", ""many""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_SNP_L "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""Sniper Rifles"", ""many""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_LCH_L "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""Launchers"", ""many""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+		#define STR_DEALER_RND_L "closeDialog 0; if ([player] call A3A_fnc_isMember) then {[dealerCrate, ""Random"", ""many""] remoteExec [""A3A_fnc_buyGear"", 2];} else {hint ""Only server members have access to this function""};"
+
+		class DEALER_button_L1: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_assault_rifles;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.317959 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_ASS_L;
+		};
+
+		class DEALER_button_L2: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_machineguns;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.415981 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_MGS_L;
+		};
+
+		class DEALER_button_L3: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_launchers;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.514003 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_LCH_L;
+		};
+
+		class DEALER_button_R1: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_pistols;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.317959 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_PIS_L;
+		};
+
+		class DEALER_button_R2: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_sniper_rifles;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.415981 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_SNP_L;
+		};
+
+		class DEALER_button_R3: RscButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_dialog_dealer_menu_random;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.514003 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+  			h = 0.0560125 * safezoneH;
+			toolTip = "";
+			action = STR_DEALER_RND_L;
+		};
+	};
+};
 
 //Undefined
 class mbt_type {
