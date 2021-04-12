@@ -142,16 +142,6 @@ else
 									if ([_LeaderX] call A3A_fnc_isMember) then {[[],"A3A_fnc_attackHQ"] remoteExec ["A3A_fnc_scheduler",2]};
 								};
 							};
-						}
-						else
-						{
-							_bases = airportsX select {(getMarkerPos _x distance _mortarX < distanceForAirAttack) and ([_x,true] call A3A_fnc_airportCanAttack) and (sidesX getVariable [_x,sideUnknown] != teamPlayer)};
-							if (count _bases > 0) then
-							{
-								_base = [_bases,_positionX] call BIS_fnc_nearestPosition;
-								_sideX = sidesX getVariable [_base,sideUnknown];
-								[[getPosASL _mortarX,_sideX,"Normal",false],"A3A_fnc_patrolCA"] remoteExec ["A3A_fnc_scheduler",2];
-							};
 						};
 					};
 					_mortarX setVariable ["detection",[_positionX,_chance]];
@@ -197,6 +187,36 @@ if (_side != teamPlayer) then
 		};
 		_veh removeEventHandler ["GetIn", _thisEventHandler];
 	}];
+};
+
+if(_veh isKindOf "Air") then
+{
+    //Start airspace control script if rebel player enters
+    _veh addEventHandler
+    [
+        "GetIn",
+        {
+            params ["_veh", "_role", "_unit"];
+            if((side (group _unit) == teamPlayer) && {isPlayer _unit}) then
+            {
+                [_veh] spawn A3A_fnc_airspaceControl;
+            };
+        }
+    ];
+
+
+    _veh addEventHandler
+    [
+        "IncomingMissile",
+        {
+            params ["_target", "_ammo", "_vehicle", "_instigator"];
+            private _group = group driver _target;
+            private _supportTypes = [_group, _vehicle] call A3A_fnc_chooseSupport;
+            _supportTypes = _supportTypes - ["QRF"];
+            private _reveal = [getPos _vehicle, side _group] call A3A_fnc_calculateSupportCallReveal;
+            [_vehicle, 4, _supportTypes, side _group, _reveal] remoteExec ["A3A_fnc_sendSupport", 2];
+        }
+    ]
 };
 
 // Handler to prevent vehDespawner deleting vehicles for an hour after rebels exit them

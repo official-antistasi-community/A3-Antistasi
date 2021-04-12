@@ -145,7 +145,7 @@ vehNATOBoat = "B_Boat_Armed_01_minigun_F";
 vehNATORBoat = "B_Boat_Transport_01_F";
 vehNATOBoats = [vehNATOBoat,vehNATORBoat,"B_APC_Wheeled_01_cannon_F"];
 //Planes
-vehNATOPlane = "B_Plane_CAS_01_F";
+vehNATOPlane = "B_Plane_CAS_01_dynamicLoadout_F";
 vehNATOPlaneAA = "B_Plane_Fighter_01_F";
 vehNATOTransportPlanes = ["B_T_VTOL_01_infantry_F"];
 //Heli

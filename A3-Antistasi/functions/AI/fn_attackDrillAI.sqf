@@ -44,6 +44,7 @@ if (count _mortarsX == 1) then
 	_mortarsX append ((units _groupX) select {_x getVariable ["typeOfSoldier",""] == "StaticBase"});
 	if (count _mortarsX > 1) then
 		{
+        //Never happens, the two previous conditions exclude each other
 		//_mortarsX spawn A3A_fnc_mortarDrill;
 		_mortarsX spawn A3A_fnc_staticMGDrill;//no olvides borrar la otra función si esto funciona
 		}
@@ -137,47 +138,38 @@ while {true} do
 			_soldiers = ((units _groupX) select {[_x] call A3A_fnc_canFight}) - [_groupX getVariable ["mortarX",objNull]];
 			_numSoldiers = count _soldiers;
 			if !(isNull _air) then
-				{
-				if (_allNearFriends findIf {(_x call A3A_fnc_typeOfSoldier == "AAMan") or (_x call A3A_fnc_typeOfSoldier == "StaticGunner")} == -1) then
-					{
-					if (_sideX != teamPlayer) then {[getPosASL _LeaderX,_sideX,"Air",false] remoteExec ["A3A_fnc_patrolCA",2]};
-					};
-				//_nuevataskX = ["Hide",_soldiers - (_soldiers select {(_x call A3A_fnc_typeOfSoldier == "AAMan") or (_x getVariable ["typeOfSoldier",""] == "StaticGunner")})];
+			{
+                private _supportTypes = [_groupX, _air] call A3A_fnc_chooseSupport;
+                if ((count _supportTypes) > 0) then
+                {
+                    [_groupX, _supportTypes, _air] spawn A3A_fnc_callForSupport;
+                };
 				_groupX setVariable ["taskX","Hide"];
 				_taskX = "Hide";
-				};
+			};
 			if !(isNull _tanksX) then
-				{
-				if (_allNearFriends findIf {_x call A3A_fnc_typeOfSoldier == "ATMan"} == -1) then
-					{
-					_mortarX = _groupX getVariable ["mortarsX",objNull];
-					if (!(isNull _mortarX) and ([_mortarX] call A3A_fnc_canFight)) then
-						{
-						if ({if (_x distance _tanksX < 100) exitWith {1}} count _allNearFriends == 0) then {[_mortarX,getPosASL _tanksX,4] spawn A3A_fnc_mortarSupport};
-						}
-					else
-						{
-						if (_sideX != teamPlayer) then {[getPosASL _LeaderX,_sideX,"Tank",false] remoteExec ["A3A_fnc_patrolCA",2]};
-						};
-					};
-				//_nuevataskX = ["Hide",_soldiers - (_soldiers select {(_x getVariable ["typeOfSoldier",""] == "ATMan")})];
+			{
+                private _supportTypes = [_groupX, _tanksX] call A3A_fnc_chooseSupport;
+                if ((count _supportTypes) > 0) then
+                {
+                    [_groupX, _supportTypes, _tanksX] spawn A3A_fnc_callForSupport;
+                };
 				_groupX setVariable ["taskX","Hide"];
 				_taskX = "Hide";
-				};
-			if (_numObjectives > 2*_numNearFriends) then
-				{
+			};
+			if (_numObjectives > 2 * _numNearFriends) then
+			{
 				if !(isNull _nearX) then
-					{
-					if (_sideX != teamPlayer) then {[getPosASL _LeaderX,_sideX,"Normal",false] remoteExec ["A3A_fnc_patrolCA",2]};
-					_mortarX = _groupX getVariable ["mortarsX",objNull];
-					if (!(isNull _mortarX) and ([_mortarX] call A3A_fnc_canFight)) then
-						{
-						if ({if (_x distance _nearX < 100) exitWith {1}} count _allNearFriends == 0) then {[_mortarX,getPosASL _nearX,1] spawn A3A_fnc_mortarSupport};
-						};
-					};
+				{
+                    private _supportTypes = [_groupX, _nearX] call A3A_fnc_chooseSupport;
+                    if ((count _supportTypes) > 0) then
+                    {
+                        [_groupX, _supportTypes, _nearX] spawn A3A_fnc_callForSupport;
+                    };
+				};
 				_groupX setVariable ["taskX","Hide"];
 				_taskX = "Hide";
-				};
+			};
 			_transporte = _groupX getVariable ["transporte",objNull];
 			if (isNull(_groupX getVariable ["transporte",objNull])) then
 				{
@@ -219,17 +211,6 @@ while {true} do
 					_groupX setVariable ["taskX","Assault"];
 					_taskX = "Assault";
 					}
-				else
-					{
-					if (_numObjectives > 1) then
-						{
-						_mortarX = _groupX getVariable ["mortarsX",objNull];
-						if (!(isNull _mortarX) and ([_mortarX] call A3A_fnc_canFight)) then
-							{
-							if ({if (_x distance _nearX < 100) exitWith {1}} count _allNearFriends == 0) then {[_mortarX,getPosASL _nearX,1] spawn A3A_fnc_mortarSupport};
-							};
-						};
-					};
 				};
 
 			if (_taskX == "Assault") then
@@ -267,11 +248,6 @@ while {true} do
 										} forEach _baseOfFire select {(_x getVariable ["typeOfSoldier",""] == "Normal") and (count (getArray (configfile >> "CfgWeapons" >> primaryWeapon _x >> "muzzles")) == 2)};
 										};
 									};
-								};
-							_mortarX = _groupX getVariable ["mortarsX",objNull];
-							if (!(isNull _mortarX) and ([_mortarX] call A3A_fnc_canFight)) then
-								{
-								if ({if (_x distance _nearX < 100) exitWith {1}} count _allNearFriends == 0) then {[_mortarX,getPosASL _nearX,1] spawn A3A_fnc_mortarSupport};
 								};
 							};
 						};

@@ -137,7 +137,7 @@ vehNATOBoat = "rhsusf_mkvsoc";
 vehNATORBoat = "rhsgref_hidf_rhib";
 vehNATOBoats = [vehNATOBoat,vehNATORBoat,"rhsusf_m113d_usarmy","rhsusf_m113d_usarmy_M240","rhsusf_m113d_usarmy_MK19"];
 //Planes
-vehNATOPlane = "RHS_A10_AT";
+vehNATOPlane = "RHS_A10";
 vehNATOPlaneAA = "rhsusf_f22";
 vehNATOTransportPlanes = ["RHS_C130J"];
 //Heli

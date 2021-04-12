@@ -1,54 +1,74 @@
 if (!isServer) exitWith {};
 
-private ["_markerX","_sideX","_leave","_enemy1","_enemy2","_winner"];
+/*  Checks if the marker should change its owner after a unit died and flips it if need be
+    Execution on: Server
+    Scope: Internal
+    Params:
+        _marker : STRING : Name of the marker the unit died on
+        _side : SIDE : Side of the unit which died
+    Returns:
+        Nothing
+*/
+params ["_marker", "_side"];
 
-_markerX = _this select 0;
-_sideX = _this select 1;
-if ((isNil "_markerX") or (isNil "_sideX")) exitWith {};
+if ((isNil "_marker") or (isNil "_side")) exitWith {};
+
+//Await lock
 waitUntil {!zoneCheckInProgress};
 zoneCheckInProgress = true;
-_leave = true;
-_enemy1 = "";
-_enemy2 = "";
 
-if ((_sideX == teamPlayer) and (sidesX getVariable [_markerX,sideUnknown] == teamPlayer)) then
-	{
-	_leave = false;
-	_enemy1 = Invaders;
-	_enemy2 = Occupants;
-	}
-else
-	{
-	if ((_sideX == Occupants) and (sidesX getVariable [_markerX,sideUnknown] == Occupants)) then
-		{
-		_leave = false;
-		_enemy1 = Invaders;
+//If marker is a different side than the unit which died on it, we don't care
+if(_side != sidesX getVariable [_marker, sideUnknown]) exitWith
+{
+    zoneCheckInProgress = false
+};
+
+private _enemy1 = sideUnknown;
+private _enemy2 = sideUnknown;
+
+switch (_side) do
+{
+    case (teamPlayer):
+    {
+        _enemy1 = Invaders;
+    	_enemy2 = Occupants;
+    };
+    case (Occupants):
+    {
+        _enemy1 = Invaders;
 		_enemy2 = teamPlayer;
-		}
-	else
-		{
-		if ((_sideX == Invaders) and (sidesX getVariable [_markerX,sideUnknown] == Invaders)) then
-			{
-			_leave = false;
-			_enemy1 = Occupants;
-			_enemy2 = teamPlayer;
-			};
-		};
-	};
+    };
+    case (Invaders):
+    {
+        _enemy1 = Occupants;
+        _enemy2 = teamPlayer;
+    };
+};
 
-if (_leave) exitWith {zoneCheckInProgress = false};
-_leave = true;
+[0,0,0] params ["_defenderUnitCount", "_enemy1UnitCount", "_enemy2UnitCount"];
 
-if ({((_x getVariable ["spawner",false]) and ((side group _x) in [_enemy1,_enemy2])) and ([_x,_markerX] call A3A_fnc_canConquer)} count allUnits > 3*({([_x,_markerX] call A3A_fnc_canConquer) and (_x getVariable ["markerX",""] == _markerX)} count allUnits)) then
-	{
-	_leave = false;
-	};
-if (_leave) exitWith {zoneCheckInProgress = false};
+private _markerPos = getMarkerPos _marker;
+{
+    if((_markerPos distance2D _x < 300) && {[_x] call A3A_fnc_canFight}) then
+    {
+        switch (side (group _x)) do
+        {
+            case (_side): {_defenderUnitCount = _defenderUnitCount + 1};
+            case (_enemy1): {_enemy1UnitCount = _enemy1UnitCount + 1};
+            case (_enemy2): {_enemy2UnitCount = _enemy2UnitCount + 1};
+        };
+    }
+} forEach allUnits;
 
-_winner = _enemy1;
-if ({(_x getVariable ["spawner",false]) and (side group _x == _enemy1) and ([_x,_markerX] call A3A_fnc_canConquer)} count allUnits <= {(_x getVariable ["spawner",false]) and (side group _x == _enemy2) and ([_x,_markerX] call A3A_fnc_canConquer)} count allUnits) then {_winner = _enemy2};
+[
+    3,
+    format ["ZoneCheck at %1 found %2 friendly %5 units, %3 enemy %6 units and %4 enemy %7 units", _marker, _defenderUnitCount, _enemy1UnitCount, _enemy2UnitCount, _side, _enemy1, _enemy2],
+    "zoneCheck"
+] call A3A_fnc_log;
 
-[_winner,_markerX] remoteExec ["A3A_fnc_markerChange",2];
-
-waitUntil {sleep 1; sidesX getVariable [_markerX,sideUnknown] == _winner};
+if (_enemy1UnitCount > 3 * _defenderUnitCount || {_enemy2UnitCount > 3 * _defenderUnitCount}) then
+{
+    private _winner = if (_enemy1UnitCount > _enemy2UnitCount) then {_enemy1} else {_enemy2};
+    [_winner,_marker] remoteExec ["A3A_fnc_markerChange",2];
+};
 zoneCheckInProgress = false;

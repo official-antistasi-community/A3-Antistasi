@@ -5,8 +5,14 @@ OnLoadMission = $STR_antistasi_mission_info_chernawinter_blurb_text;
 briefingName = $STR_antistasi_mission_info_chernawinter_mapname_text;
 overviewText = $STR_antistasi_mission_info_chernawinter_description_text;
 
-class CfgFunctions {
+class CfgFunctions
+{
     #include "MissionDescription\CfgFunctionsContents.hpp"
+};
+
+class CfgNotifications
+{
+    #include "MissionDescription\CfgNotificationsContents.hpp"
 };
 
 class CfgSounds
@@ -207,6 +213,10 @@ class CfgSounds
 	};
   // End Snow Script Sounds
 };
+
+#include "MissionDescription\params.hpp"
+
+#include "MissionDescription\CfgIdentities.hpp"
 
 class CfgDebriefing {
     #include "MissionDescription\CfgDebriefingContents.hpp"

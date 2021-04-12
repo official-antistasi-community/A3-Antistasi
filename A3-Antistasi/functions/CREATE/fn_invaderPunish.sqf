@@ -17,7 +17,8 @@ diag_log format ["[Antistasi] Launching CSAT Punish Against %1 from %2 (CSATpuni
 _nameDestination = [_attackDestination] call A3A_fnc_localizar;
 [[teamPlayer,civilian,Occupants],"invaderPunish",[format ["%2 is attacking innocent civilians in %1! Defend the city at all costs",_nameDestination,nameInvaders],format ["%1 Punishment",nameInvaders],_attackDestination],getMarkerPos _attackDestination,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
 
-_nul = [_attackOrigin,_attackDestination,Invaders] spawn A3A_fnc_artillery;
+private _reveal = [_posDestination, Invaders] call A3A_fnc_calculateSupportCallReveal;
+[_posDestination, 4, ["MORTAR"], Invaders, _reveal] remoteExec ["A3A_fnc_sendSupport", 2];
 private _sideTarget = if (sidesX getVariable [_attackDestination,sideUnknown] == Occupants) then {Occupants} else {teamPlayer};
 _missionExpireTime = time + 3600;
 
@@ -101,7 +102,12 @@ for "_i" from 1 to 3 do {
 _dataX = server getVariable _attackDestination;
 _numCiv = _dataX select 0;
 _numCiv = round (_numCiv /10);
-if (sidesX getVariable [_attackDestination,sideUnknown] == Occupants) then {[[_posDestination,Occupants,"",false],"A3A_fnc_patrolCA"] remoteExec ["A3A_fnc_scheduler",2]};
+//Is this intended to be another attack or should that be a small attack instead?
+if (sidesX getVariable [_attackDestination,sideUnknown] == Occupants) then
+{
+    private _reveal = [_posDestination, Invaders] call A3A_fnc_calculateSupportCallReveal;
+    [_posDestination, 4, ["QRF"], Invaders, _reveal] remoteExec ["A3A_fnc_sendSupport", 2];
+};
 if (_numCiv < 8) then {_numCiv = 8};
 
 _size = [_attackDestination] call A3A_fnc_sizeMarker;
@@ -136,8 +142,8 @@ _soldiersSpawned = count _soldiers;
 if (tierWar >= 5) then {
 	for "_i" from 0 to round random 1 do {
 		if ([vehCSATPlane] call A3A_fnc_vehAvailable) then {
-			private _bombType = if (napalmEnabled) then {"NAPALM"} else {"HE"};
-			_nul = [_attackDestination,Invaders,_bombType] spawn A3A_fnc_airstrike;
+            private _reveal = [_posDestination, Invaders] call A3A_fnc_calculateSupportCallReveal;
+            [_posDestination, 4, ["AIRSTRIKE"], Invaders, _reveal] remoteExec ["A3A_fnc_sendSupport", 2];
 			sleep 30;
 		};
 	};

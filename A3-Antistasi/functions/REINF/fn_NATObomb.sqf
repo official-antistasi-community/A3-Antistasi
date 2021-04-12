@@ -1,6 +1,6 @@
 if (bombRuns < 1) exitWith {["Air Support", "You lack of enough Air Support to make this request"] call A3A_fnc_customHint;};
 //if (!allowPlayerRecruit) exitWith {hint "Server is very loaded. <br/>Wait one minute or change FPS settings in order to fulfill this request"};
-	if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {["Air Support", "You need a radio in your inventory to be able to give orders to other squads"] call A3A_fnc_customHint;} else {["Air Support", "You need a Radio Man in your group to be able to give orders to other squads"] call A3A_fnc_customHint;}};
+if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {["Air Support", "You need a radio in your inventory to be able to give orders to other squads"] call A3A_fnc_customHint;} else {["Air Support", "You need a Radio Man in your group to be able to give orders to other squads"] call A3A_fnc_customHint;}};
 if ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0) exitWith {["Air Support", "You need to control an airport in order to fulfill this request"] call A3A_fnc_customHint;};
 _typeX = _this select 0;
 
@@ -39,6 +39,7 @@ positionTel = [];
 
 _ang = [_pos1,_pos2] call BIS_fnc_dirTo;
 
+
 bombRuns = bombRuns - 1;
 publicVariable "bombRuns";
 [] spawn A3A_fnc_statistics;
@@ -74,8 +75,17 @@ _wp1 setWaypointType "MOVE";
 _wp1 setWaypointSpeed "LIMITED";
 _wp1 setWaypointBehaviour "CARELESS";
 
-if ((_typeX == "NAPALM") and (!napalmEnabled)) then {_typeX = "HE"};
-_wp1 setWaypointStatements ["true", format ["if !(local this) exitWith {}; [this, '%1'] spawn A3A_fnc_airbomb", _typeX]];
+if(_typeX == "NAPALM" && !napalmEnabled) then {_typeX == "HE"};
+private _bombParams = [_plane, _typeX, 4, (_pos1 distance2D _pos2)];
+(driver _plane) setVariable ["bombParams", _bombParams, true];
+
+[_pos1, driver _plane] spawn
+{
+    params ["_pos", "_pilot"];
+    waitUntil {sleep 0.1; ((_pos distance2D _pilot) < 250) || {isNull (objectParent _pilot)}};
+    if(isNull (objectParent _pilot)) exitWith {};
+    (_pilot getVariable 'bombParams') spawn A3A_fnc_airbomb;
+};
 
 _wp2 = group _plane addWaypoint [_pos2, 1];
 _wp2 setWaypointSpeed "LIMITED";

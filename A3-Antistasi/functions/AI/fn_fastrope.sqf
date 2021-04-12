@@ -18,7 +18,7 @@ if (typeOf _veh == "B_Heli_Transport_01_camo_F") then
 	};
 */
 _landpos = [];
-_dist = if (_reinf) then {30} else {300 + random 200};
+_dist = if (_reinf) then {30} else {100 + random 100};
 
 {_x disableAI "TARGET"; _x disableAI "AUTOTARGET"} foreach units _heli;
 while {true} do
@@ -31,7 +31,8 @@ _landpos set [2,0];
 _wp = _heli addWaypoint [_landpos, 0];
 _wp setWaypointType "MOVE";
 _wp setWaypointBehaviour "CARELESS";
-//_wp setWaypointSpeed "LIMITED";
+_wp setWaypointSpeed "FULL";
+_wp setWaypointCompletionRadius 3;
 
 
 
@@ -101,6 +102,6 @@ else
 _wp3 = _heli addWaypoint [_posOrigin, 1];
 _wp3 setWaypointType "MOVE";
 _wp3 setWaypointSpeed "NORMAL";
-_wp3 setWaypointBehaviour "AWARE";
-_wp3 setWaypointStatements ["true", "if !(local this) exitWith {}; deleteVehicle (vehicle this); {deleteVehicle _x} forEach thisList"];
-{_x setBehaviour "AWARE";} forEach units _heli;
+_wp3 setWaypointBehaviour "CARELESS";
+_wp3 setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicle _x} forEach thisList"];
+{_x setBehaviour "CARELESS";} forEach units _heli;

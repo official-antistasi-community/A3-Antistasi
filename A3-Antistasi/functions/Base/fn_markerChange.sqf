@@ -64,10 +64,30 @@ garrison setVariable [format ["%1_requested", _markerX], [], true];
 if (_winner == teamPlayer) then
 {
 	_super = if (_markerX in airportsX) then {true} else {false};
-	[_markerX,_looser,"",_super] spawn A3A_fnc_patrolCA;
-	//sleep 15;
-	// Removed for the moment, old broken stuff
-//	[[_markerX],"A3A_fnc_autoGarrison"] call A3A_fnc_scheduler;
+    if(_positionX distance2D posHQ > distanceMission) then
+    {
+        [_markerX, _looser, _super] spawn
+        {
+            params ["_marker", "_loser", "_super"];
+            waitUntil
+            {
+                sleep 10;
+                spawner getVariable _marker == 2
+            };
+            if(sidesX getVariable [_marker, sideUnknown] == _loser) exitWith {};
+            [[_marker, _loser, _super], "A3A_fnc_singleAttack"] call A3A_fnc_scheduler;
+        };
+    }
+    else
+    {
+        [_markerX, _looser, _super] spawn
+        {
+            params ["_marker", "_loser", "_super"];
+            sleep (random ((15 - tierWar) * 60));
+            if(sidesX getVariable [_marker, sideUnknown] == _loser) exitWith {};
+            [[_marker, _loser, _super], "A3A_fnc_singleAttack"] call A3A_fnc_scheduler;
+        };
+    };
 }
 else
 {

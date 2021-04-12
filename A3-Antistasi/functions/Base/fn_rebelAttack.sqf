@@ -1,3 +1,5 @@
+params [["_side", sideEnemy]];
+
 /*  Handles the large attack that also are missions
 
     Execution on: HC or Server
@@ -10,8 +12,6 @@
     Returns:
         Nothing
 */
-
-params [["_side", sideEnemy]];
 
 private _fileName = "rebelAttack";
 [2, format ["Starting large attack script for side %1", _side], _fileName, true] call A3A_fnc_log;
@@ -293,7 +293,7 @@ if(count _easyTargets >= 4) then
         if((_nearPlayers != -1) || ((spawner getVariable _target) != 2) || (sidesX getVariable _target == teamPlayer)) then
         {
             [2, format ["Starting single attack against %1 from %2", _target, _x select 0], _fileName] call A3A_fnc_log;
-            [[_target, _x select 0, "", false],"A3A_fnc_patrolCA"] remoteExec ["A3A_fnc_scheduler",2];
+            [[_target, _x select 0, false],"A3A_fnc_singleAttack"] remoteExec ["A3A_fnc_scheduler",2];
             sleep 180;
         }
         else

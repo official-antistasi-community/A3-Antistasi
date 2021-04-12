@@ -1,7 +1,7 @@
 //Define results for small intel
 #define TROOPS          100
 #define TIME_LEFT       101
-#define ACCESS_CAR      102
+#define DECRYPTION_KEY  102
 #define CONVOY          103
 
 //Define results for medium intel
@@ -51,7 +51,7 @@ else
 
 if(_intelType == "Small") then
 {
-    _intelContent = selectRandomWeighted [TROOPS, 0, TIME_LEFT, 0.3, ACCESS_CAR, 0.35, CONVOY, 0.35];
+    _intelContent = selectRandomWeighted [TROOPS, 0, TIME_LEFT, 0.3, DECRYPTION_KEY, 0.35, CONVOY, 0.35];
     switch (_intelContent) do
     {
         case (TROOPS):
@@ -80,9 +80,19 @@ if(_intelType == "Small") then
                 _text = format ["%1 attack expected in %2 minutes", _sideName, round (_nextAttack / 60)];
             };
         };
-        case (ACCESS_CAR):
+        case (DECRYPTION_KEY):
         {
-            _text = format ["%1 currently has access to<br/>%2", _sideName, ([_side, ACCESS_CAR] call A3A_fnc_getVehicleIntel)];
+            if(_side == Occupants) then
+            {
+                occupantsRadioKeys = occupantsRadioKeys + 1;
+                publicVariable "occupantsRadioKeys";
+            }
+            else
+            {
+                invaderRadioKeys = invaderRadioKeys + 1;
+                publicVariable "invaderRadioKeys";
+            };
+            _text = format ["You found a %1 decryption key!<br/>It allows your faction to fully decrypt the next support call.", _sideName];
         };
         case (CONVOY):
         {

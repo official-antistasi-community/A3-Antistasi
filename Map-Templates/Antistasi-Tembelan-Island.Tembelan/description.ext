@@ -5,11 +5,18 @@ OnLoadMission = $STR_antistasi_mission_info_tembelan_blurb_text;
 briefingName = $STR_antistasi_mission_info_tembelan_mapname_text;
 overviewText = $STR_antistasi_mission_info_tembelan_description_text;
 
-class CfgFunctions {
+class CfgFunctions
+{
     #include "MissionDescription\CfgFunctionsContents.hpp"
 };
 
-class CfgSounds {
+class CfgNotifications
+{
+    #include "MissionDescription\CfgNotificationsContents.hpp"
+};
+
+class CfgSounds
+{
     #include "MissionDescription\CfgSoundsContents.hpp"
 };
 

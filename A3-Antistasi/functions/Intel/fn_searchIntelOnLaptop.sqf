@@ -91,16 +91,7 @@ private _attack = selectRandomWeighted ["No", _noAttackChance, "Small", 0.6, "La
 private _isLargeAttack = (_attack == "Large");
 if(!(_attack == "No")) then
 {
-    private _attackType = "";
-    if(tierWar < 5) then
-    {
-        _attackType = "Normal";
-    }
-    else
-    {
-        _attackType = selectRandomWeighted ["Normal", 0.6, "Tank", 0.4];
-    };
-    [[_marker, _side, _attackType, _isLargeAttack],"A3A_fnc_patrolCA"] remoteExec ["A3A_fnc_scheduler",2];
+    [[_marker, _side, _isLargeAttack],"A3A_fnc_singleAttack"] remoteExec ["A3A_fnc_scheduler",2];
 };
 
 _intel setVariable ["ActionNeeded", false, true];

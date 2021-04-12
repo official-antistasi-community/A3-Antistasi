@@ -85,8 +85,6 @@ if ((spawner getVariable _markerX != 2) and !(sidesX getVariable [_markerX,sideU
 			["TaskFailed", ["", format ["Ammotruck Stolen in an %1",(_vehicle getVariable ["ammoTruckLocation", ""])]]] remoteExec ["BIS_fnc_showNotification",_owningSide];
 		};
 
-		[getPosASL _vehicle, _owningSide, "", false] spawn A3A_fnc_patrolCA;
-
 		_truckX removeEventHandler ["GetIn", _thisEventHandler];
 	}];
 
