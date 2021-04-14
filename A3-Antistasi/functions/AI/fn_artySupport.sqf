@@ -1,283 +1,490 @@
+/*
+
+           ██▀███  ▓█████ ▄▄▄       ██▓     █     █░ ▄▄▄       ██▀███
+          ▓██ ▒ ██▒▓█   ▀▒████▄    ▓██▒    ▓█░ █ ░█░▒████▄    ▓██ ▒ ██▒
+          ▓██ ░▄█ ▒▒███  ▒██  ▀█▄  ▒██░    ▒█░ █ ░█ ▒██  ▀█▄  ▓██ ░▄█ ▒
+          ▒██▀▀█▄  ▒▓█  ▄░██▄▄▄▄██ ▒██░    ░█░ █ ░█ ░██▄▄▄▄██ ▒██▀▀█▄
+          ░██▓ ▒██▒░▒████▒▓█   ▓██▒░██████▒░░██▒██▓  ▓█   ▓██▒░██▓ ▒██▒
+          ░ ▒▓ ░▒▓░░░ ▒░ ░▒▒   ▓▒█░░ ▒░▓  ░░ ▓░▒ ▒   ▒▒   ▓▒█░░ ▒▓ ░▒▓░
+            ░▒ ░ ▒░ ░ ░  ░ ▒   ▒▒ ░░ ░ ▒  ░  ▒ ░ ░    ▒   ▒▒ ░  ░▒ ░ ▒░
+            ░░   ░    ░    ░   ▒     ░ ░     ░   ░    ░   ▒     ░░   ░
+             ░        ░  ░     ░  ░    ░  ░    ░          ░  ░   ░
+
+                      remade by Triada from RealWar community
+
+*/
+
+/*
+
+                 █████             ██████   ███
+              ░░███             ███░░███ ░░░
+            ███████   ██████   ░███ ░░░  ████  ████████    ██████   █████
+           ███░░███  ███░░███ ███████   ░░███ ░░███░░███  ███░░███ ███░░
+          ░███ ░███ ░███████ ░░░███░     ░███  ░███ ░███ ░███████ ░░█████
+          ░███ ░███ ░███░░░    ░███      ░███  ░███ ░███ ░███░░░   ░░░░███
+          ░░████████░░██████   █████     █████ ████ █████░░██████  ██████
+           ░░░░░░░░  ░░░░░░   ░░░░░     ░░░░░ ░░░░ ░░░░░  ░░░░░░  ░░░░░░
+
+*/
+
 #include "..\..\Includes\common.inc"
+#define INBOUND_TEXT "STR_antistasi_arty_inbound_text" call BIS_fnc_localize
+#define SPLASH_TEXT "STR_antistasi_arty_splash_text" call BIS_fnc_localize
+#define TITLE_TEXT "STR_antistasi_arty_title_text" call BIS_fnc_localize
+#define YOU_MUST_TEXT "STR_antistasi_arty_you_must_text" call BIS_fnc_localize
+#define CANNOT_FIRE_TEXT "STR_antistasi_arty_cannot_fire_text" call BIS_fnc_localize
+#define MODSET_TEXT "STR_antistasi_arty_modset_text" call BIS_fnc_localize
+#define NO_AMMO_TEXT "STR_antistasi_arty_no_ammo_text" call BIS_fnc_localize
+#define BUSY_TEXT "STR_antistasi_arty_busy_text" call BIS_fnc_localize
+#define SELECT_POS_TEXT "STR_antistasi_arty_select_pos_text" call BIS_fnc_localize
+#define OUT_TEXT "STR_antistasi_arty_out_text" call BIS_fnc_localize
+#define MARKER_TEXT "STR_antistasi_arty_marker_text" call BIS_fnc_localize
+#define BEGIN_MARKER_TEXT "STR_antistasi_arty_begin_marker_text" call BIS_fnc_localize
+#define END_MARKER_TEXT "STR_antistasi_arty_end_marker_text" call BIS_fnc_localize
+#define SELECT_POS_START_TEXT "STR_antistasi_arty_select_pos_start_text" call BIS_fnc_localize
+#define SELECT_POS_FIN_TEXT "STR_antistasi_arty_select_pos_fin_text" call BIS_fnc_localize
+#define REQUEST_TEXT "STR_antistasi_arty_request_text" call BIS_fnc_localize
+
+/*
+
+                    ██████
+                   ███░░███
+                  ░███ ░░░  █████ ████ ████████    ██████   █████
+                 ███████   ░░███ ░███ ░░███░░███  ███░░███ ███░░
+                ░░░███░     ░███ ░███  ░███ ░███ ░███ ░░░ ░░█████
+                  ░███      ░███ ░███  ░███ ░███ ░███  ███ ░░░░███
+                  █████     ░░████████ ████ █████░░██████  ██████
+                 ░░░░░       ░░░░░░░░ ░░░░ ░░░░░  ░░░░░░  ░░░░░░
+
+*/
+
+/* --------------------------- count ammo function -------------------------- */
+
+private _fastCountAmmo =
+{
+    params ["_artyArray", "_typeAmmo"];
+
+    private _artyAmmoArray = [];
+
+    private ["_artyUnit", "_magTypeAmmo", "_magCountAmmo"];
+
+    for "_i" from 0 to (count _artyArray) - 1
+    do
+    {
+        _artyAmmoArray pushBack 0;
+        _artyUnit = _artyArray # _i;
+
+        {
+            _magTypeAmmo = _x # 0;
+            _magCountAmmo = _x # 1;
+
+            if ((_magTypeAmmo == _typeAmmo) && { (canFire _artyUnit) })
+            then { _artyAmmoArray set [_i, _artyAmmoArray # _i + _magCountAmmo]; };
+        } forEach (magazinesAmmo _artyUnit);
+    };
+
+    _artyAmmoArray
+};
+
+/* --------------------------- arty fire procedure -------------------------- */
+
+private _artyFire =
+{
+    params ["_artyUnit", "_position", "_typeAmmo", "_orderNum"];
+
+    waitUntil
+    {
+        sleep 0.2;
+
+        if (!(canFire _artyUnit)
+            || { _artyUnit getVariable ["currentOrderNum", 1] == _orderNum
+            && { unitReady _artyUnit } }) exitWith { true };
+
+        false
+    };
+
+    if (!(isNil "_artyUnit") && { (canFire  _artyUnit) })
+    then
+    {
+        _artyUnit commandArtilleryFire [_position, _typeAmmo, 1];
+
+        sleep 2;
+
+        _artyUnit setVariable ["currentOrderNum",
+            (_artyUnit getVariable ["currentOrderNum", 1]) + 1];
+    }
+    else
+    {
+        if !(isNil "_artyUnit")
+        then
+        {
+            _artyUnit setVariable ["currentOrderNum", nil];
+            _artyUnit setVariable ["lastOrderNum", nil];
+        };
+    }
+};
+
+/* ---------------------- impact notification procedure --------------------- */
+
+private _firstImpactNotification =
+{
+    params ["_artyUnit", "_position", "_typeAmmo"];
+
+    if !(canFire _artyUnit) exitWith { };
+
+    private _eta = _artyUnit getArtilleryETA [_position, _typeAmmo];
+    private _timeX = time + _eta;
+    private _textX = format [INBOUND_TEXT, round _eta];
+
+    [petros, "sideChat", _textX] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
+
+    waitUntil
+    {
+        sleep 1;
+
+        if (!(isNil "_timeX") && { time > _timeX }) exitWith { true };
+
+        false
+    };
+
+
+    [petros, "sideChat", SPLASH_TEXT] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
+};
+
+/* -------------------------------------------------------------------------- */
+
+/*
+
+                                                ███
+                                               ░░░
+                     █████████████    ██████   ████  ████████
+                    ░░███░░███░░███  ░░░░░███ ░░███ ░░███░░███
+                     ░███ ░███ ░███   ███████  ░███  ░███ ░███
+                     ░███ ░███ ░███  ███░░███  ░███  ░███ ░███
+                     █████░███ █████░░████████ █████ ████ █████
+                    ░░░░░ ░░░ ░░░░░  ░░░░░░░░ ░░░░░ ░░░░ ░░░░░
+
+*/
+
+/* --------------------------------- _groups -------------------------------- */
+
 FIX_LINE_NUMBERS()
-if (count hcSelected player == 0) exitWith {["Artillery Support", "You must select an artillery group"] call A3A_fnc_customHint;};
 
-private ["_groups","_artyArray","_artyRoundsArr","_hasAmmunition","_areReady","_hasArtillery","_areAlive","_soldierX","_veh","_typeAmmunition","_typeArty","_positionTel","_artyArrayDef1","_artyRoundsArr1","_piece","_isInRange","_positionTel2","_rounds","_roundsMax","_markerX","_size","_forcedX","_textX","_mrkFinal","_mrkFinal2","_timeX","_eta","_countX","_pos","_ang"];
+private _groups = hcSelected player;
 
-_groups = hcSelected player;
-_unitsX = [];
-{_groupX = _x;
-{_unitsX pushBack _x} forEach units _groupX;
-} forEach _groups;
-typeAmmunition = nil;
-_artyArray = [];
-_artyRoundsArr = [];
+if (count _groups == 0)
+exitWith { [TITLE_TEXT, YOU_MUST_TEXT] call A3A_fnc_customHint; };
 
-_hasAmmunition = 0;
-_areReady = false;
-_hasArtillery = false;
-_areAlive = false;
+/* --------------------------------- _units --------------------------------- */
+
+private _units = [];
 
 {
-_soldierX = _x;
-_veh = vehicle _soldierX;
-if ((_veh != _soldierX) and (not(_veh in _artyArray))) then
-	{
-	if (( "Artillery" in (getArray (configfile >> "CfgVehicles" >> typeOf _veh >> "availableForSupportTypes")))) then
-		{
-		_hasArtillery = true;
-		if ((canFire _veh) and (alive _veh) and (isNil "typeAmmunition")) then
-			{
-			_areAlive = true;
-			_nul = createDialog "mortar_type";
-			waitUntil {!dialog or !(isNil "typeAmmunition")};
-			if !(isNil "typeAmmunition") then
-				{
-				_typeAmmunition = typeAmmunition;
-				//typeAmmunition = nil;
-			//	};
-			//if (! isNil "_typeAmmunition") then
-				//{
-				{
-				if (_x select 0 == _typeAmmunition) then
-					{
-					_hasAmmunition = _hasAmmunition + 1;
-					};
-				} forEach magazinesAmmo _veh;
-				};
-			if (_hasAmmunition > 0) then
-				{
-				if (unitReady _veh) then
-					{
-					_areReady = true;
-					_artyArray pushBack _veh;
-					_artyRoundsArr pushBack (((magazinesAmmo _veh) select 0)select 1);
-					};
-				};
-			};
-		};
-	};
-} forEach _unitsX;
+    _group = _x;
 
-if (!_hasArtillery) exitWith {["Artillery Support", "You must select an artillery group or it is a Mobile Mortar and it's moving"] call A3A_fnc_customHint;};
-if (!_areAlive) exitWith {["Artillery Support", "All elements in this Batery cannot fire or are disabled"] call A3A_fnc_customHint;};
-if ((_hasAmmunition < 2) and (!_areReady)) exitWith {["Artillery Support", "The Battery has no ammo to fire. Reload it on HQ"] call A3A_fnc_customHint;};
-if (!_areReady) exitWith {["Artillery Support", "Selected Battery is busy right now"] call A3A_fnc_customHint;};
-if (_typeAmmunition == "not_supported") exitWith {["Artillery Support", "Your current modset doesent support this strike type"] call A3A_fnc_customHint;};
-if (isNil "_typeAmmunition") exitWith {};
+    { _units pushBack _x; } forEach units _group;
+} forEach _groups;
+
+/* ------------------------------- _artyArray ------------------------------- */
+
+private _artyArray = [];
+private _unit = nil;
+private _veh = nil;
+private _supportConfigArray = [];
+
+{
+    _unit = _x;
+    _veh = vehicle _unit;
+
+    if (_veh != _unit && { _supportConfigArray = getArray (configfile >> "CfgVehicles"
+            >> typeOf _veh >> "availableForSupportTypes"); "Artillery" in _supportConfigArray })
+    then { _artyArray pushBackUnique _veh; };
+} forEach _units;
+
+if (count _artyArray == 0)
+exitWith { [TITLE_TEXT, YOU_MUST_TEXT] call A3A_fnc_customHint; };
+
+/* ----------------------------- _fireArtyArray ----------------------------- */
+
+private _fireArtyArray = [];
+
+{
+    if (canFire _x) then { _fireArtyArray pushBack _x; };
+} forEach _artyArray;
+
+if (count _fireArtyArray == 0)
+exitWith { [TITLE_TEXT, CANNOT_FIRE_TEXT] call A3A_fnc_customHint; };
+
+/* --------------------------- mortar_type dialog --------------------------- */
+
+typeAmmunition = nil;
+
+createDialog "mortar_type";
+
+waitUntil { sleep 0.1; !dialog };
+
+if (isNil "typeAmmunition") exitWith {};
+
+private _typeAmmo = typeAmmunition;
+
+if (_typeAmmo == "not_supported")
+exitWith { [TITLE_TEXT, MODSET_TEXT] call A3A_fnc_customHint; };
+
+/* ---------------------------- _hasAmmoArtyArray --------------------------- */
+
+private _hasAmmoArtyArray = [];
+
+{
+    _veh = _x;
+
+    {
+        _magAmmoType = _x # 0;
+
+        if (_magAmmoType == _typeAmmo)
+        then { _hasAmmoArtyArray pushBack _veh; };
+    } forEach magazinesAmmo _veh;
+} forEach _fireArtyArray;
+
+if (count _hasAmmoArtyArray == 0)
+exitWith { [TITLE_TEXT, NO_AMMO_TEXT] call A3A_fnc_customHint; };
+
+/* ---------------------- ready to fire artillery array --------------------- */
+
+private _hasAmmoReadyArtyArray = [];
+
+{
+    if (unitReady _x) then { _hasAmmoReadyArtyArray pushBack _x; };
+} forEach _hasAmmoArtyArray;
+
+if (count _hasAmmoReadyArtyArray == 0)
+exitWith { [TITLE_TEXT, BUSY_TEXT] call A3A_fnc_customHint; };
+
+/* ------------------------ select strike type dialog ----------------------- */
 
 hcShowBar false;
 hcShowBar true;
 
-if (_typeAmmunition != "2Rnd_155mm_Mo_LG") then
-	{
-	closedialog 0;
-	_nul = createDialog "strike_type";
-	}
-else
-	{
-	typeArty = "NORMAL";
-	};
+typeArty = nil;
 
-waitUntil {!dialog or (!isNil "typeArty")};
+if (_typeAmmo != "2Rnd_155mm_Mo_LG")
+then
+{
+    closedialog 0;
+    createDialog "strike_type";
+}
+else
+{
+    typeArty = "NORMAL";
+};
+
+waitUntil { sleep 0.1; !dialog };
 
 if (isNil "typeArty") exitWith {};
 
-_typeArty = typeArty;
-typeArty = nil;
+private _typeArty = typeArty;
 
+/* --------------------------- first click on map --------------------------- */
 
 positionTel = [];
 
-["Artillery Support", "Select the position on map where to perform the Artillery strike"] call A3A_fnc_customHint;
+if (_typeArty != "BARRAGE")
+then { [TITLE_TEXT, SELECT_POS_TEXT] call A3A_fnc_customHint; }
+else { [TITLE_TEXT, SELECT_POS_START_TEXT] call A3A_fnc_customHint; };
 
-if (!visibleMap) then {openMap true};
-onMapSingleClick "positionTel = _pos;";
 
-waitUntil {sleep 1; (count positionTel > 0) or (!visibleMap)};
-onMapSingleClick "";
+if !(visibleMap) then { openMap true; };
 
-if (!visibleMap) exitWith {};
+onMapSingleClick "positionTel = _pos; onMapSingleClick ''";
 
-_positionTel = positionTel;
+waitUntil { sleep 1; (count positionTel > 0) || { !(visibleMap) } };
 
-_artyArrayDef1 = [];
-_artyRoundsArr1 = [];
+if (count positionTel == 0) exitWith {};
 
-for "_i" from 0 to (count _artyArray) - 1 do
-	{
-	_piece = _artyArray select _i;
-	_isInRange = _positionTel inRangeOfArtillery [[_piece], ((getArtilleryAmmo [_piece]) select 0)];
-	if (_isInRange) then
-		{
-		_artyArrayDef1 pushBack _piece;
-		_artyRoundsArr1 pushBack (_artyRoundsArr select _i);
-		};
-	};
+private _positionTel = positionTel;
 
-if (count _artyArrayDef1 == 0) exitWith {["Artillery Support", "The position you marked is out of bounds for that Battery"] call A3A_fnc_customHint;};
+/* --------------------------- in range arty array -------------------------- */
 
-_mrkFinal = createMarkerLocal [format ["Arty%1", random 100], _positionTel];
+private _isInRangeArtyArray = [];
+
+{
+    if (_positionTel inRangeOfArtillery [[_x], _typeAmmo])
+    then { _isInRangeArtyArray pushBack _x; };
+} forEach _hasAmmoReadyArtyArray;
+
+if (count _isInRangeArtyArray == 0)
+exitWith { [TITLE_TEXT, OUT_TEXT] call A3A_fnc_customHint; };
+
+/* ------------------- markers and second click on the map ------------------ */
+
+private _mrkFinal = createMarkerLocal [format ["Arty%1", random 100], _positionTel];
 _mrkFinal setMarkerShapeLocal "ICON";
 _mrkFinal setMarkerTypeLocal "hd_destroy";
 _mrkFinal setMarkerColorLocal "ColorRed";
 
-if (_typeArty == "BARRAGE") then
-	{
-	_mrkFinal setMarkerTextLocal "Artillery Barrage Begin";
-	positionTel = [];
+private _positionTel2 = [];
 
-	["Artillery Support", "Select the position to finish the barrage"] call A3A_fnc_customHint;
-
-	if (!visibleMap) then {openMap true};
-	onMapSingleClick "positionTel = _pos;";
-
-	waitUntil {sleep 1; (count positionTel > 0) or (!visibleMap)};
-	onMapSingleClick "";
-
-	_positionTel2 = positionTel;
-	};
-
-if ((_typeArty == "BARRAGE") and (isNil "_positionTel2")) exitWith {deleteMarkerLocal _mrkFinal};
-
-if (_typeArty != "BARRAGE") then
-	{
-	if (_typeAmmunition != "2Rnd_155mm_Mo_LG") then
-		{
-		closedialog 0;
-		_nul = createDialog "rounds_number";
-		}
-	else
-		{
-		roundsX = 1;
-		};
-	waitUntil {!dialog or (!isNil "roundsX")};
-	};
-
-if ((isNil "roundsX") and (_typeArty != "BARRAGE")) exitWith {deleteMarkerLocal _mrkFinal};
-
-if (_typeArty != "BARRAGE") then
-	{
-	_mrkFinal setMarkerTextLocal "Arty Strike";
-	_rounds = roundsX;
-	_roundsMax = _rounds;
-	roundsX = nil;
-	}
+if (_typeArty != "BARRAGE")
+then
+{
+    _mrkFinal setMarkerTextLocal (MARKER_TEXT);
+}
 else
-	{
-	_rounds = round (_positionTel distance _positionTel2) / 10;
-	_roundsMax = _rounds;
-	};
+{
+    positionTel = [];
 
-_markerX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
-_size = [_markerX] call A3A_fnc_sizeMarker;
-_forcedX = false;
+    _mrkFinal setMarkerTextLocal (BEGIN_MARKER_TEXT);
 
-if ((not(_markerX in forcedSpawn)) and (_positionTel distance (getMarkerPos _markerX) < _size) and ((spawner getVariable _markerX != 0))) then
-	{
-	_forcedX = true;
-	forcedSpawn pushBack _markerX;
-	publicVariable "forcedSpawn";
-	};
+    [TITLE_TEXT, SELECT_POS_FIN_TEXT] call A3A_fnc_customHint;
 
-_textX = format ["Requesting fire support on Grid %1. %2 Rounds", mapGridPosition _positionTel, round _rounds];
-[theBoss,"sideChat",_textX] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+    if !(visibleMap) then { openMap true; };
 
-if (_typeArty == "BARRAGE") then
-	{
-	_mrkFinal2 = createMarkerLocal [format ["Arty%1", random 100], _positionTel2];
-	_mrkFinal2 setMarkerShapeLocal "ICON";
-	_mrkFinal2 setMarkerTypeLocal "hd_destroy";
-	_mrkFinal2 setMarkerColorLocal "ColorRed";
-	_mrkFinal2 setMarkerTextLocal "Artillery Barrage End";
-	_ang = [_positionTel,_positionTel2] call BIS_fnc_dirTo;
-	sleep 5;
-	_eta = (_artyArrayDef1 select 0) getArtilleryETA [_positionTel, ((getArtilleryAmmo [(_artyArrayDef1 select 0)]) select 0)];
-	_timeX = time + _eta;
-	_textX = format ["Acknowledged. Fire mission is inbound. ETA %1 secs for the first impact",round _eta];
-	[petros,"sideChat",_textX]remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
-	[_timeX] spawn
-		{
-		private ["_timeX"];
-		_timeX = _this select 0;
-		waitUntil {sleep 1; time > _timeX};
-		[petros,"sideChat","Splash. Out"] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
-		};
-	};
+    onMapSingleClick "positionTel = _pos; onMapSingleClick ''";
 
-_pos = [_positionTel,random 10,random 360] call BIS_fnc_relPos;
+    waitUntil { sleep 1; (count positionTel > 0) || { !(visibleMap) } };
 
-for "_i" from 0 to (count _artyArrayDef1) - 1 do
-	{
-	if (_rounds > 0) then
-		{
-		_piece = _artyArrayDef1 select _i;
-		_countX = _artyRoundsArr1 select _i;
-		//hint format ["roundsX que faltan: %1, roundsX que tiene %2",_rounds,_countX];
-		if (_countX >= _rounds) then
-			{
-			if (_typeArty != "BARRAGE") then
-				{
-				_piece commandArtilleryFire [_pos,_typeAmmunition,_rounds];
-				}
-			else
-				{
-				for "_r" from 1 to _rounds do
-					{
-					_piece commandArtilleryFire [_pos,_typeAmmunition,1];
-					sleep 2;
-					_pos = [_pos,10,_ang + 5 - (random 10)] call BIS_fnc_relPos;
-					};
-				};
-			_rounds = 0;
-			}
-		else
-			{
-			if (_typeArty != "BARRAGE") then
-				{
-				_piece commandArtilleryFire [[_pos,random 10,random 360] call BIS_fnc_relPos,_typeAmmunition,_countX];
-				}
-			else
-				{
-				for "_r" from 1 to _countX do
-					{
-					_piece commandArtilleryFire [_pos,_typeAmmunition,1];
-					sleep 2;
-					_pos = [_pos,10,_ang + 5 - (random 10)] call BIS_fnc_relPos;
-					};
-				};
-			_rounds = _rounds - _countX;
-			};
-		};
-	};
+    _positionTel2 = positionTel;
+};
 
-if (_typeArty != "BARRAGE") then
-	{
-	sleep 5;
-	_eta = (_artyArrayDef1 select 0) getArtilleryETA [_positionTel, ((getArtilleryAmmo [(_artyArrayDef1 select 0)]) select 0)];
-	_timeX = time + _eta - 5;
-	if (isNil "_timeX") exitWith {
-        Error_4("Params: %1,%2,%3,%4",_artyArrayDef1 select 0,_positionTel,((getArtilleryAmmo [(_artyArrayDef1 select 0)]) select 0),(_artyArrayDef1 select 0) getArtilleryETA [_positionTel, ((getArtilleryAmmo [(_artyArrayDef1 select 0)]) select 0)]);
-		};
-	_textX = format ["Acknowledged. Fire mission is inbound. %2 Rounds fired. ETA %1 secs",round _eta,_roundsMax - _rounds];
-	[petros,"sideChat",_textX] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
-	};
+if (_typeArty == "BARRAGE" && { count _positionTel2 == 0 })
+exitWith { deleteMarkerLocal _mrkFinal; };
 
-if (_typeArty != "BARRAGE") then
-	{
-	waitUntil {sleep 1; time > _timeX};
-	[petros,"sideChat","Splash. Out"] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
-	};
+private _mrkFinal2 = nil;
+private _angle = 0;
+
+if (_typeArty == "BARRAGE")
+then
+{
+    _mrkFinal2 = createMarkerLocal
+        [format ["Arty%1", random 100], _positionTel2];
+    _mrkFinal2 setMarkerShapeLocal "ICON";
+    _mrkFinal2 setMarkerTypeLocal "hd_destroy";
+    _mrkFinal2 setMarkerColorLocal "ColorRed";
+    _mrkFinal2 setMarkerTextLocal (END_MARKER_TEXT);
+
+    _angle = _positionTel getDir _positionTel2;
+};
+
+sleep 1;
+
+/* --------------------------- count rounds dialog -------------------------- */
+
+roundsX = nil;
+
+if (_typeAmmo != "2Rnd_155mm_Mo_LG")
+then { createDialog "rounds_number"; }
+else { roundsX = 1; };
+
+waitUntil { sleep 1; !(dialog) };
+
+if (isNil "roundsX")
+exitWith
+{
+    if !(isNil "_mrkFinal") then { deleteMarkerLocal _mrkFinal; };
+    if !(isNil "_mrkFinal2") then { deleteMarkerLocal _mrkFinal2; };
+};
+
+private _rounds = roundsX;
+
+/* ---------------------- barrage strike interval count --------------------- */
+
+private  _distance = 0;
+
+if (_typeArty == "BARRAGE" && { _rounds > 1 })
+then { _distance = (_positionTel distance _positionTel2) / (_rounds - 1); };
+
+/* ---------------------------- spawn fired area ---------------------------- */
+
+private _markerX = [markersX, _positionTel] call BIS_fnc_nearestPosition;
+private _size = [_markerX] call A3A_fnc_sizeMarker;
+private _forcedX = false;
+
+if (!(_markerX in forcedSpawn)
+    && { _positionTel distance (getMarkerPos _markerX) < _size
+    && { spawner getVariable _markerX != 0 } })
+then
+{
+    _forcedX = true;
+    forcedSpawn pushBack _markerX;
+    publicVariable "forcedSpawn";
+};
+
+/* ---------------------------------- chat ---------------------------------- */
+
+private _fin = "";
+
+if ((_rounds % 10) != 1 || { (_rounds % 100) == 11 })
+then
+{
+    if ((_rounds % 10) in [2, 3, 4] && { !((_rounds % 100) in [12, 13, 14]) })
+    then { _fin = "а"; }
+    else { _fin = "ов"; };
+};
+
+private _textX = format [REQUEST_TEXT, mapGridPosition _positionTel, round _rounds, _fin];
+[theBoss, "sideChat", _textX] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
+
+/* ------------------------------- fire cycle ------------------------------- */
+
+sleep 5;
+
+private _position = [];
+private _artyUnits = _isInRangeArtyArray;
+private _ammoUnits = [_artyUnits, _typeAmmo] call _fastCountAmmo;
+
+private _isCycleOn = true;
+private _count = 0;
+private _lastOrderNum = 0;
+
+while { _isCycleOn }
+do
+{
+    _isCycleOn = false;
+
+    for "_i" from 0 to (count _artyUnits) - 1
+    do
+    {
+        _artyUnit = _artyUnits # _i;
+        _unitAmmo = _ammoUnits # _i;
+
+        if (_count != _rounds && { canFire _artyUnit && { _unitAmmo >= 1 } })
+        then
+        {
+            _lastOrderNum = _artyUnit getVariable ["lastOrderNum", 0];
+            _lastOrderNum = _lastOrderNum + 1;
+            _artyUnit setVariable ["lastOrderNum", _lastOrderNum];
+
+            if (_typeArty == "BARRAGE")
+            then { _positionTel = _positionTel getPos [_distance , _angle]; };
+
+            _position = _positionTel getPos [random 10, random 360];
+
+            [_artyUnit, _position, _typeAmmo, _lastOrderNum] spawn _artyFire;
+
+            if (_count == 0)
+            then { [_artyUnit, _position, _typeAmmo] spawn _firstImpactNotification; };
+
+            _count = _count + 1;
+            _isCycleOn = true;
+            _ammoUnits set [_i, _unitAmmo - 1];
+        };
+    };
+};
+
+/* ----------------------------- after fire work ---------------------------- */
+
 sleep 10;
-deleteMarkerLocal _mrkFinal;
-if (_typeArty == "BARRAGE") then {deleteMarkerLocal _mrkFinal2};
 
-if (_forcedX) then
-	{
-	sleep 20;
-	if (_markerX in forcedSpawn) then
-		{
-		forcedSpawn = forcedSpawn - [_markerX];
-		publicVariable "forcedSpawn";
-		};
-	};
+if !(isNil "_mrkFinal") then { deleteMarkerLocal _mrkFinal; };
+
+if !(isNil "_mrkFinal2") then { deleteMarkerLocal _mrkFinal2; };
+
+if !(_forcedX) exitWith {};
+
+sleep 20;
+
+if !(_markerX in forcedSpawn) exitWith {};
+
+forcedSpawn = forcedSpawn - [_markerX];
+publicVariable "forcedSpawn";
+
+/* -------------------------------------------------------------------------- */

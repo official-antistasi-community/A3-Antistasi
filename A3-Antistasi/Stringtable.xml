@@ -3413,5 +3413,87 @@
         <Russian>Зеленые vs Красные</Russian>
       </Key>
     </Container>
+    <Container name="artillery_support">
+      <Key ID="STR_antistasi_arty_inbound_text">
+        <Original>Acknowledged. Fire mission is inbound. ETA %1 secs for the first impact</Original>
+        <English>Acknowledged. Fire mission is inbound. ETA %1 secs for the first impact</English>
+        <Russian>Выполнено. Удар пошёл. Рассчётное время в пути %1 сек.</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_splash_text">
+        <Original>Splash. Out</Original>
+        <English>Splash. Out</English>
+        <Russian>Разрыв. Конец связи</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_title_text">
+        <Original>Artillery Support</Original>
+        <English>Artillery Support</English>
+        <Russian>Артиллерия</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_you_must_text">
+        <Original>You must select an artillery group</Original>
+        <English>You must select an artillery group</English>
+        <Russian>Выберите артиллерийскую группу</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_cannot_fire_text">
+        <Original>All elements in this Batery cannot fire</Original>
+        <English>All elements in this Batery cannot fire</English>
+        <Russian>Выбранные группы стрелять не могут</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_modset_text">
+        <Original>Your current modset doesent support this strike type</Original>
+        <English>Your current modset doesent support this strike type</English>
+        <Russian>Ваш набор модов не поддерживает этот удар</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_no_ammo_text">
+        <Original>The Battery has no ammo to fire. Reload it on HQ</Original>
+        <English>The Battery has no ammo to fire. Reload it on HQ</English>
+        <Russian>Закончились боеприпасы. Перезарядите в Штабе</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_busy_text">
+        <Original>Selected Battery is busy right now</Original>
+        <English>Selected Battery is busy right now</English>
+        <Russian>Выбранные группы сейчас заняты</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_select_pos_text">
+        <Original>Select the position on map where to perform the Artillery strike</Original>
+        <English>Select the position on map where to perform the Artillery strike</English>
+        <Russian>Выберите на карте точку для артиллерийского удара</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_out_text">
+        <Original>The position you marked is out of bounds for that Battery</Original>
+        <English>The position you marked is out of bounds for that Battery</English>
+        <Russian>Отмеченная позиция вне зоны досягаемости для удара</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_marker_text">
+        <Original>Arty Strike</Original>
+        <English>Arty Strike</English>
+        <Russian>Арт. удар</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_begin_marker_text">
+        <Original>Artillery Barrage Begin</Original>
+        <English>Artillery Barrage Begin</English>
+        <Russian>Начало удара</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_end_marker_text">
+        <Original>Artillery Barrage End</Original>
+        <English>Artillery Barrage End</English>
+        <Russian>Конец удара</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_select_pos_start_text">
+        <Original>Select the position to finish the barrage</Original>
+        <English>Select the position to finish the barrage</English>
+        <Russian>Укажите на карте начало заградительного удара</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_select_pos_fin_text">
+        <Original>Select the position to finish the barrage</Original>
+        <English>Select the position to finish the barrage</English>
+        <Russian>Укажите на карте конец заградительного удара</Russian>
+      </Key>
+      <Key ID="STR_antistasi_arty_request_text">
+        <Original>Requesting fire support on Grid %1. %2 Rounds</Original>
+        <English>Requesting fire support on Grid %1. %2 Rounds</English>
+        <Russian>Запрашиваю удар по позиции %1. %2 выстрел%3</Russian>
+      </Key>
+    </Container>
   </Package>
 </Project>
