@@ -3,13 +3,10 @@ params ["_loadoutName"];
 private _basicMedicalSupplies =
 	if (A3A_hasACE) then {
 		[
-			["ACE_Tourniquet",3],
-			["ACE_SalineIV_500",1],
-			["ACE_Morphine",2],
-			["ACE_Epinephrine",2],
-			["ACE_Adenosine",2],
-			["ACE_PackingBandage",10],
-			["ACE_ElasticBandage",10],
+			["ACE_Tourniquet",4],
+			["ACE_Morphine",3],
+			["ACE_Epinephrine",3],
+			["ACE_PackingBandage",20],
 			["ACE_Quikclot",10],
 			["ACE_splint", 2]
 		]
@@ -23,7 +20,9 @@ private _basicMiscItems =
 	if (A3A_hasACE) then {
 		[
 			["ACE_Earplugs",1],
-			["ACE_Cabletie",3]
+			["ACE_Cabletie",3],
+			["ACE_MapTools",1]
+
 		];
 	} else {
 		[
@@ -36,20 +35,13 @@ private _medicSupplies =
 		[
 			["ACE_surgicalKit",1],
 
-			["ACE_PackingBandage",5],
-			["ACE_ElasticBandage",20],
-			["ACE_QuikClot",10],
+			["ACE_ElasticBandage",25],
 
 			["ACE_Morphine",5],
-			["ACE_Epinephrine",5],
-			["ACE_Adenosine",5],
+			["ACE_Epinephrine",10],
 
-			["ACE_PlasmaIV_250",5],
-			["ACE_SalineIV_500",3],
-			["ACE_BloodIV",1],
-
-			["ACE_Tourniquet",3],
-			["ACE_Splint",4]
+			["ACE_BloodIV_500",6],
+			["ACE_Splint",5]
 		]
 	} else {
 		[
