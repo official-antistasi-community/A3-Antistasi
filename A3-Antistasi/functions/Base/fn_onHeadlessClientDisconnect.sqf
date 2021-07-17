@@ -7,7 +7,7 @@ if (_owner in hcArray) then
 		[] spawn {
 			while {true} do
 			{
-				[petros,"hint","A Headless Client has been disconnected. This will cause malfunctions. Head back to HQ for saving ASAP and ask and Admin for a restart", "Headless Client"] remoteExec ["A3A_fnc_commsMP"];
+				[petros,"hint",localize "STR_antistasi_Headless_disconnected", localize "STR_antistasi_Headless_head"] remoteExec ["A3A_fnc_commsMP"];
 				sleep 30;
 			};
 		};

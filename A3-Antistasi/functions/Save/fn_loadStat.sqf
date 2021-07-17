@@ -163,7 +163,7 @@ if (_varName in _specialVarLoads) then {
 				_mrk setMarkerShape "ICON";
 				_mrk setMarkerType "loc_bunker";
 				_mrk setMarkerColor colorTeamPlayer;
-				if (isOnRoad _positionX) then {_mrk setMarkerText format ["%1 Roadblock",nameTeamPlayer]} else {_mrk setMarkerText format ["%1 Watchpost",nameTeamPlayer]};
+				if (isOnRoad _positionX) then {_mrk setMarkerText format ["%1 " + localize "STR_a3_cfggroups_empty_military_roadblocks_roadblock2",nameTeamPlayer]} else {_mrk setMarkerText format ["%1 " + localize "STR_antistasi_markers_watchpost",nameTeamPlayer]};
 				spawner setVariable [_mrk,2,true];
 				if (count _garrison > 0) then {garrison setVariable [_mrk,_garrison,true]};
 				outpostsFIA pushBack _mrk;

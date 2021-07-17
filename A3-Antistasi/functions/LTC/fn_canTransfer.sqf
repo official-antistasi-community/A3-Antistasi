@@ -38,7 +38,7 @@ if (!_done) then {
             };
         };
     } else {
-        ["Loot crate", "Already transfering"] remoteExec ["A3A_fnc_customHint", _owner];
+        [localize "STR_antistasi_customHint_loot", localize "STR_antistasi_customHint_loot_already"] remoteExec ["A3A_fnc_customHint", _owner];
     };
 
 

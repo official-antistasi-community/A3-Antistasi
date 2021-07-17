@@ -20,12 +20,12 @@
 */
 params ["_unit"];
 private _time = _unit getVariable ["BuyCrateCooldown",time];
-if (_time > time) exitWith {["Loot crate", format ["You already bought one, wait %1 seconds before you can buy another", ceil (_time - time)]] call A3A_fnc_customHint};
+if (_time > time) exitWith {[localize "STR_antistasi_customHint_loot", format [localize "STR_antistasi_customHint_loot_wait", ceil (_time - time)]] call A3A_fnc_customHint};
 _money = _unit getVariable ["moneyX", 0];
-if (_money < 10) exitWith {["Loot crate", "You can't afford a loot crate"] call A3A_fnc_customHint};
+if (_money < 10) exitWith {[localize "STR_antistasi_customHint_loot", localize "STR_antistasi_customHint_loot_no_afford"] call A3A_fnc_customHint};
 _unit setVariable ["BuyCrateCooldown",time + 5];
 [-10] call A3A_fnc_resourcesPlayer;
-["Loot crate", "Loot crate bought"] call A3A_fnc_customHint;
+[localize "STR_antistasi_customHint_loot", localize "STR_antistasi_customHint_loot_bought"] call A3A_fnc_customHint;
 
 //spawn crate
 private _createType = NATOSurrenderCrate;

@@ -2,7 +2,7 @@
 //   Side Information   //
 //////////////////////////
 
-["name", "LDF"] call _fnc_saveToTemplate;
+["name", localize "STR_antistasi_faction_LDF"] call _fnc_saveToTemplate;
 ["spawnMarkerName", "LDF Support Corridor"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_Enoch_F"] call _fnc_saveToTemplate;

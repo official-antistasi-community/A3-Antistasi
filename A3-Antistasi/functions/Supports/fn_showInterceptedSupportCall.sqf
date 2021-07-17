@@ -49,7 +49,7 @@ private _sideName = if(_side == Occupants) then {nameOccupants} else {nameInvade
 if (_reveal <= 0.5) then
 {
     //Side and call is reveal
-    _text = format ["%1 is executing an unknown support now", _sideName];
+    _text = format [localize "STR_antistasi_notification_supportCall_noRevealed", _sideName];
 }
 else
 {
@@ -57,53 +57,53 @@ else
     {
         case ("QRF"):
         {
-            _text = format ["A %1 QRF just arrived", _sideName];
+            _text = format [localize "STR_antistasi_notification_supportCall_QRF", _sideName];
         };
         case ("AIRSTRIKE"):
         {
-            _text = format ["%1 is about to execute an airstrike", _sideName];
+            _text = format [localize "STR_antistasi_notification_supportCall_airstrike", _sideName];
         };
         case ("MORTAR"):
         {
-            _text = format ["A %1 mortar has opened fire", _sideName];
+            _text = format [localize "STR_antistasi_notification_supportCall_mortar", _sideName];
         };
         case ("ORBSTRIKE"):
         {
-            _text = format ["A %1 satellite has fired the orbital strike", _sideName];
+            _text = format [localize "STR_antistasi_notification_supportCall_ORBSTRIKE", _sideName];
         };
         case ("MISSILE"):
         {
-            _text = format ["%1 cruise missile launched", _sideName];
+            _text = format [localize "STR_antistasi_notification_supportCall_MISSILE", _sideName];
         };
         case ("SAM"):
         {
-            _text = format ["%1 SAM missile launched", _sideName];
+            _text = format [localize "STR_antistasi_notification_supportCall_SAM", _sideName];
         };
         case ("CARPETBOMB"):
         {
-            _text = format ["%1 bomber started to lay down a carpet bombing", _sideName];
+            _text = format [localize "STR_antistasi_notification_supportCall_CARPETBOMB", _sideName];
         };
         case ("ASF"):
         {
-            _text = format ["%1 fighter started chasing a target", _sideName];
+            _text = format [localize "STR_antistasi_notification_supportCall_ASF", _sideName];
         };
         case ("CAS"):
         {
-            _text = format ["A %1 CAS bomber has locked onto a target", _sideName];
+            _text = format [localize "STR_antistasi_notification_supportCall_CAS", _sideName];
         };
         case ("GUNSHIP"):
         {
-            _text = format ["A %1 heavy gunship started cycling the area", _sideName];
+            _text = format [localize "STR_antistasi_notification_supportCall_GUNSHIP", _sideName];
         };
         default
         {
-            _text = format ["%1 is executing %2 support now", _sideName, _supportType];
+            _text = format [localize "STR_antistasi_notification_supportCall_default", _sideName, _supportType];
         };
     };
     if(_reveal > 0.8) then
     {
         //Side, type, call and marker revealed
-        _text = format ["%1. Target marked on map!", _text];
+        _text = format [localize "STR_antistasi_notification_supportCall_marked", _text];
         _marker setMarkerAlpha 0.75;
         _textMarker setMarkerAlpha 1;
     };

@@ -61,23 +61,23 @@ private _cargoMass = _newMass - _defaultMass;
 private _msg = "";
 if (!_removeObject) then{
     if (_availableNodes == 0) then {
-        _msg = Format ["<t color='#00fff3'>""%1"" is loaded onto ""%2"" There is no more space.</t>", _objectName, _vehicleName, _availableNodes];
+        _msg = Format ["<t color='#00fff3'>"+localize"STR_antistasi_logistics_loaded_noSpace"+"</t>", _objectName, _vehicleName, _availableNodes];
     } else {
-        _msg = Format ["<t color='#00fff3'>""%1"" is loaded onto ""%2"". Free slots: ""%3"".</t>", _objectName, _vehicleName, _availableNodes];
+        _msg = Format ["<t color='#00fff3'>"+localize"STR_antistasi_logistics_loaded_free"+"</t>", _objectName, _vehicleName, _availableNodes];
     };
 } else {
-    _msg = Format ["<t color='#00fff3'>""%1"" was unloaded from ""%2"". Free slots: ""%3"".</t>", _objectName, _vehicleName, _availableNodes];
+    _msg = Format ["<t color='#00fff3'>"+localize"STR_antistasi_logistics_unloaded"+"</t>", _objectName, _vehicleName, _availableNodes];
 };
 
 private _text = format [
     "
     <img image='%1' size='2' align='left'/>
     <t color='#a02e69' size='1.2' shadow='1' shadowColor='#000000' align='center'>%2</t><br/>
-    <t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'>Default mass: </t>
+    <t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'>"+localize"STR_antistasi_logistics_defaultMass"+" </t>
     <t color='#00ff59' size='1.2' shadow='1' shadowColor='#000000' align='left'>%3</t><br/>
-    <t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'>Cargo mass: </t>
+    <t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'>"+localize"STR_antistasi_logistics_cargoMass"+" </t>
     <t color='#00ff59' size='1.2' shadow='1' shadowColor='#000000' align='left'>%4</t><br/>
-    <t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'>Current mass: </t>
+    <t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'>"+localize"STR_antistasi_logistics_currentMass"+" </t>
     <t color='#00ff59' size='1.2' shadow='1' shadowColor='#000000' align='left'>%5</t><br/>
     ",
     getText(configFile >> "cfgVehicles" >> typeOf _vehicle >> "picture"),

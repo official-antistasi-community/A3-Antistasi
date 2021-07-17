@@ -2,7 +2,7 @@
 //   Side Information   //
 //////////////////////////
 
-["name", "NATO"] call _fnc_saveToTemplate;
+["name", localize "STR_antistasi_faction_NATO"] call _fnc_saveToTemplate;
 ["spawnMarkerName", "NATO Support Corridor"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_NATO_F"] call _fnc_saveToTemplate;

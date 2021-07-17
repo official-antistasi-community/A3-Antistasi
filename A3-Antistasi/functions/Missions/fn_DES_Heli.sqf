@@ -85,8 +85,8 @@ private _dateLimitNum = dateToNumber _dateLimit;
 Info("Creating Helicopter Down mission");
 private _location = [_missionOrigin] call A3A_fnc_localizar;
 private _taskId = "DES" + str A3A_taskCount;
-private _text = format ["We have downed a helicopter. There is a good chance to destroy it before it is recovered. Do it before a recovery team from %1 reaches the crash site. MOVE QUICKLY",_location];
-[[teamPlayer,civilian],_taskId,[_text,"Downed Heli",_taskMrk],_posCrashMrk,false,0,true,"Destroy",true] call BIS_fnc_taskCreate;
+private _text = format [localize "STR_antistasi_mission_destroyHeli_text",_location];
+[[teamPlayer,civilian],_taskId,[_text,localize "STR_antistasi_mission_destroyHeli",_taskMrk],_posCrashMrk,false,0,true,"Destroy",true] call BIS_fnc_taskCreate;
 [_taskId, "DES", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 ////////////////
@@ -110,7 +110,7 @@ sleep 1;
 private _vehicleDataE = [position _roadE, 0,_typeVeh, _sideX] call A3A_fnc_spawnVehicle;
 private _vehE = _vehicleDataE select 0;
 _vehE limitSpeed 50;
-[_vehE,"Escort"] spawn A3A_fnc_inmuneConvoy;
+[_vehE,localize "STR_antistasi_markers_escort"] spawn A3A_fnc_inmuneConvoy;
 private _vehCrew = crew _vehE;
 {[_x] call A3A_fnc_NATOinit} forEach _vehCrew;
 [_vehE, _sideX] call A3A_fnc_AIVEHinit;
@@ -139,7 +139,7 @@ private _vehR = _vehicleDataR select 0;
 _vehR limitSpeed 50;
 [_vehR, _sideX] call A3A_fnc_AIVEHinit;
 sleep 1;
-[_vehR,"Repair Truck"] spawn A3A_fnc_inmuneConvoy;
+[_vehR,localize "STR_antistasi_markers_repairTruck"] spawn A3A_fnc_inmuneConvoy;
 private _groupVehR = _vehicleDataR select 2;
 private _vehCrewR = units _groupVehR;
 {[_x] call A3A_fnc_NATOinit} forEach _vehCrewR;

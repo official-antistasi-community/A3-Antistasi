@@ -69,7 +69,7 @@ if (_side isEqualTo east) then {
 	CSATFlag = _faction getVariable "flag";
 	CSATFlagTexture = _faction getVariable "flagTexture";
 	flagCSATmrk = _faction getVariable "flagMarkerType";
-	if (isServer) then {"CSAT_carrier" setMarkerText (_faction getVariable "spawnMarkerName")};
+	if (isServer) then {"CSAT_carrier" setMarkerText (format [localize "STR_antistasi_marker_supportCorridor", _faction getVariable "name"])};
 
 	//Loot crate
 	CSATAmmoBox = _faction getVariable "ammobox";
@@ -255,7 +255,7 @@ if (_side isEqualTo west) then {
 	NATOFlag = _faction getVariable "flag";
 	NATOFlagTexture = _faction getVariable "flagTexture";
 	flagNATOmrk = _faction getVariable "flagMarkerType";
-	if (isServer) then {"NATO_carrier" setMarkerText (_faction getVariable "spawnMarkerName")};
+	if (isServer) then {"NATO_carrier" setMarkerText (format [localize "STR_antistasi_marker_supportCorridor", _faction getVariable "name"])};
 
 	//Loot crate
 	NATOAmmobox = _faction getVariable "ammobox";

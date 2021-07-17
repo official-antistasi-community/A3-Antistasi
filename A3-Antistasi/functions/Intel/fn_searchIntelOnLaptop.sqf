@@ -20,7 +20,7 @@ if(_isTrap) exitWith
     _intel remoteExecCall ["removeAllActions", 0];
     _intel setObjectTextureGlobal [0, "Pictures\Intel\laptop_die.paa"];
     {
-        [petros,"hint","The screen says:<br/><br/>Prepare to die!", "Search Intel"] remoteExec ["A3A_fnc_commsMP",_x];
+        [petros,"hint",localize "STR_antistasi_intel_prepareDie", localize "STR_antistasi_intel_search"] remoteExec ["A3A_fnc_commsMP",_x];
     } forEach ([50,0,_intel,teamPlayer] call A3A_fnc_distanceUnits);
     sleep (2 + (random 3));
     private _bombPos = getPosWorld _bomb;
@@ -113,7 +113,7 @@ while {_pointSum <= _neededPoints} do
     {
         _pointSum = 0;
         {
-            [petros,"hint","No one in range of the intel, reseting download!", "Search Intel"] remoteExec ["A3A_fnc_commsMP",_x]
+            [petros,"hint", localize "STR_antistasi_intel_noRange_download", localize "STR_antistasi_intel_search"] remoteExec ["A3A_fnc_commsMP",_x]
         } forEach ([50,0,_intel,teamPlayer] call A3A_fnc_distanceUnits);
     };
 
@@ -135,43 +135,43 @@ while {_pointSum <= _neededPoints} do
             {
                 case ("Err_Sml_01"):
                 {
-                    _errorText = "Data Fragment Error. File {002451%12-215502%} has to be confirmed manually!";
-                    _actionText = "Confirm file";
+                    _errorText = localize "STR_antistasi_intel_error1";
+                    _actionText = localize "STR_antistasi_intel_action1";
                     _penalty = 0; //150 + random 100;
                     _picturePath = "error1";
                 };
                 case ("Err_Sml_02"):
                 {
-                    _errorText = "404 Error on server. URL incorrect. Skip URL?";
-                    _actionText = "Skip URL";
+                    _errorText = localize "STR_antistasi_intel_error2";
+                    _actionText = localize "STR_antistasi_intel_action2";
                     _penalty = 0; //150 + random 50;
                     _picturePath = "error2";
                 };
                 case ("Err_Sml_03"):
                 {
-                    _errorText = "Windows needs an update. Update now and lose all data?";
-                    _actionText = "Stop windows update";
+                    _errorText = localize "STR_antistasi_intel_error3";
+                    _actionText = localize "STR_antistasi_intel_action3";
                     _penalty = 0; //200 + random 150;
                     _picturePath = "error3";
                 };
                 case ("Err_Med_01"):
                 {
-                    _errorText = "Download port closed on server. Manual reroute required!";
-                    _actionText = "Reroute download";
+                    _errorText = localize "STR_antistasi_intel_error4";
+                    _actionText = localize "STR_antistasi_intel_action4";
                     _penalty = 0;// 250 + random 150;
                     _picturePath = "error4";
                 };
                 case ("Err_Med_02"):
                 {
-                    _errorText = "Error in NetworkAdapter. Hardware not responding. Restart now?";
-                    _actionText = "Restart NetworkAdapter";
+                    _errorText = localize "STR_antistasi_intel_error5";
+                    _actionText = localize "STR_antistasi_intel_action5";
                     _penalty = 0; //350 + random 100;
                     _picturePath = "error5";
                 };
                 case ("Err_Lar_01"):
                 {
-                    _errorText = "Critical Error in network infrastructur. Server returned ErrorCode: CRITICAL_ARMA_PROCESS_DIED";
-                    _actionText = "Restart server process";
+                    _errorText = localize "STR_antistasi_intel_error6";
+                    _actionText = localize "STR_antistasi_intel_action6";
                     _penalty = 0;// 600 + random 250;
                     _picturePath = "error6";
                 };
@@ -229,7 +229,7 @@ while {_pointSum <= _neededPoints} do
             _pointSum = _pointSum + (_pointsPerSecond * _timeDiff);
         };
         {
-            [petros,"hintS", format ["Download at %1%2",((round ((_pointSum/_neededPoints) * 10000))/ 100), "%"], "Search Intel"] remoteExec ["A3A_fnc_commsMP",_x]
+            [petros,"hintS", format [localize "STR_antistasi_intel_download",((round ((_pointSum/_neededPoints) * 10000))/ 100), "%"], localize "STR_antistasi_intel_search"] remoteExec ["A3A_fnc_commsMP",_x]
         } forEach _playerList;
     };
 };
@@ -242,7 +242,7 @@ if(_pointSum >= _neededPoints) then
     private _intelText = ["Large", _side] call A3A_fnc_selectIntel;
     [_intelText] remoteExec ["A3A_fnc_showIntel", [teamPlayer, civilian]];
     {
-        [petros,"hint","You managed to download the intel!", "Search Intel"] remoteExec ["A3A_fnc_commsMP",_x];
+        [petros,"hint", localize "STR_antistasi_intel_managed_download", localize "STR_antistasi_intel_search"] remoteExec ["A3A_fnc_commsMP",_x];
         [10,_x] call A3A_fnc_playerScoreAdd;
     } forEach ([50,0,_intel,teamPlayer] call A3A_fnc_distanceUnits);
     [5, theBoss] call A3A_fnc_playerScoreAdd;

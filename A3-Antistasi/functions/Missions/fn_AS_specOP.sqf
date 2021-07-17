@@ -19,10 +19,10 @@ _displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time po
 
 _nameDest = [_markerX] call A3A_fnc_localizar;
 _naming = if (_sideX == Occupants) then {"NATO"} else {"CSAT"};
-private _taskString = format ["We have spotted a %3 SpecOp team patrolling around a %1. Ambush them and we will have one less problem. Do this before %2. Be careful, they are tough boys.",_nameDest,_displayTime];
+private _taskString = format [localize "STR_antistasi_mission_SpecOps_text",_nameDest,_displayTime];
 private _taskId = "AS" + str A3A_taskCount;
 
-[[teamPlayer,civilian],_taskId,[_taskString,"SpecOps",_markerX],_positionX,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[_taskString,localize "STR_antistasi_mission_SpecOps_name",_markerX],_positionX,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
 [_taskId, "AS", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 waitUntil  {sleep 5; (dateToNumber date > _dateLimitNum) or (sidesX getVariable [_markerX,sideUnknown] == teamPlayer)};
 
@@ -62,7 +62,7 @@ else
 		[10,theBoss] call A3A_fnc_playerScoreAdd;
 		};
     [_sideX, 10, 60] remoteExec ["A3A_fnc_addAggression", 2];
-	["TaskFailed", ["", format ["SpecOp Team decimated at a %1",_nameDest]]] remoteExec ["BIS_fnc_showNotification",_sideX];
+	["TaskFailed", ["", format [localize "STR_antistasi_mission_killed",_nameDest]]] remoteExec ["BIS_fnc_showNotification",_sideX];
 	};
 
 [_taskId, "AS", 1200] spawn A3A_fnc_taskDelete;

@@ -5,7 +5,7 @@
 #include "..\dialogs.hpp"
 #include "..\Garage\Dialogs.hpp"
 
-author = $STR_antistasi_credits_generic_author_text;
+author = $STR_antistasi_author;
 loadScreen = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
 overviewPicture = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
 Keys[] = {"A3-Antistasi-is-not-available-in-single-player"};

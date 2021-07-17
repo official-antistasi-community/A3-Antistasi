@@ -1,6 +1,6 @@
-if !(membershipEnabled) exitWith {["Membership", "Server Member feature is disabled"] call A3A_fnc_customHint;};
+if !(membershipEnabled) exitWith {[localize "STR_antistasi_customHint_membership", localize "STR_antistasi_customHint_membership_off"] call A3A_fnc_customHint;};
 private ["_countX"];
-_textX = "In Game Members<br/><br/>";
+private _textX = localize "STR_antistasi_orgPlayers_memberList_inGame"+"<br/><br/>";
 _countN = 0;
 
 {
@@ -12,6 +12,5 @@ if (!isNull _playerX) then
 	};
 } forEach (call A3A_fnc_playableUnits);
 
-_textX = format ["%1<br/>No members:<br/>%2",_textX,_countN];
-
-["Membership", _textX] call A3A_fnc_customHint;
+_textX = _textX + "<br/>" + localize "STR_antistasi_orgPlayers_memberList_count" + str _countN;
+[localize "STR_antistasi_customHint_membership", _textX] call A3A_fnc_customHint;

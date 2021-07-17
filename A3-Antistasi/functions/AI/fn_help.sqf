@@ -15,7 +15,7 @@ if (_medicX != _unit) then
 	{
 	if !(_unit getVariable ["incapacitated",false]) then
 		{
-		if (_isPlayer) then {_unit groupChat format ["Comrades, this is %1. I'm hurt",name _unit]};
+		if (_isPlayer) then {_unit groupChat format [localize "STR_antistasi_chat_helpMe",name _unit]};
 		playSound3D [(selectRandom injuredSounds),_unit,false, getPosASL _unit, 1, 1, 50];
 		};
 	if (_isPlayer) then
@@ -26,10 +26,10 @@ if (_medicX != _unit) then
 			private ["_medicX","_unit"];
 			_medicX = _this select 0;
 			_unit = _this select 1;
-			_medicX groupChat format ["Wait a minute comrade %1, I will patch you up",name _unit]
+			_medicX groupChat format [localize "STR_antistasi_chat_helpMe_wait",name _unit]
 			};
 		};
-	if (hasInterface) then {if (player == _unit) then {["Medical", format ["%1 is on the way to help you",name _medicX]] call A3A_fnc_customHint;}};
+	if (hasInterface) then {if (player == _unit) then {[localize "STR_antistasi_customHint_medical", format [localize "STR_antistasi_customHint_medical_help_you",name _medicX]] call A3A_fnc_customHint;}};
 	_enemy = _medicX findNearestEnemy _unit;
 	_smoked = [_medicX,_unit,_enemy] call A3A_fnc_chargeWithSmoke;
 	_medicX stop false;
@@ -122,7 +122,7 @@ if (_medicX != _unit) then
 					_unit playMoveNow "";
 					if (_cured) then
 						{
-						if (_medicX != _unit) then {if (_isPlayer) then {_medicX groupChat format ["You are ready %1",name _unit]}};
+						if (_medicX != _unit) then {if (_isPlayer) then {_medicX groupChat format [localize "STR_antistasi_chat_helpMe_ready",name _unit]}};
 						};
 					sleep 5;
 					_medicX stop false;
@@ -153,7 +153,7 @@ if (_medicX != _unit) then
 				_cured = [_unit,_medicX] call A3A_fnc_actionRevive;
 				if (_cured) then
 					{
-					if (_medicX != _unit) then {if (_isPlayer) then {_medicX groupChat format ["You are ready %1",name _unit]}};
+					if (_medicX != _unit) then {if (_isPlayer) then {_medicX groupChat format [localize "STR_antistasi_chat_helpMe_ready",name _unit]}};
 					sleep 10;
 					};
 				_medicX stop false;
@@ -171,7 +171,7 @@ if (_medicX != _unit) then
 			if (_unit getVariable ["incapacitated",false]) then {_cured = [_unit,_medicX] call A3A_fnc_actionRevive} else {_medicX action ["HealSoldier",_unit]; _cured = true};
 			if (_cured) then
 				{
-				if (_medicX != _unit) then {if (_isPlayer) then {_medicX groupChat format ["You are ready %1",name _unit]}};
+				if (_medicX != _unit) then {if (_isPlayer) then {_medicX groupChat format [localize "STR_antistasi_chat_helpMe_ready",name _unit]}};
 				sleep 10;
 				};
 			_medicX stop false;

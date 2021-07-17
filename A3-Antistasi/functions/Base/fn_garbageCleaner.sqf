@@ -1,6 +1,6 @@
 #include "..\..\Includes\common.inc"
 FIX_LINE_NUMBERS()
-[petros,"hint","Deleting Garbage. Please wait", "Garbage Cleaner"] remoteExec ["A3A_fnc_commsMP", 0];
+[petros,"hint",localize "STR_antistasi_cleanForest_wait", localize "STR_antistasi_journal_entry_header_Options_7"] remoteExec ["A3A_fnc_commsMP", 0];
 Info("Cleaning garbage...");
 
 private _rebelSpawners = allUnits select { side group _x == teamPlayer && {_x getVariable ["spawner",false]} };
@@ -49,5 +49,5 @@ if (A3A_hasRHS) then {
 
 };
 
-[petros,"hint","Garbage deleted", "Garbage Cleaner"] remoteExec ["A3A_fnc_commsMP", 0];
+[petros,"hint",localize "STR_antistasi_cleanForest_deleted", localize "STR_antistasi_journal_entry_header_Options_7"] remoteExec ["A3A_fnc_commsMP", 0];
 Info("Garbage clean completed");

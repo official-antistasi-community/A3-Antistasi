@@ -6,11 +6,11 @@ private _disabledPlayerDamage = false;
 
 if (_newGame) then {
     Info("New session selected");
-	"Initial HQ Placement Selection" hintC ["Click on the Map Position you want to start the Game.","Close the map with M to start in the default position.","Don't select areas with enemies nearby!!\n\nGame experience changes a lot on different starting positions."];
+	localize "STR_antistasi_customHint_startPosition" hintC [localize "STR_antistasi_customHint_startPosition_text"];
 } else {
 	player allowDamage false;
 	_disabledPlayerDamage = true;
-	format ["%1 is Dead",name petros] hintC format ["%1 has been killed. You lost part of your assets and need to select a new HQ position far from the enemies.",name petros];
+	format [localize "STR_antistasi_customHint_carry_dead",name petros] hintC format [localize "STR_antistasi_customHint_startPosition_petrosDead",name petros];
 };
 
 hintC_arr_EH = findDisplay 72 displayAddEventHandler ["unload",{
@@ -60,24 +60,24 @@ while {_positionIsInvalid} do {
 	_markerX = [_markersX,_positionClicked] call BIS_fnc_nearestPosition;
 
 	if (getMarkerPos _markerX distance _positionClicked < 500) then {
-		["HQ Position", "Place selected is very close to enemy zones.<br/><br/> Please select another position"] call A3A_fnc_customHint;
+		[localize "STR_antistasi_customHint_HQ_position", localize "STR_antistasi_customHint_HQ_close"] call A3A_fnc_customHint;
 		_positionIsInvalid = true;
 	};
 
 	if (!_positionIsInvalid && {surfaceIsWater _positionClicked}) then {
-		["HQ Position", "Selected position cannot be in water"] call A3A_fnc_customHint;
+		[localize "STR_antistasi_customHint_HQ_position", localize "STR_antistasi_customHint_HQ_water"] call A3A_fnc_customHint;
 		_positionIsInvalid = true;
 	};
 
 	if (!_positionIsInvalid && (_positionClicked findIf { (_x < 0) || (_x > worldSize)} != -1)) then {
-		["HQ Position", "Selected position cannot be outside the map"] call A3A_fnc_customHint;
+		[localize "STR_antistasi_customHint_HQ_position", localize "STR_antistasi_customHint_HQ_outside"] call A3A_fnc_customHint;
 		_positionIsInvalid = true;
 	};
 
 	if (!_positionIsInvalid && !_newGame) then {
 		//Invalid if enemies nearby
 		_positionIsInvalid = (allUnits findIf {(side _x == Occupants || side _x == Invaders) && {_x distance _positionClicked < 500}}) > -1;
-		if (_positionIsInvalid) then {["HQ Position", "There are enemies in the surroundings of that area, please select another."] call A3A_fnc_customHint;};
+		if (_positionIsInvalid) then {[localize "STR_antistasi_customHint_HQ_position", localize "STR_antistasi_customHint_HQ_enemy"] call A3A_fnc_customHint;};
 	};
 	sleep 0.1;
 };

@@ -14,7 +14,7 @@ if (random 100 < _chance) then
 		{
 		if (not revealX) then
 			{
-			["TaskSucceeded", ["", "Enemy Comms Intercepted"]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
+			["TaskSucceeded", ["", localize "STR_antistasi_notification_comm_inter"]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 			revealX = true; publicVariable "revealX";
 			[] remoteExec ["A3A_fnc_revealToPlayer",teamPlayer];
 			};
@@ -30,7 +30,7 @@ else
 		{
 		if (revealX) then
 			{
-			["TaskFailed", ["", "Enemy Comms Lost"]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
+			["TaskFailed", ["", localize "STR_antistasi_notification_comm_lost"]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 			revealX = false; publicVariable "revealX";
 			};
 		};

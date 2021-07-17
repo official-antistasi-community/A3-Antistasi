@@ -1,14 +1,14 @@
-if (player != theBoss) exitWith {["Skill Add", "Only our Commander has access to this function"] call A3A_fnc_customHint;};
+if (player != theBoss) exitWith {[localize "STR_antistasi_customHint_skill", localize "STR_antistasi_customHint_only_comander"] call A3A_fnc_customHint;};
 
-if (skillFIA > 20) exitWith {["Skill Add", "Your troops have the maximum training"] call A3A_fnc_customHint;};
-if (skillFIA > (tierWar*2)) exitWith {["Skill Add", "You cannot upgrade training in the current War Level"] call A3A_fnc_customHint;};
+if (skillFIA > 20) exitWith {[localize "STR_antistasi_customHint_skill", localize "STR_antistasi_customHint_skill_max"] call A3A_fnc_customHint;};
+if (skillFIA > (tierWar*2)) exitWith {[localize "STR_antistasi_customHint_skill", localize "STR_antistasi_customHint_skill_warlevel"] call A3A_fnc_customHint;};
 _resourcesFIA = server getVariable "resourcesFIA";
 _costs = 1000 + (1.5*(skillFIA *750));
-if (_resourcesFIA < _costs) exitWith {["Skill Add", format ["You do not have enough money to afford additional training. %1 € needed",_costs]] call A3A_fnc_customHint;};
+if (_resourcesFIA < _costs) exitWith {[localize "STR_antistasi_customHint_skill", format [localize "STR_antistasi_customHint_skill_noMoney",_costs]] call A3A_fnc_customHint;};
 
 _resourcesFIA = _resourcesFIA - _costs;
 skillFIA = skillFIA + 1;
-["Skill Add", format ["%2 Skill Level has been Upgraded<br/>Current level is %1",skillFIA,nameTeamPlayer]] call A3A_fnc_customHint;
+[localize "STR_antistasi_customHint_skill", format [localize "STR_antistasi_customHint_skill_upgrade",skillFIA,nameTeamPlayer]] call A3A_fnc_customHint;
 publicVariable "skillFIA";
 server setVariable ["resourcesFIA",_resourcesFIA,true];
 [] spawn A3A_fnc_statistics;

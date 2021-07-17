@@ -13,28 +13,28 @@ if (_playerX getVariable ["eligible",false]) then
 		if(!isNull _newBoss && isPlayer _newBoss) then
 		{
 			if ([_newBoss] call A3A_fnc_makePlayerBossIfEligible) then {
-				_text = format ["You resign from being commander, choosing %1 as your successor.", name _newBoss];
+				_text = format [localize "STR_antistasi_customHint_eligible_suc", name _newBoss];
 			}
 			else {
-				_text = format ["You resign from being commander. Your chosen successor (%1) was not eligible.", name _newBoss];
+				_text = format [localize "STR_antistasi_customHint_eligible_suc_noChosen", name _newBoss];
 			};
 		}
 		else {
-			_text = "You resign from being Commander. Others will take the command if there is someone suitable.";
+			_text = localize "STR_antistasi_customHint_eligible_noSuc";
 		};
 	}
 	else
 	{
-		_text = "You decided not to be eligible for commander.";
+		_text = localize "STR_antistasi_customHint_eligible_no";
 	};
 }
 else
 {
 	_playerX setVariable ["eligible",true,true];
-	_text = "You are now eligible to be commander of our forces.";
+	_text = localize "STR_antistasi_customHint_eligible";
 };
 
-["Commander", _text] remoteExec ["A3A_fnc_customHint", _playerX];
+[localize "STR_position_commander", _text] remoteExec ["A3A_fnc_customHint", _playerX];
 
 // Will remove current boss if now ineligible
 [] call A3A_fnc_assignBossIfNone;

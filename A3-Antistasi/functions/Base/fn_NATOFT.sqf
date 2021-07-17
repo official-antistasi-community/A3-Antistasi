@@ -5,14 +5,14 @@ _enemyFaction = if (_sideX == Occupants) then {Invaders} else {Occupants};
 if (((side _enemyX == _enemyFaction) or (side _enemyX == teamPlayer)) and (_enemyX distance player < 500) and (not(captive _enemyX))) exitWith {_checkX = true};
 } forEach allUnits;
 
-if (_checkX) exitWith {["Fast Travel", "You cannot Fast Travel while enemies are nearby"] call A3A_fnc_customHint;};
+if (_checkX) exitWith {[localize "STR_a3_fastravel1", localize "STR_antistasi_customHint_fast_travel_enemy"] call A3A_fnc_customHint;};
 
 if (vehicle player != player) then {if (!(canMove vehicle player)) then {_checkX = true}};
-if (_checkX) exitWith {["Fast Travel", "You cannot Fast Travel if your vehicles don't have a driver or your vehicles immobile"] call A3A_fnc_customHint;};
+if (_checkX) exitWith {[localize "STR_a3_fastravel1", localize "STR_antistasi_customHint_fast_travel_noDriver"] call A3A_fnc_customHint;};
 
 positionTel = [];
 
-["Fast Travel", "Click on the zone you want to travel to"] call A3A_fnc_customHint;
+[localize "STR_a3_fastravel1", localize "STR_antistasi_customHint_fast_travel_map"] call A3A_fnc_customHint;
 if (!visibleMap) then {openMap true};
 onMapSingleClick "positionTel = _pos;";
 
@@ -38,34 +38,34 @@ if (count _positionTel > 0) then
 		};
 	_base = [_markersX, _positionTel] call BIS_Fnc_nearestPosition;
 
-	if ((sidesX getVariable [_base,sideUnknown] == teamPlayer) or (_base in _mrkENY)) exitWith {["Fast Travel", "You cannot Fast Travel to an enemy controlled zone"] call A3A_fnc_customHint; openMap [false,false]};
+	if ((sidesX getVariable [_base,sideUnknown] == teamPlayer) or (_base in _mrkENY)) exitWith {[localize "STR_a3_fastravel1", localize "STR_antistasi_customHint_fast_travel_enemy_control"] call A3A_fnc_customHint; openMap [false,false]};
 
-	if ((!(_base in airportsX)) and (!(_base in seaports)) and (!(_base in outposts)) and (_base != _mrkRespawn)) exitWith {["Fast Travel", "You can only Fast Travel to Airbases, Outposts and Seaports"] call A3A_fnc_customHint; openMap [false,false]};
+	if ((!(_base in airportsX)) and (!(_base in seaports)) and (!(_base in outposts)) and (_base != _mrkRespawn)) exitWith {[localize "STR_a3_fastravel1", localize "STR_antistasi_customHint_fast_trevel_info"] call A3A_fnc_customHint; openMap [false,false]};
 
 	{
 		if (((side (group _x) == teamPlayer) or (side (group _x) == _enemyFaction)) and (_x distance (getMarkerPos _base) < 500) and (not(captive _x))) then {_checkX = true};
 	} forEach allUnits;
 
-	if (_checkX) exitWith {["Fast Travel", "You cannot Fast Travel to an area under attack or with enemies in the surrounding area"] call A3A_fnc_customHint; openMap [false,false]};
+	if (_checkX) exitWith {[localize "STR_a3_fastravel1", localize "STR_antistasi_customHint_fast_trevel_attack"] call A3A_fnc_customHint; openMap [false,false]};
 
 	if (_positionTel distance getMarkerPos _base < 50) then
 		{
 		_positionX = [getMarkerPos _base, 10, random 360] call BIS_Fnc_relPos;
 		_distanceX = round (((position player) distance _positionX)/200);
 		disableUserInput true;
-		cutText ["Fast traveling, please wait","BLACK",2];
+		cutText [localize "STR_antistasi_cutText_tp","BLACK",2];
 		sleep 2;
 		(vehicle player) setPos _positionX;
 		player allowDamage false;
 		sleep _distanceX;
 		disableUserInput false;
-		cutText ["You arrived to destination","BLACK IN",3];
+		cutText [localize "STR_antistasi_cutText_tpDone","BLACK IN",3];
 		sleep 5;
 		player allowDamage true;
 		}
 	else
 		{
-		["Fast Travel", "You must click near a marker you control"] call A3A_fnc_customHint;
+		[localize "STR_a3_fastravel1", localize "STR_antistasi_customHint_fast_trevel_click"] call A3A_fnc_customHint;
 		};
 	};
 openMap false;

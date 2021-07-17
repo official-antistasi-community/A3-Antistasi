@@ -13,7 +13,7 @@
 //   Side Information   //
 //////////////////////////
 
-["name", "MACV"] call _fnc_saveToTemplate;
+["name", localize "STR_antistasi_faction_MACV"] call _fnc_saveToTemplate;
 ["spawnMarkerName", "MACV Support Corridor"] call _fnc_saveToTemplate;
 
 ["flag", "vn_flag_usa"] call _fnc_saveToTemplate;

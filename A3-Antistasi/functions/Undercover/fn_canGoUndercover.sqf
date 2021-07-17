@@ -33,13 +33,13 @@ private _reasons = [];
 
 if (player != player getVariable["owner", player]) exitWith
 {
-    ["Undercover", "You cannot go Undercover while you are controlling AI"] call A3A_fnc_customHint;
+    [localize "STR_antistasi_undercover", localize "STR_antistasi_undercover_controlAI"] call A3A_fnc_customHint;
     [false, "No Undercover while controlling AI"];
 };
 
 if (captive player) exitWith
 {
-    ["Undercover", "You are Undercover already"] call A3A_fnc_customHint;
+    [localize "STR_antistasi_undercover", localize "STR_antistasi_undercover_already"] call A3A_fnc_customHint;
     [false, "Already undercover"];
 };
 
@@ -51,12 +51,12 @@ if !(isNull (objectParent player)) then
 {
     if (!(typeOf(objectParent player) in undercoverVehicles)) exitWith
     {
-        ["Undercover", "You are not in a civilian vehicle"] call A3A_fnc_customHint;
+        [localize "STR_antistasi_undercover", localize "STR_antistasi_undercover_undercoverVehicles"] call A3A_fnc_customHint;
         _result = [false, "In non civilian vehicle"];
     };
     if ((objectParent player) in reportedVehs) then
     {
-        ["Undercover", "This vehicle has been reported to the enemy. Change or renew your vehicle in the Garage to go Undercover"] call A3A_fnc_customHint;
+        [localize "STR_antistasi_undercover", localize "STR_antistasi_undercover_reportedVehs"] call A3A_fnc_customHint;
         _result = [false, "In reported vehicle"];
     };
 }
@@ -64,51 +64,51 @@ else
 {
     if (dateToNumber date < (player getVariable ["compromised", 0])) exitWith
     {
-        ["Undercover", "You have been reported in the last 30 minutes therefore you cannot go Undercover"] call A3A_fnc_customHint;
+        [localize "STR_antistasi_undercover", localize "STR_antistasi_undercover_reported"] call A3A_fnc_customHint;
         _result = [false, "Recently reported"];
     };
 
-    private _text = "You cannot go Undercover while:<br/>";
+    private _text = localize "STR_antistasi_undercover_text";
     _result = [true];
     if (primaryWeapon player != "" || secondaryWeapon player != "" || handgunWeapon player != "") then
     {
-        _text = format ["%1<br/>A weapon is visible", _text];
+        _text = format ["%1<br/>"+localize"STR_antistasi_undercover_visible_weapon", _text];
         _result set [0, false];
         _result pushBack "Weapon visible";
     };
     if (vest player != "") then
     {
-        _text = format ["%1<br/>Wearing a vest", _text];
+        _text = format ["%1<br/>"+localize"STR_antistasi_undercover_visible_vest", _text];
         _result set [0, false];
         _result pushBack "Vest visible";
     };
     if (headgear player in allArmoredHeadgear) then
     {
-        _text = format ["%1<br/>Wearing a helmet", _text];
+        _text = format ["%1<br/>"+localize"STR_antistasi_undercover_visible_helmet", _text];
         _result set [0, false];
         _result pushBack "Helmet visible";
     };
     if (hmd player != "") then
     {
-        _text = format ["%1<br/>Wearing NVGs", _text];
+        _text = format ["%1<br/>"+localize"STR_antistasi_undercover_visible_NVGs", _text];
         _result set [0, false];
         _result pushBack "NVG visible";
     };
     if ((uniform player != "") && !(uniform player in (A3A_faction_civ getVariable "uniforms"))) then
     {
-        _text = format ["%1<br/>Wearing a suspicious uniform", _text];
+        _text = format ["%1<br/>"+localize"STR_antistasi_undercover_visible_uniform", _text];
         _result set [0, false];
         _result pushBack "Suspicious uniform";
     };
     if (uniform player == "") then
     {
-        _text = format ["%1<br/>Being naked. Thats what you think is unsuspicious?", _text];
+        _text = format ["%1<br/>"+localize"STR_antistasi_undercover_visible_naked", _text];
         _result set [0, false];
         _result pushBack "No clothes";
     };
     if !(_result select 0) then
     {
-        ["Undercover", _text] call A3A_fnc_customHint;
+        [localize "STR_antistasi_undercover", _text] call A3A_fnc_customHint;
     };
 };
 
@@ -121,7 +121,7 @@ private _base = [_secureBases, player] call BIS_fnc_nearestPosition;
 private _size = [_base] call A3A_fnc_sizeMarker;
 if ((player distance2D getMarkerPos _base < _size * 2) && (sidesX getVariable [_base, sideUnknown] != teamPlayer)) exitWith
 {
-    ["Undercover", "You cannot go Undercover near Airports, Outposts, Seaports or Roadblocks"] call A3A_fnc_customHint;
+    [localize "STR_antistasi_undercover", localize "STR_antistasi_undercover_zone"] call A3A_fnc_customHint;
     [false, "Near enemy territory"];
 };
 
@@ -134,7 +134,7 @@ if
     } count allUnits > 0
 ) exitWith
 {
-    ["Undercover", "You cannot go Undercover while enemies are spotting you"] call A3A_fnc_customHint;
+    [localize "STR_antistasi_undercover", localize "STR_antistasi_undercover_spotting"] call A3A_fnc_customHint;
     [false, "Spotted by enemies"];
 };
 

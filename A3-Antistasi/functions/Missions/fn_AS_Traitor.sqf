@@ -55,8 +55,8 @@ _groupTraitor selectLeader _traitor;
 _posTsk = (position _houseX) getPos [random 100, random 360];
 
 private _taskId = "AS" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskID,[format ["A traitor has scheduled a meeting with %4 in %1. Kill him before he provides enough intel to give us trouble. Do this before %2. We don't where exactly this meeting will happen. You will recognise the building by the nearby Offroad and %3 presence.",_nameDest,_displayTime,nameOccupants],"Kill the Traitor",_markerX],_posTsk,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
-[[Occupants],_taskID+"B",[format ["We arranged a meeting in %1 with a %3 contact who may have vital information about their Headquarters position. Protect him until %2.",_nameDest,_displayTime,nameTeamPlayer],"Protect Contact",_markerX],getPos _houseX,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskID,[format [localize "STR_antistasi_mission_traitor_text",_nameDest,_displayTime,nameOccupants],localize "STR_antistasi_mission_traitor_name",_markerX],_posTsk,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
+[[Occupants],_taskID+"B",[format [localize "STR_antistasi_mission_protectContact_text",_nameDest,_displayTime,nameTeamPlayer],localize "STR_antistasi_mission_protectContact",_markerX],getPos _houseX,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
 [_taskId, "AS", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 traitorIntel = false; publicVariable "traitorIntel";
@@ -137,7 +137,7 @@ if (not alive _traitor || traitorIntel) then
 	[_taskId, "AS", "SUCCEEDED", true] call A3A_fnc_taskSetState;
 	if(traitorIntel && (alive _traitor)) then
 	{
-		{[petros,"hint","Someone found some intel on the traitors family, he will not cause any problems any more!"] remoteExec ["A3A_fnc_commsMP",_x]} forEach ([500,0,_traitor,teamPlayer] call A3A_fnc_distanceUnits);
+		{[petros,"hint",localize "STR_antistasi_intel_petrosTraitor"] remoteExec ["A3A_fnc_commsMP",_x]} forEach ([500,0,_traitor,teamPlayer] call A3A_fnc_distanceUnits);
 
 		moveOut _traitor;
 		_traitor join grpNull;

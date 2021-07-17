@@ -172,7 +172,7 @@ if (not(_markerX in destroyedSites)) then
 						_nameX = [_markerX] call A3A_fnc_localizar;
 						destroyedSites pushBackUnique _markerX;
 						publicVariable "destroyedSites";
-						["TaskFailed", ["", format ["%1 Destroyed",_nameX]]] remoteExec ["BIS_fnc_showNotification",[teamPlayer,civilian]];
+						["TaskFailed", ["", format [localize "STR_antistasi_notification_Destroyed",_nameX]]] remoteExec ["BIS_fnc_showNotification",[teamPlayer,civilian]];
 					};
 				}];
 		};

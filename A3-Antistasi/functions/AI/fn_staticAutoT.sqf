@@ -1,6 +1,6 @@
 private ["_LeaderX","_static","_groupX","_maxCargo"];
 
-if (count hcSelected player != 1) exitWith {["Static Auto Target", "You must select one group on the HC bar"] call A3A_fnc_customHint;};
+if (count hcSelected player != 1) exitWith {[localize "STR_antistasi_customHint_auto_target", localize "STR_antistasi_customHint_auto_target_no_select"] call A3A_fnc_customHint;};
 
 _groupX = (hcSelected player select 0);
 
@@ -9,18 +9,18 @@ _static = objNull;
 {
 if (vehicle _x isKindOf "staticWeapon") then {_static = vehicle _x;}
 } forEach units _groupX;
-if (isNull _static) exitWith {["Static Auto Target", "Selected squad is not a mounted static type"] call A3A_fnc_customHint;};
+if (isNull _static) exitWith {[localize "STR_antistasi_customHint_auto_target", localize "STR_antistasi_customHint_auto_target_no_type"] call A3A_fnc_customHint;};
 
-if ((typeOf _static == SDKMortar) and (isMultiPlayer)) exitWith {["Static Auto Target", "Static Auto Target is not available for Mortar Squads in Multiplayer"] call A3A_fnc_customHint;};
+if ((typeOf _static == SDKMortar) and (isMultiPlayer)) exitWith {[localize "STR_antistasi_customHint_auto_target", localize "STR_antistasi_customHint_auto_target_MP"] call A3A_fnc_customHint;};
 if (_groupX getVariable "staticAutoT") exitWith
 	{
 	_groupX setVariable ["staticAutoT",false,true];
 	if (typeOf _static == SDKMortar) then {_groupX setvariable ["UPSMON_Removegroup",true]};
 	sleep 5;
-	["Static Auto Target", format ["Mounted Static Squad %1 set to Auto Target Mode OFF", groupID _groupX]] call A3A_fnc_customHint;
+	[localize "STR_antistasi_customHint_auto_target", format [localize "STR_antistasi_customHint_auto_target_off", groupID _groupX]] call A3A_fnc_customHint;
 	};
 
-["Static Auto Target", format ["Mounted Static Squad %1 set to Auto Target Mode ON", groupID _groupX]] call A3A_fnc_customHint;
+[localize "STR_antistasi_customHint_auto_target", format [localize "STR_antistasi_customHint_auto_target_on", groupID _groupX]] call A3A_fnc_customHint;
 _groupX setVariable ["staticAutoT",true,true];
 
 if (typeOf _static == SDKMortar) exitWith {_nul=[_static] execVM "scripts\UPSMON\MON_artillery_add.sqf";};//TODO delete UPSMON link

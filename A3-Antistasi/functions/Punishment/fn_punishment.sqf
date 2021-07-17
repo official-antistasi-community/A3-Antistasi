@@ -86,8 +86,8 @@ _varspace setVariable ["player",_originalBody];
 private _injuredComrade = "";
 private _victimStats = "damaged systemPunished [AI]";
 if (_victim isKindOf "Man") then {
-	_injuredComrade = ["Injured comrade: ",name _victim] joinString "";
-	["FF Notification", [_name," hurt you!"] joinString ""] remoteExecCall ["A3A_fnc_customHint", _victim, false];
+	_injuredComrade = [localize "STR_antistasi_customHint_FF_injured"+" ",name _victim] joinString "";
+	[localize "str_cfg_markers_warning", format [localize "STR_antistasi_customHint_punish_hurt",_name]] remoteExecCall ["A3A_fnc_customHint", _victim, false];
 	private _UIDVictim = ["AI", getPlayerUID _victim] select (isPlayer _victim);
 	_victimStats = ["damaged ",name _victim," [",_UIDVictim,"]"] joinString "";
 };
@@ -97,7 +97,7 @@ private _playerStats = ["Total-time: ",str _timeTotal," (incl. +",str _timeAdded
 private _instigatorLog = [["WARNING","GUILTY"] select (_offenceTotal >= 1)," | ",_name," [",_UID,"] ",_victimStats,", ",_playerStats] joinString "";
 Info(_instigatorLog);
 
-["FF Warning", ["Watch your fire!",_injuredComrade,_customMessage] joinString "<br/>"] remoteExecCall ["A3A_fnc_customHint", _originalBody, false];
+[localize "str_cfg_markers_warning", [localize "STR_antistasi_customHint_friendlyFire",_injuredComrade,_customMessage] joinString "<br/>"] remoteExecCall ["A3A_fnc_customHint", _originalBody, false];
 
 if (_offenceTotal < 1) exitWith {"WARNING";};
 
@@ -107,7 +107,7 @@ if (_instigator isEqualTo _originalBody) then {
 } else {
 	(units group _originalBody) joinSilent group _originalBody;  // Refer to controlunit.sqf for source of this *function*
 	group _instigator selectLeader _originalBody;
-	["Control Unit", "Returned to original Unit due to FF."] remoteExecCall ["A3A_fnc_customHint",_instigator,false];
+	[localize "STR_antistasi_customHint_control", localize "STR_antistasi_customHint_control_return"] remoteExecCall ["A3A_fnc_customHint",_instigator,false];
 	[_originalBody] remoteExec ["selectPlayer",_instigator,false];
 
 	[_instigator,_originalBody,_UID,_timeTotal,_name] spawn {  // Waits for player to control original body. This will be relocated to sentence_client in the future allowing for snappy execution server-side.

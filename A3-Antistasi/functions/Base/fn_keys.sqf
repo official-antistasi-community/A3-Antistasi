@@ -29,12 +29,12 @@ else
 			if (soundVolume <= 0.5) then
 				{
 				0.5 fadeSound 1;
-				["Ear Plugs", "You've taken out your ear plugs.", true] call A3A_fnc_customHint;
+				[localize "STR_antistasi_earplugs", localize "STR_antistasi_earplugs_off", true] call A3A_fnc_customHint;
 				}
 			else
 				{
 				0.5 fadeSound 0.1;
-				["Ear Plugs", "You've inserted your ear plugs.", true] call A3A_fnc_customHint;
+				[localize "STR_antistasi_earplugs", localize "STR_antistasi_earplugs_on", true] call A3A_fnc_customHint;
 				};
 			};
 		};

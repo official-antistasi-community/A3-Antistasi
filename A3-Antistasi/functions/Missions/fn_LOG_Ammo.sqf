@@ -29,7 +29,7 @@ _pos = _pos findEmptyPosition [1,60,_typeVehX];
 if (count _pos == 0) then {_pos = position _road};
 
 private _taskId = "LOG" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[format ["We've spotted an Ammotruck in an %1. Go there and destroy or steal it before %2.",_nameDest,_displayTime],"Steal or Destroy Ammotruck",_markerX],_pos,false,0,true,"rearm",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[format [localize "STR_antistasi_mission_ammoVeh_text",_nameDest,_displayTime],localize "STR_antistasi_mission_ammoVeh",_markerX],_pos,false,0,true,"rearm",true] call BIS_fnc_taskCreate;
 [_taskId, "LOG", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _truckCreated = false;
@@ -83,7 +83,7 @@ if ((spawner getVariable _markerX != 2) and !(sidesX getVariable [_markerX,sideU
 		private _owningSide = (_vehicle getVariable "originalSide");		// set by AIVEHinit
 
 		if (_unit getVariable ["spawner",false]) then {
-			["TaskFailed", ["", format ["Ammotruck Stolen in an %1",(_vehicle getVariable ["ammoTruckLocation", ""])]]] remoteExec ["BIS_fnc_showNotification",_owningSide];
+			["TaskFailed", ["", format [localize "STR_antistasi_notification_Ammotruck_stolen",(_vehicle getVariable ["ammoTruckLocation", ""])]]] remoteExec ["BIS_fnc_showNotification",_owningSide];
 		};
 
 		_truckX removeEventHandler ["GetIn", _thisEventHandler];

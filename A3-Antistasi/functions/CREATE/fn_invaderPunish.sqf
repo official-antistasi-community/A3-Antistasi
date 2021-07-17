@@ -18,7 +18,7 @@ Info_2("Launching CSAT Punish Against %1 from %2", _attackDestination, _attackOr
 
 _nameDestination = [_attackDestination] call A3A_fnc_localizar;
 private _taskId = "invaderPunish" + str A3A_taskCount;
-[[teamPlayer,civilian,Occupants],_taskId,[format ["%2 is attacking critical positions within %1! Defend the city at all costs",_nameDestination,nameInvaders],format ["%1 Punishment",nameInvaders],_attackDestination],getMarkerPos _attackDestination,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian,Occupants],_taskId,[format [localize "STR_antistasi_mission_invader_text",_nameDestination,nameInvaders],format [localize "STR_antistasi_mission_invader_name",nameInvaders],_attackDestination],getMarkerPos _attackDestination,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
 [_taskId, "invaderPunish", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 

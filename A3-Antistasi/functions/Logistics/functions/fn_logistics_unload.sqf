@@ -29,9 +29,9 @@ if ((count _loaded) isEqualTo 1) then {_lastLoaded = true};
 if !(
     ((gunner _cargo) isEqualTo _cargo)
     or ((gunner _cargo) isEqualTo objNull)
-) exitWith {["Logistics", "Can't unload a static that's mounted"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner]};
+) exitWith {[localize"STR_antistasi_logistics_head", localize"STR_antistasi_logistics_staticMounted_unload"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner]};
 
-if (_vehicle getVariable ["LoadingCargo", false]) exitWith {["Logistics", "Cargo is already being unloaded from the vehicle"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner]};
+if (_vehicle getVariable ["LoadingCargo", false]) exitWith {[localize"STR_antistasi_logistics_head", localize"STR_antistasi_logistics_alreadyUploaded"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner]};
 _vehicle setVariable ["LoadingCargo",true,true];
 
 //update list of nodes on vehicle

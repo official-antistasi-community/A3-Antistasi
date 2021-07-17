@@ -1,17 +1,17 @@
 params["_vehicle", "_caller", "_actionID"];
 
-if(!isPlayer _caller) exitWith {["Breach Vehicle", "Only players are currently able to breach vehicles!"] call A3A_fnc_customHint;};
+if(!isPlayer _caller) exitWith {[localize "STR_antistasi_customHint_breach_veh", localize "STR_antistasi_customHint_breach_veh_only_player"] call A3A_fnc_customHint;};
 
 //Only engineers should be able to breach a vehicle
 private _isEngineer = _caller getUnitTrait "engineer";
 if(!_isEngineer) exitWith
 {
-    ["Breach Vehicle", "You have to be an engineer to breach a vehicle!"] call A3A_fnc_customHint;;
+    [localize "STR_antistasi_customHint_breach_veh", localize "STR_antistasi_customHint_breach_veh_no_eng"] call A3A_fnc_customHint;;
 };
 
 if(!alive _vehicle) exitWith
 {
-    ["Breach Vehicle", "Why would you want to breach a destroyed vehicle?"] call A3A_fnc_customHint;
+    [localize "STR_antistasi_customHint_breach_veh", localize "STR_antistasi_customHint_breach_veh_destr"] call A3A_fnc_customHint;
     _vehicle removeAction _actionID;
 };
 
@@ -19,14 +19,14 @@ private _vehCrew = crew _vehicle;
 private _aliveCrew = _vehCrew select {alive _x};
 if(count _aliveCrew == 0) exitWith
 {
-    ["Breach Vehicle", "There is no living crew left, no need for breaching!"] call A3A_fnc_customHint;
+    [localize "STR_antistasi_customHint_breach_veh", localize "STR_antistasi_customHint_breach_veh_no_need"] call A3A_fnc_customHint;
     _vehicle lock false;
     _vehicle removeAction _actionID;
 };
 
 if(side (_aliveCrew select 0) == teamPlayer) exitWith
 {
-    ["Breach Vehicle", "You cannot breach a vehicle which is controlled by the rebels!"] call A3A_fnc_customHint;
+    [localize "STR_antistasi_customHint_breach_veh", localize "STR_antistasi_customHint_breach_veh_rebels"] call A3A_fnc_customHint;
     _vehicle removeAction _actionID;
 };
 
@@ -54,7 +54,7 @@ private _index = -1;
 //Abort if no explosives found
 if(_magazineArray isEqualTo []) exitWith
 {
-    ["Breach Vehicle", "You carry no explosives. You will need some to breach vehicles!"] call A3A_fnc_customHint;
+    [localize "STR_antistasi_customHint_breach_veh", localize "STR_antistasi_customHint_breach_veh_no_explosives"] call A3A_fnc_customHint;
 };
 
 private _explosive = "";
@@ -91,7 +91,7 @@ if(!(_explo isEqualTo [])) then
 
 if(_explosiveCount == 0) exitWith
 {
-    ["Breach Vehicle", "You don't have the right explosives, check the briefing notes to see what you need!"] call A3A_fnc_customHint;
+    [localize "STR_antistasi_customHint_breach_veh", localize "STR_antistasi_customHint_breach_veh_type_explosives"] call A3A_fnc_customHint;
 };
 
 private _time = 15 + (random 5);
@@ -113,7 +113,7 @@ _caller setVariable ["breachVeh", _vehicle];
 _caller setVariable ["animsDone",false];
 _caller setVariable ["cancelBreach",false];
 
-private _action = _caller addAction ["Cancel Breaching", {(_this select 1) setVariable ["cancelBreach",true]},nil,6,true,true,"","(isPlayer _this) && (_this == vehicle _this)"];
+private _action = _caller addAction [localize "STR_antistasi_addAction_breach_cancel", {(_this select 1) setVariable ["cancelBreach",true]},nil,6,true,true,"","(isPlayer _this) && (_this == vehicle _this)"];
 _vehicle removeAction _actionID;
 
 _caller addEventHandler ["AnimDone",
@@ -154,7 +154,7 @@ if
   {_caller getVariable ["cancelBreach",false]}}}}
 ) exitWith
 {
-  ["Breach Vehicle", "Breaching cancelled"] call A3A_fnc_customHint;
+  [localize "STR_antistasi_customHint_breach_veh", localize "STR_antistasi_customHint_breach_veh_cancel"] call A3A_fnc_customHint;
   _caller setVariable ["cancelBreach",nil];
   if(alive _vehicle) then {
 	_vehicle call A3A_fnc_addActionBreachVehicle;
@@ -169,7 +169,7 @@ for "_count" from 1 to _explosiveCount do
 
 //Added as the vehicle might blow up. Best not to blow up in the player's face.
 //Pause AFTER removing the explosive in case they decide to drop it or something.
-["Breach Vehicle", "Breaching in 10 seconds."] call A3A_fnc_customHint;
+[localize "STR_antistasi_customHint_breach_veh", format [localize "STR_antistasi_customHint_breach_veh_wait",10]] call A3A_fnc_customHint;
 sleep 10;
 
 private _hitPointsConfigPath = configFile >> "CfgVehicles" >> (typeOf _vehicle) >> "HitPoints";

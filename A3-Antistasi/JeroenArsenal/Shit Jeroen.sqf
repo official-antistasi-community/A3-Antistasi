@@ -51,14 +51,14 @@ if(count _cfg == 0)then{
 
 this addAction [
 	localize "str_act_gameOptions", {
-		["Game Options", format ["Arma 3 - Antistasi<br/><br/>Version: %1",antistasiVersion]] call A3A_fnc_customHint;
+		[localize "STR_disp_options_game_options", format ["Arma 3 - Antistasi<br/><br/>Version: %1",antistasiVersion]] call A3A_fnc_customHint;
 		nul=CreateDialog "game_options_commander";
 	},nil,0,false,true,"","(isPlayer _this) and (_this == Slowhand) and (_this == _this getVariable ['owner',objNull])"
 ];
 
 this addAction [
 	localize "str_act_gameOptions", {
-		["Game Options", format ["Arma 3 - Antistasi<br/><br/>Version: %1",antistasiVersion]] call A3A_fnc_customHint;
+		[localize "STR_disp_options_game_options", format ["Arma 3 - Antistasi<br/><br/>Version: %1",antistasiVersion]] call A3A_fnc_customHint;
 		nul=CreateDialog "game_options_player";
 	},nil,0,false,true,"","(isPlayer _this) and !(_this == Slowhand) and (_this == _this getVariable ['owner',objNull])"
 ];
@@ -216,7 +216,7 @@ player addAction ["Hold On", {
 	if(!isnil "_nearestVehicle")then{
 		player attachto [_nearestVehicle];
 		_index = (findDisplay 46) displayAddEventHandler ["KeyDown", "
-			['Game Options', str (_this select 1)] call A3A_fnc_customHint;
+			[localize 'STR_disp_options_game_options', str (_this select 1)] call A3A_fnc_customHint;
 			if((_this select 1) in [17,30,31,32,57])then{
 				detach player;
 				_index = missionnamespace getVariable 'jn_hold';
@@ -431,7 +431,7 @@ player addAction[
 		_targetLocation = player getpos [600,direction player];
 		_target = cursorObject;
 		if(isnull _target)exitWith{};
-		["Game Options", str _count] call A3A_fnc_customHint;
+		[localize "STR_disp_options_game_options", str _count] call A3A_fnc_customHint;
 
 		[_target,_launcher,_location]spawn {
 			params["_target","_launcher","_location"];
@@ -496,7 +496,7 @@ player addAction[
 	private _targets = allunits select {side _x isEqualTo opfor && _x distance _launcher < 2000};
 	_count = if(count _targets <= 30)then{count _targets}else{30};
 	if(_count == 0)exitWith{};
-	["Game Options", str _count] call A3A_fnc_customHint;
+	[localize "STR_disp_options_game_options", str _count] call A3A_fnc_customHint;
 	for "_i" from 0 to (_count-1) do{
 		sleep 0.5;
 		_target = _targets select _i;

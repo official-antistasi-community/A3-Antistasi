@@ -75,12 +75,12 @@ _instigator setVariable ["A3A_FFPun_CD", servertime + 1, false]; // Local Exec f
 private _victimStats = ["damaged ",["systemPunished",name _victim] select (_victim isKindOf "Man")," "] joinString "";
 _victimStats = [_victimStats,"[",["AI",getPlayerUID _victim] select (isPlayer _victim),"]"] joinString "";
 private _notifyVictim = {
-    if (isPlayer _victim) then {["FF Notification", format["%1 hurt you!",name _instigator]] remoteExec ["A3A_fnc_customHint", _victim, false];};
+    if (isPlayer _victim) then {[localize "str_cfg_markers_warning", format[localize "STR_antistasi_customHint_punish_hurt",name _instigator]] remoteExec ["A3A_fnc_customHint", _victim, false];};
 };
 private _notifyInstigator = {
     params ["_exempMessage"];
-    private _comradeStats = ["",["Injured comrade: ",name _victim,""] joinString ""] select (_victim isKindOf "Man");
-    ["FF Warning", [_exempMessage,_comradeStats,_customMessage] joinString "<br/>"] remoteExec ["A3A_fnc_customHint", _instigator, false];
+    private _comradeStats = ["",[localize "STR_antistasi_customHint_FF_injured"+" ",name _victim,""] joinString ""] select (_victim isKindOf "Man");
+    [localize "str_cfg_markers_warning", [_exempMessage,_comradeStats,_customMessage] joinString "<br/>"] remoteExec ["A3A_fnc_customHint", _instigator, false];
 };
 private _logPvPHurt = {
     if (!(_victim isKindOf "Man")) exitWith {};
@@ -116,7 +116,7 @@ if (!(_exemption isEqualTo "")) exitWith {
 
 /////////////Acts on Collision//////////////
 if (_isCollision) then {
-    _customMessage = [_customMessage,"You damaged a friendly as a driver."] joinString "<br/>";
+    _customMessage = [_customMessage,localize "STR_antistasi_FF_driver"] joinString "<br/>";
     _timeAdded = 27;
     _offenceAdded = 0.15;
     Info_4("COLLISION | %1 [%2]'s %3 %4", name _instigator, getPlayerUID _instigator, _vehicleType, _victimStats);
@@ -125,12 +125,12 @@ if (_isCollision) then {
 /////////Checks for important roles/////////
 _exemption = switch (true) do {
     case (!(admin owner _instigator isEqualTo 0) || player isEqualTo _instigator): {  // Local host included.
-        ["You damaged a friendly as admin."] call _notifyInstigator; // Admin not reported to victim in case of Zeus remote control.
+        [localize "STR_antistasi_FF_admin"] call _notifyInstigator; // Admin not reported to victim in case of Zeus remote control.
         format ["ADMIN, %1", ["Server","Voted","Logged"] select (admin owner _instigator)];
     };
     case (_vehicle isKindOf "Air"): {
         call _notifyVictim;
-        ["You damaged a friendly as CAS support."] call _notifyInstigator;
+        [localize "STR_antistasi_FF_CAS"] call _notifyInstigator;
         format["AIRCRAFT, %1", _vehicleType];
     };
     case (
@@ -138,7 +138,7 @@ _exemption = switch (true) do {
         {!(getNumber (configFile >> "CfgVehicles" >> _vehicleType >> "artilleryScanner") isEqualTo 0)}
     ): {
         call _notifyVictim;
-        ["You damaged a friendly as arty support."] call _notifyInstigator;
+        [localize "STR_antistasi_FF_artSupport"] call _notifyInstigator;
         format ["ARTY, %1", _vehicleType];
     };
     // TODO: if( remoteControlling(_instigator) ) exitWith

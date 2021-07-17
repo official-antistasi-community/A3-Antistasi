@@ -7,7 +7,7 @@ if (_unit != _unit getVariable ["owner",_unit]) exitWith {};
 if (!isPlayer _unit) exitWith {};
 _unit setVariable ["respawning",true];
 //_unit enableSimulation true;
-["Respawning",0,0,3,0,0,4] spawn bis_fnc_dynamicText;
+[localize "STR_antistasi_notification_respawning",0,0,3,0,0,4] spawn bis_fnc_dynamicText;
 //titleText ["", "BLACK IN", 0];
 if (!isNil "respawnMenu") then {(findDisplay 46) displayRemoveEventHandler ["KeyDown", respawnMenu]};
 if (isMultiplayer) exitWith

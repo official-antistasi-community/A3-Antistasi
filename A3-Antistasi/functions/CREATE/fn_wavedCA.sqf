@@ -57,8 +57,8 @@ Info_2("Side Attacker:%1, Side Defender: %2",_sideX,_isSDK);
 _nameDest = [_mrkDestination] call A3A_fnc_localizar;
 
 private _taskId = "rebelAttack" + str A3A_taskCount;
-[_sideTsk,_taskId,[format ["%2 Is attacking from the %1. Intercept them or we may loose a sector",_nameOrigin,_nameENY],format ["%1 Attack",_nameENY],_mrkOrigin],getMarkerPos _mrkOrigin,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
-[_sideTsk1,_taskId+"B",[format ["We are attacking %2 from the %1. Help the operation if you can",_nameOrigin,_nameDest],format ["%1 Attack",_nameENY],_mrkDestination],getMarkerPos _mrkDestination,false,0,true,"Attack",true] call BIS_fnc_taskCreate;
+[_sideTsk,_taskId,[format [localize "STR_antistasi_mission_attack_text",_nameOrigin,_nameENY],format [localize "STR_antistasi_mission_attack_name",_nameENY],_mrkOrigin],getMarkerPos _mrkOrigin,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
+[_sideTsk1,_taskId+"B",[format [localize "STR_antistasi_mission_attackPVP_text",_nameOrigin,_nameDest],format [localize "STR_antistasi_mission_attack_name",_nameENY],_mrkDestination],getMarkerPos _mrkDestination,false,0,true,"Attack",true] call BIS_fnc_taskCreate;
 [_taskId, "rebelAttack", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 // Use fixed aggro value for non-rebel targets for the moment
@@ -285,8 +285,8 @@ while {(_waves > 0)} do
 						_Vwp1 setWaypointStatements ["true","if !(local this) exitWith {}; {if (side _x != side this) then {this reveal [_x,4]}} forEach allUnits"];
 						_Vwp1 setWaypointBehaviour "COMBAT";
 						_veh allowCrewInImmobile true;
-						private _typeName = if (_typeVehX in vehAPCs) then {"APC"} else {"MRAP"};
-						[_veh,"APC"] spawn A3A_fnc_inmuneConvoy;
+						private _typeName = if (_typeVehX in vehAPCs) then {localize "STR_antistasi_markers_APC"} else {localize "STR_antistasi_markers_MRAP"};
+						[_veh,_typeName] spawn A3A_fnc_inmuneConvoy;
 					}
 					else
 						{
@@ -299,7 +299,7 @@ while {(_waves > 0)} do
 						_Vwp0 setWaypointType "GETOUT";
 						_Vwp1 = _groupVeh addWaypoint [_posDestination, count (wayPoints _groupVeh)];
 						_Vwp1 setWaypointType "SAD";
-						[_veh,"Truck"] spawn A3A_fnc_inmuneConvoy;
+						[_veh,localize "STR_antistasi_markers_Truck"] spawn A3A_fnc_inmuneConvoy;
 					};
 				}
 				else
@@ -311,7 +311,7 @@ while {(_waves > 0)} do
 					_Vwp0 setWaypointStatements ["true","if !(local this) exitWith {}; {if (side _x != side this) then {this reveal [_x,4]}} forEach allUnits"];
 					_Vwp0 = _groupVeh addWaypoint [_posDestination, count (wayPoints _groupVeh)];
 					_Vwp0 setWaypointType "SAD";
-					private _typeName = if (_typeVehX in vehTanks) then {"Tank"} else {"AA"};
+					private _typeName = if (_typeVehX in vehTanks) then {localize "STR_antistasi_markers_tank"} else {localize "STR_antistasi_markers_AA"};
 					[_veh, _typeName] spawn A3A_fnc_inmuneConvoy;
 					_veh allowCrewInImmobile true;
 				};
@@ -680,7 +680,7 @@ while {(_waves > 0)} do
 		{
 		if !([true] call A3A_fnc_FIAradio) then {sleep 100};
 		_SDKShown = true;
-		["TaskSucceeded", ["", "Attack Destination Updated"]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
+		["TaskSucceeded", ["", localize "STR_antistasi_mission_attack_update"]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 		[_taskId, getMarkerPos _mrkDestination] call BIS_fnc_taskSetDestination;
 		};
 	_solMax = round ((count _soldiers)*0.6);
@@ -724,7 +724,7 @@ while {(_waves > 0)} do
                     };
                 } forEach citiesX;
 				[60,-60,_mrkDestination,false] remoteExec ["A3A_fnc_citySupportChange",2];		// no pop scaling, force swing
-				["TaskFailed", ["", format ["%1 joined %2",[_mrkDestination, false] call A3A_fnc_location,nameOccupants]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
+				["TaskFailed", ["", format [localize "STR_antistasi_notification_joined",[_mrkDestination, false] call A3A_fnc_location,nameOccupants]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 				sidesX setVariable [_mrkDestination,Occupants,true];
 				[Occupants, -10, 45] remoteExec ["A3A_fnc_addAggression",2];
 				_mrkD = format ["Dum%1",_mrkDestination];

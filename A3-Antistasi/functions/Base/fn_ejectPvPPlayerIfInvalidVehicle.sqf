@@ -11,6 +11,6 @@ if (_veh != lastVehicleSpawned) then
 		//ACE has a loop which tries to force handcuffed players back into vehicles if anything kicks them out.
 		//The spawn stops Arma hanging indefinitely in an infinite loop if /somehow/ we hit that condition.
 		_unit spawn { moveOut _this };
-		["PvP Information", "PvP players are only allowed to use their own or other PvP player vehicles"] call A3A_fnc_customHint;
+		[localize "STR_antistasi_customHint_pvp_info", localize "STR_antistasi_customHint_pvp_info_text"] call A3A_fnc_customHint;
 	};
 };

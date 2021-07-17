@@ -173,13 +173,13 @@ if (_destinationX == boxX) then
 	_updated = [] call A3A_fnc_arsenalManage;
 	if (_updated != "") then
 		{
-		_updated = format ["<t size='0.5' color='#C1C0BB'>Arsenal Updated<br/><br/>%1</t>",_updated];
+		_updated = format ["<t size='0.6' color='#C1C0BB'>"+localize "STR_antistasi_dynamicText_resource_arsenalUpdated"+"<t size='0.5' color='#C1C0BB'><br/><br/>%1",_updated];
 		[petros,"income",_updated] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
 		};
 	}
 else
 	{
-	[petros,"hint","Truck Loaded", "Cargo"] remoteExec ["A3A_fnc_commsMP",driver _destinationX];
+	[petros,"hint",localize "STR_antistasi_logistics_TruckLoaded", localize "STR_antistasi_logistics_cargo"] remoteExec ["A3A_fnc_commsMP",driver _destinationX];
 	};
 
 if (!isNull _originX) then {

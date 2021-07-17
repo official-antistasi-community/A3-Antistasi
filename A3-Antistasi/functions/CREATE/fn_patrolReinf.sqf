@@ -68,7 +68,7 @@ if (_land) then
 		};
 	} forEach units _groupX;
 	[_veh, _sideX] call A3A_fnc_AIVEHinit;
-	[_veh,"Inf Truck."] spawn A3A_fnc_inmuneConvoy;
+	[_veh,localize "STR_antistasi_markers_infTruck"] spawn A3A_fnc_inmuneConvoy;
 //	_groupX spawn A3A_fnc_attackDrillAI;
 	[_mrkOrigin,_posDestination,_groupX] call A3A_fnc_WPCreate;
 	_Vwp0 = _groupX addWaypoint [_posDestination, 50];

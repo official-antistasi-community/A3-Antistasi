@@ -3,7 +3,7 @@ private ["_veh","_text","_mrkFinal","_pos","_side","_typeX","_newPos","_road","_
 _veh = _this select 0;
 _text = _this select 1;
 _convoy = false;
-if ((_text == "Convoy Objective") or (_text == "Mission Vehicle") or (_text == "Supply Box")) then {_convoy = true};
+if ((_text == localize "STR_antistasi_markers_convoy") or (_text == localize "STR_antistasi_markers_missionVehicle") or (_text == localize "STR_antistasi_markers_supplyBox")) then {_convoy = true};
 _side = side (group (driver _veh));
 _typeX = "_unknown";
 _formatX = "";
@@ -59,7 +59,7 @@ else
 
 _typeX = format ["%1%2",_formatX,_typeX];
 
-if ((side group (driver _veh) != teamPlayer) and (side driver _veh != sideUnknown)) then {["TaskSucceeded", ["", format ["%1 Spotted",_text]]] spawn BIS_fnc_showNotification};
+if ((side group (driver _veh) != teamPlayer) and (side driver _veh != sideUnknown)) then {["TaskSucceeded", ["", format [localize "STR_antistasi_notification_spotted",_text]]] spawn BIS_fnc_showNotification};
 
 _mrkFinal = createMarkerLocal [format ["%2%1", random 100,_text], position _veh];
 _mrkFinal setMarkerShapeLocal "ICON";

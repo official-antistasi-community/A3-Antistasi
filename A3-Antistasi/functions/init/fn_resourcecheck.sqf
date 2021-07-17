@@ -61,7 +61,7 @@ while {true} do
 		// revuelta civil!!
 		if ((_supportGov < _supportReb) and (sidesX getVariable [_city,sideUnknown] == Occupants)) then
 		{
-			["TaskSucceeded", ["", format ["%1 joined %2",[_city, false] call A3A_fnc_location,nameTeamPlayer]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
+			["TaskSucceeded", ["", format [localize "STR_antistasi_notification_joined",[_city, false] call A3A_fnc_location,nameTeamPlayer]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 			sidesX setVariable [_city,teamPlayer,true];
 			[Occupants, 10, 60] remoteExec ["A3A_fnc_addAggression",2];
 			_mrkD = format ["Dum%1",_city];
@@ -81,7 +81,7 @@ while {true} do
 		};
 		if ((_supportGov > _supportReb) and (sidesX getVariable [_city,sideUnknown] == teamPlayer)) then
 		{
-			["TaskFailed", ["", format ["%1 joined %2",[_city, false] call A3A_fnc_location,nameOccupants]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
+			["TaskFailed", ["", format [localize "STR_antistasi_notification_joined",[_city, false] call A3A_fnc_location,nameOccupants]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 			sidesX setVariable [_city,Occupants,true];
 			[Occupants, -10, 45] remoteExec ["A3A_fnc_addAggression",2];
 			_mrkD = format ["Dum%1",_city];
@@ -110,9 +110,9 @@ while {true} do
 	bombRuns = bombRuns + 0.25 * ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX);
 	publicVariable "bombRuns";
 
-	private _textX = format ["<t size='0.6' color='#C1C0BB'>Taxes Income.<br/> <t size='0.5' color='#C1C0BB'><br/>Manpower: +%1<br/>Money: +%2 €", _hrAdd, _resAdd];
+	private _textX = format ["<t size='0.6' color='#C1C0BB'>"+localize "STR_antistasi_dynamicText_resource_income"+"<br/><t size='0.5' color='#C1C0BB'><br/>"+localize "STR_antistasi_dynamicText_resource_income_HR_money", _hrAdd, _resAdd];
 	private _textArsenal = [] call A3A_fnc_arsenalManage;
-	if (_textArsenal != "") then {_textX = format ["%1<br/>Arsenal Updated<br/><br/>%2", _textX, _textArsenal]};
+	if (_textArsenal != "") then {_textX = format ["%1<br/>"+localize "STR_antistasi_dynamicText_resource_arsenalUpdated"+"<br/><br/><t size='0.5'>%2", _textX, _textArsenal]};
 	[petros, "taxRep", _textX] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
 
 
@@ -172,7 +172,7 @@ while {true} do
 			_changingX = true;
 			destroyedSites = destroyedSites - [_x];
 			_nameX = [_x] call A3A_fnc_localizar;
-			["TaskSucceeded", ["", format ["%1 Rebuilt",_nameX]]] remoteExec ["BIS_fnc_showNotification",[teamPlayer,civilian]];
+			["TaskSucceeded", ["", format [localize "STR_antistasi_customHint_rebuild_rebuild",_nameX]]] remoteExec ["BIS_fnc_showNotification",[teamPlayer,civilian]];
 			sleep 2;
 			};
 		} forEach (destroyedSites - citiesX) select {sidesX getVariable [_x,sideUnknown] != teamPlayer};

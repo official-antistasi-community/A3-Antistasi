@@ -15,20 +15,20 @@ else
 	{
 	_city = [citiesX,_pos] call BIS_fnc_nearestPosition;
 	_city = [_city,false] call A3A_fnc_location;
-	if (_siteX in airportsX) then {_textX = format ["%1 Airbase",_city]};
-	if (_siteX in resourcesX) then {_textX = format ["Resource near %1",_city]};
-	if (_siteX in factories) then {_textX = format ["Factory near %1",_city]};
-	if (_siteX in outposts) then {_textX = format ["Outpost near %1",_city]};
-	if (_siteX in seaports) then {_textX = format ["Seaport near %1",_city]};
+	if (_siteX in airportsX) then {_textX = format ["%1 " + localize "STR_A3_Campaign_C_EB_Marker_Airbase",_city]};
+	if (_siteX in resourcesX) then {_textX = format [localize "STR_antistasi_resources" + " " + localize "STR_a3_bis_fnc_locationdescription_near",_city]};
+	if (_siteX in factories) then {_textX = format [localize "STR_a3_cfgvehicles_land_factory_main_f0" + " " + localize "STR_a3_bis_fnc_locationdescription_near",_city]};
+	if (_siteX in outposts) then {_textX = format [localize "STR_a3_exp_m01_respawnoutpost" + " " + localize "STR_a3_bis_fnc_locationdescription_near",_city]};
+	if (_siteX in seaports) then {_textX = format [localize "STR_a3_cfgeditorsubcategories_edsubcat_seaports0" + " " + localize "STR_a3_bis_fnc_locationdescription_near",_city]};
 	if (_siteX in controlsX) then
 		{
 		if (isOnRoad getMarkerPos _siteX) then
 			{
-			_textX = format ["Roadblock near %1",_city]
+			_textX = format [localize "STR_a3_cfggroups_empty_military_roadblocks_roadblock2" + " " + localize "STR_a3_bis_fnc_locationdescription_near",_city]
 			}
 		else
 			{
-			_textX = format ["Forest near %1",_city]
+			_textX = format [localize "STR_dn_forest" + " " + localize "STR_a3_bis_fnc_locationdescription_near",_city]
 			};
 		}
 	else{

@@ -464,11 +464,11 @@ _reportReplaced = "";
 {
 	_nameNew = [_x select 0] call _lookupConfigName;
 	_nameOld = [_x select 1] call _lookupConfigName;
-	_reportReplaced = _reportReplaced + _nameOld + " has been kept, because there is no " + _nameNew + "\n";
+	_reportReplaced = _reportReplaced + _nameOld + localize"STR_antistasi_JN_noItem_2" + _nameNew + "\n";
 } forEach _arrayReplaced;
 
 if!(_reportReplaced isEqualTo "")then{
-	_reportTotal = ("These items were not in the Arsenal, so the originals have been kept:\n" + _reportReplaced+"\n");
+	_reportTotal = (localize"STR_antistasi_JN_noItem_1"+"\n" + _reportReplaced+"\n");
 };
 
 _reportMissing = "";
@@ -479,7 +479,7 @@ _reportMissing = "";
 }forEach _arrayMissing;
 
 if!(_reportMissing isEqualTo "")then{
-	_reportTotal = (_reportTotal+"These items were not in the Arsenal:\n" + _reportMissing+"\n");
+	_reportTotal = (_reportTotal+localize"STR_antistasi_JN_noItem_3"+"\n" + _reportMissing+"\n");
 };
 
 if!(_reportTotal isEqualTo "")then{

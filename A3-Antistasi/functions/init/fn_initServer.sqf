@@ -113,7 +113,7 @@ if (loadLastSave) then {
 		publicVariable "membersX";
 	};
 	if (membershipEnabled and (membersX isEqualTo [])) then {
-		[petros,"hint","Membership is enabled but members list is empty. Current players will be added to the member list", "Membership"] remoteExec ["A3A_fnc_commsMP"];
+		[petros,"hint",localize "STR_antistasi_Membership_empty", localize "STR_antistasi_customHint_membership"] remoteExec ["A3A_fnc_commsMP"];
         Info("Previous data loaded");
         Info("Membership enabled, adding current players to list");
 		membersX = [];

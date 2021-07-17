@@ -2,7 +2,7 @@
 //   Rebel Information   //
 ///////////////////////////
 
-["name", "CCM"] call _fnc_saveToTemplate; 						//this line determines the faction name -- Example: ["name", "NATO"] - ENTER ONLY ONE OPTION
+["name", localize "STR_antistasi_faction_CCM"] call _fnc_saveToTemplate; 						//this line determines the faction name -- Example: ["name", "NATO"] - ENTER ONLY ONE OPTION
 
 ["flag", "Flag_CCM_B"] call _fnc_saveToTemplate;
 ["flagTexture", "\UK3CB_Factions\addons\UK3CB_Factions_CCM\Flag\ccm_i_flag_co.paa"] call _fnc_saveToTemplate;

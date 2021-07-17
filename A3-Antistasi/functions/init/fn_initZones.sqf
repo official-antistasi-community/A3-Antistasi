@@ -340,7 +340,7 @@ switch (toLower worldName) do {
 			_mrkFinal setMarkerShape "ICON";
 			_mrkFinal setMarkerType "loc_Transmitter";
 			_mrkFinal setMarkerColor "ColorBlack";
-			_mrkFinal setMarkerText "Radio Tower";
+			_mrkFinal setMarkerText localize "STR_a3_cfgmarkers_loc_transmitter";
 			mrkAntennas pushBack _mrkFinal;
 			_x addEventHandler [
 				"Killed",
@@ -360,8 +360,8 @@ switch (toLower worldName) do {
 					deleteMarker _mrk;
 					publicVariable "antennas";
 					publicVariable "antennasDead";
-					["TaskSucceeded", ["", "Radio Tower Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
-					["TaskFailed", ["", "Radio Tower Destroyed"]] remoteExec ["BIS_fnc_showNotification", Occupants];
+					["TaskSucceeded", ["", localize "STR_antistasi_notification_radioDestroy"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
+					["TaskFailed", ["", localize "STR_antistasi_notification_radioDestroy"]] remoteExec ["BIS_fnc_showNotification", Occupants];
 				}
 			];
 		};
@@ -387,7 +387,7 @@ if (count _posAntennas > 0) then {
 				_mrkFinal setMarkerShape "ICON";
 				_mrkFinal setMarkerType "loc_Transmitter";
 				_mrkFinal setMarkerColor "ColorBlack";
-				_mrkFinal setMarkerText "Radio Tower";
+				_mrkFinal setMarkerText localize "STR_a3_cfgmarkers_loc_transmitter";
 				mrkAntennas pushBack _mrkFinal;
 
 				_antenna addEventHandler [
@@ -408,8 +408,8 @@ if (count _posAntennas > 0) then {
 						deleteMarker _mrk;
 						publicVariable "antennas";
 						publicVariable "antennasDead";
-						["TaskSucceeded", ["", "Radio Tower Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
-						["TaskFailed", ["", "Radio Tower Destroyed"]] remoteExec ["BIS_fnc_showNotification", Occupants];
+						["TaskSucceeded", ["", localize "STR_antistasi_notification_radioDestroy"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
+						["TaskFailed", ["", localize "STR_antistasi_notification_radioDestroy"]] remoteExec ["BIS_fnc_showNotification", Occupants];
 					}
 				];
 			};

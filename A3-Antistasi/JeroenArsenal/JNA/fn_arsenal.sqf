@@ -361,8 +361,8 @@ switch _mode do {
 
 		_ctrlButtonImport = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONIMPORT;
 		_ctrlButtonImport ctrlRemoveAllEventHandlers "buttonclick";
-		_ctrlButtonImport ctrlSetText "Default gear";
-		_ctrlButtonImport ctrlSetTooltip "Add default items like radio and medical supplies";
+		_ctrlButtonImport ctrlSetText localize"STR_antistasi_JN_defaultGear";
+		_ctrlButtonImport ctrlSetTooltip localize"STR_antistasi_JN_defaultGear_tooltip";
 		_ctrlButtonImport ctrladdeventhandler ["buttonclick",{["buttonDefaultGear",[ctrlparent (_this select 0)]] call jn_fnc_arsenal;}];
 
 		_ctrlButtonSave = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONSAVE;
@@ -372,8 +372,8 @@ switch _mode do {
 		_ctrlButtonRandom = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONRANDOM;
 		_ctrlButtonRandom ctrlRemoveAllEventHandlers "buttonclick";
 		_ctrlButtonRandom ctrladdeventhandler ["buttonclick",{["buttonInvToJNA",[ctrlparent (_this select 0)]] call jn_fnc_arsenal;}];
-		_ctrlButtonRandom ctrlSetText "To crate";
-		_ctrlButtonRandom ctrlSetTooltip "Move items from crate inventory to arsenal";
+		_ctrlButtonRandom ctrlSetText localize"STR_antistasi_JN_toCrate";
+		_ctrlButtonRandom ctrlSetTooltip localize"STR_antistasi_JN_toCrate_tooltip";
 
 		_ctrlArrowLeft = _display displayctrl IDC_RSCDISPLAYARSENAL_ARROWLEFT;
 		_ctrlArrowLeft ctrlRemoveAllEventHandlers "buttonclick";

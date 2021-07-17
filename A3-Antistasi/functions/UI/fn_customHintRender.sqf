@@ -37,7 +37,7 @@ if (A3A_customHint_MSGs isEqualTo []) then {
     private _alphaHex = [(((_autoDismiss + A3A_customHint_UpdateTime - serverTime) min (_autoDismiss-5)) / (_autoDismiss-5)) ] call A3A_fnc_shader_ratioToHex;
     private _dismissKey = actionKeysNames ["User12",1];
     private _topMSGIndex = count A3A_customHint_MSGs - 1;
-    private _keyBind = (["<br/><t size='0.8' color='#",_alphaHex,"e5b348' shadow='1' shadowColor='#",_alphaHex,"000000' valign='top' >Press <t color='#",_alphaHex,"f0d498' >",[_dismissKey,"Use Action 12"] select (_dismissKey isEqualTo ""),"</t> to dismiss notification. +",str _topMSGIndex,"</t>"] joinString ""); // Needs to be added to string table.
+    private _keyBind = (["<br/><t size='0.8' color='#",_alphaHex,"e5b348' shadow='1' shadowColor='#",_alphaHex,"000000' valign='top' >"+ localize "STR_antistasi_customHint_render1"+" <t color='#",_alphaHex,"f0d498' >",[_dismissKey,"Use Action 12"] select (_dismissKey isEqualTo ""),"</t>"," "+localize "STR_antistasi_customHint_render2"+" ",str _topMSGIndex,"</t>"] joinString ""); // Needs to be added to string table.
     private _previousNotifications = ["<t color='#",_alphaHex,"e5b348' font='RobotoCondensed' align='center' valign='middle' underline='0' shadow='1' shadowColor='#",_alphaHex,"000000' shadowOffset='0.0625'>"];
     if (_topMSGIndex < 4) then {
         private _size = (-20/(8-_topMSGIndex) +4.6);

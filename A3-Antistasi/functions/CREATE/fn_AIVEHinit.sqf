@@ -88,7 +88,7 @@ else
 			if ((!isPlayer _unit) and (_unit getVariable ["spawner",false]) and (side group _unit == teamPlayer)) then
 			{
 				moveOut _unit;
-				["General", "Only Humans can pilot an air vehicle"] call A3A_fnc_customHint;
+				[localize "STR_antistasi_customHint_general", localize "STR_antistasi_customHint_general_only_player"] call A3A_fnc_customHint;
 			};
 		}];
 

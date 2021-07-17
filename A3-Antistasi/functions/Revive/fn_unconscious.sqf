@@ -96,22 +96,22 @@ while {(time < _bleedOut) and (_unit getVariable ["incapacitated",false]) and (a
 			_helpX = [_unit] call A3A_fnc_askHelp;
 			if (isNull _helpX) then
 				{
-				_textX = format ["<t size='0.6'>There is no AI near to help you.<t size='0.5'><br/>Hit R to Respawn"];
+				_textX = format ["<t size='0.6'>"+ localize "STR_antistasi_dynamicText_revive_noAI" +"<t size='0.5'><br/>" + localize "STR_antistasi_dynamicText_revive_hit_R"];
 				}
 			else
 				{
-				if (_helpX != _unit) then {_textX = format ["<t size='0.6'>%1 is on the way to help you.<t size='0.5'><br/>Hit R to Respawn",name _helpX]} else {_textX = "<t size='0.6'>Wait until you get assistance or<t size='0.5'><br/>Hit R to Respawn"};
+				if (_helpX != _unit) then {_textX = format ["<t size='0.6'>"+ localize "STR_antistasi_dynamicText_revive_AI" + "<t size='0.5'><br/>" + localize "STR_antistasi_dynamicText_revive_hit_R",name _helpX]} else {_textX = "<t size='0.6'>" + localize "STR_antistasi_dynamicText_revive_wait" + "<t size='0.5'><br/>" + localize "STR_antistasi_dynamicText_revive_hit_R"};
 				};
 			}
 		else
 			{
 			if (!isNil "_helpX") then
 				{
-				if (!isNull _helpX) then {_textX = format ["<t size='0.6'>%1 is on the way to help you.<t size='0.5'><br/>Hit R to Respawn",name _helpX]} else {_textX = "<t size='0.6'>Wait until you get assistance or<t size='0.5'><br/>Hit R to Respawn"};
+				if (!isNull _helpX) then {_textX = format ["<t size='0.6'>"+ localize "STR_antistasi_dynamicText_revive_AI" + "<t size='0.5'><br/>" + localize "STR_antistasi_dynamicText_revive_hit_R",name _helpX]} else {_textX = "<t size='0.6'>" + localize "STR_antistasi_dynamicText_revive_wait" + "<t size='0.5'><br/>" + localize "STR_antistasi_dynamicText_revive_hit_R"};
 				}
 			else
 				{
-				_textX = "<t size='0.6'>Wait until you get assistance or<t size='0.5'><br/>Hit R to Respawn";
+				_textX = "<t size='0.6'>"+ localize "STR_antistasi_dynamicText_revive_wait" + "<t size='0.5'><br/>" + localize "STR_antistasi_dynamicText_revive_hit_R";
 				};
 			};
 		[_textX,0,0,3,0,0,4] spawn bis_fnc_dynamicText;

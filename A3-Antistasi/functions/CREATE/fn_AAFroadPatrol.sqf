@@ -117,7 +117,7 @@ if (_typePatrol != "AIR") then
 _vehicle=[_posBase, 0,_typeCar, _sideX] call A3A_fnc_spawnVehicle;
 _veh = _vehicle select 0;
 [_veh, _sideX] call A3A_fnc_AIVEHinit;
-[_veh,"Patrol"] spawn A3A_fnc_inmuneConvoy;
+[_veh,localize "STR_antistasi_markers_patrol"] spawn A3A_fnc_inmuneConvoy;
 _vehCrew = _vehicle select 1;
 // Forced non-spawner for performance reasons. They can travel a lot through rebel territory.
 {[_x,"",false] call A3A_fnc_NATOinit} forEach _vehCrew;

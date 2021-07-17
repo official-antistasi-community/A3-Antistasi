@@ -17,8 +17,8 @@ _posOrigin = getMarkerPos _airportX;
 _sideX = if (sidesX getVariable [_airportX,sideUnknown] == Occupants) then {Occupants} else {Invaders};
 
 private _taskId = "DEF_HQ" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[format ["Enemy knows our HQ coordinates. They have sent a SpecOp Squad in order to kill %1. Intercept them and kill them. Or you may move our HQ 1Km away so they will loose track",name petros],format ["Defend %1",name petros],respawnTeamPlayer],_positionX,true,10,true,"Defend",true] call BIS_fnc_taskCreate;
-[[_sideX],_taskId+"B",[format ["We know %2 HQ coordinates. We have sent a SpecOp Squad in order to kill his leader %1. Help the SpecOp team",name petros, nameTeamPlayer],format ["Kill %1",name petros],respawnTeamPlayer],_positionX,true,10,true,"Attack",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[format [localize "STR_antistasi_mission_defend_text",name petros],format [localize "STR_antistasi_mission_defend_name",name petros],respawnTeamPlayer],_positionX,true,10,true,"Defend",true] call BIS_fnc_taskCreate;
+[[_sideX],_taskId+"B",[format [localize "STR_antistasi_mission_kill_text",name petros, nameTeamPlayer],format [localize "STR_antistasi_mission_kill_name",name petros],respawnTeamPlayer],_positionX,true,10,true,"Attack",true] call BIS_fnc_taskCreate;
 [_taskId, "DEF_HQ", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _typesVeh = if (_sideX == Occupants) then {vehNATOAttackHelis} else {vehCSATAttackHelis};

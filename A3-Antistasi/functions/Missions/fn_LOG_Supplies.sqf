@@ -21,10 +21,10 @@ _displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time po
 
 _nameDest = [_markerX] call A3A_fnc_localizar;
 _holdTime = if(_difficultX) then {4} else {2};
-_taskDescription = format ["%1 population is in need of supplies. We may improve our relationship with that city if we are the ones who provide them. I have placed a crate with supplies near our HQ. Deliver the crate to %1 city center, hold it there for %3 minutes and it's done. Do this before %2.",_nameDest,_displayTime, _holdTime];
+_taskDescription = format [localize "STR_antistasi_mission_supplies_text",_nameDest,_displayTime, _holdTime];
 
 private _taskId = "SUPP" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[_taskDescription,"City Supplies",_markerX],_positionX,false,0,true,"Heal",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[_taskDescription,"STR_antistasi_mission_supplies",_markerX],_positionX,false,0,true,"Heal",true] call BIS_fnc_taskCreate;
 [_taskId, "SUPP", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 //Creating the box
@@ -33,10 +33,10 @@ _truckX = "Land_FoodSacks_01_cargo_brown_F" createVehicle _pos;
 _truckX enableRopeAttach true;
 _truckX allowDamage false;
 [_truckX] call A3A_fnc_logistics_addLoadAction;
-_truckX addAction ["Delivery infos",
+_truckX addAction [localize "STR_antistasi_logistics_info",
 	{
-		_text = format ["Deliver this box to %1, unload it to start distributing to people",(_this select 0) getVariable "destinationX"]; //This need a rework
-		["Logistics Mission", _text] remoteExecCall ["A3A_fnc_customHint",_this select 2];	//This need a rework
+		_text = format [localize "STR_antistasi_mission_logistics_text",(_this select 0) getVariable "destinationX"]; //This need a rework
+		[localize "STR_antistasi_mission_logistics_name", _text] remoteExecCall ["A3A_fnc_customHint",_this select 2];	//This need a rework
 	},
 	nil,
 	0,
@@ -49,7 +49,7 @@ _truckX addAction ["Delivery infos",
 //{_x reveal _truckX} forEach (allPlayers - (entities "HeadlessClient_F"));
 _truckX setVariable ["destinationX",_nameDest,true];
 
-[_truckX,"Supply Box"] spawn A3A_fnc_inmuneConvoy;
+[_truckX,localize"STR_antistasi_markers_supplyBox"] spawn A3A_fnc_inmuneConvoy;
 
 waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or ((_truckX distance _positionX < 40) and (isNull attachedTo _truckX) and (isNull ropeAttachedTo _truckX)) or (isNull _truckX)};
 _bonus = if (_difficultX) then {2} else {1};
@@ -62,7 +62,7 @@ if ((dateToNumber date > _dateLimitNum) or (isNull _truckX)) then
 else
 	{
 	_countX = 120*_bonus;//120
-	["TaskFailed", ["", format ["%2 deploying supplies in %1",_nameDest,nameTeamPlayer]]] remoteExec ["BIS_fnc_showNotification",Occupants];
+	["TaskFailed", ["", format [localize "STR_antistasi_notification_deploy_supplies",_nameDest,nameTeamPlayer]]] remoteExec ["BIS_fnc_showNotification",Occupants];
 	{_friendX = _x;
 	if (captive _friendX) then
 		{
@@ -81,8 +81,8 @@ else
 		{
 		while {(_countX > 0) and (_truckX distance _positionX < 40) and ({[_x] call A3A_fnc_canFight} count ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits) == count ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits)) and ({(side _x == Occupants) and (_x distance _truckX < 50)} count allUnits == 0) and (dateToNumber date < _dateLimitNum) and (isNull attachedTo _truckX)} do
 			{
-			_formatX = format ["Keep the area clear of hostiles for %1 more seconds", _countX];
-			{if (isPlayer _x) then {[petros,"hint",_formatX,"Logistics Mission"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits);
+			_formatX = format [localize "STR_antistasi_mission_logistics_areaClear", _countX];
+			{if (isPlayer _x) then {[petros,"hint",_formatX,localize "STR_antistasi_mission_logistics_name"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits);
 			sleep 1;
 			_countX = _countX - 1;
 			};
@@ -96,7 +96,7 @@ else
 		};
 		if ((dateToNumber date < _dateLimitNum) and !(isNull _truckX)) then
 			{
-			[petros,"hint","Supplies Delivered", "Logistics Mission"] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+			[petros,"hint",localize "STR_antistasi_mission_logistics_delivered",localize "STR_antistasi_mission_logistics_name"] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
 			[_taskId, "SUPP", "SUCCEEDED"] call A3A_fnc_taskSetState;
 			{if (_x distance _positionX < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
 			[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;

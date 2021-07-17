@@ -185,11 +185,11 @@ else
 {sidesX setVariable [_x, Occupants, true]} forEach _controlsNATO;
 {sidesX setVariable [_x, Invaders, true]} forEach _controlsCSAT;
 
-[_mrkCSAT, airportsX, flagCSATmrk, "%1 Airbase", true] call _fnc_initMarker;
-[_mrkCSAT, resourcesX, "loc_rock", "Resources"] call _fnc_initMarker;
-[_mrkCSAT, factories, "u_installation", "Factory"] call _fnc_initMarker;
-[_mrkCSAT, outposts, "loc_bunker", "%1 Outpost", true] call _fnc_initMarker;
-[_mrkCSAT, seaports, "b_naval", "Sea Port"] call _fnc_initMarker;
+[_mrkCSAT, airportsX, flagCSATmrk, "%1 "+ localize "STR_A3_Campaign_C_EB_Marker_Airbase", true] call _fnc_initMarker;
+[_mrkCSAT, resourcesX, "loc_rock", localize "STR_antistasi_resources"] call _fnc_initMarker;
+[_mrkCSAT, factories, "u_installation", localize "STR_a3_cfgvehicles_land_factory_main_f0"] call _fnc_initMarker;
+[_mrkCSAT, outposts, "loc_bunker", "%1 "+ localize "STR_a3_exp_m01_respawnoutpost", true] call _fnc_initMarker;
+[_mrkCSAT, seaports, "b_naval", localize "STR_a3_cfgeditorsubcategories_edsubcat_seaports0"] call _fnc_initMarker;
 
 if (!(isNil "loadLastSave") && {loadLastSave}) exitWith {};
 

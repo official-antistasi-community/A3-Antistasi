@@ -61,7 +61,7 @@ _mrk setMarkerText _textX;
 [_mrk,0] remoteExec ["setMarkerAlpha",[Occupants,Invaders]];
 
 private _taskId = "Mines" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[format ["An Engineer Team has been deployed at your command with High Command Option. Once they reach the position, they will start to deploy %1 mines in the area. Cover them in the meantime.",_quantity],"Minefield Deploy",_mrk],_positionTel,false,0,true,"map",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[format [localize "STR_antistasi_mission_buildMine_text",_quantity],localize "STR_antistasi_mission_buildMine",_mrk],_positionTel,false,0,true,"map",true] call BIS_fnc_taskCreate;
 [_taskId, "Mines", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _groupX = createGroup teamPlayer;
@@ -102,7 +102,7 @@ if ((_truckX distance _positionTel < 50) and ({alive _x} count units _groupX > 0
 		waitUntil {!(isPlayer leader _groupX)};
 		};
 	theBoss hcRemoveGroup _groupX;
-	[petros,"hint","Engineer Team deploying mines.", "Minefields"] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+	[petros,"hint",localize "STR_antistasi_mission_buildMine_deploying",localize "STR_antistasi_customHint_minefields"] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
 	_nul = [leader _groupX, _mrk, "SAFE","SPAWNED", "SHOWMARKER"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
 	sleep 30*_quantity;
 	if ((alive _truckX) and ({alive _x} count units _groupX > 0)) then

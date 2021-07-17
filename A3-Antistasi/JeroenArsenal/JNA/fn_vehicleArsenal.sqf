@@ -266,8 +266,8 @@ switch _mode do {
 		_ctrlButtonRandom = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONRANDOM;
 		_ctrlButtonRandom ctrlRemoveAllEventHandlers "buttonclick";
 		_ctrlButtonRandom ctrladdeventhandler ["buttonclick",{["Unload",[ctrlparent (_this select 0)]] call jn_fnc_vehicleArsenal;}];
-		_ctrlButtonRandom ctrlSetText "Unload";
-		_ctrlButtonRandom ctrlSetTooltip "Move items from car to arsenal";
+		_ctrlButtonRandom ctrlSetText localize "STR_VIV_UNLOAD";
+		_ctrlButtonRandom ctrlSetTooltip localize"STR_antistasi_JN_unload_tooltip";
 
 		_ctrlButtonExport = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONEXPORT;
 		_ctrlButtonExport ctrlRemoveAllEventHandlers "buttonclick";

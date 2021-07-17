@@ -38,7 +38,7 @@ _strikePlane addEventHandler
     "Killed",
     {
         params ["_strikePlane"];
-        ["TaskSucceeded", ["", "Airstrike Vessel Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
+        ["TaskSucceeded", ["", localize "STR_antistasi_notification_airstrike_destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
         [_strikePlane] spawn A3A_fnc_postMortem;
         [(_strikePlane getVariable "side"), 20, 45] remoteExec ["A3A_fnc_addAggression", 2];
     }
@@ -49,7 +49,7 @@ _pilot addEventHandler
     "Killed",
     {
         params ["_unit"];
-        ["TaskSucceeded", ["", "Airstrike crew killed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
+        ["TaskSucceeded", ["", localize "STR_antistasi_notification_airstrike_crewKilled"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
         [_unit] spawn A3A_fnc_postMortem;
     }
 ];

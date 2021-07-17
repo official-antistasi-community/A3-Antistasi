@@ -35,7 +35,7 @@ while {(captive _LeaderX) and (captive _unit)} do
 	};
 
 //_unit removeAllEventHandlers "FIRED";
-if (!captive _unit) then {_unit groupChat "Shit, they have spotted me!"} else {[_unit,false] remoteExec ["setCaptive",0,_unit]; _unit setCaptive false};
+if (!captive _unit) then {_unit groupChat localize "STR_antistasi_undercover_spotted_me"} else {[_unit,false] remoteExec ["setCaptive",0,_unit]; _unit setCaptive false};
 if (captive player) then {sleep 5};
 _unit setBehaviour _oldBehaviour;
 _unit enableAI "TARGET";

@@ -132,7 +132,7 @@ deleteVehicle _strikeObject;
 
 private _citiesInRange = (citiesX - destroyedSites) select {((getMarkerPos _x) distance2D _impactPosition) < 200};
 {
-    ["TaskFailed", ["", format ["%1 destroyed", [_x] call A3A_fnc_localizar]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
+    ["TaskFailed", ["", format [localize "STR_antistasi_notification_Destroyed", [_x] call A3A_fnc_localizar]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
     destroyedSites = destroyedSites + [_x];
 	publicVariable "destroyedSites";
     sleep 10;

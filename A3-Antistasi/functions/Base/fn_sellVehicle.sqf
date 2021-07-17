@@ -35,18 +35,18 @@ params [
 FIX_LINE_NUMBERS()
 
 if (isNull _player) exitWith { Error("_player is null.") };
-if (isNull _veh) exitWith {["Sell Vehicle", "You are not looking at a vehicle."] remoteExecCall ["A3A_fnc_customHint",_player];};
+if (isNull _veh) exitWith {[localize "STR_antistasi_journal_entry_header_commander_11", localize "STR_antistasi_customHint_sell_veh_no_look"] remoteExecCall ["A3A_fnc_customHint",_player];};
 
-if (_veh distance getMarkerPos respawnTeamPlayer > 50) exitWith {["Sell Vehicle", "Vehicle must be closer than 50 meters to the headquarters marker."] remoteExecCall ["A3A_fnc_customHint",_player];};
+if (_veh distance getMarkerPos respawnTeamPlayer > 50) exitWith {[localize "STR_antistasi_journal_entry_header_commander_11", format [localize "STR_antistasi_customHint_sell_veh_no_flag",50]] remoteExecCall ["A3A_fnc_customHint",_player];};
 
-if ({isPlayer _x} count crew _veh > 0) exitWith {["Sell Vehicle", "In order to sell the vehicle, it must be empty."] remoteExecCall ["A3A_fnc_customHint",_player];};
+if ({isPlayer _x} count crew _veh > 0) exitWith {[localize "STR_antistasi_journal_entry_header_commander_11", localize "STR_antistasi_customHint_sell_veh_no_empty"] remoteExecCall ["A3A_fnc_customHint",_player];};
 
 _owner = _veh getVariable ["ownerX",""];
 if !(_owner isEqualTo "" || {getPlayerUID _player isEqualTo _owner}) exitWith {  // Vehicle cannot be sold if owned by another player.
-    ["Sell Vehicle", "You are not the owner of this vehicle. Therefore, you cannot sell it."] remoteExecCall ["A3A_fnc_customHint",_player];
+    [localize "STR_antistasi_journal_entry_header_commander_11", localize "STR_antistasi_customHint_sell_veh_owner"] remoteExecCall ["A3A_fnc_customHint",_player];
 };
 
-if (_veh getVariable ["A3A_sellVehicle_inProgress",false]) exitWith {["Sell Vehicle", "Vehicle sale already in progress."] remoteExecCall ["A3A_fnc_customHint",_player];};
+if (_veh getVariable ["A3A_sellVehicle_inProgress",false]) exitWith {[localize "STR_antistasi_journal_entry_header_commander_11", localize "STR_antistasi_customHint_sell_veh_already"] remoteExecCall ["A3A_fnc_customHint",_player];};
 _veh setVariable ["A3A_sellVehicle_inProgress",true,false];  // Only processed on the server. It is absolutely pointless trying to network this due to race conditions.
 
 private _typeX = typeOf _veh;
@@ -64,7 +64,7 @@ private _costs = call {
 
 if (_costs == 0) exitWith {
     _veh setVariable ["A3A_sellVehicle_inProgress",false,false];
-    ["Sell Vehicle", "The vehicle you are looking is not suitable in our marketplace."] remoteExecCall ["A3A_fnc_customHint",_player];
+    [localize "STR_antistasi_journal_entry_header_commander_11", localize "STR_antistasi_customHint_sell_veh_suitable"] remoteExecCall ["A3A_fnc_customHint",_player];
 };
 
 _costs = round (_costs * (1-damage _veh));
@@ -78,5 +78,5 @@ if (_veh in reportedVehs) then {reportedVehs = reportedVehs - [_veh]; publicVari
 
 if (_veh isKindOf "StaticWeapon") then {deleteVehicle _veh};
 
-["Sell Vehicle", "Vehicle Sold."] remoteExecCall ["A3A_fnc_customHint",_player];
+[localize "STR_antistasi_journal_entry_header_commander_11", localize "STR_antistasi_customHint_sell_veh_sold"] remoteExecCall ["A3A_fnc_customHint",_player];
 nil;

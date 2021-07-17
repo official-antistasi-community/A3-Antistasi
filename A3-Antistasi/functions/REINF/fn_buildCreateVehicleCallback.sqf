@@ -12,7 +12,7 @@ if (!_isPlayer) then
 else
 {
 	build_time = build_time / 2;
-	["Build Info", "Walk to the selected position to start building"] call A3A_fnc_customHint;
+	[localize "STR_antistasi_customHint_build", localize "STR_antistasi_customHint_build_start"] call A3A_fnc_customHint;
 };
 
 build_targetLocation = _positionX;
@@ -31,7 +31,7 @@ waitUntil {sleep 1;(time > _timeOut) or (build_engineerSelected distance _positi
 if (time > _timeOut) exitWith 
 {
 	build_cancelBuild = true;
-	["Build Info", "You didn't move to the position, construction has timed out."] call A3A_fnc_customHint;
+	[localize "STR_antistasi_customHint_build", localize "STR_antistasi_customHint_build_timeout"] call A3A_fnc_customHint;
 };
 
 build_atBuildLocation = true;
@@ -79,7 +79,7 @@ waitUntil  {sleep 5; !([build_engineerSelected] call A3A_fnc_canFight) or (build
 build_engineerSelected setVariable ["constructing",false];
 if (!_isPlayer) then {{build_engineerSelected enableAI _x} forEach ["ANIM","AUTOTARGET","FSM","MOVE","TARGET"]};
 
-if (time <= _timeOut) exitWith {["Build Info", "Construction cancelled"] call A3A_fnc_customHint;};
+if (time <= _timeOut) exitWith {[localize "STR_antistasi_customHint_build", localize "STR_antistasi_customHint_construct_cancel"] call A3A_fnc_customHint;};
 if (!_isPlayer) then {build_engineerSelected doFollow (leader build_engineerSelected)};
 
 private _veh = createVehicle [_structureType, _positionX, [], 0, "CAN_COLLIDE"];

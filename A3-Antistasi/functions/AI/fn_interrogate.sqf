@@ -18,7 +18,7 @@ if (!alive _unit) exitWith {};
 if (_unit getVariable ["interrogated", false]) exitWith {};
 _unit setVariable ["interrogated", true, true];
 
-_player globalChat "You imperialist! Tell me what you know!";
+_player globalChat localize "STR_antistasi_chat_inter_tellMe";
 private _chance = 0;
 private _side = side (group _unit);
 if (_side == Occupants) then
@@ -40,21 +40,21 @@ if ((round (random 100)) < _chance) then
     {
         if(_unit getVariable ["hasIntel", false]) then
         {
-            _unit globalChat "Okay, I tell you what I know";
+            _unit globalChat localize "STR_antistasi_chat_inter_cooperative";
             _unit setVariable ["hasIntel", false, true];
             ["Small", _side] spawn A3A_fnc_selectIntel;
         }
         else
         {
-            _unit globalChat "I would, but I don't know anything";
+            _unit globalChat localize "STR_antistasi_chat_inter_iDontKnow";
         };
     }
     else
     {
-        _unit globalChat "I would, but only our squadleader may knows something";
+        _unit globalChat localize "STR_antistasi_chat_inter_noLeader";
     };
 }
 else
 {
-	_unit globalChat "Screw you, I am not telling anything!";
+	_unit globalChat localize "STR_antistasi_chat_inter_no";
 };

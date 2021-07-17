@@ -21,12 +21,12 @@
 //check if action already on player
 if ((actionIDs Player) findIf {
     _params = player actionParams _x;
-    (_params#0) isEqualTo "Load loot to crate"
+    (_params#0) isEqualTo localize "STR_antistasi_addAction_lootCrate"
 } != -1) exitWith {};
 
 //add load actions
 player addAction [
-    "Load loot to crate",
+    localize "STR_antistasi_addAction_lootCrate",
     {
         [cursorObject, clientOwner] remoteExecCall ["A3A_fnc_canLoot", 2];
     },
@@ -43,7 +43,7 @@ player addAction [
 ];
 
 player addAction [
-    "Load loot from crate to vehicle",
+    localize "STR_antistasi_addAction_lootVeh",
     {
         [cursorObject, clientOwner] remoteExecCall ["A3A_fnc_canTransfer", 2];
     },
@@ -61,7 +61,7 @@ player addAction [
 
 //add carry actions
 player addAction [
-    "Carry Crate",
+    localize "STR_antistasi_addAction_carryCrate",
     {
         [cursorObject, true] call A3A_fnc_carryCrate;
     },
@@ -79,7 +79,7 @@ player addAction [
 ];
 
 player addAction [
-    "Drop Crate",
+    localize "STR_antistasi_addAction_dropCrate",
     {
         [nil, false] call A3A_fnc_carryCrate;
     },

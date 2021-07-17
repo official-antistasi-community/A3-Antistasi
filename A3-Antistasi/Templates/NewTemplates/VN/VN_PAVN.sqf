@@ -2,7 +2,7 @@
 //   Side Information   //
 //////////////////////////
 
-["name", "PAVN"] call _fnc_saveToTemplate;
+["name", localize "STR_antistasi_faction_PAVN"] call _fnc_saveToTemplate;
 ["spawnMarkerName", "PAVN support corridor"] call _fnc_saveToTemplate;
 
 ["flag", "vn_flag_pavn"] call _fnc_saveToTemplate;

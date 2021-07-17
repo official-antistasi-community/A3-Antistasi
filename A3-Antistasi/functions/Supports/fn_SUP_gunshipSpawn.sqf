@@ -36,7 +36,7 @@ _strikePlane addEventHandler
     "Killed",
     {
         params ["_strikePlane"];
-        ["TaskSucceeded", ["", "Gunship Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
+        ["TaskSucceeded", ["", localize "STR_antistasi_notification_gunship_destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
         private _timerArray = _strikePlane getVariable "TimerArray";
         private _timerIndex = _strikePlane getVariable "TimerIndex";
         _timerArray set [_timerIndex, (_timerArray select _timerIndex) + 3600];

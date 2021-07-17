@@ -1,8 +1,8 @@
 private ["_typeX","_costs","_positionTel","_quantity","_quantityMax"];
 
-if ("Mines" in A3A_activeTasks) exitWith {["Minefields", "We can only deploy one minefield at a time."] call A3A_fnc_customHint;};
+if ("Mines" in A3A_activeTasks) exitWith {[localize "STR_antistasi_journal_entry_header_commander_10", localize "STR_antistasi_customHint_minefields_one"] call A3A_fnc_customHint;};
 
-if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {["Minefields", "You need a radio in your inventory to be able to give orders to other squads"] call A3A_fnc_customHint;} else {["Minefields", "You need a Radio Man in your group to be able to give orders to other squads"] call A3A_fnc_customHint;}};
+if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {[localize "STR_antistasi_journal_entry_header_commander_10", localize "STR_antistasi_customHint_minefields_noradio"] call A3A_fnc_customHint;} else {["Minefields", "You need a Radio Man in your group to be able to give orders to other squads"] call A3A_fnc_customHint;}};
 
 _typeX = _this select 0;
 
@@ -13,11 +13,11 @@ if (_typeX == "delete") then
 	_costs = _costs - (server getVariable (SDKExp select 0));
 	_hr = 1;
 	};
-if ((server getVariable "resourcesFIA" < _costs) or (server getVariable "hr" < _hr)) exitWith {["Minefields", format ["Not enough resources to recruit a mine deploying team (%1 € and %2 HR needed)",_costs,_hr]] call A3A_fnc_customHint;};
+if ((server getVariable "resourcesFIA" < _costs) or (server getVariable "hr" < _hr)) exitWith {[localize "STR_antistasi_journal_entry_header_commander_10", format [localize "STR_antistasi_customHint_minefields_no_resources",_costs,_hr]] call A3A_fnc_customHint;};
 
 if (_typeX == "delete") exitWith
 	{
-	["Minefields", "An Explosive Specialist is available on your High Command bar.<br/><br/>Send him anywhere on the map to deactivate mines. He will load his truck with mines he found.<br/><br/>Upon returning back to HQ he will unload mines stored in his vehicle."] call A3A_fnc_customHint;
+	[localize "STR_antistasi_journal_entry_header_commander_10", localize "STR_antistasi_customHint_minefields_HC"] call A3A_fnc_customHint;
 	[[],"A3A_fnc_mineSweep"] remoteExec ["A3A_fnc_scheduler",2];
 	};
 
@@ -37,11 +37,11 @@ if (_typeX == "ATMine") then
 if (_x select 0 == _typeM) exitWith {_quantity = _x select 1}
 } forEach _pool;
 
-if (_quantity < 5) exitWith {["Minefields", "You need at least 5 mines of this type to build a Minefield"] call A3A_fnc_customHint;};
+if (_quantity < 5) exitWith {[localize "STR_antistasi_journal_entry_header_commander_10",format [localize "STR_antistasi_customHint_minefields_no_mine",5]] call A3A_fnc_customHint;};
 
 if (!visibleMap) then {openMap true};
 positionTel = [];
-["Minefields", "Click on the position you wish to build the minefield."] call A3A_fnc_customHint;
+[localize "STR_antistasi_journal_entry_header_commander_10", localize "STR_antistasi_customHint_minefields_map"] call A3A_fnc_customHint;
 
 onMapSingleClick "positionTel = _pos;";
 

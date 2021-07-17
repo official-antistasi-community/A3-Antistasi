@@ -2,7 +2,7 @@ private ["_hr","_resourcesFIA","_typeX","_costs","_markerX","_garrison","_positi
 
 _hr = server getVariable "hr";
 
-if (_hr < 1) exitWith {["Garrisons", "You lack of HR to make a new recruitment"] call A3A_fnc_customHint;};
+if (_hr < 1) exitWith {[localize "STR_antistasi_garrisons", localize "STR_antistasi_garrisons_noHR"] call A3A_fnc_customHint;};
 
 _resourcesFIA = server getVariable "resourcesFIA";
 
@@ -21,17 +21,17 @@ else
 	_costs = server getVariable _typeX;
 	};
 
-if (_costs > _resourcesFIA) exitWith {["Garrisons", format ["You do not have enough money for this kind of unit (%1 € needed)",_costs]] call A3A_fnc_customHint;};
+if (_costs > _resourcesFIA) exitWith {[localize "STR_antistasi_garrisons", format [localize "STR_antistasi_garrisons_noMoney",_costs]] call A3A_fnc_customHint;};
 
 _markerX = positionXGarr;
 
-if ((_typeX == staticCrewTeamPlayer) and (_markerX in outpostsFIA)) exitWith {["Garrisons", "You cannot add mortars to a Roadblock garrison"] call A3A_fnc_customHint;};
+if ((_typeX == staticCrewTeamPlayer) and (_markerX in outpostsFIA)) exitWith {[localize "STR_antistasi_garrisons", localize "STR_antistasi_garrisons_mortar"] call A3A_fnc_customHint;};
 
 _positionX = getMarkerPos _markerX;
 
-if (surfaceIsWater _positionX) exitWith {["Garrisons", "This Garrison is still updating, please try again in a few seconds"] call A3A_fnc_customHint;};
+if (surfaceIsWater _positionX) exitWith {[localize "STR_antistasi_garrisons", localize "STR_antistasi_garrisons_wait"] call A3A_fnc_customHint;};
 
-if ([_positionX,500] call A3A_fnc_enemyNearCheck) exitWith {["Garrisons", "You cannot Recruit Garrison Units with enemies near the zone"] call A3A_fnc_customHint;};
+if ([_positionX,500] call A3A_fnc_enemyNearCheck) exitWith {[localize "STR_antistasi_garrisons", localize "STR_antistasi_garrisons_enemy"] call A3A_fnc_customHint;};
 _nul = [-1,-_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
 /*
 _garrison = [];
@@ -45,7 +45,7 @@ waitUntil {(_countX < count (garrison getVariable [_markerX, []])) or (sidesX ge
 
 if (sidesX getVariable [_markerX,sideUnknown] == teamPlayer) then
 	{
-	["Garrisons", format ["Soldier recruited.%1",[_markerX] call A3A_fnc_garrisonInfo]] call A3A_fnc_customHint;
+	[localize "STR_antistasi_garrisons", format [localize "STR_antistasi_garrisons_recruit",[_markerX] call A3A_fnc_garrisonInfo]] call A3A_fnc_customHint;
 
 	if (spawner getVariable _markerX != 2) then
 		{

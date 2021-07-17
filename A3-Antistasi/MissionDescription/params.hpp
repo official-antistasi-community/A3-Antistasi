@@ -6,21 +6,21 @@ class Params
 {
     class howTo0
     {
-        title = "HOW TO USE ANTISTASI PARAMETERS";
+        title = $STR_antistasi_param_howTo0;
         values[] = {""};
         texts[] = {""};
         default = "";
     };
     class howTo1
     {
-        title = "Default values will attempt to load from the save. If not found, the value in brackets will be used instead";
+        title = $STR_antistasi_param_howTo1;
         values[] = {""};
         texts[] = {""};
         default = "";
     };
     class howTo2
     {
-        title = "Setting any other value will override that parameter with the chosen value";
+        title = $STR_antistasi_param_howTo2;
         values[] = {""};
         texts[] = {""};
         default = "";
@@ -34,156 +34,156 @@ class Params
     };
     class loadSave
     {
-        title = "Load last Persistent Save";
+        title = $STR_antistasi_param_loadSave;
         values[] = {1,0};
-        texts[] = {"Yes","No"};
+        texts[] = {$STR_lib_info_yes,$STR_lib_info_no};
         default = 1;
     };
     class gameMode
     {
-        title = "Game Mode - Do NOT change this mid mission";
+        title = $STR_antistasi_param_gameMode;
         values[] = {9999,1,2,3};
-        texts[] = {"Default (Reb vs Gov vs Inv)","Reb vs Gov vs Inv","Reb vs Gov & Inv","Reb vs Gov"};
+        texts[] = {$STR_antistasi_param_gameMode_default, $STR_antistasi_param_gameMode_Reb_vs_Gov_vs_Inv, $STR_antistasi_param_gameMode_Reb_vs_Gov_and_Inv, $STR_antistasi_param_gameMode_Reb_vs_Gov};
         default = 9999;
     };
     class autoSave
     {
-        title = "Enable Autosave (every X minutes)";
+        title = $STR_antistasi_param_autoSave;
         values[] = {9999,1,0};
-        texts[] = {"Default (Yes)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_yes,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class autoSaveInterval
     {
-        title = "Time between autosaves (in minutes)";
+        title = $STR_antistasi_param_autoSaveInterval;
         values[] = {9999,600,1200,1800,3600,5400};
-        texts[] = {"Default (60)","10","20","30","60","90"};
+        texts[] = {$STR_antistasi_param_default_60,"10","20","30","60","90"};
         default = 9999;
     };
     class membership
     {
-        title = "Enable Server Membership";
+        title = $STR_antistasi_param_membership;
         values[] = {9999,1,0};
-        texts[] = {"Default (Yes)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_yes,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class switchComm
     {
-        title = "Enable Commander Switch (highest ranked player)";
+        title = $STR_antistasi_param_switchComm;
         values[] = {9999,1,0};
-        texts[] = {"Default (Yes)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_yes,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class tkPunish
     {
-        title = "Enable Teamkill Punish";
+        title = $STR_antistasi_param_tkPunish;
         values[] = {9999,1,0};
-        texts[] = {"Default (Yes)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_yes,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class mRadius
     {
-        title = "Max distance from HQ for tasks";
+        title = $STR_antistasi_param_mRadius;
         values[] = {9999,2000,4000,6000,8000,10000,12000};
-        texts[] = {"Default (4000)","2000","4000","6000","8000","10000","12000"};
+        texts[] = {$STR_antistasi_param_default_4000,"2000","4000","6000","8000","10000","12000"};
         default = 9999;
     };
     class pMarkers
     {
-        title = "Allow Friendly Player Markers";
+        title = $STR_antistasi_param_pMarkers;
         values[] = {9999,1,0};
-        texts[] = {"Default (Yes)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_yes,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class AISkill
     {
-        title = "Mission Difficulty";
+        title = $STR_antistasi_param_AISkill;
         values[] = {9999,1,2,3};
-        texts[] = {"Default (Normal)","Easy","Normal","Hard"};
+        texts[] = {$STR_antistasi_param_AISkill_default,$STR_antistasi_param_diff_easy,$STR_antistasi_param_diff_normal,$STR_antistasi_param_diff_hard};
         default = 9999;
     };
     class unlockItem
     {
-        title = "Number of the same item required to unlock";
+        title = $STR_antistasi_param_unlockItem;
         values[] = {9999,15,25,40,1e6};
-        texts[] = {"Default (25)","15","25","40","1 000 000"};
+        texts[] = {$STR_antistasi_param_default_25,"15","25","40","1 000 000"};
         default = 9999;
     };
     class memberOnlyMagLimit
     {
-        title = "Number of magazines needed for guests to be able to use them";
+        title = $STR_antistasi_param_memberOnlyMagLimit;
         values[] = {9999,10,20,30,40,50,60};
-        texts[] = {"Default (40)","10","20","30","40","50","60"};
+        texts[] = {$STR_antistasi_param_default_40,"10","20","30","40","50","60"};
         default = 9999;
     };
     class civTraffic
     {
-        title = "Rate of Civ Traffic";
+        title = $STR_antistasi_param_civTraffic;
         values[] = {9999,0,1,2,4,};
-        texts[] = {"Default (Medium)","None","Low","Medium","High"};
+        texts[] = {$STR_antistasi_param_civTraffic_default,$STR_A3_None,$STR_A3_OPTIONS_LOW,$STR_A3_OPTIONS_MEDIUM,$STR_A3_OPTIONS_HIGH};
         default = 9999;
     };
     class memberSlots
     {
-        title = "Percentage of Reserved Slots for Members";
+        title = $STR_antistasi_param_memberSlots;
         values[] = {9999,0,20,40,60,80,100};
-        texts[] = {"Default (20%)","None","20%","40%","60%","80%","All"};
+        texts[] = {$STR_antistasi_param_memberSlots_default,$STR_A3_None,"20%","40%","60%","80%","All"};
         default = 9999;
     };
     class memberDistance
     {
-        title = "Max distance non members can be from the closest member or HQ (they will be teleported to HQ after some timeout)";
+        title = $STR_antistasi_param_memberDistance;
         values[] = {9999,4000,5000,6000,7000,8000,16000};
-        texts[] = {"Default (5km)","4 Kmts","5 Kmts","6 Kmts","7 Kmts","8 Kmts","Unlimited"};
+        texts[] = {$STR_antistasi_param_memberDistance_default,"4 Kmts","5 Kmts","6 Kmts","7 Kmts","8 Kmts",$STR_a3_ta_vanguard_unlimited};
         default = 9999;
     };
     class allowFT
     {
-        title = "Fast Travel Targets Allowed";
+        title = $STR_antistasi_param_allowFT;
         values[] = {9999,0,1};
-        texts[] = {"Default (Airports & HQ)","Any friendly position","Only Airports & HQ"};
+        texts[] = {$STR_antistasi_param_allowFT_default,$STR_antistasi_param_allowFT_friendlyPos,$STR_antistasi_param_allowFT_onlyAirHQ};
         default = 9999;
     };
     class napalmEnabled
     {
-        title = "Enable Napalm Bombing for AI";
+        title = $STR_antistasi_param_napalmEnabled;
         values[] = {9999,0,1};
-        texts[] = {"Default (No)","No","Yes"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_no,$STR_lib_info_yes};
         default = 9999;
     };
     class unlockedUnlimitedAmmo
     {
-        title = "Do Unlocked Weapons Automatically Unlock Their Standard Magazine?";
+        title = $STR_antistasi_param_unlockedUnlimitedAmmo;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class allowGuidedLaunchers
     {
-        title = "Should Guided Launchers become unlocked?";
+        title = $STR_antistasi_param_allowGuidedLaunchers;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class allowUnlockedExplosives
     {
-        title = "Should Explosives become unlocked?";
+        title = $STR_antistasi_param_allowUnlockedExplosives;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class startWithLongRangeRadio
     {
-        title = "[TFAR] Start with Long Range Radio?";
+        title = $STR_antistasi_param_startWithLongRangeRadio;
         values[] = {9999,1,0};
-        texts[] = {"Default (Yes)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_yes,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class helmetLossChance
     {
-        title = "Chance of helmet loss on headshots";
+        title = $STR_antistasi_param_helmetLossChance;
         values[] = {9999,0,33,66,100};
-        texts[] = {"Default (Sometimes)","Never","Sometimes","Often","Always"};
+        texts[] = {$STR_antistasi_param_helmetLossChance_default,$STR_a3_wl_param15_value1,$STR_antistasi_param_helmetLossChance_Sometimes,$STR_antistasi_param_helmetLossChance_Often,$STR_a3_rscdisplaycampaignlobby_always};
         default = 9999;
     };
     class Spacer10
@@ -195,16 +195,16 @@ class Params
     };
     class EnableLootToCrate
     {
-        title = "Enable Loot to crate";
+        title = $STR_antistasi_param_EnableLootToCrate;
         values[] = {9999, 0, 1};
-        texts[] = {"Default (Enabled)","Disabled", "Enabled"};
+        texts[] = {$STR_antistasi_param_default_enabled, $STR_disabled, $STR_enabled};
         default = 9999;
     };
     class LTCLootUnlocked
     {
-        title = "Loot to crate: transfers unlocked items";
+        title = $STR_antistasi_param_LTCLootUnlocked;
         values[] = {9999, 0, 1};
-        texts[] = {"Default (Disabled)", "Disabled", "Enabled"};
+        texts[] = {$STR_antistasi_param_default_disabled, $STR_disabled, $STR_enabled};
         default = 9999;
     };
     class Spacer11
@@ -216,86 +216,86 @@ class Params
     };
     class Kart
     {
-        title = "Allow Items and Vehicles from Karts DLC?";
+        title = $STR_antistasi_param_Kart;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class Mark
     {
-        title = "Allow Items and Vehicles from Marksman DLC?";
+        title = $STR_antistasi_param_Mark;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class Heli
     {
-        title = "Allow Items and Vehicles from Heli DLC?";
+        title = $STR_antistasi_param_Heli;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class Expansion
     {
-        title = "Allow Items and Vehicles from Apex DLC?";
+        title = $STR_antistasi_param_Expansion;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class Jets
     {
-        title = "Allow Items and Vehicles from Jets DLC?";
+        title = $STR_antistasi_param_Jets;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class Orange
     {
-        title = "Allow Items and Vehicles from Laws of War DLC?";
+        title = $STR_antistasi_param_Orange;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class Tanks
     {
-        title = "Allow Items and Vehicles from Tanks DLC?";
+        title = $STR_antistasi_param_Tanks;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class GlobMob
     {
-        title = "Allow Items and Vehicles from Global Mobilization DLC?";
+        title = $STR_antistasi_param_GlobMob;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class Enoch
     {
-        title = "Allow Items and Vehicles from Contact DLC?";
+        title = $STR_antistasi_param_Enoch;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class OfficialMod
     {
-        title = "Allow ADR-97 DLC?";
+        title = $STR_antistasi_param_OfficialMod;
         values[] = {9999,1,0};
-        texts[] = {"Default (No)","Yes","No"};
+        texts[] = {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class AoW
     {
-        title = "Allow Art of War DLC?";
+        title = $STR_antistasi_param_AoW;
         values[] = {9999,1,0};
-        texts[] =  {"Default (No)","Yes","No"};
+        texts[] =  {$STR_antistasi_param_default_no,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
         class VN
     {
-        title = "Allow VN DLC (S.O.G. PRAIRIE FIRE)?";
+        title = $STR_antistasi_param_SOG;
         values[] = {9999,1,0};
-        texts[] =  {"Default (Yes)","Yes","No"};
+        texts[] =  {$STR_antistasi_param_default_yes,$STR_lib_info_yes,$STR_lib_info_no};
         default = 9999;
     };
     class Spacer0
@@ -307,72 +307,72 @@ class Params
     };
     class AdvancedParams
     {
-        title = "ADVANCED USERS ONLY";
+        title = $STR_antistasi_param_AdvancedParams;
         values[] = {""};
         texts[] = {""};
         default = "";
     };
     class LogLevel
     {
-        title = "Logging Level (Amount of detail in .rpt file)";
+        title = $STR_antistasi_param_LogLevel;
         values[] = {9999,1,2,3};
-        texts[] = {"Default (Debug)", "Error", "Info", "Debug"};
+        texts[] = {$STR_antistasi_param_LogLevel_default, "Error", "Info", "Debug"};
         default = 9999;
     };
     class SupportOptions
     {
-        title = "SUPPORT OPTIONS";
+        title = $STR_antistasi_param_SupportOptions;
         values[] = {""};
         texts[] = {""};
         default = "";
     };
     class allowUnfairSupports
     {
-        title = "[Experimental - Use at own risk] Allow unfair supports to be used by the enemy";
+        title = $STR_antistasi_param_allowUnfairSupports;
         values[] = {9999, 0, 1};
-        texts[] = {"Default (Not Allowed)", "Not allowed", "Allowed"};
+        texts[] = {$STR_antistasi_param_default_notAllowed, $STR_antistasi_param_notAllowed, $STR_antistasi_param_Allowed};
         default = 9999;
     }
     class allowFuturisticSupports
     {
-        title = "[Experimental - Use at own risk](Requires unfair supports) Allow futuristic supports to be used by the enemy";
+        title = $STR_antistasi_param_allowFuturisticSupports;
         values[] = {9999, 0, 1};
-        texts[] = {"Default (Not Allowed)", "Not allowed", "Allowed"};
+        texts[] = {$STR_antistasi_param_default_notAllowed, $STR_antistasi_param_notAllowed, $STR_antistasi_param_Allowed};
         default = 9999;
     }
     class CrateOptions
     {
-        title = "LOOT CRATE OPTIONS";
+        title = $STR_antistasi_param_CrateOptions;
         values[] = {""};
         texts[] = {""};
         default = "";
     };
     class truelyRandomCrates
     {
-        title = "[Experimental] Truely Random Crates: Remove all balance checks from Crates";
+        title = $STR_antistasi_param_truelyRandomCrates;
         values[] = {9999, 0, 1};
-        texts[] = {"Default (False)", "False", "True"};
+        texts[] = {$STR_antistasi_param_default_false, $STR_antistasi_param_false, $STR_antistasi_param_true};
         default = 9999;
     };
     class cratePlayerScaling
     {
-        title = "Decrease loot quantity as player count increases? (Yes is recommended for balance reasons)";
+        title = $STR_antistasi_param_cratePlayerScaling;
         values[] = {9999, 0, 1};
-        texts[] = {"Default (True)", "False", "True"};
+        texts[] = {$STR_antistasi_param_default_true, $STR_antistasi_param_false, $STR_antistasi_param_true};
         default = 9999;
     };
     class crateWepTypeMax
     {
-        title = "Maximum Weapon Types in Crates";
+        title = $STR_antistasi_param_crateWepTypeMax;
         values[] = {9999,0,2,4,6,8,12,16};
-        texts[] = {"Default (9)","1","3","5","7","9","13","17"};
+        texts[] = {$STR_antistasi_param_default_9,"1","3","5","7","9","13","17"};
         default = 9999;
     };
     class crateWepNumMax
     {
-        title = "Maximum Weapon Quantity in Crates";
+        title = $STR_antistasi_param_crateWepNumMax;
         values[] = {9999,0,1,3,5,8,10,15};
-        texts[] = {"Default (8)","None","1","3","5","8","10","15"};
+        texts[] = {$STR_antistasi_param_default_8,$STR_A3_None,"1","3","5","8","10","15"};
         default = 9999;
     };
     class Spacer1
@@ -384,16 +384,16 @@ class Params
     };
     class crateItemTypeMax
     {
-        title = "Maximum Item Types in Crates";
+        title = $STR_antistasi_param_crateItemTypeMax;
         values[] = {9999,0,2,4,9};
-        texts[] = {"Default (5)","1","3","5","10"};
+        texts[] = {$STR_antistasi_param_default_5,"1","3","5","10"};
         default = 9999;
     };
     class crateItemNumMax
     {
-        title = "Maximum Item Quantity in Crates";
+        title = $STR_antistasi_param_crateItemNumMax;
         values[] = {9999,0,1,3,5,10,15};
-        texts[] = {"Default (5)","None","1","3","5","10","15"};
+        texts[] = {$STR_antistasi_param_default_5,$STR_A3_None,"1","3","5","10","15"};
         default = 9999;
     };
     class Spacer2
@@ -405,16 +405,16 @@ class Params
     };
     class crateAmmoTypeMax
     {
-        title = "Maximum Ammo Types in Crates";
+        title = $STR_antistasi_param_crateAmmoTypeMax;
         values[] = {9999,0,2,4,6,9,14,19};
-        texts[] = {"Default (7)","1","3","5","7","10","15","20"};
+        texts[] = {$STR_antistasi_param_default_7,"1","3","5","7","10","15","20"};
         default = 9999;
     };
     class crateAmmoNumMax
     {
-        title = "Maximum Ammo Quantity in Crates";
+        title = $STR_antistasi_param_crateAmmoNumMax;
         values[] = {9999,0,1,3,5,10,15,20,25,30};
-        texts[] = {"Default (20)","None","1","3","5","10","15","20","25","30"};
+        texts[] = {$STR_antistasi_param_default_20,$STR_A3_None,"1","3","5","10","15","20","25","30"};
         default = 9999;
     };
     class Spacer3
@@ -426,16 +426,16 @@ class Params
     };
     class crateExplosiveTypeMax
     {
-        title = "Maximum Explosive Types in Crates";
+        title = $STR_antistasi_param_crateExplosiveTypeMax;
         values[] = {9999,0,2,4,9};
-        texts[] = {"Default (3)","1","3","5","10"};
+        texts[] = {$STR_antistasi_param_default_3,"1","3","5","10"};
         default = 9999;
     };
     class crateExplosiveNumMax
     {
-        title = "Maximum Explosive Quantity in Crates";
+        title = $STR_antistasi_param_crateExplosiveNumMax;
         values[] = {9999,0,1,3,5,10,15};
-        texts[] = {"Default (5)","None","1","3","5","10","15"};
+        texts[] = {$STR_antistasi_param_default_5,$STR_A3_None,"1","3","5","10","15"};
         default = 9999;
     };
     class Spacer4
@@ -447,16 +447,16 @@ class Params
     };
     class crateAttachmentTypeMax
     {
-        title = "Maximum Attachment Types in Crates";
+        title = $STR_antistasi_param_crateAttachmentTypeMax;
         values[] = {9999,0,2,4,6,9,14,19};
-        texts[] = {"Default (7)","1","3","5","7","10","15","20"};
+        texts[] = {$STR_antistasi_param_default_7,"1","3","5","7","10","15","20"};
         default = 9999;
     };
     class crateAttachmentNumMax
     {
-        title = "Maximum Attachment Quantity in Crates";
+        title = $STR_antistasi_param_crateAttachmentNumMax;
         values[] = {9999,0,1,3,5,10,15,20,25,30};
-        texts[] = {"Default (15)","None","1","3","5","10","15","20","25","30"};
+        texts[] = {$STR_antistasi_param_default_15,$STR_A3_None,"1","3","5","10","15","20","25","30"};
         default = 9999;
     };
     class Spacer5
@@ -468,16 +468,16 @@ class Params
     };
     class crateBackpackTypeMax
     {
-        title = "Maximum Backpack Types in Crates";
+        title = $STR_antistasi_param_crateBackpackTypeMax;
         values[] = {9999,0,2,4,9};
-        texts[] = {"Default (0)","1","3","5","10"};
+        texts[] = {$STR_antistasi_param_default_0,"1","3","5","10"};
         default = 9999;
     };
     class crateBackpackNumMax
     {
-        title = "Maximum Backpack Quantity in Crates";
+        title = $STR_antistasi_param_crateBackpackNumMax;
         values[] = {9999,0,1,3,5,10,15};
-        texts[] = {"Default (3)","None","1","3","5","10","15"};
+        texts[] = {$STR_antistasi_param_default_3,$STR_A3_None,"1","3","5","10","15"};
         default = 9999;
     };
     class Spacer6
@@ -489,16 +489,16 @@ class Params
     };
     class crateVestTypeMax
     {
-        title = "Maximum Vest Types in Crates";
+        title = $STR_antistasi_param_crateVestTypeMax;
         values[] = {9999,0,2,4,9};
-        texts[] = {"Default (0)","1","3","5","10"};
+        texts[] = {$STR_antistasi_param_default_0,"1","3","5","10"};
         default = 9999;
     };
     class crateVestNumMax
     {
-        title = "Maximum Vest Quantity in Crates";
+        title = $STR_antistasi_param_crateVestNumMax;
         values[] = {9999,0,1,3,5,10,15};
-        texts[] = {"Default (3)","None","1","3","5","10","15"};
+        texts[] = {$STR_antistasi_param_default_3,$STR_A3_None,"1","3","5","10","15"};
         default = 9999;
     };
     class Spacer7
@@ -510,16 +510,16 @@ class Params
     };
     class crateHelmetTypeMax
     {
-        title = "Maximum Helmet Types in Crates";
+        title = $STR_antistasi_param_crateHelmetTypeMax;
         values[] = {9999,0,2,4,9};
-        texts[] = {"Default (0)","1","3","5","10"};
+        texts[] = {$STR_antistasi_param_default_0,"1","3","5","10"};
         default = 9999;
     };
     class crateHelmetNumMax
     {
-        title = "Maximum Helmet Quantity in Crates";
+        title = $STR_antistasi_param_crateHelmetNumMax;
         values[] = {9999,0,1,3,5,10,15};
-        texts[] = {"Default (0)","None","1","3","5","10","15"};
+        texts[] = {$STR_antistasi_param_default_0,$STR_A3_None,"1","3","5","10","15"};
         default = 9999;
     };
     class Spacer8
@@ -531,16 +531,16 @@ class Params
     };
     class crateDeviceTypeMax
     {
-        title = "Maximum Device Backpack Types in Crates";
+        title = $STR_antistasi_param_crateDeviceTypeMax;
         values[] = {9999,0,2,4,9};
-        texts[] = {"Default (3)","1","3","5","10"};
+        texts[] = {$STR_antistasi_param_default_3,"1","3","5","10"};
         default = 9999;
     };
     class crateDeviceNumMax
     {
-        title = "Maximum Device Backpack Quantity in Crates";
+        title = $STR_antistasi_param_crateDeviceNumMax;
         values[] = {9999,0,1,3,5,10,15};
-        texts[] = {"Default (3)","None","1","3","5","10","15"};
+        texts[] = {$STR_antistasi_param_default_3,$STR_A3_None,"1","3","5","10","15"};
         default = 9999;
     };
 };

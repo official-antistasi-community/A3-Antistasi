@@ -18,7 +18,7 @@ _unloadActionID = _vehicle addAction [
 ];
 _vehicle setUserActionText [
 	_unloadActionID,
-	"Unload Cargo",
+	localize "STR_antistasi_logistics_loadCargo",
 	"<t size='2'><img image='\A3\ui_f\data\IGUI\Cfg\Actions\arrow_down_gs.paa'/></t>"
 ];
 _vehicle setVariable ["jnl_unloadActionID", _unloadActionID, false];

@@ -418,7 +418,7 @@ class Mission
 			dataType="Marker";
 			position[]={5404.0225,76.880768,17913.617};
 			name="respawn_guerrila";
-			text="Your Headquarters";
+			text=$STR_antistasi_marker_HQ;
 			type="hd_flag";
 			colorName="ColorGUER";
 			id=934;

@@ -3,17 +3,17 @@ _nul=createDialog "set_params";
 waitUntil {dialog};
 private _autoSaveInterval = "autoSaveInterval" call BIS_fnc_getParamValue;
 [
-	"W A R N I N G ",
-	["Antistasi has a custom save system similar to other CTIs.<br/><br/>",
-	"To Save: Your commander needs to go to the <t color='#f0d498'>Map Board</t>, scroll-select <t color='#f0d498'>""Game Options""</t> and click on the <t color='#f0d498'>""Persistent Save""</t> button.<br/><br/>",
-	"Current parameters are configured to auto-save every <t color='#f0d498'>",(_autoSaveInterval/60) toFixed 0," minutes</t>."] joinString ""
+	localize"str_cfg_markers_warning",
+	[localize"STR_antistasi_customHint_save_info",
+	localize "STR_antistasi_customHint_save_info2",
+	localize "STR_antistasi_customHint_autosave_info"+" <t color='#f0d498'>",(_autoSaveInterval/60) toFixed 0," "+localize"str_a3_rscattributeskiptime_minutes"+"</t>."] joinString ""
 ] call A3A_fnc_customHint;
 waitUntil {!dialog};
 
 if (!isNil "loadLastSave" && {!loadLastSave}) then {
 	_nul=createDialog "diff_menu";
 	waitUntil {dialog};
-	["Load Save", "Choose a difficulty level"] call A3A_fnc_customHint;
+	[localize "STR_antistasi_customHint_load_head", localize "STR_antistasi_customHint_difficulty"] call A3A_fnc_customHint;
 	waitUntil {!dialog};
 
 	// Set default SP params before initParams runs, where different from MP

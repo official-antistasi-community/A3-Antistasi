@@ -28,7 +28,7 @@ if (side group player == teamPlayer) then
 	{
 	_owner = _oldUnit getVariable ["owner",_oldUnit];
 
-	if (_owner != _oldUnit) exitWith {["Remote AI", "Died while remote controlling AI"] call A3A_fnc_customHint; selectPlayer _owner; disableUserInput false; deleteVehicle _newUnit};
+	if (_owner != _oldUnit) exitWith {[localize "STR_antistasi_customHint_remoteAI", localize "STR_antistasi_customHint_remoteAI_dead"] call A3A_fnc_customHint; selectPlayer _owner; disableUserInput false; deleteVehicle _newUnit};
 
 	_nul = [0,-1,getPos _oldUnit] remoteExec ["A3A_fnc_citySupportChange",2];
 
@@ -216,7 +216,7 @@ if (side group player == teamPlayer) then
 				};
 				_markersX = markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
 				_pos = position _veh;
-				if (_markersX findIf {_pos inArea _x} != -1) then {["Static Deployed", "Static weapon has been deployed for use in a nearby zone, and will be used by garrison militia if you leave it here the next time the zone spawns"] call A3A_fnc_customHint;};
+				if (_markersX findIf {_pos inArea _x} != -1) then {[localize "STR_antistasi_customHint_static_deployed", localize "STR_antistasi_customHint_static_deployed_use"] call A3A_fnc_customHint;};
 			};
 		}];
 	player addEventHandler ["WeaponDisassembled",

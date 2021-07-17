@@ -52,7 +52,7 @@ switch (true) do
         //We could add the UPSMON routines here
         _vehWP2 setWaypointType "SAD";
         _vehWP2 setWaypointBehaviour "COMBAT";
-        [_vehicle, "Inf Truck."] spawn A3A_fnc_inmuneConvoy;
+        [_vehicle, localize "STR_antistasi_markers_infTruck"] spawn A3A_fnc_inmuneConvoy;
     };
     case ((typeof _vehicle in vehTanks) or (typeof _vehicle in vehAA)):
     {
@@ -71,7 +71,7 @@ switch (true) do
 
         //This keeps units from moving out of tanks if disabled, do we want that?
         _vehicle allowCrewInImmobile true;
-        private _typeName = if (typeof _vehicle in vehTanks) then {"Tank"} else {"AA"};
+        private _typeName = if (typeof _vehicle in vehTanks) then {localize "STR_antistasi_markers_tank"} else {localize "STR_antistasi_markers_AA"};
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
     case (_vehicle isKindOf "Helicopter" && {(typeof _vehicle) in vehTransportAir}):
@@ -192,7 +192,7 @@ switch (true) do
 
         //This keeps units from moving out of APC if disabled, do we want that?
         _vehicle allowCrewInImmobile true;
-        private _typeName = if (typeof _vehicle in vehAPCs) then {"APC"} else {"MRAP"};
+        private _typeName = if (typeof _vehicle in vehAPCs) then {localize "STR_antistasi_markers_APC"} else {localize "STR_antistasi_markers_MRAP"};
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
 };

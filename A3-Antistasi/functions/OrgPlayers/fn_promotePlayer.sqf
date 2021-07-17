@@ -5,7 +5,7 @@ private ["_puntMax","_textX","_multiplier","_newRank","_selectable","_disconnect
 _puntMax = 0;
 _multiplier = 1;
 
-private _textX = "Promoted Players:<br/><br/>";
+private _textX = localize "STR_antistasi_chat_petros_promoted"+"<br/><br/>";
 
 _promoted = false;
 {
@@ -35,6 +35,6 @@ Debug(_textX);
 
 if (_promoted) then
 {
-	_textX = format ["%1<br/><br/>CONGRATULATIONS!!",_textX];
-	[petros,"hint",_textX, "Promotion"] remoteExec ["A3A_fnc_commsMP"];
+	_textX = format ["%1"+"<br/><br/>"+localize "STR_antistasi_chat_petros_congratulation",_textX];
+	[petros,"hint",_textX, localize "STR_antistasi_chat_petros_promotion"] remoteExec ["A3A_fnc_commsMP"];
 };

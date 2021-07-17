@@ -2,7 +2,7 @@
 //   Rebel Information   //
 ///////////////////////////
 
-["name", "FIA"] call _fnc_saveToTemplate; 						//this line determines the faction name -- Example: ["name", "NATO"] - ENTER ONLY ONE OPTION
+["name", localize "STR_antistasi_faction_FIA"] call _fnc_saveToTemplate; 						//this line determines the faction name -- Example: ["name", "NATO"] - ENTER ONLY ONE OPTION
 
 ["flag", "Flag_FIA_F"] call _fnc_saveToTemplate;
 ["flagTexture", "a3\data_f\flags\flag_fia_co.paa"] call _fnc_saveToTemplate;

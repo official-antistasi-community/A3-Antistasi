@@ -21,7 +21,7 @@ _caller setVariable ["intelFound",false];
 _caller setVariable ["cancelIntelSearch",false];
 
 _caller playMoveNow selectRandom medicAnims;
-private _cancelAction = _caller addAction ["Cancel Search", {(_this select 1) setVariable ["cancelIntelSearch",true]},nil,6,true,true,"","(isPlayer _this)"];
+private _cancelAction = _caller addAction [localize "STR_antistasi_intel_cancel", {(_this select 1) setVariable ["cancelIntelSearch",true]},nil,6,true,true,"","(isPlayer _this)"];
 
 _caller addEventHandler
 [
@@ -66,7 +66,7 @@ _caller setVariable ["cancelIntelSearch", nil];
 
 if(_wasCancelled) exitWith
 {
-    ["Intel", "Search cancelled"] call A3A_fnc_customHint;
+    [localize "STR_antistasi_intel_search", localize "STR_antistasi_intel_canceled"] call A3A_fnc_customHint;
     _caller setVariable ["intelFound", nil];
     [_squadLeader, "Intel_Small"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_squadLeader];
 };
@@ -76,7 +76,7 @@ if(_caller getVariable ["intelFound", false]) then
     private _hasIntel = _squadLeader getVariable ["hasIntel", false];
     if(_hasIntel) then
     {
-        ["Intel", "Search completed, intel found!"] call A3A_fnc_customHint;
+        [localize "STR_antistasi_intel_search", localize "STR_antistasi_intel_completed_found"] call A3A_fnc_customHint;
         private _intelText = ["Small", _side] call A3A_fnc_selectIntel;
         [_intelText] remoteExec ["A3A_fnc_showIntel", [teamPlayer, civilian]];
         {
@@ -85,7 +85,7 @@ if(_caller getVariable ["intelFound", false]) then
     }
     else
     {
-        ["Intel", "Search completed, but you found nothing!"] call A3A_fnc_customHint;
+        [localize "STR_antistasi_intel_search", localize "STR_antistasi_intel_completed_noFound"] call A3A_fnc_customHint;
     };
 }
 else

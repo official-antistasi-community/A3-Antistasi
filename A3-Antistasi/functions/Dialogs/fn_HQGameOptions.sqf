@@ -31,12 +31,12 @@ FIX_LINE_NUMBERS()
 ////////////////////
 // Authentication //
 ////////////////////
-private _optionLocalisationTable = [["maxUnits","distanceSPWN","civPerc"],["AI Limit","Spawn Distance","Civilian Limit"]];
-private _hintTitle = "HQ Spawn Options";
+private _optionLocalisationTable = [["maxUnits","distanceSPWN","civPerc"],[localize "STR_antistasi_journal_entry_header_Options_2",localize "STR_a3_modules_modulepatrolarea_f_attributes_spawndistance0",localize "STR_antistasi_journal_entry_header_Options_5"]];
+private _hintTitle = localize "STR_antistasi_customHint_spawnOptions";
 private _authenticate = _option in ["maxUnits","distanceSPWN","civPerc"];
 
 if (_authenticate && {!(_player == theBoss || admin owner _player > 0 || _player == player)}) exitWith {
-    [_hintTitle, "Only our Commander or admin has access to "+(_optionLocalisationTable#1#(_optionLocalisationTable#0 find _option))] remoteExecCall ["A3A_fnc_customHint",_player];
+    [_hintTitle, localize "STR_antistasi_customHint_only_admin_or_comander_to"+(_optionLocalisationTable#1#(_optionLocalisationTable#0 find _option))] remoteExecCall ["A3A_fnc_customHint",_player];
     Error("ACCESS VIOLATION | "+ name _player + " ["+(getPlayerUID _player) + "] ["+ str owner _player +"] attempted calling restricted backing method "+str _this);
     nil;
 };
@@ -76,10 +76,10 @@ private _processAction = {
     if (_inRange == 2) then {
         _finalAmount = _originalAmount + _adjustmentAmount;
         missionNamespace setVariable [_option,_finalAmount,true];
-        _hintText = " set to "+str _finalAmount;
+        _hintText = " "+localize"STR_antistasi_limit_set"+" "+str _finalAmount;
         Info("SET | "+name _player+" ["+ getPlayerUID _player +"] ["+ str owner _player +"] changed "+_optionName+" from " + str _originalAmount +" to " + str _finalAmount);
     } else {
-        _hintText = " is already at "+(["lower","upper"] select _inRange)+" limit of "+str _originalAmount;
+        _hintText = " "+localize"STR_antistasi_limit_already"+" "+(["lower","upper"] select _inRange)+" limit of "+str _originalAmount;
     };
 
     private _graphic = "--------------------------------------------------";

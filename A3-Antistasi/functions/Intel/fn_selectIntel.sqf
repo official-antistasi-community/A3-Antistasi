@@ -73,11 +73,11 @@ if(_intelType == "Small") then
             private _sideName = if (_side == Occupants) then {nameOccupants} else {nameInvaders};
             if(_nextAttack < 300) then
             {
-                _text = format ["%1 attack is imminent!", _sideName];
+                _text = format [localize "STR_antistasi_intel_attack", _sideName];
             }
             else
             {
-                _text = format ["%1 attack expected in %2 minutes", _sideName, round (_nextAttack / 60)];
+                _text = format [localize "STR_antistasi_intel_attackTime", _sideName, round (_nextAttack / 60)];
             };
         };
         case (DECRYPTION_KEY):
@@ -92,7 +92,7 @@ if(_intelType == "Small") then
                 invaderRadioKeys = invaderRadioKeys + 1;
                 publicVariable "invaderRadioKeys";
             };
-            _text = format ["You found a %1 decryption key!<br/>It allows your faction to fully decrypt the next support call.", _sideName];
+            _text = format [localize "STR_antistasi_intel_key_support", _sideName];
         };
         case (CONVOY):
         {
@@ -109,11 +109,11 @@ if(_intelType == "Small") then
             if(count _convoyMarker != 0) then
             {
                 (selectRandom _convoyMarker) setMarkerAlpha 1;
-                _text = format ["We found the tracking data for a %1 convoy.<br/>Convoy position marked on map!", _sideName];
+                _text = format [localize "STR_antistasi_intel_convoy", _sideName];
             }
             else
             {
-                _text = format ["There are currently no %1 convoys driving around!", _sideName];
+                _text = format [localize "STR_antistasi_intel_noConvoy", _sideName];
             };
         };
     };
@@ -125,15 +125,15 @@ if(_intelType == "Medium") then
     {
         case (ACCESS_AIR):
         {
-            _text = format ["%1 currently has access to<br/>%2", _sideName, ([_side, ACCESS_AIR] call A3A_fnc_getVehicleIntel)];
+            _text = format [localize "STR_antistasi_intel_access", _sideName, ([_side, ACCESS_AIR] call A3A_fnc_getVehicleIntel)];
         };
         case (ACCESS_HELI):
         {
-            _text = format ["%1 currently has access to<br/>%2", _sideName, ([_side, ACCESS_HELI] call A3A_fnc_getVehicleIntel)];
+            _text = format [localize "STR_antistasi_intel_access", _sideName, ([_side, ACCESS_HELI] call A3A_fnc_getVehicleIntel)];
         };
         case (ACCESS_ARMOR):
         {
-            _text = format ["%1 currently has access to<br/>%2", _sideName, ([_side, ACCESS_ARMOR] call A3A_fnc_getVehicleIntel)];
+            _text = format [localize "STR_antistasi_intel_access", _sideName, ([_side, ACCESS_ARMOR] call A3A_fnc_getVehicleIntel)];
         };
         case (CONVOYS):
         {
@@ -150,7 +150,7 @@ if(_intelType == "Medium") then
             {
                 _x setMarkerAlpha 1;
             } forEach _convoyMarkers;
-            _text = format ["We found the %1 convoy GPS decryption key!<br/>%2 convoys are marked on the map", _sideName, count _convoyMarkers];
+            _text = format [localize "STR_antistasi_intel_key_convoy", _sideName, count _convoyMarkers];
         };
         case (COUNTER_ATTACK):
         {
@@ -172,7 +172,7 @@ if(_intelType == "Large") then
     {
         case (TRAITOR):
         {
-            _text = "You found data on the family of the traitor, we don't think he will do any more trouble";
+            _text = localize "STR_antistasi_intel_traitor";
             traitorIntel = true; publicVariable "traitorIntel";
         };
         case (WEAPON):
@@ -182,12 +182,12 @@ if(_intelType == "Large") then
             [_newWeapon] remoteExec ["A3A_fnc_unlockEquipment", 2];
 
             private _weaponName = getText (configFile >> "CfgWeapons" >> _newWeapon >> "displayName");
-            _text = format ["You found the supply data for the<br/> %1<br/> You have unlocked this weapon!", _weaponName];
+            _text = format [localize "STR_antistasi_intel_weapons", _weaponName];
         };
         case (MONEY):
         {
             private _money = ((round (random 50)) + (10 * tierWar)) * 100;
-            _text = format ["You found some confidential data, you sold it for %1 on the black market!", _money];
+            _text = format [localize "STR_antistasi_intel_blackMarket", _money];
             [0, _money] remoteExec ["A3A_fnc_resourcesFIA",2];
         };
     };

@@ -1,12 +1,12 @@
-if (bombRuns < 1) exitWith {["Air Support", "You lack of enough Air Support to make this request"] call A3A_fnc_customHint;};
+if (bombRuns < 1) exitWith {[localize "STR_antistasi_dialogs_commander_comm_air_support", localize "STR_antistasi_customHint_air_support_noSupport"] call A3A_fnc_customHint;};
 //if (!allowPlayerRecruit) exitWith {hint "Server is very loaded. <br/>Wait one minute or change FPS settings in order to fulfill this request"};
-if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {["Air Support", "You need a radio in your inventory to be able to give orders to other squads"] call A3A_fnc_customHint;} else {["Air Support", "You need a Radio Man in your group to be able to give orders to other squads"] call A3A_fnc_customHint;}};
-if ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0) exitWith {["Air Support", "You need to control an airport in order to fulfill this request"] call A3A_fnc_customHint;};
+if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {[localize "STR_antistasi_dialogs_commander_comm_air_support", localize "STR_antistasi_customHint_minefields_noradio"] call A3A_fnc_customHint;} else {["Air Support", "You need a Radio Man in your group to be able to give orders to other squads"] call A3A_fnc_customHint;}};
+if ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0) exitWith {[localize "STR_antistasi_dialogs_commander_comm_air_support", localize "STR_antistasi_customHint_air_support_noAirport"] call A3A_fnc_customHint;};
 _typeX = _this select 0;
 
 positionTel = [];
 
-["Air Support", "Select the spot from which the plane will start to drop the bombs"] call A3A_fnc_customHint;
+[localize "STR_antistasi_dialogs_commander_comm_air_support", localize "STR_antistasi_customHint_air_support_select"] call A3A_fnc_customHint;
 
 if (!visibleMap) then {openMap true};
 onMapSingleClick "positionTel = _pos;";
@@ -23,9 +23,9 @@ _mrkorig = createMarkerLocal [format ["BRStart%1",random 1000], _pos1];
 _mrkorig setMarkerShapeLocal "ICON";
 _mrkorig setMarkerTypeLocal "hd_destroy";
 _mrkorig setMarkerColorLocal "ColorRed";
-_mrkOrig setMarkerTextLocal "Bomb Run Init";
+_mrkOrig setMarkerTextLocal localize "STR_antistasi_markers_bomb_init";
 
-["Air Support", "Select the map position to which the plane will exit to calculate plane's route vector"] call A3A_fnc_customHint;
+[localize "STR_antistasi_dialogs_commander_comm_air_support", localize "STR_antistasi_customHint_air_support_selectVector"] call A3A_fnc_customHint;
 
 onMapSingleClick "positionTel = _pos;";
 
@@ -48,7 +48,7 @@ _mrkDest = createMarkerLocal [format ["BRFin%1",random 1000], _pos2];
 _mrkDest setMarkerShapeLocal "ICON";
 _mrkDest setMarkerTypeLocal "hd_destroy";
 _mrkDest setMarkerColorLocal "ColorRed";
-_mrkDest setMarkerTextLocal "Bomb Run Exit";
+_mrkDest setMarkerTextLocal localize "STR_antistasi_markers_bomb_exit";
 
 //openMap false;
 private _isHelicopter = vehSDKPlane isKindOf "helicopter";
@@ -70,7 +70,7 @@ _plane flyInHeight 100;
 private _minAltASL = ATLToASL [_positionX select 0, _positionX select 1, 0];
 _plane flyInHeightASL [(_minAltASL select 2) +100, (_minAltASL select 2) +100, (_minAltASL select 2) +100];
 
-driver _plane sideChat "Starting Bomb Run. ETA 30 seconds.";
+driver _plane sideChat format [localize "STR_antistasi_chat_startBomb",30];
 _wp1 = group _plane addWaypoint [_pos1, 0];
 _wp1 setWaypointType "MOVE";
 if (!_isHelicopter) then { _wp1 setWaypointSpeed "LIMITED" };

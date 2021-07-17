@@ -236,8 +236,8 @@ if (spawner getVariable _markerX != 2) then
     Debug_3("Control %1 captured by %2. Is Roadblock: %3", _markerX, _winner, _isControl);
 	if (_isControl) then
 		{
-		["TaskSucceeded", ["", "Roadblock Destroyed"]] remoteExec ["BIS_fnc_showNotification",_winner];
-		["TaskFailed", ["", "Roadblock Lost"]] remoteExec ["BIS_fnc_showNotification",_sideX];
+		["TaskSucceeded", ["", localize "STR_antistasi_notification_RoadblockDestroy"]] remoteExec ["BIS_fnc_showNotification",_winner];
+		["TaskFailed", ["", localize "STR_antistasi_notification_Roadblock_lost"]] remoteExec ["BIS_fnc_showNotification",_sideX];
 		};
 	if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then
 		{
