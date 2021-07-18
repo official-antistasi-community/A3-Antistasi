@@ -463,6 +463,15 @@ class A3A
         class vehicleSort {};
     };
 
+    calss Async
+    {
+        class await {};
+        class getVar {};
+        class handleAwait {};
+        class handleAwaitFail {};
+        class handleGetVar {};
+    };
+
     class OrgPlayers
     {
         class donateMoney {};
