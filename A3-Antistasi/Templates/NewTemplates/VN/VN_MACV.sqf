@@ -124,8 +124,8 @@ _loadoutData setVariable ["sniperRifles", []];
 _loadoutData setVariable ["lightATLaunchers", ["vn_m72"]];
 _loadoutData setVariable ["sidearms", []];
 
-_loadoutData setVariable ["ATMines", ["vn_mine_m14_mag"]];
-_loadoutData setVariable ["APMines", ["vn_mine_m15_mag"]];
+_loadoutData setVariable ["ATMines", ["vn_mine_m15_mag"]];
+_loadoutData setVariable ["APMines", ["vn_mine_m14_mag"]];
 _loadoutData setVariable ["lightExplosives", ["vn_mine_m112_remote_mag"]];
 _loadoutData setVariable ["heavyExplosives", ["vn_mine_satchel_remote_02_mag"]];
 

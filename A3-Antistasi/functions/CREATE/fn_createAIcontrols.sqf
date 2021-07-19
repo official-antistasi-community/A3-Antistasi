@@ -158,10 +158,16 @@ else
 		_size = [_markerX] call A3A_fnc_sizeMarker;
 		if ({if (_x inArea _markerX) exitWith {1}} count allMines == 0) then
 			{
-			for "_i" from 1 to 60 do
+			Debug_1("Creating a Minefield at %1", _markerX);
+			for "_i" from 1 to 45 do
 				{
-				_mineX = createMine ["APERSMine",_positionX,[],_size];
-				if (_sideX == Occupants) then {Occupants revealMine _mineX} else {Invaders revealMine _mineX};
+				if (_sideX == Occupants) then {
+				_mineX = createMine [ selectRandom (A3A_faction_occ getVariable "minefieldAPERS") ,_positionX,[],_size];
+   				Occupants revealMine _mineX;
+				} else {
+				_mineX = createMine [ selectRandom (A3A_faction_inv getVariable "minefieldAPERS") ,_positionX,[],_size];
+				Invaders revealMine _mineX;
+					};
 				};
 			};
 		_groupX = [_positionX,_sideX, _cfg] call A3A_fnc_spawnGroup;
