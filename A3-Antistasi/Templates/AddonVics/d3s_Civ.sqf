@@ -1,4 +1,4 @@
-civVehCommonData append [
+_addon set ["vehiclesCivCar", [
 	/*Classic*/
 	"d3s_skylark_52", 0.5
 	,"d3s_skylark_53", 0.5
@@ -579,9 +579,9 @@ civVehCommonData append [
 	,"d3s_452", 0.5
 	,"d3s_uaz_469P_EXP", 0.5
 	,"d3s_uaz_469P", 0.5
-];
+]];
 
-civVehMedicalData append [
+_addon set ["vehiclesCivMedical", [
 	"d3s_charger_15_EMS", 0.1
 	,"d3s_uaz_3162_EMS", 0.1
 	,"d3s_tahoe_EMS", 0.1
@@ -590,18 +590,18 @@ civVehMedicalData append [
 	,"d3s_uaz_3165M_EMS", 0.1
 	,"d3s_savana_EMS", 0.1
 	,"d3s_vklasse_17_EMS", 0.1
-];
+]];
 
-civVehRepairData append [
+_addon set ["vehiclesCivRepair", [
 	"d3s_titan_17_TAR", 0.3
 	/*Russian*/
 	,"d3s_zil_131_5", 0.3
 	,"d3s_kamaz_kung", 0.3
 	,"d3s_kamaz_4350_kung", 0.3
 	,"d3s_next_kung", 0.3
-];
+]];
 
-civVehIndustrialData append [
+_addon set ["vehiclesCivIndustrial", [
 	"d3s_baumaschinen", 0.5
 	,"d3s_scania_16", 0.5
 	,"d3s_SRlonghorn_4520_cov", 0.5
@@ -645,9 +645,9 @@ civVehIndustrialData append [
 	,"d3s_ural", 0.5
 	,"d3s_ural_tent", 0.5
 	,"d3s_next", 0.5
-];
+]];
 
-civVehRefuelData append [
+_addon set ["vehiclesCivFuel", [
 	"d3s_SRlonghorn_4520_fuel", 0.2
 	,"d3s_SRmh_9500_fuel", 0.2
 	,"d3s_peterbilt_579_tank", 0.2
@@ -668,6 +668,6 @@ civVehRefuelData append [
 	,"d3s_ural_4320_cisterna", 0.2
 	,"d3s_next_bocha", 0.2
 	,"d3s_next_tent", 0.2
-];
+]];
 
 /*This template will include a section for adding police vehicles to templates once they all are set up for arrayed patrol cars.*/

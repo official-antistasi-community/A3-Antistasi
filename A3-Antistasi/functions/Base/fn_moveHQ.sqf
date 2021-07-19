@@ -20,19 +20,19 @@ Dependencies:
     <NAMESPACE> garrison
     <SIDE> Occupants
     <SIDE> Invaders
-    <ARRAY> soldiersSDK
-    <STRING> staticCrewTeamPlayer
-    <STRING> SDKMortar
     <NAMESPACE> server
+    <Hashmap> A3A_faction_reb
 
 Example:
 [] call A3A_fnc_moveHQ;
 */
-
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 private _possible = [] call A3A_fnc_canMoveHQ;
 if !(_possible#0) exitWith {};
 
 [petros,"remove"] remoteExec ["A3A_fnc_flagaction",0];
+private _groupData = FactionGet(reb,"groups");
 private _groupPetros = group petros;
 [petros] join theBoss;
 deleteGroup _groupPetros;
@@ -68,17 +68,17 @@ if (count _garrison > 0) then
                 if (!alive _x) then
                 {
                     private _unitType = _x getVariable "unitType";
-                    if (_unitType in soldiersSDK) then
+                    if (_unitType in (_groupData get "soldiers")) then
                     {
-                        if (_unitType == staticCrewTeamPlayer) then
+                        if (_unitType == (_groupData get "staticCrew")) then
                         {
-                            _costs = _costs - ([SDKMortar] call A3A_fnc_vehiclePrice)
+                            _costs = _costs - ([FactionGet(reb,"staticMortar")] call A3A_fnc_vehiclePrice)
                         };
                         _hr = _hr - 1;
                         _costs = _costs - (server getVariable (_unitType));
                     };
                 };
-                if (typeOf (vehicle _x) == SDKMortar) then
+                if (typeOf (vehicle _x) == FactionGet(reb,"staticMortar")) then
                 {
                     deleteVehicle vehicle _x
                 };
@@ -87,9 +87,9 @@ if (count _garrison > 0) then
         } forEach allUnits;
     };
     {
-        if (_x == staticCrewTeamPlayer) then
+        if (_x == (_groupData get "staticCrew")) then
         {
-            _costs = _costs + ([SDKMortar] call A3A_fnc_vehiclePrice)
+            _costs = _costs + ([FactionGet(reb,"staticMortar")] call A3A_fnc_vehiclePrice)
         };
         _hr = _hr + 1;
         _costs = _costs + (server getVariable _x);

@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 //////////////////
 // Basic Items ///
 //////////////////
@@ -75,8 +77,9 @@ lootDevice append _lootDeviceBag + allBackpacksRadio;
 //      REBEL STARTING ITEMS     ///
 ////////////////////////////////////
 //KEEP AT BOTTOM!!!
-initialRebelEquipment append lootBasicItem;
-initialRebelEquipment append (A3A_faction_reb getVariable "uniforms");
-initialRebelEquipment append (A3A_faction_civ getVariable "uniforms");
-initialRebelEquipment append allCosmeticHeadgear;
-initialRebelEquipment append allCosmeticGlasses;
+private _initialEquipment = FactionGet(reb,"initialRebelEquipment");
+_initialEquipment append lootBasicItem;
+_initialEquipment append (A3A_faction_reb get "uniforms");
+_initialEquipment append (A3A_faction_civ get "uniforms");
+_initialEquipment append allCosmeticHeadgear;
+_initialEquipment append allCosmeticGlasses;

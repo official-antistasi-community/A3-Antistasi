@@ -1,9 +1,13 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+
 #define ACCESS_CAR      102
 #define ACCESS_ARMOR    200
 #define ACCESS_AIR      201
 #define ACCESS_HELI     202
 
 params ["_side", "_type"];
+private _faction = Faction(_side);
 
 /*  Creates the intel text of enemy vehicles for all sides and classes
 *   Params:
@@ -14,52 +18,18 @@ params ["_side", "_type"];
 *       _text : TEXT : The text for the intel
 */
 
-private _allVehicles = [];
-switch (_type) do
-{
-    case (ACCESS_CAR):
-    {
-        if(_side == Occupants) then
-        {
-            _allVehicles = +vehNATOLight;
-        }
-        else
-        {
-            _allVehicles = +vehCSATLight;
-        };
-    };
-    case (ACCESS_HELI):
-    {
-        if(_side == Occupants) then
-        {
-            _allVehicles = vehNATOTransportHelis + vehNATOAttackHelis;
-        }
-        else
-        {
-            _allVehicles = vehCSATTransportHelis + vehCSATAttackHelis;
-        };
-    };
-    case (ACCESS_ARMOR):
-    {
-        if(_side == Occupants) then
-        {
-            _allVehicles = +vehNATOAttack;
-        }
-        else
-        {
-            _allVehicles = +vehCSATAttack;
-        };
-    };
-    case (ACCESS_AIR):
-    {
-        if(_side == Occupants) then
-        {
-            _allVehicles = [vehNATOPlane, vehNATOPlaneAA] + vehNATOTransportPlanes + ([vehNATOUAV, vehNATOUAVSmall] select {_x isNotEqualTo "not_supported"});
-        }
-        else
-        {
-            _allVehicles = [vehCSATPlane, vehCSATPlaneAA] + vehCSATTransportPlanes + ([vehCSATUAV, vehCSATUAVSmall] select {_x isNotEqualTo "not_supported"});
-        };
+
+private _allVehicles = switch _type do {
+    case ACCESS_CAR: { (_faction get "vehiclesLightArmed") + (_faction get "vehiclesLightArmed") };
+    case ACCESS_HELI: { (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport") + (_faction get "vehiclesHelisAttack") };
+    case ACCESS_ARMOR: { (_faction get "vehiclesAPCs") + (_faction get "vehiclesTanks") };
+    case ACCESS_AIR: {
+        (_faction get "vehiclesPlanesCAS") + (_faction get "vehiclesPlanesAA") + (_faction get "vehiclesPlanesTransport")
+        + (
+            (_faction get "uavsAttack")
+            + (_faction get "uavsPortable")
+            select {_x isNotEqualTo "not_supported"}
+        ) //maybe all should have "not_supported" filtered out (out of scope for this pr)
     };
 };
 private _text = "";

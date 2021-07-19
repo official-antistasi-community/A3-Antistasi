@@ -62,7 +62,7 @@ if ((dateToNumber date > _dateLimitNum) or (isNull _truckX)) then
 else
 	{
 	_countX = 120*_bonus;//120
-	["TaskFailed", ["", format ["%2 deploying supplies in %1",_nameDest,nameTeamPlayer]]] remoteExec ["BIS_fnc_showNotification",Occupants];
+	["TaskFailed", ["", format ["%2 deploying supplies in %1",_nameDest,FactionGet(reb,"name")]]] remoteExec ["BIS_fnc_showNotification",Occupants];
 	{_friendX = _x;
 	if (captive _friendX) then
 		{

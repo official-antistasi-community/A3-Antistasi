@@ -156,7 +156,7 @@ Info("Accepting players");
 if !(loadLastSave) then {
 	{
 		_x call A3A_fnc_unlockEquipment;
-	} foreach initialRebelEquipment;
+	} foreach FactionGet(reb,"initialRebelEquipment");
     Info("Initial arsenal unlocks completed");
 };
 call A3A_fnc_createPetros;

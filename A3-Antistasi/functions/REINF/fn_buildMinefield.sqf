@@ -1,3 +1,7 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+private _groupData = FactionGet(reb,"groups");
+#define GROUP(VAR) (_groupData get VAR)
 if (!isServer and hasInterface) exitWith {};
 
 private ["_typeX","_quantity","_typeAmmunition","_groupX","_unit","_radiusX","_roads","_road","_pos","_truckX","_textX","_mrk","_ATminesAdd","_APminesAdd","_positionTel","_tsk","_magazines","_typeMagazines","_cantMagazines","_newCantMagazines","_mineX","_typeX","_truckX"];
@@ -5,16 +9,16 @@ private ["_typeX","_quantity","_typeAmmunition","_groupX","_unit","_radiusX","_r
 _typeX = _this select 0;
 _positionTel = _this select 1;
 _quantity = _this select 2;
-_costs = (2*(server getVariable (SDKExp select 0))) + ([vehSDKTruck] call A3A_fnc_vehiclePrice);
+_costs = (2*(server getVariable GROUP("Exp"))) + ([FactionGet(reb,"vehicleTruck")] call A3A_fnc_vehiclePrice);
 [-2,(-1*_costs)] remoteExec ["A3A_fnc_resourcesFIA",2];
 
 if (_typeX == "ATMine") then
 	{
-	_typeAmmunition = ATMineMag;
+	_typeAmmunition = FactionGet(reb,"mineAT");
 	};
 if (_typeX == "APERSMine") then
 	{
-	_typeAmmunition = APERSMineMag;
+	_typeAmmunition = FactionGet(reb,"mineAPERS");
 	};
 
 /*
@@ -66,15 +70,15 @@ private _taskId = "Mines" + str A3A_taskCount;
 
 _groupX = createGroup teamPlayer;
 
-_unit = [_groupX, (SDKExp select 0), (getMarkerPos respawnTeamPlayer), [], 0, "NONE"] call A3A_fnc_createUnit;
+_unit = [_groupX, GROUP("Exp"), (getMarkerPos respawnTeamPlayer), [], 0, "NONE"] call A3A_fnc_createUnit;
 sleep 1;
-_unit = [_groupX, (SDKExp select 0), (getMarkerPos respawnTeamPlayer), [], 0, "NONE"] call A3A_fnc_createUnit;
+_unit = [_groupX, GROUP("Exp"), (getMarkerPos respawnTeamPlayer), [], 0, "NONE"] call A3A_fnc_createUnit;
 _groupX setGroupId ["MineF"];
 
 _road = [getMarkerPos respawnTeamPlayer] call A3A_fnc_findNearestGoodRoad;
-_pos = position _road findEmptyPosition [1,30,vehSDKTruck];
+_pos = position _road findEmptyPosition [1,30,FactionGet(reb,"vehicleTruck")];
 
-_truckX = vehSDKTruck createVehicle _pos;
+_truckX = FactionGet(reb,"vehicleTruck") createVehicle _pos;
 
 _groupX addVehicle _truckX;
 {[_x] spawn A3A_fnc_FIAinit; [_x] orderGetIn true} forEach units _groupX;

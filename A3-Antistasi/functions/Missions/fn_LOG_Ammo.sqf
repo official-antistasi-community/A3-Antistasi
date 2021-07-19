@@ -1,5 +1,7 @@
 //Mission: Logistics for ammunition
 if (!isServer and hasInterface) exitWith{};
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 
 private ["_pos","_truckX","_truckCreated","_groupX","_groupX1","_mrk"];
 
@@ -12,6 +14,8 @@ _groupContact = grpNull;
 _tsk = "";
 _positionX = getMarkerPos _markerX;
 _sideX = if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then {Occupants} else {Invaders};
+private _faction = Faction(_sideX);
+private _groupData = FactionGetGroups(_sideX);
 _timeLimit = if (_difficultX) then {30} else {60};
 if (A3A_hasIFA) then {_timeLimit = _timeLimit * 2};
 _dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + _timeLimit];
@@ -20,7 +24,7 @@ _dateLimit = numberToDate [date select 0, _dateLimitNum];//converts datenumber b
 _displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time portion of the date array to a string for clarity in hints
 
 _nameDest = [_markerX] call A3A_fnc_localizar;
-_typeVehX = if (_sideX == Occupants) then {vehNATOAmmoTruck} else {vehCSATAmmoTruck};
+_typeVehX = selectRandom (_faction get "vehiclesAmmoTrucks");
 _size = [_markerX] call A3A_fnc_sizeMarker;
 
 _road = [_positionX] call A3A_fnc_findNearestGoodRoad;
@@ -52,7 +56,7 @@ if ((spawner getVariable _markerX != 2) and !(sidesX getVariable [_markerX,sideU
 	_mrk setMarkerColorLocal "ColorRed";
 	_mrk setMarkerBrushLocal "DiagGrid";
 	if (!debug) then {_mrk setMarkerAlphaLocal 0};
-	_typeGroup = if (_difficultX) then {if (_sideX == Occupants) then {NATOSquad} else {CSATSquad}} else {if (_sideX == Occupants) then {groupsNATOSentry} else {groupsCSATSentry}};
+	_typeGroup = _groups get if (_difficultX) then {"squad"} else {"sentry"};
 	//_cfg = if (_sideX == Occupants) then {cfgNATOInf} else {cfgCSATInf};
 	_groupX = [_pos,_sideX, _typeGroup] call A3A_fnc_spawnGroup;
 	sleep 1;

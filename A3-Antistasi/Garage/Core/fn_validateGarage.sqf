@@ -25,6 +25,7 @@ private _cfg = (configFile >> "CfgVehicles");
     private _cat = _x;
     private _catIndex = _forEachIndex;
     {
+        Debug_2("Value X: %1 - Y: %2", _x, _y);
         private _class = _y#1;
         if !(isClass (_cfg >> _class)) then {_invalidentries pushBack [_catIndex, _x]};
     } forEach _x;

@@ -12,7 +12,8 @@ Scope: Local
 Environment: Scheduled
 Public: Yes
 Dependencies:
-    <OBJECT> A3A_faction_civ
+    <HashMap> A3A_faction_civ
+    <HashMap> A3A_faction_reb
     <ARRAY> reportedVehs
     <ARRAY> controlsX
     <ARRAY> airportsX
@@ -21,8 +22,6 @@ Dependencies:
     <ARRAY> undercoverVehicles
     <BOOL> A3A_hasACE
     <SIDE> Occupants
-    <STRING> civHeli
-    <ARRAY> civBoats
     <SIDE> Invaders
     <ARRAY> detectionAreas
     <NAMESPACE> sidesX
@@ -126,7 +125,7 @@ while {_reason == ""} do
             _reason = "NoFly";
         };
 
-        if ((_vehType != civHeli) && (!(_vehType in civBoats))) then
+        if ((_vehType != FactionGet(reb,"vehicleCivHeli")) && (!(_vehType in FactionGet(reb,"vehicleCivHeli")))) then
         {
             if (!(isOnRoad position _veh) && {count (_veh nearRoads 50) == 0}) then
             {
@@ -184,7 +183,7 @@ while {_reason == ""} do
                 _reason = "BadMedic";
             };
         };
-        if ((primaryWeapon player != "") || (secondaryWeapon player != "") || (handgunWeapon player != "") || (vest player != "") || (getNumber(configfile >> "CfgWeapons" >> headgear player >> "ItemInfo" >> "HitpointsProtectionInfo" >> "Head" >> "armor") > 2) || (hmd player != "") || (!(uniform player in (A3A_faction_civ getVariable "uniforms")))) exitWith
+        if ((primaryWeapon player != "") || (secondaryWeapon player != "") || (handgunWeapon player != "") || (vest player != "") || (getNumber(configfile >> "CfgWeapons" >> headgear player >> "ItemInfo" >> "HitpointsProtectionInfo" >> "Head" >> "armor") > 2) || (hmd player != "") || (!(uniform player in (A3A_faction_civ get "uniforms")))) exitWith
         {
             if ({((side _x == Invaders) or (side _x == Occupants)) and ((_x knowsAbout player > 1.4) or (_x distance player < 350))} count allUnits > 0) then
             {

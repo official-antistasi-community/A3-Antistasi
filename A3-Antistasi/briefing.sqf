@@ -1,6 +1,11 @@
+#include "Includes\common.inc"
+FIX_LINE_NUMBERS()
 waitUntil {!isNull player};
 //format [localize "STR_antistasi_journal_entry_header_tutorial_1"]
 //format [localize "STR_antistasi_journal_entry_text_tutorial_1"]
+private _nameOcc = FactionGet(occ,"name");
+private _nameInv = FactionGet(inv,"name");
+private _namereb = FactionGet(reb,"name");
 if (side player == teamPlayer) then
 {
 _index =player createDiarySubject ["Tutorial","Antistasi Basics"];
@@ -39,7 +44,7 @@ player createDiaryRecord ["SpecialK",[format [localize "STR_antistasi_journal_en
 
 
 _index =player createDiarySubject ["Features","Features Detail"];
-player createDiaryRecord ["Features",[format [localize "STR_antistasi_journal_entry_header_Features_17"],format [localize "STR_antistasi_journal_entry_text_Features_17", breachingExplosivesAPC call A3A_fnc_createBreachChargeText, "<br></br><br></br>", breachingExplosivesTank call A3A_fnc_createBreachChargeText]]];
+player createDiaryRecord ["Features",[format [localize "STR_antistasi_journal_entry_header_Features_17"],format [localize "STR_antistasi_journal_entry_text_Features_17", FactionGet(reb,"breachingExplosivesAPC") call A3A_fnc_createBreachChargeText, "<br></br><br></br>", FactionGet(reb,"breachingExplosivesTank") call A3A_fnc_createBreachChargeText]]];
 player createDiaryRecord ["Features",[format [localize "STR_antistasi_journal_entry_header_Features_16"],format [localize "STR_antistasi_journal_entry_text_Features_16"]]];
 player createDiaryRecord ["Features",[format [localize "STR_antistasi_journal_entry_header_Features_12"],format [localize "STR_antistasi_journal_entry_text_Features_12"]]];
 player createDiaryRecord ["Features",[format [localize "STR_antistasi_journal_entry_header_Features_11"],format [localize "STR_antistasi_journal_entry_text_Features_11"]]];
@@ -81,7 +86,7 @@ player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry
 player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_Diary_4"],format [localize "STR_antistasi_journal_entry_text_Diary_4"]]];
 player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_Diary_3"],format [localize "STR_antistasi_journal_entry_text_Diary_3"]]];
 player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_Diary_2"],format [localize "STR_antistasi_journal_entry_text_Diary_2"]]];
-player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_Diary_1",nameOccupants,nameInvaders],format [localize "STR_antistasi_journal_entry_text_Diary_1",nameOccupants,nameInvaders,nameTeamPlayer,worldName]]];
+player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_Diary_1",_nameOcc,_nameInv],format [localize "STR_antistasi_journal_entry_text_Diary_1",_nameOcc,_nameInv,_nameReb,worldName]]];
 
 //Multiplayer Specific Options, these will only show when the game is loaded via Multiplayer.
 	if (!isNil "serverID") then {
@@ -96,23 +101,23 @@ player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry
 //Mission Specific stuff, fuck this code. This specifies the Rules of Engagement option in the menus.
 switch (gameMode) do {
 	case 1: {
-				player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_gamemode"],format [localize "STR_antistasi_journal_entry_text_gamemode_4",nameOccupants,nameInvaders,nameTeamPlayer]]]
+				player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_gamemode"],format [localize "STR_antistasi_journal_entry_text_gamemode_4",_nameOcc,_nameInv,_nameReb]]]
 			};
 	case 2: {
-				player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_gamemode"],format [localize "STR_antistasi_journal_entry_text_gamemode_3",nameOccupants,nameInvaders,nameTeamPlayer]]]
+				player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_gamemode"],format [localize "STR_antistasi_journal_entry_text_gamemode_3",_nameOcc,_nameInv,_nameReb]]]
 			};
 	case 3: {
-				player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_gamemode"],format [localize "STR_antistasi_journal_entry_text_gamemode_2",nameOccupants,nameTeamPlayer]]]
+				player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_gamemode"],format [localize "STR_antistasi_journal_entry_text_gamemode_2",_nameOcc,_nameReb]]]
 			};
 	case 4: {
-				player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_gamemode"],format [localize "STR_antistasi_journal_entry_text_gamemode_1",nameInvaders,nameTeamPlayer]]]
+				player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_gamemode"],format [localize "STR_antistasi_journal_entry_text_gamemode_1",_nameInv,_nameReb]]]
 			};
-	Default {player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_gamemode"],format [localize "STR_antistasi_journal_entry_text_gamemode_4",nameOccupants,nameInvaders,nameTeamPlayer]]]};
+	Default {player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_gamemode"],format [localize "STR_antistasi_journal_entry_text_gamemode_4",_nameOcc,_nameInv,_nameReb]]]};
 	};
 
 
 // Default Welcome stuff.
-player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_Default_3"],format [localize "STR_antistasi_journal_entry_text_Default_3",nameInvaders]]];
+player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_Default_3"],format [localize "STR_antistasi_journal_entry_text_Default_3",_nameInv]]];
 player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_Default_2"],format [localize "STR_antistasi_journal_entry_text_Default_2"]]];
 
 _nameXMiss = if (A3A_hasIFA) then {"Armia Krajowa"} else {if (worldName == "Tanoa") then {"Warlords of the Pacific"} else {"Antistasi"}};

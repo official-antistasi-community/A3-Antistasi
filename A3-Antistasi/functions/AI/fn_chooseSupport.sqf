@@ -15,6 +15,7 @@ params ["_group", "_enemy"];
 */
 #include "..\..\Includes\common.inc"
 FIX_LINE_NUMBERS()
+private _faction = Faction(side _group);
 private _supportTypes = [];
 
 //If enemy is more than 600 meters away we always force the support
@@ -157,7 +158,7 @@ switch (true) do
     case (_enemyVehicle isKindOf "Helicopter"):
     {
         private _vehicleType = typeOf _enemyVehicle;
-        if(_vehicleType in vehNATOAttackHelis || _vehicleType in vehCSATAttackHelis) then
+        if(_vehicleType in (_faction get "vehiclesHelisAttack")) then
         {
             if
             (

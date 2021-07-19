@@ -87,7 +87,7 @@ if ("police" in (_unit getVariable "unitType")) then
 _unit setSkill _skill;
 
 //Adjusts squadleaders with improved skill and adds intel action
-if (_type in squadLeaders) then
+if (_type in FactionGet(all,"SquadLeaders")) then
 {
     _unit setskill ["courage",_skill + 0.2];
     _unit setskill ["commanding",_skill + 0.2];

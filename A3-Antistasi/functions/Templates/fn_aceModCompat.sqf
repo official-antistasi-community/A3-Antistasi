@@ -60,16 +60,16 @@ publicVariable "advItems";
 ////////////////////////////////////
 //   ACE ITEMS MODIFICATIONS     ///
 ////////////////////////////////////
-initialRebelEquipment append aceItems;
+FactionGet(reb,"initialRebelEquipment") append aceItems;
 
 
 //ACE medical starting items
 if (A3A_hasACEMedical) then {
-	initialRebelEquipment append aceMedItems;
+	FactionGet(reb,"initialRebelEquipment") append aceMedItems;
 };
 
 if (A3A_hasADV) then {
-	initialRebelEquipment append advItems;
+	FactionGet(reb,"initialRebelEquipment") append advItems;
 };
 if !(A3A_hasVN) then {
 	lootItem append ["ACE_acc_pointer_green_IR","ACE_Chemlight_Shield","ACE_VMH3","ACE_VMM3"];

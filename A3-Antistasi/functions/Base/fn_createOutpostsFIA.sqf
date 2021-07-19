@@ -1,3 +1,6 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+private _groupData = FactionGet(reb,"groups");
 if (!isServer) exitWith {};
 
 private ["_typeX","_costs","_groupX","_unit","_radiusX","_roads","_road","_pos","_truckX","_textX","_mrk","_hr","_unitsX","_formatX"];
@@ -9,15 +12,15 @@ if (_typeX == "delete") exitWith {["Create Outpost", "Deprecated option. Use Rem
 
 _isRoad = isOnRoad _positionTel;
 
-_textX = format ["%1 Observation Post",nameTeamPlayer];
-_typeGroup = groupsSDKSniper;
-_typeVehX = vehSDKBike;
+_textX = format ["%1 Observation Post",FactionGet(reb,"name")];
+_typeGroup = _groupData get "groupsSnipers";
+_typeVehX = FactionGet(reb,"vehicleBasic");
 private _tsk = "";
 if (_isRoad) then
 	{
-	_textX = format ["%1 Roadblock",nameTeamPlayer];
-	_typeGroup = groupsSDKAT;
-	_typeVehX = vehSDKTruck;
+	_textX = format ["%1 Roadblock",FactionGet(reb,"name")];
+	_typeGroup = _groupData get "AT";
+	_typeVehX = FactionGet(reb,"vehicleTruck");
 	};
 
 _mrk = createMarker [format ["FIAPost%1", random 1000], _positionTel];
@@ -29,11 +32,7 @@ private _taskId = "outpostsFIA" + str A3A_taskCount;
 [[teamPlayer,civilian],_taskId,["We are sending a team to establish a Watchpost/Roadblock. Use HC to send the team to their destination","Post \ Roadblock Deploy",_mrk],_positionTel,false,0,true,"Move",true] call BIS_fnc_taskCreate;
 [_taskId, "outpostsFIA", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
-_formatX = [];
-{
-if (random 20 <= skillFIA) then {_formatX pushBack (_x select 1)} else {_formatX pushBack (_x select 0)};
-} forEach _typeGroup;
-_groupX = [getMarkerPos respawnTeamPlayer, teamPlayer, _formatX] call A3A_fnc_spawnGroup;
+_groupX = [getMarkerPos respawnTeamPlayer, teamPlayer, _typeGroup] call A3A_fnc_spawnGroup;
 _groupX setGroupId ["Post"];
 _road = [getMarkerPos respawnTeamPlayer] call A3A_fnc_findNearestGoodRoad;
 _pos = position _road findEmptyPosition [1,30,"B_G_Van_01_transport_F"];
@@ -71,10 +70,7 @@ if ({(alive _x) and (_x distance _positionTel < 10)} count units _groupX > 0) th
 	_mrk setMarkerText _textX;
 	if (_isRoad) then
 		{
-		_garrison = [staticCrewTeamPlayer];
-		{
-		if (random 20 <= skillFIA) then {_garrison pushBack (_x select 1)} else {_garrison pushBack (_x select 0)};
-		} forEach groupsSDKAT;
+		_garrison = [FactionGet(reb,"staticCrew")] + FactionGet(reb,"At") apply {_x#0};// same unit why it did a random with skill idk
 		garrison setVariable [_mrk,_garrison,true];
 		};
 	}

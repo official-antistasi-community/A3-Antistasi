@@ -1,12 +1,14 @@
 params ["_side"];
-
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+private _faction = Faction(_side);
 if(tierWar < 3) exitWith {-1};
 
 private _lastSupport = server getVariable ["lastSupport", ["", 0]];
 if((_lastSupport select 0) == "AIRSTRIKE" && {(_lastSupport select 1) > time}) exitWith {-1};
 
 //Vehicles not available, block support
-private _planeType = if (_side isEqualTo Occupants) then {vehNATOPlane} else {vehCSATPlane};
+private _planeType = selectRandom (_faction get "vehiclesPlanesCAS");
 if !(_planeType isKindOf "Air") exitWith {-1}; //allow helicopters to also drop bombs as airstrikes
 
 //Select a timer index and the max number of timers available

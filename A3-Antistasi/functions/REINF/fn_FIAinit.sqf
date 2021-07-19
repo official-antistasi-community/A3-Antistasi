@@ -1,3 +1,7 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+private _groupData = FactionGet(reb,"groups");
+#define GROUP(VAR) (_groupData get VAR)
 private ["_victim","_killer"];
 
 private _unit = _this select 0;
@@ -10,11 +14,11 @@ private _typeX = _unit getVariable "unitType";
 private _skill = (0.6 / skillMult + 0.015 * skillFIA);
 _unit setSkill _skill;
 
-if (_typeX in squadLeaders) then {
+if (_typeX isEqualTo GROUP("SL")) then {
 	_unit setskill ["courage",_skill + 0.2];
 	_unit setskill ["commanding",_skill + 0.2];
 };
-if (_typeX in SDKSniper) then {
+if (_typeX isEqualTo GROUP("Sniper")) then {
 	_unit setskill ["aimingAccuracy",_skill + 0.2];
 	_unit setskill ["aimingShake",_skill + 0.2];
 };
@@ -23,7 +27,7 @@ _unit setUnitTrait ["camouflageCoef",0.8];
 _unit setUnitTrait ["audibleCoef",0.8];
 
 // FIAinit is called for liberated refugees/hostages. Don't equip them.
-if !(_typeX isEqualTo SDKUnarmed) then {
+if !(_typeX isEqualTo GROUP("Unarmed")) then {
 	[_unit, [0,1] select (leader _unit != player)] call A3A_fnc_equipRebel;
 };
 _unit selectWeapon (primaryWeapon _unit);
@@ -53,7 +57,7 @@ if (player == leader _unit) then {
 		};
 		_victim setVariable ["spawner",nil,true];
 	}];
-	if (((_unit getVariable "unitType") != SDKUnarmed) and !A3A_hasIFA) then {
+	if (((_unit getVariable "unitType") != GROUP("Unarmed")) and !A3A_hasIFA) then {
 		private _idUnit = selectRandom arrayids;
 		arrayids = arrayids - [_idunit];
 		_unit setIdentity _idUnit;

@@ -1,4 +1,4 @@
-civVehCommonData append [
+_addon set ["vehiclesCivCar", [
     "TCGM_Bike_oli",0.0     // Folding Bike (Olive)
     ,"TCGM_Bike_snd",0.0    // Folding Bike (Sand)
     ,"TCGM_Bike_nht",0.0    // Folding Bike (Black)
@@ -10,4 +10,4 @@ civVehCommonData append [
     ,"TCGM_Bike_blu",1.0    // Folding Bike (Blue)
     ,"TCGM_Bike_wht",1.0    // Folding Bike (White)
     ,"TCGM_Bike_red",1.0    // Folding Bike (Red)
-];
+]];

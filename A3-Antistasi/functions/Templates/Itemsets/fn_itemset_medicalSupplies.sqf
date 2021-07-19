@@ -44,8 +44,8 @@ if (_level == "MEDIC") exitWith {
 			]
 		};
 		default {
-			private _mediKits = _factionData getVariable "mediKits";
-			private _firstAidKits = _factionData getVariable "firstAidKits";
+			private _mediKits = _factionData get "mediKits";
+			private _firstAidKits = _factionData get "firstAidKits";
 			[
 				[_mediKits#0, 1],
 				[_firstAidKits#0,10]
@@ -70,7 +70,7 @@ if (_level == "MEDIC") exitWith {
 			]
 		};
 		default {
-			private _firstAidKits = _factionData getVariable "firstAidKits";
+			private _firstAidKits = _factionData get "firstAidKits";
 			[
 				[_firstAidKits#0,3]
 			]
@@ -87,7 +87,7 @@ switch (true) do {
 		]
 	};
 	default {
-		private _firstAidKits = _factionData getVariable "firstAidKits";
+		private _firstAidKits = _factionData get "firstAidKits";
 		[
 			[_firstAidKits#0,3]
 		]

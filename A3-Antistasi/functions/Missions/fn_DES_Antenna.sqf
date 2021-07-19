@@ -1,6 +1,7 @@
 //Mission: Destroy the antenna
 if (!isServer and hasInterface) exitWith{};
-
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 private ["_antenna","_positionX","_timeLimit","_markerX","_nameDest","_mrkFinal","_tsk"];
 
 _antenna = _this select 0;
@@ -27,7 +28,7 @@ _mrkFinal = createMarker [format ["DES%1", random 100], _positionX];
 _mrkFinal setMarkerShape "ICON";
 
 private _taskId = "DES" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[format ["We need to destroy or take a Radio Tower in %1. This will interrupt %3 Propaganda Nework. Do it before %2.",_nameDest,_displayTime,nameOccupants],"Destroy Radio Tower",_mrkFinal],_positionX,false,0,true,"Destroy",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[format ["We need to destroy or take a Radio Tower in %1. This will interrupt %3 Propaganda Nework. Do it before %2.",_nameDest,_displayTime,FactionGet(occ,"name")],"Destroy Radio Tower",_mrkFinal],_positionX,false,0,true,"Destroy",true] call BIS_fnc_taskCreate;
 [_taskId, "DES", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 waitUntil {sleep 1;(dateToNumber date > _dateLimitNum) or (not alive _antenna) or (not(sidesX getVariable [_markerX,sideUnknown] == Occupants))};
 

@@ -1,3 +1,7 @@
+#include "..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+private _groupData = FactionGet(reb,"groups");
+#define GROUP(VAR) (_groupData get VAR)
 //if (!isServer) exitWith{};
 
 if (player != leader group player) exitWith {["Dismiss Group", "You cannot dismiss anyone if you are not the squad leader"] call A3A_fnc_customHint;};
@@ -15,7 +19,7 @@ _newGroup = createGroup teamPlayer;
 //if ({isPlayer _x} count units group player == 1) then {_ai = true; _newGroup = createGroup teamPlayer};
 
 {
-if ((_x getVariable "unitType") != SDKUnarmed) then
+if ((_x getVariable "unitType") != GROUP("Unarmed")) then
 	{
 	[_x] join _newGroup;
 	if !(A3A_hasIFA) then {arrayids = arrayids + [name _x]};

@@ -17,15 +17,16 @@ params ["_side", "_timerIndex", "_supportPos", "_supportName"];
 */
 #include "..\..\Includes\common.inc"
 FIX_LINE_NUMBERS()
-private _mortarType = if(_side == Occupants) then {NATOMortar} else {CSATMortar};
-private _shellType = if(_side == Occupants) then {NATOmortarMagazineHE} else {CSATmortarMagazineHE};
+private _faction = Faction(_side);
+private _mortarType = selectRandom (_faction get "staticMortars");
+private _shellType = _faction get "mortarMagazineHE";
 private _isMortar = true;
 
 //If war level between 6 and 8 there is a chance (25%/50%/75%) that it switches to a howitzer instead, above it howitzer is guaranteed
 if((25 * (tierWar - 5)) > random 100) then
 {
-    _mortarType = if(_side == Occupants) then {vehNATOMRLS} else {vehCSATMRLS};
-    _shellType = if(_side == Occupants) then {vehNATOMRLSMags} else {vehCSATMRLSMags};
+    _mortarType = selectRandom (_faction get "vehiclesArtillery");
+    _shellType = ((_faction get "magazines") get _mortarType) #0;
     _isMortar = false;
 };
 

@@ -102,7 +102,7 @@ private _nonReinfUnits = [["", [], []]];
   {
     {
       private _cargoUnit = _x;
-      if(_cargoUnit == NATOCrew || _cargoUnit == CSATCrew) then
+      if(_cargoUnit == FactionGet(occ,"crew") || _cargoUnit == FactionGet(inv,"crew")) then
       {
         //Unit is crew member, check crew section
         private _index = _requested findIf {count (_x select 1) > 0};

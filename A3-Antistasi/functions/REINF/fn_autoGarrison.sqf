@@ -1,3 +1,7 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+private _groupData = FactionGet(reb,"groups");
+#define GROUP(VAR) (_groupData get VAR)
 if (!isServer and hasInterface) exitWith {};
 
 private ["_markerX","_destinationX","_originX","_groups","_soldiers","_vehiclesX","_size","_groupX","_truckX","_radiusX","_roads","_road","_pos"];
@@ -22,16 +26,11 @@ _size = round (_size / _divisor);
 
 if (_size == 0) then {_size = 1};
 
-_typesGroup = [groupsSDKmid,groupsSDKAT,groupsSDKSquad,groupsSDKSniper];
+_typesGroup = [GROUP("medium"),GROUP("AT"),GROUP("squad"),GROUP("Sniper")];
 
 while {(_size > 0)} do
 	{
-	_typeGroup = selectRandom _typesGroup;
-	_formatX = [];
-	{
-	if (random 20 <= skillFIA) then {_formatX pushBack (_x select 1)} else {_formatX pushBack (_x select 0)};
-	} forEach _typeGroup;
-	_groupX = [_originX, teamPlayer, _formatX,false,true] call A3A_fnc_spawnGroup;
+	_groupX = [_originX, teamPlayer, selectRandom _typesGroup,false,true] call A3A_fnc_spawnGroup;
 	if !(isNull _groupX) then
 		{
 		_groups pushBack _groupX;

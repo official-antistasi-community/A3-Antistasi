@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 private _unit = _this select 0;
 if (isPlayer _unit) exitWith {};
 if !([_unit] call A3A_fnc_canFight) exitWith {};
@@ -34,7 +36,7 @@ _nearbyContainers = nearestObjects [_unit, ["ReammoBox_F","LandVehicle","WeaponH
 if (boxX in _nearbyContainers) then {_nearbyContainers = _nearbyContainers - [boxX]};
 
 
-if ((_primaryWeapon in initialRebelEquipment) || (_primaryWeapon isEqualTo "")) then {
+if ((_primaryWeapon in FactionGet(reb,"initialRebelEquipment")) || (_primaryWeapon isEqualTo "")) then {
 	_needsRearm = true;
 	if (count _nearbyContainers > 0) then {
 		{

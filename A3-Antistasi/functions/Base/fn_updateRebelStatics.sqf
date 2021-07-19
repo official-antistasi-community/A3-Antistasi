@@ -8,7 +8,10 @@
 
     Scope: Wherever you want to put garrison groups, probably server or HC
 */
-
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+private _groupData = FactionGet(reb,"groups");
+#define GROUP(VAR) (_groupData get VAR)
 params ["_target"];
 
 // If position or object target, identify rebel marker
@@ -42,7 +45,7 @@ if (count _freeStatics == 0) exitWith {};
 private _possibleCrew = allUnits inAreaArray _marker;
 _possibleCrew = _possibleCrew select {
     _x getVariable ["markerX", ""] isEqualTo _marker
-    and _x getVariable ["UnitType", ""] in SDKMil
+    and _x getVariable ["UnitType", ""] isEqualTo GROUP("Mil")
     and isNull objectParent _x
     and [_x] call A3A_fnc_canFight
 };

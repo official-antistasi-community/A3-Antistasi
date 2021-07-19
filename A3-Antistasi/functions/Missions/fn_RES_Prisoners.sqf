@@ -1,3 +1,7 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+private _groupData = FactionGet(reb,"groups");
+#define GROUP(VAR) (_groupData get VAR)
 //Mission: Rescue the prisoners
 if (!isServer and hasInterface) exitWith{};
 
@@ -62,7 +66,7 @@ else
 _grpPOW = createGroup teamPlayer;
 for "_i" from 0 to _countX do
 	{
-	_unit = [_grpPOW, SDKUnarmed, (_posHouse select _i), [], 0, "NONE"] call A3A_fnc_createUnit;
+	_unit = [_grpPOW, GROUP("Unarmed"), (_posHouse select _i), [], 0, "NONE"] call A3A_fnc_createUnit;
 	_unit allowDamage false;
 	_unit setCaptive true;
 	_unit disableAI "MOVE";

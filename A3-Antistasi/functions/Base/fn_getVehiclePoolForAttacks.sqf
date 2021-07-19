@@ -15,265 +15,90 @@
 params ["_side", ["_filter", []]];
 #include "..\..\Includes\common.inc"
 FIX_LINE_NUMBERS()
+private _faction = Faction(_side);
+private _isOcc = _side isEqualTo Occupants;
 private _vehicleSelection = [];
 
 Debug_2("Now searching for attack vehicle pool for %1 with filter %2", _side, _filter);
 //In general is Invaders always a bit less chill than the occupants, they will use heavier vehicles more often and earlier
-switch (tierWar) do
-{
-    case (1):
-    {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOLightArmed, 15],
-                [vehNATOTrucks, 10],
-                [vehNATOPatrolHeli, 25],
-                [vehNATOAPC, 35],
-                [vehNATOTransportHelis, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATTrucks, 5],
-                [vehCSATLightArmed, 15],
-                [vehCSATPatrolHeli, 25],
-                [vehCSATAPC, 30],
-                [vehCSATTransportHelis, 25]
-            ];
-        };
+private_vehicleSelection = switch (tierWar) do {
+    case (1): {
+        [
+            [_faction get "vehiclesLightArmed", if (_isOcc) then {15} else {5}],
+            [_faction get "vehiclesTrucks", if (_isOcc) then {10} else {15}],
+            [_faction get "vehiclesHelisLight", if (_isOcc) then {25} else {25}],
+            [_faction get "vehiclesAPCs", if (_isOcc) then {35} else {30}],
+            [(_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport"), if (_isOcc) then {15} else {25}]
+        ]
     };
-    case (2):
-    {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOLightArmed, 15],
-                [vehNATOPatrolHeli, 25],
-                [vehNATOAPC, 40],
-                [vehNATOTransportHelis, 20]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATPatrolHeli, 15],
-                [vehCSATAPC, 40],
-                [vehCSATTransportHelis, 35],
-                [vehCSATAA, 10]
-            ];
-        };
+    case (2): {
+        [
+            [_faction get (if (_isOcc) then {"vehiclesLightArmed"} else {"vehiclesAA"}), if (_isOcc) then {15} else {10}],
+            [_faction get "vehiclesHelisLight", if (_isOcc) then {25} else {15}],
+            [_faction get "vehiclesAPCs", 40],
+            [(_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport"), if (_isOcc) then {20} else {35}]
+        ]
     };
     case (3):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOPatrolHeli, 15],
-                [vehNATOAPC, 35],
-                [vehNATOTransportHelis, 40],
-                [vehNATOAA, 10]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATPatrolHeli, 5],
-                [vehCSATAPC, 35],
-                [vehCSATTransportHelis, 30],
-                [vehCSATAA, 15],
-                [vehCSATAttackHelis, 15]
-            ];
-        };
+        [
+            [_faction get "vehiclesHelisLight", if (_isOcc) then {15} else {5}],
+            [_faction get "vehiclesAPCs", 35],
+            [(_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport"), if (_isOcc) then {40} else {30}],
+            [_faction get "vehiclesAA", if (_isOcc) then {10} else {15}]
+        ] + (if (_isOcc) then { [] } else {[
+            [_faction get "vehiclesHelisAttack", 15]
+        ]});
     };
     case (4):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 30],
-                [vehNATOTransportHelis, 40],
-                [vehNATOAA, 15],
-                [vehNATOAttackHelis, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 15],
-                [vehCSATTransportHelis, 15],
-                [vehCSATAA, 15],
-                [vehCSATAttackHelis, 20],
-                [vehCSATTank, 15],
-                [vehCSATTransportPlanes, 20]
-            ];
-        };
+        [
+            [_faction get "vehiclesAPCs", if (_isOcc) then {30} else {15}],
+            [(_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport"), if (_isOcc) then {40} else {15}],
+            [_faction get "vehiclesAA", 15],
+            [_faction get "vehiclesHelisAttack", if (_isOcc) then {15} else {20}]
+        ] + (if (_isOcc) then { [] } else {[
+            [_faction get "vehiclesTanks", 15],
+            [_faction get "vehiclesPlanesTransport", 20]
+        ]});
     };
     case (5):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 20],
-                [vehNATOTransportHelis, 20],
-                [vehNATOAA, 15],
-                [vehNATOAttackHelis, 30],
-                [vehNATOTank, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 15],
-                [vehCSATTransportHelis, 10],
-                [vehCSATAA, 15],
-                [vehCSATAttackHelis, 15],
-                [vehCSATTank, 20],
-                [vehCSATTransportPlanes, 15]
-            ];
-        };
+        [
+            [_faction get "vehiclesAPCs", if (_isOcc) then {20} else {15}],
+            [(_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport"), if (_isOcc) then {20} else {10}],
+            [_faction get "vehiclesAA", 15],
+            [_faction get "vehiclesHelisAttack", if (_isOcc) then {30} else {15}],
+            [_faction get "vehiclesTanks", if (_isOcc) then {15} else {20}]
+        ] + (if (_isOcc) then { [] } else {[
+            [_faction get "vehiclesPlanesTransport", 15]
+        ]});
     };
     case (6):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 15],
-                [vehNATOTransportHelis, 10],
-                [vehNATOAA, 10],
-                [vehNATOAttackHelis, 20],
-                [vehNATOTank, 15],
-                [vehNATOTransportPlanes, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 10],
-                [vehCSATTransportHelis, 5],
-                [vehCSATAA, 10],
-                [vehCSATAttackHelis, 20],
-                [vehCSATTank, 20],
-                [vehCSATTransportPlanes, 15]
-            ];
-        };
+        [
+            [_faction get "vehiclesAPCs", if (_isOcc) then {15} else {10}],
+            [(_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport"), if (_isOcc) then {10} else {5}],
+            [_faction get "vehiclesAA", 10],
+            [_faction get "vehiclesHelisAttack", 20],
+            [_faction get "vehiclesTanks", if (_isOcc) then {15} else {20}],
+            [_faction get "vehiclesPlanesTransport", 15]
+        ];
     };
-    case (7):
-    {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 10],
-                [vehNATOTransportHelis, 10],
-                [vehNATOAA, 5],
-                [vehNATOAttackHelis, 20],
-                [vehNATOTank, 20],
-                [vehNATOTransportPlanes, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 10],
-                [vehCSATAA, 10],
-                [vehCSATAttackHelis, 25],
-                [vehCSATTank, 25],
-                [vehCSATTransportPlanes, 15]
-            ];
-        };
-    };
-    case (8):
-    {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 10],
-                [vehNATOTransportHelis, 10],
-                [vehNATOAA, 5],
-                [vehNATOAttackHelis, 20],
-                [vehNATOTank, 20],
-                [vehNATOTransportPlanes, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 10],
-                [vehCSATAA, 10],
-                [vehCSATAttackHelis, 25],
-                [vehCSATTank, 25],
-                [vehCSATTransportPlanes, 15]
-            ];
-        };
-    };
-    case (9):
-    {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 10],
-                [vehNATOTransportHelis, 10],
-                [vehNATOAA, 5],
-                [vehNATOAttackHelis, 20],
-                [vehNATOTank, 20],
-                [vehNATOTransportPlanes, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 10],
-                [vehCSATAA, 10],
-                [vehCSATAttackHelis, 25],
-                [vehCSATTank, 25],
-                [vehCSATTransportPlanes, 15]
-            ];
-        };
-    };
+    case (7);
+    case (8);
+    case (9);
     case (10):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOAPC, 10],
-                [vehNATOTransportHelis, 10],
-                [vehNATOAA, 5],
-                [vehNATOAttackHelis, 20],
-                [vehNATOTank, 20],
-                [vehNATOTransportPlanes, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATAPC, 10],
-                [vehCSATAA, 10],
-                [vehCSATAttackHelis, 25],
-                [vehCSATTank, 25],
-                [vehCSATTransportPlanes, 15]
-            ];
-        };
+        [
+            [_faction get "vehiclesAPCs", 10],
+            [_faction get "vehiclesAA", if (_isOcc) then {5} else {10}],
+            [_faction get "vehiclesHelisAttack", if (_isOcc) then {20} else {25}],
+            [_faction get "vehiclesTanks", if (_isOcc) then {20} else {25}],
+            [_faction get "vehiclesPlanesTransport", 15]
+        ] + (if (_isOcc) then { [
+            [(_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport"), 10]
+        ] } else { [] });
     };
 };
 

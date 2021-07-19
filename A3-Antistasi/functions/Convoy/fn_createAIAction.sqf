@@ -12,6 +12,8 @@ params ["_destination", "_type", "_side", ["_arguments", []]];
 *   Returns:
 *     Nothing
 */
+private _faction = Faction(_side);
+private _groupData = FactionGetGroups(_side);
 
 if(!serverInitDone) then
 {
@@ -157,17 +159,17 @@ if(_type == "patrol") then
         case (tierWar < 3):
         {
           _count = 1;
-          _vehPool = if(_side == Occupants) then {vehNATOLight} else {vehCSATLightArmed};
+          _vehPool = (_faction get "vehiclesLightArmed") + (_faction get "vehiclesLightUnarmed");
         };
         case (tierWar < 6 && {tierWar > 2}):
         {
           _count = 2 + (round (random 1));
-          _vehPool = if(_side == Occupants) then {vehNATOLightArmed + vehNATOAPC} else {vehCSATLightArmed + vehCSATAPC};
+          _vehPool = (_faction get "vehiclesLightArmed") + (_faction get "vehiclesAPCs");
         };
         case (tierWar > 5):
         {
           _count = 3 + (round (random 2));
-          _vehPool = if(_side == Occupants) then {vehNATOAttack} else {vehCSATAttack};
+          _vehPool = (_faction get "vehiclesAPCs") + (_faction get "vehiclesTanks");
         };
       };
 
@@ -189,15 +191,15 @@ if(_type == "patrol") then
       {
         case (tierWar < 3):
         {
-          _vehPool = if(_side == Occupants) then {vehNATOPatrolHeli} else {vehCSATPatrolHeli};
+          _vehPool = _faction get "vehiclesHelisLight";
         };
         case (tierWar > 2 && tierWar < 7):
         {
-          _vehPool = if(_side == Occupants) then {vehNATOTransportHelis} else {vehCSATTransportHelis};
+          _vehPool = (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport");
         };
         case (tierWar > 6):
         {
-          _vehPool = if(_side == Occupants) then {vehNATOAttackHelis} else {vehCSATAttackHelis};
+          _vehPool = _faction get "vehiclesHelisAttack";
         };
       };
       for "_i" from 1 to _count do
@@ -284,8 +286,8 @@ if(_type == "airstrike") then
     //NATO accepts 2 casulties, CSAT does not really care
     if((_side == Occupants && {count _friendlies < 3}) || {_side == Invaders && {count _friendlies < 8}}) then
     {
-      _plane = if (_side == Occupants) then {vehNATOPlane} else {vehCSATPlane};
-      _crewUnits = if(_side == Occupants) then {NATOCrew} else {CSATCrew};
+      _plane = selectRandom (_faction get "vehiclesPlanesCAS");
+      _crewUnits = _groupData get "crew";
     	if ([_plane] call A3A_fnc_vehAvailable) then
     	{
         _bombType = "";
@@ -438,42 +440,42 @@ if(_type == "convoy") then
       		_text = format ["A convoy from %1 is about to depart at %2. It will provide ammunition to %3. Try to intercept it. Steal or destroy that truck before it reaches it's destination.",_nameOrigin,_displayTime,_nameDest];
       		_taskTitle = "Ammo Convoy";
       		_taskIcon = "rearm";
-      		_typeVehObj = if (_side == Occupants) then {vehNATOAmmoTruck} else {vehCSATAmmoTruck};
+      		_typeVehObj = selectRandom (_faction get "vehiclesAmmoTrucks");
       	};
       	case "Armor":
       	{
       		_text = format ["A convoy from %1 is about to depart at %2. It will reinforce %3 with armored vehicles. Try to intercept it. Steal or destroy that thing before it reaches it's destination.",_nameOrigin,_displayTime,_nameDest];
       		_taskTitle = "Armored Convoy";
       		_taskIcon = "Destroy";
-      		_typeVehObj = if (_side == Occupants) then {vehNATOAA} else {vehCSATAA};
+      		_typeVehObj = selectRandom (_faction get "vehiclesAA");
       	};
       	case "Prisoners":
       	{
       		_text = format ["A group os POW's is being transported from %1 to %3, and it's about to depart at %2. Try to intercept it. Kill or capture the truck driver to make them join you and bring them to HQ. Alive if possible.",_nameOrigin,_displayTime,_nameDest];
       		_taskTitle = "Prisoner Convoy";
       		_taskIcon = "run";
-      		_typeVehObj = if (_side == Occupants) then {selectRandom vehNATOTrucks} else {selectRandom vehCSATTrucks};
+      		_typeVehObj = selectRandom (_faction get "vehiclesTrucks");
       	};
       	case "Reinforcements":
       	{
       		_text = format ["Reinforcements are being sent from %1 to %3 in a convoy, and it's about to depart at %2. Try to intercept and kill all the troops and vehicle objective.",_nameOrigin,_displayTime,_nameDest];
       		_taskTitle = "Reinforcements Convoy";
       		_taskIcon = "run";
-      		_typeVehObj = if (_side == Occupants) then {selectRandom vehNATOTrucks} else {selectRandom vehCSATTrucks};
+      		_typeVehObj = selectRandom (_faction get "vehiclesTrucks");
       	};
       	case "Money":
       	{
       		_text = format ["A truck plenty of money is being moved from %1 to %3, and it's about to depart at %2. Steal that truck and bring it to HQ. Those funds will be very welcome.",_nameOrigin,_displayTime,_nameDest];
       		_taskTitle = "Money Convoy";
       		_taskIcon = "move";
-      		_typeVehObj = "C_Van_01_box_F";
+      		_typeVehObj = "C_Van_01_box_F"; //ToDo: replace with templated vehicles, no hard coded classes
       	};
       	case "Supplies":
       	{
-      		_text = format ["A truck with medical supplies destination %3 it's about to depart at %2 from %1. Steal that truck bring it to %3 and let people in there know it is %4 who's giving those supplies.",_nameOrigin,_displayTime,_nameDest,nameTeamPlayer];
+      		_text = format ["A truck with medical supplies destination %3 it's about to depart at %2 from %1. Steal that truck bring it to %3 and let people in there know it is %4 who's giving those supplies.",_nameOrigin,_displayTime,_nameDest,FactionGet(reb,"name")];
       		_taskTitle = "Supply Convoy";
       		_taskIcon = "heal";
-      		_typeVehObj = "C_Van_01_box_F";
+      		_typeVehObj = "C_Van_01_box_F"; //ToDo: replace with templated vehicles, no hard coded classes
       	};
         default
         {
@@ -489,10 +491,10 @@ if(_type == "convoy") then
 //      missionsX pushBack ["CONVOY","CREATED"]; publicVariable "missionsX";
 
         sleep (_timeLimit * 60);
-        _crewUnits = if(_side == Occupants) then {NATOCrew} else {CSATCrew};
+        _crewUnits = _groupData get "crew";
 
         //Creating convoy lead vehicle
-        _typeVehLead = if (_side == Occupants) then {if (!_isEasy) then {selectRandom vehNATOLightArmed} else {vehPoliceCar}} else {selectRandom vehCSATLightArmed};
+        _typeVehLead = if (_side == Occupants && _isEasy) then {_faction get "vehiclesPolice"} else {selectRandom (_faction get "vehiclesLightArmed")};
         _crew = [_typeVehLead, _crewUnits] call A3A_fnc_getVehicleCrew;
         _units pushBack [_typeVehLead, _crew, []];
         _vehicleCount = _vehicleCount + 1;
@@ -513,41 +515,24 @@ if(_type == "convoy") then
           };
         };
 
-        _vehPool = if (_side == Occupants) then
+        _vehPool = if (_side == Occupants && !_isEasy) then
         {
-          if (!_isEasy) then
-          {
-            vehNATOAttack
-          }
-          else
-          {
-            [vehFIAArmedCar,vehFIATruck,vehFIACar]
-          };
+            (_faction get "vehiclesMilitiaLightArmed")
+            + (_faction get "vehiclesMilitiaTrucks")
+            + (_faction get "vehiclesMilitiaCars")
         }
         else
         {
-          vehCSATAttack;
+          (_faction get "vehiclesAPCs") + (_faction get "vehiclesTanks")
         };
 
         //Delete MBT from array if aggro is not high enough
         if (!_isEasy) then
         {
-        	_rnd = random 100;
-        	if (_side == Occupants) then
-        	{
-        		if (_rnd > aggressionOccupants) then
-        		{
-        			_vehPool = _vehPool - [vehNATOTank];
-        		};
-        	}
-        	else
-        	{
-        		if (_rnd > aggressionInvaders) then
-        		{
-        			_vehPool = _vehPool - [vehCSATTank];
-        		};
-        	};
-        	if (count _vehPool == 0) then {if (_side == Occupants) then {_vehPool = vehNATOTrucks} else {_vehPool = vehCSATTrucks}};
+            if (random 100 > ([aggressionOccupants, aggressionInvaders] select (_side isEqualTo Invaders)) ) then {
+                _vehPool = _vehPool - (_faction get "vehiclesTanks");
+            };
+        	if (count _vehPool == 0) then {_vehPool = _faction get "vehiclesTrucks"};
         };
         //Vehicle pool prepared
 
@@ -572,7 +557,7 @@ if(_type == "convoy") then
         {
           for "_i" from 1 to (1 + round (random 11)) do
           {
-            _typeGroup pushBack SDKUnarmed;
+            _typeGroup pushBack FactionGet(reb,"Unarmed");
           };
         };
         _crew = [_typeVehObj, _crewUnits] call A3A_fnc_getVehicleCrew;

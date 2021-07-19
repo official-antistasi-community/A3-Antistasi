@@ -16,12 +16,13 @@ Dependencies:
     <ARRAY> allMachineGuns
     <BOOL> haveNV
     <BOOL> hasIFA
-    <ARRAY> squadLeaders
+    <HashMap> A3A_faction_all
 
 Example:
 [_group, _killer] spawn A3A_fnc_AIreactOnKill;
 */
-
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 params ["_group", "_killer"];
 
 private _enemy = objNull;
@@ -105,7 +106,7 @@ if(_group getVariable ["canCallSupportAt", -1] < dateToNumber date) then
 					{
                         if (sunOrMoon < 1) then
 						{
-                            if ((A3A_hasIFA and ((_x getVariable "unitType") in squadLeaders)) || (count (getArray (configfile >> "CfgWeapons" >> primaryWeapon _x >> "muzzles")) == 2)) then
+                            if ((A3A_hasIFA and ((_x getVariable "unitType") in FactionGet(all,"SquadLeaders"))) || (count (getArray (configfile >> "CfgWeapons" >> primaryWeapon _x >> "muzzles")) == 2)) then
 							{
                                 [_x,_enemy] spawn A3A_fnc_useFlares;
 							};
@@ -117,7 +118,7 @@ if(_group getVariable ["canCallSupportAt", -1] < dateToNumber date) then
 			{
                 if ((sunOrMoon <1) && !haveNV) then
 				{
-                    if ((A3A_hasIFA and ((_x getVariable "unitType") in squadLeaders)) || (count (getArray (configfile >> "CfgWeapons" >> primaryWeapon _x >> "muzzles")) == 2)) then
+                    if ((A3A_hasIFA and ((_x getVariable "unitType") in FactionGet(all,"SquadLeaders"))) || (count (getArray (configfile >> "CfgWeapons" >> primaryWeapon _x >> "muzzles")) == 2)) then
 					{
                         [_x] call A3A_fnc_useFlares;
 					};

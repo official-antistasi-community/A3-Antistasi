@@ -17,6 +17,7 @@
     License: MIT License
 */
 #include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 if (!canSuspend) exitWith {Error("executed in non-suspendable environment")};
 
 _darkMaps = ["cam_lao_nam"];

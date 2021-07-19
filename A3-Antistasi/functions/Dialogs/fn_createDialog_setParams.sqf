@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 _nul=createDialog "set_params";
 
 waitUntil {dialog};
@@ -29,7 +31,7 @@ if (!isNil "loadLastSave" && {!loadLastSave}) then {
 			//Easy Difficulty Tweaks
 			server setVariable ["hr",25,true];
 			server setVariable ["resourcesFIA",5000,true];
-			vehInGarage = [vehSDKTruck,vehSDKTruck,SDKMortar,SDKMGStatic,staticAAteamPlayer];
+			vehInGarage = [FactionGet(reb,"vehicleTruck"),FactionGet(reb,"vehicleTruck"),FactionGet(reb,"staticMortar"),FactionGet(reb,"staticMG"),FactionGet(reb,"staticAA")];
 			if !(A3A_hasTFAR || A3A_hasTFARBeta) then
 				{
 				["ItemRadio"] call A3A_fnc_unlockEquipment;

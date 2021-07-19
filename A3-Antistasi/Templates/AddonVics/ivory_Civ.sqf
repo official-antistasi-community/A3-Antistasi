@@ -1,4 +1,4 @@
-civVehCommonData append [
+_addon set ["vehiclesCivCar", [
   "ivory_gti",2.0          //VW Golf GTI
   ,"ivory_prius",2.0      //Toyota Prius
   ,"ivory_isf",2.0        //Lexus ISF
@@ -33,11 +33,11 @@ civVehCommonData append [
   ,"ivory_cv_taxi",0.2    //Ford Crown Victoria Taxi
   ,"ivory_190e_taxi",0.2  //Mercedes Benz 190E Taxi
   ,"ivory_prius_taxi",0.2  //Toyota Prius Taxi
-];
+]];
 
-civVehMedicalData append [
+_addon set ["vehiclesCivMedical", [
   "ivory_suburban_ems",0.1            //Chevrolet Suburban EMS
   ,"ivory_suburban_ems_slicktop",0.1  //Chevrolet Suburban EMS
-];
+]];
 
 /*This template will include a section for adding police vehicles to templates once they all are set up for arrayed patrol cars.*/

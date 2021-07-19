@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 private ["_flag","_typeX"];
 
 if (!hasInterface) exitWith {};
@@ -110,7 +112,7 @@ switch _typeX do
     };
     case "seaport":
     {
-        _flag addAction ["Buy Boat", {[vehSDKBoat] spawn A3A_fnc_addFIAVeh},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4]
+        _flag addAction ["Buy Boat", {[FactionGet(reb,"vehicleBoat")] spawn A3A_fnc_addFIAVeh},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4]
     };
     case "garage":
     {

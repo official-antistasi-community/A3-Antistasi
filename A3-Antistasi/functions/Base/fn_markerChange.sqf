@@ -33,18 +33,18 @@ if (isNil "_flagX") then {_flagX = objNull};
 
 if (_looser == teamPlayer) then
 	{
-	_textX = format ["%1 ",nameTeamPlayer];
+	_textX = format ["%1 ",FactionGet(reb,"name")];
 	[] call A3A_fnc_tierCheck;
 	}
 else
 	{
 	if (_looser == Occupants) then
 		{
-		_textX = format ["%1 ",nameOccupants];
+		_textX = format ["%1 ",FactionGet(occ,"name")];
 		}
 	else
 		{
-		_textX = format ["%1 ",nameInvaders];
+		_textX = format ["%1 ",FactionGet(inv,"name")];
 		};
 	};
 garrison setVariable [_markerX,[],true];
@@ -296,7 +296,7 @@ if (_winner == teamPlayer) then
 		//[_flagX,"remove"] remoteExec ["A3A_fnc_flagaction",0,_flagX];
 		//_flagX setVariable ["isGettingCaptured", nil, true];
 		[_flagX,"SDKFlag"] remoteExec ["A3A_fnc_flagaction",0,_flagX];
-		[_flagX,SDKFlagTexture] remoteExec ["setFlagTexture",_flagX];
+		[_flagX,FactionGet(reb,"flagTexture")] remoteExec ["setFlagTexture",_flagX];
 		sleep 2;
 		//[_flagX,"unit"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_flagX];
 		//[_flagX,"vehicle"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_flagX];
@@ -333,11 +333,11 @@ else
 		};
 		if (_winner == Occupants) then
 		{
-			[_flagX,NATOFlagTexture] remoteExec ["setFlagTexture",_flagX];
+			[_flagX,FactionGet(occ,"flagTexture")] remoteExec ["setFlagTexture",_flagX];
 		}
 		else
 		{
-			[_flagX,CSATFlagTexture] remoteExec ["setFlagTexture",_flagX];
+			[_flagX,FactionGet(inv,"flagTexture")] remoteExec ["setFlagTexture",_flagX];
 		};
 	};
 	if (_looser == teamPlayer) then

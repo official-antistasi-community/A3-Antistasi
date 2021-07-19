@@ -6,6 +6,8 @@ _mrkDestination = _this select 0;
 _mrkOrigin = _this select 1;
 _numberX = _this select 2;
 _sideX = _this select 3;
+private _faction = Faction(_sideX);
+private _groupData = FactionGetGroups(_sideX);
 Info_4("Spawning PatrolReinf. Dest:%1, Orig:%2, Size:%3, Side: %4",_mrkDestination,_mrkOrigin,_numberX,_sideX);
 _posDestination = getMarkerPos _mrkDestination;
 _posOrigin = getMarkerPos _mrkOrigin;
@@ -15,17 +17,17 @@ if ([_sideX] call A3A_fnc_remUnitCount < _numberX) exitWith {
 };
 
 _land = if (_posOrigin distance _posDestination > distanceForLandAttack) then {false} else {true};
-_typeGroup = if (_sideX == Occupants) then {if (_numberX == 4) then {selectRandom groupsNATOmid} else {selectRandom groupsNATOSquad}} else {if (_numberX == 4) then {selectRandom groupsCSATmid} else {selectRandom groupsCSATSquad}};
+_typeGroup = selectRandom (_groupData get (if (_numberX == 4) then {"medium"} else {"squads"}));
 _typeVehX = "";
 if (_land) then
 {
-	if (_sideX == Occupants) then {_typeVehX = selectRandom vehNATOTrucks} else {_typeVehX = selectRandom vehCSATTrucks};
+	_typeVehX = selectRandom (_faction get "vehiclesTrucks");
 }
 else
 {
-	_vehPool = if (_sideX == Occupants) then {vehNATOTransportHelis + vehNATOTransportPlanes} else {vehCSATTransportHelis + vehCSATTransportPlanes};
+	_vehPool = (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport") + (_faction get "vehiclesPlanesTransport");
     _vehPool = _vehPool arrayIntersect _vehPool;//ensure unique classnames
-	if ((_numberX > 4) and (count _vehPool > 1) and !A3A_hasIFA) then {_vehPool = _vehPool - [vehNATOPatrolHeli,vehCSATPatrolHeli]};
+	if ((_numberX > 4) and (count _vehPool > 1) and !A3A_hasIFA) then {_vehPool = _vehPool - (_faction get "vehiclesHelisLight")};
 	//_vehPool = _vehPool select {(_x isKindOf "Helicopter") and (_x in vehFastRope)};
 	_typeVehX = selectRandom _vehPool;
 };

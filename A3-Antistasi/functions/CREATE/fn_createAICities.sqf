@@ -13,6 +13,7 @@ _positionX = getMarkerPos (_markerX);
 
 _num = [_markerX] call A3A_fnc_sizeMarker;
 _sideX = sidesX getVariable [_markerX,sideUnknown];
+private _groupData = FactionGetGroups(_sideX); //retrive group data from the faction data
 if ((markersX - controlsX) findIf {(getMarkerPos _x inArea _markerX) and (sidesX getVariable [_x,sideUnknown] != _sideX)} != -1) exitWith {};
 _num = round (_num / 100);
 
@@ -27,7 +28,7 @@ _esAAF = true;
 if (_markerX in destroyedSites) then
 	{
 	_esAAF = false;
-	_params = [_positionX,Invaders,CSATSpecOp];
+	_params = [_positionX,Invaders,_groupData get "specOps"];
 	}
 else
 	{
@@ -38,11 +39,11 @@ else
 		if (_frontierX) then
 			{
 			_num = _num * 2;
-			_params = [_positionX, Occupants, groupsNATOSentry];
+			_params = [_positionX, Occupants, _groupData get "sentry"];
 			}
 		else
 			{
-			_params = [_positionX, Occupants, groupsNATOGen];
+			_params = [_positionX, Occupants, _groupData get "police"];
 			};
 		}
 	else
@@ -50,7 +51,7 @@ else
 		_esAAF = false;
 		_num = round (_num * (_prestigeBLUFOR/100));
 		_array = [];
-		{if (random 20 < skillFIA) then {_array pushBack (_x select 0)} else {_array pushBack (_x select 1)}} forEach groupsSDKSentry;
+		{if (random 20 < skillFIA) then {_array pushBack (_x select 0)} else {_array pushBack (_x select 1)}} forEach _groupData get "groupsSentry";
 		_params = [_positionX, teamPlayer, _array];
 		};
 	};

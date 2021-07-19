@@ -37,17 +37,10 @@ if(isNil "_side") exitWith
     Error("No side given!");
 };
 
+private _faction = Faction(_side);
 private _text = "";
-private _sideName = "";
+private _sideName = _faction get "name";
 private _intelContent = "";
-if(_side == Occupants) then
-{
-    _sideName = nameOccupants
-}
-else
-{
-    _sideName = nameInvaders
-};
 
 if(_intelType == "Small") then
 {
@@ -70,7 +63,6 @@ if(_intelType == "Small") then
             {
                 _nextAttack = attackCountdownInvaders + (random 600) - 300;
             };
-            private _sideName = if (_side == Occupants) then {nameOccupants} else {nameInvaders};
             if(_nextAttack < 300) then
             {
                 _text = format ["%1 attack is imminent!", _sideName];

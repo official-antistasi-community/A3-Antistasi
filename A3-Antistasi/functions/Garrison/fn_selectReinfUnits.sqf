@@ -24,6 +24,8 @@ private _unitsSend = [];
 //Hard copy, need to work on this
 private _reinf = +([_target] call A3A_fnc_getRequested);
 private _side = sidesX getVariable [_base, sideUnknown];
+private _faction = Faction(_side);
+private _groupData = _faction get "groups";
 
 private _maxRequested = [_reinf, false] call A3A_fnc_countGarrison;
 private _maxVehiclesNeeded = _maxRequested select 0;
@@ -98,11 +100,11 @@ while {_currentUnitCount < (_maxUnitSend - 2) && {_maxCargoSpaceNeeded+_maxVehic
             {
                 if (_neededCargoSpace <= 4) then
                 {
-                    _currentSelected = if (_side ==	Occupants) then {vehNATOPatrolHeli} else {vehCSATPatrolHeli};
+                    _currentSelected = selectRandom (_faction get "vehiclesHelisLight");
                 }
                 else
                 {
-                    _currentSelected = if (_side ==	Occupants) then {selectRandom vehNATOTransportHelis} else {selectRandom vehCSATTransportHelis};
+                    _currentSelected = selectRandom ((_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport"));
                 };
                 Verbose_1("Selected %1 as an air transport vehicle", _currentSelected);
             }
@@ -111,19 +113,19 @@ while {_currentUnitCount < (_maxUnitSend - 2) && {_maxCargoSpaceNeeded+_maxVehic
                 if(_neededCargoSpace == 1) then
                 {
                     //Vehicle, crew and one person, selecting quad
-                    _currentSelected = if(_side == Occupants) then {vehNATOBike} else {vehCSATBike};
+                    _currentSelected = selectRandom (_faction get "vehiclesBasic");
                 }
                 else
                 {
                     if(_neededCargoSpace <= 5) then
                     {
                         //Select light unarmed vehicle (as the armed uses three crew)
-                        _currentSelected = if(_side == Occupants) then {selectRandom vehNATOLightUnarmed} else {selectRandom vehCSATLightUnarmed};
+                        _currentSelected = selectRandom (_faction get "vehiclesLightUnarmed");
                     }
                     else
                     {
                         //Select random truck or helicopter
-                        _currentSelected = if(_side == Occupants) then {selectRandom (vehNATOTrucks + vehNATOTransportHelis)} else {selectRandom (vehCSATTrucks + vehCSATTransportHelis)};
+                        _currentSelected = selectRandom ((_faction get "vehiclesLightUnarmed") + (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport"));
                     };
                 };
                 Verbose_1("Selected %1 as an ground or air transport vehicle", _currentSelected);
@@ -136,7 +138,7 @@ while {_currentUnitCount < (_maxUnitSend - 2) && {_maxCargoSpaceNeeded+_maxVehic
     if(_currentSelected != "") then
     {
         //Assigning crew
-        private _crewMember = if(_side == Occupants) then {NATOCrew} else {CSATCrew};
+        private _crewMember = _groupData get "crew";
         private _crew = [_currentSelected, _crewMember] call A3A_fnc_getVehicleCrew;
         _currentUnitCount = _currentUnitCount + 1 + _crewSeats;
 

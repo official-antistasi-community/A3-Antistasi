@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 private _fileName = "milBuildings.sqf";
 private ["_positionX","_size","_buildings","_groupX","_typeUnit","_sideX","_building","_typeB","_frontierX","_typeVehX","_veh","_vehiclesX","_soldiers","_pos","_ang","_markerX","_unit","_return"];
 _markerX = _this select 0;
@@ -9,17 +11,19 @@ _buildings = _buildings inAreaArray _markerX;
 if (count _buildings == 0) exitWith {[grpNull,[],[]]};
 
 _sideX = _this select 2;
+private _faction = Faction(_sideX);
+private _groupData = FactionGetGroups(_sideX); //retrive group data from the faction data
 _frontierX = _this select 3;
 
 _vehiclesX = [];
 _soldiers = [];
 
 _groupX = createGroup _sideX;
-_typeUnit = if (_sideX==Occupants) then {staticCrewOccupants} else {staticCrewInvaders};
+_typeUnit = _groupData get "staticCrew";
 
 //New system to place helis, does not care about heli types currently
 private _helicopterTypes = [];
-_helicopterTypes pushBack (if (_sideX == Occupants) then {vehNATOPatrolHeli} else {vehCSATPatrolHeli});
+_helicopterTypes append (_faction get "vehiclesHelisLight");
 private _spawnParameter = [_markerX, "Heli"] call A3A_fnc_findSpawnPosition;
 private _count = 1 + round (random 3); //Change these numbers as you want, first number is minimum, max is first plus second number
 while {_spawnParameter isEqualType [] && {_count > 0}} do
@@ -68,7 +72,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         if (isObjectHidden _building) exitWith {};			// don't put statics on destroyed buildings
         if 	((_typeB == "Land_Cargo_Patrol_V1_F") or (_typeB == "Land_Cargo_Patrol_V2_F") or (_typeB == "Land_Cargo_Patrol_V3_F") or (_typeB == "Land_Cargo_Patrol_V4_F")) exitWith
         {
-            private _type = if (_sideX == Occupants) then {NATOMG} else {CSATMG};
+            private _type = selectRandom (_faction get "staticMGs");
             private _dir = (getDir _building) - 180;
             private _zpos = AGLToASL (_building buildingPos 1);
             private _pos = _zpos getPos [1.5, _dir];			// zeroes Z value because BIS
@@ -77,7 +81,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         };
 		if 	((_typeB == "Land_Hlaska") or (_typeB == "Land_vn_hlaska")) exitWith
         {
-            private _type = if (_sideX == Occupants) then {NATOMG} else {CSATMG};
+            private _type = selectRandom (_faction get "staticMGs");
             private _dir = (getDir _building);
             private _zpos = AGLToASL (_building buildingPos 1);
             private _pos = _zpos getPos [0.5, _dir];
@@ -86,7 +90,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         };
         if 	((_typeB == "Land_fortified_nest_small_EP1") or (_typeB == "Land_BagBunker_Small_F") or (_typeB == "Land_BagBunker_01_small_green_F") or (_typeB == "Land_fortified_nest_small") or (_typeB == "Fort_Nest") or (_typeB == "Land_vn_bagbunker_01_small_green_f") or (_typeB == "Land_vn_bagbunker_small_f") or (_typeB == "Land_vn_o_shelter_05")) exitWith
         {
-            private _type = if (_sideX == Occupants) then {NATOMG} else {CSATMG};
+            private _type = selectRandom (_faction get "staticMGs");
             private _dir = (getDir _building) - 180;
             private _zpos = AGLToASL (_building buildingPos 1);
             private _pos = _zpos getPos [-1, _dir];
@@ -95,7 +99,7 @@ for "_i" from 0 to (count _buildings) - 1 do
 		};
  		if 	((_typeB == "Land_vn_o_tower_02")) exitWith
          {
-             private _type = if (_sideX == Occupants) then {NATOMG} else {CSATMG};
+             private _type = selectRandom (_faction get "staticMGs");
              private _dir = (getDir _building) - 90;
              private _zpos = AGLToASL (_building buildingPos 1);
              private _pos = _zpos getPos [0.5, _dir];
@@ -104,7 +108,7 @@ for "_i" from 0 to (count _buildings) - 1 do
          };
  		if 	((_typeB == "Land_vn_hut_tower_01")) exitWith
          {
-             private _type = if (_sideX == Occupants) then {NATOMG} else {CSATMG};
+             private _type = selectRandom (_faction get "staticMGs");
              private _dir = (getDir _building) - 180;
              private _zpos = AGLToASL (_building buildingPos 5);
              private _pos = _zpos getPos [1, _dir];
@@ -113,7 +117,7 @@ for "_i" from 0 to (count _buildings) - 1 do
          };
  		if 	((_typeB == "Land_vn_o_platform_05") or (_typeB == "Land_vn_o_platform_06")) exitWith
          {
-             private _type = if (_sideX == Occupants) then {NATOMG} else {CSATMG};
+             private _type = selectRandom (_faction get "staticMGs");
              private _dir = (getDir _building) - 270;
              private _zpos = AGLToASL (_building buildingPos 5);
              private _pos = _zpos getPos [0.5, _dir];
@@ -122,7 +126,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         };
 		if 	((_typeB == "Land_vn_b_trench_bunker_04_01")) exitWith
          {
-             private _type = if (_sideX == Occupants) then {NATOMG} else {CSATMG};
+             private _type = selectRandom (_faction get "staticMGs");
              private _dir = (getDir _building) + 90;
              private _zpos = AGLToASL (_building buildingPos 4);
              private _pos = _zpos getPos [-1.5, _dir];
@@ -132,7 +136,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         };
         if 	((_typeB == "Land_Cargo_Tower_V1_F") or (_typeB == "Land_Cargo_Tower_V1_No1_F") or (_typeB == "Land_Cargo_Tower_V1_No2_F") or (_typeB == "Land_Cargo_Tower_V1_No3_F") or (_typeB == "Land_Cargo_Tower_V1_No4_F") or (_typeB == "Land_Cargo_Tower_V1_No5_F") or (_typeB == "Land_Cargo_Tower_V1_No6_F") or (_typeB == "Land_Cargo_Tower_V1_No7_F") or (_typeB == "Land_Cargo_Tower_V2_F") or (_typeB == "Land_Cargo_Tower_V3_F") or (_typeB == "Land_Cargo_Tower_V4_F")) exitWith			// just the big towers which have 3 .50 cals on top
         {
-            private _type = if (_sideX == Occupants) then {NATOMG} else {CSATMG};
+            private _type = selectRandom (_faction get "staticMGs");
             _dir = getDir _building;
             _zOffset = [0, 0, -0.3]; //fix spawn hight
             _Tdir = _dir + 90; //relative rotation to building
@@ -158,7 +162,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         };
 		if 	((_typeB == "Land_Radar_01_HQ_F") or (_typeB == "Land_vn_radar_01_hq_f")) exitWith
         {
-            private _type = if (_sideX == Occupants) then {staticAAOccupants} else {staticAAInvaders};
+            private _type = selectRandom (_faction get "staticAA");
             private _dir = getDir _building;
             private _zpos = AGLToASL (_building buildingPos 30);
             private _pos = getPosASL _building;
@@ -167,7 +171,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         };
         if 	((_typeB == "Land_Cargo_HQ_V1_F") or (_typeB == "Land_Cargo_HQ_V2_F") or (_typeB == "Land_Cargo_HQ_V3_F")) exitWith
         {
-            private _type = if (_sideX == Occupants) then {staticAAOccupants} else {staticAAInvaders};
+            private _type = selectRandom (_faction get "staticAA");
             private _dir = getDir _building;
             private _zpos = AGLToASL (_building buildingPos 8);
             private _pos = getPosASL _building;
@@ -176,7 +180,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         };
 		if 	((_typeB == "Land_vn_cementworks_01_grey_f")) exitWith
         {
-            private _type = if (_sideX == Occupants) then {staticAAOccupants} else {staticAAInvaders};
+            private _type = selectRandom (_faction get "staticAA");
             private _dir = getDir _building;
             private _zpos = AGLToASL (_building buildingPos 24);
             private _pos = getPosASL _building;
@@ -185,7 +189,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         };
 		if 	((_typeB == "Land_vn_cementworks_01_brick_f")) exitWith
         {
-            private _type = if (_sideX == Occupants) then {staticAAOccupants} else {staticAAInvaders};
+            private _type = selectRandom (_faction get "staticAA");
             private _dir = getDir _building;
             private _zpos = AGLToASL (_building buildingPos 20);
             private _pos = getPosASL _building;
@@ -194,7 +198,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         };
 		if 	((_typeB == "Land_vn_a_office01")) exitWith
         {
-            private _type = if (_sideX == Occupants) then {staticAAOccupants} else {staticAAInvaders};
+            private _type = selectRandom (_faction get "staticAA");
             private _dir = (getDir _building) + 180;
             private _zpos = AGLToASL (_building buildingPos 8);
 			private _pos = _zpos getPos [1.5, _dir];
@@ -215,7 +219,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         if (isObjectHidden _building) exitWith {};            // don't put statics on destroyed buildings
         if     ((_typeB == "Land_vn_o_snipertree_01") or (_typeB == "Land_vn_o_snipertree_02") or (_typeB == "Land_vn_o_snipertree_03") or (_typeB == "Land_vn_o_snipertree_04") or (_typeB == "Land_vn_o_platform_01") or (_typeB == "Land_vn_o_platform_02") or (_typeB == "Land_vn_o_platform_03")) exitWith
         {
-            private _type = if (_sideX == Occupants) then {NATOMarksman} else {CSATMarksman};
+            private _type = _groupData get "marksman";
             private _dir = (getDir _building) - 180;
             private _zpos = AGLToASL (_building buildingPos 0);
             private _pos = _zpos getPos [0, _dir];            // zeroes Z value because BIS
@@ -237,7 +241,7 @@ for "_i" from 0 to (count _buildings) - 1 do
         if (isObjectHidden _building) exitWith {};            // don't put statics on destroyed buildings
         if     ((_typeB == "Land_vn_b_tower_01")) exitWith
         {
-            private _type = if (_sideX == Occupants) then {NATOGrunt} else {CSATGrunt};
+            private _type = _groupData get "grunt";
             private _dir = (getDir _building) - 180;
             private _zpos = AGLToASL (_building buildingPos 0);
             private _pos = _zpos getPos [0, _dir];            // zeroes Z value because BIS

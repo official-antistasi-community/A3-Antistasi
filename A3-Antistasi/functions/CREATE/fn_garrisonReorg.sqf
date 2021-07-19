@@ -1,18 +1,20 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 if (count _this <= 8) exitWith {_this};
-private _SLcount = {_x in squadLeaders} count _this;
-private _medCount = {_x in medics} count _this;
+private _SLcount = {_x in FactionGet(all,"SquadLeaders")} count _this;
+private _medCount = {_x in FactionGet(all,"Medics")} count _this;
 if ((_SLcount == 0) and (_medCount == 0)) exitWith {_this};
 private _pool = +_this;
 private _slClass = "";
 if (_slCount > 0) then
 	{
-	_slClass = _this select (_this findIf {_x in squadLeaders});
+	_slClass = _this select (_this findIf {_x in FactionGet(all,"SquadLeaders")});
 	_pool = _pool - [_slClass];
 	};
 private _medClass = "";
 if (_medCount > 0) then
 	{
-	_medClass = _this select (_this findIf {_x in medics});
+	_medClass = _this select (_this findIf {_x in FactionGet(all,"Medics")});
 	_pool = _pool - [_medClass];
 	};
 if (_pool isEqualTo []) exitWith {_this};

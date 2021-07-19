@@ -29,6 +29,8 @@ if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then
 		_isFIA = true;
 	};
 };
+private _faction = Faction(_sideX);
+private _groupData = FactionGetGroups(_sideX); //retrive group data from the faction data
 
 _antenna = objNull;
 
@@ -72,21 +74,14 @@ if (_patrol) then
 	_countX = 0;
 	while {_countX < 4} do //Fixed number of patrols?
 	{
-		_arraygroups = if (_sideX == Occupants) then
-		{
-			if (!_isFIA) then {groupsNATOsmall} else {groupsFIASmall};
-		}
-		else
-		{
-			groupsCSATsmall
-		};
-		if ([_markerX,false] call A3A_fnc_fogCheck < 0.3) then {_arraygroups = _arraygroups - sniperGroups};
+        _arrayGroups = _groupData get (if (_isFIA) then {"militia_Small"} else {"small"});
+		if ([_markerX,false] call A3A_fnc_fogCheck < 0.3) then {_arraygroups = _arraygroups - (_groupData get "sniper")};
 		_typeGroup = selectRandom _arraygroups;
 		_groupX = [_positionX,_sideX, _typeGroup,false,true] call A3A_fnc_spawnGroup;
 		if !(isNull _groupX) then
 		{
 			sleep 1;
-			if ((random 10 < 2.5) and (!(_typeGroup in sniperGroups))) then
+			if ((random 10 < 2.5) and (!(_typeGroup in (_groupData get "sniper")))) then
 			{
 				_dog = [_groupX, "Fin_random_F",_positionX,[],0,"FORM"] call A3A_fnc_createUnit;
 				[_dog] spawn A3A_fnc_guardDog;
@@ -102,8 +97,8 @@ if (_patrol) then
 
 if ((_frontierX) and (_markerX in outposts)) then
 {
-	_typeUnit = if (_sideX==Occupants) then {staticCrewOccupants} else {staticCrewInvaders};
-	_typeVehX = if (_sideX == Occupants) then {NATOMortar} else {CSATMortar};
+	_typeUnit = _groupData get "staticCrew";
+	_typeVehX = selectRandom (_faction get "staticMortars");
 	_spawnParameter = [_markerX, "Mortar"] call A3A_fnc_findSpawnPosition;
 	if(_spawnParameter isEqualType []) then
 	{
@@ -132,7 +127,7 @@ if(random 100 < (40 + tierWar * 3)) then
 	[_markerX, _large] spawn A3A_fnc_placeIntel;
 };
 
-_typeVehX = if (_sideX == Occupants) then {NATOFlag} else {CSATFlag};
+_typeVehX = _faction get "flag";
 _flagX = createVehicle [_typeVehX, _positionX, [],0, "NONE"];
 _flagX allowDamage false;
 [_flagX,"take"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_flagX];
@@ -141,7 +136,7 @@ _vehiclesX pushBack _flagX;
 // Only create ammoBox if it's been recharged (see reinforcementsAI)
 private _ammoBox = if (garrison getVariable [_markerX + "_lootCD", 0] == 0) then
 {
-	private _ammoBoxType = if (_sideX == Occupants) then {NATOAmmoBox} else {CSATAmmoBox};
+	private _ammoBoxType = _faction get "ammobox";
 	private _ammoBox = [_ammoBoxType, _positionX, 15, 5, true] call A3A_fnc_safeVehicleSpawn;
 	// Otherwise when destroyed, ammoboxes sink 100m underground and are never cleared up
 	_ammoBox addEventHandler ["Killed", { [_this#0] spawn { sleep 10; deleteVehicle (_this#0) } }];
@@ -163,7 +158,7 @@ _roads = _positionX nearRoads _size;
 
 if ((_markerX in seaports) and !A3A_hasIFA) then
 {
-	_typeVehX = if (_sideX == Occupants) then {vehNATOBoat} else {vehCSATBoat};
+	_typeVehX = selectRandom (_faction get "vehiclesGunBoats");
 	if ([_typeVehX] call A3A_fnc_vehAvailable) then
 	{
 		_mrkMar = seaSpawn select {getMarkerPos _x inArea _markerX};
@@ -222,36 +217,17 @@ else
 			_vehiclesX pushBack _bunker;
 			_bunker setDir _dirveh;
 			_pos = getPosATL _bunker;
-			_typeVehX = if (_sideX==Occupants) then {staticATOccupants} else {staticATInvaders};
+			_typeVehX = selectRandom (_faction get "staticAT");
 			_veh = _typeVehX createVehicle _positionX;
 			_vehiclesX pushBack _veh;
 			_veh setPos _pos;
 			_veh setDir _dirVeh + 180;
-			_typeUnit = if (_sideX==Occupants) then {staticCrewOccupants} else {staticCrewInvaders};
+			_typeUnit = _groupData get "staticCrew";
 			_unit = [_groupX, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
 			[_unit,_markerX] call A3A_fnc_NATOinit;
 			[_veh, _sideX] call A3A_fnc_AIVEHinit;
 			_unit moveInGunner _veh;
 			_soldiers pushBack _unit;
-
-			//Else case not possible, see line 181
-			// }
-			// else
-			// {
-			// 	_typeGroup = selectRandom groupsFIAMid;
-			// 	_groupX = [_positionX, _sideX, _typeGroup,false,true] call A3A_fnc_spawnGroup;
-			// 	if !(isNull _groupX) then
-			// 	{
-			// 		_veh = vehFIAArmedCar createVehicle getPos _road;
-			// 		_veh setDir _dirveh + 90;
-			// 		_nul = [_veh] call A3A_fnc_AIVEHinit;
-			// 		_vehiclesX pushBack _veh;
-			// 		sleep 1;
-			// 		_unit = [_groupX, FIARifleman, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
-			// 		_unit moveInGunner _veh;
-			// 		{_soldiers pushBack _x; [_x,_markerX] call A3A_fnc_NATOinit} forEach units _groupX;
-			// 	};
-			// };
 		};
 	};
 };
@@ -261,13 +237,13 @@ if (_spawnParameter isEqualType []) then
 {
 	_typeVehX = if (_sideX == Occupants) then
 	{
-		private _types = if (!_isFIA) then {vehNATOTrucks + vehNATOCargoTrucks} else {[vehFIATruck]};
-		_types = _types select { _x in vehCargoTrucks };
-		if (count _types == 0) then { vehNATOCargoTrucks } else { _types };
+		private _types = if (!_isFIA) then {(_faction get "vehiclesTrucks") + (_faction get "vehiclesCargoTrucks")} else {_faction get "vehiclesMilitiaTrucks"};
+		_types = _types select { _x in FactionGet(all,"vehiclesCargoTrucks") };
+		if (count _types == 0) then { (_faction get "vehiclesCargoTrucks") } else { _types };
 	}
 	else
 	{
-		vehCSATTrucks
+		(_faction get "vehiclesTrucks")
 	};
 	_veh = createVehicle [selectRandom _typeVehX, (_spawnParameter select 0), [], 0, "NONE"];
 	_veh setDir (_spawnParameter select 1);
@@ -294,7 +270,7 @@ if (!isNull _antenna) then
 			_posF = _pos getPos [1,_dir];
 			_posF set [2,24.3];
 		};
-		_typeUnit = if (_sideX == Occupants) then {if (!_isFIA) then {NATOMarksman} else {FIAMarksman}} else {CSATMarksman};
+        _typeUnit = _groupData get (if (_isFIA) then {"militia_Rifleman"} else {"marksman"});
 		_unit = [_groupX, _typeUnit, _positionX, [], _dir, "NONE"] call A3A_fnc_createUnit;
 		_unit setPosATL _posF;
 		_unit forceSpeed 0;

@@ -1,4 +1,5 @@
-
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 private ["_textX","_dataX","_numCiv","_prestigeOPFOR","_prestigeBLUFOR","_power","_busy","_siteX","_positionTel","_garrison"];
 positionTel = [];
 
@@ -18,7 +19,7 @@ if (_x in destroyedSites) then {_popCSAT = _popCSAT + _numCIV};
 } forEach citiesX;
 _popFIA = round _popFIA;
 _popAAF = round _popAAF;
-["City Information", format ["%7<br/><br/>Total pop: %1<br/>%6 Support: %2<br/>%5 Support: %3 <br/><br/>Murdered Pop: %4<br/><br/>Click on the zone",_pop, _popFIA, _popAAF, _popCSAT,nameOccupants,nameTeamPlayer,worldName]] call A3A_fnc_customHint;
+["City Information", format ["%7<br/><br/>Total pop: %1<br/>%6 Support: %2<br/>%5 Support: %3 <br/><br/>Murdered Pop: %4<br/><br/>Click on the zone",_pop, _popFIA, _popAAF, _popCSAT,FactionGet(occ,"name"),FactionGet(reb,"name"),worldName]] call A3A_fnc_customHint;
 
 if (!visibleMap) then {openMap true};
 
@@ -34,10 +35,12 @@ while {visibleMap} do
 		_positionTel = positionTel;
 		_siteX = [markersX, _positionTel] call BIS_Fnc_nearestPosition;
 		_textX = "Click on the zone";
-		_nameFaction = if (sidesX getVariable [_siteX,sideUnknown] == teamPlayer) then {nameTeamPlayer} else {if (sidesX getVariable [_siteX,sideUnknown] == Occupants) then {nameOccupants} else {nameInvaders}};
+        private _side = sidesX getVariable [_siteX,sideUnknown];
+        private _faction = Faction(_side);
+		_nameFaction = _faction get "name";
 		if (_siteX == "Synd_HQ") then
 			{
-			_textX = format ["%2 HQ%1",[_siteX] call A3A_fnc_garrisonInfo,nameTeamPlayer];
+			_textX = format ["%2 HQ%1",[_siteX] call A3A_fnc_garrisonInfo,FactionGet(reb,"name")];
 			};
 		if (_siteX in citiesX) then
 			{
@@ -47,34 +50,16 @@ while {visibleMap} do
 			_prestigeOPFOR = round (_dataX select 2);
 			_prestigeBLUFOR = round (_dataX select 3);
 			_power = [_siteX] call A3A_fnc_getSideRadioTowerInfluence;
-			_textX = format ["%1<br/><br/>Pop %2<br/>%6 Support: %3 %5<br/>%7 Support: %4 %5",[_siteX,false] call A3A_fnc_location,_numCiv,_prestigeOPFOR,_prestigeBLUFOR,"%",nameOccupants,nameTeamPlayer];
+			_textX = format ["%1<br/><br/>Pop %2<br/>%6 Support: %3 %5<br/>%7 Support: %4 %5",[_siteX,false] call A3A_fnc_location,_numCiv,_prestigeOPFOR,_prestigeBLUFOR,"%",FactionGet(occ,"name"),FactionGet(reb,"name")];
 			_positionX = getMarkerPos _siteX;
 			_result = "NONE";
-			switch (_power) do
+			_result = switch (_power) do
 				{
-				case teamPlayer: {_result = format ["%1",nameTeamPlayer]};
-				case Occupants: {_result = format ["%1",nameOccupants]};
-				case Invaders: {_result = format ["%1",nameInvaders]};
+				case teamPlayer: {FactionGet(reb,"name")};
+				case Occupants: {FactionGet(occ,"name")};
+				case Invaders: {FactionGet(inv,"name")};
+                default {"NONE"};
 				};
-			/*_ant1 = [antennas,_positionX] call BIS_fnc_nearestPosition;
-			_ant2 = [antennasDead, _positionX] call BIS_fnc_nearestPosition;
-			if (_ant1 distance _positionX > _ant2 distance _positionX) then
-				{
-				_result = "NONE";
-				}
-			else
-				{
-				_outpost = [markersX,_ant1] call BIS_fnc_NearestPosition;
-				if (sidesX getVariable [_siteX,sideUnknown] == teamPlayer) then
-					{
-					if (sidesX getVariable [_outpost,sideUnknown] == teamPlayer) then {_result = format ["%1",nameTeamPlayer]} else {if (sidesX getVariable [_outpost,sideUnknown] == Invaders) then {_result = "NONE"}};
-					}
-				else
-					{
-					if (sidesX getVariable [_outpost,sideUnknown] == teamPlayer) then {_result = format ["%1",nameTeamPlayer]} else {if (sidesX getVariable [_outpost,sideUnknown] == Invaders) then {_result = "NONE"}};
-					};
-				};
-			*/
 			_textX = format ["%1<br/>Influence: %2",_textX,_result];
 			if (_siteX in destroyedSites) then {_textX = format ["%1<br/>DESTROYED",_textX]};
 			if (sidesX getVariable [_siteX,sideUnknown] == teamPlayer) then {_textX = format ["%1<br/>%2",_textX,[_siteX] call A3A_fnc_garrisonInfo]};

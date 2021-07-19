@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 params["_vehicle", "_caller", "_actionID"];
 
 if(!isPlayer _caller) exitWith {["Breach Vehicle", "Only players are currently able to breach vehicles!"] call A3A_fnc_customHint;};
@@ -30,7 +32,7 @@ if(side (_aliveCrew select 0) == teamPlayer) exitWith
     _vehicle removeAction _actionID;
 };
 
-private _isTank = (typeOf _vehicle) in vehTanks;
+private _isTank = (typeOf _vehicle) in FactionGet(all,"vehiclesTanks");
 
 private _magazines = magazines _caller;
 private _magazineArray = [];
@@ -81,7 +83,7 @@ private _fn_selectExplosive =
 
 _index = -1;
 
-private _needed = if(_isTank) then {breachingExplosivesTank} else {breachingExplosivesAPC};
+private _needed = FactionGet(reb, (if(_isTank) then {"breachingExplosivesTank"} else {"breachingExplosivesAPC"}));
 private _explo = [_needed, _magazineArray] call _fn_selectExplosive;
 if(!(_explo isEqualTo [])) then
 {

@@ -9,7 +9,7 @@ while {_sleepTime > 0} do
     if((spawner getVariable _airport) != 2) exitWith {};
 };
 
-private _gunshipData = [Occupants, _airport, _timerIndex, "B_T_VTOL_01_armed_F", NATOPilot, _supportPos] call A3A_fnc_SUP_gunshipSpawn;
+private _gunshipData = [Occupants, _airport, _timerIndex, "B_T_VTOL_01_armed_F", FactionGet(occ, "pilot"), _supportPos] call A3A_fnc_SUP_gunshipSpawn;
 _gunshipData params ["_gunship", "_strikeGroup"];
 
 //Prepare crew units and spawn them in
@@ -20,7 +20,7 @@ private _heavyGunner = objNull;
 
 for "_i" from 1 to 2 do
 {
-    _crew = [_strikeGroup, NATOPilot, getPos _gunship] call A3A_fnc_createUnit;
+    _crew = [_strikeGroup, FactionGet(occ, "pilot"), getPos _gunship] call A3A_fnc_createUnit;
     if(_i == 1) then
     {
         _crew moveInTurret [_gunship, [1]];
@@ -400,7 +400,7 @@ while {_lifeTime > 0} do
                         }
                         else
                         {
-                            if(_target in vehAPCs) then
+                            if(_target in FactionGet(all,"vehiclesAPCs")) then
                             {
                                 //APC, use mainly AP and rarely rockets
                                 _mainGunnerList pushBack [_target, 12, _antiAPCBelt];

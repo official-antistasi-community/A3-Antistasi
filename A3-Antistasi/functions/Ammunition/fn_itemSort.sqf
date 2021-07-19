@@ -1,8 +1,8 @@
-if (A3A_faction_reb getVariable "addDiveGear") then {
+if (A3A_faction_reb get "addDiveGear") then {
 	diveGear append ["U_I_Wetsuit","V_RebreatherIA","G_Diving"];
 };
 
-if (A3A_faction_reb getVariable "addFlightGear") then {
+if (A3A_faction_reb get "addFlightGear") then {
 	flyGear pushBack "U_I_pilotCoveralls"
 };
 //Lights Vs Laser ID

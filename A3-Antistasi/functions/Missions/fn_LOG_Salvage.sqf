@@ -34,10 +34,11 @@ Debug_3("Salvage Mission Positions: %1, %2, %3", _mrk1Pos, _mrk2Pos, _mrk3Pos);
 
 private _difficultX = if (random 10 < tierWar) then {true} else {false};
 private _sideX = if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then {Occupants} else {Invaders};
+private _faction = Faction(_sideX);
+private _groupData = FactionGetGroups(_sideX);
 
 //Type of salvage crate to spawn
-private _boxType = [NATOEquipmentBox, CSATEquipmentBox] select (_sideX isEqualTo Invaders); //until new template system is in this will be nil
-_boxType = [_boxType, "Box_NATO_Equip_F"] select isNil "_boxType"; //so we add this so boxtype is not undefined
+private _boxType = _faction get "equipmentBox";
 
 //Set time limit on mission
 private _timeLimit = if (_difficultX) then {30} else {60};
@@ -80,8 +81,8 @@ Debug("Box spawned");
 
 //Create boat and initialise crew members
 Debug("Spawning patrol boat and crew");
-private _typeVeh = if (_difficultX) then {if (_sideX == Occupants) then {vehNATOBoat} else {vehCSATBoat}} else {if (_sideX == Occupants) then {vehNATORBoat} else {vehCSATRBoat}};
-private _typeGroup = if (_difficultX) then {if (_sideX == Occupants) then {NATOSquad} else {CSATSquad}} else {if (_sideX == Occupants) then {groupsNATOmid select 0} else {groupsCSATmid select 0}};
+private _typeVeh = if (_difficultX) then { selectRandom (_faction get "vehiclesGunBoats") } else { selectRandom (_faction get "vehiclesTransportBoats") };
+private _typeGroup = if _difficultX then {_groupData get "squad"} else {(_groupData get "medium")#0};
 private _boatSpawnLocation = selectRandom [_mrk1Pos, _mrk2Pos, _mrk3Pos];
 
 private _veh = createVehicle [_typeVeh, _boatSpawnLocation, [], 0, "NONE"];

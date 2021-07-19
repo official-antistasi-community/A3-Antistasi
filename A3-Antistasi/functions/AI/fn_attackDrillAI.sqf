@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 private _groupX = _this;
 _objectivesX = _groupX call A3A_fnc_enemyList;
 _groupX setVariable ["objectivesX",_objectivesX];
@@ -239,7 +241,7 @@ while {true} do
 									{
 									if (A3A_hasIFA) then
 										{
-										if (([_LeaderX] call A3A_fnc_canFight) and ((_LeaderX getVariable "unitType") in squadLeaders)) then {[_LeaderX,_nearX] call A3A_fnc_useFlares}
+										if (([_LeaderX] call A3A_fnc_canFight) and ((_LeaderX getVariable "unitType") in FactionGet(all,"SquadLeaders"))) then {[_LeaderX,_nearX] call A3A_fnc_useFlares}
 										}
 									else
 										{

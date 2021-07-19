@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 params ["_vehicle", "_crewGroup", "_cargoGroup", "_posDestination", "_markerOrigin", "_landPosBlacklist"];
 
 /*  Create the logic for attacking units, how different units should attack and behave
@@ -24,7 +26,7 @@ _posOrigin set [2, 50];
 
 switch (true) do
 {
-    case (typeof _vehicle in vehTrucks):
+    case (typeof _vehicle in FactionGet(all,"vehiclesTrucks")):
     {
         //Move cargo group into crew group
         (units _cargoGroup) joinSilent _crewGroup;
@@ -54,7 +56,7 @@ switch (true) do
         _vehWP2 setWaypointBehaviour "COMBAT";
         [_vehicle, "Inf Truck."] spawn A3A_fnc_inmuneConvoy;
     };
-    case ((typeof _vehicle in vehTanks) or (typeof _vehicle in vehAA)):
+    case ((typeof _vehicle in FactionGet(all,"vehiclesTanks")) or (typeof _vehicle in FactionGet(all,"vehiclesAA"))):
     {
         {_x disableAI "MINEDETECTION"} forEach (units _crewGroup);
 
@@ -71,10 +73,10 @@ switch (true) do
 
         //This keeps units from moving out of tanks if disabled, do we want that?
         _vehicle allowCrewInImmobile true;
-        private _typeName = if (typeof _vehicle in vehTanks) then {"Tank"} else {"AA"};
+        private _typeName = if (typeof _vehicle in FactionGet(all,"vehiclesTanks")) then {"Tank"} else {"AA"};
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
-    case (_vehicle isKindOf "Helicopter" && {(typeof _vehicle) in vehTransportAir}):
+    case (_vehicle isKindOf "Helicopter" && {(typeof _vehicle) in FactionGet(all,"vehiclesTransportAir")}):
     {
         //Transport helicopter
         _landPos = [_posDestination, 100, 150, 10, 0, 0.12, 0, [], [[0,0,0],[0,0,0]]] call BIS_fnc_findSafePos;
@@ -134,14 +136,14 @@ switch (true) do
             };
         };
     };
-    case (_vehicle isKindOf "Helicopter" && {!((typeof _vehicle) in vehTransportAir)}):
+    case (_vehicle isKindOf "Helicopter" && {!((typeof _vehicle) in FactionGet(all,"vehiclesTransportAir"))}):
     {
         //Attack helicopter
         private _vehWP0 = _crewGroup addWaypoint [_posDestination, 0];
         _vehWP0 setWaypointBehaviour "AWARE";
         _vehWP0 setWaypointType "SAD";
     };
-    case ((typeof _vehicle) in vehTransportAir && {!(_vehicle isKindOf "Helicopter")}):
+    case ((typeof _vehicle) in FactionGet(all,"vehiclesTransportAir") && {!(_vehicle isKindOf "Helicopter")}):
     {
         //Dropship with para units
         [_vehicle, _cargoGroup, _posDestination, _markerOrigin] spawn A3A_fnc_paradrop;
@@ -192,7 +194,7 @@ switch (true) do
 
         //This keeps units from moving out of APC if disabled, do we want that?
         _vehicle allowCrewInImmobile true;
-        private _typeName = if (typeof _vehicle in vehAPCs) then {"APC"} else {"MRAP"};
+        private _typeName = if (typeof _vehicle in FactionGet(all,"vehiclesAPCs")) then {"APC"} else {"MRAP"};
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
 };

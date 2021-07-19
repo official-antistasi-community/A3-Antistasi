@@ -1,21 +1,25 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+private _groupData = FactionGet(reb,"groups");
+#define GROUP(VAR) (_groupData get VAR)
 if (!isServer and hasInterface) exitWith {};
 
 private ["_costs","_groupX","_unit","_minesX","_radiusX","_roads","_truckX","_mineX","_countX"];
 
-_costs = (server getVariable (SDKExp select 0)) + ([vehSDKRepair] call A3A_fnc_vehiclePrice);
+_costs = server getVariable GROUP("Exp") + ([FactionGet(reb,"vehicleRepair")] call A3A_fnc_vehiclePrice);
 
 [-1,-1*_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
 
 _groupX = createGroup teamPlayer;
 
-_unit = [_groupX, (SDKExp select 0), getMarkerPos respawnTeamPlayer, [], 0, "NONE"] call A3A_fnc_createUnit;
+_unit = [_groupX, GROUP("Exp"), getMarkerPos respawnTeamPlayer, [], 0, "NONE"] call A3A_fnc_createUnit;
 _groupX setGroupIdGlobal [format ["MineSw%1",{side (leader _x) == teamPlayer} count allGroups]];
 _minesX = [];
 sleep 1;
 _road = [getMarkerPos respawnTeamPlayer] call A3A_fnc_findNearestGoodRoad;
 _pos = position _road findEmptyPosition [1,30,"B_G_Van_01_transport_F"];
 
-_truckX = vehSDKRepair createVehicle _pos;
+_truckX = FactionGet(reb,"vehicleRepair") createVehicle _pos;
 
 [_truckX, teamPlayer] call A3A_fnc_AIVEHinit;
 [_unit] spawn A3A_fnc_FIAinit;

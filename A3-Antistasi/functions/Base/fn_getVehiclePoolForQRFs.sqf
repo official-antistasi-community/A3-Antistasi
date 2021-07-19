@@ -15,346 +15,169 @@
 params ["_side", ["_filter", []]];
 #include "..\..\Includes\common.inc"
 FIX_LINE_NUMBERS()
+private _faction = Faction(_side);
+private _isOcc = _side isEqualTo Occupants;
 
-private _vehicleSelection = [];
+#define EntryCommon(VEH, Q_OCC, Q_INV) [VEH, if (_isOcc) then {Q_OCC} else {Q_INV}]
+#define VEH(VAR) (_faction get VAR)
 
 Debug_2("Now searching for QRF vehicle pool for %1 with filter %2", _side, _filter);
 //In general is Invaders always a bit less chill than the occupants, they will use heavier vehicles more often and earlier
-switch (tierWar) do
+private _vehicleSelection = switch (tierWar) do
 {
     //General idea: Send only ground units as players should be able to loot and grab the crate before the enemy arrives with a QRF
     // JJ: As of 2.3-prerelease, this function is always called with either an air or ground filter, so air/ground balancing is not valid
     case (1):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehPoliceCar, 40],
-                [vehFIACar, 30],
-                [vehFIATruck, 20],
-                [vehFIAArmedCar, 10],
-
-                [vehNATOPatrolHeli, 100]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATLightUnarmed, 40],
-                [vehCSATTrucks, 40],
-                [vehCSATLightArmed, 20],
-
-                [vehCSATPatrolHeli, 100]
-            ];
-        };
+        [
+            EntryCommon(VEH("vehiclesHelisLight"), 100, 100)
+        ] + (if (_isOcc) then {[
+            [VEH("vehiclesPolice"), 40],
+            [VEH("vehiclesMilitiaCars"), 30],
+            [VEH("vehiclesMilitiaTrucks"), 20],
+            [VEH("vehiclesMilitiaLightArmed"), 10]
+        ]} else {[
+            [VEH("vehiclesLightUnarmed"), 40],
+            [VEH("vehiclesTrucks"), 40],
+            [VEH("vehiclesLightArmed"), 20]
+        ]});
     };
     //General idea: Enemies get airborne, police units are reduced and replaced by military units
     case (2):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehPoliceCar, 15],
-                [vehFIACar, 15],
-                [vehFIAArmedCar, 10],
-                [vehFIATruck, 10],
-                [vehNATOLightUnarmed, 15],
-                [vehNATOTrucks, 25],
-                [vehNATOLightArmed, 10],
-
-                [vehNATOPatrolHeli, 100]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATLightUnarmed, 20],
-                [vehCSATTrucks, 40],
-                [vehCSATLightArmed, 30],
-                [vehCSATAPC, 10],
-
-                [vehCSATPatrolHeli, 80],
-                [vehCSATTransportHelis, 20]
-            ];
-        };
+        [
+            EntryCommon(VEH("vehiclesHelisLight"), 100, 80),
+            EntryCommon(VEH("vehiclesLightUnarmed"), 15, 20),
+            EntryCommon(VEH("vehiclesLightArmed"), 10, 30),
+            EntryCommon(VEH("vehiclesTrucks"), 25, 40)
+        ] + (if (_isOcc) then {[
+            [VEH("vehiclesPolice"), 15],
+            [VEH("vehiclesMilitiaCars"), 15],
+            [VEH("vehiclesMilitiaTrucks"), 10],
+            [VEH("vehiclesMilitiaLightArmed"), 10]
+        ]} else {[
+            [VEH("vehiclesAPCs"), 10]
+        ]});
     };
     //General idea: No police units any more, armed vehicles and first sightings of APCs
     case (3):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehFIAArmedCar, 10],
-                [vehFIATruck, 10],
-                [vehNATOLightUnarmed, 10],
-                [vehNATOLightArmed, 20],
-                [vehNATOTrucks, 40],
-                [vehNATOAPC, 10],
-
-                [vehNATOPatrolHeli, 80],
-                [vehNATOTransportHelis, 20]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATLightUnarmed, 5],
-                [vehCSATTrucks, 30],
-                [vehCSATLightArmed, 45],
-                [vehCSATAPC, 20],
-
-                [vehCSATPatrolHeli, 60],
-                [vehCSATTransportHelis, 40]
-            ];
-        };
+        [
+            EntryCommon(VEH("vehiclesHelisLight"), 80, 60),
+            EntryCommon(VEH("vehiclesHelisLight") + VEH("vehiclesHelisTransport"), 20, 40),
+            EntryCommon(VEH("vehiclesLightUnarmed"), 10, 5),
+            EntryCommon(VEH("vehiclesLightArmed"), 20, 45),
+            EntryCommon(VEH("vehiclesTrucks"), 40, 30),
+            EntryCommon(VEH("vehiclesAPCs"), 10, 20)
+        ] + (if (_isOcc) then {[
+            [VEH("vehiclesMilitiaTrucks"), 10],
+            [VEH("vehiclesMilitiaLightArmed"), 10]
+        ]} else {[]});
     };
     //General idea: Unarmed vehicles vanish, trucks start to get replaced by APCs, first sighting of transport helicopters
     case (4):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOLightArmed, 35],
-                [vehNATOTrucks, 40],
-                [vehNATOAPC, 25],
-
-                [vehNATOPatrolHeli, 50],
-                [vehNATOTransportHelis, 50]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATTrucks, 10],
-                [vehCSATLightArmed, 40],
-                [vehCSATAPC, 40],
-                [vehCSATTank, 10],
-
-                [vehCSATPatrolHeli, 40],
-                [vehCSATTransportHelis, 50],
-                [vehCSATAttackHelis, 10]
-            ];
-        };
+        [
+            EntryCommon(VEH("vehiclesHelisLight"), 50, 40),
+            EntryCommon(VEH("vehiclesHelisLight") + VEH("vehiclesHelisTransport"), 50, 50),
+            EntryCommon(VEH("vehiclesLightArmed"), 35, 40),
+            EntryCommon(VEH("vehiclesTrucks"), 40, 10),
+            EntryCommon(VEH("vehiclesAPCs"), 25, 40)
+        ] + (if (_isOcc) then {[]} else {[
+            [VEH("vehiclesHelisAttack"), 10],
+            [VEH("vehiclesTanks"), 10]
+        ]});
     };
     //General idea: Get rid of any unarmed vehicle, Invaders start to bring the big guns
     case (5):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOLightArmed, 30],
-                [vehNATOTrucks, 25],
-                [vehNATOAPC, 35],
-                [vehNATOTank, 10],
-
-                [vehNATOPatrolHeli, 30],
-                [vehNATOTransportHelis, 60],
-                [vehNATOAttackHelis, 10]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATTrucks, 10],
-                [vehCSATLightArmed, 30],
-                [vehCSATAPC, 40],
-                [vehCSATTank, 20],
-
-                [vehCSATPatrolHeli, 25],
-                [vehCSATTransportHelis, 50],
-                [vehCSATTransportPlanes, 10],
-                [vehCSATAttackHelis, 15]
-            ];
-        };
+        [
+            EntryCommon(VEH("vehiclesHelisLight"), 30, 25),
+            EntryCommon(VEH("vehiclesHelisLight") + VEH("vehiclesHelisTransport"), 60, 50),
+            EntryCommon(VEH("vehiclesLightArmed"), 30, 30),
+            EntryCommon(VEH("vehiclesTrucks"), 25, 10),
+            EntryCommon(VEH("vehiclesAPCs"), 35, 40),
+            EntryCommon(VEH("vehiclesTanks"), 10, 20),
+            EntryCommon(VEH("vehiclesHelisAttack"), 10, 15)
+        ] + (if (_isOcc) then {[]} else {[
+            [VEH("vehiclesPlanesTransport"), 10]
+        ]});
     };
     //General idea: No light vehicles any more, Invaders start to bring attack helicopter
     case (6):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOLightArmed, 25],
-                [vehNATOTrucks, 15],
-                [vehNATOAPC, 45],
-                [vehNATOTank, 15],
-
-                [vehNATOPatrolHeli, 20],
-                [vehNATOTransportHelis, 60],
-                [vehNATOTransportPlanes, 10],
-                [vehNATOAttackHelis, 10]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATTrucks, 5],
-                [vehCSATLightArmed, 25],
-                [vehCSATAPC, 45],
-                [vehCSATAA, 5],
-                [vehCSATTank, 20],
-
-                [vehCSATPatrolHeli, 15],
-                [vehCSATTransportHelis, 50],
-                [vehCSATTransportPlanes, 15],
-                [vehCSATAttackHelis, 20]
-            ];
-        };
+        [
+            EntryCommon(VEH("vehiclesLightArmed"), 25, 25),
+            EntryCommon(VEH("vehiclesTrucks"), 15, 5),
+            EntryCommon(VEH("vehiclesAPCs"), 45, 45),
+            EntryCommon(VEH("vehiclesTanks"), 15, 20),
+            EntryCommon(VEH("vehiclesHelisLight"), 20, 15),
+            EntryCommon(VEH("vehiclesHelisLight") + VEH("vehiclesHelisTransport"), 60, 50),
+            EntryCommon(VEH("vehiclesPlanesTransport"), 10, 15),
+            EntryCommon(VEH("vehiclesHelisAttack"), 10, 20)
+        ] + (if (_isOcc) then {[]} else {[
+            [VEH("vehiclesAA"), 5]
+        ]});
     };
     //General idea: Getting rid of light helis, Invaders start the endgame
     case (7):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOTrucks, 10],
-                [vehNATOLightArmed, 20],
-                [vehNATOAPC, 50],
-                [vehNATOAA, 5],
-                [vehNATOTank, 15],
-
-                [vehNATOPatrolHeli, 10],
-                [vehNATOTransportHelis, 55],
-                [vehNATOTransportPlanes, 20],
-                [vehNATOAttackHelis, 15]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATTrucks, 5],
-                [vehCSATLightArmed, 25],
-                [vehCSATAPC, 40],
-                [vehCSATAA, 5],
-                [vehCSATTank, 25],
-
-                [vehCSATPatrolHeli, 10],
-                [vehCSATTransportHelis, 40],
-                [vehCSATTransportPlanes, 25],
-                [vehCSATAttackHelis, 25]
-            ];
-        };
+        [
+            EntryCommon(VEH("vehiclesLightArmed"), 20, 25),
+            EntryCommon(VEH("vehiclesTrucks"), 10, 5),
+            EntryCommon(VEH("vehiclesAPCs"), 50, 40),
+            EntryCommon(VEH("vehiclesAA"), 5, 5),
+            EntryCommon(VEH("vehiclesTanks"), 15, 25),
+            EntryCommon(VEH("vehiclesHelisLight"), 10, 10),
+            EntryCommon(VEH("vehiclesHelisLight") + VEH("vehiclesHelisTransport"), 55, 40),
+            EntryCommon(VEH("vehiclesPlanesTransport"), 20, 25),
+            EntryCommon(VEH("vehiclesHelisAttack"), 15, 25)
+        ];
     };
     //General idea, Occupants start to throw in everything, Invaders upgrade to maximum
     case (8):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOTrucks, 10],
-                [vehNATOLightArmed, 15],
-                [vehNATOAPC, 50],
-                [vehNATOAA, 5],
-                [vehNATOTank, 20],
-
-                [vehNATOPatrolHeli, 10],
-                [vehNATOTransportHelis, 40],
-                [vehNATOTransportPlanes, 25],
-                [vehNATOAttackHelis, 20]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATTrucks, 5],
-                [vehCSATLightArmed, 20],
-                [vehCSATAPC, 40],
-                [vehCSATAA, 10],
-                [vehCSATTank, 25],
-
-                [vehCSATPatrolHeli, 5],
-                [vehCSATTransportHelis, 40],
-                [vehCSATTransportPlanes, 25],
-                [vehCSATAttackHelis, 25]
-            ];
-        };
+        [
+            EntryCommon(VEH("vehiclesLightArmed"), 15, 20),
+            EntryCommon(VEH("vehiclesTrucks"), 10, 5),
+            EntryCommon(VEH("vehiclesAPCs"), 50, 40),
+            EntryCommon(VEH("vehiclesAA"), 5, 10),
+            EntryCommon(VEH("vehiclesTanks"), 20, 25),
+            EntryCommon(VEH("vehiclesHelisLight"), 10, 5),
+            EntryCommon(VEH("vehiclesHelisLight") + VEH("vehiclesHelisTransport"), 40, 40),
+            EntryCommon(VEH("vehiclesPlanesTransport"), 25, 25),
+            EntryCommon(VEH("vehiclesHelisAttack"), 20, 25)
+        ];
     };
     //General idea: Occupants get access to all, invaders start to heavily rely on tanks and attack helis
     case (9):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOTrucks, 5],
-                [vehNATOLightArmed, 10],
-                [vehNATOAPC, 50],
-                [vehNATOAA, 10],
-                [vehNATOTank, 25],
-
-                [vehNATOPatrolHeli, 5],
-                [vehNATOTransportHelis, 35],
-                [vehNATOTransportPlanes, 25],
-                [vehNATOAttackHelis, 25]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATTrucks, 5],
-                [vehCSATLightArmed, 10],
-                [vehCSATAPC, 40],
-                [vehCSATAA, 10],
-                [vehCSATTank, 30],
-
-                [vehCSATPatrolHeli, 5],
-                [vehCSATTransportHelis, 35],
-                [vehCSATTransportPlanes, 25],
-                [vehCSATAttackHelis, 30]
-            ];
-        };
+        [
+            EntryCommon(VEH("vehiclesLightArmed"), 10, 10),
+            EntryCommon(VEH("vehiclesTrucks"), 5, 5),
+            EntryCommon(VEH("vehiclesAPCs"), 50, 40),
+            EntryCommon(VEH("vehiclesAA"), 10, 10),
+            EntryCommon(VEH("vehiclesTanks"), 25, 30),
+            EntryCommon(VEH("vehiclesHelisLight"), 5, 5),
+            EntryCommon(VEH("vehiclesHelisLight") + VEH("vehiclesHelisTransport"), 35, 35),
+            EntryCommon(VEH("vehiclesPlanesTransport"), 25, 25),
+            EntryCommon(VEH("vehiclesHelisAttack"), 25, 30)
+        ];
     };
     //General idea: Occupants finish with a focus on infantry units supported by combat vehicles, while Invaders tend to use heavy armor
     case (10):
     {
-        if(_side == Occupants) then
-        {
-            _vehicleSelection =
-            [
-                [vehNATOTrucks, 5],
-                [vehNATOLightArmed, 5],
-                [vehNATOAPC, 50],
-                [vehNATOAA, 10],
-                [vehNATOTank, 30],
-
-                [vehNATOPatrolHeli, 5],
-                [vehNATOTransportHelis, 30],
-                [vehNATOTransportPlanes, 25],
-                [vehNATOAttackHelis, 25]
-            ];
-        };
-        if(_side == Invaders) then
-        {
-            _vehicleSelection =
-            [
-                [vehCSATTrucks, 5],
-                [vehCSATLightArmed, 5],
-                [vehCSATAPC, 45],
-                [vehCSATAA, 10],
-                [vehCSATTank, 35],
-
-                [vehCSATPatrolHeli, 5],
-                [vehCSATTransportHelis, 30],
-                [vehCSATTransportPlanes, 25],
-                [vehCSATAttackHelis, 30]
-            ];
-        };
+        [
+            EntryCommon(VEH("vehiclesLightArmed"), 5, 5),
+            EntryCommon(VEH("vehiclesTrucks"), 5, 5),
+            EntryCommon(VEH("vehiclesAPCs"), 50, 45),
+            EntryCommon(VEH("vehiclesAA"), 10, 10),
+            EntryCommon(VEH("vehiclesTanks"), 30, 35),
+            EntryCommon(VEH("vehiclesHelisLight"), 5, 5),
+            EntryCommon(VEH("vehiclesHelisLight") + VEH("vehiclesHelisTransport"), 30, 30),
+            EntryCommon(VEH("vehiclesPlanesTransport"), 25, 25),
+            EntryCommon(VEH("vehiclesHelisAttack"), 25, 30)
+        ];
     };
 };
 

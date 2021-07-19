@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 /*
     Author: [Håkon]
     [Description]
@@ -35,7 +37,7 @@ if (_pickUp) then {
     };
 } else {
     if (isNull _crate) then {
-        private _attached = (attachedObjects _player)select {(typeOf _x) in [NATOSurrenderCrate, CSATSurrenderCrate]};
+        private _attached = (attachedObjects _player)select {(typeOf _x) in [FactionGet(occ,"surrenderCrate"), FactionGet(inv,"surrenderCrate")]};
         if (_attached isEqualTo []) exitWith {};
         _crate = _attached # 0;
     };

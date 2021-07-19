@@ -15,6 +15,7 @@ params ["_side", "_posDestination", "_supportName"];
 */
 #include "..\..\Includes\common.inc"
 FIX_LINE_NUMBERS()
+private _faction = Faction(_side);
 
 private _typeOfAttack = [_posDestination, _side, _supportName] call A3A_fnc_chooseAttackType;
 //If no type specified, exit here
@@ -83,13 +84,13 @@ if ((_posOrigin distance2D _posDestination < distanceForLandAttack) && {[_posOri
 {
     //The attack will be carried out by land and air vehicles
 	_vehPool = [_side] call A3A_fnc_getVehiclePoolForQRFs;
-    _replacement = if(_side == Occupants) then {(vehNATOTransportHelis + vehNATOTrucks + [vehNATOPatrolHeli])} else {(vehCSATTransportHelis + vehCSATTrucks + [vehCSATPatrolHeli])};
+    _replacement = (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport") + (_faction get "vehiclesTrucks") + (_faction get "vehiclesHelisTransport");
 }
 else
 {
     //The attack will be carried out by air vehicles only
 	_vehPool = [_side, ["LandVehicle"]] call A3A_fnc_getVehiclePoolForQRFs;
-    _replacement = if(_side == Occupants) then {(vehNATOTransportHelis + [vehNATOPatrolHeli])} else {(vehCSATTransportHelis + [vehCSATPatrolHeli])};
+    _replacement = (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport") + (_faction get "vehiclesHelisLight");
 };
 
 //If vehicle pool is empty, fill it up

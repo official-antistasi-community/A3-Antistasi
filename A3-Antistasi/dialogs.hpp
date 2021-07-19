@@ -285,7 +285,7 @@ class garrison_recruit 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKMil] spawn A3A_fnc_garrisonAdd";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'Mil'] spawn A3A_fnc_garrisonAdd";
 		};
 		class HQ_button_autorifleman: RscButton
 		{
@@ -295,7 +295,7 @@ class garrison_recruit 			{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKMG] spawn A3A_fnc_garrisonAdd";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'MG'] spawn A3A_fnc_garrisonAdd";
 		};
 		class HQ_button_medic: RscButton
 		{
@@ -305,7 +305,7 @@ class garrison_recruit 			{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKMedic] spawn A3A_fnc_garrisonAdd";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'Medic'] spawn A3A_fnc_garrisonAdd";
 		};
 		class HQ_button_engineer: RscButton
 		{
@@ -315,7 +315,7 @@ class garrison_recruit 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKSL] spawn A3A_fnc_garrisonAdd";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'SL'] spawn A3A_fnc_garrisonAdd";
 		};
 		class HQ_button_explosive: RscButton
 		{
@@ -325,7 +325,7 @@ class garrison_recruit 			{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [staticCrewTeamPlayer] spawn A3A_fnc_garrisonAdd";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'staticCrew'] spawn A3A_fnc_garrisonAdd";
 		};
 		class HQ_button_grenadier: RscButton
 		{
@@ -335,7 +335,7 @@ class garrison_recruit 			{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKGL] spawn A3A_fnc_garrisonAdd";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'GL'] spawn A3A_fnc_garrisonAdd";
 		};
 		class HQ_button_marksman: RscButton
 		{
@@ -345,7 +345,7 @@ class garrison_recruit 			{
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKSniper] spawn A3A_fnc_garrisonAdd";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'Sniper'] spawn A3A_fnc_garrisonAdd";
 		};
 
 		class HQ_button_AT: RscButton
@@ -356,7 +356,7 @@ class garrison_recruit 			{
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKATman] spawn A3A_fnc_garrisonAdd";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'LAT'] spawn A3A_fnc_garrisonAdd";
 		};
 	};
 };										//slots: 8
@@ -468,7 +468,7 @@ class unit_recruit 		{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKMil] spawn A3A_fnc_reinfPlayer";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'Mil'] spawn A3A_fnc_reinfPlayer";
 		};
 		class HQ_button_autorifleman: RscButton
 		{
@@ -478,7 +478,7 @@ class unit_recruit 		{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKMG] spawn A3A_fnc_reinfPlayer";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'MG'] spawn A3A_fnc_reinfPlayer";
 		};
 		class HQ_button_medic: RscButton
 		{
@@ -488,7 +488,7 @@ class unit_recruit 		{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKMedic] spawn A3A_fnc_reinfPlayer";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'Medic'] spawn A3A_fnc_reinfPlayer";
 		};
 		class HQ_button_engineer: RscButton
 		{
@@ -498,7 +498,7 @@ class unit_recruit 		{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKEng] spawn A3A_fnc_reinfPlayer";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'Eng'] spawn A3A_fnc_reinfPlayer";
 		};
 		class HQ_button_explosive: RscButton
 		{
@@ -508,7 +508,7 @@ class unit_recruit 		{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKExp] spawn A3A_fnc_reinfPlayer";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'Exp'] spawn A3A_fnc_reinfPlayer";
 		};
 		class HQ_button_grenadier: RscButton
 		{
@@ -518,7 +518,7 @@ class unit_recruit 		{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKGL] spawn A3A_fnc_reinfPlayer";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'GL'] spawn A3A_fnc_reinfPlayer";
 		};
 		class HQ_button_marksman: RscButton
 		{
@@ -528,7 +528,7 @@ class unit_recruit 		{
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKSniper] spawn A3A_fnc_reinfPlayer";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'Sniper'] spawn A3A_fnc_reinfPlayer";
 		};
 
 		class HQ_button_AT: RscButton
@@ -539,7 +539,7 @@ class unit_recruit 		{
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [SDKATman] spawn A3A_fnc_reinfPlayer";
+			action = "nul = [(A3A_faction_reb get 'groups') get 'LAT'] spawn A3A_fnc_reinfPlayer";
 		};
 	};
 };
@@ -642,7 +642,7 @@ class buy_vehicle 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closedialog 0; nul = [vehSDKBike] spawn A3A_fnc_addFIAveh";
+			action = "closedialog 0; nul = [A3A_faction_reb get 'vehicleBasic'] spawn A3A_fnc_addFIAveh";
 		};
 		class HQ_button_offroad: RscButton
 		{
@@ -652,7 +652,7 @@ class buy_vehicle 			{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [vehSDKLightUnarmed] spawn A3A_fnc_addFIAveh;";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'vehicleLightUnarmed'] spawn A3A_fnc_addFIAveh;";
 		};
 		class HQ_button_truck: RscButton
 		{
@@ -662,7 +662,7 @@ class buy_vehicle 			{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [vehSDKTruck] spawn A3A_fnc_addFIAveh;";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'vehicleTruck'] spawn A3A_fnc_addFIAveh;";
 		};
 		class HQ_button_Aoffroad: RscButton
 		{
@@ -672,7 +672,7 @@ class buy_vehicle 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [vehSDKLightArmed] spawn A3A_fnc_addFIAveh;";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'vehicleLightArmed'] spawn A3A_fnc_addFIAveh;";
 		};
 		class HQ_button_MG: RscButton
 		{
@@ -683,7 +683,7 @@ class buy_vehicle 			{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [SDKMGStatic] spawn A3A_fnc_addFIAveh;";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'staticMG'] spawn A3A_fnc_addFIAveh;";
 		};
 		class HQ_button_mortar: RscButton
 		{
@@ -694,7 +694,7 @@ class buy_vehicle 			{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [SDKMortar] spawn A3A_fnc_addFIAveh;";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'staticMortar'] spawn A3A_fnc_addFIAveh;";
 		};
 		class HQ_button_AT: RscButton
 		{
@@ -705,7 +705,7 @@ class buy_vehicle 			{
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [staticATteamPlayer] spawn A3A_fnc_addFIAveh;";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'staticAT'] spawn A3A_fnc_addFIAveh;";
 		};
 
 		class HQ_button_AA: RscButton
@@ -717,7 +717,7 @@ class buy_vehicle 			{
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [staticAAteamPlayer] spawn A3A_fnc_addFIAveh;";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'staticAA'] spawn A3A_fnc_addFIAveh;";
 		};
 	};
 };
@@ -762,7 +762,7 @@ class civ_vehicle 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [civCar] spawn A3A_fnc_addFIAveh;";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'vehicleCivCar'] spawn A3A_fnc_addFIAveh;";
 		};
 		class HQ_button_Gstatic: RscButton
 		{
@@ -772,7 +772,7 @@ class civ_vehicle 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [civTruck] spawn A3A_fnc_addFIAveh;";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'vehicleCivTruck'] spawn A3A_fnc_addFIAveh;";
 		};
 		class HQ_button_Gremove: RscButton
 		{
@@ -783,7 +783,7 @@ class civ_vehicle 			{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [civHeli] spawn A3A_fnc_addFIAveh;";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'vehicleCivHeli'] spawn A3A_fnc_addFIAveh;";
 		};
 		class HQ_button_offroad: RscButton
 		{
@@ -793,7 +793,7 @@ class civ_vehicle 			{
 		 	y = 0.415981 * safezoneH + safezoneY;
 		 	w = 0.175015 * safezoneW;
 		 	h = 0.0560125 * safezoneH;
-		 	action = "closeDialog 0;[civBoat] spawn A3A_fnc_addFIAveh;";
+		 	action = "closeDialog 0;[A3A_faction_reb get 'vehicleCivBoat'] spawn A3A_fnc_addFIAveh;";
 		 };
 	};
 };
@@ -2143,7 +2143,7 @@ class squad_recruit 			{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [groupsSDKmid] spawn A3A_fnc_addFIAsquadHC";
+			action = "closeDialog 0;nul = [(A3A_faction_reb get 'groups') get 'medium'] spawn A3A_fnc_addFIAsquadHC";
 		};
 		class HQ_button_ATteam: RscButton
 		{
@@ -2153,7 +2153,7 @@ class squad_recruit 			{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [groupsSDKAT] spawn A3A_fnc_addFIAsquadHC";
+			action = "closeDialog 0;nul = [(A3A_faction_reb get 'groups') get 'LAT'] spawn A3A_fnc_addFIAsquadHC";
 		};
 		class HQ_button_sniperTeam: RscButton
 		{
@@ -2163,7 +2163,7 @@ class squad_recruit 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [groupsSDKSniper] spawn A3A_fnc_addFIAsquadHC";
+			action = "closeDialog 0;nul = [(A3A_faction_reb get 'groups') get 'Sniper'] spawn A3A_fnc_addFIAsquadHC";
 		};
 		class HQ_button_infsquadM: RscButton
 		{
@@ -2173,7 +2173,7 @@ class squad_recruit 			{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [SDKMGStatic] spawn A3A_fnc_addFIAsquadHC";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'staticMG'] spawn A3A_fnc_addFIAsquadHC";
 		};
 		class HQ_button_infteamM: RscButton
 		{
@@ -2183,7 +2183,7 @@ class squad_recruit 			{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [vehSDKAT] spawn A3A_fnc_addFIAsquadHC";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'staticAT'] spawn A3A_fnc_addFIAsquadHC";
 		};
 		class HQ_button_ATteamM: RscButton
 		{
@@ -2193,7 +2193,7 @@ class squad_recruit 			{
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [staticAAteamPlayer] spawn A3A_fnc_addFIAsquadHC";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'staticAA'] spawn A3A_fnc_addFIAsquadHC";
 		};
 
 		class HQ_button_mortar: RscButton
@@ -2204,7 +2204,7 @@ class squad_recruit 			{
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [SDKMortar] spawn A3A_fnc_addFIAsquadHC";
+			action = "closeDialog 0;nul = [A3A_faction_reb get 'staticMortar'] spawn A3A_fnc_addFIAsquadHC";
 		};
 	};
 };
@@ -2546,7 +2546,7 @@ class mortar_type {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0; typeAmmunition = SDKMortarHEMag;";
+			action = "closeDialog 0; typeAmmunition = A3A_faction_reb get 'staticMortarMagHE';";
 		};
 		class HQ_button_Gstatic: RscButton
 		{
@@ -2556,7 +2556,7 @@ class mortar_type {
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0; typeAmmunition = SDKMortarSmokeMag;";
+			action = "closeDialog 0; typeAmmunition = A3A_faction_reb get 'staticMortarMagSmoke';";
 		};
 		/*
 		class HQ_button_Gremove: RscButton
@@ -2756,64 +2756,6 @@ class strike_type {
 	};
 };
 
-//NATO
-class NATO_player {
-	idd=-1;
-	movingenable=false;
-
-	class controls {
-		class HQ_box: BOX
-		{
-			idc = -1;
-			text = $STR_antistasi_dialogs_generic_box_text;
-			x = 0.244979 * safezoneW + safezoneX;
-			y = 0.223941 * safezoneH + safezoneY;
-			w = 0.445038 * safezoneW;
-			h = 0.20 * safezoneH;//30
-		};
-		class HQ_frame: RscFrame
-		{
-			idc = -1;
-			text = $STR_antistasi_dialogs_nato_player_specop;
-			x = 0.254979 * safezoneW + safezoneX;
-			y = 0.233941 * safezoneH + safezoneY;
-			w = 0.425038 * safezoneW;
-			h = 0.18 * safezoneH;//28
-		};
-		class HQ_button_back: RscButton
-		{
-			idc = -1;
-			text = $STR_antistasi_dialogs_generic_button_back_text;
-			x = 0.61 * safezoneW + safezoneX;
-			y = 0.251941 * safezoneH + safezoneY;
-			w = 0.06 * safezoneW;//0.175015
-			h = 0.05 * safezoneH;
-			action = "closeDialog 0";
-		};
-		class HQ_button_Gsquad: RscButton
-		{
-			idc = -1;
-			text = $STR_antistasi_dialogs_nato_player_quadbike;
-			x = 0.272481 * safezoneW + safezoneX;
-			y = 0.317959 * safezoneH + safezoneY;
-			w = 0.175015 * safezoneW;
-			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;[] call A3A_fnc_NATOQuadbike";
-		};
-		class HQ_button_Gstatic: RscButton
-		{
-			idc = -1;
-			text = $STR_antistasi_dialogs_nato_player_fast;
-			x = 0.482498 * safezoneW + safezoneX;
-			y = 0.317959 * safezoneH + safezoneY;
-			w = 0.175015 * safezoneW;
-			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;[] spawn A3A_fnc_NATOFT";
-		};
-	};
-};
-
-
 //Undefined
 class mbt_type {
 	idd=-1;
@@ -2923,7 +2865,7 @@ class squad_options 	{
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			//tooltip = "";
-			action = "closeDialog 0;nul = [groupsSDKSquad] spawn A3A_fnc_addFIAsquadHC;";
+			action = "closeDialog 0;nul = [(A3A_faction_reb get 'groups') get 'squad'] spawn A3A_fnc_addFIAsquadHC;";
 		};
 		class HQ_button_Gstatic: RscButton
 		{
@@ -2933,7 +2875,7 @@ class squad_options 	{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0; nul = [groupsSDKSquadEng] spawn A3A_fnc_addFIAsquadHC;";
+			action = "closeDialog 0; nul = [(A3A_faction_reb get 'groups') get 'squadEng'] spawn A3A_fnc_addFIAsquadHC;";
 		};
 
 		class HQ_button_Gremove: RscButton
@@ -2944,7 +2886,7 @@ class squad_options 	{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [groupsSDKSquadSupp,""MG""] spawn A3A_fnc_addFIAsquadHC;";
+			action = "closeDialog 0;nul = [(A3A_faction_reb get 'groups') get 'squadSupp',""MG""] spawn A3A_fnc_addFIAsquadHC;";
 		};
 		class HQ_button_unlock: RscButton
 		{
@@ -2954,7 +2896,7 @@ class squad_options 	{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;nul = [groupsSDKSquadSupp,""Mortar""] spawn A3A_fnc_addFIAsquadHC;";
+			action = "closeDialog 0;nul = [(A3A_faction_reb get 'groups') get 'squadSupp',""Mortar""] spawn A3A_fnc_addFIAsquadHC;";
 		};
 	};
 };

@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 private ["_gunner","_helperX"];
 private _isMortar = false;
 {if (_x getVariable ["typeOfSoldier",""] == "StaticGunner") then {_gunner = _x} else {_helperX = _x}} forEach _this;
@@ -6,13 +8,14 @@ private _groupX = group _gunner;
 private _mounted = false;
 private _veh = objNull;
 private _sideX = side _groupX;
+private _faction = Faction(_sideX);
 private _typeVehX = 	if !(_isMortar) then
 						{
-						if (_sideX == Occupants) then {NATOMG} else {if (_sideX == Invaders) then {CSATMG} else {SDKMGStatic}};
+                            _faction get "staticMGs";
 						}
 					else
 						{
-						if (_sideX == Occupants) then {NATOMortar} else {if (_sideX == Invaders) then {CSATMortar} else {SDKMortar}};
+                            _faction get "staticMortars";
 						};
 private _backpckG = backPack _gunner;
 private _backpckA = backpack _helperX;

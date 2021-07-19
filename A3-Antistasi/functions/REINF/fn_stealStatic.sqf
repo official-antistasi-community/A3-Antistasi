@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 private ["_staticX","_nearX","_playerX"];
 
 _staticX = _this select 0;
@@ -9,7 +11,7 @@ if (alive gunner _staticX) exitWith {["Steal Static", "You cannot steal a static
 
 if ((alive assignedGunner _staticX) and (!isPlayer (assignedGunner _staticX))) exitWith {["Steal Static", "The gunner of this static weapon is still alive"] call A3A_fnc_customHint;};
 
-if (A3A_hasRHS and ((typeOf _staticX == staticATteamPlayer) or (typeOf _staticX == staticAAteamPlayer))) exitWith {["Steal Static", "This weapon cannot be dissassembled"] call A3A_fnc_customHint;};
+if (A3A_hasRHS and ((typeOf _staticX == FactionGet(reb,"staticAT")) or (typeOf _staticX == FactionGet(reb,"staticAA")))) exitWith {["Steal Static", "This weapon cannot be dissassembled"] call A3A_fnc_customHint;};
 
 _nearX = [markersX,_staticX] call BIS_fnc_nearestPosition;
 

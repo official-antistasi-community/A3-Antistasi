@@ -7,6 +7,8 @@ private ["_pos","_veh","_roads","_conquered","_dirVeh","_markerX","_positionX","
 _markerX = _this select 0;
 _positionX = getMarkerPos _markerX;
 _sideX = sidesX getVariable [_markerX,sideUnknown];
+private _faction = Faction(_sideX);
+private _groupData = FactionGetGroups(_sideX); //retrive group data from the faction data
 
 Info_1("Spawning Control Point %1", _markerX);
 
@@ -75,14 +77,14 @@ if (_isControl) then
 			_vehiclesX pushBack _bunker;
 			_bunker setDir _dirveh;
 			_pos = getPosATL _bunker;
-			_typeVehX = if (_sideX == Occupants) then {NATOMG} else {CSATMG};
+			_typeVehX = selectRandom (_faction get "staticMGs");
 			_veh = _typeVehX createVehicle _positionX;
 			_vehiclesX pushBack _veh;
 			_veh setPosATL _pos;
 			_veh setDir _dirVeh;
 
 			_groupE = createGroup _sideX;
-			_typeUnit = if (_sideX == Occupants) then {staticCrewOccupants} else {staticCrewInvaders};
+			_typeUnit = _groupData get "staticCrew";
 			_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
 			_unit moveInGunner _veh;
 			_soldiers pushBack _unit;
@@ -93,7 +95,7 @@ if (_isControl) then
 			_bunker setDir _dirveh + 180;
 			_pos = getPosATL _bunker;
 			_pos = [getPos _bunker, 6, getDir _bunker] call BIS_fnc_relPos;
-			_typeVehX = if (_sideX == Occupants) then {NATOFlag} else {CSATFlag};
+			_typeVehX = _faction get "flag";
 			_veh = createVehicle [_typeVehX, _pos, [],0, "NONE"];
 			_vehiclesX pushBack _veh;
 			_veh setPosATL _pos;
@@ -105,7 +107,7 @@ if (_isControl) then
 			sleep 1;
 			{ [_x, _sideX] call A3A_fnc_AIVEHinit } forEach _vehiclesX;
 			};
-		_typeGroup = if (_sideX == Occupants) then {selectRandom groupsNATOmid} else {selectRandom groupsCSATmid};
+        _typeGroup = selectRandom (_groupData get "medium");
 		_groupX = [_positionX,_sideX, _typeGroup, true] call A3A_fnc_spawnGroup;
 		if !(isNull _groupX) then
 			{
@@ -126,17 +128,17 @@ if (_isControl) then
 		}
 	else
 		{
-		_typeVehX = if !(A3A_hasIFA) then {vehFIAArmedCar} else {vehFIACar};
+		_typeVehX = selectRandom (_faction get (if !(A3A_hasIFA) then {"vehiclesMilitiaLightArmed"} else {"vehiclesMilitiaCars"}));
 		_veh = _typeVehX createVehicle getPos (_roads select 0);
 		_veh setDir _dirveh + 90;
 		[_veh, _sideX] call A3A_fnc_AIVEHinit;
 		_vehiclesX pushBack _veh;
 		sleep 1;
-		_typeGroup = selectRandom groupsFIAMid;
+		_typeGroup = selectRandom (_groupData get "militia_Medium");
 		_groupX = [_positionX, _sideX, _typeGroup, true] call A3A_fnc_spawnGroup;
 		if !(isNull _groupX) then
 			{
-			_unit = [_groupX, FIARifleman, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
+			_unit = [_groupX, _groupData get "militia_Rifleman", _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
 			_unit moveInGunner _veh;
 			{_soldiers pushBack _x; [_x,"", false] call A3A_fnc_NATOinit} forEach units _groupX;
 			};
@@ -149,10 +151,9 @@ else
 	_frontierX = if (count _markersX > 0) then {true} else {false};
 	if (_frontierX) then
 		{
-		_cfg = CSATSpecOp;
+		_cfg = _groupData get "specOps";
 		if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then
 			{
-			_cfg = NATOSpecOp;
 			_sideX = Occupants;
 			};
 		_size = [_markerX] call A3A_fnc_sizeMarker;
@@ -166,7 +167,7 @@ else
 			};
 		_groupX = [_positionX,_sideX, _cfg] call A3A_fnc_spawnGroup;
 		_nul = [leader _groupX, _markerX, "SAFE","SPAWNED","RANDOM","NOVEH2","NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
-		_typeVehX = if (_sideX == Occupants) then {vehNATOUAVSmall} else {vehCSATUAVSmall};
+		_typeVehX = selectRandom (_faction get "uavsPortable");
 		if (_typeVehX != "not_supported") then
 			{
 			sleep 1;

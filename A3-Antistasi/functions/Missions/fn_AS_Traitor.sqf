@@ -10,6 +10,7 @@ _contactX = objNull;
 _groupContact = grpNull;
 _tsk = "";
 _tsk1 = "";
+private _groupData = FactionGet(occ,"groups");
 
 _positionX = getMarkerPos _markerX;
 
@@ -45,18 +46,18 @@ _arrayAirports = airportsX select {sidesX getVariable [_x,sideUnknown] == Occupa
 _base = [_arrayAirports, _positionX] call BIS_Fnc_nearestPosition;
 _posBase = getMarkerPos _base;
 
-_traitor = [_groupTraitor, NATOOfficer2, _posTraitor, [], 0, "NONE"] call A3A_fnc_createUnit;
+_traitor = [_groupTraitor, _groupData get "traitor", _posTraitor, [], 0, "NONE"] call A3A_fnc_createUnit;
 _traitor allowDamage false;
 _traitor setPos _posTraitor;
-_sol1 = [_groupTraitor, NATOBodyG, _posSol1, [], 0, "NONE"] call A3A_fnc_createUnit;
-_sol2 = [_groupTraitor, NATOBodyG, _posSol2, [], 0, "NONE"] call A3A_fnc_createUnit;
+_sol1 = [_groupTraitor, _groupData get "bodyGuard", _posSol1, [], 0, "NONE"] call A3A_fnc_createUnit;
+_sol2 = [_groupTraitor, _groupData get "bodyGuard", _posSol2, [], 0, "NONE"] call A3A_fnc_createUnit;
 _groupTraitor selectLeader _traitor;
 
 _posTsk = (position _houseX) getPos [random 100, random 360];
 
 private _taskId = "AS" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskID,[format ["A traitor has scheduled a meeting with %4 in %1. Kill him before he provides enough intel to give us trouble. Do this before %2. We don't where exactly this meeting will happen. You will recognise the building by the nearby Offroad and %3 presence.",_nameDest,_displayTime,nameOccupants],"Kill the Traitor",_markerX],_posTsk,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
-[[Occupants],_taskID+"B",[format ["We arranged a meeting in %1 with a %3 contact who may have vital information about their Headquarters position. Protect him until %2.",_nameDest,_displayTime,nameTeamPlayer],"Protect Contact",_markerX],getPos _houseX,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskID,[format ["A traitor has scheduled a meeting with %4 in %1. Kill him before he provides enough intel to give us trouble. Do this before %2. We don't where exactly this meeting will happen. You will recognise the building by the nearby Offroad and %3 presence.",_nameDest,_displayTime,FactionGet(occ,"name")],"Kill the Traitor",_markerX],_posTsk,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
+[[Occupants],_taskID+"B",[format ["We arranged a meeting in %1 with a %3 contact who may have vital information about their Headquarters position. Protect him until %2.",_nameDest,_displayTime,FactionGet(reb,"name")],"Protect Contact",_markerX],getPos _houseX,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
 [_taskId, "AS", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 traitorIntel = false; publicVariable "traitorIntel";
@@ -87,7 +88,7 @@ else
 	_dirVeh = getDir _road;
 	};
 _posVeh = [_posroad, 3, _dirveh + 90] call BIS_Fnc_relPos;
-_veh = vehSDKLightUnarmed createVehicle _posVeh;
+_veh = FactionGet(reb,"vehicleLightUnarmed") createVehicle _posVeh;
 _veh allowDamage false;
 _veh setDir _dirVeh;
 sleep 15;
@@ -104,8 +105,17 @@ _mrk setMarkerColorLocal "ColorRed";
 _mrk setMarkerBrushLocal "DiagGrid";
 _mrk setMarkerAlphaLocal 0;
 
-_typeGroup = if (random 10 < tierWar) then {NATOSquad} else {[policeOfficer,policeGrunt,policeGrunt,policeGrunt,policeGrunt,policeGrunt,policeGrunt,policeGrunt]};
-_groupX = [_positionX,Occupants, NATOSquad] call A3A_fnc_spawnGroup;
+_typeGroup = if (random 10 < tierWar) then {_groupData get "squad"} else {[
+    _groupData get "police_Officer"
+    ,_groupData get "police_Grunt"
+    ,_groupData get "police_Grunt"
+    ,_groupData get "police_Grunt"
+    ,_groupData get "police_Grunt"
+    ,_groupData get "police_Grunt"
+    ,_groupData get "police_Grunt"
+    ,_groupData get "police_Grunt"
+]};
+_groupX = [_positionX,Occupants, _typeGroup] call A3A_fnc_spawnGroup;
 sleep 1;
 if (random 10 < 2.5) then
 	{

@@ -1,3 +1,4 @@
+//ToDo: this function needs a refactor bad
 #include "..\..\Includes\common.inc"
 FIX_LINE_NUMBERS()
 private ["_soldiers","_vehiclesX","_groups","_base","_posBase","_roads","_typeCar","_arrayAirports","_arrayDestinations","_radiusX","_road","_veh","_vehCrew","_groupVeh","_groupX","_groupP","_distanceX","_spawnPoint"];
@@ -28,43 +29,28 @@ private _isValidPatrolOrigin = if (isMultiplayer) then {
 if (_arrayAirports1 isEqualTo []) exitWith {};
 
 _base = selectRandom _arrayAirports1;
+_sideX = sidesX getVariable [_base,sideUnknown];
+private _faction = Faction(_sideX);
+private _groupData = FactionGetGroups(_sideX);
+
 _typeCar = "";
-_sideX = Occupants;
 _typePatrol = "LAND";
-if (sidesX getVariable [_base,sideUnknown] == Occupants) then
-	{
-	if ((_base in seaports) and ([vehNATOBoat] call A3A_fnc_vehAvailable)) then
-		{
-		_typeCar = vehNATOBoat;
-		_typePatrol = "SEA";
-		}
-	else
-		{
-		if (random 100 < aggressionOccupants) then
-			{
-			_typeCar = if (_base in airportsX) then {selectRandom (vehNATOLight + [vehNATOPatrolHeli])} else {selectRandom vehNATOLight};
-			if (_typeCar == vehNATOPatrolHeli) then {_typePatrol = "AIR"};
-			}
-		else
-			{
-			_typeCar = selectRandom [vehPoliceCar,vehFIAArmedCar];
-			};
-		};
-	}
-else
-	{
-	_sideX = Invaders;
-	if ((_base in seaports) and ([vehCSATBoat] call A3A_fnc_vehAvailable)) then
-		{
-		_typeCar = vehCSATBoat;
-		_typePatrol = "SEA";
-		}
-	else
-		{
-		_typeCar = if (_base in airportsX) then {selectRandom (vehCSATLight + [vehCSATPatrolHeli])} else {selectRandom vehCSATLight};
-		if (_typeCar == vehCSATPatrolHeli) then {_typePatrol = "AIR"};
-		};
-	};
+private _boats = (_faction get "vehiclesGunBoats") select {[_x] call A3A_fnc_vehAvailable};
+if ((_base in seaports) && {count _boats > 0}) then {
+    _typeCar = selectRandom _boats;
+    _typePatrol = "SEA";
+} else {
+    if ( _sideX isEqualTo Invaders || random 100 < aggressionOccupants ) then {
+        _typeCar = selectRandom (
+            if (_base in airportsX) then {
+                (_faction get "vehiclesLightArmed") + (_faction get "vehiclesLightUnarmed") + (_faction get "vehiclesHelisLight")
+            } else {_faction get "vehiclesHelisLight"}
+        );
+        if (_typeCar in (_faction get "vehiclesHelisLight")) then {_typePatrol = "AIR"};
+    } else {
+        _typeCar = selectRandom ( (_faction get "vehiclesPolice") + (_faction get "vehiclesMilitiaLightArmed") );
+    };
+};
 
 _posbase = getMarkerPos _base;
 
@@ -127,17 +113,10 @@ _groups = _groups + [_groupVeh];
 _vehiclesX = _vehiclesX + [_veh];
 
 
-if (_typeCar in vehNATOLightUnarmed) then
+if (_typeCar in (_faction get "vehiclesLightUnarmed")) then
 	{
 	sleep 1;
-	_groupX = [_posbase, _sideX, groupsNATOSentry] call A3A_fnc_spawnGroup;
-	{_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x; [_x] joinSilent _groupVeh; [_x,"",false] call A3A_fnc_NATOinit} forEach units _groupX;
-	deleteGroup _groupX;
-	};
-if (_typeCar in vehCSATLightUnarmed) then
-	{
-	sleep 1;
-	_groupX = [_posbase, _sideX, groupsCSATSentry] call A3A_fnc_spawnGroup;
+	_groupX = [_posbase, _sideX, _groupData get "sentry"] call A3A_fnc_spawnGroup;
 	{_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x; [_x] joinSilent _groupVeh; [_x,"",false] call A3A_fnc_NATOinit} forEach units _groupX;
 	deleteGroup _groupX;
 	};

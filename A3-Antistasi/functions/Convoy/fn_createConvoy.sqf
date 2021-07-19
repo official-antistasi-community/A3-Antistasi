@@ -96,14 +96,14 @@ if(_convoySide == Occupants) then
     private _convoyArray = server getVariable ["convoyMarker_Occupants", []];
     _convoyArray pushBack _convoyMarker;
     server setVariable ["convoyMarker_Occupants", _convoyArray, true];
-    _convoyMarker setMarkerText (format ["[GPS-%3] %1 %2 Convoy", nameOccupants, _convoyType, _convoyID]);
+    _convoyMarker setMarkerText (format ["[GPS-%3] %1 %2 Convoy", FactionGet(occ,"name"), _convoyType, _convoyID]);
 }
 else
 {
     private _convoyArray = server getVariable ["convoyMarker_Invaders", []];
     _convoyArray pushBack _convoyMarker;
     server setVariable ["convoyMarker_Invaders", _convoyArray, true];
-    _convoyMarker setMarkerText (format ["[GPS-%3] %1 %2 Convoy", nameInvaders, _convoyType, _convoyID]);
+    _convoyMarker setMarkerText (format ["[GPS-%3] %1 %2 Convoy", FactionGet(inv,"name"), _convoyType, _convoyID]);
 };
 
 Info_5("CreateConvoy[%1]: Created convoy with %2 m/s and a total of %3 waypoints, marker is %4%5", _convoyID, _velocity, count _route, _markerPrefix, _markerType);

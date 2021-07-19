@@ -88,7 +88,6 @@ _lineIndex = 0;
   if(!_skip) then
   {
     _spawnParameter = [getMarkerPos _marker, objNull];
-    //_spawnParameter = [_marker, NATOCrew] call A3A_fnc_findSpawnPosition;
     {
       _unitX = [_groupX, _x, (_spawnParameter select 0), [], 5, "NONE"] call A3A_fnc_createUnit;
       _allSoldiers pushBack _unitX;

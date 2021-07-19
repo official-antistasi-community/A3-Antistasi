@@ -18,19 +18,21 @@ Info_2("Launching CSAT Punish Against %1 from %2", _attackDestination, _attackOr
 
 _nameDestination = [_attackDestination] call A3A_fnc_localizar;
 private _taskId = "invaderPunish" + str A3A_taskCount;
-[[teamPlayer,civilian,Occupants],_taskId,[format ["%2 is attacking critical positions within %1! Defend the city at all costs",_nameDestination,nameInvaders],format ["%1 Punishment",nameInvaders],_attackDestination],getMarkerPos _attackDestination,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian,Occupants],_taskId,[format ["%2 is attacking critical positions within %1! Defend the city at all costs",_nameDestination,FactionGet(inv,"name")],format ["%1 Punishment",FactionGet(inv,"name")],_attackDestination],getMarkerPos _attackDestination,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
 [_taskId, "invaderPunish", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 
 private _reveal = [_posDestination, Invaders] call A3A_fnc_calculateSupportCallReveal;
 [_posDestination, 4, ["MORTAR"], Invaders, _reveal] remoteExec ["A3A_fnc_sendSupport", 2];
 private _sideTarget = if (sidesX getVariable [_attackDestination,sideUnknown] == Occupants) then {Occupants} else {teamPlayer};
+private _defenderFaction = Faction(_sideTarget);
 _missionExpireTime = time + 3600;
 
-private _invaderAirTransport = vehCSATTransportHelis + vehCSATTransportPlanes;
+private _invaderAirTransport = FactionGet(inv, "vehiclesHelisLight") + FactionGet(inv, "vehiclesHelisTransport") + FactionGet(inv, "vehiclesPlanesTransport");
+#define VEH_AIR (_invaderAirTransport + FactionGet(inv, "vehiclesPlanesCAS") + FactionGet(inv, "vehiclesPlanesAA"))
 
 for "_i" from 1 to 3 do {
-	_typeAirVehicle = if (_i != 3) then {selectRandom (vehCSATAir select {[_x] call A3A_fnc_vehAvailable})} else {selectRandom (_invaderAirTransport select {[_x] call A3A_fnc_vehAvailable})};
+	_typeAirVehicle = if (_i != 3) then {selectRandom (VEH_AIR select {[_x] call A3A_fnc_vehAvailable})} else {selectRandom (_invaderAirTransport select {[_x] call A3A_fnc_vehAvailable})};
 	_timeOut = 0;
 	_pos = _posOrigin findEmptyPosition [0,100,_typeAirVehicle];
 	while {_timeOut < 60} do {
@@ -120,7 +122,7 @@ _size = [_attackDestination] call A3A_fnc_sizeMarker;
 
 _groupCivil = createGroup _sideTarget;
 _groups pushBack _groupCivil;
-_typeUnit = if (_sideTarget == teamPlayer) then {SDKUnarmed} else {NATOUnarmed};
+_typeUnit = _defenderFaction get "Unarmed";
 for "_i" from 0 to _numCiv do {
 	while {true} do {
 		_pos = _posDestination getPos [random _size,random 360];
@@ -128,12 +130,12 @@ for "_i" from 0 to _numCiv do {
 	};
 	_civ = [_groupCivil, _typeUnit,_pos, [],0,"NONE"] call A3A_fnc_createUnit;
 	[_civ] call A3A_fnc_civInit;
-	_rnd = random 100; 
-  	if (_rnd < 75) then { 
-			[_civ, selectRandom (unlockedsniperrifles + unlockedshotguns + Unlockedrifles + unlockedsmgs), 5, 0] call BIS_fnc_addWeapon;  
-		} else {  
-			[_civ, selectRandom (unlockedmachineguns + unlockedshotguns + Unlockedrifles + unlockedsmgs), 5, 0] call BIS_fnc_addWeapon;   
-	}; 
+	_rnd = random 100;
+  	if (_rnd < 75) then {
+			[_civ, selectRandom (unlockedsniperrifles + unlockedshotguns + Unlockedrifles + unlockedsmgs), 5, 0] call BIS_fnc_addWeapon;
+		} else {
+			[_civ, selectRandom (unlockedmachineguns + unlockedshotguns + Unlockedrifles + unlockedsmgs), 5, 0] call BIS_fnc_addWeapon;
+	};
 	_civilians pushBack _civ;
 	_civ setSkill 0.5;
 	sleep 0.5;
@@ -143,8 +145,9 @@ _nul = [leader _groupCivil, _attackDestination, "AWARE","SPAWNED","NOVEH2"] exec
 _soldiersSpawned = count _soldiers;
 
 if (tierWar >= 5) then {
+    private _planes = FactionGet(inv,"vehiclesPlanesCAS") select {[_x] call A3A_fnc_vehAvailable};
 	for "_i" from 0 to round random 1 do {
-		if ([vehCSATPlane] call A3A_fnc_vehAvailable) then {
+		if (_planes isNotEqualTo []) then {
             private _reveal = [_posDestination, Invaders] call A3A_fnc_calculateSupportCallReveal;
             [_posDestination, 4, ["AIRSTRIKE"], Invaders, _reveal] remoteExec ["A3A_fnc_sendSupport", 2];
 			sleep 30;

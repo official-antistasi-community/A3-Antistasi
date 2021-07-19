@@ -1,5 +1,7 @@
 if (!isServer and hasInterface) exitWith{};
-
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+private _groupData = FactionGet(reb,"groups");
 private ["_markerX","_vehiclesX","_groups","_soldiers","_positionX","_staticsX","_garrison"];
 
 _markerX = _this select 0;
@@ -14,8 +16,8 @@ if (_markerX != "Synd_HQ") then
 {
 	if (!(_markerX in citiesX)) then
 	{
-		private _veh = createVehicle [SDKFlag, _positionX, [],0, "NONE"];
-		_veh setFlagTexture SDKFlagTexture;
+		private _veh = createVehicle [FactionGet(reb,"flag"), _positionX, [],0, "NONE"];
+		_veh setFlagTexture FactionGet(reb,"flagTexture");
 		_veh allowDamage false;
 		_vehiclesX pushBack _veh;
 		[_veh,"SDKFlag"] remoteExec ["A3A_fnc_flagaction",0,_veh];
@@ -73,30 +75,30 @@ private _groupStatics = grpNull;
 private _groupMortars = grpNull;
 
 // Create the purchased mortars
-if (staticCrewTeamPlayer in _garrison) then
+if ((_groupData get "staticCrew") in _garrison) then
 {
 	_groupMortars = createGroup teamPlayer;
 	{
-		private _unit = [_groupMortars, staticCrewTeamPlayer, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
+		private _unit = [_groupMortars, _groupData get "staticCrew", _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
 		private _pos = [_positionX] call A3A_fnc_mortarPos;
-		private _veh = SDKMortar createVehicle _pos;
+		private _veh = FactionGet(reb,"staticMortar") createVehicle _pos;
 		_vehiclesX pushBack _veh;
 		_nul=[_veh] execVM "scripts\UPSMON\MON_artillery_add.sqf";//TODO need delete UPSMON link
 		_unit assignAsGunner _veh;
 		_unit moveInGunner _veh;
 		[_veh, teamPlayer] call A3A_fnc_AIVEHinit;
 		_soldiers pushBack _unit;
-	} forEach (_garrison select {_x == staticCrewTeamPlayer});
-	_garrison = _garrison - [staticCrewTeamPlayer];
+	} forEach (_garrison select {_x == (_groupData get "staticCrew")});
+	_garrison = _garrison - [_groupData get "staticCrew"];
 };
 
 // Move riflemen into saved static weapons in area
 {
 	if !(isNil {_x getVariable "lockedForAI"}) then { continue };
-	private _index = _garrison findIf {_x in SDKMil};
+	private _index = _garrison findIf {_x isEqualTo (_groupData get "Mil")};
 	if (_index == -1) exitWith {};
 	private _unit = objNull;
-	if (typeOf _x == SDKMortar) then
+	if (typeOf _x == FactionGet(reb,"staticMortar")) then
 	{
 		if (isNull _groupMortars) then { _groupMortars = createGroup teamPlayer };
 		_unit = [_groupMortars, (_garrison select _index), _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
@@ -133,7 +135,7 @@ while {(spawner getVariable _markerX != 2) and (_countUnits < _totalUnits)} do
 	};
 	private _typeX = _garrison select _countUnits;
 	private _unit = [_groupX, _typeX, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
-	if (_typeX in SDKSL) then {_groupX selectLeader _unit};
+	if (_typeX isEqualTo (_groupData get "SL")) then {_groupX selectLeader _unit};
 	[_unit,_markerX] call A3A_fnc_FIAinitBases;
 	_soldiers pushBack _unit;
 	_countUnits = _countUnits + 1;

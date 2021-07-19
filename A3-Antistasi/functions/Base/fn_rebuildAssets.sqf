@@ -1,4 +1,5 @@
-
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 _resourcesFIA = server getVariable "resourcesFIA";
 
 if (_resourcesFIA < 5000) exitWith {["Rebuild Assets", "You do not have enough money to rebuild any Asset. You need 5.000 €"] call A3A_fnc_customHint;};
@@ -35,7 +36,7 @@ if (_siteX in outposts) then
 		if (sidesX getVariable [_siteX, sideUnknown] != teamPlayer) then
 			{
 			_leave = true;
-			_textX = format ["You cannot rebuild a Radio Tower in an Outpost which does not belong to %1",nameTeamPlayer];
+			_textX = format ["You cannot rebuild a Radio Tower in an Outpost which does not belong to %1",FactionGet(reb,"name")];
 			}
 		else
 			{

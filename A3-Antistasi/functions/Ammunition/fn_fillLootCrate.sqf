@@ -20,7 +20,7 @@ clearWeaponCargoGlobal _crate;
 clearItemCargoGlobal _crate;
 clearBackpackCargoGlobal _crate;
 //Double max types if the crate is an ammo truck
-if (typeOf _crate in vehAmmoTrucks) then {
+if (typeOf _crate in FactionGet(all,"vehiclesAmmoTrucks")) then {
     Verbose("Ammo Truck Detected: Doubling Types");
 	_crateWepTypeMax = _crateWepTypeMax * 2;
 	_crateItemTypeMax = _crateItemTypeMax * 2;

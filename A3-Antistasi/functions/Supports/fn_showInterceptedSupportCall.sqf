@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 params ["_reveal", "_position", "_side", "_supportType", "_marker", "_textMarker"];
 
 /*  Shows the intercepted radio message to the players
@@ -45,7 +47,7 @@ if(_position distance2D (getMarkerPos "Synd_HQ") < distanceMission) then
 if(_reveal <= 0.2) exitWith {};
 
 private _text = "";
-private _sideName = if(_side == Occupants) then {nameOccupants} else {nameInvaders};
+private _sideName = if(_side == Occupants) then {FactionGet(occ,"name")} else {FactionGet(inv,"name")};
 if (_reveal <= 0.5) then
 {
     //Side and call is reveal

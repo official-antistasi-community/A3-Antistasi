@@ -23,7 +23,7 @@ if (haveRadio) then {_unit linkItem selectrandom (unlockedRadios)};
 
 // Chance of picking armored rather than random vests and headgear, rising with unlocked gear counts
 if !(unlockedHeadgear isEqualTo []) then {
-	if (count unlockedArmoredHeadgear * 20 < random(100)) then { _unit addHeadgear (selectRandom (A3A_faction_reb getVariable "headgear")) }
+	if (count unlockedArmoredHeadgear * 20 < random(100)) then { _unit addHeadgear (selectRandom (A3A_faction_reb get "headgear")) }
 	else { _unit addHeadgear (selectRandom unlockedArmoredHeadgear) };
 };
 if !(unlockedVests isEqualTo []) then {
@@ -38,9 +38,10 @@ if !(_unlockedSmokes isEqualTo []) then { _unit addMagazines [selectRandom _unlo
 
 
 private _unitClass = _unit getVariable "unitType";
-
+private _groupData = FactionGet(reb,"groups");
+#define GROUP(VAR) (_groupData get VAR)
 switch (true) do {
-	case (_unitClass in SDKSniper): {
+	case (_unitClass in GROUP("Sniper")): {
 		if (count unlockedSniperRifles > 0) then {
 			[_unit, selectRandom unlockedSniperRifles, 8] call _addWeaponAndMags;
 			if (count unlockedOptics > 0) then {
@@ -52,20 +53,20 @@ switch (true) do {
 			[_unit,unlockedRifles] call A3A_fnc_randomRifle;
 		};
 	};
-	case (_unitClass in SDKMil): {
+	case (_unitClass isEqualTo GROUP("Mil")): {
 		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
 		// Adding AA launchers to garrison riflemen because explosives guys can't currently be purchased there
 		if (_recruitType == 2 && {count unlockedAA > 0}) then {
 			[_unit, selectRandom unlockedAA, 1] call _addWeaponAndMags;
 		};
 	};
-	case (_unitClass in SDKMG): {
+	case (_unitClass isEqualTo GROUP("MG")): {
 		[_unit,unlockedMachineGuns] call A3A_fnc_randomRifle;
 	};
-	case (_unitClass in SDKGL): {
+	case (_unitClass isEqualTo GROUP("GL")): {
 		[_unit,unlockedGrenadeLaunchers] call A3A_fnc_randomRifle;
 	};
-	case (_unitClass in SDKExp): {
+	case (_unitClass isEqualTo GROUP("Exp")): {
 		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
 		_unit enableAIFeature ["MINEDETECTION", true]; //This should prevent them from Stepping on the Mines as an "Expert" (It helps, they still step on them)
 		if (count unlockedAA > 0) then {
@@ -73,10 +74,10 @@ switch (true) do {
 		};
 		// TODO: explosives. Not that they know what to do with them.
 	};
-	case (_unitClass in SDKEng): {
+	case (_unitClass isEqualTo GROUP("Eng")): {
 		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
 	};
-	case (_unitClass in SDKMedic): {
+	case (_unitClass isEqualTo GROUP("Medic")): {
 		[_unit,unlockedSMGs] call A3A_fnc_randomRifle;
 		// temporary hack
 		private _medItems = [];
@@ -90,7 +91,7 @@ switch (true) do {
 			_unit addItemToBackpack _x;
 		} forEach _medItems;
 	};
-	case (_unitClass in SDKATman): {
+	case (_unitClass in GROUP("LAT")): {
 		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
 		if !(unlockedAT isEqualTo []) then {
 			[_unit, selectRandom unlockedAT, 4] call _addWeaponAndMags;
@@ -101,11 +102,11 @@ switch (true) do {
 		};
 	};
 	// squad leaders and
-	case (_unitClass in squadLeaders): {
+	case (_unitClass in GROUP("SL")): {
 		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
 		if (_recruitType == 1) then {_unit linkItem selectrandom (unlockedRadios)};
 	};
- 	case (_unitClass isEqualTo staticCrewTeamPlayer): {
+ 	case (_unitClass isEqualTo GROUP("staticCrew")): {
 		[_unit,unlockedRifles] call A3A_fnc_randomRifle;
 		if (_recruitType == 1) then {_unit linkItem selectrandom (unlockedRadios)};
 	};

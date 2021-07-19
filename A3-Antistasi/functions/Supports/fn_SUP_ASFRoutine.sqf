@@ -2,8 +2,10 @@ params ["_side", "_timerIndex", "_sleepTime", "_airport", "_supportName", "_setu
 #include "..\..\Includes\common.inc"
 FIX_LINE_NUMBERS()
 
-private _plane = if (_side == Occupants) then {vehNATOPlaneAA} else {vehCSATPlaneAA};
-private _crewUnits = if(_side == Occupants) then {NATOPilot} else {CSATPilot};
+private _faction = Faction(_side);
+private _groupData = FactionGetGroups(_side);
+private _plane = selectRandom (_faction get "vehiclesPlanesAA");
+private _crewUnits = _groupData get "pilot";
 private _timerArray = if(_side == Occupants) then {occupantsASFTimer} else {invadersASFTimer};
 
 //Sleep to simulate preparetion time

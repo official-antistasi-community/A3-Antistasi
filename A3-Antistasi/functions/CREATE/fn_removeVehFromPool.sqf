@@ -1,4 +1,6 @@
-if (_this in vehUnlimited) exitWith {};
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
+if (_this in FactionGet(all,"vehiclesUnlimited")) exitWith {};
 
 private _number = timer getVariable _this;
 

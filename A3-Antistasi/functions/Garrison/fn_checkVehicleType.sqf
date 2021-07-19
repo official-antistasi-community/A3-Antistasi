@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 params ["_vehicle", "_preference"];
 
 /*  Checks if the given vehicle type is within the preferred category
@@ -9,78 +11,113 @@ params ["_vehicle", "_preference"];
 *     _result : BOOLEAN : True if vehicle fits category, false otherwise
 */
 
-private ["_result"];
+//define list of vehicles as lazy conditions
+#define lightVeh \
+    {_vehicle in FactionGet(occ,"vehiclesLightArmed")} \
+    || {_vehicle in FactionGet(inv,"vehiclesLightUnarmed")} \
+    || {_vehicle in FactionGet(occ,"vehiclesLightArmed")} \
+    || {_vehicle in FactionGet(inv,"vehiclesLightUnarmed")}
+
+#define apc \
+    {_vehicle in FactionGet(occ,"vehiclesAPCs")} \
+    || {_vehicle in FactionGet(inv,"vehiclesAPCs")}
+
+#define tank \
+    {_vehicle in FactionGet(occ,"vehiclesTanks")} \
+    || {_vehicle in FactionGet(inv,"vehiclesTanks")}
+
+#define patrolHeli \
+    {_vehicle in FactionGet(occ,"vehiclesHelisLight")} \
+    || {_vehicle in FactionGet(inv,"vehiclesHelisLight")}
+
+#define transportHeli \
+    patrolHeli \
+    || {_vehicle in FactionGet(occ,"vehiclesHelisTransport")} \
+    || {_vehicle in FactionGet(inv,"vehiclesHelisTransport")}
+
+#define attackHeli \
+    {_vehicle in FactionGet(occ,"vehiclesHelisAttack")} \
+    || {_vehicle in FactionGet(inv,"vehiclesHelisAttack")}
+
+#define drone \
+    {_vehicle in FactionGet(occ,"uavsAttack")} \
+    || {_vehicle in FactionGet(inv,"uavsAttack")} \
+    || {_vehicle in FactionGet(occ,"uavsPortable")} \
+    || {_vehicle in FactionGet(inv,"uavsPortable")}
+
+#define plane \
+    {_vehicle in FactionGet(occ,"vehiclesPlanesCAS")} \
+    || {_vehicle in FactionGet(inv,"vehiclesPlanesCAS")} \
+    || {_vehicle in FactionGet(occ,"vehiclesPlanesAA")} \
+    || {_vehicle in FactionGet(inv,"vehiclesPlanesAA")}
 
 //TODO this does not work properly (maybe even throws errors) as the template files arent
 //unified on how they work, await Pots Templates, then fix this
-_result = false;
 switch (_preference) do
 {
     case ("EMPTY"):
     {
-      _result = (_vehicle == "");
+      _vehicle == "";
     };
     case ("LAND_START"):
     {
-      _result = (_vehicle == "" || {_vehicle in vehNATOLight || _vehicle in vehCSATLight});
+        _vehicle == "" || lightVeh;
     };
     case ("LAND_LIGHT"):
     {
-      _result = (_vehicle in vehNATOLight || {_vehicle in vehCSATLight});
+      false || lightVeh;
     };
     case ("LAND_DEFAULT"):
     {
-      _result = (_vehicle in vehNATOLight || {_vehicle in vehCSATLight || {_vehicle in vehNATOAPC || {_vehicle in vehCSATAPC}}});
+      false || lightVeh || apc;
     };
     case ("LAND_APC"):
     {
-      _result = (_vehicle in vehNATOAPC || {_vehicle in vehCSATAPC});
+      false || apc;
     };
     case ("LAND_ATTACK"):
     {
-      //Does this work? vehXXXXTank is not an array...
-      _result = (_vehicle in vehNATOAPC || {_vehicle in vehCSATAPC || {_vehicle == vehNATOTank || {_vehicle == vehCSATTank}}})
+
+      false || apc || tank;
     };
     case ("LAND_TANK"):
     {
-      _result = (_vehicle == vehNATOTank || {_vehicle == vehCSATTank});
+      false || tank;
     };
     case ("LAND_AIR"):
     {
-      _result = (_vehicle == vehNATOAA || {_vehicle == vehCSATAA});
+      _vehicle in FactionGet(occ,"vehiclesAA") || {_vehicle in FactionGet(inv,"vehiclesAA")};
     };
     case ("HELI_PATROL"):
     {
-      _result = (_vehicle == "" || {_vehicle in vehNATOPatrolHeli || _vehicle in vehCSATPatrolHeli});
+      _vehicle == "" || patrolHeli;
     };
     case ("HELI_LIGHT"):
     {
-      _result = (_vehicle in vehNATOPatrolHeli || {_vehicle in vehCSATPatrolHeli});
+      false || patrolHeli;
     };
     case ("HELI_TRANSPORT"):
     {
-      _result = (_vehicle in vehNATOTransportHelis || {_vehicle in vehCSATTransportHelis});
+        false || transportHeli;
     };
     case ("HELI_DEFAULT"):
     {
-      _result = (_vehicle in vehNATOTransportHelis || {_vehicle in vehCSATTransportHelis || {_vehicle in vehNATOAttackHelis || {_vehicle in vehCSATAttackHelis}}});
+        false || transportHeli || attackHeli;
     };
     case ("HELI_ATTACK"):
     {
-      _result = (_vehicle in vehNATOAttackHelis || {_vehicle in vehCSATAttackHelis});
+      false || attackHeli;
     };
     case ("AIR_DRONE"):
     {
-      _result = (_vehicle == "" || {_vehicle in [vehNATOUAV, vehNATOUAVSmall] || {_vehicle in [vehCSATUAV, vehCSATUAVSmall]}});
+      _vehicle == "" || drone
     };
     case ("AIR_GENERIC"):
     {
-      _result = (_vehicle in [vehNATOUAV, vehNATOUAVSmall] || {_vehicle in [vehCSATUAV, vehCSATUAVSmall] || {_vehicle in [vehNATOPlane, vehNATOPlaneAA] || {_vehicle in [vehCSATPlane, vehCSATPlaneAA]}}});
+      false || drone || plane;
     };
     case ("AIR_DEFAULT"):
     {
-      _result = (_vehicle in [vehNATOPlane, vehNATOPlaneAA] || {_vehicle in [vehCSATPlane, vehCSATPlaneAA]});
+      false || plane;
     };
 };
-
-_result;

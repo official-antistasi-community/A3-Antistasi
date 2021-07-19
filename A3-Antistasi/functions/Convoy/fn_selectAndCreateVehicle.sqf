@@ -15,6 +15,9 @@ params ["_vehPool", "_side", ["_isAir", false]];
 *       - ARRAY of STRINGS: the new vehicle pool
 */
 
+private _faction = Faction(_side);
+private _groupData = FactionGetGroups(_side);
+
 if(isNil "_side") exitWith
 {
     Error("No side given!");
@@ -28,7 +31,7 @@ if(isNil "_vehPool" || {!(_vehPool isEqualType []) || {count _vehPool == 0}}) ex
 private ["_selectedVehicle"];
 _selectedVehicle = selectRandom _vehPool;
 
-_crewUnits = if(_side == Occupants) then {NATOCrew} else {CSATCrew};
+_crewUnits = _groupData get "crew";
 
 while{!([_selectedVehicle] call A3A_fnc_vehAvailable)} do
 {
@@ -37,22 +40,15 @@ while{!([_selectedVehicle] call A3A_fnc_vehAvailable)} do
   {
     switch (true) do
     {
-      case (_side == Occupants && {!_isAir}):
+      case (!_isAir):
       {
-        _vehPool = vehNATOTrucks;
+        _vehPool = _faction get "vehiclesTrucks";
       };
-      case (_Side == Occupants && {_isAir}):
+      default
       {
-        _vehPool = vehNATOTransportHelis;
+        _vehPool = (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport");
       };
-      case (_side == Invaders && {!_isAir}):
-      {
-        _vehPool = vehCSATTrucks;
-      };
-      case (_Side == Invaders && {_isAir}):
-      {
-        _vehPool = vehCSATTransportHelis;
-      };
+
     };
   };
   _selectedVehicle = selectRandom _vehPool;
@@ -62,19 +58,19 @@ _crew = [_selectedVehicle, _crewUnits] call A3A_fnc_getVehicleCrew;
 _typeGroup = [];
 if (!_isEasy) then
 {
-  if (!(_selectedVehicle in vehTanks)) then
+  if (!(_selectedVehicle in FactionGet(all,"vehiclesTanks"))) then
   {
     _typeGroup = [_selectedVehicle,_side] call A3A_fnc_cargoSeats;
   };
 }
 else
 {
-  if (not(_selectedVehicle == vehFIAArmedCar)) then
+  if (not(_selectedVehicle == (_faction get "vehiclesMilitiaLightArmed"))) then
   {
-    _typeGroup = selectRandom groupsFIASquad;
-    if (_selectedVehicle == vehFIACar) then
+    _typeGroup = selectRandom (_groupData get "militia_Squads");
+    if (_selectedVehicle == (_faction get "vehiclesMilitiaCars")) then
     {
-      _typeGroup = selectRandom groupsFIAMid;
+      _typeGroup = selectRandom (_groupData get "medium");
     };
   };
 };

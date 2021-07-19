@@ -17,7 +17,7 @@
 		_group - Group with crew members [GROUP]
 
     Example(s):
-		[west, _myVehicle, NATOCrew] call A3A_fnc_createVehicleCrew;
+		[west, _myVehicle, FactionGet(occ,"crew")] call A3A_fnc_createVehicleCrew;
 */
 
 params ["_group", "_vehicle", "_unitType"];

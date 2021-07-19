@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 params ["_positionX","_sideX","_typesX",["_override",false],["_canBypass",false]];
 //private ["_groupX","_countX","_countRanks","_LeaderX","_unitsX","_index","_positionX","_sideX","_typesX","_override","_canBypass"];
 private ["_groupX","_countX","_countRanks","_LeaderX","_unitsX","_index"];
@@ -11,7 +13,6 @@ _canBypass = if (count _this > 4) then {_this select 4} else {false};*/
 _allUnits = {(local _x) and (alive _x)} count allUnits;
 _allUnitsSide = 0;
 _maxUnitsSide = maxUnits;
-
 if (gameMode <3) then
 	{
 	_allUnitsSide = {(local _x) and (alive _x) and (side group _x == _sideX)} count allUnits;
@@ -34,6 +35,7 @@ else
 	if (_countX < 8) then {_ranks = _ranks - ["LIEUTENANT"]};
 	};
 _countRanks = (count _ranks - 1);
+Debug_2("Side: %1 spawning group composition: %2", _sideX, _typesX);
 for "_i" from 0 to (_countX - 1) do
 	{
 	if ((_i == 0) or (((_allUnits + 1) < maxUnits) and ((_allUnitsSide + 1) < _maxUnitsSide)) or _override) then
@@ -46,7 +48,7 @@ for "_i" from 0 to (_countX - 1) do
 			{
 			_unit setRank (_ranks select _i);
 			};
-		if ((_typesX select _i) in squadLeaders) then {_groupX selectLeader _unit};
+		if ((_typesX select _i) in FactionGet(all,"SquadLeaders")) then {_groupX selectLeader _unit};
 		sleep 0.25;
 		};
 	};

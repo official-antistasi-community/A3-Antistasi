@@ -1,3 +1,5 @@
+#include "..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 //if (!isServer) exitWith{};
 private ["_groups","_hr","_resourcesFIA","_wp","_groupX","_veh","_leave"];
 
@@ -49,12 +51,13 @@ private _assignedVehicles =	[];
 			_backpck = backpack _x;
 			if (_backpck != "") then
 			{
-				switch (_backpck) do
+                private _assemblesToo = getArray (configFile/"CfgVehicles"/_backpck/"assembleInfo"/"assembleTo ");
+				switch (_assemblesToo) do
 				{
-					case MortStaticSDKB: {_resourcesFIA = _resourcesFIA + ([SDKMortar] call A3A_fnc_vehiclePrice)};
-					case AAStaticSDKB: {_resourcesFIA = _resourcesFIA + ([staticAAteamPlayer] call A3A_fnc_vehiclePrice)};
-					case MGStaticSDKB: {_resourcesFIA = _resourcesFIA + ([SDKMGStatic] call A3A_fnc_vehiclePrice)};
-					case ATStaticSDKB: {_resourcesFIA = _resourcesFIA + ([staticATteamPlayer] call A3A_fnc_vehiclePrice)};
+					case FactionGet(reb,"staticMortar"): {_resourcesFIA = _resourcesFIA + ([FactionGet(reb,"staticMortar")] call A3A_fnc_vehiclePrice)};
+					case FactionGet(reb,"staticAA"): {_resourcesFIA = _resourcesFIA + ([FactionGet(reb,"staticAA")] call A3A_fnc_vehiclePrice)};
+					case FactionGet(reb,"staticMG"): {_resourcesFIA = _resourcesFIA + ([FactionGet(reb,"staticMG")] call A3A_fnc_vehiclePrice)};
+					case FactionGet(reb,"staticAT"): {_resourcesFIA = _resourcesFIA + ([FactionGet(reb,"staticAT")] call A3A_fnc_vehiclePrice)};
 				};
 			};
 		};
@@ -65,7 +68,7 @@ private _assignedVehicles =	[];
 
 {
 	private _veh = _x;
-	if ((typeOf _veh) in vehFIA) then
+	if ((typeOf _veh) in FactionGet(all,"vehiclesReb")) then
 	{
 		_resourcesFIA = _resourcesFIA + ([(typeOf _veh)] call A3A_fnc_vehiclePrice);
 		if (count attachedObjects _veh > 0) then

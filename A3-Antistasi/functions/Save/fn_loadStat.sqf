@@ -90,7 +90,7 @@ if (_varName in _specialVarLoads) then {
 				_costs = round (_costs + (_costs * (_i/280)));
 			};
 			server setVariable [_x,_costs,true];
-		} forEach soldiersSDK;
+		} forEach (FactionGet(reb,"groups") get "soldiers");
 	};
     if (_varname == "HR_Garage") then {
         [_varValue] call HR_GRG_fnc_loadSaveData;
@@ -163,7 +163,7 @@ if (_varName in _specialVarLoads) then {
 				_mrk setMarkerShape "ICON";
 				_mrk setMarkerType "loc_bunker";
 				_mrk setMarkerColor colorTeamPlayer;
-				if (isOnRoad _positionX) then {_mrk setMarkerText format ["%1 Roadblock",nameTeamPlayer]} else {_mrk setMarkerText format ["%1 Watchpost",nameTeamPlayer]};
+				if (isOnRoad _positionX) then {_mrk setMarkerText format ["%1 Roadblock",FactionGet(reb,"name")]} else {_mrk setMarkerText format ["%1 Watchpost",FactionGet(reb,"name")]};
 				spawner setVariable [_mrk,2,true];
 				if (count _garrison > 0) then {garrison setVariable [_mrk,_garrison,true]};
 				outpostsFIA pushBack _mrk;

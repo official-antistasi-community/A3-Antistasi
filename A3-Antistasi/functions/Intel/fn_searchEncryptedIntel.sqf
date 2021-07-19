@@ -20,6 +20,7 @@ Example: [_intel, objNull, _actionID] call A3A_fnc_searchEncryptedIntel;
 License: MIT License
 */
 #include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 params [["_intel", objNull, [objNull]], "", ["_id", -1, [0]]];
 
 if (isNull _intel || _id isEqualTo -1) exitWith {Error_2("Invalid arguments | Intel obj: %1 | Action ID: %2", _intel, _id)};

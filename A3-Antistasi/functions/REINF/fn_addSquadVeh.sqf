@@ -10,9 +10,6 @@ _veh = cursortarget;
 
 _typeX = typeOf _veh;
 
-//if (cursortarget == "") exitWith {hint "You are not looking at anything"};
-//if ((not(_typeX in vehFIA)) and (not(_typeX in vehAAFland)) and (not(_typeX in arrayCivVeh))) exitWith {hint "You are not looking to a valid vehicle"};
-
 if ((!alive _veh) or (!canMove _veh)) exitWith {["Add Squad Vehicle", "The selected vehicle is destroyed or cannot move"] call A3A_fnc_customHint;};
 if ({(alive _x) and (_x in _veh)} count allUnits > 0) exitWith {["Add Squad Vehicle", "Selected vehicle is not empty"] call A3A_fnc_customHint;};
 if (_veh isKindOf "StaticWeapon") exitWith {["Add Squad Vehicle", "You cannot assign a Static Weapon to a Squad"] call A3A_fnc_customHint;};
@@ -43,8 +40,3 @@ _veh setVariable ["owner",_groupX,true];
 
 leader _groupX assignAsDriver _veh;
 {[_x] orderGetIn true; [_x] allowGetIn true} forEach units _groupX;
-
-
-
-
-

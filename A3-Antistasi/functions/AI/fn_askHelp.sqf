@@ -10,7 +10,7 @@ if !(isNull _helped) exitWith { _helped };
 private _enemy = _target findNearestEnemy _target;
 if (!isPlayer _target and (([objNull, "VIEW"] checkVisibility [eyePos _enemy, eyePos _target] > 0) or (_target distance _enemy < 100))) exitWith { objNull };
 
-private _firstAidKits = ["FirstAidKit"] + (A3A_faction_reb getVariable "firstAidKits");    // FirstAidKit is kept in case a unit still got hold of it.
+private _firstAidKits = ["FirstAidKit"] + (A3A_faction_reb get "firstAidKits");    // FirstAidKit is kept in case a unit still got hold of it.
 private _unitNeedsFAK = count (_firstAidKits arrayIntersect items _target) == 0;
 
 private _units = units group _target;

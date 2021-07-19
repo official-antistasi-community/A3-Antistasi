@@ -16,6 +16,7 @@ _markerLength = (_markerSize select 0) max (_markerSize select 1);
 _isFrontline = [_marker] call A3A_fnc_isFrontline;
 
 _side = sidesX getVariable [_marker, sideUnknown];
+private _faction = Faction(_side);
 _isMilitia = false;
 
 if(_side == sideUnknown) exitWith
@@ -66,7 +67,7 @@ if(!debug) then
   _patrolMarker setMarkerAlphaLocal 0;
 };
 
-_typeFlag = if (_side == Occupants) then {NATOFlag} else {CSATFlag};
+_typeFlag = _faction get "flag";
 _flag = createVehicle [_typeFlag, _markerPos, [], 0, "NONE"];
 _flag allowDamage false;
 [_flag,"take"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_flag];
@@ -74,18 +75,9 @@ _flag allowDamage false;
 _box = objNull;
 if(_marker in airportsX || {_marker in seaports || {_marker in outposts}}) then
 {
-  if (_side == Occupants) then
-  {
-    _box = [NATOAmmoBox, _markerPos, 15, 5, true] call A3A_fnc_safeVehicleSpawn;
+    _box = [_faction get "ammobox", _markerPos, 15, 5, true] call A3A_fnc_safeVehicleSpawn;
     [_box] spawn A3A_fnc_fillLootCrate;
-  }
-  else
-  {
-    _box = [CSATAmmoBox, _markerPos, 15, 5, true] call A3A_fnc_safeVehicleSpawn;
-    [_box] spawn A3A_fnc_fillLootCrate;
-  };
-  [_box] call A3A_fnc_logistics_addLoadAction;
-
+    [_box] call A3A_fnc_logistics_addLoadAction;
 };
 
 [_marker, _patrolMarker, _flag, _box] call A3A_fnc_cycleSpawn;

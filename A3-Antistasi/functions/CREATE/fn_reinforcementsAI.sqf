@@ -37,20 +37,15 @@ _reinfPlaces = [];
 	_numGarr = [_airportX] call A3A_fnc_garrisonSize;
 	_numReal = count (garrison getVariable [_airportX, []]);
 	_sideX = sidesX getVariable [_airportX,sideUnknown];
+    private _groupData = FactionGetGroups(_sideX);
 
 	//Self reinforce the airport if needed
 	if (_numReal + 4 <= _numGarr) then
 	{
-		if (_numReal + 8 <= _numGarr) then
-		{
-			if (_sideX == Occupants) then {[selectRandom groupsNATOSquad,_sideX,_airportX,0] remoteExec ["A3A_fnc_garrisonUpdate",2]} else {[selectRandom groupsCSATSquad,_sideX,_airportX,0] remoteExec ["A3A_fnc_garrisonUpdate",2]};
-			_numberX = 0;
-		}
-		else
-		{
-			if (_sideX == Occupants) then {[selectRandom groupsNATOmid,_sideX,_airportX,0] remoteExec ["A3A_fnc_garrisonUpdate",2]} else {[selectRandom groupsCSATmid,_sideX,_airportX,0] remoteExec ["A3A_fnc_garrisonUpdate",2]};
-			_numberX = 4;
-		};
+        [
+            selectRandom (_groupData get (if (_numReal + 8 <= _numGarr) then {_numberX = 0; "squads"} else {_numberX = 4; "medium"}))
+            ,_sideX,_airportX,0
+        ] remoteExec ["A3A_fnc_garrisonUpdate",2];
 	};
 	//Self reinforce done
 
@@ -83,7 +78,7 @@ _reinfPlaces = [];
 				{
 					if ({(_x distance2D _positionX < (2*distanceSPWN)) or (_x distance2D (getMarkerPos _siteX) < (2*distanceSPWN))} count allPlayers == 0) then
 					{
-						_typeGroup = if (_sideX == Occupants) then {if (_numberX == 4) then {selectRandom groupsNATOmid} else {selectRandom groupsNATOSquad}} else {if (_numberX == 4) then {selectRandom groupsCSATmid} else {selectRandom groupsCSATSquad}};
+                        _typeGroup = selectRandom (_groupData get (if (_numberX == 4) then {"medium"} else {"squads"}));
 						[_typeGroup,_sideX,_siteX,2] remoteExec ["A3A_fnc_garrisonUpdate",2];
 
 						//This line send a virtual convoy, execute [] execVM "Convoy\convoyDebug.sqf" as admin to see it

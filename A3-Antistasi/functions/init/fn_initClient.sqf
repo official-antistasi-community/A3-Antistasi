@@ -1,5 +1,6 @@
 #include "..\..\Includes\common.inc"
 FIX_LINE_NUMBERS()
+#define OccAndInv(VAR) (FactionGet(occ,VAR) + FactionGet(inv,VAR))
 
 //Make sure logLevel is always initialised.
 //This should be overridden by the server, as appropriate. Hence the nil check.
@@ -33,6 +34,7 @@ if (!hasInterface) exitWith {
 
 waitUntil {!isNull player};
 waitUntil {player == player};
+
 //Disable player saving until they're fully ready, and have chosen whether to load their save.
 player setVariable ["canSave", false, true];
 
@@ -46,6 +48,9 @@ else {
 	// SP or hosted, initFuncs/var run in serverInit
 	waitUntil {sleep 0.5;(!isNil "serverInitDone")};
 };
+private _side = side group player;
+private _faction = Faction(_side);
+private _groupData = FactionGet(reb,"groups");
 [] execVM "briefing.sqf";
 
 _isJip = _this select 1;
@@ -96,47 +101,6 @@ if (!A3A_hasACE) then {
 	[] spawn A3A_fnc_tags;
 };
 
-if (player getVariable ["pvp",false]) exitWith {
-	lastVehicleSpawned = objNull;
-	[player] call A3A_fnc_pvpCheck;
-	[player] call A3A_fnc_dress;
-	if (A3A_hasACE) then {[] call A3A_fnc_ACEpvpReDress};
-	respawnTeamPlayer setMarkerAlphaLocal 0;
-
-	player addEventHandler ["GetInMan", {_this call A3A_fnc_ejectPvPPlayerIfInvalidVehicle}];
-	player addEventHandler ["SeatSwitchedMan", {[_this select 0, assignedVehicleRole (_this select 0) select 0, _this select 2] call A3A_fnc_ejectPvPPlayerIfInvalidVehicle}];
-	player addEventHandler ["InventoryOpened", {
-		_override = false;
-		_boxX = typeOf (_this select 1);
-		if ((_boxX == NATOAmmoBox) or (_boxX == CSATAmmoBox)) then {_override = true};
-		_override
-	}];
-	_nameX = if (side player == Occupants) then {nameOccupants} else {nameInvaders};
-	waituntil {!isnull (finddisplay 46)};
-	gameMenu = (findDisplay 46) displayAddEventHandler ["KeyDown", {
-		_handled = FALSE;
-		if (_this select 1 == 207) then {
-			if (!A3A_hasACEhearing) then {
-				if (soundVolume <= 0.5) then {
-					0.5 fadeSound 1;
-					["Ear Plugs", "You've taken out your ear plugs.", true] call A3A_fnc_customHint;
-				}
-				else {
-					0.5 fadeSound 0.1;
-					["Ear Plugs", "You've inserted your ear plugs.", true] call A3A_fnc_customHint;
-				};
-			};
-		}
-		else {
-			if (_this select 1 == 21) then {
-				closedialog 0;
-				_nul = createDialog "NATO_player";
-			};
-		};
-		_handled
-	}];
-};
-
 // Placeholders, should get replaced globally by the server
 player setVariable ["score",0];
 player setVariable ["moneyX",0];
@@ -185,7 +149,7 @@ player addEventHandler ["InventoryOpened", {
 	if (captive _playerX) then {
 		_containerX = _this select 1;
 		_typeX = typeOf _containerX;
-		if (((_containerX isKindOf "Man") and (!alive _containerX)) or (_typeX == NATOAmmoBox) or (_typeX == CSATAmmoBox)) then {
+		if (((_containerX isKindOf "Man") and (!alive _containerX)) or (_typeX isEqualTo OccAndInv("ammoBox"))) then {
 			if ({if (((side _x== Invaders) or (side _x== Occupants)) and (_x knowsAbout _playerX > 1.4)) exitWith {1}} count allUnits > 0) then{
 				[_playerX,false] remoteExec ["setCaptive",0,_playerX];
 				_playerX setCaptive false;
@@ -394,7 +358,12 @@ if (A3A_hasACE) then
 		[_x] call ace_interact_menu_fnc_compileMenuSelfAction;
 		[_x, 1,["ACE_SelfActions", "ACE_TeamManagement", "ACE_LeaveGroup"]] call ace_interact_menu_fnc_removeActionFromClass;
 		[_x, 0,["ACE_MainActions", "ACE_JoinGroup"]] call ace_interact_menu_fnc_removeActionFromClass;
-	} forEach (_playerUnits + [typePetros, staticCrewTeamPlayer, SDKUnarmed] + SDKSniper + SDKATman + SDKMedic + SDKMG + SDKExp + SDKGL + SDKMil + SDKSL + SDKEng);
+	} forEach (
+        _playerUnits
+        + (_groupData get "squadEng") // SL, GL, militia, mg, exp, lat, eng, medic
+        + (_groupData get "sniper")
+        + [_groupData get "unarmed", _groupData get "staticCrew", _groupData get "Petros"]
+    );
 };
 
 boxX allowDamage false;

@@ -3521,23 +3521,6 @@
         <Russian>Выберите тип боеприпасов для удара</Russian>
       </Key>
     </Container>
-    <Container name="NATO_player">
-      <Key ID="STR_antistasi_dialogs_nato_player_specop">
-        <Original>SpecOp Menu</Original>
-        <Chinesesimp>特殊行动菜单</Chinesesimp>
-        <Russian>Меню СпН</Russian>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_nato_player_quadbike">
-        <Original>Quadbike</Original>
-        <Chinesesimp>四轮摩托车</Chinesesimp>
-        <Russian>Квадроцикл</Russian>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_nato_player_fast">
-        <Original>Fast Travel</Original>
-        <Chinesesimp>快速移动</Chinesesimp>
-        <Russian>Быстрое Перемещение</Russian>
-      </Key>
-    </Container>
     <Container name="squad_options">
       <Key ID="STR_antistasi_dialogs_squad_options">
         <Original>Squad Options</Original>

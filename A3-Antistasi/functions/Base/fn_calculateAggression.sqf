@@ -12,6 +12,8 @@ params [["_silent", false]];
     Returns:
         Nothing
 */
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 
 //Calculate the new values from the stacks
 private _newOccupantsValue = 0;
@@ -42,7 +44,7 @@ if(_newOccupantsValue < (_levelBoundsOccupants select 0)) then
 {
     aggressionLevelOccupants = ((ceil (_newOccupantsValue / 20)) min 5) max 1;
     publicVariable "aggressionLevelOccupants";
-    _notificationText = format ["%1 aggression level reduced to %2<br/>", nameOccupants, [aggressionLevelOccupants] call A3A_fnc_getAggroLevelString];
+    _notificationText = format ["%1 aggression level reduced to %2<br/>", FactionGet(occ,"name"), [aggressionLevelOccupants] call A3A_fnc_getAggroLevelString];
     _levelsChanged = true;
 }
 else
@@ -51,7 +53,7 @@ else
     {
         aggressionLevelOccupants = ((ceil (_newOccupantsValue / 20)) min 5) max 1;
         publicVariable "aggressionLevelOccupants";
-        _notificationText = format ["%1 aggression level increased to %2<br/>", nameOccupants, [aggressionLevelOccupants] call A3A_fnc_getAggroLevelString];
+        _notificationText = format ["%1 aggression level increased to %2<br/>", FactionGet(occ,"name"), [aggressionLevelOccupants] call A3A_fnc_getAggroLevelString];
         _levelsChanged = true;
     };
 };
@@ -60,7 +62,7 @@ if(_newInvadersValue < (_levelBoundsInvaders select 0)) then
 {
     aggressionLevelInvaders = ((ceil (_newInvadersValue / 20)) min 5) max 1;
     publicVariable "aggressionLevelInvaders";
-    _notificationText = format ["%1%2 aggression level reduced to %3", _notificationText, nameInvaders, [aggressionLevelInvaders] call A3A_fnc_getAggroLevelString];
+    _notificationText = format ["%1%2 aggression level reduced to %3", _notificationText, FactionGet(inv,"name"), [aggressionLevelInvaders] call A3A_fnc_getAggroLevelString];
     _levelsChanged = true;
 }
 else
@@ -69,7 +71,7 @@ else
     {
         aggressionLevelInvaders = ((ceil (_newInvadersValue / 20)) min 5) max 1;
         publicVariable "aggressionLevelInvaders";
-        _notificationText = format ["%1%2 aggression level increased to %3", _notificationText, nameInvaders, [aggressionLevelInvaders] call A3A_fnc_getAggroLevelString];
+        _notificationText = format ["%1%2 aggression level increased to %3", _notificationText, FactionGet(inv,"name"), [aggressionLevelInvaders] call A3A_fnc_getAggroLevelString];
         _levelsChanged = true;
     };
 };

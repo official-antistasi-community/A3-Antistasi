@@ -18,45 +18,40 @@ params [
 if (_filepaths isEqualType "") then {_filepaths = [_filepaths]};
 if (count _filepaths == 0) then {Error("No filepaths provided.")};
 
-//Create a global namespace to store faction data in.
-private _dataStore = true call A3A_fnc_createNamespace;
+private _dataStore = createHashMap;
 
 private _fnc_saveToTemplate = {
 	params ["_name", "_data"];
 
-	_dataStore setVariable [_name, _data, true];
+	_dataStore set [_name, _data];
 };
 
 private _fnc_getFromTemplate = {
 	params ["_name"];
 
-	_dataStore getVariable _name;
+	_dataStore get _name;
 };
 
 //Keep track of loadout namespaces so we can delete them when we're done.
 private _loadoutNamespaces = [];
 private _fnc_createLoadoutData = {
-	private _namespace = false call A3A_fnc_createNamespace;
+	private _namespace = createHashMap;
 	_loadoutNamespaces pushBack _namespace;
 	_namespace
 };
 
 private _fnc_copyLoadoutData = {
 	params ["_sourceNamespace"];
-	private _newNamespace = call _fnc_createLoadoutData;
-	{
-		_newNamespace setVariable [_x, _sourceNamespace getVariable _x];
-	} forEach allVariables _sourceNamespace;
-	_newNamespace
+    + _sourceNamespace //hashmaps deepcopy with +
 };
 
-private _allLoadouts = true call A3A_fnc_createNamespace;
-_dataStore setVariable ["loadouts", _allLoadouts];
+private _allLoadouts = createHashMap;
+_dataStore set ["loadouts", _allLoadouts];
 
 private _fnc_saveUnitToTemplate = {
 	params ["_typeName", "_loadouts", ["_traits", []]];
 	private _unitDefinition = [_loadouts, _traits];
-	_allLoadouts setVariable [_typeName, _unitDefinition];
+	_allLoadouts set [_typeName, _unitDefinition];
 };
 
 private _fnc_generateAndSaveUnitToTemplate = {
@@ -81,9 +76,5 @@ private _fnc_generateAndSaveUnitsToTemplate = {
 	call compile preprocessFileLineNumbers _x;
 } forEach _filepaths;
 
-//Clear up used loadout namespaces.
-{
-	[_x] call A3A_fnc_deleteNamespace;
-} forEach _loadoutNamespaces;
 
 _dataStore

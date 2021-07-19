@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 params ["_unit", "_player", "_actionID"];
 
 /*  The action of interrogating a surrendered unit.
@@ -36,7 +38,7 @@ sleep 5;
 
 if ((round (random 100)) < _chance) then
 {
-    if((_unit getVariable "unitType") in squadLeaders) then
+    if((_unit getVariable "unitType") in FactionGet(all,"SquadLeaders")) then
     {
         if(_unit getVariable ["hasIntel", false]) then
         {

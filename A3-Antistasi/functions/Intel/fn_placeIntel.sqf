@@ -60,8 +60,8 @@ private _spawnParameters = switch (true) do {
 if (_spawnParameters isEqualType true) exitWith { [1, format ["No spawn parameters for building %1", typeOf _building], _fileName] call A3A_fnc_Log };
 
 
-private _factionData = [A3A_faction_occ,A3A_faction_inv] select (_side == east);
-(_factionData getVariable "placeIntel_desk") params ["_classname_desk","_azimuth"];
+private _faction = Faction(_side);
+(_faction get "placeIntel_desk") params ["_classname_desk","_azimuth"];
 private _desk = createVehicle [_classname_desk, [0, 0, 0], [], 0, "CAN_COLLIDE"];
 _desk setDir (getDir _building + (_spawnParameters select 1) + _azimuth);
 if (surfaceIsWater (_spawnParameters select 0)) then {
@@ -76,7 +76,7 @@ sleep 5;
 _desk enableSimulation false;
 
 (
-	_factionData getVariable (["placeIntel_itemMedium","placeIntel_itemLarge"] select _isLarge)
+	_faction get (["placeIntel_itemMedium","placeIntel_itemLarge"] select _isLarge)
 ) params ["_intelType","_azimuth","_isComputer"];
 
 private _intel = createVehicle [_intelType, [0,0,0], [], 0, "CAN_COLLIDE"];

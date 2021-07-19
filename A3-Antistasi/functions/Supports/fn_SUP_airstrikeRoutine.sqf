@@ -9,8 +9,10 @@ while {_sleepTime > 0} do
     if((spawner getVariable _airport) != 2) exitWith {};
 };
 
-private _plane = if (_side == Occupants) then {vehNATOPlane} else {vehCSATPlane};
-private _crewUnits = if(_side == Occupants) then {NATOPilot} else {CSATPilot};
+private _faction = Faction(_side);
+private _groupData = FactionGetGroups(_side);
+private _plane = selectRandom (_faction get "vehiclesPlanesCAS");
+private _crewUnits = _groupData get "pilot";
 private _isHelicopter = _plane isKindOf "Helicopter";
 
 private _spawnPos = (getMarkerPos _airport) vectorAdd [0, 0, if (_isHelicopter) then {150} else {500}];

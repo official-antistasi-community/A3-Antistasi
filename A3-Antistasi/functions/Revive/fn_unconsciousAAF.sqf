@@ -1,3 +1,5 @@
+#include "..\..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 params ["_unit", "_injurer"];
 
 private _bleedOutTime = if (surfaceIsWater (position _unit)) then {time + 60} else {time + 300};
@@ -41,7 +43,7 @@ _unit stop false;
 if (_playerNear) then
 {
 	[_unit,"remove"] remoteExec ["A3A_fnc_flagaction",0,_unit];
-    if((_unit getVariable "unitType") in squadLeaders) then
+    if((_unit getVariable "unitType") in FactionGet(all,"SquadLeaders")) then
     {
         _unit spawn
         {

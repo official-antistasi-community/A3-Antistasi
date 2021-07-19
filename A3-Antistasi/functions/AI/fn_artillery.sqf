@@ -8,13 +8,14 @@ _mrkOrigin = _this select 0;
 _posOrigin = if (_mrkOrigin isEqualType "") then {getMarkerPos _mrkOrigin} else {_mrkOrigin};
 _mrkDestination = _this select 1;
 _attackingSide = _this select 2;
+private _faction = Faction(_attackingSide);
 _sideTargets = _attackingSide call BIS_fnc_enemySides;
 _posDestination = getMarkerPos _mrkDestination;
-_typeVehX = if (_attackingSide == Occupants) then {vehNATOMRLS} else {vehCSATMRLS};
+_typeVehX = (_faction get "vehiclesArtillery");
 
 if !([_typeVehX] call A3A_fnc_vehAvailable) exitWith {};
 
-_typeAmmunition = if (_attackingSide == Occupants) then {vehNATOMRLSMags} else {vehCSATMRLSMags};
+_typeAmmunition = ((_faction get "magazines") get _typeVehX) #0;
 
 _pos = [_posOrigin, 50,100, 10, 0, 0.3, 0] call BIS_Fnc_findSafePos;
 
@@ -37,7 +38,7 @@ if (_posDestination inRangeOfArtillery [[_veh], ((getArtilleryAmmo [_veh]) selec
 		if (count _objectivesX > 0) then
 			{
 			{
-			if (typeOf _x in vehAttack) exitWith {_objectiveX = _x; _roundsX = 4};
+			if (typeOf _x in FactionGet(all,"vehiclesAttack")) exitWith {_objectiveX = _x; _roundsX = 4};
 			} forEach _objectivesX;
 			if (isNull _objectiveX) then {_objectiveX = selectRandom _objectivesX};
 			}

@@ -1,5 +1,6 @@
 #include "..\..\Includes\common.inc"
 FIX_LINE_NUMBERS()
+#define OccAndInv(VAR) (FactionGet(occ, VAR) + FactionGet(inv, VAR))
 if (!isServer) exitWith {
     Error("Miscalled server-only function");
 };
@@ -85,12 +86,8 @@ _vehInGarage = _vehInGarage + vehInGarage;
 				_resourcesBackground = _resourcesBackground + (server getVariable [(_friendX getVariable "unitType"),0]);
 				_backpck = backpack _friendX;
 				if (_backpck != "") then {
-					switch (_backpck) do {
-						case MortStaticSDKB: {_resourcesBackground = _resourcesBackground + ([SDKMortar] call A3A_fnc_vehiclePrice)};
-						case AAStaticSDKB: {_resourcesBackground = _resourcesBackground + ([staticAAteamPlayer] call A3A_fnc_vehiclePrice)};
-						case MGStaticSDKB: {_resourcesBackground = _resourcesBackground + ([SDKMGStatic] call A3A_fnc_vehiclePrice)};
-						case ATStaticSDKB: {_resourcesBackground = _resourcesBackground + ([staticATteamPlayer] call A3A_fnc_vehiclePrice)};
-					};
+                    private _assemblesTo = getText (configFile/"CfgVehicles"/_backpck/"assembleInfo"/"assembleTo");
+                    if (_backpck isNotEqualTo "") then {_resourcesBackground = _resourcesBackground + ([_assemblesTo] call A3A_fnc_vehiclePrice)};
 				};
 				if (vehicle _friendX != _friendX) then {
 					_veh = vehicle _friendX;
@@ -226,7 +223,7 @@ _dataX = [];
 _dataX = [];
 {
 	_dataX pushBack [_x,timer getVariable _x];
-} forEach (vehAttack + vehNATOAttackHelis + vehPlanes + vehCSATAttackHelis);
+} forEach (FactionGet(all,"vehiclesAttack") + FactionGet(all,"vehiclesPlanes") + FactionGet(all,"vehiclesHelisAttack"));
 
 ["idleassets",_dataX] call A3A_fnc_setStatVariable;
 
@@ -245,6 +242,6 @@ _controlsX = controlsX select {(sidesX getVariable [_x,sideUnknown] == teamPlaye
 
 saveProfileNamespace;
 savingServer = false;
-_saveHintText = ["<t size='1.5'>",nameTeamPlayer," Assets:<br/><t color='#f0d498'>HR: ",str _hrBackground,"<br/>Money: ",str _resourcesBackground," €</t></t><br/><br/>Further infomation is provided in <t color='#f0d498'>Map Screen > Game Options > Persistent Save-game</t>."] joinString "";
+_saveHintText = ["<t size='1.5'>",FactionGet(reb,"name")," Assets:<br/><t color='#f0d498'>HR: ",str _hrBackground,"<br/>Money: ",str _resourcesBackground," €</t></t><br/><br/>Further infomation is provided in <t color='#f0d498'>Map Screen > Game Options > Persistent Save-game</t>."] joinString "";
 ["Persistent Save Completed",_saveHintText] remoteExec ["A3A_fnc_customHint",0,false];
 Info("Persistent Save Completed");

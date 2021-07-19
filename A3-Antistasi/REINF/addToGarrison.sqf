@@ -1,3 +1,5 @@
+#include "..\Includes\common.inc"
+FIX_LINE_NUMBERS()
 private ["_positionTel","_nearX","_thingX","_groupX","_unitsX","_leave"];
 if (!visibleMap) then {openMap true};
 positionTel = [];
@@ -18,7 +20,7 @@ _nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
 
 if !(_positionTel inArea _nearX) exitWith {["Garrison", "You must click near a marked zone"] call A3A_fnc_customHint;};
 
-if (not(sidesX getVariable [_nearX,sideUnknown] == teamPlayer)) exitWith {["Garrison", format ["That zone does not belong to %1",nameTeamPlayer]] call A3A_fnc_customHint;};
+if (not(sidesX getVariable [_nearX,sideUnknown] == teamPlayer)) exitWith {["Garrison", format ["That zone does not belong to %1",FactionGet(reb,"name")]] call A3A_fnc_customHint;};
 
 if ((_nearX in outpostsFIA) and !(isOnRoad getMarkerPos _nearX)) exitWith {["Garrison", "You cannot manage garrisons on this kind of zone"] call A3A_fnc_customHint;};
 
@@ -46,9 +48,13 @@ private _alreadyInGarrison = false;
 } forEach _unitsX;
 if _alreadyInGarrison exitWith {["Garrison", "The units selected already are in a garrison"] call A3A_fnc_customHint};
 
+private _rebGroupData = FactionGet(reb,"groups");
 {
 	private _unitType = _x getVariable "unitType";
-	if ((_unitType == staticCrewTeamPlayer) or (_unitType == SDKUnarmed) or (_unitType == typePetros) or (_unitType in arrayCivs) or (!alive _x)) exitWith {_leave = true}
+	if (
+        (_unitType in (["staticCrew", "Unarmed", "Petros"] apply {_rebGroupData get _x}))
+        or (_unitType in arrayCivs) or (!alive _x)
+    ) exitWith {_leave = true}
 } forEach _unitsX;
 
 if (_leave) exitWith {["Garrison", "Static crewman, prisoners, refugees, Petros or dead units cannot be added to any garrison"] call A3A_fnc_customHint;};
@@ -104,7 +110,7 @@ if (spawner getVariable _nearX != 2) then
 		params ["_marker", "_group"];
 		waitUntil {
 			sleep 5;
-			isNull leader _group or { leader _group distance getMarkerPos _marker < 20 } 
+			isNull leader _group or { leader _group distance getMarkerPos _marker < 20 }
 		};
 		sleep 10;			// give units some time to get onto marker
 		if !(isNull leader _group) then { [_marker] remoteExec ["A3A_fnc_updateRebelStatics", 2] };

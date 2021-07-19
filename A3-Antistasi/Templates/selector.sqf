@@ -154,59 +154,59 @@ private _pickAITemplate = {
     switch _this do {
         case "BAF": {
             switch(true) do {
-                case (toLower worldName in arcticmaps): { "Templates\NewTemplates\3CB\3CB_AI_BAF_Arctic.sqf" };
-                case (toLower worldName in temperatemaps): { "Templates\NewTemplates\3CB\3CB_AI_BAF_Temperate.sqf" };
-                case (toLower worldName in tropicalmaps): { "Templates\NewTemplates\3CB\3CB_AI_BAF_Tropical.sqf" };
-                default { "Templates\NewTemplates\3CB\3CB_AI_BAF_Arid.sqf" };
+                case (toLower worldName in arcticmaps): { "Templates\Templates\3CB\3CB_AI_BAF_Arctic.sqf" };
+                case (toLower worldName in temperatemaps): { "Templates\Templates\3CB\3CB_AI_BAF_Temperate.sqf" };
+                case (toLower worldName in tropicalmaps): { "Templates\Templates\3CB\3CB_AI_BAF_Tropical.sqf" };
+                default { "Templates\Templates\3CB\3CB_AI_BAF_Arid.sqf" };
             };
         };
 
         //Factions
-        case "Coldwar US": { "Templates\NewTemplates\3CB\3CB_AI_CW_US.sqf" };
-        case "Coldwar Soviets": { "Templates\NewTemplates\3CB\3CB_AI_CW_SOV.sqf" };
-        case "TKA West": { "Templates\NewTemplates\3CB\3CB_AI_TKA_West.sqf" };
-        case "TKA East": { "Templates\NewTemplates\3CB\3CB_AI_TKA_East.sqf" };
+        case "Coldwar US": { "Templates\Templates\3CB\3CB_AI_CW_US.sqf" };
+        case "Coldwar Soviets": { "Templates\Templates\3CB\3CB_AI_CW_SOV.sqf" };
+        case "TKA West": { "Templates\Templates\3CB\3CB_AI_TKA_West.sqf" };
+        case "TKA East": { "Templates\Templates\3CB\3CB_AI_TKA_East.sqf" };
 
         //RHS
-        case "US Marines": { "Templates\NewTemplates\RHS\RHS_AI_USAF_Marines_Temperate.sqf" };
-        case "CDF": { "Templates\NewTemplates\RHS\RHS_AI_CDF_Temperate.sqf" };
+        case "US Marines": { "Templates\Templates\RHS\RHS_AI_USAF_Marines_Temperate.sqf" };
+        case "CDF": { "Templates\Templates\RHS\RHS_AI_CDF_Temperate.sqf" };
         case "USAF": {
             switch(true) do {
                 case (toLower worldName in arcticmaps);
                 case (toLower worldName in temperatemaps);
-                case (toLower worldName in tropicalmaps): { "Templates\NewTemplates\RHS\RHS_AI_USAF_Army_Temperate.sqf" };
-                default { "Templates\NewTemplates\RHS\RHS_AI_USAF_Army_Arid.sqf" };
+                case (toLower worldName in tropicalmaps): { "Templates\Templates\RHS\RHS_AI_USAF_Army_Temperate.sqf" };
+                default { "Templates\Templates\RHS\RHS_AI_USAF_Army_Arid.sqf" };
             };
         };
         case "AFRF": {
             switch(true) do {
                 case (toLower worldName in arcticmaps);
                 case (toLower worldName in temperatemaps);
-                case (toLower worldName in tropicalmaps): { "Templates\NewTemplates\RHS\RHS_AI_AFRF_Temperate.sqf" };
-                default { "Templates\NewTemplates\RHS\RHS_AI_AFRF_Arid.sqf" };
+                case (toLower worldName in tropicalmaps): { "Templates\Templates\RHS\RHS_AI_AFRF_Temperate.sqf" };
+                default { "Templates\Templates\RHS\RHS_AI_AFRF_Arid.sqf" };
             };
         };
 
         //VN
-        case "PAVN": { "Templates\NewTemplates\VN\VN_PAVN.sqf" };
-        case "MACV": { "Templates\NewTemplates\VN\VN_MACV.sqf" };
+        case "PAVN": { "Templates\Templates\VN\VN_PAVN.sqf" };
+        case "MACV": { "Templates\Templates\VN\VN_MACV.sqf" };
 
         //Vanilla & DLC
-        case "LDF": { "Templates\NewTemplates\Vanilla\Vanilla_AI_LDF_Enoch.sqf" };
-        case "AAF": { "Templates\NewTemplates\Vanilla\Vanilla_AI_AAF_Arid.sqf" };
+        case "LDF": { "Templates\Templates\Vanilla\Vanilla_AI_LDF_Enoch.sqf" };
+        case "AAF": { "Templates\Templates\Vanilla\Vanilla_AI_AAF_Arid.sqf" };
         case "NATO": {
             switch(true) do {
-                case (toLower worldName == "tanoa"): { "Templates\NewTemplates\Vanilla\Vanilla_AI_NATO_Tropical.sqf" };
+                case (toLower worldName == "tanoa"): { "Templates\Templates\Vanilla\Vanilla_AI_NATO_Tropical.sqf" };
                 case (toLower worldName in temperatemaps);
-                case (toLower worldName in tropicalmaps): { "Templates\NewTemplates\Vanilla\Vanilla_AI_NATO_Temperate.sqf" };
-                default { "Templates\NewTemplates\Vanilla\Vanilla_AI_NATO_Arid.sqf" };
+                case (toLower worldName in tropicalmaps): { "Templates\Templates\Vanilla\Vanilla_AI_NATO_Temperate.sqf" };
+                default { "Templates\Templates\Vanilla\Vanilla_AI_NATO_Arid.sqf" };
             };
         };
         case "CSAT": {
             switch(true) do {
-                case (toLower worldName == "enoch"): { "Templates\NewTemplates\Vanilla\Vanilla_AI_CSAT_Enoch.sqf" };
-                case (toLower worldName == "tanoa"): { "Templates\NewTemplates\Vanilla\Vanilla_AI_CSAT_Tropical.sqf" };
-                default { "Templates\NewTemplates\Vanilla\Vanilla_AI_CSAT_Arid.sqf" };
+                case (toLower worldName == "enoch"): { "Templates\Templates\Vanilla\Vanilla_AI_CSAT_Enoch.sqf" };
+                case (toLower worldName == "tanoa"): { "Templates\Templates\Vanilla\Vanilla_AI_CSAT_Tropical.sqf" };
+                default { "Templates\Templates\Vanilla\Vanilla_AI_CSAT_Arid.sqf" };
             };
         };
     };
@@ -216,30 +216,30 @@ private _pickRebTemplate = {
     switch _this do {
 
         //3cb Factions
-        case "CNM": { "Templates\NewTemplates\3CB\3CB_Reb_CNM_Temperate.sqf" };
-        case "TKM": { "Templates\NewTemplates\3CB\3CB_Reb_TKM_Arid.sqf" };
+        case "CNM": { "Templates\Templates\3CB\3CB_Reb_CNM_Temperate.sqf" };
+        case "TKM": { "Templates\Templates\3CB\3CB_Reb_TKM_Arid.sqf" };
 
         //RHS
         case "NAPA": {
             switch(true) do {
                 case (toLower worldName in arcticmaps);
                 case (toLower worldName in temperatemaps);
-                case (toLower worldName in tropicalmaps): { "Templates\NewTemplates\RHS\RHS_Reb_NAPA_Temperate.sqf" };
-                default { "Templates\NewTemplates\RHS\RHS_Reb_NAPA_Arid.sqf" };
+                case (toLower worldName in tropicalmaps): { "Templates\Templates\RHS\RHS_Reb_NAPA_Temperate.sqf" };
+                default { "Templates\Templates\RHS\RHS_Reb_NAPA_Arid.sqf" };
             };
         };
 
         //VN
-        case "POF": { "Templates\NewTemplates\VN\VN_Reb_POF.sqf" };
+        case "POF": { "Templates\Templates\VN\VN_Reb_POF.sqf" };
 
         //Vanilla
         case "FIA": {
             switch (true) do {
-                case (toLower worldName == "enoch"): { "Templates\NewTemplates\Vanilla\Vanilla_Reb_FIA_Enoch.sqf" };
-                default { "Templates\NewTemplates\Vanilla\Vanilla_Reb_FIA_Arid.sqf" };
+                case (toLower worldName == "enoch"): { "Templates\Templates\Vanilla\Vanilla_Reb_FIA_Enoch.sqf" };
+                default { "Templates\Templates\Vanilla\Vanilla_Reb_FIA_Arid.sqf" };
             };
         };
-        case "SDK": { "Templates\NewTemplates\Vanilla\Vanilla_Reb_SDK_Tanoa.sqf" };
+        case "SDK": { "Templates\Templates\Vanilla\Vanilla_Reb_SDK_Tanoa.sqf" };
     };
 };
 
@@ -249,13 +249,13 @@ private _pickCIVTemplate = {
             switch(true) do {
                 case (toLower worldName in arcticmaps);
                 case (toLower worldName in temperatemaps);
-                case (toLower worldName in tropicalmaps): { "Templates\NewTemplates\3CB\3CB_Civ_Temperate.sqf" };
-                default { "Templates\NewTemplates\3CB\3CB_Civ_Arid.sqf" };
+                case (toLower worldName in tropicalmaps): { "Templates\Templates\3CB\3CB_Civ_Temperate.sqf" };
+                default { "Templates\Templates\3CB\3CB_Civ_Arid.sqf" };
             };
         };
-        case "RHS": { "Templates\NewTemplates\RHS\RHS_Civ.sqf" };
-        case "VN": { "Templates\NewTemplates\VN\VN_CIV.sqf" };
-        case "Vanilla": { "Templates\NewTemplates\Vanilla\Vanilla_Civ.sqf" };
+        case "RHS": { "Templates\Templates\RHS\RHS_Civ.sqf" };
+        case "VN": { "Templates\Templates\VN\VN_CIV.sqf" };
+        case "Vanilla": { "Templates\Templates\Vanilla\Vanilla_Civ.sqf" };
     };
 };
 
@@ -336,24 +336,24 @@ Info("Reading Addon mod files.");
 //Addon pack loading goes here.
 A3A_LoadedContentAddons = [];
 if (A3A_hasIvory) then {
-  call compile preProcessFileLineNumbers "Templates\AddonVics\ivory_Civ.sqf";
-  A3A_LoadedContentAddons pushBack "IvoryCars";
-  Info("Using Addon Ivory Cars Template");
+    [civilian, "Templates\AddonVics\ivory_Civ.sqf"] call A3A_fnc_loadAddon;
+    A3A_LoadedContentAddons pushBack "IvoryCars";
+    Info("Using Addon Ivory Cars Template");
 };
 if (A3A_hasTCGM) then {
-  call compile preProcessFileLineNumbers "Templates\AddonVics\tcgm_Civ.sqf";
-  A3A_LoadedContentAddons pushBack "TCGM_BikeBackPack";
-  Info("Using Addon TCGM_BikeBackPack Template");
+    [civilian, "Templates\AddonVics\tcgm_Civ.sqf"] call A3A_fnc_loadAddon;
+    A3A_LoadedContentAddons pushBack "TCGM_BikeBackPack";
+    Info("Using Addon TCGM_BikeBackPack Template");
 };
 if (A3A_hasD3S) then {
-  call compile preProcessFileLineNumbers "Templates\AddonVics\d3s_Civ.sqf";
-  A3A_LoadedContentAddons pushBack "D3SCars";
-  Info("Using Addon D3S Cars Template");
+    [civilian, "Templates\AddonVics\d3s_Civ.sqf"] call A3A_fnc_loadAddon;
+    A3A_LoadedContentAddons pushBack "D3SCars";
+    Info("Using Addon D3S Cars Template");
 };
 if (A3A_hasRDS) then {
-  call compile preProcessFileLineNumbers "Templates\AddonVics\rds_Civ.sqf";
-  A3A_LoadedContentAddons pushBack "RDSCars";
-  Info("Using Addon RDS Cars Template");
+    [civilian, "Templates\AddonVics\rds_Civ.sqf"] call A3A_fnc_loadAddon;
+    A3A_LoadedContentAddons pushBack "RDSCars";
+    Info("Using Addon RDS Cars Template");
 };
 A3A_LoadedContentAddons = A3A_LoadedContentAddons apply {toLower _x};
 
@@ -362,13 +362,15 @@ A3A_LoadedContentAddons = A3A_LoadedContentAddons apply {toLower _x};
 //======================|
 
 Info("Reading Logistics Node files.");
-call compile preProcessFileLineNumbers "Templates\NewTemplates\Vanilla\Vanilla_Logistics_Nodes.sqf";//Always call vanilla as it initialises the arrays.
-if (A3A_hasRHS) then {call compile preProcessFileLineNumbers "Templates\NewTemplates\RHS\RHS_Logistics_Nodes.sqf"};
-if (A3A_has3CBFactions) then {call compile preProcessFileLineNumbers "Templates\NewTemplates\3CB\3CBFactions_Logistics_Nodes.sqf"};
-if (A3A_has3CBBAF) then {call compile preProcessFileLineNumbers "Templates\NewTemplates\3CB\3CBBAF_Logistics_Nodes.sqf"};
-if (A3A_hasVN) then {call compile preProcessFileLineNumbers "Templates\NewTemplates\VN\VN_Logistics_Nodes.sqf"};
+call compile preProcessFileLineNumbers "Templates\Templates\Vanilla\Vanilla_Logistics_Nodes.sqf";//Always call vanilla as it initialises the arrays.
+if (A3A_hasRHS) then {call compile preProcessFileLineNumbers "Templates\Templates\RHS\RHS_Logistics_Nodes.sqf"};
+if (A3A_has3CBFactions) then {call compile preProcessFileLineNumbers "Templates\Templates\3CB\3CBFactions_Logistics_Nodes.sqf"};
+if (A3A_has3CBBAF) then {call compile preProcessFileLineNumbers "Templates\Templates\3CB\3CBBAF_Logistics_Nodes.sqf"};
+if (A3A_hasVN) then {call compile preProcessFileLineNumbers "Templates\Templates\VN\VN_Logistics_Nodes.sqf"};
 
 //if (A3A_hasIFA) then {call compile preProcessFileLineNumbers "Templates\IFA\IFA_Logistics_Nodes.sqf"};		//disabled until imtegrated
 //if (A3A_hasFFAA) then {call compile preProcessFileLineNumbers "Templates\FFAA\FFAA_Logistics_Nodes.sqf"};		//disabled until imtegrated
 //if (A3A_hasD3S) then {call compile preProcessFileLineNumbers "Templates\AddonVics\d3s_Logi_Nodes.sqf";};		//disabled until imtegrated
 //if (A3A_hasRDS) then {call compile preProcessFileLineNumbers "Templates\AddonVics\rds_Logi_Nodes.sqf";};		//disabled until imtegrated
+
+call A3A_fnc_compileMissionAssets;
