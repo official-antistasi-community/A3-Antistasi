@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="A3-Antistasi">
+  <Package name="A3-Antistasi Mission">
+    <Container name="Legacy tasks">
+      <Key ID="STR_antistasi_LTasks_AS_official_title">
+        <Original>Kill the Officer</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_AS_official_description">
+      <!-- %1 = Faction name | %2 = Location name | %3 = time in format H:M -->
+        <Original>A %1 officer is inspecting %2. Go there and kill him before %3.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_AS_specOp_title">
+        <Original>SpecOps</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_AS_specOP_description">
+      <!-- %1 = Faction name | %2 = Location name | %3 = time in format H:M -->
+        <Original>We have spotted a %1 SpecOp team patrolling around a %2. Ambush them and we will have one less problem. Do this before %3. Be careful, they are tough boys.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_CON_Outpost_resource_title">
+        <Original>Resource Acquisition</Original>
+      </Key> 
+      <!-- %1 = Location name | %2 = time in format H:M -->
+      <Key ID="STR_antistasi_LTasks_CON_Outpost_resource_description">
+        <Original>A %1 would be a fine addition to our cause. Go there and capture it before %2.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_CON_Outpost_outpost_title">
+        <Original>Take the Outpost</Original>
+      </Key> 
+      <!-- %1 = Location name | %2 = time in format H:M -->
+      <Key ID="STR_antistasi_LTasks_CON_Outpost_outpost_description">
+        <Original>A %1 is disturbing our operations in the area. Go there and capture it before %2.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_CON_Outpost_seaport_title">
+        <Original>Secure the Seaport</Original>
+      </Key> 
+      <!-- %1 = Location name | %2 = time in format H:M -->
+      <Key ID="STR_antistasi_LTasks_CON_Outpost_seaport_description">
+        <Original>%1 is an important fishing supplier for our local Fish&amp;Chips dinners. Go there and capture it before %2.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_CON_Outpost_factory_title">
+        <Original>Reclaim means of production</Original>
+      </Key> 
+      <!-- %1 = Location name | %2 = time in format H:M -->
+      <Key ID="STR_antistasi_LTasks_CON_Outpost_factory_description">
+        <Original>%1 is being used to aid the enemy. Go there and capture it before %2.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_LOG_Supplies_title">
+        <Original>City Supplies</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_LOG_Supplies_description">
+        <Original>%1 population is in need of supplies. We may improve our relationship with that city if we are the ones who provide them. I have placed a crate with supplies near our HQ. Deliver the crate to %1 city center, hold it there for %3 minutes and it's done. Do this before %2.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_LOG_Supplies_distributing_supplies">
+        <Original>Keep distributing supplies for %1 more seconds.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_LOG_Supplies_supplies_delivered">
+        <Original>Supplies Delivered.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_LOG_Ammo_title">
+        <Original>Steal or Destroy Ammotruck</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_LOG_Ammo_description">
+        <Original>We've spotted an Ammotruck in an %1. Go there and destroy or steal it before %2.%2.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_LOG_Ammo_destroyed">
+        <Original>Ammo Truck Destroyed.</Original>
+      </Key>
+      <Key ID="STR_antistasi_LTasks_LOG_Ammo_captured">
+        <Original>Ammo Truck Captured.</Original>
+      </Key>
+    </Container>
+  </Package>
+</Project>
