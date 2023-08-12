@@ -11,6 +11,7 @@ class CfgFunctions {
 
         class Helpers { // task helper functions  |  Common functionality used by tasks or the params getters
             file = QPATHTOFOLDER(Helpers);
+            class hintNear {};
             class minutesFromNow {};
             class nearFriendlyMarkers {};
             class nearHostileMarkers {};
