@@ -92,6 +92,8 @@
 
 ["voices", ["Male01FRE","Male02FRE","Male03FRE"]] call _fnc_saveToTemplate;
 
+"TanoanMen" call _fnc_saveNames;
+
 //////////////////////////
 //       Loadouts       //
 //////////////////////////

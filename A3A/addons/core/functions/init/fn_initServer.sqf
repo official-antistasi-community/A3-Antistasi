@@ -272,6 +272,45 @@ if (A3A_hasACE) then {
     }] call CBA_fnc_addEventHandler;
 };
 
+if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
+    isClass (configfile >> "CfgPatches" >> "lambs_danger"))) then {
+    // disable lambs danger fsm entrypoint
+    ["CAManBase", "InitPost", {
+        params ["_unit"];
+        (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
+        _unit setVariable ["lambs_danger_disableAI", true];
+    }] call CBA_fnc_addClassEventHandler;
+};
+
+// Could replace these with entityCreated handler instead...
+if(A3A_hasZen) then {
+    ["zen_common_createZeus", {
+        _this spawn {
+            params ["_unit"];
+
+            // wait in case our event was called first
+            waitUntil {sleep 1; !isNull getAssignedCuratorLogic _unit};
+
+            //now add the logging to the module
+            [[getAssignedCuratorLogic _unit]] remoteExecCall ["A3A_fnc_initZeusLogging",0];
+        };
+    }] call CBA_fnc_addEventHandler;
+};
+
+if (A3A_hasACE) then {
+    ["ace_zeus_createZeus", {
+        _this spawn {
+            params ["_unit"];
+
+            // wait in case our event was called first
+            waitUntil {sleep 1; !isNull getAssignedCuratorLogic _unit};
+
+            //now add the logging to the module
+            [[getAssignedCuratorLogic _unit]] remoteExecCall ["A3A_fnc_initZeusLogging",0];
+        };
+    }] call CBA_fnc_addEventHandler;
+};
+
 
 serverInitDone = true; publicVariable "serverInitDone";
 Info("Setting serverInitDone as true");
@@ -323,46 +362,5 @@ savingServer = false;           // enable saving
     };
 };
 
-if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
-    isClass (configfile >> "CfgPatches" >> "lambs_danger"))) then {
-    // disable lambs danger fsm entrypoint
-    ["CAManBase", "InitPost", {
-        params ["_unit"];
-        (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
-        _unit setVariable ["lambs_danger_disableAI", true];
-    }] call CBA_fnc_addClassEventHandler;
-};
-
-
-
-if(A3A_hasZen) then 
-{
-    ["zen_common_createZeus", {
-        [_this] spawn {
-            params ["_unit"];
-
-            // wait in case our event was called first
-            waitUntil {sleep 1; !isNull getAssignedCuratorLogic _unit};
-
-            //now add the logging to the module
-            [[getAssignedCuratorLogic _unit]] remoteExecCall ["A3A_fnc_initZeusLogging",0];
-        };
-    }] call CBA_fnc_addEventHandler;
-};
-
-if(A3A_hasACE) then 
-{
-    ["ace_zeus_createZeus", {
-        [_this] spawn {
-            params ["_unit"];
-
-            // wait in case our event was called first
-            waitUntil {sleep 1; !isNull getAssignedCuratorLogic _unit};
-
-            //now add the logging to the module
-            [[getAssignedCuratorLogic _unit]] remoteExecCall ["A3A_fnc_initZeusLogging",0];
-        };
-    }] call CBA_fnc_addEventHandler;
-};
 
 Info("initServer completed");

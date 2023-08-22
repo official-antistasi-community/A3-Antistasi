@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="A3-Antistasi">
+    <Package name="A3-Antistasi Mission">
+        <Container name="JNA">
+            <Key ID="STR_A3A_JNA_title">
+                <Original>Jeroen (Not) Limited Arsenal</Original>
+                <Spanish>Jeroen (No) Arsenal limitado</Spanish>
+            </Key>
+            <Key ID="STR_A3A_JNA_vehicle_title">
+                <Original>Vehicle inventory</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_loading_error">
+                <Original>ERROR DURING ARSENAL LOAD</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_rhs_error">
+                <Original>ERROR - Please report RPT to Antistasi Dev's.</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_export_todo">
+                <Original>TODO</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_loadinventory_kept">
+                <Original> has been kept, because there is no </Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_loadinventory_notin_kept">
+                <Original>These items were not in the Arsenal, so the originals have been kept:\n</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_loadinventory_notin">
+                <Original>These items were not in the Arsenal:\n</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_vehicle_mass_load">
+                <Original>Load</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_text_defaultgear">
+                <Original>Default gear</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_tooltip_defaultgear">
+                <Original>Add default items like radio and medical supplies</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_text_tocrate">
+                <Original>To crate</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_tooltip_tocrate">
+                <Original>Move items from crate inventory to arsenal</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_text_unload">
+                <Original>Unload</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_tooltop_unload">
+                <Original>Move items from car to arsenal</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_sort_amount">
+                <Original>Sort by amount</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_sort_default">
+                <Original>Default</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_assetamount_amount0">
+                <Original>Looks like I am the only one using this today</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_assetamount_amountmore50">
+                <Original>More than enough for a whole army</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_assetamount_amountmore10">
+                <Original>Many of these left</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_assetamount_amountmore3">
+                <Original>Some of these left</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_assetamount_amountmore1">
+                <Original>If I want one I need to take it before some one else does</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_assetamount_amount1">
+                <Original>The last one in the box</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_assetamount_amountunlimited">
+                <Original>More than enough for a whole army</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_ammoamount_amount0">
+                <Original>, but there is no ammo for it</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_ammoamount_amountmore09">
+                <Original>, and there is enough ammo for it</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_ammoamount_amountmore02">
+                <Original>, and there is still some ammo for it</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_ammoamount_amountmore0">
+                <Original>, but there are only a few shots for it</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_weapon_low">
+                <Original>We are low on this item, only members may use it</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_batteries_no_space">
+                <Original>I can't take batteries, I have no space for it</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_batteries_no_left">
+                <Original>Shit there are no more batteries</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_scope_incompatible">
+                <Original>\n(Not compatible with currently equipped weapons)</Original>
+            </Key>
+            <Key ID="STR_A3A_JNA_memberonly">
+                <Original>We are low on this item, only members may use it</Original>
+            </Key>
+        </Container>
+        <Container name="JND">
+            <Key ID="STR_A3A_JND_title">
+                <Original>Ultra Wide Extended Debug Console With Extra Save Buttens!</Original>
+            </Key>
+            <Key ID="STR_A3A_JND_button_load">
+                <Original>Load</Original>
+            </Key>
+            <Key ID="STR_A3A_JND_button_save">
+                <Original>Save</Original>
+            </Key>
+            <Key ID="STR_A3A_JND_button_del">
+                <Original>Del</Original>
+            </Key>
+            <Key ID="STR_A3A_JND_button_undo">
+                <Original>-- Undo last save --</Original>
+            </Key>
+        </Container>
+    </Package>
+</Project>

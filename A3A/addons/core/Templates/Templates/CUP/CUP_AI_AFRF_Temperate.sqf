@@ -82,6 +82,7 @@
 "WhiteHead_13","WhiteHead_14","WhiteHead_17","WhiteHead_18",
 "WhiteHead_21","WhiteHead_30"]] call _fnc_saveToTemplate;
 ["voices", ["Male01RUS","Male02RUS","Male03RUS"]] call _fnc_saveToTemplate;
+"CUP_Names_RussianMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //

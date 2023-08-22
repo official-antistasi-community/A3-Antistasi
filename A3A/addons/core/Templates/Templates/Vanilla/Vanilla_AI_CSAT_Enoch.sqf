@@ -91,6 +91,7 @@ if (allowDLCWS) then {
 "RussianHead_3","RussianHead_4","RussianHead_5","WhiteHead_01","WhiteHead_02",
 "WhiteHead_04","WhiteHead_08","WhiteHead_09","WhiteHead_10","WhiteHead_13",
 "WhiteHead_14","WhiteHead_15","WhiteHead_18","WhiteHead_21","WhiteHead_30"]] call _fnc_saveToTemplate;
+"RussianMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //

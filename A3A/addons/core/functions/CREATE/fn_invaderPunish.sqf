@@ -63,6 +63,8 @@ if (_numCiv > 30) then {_numCiv = 30};
 private _civilians = [];
 private _civGroups = [];
 private _civWeapons = unlockedsniperrifles + unlockedmachineguns + unlockedshotguns + unlockedrifles + unlockedsmgs + unlockedhandguns;
+private _unitType = FactionGet(reb, "unitUnarmed");
+
 while {count _civilians < _numCiv} do
 {
     private _groupCivil = createGroup teamPlayer;
@@ -71,10 +73,9 @@ while {count _civilians < _numCiv} do
         private _pos = _posDest getPos [random _size / 2,random 360];
         if (!surfaceIsWater _pos) exitWith { _pos };
     };
-    for "_i" from 1 to (4 min (_numCiv - count _civilians)) do
-    {
-        private _civ = [_groupCivil, FactionGet(reb, "unitUnarmed"), _pos, [], 0, "NONE"] call A3A_fnc_createUnit;
-        [_civ, selectRandom (A3A_faction_civ get "faces"), "NoVoice"] call A3A_fnc_setIdentity;
+    for "_i" from 1 to (4 min (_numCiv - count _civilians)) do {
+        private _identity = [A3A_faction_civ, _unitType] call A3A_fnc_createRandomIdentity;
+        private _civ = [_groupCivil, _unitType, _pos, [], 0, "NONE", _identity] call A3A_fnc_createUnit;
         _civ forceAddUniform selectRandom (A3A_faction_civ get "uniforms");
         _civ addHeadgear selectRandom (A3A_faction_civ get "headgear");
         [_civ, selectRandom _civWeapons, 5, 0] call BIS_fnc_addWeapon;

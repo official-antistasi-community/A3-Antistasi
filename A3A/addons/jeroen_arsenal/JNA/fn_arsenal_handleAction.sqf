@@ -16,16 +16,16 @@ uisleep 10;
 private _ids = missionnamespace getvariable ["BIS_fnc_startLoadingScreen_ids",[]];
   if("jn_fnc_arsenal" in _ids)then{
 	private _display =  uiNamespace getVariable ["arsanalDisplay","No display"];
-	titleText["ERROR DURING LOADING ARSENAL", "PLAIN"];
+	titleText[localize "STR_A3A_JNA_loading_error", "PLAIN"];
 	_display closedisplay 2;
 	["jn_fnc_arsenal"] call BIS_fnc_endLoadingScreen;
   };
 
-  //TODO this is a temp fix for rhs because it freezes the loading screen if no primaryWeapon was equiped. This will be fix in rhs 0.4.9
+  //TODO: This has been fixed, we'll remove in a future update.
 if("bis_fnc_arsenal" in _ids)then{
 	private _display =  uiNamespace getVariable ["arsanalDisplay","No display"];
-	titleText["Non Fatal Error, RHS?", "PLAIN"];
-	diag_log "JNA: Non Fatal Error, RHS?";
+	titleText[localize "STR_A3A_JNA_rhs_error", "PLAIN"];
+	diag_log "JNA: ERROR - Please report RPT to Antistasi Dev's.";
 	["bis_fnc_arsenal"] call BIS_fnc_endLoadingScreen;
 };
 };

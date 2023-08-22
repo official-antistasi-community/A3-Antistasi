@@ -45,7 +45,9 @@ _arrayAirports = airportsX select {sidesX getVariable [_x,sideUnknown] == Occupa
 _base = [_arrayAirports, _positionX] call BIS_Fnc_nearestPosition;
 _posBase = getMarkerPos _base;
 
-_traitor = [_groupTraitor, FactionGet(occ,"unitTraitor"), _posTraitor, [], 0, "NONE"] call A3A_fnc_createUnit;
+private _traitorIdentity = [A3A_faction_reb, FactionGet(occ,"unitTraitor")] call A3A_fnc_createRandomIdentity;
+_traitorIdentity set ["speaker", "NoVoice"];
+_traitor = [_groupTraitor, FactionGet(occ,"unitTraitor"), _posTraitor, [], 0, "NONE", _traitorIdentity] call A3A_fnc_createUnit;
 _traitor allowDamage false;
 _traitor setPos _posTraitor;
 _sol1 = [_groupTraitor, FactionGet(occ,"unitBodyguard"), _posSol1, [], 0, "NONE"] call A3A_fnc_createUnit;

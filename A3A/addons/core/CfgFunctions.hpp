@@ -332,6 +332,7 @@ class CfgFunctions
             class clientIdleChecker {};
             class installClientEH {};
             class credits {};
+            class initACE {};
             class initACEUnconsciousHandler {};
             class initBases {};
             class initUtilityItems {};
@@ -727,6 +728,7 @@ class CfgFunctions
             class setIdentity {};
             class setIdentityLocal {};
             class setPos {};
+            class createRandomIdentity {};
             class vehicleTextureSync {};
             class vehicleWillCollideAtPosition {};
             class getRoadDirection {};

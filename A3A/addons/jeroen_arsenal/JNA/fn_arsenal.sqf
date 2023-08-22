@@ -274,7 +274,7 @@ switch _mode do {
 		["ReplaceBaseItems",[_display]] call jn_fnc_arsenal;
 		["customEvents",[_display]] call jn_fnc_arsenal;
 		["CreateListAll", [_display]] call jn_fnc_arsenal;
-		['showMessage',[_display,"Jeroen (Not) Limited Arsenal"]] call jn_fnc_arsenal;
+		['showMessage',[_display, localize "STR_A3A_JNA_title"]] call jn_fnc_arsenal;
 		["HighlightMissingIcons",[_display]] call jn_fnc_arsenal;
 
 		["jn_fnc_arsenal"] call BIS_fnc_endLoadingScreen;
@@ -363,12 +363,12 @@ switch _mode do {
 
 		_ctrlButtonExport = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONEXPORT;
 		_ctrlButtonExport ctrlRemoveAllEventHandlers "buttonclick";
-		_ctrlButtonExport ctrlSetText "TODO";
+		_ctrlButtonExport ctrlSetText localize "STR_A3A_JNA_export_todo";
 
 		_ctrlButtonImport = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONIMPORT;
 		_ctrlButtonImport ctrlRemoveAllEventHandlers "buttonclick";
-		_ctrlButtonImport ctrlSetText "Default gear";
-		_ctrlButtonImport ctrlSetTooltip "Add default items like radio and medical supplies";
+		_ctrlButtonImport ctrlSetText localize "STR_A3A_JNA_text_defaultgear";
+		_ctrlButtonImport ctrlSetTooltip localize "STR_A3A_JNA_tooltip_defaultgear";
 		_ctrlButtonImport ctrladdeventhandler ["buttonclick",{["buttonDefaultGear",[ctrlparent (_this select 0)]] call jn_fnc_arsenal;}];
 
 		_ctrlButtonSave = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONSAVE;
@@ -378,8 +378,8 @@ switch _mode do {
 		_ctrlButtonRandom = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONRANDOM;
 		_ctrlButtonRandom ctrlRemoveAllEventHandlers "buttonclick";
 		_ctrlButtonRandom ctrladdeventhandler ["buttonclick",{["buttonInvToJNA",[ctrlparent (_this select 0)]] call jn_fnc_arsenal;}];
-		_ctrlButtonRandom ctrlSetText "To crate";
-		_ctrlButtonRandom ctrlSetTooltip "Move items from crate inventory to arsenal";
+		_ctrlButtonRandom ctrlSetText localize "STR_A3A_JNA_text_tocrate";
+		_ctrlButtonRandom ctrlSetTooltip localize "STR_A3A_JNA_tooltip_tocrate";
 
 		_ctrlArrowLeft = _display displayctrl IDC_RSCDISPLAYARSENAL_ARROWLEFT;
 		_ctrlArrowLeft ctrlRemoveAllEventHandlers "buttonclick";
@@ -439,8 +439,8 @@ switch _mode do {
       };
 
 
-			private _sortByAmountIndex =  _ctrlSort lbadd "Sort by amount";
-      private _sortDefaultIndex = _ctrlSort lbadd "Default";
+			private _sortByAmountIndex =  _ctrlSort lbadd localize "STR_A3A_JNA_sort_amount";
+      private _sortDefaultIndex = _ctrlSort lbadd localize "STR_A3A_JNA_sort_default";
 
       _ctrlSort lbSetValue [0, SORT_ALPHABETICAL];
       _ctrlSort lbSetValue [_sortByAmountIndex, SORT_AMOUNT];
@@ -1479,41 +1479,41 @@ switch _mode do {
 
 				_strAmount = switch true do {
 					case (_amount == 0): {
-						"Looks like I am the only one using this today"
+						localize "STR_A3A_JNA_assetamount_amount0"
 					};
 					case (_amount > 50): {
-						"More than enough for a whole army"
+						localize "STR_A3A_JNA_assetamount_amountmore50"
 					};
 					case (_amount > 10): {
-						"Many of these left"
+						localize "STR_A3A_JNA_assetamount_amountmore10"
 					};
 					case (_amount > 3): {
-						"Some of these left"
+						localize "STR_A3A_JNA_assetamount_amountmore3"
 					};
 					case (_amount > 1): {
-						"If I want one I need to take it before some one else does"
+						localize "STR_A3A_JNA_assetamount_amountmore1"
 					};
 					case (_amount == 1): {
-						"The last one in the box"
+						localize "STR_A3A_JNA_assetamount_amount1"
 					};
 					case (_amount == -1): {//TODO marker for changed entry
-						"More than enough for a whole army"
+						localize "STR_A3A_JNA_assetamount_amountunlimited"
 					};
 					default{""};
 				};
 
 				_strAmmo = switch true do {
 					case (_colorMult == 0): {
-						", but there is no ammo for it"
+						localize "STR_A3A_JNA_ammoamount_amount0"
 					};
 					case (_colorMult > 0.9): {
-						", and there is enough ammo for it"
+						localize "STR_A3A_JNA_ammoamount_amountmore09"
 					};
 					case (_colorMult > 0.2): {
-						", and there is still some ammo for it"
+						localize "STR_A3A_JNA_ammoamount_amountmore02"
 					};
 					case (_colorMult > 0): {
-						", but there are only a few shots for it"
+						localize "STR_A3A_JNA_ammoamount_amountmore0"
 					};
 					default{""};
 				};
@@ -1597,7 +1597,7 @@ switch _mode do {
 		//check if weapon is unlocked
 		private _min = [_index, _item] call _minItemsMember;
 		if ((_amount <= _min) AND (_amount != -1) AND (_item !="") AND !([player] call A3A_fnc_isMember) AND !_type) exitWith{
-			['showMessage',[_display,"We are low on this item, only members may use it"]] call jn_fnc_arsenal;
+			['showMessage',[_display,localize "STR_A3A_JNA_weapon_low"]] call jn_fnc_arsenal;
 
 			//reset _cursel
 			if(missionnamespace getvariable ["jna_reselect_item",true])then{//prefent loop when unavalable item was worn and a other unavalable item was selected
@@ -1773,10 +1773,10 @@ switch _mode do {
 									player addmagazine _mag;
 									[IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, _mag]call jn_fnc_arsenal_removeItem;
 								}else{
-									titleText["I can't take batteries, I have no space for it", "PLAIN"];
+									titleText[localize "STR_A3A_JNA_batteries_no_space", "PLAIN"];
 								};
 							}else{
-								titleText["Shit there are no more batteries", "PLAIN"];
+								titleText[localize "STR_A3A_JNA_batteries_no_left", "PLAIN"];
 							};
 						};
 						[_index, _item]call jn_fnc_arsenal_removeItem;
@@ -2090,7 +2090,7 @@ switch _mode do {
 			_ctrlList lnbsetcolor [[_r,1],_color];
 			_ctrlList lnbsetcolor [[_r,2],_color];
 			_text = _ctrlList lnbtext [_r,1];
-			_ctrlList lbsettooltip [_r * _columns,[_text,_text + "\n(Not compatible with currently equipped weapons)"] select _isIncompatible];
+			_ctrlList lbsettooltip [_r * _columns,[_text,_text + localize "STR_A3A_JNA_scope_incompatible"] select _isIncompatible];
 		};
 	};
 
@@ -2139,7 +2139,7 @@ switch _mode do {
 			if (_add > 0) then {//add
 				_min = [_index, _item] call _minItemsMember;
 				if((_amount <= _min) AND (_amount != -1) AND !([player] call A3A_fnc_isMember)) exitWith{
-					['showMessage',[_display,"We are low on this item, only members may use it"]] call jn_fnc_arsenal;
+					['showMessage',[_display, localize "STR_A3A_JNA_memberonly"]] call jn_fnc_arsenal;
 				};
 				if(_index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG,IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL])then{//magazines are handeld by bullet count
 					//check if full mag can be optaind

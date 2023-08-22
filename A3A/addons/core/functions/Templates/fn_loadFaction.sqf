@@ -72,6 +72,15 @@ private _fnc_generateAndSaveUnitsToTemplate = {
 	} forEach _unitTemplates;
 };
 
+private _fnc_saveNames = {
+    params ["_names"];
+    private _nameConfig = configfile >> "CfgWorlds" >> "GenericNames" >> _names;
+    private _firstNames = configProperties [_nameConfig >> "FirstNames"] apply { getText(_x) };
+    ["firstNames", _firstNames] call _fnc_saveToTemplate;
+    private _lastNames = configProperties [_nameConfig >> "LastNames"] apply { getText(_x) };
+    ["lastNames", _lastNames] call _fnc_saveToTemplate;
+};
+
 {
 	call compile preprocessFileLineNumbers _x;
 } forEach _filepaths;

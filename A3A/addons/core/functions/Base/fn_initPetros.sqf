@@ -7,8 +7,6 @@ petros setSkill 1;
 petros setVariable ["respawning",false];
 petros allowDamage false;
 
-[petros, "GreekHead_A3_01", "Male06GRE", 1.1, "Petros"] call A3A_fnc_setIdentity;
-
 removeHeadgear petros;
 removeGoggles petros;
 private _vest = selectRandomWeighted (A3A_rebelGear get "ArmoredVests");

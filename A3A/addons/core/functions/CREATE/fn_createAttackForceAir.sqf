@@ -36,13 +36,13 @@ private _cargoGroups = [];
 private _faction = Faction(_side);
 private _transportPlanes = _faction get "vehiclesPlanesTransport";
 private _transportHelis = _faction get "vehiclesHelisTransport";
-private _lightHelis = _faction get "vehiclesHelisTransport";
+private _lightHelis = _faction get "vehiclesHelisLight";
 private _lhFactor = 0 max (1 - (tierWar+_tierMod) / 10);            // phase out light helis at higher war tiers
 
 private _transportPool = [];
 { _transportPool append [_x, 1 / count _transportPlanes] } forEach _transportPlanes;
 { _transportPool append [_x, 2 / count _transportHelis] } forEach _transportHelis;
-{ _transportPool append [_x, 2 * _lhFactor / count _transportHelis] } forEach _lightHelis;
+{ _transportPool append [_x, 2 * _lhFactor / count _lightHelis] } forEach _lightHelis;
 
 private _supportPool = [_side, tierWar+_tierMod] call A3A_fnc_getVehiclesAirSupport;
 

@@ -48,6 +48,7 @@
 "WhiteHead_05","WhiteHead_07","WhiteHead_08","WhiteHead_09","WhiteHead_10","WhiteHead_11","WhiteHead_12",
 "WhiteHead_14","WhiteHead_15","WhiteHead_16","WhiteHead_17","WhiteHead_18","WhiteHead_19","WhiteHead_20",
 "WhiteHead_21"]] call _fnc_saveToTemplate;
+"CUP_Names_CzechMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //

@@ -30,7 +30,6 @@ _unit setUnitTrait ["audibleCoef",0.8];
 // FIAinit is called for liberated refugees/hostages. Don't equip them.
 if !(_typeX isEqualTo FactionGet(reb,"unitUnarmed")) then {
 	[_unit, [0,1] select (leader _unit != player)] call A3A_fnc_equipRebel;
-	[_unit, selectRandom (A3A_faction_reb get "faces"), selectRandom (A3A_faction_reb get "voices")] call A3A_fnc_setIdentity;
 };
 _unit selectWeapon (primaryWeapon _unit);
 

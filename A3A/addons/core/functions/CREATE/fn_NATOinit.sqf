@@ -19,7 +19,6 @@ if ((isNil "_unit") || (isNull _unit)) exitWith
 
 private _type = _unit getVariable "unitType";
 private _side = side (group _unit);
-private _faction = Faction(_side);
 _unit setVariable ["originalSide", _side];          // used for delete handler, which is local
 
 if (isNil "_type") then {
@@ -84,44 +83,13 @@ _unit addEventHandler ["HandleDamage", A3A_fnc_handleDamageAAF];
 _unit addEventHandler ["Killed", A3A_fnc_enemyUnitKilledEH];
 _unit addEventHandler ["Deleted", A3A_fnc_enemyUnitDeletedEH];
 
-
-//Calculates the skill of the given unit
-//private _skill = (0.15 * skillMult) + (0.04 * difficultyCoef) + (0.02 * tierWar);
-private _skill = (0.1 * A3A_enemySkillMul) + (0.07 * (1 max A3A_activePlayerCount^0.5)) + (0.01 * tierWar);
-private _regularFaces = (_faction get "faces");
-private _regularVoices = (_faction get "voices");
-private ["_face", "_voice"];
-
-switch (true) do {
-case ("militia_" in (_unit getVariable "unitType")):
-    {
-    _skill = _skill * 0.7;
-    _face = selectRandom (_faction getOrDefault ["milFaces", _regularFaces]);
-    _voice = selectRandom (_faction getOrDefault ["milVoices", _regularVoices]);
-    };
-case ("police" in (_unit getVariable "unitType")):
-    {
-    _skill = _skill * 0.5;
-    _face = selectRandom (_faction getOrDefault ["polFaces", _regularFaces]);
-    _voice = selectRandom (_faction getOrDefault ["polVoices", _regularVoices]);
-    };
-case ("SF" in (_unit getVariable "unitType")):
-    {
-    _skill = _skill * 1.2;
-    _face = selectRandom (_faction getOrDefault ["sfFaces", _regularFaces]);
-    _voice = selectRandom (_faction getOrDefault ["sfVoices", _regularVoices]);
-    };
-case ("Traitor" in (_unit getVariable "unitType")):
-    {
-    _face = selectRandom (A3A_faction_reb  get "faces");
-    _voice = "NoVoice";
-    };
-default {
-    _face = selectRandom _regularFaces;
-    _voice = selectRandom _regularVoices;
-    };
+private _baseSkill = (0.1 * A3A_enemySkillMul) + (0.07 * (1 max A3A_activePlayerCount^0.5)) + (0.01 * tierWar);
+private _skill = switch (true) do {
+    case ("militia_" in _type): { _baseSkill * 0.7 };
+    case ("police" in _type): { _baseSkill * 0.5 };
+    case ("SF" in _type): { _baseSkill * 1.2 };
+    default { _baseSkill };
 };
-[_unit, _face, _voice] call A3A_fnc_setIdentity;
 _unit setSkill _skill;
 
 //Adjusts squadleaders with improved skill and adds intel action
