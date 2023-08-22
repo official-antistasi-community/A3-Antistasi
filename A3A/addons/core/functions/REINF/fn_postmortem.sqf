@@ -14,17 +14,6 @@ private _group = group _victim;
 Debug("PostMortem Called");
 if (isnull _victim)exitwith{Error("Function failed called with null param.")};
 
-if (isNull _group) then
-{
-    Debug_1("Group for victim :: %1, no group found! Removing from Statics list.",_victim);
-
-	if (_victim in staticsToSave) then
-    {
-        staticsToSave = staticsToSave - [_victim];
-        publicVariable "staticsToSave";
-    };
-};
-
 Debug_3("Pausing for %1 minutes before cleaning victim: %2 and group: %3", round cleantime/60, _victim, _group);
 sleep cleantime;
 

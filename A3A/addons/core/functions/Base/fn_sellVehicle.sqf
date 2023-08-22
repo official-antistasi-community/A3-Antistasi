@@ -119,11 +119,12 @@ _costs = round (_costs * (1-damage _veh));
 
 [0,_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
 
-if (_veh in staticsToSave) then {staticsToSave = staticsToSave - [_veh]; publicVariable "staticsToSave"};
+private _vehMarker = _veh getVariable "markerX";
+if (!isNil "_vehMarker") then { [_veh] call A3A_fnc_remVehicleFromGarrison };
 
 [_veh,true] call A3A_fnc_empty;
 
-if (_veh isKindOf "StaticWeapon") then {deleteVehicle _veh};
+if (_veh isKindOf "StaticWeapon") then {deleteVehicle _veh};        // otherwise fnc_empty does it eventually?
 
 ["Sell Vehicle", "Vehicle Sold."] remoteExecCall ["A3A_fnc_customHint",_player];
 nil;

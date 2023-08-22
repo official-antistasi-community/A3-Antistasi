@@ -25,7 +25,6 @@ if (isServer) then {
 	["prestigeBLUFOR"] call A3A_fnc_getStatVariable;
 	["resourcesFIA"] call A3A_fnc_getStatVariable;
 	["garrison"] call A3A_fnc_getStatVariable;
-	["usesWurzelGarrison"] call A3A_fnc_getStatVariable;
 	["skillFIA"] call A3A_fnc_getStatVariable;
 	["membersX"] call A3A_fnc_getStatVariable;
 	["vehInGarage"] call A3A_fnc_getStatVariable;
@@ -86,6 +85,58 @@ if (isServer) then {
 		};
 	} forEach citiesX;
 
+
+	// Backwards compatibility, copy garrison troops and statics into rebel garrisons
+	A3A_garrison = ["newGarrison"] call A3A_fnc_returnSavedStat;
+	if (isNil "A3A_garrison") then
+	{
+		// troops
+		A3A_garrison = createHashMap;
+		private _rebelMarkers = markersX select { sidesX getVariable _x == teamPlayer };
+		{
+			private _troops = garrison getVariable [_x, []];
+			private _garrison = createHashMapFromArray [ ["troops", _troops], ["statics", []], ["vehicles", []], ["buildings", []] ];
+			A3A_garrison set [_x, _garrison];
+		} forEach _rebelMarkers;
+
+		// Too much of a pain to support, don't bother
+		if (A3A_saveVersion < 20401) exitWith {};
+
+		// statics & buildings
+        {
+            _x params ["_typeVeh", "_posVeh", "_vecUp", "_vecDir", "_state"];
+
+            // ignore vehicles & utility items, spawned by loadStat
+			if (_typeVeh in A3A_utilityItemHM) then { continue };
+			private _isStatic = _typeVeh isKindOf "StaticWeapon";
+            if !(_isStatic or _typeVeh isKindOf "Building") then { continue };
+            // Could check for the driver flag instead maybe?
+
+			_marker = [_posVeh] call A3A_fnc_getMarkerForPos;
+			if (_marker == "") then { continue };
+			if !(_marker in A3A_garrison) then { continue };			// non-rebel marker? maybe possible
+			private _array = A3A_garrison get _marker get (["buildings", "statics"] select _isStatic);
+			_array pushBack [_typeVeh, [_posVeh, _vecUp, _vecDir]];
+
+        } forEach (["staticsX"] call A3A_fnc_returnSavedStat);
+
+		// Could fix roadblock vehicle & garrison mortars here, probably not worth it though
+	};
+
+	// Spawn in all garrison buildings
+	{
+		{
+			_x params ["_typeVeh", "_posData"];
+			_posData params ["_posVeh", "_vecUp", "_vecDir"];
+			isNil {
+				private _veh = createVehicle [_typeVeh, _posVeh, [], 0, "CAN_COLLIDE"];
+				_veh setPosWorld _posVeh;
+				_veh setVectorDirAndUp [_vecDir, _vecUp];
+			};
+		} forEach (_y get "buildings");
+	} forEach A3A_garrison;
+
+
     //Load aggro stacks and level and calculate current level
     ["aggressionOccupants"] call A3A_fnc_getStatVariable;
 	["aggressionInvaders"] call A3A_fnc_getStatVariable;
@@ -95,31 +146,13 @@ if (isServer) then {
 
 	["posHQ"] call A3A_fnc_getStatVariable;
 	["nextTick"] call A3A_fnc_getStatVariable;
+
+	// Still used for utility items and vehicles parked near HQ
 	["staticsX"] call A3A_fnc_getStatVariable;
 
-	{_x setPos getMarkerPos respawnTeamPlayer} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
-	_sites = markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
-
-
-	tierPreference = 1;
-	publicVariable "tierPreference";
 	// update war tier silently, calls updatePreference if changed
 	[true] call A3A_fnc_tierCheck;
 
-	if (isNil "usesWurzelGarrison") then {
-		//Create the garrison new
-        Info("No WurzelGarrison found, creating new!");
-		[airportsX, "Airport", [0,0,0]] spawn A3A_fnc_createGarrison;	//New system
-		[resourcesX, "Other", [0,0,0]] spawn A3A_fnc_createGarrison;	//New system
-		[factories, "Other", [0,0,0]] spawn A3A_fnc_createGarrison;
-		[outposts, "Outpost", [1,1,0]] spawn A3A_fnc_createGarrison;
-		[seaports, "Other", [1,0,0]] spawn A3A_fnc_createGarrison;
-
-	} else {
-		//Garrison save in wurzelformat, load it
-        Info("WurzelGarrison found, loading it!");
-		["wurzelGarrison"] call A3A_fnc_getStatVariable;
-	};
 
     //Load state of testing timer
     ["testingTimerIsActive"] call A3A_fnc_getStatVariable;

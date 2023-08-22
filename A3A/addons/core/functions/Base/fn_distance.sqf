@@ -145,95 +145,71 @@ private _processOccupantMarker = {
 
 private _processFIAMarker = {
 
+    private _enemies = _occupants + _invaders;
     switch (spawner getVariable _marker)
     do
     {
         case ENABLED:
         {
-            // if somebody blufor is inside distanceSPWN
-            // or somebody opfor is inside distanceSPWN
+            // if somebody enemy is inside distanceSPWN
             // or somebody green is control unit and is inside distanceSPWN2
             // or marker is forced to spawn than exit (marker still ENABLED)
-            if (_occupants inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
-                || { _invaders inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
+            if (_enemies inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
                 || { _players inAreaArray [_position, distanceSPWN2, distanceSPWN2] isNotEqualTo []
-                || { _marker in forcedSpawn } }}) exitWith {};
+                || { _marker in forcedSpawn } }) exitWith {};
 
             // DISABLE marker
             spawner setVariable [_marker, DISABLED, true];
-
-            // disable simulation for all marker units
-            {
-                if (_x getVariable ["markerX", ""] == _marker
-                    && { vehicle _x == _x }) then { _x enableSimulationGlobal false; };
-            } forEach allUnits;
+            private _machineID = A3A_garrisonMachine get _marker; 
+            ["pause", [_marker]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
         };
 
         case DISABLED:
         {
-            // if somebody blufor is inside distanceSPWN
-            // or sombody opfor is inside distanceSPWN
+            // if somebody enemy is inside distanceSPWN
             // or somebody green is player and is inside distanceSPWN2
             // or marker is forced spawn than ENABLE marker
-            if (_occupants inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
-                || { _invaders inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
+            if (_enemies inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
                 || { _players inAreaArray [_position, distanceSPWN2, distanceSPWN2] isNotEqualTo []
-                || { _marker in forcedSpawn } }})
+                || { _marker in forcedSpawn } })
             then
             {
                 // ENABLE this marker
                 spawner setVariable [_marker, ENABLED, true];
-
-                // enable simulation for all marker units
-                {
-                    if (_x getVariable ["markerX", ""] == _marker && {
-                        vehicle _x == _x }) then { _x enableSimulationGlobal true; };
-                } forEach allunits;
+                private _machineID = A3A_garrisonMachine get _marker; 
+                ["unpause", [_marker]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
             }
             else
             {
-                // if sombody blufor is inside distanceSPWN1
-                // or somebody opfor is inside distanceSPWN1
-                // or somebody green is player and is inside distanceSPWN
+                // if enemy is inside distanceSPWN1
+                // or player is inside distanceSPWN
                 // then exit (marker still DISABLED)
-                if (_occupants inAreaArray [_position, distanceSPWN1, distanceSPWN1] isNotEqualTo []
-                    || { _invaders inAreaArray [_position, distanceSPWN1, distanceSPWN1] isNotEqualTo []
-                    || { _players inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo [] }})
+                if (_enemies inAreaArray [_position, distanceSPWN1, distanceSPWN1] isNotEqualTo []
+                    || { _players inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo [] })
                 exitWith {};
 
                 // DESPAWN this marker
                 spawner setVariable [_marker, DESPAWN, true];
+                private _machineID = A3A_garrisonMachine get _marker; 
+                ["despawn", [_marker]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
+                A3A_garrisonMachine deleteAt _marker;       // clear machine ID
             };
         };
 
         case DESPAWN:
         {
-            // if nobody blufor is inside distanceSPWN
-            // and nobody opfor is inside distanceSPWN
-            // and nobody green player is inside distanceSPWN2
+            // if no enemies inside distanceSPWN
+            // and no players inside distanceSPWN2
             // and marker is not forced spawn then exit (marker still DESPAWN)
-            if (_occupants inAreaArray [_position, distanceSPWN, distanceSPWN] isEqualTo []
-                && { _invaders inAreaArray [_position, distanceSPWN, distanceSPWN] isEqualTo []
+            if (_enemies inAreaArray [_position, distanceSPWN, distanceSPWN] isEqualTo []
                 && { _players inAreaArray [_position, distanceSPWN2, distanceSPWN2] isEqualTo []
-                && { !(_marker in forcedSpawn) } }}) exitWith {};
+                && { !(_marker in forcedSpawn) } }) exitWith {};
 
-            // ENABLED this marker
+            // ENABLE this marker
             spawner setVariable [_marker, ENABLED, true];
-
-            // run spawn procedures
-            switch (true)
-            do
-            {
-                case (_marker in outpostsFIA):
-                {
-                    [[_marker], "A3A_fnc_createFIAOutposts2"] call A3A_fnc_scheduler;
-                };
-
-                case !(_marker in controlsX):
-                {
-                    [[_marker], "A3A_fnc_createSDKGarrisons"] call A3A_fnc_scheduler;
-                };
-            };
+            private _machineID = call A3A_fnc_chooseMachineForGarrison;
+            A3A_garrisonMachine set [_marker, _machineID];
+            ["spawn", [_marker, A3A_garrison get _marker]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
         };
     };
 };

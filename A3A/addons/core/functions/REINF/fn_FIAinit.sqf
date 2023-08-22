@@ -1,12 +1,14 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-private ["_victim","_killer"];
+params ["_unit"];
 
-private _unit = _this select 0;
+_unit addEventHandler ["Killed", A3A_fnc_rebelUnitKilledEH];
+_unit setVariable ["A3A_killedEH", true];
+// TODO: delete EH needed as well? marginal
 
 [_unit] call A3A_fnc_initRevive;
-_unit setVariable ["spawner",true,true];
+_unit setVariable ["spawner", true, true];
 
 _unit allowFleeing 0;
 private _typeX = _unit getVariable "unitType";
@@ -32,32 +34,13 @@ if !(_typeX isEqualTo FactionGet(reb,"unitUnarmed")) then {
 };
 _unit selectWeapon (primaryWeapon _unit);
 
-
-private _victim = objNull;
-private _killer = objNull;
-
 if (player == leader _unit) then {
 	_unit setVariable ["owner", player, true];
-	_unit addEventHandler ["killed", {
-		_victim = _this select 0;
-		[_victim] spawn A3A_fnc_postmortem;
-		_killer = _this select 1;
-		if (side _killer == Occupants) then {
-			_nul = [0.25,0,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-			[Occupants, -1, 30] remoteExec ["A3A_fnc_addAggression",2];
-		} else {
-			if (side _killer == Invaders) then {
-				[Invaders, -1, 30] remoteExec ["A3A_fnc_addAggression",2]
-			} else {
-				if (isPlayer _killer) then {
-					_killer addRating 1000;
-				};
-			};
-		};
-		_victim setVariable ["spawner",nil,true];
-	}];
 	if (captive player) then {[_unit] spawn A3A_fnc_undercoverAI};
+};
 
+/*
+	// move this code to initClient?
 	_unit setVariable ["rearming",false];
 	if ((!haveRadio) and !(A3A_hasIFA)) then {
 		while {alive _unit} do {
@@ -77,30 +60,4 @@ if (player == leader _unit) then {
 			};
 		};
 	};
-} else {
-	_unit addEventHandler ["killed", {
-		_victim = _this select 0;
-		_killer = _this select 1;
-		[_victim] remoteExec ["A3A_fnc_postmortem",2];
-		if ((isPlayer _killer) and (side _killer == teamPlayer)) then {
-			if (!isMultiPlayer) then {
-				_nul = [0,20] remoteExec ["A3A_fnc_resourcesFIA",2];
-				_killer addRating 1000;
-			};
-		} else {
-			if (side _killer == Occupants) then {
-				_nul = [0.25,0,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-				[Occupants, -1, 30] remoteExec ["A3A_fnc_addAggression",2];
-			} else {
-				if (side _killer == Invaders) then {
-					[Invaders, -1, 30] remoteExec ["A3A_fnc_addAggression",2]
-				} else {
-					if (isPlayer _killer) then {
-						_killer addRating 1000;
-					};
-				};
-			};
-		};
-		_victim setVariable ["spawner",nil,true];
-	}];
-};
+*/

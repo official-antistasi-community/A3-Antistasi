@@ -1,6 +1,6 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-private ["_thingX","_playerX","_id","_isStatic","_sites","_markerX","_size","_positionX"];
+private ["_thingX","_playerX","_id","_isStatic","_sites","_markerX","_positionX"];
 
 _thingX = _this select 0;
 _playerX = _this select 1;
@@ -15,9 +15,8 @@ if (([_playerX] call A3A_fnc_countAttachedObjects) > 0) exitWith {["Move HQ", "Y
 
 _sites = markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
 _markerX = [_sites,_playerX] call BIS_fnc_nearestPosition;
-_size = [_markerX] call A3A_fnc_sizeMarker;
 _positionX = getMarkerPos _markerX;
-if (_playerX distance2D _positionX > _size) exitWith {["Move HQ", "This asset needs to be closer to it relative zone center to be able to be moved."] call A3A_fnc_customHint;};
+//if (_playerX distance2D _positionX > _size) exitWith {["Move HQ", "This asset needs to be closer to it relative zone center to be able to be moved."] call A3A_fnc_customHint;};
 
 if (captive _playerX) then { _playerX setCaptive false };
 
@@ -42,23 +41,14 @@ private _fnc_placeObject = {
 
 	if (_playerX == attachedTo _thingX) then {
 		_playerX setVelocity [0,0,0];
-		_thingX setVelocity [0,0,0];
 		detach _thingX;
+		// Some objects never lose (and even regain) their velocity when detached, becoming lethal
+		[_thingX, [0,0,0]] remoteExec ["setVelocity", _thingX];
 	};
 
 	if (_dropObjectActionIndex != -1) then {
 		_playerX removeAction _dropObjectActionIndex;
 	};
-
-	// Can't find a case where this is ever true, but we'll make sure
-	if (local _thingX) then {
-		if (isNull group _thingX) then { [_thingX, 2] remoteExec ["setOwner", 2] }
-		else { [group _thingX, 2] remoteExec ["setGroupOwner", 2] };
-	};
-
-	// Some objects never lose (and even regain) their velocity when detached, becoming lethal
-	// On a DS, object locality changes when detached, so we have to remoteexec
-	[_thingX, [0,0,0]] remoteExec ["setVelocity", _thingX];
 
 	// Without this, non-unit objects often hang in mid-air
 	[_thingX, surfaceNormal position _thingX] remoteExec ["setVectorUp", _thingX];
@@ -70,9 +60,14 @@ private _fnc_placeObject = {
 		_thingX setPosASL (_intersects select 0 select 0);
 	};
 
-	// _thingX setPosATL [getPosATL _thingX select 0,getPosATL _thingX select 1,0.1];
-
-	if (_thingX isKindOf "StaticWeapon") then { _thingX lock false };
+	if (_thingX isKindOf "StaticWeapon") then { 
+		_thingX lock false;
+		_thingX spawn {
+			// wait until the thing has settled before adding/switching it
+			sleep 2;
+			["", _this] remoteExecCall ["A3A_fnc_addVehicleToGarrison", 2];
+		};
+	};
 
 	_thingX setVariable ["objectBeingMoved", false];
 
@@ -85,11 +80,11 @@ private _actionX = _playerX addAction ["Drop Here", {
 	[_thingX, player, (_this select 2)] call _fnc_placeObject;
 }, [_thingX, _fnc_placeObject],6,true,true,"",""];
 
-waitUntil {sleep 1;
+waitUntil {sleep 0.2;
 	(_playerX != attachedTo _thingX)
 	or (vehicle _playerX != _playerX)
-	or (_playerX distance2D _positionX > (_size-3))
 	or !([_playerX] call A3A_fnc_canFight)
+	or (!_isStatic and !(_thingX inArea _markerX))
 	or (!isPlayer _playerX)
 	or (_isStatic and {count crew _thingX > 0})
 };
@@ -99,4 +94,4 @@ if !(_isStatic) then { _thingX addAction ["Move this asset", A3A_fnc_moveHQObjec
 
 if (vehicle _playerX != _playerX) exitWith {["Move HQ", "You cannot move HQ assets while in a vehicle."] call A3A_fnc_customHint;};
 
-if  (_playerX distance2D _positionX > _size) exitWith {["Move HQ", "This asset cannot be moved more far away for its zone center."] call A3A_fnc_customHint;};
+if (!_isStatic and !(_thingX inArea _markerX)) exitWith {["Move HQ", "This asset cannot be moved further away from HQ."] call A3A_fnc_customHint;};

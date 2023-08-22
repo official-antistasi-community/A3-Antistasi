@@ -13,6 +13,9 @@ FIX_LINE_NUMBERS()
 
 params ["_target"];
 
+if (true) exitWith {};
+
+
 // If position or object target, identify rebel marker
 private _marker = _target;
 if !(_target isEqualType "") then

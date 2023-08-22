@@ -46,9 +46,10 @@ private _maxThreatDist = distanceForAirAttack + 1000;
     if (gameMode != 1 && _markerSide != _targetSide) then { continue };
     if (_airportPositions inAreaArray [markerPos _x, _maxThreatDist, _maxThreatDist] isEqualTo []) then { continue };
 
-    private _threat = 10 * count (garrison getVariable [_x, []]);
+    private _garrison = A3A_garrison get _x;
+    private _threat = 10 * count (_garrison get "troops");
     if (_markerSide == teamPlayer) then {
-        _threat = _threat + 50 * count (staticsToSave inAreaArray _x);
+        _threat = _threat + 50 * (count (_garrison get "statics") + count (_garrison get "vehicles"));
     } else {
         // based on typical static count
         _threat = _threat + call {

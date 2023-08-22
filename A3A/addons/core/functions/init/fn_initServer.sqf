@@ -234,12 +234,43 @@ addMissionEventHandler ["EntityKilled", {
         Debug_2("%1 killed by %2", typeof _victim, _killerSide);
     };
 
+    private _marker = _victim getVariable "markerX";
+    if (!isNil "_marker") then {
+        if (_victim isKindOf "CAManBase") exitWith { [_victim] call A3A_fnc_remUnitFromGarrison }; 
+        [_victim] call A3A_fnc_remVehicleFromGarrison;
+    };
+
     if !(isNil {_victim getVariable "ownerSide"}) then {
         // Antistasi-created vehicle
         [_victim, _killerSide, false] call A3A_fnc_vehKilledOrCaptured;
         [_victim] spawn A3A_fnc_postmortem;
     };
 }];
+
+if (A3A_hasACE) then {
+    // Handler for detecting ACE load of static weapons. God why?
+    ["ace_common_hideObjectGlobal", {
+    	params ["_object", "_hide"];
+        if !(_object isKindOf "StaticWeapon") exitWith {};
+        if !(_hide) exitWith {};
+        if (!isNil {_object getVariable "markerX"}) then { [_object] call A3A_fnc_remVehicleFromGarrison };
+    }] call CBA_fnc_addEventHandler;
+
+    // Handler for detecting ACE cargo unload of static weapons
+    ["ace_cargoUnloaded", {
+        params ["_object", "_vehicle", "_unload"];
+        if !(_object isKindOf "StaticWeapon") exitWith {};
+        ["", _object] call A3A_fnc_addVehicleToGarrison;
+    }] call CBA_fnc_addEventHandler;
+
+    // Handler for detecting ACE drag/carry release of static weapons
+    ["ace_common_setMass", {
+        params ["_object", "_mass"];
+        if !(_object isKindOf "StaticWeapon") exitWith {};
+        if (_mass < 1) exitWith {};
+        ["", _object] call A3A_fnc_addVehicleToGarrison;
+    }] call CBA_fnc_addEventHandler;
+};
 
 
 serverInitDone = true; publicVariable "serverInitDone";
@@ -248,6 +279,9 @@ A3A_startupState = "completed"; publicVariable "A3A_startupState";
 
 
 // ********************* Initialize loops *******************************************
+
+A3A_garrisonOps = [];
+[] spawn A3A_fnc_garrisonOpLoop;
 
 [] spawn A3A_fnc_distance;                          // Marker spawn loop
 [] spawn A3A_fnc_resourcecheck;                     // 10-minute loop

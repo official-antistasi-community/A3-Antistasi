@@ -114,11 +114,11 @@ if (
 
 //here to allow adaption of external Antistasi system without needing to addapt code under APL-ND
 private _broadcastReportedVehsAndStaticsToSave = {
-    publicVariable "staticsToSave";
 };
 //_this is vehicle
 private _deleteFromReportedVehsAndStaticsToSave = {
-    staticsToSave deleteAt (staticsToSave find _this);
+    private _marker = _this getVariable "markerX";
+    if (!isNil "_marker") then { [_this] call A3A_fnc_remVehicleFromGarrison };     // must be done before deletion
 };
 //_this is vehicle
 private _transferToArsenal = {

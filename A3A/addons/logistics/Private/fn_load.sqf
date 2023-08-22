@@ -26,6 +26,9 @@ params ["_cargo", "_vehicle", "_node", "_weapon", ["_instant", false, [true]]];
 if (_vehicle getVariable ["LoadingCargo", false]) exitWith {[localize "STR_A3A_logi_title", localize "STR_A3A_logi_load_being"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner]; nil};
 _vehicle setVariable ["LoadingCargo",true,true];
 
+// Remove from garrison if it's in one
+if (!isNil {_cargo getVariable "markerX"}) then { [_cargo] remoteExecCall ["A3A_fnc_remVehicleFromGarrison", 2] };
+
 //object string for jip
 private _objStringCargo = str _cargo splitString ":" joinString "";
 private _objStringVehicle = str _vehicle splitString ":" joinString "";

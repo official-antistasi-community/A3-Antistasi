@@ -114,7 +114,7 @@ _vehInGarage = _vehInGarage + vehInGarage;
 				if (vehicle _friendX != _friendX) then {
 					_veh = vehicle _friendX;
 					_typeVehX = typeOf _veh;
-					if (not(_veh in staticsToSave)) then {
+					if (isNil {_veh get "markerX"}) then {
 						if ((_veh isKindOf "StaticWeapon") or (driver _veh == _friendX)) then {
 							if ((group _friendX in (hcAllGroups theBoss)) or (!isMultiplayer)) then {
 								_resourcesBackground = _resourcesBackground + ([_typeVehX] call A3A_fnc_vehiclePrice);
@@ -152,13 +152,6 @@ _arrayEst = [];
 } forEach (vehicles inAreaArray [markerPos respawnTeamPlayer, 50, 50] select { alive _x });
 
 
-_sites = markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
-{
-	if ((alive _x) and !(surfaceIsWater position _x) and (isNull attachedTo _x)) then {
-		_arrayEst pushBack [typeOf _x,getPosWorld _x,vectorUp _x, vectorDir _x];
-	};
-} forEach staticsToSave;
-
 ["staticsX", _arrayEst] call A3A_fnc_setStatVariable;
 [] call A3A_fnc_arsenalManage;
 
@@ -179,23 +172,9 @@ _prestigeBLUFOR = [];
 ["prestigeOPFOR", _prestigeOPFOR] call A3A_fnc_setStatVariable;
 ["prestigeBLUFOR", _prestigeBLUFOR] call A3A_fnc_setStatVariable;
 
-_markersX = markersX - outpostsFIA - controlsX;
-_garrison = [];
-_wurzelGarrison = [];
 
-{
-	_garrison pushBack [_x,garrison getVariable [_x,[]],garrison getVariable [_x + "_lootCD", 0]];
-	_wurzelGarrison pushBack [
-		_x,
-		garrison getVariable [format ["%1_garrison",_x], []],
-	 	garrison getVariable [format ["%1_requested",_x], []],
-		garrison getVariable [format ["%1_over", _x], []]
-	];
-} forEach _markersX;
-
-["garrison",_garrison] call A3A_fnc_setStatVariable;
-["wurzelGarrison", _wurzelGarrison] call A3A_fnc_setStatVariable;
-["usesWurzelGarrison", true] call A3A_fnc_setStatVariable;
+["garrison", []] call A3A_fnc_setStatVariable;
+["newGarrison", A3A_garrison] call A3A_fnc_setStatVariable;
 
 _arrayMines = [];
 private _mineChance = 500 / (500 max count allMines);

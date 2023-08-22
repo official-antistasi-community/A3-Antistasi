@@ -33,7 +33,7 @@ private _specialVarLoads = [
     "garrison","tasks","membersX","vehInGarage","destroyedBuildings","idlebases",
     "chopForest","weather","killZones","jna_dataList","controlsSDK","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
-    "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray"
+    "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "newGarrison"
 ];
 
 private _varName = _this select 0;
@@ -174,23 +174,22 @@ if (_varName in _specialVarLoads) then {
             if (count _x > 2) then { garrison setVariable [_marker + "_lootCD", _x select 2, true] };
         } forEach _varvalue;
     };
-    if (_varName == 'wurzelGarrison') then {
-        {
-            garrison setVariable [format ["%1_garrison", (_x select 0)], +(_x select 1), true];
-            garrison setVariable [format ["%1_requested", (_x select 0)], +(_x select 2), true];
-            garrison setVariable [format ["%1_over", (_x select 0)], +(_x select 3), true];
-            [(_x select 0)] call A3A_fnc_updateReinfState;
-        } forEach _varvalue;
+    if (_varName == 'newGarrison') then {
+        A3A_garrison = _varValue;
     };
     if (_varName == 'outpostsFIA') then {
         if (count (_varValue select 0) == 2) then {
             {
                 _positionX = _x select 0;
                 _garrison = _x select 1;
-                _mrk = createMarker [format ["FIApost%1", random 1000], _positionX];
-                _mrk setMarkerShape "ICON";
-                _mrk setMarkerType "loc_bunker";
-                _mrk setMarkerColor colorTeamPlayer;
+                _mrk = createMarkerLocal [format ["FIApost%1", mapGridPosition _positionX], _positionX];
+                if (_mrk == "") then {
+                    Error_1("Overlapped rebel outpost at %1 removed", _positionX); 
+                    continue;
+                };
+                _mrk setMarkerShapeLocal "ICON";
+                _mrk setMarkerTypeLocal "loc_bunker";
+                _mrk setMarkerColorLocal colorTeamPlayer;
                 if (isOnRoad _positionX) then {_mrk setMarkerText format ["%1 Roadblock",FactionGet(reb,"name")]} else {_mrk setMarkerText format ["%1 Watchpost",FactionGet(reb,"name")]};
                 spawner setVariable [_mrk,2,true];
                 if (count _garrison > 0) then {garrison setVariable [_mrk,_garrison,true]};
@@ -306,31 +305,28 @@ if (_varName in _specialVarLoads) then {
             vehicleBox setDir ((_varValue select 5) select 0);
             vehicleBox setPos ((_varValue select 5) select 1);
         };
-        {_x setPos _posHQ} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
     };
     if (_varname == 'staticsX') then {
         for "_i" from 0 to (count _varvalue) - 1 do {
-            (_varValue#_i) params ["_typeVehX", "_posVeh", "_xVectorUp", "_xVectorDir", "_state"];
-            private _veh = createVehicle [_typeVehX,[0,0,1000],[],0,"CAN_COLLIDE"];
-            // This is only here to handle old save states. Could be removed after a few version itterations. -Hazey
-            if (_xVectorUp isEqualType 0) then { // We have to check number because old save state might still be using getDir. -Hazey
-                _veh setDir _xVectorUp; //is direction due to old save
-                _veh setVectorUp surfaceNormal (_posVeh);
-                _veh setPosATL _posVeh;
-            } else {
+            (_varValue#_i) params ["_typeVeh", "_posVeh", "_xVectorUp", "_xVectorDir", "_state"];
+
+            // statics and buildings imported to garrison later
+            if (_typeVeh isKindOf "StaticWeapon") then { continue };
+            if (_typeVeh isKindOf "Building" and !(_typeVeh in A3A_utilityItemHM)) then { continue };
+            // Could check for the driver flag instead maybe?
+
+            private _veh = createVehicle [_typeVeh,[0,0,1000],[],0,"CAN_COLLIDE"];
+            isNil {
+                // pre 2.4.1 used ATL position. Very old versions used number direction, just skip that
                 if (A3A_saveVersion >= 20401) then { _veh setPosWorld _posVeh } else { _veh setPosATL _posVeh };
-                _veh setVectorDirAndUp [_xVectorDir,_xVectorUp];
+                if (_xVectorUp isEqualType []) then { _veh setVectorDirAndUp [_xVectorDir,_xVectorUp] };
             };
+
             [_veh, teamPlayer] call A3A_fnc_AIVEHinit;                  // Calls initObject instead if it's a buyable item
-            // TODO: Check whether various buyable items turn up as "Building"
-            if ((_veh isKindOf "StaticWeapon") or (_veh isKindOf "Building") and isNil {_veh getVariable "A3A_canGarage"}) then {
-                staticsToSave pushBack _veh;
-            };
             if (!isNil "_state") then {
                 [_veh, _state] call HR_GRG_fnc_setState;
             };
         };
-        publicVariable "staticsToSave";
     };
     if (_varname == 'tasks') then {
 /*

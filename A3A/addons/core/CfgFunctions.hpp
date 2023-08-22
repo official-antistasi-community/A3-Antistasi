@@ -113,6 +113,7 @@ class CfgFunctions
             class calculateAggression {};
             class canMoveHQ {};
             class chooseAttack {};
+            class chooseMachineForGarrison {};
             class citiesToCivPatrol {};
             class citySupportChange {};
             class commsMP {};
@@ -131,8 +132,8 @@ class CfgFunctions
             class fogCheck {};
             class garbageCleaner {};
             class garbageCleanerTracker {};
-            class garrisonInfo {};
             class getAggroLevelString {};
+            class getMarkerForPos {};
             class getRecentDamage {};
             class getVehiclesAirSupport {};
             class getVehiclesGroundSupport {};
@@ -196,23 +197,6 @@ class CfgFunctions
             class setNestedObject {};
         };
 
-        class Convoy {
-            file = QPATHTOFOLDER(functions\Convoy);
-            class cleanConvoyMarker {};
-            class convoyDebug {};
-            class convoyMovement {};
-            class createAIAction {};
-            class createConvoy {};
-            class despawnConvoy {};
-            class findAirportForAirstrike {};
-            class followVehicle {};
-            class onConvoyArrival {};
-            class roadblockFight {};
-            class selectAndCreateVehicle {};
-            class spawnConvoy {};
-            class spawnConvoyLine {};
-        };
-
         class CREATE {
             file = QPATHTOFOLDER(functions\CREATE);
             class AAFroadPatrol {};
@@ -236,13 +220,10 @@ class CfgFunctions
             class createAttackForceMixed {};
             class createAttackVehicle {};
             class createFIAOutposts2 {};
-            class createSDKGarrisons {};
-            class createSDKgarrisonsTemp {};
             class createUnit {};
             class createVehicleCrew {};
             class createVehicleQRFBehaviour {};
             class crewTypeForVehicle {};
-            class cycleSpawn {};
             class FIAinitBases {};
             class findSpawnPosition {};
             class freeSpawnPositions {};
@@ -301,37 +282,41 @@ class CfgFunctions
         class EventHandler {
             file = QPATHTOFOLDER(functions\EventHandler);
             class addArtilleryTrailEH {};
+            class disassembledEH {};
             class enemyUnitDeletedEH {};
             class enemyUnitKilledEH {};
+            class rebelUnitKilledEH {};
             class vehicleDeletedEH {};
         };
 
-        class Garrison {
-            file = QPATHTOFOLDER(functions\Garrison);
-            class addGarrison {};
-            class addRequested {};
-            class checkGroupType {};
-            class checkVehicleType {};
-            class countGarrison {};
-            class createGarrison {};
-            class createGarrisonLine {};
-            class getGarrison {};
-            class getGarrisonRatio {};
-            class getGarrisonStatus {};
-            class getRequested {};
-            class getVehicleCrew {};
-            class initPreference {};
-            class logArray {};
-            class replenishGarrison {};
-            class selectGroupType {};
-            class selectReinfUnits {};
-            class selectVehicleType {};
-            class shouldReinforce {};
-            class updateGarrison {};
-            class updatePreference {};
-            class updateReinfState {};
-            class updateVehicles {};
+        class GarrisonLocal {
+            file = QPATHTOFOLDER(functions\GarrisonLocal);
+            class addGroupToGarrisonLocal {};
+            class addVehicleToGarrisonLocal {};
+            class despawnGarrison {};
+            class disbandGarrison {};
+            class garrisonOp {};
+            class garrisonOpLoop {};
             class getGarrisonLimit {};
+            class pauseGarrison {};
+            class remUnitFromGarrisonLocal {};
+            class remVehicleFromGarrisonLocal {};
+            class spawnGarrison {};
+            class spawnUnitInGarrison {};
+            class unpauseGarrison {};
+        };
+
+        class GarrisonServer {
+            file = QPATHTOFOLDER(functions\GarrisonServer);
+            class addUnitsToGarrison {};
+            class addUnitTypeToGarrison {};
+            class addVehicleToGarrison {};
+            class clearGarrison {};
+            class createRebelControl {};
+            class garrisonInfo {};
+            class remUnitFromGarrison {};
+            class remVehicleFromGarrison {};
+            class showSiteInfo {};
         };
 
         class init {
@@ -344,8 +329,8 @@ class CfgFunctions
 
             //Other initialisation functions (generally called by the above)
             class briefing {};
-            class cityinfo {};
             class clientIdleChecker {};
+            class installClientEH {};
             class credits {};
             class initACEUnconsciousHandler {};
             class initBases {};
@@ -508,7 +493,6 @@ class CfgFunctions
             class addFIAveh {};
             class addSquadVeh {};
             class addToGarrison {};
-            class autoGarrison {};
             class build {};
             class buildCreateVehicleCallback {};
             class buildMinefield {};

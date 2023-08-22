@@ -88,8 +88,6 @@ DECLARE_SERVER_VAR(revealX, false);
 DECLARE_SERVER_VAR(haveNV, false);
 DECLARE_SERVER_VAR(A3A_activeTasks, []);
 DECLARE_SERVER_VAR(A3A_taskCount, 0);
-//List of statics (MGs, AA, etc) that will be saved and loaded.
-DECLARE_SERVER_VAR(staticsToSave, []);
 //Whether the players have access to radios.
 DECLARE_SERVER_VAR(haveRadio, false);
 //Currently destroyed buildings.
@@ -119,6 +117,13 @@ prestigeBLUFOR = 0;																	//Initial % FIA support on each city
 occupantsRadioKeys = 0;
 invaderRadioKeys = 0;
 
+// New garrison data structure
+A3A_garrison = createHashMap;
+A3A_activeGarrison = createHashMap;
+
+// Marker string => machine ID (HC/server) mapping
+A3A_garrisonMachine = createHashMap;
+
 // Recent casualties/damage taken by enemies, format [X, Y, time * 1000 + value]
 A3A_recentDamageOcc = [];
 A3A_recentDamageInv = [];
@@ -140,8 +145,6 @@ A3A_curHQInfoInv = 0;
 A3A_oldHQInfoOcc = [];			// arrays of [xpos, ypos, knowledge]
 A3A_oldHQInfoInv = [];
 
-// Used by createAIAction for... something
-attackMrk = [];
 
 // These are silly, should be nil/true and local-defined only
 cityIsSupportChanging = false;
@@ -568,30 +571,6 @@ Info("Creating pricelist");
 	server setVariable [_x, _y, true];
 } forEach A3A_rebelVehicleCosts;
 
-///////////////////////
-//     GARRISONS    ///
-///////////////////////
-Info("Initialising Garrison Variables");
-
-tierPreference = 1;
-cityUpdateTiers = [4, 8];
-cityStaticsTiers = [0.2, 1];
-airportUpdateTiers = [3, 6, 8];
-airportStaticsTiers = [0.5, 0.75, 1];
-outpostUpdateTiers = [4, 7, 9];
-outpostStaticsTiers = [0.4, 0.7, 1];
-otherUpdateTiers = [3, 7];
-otherStaticsTiers = [0.3, 1];
-[] call A3A_fnc_initPreference;
-
-////////////////////////////
-//     REINFORCEMENTS    ///
-////////////////////////////
-Info("Initialising Reinforcement Variables");
-DECLARE_SERVER_VAR(reinforceMarkerOccupants, []);
-DECLARE_SERVER_VAR(reinforceMarkerInvader, []);
-DECLARE_SERVER_VAR(canReinforceOccupants, []);
-DECLARE_SERVER_VAR(canReinforceInvader, []);
 
 /////////////////////////////////////////
 //     SYNCHRONISE SERVER VARIABLES   ///

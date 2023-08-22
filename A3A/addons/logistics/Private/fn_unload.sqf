@@ -128,6 +128,12 @@ if (isNull _cargo || isNull _vehicle) exitWith {};//vehicle or cargo deleted
 [_cargo, false] remoteExec ["A3A_Logistics_fnc_toggleLock", 0, "A3A_Logistics_toggleLock" + _objStringCargo];
 [_vehicle, false, _seats] remoteExec ["A3A_Logistics_fnc_toggleLock", 0, "A3A_Logistics_toggleLock" + _objStringVehicle];
 
+// Add to garrison if it's inside one
+if (_cargo isKindOf "StaticWeapon") then {
+    ["", _cargo] remoteExecCall ["A3A_fnc_addVehicleToGarrison", 2];
+    ["Static Deployed", "Static weapon has been deployed for use in a nearby garrison."] call A3A_fnc_customHint;
+};
+
 //update list
 _loaded deleteAt 0;
 _vehicle setVariable ["Cargo", _loaded, true];

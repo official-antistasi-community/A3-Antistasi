@@ -67,7 +67,7 @@ if (_globalSave) then
 				_totalMoney = _totalMoney + _unitPrice;
 			};
 			private _veh = vehicle _x;
-			if (_veh == _x || {_veh in staticsToSave}) exitWith {};
+			if (_veh == _x || !isNil {_veh getVariable "markerX"}) exitWith {};
 			if (_x == driver _veh || {_x == gunner _veh && _veh isKindOf "StaticWeapon"}) then {
 				private _vehPrice = [typeof _veh] call A3A_fnc_vehiclePrice;
 				_totalMoney = _totalMoney + _vehPrice;

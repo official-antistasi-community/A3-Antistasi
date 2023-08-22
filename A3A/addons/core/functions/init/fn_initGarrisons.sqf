@@ -5,6 +5,9 @@ Info("InitGarrisons started");
 
 // This function is now only called for a new game
 
+private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["statics", []], ["vehicles", []], ["buildings", []] ];
+A3A_garrison set ["Synd_HQ", +_emptyGarrison];
+
 _fnc_initGarrison =
 {
     params ["_marker", "_occGroups", "_invGroups"];
@@ -18,6 +21,7 @@ _fnc_initGarrison =
     };
     _garrison resize _garrNum;
     garrison setVariable [_marker, _garrison, true];
+    A3A_garrison set [_marker, +_emptyGarrison];            // probably don't need this yet...
 };
 
 private _updateMarkers = outposts + airportsX;			// To sort out the faction names & flags

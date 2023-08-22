@@ -124,7 +124,6 @@ while {true} do
 	[] call A3A_fnc_generateRebelGear;
 
 	[] call A3A_fnc_FIAradio;
-    [] call A3A_fnc_cleanConvoyMarker;
 
     // Random-walk the defence multipliers for markers to add some persistent variation
     // Maybe add some logic to this later
@@ -147,9 +146,9 @@ while {true} do
 
 	private _missionChance = 5 * A3A_activePlayerCount;
 	if ((!bigAttackInProgress) and (random 100 < _missionChance)) then {[] spawn A3A_fnc_missionRequest};
-	//Removed from scheduler for now, as it errors on Headless Clients.
-	//[[],"A3A_fnc_reinforcementsAI"] call A3A_fnc_scheduler;
+
 	[] spawn A3A_fnc_reinforcementsAI;
+
 	{
 	_veh = _x;
 	if ((_veh isKindOf "StaticWeapon") and ({isPlayer _x} count crew _veh == 0) and (alive _veh)) then

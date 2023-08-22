@@ -86,13 +86,10 @@ if (!_isPlayer) then {build_engineerSelected doFollow (leader build_engineerSele
 private _veh = createVehicle [_structureType, _positionX, [], 0, "CAN_COLLIDE"];
 _veh setDir _dir;
 //save performance by turning off simulations 
-_veh enableSimulationGlobal false;
+_veh enableSimulationGlobal false;			// busted, needs to run on server. Does it matter?
 
-if ((build_type == "SB") or (build_type == "CB")) exitWith
-{
-	staticsToSave pushBackUnique _veh;
-	publicVariable "staticsToSave"
-};
+// TODO: Can we even build off-marker? What then?
+["", _veh] remoteExecCall ["A3A_fnc_addVehicleToGarrison", 2];
 
 
 //falta inicializarlo en veh init
@@ -124,12 +121,3 @@ if (build_type == "RB") then
 
 build_nearestFriendlyMarker = nil;
 build_engineerSelected = nil;
-
-while {alive _veh} do
-	{
-	if ((not([distanceSPWN,1,_veh,teamPlayer] call A3A_fnc_distanceUnits)) and (_veh distance getMarkerPos respawnTeamPlayer > 100)) then
-		{
-		deleteVehicle _veh
-		};
-	sleep 60;
-	};

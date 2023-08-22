@@ -109,10 +109,11 @@ else
 		{
 			_veh setCenterOfMass [(getCenterOfMass _veh) vectorAdd [0, 0, -1], 0];
 
-			if !(_typeX isKindOf "StaticMortar") then {
-				[_veh, "static"] remoteExec ["A3A_fnc_flagAction", [teamPlayer,civilian], _veh];
-				if (_side == teamPlayer && !isNil {serverInitDone}) then { [_veh] remoteExec ["A3A_fnc_updateRebelStatics", 2] };
-			};
+			// Disassembly handler for removal from garrisons
+			_veh addEventHandler ["Disassembled", A3A_fnc_disassembledEH];
+			_veh setVariable ["A3A_disassembledEH", true];
+
+			[_veh, "static"] remoteExec ["A3A_fnc_flagAction", [teamPlayer,civilian], _veh];
 		};
 	};
 };

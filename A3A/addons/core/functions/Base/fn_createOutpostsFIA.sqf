@@ -11,18 +11,19 @@ if (_typeX == "delete") exitWith {["Create Outpost", "Deprecated option. Use Rem
 
 _isRoad = isOnRoad _positionTel;
 
-_textX = format ["%1 Observation Post",FactionGet(reb,"name")];
+_textX = format ["%1 Watchpost",FactionGet(reb,"name")];
 _typeGroup = FactionGet(reb,"groupSniper");
 _typeVehX = (FactionGet(reb,"vehiclesBasic")) # 0;
 private _tsk = "";
 if (_isRoad) then
 	{
 	_textX = format ["%1 Roadblock",FactionGet(reb,"name")];
-	_typeGroup = FactionGet(reb,"groupAT");
+	_typeGroup = FactionGet(reb,"groupAT") + [FactionGet(reb,"unitCrew")];
 	_typeVehX = (FactionGet(reb,"vehiclesTruck")) # 0;
 	};
 
-_mrk = createMarker [format ["FIAPost%1", random 1000], _positionTel];
+_mrk = createMarkerLocal [format ["FIAPost%1", mapGridPosition _positionTel], _positionTel];
+if (_mrk == "") exitWith {["Create Outpost", "There's already a rebel outpost near that position"]};
 _mrk setMarkerShape "ICON";
 
 _dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + 60];
@@ -57,22 +58,12 @@ if ({(alive _x) and (_x distance _positionTel < 10)} count units _groupX > 0) th
 		waitUntil {!(isPlayer leader _groupX)};
 		sleep 5;			// Give client & server time to resolve the selectPlayer before we delete anything
 		};
-	outpostsFIA = outpostsFIA + [_mrk]; publicVariable "outpostsFIA";
-	sidesX setVariable [_mrk,teamPlayer,true];
-	markersX = markersX + [_mrk];
-	publicVariable "markersX";
-	spawner setVariable [_mrk,2,true];
+
 	[_taskId, "outpostsFIA", "SUCCEEDED"] call A3A_fnc_taskSetState;
-	_nul = [-5,5,_positionTel] remoteExec ["A3A_fnc_citySupportChange",2];
-	_mrk setMarkerType "loc_bunker";
-	_mrk setMarkerColor colorTeamPlayer;
-	_mrk setMarkerText _textX;
-	if (_isRoad) then {
-		_garrison = FactionGet(reb,"groupAT");
-		_garrison pushBack FactionGet(reb,"unitCrew");
-		garrison setVariable [_mrk,_garrison,true];
-	};
-    ["RebelControlCreated", [_mrk, _isRoad]] call EFUNC(Events,triggerEvent);
+
+	private _unitTypes = units _groupX select { alive _x } apply { _x getVariable "unitType" };
+	private _vehTypes = [[], [FactionGet(reb,"vehiclesLightArmed")#0]] select _isRoad;
+	[_mrk, _textX, _unitTypes, _vehTypes] remoteExecCall ["A3A_fnc_createRebelControl", 2];
 } else {
 	[_taskId, "outpostsFIA", "FAILED"] call A3A_fnc_taskSetState;
 	sleep 3;
