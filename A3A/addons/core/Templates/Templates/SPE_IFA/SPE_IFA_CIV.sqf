@@ -3,17 +3,16 @@
 //////////////////////////    
 
 ["vehiclesCivCar", [
-    "SPE_OpelBlitz", 1
-    , "SPE_OpelBlitz_Open", 1
-    , "LIB_GazM1", 1
+    "LIB_GazM1", 1
     , "LIB_GazM1_dirty", 1
     , "LIB_GazM1_SOV_camo_sand", 1
     , "LIB_GazM1_SOV", 1
+    , "LIB_Willys_MB", 1
+    , "LIB_Willys_MB_Hood", 1
     ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
-    "SPE_OpelBlitz", 1
-    , "SPE_OpelBlitz_Open", 1
+    "LIB_Zis5v", 1
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivBoat", [
@@ -21,15 +20,15 @@
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivRepair", [
-    "SPE_OpelBlitz_Repair", 0.1
+    "LIB_Zis6_Parm", 0.1
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivMedical", [
-    "SPE_OpelBlitz_Ambulance", 0.1
+    "LIB_Zis5v_Med", 0.1
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivFuel", [
-    "SPE_OpelBlitz_Fuel", 0.1
+    "LIB_Zis5v_Fuel", 0.1
 ]] call _fnc_saveToTemplate;
 
 /////////////////////

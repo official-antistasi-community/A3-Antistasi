@@ -26,10 +26,10 @@
 //       Vehicles       //
 //////////////////////////
 
-["vehiclesBasic", ["SPE_FFI_OpelBlitz_Open"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["LIB_Kfz1_sernyt","LIB_Kfz1_Hood_sernyt"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["SPE_US_M3_Halftrack","LIB_Kfz1_MG42_sernyt"]] call _fnc_saveToTemplate;
-["vehiclesTruck", ["SPE_US_M3_Halftrack_Unarmed"]] call _fnc_saveToTemplate;
+["vehiclesBasic", ["LIB_Kfz1_sernyt"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["LIB_Kfz1_Hood_sernyt","LIB_UK_Willys_MB_Hood"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["LIB_UK_Willys_MB_M1919","LIB_Kfz1_MG42_sernyt"]] call _fnc_saveToTemplate;
+["vehiclesTruck", ["LIB_US6_Open"]] call _fnc_saveToTemplate;
 ["vehiclesAT", []] call _fnc_saveToTemplate;
 ["vehiclesAA", ["SPE_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
 
@@ -39,7 +39,7 @@
 ["vehiclesHeli", []] call _fnc_saveToTemplate;
 
 ["vehiclesCivCar", ["LIB_GazM1","LIB_GazM1_dirty"]] call _fnc_saveToTemplate;
-["vehiclesCivTruck", ["SPE_FFI_OpelBlitz"]] call _fnc_saveToTemplate;
+["vehiclesCivTruck", ["LIB_Zis5v"]] call _fnc_saveToTemplate;
 ["vehiclesCivHeli", []] call _fnc_saveToTemplate;
 ["vehiclesCivBoat", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesCivPlane", []] call _fnc_saveToTemplate;
