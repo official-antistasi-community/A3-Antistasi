@@ -426,7 +426,7 @@ class CfgFunctions
             class DES_Antenna {};
             class DES_Heli {};
             class DES_Vehicle {};
-            class LOG_Ammo {};
+            class LOG_Steal {};
             class LOG_Bank {};
             class LOG_Supplies {};
             class LOG_Salvage {};

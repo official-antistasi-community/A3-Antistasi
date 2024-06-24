@@ -5055,6 +5055,9 @@
         <Czech>Ukradni nebo Znič muniční náklaďák</Czech>
         <Chinesesimp>盗取或者摧毁敌方弹药车</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_mission_log_ammo_stolen_text">
+        <Original>Ammotruck Stolen in an %1</Original>
+      </Key>
       <Key ID="STR_A3A_fn_mission_log_bank_hint_text1">
         <Original>Bring this truck to %1 Bank and park it in the main entrance.</Original>
         <Italian>Porta questo camion alla Banca %1 e parcheggialo all'entrata principale.</Italian>
@@ -5111,6 +5114,15 @@
         <Polish>Napad na bank</Polish>
         <Czech>Bankovní loupež</Czech>
         <Chinesesimp>银行劫案</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_log_fuel_text">
+        <Original>We've spotted a Fuel truck in %1. Go there and destroy or steal it before %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_log_fuel_title">
+        <Original>Steal or Destroy Fuel truck</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_log_fuel_stolen_text">
+        <Original>Fuel truck Stolen in an %1</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_log_salv_text">
         <Original>A supply shipment was sunk outside of %1. Go there and recover the supplies before %2. You will need to get a hold of a boat with a winch to recover the shipment, check beaches for civilian boats you can commandeer.</Original>

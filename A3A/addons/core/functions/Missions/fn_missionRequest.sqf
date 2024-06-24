@@ -126,7 +126,7 @@ switch (_type) do {
 			};
 		} else {
 			private _site = selectRandom _possibleMarkers;
-			if (_site in outposts) then {[[_site],"A3A_fnc_LOG_Ammo"] remoteExec ["A3A_fnc_scheduler",2]};
+			if (_site in outposts) then {[[_site],"A3A_fnc_LOG_Steal"] remoteExec ["A3A_fnc_scheduler",2]};
 			if (_site in banks) then {[[_site],"A3A_fnc_LOG_Bank"] remoteExec ["A3A_fnc_scheduler",2]};
 			if (_site in Seaports) then {[[_site],"A3A_fnc_LOG_Salvage"] remoteExec ["A3A_fnc_scheduler",2]};
 		};

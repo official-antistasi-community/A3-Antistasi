@@ -5,6 +5,9 @@ FIX_LINE_NUMBERS()
 
 private ["_pos","_truckX","_truckCreated","_groupX","_groupX1","_mrk"];
 
+// is this a fuel truck?
+private _isFuel = selectRandom [true, false];
+
 _markerX = _this select 0;
 
 _difficultX = if (random 10 < tierWar) then {true} else {false};
@@ -23,7 +26,7 @@ _dateLimit = numberToDate [date select 0, _dateLimitNum];//converts datenumber b
 _displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time portion of the date array to a string for clarity in hints
 
 _nameDest = [_markerX] call A3A_fnc_localizar;
-_typeVehX = selectRandom (_faction get "vehiclesAmmoTrucks");
+_typeVehX = [selectRandom (_faction get "vehiclesAmmoTrucks"), selectRandom (_faction get "vehiclesFuelTrucks")] select _isFuel;
 _size = [_markerX] call A3A_fnc_sizeMarker;
 
 _road = [_positionX] call A3A_fnc_findNearestGoodRoad;
@@ -32,7 +35,10 @@ _pos = _pos findEmptyPosition [1,60,_typeVehX];
 if (count _pos == 0) then {_pos = position _road};
 
 private _taskId = "LOG" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[format [localize "STR_A3A_fn_mission_log_ammo_text",_nameDest,_displayTime],localize "STR_A3A_fn_mission_log_ammo_titel",_markerX],_pos,false,0,true,"rearm",true] call BIS_fnc_taskCreate;
+private _text = [localize "STR_A3A_fn_mission_log_ammo_text", localize "STR_A3A_fn_mission_log_fuel_text"] select _isFuel;
+private _title = [localize "STR_A3A_fn_mission_log_ammo_titel", localize "STR_A3A_fn_mission_log_fuel_title"] select _isFuel;
+private _taskType = ["rearm", "refuel"] select _isFuel;
+[[teamPlayer,civilian],_taskId,[format [_text,_nameDest,_displayTime],_title ,_markerX],_pos,false,0,true,_taskType,true] call BIS_fnc_taskCreate;
 [_taskId, "LOG", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _truckCreated = false;
@@ -80,14 +86,15 @@ if ((spawner getVariable _markerX != 2) and !(sidesX getVariable [_markerX,sideU
 		(_truckX distanceSqr posHQ) < 10000;
 	};
 
-	_truckX setVariable ["ammoTruckLocation", _nameDest];
+	_truckX setVariable ["A3A_TruckLocation", _nameDest];
 	_truckX addEventHandler ["GetIn", {
 		params ["_vehicle", "_role", "_unit", "_turret"];
 
 		private _owningSide = (_vehicle getVariable "originalSide");		// set by AIVEHinit
 
 		if (_unit getVariable ["spawner",false]) then {
-			["TaskFailed", ["", format ["Ammotruck Stolen in an %1",(_vehicle getVariable ["ammoTruckLocation", ""])]]] remoteExec ["BIS_fnc_showNotification",_owningSide];
+			private _stolenText = [localize "STR_A3A_fn_mission_log_ammo_stolen_text", localize "STR_A3A_fn_mission_log_fuel_stolen_text"] select _isFuel;
+			["TaskFailed", ["", format [_stolenText,(_vehicle getVariable ["A3A_TruckLocation", ""])]]] remoteExec ["BIS_fnc_showNotification",_owningSide];
 		};
 
 		_truckX removeEventHandler ["GetIn", _thisEventHandler];
@@ -118,7 +125,7 @@ else
 	[-10, theBoss] call A3A_fnc_playerScoreAdd;
 	};
 
-[_taskId, "LOG", 1200] spawn A3A_fnc_taskDelete;
+[_taskId, "LOG", [1200, 600] select _isFuel] spawn A3A_fnc_taskDelete;
 if (_truckCreated) then
 {
 	// TODO: Head off to nearby base
