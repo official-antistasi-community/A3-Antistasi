@@ -683,6 +683,8 @@ class CfgFunctions
         class FunctionsTemplates {
             file = QPATHTOFOLDER(functions\Templates);
             class aceModCompat {};
+            class ilbeModCompat {};
+            class ctabModCompat {};
             class compatibilityLoadFaction {};
             class compileGroups {};
             class compileMissionAssets {};

@@ -22,4 +22,10 @@ if (A3A_hasACE) then {
 	];
 };
 
+if (A3A_hascTab) then {
+	_items append [
+		["ItemcTabHCam", 1]
+	];
+};
+
 _items
