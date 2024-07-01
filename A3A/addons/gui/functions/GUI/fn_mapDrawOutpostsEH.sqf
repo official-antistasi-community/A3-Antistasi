@@ -1,26 +1,29 @@
 /*
-    Maintainer: DoomMetal
-        Draws map markers to map controls
+Maintainer: Caleb Serafin, DoomMetal
+    Draws map markers to map controls
 
-    Arguments:
-        None
+Arguments:
+    None
 
-    Return Value:
-        None
+Return Value:
+    None
 
-    Scope: Internal
-    Environment: Unscheduled
-    Public: No
-    Dependencies:
-        <ARRAY> airportsX
-        <ARRAY> resourcesX
-        <ARRAY> factories
-        <ARRAY> outposts
-        <ARRAY> seaports
-        <ARRAY> citiesX
+Scope: Internal
+Environment: Unscheduled
+Public: No
+Dependencies:
+    <ARRAY> airportsX
+    <ARRAY> resourcesX
+    <ARRAY> factories
+    <ARRAY> outposts
+    <ARRAY> seaports
+    <ARRAY> citiesX
 
-    Example:
-        _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
+Example:
+    _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\textures.inc"

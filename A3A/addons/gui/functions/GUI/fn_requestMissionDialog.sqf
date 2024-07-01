@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles controls on the Request Mission dialog.
 
 Arguments:
@@ -17,6 +17,9 @@ Dependencies:
 
 Example:
     ["missionButtonClicked", ["CON"]] call FUNC(requestMissionDialog);
+
+License: APL-ND
+
 */
 
 #include "..\..\script_component.hpp"

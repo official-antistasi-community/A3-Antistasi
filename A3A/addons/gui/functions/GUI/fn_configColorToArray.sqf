@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Converts colors defined in mission config to arrays usable in sqf.
     From this:
       {1,0,0,1}
@@ -23,6 +23,9 @@ Dependencies:
 Example:
     [A3A_COLOR_BLACK] call FUNC(configColorToArray); // [0,0,0,1]
     [{0,0,0,1}] call FUNC(configColorToArray); // [0,0,0,1]
+
+License: APL-ND
+
 */
 
 private _configColor = _this select 0;

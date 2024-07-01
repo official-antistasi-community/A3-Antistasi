@@ -1,5 +1,12 @@
 // TODO UI-update: update header
 
+/*
+Maintainer: Caleb Serafin, DoomMetal
+
+License: APL-ND
+
+*/
+
 // Returns info about a group
 // Group name, position, alive/combat ready counts, vehicle status etc.
 // Mostly rewritten stuff from REINF/fn_vehStats.sqf

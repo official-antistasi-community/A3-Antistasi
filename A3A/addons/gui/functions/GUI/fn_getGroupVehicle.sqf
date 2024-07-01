@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Gets a high command groups assigned vehicle
 
 Arguments:
@@ -16,6 +16,9 @@ Dependencies:
 
 Example:
     [_someGroup] call FUNC(getGroupVehicle); // Returns the group vehicle if it has one, objNull if not
+
+License: APL-ND
+
 */
 
 // This function was part of A3A_fnc_vehStats

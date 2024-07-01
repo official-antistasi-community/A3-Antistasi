@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Commander tab of the Main dialog.
 
 Arguments:
@@ -17,6 +17,9 @@ Dependencies:
 
 Example:
     ["update"] call FUNC(commanderTab);
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"

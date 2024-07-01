@@ -1,17 +1,22 @@
 /*
+Maintainer: Caleb Serafin, DoomMetal
+
   Returns an array with numbers of vehicle positions
 
-  Params:
-    0 : String - classname of vehicle
+Params:
+	0 : String - classname of vehicle
 
-  Returns
-    Array :
-      0 - driver
-			1 - copilot
-      2 - commander
-      3 - gunners
-      4 - passengers (includes FFV seats)
-      5 - FFV seats
+Returns
+	Array :
+		0 - driver
+		1 - copilot
+		2 - commander
+		3 - gunners
+		4 - passengers (includes FFV seats)
+		5 - FFV seats
+
+License: APL-ND
+
 */
 
 // TODO UI-update: Update header

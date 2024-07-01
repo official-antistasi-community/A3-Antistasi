@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles the initialization and updating of the Recruit Units dialog.
     This function should only be called from RecruitDialog onLoad and control activation EHs.
 
@@ -18,6 +18,9 @@ Dependencies:
 
 Example:
     ["onLoad"] spawn FUNC(recruitDialog); // initialization
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"

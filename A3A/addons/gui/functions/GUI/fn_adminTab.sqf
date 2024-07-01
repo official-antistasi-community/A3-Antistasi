@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Admin tab of the Main dialog.
 
 Arguments:
@@ -17,6 +17,9 @@ Dependencies:
 
 Example:
     ["update"] call A3A_fnc_adminTab;
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"

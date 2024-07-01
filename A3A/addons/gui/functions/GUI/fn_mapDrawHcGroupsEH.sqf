@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Event Handler for drawing High Command group markers to the maps
 
 Arguments:
@@ -16,6 +16,9 @@ Dependencies:
 
 Example:
     _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawHcGroupsEH"];
+
+License: APL-ND
+
 */
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

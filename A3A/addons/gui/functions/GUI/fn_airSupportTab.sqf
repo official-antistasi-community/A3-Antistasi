@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Air Support tab of the Main dialog.
 
 Arguments:
@@ -17,6 +17,9 @@ Dependencies:
 
 Example:
     ["update"] call FUNC(airSupportTab);
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"

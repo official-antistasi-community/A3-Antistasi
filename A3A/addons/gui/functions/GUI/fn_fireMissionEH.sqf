@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Event Handler for drawing fire mission markers to the commander map
 
 Arguments:
@@ -16,6 +16,9 @@ Dependencies:
 
 Example:
     _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_fireMissionEH"];
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"

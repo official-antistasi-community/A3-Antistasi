@@ -1,22 +1,25 @@
 /*
-Maintainer: DoomMetal
-Handles updating and controls on the AI Management tab of the Main dialog.
+Maintainer: Caleb Serafin, DoomMetal
+    Handles updating and controls on the AI Management tab of the Main dialog.
 
 Arguments:
-<STRING> Mode
-<ARRAY<ANY>> Array of params for the mode when applicable. Params for specific modes are documented in the modes.
+    <STRING> Mode
+    <ARRAY<ANY>> Array of params for the mode when applicable. Params for specific modes are documented in the modes.
 
 Return Value:
-Nothing
+    Nothing
 
 Scope: Clients, Local Arguments, Local Effect
 Environment: Scheduled for control changes / Unscheduled for update
 Public: No
 Dependencies:
-None
+    None
 
 Example:
-["update"] call FUNC(aiManagementTab);
+    ["update"] call FUNC(aiManagementTab);
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"

@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles the initialization and tab switching on the Main Dialog (aka the Y-Menu).
     This function should only be called from MainDialog onLoad and control activation EHs.
 
@@ -19,6 +19,9 @@ Dependencies:
 Example:
     ["onLoad"] spawn FUNC(mainDialog); // initialization
     ["switchTab", ["player"]] call FUNC(mainDialog); // switching to the player tab
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"

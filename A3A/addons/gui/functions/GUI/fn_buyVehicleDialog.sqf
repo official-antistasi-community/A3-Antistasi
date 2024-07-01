@@ -1,19 +1,26 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles the initialization and updating of the Buy Vehicle dialog.
     This function should only be called from BuyVehicle onLoad and control activation EHs.
+
 Arguments:
     <STRING> Mode, only possible value for this dialog is "onLoad"
     <ARRAY<ANY>> Array of params for the mode when applicable. Params for specific modes are documented in the modes.
+
 Return Value:
     Nothing
+
 Scope: Clients, Local Arguments, Local Effect
 Environment: Scheduled for onLoad mode / Unscheduled for everything else unless specified
 Public: No
 Dependencies:
     None
+
 Example:
     ["onLoad"] spawn A3A_GUI_fnc_buyVehicleDialog; // initialization
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"

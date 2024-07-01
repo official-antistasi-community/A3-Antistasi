@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Event Handler for drawing select markers to maps.
 
     Draws a pulsing selection marker on the position specified in
@@ -20,6 +20,9 @@ Dependencies:
 
 Example:
     _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawSelectEH"];
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\defines.hpp"

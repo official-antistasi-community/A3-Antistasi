@@ -1,16 +1,22 @@
 /*
-Author: [Killerswin2, Hakon (Stole his bb code)]
-	creates the controls for the dialog. Picture and Button are created. Data Saved to buttons.
+Maintainer: Caleb Serafin, Killerswin2, Hakon
+	Creates the controls for the dialog. Picture and Button are created. Data Saved to buttons.
+
 Arguments:
-1. <string> string for initilizer
+	<string> string for initilizer
+
 Return Value:
-NONE
+	NONE
+
 Scope: Client
 Environment: scheduled
-Public:
-no
+Public: No
 Example:
-["onLoad"] spawn A3A_GUI_fnc_teamLeaderRTSPlacerDialog
+	["onLoad"] spawn A3A_GUI_fnc_teamLeaderRTSPlacerDialog
+
+License: APL-ND
+	As of 1st July 2024 Ellis Nielsen, the owner of the code, has transfered the ownership to Calep Serafin.
+
 */
 
 

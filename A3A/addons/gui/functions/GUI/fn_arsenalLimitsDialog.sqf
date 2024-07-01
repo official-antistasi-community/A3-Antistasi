@@ -1,4 +1,5 @@
 /*
+Maintainer: Caleb Serafin, DoomMetal
     Handles the initialization and updating of the arsenal guest limits dialog.
 
 Arguments:
@@ -10,6 +11,9 @@ Returns:
 
 Environment:
     Should not be called by onLoad because findDisplay and ctrlParent do not work in that context.
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
