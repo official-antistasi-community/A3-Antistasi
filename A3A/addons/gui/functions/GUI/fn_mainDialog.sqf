@@ -142,6 +142,12 @@ switch (_mode) do
         setGroupIconsVisible _groupIcons;
         setGroupIconsSelectable true;
 
+        A3A_DoSendAdminData = false;
+        publicVariableServer "A3A_DoSendAdminData";
+
+        // stop admin tab if not nil
+        terminate (_display getVariable ["A3A_adminTabUpdateSpawn", scriptNull]);
+
         Debug("MainDialog onUnload complete.");
     };
 
@@ -175,6 +181,10 @@ switch (_mode) do
             {
                 if ([] call FUNCMAIN(isLocalAdmin)) then {
                     _selectedTabIDC = A3A_IDC_ADMINTAB;
+                    // tell the server to start sending the admin data over the net to the admin
+                    A3A_DoSendAdminData = true;
+                    publicVariableServer "A3A_DoSendAdminData";
+                    [] remoteExecCall ["A3A_fnc_adminData", 2];
                 };
             };
 
@@ -246,6 +256,9 @@ switch (_mode) do
         private _selectedTabCtrl = _display displayCtrl _selectedTabIDC;
         _selectedTabCtrl ctrlShow true;
 
+        // stop admin tab if not nil
+        terminate (_display getVariable ["A3A_adminTabUpdateSpawn", scriptNull]);
+
         // Update tab
         Debug("Updating selected tab");
         switch (_selectedTab) do
@@ -262,7 +275,15 @@ switch (_mode) do
 
             case ("admin"):
             {
-                ["update"] call FUNC(adminTab);
+                private _updateAdminTab = [] spawn 
+                {
+                    while {true} do 
+                    {
+                        ["update"] call FUNC(adminTab);
+                        sleep 1;
+                    };
+                };
+                _display setVariable ["A3A_adminTabUpdateSpawn", _updateAdminTab];
             };
 
             case ("fasttravel"):

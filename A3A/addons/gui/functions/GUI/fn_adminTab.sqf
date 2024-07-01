@@ -68,9 +68,9 @@ switch (_mode) do
         // TODO UI-update: change this to get server values instead when merging
         private _debugText = _display displayCtrl A3A_IDC_DEBUGINFO;
         private _missionTime = [time] call A3A_fnc_formatTime;
-        private _serverFps = (round (diag_fps * 10)) / 10; // TODO UI-update: Get actual server FPS, not just client
-        private _connectedHCs = 0; // TODO UI-update: get actual number of connected headless clients
-        private _players = 0; // TODO UI-update: get actual number of players connected
+        private _serverFps = (round (diag_fps * 10)) / 10; 
+        private _connectedHCs = 0; 
+        private _players = 0;
 
         // TODO UI-update: get actual unit counts
         private _allUnits = count allUnits;
@@ -81,6 +81,20 @@ switch (_mode) do
         private _countOccupants = 37;
         private _countCiv = 4096;
         private _destroyedVehicles = 2;
+
+        if(!isNil "A3A_AdminData") then 
+        {
+            _serverFps = A3A_AdminData#0;
+            _deadUnits = A3A_AdminData#1;
+            _allUnits = A3A_AdminData#2;
+            _countRebels = A3A_AdminData#4;
+            _countInvaders = A3A_AdminData#5;
+            _countOccupants = A3A_AdminData#6;
+            _countCiv = A3A_AdminData#7;
+            _players = A3A_AdminData#9;
+            _destroyedVehicles = A3A_AdminData#10;
+            _connectedHCs = A3A_AdminData#12;
+        };
 
         // TODO UI-update: localize later, not final yet
         private _formattedString = format [

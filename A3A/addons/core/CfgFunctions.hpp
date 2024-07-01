@@ -764,6 +764,7 @@ class CfgFunctions
 
         class Utility {
             file = QPATHTOFOLDER(functions\Utility);
+            class adminData {};
             class basicBackpack {};
             class boxCollisionCheck {};
             class classNameToModel {};
