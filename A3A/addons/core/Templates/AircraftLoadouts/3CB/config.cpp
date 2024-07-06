@@ -31,6 +31,15 @@ class A3A {
             class UK3CB_ADA_I_Su25SM_CAS : RHS_Su25SM_vvsc{};
             class UK3CB_KDF_B_Su25SM_CAS : RHS_Su25SM_vvsc{};
             class UK3CB_CW_SOV_O_LATE_Su25SM_CAS : RHS_Su25SM_vvsc{};
+            class UK3CB_CSAT_A_O_Su25SM : RHS_Su25SM_vvsc{};
+            class UK3CB_CSAT_B_O_Su25SM : RHS_Su25SM_vvsc{};
+            class UK3CB_CSAT_F_O_Su25SM : RHS_Su25SM_vvsc{};
+            class UK3CB_CSAT_M_O_Su25SM : RHS_Su25SM_vvsc{};
+            class UK3CB_CSAT_G_O_Su25SM : RHS_Su25SM_vvsc{};
+            class UK3CB_CSAT_N_O_Su25SM : RHS_Su25SM_vvsc{};
+            class UK3CB_CSAT_U_O_Su25SM : RHS_Su25SM_vvsc{};
+            class UK3CB_CSAT_S_O_Su25SM : RHS_Su25SM_vvsc{};
+            class UK3CB_CSAT_W_O_Su25SM : RHS_Su25SM_vvsc{};
             
             class UK3CB_B_Mystere_HIDF_CAS1 : baseCAS {
                 loadout[] = {"PylonRack_3Rnd_Missile_AGM_02_F","PylonRack_12Rnd_missiles","PylonRack_12Rnd_missiles","PylonRack_3Rnd_Missile_AGM_02_F"};
@@ -84,6 +93,15 @@ class A3A {
             class UK3CB_LDF_B_MIG29SM : rhs_mig29sm_vvs {};
             class UK3CB_KDF_B_MIG29SM : rhs_mig29sm_vvs {};
             class UK3CB_AAF_O_MIG29S : rhs_mig29sm_vvs {};
+            class UK3CB_CSAT_A_O_MIG29SM : rhs_mig29sm_vvs{};
+            class UK3CB_CSAT_B_O_MIG29SM : rhs_mig29sm_vvs{};
+            class UK3CB_CSAT_F_O_MIG29SM : rhs_mig29sm_vvs{};
+            class UK3CB_CSAT_M_O_MIG29SM : rhs_mig29sm_vvs{};
+            class UK3CB_CSAT_N_O_MIG29SM : rhs_mig29sm_vvs{};
+            class UK3CB_CSAT_G_O_MIG29SM : rhs_mig29sm_vvs{};
+            class UK3CB_CSAT_S_O_MIG29SM : rhs_mig29sm_vvs{};
+            class UK3CB_CSAT_U_O_MIG29SM : rhs_mig29sm_vvs{};
+            class UK3CB_CSAT_W_O_MIG29SM : rhs_mig29sm_vvs{};
             
             class UK3CB_ANA_B_L39_PYLON : baseCAP {
                 loadout[] = {"PylonRack_1Rnd_Missile_AA_04_F","PylonRack_1Rnd_AAA_missiles","PylonRack_1Rnd_GAA_missiles","PylonWeapon_300Rnd_20mm_shells","PylonRack_1Rnd_GAA_missiles","PylonRack_1Rnd_AAA_missiles","PylonRack_1Rnd_Missile_AA_04_F"};
