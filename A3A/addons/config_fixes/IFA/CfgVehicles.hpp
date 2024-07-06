@@ -62,4 +62,26 @@ class CfgVehicles
 	class LIB_Armored_Target_Dummy : Tank {
 		delete EventHandlers;
 	};
+
+	// Nose-fall tweaks to make planes turn at a semi-decent rate when flown by AI
+	// Note: LIB_Ju87 not adjusted because planes with low maxSpeed use different AI logic
+	class LIB_GER_Plane_base;
+	class LIB_FW190F8 : LIB_GER_Plane_base
+	{
+		draconicTorqueXCoef = 2;
+	};
+	class LIB_SU_Plane_base;
+	class LIB_P39 : LIB_SU_Plane_base
+	{
+		draconicTorqueXCoef = 2;
+	};
+	class LIB_Pe2 : LIB_SU_Plane_base
+	{
+		draconicTorqueXCoef = 2;
+	};
+	class LIB_US_Plane_base;
+	class LIB_P47 : LIB_US_Plane_base
+	{
+		draconicTorqueXCoef = 2;
+	};
 };
