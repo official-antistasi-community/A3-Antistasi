@@ -47,8 +47,13 @@ IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL		26
 jna_minItemMember = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
 //jna_minItemMember = [24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,memberOnlyMagLimit,24,24,24,24,memberOnlyMagLimit];
 jna_minItemMember = jna_minItemMember apply { A3A_guestItemLimit };
-jna_minItemMember set [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG, A3A_guestItemLimit*3];
-jna_minItemMember set [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, A3A_guestItemLimit*3];
+jna_minItemMember set [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG, minWeaps];
+jna_minItemMember set [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, minWeaps];
+
+if (minWeaps == -1) then {
+    jna_minItemMember set [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG, A3A_guestItemLimit*3];
+    jna_minItemMember set [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, A3A_guestItemLimit*3];
+};
 
 //server
 if(isServer)then{

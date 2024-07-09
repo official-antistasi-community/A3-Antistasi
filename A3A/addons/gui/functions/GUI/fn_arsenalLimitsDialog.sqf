@@ -23,7 +23,7 @@ FIX_LINE_NUMBERS()
 
 params ["_mode", "_params"];
 
-private _fnc_defaultLimit = { [A3A_guestItemLimit, 3*A3A_guestItemLimit] select (_this == 26) };
+private _fnc_defaultLimit = { jna_minItemMember select _this;};
 
 private _display = findDisplay A3A_IDD_ARSENALLIMITSDIALOG;
 private _listBox = _display displayCtrl A3A_IDC_ARSLIMLISTBOX;
