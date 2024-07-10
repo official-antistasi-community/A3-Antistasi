@@ -1,5 +1,5 @@
 /*
-Maintainer: Caleb Serafin, DoomMetal
+Maintainer: John Jordan
     Handles the initialization and updating of the arsenal guest limits dialog.
 
 Arguments:
@@ -11,8 +11,6 @@ Returns:
 
 Environment:
     Should not be called by onLoad because findDisplay and ctrlParent do not work in that context.
-
-License: APL-ND
 
 */
 
@@ -46,7 +44,7 @@ switch (_mode) do
             [localize "STR_antistasi_arsenal_limits_dialog_hint_title", localize "STR_antistasi_arsenal_limits_dialog_guest_warning"] call A3A_fnc_customHint;
             (_display displayctrl A3A_IDC_ARSLIMRESETBUTTON) ctrlEnable false;
         };
-        ["typeSelect", [A3A_IDC_ARSLIMTYPESBASE]] call A3A_GUI_fnc_ArsenalLimitsDialog;
+        ["typeSelect", [A3A_IDC_ARSLIMTYPESBASE]] call A3A_GUI_fnc_arsenalLimitsDialog;
     };
 
     case ("typeSelect"):
@@ -95,7 +93,7 @@ switch (_mode) do
                 _button ctrlCommit 0;
                 _button ctrlSetText _text;
                 _button setVariable ["A3A_params", [_valCtrl, _adjust]];
-                _button ctrlAddEventHandler ["ButtonClick", { ["listButton", _this] call A3A_GUI_fnc_ArsenalLimitsDialog }];
+                _button ctrlAddEventHandler ["ButtonClick", { ["listButton", _this] call A3A_GUI_fnc_arsenalLimitsDialog }];
             } forEach [["R", "R", 66], ["-", -5, 70], ["+", 5, 82], ["U", "U", 86]];
 
         } forEach (jna_datalist#_typeIndex select {_x#1>0});        // only show non-unlocked items
@@ -142,7 +140,7 @@ switch (_mode) do
             A3A_arsenalLimits deleteAt (_x#0);
         } forEach (jna_datalist#_typeIndex);
 
-        ["typeSelect", [_typeIndex + A3A_IDC_ARSLIMTYPESBASE]] call A3A_GUI_fnc_ArsenalLimitsDialog;          // refresh the display
+        ["typeSelect", [_typeIndex + A3A_IDC_ARSLIMTYPESBASE]] call A3A_GUI_fnc_arsenalLimitsDialog;          // refresh the display
     };
 
 /*    case ("stepButton"):

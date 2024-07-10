@@ -76,6 +76,7 @@ class A3A_ArsenalLimitsDialog : A3A_DefaultDialog {
                     idc = A3A_IDC_ARSLIMTYPESBASE + 0;
                     text="\A3\Ui_f\data\GUI\Rsc\RscDisplayArsenal\PrimaryWeapon_ca.paa";
                     tooltip="$STR_A3_RscDisplayArsenal_tab_PrimaryWeapon";
+                    onLoad = "(_this # 0) ctrlEnable false";                // disable until init is complete
                     onButtonClick = "['typeSelect', [ctrlIDC (_this#0)]] call A3A_GUI_fnc_arsenalLimitsDialog";
                     colorDisabled[] = {0,0,0,1};
                     colorBackgroundDisabled[] = {1,1,1,1};
