@@ -87,6 +87,10 @@ while {(time < _bleedOut) and (_unit getVariable ["incapacitated",false]) and (a
 	};
 
 	if (_isPlayer) then	{
+		// Slow down self-revive timeout expiry while downed
+		private _timeout = _unit getVariable ["A3A_selfReviveTimeout", -1];
+		if (_timeout > 0) then { _unit setVariable ["A3A_selfReviveTimeout", _timeout + 0.5] };
+
 		private _helpText = "<t size='0.8'>" + call {
 			if (isNull _helper) exitWith {localize "STR_A3A_fn_revive_unconscious_noAI"};
 			if (_helper distance _unit < 3) exitWith { format [localize "STR_A3A_fn_revive_unconscious_helping", name _helper] };
