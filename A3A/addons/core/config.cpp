@@ -60,3 +60,6 @@ class CfgMPGameTypes {
 };
 
 #include "CfgMarkers.hpp"
+
+// Base AI unit definitions
+#include "CfgVehicles.hpp"
