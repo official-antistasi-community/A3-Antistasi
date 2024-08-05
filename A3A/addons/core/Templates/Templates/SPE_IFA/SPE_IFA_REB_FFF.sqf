@@ -76,7 +76,7 @@ private _initialRebelEquipment = [
     ["SPE_Ladung_Small_MINE_mag", 10], ["SPE_US_TNT_half_pound_mag", 10], ["SPE_US_TNT_4pound_mag", 3], ["SPE_Ladung_Big_MINE_mag", 3],
     "SPE_Shg24_Frag", "SPE_NB39", "SPE_US_Mk_1",
     "V_SPE_US_Vest_M1919", "V_SPE_DAK_VestKar98",
-    "B_SPE_FFI_M36_Saboteur", "B_SPE_GER_MedicBackpack_Empty",
+    "B_SPE_FFI_Gasbag", "B_SPE_GER_MedicBackpack_Empty",
     "SPE_Binocular_US"
 ];
 
