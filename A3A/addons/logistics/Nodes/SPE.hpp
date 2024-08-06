@@ -71,3 +71,71 @@ class SPE_US_M3_Halftrack : TRIPLES(ADDON,Nodes,Base)
     };
 };
 class SPE_FR_M3_Halftrack : SPE_US_M3_Halftrack {};
+
+class SPE_CCKW_353 : TRIPLES(ADDON,Nodes,Base)
+{
+    canLoadWeapon = 0;
+        class Nodes
+    {
+        class Node1
+        {
+            offset[] = {0,0.3,-0.7};
+            seats[] = {3,4};
+        };
+        class Node2
+        {
+            offset[] = {0,-0.5,-0.7};
+            seats[] = {5,6,7,8};
+        };
+        class Node3
+        {
+            offset[] = {0,-1.3,-0.7};
+            seats[] = {9,10};
+        };
+        class Node4
+        {
+            offset[] = {0,-2.1,-0.7};
+            seats[] = {0,1};
+        };
+    };
+};
+class SPE_CCKW_353_M2 : SPE_CCKW_353 {};
+class SPE_CCKW_353_Open : TRIPLES(ADDON,Nodes,Base)
+{
+        class Nodes
+    {
+        class Node1
+        {
+            offset[] = {0,0.3,-0.7};
+            seats[] = {3,4};
+        };
+        class Node2
+        {
+            offset[] = {0,-0.5,-0.7};
+            seats[] = {5,6,7,8};
+        };
+        class Node3
+        {
+            offset[] = {0,-1.3,-0.7};
+            seats[] = {9,10};
+        };
+        class Node4
+        {
+            offset[] = {0,-2.1,-0.7};
+            seats[] = {0,1};
+        };
+    };
+};
+
+class SPE_US_G503_MB : TRIPLES(ADDON,Nodes,Base)
+{
+        class Nodes
+    {
+        class Node1
+        {
+            offset[] = {0,-1.07,-0.6};
+        };
+    };
+};
+class SPE_US_G503_MB_Armoured : SPE_US_G503_MB {};
+class SPE_US_G503_MB_Open : SPE_US_G503_MB {};
