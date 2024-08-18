@@ -173,7 +173,7 @@ private _sfLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _sfLoadoutData set ["uniforms", ["EAW_SNLF_Uniform_1c_1942"]];
 _sfLoadoutData set ["vests", ["EAW_SNLF_RifleKit_1"]];
 _sfLoadoutData set ["backpacks", ["EAW_Japanese_Backpack_Type5"]];
-_sfLoadoutData set ["helmets", ["EAW_SNLF_Helmet_Covered", "EAW_SNLF_Helmet_1","EAW_SNLF_Helmet_Covered_Net"]];´
+_sfLoadoutData set ["helmets", ["EAW_SNLF_Helmet_Covered", "EAW_SNLF_Helmet_1","EAW_SNLF_Helmet_Covered_Net"]];
 //["Weapon", "Muzzle", "Rail", "Sight", [], [], "Bipod"];
 
 _sfLoadoutData set ["rifles", [
