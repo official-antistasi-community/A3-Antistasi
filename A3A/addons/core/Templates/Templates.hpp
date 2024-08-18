@@ -1522,6 +1522,16 @@ class Templates
     };
 */
     // ***************************** IFA *****************************
+    class IFA_IJA
+    {
+        side = "Inv";
+        flagTexture = "\x\A3A\addons\core\Pictures\Flags\ifa_sov.paa";
+        basepath = QPATHTOFOLDER(Templates\Templates\EAW);
+        name = "EAW IJA";
+        file = "EAW_AI_IJA";
+        shortName = "IJA";
+        lore = "";
+    };
     class IFA_Base
     {
         requiredAddons[] = {"IFA3_Core"};
