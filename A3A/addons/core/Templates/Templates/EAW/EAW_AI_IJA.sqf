@@ -20,7 +20,7 @@
 // vehicles can be placed in more than one category if they fit between both. Cost will be derived by the higher category
 ["vehiclesBasic", ["EAW_T94_Truck"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["EAW_T94_Truck"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["EAW_Crossley", "EAW_Type94_1937"]] call _fnc_saveToTemplate;             // Should be armed, unarmoured to lightly armoured, with 0-4 passengers
+["vehiclesLightArmed", ["EAW_Crossley"]] call _fnc_saveToTemplate;             // Should be armed, unarmoured to lightly armoured, with 0-4 passengers
 ["vehiclesTrucks", ["EAW_T94_Truck","EAW_T94_Truck_1941J","EAW_T94_Truck_1941"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["EAW_T94_Truck","EAW_T94_Truck_1941J","EAW_T94_Truck_1941"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["EAW_Dodge1936_Pickup_Military_Ammo_IJA"]] call _fnc_saveToTemplate;
@@ -30,17 +30,17 @@
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;             // armed, lightly armoured, with 6-8 passengers 
 ["vehiclesAPCs", []] call _fnc_saveToTemplate;                  // armed with enclosed turret, armoured, with 6-8 passengers
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;                  // capable of surviving multiple rockets, cannon armed, with 6-8 passengers
-["vehiclesTanks", ["EAW_Type89_1937","EAW_ChiHa_1941J","EAW_ChiHa_Kai_1941J"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["EAW_Crossley"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
+["vehiclesLightTanks", ["EAW_ChiHa_1941J","EAW_ChiHa_Kai_1941J", "EAW_Type89_1937"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
 
 
 ["vehiclesTransportBoats", ["EAW_Daihatsu_LC_IJA"]] call _fnc_saveToTemplate;
-["vehiclesGunBoats", ["EAW_Daihatsu_LC_IJA"]] call _fnc_saveToTemplate;
+["vehiclesGunBoats", ["LIB_UK_LCI"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["EAW_A4N"]] call _fnc_saveToTemplate;             // Will be used with CAS script, must be defined in setPlaneLoadout. Needs fixed gun and either rockets or missiles
 ["vehiclesPlanesAA", ["EAW_A4N"]] call _fnc_saveToTemplate;              // 
-["vehiclesPlanesTransport", []] call _fnc_saveToTemplate;
+["vehiclesPlanesTransport", ["LIB_C47_RAF"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;            // ideally fragile & unarmed helis seating 4+
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
