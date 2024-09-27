@@ -114,6 +114,7 @@ private _longestTime = 0.0;
 _totalCost = ceil _totalCost;
 // Cap
 _longestTime = _longestTime min 60.0;
+_longestTime = round _longestTime;
 
 // Return
 [_totalCost, _longestTime];

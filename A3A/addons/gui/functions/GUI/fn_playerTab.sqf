@@ -100,9 +100,10 @@ switch (_mode) do
 
         } else {
             _fastTravelButton ctrlEnable false;
-            _fastTravelButton ctrlSetTooltip (_fastTravelBlockers joinString ", ");
+            private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
+            _fastTravelButton ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
             _fastTravelIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            _fastTravelIcon ctrlSetTooltip (_fastTravelBlockers joinString ", ");
+            _fastTravelIcon ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
         };
 
         // Construct

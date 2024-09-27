@@ -2764,6 +2764,12 @@
         <Turkish>Şuraya gideceksin:</Turkish>
         <Chinesesimp>你将会快速旅行至</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_fast_travel_cost">
+        <Original>This action will cost</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_fast_travel_noMoney">
+        <Original>You cannot afford this.</Original>
+      </Key>
     </Container>
     <Container name="dialog_main_player">
       <Key ID="STR_antistasi_dialogs_main_add_to_air_support">

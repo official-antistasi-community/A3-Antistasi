@@ -2972,6 +2972,9 @@
         <Turkish>Grup %1 hedefe ilerliyor.</Turkish>
         <Chinesesimp>正在将组 %1 移动至目标。</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_dialogs_ftradio_generic_fail">
+        <Original>You cannot Fast Travel while: </Original>
+      </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_grp_select">
         <Original>You can select one group only to Fast Travel.</Original>
         <Italian>Puoi selezionare solo un gruppo cui effettuare il Viaggio Rapido.</Italian>

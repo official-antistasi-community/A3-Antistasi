@@ -153,7 +153,8 @@ switch (_mode) do
             // ShortcutButtons doesn't change texture color when disabled so we have to use fade
             _groupFastTravelButton ctrlSetFade 0.5;
             _groupFastTravelButton ctrlCommit 0;
-            _groupFastTravelButton ctrlSetTooltip (_fastTravelBlockers joinString ", ");
+            private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
+            _groupFastTravelButton ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
         };
 
         private _groupCountText = _display displayCtrl A3A_IDC_HCGROUPCOUNT;

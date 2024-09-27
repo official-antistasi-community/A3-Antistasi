@@ -125,6 +125,7 @@ class CfgFunctions
             class destroyCity {};
             class distance {};
             class distanceUnits {};
+            class fastTravelMove {};
             class FIAradio {};
             class findAttackTargets {};
             class findBasesForConvoy {};
