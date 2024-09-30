@@ -4697,6 +4697,50 @@
         <Czech>Bedna</Czech>
       </Key>
     </Container>
+    <Container name="A3A_fn_medical">
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_author_somebody">
+        <English>Somebody</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_examine">
+        <English>%1 is examining you...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_drawing">
+        <English>%1 is drawing your blood...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_painkillers">
+        <English>%1 is giving you painkillers...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_injection">
+        <English>%1 is giving you injection...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_applyTourniquet">
+        <English>%1 is applying tourniquet...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_removeTourniquet">
+        <English>%1 is removing tourniquet...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_bandage">
+        <English>%1 bandages you...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_transfusion">
+        <English>%1 is giving you a transfusion...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_cpr">
+        <English>%1 is performing CPR...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_patting">
+        <English>%1 is trying to extinguish you...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_healing">
+        <English>%1 is healing you...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_splint">
+        <English>%1 puts a splint on you...</English>
+      </Key>
+      <Key ID="STR_A3A_fn_medical_TreatmentMessage_suturing">
+        <English>%1 stitches your wounds...</English>
+      </Key>
+    </Container>
     <Container name="A3A_fn_mission">
       <Key ID="STR_A3A_fn_mission_as_off_text">
         <Original>A %3 officer is inspecting %1. Go there and kill him before %2.</Original>
