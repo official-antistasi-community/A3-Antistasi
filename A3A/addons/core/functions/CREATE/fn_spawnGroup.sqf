@@ -10,6 +10,7 @@ _typesX = _this select 2;
 _override = if (count _this >3) then {_this select 3} else {false};
 _canBypass = if (count _this > 4) then {_this select 4} else {false};*/
 
+Debug_2("Side: %1 spawning group composition: %2", _sideX, _typesX);
 _groupX = createGroup _sideX;
 _ranks = ["LIEUTENANT","SERGEANT","CORPORAL"];
 _countX = count _typesX;
@@ -22,7 +23,6 @@ else
 	if (_countX < 8) then {_ranks = _ranks - ["LIEUTENANT"]};
 	};
 _countRanks = (count _ranks - 1);
-Debug_2("Side: %1 spawning group composition: %2", _sideX, _typesX);
 for "_i" from 0 to (_countX - 1) do
 {
 	_unit = [_groupX, (_typesX select _i), _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;

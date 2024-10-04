@@ -17,6 +17,8 @@ seaSpawn = [];
 seaAttackSpawn = [];
 detectionAreas = [];
 
+generalPOI = [];
+
 fnc_sortPlacementMarker =
 {
   params ["_array", "_split"];
@@ -74,6 +76,7 @@ fnc_sortPlacementMarker =
     case ("outpost"): {outposts pushBack _x;};
     case ("seaport"): {seaports pushBack _x;};
     case ("control"): {controlsX pushBack _x;};
+    case ("poi"): {generalPOI pushBack _x;};
     case ("seapatrol"): {seaMarkers pushBack _x;};
     case ("seaspawn"): {seaSpawn pushBack _x;};
     case ("seaattackspawn"): {seaAttackSpawn pushBack _x;};
