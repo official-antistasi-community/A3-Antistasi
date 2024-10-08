@@ -35,7 +35,7 @@ private _fnc_placed = {
 
 //get mounts state
 HR_GRG_Mounts apply {
-    private _static = (HR_GRG_Vehicles#4) get (_x#1);
+    private _static = (HR_GRG_Vehicles#6) get (_x#1);
     _x pushBack (_static#4);
     _x
 };

@@ -469,6 +469,10 @@
         <Turkish>Çok fazla kilitli aracın var</Turkish>
         <Chinesesimp>你已上锁过多载具</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Generic_Unmanned">
+        <Original>Unmanned</Original>
+        <Russian>Беспилотники</Russian>
+      </Key>
       <Key ID="STR_HR_GRG_Generic_Air">
         <Original>Aircraft</Original>
         <German>Flugzeug</German>
@@ -482,6 +486,18 @@
         <Portuguese>Avião</Portuguese>
         <Turkish>Uçak</Turkish>
         <Chinesesimp>飞行器</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_Heli">
+        <Original>Helicopters</Original>
+        <Russian>Вертолёты</Russian>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_Plane">
+        <Original>Planes</Original>
+        <Russian>Самолёты</Russian>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_VTOL">
+        <Original>VTOL</Original>
+        <Russian>СВВП</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Generic_AirDisabled">
         <Original>You can only access aircrafts from a friendly airbase</Original>

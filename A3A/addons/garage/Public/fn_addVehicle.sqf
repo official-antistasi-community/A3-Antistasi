@@ -96,7 +96,7 @@ if ( ( {alive _x} count (crew _vehicle) ) > 0) then { _exit = true };
 if (_exit) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Crewed"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     // valid vehicle for garage
-private _cat = [_class] call HR_GRG_fnc_getCatIndex;
+private _cat = [_class , _vehicle] call HR_GRG_fnc_getCatIndex;
 if (_cat < 0) exitWith { ["STR_HR_GRG_Feedback_addVehicle_GenericFail"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     //cap block
