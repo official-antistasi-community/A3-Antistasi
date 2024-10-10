@@ -4391,5 +4391,46 @@
         <Chinesesimp>使用新的存档文件</Chinesesimp>
       </Key>
     </Container>
+    <Container name="setup_dialog">
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
+        <Original>Custom AI Loadouts</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_priWeapon">
+        <Original>Primary weapon</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_secWeapon">
+        <Original>Secondary weapon</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_ammoQuant">
+        <Original>Ammo quantity</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_priOptic">
+        <Original>Primary optic</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_uniform">
+        <Original>Uniform</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_vest">
+        <Original>Vest</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_backpack">
+        <Original>Backpack</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_headgear">
+        <Original>Headgear</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_close">
+        <Original>Close</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_copyToAll">
+        <Original>Copy To All</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetRole">
+        <Original>Reset Role</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetAll">
+        <Original>Reset All</Original>
+      </Key>
+    </Container>
   </Package>
 </Project>

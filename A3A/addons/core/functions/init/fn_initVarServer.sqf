@@ -175,6 +175,8 @@ hcArray = [];					// array of headless client IDs
 membersX = [];					// These two published later by startGame
 theBoss = objNull;
 
+createHashMap call A3A_fnc_setRebelLoadouts;		// sets version times, no dependencies
+
 ///////////////////////////////////////////
 //     INITIALISING ITEM CATEGORIES     ///
 ///////////////////////////////////////////

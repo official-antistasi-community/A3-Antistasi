@@ -1774,13 +1774,13 @@ class commander_comm 		{
 		class 10slots_R2: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
-			text = "";
+			text = "Customize loadouts"; //$STR_antistasi_dialogs_commander_comm_customLoadouts;
 			x = 0.482498 * safezoneW + safezoneX;
 			y = 0.365981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			tooltip = "";
-			action = "";
+			tooltip = "Customize loadouts for rebel AI troops"; //$STR_antistasi_dialogs_commander_comm_customLoadouts_tooltip;
+			action = "if (player == theBoss) then {closeDialog 0; createDialog ""A3A_customLoadoutsDialog""} else {[""Custom Loadouts"", ""Only commanders have access to this function""] call A3A_fnc_customHint}";
 		};
 		class 10slots_L3: A3A_core_BattleMenuRedButton
 		{

@@ -69,6 +69,7 @@ class CfgFunctions
         class Ammunition {
             file = QPATHTOFOLDER(functions\Ammunition);
             class ACEpvpReDress {};
+            class addPrimaryAndMags {};
             class allMagazines {};
             class ammunitionTransfer {};
             class arsenalManage {};
@@ -92,6 +93,7 @@ class CfgFunctions
             class launcherInfo {};
             class loot {};
             class randomRifle {};
+            class setRebelLoadouts {};
             class transfer {};
             class unlockEquipment {};
             class vehicleSort {};

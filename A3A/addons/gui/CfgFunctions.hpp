@@ -12,6 +12,7 @@ class CfgFunctions {
             class commanderTab {};
             class configColorToArray {};
             class constructTab {};
+            class customLoadoutsDialog {};
             class donateTab {};
             class fastTravelTab {};
             class fireMissionEH {};
