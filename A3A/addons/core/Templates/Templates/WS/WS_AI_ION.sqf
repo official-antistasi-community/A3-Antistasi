@@ -515,7 +515,10 @@ if ("rf" in A3A_enabledDLC) then {
     ["hgun_Glock19_Tan_RF", "muzzle_snds_L", "acc_flashlight_IR_pistol_RF", "optic_MRD_tan_RF", [], [], ""],
     ["hgun_Glock19_auto_Tan_RF", "muzzle_snds_L", "acc_flashlight_IR_pistol_RF", "optic_MRD_tan_RF", [], [], ""],
     ["hgun_Glock19_auto_Tan_RF", "muzzle_snds_L", "acc_flashlight_IR_pistol_RF", "optic_MRD_tan_RF", [], [], ""],
-    ["hgun_Glock19_auto_Tan_RF", "muzzle_snds_L", "acc_flashlight_IR_pistol_RF", "optic_MRD_tan_RF", [], [], ""]
+    ["hgun_Glock19_auto_Tan_RF", "muzzle_snds_L", "acc_flashlight_IR_pistol_RF", "optic_MRD_tan_RF", [], [], ""],
+    ["hgun_DEagle_RF", "", "", "optic_rds_RF", [], [], ""],
+    ["hgun_DEagle_bronze_RF", "", "", "optic_Yorris", [], [], ""],
+    ["hgun_DEagle_classic_RF", "", "", "optic_VRCO_pistol_RF", [], [], ""]
     ];
     (_militaryLoadoutData get "sidearms") append [
     ["hgun_Glock19_Tan_RF", "", "acc_flashlight_pistol", "", [], [], ""],
@@ -529,6 +532,8 @@ if ("rf" in A3A_enabledDLC) then {
     "H_HelmetHeavy_Sand_RF",
     "H_HelmetHeavy_Simple_Sand_RF",
     "H_HelmetHeavy_VisorUp_Sand_RF"];
+    
+    _officerLoadoutData set ["sidearms", ["hgun_DEagle_RF","hgun_DEagle_bronze_RF","hgun_DEagle_classic_RF","hgun_DEagle_copper_RF","hgun_DEagle_gold_RF"]];
 };
 
 

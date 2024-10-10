@@ -83,6 +83,19 @@ if ("enoch" in A3A_enabledDLC) then {
 if ("orange" in A3A_enabledDLC) then {
     _vehiclesPolice append ["B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
 };
+if ("rf" in A3A_enabledDLC) then {
+    _vehiclesPolice = ["B_T_Pickup_rf","a3a_police_Pickup_rf"];
+
+    _vehiclesLightUnarmed append ["a3a_ION_Pickup_rf","a3a_ION_Pickup_rf"];
+    _vehiclesLightArmed append ["a3a_ION_Pickup_hmg_rf", "a3a_ION_Pickup_mmg_rf", "a3a_ION_Pickup_hmg_rf", "a3a_ION_Pickup_mmg_rf"];
+
+    ["vehiclesHelisLight", ["a3a_black_Heli_light_03_unarmed_rf", "a3a_Heli_Light_01_ION_F"]] call _fnc_saveToTemplate;
+    ["vehiclesHelisTransport", ["a3a_ION_Heli_Transport_02_F", "a3a_ION_Heli_EC_04_military_rf"]] call _fnc_saveToTemplate;
+    ["vehiclesHelisLightAttack", ["a3a_Heli_Light_01_dynamicLoadout_ION_F", "a3a_black_Heli_light_03_dynamicLoadout_rf", "a3a_ION_Heli_EC_03_rf"]] call _fnc_saveToTemplate;
+    ["vehiclesHelisAttack", ["a3a_ION_Heli_EC_02_rf"]] call _fnc_saveToTemplate;
+    
+    ["vehiclesAirPatrol", ["a3a_Heli_Light_01_ION_F", "B_GEN_Heli_EC_01_RF"]] call _fnc_saveToTemplate;
+};
 ["vehiclesTanks", _Tanks] call _fnc_saveToTemplate;
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", _vehiclesMilitiaCars] call _fnc_saveToTemplate;
@@ -145,10 +158,6 @@ _loadoutData set ["AALaunchers", [
 ["launch_B_Titan_olive_F", "", "acc_pointer_IR", "", ["Titan_AA"], [], ""]
 ]];
 _loadoutData set ["sidearms", []];
-
-if ("expansion" in A3A_enabledDLC) then {
-    (_loadoutData get "lightATLaunchers") append [];
-};
 
 _loadoutData set ["ATMines", ["ATMine_Range_Mag"]];
 _loadoutData set ["APMines", ["APERSMine_Range_Mag"]];
@@ -244,7 +253,7 @@ _sfLoadoutData set ["SMGs", [
 ["SMG_01_F", "muzzle_snds_acp", "", "optic_Holosight_blk_F", [], [], ""],
 ["SMG_01_F", "muzzle_snds_acp", "", "optic_Holosight_blk_F", [], [], ""],
 ["SMG_01_F", "muzzle_snds_acp", "", "optic_Aco_smg", [], [], ""],
-["SMG_03C_TR_black", "muzzle_snds_570", "acc_pointer_IR", "optic_Yorris", [], [], ""],
+["SMG_03C_TR_black", "muzzle_snds_570", "acc_pointer_IR", "optic_Aco_smg", [], [], ""],
 ["SMG_03C_TR_black", "muzzle_snds_570", "acc_pointer_IR", "optic_Aco_smg", [], [], ""]
 ]];
 _sfLoadoutData set ["machineGuns", [
@@ -434,6 +443,9 @@ if ("orange" in A3A_enabledDLC) then {
     (_militiaLoadoutData get "vests") append ["V_Pocketed_black_F","V_LegStrapBag_black_F"];
 };
 if ("rf" in A3A_enabledDLC) then {
+    (_sfLoadoutData get "helmets") append [
+        "H_HelmetHeavy_Black_RF", "H_HelmetHeavy_Simple_Black_RF", "H_HelmetHeavy_VisorUp_Black_RF"
+    ];
     (_sfLoadoutData get "sidearms") append [
     ["hgun_DEagle_RF", "", "", "optic_VRCO_pistol_RF", [], [], ""],
     ["hgun_Glock19_RF", "muzzle_snds_L", "acc_pointer_IR_pistol_RF", "optic_MRD_black", [], [], ""],
@@ -443,6 +455,9 @@ if ("rf" in A3A_enabledDLC) then {
     (_militaryLoadoutData get "Hvests") append ["V_PlateCarrierLite_black_noFlag_RF"];
     (_militaryLoadoutData get "backpacks") append ["B_DuffleBag_Black_RF","B_DuffleBag_Black_NoLogo_RF"];
     (_militaryLoadoutData get "sidearms") append ["hgun_DEagle_RF","hgun_Glock19_Tan_RF","hgun_Glock19_RF"];
+    (_militaryLoadoutData get "marksmanRifles") append [
+    ["arifle_SPAR_01_blk_F", "", "acc_flashlight", "optic_DMS", ["20Rnd_556x45_AP_Stanag_red_RF"], [], "bipod_01_F_blk"]
+    ];
     
     (_militiaLoadoutData get "Hvests") append ["V_TacVest_rig_blk_RF"];
     (_militiaLoadoutData get "marksmanRifles") append [

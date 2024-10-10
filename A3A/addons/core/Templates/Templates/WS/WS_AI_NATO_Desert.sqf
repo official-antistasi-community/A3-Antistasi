@@ -129,10 +129,10 @@ if ("rf" in A3A_enabledDLC) then {
 "WhiteHead_21"]] call _fnc_saveToTemplate;
 private _sfSwitch = 0;
 //"random" documentation insists on this format
-if (random [0, 0.5, 1] > 0.5) then {
+//if (random [0, 0.5, 1] > 0.5) then {
 	["sfVoices", ["Male01ENGB", "Male02ENGB", "Male03ENGB", "Male04ENGB", "Male05ENGB"]] call _fnc_saveToTemplate;
 	_sfSwitch = 1; //CTRG 04 switch
-};
+//}; //commented out as having this be random was silly
 "NATOMen" call _fnc_saveNames;
 
 //////////////////////////
@@ -310,12 +310,14 @@ if (_sfSwitch < 0.5) then {
 	_sfLoadoutData set ["binoculars", ["Laserdesignator"]];
 
 	_sfLoadoutData set ["slRifles", [
+	["arifle_SLR_Para_snake_lxWS", "suppressor_h_snake_lxWS", "saber_light_ir_snake_lxWS", "optic_Hamr_snake_lxWS", ["20Rnd_762x51_slr_Snake_reload_tracer_Red_lxWS", "20Rnd_762x51_slr_Snake_reload_tracer_Red_lxWS", "20Rnd_762x51_slr_Snake_tracer_Red_lxWS"], [], ""],
 	["arifle_Velko_lxWS", "suppressor_l_lxWS", "acc_pointer_IR", "optic_MRCO", ["35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_tracer_red_lxWS"], [], ""],
 	["arifle_VelkoR5_snake_lxWS", "suppressor_l_snake_lxWS", "acc_pointer_IR_snake_lxWS", "optic_Hamr", ["35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_tracer_red_lxWS"], [], ""],
 	["arifle_VelkoR5_GL_snake_lxWS", "suppressor_l_snake_lxWS", "acc_pointer_IR_snake_lxWS", "optic_MRCO", ["35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_tracer_red_lxWS"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
 	["arifle_VelkoR5_GL_snake_lxWS", "suppressor_l_snake_lxWS", "acc_pointer_IR_snake_lxWS", "optic_Hamr", ["35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_tracer_red_lxWS"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
 	]];
 	_sfLoadoutData set ["rifles", [
+	["arifle_SLR_Para_snake_lxWS", "suppressor_h_snake_lxWS", "saber_light_ir_snake_lxWS", "optic_Holosight_smg_snake_lxWS", ["30Rnd_762x51_slr_Snake_reload_tracer_Red_lxWS", "20Rnd_762x51_slr_Snake_reload_tracer_Red_lxWS", "20Rnd_762x51_slr_Snake_tracer_Red_lxWS"], [], ""],
 	["arifle_SLR_lxWS", "muzzle_snds_B_snd_F", "", "optic_r1_low_lxWS", ["30Rnd_762x51_slr_lxWS"], [], ""],
 	["arifle_SLR_V_lxWS", "", "", "optic_MRCO", ["30Rnd_762x51_slr_lxWS"], [], ""],
 	["arifle_Velko_lxWS", "suppressor_l_lxWS", "acc_pointer_IR", "optic_Holosight_blk_F", ["35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_tracer_red_lxWS"], [], ""],
@@ -323,6 +325,7 @@ if (_sfSwitch < 0.5) then {
 	["arifle_Velko_lxWS", "suppressor_l_lxWS", "acc_pointer_IR", "optic_ACO_grn", ["35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_tracer_red_lxWS"], [], ""]
 	]];
 	_sfLoadoutData set ["carbines", [
+	["arifle_SLR_Para_snake_lxWS", "suppressor_h_snake_lxWS", "saber_light_ir_snake_lxWS", "optic_Holosight_smg_snake_lxWS", ["20Rnd_762x51_slr_Snake_reload_tracer_Red_lxWS", "20Rnd_762x51_slr_Snake_reload_tracer_Red_lxWS", "30Rnd_762x51_slr_Snake_tracer_Red_lxWS"], [], ""],
 	["arifle_VelkoR5_snake_lxWS", "suppressor_l_snake_lxWS", "acc_pointer_IR_snake_lxWS", "optic_r1_high_snake_lxWS", ["35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_reload_tracer_red_lxWS", "35Rnd_556x45_Velko_snake_tracer_red_lxWS"], [], ""]
 	]];
 	_sfLoadoutData set ["grenadeLaunchers", [
