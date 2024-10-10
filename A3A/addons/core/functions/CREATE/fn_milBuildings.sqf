@@ -34,6 +34,7 @@ while {_count > 0} do
     _veh = createVehicle [_typeVehX, (_spawnParameter select 0), [],0, "CAN_COLLIDE"];
     _veh setDir (_spawnParameter select 1);
     _vehiclesX pushBack _veh;
+    [_veh, _sideX] call A3A_fnc_AIVEHinit;
     _count = _count - 1;
 };
 

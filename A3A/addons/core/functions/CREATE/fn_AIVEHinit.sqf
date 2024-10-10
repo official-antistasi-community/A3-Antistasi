@@ -82,10 +82,20 @@ else
 {
 	if (_veh isKindOf "Air") then
 	{
+		[_veh] spawn {
+			params ["_veh"];
+			sleep 10;
+			if !(isNull driver _veh) then {[_veh] spawn A3A_fnc_aaReveal;};
+		};
 		_veh addEventHandler ["GetIn",
 		{
-			if (_this select 1 != "driver") exitWith {};
-			_unit = _this select 2;
+			params ["_vehicle", "_role", "_unit", "_turret"];
+			if (isNull (_vehicle getVariable ["aaRevealHandle", scriptNull])) then 
+			{
+				private _handle = [_vehicle] spawn A3A_fnc_aaReveal;
+				_vehicle setVariable ["aaRevealHandle",_handle];
+			};
+			if (_role != "driver") exitWith {};
 			if ((!isPlayer _unit) and (_unit getVariable ["spawner",false]) and (side group _unit == teamPlayer)) then
 			{
 				moveOut _unit;
