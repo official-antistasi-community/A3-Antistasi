@@ -7728,6 +7728,9 @@
         <Korean>%1 키를 눌러 부상을 떨쳐냅니다.</Korean>
         <Russian>Нажмите %1, чтобы избавиться от повреждения.</Russian>
       </Key>
+      <Key ID="STR_A3A_fn_revive_downed_help">
+        <Original>I am injured comrades! Help!</Original>
+      </Key>
     </Container>
     <Container name="A3A_fn_SalvageRope">
       <Key ID="STR_A3A_fn_salvRope_addact_attach">
@@ -9742,6 +9745,9 @@
       <Key ID="STR_A3A_Params_removeRestore_title">
         <Original>Disable the "Restore nearby units" option on the vehicle box.</Original>
         <Russian>Отключить опцию "Восстановить близлежащие объекты".</Russian>
+      </Key>
+      <Key ID="STR_A3A_Params_sendDownedNotification_title">
+        <Original>Send Chat Notification When Downed</Original>
       </Key>
       <Key ID="STR_A3A_Params_reviveTime_10s">
         <Original>10 seconds</Original>
