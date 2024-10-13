@@ -253,6 +253,7 @@ class CfgFunctions
             class createAttackForceMixed {};
             class createAttackVehicle {};
             class createFIAOutposts2 {};
+            class createPOI {};
             class createSDKGarrisons {};
             class createSDKgarrisonsTemp {};
             class createUnit {};

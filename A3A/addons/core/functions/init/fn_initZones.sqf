@@ -53,7 +53,7 @@ defaultControlIndex = (count controlsX) - 1;
 outpostsFIA = [];
 destroyedSites = [];
 garrison setVariable ["Synd_HQ", [], true];
-markersX = airportsX + resourcesX + factories + outposts + seaports + controlsX + ["Synd_HQ"];
+markersX = airportsX + resourcesX + factories + outposts + seaports + controlsX + generalPOI + ["Synd_HQ"];
 markersX apply {
 	_x setMarkerAlpha 0;
 	spawner setVariable [_x, 2, true];
@@ -131,6 +131,8 @@ markersX = markersX + citiesX;
 sidesX setVariable ["Synd_HQ", teamPlayer, true];
 sidesX setVariable ["NATO_carrier", Occupants, true];
 sidesX setVariable ["CSAT_carrier", Invaders, true];
+
+{sidesX setVariable [_x, Occupants, true];} forEach generalPOI;
 
 
 Info("Setting up antennas");
@@ -332,6 +334,8 @@ publicVariable "defaultControlIndex";
 publicVariable "detectionAreas";
 publicvariable "A3A_fuelStations";
 publicvariable "A3A_fuelStationTypes";
+
+publicvariable "generalPOI";
 
 initZonesDone = true;				// signal headless clients that they can start nav init
 publicVariable "initZonesDone";
