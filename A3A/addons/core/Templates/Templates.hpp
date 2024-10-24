@@ -303,6 +303,129 @@ class Templates
         lore = $STR_A3A_templates_lore_VN_Civ;
     };
 
+    // ***************************** Aegis *****************************
+    class Aegis_Base : Vanilla_Base
+    {
+        requiredAddons[] = {"A3_Aegis_Weapons_F_Aegis"};
+        logo = "\A3_Aegis\Data_F_Aegis\Logos\arma3_aegis_logo_CA.paa";
+        basepath = QPATHTOFOLDER(Templates\Templates\Aegis)
+        priority = 25;
+    };
+
+    class Aegis_Iran : Aegis_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3_Aegis\Data_F_Aegis\Flags\flag_Iran_CO.paa";
+        name = "Aegis Iran";
+        file = "Aegis_AI_Iran";
+        climate[] = {"arid", "arctic"};
+    };
+    class Aegis_China : Aegis_Iran
+    {
+        flagTexture = "\A3_Aegis\Data_F_Aegis\Flags\flag_China_CO.paa";
+        name = "Aegis China";
+        file = "Aegis_AI_China";
+        climate[] = {"tropical"};
+        forceDLC[] = {"expansion"};
+    };
+    class Aegis_Russia : Aegis_Iran
+    {
+        flagTexture = "a3_aegis\data_f_aegis\flags\flag_rus_co.paa";
+        name = "Aegis Russia";
+        file = "Aegis_AI_Russia";
+        climate[] = {"temperate"};
+        forceDLC[] = {"enoch"};
+    };
+    class Aegis_US_Arid : Aegis_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3_Aegis\data_f_aegis\Flags\flag_USA_51_CO.paa";
+        name = "Aegis US Arid";
+        file = "Aegis_AI_US_Arid";
+        climate[] = {"arid"};
+    };
+    class Aegis_US_Tropical : Aegis_US_Arid
+    {
+        name = "Aegis US Tropical";
+        file = "Aegis_AI_US_Tropical";
+        climate[] = {"tropical"};
+    };
+    class Aegis_US_Temperate : Aegis_US_Arid
+    {
+        name = "Aegis US Temperate";
+        file = "Aegis_AI_US_Temperate";
+        climate[] = {"temperate", "arctic"};
+    };
+    class Aegis_BAF_Arid : Aegis_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\Data_F\Flags\Flag_uk_CO.paa";
+        name = "Aegis BAF Arid";
+        file = "Aegis_AI_BAF_Arid";
+        climate[] = {"arid"};
+        forceDLC[] = {"enoch"};
+    };
+    class Aegis_BAF_Tropical : Aegis_BAF_Arid
+    {
+        name = "Aegis BAF Tropical";
+        file = "Aegis_AI_BAF_Tropical";
+        climate[] = {"tropical"};
+        forceDLC[] = {"enoch"};
+    };
+    class Aegis_BAF_Temperate : Aegis_BAF_Arid
+    {
+        name = "Aegis BAF Temperate";
+        file = "Aegis_AI_BAF_Temperate";
+        climate[] = {"temperate", "arctic"};
+        forceDLC[] = {"enoch"};
+    };
+    class Aegis_LDF : Aegis_Base
+    {
+        side = "Occ";
+        flagTexture = "a3\data_f_enoch\flags\flag_enoch_co.paa";
+        name = "Aegis LDF";
+        file = "Aegis_AI_LDF";
+        maps[] = {"enoch","vt7"};
+        climate[] = {"temperate"};
+        forceDLC[] = {"enoch"};
+    };
+    class Aegis_AAF : Aegis_Base
+    {
+        side = "Occ";
+        flagTexture = "a3\data_f\flags\flag_aaf_co.paa";
+        name = "Aegis AAF";
+        file = "Aegis_AI_AAF";
+        maps[] = {"altis"};
+        climate[] = {"arid"};
+    };
+
+    class Aegis_FIA : Aegis_Base
+    {
+        side = "Reb";
+        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        name = "Aegis FIA";
+        file = "Aegis_Reb_FIA";
+    };
+
+    class Aegis_SDK : Aegis_Base
+    {
+        side = "Reb";
+        flagTexture = "\A3\Data_F_exp\Flags\Flag_Synd_CO.paa";
+        name = "Aegis SDK";
+        file = "Aegis_Reb_SDK";
+        maps[] = {"Tanoa"};
+        climate[] = {"tropical"};
+        forceDLC[] = {"expansion"};
+    };
+
+    class Aegis_Civ : Aegis_Base
+    {
+        side = "Civ";
+        flagTexture = "a3\data_f\flags\flag_aaf_co.paa";
+        name = "Aegis";
+        file = "Aegis_Civ";
+    };
+
     // ***************************** RHS *****************************
 
     class RHS_Base
