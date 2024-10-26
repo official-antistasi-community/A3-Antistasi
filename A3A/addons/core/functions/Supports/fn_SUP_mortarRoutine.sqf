@@ -105,7 +105,7 @@ while {time < _timeout} do
     private _subTargets = [];
 
     // Ranging shots
-    if (_mortar distance2d _targetPos - 1500 < random 1500) then {
+    if (_mortar distance2d _targetPos < 1500 + random 1500) then {
         _subTargets pushBack [_targetPos getPos [_spreadOffset, random 360], 20];
     } else {
         _subTargets pushBack [_targetPos getPos [_spreadOffset*1.5, random 360], 20];
