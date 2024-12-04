@@ -2,7 +2,7 @@
 //       Vehicles       //
 //////////////////////////    
 
-["vehiclesCivCar", ["EAW_Dodge1936_Pickup", 1]] call _fnc_saveToTemplate;             //this line determines civilian cars -- Example: ["vehiclesCivCar", ["C_Offroad_01_F"]] -- Array, can contain multiple assets
+["vehiclesCivCar", ["LIB_GazM1_dirty", 1]] call _fnc_saveToTemplate;             //this line determines civilian cars -- Example: ["vehiclesCivCar", ["C_Offroad_01_F"]] -- Array, can contain multiple assets
 
 ["vehiclesCivIndustrial", ["EAW_Dodge1936_Pickup", 1]] call _fnc_saveToTemplate;             //this line determines civilian trucks -- Example: ["vehiclesCivIndustrial", ["C_Truck_02_transport_F"]] -- Array, can contain multiple assets
 
@@ -12,7 +12,7 @@
 
 ["vehiclesCivRepair", []] call _fnc_saveToTemplate;            //this line determines civilian repair vehicles
 
-["vehiclesCivMedical", ["EAW_Dodge1936_Pickup_Military_Medical_IJA", 1]] call _fnc_saveToTemplate;        //this line determines civilian medic vehicles
+["vehiclesCivMedical", []] call _fnc_saveToTemplate;        //this line determines civilian medic vehicles
 
 ["vehiclesCivFuel", []] call _fnc_saveToTemplate;            //this line determines civilian fuel vehicles
 
@@ -20,7 +20,8 @@
 ///  Identities   ///
 /////////////////////
 
-["faces", []] call _fnc_saveToTemplate;
+["faces", ["AsianHead_A3_01","AsianHead_A3_02","AsianHead_A3_03","AsianHead_A3_04","AsianHead_A3_05","AsianHead_A3_06","AsianHead_A3_07"]] call _fnc_saveToTemplate;
+"ChineseMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //
@@ -28,14 +29,13 @@
 
 private _civUniforms = ["EAW_Civ_Robe_Grey","EAW_Civ_Robe_BlueGrey","EAW_Civ_Robe_Uniform_Blue","EAW_Civ_1_Uniform_White","EAW_Civ_1_Uniform_Tan","EAW_Civ_1_Uniform_Grey","EAW_Civ_1_Uniform_Brown","EAW_Civ_1_Uniform"];          //Uniforms given to Normal Civs
 
-private _pressUniforms = [];            //Uniforms given to Press/Journalists
+private _pressUniforms = ["EAW_Civ_1_Uniform_White","EAW_Civ_1_Uniform_Tan","EAW_Civ_1_Uniform_Grey","EAW_Civ_1_Uniform_Brown","EAW_Civ_1_Uniform"];            //Uniforms given to Press/Journalists
 
-private _workerUniforms = [];           //Uniforms given to Workers at Factories/Resources
-
-private _dlcUniforms = [];          //Uniforms given if DLCs are enabled, only given to the Arsenal not Civilians
+private _workerUniforms = ["EAW_Civ_1_Uniform_White","EAW_Civ_1_Uniform_Tan","EAW_Civ_1_Uniform_Grey","EAW_Civ_1_Uniform_Brown","EAW_Civ_1_Uniform"];           //Uniforms given to Workers at Factories/Resources
 
 
-["uniforms", _civUniforms + _pressUniforms + _workerUniforms + _dlcUniforms] call _fnc_saveToTemplate;          //Uniforms given to the Arsenal, Allowed for Undercover and given to Rebel Ai that go Undercover
+
+["uniforms", _civUniforms + _pressUniforms + _workerUniforms] call _fnc_saveToTemplate;          //Uniforms given to the Arsenal, Allowed for Undercover and given to Rebel Ai that go Undercover
 
 _civhats = ["EAW_SunHat"];
 
@@ -44,11 +44,13 @@ _civhats = ["EAW_SunHat"];
 private _loadoutData = call _fnc_createLoadoutData;
 
 _loadoutData set ["uniforms", _civUniforms];
-_loadoutData set ["pressUniforms", _pressUniforms];
+_loadoutData set ["pressUniforms", ["U_LIB_UK_KhakiDrills"]];
 _loadoutData set ["workerUniforms", _workerUniforms];
-_loadoutData set ["pressVests", []];
+_loadoutData set ["pressVests", ["V_Plain_crystal_F"]];
 _loadoutData set ["helmets", _civHats];
-_loadoutData set ["pressHelmets", []];
+_loadoutData set ["pressHelmets", ["H_LIB_UK_Helmet_Mk2_Cover_w"]];
+_loadoutData set ["pressFacewear", ["G_LIB_Binoculars"]];
+_loadoutData set ["facewear", ["EAW_Glasses"]];
 
 _loadoutData set ["maps", ["ItemMap"]];
 _loadoutData set ["watches", ["ItemWatch"]];
@@ -57,7 +59,13 @@ _loadoutData set ["compasses", ["ItemCompass"]];
 
 
 private _manTemplate = {
+    if (random 10 > 7) then {
+        ["helmets"] call _fnc_setHelmet;
+    };
     ["uniforms"] call _fnc_setUniform;
+    if (random 10 > 7) then {
+        ["facewear"] call _fnc_setFacewear;
+    };
 
     ["items_medical_standard"] call _fnc_addItemSet;
 
@@ -68,6 +76,9 @@ private _manTemplate = {
 private _workerTemplate = {
     ["helmets"] call _fnc_setHelmet;
     ["uniforms"] call _fnc_setUniform;
+    if (random 10 > 7) then {
+        ["facewear"] call _fnc_setFacewear;
+    };
 
     ["items_medical_standard"] call _fnc_addItemSet;
 
@@ -79,6 +90,7 @@ private _pressTemplate = {
     ["pressHelmets"] call _fnc_setHelmet;
     ["pressVests"] call _fnc_setVest;
     ["pressUniforms"] call _fnc_setUniform;
+    ["pressFacewear"] call _fnc_setFacewear;
 
     ["items_medical_standard"] call _fnc_addItemSet;
 
@@ -88,7 +100,7 @@ private _pressTemplate = {
 };
 private _prefix = "militia";
 private _unitTypes = [
-    ["Press", _manTemplate],
+    ["Press", _pressTemplate],
     ["Worker", _workerTemplate],
     ["Man", _manTemplate]
 ];

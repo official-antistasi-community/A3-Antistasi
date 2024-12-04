@@ -14,6 +14,7 @@
     ["LIB_US_M3_Halftrack", ["cost", 60]],
     ["LIB_SOV_M3_Halftrack", ["cost", 60]],
     ["LIB_UK_M3_Halftrack", ["cost", 60]],
+    ["LIB_UniversalCarrier", ["cost", 40], ["threat", 300]],
     ["LIB_M8_Greyhound", ["cost", 80]],
     ["LIB_Ju87", ["cost", 75]],
     ["LIB_Pe2", ["cost", 75]],

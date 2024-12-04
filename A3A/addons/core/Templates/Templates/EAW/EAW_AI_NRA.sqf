@@ -2,12 +2,12 @@
 //   Side Information   //
 //////////////////////////
 
-["name", "IJA"] call _fnc_saveToTemplate;
-["spawnMarkerName", "IJA Support Corridor"] call _fnc_saveToTemplate;
+["name", "NRA"] call _fnc_saveToTemplate;
+["spawnMarkerName", "NRA Support Corridor"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_FIA_F"] call _fnc_saveToTemplate;
-["flagTexture", "\A3\Data_F\Flags\Flag_red_CO.paa"] call _fnc_saveToTemplate;
-["flagMarkerType", "Faction_OPFOR_EP1"] call _fnc_saveToTemplate;
+["flagTexture", "\A3\Data_F\Flags\Flag_blue_CO.paa"] call _fnc_saveToTemplate;
+["flagMarkerType", "Faction_BLUFOR_EP1"] call _fnc_saveToTemplate;
 
 ["attributeLowAir", true] call _fnc_saveToTemplate;             // Use fewer air units in general
 ["attributeMoreTrucks", true] call _fnc_saveToTemplate;         // Use more truck for transports
@@ -25,8 +25,8 @@
 ["vehiclesBasic", ["EAW_T94_Truck"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["EAW_T94_Truck"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["EAW_Crossley"]] call _fnc_saveToTemplate;             // Should be armed, unarmoured to lightly armoured, with 0-4 passengers
-["vehiclesTrucks", ["EAW_T94_Truck","EAW_T94_Truck_1941J","EAW_T94_Truck_1941"]] call _fnc_saveToTemplate;
-["vehiclesCargoTrucks", ["EAW_T94_Truck","EAW_T94_Truck_1941J","EAW_T94_Truck_1941"]] call _fnc_saveToTemplate;
+["vehiclesTrucks", ["EAW_Dodge1936_Pickup_Military_ROC"]] call _fnc_saveToTemplate;
+["vehiclesCargoTrucks", ["EAW_Dodge1936_Pickup_Military_ROC"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["EAW_Dodge1936_Pickup_Military_Ammo_IJA"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["EAW_Dodge1936_Pickup_Military_Fuel_IJA"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["EAW_Dodge1936_Pickup_Military_Fuel_IJA"]] call _fnc_saveToTemplate;
@@ -34,7 +34,7 @@
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;             // armed, lightly armoured, with 6-8 passengers 
 ["vehiclesAPCs", []] call _fnc_saveToTemplate;                  // armed with enclosed turret, armoured, with 6-8 passengers
 ["vehiclesIFVs", ["LIB_UniversalCarrier"]] call _fnc_saveToTemplate;                  // capable of surviving multiple rockets, cannon armed, with 6-8 passengers
-["vehiclesLightTanks", ["EAW_ChiHa", "EAW_Type89_1937"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks", ["EAW_Type89_1937", "EAW_T26_NRA", "EAW_Vickers6Ton"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["EAW_ChiHa", "EAW_ChiHa_Kai"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
 
@@ -64,7 +64,7 @@
 ["uavsPortable", []] call _fnc_saveToTemplate;
 
 //Config special vehicles
-["vehiclesMilitiaLightArmed", ["EAW_Crossley"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["EAW_Crossley", "EAW_Type94_1937"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaTrucks", ["EAW_Dodge1936_Pickup_Military_IJA"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["EAW_Dodge1936_Pickup_Military_IJA"]] call _fnc_saveToTemplate;
 
@@ -92,6 +92,10 @@
 //Faces and Voices given to AI Factions.
 ["voices", ["Male01CHI","Male02CHI","Male03CHI"]] call _fnc_saveToTemplate;
 ["faces", ["AsianHead_A3_01","AsianHead_A3_02","AsianHead_A3_03","AsianHead_A3_04","AsianHead_A3_05","AsianHead_A3_06","AsianHead_A3_07"]] call _fnc_saveToTemplate;
+//SpecialForces, Militia, Police Faces and Voices, these are Optional if there is no reason to Include them, leave them out.
+["sfVoices", ["male01ger", "male02ger", "male03ger", "male04ger", "male05ger", "male06ger"]] call _fnc_saveToTemplate;
+["sfFaces", ["WhiteHead_22_a","WhiteHead_22_l","WhiteHead_22_sa"]] call _fnc_saveToTemplate;
+
 "ChineseMen" call _fnc_saveNames;
 
 //////////////////////////
@@ -100,15 +104,28 @@
 private _loadoutData = call _fnc_createLoadoutData;
 _loadoutData set ["rifles", []];
 _loadoutData set ["carbines", []];
-_loadoutData set ["grenadeLaunchers", ["EAW_Type89_Discharger"]];
+_loadoutData set ["grenadeDischarger", ["EAW_Type89_Discharger"]];
+_loadoutData set ["grenadeLaunchers", [
+["LIB_K98_GW", "LIB_ACC_GW_SB_Empty", "", "", [], ["LIB_1Rnd_G_SPRGR_30"], ""],
+["LIB_K98_GW", "LIB_ACC_GW_SB_Empty", "", "", [], ["LIB_1Rnd_G_SPRGR_30", "LIB_1Rnd_G_PZGR_30"], ""],
+["LIB_K98_GW", "LIB_ACC_GW_SB_Empty", "", "", [], ["LIB_1Rnd_G_PZGR_30", "LIB_1Rnd_G_SPRGR_30"], ""]
+]];
 _loadoutData set ["SMGs", []];
-_loadoutData set ["machineGuns", []];
-_loadoutData set ["marksmanRifles", []];
+_loadoutData set ["machineGuns", [
+["EAW_FN30_Base", "", "", "", [], [], "EAW_FN30_Bipod"],
+["EAW_ZB26_Base", "", "", "", [], [], "EAW_ZB26_Bipod"]
+]];
+_loadoutData set ["marksmanRifles", [
+["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_SMK"], [], ""],
+["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_sS"], [], ""],
+["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t"], [], ""]
+]];
 _loadoutData set ["sniperRifles", []];
 
 _loadoutData set ["lightATLaunchers", []];
 _loadoutData set ["ATLaunchers", ["LIB_M1A1_Bazooka"]];
-_loadoutData set ["sidearms", ["EAW_Type14"]];
+_loadoutData set ["AALaunchers", []];
+_loadoutData set ["sidearms", ["EAW_C96", "LIB_P08"]];
 _loadoutData set ["slSidearms", ["EAW_Dao"]];
 
 _loadoutData set ["ATMines", []];
@@ -116,8 +133,8 @@ _loadoutData set ["APMines", []];
 _loadoutData set ["lightExplosives", []];
 _loadoutData set ["heavyExplosives", []];
 
-_loadoutData set ["antiTankGrenades", ["EAW_Type3_Grenade_Mag"]];
-_loadoutData set ["antiInfantryGrenades", ["EAW_Type91_Mag", "EAW_Type91_Trans_Mag", "EAW_Type97_Mag"]];
+_loadoutData set ["antiTankGrenades", ["EAW_Type3_Grenade_Mag", "EAW_Chinese_Grenade_Bundle_Mag"]];
+_loadoutData set ["antiInfantryGrenades", ["EAW_Chinese_Grenade_Mag"]];
 _loadoutData set ["smokeGrenades", ["LIB_NB39"]];
 _loadoutData set ["signalsmokeGrenades", []];
 
@@ -129,24 +146,24 @@ _loadoutData set ["watches", ["ItemWatch"]];
 _loadoutData set ["compasses", ["ItemCompass"]];
 _loadoutData set ["radios", ["ItemRadio"]];
 _loadoutData set ["gpses", []];
-_loadoutData set ["NVGs", []];
-_loadoutData set ["binoculars", ["LIB_Binocular_UK"]];
-_loadoutData set ["rangefinders", ["LIB_Binocular_UK"]];
+_loadoutData set ["NVGs", ["EAW_NanjingBand"]];
+_loadoutData set ["binoculars", ["LIB_Binocular_GER"]];
+_loadoutData set ["rangefinders", ["LIB_Binocular_GER"]];
 
 _loadoutData set ["uniforms", []];
-_loadoutData set ["vests", ["EAW_Type90_RifleKit", "EAW_RJ_RifleKit", "EAW_SNLF_RifleKit_1"]];
-_loadoutData set ["MGVests", ["EAW_IJA_LMG_Kit", "EAW_Type11_Kit"]];
-_loadoutData set ["SMGVests", ["EAW_IJA_SMG_Kit"]];
-_loadoutData set ["MedVests", ["EAW_Type90_RifleKit_Medic"]];
-_loadoutData set ["GrenVests", ["EAW_Type90_GrenadierKit"]];
+_loadoutData set ["vests", ["EAW_C96_Vest", "EAW_NRALeatherCan_1", "EAW_Chinese_Bandolier2_Rifle"]];
+_loadoutData set ["MGVests", ["EAW_ZB_Bandolier"]];
+_loadoutData set ["SMGVests", ["EAW_Chinese_MP28_Kit"]];
+_loadoutData set ["MedVests", ["EAW_Chinese_Medic_Bag"]];
+_loadoutData set ["GrenVests", ["EAW_Chinese_Bandolier_Rifle_Grenade"]];
 _loadoutData set ["backpacks", []];
 _loadoutData set ["longRangeRadios", []];
 _loadoutData set ["helmets", []];
-_loadoutData set ["slHelmets", ["EAW_IJA_Cap_Wool"]];
-_loadoutData set ["sniHelmets", ["EAW_Type92_Camo1", "EAW_Type92_Camo2","EAW_Type92_Camo3", "EAW_Type92_Camo4"]];
+_loadoutData set ["slHelmets", ["EAW_Chinese_VisorCap_Green"]];
+_loadoutData set ["sniHelmets", ["EAW_M35_Camo_1", "EAW_Chinese_Cap_2_Camo_Green2", "EAW_Chinese_Cap_1_Camo_Green2"]];
 
 _loadoutData set ["facewear", []];
-_loadoutData set ["sniFacewear", ["EAW_CamoVest_1", "EAW_CamoVest_2", "EAW_CamoVest_3", "EAW_CamoVest_4", "EAW_CamoVest_5", "EAW_CamoVest_6"]];
+_loadoutData set ["sniFacewear", ["EAW_CamoVest_2", "EAW_CamoVest_3", "EAW_CamoVest_4", "EAW_CamoVest_5", "EAW_CamoVest_6"]];
 
 //Item *set* definitions. These are added in their entirety to unit loadouts. No randomisation is applied.
 _loadoutData set ["items_medical_basic", ["BASIC"] call A3A_fnc_itemset_medicalSupplies];
@@ -178,72 +195,73 @@ _loadoutData set ["items_unarmed_extras", []];
 ///////////////////////////////////////
 
 private _sfLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_sfLoadoutData set ["uniforms", ["EAW_Type98_Uniform_Jyuban_Rolled", "EAW_Type98_Uniform_Jyuban"]];
-_sfLoadoutData set ["vests", ["EAW_Jyuban_RifleKit", "EAW_Jyuban_RifleKit", "EAW_Jyuban_LMG_BearerKit"]];
-_sfLoadoutData set ["MGVests", ["EAW_Jyuban_Type11Kit", "EAW_Jyuban_LMGKit"]];
-_sfLoadoutData set ["SMGVests", ["EAW_IJA_SMG_Kit"]];
-_sfLoadoutData set ["MedVests", ["EAW_Jyuban_MedicKit"]];
-_sfLoadoutData set ["GrenVests", ["EAW_Jyuban_GrenadierKit"]];
-_sfLoadoutData set ["backpacks", ["EAW_Jyuban_GrenadierBag", "EAW_IJA_LMG_AmmoBearer_Bag_Jyuban"]];
-_sfLoadoutData set ["helmets", ["EAW_Type92_Camo1", "EAW_Type92_Camo2","EAW_Type92_Camo3", "EAW_Type92_Camo4"]];
+_sfLoadoutData set ["uniforms", ["U_LIB_GER_Soldier_camo2", "U_LIB_GER_Scharfschutze", "U_LIB_GER_Soldier_camo"]];
+_sfLoadoutData set ["backpacks", ["EAW_Jyuban_GrenadierBag", "EAW_Jyuban_GrenadierBag", "EAW_Jyuban_GrenadierBag", "EAW_Chinese_Backpack_1_Camo", "EAW_Chinese_Backpack_4_Camo"]];
+_sfLoadoutData set ["helmets", ["H_LIB_GER_HelmetUtility_Oak", "H_LIB_GER_HelmetCamo2","H_LIB_GER_HelmetCamo", "H_LIB_GER_HelmetCamo4"]];
+_sfLoadoutData set ["slHelmets", ["H_LIB_GER_HelmetUtility_Oak", "H_LIB_GER_HelmetCamo2","H_LIB_GER_HelmetCamo", "H_LIB_GER_HelmetCamo4"]];
+_sfLoadoutData set ["sniHelmets", ["H_LIB_GER_HelmetUtility_Oak", "H_LIB_GER_HelmetCamo2","H_LIB_GER_HelmetCamo", "H_LIB_GER_HelmetCamo4"]];
 _sfLoadoutData set ["facewear", ["EAW_CamoVest_2", "EAW_CamoVest_3", "EAW_CamoVest_4", "EAW_CamoVest_5", "EAW_CamoVest_6"]];
+_sfLoadoutData set ["NVGs", []];
 //["Weapon", "Muzzle", "Rail", "Sight", [], [], "Bipod"];
 
 _sfLoadoutData set ["slRifles", [
+    "LIB_G41",
+    "LIB_G41",
     "EAW_MP28",
-    ["EAW_Type99_Long_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
-    ["LIB_M1_Carbine", "", "", "", ["LIB_15Rnd_762x33", "LIB_15Rnd_762x33", "LIB_15Rnd_762x33_t"], [], ""],
-    ["LIB_M1928_Thompson", "", "", "", ["LIB_50Rnd_45ACP", "LIB_30Rnd_45ACP", "LIB_30Rnd_45ACP", "LIB_30Rnd_45ACP_t"], [], ""]
+    "EAW_C96_Auto_Carbine",
+    ["LIB_K98", "LIB_ACC_K98_Bayo", "", "", [], ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t","LIB_5Rnd_792x57_sS","LIB_5Rnd_792x57_SMK"], ""]
 ]];
 _sfLoadoutData set ["rifles", [
-    ["EAW_Type99_Long_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
+    ["LIB_K98", "LIB_ACC_K98_Bayo", "", "", [], ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t","LIB_5Rnd_792x57_sS","LIB_5Rnd_792x57_SMK"], ""]
 ]];
 _sfLoadoutData set ["carbines", [
-    ["LIB_M1_Carbine", "", "", "", ["LIB_15Rnd_762x33", "LIB_15Rnd_762x33", "LIB_15Rnd_762x33_t"], [], ""],
-    ["EAW_Type99_Short_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
-    ["EAW_Type99_Long_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
+    "EAW_MP28",
+    "EAW_C96_Auto_Carbine"
 ]];
 _sfLoadoutData set ["SMGs", [
     "EAW_MP28",
     "EAW_MP28",
-    ["LIB_M1928_Thompson", "", "", "", ["LIB_50Rnd_45ACP", "LIB_30Rnd_45ACP", "LIB_30Rnd_45ACP", "LIB_30Rnd_45ACP_t"], [], ""]
+    "EAW_C96_Auto_Carbine"
 ]];
 _sfLoadoutData set ["machineGuns", [
-    ["EAW_Type99", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"]
+    ["EAW_FN30_Base", "", "", "", [], [], "EAW_FN30_Bipod"],
+    ["EAW_ZB26_Base", "", "", "", [], [], "EAW_ZB26_Bipod"],
+    "LIB_MG34"
 ]];
 _sfLoadoutData set ["marksmanRifles", [
-    ["EAW_Type97_Sniper_Stock2", "EAW_Type30_Bayonet_Attach", "", "EAW_Type97_Sniper_Scope", [], [], ""]
+["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_SMK"], [], ""],
+["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_sS"], [], ""],
+["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t"], [], ""]
 ]];
+_sfLoadoutData set ["slSidearms", ["LIB_P08"]];
 /////////////////////////////////
 //    Military Loadout Data    //
 /////////////////////////////////
 
 private _militaryLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_militaryLoadoutData set ["uniforms", ["EAW_Type98_Uniform_Summer"]];
-_militaryLoadoutData set ["backpacks", ["EAW_Japanese_Backpack_Type5_Hide", "EAW_Bedroll_Tan"]];
-_militaryLoadoutData set ["helmets", ["EAW_Type92","EAW_Type92_Cover","EAW_Type92_Cover_Net"]];
+_militaryLoadoutData set ["uniforms", ["EAW_Chinese_Uniform_Green"]];
+_militaryLoadoutData set ["backpacks", ["EAW_Chinese_Backpack_1", "EAW_Chinese_Backpack_German", "EAW_Bedroll_Brown", "EAW_Bedroll_Brown"]];
+_militaryLoadoutData set ["helmets", ["EAW_M35","EAW_ROC_Brodie_Green","EAW_Chinese_Cap_Green"]];
 
 _militaryLoadoutData set ["rifles", [
-["EAW_Type99_Long", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
-["EAW_Type38_Base", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
-["EAW_Type38_NoCover", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
+["EAW_Type24_Rifle_Base", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
+["EAW_Type24_Rifle_Stock2", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
+["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
 ]];
+_militaryLoadoutData set ["grenadeLaunchers", []];
 _militaryLoadoutData set ["carbines", [
-["EAW_Type99_Short", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
-["EAW_Type38_Carbine", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
-["EAW_Type38_Carbine_NoCover", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
+["EAW_Type24_Rifle_Base", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
+["EAW_Type24_Rifle_Stock2", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
+"EAW_C96_Carbine"
 ]];
 _militaryLoadoutData set ["SMGs", [
-["EAW_Type99_Short", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
-"EAW_MP28"
-]];
-_militaryLoadoutData set ["machineGuns", [
-["EAW_Type99", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"],
-["EAW_Type96", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"],
-["EAW_Type11_Base", "", "", "", [], [], "EAW_Type11_Bipod"]
+"EAW_C96_Carbine",
+"EAW_C96_Carbine",
+"EAW_C96_Auto_Carbine"
 ]];
 _militaryLoadoutData set ["marksmanRifles", [
-["EAW_Type97_Sniper", "EAW_Type30_Bayonet_Attach", "", "EAW_Type97_Sniper_Scope", [], [], ""]
+["EAW_Type97_Sniper", "", "", "EAW_Type97_Sniper_Scope", [], [], ""],
+["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t"], [], ""]
 ]];
 
 ///////////////////////////////
@@ -252,48 +270,44 @@ _militaryLoadoutData set ["marksmanRifles", [
 
 private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
-_policeLoadoutData set ["uniforms", ["EAW_RJ_Japanese_Uniform"]];
-_policeLoadoutData set ["vests", ["EAW_IJA_SwordBelt"]];
-_policeLoadoutData set ["helmets", ["EAW_RJ_Japanese_Cap"]];
+_policeLoadoutData set ["uniforms", ["EAW_Chinese_Uniform_Shorts"]];
+_policeLoadoutData set ["vests", ["EAW_C96_Vest_Dao"]];
+_policeLoadoutData set ["helmets", ["EAW_Chinese_Cap_1", "EAW_Chinese_VisorCap_Blue"]];
 
 _policeLoadoutData set ["carbines", [
-["EAW_Type38_Carbine", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
-["EAW_Type38_Carbine_NoCover", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
+["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
+"EAW_C96_Carbine"
 ]];
-_policeLoadoutData set ["sidearms", ["EAW_Type95"]];
+_policeLoadoutData set ["sidearms", ["EAW_Dao"]];
 
 ////////////////////////////////
 //    Militia Loadout Data    //
 ////////////////////////////////
 
 private _militiaLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_militiaLoadoutData set ["uniforms", ["EAW_Type90_Uniform_Transition_Summer"]];
+_militiaLoadoutData set ["uniforms", ["EAW_Chinese_Uniform"]];
 _militiaLoadoutData set ["backpacks", ["EAW_Bedroll_Tan"]];
-_militiaLoadoutData set ["helmets", ["EAW_IJA_Plum"]];
-
-_militiaLoadoutData set ["ATLaunchers", []];
+_militiaLoadoutData set ["helmets", ["EAW_Chinese_Cap_1", "EAW_ROC_Brodie_Blue", "EAW_Adrian"]];
+_militiaLoadoutData set ["slHelmets", ["EAW_Chinese_VisorCap_Blue"]];
 
 _militiaLoadoutData set ["rifles", [
-["EAW_Type30_Rifle", "", "", "", [], [], ""],
-["EAW_Type30_Rifle_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
+["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["carbines", [
-["EAW_Type30_Rifle", "", "", "", [], [], ""],
-["EAW_Type30_Rifle_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
+["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
+"EAW_C96_Carbine"
 ]];
+_militiaLoadoutData set ["grenadeLaunchers", []];
 _militiaLoadoutData set ["SMGs", [
-["EAW_Type30_Rifle", "", "", "", [], [], ""],
-["EAW_Type30_Rifle_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
-]];
-_militiaLoadoutData set ["machineGuns", [
-["EAW_Type11_Base", "", "", "", [], [], "EAW_Type11_Bipod"]
+["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
+"EAW_C96_Carbine",
+"EAW_C96_Auto_Carbine"
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["EAW_Type30_Rifle", "", "", "", [], [], ""],
-["EAW_Type30_Rifle_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
+["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
 ]];
-_militiaLoadoutData set ["sidearms", ["EAW_Type30"]];
-_militiaLoadoutData set ["slSidearms", ["EAW_Type30"]];
+_militiaLoadoutData set ["sidearms", ["EAW_Hanyang_Bayonet"]];
+_militiaLoadoutData set ["slSidearms", ["EAW_Dao"]];
 
 //////////////////////////
 //    Misc Loadouts     //
@@ -403,22 +417,23 @@ private _grenadierTemplate = {
     ["uniforms"] call _fnc_setUniform;
     ["backpacks"] call _fnc_setBackpack;
 
-    ["rifles"] call _fnc_setPrimary;
+    _grenade = ["grenadeLaunchers", selectRandom ["carbines", "rifles"]] call _fnc_fallback;
+    [_grenade] call _fnc_setPrimary;
     ["primary", 5] call _fnc_addMagazines;
+    ["primary", selectRandom [3,4,5]] call _fnc_addAdditionalMuzzleMagazines;
+    
+    if (_grenade isNotEqualTo "grenadeLaunchers") then {
+        ["grenadeDischarger"] call _fnc_setLauncher;
+        ["launcher", 2] call _fnc_addMagazines;
+    };
+
 
     ["items_medical_standard"] call _fnc_addItemSet;
     ["items_grenadier_extras"] call _fnc_addItemSet;
     ["items_miscEssentials"] call _fnc_addItemSet;
-    _grenade = selectRandom ["antiInfantryGrenades", "grenadeLaunchers"];
-    if (_grenade isEqualTo "grenadeLaunchers") then {
-        ["antiInfantryGrenades", 2] call _fnc_addItem;
-        ["grenadeLaunchers"] call _fnc_setLauncher;
-        ["launcher", 2] call _fnc_addMagazines;
-    } else {
-        ["antiInfantryGrenades", 4] call _fnc_addItem;
-        ["antiTankGrenades", 2] call _fnc_addItem;
-    };
-    ["smokeGrenades", 2] call _fnc_addItem;
+    ["antiInfantryGrenades", 2] call _fnc_addItem;
+    ["antiTankGrenades", 1] call _fnc_addItem;
+    ["smokeGrenades", 3] call _fnc_addItem;
 
     ["maps"] call _fnc_addMap;
     ["watches"] call _fnc_addWatch;
@@ -434,7 +449,7 @@ private _explosivesExpertTemplate = {
     ["uniforms"] call _fnc_setUniform;
     ["backpacks"] call _fnc_setBackpack;
 
-    [selectRandom ["rifles", "carbines"]] call _fnc_setPrimary;
+    [selectRandom ["rifles", "carbines", "SMGs"]] call _fnc_setPrimary;
     ["primary", 5] call _fnc_addMagazines;
 
 
@@ -498,7 +513,7 @@ private _latTemplate = {
     ["uniforms"] call _fnc_setUniform;
     ["backpacks"] call _fnc_setBackpack;
 
-    [selectRandom ["rifles", "carbines"]] call _fnc_setPrimary;
+    [selectRandom ["rifles", "carbines", "SMGs"]] call _fnc_setPrimary;
     ["primary", 5] call _fnc_addMagazines;
 
     ["items_medical_standard"] call _fnc_addItemSet;
@@ -524,9 +539,8 @@ private _atTemplate = {
     [selectRandom ["rifles", "carbines"]] call _fnc_setPrimary;
     ["primary", 5] call _fnc_addMagazines;
 
-    [selectRandom ["ATLaunchers", "grenadeLaunchers"]] call _fnc_setLauncher;
-    //TODO - Add a check if it's disposable.
-    ["launcher", 2] call _fnc_addMagazines;
+    ["ATLaunchers"] call _fnc_setLauncher;
+    ["launcher", round(random 2.2)] call _fnc_addMagazines;
 
     ["items_medical_standard"] call _fnc_addItemSet;
     ["items_at_extras"] call _fnc_addItemSet;
@@ -542,7 +556,7 @@ private _atTemplate = {
 };
 
 private _aaTemplate = {
-    call selectRandom[_latTemplate, _atTemplate];
+    call selectRandom[_latTemplate, _atTemplate, _grenadierTemplate];
 };
 
 private _machineGunnerTemplate = {
