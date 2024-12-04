@@ -314,6 +314,9 @@ _militiaLoadoutData set ["slSidearms", ["EAW_Dao"]];
 //////////////////////////
 
 private _crewLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
+private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
+/*
+private _crewLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _crewLoadoutData set ["uniforms", []];
 _crewLoadoutData set ["vests", []];
 _crewLoadoutData set ["helmets", []];
@@ -322,6 +325,7 @@ private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["uniforms", []];
 _pilotLoadoutData set ["vests", []];
 _pilotLoadoutData set ["helmets", []];
+*/
 
 
 /////////////////////////////////
@@ -589,7 +593,6 @@ private _marksmanTemplate = {
     ["facewear"] call _fnc_setFacewear;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
-    ["backpacks"] call _fnc_setBackpack;
 
     ["marksmanRifles"] call _fnc_setPrimary;
     ["primary", 5] call _fnc_addMagazines;
@@ -615,7 +618,6 @@ private _sniperTemplate = {
     ["sniFacewear"] call _fnc_setFacewear;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
-    ["backpacks"] call _fnc_setBackpack;
 
     ["marksmanRifles"] call _fnc_setPrimary;
     ["primary", 7] call _fnc_addMagazines;
