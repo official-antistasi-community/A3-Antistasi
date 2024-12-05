@@ -12,6 +12,8 @@
 ["attributeLowAir", true] call _fnc_saveToTemplate;             // Use fewer air units in general
 ["attributeMoreTrucks", true] call _fnc_saveToTemplate;         // Use more truck for transports
 ["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
+["placeIntel_itemLarge", ["Intel_File2_F",-155,false]] call _fnc_saveToTemplate;
+
 
 //////////////////////////
 //       Vehicles       //
@@ -68,7 +70,7 @@
 ["vehiclesMilitiaTrucks", ["EAW_Dodge1936_Pickup_Military_IJA"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["EAW_Dodge1936_Pickup_Military_IJA"]] call _fnc_saveToTemplate;
 
-["vehiclesPolice", ["EAW_Dodge1936_Pickup_Military_ROC"]] call _fnc_saveToTemplate;
+["vehiclesPolice", ["LIB_Kfz1_Hood_sernyt"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["EAW_Type24_MG"]] call _fnc_saveToTemplate;
 ["staticAT", ["EAW_Type1_47mm_J", "EAW_IJA_Type92_BG"]] call _fnc_saveToTemplate;
@@ -239,6 +241,7 @@ _militaryLoadoutData set ["SMGs", [
 ]];
 _militaryLoadoutData set ["machineGuns", [
 ["EAW_Type99", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"],
+["EAW_Type96", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"],
 ["EAW_Type96", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"],
 ["EAW_Type11_Base", "", "", "", [], [], "EAW_Type11_Bipod"]
 ]];
@@ -788,6 +791,6 @@ private _unitTypes = [
 //The following lines are determining the loadout for the unit used in the "kill the official" mission
 ["other", [["Official", _policeTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "kill the traitor" mission
-["other", [["Traitor", _traitorTemplate]], _militiaLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "Invader Punishment" mission
 ["other", [["Unarmed", _UnarmedTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
