@@ -12,6 +12,8 @@
 ["attributeLowAir", true] call _fnc_saveToTemplate;             // Use fewer air units in general
 ["attributeMoreTrucks", true] call _fnc_saveToTemplate;         // Use more truck for transports
 ["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
+["placeIntel_itemLarge", ["Intel_File2_F",-155,false]] call _fnc_saveToTemplate;
+
 
 //////////////////////////
 //       Vehicles       //
@@ -43,9 +45,9 @@
 ["vehiclesGunBoats", ["LIB_UK_LCI"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["EAW_G3M", "EAW_Ki43_II"]] call _fnc_saveToTemplate;             // Will be used with CAS script, must be defined in setPlaneLoadout. Needs fixed gun and either rockets or missiles
-["vehiclesPlanesAA", ["EAW_Ki43_II"]] call _fnc_saveToTemplate;              // 
-["vehiclesPlanesTransport", ["LIB_C47_RAF"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["EAW_AVG_P40", "EAW_HawkIII"]] call _fnc_saveToTemplate;             // Will be used with CAS script, must be defined in setPlaneLoadout. Needs fixed gun and either rockets or missiles
+["vehiclesPlanesAA", ["EAW_AVG_P40", "EAW_i16"]] call _fnc_saveToTemplate;              // 
+["vehiclesPlanesTransport", ["LIB_C47_Skytrain"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;            // ideally fragile & unarmed helis seating 4+
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
@@ -53,25 +55,24 @@
 ["vehiclesHelisLightAttack", []] call _fnc_saveToTemplate;      // Utility helis with fixed or door guns + rocket pods
 ["vehiclesHelisAttack", []] call _fnc_saveToTemplate;           // Proper attack helis: Apache, Hind etc
 
-["vehiclesArtillery", ["EAW_IJA_Type91_Gun_Arty","EAW_Type38Kai_Arty"]] call _fnc_saveToTemplate;
+["vehiclesArtillery", ["EAW_lefH18_Arty","EAW_NRA_Type99_10cm_Gun_Arty"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
-["EAW_IJA_Type91_Gun_Arty", ["EAW_Type91_105mm_Arty_Magazine"]],
-["EAW_Type38Kai_Arty", ["EAW_Type38Kai_Arty_Magazine"]],
-["EAW_IJA_Type92_BG_Arty", ["EAW_Type92BG_70mm_Arty_Magazine"]]
+["EAW_lefH18_Arty", ["EAW_lefH18_Arty_Magazine"]],
+["EAW_NRA_Type99_10cm_Gun_Arty", ["EAW_Type91_105mm_Arty_Magazine"]]
 ]] call _fnc_saveToTemplate; //element format: [Vehicle class, [Magazines]]
 
 ["uavsAttack", []] call _fnc_saveToTemplate;
 ["uavsPortable", []] call _fnc_saveToTemplate;
 
 //Config special vehicles
-["vehiclesMilitiaLightArmed", ["EAW_Crossley", "EAW_Type94_1937"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["EAW_Crossley"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaTrucks", ["EAW_Dodge1936_Pickup_Military_IJA"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["EAW_Dodge1936_Pickup_Military_IJA"]] call _fnc_saveToTemplate;
 
-["vehiclesPolice", ["EAW_Dodge1936_Pickup_Military_ROC"]] call _fnc_saveToTemplate;
+["vehiclesPolice", ["LIB_Kfz1_Hood_sernyt"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["EAW_Type24_MG"]] call _fnc_saveToTemplate;
-["staticAT", ["EAW_Type1_47mm_J", "EAW_IJA_Type92_BG"]] call _fnc_saveToTemplate;
+["staticAT", ["EAW_ROC_Pak36"]] call _fnc_saveToTemplate;
 ["staticAA", ["EAW_T98_20mm_AA", "EAW_T98_20mm_AA", "EAW_IJA_Type99_88_AA_1941"]] call _fnc_saveToTemplate;
 ["staticMortars", ["EAW_IJA_Type97_Mortar_1941J"]] call _fnc_saveToTemplate;
 
@@ -255,6 +256,7 @@ _militaryLoadoutData set ["carbines", [
 "EAW_C96_Carbine"
 ]];
 _militaryLoadoutData set ["SMGs", [
+"EAW_MP28",
 "EAW_C96_Carbine",
 "EAW_C96_Carbine",
 "EAW_C96_Auto_Carbine"
@@ -289,6 +291,7 @@ _militiaLoadoutData set ["uniforms", ["EAW_Chinese_Uniform"]];
 _militiaLoadoutData set ["backpacks", ["EAW_Bedroll_Tan"]];
 _militiaLoadoutData set ["helmets", ["EAW_Chinese_Cap_1", "EAW_ROC_Brodie_Blue", "EAW_Adrian"]];
 _militiaLoadoutData set ["slHelmets", ["EAW_Chinese_VisorCap_Blue"]];
+_militiaLoadoutData set ["NVGs", []];
 
 _militiaLoadoutData set ["rifles", [
 ["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
@@ -803,6 +806,6 @@ private _unitTypes = [
 //The following lines are determining the loadout for the unit used in the "kill the official" mission
 ["other", [["Official", _policeTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "kill the traitor" mission
-["other", [["Traitor", _traitorTemplate]], _militiaLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "Invader Punishment" mission
 ["other", [["Unarmed", _UnarmedTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
