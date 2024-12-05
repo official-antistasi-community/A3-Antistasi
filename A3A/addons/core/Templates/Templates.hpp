@@ -1656,7 +1656,7 @@ class Templates
         side = "Occ";
         flagTexture = "\x\A3A\addons\core\Pictures\Flags\ifa_sov.paa";
         name = "EAW PLA";
-        file = "EAW_AI_ROC";
+        file = "EAW_AI_PLA";
         shortName = "EAW PLA";
         lore = "People's Liberation Army";
     };
