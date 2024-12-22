@@ -558,6 +558,14 @@ if (A3A_hasACE) then {
 	[] call A3A_fnc_aceModCompat;
 };
 
+if (A3A_hasILBE) then {
+	[] call A3A_fnc_ilbeModCompat;
+};
+
+if (A3A_hascTab) then {
+	[] call A3A_fnc_ctabModCompat;
+};
+
 ////////////////////////////////////
 //     ACRE ITEM MODIFICATIONS   ///
 ////////////////////////////////////
