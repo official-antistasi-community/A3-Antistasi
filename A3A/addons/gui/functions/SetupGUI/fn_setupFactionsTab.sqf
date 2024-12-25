@@ -170,6 +170,8 @@ switch (_mode) do
             ,["Swedish_Forces_Pack","Swedish Forces Pack"]
             ,["cwr3_core","Cold War Rearmed 3"]
             ,["WW2_SPEX_Assets_c_Characters_Americans_c","SPEX - Spearhead Extended"]
+            ,["PRACS_Core","Project RACS 2023"]
+            ,["PRACS_SLA_Core","Project RACS SLA 2023"]
         ];
 
         private _prettyAddons = _requiredAddons apply 
