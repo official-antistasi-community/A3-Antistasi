@@ -5,4 +5,5 @@ class lxws_vehicles_f_lxws_zu23_zu23_lxws_p3d : TRIPLES(ADDON,Cargo,Base)
     size = 6;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AA ;
 };

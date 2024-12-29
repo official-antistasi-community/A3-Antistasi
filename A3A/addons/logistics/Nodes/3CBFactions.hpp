@@ -13,6 +13,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
             seats[] = {0,2,3,4,5,6};
         };
     };
+    canLoadLowWeapons = 0;
 };
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_datsun_uk3cb_datsun_open_p3d : TRIPLES(ADDON,Nodes,Base)
@@ -65,6 +66,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
             seats[] = {3,4,6};
         };
     };
+    canLoadLowWeapons = 0;
 };
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_m939_uk3cb_m939_open_p3d : TRIPLES(ADDON,Nodes,Base)
@@ -102,11 +104,13 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
             seats[] = {11,12};
         };
     };
+    canLoadLowWeapons = 0;
 };
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_m939_uk3cb_m939_closed_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
+    weaponBlackList[] = BL_MORTAR_AA;
     class Nodes
     {
         class Node1
@@ -144,6 +148,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_m939_uk3cb_m939_guntruck_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -181,6 +186,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_m939_uk3cb_m939_recovery_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -218,6 +224,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_mtvr_uk3cb_mtvr_open_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -250,7 +257,8 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_mtvr_uk3cb_mtvr_closed_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
+    weaponBlackList[] = BL_MORTAR_AA;
     class Nodes
     {
         class Node1
@@ -357,6 +365,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_v3s_uk3cb_v3s_open_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -389,7 +398,8 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_v3s_uk3cb_v3s_transport_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
+    weaponBlackList[] = BL_MORTAR_AA;
     class Nodes
     {
         class Node1
@@ -459,6 +469,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicles_fishing_boat_uk3cb_fishing_boat_unarmed_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    weaponBlackList[] = BL_MORTAR;
     class Nodes
     {
         class Node1
@@ -486,6 +497,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicle
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicles_fishing_boat_uk3cb_fishing_boat_viv_ffv_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    weaponBlackList[] = BL_MORTAR;
     class Nodes
     {
         class Node1
@@ -513,6 +525,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicle
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicles_fishing_boat_uk3cb_fishing_boat_zu23_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    weaponBlackList[] = BL_MORTAR;
     class Nodes
     {
         class Node1
@@ -525,6 +538,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicle
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicles_fishing_boat_uk3cb_fishing_boat_zu23_front_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    weaponBlackList[] = BL_MORTAR;
     class Nodes
     {
         class Node1
@@ -552,6 +566,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicle
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicles_small_boat_uk3cb_smallboat_wood_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    weaponBlackList[] = BL_MORTAR;
     class Nodes
     {
         class Node1
@@ -569,6 +584,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicle
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicles_small_boat_uk3cb_smallboat_closed_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    weaponBlackList[] = BL_MORTAR;
     class Nodes
     {
         class Node1
@@ -581,6 +597,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicle
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicles_small_boat_uk3cb_smallboat_open_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    weaponBlackList[] = BL_MORTAR;
     class Nodes
     {
         class Node1
@@ -593,6 +610,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_water_UK3CB_Factions_Vehicle
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_pickup_uk3cb_pickup_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    weaponBlackList[] = BL_MORTAR;
     class Nodes
     {
         class Node1
@@ -637,7 +655,7 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_armour_UK3CB_Factions_Vehicl
 
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_t810_uk3cb_T810_transport_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -668,9 +686,39 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
     };
 };
 
+class UK3CB_T810_Closed : UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_t810_uk3cb_T810_transport_p3d
+{
+    weaponBlackList[] = BL_MORTAR_AA;
+};
+
+class UK3CB_ION_B_Desert_T810_Closed : UK3CB_T810_Closed
+{
+
+};
+
+class UK3CB_ION_B_Urban_T810_Closed : UK3CB_T810_Closed
+{
+
+};
+
+class UK3CB_ION_B_Winter_T810_Closed : UK3CB_T810_Closed
+{
+
+};
+
+class UK3CB_ION_B_Woodland_T810_Closed : UK3CB_T810_Closed
+{
+
+};
+
+class UK3CB_LDF_B_T810_Closed : UK3CB_T810_Closed
+{
+
+};
+
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_t810_uk3cb_T810_transport_armed_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -701,8 +749,19 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
     };
 };
 
+class UK3CB_T810_Closed_armed : UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_t810_uk3cb_T810_transport_armed_p3d
+{
+    weaponBlackList[] = BL_MORTAR_AA;
+};
+
+class UK3CB_LDF_B_T810_Closed_PKM : UK3CB_T810_Closed_armed
+{
+
+};
+
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_t810_uk3cb_t810_recovery_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1

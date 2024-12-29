@@ -5,6 +5,7 @@ class rhsusf_addons_rhsusf_heavyweapons_TOW_TOW_static : TRIPLES(ADDON,Cargo,Bas
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AT ;
 };
 
 class rhsusf_addons_rhsusf_heavyweapons_m2_mg : TRIPLES(ADDON,Cargo,Base)
@@ -14,6 +15,7 @@ class rhsusf_addons_rhsusf_heavyweapons_m2_mg : TRIPLES(ADDON,Cargo,Base)
     size = 4;
     recoil = 100;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class rhsusf_addons_rhsusf_heavyweapons_m2_mg2 : TRIPLES(ADDON,Cargo,Base)
@@ -23,6 +25,7 @@ class rhsusf_addons_rhsusf_heavyweapons_m2_mg2 : TRIPLES(ADDON,Cargo,Base)
     size = 4;
     recoil = 100;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class rhsusf_addons_rhsusf_heavyweapons_Mk19_minitripod_mk19_stat : TRIPLES(ADDON,Cargo,Base)
@@ -32,6 +35,7 @@ class rhsusf_addons_rhsusf_heavyweapons_Mk19_minitripod_mk19_stat : TRIPLES(ADDO
     size = 4;
     recoil = 100;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_DShKM_DShKM_mg : TRIPLES(ADDON,Cargo,Base)
@@ -41,6 +45,7 @@ class rhsafrf_addons_rhs_heavyweapons_DShKM_DShKM_mg : TRIPLES(ADDON,Cargo,Base)
     size = 4;
     recoil = 100;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_DShKM_DShKM_mg2 : TRIPLES(ADDON,Cargo,Base)
@@ -50,6 +55,7 @@ class rhsafrf_addons_rhs_heavyweapons_DShKM_DShKM_mg2 : TRIPLES(ADDON,Cargo,Base
     size = 4;
     recoil = 100;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_mg_bis_kord_KORD_6u16sp : TRIPLES(ADDON,Cargo,Base)
@@ -59,6 +65,7 @@ class rhsafrf_addons_rhs_heavyweapons_mg_bis_kord_KORD_6u16sp : TRIPLES(ADDON,Ca
     size = 4;
     recoil = 150;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_mg_bis_kord_kord : TRIPLES(ADDON,Cargo,Base)
@@ -68,6 +75,7 @@ class rhsafrf_addons_rhs_heavyweapons_mg_bis_kord_kord : TRIPLES(ADDON,Cargo,Bas
     size = 4;
     recoil = 150;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_mg_rhs_nsv_tripod : TRIPLES(ADDON,Cargo,Base)
@@ -77,6 +85,7 @@ class rhsafrf_addons_rhs_heavyweapons_mg_rhs_nsv_tripod : TRIPLES(ADDON,Cargo,Ba
     size = 4;
     recoil = 150;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_kornet_kornet_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -86,6 +95,7 @@ class rhsafrf_addons_rhs_heavyweapons_kornet_kornet_p3d : TRIPLES(ADDON,Cargo,Ba
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AT ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_spg9_spg9_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -95,6 +105,7 @@ class rhsafrf_addons_rhs_heavyweapons_spg9_spg9_p3d : TRIPLES(ADDON,Cargo,Base)
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AT ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_AGS30_AGS_static : TRIPLES(ADDON,Cargo,Base)
@@ -104,6 +115,7 @@ class rhsafrf_addons_rhs_heavyweapons_AGS30_AGS_static : TRIPLES(ADDON,Cargo,Bas
     size = 4;
     recoil = 100;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_igla_igla_AA_pod : TRIPLES(ADDON,Cargo,Base)
@@ -113,6 +125,7 @@ class rhsafrf_addons_rhs_heavyweapons_igla_igla_AA_pod : TRIPLES(ADDON,Cargo,Bas
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AA ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_ZU23_rhs_zu23 : TRIPLES(ADDON,Cargo,Base)
@@ -123,6 +136,7 @@ class rhsafrf_addons_rhs_heavyweapons_ZU23_rhs_zu23 : TRIPLES(ADDON,Cargo,Base)
     recoil = 250;
     isWeapon = 1;
     blackList[] = {"\rhsusf\addons\rhsusf_HEMTT_A4\M977A4_wd","\rhsusf\addons\rhsusf_hemtt_a4\M977A4_WD_APK","\rhsusf\addons\rhsusf_hemtt_a4\M977A4_WD_APK_M2"};
+    weaponType = TYPE_AA ;
 };
 
 class rhsafrf_addons_rhs_heavyweapons_podnos_2b14_82mm_podnos_2b14_82mm : TRIPLES(ADDON,Cargo,Base)
@@ -133,6 +147,7 @@ class rhsafrf_addons_rhs_heavyweapons_podnos_2b14_82mm_podnos_2b14_82mm : TRIPLE
     recoil = 2000;
     isWeapon = 1;
     blackList[] = {"\A3\boat_f_gamma\Boat_Civil_01\Boat_Civil_01_F","\A3\boat_f\Boat_Transport_01\Boat_Transport_01_F.p3d","\A3\Boat_F_Exp\Boat_Transport_02\Boat_Transport_02_F.p3d"};
+    weaponType = TYPE_MORTAR ;
 };
 
 class rhsusf_addons_rhsusf_m252_rhs_mortar_m252_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -143,4 +158,5 @@ class rhsusf_addons_rhsusf_m252_rhs_mortar_m252_p3d : TRIPLES(ADDON,Cargo,Base)
     recoil = 2000;
     isWeapon = 1;
     blackList[] = {"\A3\boat_f_gamma\Boat_Civil_01\Boat_Civil_01_F","\A3\boat_f\Boat_Transport_01\Boat_Transport_01_F.p3d","\A3\Boat_F_Exp\Boat_Transport_02\Boat_Transport_02_F.p3d"};
+    weaponType = TYPE_MORTAR ;
 };

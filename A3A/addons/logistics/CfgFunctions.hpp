@@ -7,6 +7,8 @@ class CfgFunctions {
             class drawSeats {};
             class generateCargoOffset {};
             class generateHardPoints {};
+            class getCargoClassName {};
+            class checkDefinedCargoNodes{};
         };
 
         class Public {

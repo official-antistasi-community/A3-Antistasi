@@ -5,6 +5,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_DShKM_CUP_DShKM_mg_p3d : TRIPLES(ADD
     size = 4;
     recoil = 100;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_KORD_CUP_KORD_6u16sp_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -14,6 +15,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_KORD_CUP_KORD_6u16sp_p3d : TRIPLES(A
     size = 4;
     recoil = 200;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_ZU23_CUP_zu23_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -23,6 +25,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_ZU23_CUP_zu23_p3d : TRIPLES(ADDON,Ca
     size = 7;
     recoil = 1000;
     isWeapon = 1;
+    weaponType = TYPE_AA ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_SPG9_CUP_spg9_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -32,6 +35,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_SPG9_CUP_spg9_p3d : TRIPLES(ADDON,Ca
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AT ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_M2_CUP_m2_mg_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -41,6 +45,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_M2_CUP_m2_mg_p3d : TRIPLES(ADDON,Car
     size = 4;
     recoil = 100;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_IglaPod_CUP_igla_AA_pod_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -50,6 +55,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_IglaPod_CUP_igla_AA_pod_p3d : TRIPLE
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AA ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_FIM92Pod_CUP_FIM92_AA_Pod_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -59,6 +65,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_FIM92Pod_CUP_FIM92_AA_Pod_p3d : TRIP
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AA ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_M252_CUP_81Mortar_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -68,6 +75,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_M252_CUP_81Mortar_p3d : TRIPLES(ADDO
     size = 2;
     recoil = 2000;
     isWeapon = 1;
+    weaponType = TYPE_MORTAR ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_TOW_CUP_TOW_static_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -77,6 +85,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_TOW_CUP_TOW_static_p3d : TRIPLES(ADD
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AT ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_Kornet_CUP_Kornet_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -86,6 +95,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_Kornet_CUP_Kornet_p3d : TRIPLES(ADDO
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AT ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_Podnos_CUP_podnos_2b14_82mm_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -95,6 +105,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_Podnos_CUP_podnos_2b14_82mm_p3d : TR
     size = 2;
     recoil = 2000;
     isWeapon = 1;
+    weaponType = TYPE_MORTAR ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_M2_CUP_L111A1_mg_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -104,6 +115,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_M2_CUP_L111A1_mg_p3d : TRIPLES(ADDON
     size = 4;
     recoil = 100;
     isWeapon = 1;
+    weaponType = TYPE_MG ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_Metis_CUP_metis_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -113,6 +125,7 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_Metis_CUP_metis_p3d : TRIPLES(ADDON,
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AT ;
 };
 
 class CUP_Weapons_CUP_Weapons_StaticWeapons_RBS70_CUP_RBS70_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -122,4 +135,5 @@ class CUP_Weapons_CUP_Weapons_StaticWeapons_RBS70_CUP_RBS70_p3d : TRIPLES(ADDON,
     size = 4;
     recoil = 250;
     isWeapon = 1;
+    weaponType = TYPE_AT ;
 };
