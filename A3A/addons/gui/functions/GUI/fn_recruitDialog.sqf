@@ -89,42 +89,42 @@ switch (_mode) do
         private _hr = server getVariable "hr";
         if (_money < _militiamanPrice || _hr < 1) then {
             _militiamanButton ctrlEnable false;
-            _militiamanButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
+            _militiamanButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
             _militiamanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _autoriflemanPrice || _hr < 1) then {
             _autoriflemanButton ctrlEnable false;
-            _autoriflemanButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
+            _autoriflemanButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
             _autoriflemanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _grenadierPrice || _hr < 1) then {
             _grenadierButton ctrlEnable false;
-            _grenadierButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
+            _grenadierButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
             _grenadierIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _antitankPrice || _hr < 1) then {
             _antitankButton ctrlEnable false;
-            _antitankButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
+            _antitankButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
             _antitankIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _medicPrice || _hr < 1) then {
             _medicButton ctrlEnable false;
-            _medicButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
+            _medicButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
             _medicIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _marksmanPrice || _hr < 1) then {
             _marksmanButton ctrlEnable false;
-            _marksmanButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
+            _marksmanButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
             _marksmanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _engineerPrice || _hr < 1) then {
             _engineerButton ctrlEnable false;
-            _engineerButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
+            _engineerButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
             _engineerIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _bombSpecialistPrice || _hr < 1) then {
             _bombSpecialistButton ctrlEnable false;
-            _bombSpecialistButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
+            _bombSpecialistButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
             _bombSpecialistIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
 

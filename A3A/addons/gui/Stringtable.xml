@@ -966,6 +966,9 @@
         <Turkish>Savaş seviyesi:</Turkish>
         <Chinesesimp>战争等级：</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_train_tooltip">
+        <Original>This will cost %1</Original>
+      </Key>
     </Container>
     <Container name="dialog_hq_garrisons">
       <Key ID="STR_antistasi_dialogs_hq_garrisons_at">
@@ -3236,6 +3239,12 @@
         <Turkish>Görev İste</Turkish>
         <Chinesesimp>请求任务</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_mission_request_noCommander">
+        <Original>Only the Commander has access to this function.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_request_title">
+        <Original>Mission Request</Original>
+      </Key>
     </Container>
     <Container name="dialog_recruit_squad">
       <Key ID="STR_antistasi_dialogs_recruit_squad_aa_truck">
@@ -3378,6 +3387,9 @@
         <Turkish>BİRLİĞİ GÖREVE AL</Turkish>
         <Chinesesimp>招募小队</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_recruit_squad_error">
+        <Original>You do not have enough money or HR for this group type</Original>
+      </Key>
     </Container>
     <Container name="dialog_recruit_units">
       <Key ID="STR_antistasi_dialogs_recruit_units_antitank">
@@ -3498,6 +3510,9 @@
         <Portuguese>RECRUTAR UNIDADES</Portuguese>
         <Turkish>BİRİMLERİ GÖREVE AL</Turkish>
         <Chinesesimp>招募单位</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_units_error">
+        <Original>You do not have enough money or HR for this unit type</Original>
       </Key>
     </Container>
     <Container name="dialogs_generic">

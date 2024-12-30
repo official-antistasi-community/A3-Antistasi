@@ -161,48 +161,48 @@ switch (_mode) do
         private _hr = server getVariable "hr";
         if (_money < _infSquadMoney || _hr < _infSquadHr) then {
             _infSquadButton ctrlEnable false;
-            _infSquadButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
+            _infSquadButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _infSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         // TODO UI-update: reenable this when eng squad button is back in
         /* if (_money < _engSquadMoney || _hr < _engSquadHr) then {
             _engSquadButton ctrlEnable false;
-            _engSquadButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
+            _engSquadButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _engSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         }; */
         if (_money < _infTeamMoney || _hr < _infTeamHr) then {
             _infTeamButton ctrlEnable false;
-            _infTeamButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
+            _infTeamButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _infTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _mgTeamMoney || _hr < _mgTeamHr) then {
             _mgTeamButton ctrlEnable false;
-            _mgTeamButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
+            _mgTeamButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _mgTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _atTeamMoney || _hr < _atTeamHr) then {
             _atTeamButton ctrlEnable false;
-            _atTeamButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
+            _atTeamButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _atTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _mortarTeamMoney || _hr < _mortarTeamHr) then {
             _mortarTeamButton ctrlEnable false;
-            _mortarTeamButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
+            _mortarTeamButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _mortarTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _sniperTeamMoney || _hr < _sniperTeamHr) then {
             _sniperTeamButton ctrlEnable false;
-            _sniperTeamButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
+            _sniperTeamButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _sniperTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _atCarMoney || _hr < _atCarHr) then {
             _atCarButton ctrlEnable false;
-            _atCarButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
+            _atCarButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _atCarIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _aaTruckMoney || _hr < _aaTruckHr) then {
             _aaTruckButton ctrlEnable false;
-            _aaTruckButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
+            _aaTruckButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _aaTruckIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
     };
