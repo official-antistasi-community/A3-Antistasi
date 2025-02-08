@@ -7,8 +7,8 @@
 class A3A_MainDialog : A3A_TabbedDialog
 {
     idd = A3A_IDD_MAINDIALOG;
-    onLoad = "[""onLoad""] spawn A3A_fnc_mainDialog";
-    onUnload = "[""onUnload""] call A3A_fnc_mainDialog";
+    onLoad = "[""onLoad""] spawn A3A_GUI_fnc_mainDialog";
+    onUnload = "[""onUnload""] call A3A_GUI_fnc_mainDialog";
 
     class Controls
     {
@@ -36,7 +36,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_PLAYERTABBUTTON;
                     text = $STR_antistasi_dialogs_main_player_tab_button;
-                    onButtonClick = "[""switchTab"", [""player""]] call A3A_fnc_mainDialog;";
+                    onButtonClick = "[""switchTab"", [""player""]] call A3A_GUI_fnc_mainDialog;";
                     x = 0;
                     y = 0;
                     w = 30 * GRID_W;
@@ -47,7 +47,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_COMMANDERTABBUTTON;
                     text = $STR_antistasi_dialogs_main_commander_tab_button;
-                    onButtonClick = "[""switchTab"", [""commander""]] call A3A_fnc_mainDialog;";
+                    onButtonClick = "[""switchTab"", [""commander""]] call A3A_GUI_fnc_mainDialog;";
                     x = 30 * GRID_W;
                     y = 0;
                     w = 30 * GRID_W;
@@ -58,7 +58,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_ADMINTABBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_tab_button;
-                    onButtonClick = "[""switchTab"", [""admin""]] call A3A_fnc_mainDialog;";
+                    onButtonClick = "[""switchTab"", [""admin""]] call A3A_GUI_fnc_mainDialog;";
                     x = 60 * GRID_W;
                     y = 0;
                     w = 30 * GRID_W;
@@ -120,7 +120,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_FASTTRAVELBUTTON;
                     text = $STR_antistasi_dialogs_main_fast_travel;
                     tooltip = $STR_antistasi_dialogs_main_fast_travel_tooltip;
-                    onButtonClick = "[""setHcMode"", [false]] call A3A_fnc_fastTravelTab; [""switchTab"", [""fasttravel""]] call A3A_fnc_mainDialog";
+                    onButtonClick = "[""setHcMode"", [false]] call A3A_GUI_fnc_fastTravelTab; [""switchTab"", [""fasttravel""]] call A3A_GUI_fnc_mainDialog";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 20 * GRID_W;
                     y = 32 * GRID_H;
@@ -143,7 +143,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_CONSTRUCTBUTTON;
                     text = $STR_antistasi_dialogs_main_construct;
-                    onButtonClick = "[""switchTab"", [""construct""]] call A3A_fnc_mainDialog;";
+                    onButtonClick = "[""switchTab"", [""construct""]] call A3A_GUI_fnc_mainDialog;";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 20 * GRID_W;
                     y = 53 * GRID_H;
@@ -166,7 +166,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_AIMANAGEMENTBUTTON;
                     text = $STR_antistasi_dialogs_main_ai_management;
-                    onButtonClick = "[""switchTab"", [""aimanagement""]] call A3A_fnc_mainDialog;";
+                    onButtonClick = "[""switchTab"", [""aimanagement""]] call A3A_GUI_fnc_mainDialog;";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 20 * GRID_W;
                     y = 74 * GRID_H;
@@ -312,7 +312,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class CommanderButton : A3A_Button
                 {
                     idc = A3A_IDC_COMMANDERBUTTON;
-                    onButtonClick = "[player, cursorTarget] call A3A_fnc_theBossToggleEligibility; [""update""] call A3A_fnc_playerTab;";
+                    onButtonClick = "[player, cursorTarget] call A3A_fnc_theBossToggleEligibility; [""update""] call A3A_GUI_fnc_playerTab;";
                     x = 74 * GRID_W;
                     y = 34 * GRID_H;
                     w = 22 * GRID_W;
@@ -334,7 +334,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_DONATEBUTTON;
                     text = $STR_antistasi_dialogs_main_donate;
-                    onButtonClick = "[""switchTab"", [""donate""]] call A3A_fnc_mainDialog;";
+                    onButtonClick = "[""switchTab"", [""donate""]] call A3A_GUI_fnc_mainDialog;";
                     x = 130 * GRID_W;
                     y = 34 * GRID_H;
                     w = 22 * GRID_W;
@@ -355,6 +355,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class HideTopBarCheckBox :A3A_CheckBox
                 {
                     idc = A3A_IDC_HIDETOPBARCHECKBOX;
+                    onCheckedChanged = "params [""_control"", ""_checked""]; [""uiEvent_hideTopBarCheckBox_checked"", [_checked]] call A3A_GUI_fnc_mainDialog;";
                     x = 124 * GRID_W;
                     y = 47 * GRID_H;
                     w = 4 * GRID_W;
@@ -492,7 +493,7 @@ class A3A_MainDialog : A3A_TabbedDialog
         class CommanderMap : A3A_MapControl
         {
             idc = A3A_IDC_COMMANDERMAP;
-            onMouseButtonClick = "[""commanderMapClicked"", [[_this select 2, _this select 3]]] call A3A_fnc_commanderTab";
+            onMouseButtonClick = "[""commanderMapClicked"", [[_this select 2, _this select 3]]] call A3A_GUI_fnc_commanderTab";
             x = CENTER_X(DIALOG_W) + 68 * GRID_W;
             y = CENTER_Y(DIALOG_H) + 8 * GRID_H;
             w = 84 * GRID_W;
@@ -569,7 +570,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_HCGROUPNAME;
                             text = "";
-                            onButtonClick = "[""groupNameLabelClicked""] call A3A_fnc_commanderTab";
+                            onButtonClick = "[""groupNameLabelClicked""] call A3A_GUI_fnc_commanderTab";
                             x = 0;
                             y = 0;
                             w = 42 * GRID_W;
@@ -581,7 +582,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             idc = A3A_IDC_HCFASTTRAVELBUTTON;
                             textureNoShortcut = A3A_Icon_FastTravel;
                             tooltip = $STR_antistasi_dialogs_main_fast_travel;
-                            onButtonClick = "[""groupFastTravelButtonClicked""] call A3A_fnc_commanderTab";
+                            onButtonClick = "[""groupFastTravelButtonClicked""] call A3A_GUI_fnc_commanderTab";
                             x = 42 * GRID_W;
                             y = 0 * GRID_H;
                             w = 6 * GRID_W;
@@ -601,7 +602,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             idc = -1;
                             textureNoShortcut = A3A_Icon_Remotecontrol;
                             tooltip = $STR_antistasi_dialogs_main_remote_control_tooltip;
-                            onButtonClick = "[""groupRemoteControlButtonClicked""] call A3A_fnc_commanderTab";
+                            onButtonClick = "[""groupRemoteControlButtonClicked""] call A3A_GUI_fnc_commanderTab";
                             x = 48 * GRID_W;
                             y = 0 * GRID_H;
                             w = 6 * GRID_W;
@@ -704,7 +705,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_HCFIREMISSIONBUTTON;
                             text = $STR_antistasi_dialogs_main_hc_fire_mission_button;
-                            onButtonClick = "[""updateFireMissionView""] call A3A_fnc_commanderTab;";
+                            onButtonClick = "[""updateFireMissionView""] call A3A_GUI_fnc_commanderTab;";
                             x = 28 * GRID_W;
                             y = 30 * GRID_H;
                             w = 24 * GRID_W;
@@ -745,7 +746,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = -1;
                             text = $STR_antistasi_dialogs_main_hc_dismiss;
-                            onButtonClick = "[""groupDismissButtonClicked""] call A3A_fnc_commanderTab";
+                            onButtonClick = "[""groupDismissButtonClicked""] call A3A_GUI_fnc_commanderTab";
                             x = 28 * GRID_W;
                             y = 54 * GRID_H;
                             w = 24 * GRID_W;
@@ -771,7 +772,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = -1;
                             text = $STR_antistasi_dialogs_main_hc_fire_mission_label;
-                            onButtonClick = "[""update""] call A3A_fnc_commanderTab;";
+                            onButtonClick = "[""update""] call A3A_GUI_fnc_commanderTab;";
                             x = 0;
                             y = 0;
                             w = 54 * GRID_W;
@@ -869,7 +870,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     idc = A3A_IDC_HEBUTTON;
                                     text = $STR_antistasi_dialogs_main_hc_fire_mission_shell_type_he;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
-                                    onButtonClick = "[""fireMissionSelectionChanged"",[""he""]] call A3A_fnc_commanderTab;";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""he""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 20 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 15 * GRID_W;
@@ -886,7 +887,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     idc = A3A_IDC_SMOKEBUTTON;
                                     text = $STR_antistasi_dialogs_main_hc_fire_mission_shell_type_smoke;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
-                                    onButtonClick = "[""fireMissionSelectionChanged"",[""smoke""]] call A3A_fnc_commanderTab;";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""smoke""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 35 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 15 * GRID_W;
@@ -925,7 +926,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     idc = A3A_IDC_POINTSTRIKEBUTTON;
                                     text = $STR_antistasi_dialogs_main_hc_fire_mission_type_point;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
-                                    onButtonClick = "[""fireMissionSelectionChanged"",[""point""]] call A3A_fnc_commanderTab;";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""point""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 20 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 15 * GRID_W;
@@ -941,7 +942,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     idc = A3A_IDC_BARRAGEBUTTON;
                                     text = $STR_antistasi_dialogs_main_hc_fire_mission_type_barrage;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
-                                    onButtonClick = "[""fireMissionSelectionChanged"",[""barrage""]] call A3A_fnc_commanderTab;";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""barrage""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 35 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 15 * GRID_W;
@@ -994,7 +995,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                                 {
                                     idc = A3A_IDC_ADDROUNDSBUTTON;
                                     text = "+";
-                                    onButtonClick = "[""fireMissionSelectionChanged"",[""addround""]] call A3A_fnc_commanderTab;";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""addround""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 42 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 4 * GRID_W;
@@ -1005,7 +1006,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                                 {
                                     idc = A3A_IDC_SUBROUNDSBUTTON;
                                     text = "-";
-                                    onButtonClick = "[""fireMissionSelectionChanged"",[""subround""]] call A3A_fnc_commanderTab;";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""subround""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 46 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 4 * GRID_W;
@@ -1055,7 +1056,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     idc = -1;
                                     text = $STR_antistasi_dialogs_main_hc_fire_mission_set;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
-                                    onButtonClick = "[""fireMissionSelectionChanged"",[""setstart""]] call A3A_fnc_commanderTab;";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""setstart""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 42 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 8 * GRID_W;
@@ -1105,7 +1106,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     idc = -1;
                                     text = $STR_antistasi_dialogs_main_hc_fire_mission_set;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
-                                    onButtonClick = "[""fireMissionSelectionChanged"",[""setend""]] call A3A_fnc_commanderTab;";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""setend""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 42 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 8 * GRID_W;
@@ -1118,7 +1119,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_FIREBUTTON;
                             text = $STR_antistasi_dialogs_main_hc_fire_mission_fire_button;
-                            onbuttonClick = "[""fireMissionButtonClicked""] call A3A_fnc_commanderTab";
+                            onbuttonClick = "[""fireMissionButtonClicked""] call A3A_GUI_fnc_commanderTab";
                             x = 17 * GRID_W;
                             y = 56 * GRID_H;
                             w = 20 * GRID_W;
@@ -1181,7 +1182,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_AIRSUPPORTBUTTON;
                     text = $STR_antistasi_dialogs_main_air_support_button;
-                    onButtonClick = "[""switchTab"", [""airsupport""]] call A3A_fnc_mainDialog;";
+                    onButtonClick = "[""switchTab"", [""airsupport""]] call A3A_GUI_fnc_mainDialog;";
                     x = 10 * GRID_W;
                     y = 80 * GRID_H;
                     w = 24 * GRID_W;
@@ -1192,7 +1193,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_GARBAGECLEANBUTTON;
                     text = $STR_antistasi_dialogs_main_garbage_clean_button;
-                    onButtonclick = "[""showGarbageCleanOptions""] call A3A_fnc_commanderTab";
+                    onButtonclick = "[""showGarbageCleanOptions""] call A3A_GUI_fnc_commanderTab";
                     x = 36 * GRID_W;
                     y = 80 * GRID_H;
                     w = 24 * GRID_W;
@@ -1213,7 +1214,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = -1;
                             text = $STR_antistasi_dialogs_main_garbage_clean_all;
-                            onButtonClick = "[""garbageCleanMapButtonClicked""] call A3A_fnc_commanderTab";
+                            onButtonClick = "[""garbageCleanMapButtonClicked""] call A3A_GUI_fnc_commanderTab";
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
                             w = 24 * GRID_W;
@@ -1224,7 +1225,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = -1;
                             text = $STR_antistasi_dialogs_main_garbage_clean_hq;
-                            onButtonClick = "[""garbageCleanHqButtonClicked""] call A3A_fnc_commanderTab";
+                            onButtonClick = "[""garbageCleanHqButtonClicked""] call A3A_GUI_fnc_commanderTab";
                             x = 26 * GRID_W;
                             y = 0 * GRID_H;
                             w = 24 * GRID_W;
@@ -1268,7 +1269,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_PLAYERMANAGEMENTBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_player_management_button;
-                    onButtonClick = "[""switchTab"", [""playermanagement""]] call A3A_fnc_mainDialog;";
+                    onButtonClick = "[""switchTab"", [""playermanagement""]] call A3A_GUI_fnc_mainDialog;";
                     x = 8 * GRID_W;
                     y = 64 * GRID_H;
                     w = 48 * GRID_W;
@@ -1331,7 +1332,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     y = 16 * GRID_H;
                     w = 40 * GRID_W;
                     h = 4 * GRID_H;
-                    onSliderPosChanged = "[""civLimitSliderChanged""] spawn A3A_fnc_adminTab";
+                    onSliderPosChanged = "[""civLimitSliderChanged""] spawn A3A_GUI_fnc_adminTab";
                 };
 
                 class CivLimitEditBox : A3A_Edit
@@ -1344,7 +1345,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     y = 16 * GRID_H;
                     w = 12 * GRID_W;
                     h = 4 * GRID_H;
-                    onChar = "[""civLimitEditBoxChanged""] spawn A3A_fnc_adminTab";
+                    onChar = "[""civLimitEditBoxChanged""] spawn A3A_GUI_fnc_adminTab";
                 };
 
                 class SpawnDistanceLabel : A3A_Text
@@ -1365,7 +1366,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     y = 22 * GRID_H;
                     w = 40 * GRID_W;
                     h = 4 * GRID_H;
-                    onSliderPosChanged = "[""spawnDistanceSliderChanged""] spawn A3A_fnc_adminTab";
+                    onSliderPosChanged = "[""spawnDistanceSliderChanged""] spawn A3A_GUI_fnc_adminTab";
                 };
 
                 class SpawnDistanceEditBox : A3A_Edit
@@ -1378,81 +1379,81 @@ class A3A_MainDialog : A3A_TabbedDialog
                     y = 22 * GRID_H;
                     w = 12 * GRID_W;
                     h = 4 * GRID_H;
-                    onChar = "[""spawnDistanceEditBoxChanged""] spawn A3A_fnc_adminTab";
+                    onChar = "[""spawnDistanceEditBoxChanged""] spawn A3A_GUI_fnc_adminTab";
                 };
 
-                class AiLimiterLabel : A3A_Text
-                {
-                    idc = -1;
-                    text = $STR_antistasi_dialogs_main_admin_ai_limiter_label;
-                    sizeEx = GUI_TEXT_SIZE_MEDIUM;
-                    x = 74 * GRID_W;
-                    y = 28 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 4 * GRID_H;
-                };
+                // class AiLimiterLabel : A3A_Text
+                // {
+                //     idc = -1;
+                //     text = $STR_antistasi_dialogs_main_admin_ai_limiter_label;
+                //     sizeEx = GUI_TEXT_SIZE_MEDIUM;
+                //     x = 74 * GRID_W;
+                //     y = 28 * GRID_H;
+                //     w = 24 * GRID_W;
+                //     h = 4 * GRID_H;
+                // };
 
-                class AiLimiterSlider : A3A_Slider
-                {
-                    idc = A3A_IDC_AILIMITERSLIDER;
-                    x = 98 * GRID_W;
-                    y = 28 * GRID_H;
-                    w = 40 * GRID_W;
-                    h = 4 * GRID_H;
-                    onSliderPosChanged = "[""aiLimiterSliderChanged""] spawn A3A_fnc_adminTab";
-                };
+                // class AiLimiterSlider : A3A_Slider
+                // {
+                //     idc = A3A_IDC_AILIMITERSLIDER;
+                //     x = 98 * GRID_W;
+                //     y = 28 * GRID_H;
+                //     w = 40 * GRID_W;
+                //     h = 4 * GRID_H;
+                //     onSliderPosChanged = "[""aiLimiterSliderChanged""] spawn A3A_GUI_fnc_adminTab";
+                // };
 
-                class AiLimiterEditBox : A3A_Edit
-                {
-                    idc = A3A_IDC_AILIMITEREDITBOX;
-                    style = ST_RIGHT;
-                    text = "0";
-                    sizeEx = GUI_TEXT_SIZE_MEDIUM;
-                    x = 140 * GRID_W;
-                    y = 28 * GRID_H;
-                    w = 12 * GRID_W;
-                    h = 4 * GRID_H;
-                    onChar = "[""aiLimiterEditBoxChanged""] spawn A3A_fnc_adminTab";
-                };
+                // class AiLimiterEditBox : A3A_Edit
+                // {
+                //     idc = A3A_IDC_AILIMITEREDITBOX;
+                //     style = ST_RIGHT;
+                //     text = "0";
+                //     sizeEx = GUI_TEXT_SIZE_MEDIUM;
+                //     x = 140 * GRID_W;
+                //     y = 28 * GRID_H;
+                //     w = 12 * GRID_W;
+                //     h = 4 * GRID_H;
+                //     onChar = "[""aiLimiterEditBoxChanged""] spawn A3A_GUI_fnc_adminTab";
+                // };
 
-                class AiSectionWarningBackground : A3A_Background
-                {
-                    idc = -1;
-                    colorBackground[] = {0,0,0,0.6};
-                    x = 75 * GRID_W;
-                    y = 37 * GRID_H;
-                    w = 52 * GRID_W;
-                    h = 10 * GRID_H;
-                };
+                // class AiSectionWarningBackground : A3A_Background
+                // {
+                //     idc = -1;
+                //     colorBackground[] = {0,0,0,0.6};
+                //     x = 75 * GRID_W;
+                //     y = 37 * GRID_H;
+                //     w = 52 * GRID_W;
+                //     h = 10 * GRID_H;
+                // };
 
-                class AiSectionWarningIcon : A3A_Picture
-                {
-                    idc = -1;
-                    text = A3A_Icon_Warning;
-                    colorText[] = A3A_COLOR_ERROR;
-                    x = 76 * GRID_W;
-                    y = 38 * GRID_H;
-                    w = 8 * GRID_W;
-                    h = 8 * GRID_H;
-                };
+                // class AiSectionWarningIcon : A3A_Picture
+                // {
+                //     idc = -1;
+                //     text = A3A_Icon_Warning;
+                //     colorText[] = A3A_COLOR_ERROR;
+                //     x = 76 * GRID_W;
+                //     y = 38 * GRID_H;
+                //     w = 8 * GRID_W;
+                //     h = 8 * GRID_H;
+                // };
 
-                class AiSectionWarning : A3A_TextMulti
-                {
-                    idc = -1;
-                    text = $STR_antistasi_dialogs_main_admin_ai_section_warning;
-                    sizeEx = GUI_TEXT_SIZE_SMALL;
-                    font = "PuristaLight";
-                    x = 85 * GRID_W;
-                    y = 37 * GRID_H;
-                    w = 42 * GRID_W;
-                    h = 10 * GRID_H;
-                };
+                // class AiSectionWarning : A3A_TextMulti
+                // {
+                //     idc = -1;
+                //     text = $STR_antistasi_dialogs_main_admin_ai_section_warning;
+                //     sizeEx = GUI_TEXT_SIZE_SMALL;
+                //     font = "PuristaLight";
+                //     x = 85 * GRID_W;
+                //     y = 37 * GRID_H;
+                //     w = 42 * GRID_W;
+                //     h = 10 * GRID_H;
+                // };
 
                 class CommitAiButton : A3A_Button
                 {
                     idc = A3A_IDC_COMMITAIBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_ai_commit_button;
-                    onButtonClick = "[""confirmAILimit""] call A3A_fnc_adminTab;"; // TODO UI-update: Placeholder
+                    onButtonClick = "[""confirmAILimit""] call A3A_GUI_fnc_adminTab;"; // TODO UI-update: Placeholder
                     x = 132 * GRID_W;
                     y = 36 * GRID_H;
                     w = 20 * GRID_W;
@@ -1481,7 +1482,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_tp_petros_button;
-                    onButtonClick = "petros setPos (player modelToWorld [0,2,0]);";
+                    onButtonClick = "[""tpPetrosToAdmin""] call A3A_GUI_fnc_adminTab;";
+                    //tooltip = $STR_antistasi_dialogs_main_fast_travel_tooltip;
                     x = 74 * GRID_W;
                     y = 64 * GRID_H;
                     w = 16 * GRID_H;
@@ -1492,7 +1494,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_tp_arsenal_box_button;
-                    onButtonClick = "boxX setPos (player modelToWorld [0,2,0]);";
+                    onButtonClick = "[""tpArsenalToAdmin""] call A3A_GUI_fnc_adminTab;";
                     x = 103 * GRID_W;
                     y = 64 * GRID_H;
                     w = 16 * GRID_H;
@@ -1503,7 +1505,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_tp_vehicle_box_button;
-                    onButtonClick = "vehicleBox setPos (player modelToWorld [0,2,0]);";
+                    onButtonClick = "[""tpVehicleToAdmin""] call A3A_GUI_fnc_adminTab;";
                     x = 132 * GRID_W;
                     y = 64 * GRID_H;
                     w = 16 * GRID_H;
@@ -1514,7 +1516,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_tp_flag_button;
-                    onButtonClick = "flagX setPos (player modelToWorld [0,2,0]);";
+                    onButtonClick = "[""tpFlagToAdmin""] call A3A_GUI_fnc_adminTab;";
                     x = 74 * GRID_W;
                     y = 80 * GRID_H;
                     w = 16 * GRID_H;
@@ -1525,7 +1527,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_tp_tent_button;
-                    onButtonClick = "fireX setPos (player modelToWorld [0,2,0]);";
+                    onButtonClick = "[""tpTentToAdmin""] call A3A_GUI_fnc_adminTab;";
                     x = 103 * GRID_W;
                     y = 80 * GRID_H;
                     w = 16 * GRID_H;
@@ -1536,7 +1538,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_tp_map_button;
-                    onButtonClick = "mapX setPos (player modelToWorld [0,2,0]);";
+                    onButtonClick = "[""tpMapBoardToAdmin""] call A3A_GUI_fnc_adminTab;";
                     x = 132 * GRID_W;
                     y = 80 * GRID_H;
                     w = 16 * GRID_H;
@@ -1553,7 +1555,7 @@ class A3A_MainDialog : A3A_TabbedDialog
         class FastTravelMap : A3A_MapControl
         {
             idc = A3A_IDC_FASTTRAVELMAP;
-            onMouseButtonClick = "[""mapClicked"", [[_this select 2, _this select 3]]] call A3A_fnc_fastTravelTab";
+            onMouseButtonClick = "[""mapClicked"", [[_this select 2, _this select 3]]] call A3A_GUI_fnc_fastTravelTab";
             x = CENTER_X(DIALOG_W) + 48 * GRID_W;
             y = CENTER_Y(DIALOG_H) + 8 * GRID_H;
             w = 104 * GRID_W;
@@ -1627,7 +1629,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     idc = A3A_IDC_FASTTRAVELCOMMITBUTTON;
                     text = $STR_antistasi_dialogs_main_fast_travel;
                     // tooltip = $STR_antistasi_dialogs_main_fast_travel_tooltip;
-                    onButtonClick = "[""commitButtonClicked""] call A3A_fnc_fastTravelTab;";
+                    onButtonClick = "[""commitButtonClicked""] call A3A_GUI_fnc_fastTravelTab;";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 8 * GRID_W;
                     y = 80 * GRID_H;
@@ -1679,7 +1681,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     sizeEx = GUI_TEXT_SIZE_SMALL;
                     text = $STR_antistasi_dialogs_main_ai_management_clear_button;
                     tooltip = $STR_antistasi_dialogs_main_ai_management_clear_tooltip;
-                    onButtonClick = "[""clearAIListboxSelection""] call A3A_fnc_aiManagementTab;";
+                    onButtonClick = "[""clearAIListboxSelection""] call A3A_GUI_fnc_aiManagementTab;";
                     x = 83 * GRID_W;
                     y = 14 * GRID_H;
                     w = 10 * GRID_W;
@@ -1689,7 +1691,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class AIListBox : A3A_ListBoxMulti
                 {
                     idc = A3A_IDC_AILISTBOX;
-                    onLBSelChanged = "[""aiListBoxSelectionChanged""] spawn A3A_fnc_aiManagementTab";
+                    onLBSelChanged = "[""aiListBoxSelectionChanged""] spawn A3A_GUI_fnc_aiManagementTab";
                     x = 15 * GRID_W;
                     y = 18 * GRID_H;
                     w = 78 * GRID_W;
@@ -1710,7 +1712,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_AICONTROLBUTTON;
                             text = $STR_antistasi_dialogs_main_ai_management_temp_ai_control_button;
-                            onButtonClick = "[""aiControlButtonClicked""] call A3A_fnc_aiManagementTab";
+                            onButtonClick = "[""aiControlButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
                             w = 32 * GRID_W;
@@ -1731,7 +1733,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_AIDISMISSBUTTON;
                             text = $STR_antistasi_dialogs_main_ai_management_dismiss_button;
-                            onButtonClick = "[""dismissButtonClicked""] call A3A_fnc_aiManagementTab";
+                            onButtonClick = "[""dismissButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
                             y = 20 * GRID_H;
                             w = 32 * GRID_W;
@@ -1752,7 +1754,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_AIAUTOLOOTBUTTON;
                             text = $STR_antistasi_dialogs_main_ai_management_auto_rearm_button;
-                            onButtonClick = "[""autoLootButtonClicked""] call A3A_fnc_aiManagementTab";
+                            onButtonClick = "[""autoLootButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
                             y = 40 * GRID_H;
                             w = 32 * GRID_W;
@@ -1773,7 +1775,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_AIAUTOHEALBUTTON;
                             text = $STR_antistasi_dialogs_main_ai_management_auto_heal_button;
-                            onButtonClick = "[""autoHealButtonClicked""] call A3A_fnc_aiManagementTab";
+                            onButtonClick = "[""autoHealButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
                             y = 60 * GRID_H;
                             w = 32 * GRID_W;
@@ -1858,7 +1860,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     y = 40 * GRID_H;
                     w = 16 * GRID_W;
                     h = 6 * GRID_H;
-                    onChar = "[""moneyEditBoxChanged""] spawn A3A_fnc_donateTab";
+                    onChar = "[""moneyEditBoxChanged""] spawn A3A_GUI_fnc_donateTab";
                 };
 
                 class EuroLabel : A3A_Text
@@ -1877,7 +1879,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     textureNoShortcut = A3A_ArrowEmpty_3L;
-                    onButtonClick = "[""donationAdd"", [-1000]] spawn A3A_fnc_donateTab";
+                    onButtonClick = "[""donationAdd"", [-1000]] spawn A3A_GUI_fnc_donateTab";
                     x = 74 * GRID_W;
                     y = 53 * GRID_H;
                     w = 6 * GRID_W;
@@ -1896,7 +1898,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     textureNoShortcut = A3A_ArrowEmpty_2L;
-                    onButtonClick = "[""donationAdd"", [-100]] spawn A3A_fnc_donateTab";
+                    onButtonClick = "[""donationAdd"", [-100]] spawn A3A_GUI_fnc_donateTab";
                     x = 81 * GRID_W;
                     y = 53 * GRID_H;
                     w = 6 * GRID_W;
@@ -1921,14 +1923,14 @@ class A3A_MainDialog : A3A_TabbedDialog
                     y = 53 * GRID_H;
                     w = 50 * GRID_W;
                     h = 6 * GRID_H;
-                    onSliderPosChanged = "[""moneySliderChanged""] spawn A3A_fnc_donateTab";
+                    onSliderPosChanged = "[""moneySliderChanged""] spawn A3A_GUI_fnc_donateTab";
                 };
 
                 class Add100Button : A3A_ShortcutButton
                 {
                     idc = -1;
                     textureNoShortcut = A3A_ArrowEmpty_2R;
-                    onButtonClick = "[""donationAdd"", [100]] spawn A3A_fnc_donateTab";
+                    onButtonClick = "[""donationAdd"", [100]] spawn A3A_GUI_fnc_donateTab";
                     x = 139 * GRID_W;
                     y = 53 * GRID_H;
                     w = 6 * GRID_W;
@@ -1947,7 +1949,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     textureNoShortcut = A3A_ArrowEmpty_3R;
-                    onButtonClick = "[""donationAdd"", [1000]] spawn A3A_fnc_donateTab";
+                    onButtonClick = "[""donationAdd"", [1000]] spawn A3A_GUI_fnc_donateTab";
                     x = 146 * GRID_W;
                     y = 53 * GRID_H;
                     w = 6 * GRID_W;
@@ -1966,7 +1968,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_DONATEPLAYERBUTTON;
                     text = $STR_antistasi_dialogs_main_donate_player;
-                    onButtonClick = "hint ""Placeholder\nWill use A3A_fnc_donateMoney when merged"""; // TODO UI-update: Replace placeholder when merging
+                    onButtonClick = "[""donatePlayerConfirmed""] spawn A3A_GUI_fnc_donateTab";
                     x = 74 * GRID_W;
                     y = 63 * GRID_H;
                     w = 36 * GRID_W;
@@ -1977,7 +1979,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_DONATEFACTIONBUTTON;
                     text = $STR_antistasi_dialogs_main_donate_faction;
-                    onButtonClick = "hint ""Placeholder\nWill use A3A_fnc_donateMoney when merged"""; // TODO UI-update: Replace placeholder when merging
+                    onButtonClick = "[""donateFactionConfirmed""] spawn A3A_GUI_fnc_donateTab";
                     x = 116 * GRID_W;
                     y = 63 * GRID_H;
                     w = 36 * GRID_W;
@@ -2178,7 +2180,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     y = 12 * GRID_H;
                     w = 106 * GRID_W;
                     h = 82 * GRID_H;
-                    onLBSelChanged = "[""playerLbSelectionChanged""] spawn A3A_fnc_playerManagementTab";
+                    onLBSelChanged = "[""playerLbSelectionChanged""] spawn A3A_GUI_fnc_playerManagementTab";
 
                     sizeEx = GUI_TEXT_SIZE_MEDIUM;
                     rowHeight = 4 * GRID_H;
@@ -2189,7 +2191,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_ADDMEMBERBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_add_member_button;
-                    onButtonClick = "[""adminAddMember""] call A3A_fnc_playerManagementTab";
+                    onButtonClick = "[""adminAddMember""] call A3A_GUI_fnc_playerManagementTab";
                     show = false;
                     x = 120 * GRID_W;
                     y = 7 * GRID_H;
@@ -2201,7 +2203,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_REMOVEMEMBERBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_remove_member_button;
-                    onButtonClick = "[""adminRemoveMember""] call A3A_fnc_playerManagementTab";
+                    onButtonClick = "[""adminRemoveMember""] call A3A_GUI_fnc_playerManagementTab";
                     show = false;
                     x = 120 * GRID_W;
                     y = 7 * GRID_H;

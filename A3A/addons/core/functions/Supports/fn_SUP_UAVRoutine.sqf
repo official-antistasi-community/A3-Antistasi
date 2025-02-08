@@ -27,6 +27,7 @@ private _uav = createVehicle [_planeType, _spawnPos, [], 0, "FLY"];
 [_side, _uav] call A3A_fnc_createVehicleCrew;
 _groupVeh = group driver _uav;
 { [_x, nil, false, _resPool] call A3A_fnc_NATOinit } forEach (crew _uav);           // arguable
+[-10 * count units _groupVeh, _side, _resPool] call A3A_fnc_addEnemyResources;
 [_uav, _side, _resPool] call A3A_fnc_AIVEHinit;
 
 _wp = _groupVeh addWayPoint [_suppCenter, 0];

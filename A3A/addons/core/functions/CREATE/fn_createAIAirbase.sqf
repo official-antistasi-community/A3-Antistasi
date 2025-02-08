@@ -253,12 +253,16 @@ private _ammoBox = if (garrison getVariable [_markerX + "_lootCD", 0] == 0) then
 	// Otherwise when destroyed, ammoboxes sink 100m underground and are never cleared up
 	_ammoBox addEventHandler ["Killed", { [_this#0] spawn { sleep 10; deleteVehicle (_this#0) } }];
 	[_ammoBox] spawn A3A_fnc_fillLootCrate;
-	[_ammoBox] call A3A_Logistics_fnc_addLoadAction;
+	[_ammoBox, nil, true] call A3A_Logistics_fnc_addLoadAction;
 
 	[_ammoBox] spawn {
 		sleep 1;    //make sure fillLootCrate finished clearing the crate
 		{
-			_this#0 addItemCargoGlobal [_x, round random [5,15,15]];
+			if (getText(configFile >> "CfgVehicles" >> _x >> "vehicleClass") isEqualTo "Backpacks") then {
+				_this#0 addBackpackCargoGlobal [_x, round random [5,15,15]];
+			} else {
+				_this#0 addItemCargoGlobal [_x, round random [5,15,15]];
+			};
 		} forEach (A3A_faction_reb get "flyGear");
 	};
 	_ammoBox;
@@ -267,7 +271,13 @@ private _ammoBox = if (garrison getVariable [_markerX + "_lootCD", 0] == 0) then
 
 if (!_busy) then
 {
-	private _vehTypesHeavy = (_faction get "vehiclesLightAPCs") + (_faction get "vehiclesAPCs") + (_faction get "vehiclesIFVs") + (_faction get "vehiclesLightTanks") + (_faction get "vehiclesTanks");
+	private _vehTypesHeavy = 
+        (_faction get "vehiclesLightAPCs") + 
+        (_faction get "vehiclesAPCs") + 
+        (_faction get "vehiclesIFVs") + 
+        (_faction get "vehiclesLightTanks") + 
+        (_faction get "vehiclesTanks") + 
+        (_faction get "vehiclesHeavyTanks");
 	for "_i" from 1 to (round (random 2)) do
 	{
 		_spawnParameter = [_markerX, "Vehicle"] call A3A_fnc_findSpawnPosition;
@@ -286,7 +296,14 @@ if (!_busy) then
 	};
 };
 
-private _vehTypesLight = (_faction get "vehiclesLightArmed") + (_faction get "vehiclesLightUnarmed") + (_faction get "vehiclesTrucks") + (_faction get "vehiclesAmmoTrucks") + (_faction get "vehiclesRepairTrucks") + (_faction get "vehiclesFuelTrucks") + (_faction get "vehiclesMedical");
+private _vehTypesLight = 
+    (_faction get "vehiclesLightArmed") + 
+    (_faction get "vehiclesLightUnarmed") + 
+    (_faction get "vehiclesTrucks") + 
+    (_faction get "vehiclesAmmoTrucks") + 
+    (_faction get "vehiclesRepairTrucks") + 
+    (_faction get "vehiclesFuelTrucks") + 
+    (_faction get "vehiclesMedical");
 _countX = 0;
 
 while {_countX < _nVeh && {_countX < 3}} do

@@ -12,7 +12,8 @@ removeGoggles petros;
 private _vest = selectRandomWeighted (A3A_rebelGear get "ArmoredVests");
 if (_vest == "") then { _vest = selectRandomWeighted (A3A_rebelGear get "CivilianVests") };
 petros addVest _vest;
-[petros, "Rifles"] call A3A_fnc_randomRifle;
+private _weapon = ["Rifles"] call A3A_fnc_randomRifle;
+[petros, _weapon, "OpticsMid", 50] call A3A_fnc_addPrimaryAndMags;
 petros selectWeapon (primaryWeapon petros);
 
 if (petros == leader group petros) then {

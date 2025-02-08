@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles the initialization and updating of the HQ Dialog
     This function should only be called from HqDialog onLoad and control activation EHs.
 
@@ -17,8 +17,11 @@ Dependencies:
     None
 
 Example:
-    ["onLoad"] spawn A3A_fnc_hqDialog; // initialization
-    ["switchTab", ["garrison"]] call A3A_fnc_hqDialog; // switching to the garrison tab
+    ["onLoad"] spawn FUNC(hqDialog); // initialization
+    ["switchTab", ["garrison"]] call FUNC(hqDialog); // switching to the garrison tab
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -44,7 +47,7 @@ switch (_mode) do
         setGroupIconsSelectable false;
 
         // Show main tab content
-        ["switchTab", ["main"]] call A3A_fnc_hqDialog;
+        ["switchTab", ["main"]] call FUNC(hqDialog);
 
         // Move HQ button
         // TODO UI-update: Move to updateMainTab?
@@ -52,16 +55,16 @@ switch (_mode) do
         private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
         private _moveHqButton = _display displayCtrl A3A_IDC_MOVEHQBUTTON;
 
-        private _canMoveHQ = [] call A3A_fnc_canMoveHQ;
+        private _canMoveHQ = [] call FUNCMAIN(canMoveHQ);
         if (_canMoveHQ # 0) then {
             _moveHqButton ctrlEnable true;
             _moveHqButton ctrlSetTooltip "";
-            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call A3A_fnc_configColorToArray);
+            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
             _moveHqIcon ctrlSetTooltip "";
         } else {
             _moveHqButton ctrlEnable false;
             _moveHqButton ctrlSetTooltip _canMoveHQ # 1;
-            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
             _moveHqIcon ctrlSetTooltip _canMoveHQ # 1;
         };
 
@@ -77,13 +80,13 @@ switch (_mode) do
         _restSlider sliderSetRange [0,24];
         _restSlider sliderSetSpeed [1,1];
         _restSlider sliderSetPosition 0;
-        ["restSliderChanged"] spawn A3A_fnc_hqDialog;
+        ["restSliderChanged"] spawn FUNC(hqDialog);
 
         // Garrison tab map drawing EHs
         // Select marker
-        _garrisonMap ctrlAddEventHandler ["Draw", "_this call A3A_fnc_mapDrawSelectEH"];
+        _garrisonMap ctrlAddEventHandler ["Draw", "_this call A3A_GUI_fnc_mapDrawSelectEH"];
         // Outposts
-        _garrisonMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawOutpostsEH"];
+        _garrisonMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
 
         Debug("HqDialog onLoad complete.");
     };
@@ -163,17 +166,17 @@ switch (_mode) do
         {
             case ("main"):
             {
-                ["updateMainTab"] call A3A_fnc_hqDialog;
+                ["updateMainTab"] call FUNC(hqDialog);
             };
 
             case ("garrison"):
             {
-                ["updateGarrisonTab"] call A3A_fnc_hqDialog;
+                ["updateGarrisonTab"] call FUNC(hqDialog);
             };
 
             case ("minefields"):
             {
-                ["updateMinefieldsTab"] call A3A_fnc_hqDialog;
+                ["updateMinefieldsTab"] call FUNC(hqDialog);
             };
         };
     };
@@ -194,15 +197,17 @@ switch (_mode) do
         private _invadersFlag = _display displayCtrl A3A_IDC_INVFLAGPICTURE;
         private _invadersAggroText = _display displayCtrl A3A_IDC_INVAGGROTEXT;
         _warLevelText ctrlSetText str tierWar;
-        _occupantsFlag ctrlSetText NATOFlagTexture;
-        _occupantsAggroText ctrlSetText ([aggressionLevelOccupants] call A3A_fnc_getAggroLevelString);
+        _occupantsFlag ctrlSetText (A3A_faction_occ get "flagTexture");
+        _occupantsAggroText ctrlSetText ([aggressionLevelOccupants] call FUNCMAIN(getAggroLevelString));
         _aggressionStr = localize "STR_antistasi_dialogs_generic_aggression";
-        _occupantsFlag ctrlSetToolTip (nameOccupants + " " + _aggressionStr);
-        _occupantsAggroText ctrlSetTooltip (nameOccupants + " " + _aggressionStr);
-        _invadersFlag ctrlSetText CSATFlagTexture;
-        _invadersAggroText ctrlSetText ([aggressionLevelInvaders] call A3A_fnc_getAggroLevelString);
-        _invadersFlag ctrlSetToolTip (nameInvaders + " " + _aggressionStr);
-        _invadersAggroText ctrlSetTooltip (nameInvaders + " " + _aggressionStr);
+        private _nameOccupants = A3A_faction_occ get "name";
+        _occupantsFlag ctrlSetToolTip (_nameOccupants + " " + _aggressionStr);
+        _occupantsAggroText ctrlSetTooltip (_nameOccupants + " " + _aggressionStr);
+        _invadersFlag ctrlSetText (A3A_faction_inv get "flagTexture");
+        _invadersAggroText ctrlSetText ([aggressionLevelInvaders] call FUNCMAIN(getAggroLevelString));
+        private _nameInvaders = A3A_faction_inv get "name";
+        _invadersFlag ctrlSetToolTip (_nameInvaders + " " + _aggressionStr);
+        _invadersAggroText ctrlSetTooltip (_nameInvaders + " " + _aggressionStr);
 
         // Get location data
         private _controlledCities = {sidesX getVariable [_x, sideUnknown] == teamPlayer} count citiesX;
@@ -315,7 +320,7 @@ switch (_mode) do
         private _backButton = _display displayCtrl A3A_IDC_HQDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["main"]] call A3A_fnc_hqDialog;
+            ["switchTab", ["main"]] call FUNC(hqDialog);
         }];
         _backButton ctrlShow true;
 
@@ -331,12 +336,12 @@ switch (_mode) do
         {
             Trace("No marker selected, selecting HQ");
             _hqMapPos = _garrisonMap ctrlMapWorldToScreen (getMarkerPos "Synd_HQ");
-            ["garrisonMapClicked", [_hqMapPos]] call A3A_fnc_hqDialog;
+            ["garrisonMapClicked", [_hqMapPos]] call FUNC(hqDialog);
         };
 
         // Get the data from the marker
         private _position = getMarkerPos _selectedMarker;
-        private _garrisonName = [_selectedMarker] call A3A_fnc_getLocationMarkerName;
+        private _garrisonName = "Outpost";//[_selectedMarker] call A3A_fnc_getLocationMarkerName;  // ToDo define
         private _garrison = garrison getVariable [_selectedMarker, []];
 
         // Get garrison counts
@@ -438,7 +443,7 @@ switch (_mode) do
         _autoriflemanPrice = server getVariable (SDKMG # 0);
         _grenadierPrice = server getVariable (SDKGL # 0);
         _medicPrice = server getVariable (SDKMedic # 0);
-        _mortarPrice = (server getVariable staticCrewTeamPlayer) + ([SDKMortar] call A3A_fnc_vehiclePrice);
+        _mortarPrice = (server getVariable staticCrewTeamPlayer) + ([SDKMortar] call FUNCMAIN(vehiclePrice));
         _marksmanPrice = server getVariable (SDKSniper # 0);
         _atPrice = server getVariable (SDKATman # 0);
 
@@ -508,7 +513,7 @@ switch (_mode) do
         private _backButton = _display displayCtrl A3A_IDC_HQDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["main"]] call A3A_fnc_hqDialog;
+            ["switchTab", ["main"]] call FUNC(hqDialog);
         }];
         _backButton ctrlShow true;
     };
@@ -517,11 +522,11 @@ switch (_mode) do
     {
         private _restSlider = _display displayCtrl A3A_IDC_RESTSLIDER;
         private _restText = _display displayCtrl A3A_IDC_RESTTEXT;
-        private _time = sliderPosition _restSlider;
-        private _restTimeString = [_time, "HM", true] call A3A_fnc_formatTime;
-        private _postRestTime = daytime + _time;
-        if (_postRestTime > 24) then {_postRestTime = _postRestTime - 24};
-        private _postRestTimeString = [_postRestTime, "HH:MM"] call BIS_fnc_timeToString;
+        private _timeHours = sliderPosition _restSlider;
+        private _restTimeString = [_timeHours * 60 * 60,1,1,false,2,false,true] call FUNCMAIN(timeSpan_format);
+
+        private _postRestTime = (daytime + _timeHours) * 60 * 60;
+        private _postRestTimeString = [_postRestTime,2,2,false,[1,3],true,false] call FUNCMAIN(timeSpan_format);
         private _message = format [localize "STR_antistasi_dialogs_hq_rest_text" + "<br />" + localize "STR_antistasi_dialogs_hq_wakeup_text", _restTimeString, _postRestTimeString];
         _restText ctrlSetStructuredText parseText _message;
     };
@@ -550,8 +555,8 @@ switch (_mode) do
     {
         private _factionMoneyEditBox = _display displayCtrl A3A_IDC_FACTIONMONEYEDITBOX;
         private _factionMoneyEditBoxValue = floor parseNumber ctrlText _factionMoneyEditBox;
-        [_factionMoneyEditBoxValue] call A3A_fnc_theBossSteal;
-        ["updateMainTab"] call A3A_fnc_hqDialog;
+        [_factionMoneyEditBoxValue] call FUNCMAIN(theBossSteal);
+        ["updateMainTab"] call FUNC(hqDialog);
     };
 
     case ("garrisonMapClicked"):
@@ -577,7 +582,7 @@ switch (_mode) do
         private _position = getMarkerPos _selectedMarker;
         _garrisonMap setVariable ["selectMarkerData", [_position]];
 
-        ["updateGarrisonTab"] call A3A_fnc_hqDialog;
+        ["updateGarrisonTab"] call FUNC(hqDialog);
     };
 
     // Updating the garrison numbers
@@ -614,11 +619,11 @@ switch (_mode) do
             };
         };
 
-        [_unitType, _selectedMarker] spawn A3A_fnc_garrisonAdd;
+        [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonAdd);
 
         sleep 1; // TODO UI-update: bad hack to make it correctly update the UI with the new number
 
-        ["updateGarrisonTab"] call A3A_fnc_hqDialog;
+        ["updateGarrisonTab"] call FUNC(hqDialog);
     };
 
     case ("garrisonRemove"):
@@ -654,12 +659,12 @@ switch (_mode) do
             };
         };
 
-        Debug_2("Calling A3A_fnc_garrisonRemove with [%1,%2]", _unitType, _selectedMarker);
-        [_unitType, _selectedMarker] spawn A3A_fnc_garrisonRemove;
+        Debug_2("Calling FUNCMAIN(garrisonRemove) with [%1,%2]", _unitType, _selectedMarker);
+        [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonRemove);
 
         sleep 1; // TODO UI-update: bad hack to make it correctly update the UI with the new number
 
-        ["updateGarrisonTab"] call A3A_fnc_hqDialog;
+        ["updateGarrisonTab"] call FUNC(hqDialog);
     };
 
     case ("dismissGarrison"):
@@ -667,11 +672,11 @@ switch (_mode) do
         Trace("Dismissing garrison");
 
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
-        [_selectedMarker] spawn A3A_fnc_dismissGarrison;
+        [_selectedMarker] spawn FUNCMAIN(dismissGarrison);
 
         sleep 1; // Same stupd hack as before, need to fix this
 
-        ["updateGarrisonTab"] call A3A_fnc_hqDialog;
+        ["updateGarrisonTab"] call FUNC(hqDialog);
     };
 
     case ("skipTime"):
@@ -681,19 +686,19 @@ switch (_mode) do
         private _titleStr = localize "STR_A3A_fn_GUI_hqDialog_title";
 
         // TODO UI-update: Move all these checks to update and disable button etc
-        if (player!= theBoss) exitWith [_titleStr, localize "STR_A3A_fn_GUI_hqDialog_notBoss"] call A3A_fnc_customHint;
+        if (player!= theBoss) exitWith [_titleStr, localize "STR_A3A_fn_GUI_hqDialog_notBoss"] call FUNCMAIN(customHint);
         _enemiesNear = false;
 
         {
             if ((side _x == Occupants) or (side _x == Invaders)) then
         	{
-            	if ([500,1,_x,teamPlayer] call A3A_fnc_distanceUnits) then {_presente = true};
+            	if ([500,1,_x,teamPlayer] call FUNCMAIN(distanceUnits)) then {_presente = true};
         	};
         } forEach allUnits;
-        if (_enemiesNear) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_enemiesNear"] call A3A_fnc_customHint;};
-        if ("rebelAttack" in A3A_activeTasks) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_rebelAttack"] call A3A_fnc_customHint;};
-        if ("invaderPunish" in A3A_activeTasks) exitWith {[_titleStr, format [localize "STR_A3A_fn_GUI_hqDialog_invaderPunish", FactionGet(inv,"name")]] call A3A_fnc_customHint;};
-        if ("DEF_HQ" in A3A_activeTasks) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_DEF_HQ"] call A3A_fnc_customHint;};
+        if (_enemiesNear) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_enemiesNear"] call FUNCMAIN(customHint);};
+        if ("rebelAttack" in A3A_activeTasks) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_rebelAttack"] call FUNCMAIN(customHint);};
+        if ("invaderPunish" in A3A_activeTasks) exitWith {[_titleStr, format [localize "STR_A3A_fn_GUI_hqDialog_invaderPunish", FactionGet(inv,"name")]] call FUNCMAIN(customHint);};
+        if ("DEF_HQ" in A3A_activeTasks) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_DEF_HQ"] call FUNCMAIN(customHint);};
 
         _playersNotAtHq = false;
         _posHQ = getMarkerPos respawnTeamPlayer;
@@ -701,9 +706,9 @@ switch (_mode) do
             if ((_x distance _posHQ > 100) and (side _x == teamPlayer)) then {_checkX = true};
         } forEach (allPlayers - (entities "HeadlessClient_F"));
 
-        if (_playersNotAtHq) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_playersNotAtHQ"] call A3A_fnc_customHint;};
+        if (_playersNotAtHq) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_playersNotAtHQ"] call FUNCMAIN(customHint);};
 
-        [_time] remoteExec ["A3A_fnc_resourceCheckSkipTime", 0];
+        [_time] remoteExec ["FUNCMAIN(resourceCheckSkipTime)", 0];
 
         closeDialog 1;
     };
@@ -711,7 +716,7 @@ switch (_mode) do
     case ("buildWatchpost"):
     {
         closeDialog 1;
-        ["create"] spawn A3A_fnc_outpostDialog;
+        ["create"] spawn FUNCMAIN(outpostDialog);
     };
 
     case ("removeWatchpost"):

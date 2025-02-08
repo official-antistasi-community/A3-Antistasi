@@ -46,11 +46,17 @@
     </Container>
     <Container name="A3A_fn_ai">
       <Key ID="STR_A3A_fn_ai_artySupport_artyStrike">
-        <Original>Artillery Strike</Original>
+        <Original>Mortar Strike</Original>
         <French>Frappe d'artillerie</French>
         <Korean>포병 타격</Korean>
         <Russian>Артиллерийский удар</Russian>
         <Chinesesimp>重炮投送</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_ai_artySupport_barrageHintHE">
+        <Original>Mortar barrage is inbound, starting grid %1.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_ai_artySupport_barrageHintSmoke">
+        <Original>Smoke barrage is inbound, starting grid %1.</Original>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_busy">
         <Original>Selected battery is busy right now.</Original>
@@ -99,14 +105,14 @@
         <Chinesesimp>你当前的模式设定不支持这种类型的火力支援.</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_mrkFinal">
-        <Original>Artillery Barrage Begin</Original>
+        <Original>Mortar Barrage Begin</Original>
         <French>Début du barrage d'artillerie</French>
         <Korean>포병 연발타격 시작</Korean>
         <Russian>Начало огня</Russian>
         <Chinesesimp>重炮火力投送开始</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_mrkFinal2">
-        <Original>Artillery Barrage End</Original>
+        <Original>Mortar Barrage End</Original>
         <French>Fin du barrage d'artillerie</French>
         <Korean>포병 연발타격 끝</Korean>
         <Russian>Конец огня</Russian>
@@ -144,6 +150,12 @@
         <Portuguese>A posição que marcaste está fora dos limites para esta bateria.</Portuguese>
         <Turkish>Seçili pozisyon bu bataryanın menzili dışında.</Turkish>
         <Chinesesimp>你所标记的位置位于该炮组射程之外.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_ai_artySupport_precisionHintHE">
+        <Original>Mortar fire support is inbound, grid %1</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_ai_artySupport_precisionHintSmoke">
+        <Original>Smoke rounds are inbound, grid %1.</Original>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_select">
         <Original>You must select an artillery group.</Original>
@@ -2132,7 +2144,7 @@
         <Chinesesimp>总部位置</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_marker">
-        <Original>You must click near a map marker.</Original>
+        <Original>You must click near a rebel map marker.</Original>
         <Italian>Devi cliccare vicino a un marcatore sulla mappa.</Italian>
         <Spanish>Debe clicar cerca de un marcador de mapa.</Spanish>
         <French>Vous devez cliquer à côté d'un marqueur de carte.</French>
@@ -2185,8 +2197,8 @@
         <Turkish>Radyo Kulesi yeniden yapıldı.</Turkish>
         <Chinesesimp>通信塔已被重建</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_base_rebasset_no">
-        <Original>You cannot rebuild that.</Original>
+      <Key ID="STR_A3A_fn_base_rebasset_no_nothing">
+        <Original>There is nothing to rebuild on this site.</Original>
         <Italian>Non puoi ricostruire ciò.</Italian>
         <Spanish>No puede reconstruir esto.</Spanish>
         <French>Vous ne pouvez pas reconstruire ceci.</French>
@@ -2210,30 +2222,6 @@
         <Portuguese>Não tens dinheiro suficiente para reconstruir qualquer Ativo. Precisas de 5.000€.</Portuguese>
         <Turkish>Yeni ekipman yapmak için yeterinde paranız yok. 5.000 €'ya ihtiyacınız var.</Turkish>
         <Chinesesimp>你当前的资金不足以重建任何资产. 你需要 5.000 €.</Chinesesimp>
-      </Key>
-      <Key ID="STR_A3A_fn_base_rebasset_no_notower">
-        <Original>That Outpost does not have a destroyed Radio Tower.</Original>
-        <Italian>Quell'Avamposto non ha un Torre Radio distrutta.</Italian>
-        <Spanish>Esa base no tiene una torre de radio destruida.</Spanish>
-        <French>Cet Avant-Poste n'a pas de Tour Radio détruite.</French>
-        <Korean>이 전초기지는 파괴된 송신탑을 가지고 있지 않습니다.</Korean>
-        <Russian>На этом аванпосте нет разрушенной радиовышки.</Russian>
-        <Czech>Toto stanoviště nemá zničenou Rádiovou Věž.</Czech>
-        <Portuguese>Este Posto Avançado não tem Torre de Rádio.</Portuguese>
-        <Turkish>O karakolun yıkılmış bir Radyo Kulesi yok.</Turkish>
-        <Chinesesimp>那个哨站没有被摧毁的通信塔</Chinesesimp>
-      </Key>
-      <Key ID="STR_A3A_fn_base_rebasset_no_owner">
-        <Original>You cannot rebuild a Radio Tower in an Outpost which does not belong to %1.</Original>
-        <Italian>Non puoi ricostruire una Torre Radio in un Avamposto che non appartiene a %1.</Italian>
-        <Spanish>No puede reconstruir una torre de radio en una base que no pertenezca a %1.</Spanish>
-        <French>Vous ne pouvez pas reconstruire une Tour Radio dans un Avant-Poste qui n'appartient pas à %1.</French>
-        <Korean>%1의 소유가 아닌 전초기지의 송신탑은 재건축할 수 없습니다.</Korean>
-        <Russian>Вы не можете перестроить радиовышку на аванпосте, который не принадлежит %1.</Russian>
-        <Czech>Nemůžeš znovu postavit Radiovou věž na základně, která nespadá pod %1.</Czech>
-        <Portuguese>Não podes reconstruir a Torre de Rádio num Posto Avançado que não pertence a %1.</Portuguese>
-        <Turkish>%1 'e ait olmayan bir Karakola Radyo Kulesi dikemezsiniz.</Turkish>
-        <Chinesesimp>你无法在一个不属于 %1 的哨站里重建通信塔</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_title">
         <Original>Rebuild Assets</Original>
@@ -2378,7 +2366,7 @@
         <Chinesesimp>出售载具</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_sellveh_sold">
-        <Original>Vehicle Sold.</Original>
+        <Original>Vehicle sold.</Original>
         <German>Fahrzeuge verkauft</German>
         <Italian>Veicolo Venduto.</Italian>
         <Spanish>Vehículo vendido.</Spanish>
@@ -2536,7 +2524,7 @@
       <Key ID="STR_A3A_fn_createOutpostsFIA_RB_title">
         <Original>Roadblock Deploy</Original>
         <Korean>검문소 배치</Korean>
-        <Russian>Блокпост развернут</Russian>
+        <Russian>Развертывание блокпоста</Russian>
       </Key>
       <Key ID="STR_A3A_fn_FIARadio_no">
         <Original>Enemy Comms Lost</Original>
@@ -2901,7 +2889,7 @@
       <Key ID="STR_A3A_fn_dialogs_createDialog_SLPS_line1">
         <Original>Antistasi has a custom save system similar to other CTIs.&lt;br/&gt;&lt;br/&gt;To Save: Your commander needs to go to the &lt;t color='#f0d498'&gt;Map Board&lt;/t&gt;, scroll-select &lt;t color='#f0d498'&gt;""Game Options""&lt;/t&gt; and click on the &lt;t color='#f0d498'&gt;""Persistent Save""&lt;/t&gt; button.</Original>
         <Korean>안티스타시에는 다른 CTI 모드와 유사한 사용자 정의 저장 시스템이 있습니다.&lt;br/&gt;&lt;br/&gt;저장 방법: 지휘관은 &lt;t color='#f0d498'&gt;지도 화이트보드&lt;/t&gt;로 이동하여 스크롤 선택으로&lt;t color='#f0d498'&gt;""게임 설정""&lt;/t&gt;을 선택하고 &lt;t color='#f0d498'&gt;""영구 저장""&lt;/t&gt; 버튼을 누르십시오.</Korean>
-        <Russian>В Antistasi есть собственная система сохранения, похожая на другие CTI.&lt;br/&gt;&lt;br/&gt; Чтобы сохранить: Ваш командир должен подойти к&lt;t color='#f0d498'&gt;Карта&lt;/t&gt;, открыть &lt;t color='#f0d498'&gt;""Настройки игры""&lt;/t&gt; и нажать на кнопку &lt;t color='#f0d498'&gt;""Сохранить игру""&lt;/t&gt;.</Russian>
+        <Russian>В Antistasi есть собственная система сохранения, похожая на другие CTI.&lt;br/&gt;&lt;br/&gt; Чтобы сохранить: Ваш командир должен подойти к &lt;t color='#f0d498'&gt;Карте&lt;/t&gt;, открыть &lt;t color='#f0d498'&gt;""Параметры""&lt;/t&gt; и нажать на кнопку &lt;t color='#f0d498'&gt;""Сохранение""&lt;/t&gt;.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_createDialog_SLPS_line2">
         <Original>Current parameters are configured to auto-save every %1 minutes.</Original>
@@ -2925,7 +2913,7 @@
         <Russian>Текущий уровень: %2. Стоимость обучения на следующем уровне: %1 €.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_fastTravelRadio_begin">
-        <Original>Fast traveling, travel time: %1s, please wait.</Original>
+        <Original>Fast traveling, travel time: %1, please wait.</Original>
         <Korean>빠른 이동 중. 도착 시간까지: %1초, 잠시만 기다려 주십시오...</Korean>
         <Russian>Быстрое перемещение: пожалуйста, подождите %1 сек.</Russian>
       </Key>
@@ -3432,7 +3420,7 @@
         <Czech>Nemůžeš odpočívat když HQ je pod útokem.</Czech>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius">
-        <Original>All players must be in a 100m radius from HQ to be able to rest.</Original>
+        <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;&lt;br/&gt;More than 10 players are absent from HQ currently.</Original>
         <Italian>Tutti i giocatori devono trovarsi entro 100m dal QG per riposare.</Italian>
         <Spanish>Todos los jugadores deben estar en un radio de 100m del CG para poder descansar.</Spanish>
         <French>Tous les joueurs doivent se trouver dans un rayon de 100 m du QG pour pouvoir se reposer.</French>
@@ -3440,6 +3428,12 @@
         <Russian>Все игроки должны находиться в радиусе 100 метров от штаба, чтобы иметь возможность отдохнуть.</Russian>
         <Polish>Wszyscy gracze muszą znajdować się w promieniu 100 m od siedziby głównej, aby móc odpocząć.</Polish>
         <Czech>Všichni hráči musí být v okruhu 100M od HQ abys mohl pustit odpočinek.</Czech>
+      </Key>
+      <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius_players">
+        <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;The following players are not at HQ: %1, and %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius_singleplayer">
+        <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;&lt;br/&gt;%1 is currently not at HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_title">
         <Original>Skip Time / Rest</Original>
@@ -4712,6 +4706,7 @@
         <Russian>Офицер %3 осматривает %1. Отправляйтесь туда и убейте его до %2.</Russian>
         <Polish>Oficer %4 przeprowadza inspekcję %1. Idź tam i zabij go przed %2:%3."</Polish>
         <Czech>Důstojník %3 kontroluje %1. Jděte tam a zabijte ho před %2.</Czech>
+        <Chinesesimp>一名 %3 军官正在视察 %1。赶在 %2 之前杀了他。</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_as_off_titel">
         <Original>Kill the Officer</Original>
@@ -4727,6 +4722,7 @@
         <Original>Special Forces team decimated at a %1.</Original>
         <Korean>특수부대 팀이 %1에서 전멸하였습니다.</Korean>
         <Russian>Команда спецназа уничтожена в %1.</Russian>
+        <Chinesesimp>特种部队在 %1 处被消灭。</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_as_specop_text">
         <Original>We have spotted a %3 Special Forces team patrolling around a %1. Ambush them and we will have one less problem. Do this before %2. Be careful, they are tough boys.</Original>
@@ -4736,6 +4732,7 @@
         <Russian>Мы заметили группу спецназа %3, патрулирующую район %1. Устройте им засаду, и у нас будет на одну проблему меньше. Сделайте это до %2. Будьте осторожны, они крутые парни.</Russian>
         <Polish>Zauważyliśmy zespół %3 sił specjalnych patrolujący okolice %1. Przeprowadź na nich skuteczną zasadzkę, a będziemy mieli jeden problem mniej. Zrób to przed %2. Uważaj, to twardziele.</Polish>
         <Czech>Zpozorovali jsme tým speciálních jednotek %3, který hlídá okolí %1. Přepadněte je a budeme mít o jeden problém méně. Udělejte to před %2. Buďte opatrní, jsou to tvrdí borci.</Czech>
+        <Chinesesimp>我们发现一支 %3 特种部队正在 %1 附近巡逻。如果能伏击他们，我们就少了一件麻烦事。在 %2 之前行动。小心点，这可是个硬骨头。</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_as_specop_titel">
         <Original>Special Forces</Original>
@@ -4756,7 +4753,7 @@
         <Russian>Кто-то нашел информацию о семье предателей, он больше не доставит никаких проблем!</Russian>
         <Polish>Ktoś znalazł informacje o rodzinie zdrajcy, nie będzie już sprawiał problemów!</Polish>
         <Czech>Někdo našel informace o rodině zrádce. Další problémy už působit nebude.</Czech>
-        <Chinesesimp>线人收集到一些关于叛徒家人的资料,他很快就不会是我们的问题了!</Chinesesimp>
+        <Chinesesimp>线人收集到一些关于叛徒家人的资料，他很快就不会是我们的问题了!</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_as_traitor_text">
         <Original>A traitor has scheduled a meeting with %3 forces in %1. Kill him before he provides enough intel to give us trouble. Do this before %2. We don't know where exactly this meeting will happen. You will recognize the building by the nearby parked vehicle and %3 presence.</Original>
@@ -4766,6 +4763,7 @@
         <Russian>Предатель назначил встречу с силами %3 в %1. Убейте его, прежде чем он предоставит достаточно информации, чтобы доставить нам неприятности. Сделайте это до %2. Мы не знаем, где именно произойдет эта встреча. Вы узнаете здание по припаркованному поблизости автомобилю и присутствию %3.</Russian>
         <Polish>Zdrajca zaplanował spotkanie z %4 w %1. Zabij go, zanim przekaże im wystarczająco dużo informacji przez którę będziemy mieli kłopoty. Zrób to przed %2. Nie wiemy, gdzie dokładnie odbędzie się to spotkanie. Budynek rozpoznasz po pobliskim Offroadzie i obecności %3.</Polish>
         <Czech>Zrádce naplánoval setkání s %3 v %1. Zabijte ho dříve, než poskytne dost informací, které by nám způsobily problémy. Udělejte to před %2. Nevíme přesně, kde to setkání proběhne. Budovu poznáte podle nedalekého zaparkovaného vozidla, a přítomnosti %3.</Czech>
+        <Chinesesimp>一名叛徒计划在 %1 与 %3 部队会面。务必在 %2 之前干掉他，以避免他提供足以给我们造成麻烦的情报。我们不知道具体的会面地点，但你可以通过附近停放的车和 %3 的存在认出这栋建筑。</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_as_traitor_titel">
         <Original>Kill the Traitor</Original>
@@ -4785,6 +4783,7 @@
         <Russian>%1 был бы прекрасным дополнением к нашему делу. Идите туда и захватите до %2.</Russian>
         <Polish>%1 będzie dobrym wzmocnieniem naszej sprawy. Udaj się tam i zdobądź to przed %2.</Polish>
         <Czech>%1 by se nám hodilo. Jděte tam a zaberte to před %2.</Czech>
+        <Chinesesimp>一个 %1 会为我们的事业添砖加瓦。在 %2 之前去那里占领它。</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_conq_outp_text2">
         <Original>A %1 is disturbing our operations in the area. Go there and capture it before %2.</Original>
@@ -4794,11 +4793,13 @@
         <Russian>%1 мешает нашим операциям в этом районе. Отправляйтесь туда и захватите его до того, как %2.</Russian>
         <Polish>Obiekt %1 zakłóca nasze operacje w okolicy. Udaj się tam i zdobądź go przed %2.</Polish>
         <Czech>%1 narušuje naše operace v této oblasti. Jděte tam a zaberte to před %2.</Czech>
+        <Chinesesimp>一个 %1 正在干扰我们在该地区的行动。在 %2 之前去那里占领它。</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_conq_outp_text3">
         <Original>An enemy garrison here is disturbing our operations in the area. Go there and secure the area before %1.</Original>
         <Korean>이 곳의 적 주둔군이 해당 지역에서 우리 작전을 방해하고 있습니다. 가서 %1 전까지 지역을 확보하십시오.</Korean>
         <Russian>Вражеский гарнизон здесь мешает нашим операциям в этом районе. Отправляйтесь туда и обезопасьте район до %1.</Russian>
+        <Chinesesimp>一个敌军驻地正在干扰我们在该地区的行动，在 %1 之前去那里肃清这个区域。</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_conq_outp_titel1">
         <Original>Resource Acquisition</Original>
@@ -4808,6 +4809,7 @@
         <Russian>Захват Ресурсов</Russian>
         <Polish>Pozyskiwanie zasobów</Polish>
         <Czech>Získávání zdrojů</Czech>
+        <Chinesesimp>资源获取</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_conq_outp_titel2">
         <Original>Take the Outpost</Original>
@@ -4823,11 +4825,14 @@
         <Original>Destroy Roadblock</Original>
         <Korean>검문소 파괴</Korean>
         <Russian>Уничтожить блокпост</Russian>
+        <Chinesesimp>摧毁路障</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_conq_outp_titel4">
         <Original>Secure the AO</Original>
+        <French>Sécuriser l'OA</French>
         <Korean>작전 구역 확보</Korean>
         <Russian>Защита Оперативной зоны</Russian>
+        <Chinesesimp>肃清区域</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_conv_ammo_text">
         <Original>A convoy from %1 is about to depart at %2. It will provide ammunition to %3. Try to intercept it. Steal or destroy that truck before it reaches its destination.</Original>
@@ -5103,7 +5108,7 @@
         <Italian>Salva rifornimenti</Italian>
         <French>Récupération de Provisions</French>
         <Korean>보급품 인양</Korean>
-        <Russian>Аварийные припасы</Russian>
+        <Russian>Затопленные припасы</Russian>
         <Polish>Odzyskaj zapasy</Polish>
         <Czech>Zachránit zásoby</Czech>
       </Key>
@@ -5318,14 +5323,9 @@
         <Czech>Skupina pašeráků byla zatčena v %1 a mají být posláni do vězení. Jděte tam a osvoboďte je, aby se připojili k naší věci. Udělejte to před %2.</Czech>
       </Key>
       <Key ID="STR_A3A_fn_mission_res_refu_text2">
-        <Original>A group of %3 supporters are hidden in %1 awaiting for evacuation. We have to find them before %2 does. If not, there will be a certain death for them. Bring them back to HQ.</Original>
-        <Italian>Un gruppo di sostenitori %3 sono nascosti a %1 in attesa di essere evacuati. Dobbiamo trovarli prima che lo faccia %2. Se non ci riusciremo verranno sicuramente giustiziati. Portali al QG.</Italian>
-        <Spanish>Un grupo de seguidores de %3 están escondidos en %1 esperando una evacuación. Tenemos que encontrares antes de que %2 lo haga. De lo contrario, su muerte está asegurada. Traedlos  de vuelta al CG.</Spanish>
-        <French>Un groupe de %3 partisans sont cachés à %1 et attendent une evacuation. Nous devons les trouver avant que %2 ne le fasse. Sinon leur mort est certaine. Ramenez les au QG.</French>
-        <Korean>%1에 %3의 지지자들이 숨어서 후송을 기다리고 있습니다. %2 전까지 그들을 찾아야 합니다. 그렇지 않으면 그들은 확실히 죽을 것입니다. 본부로 데려오십시오.</Korean>
-        <Russian>Группа сторонников %3 спрятана в %1 и ожидает эвакуации. Мы должны найти их раньше, чем это сделает %2. Если нет, их ждет верная смерть. Верните их в штаб.</Russian>
-        <Polish>Grupa %3 osób nas wspierających jest ukryta w %1 w oczekiwaniu na ewakuację. Musimy ich znaleźć, zanim zrobi to %2. Jeśli nie, czeka ich pewna śmierć. Sprowadź ich z powrotem do kwatery głównej.</Polish>
-        <Czech>Skupina podporovatelů %3 se skrývá v %1 a čeká na evakuaci. Musíme je najít dříve než %2. Jinak je čeká jistá smrt. Přiveďte je zpět do základny.</Czech>
+        <Original>A group of %3 supporters are hidden in %1 awaiting for evacuation. We have to find them before %2 does. If not, there will be a certain death for them. Bring them back to HQ before %4.</Original>
+        <Korean>%3지지자 무리가 %1에 숨어서 대피를 기다리고 있습니다. %2이(가) 발견하기 전에 그들을 찾아야 하며, 그렇지 않으면 그들은 확실하게 죽음을 맞이할 것입니다. %4 이전에 본부로 데려오십시오.</Korean>
+        <Russian>Группа сторонников %3 спрятана в %1 в ожидании эвакуации. Мы должны найти их раньше, чем это сделает %2. Если нет, их ждет верная смерть. Приведите их в штаб до %4.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_mission_res_refu_titel">
         <Original>Refugees Evac</Original>
@@ -5362,37 +5362,19 @@
     </Container>
     <Container name="A3A_fn_OrgPlayers">
       <Key ID="STR_A3A_fn_orgp_donMon_donated_faction">
-        <Original>You have donated 100 € to the cause. This will raise your status among our forces.</Original>
-        <Italian>Hai donato 100 € alla causa. Ciò accrescerà il tuo status tra le nostre forze.</Italian>
-        <Spanish>Ha donado 100 € a la causa. Esto incrementará su estatus entre sus fuerzas.</Spanish>
-        <French>Vous avez donné 100 € à la cause. Cela va améliorer votre réputation au sein de nos forces</French>
-        <Korean>당신은 100€를 기부했습니다. 이는 우리 군에서의 당신의 지위가 높아질 것입니다.</Korean>
-        <Russian>Вы передали 100 € на общее дело. Это повысит ваш статус среди наших товарищей.</Russian>
-        <Polish>Przekazałeś 100 € na ten cel. Podniesie to twój status wśród naszych sił.</Polish>
-        <Czech>Daroval jsi 100 € na pomoc naší věci. Tento akt zvýší tvé postavení mezi námi.</Czech>
-        <Chinesesimp>你为大义慷慨贡献了 100 €. 此举将提升你在我军中的地位.</Chinesesimp>
+        <Original>You have donated %1 € to the cause. This will raise your status among our forces.</Original>
+        <Korean>당신은 %1€를 기부했습니다. 이는 우리 군에서 당신의 지위가 높아질 것입니다.</Korean>
+        <Russian>Вы пожертвовали %1 € на дело. Это повысит ваш статус среди наших сил.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_orgp_donMon_donated_player">
-        <Original>You have donated 100 € to %1.</Original>
-        <Italian>Hai donato 100 € a %1.</Italian>
-        <Spanish>Ha donado 100 € a %1.</Spanish>
-        <French>Vous avez donné 100 € à %1.</French>
-        <Korean>당신은 %1에 100€를 기부했습니다.</Korean>
-        <Russian>Вы передали 100 € %1.</Russian>
-        <Polish>Przekazałeś 100 € na rzecz %1.</Polish>
-        <Czech>Daroval jsi 100 € hráči %1.</Czech>
-        <Chinesesimp>你慷慨贡献 100 € 给了 %1.</Chinesesimp>
+        <Original>You have donated %2 € to %1.</Original>
+        <Korean>당신은 %1에 %2€를 기부했습니다.</Korean>
+        <Russian>Вы пожертвовали %2 € для %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_orgp_donMon_no_less">
-        <Original>You have less than 100 € to donate.</Original>
-        <Italian>Hai meno di 100 € da donare.</Italian>
-        <Spanish>Tiene menos de 100 € para donar.</Spanish>
-        <French>Vous avez moins de 100 € à donner.</French>
-        <Korean>당신은 100€보다 적은 돈을 가지고 있습니다.</Korean>
-        <Russian>У вас есть меньше 100 € для передачи.</Russian>
-        <Polish>Masz mniej niż 100 € do przekazania.</Polish>
-        <Czech>Máš méně než 100€ k darování.</Czech>
-        <Chinesesimp>你需要至少 100 € 才可以贡献.</Chinesesimp>
+        <Original>Insufficient Funds&lt;br/&gt;You have less than %1 € to donate.</Original>
+        <Korean>자금 부족&lt;br/&gt;%1€ 보다 적은 금액을 가지고 있습니다.</Korean>
+        <Russian>Недостаточно средств&lt;br/&gt;Вы пожертвовали менее %1 €.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_orgp_donMon_no_looking">
         <Original>You must be looking at a player in order to give him money.</Original>
@@ -5404,6 +5386,14 @@
         <Polish>Musisz patrzeć na gracza, aby dać mu pieniądze.</Polish>
         <Czech>Musiš se dívat na hráče abys mu mohl darovat peníze.</Czech>
         <Chinesesimp>你必须在目视一名玩家的情况下才能给予他资金.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_orgp_donMon_not_positive">
+        <Original>Donation amount must be greater than 0.</Original>
+        <Russian>Сумма пожертвования должна быть больше 0.</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_orgp_donMon_received_money">
+        <Original>You received a %1 € donation from %2.</Original>
+        <Russian>Вы получили пожертвование в размере %1 € от %2.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_orgp_donMon_titel">
         <Original>Donate Money</Original>
@@ -5892,7 +5882,7 @@
         <Italian>Caratteristiche Unità</Italian>
         <French>Attributs d'Unité</French>
         <Korean>유닛 특성</Korean>
-        <Russian>Черты юнита</Russian>
+        <Russian>Роль</Russian>
         <Polish>Cechy jednostek</Polish>
         <Czech>Vlastnosti jednotky</Czech>
         <Chinesesimp>单位特长</Chinesesimp>
@@ -5902,7 +5892,7 @@
         <Italian>Caratteristiche Unità</Italian>
         <French>Attributs d'Unité</French>
         <Korean>유닛 특성</Korean>
-        <Russian>Черты юнита</Russian>
+        <Russian>Роль</Russian>
         <Polish>Cechy jednostek</Polish>
         <Czech>Vlastnosti jednotky</Czech>
         <Chinesesimp>单位特长</Chinesesimp>
@@ -6942,6 +6932,18 @@
         <Russian>Контроль ИИ</Russian>
         <Chinesesimp>控制单位</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_reinf_convSqd_created">
+        <Original>Converted %1 squad members into high command group %2.</Original>
+        <Russian>Преобразовал членов отряда %1 в группу высшего командования %2.</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_convSqd_no_selected">
+        <Original>You need to select some valid units.</Original>
+        <Russian>Вам нужно выбрать несколько допустимых юнитов.</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_convSqd_title">
+        <Original>Convert To Squad</Original>
+        <Russian>Преобразование в отряд</Russian>
+      </Key>
       <Key ID="STR_A3A_fn_reinf_dismissPlayerGroup_GTFO">
         <Original>Get out of my sight you useless scum!</Original>
         <French>Hors de ma vue vermine!</French>
@@ -7717,18 +7719,14 @@
         <Chinesesimp>%1正在赶来救助你的路上</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_revive_unconscious_respawn">
-        <Original>Press R to respawn.</Original>
-        <French>Appuyez sur R pour réapparaître.</French>
-        <Korean>R 키를 눌러 리스폰합니다.</Korean>
-        <Russian>Нажмите R, чтобы возродиться.</Russian>
-        <Chinesesimp>按R键重生</Chinesesimp>
+        <Original>Press %1 to respawn.</Original>
+        <Korean>%1 키를 눌러 리스폰합니다.</Korean>
+        <Russian>Нажмите %1, чтобы возродиться.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_revive_unconscious_selfRevive">
-        <Original>Press H to shake off the injury.</Original>
-        <French>Appuyez sur H pour vous débarrasser de la blessure.</French>
-        <Korean>H 키를 눌러 부상을 떨쳐냅니다.</Korean>
-        <Russian>Нажмите H, чтобы избавиться от повреждения.</Russian>
-        <Chinesesimp>按H键来甩开疼痛</Chinesesimp>
+        <Original>Press %1 to shake off the injury.</Original>
+        <Korean>%1 키를 눌러 부상을 떨쳐냅니다.</Korean>
+        <Russian>Нажмите %1, чтобы избавиться от повреждения.</Russian>
       </Key>
     </Container>
     <Container name="A3A_fn_SalvageRope">
@@ -8653,6 +8651,22 @@
         <Korean>화면 상단에 있는 안티스타시 전용 정보 표시줄의 표시 여부를 전환합니다.</Korean>
         <Russian>Переключает видимость информационной панели Antistasi в верхней части экрана.</Russian>
       </Key>
+      <Key ID="STR_A3A_keybinds_CfgUserAct_respawn_DN">
+        <Original>Respawn</Original>
+        <Russian>Возрождение</Russian>
+      </Key>
+      <Key ID="STR_A3A_keybinds_CfgUserAct_respawn_tip">
+        <Original>Respawn when unconscious in the Antistasi medical system.</Original>
+        <Russian>Возрождаться при потере сознания в медицинской системе Antistasi.</Russian>
+      </Key>
+      <Key ID="STR_A3A_keybinds_CfgUserAct_selfRevive_DN">
+        <Original>Self revive</Original>
+        <Russian>Лечиться</Russian>
+      </Key>
+      <Key ID="STR_A3A_keybinds_CfgUserAct_selfRevive_tip">
+        <Original>Self revive when unconscious in the Antistasi medical system.</Original>
+        <Russian>Самостоятельное оживление при потере сознания в медицинской системе Antistasi.</Russian>
+      </Key>
       <Key ID="STR_A3A_keybinds_keyAcc_earplugs_in">
         <Original>You've inserted your ear plugs.</Original>
         <Italian>Hai inserito i tappi per le orecchie.</Italian>
@@ -9035,6 +9049,10 @@
         <Polish>Dystans używany do szukania pobliskich przeciwników</Polish>
         <Chinesesimp>用于探查附近敌情的距离</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Params_enemyResponseTime_title">
+        <Original>Speed of enemy air responses</Original>
+        <Russian>Скорость реагирования авиации противника</Russian>
+      </Key>
       <Key ID="STR_A3A_Params_enemySkillMul_title">
         <Original>Enemy AI skill (also affected by server skill)</Original>
         <Italian>Abilità delle IA nemiche (influenzato anche dal livello di abilità del server)</Italian>
@@ -9079,6 +9097,10 @@
         <Russian>Режим игры - НЕ МЕНЯЙТЕ ЕГО В СЕРЕДИНЕ МИССИИ</Russian>
         <Polish>Tryb gry - NIE zmieniaj tego w trakcie misji</Polish>
         <Chinesesimp>游玩模式 - 请勿在游玩过程中改变此选项</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_Params_gcMaxObjects_title">
+        <Original>Maximum number of corpses and wrecks</Original>
+        <Russian>Максимальное количество трупов и обломков</Russian>
       </Key>
       <Key ID="STR_A3A_Params_GCThreshold_title">
         <Original>Garbage Cleaner Threshold for Automatic GC</Original>
@@ -9294,6 +9316,10 @@
         <Polish>Włączone</Polish>
         <Chinesesimp>启用</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Params_generic_fast">
+        <Original>Fast</Original>
+        <Russian>Быстро</Russian>
+      </Key>
       <Key ID="STR_A3A_Params_generic_high">
         <Original>High</Original>
         <German>Hoch</German>
@@ -9392,6 +9418,10 @@
         <Russian>Часто</Russian>
         <Chinesesimp>经常</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Params_generic_slow">
+        <Original>Slow</Original>
+        <Russian>Медленно</Russian>
+      </Key>
       <Key ID="STR_A3A_Params_generic_sometimes">
         <Original>Sometimes</Original>
         <Italian>Qualche volta</Italian>
@@ -9407,6 +9437,10 @@
         <Korean>무제한</Korean>
         <Russian>Неограниченно</Russian>
         <Chinesesimp>无限</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_Params_generic_veryfast">
+        <Original>Very fast</Original>
+        <Russian>Очень быстро</Russian>
       </Key>
       <Key ID="STR_A3A_Params_generic_veryhigh">
         <Original>Very high</Original>
@@ -9425,6 +9459,10 @@
         <Korean>매우 낮음</Korean>
         <Russian>Очень низкая</Russian>
         <Chinesesimp>非常低</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_Params_generic_veryslow">
+        <Original>Very slow</Original>
+        <Russian>Очень медленно</Russian>
       </Key>
       <Key ID="STR_A3A_Params_globalCivilianMax_title">
         <Original>Maximum global civilians</Original>
@@ -9703,6 +9741,7 @@
       </Key>
       <Key ID="STR_A3A_Params_removeRestore_title">
         <Original>Disable the "Restore nearby units" option on the vehicle box.</Original>
+        <Russian>Отключить опцию "Восстановить близлежащие объекты".</Russian>
       </Key>
       <Key ID="STR_A3A_Params_reviveTime_10s">
         <Original>10 seconds</Original>
@@ -9855,7 +9894,7 @@
         <Spanish>Sacar cuerdas de remolque</Spanish>
         <French>Déployer treuil</French>
         <Korean>견인줄 꺼내기</Korean>
-        <Russian>Развернуть трос</Russian>
+        <Russian>Растянуть трос</Russian>
         <Polish>Rozłóż linkę holowniczą</Polish>
         <Czech>Vyložit tažné lano</Czech>
         <Portuguese>Tirar cordas de reboque</Portuguese>
@@ -10075,7 +10114,7 @@
         <Spanish>Ya te has revivido recientemente.</Spanish>
         <French>Vous vous êtes déjà réanimé vous-même récemment.</French>
         <Korean>당신은 이미 최근에 자가소생을 했습니다.</Korean>
-        <Russian>Вы уже пришли в себя.</Russian>
+        <Russian>Вы уже возрождали себя.</Russian>
         <Polish>Niedawno już się uleczyłeś.</Polish>
         <Czech>Již jsi se nedávno oživil.</Czech>
       </Key>
@@ -10336,6 +10375,10 @@
         <Korean>예상 설정 시간: %1분</Korean>
         <Russian>Осталось времени: %1 мин.</Russian>
       </Key>
+      <Key ID="STR_A3A_fn_support_showIntStpCll_TANK">
+        <Original>%1 just sent a tank platoon.</Original>
+        <Russian>%1 только что прислал танковый взвод.</Russian>
+      </Key>
       <Key ID="STR_A3A_fn_support_showIntStpCll_UAV">
         <Original>%1 is sending a spotting UAV.</Original>
         <Korean>%1 세력이 감시형 UAV를 보냄</Korean>
@@ -10365,6 +10408,312 @@
         <Original>%1 Destroyed</Original>
         <Korean>%1 파괴됨</Korean>
         <Russian>%1 уничтожен</Russian>
+      </Key>
+    </Container>
+    <Container name="A3A_templates">
+      <Key ID="STR_A3A_templates_IFA_CIV_FR">
+        <Original>As well as managing a large country in the middle of Europe, France also controls several offshore territories. Throughout all of these provinces, the French civilians simply wish for the war to end in their home country.</Original>
+        <Russian>Франция не только управляет большой страной в центре Европы, но и контролирует несколько оффшорных территорий. Во всех этих провинциях мирные жители Франции просто желают, чтобы война закончилась в их родной стране.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_IFA_CIV_PL">
+        <Original>In World War II, Poland was trapped in a very awkward position between the Soviets and Germans. The people of Poland have suffered through an occupied, and the recent change in relations has opened a window of opportunity for the Polish Resistance.</Original>
+        <Russian>Во время Второй мировой войны Польша оказалась в очень неудобном положении между Советами и немцами. Народ Польши пережил оккупацию, и недавнее изменение отношений открыло окно возможностей для польского Сопротивления.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_IFA_REB_AK">
+        <Original>The Polish resistance is in an extremely bad spot. Surrounded by the Wehrmacht on one side and the Soviets on the other, the Polish townspeople have no choice but to fight for the safety and freedom of their country. They use a much older but wealthy supply of Walther PPKs.</Original>
+        <Russian>Польское сопротивление находится в крайне тяжелом положении. Окруженные с одной стороны вермахтом, а с другой - советскими войсками, жители польских городов не имеют иного выбора, кроме как сражаться за безопасность и свободу своей страны. Они используют старые, но богатые запасы пистолетов Walther PPK.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_IFA_Reb_FFI">
+        <Original>The French Resistance is battling the Wehrmacht invasion of their country, along with the Allied powers who they believe are being far too heavy-handed with civilian casualities and need to be stopped. They use a much older but healthy supply of Walther PPKs.</Original>
+        <Russian>Французское Сопротивление борется с вторжением вермахта в свою страну вместе с союзными войсками, которые, по их мнению, слишком жестоко расправляются с мирным населением и должны быть остановлены. Для этого они используют старые, но надежные пистолеты Walther PPK.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AAF">
+        <Original>The Altis Armed Forces are comprised mostly of combat veterans and patriotic citizens from their home island, with an outdated arsenal of U.S. and Soviet equipment, which is being actively renovated. They typically use the HK G3 and HK G36.</Original>
+        <Russian>Вооруженные силы Алтиса состоят в основном из ветеранов боевых действий и патриотически настроенных граждан с родного острова. Они располагают устаревшим арсеналом американского и советского оборудования, который активно обновляется. Как правило, они используют HK G3 и HK G36.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_ADA">
+        <Original>The African Desert Army is a coalition of North African nations around the Sahara. They primarily use very old Soviet equipment and Vietnam-War era US equipment, and prefer a variety of mass-produced rifles like the M16, AK-74, and G3.</Original>
+        <Russian>Африканская армия пустыни - коалиция стран Северной Африки, расположенных в районе Сахары. В основном они используют очень старое советское оборудование и американскую технику времен Вьетнамской войны, а также предпочитают различные массовые винтовки, такие как M16, AK-74 и G3.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_ANA">
+        <Original>The Afghan National Army has, like its host country, undergone quite the history since it's conception in 1997. They use a mix of locally-sourced, Soviet, and American weapons, as well as Soviet surplus equipment supported by the remnants of American occupation.</Original>
+        <Russian>С момента своего создания в 1997 году Афганская национальная армия, как и принимающая ее страна, пережила немало историй. Они используют сочетание местного, советского и американского оружия, а также советские излишки техники, поддерживаемые остатками американской оккупации.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_CW_Sov">
+        <Original>The Soviets after the end of World War II built up their own military superpower and nuclear program, independent of the US. With the development of the AK-47 and mass-produced variants like the AKM, the Soviets became one of the two leading world powers.</Original>
+        <Russian>После окончания Второй мировой войны Советский Союз создал свою собственную военную сверхдержаву и ядерную программу, независимую от США. Благодаря разработке АК-47 и его массовых вариантов, таких как АКМ, Советы стали одной из двух ведущих мировых держав.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_CW_US">
+        <Original>After the victories on the Pacific Front during World War II, the United States realized it was woefully ill-prepared for another prolonged war and put itself at the forefront of military innovation and industry. They typically use the M16 and M14 rifles which have been in service to this day.</Original>
+        <Russian>После побед на Тихоокеанском фронте во время Второй мировой войны Соединенные Штаты осознали, что крайне плохо подготовлены к новой затяжной войне, и выдвинулись на передовые позиции в области военных инноваций и промышленности. Как правило, они используют винтовки M16 и M14, которые стоят на вооружении и по сей день.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_HIDF">
+        <Original>The Horizon Island Defense Force are the small military force defending the Pacific island of Tanoa. They typically use Vietnam-war era and similar US gear, rounded with a variety of imported European weapons and vehicles.</Original>
+        <Russian>Силы обороны острова Горизонт - это небольшие военные силы, защищающие тихоокеанский остров Таноа. Как правило, они используют американское снаряжение времен Вьетнамской войны и аналогичное, а также разнообразное импортное европейское оружие и транспортные средства.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_KRG">
+        <Original>The Kyrgystan Royal Guard is the primary defending force of the Middle-Eastern country of Kyrgystan. Outfitted primarily with U.S. surplus equipment, the KRG make use of a variety of small arms imported from various neighboring countries.</Original>
+        <Russian>Королевская гвардия Киргизстана - основная оборонительная сила ближневосточной страны Киргизстан. Оснащенная в основном американским оборудованием, Королевская гвардия Киргизии использует различные виды стрелкового оружия, импортируемого из различных соседних стран.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_LDF">
+        <Original>The dedicated protectors of a small Eastern European territory near Belarus, the Livonia Defense Force are a relatively small but deceptively capable army. As a former Soviet territory, the military uses any surplus Soviet gear it can scavenge.</Original>
+        <Russian>Самоотверженные защитники небольшой восточноевропейской территории, расположенной недалеко от Белоруссии, Силы обороны Ливонии - относительно небольшая, но обманчиво боеспособная армия. Будучи бывшей советской территорией, военные используют все излишки советского снаряжения, которые им удается раздобыть.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_MDF">
+        <Original>The Malden Defense Force are the small military force defending the island of Malden, close to the Gibraltar Strait. They use US imported weaponry and vehicles, as well as the French Mystere fighter for aerial operations.</Original>
+        <Russian>Силы обороны Мальдена - это небольшие военные силы, защищающие остров Мальден, расположенный недалеко от Гибралтарского пролива. Они используют оружие и транспортные средства, импортируемые из США, а также французский истребитель Mystere для воздушных операций.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_TKA_East">
+        <Original>The Takistani Army is backed by a variety of sources, which are represented as individual templates in the faction selector. This faction uses primarily Eastern, or Russian, vehicles and weaponry.</Original>
+        <Russian>Такистанская армия опирается на различные источники, которые представлены в виде отдельных шаблонов в селекторе фракций. Эта фракция использует преимущественно восточные, или российские, транспортные средства и оружие.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_TKA_Mix">
+        <Original>The Takistani Army is backed by a variety of sources, which are represented as individual templates in the faction selector. This faction is transitioning between military backers and uses a mix of United States and Russian vehicles and weaponry.</Original>
+        <Russian>Такистанская армия поддерживается различными источниками, которые представлены в виде отдельных шаблонов в селекторе фракций. Эта фракция переходит от одного военного сторонника к другому и использует смесь американских и российских транспортных средств и оружия.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_AI_TKA_West">
+        <Original>The Takistani Army is backed by a variety of sources, which are represented as individual templates in the faction selector. This faction uses primarily Western, or United States, vehicles and weaponry.</Original>
+        <Russian>Такистанская армия опирается на различные источники, которые представлены в виде отдельных шаблонов в селекторе фракций. Эта фракция использует в основном западные, или американские, транспортные средства и оружие.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_Reb_CCM">
+        <Original>The Chernorussian Communist Militia is quite similar to NAPA, with a group of citizens that takes faith in the old ways of the Soviet Union over the modern ideology of capitalism. Similar to NAPA, they scavenge whatever Soviet weapons they can.</Original>
+        <Russian>Чернорусское коммунистическое ополчение очень похоже на NAPA. Это группа граждан, которые верят в старый путь Советского Союза, а не в современную идеологию капитализма. Как и NAPA, они собирают все советское оружие, которое могут найти.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_Reb_ION">
+        <Original>A detachment of ION Services, Incorporated, is sent by an unknown client to cause instability in the region. ION mercenaries have better funding and access to a wider variety of assets than other grassroots rebellions.</Original>
+        <Russian>Отряд ION Services, Incorporated отправлен неизвестным клиентом, чтобы вызвать нестабильность в регионе. Наемники ION имеют лучшее финансирование и доступ к более широкому спектру активов, чем другие низовые повстанцы.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_Reb_LSM">
+        <Original>The Livonia Separatist Militia works against the, per their view, tyrannic rule of the current government. They use scavenged weapons wherever possible since many members are defectors with previous military experience, but many prefer to fall back on the CZ550, a hunting rifle in 8mm Mauser.</Original>
+        <Russian>Ливонское сепаратистское ополчение выступает против тиранического, по их мнению, правления нынешнего правительства. По возможности они пользуются оружием, добытым на свалках, так как многие члены ополчения - дезертиры с военным опытом, но многие предпочитают использовать охотничью винтовку CZ550 калибра 8 мм Mauser.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_AAF">
+        <Original>The Altis Armed Forces are comprised mostly of combat veterans and patriotic citizens from their home island, with an outdated arsenal being actively renovated. They prefer to use the Mk20 bullpup assault rifle chambered in 5.56x45mm STANAG NATO-standard magazines.</Original>
+        <Russian>Вооруженные силы Алтиса состоят в основном из ветеранов боевых действий и патриотически настроенных граждан родного острова, а устаревший арсенал активно обновляется. Они предпочитают использовать штурмовую винтовку Mk20 под патрон 5,56x45 мм STANAG NATO.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_ACR">
+        <Original>The Army of the Czech Republic, as a landlocked country, primarily focuses on it's Air Force and ground forces. Many of the weapons the ACR use are standard NATO-issue, but they tend to diversify with a variety of homegrown weapons, such as the vz. 58 or CZ BREN.</Original>
+        <Russian>Армия Чешской Республики, как страны, не имеющей выхода к морю, в первую очередь ориентирована на ВВС и сухопутные войска. Многие виды оружия, используемые ACR, являются стандартным оружием НАТО, но они склонны к разнообразию, используя различные виды отечественного оружия, такие как vz. 58 или CZ BREN.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_AFRF">
+        <Original>The Armed Forces of the Russian Federation are the current-age Russian Army. Equipping a variety of cutting edge and Cold-War era vehicles, the AFRF typically use homegrown AK assault rifles chambered in 5.45 and 7.62 calibers.</Original>
+        <Russian>Вооруженные силы Российской Федерации - это современная российская армия. Оснащенные разнообразной новейшей техникой времен холодной войны, ВС РФ обычно используют отечественные автоматы АК калибров 5,45 и 7,62.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_BAF">
+        <Original>The British Armed Forces have quite the history, and their unique assortment of weaponry and equipment clearly shows it. They typically use the L85 series of assault rifles, chambered in 5.56 NATO.</Original>
+        <Russian>Британские вооруженные силы имеют богатую историю, о чем ярко свидетельствует их уникальный ассортимент оружия и снаряжения. Как правило, они используют штурмовые винтовки серии L85 под патрон 5,56 НАТО.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_BWA3_AI_BW">
+        <Original>The Bundesweher are the current armed forces for Germany. They frequently use domestically produced rifles, such as the G27, G36, and G38 for small arms. Their armored units are rounded out with many NATO and U.S. produced vehicles.</Original>
+        <Russian>Бундесвер - это действующие вооруженные силы Германии. В качестве стрелкового оружия они часто используют винтовки отечественного производства, такие как G27, G36 и G38. Их бронетанковые подразделения укомплектованы многочисленными машинами производства НАТО и США.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CDF">
+        <Original>The Chernarus Defense Force are the culmination of the land, air, and sea branches dedicated to the defense of Chernarus. They typically use a variety of surplus Russian weaponry, but have cut all ties with the previous government. They are the primary counter-insurgency force against the ChDKZ.</Original>
+        <Russian>Силы обороны Чернаруса - это совокупность наземных, воздушных и морских подразделений, занимающихся обороной Чернаруса. Как правило, они используют различные излишки российского оружия, но разорвали все связи с предыдущим правительством. Они являются основной противоповстанческой силой в борьбе с ЧДКЗ.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CHC">
+        <Original>The civilians of Chernarus already have enough on their plate with the active civil war in their home country. It's your job to end the rule of the corrupt government over these people's lives.</Original>
+        <Russian>У мирных жителей Чернаруса и так хватает забот из-за активной гражданской войны в их родной стране. Ваша задача - положить конец господству коррумпированного правительства над жизнью этих людей.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CIV">
+        <Original>No rebellion is won without the support of the civilians, whether they choose to report information to the rebels or volunteer to fight for what is right. Whatever their role may be, the rebellion is always fighting for their freedom.</Original>
+        <Russian>Ни одно восстание не победит без поддержки мирных жителей, независимо от того, решают ли они сообщать информацию повстанцам или добровольно сражаются за правое дело. Какова бы ни была их роль, повстанцы всегда борются за свою свободу.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CSAT">
+        <Original>A coalition of Middle-Eastern and Asian nations led by Iran and China, the Canton protocol Strategic Alliance Treaty's meteoric rise rivals the power of the western NATO coalition. CSAT forces prefer to use the Katiba assault rifle, chambered in 6.5x39mm Caseless.</Original>
+        <Russian>Коалиция ближневосточных и азиатских стран во главе с Ираном и Китаем, стремительный взлет которой по Кантонскому протоколу Договора о стратегическом союзе соперничает с мощью западной коалиции НАТО. Силы CSAT предпочитают использовать штурмовую винтовку Katiba под патрон 6,5x39 мм Caseless.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CSATApex">
+        <Original>CSAT forces are frequently operating in the Pacific island of Tanoa at the request of the local government and use Chinese weapons more frequently. They prefer the 5.8x42mm intermediate caliber for the CAR-95 assault rifles.</Original>
+        <Russian>Силы CSAT часто действуют на тихоокеанском острове Таноа по просьбе местного правительства и чаще используют китайское оружие. Они предпочитают промежуточный калибр 5,8x42 мм для штурмовых винтовок CAR-95.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CSATEnoch">
+        <Original>CSAT forces operating in Livonia are Russian-based and use modern Russian gear along with weapons from other nations in the alliance. They typically use the Katiba assault rifle, similar to traditional CSAT doctrine.</Original>
+        <Russian>Силы CSAT, действующие в Ливонии, базируются в России и используют современное российское снаряжение, а также оружие других стран, входящих в альянс. Как правило, они используют штурмовую винтовку "Катиба", что соответствует традиционной доктрине CSAT.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CUP_AI_BW">
+        <Original>The Bundesweher are the current armed forces for Germany. They frequently use domestically produced rifles, such as the G36, HK416, and HK417 for small arms. Their armored units are rounded out with many NATO and U.S. produced vehicles.</Original>
+        <Russian>Бундесвер - это действующие вооруженные силы Германии. В качестве стрелкового оружия они часто используют винтовки отечественного производства, такие как G36, HK416 и HK417. Их бронетанковые подразделения укомплектованы многими машинами производства НАТО и США.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CUP_AI_HIL">
+        <Original>The Horizon Island Legion are the small military force defending the Pacific island of Tanoa. They typically use Gulf-war era and similar US gear, rounded with a variety of imported European weapons and vehicles and a substantial amount of Vietnam-era small arms.</Original>
+        <Russian>Легион острова Горизонт - небольшая военная сила, защищающая тихоокеанский остров Таноа. Как правило, они используют американское снаряжение времен войны в Персидском заливе и аналогичное, дополненное различными видами импортного европейского оружия и транспортных средств, а также значительным количеством стрелкового оружия вьетнамской эпохи.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CUP_AI_RACS">
+        <Original>The Royal Army Corps of Sahrani use a variety of NATO and U.S. vehicles and weaponry, with some diversity depending on individual preference, often including versions of the FN FAL or HK G36.</Original>
+        <Russian>Королевский армейский корпус Сахрани использует различные транспортные средства и вооружение НАТО и США, с некоторым разнообразием в зависимости от индивидуальных предпочтений, часто включая версии FN FAL или HK G36.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CUP_AI_SLA">
+        <Original>The Sahrani Liberation Army are a group that opposes the Western support of the current government and has successfully acquired assets from a variety of Eastern nations to execute a violent coup in Sahrani. They use a wide variety of AK-pattern rifles.</Original>
+        <Russian>Освободительная армия Сахрани - группа, выступающая против поддержки Западом нынешнего правительства, которая успешно приобрела активы у различных восточных стран, чтобы совершить насильственный переворот в Сахрани. Они используют широкий спектр автоматов типа АК.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CUP_AI_TKA">
+        <Original>The Takistani Army maintains a healthy stockpile of Soviet-era equipment and small arms after the end of official Soviet occupation. Their arsenal is rounded out with the occaisonal foreign rifle, such as the FAL 50.61.</Original>
+        <Russian>После окончания официальной советской оккупации армия Такистана сохранила значительные запасы советского снаряжения и стрелкового оружия. Их арсенал пополняется редкой иностранной винтовкой, например FAL 50.61.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_FIA">
+        <Original>The AAF's treatment of the civilans on Altis has left many moving for a change in leadership, and the Freedom and Independence Army is here to restore freedom and a government with the people in mind. The FIA primarily use sub-machine guns to start with, quickly transitioning to stolen enemy weapons.</Original>
+        <Russian>Обращение AAF с гражданским населением на Алтисе привело к тому, что многие стали требовать смены руководства, и Армия свободы и независимости пришла сюда, чтобы восстановить свободу и правительство, ориентированное на людей. Для начала FIA использует в основном пистолеты-пулеметы, быстро переходя на краденое оружие противника.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_GM_AI_BW">
+        <Original>The Bundesweher are the current armed forces for Germany. They frequently use domestically produced rifles, such as the G36 and HK33 for small arms. Their armored units are rounded out with many NATO and U.S. produced vehicles.</Original>
+        <Russian>Бундесвер - это действующие вооруженные силы Германии. В качестве стрелкового оружия они часто используют винтовки отечественного производства, такие как G36 и HK33. Их бронетанковые подразделения укомплектованы многочисленными машинами производства НАТО и США.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_GM_AI_NVA">
+        <Original>The NVA were the predominant armed forces in Germany from 1956 to 1990, with the fall of the Soviet Union. They typically use a wide variety of AK pattern rifles due to the overwhelming availability.</Original>
+        <Russian>NVA были доминирующими вооруженными силами в Германии с 1956 по 1990 год, после распада Советского Союза. Они обычно используют широкий спектр автоматов типа АК, что объясняется их широкой доступностью.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_GM_Civ">
+        <Original>The civilians of Germany never wanted a civil war, yet the conflicting interests of two leaders has led the country and its citizens into a very poor position. The FIA aim to lift this burden by taking matters into their own hands.</Original>
+        <Russian>Граждане Германии никогда не хотели гражданской войны, но конфликт интересов двух лидеров привел страну и ее граждан в крайне бедственное положение. FIA стремится снять это бремя, взяв дело в свои руки.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_GM_Reb">
+        <Original>The Freedom and Independence Army is a group of civilians opposing the occupation of the BW and NVA. They make good use of their ample suply of Mosin-Nagants, but rapidly switch to locally produced rifles when they can be acquired.</Original>
+        <Russian>Армия свободы и независимости - это группа гражданских лиц, выступающих против оккупации BW и NVA. Они используют достаточные запасы винтовок Мосина-Наганта, но быстро переходят на винтовки местного производства, когда их удается приобрести.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_IFA_AI_ALLIES">
+        <Original>The Allies of World War II were a coalition of nations dedicated to fighting the Wehrmacht's ruthless invasion of its neighboring countries. They most often use American-exported weapons, such as the M1 Garand, M1A1 Thompson, and M1 Carbine.</Original>
+        <Russian>Союзники во Второй мировой войне - это коалиция стран, призванная бороться с безжалостным вторжением вермахта в соседние страны. Чаще всего они использовали оружие американского производства, такое как M1 Garand, M1A1 Thompson и M1 Carbine.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_IFA_AI_SOV">
+        <Original>The Soviets during World War II worked with the Allies after Russian territory was invaded during the Wehrmacht's destructive path to power. They most often use the PPSH-41 submachine gun and Mosin-Nagant rifle, with few exceptions.</Original>
+        <Russian>Советские войска во время Второй мировой войны сотрудничали с союзниками после того, как территория России была захвачена в ходе разрушительного пути вермахта к власти. Чаще всего они использовали пистолет-пулемет ППШ-41 и винтовку Мосина-Наганта, за редким исключением.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_IFA_AI_UK">
+        <Original>The United Kingdom was at the forefront of World War II, a final show of force from a once-great empire. They commonly use a variety of home-grown weapons like the Sten and Enfield, mixed with a variety of American export weaponry.</Original>
+        <Russian>Великобритания была на переднем крае Второй мировой войны - последняя демонстрация силы некогда великой империи. Они обычно используют различные виды отечественного оружия, такие как "Стен" и "Энфилд", в сочетании с американским экспортным оружием.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_ION">
+        <Original>Ruthless and willing to do anything for a quick buck, the private military corporation of ION Services, Incorporated and it's diverse set of contractors believe every job has a reasonable price. The company buys assets in bulk for dirt-cheap, and there is no standard-issue rifle.</Original>
+        <Russian>Безжалостная и готовая на все ради быстрой наживы частная военная корпорация ION Services, Incorporated и ее разнообразные подрядчики считают, что у каждой работы есть разумная цена. Компания закупает имущество оптом и по дешевке, а стандартных винтовок не существует.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_LDF">
+        <Original>The dedicated protectors of a small Eastern European territory near Belarus, the Livonia Defense Force are a relatively small but deceptively capable army. They use custom-made Promet rifles, often utilizing custom sights and underbarrel shotgun attachments.</Original>
+        <Russian>Самоотверженные защитники небольшой восточноевропейской территории, расположенной неподалеку от Белоруссии, Силы обороны Ливонии - относительно небольшая, но обманчиво боеспособная армия. Они используют сделанные на заказ винтовки Promet, часто с прицелами и подствольными дробовиками.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_LFF">
+        <Original>The Livonia Freedom Fighters believe that the LDF has grown corrupt and that the government needs to be reevaluated, whether peacefully or with force by the hands of the rebellion forming in Livonia. The LFF often use basic hunting shotguns until the opportunity to steal an enemy weapon presents itself.</Original>
+        <Russian>Ливонские борцы за свободу считают, что ЛДФ стал коррумпированным и что правительство нуждается в переоценке, будь то мирным путем или с применением силы руками восстания, формирующегося в Ливонии. LFF часто пользуются простыми охотничьими ружьями, пока не представится возможность украсть оружие противника.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_NAPA">
+        <Original>The National Party formed as a civilian militia during the civil war between the CDF and the ChDKZ. As the territory was previously part of the Soviet Union, NAPA uses weapons it can steal from either Russian-backed force, but many militiamen fall back on the commonly available Kar98K.</Original>
+        <Russian>Национальная партия сформировалась как гражданское ополчение во время гражданской войны между ХДС и ЧДКЗ. Поскольку территория ранее входила в состав Советского Союза, НАПА использует оружие, которое она может украсть у любой из поддерживаемых Россией сил, но многие ополченцы предпочитают использовать общедоступный Kar98K.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_NATO">
+        <Original>Since its founding in 1949, the North Atlantic Treaty Organization has been dedicated to ensuring the safety and security of all nations involved in the alliance, leading to one of the world's most lethal superpowers. NATO forces use the 6.5x39mm cartridge for almost all small arms.</Original>
+        <Russian>С момента своего основания в 1949 году Организация Североатлантического договора посвятила себя обеспечению безопасности всех стран, входящих в альянс, и стала одной из самых смертоносных сверхдержав в мире. Силы НАТО используют патрон 6,5x39 мм почти для всего стрелкового оружия.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_NATOUK">
+        <Original>Since its founding in 1949, the North Atlantic Treaty Organization has been dedicated to ensuring the safety and security of all nations involved in the alliance, with this regiment hailing from the United Kingdom and using the SPAR-16 and SPAR-17 rifles.</Original>
+        <Russian>С момента своего основания в 1949 году Организация Североатлантического договора призвана обеспечивать безопасность всех стран, входящих в альянс. Полк, в котором используются винтовки SPAR-16 и SPAR-17, дислоцируется в Великобритании.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_RHS_AI_ChDKZ">
+        <Original>The Chernarussian Movement of the Red Star is a pro-Russian separatist movement that quickly evolved to an active civilian militia to a powerful force capable of challenging governments directly. They normally use Cold-War era Soviet equipment and vehicles.</Original>
+        <Russian>Чернарусское движение Красной Звезды - это пророссийское сепаратистское движение, которое быстро превратилось из активного гражданского ополчения в мощную силу, способную бросить прямой вызов правительству. Они обычно используют советское оборудование и транспортные средства времен холодной войны.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_RHS_AI_SAF">
+        <Original>The Serbian Armed Forces used to primarily use Soviet equipment, but have since diversified their arsenal after the fall of the Soviet Union. They often wield the HK G36, and commonly use American Humvees along with a host of more modern Russian vehicles.</Original>
+        <Russian>Раньше сербские вооруженные силы использовали в основном советскую технику, но после распада Советского Союза их арсенал стал более разнообразным. Они часто используют HK G36 и американские "Хаммеры", а также множество более современных российских машин.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_SDK">
+        <Original>Syndikat supporters see through the reign of CSAT on the Pacific island of Tanoa and are actively attempting to overthrow the government responsible for allowing foreign occupation. Similar to the FIA, they typically use sub-machine guns for hit-and-run tactics.</Original>
+        <Russian>Сторонники Синдиката видят, что на тихоокеанском острове Таноа правят CSAT, и активно пытаются свергнуть правительство, допустившее иностранную оккупацию. Подобно FIA, они обычно используют пистолеты-пулеметы для тактики "налета и бегства".</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_SFP_SAF00">
+        <Original>The Swedish Defense Force was never focused on any exploratory ventures into surrounding nations, instead opting to maintain its alliances and fortify the Swedish border from any kind of enemy attack. They use a variety of homegrown weapons, often using the AK4, a variant of the G3.</Original>
+        <Russian>Шведские силы обороны никогда не были нацелены на исследовательские экспедиции в соседние страны, предпочитая поддерживать свои союзы и укреплять шведскую границу от любых вражеских нападений. Они используют разнообразное отечественное оружие, часто применяя АК4, вариант G3.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_SFP_SAF15">
+        <Original>The Swedish Defense Force was never focused on any exploratory ventures into surrounding nations, instead opting to maintain its alliances and fortify the Swedish border from any kind of enemy attack. They use a variety of homegrown weapons, often using the AK5, a variant of the FN FNC.</Original>
+        <Russian>Шведские силы обороны никогда не были нацелены на исследовательские экспедиции в соседние страны, предпочитая поддерживать свои союзы и укреплять шведскую границу от любых вражеских нападений. Они используют разнообразное отечественное оружие, часто применяя АК5 - вариант FN FNC.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_SPE_IFA_AI_US">
+        <Original>The United States represented the industrial backbone of the Allies during World War II. U.S. forces typically use a wide variety of battle rifles and SMGs, such as the M1 Garand and M1A1 Thompson.</Original>
+        <Russian>Во время Второй мировой войны Соединенные Штаты составляли промышленную основу союзников. Американские войска обычно используют широкий спектр боевых винтовок и SMG, таких как M1 Garand и M1A1 Thompson.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_SPE_IFA_AI_WEH">
+        <Original>The Wehrmacht were the armed forces of Germany during World War II. They typically use the Kar98K, and a variety of sub-machine guns like the MP38 and MP40, and created the first true assault rifle, the STG 44.</Original>
+        <Russian>Вермахт был вооруженными силами Германии во время Второй мировой войны. Они обычно использовали Kar98K и различные пистолеты-пулеметы, такие как MP38 и MP40, а также создали первую настоящую штурмовую винтовку STG 44.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_SPE_IFA_CIV">
+        <Original>The civilians of France have certainly seen their fair share of turmoil over the last 300 years, but the impact of World War II has been unlike anything seen before. The FFF wishes to liberate these people from the clutches of the Germans.</Original>
+        <Russian>За последние 300 лет мирные жители Франции пережили немало потрясений, но последствия Второй мировой войны не похожи ни на какие другие. FFF хочет освободить этих людей из лап немцев.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_SPE_IFA_Reb_FFF">
+        <Original>The Free French Forces are a separatist movement defending themselves primarily against the Wehrmacht, and later against the aggression of the United Kingdom and other Allied countries. Many Kar98K rifles are available, making them the precision weapon of choice for any revolutionary.</Original>
+        <Russian>Силы Свободной Франции - сепаратистское движение, защищавшееся в первую очередь от вермахта, а затем от агрессии Великобритании и других союзных стран. В наличии имеется множество винтовок Kar98K, что делает их высокоточным оружием для любого революционера.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_TKC">
+        <Original>The remainder of the civilians who were unable to evacuate the combat zone, the Takistani civilians are always on alert and have learned not to trust anyone. Make sure you restore peace to their lands.</Original>
+        <Russian>Оставшиеся мирные жители, которые не смогли эвакуироваться из зоны боевых действий, - такистанцы всегда начеку и научились никому не доверять. Убедитесь, что вы восстановили мир на их землях.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_TKM">
+        <Original>The Takistani militia is an unexpectedly well-armed group of civilians who hold a significant opposition to the foreign occupation and support the acting government is attempting to use to bolster its ranks. They use a variety of scavenged weapons, commonly relying on bolt-action rifles.</Original>
+        <Russian>Такистанское ополчение - неожиданно хорошо вооруженная группа гражданских лиц, выступающих против иностранной оккупации и поддержки, которую действующее правительство пытается использовать для укрепления своих рядов. Они используют разнообразное оружие, добытое в мусорных баках, в основном полагаясь на винтовки с продольно-скользящим затвором.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_TLA">
+        <Original>The Tanoa Liberation Army is built on the dreams of hundreds, even thousands of soldiers to return the volcanic island of Tanoa to its former glory. They are very poorly funded, and typically use some of the oldest Cold War Soviet technology.</Original>
+        <Russian>Освободительная армия Таноа построена на мечтах сотен и даже тысяч солдат вернуть вулканическому острову Таноа его былую славу. Они очень плохо финансируются и обычно используют самые старые советские технологии времен холодной войны.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_UNS_AI_PAVN">
+        <Original>The People's Army of Vietnam are the citizens and militia of Vietnam dedicated to fighting the invasion of the US, with weapons funded from surrounding Eastern countries such as China and the Soviet Union. They typically use Type 56 assault rifles and the SKS battle rifle.</Original>
+        <Russian>Народная армия Вьетнама - это граждане и ополченцы Вьетнама, призванные бороться против вторжения США, с оружием, полученным от окружающих восточных стран, таких как Китай и Советский Союз. Как правило, они используют штурмовые винтовки Тип 56 и боевую винтовку СКС.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_UNS_AI_US">
+        <Original>This is the Military Assistance Command, Vietnam, and are the operational of the US military tasked with invading Vietnam. They normally use later World War 2 weapons with a few fresh faces, like the M14, M16, and M60.</Original>
+        <Russian>Это Командование военной помощи Вьетнаму, оперативное подразделение вооруженных сил США, которому поручено вторжение во Вьетнам. Обычно они используют оружие времен Второй мировой войны, а также несколько новых образцов, таких как M14, M16 и M60.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_UNS_Reb_VC">
+        <Original>The Vietcong are a milita separatist force directly fighting the PAVN and it's reliance on the power of foreign nations. Due to the high availablilty, the VC typically use similar weapons as the PAVN, including a variety of AK variants and AK clones.</Original>
+        <Russian>Вьетконг - сепаратистская военная сила, напрямую борющаяся с ПАВН и его зависимостью от власти иностранных государств. Из-за высокой доступности оружия ВК, как правило, используют то же оружие, что и ПАВН, включая различные варианты АК и клоны АК.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_USAF">
+        <Original>The United States Army are one of the world's most dangerous military superpowers, with their alliance to NATO making them a difficult threat. They typically produce and use a substantial amount of NATO weaponry, including 5.56 STANAG and 7.62 calibers.</Original>
+        <Russian>Армия Соединенных Штатов - одна из самых опасных военных сверхдержав в мире, а их союз с НАТО делает их сложной угрозой. Как правило, они производят и используют значительное количество оружия НАТО, включая калибры 5,56 STANAG и 7,62.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_USMC">
+        <Original>The United States Marine Corps are the primary branch of the US military deployed overseas. They retain the same lethality as their domestic counterparts, with equipment fitted for operating on the high seas. Their small arms are predominantly the same as the standard US Army.</Original>
+        <Russian>Корпус морской пехоты США - основное подразделение вооруженных сил США, развернутое за рубежом. Они сохраняют ту же смертоносность, что и их отечественные коллеги, а их снаряжение приспособлено для действий в открытом море. Их стрелковое оружие в основном такое же, как и в армии США.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_VDV">
+        <Original>The Russian Air Forces fill a vital gap in the AFRF's capability of cohesive aerial assaults. They typically use standard issue Russian equipment, but their vehicles and gear are modified to be more lightweight for ease of aerial operations.</Original>
+        <Russian>Российские ВВС заполняют жизненно важный пробел в возможностях ВСРФ по проведению сплоченных воздушных десантов. Как правило, они используют стандартное российское оборудование, но их машины и снаряжение модифицированы для облегчения воздушных операций.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_VN_AI_MACV">
+        <Original>The Military Assistance Command, Vietnam are the operational group of the US military tasked with invading Vietnam. They normally use later World War II weapons with a few fresh faces, like the M14, M16, and M60.</Original>
+        <Russian>Командование военной помощи Вьетнаму - оперативная группа вооруженных сил США, которой поручено вторжение во Вьетнам. Обычно они используют оружие времен Второй мировой войны, а также несколько новых образцов, таких как M14, M16 и M60.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_VN_AI_PAVN">
+        <Original>The People's Army of Vietnam are the citizens and militia of Vietnam dedicated to fighting the invasion of the US, with weapons funded from surrounding Eastern countries such as China and the Soviet Union. They typically use Type 56 assault rifles and the SKS battle rifle.</Original>
+        <Russian>Народная армия Вьетнама - это граждане и ополченцы Вьетнама, призванные бороться против вторжения США, с оружием, полученным от окружающих восточных стран, таких как Китай и Советский Союз. Как правило, они используют штурмовые винтовки Тип 56 и боевую винтовку СКС.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_VN_Civ">
+        <Original>The noncombatant civilians of Vietnam wish for no part in this war, solely looking to go back to the time where they could farm in peace.</Original>
+        <Russian>Не участвующие в боевых действиях мирные жители Вьетнама не желают принимать никакого участия в этой войне, а лишь хотят вернуться в то время, когда они могли спокойно заниматься сельским хозяйством.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_VN_Reb_POF">
+        <Original>The Pissed Off Farmers are an excellent example of what happens when you mess with the rice paddies. They have a high supply of Mosin-Nagants, due to the incredible mass-production during World War II.</Original>
+        <Russian>Взбешенные фермеры - отличный пример того, что бывает, если возиться с рисовыми полями. У них большой запас пистолетов Мосина-Наганта, благодаря невероятно массовому производству во время Второй мировой войны.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_WS_AI_ADF">
+        <Original>The Arganian Defense Force is the organized army defending Argana. They take the role of the benevolent overlords, leaving the SFIA to do the dirty work under the sponsorship of the ADF. They use the Velko rifles along with the Mk20 bullpup rifle.</Original>
+        <Russian>Силы обороны Арганы - это организованная армия, защищающая Аргану. Они выступают в роли доброжелательных владык, оставляя SFIA выполнять грязную работу под патронажем ADF. Они используют винтовки Велко, а также винтовку Mk20 буллпап.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_WS_AI_ION">
+        <Original>ION Services, Incorporated forces around Sefrou Ramal are still classified as independent contractors, but are hired by third parties for specific jobs in the destabilized region. They use the custom-made XMS bullpup rifles with standard STANAG magazines.</Original>
+        <Russian>Силы ION Services, Incorporated вокруг Сефру Рамаль по-прежнему классифицируются как независимые подрядчики, но нанимаются третьими сторонами для выполнения конкретных работ в дестабилизированном регионе. Они используют сделанные на заказ винтовки XMS в стиле буллпап со стандартными магазинами STANAG.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_WS_AI_SIFA">
+        <Original>The Sefrawi Freedom and Independence Army is a state-backed paramilitary group, funded and reporting directly to the Arganian government for the work that's too dirty for the ADF's soldiers. They typically use the Velko rifles, which are domestically sourced.</Original>
+        <Russian>Армия свободы и независимости Сефрауи - это военизированная группировка, поддерживаемая государством, финансируемая и подчиняющаяся непосредственно правительству Аргании для выполнения работы, которая слишком грязная для солдат ADF. Они обычно используют винтовки Велко, которые производятся внутри страны.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_WS_CIV">
+        <Original>Many of the citizens of Sefrou-Ramal have not had the chance to evacuate yet, making the area very dangerous for any noncombatants. The Tura look to help the residents of their homeland however possible.</Original>
+        <Russian>Многие жители Сефру-Рамаля еще не успели эвакуироваться, что делает эту местность очень опасной для всех, кто не участвует в боевых действиях. Тура стремятся помочь жителям своей родины, насколько это возможно.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_WS_Reb_Tura">
+        <Original>The Tura are an ancient tribe that opposes the urbanization and military presence in Sefrawi and is willing to take up arms to retake what once was their home. They use weapons stolen from the enemy, as well as armored pickups and technicals for assault.</Original>
+        <Russian>Тура - древнее племя, которое выступает против урбанизации и военного присутствия в Сефрауи и готово взяться за оружие, чтобы отвоевать то, что когда-то было их домом. Для нападения они используют оружие, украденное у врага, а также бронированные пикапы и технику.</Russian>
       </Key>
     </Container>
     <Container name="AI_management">
@@ -10871,6 +11220,14 @@
         <Czech>Vyčistí mrtvá těla, zahozenou výzbroj, zničené vozidla a podobné entity. Výrazně pomáhá s chodem klienta a servru, doporučuje se spustit alespoň jednou za hodinu.</Czech>
         <Turkish>Oyunda birçok şeyi temizler. Görevi dondurduğu için dikkatli kullanın</Turkish>
         <Chinesesimp>清理游戏中的一些东西。谨慎使用, 因为它可能导致任务卡死</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_commander_comm_convSquad">
+        <Original>Convert to Squad</Original>
+        <Russian>Преобразование в отряд</Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_commander_comm_convSquad_tooltip">
+        <Original>Convert currently selected AI units to a high command squad.</Original>
+        <Russian>Преобразуйте выбранные в данный момент отряды AI в отряды высшего командования.</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_commander_comm_faction_garage">
         <Original>Faction Garage</Original>

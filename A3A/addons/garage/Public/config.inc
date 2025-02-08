@@ -19,7 +19,7 @@
 HR_GRG_Prefix = "Antistasi";
 
 // Condition for whether the player can override garage locks
-HR_GRG_isCmdClient = {
+HR_GRG_canOverrideLock = {
     (isServer && hasInterface && _this isEqualTo player) //Lan host
     || {admin owner _this > 0} //admin
     || {_this isEqualTo theBoss && _this call A3A_fnc_isMember } //member-commander
@@ -133,3 +133,23 @@ if (isClass (configfile >> "CBA_Extended_EventHandlers")) then {
     }] call CBA_fnc_addSetting;
 
 };
+
+// sell button
+HR_GRG_disableSellButton = false;
+
+HR_GRG_addResources = {
+    params ["_money"];
+    [0,_money] call A3A_fnc_resourcesFIA;
+};
+
+HR_GRG_canSell = {_this isEqualTo theBoss};
+
+HR_GRG_getVehicleSellPrice = {
+    private _disableSale = false;
+    if (_disableSale) exitWith {0};
+    params ["_veh"];
+    [_veh] call A3A_fnc_getVehicleSellPrice;
+};
+
+
+

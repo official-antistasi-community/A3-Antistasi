@@ -46,7 +46,7 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 	"outpostsFIA", "tasks", "idlebases", "idleassets", "killZones", "controlsSDK", "params",
 	"attackCountdownOccupants", "attackCountdownInvaders", "prestigeNATO", "prestigeCSAT",
 	"savedPlayers", "testingTimerIsActive", "HR_Garage", "A3A_fuelAmountleftArray", "HQKnowledge", "enemyResources",
-	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC"];
+	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC", "arsenalLimits", "rebelLoadouts"];
 
 
 // Remove this campaign from the save list, if present

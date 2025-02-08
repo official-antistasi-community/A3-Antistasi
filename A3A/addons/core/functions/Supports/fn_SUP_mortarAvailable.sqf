@@ -20,4 +20,4 @@ if (_target isKindOf "Air") exitWith { 0 };     // can't hit air
 // balance this one against artillery
 if (tierWar < 2) exitWith { 0 };
 if (tierWar < 5 or !("ARTILLERY" in _availTypes)) exitWith { 1 };
-1 - (tierWar - 4) / 8;       // // 87.5% at tier 5, 25% at tier 10
+1 - (tierWar - 4) / 12;       // // 91.7% at tier 5, 50% at tier 10

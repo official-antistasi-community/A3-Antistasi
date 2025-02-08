@@ -33,7 +33,7 @@ if(side (_aliveCrew select 0) == teamPlayer) exitWith
     _vehicle removeAction _actionID;
 };
 
-private _isTank = (typeOf _vehicle) in FactionGet(all,"vehiclesTanks");
+private _isTank = (typeOf _vehicle) in (FactionGet(all,"vehiclesTanks") + FactionGet(all,"vehiclesHeavyTanks"));
 
 private _magazines = magazines _caller;
 private _magazineArray = [];

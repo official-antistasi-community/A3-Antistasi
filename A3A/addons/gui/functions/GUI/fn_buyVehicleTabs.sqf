@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal, killerswin2
+Maintainer: Caleb Serafin, DoomMetal, killerswin2
     Handles the initialization and updating of the Buy item dialog.
     This function should only be called from Buyvehicle onLoad and control activation EHs.
 
@@ -17,7 +17,10 @@ Dependencies:
     None
 
 Example:
-    ["logistics"] call A3A_fnc_buyVehicleTab;
+    ["logistics"] call A3A_GUI_fnc_buyVehicleTab;
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -60,7 +63,7 @@ if (_tab isEqualTo "vehicles") then
         private _configClass = configFile >> "CfgVehicles" >> _className;
         if (!isClass _configClass) then { continue };
 
-        private _crewCount = [_className] call A3A_fnc_getVehicleCrewCount;
+        private _crewCount = [_className] call A3A_GUI_fnc_getVehicleCrewCount;
         _crewCount params ["_driver", "_coPilot", "_commander", "_gunners", "_passengers", "_passengersFFV"];
 
         private _displayName = getText (_configClass >> "displayName");

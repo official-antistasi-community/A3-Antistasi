@@ -11,7 +11,7 @@ if (_victim getVariable ["spawner",false]) then
 //Gather infos, trigger timed despawn
 private _victimGroup = group _victim;
 private _victimSide = side (group _victim);
-[_victim] spawn A3A_fnc_postmortem;
+[_victim] remoteExec ["A3A_fnc_postmortem", 2];
 
 // Deplete resource pools if we haven't paid for this unit in advance
 private _pool = _victim getVariable ["A3A_resPool", "legacy"];

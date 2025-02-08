@@ -10,17 +10,9 @@ if ([getPosATL player] call A3A_fnc_enemyNearCheck) exitWith {[_titleStr, locali
 
 if (player != leader group player) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_reinfPlayer_no_lead"] call A3A_fnc_customHint;};
 
-private _hr = server getVariable "hr";
-
-if (_hr < 1) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_reinfPlayer_no_hr"] call A3A_fnc_customHint;};
-private _typeUnit = _this select 0;
-private _costs = server getVariable _typeUnit;
-private _resourcesFIA = 0;
-if (!isMultiPlayer) then {_resourcesFIA = server getVariable "resourcesFIA"} else {_resourcesFIA = player getVariable "moneyX";};
-
-if (_costs > _resourcesFIA) exitWith {[_titleStr, format [localize "STR_A3A_fn_reinf_reinfPlayer_no_money",_costs]] call A3A_fnc_customHint;};
-
 if ((count units group player) + (count units stragglers) > 9) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_reinfPlayer_no_full"] call A3A_fnc_customHint;};
+
+call A3A_fnc_fetchRebelGear;		// Fetch rebel gear from the server if we're out of date
 
 private _weaponHM = createHashMapFromArray [
 	[A3A_faction_reb get "unitSniper", "SniperRifles"],
@@ -30,19 +22,27 @@ private _weaponHM = createHashMapFromArray [
 	[A3A_faction_reb get "unitAA", "MissileLaunchersAA"],
 	[A3A_faction_reb get "unitAT", "MissileLaunchersAT"]];
 
+private _typeUnit = _this select 0;
 if (A3A_rebelGear getOrDefault [_weaponHM getOrDefault [_typeUnit, ""], false] isEqualTo []) exitWith {
 	[_titleStr, localize "STR_A3A_fn_reinf_reinfPlayer_no_weapons"] call A3A_fnc_customHint;
 };
 
+private _hr = server getVariable "hr";
+if (_hr < 1) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_reinfPlayer_no_hr"] call A3A_fnc_customHint;};
+private _costs = server getVariable _typeUnit;
+
+private _resources = if (player == theBoss) then { server getVariable "resourcesFIA" } else { player getVariable "moneyX" };
+if (_costs > _resources) exitWith {[_titleStr, format [localize "STR_A3A_fn_reinf_reinfPlayer_no_money",_costs]] call A3A_fnc_customHint;};
+
 private _unit = [group player, _typeUnit, position player, [], 0, "NONE"] call A3A_fnc_createUnit;
 
-if (!isMultiPlayer) then {
-	_nul = [-1, - _costs] remoteExec ["A3A_fnc_resourcesFIA",2];
+if (player == theBoss) then {
+	[-1, -_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
 } else {
-	_nul = [-1, 0] remoteExec ["A3A_fnc_resourcesFIA",2];
+	[-1, 0] remoteExec ["A3A_fnc_resourcesFIA",2];
 	[- _costs] call A3A_fnc_resourcesPlayer;
-	[_titleStr, localize "STR_A3A_fn_reinf_reinfPlayer_recruited"] call A3A_fnc_customHint;
 };
+[_titleStr, localize "STR_A3A_fn_reinf_reinfPlayer_recruited"] call A3A_fnc_customHint;
 
 [_unit] spawn A3A_fnc_FIAinit;
 _unit disableAI "AUTOCOMBAT";

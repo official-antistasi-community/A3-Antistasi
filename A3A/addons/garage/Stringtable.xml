@@ -422,6 +422,9 @@
         <Turkish>Aracı kilitledi</Turkish>
         <Chinesesimp>载具被上锁，它属于</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Feedback_LockedToolTip_Ago">
+        <Original>%1: %2 ago</Original>
+      </Key>
       <Key ID="STR_HR_GRG_Feedback_requestMount_Denied">
         <Original>Can't mount static</Original>
         <German>Kann gegenstand nicht montieren.</German>
@@ -435,6 +438,22 @@
         <Portuguese>Não podes montar estática</Portuguese>
         <Turkish>Statik monte edilemez</Turkish>
         <Chinesesimp>无法装载固定式武器</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Feedback_sellVehicle_comOnly">
+        <Original>Only the Commander can sell vehicles.</Original>
+        <French>Seul le Commandant peux vendre des véhicules.</French>
+      </Key>
+      <Key ID="STR_HR_GRG_Feedback_sellVehicle_locked">
+        <Original>You cannot sell a locked vehicle. If this is your vehicle, make sure to unlock it first.</Original>
+        <French>Vous ne pouvez vendre de véhicule vérrouiller. Si c'est votre véhicule, dévérouiller le d'abord.</French>
+      </Key>
+      <Key ID="STR_HR_GRG_Feedback_sellVehicle_noPrice">
+        <Original>This vehicle is not suitable for our marketplace.</Original>
+        <French>Ce véhicule n'est pas adapté pour notre marché.</French>
+      </Key>
+      <Key ID="STR_HR_GRG_Feedback_sellVehicle_sold">
+        <Original>Vehicle sold for %1 €.</Original>
+        <French>Véhicule vendu pour %1 €.</French>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_toggleLock_limit">
         <Original>You have too many vehicles locked</Original>
@@ -647,6 +666,10 @@
         <Turkish>Direkler</Turkish>
         <Chinesesimp>挂架</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Generic_SellVeh">
+        <Original>Sell Vehicle</Original>
+        <French>Vendre véhicule</French>
+      </Key>
       <Key ID="STR_HR_GRG_Generic_Static">
         <Original>Statics</Original>
         <German>Statik</German>
@@ -702,6 +725,10 @@
         <Portuguese>Disponível:</Portuguese>
         <Turkish>Mevcut:</Turkish>
         <Chinesesimp>可用:</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_InfoPanel_cannotBeSold">
+        <Original>Cannot be sold.</Original>
+        <French>Ne peux pas être vendu.</French>
       </Key>
       <Key ID="STR_HR_GRG_InfoPanel_Capacity">
         <Original>Capacity:</Original>
@@ -814,6 +841,9 @@
         <Portuguese>Massa:</Portuguese>
         <Turkish>Yığın:</Turkish>
         <Chinesesimp>重量:</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_InfoPanel_salePrice">
+        <Original>Sell Price:</Original>
       </Key>
       <Key ID="STR_HR_GRG_InfoPanel_Seats">
         <Original>Seats:</Original>

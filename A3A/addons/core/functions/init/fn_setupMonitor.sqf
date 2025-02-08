@@ -15,10 +15,9 @@ private _addonVics = "true" configClasses (configFile/"A3A"/"AddonVics");
 
 // Ignore DLC without equipment and vehicles
 // Need the true names from here, so pass it all in
-private _loadedDLC = getLoadedModsInfo select {
-	(_x#3) and {!(_x#1 in ["A3","curator","argo","tacops"])}
-};
-
+// Arma bug: Need to hardcode CDLC because arma3.cfg mod loading method doesn't register CDLC as "official"
+private _loadedDLC = getLoadedModsInfo select { (_x#2) and !(_x#1 in ["A3","curator","argo","tacops"]) };
+_loadedDLC append (getLoadedModsInfo select { tolower (_x#1) in ["ef", "gm", "rf", "spe", "vn", "ws"] });
 
 private _autoLoadTime = "autoLoadLastGame" call BIS_fnc_getParamValue;
 private _autoLoadData = nil;
@@ -81,7 +80,7 @@ while {isNil "A3A_saveData"} do {
         Info_1("Player %1 is no longer admin, disabling their setup dialog", name A3A_setupPlayer);
         A3A_startupState = _waitState; publicVariable "A3A_startupState";
 
-        ["serverClose"] remoteExec ["A3A_fnc_setupDialog", A3A_setupPlayer];
+        ["serverClose"] remoteExec ["A3A_GUI_fnc_setupDialog", A3A_setupPlayer];
         A3A_setupPlayer = objNull;
     };
 
@@ -97,7 +96,7 @@ while {isNil "A3A_saveData"} do {
     // Collect save data. Do this each time so consistency is maintained with deletes
     private _saveData = call A3A_fnc_collectSaveData;
     DebugArray("Save data found:", _saveData);
-    ["sendData", [_saveData, _loadedPatches, _loadedDLC]] remoteExec ["A3A_fnc_setupDialog", A3A_setupPlayer];
+    ["sendData", [_saveData, _loadedPatches, _loadedDLC]] remoteExec ["A3A_GUI_fnc_setupDialog", A3A_setupPlayer];
 };
 
 Info("Setup monitor terminated");

@@ -3,6 +3,8 @@ class UserActionsConflictsGroups {
         PREFIX[] = {
             QGVAR(battleMenu),
             QGVAR(artyMenu),
+            QGVAR(respawn),
+            QGVAR(selfRevive),
             QGVAR(infoBar),
             QGVAR(earPlugs),
             QGVAR(customHintDismiss)

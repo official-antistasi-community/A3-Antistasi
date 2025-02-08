@@ -1,15 +1,15 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-private ["_hr","_resourcesFIA","_hrT","_resourcesFIAT"];
+params [["_hr",""],["_resourcesFIA",""]]; // nil protection
+
+if !(_hr isEqualType 0) exitWith {Error("The first parameter, the added HR, must be a number");};
+if !(_resourcesFIA isEqualType 0) exitWith {Error("The second parameter, the added money, must be a number");};
 waitUntil {!resourcesIsChanging};
 resourcesIsChanging = true;
-_hr = _this select 0;
-_resourcesFIA = _this select 1;
-if (isNil "_resourcesFIA") then {Error("_resourceFIA is nil");};
-if ((isNil "_hr") or (isNil "_resourcesFIA")) exitWith {resourcesIsChanging = false};
+
 if ((floor _resourcesFIA == 0) and (floor _hr == 0)) exitWith {resourcesIsChanging = false};
-_hrT = server getVariable "hr";
-_resourcesFIAT = server getVariable "resourcesFIA";
+private _hrT = server getVariable "hr";
+private _resourcesFIAT = server getVariable "resourcesFIA";
 
 _hrT = _hrT + _hr;
 _resourcesFIAT = round (_resourcesFIAT + _resourcesFIA);

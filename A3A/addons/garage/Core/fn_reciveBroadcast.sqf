@@ -26,7 +26,7 @@
 #include "defines.inc"
 FIX_LINE_NUMBERS()
 Trace_1("Reciving broadcast: %1",_this);
-params ["_lockUID", "_checkoutUID", "_catIndex", "_vehUID", "_player", "_switch"];
+params ["_lockUID", "_checkoutUID", "_catIndex", "_vehUID", "_player", "_switch", "_time"];
 
 private _cat = HR_GRG_Vehicles#_catIndex;
 private _vehicle = _cat get _vehUID;
@@ -37,6 +37,7 @@ if (_switch) then { [getPlayerUID _player] call HR_GRG_fnc_releaseAllVehicles };
 if (!isNil "_lockUID") then {
     _vehicle set [2, _lockUID];
     _vehicle set [5, if (_lockUID isEqualTo "") then { "" } else { name _player }];
+    _vehicle set [7, [_time, []] select (_lockUID isEqualTo "")];
 };
 
 if (!isNil "_checkoutUID") then {

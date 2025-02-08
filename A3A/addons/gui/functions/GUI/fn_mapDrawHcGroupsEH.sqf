@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Event Handler for drawing High Command group markers to the maps
 
 Arguments:
@@ -15,8 +15,13 @@ Dependencies:
     Map must be open
 
 Example:
-    _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawHcGroupsEH"];
+    _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawHcGroupsEH"];
+
+License: APL-ND
+
 */
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
 
 params ["_map"];
 
@@ -24,15 +29,15 @@ params ["_map"];
 private _oldHcGroupData = _map getVariable "hcGroupData";
 private _hcGroupData = [];
 {
-    private _groupData = [_x] call A3A_fnc_getGroupInfo;
+    private _groupData = [_x] call FUNC(getGroupInfo);
     _hcGroupData pushBack _groupData;
 } forEach hcallGroups player; // TODO UI-update: Replace with commander?
 _map setVariable ["hcGroupData", _hcGroupData];
 
-// TODO UI-update: Move to A3A_fnc_commanderTab
+// TODO UI-update: Move to FUNC(commanderTab)
 // Update commander tab when data changes
 /* if !(_oldHcGroupData isEqualTo _hcGroupData) then {
-["update"] call A3A_fnc_commanderTab;
+["update"] call FUNC(commanderTab);
 }; */
 
 {

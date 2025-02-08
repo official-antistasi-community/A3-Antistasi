@@ -50,6 +50,7 @@
 #define HR_GRG_IDC_tLock 170012
 #define HR_GRG_IDC_Confirm 170013
 #define HR_GRG_IDC_InfoPanel 170014
+#define HR_GRG_IDC_SellVeh 170015
 #define HR_GRG_IDC_SourcePanelAmmo 1700141
 #define HR_GRG_IDC_SourcePanelFuel 1700142
 #define HR_GRG_IDC_SourcePanelRepair 1700143

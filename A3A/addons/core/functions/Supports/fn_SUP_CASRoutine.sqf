@@ -35,6 +35,8 @@ private _group = [_side, _plane] call A3A_fnc_createVehicleCrew;
 { [_x, nil, false, _resPool] call A3A_fnc_NATOinit } forEach units _group;
 _group deleteGroupWhenEmpty true;
 _group setBehaviourStrong "CARELESS";
+[-10 * count units _group, _side, _resPool] call A3A_fnc_addEnemyResources;
+
 
 _plane addEventHandler ["Killed", {
     params ["_plane"];
@@ -42,7 +44,7 @@ _plane addEventHandler ["Killed", {
 }];
 
 // should we be passing the timeout around here? Or have separate timeouts for bomb & CAS?
-if (!isNil {_plane getVariable "bombRacks"}) then {
+if (count (_plane getVariable "diveParams") > 0) then {
     [_suppData, _plane, _group, _reveal] call A3A_fnc_SUP_CASDiveBomb;
 };
 

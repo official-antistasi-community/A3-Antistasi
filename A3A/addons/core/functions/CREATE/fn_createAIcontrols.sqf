@@ -74,7 +74,7 @@ if (_isControl) then
 		if !(A3A_hasIFA) then
 			{
 			_pos = [getPos (_roads select 0), 7, _dirveh + 270] call BIS_Fnc_relPos;
-			if (worldname == "SPE_Normandy") then {
+			if ((worldname == "SPE_Normandy") or (worldname == "SPE_Mortain")) then {
 				_bunker = "Land_SPE_Sandbag_Nest" createVehicle _pos;
 				_bunker setDir _dirveh;
 				_pos = _bunker modelToWorld [-0.200684,-0.91333,-0.421184];
@@ -97,7 +97,7 @@ if (_isControl) then
 			_soldiers pushBack _unit;
 			sleep 1;
 			_pos = [getPos (_roads select 0), 7, _dirveh + 90] call BIS_Fnc_relPos;
-			if (worldname == "SPE_Normandy") then {
+			if ((worldname == "SPE_Normandy") or (worldname == "SPE_Mortain")) then {
 				_bunker = "Land_SPE_Sandbag_Nest" createVehicle _pos;
 				_bunker setDir _dirveh + 180;
 				_pos = _bunker modelToWorld [-0.200684,-0.91333,-0.421184];

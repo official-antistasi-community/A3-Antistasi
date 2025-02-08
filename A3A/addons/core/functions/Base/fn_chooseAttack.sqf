@@ -92,11 +92,14 @@ if (_targetMrk in citiesX) exitWith {
     if (_side == Invaders) then {
         // Punishment, unsimulated
         Info_2("Starting punishment mission from %1 to %2", _originMrk, _targetMrk);
+        [-400, _side, "attack"] call A3A_fnc_addEnemyResources;
+        bigAttackInProgress = true; publicVariable "bigAttackInProgress";
         [_targetMrk, _originMrk] spawn A3A_fnc_invaderPunish;
     } else {
         // Supply convoy, unsimulated
         // Do we allow these even if there's already a convoy? Probably not harmful.
         Info_2("Sending supply convoy from %1 to %2", _originMrk, _targetMrk);
+        [-200, _side, "attack"] call A3A_fnc_addEnemyResources;
         [[_targetMrk, _originMrk, "Supplies", "attack"],"A3A_fnc_convoy"] call A3A_fnc_scheduler;
     };
     true;
@@ -104,6 +107,8 @@ if (_targetMrk in citiesX) exitWith {
 
 if (_targetMrk == "Synd_HQ") exitWith {
     Info_2("Starting HQ attack from %1", _originMrk);
+    [-400, _side, "attack"] call A3A_fnc_addEnemyResources;
+    bigAttackInProgress = true; publicVariable "bigAttackInProgress";
     [_side, _originMrk] spawn A3A_fnc_attackHQ;
     true;
 };
@@ -114,6 +119,8 @@ if((spawner getVariable _targetMrk) != 2 || (sidesX getVariable _targetMrk) == t
     // Sending real attack, execute the fight
     private _waves = round (1 + random 1 + _localThreat / 1000);         // TODO: magic number
     Info_3("Starting waved attack with %1 waves from %2 to %3", _waves, _originMrk, _targetMrk);
+    [-400, _side, "attack"] call A3A_fnc_addEnemyResources;
+    bigAttackInProgress = true; publicVariable "bigAttackInProgress";
     [_targetMrk, _originMrk, _waves] spawn A3A_fnc_wavedAttack;
     true;
 }
@@ -128,7 +135,7 @@ else
 
     // land units are a bit cheaper, attack is generally more expensive than defence
     private _atkResources = _defResources + _localThreat + _flyoverThreat;
-    _atkResources = _atkResources * (0.75 + 2^(-_countLandAttackBases));
+    _atkResources = 400 + _atkResources * (0.75 + 2^(-_countLandAttackBases));
     [-_atkResources, _side, "attack"] call A3A_fnc_addEnemyResources;
 
     // Flip marker and add garrison once flipped

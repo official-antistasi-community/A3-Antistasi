@@ -663,7 +663,7 @@ SA_Pickup_Tow_Ropes_Action_Check = {
 };
 
 SA_Can_Pickup_Tow_Ropes = {
-	isNull (player getVariable ["SA_Tow_Ropes_Vehicle", objNull]) && count (missionNamespace getVariable ["SA_Nearby_Tow_Vehicles",[]]) > 0 && vehicle player == player;
+	isNull (player getVariable ["SA_Tow_Ropes_Vehicle", objNull]) && count (missionNamespace getVariable ["SA_Nearby_Tow_Vehicles",[]]) > 0 && vehicle player == player && !(call A3A_fnc_isCarrying);
 };
 
 SA_TOW_SUPPORTED_VEHICLES = [

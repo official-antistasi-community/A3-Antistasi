@@ -37,11 +37,12 @@ private _initData = [
     ["ARTILLERY",       "AREA", 0.5, 0.9, 150,  85,  "", "vehiclesArtillery"],           // balanced against mortars (50/50 at tier 10), total will be 0.5/0.9
     ["MORTAR",          "AREA", 0.5, 0.9, 100,  50,  "", "staticMortars"],
     ["ASF",           "TARGET", 1.0, 0.4,   0, 100,  "", "vehiclesPlanesAA"],            // balanced against SAMs (if available), 66/33 weighting
-    ["CAS",           "TARGET", 1.0, 0.4,   0, 100,  "", "vehiclesPlanesCAS"],
+    ["CAS",           "TARGET", 0.5, 0.5,   0, 100,  "", "vehiclesPlanesCAS"],
+    ["TANK",          "TARGET", 0.5, 0.5,   0, 100,  "", ""],                            // balanced against CAS, lowAir based
     ["QRFLAND",       "TROOPS", 1.0, 1.4,   0,   0,  "", ""],
     ["QRFAIR",        "TROOPS", 0.5, 0.1,   0,   0,  "", ""],
-    ["CARPETBOMBS",     "AREA", 0.5, 0.1, 200,   0, "u", ""],                            // balanced against airstrikes
-    ["SAM",           "TARGET", 1.0, 1.0,   0, 100, "u", ""],                             // balanced against ASF
+    ["CARPETBOMBS",     "AREA", 0.5, 0.1, 200,   0, "u", "vehiclesPlanesCAS"],            // balanced against airstrikes
+    ["SAM",           "TARGET", 1.0, 1.0,   0, 100,  "", ""],                             // balanced against ASF
     ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""]
 //    ["GUNSHIP",    ["AREA",   0.2,  50,   0]],                 // uh. Does AREA work for this? Only lasts 5 minutes so maybe...
 ];
@@ -51,12 +52,14 @@ private _fnc_buildSupportHM =
 {
     params ["_faction"];
     private _lowAir = _faction getOrDefault ["attributeLowAir", false];
+    private _noSAM = _faction getOrDefault ["attributeNoSAM", false];
     private _suppHM = createHashMap;
     {
         _x params ["_suppType", "_baseType", "_weight", "_lowAirWeight", "_effRadius", "_strikepower", "_flags", "_reqType"];
         if (_faction get _reqType isEqualTo []) then { continue };
         if ("u" in _flags and !allowUnfairSupports) then { continue };
         if ("f" in _flags and !allowFuturisticSupports) then { continue };
+        if (_suppType == "SAM" and _noSAM) then { continue };
 
         private _weight = [_weight, _lowAirWeight] select _lowAir;
         _suppHM set [_suppType, [_baseType, _weight, _effRadius, _strikepower]];
@@ -66,6 +69,20 @@ private _fnc_buildSupportHM =
 
 A3A_supportTypesOcc = A3A_faction_occ call _fnc_buildSupportHM;
 A3A_supportTypesInv = A3A_faction_inv call _fnc_buildSupportHM;
+
+// Generate anti-air support threshold for a faction, based on average ASF plane cost
+private _fnc_getAirThreshold =
+{
+    params ["_faction"];
+    private _planes = _faction get "vehiclesPlanesAA";
+    if (_planes isEqualTo []) exitWith { 200 };     // SAM price
+    private _cost = 0;
+    { _cost = _cost + (A3A_vehicleResourceCosts get _x) } forEach _planes;
+    _cost / count _planes;
+};
+
+A3A_airThresholdOcc = A3A_faction_occ call _fnc_getAirThreshold;
+A3A_airThresholdInv = A3A_faction_inv call _fnc_getAirThreshold;
 
 
 // Build marker lists for determining importance of target locations

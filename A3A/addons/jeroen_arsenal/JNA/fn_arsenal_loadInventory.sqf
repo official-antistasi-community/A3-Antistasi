@@ -164,7 +164,7 @@ _itemCounts =+ _availableItems;
 		_item = _x select 0;
 		_amount = (_x select 1);
 		if (_amount != -1 && !_isMember) then {
-			_itemMin = A3A_arsenalLimits getOrDefault [_item, _arrayMin];
+			_itemMin = A3A_arsenalLimits getOrDefault [_item, [_arrayMin]] select 0;
 			if (_isMagArray) then { _itemMin = _itemMin * getNumber (configfile >> "CfgMagazines" >> _item >> "count") };
 			_subArray set [_foreachindex, [_item, (_amount - _itemMin) max 0]];
 		};

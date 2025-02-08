@@ -274,6 +274,7 @@ class Mission
 	assetType="Free";
 	class Intel
 	{
+        briefingName=$STR_antistasi_mission_info_SPE_Normandy_mapname_text;
 		resistanceWest=0;
 		timeOfChanges=1800.0002;
 		startWeather=0.30000001;

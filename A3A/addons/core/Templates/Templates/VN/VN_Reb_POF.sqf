@@ -19,7 +19,7 @@
 ["itemMaps", ["vn_b_item_map"]] call _fnc_saveToTemplate;  // Relies on autodetection.
 
 ["diveGear", ["vn_b_uniform_seal_09_01", "vn_b_acc_seal_01", "vn_b_vest_seal_01"]] call _fnc_saveToTemplate;
-["flyGear", ["vn_b_uniform_heli_01_01"]] call _fnc_saveToTemplate;
+["flyGear", ["vn_b_uniform_heli_01_01","vn_i_pack_parachute_01"]] call _fnc_saveToTemplate;
 
 ["surrenderCrate", "vn_o_ammobox_04"] call _fnc_saveToTemplate;
 

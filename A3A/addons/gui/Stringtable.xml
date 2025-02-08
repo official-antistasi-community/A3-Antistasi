@@ -30,6 +30,12 @@
         <Turkish>Şu anki</Turkish>
         <Chinesesimp>当前</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_arsenal_limits_dialog_guest_warning">
+        <Original>As a guest commander you can't reduce arsenal limits below default, or below values set by members.</Original>
+      </Key>
+      <Key ID="STR_antistasi_arsenal_limits_dialog_hint_title">
+        <Original>Arsenal Guest Limits</Original>
+      </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_limit">
         <Original>Limit</Original>
         <German>Grenze</German>
@@ -57,6 +63,9 @@
         <Portuguese>REÍNICIO</Portuguese>
         <Turkish>RESET</Turkish>
         <Chinesesimp>重置</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_arsenal_limits_dialog_reset_tooltip">
+        <Original>Reset all items in this category to the default guest limit</Original>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_step">
         <Original>STEP</Original>
@@ -513,6 +522,7 @@
         <Korean>우리 본부가 공격받는 동안에는 쉴 수 없습니다.</Korean>
         <Russian>Вы не можете отдыхать, пока наша штаб-квартира находится под атакой.</Russian>
         <Czech>Nemůžeš odpočívat když je základna pod útokem.</Czech>
+        <Chinesesimp>你无法在敌人入侵基地时休息</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_GUI_hqDialog_enemiesNear">
         <Original>You cannot rest while enemies are near our HQ.</Original>
@@ -521,6 +531,7 @@
         <Korean>적들이 우리 본부 근처에 있는 동안에는 쉴 수 없습니다.</Korean>
         <Russian>Вы не можете отдыхать, пока враги находятся рядом с нашей штаб-квартирой.</Russian>
         <Czech>Nemůžeš odpočívat když jsou nepřátelkské jednotky poblíž základny.</Czech>
+        <Chinesesimp>你无法在基地附近存在敌人的情况下休息</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_GUI_hqDialog_invaderPunish">
         <Original>You cannot rest while %1 is attacking civilians.</Original>
@@ -529,6 +540,7 @@
         <Korean>%1 세력이 민간인을 공격하는 동안에는 쉴 수 없습니다.</Korean>
         <Russian>Вы не можете отдыхать, пока %1 нападает на мирных жителей.</Russian>
         <Czech>Nemůžeš odpočívat když %1 útočí na civilisty.</Czech>
+        <Chinesesimp>你无法在 %1 残害平民的情况下休息</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_GUI_hqDialog_notBoss">
         <Original>Only the commander can skip time.</Original>
@@ -537,6 +549,7 @@
         <Korean>지휘관만이 시간을 스킵할 수 있습니다.</Korean>
         <Russian>Только командир может пропустить время.</Russian>
         <Czech>Pouze velitel může přeskočit čas.</Czech>
+        <Chinesesimp>只有指挥官才能略过时间</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_GUI_hqDialog_playersNotAtHQ">
         <Original>All players must be within 100m of the HQ marker to skip time.</Original>
@@ -545,6 +558,7 @@
         <Korean>시간을 스킵하려면 모든 플레이어가 본부 마커로부터 100m 이내에 있어야 합니다.</Korean>
         <Russian>Все игроки должны находиться в пределах 100 метров от флага штаба, чтобы пропустить время.</Russian>
         <Czech>Všichni hráči musí být v okruhu méně než 100m od základny, aby se mohl přeskočit čas.</Czech>
+        <Chinesesimp>为了略过时间，所有玩家必须待在总部图标周边100米内</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_GUI_hqDialog_rebelAttack">
         <Original>You cannot rest while the enemy is launching a major attack.</Original>
@@ -553,6 +567,7 @@
         <Korean>적이 대규모 공격을 가하는 동안에는 쉴 수 없습니다.</Korean>
         <Russian>Вы не можете отдыхать, пока враг предпринимает крупную атаку.</Russian>
         <Czech>Nemůžeš odpočívat když nepřítel zahajuje velký útok.</Czech>
+        <Chinesesimp>你无法在敌人发动强大攻势休息</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_GUI_hqDialog_title">
         <Original>Skip Time / Rest</Original>
@@ -561,6 +576,7 @@
         <Korean>시간 스킵 / 휴식</Korean>
         <Russian>Пропустить время</Russian>
         <Czech>Přeskočit čas / Odpočívat</Czech>
+        <Chinesesimp>略过时间/</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_aggression">
         <Original>Aggression:</Original>
@@ -3037,14 +3053,7 @@
         <Chinesesimp>无可用载具</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_player_money_text">
-        <Original>Current money:&lt;br/&gt;€ %1</Original>
-        <German>Aktuelles Geld:&lt;br/&gt;€ %1</German>
-        <Italian>Denaro attuale:&lt;br/&gt;€ %1</Italian>
-        <Spanish>Dinero:&lt;br/&gt;€ %1</Spanish>
-        <French>Argent actuel :&lt;br/&gt;€ %1</French>
-        <Korean>현재 자금:&lt;br/&gt;%1€</Korean>
-        <Russian>Текущий баланс:&lt;br/&gt;€ %1</Russian>
-        <Czech>Aktuální peníze:&lt;br/&gt;€ %1</Czech>
+        <Original>Current money: € %1</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_sell_vehicle">
         <Original>Sell</Original>
@@ -3935,6 +3944,9 @@
       </Key>
     </Container>
     <Container name="setup_dialog">
+      <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_badFactions">
+        <Original>The currently selected factions are not loaded.&lt;br/&gt;Go to the Factions tab and select available factions.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_copy">
         <Original>Copy game with ID %1</Original>
         <Italian>Copia partita con ID %1</Italian>
@@ -4095,18 +4107,7 @@
         <Chinesesimp>删除存档</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_dlc">
-        <Original>DLC</Original>
-        <German>DLC</German>
-        <Italian>DLC</Italian>
-        <Spanish>DLC</Spanish>
-        <French>DLC</French>
-        <Korean>DLC</Korean>
-        <Russian>DLC</Russian>
-        <Polish>DLC</Polish>
-        <Czech>DLC</Czech>
-        <Portuguese>DLC</Portuguese>
-        <Turkish>DLC</Turkish>
-        <Chinesesimp>DLC</Chinesesimp>
+        <Original>DLC and Addons</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_faction_tab_button">
         <Original>Factions</Original>
@@ -4121,6 +4122,12 @@
         <Portuguese>Fações</Portuguese>
         <Turkish>Hizipler</Turkish>
         <Chinesesimp>派系</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_factionInfo">
+        <Original>Faction Information</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_infoPanel_header">
+        <Original>%1 Information</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_invaders">
         <Original>Invaders</Original>
@@ -4248,6 +4255,9 @@
         <Turkish>Parametreler</Turkish>
         <Chinesesimp>参数</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_setup_prettyAddons">
+        <Original>Required Addons: %1</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_setup_rebels">
         <Original>Rebels</Original>
         <German>Rebellen</German>
@@ -4360,6 +4370,12 @@
         <Turkish>ANTİSTASİ KURULUMU</Turkish>
         <Chinesesimp>ANTISTASI设置</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_setup_toggleAddons_addons">
+        <Original>Switch to Addons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_toggleAddons_DLC">
+        <Original>Switch to DLCs</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_setup_use_new_namespace">
         <Original>Use New Save file</Original>
         <German>Nutze neue Spielstand Datei</German>
@@ -4373,6 +4389,47 @@
         <Portuguese>Usar novo ficheiro</Portuguese>
         <Turkish>Yeni kayıt dosyası kullan</Turkish>
         <Chinesesimp>使用新的存档文件</Chinesesimp>
+      </Key>
+    </Container>
+    <Container name="setup_dialog">
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
+        <Original>Custom AI Loadouts</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_priWeapon">
+        <Original>Primary weapon</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_secWeapon">
+        <Original>Secondary weapon</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_ammoQuant">
+        <Original>Ammo quantity</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_priOptic">
+        <Original>Primary optic</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_uniform">
+        <Original>Uniform</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_vest">
+        <Original>Vest</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_backpack">
+        <Original>Backpack</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_headgear">
+        <Original>Headgear</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_close">
+        <Original>Close</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_copyToAll">
+        <Original>Copy To All</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetRole">
+        <Original>Reset Role</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetAll">
+        <Original>Reset All</Original>
       </Key>
     </Container>
   </Package>

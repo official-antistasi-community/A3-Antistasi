@@ -11,8 +11,10 @@ class NavGrid {
     isladuala3 = QPATHTOFOLDER(Antistasi_isladuala3.isladuala3\navGrid.sqf);
     Kunduz = QPATHTOFOLDER(Antistasi_Kunduz.Kunduz\navGrid.sqf);
     Malden = QPATHTOFOLDER(Antistasi_Malden.Malden\navGrid.sqf);
+    pulau = QPATHTOFOLDER(Antistasi_pulau.pulau\navGrid.sqf);
     regero = QPATHTOFOLDER(Antistasi_regero.regero\navGrid.sqf);
     sara = QPATHTOFOLDER(Antistasi_sara.sara\navGrid.sqf);
+    SPE_Mortain = QPATHTOFOLDER(Antistasi_SPE_Mortain.SPE_Mortain\navGrid.sqf);
     SPE_Normandy = QPATHTOFOLDER(Antistasi_SPE_Normandy.SPE_Normandy\navGrid.sqf);
     Stratis = QPATHTOFOLDER(Antistasi_Stratis.Stratis\navGrid.sqf);
     takistan = QPATHTOFOLDER(Antistasi_takistan.takistan\navGrid.sqf);

@@ -1,7 +1,7 @@
 /*
 Author: [Killerswin2, Hakon (Stole his bb code)]
     team leader structured placer. Allows teamleaders to gain access to a
-    rts like camera to place objects. 
+    rts like camera to place objects.
 Arguments:
 1. <object> object that will center placement
 2. <number> number that is used for the radius of placement
@@ -9,7 +9,7 @@ Return Value:
 NONE
 Scope: Client
 Environment: Unscheduled
-Public: 
+Public:
 no
 Example:
 [player, 100] call A3A_fnc_buildingPlacer.sqf
@@ -48,7 +48,7 @@ for "_i" from 1 to 36 do {
 
 private _emptyDisplay = findDisplay 46 createDisplay "A3A_teamLeaderBuilder";
 A3A_building_EHDB set [BUILD_DISPLAY, _emptyDisplay];
-call (A3A_building_EHDB # UPDATE_BB); 
+call (A3A_building_EHDB # UPDATE_BB);
 
 private _downKeyEH = _emptyDisplay displayAddEventHandler ["KeyDown", {
     params["_displayOrControl","_key"];
@@ -63,7 +63,7 @@ private _downKeyEH = _emptyDisplay displayAddEventHandler ["KeyDown", {
 
     if (_key isEqualTo DIK_R) then {
         A3A_building_EHDB set [ROTATION_MODE_CW, true];
-    };	 
+    };
 }];
 
 A3A_building_EHDB set [KEY_DOWN_EH, _downKeyEH];
@@ -79,7 +79,7 @@ private _upKeyEH = _emptyDisplay displayAddEventHandler ["KeyUp", {
 
         if (_tempObject distance (A3A_building_EHDB # BUILD_RADIUS_OBJECT_CENTER) > (A3A_building_EHDB # BUILD_RADIUS)) exitwith {};
         if (isOnRoad getPosATL _tempObject) exitwith {};	// can't build on roads
-        
+
         private _price = (A3A_building_EHDB # OBJECT_PRICE);
         private _supply = (A3A_building_EHDB # AVAILABLE_MONEY);
 
@@ -87,7 +87,7 @@ private _upKeyEH = _emptyDisplay displayAddEventHandler ["KeyUp", {
         if (_price > _supply) exitWith {};
 
         A3A_building_EHDB set [AVAILABLE_MONEY, _supply - _price];
-        ["updateMoney"] call A3A_fnc_teamLeaderRTSPlacerDialog;
+        ["updateMoney"] call A3A_GUI_fnc_teamLeaderRTSPlacerDialog;
 
         private _position = getPosWorld _tempObject;
         private _dirAndUp = [vectorDir _tempObject, vectorUp _tempObject];
@@ -114,7 +114,7 @@ private _upKeyEH = _emptyDisplay displayAddEventHandler ["KeyUp", {
         private _buildData = _buildArray deleteAt _objIndex;
         private _supply = (A3A_building_EHDB # AVAILABLE_MONEY);
         A3A_building_EHDB set [AVAILABLE_MONEY, _supply + (_buildData#4)];
-        ["updateMoney"] call A3A_fnc_teamLeaderRTSPlacerDialog;
+        ["updateMoney"] call A3A_GUI_fnc_teamLeaderRTSPlacerDialog;
     };
 
     // Repair
@@ -135,7 +135,7 @@ private _upKeyEH = _emptyDisplay displayAddEventHandler ["KeyUp", {
         private _supply = (A3A_building_EHDB # AVAILABLE_MONEY);
         if(_price > _supply) exitWith {};
         A3A_building_EHDB set [AVAILABLE_MONEY, _supply - _price];
-        ["updateMoney"] call A3A_fnc_teamLeaderRTSPlacerDialog;
+        ["updateMoney"] call A3A_GUI_fnc_teamLeaderRTSPlacerDialog;
 
         // Place imitation of repaired building
         private _oldPos = getPosATL _building;
@@ -183,7 +183,7 @@ private _eventHanderEachFrame = addMissionEventHandler ["EachFrame", {
     private _stateChange = false;
     private _object = (A3A_building_EHDB # BUILD_OBJECT_TEMP_OBJECT);
     private _vehiclePos = screenToWorld getMousePosition;
-    
+
     //change in position
     if (_object distance2d _vehiclePos > 0.1) then {
         _stateChange = true;
@@ -193,7 +193,7 @@ private _eventHanderEachFrame = addMissionEventHandler ["EachFrame", {
     private _intersects = lineIntersectsSurfaces [getPosASL A3A_cam, AGLtoASL _vehiclePos, _object, A3A_cam];
     private _intersectObj = if (count _intersects > 0) then { _intersects#0#3 } else { objNull };
     A3A_building_EHDB set [CURSOR_OBJECT, _intersectObj];
-    ["setContextKey", [""]] call A3A_fnc_setupPlacerHints;
+    ["setContextKey", [""]] call A3A_GUI_fnc_setUpPlacerHints;
 
     //((uiNamespace getVariable "A3A_placerHint_display") displayCtrl IDC_PLACERHINT_TEST_TEXT) ctrlSetText str _intersectObj;
 
@@ -209,12 +209,12 @@ private _eventHanderEachFrame = addMissionEventHandler ["EachFrame", {
         private _bbsize = (boundingBoxReal _building # 1) vectorDiff (boundingBoxReal _building # 0);
         private _price = 6 * sqrt((_bbsize#0) * (_bbsize#1) * (_bbsize#2));
         _price = 10 * round (_price / 10);
-        ["setContextKey", ["rebuild", _price]] call A3A_fnc_setupPlacerHints;
+        ["setContextKey", ["rebuild", _price]] call A3A_GUI_fnc_setUpPlacerHints;
     };
 
     if (_intersectObj in (A3A_building_EHDB # BUILD_OBJECT_TEMP_OBJECT_ARRAY)) then {
         // show C key
-        ["setContextKey", ["cancel", getText (configof _intersectObj >> "displayName")]] call A3A_fnc_setupPlacerHints;
+        ["setContextKey", ["cancel", getText (configof _intersectObj >> "displayName")]] call A3A_GUI_fnc_setUpPlacerHints;
     };
 
     if (A3A_building_EHDB # ROTATION_MODE_CCW) then {
@@ -231,12 +231,12 @@ private _eventHanderEachFrame = addMissionEventHandler ["EachFrame", {
         _stateChange = true;
     };
 
-    
+
     if (A3A_building_EHDB # GUI_BUTTON_PRESSED) then {
         A3A_building_EHDB set [GUI_BUTTON_PRESSED, false];
         _stateChange = true;
     };
-    
+
     if (A3A_building_EHDB # SNAP_SURFACE_MODE) then {
         private _posASL = AGLtoASL _vehiclePos;
         private _intersects = lineIntersectsSurfaces [_posASL vectorAdd [0,0,100], _posASL vectorAdd [0,0,-100], _object];
@@ -255,11 +255,11 @@ private _eventHanderEachFrame = addMissionEventHandler ["EachFrame", {
     private _camClampPos = [0,0,0];
     _camClampPos set [0, _cameraPos#0 max (_centerPos#0 - _buildRad) min (_centerPos#0 + _buildRad)];
     _camClampPos set [1, _cameraPos#1 max (_centerPos#1 - _buildRad) min (_centerPos#1 + _buildRad)];
-    
+
     // make the clamp a sphere instead of a weird rectangle
     _camClampPos set [2, _cameraPos#2 max (_centerPos#2 + 5) min (_centerPos#2 + _buildRad)];
     A3A_cam setPosATL _camClampPos;
-    
+
 
     // Object render state update
     if (!_stateChange) exitWith {};

@@ -1,5 +1,5 @@
 /*
-function: A3A_fnc_setupHQPosDialog
+function: A3A_GUI_fnc_setupHQPosDialog
     Handles the initialization and tab switching on the setup dialog.
     This function should only be called from setupDialog onLoad and control activation EHs.
 

@@ -26,6 +26,8 @@ class CfgFunctions
             class requestSelectionChange {};
             class requestVehicle {};
             class selectionChange {};
+            class sellVehGRG {};
+            class sellVehGRGLocal {};
             class switchCategory {};
             class toggleConfirmBttn {};
             class toggleLock {};

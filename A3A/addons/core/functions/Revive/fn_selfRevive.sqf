@@ -22,6 +22,9 @@ if (time < player getVariable ["A3A_selfReviveTimeout", -1]) exitWith {
 };
 
 // ok so now we actually do it...
+removeAllUserActionEventHandlers ["A3A_core_respawn", "Activate"];
+removeAllUserActionEventHandlers ["A3A_core_selfRevive", "Activate"];
+
 player setVariable ["incapacitated", false, true];
 player setDamage 0.5;
 player removeItem selectRandom _hasFAKs;

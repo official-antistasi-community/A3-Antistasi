@@ -41,7 +41,18 @@ private _fnc_executeWeaponFire =
 
         //Fire weapon if one is selected (guided weapons only gets fired when they have a lockon possibility on the target)
         _plane setVariable ["missileShots", _missileShots min _currentHighest];
-        _plane fireAtTarget [_plane getVariable "currentTarget", _selectedWeapon];
+        private _missileFired = false;
+        _missileFired = _plane fireAtTarget [_plane getVariable "currentTarget", _selectedWeapon];
+        
+        //This should only affect RHSGREF_A29B_HIDF and UK3CB_B_T28Trojan_HIDF_CAS
+        if (!(gunner _plane isEqualTo objNull) && !_missileFired) then { 
+            //Strictly speaking not required for the two planes this fix is for, the backup if statement would select the correct firemode regardless - future proofing
+            private _weapCfg = configFile >> "cfgWeapons" >> _selectedWeapon;
+            private _modes = ["Direct","TopDown"] arrayIntersect getArray (_weapCfg >> "modes");
+            if (_modes isEqualTo []) then { _modes = getArray (_weapCfg >> "modes") };
+            private _modeCfg = [_weapCfg >> (_modes#0), _weapCfg] select (_modes#0 == "this");
+            (driver _plane) forceWeaponFire [_selectedWeapon, configName _modeCfg];
+        };
     };
 
     private _weapons = _plane getVariable ["rocketLauncher", []];
@@ -103,6 +114,7 @@ private _fireParams =
 private _fireParams = +(_plane getVariable "fireParams");
 _plane setVariable ["currentTarget", _target];
 
+
 private _enterRunPos = getPosASL _plane;
 private _targetPos = eyePos _target;
 if(terrainIntersectASL [_enterRunPos, _targetPos]) exitWith {
@@ -131,6 +143,13 @@ reverse _fireIntervals;
 while { count _fireParams > count _fireIntervals } do { _fireParams deleteAt 0 };
 Debug_2("Fire intervals for run dist %1: %2", _runDist, _fireIntervals);
 
+//This should only affect RHSGREF_A29B_HIDF and UK3CB_B_T28Trojan_HIDF_CAS
+private _gunnerLaser = getText(configFile >> "A3A" >> "Loadouts" >> "CASPlane" >> typeOf _plane >> "gunnerLaser");
+if (_gunnerLaser isNotEqualTo "") then {
+    (gunner _plane) doTarget _target;
+    _plane lockCameraTo [_target, [0]];
+    (gunner _plane) forceWeaponFire [_gunnerLaser, _gunnerLaser];
+};
 
 addMissionEventHandler ["EachFrame",
 {
@@ -158,6 +177,11 @@ waitUntil { sleep 1; _transform#8 >= 1 };
 
 Debug_1("Gun run for %1 finished, returning control", _supportName);
 
+//This should only affect RHSGREF_A29B_HIDF and UK3CB_B_T28Trojan_HIDF_CAS
+if (_gunnerLaser isNotEqualTo "") then {
+    _plane lockCameraTo [objNull, [0]];
+    (gunner _plane) forceWeaponFire [_gunnerLaser, _gunnerLaser];
+};
 /*
     if(_interval > 0.25 && (_fireParams#0#0)) then
     {

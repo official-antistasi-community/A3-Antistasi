@@ -5,6 +5,8 @@
 
     Arguments:
     0. <Int> Client UID
+    1. <Str> Player, for logging
+    2. <Bool> Whether or not to exclude mounts from removal (default false)
 
     Return Value:
     <Bool> succesfull
@@ -20,12 +22,14 @@
 */
 #include "defines.inc"
 FIX_LINE_NUMBERS()
-params [["_UID", "", [""]], ["_player", objNull, [objNull]]];
+params [["_UID", "", [""]], ["_player", objNull, [objNull]], ["_removeMounts",false,[false]]];
 Trace_1("Removing vehicles from garage with UID: %1", _UID);
 if (_UID isEqualTo "") exitWith {false};
 
 //find vehicles to remove
 private _toRemove = [];
+private _localVehicleList = +HR_GRG_Vehicles;
+if (_removeMounts) then {_localVehicleList deleteAt 4};
 {
     private _catIndex = _forEachIndex;
     private _hashMap = _x;
@@ -33,8 +37,9 @@ private _toRemove = [];
         _veh = _hashMap get _x;
         if ((_veh#3) isEqualTo _UID) then {_toRemove pushBack [_catIndex, _x, _veh]};
     } forEach keys _x;
-} forEach HR_GRG_Vehicles;
+} forEach _localVehicleList;
 
+    
 //remove vehicles
 {
     //remove vehicle

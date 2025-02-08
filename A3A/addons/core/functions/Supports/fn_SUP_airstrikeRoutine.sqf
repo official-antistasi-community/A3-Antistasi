@@ -22,6 +22,11 @@ params ["_supportName", "_side", "_sleepTime", "_targetPos", "_airport", "_resPo
 //Sleep to simulate preparation time
 sleep _sleepTime;
 
+private _isCarpetBombing = false;
+if (_bombType == "CARPET") then {
+	_bombType = "HE";
+	_isCarpetBombing = true;
+};
 private _isHelicopter = _planeType isKindOf "Helicopter";
 private _spawnPos = (getMarkerPos _airport) vectorAdd [0, 0, if (_isHelicopter) then {150} else {500}];
 private _plane = createVehicle [_planeType, _spawnPos, [], 0, "FLY"];     // FLY forces 100m alt
@@ -38,6 +43,7 @@ _group deleteGroupWhenEmpty true;
     _x disableAI "TARGET";
     _x disableAI "AUTOTARGET";
 } forEach units _group;
+[-10 * count units _group, _side, _resPool] call A3A_fnc_addEnemyResources;
 
 // Should we really have these?
 _plane addEventHandler ["Killed", {
@@ -46,7 +52,7 @@ _plane addEventHandler ["Killed", {
 }];
 
 //["_reveal", "_position", "_side", "_supportType", "_markerType", "_markerLifeTime"]
-[_reveal, _targetPos, _side, "Airstrike", 150, 120] spawn A3A_fnc_showInterceptedSupportCall;
+[_reveal, _targetPos, _side, "Airstrike", 150, 120] spawn A3A_fnc_showInterceptedSupportCall; // no better way to time this with the current system, unfortunately
 //[_side, format ["%1_coverage", _supportName]] spawn A3A_fnc_clearTargetArea;
 
 
@@ -67,6 +73,16 @@ private _startBombPosition = _targetPos getPos [100, _targDir + 180];
 _startBombPosition set [2, 150];
 private _endBombPosition = _targetPos getPos [100, _targDir];
 _endBombPosition set [2, 150];
+
+if (_isCarpetBombing) then {
+    _bombParams set [2, 5 max _bombCount];
+    _flightSpeed = "FULL";
+    //Extends and wiggles the start and end position to make it feel just a little more organic
+    _startBombPosition = _startBombPosition getPos [45 + random 10, _targDir + 180];
+    _startBombPosition set [2, 150];
+    _endBombPosition = _endBombPosition getPos [45 + random 10, _targDir];
+    _endBombPosition set [2, 150];
+};
 
 private _wp2 = _group addWaypoint [_startBombPosition, 0];
 _wp2 setWaypointType "MOVE";

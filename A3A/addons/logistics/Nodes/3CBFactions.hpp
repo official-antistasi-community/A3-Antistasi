@@ -32,6 +32,24 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
     };
 };
 
+class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_hilux_uk3cb_hilux_civilian_closed_p3d : TRIPLES(ADDON,Nodes,Base)
+{
+    canLoadWeapon = 0;
+    class Nodes
+    {
+        class Node1
+        {
+            offset[] = {-0.05,-0.5,-0.634};
+            seats[] = {5};
+        };
+        class Node2
+        {
+            offset[] = {-0.05,-1.6,-0.634};
+            seats[] = {3,4,6};
+        };
+    };
+};
+
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_hilux_uk3cb_hilux_p3d : TRIPLES(ADDON,Nodes,Base)
 {
     class Nodes

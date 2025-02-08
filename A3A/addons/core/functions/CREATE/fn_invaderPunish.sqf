@@ -19,8 +19,6 @@ params ["_mrkDest", "_mrkOrigin", "_delay"];
 
 ServerInfo_2("Launching CSAT Punishment Against %1 from %2", _mrkDest, _mrkOrigin);
 
-// Mostly to prevent fast travel
-bigAttackInProgress = true; publicVariable "bigAttackInProgress";
 forcedSpawn pushBack _mrkDest; publicVariable "forcedSpawn";
 
 private _posDest = getMarkerPos _mrkDest;

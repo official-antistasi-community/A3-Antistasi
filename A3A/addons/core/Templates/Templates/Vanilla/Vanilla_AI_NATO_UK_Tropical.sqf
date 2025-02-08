@@ -19,7 +19,7 @@
 
 ["vehiclesBasic", ["B_T_Quadbike_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["B_T_MRAP_01_F","B_T_MRAP_01_F", "B_T_LSV_01_unarmed_F"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed",["B_T_MRAP_01_hmg_F","B_T_MRAP_01_hmg_F", "B_T_MRAP_01_gmg_F", "B_T_LSV_01_AT_F", "B_T_LSV_01_armed_F"]] call _fnc_saveToTemplate;
+private _LightArmed = ["B_T_MRAP_01_hmg_F","B_T_MRAP_01_hmg_F", "B_T_MRAP_01_gmg_F", "B_T_LSV_01_AT_F", "B_T_LSV_01_armed_F"];
 ["vehiclesTrucks", ["B_T_Truck_01_transport_F", "B_T_Truck_01_covered_F"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["B_T_Truck_01_flatbed_F", "B_T_Truck_01_cargo_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["B_T_Truck_01_ammo_F"]] call _fnc_saveToTemplate;
@@ -55,9 +55,9 @@ private _HelisTransport = ["B_Heli_Transport_01_camo_F","B_CTRG_Heli_Transport_0
 ["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles
-["vehiclesMilitiaLightArmed", ["a3a_Offroad_01_green_armed_F", "a3a_Offroad_01_green_AT_F"]] call _fnc_saveToTemplate;
+_vehiclesMilitiaLightArmed = ["a3a_Offroad_01_green_armed_F", "a3a_Offroad_01_green_AT_F"];
 ["vehiclesMilitiaTrucks", ["I_C_Van_01_transport_F"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaCars", ["a3a_Offroad_01_green_F","I_C_Offroad_02_unarmed_F"]] call _fnc_saveToTemplate;
+_vehiclesMilitiaCars = ["a3a_Offroad_01_green_F","I_C_Offroad_02_unarmed_F"];
 
 private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 
@@ -93,13 +93,36 @@ if ("heli" in A3A_enabledDLC) then {
 if ("orange" in A3A_enabledDLC) then {
     _vehiclesPolice append ["B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
 };
+if ("rf" in A3A_enabledDLC) then {
+    _vehiclesPolice = ["B_T_Pickup_rf","a3a_police_Pickup_rf"];
+    _HelisTransport = ["B_Heli_EC_04_military_RF"];
+
+    _vehiclesMilitiaCars = ["B_Pickup_rf","B_T_Pickup_Comms_rf"];
+    _vehiclesMilitiaLightArmed = ["B_T_Pickup_mmg_rf"];
+
+    ["vehiclesHelisLight", ["B_Heli_light_03_unarmed_RF"]] call _fnc_saveToTemplate;
+    ["vehiclesHelisLightAttack", ["B_Heli_EC_03_RF", "a3a_Heli_light_03_dynamicLoadout_rf"]] call _fnc_saveToTemplate;
+    ["vehiclesHelisAttack", ["a3a_black_Heli_EC_02_rf"]] call _fnc_saveToTemplate;
+    
+    ["vehiclesAirPatrol", ["B_Heli_light_03_unarmed_RF", "B_Heli_Light_01_F"]] call _fnc_saveToTemplate;
+};
+if ("ef" in A3A_enabledDLC) then {
+    _LightArmed append ["EF_B_MRAP_01_FSV_NATO_T", "EF_B_MRAP_01_AT_NATO_T", "EF_B_MRAP_01_LAAD_NATO_T"];
+    ["vehiclesAA", ["B_T_APC_Tracked_01_AA_F", "EF_B_MRAP_01_LAAD_NATO_T"]] call _fnc_saveToTemplate;
+    ["vehiclesGunBoats", ["EF_B_CombatBoat_HMG_CTRG", "EF_B_CombatBoat_AT_CTRG"]] call _fnc_saveToTemplate;
+    ["vehiclesHelisAttack", ["B_Heli_Attack_01_dynamicLoadout_F", "EF_B_AH99J_NATO"]] call _fnc_saveToTemplate;
+};
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;
+
+["vehiclesLightArmed", _LightArmed] call _fnc_saveToTemplate;
 
 ["vehiclesAPCs", _APCs] call _fnc_saveToTemplate;
 ["vehiclesTanks", _Tanks] call _fnc_saveToTemplate;
 
 ["vehiclesHelisTransport", _HelisTransport] call _fnc_saveToTemplate;
 
+["vehiclesMilitiaCars", _vehiclesMilitiaCars] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", _vehiclesMilitiaLightArmed] call _fnc_saveToTemplate;
 
 #include "Vanilla_Vehicle_Attributes.sqf"
 
@@ -422,6 +445,17 @@ private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["uniforms", ["U_B_HeliPilotCoveralls"]];
 _pilotLoadoutData set ["vests", ["V_TacVest_blk"]];
 _pilotLoadoutData set ["helmets", ["H_CrewHelmetHeli_B", "H_PilotHelmetHeli_B"]];
+_pilotLoadoutData set ["facewear", ["G_Aviator","G_Squares_Tinted","G_Tactical_Black"]];
+
+private _officerLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
+_officerLoadoutData set ["uniforms", ["U_B_ParadeUniform_01_US_F", "U_B_ParadeUniform_01_US_decorated_F"]];
+_officerLoadoutData set ["vests", ["V_TacVest_oli", "V_LegStrapBag_olive_F"]];
+_officerLoadoutData set ["helmets", ["H_ParadeDressCap_01_US_F", "H_Beret_Colonel"]];
+_officerLoadoutData set ["backpacks", []];
+_officerLoadoutData set ["SMGs", [
+["arifle_SPAR_01_khk_F", "", "acc_pointer_IR", "optic_Holosight_khk_F", [], [], ""],
+["arifle_SPAR_01_blk_F", "", "acc_pointer_IR", "optic_Aco", [], [], ""]
+]];
 
 
 if ("rf" in A3A_enabledDLC) then {
@@ -989,7 +1023,7 @@ private _unitTypes = [
 
 ["other", [["Pilot", _crewTemplate]], _pilotLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the unit used in the "kill the official" mission
-["other", [["Official", _squadLeaderTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Official", _policeTemplate]], _officerLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "kill the traitor" mission
 ["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "Invader Punishment" mission

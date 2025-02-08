@@ -34,8 +34,6 @@ params [
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-#define OccAndInv(VAR) (FactionGet(occ, VAR) + FactionGet(inv, VAR))
-
 private _titleStr = localize "STR_A3A_fn_base_sellveh_sell";
 
 /*
@@ -69,49 +67,7 @@ if !(_owner isEqualTo "" || {getPlayerUID _player isEqualTo _owner}) exitWith { 
 if (_veh getVariable ["A3A_sellVehicle_inProgress",false]) exitWith {[_titleStr, localize "STR_A3A_fn_base_sellveh_progress"] remoteExecCall ["A3A_fnc_customHint",_player];};
 _veh setVariable ["A3A_sellVehicle_inProgress",true,false];  // Only processed on the server. It is absolutely pointless trying to network this due to race conditions.
 
-private _typeX = typeOf _veh;
-private _costs = call {
-    if (_typeX in _blacklistedAssets) exitWith {0};
-    if (_veh isKindOf "StaticWeapon") exitWith {100};			// in case rebel static is same as enemy statics
-    if (_typeX in FactionGet(all,"vehiclesReb")) exitWith { ([_typeX] call A3A_fnc_vehiclePrice) / 2 };
-    if (
-        (_typeX in arrayCivVeh)
-        or (_typeX in civBoats)
-        or (_typeX in (FactionGet(reb,"vehiclesCivBoat") + FactionGet(reb,"vehiclesCivCar") + FactionGet(reb,"vehiclesCivTruck")))
-    ) exitWith {25};
-    if (
-        (_typeX in FactionGet(all,"vehiclesLight"))
-        or (_typeX in OccAndInv("vehiclesTrucks"))
-        or (_typeX in OccAndInv("vehiclesCargoTrucks"))
-        or (_typeX in OccAndInv("vehiclesMilitiaTrucks"))
-        or (_typeX in FactionGet(reb,"vehiclesTruck"))
-    ) exitWith {100};
-    if (
-        (_typeX in FactionGet(all,"vehiclesBoats"))
-        or (_typeX in FactionGet(all,"vehiclesLightAPCs"))
-        or (_typeX in OccAndInv("vehiclesAmmoTrucks"))
-        or (_typeX in OccAndInv("vehiclesRepairTrucks"))
-        or (_typeX in OccAndInv("vehiclesFuelTrucks"))
-        or (_typeX in OccAndInv("vehiclesMedical"))
-    ) exitWith {200};
-    if (_typeX in (FactionGet(all,"vehiclesHelisLight") + FactionGet(reb,"vehiclesCivHeli"))) exitWith {500};
-    if (
-        (_typeX in FactionGet(all,"vehiclesAPCs"))
-        || (_typeX in FactionGet(all,"vehiclesIFVs"))
-        || (_typeX in FactionGet(all,"vehiclesLightTanks"))
-        || (_typeX in FactionGet(all,"vehiclesHelisLightAttack"))
-        || (_typeX in FactionGet(all,"vehiclesTransportAir"))
-        || (_typeX in FactionGet(all,"vehiclesUAVs"))
-    ) exitWith {1000};
-    if (
-        (_typeX in FactionGet(all,"vehiclesHelisAttack"))
-        or (_typeX in FactionGet(all,"vehiclesTanks"))
-        or (_typeX in FactionGet(all,"vehiclesAA"))
-        or (_typeX in FactionGet(all,"vehiclesArtillery"))
-    ) exitWith {3000};
-    if (_typeX in (FactionGet(all,"vehiclesPlanesCAS") + FactionGet(all,"vehiclesPlanesAA"))) exitWith {4000};
-    0;
-};
+private _costs = [_veh] call A3A_fnc_getVehicleSellPrice;
 
 if (_costs == 0) exitWith {
     _veh setVariable ["A3A_sellVehicle_inProgress",false,false];

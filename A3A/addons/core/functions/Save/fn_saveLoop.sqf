@@ -87,6 +87,8 @@ private _antennasDeadPositions = [];
 ["maxUnits", 140] call A3A_fnc_setStatVariable;				        // backwards compatibility
 ["nextTick", nextTick - time] call A3A_fnc_setStatVariable;
 ["weather",[fogParams,rain]] call A3A_fnc_setStatVariable;
+["arsenalLimits", A3A_arsenalLimits] call A3A_fnc_setStatVariable;
+["rebelLoadouts", A3A_rebelLoadouts] call A3A_fnc_setStatVariable;
 private _destroyedPositions = destroyedBuildings apply { getPosATL _x };
 ["destroyedBuildings",_destroyedPositions] call A3A_fnc_setStatVariable;
 

@@ -25,8 +25,21 @@ private _class = HR_GRG_SelectedVehicles param [2, "", [""]];
 Trace("Reloading Extras");
 //Mounts
 private _disp = findDisplay HR_GRG_IDD_Garage;
-private _ctrl = _disp displayCtrl HR_GRG_IDC_ExtraMounts;
-lbClear _ctrl;
+private _ctrlExtraMounts = _disp displayCtrl HR_GRG_IDC_ExtraMounts;
+lbClear _ctrlExtraMounts;
+private _ctrlExtraTexture = _disp displayCtrl HR_GRG_IDC_ExtraTexture;
+lbClear _ctrlExtraTexture;
+private _ctrlExtraAnim = _disp displayCtrl HR_GRG_IDC_ExtraAnim;
+lbClear _ctrlExtraAnim;
+private _ctrlSourcePanelAmmo = _disp displayCtrl HR_GRG_IDC_SourcePanelAmmo;
+private _ctrlSourcePanelFuel = _disp displayCtrl HR_GRG_IDC_SourcePanelFuel;
+private _ctrlSourcePanelRepair = _disp displayCtrl HR_GRG_IDC_SourcePanelRepair;
+private _ctrlInfoPanel = _disp displayCtrl HR_GRG_IDC_InfoPanel;
+
+if (!isClass (configFile >> "CfgVehicles" >> _class)) exitWith {
+    _ctrlInfoPanel ctrlSetStructuredText text "";
+};
+
 private _nodeCfg = [HR_GRG_previewVeh] call A3A_Logistics_fnc_getNodeConfig;
 private _vehNodes = [HR_GRG_previewVeh] call A3A_Logistics_fnc_getVehicleNodes;
 private _vehModel = getText (configFile >> "CfgVehicles" >> typeOf HR_GRG_previewVeh >> "model");
@@ -53,15 +66,15 @@ if (_vehNodes isEqualType []) then {
 
         //add entry
         if ( (_allowed) && (_size != -1) && (_capacity >= _size) && !_block) then { //static is loadable and vehicle can fit it
-            private _index = _ctrl lbAdd _displayName;
-            _ctrl lbSetData [_index, _staticClass];
-            _ctrl lbSetValue [_index, _x];
-            _ctrl lbsetpicture [_index,checkboxTextures select (_checkedOut isEqualTo HR_GRG_PlayerUID)];
-            _ctrl lbSetTextRight [_index, format ["Size: %1", _size]];
+            private _index = _ctrlExtraMounts lbAdd _displayName;
+            _ctrlExtraMounts lbSetData [_index, _staticClass];
+            _ctrlExtraMounts lbSetValue [_index, _x];
+            _ctrlExtraMounts lbsetpicture [_index,checkboxTextures select (_checkedOut isEqualTo HR_GRG_PlayerUID)];
+            _ctrlExtraMounts lbSetTextRight [_index, format ["Size: %1", _size]];
             Trace_4("Mount Added to list | Class: %1 | UID: %2 | Checked: %3 | Size: %4", _staticClass, _x, (_checkedOut isEqualTo HR_GRG_PlayerUID), _type);
         };
     } forEach (HR_GRG_Vehicles#4);//statics
-    lbSort _ctrl;
+    lbSort _ctrlExtraMounts;
 };
 if (_reloadMounts) then { [] call HR_GRG_fnc_reloadMounts };
 
@@ -69,62 +82,55 @@ private _customisation = [HR_GRG_previewVeh] call BIS_fnc_getVehicleCustomizatio
 //textures
 HR_GRG_curTexture = _customisation#0;
 private _badInit = HR_GRG_curTexture isEqualTo [];
-private _ctrl = _disp displayCtrl HR_GRG_IDC_ExtraTexture;
-lbClear _ctrl;
 {
     private _displayName = getText (_x >> "displayName");
     private _cfgName = configname _x;
     if (_displayName != "" && {!(_displayName in HR_GRG_blackListCamo)}) then {
-        private _index = _ctrl lbAdd _displayName;
-        _ctrl lbsetdata [_index,_cfgName];
+        private _index = _ctrlExtraTexture lbAdd _displayName;
+        _ctrlExtraTexture lbsetdata [_index,_cfgName];
         if (_badInit) then {
-            _ctrl lbsetpicture [_index,checkboxTextures#0];
+            _ctrlExtraTexture lbsetpicture [_index,checkboxTextures#0];
         } else {
-            _ctrl lbsetpicture [_index,checkboxTextures select ((HR_GRG_curTexture#0) isEqualTo _cfgName)];
+            _ctrlExtraTexture lbsetpicture [_index,checkboxTextures select ((HR_GRG_curTexture#0) isEqualTo _cfgName)];
         };
     };
 } foreach (configProperties [(configfile >> "CfgVehicles" >> _class >> "textureSources"),"isclass _x",true]);
-lbSort _ctrl;
+lbSort _ctrlExtraTexture;
 
 //animations
-private _ctrl = _disp displayCtrl HR_GRG_IDC_ExtraAnim;
-lbClear _ctrl;
 {
     _configName = configname _x;
     _displayName = getText (_x >> "displayName");
     if (_displayName != "") then {
         _textures = getArray (_x >> "textures");
-        _index = _ctrl lbAdd _displayName;
-        _ctrl lbSetData [_index,_configName];
+        _index = _ctrlExtraAnim lbAdd _displayName;
+        _ctrlExtraAnim lbSetData [_index,_configName];
         private _phase = ceil (HR_GRG_PreviewVeh animationPhase _configName);
-        _ctrl lbSetPicture [_index,checkboxTextures#_phase];
+        _ctrlExtraAnim lbSetPicture [_index,checkboxTextures#_phase];
     };
 } foreach (configProperties [(configfile >> "CfgVehicles" >> _class >> "animationSources"),"isclass _x",true]);
-lbSort _ctrl;
+lbSort _ctrlExtraAnim;
 
 HR_GRG_curAnims = _customisation#1;
 [HR_GRG_previewVeh, HR_GRG_curTexture, HR_GRG_curAnims] call BIS_fnc_initVehicle;
 
 //update source panel
-private _ctrl = _disp displayCtrl HR_GRG_IDC_SourcePanelAmmo;
-_ctrl ctrlSetStructuredText composeText ["   ", image RearmIcon, " ", image (checkboxTextures select (HR_GRG_hasAmmoSource && !HR_GRG_ServiceDisabled_Rearm))];
-_ctrl ctrlSetTooltip ([
+_ctrlSourcePanelAmmo ctrlSetStructuredText composeText ["   ", image RearmIcon, " ", image (checkboxTextures select (HR_GRG_hasAmmoSource && !HR_GRG_ServiceDisabled_Rearm))];
+_ctrlSourcePanelAmmo ctrlSetTooltip ([
     localize "STR_HR_GRG_SourcePanel_toolTip_Ammo_Unavailable"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Ammo_Available"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Ammo_Disabled"
 ] select (if (HR_GRG_ServiceDisabled_Rearm) then {2} else {HR_GRG_hasAmmoSource}));
 
-private _ctrl = _disp displayCtrl HR_GRG_IDC_SourcePanelFuel;
-_ctrl ctrlSetStructuredText composeText ["   ", image RefuelIcon, " ", image (checkboxTextures select (HR_GRG_hasFuelSource && !HR_GRG_ServiceDisabled_Refuel))];
-_ctrl ctrlSetTooltip ([
+_ctrlSourcePanelFuel ctrlSetStructuredText composeText ["   ", image RefuelIcon, " ", image (checkboxTextures select (HR_GRG_hasFuelSource && !HR_GRG_ServiceDisabled_Refuel))];
+_ctrlSourcePanelFuel ctrlSetTooltip ([
     localize "STR_HR_GRG_SourcePanel_toolTip_Fuel_Unavailable"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Fuel_Available"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Fuel_Disabled"
 ] select (if (HR_GRG_ServiceDisabled_Refuel) then {2} else {HR_GRG_hasFuelSource}));
 
-private _ctrl = _disp displayCtrl HR_GRG_IDC_SourcePanelRepair;
-_ctrl ctrlSetStructuredText composeText ["   ", image RepairIcon, " ", image (checkboxTextures select (HR_GRG_hasRepairSource && !HR_GRG_ServiceDisabled_Repair))];
-_ctrl ctrlSetTooltip ([
+_ctrlSourcePanelRepair ctrlSetStructuredText composeText ["   ", image RepairIcon, " ", image (checkboxTextures select (HR_GRG_hasRepairSource && !HR_GRG_ServiceDisabled_Repair))];
+_ctrlSourcePanelRepair ctrlSetTooltip ([
     localize "STR_HR_GRG_SourcePanel_toolTip_Repair_Unavailable"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Repair_Available"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Repair_Disabled"
@@ -132,7 +138,6 @@ _ctrl ctrlSetTooltip ([
 
 if (isNull HR_GRG_previewVeh) exitWith {};
 //update info panel
-private _ctrl = _disp displayCtrl HR_GRG_IDC_InfoPanel;
 private _spacer = composeText [lineBreak, lineBreak];
 private _topBar = composeText [
     image cfgIcon(_class), " ", cfgDispName(_class)
@@ -151,6 +156,9 @@ private _typeSource = switch (_source find true) do {
     default {localize "STR_HR_GRG_InfoPanel_isNotSource"};
 };
 
+private _sellPrice = [HR_GRG_previewVeh] call HR_GRG_getVehicleSellPrice;
+_sellPrice = [str _sellPrice, localize "STR_HR_GRG_InfoPanel_cannotBeSold"] select (_sellPrice == 0);
+_sellPrice = [localize "STR_HR_GRG_InfoPanel_salePrice",_sellPrice] joinString " ";
 
 //state indicator
 private _getPercentageAmmo = {
@@ -271,4 +279,4 @@ _generalInfo = composeText [
     ,image MassIcon," ",localize "STR_HR_GRG_InfoPanel_Mass"," ", str _mass
 ];
 
-_ctrl ctrlSetStructuredText composeText [_topBar, lineBreak, _typeSource, _spacer, "Vehicle state:", lineBreak, _vehicleState,lineBreak,_refuelInfo, _spacer, _seatsInfo, _spacer, _cargoInfo, _spacer, _generalInfo];
+_ctrlInfoPanel ctrlSetStructuredText composeText [_topBar, lineBreak, _typeSource, lineBreak, _sellPrice, _spacer, "Vehicle state:", lineBreak, _vehicleState,lineBreak,_refuelInfo, _spacer, _seatsInfo, _spacer, _cargoInfo, _spacer, _generalInfo];

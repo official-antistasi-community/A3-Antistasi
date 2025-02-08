@@ -4,6 +4,7 @@ class CfgFunctions {
             file = QPATHTOFOLDER(Dev);
             class convertCargoToNew {};
             class convertNodesToNew {};
+            class drawSeats {};
             class generateCargoOffset {};
             class generateHardPoints {};
         };

@@ -69,6 +69,7 @@ class CfgFunctions
         class Ammunition {
             file = QPATHTOFOLDER(functions\Ammunition);
             class ACEpvpReDress {};
+            class addPrimaryAndMags {};
             class allMagazines {};
             class ammunitionTransfer {};
             class arsenalManage {};
@@ -92,6 +93,7 @@ class CfgFunctions
             class launcherInfo {};
             class loot {};
             class randomRifle {};
+            class setRebelLoadouts {};
             class transfer {};
             class unlockEquipment {};
             class vehicleSort {};
@@ -135,6 +137,7 @@ class CfgFunctions
             class getAggroLevelString {};
             class getRecentDamage {};
             class getVehiclesAirSupport {};
+            class getVehicleSellPrice {};
             class getVehiclesGroundSupport {};
             class getVehiclesGroundTransport {};
             class vehicleBoxRestore {};
@@ -159,6 +162,8 @@ class CfgFunctions
             class placementSelection {};
             class playableUnits {};
             class getSideRadioTowerInfluence {};
+            class postmortem {};
+            class postmortemLoop {};
             class powerReorg {};
             class radioCheck {};
             class rebuildAssets {};
@@ -294,11 +299,13 @@ class CfgFunctions
             class prepFunctions {};
             class spawnDebuggingLoop {};
             class spawnSelectedTemplateAI {};
-            class debugSpawnVics {};    
+            class debugSpawnVics {};
         };
 
         class Dialogs {
             file = QPATHTOFOLDER(functions\Dialogs);
+            class canFastTravel {};
+            class calculateFastTravelCost {};
             class clearForest {};
             class createDialog_shouldLoadPersonalSave {};
             class dialogHQ {};
@@ -306,7 +313,6 @@ class CfgFunctions
             class HQGameOptions {};
             class loadPreviousSession {};
             class mineDialog {};
-            class moveHQObject {};
             class persistentSave {};
             class skiptime {};
             class squadOptions {};
@@ -445,6 +451,10 @@ class CfgFunctions
         class OrgPlayers {
             file = QPATHTOFOLDER(functions\OrgPlayers);
             class donateMoney {};
+            class sendMoney {};
+            class isClientAdmin {};
+            class isLocalAdmin {};
+            class isLocalAdminOrServer {};
             class isMember {};
             class makePlayerBossIfEligible {};
             class memberAdd {};
@@ -532,6 +542,7 @@ class CfgFunctions
             class buildMinefield {};
             class controlHCsquad {};
             class controlunit {};
+            class convertToSquad {};
             class dismissPlayerGroup {};
             class dismissSquad {};
             class enemyNearCheck {};
@@ -541,7 +552,6 @@ class CfgFunctions
             class garrisonAdd {};
             class garrisonDialog {};
             class NATObomb {};
-            class postmortem {};
             class reDress {};
             class reinfPlayer {};
             class spawnHCGroup {};
@@ -665,6 +675,9 @@ class CfgFunctions
             class SUP_SAM {};
             class SUP_SAMAvailable {};
             class SUP_SAMRoutine {};
+            class SUP_tank {};
+            class SUP_tankAvailable {};
+            class SUP_tankRoutine {};
             class SUP_UAV {};
             class SUP_UAVRoutine {};
         };
@@ -722,6 +735,7 @@ class CfgFunctions
             class secondsToTimeSpan {};
             class systemTime_format_S {};
             class timeSpan_format {};
+            class systemTimeDurationToTimeSpan {};
         };
 
         class UI {
@@ -779,9 +793,10 @@ class CfgFunctions
             class attachedObjects {};
             class buyItem {};
             class carryItem {};
-            class dropObject {};
+            class dropItem {};
             class initObject {};
             class initObjectRemote {};
+            class isCarrying {};
             class remainingFuel {};
             class rotateItem {};
         };

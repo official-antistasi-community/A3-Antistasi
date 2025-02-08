@@ -1,5 +1,8 @@
 //TODO: add header
 
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
 private ["_roads","_pos","_positionX","_groupX"];
 private _titleStr = localize "STR_A3A_fn_dialogs_ftradio_title";
 
@@ -16,20 +19,20 @@ _boss = leader _groupX;
 
 if ((_boss != player) and (!_esHC)) then {_groupX = player};
 
-if (({isPlayer _x} count units _groupX > 1) and (_esHC)) 
+if (({isPlayer _x} count units _groupX > 1) and (_esHC))
 exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_command"] call A3A_fnc_customHint;};
 
-if (player != player getVariable ["owner",player]) 
+if (player != player getVariable ["owner",player])
 exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_control"] call A3A_fnc_customHint;};
 
-if (!_esHC and !isNil {vehicle player getVariable "SA_Tow_Ropes"}) 
+if (!_esHC and !isNil {vehicle player getVariable "SA_Tow_Ropes"})
 exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_tow"] call A3A_fnc_customHint;};
 
-if (!isNil "A3A_FFPun_Jailed" && {(getPlayerUID player) in A3A_FFPun_Jailed}) 
+if (!isNil "A3A_FFPun_Jailed" && {(getPlayerUID player) in A3A_FFPun_Jailed})
 exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_ff"] call A3A_fnc_customHint;};
 
 _checkX = false;
-//_distanceX = 500 - (([_boss,false] call A3A_fnc_fogCheck) * 450);
+
 {if ([getPosATL _x] call A3A_fnc_enemyNearCheck) exitWith {_checkX = true}} forEach units _groupX;
 if (_checkX) exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_enemy1"] call A3A_fnc_customHint;};
 
@@ -56,18 +59,18 @@ _positionTel = positionTel;
 if (count _positionTel > 0) then
 	{
 	_base = [_markersX, _positionTel] call BIS_Fnc_nearestPosition;
-	if (_checkForPlayer and ((_base != "SYND_HQ") and !(_base in airportsX))) 
+	if (_checkForPlayer and ((_base != "SYND_HQ") and !(_base in airportsX)))
 	exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_onlyhq"] call A3A_fnc_customHint;};
-	if ((sidesX getVariable [_base,sideUnknown] == Occupants) or (sidesX getVariable [_base,sideUnknown] == Invaders)) 
+    if ((sidesX getVariable [_base,sideUnknown]) in [Occupants, Invaders])
 	exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_enemy2"] call A3A_fnc_customHint; openMap [false,false]};
-	if (_base in forcedSpawn) 
+	if (_base in forcedSpawn)
 	exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_attack1"] call A3A_fnc_customHint; openMap [false,false]};
 
 	//if (_base in outpostsFIA) exitWith {hint "You cannot Fast Travel to roadblocks and watchposts"; openMap [false,false]};
 
-	if ([getMarkerPos _base] call A3A_fnc_enemyNearCheck) 
+	if ([getMarkerPos _base] call A3A_fnc_enemyNearCheck)
 	exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_attack2"] call A3A_fnc_customHint; openMap [false,false]};
-	if (!(player call A3A_fnc_isMember || player == theBoss) && {!([_positionTel] call A3A_fnc_playerLeashCheckPosition)}) 
+	if (!(player call A3A_fnc_isMember || player == theBoss) && {!([_positionTel] call A3A_fnc_playerLeashCheckPosition)})
 	exitWith {[_titleStr, format [localize "STR_A3A_fn_dialogs_ftradio_no_members", ceil (memberDistance/1e3)]] call A3A_fnc_customHint;};
 
 	if (_positionTel distance getMarkerPos _base < 50) then
@@ -77,14 +80,20 @@ if (count _positionTel > 0) then
 		//if (!_esHC) then {disableUserInput true; cutText ["Fast traveling, please wait","BLACK",2]; sleep 2;} else {hcShowBar false;hcShowBar true;hint format ["Moving group %1 to destination",groupID _groupX]; sleep _distanceX;};
 		_forcedX = false;
 		if (!isMultiplayer) then {if (not(_base in forcedSpawn)) then {_forcedX = true; forcedSpawn = forcedSpawn + [_base]}};
-		if (!_esHC) then {disableUserInput true; cutText [format [localize "STR_A3A_fn_dialogs_fastTravelRadio_begin", _distanceX],"BLACK",1]; sleep 1;}
-			else {[_titleStr, format [localize "STR_A3A_fn_dialogs_ftradio_grp_moving",groupID _groupX]] call A3A_fnc_customHint; sleep _distanceX;};
+		if (!_esHC) then {
+			disableUserInput true;
+			cutText [format [localize "STR_A3A_fn_dialogs_fastTravelRadio_begin", ([[_distanceX] call A3A_fnc_secondsToTimeSpan,0,0,false,2] call A3A_fnc_timeSpan_format)],"BLACK",1];
+			sleep 1;
+		} else {
+			[_titleStr, format [localize "STR_A3A_fn_dialogs_ftradio_grp_moving",groupID _groupX]] call A3A_fnc_customHint;
+			sleep _distanceX;
+		};
  		if (!_esHC) then
  			{
  			_timePassed = 0;
  			while {_timePassed < _distanceX} do
  				{
- 				cutText [format [localize "STR_A3A_fn_dialogs_fastTravelRadio_begin", (_distanceX - _timePassed)],"BLACK",0.0001];
+ 				cutText [format [localize "STR_A3A_fn_dialogs_fastTravelRadio_begin", ([[_distanceX - _timePassed] call A3A_fnc_secondsToTimeSpan,0,0,false,2] call A3A_fnc_timeSpan_format)],"BLACK",0.0001];
  				sleep 1;
  				_timePassed = _timePassed + 1;
  				}
@@ -96,7 +105,7 @@ if (count _positionTel > 0) then
 			{if (vehicle _x != _x) then {_vehicles pushBackUnique (vehicle _x)}} forEach units _groupX;
 			{if ((vehicle _x) in _vehicles) exitWith {_checkForPlayer = true}} forEach (call A3A_fnc_playableUnits);
 			};
-		if (_checkForPlayer and ((_base != "SYND_HQ") and !(_base in airportsX))) 
+		if (_checkForPlayer and ((_base != "SYND_HQ") and !(_base in airportsX)))
 		exitWith {[_titleStr, format [localize "STR_A3A_fn_dialogs_ftradio_cancelled",groupID _groupX]] call A3A_fnc_customHint;};
 		private _ftUnits = [];
 		{

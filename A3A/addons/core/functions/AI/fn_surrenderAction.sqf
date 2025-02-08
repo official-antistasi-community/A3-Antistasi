@@ -84,8 +84,8 @@ if (!isNil "_markerX") then { [_markerX, _unitSide] remoteExec ["A3A_fnc_zoneChe
 
 
 // timed cleanup functions
-[_unit] spawn A3A_fnc_postmortem;
-[_boxX] spawn A3A_fnc_postmortem;
+[_unit] remoteExec ["A3A_fnc_postmortem", 2];
+[_boxX] remoteExec ["A3A_fnc_postmortem", 2];
 
 sleep 3;				// Also protects against box kills
 _unit allowDamage true;

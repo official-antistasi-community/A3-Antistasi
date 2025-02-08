@@ -1,22 +1,25 @@
 /*
-Maintainer: DoomMetal
-Handles updating and controls on the AI Management tab of the Main dialog.
+Maintainer: Caleb Serafin, DoomMetal
+    Handles updating and controls on the AI Management tab of the Main dialog.
 
 Arguments:
-<STRING> Mode
-<ARRAY<ANY>> Array of params for the mode when applicable. Params for specific modes are documented in the modes.
+    <STRING> Mode
+    <ARRAY<ANY>> Array of params for the mode when applicable. Params for specific modes are documented in the modes.
 
 Return Value:
-Nothing
+    Nothing
 
 Scope: Clients, Local Arguments, Local Effect
 Environment: Scheduled for control changes / Unscheduled for update
 Public: No
 Dependencies:
-None
+    None
 
 Example:
-["update"] call A3A_fnc_aiManagementTab;
+    ["update"] call FUNC(aiManagementTab);
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -37,7 +40,7 @@ switch (_mode) do
         private _backButton = _display displayCtrl A3A_IDC_MAINDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["player"]] call A3A_fnc_mainDialog;
+            ["switchTab", ["player"]] call FUNC(mainDialog);
         }];
         _backButton ctrlShow true;
 
@@ -83,7 +86,7 @@ switch (_mode) do
             };
         } forEach groupSelectedUnits player;
 
-        ["aiListBoxSelectionChanged"] call A3A_fnc_aiManagementTab;
+        ["aiListBoxSelectionChanged"] call FUNC(aiManagementTab);
     };
 
     case ("clearAIListboxSelection"):
@@ -97,7 +100,7 @@ switch (_mode) do
         };
 
         // Update Selection
-        ["aiListBoxSelectionChanged"] spawn A3A_fnc_aiManagementTab;
+        ["aiListBoxSelectionChanged"] spawn FUNC(aiManagementTab);
     };
 
     case ("aiListBoxSelectionChanged"):
@@ -117,11 +120,11 @@ switch (_mode) do
         {
             _aiControlButton ctrlEnable true;
             _aiControlButton ctrlSetTooltip "";
-            _aiControlIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call A3A_fnc_configColorToArray);
+            _aiControlIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
         } else {
             _aiControlButton ctrlEnable false;
             _aiControlButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip";
-            _aiControlIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _aiControlIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
 
         // If none are selected, disable all the other buttons
@@ -134,23 +137,23 @@ switch (_mode) do
         if (count _lbSelection > 0) then {
             _aiDismissButton ctrlEnable true;
             _aiDismissButton ctrlSetTooltip "";
-            _aiDismissIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call A3A_fnc_configColorToArray);
+            _aiDismissIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
             _aiAutoLootButton ctrlEnable true;
             _aiAutoLootButton ctrlSetTooltip "";
-            _aiAutoLootIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call A3A_fnc_configColorToArray);
+            _aiAutoLootIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
             _aiAutoHealButton ctrlEnable true;
             _aiAutoHealButton ctrlSetTooltip "";
-            _aiAutoHealIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call A3A_fnc_configColorToArray);
+            _aiAutoHealIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
         } else {
             _aiDismissButton ctrlEnable false;
             _aiDismissButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_ai_management_select_ai_tooltip";
-            _aiDismissIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _aiDismissIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
             _aiAutoLootButton ctrlEnable false;
             _aiAutoLootButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_ai_management_select_ai_tooltip";
-            _aiAutoLootIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _aiAutoLootIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
             _aiAutoHealButton ctrlEnable false;
             _aiAutoHealButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_ai_management_select_ai_tooltip";
-            _aiAutoHealIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _aiAutoHealIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
     };
 

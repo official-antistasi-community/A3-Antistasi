@@ -40,16 +40,16 @@ private _staticMortars = ["I_G_Mortar_01_F"];
 
 if ("expansion" in A3A_enabledDLC) then {
     _vehiclesCivCar append ["C_Offroad_02_unarmed_F"];
-	_vehiclesLightUnarmed append ["I_C_Offroad_02_unarmed_F"];
-	_vehiclesLightArmed append ["I_C_Offroad_02_LMG_F"];
-	_vehiclesAT append ["I_C_Offroad_02_AT_F"];
+    _vehiclesLightUnarmed append ["I_C_Offroad_02_unarmed_F"];
+    _vehiclesLightArmed append ["I_C_Offroad_02_LMG_F"];
+    _vehiclesAT append ["I_C_Offroad_02_AT_F"];
 };
 if ("rf" in A3A_enabledDLC) then {
-    _vehiclesCivCar append ["C_Pickup_rf"];
-    _vehiclesLightUnarmed append ["I_Tura_Pickup_01_RF"];
-    _vehiclesLightArmed append ["I_Tura_Pickup_01_mmg_rf"];
-    _staticMortars append ["I_G_CommandoMortar_RF"];
-    _vehiclesCivHeli append ["C_Heli_EC_01A_civ_RF","C_Heli_EC_04_rescue_RF"];
+    _vehiclesCivCar append ["C_Pickup_rf","C_Pickup_covered_rf"];
+    _vehiclesLightUnarmed append ["a3a_FIA_Pickup_rf", "a3a_FIA_Pickup_covered_rf"];
+    _vehiclesLightArmed append ["a3a_FIA_Pickup_mmg_rf", "a3a_FIA_Pickup_hmg_rf"];
+    _staticMortars append ["I_G_CommandoMortar_rf"];
+    _vehiclesCivHeli append ["C_Heli_EC_01A_civ_rf","C_Heli_EC_04_rescue_rf"];
 };
 
 ["vehiclesCivHeli", _vehiclesCivHeli] call _fnc_saveToTemplate;
@@ -94,7 +94,9 @@ if ("enoch" in A3A_enabledDLC) then {
 if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr","tf_anprc154"]};
 if (A3A_hasTFAR && startWithLongRangeRadio) then {_initialRebelEquipment append ["tf_anprc155","tf_anprc155_coyote"]};
 if (A3A_hasTFARBeta) then {_initialRebelEquipment append ["TFAR_microdagr","TFAR_anprc154"]};
-if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155","TFAR_anprc155_coyote"]};
+if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote", "TFAR_anarc164", "a3a_TFAR_rt1523g_rhs", "a3a_TFAR_rt1523g_bwmod", "a3a_TFAR_rt1523g"]};
+if (A3A_hasTFARBeta && startWithLongRangeRadio && ("enoch" in A3A_enabledDLC)) then {
+    _initialRebelEquipment append ["B_RadioBag_01_black_F", "B_RadioBag_01_digi_F", "a3a_B_RadioBag_01_oucamo_F", "a3a_B_RadioBag_01_wdl_F"]};
 _initialRebelEquipment append ["Chemlight_blue","Chemlight_green","Chemlight_red","Chemlight_yellow"];
 ["initialRebelEquipment", _initialRebelEquipment] call _fnc_saveToTemplate;
 
@@ -103,10 +105,10 @@ private _rebUniforms = [
     "U_lxWS_Djella_03_Green",
     "U_lxWS_Djella_02_Grey",
     "U_lxWS_Djella_02_Brown",
-	"U_lxWS_C_Djella_06",
-	"U_lxWS_C_Djella_02a",
-	"U_lxWS_C_Djella_05",
-	"U_lxWS_C_Djella_01",
+    "U_lxWS_C_Djella_06",
+    "U_lxWS_C_Djella_02a",
+    "U_lxWS_C_Djella_05",
+    "U_lxWS_C_Djella_01",
     "U_lxWS_Tak_02_A",
     "U_lxWS_Tak_02_B",
     "U_lxWS_Tak_02_C"

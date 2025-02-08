@@ -8,11 +8,11 @@ Maintainer: Caleb Serafin
     Note: Sub seconds are used instead of fractions due to float's limited precision.
 
 Arguments:
-    <Timespan> Timespan.    isNegative is index 0, days are index 1, hours are index 2, and smaller units follow in order. May be any amount of fields as long as it starts with isNegative and is in order.
+    <Timespan> Timespan. | <SCALAR> Seconds     isNegative is index 0, days are index 1, hours are index 2, and smaller units follow in order. May be any amount of fields as long as it starts with isNegative and is in order. | Seconds get converted to timespan.
     <SCALAR> Symbol Set.    0 are full names. 1 are abbreviations. 2 are condensed colons & en-dash.                                                        [DEFAULT=0]
     <SCALAR> Show Zeros.    0 will only show non-zero fields. 1 will show in-between zeros between non-zeros. 2 will show all zeros.                        [DEFAULT=0]
     <BOOLEAN> Show Positive.false will hide the positive sign. true will allow the positive sign all fields                                                 [DEFAULT=false]
-    <SCALAR> Fields Amount | <SCALAR,SCALAR> Slice   Number of significant fields to display. | First & last Index to be displayed. Days #1, hours #2 ect.. [DEFAULT=1e7]
+    <SCALAR> Fields Amount | <SCALAR,SCALAR> Slice   Number of significant fields to display. | First & last index to be displayed. Days #0, hours #1 etc. [DEFAULT=1e7]
     <BOOLEAN> Pad.          All fields will be padded, Days will be padded to 2 characters.                                                                 [DEFAULT=false]
     <BOOLEAN> Localise.     false for Great British English symbols, true for localised symbols.                                                            [DEFAULT=false]
 
@@ -24,54 +24,27 @@ Environment: Any
 Public: Yes
 
 Example:
-    // Negatives.
-    DEV_timeSpan = [true,0,0,21,0,0,69,420];
-    [DEV_timeSpan]                      call A3A_fnc_timeSpan_format;  // "(-) 21 Minutes 69 Microseconds 420 Nanoseconds"
-    [DEV_timeSpan,1]                    call A3A_fnc_timeSpan_format;  // "(-) 21m 69µs 420ns"
-    [DEV_timeSpan,2,2]                  call A3A_fnc_timeSpan_format;  // "-0:0:21:0–0:69:420"
+    // These are probably the ones you want:
+    // Assuming
+    private _seconds = _eventStart - serverTime;
+    // Dynamic range. (Full names; Show zeros between non-zeros; Hide positive sign; Limit to 2 significant fields; No padding; Localised)
+    [_seconds,0,1,false,2,false,true] call A3A_fnc_timeSpan_format;  // "1 Days 2 Hours" / "1 天 2 小时"; "13 Hours"
+    // Fixed Range like a digital clock (Colon separated; Show all zeros; Hide positive sign; Select only hours and minutes; With padding; Not localised)
+    [_seconds,2,2,false,[1,3],true,false] call A3A_fnc_timeSpan_format;  // "23:54"; "00:43"; "14:00"
 
-    // Zeros. Note the negative marker in DEV_timeSpan.
-    DEV_timeSpan = [true];
-    [DEV_timeSpan]                      call A3A_fnc_timeSpan_format;  // "(Now)"
-    [DEV_timeSpan,0,0,true]             call A3A_fnc_timeSpan_format;  // "(+) (Now)"
-    [DEV_timeSpan,1]                    call A3A_fnc_timeSpan_format;  // "0"
-    [DEV_timeSpan,1,0,true]             call A3A_fnc_timeSpan_format;  // "(+) 0"
-    [DEV_timeSpan,0,2,false]            call A3A_fnc_timeSpan_format;  // "0 Days 0 Hours 0 Minutes 0 Seconds 0 Milliseconds 0 Microseconds 0 Nanoseconds"
-    [DEV_timeSpan,0,2,false,nil,true]   call A3A_fnc_timeSpan_format;  // "00 Days 00 Hours 00 Minutes 00 Seconds 000 Milliseconds 000 Microseconds 000 Nanoseconds"
-    [DEV_timeSpan,1,2,false]            call A3A_fnc_timeSpan_format;  // "0d 0h 0m 0s 0ms 0µs 0ns"
-    [DEV_timeSpan,2,2,false]            call A3A_fnc_timeSpan_format;  // "0:0:0:0–0:0:0"
-    [DEV_timeSpan,2,2,true,nil,true]    call A3A_fnc_timeSpan_format;  // "+00:00:00:00–000:000:000"
+    // See fn_timeSpan_formatTests for non-localised examples.
 
-    // Field visibility.
-    DEV_timeSpan = [false,0,3,54,0,152,0];
-    [DEV_timeSpan,0]                    call A3A_fnc_timeSpan_format;  // "3 Hours 54 Minutes 152 Milliseconds"
-    [DEV_timeSpan,0,1]                  call A3A_fnc_timeSpan_format;  // "3 Hours 54 Minutes 0 Seconds 152 Milliseconds"
-    [DEV_timeSpan,0,2]                  call A3A_fnc_timeSpan_format;  // "0 Days 3 Hours 54 Minutes 0 Seconds 152 Milliseconds 0 Microseconds 0 Nanoseconds"
-    [DEV_timeSpan,0,2,true]             call A3A_fnc_timeSpan_format;  // "(+) 0 Days 3 Hours 54 Minutes 0 Seconds 152 Milliseconds 0 Microseconds 0 Nanoseconds"
-
-    // Slicing.
-    DEV_timeSpan = [false,0,3,54,0,152,0];
-    [DEV_timeSpan,0,1,false,2]          call A3A_fnc_timeSpan_format;  // "3 Hours 54 Minutes"
-    [DEV_timeSpan,0,2,false,[1,1e7]]    call A3A_fnc_timeSpan_format;  // "3 Hours 54 Minutes 0 Seconds 152 Milliseconds 0 Microseconds 0 Nanoseconds"
-    [DEV_timeSpan,0,2,false,[0,4]]      call A3A_fnc_timeSpan_format;  // "0 Days 3 Hours 54 Minutes 0 Seconds"
-    [DEV_timeSpan,0,2,false,[1,4]]      call A3A_fnc_timeSpan_format;  // "3 Hours 54 Minutes 0 Seconds"
-
-    // Slicing to get digital time.
-    DEV_timeSpan = [false,0,3,54,0,152,0];
-    [DEV_timeSpan,2,2,false,[1,4]]      call A3A_fnc_timeSpan_format;  // "3:54:0"
-    [DEV_timeSpan,2,2,false,[1,4],true] call A3A_fnc_timeSpan_format;  // "03:54:00"
-
-    // Localised all places on machine
+    // Example of each time unit being Localised on a machine set to Simplified Chinese
     DEV_timeSpan = [false,1,2,3,4,5,6,7];
-    [nil,0,0,false,nil,false,true]          call A3A_fnc_timeSpan_format;  // "(Now)"
-    [DEV_timeSpan,0,2,false,nil,false,true] call A3A_fnc_timeSpan_format;  // "1 Days 2 Hours 3 Minutes 4 Seconds 5 Milliseconds 6 Microseconds 7 Nanoseconds"
+    [nil,0,0,false,nil,false,true]          call A3A_fnc_timeSpan_format;  // "(现在)"
+    [DEV_timeSpan,0,2,false,nil,false,true] call A3A_fnc_timeSpan_format;  // "1 天 2 小时 3 分钟 4 秒 5 毫秒 6 微秒 7 纳秒"
     [DEV_timeSpan,1,2,false,nil,false,true] call A3A_fnc_timeSpan_format;  // "1d 2h 3m 4s 5ms 6µs 7ns"
 */
 
 // A3A_fnc_timeSpan_format = {
 
 params [
-    ["_timeSpan",[], [ [] ]],
+    ["_timeSpan",[], [ [], 0 ]],
     ["_symbolSet", 0, [ 0 ]],
     ["_showZeros", 0, [ 0 ]],
     ["_showPositive", false, [ false ]],
@@ -80,22 +53,28 @@ params [
     ["_localise", false, [ false ]]
 ];
 
+if (_timeSpan isEqualType 0) then {
+    _timeSpan = [_timeSpan] call A3A_fnc_secondsToTimeSpan;
+};
+
 // Note the lack of front spacing on abbreviations.
 // Note: Micro sign (µ) U+00B5, is completely different from Greek Mu (μ) U+03BC
-private _sizeFieldList = if (_localise && (_symbolSet != 2)) then {
-    private _preSpace = [" ",""] #_symbolSet;
-    private _postSpace = [" "," "] #_symbolSet;
-    [
-        ["STR_antistasi_timeSpan_days","STR_antistasi_timeSpan_hours","STR_antistasi_timeSpan_minutes","STR_antistasi_timeSpan_seconds","STR_antistasi_timeSpan_milliseconds","STR_antistasi_timeSpan_microseconds","STR_antistasi_timeSpan_nanoseconds"],
-        ["STR_antistasi_timeSpan_days_abbr","STR_antistasi_timeSpan_hours_abbr","STR_antistasi_timeSpan_minutes_abbr","STR_antistasi_timeSpan_seconds_abbr","STR_antistasi_timeSpan_milliseconds_abbr","STR_antistasi_timeSpan_microseconds_abbr","STR_antistasi_timeSpan_nanoseconds_abbr"]
-    ] #_symbolSet apply {_preSpace + (localize _x) + _postSpace};
-} else {
-    [
-        [" Days "," Hours "," Minutes "," Seconds "," Milliseconds "," Microseconds "," Nanoseconds "],
-        ["d ","h ","m ","s ","ms ","µs ","ns "],
-        [":",":",":","–",":",":",":"]  // Note En-Dash U+2013 (toString[8211]) is used to separate seconds from smaller parts.
-    ] #_symbolSet;
-};
+private _sizeFieldList = (
+    if (_localise && (_symbolSet != 2)) then {
+        private _preSpace = [" ",""] #_symbolSet;
+        private _postSpace = [" "," "] #_symbolSet;
+        [
+            ["STR_antistasi_timeSpan_days","STR_antistasi_timeSpan_hours","STR_antistasi_timeSpan_minutes","STR_antistasi_timeSpan_seconds","STR_antistasi_timeSpan_milliseconds","STR_antistasi_timeSpan_microseconds","STR_antistasi_timeSpan_nanoseconds"],
+            ["STR_antistasi_timeSpan_days_abbr","STR_antistasi_timeSpan_hours_abbr","STR_antistasi_timeSpan_minutes_abbr","STR_antistasi_timeSpan_seconds_abbr","STR_antistasi_timeSpan_milliseconds_abbr","STR_antistasi_timeSpan_microseconds_abbr","STR_antistasi_timeSpan_nanoseconds_abbr"]
+        ] #_symbolSet apply {_preSpace + (localize _x) + _postSpace};
+    } else {
+        [
+            [" Days "," Hours "," Minutes "," Seconds "," Milliseconds "," Microseconds "," Nanoseconds "],
+            ["d ","h ","m ","s ","ms ","µs ","ns "],
+            [":",":",":","–",":",":",":"]  // Note En-Dash U+2013 (toString[8211]) is used to separate seconds from smaller parts.
+        ] #_symbolSet;
+    }
+);
 private _showInBetweenZeros = _showZeros > 0;
 private _showAllZeros = _showZeros > 1;
 // Copy timeSpan to avoid resizes changing input array.
