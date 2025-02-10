@@ -1703,4 +1703,94 @@ class Templates
         shortName = "FIA";
         lore = $STR_A3A_templates_lore_FIA;
     };
+
+     // ***************************** CSLA *****************************
+
+     class CSLA_Base
+    {
+        requiredAddons[] = {"CUP_Creatures_People_Civil_Russia", "CUP_BaseConfigs", "CUP_AirVehicles_Core", "CSLA_UI"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\CSLA);
+        logo = "\CSLA_cfg\Logos\csla_logo.paa";
+        priority = 70;
+    };
+
+    class CSLA_AI_US_Army_Temperate  : CSLA_Base
+    {
+        basepath = QPATHTOFOLDER(Templates\CSLA); //the path to the folder the template is located in, this translates to "\x\A3AE\addons\templates\Templates\Vanilla"
+        side = "Occ"; //the side the faction defaults to, one of the following: Inv, Occ, Reb, Civ
+        flagTexture = "a3\data_f\flags\flag_us_co.paa"; //path to an icon to be displayed in the selector
+        name = "US ARMY Temprate"; //the name shown in the selector
+        file = "CSLA_AI_US_Army_Temperate "; //the template file name
+        climate[] = {"Temperate"}; //climate that the template is meant for
+    };
+
+     class CSLA_AI_US_Army_Arid : CSLA_Base
+    {
+        side = "Occ";
+        flagTexture = "a3\data_f\flags\flag_us_co.paa";
+        name = "US ARMY Arid";
+        file = "CSLA_AI_US_Army_Arid";
+        climate[] = {"Arid"};
+        shortName = "US ARMY";
+    };
+    
+    class CSLA_AI_CSLA_Temperate : CSLA_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\CzechRepublic_ca.paa";
+        name = "CSLA Temperate";
+        file = "CSLA_AI_CSLA_Temperate";
+        climate[] = {"Temperate"};
+        shortName = "CSLA";
+    };
+
+    class CSLA_AI_CSLA_Arid : CSLA_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\CzechRepublic_ca.paa";
+        name = "CSLA Arid";
+        file = "CSLA_AI_CSLA_Arid";
+        climate[] = {"Arid"};
+        shortName = "CSLA";
+    };
+
+    class CSLA_AI_AFMC_Temperate : CSLA_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\nato_ca.paa";
+        name = "AFMC Temperate";
+        file = "CSLA_AI_AFMC_Temperate";
+        climate[] = {"Temperate"};
+        shortName = "AFMC";
+    };
+
+    class CSLA_AI_FIA_Temperate : CSLA_Base
+    {
+        side = "Occ";
+        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        name = "FIA";
+        file = "CSLA_AI_FIA_Temperate";
+        climate[] = {"Temperate"};
+        shortName = "FIA";
+    };
+
+    class CSLA_Reb_NAPA : CSLA_Base
+    {
+        side = "Reb";
+        flagTexture = "cup\baseconfigs\cup_baseconfigs\data\flags\flag_napa_co.paa";
+        name = "FIA";
+        file = "CSLA_Reb_NAPA";
+        climate[] = {"Temperate"};
+        shortName = "FIA";
+    };
+
+    class CSLA_Civ_TC : CSLA_Base
+    {
+        side = "Civ";
+        flagTexture = "\CUP\BaseConfigs\CUP_BaseConfigs\data\Flags\flag_tka_co.paa";
+        name = "CIV_TC";
+        file = "CSLA_Civ_TC";
+        climate[] = {"Temperate"};
+        shortName = "FIA";
+    };
 };
