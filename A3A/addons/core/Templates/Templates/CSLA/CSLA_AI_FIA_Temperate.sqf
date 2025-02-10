@@ -27,7 +27,7 @@
 ["vehiclesFuelTrucks", ["CSLA_FIA_V3Sf_des"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", []] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["FIA_OT64C_VB", "CSLA_OT62", "CSLA_OT65A", "CSLA_OT62D"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", ["CSLA_BVP1"]] call _fnc_saveToTemplate;            // mortar carrier: "CUP_B_M1129_MC_MK19_Woodland"
+["vehiclesAPCs", ["CSLA_BVP1"]] call _fnc_saveToTemplate;            
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["CUP_O_T55_SLA"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["CSLA_FIA_PLdvK59V3S"]] call _fnc_saveToTemplate;

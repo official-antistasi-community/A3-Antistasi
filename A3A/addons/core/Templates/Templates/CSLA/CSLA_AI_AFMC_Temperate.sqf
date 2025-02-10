@@ -27,7 +27,7 @@
 ["vehiclesFuelTrucks", ["AFMC_M923f"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["AFMC_M113A2_AMB"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["AFMC_M113A1", "AFMC_M113A1_Mk19", "AFMC_M113A2ext", "US85_M113A1_TOW"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", ["AFMC_LAV25"]] call _fnc_saveToTemplate;            // mortar carrier: "CUP_B_M1129_MC_MK19_Woodland"
+["vehiclesAPCs", ["AFMC_LAV25"]] call _fnc_saveToTemplate;            
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["CUP_B_Leopard_1A3GRN_GER"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["AFMC_M163"]] call _fnc_saveToTemplate;
