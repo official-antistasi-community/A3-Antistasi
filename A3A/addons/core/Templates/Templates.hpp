@@ -1717,7 +1717,7 @@ class Templates
     class CSLA_AI_US_Army_Temperate  : CSLA_Base
     {
         basepath = QPATHTOFOLDER(Templates\CSLA); //the path to the folder the template is located in, this translates to "\x\A3AE\addons\templates\Templates\Vanilla"
-        side = "Occ"; //the side the faction defaults to, one of the following: Inv, Occ, Reb, Civ
+        side = "Inv"; //the side the faction defaults to, one of the following: Inv, Occ, Reb, Civ
         flagTexture = "a3\data_f\flags\flag_us_co.paa"; //path to an icon to be displayed in the selector
         name = "US ARMY Temprate"; //the name shown in the selector
         file = "CSLA_AI_US_Army_Temperate "; //the template file name
@@ -1726,7 +1726,7 @@ class Templates
 
      class CSLA_AI_US_Army_Arid : CSLA_Base
     {
-        side = "Occ";
+        side = "Inv";
         flagTexture = "a3\data_f\flags\flag_us_co.paa";
         name = "US ARMY Arid";
         file = "CSLA_AI_US_Army_Arid";
@@ -1736,7 +1736,7 @@ class Templates
     
     class CSLA_AI_CSLA_Temperate : CSLA_Base
     {
-        side = "Inv";
+        side = "Occ";
         flagTexture = "\A3\ui_f\data\map\markers\flags\CzechRepublic_ca.paa";
         name = "CSLA Temperate";
         file = "CSLA_AI_CSLA_Temperate";
@@ -1746,7 +1746,7 @@ class Templates
 
     class CSLA_AI_CSLA_Arid : CSLA_Base
     {
-        side = "Inv";
+        side = "Occ";
         flagTexture = "\A3\ui_f\data\map\markers\flags\CzechRepublic_ca.paa";
         name = "CSLA Arid";
         file = "CSLA_AI_CSLA_Arid";
@@ -1756,7 +1756,7 @@ class Templates
 
     class CSLA_AI_AFMC_Temperate : CSLA_Base
     {
-        side = "Occ";
+        side = "Inv";
         flagTexture = "\A3\ui_f\data\map\markers\flags\nato_ca.paa";
         name = "AFMC Temperate";
         file = "CSLA_AI_AFMC_Temperate";
@@ -1778,10 +1778,10 @@ class Templates
     {
         side = "Reb";
         flagTexture = "cup\baseconfigs\cup_baseconfigs\data\flags\flag_napa_co.paa";
-        name = "FIA";
+        name = "CSLA NAPA";
         file = "CSLA_Reb_NAPA";
         climate[] = {"Temperate"};
-        shortName = "FIA";
+        shortName = "NAPA";
     };
 
     class CSLA_Civ_TC : CSLA_Base
