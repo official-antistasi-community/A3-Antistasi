@@ -94,19 +94,12 @@ HR_GRG_onCloseEvent = {
 };
 
 // Function to check if the vehicle class is undercover
-HR_GRG_AntistasiOrNot = {
+HR_GRG_isCivilian = {
     params [
         ["_class", ""]
     ];
 
-    if (_class isEqualTo "") exitWith {-1}
-    if (isNil "undercoverVehicles") exitWith {-1};
-
-    private _isUndercover = if (_class in undercoverVehicles) then {
-        0;
-    } else {
-        1;
-    };
+    [1, 0] select (_class in undercoverVehicles);
 
     _isUndercover;
 };
