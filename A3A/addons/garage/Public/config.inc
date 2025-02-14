@@ -100,8 +100,6 @@ HR_GRG_isCivilian = {
     ];
 
     [1, 0] select (_class in undercoverVehicles);
-
-    _isUndercover;
 };
 
 //CBA settings

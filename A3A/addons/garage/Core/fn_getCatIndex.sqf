@@ -34,7 +34,7 @@ switch (true) do {
     //filter blacklist first
     case (_class in HR_GRG_blacklistVehicles): { -2 };
     //vanilla
-    case (_editorCat isEqualTo "EdSubcat_Cars"): { [_class] call HR_GRG_AntistasiOrNot }; // Returns 0 (undercover) or 1 (not undercover) 
+    case (_editorCat isEqualTo "EdSubcat_Cars"): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover) 
     case (_editorCat isEqualTo "EdSubcat_APCs"): { 2 };
     case (_editorCat in ["EdSubcat_Tanks","EdSubcat_AAs","EdSubcat_Artillery"]): { 3 };
     case (_editorCat in ["EdSubcat_Helicopters"] || getNumber (_vtolConfig >> "vtol") > 0): { 4 };
@@ -44,7 +44,7 @@ switch (true) do {
     case (_editorCat isEqualTo "EdSubcat_Turrets"): { 7 };
 
     //rhs
-    case (_editorCat in ["rhs_EdSubcat_car", "rhs_EdSubcat_truck", "rhs_EdSubcat_mrap"]): { [_class] call HR_GRG_AntistasiOrNot }; // Returns 0 (undercover) or 1 (not undercover)
+    case (_editorCat in ["rhs_EdSubcat_car", "rhs_EdSubcat_truck", "rhs_EdSubcat_mrap"]): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover)
     case (_editorCat in ["rhs_EdSubcat_apc","rhs_EdSubcat_ifv"]): {2};
     case (_editorCat in ["rhs_EdSubcat_tank","rhs_EdSubcat_aa","rhs_EdSubcat_artillery"]): {3};
     case (_editorCat in ["rhs_EdSubcat_helicopter","rhs_EdSubcat_helicopter_d","rhs_EdSubcat_helicopter_wd"]): { 4 };
@@ -52,10 +52,10 @@ switch (true) do {
     case (_editorCat isEqualTo "rhs_EdSubcat_boat"): { 6 };
 
     //cup
-    case (_editorCat in ["CUP_EdSubcat_Bikes", "CUP_EdSubCat_Cars_Woodland", "CUP_EdSubCat_UpHMMWV_Cars_Desert", "CUP_EdSubCat_Cars_Winter"]): { [_class] call HR_GRG_AntistasiOrNot }; // Returns 0 (undercover) or 1 (not undercover)
+    case (_editorCat in ["CUP_EdSubcat_Bikes", "CUP_EdSubCat_Cars_Woodland", "CUP_EdSubCat_UpHMMWV_Cars_Desert", "CUP_EdSubCat_Cars_Winter"]): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover)
     
     //Fallback
-    case (_class isKindOf "Car"): { [_class] call HR_GRG_AntistasiOrNot }; // Returns 0 (undercover) or 1 (not undercover)
+    case (_class isKindOf "Car"): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover)
     case (_class isKindOf "Tracked_APC"): { 2 }; //?
     case (_class isKindOf "Tank"): { 3 };
     case (_class isKindOf "Helicopter"): { 4 };
