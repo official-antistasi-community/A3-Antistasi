@@ -90,6 +90,7 @@ switch _special do {
     };
 
     //vehicle squad
+    // aa is dead code
     case "BuildAA": {
         private _static = ((attachedObjects _vehicle) select {typeOf _x in FactionGet(reb,"staticAA")})#0;
         (_units # (_countUnits -1)) moveInDriver _vehicle;
