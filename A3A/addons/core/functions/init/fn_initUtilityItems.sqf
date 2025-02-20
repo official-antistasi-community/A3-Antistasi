@@ -39,7 +39,7 @@ private _items = [
 if (LootToCrateRadius == 0) then { _items deleteAt 0 };
 
 if(A3A_hasACE) then {
-    _items pushBack [_medCrate#0, _medCrate#1, "medicalbox", "heal", ["noclear", "move"]];
+    _items pushBack [_medCrate#0, _medCrate#1, "medicalbox", "heal", ["noclear", "move", "medfacility"]];
     _items pushBack ["ACE_Wheel", 5, "", "", []];
     _items pushBack ["ACE_Track", 5, "", "", []];       // check names
 };

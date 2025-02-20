@@ -26,7 +26,7 @@
 
 private _medBox = ["Box_AAF_Equip_F", 5];
 if(A3A_hasACE) then {
-	_medBox = ["ACE_medicalSupplyCrate_advanced", 5];
+	_medBox = ["ACE_medicalSupplyCrate_advanced", 40];
 };
 
 ["vehicleMedicalBox", _medBox] call _fnc_saveToTemplate;

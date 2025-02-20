@@ -95,6 +95,12 @@ if ("unpack" in _flags) then {
     ];
 };
 
+if("medfacility") then {
+    if(A3A_hasACEMedical) then {
+        _object setVariable ["ace_medical_isMedicalVehicle", true];
+    };
+};
+
 // specific to the tent
 if (typeOf _object == "Land_MedicalTent_01_MTP_closed_F") then {
     _object addAction [
