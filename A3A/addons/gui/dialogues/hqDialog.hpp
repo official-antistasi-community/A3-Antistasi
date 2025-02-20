@@ -534,9 +534,9 @@ class A3A_HqDialog : A3A_DefaultDialog
 
                         class TrainTroopsButton : A3A_Button
                         {
-                            idc = -1;
+                            idc = A3A_IDC_FACTIONTRAININGBUTTON;
                             text = $STR_antistasi_dialogs_hq_train_button;
-                            onButtonClick = "[] call A3A_fnc_FIAskillAdd; [""updateMainTab""] call A3A_GUI_fnc_hqDialog"; // TODO UI-update: Update tooltip with price
+                            onButtonClick = "[] call A3A_fnc_FIAskillAdd; [""updateMainTab""] call A3A_GUI_fnc_hqDialog";
                             x = 60 * GRID_W;
                             y = 7 * GRID_H;
                             w = 22 * GRID_W;
@@ -599,7 +599,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                         {
                             idc = A3A_IDC_FACTIONMONEYBUTTON;
                             text = $STR_antistasi_dialogs_hq_take_money_button;
-                            onButtonClick = "[""factionMoneyButtonClicked""] call A3A_GUI_fnc_hqDialog"; // TODO UI-update: Replace placeholder when merging
+                            onButtonClick = "[""factionMoneyButtonClicked""] call A3A_GUI_fnc_hqDialog";
                             x = 60 * GRID_W;
                             y = 19 * GRID_H;
                             w = 22 * GRID_W;
@@ -655,7 +655,7 @@ class A3A_HqDialog : A3A_DefaultDialog
 
                         class RestButton : A3A_Button
                         {
-                            idc = -1;
+                            idc = A3A_IDC_RESTBUTTON;
                             text = $STR_antistasi_dialogs_hq_rest_button;
                             onButtonClick = "[""skipTime""] spawn A3A_GUI_fnc_hqDialog;";
                             x = 41 * GRID_W; // 108
@@ -776,7 +776,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             style = ST_RIGHT;
                             text = "";
                             font = "RobotoCondensedLight";
-                            colorText[] = A3A_COLOR_BUTTON_TEXT_DISABLED; // TODO UI-update: Replace color, needs it's own
+                            colorText[] = A3A_COLOR_UNITPRICE;
                             x = 26 * GRID_W;
                             y = 0 * GRID_H;
                             w = 8 * GRID_W;
@@ -1329,7 +1329,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                 {
                     idc = A3A_IDC_REBUILDGARRISONBUTTON;
                     text = $STR_antistasi_dialogs_hq_garrisons_rebuild_assets_button;
-                    onButtonClick = "hint ""Placeholder\nWill use A3A_fnc_rebuildAssets when merged"""; // TODO UI-update: Replace placeholder when merging
+                    onButtonClick = "[""rebuildAssets""] spawn A3A_GUI_fnc_hqDialog";
                     x = 10 * GRID_W;
                     y = 60 * GRID_H;
                     w = 22 * GRID_W;

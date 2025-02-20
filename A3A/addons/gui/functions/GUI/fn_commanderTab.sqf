@@ -251,7 +251,8 @@ switch (_mode) do
         _groupCombatModeText ctrlSetText _combatMode;
 
         private _groupVehicleText = _display displayCtrl A3A_IDC_HCGROUPVEHICLE;
-        _groupVehicleText ctrlSetStructuredText parseText "<t align='right'>Super long vehicle name bla bla</t>"; // TODO UI-update: Update with actual vehicle name
+        private _groupVehicleName = getText(configfile >> "CfgVehicles" >> typeOf _groupVehicle >> "displayName");
+        _groupVehicleText ctrlSetStructuredText parseText format ["<t align='right'>%1</t>", _groupVehicleName]; 
 
         // Pan to group location
         _commanderMap ctrlMapAnimAdd [0.2, ctrlMapScale _commanderMap, getPos _groupLeader];

@@ -113,6 +113,7 @@ class CfgFunctions
             class blackout {};
             class buildHQ {};
             class calculateAggression {};
+            class canManageAI {};
             class canMoveHQ {};
             class chooseAttack {};
             class citiesToCivPatrol {};
@@ -306,6 +307,7 @@ class CfgFunctions
         class Dialogs {
             file = QPATHTOFOLDER(functions\Dialogs);
             class canFastTravel {};
+            class canSkipTime {};
             class calculateFastTravelCost {};
             class clearForest {};
             class createDialog_shouldLoadPersonalSave {};

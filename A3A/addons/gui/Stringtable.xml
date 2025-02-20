@@ -1953,6 +1953,9 @@
         <Turkish>Napalm Bombası</Turkish>
         <Chinesesimp>凝固汽油弹</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_support_no_base_tooltip">
+        <Original>You have no airbases under your control</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_no_points_tooltip">
         <Original>You have no air support points</Original>
         <German>Du hast keine Luftunterstützungspunkte</German>

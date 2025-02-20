@@ -50,9 +50,7 @@ switch (_mode) do
         ["switchTab", ["main"]] call FUNC(hqDialog);
 
         // Move HQ button
-        // TODO UI-update: Move to updateMainTab?
-        // TODO UI-update: merge in wurzels A3A_fnc_canMoveHQ
-        private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
+        /*private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
         private _moveHqButton = _display displayCtrl A3A_IDC_MOVEHQBUTTON;
 
         private _canMoveHQ = [] call FUNCMAIN(canMoveHQ);
@@ -67,7 +65,7 @@ switch (_mode) do
             _moveHqIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
             _moveHqIcon ctrlSetTooltip _canMoveHQ # 1;
         };
-
+        */
         // Faction money section setup
         private _factionMoneySlider = _display displayCtrl A3A_IDC_FACTIONMONEYSLIDER;
         private _factionMoney = server getVariable ["resourcesFIA", 0];
@@ -209,6 +207,36 @@ switch (_mode) do
         _invadersFlag ctrlSetToolTip (_nameInvaders + " " + _aggressionStr);
         _invadersAggroText ctrlSetTooltip (_nameInvaders + " " + _aggressionStr);
 
+        // Skip time condition
+        private _restButton = _display displayCtrl A3A_IDC_RESTBUTTON;
+        private _error = call FUNCMAIN(canSkipTime);
+        if (_error isEqualTo "") then {
+            _restButton ctrlEnable true;
+            _restButton ctrlSetTooltip "";
+            _restButton ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+        } else {
+            _restButton ctrlEnable false;
+            _restButton ctrlSetTooltip _error;
+            _restButton ctrlSetTextColor ([A3A_COLOR_BUTTON_TEXT_DISABLED] call FUNC(configColorToArray));
+        };
+
+        // Move HQ condition
+        private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
+        private _moveHqButton = _display displayCtrl A3A_IDC_MOVEHQBUTTON;
+
+        private _canMoveHQ = [] call FUNCMAIN(canMoveHQ);
+        if (_canMoveHQ # 0) then {
+            _moveHqButton ctrlEnable true;
+            _moveHqButton ctrlSetTooltip "";
+            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+            _moveHqIcon ctrlSetTooltip "";
+        } else {
+            _moveHqButton ctrlEnable false;
+            _moveHqButton ctrlSetTooltip _canMoveHQ # 1;
+            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+            _moveHqIcon ctrlSetTooltip _canMoveHQ # 1;
+        };
+        
         // Get location data
         private _controlledCities = {sidesX getVariable [_x, sideUnknown] == teamPlayer} count citiesX;
         private _totalCities = count citiesX;
@@ -295,6 +323,8 @@ switch (_mode) do
         private _trainingText = _display displayCtrl A3A_IDC_FACTIONTRAININGTEXT;
         _hrText ctrlSetText str _hr;
         _trainingText ctrlSetText format ["%1 / 20", _trainingLevel];
+        private _trainingTooltip = _display displayCtrl A3A_IDC_FACTIONTRAININGBUTTON;
+        _trainingTooltip ctrlSetTooltip (format [localize "STR_antistasi_dialogs_hq_train_tooltip",1000 + (1.5*((skillFIA) *750))]);
 
         private _factionMoney = server getVariable ["resourcesFIA", 0];
         private _factionMoneyText = _display displayCtrl A3A_IDC_FACTIONMONEYTEXT;
@@ -480,9 +510,7 @@ switch (_mode) do
         if (_factionMoney < _atPrice || _hr < 1) then {_atAddButton ctrlEnable false; _atAddButton ctrlSetTooltip _noResourcesText};
 
         // Disable any management buttons if garrison is under attack
-        // TODO UI-update: This is very placeholdery atm, replace with A3A_fnc_enemyNearCheck on merge
-        private _garrisonUnderAttack = false;
-        if (_selectedMarker isEqualTo "outpost_1") then {_garrisonUnderAttack = true};
+        private _garrisonUnderAttack = [markerPos _selectedMarker] call FUNCMAIN(enemyNearCheck);
         if (_garrisonUnderAttack) then {
             _garrisonAttackText = localize "STR_antistasi_dialogs_hq_garrisons_under_attack";
             {
@@ -683,32 +711,7 @@ switch (_mode) do
     {
         private _restSlider = _display displayCtrl A3A_IDC_RESTSLIDER;
         private _time = sliderPosition _restSlider;
-        private _titleStr = localize "STR_A3A_fn_GUI_hqDialog_title";
-
-        // TODO UI-update: Move all these checks to update and disable button etc
-        if (player!= theBoss) exitWith [_titleStr, localize "STR_A3A_fn_GUI_hqDialog_notBoss"] call FUNCMAIN(customHint);
-        _enemiesNear = false;
-
-        {
-            if ((side _x == Occupants) or (side _x == Invaders)) then
-        	{
-            	if ([500,1,_x,teamPlayer] call FUNCMAIN(distanceUnits)) then {_presente = true};
-        	};
-        } forEach allUnits;
-        if (_enemiesNear) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_enemiesNear"] call FUNCMAIN(customHint);};
-        if ("rebelAttack" in A3A_activeTasks) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_rebelAttack"] call FUNCMAIN(customHint);};
-        if ("invaderPunish" in A3A_activeTasks) exitWith {[_titleStr, format [localize "STR_A3A_fn_GUI_hqDialog_invaderPunish", FactionGet(inv,"name")]] call FUNCMAIN(customHint);};
-        if ("DEF_HQ" in A3A_activeTasks) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_DEF_HQ"] call FUNCMAIN(customHint);};
-
-        _playersNotAtHq = false;
-        _posHQ = getMarkerPos respawnTeamPlayer;
-        {
-            if ((_x distance _posHQ > 100) and (side _x == teamPlayer)) then {_checkX = true};
-        } forEach (allPlayers - (entities "HeadlessClient_F"));
-
-        if (_playersNotAtHq) exitWith {[_titleStr, localize "STR_A3A_fn_GUI_hqDialog_playersNotAtHQ"] call FUNCMAIN(customHint);};
-
-        [_time] remoteExec ["FUNCMAIN(resourceCheckSkipTime)", 0];
+        [_time] call FUNCMAIN(skipTime);
 
         closeDialog 1;
     };
@@ -723,6 +726,14 @@ switch (_mode) do
     {
         // TODO UI-update: this was apparently deprecated and uses dismiss garrison instead, considering replacing/removing this button
         closeDialog 1;
+    };
+
+    case ("rebuildAssets"):
+    {
+        Trace("Rebuilding assets");
+
+        private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
+        [_selectedMarker] spawn FUNCMAIN(rebuildAssets);
     };
 
     default

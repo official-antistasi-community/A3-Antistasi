@@ -124,28 +124,10 @@ switch (_mode) do
         };
 
         // AI Management
-        // TODO UI-update: split checks to A3A_fnc_canManageAI
         _aiManagementTooltipText = "";
-        _canManageAi = false;
-
-        // Check if AI Management is available
-        switch (true) do
-        {
-            case !(leader player == player):
-            {
-                _aiManagementTooltipText = localize "STR_antistasi_dialogs_main_ai_management_sl_tooltip";
-            };
-
-            case ({!isPlayer _x} count units group player < 1):
-            {
-                _aiManagementTooltipText = localize "STR_antistasi_dialogs_main_ai_management_no_ai_tooltip";
-            };
-
-            default
-            {
-                _canManageAi = true;
-            };
-        };
+        _canManageAi = call A3A_fnc_canManageAI; // Returns array, need to filter into seperate vars
+        _aiManagementButton = _canManageAI#1;
+        _canManageAI = _canManageAI#0;
 
         private _aiManagementButton = _display displayCtrl A3A_IDC_AIMANAGEMENTBUTTON;
         private _aiManagementIcon = _display displayCtrl A3A_IDC_AIMANAGEMENTICON;
@@ -179,17 +161,13 @@ switch (_mode) do
         _playerRankText ctrlSetText ([player, "displayName"] call BIS_fnc_rankParams);
         _playerRankPicture ctrlSetText ([player, "texture"] call BIS_fnc_rankParams);
 
-        private _time = time; // TODO UI-update: get time at session start, not mission start, aka after you've loaded in, and on respawns etc...
+        private _time = (time - A3A_aliveTime); // current time - time since last (re)spawn
         _aliveText ctrlSetText format [[_time,1,1,false,2,false,true] call A3A_fnc_timeSpan_format];
 
-        // TODO UI-update: Make function for getting num of completed missions
-        private _missions = 0;
-        // private _missions = player getVariable "missionsCompleted";
+        private _missions = player getVariable "missionsCompleted";
         _missionsText ctrlSetText str _missions;
 
-        // TODO UI-update: Make function for getting number of kills
-        private _kills = 0;
-        // private _kills = player getVariable "kills";
+        private _kills = (getPlayerScores player)#0;
         _killsText ctrlSetText str _kills;
 
         // Update commander icon/text/button

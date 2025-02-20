@@ -64,7 +64,7 @@ switch (_mode) do
             _aiListBox ctrlEnable true;
             {
                 _index = _aiListBox lbAdd name _x;
-                _netId = _x call BIS_fnc_netId; // TODO UI-update: can be only netId command instead of function in MP-only
+                _netId = netId _x;
                 Trace_1("Adding unit: %1", _netId);
                 _aiListBox lbSetData [_index, _netId];
             } forEach _aisInGroup;
@@ -72,7 +72,7 @@ switch (_mode) do
 
         // If any units are selected on the command bar select those in the list
         {
-            _netId = _x call BIS_fnc_netId; // TODO UI-update: can be only netId command instead of function in MP-only
+            _netId = netID _x;
             Trace_1("Selecting unit: %1", _netId);
             _lbSize = lbSize _aiListBox;
             for "_i" from 0 to (_lbSize - 1) do
@@ -115,8 +115,8 @@ switch (_mode) do
         private _aiControlIcon = _display displayCtrl A3A_IDC_AICONTROLICON;
         _lbSelection = lbSelection _aiListBox;
         Trace_1("AI LB selection changed: %1", _lbSelection);
-        // TODO UI-update: disable AI control button when petros is selected
-        if (count _lbSelection == 1) then
+        private _hasPetros = ((_lbSelection findIf {objectFromNetId (_aiListBox lbData _x) == petros}) > -1);
+        if (count _lbSelection == 1 && !(_hasPetros)) then
         {
             _aiControlButton ctrlEnable true;
             _aiControlButton ctrlSetTooltip "";

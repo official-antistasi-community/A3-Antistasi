@@ -234,6 +234,7 @@ if (side group player == teamPlayer) then
 		];
 	[] spawn A3A_fnc_unitTraits;
 	[] spawn A3A_fnc_statistics;
+	A3A_aliveTime = time;
 	}
 else
 	{

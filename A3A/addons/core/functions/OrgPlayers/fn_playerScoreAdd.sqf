@@ -21,6 +21,10 @@ if (isMultiplayer) exitWith
 			_textX = format ["<br/><br/><br/><br/><br/><br/>" + localize "STR_A3A_fn_orgp_playerScoreAdd_money" + " €",_pointsX*10];
 			[petros,"income",_textX] remoteExec ["A3A_fnc_commsMP",_playerX];
 			//[] remoteExec ["A3A_fnc_statistics",_playerX];
+			if (_pointsX >= 10) then { // Dumb way to track mission completion without changing every mission file
+				private _missions = _playerX getVariable "missionsCompleted";
+				_playerX setVariable ["missionsCompleted",_missions];
+			}
 			};
 		};
 	_pointsX = _pointsX + _pointsXJ;

@@ -1,25 +1,28 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
+params [["_siteX", "", [""]]];
+
 private _titleStr = localize "STR_A3A_fn_base_rebasset_title";
 
 private _resourcesFIA = server getVariable "resourcesFIA";
 if (_resourcesFIA < 5000) exitWith {[_titleStr, localize "STR_A3A_fn_base_rebasset_no_money"] call A3A_fnc_customHint;};
 
-if (!visibleMap) then {openMap true};
-positionTel = [];
-[_titleStr, localize "STR_A3A_fn_base_rebasset_click_zone"] call A3A_fnc_customHint;
+if (count _positionTel == 0) then { // If no location given, default behavior. New UI provides location.
+    if (!visibleMap) then {openMap true};
+    positionTel = [];
+    [_titleStr, localize "STR_A3A_fn_base_rebasset_click_zone"] call A3A_fnc_customHint;
 
-onMapSingleClick "positionTel = _pos;";
+    onMapSingleClick "positionTel = _pos;";
 
-waitUntil {sleep 1; (count positionTel > 0) or (not visiblemap)};
-onMapSingleClick "";
+    waitUntil {sleep 1; (count positionTel > 0) or (not visiblemap)};
+    onMapSingleClick "";
 
-if (!visibleMap) exitWith {};
+    if (!visibleMap) exitWith {};
 
-private _positionTel = positionTel;
-
-private _siteX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
+    _positionTel = positionTel;
+    _siteX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
+};
 
 if (getMarkerPos _siteX distance2d _positionTel > 50) exitWith {[_titleStr, localize "STR_A3A_fn_base_rebasset_click_marker"] call A3A_fnc_customHint;};
 if (sidesX getVariable [_siteX, sideUnknown] != teamPlayer) exitWith {[_titleStr, localize "STR_A3A_fn_base_rebasset_click_marker"] call A3A_fnc_customHint;};

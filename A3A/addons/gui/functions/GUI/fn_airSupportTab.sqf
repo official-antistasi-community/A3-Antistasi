@@ -63,25 +63,31 @@ switch (_mode) do
         private _napalmButton = _display displayCtrl A3A_IDC_AIRSUPPORTNAPALMBUTTON;
 
         // Check if there are enough air support points
-        if (_airSupportPoints < 1) then
+        if ((_airSupportPoints < 1) || ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0)) then
         {
-            Trace("No air support points, disabling buttons");
-            _heIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            _heIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
+            private _failMessage = "";
+            private _color = ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+            if (_airSupportPoints < 1) then
+            {
+                Trace("No air support points, disabling buttons");
+                _failMessage = localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
+            } else {
+                Trace("No airports, disabling buttons");
+                _failMessage = localize "STR_antistasi_dialogs_main_air_support_no_base_tooltip";
+            };
+            _heIcon ctrlSetTextColor _color;
+            _heIcon ctrlSetTooltip _failMessage;
             _heButton ctrlEnable false;
-            _heButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-            _carpetIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            _carpetIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
+            _heButton ctrlSetTooltip _failMessage;
+            _carpetIcon ctrlSetTextColor _color;
+            _carpetIcon ctrlSetTooltip _failMessage;
             _carpetButton ctrlEnable false;
-            _carpetButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-            _napalmIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            _napalmIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
+            _carpetButton ctrlSetTooltip _failMessage;
+            _napalmIcon ctrlSetTextColor _color;
+            _napalmIcon ctrlSetTooltip _failMessage;
             _napalmButton ctrlEnable false;
-            _napalmButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
+            _napalmButton ctrlSetTooltip _failMessage;
         };
-
-        // TODO UI-update: Check for controlled airbases
-        // {sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0
     };
 
     default

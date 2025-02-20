@@ -448,18 +448,16 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 12 * GRID_H;
                         };
 
-                        // TODO UI-update: Vehicle locks/unlocks are no longer a thing outside garage
-                        // Either replace this with something else or make the garage button bigger?
-                        // class UnlockVehicleButton : A3A_Button
-                        // {
-                        //   idc = A3A_IDC_UNLOCKVEHICLEBUTTON;
-                        //   text = $STR_antistasi_dialogs_main_unlock_vehicle; // Same exists for unlock
-                        //   onButtonClick = "hint ""Placeholder\nWill use A3A_fnc_unlockVehicle when merged"""; // TODO UI-update: Replace placeholder when merging
-                        //   x = 32 * GRID_W;
-                        //   y = 14 * GRID_H;
-                        //   w = 22 * GRID_W;
-                        //   h = 12 * GRID_H;
-                        // };
+                        class UnlockVehicleButton : A3A_Button
+                        {
+                            idc = A3A_IDC_UNLOCKVEHICLEBUTTON;
+                            text = $STR_antistasi_dialogs_main_unlock_vehicle; // Same exists for unlock
+                            onButtonClick = "closeDialog 0; [cursorObject] call A3A_fnc_unlockVehicle";
+                            x = 32 * GRID_W;
+                            y = 14 * GRID_H;
+                            w = 22 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
 
                         class SellVehicleButton : A3A_Button
                         {
@@ -2215,7 +2213,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_tp_to_player_button;
-                    onButtonClick = "hint ""Placeholder\nWill use new function when merged"""; // TODO UI-update: Replace placeholder when merging
+                    onButtonClick = "[""tpToPlayer""] call A3A_GUI_fnc_playerManagementTab"; // TODO UI-update: Replace placeholder when merging
                     x = 120 * GRID_W;
                     y = 22 * GRID_H;
                     w = 32 * GRID_W;
@@ -2226,7 +2224,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_tp_player_to_me_button;
-                    onButtonClick = "hint ""Placeholder\nWill use new function when merged"""; // TODO UI-update: Replace placeholder when merging
+                    onButtonClick = "[""tpPlayerToMe""] call A3A_GUI_fnc_playerManagementTab";
                     x = 120 * GRID_W;
                     y = 37 * GRID_H;
                     w = 32 * GRID_W;
@@ -2237,7 +2235,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_kick_player_button;
-                    onButtonClick = "hint ""Placeholder\nWill use new function when merged"""; // TODO UI-update: Replace placeholder when merging
+                    onButtonClick = "[""adminKickPlayer""] call A3A_GUI_fnc_playerManagementTab";
                     x = 120 * GRID_W;
                     y = 52 * GRID_H;
                     w = 32 * GRID_W;
@@ -2248,7 +2246,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_ban_player_button;
-                    onButtonClick = "hint ""Placeholder\nWill use new function when merged"""; // TODO UI-update: Replace placeholder when merging
+                    onButtonClick = "[""adminBanPlayer""] call A3A_GUI_fnc_playerManagementTab";
                     x = 120 * GRID_W;
                     y = 67 * GRID_H;
                     w = 32 * GRID_W;
@@ -2259,7 +2257,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_main_admin_copy_uid_button;
-                    onButtonClick = "hint ""Placeholder\nWill use new function when merged"""; // TODO UI-update: Replace placeholder when merging
+                    onButtonClick = "[""adminCopyUID""] call A3A_GUI_fnc_playerManagementTab";
                     x = 120 * GRID_W;
                     y = 82 * GRID_H;
                     w = 32 * GRID_W;

@@ -68,22 +68,22 @@ switch (_mode) do
         // ctrlSetText [A3A_IDC_AILIMITEREDITBOX, str _aiLimiter];
 
         // Get Debug info
-        // TODO UI-update: change this to get server values instead when merging
         private _debugText = _display displayCtrl A3A_IDC_DEBUGINFO;
-        private _missionTime = [time] call A3A_fnc_formatTime;
-        private _serverFps = (round (diag_fps * 10)) / 10; // TODO UI-update: Get actual server FPS, not just client
-        private _connectedHCs = 0; // TODO UI-update: get actual number of connected headless clients
-        private _players = 0; // TODO UI-update: get actual number of players connected
+        private _missionTime = [serverTime] call A3A_fnc_timespan_format;
+        // private _rawServerFps = remoteExecCall ["diag_fps",2];
+        private _rawServerFps = diag_fps; // TODO UI-update get server FPS not client
+        private _serverFps = (round (_rawServerFPS * 10)) / 10;
+        private _connectedHCs = count entities "HeadlessClient_F";
+        private _players = count allPlayers - _connectedHCs;
 
-        // TODO UI-update: get actual unit counts
         private _allUnits = count allUnits;
-        private _deadUnits = 1349;
+        private _deadUnits = count allDead;
         private _countGroups = count allGroups;
-        private _countRebels = 16;
-        private _countInvaders = 5;
-        private _countOccupants = 37;
-        private _countCiv = 4096;
-        private _destroyedVehicles = 2;
+        private _countRebels = {side _x == teamPlayer} count allUnits;
+        private _countInvaders = {side _x == Invaders} count allUnits;
+        private _countOccupants = {side _x == Occupants} count allUnits;
+        private _countCiv = {side _x == civilian} count allUnits;
+        private _destroyedVehicles = {!alive _x} count vehicles;
 
         // TODO UI-update: localize later, not final yet
         private _formattedString = format [

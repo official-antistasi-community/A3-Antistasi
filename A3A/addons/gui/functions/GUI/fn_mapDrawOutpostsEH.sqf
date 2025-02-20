@@ -49,29 +49,33 @@ private _outpostIconData = [];
     private _marker = _x;
     private _type = _marker call A3A_GUI_fnc_getLocationMarkerType;
     private _name = _marker call A3A_GUI_fnc_getLocationMarkerName;
+    private _isCity = _marker in citiesX;
+    private _isDestroyed = _marker in destroyedSites;
     private _pos = getMarkerPos _marker;
     private _side = sidesX getVariable [_marker,sideUnknown];
     private _color = [1,1,1,1];
 
-    // TODO UI-update: add color for dead cities
-    switch (_side) do {
-        case (teamPlayer): {
+    switch (true) do {
+        case (_isDestroyed && _isCity): {
+            _color = [A3A_COLOR_BLACK] call FUNC(configColorToArray);
+        };
+        case (_side == teamPlayer): {
             _color = ["Map", "Independent"] call BIS_fnc_displayColorGet;
         };
 
-        case (Occupants): {
+        case (_side == Occupants): {
             _color = ["Map", "BLUFOR"] call BIS_fnc_displayColorGet;
         };
 
-        case (Invaders): {
+        case (_side == Invaders): {
             _color = ["Map", "OPFOR"] call BIS_fnc_displayColorGet;
         };
 
-        case (civilian): {
+        case (_side == civilian): {
             _color = ["Map", "Civilian"] call BIS_fnc_displayColorGet;
         };
 
-        case (sideUnknown): {
+        case (_side == sideUnknown): {
             _color = ["Map", "Unknown"] call BIS_fnc_displayColorGet;
         };
     };
