@@ -44,22 +44,31 @@ private _originPosition = getMarkerPos _originMarker;
 
 _vehicle flyInHeight 1000;
 _vehicle setCollisionLight false;
-if(_vehicle isKindOf "Helicopter") then
-{
-    _entryDistance = 150;
+if(_vehicle isKindOf "Helicopter") then {
     _vehicle flyInHeight 500;
 };
 
 // Try to find a position that isn't on water
 private _dropPos = _targetPosition;
-for "_i" from 1 to 10 do {
-    private _testPos = _dropPos getPos [random 150 + 150, random 360];
-    if !(surfaceIsWater _testPos) exitWith { _dropPos = _testPos };
-};
 private _angle = (_originPosition getDir _targetPosition);
-private _entryPos = _dropPos getPos [-100, _angle];
-private _exitPos = _dropPos getPos [300, _angle];
+for "_i" from 1 to 10 do {
+    private _testPos = _targetPosition getPos [random 150 + 250, random 360];
+    private _testPos2 = _testPos getPos [150, _angle];
+    private _testPos3 = _testPos getPos [150, _angle+180];
+    if !(surfaceIsWater _testPos || surfaceIsWater _testPos2 || surfaceIsWater _testPos3) exitWith { _dropPos = _testPos };
+};
+private _entryPos = _dropPos getPos [-150, _angle];
+private _exitPos = _dropPos getPos [250, _angle];
 { _x set [2, 500] } forEach [_entryPos, _exitPos, _originPosition];
+
+/*private _mrk = createMarkerLocal [format ["%1paradroparea", random 100], _dropPos];
+_mrk setMarkerShapeLocal "RECTANGLE";
+_mrk setMarkerSizeLocal [100,100];
+_mrk setMarkerTypeLocal "hd_warning";
+_mrk setMarkerColorLocal "ColorRed";
+_mrk setMarkerBrushLocal "DiagGrid";
+_mrk setMarkerDirLocal _angle;
+*/
 
 while {count waypoints _groupPilot > 0} do { deleteWaypoint [_groupPilot, 0] };
 
@@ -82,6 +91,11 @@ if(currentWaypoint _groupPilot > 0) then
 {
     ServerDebug_1("Drop pos %1 reached", _dropPos);
     _vehicle setCollisionLight true;
+
+    // Move leader unit into middle of drop order
+    private _jumpUnits = units _groupJumper - [leader _groupJumper];
+    _jumpUnits insert [floor (count _jumpUnits / 2), [leader _groupJumper]];
+
     {
         unAssignVehicle _x;
         //Move them into alternating left/right positions, so their parachutes are less likely to kill each other
@@ -99,7 +113,7 @@ if(currentWaypoint _groupPilot > 0) then
             deleteVehicle _chute;
         };
         sleep 0.5;
-  	} forEach units _groupJumper;
+  	} forEach _jumpUnits;
 };
 
 while {count waypoints _groupJumper > 0} do { deleteWaypoint [_groupJumper, 0] };
