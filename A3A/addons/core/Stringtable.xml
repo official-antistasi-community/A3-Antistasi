@@ -3806,6 +3806,10 @@
         <Turkish>Araç Satın Al</Turkish>
         <Chinesesimp>购买载具</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_init_initclient_addact_gunshop">
+        <Original>Gun Shop</Original>
+        <German>Waffenladen</German>
+      </Key>
       <Key ID="STR_A3A_fn_init_initclient_addact_gameOpt">
         <Original>Game Options</Original>
         <Italian>Opzioni di Gioco</Italian>
