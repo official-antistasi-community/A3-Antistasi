@@ -19,7 +19,7 @@
 // get the items from the json file
 // A3A\addons\gui\functions\gunShop\blackedListedItems.json
 if(isNil "A3A_GS_blockeditemsJson") then {
-    A3A_GS_blockeditemsJson = fromJSON loadFile QPATHTOFOLDER(functions\gunShop\blackedListedItems.json);
+    A3A_GS_blockeditemsJson = fromJSON loadFile QPATHTOFOLDER(functions\gunShop\blackListedItems.json);
 };
 
 // clear the array

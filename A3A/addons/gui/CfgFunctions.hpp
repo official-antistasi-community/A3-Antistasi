@@ -60,7 +60,7 @@ class CfgFunctions {
 			file = QPATHTOFOLDER(functions\gunShop);
             class addItemToBlackList {};
 			class addToCart {};
-            class blackedListedItems {};
+            class blackListedItems {};
 			class calculateItemPrice {};
 			class checkOut {};
 			class createFilters {};

@@ -31,6 +31,8 @@ if (player == theBoss) then { [0, -_totalCost] remoteExec ["A3A_fnc_resourcesFIA
 
 
 
+// TODO CHANGE THIS!!!!! - Ellis Nielsen. I have a better idea now.
+
 // create a object to hold the items.
 private _pos = getPosASL player findEmptyPosition [0, 50, "B_supplyCrate_F"];
 

@@ -30,7 +30,7 @@ _fnc_weaponPriceCalculator = {
         };
         case "Handgun": {_basePrice * 0.5};
         case "Launcher": {_basePrice * 8.0};
-        case "MissileLauncher": {_basePrice * 20.0};
+        case "MissileLauncher": {_basePrice * 20.0 * (allowGuidedLaunchers + 1)}; // double the price if they can unlock it
         case "RocketLauncher": {_basePrice * 6.0};
         case "MachineGun": {_basePrice * 10.0};
         case "Shotgun": {_basePrice * 2.0};
@@ -38,7 +38,7 @@ _fnc_weaponPriceCalculator = {
         case "SubmachineGun": {_basePrice * 2.0};
         case "SniperRifle": {_basePrice * 12.0};
         default {
-            diag_log format["None supported type: %1 of weapon: %2,",_type,_className];
+            //diag_log format["None supported type: %1 of weapon: %2,",_type,_className];
         };
     };
 };
@@ -64,7 +64,7 @@ _fnc_itemPriceCalculator = {
         };
         case "AccessoryBipod": {_basePrice * 0.75};
         default {
-            diag_log format ["None supported type: %1 of item: %2", _type, _className];
+            //diag_log format ["None supported type: %1 of item: %2", _type, _className];
             _basePrice
         };
     };
@@ -144,7 +144,8 @@ _fnc_magazinePriceCalculator = {
                 _costPerRound = (_costPerRound + _costPerRoundSubAmmo) / 2;
             };
 
-            round (_costPerRound * _count * _basePrice)
+            //I will be evil here. If they can unlock missle lanuchers then charge more, this can be very expensive.
+            round (_costPerRound * _count * _basePrice * (allowGuidedLaunchers + 1))
         };
         case "Rocket": {
             _basePrice = _basePrice * 3;
@@ -206,7 +207,7 @@ _fnc_minePriceCalculator = {
         case "MineDirectional": {_basePrice * 5.0};
         default {
             // this should not be reached unless something has gone horribly wrong
-            diag_log format ["None supported type: %1 of mine: %2,", _type, _className];
+            //diag_log format ["None supported type: %1 of mine: %2,", _type, _className];
             _basePrice
         };
     };
@@ -224,15 +225,17 @@ if (isClass (_cfg >> _className)) then
     //diag_log format ["No price for %1 in config", _className];
     // calculate price now. 
     (_className call BIS_fnc_itemType) params ["_category", "_type"];
-    private _base = 100;
+    
+    // 15: 167, 25: 100, 40: 63, -1: 50 
+    private _base = if(minWeaps isNotEqualTo -1) then {100 * (25 / minWeaps)} else {50};
 
     switch (_category) do {
-        case "Weapon": {_price = [_className, _type, _base * 2] call _fnc_weaponPriceCalculator};
+        case "Weapon": {_price = ([_className, _type, _base * 2] call _fnc_weaponPriceCalculator() * (unlockedUnlimitedAmmo + 1)}; // unlockedUnlimitedAmmo once bought, double price
         case "Item": {_price = [_className, _type, _base] call _fnc_itemPriceCalculator};
         case "Magazine": {_price = [_className, _type, _base] call _fnc_magazinePriceCalculator};
-        case "Mine": {_price = [_className, _type, _base] call _fnc_minePriceCalculator};
+        case "Mine": {_price = ([_className, _type, _base] call _fnc_minePriceCalculator) * (allowUnlockedExplosives + 1)}; // double the price, since they can unlock explosives
         default {
-            diag_log format ["None supported category: %1 of weapon: %2,", _category, _className];
+            //diag_log format ["None supported category: %1 of weapon: %2,", _category, _className];
         };
     };
 };
