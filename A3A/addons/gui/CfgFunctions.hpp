@@ -58,7 +58,9 @@ class CfgFunctions {
 
         class gunShop {
 			file = QPATHTOFOLDER(functions\gunShop);
+            class addItemToBlackList {};
 			class addToCart {};
+            class blackedListedItems {};
 			class calculateItemPrice {};
 			class checkOut {};
 			class createFilters {};

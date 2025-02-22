@@ -1,8 +1,6 @@
 #include "..\..\dialogues\ids.inc"
 #include "..\..\script_component.hpp"
 
-
-diag_log format ["Creating gun shop lists"];
 private _types = [];
 _types set [0,["AssaultRifle","MachineGun","SniperRifle","Shotgun","Rifle","SubmachineGun","Shotgun"]];
 _types set [1,["Launcher","MissileLauncher","RocketLauncher"]];
@@ -55,15 +53,17 @@ private _isInvVanilla = false;
 // CDLC and BASE ONLY!!!!
 A3A_GS_allowedMods = [A3A_factionsDataGS#1, A3A_factionsDataGS#2,(_isOccVanilla && _isInvVanilla)];
 
-
+// theses are items are not allowed to be purchased
+call A3A_GUI_fnc_blackedListedItems;
 
 private _fnc_isAllowed = 
 {
-	params ["_config"];
+	params ["_config", "_className"];
 	private _mod = _config call A3A_fnc_getModOfConfigClass;
 	if (_mod in A3A_GS_allowedMods#1 || {_mod isEqualTo "a3" && !(A3A_GS_allowedMods#2)} ) exitWith {false};
+	if (_className in A3A_GS_blockedItems) exitWith {false};
 
-	true;
+	true
 };
 
 private _fnc_setHashMap = 
@@ -89,10 +89,12 @@ private _fnc_setHashMap =
 	then 
 	{
 		_className call bis_fnc_itemType params ["_weaponTypeCategory", "_weaponTypeSpecific"];
-		if (_weaponTypeCategory != "VehicleWeapon" && [_x] call _fnc_isAllowed) then 
-		{						
-			private _typesDataIndex = _types findIf { _weaponTypeSpecific in _x }; // _types is part of macro
-			if (_typesDataIndex > -1) then { [_typesDataIndex, _className] call _fnc_setHashMap };
+		if (_weaponTypeCategory != "VehicleWeapon") then 
+		{
+			if([_x, _className] call _fnc_isAllowed) then {
+				private _typesDataIndex = _types findIf { _weaponTypeSpecific in _x }; // _types is part of macro
+				if (_typesDataIndex > -1) then { [_typesDataIndex, _className] call _fnc_setHashMap };
+			};						
 		};
 	};
 } foreach _weapVecConfig;
@@ -113,7 +115,7 @@ private _magPut = [];
 				private _itemAdded = false;
 				private _className = configName _cfgMag;
 													
-			if (getNumber (_cfgMag >> "scope") == 2 || getNumber (_cfgMag >> "scopeArsenal") == 2 && [_cfgMag] call _fnc_isAllowed) then 
+			if ((getNumber (_cfgMag >> "scope") == 2 || getNumber (_cfgMag >> "scopeArsenal") == 2 ) && [_cfgMag, _className] call _fnc_isAllowed) then 
 				{
 					if (_weapon isEqualTo "throw") then 
 					{
@@ -140,7 +142,7 @@ private _mags = [];
 		(getNumber (_x >> "scope") == 2 || getNumber (_x >> "scopeArsenal") == 2) 
 		&& 
 		{ !(toLower _className in _magazinesThrowPut) }
-	} && [_x] call _fnc_isAllowed
+	} && [_x, _className] call _fnc_isAllowed
 	) then 
 	{
 		_mags pushBackUnique _className;
