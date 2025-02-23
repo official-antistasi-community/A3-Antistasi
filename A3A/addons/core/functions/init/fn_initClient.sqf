@@ -407,7 +407,7 @@ vehicleBox addAction [localize "STR_A3A_fn_init_initclient_addact_gunshop", {
     } else {
         createDialog "A3A_gunShop";
     }
-},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer) and (_this == theBoss) and && theBoss call A3A_fnc_isMember", 4];
+},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer) and (_this == theBoss) and theBoss call A3A_fnc_isMember", 4];
 
 fireX allowDamage false;
 [fireX, "fireX"] call A3A_fnc_flagaction;
