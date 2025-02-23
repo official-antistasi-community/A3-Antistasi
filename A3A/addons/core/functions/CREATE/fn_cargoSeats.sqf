@@ -1,7 +1,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 private _filename = "fn_cargoSeats";
-params ["_veh", "_sideX"];
+params ["_veh", "_sideX", ["_forceSpecOps",false]];
 
 private _faction = Faction(_sideX);
 private _isMilitia = _veh in ((_faction get "vehiclesMilitiaLightArmed") + (_faction get "vehiclesMilitiaTrucks") + (_faction get "vehiclesMilitiaCars"));
@@ -15,6 +15,7 @@ if (_cargoSeats < 2) exitwith { [] };
 
 if (_cargoSeats < 4) exitWith
 {
+	if(_forceSpecOps) exitWith {_faction get "groupSpecOps"};
 	if (_isMilitia) exitWith { selectRandom (_faction get "groupsMilitiaSmall") };
 	if (_veh in (_faction get "vehiclesPolice")) exitWith { _faction get "groupPolice" };
 	_faction get "groupSentry";
@@ -22,12 +23,14 @@ if (_cargoSeats < 4) exitWith
 
 if (_cargoSeats < 6 or { _cargoSeats == 6 and random 3 < 1}) exitWith			// 6-man normally uses clipped full squad
 {
+	if(_forceSpecOps) exitWith {_faction get "groupSpecOps"};
 	if (_isMilitia) exitWith { selectRandom (_faction get "groupsMilitiaMedium") };
 	if (_veh in (_faction get "vehiclesPolice")) exitWith { (_faction get "groupPolice") + [_faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt"] };
 	selectRandom (_faction get "groupsMedium");
 };
 
 private _squad = call {
+	if(_forceSpecOps) exitWith {selectRandom _faction get "groupSpecOpsRandom"};
 	if (_isMilitia) exitWith { selectRandom (_faction get "groupsMilitiaSquads") };
     selectRandom (_faction get "groupsSquads");
 };
