@@ -19,6 +19,13 @@ private _POWS = [];
 private _reinforcementsX = [];
 
 
+private _startOutpost = createMarker ["start_pos_convoy", _posSpawn];
+_startOutpost setMarkerShape "ICON";
+_startOutpost setMarkerType "hd_start";
+_startOutpost setMarkerColor "ColorBlack";
+_startOutpost setMarkerText localize "STR_A3A_fn_mission_conv_start_location";
+
+
 // Setup start time
 
 if (_startDelay < 0) then { _startDelay = random 5 + ([10, 5] select _difficult) }; 		// start delay, 5-10 or 15-20 mins real time
@@ -107,13 +114,12 @@ switch (tolower _convoyType) do
     };
     case "gunshop":
     {
-        private _textX = "Oh, looks like the shipment was intercepted by the local authorities. Looks like you need to take it back.";
-        private _taskTitle = "Recover Gun Shipment";
-        private _taskIcon = "rearm";
-        private _typeVehObj = selectRandom [selectRandom (_faction get "vehiclesTrucks"), selectRandom (_faction get "vehiclesAmmoTrucks")];
+        _textX = format [localize "STR_A3A_fn_mission_conv_gunshop_text",_nameOrigin,_displayTime,_nameDest];
+        _taskTitle = localize "STR_A3A_fn_mission_conv_gunshop_title";
+        _taskIcon = "rearm";
+        _typeVehObj = selectRandom (_faction get "vehiclesTrucks");
     };
 };
-
 
 // Find suitable nav points for origin/dest
 private _posOrigin = navGrid select ([_mrkOrigin] call A3A_fnc_getMarkerNavPoint) select 0;
@@ -142,31 +148,33 @@ if (_route isEqualTo []) then { _route = [_posOrigin, _posDest] };
 */
 
 // union of  missles and lanuchers
-private _hasMissiles = 0;
-private _hasMines = 0;
-{
-    private _categories = _x call A3A_fnc_equipmentClassToCategories;
-    if("MissileLaunchers" in _categories ) then {_hasMissiles = 1};
-    if("MagMissile" in _categories ) then {_hasMissiles = 1};
-    if("Mine" in _categories ) then {_hasMines = 1};
-    if("MineBounding" in _categories ) then {_hasMines = 1};
-    if("MineDirectional" in _categories ) then {_hasMines = 1};
-} foreach _gunshopItems;
+// private _hasMissiles = 0;
+// private _hasMines = 0;
+// {
+//     private _categories = _x call A3A_fnc_equipmentClassToCategories;
+//     if("MissileLaunchers" in _categories ) then {_hasMissiles = 1};
+//     if("MagMissile" in _categories ) then {_hasMissiles = 1};
+//     if("Mine" in _categories ) then {_hasMines = 1};
+//     if("MineBounding" in _categories ) then {_hasMines = 1};
+//     if("MineDirectional" in _categories ) then {_hasMines = 1};
+// } foreach _gunshopItems;
 
-private _newTier = tierWar + _hasMissile + _hasMines;
+ //A3A_newtier = tierWar + _hasMissiles + _hasMines;
 
 // random value, 75000
-_newTier = _newTier + (_totalCost/75000);
-_newTier = if(_newTier > 10 ) then {_newTier = 10;}
+// A3A_newtier = A3A_newtier + (_totalCost/75000);
+// A3A_newtier = if(A3A_newtier > 10 ) then {A3A_newtier = 10};
+// ServerInfo_1("A3A_newtier calculation: %1", A3A_newtier);
 
-private _vehPool = ([_sideX, _newTier] call A3A_fnc_getVehiclesGroundTransport) + ([_sideX, _newTier] call A3A_fnc_getVehiclesGroundSupport);
+private _vehPool = ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundTransport) + ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundSupport);
+private _heliPool = [_sideX, tierWar, true] call A3A_fnc_getVehiclesAirSupport;
 private _pathState = [];			// Set the scope so that state is preserved between findPosOnRoute calls
 private _resourcesSpent = 0;
 
 // Spawning worker functions
 
 private _fnc_spawnConvoyVehicle = {
-    params ["_vehType", "_markName"];
+    params ["_vehType", "_markName", ["_spawnSF", false]];
     ServerDebug_1("Spawning vehicle type %1", _vehType);
 
     // Find location down route
@@ -182,13 +190,15 @@ private _fnc_spawnConvoyVehicle = {
     _veh setVectorDirAndUp [_pathState#1, _vecUp];
     _veh allowDamage false;
 
-    private _group = [_sideX, _veh] call A3A_fnc_createVehicleCrew;
-    { [_x, nil, nil, _resPool] call A3A_fnc_NATOinit; _x allowDamage false; _x disableAI "MINEDETECTION" } forEach (units _group);
-    _soldiers append (units _group);
+    //private _group = [_sideX, _veh] call A3A_fnc_createVehicleCrew;
+    private _troopType = if(_spawnSF) then {Specops} else {"Normal"};
+    private _filledVic = [_vehType, _veh, _troopType, _resPool, _sideX, _mrkOrigin] call A3A_fnc_createAndFillVehicle;
+    { [_x, nil, nil, _resPool] call A3A_fnc_NATOinit; _x allowDamage false; _x disableAI "MINEDETECTION" } forEach (units (_filledVic#0));
+    _soldiers append (units (_filledVic#0));
+    _soldiers append (units (_filledVic#1));
     (driver _veh) stop true;
-    deleteWaypoint [_group, 0];													// groups often start with a bogus waypoint
+    deleteWaypoint [_filledVic#0, 0];													// groups often start with a bogus waypoint
 
-    [_veh, _sideX, _resPool] call A3A_fnc_AIVEHinit;
     if (_vehType in FactionGet(all,"vehiclesArmor")) then { _veh allowCrewInImmobile true };			// move this to AIVEHinit at some point?
     _vehiclesX pushBack _veh;
     _markNames pushBack _markName;
@@ -196,20 +206,34 @@ private _fnc_spawnConvoyVehicle = {
 };
 
 private _fnc_spawnEscortVehicle = {
+    params [["_spawnSF", false]];
     private _typeVehEsc = selectRandomWeighted _vehPool;
-    private _veh = [_typeVehEsc, "Convoy Escort"] call _fnc_spawnConvoyVehicle;
+    private _veh = [_typeVehEsc, "Convoy Escort", _spawnSF] call _fnc_spawnConvoyVehicle;
+};
 
-    // make sf only for gunshop 8+ warlevel
-    private _typeGroup = [_typeVehEsc, _sideX, (_convoyType == "GunShop" && tierWar > 7)] call A3A_fnc_cargoSeats;
-    if (count _typeGroup == 0) exitWith {};
-    private _groupEsc = [_posSpawn, _sideX, _typeGroup] call A3A_fnc_spawnGroup;				// Unit limit?
-    {[_x, nil, nil, _resPool] call A3A_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh;} forEach units _groupEsc;
-    _soldiers append (units _groupEsc);
+private _fnc_spawnEscortHeli = {
+    params [["_spawnSF", false]];
+    private _typeVehEsc = selectRandomWeighted _heliPool;
+    //private _veh = [_typeVehEsc, "Convoy Escort"] call _fnc_spawnConvoyVehicle;
+    private _airbase = [_sideX, _posSpawn] call A3A_fnc_availableBasesAir;
+    private _vehicle = [_airbase, _typeVehEsc] call A3A_fnc_spawnVehicleAtMarker;
+
+    private _troopType = if(_spawnSF) then {Specops} else {"Normal"};
+    private _filledVic = [_typeVehEsc, _vehicle, _troopType, _resPool, _sideX, _mrkOrigin] call A3A_fnc_createAndFillVehicle;
+    _soldiers append (units (_filledVic#0));
+    _soldiers append (units (_filledVic#1));
+
+    (driver _vehicle) stop true;
+    deleteWaypoint [_filledVic#0, 0];
+    //_vehiclesX pushBack _vehicle;
+    //_markNames pushBack "Convoy Escort Heli";
+    _vehicle;
 };
 
 
 // Tail escort
-[] call _fnc_spawnEscortVehicle;
+ // make sf only for gunshop 8+ warlevel
+((_convoyType == "GunShop") && (tierWar > 7)) call _fnc_spawnEscortVehicle;
 
 // Objective vehicle
 sleep 2;
@@ -252,6 +276,21 @@ if (_convoyType == "Ammunition") then
 {
     [_vehObj] spawn A3A_fnc_fillLootCrate;
 };
+if() then 
+{
+    [_vehObj, 999999] remoteExec ["setMaxLoad", 2];
+
+        // add items.
+        {
+            private _key = _x#0;
+            private _amount = _x#1;
+            _vehObj addItemCargoGlobal [_key, _amount];
+            
+            // sleep here encase someone buys 1000 of something.
+            sleep 0.1;
+        } forEach _gunshopItems;
+    
+};
 
 // Initial escort vehicles, 0-1 for SP, 1-2 for 10+
 private _countX = round ((A3A_balancePlayerScale min 1.5) + random 0.5 + ([-0.75, 0.25] select _difficult));
@@ -259,18 +298,12 @@ if(_convoyType == "GunShop") then {_countX = _countX + 1};
 for "_i" from 1 to _countX do
 {
     sleep 2;
-    [] call _fnc_spawnEscortVehicle;
+    ((_convoyType == "GunShop") && (tierWar > 7))  call _fnc_spawnEscortVehicle;
 };
 
 // Lead vehicle
 sleep 2;
-private _typeVehX = if(_convoyType isNotEqualTo "GunShop") then {
-        selectRandom (if (_sideX == Occupants && random 4 < tierWar) then {_faction get "vehiclesPolice"} else {_faction get "vehiclesLightArmed"});
-    }
-    else
-    {
-        selectRandom (if (_sideX == Occupants && random 5 < _newTier) then {([_sideX, _newTier] call A3A_fnc_getVehiclesGroundTransport)} else {([_sideX, _newTier, true] call A3A_fnc_getVehiclesGroundSupport)});
-    }
+private _typeVehX = selectRandom (if (_sideX == Occupants && random 4 < tierWar) then {_faction get "vehiclesPolice"} else {_faction get "vehiclesLightArmed"});
 private _vehLead = [_typeVehX, "Convoy Lead"] call _fnc_spawnConvoyVehicle;
 
 // Apply convoy resource cost, if it's from attack or defence pool
@@ -289,7 +322,13 @@ ServerInfo_2("Spawn performed: %1 ground vehicles, %2 soldiers", count _vehicles
 
 // Send the vehicles after the delay
 
-sleep (60*_startDelay);
+sleep (60);
+if (_convoyType == "GunShop") then {
+    // how send the helis
+    private _heli = ((_convoyType == "GunShop") && (tierWar > 7)) call _fnc_spawnEscortHeli;
+
+
+};
 _route = _route select [_pathState#2, count _route];        // remove navpoints that we already passed while spawning
 ServerInfo("Convoy mission under way");
 
@@ -504,20 +543,6 @@ if (_convoyType == "GunShop") then
             [true, false, 0, 0, 15, 180, "gunshop"] call _fnc_applyResults;
             // create a object to hold the items.
 
-            [_vehObj, 999999] remoteExec ["setMaxLoad", 2];
-
-            // add items.
-            {
-            	private _key = _x;
-            	private _map = _y;
-            	private _amount = _map get "_amount";
-            
-            	_vehObj addItemCargoGlobal [_key, _amount];
-            
-            	// sleep here encase someone buys 1000 of something.
-            	sleep 0.1;
-            } forEach _gunshopItems;
-            
             // you bought shit, we aren't handing out money
             //[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
             
