@@ -28,10 +28,16 @@ if((player == theBoss && server getVariable ["resourcesFIA", 0] < _totalCost)) e
 };
 
 if (player == theBoss) then { [0, -_totalCost] remoteExec ["A3A_fnc_resourcesFIA", 2] };
+private _shoppingCartList = [];
+{
+	private _key = _x;
+	private _map = _y;
+    private _amount = _map get "_amount";
+	_shoppingCartList pushBackUnique [_key, _amount];
 
-
+} forEach A3A_shoppingCart;
 
 // TODO CHANGE THIS!!!!!
-[_totalCost, A3A_shoppingCart] remoteExec ["A3A_fnc_GSConvoy", 2]
+[_totalCost, _shoppingCartList] remoteExec ["A3A_fnc_GSConvoy", 2];
 
 closeDialog 1;
