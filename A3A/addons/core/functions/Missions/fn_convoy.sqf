@@ -3,7 +3,7 @@ FIX_LINE_NUMBERS()
 
 //Mission: Capture/destroy the convoy
 if (!isServer and hasInterface) exitWith {};
-params ["_mrkDest", "_mrkOrigin", ["_convoyType", ""], ["_resPool", "legacy"], ["_startDelay", -1]];
+params ["_mrkDest", "_mrkOrigin", ["_convoyType", ""], ["_resPool", "legacy"], ["_startDelay", -1], ["_totalCost", 0], "_gunshopItems"];
 
 private _difficult = if (random 10 < tierWar) then {true} else {false};
 private _sideX = if (sidesX getVariable [_mrkOrigin,sideUnknown] == Occupants) then {Occupants} else {Invaders};
@@ -105,6 +105,13 @@ switch (tolower _convoyType) do
         _taskIcon = "heal";
         _typeVehObj = selectRandom (FactionGet(reb, "vehiclesCivSupply"));
     };
+    case "gunshop":
+    {
+        private _textX = "Oh, looks like the shipment was intercepted by the local authorities. Looks like you need to take it back.";
+        private _taskTitle = "Recover Gun Shipment";
+        private _taskIcon = "rearm";
+        private _typeVehObj = selectRandom [selectRandom (_faction get "vehiclesTrucks"), selectRandom (_faction get "vehiclesAmmoTrucks")];
+    };
 };
 
 
@@ -126,7 +133,33 @@ private _route = [_posOrigin, _posDest] call A3A_fnc_findPath;
 _route = _route apply { _x select 0 };			// reduce to position array
 if (_route isEqualTo []) then { _route = [_posOrigin, _posDest] };
 
-private _vehPool = ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundTransport) + ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundSupport);
+// gunshop price handling
+/**
+    The enjoys of figuring this out. Simple just add on to war level for the weights, but how? Not so
+    simple there is not good way to handle this. We might want to look to rule-based systems. However,
+    those are not implemented in the current form. Simple rules will have to work for now.
+
+*/
+
+// union of  missles and lanuchers
+private _hasMissiles = 0;
+private _hasMines = 0;
+{
+    private _categories = _x call A3A_fnc_equipmentClassToCategories;
+    if("MissileLaunchers" in _categories ) then {_hasMissiles = 1};
+    if("MagMissile" in _categories ) then {_hasMissiles = 1};
+    if("Mine" in _categories ) then {_hasMines = 1};
+    if("MineBounding" in _categories ) then {_hasMines = 1};
+    if("MineDirectional" in _categories ) then {_hasMines = 1};
+} foreach _gunshopItems;
+
+private _newTier = tierWar + _hasMissile + _hasMines;
+
+// random value, 75000
+_newTier = _newTier + (_totalCost/75000);
+_newTier = if(_newTier > 10 ) then {_newTier = 10;}
+
+private _vehPool = ([_sideX, _newTier] call A3A_fnc_getVehiclesGroundTransport) + ([_sideX, _newTier] call A3A_fnc_getVehiclesGroundSupport);
 private _pathState = [];			// Set the scope so that state is preserved between findPosOnRoute calls
 private _resourcesSpent = 0;
 
@@ -166,7 +199,8 @@ private _fnc_spawnEscortVehicle = {
     private _typeVehEsc = selectRandomWeighted _vehPool;
     private _veh = [_typeVehEsc, "Convoy Escort"] call _fnc_spawnConvoyVehicle;
 
-    private _typeGroup = [_typeVehEsc, _sideX] call A3A_fnc_cargoSeats;
+    // make sf only for gunshop 8+ warlevel
+    private _typeGroup = [_typeVehEsc, _sideX, (_convoyType == "GunShop" && tierWar > 7)] call A3A_fnc_cargoSeats;
     if (count _typeGroup == 0) exitWith {};
     private _groupEsc = [_posSpawn, _sideX, _typeGroup] call A3A_fnc_spawnGroup;				// Unit limit?
     {[_x, nil, nil, _resPool] call A3A_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh;} forEach units _groupEsc;
@@ -221,6 +255,7 @@ if (_convoyType == "Ammunition") then
 
 // Initial escort vehicles, 0-1 for SP, 1-2 for 10+
 private _countX = round ((A3A_balancePlayerScale min 1.5) + random 0.5 + ([-0.75, 0.25] select _difficult));
+if(_convoyType == "GunShop") then {_countX = _countX + 1};
 for "_i" from 1 to _countX do
 {
     sleep 2;
@@ -229,7 +264,13 @@ for "_i" from 1 to _countX do
 
 // Lead vehicle
 sleep 2;
-private _typeVehX = selectRandom (if (_sideX == Occupants && random 4 < tierWar) then {_faction get "vehiclesPolice"} else {_faction get "vehiclesLightArmed"});
+private _typeVehX = if(_convoyType isNotEqualTo "GunShop") then {
+        selectRandom (if (_sideX == Occupants && random 4 < tierWar) then {_faction get "vehiclesPolice"} else {_faction get "vehiclesLightArmed"});
+    }
+    else
+    {
+        selectRandom (if (_sideX == Occupants && random 5 < _newTier) then {([_sideX, _newTier] call A3A_fnc_getVehiclesGroundTransport)} else {([_sideX, _newTier, true] call A3A_fnc_getVehiclesGroundSupport)});
+    }
 private _vehLead = [_typeVehX, "Convoy Lead"] call _fnc_spawnConvoyVehicle;
 
 // Apply convoy resource cost, if it's from attack or defence pool
@@ -437,6 +478,55 @@ if (_convoyType == "Supplies") then
         {
             [false, true, 0, -10, 0, 0, "supply"] call _fnc_applyResults;
             [15*_bonus,0,_mrkDest] remoteExec ["A3A_fnc_citySupportChange",2];
+        };
+    };
+};
+
+if (_convoyType == "GunShop") then
+{
+
+    waitUntil {sleep 1; (time > _timeout) or (_vehObj distance _posDest < _arrivalDist) or (not alive _vehObj) or (side group driver _vehObj != _sideX)};
+    if ((_vehObj distance _posDest < _arrivalDist) or (time > _timeout)) then
+    {
+
+        [false, true, -200, -10, 0, 0, "gunshop"] call _fnc_applyResults;
+    }
+    else
+    {
+        waitUntil {sleep 2; (_vehObj distance _posHQ < 50) or (not alive _vehObj) or (time > _timeout)};
+        if ((not alive _vehObj) or (time > _timeout)) then
+        {
+            // hahahahaha, they kept you from getting the guns
+            [true, false, 0, 0, 5, 60, "gunshop"] call _fnc_applyResults;
+        };
+        if (_vehObj distance _posHQ < 50) then
+        {
+            [true, false, 0, 0, 15, 180, "gunshop"] call _fnc_applyResults;
+            // create a object to hold the items.
+
+            [_vehObj, 999999] remoteExec ["setMaxLoad", 2];
+
+            // add items.
+            {
+            	private _key = _x;
+            	private _map = _y;
+            	private _amount = _map get "_amount";
+            
+            	_vehObj addItemCargoGlobal [_key, _amount];
+            
+            	// sleep here encase someone buys 1000 of something.
+            	sleep 0.1;
+            } forEach _gunshopItems;
+            
+            // you bought shit, we aren't handing out money
+            //[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
+            
+            // you might have gotten your gear, but you have made the enemy more determined
+            if (_resPool != "legacy") then {
+                
+                // this can be a double edge sword, too much and you're fucked.
+                [_totalCost, _sideX, _resPool] remoteExec ["A3A_fnc_addEnemyResources", 2];
+            };
         };
     };
 };

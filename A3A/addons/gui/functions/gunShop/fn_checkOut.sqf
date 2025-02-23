@@ -31,32 +31,7 @@ if (player == theBoss) then { [0, -_totalCost] remoteExec ["A3A_fnc_resourcesFIA
 
 
 
-// TODO CHANGE THIS!!!!! - Ellis Nielsen. I have a better idea now.
-
-// create a object to hold the items.
-private _pos = getPosASL player findEmptyPosition [0, 50, "B_supplyCrate_F"];
-
-private _crate = createVehicle ["B_supplyCrate_F", [0,0,0]];
-clearMagazineCargoGlobal _crate;
-clearWeaponCargoGlobal _crate;
-clearItemCargoGlobal _crate;
-clearBackpackCargoGlobal _crate;
-
-[_crate, 999999] remoteExec ["setMaxLoad", 2];
-
-// add items.
-{
-	private _key = _x;
-	private _map = _y;
-	private _amount = _map get "_amount";
-
-	_crate addItemCargoGlobal [_key, _amount];
-
-	// sleep here encase someone buys 1000 of something.
-	sleep 0.1;
-} forEach A3A_shoppingCart;
-
-
-_crate setPosWorld _pos;
+// TODO CHANGE THIS!!!!!
+[_totalCost, A3A_shoppingCart] remoteExec ["A3A_fnc_GSConvoy", 2]
 
 closeDialog 1;
