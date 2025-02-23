@@ -230,7 +230,7 @@ if (isClass (_cfg >> _className)) then
     private _base = if(minWeaps isNotEqualTo -1) then {100 * (25 / minWeaps)} else {50};
 
     switch (_category) do {
-        case "Weapon": {_price = ([_className, _type, _base * 2] call _fnc_weaponPriceCalculator() * (unlockedUnlimitedAmmo + 1)}; // unlockedUnlimitedAmmo once bought, double price
+        case "Weapon": {_price = ([_className, _type, _base * 2] call _fnc_weaponPriceCalculator) * (unlockedUnlimitedAmmo + 1)}; // unlockedUnlimitedAmmo once bought, double price
         case "Item": {_price = [_className, _type, _base] call _fnc_itemPriceCalculator};
         case "Magazine": {_price = [_className, _type, _base] call _fnc_magazinePriceCalculator};
         case "Mine": {_price = ([_className, _type, _base] call _fnc_minePriceCalculator) * (allowUnlockedExplosives + 1)}; // double the price, since they can unlock explosives
