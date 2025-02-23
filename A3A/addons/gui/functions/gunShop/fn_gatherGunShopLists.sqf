@@ -54,7 +54,7 @@ private _isInvVanilla = false;
 A3A_GS_allowedMods = [A3A_factionsDataGS#1, A3A_factionsDataGS#2,(_isOccVanilla && _isInvVanilla)];
 
 // theses are items are not allowed to be purchased
-call A3A_GUI_fnc_blackedListedItems;
+call A3A_GUI_fnc_blackListedItems;
 
 private _fnc_isAllowed = 
 {
