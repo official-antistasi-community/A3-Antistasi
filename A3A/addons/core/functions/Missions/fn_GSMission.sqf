@@ -1,5 +1,5 @@
 /*
- * File: fn_GSConvoy.sqf
+ * File: fn_GSMission.sqf
  * Function: 
  * Author: <author>
  * Function description
@@ -15,6 +15,16 @@ FIX_LINE_NUMBERS()
 params ["_totalCost", "_gunshopList"];
 
 if (!isServer and hasInterface) exitWith {};
+
+
+// spawn a petros look alike
+
+
+// does
+
+
+
+
 private _possibleMarkers = [];
 
 // only do the city convoys on flip?

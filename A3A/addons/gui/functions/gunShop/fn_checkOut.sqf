@@ -38,6 +38,6 @@ private _shoppingCartList = [];
 } forEach A3A_shoppingCart;
 
 // TODO CHANGE THIS!!!!!
-[_totalCost, _shoppingCartList] remoteExec ["A3A_fnc_GSConvoy", 2];
+[_totalCost, _shoppingCartList] remoteExec ["A3A_fnc_GSMission", 2];
 
 closeDialog 1;

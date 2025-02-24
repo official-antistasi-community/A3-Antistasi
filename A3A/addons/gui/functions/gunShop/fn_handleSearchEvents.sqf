@@ -3,6 +3,8 @@
 #include "..\..\dialogues\defines.hpp"
 #include "\a3\ui_f\hpp\definedikcodes.inc"
 
+FIX_LINE_NUMBERS()
+
 params ["_displayOrControl", "_key", "_shift", "_ctrl", "_alt"];
 
 if !(_key in [DIK_RETURN, DIK_NUMPADENTER]) exitWith {}; 
@@ -14,7 +16,7 @@ private _selectedTab = A3A_selectedTab;
 // get the search text
 private _text = toLower(ctrlText A3A_IDC_GUN_SHOP_SEARCH_FIELD);
 
-private _controls = (_display getVariable ((_selectedTab#1) + "Ctrls"));
+private _controls = (_display getVariable ((_selectedTab) + "Ctrls"));
 (_display getVariable ((_selectedTab) + "Ctrls" + "Meta")) params ["_modulus", "_gridWidthConst", "_gridHeightConst"];
 
 
