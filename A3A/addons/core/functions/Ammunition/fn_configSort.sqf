@@ -64,6 +64,7 @@ private ["_nameX", "_item", "_itemMod", "_itemType", "_categories"];           /
     _categories = [_nameX, _itemType] call A3A_fnc_equipmentClassToCategories;
     {
         //We're not returning a default value with getVariable, becuase it *must* be instantiated before now. If it isn't, we *need* it to error.
+        // allweapons, allrifles are pushedback here!!!!
         (missionNamespace getVariable ("all" + _x)) pushBack _nameX;         // uniqueness should be guaranteed by base weapon filtering
     } forEach _categories;
 

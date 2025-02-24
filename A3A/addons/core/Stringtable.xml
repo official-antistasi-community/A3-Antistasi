@@ -4974,6 +4974,12 @@
       <Key ID="STR_A3A_fn_mission_conv_start_location">
         <Original>convoy start</Original>
       </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_met_text">
+        <Original></Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_met_title">
+        <Original>Meet Pet Ros</Original>
+      </Key>
       <Key ID="STR_A3A_fn_mission_des_ante_text">
         <Original>We need to destroy or take a Radio Tower in %1. This will interrupt the coverage of %3 radio propaganda. Do it before %2.</Original>
         <Italian>Dobbiamo distruggere o catturare la Torre Radio a %1. Ciò interromperà la Rete di Propaganda %3. Falla entro %2.</Italian>

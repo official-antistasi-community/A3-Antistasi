@@ -24,7 +24,7 @@ private _totalCost = 0;
 // check if you can afford here.
 
 if((player == theBoss && server getVariable ["resourcesFIA", 0] < _totalCost)) exitWith {
-    [_titleStr, localize "STR_A3A_Utility_Items_Insufficient_Funds"] call A3A_fnc_customHint;
+    [localize "STR_A3A_Utility_Items_Purchase_Title", localize "STR_A3A_Utility_Items_Insufficient_Funds"] call A3A_fnc_customHint;
 };
 
 if (player == theBoss) then { [0, -_totalCost] remoteExec ["A3A_fnc_resourcesFIA", 2] };
@@ -37,7 +37,8 @@ private _shoppingCartList = [];
 
 } forEach A3A_shoppingCart;
 
-// TODO CHANGE THIS!!!!!
-[_totalCost, _shoppingCartList] remoteExec ["A3A_fnc_GSMission", 2];
+[[_totalCost, _shoppingCartList], {A3A_shoppingList = _this}] remoteExec ["call", 2];
+
+A3A_shoppingCart = nil;
 
 closeDialog 1;

@@ -117,7 +117,7 @@ switch (tolower _convoyType) do
         _textX = format [localize "STR_A3A_fn_mission_conv_gunshop_text",_nameOrigin,_displayTime,_nameDest];
         _taskTitle = localize "STR_A3A_fn_mission_conv_gunshop_title";
         _taskIcon = "rearm";
-        _typeVehObj = selectRandom (_faction get "vehiclesTrucks");
+        _typeVehObj = selectRandom (_faction get "vehiclesAmmoTrucks");
     };
 };
 
@@ -276,19 +276,19 @@ if (_convoyType == "Ammunition") then
 {
     [_vehObj] spawn A3A_fnc_fillLootCrate;
 };
-if() then 
+if(_convoyType == "GunShop") then 
 {
     [_vehObj, 999999] remoteExec ["setMaxLoad", 2];
 
-        // add items.
-        {
-            private _key = _x#0;
-            private _amount = _x#1;
-            _vehObj addItemCargoGlobal [_key, _amount];
-            
-            // sleep here encase someone buys 1000 of something.
-            sleep 0.1;
-        } forEach _gunshopItems;
+    // add items.
+    {
+        private _key = _x#0;
+        private _amount = _x#1;
+        _vehObj addItemCargoGlobal [_key, _amount];
+        
+        // sleep here encase someone buys 1000 of something.
+        sleep 0.1;
+    } forEach _gunshopItems;
     
 };
 
@@ -326,6 +326,7 @@ sleep (60);
 if (_convoyType == "GunShop") then {
     // how send the helis
     private _heli = ((_convoyType == "GunShop") && (tierWar > 7)) call _fnc_spawnEscortHeli;
+    
 
 
 };
