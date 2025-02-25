@@ -87,50 +87,52 @@ _wp2 setWaypointStatements ["true", "if !(local this) exitWith {}; deleteVehicle
 
 waitUntil {sleep 1; (currentWaypoint _groupPilot > 0) || (!alive _vehicle) || (!canMove _vehicle)};
 
-if(currentWaypoint _groupPilot > 0) then
+_vehicle setCollisionLight true;
+
+// Move leader unit into middle of drop order
+private _jumpUnits = units _groupJumper - [leader _groupJumper];
+_jumpUnits insert [floor (count _jumpUnits / 2), [leader _groupJumper]];
+
+private _lastJumper = objNull;
 {
-    ServerDebug_1("Drop pos %1 reached", _dropPos);
-    _vehicle setCollisionLight true;
+    if (!alive _x or _x getVariable ["incapacitated", false]) then { continue };
+    _lastJumper = _x;
 
-    // Move leader unit into middle of drop order
-    private _jumpUnits = units _groupJumper - [leader _groupJumper];
-    _jumpUnits insert [floor (count _jumpUnits / 2), [leader _groupJumper]];
-
+    unAssignVehicle _x;
+    //Move them into alternating left/right positions, so their parachutes are less likely to kill each other
+    private _pos = if (_forEachIndex % 2 == 0) then {_vehicle modeltoWorld [7, -20, -5]} else {_vehicle modeltoWorld [-7, -20, -5]};
+    _x setPosASL AGLtoASL _pos;
+    _x spawn
     {
-        unAssignVehicle _x;
-        //Move them into alternating left/right positions, so their parachutes are less likely to kill each other
-        private _pos = if (_forEachIndex % 2 == 0) then {_vehicle modeltoWorld [7, -20, -5]} else {_vehicle modeltoWorld [-7, -20, -5]};
-        _x setPosASL AGLtoASL _pos;
-        _x spawn
-        {
-            sleep (getPosATL _this # 2 / 70);      // can't fall faster than that, save some checks
-            waitUntil {sleep 0.25; getPosATL _this # 2 < 120};
-            private _chute = createVehicle ["Steerable_Parachute_F", getPosATL _this, [], 0, "CAN_COLLIDE"];
-            _this moveInDriver _chute;
-            private _smokeGrenade = selectRandom allSmokeGrenades;
-            private _smoke = _smokeGrenade createVehicle (getPosATL _this);
-            waitUntil { sleep 1; isTouchingGround _this};
-            deleteVehicle _chute;
-        };
-        sleep 0.5;
-  	} forEach _jumpUnits;
-};
+        sleep (getPosATL _this # 2 / 70);      // can't fall faster than that, save some checks
+        waitUntil {sleep 0.25; getPosATL _this # 2 < 120};
+        private _chute = createVehicle ["Steerable_Parachute_F", getPosATL _this, [], 0, "CAN_COLLIDE"];
+        _this moveInDriver _chute;
+        private _smokeGrenade = selectRandom allSmokeGrenades;
+        private _smoke = _smokeGrenade createVehicle (getPosATL _this);
+        waitUntil { sleep 1; isTouchingGround _this};
+        deleteVehicle _chute;
+    };
+    sleep 0.5;
+} forEach _jumpUnits;
 
 while {count waypoints _groupJumper > 0} do { deleteWaypoint [_groupJumper, 0] };
 
-// Waiting here because Arma likes to randomly delete paratrooper waypoints on landing
-waitUntil { sleep 1; isTouchingGround leader _groupJumper };
+if (!isNull _lastJumper) then {
+    // Waiting here because Arma likes to randomly delete paratrooper waypoints on landing
+    waitUntil { sleep 1; isTouchingGround _lastJumper };
 
-sleep 10;       // wait until everyone else has landed
+    sleep 5;       // make sure everyone's landed
 
-_wpMove = _groupJumper addWaypoint [_targetPosition, 0];
-_wpMove setWaypointType "MOVE";
-_wpMove setWaypointBehaviour "AWARE";
-_groupJumper setCurrentWaypoint _wpMove;
+    _wpMove = _groupJumper addWaypoint [_targetPosition, 0];
+    _wpMove setWaypointType "MOVE";
+    _wpMove setWaypointBehaviour "AWARE";
+    _groupJumper setCurrentWaypoint _wpMove;
 
-if !(_isReinforcement) then
-{
-    _wpClear = _groupJumper addWaypoint [_targetPosition, 0];
-    _wpClear setWaypointType "SAD";
-    _groupJumper spawn A3A_fnc_attackDrillAI;
+    if !(_isReinforcement) then
+    {
+        _wpClear = _groupJumper addWaypoint [_targetPosition, 0];
+        _wpClear setWaypointType "SAD";
+        _groupJumper spawn A3A_fnc_attackDrillAI;
+    };
 };
