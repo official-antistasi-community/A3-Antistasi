@@ -25,7 +25,7 @@ class stubbhult {
 		{"sofieslatt",25},
 		{"mjalahult",65},
 		{"vallshult",25},
-		{"unnaryd",1},
+		{"unnaryd",10},
 		{"yttre_mjala",55},
 		{"dohult",20},
 		{"eldshult",45},
