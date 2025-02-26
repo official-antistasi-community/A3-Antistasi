@@ -321,15 +321,13 @@ ServerInfo_2("Spawn performed: %1 ground vehicles, %2 soldiers", count _vehicles
 
 
 // Send the vehicles after the delay
-
-sleep (60);
 if (_convoyType == "GunShop") then {
     // how send the helis
     private _heli = ((_convoyType == "GunShop") && (tierWar > 7)) call _fnc_spawnEscortHeli;
-    
-
-
+    [_heli, _vehObj, 30] spawn A3A_fnc_vehicleConvoyHeliTravel;
 };
+
+sleep (60);
 _route = _route select [_pathState#2, count _route];        // remove navpoints that we already passed while spawning
 ServerInfo("Convoy mission under way");
 
@@ -369,6 +367,7 @@ private _fnc_applyResults =
 
     [_sideX, _aggroMod, _aggroTime] remoteExec ["A3A_fnc_addAggression", 2];
 
+    // pvp code
     if !(_success1) then {
         _killZones = killZones getVariable [_mrkOrigin,[]];
         _killZones = _killZones + [_mrkDest,_mrkDest];
@@ -549,9 +548,11 @@ if (_convoyType == "GunShop") then
             
             // you might have gotten your gear, but you have made the enemy more determined
             if (_resPool != "legacy") then {
-                
+                // clamp to 1000
+                private _poolReplace =  0  max (_totalCost/1000) min 1000;
+
                 // this can be a double edge sword, too much and you're fucked.
-                [_totalCost, _sideX, _resPool] remoteExec ["A3A_fnc_addEnemyResources", 2];
+                [_poolReplace, _sideX, _resPool] remoteExec ["A3A_fnc_addEnemyResources", 2];
             };
         };
     };

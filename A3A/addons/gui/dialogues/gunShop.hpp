@@ -1,10 +1,32 @@
 #include "ids.inc"
 
-class A3A_gunShop: A3A_TabbedDialog
+class A3A_gunShop: A3A_DefaultDialog
 {
     idd = A3A_IDD_GUN_SHOP;
     onLoad = "[""onLoad"", _this] spawn A3A_GUI_fnc_gunShop";
     movingenable = false;
+
+    class ControlsBackground
+    {
+        class TitleBarBackground : A3A_Background
+        {
+            moving = true;
+            colorBackground[] = A3A_COLOR_TITLEBAR_BACKGROUND;
+            x = CENTER_X(DIALOG_W);
+            y = CENTER_Y(DIALOG_H)  - 10 * GRID_H;
+            w = DIALOG_W * GRID_W;
+            h = 21.4 * GRID_H;
+        };
+
+        class  Background : A3A_Background
+        {
+            x = CENTER_X(DIALOG_W);
+            y = CENTER_Y(DIALOG_H) + GRID_H * 6.4;
+            w = DIALOG_W * GRID_W;
+            h = DIALOG_H * GRID_H - GRID_H * 6.4;
+            colorBackground[] = {0.0, 0.0, 0.0, 1.0};
+        };
+    };
     class Controls
     {
         class TitlebarText : A3A_TitlebarText
@@ -616,7 +638,7 @@ class A3A_gunShop: A3A_TabbedDialog
             y = CENTER_Y(DIALOG_H) + GRID_H * 87.2;
             w = 30 * GRID_W;
             h = 6.4 * GRID_H;
-            colorText[] = {0.03,0.37,0.09,1};
+            colorText[] = {0.32,0.82,0.45,1};
         };
     };
 };

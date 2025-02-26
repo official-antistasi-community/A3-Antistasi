@@ -32,12 +32,12 @@ if(_className in A3A_shoppingCart) exitWith
 	};
 
 	private _amountText = _map getOrDefault ["_controlAmount", -1];
-	_amountText ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' align='center' shadow='2'>%1</t>", _amount]);
+	_amountText ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' align='center' color='#E5C454' shadow='2'>%1</t>", _amount]);
 	_amountText ctrlCommit 0;
 	
 	private _totalCost = _map getOrDefault ["_controlCost", -1];
 	private _weaponPrice = _map getOrDefault ["_price", -1];
-	_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#085F16' shadow='2'>€ %1</t>", _weaponPrice * _amount]);
+	_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _weaponPrice * _amount]);
 	_totalCost ctrlCommit 0;
 
 

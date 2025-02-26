@@ -109,6 +109,22 @@ if(_noCrate) exitWith
 		[petros,"globalChat",localize "STR_A3A_fn_mission_request_noConvoy"] remoteExec ["A3A_fnc_commsMP",theBoss];
 	} else {
 		private _args = selectRandom _convoyPairs;
+		private _pick1Distance = (getMarkerPos (_args#0)) distance (getMarkerPos (_args#1)); 
+ 	 	// pick the longest 
+ 	 	{ 
+ 	  		private _posDest1 = getMarkerPos (_x#0); 
+ 	  		private _posDest2 = getMarkerPos (_x#1); 
+ 	  		private _newDistance = (_posDest1 distance _posDest2); 
+
+ 	  		if( _newDistance > _pick1Distance) then  
+ 	  		{ 
+			_args = _x; 
+			_pick1Distance = _newDistance; 
+ 	  		}; 
+	
+	
+ 	 	} forEach _convoyPairs; 
+		
 		_args append ["GunShop","legacy",-1, _totalCost, _gunshopList];
 		[_args,"A3A_fnc_convoy"] remoteExec ["A3A_fnc_scheduler",2];
 	};

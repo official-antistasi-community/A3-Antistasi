@@ -1,6 +1,7 @@
 #include "..\..\dialogues\ids.inc"
 #include "..\..\script_component.hpp"
 #include "..\..\dialogues\defines.hpp"
+FIX_LINE_NUMBERS()
 
 params[["_mode","onLoad"], ["_params",[]]];
 private _display = findDisplay A3A_IDD_GUN_SHOP;
@@ -79,12 +80,12 @@ switch (_mode) do
         } forEach _allTabs;
 
         private _controls = (_display getVariable ((_selectedTab) + "Ctrls"));
-        (_display getVariable ((_selectedTab) + "Ctrls" + "Meta")) params ["_modulus", "_gridWidthConst", "_gridHeightConst"];
-        //_display setVariable [(_selectedTab + "Ctrls" + "Meta"), [ _modulus, _gridWidthConst, _gridHeightConst ]];
+        (_display getVariable ((_selectedTab) + "Ctrls" + "Meta")) params ["_columnCount", "_gridWidthConst", "_gridHeightConst"];
+        //_display setVariable [(_selectedTab + "Ctrls" + "Meta"), [ _columnCount, _gridWidthConst, _gridHeightConst ]];
         // resort because we are changing tabs
         {
-            private _itemXPos = (_forEachIndex % _modulus) * (_gridWidthConst * GRID_W);
-            private _itemYPos =  (floor (_forEachIndex / _modulus)) * (_gridHeightConst * GRID_H);
+            private _itemXPos = (_forEachIndex % _columnCount) * (_gridWidthConst * GRID_W);
+            private _itemYPos =  (floor (_forEachIndex / _columnCount)) * (_gridHeightConst * GRID_H);
             _x ctrlSetPositionX _itemXPos;
             _x ctrlSetPositionY _itemYPos;
             _x ctrlCommit 0.1;

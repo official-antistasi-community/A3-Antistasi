@@ -62,6 +62,7 @@ class CfgFunctions
             class unitGetToCover {};
             class useFlares {};
             class VANTinfo {};
+            class vehicleConvoyHeliTravel{};
             class vehicleConvoyTravel {};
             class vehicleMarkers {};
         };
@@ -787,9 +788,7 @@ class CfgFunctions
             class vehicleTextureSync {};
             class vehicleWillCollideAtPosition {};
             class getRoadDirection {};
-            class getSaveDataFactions {};
             class getItemListFromDLC {};
-            class sendFactionsData {};
         };
 
         class UtilityItems {
