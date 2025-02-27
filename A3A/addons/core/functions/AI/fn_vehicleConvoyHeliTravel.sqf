@@ -20,23 +20,23 @@ if((typeOf _heli) in FactionGet(all,"vehiclesHelisAttack") + FactionGet(all,"veh
     _heliGroup addEventHandler ["EnemyDetected", {
 	    params ["_group", "_newTarget"];
         private _heli = vehicle leader _group;
-        // send a support, don't reveal
-        [side _heli, _newTarget, _heli, 2, 0] call A3A_fnc_requestSupport
 
         [vehicle leader _group, _group, getPosATL _newTarget] spawn A3A_fnc_attackHeli;
 
-        terminate ( _heli getVariable "scriptToKill" );
+        terminate ( _heli getVariable "A3A_heliTravelScript" );
+        _group removeEventHandler  [_thisEvent, _thisEventHandler];
     }];
 };
 
-_heli setVariable ["scriptToKill", _thisScript];
+_heli setVariable ["A3A_heliTravelScript", _thisScript];
 
 
 private _speedSet = false;
+private _wp = _heliGroup addWaypoint [_convoyObj, 50];
 
 while{alive _heli && alive _convoyObj} do {
 
-    private _wp = _heliGroup addWaypoint [_convoyObj, 50];
+    _wp setWaypointPosition [_convoyObj, 50];
     _wp setWaypointType "MOVE";
     _heliGroup setCurrentWaypoint _wp;
 
