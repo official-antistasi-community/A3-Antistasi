@@ -3,7 +3,7 @@ FIX_LINE_NUMBERS()
 
 //Mission: Capture/destroy the convoy
 if (!isServer and hasInterface) exitWith {};
-params ["_mrkDest", "_mrkOrigin", ["_convoyType", ""], ["_resPool", "legacy"], ["_startDelay", -1]];
+params ["_mrkDest", "_mrkOrigin", ["_convoyType", ""], ["_resPool", "legacy"], ["_startDelay", -1], ["_totalCost", 0], "_gunshopItems"];
 
 private _difficult = if (random 10 < tierWar) then {true} else {false};
 private _sideX = if (sidesX getVariable [_mrkOrigin,sideUnknown] == Occupants) then {Occupants} else {Invaders};
@@ -17,6 +17,13 @@ private _vehiclesX = [];
 private _markNames = [];
 private _POWS = [];
 private _reinforcementsX = [];
+
+
+private _startOutpost = createMarker ["start_pos_convoy", _posSpawn];
+_startOutpost setMarkerShape "ICON";
+_startOutpost setMarkerType "hd_start";
+_startOutpost setMarkerColor "ColorBlack";
+_startOutpost setMarkerText localize "STR_A3A_fn_mission_conv_start_location";
 
 
 // Setup start time
@@ -105,8 +112,14 @@ switch (tolower _convoyType) do
         _taskIcon = "heal";
         _typeVehObj = selectRandom (FactionGet(reb, "vehiclesCivSupply"));
     };
+    case "gunshop":
+    {
+        _textX = format [localize "STR_A3A_fn_mission_conv_gunshop_text",_nameOrigin,_displayTime,_nameDest];
+        _taskTitle = localize "STR_A3A_fn_mission_conv_gunshop_title";
+        _taskIcon = "rearm";
+        _typeVehObj = selectRandom (_faction get "vehiclesAmmoTrucks");
+    };
 };
-
 
 // Find suitable nav points for origin/dest
 private _posOrigin = navGrid select ([_mrkOrigin] call A3A_fnc_getMarkerNavPoint) select 0;
@@ -126,14 +139,42 @@ private _route = [_posOrigin, _posDest] call A3A_fnc_findPath;
 _route = _route apply { _x select 0 };			// reduce to position array
 if (_route isEqualTo []) then { _route = [_posOrigin, _posDest] };
 
+// gunshop price handling
+/**
+    The enjoys of figuring this out. Simple just add on to war level for the weights, but how? Not so
+    simple there is not good way to handle this. We might want to look to rule-based systems. However,
+    those are not implemented in the current form. Simple rules will have to work for now.
+
+*/
+
+// union of  missles and lanuchers
+// private _hasMissiles = 0;
+// private _hasMines = 0;
+// {
+//     private _categories = _x call A3A_fnc_equipmentClassToCategories;
+//     if("MissileLaunchers" in _categories ) then {_hasMissiles = 1};
+//     if("MagMissile" in _categories ) then {_hasMissiles = 1};
+//     if("Mine" in _categories ) then {_hasMines = 1};
+//     if("MineBounding" in _categories ) then {_hasMines = 1};
+//     if("MineDirectional" in _categories ) then {_hasMines = 1};
+// } foreach _gunshopItems;
+
+ //A3A_newtier = tierWar + _hasMissiles + _hasMines;
+
+// random value, 75000
+// A3A_newtier = A3A_newtier + (_totalCost/75000);
+// A3A_newtier = if(A3A_newtier > 10 ) then {A3A_newtier = 10};
+// ServerInfo_1("A3A_newtier calculation: %1", A3A_newtier);
+
 private _vehPool = ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundTransport) + ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundSupport);
+private _heliPool = [_sideX, tierWar, true] call A3A_fnc_getVehiclesAirSupport;
 private _pathState = [];			// Set the scope so that state is preserved between findPosOnRoute calls
 private _resourcesSpent = 0;
 
 // Spawning worker functions
 
 private _fnc_spawnConvoyVehicle = {
-    params ["_vehType", "_markName"];
+    params ["_vehType", "_markName", ["_spawnSF", false]];
     ServerDebug_1("Spawning vehicle type %1", _vehType);
 
     // Find location down route
@@ -149,13 +190,15 @@ private _fnc_spawnConvoyVehicle = {
     _veh setVectorDirAndUp [_pathState#1, _vecUp];
     _veh allowDamage false;
 
-    private _group = [_sideX, _veh] call A3A_fnc_createVehicleCrew;
-    { [_x, nil, nil, _resPool] call A3A_fnc_NATOinit; _x allowDamage false; _x disableAI "MINEDETECTION" } forEach (units _group);
-    _soldiers append (units _group);
+    //private _group = [_sideX, _veh] call A3A_fnc_createVehicleCrew;
+    private _troopType = if(_spawnSF) then {Specops} else {"Normal"};
+    private _filledVic = [_vehType, _veh, _troopType, _resPool, _sideX, _mrkOrigin] call A3A_fnc_createAndFillVehicle;
+    { [_x, nil, nil, _resPool] call A3A_fnc_NATOinit; _x allowDamage false; _x disableAI "MINEDETECTION" } forEach (units (_filledVic#0));
+    _soldiers append (units (_filledVic#0));
+    _soldiers append (units (_filledVic#1));
     (driver _veh) stop true;
-    deleteWaypoint [_group, 0];													// groups often start with a bogus waypoint
+    deleteWaypoint [_filledVic#0, 0];													// groups often start with a bogus waypoint
 
-    [_veh, _sideX, _resPool] call A3A_fnc_AIVEHinit;
     if (_vehType in FactionGet(all,"vehiclesArmor")) then { _veh allowCrewInImmobile true };			// move this to AIVEHinit at some point?
     _vehiclesX pushBack _veh;
     _markNames pushBack _markName;
@@ -163,19 +206,34 @@ private _fnc_spawnConvoyVehicle = {
 };
 
 private _fnc_spawnEscortVehicle = {
+    params [["_spawnSF", false]];
     private _typeVehEsc = selectRandomWeighted _vehPool;
-    private _veh = [_typeVehEsc, "Convoy Escort"] call _fnc_spawnConvoyVehicle;
+    private _veh = [_typeVehEsc, "Convoy Escort", _spawnSF] call _fnc_spawnConvoyVehicle;
+};
 
-    private _typeGroup = [_typeVehEsc, _sideX] call A3A_fnc_cargoSeats;
-    if (count _typeGroup == 0) exitWith {};
-    private _groupEsc = [_posSpawn, _sideX, _typeGroup] call A3A_fnc_spawnGroup;				// Unit limit?
-    {[_x, nil, nil, _resPool] call A3A_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh;} forEach units _groupEsc;
-    _soldiers append (units _groupEsc);
+private _fnc_spawnEscortHeli = {
+    params [["_spawnSF", false]];
+    private _typeVehEsc = selectRandomWeighted _heliPool;
+    //private _veh = [_typeVehEsc, "Convoy Escort"] call _fnc_spawnConvoyVehicle;
+    private _airbase = [_sideX, _posSpawn] call A3A_fnc_availableBasesAir;
+    private _vehicle = [_airbase, _typeVehEsc] call A3A_fnc_spawnVehicleAtMarker;
+
+    private _troopType = if(_spawnSF) then {Specops} else {"Normal"};
+    private _filledVic = [_typeVehEsc, _vehicle, _troopType, _resPool, _sideX, _mrkOrigin] call A3A_fnc_createAndFillVehicle;
+    _soldiers append (units (_filledVic#0));
+    _soldiers append (units (_filledVic#1));
+
+    (driver _vehicle) stop true;
+    deleteWaypoint [_filledVic#0, 0];
+    //_vehiclesX pushBack _vehicle;
+    //_markNames pushBack "Convoy Escort Heli";
+    _vehicle;
 };
 
 
 // Tail escort
-[] call _fnc_spawnEscortVehicle;
+ // make sf only for gunshop 8+ warlevel
+((_convoyType == "GunShop") && (tierWar > 7)) call _fnc_spawnEscortVehicle;
 
 // Objective vehicle
 sleep 2;
@@ -218,13 +276,29 @@ if (_convoyType == "Ammunition") then
 {
     [_vehObj] spawn A3A_fnc_fillLootCrate;
 };
+if(_convoyType == "GunShop") then 
+{
+    [_vehObj, 999999] remoteExec ["setMaxLoad", 2];
+
+    // add items.
+    {
+        private _key = _x#0;
+        private _amount = _x#1;
+        _vehObj addItemCargoGlobal [_key, _amount];
+        
+        // sleep here encase someone buys 1000 of something.
+        sleep 0.1;
+    } forEach _gunshopItems;
+    
+};
 
 // Initial escort vehicles, 0-1 for SP, 1-2 for 10+
 private _countX = round ((A3A_balancePlayerScale min 1.5) + random 0.5 + ([-0.75, 0.25] select _difficult));
+if(_convoyType == "GunShop") then {_countX = _countX + 1};
 for "_i" from 1 to _countX do
 {
     sleep 2;
-    [] call _fnc_spawnEscortVehicle;
+    ((_convoyType == "GunShop") && (tierWar > 7))  call _fnc_spawnEscortVehicle;
 };
 
 // Lead vehicle
@@ -247,8 +321,13 @@ ServerInfo_2("Spawn performed: %1 ground vehicles, %2 soldiers", count _vehicles
 
 
 // Send the vehicles after the delay
+if (_convoyType == "GunShop") then {
+    // how send the helis
+    private _heli = ((_convoyType == "GunShop") && (tierWar > 7)) call _fnc_spawnEscortHeli;
+    [_heli, _vehObj, 30] spawn A3A_fnc_vehicleConvoyHeliTravel;
+};
 
-sleep (60*_startDelay);
+sleep (60);
 _route = _route select [_pathState#2, count _route];        // remove navpoints that we already passed while spawning
 ServerInfo("Convoy mission under way");
 
@@ -288,6 +367,7 @@ private _fnc_applyResults =
 
     [_sideX, _aggroMod, _aggroTime] remoteExec ["A3A_fnc_addAggression", 2];
 
+    // pvp code
     if !(_success1) then {
         _killZones = killZones getVariable [_mrkOrigin,[]];
         _killZones = _killZones + [_mrkDest,_mrkDest];
@@ -437,6 +517,43 @@ if (_convoyType == "Supplies") then
         {
             [false, true, 0, -10, 0, 0, "supply"] call _fnc_applyResults;
             [15*_bonus,0,_mrkDest] remoteExec ["A3A_fnc_citySupportChange",2];
+        };
+    };
+};
+
+if (_convoyType == "GunShop") then
+{
+
+    waitUntil {sleep 1; (time > _timeout) or (_vehObj distance _posDest < _arrivalDist) or (not alive _vehObj) or (side group driver _vehObj != _sideX)};
+    if ((_vehObj distance _posDest < _arrivalDist) or (time > _timeout)) then
+    {
+
+        [false, true, -200, -10, 0, 0, "gunshop"] call _fnc_applyResults;
+    }
+    else
+    {
+        waitUntil {sleep 2; (_vehObj distance _posHQ < 50) or (not alive _vehObj) or (time > _timeout)};
+        if ((not alive _vehObj) or (time > _timeout)) then
+        {
+            // hahahahaha, they kept you from getting the guns
+            [true, false, 0, 0, 5, 60, "gunshop"] call _fnc_applyResults;
+        };
+        if (_vehObj distance _posHQ < 50) then
+        {
+            [true, false, 0, 0, 15, 180, "gunshop"] call _fnc_applyResults;
+            // create a object to hold the items.
+
+            // you bought shit, we aren't handing out money
+            //[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
+            
+            // you might have gotten your gear, but you have made the enemy more determined
+            if (_resPool != "legacy") then {
+                // clamp to 1000
+                private _poolReplace =  0  max (_totalCost/1000) min 1000;
+
+                // this can be a double edge sword, too much and you're fucked.
+                [_poolReplace, _sideX, _resPool] remoteExec ["A3A_fnc_addEnemyResources", 2];
+            };
         };
     };
 };

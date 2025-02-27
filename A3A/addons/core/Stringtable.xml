@@ -3806,6 +3806,10 @@
         <Turkish>Araç Satın Al</Turkish>
         <Chinesesimp>购买载具</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_init_initclient_addact_gunshop">
+        <Original>Gun Shop</Original>
+        <German>Waffenladen</German>
+      </Key>
       <Key ID="STR_A3A_fn_init_initclient_addact_gameOpt">
         <Original>Game Options</Original>
         <Italian>Opzioni di Gioco</Italian>
@@ -4960,6 +4964,21 @@
         <Polish>Konwój z zaopatrzeniem</Polish>
         <Czech>Konvoj se zásobami.</Czech>
         <Chinesesimp>补给运输车队</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conv_gunshop_text">
+        <Original>Our shipment of weapons has  been intercepted by the local authorities, and is being redirected as supplies for an %3. It's about to leave at %2 from an %1. The circumstances surrounding this incident are unclear, but it is evident that the shipment's documentation and contents have raised concerns among regulatory bodies. We can't let the authorities get in our way. Take the shipment back by any means.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conv_gunshop_title">
+        <Original>Recover Gun Shipment</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conv_start_location">
+        <Original>convoy start</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_met_text">
+        <Original></Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_met_title">
+        <Original>Meet Pet Ros</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_des_ante_text">
         <Original>We need to destroy or take a Radio Tower in %1. This will interrupt the coverage of %3 radio propaganda. Do it before %2.</Original>

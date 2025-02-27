@@ -62,6 +62,7 @@ class CfgFunctions
             class unitGetToCover {};
             class useFlares {};
             class VANTinfo {};
+            class vehicleConvoyHeliTravel{};
             class vehicleConvoyTravel {};
             class vehicleMarkers {};
         };
@@ -250,6 +251,7 @@ class CfgFunctions
             class createAIOutposts {};
             class createAIResources {};
             class createAISite {};
+            class createAndFillVehicle {};
             class createAttackForceAir {};
             class createAttackForceLand {};
             class createAttackForceMixed {};
@@ -428,6 +430,7 @@ class CfgFunctions
             class DES_Antenna {};
             class DES_Heli {};
             class DES_Vehicle {};
+            class GSMission {};
             class LOG_Ammo {};
             class LOG_Bank {};
             class LOG_Supplies {};
