@@ -15,26 +15,21 @@ params ["_heli", "_convoyObj", "_maxSpeed"];
 
 private _heliGroup = group _heli;
 
-// we want the heli to land near the enemies.
-if((typeOf _heli) in FactionGet(all, "vehiclesHelisTransport") + FactionGet(all,"vehiclesHelisLight")) then 
-{
-    _heliGroup addEventHandler ["CombatModeChanged", {
-	    params ["_group", "_newMode"];
-        if(_newMode isEqualTo "COMBAT") then 
-        {
-
-        };
-    }];
-};
-
 if((typeOf _heli) in FactionGet(all,"vehiclesHelisAttack") + FactionGet(all,"vehiclesHelisLightAttack")) then 
 {
     _heliGroup addEventHandler ["EnemyDetected", {
 	    params ["_group", "_newTarget"];
-        
+        private _heli = vehicle leader _group;
+        // send a support, don't reveal
+        [side _heli, _newTarget, _heli, 2, 0] call A3A_fnc_requestSupport
+
         [vehicle leader _group, _group, getPosATL _newTarget] spawn A3A_fnc_attackHeli;
+
+        terminate ( _heli getVariable "scriptToKill" );
     }];
 };
+
+_heli setVariable ["scriptToKill", _thisScript];
 
 
 private _speedSet = false;
