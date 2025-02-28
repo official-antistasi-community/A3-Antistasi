@@ -139,32 +139,6 @@ private _route = [_posOrigin, _posDest] call A3A_fnc_findPath;
 _route = _route apply { _x select 0 };			// reduce to position array
 if (_route isEqualTo []) then { _route = [_posOrigin, _posDest] };
 
-// gunshop price handling
-/**
-    The enjoys of figuring this out. Simple just add on to war level for the weights, but how? Not so
-    simple there is not good way to handle this. We might want to look to rule-based systems. However,
-    those are not implemented in the current form. Simple rules will have to work for now.
-
-*/
-
-// union of  missles and lanuchers
-// private _hasMissiles = 0;
-// private _hasMines = 0;
-// {
-//     private _categories = _x call A3A_fnc_equipmentClassToCategories;
-//     if("MissileLaunchers" in _categories ) then {_hasMissiles = 1};
-//     if("MagMissile" in _categories ) then {_hasMissiles = 1};
-//     if("Mine" in _categories ) then {_hasMines = 1};
-//     if("MineBounding" in _categories ) then {_hasMines = 1};
-//     if("MineDirectional" in _categories ) then {_hasMines = 1};
-// } foreach _gunshopItems;
-
- //A3A_newtier = tierWar + _hasMissiles + _hasMines;
-
-// random value, 75000
-// A3A_newtier = A3A_newtier + (_totalCost/75000);
-// A3A_newtier = if(A3A_newtier > 10 ) then {A3A_newtier = 10};
-// ServerInfo_1("A3A_newtier calculation: %1", A3A_newtier);
 
 private _vehPool = ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundTransport) + ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundSupport);
 private _heliPool = [_sideX, tierWar, true] call A3A_fnc_getVehiclesAirSupport;
@@ -225,8 +199,6 @@ private _fnc_spawnEscortHeli = {
 
     (driver _vehicle) stop true;
     deleteWaypoint [_filledVic#0, 0];
-    //_vehiclesX pushBack _vehicle;
-    //_markNames pushBack "Convoy Escort Heli";
     _vehicle;
 };
 
@@ -327,7 +299,7 @@ if (_convoyType == "GunShop") then {
     [_heli, _vehObj, 30] spawn A3A_fnc_vehicleConvoyHeliTravel;
 };
 
-sleep (60);
+sleep (60 * _startDelay);
 _route = _route select [_pathState#2, count _route];        // remove navpoints that we already passed while spawning
 ServerInfo("Convoy mission under way");
 
@@ -567,6 +539,8 @@ if (_convoyType == "GunShop") then
 { deleteVehicle _x } forEach _POWs;
 
 [_taskId, "CONVOY", 600, true] spawn A3A_fnc_taskDelete;
+
+deleteMarker _startOutpost;
 
 // Clear this array so the vehicleConvoyTravel spawns exit and merge groups
 _convoyVehicles resize 0;
