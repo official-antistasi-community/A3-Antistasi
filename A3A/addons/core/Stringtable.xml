@@ -4975,7 +4975,7 @@
         <Original>convoy start</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_gunshop_met_text">
-        <Original></Original>
+        <Original>A man by the of Pet Ros has contacted us. He is in %1, go and meet him. Rumor is that he sells hard to find items for the right price.</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_gunshop_met_title">
         <Original>Meet Pet Ros</Original>
@@ -9891,7 +9891,7 @@
         <Chinesesimp>是否在解锁枪械的同时也解锁配套的标准弹匣？</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_Params_allowguestcommander_title">
-        <Original>Allow the guest commander to access the gun shop?</Original>
+        <Original>Allow the guest commander to have access to the gun shop?</Original>
       </Key>
     </Container>
     <Container name="A3A_Scripts">
