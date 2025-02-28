@@ -89,7 +89,7 @@ A3A_shoppingList params ["_totalCost", "_gunshopList"];
 
 // do they get a crate or are they fucked?
 
-
+// if they spend 348,000 or more, they will always have a convoy mission.
 private _noCrate = (floor random 12 ) + (floor random 12) + (floor random 12) > ceil (29 - tierWar - (_totalCost/12000));
 
 //oof
@@ -113,7 +113,7 @@ if(_noCrate) exitWith
 	} forEach _markers;
 	if (count _possibleMarkers == 0) then
 	{
-		[petros,"globalChat",localize "STR_A3A_fn_mission_request_noConvoy"] remoteExec ["A3A_fnc_commsMP",theBoss];
+		[_coolerPetros,"globalChat",localize "STR_A3A_fn_mission_request_noConvoy"] remoteExec ["A3A_fnc_commsMP",theBoss];
 	} else {
 		private _args = selectRandom _convoyPairs;
 		private _pick1Distance = (getMarkerPos (_args#0)) distance (getMarkerPos (_args#1)); 
@@ -143,7 +143,7 @@ if(_noCrate) exitWith
 
 private _pos = getPosASL _coolerPetros findEmptyPosition [0, 50, "B_supplyCrate_F"];
 
-private _crate = createVehicle ["B_supplyCrate_F", _pos];
+private _crate = createVehicle ["B_supplyCrate_F", [0,0,0]];
 clearMagazineCargoGlobal _crate;
 clearWeaponCargoGlobal _crate;
 clearItemCargoGlobal _crate;
@@ -156,8 +156,9 @@ clearBackpackCargoGlobal _crate;
     _crate addItemCargoGlobal [_key, _amount];
     
     // sleep here encase someone buys 1000 of something.
-    sleep 0.1;
+    sleep 0.01;
 } forEach _gunshopList;
 
 
 
+_crate setPosASL _pos;
