@@ -43,6 +43,13 @@ private _identity = createHashMapFromArray [
     ["pitch", 1.1]
 ];
 
+private _conditionCode = "(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer) and (_this == theBoss)";
+
+if(!A3A_GS_allowGuestCommander) then {
+	_conditionCode + "and theBoss call A3A_fnc_isMember";
+}; 
+
+
 private _coolerPetros = [createGroup civilian, FactionGet(reb,"unitPetros"), getMarkerPos _posDest, [], 10, "NONE", _identity] call A3A_fnc_createUnit;
 // copy his drip. 
 private _notCoolPetrosLoadout = getUnitLoadout petros;
@@ -60,7 +67,7 @@ _coolerPetros addAction [localize "STR_A3A_fn_init_initclient_addact_gunshop", {
     } else {
         createDialog "A3A_gunShop";
     }
-},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer) and (_this == theBoss) and theBoss call A3A_fnc_isMember", 4];
+},nil,0,false,true,"",_conditionCode, 4];
 
 private _timeout = time + 3600;
 
