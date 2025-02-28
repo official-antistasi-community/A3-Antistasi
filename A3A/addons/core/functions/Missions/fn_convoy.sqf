@@ -188,7 +188,6 @@ private _fnc_spawnEscortVehicle = {
 private _fnc_spawnEscortHeli = {
     params [["_spawnSF", false]];
     private _typeVehEsc = selectRandomWeighted _heliPool;
-    //private _veh = [_typeVehEsc, "Convoy Escort"] call _fnc_spawnConvoyVehicle;
     private _airbase = [_sideX, _posSpawn] call A3A_fnc_availableBasesAir;
     private _vehicle = [_airbase, _typeVehEsc] call A3A_fnc_spawnVehicleAtMarker;
 
@@ -250,6 +249,10 @@ if (_convoyType == "Ammunition") then
 };
 if(_convoyType == "GunShop") then 
 {
+    clearMagazineCargoGlobal _vehObj;
+    clearWeaponCargoGlobal _vehObj;
+    clearItemCargoGlobal _vehObj;
+    clearBackpackCargoGlobal _vehObj;
     [_vehObj, 999999] remoteExec ["setMaxLoad", 2];
 
     // add items.
@@ -295,8 +298,13 @@ ServerInfo_2("Spawn performed: %1 ground vehicles, %2 soldiers", count _vehicles
 // Send the vehicles after the delay
 if (_convoyType == "GunShop") then {
     // how send the helis
-    private _heli = ((_convoyType == "GunShop") && (tierWar > 7)) call _fnc_spawnEscortHeli;
-    [_heli, _vehObj, 30] spawn A3A_fnc_vehicleConvoyHeliTravel;
+    private _countX = round ((A3A_balancePlayerScale min 1.5) + random 0.5 + ([-0.75, 0.25] select _difficult));
+    for "_i" from 1 to _countX do
+    {
+        sleep 2;
+        private _heli = ((_convoyType == "GunShop") && (tierWar > 7)) call _fnc_spawnEscortHeli;
+        [_heli, _vehObj, 30] spawn A3A_fnc_vehicleConvoyHeliTravel;
+    };
 };
 
 sleep (60 * _startDelay);
@@ -513,19 +521,13 @@ if (_convoyType == "GunShop") then
         if (_vehObj distance _posHQ < 50) then
         {
             [true, false, 0, 0, 15, 180, "gunshop"] call _fnc_applyResults;
-            // create a object to hold the items.
-
-            // you bought shit, we aren't handing out money
-            //[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
             
             // you might have gotten your gear, but you have made the enemy more determined
-            if (_resPool != "legacy") then {
-                // clamp to 1000
-                private _poolReplace =  0  max (_totalCost/1000) min 1000;
-
-                // this can be a double edge sword, too much and you're fucked.
-                [_poolReplace, _sideX, _resPool] remoteExec ["A3A_fnc_addEnemyResources", 2];
-            };
+            // clamp to 1000
+            private _poolReplace =  0  max (_totalCost/1000) min 1000;
+            // this can be a double edge sword, too much and you're fucked.
+            [_poolReplace, _sideX, _resPool] remoteExec ["A3A_fnc_addEnemyResources", 2];
+            
         };
     };
 };
