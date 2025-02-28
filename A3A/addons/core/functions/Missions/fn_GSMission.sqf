@@ -63,13 +63,20 @@ private _garrisonGroups = [group _coolerPetros, getMarkerPos _posDest, 200] call
 [_taskId, "LOG", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _coolerPetros disableAI "ALL";
-private _gsActionId = _coolerPetros addAction [localize "STR_A3A_fn_init_initclient_addact_gunshop", {
+
+private _addActionCode = {
+	params ["_coolerPetros", "_conditionCode"];
+	_coolerPetros addAction [localize "STR_A3A_fn_init_initclient_addact_gunshop", {
     if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {
         [localize "STR_A3A_fn_init_initclient_addact_gunshop", localize "STR_A3A_fn_init_initclient_buyveh_enemy"] call A3A_fnc_customHint;
     } else {
         createDialog "A3A_gunShop";
     }
 },nil,0,false,true,"",_conditionCode, 4];
+};
+
+// do this global, because any one can become the commander
+[[_coolerPetros, _conditionCode], _addActionCode] remoteExec ["call", 0, _coolerPetros];
 
 private _timeout = time + 3600;
 
@@ -86,7 +93,7 @@ if((time > _timeout) || (!alive _coolerPetros)) exitWith {
 [_taskId, "LOG", "SUCCEEDED"] call A3A_fnc_taskSetState;
 [_taskId, "LOG", 600, true] spawn A3A_fnc_taskDelete;
 
-_coolerPetros removeAction _gsActionId;
+[_coolerPetros, 0] remoteExec ["removeAction", 0, _coolerPetros];
 
 A3A_shoppingList params ["_totalCost", "_gunshopList"];
 
@@ -165,3 +172,5 @@ clearBackpackCargoGlobal _crate;
 _crate setPosASL _pos;
 
 [group _coolerPetros] spawn A3A_fnc_groupDespawner;
+
+A3A_shoppingList = nil;
