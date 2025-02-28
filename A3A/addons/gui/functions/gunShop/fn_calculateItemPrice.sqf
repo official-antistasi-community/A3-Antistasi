@@ -87,6 +87,7 @@ _fnc_itemPriceCalculator = {
             if(_isMuzzle) then 
             {
                 private _audible = getNumber(configFile >> "CfgWeapons" >> _className  >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
+                if(_audible isEqualTo 0) then {_audible = 0.70};
                 _cost = _cost * floor (round (0.70/_audible));
             };
             _cost
