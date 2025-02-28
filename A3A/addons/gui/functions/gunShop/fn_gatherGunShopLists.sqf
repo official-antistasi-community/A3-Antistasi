@@ -23,10 +23,6 @@ _gunShopArray set [6, []];
 
 private _gunShopData = createHashMap;
 
-
-
-
-
 _gunShopData set [A3A_IDC_GUN_SHOP_PRIMARY_TAB, (allRifles + allSniperRifles + allMachineGuns  + allSMGs + allShotguns)];
 _gunShopData set [A3A_IDC_GUN_SHOP_HANDGUN_TAB, (allHandguns)];
 
