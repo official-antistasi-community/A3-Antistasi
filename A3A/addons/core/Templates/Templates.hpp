@@ -945,6 +945,26 @@ class Templates
         lore = $STR_A3A_templates_lore_TKC;
     };
 
+        class 3CBF_MEC : 3CBF_Base
+    {
+        side = "Civ";
+        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        name = "3CB Middle Eastern";
+        file = "3CB_Civ_MEC";
+        maps[] = {"takistan","tem_anizay","kunduz"};
+        shortName = "Civilian";
+        lore = $STR_A3A_templates_lore_MEC;
+    };
+        class 3CBF_ADC : 3CBF_Base
+    {
+        side = "Civ";
+        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        name = "3CB African Desert";
+        file = "3CB_Civ_ADC";
+        maps[] = {"takistan","tem_anizay","kunduz"};
+        shortName = "Civilian";
+        lore = $STR_A3A_templates_lore_ADC;
+    };
     // ***************************** 3CB BAF *****************************
 
     class 3CBBAF_Base

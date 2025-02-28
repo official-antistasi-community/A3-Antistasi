@@ -10647,6 +10647,12 @@
         <Original>The remainder of the civilians who were unable to evacuate the combat zone, the Takistani civilians are always on alert and have learned not to trust anyone. Make sure you restore peace to their lands.</Original>
         <Russian>Оставшиеся мирные жители, которые не смогли эвакуироваться из зоны боевых действий, - такистанцы всегда начеку и научились никому не доверять. Убедитесь, что вы восстановили мир на их землях.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_MEC">
+        <Original>While the civilians are used to endless war, they are looking to live in peace.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_ADC">
+        <Original>Nothing less then the cradle of humanity, the last remants won't flee from hostilities.</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_TKM">
         <Original>The Takistani militia is an unexpectedly well-armed group of civilians who hold a significant opposition to the foreign occupation and support the acting government is attempting to use to bolster its ranks. They use a variety of scavenged weapons, commonly relying on bolt-action rifles.</Original>
         <Russian>Такистанское ополчение - неожиданно хорошо вооруженная группа гражданских лиц, выступающих против иностранной оккупации и поддержки, которую действующее правительство пытается использовать для укрепления своих рядов. Они используют разнообразное оружие, добытое в мусорных баках, в основном полагаясь на винтовки с продольно-скользящим затвором.</Russian>
