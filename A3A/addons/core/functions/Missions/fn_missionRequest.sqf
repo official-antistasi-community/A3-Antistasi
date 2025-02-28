@@ -104,6 +104,9 @@ switch (_type) do {
 	};
 
 	case "LOG": {
+		// role three dice
+		private _spawnGunShop = (floor random 12 ) + (floor random 12) + (floor random 12) + tierWar > 29;
+		if(_spawnGunShop && !bigAttackInProgress && tierWar > 3) exitWith {[[],"A3A_fnc_GSMission"] remoteExec ["A3A_fnc_scheduler",2]};
 		//Add unspawned outposts for ammo trucks, and seaports for salvage
 		_possibleMarkers = [seaports + outposts] call _findIfNearAndHostile;
 		_possibleMarkers = _possibleMarkers select {(_x in seaports) or (spawner getVariable _x != 0)};
