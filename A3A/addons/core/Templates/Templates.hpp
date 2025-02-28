@@ -927,7 +927,7 @@ class Templates
     class 3CBF_CHC : 3CBF_Base
     {
         side = "Civ";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_chc\flag\chc_flag_co.paa";
         name = "3CB Cherno";
         file = "3CB_Civ_CHC";
         shortName = "Civilian";
@@ -937,7 +937,7 @@ class Templates
     class 3CBF_TKC : 3CBF_Base
     {
         side = "Civ";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_tkc\flag\tkc_flag_co.paa";
         name = "3CB Takistan";
         file = "3CB_Civ_TKC";
         maps[] = {"takistan","tem_anizay","kunduz"};
@@ -948,7 +948,7 @@ class Templates
         class 3CBF_MEC : 3CBF_Base
     {
         side = "Civ";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_mec\flag\mec_flag_co.paa";
         name = "3CB Middle Eastern";
         file = "3CB_Civ_MEC";
         maps[] = {"takistan","tem_anizay","kunduz"};
@@ -958,7 +958,7 @@ class Templates
         class 3CBF_ADC : 3CBF_Base
     {
         side = "Civ";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_adc\flag\adc_flag_co.paa";
         name = "3CB African Desert";
         file = "3CB_Civ_ADC";
         maps[] = {"takistan","tem_anizay","kunduz"};
