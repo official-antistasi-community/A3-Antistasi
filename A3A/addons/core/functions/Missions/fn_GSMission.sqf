@@ -25,7 +25,9 @@ private _possibleLocationsOfSpawn = citiesX select {(getMarkerPos _x) distance (
 
 private _posDest = selectRandom _possibleLocationsOfSpawn;
 
-private _textX = localize "STR_A3A_fn_mission_gunshop_met_text";
+private _nameDest = [_posDest] call A3A_fnc_localizar;
+
+private _textX = format [localize "STR_A3A_fn_mission_gunshop_met_text", _nameDest];
 private _taskState = "CREATED";
 private _taskTitle = localize "STR_A3A_fn_mission_gunshop_met_title";
 private _taskIcon = "meet";
@@ -50,7 +52,7 @@ if(!A3A_GS_allowGuestCommander) then {
 }; 
 
 
-private _coolerPetros = [createGroup civilian, FactionGet(reb,"unitPetros"), getMarkerPos _posDest, [], 10, "NONE", _identity] call A3A_fnc_createUnit;
+private _coolerPetros = [createGroup teamPlayer, FactionGet(reb,"unitPetros"), getMarkerPos _posDest, [], 10, "NONE", _identity] call A3A_fnc_createUnit;
 // copy his drip. 
 private _notCoolPetrosLoadout = getUnitLoadout petros;
 _coolerPetros setUnitLoadout _notCoolPetrosLoadout;
@@ -61,7 +63,7 @@ private _garrisonGroups = [group _coolerPetros, getMarkerPos _posDest, 200] call
 [_taskId, "LOG", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _coolerPetros disableAI "ALL";
-_coolerPetros addAction [localize "STR_A3A_fn_init_initclient_addact_gunshop", {
+private _gsActionId = _coolerPetros addAction [localize "STR_A3A_fn_init_initclient_addact_gunshop", {
     if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {
         [localize "STR_A3A_fn_init_initclient_addact_gunshop", localize "STR_A3A_fn_init_initclient_buyveh_enemy"] call A3A_fnc_customHint;
     } else {
@@ -84,6 +86,7 @@ if((time > _timeout) || (!alive _coolerPetros)) exitWith {
 [_taskId, "LOG", "SUCCEEDED"] call A3A_fnc_taskSetState;
 [_taskId, "LOG", 600, true] spawn A3A_fnc_taskDelete;
 
+_coolerPetros removeAction _gsActionId;
 
 A3A_shoppingList params ["_totalCost", "_gunshopList"];
 
@@ -96,10 +99,8 @@ private _noCrate = (floor random 12 ) + (floor random 12) + (floor random 12) > 
 if(_noCrate) exitWith 
 {
 	private _possibleMarkers = [];
-	// only do the city convoys on flip?
 	private _markers = (airportsX + resourcesX + factories + seaports + outposts - blackListDest);
-	// Pre-filter the possible source bases to make this less n-squared
-	private _possibleBases = (airportsX + seaports + outposts) select { (getMarkerPos _x) distance (getMarkerPos respawnTeamPlayer) < distanceMission + 8000 };
+	private _possibleBases = (airportsX + seaports + outposts) select { (getMarkerPos _x) distance (getMarkerPos respawnTeamPlayer) < distanceMission + 10000 };
 	private _convoyPairs = [];
 	{
 		private _site = _x;
@@ -125,8 +126,8 @@ if(_noCrate) exitWith
 
  	  		if( _newDistance > _pick1Distance) then  
  	  		{ 
-			_args = _x; 
-			_pick1Distance = _newDistance; 
+				_args = _x; 
+				_pick1Distance = _newDistance; 
  	  		}; 
 	
 	
@@ -162,3 +163,5 @@ clearBackpackCargoGlobal _crate;
 
 
 _crate setPosASL _pos;
+
+[group _coolerPetros] spawn A3A_fnc_groupDespawner;
