@@ -9,10 +9,10 @@
 ["vehiclesCivCar", [
     "UK3CB_MEC_C_Ikarus", 0                    // bus, dangerously large
     ,"UK3CB_MEC_C_Datsun_Civ_Closed", 0.5
-    ,"UK3CB_MEC_C_Datsun_Civ_Open", 1.0            // cargo capable
+    ,"UK3CB_MEC_C_Datsun_Civ_Open", 1.0            // cargo-capable
     ,"UK3CB_MEC_C_Hatchback", 0.5
     ,"UK3CB_MEC_C_Hilux_Civ_Closed", 0.5
-    ,"UK3CB_MEC_C_Hilux_Civ_Open", 1.0            // cargo capable
+    ,"UK3CB_MEC_C_Hilux_Civ_Open", 1.0            // cargo-capable
     ,"UK3CB_MEC_C_Lada", 0.5
     ,"UK3CB_MEC_C_Lada_Taxi", 0.5
     ,"UK3CB_MEC_C_LR_Closed", 0.5        // land rovers
