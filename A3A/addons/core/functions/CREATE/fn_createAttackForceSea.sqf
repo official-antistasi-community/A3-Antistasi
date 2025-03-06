@@ -7,14 +7,14 @@ Environment: Scheduled (sleeps between unit spawns)
 
 Arguments:
     <SIDE> Side to create force for
-    <STRING> Marker name of source marker to spawn at
+    <STRING> Marker name of source marker to spawn at (for ships, can use any marker for that side)
     <POS or STRING> Position or marker of target location for attack force
     <STRING> Resource pool to use
     <INTEGER> Total number of vehicles to create
     <INTEGER> Number of attack/support vehicles to create
     <NUMBER> Optional, tier modifier to apply to vehicle selection (Default: 0)
     <STRING> Optional, troop type to use (Default: "Normal")
-    <ARRAY> Optional, position for the chosen dismount hardpoint. Needed for boats (Default: [0,0,0])
+    <ARRAY> Path of positions from landing point to deep sea
 
 Return array:
     <SCALAR> Resources spent
@@ -25,8 +25,7 @@ Return array:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_side", "_marker", "_target", "_resPool", "_vehCount", "_vehAttackCount", ["_tierMod", 0], ["_troopType", "Normal"],["_dismountPos",[0,0,0]]];
-diag_log [_side, _marker, _target, _resPool, _vehCount, _vehAttackCount, _tierMod, _troopType, _dismountPos];
+params ["_side", "_marker", "_target", "_resPool", "_vehCount", "_vehAttackCount", ["_tierMod", 0], ["_troopType", "Normal"], "_seaPath"];
 private _targpos = if (_target isEqualType []) then { _target } else { markerPos _target };
 
 private _resourcesSpent = 0;
@@ -39,10 +38,11 @@ private _transportBoats = _faction get "vehiclesTransportBoats";
 private _attackBoats = _faction get "vehiclesGunBoats";
 
 private _isTransport = (_vehAttackCount == 0); // gunboats spawned first to cover
+private _landPosBlacklist = [];
 
 for "_i" from 1 to _vehCount do {
     private _vehType = selectRandom ([_attackBoats, _transportBoats] select _isTransport);
-    private _vehData = [_vehType, _troopType, _resPool, [], _side, _marker, _targPos,_dismountPos] call A3A_fnc_createAttackVehicle;
+    private _vehData = [_vehType, _troopType, _resPool, _landPosBlacklist, _side, _marker, _targPos, _seaPath] call A3A_fnc_createAttackVehicle;
     if !(_vehData isEqualType []) exitWith {};          // couldn't create for some reason
 
     _vehicles pushBack (_vehData#0);

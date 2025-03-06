@@ -12,7 +12,7 @@
         _side: SIDE : The side of the attacker
         _markerOrigin: STRING : The name of the marker marking the origin
         _posDestination: ARRAY : Target position (ASL or ATL? probably used as 2d anyway)
-        _dismountPos: POSITION : Optional, needed for boats. The chosen dismount hardpoint
+        _seaPath: ARRAY : Optional, needed for boats. Path of positions from landing point to deep sea
 
     Returns:
         ARRAY : [_vehicle, _crewGroup, _cargoGroup, _landPosBlacklist]
@@ -22,11 +22,14 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_vehicleType", "_troopType", "_resPool", "_landPosBlacklist", "_side", "_markerOrigin", "_posDestination",["_dismountPos",[0,0,0]]];
+params ["_vehicleType", "_troopType", "_resPool", "_landPosBlacklist", "_side", "_markerOrigin", "_posDestination", ["_seaPath", []]];
 
 private _faction = Faction(_side);
-private _vehicle = [_markerOrigin, _vehicleType] call A3A_fnc_spawnVehicleAtMarker;
-
+private _vehicle = if (_vehicleType isKindOf "Ship") then {
+    [_vehicleType, _seaPath#-1, 100, 5, true] call A3A_fnc_safeVehicleSpawn;
+} else {
+    [_markerOrigin, _vehicleType] call A3A_fnc_spawnVehicleAtMarker;
+};
 if(isNull _vehicle) exitWith {objNull};
 
 // Fill cargo turrets with crew for attack helis
@@ -59,7 +62,7 @@ if (_expectedCargo >= 2 and !_isAttackHeli) then
         } forEach ("true" configClasses (_config >> "Turrets"));
     };
     private _cargoTurrets = [];
-private _blacklistTypes = ["LIB_Li2","LIB_C47_RAF","LIB_C47_Skytrain","LIB_C47_RAF_bob","LIB_C47_RAF_snafu"];
+    private _blacklistTypes = ["LIB_Li2","LIB_C47_RAF","LIB_C47_Skytrain","LIB_C47_RAF_bob","LIB_C47_RAF_snafu"];
     if !(_vehicleType in _blacklistTypes) then {
         [configFile >> "CfgVehicles" >> _vehicleType] call _fnc_addCargoTurrets;
     };
@@ -79,7 +82,7 @@ private _blacklistTypes = ["LIB_Li2","LIB_C47_RAF","LIB_C47_Skytrain","LIB_C47_R
     } forEach units _cargoGroup;
 };
 
-_landPosBlacklist = [_vehicle, _crewGroup, _cargoGroup, _posDestination, _markerOrigin, _landPosBlacklist,_dismountPos] call A3A_fnc_createVehicleQRFBehaviour;
+_landPosBlacklist = [_vehicle, _crewGroup, _cargoGroup, _posDestination, _markerOrigin, _landPosBlacklist, _seaPath] call A3A_fnc_createVehicleQRFBehaviour;
 ServerDebug_5("Spawn Performed: Created vehicle %1 with %2 crew (%3) and %4 cargo (%5)", typeof _vehicle, count units _crewGroup, _crewGroup, count units _cargoGroup, _cargoGroup);
 
 [_vehicle, _crewGroup, _cargoGroup, _landPosBlacklist];
