@@ -89,7 +89,7 @@ if (_vehicle isKindOf "Ship") then {
         };
         _landPosBlacklist pushBack _landPos;
 
-        private _vehWP0 = _crewGroup addWaypoint [_landPos, 0];
+        private _vehWP0 = _crewGroup addWaypoint [ASLtoATL _landPos, 0];
         _vehWP0 setWaypointType "TR UNLOAD";
         //_vehWP0 setWaypointCompletionRadius 200;
         _vehWP0 setWaypointBehaviour "AWARE";
@@ -97,7 +97,7 @@ if (_vehicle isKindOf "Ship") then {
     };
 
     if (_isAttack) then {
-        private _vehWP1 = _crewGroup addWaypoint [_seaPath#2, 0];
+        private _vehWP1 = _crewGroup addWaypoint [ASLtoATL _seaPath#2, 0];
         _vehWP1 setWaypointType "SAD";
         _vehWP1 setWaypointBehaviour "COMBAT";
     };

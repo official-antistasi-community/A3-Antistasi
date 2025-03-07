@@ -26,7 +26,9 @@ params ["_vehicleType", "_troopType", "_resPool", "_landPosBlacklist", "_side", 
 
 private _faction = Faction(_side);
 private _vehicle = if (_vehicleType isKindOf "Ship") then {
-    [_vehicleType, _seaPath#-1, 100, 5, true] call A3A_fnc_safeVehicleSpawn;
+    private _veh = [_vehicleType, _seaPath#-1, 100, 5, true] call A3A_fnc_safeVehicleSpawn;
+    _veh setDir (_seaPath#-1 getDir _seaPath#1);
+    _veh;
 } else {
     [_markerOrigin, _vehicleType] call A3A_fnc_spawnVehicleAtMarker;
 };

@@ -29,7 +29,7 @@ while { _pathlen < _travelDist } do
     // Find deepest point in 100-degree arc
     private _bestPos = [0,0,1e6];
     private _bestDepth = 1e6;
-    for "_offset" from -50 to +50 step 10 do {
+    for "_offset" from -50 to 50 step 10 do {
         private _testPos = ATLtoASL (_lastPos getPos [_testDist, _lastDir+_offset]);
 
         // second point contribution, in case of local minima

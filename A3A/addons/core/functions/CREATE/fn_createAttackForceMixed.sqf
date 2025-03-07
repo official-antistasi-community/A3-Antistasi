@@ -39,10 +39,11 @@ private _crewGroups = [];
 private _cargoGroups = [];
 
 // Decision to send a naval force
+private _boatCount = round (random 0.5 + _vehCount / 6);
 private _seaPath = [];
 private _seaTime = 0;
 
-if (_target isEqualType "" && (_faction get "vehiclesGunBoats") isNotEqualTo []) then {
+if (_boatCount > 0 && _target isEqualType "" && (_faction get "vehiclesGunBoats") isNotEqualTo []) then {
     _seaPath = [_target, 300, 2000] call A3A_fnc_findSeaPath;
     if (_seaPath isEqualTo []) exitWith {};
 
@@ -52,16 +53,16 @@ if (_target isEqualType "" && (_faction get "vehiclesGunBoats") isNotEqualTo [])
         _maxSpeed = _speed max _maxSpeed;
     } forEach (_faction get "vehiclesGunBoats");
     _seaTime = 3600 * 2 / _maxSpeed; // speed in km/h, 2km to travel, convert to seconds
+
+    _vehCount = 0 max (_vehCount - _boatCount);
 };
 
+
 private _fnc_spawnNavalAttack = {
-    ServerDebug_1("Attempting to perform naval spawn with path %1", _seaPath);
-    // For now, boats dont play into any strength calculation and just take resources
-    private _boatCount = round (_vehCount / 5);
     private _attackRatio = 0.3 + random 0.1 + tierWar/50;
     private _attackCount = round (_boatCount * _attackRatio);
     private _troops = ["Normal", "SpecOps"] select ("specops" in _modifiers);
-    ServerDebug_2("Attempting to spawn %1 sea vehicles including %2 attack", _boatCount, _attackCount);
+    ServerDebug_3("Attempting to spawn %1 sea vehicles including %2 attack with path %3", _boatCount, _attackCount, _seaPath);
 
     private _data = [_side, _airbase, _targPos, _resPool, _boatCount, _attackCount, _tier, _troops, _seaPath] call A3A_fnc_createAttackForceSea;
     _resourcesSpent = _resourcesSpent + _data#0;
