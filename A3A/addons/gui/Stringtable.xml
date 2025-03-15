@@ -32,9 +32,11 @@
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_guest_warning">
         <Original>As a guest commander you can't reduce arsenal limits below default, or below values set by members.</Original>
+        <Russian>Как приглашенный командир, вы не можете уменьшать лимиты арсенала ниже значений по умолчанию или ниже значений, установленных участниками.</Russian>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_hint_title">
         <Original>Arsenal Guest Limits</Original>
+        <Russian>Лимит Арсенала гостей</Russian>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_limit">
         <Original>Limit</Original>
@@ -66,6 +68,7 @@
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_reset_tooltip">
         <Original>Reset all items in this category to the default guest limit</Original>
+        <Russian>Сбросьте для всех товаров в этой категории лимит гостей по умолчанию</Russian>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_step">
         <Original>STEP</Original>
@@ -3054,6 +3057,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_player_money_text">
         <Original>Current money: € %1</Original>
+        <Russian>Текущий баланс: € %1</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_sell_vehicle">
         <Original>Sell</Original>
@@ -3946,6 +3950,7 @@
     <Container name="setup_dialog">
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_badFactions">
         <Original>The currently selected factions are not loaded.&lt;br/&gt;Go to the Factions tab and select available factions.</Original>
+        <Russian>Выбранные в данный момент фракции не загружены.&lt;br/&gt;Перейдите на вкладку Фракции и выберите доступные фракции.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_copy">
         <Original>Copy game with ID %1</Original>
@@ -3992,7 +3997,58 @@
         <Italian>%1 occupanti e %2 invasori?</Italian>
         <French>%1 occupants et %2 envahisseurs ?</French>
         <Korean>%1이(가) 점령군이고 %2이(가) 침략군입니까?</Korean>
+        <Russian>%1 оккупанты и %2 захватчики?</Russian>
         <Czech>%1 okupanti a %2 vetřelci?</Czech>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_ammoQuant">
+        <Original>Ammo quantity</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_backpack">
+        <Original>Backpack</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_close">
+        <Original>Close</Original>
+        <German>Schließen</German>
+        <Italian>Chiudi</Italian>
+        <Spanish>Cerrar</Spanish>
+        <French>Fermer</French>
+        <Korean>닫기</Korean>
+        <Russian>Закрыть</Russian>
+        <Polish>Zamknij</Polish>
+        <Czech>Zavřít</Czech>
+        <Portuguese>Fechar</Portuguese>
+        <Turkish>Yakın</Turkish>
+        <Chinesesimp>关闭</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_copyToAll">
+        <Original>Copy To All</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_headgear">
+        <Original>Headgear</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_priOptic">
+        <Original>Primary optic</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_priWeapon">
+        <Original>Primary weapon</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetAll">
+        <Original>Reset All</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetRole">
+        <Original>Reset Role</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_secWeapon">
+        <Original>Secondary weapon</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
+        <Original>Custom AI Loadouts</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_uniform">
+        <Original>Uniform</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_vest">
+        <Original>Vest</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_addonvics">
         <Original>Addon vehicles</Original>
@@ -4108,6 +4164,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_dlc">
         <Original>DLC and Addons</Original>
+        <Russian>DLC и Аддоны</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_faction_tab_button">
         <Original>Factions</Original>
@@ -4125,9 +4182,11 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_factionInfo">
         <Original>Faction Information</Original>
+        <Russian>Информация о фракции</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_infoPanel_header">
         <Original>%1 Information</Original>
+        <Russian>%1 Информация</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_invaders">
         <Original>Invaders</Original>
@@ -4257,6 +4316,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_prettyAddons">
         <Original>Required Addons: %1</Original>
+        <Russian>Требуется аддон: %1</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_rebels">
         <Original>Rebels</Original>
@@ -4372,9 +4432,11 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_toggleAddons_addons">
         <Original>Switch to Addons</Original>
+        <Russian>Переключить на аддон</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_toggleAddons_DLC">
         <Original>Switch to DLCs</Original>
+        <Russian>Переключить на ДЛС</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_use_new_namespace">
         <Original>Use New Save file</Original>
@@ -4389,45 +4451,6 @@
         <Portuguese>Usar novo ficheiro</Portuguese>
         <Turkish>Yeni kayıt dosyası kullan</Turkish>
         <Chinesesimp>使用新的存档文件</Chinesesimp>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
-        <Original>Custom AI Loadouts</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_priWeapon">
-        <Original>Primary weapon</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_secWeapon">
-        <Original>Secondary weapon</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_ammoQuant">
-        <Original>Ammo quantity</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_priOptic">
-        <Original>Primary optic</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_uniform">
-        <Original>Uniform</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_vest">
-        <Original>Vest</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_backpack">
-        <Original>Backpack</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_headgear">
-        <Original>Headgear</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_close">
-        <Original>Close</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_copyToAll">
-        <Original>Copy To All</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetRole">
-        <Original>Reset Role</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetAll">
-        <Original>Reset All</Original>
       </Key>
     </Container>
   </Package>
