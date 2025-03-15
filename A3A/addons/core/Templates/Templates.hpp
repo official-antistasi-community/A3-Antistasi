@@ -1709,7 +1709,7 @@ class Templates
     class PRACS_RACS_Base
     {
         requiredAddons[] = {"PRACS_Core"}; 
-        basepath = QPATHTOFOLDER(Templates\PRACS); 
+        basepath = QPATHTOFOLDER(Templates\Templates\PRACS); 
         logo = "PRACS_Core\Logo\ProjectRACS_mod_ca.paa"; // to be done
         maps[] = {"sara"};
         priority = 80;
@@ -1736,7 +1736,7 @@ class Templates
     class PRACS_SLA_Base
     {
         requiredAddons[] = {"PRACS_SLA_Core"}; 
-        basepath = QPATHTOFOLDER(Templates\PRACS); 
+        basepath = QPATHTOFOLDER(Templates\Templates\PRACS); 
         logo = "PRACS_SLA_Core\Logo\pracs_sla_mod_ca.paa";
         maps[] = {"sara"};
         priority = 80;
