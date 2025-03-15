@@ -1721,7 +1721,7 @@ class Templates
         flagTexture = "\PRACS_Core\Flags\KingdomofSahrani_co.paa";
         name = "PRACS RACS Arid";
         file = "PRACS_AI_RACS_Arid";
-        climate[] = {"Arid"};
+        climate[] = {"arid"};
         shortName = "RACS";
         lore = $STR_A3A_templates_lore_CUP_AI_RACS;
     };
@@ -1747,7 +1747,7 @@ class Templates
         side = "Inv";
         flagTexture = "\PRACS_SLA_Core\Flags\flag_north_co.paa";
         name = "PRACS SLA Arid";
-        climate[] = {"Arid"};
+        climate[] = {"arid"};
         file = "PRACS_AI_SLA_Arid";
         shortName = "SLA";
         lore = $STR_A3A_templates_lore_CUP_AI_SLA;
@@ -1765,7 +1765,7 @@ class Templates
         side = "Inv";
         flagTexture = "\PRACS_SLA_Core\Flags\flag_north_co.paa";
         name = "PRACS SLA Guards Arid";
-        climate[] = {"Arid"};
+        climate[] = {"arid"};
         file = "PRACS_AI_SLA_Rev_Guards_Arid";
         shortName = "SLA Guards";
         lore = $STR_A3A_templates_lore_CUP_AI_SLA;

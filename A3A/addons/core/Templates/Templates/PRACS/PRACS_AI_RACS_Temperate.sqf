@@ -76,7 +76,7 @@
 ["minefieldAT", ["rhsusf_mine_M19"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["rhsusf_mine_m14"]] call _fnc_saveToTemplate;
 
-#include "RHS_Vehicle_Attributes.sqf"
+#include "..\RHS\RHS_Vehicle_Attributes.sqf"
 
 /////////////////////
 ///  Identities   ///
