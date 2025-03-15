@@ -36,6 +36,7 @@
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_hint_title">
         <Original>Arsenal Guest Limits</Original>
+        <German>Arsenal Gast Limit</German>
         <Russian>Лимит Арсенала гостей</Russian>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_limit">

@@ -47,6 +47,7 @@
     <Container name="A3A_fn_ai">
       <Key ID="STR_A3A_fn_ai_artySupport_artyStrike">
         <Original>Mortar Strike</Original>
+        <German>Mörserschlag</German>
         <French>Frappe d'artillerie</French>
         <Korean>포병 타격</Korean>
         <Russian>Артиллерийский удар</Russian>

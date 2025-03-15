@@ -673,6 +673,7 @@
       </Key>
       <Key ID="STR_HR_GRG_Generic_SellVeh">
         <Original>Sell Vehicle</Original>
+        <German>Fahrzeug verkaufen</German>
         <French>Vendre véhicule</French>
         <Russian>Продать</Russian>
       </Key>
