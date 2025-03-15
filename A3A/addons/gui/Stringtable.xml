@@ -4390,8 +4390,6 @@
         <Turkish>Yeni kayıt dosyası kullan</Turkish>
         <Chinesesimp>使用新的存档文件</Chinesesimp>
       </Key>
-    </Container>
-    <Container name="setup_dialog">
       <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
         <Original>Custom AI Loadouts</Original>
       </Key>
