@@ -146,7 +146,7 @@ class HR_GRG_VehicleSelect
             w = 10 * GRID_NOUISCALE_W;
             h = 4 * GRID_NOUISCALE_H;
             text = HideVicIcon;
-            tooltip = $STR_HR_GRG_Generic_Cars_Undercover;
+            tooltip = $STR_HR_GRG_Generic_Cars_Сivilian;
             action = "[0] call HR_GRG_fnc_switchCategory;";
         };
         class HR_GRG_BttnCars: HR_GRG_BttnCarsUndercover
