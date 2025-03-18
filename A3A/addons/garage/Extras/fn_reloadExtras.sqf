@@ -73,7 +73,7 @@ if (_vehNodes isEqualType []) then {
             _ctrlExtraMounts lbSetTextRight [_index, format ["Size: %1", _size]];
             Trace_4("Mount Added to list | Class: %1 | UID: %2 | Checked: %3 | Size: %4", _staticClass, _x, (_checkedOut isEqualTo HR_GRG_PlayerUID), _type);
         };
-    } forEach (HR_GRG_Vehicles#7);//statics
+    } forEach (HR_GRG_Vehicles#8);//statics
     lbSort _ctrlExtraMounts;
 };
 if (_reloadMounts) then { [] call HR_GRG_fnc_reloadMounts };

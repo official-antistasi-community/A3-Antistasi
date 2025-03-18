@@ -39,7 +39,7 @@
     License: APL-ND
 */
 
-#define EXPECTED_LENGTH 8
+#define EXPECTED_LENGTH 9
 
 if (!isServer) exitWith {false};
 #include "defines.inc"
@@ -54,18 +54,16 @@ private _validSave = _save params [
 ];
 
 // Garage will change from 5 categories to 8 categories at some point. This code will adapt older saved garages to the new standard.
-if (count _garage != EXPECTED_LENGTH) then {
-    Info_1("Reformatting an existing saved garage to %1 categories. This happens after an update and will not run again.",EXPECTED_LENGTH)
+Info_1("Reformatting an existing saved garage to %1 categories. This happens after an update and will not run again.",EXPECTED_LENGTH)
+{
+    private _dataHM = _x;
     {
-        private _dataHM = _x;
-        {
-            private _data = _dataHM get _x;
-            _newCat = [_data#1] call HR_GRG_fnc_getCatIndex;
-            _newGarage#_newCat set [_x, _data];
-        } forEach _x; // each vehicle
-    } forEach _garage; // each cat
-    _garage = _newGarage;
-};
+        private _data = _dataHM get _x;
+        _newCat = [_data#1] call HR_GRG_fnc_getCatIndex;
+        _newGarage#_newCat set [_x, _data];
+    } forEach _x; // each vehicle
+} forEach _garage; // each cat
+_garage = _newGarage;
 
 HR_GRG_Vehicles = +_garage;
 HR_GRG_UID = +_uid;

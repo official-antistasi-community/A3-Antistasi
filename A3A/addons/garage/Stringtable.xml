@@ -563,6 +563,17 @@
         <Turkish>Gemiler</Turkish>
         <Chinesesimp>船只</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Generic_Source">
+        <Original>Resource vehicles</Original>
+        <French>Véhicules de ressources</French>
+        <Russian>Ресурсные транспортные средства</Russian>
+        <Korean>자원 차량</Korean>
+        <Spanish>Vehículos de recursos</Spanish>
+        <Chinesesimp>资源车辆</Chinesesimp>
+        <Czech>Zdrojová vozidla</Czech>
+        <Italian>Veicoli delle risorse</Italian>
+        <Polish>Pojazdy zasobów</Polish>
+      </Key>
       <Key ID="STR_HR_GRG_Generic_Cancel">
         <Original>Cancel</Original>
         <German>Abbrechen</German>

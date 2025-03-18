@@ -23,7 +23,7 @@ FIX_LINE_NUMBERS()
 Trace("Reloading mounts");
 private _disp = findDisplay HR_GRG_IDD_Garage;
 private _ctrl = _disp displayCtrl HR_GRG_IDC_ExtraMounts;
-private _cat = HR_GRG_vehicles#7;
+private _cat = HR_GRG_vehicles#8;
 //remove old statics
 {
     [HR_GRG_previewVeh, true] call A3A_Logistics_fnc_unload;
@@ -52,7 +52,7 @@ private _usedCapacity = 0;
 {
     //load preview static onto preview vehicle
     _x params ["_class", "_vehUID"];
-    private _staticData = (HR_GRG_Vehicles#7) get _vehUID;
+    private _staticData = (HR_GRG_Vehicles#8) get _vehUID;
     private _static = _class createVehicleLocal [random 100,random 100,10000 + random 10000];
     [_static, _staticData#4] call HR_GRG_fnc_setState;
     _static enableSimulation false;

@@ -34,6 +34,9 @@ switch (true) do {
     //filter blacklist first
     case (_class in HR_GRG_blacklistVehicles): { -2 };
     //vanilla
+    case ([_class] call HR_GRG_fnc_isAmmoSource): { 7 };
+    case ([_class] call HR_GRG_fnc_isFuelSource): { 7 };
+    case ([_class] call HR_GRG_fnc_isRepairSource): { 7 };
     case (_editorCat isEqualTo "EdSubcat_Cars"): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover) 
     case (_editorCat isEqualTo "EdSubcat_APCs"): { 2 };
     case (_editorCat in ["EdSubcat_Tanks","EdSubcat_AAs","EdSubcat_Artillery"]): { 3 };
@@ -41,7 +44,7 @@ switch (true) do {
     //case (getNumber (configOf _vehicle >> "vtol") > 0): { 5 };
     case (_editorCat in ["EdSubcat_Planes"] && (getNumber (_vtolConfig >> "vtol") == 0)): { 5 };
     case (_editorCat in ["EdSubcat_Boats","EdSubcat_Submersibles"]): { 6 };
-    case (_editorCat isEqualTo "EdSubcat_Turrets"): { 7 };
+    case (_editorCat isEqualTo "EdSubcat_Turrets"): { 8 };
 
     //rhs
     case (_editorCat in ["rhs_EdSubcat_car", "rhs_EdSubcat_truck", "rhs_EdSubcat_mrap"]): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover)
@@ -61,7 +64,7 @@ switch (true) do {
     case (_class isKindOf "Helicopter"): { 4 };
     case (_class isKindOf "Plane"): { 5 };
     case (_class isKindOf "Ship"): { 6 };
-    case (_class isKindOf "staticWeapon"): { 7 }; //some non-vanilla artillery is statics
+    case (_class isKindOf "staticWeapon"): { 8 }; //some non-vanilla artillery is statics
 
     default { -1 };
 };
