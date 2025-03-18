@@ -487,9 +487,9 @@
         <Turkish>Uçak</Turkish>
         <Chinesesimp>飞行器</Chinesesimp>
       </Key>
-      <Key ID="STR_HR_GRG_Generic_Cars_Undercover">
-        <Original>Undercover</Original>
-        <Russian>Под прикрытием</Russian>
+      <Key ID="STR_HR_GRG_Generic_Cars_Сivilian">
+        <Original>Сivilian vehicles</Original>
+        <Russian>Гражданская техника</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Generic_APC">
         <Original>APC/IFV</Original>
