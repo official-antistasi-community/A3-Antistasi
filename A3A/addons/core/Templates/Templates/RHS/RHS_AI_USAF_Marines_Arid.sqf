@@ -436,7 +436,7 @@ _militiaLoadoutData set ["rifles", [
 ["rhs_weap_m14_ris", "", "rhsusf_acc_wmx_bk", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["carbines", [
-["rhs_weap_m4a1_carryhandle", "", "rhsusf_acc_wmx_bk", "", ["rhs_mag_30Rnd_556x45_M855_Stanag", "rhs_mag_30Rnd_556x45_M855_Stanag", "rhs_mag_30Rnd_556x45_M855_Stanag_Tracer_Red"], [], ""]
+["rhs_weap_m4_carryhandle", "", "rhsusf_acc_wmx_bk", "", ["rhs_mag_30Rnd_556x45_M855_Stanag", "rhs_mag_30Rnd_556x45_M855_Stanag", "rhs_mag_30Rnd_556x45_M855_Stanag_Tracer_Red"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
 ["rhs_weap_m16a4_carryhandle_M203", "", "rhsusf_acc_wmx_bk", "", ["rhs_mag_30Rnd_556x45_M855_Stanag", "rhs_mag_30Rnd_556x45_M855_Stanag", "rhs_mag_30Rnd_556x45_M855_Stanag_Tracer_Red"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""],
@@ -480,6 +480,44 @@ private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["vests", ["rhsusf_spc_crewman"]];
 _pilotLoadoutData set ["helmets", ["rhsusf_hgu56p_black", "rhsusf_hgu56p_mask_black", "rhsusf_hgu56p_visor_black", "rhsusf_hgu56p_visor_mask_black"]];
 
+if (isClass (configFile >> "CfgPatches" >> "UK3CB_Factions_Vehicles_SUV")) then {
+    
+    (_militiaLoadoutData get "rifles") append [
+    ["UK3CB_M16A2", "", "", "", ["rhs_mag_30Rnd_556x45_M193_Stanag", "rhs_mag_30Rnd_556x45_M193_Stanag", "rhs_mag_30Rnd_556x45_M196_Stanag_Tracer_Red"], [], ""],
+    ["UK3CB_M16A3", "", "", "", ["rhs_mag_30Rnd_556x45_M193_Stanag", "rhs_mag_30Rnd_556x45_M193_Stanag", "rhs_mag_30Rnd_556x45_M196_Stanag_Tracer_Red"], [], ""]
+    ];
+    (_militiaLoadoutData get "carbines") append [
+    ["UK3CB_M16A2", "", "", "", ["rhs_mag_30Rnd_556x45_M193_Stanag", "rhs_mag_30Rnd_556x45_M193_Stanag", "rhs_mag_30Rnd_556x45_M196_Stanag_Tracer_Red"], [], ""]
+    ];
+    (_militiaLoadoutData get "grenadeLaunchers") append [
+    ["UK3CB_M16A2_UGL", "", "", "", ["rhs_mag_30Rnd_556x45_M193_Stanag", "rhs_mag_30Rnd_556x45_M193_Stanag", "rhs_mag_30Rnd_556x45_M196_Stanag_Tracer_Red"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""],
+    ["UK3CB_M16A3_UGL", "", "", "", ["rhs_mag_30Rnd_556x45_M193_Stanag", "rhs_mag_30Rnd_556x45_M193_Stanag", "rhs_mag_30Rnd_556x45_M196_Stanag_Tracer_Red"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""]
+    ];
+    (_militiaLoadoutData get "SMGs") append [
+    ["UK3CB_MP5A2", "", "uk3cb_acc_surefiregrip", "", ["UK3CB_MP5_30Rnd_9x19_Magazine", "UK3CB_MP5_30Rnd_9x19_Magazine_R", "UK3CB_MP5_30Rnd_9x19_Magazine_RT"], [], ""],
+    ["UK3CB_MP5N", "", "rhsusf_acc_wmx_bk", "", ["UK3CB_MP5_30Rnd_9x19_Magazine", "UK3CB_MP5_30Rnd_9x19_Magazine_R", "UK3CB_MP5_30Rnd_9x19_Magazine_RT"], [], ""]
+    ];
+    (_militiaLoadoutData get "machineGuns") append [
+    ["UK3CB_M60", "", "", "", ["UK3CB_M60_100rnd_762x51", "UK3CB_M60_100rnd_762x51_R", "UK3CB_M60_100rnd_762x51_RM", "UK3CB_M60_100rnd_762x51_RT"], [], ""]
+    ];
+    (_militiaLoadoutData get "marksmanRifles") append [
+    ["UK3CB_M21", "", "", "uk3cb_optic_artel_m14", ["UK3CB_M14_20rnd_762x51", "UK3CB_M14_20rnd_762x51_R", "UK3CB_M14_20rnd_762x51_RT"], [], ""]
+    ];
+
+    (_pilotLoadoutData get "SMGs") append [
+    ["UK3CB_MP5K", "", "", "", ["UK3CB_MP5_30Rnd_9x19_Magazine", "UK3CB_MP5_30Rnd_9x19_Magazine_R", "UK3CB_MP5_30Rnd_9x19_Magazine_RT"], [], ""],
+    ["UK3CB_MP5K", "", "", "", ["UK3CB_MP5_30Rnd_9x19_Magazine", "UK3CB_MP5_30Rnd_9x19_Magazine_R", "UK3CB_MP5_30Rnd_9x19_Magazine_RT"], [], ""],
+    ["UK3CB_MP5K", "", "", "", ["UK3CB_MP5_30Rnd_9x19_Magazine", "UK3CB_MP5_30Rnd_9x19_Magazine_R", "UK3CB_MP5_30Rnd_9x19_Magazine_RT"], [], ""],
+    ["UK3CB_MP5K", "", "", "", ["UK3CB_MP5_30Rnd_9x19_Magazine", "UK3CB_MP5_30Rnd_9x19_Magazine_R", "UK3CB_MP5_30Rnd_9x19_Magazine_RT"], [], ""]
+    ];
+
+    (_policeLoadoutData get "SMGs") append [
+    ["UK3CB_MP510", "", "rhsusf_acc_wmx_bk", "rhsusf_acc_compm4", ["UK3CB_MP5_30Rnd_10_Magazine", "UK3CB_MP5_30Rnd_10_Magazine_R", "UK3CB_MP5_30Rnd_10_Magazine_RT"], [], ""],
+    ["UK3CB_MP510", "", "rhsusf_acc_wmx_bk", "rhsusf_acc_mrds", ["UK3CB_MP5_30Rnd_10_Magazine", "UK3CB_MP5_30Rnd_10_Magazine_R", "UK3CB_MP5_30Rnd_10_Magazine_RT"], [], ""],
+    ["UK3CB_MP5A2", "", "uk3cb_acc_surefiregrip", "rhsusf_acc_T1_high", ["UK3CB_MP5_30Rnd_9x19_Magazine", "UK3CB_MP5_30Rnd_9x19_Magazine_R", "UK3CB_MP5_30Rnd_9x19_Magazine_RT"], [], ""],
+    ["UK3CB_MP5A2", "", "uk3cb_acc_surefiregrip", "rhsusf_acc_eotech_xps3", ["UK3CB_MP5_30Rnd_9x19_Magazine", "UK3CB_MP5_30Rnd_9x19_Magazine_R", "UK3CB_MP5_30Rnd_9x19_Magazine_RT"], [], ""]
+    ];
+};
 /////////////////////////////////
 //    Unit Type Definitions    //
 /////////////////////////////////

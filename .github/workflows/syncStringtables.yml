@@ -28,7 +28,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install antistasi_translation_sync package
-        run: pip install "Tools/antistasi_translation_sync-0.5.0-py3-none-any.whl"
+        run: pip install "Tools/antistasi_translation_sync-0.6.1-py3-none-any.whl"
 
 
       - name: actual syncing

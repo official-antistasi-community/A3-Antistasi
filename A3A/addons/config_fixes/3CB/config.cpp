@@ -11,7 +11,8 @@ class CfgPatches
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"A3_Data_F_AoW_Loadorder","UK3CB_Factions_Vehicles_SUV"};
+        requiredAddons[] = {"A3_Data_F_AoW_Loadorder","UK3CB_Factions_Vehicles_SUV",
+        "UK3CB_Factions_Weapons_AUG","UK3CB_Factions_Weapons_M14","UK3CB_Factions_Weapons_MG3"};
         author = AUTHOR;
         authors[] = { AUTHORS };
         authorUrl = "";

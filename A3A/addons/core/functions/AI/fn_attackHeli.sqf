@@ -1,6 +1,6 @@
 /*  Persistent AI script to make enemy attack helis behave better
     Prevents helis giving enemies an easy kill on the first pass, and hovering once they run out of targets
-
+    Also gives the heli a custom loadout if it exists
 Scope: Server or HC
 Environment: Spawned
 
@@ -19,9 +19,9 @@ Arguments:
 FIX_LINE_NUMBERS()
 
 params ["_vehicle", "_group", "_targPos"];
-
 // Set script handle so abort routines can remove it later
 _group setVariable ["A3A_AIScriptHandle", _thisScript];
+[_vehicle, "HELICOPTER"] call A3A_fnc_setPlaneLoadout;
 
 while {count waypoints _group > 0} do { deleteWaypoint [_group, 0] };
 _group setBehaviourStrong "COMBAT";

@@ -1,3 +1,32 @@
+/*
+Maintainer: Not Caleb Serafin, somebody else pls
+    Controls a high-command squad.
+    Limitations and recommendations are currently unknown.
+
+Arguments:
+    ARRAY<GROUP> Backwards compatibility.
+
+Scope: Client, Global Arguments, Global Effect
+Environment: Scheduled
+Public: Yes
+
+Example:
+    // Easy use.
+    private _selectedSquads = hcSelected player;
+    if (count _selectedSquads == 1) then {
+        [_selectedSquads] spawn A3A_fnc_controlHCSquad;
+    };
+
+    // Intermediate
+    private _display = findDisplay A3A_IDD_MAINDIALOG;
+    private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
+    private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+    if (_group isNotEqualTo grpNull) then {
+        closeDialog 1;
+        [[_group]] spawn A3A_fnc_controlHCSquad;
+    }
+*/
+
 private _titleStr = localize "STR_A3A_fn_reinf_controlHQSquad_title";
 
 if (player != theBoss) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_controlHQSquad_no_commander"] call A3A_fnc_customHint;};

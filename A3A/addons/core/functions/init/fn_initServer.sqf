@@ -17,6 +17,7 @@ if (call A3A_fnc_modBlacklist) exitWith {};
 
 // hide all the HQ objects
 {
+    _x enableRopeAttach false;
     _x allowDamage false;
     _x hideObjectGlobal true;
 } forEach [boxX, flagX, vehicleBox, fireX, mapX, petros];
@@ -25,6 +26,7 @@ switch (toLower worldname) do {
 	case "cam_lao_nam": {};
 	case "vn_khe_sanh": {mapX setObjectTextureGlobal [0,"Pictures\Mission\whiteboard.paa"];};
 	case "spe_normandy": {mapX setObjectTextureGlobal [0,"Pictures\Mission\whiteboard.paa"];};
+	case "spe_mortain": {mapX setObjectTextureGlobal [0,"Pictures\Mission\whiteboard.paa"];};
 	default {mapX setObjectTextureGlobal [0,"Pictures\Mission\whiteboard.jpg"];};
 };
 
@@ -229,7 +231,14 @@ call A3A_fnc_createPetros;
 //HandleDisconnect doesn't get 'owner' param, so we can't use it to handle headless client disconnects.
 addMissionEventHandler ["HandleDisconnect",{_this call A3A_fnc_onPlayerDisconnect;false}];
 //PlayerDisconnected doesn't get access to the unit, so we shouldn't use it to handle saving.
-addMissionEventHandler ["PlayerDisconnected",{_this call A3A_fnc_onHeadlessClientDisconnect;false}];
+addMissionEventHandler ["PlayerDisconnected",{
+    // Remove player from arsenal in case they disconnected while in it
+    private _temp = server getVariable ["jna_playersInArsenal",[]];
+    _temp = _temp - [param [4]];
+    server setVariable ["jna_playersInArsenal",_temp,true];
+    _this call A3A_fnc_onHeadlessClientDisconnect;
+    false;
+}];
 
 addMissionEventHandler ["BuildingChanged", {
     params ["_oldBuilding", "_newBuilding", "_isRuin"];
@@ -258,7 +267,7 @@ addMissionEventHandler ["EntityKilled", {
 
     if !(isNil {_victim getVariable "ownerSide"}) then {
         // Antistasi-created vehicle
-        [_victim, _killerSide, false] call A3A_fnc_vehKilledOrCaptured;
+        [_victim, _killerSide, false, _killer] call A3A_fnc_vehKilledOrCaptured;
         [_victim] spawn A3A_fnc_postmortem;
     };
 }];
@@ -303,13 +312,14 @@ if (A3A_hasACE) then {
 };
 
 
+A3A_startupState = "completed"; publicVariable "A3A_startupState";
 serverInitDone = true; publicVariable "serverInitDone";
 Info("Setting serverInitDone as true");
-A3A_startupState = "completed"; publicVariable "A3A_startupState";
 
 
 // ********************* Initialize loops *******************************************
 
+[] spawn A3A_fnc_postmortemLoop;                    // Postmortem cleanup loop
 [] spawn A3A_fnc_distance;                          // Marker spawn loop
 [] spawn A3A_fnc_resourcecheck;                     // 10-minute loop
 [] spawn A3A_fnc_aggressionUpdateLoop;              // 1-minute loop

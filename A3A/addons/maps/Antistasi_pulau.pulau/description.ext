@@ -1,0 +1,41 @@
+#include "..\missionDescription\master.hpp"
+
+OnLoadName = $STR_antistasi_mission_info_pulau_mapname_short_text;
+OnLoadMission = $STR_antistasi_mission_info_pulau_blurb_text;
+briefingName = $STR_antistasi_mission_info_pulau_mapname_text;
+overviewText = $STR_antistasi_mission_info_pulau_description_text;
+loadScreen = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
+overviewPicture = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
+
+class CfgNotifications
+{
+    #include "..\missionDescription\CfgNotificationsContents.hpp"
+};
+
+class CfgDebriefing {
+    #include "..\missionDescription\CfgDebriefingContents.hpp"
+	class End1
+	{
+		title = "V I C T O R Y";
+		subtitle = "Pulau is Ours!";
+		description = "The population of Pulau loves you!<br/>The SDK brave soldiers have proven their valour, and Petros, Paluas new Prime Minister, could at last to have a nice holiday. A deserved rest in a Greek island with drinks and fine food.";
+		picture = "n_inf";
+		pictureColor[] = {0.0,0.5,0.0,1};
+	};
+    class petrosDead
+    {
+        title = "Petros is Dead";
+        subtitle = "Petros is Dead";
+        description = "Congratulations!: Petros is Dead. Now with Syndikat without a leader, you may think about joining them, and free Pulau";
+        picture = "b_unknown";
+        pictureColor[] = {0.5,0.0,0.0,1};
+    };
+    class destroyedSites
+    {
+        title = "Pulau is Destroyed";
+        subtitle = "Pulau got Destroyed by OPFOR";
+        description = "One third of the population in Pulau has been murdered by OPFOR.<br/>Pulau no longer exists, nobody wants to live here.";
+        picture = "b_unknown";
+        pictureColor[] = {0.5,0.0,0.0,1};
+    };
+};

@@ -37,11 +37,12 @@ FIX_LINE_NUMBERS()
 private _layer = ["A3A_infoCenter"] call BIS_fnc_rscLayer;
 
 private _titleStr = localize "STR_A3A_fn_undercover_title";
-private _result = [] call A3A_fnc_canGoUndercover;
+([] call A3A_fnc_canGoUndercover) params ["_canUndercover", "_reasonNotEnum", "_shortReasonNot", "_longReasonNot"];
 
-if(!(_result select 0)) exitWith
+if(!_canUndercover) exitWith
 {
-    if((_result select 1) == "Spotted by enemies") then
+    [localize "STR_A3A_fn_undercover_title", _longReasonNot] call A3A_fnc_customHint;
+    if(_reasonNotEnum == 15) then // Spotted by enemies
     {
         if !(isNull (objectParent player)) then
         {

@@ -69,10 +69,13 @@ private _classWeightsHM = call {
     // Shortcut this for air targets
     if (_target isKindOf "Air") exitWith { createHashMapFromArray [["AREA", 0], ["TROOPS", 0], ["TARGET", 1]] };
 
-    // AREA has stronger reduction than TROOPS but over a smaller area
-    private _weightArea = 1;
+    // Some general aggro weighting for area supports
+    private _aggro = [aggressionInvaders, aggressionOccupants] select (_side == Occupants);
+    private _weightArea = 0.5 + (_aggro/200);
     private _weightTarget = 1;
     private _weightTroops = 1;
+
+    // AREA has stronger reduction than TROOPS but over a smaller area
     {
         _x params ["_sside", "_btype", "_starg", "_endtime", "_dur", "_pow"];
         if (_sside != _side or time >= _endtime) then { continue };

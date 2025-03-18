@@ -57,50 +57,26 @@ private _airportWarningHeight = 750;
 
 //Initialize needed variables
 private _inWarningRangeOutpost = [];
-private _inDetectionRangeOutpost = [];
 private _inWarningRangeAirport = [];
-private _inDetectionRangeAirport = [];
 private _vehicleIsUndercover = false;
 private _supportCallAt = -1;
 private _vehPos = [];
 
 private _fn_sendSupport =
 {
-    params ["_vehicle", "_marker"];
-
+    params ["_vehicle", "_marker", "_threat"];
     private _markerSide = sidesX getVariable [_marker, sideUnknown];
-    //Reveal vehicle to all groups of the side so they can take actions
-/*    {
-        if(side _x == _markerSide) then
-        {
-            _x reveal [_vehicle, 4];            // TODO: doesn't actually work, needs remoteExec
-        };
-    } forEach allGroups;
-*/
-    //Take actions against the aircraft
+
+    ServerDebug_2("Vehicle %1 violated airspace of marker %2", typeof _vehicle, _marker);
+
+    // Add threat to vehicle on server side. Hopefully faster than the requestSupport call
+    [_markerSide, false, _threat, _vehicle] remoteExecCall ["A3A_fnc_addRecentDamage", 2];
+
     // Let support system decide whether it's worth reacting to
     private _revealValue = [getMarkerPos _marker, _markerSide] call A3A_fnc_calculateSupportCallReveal;
     [_markerSide, _vehicle, markerPos _marker, 4, _revealValue] remoteExec ["A3A_fnc_requestSupport", 2];
 
-/*
-    switch (_airType) do
-    {
-        case (MIL_HELI):
-        {
-            Debug_3("Rebel military helicopter %1 detected by %2 (side %3), sending support now!", _vehicle, _marker, _markerSide);
-            [_vehicle, _markerSide, markerPos _marker, 4, _revealValue] remoteExec ["A3A_fnc_requestSupport", 2];
-        };
-        case (JET):
-        {
-            Debug_3("Rebel jet %1 detected by %2 (side %3), sending support now!", _vehicle, _marker, _markerSide);
-            [_vehicle, 4, ["ASF", "SAM"], _markerSide, _revealValue] remoteExec ["A3A_fnc_sendSupport", 2];
-        };
-        default
-        {
-            Debug_3("Rebel civil helicopter %1 detected by %2 (side %3), revealed for all groups!", _vehicle, _marker, _markerSide);
-        };
-    };
-*/
+    _supportCallAt = time + 30;
 };
 
 private _fn_checkNoFlyZone =
@@ -141,6 +117,9 @@ while {_player in crew _vehicle && alive _vehicle} do
 
     // Only run the checks for the vehicle's commander
     if (_player != effectiveCommander _vehicle) then { continue };
+
+    // If we already made a call, wait until the timeout
+    if (time < _supportCallAt) then { continue };
 
     //Check undercover status
     _vehicleIsUndercover = captive ((crew _vehicle) select 0);
@@ -196,40 +175,23 @@ while {_player in crew _vehicle && alive _vehicle} do
     }
     else
     {
-        //Vehicles will be attacked instantly once detected
-
         //Check for nearby airports
         private _airportsInRange = [_enemyAirports, _vehPos, _airportDetectionRange, _airportDetectionHeight] call _fn_getMarkersInRange;
 
-        //newAirports will contain all airports which just detected the aircraft
-        private _newAirports = _airportsInRange - _inDetectionRangeAirport;
-        _inDetectionRangeAirport = _airportsInRange;
-
-        if(count _newAirports > 0) then
+        if(count _airportsInRange > 0) then
         {
             //Vehicle detected by another airport (or multiple, lucky in that case)
-            [_vehicle, _newAirports select 0] call _fn_sendSupport;
-            _supportCallAt = time + 300;
-        }
-        else
+            [_vehicle, _airportsInRange select 0, 30] call _fn_sendSupport;
+            continue;
+        };
+
+        //Check for nearby outposts
+        private _outpostsInRange = [_enemyOutposts, _vehPos, _outpostDetectionRange, _outpostDetectionHeight] call _fn_getMarkersInRange;
+
+        if(count _outpostsInRange > 0) then
         {
-            //No airport near, to save performance we only check outpost if they would be able to send support
-            if(time > _supportCallAt) then
-            {
-                //Check for nearby outposts
-                private _outpostsInRange = [_enemyOutposts, _vehPos, _outpostDetectionRange, _outpostDetectionHeight] call _fn_getMarkersInRange;
-
-                //Same as above
-                private _newOutposts = _outpostsInRange - _inDetectionRangeOutpost;
-                _inDetectionRangeOutpost = _outpostsInRange;
-
-                if(count _newOutposts > 0) then
-                {
-                    //Vehicle detected by another outpost, call support if possible
-                    [_vehicle, _newOutposts select 0] call _fn_sendSupport;
-                    _supportCallAt = time + 300;
-                };
-            };
+            //Vehicle detected by another outpost, call support if possible
+            [_vehicle, _outpostsInRange select 0, 10] call _fn_sendSupport;
         };
     };
 };

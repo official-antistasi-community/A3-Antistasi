@@ -36,7 +36,7 @@
 ["vehiclesGunBoats", ["UK3CB_MDF_B_RHIB_Gunboat"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["UK3CB_B_AAV_US_WDL"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["UK3CB_KDF_B_Su25SM_CAS"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["UK3CB_KDF_B_Su25SM_CAS", "UK3CB_ION_B_Desert_T28Trojan_CAS"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesAA", ["UK3CB_KDF_B_MIG29SM"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["RHS_C130J"]] call _fnc_saveToTemplate;
 

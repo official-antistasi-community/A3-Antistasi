@@ -38,6 +38,8 @@ if (isServer) then {
 	["killZones"] call A3A_fnc_getStatVariable;
 	["controlsSDK"] call A3A_fnc_getStatVariable;
 	["bombRuns"] call A3A_fnc_getStatVariable;
+	["arsenalLimits"] call A3A_fnc_getStatVariable;
+	["rebelLoadouts"] call A3A_fnc_getStatVariable;
 	["jna_dataList"] call A3A_fnc_getStatVariable;
 	//===========================================================================
 

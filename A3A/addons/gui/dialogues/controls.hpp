@@ -57,6 +57,11 @@ class A3A_Text : A3A_CtrlDefault
     colorBackground[] = A3A_COLOR_TRANSPARENT;
 };
 
+class A3A_TextRight : A3A_Text
+{
+    style = ST_RIGHT;
+};
+
 class A3A_TextMulti: A3A_Text
 {
     style = ST_LEFT + ST_MULTI + ST_NO_RECT;

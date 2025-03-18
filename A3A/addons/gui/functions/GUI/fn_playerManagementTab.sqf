@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Player Management tab of the Main dialog.
 
 Arguments:
@@ -16,7 +16,10 @@ Dependencies:
     None
 
 Example:
-    ["update"] call A3A_fnc_playerManagementTab;
+    ["update"] call FUNC(playerManagementTab);
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -37,7 +40,7 @@ switch (_mode) do
         private _backButton = _display displayCtrl A3A_IDC_MAINDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["admin"]] call A3A_fnc_mainDialog;
+            ["switchTab", ["admin"]] call FUNC(mainDialog);
         }];
         _backButton ctrlShow true;
 
@@ -58,7 +61,7 @@ switch (_mode) do
         } forEach allPlayers;
 
         _listBox lnbSetCurSelRow 0;
-        ["playerLbSelectionChanged"] spawn A3A_fnc_playerManagementTab;
+        ["playerLbSelectionChanged"] spawn FUNC(playerManagementTab);
     };
 
     // Player Management
@@ -95,7 +98,7 @@ switch (_mode) do
         private _index = lbCurSel _listBox;
         _listBox lnbSetColor [[_index,0], [0.2,0.6,0.2,1]];
         // fakePlayers select _index setVariable ["isMember", true]; // TODO UI-update: use A3A_fnc_memberAdd
-        ["playerLbSelectionChanged"] spawn A3A_fnc_playerManagementTab;
+        ["playerLbSelectionChanged"] spawn FUNC(playerManagementTab);
     };
 
     case ("adminRemoveMember"):
@@ -105,7 +108,7 @@ switch (_mode) do
         private _index = lbCurSel _listBox;
         _listBox lnbSetColor [[_index,0], [0.7,0.7,0.7,1]];
         // fakePlayers select _index setVariable ["isMember", false]; // TODO UI-update: use A3A_fnc_memberAdd
-        ["playerLbSelectionChanged"] spawn A3A_fnc_playerManagementTab;
+        ["playerLbSelectionChanged"] spawn FUNC(playerManagementTab);
     };
 
     default

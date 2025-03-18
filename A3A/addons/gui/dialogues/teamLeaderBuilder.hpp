@@ -11,7 +11,7 @@ class A3A_buttonSmallText : A3A_button
 class A3A_teamLeaderBuilder
 {
     idd = A3A_IDD_TEAMLEADERDIALOG;
-    onLoad = "[""onLoad""] spawn A3A_fnc_teamLeaderRTSPlacerDialog";
+    onLoad = "[""onLoad""] spawn A3A_GUI_fnc_teamLeaderRTSPlacerDialog";
     movingenable = true;
 
     class ControlsBackground

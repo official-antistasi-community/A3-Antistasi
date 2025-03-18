@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Admin tab of the Main dialog.
 
 Arguments:
@@ -17,6 +17,9 @@ Dependencies:
 
 Example:
     ["update"] call A3A_fnc_adminTab;
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -28,6 +31,7 @@ FIX_LINE_NUMBERS()
 params[["_mode","onLoad"], ["_params",[]]];
 
 // TODO UI-update: move these to some more sensible place:
+// Copied from A3A\addons\core\functions\Dialogs\fn_HQGameOptions.sqf
 private _civLimitMin = 0;
 private _civLimitMax = 150;
 private _spawnDistanceMin = 600;
@@ -56,12 +60,12 @@ switch (_mode) do
         _spawnDistanceSlider sliderSetPosition _spawnDistance;
         ctrlSetText [A3A_IDC_SPAWNDISTANCEEDITBOX, str _spawnDistance];
 
-        _aiLimiterSlider = _display displayCtrl A3A_IDC_AILIMITERSLIDER;
-        _aiLimiterSlider sliderSetRange [_aiLimiterMin, _aiLimiterMax];
-        _aiLimiterSlider sliderSetSpeed [10, 10];
-        _aiLimiter = missionNamespace getVariable ["maxUnits",0];
-        _aiLimiterSlider sliderSetPosition _aiLimiter;
-        ctrlSetText [A3A_IDC_AILIMITEREDITBOX, str _aiLimiter];
+        // _aiLimiterSlider = _display displayCtrl A3A_IDC_AILIMITERSLIDER;
+        // _aiLimiterSlider sliderSetRange [_aiLimiterMin, _aiLimiterMax];
+        // _aiLimiterSlider sliderSetSpeed [10, 10];
+        // _aiLimiter = missionNamespace getVariable ["maxUnits",0];
+        // _aiLimiterSlider sliderSetPosition _aiLimiter;
+        // ctrlSetText [A3A_IDC_AILIMITEREDITBOX, str _aiLimiter];
 
         // Get Debug info
         // TODO UI-update: change this to get server values instead when merging
@@ -187,18 +191,18 @@ switch (_mode) do
         _commitAiButton ctrlSetText localize "STR_antistasi_dialogs_main_admin_ai_confirm_button";
         _commitAiButton ctrlAddEventHandler ["ButtonClick", {
             Trace("Confirmed AI Settings");
-            hint "Oh no you broke the server :(";
 
             private _display = findDisplay A3A_IDD_MAINDIALOG;
             private _civLimitEditBox = _display displayCtrl A3A_IDC_CIVLIMITEDITBOX;
             private _globalCivilianMax = floor parseNumber ctrlText _civLimitEditBox;
             private _spawnDistanceEditBox = _display displayCtrl A3A_IDC_SPAWNDISTANCEEDITBOX;
             private _distanceSPWN = floor parseNumber ctrlText _spawnDistanceEditBox;
-            private _aiLimiterEditBox = _display displayCtrl A3A_IDC_AILIMITEREDITBOX;
-            private _maxUnits = floor parseNumber ctrlText _aiLimiterEditBox;
+            //private _aiLimiterEditBox = _display displayCtrl A3A_IDC_AILIMITEREDITBOX;
+            //private _maxUnits = floor parseNumber ctrlText _aiLimiterEditBox;
 
             // TODO UI-update: Change when merging. Something like this but with "set" instead of "increase"?
-            // [player,"maxUnits","increase"] remoteExecCall ["A3A_fnc_HQGameOptions",2];
+            [player,"globalCivilianMax","set", _globalCivilianMax, true] remoteExecCall ["A3A_fnc_HQGameOptions",2];
+            [player,"distanceSPWN","set", _distanceSPWN, true] remoteExecCall ["A3A_fnc_HQGameOptions",2];
 
             // TODO UI-update: Placeholder routine, don't merge! Has no security checks whatsoever
             // Trace_3("Changing AI Settings - globalCivilianMax:%1, distanceSPWN:%2, maxUnits:%3", _globalCivilianMax, _distanceSPWN, _maxUnits);
@@ -206,9 +210,57 @@ switch (_mode) do
             // missionNamespace setVariable ["distanceSPWN", _distanceSPWN];
             // missionNamespace setVariable ["maxUnits", _maxUnits];
 
-
-            closeDialog 2;
+            // Don't Close.
+            //closeDialog 2;
         }];
+    };
+
+    case ("tpPetrosToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        petros setPos (player modelToWorld [0,2,0]);
+    };
+
+    case ("tpArsenalToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        boxX setPos (player modelToWorld [0,2,0]);
+    };
+
+    case ("tpVehicleToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        vehicleBox setPos (player modelToWorld [0,2,0]);
+    };
+
+    case ("tpFlagToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        flagX setPos (player modelToWorld [0,2,0]);
+    };
+
+    case ("tpTentToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        fireX setPos (player modelToWorld [0,2,0]);
+    };
+
+    case ("tpMapBoardToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        mapX setPos (player modelToWorld [0,2,0]);
     };
 
     default

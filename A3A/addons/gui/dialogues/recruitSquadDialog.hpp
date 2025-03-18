@@ -1,7 +1,7 @@
 class A3A_RecruitSquadDialog : A3A_DefaultDialog
 {
   idd = A3A_IDD_RECRUITSQUADDIALOG;
-  onLoad = "[""onLoad""] spawn A3A_fnc_recruitSquadDialog";
+  onLoad = "[""onLoad""] spawn A3A_GUI_fnc_recruitSquadDialog";
 
   class Controls
   {
@@ -49,7 +49,7 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITINFSQUADBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_inf_squad;
-          onButtonClick = "[""buySquad"", [_this]] call A3A_fnc_recruitSquadDialog";
+          onButtonClick = "[""buySquad"", [_this]] call A3A_GUI_fnc_recruitSquadDialog";
           size = GUI_TEXT_SIZE_LARGE;
           x = 36 * GRID_W;
           y = 11 * GRID_H;
@@ -84,7 +84,7 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITINFTEAMBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_inf_team;
-          onButtonClick = "[""buySquad"", [_this]] call A3A_fnc_recruitSquadDialog";
+          onButtonClick = "[""buySquad"", [_this]] call A3A_GUI_fnc_recruitSquadDialog";
           size = GUI_TEXT_SIZE_LARGE;
           x = 36 * GRID_W;
           y = 32 * GRID_H;
@@ -119,7 +119,7 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITMGTEAMBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_mg_team;
-          onButtonClick = "[""buySquad"", [_this]] call A3A_fnc_recruitSquadDialog";
+          onButtonClick = "[""buySquad"", [_this]] call A3A_GUI_fnc_recruitSquadDialog";
           size = GUI_TEXT_SIZE_LARGE;
           x = 36 * GRID_W;
           y = 53 * GRID_H;
@@ -154,7 +154,7 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITATTEAMBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_at_team;
-          onButtonClick = "[""buySquad"", [_this]] call A3A_fnc_recruitSquadDialog";
+          onButtonClick = "[""buySquad"", [_this]] call A3A_GUI_fnc_recruitSquadDialog";
           size = GUI_TEXT_SIZE_LARGE;
           x = 36 * GRID_W;
           y = 74 * GRID_H;
@@ -189,7 +189,7 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITMORTARTEAMBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_mortar_team;
-          onButtonClick = "[""buySquad"", [_this]] call A3A_fnc_recruitSquadDialog";
+          onButtonClick = "[""buySquad"", [_this]] call A3A_GUI_fnc_recruitSquadDialog";
           size = GUI_TEXT_SIZE_LARGE;
           x = 88 * GRID_W;
           y = 11 * GRID_H;
@@ -225,7 +225,7 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITSNIPERTEAMBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_sniper_team;
-          onButtonClick = "[""buySquad"", [_this]] call A3A_fnc_recruitSquadDialog";
+          onButtonClick = "[""buySquad"", [_this]] call A3A_GUI_fnc_recruitSquadDialog";
           size = GUI_TEXT_SIZE_LARGE;
           x = 88 * GRID_W;
           y = 32 * GRID_H;
@@ -260,7 +260,7 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITATCARBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_at_car;
-          onButtonClick = "[""buySquad"", [_this]] call A3A_fnc_recruitSquadDialog";
+          onButtonClick = "[""buySquad"", [_this]] call A3A_GUI_fnc_recruitSquadDialog";
           size = GUI_TEXT_SIZE_LARGE;
           x = 88 * GRID_W;
           y = 53 * GRID_H;
@@ -295,7 +295,7 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         {
           idc = A3A_IDC_RECRUITAATRUCKBUTTON;
           text = $STR_antistasi_dialogs_recruit_squad_aa_truck;
-          onButtonClick = "[""buySquad"", [_this]] call A3A_fnc_recruitSquadDialog";
+          onButtonClick = "[""buySquad"", [_this]] call A3A_GUI_fnc_recruitSquadDialog";
           size = GUI_TEXT_SIZE_LARGE;
           x = 88 * GRID_W;
           y = 74 * GRID_H;
@@ -318,7 +318,7 @@ class A3A_RecruitSquadDialog : A3A_DefaultDialog
         class IncludeVehicleCB : A3A_CheckBox
         {
           idc = A3A_IDC_SQUADINCLUDEVEHICLECHECKBOX;
-          onCheckedChanged = "[""update""] call A3A_fnc_recruitSquadDialog";
+          onCheckedChanged = "[""update""] call A3A_GUI_fnc_recruitSquadDialog";
           x = 96 * GRID_W;
           y = 90 * GRID_H;
           w = 6 * GRID_W;

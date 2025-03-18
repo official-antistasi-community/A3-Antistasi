@@ -3,6 +3,251 @@ Changelog
 ==========
 
 
+Version 3.8.0
+===============
+
+.. note::
+   29th December 2024
+
+.. admonition:: Major
+
+   * :issue:`3441` & :issue:`3442` Added Expeditionary Forces MJTF factions and added EF integration in Vanilla and Western Sahara templates
+   * :issue:`3392` Added UI and supporting code to set custom loadouts for rebel troops
+
+.. admonition:: Minor
+
+   * :issue:`3376` Changed to have more frequent militia vehicles/transports early game
+   * :issue:`3388` Implemented mortar/artillery support ranging shot and walking barrage
+   * :issue:`3389` Added injector success and UID logging
+   * :issue:`3430` Turned Carpet bombing into triple airstrike
+   * :issue:`3459` Added various TFAR backpacks and to multiple templates
+   * :issue:`3462` Improved loot-to-crate to dump to single weapon holder
+
+.. admonition:: Template updates
+
+   * :issue:`3182` Added 3CB CSAT Scimitar, Gryphon, Bear, and Viper regiment
+   * :issue:`3407` Updated Vanilla/WS Factions, fine tuning, officer loadouts, further RF integration in vanilla and WS factions
+   * :issue:`3413` & :issue:`3429` & :issue:`3460` Added CWR3 Factions Templates
+   * :issue:`3414` Added Aegis Factions Compatibility
+   * :issue:`3428` Added SPEX Factions Templates
+   * :issue:`3442` Added 3CBF weapon integration into RHS factions
+   * :issue:`3437` Updated IFA Faction Templates to solve a bug with the large intel item. Adds Churchills to the IFA UK faction IFV lineup
+   * :issue:`3451` Fixed missing comma and incorrect artillery classnames in CUP template in BAF, ION
+   * :issue:`3452` Updated 3CB LDF with the Livonian Armed Forest Rangers, and corrected magazine classname for the rocket artillery
+   * :issue:`3457` Fixed NVG entry in RHS HIDF
+
+.. admonition:: Terrain updates
+
+   * :issue:`3424` & :issue:`3448` & :issue:`3463` Updated Isla Duala to hide "bad" objects, cull obsolete enemy locations and to be taken off of 'dev' status, hence being available to play
+
+.. admonition:: Bugfixes
+
+   * :issue:`3386` Flattened out support responses and block support calls for mine kills
+   * :issue:`3390` Fixed HQ actions being available through remote controls
+   * :issue:`3393` Fixed skill upgrade tooltip not updating
+   * :issue:`3395` Fixed errors caused by tags function
+   * :issue:`3397` Fixed arsenal not clearing client IDs on disconnect
+   * :issue:`3402` Prevented rebels AIs being equipped with VN melee weapons
+   * :issue:`3406` Fixed base class for srifle_GM6_snake_lxWS
+   * :issue:`3418` Fixed precedence error in mortar/arty support routine
+   * :issue:`3416` Fixed custom WS Kamaz Textures
+   * :issue:`3436` Fixed debug line in fn_setPlaneLoadout.sqf
+   * :issue:`3446` Fixed wrong owner check in fn_addBombRun.sqf
+   * :issue:`3455` Fixed and optimized spawner selection
+   * :issue:`3458` Fixed issue with Rebel Loadouts
+   * :issue:`3473` Fixed issue with Rebel Airstrike
+
+.. admonition:: Groundwork
+
+   * :issue:`3423` Added Helicopter Config Loadout capability
+
+.. admonition:: Localization
+
+   * [No PRs] - Unfortunately no updates due to pipeline issues.
+
+.. admonition:: Tools
+
+   * :issue:`3401` Added Seat drawing dev function
+
+.. admonition:: Refactor
+
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
+Version 3.7.1
+===============
+
+.. note::
+   8th October 2024
+
+.. admonition:: Bugfixes
+
+   * :issue:`3409` Fix CUP disposable missile launchers breaking init after CBA 3.18 update
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
+Version 3.7.0
+===============
+
+.. note::
+   18th August 2024
+
+.. admonition:: Major
+
+   .. rubric:: :issue:`3371` Added Map Port of Mortain - 1.1 Update of the `Spearhead 1944 CDLC <https://store.steampowered.com/app/1175380/Arma_3_Creator_DLC_Spearhead_1944/>`_
+   .. rubric:: :issue:`3356` Updated SPE-IFA Templates - 1.1 Update of the `Spearhead 1944 CDLC <https://store.steampowered.com/app/1175380/Arma_3_Creator_DLC_Spearhead_1944/>`_
+
+.. admonition:: Minor
+
+   * :issue:`3327` Reduced artillery/mortar ratio at high war tiers
+   * :issue:`3334` Added a tooltip for vehicle locktime
+   * :issue:`3335` Improve CUP and IFA plane turn rates when flown by AI
+   * :issue:`3343` Slowed down self-revive timeout when downed
+   * :issue:`3349` Created new classes for Antistasi AI units - Fixes ACE action blocking
+   * :issue:`3370` Added attributeMoreTrucks and IFV-only option to ground transport selection
+   * :issue:`3372` Made dive bomb runs less accurate against infantry targets
+   * :issue:`3377` Added flashlights to unit definitions (currently only SPE specific usage)
+
+.. admonition:: Template updates
+
+   * :issue:`3363` Removed CUP Cluster MLRS
+
+.. admonition:: Bugfixes
+
+   * :issue:`3320` Skip Time Improvements
+   * :issue:`3338` Fixed slow-server UI issue and incorrect licensing in arsenal limits
+   * :issue:`3359` Fixed issue where running destroyCity with CUP interiors could crash
+   * :issue:`3362` Disallowed sling-loading HQ objects
+   * :issue:`3364` Added workaround for Arma bug with CDLC detection and arma3.cfg mod loading method
+   * :issue:`3365` Small sell price rework
+   * :issue:`3367` Fixed support crew being provided for free and then refunded
+   * :issue:`3368` Fixed inability to rebuild non-outpost radio towers
+   * :issue:`3369` Added Ammobox Protection
+   * :issue:`3375` Replaced all uses of GETOUT waypoints
+   * :issue:`3381` Fixed SoldierGB inheritance chain for CBA XEH.
+
+.. admonition:: Groundwork
+
+   * :issue:`3333` Adjusted DoomMetal GUI Header and license
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
+Version 3.6.0
+===============
+
+.. note::
+   30th June 2024
+
+.. admonition:: Major
+
+   .. rubric:: :issue:`3214` Added Map Port of `Pulau <https://steamcommunity.com/workshop/filedetails/?id=1423583812>`_
+
+.. admonition:: Minor
+
+   * :issue:`3229` Added GUI prefix and Experimental Battle Menu
+   * :issue:`3233` Switched respawn & self-revive keys to custom keybinds
+   * :issue:`3234` Allowed guests to use of arsenal limits dialog and set default guest limit to 0
+   * :issue:`3237` Added Garage Sell Button
+   * :issue:`3238` Added Parameter fencing for debug commands
+   * :issue:`3250` Reworked anti-air support response balance
+   * :issue:`3255` Converted corpse/wreck timed cleanup into a server queue with max cap
+   * :issue:`3257` Removed restriction from AILoadInfo action
+   * :issue:`3259` Added Parachutes to airbase crates
+   * :issue:`3261` Added a few RHS items to Garbage Cleaner
+   * :issue:`3269` Added Setup GUI Factions Info
+   * :issue:`3274` Added tank platoon support as alternative to CAS
+   * :issue:`3278` Updated SF spawn locations on Livonia
+   * :issue:`3282` Allowed commanders to make custom HC squads
+   * :issue:`3284` Added logging for temporary membership
+   * :issue:`3295` Added explosiveSpecialist and UAVHacker traits to default commander slot
+   * :issue:`3319` Adjusted air support response for cheap planes
+
+.. admonition:: Template updates
+
+   * :issue:`2800` Added `Swedish Forces Pack (SFP) <https://steamcommunity.com/workshop/filedetails/?id=826911897>`_ templates (requires CUP Units, Vehicles and Weapons loaded)
+         - Make sure you use `SFP - ACE Compatibility <https://steamcommunity.com/sharedfiles/filedetails/?id=2282227267>`_ when playing with ACE
+   * :issue:`3166` Added `Iron Front AiO <https://steamcommunity.com/workshop/filedetails/?id=2648308937>`_ templates
+         - Plus optional support for `WW2 Tanks <https://steamcommunity.com/workshop/filedetails/?id=2842504702>`_
+         - Plus optional support for `WW2 Armoured Cars <https://steamcommunity.com/sharedfiles/filedetails/?id=2811202098>`_
+         - Plus optional support for `Bystrokhodny Tanks - BT7 And Variants <https://steamcommunity.com/sharedfiles/filedetails/?id=2398198697>`_
+         - Make sure you use `Iron Front in Arma 3 ACE compatibility <https://steamcommunity.com/workshop/filedetails/?id=773759919>`_ when playing with ACE
+   * :issue:`3203` Added Poseidon II to RHS NAPA
+   * :issue:`3204` Added Reaction Forces CDLC compatibility for Western Sahara templates
+   * :issue:`3208` Added vehicles for vehiclesAirPatrol to some RHS templates
+   * :issue:`3209` Added RHS HIDF template
+   * :issue:`3258` "Re-added" the RPD to the 3CB SOV template
+   * :issue:`3271` Added RHS VDV templates
+   * :issue:`3267` Added RHS Tanoan Liberation Army (TLA) template
+   * :issue:`3277` Updated buyable vehicles for CUP
+
+.. admonition:: Bugfixes
+
+   * :issue:`3172` Added/Fixed planes from RHS and 3CB (A-29 & T-28)
+   * :issue:`3205` Fixed case where seats may not be unlocked when dead crew are deleted
+   * :issue:`3228` Updated fn_vehiclePrice to not fail on absent vehicles
+   * :issue:`3231` Fixed artillery not rotating to target before firing
+   * :issue:`3242` Added Cargo nodes for 3CB Hilux (Covered)
+   * :issue:`3251` Fixed breaking error in citySupportChange type-safety checks
+   * :issue:`3254` Fixed Refugee mission timer
+   * :issue:`3256` Fixed destroy Heli mission
+   * :issue:`3260` Applied Artillery marker improvements
+   * :issue:`3264` Fixed lootToCrate issues with IFA gear
+   * :issue:`3266` Improved getArtilleryRanges & fixed IFA mortar case
+   * :issue:`3273` Prevented concurrent major attacks, and added a planning cost
+   * :issue:`3281` Fixed 3CB Factions baseWeapon config
+   * :issue:`3283` Fixed incorrect config array specifier for diveParams
+   * :issue:`3286` Fixed inconsistent parameter bug with createAttackForceLand
+   * :issue:`3293` Fixed potential double-carry or double-drop errors under heavy script load
+   * :issue:`3294` Fixed fetching current arsenal data before displaying the arsenal limits dialog
+   * :issue:`3297` Switched over init order to fix error in initRemoteObject JIP function
+   * :issue:`3315` Buffed IFA mortars to be closer to MK6
+   * :issue:`3322` Fixed conflicting addon messages from aircraft loadout configs
+
+.. admonition:: Groundwork
+
+   * :issue:`3200` Added vehiclesHeavyTanks template category
+   * :issue:`3208` Added vehiclesAirPatrol template category
+   * :issue:`3287` Fixed WW2 factions using SAM supports
+
+.. admonition:: Localization
+
+   * [Multiple PRs] - Added tons of new translations to different languages
+
+.. admonition:: Refactor
+
+   * :issue:`3210` Merged item carrying code and switch to blacklist for carry blocking
+   * :issue:`3227` Moved Airplane loadouts to configs
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
 Version 3.5.4
 ===============
 

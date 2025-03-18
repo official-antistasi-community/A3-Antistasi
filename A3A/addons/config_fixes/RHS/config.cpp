@@ -2,8 +2,6 @@
 
 #include "..\script_component.hpp"
 
-#if __has_include("\rhsgref\addons\rhsgref_main\config.bin")
-
 class CfgPatches 
 {
     class PATCHNAME(RHS) 
@@ -16,6 +14,7 @@ class CfgPatches
         author = AUTHOR;
         authors[] = { AUTHORS };
         authorUrl = "";
+        skipWhenMissingDependencies = 1;
         VERSION_CONFIG;
     };
 };
@@ -23,6 +22,4 @@ class CfgPatches
 // Uncomment when needed
 //#include "CfgMagazines.hpp"
 #include "CfgVehicles.hpp"
-//#include "CfgWeapons.hpp"
-
-#endif      // __has_include("\rhsgref\addons\rhsgref_main\config.bin"
+#include "CfgWeapons.hpp"

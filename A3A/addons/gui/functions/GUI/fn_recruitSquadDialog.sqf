@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles the initialization and updating of the Recruit Squad dialog.
     This function should only be called from RecruitSquadDialog onLoad and control activation EHs.
 
@@ -17,8 +17,11 @@ Dependencies:
     None
 
 Example:
-    ["onLoad"] spawn A3A_fnc_recruitDialog; // initialization
-    ["update"] spawn A3A_fnc_recruitDialog; // update
+    ["onLoad"] spawn FUNC(recruitDialog); // initialization
+    ["update"] spawn FUNC(recruitDialog); // update
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -38,7 +41,7 @@ switch (_mode) do
         vehQuery = nil;
 
         // Separated because initial "onLoad" needs scheduled env while other updates needs unscheduled
-        ["update"] call A3A_fnc_recruitSquadDialog;
+        ["update"] call FUNC(recruitSquadDialog);
 
         Debug("RecruitSquadDialog onLoad complete.");
     };
@@ -159,48 +162,48 @@ switch (_mode) do
         if (_money < _infSquadMoney || _hr < _infSquadHr) then {
             _infSquadButton ctrlEnable false;
             _infSquadButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
-            _infSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _infSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         // TODO UI-update: reenable this when eng squad button is back in
         /* if (_money < _engSquadMoney || _hr < _engSquadHr) then {
             _engSquadButton ctrlEnable false;
             _engSquadButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
-            _engSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _engSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         }; */
         if (_money < _infTeamMoney || _hr < _infTeamHr) then {
             _infTeamButton ctrlEnable false;
             _infTeamButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
-            _infTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _infTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _mgTeamMoney || _hr < _mgTeamHr) then {
             _mgTeamButton ctrlEnable false;
             _mgTeamButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
-            _mgTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _mgTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _atTeamMoney || _hr < _atTeamHr) then {
             _atTeamButton ctrlEnable false;
             _atTeamButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
-            _atTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _atTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _mortarTeamMoney || _hr < _mortarTeamHr) then {
             _mortarTeamButton ctrlEnable false;
             _mortarTeamButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
-            _mortarTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _mortarTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _sniperTeamMoney || _hr < _sniperTeamHr) then {
             _sniperTeamButton ctrlEnable false;
             _sniperTeamButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
-            _sniperTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _sniperTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _atCarMoney || _hr < _atCarHr) then {
             _atCarButton ctrlEnable false;
             _atCarButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
-            _atCarIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _atCarIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _aaTruckMoney || _hr < _aaTruckHr) then {
             _aaTruckButton ctrlEnable false;
             _aaTruckButton ctrlSetTooltip "You do not have enough money or HR for this group type"; // TODO UI-update: stringtable
-            _aaTruckIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _aaTruckIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
     };
 

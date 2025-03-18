@@ -36,7 +36,7 @@
 ["vehiclesGunBoats", ["UK3CB_TKA_B_RHIB_Gunboat"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["UK3CB_B_LAV25_HIDF", "UK3CB_B_AAV_HIDF"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["UK3CB_B_Mystere_HIDF_CAS1"]] call _fnc_saveToTemplate;      // "RHSGREF_A29B_HIDF" -> needs laser activation
+["vehiclesPlanesCAS", ["UK3CB_B_Mystere_HIDF_CAS1", "RHSGREF_A29B_HIDF", "UK3CB_B_T28Trojan_HIDF_CAS"]] call _fnc_saveToTemplate;      // "UK3CB_B_Mystere_HIDF_CAS1" -> commented for testing of A29 & T28
 ["vehiclesPlanesAA", ["UK3CB_B_Mystere_HIDF_AA1"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["RHS_C130J"]] call _fnc_saveToTemplate;
 

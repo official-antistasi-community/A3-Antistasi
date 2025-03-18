@@ -1,5 +1,5 @@
 /*
-Function: A3A_fnc_setupFactionsTab
+Function: A3A_GUI_fnc_setupFactionsTab
     Handles the initialization and tab switching on the setup dialog.
     This function should only be called from setupDialog onLoad and control activation EHs.
 Author: John Jordan (jaj22)
@@ -34,6 +34,8 @@ Debug_1("setupFactionsTab called with mode %1", _mode);
 
 private _display = findDisplay A3A_IDD_SETUPDIALOG;
 private _worldName = toLower worldName;
+private _addonTable = _display displayCtrl A3A_IDC_SETUP_ADDONVICSBOX;
+private _dlcTable = _display displayCtrl A3A_IDC_SETUP_DLCBOX;
 
 if (isNil "A3A_setup_loadedPatches") exitWith { Error("No patch data. Load order fuckup?") };
 
@@ -74,7 +76,6 @@ if (isNil {_display getVariable "validFactions"}) then
     _display setVariable ["validFactions", _factions];
 
     // Fill the addon vics
-    private _addonTable = _display displayCtrl A3A_IDC_SETUP_ADDONVICSBOX;
     private _checkCtrls = [];
     {
         private _textCtrl = _display ctrlCreate ["A3A_Text_Small", -1, _addonTable];
@@ -97,7 +98,6 @@ if (isNil {_display getVariable "validFactions"}) then
     // Fill the DLC
     // Fetch these automatically but remove DLC without equipment and vehicles
     //private _loadedDLC = getLoadedModsInfo select {_x#3 and !(_x#1 in ["A3","curator","argo","tacops"])};
-    private _dlcTable = _display displayCtrl A3A_IDC_SETUP_DLCBOX;
     _checkCtrls = [];
     {
         private _textCtrl = _display ctrlCreate ["A3A_Text_Small", -1, _dlcTable];
@@ -117,19 +117,86 @@ if (isNil {_display getVariable "validFactions"}) then
 
 switch (_mode) do
 {
-    case ("update"): {};			// Don't hide anything here, nothing to do
+    case ("update"): {
+        _addonTable ctrlShow false;
+        private _buttonCtrl = _display displayCtrl A3A_IDC_SETUP_DLCTOGGLE;
+        _buttonCtrl ctrlSetText localize "STR_antistasi_dialogs_setup_toggleAddons_addons";
+    };
+    case ("switchAddons"): 
+    {
+        private _buttonCtrl = _display displayCtrl A3A_IDC_SETUP_DLCTOGGLE;
+        private _buttonStatus = ctrlShown _dlcTable;
+        _buttonCtrl ctrlSetText localize (["STR_antistasi_dialogs_setup_toggleAddons_DLC","STR_antistasi_dialogs_setup_toggleAddons_addons"] select !_buttonStatus);
+        _dlcTable ctrlShow !_buttonStatus;
+        _addonTable ctrlShow _buttonStatus;
+    };
 
     case ("factionSelected"):
     {
         _params params ["_listbox", "_rowIndex"];
         if (_rowIndex == -1) exitWith {};
-        if (_listbox lbData _rowIndex != "") then {
-            _listBox setVariable ["lastSel", _rowIndex];
+        _listBox setVariable ["lastSel", _rowIndex];
+        private _faction = _listbox lbData lbCurSel _listbox;
+        private _infoBox = _display displayCtrl A3A_IDC_SETUP_INFOBOX;
+        private _infoLabel = _display displayCtrl A3A_IDC_SETUP_INFOLABEL;
+        private _path = (configFile  >>  "A3A"  >>  "Templates" >>  _faction);
+        private _shortName = if !(isNull (_path/"shortName")) then 
+        {  
+            getText(_path/"shortName");
         } else {
-            _listbox lbSetCurSel (_listbox getVariable ["lastSel", 0]);
+            "Faction"; //  DO NOT LOCALIZE -- This is a debug string that should only show up when a template author hasn't put a short name in.
         };
-    };
 
+        _infoLabel ctrlSetText format [localize "STR_antistasi_dialogs_setup_infoPanel_header",_shortName];
+        private _requiredAddons = getArray(_path/"requiredAddons") + getArray(_path/"forceDLC") - ["ws","vn","gm","spe"]; // CDLCs are listed twice for forced DLC and dependency
+        private _prettyAddonHM = createHashMapFromArray [ // TODO: Do we want to trim down the dependencies list? CUP Vehicles has dependencies on CUP Units and CUP Vehicles
+            ["Weapons_1_F_lxWS", "Western Sahara CDLC"]
+            ,["vn_weapons", "S.O.G Prairie Fire CDLC"]
+            ,["rhsgref_main", "RHSGREF"]
+            ,["rhssaf_main", "RHSSAF"]
+            ,["UK3CB_Factions_Vehicles_SUV", "3CB Factions"]
+            ,["UK3CB_BAF_Weapons", "3CB BAF Weapons"]
+            ,["UK3CB_BAF_Vehicles", "3CB BAF Vehicles"]
+            ,["UK3CB_BAF_Units_Common", "3CB BAF Units"]
+            ,["UK3CB_BAF_Equipment", "3CB BAF Equipment"]
+            ,["CUP_Creatures_People_Civil_Russia", "CUP Units"]
+            ,["CUP_BaseConfigs", "CUP Weapons"]
+            ,["CUP_AirVehicles_Core", "CUP Vehicles"]
+            ,["uns_weap_w", "Unsung"]
+            ,["gm_weapons_items", "Global Mobilization CDLC"]
+            ,["bwa3_common", "BWMod"]
+            ,["ww2_spe_assets_c_characters_germans_c", "Spearhead 1944 CDLC"]
+            ,["IFA3_Core", "IFA3 AIO"]
+            ,["Swedish_Forces_Pack","Swedish Forces Pack"]
+            ,["cwr3_core","Cold War Rearmed 3"]
+            ,["WW2_SPEX_Assets_c_Characters_Americans_c","SPEX - Spearhead Extended"]
+        ];
+
+        private _prettyAddons = _requiredAddons apply 
+        {
+            if (!isNull(configFile >> "CfgMods" >> _x >> "nameShort")) then
+            {   
+                getText(configFile >> "CfgMods" >> _x >> "nameShort");
+            } else {
+                _prettyAddonHM getOrDefault [_x,_x];
+            };
+        };
+
+        _prettyAddons = if (count _prettyAddons == 0) then {
+            format [localize "STR_antistasi_dialogs_setup_prettyAddons","None"];
+        } else {
+            format [localize "STR_antistasi_dialogs_setup_prettyAddons",_prettyAddons joinString ", "];
+        };
+
+        private _lore = if !(isNull(_path/"lore")) then 
+        {
+            getText(_path/"lore");
+        } else {
+            "The template author has not added a description to this template."; // TODO: Do we localize a debug string?
+        };
+        private _fullString = [_prettyAddons,endl,endl,_lore] joinString "";
+        _infoBox ctrlSetText _fullString;
+    };
     case ("fillFactions"):
     {
         _params params ["_isSaveChange"];
@@ -143,10 +210,10 @@ switch (_mode) do
             lbClear _listBox;
             {
                 private _index = _listBox lbAdd getText(_x/"name");
+                _listBox lbSetData [_index, configName _x];
                 if (_x call _fnc_factionLoaded) then {
                     _listBox lbSetPicture [_index, getText(_x/"flagTexture")];
                     _listBox lbSetPictureRight [_index, getText(_x/"logo")];
-                    _listBox lbSetData [_index, configName _x];
                     if (_selected == configName _x) then { _listBox lbSetCurSel (lbSize _listBox - 1) };
                 } else {
                     _listBox lbSetPicture [_index, "a3\data_f\flags\flag_white_dmg_co.paa"];

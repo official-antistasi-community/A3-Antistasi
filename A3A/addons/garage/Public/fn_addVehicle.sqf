@@ -172,6 +172,7 @@ private _addVehicle = {
 
     private _stateData = [_this] call HR_GRG_fnc_getState;
     private _customisation = [_this] call BIS_fnc_getVehicleCustomization;
+    private _lockTime = [systemTimeUTC, []] select (_lockUID isEqualTo "");
 
     //Antistasi adaptions
     _this call _transferToArsenal;
@@ -182,7 +183,7 @@ private _addVehicle = {
 
     //Add vehicle to garage
     private _vehUID = [] call HR_GRG_fnc_genVehUID;
-    (HR_GRG_Vehicles#_cat) set [_vehUID, [cfgDispName(_class), _class, _lockUID, "", _stateData, _lockName, _customisation]];
+    (HR_GRG_Vehicles#_cat) set [_vehUID, [cfgDispName(_class), _class, _lockUID, "", _stateData, _lockName, _customisation, _lockTime]];
 
     //register vehicle as a source
     if (_sourceIndex != -1) then {

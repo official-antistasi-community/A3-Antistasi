@@ -49,9 +49,9 @@ if ("expansion" in A3A_enabledDLC) then {
 
 if ("rf" in A3A_enabledDLC) then {
     _vehiclesCivCar append ["C_Pickup_rf","C_Pickup_covered_rf"];
-    _vehiclesLightUnarmed append ["a3a_black_Pickup_rf"];
-    _vehiclesLightArmed append ["a3a_black_Pickup_mmg_rf"];
-    _staticMortars append ["I_G_CommandoMortar_RF"];
+    _vehiclesLightUnarmed append ["a3a_black_Pickup_rf","a3a_black_Pickup_covered_rf"];
+    _vehiclesLightArmed append ["a3a_black_Pickup_mmg_rf","a3a_black_Pickup_hmg_rf"];
+    _staticMortars append ["I_G_CommandoMortar_rf"];
     _vehiclesCivHeli append ["C_Heli_EC_01A_civ_RF","C_Heli_EC_04_rescue_RF"];
 };
 
@@ -104,7 +104,9 @@ if ("rf" in A3A_enabledDLC) then {
 if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr","tf_anprc154"]};
 if (A3A_hasTFAR && startWithLongRangeRadio) then {_initialRebelEquipment append ["tf_anprc155","tf_anprc155_coyote"]};
 if (A3A_hasTFARBeta) then {_initialRebelEquipment append ["TFAR_microdagr","TFAR_anprc154"]};
-if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155","TFAR_anprc155_coyote"]};
+if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote", "TFAR_anarc164", "a3a_TFAR_rt1523g_rhs", "a3a_TFAR_rt1523g_bwmod", "a3a_TFAR_rt1523g"]};
+if (A3A_hasTFARBeta && startWithLongRangeRadio && ("enoch" in A3A_enabledDLC)) then {
+    _initialRebelEquipment append ["B_RadioBag_01_black_F", "B_RadioBag_01_digi_F", "a3a_B_RadioBag_01_oucamo_F", "a3a_B_RadioBag_01_wdl_F"]};
 _initialRebelEquipment append ["Chemlight_blue","Chemlight_green","Chemlight_red","Chemlight_yellow"];
 ["initialRebelEquipment", _initialRebelEquipment] call _fnc_saveToTemplate;
 

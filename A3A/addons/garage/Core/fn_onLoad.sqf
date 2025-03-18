@@ -98,6 +98,12 @@ HR_GRG_Cats = [HR_GRG_IDC_CatCar,HR_GRG_IDC_CatArmored,HR_GRG_IDC_CatAir,HR_GRG_
 } forEach HR_GRG_Cats;
 [0] call HR_GRG_fnc_switchCategory;
 
+//sell button init
+
+if (HR_GRG_disableSellButton) then {
+    _disp displayCtrl HR_GRG_IDC_SellVeh ctrlEnable false;
+};
+
 //extras list init
 if (
     !HR_GRG_Pylons_Enabled //Pylon editing disabled

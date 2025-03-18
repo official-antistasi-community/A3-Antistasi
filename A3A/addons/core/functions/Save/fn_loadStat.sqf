@@ -33,7 +33,7 @@ private _specialVarLoads = [
     "garrison","tasks","membersX","vehInGarage","destroyedBuildings","idlebases",
     "chopForest","weather","killZones","jna_dataList","controlsSDK","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
-    "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray"
+    "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts"
 ];
 
 private _varName = _this select 0;
@@ -374,6 +374,12 @@ if (_varName in _specialVarLoads) then {
 	            _fuelStation setFuelCargo (A3A_fuelAmountleftArray # _i # 1);
 	        };
         };
+    };
+    if (_varname == "arsenalLimits") then {
+        A3A_arsenalLimits = _varValue; publicVariable "A3A_arsenalLimits";
+    };
+    if (_varname == "rebelLoadouts") then {
+        _varValue call A3A_fnc_setRebelLoadouts;        // updates version numbers
     };
 
     if(_varname == 'testingTimerIsActive') then

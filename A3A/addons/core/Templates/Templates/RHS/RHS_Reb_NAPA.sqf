@@ -57,7 +57,7 @@ private _initialRebelEquipment = [
 if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr", "tf_anprc154"]};
 if (A3A_hasTFAR && startWithLongRangeRadio) then {_initialRebelEquipment append ["tf_anprc155", "tf_anprc155_coyote"]};
 if (A3A_hasTFARBeta) then {_initialRebelEquipment append ["TFAR_microdagr", "TFAR_anprc154"]};
-if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote"]};
+if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote", "TFAR_anarc164", "a3a_TFAR_rt1523g_rhs", "a3a_TFAR_rt1523g_bwmod", "a3a_TFAR_rt1523g"]};
 _initialRebelEquipment append ["Chemlight_blue", "Chemlight_green", "Chemlight_red", "Chemlight_yellow"];
 ["initialRebelEquipment", _initialRebelEquipment] call _fnc_saveToTemplate;
 
@@ -75,8 +75,6 @@ private _rebUniforms = [
     "rhsgref_uniform_dpm_olive",
     "rhsgref_uniform_3color_desert",
     "rhsgref_uniform_gorka_1_f",
-    "rhsgref_uniform_TLA_1",
-    "rhsgref_uniform_TLA_2",
     "rhs_insurgent_uniform_1",
     "rhs_insurgent_uniform_2",
     "rhs_insurgent_uniform_3",

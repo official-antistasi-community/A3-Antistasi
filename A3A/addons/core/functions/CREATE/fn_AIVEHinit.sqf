@@ -80,7 +80,7 @@ if (_veh isKindOf "Car" or _veh isKindOf "Tank") then
 }
 else
 {
-	if ( _typeX in (FactionGet(all,"vehiclesFixedWing") + FactionGet(all,"vehiclesHelis")) ) then
+	if (_veh isKindOf "Air") then
 	{
 		_veh addEventHandler ["GetIn",
 		{
@@ -101,6 +101,12 @@ else
 				_veh addEventHandler ["GetOut", {private ["_veh"];_veh = _this select 0; if ((isTouchingGround _veh) and (isEngineOn _veh)) then {if (side (_this select 2) != teamPlayer) then {if (_veh getVariable "within") then {_veh setVariable ["within",false]; [_veh] call A3A_fnc_smokeCoverAuto}}}}];
 				_veh addEventHandler ["GetIn", {private ["_veh"];_veh = _this select 0; if (side (_this select 2) != teamPlayer) then {_veh setVariable ["within",true]}}];
 			};
+			_veh addEventHandler ["RopeAttach", {
+				params ["_object1", "_rope", "_object2"];
+				{
+					[_x, false] remoteExec ["setCaptive", _x];
+				} forEach crew _object1;
+			}];
 		};
 	}
 	else
@@ -144,7 +150,7 @@ if (_side == Invaders or _side == Occupants) then
 
 		// Add 1/3 cost to recent casualties list on server
 		private _vehCost = A3A_vehicleResourceCosts getOrDefault [typeof _veh, 0];
-		[_veh getVariable "ownerSide", getPos _veh, _vehCost/3] remoteExec ["A3A_fnc_addRecentDamage", 2];
+		[_veh getVariable "ownerSide", getPos _veh, _vehCost/3, _source] remoteExec ["A3A_fnc_addRecentDamage", 2];
 
 		// Attempt to call for support if there's a crew. Assume local, should be true
 		if !(isNull group _veh) then { [group _veh, _source] spawn A3A_fnc_callForSupport };

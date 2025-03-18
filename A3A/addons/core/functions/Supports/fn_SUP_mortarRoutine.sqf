@@ -8,63 +8,52 @@ Arguments:
     <GROUP> Crew group of mortar/artillery vehicle
     <SCALAR> Delay time in seconds
     <SCALAR> Amount of information to reveal to rebels, 0-1
-
+    <BOOL> True if it's heavy artillery, false if mortar/light
 */
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_suppData", "_mortar", "_crewGroup", "_sleepTime", "_reveal"];
+params ["_suppData", "_mortar", "_crewGroup", "_sleepTime", "_reveal", "_isHeavyArty"];
 _suppData params ["_supportName", "_side", "_suppType", "_suppCenter", "_suppRadius", "_target"];
 
 //Sleep to simulate the time it would need to set the support up
 sleep _sleepTime;
 
-//Decrease number of rounds and time alive if aggro is low
-private _sideAggression = if(_side == Occupants) then {aggressionOccupants} else {aggressionInvaders};
-private _numberOfRounds = 24;
 private _timeAlive = 1200;
-
-//If the aggro is low, the mortar will shoot less and stay longer in one spot
-if((30 + random 40) >_sideAggression) then
-{
-    _numberOfRounds = 12;
-    _timeAlive = 1800;
-};
-private _shotsPerVolley = _numberOfRounds / 3;
+private _shotsForEffect = 6;
+private _maxVolleys = 3;
+private _reloadTime = [3,10] select _isHeavyArty;
+private _spreadOffset = [100, 200] select _isHeavyArty;
 
 //A function to repeatedly fire onto a target without loops by using an EH
 private _fn_executeMortarFire =
 {
     params ["_mortar"];
 
-    _mortar addEventHandler
-    [
-        "Fired",
-        {
-            params ["_mortar"];
+    _mortar addEventHandler ["Fired", {
+        params ["_mortar"];
 
-            private _subTargets = _mortar getVariable ["FireOrder", []];
-            if(count _subTargets == 0) exitWith
-            {
-                _mortar removeEventHandler ["Fired", _thisEventHandler];
-                _mortar setVariable ["FireOrder", nil];
-            };
-            private _shellTarget = _subTargets deleteAt 0;
+        private _subTargets = _mortar getVariable ["FireOrder", []];
+        if (_subTargets isEqualTo []) exitWith {
+            _mortar removeEventHandler ["Fired", _thisEventHandler];
+            _mortar setVariable ["FireOrder", nil];
+        };
+        (_subTargets deleteAt 0) params ["_shotPos", "_delayTime"];
 
-            [_shellTarget, _mortar] spawn
-            {
-                params ["_shellTarget", "_mortar"];
-                sleep 1;
-                _mortar doArtilleryFire [_shellTarget, _mortar getVariable "shellType", 1];
-            }
+        [_shotPos, _delayTime, _mortar] spawn {
+            params ["_shotPos", "_delayTime", "_mortar"];
+            sleep _delayTime;
+            _mortar doArtilleryFire [_shotPos, _mortar getVariable "shellType", 1];
         }
-    ];
+    }];
 
-    sleep 30;           // Give players a bit more warning before the shells land
     private _subTargets = _mortar getVariable ["FireOrder", []];
-    private _target = _subTargets deleteAt 0;
-    _mortar doArtilleryFire [_target, _mortar getVariable "shellType", 1];
+
+    // Fire first shot after specified delay
+    (_subTargets deleteAt 0) params ["_shotPos", "_delayTime"];
+    sleep _delayTime;
+    _mortar doArtilleryFire [_shotPos, _mortar getVariable "shellType", 1];
 };
 
 
@@ -101,33 +90,52 @@ while {time < _timeout} do
 
     if !(isNil {_mortar getVariable "FireOrder"}) then { continue };        // mortar still firing at last target
 
-    if (_numberOfRounds <= 0) exitWith {
+    if (_maxVolleys <= 0) exitWith {
         Info_1("%1 has no more rounds left to fire, aborting routine", _supportName);
     };
 
     // Read in new target if there is one
     if (_target isEqualTo []) then { continue };         // no new target added yet
+    _mortar setVehicleAmmo 1;
     private _targetPos = _target select 1;                  // only use position here, not target object
     _target resize 0;                                       // clear target array so that a new one can be added externally
     Debug_2("%1 Next target is %2", _supportName, _targetPos);
 
-    // 50m circular spread because it's easy
+    private _flightTime = _mortar getArtilleryETA [_targetPos, _mortar getVariable "shellType"];
     private _subTargets = [];
-    for "_i" from 1 to _shotsPerVolley do {
-        _subTargets pushBack (_targetPos getPos [random 50, random 360]);
+
+    // Ranging shots
+    if (_mortar distance2d _targetPos < 1500 + random 1500) then {
+        _subTargets pushBack [_targetPos getPos [_spreadOffset, random 360], 20];
+    } else {
+        _subTargets pushBack [_targetPos getPos [_spreadOffset*1.5, random 360], 20];
+        _subTargets pushBack [_targetPos getPos [_spreadOffset*0.75, random 360], _flightTime];
     };
+
+    // Other shots draw a line through the target
+    private _targDir = getPosATL _mortar vectorFromTo _targetPos;
+    private _startPos = _targetPos vectorAdd (_targDir vectorMultiply -0.5*_spreadOffset);
+    private _increment = _targDir vectorMultiply (_spreadOffset / (_shotsForEffect-1));
+
+    _subTargets pushBack [_startPos, _flightTime];
+    for "_i" from 1 to (_shotsForEffect-1) do {
+        private _shotPos = _startPos vectorAdd (_increment vectorMultiply _i);
+        _subTargets pushBack [_shotPos, _reloadTime];
+    };
+
+    private _volleyTime = 0;
+    { _volleyTime = _volleyTime + (_x#1) } forEach _subTargets;
+    _timeout = _timeout max (time + _volleyTime);                // don't cleanup until the volley is done
+    [_reveal, _targetPos, _side, _suppType, 150, _volleyTime] spawn A3A_fnc_showInterceptedSupportCall;
 
     // Start shooting
     _mortar setVariable ["FireOrder", _subTargets];
     [_mortar, _targetPos] spawn _fn_rotateToTarget;
     [_mortar] spawn _fn_executeMortarFire;
-    _numberOfRounds = _numberOfRounds - _shotsPerVolley;
-    _timeout = _timeout max (time + 60);                // don't cleanup until the volley is done
+    _maxVolleys = _maxVolleys - 1;
 
     //Makes sure that all units escape before attacking
     // [_side, _targetMarker] spawn A3A_fnc_clearTargetArea;
-
-    [_reveal, _targetPos, _side, _suppType, 150, 5*60] spawn A3A_fnc_showInterceptedSupportCall;
 };
 
 _mortar removeAllEventHandlers "Fired";

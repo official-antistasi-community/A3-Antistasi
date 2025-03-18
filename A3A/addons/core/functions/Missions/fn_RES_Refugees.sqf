@@ -41,7 +41,7 @@ _displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time po
 _sideX = if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then {Occupants} else {Invaders};
 private _faction = Faction(_sideX);
 _textX = if (_sideX == Occupants) then {format [localize "STR_A3A_fn_mission_res_refu_text1",_nameDest,_displayTime]} 
-else {format [localize "STR_A3A_fn_mission_res_refu_text2",_nameDest,FactionGet(inv,"name"),FactionGet(reb,"name")]};
+else {format [localize "STR_A3A_fn_mission_res_refu_text2",_nameDest,FactionGet(inv,"name"),FactionGet(reb,"name"),_displayTime]};
 _posTsk = if (_sideX == Occupants) then {(position _houseX) getPos [random 100, random 360]} else {position _houseX};
 
 private _taskId = "RES" + str A3A_taskCount;

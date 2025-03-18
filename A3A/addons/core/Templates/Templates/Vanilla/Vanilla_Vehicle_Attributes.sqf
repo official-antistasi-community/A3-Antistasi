@@ -33,3 +33,10 @@ if ("ws" in A3A_enabledDLC) then {
         ["a3a_I_E_Truck_02_zu23_F", ["cost", 60]]
     ];
 };
+
+//Reaction Forces Vehicles
+if (isClass (configFile >> "CfgPatches" >> "RF_Vehicles")) then {
+    (["attributesVehicles"] call _fnc_getFromTemplate) append [
+        ["B_ION_Pickup_aat_rf", ["cost", 40]]
+    ];
+};

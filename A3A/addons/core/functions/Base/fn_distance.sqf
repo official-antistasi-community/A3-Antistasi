@@ -416,15 +416,16 @@ do
     {
         _counter = 0;
 
-        // only count one spawner per vehicle
-        _occupants = units Occupants select { _x getVariable ["spawner", false] and _x == effectiveCommander vehicle _x };
-        _invaders = units Invaders select { _x getVariable ["spawner", false] and _x == effectiveCommander vehicle _x };
+        // Only count one spawner per vehicle. SimpleVM is much faster with split selects
+        _occupants = units Occupants select { _x getVariable ["spawner", false] } select { _x == effectiveCommander vehicle _x };
+        _invaders = units Invaders select { _x getVariable ["spawner", false] } select { _x == effectiveCommander vehicle _x };
 
+        // No effective-commander optimization for players because it breaks on disconnection
+        _teamplayer = units teamPlayer select { _x getVariable ["spawner", false] };
         // Exclude players in fast-moving fixed-wing aircraft
-        _teamplayer = units teamPlayer select {
+        _teamplayer = _teamplayer select {
             private _veh = vehicle _x;
-            _x getVariable ["spawner", false] and _x == effectiveCommander _veh
-            and (_veh == _x or {!(_veh isKindOf "Plane" and speed _veh > 250)})
+            !(_veh isKindOf "Plane") or {isTouchingGround _veh or speed _veh < 80}
         };
         // Add in rebel-controlled UAVs
         _teamplayer append (allUnitsUAV select { side group _x == teamPlayer });
@@ -434,8 +435,7 @@ do
         {
             private _rp = _x getVariable ["owner", _x];         // real player unit in remote-control case
             private _veh = vehicle _rp;
-            if (_rp != effectiveCommander _veh) then { continue };
-            if (_veh == _rp or {!(_veh isKindOf "Air" and speed _veh > 50)}) then { _players pushBack _rp };
+            if (!(_veh isKindOf "Air") or { speed _veh < 50 }) then { _players pushBack _rp };
         } forEach (allPlayers - entities "HeadlessClient_F");
     };
 

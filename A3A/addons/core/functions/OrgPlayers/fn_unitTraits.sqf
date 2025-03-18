@@ -32,6 +32,8 @@ if(roleDescription player == "Default Commander") then
     player setUnitTrait ["audibleCoef",0.8];
     player setUnitTrait ["loadCoef",1.4];
     player setUnitTrait ["medic", true];
+    player setUnitTrait ["explosiveSpecialist", true];
+    player setUnitTrait ["UAVHacker", true];
     // ACE clears the engineer unitTrait and adds this var at CBA initPost, so we have to do it ourselves
     if (missionNamespace getVariable ["ace_repair_enabled", false]) then { player setVariable ["ace_isEngineer", true, true] } else { player setUnitTrait ["engineer", true] };
     _text = localize "STR_A3A_fn_orgp_unitTraits_commander1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_commander2";

@@ -355,7 +355,7 @@ _militaryLoadoutData set ["sidearms", [
 ///////////////////////////////
 
 private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData; // touch and shit breaks
-_policeLoadoutData set ["uniforms", ["U_B_GEN_Soldier_F", "U_B_GEN_Commander_F"]];
+_policeLoadoutData set ["uniforms", ["rhs_uniform_omon"]];
 _policeLoadoutData set ["vests", ["V_TacVest_blk_POLICE"]];
 _policeLoadoutData set ["helmets", ["H_Cap_police"]];
 _policeLoadoutData set ["antiInfantryGrenades", ["rhs_mag_fakel", "rhs_mag_fakels", "rhs_mag_plamyam"]];
@@ -364,13 +364,11 @@ _policeLoadoutData set ["shotGuns", [
 ["rhs_weap_M590_5RD", "", "", "", ["rhsusf_5Rnd_00Buck", "rhsusf_5Rnd_Slug"], [], ""]
 ]];
 _policeLoadoutData set ["SMGs", [
-["rhsusf_weap_MP7A2", "", "rhsusf_acc_wmx_bk", "rhsusf_acc_compm4", [], [], ""],
-["rhsusf_weap_MP7A2", "", "rhsusf_acc_wmx_bk", "rhsusf_acc_mrds", [], [], ""],
-["rhsusf_weap_MP7A2", "", "rhsusf_acc_wmx_bk", "rhsusf_acc_T1_high", [], [], ""],
-["rhsusf_weap_MP7A2", "", "rhsusf_acc_wmx_bk", "rhsusf_acc_eotech_xps3", [], [], ""],
-"rhs_weap_pp2000"]];
+["rhs_weap_aks74u", "rhs_acc_dtk", "", "", ["rhs_30Rnd_545x39_7U1_AK"], [], ""],
+["rhs_weap_akms", "rhs_acc_dtkakm", "", "", ["rhs_10Rnd_762x39mm_U"], [], ""]
+]];
 _policeLoadoutData set ["sidearms", [
-["rhsusf_weap_glock17g4", "", "acc_flashlight_pistol", "", ["rhsusf_mag_17Rnd_9x19_JHP"], [], ""]
+"rhs_weap_makarov_pm"
 ]];
 ////////////////////////////////
 //    Militia Loadout Data    //
@@ -421,6 +419,35 @@ private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["vests", ["V_TacVest_oli"]];
 _pilotLoadoutData set ["helmets", ["rhs_zsh7a_mike"]];
 
+if (isClass (configFile >> "CfgPatches" >> "UK3CB_Factions_Vehicles_SUV")) then {
+    
+    (_militaryLoadoutData get "marksmanRifles") append [
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m21", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]
+    ];
+    (_militaryLoadoutData get "sniperRifles") append [
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m21", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]
+    ];
+    (_militaryLoadoutData get "machineGuns") append [
+    ["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_G", "UK3CB_RPD_100rnd_762x39_GM", "UK3CB_RPD_100rnd_762x39_GT"], [], ""],
+    ["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_G", "UK3CB_RPD_100rnd_762x39_GM", "UK3CB_RPD_100rnd_762x39_GT"], [], ""],
+    ["UK3CB_RPK", "", "", "", ["UK3CB_RPK_40rnd_762x39", "UK3CB_RPK_40rnd_762x39_G", "UK3CB_RPK_40rnd_762x39_GM", "UK3CB_RPK_40rnd_762x39_GT"], [], ""],
+    ["UK3CB_RPK", "", "", "", ["UK3CB_RPK_40rnd_762x39", "UK3CB_RPK_40rnd_762x39_G", "UK3CB_RPK_40rnd_762x39_GM", "UK3CB_RPK_40rnd_762x39_GT"], [], ""]
+    ];
+
+    (_militiaLoadoutData get "machineGuns") append [
+    ["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_G", "UK3CB_RPD_100rnd_762x39_GM", "UK3CB_RPD_100rnd_762x39_GT"], [], ""],
+    ["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_G", "UK3CB_RPD_100rnd_762x39_GM", "UK3CB_RPD_100rnd_762x39_GT"], [], ""],
+    ["UK3CB_RPK", "", "", "", ["UK3CB_RPK_40rnd_762x39", "UK3CB_RPK_40rnd_762x39_G", "UK3CB_RPK_40rnd_762x39_GM", "UK3CB_RPK_40rnd_762x39_GT"], [], ""],
+    ["UK3CB_RPK", "", "", "", ["UK3CB_RPK_40rnd_762x39", "UK3CB_RPK_40rnd_762x39_G", "UK3CB_RPK_40rnd_762x39_GM", "UK3CB_RPK_40rnd_762x39_GT"], [], ""]
+    ];
+    (_militiaLoadoutData get "sniperRifles") append [
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m21", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]
+    ];
+
+    (_policeLoadoutData get "SMGs") append [
+    ["uk3cb_sks_01", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""]
+    ];
+};
 /////////////////////////////////
 //    Unit Type Definitions    //
 /////////////////////////////////

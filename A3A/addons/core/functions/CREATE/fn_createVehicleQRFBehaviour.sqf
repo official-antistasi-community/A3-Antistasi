@@ -138,7 +138,7 @@ else            // ground vehicle
 
         //Set the waypoints for cargoGroup
         private _cargoWP0 = _cargoGroup addWaypoint [_landpos, 0];
-        _cargoWP0 setWaypointType "GETOUT";
+        //_cargoWP0 setWaypointType "GETOUT";
         _cargoWP0 setWaypointStatements ["true", "if !(local this) exitWith {}; (group this) leaveVehicle (assignedVehicle this); (group this) spawn A3A_fnc_attackDrillAI"];
         private _cargoWP1 = _cargoGroup addWaypoint [_posDestination, 0];
         _cargoWP1 setWaypointBehaviour "AWARE";
@@ -170,7 +170,7 @@ else            // ground vehicle
 
         //Set the waypoints for cargoGroup
         private _cargoWP0 = _cargoGroup addWaypoint [_landpos, 0];
-        _cargoWP0 setWaypointType "GETOUT";
+        //_cargoWP0 setWaypointType "GETOUT";
         _cargoWP0 setWaypointStatements ["true", "if !(local this) exitWith {}; (group this) leaveVehicle (assignedVehicle this); (group this) spawn A3A_fnc_attackDrillAI"];
         private _cargoWP1 = _cargoGroup addWaypoint [_posDestination, 0];
         _cargoWP1 setWaypointBehaviour "AWARE";

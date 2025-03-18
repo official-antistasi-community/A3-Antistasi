@@ -35,8 +35,9 @@ private _declareServerVariable = {
 ////////////////////////////////////////
 Info("initialising general server variables");
 
-//time to delete dead bodies, vehicles etc..
-DECLARE_SERVER_VAR(cleantime, 3600);
+private _mapInfo = missionConfigFile/"A3A"/"mapInfo"/toLower worldName;
+if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower worldName};
+
 //initial spawn distance. Less than 1Km makes parked vehicles spawn in your nose while you approach.
 //User-adjustable variables are now declared in initParams
 //DECLARE_SERVER_VAR(distanceSPWN, 1000);
@@ -44,10 +45,15 @@ DECLARE_SERVER_VAR(distanceSPWN1, distanceSPWN*1.3);
 DECLARE_SERVER_VAR(distanceSPWN2, distanceSPWN*0.5);
 //Quantity of Civs to spawn in (most likely per client - Bob Murphy 26.01.2020)
 //DECLARE_SERVER_VAR(globalCivilianMax, 5);
+
 //The furthest distance the AI can attack from using helicopters or planes
-DECLARE_SERVER_VAR(distanceForAirAttack, 10000);
+distanceForAirAttack = if (isNumber (_mapInfo/"distanceForAirAttack")) then { getNumber (_mapInfo/"distanceForAirAttack") } else { 10000 };
+ONLY_DECLARE_SERVER_VAR(distanceForAirAttack);
+
 //The furthest distance the AI can attack from using trucks and armour
-DECLARE_SERVER_VAR(distanceForLandAttack, 3000);			// now faction-adjusted  - if (A3A_hasIFA) then {5000} else {3000});
+distanceForLandAttack = if (isNumber (_mapInfo/"distanceForLandAttack")) then { getNumber (_mapInfo/"distanceForLandAttack") } else { 3000 };
+ONLY_DECLARE_SERVER_VAR(distanceForLandAttack);
+
 //Max units we aim to spawn in. Still declared in initParams and modifiable in game options, but unused
 //DECLARE_SERVER_VAR(maxUnits, 140);
 
@@ -128,7 +134,7 @@ A3A_recentDamageInv = [];
 // Balance params updated by aggressionUpdateLoop
 A3A_balancePlayerScale = 1;					// Important due to load/save scaling to 1 playerScale
 A3A_balanceVehicleCost = 110;
-A3A_balanceResourceRate = A3A_balancePlayerScale * A3A_balanceVehicleCost;
+A3A_balanceResourceRate = A3A_balancePlayerScale * ([A3A_balanceVehicleCost, 140] select (gameMode == 1));
 
 // Current resources, overwritten by saved game
 A3A_resourcesDefenceOcc = A3A_balanceResourceRate * 3;													// 30% of max
@@ -168,10 +174,16 @@ A3A_tasksData = [];
 
 A3A_buildingsToSave = [];
 
+A3A_gcQueue = [];				// List of postmortem objects to clean up
+A3A_gcCleanTime = 1800;			// Base time for deleting postmortem objects
+A3A_gcMaxBumps = 3;				// Max times to delay cleanup for an object that's near players
+
 hcArray = [];					// array of headless client IDs
 
 membersX = [];					// These two published later by startGame
 theBoss = objNull;
+
+createHashMap call A3A_fnc_setRebelLoadouts;		// sets version times, no dependencies
 
 ///////////////////////////////////////////
 //     INITIALISING ITEM CATEGORIES     ///
@@ -260,10 +272,12 @@ FIX_LINE_NUMBERS()
 //////////////////////////////////////
 Info("Setting up faction and DLC equipment flags");
 
+// Arma bug: Need to hardcode CDLC because arma3.cfg mod loading method doesn't register CDLC as "official"
+private _loadedDLC = getLoadedModsInfo select { (_x#2) and !(_x#1 in ["A3","curator","argo","tacops"]) };
+_loadedDLC append (getLoadedModsInfo select { tolower (_x#1) in ["ef", "gm", "rf", "spe", "vn", "ws"] });
+_loadedDLC = _loadedDLC apply { tolower (_x#1) };
+
 // Set enabled & disabled DLC/CDLC arrays for faction/equipment modification
-private _loadedDLC = getLoadedModsInfo select {
-	(_x#3) and {!(_x#1 in ["A3","curator","argo","tacops"])}
-} apply {tolower (_x#1)};
 A3A_enabledDLC = (_saveData get "DLC") apply {tolower _x};                 // should be pre-checked against _loadedDLC
 {
 	A3A_enabledDLC insert [0, getArray (configFile/"A3A"/"Templates"/_x/"forceDLC"), true];		// add unique elements only
@@ -274,7 +288,7 @@ A3A_disabledMods = A3A_disabledDLC;                 // Split to allow CUP civili
 // Everything that counts as vanilla: Official DLC plus various junk tags
 A3A_vanillaMods = (getLoadedModsInfo select {_x#2 and _x#3} apply {tolower (_x#1)}) + ["", "officialmod"];
 
-Debug_3("DLC enabled: %1 Disabled: %2 Vanilla: %3", A3A_enabledDLC, A3A_disabledDLC, A3A_vanillaMods);
+Debug_4("DLC loaded: %1 Enabled: %2 Disabled: %3 Vanilla: %4", _loadedDLC, A3A_enabledDLC, A3A_disabledDLC, A3A_vanillaMods);
 
 // TODO: fix all allowDLCxxx and A3A_hasxxx references in templates
 // for the moment just fudge the ones that we're using
@@ -555,7 +569,7 @@ if (A3A_hasACE) then {
 ////////////////////////////////////
 //     ACRE ITEM MODIFICATIONS   ///
 ////////////////////////////////////
-if (A3A_hasACRE) then {FactionGet(reb,"initialRebelEquipment") append ["ACRE_PRC343","ACRE_PRC148","ACRE_PRC152","ACRE_SEM52SL"];};
+if (A3A_hasACRE) then {FactionGet(reb,"initialRebelEquipment") append ["ACRE_PRC343","ACRE_PRC148","ACRE_PRC152","ACRE_SEM52SL","ACRE_BF888S"];};
 if (A3A_hasACRE && startWithLongRangeRadio) then {FactionGet(reb,"initialRebelEquipment") append ["ACRE_SEM70", "ACRE_PRC117F", "ACRE_PRC77"];};
 
 ////////////////////////////////////

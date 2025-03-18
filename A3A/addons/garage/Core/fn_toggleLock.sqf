@@ -35,7 +35,7 @@ private _owner = _veh#5;
 _success = call {
     if ( _lock isEqualTo "" ) exitWith { true };
     if ( _lock isEqualTo _UID) exitWith { _UID = ""; true };
-    if (_player call HR_GRG_isCmdClient) exitWith { _UID = ""; Info_5("Commander unlock | Vehicle ID: %1 | Owner: %2 [%3] | Commander: %4 [%5]", _vehUID, _owner, _lock, name _player, _UID); true };
+    if (_player call HR_GRG_canOverrideLock) exitWith { _UID = ""; Info_5("Commander unlock | Vehicle ID: %1 | Owner: %2 [%3] | Commander: %4 [%5]", _vehUID, _owner, _lock, name _player, _UID); true };
     false
 };
 if (!_success) exitWith { Trace("Failed to toggle lock") };
@@ -45,7 +45,10 @@ if (_lock isEqualTo "" && !(_vehUID in flatten HR_GRG_Sources) && {[_UID] call H
     ["STR_HR_GRG_Feedback_toggleLock_limit"] remoteExecCall ["HR_GRG_fnc_Hint", _player];
 };
 
+private _lockTime = systemTimeUTC;
+
 _veh set [2, _UID];
 _veh set [5, [name _player, ""] select (_UID isEqualTo "")];
-[_UID, nil, _catIndex, _vehUID, _player, false] call HR_GRG_fnc_broadcast;
+_veh set [7, [_lockTime, 0] select (_UID isEqualTo "")];
+[_UID, nil, _catIndex, _vehUID, _player, false, _lockTime] call HR_GRG_fnc_broadcast;
 Info_3("Lock state toggled for Vehicle ID: %1 | By: %2 | Locked: %3", _vehUID, name _player, (_UID isNotEqualTo ""));

@@ -27,7 +27,8 @@ private _weights = [];
     if (count (garrison getVariable [_x,[]]) < 16) then {continue};
 
     _freeAirports pushBack _x;
-    _weights pushBack (1 / (markerPos _x distance2D _targPos)^2);
+    private _effDist = abs ((markerPos _x distance2D _targPos) - 5000);     // prefer mid-distance spawns
+    _weights pushBack (1 / _effDist^2);
 } forEach airportsX;
 
 // Carrier/air corridor is always available

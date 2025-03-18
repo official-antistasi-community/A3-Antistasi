@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Air Support tab of the Main dialog.
 
 Arguments:
@@ -16,7 +16,10 @@ Dependencies:
     None
 
 Example:
-    ["update"] call A3A_fnc_airSupportTab;
+    ["update"] call FUNC(airSupportTab);
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -37,7 +40,7 @@ switch (_mode) do
         private _backButton = _display displayCtrl A3A_IDC_MAINDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["commander"]] call A3A_fnc_mainDialog;
+            ["switchTab", ["commander"]] call FUNC(mainDialog);
         }];
         _backButton ctrlShow true;
 
@@ -63,15 +66,15 @@ switch (_mode) do
         if (_airSupportPoints < 1) then
         {
             Trace("No air support points, disabling buttons");
-            _heIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _heIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
             _heIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
             _heButton ctrlEnable false;
             _heButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-            _carpetIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _carpetIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
             _carpetIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
             _carpetButton ctrlEnable false;
             _carpetButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-            _napalmIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _napalmIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
             _napalmIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
             _napalmButton ctrlEnable false;
             _napalmButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
