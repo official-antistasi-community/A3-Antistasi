@@ -46,7 +46,7 @@ _newCtrl ctrlShow true;
 //case 3: {localize "STR_HR_GRG_Generic_VTOL"};
 //update category text
 private _text = switch _index do {
-    case 0: {localize "STR_HR_GRG_Generic_Cars_Undercover"};
+    case 0: {localize "STR_HR_GRG_Generic_Cars_Сivilian"};
     case 1: {localize "STR_HR_GRG_Generic_Cars"};
     case 2: {localize "STR_HR_GRG_Generic_APC"};
     case 3: {localize "STR_HR_GRG_Generic_Armored"};
