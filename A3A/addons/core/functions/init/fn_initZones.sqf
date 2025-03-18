@@ -133,26 +133,35 @@ sidesX setVariable ["NATO_carrier", Occupants, true];
 sidesX setVariable ["CSAT_carrier", Invaders, true];
 
 
+Info("Setting up banks");
+
+banks = [];
+
+private _posBank = getArray (_mapInfo/"banks");
+if (_posBank isEqualTo []) then {banks = nearestObjects [[worldSize/2, worldSize/2], ["Land_Offices_01_V1_F"], worldSize]};
+
+{
+	private _bank = nearestObject [_x, "house"];
+	if (isNull _bank) then {
+		Error_1("Building not found at %1", _x);
+		continue;
+	};
+	banks pushBack _bank;
+} forEach _posBank;
+
+
 Info("Setting up antennas");
 
 antennasDead = [];
-banks = [];
 mrkAntennas = [];
 antennas = [];
-private _banktypes = ["Land_Offices_01_V1_F"];
 private _antennatypes = ["Land_TTowerBig_1_F", "Land_TTowerBig_2_F", "Land_Communication_F",
 "Land_Vysilac_FM","Land_A_TVTower_base","Land_Telek1", "Land_vn_tower_signal_01","land_gm_radio_antenna_01"];
 private ["_antenna", "_mrkFinal", "_antennaProv"];
-if (debug) then {
-    Debug("Setting up Radio Towers.");
-};
 
 private _posAntennas = getArray (_mapInfo/"antennas");
 private _blacklistIndex = getArray (_mapInfo/"antennasBlacklistIndex");
 private _hardCodedAntennas = _posAntennas isNotEqualTo [];
-
-private _posBank = getArray (_mapInfo/"banks");
-if ( _posBank isEqualTo []) then {banks = nearestObjects [[worldSize/2, worldSize/2], _banktypes, worldSize]};
 
 // Land_A_TVTower_base can't be destroyed, Land_Communication_F and Land_Vysilac_FM are not replaced with "Ruins" when destroyed.
 // This causes issues with persistent load and rebuild scripts, so we replace those with antennas that work properly.
@@ -264,16 +273,7 @@ if (count _posAntennas > 0) then {
 if (debug) then {
 	Error("Broken Radio Towers identified.");
 };
-if (count _posBank > 0) then {
-	for "_i" from 0 to (count _posBank - 1) do {
-		_bankProv = nearestObjects [_posBank select _i, _banktypes, 30];
 
-		if (count _bankProv > 0) then {
-			private _banco = _bankProv select 0;
-			banks = banks + [_banco];
-		};
-	};
-};
 
 // Make list of markers that don't have a proper road nearby
 // TODO: Nearly obsolete. Switch convoy code to road distance checks & markerNavPoint
