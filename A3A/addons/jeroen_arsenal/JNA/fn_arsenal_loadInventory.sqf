@@ -173,7 +173,7 @@ _itemCounts =+ _availableItems;
 } forEach _availableItems;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  assinged items
-_assignedItems = ((_inventory select 9) + [_inventory select 3] + [_inventory select 4] + [_inventory select 5]);					//todo add binocular batterys
+_assignedItems = ((_inventory select 9) + [_inventory select 3] + [_inventory select 4] + [_inventory select 5]);
 {
 	_item = _x;
 	_amount = 1;
@@ -232,6 +232,18 @@ _assignedItems = ((_inventory select 9) + [_inventory select 3] + [_inventory se
 
 	};
 } forEach _assignedItems - [""];
+
+if (binocular player != "" && count (binocularMagazine player) == 0) then {
+	// Add first infinite binocular magazine to binocular if available
+	{
+		_item = _x;
+		_index = _item call jn_fnc_arsenal_itemType;
+
+		if ([_itemCounts select _index, _item] call jn_fnc_arsenal_itemCount == -1) exitWith {
+			player addBinocularItem _item;
+		};
+	} forEach (getArray (configFile >> "CfgWeapons" >> (binocular player) >> "magazines"));
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// weapons and attachments
 removebackpack player;

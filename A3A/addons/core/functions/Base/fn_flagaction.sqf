@@ -159,7 +159,7 @@ switch _typeX do
             true,
             false,
             "",
-            "!([_target] call A3A_fnc_canFight) && !(_target getVariable ['intelSearchDone', false]) && isPlayer _this",
+            "!([_target] call A3A_fnc_canFight) && !(_target getVariable ['intelSearchDone', false]) && !(_this getVariable ['intelSearching', false]) && isPlayer _this",
             4
         ];
     };
