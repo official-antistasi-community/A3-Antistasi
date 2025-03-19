@@ -39,7 +39,7 @@
     License: APL-ND
 */
 
-#define EXPECTED_LENGTH 9
+#define EXPECTED_LENGTH 11
 
 if (!isServer) exitWith {false};
 #include "defines.inc"

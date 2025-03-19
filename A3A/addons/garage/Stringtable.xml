@@ -495,6 +495,14 @@
         <Original>APC/IFV</Original>
         <Russian>БТР/БМП</Russian>
       </Key>
+      <Key ID="STR_HR_GRG_Generic_AA">
+          <Original>Anti-air</Original>
+          <Russian>ПВО</Russian>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_Arty">
+          <Original>Artillery</Original>
+          <Russian>Артиллерия</Russian>
+      </Key>
       <Key ID="STR_HR_GRG_Generic_Heli">
         <Original>Helicopters</Original>
         <Russian>Вертолёты</Russian>
