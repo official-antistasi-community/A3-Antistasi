@@ -414,9 +414,9 @@ class HR_GRG_VehicleSelect
         // Origins Panel
         class HR_GRG_OriginslWrapper: HR_GRG_RscControlsGroup
         {
-            x = SCREEN_RIGHT - 81 * GRID_NOUISCALE_W;
+            x = SCREEN_RIGHT - 94 * GRID_NOUISCALE_W;
             y = SCREEN_BOTTOM - 7 * GRID_NOUISCALE_H;
-            w = 44 * GRID_NOUISCALE_W;
+            w = 55 * GRID_NOUISCALE_W;
             h = 7 * GRID_NOUISCALE_H;
             size = TEXT_SIZE_MEDIUM;
 
@@ -427,7 +427,7 @@ class HR_GRG_VehicleSelect
                     idc = HR_GRG_IDC_OriginsPanel;
                     x = 0;
                     y = 0;
-                    w = 44 * GRID_NOUISCALE_W;
+                    w = 55 * GRID_NOUISCALE_W;
                     h = 7 * GRID_NOUISCALE_H;
                     size = TEXT_SIZE_HUGE;
                 };
