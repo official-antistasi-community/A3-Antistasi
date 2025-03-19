@@ -167,7 +167,7 @@ class HR_GRG_VehicleSelect
         class HR_GRG_BttnCars: HR_GRG_BttnCarsUndercover
         {
             idc = HR_GRG_IDC_BttnCars;
-            y = SCREEN_TOP + 4 * GRID_NOUISCALE_H;
+            y = SCREEN_TOP + 5 * GRID_NOUISCALE_H;
             text = CarIcon;
             tooltip = $STR_HR_GRG_Generic_Cars;
             action = "[1] call HR_GRG_fnc_switchCategory;";
@@ -175,7 +175,7 @@ class HR_GRG_VehicleSelect
         class HR_GRG_BttnAPC: HR_GRG_BttnCarsUndercover
         {
             idc = HR_GRG_IDC_BttnAPC;
-            y = SCREEN_TOP + 9 * GRID_NOUISCALE_H;
+            y = SCREEN_TOP + 10 * GRID_NOUISCALE_H;
             text = APCIcon;
             tooltip = $STR_HR_GRG_Generic_APC;
             action = "[2] call HR_GRG_fnc_switchCategory;";
@@ -183,7 +183,7 @@ class HR_GRG_VehicleSelect
         class HR_GRG_BttnArmor: HR_GRG_BttnCarsUndercover
         {
             idc = HR_GRG_IDC_BttnArmor;
-            y = SCREEN_TOP + 14 * GRID_NOUISCALE_H;
+            y = SCREEN_TOP + 15 * GRID_NOUISCALE_H;
             text = ArmoredIcon;
             tooltip = $STR_HR_GRG_Generic_Armored;
             action = "[3] call HR_GRG_fnc_switchCategory;";
@@ -191,7 +191,7 @@ class HR_GRG_VehicleSelect
         class HR_GRG_BttnAA: HR_GRG_BttnCarsUndercover
         {
             idc = HR_GRG_IDC_BttnAA;
-            y = SCREEN_TOP + 19 * GRID_NOUISCALE_H;
+            y = SCREEN_TOP + 20 * GRID_NOUISCALE_H;
             text = AAIcon;
             tooltip = $STR_HR_GRG_Generic_AA;
             action = "[4] call HR_GRG_fnc_switchCategory;";
@@ -199,7 +199,7 @@ class HR_GRG_VehicleSelect
         class HR_GRG_BttnArty: HR_GRG_BttnCarsUndercover
         {
             idc = HR_GRG_IDC_BttnArty;
-            y = SCREEN_TOP + 24 * GRID_NOUISCALE_H;
+            y = SCREEN_TOP + 25 * GRID_NOUISCALE_H;
             text = ArtyIcon;
             tooltip = $STR_HR_GRG_Generic_Arty;
             action = "[5] call HR_GRG_fnc_switchCategory;";
@@ -207,7 +207,7 @@ class HR_GRG_VehicleSelect
         class HR_GRG_BttnHeli: HR_GRG_BttnCarsUndercover
         {
             idc = HR_GRG_IDC_BttnHeli;
-            y = SCREEN_TOP + 29 * GRID_NOUISCALE_H;
+            y = SCREEN_TOP + 30 * GRID_NOUISCALE_H;
             text = HeliIcon;
             tooltip = $STR_HR_GRG_Generic_Heli;
             action = "[6] call HR_GRG_fnc_switchCategory;";
@@ -215,7 +215,7 @@ class HR_GRG_VehicleSelect
         class HR_GRG_BttnPlane: HR_GRG_BttnCarsUndercover
         {
             idc = HR_GRG_IDC_BttnPlane;
-            y = SCREEN_TOP + 34 * GRID_NOUISCALE_H;
+            y = SCREEN_TOP + 35 * GRID_NOUISCALE_H;
             text = PlaneIcon;
             tooltip = $STR_HR_GRG_Generic_Plane;
             action = "[7] call HR_GRG_fnc_switchCategory;";
@@ -223,7 +223,7 @@ class HR_GRG_VehicleSelect
         class HR_GRG_BttnBoats: HR_GRG_BttnCarsUndercover
         {
             idc = HR_GRG_IDC_BttnBoats;
-            y = SCREEN_TOP + 39 * GRID_NOUISCALE_H;
+            y = SCREEN_TOP + 40 * GRID_NOUISCALE_H;
             text = BoatIcon;
             tooltip = $STR_HR_GRG_Generic_Boat;
             action = "[8] call HR_GRG_fnc_switchCategory;";
@@ -231,7 +231,7 @@ class HR_GRG_VehicleSelect
         class HR_GRG_BttnSource: HR_GRG_BttnCarsUndercover
         {
             idc = HR_GRG_IDC_BttnSource;
-            y = SCREEN_TOP + 44 * GRID_NOUISCALE_H;
+            y = SCREEN_TOP + 45 * GRID_NOUISCALE_H;
             text = SourceIcon;
             tooltip = $STR_HR_GRG_Generic_Source;
             action = "[9] call HR_GRG_fnc_switchCategory;";
@@ -239,7 +239,7 @@ class HR_GRG_VehicleSelect
         class HR_GRG_BttnStatics: HR_GRG_BttnCarsUndercover
         {
             idc = HR_GRG_IDC_BttnStatics;
-            y = SCREEN_TOP + 49 * GRID_NOUISCALE_H;
+            y = SCREEN_TOP + 50 * GRID_NOUISCALE_H;
             text = StaticIcon;
             tooltip = $STR_HR_GRG_Generic_Static;
             action = "[10] call HR_GRG_fnc_switchCategory;";
