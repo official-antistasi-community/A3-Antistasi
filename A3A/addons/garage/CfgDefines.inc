@@ -99,6 +99,8 @@
 #define BoatIcon "\a3\ui_f\data\GUI\Rsc\RscDisplayGarage\naval_ca.paa"
 #define StaticIcon "\a3\ui_f\data\GUI\Rsc\RscDisplayGarage\static_ca.paa"
 #define SourceIcon "\A3\soft_f_gamma\Truck_02\Data\UI\Truck_02_fuel_CA.paa"
+#define ArtyIcon "\A3\Soft_F_Gamma\Truck_02\Data\UI\Truck_02_MRL_CA.paa"
+#define AAIcon "\A3\armor_f_beta\APC_Tracked_02\Data\UI\APC_Tracked_02_aa_ca.paa"
 
 #define DriverIcon "\a3\ui_f\data\IGUI\RscIngameUI\RscUnitInfo\role_driver_ca.paa"
 #define GunnerIcon "\a3\ui_f\data\IGUI\RscIngameUI\RscUnitInfo\role_gunner_ca.paa"
