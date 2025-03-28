@@ -43,6 +43,7 @@ class CfgMissions
         A3A_Mission(sara)
         A3A_Mission(SPE_Mortain)
         A3A_Mission(SPE_Normandy)
+        A3A_Mission(stubbhult)
         A3A_Mission(takistan)
         A3A_Mission(Tanoa)
         A3A_Mission(Tembelan)

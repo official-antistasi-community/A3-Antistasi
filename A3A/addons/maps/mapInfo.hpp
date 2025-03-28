@@ -16,6 +16,7 @@ class mapInfo {
     #include "Antistasi_SPE_Mortain.SPE_Mortain\mapInfo.hpp"
     #include "Antistasi_SPE_Normandy.SPE_Normandy\mapInfo.hpp"
     #include "Antistasi_Stratis.Stratis\mapInfo.hpp"
+    #include "Antistasi_stubbhult.stubbhult\mapInfo.hpp"
     #include "Antistasi_takistan.takistan\mapInfo.hpp"
     #include "Antistasi_Tanoa.Tanoa\mapInfo.hpp"
     #include "Antistasi_Tembelan.Tembelan\mapInfo.hpp"

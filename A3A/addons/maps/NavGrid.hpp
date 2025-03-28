@@ -16,6 +16,7 @@ class NavGrid {
     SPE_Mortain = QPATHTOFOLDER(Antistasi_SPE_Mortain.SPE_Mortain\navGrid.sqf);
     SPE_Normandy = QPATHTOFOLDER(Antistasi_SPE_Normandy.SPE_Normandy\navGrid.sqf);
     Stratis = QPATHTOFOLDER(Antistasi_Stratis.Stratis\navGrid.sqf);
+    stubbhult = QPATHTOFOLDER(Antistasi_stubbhult.stubbhult\navGrid.sqf);
     takistan = QPATHTOFOLDER(Antistasi_takistan.takistan\navGrid.sqf);
     Tanoa = QPATHTOFOLDER(Antistasi_Tanoa.Tanoa\navGrid.sqf);
     Tembelan = QPATHTOFOLDER(Antistasi_Tembelan.Tembelan\navGrid.sqf);

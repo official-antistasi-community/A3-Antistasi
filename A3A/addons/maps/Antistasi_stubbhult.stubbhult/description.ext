@@ -1,0 +1,29 @@
+#include "..\missionDescription\master.hpp"
+
+OnLoadName = $STR_antistasi_mission_info_stubbhult_mapname_short_text;
+OnLoadMission = $STR_antistasi_mission_info_stubbhult_blurb_text;
+briefingName = $STR_antistasi_mission_info_stubbhult_mapname_text;
+overviewText = $STR_antistasi_mission_info_stubbhult_description_text;
+loadScreen = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
+overviewPicture = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
+
+class CfgDiscordRichPresence
+{
+    applicationID="819852407265034260";
+    defaultDetails="";
+    defaultState="";
+    defaultLargeImageKey="stubbhult";
+    defaultLargeImageText="Antistasi Plus - Stubbhult";
+    defaultSmallImageKey="arma_3_logo";
+    defaultSmallImageText="Arma 3 Custom Scenario";
+    useTimeElapsed=1;
+};
+
+class CfgNotifications
+{
+    #include "..\missionDescription\CfgNotificationsContents.hpp"
+};
+
+class CfgDebriefing {
+    #include "..\missionDescription\CfgDebriefingContents.hpp"
+};
