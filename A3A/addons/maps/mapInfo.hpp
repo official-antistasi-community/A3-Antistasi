@@ -24,4 +24,5 @@ class mapInfo {
     #include "Antistasi_UMB_Colombia.UMB_Colombia\mapInfo.hpp"
     #include "Antistasi_vn_khe_sanh.vn_khe_sanh\mapInfo.hpp"
     #include "Antistasi_vt7.vt7\mapInfo.hpp"
+    #include "Antistasi_Australia.Australia\mapInfo.hpp"
 };
