@@ -1,0 +1,41 @@
+#include "..\missionDescription\master.hpp"
+
+OnLoadName = $STR_A3AE_maps_Australia_mapname_short;
+OnLoadMission = $STR_A3AE_maps_Australia_loadText;
+briefingName = $STR_A3AE_maps_Australia_mapname;
+overviewText = $STR_A3AE_maps_Australia_description;
+loadScreen = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
+overviewPicture = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
+
+class CfgNotifications
+{
+    #include "..\missionDescription\CfgNotificationsContents.hpp"
+};
+
+class CfgDebriefing {
+    #include "..\missionDescription\CfgDebriefingContents.hpp"
+	class End1
+	{
+		title = "V I C T O R Y";
+		subtitle = "Australia is Ours!";
+		description = "The population of Australia loves you!<br/>The brave soldiers have proven their valour, and Petros, Australia new Prime Minister, could at last to have a nice holidays. A deserved rest in a Greek island with drinks and fine food.";
+		picture = "n_inf";
+		pictureColor[] = {0.0,0.5,0.0,1};
+	};
+    class petrosDead
+    {
+        title = "Petros is Dead";
+        subtitle = "Petros is Dead";
+        description = "Congratulations!: Petros is Dead. Now with rebels without a leader, you may think about joining them, and free Australia";
+        picture = "b_unknown";
+        pictureColor[] = {0.5,0.0,0.0,1};
+    };
+    class destroyedSites
+    {
+        title = "Australia is Destroyed";
+        subtitle = "Australia got Destroyed by OPFOR";
+        description = "One third of the population in Australia has been murdered by the OPFOR.<br/>Australia no longer exists, nobody wants to live here.";
+        picture = "b_unknown";
+        pictureColor[] = {0.5,0.0,0.0,1};
+    };
+};
