@@ -29,7 +29,7 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 		private _varName = format ["player_%1_%2", _playerID, _x];
 		_namespace setVariable [_varname + _postfix, nil];
 
-	} forEach ["loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage", "moneyX"];
+	} forEach ["loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage", "moneyX","missionsCompleted"];
 
 } forEach _savedPlayers;
 

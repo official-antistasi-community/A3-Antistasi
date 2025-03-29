@@ -2,7 +2,7 @@
 FIX_LINE_NUMBERS()
 private _titleStr = localize "STR_A3A_fn_reinf_addSqdHC_title";
 
-params ["_typeGroup", ["_withBackpck", ""]];
+params ["_typeGroup", ["_withBackpck", ""], ["_spawnVeh", ""]];
 
 if (player != theBoss) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_commander"] call A3A_fnc_customHint;};
 if (markerAlpha respawnTeamPlayer == 0) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdHC_no_movehq"] call A3A_fnc_customHint;};
@@ -114,7 +114,7 @@ if (_isInfantry and (_costs + _vehCost) > server getVariable "resourcesFIA") exi
 #ifdef UseDoomGUI
     ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-    createDialog "veh_query";
+     if (_spawnVeh isEqualType "") then {_spawnVeh = false; createDialog "veh_query"};
 #endif
 sleep 1;
 disableSerialization;
@@ -128,7 +128,7 @@ if (str (_display) != "no display") then {
 };
 
 waitUntil {(!dialog) or (!isNil "vehQuery")};
-if ((!dialog) and (isNil "vehQuery")) exitWith { [_formatX, _idFormat, _special, objNull] spawn A3A_fnc_spawnHCGroup }; //spawn group call here
+if ((!dialog) and (isNil "vehQuery") and !(_spawnVeh)) exitWith { [_formatX, _idFormat, _special, objNull] spawn A3A_fnc_spawnHCGroup }; //spawn group call here
 
 vehQuery = nil;
 [_vehType, _fnc_placed, _fnc_placeCheck, [_formatX, _idFormat, _special], _mounts] call _vehiclePlacementMethod;

@@ -37,9 +37,6 @@ switch (_mode) do
     {
         Debug("RecruitSquadDialog onLoad starting...");
 
-        // TODO UI-update: part of a temporary fix, to be removed
-        vehQuery = nil;
-
         // Separated because initial "onLoad" needs scheduled env while other updates needs unscheduled
         ["update"] call FUNC(recruitSquadDialog);
 
@@ -85,6 +82,17 @@ switch (_mode) do
         // Get vehicle CB state
         private _includeVehicle = cbChecked _includeVehicleCheckbox;
 
+        // Define groups
+        private _groupsSDKSquad =FactionGet(reb,"groupSquad");
+        // private _groupsSDKSquadEng = FactionGet(reb,"groupSquadEng");
+        private _groupsSDKMid = FactionGet(reb,"groupMedium");
+        private _SDKMGStatic = FactionGet(reb,"staticMGs")#0;
+        private _groupsSDKAT = FactionGet(reb,"groupAT");
+        private _SDKMortar = FactionGet(reb,"staticMortars")#0;
+        private _groupsSDKSniper = FactionGet(reb,"groupSniper");
+        private _vehSDKAT = FactionGet(reb,"vehiclesAT")#0;
+        private _staticAAteamPlayer = FactionGet(reb,"staticAA")#0;
+        
         // Classnames for vehicles
         private _infSquadVehicle = "";
         // private _engSquadVehicle = "";
@@ -96,43 +104,43 @@ switch (_mode) do
         // AT cars and AA trucks obviously already have vehicles by default
 
         if (_includeVehicle) then {
-            _infSquadVehicle = [groupsSDKSquad] call A3A_fnc_getHCSquadVehicleType;
-            // _engSquadVehicle = [groupsSDKSquadEng] call A3A_fnc_getHCSquadVehicleType;
-            _infTeamVehicle = [groupsSDKmid] call A3A_fnc_getHCSquadVehicleType;
-            _mgTeamVehicle = [SDKMGStatic] call A3A_fnc_getHCSquadVehicleType;
-            _atTeamVehicle = [groupsSDKAT] call A3A_fnc_getHCSquadVehicleType;
-            _mortarTeamVehicle = [SDKMortar] call A3A_fnc_getHCSquadVehicleType;
-            _sniperTeamVehicle = [groupsSDKSniper] call A3A_fnc_getHCSquadVehicleType;
+            _infSquadVehicle = [_groupsSDKSquad] call A3A_fnc_getHCSquadVehicleType;
+            // _engSquadVehicle = [_groupsSDKSquadEng] call A3A_fnc_getHCSquadVehicleType;
+            _infTeamVehicle = [_groupsSDKmid] call A3A_fnc_getHCSquadVehicleType;
+            _mgTeamVehicle = [_SDKMGStatic] call A3A_fnc_getHCSquadVehicleType;
+            _atTeamVehicle = [_groupsSDKAT] call A3A_fnc_getHCSquadVehicleType;
+            _mortarTeamVehicle = [_SDKMortar] call A3A_fnc_getHCSquadVehicleType;
+            _sniperTeamVehicle = [_groupsSDKSniper] call A3A_fnc_getHCSquadVehicleType;
         };
 
         // Set variables for squad and vehicle types on the button
-        _infSquadButton setVariable ["squadType", groupsSDKSquad];
+        _infSquadButton setVariable ["squadType", _groupsSDKSquad];
         _infSquadButton setVariable ["vehicle", _infSquadVehicle];
-        _infTeamButton setVariable ["squadType", groupsSDKmid];
+        _infTeamButton setVariable ["squadType", _groupsSDKmid];
         _infTeamButton setVariable ["vehicle", _infTeamVehicle];
-        _mgTeamButton setVariable ["squadType", SDKMGStatic];
+        _mgTeamButton setVariable ["squadType", _SDKMGStatic];
         _mgTeamButton setVariable ["vehicle", _mgTeamVehicle];
-        _atTeamButton setVariable ["squadType", groupsSDKAT];
+        _atTeamButton setVariable ["squadType", _groupsSDKAT];
         _atTeamButton setVariable ["vehicle", _atTeamVehicle];
-        _mortarTeamButton setVariable ["squadType", SDKMortar];
+        _mortarTeamButton setVariable ["squadType", _SDKMortar];
         _mortarTeamButton setVariable ["vehicle", _mortarTeamVehicle];
-        _sniperTeamButton setVariable ["squadType", groupsSDKSniper];
+        _sniperTeamButton setVariable ["squadType", _groupsSDKSniper];
         _sniperTeamButton setVariable ["vehicle", _sniperTeamVehicle];
-        _atCarButton setVariable ["squadType", vehSDKAT];
+        _atCarButton setVariable ["squadType", _vehSDKAT];
         _atCarButton setVariable ["vehicle", ""];
-        _aaTruckButton setVariable ["squadType", staticAAteamPlayer];
+        _aaTruckButton setVariable ["squadType", _staticAAteamPlayer];
         _aaTruckButton setVariable ["vehicle", ""];
 
         // Get prices
-        private _infSquadPrice = [groupsSDKSquad, _infSquadVehicle] call A3A_fnc_getHCSquadPrice;
-        // private _engSquadPrice = [groupsSDKSquadEng, _engSquadVehicle] call A3A_fnc_getHCSquadPrice;
-        private _infTeamPrice = [groupsSDKmid, _infTeamVehicle] call A3A_fnc_getHCSquadPrice;
-        private _mgTeamPrice = [SDKMGStatic, _mgTeamVehicle] call A3A_fnc_getHCSquadPrice;
-        private _atTeamPrice = [groupsSDKAT, _atTeamVehicle] call A3A_fnc_getHCSquadPrice;
-        private _mortarTeamPrice = [SDKMortar, _mortarTeamVehicle] call A3A_fnc_getHCSquadPrice;
-        private _sniperTeamPrice = [groupsSDKSniper, _sniperTeamVehicle] call A3A_fnc_getHCSquadPrice;
-        private _atCarPrice = [vehSDKAT] call A3A_fnc_getHCSquadPrice;
-        private _aaTruckPrice = [staticAAteamPlayer] call A3A_fnc_getHCSquadPrice;
+        private _infSquadPrice = [_groupsSDKSquad, _infSquadVehicle] call A3A_fnc_getHCSquadPrice;
+        // private _engSquadPrice = [_groupsSDKSquadEng, _engSquadVehicle] call A3A_fnc_getHCSquadPrice;
+        private _infTeamPrice = [_groupsSDKmid, _infTeamVehicle] call A3A_fnc_getHCSquadPrice;
+        private _mgTeamPrice = [_SDKMGStatic, _mgTeamVehicle] call A3A_fnc_getHCSquadPrice;
+        private _atTeamPrice = [_groupsSDKAT, _atTeamVehicle] call A3A_fnc_getHCSquadPrice;
+        private _mortarTeamPrice = [_SDKMortar, _mortarTeamVehicle] call A3A_fnc_getHCSquadPrice;
+        private _sniperTeamPrice = [_groupsSDKSniper, _sniperTeamVehicle] call A3A_fnc_getHCSquadPrice;
+        private _atCarPrice = [_vehSDKAT] call A3A_fnc_getHCSquadPrice;
+        private _aaTruckPrice = [_staticAAteamPlayer] call A3A_fnc_getHCSquadPrice;
 
         // Split money and HR from price array
         _infSquadPrice params ["_infSquadMoney", "_infSquadHr"];
@@ -212,12 +220,15 @@ switch (_mode) do
         private _button = (_params # 0) # 0;
         private _squadType = _button getVariable ["squadType", []];
         private _vehicle = _button getVariable ["vehicle", ""];
-        // TODO UI-update: Temporary fix so this just works, to be replaced with something more sensible
-        if (_vehicle isNotEqualTo "") then {vehQuery = true};
+        // Get vehicle CB state
+        private _display = findDisplay A3A_IDD_RECRUITSQUADDIALOG;
+        private _includeVehicleCheckbox = _display displayCtrl A3A_IDC_SQUADINCLUDEVEHICLECHECKBOX;
+        private _includeVehicle = cbChecked _includeVehicleCheckbox;
+
         closeDialog 1;
         // Previous format, to be changed back to this
         // [_squadType, _vehicle] spawn A3A_fnc_addFIAsquadHC;
-        [_squadType] spawn A3A_fnc_addFIAsquadHC;
+        [_squadType, "", _includeVehicle] spawn A3A_fnc_addFIAsquadHC;
     };
 
     default {

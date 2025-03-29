@@ -554,6 +554,8 @@ class CfgFunctions
             class FIAskillAdd {};
             class garrisonAdd {};
             class garrisonDialog {};
+            class getHCSquadPrice {};
+            class getHCSquadVehicleType {};
             class NATObomb {};
             class reDress {};
             class reinfPlayer {};
@@ -770,6 +772,7 @@ class CfgFunctions
 
         class Utility {
             file = QPATHTOFOLDER(functions\Utility);
+            class adminData {};
             class basicBackpack {};
             class boxCollisionCheck {};
             class classNameToModel {};

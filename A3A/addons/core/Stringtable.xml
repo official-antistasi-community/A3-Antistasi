@@ -5611,7 +5611,7 @@
         <Chinesesimp>%1 没有足以能够拿取的资源</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_tBSteal_grab_yes">
-        <Original>You grabbed %1 € from the %1 Money Pool.&lt;br/&gt;&lt;br/&gt;This will affect your prestige and status among %1 forces.</Original>
+        <Original>You grabbed %1 € from the %2 Money Pool.&lt;br/&gt;&lt;br/&gt;This will affect your prestige and status among %2 forces.</Original>
         <Italian>Hai preso 100 € dal fondo %1.&lt;br/&gt;&lt;br/&gt;Ciò influirà sul tuo status tra le forze %1.</Italian>
         <French>Vous aves pris 100 € de la réserve d'argent de %1. &lt;br/&gt;&lt;br/&gt; Cela va affecter votre prestige et votre statut au sein des forces de %1.</French>
         <Korean>당신은 %1의 공동 자금에서 100€를 가져갔습니다.&lt;br/&gt;&lt;br/&gt;이는 %1의 군 내에서 당신의 지위와 위신에 영향을 미칠 것입니다.</Korean>

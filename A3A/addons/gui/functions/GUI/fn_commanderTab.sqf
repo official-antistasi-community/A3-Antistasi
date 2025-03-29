@@ -42,6 +42,14 @@ private _noRadioControlsGroup = _display displayCtrl A3A_IDC_NORADIOCONTROLSGROU
 private _garbageCleanControlsGroup = _display displayCtrl A3A_IDC_GARBAGECLEANCONTROLSGROUP;
 private _airSupportButton = _display displayCtrl A3A_IDC_AIRSUPPORTBUTTON;
 private _garbageCleanButton = _display displayCtrl A3A_IDC_GARBAGECLEANBUTTON;
+private _arsenalLimitsButton = _display displayCtrl A3A_IDC_ARSENALLIMITSBUTTON;
+private _customizeLoadoutsButton = _display displayCtrl A3A_IDC_CUSTOMIZELOADOUTSBUTTON;
+private _recruitSquadButton = _display displayCtrl A3A_IDC_RECRUITSQUADCMDBUTTON;
+private _requestMissionButton = _display displayCtrl A3A_IDC_MISSIONREQUESTBUTTON;
+private _createWatchpostButton = _display displayCtrl A3A_IDC_ADDWATCHPOSTBUTTON;
+private _removeWatchpostButton = _display displayCtrl A3A_IDC_REMOVEWATCHPOSTBUTTON;
+private _HCSquadsButton = _display displayCtrl A3A_IDC_HCSQUADSBUTTON;
+private _baseButtons = [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_recruitSquadButton,_requestMissionButton,_createWatchpostButton,_removeWatchpostButton,_HCSquadsButton];
 
 switch (_mode) do
 {
@@ -61,9 +69,8 @@ switch (_mode) do
         _noRadioControlsGroup ctrlShow false;
         _garbageCleanControlsGroup ctrlShow false;
 
-        // Show Air Support and Garbage Clean buttons
-        _airSupportButton ctrlShow true;
-        _garbageCleanButton ctrlShow true;
+        // Show base buttons
+        {_x ctrlShow true} forEach _baseButtons;
 
         // Check for radio, most of this isn't usable without one
         if !([player] call A3A_fnc_hasRadio) exitWith
@@ -92,10 +99,12 @@ switch (_mode) do
         {
             // If a group is selected show the single group view
             ["updateSingleGroupView"] call FUNC(commanderTab);
-        } else {
+        };
+        /* else {
             // If no group is selected show the multiple groups view
             ["updateMultipleGroupsView"] call FUNC(commanderTab);
         };
+        */
     };
 
     case ("updateSingleGroupView"):
@@ -103,6 +112,7 @@ switch (_mode) do
         _multipleGroupsView ctrlShow false;
         _multipleGroupsBackground ctrlShow false;
         _multipleGroupsLabel ctrlShow false;
+        {_x ctrlShow false} forEach _baseButtons;
         _singleGroupView ctrlShow true;
 
         // Hide fire mission button initially
@@ -262,6 +272,7 @@ switch (_mode) do
     case ("updateMultipleGroupsView"):
     {
         _singleGroupView ctrlShow false;
+        {_x ctrlShow false} forEach _baseButtons;
         _multipleGroupsView ctrlShow true;
         _multipleGroupsBackground ctrlShow true;
         _multipleGroupsLabel ctrlShow true;

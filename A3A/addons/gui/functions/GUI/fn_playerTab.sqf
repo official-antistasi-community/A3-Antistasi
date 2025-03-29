@@ -164,7 +164,7 @@ switch (_mode) do
         private _time = (time - A3A_aliveTime); // current time - time since last (re)spawn
         _aliveText ctrlSetText format [[_time,1,1,false,2,false,true] call A3A_fnc_timeSpan_format];
 
-        private _missions = player getVariable "missionsCompleted";
+        private _missions = player getVariable ["missionsCompleted",0];
         _missionsText ctrlSetText str _missions;
 
         private _kills = (getPlayerScores player)#0;

@@ -67,23 +67,43 @@ switch (_mode) do
         // _aiLimiterSlider sliderSetPosition _aiLimiter;
         // ctrlSetText [A3A_IDC_AILIMITEREDITBOX, str _aiLimiter];
 
-        // Get Debug info
-        private _debugText = _display displayCtrl A3A_IDC_DEBUGINFO;
-        private _missionTime = [serverTime] call A3A_fnc_timespan_format;
-        // private _rawServerFps = remoteExecCall ["diag_fps",2];
-        private _rawServerFps = diag_fps; // TODO UI-update get server FPS not client
-        private _serverFps = (round (_rawServerFPS * 10)) / 10;
-        private _connectedHCs = count entities "HeadlessClient_F";
-        private _players = count allPlayers - _connectedHCs;
+        // stat panel is updated by case in mainDialog
+    };
 
-        private _allUnits = count allUnits;
-        private _deadUnits = count allDead;
-        private _countGroups = count allGroups;
-        private _countRebels = {side _x == teamPlayer} count allUnits;
-        private _countInvaders = {side _x == Invaders} count allUnits;
-        private _countOccupants = {side _x == Occupants} count allUnits;
-        private _countCiv = {side _x == civilian} count allUnits;
-        private _destroyedVehicles = {!alive _x} count vehicles;
+    case ("updateStatPanel"):
+    {
+        // Get Debug info
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _debugText = _display displayCtrl A3A_IDC_DEBUGINFO;
+        private _missionTime = format [[serverTime,1,1,false,2,false,true] call A3A_fnc_timeSpan_format];
+        private ["_serverFPS","_deadUnits","_allUnits","_countRebels","_countInvaders","_countOccupants","_countCiv","_countGroups","_players","_destroyedVehicles","_connectedHCs"];
+
+        if(!isNil "A3A_AdminData") then 
+        {
+            _serverFps = A3A_AdminData#0;
+            _deadUnits = A3A_AdminData#1;
+            _allUnits = A3A_AdminData#2;
+            _countRebels = A3A_AdminData#4;
+            _countInvaders = A3A_AdminData#5;
+            _countOccupants = A3A_AdminData#6;
+            _countCiv = A3A_AdminData#7;
+            _countGroups = A3A_AdminData#8;
+            _players = A3A_AdminData#9;
+            _destroyedVehicles = A3A_AdminData#10;
+            _connectedHCs = A3A_AdminData#12;
+        } else {
+            _serverFps = (round (diag_fps * 10)) / 10;
+            _connectedHCs = count entities "HeadlessClient_F";
+            _players = count allPlayers - _connectedHCs;
+            _allUnits = count allUnits;
+            _deadUnits = count allDead;
+            _countGroups = count allGroups;
+            _countRebels = {side _x == teamPlayer} count allUnits;
+            _countInvaders = {side _x == Invaders} count allUnits;
+            _countOccupants = {side _x == Occupants} count allUnits;
+            _countCiv = {side _x == civilian} count allUnits;
+            _destroyedVehicles = {!alive _x} count vehicles;
+        };
 
         // TODO UI-update: localize later, not final yet
         private _formattedString = format [
@@ -115,8 +135,7 @@ switch (_mode) do
         _destroyedVehicles
         ];
 
-        _debugText ctrlSetStructuredText parseText _formattedString;
-
+        _debugText ctrlSetStructuredText parseText _formattedString; 
     };
 
     case ("civLimitSliderChanged"):
@@ -204,7 +223,7 @@ switch (_mode) do
             [player,"globalCivilianMax","set", _globalCivilianMax, true] remoteExecCall ["A3A_fnc_HQGameOptions",2];
             [player,"distanceSPWN","set", _distanceSPWN, true] remoteExecCall ["A3A_fnc_HQGameOptions",2];
 
-            // TODO UI-update: Placeholder routine, don't merge! Has no security checks whatsoever
+            // Placeholder routine, don't merge! Has no security checks whatsoever
             // Trace_3("Changing AI Settings - globalCivilianMax:%1, distanceSPWN:%2, maxUnits:%3", _globalCivilianMax, _distanceSPWN, _maxUnits);
             // missionNamespace setVariable ["globalCivilianMax", _globalCivilianMax];
             // missionNamespace setVariable ["distanceSPWN", _distanceSPWN];

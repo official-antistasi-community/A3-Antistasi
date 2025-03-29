@@ -967,7 +967,7 @@
         <Chinesesimp>战争等级：</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_train_tooltip">
-        <Original>This will cost %1</Original>
+        <Original>This will cost € %1</Original>
       </Key>
     </Container>
     <Container name="dialog_hq_garrisons">
@@ -2625,6 +2625,18 @@
         <Portuguese>Controlar remotamente líder do grupo</Portuguese>
         <Turkish>Grup liderini uzaktan kumanda et</Turkish>
         <Chinesesimp>远程控制组长</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_arsenal_limits_button">
+        <Original>Arsenal Limits</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_customize_loadouts_button">
+        <Original>Customize Loadouts</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_button">
+        <Original>Garrisons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_recruit_squad_button">
+        <Original>Recruit Squad</Original>
       </Key>
     </Container>
     <Container name="dialog_main_donate">

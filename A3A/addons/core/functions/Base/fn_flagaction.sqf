@@ -41,6 +41,7 @@ switch _typeX do
 
         petros addAction [localize "STR_A3A_fn_base_flagaction_hq_build", A3A_fnc_buildHQ,nil,0,false,true,"","(_this == theBoss) and (petros != leader group petros)",4];
         petros addAction ["Experimental HQ Management. Work in Progress.", { createDialog "A3A_HqDialog"; },nil,0,false,true,"","A3A_GUIDevPreview and (_this == theBoss) and (petros == leader group petros)",4];
+        petros addAction ["Mission Request WIP", { createDialog "A3A_RequestMissionDialog"; },nil,0,false,true,"","A3A_GUIDevPreview and ([_this] call A3A_fnc_isMember or _this == theBoss)",4];
     };
     case "truckX":
     {
