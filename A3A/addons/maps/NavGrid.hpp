@@ -24,4 +24,5 @@ class NavGrid {
     UMB_Colombia = QPATHTOFOLDER(Antistasi_UMB_Colombia.UMB_Colombia\navGrid.sqf);
     vn_khe_sanh = QPATHTOFOLDER(Antistasi_vn_khe_sanh.vn_khe_sanh\navGrid.sqf);
     vt7 = QPATHTOFOLDER(Antistasi_vt7.vt7\navGrid.sqf);
+    Australia = QPATHTOFOLDER(Antistasi_Australia.Australia\navGrid.sqf);
 };
