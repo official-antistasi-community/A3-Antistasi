@@ -97,7 +97,7 @@ if (_vehicle isKindOf "Ship") then {
     };
 
     if (_isAttack) then {
-        private _vehWP1 = _crewGroup addWaypoint [ASLtoATL _seaPath#2, 0];
+        private _vehWP1 = _crewGroup addWaypoint [ASLtoATL (_seaPath#2), 0];
         _vehWP1 setWaypointType "SAD";
         _vehWP1 setWaypointBehaviour "COMBAT";
     };
