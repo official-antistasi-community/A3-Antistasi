@@ -44,6 +44,7 @@ switch (_mode) do
     {
         Debug("MainDialog onLoad starting...");
 
+        private _isArty = (player getVariable ["accessingArtyMenu",false]);
         // Disable/hide unavailable tab buttons
         if (player isNotEqualTo theBoss) then {
             private _commanderTabButton = _display displayCtrl A3A_IDC_COMMANDERTABBUTTON;
@@ -63,7 +64,11 @@ switch (_mode) do
         setGroupIconsSelectable false;
 
         // Show player tab content
-        ["switchTab", ["player"]] call FUNC(mainDialog);
+        if !(_isArty) then {
+            ["switchTab", ["player"]] call FUNC(mainDialog);
+        } else {
+            ["switchTab", ["commander"]] call FUNC(mainDialog);
+        };
 
         // Cache group info in map control
         Debug("Caching group info");
@@ -105,9 +110,6 @@ switch (_mode) do
         // User Markers
         private _commanderUserMarkersEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawUserMarkersEH"];
         Debug_1("Adding user markers Draw EH to commander map: %1", _commanderUserMarkersEH);
-
-
-
 
         // Fast Travel map Draw EHs
         private _fastTravelMap = _display displayCtrl A3A_IDC_FASTTRAVELMAP;

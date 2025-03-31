@@ -142,8 +142,10 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class ConstructButton : A3A_Button
                 {
                     idc = A3A_IDC_CONSTRUCTBUTTON;
-                    text = $STR_antistasi_dialogs_main_construct;
-                    onButtonClick = "[""switchTab"", [""construct""]] call A3A_GUI_fnc_mainDialog;";
+                    // text = $STR_antistasi_dialogs_main_construct;
+                    text = "Old Battle Menu";
+                    // onButtonClick = "[""switchTab"", [""construct""]] call A3A_GUI_fnc_mainDialog;";
+                    onButtonClick = "closeDialog 0; createDialog 'radio_comm';";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 20 * GRID_W;
                     y = 53 * GRID_H;
@@ -714,6 +716,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = -1;
                             text = $STR_antistasi_dialogs_main_hc_mount; // TODO UI-update: update on mount status
+                            onButtonClick = "[""groupMountButtonClicked""] call A3A_GUI_fnc_commanderTab";
                             x = 2 * GRID_H;
                             y = 40 * GRID_H;
                             w = 24 * GRID_W;
@@ -724,6 +727,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = -1;
                             text = $STR_antistasi_dialogs_main_hc_add_vehicle;
+                            onButtonClick = "[""groupAddVehicleButtonClicked""] call A3A_GUI_fnc_commanderTab";
                             x = 2 * GRID_H;
                             y = 54 * GRID_H;
                             w = 24 * GRID_W;
@@ -734,6 +738,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = -1;
                             text = $STR_antistasi_dialogs_main_hc_garrison;
+                            onButtonClick = "[""groupGarrisonButtonClicked""] call A3A_GUI_fnc_commanderTab";
                             x = 28 * GRID_W;
                             y = 40 * GRID_H;
                             w = 24 * GRID_W;
@@ -1195,11 +1200,11 @@ class A3A_MainDialog : A3A_TabbedDialog
                     h = 12 * GRID_H;
                 };
 
-                class RemoveWatchpostButton : A3A_ShortcutButton
+                class RemoveGarrisonButton : A3A_ShortcutButton
                 {
-                    idc = A3A_IDC_REMOVEWATCHPOSTBUTTON;
-                    text = "Remove WP/RB";
-                    onButtonClick = "closeDialog 0; [""delete""] spawn A3A_fnc_outpostDialog";
+                    idc = A3A_IDC_REMOVEGARRISONBUTTON;
+                    text = "Remove Garrison";
+                    onButtonClick = "closeDialog 0; ['rem'] spawn A3A_fnc_garrisonDialog";
                     x = 36 * GRID_W;
                     y = 38 * GRID_H;
                     w = 24 * GRID_W;

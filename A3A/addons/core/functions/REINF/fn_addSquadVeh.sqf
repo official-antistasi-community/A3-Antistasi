@@ -1,9 +1,15 @@
 private ["_veh","_esStatic","_groupX","_maxCargo"];
 private _titleStr = localize "STR_A3A_fn_reinf_addSqdVeh_title";
+params [["_group",[]]];
+if (_group isEqualTo []) then { // this logic is weird but theres not a great way to do it
+	if (count hcSelected player != 1) exitWith {
+		_group = [];
+	};
+	_group = hcSelected player;
+};
+if (_group isEqualTo []) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdVeh_select_group"] call A3A_fnc_customHint;};
 
-if (count hcSelected player != 1) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdVeh_select_group"] call A3A_fnc_customHint;};
-
-_groupX = (hcSelected player select 0);
+_groupX = (_group select 0);
 
 if ((groupID _groupX == "Watch") or (groupID _groupX == "MineF")) exitwith {[_titleStr, localize "STR_A3A_fn_reinf_addSqdVeh_has_vehicle"] call A3A_fnc_customHint;};
 

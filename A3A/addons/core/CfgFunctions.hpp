@@ -9,6 +9,7 @@ class CfgFunctions
             class airbomb {};
             class AIreactOnKill {};
             class artySupport {};
+            class artySupportFire {};
             class askHelp {};
             class assaultBuilding {};
             class attackDrillAI {};
@@ -142,6 +143,7 @@ class CfgFunctions
             class getVehicleSellPrice {};
             class getVehiclesGroundSupport {};
             class getVehiclesGroundTransport {};
+            class HQGarbageClean {};
             class vehicleBoxRestore {};
             class initPetros {};
             class isFrontline {};

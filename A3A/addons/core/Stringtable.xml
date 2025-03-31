@@ -2260,7 +2260,7 @@
         <Russian>%1 Ресурсы</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_sellveh_no_closer">
-        <Original>Vehicle must be closer than 50 meters to the HQ marker.</Original>
+        <Original>You must be near a friendly marker in order to sell vehicles.</Original>
         <Italian>Il veicolo deve essere entro 50 metri dal marcatore del quartier generale.</Italian>
         <Spanish>El vehículo debe estar a 50 metros o menos del marcador del CG.</Spanish>
         <French>Le Véhicule doit être à moins de 50 mètres du marqueur du quartier général.</French>

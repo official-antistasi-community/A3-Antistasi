@@ -209,7 +209,7 @@ switch (_mode) do
 
         // Skip time condition
         private _restButton = _display displayCtrl A3A_IDC_RESTBUTTON;
-        private _error = call FUNCMAIN(canSkipTime);
+        private _error = [] call FUNCMAIN(canSkipTime);
         if (_error isEqualTo "") then {
             _restButton ctrlEnable true;
             _restButton ctrlSetTooltip "";
@@ -527,23 +527,6 @@ switch (_mode) do
         // Pan to location
         _garrisonMap ctrlMapAnimAdd [0.2, ctrlMapScale _garrisonMap, _position];
         ctrlMapAnimCommit _garrisonMap;
-    };
-
-    case ("updateGarrisonTabRemote"):
-    {   /* 
-        Pulls up just the garrison tab.
-        Used in Commander menu to preserve existing functionality in old battle menu.
-        E.g. here, building watchposts/roadblocks from the menu regardless of being at HQ.
-        Debatable if this is even neccesary, but having 2 buttons for add/remove doesnt fit well :(
-        Here it cherry picks required elements from onLoad and then loads as normal.
-        This should probably be scheduled.
-        */
-        // Garrison tab map drawing EHs
-        // Select marker
-        _garrisonMap ctrlAddEventHandler ["Draw", "_this call A3A_GUI_fnc_mapDrawSelectEH"];
-        // Outposts
-        _garrisonMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
-        ["switchTab", ["garrison"]] spawn FUNC(hqDialog);
     };
 
     case ("updateMinefieldsTab"):

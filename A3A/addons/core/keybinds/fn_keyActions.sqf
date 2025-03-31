@@ -19,7 +19,7 @@ switch (_key) do {
         ERROR("Disabled due to UseDoomGUI Switch.")
     #else
         closeDialog 0;
-        createDialog "radio_comm";
+        createDialog "A3A_MainDialog";
     #endif
         [] spawn { sleep 1; GVAR(keys_battleMenu) = false; };
     };
@@ -29,8 +29,9 @@ switch (_key) do {
         if (player getVariable ["owner",player] != player) exitWith {};
         if (player isEqualTo theBoss) then {
             GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
-            [] spawn A3A_fnc_artySupport;
-            [] spawn { sleep 1; GVAR(keys_battleMenu) = false; };
+            player setVariable ["accessingArtyMenu",true];
+            createDialog "A3A_MainDialog";
+            [] spawn { sleep 1; GVAR(keys_battleMenu) = false; player setVariable ["accessingArtyMenu",false];};
         };
     };
 

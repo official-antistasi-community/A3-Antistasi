@@ -60,6 +60,9 @@ switch (_mode) do
         _spawnDistanceSlider sliderSetPosition _spawnDistance;
         ctrlSetText [A3A_IDC_SPAWNDISTANCEEDITBOX, str _spawnDistance];
 
+        private _resetHQButton = _display displayCtrl A3A_IDC_RESETHQBUTTON;
+        _resetHQButton ctrlEnable false; // no seriously, what is this supposed to do?
+
         // _aiLimiterSlider = _display displayCtrl A3A_IDC_AILIMITERSLIDER;
         // _aiLimiterSlider sliderSetRange [_aiLimiterMin, _aiLimiterMax];
         // _aiLimiterSlider sliderSetSpeed [10, 10];

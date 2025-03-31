@@ -107,7 +107,7 @@ switch (_mode) do
         };
 
         // Construct
-        private _constructButton = _display displayCtrl A3A_IDC_CONSTRUCTBUTTON;
+        /* private _constructButton = _display displayCtrl A3A_IDC_CONSTRUCTBUTTON;
         private _constructIcon = _display displayCtrl A3A_IDC_CONSTRUCTICON;
         private _canBuild = [false,"Walk here"];// [] call A3A_fnc_canBuild;  // ToDo define.
         if (_canBuild # 0) then
@@ -122,6 +122,16 @@ switch (_mode) do
             _constructIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
             _constructIcon ctrlSetTooltip (_canBuild # 1);
         };
+        */
+
+        // Temporary code for testing, to be removed once a better substitute for the button is found.
+        private _constructButton = _display displayCtrl A3A_IDC_CONSTRUCTBUTTON;
+        private _constructIcon = _display displayCtrl A3A_IDC_CONSTRUCTICON;
+        _constructButton ctrlEnable true;
+        _constructButton ctrlSetTooltip "Temporary button for testing";
+        _constructIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+        _constructIcon ctrlSetTooltip "Temporary button for testing";
+
 
         // AI Management
         _aiManagementTooltipText = "";
@@ -215,8 +225,8 @@ switch (_mode) do
         private _vehicleGroup = _display displayCtrl A3A_IDC_PLAYERVEHICLEGROUP;
         private _noVehicleGroup = _display displayCtrl A3A_IDC_NOVEHICLEGROUP;
 
-        // Vehicle section is only available to members
-        if ([player] call A3A_fnc_isMember) then {
+        // Vehicle section is only available to members -- REMOVED
+        // if ([player] call A3A_fnc_isMember) then {
 
             // Attempt to get vehicle from cursorObject
             _vehicle = cursorObject; // was cursorTarget
@@ -240,8 +250,16 @@ switch (_mode) do
                     private _vehiclePicture = _display displayCtrl A3A_IDC_VEHICLEPICTURE;
                     _vehiclePicture ctrlSetText _editorPreview;
 
-                    // TODO UI-update: Disable garage, sell and add to air support buttons
-                    // if player is not in range of a friendly location
+                    private _sellVehicleButton = _display displayCtrl A3A_IDC_SELLVEHICLEBUTTON;
+
+                    // Garage check
+                    private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
+                    private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
+                    if !(_inArea > -1) then {
+                        private _addToGarageButton = _display displayCtrl A3A_IDC_GARAGEVEHICLEBUTTON;
+                        _addToGarageButton ctrlEnable false;
+                        _addToGarageButton ctrlSetTooltip "Must be near friendly marker to garage";
+                    };
 
                     // Change label on lock/unlock depending on vehicle lock state
                     // To be removed, vehicle locking isn't a thing anymore
@@ -257,11 +275,23 @@ switch (_mode) do
                     }; */
 
                     if (player == theBoss) then {
+                        // Sell check, uses same condition as garage + boss
+                        if !(_inArea > -1) then {
+                            _sellVehicleButton ctrlEnable false;
+                            _sellVehicleButton ctrlSetTooltip "Must be near friendly marker to sell";
+                        }; 
                         // Disable "add to air support" button if vehicle is not eligible
+                        private _addToAirSupportButton = _display displayCtrl A3A_IDC_ADDTOAIRSUPPORTBUTTON;
                         if !(_vehicle isKindOf "Air") then {
-                            private _addToAirSupportButton = _display displayCtrl A3A_IDC_ADDTOAIRSUPPORTBUTTON;
                             _addToAirSupportButton ctrlEnable false;
                             _addToAirSupportButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_not_eligible_vehicle_tooltip";
+                        };
+                        //Valid area to convert to air support
+                        private _friendlyMarkers = (["Synd_HQ"] + airportsX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
+                        private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
+                        if (!(_inArea > -1) && (_vehicle isKindOf "Air")) then { 
+                            _addToAirSupportButton ctrlEnable false;
+                            _addToAirSupportButton ctrlSetTooltip "Must be near airbase or HQ to add to air support";
                         };
                     } else {
                         // Enable only "garage" and "lock/unlock" buttons to regular players
@@ -285,13 +315,13 @@ switch (_mode) do
                 _vehicleGroup ctrlShow false;
                 _noVehicleGroup ctrlShow true;
             };
-        } else {
+        /* } else {
             // Show not member message
             _vehicleGroup ctrlShow false;
             _noVehicleGroup ctrlShow true;
             private _noVehicleText = _display displayCtrl A3A_IDC_NOVEHICLETEXT;
             _noVehicleText ctrlSetText localize "STR_antistasi_dialogs_main_members_only";
-        };
+        }; */
     };
 
     default {

@@ -47,9 +47,9 @@ private _customizeLoadoutsButton = _display displayCtrl A3A_IDC_CUSTOMIZELOADOUT
 private _recruitSquadButton = _display displayCtrl A3A_IDC_RECRUITSQUADCMDBUTTON;
 private _requestMissionButton = _display displayCtrl A3A_IDC_MISSIONREQUESTBUTTON;
 private _createWatchpostButton = _display displayCtrl A3A_IDC_ADDWATCHPOSTBUTTON;
-private _removeWatchpostButton = _display displayCtrl A3A_IDC_REMOVEWATCHPOSTBUTTON;
+private _removeGarrisonButton = _display displayCtrl A3A_IDC_REMOVEGARRISONBUTTON;
 private _HCSquadsButton = _display displayCtrl A3A_IDC_HCSQUADSBUTTON;
-private _baseButtons = [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_recruitSquadButton,_requestMissionButton,_createWatchpostButton,_removeWatchpostButton,_HCSquadsButton];
+private _baseButtons = [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_recruitSquadButton,_requestMissionButton,_createWatchpostButton,_removeGarrisonButton,_HCSquadsButton];
 
 switch (_mode) do
 {
@@ -95,12 +95,44 @@ switch (_mode) do
 
         // Check for selected groups
         private _selectedGroup = _commanderMap getVariable ["selectedGroup", grpNull];
-        if !(_selectedGroup isEqualTo grpNull) then
-        {
-            // If a group is selected show the single group view
-            ["updateSingleGroupView"] call FUNC(commanderTab);
+        private _hasGroup = !(_selectedGroup isEqualTo grpNull);
+        private _isArtyMenu = player getVariable ["accessingArtyMenu",false];
+        private _isMortarVic = false;
+        if (_hasGroup) then {
+            {
+                private _veh = vehicle _x;
+                if (_veh isEqualTo _x) then {continue};
+                if (( "Artillery" in (getArray (configfile >> "CfgVehicles" >> typeOf _veh >> "availableForSupportTypes")))) then
+		        {
+		            _isMortarVic = true;
+                };
+            } forEach (units _selectedGroup);
         };
-        /* else {
+
+        switch (true) do 
+        {
+            case (_hasGroup && _isArtyMenu && _isMortarVic): {
+                {_x ctrlShow false} forEach _baseButtons;
+                ["updateFireMissionView"] call FUNC(commanderTab);
+            };
+            case (_hasGroup): {
+                 ["updateSingleGroupView"] call FUNC(commanderTab);
+            };
+            case (_isArtyMenu): {
+                ["updateMultipleGroupsView"] call FUNC(commanderTab);
+            };
+            default {
+                
+            };
+        } ;
+        /* (_hasGroup && _isArty) then {
+            {_x ctrlShow false} forEach _baseButtons;
+            ["updateFireMissionView"] call FUNC(commanderTab);
+        if (_hasGroup) then
+        // If a group is selected show the single group view
+        ["updateSingleGroupView"] call FUNC(commanderTab);
+        };
+         else {
             // If no group is selected show the multiple groups view
             ["updateMultipleGroupsView"] call FUNC(commanderTab);
         };
@@ -470,13 +502,15 @@ switch (_mode) do
         private _group = _commanderMap getVariable ["selectedGroup", grpNull];
         private _units = units _group;
 
-        SDKMortarHEMag;
-        SDKMortarSmokeMag;
+        private _mortarHEMag = FactionGet(reb,"staticMortarMagHE");
+        private _mortarSmokeMag = FactionGet(reb,"staticMortarMagSmoke");
 
         private _heRoundsCount = 0;
         private _smokeRoundsCount = 0;
 
         private _checkedVehicles = [];
+        private _artyArrayDef1 = [];
+        private _artyRoundsArr1 = [];
 
         {
             private _veh = vehicle _x;
@@ -487,19 +521,30 @@ switch (_mode) do
                     if ((canFire _veh) and (alive _veh)) then
                     {
                         {
-                            if (_x # 0 == SDKMortarHEMag) then
+                            if (_x # 0 == _mortarHEMag) then
                             {
                                 _heRoundsCount = _heRoundsCount + _x # 1;
                             };
 
-                            if (_x # 0 == SDKMortarSmokeMag) then
+                            if (_x # 0 == _mortarSmokeMag) then
                             {
                                 _smokeRoundsCount = _smokeRoundsCount + _x # 1;
                             };
                         } forEach magazinesAmmo _veh;
+                        diag_log _heRoundsCount;
+                        diag_log _smokeRoundsCount;
+                        diag_log ((_heRoundsCount > 0) || (_smokeRoundsCount > 0));
+                        if ((_heRoundsCount > 0) || (_smokeRoundsCount > 0)) then {
+                            diag_log "has rounds";
+                            diag_log _veh;
+                            _artyArrayDef1 pushBack _veh;
+                            _artyRoundsArr1 pushBack (((magazinesAmmo _veh) select 0)select 1);
+                            diag_Log _artyArrayDef1;
+                            diag_Log _artyRoundsArr1;
+                        };
 
                         _checkedVehicles pushBack _veh;
-                    };
+                    }; // [["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_Flare_white",8],["8Rnd_82mm_Mo_Smoke_white",8]]
                 };
             };
         } forEach _units;
@@ -508,6 +553,8 @@ switch (_mode) do
 
         _fireMissionControlsGroup setVariable ["availableHeRounds", _heRoundsCount];
         _fireMissionControlsGroup setVariable ["availableSmokeRounds", _smokeRoundsCount];
+        _fireMissionControlsGroup setVariable ["artyArrayDef1", _artyArrayDef1];
+        _fireMissionControlsGroup setVariable ["artyRoundsArr1", _artyRoundsArr1];
 
         private _heRoundsText = _display displayCtrl A3A_IDC_HEROUNDSTEXT;
         private _smokeRoundsText = _display displayCtrl A3A_IDC_SMOKEROUNDSTEXT;
@@ -607,6 +654,7 @@ switch (_mode) do
             if (!isNil "_startPos" && !isNil "_endPos") then
             {
                 _roundsCount = round ((_startPos distance _endPos) / 10);
+                _fireMissionControlsGroup setVariable ["roundsNumber", _roundsCount];
             };
         };
 
@@ -765,6 +813,31 @@ switch (_mode) do
         }
     };
 
+    case ("groupMountButtonClicked"):
+    {
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
+        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        ["mount",[_group]] spawn A3A_fnc_vehStats;
+    };
+
+    case ("groupAddVehicleButtonClicked"):
+    {
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
+        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        [[_group]] spawn A3A_fnc_addSquadVeh;
+    };
+
+    case ("groupGarrisonButtonClicked"):
+    {
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
+        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        closeDialog 1;
+        [[_group]] spawn A3A_fnc_addToGarrison;
+    };
+
     case ("groupDismissButtonClicked"):
     {
         private _display = findDisplay A3A_IDD_MAINDIALOG;
@@ -908,6 +981,8 @@ switch (_mode) do
         private _roundsNumber = _fireMissionControlsGroup getVariable ["roundsNumber", 0];
         private _startPos = _fireMissionControlsGroup getVariable ["startPos", []];
         private _endPos = _fireMissionControlsGroup getVariable ["endPos", []];
+        private _artyArrayDef1 = _fireMissionControlsGroup getVariable ["artyArrayDef1", []];
+        private _artyRoundsArr1 = _fireMissionControlsGroup getVariable ["artyRoundsArr1", []];
 
         // Debug stuff
         private _shell = if (_heSelected) then {"HE"} else {"Smoke"};
@@ -916,28 +991,20 @@ switch (_mode) do
         // private _debugStr = format["FIRE MISSION- Shell: %1, Type: %2, Rounds: %3, StartPos: %4, EndPos: %5", _shell, _type, _roundsNumber, _startPos, _endPos];
         // Debug(_debugStr);
 
-        // Set the necessary global variables
+        private ["_typeAmmunition","_rounds","_positionTel","_positionTel2"];
         Debug_1("_heSelected: %1", _heSelected);
         if (_heSelected) then
         {
-            typeAmmunition = SDKMortarHEMag;
+            _typeAmmunition = FactionGet(reb,"staticMortarMagHE");
         } else {
-            typeAmmunition = SDKMortarSmokeMag;
+            _typeAmmunition = FactionGet(reb,"staticMortarMagSmoke");
         };
-        if (_pointSelected) then
-        {
-            typeArty = "NORMAL";
-        } else {
-            typeArty = "BARRAGE";
-        };
-        roundsX = _roundsNumber;
+        _rounds = _roundsNumber;
 
-        positionTel = _startPos;
-        if (typeArty == "BARRAGE") then {
-            positionTel2 = _endPos;
-        };
+        _positionTel = _startPos;
+        _positionTel2 = _endPos;
 
-        [[_group]] spawn A3A_fnc_artySupport;
+        [_typeAmmunition,_rounds,_artyArrayDef1,_artyRoundsArr1,_positionTel,_positionTel2] spawn A3A_fnc_artySupportFire;
     };
 
     case ("showGarbageCleanOptions"):
@@ -968,8 +1035,13 @@ switch (_mode) do
 
     case ("garbageCleanHqButtonClicked"):
     {
-        closeDialog 2;
-        ["Garbage Cleaner", "HQ only garbage clean yet to be implemented."] call A3A_fnc_customHint;
+        closedialog 1;
+        if (player == theBoss) then
+        {
+            [] remoteExec ["A3A_fnc_HQgarbageClean",2];
+        } else {
+            ["Garbage Cleaner", "Only Player Commander has access to this function."] call A3A_fnc_customHint; // TODO UI-update: stringtable this
+        };
     };
 
     default

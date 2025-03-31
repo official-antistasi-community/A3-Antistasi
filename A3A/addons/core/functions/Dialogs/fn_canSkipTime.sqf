@@ -35,3 +35,5 @@ switch (true) do {
 		_error = format [localize "STR_A3A_fn_dialogs_skiptime_no_radius_players",_absentString,_lastPlayer];
 	};
 };
+
+_error;
