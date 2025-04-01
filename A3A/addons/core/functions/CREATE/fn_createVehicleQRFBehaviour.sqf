@@ -85,7 +85,7 @@ if (_vehicle isKindOf "Ship") then {
         // check along the coast until we find an unused location
         private _landPos = _seaPath#1;
         while { _landPosBlacklist inAreaArray [_landPos, 10, 10] isNotEqualTo [] } do {
-            _landPos = _landPos vectorAdd (_sideDir vectorMultiply 11);
+            _landPos = _landPos vectorAdd (_sideDir vectorMultiply 15);
         };
         _landPosBlacklist pushBack _landPos;
 

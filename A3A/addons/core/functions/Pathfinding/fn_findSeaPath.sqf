@@ -5,20 +5,20 @@ params ["_marker", ["_radius", 300], ["_travelDist", 2000]];
 
 //_marker = "seaport_2";// "factory_4";//"Katalaki";//"seaport";//"outpost_25";//"seaport_3";//"Kalithea";
 
-private _places = selectBestPlaces [markerPos _marker, _radius, "coast-waterdepth", 30, 5];
-_places = _places select { _x#1 > 0 } select { _x#0 nearObjects ["Piers_base_F", 30] isEqualTo [] };
+// waterDepth returns actual depth in metres. factor [a,b] caps range to 0 at <=a, 1 at >=b
+private _places = selectBestPlaces [markerPos _marker, _radius, "2*(waterDepth factor [0,0.01]) - waterDepth", 30, 10] select { _x#1 > 0 };
+_places = _places select { _x#0 nearObjects ["Piers_base_F", 30] isEqualTo [] };
+_places = _places select { nearestTerrainObjects [_x#0, ["ROCK"], 30, false, true] isEqualTo [] };
 if (_places isEqualTo []) exitWith { [] };
 
 // improve accuracy. Needed or not? Cheap anyway
 private _approxPos = selectRandom _places select 0;
-private _place = selectBestPlaces [_approxPos, 15, "coast-waterdepth", 3, 1] select 0;
+private _place = selectBestPlaces [_approxPos, 15, "2*(waterDepth factor [0,0.01]) - waterDepth", 3, 1] select 0;
 private _sea = selectBestPlaces [_approxPos, 15, "waterdepth", 3, 1] select 0;
-// issue: neither of these is necessarily very close to 0 depth
-// hopefully doesn't matter
 
 // Now for the path search, general idea is to iteratively search a fan of positions for the highest sea depth
 private _lastDir = _place#0 getDir _sea#0;
-private _lastPos = ATLtoASL [_sea#0#0, _sea#0#1, 0];
+private _lastPos = ATLtoASL [_place#0#0, _place#0#1, 0];
 private _testDist = 10;
 
 private _path = [_lastPos];
@@ -42,7 +42,7 @@ while { _pathlen < _travelDist } do
 
     // If we're too shallow, bail out
     private _minDepth = -(5 min (_pathLen/50));
-    if (_bestPos#2 > _minDepth) exitWith { _path = []};
+    if (_bestPos#2 > _minDepth) exitWith {};
 
     _path pushBack _bestPos;
     _pathlen = _pathlen + _testDist;
@@ -51,6 +51,7 @@ while { _pathlen < _travelDist } do
     _testDist = (_testDist * 1.5) min 200;
 };
 
-//[_path, "test", "ColorRed"] call fnc_markPoints;
+[_path, "test", "ColorRed"] call fnc_markPoints;
+if (_pathlen < _travelDist) then { _path = [] };
 
 _path;
