@@ -572,7 +572,7 @@ if ("rf" in A3A_enabledDLC) then {
     {
         (_x get "lightATLaunchers") append _lightLaunchersAppend;
         _x set ["ATLaunchers", _medLaunchersSet];
-    } forEach [_militiaLoadoutData, _militaryLoadoutData, _sfLoadoutData];
+    } forEach [_militaryLoadoutData, _sfLoadoutData];
 };
 
 if ("ef" in A3A_enabledDLC) then {

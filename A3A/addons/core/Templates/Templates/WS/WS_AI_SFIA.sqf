@@ -507,19 +507,17 @@ if ("rf" in A3A_enabledDLC) then {
 
     _officerLoadoutData set ["sidearms", ["hgun_DEagle_RF","hgun_DEagle_bronze_RF","hgun_DEagle_classic_RF","hgun_DEagle_copper_RF","hgun_DEagle_gold_RF"]];
 
-    // SFIA uses a few of the cheaper launchers that pallets of which mysteriously fell off of the back of a truck
+    // SFIA uses a few of the launchers as high-yield SF weapons
     private _lightLaunchersAppend = [ // 1/3 chance of LAT being psrl
     ["launch_PSRL1_sand_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
-    ["launch_PSRL1_sand_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ["launch_PSRL1_PWS_sand_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_HE_RF"], [], ""]
     ];
     private _medLaunchersAppend = [ // 2/3 chance of MAT being psrl
-    ["launch_PSRL1_sand_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_HE_RF"], [], ""],
-    ["launch_PSRL1_sand_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ["launch_PSRL1_PWS_sand_RF", "", "", "", ["PSRL1_HE_RF", "PSRL1_AT_RF", "PSRL1_AT_RF"], [], ""],
+    ["launch_PSRL1_PWS_sand_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_HEAT_RF", "PSRL1_FRAG_RF"], [], ""]
     ];
-    {
-        (_x get "lightATLaunchers") append _lightLaunchersAppend;
-        (_x get "ATLaunchers") append _medLaunchersAppend;
-    } forEach [_militiaLoadoutData, _militaryLoadoutData, _sfLoadoutData];
+    (_sfLoadoutData get "lightATLaunchers") append _lightLaunchersAppend;
+    (_sfLoadoutData get "ATLaunchers") append _medLaunchersAppend;
 };
 
 /////////////////////////////////

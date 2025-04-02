@@ -139,9 +139,9 @@ _loadoutData set ["machineGuns", []];
 _loadoutData set ["marksmanRifles", []];
 _loadoutData set ["sniperRifles", []];
 _loadoutData set ["lightATLaunchers", [
-["launch_RPG32_tan_lxWS", "", "", "", ["RPG32_F", "RPG32_HE_F"], [], ""],
-["launch_RPG32_tan_lxWS", "", "", "", ["RPG32_HE_F", "RPG32_F"], [], ""],
-["launch_RPG32_tan_lxWS", "", "", "", ["RPG32_F"], [], ""]
+["launch_RPG32_F", "", "", "", ["RPG32_F", "RPG32_HE_F"], [], ""],
+["launch_RPG32_F", "", "", "", ["RPG32_HE_F", "RPG32_F"], [], ""],
+["launch_RPG32_F", "", "", "", ["RPG32_F"], [], ""]
 ]];
 _loadoutData set ["ATLaunchers", [
 ["launch_O_Vorona_brown_F", "", "", "", ["Vorona_HEAT","Vorona_HE"], [], ""],

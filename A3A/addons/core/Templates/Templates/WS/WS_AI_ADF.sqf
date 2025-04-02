@@ -553,12 +553,13 @@ if ("rf" in A3A_enabledDLC) then {
     "H_HelmetHeavy_Simple_Sand_RF",
     "H_HelmetHeavy_VisorUp_Sand_RF"
 	];
-    // ADF uses NATO gear, keep around a few PSRLs but mainly adopt MAAWS and NLAW
-    private _lightLaunchersAppend = [ // 1/3 chance of LAT being psrl
-    ["launch_PSRL1_sand_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
-    ["launch_NLAW_f"]
+    // ADF uses NATO gear, keeps cheap launchers while also upgrading slowly
+    private _lightLaunchersAppend = [ // 1/2 chance of LAT being psrl
+    ["launch_PSRL1_sand_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
     ];
-    private _medLaunchersAppend = [ // 1/4 chance of MAT being psrl
+    private _medLaunchersAppend = [ // 1/2 chance of MAT being psrl
+    ["launch_PSRL1_sand_RF", "", "", "", ["PSRL1_FRAG_RF", "PSRL1_HE_RF", "PSRL1_AT_RF"], [], ""], // issued for anti structure
+    ["launch_PSRL1_PWS_sand_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_HE_RF"], [], ""],
     ["launch_PSRL1_PWS_sand_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
     ];
     {
