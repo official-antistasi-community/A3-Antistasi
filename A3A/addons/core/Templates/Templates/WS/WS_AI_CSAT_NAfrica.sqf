@@ -139,9 +139,9 @@ _loadoutData set ["machineGuns", []];
 _loadoutData set ["marksmanRifles", []];
 _loadoutData set ["sniperRifles", []];
 _loadoutData set ["lightATLaunchers", [
-["launch_RPG32_F", "", "", "", ["RPG32_F", "RPG32_HE_F"], [], ""],
-["launch_RPG32_F", "", "", "", ["RPG32_HE_F", "RPG32_F"], [], ""],
-["launch_RPG32_F", "", "", "", ["RPG32_F"], [], ""]
+["launch_RPG32_tan_lxWS", "", "", "", ["RPG32_F", "RPG32_HE_F"], [], ""],
+["launch_RPG32_tan_lxWS", "", "", "", ["RPG32_HE_F", "RPG32_F"], [], ""],
+["launch_RPG32_tan_lxWS", "", "", "", ["RPG32_F"], [], ""]
 ]];
 _loadoutData set ["ATLaunchers", [
 ["launch_O_Vorona_brown_F", "", "", "", ["Vorona_HEAT","Vorona_HE"], [], ""],
@@ -469,6 +469,7 @@ if ("rf" in A3A_enabledDLC) then {
     (_sfLoadoutData get "sidearms") append ["hgun_DEagle_RF"];
 
     (_policeLoadoutData get "sidearms") append ["hgun_Glock19_RF"];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
     (_militaryLoadoutData get "helmets") append ["H_HelmetO_ocano_sb_hex_RF"];
     (_militiaLoadoutData get "helmets") append ["H_HelmetO_ocamo_sb_hex_RF"];
 

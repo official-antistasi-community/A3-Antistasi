@@ -545,6 +545,7 @@ if ("rf" in A3A_enabledDLC) then {
 	];
 	
     (_policeLoadoutData get "sidearms") append ["hgun_Glock19_RF"];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
 	
     (_sfLoadoutData get "helmets") append [
     "H_HelmetB_plain_sb_khaki_RF",
@@ -552,6 +553,18 @@ if ("rf" in A3A_enabledDLC) then {
     "H_HelmetHeavy_Simple_Sand_RF",
     "H_HelmetHeavy_VisorUp_Sand_RF"
 	];
+    // ADF uses NATO gear, keep around a few PSRLs but mainly adopt MAAWS and NLAW
+    private _lightLaunchersAppend = [ // 1/3 chance of LAT being psrl
+    ["launch_PSRL1_sand_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_NLAW_f"]
+    ];
+    private _medLaunchersAppend = [ // 1/4 chance of MAT being psrl
+    ["launch_PSRL1_PWS_sand_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    {
+        (_x get "lightATLaunchers") append _lightLaunchersAppend;
+        (_x get "ATLaunchers") append _medLaunchersAppend;
+    } forEach [_militiaLoadoutData, _militaryLoadoutData, _sfLoadoutData];
 };
 
 /////////////////////////////////

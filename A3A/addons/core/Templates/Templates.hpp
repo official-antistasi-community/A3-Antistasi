@@ -227,7 +227,7 @@ class Templates
     class WS_TURA : WS_Base
     {
         side = "Reb";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "\lxws\data_f_lxws\img\markers\Tura_CA.paa";
         name = "WS Tura";
         file = "WS_Reb_TURA";
         shortName = "Tura";
