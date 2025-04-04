@@ -1779,9 +1779,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     x = 101 * GRID_W;
-                    y = 14 * GRID_H;
+                    y = 12 * GRID_H;
                     w = 44 * GRID_W;
-                    h = 72 * GRID_H;
+                    h = 76 * GRID_H;
 
                     class controls
                     {
@@ -1812,7 +1812,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             text = $STR_antistasi_dialogs_main_ai_management_dismiss_button;
                             onButtonClick = "[""dismissButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
-                            y = 20 * GRID_H;
+                            y = 16 * GRID_H;
                             w = 32 * GRID_W;
                             h = 12 * GRID_H;
                         };
@@ -1822,7 +1822,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             idc = A3A_IDC_AIDISMISSICON;
                             text = A3A_Icon_Dismiss;
                             x = 36 * GRID_W;
-                            y = 22 * GRID_H;
+                            y = 18 * GRID_H;
                             w = 8 * GRID_W;
                             h = 8 * GRID_H;
                         };
@@ -1833,7 +1833,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             text = $STR_antistasi_dialogs_main_ai_management_auto_rearm_button;
                             onButtonClick = "[""autoLootButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
-                            y = 40 * GRID_H;
+                            y = 32 * GRID_H;
                             w = 32 * GRID_W;
                             h = 12 * GRID_H;
                         };
@@ -1843,7 +1843,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             idc = A3A_IDC_AIAUTOLOOTICON;
                             text = A3A_Icon_Rearm;
                             x = 36 * GRID_W;
-                            y = 42 * GRID_H;
+                            y = 34 * GRID_H;
                             w = 8 * GRID_W;
                             h = 8 * GRID_H;
                         };
@@ -1854,7 +1854,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             text = $STR_antistasi_dialogs_main_ai_management_auto_heal_button;
                             onButtonClick = "[""autoHealButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
-                            y = 60 * GRID_H;
+                            y = 48 * GRID_H;
                             w = 32 * GRID_W;
                             h = 12 * GRID_H;
                         };
@@ -1864,7 +1864,28 @@ class A3A_MainDialog : A3A_TabbedDialog
                             idc = A3A_IDC_AIAUTOHEALICON;
                             text = A3A_Icon_Heal;
                             x = 36 * GRID_W;
-                            y = 62 * GRID_H;
+                            y = 50 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 8 * GRID_H;
+                        };
+
+                        class ConvertToSquadButton : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_AICONVERTTOSQUADBUTTON;
+                            text = "Convert To HC Squad";
+                            onButtonClick = "[""convertSquadButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
+                            x = 0 * GRID_W;
+                            y = 64 * GRID_H;
+                            w = 32 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class ConvertToSquadIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_AICONVERTTOSQUADICON;
+                            text = A3A_Icon_None;
+                            x = 36 * GRID_W;
+                            y = 66 * GRID_H;
                             w = 8 * GRID_W;
                             h = 8 * GRID_H;
                         };

@@ -134,6 +134,8 @@ switch (_mode) do
         private _aiAutoLootIcon = _display displayCtrl A3A_IDC_AIAUTOLOOTICON;
         private _aiAutoHealButton = _display displayCtrl A3A_IDC_AIAUTOHEALBUTTON;
         private _aiAutoHealIcon = _display displayCtrl A3A_IDC_AIAUTOHEALICON;
+        private _convertToSquadButton = _display displayCtrl A3A_IDC_AICONVERTTOSQUADBUTTON;
+        private _convertToSquadIcon = _display displayCtrl A3A_IDC_AICONVERTTOSQUADICON;
         if (count _lbSelection > 0) then {
             _aiDismissButton ctrlEnable true;
             _aiDismissButton ctrlSetTooltip "";
@@ -144,6 +146,15 @@ switch (_mode) do
             _aiAutoHealButton ctrlEnable true;
             _aiAutoHealButton ctrlSetTooltip "";
             _aiAutoHealIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+            if (player isNotEqualTo theBoss) then {
+                _convertToSquadButton ctrlEnable false;
+                _convertToSquadButton ctrlSetTooltip "You must be command to convert units to squads";
+                _convertToSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+            } else {
+                _convertToSquadButton ctrlEnable true;
+                _convertToSquadButton ctrlSetTooltip "";
+                _convertToSquadIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+            };
         } else {
             _aiDismissButton ctrlEnable false;
             _aiDismissButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_ai_management_select_ai_tooltip";
@@ -154,6 +165,9 @@ switch (_mode) do
             _aiAutoHealButton ctrlEnable false;
             _aiAutoHealButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_ai_management_select_ai_tooltip";
             _aiAutoHealIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+            _convertToSquadButton ctrlEnable false;
+            _convertToSquadButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_ai_management_select_ai_tooltip";
+            _convertToSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
     };
 
@@ -199,6 +213,17 @@ switch (_mode) do
             _units pushBack (objectFromNetId (_aiListBox lbData _x));
         } forEach lbSelection _aiListBox;
         [_units] call A3A_fnc_autoHealFnc; */
+    };
+
+    case ("convertSquadButtonClicked"):
+    {
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _aiListBox = _display displayCtrl A3A_IDC_AILISTBOX;
+        private _units = [];
+        {
+            _units pushBack (objectFromNetId (_aiListBox lbData _x));
+        } forEach lbSelection _aiListBox;
+        [_units] spawn A3A_fnc_convertToSquad;
     };
 
     default

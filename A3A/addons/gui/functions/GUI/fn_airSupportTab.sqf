@@ -45,12 +45,12 @@ switch (_mode) do
         _backButton ctrlShow true;
 
         // Display remaining air support points
-        private _airSupportPoints = bombRuns;
+        private _airSupportPoints = round bombRuns; // remind me why this isnt an integer
         private _airSupportPointsText = _display displayCtrl A3A_IDC_AIRSUPPORTPOINTSTEXT;
         _airSupportPointsText ctrlSetText str _airSupportPoints;
 
         // Display name of aircraft used
-        private _aircraftName = getText (configFile >> "CfgVehicles" >> vehSDKPlane >> "displayName");
+        private _aircraftName = getText (configFile >> "CfgVehicles" >> ((FactionGet(reb,"vehiclesPlane")) # 0) >> "displayName");
         private _airSupportAircraftText = _display displayCtrl A3A_IDC_AIRSUPPORTAIRCRAFTTEXT;
         _airSupportAircraftText ctrlSetText _aircraftName;
 

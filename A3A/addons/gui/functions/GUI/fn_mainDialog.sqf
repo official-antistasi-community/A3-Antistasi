@@ -63,13 +63,6 @@ switch (_mode) do
         setGroupIconsVisible [false, false];
         setGroupIconsSelectable false;
 
-        // Show player tab content
-        if !(_isArty) then {
-            ["switchTab", ["player"]] call FUNC(mainDialog);
-        } else {
-            ["switchTab", ["commander"]] call FUNC(mainDialog);
-        };
-
         // Cache group info in map control
         Debug("Caching group info");
 
@@ -120,6 +113,12 @@ switch (_mode) do
         private _fastTravelOutpostsEH = _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
         Debug_1("Adding outposts Draw EH to Fast Travel map: %1", _fastTravelOutpostsEH);
 
+        // Show player tab content
+        if !(_isArty) then {
+            ["switchTab", ["player"]] call FUNC(mainDialog);
+        } else {
+            ["switchTab", ["commander"]] call FUNC(mainDialog);
+        };
 
         Debug("MainDialog onLoad complete.");
 

@@ -111,32 +111,20 @@ switch (_mode) do
 
         switch (true) do 
         {
-            case (_hasGroup && _isArtyMenu && _isMortarVic): {
-                {_x ctrlShow false} forEach _baseButtons;
+            case (_hasGroup && _isArtyMenu && _isMortarVic): { // If all is valid show fire mission view
+                {_x ctrlShow false} forEach _baseButtons; // expected to be done through single group view
                 ["updateFireMissionView"] call FUNC(commanderTab);
             };
-            case (_hasGroup): {
+            case (_hasGroup): { // If a group is selected show the single group view
                  ["updateSingleGroupView"] call FUNC(commanderTab);
             };
-            case (_isArtyMenu): {
+            case (_isArtyMenu): { // If no group is selected show the multiple groups view
                 ["updateMultipleGroupsView"] call FUNC(commanderTab);
             };
             default {
                 
             };
-        } ;
-        /* (_hasGroup && _isArty) then {
-            {_x ctrlShow false} forEach _baseButtons;
-            ["updateFireMissionView"] call FUNC(commanderTab);
-        if (_hasGroup) then
-        // If a group is selected show the single group view
-        ["updateSingleGroupView"] call FUNC(commanderTab);
         };
-         else {
-            // If no group is selected show the multiple groups view
-            ["updateMultipleGroupsView"] call FUNC(commanderTab);
-        };
-        */
     };
 
     case ("updateSingleGroupView"):

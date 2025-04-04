@@ -1,7 +1,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-
+params [["_units",[]]];
 private _titleStr = localize "STR_A3A_fn_reinf_convSqd_title";
 
 // reuse some addFIAsquadHC messages, should be fine
@@ -15,7 +15,9 @@ if (count hcAllGroups player >= _maxGroups) exitWith {
 };
 
 private _bannedTypes = [FactionGet(reb,"unitCrew"), FactionGet(reb,"unitUnarmed"), FactionGet(reb,"unitPetros"), "unknown"];
-private _units = groupSelectedUnits player select { !isPlayer _x and !(_x getVariable ["unitType", "unknown"] in _bannedTypes) };
+if (_units isEqualTo []) then {
+    _units = groupSelectedUnits player select { !isPlayer _x and !(_x getVariable ["unitType", "unknown"] in _bannedTypes) };
+};
 if (_units isEqualTo []) exitWith {
     [_titleStr, localize "STR_A3A_fn_reinf_convSqd_no_selected"] call A3A_fnc_customHint;
 };
