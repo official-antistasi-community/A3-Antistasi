@@ -98,7 +98,11 @@ else
         };
         case ("UAV"):
         {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_UAV", _sideName];
+            _text = format [localize "STR_notifiers_SUP_setup_UAV", _sideName];
+        };
+        case ("UAVAttack"):
+        {
+            _text = format [localize "STR_notifiers_SUP_setup_UAVAttack", _sideName];
         };
         default
         {
