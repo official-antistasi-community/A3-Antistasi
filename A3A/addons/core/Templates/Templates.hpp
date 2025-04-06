@@ -845,6 +845,15 @@ class Templates
         lore = $STR_A3A_templates_lore_3CB_AI_LDF;
     };
 
+    class 3CB_GAF : 3CBF_Base
+    {
+        side = "Occ";
+        flagTexture = "\UK3CB_Factions\addons\UK3CB_Factions_GAF\Flag\GAF_flag_co.paa";
+        name = "3CB GAF Temperate";
+        file = "3CB_AI_GAF";
+        climate[] = {"Temperate"};
+    };
+
     class 3CBF_KRG : 3CBF_Base
     {
         side = "Occ";
