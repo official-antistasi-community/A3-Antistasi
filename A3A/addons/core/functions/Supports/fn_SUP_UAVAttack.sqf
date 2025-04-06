@@ -26,7 +26,7 @@ if (isNil "_airport") exitWith { Debug_1("No airport found for %1 support", _sup
 
 private _planeType = selectRandom (Faction(_side) get "uavsAttack");
 
-private _aggro = if(_side == Occupants) then {aggressionOccupants} else {aggressionInvaders};
+private _aggro = [aggressionInvaders, aggressionOccupants] select (_side == Occupants);
 if (_delay < 0) then { _delay = (0.5 + random 1) * (300 - 15*tierWar - 1*_aggro) };
 
 // Well, it does actually hit
