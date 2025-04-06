@@ -28,29 +28,29 @@
 ["vehiclesMedical", ["PRACS_M250_AMB", "PRACS_BMR_AMB", "PRACS_M577", "PRACS_M113_MED"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["PRACS_M577", "PRACS_M113_M240", "PRACS_BMR_M2"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["PRACS_BMR_A3_GA1", "PRACS_BMR_A3_M2", "PRACS_BMR_A3_M3_SFOD", "PRACS_BMR_A3_Mk19", "PRACS_M113_mk19", "PRACS_M1117"]] call _fnc_saveToTemplate;
-["vehiclesIFVs", ["PRACS_Pizarro", "PRACS_Pizarro_SLE"]] call _fnc_saveToTemplate;
-["vehiclesLightTanks", ["PRACS_FV107", "PRACS_FV101", "PRACS_VEC_MGS", "PRACS_VEC_M242"]] call _fnc_saveToTemplate;
+["vehiclesIFVs", ["PRACS_Pizarro", "PRACS_Pizarro_SLE","PRACS_FV107","PRACS_VEC_M242"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks", ["PRACS_Pizarro_SLE", "PRACS_FV101", "PRACS_VEC_MGS"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["PRACS_M1A1_AIM","PRACS_M60A3","PRACS_M60S"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["PRACS_m48_chapparal","PRACS_M163_MACHBET","PRACS_M163_PIVADS","PRACS_M163_VADS","PRACS_M985_AD"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["PRACS_M163_MACHBET","PRACS_M163_PIVADS","PRACS_M163_VADS","PRACS_M985_AD","PRACS_M985_AD"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["PRACS_Zodiac"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["PRACS_Mk5_SOCR"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["PRACS_M113_M240", "PRACS_M113_mk19"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["PRACS_A4M", "PRACS_F16CJ", "PRACS_F16CJR", "PRACS_MirageV", "PRACS_Mohawk"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["PRACS_A4M", "PRACS_F16CJR", "PRACS_F16CJR", "PRACS_MirageV", "PRACS_Mohawk"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesAA", ["PRACS_F16", "PRACS_MirageIII"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["PRACS_C130"]] call _fnc_saveToTemplate;
 ["vehiclesAirPatrol", ["PRACS_E2C"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["PRACS_MH6S"]] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", ["PRACS_UH1H", "PRACS_Sa330_Puma", "PRACS_CH53"]] call _fnc_saveToTemplate;
-["vehiclesHelisLightAttack", ["PRACS_UH1H_CAS", "PRACS_AH6M", "PRACS_Sa330_Puma_AS"]] call _fnc_saveToTemplate; 
-["vehiclesHelisAttack", ["PRACS_RAH6", "PRACS_AH1S"]] call _fnc_saveToTemplate;
+["vehiclesHelisLightAttack", ["PRACS_UH1H_CAS", "PRACS_AH6M", "PRACS_RAH6"]] call _fnc_saveToTemplate; 
+["vehiclesHelisAttack", ["PRACS_Sa330_Puma_SOCAT", "PRACS_AH1S"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["PRACS_M109A6", "PRACS_M430"]] call _fnc_saveToTemplate;        
 ["magazines", createHashMapFromArray [
 ["PRACS_M109A6", ["PRACS_155mm_HE_M109A6_x25"]],
-["PRACS_M430", ["PRACS_SSM_B_MLRS_X2"]]
+["PRACS_M430", ["PRACS_M31A2_MLRS_X12"]]
 ]] call _fnc_saveToTemplate;
 
 ["uavsAttack", ["B_UAV_02_dynamicLoadout_F"]] call _fnc_saveToTemplate;     
@@ -77,6 +77,7 @@
 ["minefieldAPERS", ["rhsusf_mine_m14"]] call _fnc_saveToTemplate;
 
 #include "..\RHS\RHS_Vehicle_Attributes.sqf"
+#include "PRACS_Vehicle_Attributes.sqf"
 
 /////////////////////
 ///  Identities   ///

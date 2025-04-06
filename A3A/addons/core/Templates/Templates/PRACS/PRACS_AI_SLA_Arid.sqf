@@ -22,16 +22,16 @@
 ["vehiclesLightArmed", ["PRACS_SLA_UAZ_DSHKM", "PRACS_SLA_UAZ_AGS", "PRACS_SLA_UAZ_AT", "PRACS_SLA_UAZ_SPG9", "PRACS_SLA_Tigr", "PRACS_SLA_BTR40_NSV", "PRACS_SLA_BTR40_AGS", "PRACS_SLA_BRDM", "PRACS_SLA_BRDM_HQ_PKT", "PRACS_SLA_BTR40_AT", "PRACS_SLA_URAL_Zu23", "PRACS_SLA_Ural_S60", "PRACS_SLA_Ural_ZPU4"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["PRACS_SLA_URAL_Open", "PRACS_SLA_URAL", "PRACS_SLA_MTLB"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["PRACS_SLA_Ural_flat_bed"]] call _fnc_saveToTemplate;
-["vehiclesAmmoTrucks", ["PRACS_SLA_Ural_Ammo", "PRACS_SLA_MTLB_AMMO"]] call _fnc_saveToTemplate;
+["vehiclesAmmoTrucks", ["RHS_Ural_Ammo_MSV_01"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["PRACS_SLA_URAL_Repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["PRACS_SLA_URAL_Fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["PRACS_SLA_Ural_AMB", "PRACS_SLA_MTLB_AMB"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["PRACS_SLA_Type63", "PRACS_SLA_Type63_AGS", "PRACS_SLA_BTR60", "PRACS_SLA_MTLB_S60", "PRACS_SLA_MTLB_ZU23", "PRACS_SLA_Type63_ADA", "PRACS_SLA_BRDM_ATGM", "PRACS_SLA_Type63_AT"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["PRACS_SLA_Type63", "PRACS_SLA_Type63_AGS", "PRACS_SLA_BTR60",  "PRACS_SLA_MTLB_ZU23", "PRACS_SLA_BRDM_ATGM", "PRACS_SLA_Type63_AT"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["PRACS_SLA_BMP1"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["PRACS_SLA_BMP2"]] call _fnc_saveToTemplate;
 ["vehicleslightTanks", ["PRACS_SLA_BMD1"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["PRACS_SLA_T72B", "PRACS_SLA_T72BV"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["PRACS_SLA_SA13", "PRACS_SLA_SA17", "PRACS_SLA_SA8", "PRACS_SLA_SA9", "PRACS_SLA_ZSU23"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["PRACE_SLA_Ural_ZPU4", "PRACS_SLA_Type63_ADA", "PRACS_SLA_MTLB_S60", "PRACS_SLA_ZSU23", "PRACS_SLA_ZSU23", "PRACS_SLA_ZSU23"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["PRACS_SLA_GoFast"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["PRACS_SLA_GoFast_gun"]] call _fnc_saveToTemplate;
@@ -78,7 +78,8 @@
 ["minefieldAT", ["rhs_mine_tm62m"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["rhs_mine_pmn2"]] call _fnc_saveToTemplate;
 
-#include "RHS_Vehicle_Attributes.sqf"
+#include "..\RHS\RHS_Vehicle_Attributes.sqf"
+#include "PRACS_Vehicle_Attributes.sqf"
 
 /////////////////////
 ///  Identities   ///
