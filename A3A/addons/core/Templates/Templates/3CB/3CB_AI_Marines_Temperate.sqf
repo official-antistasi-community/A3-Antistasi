@@ -27,12 +27,12 @@
 ["vehiclesFuelTrucks", ["UK3CB_CW_US_B_LATE_M939_Fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", [""]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["UK3CB_CW_US_B_LATE_LAV25_HQ"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", ["UK3CB_CW_US_B_LATE_AAV", "UK3CB_CW_US_B_LATE_LAV25", "rhsusf_stryker_m1134_wd"]] call _fnc_saveToTemplate;
+["vehiclesAPCs", ["UK3CB_CW_US_B_LATE_AAV", "UK3CB_CW_US_B_LATE_LAV25"]] call _fnc_saveToTemplate; // , "rhsusf_stryker_m1134_wd"
 ["vehiclesIFVs", [""]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["rhsusf_m1a1hc_wd", "rhsusf_m1a1fep_od", "UK3CB_CW_US_B_EARLY_M60a3"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["UK3CB_KRG_B_M270_Avenger"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["UK3CB_TKA_B_RHIB_Gunboat","UK3CB_AAF_B_Skiff"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["UK3CB_TKA_B_RHIB_Gunboat"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["UK3CB_CW_US_B_LATE_LAV25", "UK3CB_CW_US_B_LATE_AAV"]] call _fnc_saveToTemplate;
 
@@ -42,7 +42,7 @@
 
 ["vehiclesHelisLight", ["RHS_UH1Y_UNARMED"]] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", ["UK3CB_B_Osprey_USMC_WD", "rhsusf_CH53E_USMC", "rhsusf_CH53E_USMC_GAU21", "RHS_UH1Y_UNARMED", "UK3CB_B_Osprey_IDWS_HMG_USMC_WD", "UK3CB_B_Osprey_IDWS_MG_USMC_WD", "UK3CB_B_Osprey_IDWS_USMC_WD"]] call _fnc_saveToTemplate;
-["vehiclesHelisLightAttack", ["RHS_UH1Y_FFAR", "RHS_UH1Y_FFAR", "RHS_MELB_AH6M"]] call _fnc_saveToTemplate;
+["vehiclesHelisLightAttack", ["RHS_UH1Y_FFAR", "RHS_UH1Y_FFAR"]] call _fnc_saveToTemplate; // , "RHS_MELB_AH6M"
 ["vehiclesHelisAttack", ["UK3CB_CW_US_B_LATE_AH1Z_GS", "UK3CB_CW_US_B_LATE_AH1Z_CS", "UK3CB_CW_US_B_LATE_AH1Z"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["RHS_M119_WD", "UK3CB_CW_US_B_EARLY_M109", "UK3CB_CW_US_B_LATE_M270_MLRS_HE", "UK3CB_CW_US_B_LATE_M270_MLRS_CLUSTER"]] call _fnc_saveToTemplate;
@@ -53,8 +53,8 @@
 ["UK3CB_CW_US_B_LATE_M270_MLRS_CLUSTER", ["UK3CB_M26_MLRS_X12"]]
 ]] call _fnc_saveToTemplate;
 
-["uavsAttack", []] call _fnc_saveToTemplate;
-["uavsPortable", []] call _fnc_saveToTemplate;
+["uavsAttack", ["B_UAV_02_dynamicLoadout_F"]] call _fnc_saveToTemplate;     
+["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles - militia vehicles are mostly used in the early game, police cars are being used by troops around cities -- Example:
 ["vehiclesMilitiaLightArmed", ["UK3CB_CW_US_B_LATE_M151_Jeep_HMG", "UK3CB_CW_US_B_EARLY_M151_Jeep_TOW"]] call _fnc_saveToTemplate;
