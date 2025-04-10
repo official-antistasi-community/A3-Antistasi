@@ -25,16 +25,17 @@ sleep _sleepTime;
 private _spawnPos = markerPos _airport vectorAdd [0,0,300];
 private _uav = createVehicle [_planeType, _spawnPos, [], 0, "FLY"];
 [_side, _uav] call A3A_fnc_createVehicleCrew;
-_groupVeh = group driver _uav;
+private _groupVeh = group driver _uav;
 { [_x, nil, false, _resPool] call A3A_fnc_NATOinit } forEach (crew _uav);           // arguable
 [-10 * count units _groupVeh, _side, _resPool] call A3A_fnc_addEnemyResources;
 [_uav, _side, _resPool] call A3A_fnc_AIVEHinit;
 
-_wp = _groupVeh addWayPoint [_suppCenter, 0];
+_groupVeh setCombatMode "WHITE";                         // Don't fire, just in case they have some OP shit, but allow search movement
+private _wp = _groupVeh addWayPoint [_suppCenter, 0];
 _wp setWaypointBehaviour "AWARE";
 _wp setWaypointType "SAD";
 _groupVeh setCurrentWaypoint _wp;
-//_uav flyInHeight 500;           // maybe not necessary if we lock the waypoint
+_uav flyInHeight 500;
 _groupVeh lockWP true;          // prevent exiting the SAD waypoint
 
 // do we just run for 20mins and then RTB?
@@ -44,22 +45,22 @@ while {time < _timeout && canMove _uav} do
 {
     waitUntil { sleep 5; _uav distance2d _suppCenter < 500 };
 
-    private _friends = units _side inAreaArray [_suppCenter, 1000, 1000];
-    private _friendGroups = allGroups select {(leader _x in _friends) and {isNull objectParent leader _x} };
+    private _area = [_suppCenter, 1000, 1000, 0, false];         // inArea still needs long defaults in 2.18
+    private _friendGroups = groups _side select {local _x} select {leader _x inArea _area};
 
     // Choose four random enemies to spot
     private _allEnemies = (units teamPlayer + units _enemySide) inAreaArray [_suppCenter, 500, 500];
     private _spottedEnemies = [];
     for "_i" from 0 to 3 do {
         if (count _allEnemies == 0) exitWith {};
-        private _index = floor random (count _allEnemies);
-        _spottedEnemies pushBack (_allEnemies # _index);
-        _allEnemies deleteAt _index;
+        _spottedEnemies pushBack (_allEnemies deleteAt (floor random count _allEnemies));
     };
     {
         private _group = _x;
+        { _group reveal [_x, 2] } forEach _spottedEnemies;
+        // (almost) all attacking units should be server-local anyway, but the non-local versions for reference:
         //or: [[_group, _spottedEnemies], { { _this#0 reveal [_x, 2] } forEach _this#1 }] remoteExec ["call", leader _group];
-        { [_group, [_x, 2]] remoteExec ["reveal", leader _group] } forEach _spottedEnemies;
+        //{ [_group, [_x, 2]] remoteExec ["reveal", leader _group] } forEach _spottedEnemies;
     } forEach _friendGroups;
 
     sleep 60;
