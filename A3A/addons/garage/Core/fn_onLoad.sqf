@@ -91,7 +91,7 @@ _disp displayAddEventHandler ["MouseZChanged","if !(HR_GRG_RMouseBtnDown) exitWi
 waitUntil {!isNil "HR_GRG_Vehicles"};//wait for server response
 
 //define list of controls coresponding with list index
-HR_GRG_Cats = [HR_GRG_IDC_CatCar,HR_GRG_IDC_CatArmored,HR_GRG_IDC_CatAir,HR_GRG_IDC_CatBoat,HR_GRG_IDC_CatStatic] apply {_disp displayCtrl _x};
+HR_GRG_Cats = [HR_GRG_IDC_CatUndercoverCar,HR_GRG_IDC_CatCar,HR_GRG_IDC_CatAPC,HR_GRG_IDC_CatArmored,HR_GRG_IDC_CatAA,HR_GRG_IDC_CatArty,HR_GRG_IDC_CatHeli, HR_GRG_IDC_CatPlane,HR_GRG_IDC_CatBoat,HR_GRG_IDC_CatSource,HR_GRG_IDC_CatStatic] apply {_disp displayCtrl _x}; //,HR_GRG_IDC_CatUnmanned,HR_GRG_IDC_CatVTOL
 {
     _x ctrlShow false;
     _x ctrlEnable false;

@@ -93,6 +93,15 @@ HR_GRG_onCloseEvent = {
     ["GARAGE", false] call A3A_fnc_disableInfoBar;
 };
 
+// Function to check if the vehicle class is undercover
+HR_GRG_isCivilian = {
+    params [
+        ["_class", ""]
+    ];
+
+    [1, 0] select (_class in undercoverVehicles);
+};
+
 //CBA settings
 if (isClass (configfile >> "CBA_Extended_EventHandlers")) then {
 
