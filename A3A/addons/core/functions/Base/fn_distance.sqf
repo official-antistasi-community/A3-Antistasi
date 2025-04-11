@@ -118,6 +118,11 @@ private _processOccupantMarker = {
                 {
                     [[_marker], "A3A_fnc_createAIcontrols"] call A3A_fnc_scheduler;
                 };
+                
+                case (_marker in generalPOI):
+                {
+                    [[_marker], "A3A_fnc_createPOI"] call A3A_fnc_scheduler;
+                };
 
                 // Prevent other routines taking spawn places 
                 [_marker, 1] call A3A_fnc_addTimeForIdle;

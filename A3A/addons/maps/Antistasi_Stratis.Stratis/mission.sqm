@@ -3554,7 +3554,7 @@ class Mission
 						{
 							dataType="Marker";
 							position[]={3484.3875,143.70813,2643.3286};
-							name="control";
+							name="poi";
 							markerType="RECTANGLE";
 							type="rectangle";
 							a=40;
@@ -3565,7 +3565,7 @@ class Mission
 						{
 							dataType="Marker";
 							position[]={4240.4854,212.95169,3562.5132};
-							name="control_1";
+							name="poi_1";
 							markerType="RECTANGLE";
 							type="rectangle";
 							a=40;
@@ -3576,7 +3576,7 @@ class Mission
 						{
 							dataType="Marker";
 							position[]={6014.9917,87.307739,4957.8818};
-							name="control_10";
+							name="poi_10";
 							markerType="RECTANGLE";
 							type="rectangle";
 							a=40;
