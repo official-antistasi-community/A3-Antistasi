@@ -39,7 +39,7 @@ if (_target isEqualType objNull and {!isNull _target}) then {
 // name, side, suppType, center, radius, targets
 private _suppData = [_supportName, _side, "UAVAttack", _targPos, 1000, [objNull, _targPos]];
 A3A_activeSupports pushBack _suppData;
-[_suppData, _resPool, _airport, _planeType, _delay, _reveal] spawn A3A_fnc_SUP_UAVRoutine;
+[_suppData, _resPool, _airport, _planeType, _delay, _reveal] spawn A3A_fnc_SUP_UAVAttackRoutine;
 
 [_reveal, _side, "UAVAttack", _targPos, _delay] spawn A3A_fnc_showInterceptedSetupCall;
 
