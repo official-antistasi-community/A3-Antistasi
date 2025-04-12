@@ -8,6 +8,7 @@ params ["_marker", ["_radius", 300], ["_travelDist", 2000]];
 // waterDepth returns actual depth in metres. factor [a,b] caps range to 0 at <=a, 1 at >=b
 private _places = selectBestPlaces [markerPos _marker, _radius, "2*(waterDepth factor [0,0.01]) - waterDepth", 30, 10] select { _x#1 > 0 };
 _places = _places select { _x#0 nearObjects ["Piers_base_F", 30] isEqualTo [] };
+if (isClass (configFile >> "CfgPatches" >> "CUP_Terrains_Winter_Objects")) then {_places = _places select { _x#0 nearObjects ["Land_nav_pier_m_2", 30] isEqualTo []}};
 _places = _places select { nearestTerrainObjects [_x#0, ["ROCK"], 30, false, true] isEqualTo [] };
 if (_places isEqualTo []) exitWith { [] };
 
