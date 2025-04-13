@@ -40,9 +40,15 @@ while {true} do
     private _jammers = antennas inAreaArray [getPosATL player, JAM_RADIUS, JAM_RADIUS];
     _jammers = _jammers select { sidesX getVariable (_antennaBases get netId _x) != _sideX };
 
-    // No live enemy antennas within range
+    // Get rebel antennas count
+    private _antReb = {(sidesX getVariable [
+        ([markersX, getPos _x] call BIS_fnc_nearestPosition),sideUnknown] == teamPlayer) and 
+        !(_x in antennasDead)
+    } count antennas;
+
+    // No live enemy antennas within range 
     if (_jammers isEqualTo []) then {
-        [1, 1] call _fnc_setInterference;
+        [1 - 0.03 * _antreb, 1/(1 - 0.03 * _antreb)] call _fnc_setInterference;    // Surely nobody is capturing more than 33 antennas?
         continue;
     };
 
@@ -50,6 +56,6 @@ while {true} do
     private _dist = player distance _jammer;
 
     // Receiving interference >1 has effect, sending interference <1 has effect
-    private _interference = 1 + JAM_STRENGTH * (1 - _dist/JAM_RADIUS);
+    private _interference = (1 - 0.03 * _antreb) + JAM_STRENGTH * (1 - _dist/JAM_RADIUS);
     [_interference, 1/_interference] call _fnc_setInterference;
 };
