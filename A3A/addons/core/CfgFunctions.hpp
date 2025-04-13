@@ -418,6 +418,21 @@ class CfgFunctions
             class lootToCrate {};
         };
 
+        class MinorSites {
+            file = QPATHTOFOLDER(functions\MinorSites);
+            class addMinorSite {};
+            class deleteMinorSite {};
+            class deleteNearSites {};
+            class generateCamps {};
+            class generateRoadblockPairs {};
+            class generateRoadblocks {};
+            class initMinorSites {};
+            class renderRoadblocks {};
+            class selectRoadBetweenMarkersNav {};
+            class selectRoadBetweenMarkersRand {};
+            class updateMinorSites {};
+        };
+
         class Missions {
             file = QPATHTOFOLDER(functions\Missions);
             class AS_Official {};
@@ -491,6 +506,7 @@ class CfgFunctions
             class findNodesInDistance {};
             class findPath {};
             class findPathPrecheck {};
+            class findPathSimple {};
             class findPosOnRoute {};
             class getMarkerNavPoint {};
             class getNearestNavPoint {};

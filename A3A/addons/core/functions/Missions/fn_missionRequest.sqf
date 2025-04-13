@@ -38,17 +38,7 @@ switch (_type) do {
 		_possibleMarkers = _possibleMarkers select {spawner getVariable _x != 0};
 		//add controlsX not on roads and on the 'frontier'
 		private _controlsX = [controlsX] call _findIfNearAndHostile;
-		private _nearbyFriendlyMarkers = markersX select {
-			(getMarkerPos _x inArea [getMarkerPos respawnTeamPlayer, distanceMission+distanceSPWN, distanceMission+distanceSPWN, 0, false])
-			and (sidesX getVariable [_x,sideUnknown] isEqualTo teamPlayer)
-		};
-		_nearbyFriendlyMarkers deleteAt (_nearbyFriendlyMarkers find "Synd_HQ");
-		{
-			private _pos = getmarkerPos _x;
-			if !(isOnRoad _pos) then {
-				if (_nearbyFriendlyMarkers findIf {getMarkerPos _x distance _pos < distanceSPWN} != -1) then {_possibleMarkers pushBack _x};
-			};
-		}forEach _controlsX;
+		_possibleMarkers append (_controlsX select { !isOnRoad markerPos _x });
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
