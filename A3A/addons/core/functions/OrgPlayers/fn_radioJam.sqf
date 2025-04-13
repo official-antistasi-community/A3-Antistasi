@@ -48,7 +48,7 @@ while {true} do
 
     // No live enemy antennas within range 
     if (_jammers isEqualTo []) then {
-        [1 - 0.03 * _antreb, 1/(1 - 0.03 * _antreb)] call _fnc_setInterference;    // Surely nobody is capturing more than 33 antennas?
+        [1 / (1 + 0.1 * _antreb), 1 + 0.1 * _antreb] call _fnc_setInterference;    
         continue;
     };
 
@@ -56,6 +56,6 @@ while {true} do
     private _dist = player distance _jammer;
 
     // Receiving interference >1 has effect, sending interference <1 has effect
-    private _interference = (1 - 0.03 * _antreb) + JAM_STRENGTH * (1 - _dist/JAM_RADIUS);
+    private _interference = (1 / (1 + 0.1 * _antreb)) + JAM_STRENGTH * (1 - _dist/JAM_RADIUS);
     [_interference, 1/_interference] call _fnc_setInterference;
 };
