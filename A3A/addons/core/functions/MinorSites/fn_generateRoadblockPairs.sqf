@@ -76,7 +76,8 @@ _freshNodes resize [count navGrid, true];
 _roadblockPairs = [];
 {
 	_x params ["_routeLen", "_mrk1", "_mrk2", "_route"];
-	if (count _route <= 2) then { _roadblockPairs pushBack [_mrk1, _mrk2, _routeLen]; continue };
+	private _directDist = markerPos _mrk1 distance2d markerPos _mrk2;
+	if (count _route <= 2) then { _roadblockPairs pushBack [_mrk1, _mrk2, _directDist]; continue };
 
 	// First node setup
 	private _firstNode = _route deleteAt 0;
@@ -98,7 +99,9 @@ _roadblockPairs = [];
 		_lastPos = _newPos;
 	} forEach _route;
 
-	if (_freshDist / _totalDist > 0.25) then { _roadblockPairs pushBack [_mrk1, _mrk2, _freshDist] };
+	// TODO: road quality check?
+	private _freshRatio = _freshDist / _totalDist;
+	if (_freshratio > 0.25) then { _roadblockPairs pushBack [_mrk1, _mrk2, _freshRatio * _directDist] };
 
 	Debug_4("%1 to %2, %3 fresh out of %4", _mrk1, _mrk2, _freshDist, _totalDist);
 
@@ -146,7 +149,7 @@ A3A_roadblockPairsHM = createHashMap;
 
 	private _value = (_markerVal get _mrk1) + (_markerVal get _mrk2);
 	private _connlen = (_markerConn get _mrk1) + (_markerConn get _mrk2);
-	_x pushBack (_value * _len / _connLen);						// append the weight
+	_x set [2, _value * _len / _connLen];						// replace weight
 
 	A3A_roadblockPairsHM set [_mrk1 + "/" + _mrk2, _x];			// use joined marker names as key. Do we need to sort?
 } forEach _roadblockPairs;

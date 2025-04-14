@@ -5,6 +5,9 @@ FIX_LINE_NUMBERS()
 
 params ["_side", "_numToAdd"];
 
+Info_2("Attempting to add %1 roadblocks for %2", _numToAdd, _side);
+
+
 private _usedPairs = A3A_minorSitesHM apply { _y#3 };
 private _pairWeights = [];		// pairRef, weight
 {
@@ -79,6 +82,6 @@ while {_fails < _failsAllowed} do {
 	_failsAllowed = _failsAllowed + 3;
 };
 
-Debug_1("%1 total failed attempts", _fails);
+Info_1("%1 total failed attempts", _fails);
 
 _added;
