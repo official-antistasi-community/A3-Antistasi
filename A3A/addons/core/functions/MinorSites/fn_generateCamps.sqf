@@ -48,55 +48,55 @@ private _bases = outposts + airportsX select { sidesX getVariable _x == _side } 
 private _sites = [];
 private _weights = [];
 {
-	// could throw 3/4 away randomly if this is too slow?
-	private _campPos = markerPos _x;
-	if (_exclude inAreaArray [_campPos, CAMP_MIN, CAMP_MIN] isNotEqualTo []) then { continue };
-	if (_bases inAreaArray [_campPos, distanceForLandAttack, distanceForLandAttack] isEqualTo []) then { continue };
+    // could throw 3/4 away randomly if this is too slow?
+    private _campPos = markerPos _x;
+    if (_exclude inAreaArray [_campPos, CAMP_MIN, CAMP_MIN] isNotEqualTo []) then { continue };
+    if (_bases inAreaArray [_campPos, distanceForLandAttack, distanceForLandAttack] isEqualTo []) then { continue };
 
-	// reduce weight for other nearby camps
-	private _baseWeight = 1;
-	{
-		_baseWeight = _baseWeight - linearConversion [CAMP_MIN, CAMP_MAX, _x distance2d _campPos, 1, 0, true];
-	} forEach (_curCamps inAreaArray [_campPos, CAMP_MAX, CAMP_MAX]);
-	if (_baseWeight <= 0) then { continue };
+    // reduce weight for other nearby camps
+    private _baseWeight = 1;
+    {
+        _baseWeight = _baseWeight - linearConversion [CAMP_MIN, CAMP_MAX, _x distance2d _campPos, 1, 0, true];
+    } forEach (_curCamps inAreaArray [_campPos, CAMP_MAX, CAMP_MAX]);
+    if (_baseWeight <= 0) then { continue };
 
-	// Increase chance of spawning near rebel HQ
-	private _hqdist = _campPos distance2d markerPos "Synd_HQ";
-	_sites pushBack _campPos;
-	_weights pushBack linearConversion [HQ_MIN, HQ_MAX, _hqdist, HQ_MUL*_baseWeight, _baseWeight, true];
+    // Increase chance of spawning near rebel HQ
+    private _hqdist = _campPos distance2d markerPos "Synd_HQ";
+    _sites pushBack _campPos;
+    _weights pushBack linearConversion [HQ_MIN, HQ_MAX, _hqdist, HQ_MUL*_baseWeight, _baseWeight, true];
 } forEach A3A_mapCamps;
 
 
 private _added = 0;
 while {true} do {
-	private _pos = _sites selectRandomWeighted _weights;
-	if (isNil "_pos") exitWith {};			// might be no >0 weights rather than empty array
+    private _pos = _sites selectRandomWeighted _weights;
+    if (isNil "_pos") exitWith {};			// might be no >0 weights rather than empty array
 
-	// check ellipse path to nearby bases
-	private _nearBases = _bases inAreaArray [_pos, distanceForLandAttack, distanceForLandAttack];
-	private _validPath = false;
-	{
-	    private _midpoint = (_x vectorAdd _pos) vectorMultiply 0.5;
-		//if (surfaceIsWater _midpoint) then { continue };		// guess they could just send boats...
+    // check ellipse path to nearby bases
+    private _nearBases = _bases inAreaArray [_pos, distanceForLandAttack, distanceForLandAttack];
+    private _validPath = false;
+    {
+        private _midpoint = (_x vectorAdd _pos) vectorMultiply 0.5;
+        //if (surfaceIsWater _midpoint) then { continue };		// guess they could just send boats...
         private _targDir = _x getDir _pos;
         if (_pathExclude inAreaArray [_midpoint, 500, distanceForLandAttack/2, _targDir] isEqualTo []) exitWith { _validPath = true };
-	} forEach _nearBases;
-	if (!_validPath) then { _weights set [_sites find _pos, 0]; continue };
+    } forEach _nearBases;
+    if (!_validPath) then { _weights set [_sites find _pos, 0]; continue };
 
-	[_pos, "camp", _side, ""] call A3A_fnc_addMinorSite;
+    [_pos, "camp", _side, ""] call A3A_fnc_addMinorSite;
 
-	_added = _added + 1;
-	if (_added >= _numToAdd) exitWith {};
+    _added = _added + 1;
+    if (_added >= _numToAdd) exitWith {};
 
-	// Reduce weights of nearby sites (including the selected one)
-	{
-		private _weightAdj = linearConversion [CAMP_MIN, CAMP_MAX, (_sites#_x) distance2d _pos, 1, 0, true];
-		_weights set [_x, 0 max ((_weights#_x) - _weightAdj)];			// selectRandomWeighted does not accept negatives
-	} forEach (_sites inAreaArrayIndexes [_pos, CAMP_MAX, CAMP_MAX]);
+    // Reduce weights of nearby sites (including the selected one)
+    {
+        private _weightAdj = linearConversion [CAMP_MIN, CAMP_MAX, (_sites#_x) distance2d _pos, 1, 0, true];
+        _weights set [_x, 0 max ((_weights#_x) - _weightAdj)];			// selectRandomWeighted does not accept negatives
+    } forEach (_sites inAreaArrayIndexes [_pos, CAMP_MAX, CAMP_MAX]);
 };
 
 if (_added != _numToAdd) then {
-	Info_1("Ran out of valid camp positions for %1", _side);
+    Info_1("Ran out of valid camp positions for %1", _side);
 };
 
 _added;

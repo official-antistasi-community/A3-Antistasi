@@ -11,8 +11,8 @@ private _indexes = controlsX inAreaArrayIndexes [markerPos _marker, _size, _size
 
 // Two-pass, avoid changing controlsX live
 private _toDelete = _indexes apply { controlsX select _x } select {
-	sidesX getVariable _x != _markerSide			// should always be true, but whatever
-	and spawner getVariable _x == 2 				// only delete unspawned, otherwise handled in createAIControls closedown
+    sidesX getVariable _x != _markerSide			// should always be true, but whatever
+    and spawner getVariable _x == 2 				// only delete unspawned, otherwise handled in createAIControls closedown
 };
 
 if (_toDelete isEqualTo []) exitWith {};
