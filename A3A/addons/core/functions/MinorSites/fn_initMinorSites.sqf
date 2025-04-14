@@ -107,7 +107,7 @@ private _mainMarkers = citiesX + outposts + seaports + factories + resourcesX + 
     private _addedCamp = [_side, _wantedCount - _curCamp] call A3A_fnc_generateCamps;
     Info_3("Generated %1 out of %2 new camps for %3", _addedCamp, _wantedCount - _curCamp, _side);
 
-} forEach [Occupants, Invaders];
+} forEach [Invaders, Occupants];        // invader priority
 
 Info("Roadblock and camp generation complete");
 

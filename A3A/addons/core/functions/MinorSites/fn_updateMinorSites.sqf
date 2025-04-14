@@ -63,7 +63,7 @@ _mainMarkers append airportsX;
 		private _added = [_side, 1] call A3A_fnc_generateCamps;
 		if (_added > 0) then { _sitesChanged = true };
 	};
-} forEach [Occupants, Invaders];
+} forEach [Invaders, Occupants];
 
 if (_sitesChanged) then {
 	publicVariable "controlsX";
