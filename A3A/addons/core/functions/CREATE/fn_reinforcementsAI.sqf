@@ -146,38 +146,6 @@ if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balanceP
 	};
 } forEach (airportsX + outposts + seaports);
 
-// Some placeholder stuff to add new roadblocks & camps
-private _mainMarkers = citiesX + outposts + seaports + factories + resourcesX + airportsX;
-private _sitesChanged = false;
-
-{
-	private _side = _x;
-	private _curRB = 0;
-	private _curCamp = 0;
-	{
-		if (_y#2 != _side) then { continue };
-		if (_y#1 == "roadblock") then {_curRB = _curRB + 1};
-		if (_y#1 == "camp") then {_curCamp = _curCamp + 1};
-	} forEach A3A_minorSitesHM;
-
-	private _wantedCount = { sidesX getVariable _x == _side } count _mainMarkers;
-	if (A3A_balancePlayerScale > random 3 and _wantedCount > _curRB) then {
-		private _added = [_side, 1] call A3A_fnc_generateRoadblocks;
-		if (_added > 0) then { _sitesChanged = true };
-	};
-
-	_wantedCount = _wantedCount / 2;
-	if (A3A_balancePlayerScale > random 6 and _wantedCount > _curCamp) then {
-		private _added = [_side, 1] call A3A_fnc_generateCamps;
-		if (_added > 0) then { _sitesChanged = true };
-	};
-} forEach [Occupants, Invaders];
-
-if (_sitesChanged) then {
-	publicVariable "controlsX";
-	publicVariable "markersX";
-};
-
 
 /*
 {

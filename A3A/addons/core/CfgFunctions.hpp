@@ -121,7 +121,6 @@ class CfgFunctions
             class createBreachChargeText {};
             class createOutpostsFIA {};
             class createPetros {};
-            class deleteControls {};
             class destroyCity {};
             class distance {};
             class distanceUnits {};
@@ -376,7 +375,6 @@ class CfgFunctions
             class initGarrisons {};
             class initPreJIP { preInit = 1; };
             class initSpawnPlaces {};
-            class generateRoadblock {};
 
             class initVarCommon {};
             class initVarServer {};
