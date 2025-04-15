@@ -302,9 +302,9 @@ if (!_busy) then
 	private _typeWeight = [
 		12 - (tierWar), 
 		12 - (tierWar * 0.5), 
-		10, 
+		5 + (tierWar), 
 		12 - (tierWar * 0.25), 
-		10, 
+		5 + (tierWar), 
 		5 + (tierWar * 0.5)
 		];
 
@@ -351,9 +351,9 @@ private _typeWeight = [
 	4, 
 	2, 
 	2,
-	1, 
-	1, 
-	1, 
+	1 + (tierWar * 0.05), 
+	1 + (tierWar * 0.05), 
+	1 + (tierWar * 0.2), 
 	2
 	];
 
