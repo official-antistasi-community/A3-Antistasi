@@ -81,6 +81,7 @@ _disp displayAddEventHandler ["MouseZChanged","if !(HR_GRG_RMouseBtnDown) exitWi
     (_this#1) call HR_GRG_fnc_reciveBroadcast;
 };
 "HR_GRG_Vehicles" addPublicVariableEventHandler {
+    call HR_GRG_fnc_updateVehicleCount;
     private _disp = findDisplay HR_GRG_IDD_Garage;
     private _index = HR_GRG_Cats findIf {ctrlShown _x};
     private _ctrl = HR_GRG_Cats#_index;
