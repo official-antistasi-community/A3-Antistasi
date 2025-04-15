@@ -52,7 +52,6 @@ while { _pathlen < _travelDist } do
     _testDist = (_testDist * 1.5) min 200;
 };
 
-[_path, "test", "ColorRed"] call fnc_markPoints;
 if (_pathlen < _travelDist) then { _path = [] };
 
 _path;
