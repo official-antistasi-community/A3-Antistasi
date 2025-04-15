@@ -46,8 +46,6 @@ private _typeX = if (_veh isEqualType objNull) then {typeOf _veh} else {_veh};
 
 if (_typeX in _blacklistedAssets) exitWith {0};
 
-if (_veh isKindOf "StaticWeapon") exitWith {100};			// in case rebel static is same as enemy statics
-
 if (
     _typeX in FactionGet(all,"vehiclesReb")
     or (_typeX in arrayCivVeh)
@@ -58,6 +56,8 @@ if (
     if (_vehiclePrice == 0) exitWith {25};
     _vehiclePrice;
 };
+
+if (_veh isKindOf "StaticWeapon") exitWith {100};			// if enemy static (one the rebels arent trained with)
 
 if (
     (_typeX in FactionGet(all,"vehiclesLight"))
