@@ -36,25 +36,31 @@ if (!isNil "_AIScriptHandle") then { terminate _AIScriptHandle; };   // _group s
 
 // Remove any current waypoints
 // Turns out that this is actually bugged (for infantry?) and followed vs visible waypoints desync in unpredictable ways
-while {count waypoints _group > 0} do { deleteWaypoint [_group, 0] };
+{ deleteWaypoint _x } forEachReversed (waypoints _group);
 
 // Group in vehicle
-if (vehicle leader _group != leader _group) exitWith
+private _vehicle = vehicle leader _group;
+if (_vehicle != leader _group) exitWith
 {
 	[_group] spawn A3A_fnc_groupDespawner;
-    [vehicle leader _group] spawn A3A_fnc_vehDespawner;         // probably already done, but whatever
+    [_vehicle] spawn A3A_fnc_vehDespawner;         // probably already done, but whatever
 
     // Ignore captured marker, find nearest suitable base to return to
-    if (vehicle leader _group isKindOf "Air") then {
+    if (_vehicle isKindOf "Air") then {
         _marker = [_group, airportsX + ["CSAT_carrier", "NATO_carrier"]] call _fnc_nearestBase;
+    };
+    if (_vehicle isKindOf "Ship") then {
+        _marker = _vehicle getVariable "A3A_shipSpawnPos";      // not a marker, but fixed later
     } else {
         _marker = [_group, airportsX + outposts] call _fnc_nearestBase;
     };
+
     if (isNil "_marker") exitWith {};       // just carry on
 
+    private _returnPos = if (_marker isEqualType "") then { markerPos _marker } else { _marker };
     { _x disableAI "AUTOCOMBAT" } forEach units _group;
     _group setBehaviourStrong "AWARE";
-    private _wp = _group addWaypoint [markerPos _marker, 50];
+    private _wp = _group addWaypoint [_returnPos, 50];
     ServerDebug_2("Group %1 with vehicle %2 returning to base", _group, typeof vehicle leader _group);
     _group setCurrentWaypoint _wp;
 };

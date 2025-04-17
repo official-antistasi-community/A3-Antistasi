@@ -253,6 +253,7 @@ class CfgFunctions
             class createAttackForceAir {};
             class createAttackForceLand {};
             class createAttackForceMixed {};
+            class createAttackForceSea {};
             class createAttackVehicle {};
             class createFIAOutposts2 {};
             class createSDKGarrisons {};
@@ -492,6 +493,7 @@ class CfgFunctions
             class findPath {};
             class findPathPrecheck {};
             class findPosOnRoute {};
+            class findSeaPath {};
             class getMarkerNavPoint {};
             class getNearestNavPoint {};
             class listInsert {};
