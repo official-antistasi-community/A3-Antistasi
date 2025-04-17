@@ -34,20 +34,18 @@ Reason for this is that those items are one or more of the following:
 - can be aquired by means that don't cost anything and the ability to sell those would be an infinite money exploit.
 - are no proper "statics" in terms of weaponized statics but for example the ACE spotting scoped
 - something else
+
+Since we transitioned from a blanket check for statics to a more granular check, all the previous entries on this list
+(ACE spotting scopes, remote designators, VN spiderholes) are unsellable. Functionality still exists though
 */
-private _blacklistedAssets = [
-"ACE_I_SpottingScope","ACE_O_SpottingScope","ACE_O_T_SpottingScope","ACE_B_SpottingScope","ACE_B_T_SpottingScope","ACE_SpottingScopeObject",
-"O_Static_Designator_02_F","B_Static_Designator_01_F","B_W_Static_Designator_01_F",
-"vn_o_nva_spiderhole_01","vn_o_nva_spiderhole_02","vn_o_nva_spiderhole_03",
-"vn_o_pl_spiderhole_01","vn_o_pl_spiderhole_02","vn_o_pl_spiderhole_03",
-"vn_o_vc_spiderhole_01","vn_o_vc_spiderhole_02","vn_o_vc_spiderhole_03"];
+private _blacklistedAssets = [];
 
 private _typeX = if (_veh isEqualType objNull) then {typeOf _veh} else {_veh};
 
 if (_typeX in _blacklistedAssets) exitWith {0};
 
 if (
-    _typeX in FactionGet(all,"vehiclesReb")
+    _typeX in FactionGet(all,"vehiclesReb") // accounts for friendly statics
     or (_typeX in arrayCivVeh)
     or (_typeX in civBoats)
     or (_typeX in (FactionGet(reb,"vehiclesCivBoat") + FactionGet(reb,"vehiclesCivCar") + FactionGet(reb,"vehiclesCivTruck")))
@@ -57,7 +55,12 @@ if (
     _vehiclePrice;
 };
 
-if (_veh isKindOf "StaticWeapon") exitWith {100};			// if enemy static (one the rebels arent trained with)
+// enemy statics
+
+if (_typeX in (FactionGet(all,"staticMGs"))) exitwith {200};
+if (_typeX in (FactionGet(all,"staticAT"))) exitwith {400};
+if (_typeX in (FactionGet(all,"staticAA"))) exitwith {400};
+if (_typeX in (FactionGet(all,"staticMortars"))) exitwith {400};
 
 if (
     (_typeX in FactionGet(all,"vehiclesLight"))
