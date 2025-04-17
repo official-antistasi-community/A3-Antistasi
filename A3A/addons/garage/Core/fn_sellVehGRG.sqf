@@ -41,8 +41,7 @@ if !(_lock isEqualTo "") exitWith {["STR_HR_GRG_Feedback_sellVehicle_locked"] re
 
 private _recipients = +HR_GRG_Users;
 _recipients pushBackUnique 2; // to avoid double-calling the function on localhost
-private _staticPos = HR_GRG_Cats find HR_GRG_IDC_CatStatic;
-private _removeStatics = (_catIndex != _staticPos);
+private _removeStatics = (_catIndex != HR_GRG_STATICINDEX);
 [_UID,_player,_removeStatics] remoteExecCall ["HR_GRG_fnc_removeFromPool", _recipients];
 [] remoteExec ["HR_GRG_fnc_sellVehGRGLocal",_player];
 

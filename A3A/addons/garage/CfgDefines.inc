@@ -35,6 +35,9 @@
 #define HR_GRG_IDC_CatSource 1700109
 #define HR_GRG_IDC_CatStatic 1700110
 
+#define HR_GRG_STATICINDEX 10 
+#define HR_GRG_BLOCKAIRINDEX [6,7]
+
 #define HR_GRG_IDC_BttnCars 1700111
 #define HR_GRG_IDC_BttnArmor 1700112
 #define HR_GRG_IDC_BttnHeli 1700113

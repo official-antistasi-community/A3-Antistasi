@@ -29,11 +29,7 @@ if (_UID isEqualTo "") exitWith {false};
 //find vehicles to remove
 private _toRemove = [];
 private _localVehicleList = +HR_GRG_Vehicles;
-if (_removeMounts) then 
-{
-    private _deletePos = HR_GRG_Cats find HR_GRG_IDC_CatStatic;
-    _localVehicleList deleteAt _deletePos;
-};
+if (_removeMounts) then {_localVehicleList deleteAt HR_GRG_STATICINDEX;};
 {
     private _catIndex = _forEachIndex;
     private _hashMap = _x;
