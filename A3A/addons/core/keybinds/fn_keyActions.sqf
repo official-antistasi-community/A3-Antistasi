@@ -19,7 +19,8 @@ switch (_key) do {
         ERROR("Disabled due to UseDoomGUI Switch.")
     #else
         closeDialog 0;
-        createDialog "A3A_MainDialog";
+        private _dialog = ["radio_comm","A3A_MainDialog"] select A3A_GUIDevPreview;
+        createDialog _dialog;
     #endif
         [] spawn { sleep 1; GVAR(keys_battleMenu) = false; };
     };
@@ -28,10 +29,15 @@ switch (_key) do {
         if (player getVariable ["incapacitated",false]) exitWith {};
         if (player getVariable ["owner",player] != player) exitWith {};
         if (player isEqualTo theBoss) then {
-            GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
-            player setVariable ["accessingArtyMenu",true];
-            createDialog "A3A_MainDialog";
-            [] spawn { sleep 1; GVAR(keys_battleMenu) = false; player setVariable ["accessingArtyMenu",false];};
+            if (A3A_GUIDevPreview) then {
+                player setVariable ["accessingArtyMenu",true];
+                createDialog "A3A_MainDialog";
+                [] spawn { sleep 1; player setVariable ["accessingArtyMenu",false];};
+            } else {
+                GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
+                createDialog "radio_comm";
+                [] spawn { sleep 1; GVAR(keys_battleMenu) = false;};
+            };
         };
     };
 
