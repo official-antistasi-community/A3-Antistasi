@@ -35,6 +35,7 @@
 #define HR_GRG_IDC_CatSource 1700109
 #define HR_GRG_IDC_CatStatic 1700110
 
+#define HR_GRG_CATIDCS [HR_GRG_IDC_CatUndercoverCar,HR_GRG_IDC_CatCar,HR_GRG_IDC_CatAPC,HR_GRG_IDC_CatArmored,HR_GRG_IDC_CatAA,HR_GRG_IDC_CatArty,HR_GRG_IDC_CatHeli, HR_GRG_IDC_CatPlane,HR_GRG_IDC_CatBoat,HR_GRG_IDC_CatSource,HR_GRG_IDC_CatStatic]
 #define HR_GRG_STATICINDEX 10 
 #define HR_GRG_BLOCKAIRINDEX [6,7]
 
