@@ -30,7 +30,7 @@ _ctrlLock ctrlEnable _enable;
 
 private _selCat = HR_GRG_Cats findIf {ctrlShown _x};
 private _selVehicleCat = HR_GRG_SelectedVehicles#0;
-if ((_selCat in HR_GRG_BLOCKAIRINDEX || _selVehicleCat in HR_GRG_BLOCKAIRINDEX) && {!(call HR_GRG_Cnd_canAccessAir)}) then { ///(((HR_GRG_Cats findIf {ctrlShown _x} == 4) || (HR_GRG_SelectedVehicles#0 == 4)) && {!(call HR_GRG_Cnd_canAccessAir)}) || 
+if ((_selCat in HR_GRG_BLOCKAIRINDEX || _selVehicleCat in HR_GRG_BLOCKAIRINDEX) && {!(call HR_GRG_Cnd_canAccessAir)}) then {
     _ctrlCnfrm ctrlEnable false;
     _ctrlCnfrm ctrlSetTextColor [0.7,0,0,1];
     _ctrlCnfrm ctrlSetTooltip localize "STR_HR_GRG_Generic_AirDisabled";
