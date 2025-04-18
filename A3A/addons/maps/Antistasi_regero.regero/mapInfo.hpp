@@ -18,7 +18,8 @@ class regero {
         {6395.2,6490.85,0.0109787},{1757.94,1962.84,0}
     };
     antennasBlacklistIndex[] = {1, 4, 6, 7, 11, 12, 13, 15, 16};
-    banks[] = {};
+    // Porto Nuevo, San Isabel, Angelito, Mantolin, Tarolla, Yarra Junction
+    banks[] = {{7725.96,2057.89,0},{5810.59,2072.48,0},{2898.92,2773.55,0},{3272.17,4608.3,0},{3959.47,7069.8,0},{7425.13,6384.64,0}};
     garrison[] = {{},{"airport_5", "outpost_12", "outpost_10", "control_13", "control_20"},{},{"control_13", "control_20"}};
     fuelStationTypes[] = {
         "Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_01_pump_F","Land_FuelStation_02_pump_F","Land_FuelStation_03_pump_F","Land_A_FuelStation_Feed","Land_Ind_FuelStation_Feed_EP1","Land_FuelStation_Feed_PMC","Land_Fuelstation","Land_Fuelstation_army","Land_Benzina_schnell"
