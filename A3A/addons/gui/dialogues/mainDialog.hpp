@@ -1204,7 +1204,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_REMOVEGARRISONBUTTON;
                     text = "Remove Garrison";
-                    onButtonClick = "closeDialog 0; ['rem'] spawn A3A_fnc_garrisonDialog";
+                    onButtonClick = "closeDialog 0; ['rem', true] spawn A3A_fnc_garrisonDialog";
                     x = 36 * GRID_W;
                     y = 38 * GRID_H;
                     w = 24 * GRID_W;

@@ -10,6 +10,8 @@ private _resourcesFIA = server getVariable "resourcesFIA";
 private _costs = server getVariable _unitType;
 [1,_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
 
+private _garrison = garrison getVariable [_markerX,[]];
+private _countX = count _garrison;
 [_unitType,teamPlayer,_markerX,-1] remoteExec ["A3A_fnc_garrisonUpdate",2];
 waitUntil {(_countX < count (garrison getVariable [_markerX, []])) or (sidesX getVariable [_markerX,sideUnknown] != teamPlayer)};
 

@@ -375,14 +375,16 @@ switch (_mode) do
         private _garrison = garrison getVariable [_selectedMarker, []];
 
         // Get garrison counts
-        private _rifleman = {_x in SDKMil} count _garrison;
-        private _squadLeader = {_x in SDKSL} count _garrison;
-        private _autorifleman = {_x in SDKMG} count _garrison;
-        private _grenadier = {_x in SDKGL} count _garrison;
-        private _medic = {_x in SDKMedic} count _garrison;
-        private _mortar = {_x in staticCrewTeamPlayer} count _garrison;
-        private _marksman = {_x in SDKSniper} count _garrison;
-        private _at = {_x in SDKATman} count _garrison;
+        private _rifleman = {_x in FactionGet(reb,"unitRifle")} count _garrison;
+        private _squadLeader = {_x in FactionGet(reb,"unitSL")} count _garrison;
+        private _autorifleman = {_x in FactionGet(reb,"unitMG")} count _garrison;
+        private _grenadier = {_x in FactionGet(reb,"unitGL")} count _garrison;
+        private _medic = {_x in FactionGet(reb,"unitMedic")} count _garrison;
+        private _mortar = {_x in FactionGet(reb,"unitCrew")} count _garrison;
+        private _marksman = {_x in FactionGet(reb,"unitSniper")} count _garrison;
+        private _at = {_x in FactionGet(reb,"unitLAT")} count _garrison;
+        private _atMissile = {_x in FactionGet(reb,"unitAT")} count _garrison;
+        private _aaMissile = {_x in FactionGet(reb,"unitAA")} count _garrison;
 
         // Get controls
         private _garrisonTitle = _display displayCtrl A3A_IDC_GARRISONTITLE;
@@ -394,6 +396,8 @@ switch (_mode) do
         private _mortarNumber = _display displayCtrl A3A_IDC_MORTARNUMBER;
         private _marksmanNumber = _display displayCtrl A3A_IDC_MARKSMANNUMBER;
         private _atNumber = _display displayCtrl A3A_IDC_ATNUMBER;
+        private _atMissileNumber = _display displayCtrl A3A_IDC_ATMISSILENUMBER;
+        private _aaMissileNumber = _display displayCtrl A3A_IDC_AAMISSILENUMBER;
 
         // Add currently selected marker to map, we need it later for... stuff...
         _garrisonMap setVariable ["selectedMarker", _selectedMarker];
@@ -408,6 +412,8 @@ switch (_mode) do
         _mortarNumber ctrlSetText str _mortar;
         _marksmanNumber ctrlSetText str _marksman;
         _atNumber ctrlSetText str _at;
+        _atMissileNumber ctrlSetText str _atMissile;
+        _aaMissileNumber ctrlSetText str _aaMissile;
 
         // Buttons
         _riflemanAddButton = _display displayCtrl A3A_IDC_RIFLEMANADDBUTTON;
@@ -426,6 +432,10 @@ switch (_mode) do
         _marksmanSubButton = _display displayCtrl A3A_IDC_MARKSMANSUBBUTTON;
         _atAddButton = _display displayCtrl A3A_IDC_ATADDBUTTON;
         _atSubButton = _display displayCtrl A3A_IDC_ATSUBBUTTON;
+        _atMissileAddButton = _display displayCtrl A3A_IDC_ATMISSILEADDBUTTON;
+        _atMissileSubButton = _display displayCtrl A3A_IDC_ATMISSILESUBBUTTON;
+        _aaMissileAddButton = _display displayCtrl A3A_IDC_AAMISSILEADDBUTTON;
+        _aaMissileSubButton = _display displayCtrl A3A_IDC_AAMISSILESUBBUTTON;
 
         _rebuildGarrisonButton = _display displayCtrl A3A_IDC_REBUILDGARRISONBUTTON;
         _dismissGarrisonButton = _display displayCtrl A3A_IDC_DISMISSGARRISONBUTTON;
@@ -446,7 +456,11 @@ switch (_mode) do
             _marksmanAddButton,
             _marksmanSubButton,
             _atAddButton,
-            _atSubButton
+            _atSubButton,
+            _atMissileAddButton,
+            _atMissileSubButton,
+            _aaMissileAddButton,
+            _aaMissileSubButton
         ];
 
         // Reset ctrlEnable for all management buttons
@@ -466,16 +480,20 @@ switch (_mode) do
         if (_mortar < 1) then {_mortarSubButton ctrlEnable false};
         if (_marksman < 1) then {_marksmanSubButton ctrlEnable false};
         if (_at < 1) then {_atSubButton ctrlEnable false};
+        if (_atMissile < 1) then {_atMissileSubButton ctrlEnable false};
+        if (_aaMissile < 1) then {_aaMissileSubButton ctrlEnable false};
 
         // Get prices
-        _riflemanPrice = server getVariable (SDKMil # 0);
-        _squadLeaderPrice = server getVariable (SDKSL # 0);
-        _autoriflemanPrice = server getVariable (SDKMG # 0);
-        _grenadierPrice = server getVariable (SDKGL # 0);
-        _medicPrice = server getVariable (SDKMedic # 0);
-        _mortarPrice = (server getVariable staticCrewTeamPlayer) + ([SDKMortar] call FUNCMAIN(vehiclePrice));
-        _marksmanPrice = server getVariable (SDKSniper # 0);
-        _atPrice = server getVariable (SDKATman # 0);
+        _riflemanPrice = server getVariable (FactionGet(reb,"unitRifle"));
+        _squadLeaderPrice = server getVariable (FactionGet(reb,"unitSL"));
+        _autoriflemanPrice = server getVariable (FactionGet(reb,"unitMG"));
+        _grenadierPrice = server getVariable (FactionGet(reb,"unitGL"));
+        _medicPrice = server getVariable (FactionGet(reb,"unitMedic"));
+        _mortarPrice = (server getVariable FactionGet(reb,"unitCrew")) + ([FactionGet(reb,"staticMortars")#0] call FUNCMAIN(vehiclePrice));
+        _marksmanPrice = server getVariable (FactionGet(reb,"unitSniper"));
+        _atPrice = server getVariable (FactionGet(reb,"unitLAT"));
+        _atMissilePrice = server getVariable (FactionGet(reb,"unitAT"));
+        _aaMissilePrice = server getVariable (FactionGet(reb,"unitAA"));
 
         // Update price labels
         _riflemanPriceText = _display displayCtrl A3A_IDC_RIFLEMANPRICE;
@@ -486,6 +504,8 @@ switch (_mode) do
         _mortarPriceText = _display displayCtrl A3A_IDC_MORTARPRICE;
         _marksmanPriceText = _display displayCtrl A3A_IDC_MARKSMANPRICE;
         _atPriceText = _display displayCtrl A3A_IDC_ATPRICE;
+        _atMissilePriceText = _display displayCtrl A3A_IDC_ATMISSILEPRICE;
+        _aaMissilePriceText = _display displayCtrl A3A_IDC_AAMISSILEPRICE;
 
         _riflemanPriceText ctrlSetText str _riflemanPrice + "€";
         _squadLeaderPriceText ctrlSetText str _squadLeaderPrice + "€";
@@ -495,6 +515,8 @@ switch (_mode) do
         _mortarPriceText ctrlSetText str _mortarPrice + "€";
         _marksmanPriceText ctrlSetText str _marksmanPrice + "€";
         _atPriceText ctrlSetText str _atPrice + "€";
+        _atMissilePriceText ctrlSetText str _atMissilePrice + "€";
+        _aaMissilePriceText ctrlSetText str _aaMissilePrice + "€";
 
         // Disable add buttons if faction is lacking the resources to recruit them (1HR + money)
         _hr = server getVariable ["hr", 0];
@@ -508,6 +530,8 @@ switch (_mode) do
         if (_factionMoney < _mortarPrice || _hr < 1) then {_mortarAddButton ctrlEnable false; _mortarAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _marksmanPrice || _hr < 1) then {_marksmanAddButton ctrlEnable false; _marksmanAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _atPrice || _hr < 1) then {_atAddButton ctrlEnable false; _atAddButton ctrlSetTooltip _noResourcesText};
+        if (_factionMoney < _atMissilePrice || _hr < 1) then {_atMissileAddButton ctrlEnable false; _atMissileAddButton ctrlSetTooltip _noResourcesText};
+        if (_factionMoney < _aaMissilePrice || _hr < 1) then {_aaMissileAddButton ctrlEnable false; _aaMissileAddButton ctrlSetTooltip _noResourcesText};
 
         // Disable any management buttons if garrison is under attack
         private _garrisonUnderAttack = [markerPos _selectedMarker] call FUNCMAIN(enemyNearCheck);
@@ -646,10 +670,10 @@ switch (_mode) do
                 "unitLAT";
             };
             case ("atMissile"): {
-                "unitSniper";
+                "unitAT";
             };
             case ("aaMissile"): {
-                "unitLAT";
+                "unitAA";
             };
         };
 
@@ -714,7 +738,7 @@ switch (_mode) do
         Trace("Dismissing garrison");
 
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
-        [_selectedMarker] spawn FUNCMAIN(garrisonDialog);
+        [_selectedMarker, true] spawn FUNCMAIN(garrisonDialog);
 
         sleep 1; // Same stupd hack as before, need to fix this
 
@@ -730,6 +754,7 @@ switch (_mode) do
         closeDialog 1;
     };
 
+    /*
     case ("buildWatchpost"):
     {
         closeDialog 1;
@@ -741,6 +766,7 @@ switch (_mode) do
         // TODO UI-update: this was apparently deprecated and uses dismiss garrison instead, considering replacing/removing this button
         closeDialog 1;
     };
+    */
 
     case ("rebuildAssets"):
     {

@@ -972,7 +972,7 @@
     </Container>
     <Container name="dialog_hq_garrisons">
       <Key ID="STR_antistasi_dialogs_hq_garrisons_at">
-        <Original>AT</Original>
+        <Original>Light AT</Original>
         <German>AT</German>
         <Italian>AT</Italian>
         <Spanish>AT</Spanish>

@@ -1,8 +1,9 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_unitType",["_markerX",positionXGarr]];
+params ["_unitType",["_markerX",""]];
 
+if (_markerX isEqualTo "") then {_markerX = positionXGarr}; // var wont be defined otherwise
 private _hr = server getVariable "hr";
 private _titleStr = localize "STR_A3A_garrison_header";
 

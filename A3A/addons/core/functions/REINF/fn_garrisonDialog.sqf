@@ -4,7 +4,7 @@ private ["_typeX","_positionTel","_nearX","_garrison","_costs","_hr","_size"];
 private _titleStr = localize "STR_A3A_fn_reinf_garrDia_title";
 
 _typeX = _this select 0;
-params ["_typeX"];
+params ["_typeX",["_dontOpenMenu",false]];
 private _mode = (_typeX isEqualType "");
 if (_mode) then { // is normal mode
 	if (_typeX == "add") then {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_add"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_remove"] call A3A_fnc_customHint;};
@@ -31,7 +31,7 @@ if ((getMarkerPos _nearX distance _positionTel > 40) && _mode) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "build_menu";
+	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -40,7 +40,7 @@ if (not(sidesX getVariable [_nearX,sideUnknown] == teamPlayer)) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "build_menu";
+	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 if ([_positionX] call A3A_fnc_enemyNearCheck) exitWith {
@@ -48,7 +48,7 @@ if ([_positionX] call A3A_fnc_enemyNearCheck) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-_nul=CreateDialog "build_menu";
+	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -57,7 +57,7 @@ if (_nearX in forcedSpawn) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-_nul=CreateDialog "build_menu";
+	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -71,7 +71,7 @@ if (_wPost && (_typeX isNotEqualTo "rem")) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "build_menu";
+	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -82,7 +82,7 @@ if (_typeX == "rem") then
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-		_nul=CreateDialog "build_menu";
+	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
 #endif
 	};
 	_costs = 0;
@@ -113,7 +113,7 @@ if (_typeX == "rem") then
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "build_menu";
+	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
 #endif
 	}
 else
@@ -125,7 +125,7 @@ else
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "garrison_recruit";
+	if !(_dontOpenMenu) then {_nul=CreateDialog "garrison_recruit"};
 #endif
 	sleep 1;
 	disableSerialization;
