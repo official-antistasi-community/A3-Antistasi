@@ -62,7 +62,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           colorText[]= A3A_COLOR_TEXT_DARKER;
           text = A3A_Icon_Autorifleman;
           x = 24 * GRID_W;
-          y = 34 * GRID_H;
+          y = 29 * GRID_H;
           w = 8 * GRID_W;
           h = 8 * GRID_H;
         };
@@ -74,7 +74,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = "€ 0";
           shadow = 2;
           x = 24 * GRID_W;
-          y = 40 * GRID_H;
+          y = 35 * GRID_H;
           w = 8 * GRID_W;
           h = 4 * GRID_H;
         };
@@ -85,7 +85,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = $STR_antistasi_dialogs_recruit_units_autorifleman;
           onButtonClick = "[A3A_faction_reb get 'unitMG'] spawn A3A_fnc_reinfPlayer; [""onLoad""] spawn A3A_GUI_fnc_recruitDialog;";
           x = 36 * GRID_W;
-          y = 32 * GRID_H;
+          y = 27 * GRID_H;
           w = 36 * GRID_W;
           h = 12 * GRID_H;
         };
@@ -96,7 +96,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           colorText[]= A3A_COLOR_TEXT_DARKER;
           text = A3A_Icon_Grenadier;
           x = 24 * GRID_W;
-          y = 55 * GRID_H;
+          y = 45 * GRID_H;
           w = 8 * GRID_W;
           h = 8 * GRID_H;
         };
@@ -108,7 +108,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = "€ 0";
           shadow = 2;
           x = 24 * GRID_W;
-          y = 61 * GRID_H;
+          y = 51 * GRID_H;
           w = 8 * GRID_W;
           h = 4 * GRID_H;
         };
@@ -119,7 +119,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = $STR_antistasi_dialogs_recruit_units_grenadier;
           onButtonClick = "[A3A_faction_reb get 'unitGL'] spawn A3A_fnc_reinfPlayer; [""onLoad""] spawn A3A_GUI_fnc_recruitDialog;";
           x = 36 * GRID_W;
-          y = 53 * GRID_H;
+          y = 43 * GRID_H;
           w = 36 * GRID_W;
           h = 12 * GRID_H;
         };
@@ -130,7 +130,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           colorText[]= A3A_COLOR_TEXT_DARKER;
           text = A3A_Icon_AT;
           x = 24 * GRID_W;
-          y = 76 * GRID_H;
+          y = 61 * GRID_H;
           w = 8 * GRID_W;
           h = 8 * GRID_H;
         };
@@ -142,7 +142,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = "€ 0";
           shadow = 2;
           x = 24 * GRID_W;
-          y = 82 * GRID_H;
+          y = 67 * GRID_H;
           w = 8 * GRID_W;
           h = 4 * GRID_H;
         };
@@ -153,7 +153,41 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = $STR_antistasi_dialogs_recruit_units_antitank;
           onButtonClick = "[A3A_faction_reb get 'unitLAT'] spawn A3A_fnc_reinfPlayer; [""onLoad""] spawn A3A_GUI_fnc_recruitDialog;";
           x = 36 * GRID_W;
-          y = 74 * GRID_H;
+          y = 59 * GRID_H;
+          w = 36 * GRID_W;
+          h = 12 * GRID_H;
+        };
+
+        class ATIcon : A3A_Picture
+        {
+          idc = A3A_IDC_RECRUITATMISSILEICON;
+          colorText[]= A3A_COLOR_TEXT_DARKER;
+          text = A3A_Icon_Has_AT;
+          x = 24 * GRID_W;
+          y = 77 * GRID_H;
+          w = 8 * GRID_W;
+          h = 8 * GRID_H;
+        };
+
+        class ATPriceText : A3A_Text
+        {
+          idc = A3A_IDC_RECRUITATMISSILEPRICE;
+          style = ST_CENTER;
+          text = "€ 0";
+          shadow = 2;
+          x = 24 * GRID_W;
+          y = 83 * GRID_H;
+          w = 8 * GRID_W;
+          h = 4 * GRID_H;
+        };
+
+        class ATButton : A3A_Button
+        {
+          idc = A3A_IDC_RECRUITATMISSILEBUTTON;
+          text = "AT Missile";
+          onButtonClick = "[A3A_faction_reb get 'unitAT'] spawn A3A_fnc_reinfPlayer; [""onLoad""] spawn A3A_GUI_fnc_recruitDialog;";
+          x = 36 * GRID_W;
+          y = 75 * GRID_H;
           w = 36 * GRID_W;
           h = 12 * GRID_H;
         };
@@ -198,7 +232,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           colorText[]= A3A_COLOR_TEXT_DARKER;
           text = A3A_Icon_Sniper;
           x = 128 * GRID_W;
-          y = 34 * GRID_H;
+          y = 29 * GRID_H;
           w = 8 * GRID_W;
           h = 8 * GRID_H;
         };
@@ -210,7 +244,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = "€ 0";
           shadow = 2;
           x = 128 * GRID_W;
-          y = 40 * GRID_H;
+          y = 35 * GRID_H;
           w = 8 * GRID_W;
           h = 4 * GRID_H;
         };
@@ -221,7 +255,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = $STR_antistasi_dialogs_recruit_units_marksman;
           onButtonClick = "[A3A_faction_reb get 'unitSniper'] spawn A3A_fnc_reinfPlayer; [""onLoad""] spawn A3A_GUI_fnc_recruitDialog;";
           x = 88 * GRID_W;
-          y = 32 * GRID_H;
+          y = 27 * GRID_H;
           w = 36 * GRID_W;
           h = 12 * GRID_H;
         };
@@ -232,7 +266,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           colorText[]= A3A_COLOR_TEXT_DARKER;
           text = A3A_Icon_Construct;
           x = 128 * GRID_W;
-          y = 55 * GRID_H;
+          y = 45 * GRID_H;
           w = 8 * GRID_W;
           h = 8 * GRID_H;
         };
@@ -244,7 +278,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = "€ 0";
           shadow = 2;
           x = 128 * GRID_W;
-          y = 61 * GRID_H;
+          y = 51 * GRID_H;
           w = 8 * GRID_W;
           h = 4 * GRID_H;
         };
@@ -255,7 +289,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = $STR_antistasi_dialogs_recruit_units_engineer;
           onButtonClick = "[A3A_faction_reb get 'unitEng'] spawn A3A_fnc_reinfPlayer; [""onLoad""] spawn A3A_GUI_fnc_recruitDialog;";
           x = 88 * GRID_W;
-          y = 53 * GRID_H;
+          y = 43 * GRID_H;
           w = 36 * GRID_W;
           h = 12 * GRID_H;
         };
@@ -266,7 +300,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           colorText[]= A3A_COLOR_TEXT_DARKER;
           text = A3A_Icon_Bomb_Specialist;
           x = 128 * GRID_W;
-          y = 76 * GRID_H;
+          y = 61 * GRID_H;
           w = 8 * GRID_W;
           h = 8 * GRID_H;
         };
@@ -278,7 +312,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = "€ 0";
           shadow = 2;
           x = 128 * GRID_W;
-          y = 82 * GRID_H;
+          y = 67 * GRID_H;
           w = 8 * GRID_W;
           h = 4 * GRID_H;
         };
@@ -289,7 +323,41 @@ class A3A_RecruitDialog : A3A_DefaultDialog
           text = $STR_antistasi_dialogs_recruit_units_bomb_specialist;
           onButtonClick = "[A3A_faction_reb get 'unitExp'] spawn A3A_fnc_reinfPlayer; [""onLoad""] spawn A3A_GUI_fnc_recruitDialog;";
           x = 88 * GRID_W;
-          y = 74 * GRID_H;
+          y = 59 * GRID_H;
+          w = 36 * GRID_W;
+          h = 12 * GRID_H;
+        };
+
+        class AAIcon : A3A_Picture
+        {
+          idc = A3A_IDC_RECRUITAAMISSILEICON;
+          colorText[]= A3A_COLOR_TEXT_DARKER;
+          text = A3A_Icon_Has_AA;
+          x = 128 * GRID_W;
+          y = 77 * GRID_H;
+          w = 8 * GRID_W;
+          h = 8 * GRID_H;
+        };
+
+        class AAPriceText : A3A_Text
+        {
+          idc = A3A_IDC_RECRUITAAMISSILEPRICE;
+          style = ST_CENTER;
+          text = "€ 0";
+          shadow = 2;
+          x = 128 * GRID_W;
+          y = 83 * GRID_H;
+          w = 8 * GRID_W;
+          h = 4 * GRID_H;
+        };
+
+        class AAButton : A3A_Button
+        {
+          idc = A3A_IDC_RECRUITAAMISSILEBUTTON;
+          text = "AA Missile";
+          onButtonClick = "[A3A_faction_reb get 'unitAA'] spawn A3A_fnc_reinfPlayer; [""onLoad""] spawn A3A_GUI_fnc_recruitDialog;";
+          x = 88 * GRID_W;
+          y = 75 * GRID_H;
           w = 36 * GRID_W;
           h = 12 * GRID_H;
         };

@@ -4,26 +4,29 @@ private ["_typeX","_positionTel","_nearX","_garrison","_costs","_hr","_size"];
 private _titleStr = localize "STR_A3A_fn_reinf_garrDia_title";
 
 _typeX = _this select 0;
+params ["_typeX"];
+private _mode = (_typeX isEqualType "");
+if (_mode) then { // is normal mode
+	if (_typeX == "add") then {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_add"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_remove"] call A3A_fnc_customHint;};
 
-if (_typeX == "add") then {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_add"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_remove"] call A3A_fnc_customHint;};
+	if (!visibleMap) then {openMap true};
+	positionTel = [];
 
-if (!visibleMap) then {openMap true};
-positionTel = [];
+	onMapSingleClick "positionTel = _pos;";
 
-onMapSingleClick "positionTel = _pos;";
+	waitUntil {sleep 1; (count positionTel > 0) or (not visiblemap)};
+	onMapSingleClick "";
+};
+if (!visibleMap && _mode) exitWith {};
+if (_mode) then {
+	_positionTel = positionTel;
+	positionXGarr = "";
+	_nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
+} else {_nearX = _typeX;};
 
-waitUntil {sleep 1; (count positionTel > 0) or (not visiblemap)};
-onMapSingleClick "";
-
-if (!visibleMap) exitWith {};
-
-_positionTel = positionTel;
-positionXGarr = "";
-
-_nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
 _positionX = getMarkerPos _nearX;
 
-if (getMarkerPos _nearX distance _positionTel > 40) exitWith {
+if ((getMarkerPos _nearX distance _positionTel > 40) && _mode) exitWith {
 	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_click"] call A3A_fnc_customHint;
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")

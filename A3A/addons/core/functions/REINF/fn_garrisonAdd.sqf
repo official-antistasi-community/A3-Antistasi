@@ -1,7 +1,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_unitType"];
+params ["_unitType",["_markerX",positionXGarr]];
 
 private _hr = server getVariable "hr";
 private _titleStr = localize "STR_A3A_garrison_header";
@@ -10,7 +10,6 @@ if (_hr < 1) exitWith {
 	[_titleStr, localize "STR_A3A_garrison_error_no_hr"] call A3A_fnc_customHint;
 };
 
-private _markerX = positionXGarr;
 private _resourcesFIA = server getVariable "resourcesFIA";
 private _costs = server getVariable _unitType;
 

@@ -63,6 +63,12 @@ switch (_mode) do
         private _bombSpecialistIcon = _display displayCtrl  A3A_IDC_RECRUITBOMBSPECIALISTICON;
         private _bombSpecialistPriceText = _display displayCtrl  A3A_IDC_RECRUITBOMBSPECIALISTPRICE;
         private _bombSpecialistButton = _display displayCtrl  A3A_IDC_RECRUITBOMBSPECIALISTBUTTON;
+        private _atMissileIcon = _display displayCtrl  A3A_IDC_RECRUITATMISSILEICON;
+        private _atMissilePriceText = _display displayCtrl  A3A_IDC_RECRUITATMISSILEPRICE;
+        private _atMissileButton = _display displayCtrl  A3A_IDC_RECRUITATMISSILEBUTTON;
+        private _aaMissileIcon = _display displayCtrl  A3A_IDC_RECRUITAAMISSILEICON;
+        private _aaMissilePriceText = _display displayCtrl  A3A_IDC_RECRUITAAMISSILEPRICE;
+        private _aaMissileButton = _display displayCtrl  A3A_IDC_RECRUITAAMISSILEBUTTON;
 
         // Get unit prices
         private _militiamanPrice = server getVariable FactionGet(reb,"unitRifle");
@@ -73,6 +79,8 @@ switch (_mode) do
         private _marksmanPrice = server getVariable FactionGet(reb,"unitSniper");
         private _engineerPrice = server getVariable FactionGet(reb,"unitEng");
         private _bombSpecialistPrice = server getVariable FactionGet(reb,"unitExp");
+        private _atMissilePrice = server getVariable FactionGet(reb,"unitAT");
+        private _aaMissilePrice = server getVariable FactionGet(reb,"unitAA");
 
         // Update price labels
         _militiamanPriceText ctrlSetText ((str _militiamanPrice) + "€");
@@ -83,6 +91,8 @@ switch (_mode) do
         _marksmanPriceText ctrlSetText ((str _marksmanPrice) + "€");
         _engineerPriceText ctrlSetText ((str _engineerPrice) + "€");
         _bombSpecialistPriceText ctrlSetText ((str _bombSpecialistPrice) + "€");
+        _atMissilePriceText ctrlSetText ((str _atMissilePrice) + "€");
+        _aaMissilePriceText ctrlSetText ((str _aaMissilePrice) + "€");
 
         // Disable buttons and darken icon if not enough money or HR for the unit
         private _money = player getVariable "moneyX";
@@ -126,6 +136,16 @@ switch (_mode) do
             _bombSpecialistButton ctrlEnable false;
             _bombSpecialistButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
             _bombSpecialistIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if (_money < _atMissilePrice || _hr < 1) then {
+            _atMissileButton ctrlEnable false;
+            _atMissileButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _atMissileIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if (_money < _aaMissilePrice || _hr < 1) then {
+            _aaMissileButton ctrlEnable false;
+            _aaMissileButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _aaMissileIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
 
         Debug("RecruitDialog onLoad complete.");

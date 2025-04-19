@@ -171,7 +171,7 @@ switch (_mode) do
         _playerRankText ctrlSetText ([player, "displayName"] call BIS_fnc_rankParams);
         _playerRankPicture ctrlSetText ([player, "texture"] call BIS_fnc_rankParams);
 
-        private _time = (time - A3A_aliveTime); // current time - time since last (re)spawn
+        private _time = round (time - A3A_aliveTime); // current time - time since last (re)spawn
         _aliveText ctrlSetText format [[_time,1,1,false,2,false,true] call A3A_fnc_timeSpan_format];
 
         private _missions = player getVariable ["missionsCompleted",0];

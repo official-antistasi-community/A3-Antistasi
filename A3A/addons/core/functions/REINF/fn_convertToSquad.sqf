@@ -27,6 +27,8 @@ private _group = createGroup teamPlayer;
 _group setGroupIdGlobal ["Tm-" + str ({side (leader _x) == teamPlayer} count allGroups)];       // uh. whatever
 _units join _group;
 
+if (isNull findDisplay 7420) then {["update"] call A3A_GUI_fnc_aiManagementTab;}; // ai management tab displayed
+
 // Select a suitable leader for the squad
 private _types = _units apply {_x getVariable "unitType"};
 private _leaderIndex = _types find FactionGet(reb,"unitSL");            // not actually possible atm

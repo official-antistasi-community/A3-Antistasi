@@ -8478,6 +8478,9 @@
         <Turkish>Garnizon</Turkish>
         <Chinesesimp>驻军</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_garrison_dismiss_success">
+        <Original>Unit has been disposed of. %1</Original>
+      </Key>
     </Container>
     <Container name="A3A_GCTracker">
       <Key ID="STR_A3A_GCTracker_tracker_notification">

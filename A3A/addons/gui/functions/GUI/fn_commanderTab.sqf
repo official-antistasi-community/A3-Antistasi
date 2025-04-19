@@ -177,7 +177,7 @@ switch (_mode) do
             // ShortcutButtons doesn't change texture color when disabled so we have to use fade
             _groupFastTravelButton ctrlSetFade 0;
             _groupFastTravelButton ctrlCommit 0;
-            _groupFastTravelButton ctrlSetTooltip ""; // TODO: descriptive tooltip?
+            _groupFastTravelButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_fast_travel"; // TODO: descriptive tooltip?
         } else {
             _groupFastTravelButton ctrlEnable false;
             // ShortcutButtons doesn't change texture color when disabled so we have to use fade

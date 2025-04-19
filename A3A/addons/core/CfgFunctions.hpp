@@ -556,6 +556,7 @@ class CfgFunctions
             class FIAskillAdd {};
             class garrisonAdd {};
             class garrisonDialog {};
+            class garrisonRemove {};
             class getHCSquadPrice {};
             class getHCSquadVehicleType {};
             class NATObomb {};

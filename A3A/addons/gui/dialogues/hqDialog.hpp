@@ -746,7 +746,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     x = 8 * GRID_W;
                     y = 14 * GRID_H;
                     w = 54 * GRID_W;
-                    h = 60 * GRID_H;
+                    h = 78 * GRID_H;
                 };
 
                 class GarrisonControlsGroup : A3A_ControlsGroupNoScrollbars
@@ -755,7 +755,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     x = 10 * GRID_W;
                     y = 17 * GRID_H;
                     w = 50 * GRID_W;
-                    h = 41 * GRID_H;
+                    h = 51 * GRID_H;
 
                     class controls
                     {
@@ -1322,6 +1322,146 @@ class A3A_HqDialog : A3A_DefaultDialog
                                 bottom = 0;
                             };
                         };
+                        
+                        class AtMissileLabel : A3A_Text
+                        {
+                            idc = -1;
+                            text = "AT Missile";
+                            font = "RobotoCondensedLight";
+                            x = 0 * GRID_W;
+                            y = 40 * GRID_H;
+                            w = 26 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class AtMissilePrice : RiflemanPrice
+                        {
+                            idc = A3A_IDC_ATMISSILEPRICE;
+                            x = 26 * GRID_W;
+                            y = 40 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class AtMissileNumber : A3A_Text
+                        {
+                            idc = A3A_IDC_ATMISSILENUMBER;
+                            text = "0";
+                            style = ST_RIGHT;
+                            font = "RobotoCondensedLight";
+                            x = 34 * GRID_W;
+                            y = 40 * GRID_H;
+                            w = 6 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class AtMissileRemove : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_ATMISSILESUBBUTTON;
+                            text = "-";
+                            onButtonClick = "[""garrisonRemove"",[""atMissile""]] spawn A3A_GUI_fnc_hqDialog";
+                            x = 41 * GRID_W;
+                            y = 40 * GRID_H;
+                            w = 4 * GRID_W;
+                            h = 4 * GRID_H;
+                            size = GUI_TEXT_SIZE_LARGE;
+                            class textPos
+                            {
+                                left = 1.5 * GRID_W;
+                                right = 0;
+                                top = -1 * GRID_H;
+                                bottom = 0;
+                            };
+                        };
+
+                        class AtMissileAdd : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_ATMISSILEADDBUTTON;
+                            text = "+";
+                            onButtonClick = "[""garrisonAdd"",[""atMissile""]] spawn A3A_GUI_fnc_hqDialog";
+                            x = 46 * GRID_W;
+                            y = 40 * GRID_H;
+                            w = 4 * GRID_W;
+                            h = 4 * GRID_H;
+                            size = GUI_TEXT_SIZE_LARGE;
+                            class textPos
+                            {
+                                left = 1.5 * GRID_W;
+                                right = 0;
+                                top = -1 * GRID_H;
+                                bottom = 0;
+                            };
+                        };
+
+                        class AaMissileLabel : A3A_Text
+                        {
+                            idc = -1;
+                            text = "AA Missile";
+                            font = "RobotoCondensedLight";
+                            x = 0 * GRID_W;
+                            y = 45 * GRID_H;
+                            w = 26 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class AaMissilePrice : RiflemanPrice
+                        {
+                            idc = A3A_IDC_AAMISSILEPRICE;
+                            x = 26 * GRID_W;
+                            y = 45 * GRID_H;
+                            w = 8 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class AaMissileNumber : A3A_Text
+                        {
+                            idc = A3A_IDC_AAMISSILENUMBER;
+                            text = "0";
+                            style = ST_RIGHT;
+                            font = "RobotoCondensedLight";
+                            x = 34 * GRID_W;
+                            y = 45 * GRID_H;
+                            w = 6 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class AaMissileRemove : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_AAMISSILESUBBUTTON;
+                            text = "-";
+                            onButtonClick = "[""garrisonRemove"",[""aaMissile""]] spawn A3A_GUI_fnc_hqDialog";
+                            x = 41 * GRID_W;
+                            y = 45 * GRID_H;
+                            w = 4 * GRID_W;
+                            h = 4 * GRID_H;
+                            size = GUI_TEXT_SIZE_LARGE;
+                            class textPos
+                            {
+                                left = 1.5 * GRID_W;
+                                right = 0;
+                                top = -1 * GRID_H;
+                                bottom = 0;
+                            };
+                        };
+
+                        class AaMissileAdd : A3A_ShortcutButton
+                        {
+                            idc = A3A_IDC_AAMISSILEADDBUTTON;
+                            text = "+";
+                            onButtonClick = "[""garrisonAdd"",[""aaMissile""]] spawn A3A_GUI_fnc_hqDialog";
+                            x = 46 * GRID_W;
+                            y = 45 * GRID_H;
+                            w = 4 * GRID_W;
+                            h = 4 * GRID_H;
+                            size = GUI_TEXT_SIZE_LARGE;
+                            class textPos
+                            {
+                                left = 1.5 * GRID_W;
+                                right = 0;
+                                top = -1 * GRID_H;
+                                bottom = 0;
+                            };
+                        };
                     };
                 };
 
@@ -1331,7 +1471,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     text = $STR_antistasi_dialogs_hq_garrisons_rebuild_assets_button;
                     onButtonClick = "[""rebuildAssets""] spawn A3A_GUI_fnc_hqDialog";
                     x = 10 * GRID_W;
-                    y = 60 * GRID_H;
+                    y = 78 * GRID_H;
                     w = 22 * GRID_W;
                     h = 12 * GRID_H;
                 };
@@ -1342,12 +1482,12 @@ class A3A_HqDialog : A3A_DefaultDialog
                     text = $STR_antistasi_dialogs_hq_garrisons_dismiss_garrison_button;
                     onButtonClick = "[""dismissGarrison""] spawn A3A_GUI_fnc_hqDialog";
                     x = 38 * GRID_W;
-                    y = 60 * GRID_H;
+                    y = 78 * GRID_H;
                     w = 22 * GRID_W;
                     h = 12 * GRID_H;
                 };
 
-
+                /*
                 // Build / Remove outpost buttons
                 class BuildWatchpostButton : A3A_ShortcutButton
                 {
@@ -1370,7 +1510,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     w = 22 * GRID_W;
                     h = 12 * GRID_H;
                 };
-
+                */
             };
         };
 

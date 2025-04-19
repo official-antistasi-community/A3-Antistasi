@@ -622,31 +622,38 @@ switch (_mode) do
         private _unitType = switch (_type) do
         {
             case ("rifleman"): {
-                SDKMil;
+                "unitRifle";
             };
             case ("squadleader"): {
-                SDKSL;
+                "unitSL";
             };
             case ("autorifleman"): {
-                SDKMG;
+                "unitMG";
             };
             case ("grenadier"): {
-                SDKGL;
+                "unitGL";
             };
             case ("medic"): {
-                SDKMedic;
+                "unitMedic";
             };
             case ("mortar"): {
-                staticCrewTeamPlayer;
+                "unitCrew";
             };
             case ("marksman"): {
-                SDKSniper;
+                "unitSniper";
             };
             case ("at"): {
-                SDKATman;
+                "unitLAT";
+            };
+            case ("atMissile"): {
+                "unitSniper";
+            };
+            case ("aaMissile"): {
+                "unitLAT";
             };
         };
 
+        _unitType = A3A_faction_reb get _unitType;
         [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonAdd);
 
         sleep 1; // TODO UI-update: bad hack to make it correctly update the UI with the new number
@@ -662,32 +669,39 @@ switch (_mode) do
         private _unitType = switch (_type) do
         {
             case ("rifleman"): {
-                SDKMil;
+                "unitRifle";
             };
             case ("squadleader"): {
-                SDKSL;
+                "unitSL";
             };
             case ("autorifleman"): {
-                SDKMG;
+                "unitMG";
             };
             case ("grenadier"): {
-                SDKGL;
+                "unitGL";
             };
             case ("medic"): {
-                SDKMedic;
+                "unitMedic";
             };
             case ("mortar"): {
-                staticCrewTeamPlayer;
+                "unitCrew";
             };
             case ("marksman"): {
-                SDKSniper;
+                "unitSniper";
             };
             case ("at"): {
-                SDKATman;
+                "unitLAT";
+            };
+            case ("atMissile"): {
+                "unitAT";
+            };
+            case ("aaMissile"): {
+                "unitAA";
             };
         };
 
         Debug_2("Calling FUNCMAIN(garrisonRemove) with [%1,%2]", _unitType, _selectedMarker);
+        _unitType = A3A_faction_reb get _unitType;
         [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonRemove);
 
         sleep 1; // TODO UI-update: bad hack to make it correctly update the UI with the new number
@@ -700,7 +714,7 @@ switch (_mode) do
         Trace("Dismissing garrison");
 
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
-        [_selectedMarker] spawn FUNCMAIN(dismissGarrison);
+        [_selectedMarker] spawn FUNCMAIN(garrisonDialog);
 
         sleep 1; // Same stupd hack as before, need to fix this
 

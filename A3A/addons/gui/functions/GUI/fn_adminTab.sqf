@@ -78,7 +78,7 @@ switch (_mode) do
         // Get Debug info
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _debugText = _display displayCtrl A3A_IDC_DEBUGINFO;
-        private _missionTime = format [[serverTime,1,1,false,2,false,true] call A3A_fnc_timeSpan_format];
+        private _missionTime = format [[round serverTime,1,1,false,2,false,true] call A3A_fnc_timeSpan_format];
         private ["_serverFPS","_deadUnits","_allUnits","_countRebels","_countInvaders","_countOccupants","_countCiv","_countGroups","_players","_destroyedVehicles","_connectedHCs"];
 
         if(!isNil "A3A_AdminData") then 
