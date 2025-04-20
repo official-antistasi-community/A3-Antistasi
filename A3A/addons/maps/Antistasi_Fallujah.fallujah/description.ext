@@ -1,6 +1,6 @@
 #include "..\missionDescription\master.hpp"
 
-OnLoadName = $STR_antistasi_mission_info_Fallujah_mapname_short;
+OnLoadName = $STR_antistasi_mission_info_Fallujah_mapname_short_text;
 OnLoadMission = $STR_antistasi_mission_info_Fallujah_blurb_text;
 briefingName = $STR_antistasi_mission_info_Fallujah_mapname_text;
 overviewText = $STR_antistasi_mission_info_Fallujah_description_text;
