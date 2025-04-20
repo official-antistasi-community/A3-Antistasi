@@ -148,6 +148,40 @@ switch (_mode) do
             _aaMissileIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
 
+        // Disable buttons and darken icon if not enough weapons
+        call A3A_fnc_fetchRebelGear;
+        private _noGearText = "Not enough weapons to recruit this unit type";
+        if !([A3A_faction_reb get "unitMG",false] call A3A_fnc_hasWeapons) then {
+            _autoriflemanButton ctrlEnable false;
+            _autoriflemanButton ctrlSetTooltip _noGearText;
+            _autoriflemanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if !([A3A_faction_reb get "unitGL",false] call A3A_fnc_hasWeapons) then {
+            _grenadierButton ctrlEnable false;
+            _grenadierButton ctrlSetTooltip _noGearText;
+            _grenadierIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if !([A3A_faction_reb get "unitLAT",false] call A3A_fnc_hasWeapons) then {
+            _antitankButton ctrlEnable false;
+            _antitankButton ctrlSetTooltip _noGearText;
+            _antitankIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if !([A3A_faction_reb get "unitSniper",false] call A3A_fnc_hasWeapons) then {
+            _marksmanButton ctrlEnable false;
+            _marksmanButton ctrlSetTooltip _noGearText;
+            _marksmanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if !([A3A_faction_reb get "unitAT",false] call A3A_fnc_hasWeapons) then {
+            _atMissileButton ctrlEnable false;
+            _atMissileButton ctrlSetTooltip _noGearText;
+            _atMissileIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if !([A3A_faction_reb get "unitAA",false] call A3A_fnc_hasWeapons) then {
+            _aaMissileButton ctrlEnable false;
+            _aaMissileButton ctrlSetTooltip _noGearText;
+            _aaMissileIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+
         Debug("RecruitDialog onLoad complete.");
     };
 

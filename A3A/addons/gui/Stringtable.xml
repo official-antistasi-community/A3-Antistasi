@@ -2983,7 +2983,7 @@
         <Chinesesimp>快速旅行</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_fast_travel_tooltip">
-        <Original>This is a placeholder</Original>
+        <Original>Fast travel to a friendly location</Original>
         <German>Dies ist ein Platzhalter</German>
         <Italian>Questo è un segnaposto</Italian>
         <Spanish>Esto es un marcador de posición</Spanish>

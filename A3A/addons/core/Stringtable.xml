@@ -2149,7 +2149,7 @@
         <Chinesesimp>总部位置</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_marker">
-        <Original>You must click near a rebel map marker.</Original>
+        <Original>You must select a rebel map marker.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_zone">
         <Original>Click on the zone you want to rebuild.</Original>

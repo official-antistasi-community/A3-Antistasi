@@ -1,11 +1,12 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+#include "..\..\..\gui\dialogues\ids.inc" // include new UI ids for update
 private ["_typeX","_positionTel","_nearX","_garrison","_costs","_hr","_size"];
 private _titleStr = localize "STR_A3A_fn_reinf_garrDia_title";
 
 _typeX = _this select 0;
 params ["_typeX",["_dontOpenMenu",false]];
-private _mode = (_typeX isEqualType "");
+private _mode = (_typeX in ["add","rem"]);
 if (_mode) then { // is normal mode
 	if (_typeX == "add") then {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_add"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_remove"] call A3A_fnc_customHint;};
 
@@ -22,11 +23,14 @@ if (_mode) then {
 	_positionTel = positionTel;
 	positionXGarr = "";
 	_nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
-} else {_nearX = _typeX;};
+} else {
+	_nearX = _typeX;
+	_typeX = "rem";
+};
 
 _positionX = getMarkerPos _nearX;
 
-if ((getMarkerPos _nearX distance _positionTel > 40) && _mode) exitWith {
+if (_mode && {getMarkerPos _nearX distance _positionTel > 40}) exitWith { // lazy eval
 	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_click"] call A3A_fnc_customHint;
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
@@ -158,3 +162,12 @@ else
 		_ChildControl  ctrlSetTooltip format [_unitCostFull,server getVariable FactionGet(reb,"unitAA")];
 		};
 	};
+
+disableSerialization;
+
+private _display = findDisplay A3A_IDD_HQDIALOG; // if garrison menu open, update
+if (str (_display) != "no display") then {
+	["updateGarrisonTab"] call A3A_GUI_fnc_hqDialog;
+	private _garrisonMap = _display displayCtrl A3A_IDC_GARRISONMAP;
+	_garrisonMap setVariable ["selectedMarker", ""]; // fix bug where garrison map would reset to 0 0 on dismiss
+};

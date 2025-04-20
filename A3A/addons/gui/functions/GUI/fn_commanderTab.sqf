@@ -753,32 +753,38 @@ switch (_mode) do
             Trace_1("Set fire mission endPos: %1", _clickedWorldPosition);
         };
 
+        /*
         if (count hcAllGroups player < 1) exitWith {
             Debug("CommanderMap clicked but there are no HC groups to select.");
             _commanderMap setVariable ["selectedGroup", grpNull];
         };
+        */
 
-        // Find closest HC squad to the clicked position
-        Trace("Selecting HC group");
-        private _selectedGroup = [hcAllGroups player, _clickedWorldPosition] call BIS_fnc_nearestPosition;
-        Trace_1("_selectedGroup: %1", groupId _selectedGroup);
-        private _selectedGroupMapPos = _commanderMap ctrlMapWorldToScreen getPos leader _selectedGroup;
+        // Find closest HC squad or marker to the clicked position
+        private _selectableMarkers = airportsX + resourcesX + factories + outposts + seaports + citiesX + outpostsFIA + ["Synd_HQ"];
+        private _selectableGroups = hcAllGroups player;
+        private _selectOptions = _selectableMarkers + _selectableGroups;
+        private _selectedItem = [_selectOptions, _clickedWorldPosition] call BIS_fnc_nearestPosition;
+        private _selectedItemPosition = if (_selectedItem isEqualType grpNull) then {getPos leader _selectedItem;} else {getMarkerPos _selectedItem;};
+        private _selectedItemMapPos = _commanderMap ctrlMapWorldToScreen _selectedItemPosition;
         private _maxDistance = 6 * GRID_W; // TODO UI-update: Move somewhere else?
-        private _distance = _selectedGroupMapPos distance _clickedPosition;
+        private _distance = _selectedItemMapPos distance _clickedPosition;
         Trace_4("_selectedGroupMapPos %1, _clickedPosition %2, _maxDistance %3, _distance %4", _selectedGroupMapPos, _clickedPosition, _maxDistance, _distance);
-
-        // If clicked position is nowhere near any hc groups, deselect all units
-        // and show list view
         if (_distance > _maxDistance) exitWith {
-            Debug("Distance too large, deselecting group");
+                Debug("Distance too large, deselecting item");
+                _commanderMap setVariable ["selectedGroup", grpNull];
+                _commanderMap setVariable ["selectedMarker", locationNull];
+                ["update"] call FUNC(commanderTab);
+            };
+        if (_selectedItem isEqualType grpNull) then {
+            _commanderMap setVariable ["selectedGroup", _selectedItem];
+            _commanderMap setVariable ["selectedMarker", locationNull];
+        } else {
+            _commanderMap setVariable ["selectedMarker", _selectedItem];
+            _commanderMap setVariable ["selectMarkerData", [_selectedItemPosition]];
             _commanderMap setVariable ["selectedGroup", grpNull];
-            ["update"] call FUNC(commanderTab);
         };
-
-        _commanderMap setVariable ["selectedGroup", _selectedGroup];
-
-        // Update single group view
-        ["update"] call FUNC(commanderTab);
+        ["update"] call FUNC(commanderTab); // Update single group view if applicable
     };
 
     case ("groupNameLabelClicked"):
@@ -993,6 +999,14 @@ switch (_mode) do
         _positionTel2 = _endPos;
 
         [_typeAmmunition,_rounds,_artyArrayDef1,_artyRoundsArr1,_positionTel,_positionTel2] spawn A3A_fnc_artySupportFire;
+    };
+
+    case ("removeGarrisonButtonClicked"):
+    {
+        Trace("Dismissing garrison");
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _selectedMarker = _commanderMap getVariable ["selectedMarker", ""];
+        [_selectedMarker, true] spawn A3A_fnc_garrisonDialog;
     };
 
     case ("showGarbageCleanOptions"):

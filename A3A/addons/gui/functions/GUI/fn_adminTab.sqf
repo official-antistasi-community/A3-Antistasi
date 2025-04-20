@@ -109,21 +109,23 @@ switch (_mode) do
         };
 
         // TODO UI-update: localize later, not final yet
-        private _formattedString = format [
-        "<t font='EtelkaMonospacePro' size='0.8'>
-        <t>Mission time:</t><t align='right'>%1</t><br />
-        <t>Server FPS:</t><t align='right'>%2</t><br />
-        <t>Connected HCs:</t><t align='right'>%3</t><br />
-        <t>Players:</t><t align='right'>%4</t><br />
-        <t>Groups</t><t align='right'>%5</t><br />
-        <t>Units:</t><t align='right'>%6</t><br />
-        <t>Dead units:</t><t align='right'>%7</t><br />
-        <t>Rebels:</t><t align='right'>%8</t><br />
-        <t>Invaders:</t><t align='right'>%9</t><br />
-        <t>Occupants:</t><t align='right'>%10</t><br />
-        <t>Civs:</t><t align='right'>%11</t><br />
-        <t>Wrecks:</t><t align='right'>%12</t>
-        </t>",
+        private _rawStrings = [
+        "<t font='EtelkaMonospacePro' size='0.8'>",
+        "<t>Mission time:</t><t align='right'>%1</t><br />",
+        "<t>Server FPS:</t><t align='right'>%2</t><br />",
+        "<t>Connected HCs:</t><t align='right'>%3</t><br />",
+        "<t>Players:</t><t align='right'>%4</t><br />",
+        "<t>Groups</t><t align='right'>%5</t><br />",
+        "<t>Units:</t><t align='right'>%6</t><br />",
+        "<t>Dead units:</t><t align='right'>%7</t><br />",
+        "<t>Rebels:</t><t align='right'>%8</t><br />",
+        "<t>Invaders:</t><t align='right'>%9</t><br />",
+        "<t>Occupants:</t><t align='right'>%10</t><br />",
+        "<t>Civs:</t><t align='right'>%11</t><br />",
+        "<t>Wrecks:</t><t align='right'>%12</t>"
+        ];
+        private _fullString = _rawStrings joinString "";
+        private _formattedString = format [_fullString,
         _missionTime,
         _serverFps,
         _connectedHCs,

@@ -1,7 +1,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params [["_mode",objNull,[objNull]],["_target",objNull,[objNull]]];
+params [["_mode","",[""]],["_target",objNull,[objNull]]];
 
 private _titleStr = localize "STR_A3A_fn_orgp_memAdd_titel";
 

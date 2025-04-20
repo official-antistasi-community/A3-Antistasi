@@ -143,6 +143,7 @@ class CfgFunctions
             class getVehicleSellPrice {};
             class getVehiclesGroundSupport {};
             class getVehiclesGroundTransport {};
+            class hasWeapons {};
             class HQGarbageClean {};
             class vehicleBoxRestore {};
             class initPetros {};
@@ -545,6 +546,7 @@ class CfgFunctions
             class build {};
             class buildCreateVehicleCallback {};
             class buildMinefield {};
+            class canReinfPlayer {};
             class controlHCsquad {};
             class controlunit {};
             class convertToSquad {};

@@ -371,7 +371,7 @@ switch (_mode) do
 
         // Get the data from the marker
         private _position = getMarkerPos _selectedMarker;
-        private _garrisonName = "Outpost";//[_selectedMarker] call A3A_fnc_getLocationMarkerName;  // ToDo define
+        private _garrisonName = [_selectedMarker] call A3A_GUI_fnc_getLocationMarkerName;
         private _garrison = garrison getVariable [_selectedMarker, []];
 
         // Get garrison counts
@@ -533,6 +533,24 @@ switch (_mode) do
         if (_factionMoney < _atMissilePrice || _hr < 1) then {_atMissileAddButton ctrlEnable false; _atMissileAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _aaMissilePrice || _hr < 1) then {_aaMissileAddButton ctrlEnable false; _aaMissileAddButton ctrlSetTooltip _noResourcesText};
 
+        // Disable add button for mortar if selecting marker in outpostsFIA;
+        private _noRoadblockMortarText = localize "STR_A3A_garrison_error_no_mortar";
+        if (_selectedMarker in outpostsFIA) then {
+            _mortarAddButton ctrlEnable false; 
+            _mortarAddButton ctrlSetTooltip _noRoadblockMortarText;
+            _mortarNumber ctrlSetText "0";
+            _mortarSubButton ctrlEnable false; // pretend like no mortars exist because the roadblock still has unitCrew for the vic
+        };
+
+        call A3A_fnc_fetchRebelGear;
+        private _noGearText = "Not enough weapons for this unit type";
+        if !([A3A_faction_reb get "unitMG",false] call A3A_fnc_hasWeapons) then {_autoriflemanAddButton ctrlEnable false; _autoriflemanAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitGL",false] call A3A_fnc_hasWeapons) then {_grenadierAddButton ctrlEnable false; _grenadierAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitSniper",false] call A3A_fnc_hasWeapons) then {_marksmanAddButton ctrlEnable false; _marksmanAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitLAT",false] call A3A_fnc_hasWeapons) then {_atAddButton ctrlEnable false; _atAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitAT",false] call A3A_fnc_hasWeapons) then {_atMissileAddButton ctrlEnable false; _atMissileAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitAA",false] call A3A_fnc_hasWeapons) then {_aaMissileAddButton ctrlEnable false; _aaMissileAddButton ctrlSetTooltip _noGearText};
+
         // Disable any management buttons if garrison is under attack
         private _garrisonUnderAttack = [markerPos _selectedMarker] call FUNCMAIN(enemyNearCheck);
         if (_garrisonUnderAttack) then {
@@ -679,10 +697,7 @@ switch (_mode) do
 
         _unitType = A3A_faction_reb get _unitType;
         [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonAdd);
-
-        sleep 1; // TODO UI-update: bad hack to make it correctly update the UI with the new number
-
-        ["updateGarrisonTab"] call FUNC(hqDialog);
+        // tab will update automatically
     };
 
     case ("garrisonRemove"):
@@ -727,10 +742,7 @@ switch (_mode) do
         Debug_2("Calling FUNCMAIN(garrisonRemove) with [%1,%2]", _unitType, _selectedMarker);
         _unitType = A3A_faction_reb get _unitType;
         [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonRemove);
-
-        sleep 1; // TODO UI-update: bad hack to make it correctly update the UI with the new number
-
-        ["updateGarrisonTab"] call FUNC(hqDialog);
+        // tab will update automatically
     };
 
     case ("dismissGarrison"):
@@ -739,10 +751,6 @@ switch (_mode) do
 
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
         [_selectedMarker, true] spawn FUNCMAIN(garrisonDialog);
-
-        sleep 1; // Same stupd hack as before, need to fix this
-
-        ["updateGarrisonTab"] call FUNC(hqDialog);
     };
 
     case ("skipTime"):
