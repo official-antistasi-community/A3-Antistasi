@@ -733,8 +733,8 @@
         <Chinesesimp>Antistasi - 解放 Malden</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_mission_info_napf_blurb_text">
-        <Original>Vlash: Add Something Here</Original>
-      </key>
+        <Original>Give the Swiss a taste of freedom</Original>
+      </Key>
       <Key ID="STR_antistasi_mission_info_napf_description_text">
         <Original>Be the Resistance Leader. Fight against a superior enemy in technology, number, assets and vehicles. Use guerrilla tactics in a totally dynamic world, with around 18 sidemissions, everywhere, anytime, anything.</Original>
         <German>Sei ein Anführer des Widerstands. Kämpfe gegen einen technologisch und zahlenmäßigen überlegenen Feind. Nutze Guerillataktiken in einer vollständig dynamischen Welt mit 18 möglichen Sekundärmissionen. Es könnte jederzeit und überall alles passieren...</German>
@@ -756,8 +756,8 @@
         <Original>Antistasi - Liberation of Napf</Original>
       </Key>
       <Key ID="STR_antistasi_mission_info_napfwinter_blurb_text">
-        <Original>Vlash: Add Something Here</Original>
-      </key>
+        <Original>Give the Swiss a taste of freedom</Original>
+      </Key>
       <Key ID="STR_antistasi_mission_info_napfwinter_description_text">
         <Original>Be the Resistance Leader. Fight against a superior enemy in technology, number, assets and vehicles. Use guerrilla tactics in a totally dynamic world, with around 18 sidemissions, everywhere, anytime, anything.</Original>
         <German>Sei ein Anführer des Widerstands. Kämpfe gegen einen technologisch und zahlenmäßigen überlegenen Feind. Nutze Guerillataktiken in einer vollständig dynamischen Welt mit 18 möglichen Sekundärmissionen. Es könnte jederzeit und überall alles passieren...</German>
@@ -776,7 +776,8 @@
         <Original>Antistasi Napf Winter</Original>
       </Key>
       <Key ID="STR_antistasi_mission_info_napfwinter_mapname_text">
-        <Original>Antistasi - Napf but Cold</Original>
+        <Original>Antistasi - Napf but it's Cold</Original>
+      <\Key>
       <Key ID="STR_antistasi_mission_info_pulau_blurb_text">
         <Original>Revolution on Paradise Island!</Original>
         <Russian>Революция на Райском Острове!</Russian>
