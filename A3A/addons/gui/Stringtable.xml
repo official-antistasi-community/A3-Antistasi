@@ -1209,6 +1209,15 @@
         <Turkish>Uyandığınızda saat %2 olacak.</Turkish>
         <Chinesesimp>你醒来的时候应该是 %2。</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_garrisons_atMissile">
+        <Original>AT Missile</Original>
+      </Key>
+      <Key ID="STR_antistasi_hq_garrisons_aaMissile">
+        <Original>AA Missile</Original>
+      </Key>
+      <Key ID="STR_A3A_garrison_error_no_weapons">
+        <Original>Not enough weapons for this unit type</Original>
+      </Key>
     </Container>
     <Container name="dialog_hq_minefields">
       <Key ID="STR_antistasi_dialogs_hq_minefields_apers_mines_button">
@@ -1368,6 +1377,21 @@
         <Portuguese>OPÇÕES DE BATALHA</Portuguese>
         <Turkish>SAVAŞ SEÇENEKLERİ</Turkish>
         <Chinesesimp>战斗选项</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_remove_garrison_button">
+        <Original>Remove Garrison</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_create_watchpost_button">
+        <Original>Create WP/RB</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_squads_button">
+        <Original>High Command Squads</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_convertToSquad_button">
+        <Original>Convert To HC Squad</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_commanderOnly">
+        <Original>Only Player Commander has access to this function.</Original>
       </Key>
     </Container>
     <Container name="dialog_main_admin">
@@ -2638,6 +2662,9 @@
       <Key ID="STR_antistasi_dialogs_main_recruit_squad_button">
         <Original>Recruit Squad</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_commander_no_marker">
+        <Original>Select a rebel marker to remove garrison</Original>
+      </Key>
     </Container>
     <Container name="dialog_main_donate">
       <Key ID="STR_antistasi_dialogs_main_current_money">
@@ -3139,6 +3166,15 @@
         <Portuguese>Veículos</Portuguese>
         <Turkish>Araçlar</Turkish>
         <Chinesesimp>载具</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_player_timeAlive">
+        <Original>Time alive:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_player_missions">
+        <Original>Missions:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_player_kills">
+        <Original>Kills:</Original>
       </Key>
     </Container>
     <Container name="dialog_mission_request">

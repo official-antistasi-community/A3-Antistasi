@@ -216,7 +216,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class AliveLabel : A3A_Text
                 {
                     idc = -1;
-                    text = "Time alive:"; // TODO UI-update: localize later, not final yet
+                    text = $STR_antistasi_dialogs_player_timeAlive;
                     x = 98 * GRID_W;
                     y = 17 * GRID_H;
                     w = 30 * GRID_W;
@@ -237,7 +237,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class MissionsLabel : A3A_Text
                 {
                     idc = -1;
-                    text = "Missions:"; // TODO UI-update: localize later, not final yet
+                    text = $STR_antistasi_dialogs_player_missions;
                     x = 98 * GRID_W;
                     y = 22 * GRID_H;
                     w = 30 * GRID_W;
@@ -258,7 +258,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class KillsLabel : A3A_Text
                 {
                     idc = -1;
-                    text = "Kills:"; // TODO UI-update: localize later, not final yet
+                    text = $STR_antistasi_dialogs_player_kills;
                     x = 98 * GRID_W;
                     y = 27 * GRID_H;
                     w = 30 * GRID_W;
@@ -1181,7 +1181,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class HCSquadsButton : A3A_Button
                 {
                     idc = A3A_IDC_HCSQUADSBUTTON;
-                    text = "High Command Squads";
+                    text = $STR_antistasi_dialogs_main_hc_squads_button;
                     onButtonClick = "[""updateMultipleGroupsView""] call A3A_GUI_fnc_commanderTab;";
                     x = 10 * GRID_W;
                     y = 8 * GRID_H;
@@ -1192,7 +1192,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class AddWatchpostButton : A3A_Button
                 {
                     idc = A3A_IDC_ADDWATCHPOSTBUTTON;
-                    text = "Create WP/RB";
+                    text = $STR_antistasi_dialogs_main_create_watchpost_button;
                     onButtonClick = "closeDialog 0; [""create""] spawn A3A_fnc_outpostDialog";
                     x = 10 * GRID_W;
                     y = 38 * GRID_H;
@@ -1203,7 +1203,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class RemoveGarrisonButton : A3A_ShortcutButton
                 {
                     idc = A3A_IDC_REMOVEGARRISONBUTTON;
-                    text = "Remove Garrison";
+                    text = $STR_antistasi_dialogs_main_remove_garrison_button;
                     onButtonClick = "[""removeGarrisonButtonClicked""] call A3A_GUI_fnc_commanderTab;";
                     //onButtonClick = "closeDialog 0; ['rem', true] spawn A3A_fnc_garrisonDialog";
                     x = 36 * GRID_W;
@@ -1873,7 +1873,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         class ConvertToSquadButton : A3A_ShortcutButton
                         {
                             idc = A3A_IDC_AICONVERTTOSQUADBUTTON;
-                            text = "Convert To HC Squad";
+                            text = $STR_antistasi_dialogs_main_convertToSquad_button;
                             onButtonClick = "[""convertSquadButtonClicked""] call A3A_GUI_fnc_aiManagementTab";
                             x = 0 * GRID_W;
                             y = 64 * GRID_H;

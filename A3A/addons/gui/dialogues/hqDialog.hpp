@@ -1326,7 +1326,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                         class AtMissileLabel : A3A_Text
                         {
                             idc = -1;
-                            text = "AT Missile";
+                            text = $STR_antistasi_dialogs_hq_garrisons_atMissile;
                             font = "RobotoCondensedLight";
                             x = 0 * GRID_W;
                             y = 40 * GRID_H;
@@ -1396,7 +1396,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                         class AaMissileLabel : A3A_Text
                         {
                             idc = -1;
-                            text = "AA Missile";
+                            text = $STR_antistasi_hq_garrisons_aaMissile;
                             font = "RobotoCondensedLight";
                             x = 0 * GRID_W;
                             y = 45 * GRID_H;

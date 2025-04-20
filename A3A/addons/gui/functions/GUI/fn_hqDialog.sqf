@@ -543,7 +543,7 @@ switch (_mode) do
         };
 
         call A3A_fnc_fetchRebelGear;
-        private _noGearText = "Not enough weapons for this unit type";
+        private _noGearText = localize "STR_A3A_garrison_error_no_weapons";
         if !([A3A_faction_reb get "unitMG",false] call A3A_fnc_hasWeapons) then {_autoriflemanAddButton ctrlEnable false; _autoriflemanAddButton ctrlSetTooltip _noGearText};
         if !([A3A_faction_reb get "unitGL",false] call A3A_fnc_hasWeapons) then {_grenadierAddButton ctrlEnable false; _grenadierAddButton ctrlSetTooltip _noGearText};
         if !([A3A_faction_reb get "unitSniper",false] call A3A_fnc_hasWeapons) then {_marksmanAddButton ctrlEnable false; _marksmanAddButton ctrlSetTooltip _noGearText};

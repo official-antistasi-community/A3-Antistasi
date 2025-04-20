@@ -56,5 +56,5 @@ private _smallTrashCleanList = [ // Array of classnames like ejection seats or s
     [allMissionObjects _x,true] call _fnc_objNearHQ;
 } forEach _smallTrashCleanList;
 
-[localize "STR_A3A_fn_base_gc_title", "HQ garbage deleted."] remoteExec ["A3A_fnc_customHint", 0];
+[localize "STR_A3A_fn_base_gc_title", localize "STR_A3A_fn_base_gc_hqCleaned"] remoteExec ["A3A_fnc_customHint", 0];
 Info("HQ Garbage clean completed");

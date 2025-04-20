@@ -109,6 +109,15 @@ switch (_mode) do
             } forEach (units _selectedGroup);
         };
 
+        // Check for valid marker for dismissal
+        if (_commanderMap getVariable ["selectedMarker",""] isEqualTo "") then {
+            _removeGarrisonButton ctrlEnable false;
+            _removeGarrisonButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_no_marker";
+        } else {
+            _removeGarrisonButton ctrlEnable true;
+            _removeGarrisonButton ctrlSetTooltip "";
+        };
+
         switch (true) do 
         {
             case (_hasGroup && _isArtyMenu && _isMortarVic): { // If all is valid show fire mission view
@@ -1031,7 +1040,7 @@ switch (_mode) do
         {
             [] remoteExec ["A3A_fnc_garbageCleaner",2];
         } else {
-            ["Garbage Cleaner", "Only Player Commander has access to this function."] call A3A_fnc_customHint; // TODO UI-update: stringtable this
+            ["Garbage Cleaner", localize "STR_antistasi_dialogs_main_commanderOnly"] call A3A_fnc_customHint;
         };
     };
 
@@ -1042,7 +1051,7 @@ switch (_mode) do
         {
             [] remoteExec ["A3A_fnc_HQgarbageClean",2];
         } else {
-            ["Garbage Cleaner", "Only Player Commander has access to this function."] call A3A_fnc_customHint; // TODO UI-update: stringtable this
+            ["Garbage Cleaner", localize "STR_antistasi_dialogs_main_commanderOnly"] call A3A_fnc_customHint;
         };
     };
 

@@ -2551,6 +2551,9 @@
         <Korean>최대</Korean>
         <Russian>Экстрим</Russian>
       </Key>
+      <Key ID="STR_A3A_fn_base_gc_hqCleaned">
+        <Original>HQ garbage deleted.</Original>
+      </Key>
     </Container>
     <Container name="A3A_fn_convoy">
       <Key ID="STR_A3A_fn_convoy_convdebug_admin">
@@ -4098,6 +4101,9 @@
         <Original>Taxes Income&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;Manpower: +%1&lt;br/&gt;Money: +%2 €</Original>
         <Korean>세금 획득&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;인력: +%1&lt;br/&gt;자금: +%2 </Korean>
         <Russian>Доход&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;HR: +%1&lt;br/&gt;Деньги: +%2 €</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_init_initClient_addAct_recruitSquad">
+        <Original>Squad Recruitment</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_intel">

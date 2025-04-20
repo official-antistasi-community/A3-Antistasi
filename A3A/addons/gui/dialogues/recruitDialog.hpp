@@ -184,7 +184,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         class ATButton : A3A_Button
         {
           idc = A3A_IDC_RECRUITATMISSILEBUTTON;
-          text = "AT Missile";
+          text = $STR_antistasi_dialogs_hq_garrisons_atMissile;
           onButtonClick = "[A3A_faction_reb get 'unitAT'] spawn A3A_fnc_reinfPlayer; [""onLoad""] spawn A3A_GUI_fnc_recruitDialog;";
           x = 36 * GRID_W;
           y = 75 * GRID_H;
@@ -354,7 +354,7 @@ class A3A_RecruitDialog : A3A_DefaultDialog
         class AAButton : A3A_Button
         {
           idc = A3A_IDC_RECRUITAAMISSILEBUTTON;
-          text = "AA Missile";
+          text = $STR_antistasi_hq_garrisons_aaMissile;
           onButtonClick = "[A3A_faction_reb get 'unitAA'] spawn A3A_fnc_reinfPlayer; [""onLoad""] spawn A3A_GUI_fnc_recruitDialog;";
           x = 88 * GRID_W;
           y = 75 * GRID_H;
