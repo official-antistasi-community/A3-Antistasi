@@ -37,6 +37,7 @@ _group deleteGroupWhenEmpty true;
 _group setBehaviourStrong "CARELESS";
 [-10 * count units _group, _side, _resPool] call A3A_fnc_addEnemyResources;
 
+_plane limitSpeed 500;
 
 _plane addEventHandler ["Killed", {
     params ["_plane"];
