@@ -3,7 +3,7 @@
 #include "..\..\dialogues\defines.hpp"
 
 
-params[["_className",""], ["_price", 0], ["_amountAdd", 1]];
+params[["_className",""], ["_price", 0], ["_amountAdd", 1], ["_stock", 0]];
 
 if(isNil "A3A_shoppingCart") then {
 	A3A_shoppingCart = createHashMap;
@@ -18,7 +18,9 @@ if(_className in A3A_shoppingCart) exitWith
 {
 	private _map =  A3A_shoppingCart get _className;
 	private _amount = _map getOrDefault ["_amount", 0];
+	private _stock = _map getOrDefault ["_stock", 0];		// stock only passed in from initial calls
 	_amount = _amount + _amountAdd;
+	if (_amount > _stock) then { _amount = _stock };
 
 	// delete the item from the cart
 	if(_amount <= 0) exitWith {
@@ -39,7 +41,6 @@ if(_className in A3A_shoppingCart) exitWith
 	private _weaponPrice = _map getOrDefault ["_price", -1];
 	_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _weaponPrice * _amount]);
 	_totalCost ctrlCommit 0;
-
 
 
 	_map set ["_amount", _amount];
@@ -130,6 +131,7 @@ _buttonMinus ctrladdeventhandler ["ButtonClick", {
 private _objectMap = createHashMap;
 _objectMap set ["_amount", 1];
 _objectMap set ["_price", _price];
+_objectMap set ["_stock", _stock];
 _objectMap set ["_control", _itemControlsGroup];
 _objectMap set ["_controlAmount", _amountText];
 _objectMap set ["_controlCost", _totalCost];

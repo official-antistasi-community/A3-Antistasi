@@ -15,37 +15,18 @@ private _config = configFile >> "CfgWeapons";
 
 private _columnCount = 2;
 private _columnWidth = 50;
-private _columnHeight = 50; 
+private _columnHeight = 34;
 
-private _pictureX = 0;
-private _pictureY = 0;
-private _pictureWidth = 50;
-private _pictureHeight = 20;
-
-private _displayX = 1;
-private _displayY = 22;
-private _displayWidth = 46;
-private _displayHeight = 8;
-
-private _priceX = 1;
-private _priceY = 28;
-private _priceWidth = 46;
-private _priceHeight = 6;
-
-private _logoX = 43;
-private _logoY = 34;
-private _logoWidth = 6;
-private _logoHeight = 6;
-
-private _addX = 1;
-private _addY = 40;
-private _addWidth = 46;
-private _addHeight = 8;
+private _pictureBox = [0, 0, 50, 20];
+private _displayBox = [1, 22, 30, 4];
+private _stockBox = [1, 26, 20, 4];
+private _priceBox = [1, 30, 20, 4];
+private _logoBox = [1, 14, 6, 6];
+private _addBox = [25, 27, 25, 6];
 
 switch(_selectedTab) do 
 {
-    case ("Primary"): 
-    {
+    case ("Primary"): {
         _selectedTabIDC = A3A_IDC_GUN_SHOP_PRIMARY_TAB;
         _selectedTabCtrl = A3A_IDC_GUN_SHOP_PRIMARY_TAB_CONTROL;
     };
@@ -60,237 +41,64 @@ switch(_selectedTab) do
         _selectedTabCtrl = A3A_IDC_GUN_SHOP_SECONDARY_TAB_CONTROL;
     };
 
+    _columnCount = 1;
+    _columnWidth = 100;
+    _columnHeight = 6;
+
+    _pictureBox = [0, 0, 6, 6];
+    _displayBox = [7.5, 0, 55.5, 3];
+    _priceBox = [13, 3, 61, 3];
+    _stockBox = [20, 3, 54, 3];
+    _logoBox = [70, 0, 6, 6];
+    _addBox = [76, 0, 24, 6];
+
     case ("Grenades"): {
         _selectedTabIDC = A3A_IDC_GUN_SHOP_GRENADES_TAB;
         _selectedTabCtrl = A3A_IDC_GUN_SHOP_GRENADES_TAB_CONTROL;
         _config = configFile >> "CfgMagazines";
-
-        _columnCount = 1;
-        _columnWidth = 100;
-        _columnHeight = 6;
-
-        _pictureWidth = 6;
-        _pictureHeight = 6;
-
-        _addX = 76;
-        _addY = 0;
-        _addWidth = 24;
-        _addHeight = 6;
-
-        _displayX = 7.5;
-        _displayY = 0;
-        _displayWidth = 55.5;
-        _displayHeight = 3;
-
-        _priceX = 13;
-        _priceY = 3;
-        _priceWidth = 61;
-        _priceHeight = 3;
-
-        _logoX = 70;
-        _logoY = 0;
-        _logoWidth = 6;
-        _logoHeight = 6;
-
     };
 
     case ("Explosives"): {
         _selectedTabIDC = A3A_IDC_GUN_SHOP_EXPLOSIVES_TAB;
         _selectedTabCtrl = A3A_IDC_GUN_SHOP_EXPLOSIVES_TAB_CONTROL;
         _config = configFile >> "CfgMagazines";
-
-        _columnCount = 1;
-        _columnWidth = 100;
-        _columnHeight = 6;
-
-        _pictureWidth = 6;
-        _pictureHeight = 6;
-
-        _addX = 76;
-        _addY = 0;
-        _addWidth = 24;
-        _addHeight = 6;
-
-        _displayX = 7.5;
-        _displayY = 0;
-        _displayWidth = 55.5;
-        _displayHeight = 3;
-
-        _priceX = 13;
-        _priceY = 3;
-        _priceWidth = 61;
-        _priceHeight = 3;
-
-        _logoX = 70;
-        _logoY = 0;
-        _logoWidth = 6;
-        _logoHeight = 6;
     };
 
     case ("Magazines"): {
         _selectedTabIDC = A3A_IDC_GUN_SHOP_MAGAZINES_TAB;
         _selectedTabCtrl = A3A_IDC_GUN_SHOP_MAGAZINES_TAB_CONTROL;
         _config = configFile >> "CfgMagazines";
-
-        _columnCount = 1;
-        _columnWidth = 100;
-        _columnHeight = 6;
-
-        _pictureWidth = 6;
-        _pictureHeight = 6;
-
-        _addX = 76;
-        _addY = 0;
-        _addWidth = 24;
-        _addHeight = 6;
-
-        _displayX = 7.5;
-        _displayY = 0;
-        _displayWidth = 55.5;
-        _displayHeight = 3;
-
-        _priceX = 13;
-        _priceY = 3;
-        _priceWidth = 61;
-        _priceHeight = 3;
-
-        _logoX = 70;
-        _logoY = 0;
-        _logoWidth = 6;
-        _logoHeight = 6;
     };
 
     case ("Optics"): {
         _selectedTabIDC = A3A_IDC_GUN_SHOP_OPTICS_TAB;
         _selectedTabCtrl = A3A_IDC_GUN_SHOP_OPTICS_TAB_CONTROL;
-
-        _columnCount = 1;
-        _columnWidth = 100;
-        _columnHeight = 6;
-
-        _pictureWidth = 6;
-        _pictureHeight = 6;
-
-        _addX = 76;
-        _addY = 0;
-        _addWidth = 24;
-        _addHeight = 6;
-
-        _displayX = 7.5;
-        _displayY = 0;
-        _displayWidth = 55.5;
-        _displayHeight = 3;
-
-        _priceX = 13;
-        _priceY = 3;
-        _priceWidth = 61;
-        _priceHeight = 3;
-
-        _logoX = 70;
-        _logoY = 0;
-        _logoWidth = 6;
-        _logoHeight = 6;
     };
 
     case ("Rails"): {
         _selectedTabIDC = A3A_IDC_GUN_SHOP_RAILS_TAB;
         _selectedTabCtrl = A3A_IDC_GUN_SHOP_RAILS_TAB_CONTROL;
-
-        _columnCount = 1;
-        _columnWidth = 100;
-        _columnHeight = 6;
-
-        _pictureWidth = 6;
-        _pictureHeight = 6;
-
-        _addX = 76;
-        _addY = 0;
-        _addWidth = 24;
-        _addHeight = 6;
-
-        _displayX = 7.5;
-        _displayY = 0;
-        _displayWidth = 55.5;
-        _displayHeight = 3;
-
-        _priceX = 13;
-        _priceY = 3;
-        _priceWidth = 61;
-        _priceHeight = 3;
-
-        _logoX = 70;
-        _logoY = 0;
-        _logoWidth = 6;
-        _logoHeight = 6;
-
     };
 
     case ("Muzzles"): {
         _selectedTabIDC = A3A_IDC_GUN_SHOP_MUZZLES_TAB;
         _selectedTabCtrl = A3A_IDC_GUN_SHOP_MUZZLES_TAB_CONTROL;
-
-        _columnCount = 1;
-        _columnWidth = 100;
-        _columnHeight = 6;
-
-        _pictureWidth = 6;
-        _pictureHeight = 6;
-
-        _addX = 76;
-        _addY = 0;
-        _addWidth = 24;
-        _addHeight = 6;
-
-        _displayX = 7.5;
-        _displayY = 0;
-        _displayWidth = 55.5;
-        _displayHeight = 3;
-
-        _priceX = 13;
-        _priceY = 3;
-        _priceWidth = 61;
-        _priceHeight = 3;
-
-        _logoX = 70;
-        _logoY = 0;
-        _logoWidth = 6;
-        _logoHeight = 6;
-
     };
 
     case ("Bipods"): {
         _selectedTabIDC = A3A_IDC_GUN_SHOP_BIPODS_TAB;
         _selectedTabCtrl = A3A_IDC_GUN_SHOP_BIPODS_TAB_CONTROL;
-
-        _columnCount = 1;
-        _columnWidth = 100;
-        _columnHeight = 6;
-
-        _pictureWidth = 6;
-        _pictureHeight = 6;
-
-        _addX = 76;
-        _addY = 0;
-        _addWidth = 24;
-        _addHeight = 6;
-
-        _displayX = 7.5;
-        _displayY = 0;
-        _displayWidth = 55.5;
-        _displayHeight = 3;
-
-        _priceX = 13;
-        _priceY = 3;
-        _priceWidth = 61;
-        _priceHeight = 3;
-
-        _logoX = 70;
-        _logoY = 0;
-        _logoWidth = 6;
-        _logoHeight = 6;
     };
 
 };
+
+{
+    _x set [0, (_x#0)*GRID_W];
+    _x set [1, (_x#1)*GRID_H];
+    _x set [2, (_x#2)*GRID_W];
+    _x set [3, (_x#3)*GRID_H];
+} forEach [_pictureBox, _displayBox, _priceBox, _stockBox, _logoBox, _addBox];
+
 
 if (_selectedTabIDC == -1) ExitWith {
     Error("Tried to access a tab, might not exist: %1",_selectedTab);
@@ -311,7 +119,7 @@ private _createdCtrls = [];
 
 {
     private _className = _x;
-    private _itemPrice = _y;
+    _y params ["_itemPrice", "_stock"];
 
     private _configClass = _config >> _className;
     private _displayName = getText (_configClass >> "displayName");
@@ -325,48 +133,46 @@ private _createdCtrls = [];
 
 
     private _itemControlsGroup = _display ctrlCreate ["A3A_ControlsGroupNoScrollbars", -100, _controlsGroup];
-    _itemControlsGroup ctrlSetPosition[_itemXPos, _itemYpos, _columnWidth * GRID_W, _columnHeight * GRID_H];
+    _itemControlsGroup ctrlSetPosition [_itemXPos, _itemYpos, _columnWidth * GRID_W, _columnHeight * GRID_H];
     _itemControlsGroup ctrlSetFade 1;
     _itemControlsGroup ctrlCommit 0;
 
-    private _previewButton = _display ctrlCreate ["A3A_ActivePicture", A3A_IDC_GUN_SHOP_ITEM_PREVIEW, _itemControlsGroup];
-    _previewButton ctrlSetPosition [_pictureX, _pictureY, _pictureWidth * GRID_W, _pictureHeight * GRID_H];
+    private _previewButton = _display ctrlCreate ["A3A_Picture", A3A_IDC_GUN_SHOP_ITEM_PREVIEW, _itemControlsGroup];
+    _previewButton ctrlSetPosition _pictureBox;
     _previewButton ctrlSetText _picturePreview;
     _previewButton ctrlCommit 0;
 
 
     private _button = _display ctrlCreate ["A3A_Button_Small", -1, _itemControlsGroup];
-    _button ctrlSetPosition [_addX * GRID_W, _addY * GRID_H, _addWidth * GRID_W,  _addHeight * GRID_H];
-    if(_columnCount > 4) then {
+    _button ctrlSetPosition _addBox;
+    // wrong anyway, should be have been the box height
+    //if(_columnCount > 4) then {
         // 4 is the default height, we scale to that height
-        _button ctrlSetFontHeight ((ctrlFontHeight _button) * (4 / _columnCount));
-    };
+        //_button ctrlSetFontHeight ((ctrlFontHeight _button) * (4 / _columnCount));
+    //};
     _button ctrlSetText localize "STR_antistasi_gun_shop_add_to_cart_button_text";
     _button ctrlCommit 0;
 
 
     private _displayText = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
-    _displayText ctrlSetPosition [_displayX * GRID_W, _displayY * GRID_H, _displayWidth * GRID_W, _displayHeight * GRID_H];
-    if(_columnCount > 4) then {
-        // 4 is the default height, we scale to that height
-        _displayText ctrlSetStructuredText parseText (format ["<t size='%1' align='left' valign='middle' color='#E5C454' shadow='2'>%2</t>", 0.65 *(4 / _columnCount), _displayName]);
-    };
+    _displayText ctrlSetPosition _displayBox;
     _displayText ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#E5C454' shadow='2'>%1</t>", _displayName]);
     _displayText ctrlSetTooltip _className;
     _displayText ctrlCommit 0;
 
+    private _displayStock = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
+    _displayStock ctrlSetPosition _stockBox;
+    private _stockStr = str _stock + " in stock";           // TODO: stringtable
+    _displayStock ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#63DDFF' shadow='2'>%1</t>", _stockStr]);
+    _displayStock ctrlCommit 0;
+
     private _displayPrice = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
-    _displayPrice ctrlSetPosition [_priceX * GRID_W, _priceY * GRID_H, _priceWidth * GRID_W, _priceHeight * GRID_H];
-    if(_columnCount > 4) then {
-        // 4 is the default height, we scale to that height
-        _displayText ctrlSetStructuredText parseText (format ["<t size='%1' align='left' valign='middle' color='#52D273' shadow='2'>€ %2</t>", 0.65 * (4 / _columnCount), _itemPrice]);
-    } else {
-        _displayPrice ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _itemPrice]);
-    };
+    _displayPrice ctrlSetPosition _priceBox;
+    _displayPrice ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _itemPrice]);
     _displayPrice ctrlCommit 0;
 
     private _modLogo = _display ctrlCreate ["A3A_PictureStroke", -1, _itemControlsGroup];
-    _modLogo ctrlSetPosition [_logoX * GRID_W, _logoY * GRID_H, _logoWidth * GRID_W, _logoHeight * GRID_H];
+    _modLogo ctrlSetPosition _logoBox;
     _modLogo ctrlSetText (_modPicture param [0,""]);
     _modLogo ctrlCommit 0;
 
@@ -378,15 +184,17 @@ private _createdCtrls = [];
     _button setVariable ["className", _className];
     _button setVariable ["selectedTabIDC", _selectedTabIDC];
     _button setVariable ["price", _itemPrice];
+    _button setVariable ["stock", _stock];
 
     _button ctrladdeventhandler ["ButtonClick", {
         params ["_control"];
         private _className = _control getVariable ["className", ""];
         private _selectedTabIDC = _control getVariable ["selectedTabIDC", ""];
         private _price = _control getVariable ["price", ""];
+        private _stock = _control getVariable ["stock", 0];
         if(_className isEqualTo "" || _selectedTab isEqualTo "") exitwith {};
 
-        [_className, _price] call A3A_GUI_fnc_addToCart;
+        [_className, _price, 1, _stock] call A3A_GUI_fnc_addToCart;
 
         call A3A_GUI_fnc_updateCartNumber;
 
