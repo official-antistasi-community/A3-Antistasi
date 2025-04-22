@@ -10,17 +10,13 @@ switch (_mode) do
 {
     case ("onLoad"):
     {
-        //create the shopping cart hashmap
-        A3A_shoppingCart = createHashMap;
+        // Create the shopping cart hashmap if it doesn't exist
+        if (isNil "A3A_shoppingCart") then { A3A_shoppingCart = createHashMap };
 
-		// we need to get a list of all the buyable items
-        if (isNil "A3A_GunShopData") then 
-        {
-            call A3A_GUI_fnc_gatherGunShopLists;
-        };
+        // Request gunshop data from the server and wait for it
+        [clientOwner] remoteExec ["A3A_GUI_fnc_fetchGunshopLists", 2];
 
-        // the rest depend on the data in gunShopData
-        waitUntil {sleep 1; !isNil "A3A_GunShopData"};
+        waitUntil {sleep 0.01; !isNil "A3A_gunShopData" and {count A3A_gunShopData > 0}};
 
         //we need to create all of the tabs
         ["Primary"] call A3A_GUI_fnc_createGunShopTab;
@@ -34,6 +30,7 @@ switch (_mode) do
         ["Muzzles"] call A3A_GUI_fnc_createGunShopTab;
         ["Bipods"] call A3A_GUI_fnc_createGunShopTab;
 
+        // TODO: Select primary?
     };
 
     case ("switchTab"):

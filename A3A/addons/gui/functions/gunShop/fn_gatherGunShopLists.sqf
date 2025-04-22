@@ -1,40 +1,73 @@
 #include "..\..\dialogues\ids.inc"
 #include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
 
-private _types = [];
-_types set [0,["AssaultRifle","MachineGun","SniperRifle","Shotgun","Rifle","SubmachineGun","Shotgun"]];
-_types set [1,["Launcher","MissileLauncher","RocketLauncher"]];
-_types set [2,["Handgun"]];
-_types set [3,["AccessorySights"]]; // Optics
-_types set [4,["AccessoryPointer"]]; // Rails
-_types set [5,["AccessoryMuzzle"]]; // Muzzles
-_types set [6,["AccessoryBipod"]]; // Bipods
+params [["_minCount", 2]];
 
-// create this array to hold the classnames. We want to use a hashmap later.
-private _gunShopArray = [];
-_gunShopArray set [0, []];
-_gunShopArray set [1, []];
-_gunShopArray set [2, []];
-_gunShopArray set [3, []];
-_gunShopArray set [4, []];
-_gunShopArray set [5, []];
-_gunShopArray set [6, []];
 
+private _fnc_roundPrice = {
+    params ["_price"];
+    if (_minCount < 100) then { _price = _price * (0.8 + random 0.4) };
+    call {
+        if (_price > 2000) exitWith { ceil (_price / 100) * 100 };
+        if (_price > 200) exitWith { ceil (_price / 10) * 10 };
+        ceil (_price);
+    };
+};
+
+private _fnc_generateList = {
+    params ["_cfgType", "_minCount", "_allItems"];
+
+    private _itemPriceList = createHashMap;
+    private _itemCount = _minCount + round (random 0.2 * count _allItems);
+    while {_itemCount > 0 and _allItems isNotEqualTo []} do {
+        private _item = _allItems deleteAt floor random count _allItems;
+        private _price = [_item, _cfgType] call A3A_GUI_fnc_calculateItemPrice;
+        _itemPriceList set [_item, _price call _fnc_roundPrice];
+        _itemCount = _itemCount - 1;
+    };
+    _itemPriceList;
+};
+
+// Clear the data, so other functions know it's in progress
+A3A_gunShopData = createHashMap;
+
+// Set up the item price cache
+if (isNil "A3A_itemPriceCache") then { A3A_itemPriceCache = createHashMap };
 
 private _gunShopData = createHashMap;
 
-_gunShopData set [A3A_IDC_GUN_SHOP_PRIMARY_TAB, (allRifles + allSniperRifles + allMachineGuns  + allSMGs + allShotguns)];
-_gunShopData set [A3A_IDC_GUN_SHOP_HANDGUN_TAB, (allHandguns)];
+_gunShopData set [A3A_IDC_GUN_SHOP_PRIMARY_TAB, ["weapon", _minCount*3, allRifles + allSniperRifles + allMachineGuns + allSMGs + allShotguns] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_HANDGUN_TAB, ["weapon", _minCount, +allHandguns] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_SECONDARY_TAB, ["weapon", _minCount, allMissileLaunchers + allRocketLaunchers] call _fnc_generateList];
 
-_gunShopData set [A3A_IDC_GUN_SHOP_SECONDARY_TAB, (allMissileLaunchers + allRocketLaunchers)];
-_gunShopData set [A3A_IDC_GUN_SHOP_GRENADES_TAB, (allGrenades)];
-_gunShopData set [A3A_IDC_GUN_SHOP_EXPLOSIVES_TAB, (allMine + allMineDirectional + allMineBounding)];
-_gunShopData set [A3A_IDC_GUN_SHOP_MAGAZINES_TAB, (allMagBullet + allMagShotgun + allMagMissile + allMagRocket + allMagShell + allMagSmokeShell + allMagFlare)];
+_gunShopData set [A3A_IDC_GUN_SHOP_GRENADES_TAB, ["mag", _minCount, +allGrenades] call _fnc_generateList];      // check smoke etc
+_gunShopData set [A3A_IDC_GUN_SHOP_EXPLOSIVES_TAB, ["mag", _minCount, allMine + allMineDirectional + allMineBounding] call _fnc_generateList];
 
-_gunShopData set [A3A_IDC_GUN_SHOP_OPTICS_TAB, (allOptics)];
-_gunShopData set [A3A_IDC_GUN_SHOP_RAILS_TAB, (allPointerAttachments)];
-_gunShopData set [A3A_IDC_GUN_SHOP_MUZZLES_TAB, (allMuzzleAttachments)];
-_gunShopData set [A3A_IDC_GUN_SHOP_BIPODS_TAB, (allBipods)];
+_gunShopData set [A3A_IDC_GUN_SHOP_OPTICS_TAB, ["item", _minCount, +allOptics] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_RAILS_TAB, ["item", _minCount, +allPointerAttachments] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_MUZZLES_TAB, ["item", _minCount, +allMuzzleAttachments] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_BIPODS_TAB, ["item", _minCount, +allBipods] call _fnc_generateList];
+
+if (_minCount >= 100) then {
+    private _allMags = allMagBullet + allMagShotgun + allMagMissile + allMagRocket + allMagShell + allMagSmokeShell + allMagFlare;
+    _gunShopData set [A3A_IDC_GUN_SHOP_MAGAZINES_TAB, ["mag", _minCount, _allMags] call _fnc_generateList];
+} else {
+    // Special case for magazines, base on previous weapons
+    private _weapons = keys (_gunShopData get A3A_IDC_GUN_SHOP_PRIMARY_TAB);
+    _weapons append keys (_gunShopData get A3A_IDC_GUN_SHOP_HANDGUN_TAB);
+    _weapons append keys (_gunShopData get A3A_IDC_GUN_SHOP_SECONDARY_TAB);
+
+    private _magsPrices = createHashMap;
+    {
+        private _allMags = compatibleMagazines _x;
+        private _mag = if (random 1 < 0.5) then {_allMags#0} else {selectRandom _allMags};      // first-mag bias
+        if !(_mag in allMagazines) then {continue};     // use Antistasi blacklisting? kinda expensive but whatever
+        private _price = [_mag, "mag"] call A3A_GUI_fnc_calculateItemPrice;
+        _magsPrices set [_mag, _price call _fnc_roundPrice];
+    } forEach _weapons;
+
+    _gunShopData set [A3A_IDC_GUN_SHOP_MAGAZINES_TAB, _magsPrices];
+};
 
 A3A_GunShopData = _gunShopData;
-_gunShopData;

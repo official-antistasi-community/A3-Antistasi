@@ -1,6 +1,7 @@
 #include "..\..\dialogues\ids.inc"
 #include "..\..\script_component.hpp"
 #include "..\..\dialogues\defines.hpp"
+FIX_LINE_NUMBERS()
 
 
 params ["_selectedTab"];
@@ -301,16 +302,16 @@ if (_selectedTabCtrl == -1) ExitWith {
 private _controlsGroup = _display displayCtrl _selectedTabCtrl;
 
 
-// the ArsenalData doesn't exist
-if(isNil "A3A_GunShopData") ExitWith { Error("Arsenal data does not exist")};
+if(isNil "A3A_GunShopData") ExitWith { Error("Gunshop data does not exist")};
 
 // get the items to create
-private _gunShopData = A3A_GunShopData getOrDefault [_selectedTabIDC, []];
-if (_gunShopData isEqualTo []) ExitWith {};
+private _gunShopData = A3A_GunShopData getOrDefault [_selectedTabIDC, createHashMap];
+if (count _gunShopData == 0) ExitWith { Error_1("IDC %1 not in gunshop hashmap", _selectedTabIDC) };
 private _createdCtrls = [];
 
 {
     private _className = _x;
+    private _itemPrice = _y;
 
     private _configClass = _config >> _className;
     private _displayName = getText (_configClass >> "displayName");
@@ -354,7 +355,6 @@ private _createdCtrls = [];
     _displayText ctrlSetTooltip _className;
     _displayText ctrlCommit 0;
 
-    private _itemPrice = [_className] call A3A_GUI_fnc_calculateItemPrice;
     private _displayPrice = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
     _displayPrice ctrlSetPosition [_priceX * GRID_W, _priceY * GRID_H, _priceWidth * GRID_W, _priceHeight * GRID_H];
     if(_columnCount > 4) then {
@@ -397,7 +397,6 @@ private _createdCtrls = [];
     _itemControlsGroup ctrlCommit 0.1;
 
     _createdCtrls pushBack _itemControlsGroup;
-
 
 } forEach _gunShopData;
 

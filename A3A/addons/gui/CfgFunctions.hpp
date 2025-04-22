@@ -57,21 +57,22 @@ class CfgFunctions {
         };
 
         class gunShop {
-			file = QPATHTOFOLDER(functions\gunShop);
+            file = QPATHTOFOLDER(functions\gunShop);
             class addItemToBlackList {};
-			class addToCart {};
+            class addToCart {};
             class blackListedItems {};
-			class calculateItemPrice {};
-			class checkOut {};
-			class createFilters {};
-			class createGunShopTab {};
-			class gatherGunShopLists {};
-			class gunShop {};
-			class handleSearchEvents {};
-			class updateCartNumber{};
-			class updateCartPositions {};
-			class updateFilters {};
-			class updateTotalCost {};
-		};
+            class calculateItemPrice {};
+            class checkOut {};
+            class createFilters {};
+            class createGunShopTab {};
+            class fetchGunShopLists {};
+            class gatherGunShopLists {};
+            class gunShop {};
+            class handleSearchEvents {};
+            class updateCartNumber{};
+            class updateCartPositions {};
+            class updateFilters {};
+            class updateTotalCost {};
+        };
     };
 };

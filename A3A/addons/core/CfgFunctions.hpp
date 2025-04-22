@@ -439,6 +439,7 @@ class CfgFunctions
             class REP_Antenna {};
             class RES_Prisoners {};
             class RES_Refugees {};
+            class supplyDrop {};
             class taskDelete {};
             class taskSetState {};
             class taskUpdate {};

@@ -2,98 +2,192 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_className"];
+params ["_className", "_itemCfgCat"];
+
+private _cacheVal = A3A_itemPriceCache get (_itemCfgCat + ":" + _classname);
+if (!isNil "_cacheVal") exitWith { _cacheVal };
 
 
-_fnc_weaponPriceCalculator = {
-    params ["_className", "_type", "_basePrice"];
-    private _cost = 0;
+// still need old-style shotgun adjustment
 
-    switch (_type) do {
-        case "AssaultRifle": {
-            _cost = _basePrice * 4.0;
-        };
-        case "Handgun": {
-            _cost = _basePrice;
-        };
-        case "Launcher": {
-            cost = _basePrice * 9.0;
-        };
-        case "MissileLauncher": {
-            // double the price if they can unlock it
-            _cost = _basePrice * 20.0 * (allowGuidedLaunchers + 1);
-        }; 
-        case "RocketLauncher": {
-            _cost = _basePrice * 7.0;
-        };
-        case "MachineGun": {
-            _cost = _basePrice * 5.0;
-        };
-        case "Shotgun": {
-            _cost = _basePrice * 3.0;
-        };
-        case "Rifle": {
-            _cost = _basePrice * 4.0;
-        };
-        case "SubmachineGun": {
-            _cost = _basePrice * 4.0;
-        };
-        case "SniperRifle": {
-            _cost = _basePrice * 5.0;
-        };
-        default {
-            //diag_log format["None supported type: %1 of weapon: %2,",_type,_className];
-        };
-    };
-    private _config = (configFile >> "CfgWeapons" >> _className);
-    private _modes = getArray(_config >> "modes");
-    private _muzzle = getArray(_config >> "muzzles");
-    // check if single fire only, or one fire mode
-    if(_modes isEqualTo [] or (count _modes isEqualTo 1)) then 
-    {
-        _cost = _cost / 2;
-    };
-    // check if this has a gl
-    if(count _muzzle >= 2 && {"gl" == getText (_config >> (_muzzle select 1) >> "cursorAim")}) then 
-    {
-        _cost = _cost + (_basePrice * 1.5);
-    };
-    private _fireRate = [];
-    {
-        _fireRate pushBackUnique getNumber (_config >> _x >> "reloadTime");
-    } forEach _modes;
-    _fireRate sort true;
-    _fireRate = _fireRate param [0, 60];
-    if(_fireRate isEqualTo 0) then {_fireRate = 60};
-    private _mags = [];
-    {
-        (_className call A3A_fnc_itemType) params ["_category", "_magType"];
-        _mags pushBackUnique ([_x,_magType,_basePrice] call _fnc_magazinePriceCalculator);
-    }
-    forEach (getArray(_config >> "magazines") + getArray(_config >> "magazineWell"));
-    _mags sort true;
-    _mags = _mags param [0, 0];
-    floor((_cost + (_basePrice * round (60 / _fireRate)) + _mags) / 50);
+private _fnc_ammoPriceCalculator = {
+    params ["_className"];
+
+    private _cacheVal = A3A_itemPriceCache get ("ammo:" + _classname);
+    if (!isNil "_cacheVal") exitWith { _cacheVal };
+
+    private _rocketSims = ["shotrocket", "shotmissile"];
+    private _utilSims = ["shotsmoke", "shotsmokex", "shotilluminating", "shotnvgmarker"];
+    private _mineSims = ["shotmine", "shotdirectionalbomb", "shotboundingmine", "shotgrenade"];
+
+    private _cfgAmmo = configFile >> "CfgAmmo" >> _className;
+	private _simType = tolower getText(_cfgAmmo >> "simulation");
+	if (_simType in _utilSims) exitWith { 200 };
+
+	// maxSpeed better for rockets, usually zero elsewhere. Mines have random crap.
+	private _velocity = getNumber (_cfgAmmo >> (["typicalSpeed", "maxSpeed"] select (_simType in _rocketSims)));
+	if (_simType in _mineSims) then { _velocity = 0 };
+	private _maxRange = getNumber (_cfgAmmo >> "missileLockMaxDistance") max getNumber (_cfgAmmo >> "maxControlRange");
+	private _rangeMod = _velocity max _maxRange;
+
+	// any non-zero gets a multiplicative bump? airLock double+?
+	private _guidance = getNumber (_cfgAmmo >> "irLock") + 2*getNumber (_cfgAmmo >> "manualControl") + getNumber (_cfgAmmo >> "laserLock");
+	private _airLock = getNumber (_cfgAmmo >> "airLock");
+	if (_airLock == 1) then { _airLock = 0 };
+
+    // hit & indirHit for original projectile
+	private _hit = getNumber(_cfgAmmo >> "hit");
+	private _indirHit = getNumber(_cfgAmmo >> "indirectHit") * getNumber(_cfgAmmo >> "indirectHitRange");
+	if (_simType in _mineSims and getNumber (_cfgAmmo >> "directionalExplosion") != 0) then {
+		_indirHit = _indirHit * getNumber (_cfgAmmo >> "explosionAngle") / 180;
+	};
+	
+	// submunitionAmmo can be either [type, prob, type2, prob2] array or just type string
+	private _subAmmoType = getText (_cfgAmmo >> "submunitionAmmo");
+	if (isArray (_cfgAmmo >> "submunitionAmmo")) then { _subAmmoType = getArray (_cfgAmmo >> "submunitionAmmo") # 0 };
+
+	private _subVelocity = _velocity;
+	if (_subAmmoType != "") then {
+		_subVelocity = getNumber (_cfgAmmo >> "initSpeed");
+		_cfgAmmo = configFile >> "CfgAmmo" >> _subAmmoType;
+		if (_subVelocity == 0) then { _subVelocity = getNumber (_cfgAmmo >> "typicalSpeed") };
+
+		// If there's a submunition cone type then get the submunition count from that
+		private _subCount = 1;
+		private _subConeType = getArray (_cfgAmmo >> "submunitionConeType");
+		if (_subConeType isNotEqualTo []) then {
+			_subCount = if (_subConeType#1 isEqualType 0) then { _subConeType#1 } else { count (_subConeType#1) };
+		};
+
+		_hit = _hit + _subCount * getNumber(_cfgAmmo >> "hit");
+		_indirHit = _indirHit + (_subCount * getNumber(_cfgAmmo >> "indirectHit") * getNumber(_cfgAmmo >> "indirectHitRange"));
+	};
+
+	// Penetration comes from subammo config, if it exists.
+	private _caliber = getNumber(_cfgAmmo >> "caliber");
+	//private _explosive = getNumber(_cfgAmmo >> "explosive");		// 1 to 0 range for proportion of kinetic vs explosive damage
+	private _penetration = (15/1000) * _caliber  * _subVelocity;		// should be mm of RHS steel
+
+	private _payload = 0.5*_hit + 0.5*_penetration + _indirHit;
+	private _costPerRound = if (_simType in _mineSims) then {
+		1.5 * _payload^0.7;
+	} else {
+		0.1 * (1 + _rangeMod / 600) * _payload^1.4 * (1 + _guidance * _airLock);
+	};
+
+    A3A_itemPriceCache set ["ammo:" + _classname, _costPerRound];
+	_costPerRound;
 };
 
-_fnc_itemPriceCalculator = {
-    params ["_className", "_type", "_basePrice"];
 
-    switch (_type) do {
-        case "AccessoryMuzzle": {
-            private _cost = _basePrice * 4.0;
+private _fnc_magPriceCalculator = {
+    params ["_className"];
+
+    private _cfgMag = configFile >> "CfgMagazines" >> _className;
+	private _ammoVal = getText (_cfgMag >> "ammo") call _fnc_ammoPriceCalculator;
+	
+	_ammoVal * getNumber (_cfgMag >> "count");
+};
+
+
+// Weird vanilla stuff that's probably best fixed with overrides:
+// Type 115 (extra muzzle) arifle_ARX_Hex_F (watch out for 3CBF muzzles...)     Fix in override?
+// SDAR low (ammo) price arifle_SDAR_F
+// ASP-1 KIR too cheap? subsonic ammo... srifle_DMR_04_F
+
+// APERSMineDispenser_mag? wtf? remove?
+
+private _fnc_weaponPriceCalculator = {
+	params ["_className"];
+
+	private _weaponCfg = configFile >> "CfgWeapons" >> _className;
+
+	// Base price should be based on default ammo
+	// TODO: check what this does with the RHS(?) SMAW
+
+	private _defaultMag = compatibleMagazines _className select 0;
+    if (_defaultMag == "CBA_fakeLauncherMagazine") then {
+        if (isNil "cba_disposable_normalLaunchers") exitWith { Error("CBA fake mag without CBA loaded") };
+        private _realLauncherData = cba_disposable_normalLaunchers get _className;
+        _className = _realLauncherData # 0;
+        _defaultMag = _realLauncherData # 1;     // format is [realLauncher, magazine]
+    };
+
+	private _ammoType = getText (configFile >> "CfgMagazines" >> _defaultMag >> "ammo");
+	private _ammoPrice = _ammoType call _fnc_ammoPriceCalculator;
+	private _magSize = getNumber (configFile >> "CfgMagazines" >> _defaultMag >> "count");
+	
+	// then type mod on top?
+	private _cats = _className call A3A_fnc_equipmentClassToCategories;
+	private _basePrice = switch (_cats#0) do {
+		case "Rifles": {
+			if ("GrenadeLaunchers" in _cats) exitWith { 1400 + _ammoPrice*60 };
+			400 + _ammoPrice*60;
+		};
+		case "MachineGuns": { 1200 + _ammoPrice*180 };
+		case "SniperRifles": { 750 + _ammoPrice*50*_magSize/5 };            // dispersion adjustment makes these expensive later
+		case "SMGs": { 200 + _ammoPrice*120 };
+
+		case "Handguns": { 100 + _ammoPrice*120*_magSize/10 };
+		case "Shotguns": { 200 + _ammoPrice*40*_magSize/5 };				// TODO: sort out shotgun ammo
+
+		case "GrenadeLaunchers": { 400 + _ammoPrice*50*_magSize };			// this is GL without rifle
+		case "RocketLaunchers": { 2000 + _ammoPrice*3 };
+		case "MissileLaunchers": { 10000 + _ammoPrice*3 };
+		default { 1000 }
+	};
+
+	// typical ammo price ref:
+	// missile = 5k
+	// rocket = 1k
+	// rifle bullet = 10
+	// sniper bullet = 15-40
+	// pistol bullet = 2.5
+	// shotgun shell = unknown
+
+	// "Accurate" weapons get adjusted by dispersion
+	private _dispMul = 1;
+	if (_cats#0 in ["Rifles", "MachineGuns", "SniperRifles"]) then {
+		private _modeCfg = _weaponCfg >> "Single";
+		if (!isClass _modeCfg) then { 
+			private _firstMode = getArray (_weaponCfg >> "modes") # 0;
+			if (_firstMode == "this") exitWith { _modeCfg = _weaponCfg };
+			_modeCfg = _weaponCfg >> _firstMode;
+		};
+		private _dispersion = getNumber (_modeCfg >> "dispersion");
+		_dispMul =  0.001 / _dispersion;
+	};
+
+	// extra for attachment slots? Or not?
+
+	// fire mode availability? maybe unnecessary with type mod
+
+    _basePrice * _dispMul;
+};
+
+private _fnc_itemPriceCalculator = {
+    params ["_className"];
+
+	private _cats = _className call A3A_fnc_equipmentClassToCategories;
+    switch (_cats#0) do {
+        case "MuzzleAttachments": {
+            private _cost = 500;
             private _config = (configFile >> "CfgWeapons" >> _className);
             private _isMuzzle = isNumber (_config >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
             if(_isMuzzle) then 
             {
-                private _audible = getNumber(configFile >> "CfgWeapons" >> _className  >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
-                if(_audible isEqualTo 0) then {_audible = 0.70};
-                _cost = _cost * floor (round (0.70/_audible));
+                //private _audible = getNumber (_config >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
+                //if(_audible isEqualTo 0) then {_audible = 0.7};
+                //_cost = _cost * 0.7 / _audible;
+
+                // Higher cost for heavier suppressors. Difficult to get caliber.
+                private _weightMod = getNumber (_config >> "ItemInfo" >> "mass") / 6;
+                _cost = _cost * _weightMod^2;
             };
-            _cost
+            _cost;
         };
-        case "AccessoryPointer": {_basePrice * 2.0};
-        case "AccessorySights": {
+        case "PointerAttachments": {200};
+        case "Optics": {
             // shamelessly stolen from ace.
             private _config = (configFile >> "CfgWeapons" >> _className);
             private _minZoom = 999; // FOV, so smaller is more zoomed in
@@ -101,248 +195,42 @@ _fnc_itemPriceCalculator = {
                 _minZoom = _minZoom min (getNumber (_x >> "opticsZoomMin"));
             } forEach configProperties [_config >> "ItemInfo" >> "OpticsModes"];
 
-            if (_minZoom in [0, 999]) exitWith {_basePrice};
+            if (_minZoom in [0, 999]) exitWith {400};
             
-            round(_basePrice * (0.25/_minZoom));
+            private _cost = round(400 * (0.25/_minZoom));
 
+            // Cost multiplier for NV/Ti optics modes
+            private _visionMult = 1;
+            {
+                private _mult = 0.5;
+                {
+                    if (_x == "Normal") then { _mult = _mult * 2; continue };           // If we have normal & NVG, that's better
+                    if (_x == "NVG") then { _mult = _mult * 4; continue };
+                    if (_x == "Ti") then { _mult = _mult * 6; continue };
+                } forEach getArray (_x >> "VisionMode");
+                _visionMult = _visionMult max _mult;
+            } forEach ("true" configClasses (_config >> "ItemInfo" >> "OpticsModes"));
+
+            _cost * _visionMult;
         };
-        case "AccessoryBipod": {_basePrice * 0.75};
+        case "Bipods": {700};
         default {
-            //diag_log format ["None supported type: %1 of item: %2", _type, _className];
-            _basePrice
+            Error_1("Item %1 not a valid type", _className);
+            1000;
         };
     };
 };
 
-_fnc_magazinePriceCalculator = {
-    params ["_className", "_type", "_basePrice"];
-
-    switch (_type) do {
-        case "Bullet": {
-            private _cfgMagazines = configFile >> "CfgMagazines" >> _className;
-            private _count = getNumber(_cfgMagazines >> "count");
-            private _ammo = getText(_cfgMagazines >> "ammo");
-
-            private _cfgAmmo = configFile >> "CfgAmmo" >> _ammo;
-            private _hit = getNumber(_cfgAmmo >> "hit");
-            private _indirHit = getNumber(_cfgAmmo >> "indirectHit");
-            private _caliber = getNumber(_cfgAmmo >> "caliber");
-            private _velocity = getNumber(_cfgAmmo >> "typicalSpeed");
-            private _explosive = getNumber(_cfgAmmo >> "explosive");
-
-            private _penetrability = (15/10000) * _caliber  * _velocity;
-
-            private _costPerRound = if (_explosive isEqualTo 1) then {_penetrability * (_indirHit + _hit)} else {_penetrability * ((_indirHit + _hit)/2)};
-
-            private _cost = (_costPerRound * _count) * _basePrice;
-
-            floor (_cost / 200)
-        };
-        case "Flare": {
-            private _cfgMagazines = configFile >> "CfgMagazines" >> _className;
-            private _count = getNumber(_cfgMagazines >> "count");
-            _count * _basePrice * 0.15
-        };
-        case "Grenade": {
-            private _cfgMagazines = configFile >> "CfgMagazines" >> "HandGrenade";
-			private _count = getNumber(_cfgMagazines >> "count");
-			private _ammo = getText(_cfgMagazines >> "ammo");
-
-			private _cfgAmmo = configFile >> "CfgAmmo" >> _ammo;
-			private _hit = getNumber(_cfgAmmo >> "hit");
-			private _indirHit = getNumber(_cfgAmmo >> "indirectHit");
-			private _caliber = getNumber(_cfgAmmo >> "caliber");
-			private _velocity = getNumber(_cfgAmmo >> "typicalSpeed");
-			
-
-			private _costPerRound = _indirHit + _hit;
-			private _subAmmo = getText(_cfgAmmo >> "submunitionAmmo");
-			if(_subAmmo isNotEqualTo "") then 
-			{
-				// recal the damage 
-				_cfgAmmo = configFile >> "CfgAmmo" >> _subAmmo;
-				_hit = getNumber(_cfgAmmo >> "hit");
-				_indirHit = getNumber(_cfgAmmo >> "indirectHit");
-				_caliber = getNumber(_cfgAmmo >> "caliber");
-				_velocity = getNumber(_cfgAmmo >> "typicalSpeed");
-				_explosive = getNumber(_cfgAmmo >> "explosive");
-
-				//add the "damage" to the other cost.
-				private _costPerRoundSubAmmo = _indirHit + _hit;				
-				_costPerRoundSubAmmo = sqrt _costPerRoundSubAmmo;
-				_costPerRound = (_costPerRound + _costPerRoundSubAmmo) / 2;
-			};
-
-			private _cost = (_costPerRound * _count) * _basePrice;
-
-			floor (_cost / 20)
-        };
-        case "Missile": {
-            private _cfgMagazines = configFile >> "CfgMagazines" >> _className;
-            private _count = getNumber(_cfgMagazines >> "count");
-            private _ammo = getText(_cfgMagazines >> "ammo");
-
-            private _cfgAmmo = configFile >> "CfgAmmo" >> _ammo;
-            private _hit = getNumber(_cfgAmmo >> "hit");
-            private _indirHit = getNumber(_cfgAmmo >> "indirectHit");
-            private _caliber = getNumber(_cfgAmmo >> "caliber");
-            private _velocity = getNumber(_cfgAmmo >> "typicalSpeed");
-            private _explosive = getNumber(_cfgAmmo >> "explosive");
-
-            private _penetrability = (15/10000) * _caliber  * _velocity;
-
-            private _costPerRound = if (_explosive isEqualTo 1) then {_penetrability * (_indirHit + _hit)} else {_penetrability * ((_indirHit + _hit)/2)};
-
-            // this is a AA missle
-            if (getNumber(_cfgAmmo >> "aiAmmoUsageFlags") isEqualTo 256) then 
-            {
-                // AA missiles are insanely fast, so we need to at least divid the price in half or no one will be able to afford it
-                _costPerRound = _costPerRound / 2;
-            };
-
-            // check if the missile has a subammo 
-            private _subAmmo = getText(_cfgAmmo >> "submunitionAmmo");
-            if(_subAmmo isNotEqualTo "") then 
-            {
-                // recal the damage 
-                _cfgAmmo = configFile >> "CfgAmmo" >> _subAmmo;
-                _hit = getNumber(_cfgAmmo >> "hit");
-                _indirHit = getNumber(_cfgAmmo >> "indirectHit");
-                _caliber = getNumber(_cfgAmmo >> "caliber");
-                _velocity = getNumber(_cfgAmmo >> "typicalSpeed");
-                _explosive = getNumber(_cfgAmmo >> "explosive");
-
-                _penetrability = (15/100000) * _caliber  * _velocity;
-
-                //add the "damage" to the other cost.
-                private _costPerRoundSubAmmo = if (_explosive isEqualTo 1) then {_penetrability * (_indirHit + _hit)} else {_penetrability * ((_indirHit + _hit)/2)};
-                _costPerRoundSubAmmo = sqrt _costPerRoundSubAmmo;
-                _costPerRound = (_costPerRound + _costPerRoundSubAmmo) / 2;
-            };
-
-            //I will be evil here. If they can unlock missle lanuchers then charge more, this can be very expensive.
-            floor (round (_costPerRound * _count * _basePrice * (allowGuidedLaunchers + 1)) / 35)
-        };
-        case "Rocket": {
-            _basePrice = _basePrice * 3;
-
-            private _cfgMagazines = configFile >> "CfgMagazines" >> _className;
-            private _count = getNumber(_cfgMagazines >> "count");
-            private _ammo = getText(_cfgMagazines >> "ammo");
-
-            private _cfgAmmo = configFile >> "CfgAmmo" >> _ammo;
-            private _hit = getNumber(_cfgAmmo >> "hit");
-            private _indirHit = getNumber(_cfgAmmo >> "indirectHit");
-            private _caliber = getNumber(_cfgAmmo >> "caliber");
-            private _velocity = getNumber(_cfgAmmo >> "typicalSpeed");
-            private _explosive = getNumber(_cfgAmmo >> "explosive");
-
-            private _penetrability = (15/10000) * _caliber  * _velocity;
-
-            private _costPerRound = if (_explosive isEqualTo 1) then {_penetrability * (_indirHit + _hit)} else {_penetrability * ((_indirHit + _hit)/2)};
-
-            private _subAmmo = getText(_cfgAmmo >> "submunitionAmmo");
-            if(_subAmmo isNotEqualTo "") then 
-            {
-                // recal the damage 
-                _cfgAmmo = configFile >> "CfgAmmo" >> _subAmmo;
-                _hit = getNumber(_cfgAmmo >> "hit");
-                _indirHit = getNumber(_cfgAmmo >> "indirectHit");
-                _caliber = getNumber(_cfgAmmo >> "caliber");
-                _velocity = getNumber(_cfgAmmo >> "typicalSpeed");
-                _explosive = getNumber(_cfgAmmo >> "explosive");
-
-                _penetrability = (15/100000) * _caliber  * _velocity;
-
-                //add the "damage" to the other cost.
-                private _costPerRoundSubAmmo = if (_explosive isEqualTo 1) then {_penetrability * (_indirHit + _hit)} else {_penetrability * ((_indirHit + _hit)/2)};
-                _costPerRoundSubAmmo = sqrt _costPerRoundSubAmmo;
-                _costPerRound = (_costPerRound + _costPerRoundSubAmmo) / 2;
-            };
-
-            private _cost = (_costPerRound * _count) * _basePrice;
-
-            floor (round _cost / 50)
-        };
-        case "Shell": {
-            private _cfgMagazines = configFile >> "CfgMagazines" >> _className;
-            private _count = getNumber(_cfgMagazines >> "count");
-            round (_count * _basePrice * 0.4)
-        };
-        case "ShotgunShell": {
-            private _cfgMagazines = configFile >> "CfgMagazines" >> _className;
-            private _count = getNumber(_cfgMagazines >> "count");
-            round (_count * _basePrice * 0.5)
-        };
-        case "SmokeShell": {
-            private _cfgMagazines = configFile >> "CfgMagazines" >> _className;
-            private _count = getNumber(_cfgMagazines >> "count");
-            round (_count * _basePrice * 0.15)
-        };
-        case "UnknownMagazine": {
-            _basePrice *.2
-        };
-
-        default {
-            //diag_log format ["None supported type: %1 of magazine: %2", _type, _className];
-            private _cfgMagazines = configFile >> "CfgMagazines" >> _className;
-            private _count = getNumber(_cfgMagazines >> "count");
-            round (_count * _basePrice * 0.4)
-        };
-    };
+private _price = call {
+    if (_itemCfgCat == "weapon") exitWith { _classname call _fnc_weaponPriceCalculator };
+    if (_itemCfgCat == "mag") exitWith { _classname call _fnc_magPriceCalculator };
+    _classname call _fnc_itemPriceCalculator;
 };
 
-_fnc_minePriceCalculator = {
-    params ["_className", "_type", "_basePrice"];
+A3A_itemPriceCache set [_itemCfgCat + ":" + _classname, _price];
+_price;
 
-    switch (_type) do {
-        case "Mine": {
-            _basePrice = _basePrice * 4.0;
-            };
-        case "MineBounding": {
-            _basePrice = _basePrice * 5.0;
-            };
-        case "MineDirectional": {
-            _basePrice = _basePrice * 5.0;
-        };
-        default {
-            // this should not be reached unless something has gone horribly wrong
-            //diag_log format ["None supported type: %1 of mine: %2,", _type, _className];
-            _basePrice
-        };
-    };
-    private _cfgMagazines = configFile >> "CfgMagazines" >> "HandGrenade";
-	private _count = getNumber(_cfgMagazines >> "count");
-	private _ammo = getText(_cfgMagazines >> "ammo");
-	private _cfgAmmo = configFile >> "CfgAmmo" >> _ammo;
-	private _hit = getNumber(_cfgAmmo >> "hit");
-	private _indirHit = getNumber(_cfgAmmo >> "indirectHit");
-	private _caliber = getNumber(_cfgAmmo >> "caliber");
-	private _velocity = getNumber(_cfgAmmo >> "typicalSpeed");
-	
-	private _costPerRound = _indirHit + _hit * (sqrt _velocity);
-	private _subAmmo = getText(_cfgAmmo >> "submunitionAmmo");
-	if(_subAmmo isNotEqualTo "") then 
-	{
-		// recal the damage 
-		_cfgAmmo = configFile >> "CfgAmmo" >> _subAmmo;
-		_hit = getNumber(_cfgAmmo >> "hit");
-		_indirHit = getNumber(_cfgAmmo >> "indirectHit");
-		_caliber = getNumber(_cfgAmmo >> "caliber");
-		_velocity = getNumber(_cfgAmmo >> "typicalSpeed");
-		_explosive = getNumber(_cfgAmmo >> "explosive");
-		//add the "damage" to the other cost.
-		private _costPerRoundSubAmmo = _indirHit + _hit;				
-		_costPerRoundSubAmmo = sqrt _costPerRoundSubAmmo;
-		_costPerRound = (_costPerRound + _costPerRoundSubAmmo) / 2;
-	};
-	private _cost = (_costPerRound * _count) * _basePrice;
-	_cost = floor (_cost / 168);
-    if(_cost > 0) then {_cost} else {_basePrice};
-};
-
-//diag_log format ["Creating price for %1", _className];
-
+/*
 private _price = 0;
 private _cfg = configFile >> "A3A" >> "GunShop";
 
@@ -367,5 +255,4 @@ if (isClass (_cfg >> _className)) then
         };
     };
 };
-
-_price
+*/

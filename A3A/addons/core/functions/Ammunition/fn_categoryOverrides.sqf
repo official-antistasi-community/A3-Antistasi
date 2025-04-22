@@ -9,6 +9,9 @@ private _categoryOverrideTable = [
 ["launch_NLAW_F", ["MissileLaunchers","Weapons","AT"]],
 ["hgun_PDW2000_F", ["SMGs","Weapons"]],
 ["hgun_Pistol_Signal_F", ["Unknown","Weapons"]],
+["arifle_RPK12_F", ["MachineGuns","Weapons"]],
+["arifle_RPK12_arid_F", ["MachineGuns","Weapons"]],
+["arifle_RPK12_lush_F", ["MachineGuns","Weapons"]],
 
 //RHS
 ["rhs_weap_vss", ["SniperRifles","Weapons"]],

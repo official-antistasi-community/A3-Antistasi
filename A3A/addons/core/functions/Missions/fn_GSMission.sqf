@@ -49,7 +49,7 @@ private _conditionCode = "(isPlayer _this) and (_this == _this getVariable ['own
 
 if(!A3A_GS_allowGuestCommander) then {
 	_conditionCode + "and theBoss call A3A_fnc_isMember";
-}; 
+};
 
 
 private _coolerPetros = [createGroup teamPlayer, FactionGet(reb,"unitPetros"), getMarkerPos _posDest, [], 10, "NONE", _identity] call A3A_fnc_createUnit;
@@ -63,6 +63,9 @@ private _garrisonGroups = [group _coolerPetros, getMarkerPos _posDest, 200] call
 [_taskId, "LOG", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _coolerPetros disableAI "ALL";
+
+// Build the gunshop data in advance
+[] remoteExec ["A3A_GUI_fnc_gatherGunShopLists", 2];
 
 private _addActionCode = {
 	params ["_coolerPetros", "_conditionCode"];
@@ -85,8 +88,7 @@ waitUntil{sleep 1; !isNil "A3A_shoppingList" || (time > _timeout) || (!alive _co
 if((time > _timeout) || (!alive _coolerPetros)) exitWith {
 	
 	[_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState; 
-	[_taskId, "LOG", 600, true] spawn A3A_fnc_taskDelete; 
-	
+	[_taskId, "LOG", 600, true] spawn A3A_fnc_taskDelete;
 }; 
 
 
@@ -96,6 +98,7 @@ if((time > _timeout) || (!alive _coolerPetros)) exitWith {
 [_coolerPetros, 0] remoteExec ["removeAction", 0, _coolerPetros];
 
 A3A_shoppingList params ["_totalCost", "_gunshopList"];
+// TODO: remove money
 
 // do they get a crate or are they fucked?
 
@@ -149,6 +152,7 @@ if(_noCrate) exitWith
 	A3A_shoppingList = nil;
 };
 
+/*
 private _pos = getPosASL _coolerPetros findEmptyPosition [0, 50, "B_supplyCrate_F"];
 
 private _crate = createVehicle ["B_supplyCrate_F", [0,0,0]];
@@ -170,6 +174,15 @@ clearBackpackCargoGlobal _crate;
 
 
 _crate setPosASL _pos;
+*/
+
+
+private _dropChat = "A friend is airdropping the cargo. I've marked the position on your map. Good luck."; //localize "STR_A3A_placeholder";
+private _nearPlayers = units teamPlayer inAreaArray [getPosATL _coolerPetros, 100, 100];
+[_coolerPetros, _dropChat] remoteExec ["globalChat", _nearPlayers];
+
+sleep 5;
+[getPosATL _coolerPetros, _gunshopList] spawn A3A_fnc_supplyDrop;
 
 [group _coolerPetros] spawn A3A_fnc_groupDespawner;
 
