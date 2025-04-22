@@ -93,7 +93,7 @@ switch (_mode) do
             Trace_1("_canFastTravelTuple: %1", _canFastTravelTuple);
             private _ftUnit = [player, leader (_fastTravelMap getVariable "hcGroup")] select _hcMode;
             [_ftUnit, [vehicle _ftUnit], markerPos _selectedMarker] call FUNCMAIN(calculateFastTravelCost) params ["_fastTravelCost","_fastTravelTime"];
-            private _ftCostAllowed = (player getVariable ["moneyX", 0] > _fastTravelCost);
+            private _ftCostAllowed = (player getVariable ["moneyX", 0] >= _fastTravelCost);
 
             if !(_isFastTravelAllowed && _ftCostAllowed) exitWith {
                 // Not a valid location for fast travel

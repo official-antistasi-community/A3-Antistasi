@@ -75,9 +75,16 @@ switch (_mode) do
         // Check for radio, most of this isn't usable without one
         if !([player] call A3A_fnc_hasRadio) exitWith
         {
+            // TODO UI-update: Fix the UI overlay order
+            /*
             _noRadioControlsGroup ctrlShow true;
             _airSupportButton ctrlEnable false;
             _airSupportButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_no_radio";
+            */
+            {
+                _x ctrlEnable false;
+                _x ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_no_radio";
+            } forEach [_airSupportButton,_recruitSquadButton,_requestMissionButton,_createWatchpostButton,_removeGarrisonButton,_HCSquadsButton];
         };
 
         // Initialize fire mission vars

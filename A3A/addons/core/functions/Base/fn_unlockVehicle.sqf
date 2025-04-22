@@ -1,4 +1,4 @@
-params [["_veh","",objNull]];
+params [["_veh",objNull]];
 private _titleStr = localize "STR_A3A_fn_base_unlockveh_unlockveh";
 
 if (_veh isEqualTo objNull) then {

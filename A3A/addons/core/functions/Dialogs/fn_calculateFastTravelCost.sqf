@@ -113,7 +113,7 @@ private _longestTime = 0.0;
 // Round
 _totalCost = ceil _totalCost;
 // Cap
-_longestTime = _longestTime min 60.0;
+_longestTime = (_longestTime min 60.0) max 1.0;
 _longestTime = round _longestTime;
 
 // Return
