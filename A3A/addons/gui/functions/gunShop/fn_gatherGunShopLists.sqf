@@ -61,7 +61,6 @@ if (_minCount >= 100) then {
 
     private _magsPrices = createHashMap;
     {
-        private _allMags = compatibleMagazines _x;
         private _mag = if (random 1 < 0.5) then {_allMags#0} else {selectRandom _allMags};      // first-mag bias
         if !(_mag in allMagazines) then {continue};     // use Antistasi blacklisting? kinda expensive but whatever
         private _price = [_mag, "mag"] call A3A_GUI_fnc_calculateItemPrice;

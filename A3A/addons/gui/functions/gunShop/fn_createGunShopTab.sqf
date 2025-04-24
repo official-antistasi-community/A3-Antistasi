@@ -18,7 +18,7 @@ private _columnWidth = 50;
 private _columnHeight = 34;
 
 private _pictureBox = [0, 0, 50, 20];
-private _displayBox = [1, 22, 30, 4];
+private _displayBox = [1, 22, 48, 4];
 private _stockBox = [1, 26, 20, 4];
 private _priceBox = [1, 30, 20, 4];
 private _logoBox = [1, 14, 6, 6];

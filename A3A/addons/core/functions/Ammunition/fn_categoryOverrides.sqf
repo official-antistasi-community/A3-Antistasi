@@ -229,7 +229,7 @@ private _categoryOverrideTable = [
 ["CUP_glaunch_Mk13", ["GrenadeLaunchers","Weapons"]],
 ["CUP_glaunch_M32", ["GrenadeLaunchers","Weapons"]],
 
-["CUP_launch_M136", ["RocketLaunchers","Weapons","AT"]],
+["CUP_launch_M136", ["RocketLaunchers","Weapons","AT","Disposable"]],
 ["CUP_launch_NLAW", ["RocketLaunchers","Weapons","AT"]],
 
 /*
