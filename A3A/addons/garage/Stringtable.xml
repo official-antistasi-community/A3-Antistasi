@@ -424,6 +424,7 @@
       </Key>
       <Key ID="STR_HR_GRG_Feedback_LockedToolTip_Ago">
         <Original>%1: %2 ago</Original>
+        <French>%1: %2 il y a</French>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_requestMount_Denied">
         <Original>Can't mount static</Original>
@@ -442,18 +443,22 @@
       <Key ID="STR_HR_GRG_Feedback_sellVehicle_comOnly">
         <Original>Only the Commander can sell vehicles.</Original>
         <French>Seul le Commandant peux vendre des véhicules.</French>
+        <Russian>Только командующий может продавать технику.</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_sellVehicle_locked">
         <Original>You cannot sell a locked vehicle. If this is your vehicle, make sure to unlock it first.</Original>
         <French>Vous ne pouvez vendre de véhicule vérrouiller. Si c'est votre véhicule, dévérouiller le d'abord.</French>
+        <Russian>Вы не можете продать заблокированный автомобиль. Если это ваш автомобиль, сначала разблокируйте его.</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_sellVehicle_noPrice">
         <Original>This vehicle is not suitable for our marketplace.</Original>
         <French>Ce véhicule n'est pas adapté pour notre marché.</French>
+        <Russian>Этот автомобиль не подходит для нашего рынка</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_sellVehicle_sold">
         <Original>Vehicle sold for %1 €.</Original>
         <French>Véhicule vendu pour %1 €.</French>
+        <Russian>Техника продана за %1 €.</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_toggleLock_limit">
         <Original>You have too many vehicles locked</Original>
@@ -469,6 +474,10 @@
         <Turkish>Çok fazla kilitli aracın var</Turkish>
         <Chinesesimp>你已上锁过多载具</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Generic_Unmanned">
+        <Original>Unmanned</Original>
+        <Russian>Беспилотники</Russian>
+      </Key>
       <Key ID="STR_HR_GRG_Generic_Air">
         <Original>Aircraft</Original>
         <German>Flugzeug</German>
@@ -482,6 +491,34 @@
         <Portuguese>Avião</Portuguese>
         <Turkish>Uçak</Turkish>
         <Chinesesimp>飞行器</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_Cars_Сivilian">
+        <Original>Сivilian vehicles</Original>
+        <Russian>Гражданская техника</Russian>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_APC">
+        <Original>APC/IFV</Original>
+        <Russian>БТР/БМП</Russian>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_AA">
+          <Original>Anti-air</Original>
+          <Russian>ПВО</Russian>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_Arty">
+          <Original>Artillery</Original>
+          <Russian>Артиллерия</Russian>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_Heli">
+        <Original>Helicopters</Original>
+        <Russian>Вертолёты</Russian>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_Plane">
+        <Original>Planes</Original>
+        <Russian>Самолёты</Russian>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_VTOL">
+        <Original>VTOL</Original>
+        <Russian>СВВП</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Generic_AirDisabled">
         <Original>You can only access aircrafts from a friendly airbase</Original>
@@ -538,6 +575,17 @@
         <Portuguese>Barcos</Portuguese>
         <Turkish>Gemiler</Turkish>
         <Chinesesimp>船只</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_Source">
+        <Original>Resource vehicles</Original>
+        <French>Véhicules de ressources</French>
+        <Russian>Ресурсные транспортные средства</Russian>
+        <Korean>자원 차량</Korean>
+        <Spanish>Vehículos de recursos</Spanish>
+        <Chinesesimp>资源车辆</Chinesesimp>
+        <Czech>Zdrojová vozidla</Czech>
+        <Italian>Veicoli delle risorse</Italian>
+        <Polish>Pojazdy zasobów</Polish>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Cancel">
         <Original>Cancel</Original>
@@ -668,7 +716,9 @@
       </Key>
       <Key ID="STR_HR_GRG_Generic_SellVeh">
         <Original>Sell Vehicle</Original>
+        <German>Fahrzeug verkaufen</German>
         <French>Vendre véhicule</French>
+        <Russian>Продать</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Static">
         <Original>Statics</Original>
@@ -729,6 +779,7 @@
       <Key ID="STR_HR_GRG_InfoPanel_cannotBeSold">
         <Original>Cannot be sold.</Original>
         <French>Ne peux pas être vendu.</French>
+        <Russian>Не может быть продан.</Russian>
       </Key>
       <Key ID="STR_HR_GRG_InfoPanel_Capacity">
         <Original>Capacity:</Original>

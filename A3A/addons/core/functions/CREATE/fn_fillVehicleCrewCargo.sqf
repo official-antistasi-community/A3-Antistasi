@@ -1,30 +1,26 @@
-/*
- * File: fn_createAndFillVehicle.sqf
- * Function: 
- * Author: <author>
- * Function description
- *  This function doesn't actully really only creates groups to fill the vic with
- * Arguments:
- * 0: Objects <ARRAY>
- * 1: All <BOOL>
- *
- * Return Value:
- * None
- *
- * Example:
- * [[bob, ted], false] call afm_main_fnc_example
- *
- * Public: No
- */
+/*  Fills a vehicle with crew and cargo units
+
+    Execution on: HC or Server
+
+    Scope: Internal
+
+    Parameters:
+        _vehicle: OBJECT : The vehicle object to fill
+        _troopType: STRING : Type of cargo units to use
+        _resPool: STRING : Resource pool name for vehicle/troops, probably "attack" or "defence"
+        _side: SIDE : The side of the attacker
+
+    Returns:
+        ARRAY : [_crewGroup, _cargoGroup]
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_vehicleType", "_vehicle", "_troopType", "_resPool", "_side", "_markerOrigin"];
+params ["_vehicle", "_troopType", "_resPool", "_side"];
 
+private _vehicleType = typeof _vehicle;
 private _faction = Faction(_side);
-
-if(isNull _vehicle) exitWith {objNull};
 
 // Fill cargo turrets with crew for attack helis
 private _isAttackHeli = _vehicleType in FactionGet(all, "vehiclesHelisAttack") + FactionGet(all, "vehiclesHelisLightAttack");
@@ -56,13 +52,13 @@ if (_expectedCargo >= 2 and !_isAttackHeli) then
         } forEach ("true" configClasses (_config >> "Turrets"));
     };
     private _cargoTurrets = [];
-private _blacklistTypes = ["LIB_Li2","LIB_C47_RAF","LIB_C47_Skytrain","LIB_C47_RAF_bob","LIB_C47_RAF_snafu"];
+    private _blacklistTypes = ["LIB_Li2","LIB_C47_RAF","LIB_C47_Skytrain","LIB_C47_RAF_bob","LIB_C47_RAF_snafu"];
     if !(_vehicleType in _blacklistTypes) then {
         [configFile >> "CfgVehicles" >> _vehicleType] call _fnc_addCargoTurrets;
     };
 
     if (_expectedCargo < count _groupType) then { _groupType resize _expectedCargo };           // trim to cargo seat count
-    _cargoGroup = [getMarkerPos _markerOrigin, _side, _groupType, true, false] call A3A_fnc_spawnGroup;         // force spawn, should be pre-checked
+    _cargoGroup = [getPosATL _vehicle, _side, _groupType, true, false] call A3A_fnc_spawnGroup;         // force spawn, should be pre-checked
     {
         if (_cargoTurrets isNotEqualTo []) then {
             private _turretPath = _cargoTurrets deleteAt 0;
@@ -75,6 +71,5 @@ private _blacklistTypes = ["LIB_Li2","LIB_C47_RAF","LIB_C47_Skytrain","LIB_C47_R
         [_x, nil, nil, _resPool] call A3A_fnc_NATOinit;
     } forEach units _cargoGroup;
 };
-
 
 [_crewGroup, _cargoGroup];

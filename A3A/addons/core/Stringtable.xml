@@ -47,6 +47,7 @@
     <Container name="A3A_fn_ai">
       <Key ID="STR_A3A_fn_ai_artySupport_artyStrike">
         <Original>Mortar Strike</Original>
+        <German>Mörserschlag</German>
         <French>Frappe d'artillerie</French>
         <Korean>포병 타격</Korean>
         <Russian>Артиллерийский удар</Russian>
@@ -54,9 +55,11 @@
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_barrageHintHE">
         <Original>Mortar barrage is inbound, starting grid %1.</Original>
+        <Russian>Надвигается минометный обстрел, начало сетки %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_barrageHintSmoke">
         <Original>Smoke barrage is inbound, starting grid %1.</Original>
+        <Russian>Надвигается дымовая завеса, начало сетки %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_busy">
         <Original>Selected battery is busy right now.</Original>
@@ -153,9 +156,11 @@
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_precisionHintHE">
         <Original>Mortar fire support is inbound, grid %1</Original>
+        <Russian>Идет поддержка минометным огнем, сетка %1</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_precisionHintSmoke">
         <Original>Smoke rounds are inbound, grid %1.</Original>
+        <Russian>Прибывают дымовые снаряды, сетка %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_select">
         <Original>You must select an artillery group.</Original>
@@ -2145,16 +2150,6 @@
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_marker">
         <Original>You must click near a rebel map marker.</Original>
-        <Italian>Devi cliccare vicino a un marcatore sulla mappa.</Italian>
-        <Spanish>Debe clicar cerca de un marcador de mapa.</Spanish>
-        <French>Vous devez cliquer à côté d'un marqueur de carte.</French>
-        <Korean>맵 마커 근처를 클릭해야합니다.</Korean>
-        <Russian>Вы должны щелкнуть рядом с маркером на карте.</Russian>
-        <Polish>Musisz kliknąć w pobliżu znacznika na mapie.</Polish>
-        <Czech>Musíš kliknout blízko značky na mapě.</Czech>
-        <Portuguese>Precisas de clicar perto de um marcador do mapa.</Portuguese>
-        <Turkish>Harita İşaretlerinden birine tıklamanız gerek.</Turkish>
-        <Chinesesimp>你需要在地图标记附近单击</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_zone">
         <Original>Click on the zone you want to rebuild.</Original>
@@ -2197,19 +2192,6 @@
         <Turkish>Radyo Kulesi yeniden yapıldı.</Turkish>
         <Chinesesimp>通信塔已被重建</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_base_rebasset_no_nothing">
-        <Original>There is nothing to rebuild on this site.</Original>
-        <Italian>Non puoi ricostruire ciò.</Italian>
-        <Spanish>No puede reconstruir esto.</Spanish>
-        <French>Vous ne pouvez pas reconstruire ceci.</French>
-        <Korean>그것은 재건축할 수 없습니다.</Korean>
-        <Russian>Вы не можете восстановить это.</Russian>
-        <Polish>Nie można tego odbudować.</Polish>
-        <Czech>Toto nemůžeš znovu postavit.</Czech>
-        <Portuguese>Não podes reconstruir isso.</Portuguese>
-        <Turkish>Bunu yeniden yapamazsınız.</Turkish>
-        <Chinesesimp>你无法重建这个</Chinesesimp>
-      </Key>
       <Key ID="STR_A3A_fn_base_rebasset_no_money">
         <Original>You do not have enough money to rebuild any Asset. You need 5.000 €.</Original>
         <Italian>Non hai abbastanza denaro per ricostruire alcuna risorsa. Necessiti 5.000 €.</Italian>
@@ -2222,6 +2204,9 @@
         <Portuguese>Não tens dinheiro suficiente para reconstruir qualquer Ativo. Precisas de 5.000€.</Portuguese>
         <Turkish>Yeni ekipman yapmak için yeterinde paranız yok. 5.000 €'ya ihtiyacınız var.</Turkish>
         <Chinesesimp>你当前的资金不足以重建任何资产. 你需要 5.000 €.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_base_rebasset_no_nothing">
+        <Original>There is nothing to rebuild on this site.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_title">
         <Original>Rebuild Assets</Original>
@@ -2915,7 +2900,7 @@
       <Key ID="STR_A3A_fn_dialogs_fastTravelRadio_begin">
         <Original>Fast traveling, travel time: %1, please wait.</Original>
         <Korean>빠른 이동 중. 도착 시간까지: %1초, 잠시만 기다려 주십시오...</Korean>
-        <Russian>Быстрое перемещение: пожалуйста, подождите %1 сек.</Russian>
+        <Russian>Быстрое перемещение: пожалуйста, подождите %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_fastTravelRadio_end">
         <Original>You arrived at the destination.</Original>
@@ -3123,6 +3108,7 @@
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_no_param">
         <Original>Fast travel is disabled for this server.</Original>
+        <Russian>Быстрое перемещение отключено на этом сервере.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_no_tow">
         <Original>You cannot Fast Travel with your Tow Rope out or a Vehicle attached.</Original>
@@ -3421,13 +3407,6 @@
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius">
         <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;&lt;br/&gt;More than 10 players are absent from HQ currently.</Original>
-        <Italian>Tutti i giocatori devono trovarsi entro 100m dal QG per riposare.</Italian>
-        <Spanish>Todos los jugadores deben estar en un radio de 100m del CG para poder descansar.</Spanish>
-        <French>Tous les joueurs doivent se trouver dans un rayon de 100 m du QG pour pouvoir se reposer.</French>
-        <Korean>모든 플레이어가 본부로부터 100미터 이내에 있어야 쉴 수 있습니다.</Korean>
-        <Russian>Все игроки должны находиться в радиусе 100 метров от штаба, чтобы иметь возможность отдохнуть.</Russian>
-        <Polish>Wszyscy gracze muszą znajdować się w promieniu 100 m od siedziby głównej, aby móc odpocząć.</Polish>
-        <Czech>Všichni hráči musí být v okruhu 100M od HQ abys mohl pustit odpočinek.</Czech>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius_players">
         <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;The following players are not at HQ: %1, and %2.</Original>
@@ -3805,10 +3784,6 @@
         <Czech>Koupit vozidlo</Czech>
         <Turkish>Araç Satın Al</Turkish>
         <Chinesesimp>购买载具</Chinesesimp>
-      </Key>
-      <Key ID="STR_A3A_fn_init_initclient_addact_gunshop">
-        <Original>Gun Shop</Original>
-        <German>Waffenladen</German>
       </Key>
       <Key ID="STR_A3A_fn_init_initclient_addact_gameOpt">
         <Original>Game Options</Original>
@@ -4974,11 +4949,33 @@
       <Key ID="STR_A3A_fn_mission_conv_start_location">
         <Original>convoy start</Original>
       </Key>
-      <Key ID="STR_A3A_fn_mission_gunshop_met_text">
-        <Original>A man by the of Pet Ros has contacted us. He is in %1, go and meet him. Rumor is that he sells hard to find items for the right price.</Original>
+      <Key ID="STR_A3A_fn_mission_gunshop_title">
+        <Original>Gun Shop</Original>
+        <German>Waffenladen</German>
       </Key>
-      <Key ID="STR_A3A_fn_mission_gunshop_met_title">
-        <Original>Meet Pet Ros</Original>
+      <Key ID="STR_A3A_fn_mission_gunshop_text_meet">
+        <Original>My distant cousin Solomon Maru has contacted us. Rumor is that he sells items stolen from the enemy. He is in %1, go and meet him.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_text_wait">
+        <Original>Wait a few minutes for Solomon to arrange delivery of the goods.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_airdrop">
+        <Original>A friend is airdropping the cargo. I've marked the position on your map. Good luck.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_intercept">
+        <Original>Unfortunately enemies have intercepted your shipment. But you still have a chance to acquire it. Good luck.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_nomoney">
+        <Original>You can't afford these items. Stop wasting my time.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_wait">
+        <Original>Wait around while I arrange delivery of the goods. It shouldn't take long.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_supplydrop_title">
+        <Original>Supply Drop</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_supplydrop_text">
+        <Original>An enemy plane is airdropping supplies on this position. Get there with a truck and recover the crate. Be careful not to shoot down the plane!</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_des_ante_text">
         <Original>We need to destroy or take a Radio Tower in %1. This will interrupt the coverage of %3 radio propaganda. Do it before %2.</Original>
@@ -10370,7 +10367,7 @@
       <Key ID="STR_A3A_fn_support_showIntStpCll_MORTAR">
         <Original>%1 is setting up a mortar position.</Original>
         <Korean>%1 세력이 박격포를 준비 중</Korean>
-        <Russian>%1 минирует позицию.</Russian>
+        <Russian>%1 устанавливает позицию для миномета.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntStpCll_ORBITALSTRIKE">
         <Original>A %1 satellite is charging an orbital strike.</Original>

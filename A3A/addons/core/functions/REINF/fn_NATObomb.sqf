@@ -108,7 +108,7 @@ waitUntil { sleep 2; (currentWaypoint group _plane == 4) or (time > _timeOut) or
 deleteMarkerLocal _mrkOrig;
 deleteMarkerLocal _mrkDest;
 
-if !(canMove _plane) then { sleep cleantime };		// let wreckage hang around for a bit
+if !(canMove _plane) then { sleep 3600 };		// let wreckage hang around for a bit
 deleteVehicle _plane;
 {deleteVehicle _x} forEach _planeCrew;
 deleteGroup _groupPlane;

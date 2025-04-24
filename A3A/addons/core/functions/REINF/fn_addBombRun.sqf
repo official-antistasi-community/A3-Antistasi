@@ -5,6 +5,7 @@ FIX_LINE_NUMBERS()
 private _titleStr = localize "STR_A3A_fn_reinf_bombrun_title";
 private _owner = _veh getVariable "ownerX";
 private _wrongOwner = !(isNil "_owner" || {getPlayerUID player isEqualTo _owner});   //Returns false if no owner, false if is owner, true if is not owner
+private _typeX = typeOf _veh;
 
 private _exitReason = switch (true) do {
 	case (isNull _veh):                                         {"looking"};

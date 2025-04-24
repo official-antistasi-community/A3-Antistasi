@@ -244,7 +244,7 @@ if(_pointSum >= _neededPoints) then
     _intel setObjectTextureGlobal [0,  QPATHTOFOLDER(Pictures\Intel\laptop_complete.paa)];
     ["Large", _side] remoteExec ["A3A_fnc_selectIntel", 2];
     {
-        [petros,"hint",localize "STR_A3A_fn_intel_laptop_success", localize "STR_A3A_fn_intel_encr_reset"] remoteExec ["A3A_fnc_commsMP",_x];
+        [petros,"hint",localize "STR_A3A_fn_intel_laptop_success", localize "STR_A3A_fn_intel_title2"] remoteExec ["A3A_fnc_commsMP",_x];
         [10,_x] call A3A_fnc_playerScoreAdd;
     } forEach ([50,0,_intel,teamPlayer] call A3A_fnc_distanceUnits);
     [5, theBoss] call A3A_fnc_playerScoreAdd;

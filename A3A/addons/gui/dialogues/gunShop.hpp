@@ -40,7 +40,7 @@ class A3A_gunShop: A3A_DefaultDialog
         };
 
         //list button
-        class listButton: A3A_ActivePicture 
+/*        class listButton: A3A_ActivePicture 
         {
             idc = -1;
             text = A3A_Icon_list;
@@ -49,8 +49,8 @@ class A3A_gunShop: A3A_DefaultDialog
             w = 6.4 * GRID_W;
             h = 6.4 * GRID_H;
         }; 
-        //filter button
-        class filterButton: A3A_ActivePicture 
+*/        //filter button
+/*        class filterButton: A3A_ActivePicture 
         {
             idc = -1;
             onButtonClick = "[""switchTabRight"", [""Filters""]] call A3A_GUI_fnc_gunShop";
@@ -61,7 +61,7 @@ class A3A_gunShop: A3A_DefaultDialog
             h = 6.4 * GRID_H;
         }; 
         //shopping cart button
-        class shoppingCartButton: A3A_ActivePicture 
+*/        class shoppingCartButton: A3A_ActivePicture 
         {
             idc = -1;
             onButtonClick = "[""switchTabRight"", [""Shopping""]] call A3A_GUI_fnc_gunShop";

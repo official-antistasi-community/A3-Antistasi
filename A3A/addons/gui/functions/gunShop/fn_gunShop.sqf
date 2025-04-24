@@ -30,7 +30,8 @@ switch (_mode) do
         ["Muzzles"] call A3A_GUI_fnc_createGunShopTab;
         ["Bipods"] call A3A_GUI_fnc_createGunShopTab;
 
-        // TODO: Select primary?
+        ["switchTab", ["Primary"]] call A3A_GUI_fnc_gunShop;
+        ["switchTabRight", ["Shopping"]] call A3A_GUI_fnc_gunShop;
     };
 
     case ("switchTab"):

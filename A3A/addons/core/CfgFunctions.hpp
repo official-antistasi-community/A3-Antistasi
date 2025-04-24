@@ -94,6 +94,7 @@ class CfgFunctions
             class launcherInfo {};
             class loot {};
             class randomRifle {};
+            class setCargoItems {};
             class setRebelLoadouts {};
             class transfer {};
             class unlockEquipment {};
@@ -251,10 +252,10 @@ class CfgFunctions
             class createAIOutposts {};
             class createAIResources {};
             class createAISite {};
-            class createAndFillVehicle {};
             class createAttackForceAir {};
             class createAttackForceLand {};
             class createAttackForceMixed {};
+            class createAttackForceSea {};
             class createAttackVehicle {};
             class createFIAOutposts2 {};
             class createSDKGarrisons {};
@@ -265,6 +266,7 @@ class CfgFunctions
             class crewTypeForVehicle {};
             class cycleSpawn {};
             class FIAinitBases {};
+            class fillVehicleCrewCargo {};
             class findSpawnPosition {};
             class freeSpawnPositions {};
             class garrisonReorg {};
@@ -496,6 +498,7 @@ class CfgFunctions
             class findPath {};
             class findPathPrecheck {};
             class findPosOnRoute {};
+            class findSeaPath {};
             class getMarkerNavPoint {};
             class getNearestNavPoint {};
             class listInsert {};

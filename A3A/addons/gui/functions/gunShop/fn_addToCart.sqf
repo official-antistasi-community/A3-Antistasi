@@ -34,7 +34,7 @@ if(_className in A3A_shoppingCart) exitWith
 	};
 
 	private _amountText = _map getOrDefault ["_controlAmount", -1];
-	_amountText ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' align='center' color='#E5C454' shadow='2'>%1</t>", _amount]);
+	_amountText ctrlSetStructuredText parseText (format ["<t size='0.75' align='left' valign='middle' align='center' color='#E5C454' shadow='2'>%1</t>", _amount]);
 	_amountText ctrlCommit 0;
 	
 	private _totalCost = _map getOrDefault ["_controlCost", -1];
@@ -73,7 +73,7 @@ _itemControlsGroup ctrlSetPosition[0, _itemYpos, 25 * GRID_W, 25 * GRID_H];
 _itemControlsGroup ctrlSetFade 1;
 _itemControlsGroup ctrlCommit 0;
 
-private _previewButton = _display ctrlCreate ["A3A_ActivePicture", A3A_IDC_GUN_SHOP_ITEM_PREVIEW, _itemControlsGroup];
+private _previewButton = _display ctrlCreate ["A3A_Picture", A3A_IDC_GUN_SHOP_ITEM_PREVIEW, _itemControlsGroup];
 _previewButton ctrlSetPosition [0, 0, 25 * GRID_W, 10 * GRID_H];
 _previewButton ctrlSetText _picturePreview;
 _previewButton ctrlCommit 0;
@@ -85,9 +85,14 @@ _displayText ctrlSetTooltip _className;
 _displayText ctrlCommit 0;
 
 private _totalCost = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
-_totalCost ctrlSetPosition [1 * GRID_W, 14 * GRID_H, 23 * GRID_W, 3 * GRID_H];
-_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#085F16' shadow='2'>€ %1</t>", _price]);
+_totalCost ctrlSetPosition [1 * GRID_W, 14 * GRID_H, 11 * GRID_W, 3 * GRID_H];
+_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _price]);
 _totalCost ctrlCommit 0;
+
+private _stockText = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
+_stockText ctrlSetPosition [12 * GRID_W, 14 * GRID_H, 12 * GRID_W, 3 * GRID_H];
+_stockText ctrlSetStructuredText parseText (format ["<t size='0.65' align='right' valign='middle' color='#63DDFF' shadow='2'>%1 in stock</t>", _stock]);
+_stockText ctrlCommit 0;
 
 private _amountText = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
 _amountText ctrlSetPosition [6 * GRID_W, 20 * GRID_H, 13 * GRID_W, 5 * GRID_H];
@@ -95,12 +100,12 @@ _amountText ctrlSetStructuredText parseText (format ["<t size='0.75' align='left
 _amountText ctrlCommit 0;
 
 private _buttonMinus = _display ctrlCreate ["A3A_Button_Small", -1, _itemControlsGroup];
-_buttonMinus ctrlSetPosition [1 * GRID_H , 20 * GRID_H, 5 * GRID_W,  5 * GRID_H];
+_buttonMinus ctrlSetPosition [1 * GRID_H , 20 * GRID_H, 5 * GRID_W,  4 * GRID_H];
 _buttonMinus ctrlSetText "-";
 _buttonMinus ctrlCommit 0;
 
 private _buttonPlus = _display ctrlCreate ["A3A_Button_Small", -1, _itemControlsGroup];
-_buttonPlus ctrlSetPosition [19 * GRID_W, 20 * GRID_H, 5 * GRID_W,  5 * GRID_H];
+_buttonPlus ctrlSetPosition [19 * GRID_W, 20 * GRID_H, 5 * GRID_W,  4 * GRID_H];
 _buttonPlus ctrlSetText "+";
 _buttonPlus ctrlCommit 0;
 
