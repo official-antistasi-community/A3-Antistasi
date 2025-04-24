@@ -8,11 +8,12 @@ params [["_minCount", 2]];
 private _fnc_roundPrice = {
     params ["_price"];
     if (_minCount < 100) then { _price = _price * (0.8 + random 0.4) };
-    call {
+    _price = call {
         if (_price > 2000) exitWith { ceil (_price / 100) * 100 };
         if (_price > 200) exitWith { ceil (_price / 10) * 10 };
         ceil (_price);
     };
+    _price max 5;
 };
 
 private _fnc_generateList = {
@@ -62,8 +63,11 @@ if (_minCount >= 100) then {
 
     private _magsPrices = createHashMap;
     {
+        private _allMags = compatibleMagazines _x;
+        if (_allMags isEqualTo []) then {continue};
         private _mag = if (random 1 < 0.5) then {_allMags#0} else {selectRandom _allMags};      // first-mag bias
         if !(_mag in allMagazines) then {continue};     // use Antistasi blacklisting? kinda expensive but whatever
+
         private _price = [_mag, "mag"] call A3A_GUI_fnc_calculateItemPrice;
         private _stock = ceil (15 + random 15);
         _magsPrices set [_mag, [_price call _fnc_roundPrice, _stock]];

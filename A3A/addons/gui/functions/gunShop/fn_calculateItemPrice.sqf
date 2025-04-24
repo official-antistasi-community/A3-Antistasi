@@ -14,6 +14,7 @@ private _fnc_ammoPriceCalculator = {
     params ["_className"];
 
     private _cfgAmmo = configFile >> "CfgAmmo" >> _className;
+    if (!isClass _cfgAmmo) exitWith { Error_1("Ammo %1 does not exist", _className); 10000 };
     if (isNumber (_cfgAmmo >> "A3A_price")) exitWith { getNumber (_cfgAmmo >> "A3A_price") };
 
     private _rocketSims = ["shotrocket", "shotmissile"];
@@ -95,6 +96,7 @@ private _fnc_magPriceCalculator = {
     params ["_className"];
 
     private _cfgMag = configFile >> "CfgMagazines" >> _className;
+    if (!isClass _cfgMag) exitWith { Error_1("Magazine %1 does not exist", _className); 10000 };
     if (isNumber (_cfgMag >> "A3A_price")) exitWith { getNumber (_cfgMag >> "A3A_price") };
 
     private _ammoVal = getText (_cfgMag >> "ammo") call _fnc_ammoPriceCalculatorCache;
@@ -111,6 +113,7 @@ private _fnc_weaponPriceCalculator = {
     // TODO: check what this does with the RHS(?) SMAW
 
     private _defaultMag = compatibleMagazines _className select 0;
+    if (isNil "_defaultMag") exitWith { Error_1("Weapon %1 has no magazines", _className); 10000 };
     if (_defaultMag == "CBA_fakeLauncherMagazine") then {
         if (isNil "cba_disposable_normalLaunchers") exitWith { Error("CBA fake mag without CBA loaded") };
         private _realLauncherData = cba_disposable_normalLaunchers get _className;

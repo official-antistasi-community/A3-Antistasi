@@ -85,15 +85,6 @@ if (currentWaypoint _group > 0) then
     _crate setVelocity (velocity _plane vectorMultiply 0.5);
     _crate allowDamage false;
 
-    // Get rid of the task and smoke if the box is deleted or loaded into a vehicle
-    private _fnc_cleanup = {
-        [(_this#0) getVariable "A3A_taskId", true, true] call BIS_fnc_deleteTask;
-        deleteVehicle ((_this#0) getVariable "A3A_smoke");
-    };
-    _crate setVariable ["A3A_taskId", _taskId];
-    _crate addEventHandler ["Attached", _fnc_cleanup];
-    _crate addEventHandler ["Deleted", _fnc_cleanup];
-
     // Add items. Might take a while, spawn to avoid fucking up the timings
     [_crate, _gear] spawn A3A_fnc_setCargoItems;
 
@@ -113,6 +104,15 @@ if (currentWaypoint _group > 0) then
     deleteVehicle _parachute;
     private _smoke = "SmokeShellYellow_Infinite" createVehicle getPosATL _crate;
     _crate setVariable ["A3A_smoke", _smoke];
+
+    // Get rid of the task and smoke if the box is deleted or loaded into a vehicle
+    private _fnc_cleanup = {
+        [(_this#0) getVariable "A3A_taskId", true, true] call BIS_fnc_deleteTask;
+        deleteVehicle ((_this#0) getVariable "A3A_smoke");
+    };
+    _crate setVariable ["A3A_taskId", _taskId];
+    _crate addEventHandler ["Attached", _fnc_cleanup];
+    _crate addEventHandler ["Deleted", _fnc_cleanup];
 
 	// Otherwise when destroyed, ammoboxes sink 100m underground and are never cleared up
 	_crate addEventHandler ["Killed", { [_this#0] spawn { sleep 10; deleteVehicle (_this#0) } }];

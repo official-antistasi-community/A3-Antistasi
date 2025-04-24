@@ -20,6 +20,7 @@ private _totalCost = 0;
 	
 } forEach A3A_shoppingCart;
 
+if (_totalCost <= 0) exitWith {};		// If we hit checkout with nothing in the cart, just ignore
 
 // check if you can afford here.
 
