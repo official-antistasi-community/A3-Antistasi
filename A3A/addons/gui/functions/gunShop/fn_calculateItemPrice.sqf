@@ -22,7 +22,7 @@ private _fnc_ammoPriceCalculator = {
 
     private _cfgAmmo = configFile >> "CfgAmmo" >> _className;
 	private _simType = tolower getText(_cfgAmmo >> "simulation");
-	if (_simType in _utilSims) exitWith { 200 };
+	if (_simType in _utilSims) exitWith { 40 };
 
 	// maxSpeed better for rockets, usually zero elsewhere. Mines have random crap.
 	private _velocity = getNumber (_cfgAmmo >> (["typicalSpeed", "maxSpeed"] select (_simType in _rocketSims)));
@@ -70,9 +70,9 @@ private _fnc_ammoPriceCalculator = {
 
 	private _payload = 0.5*_hit + 0.5*_penetration + _indirHit;
 	private _costPerRound = if (_simType in _mineSims) then {
-		1.5 * _payload^0.7;
+		0.3 * _payload^0.7;
 	} else {
-		0.1 * (1 + _rangeMod / 600) * _payload^1.4 * (1 + _guidance * _airLock);
+		0.02 * (1 + _rangeMod / 600) * _payload^1.4 * (1 + _guidance * _airLock);
 	};
 
     A3A_itemPriceCache set ["ammo:" + _classname, _costPerRound];
@@ -121,19 +121,19 @@ private _fnc_weaponPriceCalculator = {
 	private _cats = _className call A3A_fnc_equipmentClassToCategories;
 	private _basePrice = switch (_cats#0) do {
 		case "Rifles": {
-			if ("GrenadeLaunchers" in _cats) exitWith { 1400 + _ammoPrice*60 };
-			400 + _ammoPrice*60;
+			if ("GrenadeLaunchers" in _cats) exitWith { 300 + _ammoPrice*60 };
+			80 + _ammoPrice*60;
 		};
-		case "MachineGuns": { 1200 + _ammoPrice*180 };
-		case "SniperRifles": { 750 + _ammoPrice*50*_magSize/5 };            // dispersion adjustment makes these expensive later
-		case "SMGs": { 200 + _ammoPrice*120 };
+		case "MachineGuns": { 240 + _ammoPrice*180 };
+		case "SniperRifles": { 150 + _ammoPrice*50*_magSize/5 };            // dispersion adjustment makes these expensive later
+		case "SMGs": { 40 + _ammoPrice*120 };
 
-		case "Handguns": { 100 + _ammoPrice*120*_magSize/10 };
-		case "Shotguns": { 200 + _ammoPrice*40*_magSize/5 };				// TODO: sort out shotgun ammo
+		case "Handguns": { 20 + _ammoPrice*120*_magSize/10 };
+		case "Shotguns": { 40 + _ammoPrice*40*_magSize/5 };				// TODO: sort out shotgun ammo
 
-		case "GrenadeLaunchers": { 400 + _ammoPrice*50*_magSize };			// this is GL without rifle
-		case "RocketLaunchers": { 2000 + _ammoPrice*3 };
-		case "MissileLaunchers": { 10000 + _ammoPrice*3 };
+		case "GrenadeLaunchers": { 80 + _ammoPrice*50*_magSize };			// this is GL without rifle
+		case "RocketLaunchers": { 400 + _ammoPrice*3 };
+		case "MissileLaunchers": { 2000 + _ammoPrice*3 };
 		default { 1000 }
 	};
 
@@ -171,7 +171,7 @@ private _fnc_itemPriceCalculator = {
 	private _cats = _className call A3A_fnc_equipmentClassToCategories;
     switch (_cats#0) do {
         case "MuzzleAttachments": {
-            private _cost = 500;
+            private _cost = 200;
             private _config = (configFile >> "CfgWeapons" >> _className);
             private _isMuzzle = isNumber (_config >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
             if(_isMuzzle) then 
@@ -186,7 +186,7 @@ private _fnc_itemPriceCalculator = {
             };
             _cost;
         };
-        case "PointerAttachments": {200};
+        case "PointerAttachments": {100};
         case "Optics": {
             // shamelessly stolen from ace.
             private _config = (configFile >> "CfgWeapons" >> _className);
@@ -195,9 +195,8 @@ private _fnc_itemPriceCalculator = {
                 _minZoom = _minZoom min (getNumber (_x >> "opticsZoomMin"));
             } forEach configProperties [_config >> "ItemInfo" >> "OpticsModes"];
 
-            if (_minZoom in [0, 999]) exitWith {400};
-            
-            private _cost = round(400 * (0.25/_minZoom));
+            if (_minZoom in [0, 999]) exitWith {100};
+            private _cost = round(100 * (0.25/_minZoom));
 
             // Cost multiplier for NV/Ti optics modes
             private _visionMult = 1;
@@ -213,7 +212,7 @@ private _fnc_itemPriceCalculator = {
 
             _cost * _visionMult;
         };
-        case "Bipods": {700};
+        case "Bipods": {200};
         default {
             Error_1("Item %1 not a valid type", _className);
             1000;

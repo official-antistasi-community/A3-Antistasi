@@ -33,7 +33,7 @@ A3A_shoppingList = nil;
 // spawn a petros look alike
 private _identity = createHashMapFromArray [
     ["firstName", "Solomon"],
-	["lastName", "Maru"],
+    ["lastName", "Maru"],
     ["face", "GreekHead_A3_01"], 
     ["speaker", "Male06GRE"],
     ["pitch", 1.1]
@@ -53,31 +53,31 @@ _coolerPetros setCaptive true;		// don't let him get shot for now
 _coolerPetros disableAI "ALL";
 
 _coolerPetros addEventHandler ["killed", {
-	params ["_victim", "_killer"];
-	[_victim] remoteExec ["A3A_fnc_postmortem", 2];
+    params ["_victim", "_killer"];
+    [_victim] remoteExec ["A3A_fnc_postmortem", 2];
 
-	// In case he bled to death, or weird damage sources
+    // In case he bled to death, or weird damage sources
     _killer = _victim getVariable ["A3A_downedBy", _killer];
-	_killer = _victim getVariable ["ace_medical_lastDamageSource", _killer];
+    _killer = _victim getVariable ["ace_medical_lastDamageSource", _killer];
 
-	// Punish rebels if they killed Solomon
-	if ((isPlayer _killer) and (side _killer == teamPlayer)) then {
-		[Occupants, 20, 60] remoteExecCall ["A3A_fnc_addAggression", 2];
-	};
+    // Punish rebels if they killed Solomon
+    if ((isPlayer _killer) and (side _killer == teamPlayer)) then {
+        [Occupants, 20, 60] remoteExecCall ["A3A_fnc_addAggression", 2];
+    };
 }];
 
 private _conditionCode = "(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer) and (_this == theBoss)";
 if(!A3A_GS_allowGuestCommander) then {
-	_conditionCode + " and theBoss call A3A_fnc_isMember";
+    _conditionCode + " and theBoss call A3A_fnc_isMember";
 };
 
 private _addActionCode = {
-	params ["_coolerPetros", "_conditionCode"];
-	_coolerPetros addAction [localize "STR_A3A_fn_mission_gunshop_title", {
-		params ["_target", "_caller"];
-		[_target, false] remoteExec ["setCaptive", _target];			// Solomon is now suspicious
-		createDialog "A3A_gunShop";
-	},nil,0,false,true,"",_conditionCode, 4];
+    params ["_coolerPetros", "_conditionCode"];
+    _coolerPetros addAction [localize "STR_A3A_fn_mission_gunshop_title", {
+        params ["_target", "_caller"];
+        [_target, false] remoteExec ["setCaptive", _target];			// Solomon is now suspicious
+        createDialog "A3A_gunShop";
+    },nil,0,false,true,"",_conditionCode, 4];
 };
 
 // do this global, because any one can become the commander
@@ -87,7 +87,7 @@ private _addActionCode = {
 // Create a wandering patrol
 private _spawnPosition = [markerPos _city, 0, 200, 2, 0, -1, 0] call A3A_fnc_getSafePos;
 if (_spawnPosition isEqualTo [0,0]) exitWith {
-	ServerDebug("Unable to find spawn position for patrol unit.");
+    ServerDebug("Unable to find spawn position for patrol unit.");
 };
 
 private _patrolTypes = A3A_faction_occ get (["groupsSmall", "groupSpecOpsRandom"] select (tierWar > random 12));
@@ -102,8 +102,8 @@ private _timeout = time + 3600;
 waitUntil{sleep 1; !isNil "A3A_shoppingList" || (time > _timeout) || (!alive _coolerPetros) };
 
 if((time > _timeout) || (!alive _coolerPetros)) exitWith {
-	[_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState; 
-	[_taskId, "LOG", 600, true] spawn A3A_fnc_taskDelete;
+    [_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState; 
+    [_taskId, "LOG", 600, true] spawn A3A_fnc_taskDelete;
 };
 
 [_coolerPetros, 0] remoteExec ["removeAction", 0, _coolerPetros];
@@ -121,45 +121,46 @@ sleep (60 + random 60);
 
 
 // do they get a crate or are they fucked?
-// if they spend 348,000 or more, they will always have a convoy mission.
+// Tier 8, cheap basket: 21% chance of convoy mission
+// Tier 8, 20k basket: 50% chance of convoy mission
 A3A_shoppingList params ["_totalCost", "_gunshopList"];
-private _noCrate = (floor random 12 ) + (floor random 12) + (floor random 12) > ceil (29 - tierWar - (_totalCost/12000));
+private _noCrate = (floor random 12 ) + (floor random 12) + (floor random 12) > ceil (29 - tierWar - (_totalCost/5000));
 
 private _convoyPair = [];
 if(_noCrate) then
 {
-	// Need to check whether there's a valid convoy here. Otherwise players get a freebie
-	private _markers = (airportsX + resourcesX + factories + seaports + outposts - blackListDest);
-	private _maxDist = 0;
-	{
-		private _site = _x;
-		if (sidesX getVariable _site != Occupants) then {continue};
-		if (markerPos _site distance2d markerPos respawnTeamPlayer > distanceMission+1000) then {continue};
+    // Need to check whether there's a valid convoy here. Otherwise players get a freebie
+    private _markers = (airportsX + resourcesX + factories + seaports + outposts - blackListDest);
+    private _maxDist = 0;
+    {
+        private _site = _x;
+        if (sidesX getVariable _site != Occupants) then {continue};
+        if (markerPos _site distance2d markerPos respawnTeamPlayer > distanceMission+1000) then {continue};
 
-		private _suppMarkers = [_site, false] call A3A_fnc_findLandSupportMarkers;
-		{
-			_x params ["_base", "_dist"];
-			if (spawner getVariable _base == 0) then {continue};
-			if (sidesX getVariable _base != Occupants) then {continue};
-			if (_dist > _maxDist) then { _convoyPair = [_site, _base]; _maxDist = _dist };
+        private _suppMarkers = [_site, false] call A3A_fnc_findLandSupportMarkers;
+        {
+            _x params ["_base", "_dist"];
+            if (spawner getVariable _base == 0) then {continue};
+            if (sidesX getVariable _base != Occupants) then {continue};
+            if (_dist > _maxDist) then { _convoyPair = [_site, _base]; _maxDist = _dist };
 
-		} forEach _suppMarkers;
+        } forEach _suppMarkers;
 
-	} forEach _markers;
+    } forEach _markers;
 };
 
 if (_noCrate and _convoyPair isNotEqualTo []) exitWith
 {
-	// Send a chat message to nearby players so they know what's up
-	[_coolerPetros, localize "STR_A3A_fn_mission_gunshop_intercept"] remoteExec ["globalChat", _nearPlayers];
-	
-	sleep 5;
-	private _args = _convoyPair + ["GunShop","legacy",-1, _gunshopList];
-	[_args, "A3A_fnc_convoy"] remoteExec ["A3A_fnc_scheduler", 2];
+    // Send a chat message to nearby players so they know what's up
+    [_coolerPetros, localize "STR_A3A_fn_mission_gunshop_intercept"] remoteExec ["globalChat", _nearPlayers];
+    
+    sleep 5;
+    private _args = _convoyPair + ["GunShop","legacy",-1, _gunshopList];
+    [_args, "A3A_fnc_convoy"] remoteExec ["A3A_fnc_scheduler", 2];
 
-	_coolerPetros enableAI "ALL";
-	[group _coolerPetros] spawn A3A_fnc_groupDespawner;
-	[_patrolGroup] spawn A3A_fnc_enemyReturnToBase;
+    _coolerPetros enableAI "ALL";
+    [group _coolerPetros] spawn A3A_fnc_groupDespawner;
+    [_patrolGroup] spawn A3A_fnc_enemyReturnToBase;
 };
 
 

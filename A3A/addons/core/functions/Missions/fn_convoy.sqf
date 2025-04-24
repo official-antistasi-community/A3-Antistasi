@@ -499,18 +499,11 @@ if (_convoyType == "GunShop") then
         if ((not alive _vehObj) or (time > _timeout)) then
         {
             // hahahahaha, they kept you from getting the guns
-            [true, false, 0, 0, 5, 60, "gunshop"] call _fnc_applyResults;
+            [false, false, 0, 0, 5, 60, "gunshop"] call _fnc_applyResults;
         };
         if (_vehObj distance _posHQ < 50) then
         {
             [true, false, 0, 0, 15, 180, "gunshop"] call _fnc_applyResults;
-            
-            // you might have gotten your gear, but you have made the enemy more determined
-            // clamp to 1000
-            private _poolReplace =  0  max (_totalCost/1000) min 1000;
-            // this can be a double edge sword, too much and you're fucked.
-            [_poolReplace, _sideX, _resPool] remoteExec ["A3A_fnc_addEnemyResources", 2];
-            
         };
     };
 };
