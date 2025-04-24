@@ -69,6 +69,7 @@ class CfgFunctions {
             class gatherGunShopLists {};
             class gunShop {};
             class handleSearchEvents {};
+            class lcgRand {};
             class updateCartNumber{};
             class updateCartPositions {};
             class updateFilters {};
