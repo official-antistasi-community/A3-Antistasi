@@ -38,7 +38,8 @@ if (isNil "A3A_itemPriceCache") then { A3A_itemPriceCache = createHashMap };
 
 private _gunShopData = createHashMap;
 
-_gunShopData set [A3A_IDC_GUN_SHOP_PRIMARY_TAB, ["weapon", _minCount*3, 15, allRifles + allSniperRifles + allMachineGuns + allSMGs + allShotguns] call _fnc_generateList];
+private _glOnly = allGrenadeLaunchers select { (_x call A3A_fnc_equipmentClassToCategories) # 0 != "Rifles" };
+_gunShopData set [A3A_IDC_GUN_SHOP_PRIMARY_TAB, ["weapon", _minCount*3, 15, allRifles + allSniperRifles + allMachineGuns + allSMGs + allShotguns + _glOnly] call _fnc_generateList];
 _gunShopData set [A3A_IDC_GUN_SHOP_HANDGUN_TAB, ["weapon", _minCount, 15, +allHandguns] call _fnc_generateList];
 _gunShopData set [A3A_IDC_GUN_SHOP_SECONDARY_TAB, ["weapon", _minCount, 8, allMissileLaunchers + allRocketLaunchers] call _fnc_generateList];
 

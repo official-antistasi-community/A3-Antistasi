@@ -67,6 +67,7 @@ private _fnc_ammoPriceCalculator = {
     //private _explosive = getNumber(_cfgAmmo >> "explosive");		// 1 to 0 range for proportion of kinetic vs explosive damage
     private _penetration = (15/1000) * _caliber  * _subVelocity;		// should be mm of RHS steel
 
+    _hit = _hit min _penetration*1.5;        // hack to workaround RHS AT weirdness
     private _payload = 0.5*_hit + 0.5*_penetration + _indirHit;
     private _costPerRound = if (_simType in _mineSims) then {
         0.3 * _payload^0.7;
@@ -122,19 +123,20 @@ private _fnc_weaponPriceCalculator = {
     
     // then type mod on top?
     private _cats = _className call A3A_fnc_equipmentClassToCategories;
+    private _glMod = 0;
     private _basePrice = switch (_cats#0) do {
         case "Rifles": {
-            if ("GrenadeLaunchers" in _cats) exitWith { 300 + _ammoPrice*60 };
+            if ("GrenadeLaunchers" in _cats) then { _glMod = 220 };
             80 + _ammoPrice*60;
         };
         case "MachineGuns": { 240 + _ammoPrice*180 };
-        case "SniperRifles": { 150 + _ammoPrice*50*_magSize/5 };            // dispersion adjustment makes these expensive later
-        case "SMGs": { 40 + _ammoPrice*120 };
+        case "SniperRifles": { 200 + _ammoPrice*70*_magSize/5 };            // dispersion adjustment makes these expensive later
+        case "SMGs": { 80 + _ammoPrice*60 };
 
         case "Handguns": { 20 + _ammoPrice*120*_magSize/10 };
         case "Shotguns": { 40 + _ammoPrice*40*_magSize/5 };				// TODO: sort out shotgun ammo
 
-        case "GrenadeLaunchers": { 80 + _ammoPrice*50*_magSize };			// this is GL without rifle
+        case "GrenadeLaunchers": { 200 + _ammoPrice*20*_magSize };			// this is GL without rifle
         case "RocketLaunchers": { 400 + _ammoPrice*3 };
         case "MissileLaunchers": { 2000 + _ammoPrice*3 };
         default { 1000 };
@@ -151,14 +153,14 @@ private _fnc_weaponPriceCalculator = {
             _modeCfg = _weaponCfg >> _firstMode;
         };
         private _dispersion = getNumber (_modeCfg >> "dispersion");
-        _dispMul =  0.001 / _dispersion;
+        _dispMul =  (0.001 / _dispersion) ^ 0.7;
     };
 
     // extra for attachment slots? Or not?
 
     // fire mode availability? maybe unnecessary with type mod
 
-    _basePrice * _dispMul;
+    (_basePrice * _dispMul) + _glMod;
 };
 
 private _fnc_itemPriceCalculator = {
@@ -170,13 +172,12 @@ private _fnc_itemPriceCalculator = {
     private _cats = _className call A3A_fnc_equipmentClassToCategories;
     switch (_cats#0) do {
         case "MuzzleAttachments": {
-            private _cost = 200;
+            private _cost = 100;
             private _isMuzzle = isNumber (_config >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
             if(_isMuzzle) then 
             {
-                //private _audible = getNumber (_config >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
-                //if(_audible isEqualTo 0) then {_audible = 0.7};
-                //_cost = _cost * 0.7 / _audible;
+                private _audible = getNumber (_config >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
+                _cost = 400 * (3 min (0.5 / _audible));       // scale a bit by suppression level
 
                 // Higher cost for heavier suppressors. Difficult to get caliber.
                 // CUP suppressors mostly have bad (low) weights, so cap the minimum

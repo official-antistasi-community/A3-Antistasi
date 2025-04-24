@@ -14,6 +14,11 @@ private _categoryOverrideTable = [
 ["arifle_RPK12_lush_F", ["MachineGuns","Weapons"]],
 
 //RHS
+["rhs_weap_m76", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_LB", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_LB_Folded", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_USA_LB", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_USA_LB_Folded", ["SniperRifles","Weapons"]],
 ["rhs_weap_vss", ["SniperRifles","Weapons"]],
 ["rhs_weap_vss_grip", ["SniperRifles","Weapons"]],
 ["rhs_weap_vss_npz", ["SniperRifles","Weapons"]],
@@ -55,6 +60,9 @@ private _categoryOverrideTable = [
 ["rhs_weap_rsp30_white", ["Unknown","Weapons"]],
 ["rhs_weap_rsp30_green", ["Unknown","Weapons"]],
 ["rhs_weap_rsp30_red", ["Unknown","Weapons"]],
+
+//Some sort of periscope
+["rhs_weap_tr8", ["Unknown","Weapons"]],
 
 // These have a rifle grenade muzzle but with no magazines or wells defined
 ["rhs_weap_m70b1", ["Rifles","Weapons"]],

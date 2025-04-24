@@ -34,5 +34,15 @@ class CfgWeapons
         };
         modes[] = {"FullAuto","Ai_Burst"};
     };
+
+    // Price overrides for gun shop
+    // Subsonic sniper
+    class rhs_weap_ak74m;
+    class rhs_weap_asval : rhs_weap_ak74m {
+        A3A_price = 500;
+    };
+    class rhs_weap_vss : rhs_weap_asval {
+        A3A_price = 800;
+    };
 };
 
