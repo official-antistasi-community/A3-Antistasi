@@ -20,7 +20,7 @@ if (_mode == "pairs") exitWith {
         _weightMarker setMarkerShapeLocal "ICON";
         _weightMarker setMarkerTypeLocal "mil_dot";
         _weightMarker setMarkerTextLocal (_weight toFixed 3);
-        _weightMarker setMarkerAlpha 0.75;
+        _weightMarker setMarkerAlphaLocal 0.75;
     };
 
     {
@@ -38,7 +38,7 @@ if (_mode == "sites") exitWith {
         _textMarker setMarkerTypeLocal "mil_dot";
         _textMarker setMarkerTextLocal _text;
         _textMarker setMarkerColorLocal _color;
-        _textMarker setMarkerAlpha 0.75;
+        _textMarker setMarkerAlphaLocal 0.75;
     };
 
     {
@@ -48,17 +48,3 @@ if (_mode == "sites") exitWith {
     } forEach A3A_minorSitesHM;
 };
 
-/*
-if (_mode == "sitesByLink") exitWith {
-
-
-    {
-        [_y#0, _x, "rbmark" + str _forEachIndex] call _fnc_drawRoadblockMarker;
-    } forEach A3A_minorSitesHM;
-};
-
-if (_mode == "sitesByName") exitWith {
-
-
-};
-*/

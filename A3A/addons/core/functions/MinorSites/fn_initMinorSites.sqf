@@ -6,7 +6,7 @@ FIX_LINE_NUMBERS()
 
 Info("Setting up roadblock pair checks");
 
-private _pairData = [];		// weight, pairkey, ellipse [center, a, b, dir]
+private _pairData = [];		// weight, pairkey, ellipse [center, a, b, dir, false]
 {
     _y params ["_mrkA", "_mrkB", "_weight"];
 
@@ -14,7 +14,7 @@ private _pairData = [];		// weight, pairkey, ellipse [center, a, b, dir]
     private _posB = markerPos _mrkB;
     private _midpoint = (_posA vectorAdd _posB) vectorMultiply 0.5;
     private _length = _posA distance2d _posB;
-    _pairData pushBack [_weight, _x, [_midpoint, _length/6, _length*0.5, _posA getDir _posB]];
+    _pairData pushBack [_weight, _x, [_midpoint, _length/6, _length*0.5, _posA getDir _posB, false]];
     
 } forEach A3A_roadblockPairsHM;
 _pairData sort true;			// Check the smaller pairs first for area. Hmm... Might make sense. Area check is quite strict.
