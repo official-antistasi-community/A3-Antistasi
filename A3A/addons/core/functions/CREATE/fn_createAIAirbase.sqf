@@ -198,11 +198,23 @@ if (!_busy) then
 		private _spawnParameter = [_markerX, "Plane"] call A3A_fnc_findSpawnPosition;
 		if(_spawnParameter isEqualType []) then
 		{
-			private _vehPool = (_faction get "vehiclesPlanesCAS") + (_faction get "vehiclesPlanesAA");
+			private _vehPool = [];
+			private _vehTypes = ["vehiclesPlanesCAS", "vehiclesPlanesAA"];
+			private _typeWeight = [2, 1];
+
+			{
+				private _vehs = _faction get _x;
+				if (_vehs isEqualTo []) then {continue};
+				private _weight = (_typeWeight select _forEachIndex) / count _vehs;
+				{
+					_vehPool append [_x, _weight];
+				} forEach _vehs;
+			} forEach _vehTypes;
+
 			if(count _vehPool > 0) then
 			{
 				_spawnsUsed pushBack _spawnParameter#2;
-				_typeVehX = selectRandom _vehPool;
+				_typeVehX = selectRandomWeighted _vehPool;
 				isNil {
 					_veh = createVehicle [_typeVehX, (_spawnParameter select 0), [], 0, "CAN_COLLIDE"];
 					_veh setDir (_spawnParameter select 1);
@@ -215,13 +227,20 @@ if (!_busy) then
 		{
 			if !(_runwaySpawnLocation isEqualTo []) then
 			{
-				_typeVehX = selectRandom (
-                    (_faction get "vehiclesHelisLight")
-                    + (_faction get "vehiclesHelisTransport")
-                    + (_faction get "vehiclesPlanesCAS")
-                    + (_faction get "vehiclesPlanesAA")
-                    + (_faction get "vehiclesPlanesTransport")
-                );
+				private _vehPool = []
+				private _vehTypes = ["vehiclesPlanesCAS","vehiclesPlanesAA","vehiclesPlanesTransport"];
+				private _typeWeight = [1, 2, 2]
+
+				{
+					private _vehs = _faction get _x;
+					if (_vehs isEqualTo []) then {continue};
+					private _weight = (_typeWeight select _forEachIndex) / count _vehs;
+					{
+						_vehPool append [_x, _weight];
+					} forEach _vehs;
+				} forEach _vehTypes;
+
+				_typeVehX = selectRandomWeighted _vehTypes;
 				_veh = createVehicle [_typeVehX, _pos, [],50, "NONE"];
 				_veh setDir (_ang);
 				_pos = [_pos, 50,_ang] call BIS_fnc_relPos;
@@ -271,13 +290,33 @@ private _ammoBox = if (garrison getVariable [_markerX + "_lootCD", 0] == 0) then
 
 if (!_busy) then
 {
-	private _vehTypesHeavy = 
-        (_faction get "vehiclesLightAPCs") + 
-        (_faction get "vehiclesAPCs") + 
-        (_faction get "vehiclesIFVs") + 
-        (_faction get "vehiclesLightTanks") + 
-        (_faction get "vehiclesTanks") + 
-        (_faction get "vehiclesHeavyTanks");
+	private _vehPool = [];
+	private _vehTypes = [
+		"vehiclesLightAPCs",
+		"vehiclesAPCs",
+		"vehiclesIFVs",
+		"vehiclesLightTanks",
+		"vehiclesTanks",
+		"vehiclesHeavyTanks"
+		];
+	private _typeWeight = [
+		12 - (tierWar), 
+		12 - (tierWar * 0.5), 
+		5 + (tierWar), 
+		12 - (tierWar * 0.25), 
+		5 + (tierWar), 
+		5 + (tierWar * 0.5)
+		];
+
+	{
+		private _vehs = _faction get _x;
+		if (_vehs isEqualTo []) then {continue};
+		private _weight = (_typeWeight select _forEachIndex) / count _vehs;
+		{
+			_vehPool append [_x, _weight];
+		} forEach _vehs;
+	} forEach _vehTypes;
+
 	for "_i" from 1 to (round (random 2)) do
 	{
 		_spawnParameter = [_markerX, "Vehicle"] call A3A_fnc_findSpawnPosition;
@@ -285,7 +324,7 @@ if (!_busy) then
 		{
 			_spawnsUsed pushBack _spawnParameter#2;
 			isNil {
-				_veh = createVehicle [selectRandom _vehTypesHeavy, (_spawnParameter select 0), [], 0, "CAN_COLLIDE"];
+				_veh = createVehicle [selectRandomWeighted _vehPool, (_spawnParameter select 0), [], 0, "CAN_COLLIDE"];
 				_veh setDir (_spawnParameter select 1);
 			};
 			_vehiclesX pushBack _veh;
@@ -296,19 +335,42 @@ if (!_busy) then
 	};
 };
 
-private _vehTypesLight = 
-    (_faction get "vehiclesLightArmed") + 
-    (_faction get "vehiclesLightUnarmed") + 
-    (_faction get "vehiclesTrucks") + 
-    (_faction get "vehiclesAmmoTrucks") + 
-    (_faction get "vehiclesRepairTrucks") + 
-    (_faction get "vehiclesFuelTrucks") + 
-    (_faction get "vehiclesMedical");
+private _vehPool = [];
+private _vehTypes = [
+	"vehiclesLightArmed",
+	"vehiclesLightUnarmed",
+	"vehiclesTrucks",
+	"vehiclesCargoTrucks",
+	"vehiclesAmmoTrucks",
+	"vehiclesRepairTrucks",
+	"vehiclesFuelTrucks",
+	"vehiclesMedical"
+	];
+private _typeWeight = [
+	7, 
+	4, 
+	2, 
+	2,
+	1 + (tierWar * 0.05), 
+	1 + (tierWar * 0.05), 
+	1 + (tierWar * 0.2), 
+	2
+	];
+
+{
+	private _vehs = _faction get _x;
+	if(_vehs isEqualTo []) then {continue};
+	private _weight = (_typeWeight select _forEachIndex) / count _vehs;
+	{
+		_vehPool append [_x, _weight];
+	} forEach _vehs;
+} forEach _vehTypes;
+
 _countX = 0;
 
 while {_countX < _nVeh && {_countX < 3}} do
 {
-	_typeVehX = selectRandom _vehTypesLight;
+	_typeVehX = selectRandomWeighted _vehPool;
 	_spawnParameter = [_markerX, "Vehicle"] call A3A_fnc_findSpawnPosition;
 	if(_spawnParameter isEqualType []) then
 	{
