@@ -21,6 +21,7 @@ class CfgVehicles
     class I_Pickup_aat_rf;
     class B_Heli_light_03_dynamicLoadout_rf;
     class Heli_EC_02_base_rf;
+    class I_Pickup_rcws_rf;
 
     class a3a_armored_Pickup_rf : I_G_Pickup_rf {
         animationList[] = {"hide_bullbar",0.2,"hide_fuel_tank",1,"hide_snorkel",1,"hide_antenna",1,"hide_trunk_cover",1,"hide_trunk_door",0,"trunk_door_open",0,"hide_armor_window_armor_top",0,"window_armor_hatch_L_rot",1,"window_armor_hatch_R_rot",0,"door_F_L_open",0,"door_F_R_open",0,"door_R_L_open",0,"door_R_R_open",0,"hide_rack",1,"hide_rack_spotlights",1,"hide_frame",1,"hide_sidesteps",0.5};
@@ -243,4 +244,14 @@ class CfgVehicles
         hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
     };
 
+    // 1.1 classes
+
+    class a3a_LDF_Pickup_rcws_rf : I_Pickup_rcws_rf {
+        textureList[] = {};
+        hiddenSelectionsTextures[] = {"\lxRF\vehicles_rf\pickup_01\Data\pickup_01_ext_ldf_co.paa","\lxRF\vehicles_rf\pickup_01\Data\pickup_01_adds_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_ext2_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_AAT_olive_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_launcher_co.paa","\lxRF\vehicles_rf\pickup_01\Data\pickup_01_service_ldf_co.paa"};
+    };
+    class a3a_ADF_Pickup_rcws_rf : I_Pickup_rcws_rf {
+        textureList[] = {};
+        hiddenSelectionsTextures[] = {"\lxRF\vehicles_rf\pickup_01\Data\pickup_01_ext_argana_royal_co.paa","\lxRF\vehicles_rf\pickup_01\Data\pickup_01_adds_argana_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_ext2_co.paa","lxrf\vehicles_rf\pickup_01\Data\RCWS\rcws_tan_co.paa","\lxRF\vehicles_rf\pickup_01\Data\pickup_01_service_argana_royal_co.paa"};
+    };
 };

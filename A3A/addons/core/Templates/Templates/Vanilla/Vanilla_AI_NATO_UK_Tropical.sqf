@@ -478,6 +478,7 @@ if ("rf" in A3A_enabledDLC) then {
     _militiaLoadoutData set ["sidearms", [
     ["hgun_Glock19_khk_RF", "", "acc_flashlight_pistol", "", [], [], ""]
     ]];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
 };
 if ("mark" in A3A_enabledDLC) then {
     (_sfLoadoutData get "machineGuns") append [

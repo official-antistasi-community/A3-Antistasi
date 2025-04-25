@@ -4,8 +4,8 @@
 ["name", "Tura"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_FIA_F"] call _fnc_saveToTemplate;
-["flagTexture", "a3\data_f\flags\flag_fia_co.paa"] call _fnc_saveToTemplate;
-["flagMarkerType", "flag_FIA"] call _fnc_saveToTemplate;
+["flagTexture", "\lxws\data_f_lxws\img\markers\Tura_CA.paa"] call _fnc_saveToTemplate;
+["flagMarkerType", "lxWS_flag_Tura"] call _fnc_saveToTemplate;
 
 
 ["vehiclesBasic", ["I_G_Quadbike_01_F"]] call _fnc_saveToTemplate;
@@ -80,7 +80,7 @@ private _initialRebelEquipment = [
 if (allowDLCExpansion) then {
     _initialRebelEquipment append [["launch_RPG7_F", 15], ["RPG7_F", 45], "SMG_05_F", "hgun_Pistol_01_F", "10Rnd_9x21_Mag"];
 } else {
-    _initialRebelEquipment append [["launch_RPG32_F", 15], ["RPG32_F", 30]];
+    _initialRebelEquipment append [["launch_RPG32_tan_lxWS", 15], ["RPG32_F", 30]];
 };
 if ("rf" in A3A_enabledDLC) then {
     _initialRebelEquipment append ["srifle_h6_tan_rf","10Rnd_556x45_AP_Stanag_red_Tan_RF","10Rnd_556x45_AP_Stanag_Tan_RF","10Rnd_556x45_AP_Stanag_green_Tan_RF"];
