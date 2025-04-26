@@ -855,13 +855,13 @@ class Templates
         shortName = "KRG";
         lore = $STR_A3A_templates_lore_3CB_AI_KRG;
     };
-    class 3CB_AI_Marines_Temperate : 3CBF_Base
+    class 3CB_Marines_Temperate : 3CBF_Base
     {
         side = "Occ";
         flagTexture = "a3\data_f\flags\flag_us_co.paa";
         name = "3CB Marines Temperate";
         file = "3CB_AI_Marines_Temperate";
-        climate[] = {"Temperate"};
+        climate[] = {"temperate"};
     };
     class 3CBF_ION_Arid : 3CBF_Base
     {

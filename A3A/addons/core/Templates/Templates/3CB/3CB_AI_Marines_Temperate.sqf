@@ -25,10 +25,10 @@
 ["vehiclesAmmoTrucks", ["UK3CB_CW_US_B_LATE_M939_Reammo"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["UK3CB_CW_US_B_LATE_M939_Repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["UK3CB_CW_US_B_LATE_M939_Fuel"]] call _fnc_saveToTemplate;
-["vehiclesMedical", [""]] call _fnc_saveToTemplate;
+["vehiclesMedical", []] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["UK3CB_CW_US_B_LATE_LAV25_HQ"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["UK3CB_CW_US_B_LATE_AAV", "UK3CB_CW_US_B_LATE_LAV25"]] call _fnc_saveToTemplate; // , "rhsusf_stryker_m1134_wd"
-["vehiclesIFVs", [""]] call _fnc_saveToTemplate;
+["vehiclesIFVs", []] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["rhsusf_m1a1hc_wd", "rhsusf_m1a1fep_od", "UK3CB_CW_US_B_EARLY_M60a3"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["UK3CB_KRG_B_M270_Avenger"]] call _fnc_saveToTemplate;
 
@@ -45,20 +45,19 @@
 ["vehiclesHelisLightAttack", ["RHS_UH1Y_FFAR", "RHS_UH1Y_FFAR"]] call _fnc_saveToTemplate; // , "RHS_MELB_AH6M"
 ["vehiclesHelisAttack", ["UK3CB_CW_US_B_LATE_AH1Z_GS", "UK3CB_CW_US_B_LATE_AH1Z_CS", "UK3CB_CW_US_B_LATE_AH1Z"]] call _fnc_saveToTemplate;
 
-["vehiclesArtillery", ["RHS_M119_WD", "UK3CB_CW_US_B_EARLY_M109", "UK3CB_CW_US_B_LATE_M270_MLRS_HE", "UK3CB_CW_US_B_LATE_M270_MLRS_CLUSTER"]] call _fnc_saveToTemplate;
+["vehiclesArtillery", ["RHS_M119_WD", "UK3CB_CW_US_B_EARLY_M109", "UK3CB_CW_US_B_LATE_M270_MLRS_HE"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
 ["RHS_M119_WD", ["RHS_mag_m1_he_12" ]],
 ["UK3CB_CW_US_B_EARLY_M109", ["rhs_mag_155mm_m795_28"]],
-["UK3CB_CW_US_B_LATE_M270_MLRS_HE", ["UK3CB_M31_MLRS_X12"]],
-["UK3CB_CW_US_B_LATE_M270_MLRS_CLUSTER", ["UK3CB_M26_MLRS_X12"]]
+["UK3CB_CW_US_B_LATE_M270_MLRS_HE", ["UK3CB_M31_MLRS_X12"]]
 ]] call _fnc_saveToTemplate;
 
 ["uavsAttack", ["B_UAV_02_dynamicLoadout_F"]] call _fnc_saveToTemplate;     
 ["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles - militia vehicles are mostly used in the early game, police cars are being used by troops around cities -- Example:
-["vehiclesMilitiaLightArmed", ["UK3CB_CW_US_B_LATE_M151_Jeep_HMG", "UK3CB_CW_US_B_EARLY_M151_Jeep_TOW"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaTrucks", ["UK3CB_CW_US_B_LATE_M939_Open"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["UK3CB_CW_US_B_LATE_M151_Jeep_HMG", "UK3CB_CW_US_B_LATE_M151_Jeep_HMG", "UK3CB_CW_US_B_LATE_M151_Jeep_HMG", "UK3CB_CW_US_B_EARLY_M151_Jeep_TOW"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaTrucks", ["UK3CB_CW_US_B_LATE_M939"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["UK3CB_CW_US_B_LATE_M151_Jeep_Open", "UK3CB_CW_US_B_LATE_M151_Jeep_Closed"]] call _fnc_saveToTemplate;
 
 ["vehiclesPolice", ["UK3CB_APD_B_Offroad_Unarmed_EKAM", "UK3CB_APD_B_Offroad_Comms_EKAM", "UK3CB_APD_B_Octavia_Pol", "UK3CB_APD_B_SUV_POL", "UK3CB_APD_B_MB4WD_Unarmed"]] call _fnc_saveToTemplate;
@@ -112,7 +111,9 @@ _loadoutData set ["lightATLaunchers", [
 ]];
 _loadoutData set ["ATLaunchers", [
 ["rhs_weap_smaw_green", "", "", "rhs_weap_optic_smaw", ["rhs_mag_smaw_HEAA", "rhs_mag_smaw_HEDP"], ["rhs_mag_smaw_SR"], ""],
-["rhs_weap_smaw_green", "", "", "", ["rhs_mag_smaw_HEDP", "rhs_mag_smaw_HEDP"], ["rhs_mag_smaw_SR"], ""],
+["rhs_weap_smaw_green", "", "", "", ["rhs_mag_smaw_HEDP", "rhs_mag_smaw_HEDP"], ["rhs_mag_smaw_SR"], ""]
+]];
+_loadoutData set ["missileATLaunchers", [
 ["rhs_weap_fgm148", "", "", "", ["rhs_fgm148_magazine_AT", "rhs_fgm148_magazine_AT"], [], ""],
 ["uk3cb_m47", "", "", "", ["UK3CB_M47_Missile"], [], ""],
 ["uk3cb_m47", "", "", "", ["UK3CB_M47_Missile"], [], ""]
@@ -199,10 +200,10 @@ _sfLoadoutData set ["sniHats", ["H_Booniehat_oli"]];
 _sfLoadoutData set ["NVGs", ["rhsusf_ANPVS_15"]];
 
 _sfLoadoutData set ["rifles", [
-["rhs_weap_m27iar_grip", "rhsusf_acc_nt4_black", "", "rhsusf_acc_g33_T1", ["rhs_mag_30Rnd_556x45_Mk262_Stanag_Ranger", "rhs_mag_30Rnd_556x45_Mk318_Stanag_Ranger"], [], "rhsusf_acc_grip3"]
+["rhs_weap_m27iar_grip", "rhsusf_acc_nt4_black", "", "rhsusf_acc_g33_T1", ["rhs_mag_30Rnd_556x45_Mk262_Stanag_Ranger", "rhs_mag_30Rnd_556x45_Mk318_Stanag_Ranger"], [], ""]
 ]];
 _sfLoadoutData set ["carbines", [
-["rhs_weap_mk18_KAC", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15_bk", "rhsusf_acc_su230a", ["rhs_mag_30Rnd_556x45_Mk318_Stanag_Pull", "rhs_mag_30Rnd_556x45_Mk262_Stanag_Pull"], [], "rhsusf_acc_grip3"]
+["rhs_weap_mk18_KAC", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15_bk", "rhsusf_acc_su230a", ["rhs_mag_30Rnd_556x45_Mk318_Stanag_Pull", "rhs_mag_30Rnd_556x45_Mk262_Stanag_Pull"], [], ""]
 ]];
 _sfLoadoutData set ["SMGs", [
 ["rhsusf_weap_MP7A2", "rhsusf_acc_rotex_mp7", "rhsusf_acc_wmx_bk", "rhsusf_acc_mrds", ["rhsusf_mag_40Rnd_46x30_AP"], [], "rhsusf_acc_grip2"],
@@ -280,9 +281,9 @@ _militaryLoadoutData set ["marksmanRifles", [
 ["rhs_weap_m14ebrri", "", "", "rhsusf_acc_nxs_3515x50_md", ["UK3CB_DMR_20rnd_762x51_GT", "UK3CB_DMR_20rnd_762x51_RT"], [], ""]
 ]];
 _militaryLoadoutData set ["sniperRifles", [
-["rhs_weap_m24sws", "", "", "rhsusf_acc_M8541", ["rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m62_Mag"], [], "rhsusf_acc_harris_swivel"],
-["rhs_weap_m24sws", "", "", "rhsusf_acc_premier", ["rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m62_Mag"], [], "rhsusf_acc_harris_swivel"],
-["rhs_weap_m24sws", "", "", "rhsusf_acc_LEUPOLDMK4", ["rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m62_Mag"], [], "rhsusf_acc_harris_swivel"]
+["rhs_weap_m40a5_d", "", "", "rhsusf_acc_M8541", ["rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m62_Mag"], [], "rhsusf_acc_harris_swivel"],
+["rhs_weap_m40a5_d", "", "", "rhsusf_acc_premier", ["rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m62_Mag"], [], "rhsusf_acc_harris_swivel"],
+["rhs_weap_m40a5_d", "", "", "rhsusf_acc_LEUPOLDMK4_d", ["rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m118_special_Mag", "rhsusf_5Rnd_762x51_m62_Mag"], [], "rhsusf_acc_harris_swivel"]
 ]];
 _militaryLoadoutData set ["sidearms", [
 ["UK3CB_P320_BLK", "", "", "", [], [], ""]
@@ -297,7 +298,7 @@ _policeLoadoutData set ["uniforms", ["U_B_GEN_Soldier_F", "U_B_GEN_Commander_F"]
 _policeLoadoutData set ["vests", ["V_TacVest_blk_POLICE"]];
 _policeLoadoutData set ["helmets", ["H_Cap_police"]];
 _policeLoadoutData set ["SMGs", [
-["UK3CB_M1903A1", "", "", "", ["UK3CB_M1903A1_3006_5rnd_Magazine_YT"], [], ""]
+["rhs_weap_m3a1", "", "", "", ["rhsgref_30rnd_1143x23_M1911B_SMG", "rhsgref_30rnd_1143x23_M1911B_SMG", "rhsgref_30rnd_1143x23_M1T_SMG"], [], ""]
 ]];
 _policeLoadoutData set ["sidearms", [
 ["rhsusf_weap_m9", "", "", "", [], [], ""]
@@ -312,8 +313,7 @@ _militiaLoadoutData set ["vests", ["rhsgref_alice_webbing"]];
 _militiaLoadoutData set ["backpacks", ["UK3CB_B_Kitbag_WDL_01"]];
 _militiaLoadoutData set ["helmets", ["rhssaf_helmet_m97_woodland"]];
 _militiaLoadoutData set ["rifles", [
-["UK3CB_M16A2", "", "", "", ["rhs_mag_20Rnd_556x45_M855_Stanag"], [], ""],
-["UK3CB_M1903A1", "", "", "", ["UK3CB_M1903A1_3006_5rnd_Magazine"], [], ""]
+["UK3CB_M16A2", "", "", "", ["rhs_mag_20Rnd_556x45_M855_Stanag"], [], ""]
 ]];
 _militiaLoadoutData set ["carbines", [
 ["UK3CB_M16_Carbine", "", "", "", ["UK3CB_M16_20rnd_556x45_G"], [], ""]
@@ -572,7 +572,7 @@ private _atTemplate = {
     ["rifles"] call _fnc_setPrimary;
     ["primary", 6] call _fnc_addMagazines;
 
-    ["ATLaunchers"] call _fnc_setLauncher;
+    [selectRandom ["missileATLaunchers", "ATLaunchers"]] call _fnc_setLauncher;
     //TODO - Add a check if it's disposable.
     ["launcher", 3] call _fnc_addMagazines;
     ["sidearms"] call _fnc_setHandgun;
