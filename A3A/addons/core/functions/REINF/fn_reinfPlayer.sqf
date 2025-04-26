@@ -8,6 +8,8 @@ if (_error isNotEqualTo "") exitWith {[_titleStr, _error] call A3A_fnc_customHin
 
 private _unit = [group player, _typeUnit, position player, [], 0, "NONE"] call A3A_fnc_createUnit;
 
+private _costs = server getVariable _typeUnit;
+
 if (player == theBoss) then {
 	[-1, -_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
 } else {

@@ -1,5 +1,6 @@
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
+#include "..\..\gui\dialogues\ids.inc" // include new UI ids
 params ["_key"];
 if !(isClass (missionConfigFile/"A3A")) exitWith {}; //not a3a mission
 
@@ -30,12 +31,23 @@ switch (_key) do {
         if (player getVariable ["owner",player] != player) exitWith {};
         if (player isEqualTo theBoss) then {
             if (A3A_GUIDevPreview) then {
+                /*
                 player setVariable ["accessingArtyMenu",true];
                 createDialog "A3A_MainDialog";
                 [] spawn { sleep 1; player setVariable ["accessingArtyMenu",false];};
+                */
+                [] spawn {
+                    player setVariable ["selHcGroups",hcSelected player];
+                    showCommandingMenu "";                          // clear the command menu so that we have the scroll wheel  
+                    private _timeout = time;  
+                    waitUntil { hcSelected player isEqualTo [] or time - _timeout > 1 };  
+                    createDialog "A3A_MainDialog";  
+                    sleep 1;  
+                    player setVariable ["selHcGroups",[]];  
+                };  
             } else {
                 GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
-                createDialog "radio_comm";
+                [] spawn A3A_fnc_artySupport;
                 [] spawn { sleep 1; GVAR(keys_battleMenu) = false;};
             };
         };

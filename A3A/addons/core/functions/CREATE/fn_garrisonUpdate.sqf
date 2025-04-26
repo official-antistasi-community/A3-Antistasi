@@ -1,5 +1,4 @@
 #include "..\..\script_component.hpp"
-#include "..\..\..\gui\dialogues\ids.inc" // include new UI ids for update
 FIX_LINE_NUMBERS()
 if (!isServer) exitWith {};
 private ["_typeX","_sideX","_markerX","_modeX","_garrison","_subType"];
@@ -54,7 +53,4 @@ garrison setVariable [_markerX,_garrison,true];
 if (_sideX == teamPlayer) then {[_markerX] call A3A_fnc_mrkUpdate};
 garrisonIsChanging = false;
 
-disableSerialization;
-
-private _display = findDisplay A3A_IDD_HQDIALOG; // if garrison menu open, update
-if (str (_display) != "no display") then {["updateGarrisonTab"] call A3A_GUI_fnc_hqDialog;};
+["updateGarrisonTab"] remoteExecCall ["A3A_GUI_fnc_hqDialog", theBoss];

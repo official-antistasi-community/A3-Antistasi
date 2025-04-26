@@ -135,9 +135,7 @@ switch (_mode) do
 
         // AI Management
         _aiManagementTooltipText = "";
-        _canManageAi = call A3A_fnc_canManageAI; // Returns array, need to filter into seperate vars
-        _aiManagementButton = _canManageAI#1;
-        _canManageAI = _canManageAI#0;
+        call A3A_fnc_canManageAI params ["_canManageAI","_aiManagementButton"];
 
         private _aiManagementButton = _display displayCtrl A3A_IDC_AIMANAGEMENTBUTTON;
         private _aiManagementIcon = _display displayCtrl A3A_IDC_AIMANAGEMENTICON;

@@ -103,7 +103,6 @@ switch (_mode) do
         // Check for selected groups
         private _selectedGroup = _commanderMap getVariable ["selectedGroup", grpNull];
         private _hasGroup = !(_selectedGroup isEqualTo grpNull);
-        private _isArtyMenu = player getVariable ["accessingArtyMenu",false];
         private _isMortarVic = false;
         if (_hasGroup) then {
             {
@@ -127,16 +126,18 @@ switch (_mode) do
 
         switch (true) do 
         {
-            case (_hasGroup && _isArtyMenu && _isMortarVic): { // If all is valid show fire mission view
+            case (_hasGroup && _isMortarVic): { // If all is valid show fire mission view
                 {_x ctrlShow false} forEach _baseButtons; // expected to be done through single group view
                 ["updateFireMissionView"] call FUNC(commanderTab);
             };
             case (_hasGroup): { // If a group is selected show the single group view
                  ["updateSingleGroupView"] call FUNC(commanderTab);
             };
+            /*
             case (_isArtyMenu): { // If no group is selected show the multiple groups view
                 ["updateMultipleGroupsView"] call FUNC(commanderTab);
             };
+            */
             default {
                 
             };
@@ -535,16 +536,9 @@ switch (_mode) do
                                 _smokeRoundsCount = _smokeRoundsCount + _x # 1;
                             };
                         } forEach magazinesAmmo _veh;
-                        diag_log _heRoundsCount;
-                        diag_log _smokeRoundsCount;
-                        diag_log ((_heRoundsCount > 0) || (_smokeRoundsCount > 0));
                         if ((_heRoundsCount > 0) || (_smokeRoundsCount > 0)) then {
-                            diag_log "has rounds";
-                            diag_log _veh;
                             _artyArrayDef1 pushBack _veh;
                             _artyRoundsArr1 pushBack (((magazinesAmmo _veh) select 0)select 1);
-                            diag_Log _artyArrayDef1;
-                            diag_Log _artyRoundsArr1;
                         };
 
                         _checkedVehicles pushBack _veh;
@@ -836,7 +830,7 @@ switch (_mode) do
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
         private _group = _commanderMap getVariable ["selectedGroup", grpNull];
-        [[_group]] spawn A3A_fnc_addSquadVeh;
+        [_group] spawn A3A_fnc_addSquadVeh;
     };
 
     case ("groupGarrisonButtonClicked"):

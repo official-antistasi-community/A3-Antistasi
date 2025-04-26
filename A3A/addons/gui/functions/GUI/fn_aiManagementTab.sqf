@@ -37,6 +37,7 @@ switch (_mode) do
         Trace("Updating AI Management Tab");
         // Show back button
         private _display = findDisplay A3A_IDD_MAINDIALOG;
+        if (isNull _display) exitWith {};
         private _backButton = _display displayCtrl A3A_IDC_MAINDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         _backButton ctrlAddEventHandler ["MouseButtonClick", {
@@ -113,9 +114,14 @@ switch (_mode) do
         // Disable remote control button if more than 1 AI is selected
         private _aiControlButton = _display displayCtrl A3A_IDC_AICONTROLBUTTON;
         private _aiControlIcon = _display displayCtrl A3A_IDC_AICONTROLICON;
+        private _aiDismissButton = _display displayCtrl A3A_IDC_AIDISMISSBUTTON;
+        private _aiDismissIcon = _display displayCtrl A3A_IDC_AIDISMISSICON;
+        private _convertToSquadButton = _display displayCtrl A3A_IDC_AICONVERTTOSQUADBUTTON;
+        private _convertToSquadIcon = _display displayCtrl A3A_IDC_AICONVERTTOSQUADICON;
         _lbSelection = lbSelection _aiListBox;
         Trace_1("AI LB selection changed: %1", _lbSelection);
-        private _hasPetros = ((_lbSelection findIf {objectFromNetId (_aiListBox lbData _x) == petros}) > -1);
+        private _unitList = _lbSelection apply {objectFromNetId (_aiListBox lbData _x)};
+        private _hasPetros = (petros in _unitList);
         if (count _lbSelection == 1 && !(_hasPetros)) then
         {
             _aiControlButton ctrlEnable true;
@@ -123,7 +129,16 @@ switch (_mode) do
             _aiControlIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
         } else {
             _aiControlButton ctrlEnable false;
-            _aiControlButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip";
+            if (_hasPetros) then {
+                private _noPetrosText = localize "STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip_petros";
+                _aiControlButton ctrlSetTooltip _noPetrosText;
+                _aiDismissButton ctrlSetTooltip _noPetrosText;
+                _convertToSquadButton ctrlSetTooltip _noPetrosText;
+                _aiDismissIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray))
+                _convertToSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray))
+            } else {
+                _aiControlButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip";
+            };
             _aiControlIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
 

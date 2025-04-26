@@ -16,13 +16,3 @@ private _units = {_x in _unitType} count _garrison;
 if (_units == 0) exitWith {};
 [_unitType,teamPlayer,_markerX,-1] remoteExec ["A3A_fnc_garrisonUpdate",2];
 [1,_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
-waitUntil {(_countX < count (garrison getVariable [_markerX, []])) or (sidesX getVariable [_markerX,sideUnknown] != teamPlayer)};
-
-if (sidesX getVariable [_markerX,sideUnknown] == teamPlayer) then {
-	private _garrisonInfo = format [localize "STR_A3A_garrison_dismiss_success", [_markerX] call A3A_fnc_garrisonInfo];
-	[_titleStr, _garrisonInfo] call A3A_fnc_customHint;
-
-	if (spawner getVariable _markerX != 2) then {
-		[_markerX,_unitType] remoteExec ["A3A_fnc_createSDKGarrisonsTemp",2];
-	};
-};

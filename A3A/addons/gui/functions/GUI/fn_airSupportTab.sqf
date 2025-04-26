@@ -45,7 +45,7 @@ switch (_mode) do
         _backButton ctrlShow true;
 
         // Display remaining air support points
-        private _airSupportPoints = round bombRuns; // remind me why this isnt an integer
+        private _airSupportPoints = round bombRuns;
         private _airSupportPointsText = _display displayCtrl A3A_IDC_AIRSUPPORTPOINTSTEXT;
         _airSupportPointsText ctrlSetText str _airSupportPoints;
 

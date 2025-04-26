@@ -11,5 +11,6 @@ private _weaponHM = createHashMapFromArray [
 	[A3A_faction_reb get "unitAT", "MissileLaunchersAT"]
 ];
 
-private _hasWeapons = !(A3A_rebelGear getOrDefault [_weaponHM getOrDefault [_typeUnit, ""], false] isEqualTo []);
+private _weapons = A3A_rebelGear getOrDefault [_weaponHM getOrDefault [_typeUnit, ""], "NO LIMIT"];
+private _hasWeapons = !(_weapons isEqualTo []);
 _hasWeapons;

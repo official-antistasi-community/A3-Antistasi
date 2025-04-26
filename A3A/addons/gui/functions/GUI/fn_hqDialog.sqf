@@ -341,6 +341,7 @@ switch (_mode) do
     case ("updateGarrisonTab"):
     {
         _display = findDisplay A3A_IDD_HQDIALOG;
+        if (isNull _display) exitWith {};
 
         // Update titlebar
         _titleBar = _display displayCtrl A3A_IDC_HQDIALOGTITLEBAR;
@@ -542,14 +543,7 @@ switch (_mode) do
             _mortarSubButton ctrlEnable false; // pretend like no mortars exist because the roadblock still has unitCrew for the vic
         };
 
-        call A3A_fnc_fetchRebelGear;
-        private _noGearText = localize "STR_A3A_garrison_error_no_weapons";
-        if !([A3A_faction_reb get "unitMG",false] call A3A_fnc_hasWeapons) then {_autoriflemanAddButton ctrlEnable false; _autoriflemanAddButton ctrlSetTooltip _noGearText};
-        if !([A3A_faction_reb get "unitGL",false] call A3A_fnc_hasWeapons) then {_grenadierAddButton ctrlEnable false; _grenadierAddButton ctrlSetTooltip _noGearText};
-        if !([A3A_faction_reb get "unitSniper",false] call A3A_fnc_hasWeapons) then {_marksmanAddButton ctrlEnable false; _marksmanAddButton ctrlSetTooltip _noGearText};
-        if !([A3A_faction_reb get "unitLAT",false] call A3A_fnc_hasWeapons) then {_atAddButton ctrlEnable false; _atAddButton ctrlSetTooltip _noGearText};
-        if !([A3A_faction_reb get "unitAT",false] call A3A_fnc_hasWeapons) then {_atMissileAddButton ctrlEnable false; _atMissileAddButton ctrlSetTooltip _noGearText};
-        if !([A3A_faction_reb get "unitAA",false] call A3A_fnc_hasWeapons) then {_aaMissileAddButton ctrlEnable false; _aaMissileAddButton ctrlSetTooltip _noGearText};
+        ["updateGarrisonWepNum"] spawn A3A_GUI_fnc_hqDialog;
 
         // Disable any management buttons if garrison is under attack
         private _garrisonUnderAttack = [markerPos _selectedMarker] call FUNCMAIN(enemyNearCheck);
@@ -569,6 +563,27 @@ switch (_mode) do
         // Pan to location
         _garrisonMap ctrlMapAnimAdd [0.2, ctrlMapScale _garrisonMap, _position];
         ctrlMapAnimCommit _garrisonMap;
+    };
+    
+    case ("updateGarrisonWepNum"):
+    { // Scheduled
+        
+        _autoriflemanAddButton = _display displayCtrl A3A_IDC_AUTORIFLEMANADDBUTTON;
+        _grenadierAddButton = _display displayCtrl A3A_IDC_GRENADIERADDBUTTON;
+        _marksmanAddButton = _display displayCtrl A3A_IDC_MARKSMANADDBUTTON;
+        _atAddButton = _display displayCtrl A3A_IDC_ATADDBUTTON;
+        _atMissileAddButton = _display displayCtrl A3A_IDC_ATMISSILEADDBUTTON;
+        _aaMissileAddButton = _display displayCtrl A3A_IDC_AAMISSILEADDBUTTON;
+
+        call A3A_fnc_fetchRebelGear;
+        private _noGearText = localize "STR_A3A_garrison_error_no_weapons";
+        
+        if !([A3A_faction_reb get "unitMG",false] call A3A_fnc_hasWeapons) then {_autoriflemanAddButton ctrlEnable false; _autoriflemanAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitGL",false] call A3A_fnc_hasWeapons) then {_grenadierAddButton ctrlEnable false; _grenadierAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitSniper",false] call A3A_fnc_hasWeapons) then {_marksmanAddButton ctrlEnable false; _marksmanAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitLAT",false] call A3A_fnc_hasWeapons) then {_atAddButton ctrlEnable false; _atAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitAT",false] call A3A_fnc_hasWeapons) then {_atMissileAddButton ctrlEnable false; _atMissileAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitAA",false] call A3A_fnc_hasWeapons) then {_aaMissileAddButton ctrlEnable false; _aaMissileAddButton ctrlSetTooltip _noGearText};
     };
 
     case ("updateMinefieldsTab"):

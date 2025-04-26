@@ -24,7 +24,7 @@ if ((_x getVariable "unitType") != FactionGet(reb,"unitUnarmed")) then
 	};
 } forEach _units;
 
-if (isNull findDisplay 7420) then {["update"] call A3A_GUI_fnc_aiManagementTab;}; // ai management tab displayed
+["update"] call A3A_GUI_fnc_aiManagementTab;
 
 if (recruitCooldown < time) then {recruitCooldown = time + 60} else {recruitCooldown = recruitCooldown + 60};
 

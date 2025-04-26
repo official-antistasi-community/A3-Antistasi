@@ -1905,6 +1905,9 @@
         <Turkish>Geçici YZ Kontrolü</Turkish>
         <Chinesesimp>暂时控制AI</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip_petros">
+        <Original>You cannot remote control Petros</Original>
+      </Key>
     </Container>
     <Container name="dialog_main_air_support">
       <Key ID="STR_antistasi_dialogs_main_air_support_aircraft_used">

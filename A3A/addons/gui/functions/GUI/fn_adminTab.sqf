@@ -101,7 +101,7 @@ switch (_mode) do
             _allUnits = count allUnits;
             _deadUnits = count allDead;
             _countGroups = count allGroups;
-            _countRebels = {side _x == teamPlayer} count allUnits;
+            _countRebels = {side group _x == teamPlayer} count allUnits; // count undercover players
             _countInvaders = {side _x == Invaders} count allUnits;
             _countOccupants = {side _x == Occupants} count allUnits;
             _countCiv = {side _x == civilian} count allUnits;

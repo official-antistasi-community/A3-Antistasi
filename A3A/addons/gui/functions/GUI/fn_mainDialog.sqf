@@ -44,7 +44,6 @@ switch (_mode) do
     {
         Debug("MainDialog onLoad starting...");
 
-        private _isArty = (player getVariable ["accessingArtyMenu",false]);
         // Disable/hide unavailable tab buttons
         if (player isNotEqualTo theBoss) then {
             private _commanderTabButton = _display displayCtrl A3A_IDC_COMMANDERTABBUTTON;
@@ -66,8 +65,14 @@ switch (_mode) do
         // Cache group info in map control
         Debug("Caching group info");
 
+        private _isArty = (player getVariable ["selHcGroups",[]] isNotEqualTo []);
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
-        private _hcGroupData = [];
+        private _selHCGroups = if !(_isArty) then {
+            hcSelected player;
+        } else {
+            player getVariable ["selHcGroups",[]];
+        };
+        _hcGroupData = [];
         if (player == theBoss) then
         {
             {
@@ -80,9 +85,10 @@ switch (_mode) do
 
         // Init selected group
         private _selectedGroup = grpNull;
-        if (count (hcSelected player) == 1) then
+
+        if (count _selHCGroups == 1) then
         {
-            _selectedGroup = (hcSelected player) # 0;
+            _selectedGroup = _selHCgroups # 0;
         };
         _commanderMap setVariable ["selectedGroup", _selectedGroup];
 

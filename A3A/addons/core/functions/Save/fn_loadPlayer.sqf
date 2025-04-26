@@ -33,8 +33,8 @@ private _garage = _playerHM get "personalGarage";
 if (isNil "_garage" || {!(_garage isEqualType [])}) then {_garage = []};
 [_garage, _playerId] call HR_GRG_fnc_addVehiclesByClass;
 
-private _saveMissions = _playerHM get "missionsCompleted";
-if (!isNil "_saveMissions" && { _saveMissions isEqualType 0 }) then {_missions = _saveMissions};
+private _missions = _playerHM get "missionsCompleted";
+if (isNil "_missions" || { !(_missions isEqualType 0) }) then {_missions = 0};
 
 _unit setVariable ["score", _score, true];
 _unit setUnitRank _rank;
