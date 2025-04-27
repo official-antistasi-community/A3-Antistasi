@@ -94,6 +94,7 @@ class A3A {
             class UK3CB_LDF_B_MIG29SM : rhs_mig29sm_vvs {};
             class UK3CB_KDF_B_MIG29SM : rhs_mig29sm_vvs {};
             class UK3CB_AAF_O_MIG29S : rhs_mig29sm_vvs {};
+            class UK3CB_GAF_B_MIG29S : rhs_mig29sm_vvs {};
             class UK3CB_CSAT_A_O_MIG29SM : rhs_mig29sm_vvs{};
             class UK3CB_CSAT_B_O_MIG29SM : rhs_mig29sm_vvs{};
             class UK3CB_CSAT_F_O_MIG29SM : rhs_mig29sm_vvs{};
@@ -123,7 +124,6 @@ class A3A {
             };
             class UK3CB_TKA_B_MIG21_AA : UK3CB_LDF_B_MIG21_AA {};
             class UK3CB_GAF_B_MIG21_AA : UK3CB_LDF_B_MIG21_AA {};
-            class UK3CB_GAF_B_MIG29S : rhs_mig29sm_vvs {};
             
             class UK3CB_B_Mystere_HIDF_AA1 : baseCAP {
                 loadout[] = {"PylonRack_1Rnd_Missile_AA_04_F","PylonRack_1Rnd_AAA_missiles","PylonRack_1Rnd_AAA_missiles","PylonRack_1Rnd_Missile_AA_04_F"};

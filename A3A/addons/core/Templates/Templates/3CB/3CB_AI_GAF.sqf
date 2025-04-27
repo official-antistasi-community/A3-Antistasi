@@ -30,7 +30,7 @@
 ["vehiclesMedical", ["UK3CB_GAF_B_Gaz66_Med", "UK3CB_GAF_B_MTLB_AMB"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["UK3CB_GAF_B_MTLB_PKT", "UK3CB_GAF_B_MTLB_KPVT", "UK3CB_GAF_B_MTLB_Cannon", "UK3CB_GAF_B_MTLB_Cannon", "UK3CB_GAF_B_BTR60", "UK3CB_GAF_B_BTR70", "UK3CB_GAF_B_BTR80", "UK3CB_GAF_B_BTR80a", "UK3CB_GAF_B_BTR60"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["UK3CB_GAF_B_BMD1", "UK3CB_GAF_B_MTLB_BMP", "UK3CB_GAF_B_BRM1K", "UK3CB_GAF_B_BMP2"]] call _fnc_saveToTemplate;
-["vehiclesIFVs", [""]] call _fnc_saveToTemplate;
+["vehiclesIFVs", []] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["UK3CB_GAF_B_T80UK", "UK3CB_GAF_B_T80", "UK3CB_GAF_B_T80A"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["UK3CB_GAF_B_ZsuTank", "UK3CB_GAF_B_MTLB_ZU23"]] call _fnc_saveToTemplate;
 
@@ -217,7 +217,7 @@ _sfLoadoutData set ["grenadeLaunchers", [
 ["rhs_weap_m4_carryhandle_m203", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15A", "rhsusf_acc_compm4", ["rhs_mag_30Rnd_556x45_Mk318_PMAG"], ["rhs_mag_M441_HE", "rhs_mag_m576", "rhs_mag_m4009", "rhs_mag_M664_red_cluster"], "rhsusf_acc_grip_m203_blk"]
 ]];
 _sfLoadoutData set ["SMGs", [
-["rhs_weap_aks74un", "", "", "rhs_acc_ekp8_02", ["rhs_30Rnd_545x39_7N10_2mag_plum_AK"], [], ""]
+["rhs_weap_aks74un", "rhs_acc_tgpa", "", "rhs_acc_ekp8_02", ["rhs_30Rnd_545x39_7N10_2mag_plum_AK"], [], ""]
 ]];
 _sfLoadoutData set ["machineGuns", [
 ["rhs_weap_m249_pip_L", "rhsusf_acc_rotex5_grey", "", "rhsusf_acc_ELCAN_ard", ["rhsusf_200Rnd_556x45_mixed_soft_pouch", "rhsusf_200Rnd_556x45_M855_mixed_soft_pouch"], [], ""],
@@ -323,9 +323,6 @@ _militiaLoadoutData set ["SMGs", ["UK3CB_Uzi_Stock"]];
 _militiaLoadoutData set ["machineGuns", [
 ["UK3CB_RPK", "", "", "", ["UK3CB_RPK_40rnd_762x39_G"], [], ""],
 ["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39"], [], ""]
-]];
-_militiaLoadoutData set ["marksmanRifles", [
-["UK3CB_CZ550", "", "", "uk3cb_optic_sro", ["UK3CB_CZ550_5rnd_Mag"], [], ""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
 ["UK3CB_SVD_OLD", "", "", "rhs_acc_1pn93_1", ["UK3CB_SVD_10rnd_762x54"], [], ""]
