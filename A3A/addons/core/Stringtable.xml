@@ -9476,6 +9476,15 @@
         <Russian>Количество предметов по умолчанию, необходимое для того, чтобы гости могли их использовать</Russian>
         <Chinesesimp>允许游客玩家使用限制物品的默认限额</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Params_GUIDevPreview_title">
+        <Original>Use In-Development UI Preview</Original>
+        <Italian>Usa UI Sperimentale</Italian>
+        <Spanish>Usar vista previa de la interfaz en desarrollo</Spanish>
+        <French>Utiliser la Previsualisation de l'UI en Développement</French>
+        <Korean>개발 중인 UI 미리보기 사용</Korean>
+        <Russian>Использовать предварительный просмотр пользовательского интерфейса в разработке</Russian>
+        <Czech>Použít náhled uživatelského rozhraní ve vývoji.</Czech>
+        <Chinesesimp>使用实验性UI预览</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_Params_helmetLossChance_title">
         <Original>Chance of helmet loss on headshots</Original>

@@ -129,7 +129,7 @@ switch (_mode) do
         private _constructIcon = _display displayCtrl A3A_IDC_CONSTRUCTICON;
         _constructButton ctrlEnable true;
         _constructIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
-
+        _constructButton ctrlSetTooltip "Access the old menu if a feature doesn't work";
 
         // AI Management
         _aiManagementTooltipText = "";

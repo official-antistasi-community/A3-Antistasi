@@ -52,12 +52,12 @@ Like ft players into building garrison positions.
 private _distanceReference = distanceMission;
 
 private _costPerKmForInfantry = 0.0;
-private _costPerKmForVehicle = 100.0 / _distanceReference;
-private _costPerKmForCargo = 200.0 / _distanceReference;  // For HR logistics cargo, ACE cargo and towing, DOES NOT include the vehicle or person hauling the cargo.
+private _costPerKmForVehicle = 0.0 / _distanceReference;
+private _costPerKmForCargo = 0.0 / _distanceReference;  // For HR logistics cargo, ACE cargo and towing, DOES NOT include the vehicle or person hauling the cargo.
 
 private _secondsPerKmForInfantry = 10.0 / _distanceReference;
 private _secondsPerKmForVehicle = 20.0 / _distanceReference;
-private _secondsPerKmForCargo = 50.0 / _distanceReference;
+private _secondsPerKmForCargo = 20.0 / _distanceReference;
 
 // Get all cargo that is being fast travelled.
 private _allObjectCargo = [];

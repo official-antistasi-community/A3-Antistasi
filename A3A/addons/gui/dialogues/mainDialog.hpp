@@ -142,11 +142,11 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class ConstructButton : A3A_Button
                 {
                     idc = A3A_IDC_CONSTRUCTBUTTON;
-                    text = $STR_antistasi_dialogs_main_construct;
-                    // text = "Old Battle Menu";
+                    //text = $STR_antistasi_dialogs_main_construct;
+                    text = "Old Battle Menu";
                     // onButtonClick = "[""switchTab"", [""construct""]] call A3A_GUI_fnc_mainDialog;";
-                    // onButtonClick = "closeDialog 0; createDialog 'radio_comm';";
-                    onButtonClick = "[""Construct"", ""The Construct feature has been depreciated. Buy build boxes from the garage to construct objects.""] call A3A_fnc_customHint;"
+                    onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog 'radio_comm';};";
+                    //onButtonClick = "[""Construct"", ""The Construct feature has been depreciated. Buy build boxes from the garage to construct objects.""] call A3A_fnc_customHint;"
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 20 * GRID_W;
                     y = 53 * GRID_H;
@@ -1217,7 +1217,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_RECRUITSQUADCMDBUTTON;
                     text = $STR_antistasi_dialogs_main_recruit_squad_button;
-                    onButtonClick = "closeDialog 0; createDialog ""A3A_RecruitSquadDialog"";";
+                    onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_RecruitSquadDialog""};";
                     x = 10 * GRID_W;
                     y = 52 * GRID_H;
                     w = 24 * GRID_W;
@@ -1228,7 +1228,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_MISSIONREQUESTBUTTON;
                     text = "Request Mission";
-                    onButtonClick = "closeDialog 0; createDialog 'A3A_RequestMissionDialog';";
+                    onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_RequestMissionDialog""};";
                     x = 36 * GRID_W;
                     y = 52 * GRID_H;
                     w = 24 * GRID_W;
@@ -1239,7 +1239,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_CUSTOMIZELOADOUTSBUTTON;
                     text = $STR_antistasi_dialogs_main_customize_loadouts_button;
-                    onButtonClick = "closeDialog 0; createDialog ""A3A_customLoadoutsDialog"";";
+                    onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_customLoadoutsDialog""};";
                     x = 10 * GRID_W;
                     y = 66 * GRID_H;
                     w = 24 * GRID_W;
@@ -1250,7 +1250,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_ARSENALLIMITSBUTTON;
                     text = $STR_antistasi_dialogs_main_arsenal_limits_button;
-                    onButtonClick = "closeDialog 0; createDialog ""A3A_ArsenalLimitsDialog"";";
+                    onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog ""A3A_ArsenalLimitsDialog""};";
                     x = 36 * GRID_W;
                     y = 66 * GRID_H;
                     w = 24 * GRID_W;
