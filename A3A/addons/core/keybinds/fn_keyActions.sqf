@@ -1,6 +1,7 @@
+#include "..\..\gui\dialogues\ids.inc" // include new UI ids
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
-#include "..\..\gui\dialogues\ids.inc" // include new UI ids
+
 params ["_key"];
 if !(isClass (missionConfigFile/"A3A")) exitWith {}; //not a3a mission
 
@@ -15,42 +16,39 @@ switch (_key) do {
     case QGVAR(battleMenu): {
         if (player getVariable ["incapacitated",false]) exitWith {};
         if (player getVariable ["owner",player] != player) exitWith {};
-        GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
+
+        if (A3A_GUIDevPreview) then {
+            [] spawn {
+                if (player == theBoss) then {
+                    player setVariable ["selHcGroups",hcSelected player];
+                    waitUntil { showCommandingMenu ""; hcSelected player isEqualTo [] };
+                };
+                createDialog "A3A_MainDialog";  
+                if (player == theBoss) then {
+                    sleep 1;  
+                    player setVariable ["selHcGroups",[]]; 
+                };
+            };  
+        } else {
+            GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
     #ifdef UseDoomGUI
-        ERROR("Disabled due to UseDoomGUI Switch.")
+            ERROR("Disabled due to UseDoomGUI Switch.")
     #else
-        closeDialog 0;
-        private _dialog = ["radio_comm","A3A_MainDialog"] select A3A_GUIDevPreview;
-        createDialog _dialog;
+            closeDialog 0;
+            createDialog "radio_comm";
     #endif
-        [] spawn { sleep 1; GVAR(keys_battleMenu) = false; };
+            [] spawn { sleep 1; GVAR(keys_battleMenu) = false; };   
+        };
     };
 
     case QGVAR(artyMenu): {
+        if (A3A_GUIDevPreview) exitWith {};
         if (player getVariable ["incapacitated",false]) exitWith {};
         if (player getVariable ["owner",player] != player) exitWith {};
-        if (player isEqualTo theBoss) then {
-            if (A3A_GUIDevPreview) then {
-                /*
-                player setVariable ["accessingArtyMenu",true];
-                createDialog "A3A_MainDialog";
-                [] spawn { sleep 1; player setVariable ["accessingArtyMenu",false];};
-                */
-                [] spawn {
-                    player setVariable ["selHcGroups",hcSelected player];
-                    showCommandingMenu "";                          // clear the command menu so that we have the scroll wheel  
-                    private _timeout = time;  
-                    waitUntil { hcSelected player isEqualTo [] or time - _timeout > 1 };  
-                    createDialog "A3A_MainDialog";  
-                    sleep 1;  
-                    player setVariable ["selHcGroups",[]];  
-                };  
-            } else {
-                GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
-                [] spawn A3A_fnc_artySupport;
-                [] spawn { sleep 1; GVAR(keys_battleMenu) = false;};
-            };
-        };
+        if (player isNotEqualTo theBoss) exitWith {};
+        GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
+        [] spawn A3A_fnc_artySupport;
+        [] spawn { sleep 1; GVAR(keys_battleMenu) = false;};
     };
 
     case QGVAR(infoBar): {

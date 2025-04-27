@@ -1016,7 +1016,7 @@ switch (_mode) do
         Trace("Dismissing garrison");
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _selectedMarker = _commanderMap getVariable ["selectedMarker", ""];
-        [_selectedMarker, true] spawn A3A_fnc_garrisonDialog;
+        ["", _selectedMarker] spawn A3A_fnc_garrisonDialog;
     };
 
     case ("showGarbageCleanOptions"):

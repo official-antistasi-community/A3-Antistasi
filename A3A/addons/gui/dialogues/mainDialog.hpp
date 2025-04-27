@@ -142,10 +142,11 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class ConstructButton : A3A_Button
                 {
                     idc = A3A_IDC_CONSTRUCTBUTTON;
-                    // text = $STR_antistasi_dialogs_main_construct;
-                    text = "Old Battle Menu";
+                    text = $STR_antistasi_dialogs_main_construct;
+                    // text = "Old Battle Menu";
                     // onButtonClick = "[""switchTab"", [""construct""]] call A3A_GUI_fnc_mainDialog;";
-                    onButtonClick = "closeDialog 0; createDialog 'radio_comm';";
+                    // onButtonClick = "closeDialog 0; createDialog 'radio_comm';";
+                    onButtonClick = "[""Construct"", ""The Construct feature has been depreciated. Buy build boxes from the garage to construct objects.""] call A3A_fnc_customHint;"
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 20 * GRID_W;
                     y = 53 * GRID_H;

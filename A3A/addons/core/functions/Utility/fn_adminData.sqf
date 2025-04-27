@@ -31,6 +31,7 @@ if(!A3A_DoSendAdminData) exitWith {};
     {
         if (A3A_DoSendAdminData) then 
         {
+            /*
             private _countGroups = 0;
             private _countRebels = 0;
             private _countInvaders = 0;
@@ -58,9 +59,11 @@ if(!A3A_DoSendAdminData) exitWith {};
                         };
                 };
             } forEach allGroups;
+            */
 
             A3A_AdminData = [
                 diag_fps                        // #0 server fps
+                /*
                 ,(count alldead)                // #1 deadunits
                 ,count allunits                 // #2 allunits
                 ,count vehicles                 // #3 AllVehicles
@@ -73,6 +76,7 @@ if(!A3A_DoSendAdminData) exitWith {};
                 ,{!alive _x} count vehicles     //#10 WreckedVehicles
                 ,count entities ""              //#11 Entities
                 , count hcArray                 //#12 headless client count
+                */
             ];
 
             private _admin = [] call A3A_fnc_getAdmin;

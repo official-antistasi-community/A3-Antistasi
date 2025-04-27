@@ -765,7 +765,7 @@ switch (_mode) do
         Trace("Dismissing garrison");
 
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
-        [_selectedMarker, true] spawn FUNCMAIN(garrisonDialog);
+        ["", _selectedMarker] spawn A3A_fnc_garrisonDialog;
     };
 
     case ("skipTime"):

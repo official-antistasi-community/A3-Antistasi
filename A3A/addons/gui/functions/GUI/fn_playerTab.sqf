@@ -128,9 +128,7 @@ switch (_mode) do
         private _constructButton = _display displayCtrl A3A_IDC_CONSTRUCTBUTTON;
         private _constructIcon = _display displayCtrl A3A_IDC_CONSTRUCTICON;
         _constructButton ctrlEnable true;
-        _constructButton ctrlSetTooltip "Temporary button for testing";
         _constructIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
-        _constructIcon ctrlSetTooltip "Temporary button for testing";
 
 
         // AI Management

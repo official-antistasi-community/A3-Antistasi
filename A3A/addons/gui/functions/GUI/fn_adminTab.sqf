@@ -79,11 +79,13 @@ switch (_mode) do
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _debugText = _display displayCtrl A3A_IDC_DEBUGINFO;
         private _missionTime = format [[round serverTime,1,1,false,2,false,true] call A3A_fnc_timeSpan_format];
-        private ["_serverFPS","_deadUnits","_allUnits","_countRebels","_countInvaders","_countOccupants","_countCiv","_countGroups","_players","_destroyedVehicles","_connectedHCs"];
+        //private ["_serverFPS","_deadUnits","_allUnits","_countRebels","_countInvaders","_countOccupants","_countCiv","_countGroups","_players","_destroyedVehicles","_connectedHCs"];
+        private ["_serverFPS"];
 
         if(!isNil "A3A_AdminData") then 
         {
             _serverFps = A3A_AdminData#0;
+            /*
             _deadUnits = A3A_AdminData#1;
             _allUnits = A3A_AdminData#2;
             _countRebels = A3A_AdminData#4;
@@ -94,19 +96,20 @@ switch (_mode) do
             _players = A3A_AdminData#9;
             _destroyedVehicles = A3A_AdminData#10;
             _connectedHCs = A3A_AdminData#12;
+            */
         } else {
             _serverFps = (round (diag_fps * 10)) / 10;
-            _connectedHCs = count entities "HeadlessClient_F";
-            _players = count allPlayers - _connectedHCs;
-            _allUnits = count allUnits;
-            _deadUnits = count allDead;
-            _countGroups = count allGroups;
-            _countRebels = {side group _x == teamPlayer} count allUnits; // count undercover players
-            _countInvaders = {side _x == Invaders} count allUnits;
-            _countOccupants = {side _x == Occupants} count allUnits;
-            _countCiv = {side _x == civilian} count allUnits;
-            _destroyedVehicles = {!alive _x} count vehicles;
         };
+        _connectedHCs = count entities "HeadlessClient_F";
+        _players = count allPlayers - _connectedHCs;
+        _allUnits = count allUnits;
+        _deadUnits = count allDead;
+        _countGroups = count allGroups;
+        _countRebels = {side group _x == teamPlayer} count allUnits; // count undercover players
+        _countInvaders = {side _x == Invaders} count allUnits;
+        _countOccupants = {side _x == Occupants} count allUnits;
+        _countCiv = {side _x == civilian} count allUnits;
+        _destroyedVehicles = {!alive _x} count vehicles;
 
         // TODO UI-update: localize later, not final yet
         private _rawStrings = [

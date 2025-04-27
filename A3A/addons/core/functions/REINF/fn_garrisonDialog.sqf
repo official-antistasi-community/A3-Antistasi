@@ -35,7 +35,7 @@ if (_noMarker && {getMarkerPos _nearX distance _positionTel > 40}) exitWith { //
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -44,7 +44,7 @@ if (not(sidesX getVariable [_nearX,sideUnknown] == teamPlayer)) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 if ([_positionX] call A3A_fnc_enemyNearCheck) exitWith {
@@ -52,7 +52,7 @@ if ([_positionX] call A3A_fnc_enemyNearCheck) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -61,7 +61,7 @@ if (_nearX in forcedSpawn) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -75,7 +75,7 @@ if (_wPost && (_typeX isNotEqualTo "rem")) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -86,7 +86,7 @@ if (_typeX == "rem") then
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 	};
 	_costs = 0;
@@ -117,7 +117,7 @@ if (_typeX == "rem") then
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	if !(_dontOpenMenu) then {_nul=CreateDialog "build_menu"};
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 	}
 else
@@ -129,7 +129,7 @@ else
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	if !(_dontOpenMenu) then {_nul=CreateDialog "garrison_recruit"};
+	if (_noMarker) then {_nul=CreateDialog "garrison_recruit"};
 #endif
 	sleep 1;
 	disableSerialization;

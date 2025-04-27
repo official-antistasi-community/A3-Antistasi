@@ -34,7 +34,7 @@ switch _typeX do
         petros addAction [localize "STR_A3A_fn_base_flagaction_hq_build", A3A_fnc_buildHQ,nil,0,false,true,"","(_this == theBoss) and (petros != leader group petros)",4];
 
         petros addAction [localize "STR_A3A_fn_base_flagaction_hq_manage", { if (A3A_GUIDevPreview) then {createDialog "A3A_HqDialog"} else {call A3A_fnc_dialogHQ}; },nil,0,false,true,"","(_this == theBoss) and (petros == leader group petros)",4];
-        petros addAction [localize "STR_A3A_fn_base_flagaction_missionrequest", { if (A3A_GUIDevPreview) then {createDialog "A3A_RequestMissionDialog"} else {createDialog "mission_menu";}; },nil,0,false,true,"","([_this] call A3A_fnc_isMember or _this == theBoss)",4];
+        petros addAction [localize "STR_A3A_fn_base_flagaction_missionrequest", { if (A3A_GUIDevPreview) then {createDialog "A3A_RequestMissionDialog"} else {createDialog "mission_menu";}; },nil,0,false,true,"","(([_this] call A3A_fnc_isMember or _this == theBoss) and (petros == leader group petros))",4];
     };
     case "truckX":
     {
