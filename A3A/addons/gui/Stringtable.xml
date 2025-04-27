@@ -966,10 +966,13 @@
         <Turkish>Savaş seviyesi:</Turkish>
         <Chinesesimp>战争等级：</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_train_tooltip">
+        <Original>This will cost € %1</Original>
+      </Key>
     </Container>
     <Container name="dialog_hq_garrisons">
       <Key ID="STR_antistasi_dialogs_hq_garrisons_at">
-        <Original>AT</Original>
+        <Original>Light AT</Original>
         <German>AT</German>
         <Italian>AT</Italian>
         <Spanish>AT</Spanish>
@@ -1206,6 +1209,15 @@
         <Turkish>Uyandığınızda saat %2 olacak.</Turkish>
         <Chinesesimp>你醒来的时候应该是 %2。</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_garrisons_atMissile">
+        <Original>AT Missile</Original>
+      </Key>
+      <Key ID="STR_antistasi_hq_garrisons_aaMissile">
+        <Original>AA Missile</Original>
+      </Key>
+      <Key ID="STR_A3A_garrison_error_no_weapons">
+        <Original>Not enough weapons for this unit type</Original>
+      </Key>
     </Container>
     <Container name="dialog_hq_minefields">
       <Key ID="STR_antistasi_dialogs_hq_minefields_apers_mines_button">
@@ -1365,6 +1377,21 @@
         <Portuguese>OPÇÕES DE BATALHA</Portuguese>
         <Turkish>SAVAŞ SEÇENEKLERİ</Turkish>
         <Chinesesimp>战斗选项</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_remove_garrison_button">
+        <Original>Remove Garrison</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_create_watchpost_button">
+        <Original>Create WP/RB</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_squads_button">
+        <Original>High Command Squads</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_convertToSquad_button">
+        <Original>Convert To HC Squad</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_commanderOnly">
+        <Original>Only Player Commander has access to this function.</Original>
       </Key>
     </Container>
     <Container name="dialog_main_admin">
@@ -1878,6 +1905,9 @@
         <Turkish>Geçici YZ Kontrolü</Turkish>
         <Chinesesimp>暂时控制AI</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip_petros">
+        <Original>You cannot remote control Petros</Original>
+      </Key>
     </Container>
     <Container name="dialog_main_air_support">
       <Key ID="STR_antistasi_dialogs_main_air_support_aircraft_used">
@@ -1949,6 +1979,9 @@
         <Portuguese>Bomba Napalm</Portuguese>
         <Turkish>Napalm Bombası</Turkish>
         <Chinesesimp>凝固汽油弹</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_support_no_base_tooltip">
+        <Original>You have no airbases under your control</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_no_points_tooltip">
         <Original>You have no air support points</Original>
@@ -2620,6 +2653,21 @@
         <Turkish>Grup liderini uzaktan kumanda et</Turkish>
         <Chinesesimp>远程控制组长</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_arsenal_limits_button">
+        <Original>Arsenal Limits</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_customize_loadouts_button">
+        <Original>Customize Loadouts</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_button">
+        <Original>Garrisons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_recruit_squad_button">
+        <Original>Recruit Squad</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_commander_no_marker">
+        <Original>Select a rebel marker to remove garrison</Original>
+      </Key>
     </Container>
     <Container name="dialog_main_donate">
       <Key ID="STR_antistasi_dialogs_main_current_money">
@@ -2763,6 +2811,12 @@
         <Portuguese>Vais viajar para</Portuguese>
         <Turkish>Şuraya gideceksin:</Turkish>
         <Chinesesimp>你将会快速旅行至</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_fast_travel_cost">
+        <Original>This action will cost</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_fast_travel_noMoney">
+        <Original>You cannot afford this.</Original>
       </Key>
     </Container>
     <Container name="dialog_main_player">
@@ -2959,7 +3013,7 @@
         <Chinesesimp>快速旅行</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_fast_travel_tooltip">
-        <Original>This is a placeholder</Original>
+        <Original>Fast travel to a friendly location</Original>
         <German>Dies ist ein Platzhalter</German>
         <Italian>Questo è un segnaposto</Italian>
         <Spanish>Esto es un marcador de posición</Spanish>
@@ -3116,6 +3170,15 @@
         <Turkish>Araçlar</Turkish>
         <Chinesesimp>载具</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_player_timeAlive">
+        <Original>Time alive:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_player_missions">
+        <Original>Missions:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_player_kills">
+        <Original>Kills:</Original>
+      </Key>
     </Container>
     <Container name="dialog_mission_request">
       <Key ID="STR_antistasi_dialogs_mission_request_assassination">
@@ -3229,6 +3292,12 @@
         <Portuguese>REQUERIR MISSÃO</Portuguese>
         <Turkish>Görev İste</Turkish>
         <Chinesesimp>请求任务</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_request_noCommander">
+        <Original>Only the Commander has access to this function.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_request_title">
+        <Original>Mission Request</Original>
       </Key>
     </Container>
     <Container name="dialog_recruit_squad">
@@ -3372,6 +3441,9 @@
         <Turkish>BİRLİĞİ GÖREVE AL</Turkish>
         <Chinesesimp>招募小队</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_recruit_squad_error">
+        <Original>You do not have enough money or HR for this group type</Original>
+      </Key>
     </Container>
     <Container name="dialog_recruit_units">
       <Key ID="STR_antistasi_dialogs_recruit_units_antitank">
@@ -3492,6 +3564,9 @@
         <Portuguese>RECRUTAR UNIDADES</Portuguese>
         <Turkish>BİRİMLERİ GÖREVE AL</Turkish>
         <Chinesesimp>招募单位</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_units_error">
+        <Original>You do not have enough money or HR for this unit type</Original>
       </Key>
     </Container>
     <Container name="dialogs_generic">

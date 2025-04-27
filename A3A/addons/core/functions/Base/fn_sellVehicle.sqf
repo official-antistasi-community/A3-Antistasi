@@ -39,7 +39,9 @@ private _titleStr = localize "STR_A3A_fn_base_sellveh_sell";
 if (isNull _player) exitWith { Error("_player is null.") };
 if (isNull _veh) exitWith {[_titleStr, localize "STR_A3A_fn_base_sellveh_no_looking"] remoteExecCall ["A3A_fnc_customHint",_player];};
 
-if (_veh distance getMarkerPos respawnTeamPlayer > 50) exitWith {[_titleStr, localize "STR_A3A_fn_base_sellveh_no_closer"] remoteExecCall ["A3A_fnc_customHint",_player];};
+private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
+private _inArea = _friendlyMarkers findIf { count ([_player, _veh] inAreaArray _x) > 1 };
+if !(_inArea > -1) exitWith {[_titleStr, localize "STR_A3A_fn_base_sellveh_no_closer"] remoteExecCall ["A3A_fnc_customHint",_player];};
 
 if ({isPlayer _x} count crew _veh > 0) exitWith {[_titleStr, localize "STR_A3A_fn_base_sellveh_no_empty"] remoteExecCall ["A3A_fnc_customHint",_player];};
 

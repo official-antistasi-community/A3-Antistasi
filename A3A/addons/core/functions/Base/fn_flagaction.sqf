@@ -17,7 +17,8 @@ switch _typeX do
     };
     case "unit":
     {
-        _flag addAction [localize "STR_A3A_fn_base_flagaction_recruit", {if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_base_flagaction_recruit", localize "STR_A3A_fn_base_flagaction_recruit_no"] call A3A_fnc_customHint;} else { [] spawn A3A_fnc_unit_recruit; };},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4]
+        _flag addAction [localize "STR_A3A_fn_base_flagaction_recruit", {if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_base_flagaction_recruit", localize "STR_A3A_fn_base_flagaction_recruit_no"] call A3A_fnc_customHint;} else { if (A3A_GUIDevPreview) then {createDialog "A3A_RecruitDialog";} else {[] spawn A3A_fnc_unit_recruit;};};},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4];
+
     };
     case "vehicle":
     {
@@ -29,18 +30,11 @@ switch _typeX do
     };
     case "petros":
     {
-        petros addAction [localize "STR_A3A_fn_base_flagaction_missionrequest", {
-#ifdef UseDoomGUI
-    ERROR("Disabled due to UseDoomGUI Switch.")
-#else
-            CreateDialog "mission_menu";
-#endif
-        },nil,0,false,true,"","([_this] call A3A_fnc_isMember or _this == theBoss) and (petros == leader group petros) and _this == _this getVariable ['owner',objNull]",4];
-        petros addAction [localize "STR_A3A_fn_base_flagaction_hq_manage", A3A_fnc_dialogHQ,nil,0,false,true,"","(_this == theBoss) and (petros == leader group petros)", 4];
         petros addAction [localize "STR_A3A_fn_base_flagaction_asset_move", A3A_fnc_carryItem,nil,0,false,true,"","(_this == theBoss) and (petros == leader group petros) and (isNull objectParent _this) and !(call A3A_fnc_isCarrying)"];
-
         petros addAction [localize "STR_A3A_fn_base_flagaction_hq_build", A3A_fnc_buildHQ,nil,0,false,true,"","(_this == theBoss) and (petros != leader group petros)",4];
-        //petros addAction ["Experimental HQ Management. Work in Progress.", { createDialog "A3A_HqDialog"; },nil,0,false,true,"","A3A_GUIDevPreview and (_this == theBoss) and (petros == leader group petros)",4];
+
+        petros addAction [localize "STR_A3A_fn_base_flagaction_hq_manage", { if (A3A_GUIDevPreview) then {createDialog "A3A_HqDialog"} else {call A3A_fnc_dialogHQ}; },nil,0,false,true,"","(_this == theBoss) and (petros == leader group petros)",4];
+        petros addAction [localize "STR_A3A_fn_base_flagaction_missionrequest", { if (A3A_GUIDevPreview) then {createDialog "A3A_RequestMissionDialog"} else {createDialog "mission_menu";}; },nil,0,false,true,"","(([_this] call A3A_fnc_isMember or _this == theBoss) and (petros == leader group petros))",4];
     };
     case "truckX":
     {
