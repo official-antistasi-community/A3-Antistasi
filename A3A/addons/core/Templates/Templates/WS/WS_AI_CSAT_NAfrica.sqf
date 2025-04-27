@@ -469,6 +469,7 @@ if ("rf" in A3A_enabledDLC) then {
     (_sfLoadoutData get "sidearms") append ["hgun_DEagle_RF"];
 
     (_policeLoadoutData get "sidearms") append ["hgun_Glock19_RF"];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
     (_militaryLoadoutData get "helmets") append ["H_HelmetO_ocano_sb_hex_RF"];
     (_militiaLoadoutData get "helmets") append ["H_HelmetO_ocamo_sb_hex_RF"];
 

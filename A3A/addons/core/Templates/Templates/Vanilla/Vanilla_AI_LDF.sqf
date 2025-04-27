@@ -105,7 +105,8 @@ if ("rf" in A3A_enabledDLC) then {
     _vehiclesHelisLightAttack append ["a3a_LDF_Heli_light_03_dynamicLoadout_rf"];
     _vehiclesHelisAttack = ["a3a_LDF_Heli_EC_02_rf"];
     _vehiclesMilitiaCars append ["I_E_Pickup_rf"];
-    _vehiclesMilitiaLightArmed append ["a3a_LDF_Pickup_mmg_rf"];
+    _vehiclesMilitiaLightArmed append ["a3a_LDF_Pickup_mmg_rf", "a3a_LDF_Pickup_rcws_rf"];
+    _lightArmed append ["a3a_LDF_Pickup_rcws_rf"];
 };
 
 ["vehiclesHelisLight", _vehiclesHelisLight] call _fnc_saveToTemplate;
@@ -498,12 +499,25 @@ if ("rf" in A3A_enabledDLC) then {
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Holosight", [], [], ""],
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Aco_smg", [], [], ""]
     ];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
     (_sfLoadoutData get "helmets") append [
     "H_HelmetB_plain_sb_geo_RF",
     "H_HelmetHeavy_Olive_RF",
     "H_HelmetHeavy_Simple_Olive_RF",
     "H_HelmetHeavy_VisorUp_Olive_RF"];
     (_militaryLoadoutData get "helmets") append ["H_HelmetB_plain_sb_geo_RF"];
+    // LDF is a NATO aligned military, drop a lot of their cheap launchers for MAAWS and NLAW.
+    private _lightLaunchersAppend = [ // 1/2 chance of LAT being psrl
+    ["launch_PSRL1_geo_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    private _medLaunchersAppend = [ // 1/4 chance of MAT being psrl
+    ["launch_PSRL1_geo_RF", "", "", "", ["PSRL1_FRAG_RF", "PSRL1_HE_RF", "PSRL1_AT_RF"], [], ""], // issued for anti structure
+    ["launch_PSRL1_PWS_geo_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    {
+        (_x get "lightATLaunchers") append _lightLaunchersAppend;
+        (_x get "ATLaunchers") append _medLaunchersAppend;
+    } forEach [_militiaLoadoutData, _militaryLoadoutData, _sfLoadoutData];
 };
 
 /////////////////////////////////
