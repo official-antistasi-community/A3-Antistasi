@@ -29,9 +29,10 @@
 ["vehiclesFuelTrucks", ["UK3CB_GAF_B_Ural_Fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["UK3CB_GAF_B_Gaz66_Med", "UK3CB_GAF_B_MTLB_AMB"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["UK3CB_GAF_B_MTLB_PKT", "UK3CB_GAF_B_MTLB_KPVT", "UK3CB_GAF_B_MTLB_Cannon", "UK3CB_GAF_B_MTLB_Cannon", "UK3CB_GAF_B_BTR60", "UK3CB_GAF_B_BTR70", "UK3CB_GAF_B_BTR80", "UK3CB_GAF_B_BTR80a", "UK3CB_GAF_B_BTR60"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", ["UK3CB_GAF_B_BMD1", "UK3CB_GAF_B_MTLB_BMP", "UK3CB_GAF_B_BRM1K", "UK3CB_GAF_B_BMP2"]] call _fnc_saveToTemplate;
-["vehiclesIFVs", []] call _fnc_saveToTemplate;
-["vehiclesTanks", ["UK3CB_GAF_B_T80UK", "UK3CB_GAF_B_T80", "UK3CB_GAF_B_T80A"]] call _fnc_saveToTemplate;
+["vehiclesAPCs", ["UK3CB_GAF_B_BMD1", "UK3CB_GAF_B_MTLB_BMP"]] call _fnc_saveToTemplate;
+["vehiclesIFVs", ["UK3CB_GAF_B_BMP2"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks", ["UK3CB_GAF_B_BRM1K","UK3CB_GAF_B_T72BC"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["UK3CB_GAF_B_T80UK", "UK3CB_GAF_B_T80", "UK3CB_GAF_B_T80A","UK3CB_GAF_B_T72BC"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["UK3CB_GAF_B_ZsuTank", "UK3CB_GAF_B_MTLB_ZU23"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["UK3CB_MDF_B_RHIB"]] call _fnc_saveToTemplate;
@@ -323,6 +324,9 @@ _militiaLoadoutData set ["SMGs", ["UK3CB_Uzi_Stock"]];
 _militiaLoadoutData set ["machineGuns", [
 ["UK3CB_RPK", "", "", "", ["UK3CB_RPK_40rnd_762x39_G"], [], ""],
 ["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39"], [], ""]
+]];
+_militaryLoadoutData set ["marksmanRifles", [
+["rhs_weap_m76", "", "", "rhs_acc_pso1m2", ["rhsgref_10Rnd_792x57_m76", "rhssaf_10Rnd_792x57_m76_tracer"], [], ""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
 ["UK3CB_SVD_OLD", "", "", "rhs_acc_1pn93_1", ["UK3CB_SVD_10rnd_762x54"], [], ""]
