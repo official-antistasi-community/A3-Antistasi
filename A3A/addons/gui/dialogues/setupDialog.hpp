@@ -164,6 +164,7 @@ class A3A_SetupDialog : A3A_TabbedDialog
                 class CopyGameCheck: A3A_Checkbox {
                     idc = A3A_IDC_SETUP_COPYGAMECHECKBOX;
                     onCheckedChanged = "['copyGameCheck'] call A3A_GUI_fnc_setupLoadgameTab";
+                    tooltip = $STR_antistasi_dialogs_setup_copy_old_game_tooltip;
                     x = 126 * GRID_W;
                     y = 18 * GRID_H;
                     w = 4 * GRID_W;
@@ -172,6 +173,7 @@ class A3A_SetupDialog : A3A_TabbedDialog
                 class CopyGameText: A3A_text {
                     idc = A3A_IDC_SETUP_COPYGAMETEXT;
                     text = $STR_antistasi_dialogs_setup_copy_old_game;
+                    tooltip = $STR_antistasi_dialogs_setup_copy_old_game_tooltip;
                     x = 130 * GRID_W;
                     y = 18 * GRID_H;
                     w = 26 * GRID_W;
@@ -180,6 +182,7 @@ class A3A_SetupDialog : A3A_TabbedDialog
                 class OldParamsCheck: A3A_Checkbox {
                     idc = A3A_IDC_SETUP_OLDPARAMSCHECKBOX;
                     onCheckedChanged = "['oldParamsCheck'] call A3A_GUI_fnc_setupLoadgameTab";
+                    tooltip = $STR_antistasi_dialogs_setup_load_old_params_tooltip;
                     x = 126 * GRID_W;
                     y = 24 * GRID_H;
                     w = 4 * GRID_W;
@@ -188,6 +191,7 @@ class A3A_SetupDialog : A3A_TabbedDialog
                 class OldParamsText: A3A_text {
                     idc = A3A_IDC_SETUP_OLDPARAMSTEXT;
                     text = $STR_antistasi_dialogs_setup_load_old_params;
+                    tooltip = $STR_antistasi_dialogs_setup_load_old_params_tooltip;
                     x = 130 * GRID_W;
                     y = 24 * GRID_H;
                     w = 26 * GRID_W;
@@ -196,6 +200,7 @@ class A3A_SetupDialog : A3A_TabbedDialog
                 class NewNamespaceCheck: A3A_Checkbox {
                     idc = A3A_IDC_SETUP_NAMESPACECHECKBOX;
                     onCheckedChanged = "['newNamespaceCheck'] call A3A_GUI_fnc_setupLoadgameTab";
+                    tooltip = $STR_antistasi_dialogs_setup_use_new_namespace_tooltip;
                     x = 126 * GRID_W;
                     y = 30 * GRID_H;
                     w = 4 * GRID_W;
@@ -204,6 +209,7 @@ class A3A_SetupDialog : A3A_TabbedDialog
                 class NewNamespaceText: A3A_text {
                     idc = A3A_IDC_SETUP_NAMESPACETEXT;
                     text = $STR_antistasi_dialogs_setup_use_new_namespace;
+                    tooltip = $STR_antistasi_dialogs_setup_use_new_namespace_tooltip;
                     x = 130 * GRID_W;
                     y = 30 * GRID_H;
                     w = 26 * GRID_W;
