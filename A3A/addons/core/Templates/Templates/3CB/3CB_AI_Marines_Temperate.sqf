@@ -30,7 +30,7 @@
 ["vehiclesAPCs", ["UK3CB_CW_US_B_LATE_AAV", "UK3CB_CW_US_B_LATE_LAV25"]] call _fnc_saveToTemplate; // , "rhsusf_stryker_m1134_wd"
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["rhsusf_m1a1hc_wd", "rhsusf_m1a1fep_od", "UK3CB_CW_US_B_EARLY_M60a3"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["UK3CB_KRG_B_M270_Avenger"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["a3a_green_M270_Avenger"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["UK3CB_TKA_B_RHIB_Gunboat","UK3CB_AAF_B_Skiff"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["UK3CB_TKA_B_RHIB_Gunboat"]] call _fnc_saveToTemplate;
@@ -147,7 +147,7 @@ _loadoutData set ["sniVests", []];
 _loadoutData set ["vests", []];
 _loadoutData set ["backpacks", []];
 _loadoutData set ["medBackpacks", ["rhsusf_falconii"]];
-_loadoutData set ["atBackpacks", ["UK3CB_GAF_B_B_ENG_OLI"]];
+_loadoutData set ["atBackpacks", ["UK3CB_LSM_B_B_CARRYALL_OLI"]];
 _loadoutData set ["helmets", []];
 _loadoutData set ["slHat", ["UK3CB_H_MilCap_MAR"]];
 _loadoutData set ["sniHats", ["rhs_Booniehat_m81"]];
@@ -319,6 +319,7 @@ _militiaLoadoutData set ["carbines", [
 ["UK3CB_M16_Carbine", "", "", "", ["UK3CB_M16_20rnd_556x45_G"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
+["UK3CB_M16A2_UGL", "", "", "", ["rhs_mag_20Rnd_556x45_M855_Stanag"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""],
 ["UK3CB_M79", "", "", "", ["rhs_mag_M433_HEDP", "rhs_mag_M397_HET", "rhs_mag_M585_white_cluster"], [""], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [
