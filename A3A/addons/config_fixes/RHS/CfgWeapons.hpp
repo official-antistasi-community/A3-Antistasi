@@ -39,10 +39,10 @@ class CfgWeapons
     // Subsonic sniper
     class rhs_weap_ak74m;
     class rhs_weap_asval : rhs_weap_ak74m {
-        A3A_price = 500;
+        A3A_price = 750;
     };
     class rhs_weap_vss : rhs_weap_asval {
-        A3A_price = 800;
+        A3A_price = 900;
     };
 };
 

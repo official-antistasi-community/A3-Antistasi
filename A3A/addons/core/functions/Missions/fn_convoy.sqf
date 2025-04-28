@@ -20,12 +20,6 @@ private _POWS = [];
 private _reinforcementsX = [];
 
 
-private _startOutpost = createMarker ["start_pos_convoy", _posSpawn];
-_startOutpost setMarkerShape "ICON";
-_startOutpost setMarkerType "hd_start";
-_startOutpost setMarkerColor "ColorBlack";
-_startOutpost setMarkerText localize "STR_A3A_fn_mission_conv_start_location";
-
 
 // Setup start time
 
@@ -139,6 +133,13 @@ ServerInfo_3("%1 convoy mission created from %2 to %3", _convoyType, _mrkOrigin,
 private _route = [_posOrigin, _posDest] call A3A_fnc_findPath;
 _route = _route apply { _x select 0 };			// reduce to position array
 if (_route isEqualTo []) then { _route = [_posOrigin, _posDest] };
+
+
+private _startOutpost = createMarkerLocal ["start_pos_convoy", _route#0];
+_startOutpost setMarkerShapeLocal "ICON";
+_startOutpost setMarkerTypeLocal "hd_start";
+_startOutpost setMarkerColorLocal "ColorBlack";
+_startOutpost setMarkerText localize "STR_A3A_fn_mission_conv_start_location";
 
 
 private _vehPool = ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundTransport) + ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundSupport);

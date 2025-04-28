@@ -542,22 +542,6 @@ class Params
         default = 3;
     };
 
-    class SpacerGunShop
-    {
-        title = "";
-        values[] = {""};
-        texts[] = {""};
-        default = "";
-    };
-    class A3A_GS_allowGuestCommander
-    {
-        attr[] = {"server"};
-        title = $STR_A3A_Params_allowguestcommander_title;
-        values[] = {0, 1};
-        texts[] = {$STR_A3A_Params_generic_notallowed, $STR_A3A_Params_generic_allowed};
-        default = 0;
-    };
-
     class SpacerDevelopment
     {
         title = "";

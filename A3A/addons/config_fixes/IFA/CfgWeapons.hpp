@@ -119,4 +119,9 @@ class CfgWeapons
             artilleryDispersion = 4;
         };
     };
+
+    class LIB_RIFLE;
+    class LIB_MP44 : LIB_RIFLE {
+        A3A_price = 400;
+    };
 };

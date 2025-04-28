@@ -10,9 +10,6 @@ switch (_mode) do
 {
     case ("onLoad"):
     {
-        // Create the shopping cart hashmap if it doesn't exist
-        if (isNil "A3A_shoppingCart") then { A3A_shoppingCart = createHashMap };
-
         // Request gunshop data from the server and wait for it
         [clientOwner] remoteExec ["A3A_GUI_fnc_fetchGunshopLists", 2];
 
@@ -30,16 +27,34 @@ switch (_mode) do
         ["Muzzles"] call A3A_GUI_fnc_createGunShopTab;
         ["Bipods"] call A3A_GUI_fnc_createGunShopTab;
 
+        // Create the shopping cart hashmap if it doesn't exist
+        if (isNil "A3A_shoppingCart") then { A3A_shoppingCart = createHashMap };
+
+        // Rebuild the shopping cart UI if there are already items
+        if (count A3A_shoppingCart != 0) then {
+            private _oldCart = A3A_shoppingCart;
+            A3A_shoppingCart = createHashMap;
+            {
+                private _className = _x;
+                private _amount = _y get "_amount";
+                private _price = _y get "_price";
+                private _stock = _y get "_stock";
+                [_className, _price, _amount, _stock] call A3A_GUI_fnc_addToCart;
+            } forEach _oldCart;
+        };
+
+        _display setVariable ["initDone", true];
+
         ["switchTab", ["Primary"]] call A3A_GUI_fnc_gunShop;
         ["switchTabRight", ["Shopping"]] call A3A_GUI_fnc_gunShop;
     };
 
     case ("switchTab"):
     {
+        if !(_display getVariable ["initDone", false]) exitWith {};
+
         private _selectedTab = _params select 0;
-
         private _selectedTabIDC = -1;
-
         switch(_selectedTab) do 
         {
             case ("Primary"): {_selectedTabIDC = A3A_IDC_GUN_SHOP_PRIMARY_TAB};
@@ -101,10 +116,10 @@ switch (_mode) do
 
     case ("switchTabRight"):
     {
+        if !(_display getVariable ["initDone", false]) exitWith {};
+
         private _selectedTab = _params select 0;
-
         private _selectedTabIDC = -1;
-
         switch(_selectedTab) do 
         {
             case ("Filters"): {_selectedTabIDC = A3A_IDC_GUN_SHOP_FILTERS};

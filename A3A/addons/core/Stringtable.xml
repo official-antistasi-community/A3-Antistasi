@@ -4941,7 +4941,7 @@
         <Chinesesimp>补给运输车队</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_conv_gunshop_text">
-        <Original>Our shipment of weapons has  been intercepted by the local authorities, and is being redirected as supplies for an %3. It's about to leave at %2 from an %1. The circumstances surrounding this incident are unclear, but it is evident that the shipment's documentation and contents have raised concerns among regulatory bodies. We can't let the authorities get in our way. Take the shipment back by any means.</Original>
+        <Original>Our shipment of weapons has  been intercepted by the local authorities, and is being redirected as supplies for an %3. It's about to leave at %2 from an %1. Take the shipment back by any means.</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_conv_gunshop_title">
         <Original>Recover Gun Shipment</Original>
@@ -4954,7 +4954,7 @@
         <German>Waffenladen</German>
       </Key>
       <Key ID="STR_A3A_fn_mission_gunshop_text_meet">
-        <Original>My distant cousin Solomon Maru has contacted us. Rumor is that he sells items stolen from the enemy. He is in %1, go and meet him.</Original>
+        <Original>My distant cousin Solomon Maru has contacted us. Rumor is that he sells items stolen from the enemy. He is in %1, go and meet him. He will only speak to the commander.</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_gunshop_text_wait">
         <Original>Wait a few minutes for Solomon to arrange delivery of the goods.</Original>

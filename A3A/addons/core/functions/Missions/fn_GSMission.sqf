@@ -29,6 +29,8 @@ private _taskId = "LOG" + str A3A_taskCount;
 // Build the gunshop data in advance
 [] remoteExec ["A3A_GUI_fnc_gatherGunShopLists", 2];
 A3A_shoppingList = nil;
+A3A_shoppingCart = nil;
+publicVariable "A3A_shoppingCart";      // Need to clear the cart because the gun shop lists are different
 
 // spawn a petros look alike
 private _identity = createHashMapFromArray [

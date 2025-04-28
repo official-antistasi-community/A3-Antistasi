@@ -122,24 +122,24 @@ private _fnc_weaponPriceCalculator = {
 
     private _ammoType = getText (configFile >> "CfgMagazines" >> _defaultMag >> "ammo");
     private _ammoPrice = _ammoType call _fnc_ammoPriceCalculatorCache;
-    private _magSize = getNumber (configFile >> "CfgMagazines" >> _defaultMag >> "count");
+    private _magSize = 20 min getNumber (configFile >> "CfgMagazines" >> _defaultMag >> "count");
     
     // then type mod on top?
     private _cats = _className call A3A_fnc_equipmentClassToCategories;
     private _glMod = 0;
     private _basePrice = switch (_cats#0) do {
         case "Rifles": {
-            if ("GrenadeLaunchers" in _cats) then { _glMod = 220 };
-            80 + _ammoPrice*60;
+            if ("GrenadeLaunchers" in _cats) then { _glMod = 200 };
+            200 + _ammoPrice*200*_magSize/20;
         };
-        case "MachineGuns": { 240 + _ammoPrice*180 };
-        case "SniperRifles": { 200 + _ammoPrice*70*_magSize/5 };            // dispersion adjustment makes these expensive later
-        case "SMGs": { 80 + _ammoPrice*60 };
+        case "MachineGuns": { 350 + _ammoPrice*350 };
+        case "SniperRifles": { 300 + _ammoPrice*90*_magSize/5 };            // dispersion adjustment makes these expensive later
+        case "SMGs": { 140 + _ammoPrice*200 };
 
-        case "Handguns": { 20 + _ammoPrice*120*_magSize/10 };
-        case "Shotguns": { 40 + _ammoPrice*40*_magSize/5 };				// TODO: sort out shotgun ammo
+        case "Handguns": { 80 + _ammoPrice*200*_magSize/10 };
+        case "Shotguns": { 120 + 80*_magSize/5 };				// TODO: sort out shotgun ammo
 
-        case "GrenadeLaunchers": { 200 + _ammoPrice*20*_magSize };			// this is GL without rifle
+        case "GrenadeLaunchers": { 150 + 150*_magSize };			// this is GL without rifle
         case "RocketLaunchers": { 400 + _ammoPrice*3 };
         case "MissileLaunchers": { 2000 + _ammoPrice*3 };
         default { 1000 };
@@ -156,7 +156,7 @@ private _fnc_weaponPriceCalculator = {
             _modeCfg = _weaponCfg >> _firstMode;
         };
         private _dispersion = getNumber (_modeCfg >> "dispersion");
-        _dispMul =  (0.001 / _dispersion) ^ 0.7;
+        _dispMul =  (0.001 / _dispersion) ^ 0.5;
     };
 
     // extra for attachment slots? Or not?
@@ -180,12 +180,12 @@ private _fnc_itemPriceCalculator = {
             if(_isMuzzle) then 
             {
                 private _audible = getNumber (_config >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
-                _cost = 400 * (3 min (0.5 / _audible));       // scale a bit by suppression level
+                _cost = 100 * (3 min (0.5 / (0.05+_audible)));       // scale a bit by suppression level
 
                 // Higher cost for heavier suppressors. Difficult to get caliber.
                 // CUP suppressors mostly have bad (low) weights, so cap the minimum
                 private _weightMod = 1 max (getNumber (_config >> "ItemInfo" >> "mass") / 6);
-                _cost = _cost * _weightMod^2;
+                _cost = _cost * _weightMod;
             };
             _cost;
         };
@@ -203,11 +203,11 @@ private _fnc_itemPriceCalculator = {
             // Cost multiplier for NV/Ti optics modes
             private _visionMult = 1;
             {
-                private _mult = 0.5;
+                private _mult = 0;
                 {
-                    if (_x == "Normal") then { _mult = _mult * 2; continue };           // If we have normal & NVG, that's better
-                    if (_x == "NVG") then { _mult = _mult * 4; continue };
-                    if (_x == "Ti") then { _mult = _mult * 6; continue };
+                    if (_x == "Normal") then { _mult = _mult + 1; continue };           // If we have normal & NVG, that's better
+                    if (_x == "NVG") then { _mult = _mult + 3; continue };
+                    if (_x == "Ti") then { _mult = _mult + 5; continue };
                 } forEach getArray (_x >> "VisionMode");
                 _visionMult = _visionMult max _mult;
             } forEach ("true" configClasses (_config >> "ItemInfo" >> "OpticsModes"));
