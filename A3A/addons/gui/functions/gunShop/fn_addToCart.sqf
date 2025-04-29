@@ -96,7 +96,7 @@ _stockText ctrlCommit 0;
 
 private _amountText = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
 _amountText ctrlSetPosition [6 * GRID_W, 20 * GRID_H, 13 * GRID_W, 5 * GRID_H];
-_amountText ctrlSetStructuredText parseText (format ["<t size='0.75' align='left' valign='middle' align='center' shadow='2'>%1</t>", 1]);
+_amountText ctrlSetStructuredText parseText (format ["<t size='0.75' align='left' valign='middle' align='center' shadow='2'>%1</t>", _amountAdd]);
 _amountText ctrlCommit 0;
 
 private _buttonMinus = _display ctrlCreate ["A3A_Button_Small", -1, _itemControlsGroup];
@@ -134,7 +134,7 @@ _buttonMinus ctrladdeventhandler ["ButtonClick", {
 
 
 private _objectMap = createHashMap;
-_objectMap set ["_amount", 1];
+_objectMap set ["_amount", _amountAdd];
 _objectMap set ["_price", _price];
 _objectMap set ["_stock", _stock];
 _objectMap set ["_control", _itemControlsGroup];

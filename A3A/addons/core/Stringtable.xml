@@ -9887,9 +9887,6 @@
         <Russian>Разблокированное оружие автоматически разблокирует свой стандартный магазин?</Russian>
         <Chinesesimp>是否在解锁枪械的同时也解锁配套的标准弹匣？</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_Params_allowguestcommander_title">
-        <Original>Allow the guest commander to have access to the gun shop?</Original>
-      </Key>
     </Container>
     <Container name="A3A_Scripts">
       <Key ID="STR_A3A_scripts_advTowInit_addact_attach">

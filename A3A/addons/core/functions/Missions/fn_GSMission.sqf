@@ -69,9 +69,6 @@ _coolerPetros addEventHandler ["killed", {
 }];
 
 private _conditionCode = "(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer) and (_this == theBoss)";
-if(!A3A_GS_allowGuestCommander) then {
-    _conditionCode + " and theBoss call A3A_fnc_isMember";
-};
 
 private _addActionCode = {
     params ["_coolerPetros", "_conditionCode"];
