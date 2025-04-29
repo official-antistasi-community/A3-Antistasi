@@ -227,9 +227,9 @@ if (!_busy) then
 		{
 			if !(_runwaySpawnLocation isEqualTo []) then
 			{
-				private _vehPool = []
+				private _vehPool = [];
 				private _vehTypes = ["vehiclesPlanesCAS","vehiclesPlanesAA","vehiclesPlanesTransport"];
-				private _typeWeight = [1, 2, 2]
+				private _typeWeight = [1, 2, 2];
 
 				{
 					private _vehs = _faction get _x;
@@ -240,7 +240,8 @@ if (!_busy) then
 					} forEach _vehs;
 				} forEach _vehTypes;
 
-				_typeVehX = selectRandomWeighted _vehTypes;
+				if (_vehPool isEqualTo []) exitWith {};			// probably impossible
+				_typeVehX = selectRandomWeighted _vehPool;
 				_veh = createVehicle [_typeVehX, _pos, [],50, "NONE"];
 				_veh setDir (_ang);
 				_pos = [_pos, 50,_ang] call BIS_fnc_relPos;

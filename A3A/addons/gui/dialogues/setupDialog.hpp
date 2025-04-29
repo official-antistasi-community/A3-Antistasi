@@ -9,7 +9,7 @@ class A3A_SetupDialog : A3A_TabbedDialog
     {
         class TitlebarText : A3A_TitlebarText
         {
-            idc = A3A_IDC_SETUP_TITLEBAR;
+            idc = -1;
             text = $STR_antistasi_dialogs_setup_titlebar;
             x = DIALOG_X;
             y = DIALOG_Y - 10 * GRID_H;
@@ -40,7 +40,7 @@ class A3A_SetupDialog : A3A_TabbedDialog
 
                 class FactionTabButton : A3A_Button
                 {
-                    idc = A3A_IDC_SETUP_FACTIONTABBUTTON;
+                    idc = A3A_IDC_SETUP_FACTIONSTABBUTTON;
                     text = $STR_antistasi_dialogs_setup_faction_tab_button;
                     onButtonClick = "['switchTab', ['factions']] call A3A_GUI_fnc_setupDialog;";
                     x = 30 * GRID_W;
