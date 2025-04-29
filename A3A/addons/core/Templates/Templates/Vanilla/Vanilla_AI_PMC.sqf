@@ -34,7 +34,7 @@ private _Tanks = ["a3a_MBT_02_cannon_black_F"];
 ["vehiclesAA", ["B_APC_Tracked_01_AA_F"]] call _fnc_saveToTemplate;
 
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["B_Boat_Armed_01_minigun_F", "a3a_Boat_Armed_01_hmg_blufor_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["a3a_APC_Wheeled_03_cannon_blufor_F","a3a_B_APC_Wheeled_01_cannon_F","B_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 
@@ -460,7 +460,7 @@ if ("rf" in A3A_enabledDLC) then {
     ["hgun_Glock19_RF", "muzzle_snds_L", "acc_pointer_IR_pistol_RF", "optic_MRD_black", [], [], ""],
     ["hgun_Glock19_RF", "muzzle_snds_L", "acc_flashlight_IR_pistol_RF", "optic_MRD_black", [], [], ""]
     ];
-    
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
     (_militaryLoadoutData get "Hvests") append ["V_PlateCarrierLite_black_noFlag_RF"];
     (_militaryLoadoutData get "backpacks") append ["B_DuffleBag_Black_RF","B_DuffleBag_Black_NoLogo_RF"];
     (_militaryLoadoutData get "sidearms") append ["hgun_DEagle_RF","hgun_Glock19_Tan_RF","hgun_Glock19_RF"];
@@ -474,6 +474,27 @@ if ("rf" in A3A_enabledDLC) then {
     ];
     
     _officerLoadoutData set ["sidearms", ["hgun_DEagle_classic_RF"]];
+    // ION loves the PSRL and uses it as their standard issue alongside the NLAW. Less sights though.
+    private _lightLaunchersAppend = [ // 3/5 chance of LAT being psrl against NLAW
+    ["launch_NLAW_f"],
+    ["launch_PSRL1_black_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_black_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_HE_RF"], [], ""],
+    ["launch_PSRL1_PWS_black_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    private _medLaunchersSet = [ // 3/4 chance of MAT being psrl
+    ["launch_NLAW_f"],
+    ["launch_RPG7_f"], // rarities
+    ["launch_PSRL1_black_RF", "", "", "", ["PSRL1_FRAG_RF", "PSRL1_HE_RF", "PSRL1_AT_RF"], [], ""], // issued for anti structure
+    ["launch_PSRL1_black_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_black_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_HE_RF"], [], ""],
+    ["launch_PSRL1_black_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_black_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_black_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    {
+        (_x get "lightATLaunchers") append _lightLaunchersAppend;
+        _x set ["ATLaunchers", _medLaunchersSet];
+    } forEach [_militaryLoadoutData, _sfLoadoutData];
 };
 if ("mark" in A3A_enabledDLC) then {
     (_sfLoadoutData get "machineGuns") append [

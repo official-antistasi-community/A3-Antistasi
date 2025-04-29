@@ -2149,7 +2149,7 @@
         <Chinesesimp>总部位置</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_marker">
-        <Original>You must click near a rebel map marker.</Original>
+        <Original>You must select a rebel map marker.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_zone">
         <Original>Click on the zone you want to rebuild.</Original>
@@ -2260,7 +2260,7 @@
         <Russian>%1 Ресурсы</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_sellveh_no_closer">
-        <Original>Vehicle must be closer than 50 meters to the HQ marker.</Original>
+        <Original>You must be near a friendly marker in order to sell vehicles.</Original>
         <Italian>Il veicolo deve essere entro 50 metri dal marcatore del quartier generale.</Italian>
         <Spanish>El vehículo debe estar a 50 metros o menos del marcador del CG.</Spanish>
         <French>Le Véhicule doit être à moins de 50 mètres du marqueur du quartier général.</French>
@@ -2550,6 +2550,9 @@
         <French>Extrême</French>
         <Korean>최대</Korean>
         <Russian>Экстрим</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_base_gc_hqCleaned">
+        <Original>HQ garbage deleted.</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_convoy">
@@ -2971,6 +2974,9 @@
         <Portuguese>A mover grupo %1 para o destino.</Portuguese>
         <Turkish>Grup %1 hedefe ilerliyor.</Turkish>
         <Chinesesimp>正在将组 %1 移动至目标。</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_dialogs_ftradio_generic_fail">
+        <Original>You cannot Fast Travel while: </Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_grp_select">
         <Original>You can select one group only to Fast Travel.</Original>
@@ -4095,6 +4101,9 @@
         <Original>Taxes Income&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;Manpower: +%1&lt;br/&gt;Money: +%2 €</Original>
         <Korean>세금 획득&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;인력: +%1&lt;br/&gt;자금: +%2 </Korean>
         <Russian>Доход&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;HR: +%1&lt;br/&gt;Деньги: +%2 €</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_init_initClient_addAct_recruitSquad">
+        <Original>Squad Recruitment</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_intel">
@@ -5608,7 +5617,7 @@
         <Chinesesimp>%1 没有足以能够拿取的资源</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_tBSteal_grab_yes">
-        <Original>You grabbed 100 € from the %1 Money Pool.&lt;br/&gt;&lt;br/&gt;This will affect your prestige and status among %1 forces.</Original>
+        <Original>You grabbed %1 € from the %2 Money Pool.&lt;br/&gt;&lt;br/&gt;This will affect your prestige and status among %2 forces.</Original>
         <Italian>Hai preso 100 € dal fondo %1.&lt;br/&gt;&lt;br/&gt;Ciò influirà sul tuo status tra le forze %1.</Italian>
         <French>Vous aves pris 100 € de la réserve d'argent de %1. &lt;br/&gt;&lt;br/&gt; Cela va affecter votre prestige et votre statut au sein des forces de %1.</French>
         <Korean>당신은 %1의 공동 자금에서 100€를 가져갔습니다.&lt;br/&gt;&lt;br/&gt;이는 %1의 군 내에서 당신의 지위와 위신에 영향을 미칠 것입니다.</Korean>
@@ -10625,6 +10634,12 @@
       <Key ID="STR_A3A_templates_lore_TKC">
         <Original>The remainder of the civilians who were unable to evacuate the combat zone, the Takistani civilians are always on alert and have learned not to trust anyone. Make sure you restore peace to their lands.</Original>
         <Russian>Оставшиеся мирные жители, которые не смогли эвакуироваться из зоны боевых действий, - такистанцы всегда начеку и научились никому не доверять. Убедитесь, что вы восстановили мир на их землях.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_MEC">
+        <Original>While the civilians are used to endless war, they are looking to live in peace.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_ADC">
+        <Original>Nothing less then the cradle of humanity, the last remnants won't flee from hostilities.</Original>
       </Key>
       <Key ID="STR_A3A_templates_lore_TKM">
         <Original>The Takistani militia is an unexpectedly well-armed group of civilians who hold a significant opposition to the foreign occupation and support the acting government is attempting to use to bolster its ranks. They use a variety of scavenged weapons, commonly relying on bolt-action rifles.</Original>

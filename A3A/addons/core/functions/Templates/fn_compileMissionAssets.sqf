@@ -79,6 +79,8 @@ setVar("vehiclesPlanesAA", OccAndInv("vehiclesPlanesAA"));
 setVar("vehiclesPlanesCAS", OccAndInv("vehiclesPlanesCAS"));
 setVar("vehiclesPlanesTransport", OccAndInv("vehiclesPlanesTransport"));
 setVar("vehiclesAirPatrol", OccAndInv("vehiclesAirPatrol"));
+setVar("vehiclesTransportBoats",OccAndInv("vehiclesTransportBoats"));
+setVar("vehiclesGunBoats",OccAndInv("vehiclesGunBoats"));
 setVar("staticMortars", OccAndInv("staticMortars") + Reb("staticMortars"));
 setVar("staticAA", OccAndInv("staticAA") + Reb("staticAA"));
 setVar("staticAT", OccAndInv("staticAT") + Reb("staticAT"));

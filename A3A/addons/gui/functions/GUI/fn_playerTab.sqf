@@ -100,13 +100,14 @@ switch (_mode) do
 
         } else {
             _fastTravelButton ctrlEnable false;
-            _fastTravelButton ctrlSetTooltip (_fastTravelBlockers joinString ", ");
+            private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
+            _fastTravelButton ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
             _fastTravelIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            _fastTravelIcon ctrlSetTooltip (_fastTravelBlockers joinString ", ");
+            _fastTravelIcon ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
         };
 
         // Construct
-        private _constructButton = _display displayCtrl A3A_IDC_CONSTRUCTBUTTON;
+        /* private _constructButton = _display displayCtrl A3A_IDC_CONSTRUCTBUTTON;
         private _constructIcon = _display displayCtrl A3A_IDC_CONSTRUCTICON;
         private _canBuild = [false,"Walk here"];// [] call A3A_fnc_canBuild;  // ToDo define.
         if (_canBuild # 0) then
@@ -121,30 +122,18 @@ switch (_mode) do
             _constructIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
             _constructIcon ctrlSetTooltip (_canBuild # 1);
         };
+        */
+
+        // Temporary code for testing, to be removed once a better substitute for the button is found.
+        private _constructButton = _display displayCtrl A3A_IDC_CONSTRUCTBUTTON;
+        private _constructIcon = _display displayCtrl A3A_IDC_CONSTRUCTICON;
+        _constructButton ctrlEnable true;
+        _constructIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+        _constructButton ctrlSetTooltip "Access the old menu if a feature doesn't work";
 
         // AI Management
-        // TODO UI-update: split checks to A3A_fnc_canManageAI
         _aiManagementTooltipText = "";
-        _canManageAi = false;
-
-        // Check if AI Management is available
-        switch (true) do
-        {
-            case !(leader player == player):
-            {
-                _aiManagementTooltipText = localize "STR_antistasi_dialogs_main_ai_management_sl_tooltip";
-            };
-
-            case ({!isPlayer _x} count units group player < 1):
-            {
-                _aiManagementTooltipText = localize "STR_antistasi_dialogs_main_ai_management_no_ai_tooltip";
-            };
-
-            default
-            {
-                _canManageAi = true;
-            };
-        };
+        call A3A_fnc_canManageAI params ["_canManageAI","_aiManagementButton"];
 
         private _aiManagementButton = _display displayCtrl A3A_IDC_AIMANAGEMENTBUTTON;
         private _aiManagementIcon = _display displayCtrl A3A_IDC_AIMANAGEMENTICON;
@@ -178,17 +167,13 @@ switch (_mode) do
         _playerRankText ctrlSetText ([player, "displayName"] call BIS_fnc_rankParams);
         _playerRankPicture ctrlSetText ([player, "texture"] call BIS_fnc_rankParams);
 
-        private _time = time; // TODO UI-update: get time at session start, not mission start, aka after you've loaded in, and on respawns etc...
+        private _time = round (time - A3A_aliveTime); // current time - time since last (re)spawn
         _aliveText ctrlSetText format [[_time,1,1,false,2,false,true] call A3A_fnc_timeSpan_format];
 
-        // TODO UI-update: Make function for getting num of completed missions
-        private _missions = 0;
-        // private _missions = player getVariable "missionsCompleted";
+        private _missions = player getVariable ["missionsCompleted",0];
         _missionsText ctrlSetText str _missions;
 
-        // TODO UI-update: Make function for getting number of kills
-        private _kills = 0;
-        // private _kills = player getVariable "kills";
+        private _kills = (getPlayerScores player)#0;
         _killsText ctrlSetText str _kills;
 
         // Update commander icon/text/button
@@ -236,8 +221,8 @@ switch (_mode) do
         private _vehicleGroup = _display displayCtrl A3A_IDC_PLAYERVEHICLEGROUP;
         private _noVehicleGroup = _display displayCtrl A3A_IDC_NOVEHICLEGROUP;
 
-        // Vehicle section is only available to members
-        if ([player] call A3A_fnc_isMember) then {
+        // Vehicle section is only available to members -- REMOVED
+        // if ([player] call A3A_fnc_isMember) then {
 
             // Attempt to get vehicle from cursorObject
             _vehicle = cursorObject; // was cursorTarget
@@ -261,8 +246,16 @@ switch (_mode) do
                     private _vehiclePicture = _display displayCtrl A3A_IDC_VEHICLEPICTURE;
                     _vehiclePicture ctrlSetText _editorPreview;
 
-                    // TODO UI-update: Disable garage, sell and add to air support buttons
-                    // if player is not in range of a friendly location
+                    private _sellVehicleButton = _display displayCtrl A3A_IDC_SELLVEHICLEBUTTON;
+
+                    // Garage check
+                    private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
+                    private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
+                    if !(_inArea > -1) then {
+                        private _addToGarageButton = _display displayCtrl A3A_IDC_GARAGEVEHICLEBUTTON;
+                        _addToGarageButton ctrlEnable false;
+                        _addToGarageButton ctrlSetTooltip "Must be near friendly marker to garage";
+                    };
 
                     // Change label on lock/unlock depending on vehicle lock state
                     // To be removed, vehicle locking isn't a thing anymore
@@ -278,11 +271,23 @@ switch (_mode) do
                     }; */
 
                     if (player == theBoss) then {
+                        // Sell check, uses same condition as garage + boss
+                        if !(_inArea > -1) then {
+                            _sellVehicleButton ctrlEnable false;
+                            _sellVehicleButton ctrlSetTooltip "Must be near friendly marker to sell";
+                        }; 
                         // Disable "add to air support" button if vehicle is not eligible
+                        private _addToAirSupportButton = _display displayCtrl A3A_IDC_ADDTOAIRSUPPORTBUTTON;
                         if !(_vehicle isKindOf "Air") then {
-                            private _addToAirSupportButton = _display displayCtrl A3A_IDC_ADDTOAIRSUPPORTBUTTON;
                             _addToAirSupportButton ctrlEnable false;
                             _addToAirSupportButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_not_eligible_vehicle_tooltip";
+                        };
+                        //Valid area to convert to air support
+                        private _friendlyMarkers = (["Synd_HQ"] + airportsX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
+                        private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
+                        if (!(_inArea > -1) && (_vehicle isKindOf "Air")) then { 
+                            _addToAirSupportButton ctrlEnable false;
+                            _addToAirSupportButton ctrlSetTooltip "Must be near airbase or HQ to add to air support";
                         };
                     } else {
                         // Enable only "garage" and "lock/unlock" buttons to regular players
@@ -306,13 +311,13 @@ switch (_mode) do
                 _vehicleGroup ctrlShow false;
                 _noVehicleGroup ctrlShow true;
             };
-        } else {
+        /* } else {
             // Show not member message
             _vehicleGroup ctrlShow false;
             _noVehicleGroup ctrlShow true;
             private _noVehicleText = _display displayCtrl A3A_IDC_NOVEHICLETEXT;
             _noVehicleText ctrlSetText localize "STR_antistasi_dialogs_main_members_only";
-        };
+        }; */
     };
 
     default {

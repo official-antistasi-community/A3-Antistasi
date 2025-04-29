@@ -31,7 +31,7 @@ private _namespace = [profileNamespace, missionProfileNamespace] select _saveToN
 	{
 		if (isNil {_playerData get _x}) then { continue };				// old game data will have missing entries
 		[_uid, _x, _playerData get _x] call A3A_fnc_savePlayerStat;
-	} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage"];
+	} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage","missionsCompleted"];
 } forEach A3A_playerSaveData;
 
 ["savedPlayers", keys A3A_playerSaveData] call A3A_fnc_setStatVariable;

@@ -20,35 +20,73 @@
 */
 #include "defines.inc"
 FIX_LINE_NUMBERS()
-params [["_class", "", [""]]];
+params ["_class"]; // [["_class", "_vehicle", [""]]]
 if ( !isClass (configFile >> "CfgVehicles" >> _class) ) exitWith { Error_1("Invalid Input: %1", _class); -1 };
+
+/* _vtol = "getNumber (_x >> 'vtol') >= 0" configClasses (configFile >> "CfgVehicles");
+_class in [_vtol]; */ 
+//&& (getNumber (configOf _vehicle >> "isUav") == 0)
+//case (getNumber (configOf _vehicle >> "isUav") > 0): { 2 };
+private _vtolConfig = configFile >> "CfgVehicles" >> _class;
 
 private _editorCat = cfgEditorCat(_class);
 switch (true) do {
     //filter blacklist first
     case (_class in HR_GRG_blacklistVehicles): { -2 };
     //vanilla
-    case (_editorCat isEqualTo "EdSubcat_Cars"): { 0 };
-    case (_editorCat in ["EdSubcat_Tanks","EdSubcat_APCs","EdSubcat_AAs","EdSubcat_Artillery"]): { 1 };
-    case (_editorCat in ["EdSubcat_Helicopters","EdSubcat_Planes"]): { 2 };
-    case (_editorCat isEqualTo "EdSubcat_Boats"): { 3 };
-    case (_editorCat isEqualTo "EdSubcat_Turrets"): { 4 };
-    case (_class isKindOf "staticWeapon"): {4}; //some non-vanilla artillery is statics
+    case ([_class] call HR_GRG_fnc_isAmmoSource): { 9 };
+    case ([_class] call HR_GRG_fnc_isFuelSource): { 9 };
+    case ([_class] call HR_GRG_fnc_isRepairSource): { 9 };
+    case (_editorCat isEqualTo "EdSubcat_Cars"): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover) 
+    case (_editorCat isEqualTo "EdSubcat_APCs"): { 2 };
+    case (_editorCat in ["EdSubcat_Tanks"]): { 3 };
+    case (_editorCat in ["EdSubcat_AAs"]): { 4 };
+    case (_editorCat in ["EdSubcat_Artillery"]): { 5 };
+    case (_editorCat in ["EdSubcat_Helicopters"] || getNumber (_vtolConfig >> "vtol") > 0): { 6 };
+    //case (getNumber (configOf _vehicle >> "vtol") > 0): { 5 };
+    case (_editorCat in ["EdSubcat_Planes"] && (getNumber (_vtolConfig >> "vtol") == 0)): { 7 };
+    case (_editorCat in ["EdSubcat_Boats","EdSubcat_Submersibles"]): { 8 };
+    case (_editorCat isEqualTo "EdSubcat_Turrets"): { 10 };
 
     //rhs
-    case (_editorCat in ["rhs_EdSubcat_car","rhs_EdSubcat_truck","rhs_EdSubcat_mrap"]): {0};
-    case (_editorCat in ["rhs_EdSubcat_apc","rhs_EdSubcat_ifv","rhs_EdSubcat_tank","rhs_EdSubcat_aa","rhs_EdSubcat_artillery"]): {1};
-    case (_editorCat in ["rhs_EdSubcat_aircraft","rhs_EdSubcat_helicopter","rhs_EdSubcat_helicopter_d","rhs_EdSubcat_helicopter_wd"]): { 2 };
-    case (_editorCat isEqualTo "rhs_EdSubcat_boat"): { 3 };
+    case (_editorCat in ["rhs_EdSubcat_car", "rhs_EdSubcat_truck", "rhs_EdSubcat_mrap"]): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover)
+    case (_editorCat in ["rhs_EdSubcat_apc","rhs_EdSubcat_ifv"]): {2};
+    case (_editorCat in ["rhs_EdSubcat_tank"]): {3};
+    case (_editorCat in ["rhs_EdSubcat_aa"]): {4};
+    case (_editorCat in ["rhs_EdSubcat_artillery"]): {5};
+    case (_editorCat in ["rhs_EdSubcat_helicopter","rhs_EdSubcat_helicopter_d","rhs_EdSubcat_helicopter_wd"]): { 6 };
+    case (_editorCat in ["rhs_EdSubcat_aircraft"]): { 7 };
+    case (_editorCat isEqualTo "rhs_EdSubcat_boat"): { 8 };
 
     //cup
-    case (_editorCat in ["CUP_EdSubcat_Bikes","CUP_EdSubCat_Cars_Woodland","CUP_EdSubCat_UpHMMWV_Cars_Desert","CUP_EdSubCat_Cars_Winter"]): { 0 };
-
+    case (_editorCat in ["CUP_EdSubcat_Bikes", "CUP_EdSubCat_Cars_Woodland", "CUP_EdSubCat_UpHMMWV_Cars_Desert", "CUP_EdSubCat_Cars_Winter"]): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover)
+    
     //Fallback
-    case (_class isKindOf "Car"): { 0 };
-    case (_class isKindOf "Tank"): { 1 };
-    case (_class isKindOf "Air"): { 2 };
-    case (_class isKindOf "Ship"): { 3 };
+    case (_class isKindOf "Car"): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover)
+    case (_class isKindOf "Tracked_APC"): { 2 }; //?
+    case (_class isKindOf "Tank"): { 3 };
+    case (_class isKindOf "Helicopter"): { 6 };
+    case (_class isKindOf "Plane"): { 7 };
+    case (_class isKindOf "Ship"): { 8 };
+    case (_class isKindOf "staticWeapon"): { 10 }; //some non-vanilla artillery is statics
 
     default { -1 };
 };
+
+/// isKindOf you can check here: https://community.bistudio.com/wiki/Arma_2:_CfgVehicles#Land_Class_Vehicles
+
+/* 
+List of editor categories:
+EdSubcat_AAs
+EdSubcat_APCs
+EdSubcat_Artillery
+EdSubcat_Boats
+EdSubcat_Cars
+EdSubcat_Drones
+EdSubcat_Helicopters
+EdSubcat_Planes
+EdSubcat_Submersibles
+EdSubcat_Tanks
+EdSubcat_Turrets 
+Link to check https://community.bistudio.com/wiki/Eden_Editor:_Object_Categorization
+*/

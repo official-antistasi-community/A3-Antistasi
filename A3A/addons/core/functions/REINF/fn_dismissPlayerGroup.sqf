@@ -24,6 +24,8 @@ if ((_x getVariable "unitType") != FactionGet(reb,"unitUnarmed")) then
 	};
 } forEach _units;
 
+["update"] call A3A_GUI_fnc_aiManagementTab;
+
 if (recruitCooldown < time) then {recruitCooldown = time + 60} else {recruitCooldown = recruitCooldown + 60};
 
 

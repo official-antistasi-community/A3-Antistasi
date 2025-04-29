@@ -18,6 +18,8 @@ class CfgFunctions {
             class fireMissionEH {};
             class getGroupInfo {};
             class getGroupVehicle {};
+            class getLocationMarkerName {};
+            class getLocationMarkerType {};
             class getVehicleCrewCount {};
             class hqDialog {};
             class mainDialog {};

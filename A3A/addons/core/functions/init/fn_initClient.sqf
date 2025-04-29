@@ -100,6 +100,7 @@ waitUntil {local player};
 player setVariable ["score",0];
 player setVariable ["moneyX",0];
 player setVariable ["rankX",rank player];
+player setVariable ["missionsCompleted",0];
 
 player setVariable ["owner",player,true];
 player setVariable ["punish",0,true];
@@ -376,7 +377,8 @@ GVAR(keys_battleMenu) = false; //initilize key flags to false
 boxX allowDamage false;			// hmm...
 boxX addAction [localize "STR_A3A_fn_init_initclient_addact_transfer", {[] spawn A3A_fnc_empty;}, 4,1.5,true,true,"","!unitIsUAV _this"];
 flagX allowDamage false;
-flagX addAction [localize "STR_A3A_fn_init_initclient_addact_recruit", {if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_init_initclient_recunit", localize "STR_A3A_fn_init_initclient_recunit_no"] call A3A_fnc_customHint;} else { [] spawn A3A_fnc_unit_recruit; }},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)"];
+flagX addAction [localize "STR_A3A_fn_init_initclient_addact_recruit", { if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_init_initclient_recunit", localize "STR_A3A_fn_init_initclient_recunit_no"] call A3A_fnc_customHint;} else { if (A3A_GUIDevPreview) then {createDialog "A3A_RecruitDialog";} else {[] spawn A3A_fnc_unit_recruit;};};},nil,0,false,true,"","(petros == leader group petros)",4];
+flagx addAction [localize "STR_A3A_fn_init_initClient_addAct_recruitSquad", { createDialog "A3A_RecruitSquadDialog"; },nil,0,false,true,"","A3A_GUIDevPreview and (_this == theBoss) and (petros == leader group petros)",4];
 
 //Adds a light to the flag
 private _flagLight = "#lightpoint" createVehicle (getPos flagX);
@@ -452,6 +454,8 @@ _layer = ["statisticsX"] call bis_fnc_rscLayer;
 if (A3A_hasACE) then {call A3A_fnc_initACE};
 
 [allCurators] call A3A_fnc_initZeusLogging;
+
+A3A_aliveTime = time;
 
 initClientDone = true;
 Info("initClient completed");
