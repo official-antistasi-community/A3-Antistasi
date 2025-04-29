@@ -32,7 +32,7 @@ private _vehiclesIFVs = ["a3a_APC_Tracked_02_cannon_F"];
 private _Tanks = ["O_MBT_02_cannon_F"];
 ["vehiclesAA", ["O_APC_Tracked_02_AA_F"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["O_Boat_Transport_01_F", "I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["O_Boat_Armed_01_hmg_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["a3a_APC_Wheeled_02_rcws_v2_F"]] call _fnc_saveToTemplate;
 
@@ -96,7 +96,8 @@ if ("orange" in A3A_enabledDLC) then {
 if ("rf" in A3A_enabledDLC) then {
     _vehiclesPolice append ["a3a_police_Pickup_rf", "B_GEN_Pickup_covered_rf", "a3a_police_Pickup_comms_rf"];
     _vehiclesMilitiaCars append ["O_Pickup_rf"];
-    _vehiclesMilitiaLightArmed append ["a3a_hex_Pickup_mmg_rf"];
+    _vehiclesMilitiaLightArmed append ["a3a_hex_Pickup_mmg_rf", "O_Pickup_rcws_rf"];
+    _lightArmed append ["O_Pickup_rcws_rf"];
 };
 if ("ef" in A3A_enabledDLC) then {
     ["vehiclesGunBoats", ["EF_O_CombatBoat_HMG_OPF", "EF_O_CombatBoat_AT_OPF"]] call _fnc_saveToTemplate;
@@ -472,6 +473,7 @@ if ("rf" in A3A_enabledDLC) then {
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Holosight", [], [], ""],
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Aco_smg", [], [], ""]
     ];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
     (_militaryLoadoutData get "helmets") append ["H_HelmetO_ocano_sb_hex_RF"];
     (_militiaLoadoutData get "helmets") append ["H_HelmetO_ocamo_sb_hex_RF"];
 };

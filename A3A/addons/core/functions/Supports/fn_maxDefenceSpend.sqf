@@ -126,7 +126,7 @@ else
 
     // Cap max location spend when enemies are a small proportion of total rebel firepower
     if (_targetSide == teamPlayer) then {
-        private _maxSpendProp = 0.1 + (_enemyStr / (30 * A3A_activePlayerCount)) ^ 0.6;
+        private _maxSpendProp = 0.1 + (_enemyStr / (1 + 30 * A3A_activePlayerCount)) ^ 0.6;
         Debug_1("Max spend by rebel threat proportion: %1", _maxSpendProp);
         _maxSpendLoc = _maxSpendLoc min _maxSpendProp;
     };

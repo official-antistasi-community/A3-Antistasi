@@ -62,14 +62,17 @@ switch (_mode) do
         setGroupIconsVisible [false, false];
         setGroupIconsSelectable false;
 
-        // Show player tab content
-        ["switchTab", ["player"]] call FUNC(mainDialog);
-
         // Cache group info in map control
         Debug("Caching group info");
 
+        private _isArty = (player getVariable ["selHcGroups",[]] isNotEqualTo []);
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
-        private _hcGroupData = [];
+        private _selHCGroups = if !(_isArty) then {
+            hcSelected player;
+        } else {
+            player getVariable ["selHcGroups",[]];
+        };
+        _hcGroupData = [];
         if (player == theBoss) then
         {
             {
@@ -82,9 +85,10 @@ switch (_mode) do
 
         // Init selected group
         private _selectedGroup = grpNull;
-        if (count (hcSelected player) == 1) then
+
+        if (count _selHCGroups == 1) then
         {
-            _selectedGroup = (hcSelected player) # 0;
+            _selectedGroup = _selHCgroups # 0;
         };
         _commanderMap setVariable ["selectedGroup", _selectedGroup];
 
@@ -106,9 +110,6 @@ switch (_mode) do
         private _commanderUserMarkersEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawUserMarkersEH"];
         Debug_1("Adding user markers Draw EH to commander map: %1", _commanderUserMarkersEH);
 
-
-
-
         // Fast Travel map Draw EHs
         private _fastTravelMap = _display displayCtrl A3A_IDC_FASTTRAVELMAP;
         // Select marker
@@ -118,6 +119,12 @@ switch (_mode) do
         private _fastTravelOutpostsEH = _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
         Debug_1("Adding outposts Draw EH to Fast Travel map: %1", _fastTravelOutpostsEH);
 
+        // Show player tab content
+        if !(_isArty) then {
+            ["switchTab", ["player"]] call FUNC(mainDialog);
+        } else {
+            ["switchTab", ["commander"]] call FUNC(mainDialog);
+        };
 
         Debug("MainDialog onLoad complete.");
 
@@ -144,6 +151,12 @@ switch (_mode) do
         private _groupIcons = _display getVariable ["HCgroupIcons", [false,false]];
         setGroupIconsVisible _groupIcons;
         setGroupIconsSelectable true;
+
+        A3A_DoSendAdminData = false;
+        publicVariableServer "A3A_DoSendAdminData";
+
+        // stop admin tab if not nil
+        terminate (_display getVariable ["A3A_adminTabUpdateSpawn", scriptNull]);
 
         Debug("MainDialog onUnload complete.");
     };
@@ -178,6 +191,10 @@ switch (_mode) do
             {
                 if ([] call FUNCMAIN(isLocalAdmin)) then {
                     _selectedTabIDC = A3A_IDC_ADMINTAB;
+                    // tell the server to start sending the admin data over the net to the admin
+                    A3A_DoSendAdminData = true;
+                    publicVariableServer "A3A_DoSendAdminData";
+                    [] remoteExecCall ["A3A_fnc_adminData", 2];
                 };
             };
 
@@ -249,6 +266,9 @@ switch (_mode) do
         private _selectedTabCtrl = _display displayCtrl _selectedTabIDC;
         _selectedTabCtrl ctrlShow true;
 
+        // stop admin tab if not nil
+        terminate (_display getVariable ["A3A_adminTabUpdateSpawn", scriptNull]);
+
         // Update tab
         Debug("Updating selected tab");
         switch (_selectedTab) do
@@ -266,6 +286,15 @@ switch (_mode) do
             case ("admin"):
             {
                 ["update"] call FUNC(adminTab);
+                private _updateAdminTab = [] spawn 
+                {
+                    while {true} do 
+                    {
+                        ["updateStatPanel"] call FUNC(adminTab);
+                        sleep 1;
+                    };
+                };
+                _display setVariable ["A3A_adminTabUpdateSpawn", _updateAdminTab];
             };
 
             case ("fasttravel"):

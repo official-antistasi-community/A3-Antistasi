@@ -32,7 +32,7 @@ private _APCs = ["a3a_B_T_APC_Wheeled_01_cannon_F", "B_T_APC_Tracked_01_rcws_F"]
 private _Tanks = ["B_T_MBT_01_TUSK_F", "B_T_MBT_01_cannon_F"];
 ["vehiclesAA", ["B_T_APC_Tracked_01_AA_F"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["B_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["a3a_B_T_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 
@@ -499,12 +499,25 @@ if ("rf" in A3A_enabledDLC) then {
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Holosight", [], [], ""],
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Aco_smg", [], [], ""]
     ];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
     (_sfLoadoutData get "helmets") append [
     "H_HelmetB_plain_sb_mtp_RF",
     "H_HelmetHeavy_Sand_RF",
     "H_HelmetHeavy_Simple_Sand_RF",
     "H_HelmetHeavy_VisorUp_Sand_RF"];
     (_militaryLoadoutData get "helmets") append ["H_HelmetB_plain_sb_mtp_RF"];
+    // NATO almost exclusively uses their current in-built launchers, with the remaining PSRLs in the hands of lighter units or those trained to use them
+    private _lightLaunchersAppend = [ // 1/3 chance of LAT being psrl
+    ["launch_PSRL1_PWS_black_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_NLAW_F"]
+    ];
+    private _medLaunchersAppend = [ // 1/7 chance of MAT being psrl
+    ["launch_PSRL1_PWS_black_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    {
+        (_x get "lightATLaunchers") append _lightLaunchersAppend;
+        (_x get "ATLaunchers") append _medLaunchersAppend;
+    } forEach [_militiaLoadoutData, _militaryLoadoutData, _sfLoadoutData];
 };
 if ("ef" in A3A_enabledDLC) then {
     (_militaryLoadoutData get "slRifles") append [

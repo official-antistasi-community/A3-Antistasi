@@ -60,6 +60,9 @@ switch (_mode) do
         _spawnDistanceSlider sliderSetPosition _spawnDistance;
         ctrlSetText [A3A_IDC_SPAWNDISTANCEEDITBOX, str _spawnDistance];
 
+        private _resetHQButton = _display displayCtrl A3A_IDC_RESETHQBUTTON;
+        _resetHQButton ctrlEnable false; // no seriously, what is this supposed to do?
+
         // _aiLimiterSlider = _display displayCtrl A3A_IDC_AILIMITERSLIDER;
         // _aiLimiterSlider sliderSetRange [_aiLimiterMin, _aiLimiterMax];
         // _aiLimiterSlider sliderSetSpeed [10, 10];
@@ -67,40 +70,65 @@ switch (_mode) do
         // _aiLimiterSlider sliderSetPosition _aiLimiter;
         // ctrlSetText [A3A_IDC_AILIMITEREDITBOX, str _aiLimiter];
 
-        // Get Debug info
-        // TODO UI-update: change this to get server values instead when merging
-        private _debugText = _display displayCtrl A3A_IDC_DEBUGINFO;
-        private _missionTime = [time] call A3A_fnc_formatTime;
-        private _serverFps = (round (diag_fps * 10)) / 10; // TODO UI-update: Get actual server FPS, not just client
-        private _connectedHCs = 0; // TODO UI-update: get actual number of connected headless clients
-        private _players = 0; // TODO UI-update: get actual number of players connected
+        // stat panel is updated by case in mainDialog
+    };
 
-        // TODO UI-update: get actual unit counts
-        private _allUnits = count allUnits;
-        private _deadUnits = 1349;
-        private _countGroups = count allGroups;
-        private _countRebels = 16;
-        private _countInvaders = 5;
-        private _countOccupants = 37;
-        private _countCiv = 4096;
-        private _destroyedVehicles = 2;
+    case ("updateStatPanel"):
+    {
+        // Get Debug info
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _debugText = _display displayCtrl A3A_IDC_DEBUGINFO;
+        private _missionTime = format [[round serverTime,1,1,false,2,false,true] call A3A_fnc_timeSpan_format];
+        //private ["_serverFPS","_deadUnits","_allUnits","_countRebels","_countInvaders","_countOccupants","_countCiv","_countGroups","_players","_destroyedVehicles","_connectedHCs"];
+        private ["_serverFPS"];
+
+        if(!isNil "A3A_AdminData") then 
+        {
+            _serverFps = A3A_AdminData#0;
+            /*
+            _deadUnits = A3A_AdminData#1;
+            _allUnits = A3A_AdminData#2;
+            _countRebels = A3A_AdminData#4;
+            _countInvaders = A3A_AdminData#5;
+            _countOccupants = A3A_AdminData#6;
+            _countCiv = A3A_AdminData#7;
+            _countGroups = A3A_AdminData#8;
+            _players = A3A_AdminData#9;
+            _destroyedVehicles = A3A_AdminData#10;
+            _connectedHCs = A3A_AdminData#12;
+            */
+        } else {
+            _serverFps = (round (diag_fps * 10)) / 10;
+        };
+        _connectedHCs = count entities "HeadlessClient_F";
+        _players = count allPlayers - _connectedHCs;
+        _allUnits = count allUnits;
+        _deadUnits = count allDead;
+        _countGroups = count allGroups;
+        _countRebels = {side group _x == teamPlayer} count allUnits; // count undercover players
+        _countInvaders = {side _x == Invaders} count allUnits;
+        _countOccupants = {side _x == Occupants} count allUnits;
+        _countCiv = {side _x == civilian} count allUnits;
+        _destroyedVehicles = {!alive _x} count vehicles;
 
         // TODO UI-update: localize later, not final yet
-        private _formattedString = format [
-        "<t font='EtelkaMonospacePro' size='0.8'>
-        <t>Mission time:</t><t align='right'>%1</t><br />
-        <t>Server FPS:</t><t align='right'>%2</t><br />
-        <t>Connected HCs:</t><t align='right'>%3</t><br />
-        <t>Players:</t><t align='right'>%4</t><br />
-        <t>Groups</t><t align='right'>%5</t><br />
-        <t>Units:</t><t align='right'>%6</t><br />
-        <t>Dead units:</t><t align='right'>%7</t><br />
-        <t>Rebels:</t><t align='right'>%8</t><br />
-        <t>Invaders:</t><t align='right'>%9</t><br />
-        <t>Occupants:</t><t align='right'>%10</t><br />
-        <t>Civs:</t><t align='right'>%11</t><br />
-        <t>Wrecks:</t><t align='right'>%12</t>
-        </t>",
+        private _rawStrings = [
+        "<t font='EtelkaMonospacePro' size='0.8'>",
+        "<t>Mission time:</t><t align='right'>%1</t><br />",
+        "<t>Server FPS:</t><t align='right'>%2</t><br />",
+        "<t>Connected HCs:</t><t align='right'>%3</t><br />",
+        "<t>Players:</t><t align='right'>%4</t><br />",
+        "<t>Groups</t><t align='right'>%5</t><br />",
+        "<t>Units:</t><t align='right'>%6</t><br />",
+        "<t>Dead units:</t><t align='right'>%7</t><br />",
+        "<t>Rebels:</t><t align='right'>%8</t><br />",
+        "<t>Invaders:</t><t align='right'>%9</t><br />",
+        "<t>Occupants:</t><t align='right'>%10</t><br />",
+        "<t>Civs:</t><t align='right'>%11</t><br />",
+        "<t>Wrecks:</t><t align='right'>%12</t>"
+        ];
+        private _fullString = _rawStrings joinString "";
+        private _formattedString = format [_fullString,
         _missionTime,
         _serverFps,
         _connectedHCs,
@@ -115,8 +143,7 @@ switch (_mode) do
         _destroyedVehicles
         ];
 
-        _debugText ctrlSetStructuredText parseText _formattedString;
-
+        _debugText ctrlSetStructuredText parseText _formattedString; 
     };
 
     case ("civLimitSliderChanged"):
@@ -204,7 +231,7 @@ switch (_mode) do
             [player,"globalCivilianMax","set", _globalCivilianMax, true] remoteExecCall ["A3A_fnc_HQGameOptions",2];
             [player,"distanceSPWN","set", _distanceSPWN, true] remoteExecCall ["A3A_fnc_HQGameOptions",2];
 
-            // TODO UI-update: Placeholder routine, don't merge! Has no security checks whatsoever
+            // Placeholder routine, don't merge! Has no security checks whatsoever
             // Trace_3("Changing AI Settings - globalCivilianMax:%1, distanceSPWN:%2, maxUnits:%3", _globalCivilianMax, _distanceSPWN, _maxUnits);
             // missionNamespace setVariable ["globalCivilianMax", _globalCivilianMax];
             // missionNamespace setVariable ["distanceSPWN", _distanceSPWN];

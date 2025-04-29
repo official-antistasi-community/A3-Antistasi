@@ -67,7 +67,7 @@ if (captive player) exitWith
     [false, 2, "Already undercover", localize "STR_A3A_fn_undercover_canGoUn_already"];
 };
 
-if !(isNull (objectParent player)) then
+private _failReason = if !(isNull (objectParent player)) then
 {
     if (!(typeOf(objectParent player) in undercoverVehicles)) exitWith
     {
@@ -81,6 +81,7 @@ if !(isNull (objectParent player)) then
     {
         [false, 5, "In vehicle with tow ropes attached", localize "STR_A3A_fn_undercover_canGoUn_no_towrope"];
     };
+    [];
 }
 else
 {
@@ -119,8 +120,10 @@ else
     {
         [false, 13, "Holding tow ropes", format [localize "STR_A3A_fn_undercover_canGoUn_no_reason_rope", _cantUndercoverWhile]];
     };
+    [];
 };
 
+if (_failReason isNotEqualTo []) exitWith {_failReason};
 
 private _roadblocks = controlsX select {isOnRoad(getMarkerPos _x)};
 private _secureBases = airportsX + outposts + seaports + _roadblocks;

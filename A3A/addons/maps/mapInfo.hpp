@@ -15,6 +15,7 @@ class mapInfo {
     #include "Antistasi_Napf.Napf\mapInfo.hpp"
     #include "Antistasi_NapfWinter.NapfWinter\mapInfo.hpp"
     #include "Antistasi_pulau.pulau\mapInfo.hpp"
+    #include "Antistasi_regero.regero\mapInfo.hpp"
     #include "Antistasi_sara.sara\mapInfo.hpp"
     #include "Antistasi_SPE_Mortain.SPE_Mortain\mapInfo.hpp"
     #include "Antistasi_SPE_Normandy.SPE_Normandy\mapInfo.hpp"

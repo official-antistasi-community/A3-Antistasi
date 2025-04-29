@@ -26,13 +26,12 @@ if (_index isEqualTo -1) exitWith {};
 private _disp = findDisplay HR_GRG_IDD_Garage;
 
 //disables current category
-for "_i" from 0 to 10 do {
-    private _ctrl = _disp displayCtrl (HR_GRG_IDC_CatUndercoverCar + _i);
-    if (ctrlEnabled _ctrl) exitWith {
-        _ctrl ctrlShow false;
-        _ctrl ctrlEnable false;
+{
+    if (ctrlEnabled _x) then {
+        _x ctrlShow false;
+        _x ctrlEnable false;
     };
-};
+} forEach HR_GRG_Cats;
 
 //refresh new category
 private _disp = findDisplay HR_GRG_IDD_Garage;
