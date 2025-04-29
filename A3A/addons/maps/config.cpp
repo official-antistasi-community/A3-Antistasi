@@ -42,6 +42,7 @@ class CfgMissions
         A3A_Mission(Napf)
         A3A_Mission(NapfWinter)
         A3A_Mission(pulau)
+        A3A_Mission(regero)
         A3A_Mission(sara)
         A3A_Mission(SPE_Mortain)
         A3A_Mission(SPE_Normandy)

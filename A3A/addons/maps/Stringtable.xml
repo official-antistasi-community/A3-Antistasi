@@ -1318,6 +1318,18 @@
         <Turkish>Antistasi - Virolahti'nin Kurtuluşu</Turkish>
         <Chinesesimp>Antistasi - 解放 Virolahti</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_mission_info_regero_mapname_short_text">
+        <Original>Antistasi Regero</Original>
+      </Key>
+      <Key ID="STR_antistasi_mission_info_regero_mapname_text">
+        <Original>Antistasi - Liberation of Regero</Original>
+      </Key>
+      <Key ID="STR_antistasi_mission_info_regero_description_text">
+        <Original>Be the Resistance Leader. Fight against a superior enemy in technology, number, assets and vehicles. Use guerrilla tactics in a totally dynamic world, with around 18 sidemissions, everywhere, anytime, anything.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mission_info_regero_blurb_text">
+        <Original>We bear this liberation</Original>
+      </Key>
     </Container>
     <Container name="Mission_Params">
       <Key ID="STR_A3A_Mission_Params_autoLoadLastGame_10min">
