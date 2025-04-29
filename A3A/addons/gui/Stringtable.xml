@@ -4210,6 +4210,9 @@
         <Turkish>Eski Oyunu Kopyala</Turkish>
         <Chinesesimp>加载之前的存档</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_setup_copy_old_game_tooltip">
+        <Original>Load an old campaign with a new ID. This option can be used to move a campaign to or from the new save method, or just to make an additional copy for experiments. The new game won't exist on disk until it's saved.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_setup_create_new_game">
         <Original>Create new game</Original>
         <German>Erstelle neuen Spielstand</German>
@@ -4291,6 +4294,9 @@
         <Portuguese>Copiar parametros anteriores</Portuguese>
         <Turkish>Eski parametreleri yükle</Turkish>
         <Chinesesimp>复制之前的参数</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_load_old_params_tooltip">
+        <Original>Use the parameters from the selected campaign when creating the new one.</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_loadgame_tab_button">
         <Original>Load Game</Original>
@@ -4515,7 +4521,7 @@
         <Russian>Переключить на ДЛС</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_use_new_namespace">
-        <Original>Use New Save file</Original>
+        <Original>New save method</Original>
         <German>Nutze neue Spielstand Datei</German>
         <Italian>Usa Nuovo File di Salvataggio</Italian>
         <Spanish>Usar fichero de Partida nueva</Spanish>
@@ -4527,6 +4533,9 @@
         <Portuguese>Usar novo ficheiro</Portuguese>
         <Turkish>Yeni kayıt dosyası kullan</Turkish>
         <Chinesesimp>使用新的存档文件</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_use_new_namespace_tooltip">
+        <Original>Save the new campaign to AntistasiCommunity.vars instead of the main profile vars file. Warning: This may not work correctly on Linux servers due to an Arma bug.</Original>
       </Key>
     </Container>
   </Package>
