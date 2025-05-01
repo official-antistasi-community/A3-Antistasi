@@ -6,6 +6,9 @@ private ["_pos","_veh","_roads","_conquered","_dirVeh","_markerX","_positionX","
 
 _markerX = _this select 0;
 _positionX = getMarkerPos _markerX;
+if (_positionX isEqualTo [0,0,0]) exitWith {
+	Error_1("Control point %1 doesn't exist, exiting", _markerX);
+};
 _sideX = sidesX getVariable [_markerX,sideUnknown];
 private _faction = Faction(_sideX);
 
@@ -48,32 +51,17 @@ if (_isControl) then
 			};
 		};
 
-	// Attempt to find nearby road with two connected roads
-	_radiusX = 20;
-	while {_radiusX < 100} do
-	{
-		_roads = _positionX nearRoads _radiusX;
-		_roads = _roads select { count (roadsConnectedTo _x) == 2 };
-		if (count _roads > 0) exitWith {};
-		_radiusX = _radiusX + 10;
-	};
-
-	if (_radiusX >= 100) then {
-		// fallback case, shouldn't happen unless the map is very broken
-        Error_2("Roadblock error for %1 at %2", _markerX, _positionX);
-		_roads = _positionX nearRoads 20;		// guaranteed due to isOnRoad check
-		_dirveh = random 360;
-	} else {
-		private _roadscon = roadsConnectedto (_roads select 0);
-		_dirveh = [_roads select 0, _roadscon select 0] call BIS_fnc_DirTo;
-	};
+	// Sanity-checking should be handled already
+	private _road = roadAt _positionX;
+	private _roadscon = roadsConnectedto _road;
+	_dirveh = [_road, _roadscon select 0] call BIS_fnc_DirTo;
 
 	if (!_isFIA) then
 		{
 		_groupE = grpNull;
 		if !(A3A_hasIFA) then
 			{
-			_pos = [getPos (_roads select 0), 7, _dirveh + 270] call BIS_Fnc_relPos;
+			_pos = [getPosATL _road, 7, _dirveh + 270] call BIS_Fnc_relPos;
 			if ((worldname == "SPE_Normandy") or (worldname == "SPE_Mortain")) then {
 				_bunker = "Land_SPE_Sandbag_Nest" createVehicle _pos;
 				_bunker setDir _dirveh;
@@ -96,7 +84,7 @@ if (_isControl) then
 			_unit moveInGunner _veh;
 			_soldiers pushBack _unit;
 			sleep 1;
-			_pos = [getPos (_roads select 0), 7, _dirveh + 90] call BIS_Fnc_relPos;
+			_pos = [getPosATL _road, 7, _dirveh + 90] call BIS_Fnc_relPos;
 			if ((worldname == "SPE_Normandy") or (worldname == "SPE_Mortain")) then {
 				_bunker = "Land_SPE_Sandbag_Nest" createVehicle _pos;
 				_bunker setDir _dirveh + 180;
@@ -158,7 +146,7 @@ if (_isControl) then
 	else
 		{
 		_typeVehX = selectRandom (_faction get "vehiclesMilitiaLightArmed");
-		_veh = _typeVehX createVehicle getPos (_roads select 0);
+		_veh = _typeVehX createVehicle getPosATL _road;
 		_veh setDir _dirveh + 90;
 		[_veh, _sideX] call A3A_fnc_AIVEHinit;
 		_vehiclesX pushBack _veh;
@@ -175,10 +163,7 @@ if (_isControl) then
 	}
 else
 	{
-	_markersX = markersX select {(getMarkerPos _x distance _positionX < distanceSPWN) and (sidesX getVariable [_x,sideUnknown] == teamPlayer)};
-	_markersX = _markersX - ["Synd_HQ"] - outpostsFIA;
-	_frontierX = if (count _markersX > 0) then {true} else {false};
-	if (_frontierX) then
+	if (true) then
 		{
 		_cfg =  selectRandom (_faction get "groupSpecOpsRandom");
 		if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then
@@ -190,10 +175,15 @@ else
 			{
 			Debug_1("Creating a Minefield at %1", _markerX);
 				private _mines = (_faction get "minefieldAPERS");
-				for "_i" from 1 to 45 do {
-					_mineX = createMine [ selectRandom _mines ,_positionX,[],_size];
-					_sideX revealMine _mineX;
+				private _placedMines = [];
+				for "_i" from 1 to 30 do {
+					_placedMines pushBack createMine [ selectRandom _mines ,_positionX,[], 200];
 				};
+				// Don't put mines on roads otherwise we might start blowing up civs
+				{
+					if (_x nearRoads 20 isNotEqualTo [] or surfaceIsWater getPosATL _x) then { deleteVehicle _x; continue };
+					_sideX revealMine _x;
+				} forEach _placedMines;
 			};
 		_groupX = [_positionX,_sideX, _cfg] call A3A_fnc_spawnGroup;
 
@@ -319,41 +309,13 @@ waitUntil {sleep 1;(spawner getVariable _markerX == 2)};
 } forEach _vehiclesX;
 
 
-if (_conquered) then
-	{
-	_indexX = controlsX find _markerX;
-	if (_indexX > defaultControlIndex) then
-		{
-		_timeLimit = 120;//120
-		_dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + _timeLimit];
-		_dateLimitNum = dateToNumber _dateLimit;
-		waitUntil {sleep 60;(dateToNumber date > _dateLimitNum)};
-		_base = [(markersX - controlsX),_positionX] call BIS_fnc_nearestPosition;
-		if (sidesX getVariable [_base,sideUnknown] == Occupants) then
-			{
-			sidesX setVariable [_markerX,Occupants,true];
-			}
-		else
-			{
-			if (sidesX getVariable [_base,sideUnknown] == Invaders) then
-				{
-				sidesX setVariable [_markerX,Invaders,true];
-				};
-			};
-		}
-	else
-		{
-		/*
-		if ((!_isControl) and (_winner == teamPlayer)) then
-			{
-			_size = [_markerX] call A3A_fnc_sizeMarker;
-			for "_i" from 1 to 60 do
-				{
-				_mineX = createMine ["APERSMine",_positionX,[],_size];
-				if (_loser == Occupants) then {Occupants revealMine _mineX} else {Invaders revealMine _mineX};
-				};
-			};
-		*/
-		};
-	};
+// Check whether there's an enemy base nearby on despawn
+//private _markers = citiesX + outposts + seaports + factories + resourcesX;
+//if (_markers select { sidesX getVariable _x != _sideX } inAreaArrayIndexes [_positionX, 700, 700] isNotEqualTo []) then { _conquered = true };
+//if (airportsX select { sidesX getVariable _x != _sideX } inAreaArrayIndexes [_positionX, 1000, 1000] isNotEqualTo []) then { _conquered = true };
+
+if (_conquered) then {
+	[_markerX, true] remoteExecCall ["A3A_fnc_deleteMinorSite", 2];
+};
+
 ["locationSpawned", [_markerX, "Control", false]] call EFUNC(Events,triggerEvent);

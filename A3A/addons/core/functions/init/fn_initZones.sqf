@@ -18,46 +18,20 @@ if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower world
 
 [] call A3A_fnc_prepareMarkerArrays;
 
-private ["_name", "_sizeX", "_sizeY", "_size", "_pos", "_mrk"];
+// TODO: Read additional camps from config here?
 
-if ((toLower worldName) in ["altis", "chernarus_summer"]) then {
-	"((getText (_x >> ""type"")) == ""Hill"") &&
-	!((getText (_x >> ""name"")) isEqualTo """") &&
-	!(configName _x isEqualTo ""Magos"")"
-	configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
-
-		_name = configName _x;
-		_sizeX = getNumber (_x >> "radiusA");
-		_sizeY = getNumber (_x >> "radiusB");
-		_size = [_sizeX, _sizeY] select (_sizeX <= _sizeY);
-		_pos = getArray (_x >> "position");
-		_size = [_size, 50] select (_size < 10);
-		_mrk = createmarker [format ["%1", _name], _pos];
-		_mrk setMarkerSize [_size, _size];
-		_mrk setMarkerShape "ELLIPSE";
-		_mrk setMarkerBrush "SOLID";
-		_mrk setMarkerColor "ColorRed";
-		_mrk setMarkerText _name;
-		controlsX pushBack _name;
-	};
-};  //this only for Altis and Cherno
-if (debug) then {
-    Debug_1("Setting Spawn Points for %1.", worldname);
-};
-//We're doing it this way, because Dedicated servers world name changes case, depending on how the file is named.
-//And weirdly, == is not case sensitive.
-//this comments has not an information about the code
-
-(seaMarkers + seaSpawn + seaAttackSpawn + spawnPoints + detectionAreas) apply {_x setMarkerAlpha 0};
-defaultControlIndex = (count controlsX) - 1;
+(A3A_mapCamps + A3A_mapRoadblocks + seaMarkers + seaSpawn + seaAttackSpawn + spawnPoints + detectionAreas) apply {_x setMarkerAlpha 0};
 outpostsFIA = [];
 destroyedSites = [];
 garrison setVariable ["Synd_HQ", [], true];
-markersX = airportsX + resourcesX + factories + outposts + seaports + controlsX + ["Synd_HQ"];
+markersX = airportsX + resourcesX + factories + outposts + seaports + ["Synd_HQ"];
 markersX apply {
 	_x setMarkerAlpha 0;
 	spawner setVariable [_x, 2, true];
 };
+
+// Whatever
+controlsX = [];
 
 // Set up dummy markers + autogen roadblocks
 call A3A_fnc_initBases;
@@ -278,7 +252,7 @@ if (debug) then {
 // Make list of markers that don't have a proper road nearby
 // TODO: Nearly obsolete. Switch convoy code to road distance checks & markerNavPoint
 
-blackListDest = (markersX - controlsX - ["Synd_HQ"] - citiesX) select {
+blackListDest = (markersX - ["Synd_HQ"] - citiesX) select {
 	private _nearRoads = (getMarkerPos _x) nearRoads (([_x] call A3A_fnc_sizeMarker) * 1.5);
 //	_nearRoads = _nearRoads inAreaArray _x;
 	private _badSurfaces = ["#GdtForest", "#GdtRock", "#GdtGrassTall"];
@@ -315,7 +289,6 @@ publicVariable "airportsX";
 publicVariable "resourcesX";
 publicVariable "factories";
 publicVariable "outposts";
-publicVariable "controlsX";
 publicVariable "seaports";
 publicVariable "destroyedSites";
 publicVariable "forcedSpawn";
@@ -328,7 +301,6 @@ publicVariable "mrkAntennas";
 publicVariable "banks";
 publicVariable "seaSpawn";
 publicVariable "seaAttackSpawn";
-publicVariable "defaultControlIndex";
 publicVariable "detectionAreas";
 publicvariable "A3A_fuelStations";
 publicvariable "A3A_fuelStationTypes";

@@ -125,7 +125,6 @@ class CfgFunctions
             class createBreachChargeText {};
             class createOutpostsFIA {};
             class createPetros {};
-            class deleteControls {};
             class destroyCity {};
             class distance {};
             class distanceUnits {};
@@ -386,7 +385,6 @@ class CfgFunctions
             class initGarrisons {};
             class initPreJIP { preInit = 1; };
             class initSpawnPlaces {};
-            class generateRoadblock {};
 
             class initVarCommon {};
             class initVarServer {};
@@ -426,6 +424,21 @@ class CfgFunctions
             class initLootToCrate {};
             class lootFromContainer {};
             class lootToCrate {};
+        };
+
+        class MinorSites {
+            file = QPATHTOFOLDER(functions\MinorSites);
+            class addMinorSite {};
+            class deleteMinorSite {};
+            class deleteNearSites {};
+            class generateCamps {};
+            class generateRoadblockPairs {};
+            class generateRoadblocks {};
+            class initMinorSites {};
+            class renderRoadblocks {};
+            class selectRoadBetweenMarkersNav {};
+            class selectRoadBetweenMarkersRand {};
+            class updateMinorSites {};
         };
 
         class Missions {
@@ -503,6 +516,7 @@ class CfgFunctions
             class findNodesInDistance {};
             class findPath {};
             class findPathPrecheck {};
+            class findPathSimple {};
             class findPosOnRoute {};
             class findSeaPath {};
             class getMarkerNavPoint {};

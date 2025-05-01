@@ -35,9 +35,6 @@ private _declareServerVariable = {
 ////////////////////////////////////////
 Info("initialising general server variables");
 
-private _mapInfo = missionConfigFile/"A3A"/"mapInfo"/toLower worldName;
-if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower worldName};
-
 //initial spawn distance. Less than 1Km makes parked vehicles spawn in your nose while you approach.
 //User-adjustable variables are now declared in initParams
 //DECLARE_SERVER_VAR(distanceSPWN, 1000);
@@ -45,14 +42,6 @@ DECLARE_SERVER_VAR(distanceSPWN1, distanceSPWN*1.3);
 DECLARE_SERVER_VAR(distanceSPWN2, distanceSPWN*0.5);
 //Quantity of Civs to spawn in (most likely per client - Bob Murphy 26.01.2020)
 //DECLARE_SERVER_VAR(globalCivilianMax, 5);
-
-//The furthest distance the AI can attack from using helicopters or planes
-distanceForAirAttack = if (isNumber (_mapInfo/"distanceForAirAttack")) then { getNumber (_mapInfo/"distanceForAirAttack") } else { 10000 };
-ONLY_DECLARE_SERVER_VAR(distanceForAirAttack);
-
-//The furthest distance the AI can attack from using trucks and armour
-distanceForLandAttack = if (isNumber (_mapInfo/"distanceForLandAttack")) then { getNumber (_mapInfo/"distanceForLandAttack") } else { 3000 };
-ONLY_DECLARE_SERVER_VAR(distanceForLandAttack);
 
 //Max units we aim to spawn in. Still declared in initParams and modifiable in game options, but unused
 //DECLARE_SERVER_VAR(maxUnits, 140);

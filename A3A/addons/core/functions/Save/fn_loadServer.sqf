@@ -36,11 +36,11 @@ if (isServer) then {
 	["HQKnowledge"] call A3A_fnc_getStatVariable;
 //	["idlebases"] call A3A_fnc_getStatVariable;			// Might bring this back at some point
 	["killZones"] call A3A_fnc_getStatVariable;
-	["controlsSDK"] call A3A_fnc_getStatVariable;
 	["bombRuns"] call A3A_fnc_getStatVariable;
 	["arsenalLimits"] call A3A_fnc_getStatVariable;
 	["rebelLoadouts"] call A3A_fnc_getStatVariable;
 	["jna_dataList"] call A3A_fnc_getStatVariable;
+	["minorSites"] call A3A_fnc_getStatVariable;
 	//===========================================================================
 
 	//RESTORE THE STATE OF THE 'UNLOCKED' VARIABLES USING JNA_DATALIST
@@ -66,19 +66,10 @@ if (isServer) then {
 	//Check if we have radios unlocked and update haveRadio.
 	call A3A_fnc_checkRadiosUnlocked;
 
-	// Set enemy roadblock allegiance to match nearest main marker
-	private _mainMarkers = markersX - controlsX - outpostsFIA;
-	{
-		if (sidesX getVariable [_x,sideUnknown] != teamPlayer) then {
-			private _nearX = [_mainMarkers, markerPos _x] call BIS_fnc_nearestPosition;
-			private _sideX = sidesX getVariable [_nearX,sideUnknown];
-			sidesX setVariable [_x,_sideX,true];
-		};
-	} forEach controlsX;
-
+	// Don't have minor sites here, but they're not visible so it's fine
 	{
 		[_x] call A3A_fnc_mrkUpdate
-	} forEach (markersX - controlsX);
+	} forEach markersX;
 
 	if (count outpostsFIA > 0) then {
 		markersX = markersX + outpostsFIA; publicVariable "markersX"
@@ -103,7 +94,6 @@ if (isServer) then {
 	["staticsX"] call A3A_fnc_getStatVariable;
 
 	{_x setPos getMarkerPos respawnTeamPlayer} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
-	_sites = markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
 
 	// Move headless client logic objects near HQ so that firedNear EH etc. work more reliably
 	private _hcpos = markerPos respawnTeamPlayer vectorAdd [-100, -100, 0];

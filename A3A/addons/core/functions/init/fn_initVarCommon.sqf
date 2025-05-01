@@ -79,17 +79,26 @@ allCategories = allCategoriesExceptSpecial + specialCategories;
 [] call A3A_fnc_categoryOverrides;
 
 ////////////////////////////////////
+//      LOAD MAPINFO VARS        ///
+////////////////////////////////////
+
+private _mapInfo = missionConfigFile/"A3A"/"mapInfo"/toLower worldName;
+if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower worldName};
+
+// Load the climate here, because we need it early and globally
+A3A_climate = getText (_mapInfo/"climate");
+
+// Also land/air attack distance, needed for some pathfinding setup
+//The furthest distance the AI can attack from using helicopters or planes
+distanceForAirAttack = if (isNumber (_mapInfo/"distanceForAirAttack")) then { getNumber (_mapInfo/"distanceForAirAttack") } else { 10000 };
+
+//The furthest distance the AI can attack from using trucks and armour
+distanceForLandAttack = if (isNumber (_mapInfo/"distanceForLandAttack")) then { getNumber (_mapInfo/"distanceForLandAttack") } else { 3000 };
+
+////////////////////////////////////
 //     BEGIN MOD DETECTION       ///
 ////////////////////////////////////
 Info("Starting mod detection");
-
-// Load the climate here for the moment, because we need it early and globally
-private _worldName = toLower worldName;
-A3A_climate = toLower (if (isText (missionConfigFile/"A3A"/"mapInfo"/_worldName/"climate")) then {
-    getText (missionConfigFile/"A3A"/"mapInfo"/_worldName/"climate")
-} else {
-    getText (configFile/"A3A"/"mapInfo"/_worldName/"climate")
-});
 
 // Short Info of loaded mods needs to be added to this array. eg: `A3A_loadedTemplateInfoXML pushBack ["RHS","All factions will be replaced by RHS (AFRF &amp; USAF &amp; GREF)."];`
 A3A_loadedTemplateInfoXML = [];

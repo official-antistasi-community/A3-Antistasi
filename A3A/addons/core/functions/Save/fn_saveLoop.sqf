@@ -91,6 +91,8 @@ private _antennasDeadPositions = [];
 ["rebelLoadouts", A3A_rebelLoadouts] call A3A_fnc_setStatVariable;
 private _destroyedPositions = destroyedBuildings apply { getPosATL _x };
 ["destroyedBuildings",_destroyedPositions] call A3A_fnc_setStatVariable;
+["controlsSDK",[]] call A3A_fnc_setStatVariable;					// backwards compatibility
+["minorSites", A3A_minorSitesHM] call A3A_fnc_setStatVariable;
 
 //Save aggression values
 ["aggressionOccupants", [aggressionLevelOccupants, aggressionStackOccupants]] call A3A_fnc_setStatVariable;
@@ -353,9 +355,6 @@ _dataX = [];
 
 ["killZones",_dataX] call A3A_fnc_setStatVariable;
 
-// Only save state of the hardcoded controls
-_controlsX = controlsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (controlsX find _x < defaultControlIndex)};
-["controlsSDK",_controlsX] call A3A_fnc_setStatVariable;
 
 // fuel rework
 _fuelAmountleftArray = [];
