@@ -39,17 +39,17 @@ while { _segmentWeights isNotEqualTo [] } do
         continue;
     };
 
+    // TODO: Add mapinfo flag for maps that actually have good roads
     private _roads = [roadAt (_segment#0), roadAt (_segment#1)] call A3A_fnc_roadAStar;		// empty if no route found
-    _roads = _roads select {
-        !(getRoadInfo _x # 8)								// not marked as bridge. Should check getPosATL as well?
-        and (count roadsConnectedTo [_x, true] == 2)			// not a junction
-        and (count (_road nearRoads 10) <= 1)					// no short/overlapped roads
-    };
+    _roads = _roads select { !(getRoadInfo _x # 8) }		    	// not marked as bridge. Should check getPosATL as well?
+        select { count roadsConnectedTo _x == 2 };		    	    // not a junction. Permissive version because some maps suck (Regero).
+        //select { count (_x nearRoads 10) <= 1 };					// no short/overlapped roads
     if (_roads isNotEqualTo []) exitWith { _road = selectRandom _roads };
 
     private _segmentIndex = _segmentWeights find _segment;
     _segmentWeights deleteRange [_segmentIndex, 2];
 };
+
 
 // Now we have our target road! (or objNull, if none found)
 _road;

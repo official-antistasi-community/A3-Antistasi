@@ -58,7 +58,7 @@ _mainMarkers append airportsX;
 		if (_added > 0) then { _sitesChanged = true };
 	};
 
-	_wantedCount = _wantedCount / 2;
+	_wantedCount = _wantedCount / 3;
 	if (A3A_balancePlayerScale > random 6 and _wantedCount > _curCamp) then {
 		private _added = [_side, 1] call A3A_fnc_generateCamps;
 		if (_added > 0) then { _sitesChanged = true };

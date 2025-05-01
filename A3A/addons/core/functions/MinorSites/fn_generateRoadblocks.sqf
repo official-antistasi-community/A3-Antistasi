@@ -63,12 +63,16 @@ while {_fails < _failsAllowed} do {
 
     // random roll of 2/3 route, 1/3 random? random might be route too
     (A3A_roadblockPairsHM get _pairRef) params ["_mrkA", "_mrkB"];
-    private _road = if (random 1 < 0.6) then {
+    private _navMethod = random 1 < 0.6;
+    private _road = if (_navMethod) then {
         [_mrkA, _mrkB, _exclude] call A3A_fnc_selectRoadBetweenMarkersNav;
     } else {
         [_mrkA, _mrkB, _exclude] call A3A_fnc_selectRoadBetweenMarkersRand;
     };
-    if (isNull _road) then { _fails = _fails+1; continue };
+    if (isNull _road) then {
+        Debug_3("Failed to find roadblock between %1 and %2, nav %3", _mrkA, _mrkB, _navMethod);
+        _fails = _fails+1; continue;
+    };
 
     // add roadblock
     private _pos = getPosATL _road;

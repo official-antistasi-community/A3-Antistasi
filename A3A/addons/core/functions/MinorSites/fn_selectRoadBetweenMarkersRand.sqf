@@ -24,7 +24,7 @@ while {_roads isNotEqualTo []} do
     if (_nearExclude inAreaArray [getPosATL _road, _excludeRad, _excludeRad] isNotEqualTo []) then { continue };
 
     // skip bridges, dead ends and most junctions
-    if (getRoadInfo _road # 8 or count roadsConnectedTo [_road, true] != 2 or count (_road nearRoads 10) > 1) then { continue };
+    if (getRoadInfo _road # 8 or count roadsConnectedTo _road != 2) then { continue };  // or count (_road nearRoads 10) > 1) then { continue };
 
 	if (true) exitWith {_finalRoad = _road};
 };
