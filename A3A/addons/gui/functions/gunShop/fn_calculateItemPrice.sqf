@@ -71,7 +71,7 @@ private _fnc_ammoPriceCalculator = {
     _hit = _hit min _penetration*1.5;        // hack to workaround RHS AT weirdness
     private _payload = 0.5*_hit + 0.5*_penetration + _indirHit;
     private _costPerRound = if (_simType in _mineSims) then {
-        0.3 * _payload^0.7;
+        0.5 * _payload^0.7;
     } else {
         0.02 * (1 + _rangeMod / 600) * _payload^1.4 * (1 + _guidance * _airLock);
     };
@@ -130,16 +130,16 @@ private _fnc_weaponPriceCalculator = {
     private _basePrice = switch (_cats#0) do {
         case "Rifles": {
             if ("GrenadeLaunchers" in _cats) then { _glMod = 200 };
-            200 + _ammoPrice*200*_magSize/20;
+            160 + _ammoPrice*160*_magSize/20;
         };
-        case "MachineGuns": { 350 + _ammoPrice*350 };
-        case "SniperRifles": { 300 + _ammoPrice*90*_magSize/5 };            // dispersion adjustment makes these expensive later
-        case "SMGs": { 140 + _ammoPrice*200 };
+        case "MachineGuns": { 300 + _ammoPrice*300 };
+        case "SniperRifles": { 240 + _ammoPrice*80*_magSize/5 };            // dispersion adjustment makes these expensive later
+        case "SMGs": { 120 + _ammoPrice*160 };
 
-        case "Handguns": { 80 + _ammoPrice*200*_magSize/10 };
-        case "Shotguns": { 120 + 80*_magSize/5 };				// TODO: sort out shotgun ammo
+        case "Handguns": { 70 + _ammoPrice*160*_magSize/10 };
+        case "Shotguns": { 100 + 70*_magSize/5 };				// TODO: sort out shotgun ammo
 
-        case "GrenadeLaunchers": { 150 + 150*_magSize };			// this is GL without rifle
+        case "GrenadeLaunchers": { 120 + 120*_magSize };			// this is GL without rifle
         case "RocketLaunchers": { 400 + _ammoPrice*3 };
         case "MissileLaunchers": { 2000 + _ammoPrice*3 };
         default { 1000 };
@@ -180,7 +180,7 @@ private _fnc_itemPriceCalculator = {
             if(_isMuzzle) then 
             {
                 private _audible = getNumber (_config >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
-                _cost = 100 * (3 min (0.5 / (0.05+_audible)));       // scale a bit by suppression level
+                _cost = 150 * (3 min (0.5 / (0.05+_audible)));       // scale a bit by suppression level
 
                 // Higher cost for heavier suppressors. Difficult to get caliber.
                 // CUP suppressors mostly have bad (low) weights, so cap the minimum
@@ -197,8 +197,8 @@ private _fnc_itemPriceCalculator = {
                 _minZoom = _minZoom min (getNumber (_x >> "opticsZoomMin"));
             } forEach configProperties [_config >> "ItemInfo" >> "OpticsModes"];
 
-            if (_minZoom in [0, 999]) exitWith {100};
-            private _cost = round(100 * (0.25/_minZoom));
+            if (_minZoom in [0, 0.25, 999]) exitWith {150};
+            private _cost = 100 + round(100 * (0.25/_minZoom)^0.7);
 
             // Cost multiplier for NV/Ti optics modes
             private _visionMult = 1;

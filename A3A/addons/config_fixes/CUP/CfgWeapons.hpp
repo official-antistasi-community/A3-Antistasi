@@ -8,26 +8,26 @@ class CfgWeapons
     };
     // Bad dispersion, fancy ammo
     class CUP_arifle_xm29_ke_base : Rifle_Base_F {
-        A3A_price = 500;
+        A3A_price = 400;
     };
     // Very bad dispersion relative to parent weapons
     class CUP_arifle_XM8_Base;
     class CUP_arifle_XM8_Compact : CUP_arifle_XM8_Base {
-        A3A_price = 500;
+        A3A_price = 350;
     };
     class CUP_arifle_XM8_Compact_FG : CUP_arifle_XM8_Base {
-        A3A_price = 500;
+        A3A_price = 350;
     };
     class CUP_arifle_G36_Base;
     class CUP_arifle_G36C : CUP_arifle_G36_Base {
-        A3A_price = 420;
+        A3A_price = 350;
     };
     // Built-in optics
     class CUP_arifle_G36_Base_CarryhandleOptics : CUP_arifle_G36_Base {
-        A3A_price = 700;
+        A3A_price = 550;
     };
     class CUP_arifle_G36A;
     class CUP_arifle_AG36 : CUP_arifle_G36A {
-        A3A_price = 820;
+        A3A_price = 750;
     };
 };
