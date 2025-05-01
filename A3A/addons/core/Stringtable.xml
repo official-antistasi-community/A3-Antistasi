@@ -4949,6 +4949,43 @@
         <Czech>Konvoj se zásobami.</Czech>
         <Chinesesimp>补给运输车队</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_mission_conv_gunshop_text">
+        <Original>Our shipment of weapons has  been intercepted by the local authorities, and is being redirected as supplies for an %3. It's about to leave at %2 from an %1. Take the shipment back by any means.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conv_gunshop_title">
+        <Original>Recover Gun Shipment</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conv_start_location">
+        <Original>convoy start</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_title">
+        <Original>Gun Shop</Original>
+        <German>Waffenladen</German>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_text_meet">
+        <Original>My distant cousin Solomon Maru has contacted us. Rumor is that he sells items stolen from the enemy. He is in %1, go and meet him. He will only speak to the commander.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_text_wait">
+        <Original>Wait a few minutes for Solomon to arrange delivery of the goods.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_airdrop">
+        <Original>A friend is airdropping the cargo. I've marked the position on your map. Good luck.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_intercept">
+        <Original>Unfortunately enemies have intercepted your shipment. But you still have a chance to acquire it. Good luck.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_nomoney">
+        <Original>You can't afford these items. Stop wasting my time.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_wait">
+        <Original>Wait around while I arrange delivery of the goods. It shouldn't take long.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_supplydrop_title">
+        <Original>Supply Drop</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_supplydrop_text">
+        <Original>An enemy plane is airdropping supplies on this position. Get there with a truck and recover the crate. Be careful not to shoot down the plane!</Original>
+      </Key>
       <Key ID="STR_A3A_fn_mission_des_ante_text">
         <Original>We need to destroy or take a Radio Tower in %1. This will interrupt the coverage of %3 radio propaganda. Do it before %2.</Original>
         <Italian>Dobbiamo distruggere o catturare la Torre Radio a %1. Ciò interromperà la Rete di Propaganda %3. Falla entro %2.</Italian>

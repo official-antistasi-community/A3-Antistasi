@@ -63,6 +63,7 @@ class CfgFunctions
             class unitGetToCover {};
             class useFlares {};
             class VANTinfo {};
+            class vehicleConvoyHeliTravel{};
             class vehicleConvoyTravel {};
             class vehicleMarkers {};
         };
@@ -94,6 +95,7 @@ class CfgFunctions
             class launcherInfo {};
             class loot {};
             class randomRifle {};
+            class setCargoItems {};
             class setRebelLoadouts {};
             class transfer {};
             class unlockEquipment {};
@@ -269,6 +271,7 @@ class CfgFunctions
             class crewTypeForVehicle {};
             class cycleSpawn {};
             class FIAinitBases {};
+            class fillVehicleCrewCargo {};
             class findSpawnPosition {};
             class freeSpawnPositions {};
             class garrisonReorg {};
@@ -435,6 +438,7 @@ class CfgFunctions
             class DES_Antenna {};
             class DES_Heli {};
             class DES_Vehicle {};
+            class GSMission {};
             class LOG_Ammo {};
             class LOG_Bank {};
             class LOG_Supplies {};
@@ -443,6 +447,7 @@ class CfgFunctions
             class REP_Antenna {};
             class RES_Prisoners {};
             class RES_Refugees {};
+            class supplyDrop {};
             class taskDelete {};
             class taskSetState {};
             class taskUpdate {};

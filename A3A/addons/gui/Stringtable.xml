@@ -4538,5 +4538,93 @@
         <Original>Save the new campaign to AntistasiCommunity.vars instead of the main profile vars file. Warning: This may not work correctly on Linux servers due to an Arma bug.</Original>
       </Key>
     </Container>
+<<<<<<< HEAD
+    <Container name="setup_dialog">
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
+        <Original>Custom AI Loadouts</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_priWeapon">
+        <Original>Primary weapon</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_secWeapon">
+        <Original>Secondary weapon</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_ammoQuant">
+        <Original>Ammo quantity</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_priOptic">
+        <Original>Primary optic</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_uniform">
+        <Original>Uniform</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_vest">
+        <Original>Vest</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_backpack">
+        <Original>Backpack</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_headgear">
+        <Original>Headgear</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_close">
+        <Original>Close</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_copyToAll">
+        <Original>Copy To All</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetRole">
+        <Original>Reset Role</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetAll">
+        <Original>Reset All</Original>
+      </Key>
+    </Container>
+    <Container name="dialog_gun_shop_dialog">
+      <Key ID="STR_antistasi_gun_shop_title">
+        <Original>Gun Shop</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_rifle_tab_button">
+        <Original>Primary</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_handguns_tab_button">
+        <Original>Handguns</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_launchers_tab_button">
+        <Original>Secondary</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_grenades_tab_button">
+        <Original>Grenades</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_explosives_tab_button">
+        <Original>Explosives</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_magazines_tab_button">
+        <Original>Magazines</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_optics_tab_button">
+        <Original>Optics</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_rails_tab_button">
+        <Original>Rails</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_muzzles_tab_button">
+        <Original>Muzzles</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_bipods_tab_button">
+        <Original>Bipods</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_add_to_cart_button_text">
+        <Original>Add to Cart</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_checkout_button_text">
+        <Original>Checkout</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_total_cost_text">
+        <Original>Total:</Original>
+      </Key>
+    </Container>
+=======
+>>>>>>> unstable
   </Package>
 </Project>
