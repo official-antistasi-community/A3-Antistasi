@@ -29,7 +29,7 @@ _isFIA = false;
 if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then
 {
 	_sideX = Occupants;
-	if ((random 10 <= (tierWar + difficultyCoef)) and !(_frontierX)) then //Forced spawn is missing (check createAI outpost)
+	if ((random 10 >= (tierWar + difficultyCoef)) and !(_frontierX)) then //Forced spawn is missing (check createAI outpost)
 	{
 		_isFIA = true;
 	};
