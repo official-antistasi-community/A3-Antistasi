@@ -231,7 +231,11 @@ switch (_mode) do
 
             if !(isNull _vehicle) then {
                 // Check if vehicle is eligible for garage / sell, not a dude or house etc.
-                if (_vehicle isKindOf "Air" or _vehicle isKindOf "LandVehicle") then {
+                private _canGarage = (
+                    ([typeOf _vehicle] call HR_GRG_fnc_getCatIndex > 0) ||
+                    (_vehicle getVariable ['A3A_canGarage', false])
+                );
+                if (_canGarage) then {
                     private _className = typeOf _vehicle;
                     private _configClass = configFile >> "CfgVehicles" >> _className;
                     private _displayName = getText (_configClass >> "displayName");
