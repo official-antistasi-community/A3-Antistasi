@@ -50,6 +50,11 @@ private _fnc_final = 'params ["_victim"];';                 // params ["_victim"
 private _invalidVictim = false;
 switch (true) do {
     case (_victim isKindOf "CAManBase"): {  // Man includes everything biological, even animals such as goats ect...
+        if (_victim == petros) then {
+            // Should probably pass in the napalm source side but this will do for now
+            _victim setVariable ["A3A_napalmHit", true, 2];
+            _fnc_final = _fnc_final + 'if (alive _victim) then { _victim setVariable ["A3A_napalmHit", nil, 2] };';
+        };
         if (A3A_hasACEMedical) then {
             _fnc_onTick = _fnc_onTick +
             'if (alive _victim) then {
