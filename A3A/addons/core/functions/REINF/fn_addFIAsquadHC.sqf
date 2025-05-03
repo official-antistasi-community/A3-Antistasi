@@ -69,13 +69,16 @@ private _vehType = switch true do {
     default {(FactionGet(reb,"vehiclesLightUnarmed")) # 0};
 };
 private _idFormat = switch true do {
+    case (_typeGroup isEqualTo (FactionGet(reb,"groupSquadEng"))): {"Eng-"};
     case (_typeGroup isEqualTo (FactionGet(reb,"groupMedium"))): {"Tm-"};
     case (_typeGroup isEqualTo (FactionGet(reb,"groupAT"))): {"AT-"};
     case (_typeGroup isEqualTo (FactionGet(reb,"groupSniper"))): {"Snpr-"};
     case (_typeGroup isEqualTo (FactionGet(reb,"groupSentry"))): {"Stry-"};
     case (_typeGroup in (FactionGet(reb,"staticMortars"))): {"Mort-"};
     case (_typeGroup in (FactionGet(reb,"staticMGs"))): {"MG-"};
+    case (_typeGroup in (FactionGet(reb,"vehiclesLightArmed"))): {"M.MG-"};
     case (_typeGroup in (FactionGet(reb,"vehiclesAT"))): {"M.AT-"};
+    case (_typeGroup in (FactionGet(reb,"vehiclesAA")));
     case (_typeGroup in (FactionGet(reb,"staticAA"))): {"M.AA-"};
     default {
         switch _withBackpck do {

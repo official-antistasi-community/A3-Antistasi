@@ -3343,6 +3343,17 @@
         <Turkish>AT Takımı</Turkish>
         <Chinesesimp>反坦克班组</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_squad_eng_squad">
+        <Original>Engineer Squad</Original>
+        <Italian>Squadra Ingegneri</Italian>
+        <Spanish>Escuadra de Ingenieros</Spanish>
+        <French>Escouade d'ingénieurs</French>
+        <Korean>공병 분대</Korean>
+        <Russian>Инженеры</Russian>
+        <Polish>Drużyna Inżynierów</Polish>
+        <Czech>Inženýrská družstvo</Czech>
+        <Chinesesimp>工程师班组</Chinesesimp>
+      </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_include_vehicle_label">
         <Original>Include vehicle</Original>
         <German>Fahrzeug hinzufügen</German>
@@ -3358,7 +3369,7 @@
         <Chinesesimp>包含载具</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_inf_squad">
-        <Original>Inf. Squad</Original>
+        <Original>Infantry Squad</Original>
         <German>Inf. Trupp</German>
         <Italian>Squadra di Fant.</Italian>
         <Spanish>Escuadra de Inf.</Spanish>
@@ -3372,7 +3383,7 @@
         <Chinesesimp>步兵小队</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_inf_team">
-        <Original>Inf. Team</Original>
+        <Original>Infantry Team</Original>
         <German>Inf. Team</German>
         <Italian>Team di Fant.</Italian>
         <Spanish>Equipo de inf.</Spanish>
@@ -3384,6 +3395,9 @@
         <Portuguese>Equipa Infantaria</Portuguese>
         <Turkish>Piyade Takımı</Turkish>
         <Chinesesimp>步兵班组</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_squad_mg_car">
+        <Original>MG Car</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_mg_team">
         <Original>MG Team</Original>
