@@ -45,7 +45,7 @@ while {true} do {
     private _diveDist = (getPosATL _plane#2) / tan _diveAngle;      //_cpHorizDist + 
     private _remDist = _horizDist - _diveDist;
 
-    Debug_3("HorizDist %1, diveDist %2, heading %3", _horizDist, _diveDist, _targDirFwd vectorDotProduct vectorDir _plane);
+    //Debug_3("HorizDist %1, diveDist %2, heading %3", _horizDist, _diveDist, _targDirFwd vectorDotProduct vectorDir _plane);
 
     if (_remDist < -25) exitWith { Debug_1("Divebomb pre-dive for %1 terminated due to overshoot", _supportName) };
     if (_remDist < 25 and _targDirFwd vectorDotProduct vectorDir _plane > 0.9) exitWith { _inPosition = true };
@@ -63,7 +63,7 @@ private _firedEH = _plane addEventHandler ["Fired", {
     params ["_plane", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
 
     private _dir = _plane getVariable "A3A_diveLastDir";
-    Debug_3("Correcting bomb trajectory: old %1, new %2, plane %3", asin -(vectorDir _projectile#2), asin -(_dir#2), asin -(vectorDir _plane#2));
+    //Debug_3("Correcting bomb trajectory: old %1, new %2, plane %3", asin -(vectorDir _projectile#2), asin -(_dir#2), asin -(vectorDir _plane#2));
     _projectile setVelocity (velocity _plane);
     _projectile setVectorDir (vectorDir _plane);
 
@@ -107,7 +107,7 @@ private _ehID = addMissionEventHandler ["EachFrame", {
         private _newDir = (_dir vectorMultiply cos _maxAng) vectorAdd ((_rotDir vectorCrossProduct _dir) vectorMultiply sin _maxAng);
         _dir = _newDir vectorAdd (_rotDir vectorMultiply ((_rotDir vectorDotProduct _dir) * (1 - cos _maxAng)));
     };
-    Debug_3("Old dir %1, new dir %2, alt %3", asin -(vectorDir _plane#2), asin -(_dir#2), getPosASL _plane#2 - getPosASL _target#2);
+    //Debug_3("Old dir %1, new dir %2, alt %3", asin -(vectorDir _plane#2), asin -(_dir#2), getPosASL _plane#2 - getPosASL _target#2);
 
     // Need to force position for "airplanex" simulation. "airplane" is fine without it.
     private _nextPos = (_plane getVariable "A3A_diveLastPos") vectorAdd (_dir vectorMultiply _diveSpeed*diag_deltaTime);
@@ -135,7 +135,7 @@ private _ehID = addMissionEventHandler ["EachFrame", {
             _plane setVariable ["bombsDropped", false];
         };
         Debug("Dropping bombs...");
-        Debug_3("Plane dir %1, velocity %2, altitude %3", vectorDir _plane, velocity _plane, getPosASL _plane#2 - getPosASL _target#2);
+        //Debug_3("Plane dir %1, velocity %2, altitude %3", vectorDir _plane, velocity _plane, getPosASL _plane#2 - getPosASL _target#2);
         {
             private _bombMags = getArray (configFile >> "CfgWeapons" >> _x >> "magazines");
             private _ammoCount = 0;
