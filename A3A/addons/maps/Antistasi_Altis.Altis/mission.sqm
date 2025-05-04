@@ -9174,7 +9174,7 @@ class Mission
 					name="control";
 					class Entities
 					{
-						items=67;
+						items=150;
 						class Item0
 						{
 							dataType="Marker";
