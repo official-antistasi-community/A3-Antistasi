@@ -42,7 +42,8 @@ if (_side == teamPlayer) then
 };
 
 // Sync the vehicle textures if necessary
-_veh call A3A_fnc_vehicleTextureSync;
+// Removed 4-5-25 as trial. Vanilla vehicles seem to be fixed at least
+//_veh call A3A_fnc_vehicleTextureSync;
 
 
 private _typeX = typeOf _veh;
