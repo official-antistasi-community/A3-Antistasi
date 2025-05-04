@@ -325,7 +325,7 @@ _militiaLoadoutData set ["machineGuns", [
 ["UK3CB_RPK", "", "", "", ["UK3CB_RPK_40rnd_762x39_G"], [], ""],
 ["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39"], [], ""]
 ]];
-_militaryLoadoutData set ["marksmanRifles", [
+_militiaLoadoutData set ["marksmanRifles", [
 ["rhs_weap_m76", "", "", "rhs_acc_pso1m2", ["rhsgref_10Rnd_792x57_m76", "rhssaf_10Rnd_792x57_m76_tracer"], [], ""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
