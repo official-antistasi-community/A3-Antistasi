@@ -13,19 +13,19 @@ Version 3.9.0
 .. admonition:: Major
    
    * :issue:`3454` AI will now send boats for naval support during major attacks
-   * :issue:`3483` Added playable maps Napf and Napf Winter
-   * :issue:`3489` Added playable map Regero
+   * :issue:`3483` Added maps Napf and Napf Winter
+   * :issue:`3489` Added map Regero
    * :issue:`3511` Added a gun shop where Petros' cousin, Solomon, sells small arms
    * :issue:`3515` Fixed many bugs and added many features to new battle menu
 
 .. admonition:: Minor
 
-   * :issue:`3378` Added additional categories and an author section to the garage
+   * :issue:`3378` Added additional vehicle categories and an author section to the garage
    * :issue:`3440` Reworked airbase vehicle spawn selection
    * :issue:`3444` AI will now fast-rope from more helicopters
    * :issue:`3472` Re-enabled scouting UAV support during HQ attacks
    * :issue:`3493` Added better ACRE radio to starting equipment
-   * :issue:`3501`  Binocular magazine is now loaded from arsenal automatically
+   * :issue:`3501` Binocular magazine is now loaded from arsenal automatically
    * :issue:`3502` Improved accuracy on dive bombing planes
    * :issue:`3514` Added ACE Plotting Board to starting equipment
    * :issue:`3521` TFAR radio distance is now boosted by friendly towers
@@ -59,7 +59,7 @@ Version 3.9.0
    * :issue:`3524` Fixed garage count not updating on open
    * :issue:`3531` Fixed an error with support calls on AFK players
    * :issue:`3531` Fixed an error with two players building the same object
-   * :issue:`3534` Placed limit on CAS speed to avoid lawn-darting
+   * :issue:`3534` Placed speed limit on CAS to avoid lawn-darting
    * :issue:`3535` Fixed resources spawning military instead of militia sniper patrols
    * :issue:`3539` Fixed some Petros death bugs
 
