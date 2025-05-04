@@ -3,6 +3,90 @@ Changelog
 ==========
 
 
+
+Version 3.9.0
+===============
+
+.. note::
+   11th May 2024
+
+.. admonition:: Major
+   
+   * :issue:`3454` AI will now send boats for naval support during major attacks
+   * :issue:`3483` Added playable maps Napf and Napf Winter
+   * :issue:`3489` Added playable map Regero
+   * :issue:`3511` Added a gun shop where Petros' cousin, Solomon, sells small arms
+   * :issue:`3515` Fixed many bugs and added many features to new battle menu
+
+.. admonition:: Minor
+
+   * :issue:`3378` Added additional categories and an author section to the garage
+   * :issue:`3440` Reworked airbase vehicle spawn selection
+   * :issue:`3444` AI will now fast-rope from more helicopters
+   * :issue:`3472` Re-enabled scouting UAV support during HQ attacks
+   * :issue:`3493` Added better ACRE radio to starting equipment
+   * :issue:`3501`  Binocular magazine is now loaded from arsenal automatically
+   * :issue:`3502` Improved accuracy on dive bombing planes
+   * :issue:`3514` Added ACE Plotting Board to starting equipment
+   * :issue:`3521` TFAR radio distance is now boosted by friendly towers
+   * :issue:`3526` Statics are now sold for half their cost
+   * :issue:`3527` SPE bridges can no longer be destroyed
+   * :issue:`3532` Added tooltips to some new game setup options
+   * :issue:`3536` Explosive placement is now logged
+   * :issue:`3538` Removed some debug spam from dive bombing
+   * :issue:`3539` Petros can now die to enemy napalm
+   * :issue:`3540` MG car squads can now be bought from the new battle menu
+
+.. admonition:: Template updates
+
+   * :issue:`3499` Added 3CB civilian factions ADC and MEC
+   * :issue:`3512` Updated WS and RF to 1.05 and 1.03 updates
+   * :issue:`3518` Added 3CB US Marines faction
+   * :issue:`3519` Added 3CB US GAF faction
+
+.. admonition:: Terrain updates
+
+   * :issue:`3528` Removed a few erroneous objects on Colombia
+
+.. admonition:: Bugfixes
+
+   * :issue:`3481` Fixed searching two squad leads for intel
+   * :issue:`3482` Fixed fake AI players being created
+   * :issue:`3496` Fixed paratroopers landing in water
+   * :issue:`3508` Fixed SOG factions using Greek names
+   * :issue:`3516` Fixed undercover breaking on vehicle repair
+   * :issue:`3517` Fixed wrong laptop hack string
+   * :issue:`3524` Fixed garage count not updating on open
+   * :issue:`3531` Fixed an error with support calls on AFK players
+   * :issue:`3531` Fixed an error with two players building the same object
+   * :issue:`3534` Placed limit on CAS speed to avoid lawn-darting
+   * :issue:`3535` Fixed resources spawning military instead of militia sniper patrols
+   * :issue:`3539` Fixed some Petros death bugs
+
+.. admonition:: Groundwork
+
+   * :issue:`3507` Added additional map customizability with valid banks and attack distances
+
+.. admonition:: Localization
+
+   * [No PRs] - Unfortunately no updates due to pipeline issues.
+
+.. admonition:: Tools
+
+
+.. admonition:: Refactor
+
+   * :issue:`3523` Refactored roadblock and SpecOp point placement and management
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
 Version 3.8.0
 ===============
 
