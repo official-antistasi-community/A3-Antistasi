@@ -8,7 +8,7 @@ class EditorData
 	toggles=1061;
 	class ItemIDProvider
 	{
-		nextID=2844;
+		nextID=2846;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=783;
+		nextID=838;
 	};
 	class Camera
 	{
@@ -1787,7 +1787,7 @@ class Mission
 					name="airport_2";
 					class Entities
 					{
-						items=274;
+						items=275;
 						class Item0
 						{
 							dataType="Object";
@@ -6525,9 +6525,18 @@ class Mission
 							angle=320.67981;
 							id=800;
 						};
+						class Item274
+						{
+							dataType="Marker";
+							position[]={9390,6.8459983,4631};
+							name="spawnPoint_2";
+							type="hd_start";
+							angle=262;
+							id=2845;
+						};
 					};
 					id=2136;
-					atlOffset=1.0546842;
+					atlOffset=-0.23033714;
 				};
 				class Item3
 				{
@@ -30318,7 +30327,7 @@ class Mission
 							};
 							id=2610;
 							type="Land_CargoBox_V1_F";
-							atlOffset=-3.194809e-05;
+							atlOffset=0.057459831;
 							class CustomAttributes
 							{
 								class Attribute0
