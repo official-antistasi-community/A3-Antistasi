@@ -51,10 +51,9 @@ switch (_mode) do
         private _infSquadIcon = _display displayCtrl A3A_IDC_RECRUITINFSQUADICON;
         private _infSquadPriceText = _display displayCtrl A3A_IDC_RECRUITINFSQUADPRICE;
         private _infSquadButton = _display displayCtrl A3A_IDC_RECRUITINFSQUADBUTTON;
-        // TODO UI-update: add engineer squad back in
-        // private _engSquadIcon = _display displayCtrl A3A_IDC_RECRUITENGSQUADICON;
-        // private _engSquadPriceText = _display displayCtrl A3A_IDC_RECRUITENGSQUADPRICE;
-        // private _engSquadButton = _display displayCtrl A3A_IDC_RECRUITENGSQUADBUTTON;
+        private _engSquadIcon = _display displayCtrl A3A_IDC_RECRUITENGSQUADICON;
+        private _engSquadPriceText = _display displayCtrl A3A_IDC_RECRUITENGSQUADPRICE;
+        private _engSquadButton = _display displayCtrl A3A_IDC_RECRUITENGSQUADBUTTON;
         private _infTeamIcon = _display displayCtrl A3A_IDC_RECRUITINFTEAMICON;
         private _infTeamPriceText = _display displayCtrl A3A_IDC_RECRUITINFTEAMPRICE;
         private _infTeamButton = _display displayCtrl A3A_IDC_RECRUITINFTEAMBUTTON;
@@ -70,6 +69,9 @@ switch (_mode) do
         private _sniperTeamIcon = _display displayCtrl A3A_IDC_RECRUITSNIPERTEAMICON;
         private _sniperTeamPriceText = _display displayCtrl A3A_IDC_RECRUITSNIPERTEAMPRICE;
         private _sniperTeamButton = _display displayCtrl A3A_IDC_RECRUITSNIPERTEAMBUTTON;
+        private _mgCarIcon = _display displayCtrl A3A_IDC_RECRUITMGCARICON;
+        private _mgCarPriceText = _display displayCtrl A3A_IDC_RECRUITMGCARPRICE;
+        private _mgCarButton = _display displayCtrl A3A_IDC_RECRUITMGCARBUTTON;
         private _atCarIcon = _display displayCtrl A3A_IDC_RECRUITATCARICON;
         private _atCarPriceText = _display displayCtrl A3A_IDC_RECRUITATCARPRICE;
         private _atCarButton = _display displayCtrl A3A_IDC_RECRUITATCARBUTTON;
@@ -84,18 +86,22 @@ switch (_mode) do
 
         // Define groups
         private _groupsSDKSquad =FactionGet(reb,"groupSquad");
-        // private _groupsSDKSquadEng = FactionGet(reb,"groupSquadEng");
+        private _groupsSDKSquadEng = FactionGet(reb,"groupSquadEng");
         private _groupsSDKMid = FactionGet(reb,"groupMedium");
         private _SDKMGStatic = FactionGet(reb,"staticMGs")#0;
         private _groupsSDKAT = FactionGet(reb,"groupAT");
         private _SDKMortar = FactionGet(reb,"staticMortars")#0;
         private _groupsSDKSniper = FactionGet(reb,"groupSniper");
+        private _vehSDKMG = FactionGet(reb,"vehiclesLightArmed")#0;
         private _vehSDKAT = FactionGet(reb,"vehiclesAT")#0;
-        private _staticAAteamPlayer = FactionGet(reb,"staticAA")#0;
+
+        // Special case for AA: Specify static AA if there are no AA vehicles
+        private _rebAACars = FactionGet(reb,"vehiclesAA");
+        private _vehSDKAA = if (_rebAACars isEqualTo []) then { FactionGet(reb,"staticAA")#0 } else { _rebAACars#0 };
         
         // Classnames for vehicles
         private _infSquadVehicle = "";
-        // private _engSquadVehicle = "";
+        private _engSquadVehicle = "";
         private _infTeamVehicle = "";
         private _mgTeamVehicle = "";
         private _atTeamVehicle = "";
@@ -105,7 +111,7 @@ switch (_mode) do
 
         if (_includeVehicle) then {
             _infSquadVehicle = [_groupsSDKSquad] call A3A_fnc_getHCSquadVehicleType;
-            // _engSquadVehicle = [_groupsSDKSquadEng] call A3A_fnc_getHCSquadVehicleType;
+            _engSquadVehicle = [_groupsSDKSquadEng] call A3A_fnc_getHCSquadVehicleType;
             _infTeamVehicle = [_groupsSDKmid] call A3A_fnc_getHCSquadVehicleType;
             _mgTeamVehicle = [_SDKMGStatic] call A3A_fnc_getHCSquadVehicleType;
             _atTeamVehicle = [_groupsSDKAT] call A3A_fnc_getHCSquadVehicleType;
@@ -116,6 +122,8 @@ switch (_mode) do
         // Set variables for squad and vehicle types on the button
         _infSquadButton setVariable ["squadType", _groupsSDKSquad];
         _infSquadButton setVariable ["vehicle", _infSquadVehicle];
+        _engSquadButton setVariable ["squadType", _groupsSDKSquadEng];
+        _engSquadButton setVariable ["vehicle", _engSquadVehicle];
         _infTeamButton setVariable ["squadType", _groupsSDKmid];
         _infTeamButton setVariable ["vehicle", _infTeamVehicle];
         _mgTeamButton setVariable ["squadType", _SDKMGStatic];
@@ -126,41 +134,46 @@ switch (_mode) do
         _mortarTeamButton setVariable ["vehicle", _mortarTeamVehicle];
         _sniperTeamButton setVariable ["squadType", _groupsSDKSniper];
         _sniperTeamButton setVariable ["vehicle", _sniperTeamVehicle];
+        _mgCarButton setVariable ["squadType", _vehSDKMG];
+        _mgCarButton setVariable ["vehicle", ""];
         _atCarButton setVariable ["squadType", _vehSDKAT];
         _atCarButton setVariable ["vehicle", ""];
-        _aaTruckButton setVariable ["squadType", _staticAAteamPlayer];
+        _aaTruckButton setVariable ["squadType", _vehSDKAA];
         _aaTruckButton setVariable ["vehicle", ""];
 
         // Get prices
         private _infSquadPrice = [_groupsSDKSquad, _infSquadVehicle] call A3A_fnc_getHCSquadPrice;
-        // private _engSquadPrice = [_groupsSDKSquadEng, _engSquadVehicle] call A3A_fnc_getHCSquadPrice;
+        private _engSquadPrice = [_groupsSDKSquadEng, _engSquadVehicle] call A3A_fnc_getHCSquadPrice;
         private _infTeamPrice = [_groupsSDKmid, _infTeamVehicle] call A3A_fnc_getHCSquadPrice;
         private _mgTeamPrice = [_SDKMGStatic, _mgTeamVehicle] call A3A_fnc_getHCSquadPrice;
         private _atTeamPrice = [_groupsSDKAT, _atTeamVehicle] call A3A_fnc_getHCSquadPrice;
         private _mortarTeamPrice = [_SDKMortar, _mortarTeamVehicle] call A3A_fnc_getHCSquadPrice;
         private _sniperTeamPrice = [_groupsSDKSniper, _sniperTeamVehicle] call A3A_fnc_getHCSquadPrice;
+        private _mgCarPrice = [_vehSDKMG] call A3A_fnc_getHCSquadPrice;
         private _atCarPrice = [_vehSDKAT] call A3A_fnc_getHCSquadPrice;
-        private _aaTruckPrice = [_staticAAteamPlayer] call A3A_fnc_getHCSquadPrice;
+        private _aaTruckPrice = [_vehSDKAA] call A3A_fnc_getHCSquadPrice;
 
         // Split money and HR from price array
         _infSquadPrice params ["_infSquadMoney", "_infSquadHr"];
-        // _engSquadPrice params ["_engSquadMoney", "_engSquadHr"];
+        _engSquadPrice params ["_engSquadMoney", "_engSquadHr"];
         _infTeamPrice params ["_infTeamMoney", "_infTeamHr"];
         _mgTeamPrice params ["_mgTeamMoney", "_mgTeamHr"];
         _atTeamPrice params ["_atTeamMoney", "_atTeamHr"];
         _mortarTeamPrice params ["_mortarTeamMoney", "_mortarTeamHr"];
         _sniperTeamPrice params ["_sniperTeamMoney", "_sniperTeamHr"];
+        _mgCarPrice params ["_mgCarMoney", "_mgCarHr"];
         _atCarPrice params ["_atCarMoney", "_atCarHr"];
         _aaTruckPrice params ["_aaTruckMoney", "_aaTruckHr"];
 
         // Update price labels
         _infSquadPriceText ctrlSetText (format ["%1 € %2 HR", _infSquadMoney, _infSquadHr]);
-        // _engSquadPriceText ctrlSetText (format ["%1 €, %2 HR", _engSquadPrice, _engSquadHr]);
+        _engSquadPriceText ctrlSetText (format ["%1 €, %2 HR", _engSquadMoney, _engSquadHr]);
         _infTeamPriceText ctrlSetText (format ["%1 € %2 HR", _infTeamMoney, _infTeamHr]);
         _mgTeamPriceText ctrlSetText (format ["%1 € %2 HR", _mgTeamMoney, _mgTeamHr]);
         _atTeamPriceText ctrlSetText (format ["%1 € %2 HR", _atTeamMoney, _atTeamHr]);
         _mortarTeamPriceText ctrlSetText (format ["%1 € %2 HR", _mortarTeamMoney, _mortarTeamHr]);
         _sniperTeamPriceText ctrlSetText (format ["%1 € %2 HR", _sniperTeamMoney, _sniperTeamHr]);
+        _mgCarPriceText ctrlSetText (format ["%1 € %2 HR", _mgCarMoney, _mgCarHr]);
         _atCarPriceText ctrlSetText (format ["%1 € %2 HR", _atCarMoney, _atCarHr]);
         _aaTruckPriceText ctrlSetText (format ["%1 € %2 HR", _aaTruckMoney, _aaTruckHr]);
 
@@ -173,11 +186,11 @@ switch (_mode) do
             _infSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         // TODO UI-update: reenable this when eng squad button is back in
-        /* if (_money < _engSquadMoney || _hr < _engSquadHr) then {
+        if (_money < _engSquadMoney || _hr < _engSquadHr) then {
             _engSquadButton ctrlEnable false;
             _engSquadButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _engSquadIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-        }; */
+        };
         if (_money < _infTeamMoney || _hr < _infTeamHr) then {
             _infTeamButton ctrlEnable false;
             _infTeamButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
@@ -202,6 +215,11 @@ switch (_mode) do
             _sniperTeamButton ctrlEnable false;
             _sniperTeamButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _sniperTeamIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if (_money < _mgCarMoney || _hr < _mgCarHr) then {
+            _atCarButton ctrlEnable false;
+            _atCarButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
+            _atCarIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _atCarMoney || _hr < _atCarHr) then {
             _atCarButton ctrlEnable false;
