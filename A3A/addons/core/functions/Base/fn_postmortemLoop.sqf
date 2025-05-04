@@ -41,7 +41,7 @@ while {true} do
         if (time < _object getVariable ["A3A_gcTime", 0]) exitWith {};
 
         // If there are no players nearby then delete
-        if (_players inAreaArray [getPosATL _object, 100, 100] isEqualTo []) then { _object call _fnc_delete; continue };
+        if (_players inAreaArray [getPosATL _object, 500, 500] isEqualTo []) then { _object call _fnc_delete; continue };
 
         // If the object has been bumped too many times, delete it
         private _bumps = _object getVariable ["A3A_gcBumps", 0];

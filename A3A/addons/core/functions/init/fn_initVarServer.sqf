@@ -164,7 +164,7 @@ A3A_tasksData = [];
 A3A_buildingsToSave = [];
 
 A3A_gcQueue = [];				// List of postmortem objects to clean up
-A3A_gcCleanTime = 1800;			// Base time for deleting postmortem objects
+A3A_gcCleanTime = 3600;			// Base time for deleting postmortem objects
 A3A_gcMaxBumps = 3;				// Max times to delay cleanup for an object that's near players
 
 hcArray = [];					// array of headless client IDs
