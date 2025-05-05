@@ -89,6 +89,7 @@ switch (_mode) do
 
         // Check for selected groups
         private _selectedGroup = _commanderMap getVariable ["selectedGroup", grpNull];
+        private _doAutoSwitch = _commanderMap getVariable ["doAutoSwitch", false];
         private _hasGroup = !(_selectedGroup isEqualTo grpNull);
         private _isMortarVic = false;
         if (_hasGroup) then {
@@ -127,7 +128,7 @@ switch (_mode) do
 
         switch (true) do 
         {
-            case (_isMortarVic): { // If all is valid show fire mission view
+            case (_doAutoSwitch && _isMortarVic): { // If all is valid show fire mission view
                 {_x ctrlShow false} forEach _baseButtons; // expected to be done through single group view
                 ["updateFireMissionView"] call FUNC(commanderTab);
             };
@@ -142,6 +143,8 @@ switch (_mode) do
             default {
                 
             };
+
+            _commanderMap setVariable ["doAutoSwitch", false];
         };
     };
 
