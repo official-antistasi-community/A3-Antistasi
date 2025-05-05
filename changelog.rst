@@ -33,7 +33,6 @@ Version 3.9.0
    * :issue:`3527` SPE bridges can no longer be destroyed
    * :issue:`3532` Added tooltips to some new game setup options
    * :issue:`3536` Explosive placement is now logged
-   * :issue:`3538` Removed some debug spam from dive bombing
    * :issue:`3539` Petros can now die to enemy napalm
    * :issue:`3540` MG car squads can now be bought from the new battle menu
 
@@ -47,6 +46,7 @@ Version 3.9.0
 .. admonition:: Terrain updates
 
    * :issue:`3528` Removed a few erroneous objects on Colombia
+   * :issue:`3544` Changed garage box to traditional red box on several maps
 
 .. admonition:: Bugfixes
 
