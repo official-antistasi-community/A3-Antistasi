@@ -40,7 +40,8 @@ else
 
 
 [_titleStr, _text] remoteExec ["A3A_fnc_customHint", _playerX];
- ["update"] remoteExecCall ["A3A_GUI_fnc_playerTab", _playerX];
 
 // Will remove current boss if now ineligible
 [_forceElection] call A3A_fnc_assignBossIfNone;
+
+["update"] remoteExecCall ["A3A_GUI_fnc_playerTab", _playerX];
