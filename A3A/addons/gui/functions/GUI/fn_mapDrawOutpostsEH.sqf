@@ -84,7 +84,7 @@ private _outpostIconData = [];
     private _icon = A3A_Icon_Map_Blank;
     if (_mapScale < _fadeEnd) then {
        _icon = switch (_type) do {
-            case ("hq"): { A3A_Icon_Map_HQ; };
+            case ("hq"): { _fadedColor = [_color # 0, _color # 1, _color # 2, 1]; A3A_Icon_Map_HQ; };
             case ("city"): { A3A_Icon_Map_City; };
             case ("factory"): { A3A_Icon_Map_Factory; };
             case ("resource"): { A3A_Icon_Map_Resource; };
@@ -117,7 +117,7 @@ private _outpostIconData = [];
     ];
 
     // Draw text
-    if !(_type isEqualTo "city") then {_color = _fadedColor};
+    if !(_type in ["city","hq"]) then {_color = _fadedColor};
     _map drawIcon [
         "#(rgb,1,1,1)color(0,0,0,0)", // the icon itself is transparent
         _color, // colour

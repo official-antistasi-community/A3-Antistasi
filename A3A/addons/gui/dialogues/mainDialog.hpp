@@ -315,7 +315,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class CommanderButton : A3A_Button
                 {
                     idc = A3A_IDC_COMMANDERBUTTON;
-                    onButtonClick = "[player, cursorTarget] call A3A_fnc_theBossToggleEligibility; [""update""] call A3A_GUI_fnc_playerTab;";
+                    onButtonClick = "[player, cursorTarget] remoteExecCall [""A3A_fnc_theBossToggleEligibility"", 2];";
                     x = 74 * GRID_W;
                     y = 34 * GRID_H;
                     w = 22 * GRID_W;
