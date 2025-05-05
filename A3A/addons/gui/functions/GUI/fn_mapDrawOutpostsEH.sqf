@@ -84,7 +84,7 @@ private _outpostIconData = [];
     private _icon = A3A_Icon_Map_Blank;
     if (_mapScale < _fadeEnd) then {
        _icon = switch (_type) do {
-            case ("hq"): { _fadedColor = [_color # 0, _color # 1, _color # 2, 1]; A3A_Icon_Map_HQ; };
+            case ("hq"): { A3A_Icon_Map_HQ; };
             case ("city"): { A3A_Icon_Map_City; };
             case ("factory"): { A3A_Icon_Map_Factory; };
             case ("resource"): { A3A_Icon_Map_Resource; };
