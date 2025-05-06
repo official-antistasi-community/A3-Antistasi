@@ -36,6 +36,7 @@ switch (_mode) do
     {
         Trace("Updating Player tab");
         private _display = findDisplay A3A_IDD_MAINDIALOG;
+        if (isNull _display) exitWith {};
 
         // Disable buttons for functions that are unavailable
 

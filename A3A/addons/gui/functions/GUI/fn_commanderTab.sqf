@@ -87,21 +87,9 @@ switch (_mode) do
             } forEach [_airSupportButton,_recruitSquadButton,_requestMissionButton,_createWatchpostButton,_removeGarrisonButton,_HCSquadsButton];
         };
 
-        // Initialize fire mission vars
-        _fireMissionControlsGroup setVariable ["heSelected", true];
-        _fireMissionControlsGroup setVariable ["pointSelected", true];
-        _fireMissionControlsGroup setVariable ["roundsNumber", 1];
-        _fireMissionControlsGroup setVariable ["availableHeRounds", 0];
-        _fireMissionControlsGroup setVariable ["availableSmokeRounds", 0];
-        _fireMissionControlsGroup setVariable ["startPos", nil];
-        _fireMissionControlsGroup setVariable ["endPos", nil];
-
-        // Set map to group selection mode
-        _commanderMap setVariable ["selectFireMissionPos", false];
-        _commanderMap setVariable ["selectFireMissionEndPos", false];
-
         // Check for selected groups
         private _selectedGroup = _commanderMap getVariable ["selectedGroup", grpNull];
+        private _doAutoSwitch = _commanderMap getVariable ["doAutoSwitch", false];
         private _hasGroup = !(_selectedGroup isEqualTo grpNull);
         private _isMortarVic = false;
         if (_hasGroup) then {
@@ -115,6 +103,20 @@ switch (_mode) do
             } forEach (units _selectedGroup);
         };
 
+        // Initialize fire mission vars
+        _fireMissionControlsGroup setVariable ["heSelected", true];
+        _fireMissionControlsGroup setVariable ["pointSelected", true];
+        _fireMissionControlsGroup setVariable ["roundsNumber", 1];
+        _fireMissionControlsGroup setVariable ["availableHeRounds", 0];
+        _fireMissionControlsGroup setVariable ["availableSmokeRounds", 0];
+        _fireMissionControlsGroup setVariable ["startPos", nil];
+        _fireMissionControlsGroup setVariable ["endPos", nil];
+        _fireMissionControlsGroup setVariable ["mortarGroup", _selectedGroup];
+
+        // Set map to group selection mode
+        _commanderMap setVariable ["selectFireMissionPos", false];
+        _commanderMap setVariable ["selectFireMissionEndPos", false];
+
         // Check for valid marker for dismissal
         if (_commanderMap getVariable ["selectedMarker",""] isEqualTo "") then {
             _removeGarrisonButton ctrlEnable false;
@@ -126,7 +128,7 @@ switch (_mode) do
 
         switch (true) do 
         {
-            case (_hasGroup && _isMortarVic): { // If all is valid show fire mission view
+            case (_doAutoSwitch && _isMortarVic): { // If all is valid show fire mission view
                 {_x ctrlShow false} forEach _baseButtons; // expected to be done through single group view
                 ["updateFireMissionView"] call FUNC(commanderTab);
             };
@@ -142,6 +144,7 @@ switch (_mode) do
                 
             };
         };
+        _commanderMap setVariable ["doAutoSwitch", false];
     };
 
     case ("updateSingleGroupView"):
@@ -504,7 +507,8 @@ switch (_mode) do
 
         // Update rounds count
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
-        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        private _group = _fireMissionControlsGroup getVariable ["mortarGroup", grpNull];
+        _commanderMap setVariable ["selectedGroup", grpNull];
         private _units = units _group;
 
         private _mortarHEMag = FactionGet(reb,"staticMortarMagHE");
@@ -979,7 +983,7 @@ switch (_mode) do
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
 
         // Get params for fire mission from controlsGroup
-        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        private _group = _fireMissionControlsGroup getVariable ["mortarGroup", grpNull];
         private _heSelected = _fireMissionControlsGroup getVariable ["heSelected", true];
         private _pointSelected = _fireMissionControlsGroup getVariable ["pointSelected", true];
         private _roundsNumber = _fireMissionControlsGroup getVariable ["roundsNumber", 0];
@@ -987,7 +991,6 @@ switch (_mode) do
         private _endPos = _fireMissionControlsGroup getVariable ["endPos", []];
         private _artyArrayDef1 = _fireMissionControlsGroup getVariable ["artyArrayDef1", []];
         private _artyRoundsArr1 = _fireMissionControlsGroup getVariable ["artyRoundsArr1", []];
-
         // Debug stuff
         private _shell = if (_heSelected) then {"HE"} else {"Smoke"};
         private _type = if (_pointSelected) then {"Point"} else {"Barrage"};

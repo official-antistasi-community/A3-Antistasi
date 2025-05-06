@@ -315,7 +315,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class CommanderButton : A3A_Button
                 {
                     idc = A3A_IDC_COMMANDERBUTTON;
-                    onButtonClick = "[player, cursorTarget] call A3A_fnc_theBossToggleEligibility; [""update""] call A3A_GUI_fnc_playerTab;";
+                    onButtonClick = "[player, cursorTarget] remoteExecCall [""A3A_fnc_theBossToggleEligibility"", 2];";
                     x = 74 * GRID_W;
                     y = 34 * GRID_H;
                     w = 22 * GRID_W;
@@ -1123,7 +1123,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_FIREBUTTON;
                             text = $STR_antistasi_dialogs_main_hc_fire_mission_fire_button;
-                            onbuttonClick = "[""fireMissionButtonClicked""] call A3A_GUI_fnc_commanderTab";
+                            onbuttonClick = "[""fireMissionButtonClicked""] call A3A_GUI_fnc_commanderTab; closeDialog 0;";
                             x = 17 * GRID_W;
                             y = 56 * GRID_H;
                             w = 20 * GRID_W;

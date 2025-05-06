@@ -20,7 +20,7 @@ switch (_key) do {
         if (A3A_GUIDevPreview) then {
             [] spawn {
                 if (player == theBoss) then {
-                    player setVariable ["selHcGroups",hcSelected player];
+                    player setVariable ["autoSwitchGroups",hcSelected player];
                     waitUntil { showCommandingMenu ""; hcSelected player isEqualTo [] };
                 };
                 createDialog "A3A_MainDialog";  

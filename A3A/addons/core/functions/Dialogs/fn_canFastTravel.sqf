@@ -31,9 +31,6 @@ params [
     ["_things", objNull, [objNull, grpNull, []]],
     ["_destination", nil, [[]], [2,3]]
 ];
-if (_things isEqualType objNull || _things isEqualType grpNull) then {
-    _things = [_things];
-};
 private _blockers = [];
 
 
@@ -41,7 +38,7 @@ private _blockers = [];
 
 private _isHC = false;
 private _groupX = grpNull;
-if (count hcSelected _player == 1) then {_groupX = hcSelected player select 0; _isHC = true} else {_groupX = group player};
+if (_things isEqualType grpNull) then {_groupX = _things; _isHC = true} else {_groupX = group player};
 
 if ((limitedFT == 2) && !(_isHC)) then {_blockers append ["no_param"]};
 if (count hcSelected _player > 1) then {_blockers append ["grp_select"]};
