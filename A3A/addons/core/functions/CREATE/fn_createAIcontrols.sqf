@@ -189,12 +189,12 @@ else
 
 		[_groupX, "Patrol_Area", 25, 150, 300, false, [], false] call A3A_fnc_patrolLoop;
 		_groups pushBack _groupX;
+		{_soldiers pushBack _x} forEach units _groupX;
 
 		_typeVehX = selectRandom (_faction get "uavsPortable");
 		if !(isNil "_typeVehX") then
 			{
 			sleep 1;
-			{_soldiers pushBack _x} forEach units _groupX;
 			_uav = createVehicle [_typeVehX, _positionX, [], 0, "FLY"];
 			[_sideX, _uav] call A3A_fnc_createVehicleCrew;
 			_vehiclesX pushBack _uav;
