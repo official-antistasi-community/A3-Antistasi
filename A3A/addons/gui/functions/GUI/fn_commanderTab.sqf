@@ -143,9 +143,8 @@ switch (_mode) do
             default {
                 
             };
-
-            _commanderMap setVariable ["doAutoSwitch", false];
         };
+        _commanderMap setVariable ["doAutoSwitch", false];
     };
 
     case ("updateSingleGroupView"):
