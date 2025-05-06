@@ -186,6 +186,7 @@ Maintainer: DoomMetal
 // Other useful colors
 #define A3A_COLOR_BLACK {0,0,0,1}
 #define A3A_COLOR_WHITE {1,1,1,1}
+#define A3A_COLOR_LIME {0,1,0,1}
 
 // Tooltips
 #define A3A_COLOR_TOOLTIP_TEXT {1,1,1,1}

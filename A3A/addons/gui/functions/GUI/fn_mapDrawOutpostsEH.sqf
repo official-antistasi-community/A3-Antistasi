@@ -51,11 +51,15 @@ private _outpostIconData = [];
     private _name = _marker call A3A_GUI_fnc_getLocationMarkerName;
     private _isCity = _marker in citiesX;
     private _isDestroyed = _marker in destroyedSites;
+    private _isHQ = (_marker == "Synd_HQ");
     private _pos = getMarkerPos _marker;
     private _side = sidesX getVariable [_marker,sideUnknown];
     private _color = [1,1,1,1];
 
     switch (true) do {
+        case (_isHQ): {
+            _color = [A3A_COLOR_LIME] call FUNC(configColorToArray);
+        };
         case (_isDestroyed && _isCity): {
             _color = [A3A_COLOR_BLACK] call FUNC(configColorToArray);
         };
