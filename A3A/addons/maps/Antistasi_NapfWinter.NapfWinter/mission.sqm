@@ -5755,8 +5755,8 @@ class Mission
 									markerType="RECTANGLE";
 									type="rectangle";
 									colorName="ColorWEST";
-									a=187.56732;
-									b=145.18381;
+									a=185;
+									b=100;
 									angle=0.50559145;
 									id=121;
 									atlOffset=3.3378601e-06;
