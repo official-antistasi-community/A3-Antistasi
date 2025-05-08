@@ -49,8 +49,8 @@ private _allConfigs = _allWeaponConfigs + _allMagazineConfigs + _allBackpackConf
 //////////////////////////////
 //    Sorting Function     ///
 //////////////////////////////
-private ["_nameX", "_item", "_itemMod", "_itemType", "_categories"];           // pretty daft optimization, not likely to make much difference
-{
+private ["_cfg", "_nameX", "_item", "_itemMod", "_itemType", "_categories"];           // pretty daft optimization, not likely to make much difference
+/*{
     _nameX = configName _x;
 
     // If in disabledMods, remove. Don't need itemType for this so we do it first
@@ -69,3 +69,29 @@ private ["_nameX", "_item", "_itemMod", "_itemType", "_categories"];           /
     } forEach _categories;
 
 } forEach _allConfigs;
+*/
+while {_allConfigs isNotEqualTo []} do {
+    isNil {
+        private _startTime = diag_deltaTime;
+        while {_allConfigs isNotEqualTo [] and diag_deltaTime - _startTime < 0.02} do {
+ 
+            _cfg = _allConfigs deleteAt (count _allConfigs - 1);
+            _nameX = configName _cfg;
+
+            // If in disabledMods, remove. Don't need itemType for this so we do it first
+            _itemMod = _cfg call A3A_fnc_getModOfConfigClass;
+            if (_itemMod in A3A_disabledMods) then { continue };
+
+            // Filter items by current factions/modset
+            _itemType = _nameX call A3A_fnc_itemType;
+            if !([_cfg, _itemMod, _itemType] call _fnc_filter) then { continue };
+
+            _categories = [_nameX, _itemType] call A3A_fnc_equipmentClassToCategories;
+            {
+                //We're not returning a default value with getVariable, becuase it *must* be instantiated before now. If it isn't, we *need* it to error.
+                // allweapons, allrifles are pushedback here!!!!
+                (missionNamespace getVariable ("all" + _x)) pushBack _nameX;         // uniqueness should be guaranteed by base weapon filtering
+            } forEach _categories;
+        };
+    };
+};
