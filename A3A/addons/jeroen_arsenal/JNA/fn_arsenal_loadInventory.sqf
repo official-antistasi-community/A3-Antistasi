@@ -196,7 +196,7 @@ _assignedItems = ((_inventory select 9) + [_inventory select 3] + [_inventory se
 		};
 		
         //Weapon Stack fix
-        private _weaponname = getText(configfile >> "CfgWeapons" >> _item >> "baseWeapon");
+        private _weaponname = _item call bis_fnc_baseWeapon;
         if!(_weaponname isEqualTo "")then{
             _item = _weaponname
         };
