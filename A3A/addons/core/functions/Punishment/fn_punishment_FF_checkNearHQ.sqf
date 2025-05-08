@@ -46,6 +46,8 @@ private _fileName = "fn_punishment_FF_checkNearHQ";
 if !(_weapon in ["Put","Throw"]) exitWith {false};
 private _distancePetros = _unit distance petros;
 
+if (_unit isNotEqualTo player) exitWith {};
+
 if (_weapon == "Put") then 
 {
     ServerInfo_5("Player %1 [UID: %2] tried to place %3 at grid %4 %5 meters away from HQ",name _unit, getPlayerUID _unit, typeOf _projectile, mapGridPosition _projectile,_distancePetros);
