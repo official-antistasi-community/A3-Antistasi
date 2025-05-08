@@ -43,10 +43,10 @@ FIX_LINE_NUMBERS()
 params ["_unit","_weapon","_projectile"];
 private _fileName = "fn_punishment_FF_checkNearHQ";
 
+if (local _unit) exitWith {};
+
 if !(_weapon in ["Put","Throw"]) exitWith {false};
 private _distancePetros = _unit distance petros;
-
-if (_unit isNotEqualTo player) exitWith {};
 
 if (_weapon == "Put") then 
 {
