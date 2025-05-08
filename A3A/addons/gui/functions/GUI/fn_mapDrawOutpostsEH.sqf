@@ -80,7 +80,7 @@ private _fnc_drawIcon = {
 private _fnc_drawLabel = {
     params ["_pos", "_color", "_name"];
     _map drawIcon [
-        "#(rgb,1,1,1)color(0,0,0,0)", // the icon itself is transparent
+        "#(argb,1,1,1)color(0,0,0,0)", // the icon itself is transparent
         _color, // colour
         _pos, // position
         _markerSize, // width
@@ -119,10 +119,11 @@ private _roadblocks = outpostsFIA select { isOnRoad markerPos _x };
 
 // Cities are heavily special-case
 private _visCities = citiesX inAreaArrayIndexes [_mapCenter, _mapWidth, _mapHeight, 0, true] apply {citiesX#_x};
+private _cityIcon = [A3A_Icon_Map_City, A3A_Icon_Map_Blank] select (_mapScale >= _fadeEnd);
 {
     private _color = _sideColorHM get (sidesX getVariable _x);
     if (_x in destroyedSites) then { _color = _colorBlack };
-    [markerPos _x, _color, A3A_Icon_Map_City] call _fnc_drawIcon;
+    [markerPos _x, _color, _cityIcon] call _fnc_drawIcon;
     [markerPos _x, _color, _x] call _fnc_drawLabel;
 } forEach _visCities;
 
