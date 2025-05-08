@@ -96,10 +96,13 @@ switch (_type) do {
 	case "LOG": {
 		// role three dice
 		private _spawnGunShop = random 12 + random 12 + random 12 + tierWar > 29;
-		private _gunShopCities = citiesX select {(getMarkerPos _x) distance2d (getMarkerPos respawnTeamPlayer) < distanceMission }
-			select { sidesX getVariable _x == Occupants } select { spawner getVariable _x != 0 };
 
-		if (_spawnGunShop && !bigAttackInProgress and tierWar > 3) exitWith {
+		private _gunShopCities = [];
+		if (_spawnGunShop && !bigAttackInProgress and tierWar > 3) then {
+			_gunShopCities = citiesX select {(getMarkerPos _x) distance2d (getMarkerPos respawnTeamPlayer) < distanceMission }
+				select { sidesX getVariable _x == Occupants } select { spawner getVariable _x != 0 };
+		};
+		if (_gunShopCities isNotEqualTo []) exitWith {
 			[selectRandom _gunShopCities] remoteExec ["A3A_fnc_GSMission", 2];		// Always on server to simplify shopping list
 		};
 
