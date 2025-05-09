@@ -124,7 +124,7 @@ switch _typeX do
     };
     case "fireX":
     {
-        fireX addAction [localize "STR_A3A_fn_base_flagaction_firex_rest", A3A_fnc_skiptime,nil,0,false,true,"","(_this == theBoss)",4];
+        fireX addAction [localize "STR_A3A_fn_base_flagaction_firex_rest",{ [8] call A3A_fnc_skiptime },nil,0,false,true,"","(_this == theBoss)",4];
         fireX addAction [localize "STR_A3A_fn_base_flagaction_firex_forest", A3A_fnc_clearForest,nil,0,false,true,"","(_this == theBoss)",4];
         fireX addAction [localize "STR_A3A_fn_base_flagaction_firex_fog", { [10,[0,0,0]] remoteExec ["setFog",2]; },nil,0,false,true,"","(_this == theBoss)",4];
         fireX addAction [localize "STR_A3A_fn_base_flagaction_firex_rain", { [10,0] remoteExec ["setRain",2]; [60,0.25] remoteExec ["setOvercast",2] },nil,0,false,true,"","(_this == theBoss)",4];

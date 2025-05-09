@@ -107,7 +107,7 @@ _map setVariable ["hcGroupData", _hcGroupData];
 
     // Draw group name text
     _map drawIcon [
-        "#(rgb,1,1,1)color(0,0,0,0)", // transparent
+        "#(argb,1,1,1)color(0,0,0,0)", // transparent
         _groupIconColor, // colour
         _position, // position
         32, // width

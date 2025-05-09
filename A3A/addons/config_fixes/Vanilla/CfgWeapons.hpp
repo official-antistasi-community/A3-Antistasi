@@ -2,13 +2,6 @@
 
 class CfgWeapons 
 {
-    // Fix bad base weapon
-    class arifle_AK12_GL_base_F;
-    class arifle_AK12_GL_lush_F : arifle_AK12_GL_base_F
-    {
-        baseWeapon = "arifle_AK12_GL_lush_F";
-    };
-
     // Price overrides for gun shop
     // Type 115, extra muzzle
     class Rifle_Base_F;
