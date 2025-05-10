@@ -33,7 +33,8 @@ switch (_key) do {
                 closeDialog 0;
                 waitUntil { showCommandingMenu ""; hcSelected player isEqualTo [] };
                 createDialog "A3A_MainDialog";
-                sleep 1; GVAR(keys_battleMenu) = false;
+                sleep 1; 
+                GVAR(keys_battleMenu) = false;
             };
         } else {
     #ifdef UseDoomGUI
