@@ -131,6 +131,8 @@ A3A_resourcesDefenceInv = A3A_balanceResourceRate * (A3A_invaderBalanceMul / 10)
 A3A_resourcesAttackOcc = -10 * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10);								// ~100 min to attack
 A3A_resourcesAttackInv = -10 * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10) * (A3A_invaderBalanceMul / 10) * 0.5;	// ~50 min to attack
 
+A3A_punishmentDefBuff = 0;
+
 // HQ knowledge values
 A3A_curHQInfoOcc = 0;			// 0-1 ranges for current HQ
 A3A_curHQInfoInv = 0;

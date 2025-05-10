@@ -16,21 +16,27 @@ switch (_key) do {
     case QGVAR(battleMenu): {
         if (player getVariable ["incapacitated",false]) exitWith {};
         if (player getVariable ["owner",player] != player) exitWith {};
+        if (GVAR(keys_battleMenu)) exitWith {};         // fucking thing actually refires on closeDialog?
+        GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
 
+        // So what the fuck is going on here? Let's see...
+        // Problem 1: If you open the dialog with the commanding menu open, the map controls cannot be zoomed.
+        // Problem 2: There is no known way to close the commanding menu immediately. It needs to fade out.
+        // Problem 3: The commanding menu will not fade out with a dialog open.
+        // Problem 4: Unless there's a dialog open, the default Y key bind will also open or ping Zeus.
+        // Problem 5: Arma likes to refire the key events when you close a dialog.
+        // tl;dr: Do not rearrange this logic or clowns will eat your children.
         if (A3A_GUIDevPreview) then {
+            createDialog "A3A_dummyDialog";
+            player setVariable ["autoSwitchGroups", hcSelected player];
             [] spawn {
-                if (player == theBoss) then {
-                    player setVariable ["autoSwitchGroups",hcSelected player];
-                    waitUntil { showCommandingMenu ""; hcSelected player isEqualTo [] };
-                };
-                createDialog "A3A_MainDialog";  
-                if (player == theBoss) then {
-                    sleep 1;  
-                    player setVariable ["autoSwitchGroups",[]]; 
-                };
-            };  
+                closeDialog 0;
+                waitUntil { showCommandingMenu ""; hcSelected player isEqualTo [] };
+                createDialog "A3A_MainDialog";
+                sleep 1; 
+                GVAR(keys_battleMenu) = false;
+            };
         } else {
-            GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
     #ifdef UseDoomGUI
             ERROR("Disabled due to UseDoomGUI Switch.")
     #else
