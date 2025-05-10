@@ -1447,52 +1447,9 @@ class Templates
         file = "BWA3_AI_BW_Temperate";
         climate[] = {"temperate","tropical","arctic"};
     };
-    
-    // ***************************** Spe *****************************
-/*    //Commented out as no vehiclesPlanesTransport exist and the templates don't work without them
-    class SPE_Base
-    {
-        requiredAddons[] = {"ww2_spe_assets_c_characters_germans_c"};
-        basepath = QPATHTOFOLDER(Templates\Templates\SPE);
-        logo = QPATHTOFOLDER(Templates\Templates\SPE\spe_logo.paa);
-        priority = 80;
-        equipFlags[] = {"lowTech"};
-        forceDLC[] = {"spe"};
-    };
 
-    class SPE_US : SPE_Base
-    {
-        side = "Inv";
-        flagTexture = QPATHTOFOLDER(Templates\Templates\SPE\flag_us.paa);
-        name = "SPE US";
-        file = "SPE_AI_US";
-    };
-
-    class SPE_WEH : SPE_Base
-    {
-        side = "Occ";
-        flagTexture = QPATHTOFOLDER(Templates\Templates\SPE\flag_ger.paa);
-        name = "SPE WEH";
-        file = "SPE_AI_WEH";
-    };
-
-    class SPE_Reb : SPE_Base
-    {
-        side = "Reb";
-        flagTexture = "\WW2\SPE_Core_t\Data_t\Flags\flag_FFF_co.paa";
-        name = "SPE FFF";
-        file = "SPE_Reb_FFF";
-    };
-
-    class SPE_CIV : SPE_Base
-    {
-        side = "Civ";
-        flagTexture = QPATHTOFOLDER(Templates\Templates\SPE\flag_fr.paa);
-        name = "SPE Civs";
-        file = "SPE_CIV";
-    };
-*/
     // ***************************** IFA *****************************
+
     class IFA_Base
     {
         requiredAddons[] = {"IFA3_Core"};
@@ -1649,14 +1606,11 @@ class Templates
 
     // ***************************** SPE with SPEX *****************************
 
-    class SPEX_Base
+    class SPEX_Base : SPE_IFA_Base
     {
         requiredAddons[] = {"ww2_spe_assets_c_characters_germans_c","WW2_SPEX_Assets_c_Characters_Americans_c"};
         basepath = QPATHTOFOLDER(Templates\Templates\SPEX);
         logo = QPATHTOFOLDER(Templates\Templates\SPEX\spe_logo.paa);
-        priority = 80;
-        equipFlags[] = {"lowTech"};
-        forceDLC[] = {"spe"};
     };
 
     class SPEX_US : SPEX_Base
@@ -1697,6 +1651,103 @@ class Templates
         file = "SPEX_CIV";
         shortName = "Civilian";
         lore = $STR_A3A_templates_lore_SPE_IFA_CIV;
+    };
+    // ***************************** SPE with SPEX and SEP *****************************
+
+    class SEP_Base : SPE_IFA_Base
+    {
+        requiredAddons[] = {"ww2_spe_assets_c_characters_germans_c","WW2_SPEX_Assets_c_Characters_Americans_c"};
+        basepath = QPATHTOFOLDER(Templates\Templates\SPE_SEP);
+        logo = "SEP_MISC\data\SEP_LogoOver_ca.paa";
+        priority = 85;
+    };
+
+    class SEP_US_Winter : SEP_Base
+    {
+        side = "Occ";
+        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_us.paa);
+        name = "SEP US Winter";
+        file = "SEP_AI_US_Winter";
+        shortName = "US";
+        lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
+        climate[] = {"arctic"};
+    };
+
+    class SEP_RAAF : SEP_Base
+    {
+        side = "Occ";
+        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_us.paa);
+        name = "SEP Royal Altian Armed Forces";
+        file = "SEP_AI_RAAF";
+        shortName = "RAAF";
+        lore = "Royal Altian Armed Forces of the colonial rule over Altis and Stratis";
+        climate[] = {"arid"};
+    };
+
+    class SEP_US_Winter : SEP_Base
+    {
+        side = "Occ";
+        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_us.paa);
+        name = "SEP Horizon Island Colonial Army";
+        file = "SEP_AI_IHAC";
+        shortName = "ÎHAC";
+        lore = "Îles Horizon Armée Coloniales, French Colonial Army of Tanoa and the Horizon Islands";
+        climate[] = {"tropical"};
+    };
+
+    class SEP_WEH_Winter : SEP_Base
+    {
+        side = "Inv";
+        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_ger.paa);
+        name = "SEP Wehrmacht Central Winter";
+        file = "SEP_AI_WEH_Winter";
+        shortName = "WEH";
+        lore = "The homeland command of the German army";
+        climate[] = {"arctic"};
+    };
+
+    class SEP_WEH_Core : SEP_Base
+    {
+        side = "Inv";
+        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_ger.paa);
+        name = "SEP Wehrmacht Central";
+        file = "SEP_AI_WEH_Core";
+        shortName = "WEH";
+        lore = "The homeland command of the German army";
+        climate[] = {"temperate"};
+    };
+
+    class SEP_WEH_DAK : SEP_Base
+    {
+        side = "Inv";
+        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_ger.paa);
+        name = "SEP Deutsche Afrika Korps";
+        file = "SEP_AI_WEH_DAK";
+        shortName = "DAK";
+        lore = "The German Africa Corps";
+        climate[] = {"tropical","arid"};
+    };
+
+    class SEP_Reb_AK : SEP_Base
+    {
+        side = "Reb";
+        flagTexture = "\x\A3A\addons\core\Pictures\Flags\ifa_ak.paa";
+        name = "SEP AK";
+        file = "SEP_REB_AK";
+        shortName = "AK"; 
+        lore = $STR_A3A_templates_IFA_REB_AK;
+        climate[] = {"temperate","arctic"};
+    };
+
+    class SEP_Reb_FRAS : SEP_Base
+    {
+        side = "Reb";
+        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        name = "SEP FRAS";
+        file = "SEP_REB_FRAS";
+        shortName = "FRAS"; // Free Republic of Altis and Stratis
+        lore = "The Free Republic of Altis and Stratis";
+        climate[] = {"tropical","arid"};
     };
 
      // ***************************** CWR *****************************
