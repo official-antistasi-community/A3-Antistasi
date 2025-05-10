@@ -84,6 +84,7 @@ if (currentWaypoint _group > 0) then
 	private _crate = createVehicle [A3A_faction_occ get "ammobox", _plane modelToWorld [0,-10,-10], [], 0, "CAN_COLLIDE"];
     _crate setVelocity (velocity _plane vectorMultiply 0.5);
     _crate allowDamage false;
+    _crate setMass 1000;            // twice normal, just to increase fall rate and land closer to target
 
     // Add items. Might take a while, spawn to avoid fucking up the timings
     [_crate, _gear] spawn A3A_fnc_setCargoItems;
@@ -113,6 +114,18 @@ if (currentWaypoint _group > 0) then
     _crate setVariable ["A3A_taskId", _taskId];
     _crate addEventHandler ["Attached", _fnc_cleanup];
     _crate addEventHandler ["Deleted", _fnc_cleanup];
+
+    // Get rid of the task and smoke if items are removed from the box
+    [_crate, load _crate, _fnc_cleanup] spawn {
+        params ["_crate", "_initLoad", "_fnc_cleanup"];
+        while {!isNull _crate} do {
+            sleep 10;
+            if (load _crate != _initLoad) then {
+                [_crate] call _fnc_cleanup;
+                break;
+            };
+        };
+    };
 
 	// Otherwise when destroyed, ammoboxes sink 100m underground and are never cleared up
 	_crate addEventHandler ["Killed", { [_this#0] spawn { sleep 10; deleteVehicle (_this#0) } }];
