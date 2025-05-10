@@ -259,6 +259,7 @@ if (_varName in _specialVarLoads) then {
         A3A_resourcesDefenceInv = _varValue#1;
         A3A_resourcesAttackOcc = _varValue#2;
         A3A_resourcesAttackInv = _varValue#3;
+        if (count _varValue > 4) then { A3A_punishmentDefBuff = _varValue#4 };
     };
     if (_varname == 'HQKnowledge') then {
         A3A_curHQInfoOcc = _varValue#0;
