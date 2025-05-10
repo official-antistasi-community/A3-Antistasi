@@ -34,29 +34,23 @@ switch (true) do {
     //filter blacklist first
     case (_class in HR_GRG_blacklistVehicles): { -2 };
     //vanilla
-    case ([_class] call HR_GRG_fnc_isAmmoSource): { 9 };
-    case ([_class] call HR_GRG_fnc_isFuelSource): { 9 };
-    case ([_class] call HR_GRG_fnc_isRepairSource): { 9 };
+    case ([_class] call HR_GRG_fnc_isAmmoSource): { 6 };
+    case ([_class] call HR_GRG_fnc_isFuelSource): { 6 };
+    case ([_class] call HR_GRG_fnc_isRepairSource): { 6 };
     case (_editorCat isEqualTo "EdSubcat_Cars"): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover) 
-    case (_editorCat isEqualTo "EdSubcat_APCs"): { 2 };
-    case (_editorCat in ["EdSubcat_Tanks"]): { 3 };
-    case (_editorCat in ["EdSubcat_AAs"]): { 4 };
-    case (_editorCat in ["EdSubcat_Artillery"]): { 5 };
-    case (_editorCat in ["EdSubcat_Helicopters"] || getNumber (_vtolConfig >> "vtol") > 0): { 6 };
+    case (_editorCat in ["EdSubcat_Tanks","EdSubcat_APCs","EdSubcat_AAs","EdSubcat_Artillery"]): { 2 };
+    case (_editorCat in ["EdSubcat_Helicopters"] || getNumber (_vtolConfig >> "vtol") == 0): { 3 };
     //case (getNumber (configOf _vehicle >> "vtol") > 0): { 5 };
-    case (_editorCat in ["EdSubcat_Planes"] && (getNumber (_vtolConfig >> "vtol") == 0)): { 7 };
-    case (_editorCat in ["EdSubcat_Boats","EdSubcat_Submersibles"]): { 8 };
-    case (_editorCat isEqualTo "EdSubcat_Turrets"): { 10 };
+    case (_editorCat in ["EdSubcat_Planes"] && (getNumber (_vtolConfig >> "vtol") > 0)): { 4 };
+    case (_editorCat in ["EdSubcat_Boats","EdSubcat_Submersibles"]): { 5 };
+    case (_editorCat isEqualTo "EdSubcat_Turrets"): { 7 };
 
     //rhs
     case (_editorCat in ["rhs_EdSubcat_car", "rhs_EdSubcat_truck", "rhs_EdSubcat_mrap"]): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover)
-    case (_editorCat in ["rhs_EdSubcat_apc","rhs_EdSubcat_ifv"]): {2};
-    case (_editorCat in ["rhs_EdSubcat_tank"]): {3};
-    case (_editorCat in ["rhs_EdSubcat_aa"]): {4};
-    case (_editorCat in ["rhs_EdSubcat_artillery"]): {5};
-    case (_editorCat in ["rhs_EdSubcat_helicopter","rhs_EdSubcat_helicopter_d","rhs_EdSubcat_helicopter_wd"]): { 6 };
-    case (_editorCat in ["rhs_EdSubcat_aircraft"]): { 7 };
-    case (_editorCat isEqualTo "rhs_EdSubcat_boat"): { 8 };
+    case (_editorCat in ["rhs_EdSubcat_apc","rhs_EdSubcat_ifv","rhs_EdSubcat_tank","rhs_EdSubcat_aa","rhs_EdSubcat_artillery"]): {2};
+    case (_editorCat in ["rhs_EdSubcat_helicopter","rhs_EdSubcat_helicopter_d","rhs_EdSubcat_helicopter_wd"]): { 3 };
+    case (_editorCat in ["rhs_EdSubcat_aircraft"]): { 4 };
+    case (_editorCat isEqualTo "rhs_EdSubcat_boat"): { 5 };
 
     //cup
     case (_editorCat in ["CUP_EdSubcat_Bikes", "CUP_EdSubCat_Cars_Woodland", "CUP_EdSubCat_UpHMMWV_Cars_Desert", "CUP_EdSubCat_Cars_Winter"]): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover)
@@ -64,11 +58,11 @@ switch (true) do {
     //Fallback
     case (_class isKindOf "Car"): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover)
     case (_class isKindOf "Tracked_APC"): { 2 }; //?
-    case (_class isKindOf "Tank"): { 3 };
-    case (_class isKindOf "Helicopter"): { 6 };
-    case (_class isKindOf "Plane"): { 7 };
-    case (_class isKindOf "Ship"): { 8 };
-    case (_class isKindOf "staticWeapon"): { 10 }; //some non-vanilla artillery is statics
+    case (_class isKindOf "Tank"): { 2 };
+    case (_class isKindOf "Helicopter"): { 3 };
+    case (_class isKindOf "Plane"): { 4 };
+    case (_class isKindOf "Ship"): { 5 };
+    case (_class isKindOf "staticWeapon"): { 7 }; //some non-vanilla artillery is statics
 
     default { -1 };
 };
