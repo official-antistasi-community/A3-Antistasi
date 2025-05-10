@@ -41985,7 +41985,7 @@ class Mission
 						class Item119
 						{
 							dataType="Marker";
-							position[]={6713.9346,14.515488,16965.604};
+							position[]={6721.23,0.00136328,16955.1};
 							name="control_90";
 							markerType="RECTANGLE";
 							type="rectangle";
