@@ -4,6 +4,13 @@
 
 #include "ids.inc"
 
+class A3A_DummyDialog
+{
+    idd = -1;
+    // Do we need anything here?
+    class Controls {};
+};
+
 class A3A_MainDialog : A3A_TabbedDialog
 {
     idd = A3A_IDD_MAINDIALOG;
