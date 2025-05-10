@@ -66,6 +66,62 @@ class CfgWorlds {
                 radiusB = 150;
                 type = "NameVillage";
             };
+            class vil_Worb {
+                name = "Worb";
+                position[] = {2523,7656};
+                radiusA = 150;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Horw {
+                name = "Horw";
+                position[] = {17231,13916};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Brienz {
+                name = "Brienz";
+                position[] = {14420.4,2956.29};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Sissach {
+                name = "Sissach";
+                position[] = {11224.5,8632.69};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Luzern {
+                name = "Luzern";
+                position[] = {14503.1,14136.4};
+                radiusA = 200;
+                radiusB = 200;
+                type = "NameCity";
+            };
+            class vil_Muttenz {
+                name = "Muttenz";
+                position[] = {6259.56,10349.7};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class Hof_Hungerschwand {
+                name = "Hof Hungerschwand";
+                position[] = {9009.93,3397.32};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Liestal {
+                name = "Liestal";
+                position[] = {12746.8,9583.47};
+                radiusA = 150;
+                radiusB = 150;
+                type = "NameVillage";
+            };
         };
     };
     class NapfWinter : CAWorld {
@@ -109,6 +165,62 @@ class CfgWorlds {
             class vil_Wasen {
                 name = "Wasen";
                 position[] = {7385.5,15887};
+                radiusA = 150;
+                radiusB = 150;
+                type = "NameVillage";
+            };
+            class vil_Worb {
+                name = "Worb";
+                position[] = {2523,7656};
+                radiusA = 150;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Horw {
+                name = "Horw";
+                position[] = {17231,13916};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Brienz {
+                name = "Brienz";
+                position[] = {14420.4,2956.29};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Sissach {
+                name = "Sissach";
+                position[] = {11224.5,8632.69};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Luzern {
+                name = "Luzern";
+                position[] = {14503.1,14136.4};
+                radiusA = 200;
+                radiusB = 200;
+                type = "NameCity";
+            };
+            class vil_Muttenz {
+                name = "Muttenz";
+                position[] = {6259.56,10349.7};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class Hof_Hungerschwand {
+                name = "Hof Hungerschwand";
+                position[] = {9009.93,3397.32};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Liestal {
+                name = "Liestal";
+                position[] = {12746.8,9583.47};
                 radiusA = 150;
                 radiusB = 150;
                 type = "NameVillage";
