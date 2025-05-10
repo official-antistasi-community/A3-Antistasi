@@ -1,22 +1,24 @@
-params ["_mrkDest", ["_possibleBases", airportsX + outposts], ["_maxDistance", 3000]];
+// Note: distanceForLandAttack+1500 is same distance as findLandSupportMarkers uses, so setting higher won't matter
 
-private _posDest = getMarkerPos _mrkDest;
-private _side = sidesX getVariable [_mrkDest,sideUnknown];
-if (_mrkDest in citiesX and _side == teamPlayer) then {_side = Occupants};
+params ["_mrkDest", "_possibleBases", ["_maxDistance", distanceForLandAttack+1500]];
 
-private _bases = _possiblebases select {
-    (sidesX getVariable [_x,sideUnknown] == _side)
-    and (_posDest distance getMarkerPos _x > 1000)
-    and (_posDest distance getMarkerPos _x < _maxDistance)
-    and {
-        (spawner getVariable _x == 2)
-        and (dateToNumber date > server getVariable _x) 					// garrison not busy
-        and (count (garrison getVariable [_x,[]]) >= 16)					// sufficient garrison
-        and ([_x,_mrkDest] call A3A_fnc_arePositionsConnected)
-        and !(_x in forcedSpawn) and !(_x in blackListDest)
-        and ({_x == _mrkDest} count (killZones getVariable [_x,[]]) < 3)
-    };
-};
+private _side = sidesX getVariable [_mrkDest, teamPlayer];
+private _suppMarkers = [_mrkDest, false] call A3A_fnc_findLandSupportMarkers;
+private _bases = [];
+{
+    _x params ["_base", "_dist"];
+    if (_dist < 1500 or _dist > _maxDistance) then {continue};
+    if (sidesX getVariable _base != _side) then {continue};
+
+    // Base validity checks
+    if (spawner getVariable _base == 0) then {continue};
+    if (dateToNumber date < server getVariable _base) then {continue}; 				// garrison not busy
+    if (count (garrison getVariable [_base,[]]) < 16) then {continue};	            // sufficient garrison
+    if ({_x == _mrkDest} count (killZones getVariable [_base,[]]) >= 3) then {continue};
+
+    _bases pushBack _base;
+
+} forEach _suppMarkers;
 
 if (count _bases == 0) exitWith {""};
 selectRandom _bases;
