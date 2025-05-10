@@ -358,14 +358,14 @@
         <Chinesesimp>炮手</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_buy_vehicle_loot_tooltip">
-        <Original>This item can collect loot&lt;br/&gt;%1 max load is %2</Original>
-        <German>Dieser Gegenstand kann Beute laden&lt;br/&gt;%1 maximale Kapazität ist %2</German>
-        <Italian>Quest'oggetto può accumulare loot&lt;br/&gt;il carico massimo di %1 è %2</Italian>
-        <Spanish>Este objeto puede recolectar loot&lt;br/&gt;La carga máxima de %1 es %2</Spanish>
-        <French>Cet objet peut collecter du butin&lt;br/&gt;%1 charge max est %2</French>
-        <Korean>이 아이템은 전리품을 수집할 수 있습니다.&lt;br/&gt;%1의 최대 수용량은 %2입니다.</Korean>
-        <Russian>Этот объект может собирать вещи&lt;br/&gt;%1 с максимальной вместимостью в %2</Russian>
-        <Czech>Tento předmět může sbírat loot&lt;br/&gt;%1 maximální kapacita je %2</Czech>
+        <Original>This item can collect loot\n%1 max load is %2</Original>
+        <German>Dieser Gegenstand kann Beute laden\n%1 maximale Kapazität ist %2</German>
+        <Italian>Quest'oggetto può accumulare loot\nil carico massimo di %1 è %2</Italian>
+        <Spanish>Este objeto puede recolectar loot\nLa carga máxima de %1 es %2</Spanish>
+        <French>Cet objet peut collecter du butin\n%1 charge max est %2</French>
+        <Korean>이 아이템은 전리품을 수집할 수 있습니다.\n%1의 최대 수용량은 %2입니다.</Korean>
+        <Russian>Этот объект может собирать вещи\n%1 с максимальной вместимостью в %2</Russian>
+        <Czech>Tento předmět může sbírat loot\n%1 maximální kapacita je %2</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_buy_vehicle_med_tooltip">
         <Original>This item has medical capability</Original>
@@ -410,14 +410,14 @@
         <Chinesesimp>普通乘客座位</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_buy_vehicle_refuel_tooltip">
-        <Original>This item can refuel others&lt;br/&gt;%1 max fuel is %2</Original>
-        <German>Dieser Gegenstand kann andere betanken&lt;br/&gt;%1 Maximaler Füllstand ist %2</German>
-        <Italian>Questo oggetto può rifornire altri&lt;br/&gt;%1 massimo carburante è %2</Italian>
-        <Spanish>Este objeto puede repostar a otros&lt;br/&gt;El combustible máximo de %1 es %2</Spanish>
-        <French>Cet objet peut ravitailler les autres&lt;br/&gt;%1 carburant max est %2</French>
-        <Korean>이 아이템은 다른 차량을 재급유할 수 있습니다.&lt;br/&gt;%1의 최대 연료량은 %2입니다.</Korean>
-        <Russian>Этот объект может заправлять технику&lt;br/&gt;%1 с запасом топлива в %2</Russian>
-        <Czech>Tento předmět může tankovat ostatní&lt;br/&gt;%1 maximální palivo je %2</Czech>
+        <Original>This item can refuel others\n%1 max fuel is %2</Original>
+        <German>Dieser Gegenstand kann andere betanken\n%1 Maximaler Füllstand ist %2</German>
+        <Italian>Questo oggetto può rifornire altri\n%1 massimo carburante è %2</Italian>
+        <Spanish>Este objeto puede repostar a otros\nEl combustible máximo de %1 es %2</Spanish>
+        <French>Cet objet peut ravitailler les autres\n%1 carburant max est %2</French>
+        <Korean>이 아이템은 다른 차량을 재급유할 수 있습니다.\n%1의 최대 연료량은 %2입니다.</Korean>
+        <Russian>Этот объект может заправлять технику\n%1 с запасом топлива в %2</Russian>
+        <Czech>Tento předmět může tankovat ostatní\n%1 maximální palivo je %2</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_buy_vehicle_repair_tooltip">
         <Original>This item can repair other vehicles</Original>
@@ -723,14 +723,14 @@
         <Chinesesimp>已控制的海港</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_dead_population_tooltip">
-        <Original>Dead population&lt;br/&gt;You lose when this hits 33%</Original>
-        <German>Tote Bevölkerung&lt;br/&gt;Du verlierst wenn es 33% erreicht</German>
-        <Italian>Popolazione morta&lt;br/&gt;Perderai se raggiungerà il 33%</Italian>
-        <Spanish>Población fallecida&lt;br/&gt;Cuando llegue al 33% fracasará la misión</Spanish>
-        <French>Population morte&lt;br/&gt;Vous perdez quand cela atteint 33%</French>
-        <Korean>사망한 인구&lt;br/&gt;33% 이상 잃으면 패배합니다</Korean>
-        <Russian>Мертвое население&lt;br/&gt;Вы проиграете, когда оно достигнет 33%</Russian>
-        <Czech>Mrtvá populace&lt;br/&gt; prohrajete, pokud bude 33%</Czech>
+        <Original>Dead population\nYou lose when this hits 33%</Original>
+        <German>Tote Bevölkerung\nDu verlierst wenn es 33% erreicht</German>
+        <Italian>Popolazione morta\nPerderai se raggiungerà il 33%</Italian>
+        <Spanish>Población fallecida\nCuando llegue al 33% fracasará la misión</Spanish>
+        <French>Population morte\nVous perdez quand cela atteint 33%</French>
+        <Korean>사망한 인구\n33% 이상 잃으면 패배합니다</Korean>
+        <Russian>Мертвое население\nВы проиграете, когда оно достигнет 33%</Russian>
+        <Czech>Mrtvá populace\n prohrajete, pokud bude 33%</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_faction_money_label">
         <Original>Faction money:</Original>
@@ -845,14 +845,14 @@
         <Chinesesimp>占领方的进攻性</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_popular_support_tooltip">
-        <Original>Popular support&lt;br/&gt;You need 50% to win</Original>
-        <German>Unterstützung der Bevölkerung&lt;br/&gt;Du brauchst 50% um zu gewinnen</German>
-        <Italian>Supporto della popolazione&lt;br/&gt;Hai bisogno del 50% per vincere</Italian>
-        <Spanish>Apoyo Popular&lt;br/&gt;Necesita el 50% para ganar</Spanish>
-        <French>Support populaire&lt;br/&gt;Vous avez besoin de 50% pour gagner</French>
-        <Korean>시민의 지지율&lt;br/&gt;50%를 넘으면 이깁니다</Korean>
-        <Russian>Поддержка населения&lt;br/&gt;Вам необходимо 50% для победы</Russian>
-        <Czech>Popularita&lt;br/&gt; K vítezství potřebujete 50%</Czech>
+        <Original>Popular support\nYou need 50% to win</Original>
+        <German>Unterstützung der Bevölkerung\nDu brauchst 50% um zu gewinnen</German>
+        <Italian>Supporto della popolazione\nHai bisogno del 50% per vincere</Italian>
+        <Spanish>Apoyo Popular\nNecesita el 50% para ganar</Spanish>
+        <French>Support populaire\nVous avez besoin de 50% pour gagner</French>
+        <Korean>시민의 지지율\n50%를 넘으면 이깁니다</Korean>
+        <Russian>Поддержка населения\nВам необходимо 50% для победы</Russian>
+        <Czech>Popularita\n K vítezství potřebujete 50%</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_rest_button">
         <Original>Rest</Original>
@@ -1868,14 +1868,14 @@
         <Chinesesimp>解散单位</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip">
-        <Original>You can only remote control single units&lt;br/&gt;Select exactly one AI in the list</Original>
-        <German>Du kannst nur einzelne Einheiten fernsteuern&lt;br/&gt;Wähle eine einzelne KI aus der Liste aus</German>
-        <Italian>Puoi controllare remotamente solo singole unità&lt;br/&gt;Seleziona esattamente un'IA dalla lista</Italian>
-        <Spanish>Sólo puede contorlar una unidad de forma remota&lt;br/&gt;Seleccione exactamente una en la lista de la IA</Spanish>
-        <French>Vous ne pouvez contrôler à distance que des unités individuelles&lt;br/&gt;Sélectionnez exactement une IA dans la liste</French>
-        <Korean>단일 유닛만 원격 조종 가능합니다&lt;br/&gt;목록에서 인공지능을 정확히 하나만 선택하십시오</Korean>
-        <Russian>Вы можете удаленное управлять только одним юнитом&lt;br/&gt;Выберете конкретно одного ИИ из списка</Russian>
-        <Czech>Můžete ovládat pouze jednotlivé jednotky&lt;br/&gt;Vyber přesně jedno AI z listu</Czech>
+        <Original>You can only remote control single units\nSelect exactly one AI in the list</Original>
+        <German>Du kannst nur einzelne Einheiten fernsteuern\nWähle eine einzelne KI aus der Liste aus</German>
+        <Italian>Puoi controllare remotamente solo singole unità\nSeleziona esattamente un'IA dalla lista</Italian>
+        <Spanish>Sólo puede contorlar una unidad de forma remota\nSeleccione exactamente una en la lista de la IA</Spanish>
+        <French>Vous ne pouvez contrôler à distance que des unités individuelles\nSélectionnez exactement une IA dans la liste</French>
+        <Korean>단일 유닛만 원격 조종 가능합니다\n목록에서 인공지능을 정확히 하나만 선택하십시오</Korean>
+        <Russian>Вы можете удаленное управлять только одним юнитом\nВыберете конкретно одного ИИ из списка</Russian>
+        <Czech>Můžete ovládat pouze jednotlivé jednotky\nVyber přesně jedno AI z listu</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_ai_management_select_ai_tooltip">
         <Original>Select AI in the list</Original>
@@ -2139,7 +2139,7 @@
         <Turkish>İn</Turkish>
         <Chinesesimp>离开载具</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_hc_fire_misison_no_ammo_tooltip">
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_no_ammo_tooltip">
         <Original>Not enough ammo</Original>
         <German>Nicht genügend Munition</German>
         <Italian>Mancano munizioni</Italian>
@@ -2152,6 +2152,9 @@
         <Portuguese>Munição insuficiente</Portuguese>
         <Turkish>Yeterli cephane yok</Turkish>
         <Chinesesimp>弹药不足</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_out_of_range_tooltip">
+        <Original>Position out of range</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo">
         <Original>Ammo</Original>
@@ -2616,14 +2619,14 @@
         <Chinesesimp>&lt;t align='center'&gt;你没有高级指挥官权限。&lt;/t&gt;&lt;br /&gt;&lt;t align='center'&gt;你无法在旗杆处招募他们。&lt;/t&gt;</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_unit_count_tooltip">
-        <Original>Number of units in the group&lt;br/&gt;Able to combat / Total number of units</Original>
-        <German>&lt;br/&gt;Anzahl der Saldaten in der Gruppe&lt;br/&gt;Fähig zu kämpfen / Gesammtanzahl der Soldaten</German>
-        <Italian>Numero di unità nel gruppo&lt;br/&gt;Abili al combattimento / Numero totale di unità</Italian>
-        <Spanish>Número de unidades en el grupo&lt;br/&gt;Capaces de combatir / Total número de unidades</Spanish>
-        <French>Unités dans le groupe&lt;br/&gt;Prêtes au combat / Nombre totale d'unités</French>
-        <Korean>해당 그룹 내 유닛 수&lt;br/&gt;전투 가능 / 총 유닛 수</Korean>
-        <Russian>Количество человек в группе&lt;br/&gt;Боеспособных / Всего</Russian>
-        <Czech>Počet jednotek ve skupině&lt;br/&gt;Bojeschopných / celkový počet jednotek</Czech>
+        <Original>Number of units in the group\nAble to combat / Total number of units</Original>
+        <German>\nAnzahl der Saldaten in der Gruppe\nFähig zu kämpfen / Gesammtanzahl der Soldaten</German>
+        <Italian>Numero di unità nel gruppo\nAbili al combattimento / Numero totale di unità</Italian>
+        <Spanish>Número de unidades en el grupo\nCapaces de combatir / Total número de unidades</Spanish>
+        <French>Unités dans le groupe\nPrêtes au combat / Nombre totale d'unités</French>
+        <Korean>해당 그룹 내 유닛 수\n전투 가능 / 총 유닛 수</Korean>
+        <Russian>Количество человек в группе\nБоеспособных / Всего</Russian>
+        <Czech>Počet jednotek ve skupině\nBojeschopných / celkový počet jednotek</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_vehicle">
         <Original>Vehicle</Original>
@@ -2849,14 +2852,14 @@
         <Chinesesimp>AI管理</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_ai_management_no_ai_tooltip">
-        <Original>Needs AI group members&lt;br/&gt;You can recruit them at the flag</Original>
-        <German>Benötigt KI-Gruppenmitglieder&lt;br/&gt; Du kannst diese an der Flagge rekrutieren</German>
-        <Italian>Necessita membri del gruppo IA&lt;br/&gt;Puoi reclutarli alla bandiera</Italian>
-        <Spanish>Necesita grupo de miembros de la IA&lt;br/&gt;Puede reclutarlos en la bandera</Spanish>
-        <French>Nécessite des membres du groupe IA&lt;br/&gt;Vous pouvez les recruter au drapeau</French>
-        <Korean>인공지능 분대원 필요&lt;br/&gt;깃발에서 모집할 수 있습니다.</Korean>
-        <Russian>Необходимы ИИ в отряде&lt;br/&gt;Вы можете нанять их у Флага</Russian>
-        <Czech>Potřebuje AI členy skupiny&lt;br/&gt;Můžete je narekrutovat u vlajky</Czech>
+        <Original>Needs AI group members\nYou can recruit them at the flag</Original>
+        <German>Benötigt KI-Gruppenmitglieder\n Du kannst diese an der Flagge rekrutieren</German>
+        <Italian>Necessita membri del gruppo IA\nPuoi reclutarli alla bandiera</Italian>
+        <Spanish>Necesita grupo de miembros de la IA\nPuede reclutarlos en la bandera</Spanish>
+        <French>Nécessite des membres du groupe IA\nVous pouvez les recruter au drapeau</French>
+        <Korean>인공지능 분대원 필요\n깃발에서 모집할 수 있습니다.</Korean>
+        <Russian>Необходимы ИИ в отряде\nВы можете нанять их у Флага</Russian>
+        <Czech>Potřebuje AI členy skupiny\nMůžete je narekrutovat u vlajky</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_ai_management_sl_tooltip">
         <Original>Only available to squad leaders</Original>
@@ -4023,24 +4026,24 @@
         <Chinesesimp>已购买车辆</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_recruit_squad_spawn_message">
-        <Original>Group %1 at your command.&lt;br/&gt;&lt;br/&gt;Groups are managed from the High Command bar (Default: CTRL+SPACE)&lt;br/&gt;&lt;br/&gt;If the group gets stuck, use the AI Control feature to make them start moving. Mounted Static teams tend to get stuck (solving this is WiP)&lt;br/&gt;&lt;br/&gt;To assign a vehicle for this group, look at some vehicle, and use Vehicle Squad Mngmt option in Y menu</Original>
-        <German>Einheit %1 zu Ihrer Verfügung.&lt;br/&gt;&lt;br/&gt;Die Einheit wird über die Oberkommando-Leiste kontrolliert (Default: CTRL+SPACE)&lt;br/&gt;&lt;br/&gt;Falls die Einheit stecken bleibt, nutze das AI-Kontroll-Übernahme feature um sie wieder in bewegung zu versetzen. Teams welche statische Waffen verwenden bleiben oft stecken (beim Lösen des Wegpunktes)&lt;br/&gt;&lt;br/&gt;Um ein Fahrzeug einer EInheit hinzuzufügen, selektiere die Einheit Oberkommando-Leiste und schaue ein Fahrzeug an, anschließend Nutze das Z-Menu. </German>
-        <Italian>Gruppo %1 al tuo comando.&lt;br/&gt;&lt;br/&gt;I gruppi vengono gestiti dalla barra dell'Alto Comando(Default: CTRL+SPAZIO)&lt;br/&gt;&lt;br/&gt;Se il gruppo si blocca, usa il controllo IA per farli muovere. Le squadre statiche motorizzate di solito si incastrano facilmente. (Stiamo cercando di risolvere questo problema)&lt;br/&gt;&lt;br/&gt;Per assegnare un veicolo a questo gruppo, guarda il veicolo, e usa l'opzione Gestione Veicolo di Squadra nel menu che apri con Y</Italian>
-        <Spanish>Grupo %1 a sus órdenes.&lt;br/&gt;&lt;br/&gt;Los grupos son gestionados desde la barra de Alto Mando (Por defecto: CTRL+ESPACIO)&lt;br/&gt;&lt;br/&gt;Si el grupo queda atascado, use la opción de Control de IA para hacer que se muevan de nuevo. Los equipos Estáticos Montados tienden a atascarse (resolver esto es WiP)&lt;br/&gt;&lt;br/&gt;Para asignar un vehículo a este grupo, mire hacia un vehículo y use la opción de Gestión de Vehículo de Escuadra en el menú de Y</Spanish>
-        <French>Groupe %1 à votre commande.&lt;br/&gt;&lt;br/&gt;Les groupes sont gérés depuis la barre de commande supérieure (par défaut: CTRL+ESPACE)&lt;br/&gt;&lt;br/&gt;Si le groupe se coince, utilisez la fonction contrôle temporaire de l'IA pour les déplacer. Les équipes statiques montées ont tendance à rester bloquées (résoudre cela est WiP)&lt;br/&gt;&lt;br/&gt;Pour attribuer un véhicule à ce groupe, regardez un véhicule et utilisez l'option Vehicle Squad Mngmt dans le menu Y</French>
-        <Korean>%1 그룹은 이제 당신 휘하에 있습니다.&lt;br/&gt;&lt;br/&gt;그룹은 하이 커맨드 표시줄(기본값: 컨트롤+ 스페이스)에서 관리됩니다.&lt;br/&gt;&lt;br/&gt;그룹이 끼인다면 인공지능 조종 기능을 이용하여 이동을 시키십시오. 탑재된 고정화기 팀이 끼이는 경향이 있습니다 (해결 중에 있습니다).&lt;br/&gt;&lt;br/&gt;이 그룹에 차량을 할당하려면 차량을 보고 Y 메뉴의 차량 분대 관리 설정을 사용하십시오.</Korean>
-        <Russian>Группа %1 под вашим командованием.&lt;br/&gt;&lt;br/&gt;Управление группами происходит из панели Командования (По стандарту: CTRL+SPACE)&lt;br/&gt;&lt;br/&gt;Если группа застряла, используйте Управление ИИ чтобы заставить их двигаться. Отряды со статичным вооружение любят застревать (Это решается с помощью WiP)&lt;br/&gt;&lt;br/&gt;Чтобы назначить технику к этой группе, посмотрите на неё и используйте Управление Техникой Отряда в меню на клавише Y.</Russian>
-        <Polish>Grupuj %1 na twoje polecenie.&lt;br/&gt;&lt;br/&gt;Grupy są zarządzane z paska naczelnego dowodzenia (domyślnie: CTRL+SPACJA)&lt;br/&gt;&lt;br/&gt;Jeśli grupa utknie, przejmij nad nimi kontrolę, by zaczęli się ruszać. Drużyny z bronią statyczną mają tendencję do zacinania się (rozwiązanie jest WiP)&lt;br/&gt;&lt;br/&gt;Aby przypisać pojazd do grupy, spójrz na jakiś pojazd i użyj opcji Zarządzanie składem pojazdów w menu Y</Polish>
-        <Czech>Skupina %1 na váš příkaz.&lt;br/&gt;&lt;br/&gt;Skupiny jsou spravovány z panelu vyššího veliteství (výchozí: Ctrl+Space)&lt;br/&gt;&lt;br/&gt;Pokud se skupina uvízne, použijte funkci ovládání AI aby jste je přiměli se znovu pohybovat. Rozestavěné statické týmy mají tendenci uvíznout (Je to v řešení)&lt;br/&gt;&lt;br/&gt;K přiřazení vozidla do této skupiny, podívejte se na nějaké vozidlo a použijte Management vozidla jednotek tlačítko v Y menu</Czech>
-        <Portuguese>Grupo %1 a teu comando.&lt;br/&gt;&lt;br/&gt;Grupos são geridos através da barra do Alto Comando (Default: CTRL+SPACE)&lt;br/&gt;&lt;br/&gt;Se o grupo ficar preso, usa a ferramenta Controlo IA para os fazeres mexer. Equipas de Armas Estáticas Montadas tendem a ficar presas (sendo resolvido em WiP)&lt;br/&gt;&lt;br/&gt;Para atribuir um veículo a este grupo, olha para um veículo e usa a opção Gestão de Veículo de Pelotão no menu Y</Portuguese>
-        <Turkish>%1 grubu emrinizde.&lt;br/&gt;&lt;br/&gt;Gruplar, Yüksek Komuta çubuğundan yönetilir (Varsayılan: CTRL+SPACE)&lt;br/&gt;&lt;br/&gt;Grup takılırsa, YZ Kontrol özelliğini kullanarak hareket etmeye başlamalarını sağlayın. Statik silah kullanan ekipler takılıp kalma eğilimindedir (bunu çözmek WiP'dir)&lt;br/&gt;&lt;br/&gt;Bu gruba bir araç atamak için bazı araçlara bakın ve Y menüsünde Araç Ekibi Yönetimi seçeneğini kullanın</Turkish>
-        <Chinesesimp>%1 小组受你指挥。&lt;br/&gt;&lt;br/&gt;使用高级指挥菜单命令小组。(默认键位: CTRL+空格)&lt;br/&gt;&lt;br/&gt;如果小组卡住不动，可以先用AI控制功能来让他们动起来。已部署的固定式武器小组通常会卡住。(解决方案还在开发中)&lt;br/&gt;&lt;br/&gt;要想给小组分配一辆载具，看向该载具，然后使用Y键菜单中的载具小队管理选项</Chinesesimp>
+        <Original>Group %1 at your command.\n\nGroups are managed from the High Command bar (Default: CTRL+SPACE)\n\nIf the group gets stuck, use the AI Control feature to make them start moving. Mounted Static teams tend to get stuck (solving this is WiP)\n\nTo assign a vehicle for this group, look at some vehicle, and use Vehicle Squad Mngmt option in Y menu</Original>
+        <German>Einheit %1 zu Ihrer Verfügung.\n\nDie Einheit wird über die Oberkommando-Leiste kontrolliert (Default: CTRL+SPACE)\n\nFalls die Einheit stecken bleibt, nutze das AI-Kontroll-Übernahme feature um sie wieder in bewegung zu versetzen. Teams welche statische Waffen verwenden bleiben oft stecken (beim Lösen des Wegpunktes)\n\nUm ein Fahrzeug einer EInheit hinzuzufügen, selektiere die Einheit Oberkommando-Leiste und schaue ein Fahrzeug an, anschließend Nutze das Z-Menu. </German>
+        <Italian>Gruppo %1 al tuo comando.\n\nI gruppi vengono gestiti dalla barra dell'Alto Comando(Default: CTRL+SPAZIO)\n\nSe il gruppo si blocca, usa il controllo IA per farli muovere. Le squadre statiche motorizzate di solito si incastrano facilmente. (Stiamo cercando di risolvere questo problema)\n\nPer assegnare un veicolo a questo gruppo, guarda il veicolo, e usa l'opzione Gestione Veicolo di Squadra nel menu che apri con Y</Italian>
+        <Spanish>Grupo %1 a sus órdenes.\n\nLos grupos son gestionados desde la barra de Alto Mando (Por defecto: CTRL+ESPACIO)\n\nSi el grupo queda atascado, use la opción de Control de IA para hacer que se muevan de nuevo. Los equipos Estáticos Montados tienden a atascarse (resolver esto es WiP)\n\nPara asignar un vehículo a este grupo, mire hacia un vehículo y use la opción de Gestión de Vehículo de Escuadra en el menú de Y</Spanish>
+        <French>Groupe %1 à votre commande.\n\nLes groupes sont gérés depuis la barre de commande supérieure (par défaut: CTRL+ESPACE)\n\nSi le groupe se coince, utilisez la fonction contrôle temporaire de l'IA pour les déplacer. Les équipes statiques montées ont tendance à rester bloquées (résoudre cela est WiP)\n\nPour attribuer un véhicule à ce groupe, regardez un véhicule et utilisez l'option Vehicle Squad Mngmt dans le menu Y</French>
+        <Korean>%1 그룹은 이제 당신 휘하에 있습니다.\n\n그룹은 하이 커맨드 표시줄(기본값: 컨트롤+ 스페이스)에서 관리됩니다.\n\n그룹이 끼인다면 인공지능 조종 기능을 이용하여 이동을 시키십시오. 탑재된 고정화기 팀이 끼이는 경향이 있습니다 (해결 중에 있습니다).\n\n이 그룹에 차량을 할당하려면 차량을 보고 Y 메뉴의 차량 분대 관리 설정을 사용하십시오.</Korean>
+        <Russian>Группа %1 под вашим командованием.\n\nУправление группами происходит из панели Командования (По стандарту: CTRL+SPACE)\n\nЕсли группа застряла, используйте Управление ИИ чтобы заставить их двигаться. Отряды со статичным вооружение любят застревать (Это решается с помощью WiP)\n\nЧтобы назначить технику к этой группе, посмотрите на неё и используйте Управление Техникой Отряда в меню на клавише Y.</Russian>
+        <Polish>Grupuj %1 na twoje polecenie.\n\nGrupy są zarządzane z paska naczelnego dowodzenia (domyślnie: CTRL+SPACJA)\n\nJeśli grupa utknie, przejmij nad nimi kontrolę, by zaczęli się ruszać. Drużyny z bronią statyczną mają tendencję do zacinania się (rozwiązanie jest WiP)\n\nAby przypisać pojazd do grupy, spójrz na jakiś pojazd i użyj opcji Zarządzanie składem pojazdów w menu Y</Polish>
+        <Czech>Skupina %1 na váš příkaz.\n\nSkupiny jsou spravovány z panelu vyššího veliteství (výchozí: Ctrl+Space)\n\nPokud se skupina uvízne, použijte funkci ovládání AI aby jste je přiměli se znovu pohybovat. Rozestavěné statické týmy mají tendenci uvíznout (Je to v řešení)\n\nK přiřazení vozidla do této skupiny, podívejte se na nějaké vozidlo a použijte Management vozidla jednotek tlačítko v Y menu</Czech>
+        <Portuguese>Grupo %1 a teu comando.\n\nGrupos são geridos através da barra do Alto Comando (Default: CTRL+SPACE)\n\nSe o grupo ficar preso, usa a ferramenta Controlo IA para os fazeres mexer. Equipas de Armas Estáticas Montadas tendem a ficar presas (sendo resolvido em WiP)\n\nPara atribuir um veículo a este grupo, olha para um veículo e usa a opção Gestão de Veículo de Pelotão no menu Y</Portuguese>
+        <Turkish>%1 grubu emrinizde.\n\nGruplar, Yüksek Komuta çubuğundan yönetilir (Varsayılan: CTRL+SPACE)\n\nGrup takılırsa, YZ Kontrol özelliğini kullanarak hareket etmeye başlamalarını sağlayın. Statik silah kullanan ekipler takılıp kalma eğilimindedir (bunu çözmek WiP'dir)\n\nBu gruba bir araç atamak için bazı araçlara bakın ve Y menüsünde Araç Ekibi Yönetimi seçeneğini kullanın</Turkish>
+        <Chinesesimp>%1 小组受你指挥。\n\n使用高级指挥菜单命令小组。(默认键位: CTRL+空格)\n\n如果小组卡住不动，可以先用AI控制功能来让他们动起来。已部署的固定式武器小组通常会卡住。(解决方案还在开发中)\n\n要想给小组分配一辆载具，看向该载具，然后使用Y键菜单中的载具小队管理选项</Chinesesimp>
       </Key>
     </Container>
     <Container name="setup_dialog">
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_badFactions">
-        <Original>The currently selected factions are not loaded.&lt;br/&gt;Go to the Factions tab and select available factions.</Original>
-        <Russian>Выбранные в данный момент фракции не загружены.&lt;br/&gt;Перейдите на вкладку Фракции и выберите доступные фракции.</Russian>
+        <Original>The currently selected factions are not loaded.\nGo to the Factions tab and select available factions.</Original>
+        <Russian>Выбранные в данный момент фракции не загружены.\nПерейдите на вкладку Фракции и выберите доступные фракции.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_copy">
         <Original>Copy game with ID %1</Original>

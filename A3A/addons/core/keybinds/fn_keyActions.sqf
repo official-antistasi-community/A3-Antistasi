@@ -26,7 +26,7 @@ switch (_key) do {
                 createDialog "A3A_MainDialog";  
                 if (player == theBoss) then {
                     sleep 1;  
-                    player setVariable ["selHcGroups",[]]; 
+                    player setVariable ["autoSwitchGroups",[]]; 
                 };
             };  
         } else {

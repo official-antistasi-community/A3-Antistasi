@@ -85,6 +85,10 @@ switch (_mode) do
         _garrisonMap ctrlAddEventHandler ["Draw", "_this call A3A_GUI_fnc_mapDrawSelectEH"];
         // Outposts
         _garrisonMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
+        // User markers
+        _garrisonMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawUserMarkersEH"];
+        // HC group render
+        _garrisonMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawHcGroupsEH"];
 
         Debug("HqDialog onLoad complete.");
     };
