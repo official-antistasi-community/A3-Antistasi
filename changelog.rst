@@ -8,7 +8,7 @@ Version 3.9.0
 ===============
 
 .. note::
-   11th May 2024
+   18th May 2024
 
 .. admonition:: Major
    
@@ -35,6 +35,10 @@ Version 3.9.0
    * :issue:`3536` Explosive placement is now logged
    * :issue:`3539` Petros can now die to enemy napalm
    * :issue:`3540` MG car squads can now be bought from the new battle menu
+   * :issue:`3550` Softened corpse auto-cleanup rules
+   * :issue:`3570` Added ACE universal artillery rangetable to starting equipment
+   * :issue:`3571` Convoys now pick smarter start and end points
+   * :issue:`3579` Successfully defended punishments reduce punishment chance
 
 .. admonition:: Template updates
 
@@ -62,6 +66,9 @@ Version 3.9.0
    * :issue:`3534` Placed speed limit on CAS to avoid lawn-darting
    * :issue:`3535` Fixed resources spawning military instead of militia sniper patrols
    * :issue:`3539` Fixed some Petros death bugs
+   * :issue:`3553` Fixed broken specops squads with missing UAVs
+   * :issue:`3574` Fixed some log spam from towing physics objects
+   * :issue:`3585` Fixed transport helos attempting to land too fast
 
 .. admonition:: Groundwork
 
@@ -77,6 +84,7 @@ Version 3.9.0
 .. admonition:: Refactor
 
    * :issue:`3523` Refactored roadblock and SpecOp point placement and management
+   * :issue:`3586` Added baseWeapon automatic checking to loot scripts
 
 .. warning::
 
