@@ -39,9 +39,9 @@ switch (true) do {
     case ([_class] call HR_GRG_fnc_isRepairSource): { 6 };
     case (_editorCat isEqualTo "EdSubcat_Cars"): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover) 
     case (_editorCat in ["EdSubcat_Tanks","EdSubcat_APCs","EdSubcat_AAs","EdSubcat_Artillery"]): { 2 };
-    case (_editorCat in ["EdSubcat_Helicopters"] || getNumber (_vtolConfig >> "vtol") == 0): { 3 };
+    case (_editorCat in ["EdSubcat_Helicopters"]): { 3 };
     //case (getNumber (configOf _vehicle >> "vtol") > 0): { 5 };
-    case (_editorCat in ["EdSubcat_Planes"] && (getNumber (_vtolConfig >> "vtol") > 0)): { 4 };
+    case (_editorCat in ["EdSubcat_Planes"]): { 4 };
     case (_editorCat in ["EdSubcat_Boats","EdSubcat_Submersibles"]): { 5 };
     case (_editorCat isEqualTo "EdSubcat_Turrets"): { 7 };
 

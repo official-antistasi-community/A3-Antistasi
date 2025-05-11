@@ -58,6 +58,7 @@ Info_1("Formatting an existing saved garage to %1 categories",count HR_GRG_CATID
     {
         private _data = _dataHM get _x;
         _newCat = [_data#1] call HR_GRG_fnc_getCatIndex;
+        if (_newCat < 0) then { continue };
         _newGarage#_newCat set [_x, _data];
     } forEach _x; // each vehicle
 } forEach _garage; // each cat
