@@ -23,6 +23,8 @@ License: MIT License
 */
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+private _titleStr = localize "STR_A3A_fn_reinf_spawnHCGro_title";
+
 params [
     ["_unitTypes", [], [[]]]
     , ["_idFormat", "", [""]]
@@ -47,7 +49,7 @@ private _units = units _group;
 theBoss hcSetGroup [_group];
 
 petros directSay "SentGenReinforcementsArrived";
-["Recruit Squad", format ["Group %1 at your command.<br/><br/>Groups are managed from the High Command bar (Default: CTRL+SPACE)<br/><br/>If the group gets stuck, use the AI Control feature to make them start moving. Mounted Static teams tend to get stuck (solving this is WiP)<br/><br/>To assign a vehicle for this group, look at some vehicle, and use Vehicle Squad Mngmt option in Y menu.", groupID _group]] call A3A_fnc_customHint;
+[_titleStr, format [localize "STR_A3A_fn_reinf_spawnHCGro_atCommand", groupID _group]] call A3A_fnc_customHint;
 
 private _countUnits = count _units -1;
 private _bypassAI = true;
@@ -59,7 +61,7 @@ private _initInfVeh = {
     // Required because moveInAny is bugged for gunners (eg. GM trucks) and breaks the driving AI
     if (fullCrew [_vehicle, "gunner", true] isNotEqualTo []) then { (units _group # 1) moveInGunner _vehicle };
     call _initVeh;
-    ["Recruit Squad", "Vehicle Purchased"] call A3A_fnc_customHint;
+    [_titleStr, localize "STR_A3A_fn_reinf_spawnHCGro_purchased"] call A3A_fnc_customHint;
     petros directSay "SentGenBaseUnlockVehicle";
 };
 

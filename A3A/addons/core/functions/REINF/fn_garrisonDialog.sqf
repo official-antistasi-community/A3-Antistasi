@@ -1,58 +1,69 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+#include "..\..\..\gui\dialogues\ids.inc" // include new UI ids for update
 private ["_typeX","_positionTel","_nearX","_garrison","_costs","_hr","_size"];
+private _titleStr = localize "STR_A3A_fn_reinf_garrDia_title";
+
+// TODO: Stop using this garbage for the new UI, reduce it to old UI code
+
 _typeX = _this select 0;
+params [["_typeX","add"],["_marker",""]];
+private _noMarker = (_marker isEqualTo "");
+if (_noMarker) then { // is normal mode
+	if (_typeX == "add") then {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_add"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_remove"] call A3A_fnc_customHint;};
 
-if (_typeX == "add") then {["Garrison", "Select a zone to add garrisoned troops."] call A3A_fnc_customHint;} else {["Garrison", "Select a zone to remove it's Garrison."] call A3A_fnc_customHint;};
+	if (!visibleMap) then {openMap true};
+	positionTel = [];
 
-if (!visibleMap) then {openMap true};
-positionTel = [];
+	onMapSingleClick "positionTel = _pos;";
 
-onMapSingleClick "positionTel = _pos;";
+	waitUntil {sleep 1; (count positionTel > 0) or (not visiblemap)};
+	onMapSingleClick "";
+};
+if (!visibleMap && _noMarker) exitWith {};
+if (_noMarker) then {
+	_positionTel = positionTel;
+	positionXGarr = "";
+	_nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
+} else {
+	_nearX = _marker;
+	_typeX = "rem";
+};
 
-waitUntil {sleep 1; (count positionTel > 0) or (not visiblemap)};
-onMapSingleClick "";
-
-if (!visibleMap) exitWith {};
-
-_positionTel = positionTel;
-positionXGarr = "";
-
-_nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
 _positionX = getMarkerPos _nearX;
 
-if (getMarkerPos _nearX distance _positionTel > 40) exitWith {
-	["Garrison", "You must click near a marked zone."] call A3A_fnc_customHint;
+if (_noMarker && {getMarkerPos _nearX distance _positionTel > 40}) exitWith { // lazy eval
+	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_click"] call A3A_fnc_customHint;
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
 if (not(sidesX getVariable [_nearX,sideUnknown] == teamPlayer)) exitWith {
-	["Garrison", format ["That zone does not belong to %1.",FactionGet(reb,"name")]] call A3A_fnc_customHint;
+	[_titleStr, format [localize "STR_A3A_fn_reinf_garrDia_zone_belong",FactionGet(reb,"name")]] call A3A_fnc_customHint;
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 if ([_positionX] call A3A_fnc_enemyNearCheck) exitWith {
-	["Garrison", "You cannot manage this garrison while there are enemies nearby."] call A3A_fnc_customHint;
+	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_no_enemy"] call A3A_fnc_customHint;
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
 if (_nearX in forcedSpawn) exitWith {
-	["Garrison", "You cannot manage this garrison when there's a major attack incoming."] call A3A_fnc_customHint;
+	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_no_att"] call A3A_fnc_customHint;
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 

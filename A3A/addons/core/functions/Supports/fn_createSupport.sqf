@@ -28,8 +28,6 @@ if !(_type in _suppTypeHM) exitWith { "" };
 waitUntil { isNil "A3A_supportCallInProgress" };
 A3A_supportCallInProgress = true;
 
-Debug_5("Attempting to create %1 support with side %2, pool %3, target %4 and reveal %5", _type, _side, _resPool, _target, _reveal);
-
 // Attempt to use active support if there's a valid one
 private _supportIndex = A3A_activeSupports findIf {
     _x params ["_suppName", "_suppSide", "_suppType", "_center", "_radius", "_suppTarg", ["_minRadius", 0]];
@@ -46,6 +44,8 @@ if (_target isEqualType objNull and _supportIndex != -1) exitWith {
 // Use global increment to make logging easier to track.
 A3A_supportCount = A3A_supportCount + 1;
 private _supportName = format ["%1%2", _type, A3A_supportCount];
+
+Info_5("Creating support %1 with side %2, pool %3, target %4 and delay %5", _supportName, _side, _resPool, _target, _delay);
 
 // Spend radio key to boost support's reveal value if available
 _reveal = [_side, _targPos, _reveal] call A3A_fnc_useRadioKey;

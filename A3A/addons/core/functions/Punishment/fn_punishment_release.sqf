@@ -57,7 +57,7 @@ switch (_source) do {
 		call _releaseFromSentence;
         Info_1("RELEASE | %1", _playerStats);
 		if (isPlayer _detainee) then {
-			["FF Punishment", "Enough then."] remoteExecCall ["A3A_fnc_customHint", _detainee, false];
+			[localize "STR_A3A_fn_punish_ff_pun", localize "STR_A3A_fn_punish_punRel_enough"] remoteExecCall ["A3A_fnc_customHint", _detainee, false];
 		};
 		true;
 	};
@@ -66,7 +66,7 @@ switch (_source) do {
 		call _releaseFromSentence;
         Info_1("FORGIVE | %1", _playerStats);
 		if (isPlayer _detainee) then {
-			["FF Punishment", "An admin looks with pity upon your soul.<br/>You have been forgiven."] remoteExecCall ["A3A_fnc_customHint", _detainee, false];
+			[localize "STR_A3A_fn_punish_ff_pun", localize "STR_A3A_fn_punish_punRel_admin"] remoteExecCall ["A3A_fnc_customHint", _detainee, false];
 		};
 		true;
 	};

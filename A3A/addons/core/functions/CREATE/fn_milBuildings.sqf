@@ -22,7 +22,8 @@ _typeUnit = _faction get "unitStaticCrew";
 
 //New system to place helis, does not care about heli types currently
 private _helicopterTypes = [];
-_helicopterTypes append (_faction get "vehiclesHelisLight");
+if(_markerX in airportsX) then {_helicopterTypes append ((_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack") + (_faction get "vehiclesHelisLight"))} else {_helicopterTypes append (_faction get "vehiclesHelisLight")};
+
 private _count = 1 + round (random 3); //Change these numbers as you want, first number is minimum, max is first plus second number
 while {_count > 0} do
 {
@@ -154,7 +155,7 @@ for "_i" from 0 to (count _buildings) - 1 do
             _zpos = _zpos vectorAdd _zOffset;
             _pos = ASLToATL ([_pos select 0, _pos select 1, _zpos select 2]);
             [_type, _pos, _Tdir] call _fnc_spawnStatic;
-            sleep 0,5;
+            sleep 0.5;
             _Tdir = _dir + 180;
             _zpos = AGLToASL (_building buildingPos 16); //relative South
             _pos = _zpos getPos [-0.2, _Tdir]; //offset
@@ -180,7 +181,7 @@ for "_i" from 0 to (count _buildings) - 1 do
             _pos = ASLToATL ([_pos select 0, _pos select 1, _zpos select 2]);
             [_type, _pos, _dir] call _fnc_spawnStatic;
         };
-        if 	((_typeB == "Land_Cargo_HQ_V1_F") or (_typeB == "Land_Cargo_HQ_V2_F") or (_typeB == "Land_Cargo_HQ_V3_F")) exitWith
+        if 	((_typeB == "Land_Cargo_HQ_V1_F") or (_typeB == "Land_Cargo_HQ_V2_F") or (_typeB == "Land_Cargo_HQ_V3_F") or (_typeB == "Land_Cargo_HQ_V4_F")) exitWith
         {
             private _type = selectRandom (_faction get "staticAA");
             private _dir = getDir _building;

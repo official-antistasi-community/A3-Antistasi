@@ -54,9 +54,9 @@ switch (_mode) do
     case ("onLoad"):
     {
         if (isNil "A3A_setup_saveData") exitWith { Error("onLoad somehow called without save data") };
-        ["fillFactions", [true]] call A3A_fnc_setupFactionsTab;
-        ["setSaveData"] call A3A_fnc_setupLoadgameTab;
-        ["switchTab", ["loadgame"]] call A3A_fnc_setupDialog;
+        ["fillFactions", [true]] call A3A_GUI_fnc_setupFactionsTab;
+        ["setSaveData"] call A3A_GUI_fnc_setupLoadgameTab;
+        ["switchTab", ["loadgame"]] call A3A_GUI_fnc_setupDialog;
     };
 
     case ("onUnload"):
@@ -93,9 +93,9 @@ switch (_mode) do
 
         switch (_selectedTab) do
         {
-            case ("loadgame"): { ["update"] call A3A_fnc_setupLoadgameTab };
-            case ("factions"): { ["update"] call A3A_fnc_setupFactionsTab };
-            case ("params"): { ["update"] call A3A_fnc_setupParamsTab };
+            case ("loadgame"): { ["update"] call A3A_GUI_fnc_setupLoadgameTab };
+            case ("factions"): { ["update"] call A3A_GUI_fnc_setupFactionsTab };
+            case ("params"): { ["update"] call A3A_GUI_fnc_setupParamsTab };
         };
     };
 
@@ -116,6 +116,7 @@ switch (_mode) do
             ,["tem_anizay", "Anizay"]
             ,["cup_chernarus_A3", "Cherno 2020"]
             ,["SPE_Normandy", "Normandy"]
+            ,["SPE_Mortain", "Mortain"]
         ];
         {
             private _realMap = _x get "map";
@@ -136,7 +137,7 @@ switch (_mode) do
 
         if (!isNull _display) exitWith {
             Error("Server sent data while dialog is open? Curious");
-            ["onLoad"] spawn A3A_fnc_setupDialog;                                // Should rebuild dialog with new data. Hopefully.
+            ["onLoad"] spawn A3A_GUI_fnc_setupDialog;                                // Should rebuild dialog with new data. Hopefully.
         };
 
         if (isNull findDisplay 46 or !isNull findDisplay 49 or dialog) then {

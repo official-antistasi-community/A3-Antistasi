@@ -47,9 +47,11 @@ _playerHM set ["loadoutPlayer", _loadout];
 
 private _scorePlayer = _playerUnit getVariable ["score", 0];
 private _rankPlayer = _playerUnit getVariable ["rankX", "PRIVATE"];		// rank _unit fails on corpses
+private _missions = _playerUnit getVariable ["missionsCompleted",0];
 _playerHM set ["scorePlayer", _scorePlayer];
 _playerHM set ["rankPlayer", _rankPlayer];
 _playerHM set ["personalGarage", []];
+_playerHM set ["missionsCompleted",_missions];
 
 private _totalMoney = _playerUnit getVariable ["moneyX", 0];
 if (_shouldStripLoadout) then { _totalMoney = round (_totalMoney * 0.85) };

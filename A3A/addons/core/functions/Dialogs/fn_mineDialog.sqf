@@ -1,10 +1,14 @@
+//TODO: add header
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 private ["_typeX","_costs","_positionTel","_quantity","_quantityMax"];
+private _titleStr = localize "STR_A3A_fn_dialogs_minediag_title";
 
-if ("Mines" in A3A_activeTasks) exitWith {["Minefields", "We can only deploy one minefield at a time."] call A3A_fnc_customHint;};
+if ("Mines" in A3A_activeTasks) exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_minediag_no_one"] call A3A_fnc_customHint;};
 
-if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {["Minefields", "You need a radio in your inventory to be able to give orders to other squads."] call A3A_fnc_customHint;} else {["Minefields", "You need a Radio Man in your group to be able to give orders to other squads."] call A3A_fnc_customHint;}};
+if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {[_titleStr, localize "STR_A3A_fn_dialogs_minediag_no_radio"] call A3A_fnc_customHint;} 
+else {[_titleStr, localize "STR_A3A_fn_dialogs_minediag_no_radioman"] call A3A_fnc_customHint;}};
 
 _typeX = _this select 0;
 
@@ -15,11 +19,11 @@ if (_typeX == "delete") then
 	_costs = _costs - (server getVariable FactionGet(reb,"unitExp"));
 	_hr = 1;
 	};
-if ((server getVariable "resourcesFIA" < _costs) or (server getVariable "hr" < _hr)) exitWith {["Minefields", format ["Not enough resources to recruit a mine deploying team (%1 € and %2 HR needed).",_costs,_hr]] call A3A_fnc_customHint;};
+if ((server getVariable "resourcesFIA" < _costs) or (server getVariable "hr" < _hr)) exitWith {[_titleStr, format [localize "STR_A3A_fn_dialogs_minediag_no_resource",_costs,_hr]] call A3A_fnc_customHint;};
 
 if (_typeX == "delete") exitWith
 	{
-	["Minefields", "An Explosive Specialist is available on your High Command bar.<br/><br/>Send him anywhere on the map to deactivate mines. He will load his truck with mines he found.<br/><br/>Upon returning back to HQ he will unload mines stored in his vehicle."] call A3A_fnc_customHint;
+	[_titleStr, localize "STR_A3A_fn_dialogs_minediag_available"] call A3A_fnc_customHint;
 	[[],"A3A_fnc_mineSweep"] remoteExec ["A3A_fnc_scheduler",2];
 	};
 
@@ -39,11 +43,11 @@ if (_typeX == "ATMine") then
 if (_x select 0 == _typeM) exitWith {_quantity = _x select 1}
 } forEach _pool;
 
-if (_quantity < 5 && _quantity isNotEqualTo -1) exitWith {["Minefields", "You need at least 5 mines of this type to build a Minefield."] call A3A_fnc_customHint;};
+if (_quantity < 5 && _quantity isNotEqualTo -1) exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_minediag_timer"] call A3A_fnc_customHint;};
 
 if (!visibleMap) then {openMap true};
 positionTel = [];
-["Minefields", "Click on the position you wish to build the minefield."] call A3A_fnc_customHint;
+[_titleStr, localize "STR_A3A_fn_dialogs_minediag_click"] call A3A_fnc_customHint;
 
 onMapSingleClick "positionTel = _pos;";
 

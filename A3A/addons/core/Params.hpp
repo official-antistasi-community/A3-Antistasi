@@ -2,122 +2,150 @@ class Params
 {
     class gameMode
     {
-        title = "Game Mode - Do NOT change this mid mission";
+        title = $STR_A3A_Params_gameMode_title;
         values[] = {1,2,3};
-        texts[] = {"Reb vs Gov vs Inv","Reb vs Gov & Inv","Reb vs Gov"};
+        texts[] = {$STR_A3A_Params_gameMode_RvGvI, $STR_A3A_Params_gameMode_RvGaI, $STR_A3A_Params_gameMode_RvG};
         default = 1;
     };
     class autoSave
     {
-        title = "Enable Autosave (every X minutes)";
+        title = $STR_A3A_Params_autoSave_title;
         values[] = {0,1};
-        texts[] = {"No","Yes"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip, $STR_antistasi_dialogs_generic_button_yes_text};
         default = 1;
     };
     class autoSaveInterval
     {
-        title = "Time between autosaves (in minutes)";
+        title = $STR_A3A_Params_autoSaveInterval_title;
         values[] = {600,1200,1800,3600,5400};
         texts[] = {"10","20","30","60","90"};
         default = 3600;
     };
     class playerMarkersEnabled
     {
-        title = "Enable Friendly Player Markers";
+        title = $STR_A3A_Params_playerMarkersEnabled_title;
         values[] = {0,1};
-        texts[] = {"No","Yes"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip, $STR_antistasi_dialogs_generic_button_yes_text};
         default = 0;
     };
     class limitedFT
     {
-        title = "Fast Travel Targets Allowed";
-        values[] = {0,1};
-        texts[] = {"Any friendly position","Only Airports & HQ"};
+        title = $STR_A3A_Params_limitedFT_title;
+        values[] = {0,1,2};
+        texts[] = {$STR_A3A_Params_limitedFT_any, $STR_A3A_Params_limitedFT_hq, $STR_A3A_Params_generic_none};
         default = 1;
     };
     class civTraffic
     {
-        title = "Quantity of civilan traffic and parked vehicles";
+        title = $STR_A3A_Params_civTraffic_title;
         values[] = {0,1,2,4};
-        texts[] = {"None","Low","Medium","High"};
+        texts[] = {$STR_A3A_Params_generic_none, $STR_A3A_Params_generic_low, $STR_A3A_Params_generic_medium, $STR_A3A_Params_generic_high};
         default = 2;
     };
     class distanceMission
     {
-        title = "Max distance from HQ for tasks";
+        title = $STR_A3A_Params_distanceMission_title;
         values[] = {2000,4000,6000,8000,10000,12000};
         texts[] = {"2000","4000","6000","8000","10000","12000"};
         default = 4000;
     };
     class distanceSPWN
     {
-        title = "Spawn distance";
+        title = $STR_A3A_Params_distanceSPWN_title;
         values[] = {700,800,900,1000,1100,1200};
         texts[] = {"700","800","900","1000","1100","1200"};
         default = 1000;
     };
     class enemyNearDistance
     {
-        title = "Distance used to check for nearby enemies";
+        title = $STR_A3A_Params_enemyNearDistance_title;
         values[] = {200,300,400,500};
         texts[] = {"200","300","400","500"};
         default = 300;
     };
     class globalCivilianMax
     {
-        title = "Maximum global civilians";
+        title = $STR_A3A_Params_globalCivilianMax_title;
         values[] = {0,2,5,10,15,20};
         texts[] = {"0","2","5","10","15","20"};
-        default = 5;
+        default = 10;
     };
     class maxCiviliansPerTown
     {
-        title = "Maximum civilians spawn per town";
+        title = $STR_A3A_Params_maxCiviliansPerTown_title;
         values[] = {0,2,5,10,15};
         texts[] = {"0","2","5","10","15"};
-        default = 2;
+        default = 5;
     };
     class initialPlayerMoney
     {
-        title = "Initial Player Money";
+        title = $STR_A3A_Params_initialPlayerMoney_title;
         values[] = {0, 100, 250, 500, 1000, 2500};
         texts[] = {"0","100","250","500","1000","2500"};
         default = 100;
     };
     class initialFactionMoney
     {
-        title = "Initial Rebel Faction Money";
+        title = $STR_A3A_Params_initialFactionMoney_title;
         values[] = {0,1000,2500,5000,10000};
         texts[] = {"0","1000","2500","5000","10000"};
         default = 1000;
     };
     class initialHr
     {
-        title = "Initial Rebel Faction Manpower";
+        title = $STR_A3A_Params_initialHr_title;
         values[] = {0, 8, 16, 24, 32, 50};
         texts[] = {"0","8","16","24","32","50"};
         default = 8;
     };
     class A3A_idleTimeout
     {
-        title = "Time before a player is considered AFK";
+        title = $STR_A3A_Params_idleTimeout_title;
         values[] = {120,300,900,1800,9999999};
-        texts[] = {"2min","5min","15min","30min","disabled"};
+        texts[] = {$STR_A3A_Params_generic_2min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_15min, $STR_A3A_Params_generic_30min, $STR_A3A_Params_generic_disabled};
         default = 900;
+    };
+    class A3A_gcMaxObjects
+    {
+        title = $STR_A3A_Params_gcMaxObjects_title;
+        values[] = {50,100,150,200,300};
+        texts[] = {"50","100","150","200","300"};
+        default = 150;
     };
     class A3A_GCThreshold
     {
-        title = "Garbage Cleaner Threshold for Automatic gc";
-        values[] = {3600, 7200, 10800, 14400, 9999999};
-        texts[] = {"1hr", "2hrs", "3hrs", "4hrs", "disabled"};
-        Default = 9999999;
+        title = $STR_A3A_Params_GCThreshold_title;
+        values[] = {3600, 7200, 10800, 14400, 0};
+        texts[] = {"1hr", "2hrs", "3hrs", "4hrs", $STR_A3A_Params_generic_disabled};
+        Default = 14400;
     };
     class A3A_reviveTime
     {
-        title = "Minimum revive time for players";
+        title = $STR_A3A_Params_reviveTime_title;
         values[] = {5,10,15};
-        texts[] = {"5 seconds","10 seconds","15 seconds"};
+        texts[] = {$STR_A3A_Params_reviveTime_5s, $STR_A3A_Params_reviveTime_10s, $STR_A3A_Params_reviveTime_15s};
         default = 10;
+    };
+    class A3A_selfReviveMethods
+    {
+        title = $STR_A3A_Params_selfReviveMethods_title;
+        values[] = {0,1};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_selfReviveMethods_withstand};
+        default = 1;
+    };
+    class A3A_builderPermissions
+    {
+        title = $STR_A3A_Params_builderPermissions_title;
+        values[] = {1, 2, 3};
+        texts[] = {$STR_A3A_Params_builderPermissions_tl, $STR_A3A_Params_builderPermissions_engi, $STR_A3A_Params_builderPermissions_both};
+        default = 3;
+    };
+    class A3A_removeRestore
+    {
+        title = $STR_A3A_Params_removeRestore_title;
+        values[] = {0,1};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
+        default = 0;
     };
 
     class SpacerMembership
@@ -129,44 +157,44 @@ class Params
     };
     class TitleMembership
     {
-        title = "MEMBERSHIP OPTIONS";
+        title = $STR_A3A_Params_TitleMembership_title;
         values[] = {""};
         texts[] = {""};
         default = "";
     };
     class membershipEnabled
     {
-        title = "Enable Server Membership";
+        title = $STR_A3A_Params_membershipEnabled_title;
         values[] = {0,1};
-        texts[] = {"No","Yes"};
-        default = 1;
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
+        default = 0;
     };
     class A3A_guestCommander
     {
-        title = "Allow guests to become commander when no members are eligible";
+        title = $STR_A3A_Params_guestCommander_title;
         values[] = {0,1};
-        texts[] = {"No","Yes"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
         default = 1;
     };
     class tkPunish
     {
-        title = "Enable Teamkill Punish";
-        values[] = {0,1};
-        texts[] = {"No","Yes"};
-        default = 1;
+        title = $STR_A3A_Params_tkPunish_title;
+        values[] = {0,1,2};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text,$STR_A3A_Params_tkPunish_logonly};
+        default = 2;
     };
     class memberSlots
     {
-        title = "Percentage of Reserved Slots for Members";
+        title = $STR_A3A_Params_memberSlots_title;
         values[] = {0,20,40,60,80,100};
-        texts[] = {"None","20%","40%","60%","80%","All"};
+        texts[] = {$STR_A3A_Params_generic_none,"20%","40%","60%","80%", $STR_A3A_Params_generic_all};
         default = 20;
     };
     class memberDistance
     {
-        title = "Max distance of guests from the closest member or HQ";
+        title = $STR_A3A_Params_memberDistance_title;
         values[] = {4000,5000,6000,7000,8000,10000,16000,-1};  // 16000 is left as backwards compatibility
-        texts[] = {"4 km","5 km","6 km","7 km","8 km","10 km","16 km","Unlimited"};
+        texts[] = {$STR_A3A_Params_generic_4km, $STR_A3A_Params_generic_5km, $STR_A3A_Params_generic_6km, $STR_A3A_Params_generic_7km, $STR_A3A_Params_generic_8km, $STR_A3A_Params_generic_10km, $STR_A3A_Params_generic_16km, $STR_A3A_Params_generic_unlimited};
         default = 5000;
     };
 
@@ -179,14 +207,14 @@ class Params
     };
     class TitleBalance
     {
-        title = "BALANCE OPTIONS";
+        title = $STR_A3A_Params_TitleBalance_title;
         values[] = {""};
         texts[] = {""};
         default = "";
     };
     class A3A_enemyBalanceMul
     {
-        title = "Overall enemy resource balance";
+        title = $STR_A3A_Params_enemyBalanceMul_title;
         values[] = {4,6,8,10,12,14,17,20,24,28};
         texts[] =  {"0.4x","0.6x","0.8x","1.0x","1.2x","1.4x","1.7x","2.0x","2.4x","2.8x"};
         default = 10;
@@ -194,7 +222,7 @@ class Params
     class A3A_enemyAttackMul
     {
         attr[] = {"server"};
-        title = "Enemy attack resource balance (relative to overall balance)";
+        title = $STR_A3A_Params_enemyAttackMul_title;
         values[] = {4,6,8,10,12,14,17,20,24,28};
         texts[] =  {"0.4x","0.6x","0.8x","1.0x","1.2x","1.4x","1.7x","2.0x","2.4x","2.8x"};
         default = 10;
@@ -202,64 +230,73 @@ class Params
     class A3A_invaderBalanceMul
     {
         attr[] = {"server"};
-        title = "Resource multiplier for invaders relative to occupants";
+        title = $STR_A3A_Params_invaderBalanceMul_title;
         values[] = {10,11,12,13,14,15};
         texts[] =  {"1.0x","1.1x","1.2x","1.3x","1.4x","1.5x"};
         default = 12;
     };
+    class A3A_enemyResponseTime
+    {
+        attr[] = {"server"};
+        title = $STR_A3A_Params_enemyResponseTime_title;
+        values[] = {20,15,10,7,5};
+        texts[] =  {$STR_A3A_Params_generic_veryslow, $STR_A3A_Params_generic_slow, $STR_A3A_Params_generic_normal, $STR_A3A_Params_generic_fast, $STR_A3A_Params_generic_veryfast};
+        default = 10;
+    };
     class A3A_attackHQProximityMul
     {
         attr[] = {"server"};
-        title = "Enemy preference for attacking rebel targets closer to HQ";
+        title = $STR_A3A_Params_attackHQProximityMul_title;
         values[] = {1,2,3,5,8};
-        texts[] =  {"No change","2x","3x","5x","8x"};
+        texts[] =  {$STR_A3A_Params_generic_nochange,"2x","3x","5x","8x"};
         default = 3;
     };
     class A3A_enemySkillMul
     {
-        title = "Enemy AI skill (also affected by server skill)";
+        title = $STR_A3A_Params_enemySkillMul_title;
         values[] = {0,1,2,3,4};
-        texts[] = {"Very low","Low","Normal","High","Very high"};
+        texts[] = {$STR_A3A_Params_generic_verylow, $STR_A3A_Params_generic_low, $STR_A3A_Params_generic_normal, $STR_A3A_Params_generic_high, $STR_A3A_Params_generic_veryhigh};
         default = 2;
     };
     class A3A_rebelSkillMul
     {
-        title = "Friendly AI skill (also affected by server skill)";
+        title = $STR_A3A_Params_rebelSkillMul_title;
         values[] = {0,1,2,3,4};
-        texts[] = {"Very low","Low","Normal","High","Very high"};
+        texts[] = {$STR_A3A_Params_generic_verylow, $STR_A3A_Params_generic_low, $STR_A3A_Params_generic_normal, $STR_A3A_Params_generic_high, $STR_A3A_Params_generic_veryhigh};
         default = 2;
     };
     class napalmEnabled
     {
-        title = "Enable Napalm Bombing for AI";
+        title = $STR_A3A_Params_napalmEnabled_title;
         values[] = {0,1};
-        texts[] = {"No","Yes"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
         default = 1;
     };
     class allowUnfairSupports
     {
         attr[] = {"server"};
-        title = "Allow unfair supports to be used by the enemy";
+        title = $STR_A3A_Params_allowUnfairSupports_title;
         values[] = {0, 1};
-        texts[] = {"Not allowed", "Allowed"};
+        texts[] = {$STR_A3A_Params_generic_notallowed, $STR_A3A_Params_generic_allowed};
         default = 0;
     };
     class allowFuturisticSupports
     {
         attr[] = {"server"};
-        title = "[Experimental] Allow futuristic supports to be used by the enemy";
+        title = $STR_A3A_Params_allowFuturisticSupports_title;
         values[] = {0, 1};
-        texts[] = {"Not allowed", "Allowed"};
+        texts[] = {$STR_A3A_Params_generic_notallowed, $STR_A3A_Params_generic_allowed};
         default = 0;
     };
     class A3A_rebelGarrisonLimit
     {
-        title = "How many rebels can be garrisoned (1.5x for airports, 0.5x for resources and factories)?";
-        tooltip = "How many troops can be in garrison. Note that No limit option may affect performance as there might be too many troops for CPU to handle.";
+        title = $STR_A3A_Params_rebelGarrisonLimit_title;
+        tooltip = $STR_A3A_Params_rebelGarrisonLimit_tooltip;
         values[] = {-1, 16, 24, 32};
-        texts[] = {"No limit", "16", "24", "32"};
+        texts[] = {$STR_A3A_Params_generic_nolimit, "16", "24", "32"};
         default = 24;
     };
+
     class SpacerEquipment
     {
         title = "";
@@ -269,84 +306,84 @@ class Params
     };
     class TitleEquipment
     {
-        title = "EQUIPMENT OPTIONS";
+        title = $STR_A3A_Params_TitleEquipment_title;
         values[] = {""};
         texts[] = {""};
         default = "";
     };
     class minWeaps
     {
-        title = "Number of the same item required to unlock";
+        title = $STR_A3A_Params_minWeaps_title;
         values[] = {15,25,40,-1};
-        texts[] = {"15","25","40","No unlocks"};
+        texts[] = {"15","25","40", $STR_A3A_Params_generic_nounlocks};
         default = 25;
     };
     class A3A_guestItemLimit
     {
-        title = "Default number of items needed for guests to be able to use them";
+        title = $STR_A3A_Params_guestItemLimit_title;
         values[] = {0,10,15,25,40};
-        texts[] = {"No limit","10","15","25","40"};
-        default = 25;
+        texts[] = {$STR_A3A_Params_generic_nolimit,"10","15","25","40"};
+        default = 0;
     };
     class unlockedUnlimitedAmmo
     {
         attr[] = {"server"};
-        title = "Do Unlocked Weapons Automatically Unlock Their Standard Magazine?";
+        title = $STR_A3A_Params_unlockedUnlimitedAmmo_title;
         values[] = {1,0};
-        texts[] = {"Yes","No"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
         default = 0;
     };
     class allowGuidedLaunchers
     {
         attr[] = {"server"};
-        title = "Should Guided Launchers become unlocked?";
+        title = $STR_A3A_Params_allowGuidedLaunchers_title;
         values[] = {1,0};
-        texts[] = {"Yes","No"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
         default = 0;
     };
     class allowUnlockedExplosives
     {
         attr[] = {"server"};
-        title = "Should Explosives become unlocked?";
+        title = $STR_A3A_Params_allowUnlockedExplosives_title;
         values[] = {1,0};
-        texts[] = {"Yes","No"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
         default = 0;
     };
     class startWithLongRangeRadio
     {
         attr[] = {"server"};
-        title = "[TFAR] Start with Long Range Radio?";
+        title = $STR_A3A_Params_startWithLongRangeRadio_title;
         values[] = {0,1};
-        texts[] = {"No","Yes"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
         default = 1;
     };
     class aceFood
     {
         attr[] = {"server"};
-        title = "[ACE] Start with Food Items";
+        title = $STR_A3A_Params_aceFood_title;
         values[] = {0,1};
-        texts[] = {"No","Yes"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
         default = 0;
     };
     class helmetLossChance
     {
-        title = "Chance of helmet loss on headshots";
+        title = $STR_A3A_Params_helmetLossChance_title;
         values[] = {0,33,66,100};
-        texts[] = {"Never","Sometimes","Often","Always"};
+        texts[] = {$STR_A3A_Params_generic_never, $STR_A3A_Params_generic_sometimes, $STR_A3A_Params_generic_often, $STR_A3A_Params_generic_always};
         default = 33;
     };
     class LootToCrateRadius
     {
-        title = "Loot to crate radius";
+        title = $STR_A3A_Params_LootToCrateRadius_title;
         values[] = {0,10,15,20};
-        texts[] = {"Disabled","10m","15m","20m"};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_10m, $STR_A3A_Params_generic_15m, $STR_A3A_Params_generic_20m};
         default = 10;
     };
     class LTCLootUnlocked
     {
-        title = "Loot to crate transfers unlocked items";
+        title = $STR_A3A_Params_LTCLootUnlocked_title;
         values[] = {0, 1};
-        texts[] = {"Disabled", "Enabled"};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_enabled};
         default = 0;
     };
 
@@ -359,149 +396,149 @@ class Params
     };
     class TitleLoot
     {
-        title = "LOOT CRATE OPTIONS";
+        title = $STR_A3A_Params_TitleLoot_title;
         values[] = {""};
         texts[] = {""};
         default = "";
     };
     class bobChaosCrates
     {
-        title = "[Experimental] Truely Random Crates: Remove all balance checks from Crates";
+        title = $STR_A3A_Params_bobChaosCrates_title;
         values[] = {0, 1};
-        texts[] = {"No", "Yes"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip, $STR_antistasi_dialogs_generic_button_yes_text};
         default = 0;
     };
     class cratePlayerScaling
     {
-        title = "Decrease loot quantity as player count increases? (Yes is recommended for balance reasons)";
+        title = $STR_A3A_Params_cratePlayerScaling_title;
         values[] = {0, 1};
-        texts[] = {"No", "Yes"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip, $STR_antistasi_dialogs_generic_button_yes_text};
         default = 1;
     };
     class crateWepTypeMax
     {
-        title = "Maximum Weapon Types in Crates";
+        title = $STR_A3A_Params_crateWepTypeMax_title;
         values[] = {0,2,4,6,8,12,16};
         texts[] = {"1","3","5","7","9","13","17"};
         default = 8;
     };
     class crateWepNumMax
     {
-        title = "Maximum Weapon Quantity in Crates";
+        title = $STR_A3A_Params_crateWepNumMax_title;
         values[] = {0,1,3,5,8,10,15};
-        texts[] = {"None","1","3","5","8","10","15"};
+        texts[] = {$STR_A3A_Params_generic_none,"1","3","5","8","10","15"};
         default = 8;
     };
     class crateItemTypeMax
     {
-        title = "Maximum Item Types in Crates";
+        title = $STR_A3A_Params_crateItemTypeMax_title;
         values[] = {0,2,4,9};
         texts[] = {"1","3","5","10"};
         default = 4;
     };
     class crateItemNumMax
     {
-        title = "Maximum Item Quantity in Crates";
+        title = $STR_A3A_Params_crateItemNumMax_title;
         values[] = {0,1,3,5,10,15};
-        texts[] = {"None","1","3","5","10","15"};
+        texts[] = {$STR_A3A_Params_generic_none,"1","3","5","10","15"};
         default = 5;
     };
     class crateAmmoTypeMax
     {
-        title = "Maximum Ammo Types in Crates";
+        title = $STR_A3A_Params_crateAmmoTypeMax_title;
         values[] = {0,2,4,6,9,14,19};
         texts[] = {"1","3","5","7","10","15","20"};
         default = 6;
     };
     class crateAmmoNumMax
     {
-        title = "Maximum Ammo Quantity in Crates";
+        title = $STR_A3A_Params_crateAmmoNumMax_title;
         values[] = {0,1,3,5,10,15,20,25,30};
-        texts[] = {"None","1","3","5","10","15","20","25","30"};
+        texts[] = {$STR_A3A_Params_generic_none,"1","3","5","10","15","20","25","30"};
         default = 20;
     };
     class crateExplosiveTypeMax
     {
-        title = "Maximum Explosive Types in Crates";
+        title = $STR_A3A_Params_crateExplosiveTypeMax_title;
         values[] = {0,2,4,9};
         texts[] = {"1","3","5","10"};
         default = 4;
     };
     class crateExplosiveNumMax
     {
-        title = "Maximum Explosive Quantity in Crates";
+        title = $STR_A3A_Params_crateExplosiveNumMax_title;
         values[] = {0,1,3,5,10,15};
-        texts[] = {"None","1","3","5","10","15"};
+        texts[] = {$STR_A3A_Params_generic_none,"1","3","5","10","15"};
         default = 5;
     };
     class crateAttachmentTypeMax
     {
-        title = "Maximum Attachment Types in Crates";
+        title = $STR_A3A_Params_crateAttachmentTypeMax_title;
         values[] = {0,2,4,6,9,14,19};
         texts[] = {"1","3","5","7","10","15","20"};
         default = 6;
     };
     class crateAttachmentNumMax
     {
-        title = "Maximum Attachment Quantity in Crates";
+        title = $STR_A3A_Params_crateAttachmentNumMax_title;
         values[] = {0,1,3,5,10,15,20,25,30};
-        texts[] = {"None","1","3","5","10","15","20","25","30"};
+        texts[] = {$STR_A3A_Params_generic_none,"1","3","5","10","15","20","25","30"};
         default = 15;
     };
     class crateBackpackTypeMax
     {
-        title = "Maximum Backpack Types in Crates";
+        title = $STR_A3A_Params_crateBackpackTypeMax_title;
         values[] = {0,2,4,9};
         texts[] = {"1","3","5","10"};
         default = 0;
     };
     class crateBackpackNumMax
     {
-        title = "Maximum Backpack Quantity in Crates";
+        title = $STR_A3A_Params_crateBackpackNumMax_title;
         values[] = {0,1,3,5,10,15};
-        texts[] = {"None","1","3","5","10","15"};
+        texts[] = {$STR_A3A_Params_generic_none,"1","3","5","10","15"};
         default = 3;
     };
     class crateVestTypeMax
     {
-        title = "Maximum Vest Types in Crates";
+        title = $STR_A3A_Params_crateVestTypeMax_title;
         values[] = {0,2,4,9};
         texts[] = {"1","3","5","10"};
         default = 0;
     };
     class crateVestNumMax
     {
-        title = "Maximum Vest Quantity in Crates";
+        title = $STR_A3A_Params_crateVestNumMax_title;
         values[] = {0,1,3,5,10,15};
-        texts[] = {"None","1","3","5","10","15"};
+        texts[] = {$STR_A3A_Params_generic_none,"1","3","5","10","15"};
         default = 3;
     };
     class crateHelmetTypeMax
     {
-        title = "Maximum Helmet Types in Crates";
+        title = $STR_A3A_Params_crateHelmetTypeMax_title;
         values[] = {0,2,4,9};
         texts[] = {"1","3","5","10"};
         default = 0;
     };
     class crateHelmetNumMax
     {
-        title = "Maximum Helmet Quantity in Crates";
+        title = $STR_A3A_Params_crateHelmetNumMax_title;
         values[] = {0,1,3,5,10,15};
-        texts[] = {"None","1","3","5","10","15"};
+        texts[] = {$STR_A3A_Params_generic_none,"1","3","5","10","15"};
         default = 3;
     };
     class crateDeviceTypeMax
     {
-        title = "Maximum Device Backpack Types in Crates";
+        title = $STR_A3A_Params_crateDeviceTypeMax_title;
         values[] = {0,2,4,9};
         texts[] = {"1","3","5","10"};
         default = 2;
     };
     class crateDeviceNumMax
     {
-        title = "Maximum Device Backpack Quantity in Crates";
+        title = $STR_A3A_Params_crateDeviceNumMax_title;
         values[] = {0,1,3,5,10,15};
-        texts[] = {"None","1","3","5","10","15"};
+        texts[] = {$STR_A3A_Params_generic_none,"1","3","5","10","15"};
         default = 3;
     };
 
@@ -514,30 +551,30 @@ class Params
     };
     class TitleDevelopment
     {
-        title = "DEVELOPMENT OPTIONS";
+        title = $STR_A3A_Params_TitleDevelopment_title;
         values[] = {""};
         texts[] = {""};
         default = "";
     };
     class LogLevel
     {
-        title = "Logging Level (Amount of detail in .rpt file)";
+        title = $STR_A3A_Params_LogLevel_title;
         values[] = {1,2,3,4};
-        texts[] = {"Error", "Info", "Debug", "Verbose"};
+        texts[] = {$STR_A3A_Params_LogLevel_error, $STR_A3A_Params_LogLevel_info, $STR_A3A_Params_LogLevel_debug, $STR_A3A_Params_LogLevel_verbose};
         default = 2;
     };
     class A3A_logDebugConsole
     {
-        title = "Log debug console use";
+        title = $STR_A3A_Params_logDebugConsole_title;
         values[] = {-1,1,2};
-        texts[] = {"None", "All non-dev", "All"};
+        texts[] = {$STR_A3A_Params_generic_none, $STR_A3A_Params_logDebugConsole_nondev, $STR_A3A_Params_generic_all};
         default = 1;
     };
     class A3A_GUIDevPreview
     {
-        title = "Use In-Development UI Preview.";
+        title = $STR_A3A_Params_GUIDevPreview_title;
         values[] = {0,1};
-        texts[] = {"No", "Yes"};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip, $STR_antistasi_dialogs_generic_button_yes_text};
         default = 0;
     };
 };

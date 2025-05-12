@@ -1,21 +1,21 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-params ["_unit", "_injurer"];
+params ["_unit", "_injurer", "_fatalWound"];
+
+_unit setDamage 0.9;
+if (!_fatalWound) then { _unit setHitPointDamage ["hitface", 0.5]; };			// fatal wound marker
 
 private _bleedOutTime = if (surfaceIsWater (position _unit)) then {time + 60} else {time + 300};
 private _playerNear = false;
 private _group = group _unit;
 private _side = side _group;
 
-// This is... quite weird
-if ({if ((isPlayer _x) and (_x distance _unit < distanceSPWN2)) exitWith {1}} count allUnits != 0) then
+if (playableUnits inAreaArray [getPosATL _unit, distanceSPWN2, distanceSPWN2] isNotEqualTo []) then
 {
 	_playerNear = true;
 	[_unit,"heal"] remoteExec ["A3A_fnc_flagaction",0,_unit];
 	_unit setCaptive true;
 };
-
-_unit setFatigue 1;			// Doesn't do anything since Arma stamina rework?
 
 private _nextRequest = 0;
 while { (alive _unit) && (time < _bleedOutTime) && (_unit getVariable ["incapacitated",false]) } do
@@ -51,14 +51,6 @@ if (_playerNear) then
 
 if (time >= _bleedOutTime) exitWith
 {
-	if (side _injurer == teamPlayer) then
-	{
-		if (isPlayer _injurer) then
-		{
-			[1,_injurer] call A3A_fnc_playerScoreAdd;
-		};
-		[-1,1,getPos _unit] remoteExec ["A3A_fnc_citySupportChange",2];
-	};
     _unit setDamage 1;
 };
 
@@ -66,7 +58,7 @@ if (alive _unit) then
 {
 	_unit setUnconscious false;
 	_unit playMoveNow "unconsciousoutprone";
-	_unit setVariable ["overallDamage",damage _unit];
+	_unit setVariable ["A3A_downedBy", nil];
 
 	if (_unit getVariable ["surrendering", false]) exitWith {
 		_unit setVariable ["surrendering", nil, true];

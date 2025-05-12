@@ -21,28 +21,31 @@ if (NavGrid#_startIndex#1 != NavGrid#_endIndex#1) exitWith { false };          /
 
 // TODO: subtract start->nav and end->nav from distance? Or fancier?
 
+//diag_log format ["Path: Start %1, end %2", _startIndex, _endIndex];
 
 private _endPos = NavGrid#_endIndex#0;
-private _curEntry = [0, _startIndex, 0, false];            // curGH is really (NavGrid#_startIndex#0 distance2d _endPos), but not accessed here
+private _curEntry = [0, _startIndex, 0, 0, false];            // curGH is really (NavGrid#_startIndex#0 distance2d _endPos), but not accessed here
 private _open = [];
 private _touched = createHashMapFromArray [[_startIndex, true]];
 private _success = false;
 
-private ["_newIndex", "_newG", "_newGH"];      // optimization
+private ["_newIndex", "_newG", "_newH", "_newRealG"];      // optimization
 private _roadTypeMul = [2,1,0.5];               // road type to distance multiplier lookup
 
 scopeName "main";
 while {!isNil "_curEntry"} do
 {
-    _curEntry params ["", "_curIndex", "_curG"];        // full is [curGH, curIndex, curG, curParent]
+    _curEntry params ["", "_curIndex", "_curG", "_realG"];        // full is [curGH, curIndex, curG, realG, curParent]
+    //diag_log format ["Opened node %1 at %2, G %3, realG %4, GH %5", _curIndex, Navgrid#_curIndex#0, _curG, _realG, _curEntry#0];
     {
         _newIndex = _x#0;
         if (_newIndex in _touched) then { continue };
         if (_newIndex == _endIndex) then { _success = true; breakTo "main" };                            // found the end, done
 
         _newG = _curG + (_x#2) * (_roadTypeMul#(_x#1));
-        _newGH = _newG + 1.2*(NavGrid#_newIndex#0 distance _endPos);
-        if (_newGH < _maxDist) then { _open pushBack [_newGH, _newIndex, _newG, _curEntry] };
+        _newRealG = _realG + (_x#2);
+        _newH = 1.2*(NavGrid#_newIndex#0 distance _endPos);
+        if (_newRealG + _newH < _maxDist) then { _open pushBack [_newG + _newH, _newIndex, _newG, _newRealG, _curEntry] };
         _touched set [_newIndex, true];
 
     } forEach (NavGrid#_curIndex#3);
@@ -53,10 +56,15 @@ while {!isNil "_curEntry"} do
 
 if (!_success) exitWith {false};
 
+// "Return" total real distance in maxdist input parameter
+_this set [2, (_curEntry#3) + (NavGrid#(_curEntry#1)#0 distance2d NavGrid#_endIndex#0)];
+
 // Walk parents to generate route
 private _route = [_endIndex];
-while {_curEntry#3 isEqualType []} do {
+while {_curEntry#4 isEqualType []} do {
     _route pushBack (_curEntry select 1);
-    _curEntry = _curEntry select 3;
+    _curEntry = _curEntry select 4;
 };
+_route pushBack _startIndex;
 reverse _route;
+_route;

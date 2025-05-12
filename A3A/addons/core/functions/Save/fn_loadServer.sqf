@@ -35,19 +35,28 @@ if (isServer) then {
 	["HQKnowledge"] call A3A_fnc_getStatVariable;
 //	["idlebases"] call A3A_fnc_getStatVariable;			// Might bring this back at some point
 	["killZones"] call A3A_fnc_getStatVariable;
-	["controlsSDK"] call A3A_fnc_getStatVariable;
 	["bombRuns"] call A3A_fnc_getStatVariable;
+	["arsenalLimits"] call A3A_fnc_getStatVariable;
+	["rebelLoadouts"] call A3A_fnc_getStatVariable;
 	["jna_dataList"] call A3A_fnc_getStatVariable;
+	["minorSites"] call A3A_fnc_getStatVariable;
 	//===========================================================================
 
 	//RESTORE THE STATE OF THE 'UNLOCKED' VARIABLES USING JNA_DATALIST
+	private _categoriesToPublish = createHashMap;
 	{
 		private _arsenalTabDataArray = _x;
 		private _unlockedItemsInTab = _arsenalTabDataArray select { _x select 1 == -1 } apply { _x select 0 };
 		{
-			[_x, true] call A3A_fnc_unlockEquipment;
+			private _categories = [_x, true, true] call A3A_fnc_unlockEquipment;
+			_categoriesToPublish insert [true, _categories, []];
 		} forEach _unlockedItemsInTab;
 	} forEach jna_dataList;
+
+	Info_1("Categories to publish: %1", keys _categoriesToPublish);
+
+	// Publish the unlocked categories (once each)
+	{ publicVariable ("unlocked" + _x) } forEach keys _categoriesToPublish;
 
 	if !(unlockedNVGs isEqualTo []) then {
 		haveNV = true; publicVariable "haveNV"
@@ -56,23 +65,10 @@ if (isServer) then {
 	//Check if we have radios unlocked and update haveRadio.
 	call A3A_fnc_checkRadiosUnlocked;
 
-	//Sort optics list so that snipers pick the right sight
-	// obsolete since rebelGear
-	//unlockedOptics = [unlockedOptics,[],{getNumber (configfile >> "CfgWeapons" >> _x >> "ItemInfo" >> "mass")},"DESCEND"] call BIS_fnc_sortBy;
-
-	// Set enemy roadblock allegiance to match nearest main marker
-	private _mainMarkers = markersX - controlsX - outpostsFIA;
-	{
-		if (sidesX getVariable [_x,sideUnknown] != teamPlayer) then {
-			private _nearX = [_mainMarkers, markerPos _x] call BIS_fnc_nearestPosition;
-			private _sideX = sidesX getVariable [_nearX,sideUnknown];
-			sidesX setVariable [_x,_sideX,true];
-		};
-	} forEach controlsX;
-
+	// Don't have minor sites here, but they're not visible so it's fine
 	{
 		[_x] call A3A_fnc_mrkUpdate
-	} forEach (markersX - controlsX);
+	} forEach markersX;
 
 	if (count outpostsFIA > 0) then {
 		markersX = markersX + outpostsFIA; publicVariable "markersX"
@@ -150,6 +146,12 @@ if (isServer) then {
 	// Still used for utility items and vehicles parked near HQ
 	["staticsX"] call A3A_fnc_getStatVariable;
 
+	{_x setPosATL getMarkerPos respawnTeamPlayer} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
+
+	// Move headless client logic objects near HQ so that firedNear EH etc. work more reliably
+	private _hcpos = markerPos respawnTeamPlayer vectorAdd [-100, -100, 0];
+	{ _x setPosATL _hcpos } forEach (entities "HeadlessClient_F");
+
 	// update war tier silently, calls updatePreference if changed
 	[true] call A3A_fnc_tierCheck;
 
@@ -165,7 +167,7 @@ if (isServer) then {
 		private _playerData = createHashMap;
 		{
 			_playerData set [_x, [_uid, _x] call A3A_fnc_retrievePlayerStat];
-		} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage"];
+		} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage","missionsCompleted"];
 
 		if (isNil {_playerData get "moneyX"}) then { Error_1("Saved player %1 has no money var", _uid); continue };
 		A3A_playerSaveData set [_uid, _playerData];

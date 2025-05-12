@@ -10,11 +10,12 @@ resourcesX = [];
 factories = [];
 outposts = [];
 seaports = [];
-controlsX = [];
 seaMarkers = [];
 seaSpawn = [];
 seaAttackSpawn = [];
 detectionAreas = [];
+A3A_mapRoadblocks = [];
+A3A_mapCamps = [];
 
 fnc_sortPlacementMarker =
 {
@@ -65,7 +66,7 @@ private ["_split", "_start"];
     case ("factory"): {factories pushBack _x;};
     case ("outpost"): {outposts pushBack _x;};
     case ("seaport"): {seaports pushBack _x;};
-    case ("control"): {controlsX pushBack _x;};
+    case ("control"): {if (isOnRoad markerPos _x) then {A3A_mapRoadblocks pushBack _x} else {A3A_mapCamps pushBack _x}};
     case ("seapatrol"): {seaMarkers pushBack _x;};
     case ("seaspawn"): {seaSpawn pushBack _x;};
     case ("seaattackspawn"): {seaAttackSpawn pushBack _x;};

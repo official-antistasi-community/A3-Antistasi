@@ -9,6 +9,7 @@ class CfgFunctions
             class airbomb {};
             class AIreactOnKill {};
             class artySupport {};
+            class artySupportFire {};
             class askHelp {};
             class assaultBuilding {};
             class attackDrillAI {};
@@ -62,6 +63,7 @@ class CfgFunctions
             class unitGetToCover {};
             class useFlares {};
             class VANTinfo {};
+            class vehicleConvoyHeliTravel{};
             class vehicleConvoyTravel {};
             class vehicleMarkers {};
         };
@@ -69,6 +71,7 @@ class CfgFunctions
         class Ammunition {
             file = QPATHTOFOLDER(functions\Ammunition);
             class ACEpvpReDress {};
+            class addPrimaryAndMags {};
             class allMagazines {};
             class ammunitionTransfer {};
             class arsenalManage {};
@@ -92,6 +95,8 @@ class CfgFunctions
             class launcherInfo {};
             class loot {};
             class randomRifle {};
+            class setCargoItems {};
+            class setRebelLoadouts {};
             class transfer {};
             class unlockEquipment {};
             class vehicleSort {};
@@ -111,6 +116,7 @@ class CfgFunctions
             class blackout {};
             class buildHQ {};
             class calculateAggression {};
+            class canManageAI {};
             class canMoveHQ {};
             class chooseAttack {};
             class chooseMachineForGarrison {};
@@ -120,10 +126,10 @@ class CfgFunctions
             class createBreachChargeText {};
             class createOutpostsFIA {};
             class createPetros {};
-            class deleteControls {};
             class destroyCity {};
             class distance {};
             class distanceUnits {};
+            class fastTravelMove {};
             class FIAradio {};
             class findAttackTargets {};
             class findBasesForConvoy {};
@@ -136,8 +142,11 @@ class CfgFunctions
             class getMarkerForPos {};
             class getRecentDamage {};
             class getVehiclesAirSupport {};
+            class getVehicleSellPrice {};
             class getVehiclesGroundSupport {};
             class getVehiclesGroundTransport {};
+            class hasWeapons {};
+            class HQGarbageClean {};
             class vehicleBoxRestore {};
             class initPetros {};
             class isFrontline {};
@@ -160,6 +169,8 @@ class CfgFunctions
             class placementSelection {};
             class playableUnits {};
             class getSideRadioTowerInfluence {};
+            class postmortem {};
+            class postmortemLoop {};
             class powerReorg {};
             class radioCheck {};
             class rebuildAssets {};
@@ -190,6 +201,20 @@ class CfgFunctions
             class zoneCheck {};
         };
 
+        class Builder {
+            file = QPATHTOFOLDER(functions\Builder);
+            class addBuildingActions {};
+            class buildingComplete {};
+            class buildingPlacer {};
+            class buildingPlacerStart {};
+            class initBuildableObjects {};
+            class initBuilderMonitors {};
+            class initPlacerDB {};
+            class lockBuilderBox {};
+            class placeBuilderObjects {};
+            class processBuildingTimeouts {};
+        };
+
         class Collections {
             file = QPATHTOFOLDER(functions\Collections);
             class getNestedObject {};
@@ -209,7 +234,7 @@ class CfgFunctions
             class cargoSeats {};
             class cleanserVeh {};
             class countFreeSpawnPositions {};
-            class createAIAirplane {};
+            class createAIAirbase {};
             class createAICities {};
             class createAIcontrols {};
             class createAIOutposts {};
@@ -218,6 +243,7 @@ class CfgFunctions
             class createAttackForceAir {};
             class createAttackForceLand {};
             class createAttackForceMixed {};
+            class createAttackForceSea {};
             class createAttackVehicle {};
             class createFIAOutposts2 {};
             class createUnit {};
@@ -225,6 +251,7 @@ class CfgFunctions
             class createVehicleQRFBehaviour {};
             class crewTypeForVehicle {};
             class FIAinitBases {};
+            class fillVehicleCrewCargo {};
             class findSpawnPosition {};
             class freeSpawnPositions {};
             class garrisonReorg {};
@@ -261,10 +288,15 @@ class CfgFunctions
             class installSchrodingersBuildingFix {};
             class prepFunctions {};
             class spawnDebuggingLoop {};
+            class spawnSelectedTemplateAI {};
+            class debugSpawnVics {};
         };
 
         class Dialogs {
             file = QPATHTOFOLDER(functions\Dialogs);
+            class canFastTravel {};
+            class canSkipTime {};
+            class calculateFastTravelCost {};
             class clearForest {};
             class createDialog_shouldLoadPersonalSave {};
             class dialogHQ {};
@@ -272,7 +304,6 @@ class CfgFunctions
             class HQGameOptions {};
             class loadPreviousSession {};
             class mineDialog {};
-            class moveHQObject {};
             class persistentSave {};
             class skiptime {};
             class squadOptions {};
@@ -341,11 +372,8 @@ class CfgFunctions
             class initPreJIP { preInit = 1; };
             class initSpawnPlaces {};
             class initStaticPlaces {};
-            class generateRoadblock {};
-
             class initVarCommon {};
             class initVarServer {};
-
             class initVehClassToCrew {};
             class initZones {};
             class initZeusLogging {};
@@ -354,6 +382,7 @@ class CfgFunctions
             class prepareMarkerArrays {};
             class resourcecheck {};
             class tags {};
+            class checkCampaignEnd {};
         };
 
         class Intel {
@@ -382,6 +411,21 @@ class CfgFunctions
             class lootToCrate {};
         };
 
+        class MinorSites {
+            file = QPATHTOFOLDER(functions\MinorSites);
+            class addMinorSite {};
+            class deleteMinorSite {};
+            class deleteNearSites {};
+            class generateCamps {};
+            class generateRoadblockPairs {};
+            class generateRoadblocks {};
+            class initMinorSites {};
+            class renderRoadblocks {};
+            class selectRoadBetweenMarkersNav {};
+            class selectRoadBetweenMarkersRand {};
+            class updateMinorSites {};
+        };
+
         class Missions {
             file = QPATHTOFOLDER(functions\Missions);
             class AS_Official {};
@@ -392,6 +436,7 @@ class CfgFunctions
             class DES_Antenna {};
             class DES_Heli {};
             class DES_Vehicle {};
+            class GSMission {};
             class LOG_Ammo {};
             class LOG_Bank {};
             class LOG_Supplies {};
@@ -400,6 +445,7 @@ class CfgFunctions
             class REP_Antenna {};
             class RES_Prisoners {};
             class RES_Refugees {};
+            class supplyDrop {};
             class taskDelete {};
             class taskSetState {};
             class taskUpdate {};
@@ -415,6 +461,10 @@ class CfgFunctions
         class OrgPlayers {
             file = QPATHTOFOLDER(functions\OrgPlayers);
             class donateMoney {};
+            class sendMoney {};
+            class isClientAdmin {};
+            class isLocalAdmin {};
+            class isLocalAdminOrServer {};
             class isMember {};
             class makePlayerBossIfEligible {};
             class memberAdd {};
@@ -453,6 +503,7 @@ class CfgFunctions
             class findPathPrecheck {};
             class findPathSimple {};
             class findPosOnRoute {};
+            class findSeaPath {};
             class getMarkerNavPoint {};
             class getNearestNavPoint {};
             class listInsert {};
@@ -500,8 +551,10 @@ class CfgFunctions
             class build {};
             class buildCreateVehicleCallback {};
             class buildMinefield {};
+            class canReinfPlayer {};
             class controlHCsquad {};
             class controlunit {};
+            class convertToSquad {};
             class dismissPlayerGroup {};
             class dismissSquad {};
             class enemyNearCheck {};
@@ -510,11 +563,14 @@ class CfgFunctions
             class FIAskillAdd {};
             class garrisonAdd {};
             class garrisonDialog {};
+            class garrisonRemove {};
+            class getHCSquadPrice {};
+            class getHCSquadVehicleType {};
             class NATObomb {};
-            class postmortem {};
             class reDress {};
             class reinfPlayer {};
             class spawnHCGroup {};
+            class spawnHCVeh {};
             class vehiclePrice {};
             class vehStats {};
         };
@@ -523,11 +579,14 @@ class CfgFunctions
             file = QPATHTOFOLDER(functions\Revive);
             class actionRevive {};
             class carry {};
+            class calcVestDamageAdj {};
             class fatalWound {};
             class handleDamage {};
             class handleDamageAAF {};
             class initRevive {};
             class isMedic {};
+            class selfRevive {};
+            class selfReviveReset {};
             class respawn {};
             class unconscious {};
             class unconsciousAAF {};
@@ -631,6 +690,9 @@ class CfgFunctions
             class SUP_SAM {};
             class SUP_SAMAvailable {};
             class SUP_SAMRoutine {};
+            class SUP_tank {};
+            class SUP_tankAvailable {};
+            class SUP_tankRoutine {};
             class SUP_UAV {};
             class SUP_UAVRoutine {};
         };
@@ -688,6 +750,7 @@ class CfgFunctions
             class secondsToTimeSpan {};
             class systemTime_format_S {};
             class timeSpan_format {};
+            class systemTimeDurationToTimeSpan {};
         };
 
         class UI {
@@ -719,7 +782,9 @@ class CfgFunctions
 
         class Utility {
             file = QPATHTOFOLDER(functions\Utility);
+            class adminData {};
             class basicBackpack {};
+            class boxCollisionCheck {};
             class classNameToModel {};
             class countAttachedObjects {};
             class createDataObject {};
@@ -727,6 +792,7 @@ class CfgFunctions
             class deleteNamespace {};
             class filterAndWeightArray {};
             class getAdmin {};
+            class isEngineer {};
             class localLog {};
             class log {};
             class setIdentity {};
@@ -744,10 +810,10 @@ class CfgFunctions
             class attachedObjects {};
             class buyItem {};
             class carryItem {};
-            class dropObject {};
-            class initMovableObject {};
+            class dropItem {};
             class initObject {};
             class initObjectRemote {};
+            class isCarrying {};
             class remainingFuel {};
             class rotateItem {};
         };

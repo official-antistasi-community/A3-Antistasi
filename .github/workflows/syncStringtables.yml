@@ -1,0 +1,54 @@
+name: sync-stringtables
+on: [workflow_dispatch]
+
+
+env:
+    CORE_TOLGEE_API_TOKEN: ${{ secrets.CORE_TOLGEE_API_TOKEN }}
+    CONFIG_FIXES_TOLGEE_API_TOKEN: ${{ secrets.CONFIG_FIXES_TOLGEE_API_TOKEN }}
+    EVENTS_TOLGEE_API_TOKEN: ${{ secrets.EVENTS_TOLGEE_API_TOKEN }}
+    GARAGE_TOLGEE_API_TOKEN: ${{ secrets.GARAGE_TOLGEE_API_TOKEN }}
+    GEAR_TOLGEE_API_TOKEN: ${{ secrets.GEAR_TOLGEE_API_TOKEN }}
+    JEROEN_ARSENAL_TOLGEE_API_TOKEN: ${{ secrets.JEROEN_ARSENAL_TOLGEE_API_TOKEN }}
+    GUI_TOLGEE_API_TOKEN: ${{ secrets.GUI_TOLGEE_API_TOKEN }}
+    LOGISTICS_TOLGEE_API_TOKEN: ${{ secrets.LOGISTICS_TOLGEE_API_TOKEN }}
+    MAPS_TOLGEE_API_TOKEN: ${{ secrets.MAPS_TOLGEE_API_TOKEN }}
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install antistasi_translation_sync package
+        run: pip install "Tools/antistasi_translation_sync-0.6.1-py3-none-any.whl"
+
+
+      - name: actual syncing
+        run: antistasi-translation-sync -u "https://tolgee.targetingsnake.de" AUTO_ALL
+
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Automated Tolgee Update
+          branch: tolgee-update
+          branch-suffix: timestamp
+          delete-branch: false
+          title: 'Updated Stringtable files'
+          body: |
+            Automated Tolgee Update
+          labels: |
+            localisation
+            Automated PR
+          assignees: Bob-Murphy
+          reviewers: Bob-Murphy

@@ -4,7 +4,8 @@ FIX_LINE_NUMBERS()
 params ["_marker"];
 
 private _mrkD = format ["Dum%1",_marker];
-private _mrkSide = sidesX getVariable _marker;
+private _mrkSide = sidesX getVariable [_marker,sideUnknown];
+if (_mrkSide isEqualTo sideUnknown) exitWith {_mrkD setMarkerText "";}; // handle marker deletion case
 private _faction = Faction(_mrkSide);
 
 if (_marker in airportsX) then {

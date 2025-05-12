@@ -20,11 +20,10 @@ params ["_side", "_airbase", "_delay"];			// Side is now specified
 private _targPos = markerPos "Synd_HQ";
 private _faction = Faction(_side);
 
-bigAttackInProgress = true; publicVariable "bigAttackInProgress";
 forcedSpawn pushBack "Synd_HQ"; publicVariable "forcedSpawn";
 
 private _taskId = "DEF_HQ" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[format ["The enemy has sent SpecOps to find %1. Stop them, or move the HQ before they get here.",name petros],format ["Defend %1",name petros],respawnTeamPlayer],_targPos,true,10,true,"Defend",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[localize "STR_A3A_fn_base_attackHQ_defendLong", localize "STR_A3A_fn_base_attackHQ_defendTitle",respawnTeamPlayer],_targPos,true,10,true,"Defend",true] call BIS_fnc_taskCreate;
 [_taskId, "DEF_HQ", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 
@@ -33,7 +32,7 @@ private _taskId = "DEF_HQ" + str A3A_taskCount;
 private _uavSupp = ["UAV", _side, "attack", 500, objNull, _targPos, 0, 0] call A3A_fnc_createSupport;
 
 // Create the attacking force
-private _vehCount = round (1 + random 1 + 2 * A3A_balancePlayerScale + ([0, 0.5] select (_uavSupp == "")));
+private _vehCount = round (1.5 + random 1 + 2 * A3A_balancePlayerScale + ([0, 0.5] select (_uavSupp == "")));
 
 // Give smaller player groups a bit more time to respond
 if (isNil "_delay") then { _delay = 300 / A3A_balancePlayerScale };

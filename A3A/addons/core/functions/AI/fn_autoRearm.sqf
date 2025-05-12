@@ -5,10 +5,10 @@ if (isPlayer _unit) exitWith {};
 if !([_unit] call A3A_fnc_canFight) exitWith {};
 
 private _inPlayerGroup = (isPlayer (leader _unit));
-if (_unit getVariable ["helping",false]) exitWith {if (_inPlayerGroup) then {_unit groupChat "I cannot rearm right now. I'm healing a comrade"}};
+if (_unit getVariable ["helping",false]) exitWith {if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoLoot_noHelping"}};
 
 private _rearming = _unit getVariable ["rearming",false];
-if (_rearming) exitWith {if (_inPlayerGroup) then {_unit groupChat "I am currently rearming. Cancelling."; _unit setVariable ["rearming",false]}};
+if (_rearming) exitWith {if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoLoot_noDoing"; _unit setVariable ["rearming",false]}};
 if (vehicle _unit != _unit) exitWith {};
 _unit setVariable ["rearming",true];
 
@@ -61,7 +61,7 @@ if ((_primaryWeapon in FactionGet(reb,"initialRebelEquipment")) || (_primaryWeap
 		_unit stop false;
 		if (!((alive _selectedContainer) || (_selectedContainer isKindOf "ReammoBox_F"))) then {_selectedContainer setVariable ["busy",true]};
 		_unit doMove (getPosATL _selectedContainer);
-		if (_inPlayerGroup) then {_unit groupChat "Picking a better weapon"};
+		if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_getGun"};
 		_timeOut = time + 60;
 		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) || (isNull _selectedContainer) || (_unit distance _selectedContainer < 3) || (_timeOut < time) || (unitReady _unit)};
 		if ((unitReady _unit) && ([_unit] call A3A_fnc_canFight) && (_unit distance _selectedContainer > 3) && (_selectedContainer isKindOf "ReammoBox_F") && (!isNull _selectedContainer)) then {_unit setPos position _selectedContainer};
@@ -69,7 +69,7 @@ if ((_primaryWeapon in FactionGet(reb,"initialRebelEquipment")) || (_primaryWeap
 			_unit action ["TakeWeapon",_selectedContainer,_selectedWeapon];
 			sleep 5;
 			if (primaryWeapon _unit isEqualTo _selectedWeapon) then {
-				if (_inPlayerGroup) then {_unit groupChat "I have a better weapon now"};
+				if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_haveGun"};
 				if (_selectedContainer isKindOf "ReammoBox_F") then {_unit action ["rearm",_selectedContainer]};
 			};
 		};
@@ -111,21 +111,22 @@ if ((_foundItem) && (_unit getVariable "rearming")) then {
 	_unit stop false;
 	if (!((alive _selectedContainer) || (_selectedContainer isKindOf "ReammoBox_F"))) then {_selectedContainer setVariable ["busy",true]};
 	_unit doMove (getPosATL _selectedContainer);
-	if (_inPlayerGroup) then {_unit groupChat "Rearming"};
+	if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_rearming"};
 	_timeOut = time + 60;
 	waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) || (isNull _selectedContainer) || (_unit distance _selectedContainer < 3) || (_timeOut < time) || (unitReady _unit)};
 	if ((unitReady _unit) && ([_unit] call A3A_fnc_canFight) && (_unit distance _selectedContainer > 3) && (_selectedContainer isKindOf "ReammoBox_F") && (!isNull _selectedContainer)) then {_unit setPos position _selectedContainer};
 	if (_unit distance _selectedContainer < 3) then {
 		_unit action ["rearm",_selectedContainer];
 		if ({_x in _primaryMagazines} count (magazines _unit) >= _targetMagazines) then {
-			if (_inPlayerGroup) then {_unit groupChat "Rearmed"};
+			if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_rearmed";
 		} else {
-			if (_inPlayerGroup) then {_unit groupChat "Partially Rearmed"};
+			if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_partRearmed"};
 		};
 	};
 	_selectedContainer setVariable ["busy",false];
+	};
 } else {
-	if (_inPlayerGroup) then {_unit groupChat "No source to rearm my primary weapon"};
+	if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_noSourcePrim"};
 };
 
 _foundItem = false;
@@ -152,7 +153,7 @@ if ((_secondaryWeapon == "") && (loadAbs _unit < 340)) then {
 		_unit stop false;
 		if ((!alive _selectedContainer) || (!(_selectedContainer isKindOf "ReammoBox_F"))) then {_selectedContainer setVariable ["busy",true]};
 		_unit doMove (getPosATL _selectedContainer);
-		if (_inPlayerGroup) then {_unit groupChat "Picking a secondary weapon"};
+		if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_getSec"};
 		_timeOut = time + 60;
 		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) || (isNull _selectedContainer) || (_unit distance _selectedContainer < 3) || (_timeOut < time) || (unitReady _unit)};
 		if ((unitReady _unit) && ([_unit] call A3A_fnc_canFight) && (_unit distance _selectedContainer > 3) && (_selectedContainer isKindOf "ReammoBox_F") && (!isNull _selectedContainer)) then {_unit setPos position _selectedContainer};
@@ -160,7 +161,7 @@ if ((_secondaryWeapon == "") && (loadAbs _unit < 340)) then {
 			_unit action ["TakeWeapon",_selectedContainer,_selectedWeapon];
 			sleep 3;
 			if (secondaryWeapon _unit == _selectedWeapon) then {
-				if (_inPlayerGroup) then {_unit groupChat "I have a secondary weapon now"};
+				if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_haveSec"};
 				if (_selectedContainer isKindOf "ReammoBox_F") then {sleep 3;_unit action ["rearm",_selectedContainer]};
 			};
 		};
@@ -200,7 +201,7 @@ if (_secondaryWeapon != "") then {
 		_unit stop false;
 		if (!alive _selectedContainer) then {_selectedContainer setVariable ["busy",true]};
 		_unit doMove (position _selectedContainer);
-		if (_inPlayerGroup) then {_unit groupChat "Rearming"};
+		if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_rearming"};
 		_timeOut = time + 60;
 		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) || (isNull _selectedContainer) || (_unit distance _selectedContainer < 3) || (_timeOut < time) || (unitReady _unit)};
 		if ((unitReady _unit) && ([_unit] call A3A_fnc_canFight) && (_unit distance _selectedContainer > 3) && (_selectedContainer isKindOf "ReammoBox_F") && (!isNull _selectedContainer)) then {_unit setPos position _selectedContainer};
@@ -216,14 +217,14 @@ if (_secondaryWeapon != "") then {
 			};
 
 			if ({_x in _primaryMagazines} count (magazines _unit) >= 2) then {
-				if (_inPlayerGroup) then {_unit groupChat "Rearmed"};
+				if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_rearmed"};
 			} else {
-				if (_inPlayerGroup) then {_unit groupChat "Partially Rearmed"};
+				if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_partRearmed"};
 			};
 		};
 		_selectedContainer setVariable ["busy",false];
 	} else {
-		if (_inPlayerGroup) then {_unit groupChat "No source to rearm my secondary weapon"};
+		if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_noSourceSec"};
 	};
 	sleep 3;
 };
@@ -244,7 +245,7 @@ if (!haveRadio && {!(_unit call A3A_fnc_hasARadio)}) then {
 		_unit stop false;
 		_selectedContainer setVariable ["busy",true];
 		_unit doMove (getPosATL _selectedContainer);
-		if (_inPlayerGroup) then {_unit groupChat "Picking a Radio"};
+		if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_getRadio"};
 		_timeOut = time + 60;
 		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) || (isNull _selectedContainer) || (_unit distance _selectedContainer < 3) || (_timeOut < time) || (unitReady _unit)};
 		if (_unit distance _selectedContainer < 3) then {
@@ -274,7 +275,7 @@ if (hmd _unit == "") then {
 		_selectedContainer setVariable ["busy",true];
 		private _hmd = hmd _selectedContainer;
 		_unit doMove (getPosATL _selectedContainer);
-		if (_inPlayerGroup) then {_unit groupChat "Picking NV Googles"};
+		if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_getNVGs"};
 		_timeOut = time + 60;
 		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) || (isNull _selectedContainer) || (_unit distance _selectedContainer < 3) || (_timeOut < time) || (unitReady _unit)};
 		if (_unit distance _selectedContainer < 3) then {
@@ -303,7 +304,7 @@ if (!(headgear _unit in allArmoredHeadgear)) then {
 		_selectedContainer setVariable ["busy",true];
 		private _helmet = headgear _selectedContainer;
 		_unit doMove (getPosATL _selectedContainer);
-		if (_inPlayerGroup) then {_unit groupChat "Picking a Helmet"};
+		if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_getHelm"};
 		_timeOut = time + 60;
 		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) || (isNull _selectedContainer) || (_unit distance _selectedContainer < 3) || (_timeOut < time) || (unitReady _unit)};
 		if (_unit distance _selectedContainer < 3) then {
@@ -332,7 +333,7 @@ if ({_x == "FirstAidKit"} count (items _unit) < _targetFAKs) then {
 		_unit stop false;
 		_selectedContainer setVariable ["busy",true];
 		_unit doMove (getPosATL _selectedContainer);
-		if (_inPlayerGroup) then {_unit groupChat "Picking a First Aid Kit"};
+		if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_getFAK"};
 		_timeOut = time + 60;
 		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) || (isNull _selectedContainer) || (_unit distance _selectedContainer < 3) || (_timeOut < time) || (unitReady _unit)};
 		if (_unit distance _selectedContainer < 3) then {
@@ -362,7 +363,7 @@ if ((_foundItem) && (_unit getVariable "rearming")) then {
 	_unit stop false;
 	_selectedContainer setVariable ["busy",true];
 	_unit doMove (getPosATL _selectedContainer);
-	if (_inPlayerGroup) then {_unit groupChat "Picking a a better vest"};
+	if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_getVest"};
 	_timeOut = time + 60;
 	waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) || (isNull _selectedContainer) || (_unit distance _selectedContainer < 3) || (_timeOut < time) || (unitReady _unit)};
 	if (_unit distance _selectedContainer < 3) then {
@@ -395,7 +396,7 @@ if (backpack _unit == "") then {
 		_unit stop false;
 		_selectedContainer setVariable ["busy",true];
 		_unit doMove (getPosATL _selectedContainer);
-		if (_inPlayerGroup) then {_unit groupChat "Picking a Backpack"};
+		if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_getPack"};
 		_timeOut = time + 60;
 		waitUntil {sleep 1; !([_unit] call A3A_fnc_canFight) || (isNull _selectedContainer) || (_unit distance _selectedContainer < 3) || (_timeOut < time) || (unitReady _unit)};
 		if (_unit distance _selectedContainer < 3) then {
@@ -413,5 +414,5 @@ if (backpack _unit == "") then {
 };
 
 _unit doFollow (leader _unit);
-if (!_needsRearm) then {if (_inPlayerGroup) then {_unit groupChat "No need to rearm"}} else {if (_inPlayerGroup) then {_unit groupChat "Rearming Done"}};
+if (!_needsRearm) then {if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_noNeed"}} else {if (_inPlayerGroup) then {_unit groupChat localize "STR_A3A_fn_ai_autoRearm_done"}};
 _unit setVariable ["rearming",false];

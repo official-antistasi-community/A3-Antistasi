@@ -2,6 +2,7 @@
 // Just for debugging probably
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+private _titleStr = localize "STR_A3A_fn_ai_help_title";
 
 // Both units must be local. Non-local unit might be resolved at some point.
 
@@ -40,7 +41,7 @@ private _fnc_doHeal = {
         sleep 10; true;
     };
     if (_cured && _medic != _target && _isPlayerGroup) then {
-        _medic groupChat format ["You are ready %1",name _target];
+        _medic groupChat format [localize "STR_A3A_fn_ai_heal_ready",name _target];
     };
     _medic stop false;
     _target stop false;
@@ -54,18 +55,18 @@ if (_medicX != _unit) then
     // Is this one even used? Never seen it
     if !(_unit getVariable ["incapacitated",false]) then
     {
-        if (_isPlayerGroup) then {_unit groupChat format ["Comrades, this is %1. I'm hurt!", name _unit]};
+        if (_isPlayerGroup) then {_unit groupChat format [localize "STR_A3A_fn_ai_heal_hurt", name _unit]};
         playSound3D [(selectRandom injuredSounds),_unit,false, getPosASL _unit, 1, 1, 50];
     };
 
     // Fire helping message if in player group
     if (_isPlayerGroup) then {
-        _medicX groupChat format ["Wait a minute comrade %1, I will patch you up.", name _unit]
+        _medicX groupChat format [localize "STR_A3A_fn_ai_heal_support", name _unit]
     };
 
     // Actual helping hint for player
     if (player == _unit) then {
-        ["Medical", format ["%1 is on the way to help you.", name _medicX]] call A3A_fnc_customHint;
+        [_titleStr, format [localize "STR_A3A_fn_ai_help_onway", name _medicX]] call A3A_fnc_customHint;
     };
 
     Debug_2("Medic %1 helping %2", _medicX, _unit);

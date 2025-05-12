@@ -21,17 +21,22 @@ _displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time po
 private _markerSide = sidesX getVariable [_markerX, sideUnknown];
 
 _nameDest = [_markerX] call A3A_fnc_localizar;
-_textX = "";
-_taskName = "";
+_textX = format [localize "STR_A3A_fn_mission_conq_outp_text3",_displayTime];
+_taskName = localize "STR_A3A_fn_mission_conq_outp_titel4";
 if (_markerX in resourcesX) then
 	{
-	_textX = format ["A %1 would be a fine addition to our cause. Go there and capture it before %2.",_nameDest,_displayTime];
-	_taskName = "Resource Acquisition";
-	}
-else
+	_textX = format [localize "STR_A3A_fn_mission_conq_outp_text1",_nameDest,_displayTime];
+	_taskName = localize "STR_A3A_fn_mission_conq_outp_titel1";
+	};
+if (_markerX in outposts) then 
 	{
-	_textX = format ["A %1 is disturbing our operations in the area. Go there and capture it before %2.",_nameDest,_displayTime];
-	_taskName = "Take the Outpost";
+	_textX = format [localize "STR_A3A_fn_mission_conq_outp_text2",_nameDest,_displayTime];
+	_taskName = localize "STR_A3A_fn_mission_conq_outp_titel2";
+	};
+if (_markerX in controlsX) then 
+	{
+	_textX = format [localize "STR_A3A_fn_mission_conq_outp_text2",_nameDest,_displayTime];
+	_taskName = localize "STR_A3A_fn_mission_conq_outp_titel3";
 	};
 
 private _taskId = "CON" + str A3A_taskCount;

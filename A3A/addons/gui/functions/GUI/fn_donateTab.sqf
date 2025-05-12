@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Donate tab of the Main dialog.
 
 Arguments:
@@ -16,7 +16,10 @@ Dependencies:
     None
 
 Example:
-    ["update"] call A3A_fnc_donateTab;
+    ["update"] call FUNC(donateTab);
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -37,7 +40,7 @@ switch (_mode) do
         private _backButton = _display displayCtrl A3A_IDC_MAINDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["player"]] call A3A_fnc_mainDialog;
+            ["switchTab", ["player"]] call FUNC(mainDialog);
         }];
         _backButton ctrlShow true;
 
@@ -47,25 +50,20 @@ switch (_mode) do
         _moneySlider sliderSetRange [0,_money];
         _moneySlider sliderSetSpeed [10, 10];
         _moneySlider sliderSetPosition 0;
-        private _target = cursorTarget;
 
         private _moneyText = _display displayCtrl A3A_IDC_DONATIONMONEYTEXT;
         _moneyText ctrlSetText format ["%1 €", _money];
 
-        private _playerList = _display displayCtrl A3A_IDC_DONATEPLAYERLIST;
-        {
-            if !(_x == player) then
-            {
-                _playerList lbAdd name _x;
-                if !(_target == objNull) then
-                {
-                    if (_target == _x) then
-                    {
-                        _playerList lbSetCurSel _forEachIndex;
-                    };
-                };
-            };
-        } forEach fakePlayers;
+        private _playerListCtrl = _display displayCtrl A3A_IDC_DONATEPLAYERLIST;
+        private _players = allPlayers - entities "HeadlessClient_F";
+        A3A_GUI_donateTab_sortedPlayers = _players select { _x isNotEqualTo player } apply {[toLower name _x,_x]};
+        A3A_GUI_donateTab_sortedPlayers sort true;
+        A3A_GUI_donateTab_sortedPlayers = A3A_GUI_donateTab_sortedPlayers apply {_x#1};
+        lbClear _playerListCtrl;
+        { _playerListCtrl lbAdd name _x; } forEach A3A_GUI_donateTab_sortedPlayers;
+
+        private _cursorObjectIndex = A3A_GUI_donateTab_sortedPlayers find cursorObject;
+        if (_cursorObjectIndex >= 0) then {_playerListCtrl lbSetCurSel _cursorObjectIndex};
     };
 
     // Donation Menu
@@ -104,6 +102,33 @@ switch (_mode) do
         if (_newValue > _money) then {_newValue = _money};
         _moneyEditBox ctrlSetText str _newValue;
         _moneySlider sliderSetPosition _newValue;
+    };
+
+    case ("donatePlayerConfirmed"):
+    {
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _moneyEditBox = _display displayCtrl A3A_IDC_MONEYEDITBOX;
+        private _moneyEditBoxValue = floor parseNumber ctrlText _moneyEditBox;
+
+        private _playerListCtrl = _display displayCtrl A3A_IDC_DONATEPLAYERLIST;
+        private _donateToIndex = lbCurSel _playerListCtrl;
+        if (_donateToIndex == -1) exitWith {};
+        private _donateTo = A3A_GUI_donateTab_sortedPlayers #_donateToIndex;
+
+        [player, _donateTo, _moneyEditBoxValue] call FUNCMAIN(sendMoney);
+        // Reset
+        _moneyEditBox ctrlSetText "0";
+    };
+
+    case ("donateFactionConfirmed"):
+    {
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _moneyEditBox = _display displayCtrl A3A_IDC_MONEYEDITBOX;
+        private _moneyEditBoxValue = floor parseNumber ctrlText _moneyEditBox;
+
+        [player, "faction", _moneyEditBoxValue] call FUNCMAIN(sendMoney);
+        // Reset
+        _moneyEditBox ctrlSetText "0";
     };
 
     default

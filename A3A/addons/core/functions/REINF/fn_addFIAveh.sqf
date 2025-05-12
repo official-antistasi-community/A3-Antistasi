@@ -1,12 +1,14 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-if (!(isNil "placingVehicle") && {placingVehicle}) exitWith {["Add Vehicle", "Unable to buy vehicle, you are already placing something."] call A3A_fnc_customHint;};
-if (player != player getVariable ["owner",player]) exitWith {["Add Vehicle", "You cannot buy vehicles while you are controlling AI."] call A3A_fnc_customHint;};
-if ([getPosATL player] call A3A_fnc_enemyNearCheck) exitWith {["Add Vehicle", "You cannot buy vehicles with enemies nearby."] call A3A_fnc_customHint;};
+private _titleStr = localize "STR_A3A_fn_reinf_addFIAVeh_title";
+
+if (!(isNil "placingVehicle") && {placingVehicle}) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_no_placing"] call A3A_fnc_customHint;};
+if (player != player getVariable ["owner",player]) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_no_control"] call A3A_fnc_customHint;};
+if ([getPosATL player] call A3A_fnc_enemyNearCheck) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_no_enemy"] call A3A_fnc_customHint;};
 
 
 private _typeVehX = _this select 0;
-if (_typeVehX == "") exitWith {["Add Vehicle", "The vehicle you requested is not supported in your current modset."] call A3A_fnc_customHint;};
+if (_typeVehX == "") exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_no_supp"] call A3A_fnc_customHint;};
 
 private _cost = [_typeVehX] call A3A_fnc_vehiclePrice;
 
@@ -23,9 +25,9 @@ if (!isMultiPlayer) then {_resourcesFIA = server getVariable "resourcesFIA"} els
 		};
 	};
 
-if (_resourcesFIA < _cost) exitWith {["Add Vehicle", format ["You do not have enough money for this vehicle: %1 € required.",_cost]] call A3A_fnc_customHint;};
+if (_resourcesFIA < _cost) exitWith {[_titleStr, format [localize "STR_A3A_fn_reinf_addFIAVeh_no_money",_cost]] call A3A_fnc_customHint;};
 private _nearestMarker = [markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer},player] call BIS_fnc_nearestPosition;
-if !(player inArea _nearestMarker) exitWith {["Add Vehicle", "You need to be close to the flag to be able to purchase a vehicle."] call A3A_fnc_customHint;};
+if !(player inArea _nearestMarker) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_no_flag"] call A3A_fnc_customHint;};
 
 private _extraMessage =	format ["Buying vehicle for $%1.", _cost];
 

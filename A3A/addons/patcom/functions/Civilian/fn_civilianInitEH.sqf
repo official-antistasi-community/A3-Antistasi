@@ -86,7 +86,7 @@ _unit addEventHandler ["Killed", {
         };
     };
 
-    [_victim] spawn A3A_fnc_postmortem;
+    [_victim] remoteExec ["A3A_fnc_postmortem", 2];
 }];
 
 ["civInit", [_unit]] call EFUNC(Events,triggerEvent);

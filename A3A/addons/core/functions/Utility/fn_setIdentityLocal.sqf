@@ -29,8 +29,9 @@ private _lastName = _identity getOrDefault ["lastName", ""];
 if (_firstName != "" || _lastName != "") then {
     private _fullName = [_firstName, _lastName] select { _x != "" } joinString " ";
     _unit setName [_fullName, _firstName, _lastName];
-    if (A3A_hasACE) then {
+    if (isServer and {!isNil "ace_common_fnc_setName"}) then {
         // Updates the name displayed in ACE Medical, dogtags, name tags and other ACE features
+        // Runs global setVariable so only needs executing once
         _unit call ace_common_fnc_setName;
     };
 };

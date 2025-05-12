@@ -31,9 +31,10 @@ private _specialVarLoads = [
     "prestigeCSAT","posHQ","hr","armas","items","backpcks","ammunition","dateX","prestigeOPFOR",
     "prestigeBLUFOR","resourcesFIA","skillFIA","destroyedSites",
     "garrison","tasks","membersX","vehInGarage","destroyedBuildings","idlebases",
-    "chopForest","weather","killZones","jna_dataList","controlsSDK","mrkCSAT","nextTick",
+    "chopForest","weather","killZones","jna_dataList","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
-    "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "newGarrison"
+    "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
+    "minorSites", "newGarrison"
 ];
 
 private _varName = _this select 0;
@@ -54,11 +55,6 @@ if (_varName in _specialVarLoads) then {
     if (_varName == 'mrkNATO') then {{sidesX setVariable [[_x] call _translateMarker,Occupants,true]} forEach _varValue;};
     if (_varName == 'mrkCSAT') then {{sidesX setVariable [[_x] call _translateMarker,Invaders,true]} forEach _varValue;};
     if (_varName == 'mrkSDK') then {{sidesX setVariable [[_x] call _translateMarker,teamPlayer,true]} forEach _varValue;};
-    if (_varName == 'controlsSDK') then {
-        {
-            sidesX setVariable [_x,teamPlayer,true]
-        } forEach _varValue;
-    };
     if (_varName == 'chopForest') then {chopForest = _varValue; publicVariable "chopForest"};
     if (_varName == 'jna_dataList') then {jna_dataList = +_varValue};
     //Keeping these for older saves
@@ -262,6 +258,7 @@ if (_varName in _specialVarLoads) then {
         A3A_resourcesDefenceInv = _varValue#1;
         A3A_resourcesAttackOcc = _varValue#2;
         A3A_resourcesAttackInv = _varValue#3;
+        if (count _varValue > 4) then { A3A_punishmentDefBuff = _varValue#4 };
     };
     if (_varname == 'HQKnowledge') then {
         A3A_curHQInfoOcc = _varValue#0;
@@ -281,11 +278,6 @@ if (_varName in _specialVarLoads) then {
     };
     if (_varName == 'posHQ') then {
         _posHQ = if (count _varValue >3) then {_varValue select 0} else {_varValue};
-        {
-            if (getMarkerPos _x distance _posHQ < 1000) then {
-                sidesX setVariable [_x,teamPlayer,true];
-            };
-        } forEach controlsX;
         respawnTeamPlayer setMarkerPos _posHQ;
         posHQ = getMarkerPos respawnTeamPlayer;
         petros setPos _posHQ;
@@ -323,7 +315,16 @@ if (_varName in _specialVarLoads) then {
             };
 
             [_veh, teamPlayer] call A3A_fnc_AIVEHinit;                  // Calls initObject instead if it's a buyable item
-            if (!isNil "_state") then {
+
+/* Obsolete?
+            if (isNil {_veh getVariable "A3A_canGarage"}) then {        // Buyable items should set this
+                if (_veh isKindOf "StaticWeapon") exitWith { staticsToSave pushBack _veh };
+                if (_veh isKindOf "Building") exitWith {
+                    _veh setVariable ["A3A_building", true, true];
+                    A3A_buildingsToSave pushBack _veh;
+                };
+            };*/
+            if (!isNil "_state")  then {
                 [_veh, _state] call HR_GRG_fnc_setState;
             };
         };
@@ -366,6 +367,17 @@ if (_varName in _specialVarLoads) then {
 	            _fuelStation setFuelCargo (A3A_fuelAmountleftArray # _i # 1);
 	        };
         };
+    };
+    if (_varname == "arsenalLimits") then {
+        A3A_arsenalLimits = _varValue; publicVariable "A3A_arsenalLimits";
+    };
+    if (_varname == "rebelLoadouts") then {
+        _varValue call A3A_fnc_setRebelLoadouts;        // updates version numbers
+    };
+    if (_varname == "minorSites") then {
+        A3A_minorSitesHM = createHashMap;
+        { _y call A3A_fnc_addMinorSite } forEach _varValue;
+        // pair refs get sanity checked in initMinorSites later
     };
 
     if(_varname == 'testingTimerIsActive') then

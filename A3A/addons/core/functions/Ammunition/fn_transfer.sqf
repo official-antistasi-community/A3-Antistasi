@@ -12,7 +12,7 @@ _objectsX = nearestObjects [_truckX, ["ReammoBox_F"], 20];
 if (count _objectsX == 0) exitWith {};
 _boxX = _objectsX select 0;
 
-if ((_boxX == boxX) and (player!=theBoss)) exitWith {["Cargo", "Only the Commander can transfer this ammobox content to any truck."] call A3A_fnc_customHint; [driver _truckX,"truckX"] remoteExec ["A3A_fnc_flagaction",driver _truckX]};
+if ((_boxX == boxX) and (player!=theBoss)) exitWith {[localize "STR_A3A_fn_ammo_cargo", localize "STR_A3A_fn_ammo_transfer_commander_only"] call A3A_fnc_customHint; [driver _truckX,"truckX"] remoteExec ["A3A_fnc_flagaction",driver _truckX]};
 
 
 _weaponsX = weaponCargo _boxX;
@@ -61,7 +61,7 @@ _countX = count _todo;
 
 if (_countX < 1) then
 	{
-	["Cargo", "Closest Ammobox is empty."] call A3A_fnc_customHint;
+	[localize "STR_A3A_fn_ammo_cargo", localize "STR_A3A_fn_ammo_transfer_box_empty"] call A3A_fnc_customHint;
 	_proceed = true;
 	};
 
@@ -78,7 +78,7 @@ if (_countX > 0) then
 	if (_countX < 1) then {_countX = 1};
 	while {(_truckX == vehicle player) and (speed _truckX == 0) and (_countX > 0)} do
 		{
-		["Cargo", format ["Truck loading. <br/><br/>Time remaining: %1 secs.", _countX]] call A3A_fnc_customHint;
+		[localize "STR_A3A_fn_ammo_cargo", format [localize "STR_A3A_fn_ammo_transfer_loading", _countX]] call A3A_fnc_customHint;
 		_countX = _countX -1;
 		sleep 1;
 		if (_countX == 0) then
@@ -88,7 +88,7 @@ if (_countX > 0) then
 			};
 		if ((_truckX != vehicle player) or (speed _truckX != 0)) then
 				{
-				["Cargo", "Transfer cancelled due to movement of Truck or Player."] call A3A_fnc_customHint;
+				[localize "STR_A3A_fn_ammo_cargo", localize "STR_A3A_fn_ammo_transfer_cancelled"] call A3A_fnc_customHint;
 				_proceed = true;
 				};
 		};

@@ -82,6 +82,7 @@
 
 ["voices", ["Male01PER", "Male02PER", "Male03PER"]] call _fnc_saveToTemplate;
 ["faces", ["PersianHead_A3_01", "PersianHead_A3_02", "PersianHead_A3_03"]] call _fnc_saveToTemplate;
+"TakistaniMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //
@@ -307,10 +308,12 @@ _militaryLoadoutData set ["grenadeLaunchers", [
 ["rhs_weap_ak74n_gp25", "rhs_acc_dtk3", "", "rhs_acc_pkas", ["rhs_30Rnd_545x39_7N10_AK"], ["rhs_VOG25", "rhs_VOG25", "rhs_VOG25P", "rhs_VG40OP_white"], ""],
 ["rhs_weap_ak74n_gp25", "rhs_acc_dtk3", "", "rhs_acc_1p63", ["rhs_30Rnd_545x39_7N10_AK"], ["rhs_VOG25", "rhs_VOG25", "rhs_VOG25P", "rhs_VG40OP_white"], ""]
 ]];
-_militaryLoadoutData set ["SMGs", ["rhs_weap_pp2000"]];
+_militaryLoadoutData set ["SMGs", ["uk3cb_port_said_m45"]];
 _militaryLoadoutData set ["machineGuns", [
 ["rhs_weap_pkm", "", "", "",["rhs_100Rnd_762x54mmR", "rhs_100Rnd_762x54mmR_green"], [], ""],
-["rhs_weap_pkm", "", "", "",["rhs_100Rnd_762x54mmR_7N13", "rhs_100Rnd_762x54mmR_green"], [], ""]
+["rhs_weap_pkm", "", "", "",["rhs_100Rnd_762x54mmR_7N13", "rhs_100Rnd_762x54mmR_green"], [], ""],
+["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39"], [], ""],
+["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_GM"], [], ""]
 ]];
 _militaryLoadoutData set ["marksmanRifles", [
 ["rhs_weap_svdp", "", "", "rhs_acc_pso1m2", [], [], ""],
@@ -333,7 +336,7 @@ _policeLoadoutData set ["antiInfantryGrenades", ["rhs_mag_fakel", "rhs_mag_fakel
 _policeLoadoutData set ["rifles", [
 ["rhs_weap_ak103_1", "rhs_acc_dtk", "", "", ["rhs_10Rnd_762x39mm"], [], ""]
 ]];
-_policeLoadoutData set ["SMGs", ["rhs_weap_pp2000"]];
+_policeLoadoutData set ["SMGs", ["uk3cb_port_said_m45"]];
 _policeLoadoutData set ["sidearms", [
 ["rhs_weap_pya", "", "", "", [], [""], ""]
 ]];
@@ -364,8 +367,11 @@ _militiaLoadoutData set ["grenadeLaunchers", [
 ["rhs_weap_akms_gp25", "rhs_acc_dtkakm", "", "", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], ["rhs_VOG25", "rhs_VOG25", "rhs_VOG25P", "rhs_VG40OP_white"], ""],
 ["rhs_weap_aks74n_gp25", "rhs_acc_dtk", "", "", ["rhs_30Rnd_545x39_7N10_AK"], ["rhs_VOG25", "rhs_VOG25", "rhs_VOG25P", "rhs_VG40OP_white"], ""]
 ]];
-_militiaLoadoutData set ["SMGs", ["rhs_weap_pp2000"]];
-_militiaLoadoutData set ["machineGuns", ["rhs_weap_pkm"]];
+_militiaLoadoutData set ["SMGs", ["uk3cb_port_said_m45"]];
+_militiaLoadoutData set ["machineGuns", ["rhs_weap_pkm",
+["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39"], [], ""],
+["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_GM"], [], ""]
+]];
 _militiaLoadoutData set ["marksmanRifles", [
 ["rhs_weap_svdp", "", "", "rhs_acc_pso1m2", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]
 ]];

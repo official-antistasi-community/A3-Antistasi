@@ -147,7 +147,7 @@ class HQ_menu 			{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;if (player == theBoss) then {nul = [] call A3A_fnc_FIAskillAdd} else {[""Recruit Vehicle"", ""Only Player Commander has access to this function.""] call A3A_fnc_customHint;};";
+			action = "if (player == theBoss) then {nul = [] call A3A_fnc_FIAskillAdd} else {[""Recruit Vehicle"", ""Only Player Commander has access to this function.""] call A3A_fnc_customHint;};";
 		};
 		class HQ_button_skill: A3A_core_BattleMenuRedButton
 		{
@@ -1312,13 +1312,13 @@ class radio_comm 		{
 		class 8slots_R2: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
-			text = $STR_antistasi_dialogs_radio_comm_construct;
+			text = "New Battle Menu";		// Don't localize, tempory button.
 			x = 0.482498 * safezoneW + safezoneX;
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			tooltip = $STR_antistasi_dialogs_radio_comm_construct_tooltip;
-			action = "closeDialog 0;_nul = createDialog ""construction_menu"";";
+			tooltip = "Experimental Battle Menu. Work in Progress."; // Don't localize, tempory button.
+			action = "closeDialog 0; createDialog ""A3A_MainDialog""";
 		};
 		class 8slots_L3: A3A_core_BattleMenuRedButton
 		{
@@ -1704,123 +1704,145 @@ class AI_management 		{
 		};
 	};
 };
+
 class commander_comm 		{
 	idd=-1;
 	movingenable=false;
 	class controls {
 		//Menu Structure
-		class 8slots_box: A3A_core_BattleMenuBOX
+		class 10slots_box: A3A_core_BattleMenuBOX
 		{
 			idc = -1;
 			text = $STR_antistasi_dialogs_generic_box_text;
 			x = 0.244979 * safezoneW + safezoneX;
-			y = 0.223941 * safezoneH + safezoneY;
+			y = 0.173941 * safezoneH + safezoneY;
 			w = 0.445038 * safezoneW;
-			h = 0.492103 * safezoneH;
+			h = 0.592103 * safezoneH;
 		};
-		class 8slots_frame: A3A_core_BattleMenuFrame
+		class 10slots_frame: A3A_core_BattleMenuFrame
 		{
 			idc = -1;
 			text = $STR_antistasi_dialogs_commander_comm;
 			x = 0.254979 * safezoneW + safezoneX;
-			y = 0.233941 * safezoneH + safezoneY;
+			y = 0.183941 * safezoneH + safezoneY;
 			w = 0.425038 * safezoneW;
-			h = 0.462103 * safezoneH;
+			h = 0.562103 * safezoneH;
 		};
-		class 8slots_Back: A3A_core_BattleMenuRedButton
+		class 10slots_Back: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
 			text = $STR_antistasi_dialogs_generic_button_back_text;
 			x = 0.61 * safezoneW + safezoneX;
-			y = 0.251941 * safezoneH + safezoneY;
-			w = 0.06 * safezoneW;
+			y = 0.201941 * safezoneH + safezoneY;
+			w = 0.06 * safezoneW;//0.175015
 			h = 0.05 * safezoneH;
 			action = "closeDialog 0;nul = createDialog ""radio_comm"";";
 		};
-		//Action Buttons
-		class 8slots_L1: A3A_core_BattleMenuRedButton
+		class 10slots_L1: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
 			text = $STR_antistasi_dialogs_commander_comm_recruit;
 			x = 0.272481 * safezoneW + safezoneX;
-			y = 0.317959 * safezoneH + safezoneY;
+			y = 0.267959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_commander_comm_recruit_tooltip;
 			action = "closeDialog 0;if (player == theBoss) then { [] spawn A3A_fnc_squadRecruit; } else {[""Recruit Squad"", ""Only Player Commander has access to this function.""] call A3A_fnc_customHint;};";
 		};
-		class 8slots_R1: A3A_core_BattleMenuRedButton
+		class 10slots_R1: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
 			text = $STR_antistasi_dialogs_commander_comm_air_support;
 			x = 0.482498 * safezoneW + safezoneX;
-			y = 0.317959 * safezoneH + safezoneY;
+			y = 0.267959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_commander_comm_air_support_tooltip;
 			action = "closeDialog 0;if (player == theBoss) then {_nul = createDialog ""carpet_bombing""} else {[""Air Support"", ""Only Player Commander has access to this function.""] call A3A_fnc_customHint;};";
 		};
-		class 8slots_L2: A3A_core_BattleMenuRedButton
+		class 10slots_L2: A3A_core_BattleMenuRedButton
+		{
+			idc = -1;
+			text = $STR_antistasi_dialogs_commander_comm_convSquad;
+			x = 0.272481 * safezoneW + safezoneX;
+			y = 0.365981 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+			h = 0.0560125 * safezoneH;
+			tooltip = $STR_antistasi_dialogs_commander_comm_convSquad_tooltip;
+			action = "if (player == theBoss) then { closeDialog 0; [] spawn A3A_fnc_convertToSquad } else {[""Create Squad"", ""You're not the Commander!""] call A3A_fnc_customHint;};";
+		};
+		class 10slots_R2: A3A_core_BattleMenuRedButton
+		{
+			idc = -1;
+			text = "Customize Loadouts"; //$STR_antistasi_dialogs_commander_comm_customLoadouts;
+			x = 0.482498 * safezoneW + safezoneX;
+			y = 0.365981 * safezoneH + safezoneY;
+			w = 0.175015 * safezoneW;
+			h = 0.0560125 * safezoneH;
+			tooltip = "Customize loadouts for rebel AI troops"; //$STR_antistasi_dialogs_commander_comm_customLoadouts_tooltip;
+			action = "if (player == theBoss) then {closeDialog 0; createDialog ""A3A_customLoadoutsDialog""} else {[""Custom Loadouts"", ""Only commanders have access to this function""] call A3A_fnc_customHint}";
+		};
+		class 10slots_L3: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
 			text = $STR_antistasi_dialogs_commander_comm_roadblock;
 			x = 0.272481 * safezoneW + safezoneX;
-			y = 0.415981 * safezoneH + safezoneY;
+			y = 0.464003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_commander_comm_roadblock_tooltip;
 			action = "if (player == theBoss) then {closeDialog 0;[""create""] spawn A3A_fnc_outpostDialog} else {[""Outposts/Roadblocks"", ""You're not the Commander!""] call A3A_fnc_customHint;};";
 		};
-		class 8slots_R2: A3A_core_BattleMenuRedButton
+		class 10slots_R3: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
 			text = $STR_antistasi_dialogs_commander_comm_clean;
 			x = 0.482498 * safezoneW + safezoneX;
-			y = 0.415981 * safezoneH + safezoneY;
+			y = 0.464003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_commander_comm_clean_tooltip;
 			action = "if (player == theBoss) then {closedialog 0;[] remoteExec [""A3A_fnc_garbageCleaner"",2]} else {[""Garbage Cleaner"", ""Only Player Commander has access to this function.""] call A3A_fnc_customHint;};";
 		};
-		class 8slots_L3: A3A_core_BattleMenuRedButton
+		class 10slots_L4: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
 			text = $STR_antistasi_dialogs_commander_comm_roadblock_delete;
 			x = 0.272481 * safezoneW + safezoneX;
-			y = 0.514003 * safezoneH + safezoneY;
+			y = 0.562025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_commander_comm_roadblock_delete_tooltip;
 			action = "if (player == theBoss) then {closeDialog 0; [""delete""] spawn A3A_fnc_outpostDialog} else {[""Outposts/Roadblocks"", ""You're not the Commander!""] call A3A_fnc_customHint;};";
 		};
-		class 8slots_R3: A3A_core_BattleMenuRedButton
+		class 10slots_R4: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
 			text = "Arsenal Limits";		//$STR_antistasi_dialogs_commander_comm_faction_garage;
 			x = 0.482498 * safezoneW + safezoneX;
-			y = 0.514003 * safezoneH + safezoneY;
+			y = 0.562025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Manage arsenal limitations of guests";	//$STR_antistasi_dialogs_commander_comm_faction_garage_tooltip;
-			action = "if (player == theBoss && theBoss call A3A_fnc_isMember) then {closeDialog 0; createDialog ""A3A_ArsenalLimitsDialog""} else {[""Arsenal limits"", ""Only member commanders have access to this function""] call A3A_fnc_customHint}";
+			action = "if (player == theBoss) then {closeDialog 0; createDialog ""A3A_ArsenalLimitsDialog""} else {[""Arsenal limits"", ""Only commanders have access to this function""] call A3A_fnc_customHint}";
 		};
-		class 8slots_L4: A3A_core_BattleMenuRedButton
+		class 10slots_L5: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
 			text = $STR_antistasi_dialogs_commander_comm_resign;
 			x = 0.272481 * safezoneW + safezoneX;
-			y = 0.612025 * safezoneH + safezoneY;
+			y = 0.660047 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_commander_comm_resign_tooltip;
 			action = "if (isMultiplayer) then {closedialog 0;[player, cursorTarget] remoteExec [""A3A_fnc_theBossToggleEligibility"", 2]} else {[""Resign Commander"", ""This feature is MP Only.""] call A3A_fnc_customHint;};";
 		};
-		class 8slots_R4: A3A_core_BattleMenuRedButton
+		class 10slots_R5: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
 			text = $STR_antistasi_dialogs_commander_comm_sell;
 			x = 0.482498 * safezoneW + safezoneX;
-			y = 0.612025 * safezoneH + safezoneY;
+			y = 0.660047 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_commander_comm_sell_tooltip;
@@ -2287,7 +2309,7 @@ class player_money 			{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "[true] call A3A_fnc_donateMoney;";
+			action = "[player, cursorObject, 100] call A3A_fnc_sendMoney;";
 		};
 		class HQ_button_AA: A3A_core_BattleMenuRedButton
 		{
@@ -2298,7 +2320,7 @@ class player_money 			{
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_player_money_donate_faction_tooltip;
-			action = "[] call A3A_fnc_donateMoney;";
+			action = "[player, 'faction', 100] call A3A_fnc_sendMoney;";
 		};
 	};
 };

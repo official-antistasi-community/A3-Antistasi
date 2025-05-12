@@ -100,7 +100,7 @@ player addEventHandler ["WeaponAssembled", {
     private _marker = [getPosATL _veh] call A3A_fnc_getMarkerForPos;
     if (_marker != "") then {
         [_marker, _veh] remoteExecCall ["A3A_fnc_addVehicleToGarrison", 2];
-        ["Static Deployed", "Static weapon has been deployed for use in a nearby garrison."] call A3A_fnc_customHint;
+        [localize "STR_A3A_fn_proxy_statDepl_titel", localize "STR_A3A_fn_proxy_statDepl_text"] call A3A_fnc_customHint;
     };
 }];
 

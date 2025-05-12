@@ -6,6 +6,7 @@
     Arguments:
     0. <Object> Cargo that you want to be able to load in a vehicle
     1. <String> "load" or "unload" action (optional - should not really be used)
+    2. <Bool> Whether loading the object should break undercover
 
     Return Value:
     <Nil>
@@ -19,7 +20,7 @@
 */
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
-params [["_object", objNull, [objNull]], ["_action", "load"]];
+params [["_object", objNull, [objNull]], ["_action", "load"],["_breakUC",false]];
 
 if (isNull _object) exitWith {
     Error("No object passed, aborting");
@@ -33,5 +34,6 @@ if (!alive _object) exitWith {
 
 if (([_object] call A3A_Logistics_fnc_getCargoNodeType) isEqualTo -1) exitWith {nil};
 
-[_object , _action] remoteExec ["A3A_Logistics_fnc_addAction", 0, _object];
+private _jipKey = "A3A_Logistics_" + _action + ((str _object splitString ":") joinString "");
+[_object, _action, _jipKey,_breakUC] remoteExec ["A3A_Logistics_fnc_addAction", 0, _jipKey];
 nil

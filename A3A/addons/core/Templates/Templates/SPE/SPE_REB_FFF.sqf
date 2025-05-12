@@ -72,11 +72,11 @@ private _initialRebelEquipment = [
     "SPE_Fusil_Mle_208_12", "SPE_Fusil_Mle_208_12_Sawedoff", "SPE_K98",
     "SPE_2Rnd_12x65_Pellets", "SPE_2Rnd_12x65_Slug", "SPE_5Rnd_792x57",
     "SPE_P08", "SPE_8Rnd_9x19_P08",
-    ["SPE_PzFaust_30m", 50],
+    ["SPE_PzFaust_30m", 50], ["SPE_1Rnd_PzFaust_30m", 50],
     ["SPE_Ladung_Small_MINE_mag", 10], ["SPE_US_TNT_half_pound_mag", 10], ["SPE_US_TNT_4pound_mag", 3], ["SPE_Ladung_Big_MINE_mag", 3],
     "SPE_Shg24_Frag", "SPE_NB39", "SPE_US_Mk_1",
     "V_SPE_US_Vest_M1919", "V_SPE_DAK_VestKar98",
-    "B_SPE_FFI_M36_Saboteur", "B_SPE_GER_MedicBackpack_Empty",
+    "B_SPE_FFI_Gasbag", "B_SPE_GER_MedicBackpack_Empty",
     "SPE_Binocular_US"
 ];
 
@@ -86,10 +86,7 @@ if (A3A_hasTFAR && startWithLongRangeRadio) then {
     _initialRebelEquipment pushBack "tf_anprc155_coyote";
 };
 if (A3A_hasTFARBeta) then {_initialRebelEquipment append ["TFAR_microdagr", "TFAR_anprc154"]};
-if (A3A_hasTFARBeta && startWithLongRangeRadio) then {
-    _initialRebelEquipment pushBack "TFAR_anprc155";
-    _initialRebelEquipment pushBack "TFAR_anprc155_coyote";
-};
+if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote", "TFAR_anarc164", "a3a_TFAR_rt1523g_rhs", "a3a_TFAR_rt1523g_bwmod", "a3a_TFAR_rt1523g"]};
 
 ["initialRebelEquipment", _initialRebelEquipment] call _fnc_saveToTemplate;
 

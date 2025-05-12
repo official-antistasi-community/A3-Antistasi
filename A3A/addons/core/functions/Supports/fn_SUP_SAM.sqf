@@ -54,11 +54,11 @@ _group deleteGroupWhenEmpty true;
 
 
 private _aggro = if(_side == Occupants) then {aggressionOccupants} else {aggressionInvaders};
-if (_delay < 0) then { _delay = (0.5 + random 1) * (350 - 15*tierWar - 1*_aggro) };
+if (_delay < 0) then { _delay = (0.5 + random 1) * (100 - _aggro + 22*A3A_enemyResponseTime) };
 
 private _targArray = [];
 if (_target isEqualType objNull and {!isNull _target}) then {
-    A3A_supportStrikes pushBack [_side, "TARGET", _target, time + 1200, 1200, 200];
+    A3A_supportStrikes pushBack [_side, "TARGET", _target, time + 1200, 1200, 100];
     _targArray = [_target, _targPos];
 };
 

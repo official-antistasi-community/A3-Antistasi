@@ -31,10 +31,24 @@ if (isNil "initClientDone") then {
 
 private _flags = (A3A_utilityItemHM get typeof _object) # 4;
 
-// movable object
-// TODO: Do we really want rotate on everything?
 if ("move" in _flags) then {
-    [_object] call A3A_fnc_initMovableObject;
+    _object addAction [
+        localize "STR_A3A_fn_UtilItem_initObjRem_addact_carry",
+        A3A_fnc_carryItem,
+        _object, 1.5, true, true, "",
+        "!(call A3A_fnc_isCarrying) and (vehicle _this == _this)
+            and (isNull attachedTo _originalTarget)", 8
+    ];
+};
+
+if ("rotate" in _flags) then {
+    _object addAction [
+        localize "STR_A3A_fn_UtilItem_initObjRem_addact_rotate",
+        { [_this#3] call A3A_fnc_rotateItem },
+        _object, 1.5, true, true, "",
+        "!(_originalTarget getVariable ['A3A_rotatingObject',false])
+            and (isNull attachedTo _originalTarget)", 8
+    ];
 };
 
 // loot crate object
@@ -42,10 +56,29 @@ if ("loot" in _flags && lootToCrateRadius > 0) then {
     [_object] call A3A_fnc_initLootToCrate;
 };
 
+// building placer box
+if ("build" in _flags) then {
+    _object addAction [
+        localize "STR_A3A_fn_UtilItem_initObjRem_addact_build",
+        { [_this#0, 75, _this#0] spawn A3A_fnc_buildingPlacerStart },
+        nil, 1.5, true, true, "",
+        "(isNull attachedTo _originalTarget)", 4
+    ];
+};
+
+// building placer box with huge crap
+if ("hugebuild" in _flags) then {
+    if(A3A_hasACE) then 
+    {
+        [_object, 4] call ace_cargo_fnc_setSize;
+    };
+    // TODO: find a good way to calculate a new mass for these objects.
+};
+
 // packable object
 if ("pack" in _flags) then {
     _object addAction [
-        "Pack object",
+        localize "STR_A3A_fn_UtilItem_initObjRem_addact_pack",
         { _this#0 call A3A_Logistics_fnc_packObject },
         nil, 1.5, true, true, "",
         "(isNull attachedTo _originalTarget)", 10
@@ -55,7 +88,7 @@ if ("pack" in _flags) then {
 // unpackable object
 if ("unpack" in _flags) then {
     _object addAction [
-        "Unpack object",
+        localize "STR_A3A_fn_UtilItem_initObjRem_addact_unpack",
         { _this#0 call A3A_Logistics_fnc_unpackObject },
         nil, 1.5, true, true, "",
         "(isNull attachedTo _originalTarget)", 10
@@ -65,7 +98,7 @@ if ("unpack" in _flags) then {
 // specific to the tent
 if (typeOf _object == "Land_MedicalTent_01_MTP_closed_F") then {
     _object addAction [
-        "Open Doors",
+        localize "STR_A3A_fn_UtilItem_initObjRem_addact_open",
         { _this#0 animateSource ["Door_Hide", 1, true] },
         nil, 1.5, true, true, "",
         "true", 10

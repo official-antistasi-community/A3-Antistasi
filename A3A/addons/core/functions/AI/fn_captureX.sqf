@@ -15,7 +15,7 @@ private _response = "";
 private _fleeSide = _sideX;
 
 if (_recruiting) then {
-	_playerX globalChat "How about joining the good guys?";
+	_playerX globalChat localize "STR_A3A_fn_ai_captureX_recr1";
 
 	private _chance = 0;
 	if (_sideX == Occupants) then
@@ -33,24 +33,20 @@ if (_recruiting) then {
 	if (random 100 < _chance) then
     {
         _modAggro = [1, 30];
-		_response = "Why not? It can't be any worse.";
+		_response = localize "STR_A3A_fn_ai_captureX_recr_yes1";
 		_modHR = true;
 		_fleeSide = teamPlayer;
 	}
 	else
     {
-		_response =  "Screw you!";
+		_response =  localize "STR_A3A_fn_ai_captureX_recr_no1";
 		_modAggro = [0, 0];
 	};
 }
 else {
-	_playerX globalChat "Go back to your base and tell your comrades we are not enemies. We just want to live in peace";
-	_response = selectRandom [
-		"Okay, thank you. I owe you my life",
-		"Thank you. I swear you won't regret it!",
-		"Thank you, I won't forget this!"
-	];
-
+	_playerX globalChat localize "STR_A3A_fn_ai_captureX_dismiss";
+	private _responseNum = str selectRandom [1,2,3];
+	_response = localize ("STR_A3A_fn_ai_captureX_libresponse" + _responseNum);
     _modAggro = [-3, 30];
 };
 
@@ -70,3 +66,4 @@ if (alive _unit && {!(_unit getVariable ["incapacitated", false])}) then
 
 deleteVehicle _unit;
 deleteGroup _group;
+	

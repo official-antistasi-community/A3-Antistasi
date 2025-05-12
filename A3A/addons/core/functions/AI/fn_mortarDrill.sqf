@@ -1,3 +1,6 @@
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
 private ["_morty","_helperX"];
 
 {if (_x getVariable ["typeOfSoldier",""] == "StaticMortar") then {_morty = _x} else {_helperX = _x}} forEach _this;

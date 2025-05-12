@@ -25,10 +25,10 @@ private _baseCategory = switch (_itemType select 1) do
         case "BombLauncher": {""}; //Only for vehicles //allBombLaunchers pushBack _nameX};
         case "GrenadeLauncher": {""}; //Only for vehicles //allGrenadeLaunchers pushBack _nameX};
         case "Handgun": {"Handguns"};
-        case "Launcher": {""}; //Unused
         case "MachineGun": {"MachineGuns"};
         case "MissileLauncher": {"MissileLaunchers"};
         case "Mortar": {"Mortars"};
+        case "Launcher";                    // SPE panzerfausts
         case "RocketLauncher": {"RocketLaunchers"};
         case "Shotgun": {"Shotguns"};
         case "Throw": {""}; //Unused
@@ -132,13 +132,6 @@ call {
         };
     };
 
-    if (_basecategory == "Backpacks") exitWith {
-        // 160 = assault pack. Just a way to limit which backpacks friendly AI are using.
-        if (getNumber (configFile >> "CfgVehicles" >> _className >> "maximumLoad") >= 160) then {
-            _categories pushBack "BackpacksCargo";
-        };
-    };
-
     if (_basecategory == "Optics") exitWith {
         if (getNumber (configFile >> "CfgWeapons" >> _className >> "ace_scopeAdjust_verticalIncrement") > 0) exitWith { _categories pushBack "OpticsLong" };
         if !(isClass (configFile >> "CfgWeapons" >> _className >> "ItemInfo" >> "OpticsModes")) exitWith {};
@@ -170,8 +163,8 @@ call {
         if (getNumber (_config >> "rhs_disposable") == 1 or _mainmag == "CBA_fakeLauncherMagazine") then {
             _categories pushBack "Disposable";
             if (getNumber (_config >> "scope") == 1) exitWith { _categories set [0, "UsedLaunchers"] };
-            if (_mainmag == "CBA_fakeLauncherMagazine" and !isNil "cba_disposable_normalLaunchers") then {
-                _mainmag = (cba_disposable_normalLaunchers getVariable _classname) # 1;     // format is [realLauncher, magazine]
+            if (_mainmag == "CBA_fakeLauncherMagazine" and !isNil "cba_disposable_normalLaunchers" and {typeName cba_disposable_normalLaunchers == "HASHMAP"}) then {
+                _mainmag = (cba_disposable_normalLaunchers get _classname) # 1;     // format is [realLauncher, magazine]
             };
         };
         if (_categories#0 == "UsedLaunchers") exitWith {};

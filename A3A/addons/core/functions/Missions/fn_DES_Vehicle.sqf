@@ -27,7 +27,7 @@ _nameDest = [_markerX] call A3A_fnc_localizar;
 _typeVehX = selectRandom (_faction get "vehiclesAA");
 
 private _taskId = "DES" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[format ["We know an enemy armor (%3) is stationed in %1. It is a good chance to destroy or steal it before it causes more damage. Do it before %2.",_nameDest,_displayTime,getText (configFile >> "CfgVehicles" >> (_typeVehX) >> "displayName")],"Steal or Destroy Armor",_markerX],_positionX,false,0,true,"Destroy",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[format [localize "STR_A3A_fn_mission_des_veh_text",_nameDest,_displayTime,getText (configFile >> "CfgVehicles" >> (_typeVehX) >> "displayName")],localize "STR_A3A_fn_mission_des_veh_titel",_markerX],_positionX,false,0,true,"Destroy",true] call BIS_fnc_taskCreate;
 [_taskId, "DES", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _truckCreated = false;
@@ -74,7 +74,7 @@ if (spawner getVariable _markerX == 0) then
 		[_taskId, "DES", "SUCCEEDED"] call A3A_fnc_taskSetState;
 		if ({(_x getVariable ["spawner",false]) and (side group _x == teamPlayer)} count crew _veh > 0) then
 			{
-			["TaskFailed", ["", format ["AA Stolen in %1",_nameDest]]] remoteExec ["BIS_fnc_showNotification",_sideX];
+			["TaskFailed", ["", format ["AA Stolen in %1",_nameDest]]] remoteExec ["BIS_fnc_showNotification",_sideX]; //stringtable? this might be obsolete
 			};
 		[0,300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
         [_sideX, 5, 60] remoteExec ["A3A_fnc_addAggression", 2];

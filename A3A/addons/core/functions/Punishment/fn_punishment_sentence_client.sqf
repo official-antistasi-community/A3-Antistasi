@@ -32,7 +32,7 @@ if (_timeLeft < 5) then {_timeLeft = 5;}; // Sometimes something somewhere might
 
 for "_timeLeft" from _timeLeft to _timeLeft-4 step -1 do {
 	if (!isPlayer _detainee) exitWith {false};
-	["FF Punishment", format ["Please do not teamkill. Stare at the turtles for %1 more seconds.",_timeLeft], true] call A3A_fnc_customHint;
+	[localize "STR_A3A_fn_punish_ff_pun", format [localize "STR_A3A_fn_punish_punSenCl_text",_timeLeft], true] call A3A_fnc_customHint;
 	uiSleep 1;
 };
 true;

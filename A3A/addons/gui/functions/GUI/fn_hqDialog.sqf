@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles the initialization and updating of the HQ Dialog
     This function should only be called from HqDialog onLoad and control activation EHs.
 
@@ -17,8 +17,11 @@ Dependencies:
     None
 
 Example:
-    ["onLoad"] spawn A3A_fnc_hqDialog; // initialization
-    ["switchTab", ["garrison"]] call A3A_fnc_hqDialog; // switching to the garrison tab
+    ["onLoad"] spawn FUNC(hqDialog); // initialization
+    ["switchTab", ["garrison"]] call FUNC(hqDialog); // switching to the garrison tab
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -44,27 +47,25 @@ switch (_mode) do
         setGroupIconsSelectable false;
 
         // Show main tab content
-        ["switchTab", ["main"]] call A3A_fnc_hqDialog;
+        ["switchTab", ["main"]] call FUNC(hqDialog);
 
         // Move HQ button
-        // TODO UI-update: Move to updateMainTab?
-        // TODO UI-update: merge in wurzels A3A_fnc_canMoveHQ
-        private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
+        /*private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
         private _moveHqButton = _display displayCtrl A3A_IDC_MOVEHQBUTTON;
 
-        private _canMoveHQ = [] call A3A_fnc_canMoveHQ;
+        private _canMoveHQ = [] call FUNCMAIN(canMoveHQ);
         if (_canMoveHQ # 0) then {
             _moveHqButton ctrlEnable true;
             _moveHqButton ctrlSetTooltip "";
-            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call A3A_fnc_configColorToArray);
+            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
             _moveHqIcon ctrlSetTooltip "";
         } else {
             _moveHqButton ctrlEnable false;
             _moveHqButton ctrlSetTooltip _canMoveHQ # 1;
-            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
             _moveHqIcon ctrlSetTooltip _canMoveHQ # 1;
         };
-
+        */
         // Faction money section setup
         private _factionMoneySlider = _display displayCtrl A3A_IDC_FACTIONMONEYSLIDER;
         private _factionMoney = server getVariable ["resourcesFIA", 0];
@@ -77,13 +78,17 @@ switch (_mode) do
         _restSlider sliderSetRange [0,24];
         _restSlider sliderSetSpeed [1,1];
         _restSlider sliderSetPosition 0;
-        ["restSliderChanged"] spawn A3A_fnc_hqDialog;
+        ["restSliderChanged"] spawn FUNC(hqDialog);
 
         // Garrison tab map drawing EHs
         // Select marker
-        _garrisonMap ctrlAddEventHandler ["Draw", "_this call A3A_fnc_mapDrawSelectEH"];
+        _garrisonMap ctrlAddEventHandler ["Draw", "_this call A3A_GUI_fnc_mapDrawSelectEH"];
         // Outposts
-        _garrisonMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawOutpostsEH"];
+        _garrisonMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
+        // User markers
+        _garrisonMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawUserMarkersEH"];
+        // HC group render
+        _garrisonMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawHcGroupsEH"];
 
         Debug("HqDialog onLoad complete.");
     };
@@ -163,17 +168,17 @@ switch (_mode) do
         {
             case ("main"):
             {
-                ["updateMainTab"] call A3A_fnc_hqDialog;
+                ["updateMainTab"] call FUNC(hqDialog);
             };
 
             case ("garrison"):
             {
-                ["updateGarrisonTab"] call A3A_fnc_hqDialog;
+                ["updateGarrisonTab"] call FUNC(hqDialog);
             };
 
             case ("minefields"):
             {
-                ["updateMinefieldsTab"] call A3A_fnc_hqDialog;
+                ["updateMinefieldsTab"] call FUNC(hqDialog);
             };
         };
     };
@@ -194,16 +199,48 @@ switch (_mode) do
         private _invadersFlag = _display displayCtrl A3A_IDC_INVFLAGPICTURE;
         private _invadersAggroText = _display displayCtrl A3A_IDC_INVAGGROTEXT;
         _warLevelText ctrlSetText str tierWar;
-        _occupantsFlag ctrlSetText NATOFlagTexture;
-        _occupantsAggroText ctrlSetText ([aggressionLevelOccupants] call A3A_fnc_getAggroLevelString);
+        _occupantsFlag ctrlSetText (A3A_faction_occ get "flagTexture");
+        _occupantsAggroText ctrlSetText ([aggressionLevelOccupants] call FUNCMAIN(getAggroLevelString));
         _aggressionStr = localize "STR_antistasi_dialogs_generic_aggression";
-        _occupantsFlag ctrlSetToolTip (nameOccupants + " " + _aggressionStr);
-        _occupantsAggroText ctrlSetTooltip (nameOccupants + " " + _aggressionStr);
-        _invadersFlag ctrlSetText CSATFlagTexture;
-        _invadersAggroText ctrlSetText ([aggressionLevelInvaders] call A3A_fnc_getAggroLevelString);
-        _invadersFlag ctrlSetToolTip (nameInvaders + " " + _aggressionStr);
-        _invadersAggroText ctrlSetTooltip (nameInvaders + " " + _aggressionStr);
+        private _nameOccupants = A3A_faction_occ get "name";
+        _occupantsFlag ctrlSetToolTip (_nameOccupants + " " + _aggressionStr);
+        _occupantsAggroText ctrlSetTooltip (_nameOccupants + " " + _aggressionStr);
+        _invadersFlag ctrlSetText (A3A_faction_inv get "flagTexture");
+        _invadersAggroText ctrlSetText ([aggressionLevelInvaders] call FUNCMAIN(getAggroLevelString));
+        private _nameInvaders = A3A_faction_inv get "name";
+        _invadersFlag ctrlSetToolTip (_nameInvaders + " " + _aggressionStr);
+        _invadersAggroText ctrlSetTooltip (_nameInvaders + " " + _aggressionStr);
 
+        // Skip time condition
+        private _restButton = _display displayCtrl A3A_IDC_RESTBUTTON;
+        private _error = [] call FUNCMAIN(canSkipTime);
+        if (_error isEqualTo "") then {
+            _restButton ctrlEnable true;
+            _restButton ctrlSetTooltip "";
+            _restButton ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+        } else {
+            _restButton ctrlEnable false;
+            _restButton ctrlSetTooltip _error;
+            _restButton ctrlSetTextColor ([A3A_COLOR_BUTTON_TEXT_DISABLED] call FUNC(configColorToArray));
+        };
+
+        // Move HQ condition
+        private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
+        private _moveHqButton = _display displayCtrl A3A_IDC_MOVEHQBUTTON;
+
+        private _canMoveHQ = [] call FUNCMAIN(canMoveHQ);
+        if (_canMoveHQ # 0) then {
+            _moveHqButton ctrlEnable true;
+            _moveHqButton ctrlSetTooltip "";
+            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+            _moveHqIcon ctrlSetTooltip "";
+        } else {
+            _moveHqButton ctrlEnable false;
+            _moveHqButton ctrlSetTooltip _canMoveHQ # 1;
+            _moveHqIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+            _moveHqIcon ctrlSetTooltip _canMoveHQ # 1;
+        };
+        
         // Get location data
         private _controlledCities = {sidesX getVariable [_x, sideUnknown] == teamPlayer} count citiesX;
         private _totalCities = count citiesX;
@@ -290,6 +327,8 @@ switch (_mode) do
         private _trainingText = _display displayCtrl A3A_IDC_FACTIONTRAININGTEXT;
         _hrText ctrlSetText str _hr;
         _trainingText ctrlSetText format ["%1 / 20", _trainingLevel];
+        private _trainingTooltip = _display displayCtrl A3A_IDC_FACTIONTRAININGBUTTON;
+        _trainingTooltip ctrlSetTooltip (format [localize "STR_antistasi_dialogs_hq_train_tooltip",1000 + (1.5*((skillFIA) *750))]);
 
         private _factionMoney = server getVariable ["resourcesFIA", 0];
         private _factionMoneyText = _display displayCtrl A3A_IDC_FACTIONMONEYTEXT;
@@ -306,6 +345,7 @@ switch (_mode) do
     case ("updateGarrisonTab"):
     {
         _display = findDisplay A3A_IDD_HQDIALOG;
+        if (isNull _display) exitWith {};
 
         // Update titlebar
         _titleBar = _display displayCtrl A3A_IDC_HQDIALOGTITLEBAR;
@@ -315,7 +355,7 @@ switch (_mode) do
         private _backButton = _display displayCtrl A3A_IDC_HQDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["main"]] call A3A_fnc_hqDialog;
+            ["switchTab", ["main"]] call FUNC(hqDialog);
         }];
         _backButton ctrlShow true;
 
@@ -331,23 +371,25 @@ switch (_mode) do
         {
             Trace("No marker selected, selecting HQ");
             _hqMapPos = _garrisonMap ctrlMapWorldToScreen (getMarkerPos "Synd_HQ");
-            ["garrisonMapClicked", [_hqMapPos]] call A3A_fnc_hqDialog;
+            ["garrisonMapClicked", [_hqMapPos]] call FUNC(hqDialog);
         };
 
         // Get the data from the marker
         private _position = getMarkerPos _selectedMarker;
-        private _garrisonName = [_selectedMarker] call A3A_fnc_getLocationMarkerName;
+        private _garrisonName = [_selectedMarker] call A3A_GUI_fnc_getLocationMarkerName;
         private _garrison = garrison getVariable [_selectedMarker, []];
 
         // Get garrison counts
-        private _rifleman = {_x in SDKMil} count _garrison;
-        private _squadLeader = {_x in SDKSL} count _garrison;
-        private _autorifleman = {_x in SDKMG} count _garrison;
-        private _grenadier = {_x in SDKGL} count _garrison;
-        private _medic = {_x in SDKMedic} count _garrison;
-        private _mortar = {_x in staticCrewTeamPlayer} count _garrison;
-        private _marksman = {_x in SDKSniper} count _garrison;
-        private _at = {_x in SDKATman} count _garrison;
+        private _rifleman = {_x in FactionGet(reb,"unitRifle")} count _garrison;
+        private _squadLeader = {_x in FactionGet(reb,"unitSL")} count _garrison;
+        private _autorifleman = {_x in FactionGet(reb,"unitMG")} count _garrison;
+        private _grenadier = {_x in FactionGet(reb,"unitGL")} count _garrison;
+        private _medic = {_x in FactionGet(reb,"unitMedic")} count _garrison;
+        private _mortar = {_x in FactionGet(reb,"unitCrew")} count _garrison;
+        private _marksman = {_x in FactionGet(reb,"unitSniper")} count _garrison;
+        private _at = {_x in FactionGet(reb,"unitLAT")} count _garrison;
+        private _atMissile = {_x in FactionGet(reb,"unitAT")} count _garrison;
+        private _aaMissile = {_x in FactionGet(reb,"unitAA")} count _garrison;
 
         // Get controls
         private _garrisonTitle = _display displayCtrl A3A_IDC_GARRISONTITLE;
@@ -359,6 +401,8 @@ switch (_mode) do
         private _mortarNumber = _display displayCtrl A3A_IDC_MORTARNUMBER;
         private _marksmanNumber = _display displayCtrl A3A_IDC_MARKSMANNUMBER;
         private _atNumber = _display displayCtrl A3A_IDC_ATNUMBER;
+        private _atMissileNumber = _display displayCtrl A3A_IDC_ATMISSILENUMBER;
+        private _aaMissileNumber = _display displayCtrl A3A_IDC_AAMISSILENUMBER;
 
         // Add currently selected marker to map, we need it later for... stuff...
         _garrisonMap setVariable ["selectedMarker", _selectedMarker];
@@ -373,6 +417,8 @@ switch (_mode) do
         _mortarNumber ctrlSetText str _mortar;
         _marksmanNumber ctrlSetText str _marksman;
         _atNumber ctrlSetText str _at;
+        _atMissileNumber ctrlSetText str _atMissile;
+        _aaMissileNumber ctrlSetText str _aaMissile;
 
         // Buttons
         _riflemanAddButton = _display displayCtrl A3A_IDC_RIFLEMANADDBUTTON;
@@ -391,6 +437,10 @@ switch (_mode) do
         _marksmanSubButton = _display displayCtrl A3A_IDC_MARKSMANSUBBUTTON;
         _atAddButton = _display displayCtrl A3A_IDC_ATADDBUTTON;
         _atSubButton = _display displayCtrl A3A_IDC_ATSUBBUTTON;
+        _atMissileAddButton = _display displayCtrl A3A_IDC_ATMISSILEADDBUTTON;
+        _atMissileSubButton = _display displayCtrl A3A_IDC_ATMISSILESUBBUTTON;
+        _aaMissileAddButton = _display displayCtrl A3A_IDC_AAMISSILEADDBUTTON;
+        _aaMissileSubButton = _display displayCtrl A3A_IDC_AAMISSILESUBBUTTON;
 
         _rebuildGarrisonButton = _display displayCtrl A3A_IDC_REBUILDGARRISONBUTTON;
         _dismissGarrisonButton = _display displayCtrl A3A_IDC_DISMISSGARRISONBUTTON;
@@ -411,7 +461,11 @@ switch (_mode) do
             _marksmanAddButton,
             _marksmanSubButton,
             _atAddButton,
-            _atSubButton
+            _atSubButton,
+            _atMissileAddButton,
+            _atMissileSubButton,
+            _aaMissileAddButton,
+            _aaMissileSubButton
         ];
 
         // Reset ctrlEnable for all management buttons
@@ -431,16 +485,20 @@ switch (_mode) do
         if (_mortar < 1) then {_mortarSubButton ctrlEnable false};
         if (_marksman < 1) then {_marksmanSubButton ctrlEnable false};
         if (_at < 1) then {_atSubButton ctrlEnable false};
+        if (_atMissile < 1) then {_atMissileSubButton ctrlEnable false};
+        if (_aaMissile < 1) then {_aaMissileSubButton ctrlEnable false};
 
         // Get prices
-        _riflemanPrice = server getVariable (SDKMil # 0);
-        _squadLeaderPrice = server getVariable (SDKSL # 0);
-        _autoriflemanPrice = server getVariable (SDKMG # 0);
-        _grenadierPrice = server getVariable (SDKGL # 0);
-        _medicPrice = server getVariable (SDKMedic # 0);
-        _mortarPrice = (server getVariable staticCrewTeamPlayer) + ([SDKMortar] call A3A_fnc_vehiclePrice);
-        _marksmanPrice = server getVariable (SDKSniper # 0);
-        _atPrice = server getVariable (SDKATman # 0);
+        _riflemanPrice = server getVariable (FactionGet(reb,"unitRifle"));
+        _squadLeaderPrice = server getVariable (FactionGet(reb,"unitSL"));
+        _autoriflemanPrice = server getVariable (FactionGet(reb,"unitMG"));
+        _grenadierPrice = server getVariable (FactionGet(reb,"unitGL"));
+        _medicPrice = server getVariable (FactionGet(reb,"unitMedic"));
+        _mortarPrice = (server getVariable FactionGet(reb,"unitCrew")) + ([FactionGet(reb,"staticMortars")#0] call FUNCMAIN(vehiclePrice));
+        _marksmanPrice = server getVariable (FactionGet(reb,"unitSniper"));
+        _atPrice = server getVariable (FactionGet(reb,"unitLAT"));
+        _atMissilePrice = server getVariable (FactionGet(reb,"unitAT"));
+        _aaMissilePrice = server getVariable (FactionGet(reb,"unitAA"));
 
         // Update price labels
         _riflemanPriceText = _display displayCtrl A3A_IDC_RIFLEMANPRICE;
@@ -451,6 +509,8 @@ switch (_mode) do
         _mortarPriceText = _display displayCtrl A3A_IDC_MORTARPRICE;
         _marksmanPriceText = _display displayCtrl A3A_IDC_MARKSMANPRICE;
         _atPriceText = _display displayCtrl A3A_IDC_ATPRICE;
+        _atMissilePriceText = _display displayCtrl A3A_IDC_ATMISSILEPRICE;
+        _aaMissilePriceText = _display displayCtrl A3A_IDC_AAMISSILEPRICE;
 
         _riflemanPriceText ctrlSetText str _riflemanPrice + "€";
         _squadLeaderPriceText ctrlSetText str _squadLeaderPrice + "€";
@@ -460,6 +520,8 @@ switch (_mode) do
         _mortarPriceText ctrlSetText str _mortarPrice + "€";
         _marksmanPriceText ctrlSetText str _marksmanPrice + "€";
         _atPriceText ctrlSetText str _atPrice + "€";
+        _atMissilePriceText ctrlSetText str _atMissilePrice + "€";
+        _aaMissilePriceText ctrlSetText str _aaMissilePrice + "€";
 
         // Disable add buttons if faction is lacking the resources to recruit them (1HR + money)
         _hr = server getVariable ["hr", 0];
@@ -473,11 +535,22 @@ switch (_mode) do
         if (_factionMoney < _mortarPrice || _hr < 1) then {_mortarAddButton ctrlEnable false; _mortarAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _marksmanPrice || _hr < 1) then {_marksmanAddButton ctrlEnable false; _marksmanAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _atPrice || _hr < 1) then {_atAddButton ctrlEnable false; _atAddButton ctrlSetTooltip _noResourcesText};
+        if (_factionMoney < _atMissilePrice || _hr < 1) then {_atMissileAddButton ctrlEnable false; _atMissileAddButton ctrlSetTooltip _noResourcesText};
+        if (_factionMoney < _aaMissilePrice || _hr < 1) then {_aaMissileAddButton ctrlEnable false; _aaMissileAddButton ctrlSetTooltip _noResourcesText};
+
+        // Disable add button for mortar if selecting marker in outpostsFIA;
+        private _noRoadblockMortarText = localize "STR_A3A_garrison_error_no_mortar";
+        if (_selectedMarker in outpostsFIA) then {
+            _mortarAddButton ctrlEnable false; 
+            _mortarAddButton ctrlSetTooltip _noRoadblockMortarText;
+            _mortarNumber ctrlSetText "0";
+            _mortarSubButton ctrlEnable false; // pretend like no mortars exist because the roadblock still has unitCrew for the vic
+        };
+
+        ["updateGarrisonWepNum"] spawn A3A_GUI_fnc_hqDialog;
 
         // Disable any management buttons if garrison is under attack
-        // TODO UI-update: This is very placeholdery atm, replace with A3A_fnc_enemyNearCheck on merge
-        private _garrisonUnderAttack = false;
-        if (_selectedMarker isEqualTo "outpost_1") then {_garrisonUnderAttack = true};
+        private _garrisonUnderAttack = [markerPos _selectedMarker] call FUNCMAIN(enemyNearCheck);
         if (_garrisonUnderAttack) then {
             _garrisonAttackText = localize "STR_antistasi_dialogs_hq_garrisons_under_attack";
             {
@@ -495,6 +568,27 @@ switch (_mode) do
         _garrisonMap ctrlMapAnimAdd [0.2, ctrlMapScale _garrisonMap, _position];
         ctrlMapAnimCommit _garrisonMap;
     };
+    
+    case ("updateGarrisonWepNum"):
+    { // Scheduled
+        
+        _autoriflemanAddButton = _display displayCtrl A3A_IDC_AUTORIFLEMANADDBUTTON;
+        _grenadierAddButton = _display displayCtrl A3A_IDC_GRENADIERADDBUTTON;
+        _marksmanAddButton = _display displayCtrl A3A_IDC_MARKSMANADDBUTTON;
+        _atAddButton = _display displayCtrl A3A_IDC_ATADDBUTTON;
+        _atMissileAddButton = _display displayCtrl A3A_IDC_ATMISSILEADDBUTTON;
+        _aaMissileAddButton = _display displayCtrl A3A_IDC_AAMISSILEADDBUTTON;
+
+        call A3A_fnc_fetchRebelGear;
+        private _noGearText = localize "STR_A3A_garrison_error_no_weapons";
+        
+        if !([A3A_faction_reb get "unitMG",false] call A3A_fnc_hasWeapons) then {_autoriflemanAddButton ctrlEnable false; _autoriflemanAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitGL",false] call A3A_fnc_hasWeapons) then {_grenadierAddButton ctrlEnable false; _grenadierAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitSniper",false] call A3A_fnc_hasWeapons) then {_marksmanAddButton ctrlEnable false; _marksmanAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitLAT",false] call A3A_fnc_hasWeapons) then {_atAddButton ctrlEnable false; _atAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitAT",false] call A3A_fnc_hasWeapons) then {_atMissileAddButton ctrlEnable false; _atMissileAddButton ctrlSetTooltip _noGearText};
+        if !([A3A_faction_reb get "unitAA",false] call A3A_fnc_hasWeapons) then {_aaMissileAddButton ctrlEnable false; _aaMissileAddButton ctrlSetTooltip _noGearText};
+    };
 
     case ("updateMinefieldsTab"):
     {
@@ -508,7 +602,7 @@ switch (_mode) do
         private _backButton = _display displayCtrl A3A_IDC_HQDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["main"]] call A3A_fnc_hqDialog;
+            ["switchTab", ["main"]] call FUNC(hqDialog);
         }];
         _backButton ctrlShow true;
     };
@@ -517,11 +611,11 @@ switch (_mode) do
     {
         private _restSlider = _display displayCtrl A3A_IDC_RESTSLIDER;
         private _restText = _display displayCtrl A3A_IDC_RESTTEXT;
-        private _time = sliderPosition _restSlider;
-        private _restTimeString = [_time, "HM", true] call A3A_fnc_formatTime;
-        private _postRestTime = daytime + _time;
-        if (_postRestTime > 24) then {_postRestTime = _postRestTime - 24};
-        private _postRestTimeString = [_postRestTime, "HH:MM"] call BIS_fnc_timeToString;
+        private _timeHours = sliderPosition _restSlider;
+        private _restTimeString = [_timeHours * 60 * 60,1,1,false,2,false,true] call FUNCMAIN(timeSpan_format);
+
+        private _postRestTime = (daytime + _timeHours) * 60 * 60;
+        private _postRestTimeString = [_postRestTime,2,2,false,[1,3],true,false] call FUNCMAIN(timeSpan_format);
         private _message = format [localize "STR_antistasi_dialogs_hq_rest_text" + "<br />" + localize "STR_antistasi_dialogs_hq_wakeup_text", _restTimeString, _postRestTimeString];
         _restText ctrlSetStructuredText parseText _message;
     };
@@ -550,8 +644,8 @@ switch (_mode) do
     {
         private _factionMoneyEditBox = _display displayCtrl A3A_IDC_FACTIONMONEYEDITBOX;
         private _factionMoneyEditBoxValue = floor parseNumber ctrlText _factionMoneyEditBox;
-        [_factionMoneyEditBoxValue] call A3A_fnc_theBossSteal;
-        ["updateMainTab"] call A3A_fnc_hqDialog;
+        [_factionMoneyEditBoxValue] call FUNCMAIN(theBossSteal);
+        ["updateMainTab"] call FUNC(hqDialog);
     };
 
     case ("garrisonMapClicked"):
@@ -577,7 +671,7 @@ switch (_mode) do
         private _position = getMarkerPos _selectedMarker;
         _garrisonMap setVariable ["selectMarkerData", [_position]];
 
-        ["updateGarrisonTab"] call A3A_fnc_hqDialog;
+        ["updateGarrisonTab"] call FUNC(hqDialog);
     };
 
     // Updating the garrison numbers
@@ -589,36 +683,40 @@ switch (_mode) do
         private _unitType = switch (_type) do
         {
             case ("rifleman"): {
-                SDKMil;
+                "unitRifle";
             };
             case ("squadleader"): {
-                SDKSL;
+                "unitSL";
             };
             case ("autorifleman"): {
-                SDKMG;
+                "unitMG";
             };
             case ("grenadier"): {
-                SDKGL;
+                "unitGL";
             };
             case ("medic"): {
-                SDKMedic;
+                "unitMedic";
             };
             case ("mortar"): {
-                staticCrewTeamPlayer;
+                "unitCrew";
             };
             case ("marksman"): {
-                SDKSniper;
+                "unitSniper";
             };
             case ("at"): {
-                SDKATman;
+                "unitLAT";
+            };
+            case ("atMissile"): {
+                "unitAT";
+            };
+            case ("aaMissile"): {
+                "unitAA";
             };
         };
 
-        [_unitType, _selectedMarker] spawn A3A_fnc_garrisonAdd;
-
-        sleep 1; // TODO UI-update: bad hack to make it correctly update the UI with the new number
-
-        ["updateGarrisonTab"] call A3A_fnc_hqDialog;
+        _unitType = A3A_faction_reb get _unitType;
+        [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonAdd);
+        // tab will update automatically
     };
 
     case ("garrisonRemove"):
@@ -629,37 +727,41 @@ switch (_mode) do
         private _unitType = switch (_type) do
         {
             case ("rifleman"): {
-                SDKMil;
+                "unitRifle";
             };
             case ("squadleader"): {
-                SDKSL;
+                "unitSL";
             };
             case ("autorifleman"): {
-                SDKMG;
+                "unitMG";
             };
             case ("grenadier"): {
-                SDKGL;
+                "unitGL";
             };
             case ("medic"): {
-                SDKMedic;
+                "unitMedic";
             };
             case ("mortar"): {
-                staticCrewTeamPlayer;
+                "unitCrew";
             };
             case ("marksman"): {
-                SDKSniper;
+                "unitSniper";
             };
             case ("at"): {
-                SDKATman;
+                "unitLAT";
+            };
+            case ("atMissile"): {
+                "unitAT";
+            };
+            case ("aaMissile"): {
+                "unitAA";
             };
         };
 
-        Debug_2("Calling A3A_fnc_garrisonRemove with [%1,%2]", _unitType, _selectedMarker);
-        [_unitType, _selectedMarker] spawn A3A_fnc_garrisonRemove;
-
-        sleep 1; // TODO UI-update: bad hack to make it correctly update the UI with the new number
-
-        ["updateGarrisonTab"] call A3A_fnc_hqDialog;
+        Debug_2("Calling FUNCMAIN(garrisonRemove) with [%1,%2]", _unitType, _selectedMarker);
+        _unitType = A3A_faction_reb get _unitType;
+        [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonRemove);
+        // tab will update automatically
     };
 
     case ("dismissGarrison"):
@@ -667,56 +769,38 @@ switch (_mode) do
         Trace("Dismissing garrison");
 
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
-        [_selectedMarker] spawn A3A_fnc_dismissGarrison;
-
-        sleep 1; // Same stupd hack as before, need to fix this
-
-        ["updateGarrisonTab"] call A3A_fnc_hqDialog;
+        ["", _selectedMarker] spawn A3A_fnc_garrisonDialog;
     };
 
     case ("skipTime"):
     {
         private _restSlider = _display displayCtrl A3A_IDC_RESTSLIDER;
         private _time = sliderPosition _restSlider;
-
-        // TODO UI-update: Move all these checks to update and disable button etc
-        if (player!= theBoss) exitWith {["Skip Time / Rest", "Only the Commander can order to rest."] call A3A_fnc_customHint;};
-        _enemiesNear = false;
-
-        {
-            if ((side _x == Occupants) or (side _x == Invaders)) then
-        	{
-            	if ([500,1,_x,teamPlayer] call A3A_fnc_distanceUnits) then {_presente = true};
-        	};
-        } forEach allUnits;
-        if (_enemiesNear) exitWith {["Skip Time / Rest", "You cannot rest while enemies are near our units."] call A3A_fnc_customHint;};
-        if ("rebelAttack" in A3A_activeTasks) exitWith {["Skip Time / Rest", "You cannot rest while the enemy is counterattacking."] call A3A_fnc_customHint;};
-        if ("invaderPunish" in A3A_activeTasks) exitWith {["Skip Time / Rest", "You cannot rest while citizens are under attack."] call A3A_fnc_customHint;};
-        if ("DEF_HQ" in A3A_activeTasks) exitWith {["Skip Time / Rest", "You cannot rest while your HQ is under attack."] call A3A_fnc_customHint;};
-
-        _playersNotAtHq = false;
-        _posHQ = getMarkerPos respawnTeamPlayer;
-        {
-            if ((_x distance _posHQ > 100) and (side _x == teamPlayer)) then {_checkX = true};
-        } forEach (allPlayers - (entities "HeadlessClient_F"));
-
-        if (_playersNotAtHq) exitWith {["Skip Time / Rest", "All players must be in a 100m radius from HQ to be able to rest."] call A3A_fnc_customHint;};
-
-        [_time] remoteExec ["A3A_fnc_resourceCheckSkipTime", 0];
+        [_time] call FUNCMAIN(skipTime);
 
         closeDialog 1;
     };
 
+    /*
     case ("buildWatchpost"):
     {
         closeDialog 1;
-        ["create"] spawn A3A_fnc_outpostDialog;
+        ["create"] spawn FUNCMAIN(outpostDialog);
     };
 
     case ("removeWatchpost"):
     {
         // TODO UI-update: this was apparently deprecated and uses dismiss garrison instead, considering replacing/removing this button
         closeDialog 1;
+    };
+    */
+
+    case ("rebuildAssets"):
+    {
+        Trace("Rebuilding assets");
+
+        private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
+        [_selectedMarker] spawn FUNCMAIN(rebuildAssets);
     };
 
     default

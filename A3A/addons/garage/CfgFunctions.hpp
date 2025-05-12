@@ -14,6 +14,7 @@ class CfgFunctions
             class execForGarageUsers {};
             class genVehUID {};
             class getCatIndex {};
+            class getLockCount {};
             class onLoad {};
             class onUnload {};
             class reciveBroadcast {};
@@ -25,6 +26,8 @@ class CfgFunctions
             class requestSelectionChange {};
             class requestVehicle {};
             class selectionChange {};
+            class sellVehGRG {};
+            class sellVehGRGLocal {};
             class switchCategory {};
             class toggleConfirmBttn {};
             class toggleLock {};

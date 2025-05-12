@@ -7,12 +7,12 @@ if(isDedicated) exitWith {};
 
 if(isMultiplayer && {!isServer} && {!(call BIS_fnc_admin > 0)}) exitWith
 {
-    ["Convoy Test", "Only server admins can execute the convoy test!"] call A3A_fnc_customHint;
+    ["Convoy Test", "Only server admins can execute the convoy test!"] call A3A_fnc_customHint;//no localization needed
 };
 
 markedPos = [];
 
-["Convoy Test", "Select the spot from which the convoy will start."] call A3A_fnc_customHint;
+["Convoy Test", "Select the spot from which the convoy will start."] call A3A_fnc_customHint;//no localization needed
 
 if (!visibleMap) then {openMap true};
 onMapSingleClick "markedPos = _pos;";
@@ -31,7 +31,7 @@ _startMarker setMarkerTypeLocal "hd_destroy";
 _startMarker setMarkerColorLocal "ColorRed";
 _startMarker setMarkerTextLocal "Convoy Start";
 
-["Convoy Test", "Select the spot to which the convoy will go."] call A3A_fnc_customHint;
+["Convoy Test", "Select the spot to which the convoy will go."] call A3A_fnc_customHint;//no localization needed
 
 onMapSingleClick "markedPos = _pos;";
 
@@ -48,7 +48,7 @@ deleteMarker _startMarker;
 
 if(_path isEqualTo []) exitWith
 {
-    ["Convoy Test", "Cannot find a path between the given points!"] call A3A_fnc_customHint;
+    ["Convoy Test", "Cannot find a path between the given points!"] call A3A_fnc_customHint;//no localization needed
 };
 
 [_path, 600] call A3A_fnc_drawPath;

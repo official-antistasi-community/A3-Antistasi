@@ -47,7 +47,7 @@
 
 ["vehiclesArtillery", ["rhs_2s1_tv", "rhs_2s3_tv", "RHS_BM21_VV_01"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
-["rhs_2s1_tv", ["rhs_mag_3of56_10"]],
+["rhs_2s1_tv", ["rhs_mag_3of56_35"]],
 ["rhs_2s3_tv",["rhs_mag_HE_2a33", "rhs_mag_WP_2a33"]],
 ["RHS_BM21_VV_01", ["rhs_mag_m21of_1"]]
 ]] call _fnc_saveToTemplate;

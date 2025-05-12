@@ -95,7 +95,7 @@ private _finalWeights = [];
         // just base this on population?
         private _baseValue = sqrt ((server getVariable _x) # 0);                   // Low-value but threat is probably low too due to lack of garrison
         if (_side == Occupants) exitWith { _baseValue * (1.5 - tierWar / 10) };    // Occupants more likely to care about towns at low tiers
-        _baseValue * (tierWar / 5);                                                // Invaders more likely to care at high tiers
+        _baseValue * (tierWar / 5) / (1 + A3A_punishmentDefBuff);                  // Invaders more likely to care at high tiers but devalued by failed punishments
     } else {
         private _baseValue = call {
             if (_x in outposts) exitWith { [20, 25] select (count (_radioTowers inAreaArray _x) > 0) };

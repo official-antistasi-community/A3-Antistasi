@@ -27,11 +27,13 @@ _nul = [_oldUnit] spawn A3A_fnc_postmortem;
 _oldUnit setVariable ["incapacitated",false,true];
 _newUnit setVariable ["incapacitated",false,true];
 
+[true] call A3A_fnc_selfReviveReset;
+
 if (side group player == teamPlayer) then
 	{
 	_owner = _oldUnit getVariable ["owner",_oldUnit];
 
-	if (_owner != _oldUnit) exitWith {["Remote AI", "Died while remote controlling AI."] call A3A_fnc_customHint; selectPlayer _owner; disableUserInput false; deleteVehicle _newUnit};
+	if (_owner != _oldUnit) exitWith {[localize "STR_A3A_fn_proxy_remAI_titel", localize "STR_A3A_fn_proxy_remAI_text"] call A3A_fnc_customHint; selectPlayer _owner; disableUserInput false; deleteVehicle _newUnit};
 
 	_nul = [0,-1,getPosATL _oldUnit] remoteExec ["A3A_fnc_citySupportChange",2];
 
@@ -88,9 +90,63 @@ if (side group player == teamPlayer) then
 		[player] call A3A_fnc_punishment_FF_addEH;
 		[] spawn A3A_fnc_outOfBounds;
 	};
+<<<<<<< HEAD
+=======
+	player addEventHandler ["HandleHeal",
+		{
+		_player = _this select 0;
+		if (captive _player) then
+			{
+			if ({((side _x== Invaders) or (side _x== Occupants)) and (_x knowsAbout player > 1.4)} count allUnits > 0) then
+				{
+				[_player,false] remoteExec ["setCaptive",0,_player];
+				_player setCaptive false;
+				}
+			else
+				{
+				_city = [citiesX,_player] call BIS_fnc_nearestPosition;
+				_size = [_city] call A3A_fnc_sizeMarker;
+				_dataX = server getVariable _city;
+				if (random 100 < _dataX select 2) then
+					{
+					if (_player distance getMarkerPos _city < _size * 1.5) then
+						{
+						[_player,false] remoteExec ["setCaptive",0,_player];
+						_player setCaptive false;
+						};
+					};
+				};
+			}
+		}
+		];
+	player addEventHandler ["WeaponAssembled",
+		{
+			private _veh = _this select 1;
+			[_veh, teamPlayer] call A3A_fnc_AIVEHinit;		// will flip/capture if already initialized
+			if (_veh isKindOf "StaticWeapon") then {
+				if (not(_veh in staticsToSave)) then {
+					staticsToSave pushBack _veh;
+					publicVariable "staticsToSave";
+				};
+				_markersX = markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
+				_pos = position _veh;
+				if (_markersX findIf {_pos inArea _x} != -1) then {[localize "STR_A3A_fn_proxy_statDepl_titel", localize "STR_A3A_fn_proxy_statDepl_text"] call A3A_fnc_customHint;};
+			};
+		}];
+	player addEventHandler ["WeaponDisassembled",
+			{
+			_bag1 = _this select 1;
+			_bag2 = _this select 2;
+			//_bag1 = objectParent (_this select 1);
+			//_bag2 = objectParent (_this select 2);
+			[_bag1] remoteExec ["A3A_fnc_postmortem", 2];
+			[_bag2] remoteExec ["A3A_fnc_postmortem", 2];
+			}
+		];
+>>>>>>> unstable
 	[] spawn A3A_fnc_unitTraits;
 	[] spawn A3A_fnc_statistics;
-	call A3A_fnc_dropObject;
+	A3A_aliveTime = time;
 	}
 else
 	{

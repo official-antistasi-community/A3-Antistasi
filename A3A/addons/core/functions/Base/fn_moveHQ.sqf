@@ -29,6 +29,8 @@ Example:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 private _possible = [] call A3A_fnc_canMoveHQ;
+private _titleStr = localize "STR_A3A_fn_base_movehq_garrison";
+
 if !(_possible#0) exitWith {};
 
 private _groupPetros = group petros;
@@ -53,7 +55,7 @@ if (count _garrison > 0) then
     private _hr = 0;
     if (allUnits findIf {(alive _x) && (!captive _x) && ((side (group _x) == Occupants) || (side (group _x) == Invaders)) && {_x distance2D _posHQ < 500}} != -1) then
     {
-        ["Garrison", "HQ Garrison will stay here and distract the enemy."] call A3A_fnc_customHint;
+        [_titleStr, localize "STR_A3A_fn_base_movehq_stay"] call A3A_fnc_customHint;
         //Is there a despawn routine attached to them?
         //Why are they getting refunded if they stay?
     }
@@ -94,7 +96,7 @@ if (count _garrison > 0) then
     } forEach _garrison;
     [_hr,_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
     garrison setVariable ["Synd_HQ",[],true];
-    ["Garrison", format ["Garrison removed<br/><br/>Recovered Money: %1 €<br/>Recovered HR: %2",_costs,_hr]] call A3A_fnc_customHint;
+    [_titleStr, format [localize "STR_A3A_fn_base_movehq_removed",_costs,_hr]] call A3A_fnc_customHint;
 };
 
 sleep 5;

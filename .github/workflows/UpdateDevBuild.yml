@@ -27,7 +27,7 @@ jobs:
       run: '.\tools\Builder\buildAddons.ps1 -WorkshopID ${{github.event.inputs.workshopid}} -modFileName mod_dev.cpp'
 
     - name: Upload build addon artifact
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v4
       with:
         name: A3A
         path: build\A3A
@@ -38,7 +38,7 @@ jobs:
     needs: [build]
     steps:
     - name: Download addon artifact
-      uses: actions/download-artifact@v3.0.2
+      uses: actions/download-artifact@v4
       with:
         name: A3A
         path: A3A

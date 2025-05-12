@@ -63,11 +63,11 @@ if (_intelType == "Small") then
             private _nextAttack = (0.7 + random 0.6) * (-_atkRes / _atkResRate);
             if(_nextAttack < 5) then
             {
-                _text = format ["%1 attack is imminent!", _sideName];
+                _text = format [localize "STR_A3A_fn_intel_select_time_1", _sideName];
             }
             else
             {
-                _text = format ["%1 attack expected in %2 minutes", _sideName, round (_nextAttack)];
+                _text = format [localize "STR_A3A_fn_intel_select_time_2", _sideName, round (_nextAttack)];
             };
         };
         case (DEF_RESOURCES):
@@ -77,11 +77,11 @@ if (_intelType == "Small") then
 
             private _fraction = _defRes / _defResCap;
             private _fmt = call {
-                if (_fraction > 0.75) exitWith { "%1 has plenty of defence reserves available" };
-                if (_fraction > 0.50) exitWith { "%1 has moderate defence reserves available" };
-                if (_fraction > 0.25) exitWith { "%1 is short on defence reserves" };
-                if (_fraction > 0.00) exitWith { "%1 has almost no defence reserves left" };
-                "%1 is completely out of defence reserves!";
+                if (_fraction > 0.75) exitWith { localize "STR_A3A_fn_intel_select_reso_1" };
+                if (_fraction > 0.50) exitWith { localize "STR_A3A_fn_intel_select_reso_2" };
+                if (_fraction > 0.25) exitWith { localize "STR_A3A_fn_intel_select_reso_3" };
+                if (_fraction > 0.00) exitWith { localize "STR_A3A_fn_intel_select_reso_4" };
+                localize "STR_A3A_fn_intel_select_reso_5";
             };
             _text = format [_fmt, _sideName];
         };
@@ -95,7 +95,7 @@ if (_intelType == "Small") then
             {
                 invaderRadioKeys = invaderRadioKeys + 1;
             };
-            _text = format ["We found a %1 decryption key!<br/>It allows us to fully decrypt the next support call.", _sideName];
+            _text = format [localize "STR_A3A_fn_intel_select_decry_1", _sideName];
         };
         case (CONVOY):
         {
@@ -113,11 +113,11 @@ if (_intelType == "Small") then
             if(count _convoyMarker != 0) then
             {
                 (selectRandom _convoyMarker) setMarkerAlpha 1;
-                _text = format ["We found the tracking data for a %1 convoy.<br/>Convoy position marked on map!", _sideName];
+                _text = format [localize "STR_A3A_fn_intel_select_conv_1", _sideName];
             }
             else
             {
-                _text = format ["There are currently no %1 convoys driving around!", _sideName];
+                _text = format [localize "STR_A3A_fn_intel_select_conv_2", _sideName];
             };
         };
     };
@@ -139,7 +139,7 @@ if (_intelType == "Medium") then
             {
                 invaderRadioKeys = invaderRadioKeys + _keyCount;
             };
-            _text = format ["You found a package of %1 decryption keys!<br/>They allow your faction to decrypt support calls.", _sideName];
+            _text = format [localize "STR_A3A_fn_intel_select_decry_2", _sideName];
         };
 /*
         // These are meaningless at the moment
@@ -171,7 +171,7 @@ if (_intelType == "Medium") then
             {
                 _x setMarkerAlpha 1;
             } forEach _convoyMarkers;
-            _text = format ["We found the %1 convoy GPS decryption key!<br/>%2 convoys are marked on the map", _sideName, count _convoyMarkers];
+            _text = format [localize "STR_A3A_fn_intel_select_conv_3", _sideName, count _convoyMarkers];
         };
         case (COUNTER_ATTACK):
         {
@@ -195,22 +195,22 @@ if (_intelType == "Large") then
     {
         case (TRAITOR):
         {
-            _text = "You found incriminating data on the traitor, we don't think he will cause any more trouble";
+            _text = localize "STR_A3A_fn_intel_select_trait_1";
             traitorIntel = true; publicVariable "traitorIntel";
         };
         case (WEAPON):
         {
-            private _notYetUnlocked = allWeapons - unlockedWeapons;
-            private _newWeapon = selectRandom _notYetUnlocked;
+            private _notYetUnlocked = allWeapons - unlockedWeapons - allMissileLaunchers; // to prevent guided launchers from being unlocked by large intel
+            _newWeapon = selectRandom _notYetUnlocked;
             [_newWeapon] remoteExec ["A3A_fnc_unlockEquipment", 2];
 
             private _weaponName = getText (configFile >> "CfgWeapons" >> _newWeapon >> "displayName");
-            _text = format ["You found the supply data for the<br/> %1<br/> You have unlocked this weapon!", _weaponName];
+            _text = format [localize "STR_A3A_fn_intel_select_weap_1", _weaponName];
         };
         case (MONEY):
         {
             private _money = ((round (random 50)) + (10 * tierWar)) * 100;
-            _text = format ["You found some confidential data, you sold it for %1 on the black market!", _money];
+            _text = format [localize "STR_A3A_fn_intel_select_mon_1", _money];
             [0, _money] remoteExec ["A3A_fnc_resourcesFIA",2];
         };
     };

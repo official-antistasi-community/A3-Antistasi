@@ -4,7 +4,6 @@ Maintainer: DoomMetal
     (The thing on the top with commander, money, aggro etc.)
 */
 
-class RscTitles {
 	class Default {
        idd = -1;
        fadein = 0;
@@ -50,4 +49,3 @@ class RscTitles {
             };
 		};
 	};
-};

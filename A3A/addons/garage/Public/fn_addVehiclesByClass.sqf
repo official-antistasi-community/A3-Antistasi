@@ -62,5 +62,9 @@ private _refreshCode = {
     } forEach _cats;
     call HR_GRG_fnc_updateVehicleCount;
 };
-[ _catsRequiringUpdate, _refreshCode ] remoteExecCall ["call", HR_GRG_Users];
+
+if !(HR_GRG_Users isEqualTo []) then {
+    [ _catsRequiringUpdate, _refreshCode ] remoteExecCall ["call", HR_GRG_Users];
+};
+
 true

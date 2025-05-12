@@ -85,22 +85,15 @@ _varspace setVariable ["overhead",_overhead];
 _varspace setVariable ["name",_name];
 _varspace setVariable ["player",_originalBody];
 
-///////////////Victim Notifier//////////////
-private _injuredComrade = "";
+///////////////Log incident/////////////////
 private _victimStats = "damaged systemPunished [AI]";
 if (_victim isKindOf "Man") then {
-	_injuredComrade = ["Injured comrade: ",name _victim] joinString "";
-	["FF Notification", [_name," hurt you!"] joinString ""] remoteExecCall ["A3A_fnc_customHint", _victim, false];
 	private _UIDVictim = ["AI", getPlayerUID _victim] select (isPlayer _victim);
 	_victimStats = ["damaged ",name _victim," [",_UIDVictim,"]"] joinString "";
 };
-
-/////////////Instigator Notifier////////////
 private _playerStats = ["Total-time: ",str _timeTotal," (incl. +",str _timeAdded,"), Offence+Overhead: ",str _offenceTotal," [",str (_offenceTotal-_overhead),"+",str _overhead,"] (incl. +",str _offenceAdded,")"] joinString "";
 private _instigatorLog = [["WARNING","GUILTY"] select (_offenceTotal >= 1)," | ",_name," [",_UID,"] ",_victimStats,", ",_playerStats] joinString "";
 Info(_instigatorLog);
-
-["FF Warning", ["Watch your fire!",_injuredComrade,_customMessage] joinString "<br/>"] remoteExecCall ["A3A_fnc_customHint", _originalBody, false];
 
 if (_offenceTotal < 1) exitWith {"WARNING";};
 
@@ -113,7 +106,7 @@ if (_instigator isEqualTo _originalBody) then {
 	};
 	(units group _originalBody) joinSilent group _originalBody;  // Refer to controlunit.sqf for source of this *function*
 	group _instigator selectLeader _originalBody;
-	["Control Unit", "Returned to original Unit due to FF."] remoteExecCall ["A3A_fnc_customHint",_instigator,false];
+	[localize "STR_A3A_fn_punish_pun_conun", localize "STR_A3A_fn_punish_pun_returned"] remoteExecCall ["A3A_fnc_customHint",_instigator,false];
 	Info("Returned "+_name+" ["+_UID+"]'s UAV to original Unit due to FF.")
 	[_originalBody] remoteExec ["selectPlayer",_instigator,false];
 

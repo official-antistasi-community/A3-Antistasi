@@ -29,7 +29,8 @@
     ,"UK3CB_CHC_C_Pickup",0.5]] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
-    "UK3CB_CHC_C_Tractor", 0.2
+    "UK3CB_C_Forklift", 0.05
+    ,"UK3CB_CHC_C_Tractor", 0.2
     ,"UK3CB_CHC_C_Tractor_Old", 0.2
     ,"UK3CB_CHC_C_Kamaz_Covered", 0.3
     ,"UK3CB_CHC_C_Kamaz_Open", 0.3

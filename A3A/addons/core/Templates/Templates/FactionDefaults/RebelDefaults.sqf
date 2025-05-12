@@ -8,7 +8,7 @@
 ["toolKits", ["ToolKit"]] call _fnc_saveToTemplate;  // Relies on autodetection.
 ["itemMaps", ["ItemMap"]] call _fnc_saveToTemplate;  // Relies on autodetection.
 ["diveGear", ["U_I_Wetsuit", "V_RebreatherIA", "G_Diving"]] call _fnc_saveToTemplate;
-["flyGear", ["U_I_pilotCoveralls"]] call _fnc_saveToTemplate;
+["flyGear", ["U_I_pilotCoveralls","B_Parachute"]] call _fnc_saveToTemplate;
 
 ["surrenderCrate", "Box_IND_Wps_F"] call _fnc_saveToTemplate;
 

@@ -64,11 +64,11 @@ if ({alive _x} count units _groupX == 0) then
 	deleteMarker _markerX;
 	if (_isRoad) then
 		{
-		["TaskFailed", ["", "Roadblock Lost"]] remoteExec ["BIS_fnc_showNotification", 0];
+		["TaskFailed", ["", localize "STR_A3A_fn_base_roadblockFight_lost"]] remoteExec ["BIS_fnc_showNotification", 0];
 		}
 	else
 		{
-		["TaskFailed", ["", "Watchpost Lost"]] remoteExec ["BIS_fnc_showNotification", 0];
+		["TaskFailed", ["", localize "STR_A3A_fn_base_crfiaOP2_lostWatchpost"]] remoteExec ["BIS_fnc_showNotification", 0];
 		};
 	};
 

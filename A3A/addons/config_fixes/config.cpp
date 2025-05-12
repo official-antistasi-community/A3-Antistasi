@@ -1,16 +1,14 @@
 #include "script_component.hpp"
 
-class CfgPatches {
-    class ADDON {
+class CfgPatches 
+{
+    class ADDON 
+    {
         name = COMPONENT_NAME;
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        #if __has_include("\CUP\Weapons\CUP_Weapons_DynamicLoadout\mk82\CUP_mk82_pod.p3d")
-        requiredAddons[] = {"A3_Weapons_F", "CUP_Weapons_DynamicLoadout"};
-        #else
-        requiredAddons[] = {"A3_Weapons_F"};
-        #endif
+        requiredAddons[] = {"A3_Data_F_AoW_Loadorder"};
         author = AUTHOR;
         authors[] = { AUTHORS };
         authorUrl = "";

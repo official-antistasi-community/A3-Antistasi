@@ -31,7 +31,7 @@ while {alive player} do {
 		if (_timeLeft isEqualTo 0) then {player call BIS_fnc_neutralizeUnit} else {
 			_timerResetTimeOut = 60;
 			_timeLeft = _timeLeft -1;
-			["Out of bounds", format ["Return to the AO before your blown up, you have %1 seconds.", _timeLeft]] call A3A_fnc_customHint;
+			[localize "STR_A3A_fn_punish_oob_titel", format [localize "STR_A3A_fn_punish_oob_text", _timeLeft]] call A3A_fnc_customHint;
 		};
 	} else {
 		if (_timerResetTimeOut == 0) then {

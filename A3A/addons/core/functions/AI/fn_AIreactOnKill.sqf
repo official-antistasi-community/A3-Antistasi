@@ -35,7 +35,8 @@ _unit setVariable ["downedTimeout", time + 1200];
 if((isNil "_killer") || {(isNull _killer) || {side (group _killer) == side _group}}) exitWith {};
 
 // Add the unit to recent kills for reaction purposes
-[side _group, getPosATL _unit, 10] remoteExec ["A3A_fnc_addRecentDamage", 2];
+[side _group, getPosATL _unit, 10, _killer] remoteExec ["A3A_fnc_addRecentDamage", 2];
+
 
 private _enemy = objNull;
 private _activeGroupMembers = (units _group) select {_x call A3A_fnc_canFight};

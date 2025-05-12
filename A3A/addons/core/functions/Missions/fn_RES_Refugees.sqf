@@ -40,11 +40,12 @@ _displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time po
 
 _sideX = if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then {Occupants} else {Invaders};
 private _faction = Faction(_sideX);
-_textX = if (_sideX == Occupants) then {format ["A group of smugglers have been arrested in %1 and they are about to be sent to prison. Go there and free them in order to make them join our cause. Do this before %2",_nameDest,_displayTime]} else {format ["A group of %3 supportes are hidden in %1 awaiting for evacuation. We have to find them before %2 does it. If not, there will be a certain death for them. Bring them back to HQ",_nameDest,FactionGet(inv,"name"),FactionGet(reb,"name")]};
+_textX = if (_sideX == Occupants) then {format [localize "STR_A3A_fn_mission_res_refu_text1",_nameDest,_displayTime]} 
+else {format [localize "STR_A3A_fn_mission_res_refu_text2",_nameDest,FactionGet(inv,"name"),FactionGet(reb,"name"),_displayTime]};
 _posTsk = if (_sideX == Occupants) then {(position _houseX) getPos [random 100, random 360]} else {position _houseX};
 
 private _taskId = "RES" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[_textX,"Refugees Evac",_nameDest],_posTsk,false,0,true,"run",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[_textX,localize "STR_A3A_fn_mission_res_refu_titel",_nameDest],_posTsk,false,0,true,"run",true] call BIS_fnc_taskCreate;
 [_taskId, "RES", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _groupPOW = createGroup teamPlayer;
@@ -78,7 +79,7 @@ if (_sideX == Invaders) then
 	[_houseX, _difficultX] spawn
 	{
 		params ["_house", "_isDifficult"];
-		if (_isDifficult) then {sleep 300} else {sleep 300 + (random 1800)};
+		if (_isDifficult) then {sleep 300} else {sleep (300 + random 1800)};
 		if !(_taskId call BIS_fnc_taskCompleted) then
 		{
 			// Needs rework
