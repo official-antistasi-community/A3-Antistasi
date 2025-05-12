@@ -1,9 +1,8 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-private ["_allMarker", "_placementMarker", "_split", "_start", "_data"];
 
-_allMarker = allMapMarkers;
-_placementMarker = [];
+private _allMarker = allMapMarkers;
+private _placeMarkers = createHashMap;
 
 airportsX = [];
 spawnPoints = [];
@@ -19,7 +18,7 @@ detectionAreas = [];
 
 fnc_sortPlacementMarker =
 {
-  params ["_array", "_split"];
+  params ["_split"];
   private ["_type", "_number", "_start", "_index", "_name"];
 
   //Calculating linked main marker
@@ -49,18 +48,11 @@ fnc_sortPlacementMarker =
     _name = format ["%1_%2", _name, _split select _i];
   };
 
-  //Seting connection
-  _index = _array findIf {(_x select 0) == _type};
-  if(_index == -1) then
-  {
-    _array pushBack [_type, [_name]];
-  }
-  else
-  {
-    ((_array select _index) select 1) pushBack _name;
-  };
+  //Setting connection
+  (_placeMarkers getOrDefault [_type, [], true]) pushBack _name;
 };
 
+private ["_split", "_start"];
 {
   _split = _x splitString "_";
   _start = _split select 0;
@@ -91,7 +83,7 @@ fnc_sortPlacementMarker =
     case ("reso");
     case ("fact");
     case ("outp");
-    case ("seap"): {[_placementMarker, _split] call fnc_sortPlacementMarker;};
+    case ("seap"): {[_split] call fnc_sortPlacementMarker;};
 
     default
     {
@@ -102,18 +94,20 @@ fnc_sortPlacementMarker =
 
 //DebugArray("Marker setup done, placement marker are", _placementMarker);
 
-{
-    [_x select 0, _x select 1] call A3A_fnc_initSpawnPlaces;
-} forEach _placementMarker;
 
 // Autogenerate stuff like helipad placements for markers that don't have any defined spawn places
+
+private _majorMarkers = (airportsX + resourcesX + factories + outposts + seaports);
+
 {
-    private _spawnStr = format ["%1_vehicle_used", _x];
-    if (isNil { spawner getVariable _spawnStr }) then {
-        Debug_1("Generating additional spawn places for %1", _x);
-        [_x, []] call A3A_fnc_initSpawnPlaces;
-    };
-} forEach (airportsX + resourcesX + factories + outposts + seaports);
+  [_x, _placeMarkers getOrDefault [_x, []]] call A3A_fnc_initSpawnPlaces;
+} forEach _majorMarkers;
+
+// Now initialize static places...
+[_majorMarkers] call A3A_fnc_initStaticPlaces;
+
+// And now set up the max/par/index values per type
+[_majorMarkers] call A3A_fnc_initSpawnPlaceStats;
 
 //TEMPORARY FIX TO DETECT SPAWN MARKERS
 {

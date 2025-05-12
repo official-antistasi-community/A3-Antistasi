@@ -1,123 +1,86 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_newGarrison"];
+params ["_marker", "_side", "_newGarrison"];
 private _markerPos = markerPos _marker;
+private _faction = Faction(_side);
 
-Info_1("Spawning rebel garrison at marker %1", _marker);
+Info_2("Spawning %2 garrison at marker %1", _marker, _side);
 Debug_1("Garrison data: %1", _newGarrison);
 
-private _troops = [];
-private _statics = [];
-private _vehicles = [];
-private _buildings = [];
-private _groups = [];
-private _civs = [];
-private _civGroups = [];
+private _garrison = createHashMapFromArray [["troops", []]], ["statics", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []]];
+A3A_activeGarrison set [_marker, _garrison];
 
+// Spawn buildings first, so that flag/box don't trip over them
+if (_marker != "Synd_HQ") then {
+    private _buildings = _garrison get "buildings";
+    {
+        _x params ["_class", "_posData"];
+        _posData params ["_posWorld", "_vecUp", "_vecDir"];
+        isNil {
+            private _building = createVehicle [_class, _posWorld, [], 0, "CAN_COLLIDE"];
+            _building setPosWorld _posWorld;
+            _building setVectorDirAndUp [_vecDir, _vecUp];
+            _buildings pushBack _building;
+        };
+    } forEach (_newGarrison get "buildings");
+};
+
+// Spawn flagpole
 if (_marker != "Synd_HQ" and !(_marker in citiesX)) then
 {
-    // Spawn flagpole
-    private _flag = createVehicle [FactionGet(reb,"flag"), markerPos _marker, [], 0, "NONE"];
-    _flag setFlagTexture FactionGet(reb,"flagTexture");
+    private _flag = createVehicle [_faction get "flag", _markerPos, [], 0, "NONE"];
+    _flag setFlagTexture (_faction get "flagTexture");
     _flag allowDamage false;
-    _buildings pushBack _flag;
-    [_flag, "SDKFlag"] remoteExec ["A3A_fnc_flagaction", 0, _flag];
-
-    // Spawn resource/factory civs
-	if ((_marker in resourcesX) or (_marker in factories)) then {
-		private _spawnedCivilians = [_marker, 4] call A3A_fnc_createResourceCiv;
-		if !(isNil "_spawnedCivilians") then {
-			_civGroups pushBack (_spawnedCivilians # 0);
-			_civs append (_spawnedCivilians # 1);
-		};
-	};
+    (_garrison get "buildings") pushBack _flag;
+    private _flagAction = ["take", "SDKFlag"] select (_side == teamPlayer);
+    [_flag, _flagAction] remoteExec ["A3A_fnc_flagaction", 0, _flag];
 };
 
+// Spawn resource/factory civs
+if ((_marker in resourcesX) or (_marker in factories)) then {
+    private _spawnedCivilians = [_marker, 4] call A3A_fnc_createResourceCiv;
+    if !(isNil "_spawnedCivilians") then {
+        (_garrison get "civGroups") pushBack (_spawnedCivilians # 0);
+        (_garrison get "civs") append (_spawnedCivilians # 1);
+    };
+};
+
+if (_side != teamPlayer and { _marker in airportsX or _marker in outposts or _marker in seaports }) then {
+    // Spawn intel
+    // TODO: should be persistently placed
+    if (random 100 < (40 + tierWar * 3)) then
+    {
+        private _large = random 100 < (30 + tierWar * 2);
+        [_markerX, _large] spawn A3A_fnc_placeIntel;
+    };
+
+    // Spawn loot crate if it's off cooldown. TODO: Move to newGarrison data
+    if (garrison getVariable [_markerX + "_lootCD", 0] != 0) exitWith {};
+	private _ammoBox = [_faction get "ammobox", _markerPos, 15, 5, true] call A3A_fnc_safeVehicleSpawn;
+	[_ammoBox] call A3A_Logistics_fnc_addLoadAction;
+    (_garrison get "vehicles") pushBack _ammoBox;
+	[_ammoBox] call A3A_fnc_fillLootCrate;
+	if !(_marker in seaports) exitWith {};
+    {
+        _ammoBox addItemCargoGlobal [_x, round random [2,6,8]];
+    } forEach (A3A_faction_reb get "diveGear");
+};
+
+private _storedTroops = +(_newGarrison get "troops");
 
 // Spawn statics & crew
-private _troopTypes = _newGarrison getOrDefault ["troops", []];
-private _groupStatics = grpNull;
-{
-    _x params ["_class", "_posData"];
-    _posData params ["_posWorld", "_vecUp", "_vecDir"];
+[_garrison, _marker, _side, _storedTroops, _newGarrison get "statics"] call A3A_fnc_spawnGarrisonStatics;
 
-    private _blockers = (ASLtoATL _posWorld) nearEntities ["StaticWeapon", 2];
-    if (_blockers isNotEqualTo []) then {
-        Error_3("Spawn of %1 in %2 blocked by %3", _class, _marker, typeof (_blockers#0));
-        continue;
-    };
+// Spawn vehicles
+[_garrison, _marker, _side, _storedTroops, _newGarrison get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
 
-    private _static = objNull;
-    isNil {
-        _static = createVehicle [_class, _posWorld, [], 0, "CAN_COLLIDE"];
-        _static setPosWorld _posWorld;
-        _static setVectorDirAndUp [_vecDir, _vecUp];
-    };
-    _statics pushBack _static;
-    _static setVariable ["markerX", _marker, true];
-    [_static, teamPlayer] call A3A_fnc_AIVEHinit;
+// Spawn 2-man patrols
+[_garrison, _marker, _side, _storedTroops] call A3A_fnc_spawnGarrisonPatrols;
 
-    private _index = _troopTypes find FactionGet(reb,"unitCrew");
-    if (_index == -1) then { _index = _troopTypes find FactionGet(reb,"unitRifle") };
-    if (_index == -1) then { continue };      // Ran out of units
+// Spawn remainder as squads
+[_garrison, _marker, _side, _storedTroops] call A3A_fnc_spawnGarrisonSquads;
 
-    private _group = call {
-        if (_static isKindOf "StaticMortar") exitWith { createGroup teamPlayer };
-        if (isNull _groupStatics) then { _groupStatics = createGroup teamPlayer; _groups pushBack _groupStatics };
-        _groupStatics;
-    };
-
-    private _unit = [_group, _troopTypes deleteAt _index, _markerPos, [], 0, "NONE"] call A3A_fnc_createUnit;
-    _unit assignAsGunner _static;
-    _unit moveInGunner _static;
-    _troops pushBack _unit;
-	[_unit, _marker] call A3A_fnc_FIAinitBases;
-
-    if (_static isKindOf "StaticMortar") then {
-        [_group] call A3A_fnc_artilleryAdd;
-        _groups pushBack _group;
-    };
-    sleep 0.1;
-
-} forEach (_newGarrison getOrDefault ["statics", []]);
-
-
-// Make 8-man groups out of the remainder of the garrison
-_troopTypes = _troopTypes call A3A_fnc_garrisonReorg;
-
-private _infGroups = [];
-private _curGroup = grpNull;
-
-while {_troopTypes isNotEqualTo []} do
-{
-	if (isNull _curGroup or {count units _curGroup == 8}) then {
-		_curGroup = createGroup teamPlayer;
-		_infGroups pushBack _curGroup;
-	};
-	private _unitType = _troopTypes deleteAt 0;
-	private _unit = [_curGroup, _unitType, _markerPos, [], 0, "NONE"] call A3A_fnc_createUnit;
-	if (_unitType isEqualTo FactionGet(reb,"unitSL")) then {_curGroup selectLeader _unit};      // unnecessary?
-	[_unit, _marker] call A3A_fnc_FIAinitBases;
-	_troops pushBack _unit;
-	sleep 0.1;
-};
-_groups append _infGroups;
-
-// Add infantry groups to patcom
-if (_infGroups isNotEqualTo []) then {
-    private _markerSize = [_marker] call A3A_fnc_sizeMarker;
-    private _extraGroups = [_infGroups deleteAt 0, _markerPos, _markerSize] call A3A_fnc_patrolGroupGarrison;
-	_groups append _extraGroups;
-
-    {
-        [_x, "Patrol_Defend", 0, 150, -1, true, _markerPos, false] call A3A_fnc_patrolLoop;
-    } forEach _infGroups;
-};
-
-private _garrison = createHashMapFromArray [["troops", _troops], ["statics", _statics], ["vehicles", []], ["buildings", _buildings], ["groups", _groups],
-    ["civs", _civs], ["civGroups", _civGroups]];
-A3A_activeGarrison set [_marker, _garrison];
 
 ["locationSpawned", [_marker, "RebelOutpost", true]] call EFUNC(Events,triggerEvent);
 

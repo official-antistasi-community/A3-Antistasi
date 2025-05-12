@@ -4,7 +4,9 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_unitsOrGroup", "_client"];
+params ["_marker", "_group", "_client"];
+
+Trace_1("Called with params %1", _this);
 
 /*
 private _limit = [_marker] call A3A_fnc_getGarrisonLimit;
@@ -41,28 +43,20 @@ if (_limit != -1) then {
 if (_earlyEscape) exitWith {};
 */
 
-private _group = _unitsOrGroup;
-if (_unitsOrGroup isEqualType []) then {
-    _group = createGroup teamPlayer;
-    _unitsOrGroup joinSilent _group;
-    [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_adding_to_garrison"] remoteExecCall ["A3A_fnc_customHint", _client];
-} else {
-    [localize "STR_A3A_garrison_header", format [localize "STR_A3A_garrison_adding_to_garrison_hc", groupID _group]] remoteExecCall ["A3A_fnc_customHint", _client];
-    theBoss hcRemoveGroup _group;
-};
-
 // Add to the server garrison data store
 (A3A_garrison get _marker get "troops") append units _group;
 
 // Add to the live garrison
 private _machineID = A3A_garrisonMachine get _marker;
-if (!isNil {_machineID}) then {
+if (!isNil "_machineID") then {
     _group setGroupOwner _machineID;
     {
         _x setVariable ["markerX", _marker, true];
         _x setVariable ["spawner", nil, true];
     } forEach units _group;
-    ["addGroup", [_marker, _unitType]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
+    ["addGroup", [_marker, _unitType]] call A3A_fnc_garrisonOp;
 } else {
     { deleteVehicle _x } forEach units _group;
 };
+
+Trace("Completed");

@@ -33,9 +33,16 @@ if !(isServer) then {
         Info("HC Initialising PATCOM Variables");
         [] call A3A_fnc_patrolInit;
 
+        A3A_activeGarrison = createHashMap;
+        A3A_garrisonOps = [];
+        0 spawn A3A_fnc_garrisonOpLoop;
+
         call A3A_fnc_loadNavGrid;
-        waitUntil { sleep 0.1; !isNil "serverInitDone" };			// addNodesNearMarkers needs marker lists
+        waitUntil { sleep 0.1; !isNil "initZonesDone" };			// addNodesNearMarkers needs marker lists
         call A3A_fnc_addNodesNearMarkers;
+
+        // Could generate this locally instead if it's deterministic...
+        [clientOwner, "A3A_staticPlacesHM"] remoteExecCall ["publicVariableClient", 2];
     };
 
     if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
@@ -86,9 +93,6 @@ if (!isServer) then {
 
 // Headless clients register with server and bail out at this point
 if (!isServer and !hasInterface) exitWith {
-    A3A_activeGarrison = createHashMap;
-    A3A_garrisonOps = [];
-    0 spawn A3A_fnc_garrisonOpLoop;
     [clientOwner] remoteExecCall ["A3A_fnc_addHC",2];
 };
 

@@ -63,8 +63,8 @@ if (_winner == teamPlayer) then
 	{
 		[_flagX,"SDKFlag"] remoteExec ["A3A_fnc_flagaction",0,_flagX];
 		[_flagX,FactionGet(reb,"flagTexture")] remoteExec ["setFlagTexture",_flagX];
-		sleep 2;			// why?
-		if (_markerX in seaports) then {[_flagX,"seaport"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_flagX]};
+		//sleep 2;			// why?
+		//if (_markerX in seaports) then {[_flagX,"seaport"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_flagX]};
 	};
 }
 else

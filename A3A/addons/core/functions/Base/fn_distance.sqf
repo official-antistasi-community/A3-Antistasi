@@ -52,13 +52,7 @@ private _processOccupantMarker = {
 
             // DISABLE this marker
             spawner setVariable [_marker, DISABLED, true];
-
-            // disable simulation for all marker units
-            {
-                if (_x getVariable ["markerX", ""] == _marker
-                    && { vehicle _x == _x })
-                then { _x enableSimulationGlobal false; };
-            } forEach allUnits;
+            ["pause", [_marker]] call A3A_fnc_garrisonOp;
         };
 
         case DISABLED:
@@ -73,13 +67,7 @@ private _processOccupantMarker = {
             {
                 // ENABLE this marker
                 spawner setVariable [_marker, ENABLED, true];
-
-                // enable simulation for all marker units
-                {
-                    if (_x getVariable ["markerX", ""] == _marker
-                        && { vehicle _x == _x })
-                    then { _x enableSimulationGlobal true; };
-                } forEach allunits;
+                ["unpause", [_marker]] call A3A_fnc_garrisonOp;
             }
             else
             {
@@ -91,6 +79,7 @@ private _processOccupantMarker = {
 
                 // DESPAWN this marker
                 spawner setVariable [_marker, DESPAWN, true];
+                ["despawn", [_marker]] call A3A_fnc_garrisonOp;
             };
         };
 
@@ -105,39 +94,11 @@ private _processOccupantMarker = {
 
             // ENABLE this marker
             spawner setVariable [_marker, ENABLED, true];
+            ["spawn", [_marker, A3A_garrison get _marker]] call A3A_fnc_garrisonOp;
 
-            switch (true)
-            do
-            {
-                case (_marker in citiesX):
-                {
-                    [[_marker], "A3A_fnc_createAICities"] call A3A_fnc_scheduler;
-                };
-
-                case (_marker in controlsX):
-                {
-                    [[_marker], "A3A_fnc_createAIcontrols"] call A3A_fnc_scheduler;
-                };
-
-                // Prevent other routines taking spawn places 
+            // Prevent other routines taking spawn places 
+            if !(_marker in citiesX or _marker in controlsX) then {
                 [_marker, 1] call A3A_fnc_addTimeForIdle;
-
-                case (_marker in airportsX):
-                {
-                    [[_marker], "A3A_fnc_createAIAirplane"] call A3A_fnc_scheduler;
-                };
-
-                case (_marker in resourcesX);
-                case (_marker in factories):
-                {
-                    [[_marker], "A3A_fnc_createAIresources"] call A3A_fnc_scheduler;
-                };
-
-                case (_marker in outposts);
-                case (_marker in seaports):
-                {
-                    [[_marker], "A3A_fnc_createAIOutposts"] call A3A_fnc_scheduler;
-                };
             };
         };
     };
@@ -160,8 +121,7 @@ private _processFIAMarker = {
 
             // DISABLE marker
             spawner setVariable [_marker, DISABLED, true];
-            private _machineID = A3A_garrisonMachine get _marker; 
-            ["pause", [_marker]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
+            ["pause", [_marker]] call A3A_fnc_garrisonOp;
         };
 
         case DISABLED:
@@ -176,8 +136,7 @@ private _processFIAMarker = {
             {
                 // ENABLE this marker
                 spawner setVariable [_marker, ENABLED, true];
-                private _machineID = A3A_garrisonMachine get _marker; 
-                ["unpause", [_marker]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
+                ["unpause", [_marker]] call A3A_fnc_garrisonOp;
             }
             else
             {
@@ -190,9 +149,7 @@ private _processFIAMarker = {
 
                 // DESPAWN this marker
                 spawner setVariable [_marker, DESPAWN, true];
-                private _machineID = A3A_garrisonMachine get _marker; 
-                ["despawn", [_marker]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
-                A3A_garrisonMachine deleteAt _marker;       // clear machine ID
+                ["despawn", [_marker]] call A3A_fnc_garrisonOp;
             };
         };
 
@@ -207,9 +164,7 @@ private _processFIAMarker = {
 
             // ENABLE this marker
             spawner setVariable [_marker, ENABLED, true];
-            private _machineID = call A3A_fnc_chooseMachineForGarrison;
-            A3A_garrisonMachine set [_marker, _machineID];
-            ["spawn", [_marker, A3A_garrison get _marker]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
+            ["spawn", [_marker, A3A_garrison get _marker]] call A3A_fnc_garrisonOp;
         };
     };
 };
@@ -230,12 +185,7 @@ private _processInvaderMarker = {
 
             // DISABLE this marker
             spawner setVariable [_marker, DISABLED, true];
-
-            // disable simulation for all marker units
-            {
-                if (_x getVariable ["markerX", ""] == _marker
-                    && { vehicle _x == _x }) then { _x enableSimulationGlobal false; };
-            } forEach allUnits;
+            ["pause", [_marker]] call A3A_fnc_garrisonOp;
         };
 
         case DISABLED:
@@ -250,12 +200,7 @@ private _processInvaderMarker = {
             {
                 // ENABLE this marker
                 spawner setVariable [_marker, ENABLED, true];
-
-                // enable simulation for all marker units
-                {
-                    if (_x getVariable ["markerX", ""] == _marker
-                        && { vehicle _x == _x }) then { _x enableSimulationGlobal true; };
-                } forEach allunits;
+                ["unpause", [_marker]] call A3A_fnc_garrisonOp;
             }
             else
             {
@@ -267,6 +212,7 @@ private _processInvaderMarker = {
 
                 // DESPAWN this marker
                 spawner setVariable [_marker, DESPAWN, true];
+                ["despawn", [_marker]] call A3A_fnc_garrisonOp;
             };
         };
 
@@ -281,39 +227,11 @@ private _processInvaderMarker = {
 
             // ENABLE this marker
             spawner setVariable [_marker, ENABLED, true];
+            ["spawn", [_marker, A3A_garrison get _marker]] call A3A_fnc_garrisonOp;
 
-            switch (true)
-            do
-            {
-                case (_marker in citiesX):
-                {
-                    [[_marker], "A3A_fnc_createAICities"] call A3A_fnc_scheduler;
-                };
-
-                case (_marker in controlsX):
-                {
-                    [[_marker], "A3A_fnc_createAIcontrols"] call A3A_fnc_scheduler;
-                };
-
-                // Prevent other routines taking spawn places 
+            // Prevent other routines taking spawn places 
+            if !(_marker in citiesX or _marker in controlsX) then {
                 [_marker, 1] call A3A_fnc_addTimeForIdle;
-
-                case (_marker in airportsX):
-                {
-                    [[_marker], "A3A_fnc_createAIAirplane"] call A3A_fnc_scheduler;
-                };
-
-                case (_marker in resourcesX);
-                case (_marker in factories):
-                {
-                    [[_marker], "A3A_fnc_createAIresources"] call A3A_fnc_scheduler;
-                };
-
-                case (_marker in outposts);
-                case (_marker in seaports):
-                {
-                    [[_marker], "A3A_fnc_createAIOutposts"] call A3A_fnc_scheduler;
-                };
             };
         };
     };

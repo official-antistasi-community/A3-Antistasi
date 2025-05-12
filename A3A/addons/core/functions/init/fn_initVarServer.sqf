@@ -356,38 +356,14 @@ private _fnc_vehicleIsValid = {
 	if (_cfg call A3A_fnc_getModOfConfigClass in A3A_disabledDLC) then {false} else {true};
 };
 
-private _fnc_filterAndWeightArray = {
-
-	params ["_array", "_targWeight"];
-	private _output = [];
-	private _curWeight = 0;
-
-	// first pass, filter and find total weight
-	for "_i" from 0 to (count _array - 2) step 2 do {
-		if ((_array select _i) call _fnc_vehicleIsValid) then {
-			_output pushBack (_array select _i);
-			_output pushBack (_array select (_i+1));
-			_curWeight = _curWeight + (_array select (_i+1));
-		};
-	};
-	if (_curWeight == 0) exitWith {_output};
-
-	// second pass, re-weight
-	private _weightMod = _targWeight / _curWeight;
-	for "_i" from 0 to (count _output - 2) step 2 do {
-		_output set [_i+1, _weightMod * (_output select (_i+1))];
-	};
-	_output;
-};
-
 private _civVehicles = [];
 private _civVehiclesWeighted = [];
 
-_civVehiclesWeighted append ([FactionGet(civ,"vehiclesCivCar"), 4] call _fnc_filterAndWeightArray);
-_civVehiclesWeighted append ([FactionGet(civ,"vehiclesCivIndustrial"), 1] call _fnc_filterAndWeightArray);
-_civVehiclesWeighted append ([FactionGet(civ,"vehiclesCivMedical"), 0.1] call _fnc_filterAndWeightArray);
-_civVehiclesWeighted append ([FactionGet(civ,"vehiclesCivRepair"), 0.1] call _fnc_filterAndWeightArray);
-_civVehiclesWeighted append ([FactionGet(civ,"vehiclesCivFuel"), 0.1] call _fnc_filterAndWeightArray);
+_civVehiclesWeighted append ([FactionGet(civ,"vehiclesCivCar"), 4, _fnc_vehicleIsValid] call A3A_fnc_filterAndWeightArray);
+_civVehiclesWeighted append ([FactionGet(civ,"vehiclesCivIndustrial"), 1, _fnc_vehicleIsValid] call A3A_fnc_filterAndWeightArray);
+_civVehiclesWeighted append ([FactionGet(civ,"vehiclesCivMedical"), 0.1, _fnc_vehicleIsValid] call A3A_fnc_filterAndWeightArray);
+_civVehiclesWeighted append ([FactionGet(civ,"vehiclesCivRepair"), 0.1, _fnc_vehicleIsValid] call A3A_fnc_filterAndWeightArray);
+_civVehiclesWeighted append ([FactionGet(civ,"vehiclesCivFuel"), 0.1, _fnc_vehicleIsValid] call A3A_fnc_filterAndWeightArray);
 
 for "_i" from 0 to (count _civVehiclesWeighted - 2) step 2 do {
 	_civVehicles pushBack (_civVehiclesWeighted select _i);
@@ -420,6 +396,18 @@ DECLARE_SERVER_VAR(civBoatsWeighted, _civBoatsWeighted);
 
 private _undercoverVehicles = (arrayCivVeh - ["C_Quadbike_01_F"]) + FactionGet(reb,"vehiclesCivBoat") + FactionGet(reb,"vehiclesCivHeli") + FactionGet(reb, "vehiclesCivPlane");
 DECLARE_SERVER_VAR(undercoverVehicles, _undercoverVehicles);
+
+
+{
+    private _faction = _x;
+
+    if (FactionGet(civ,"vehiclesCivRepair") isEqualTo [] and random 1 < 0.1) exitWith { selectRandom (_faction get "vehiclesRepairTrucks") };
+	if (FactionGet(civ,"vehiclesCivFuel") isEqualTo [] and random 1 < 0.1) exitWith { selectRandom (_faction get "vehiclesFuelTrucks") };
+	private _types = if (!_isFIA) then {(_faction get "vehiclesTrucks") + (_faction get "vehiclesCargoTrucks")} else {_faction get "vehiclesMilitiaTrucks"};
+	_types = _types select { _x in FactionGet(all,"vehiclesCargoTrucks") };
+	if (count _types == 0) then { (_faction get "vehiclesCargoTrucks") } else { _types };
+	selectRandom _types;
+} forEach [A3A_faction_occ, A3A_faction_inv];
 
 //////////////////////////////////////
 //        ITEM INITIALISATION      ///

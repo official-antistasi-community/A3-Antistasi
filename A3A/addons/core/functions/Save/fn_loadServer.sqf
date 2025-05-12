@@ -116,7 +116,7 @@ if (isServer) then {
 			if (_marker == "") then { continue };
 			if !(_marker in A3A_garrison) then { continue };			// non-rebel marker? maybe possible
 			private _array = A3A_garrison get _marker get (["buildings", "statics"] select _isStatic);
-			_array pushBack [_typeVeh, [_posVeh, _vecUp, _vecDir]];
+			_array pushBack [_typeVeh, _posVeh, _vecUp, _vecDir];
 
         } forEach (["staticsX"] call A3A_fnc_returnSavedStat);
 

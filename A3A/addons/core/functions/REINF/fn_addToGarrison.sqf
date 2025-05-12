@@ -74,4 +74,13 @@ if (_earlyEscape) exitWith {
     [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_fail_no_specific_units"] call A3A_fnc_customHint;
 };
 
-[_nearX, _unitsX, clientOwner] remoteExecCall ["A3A_fnc_addUnitsToGarrison", 2];
+if (isNull _groupX) then {
+    _groupX = createGroup teamPlayer;
+    _unitsX joinSilent _group;
+    [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_adding_to_garrison"] call A3A_fnc_customHint;
+} else {
+    [localize "STR_A3A_garrison_header", format [localize "STR_A3A_garrison_adding_to_garrison_hc", groupID _groupX]] call A3A_fnc_customHint;
+    theBoss hcRemoveGroup _groupX;
+};
+
+[_nearX, _groupX, clientOwner] remoteExecCall ["A3A_fnc_addUnitsToGarrison", 2];

@@ -3,11 +3,14 @@ FIX_LINE_NUMBERS()
 	
 params ["_veh"];
 
-private _landingPad = _veh getVariable "LandingPad";
-if (!isNil "_landingPad") then { deleteVehicle _landingPad };
-
 private _spawnPlace = _veh getVariable "spawnPlace";
 if (!isNil "_spawnPlace") then { [_spawnPlace] call A3A_fnc_freeSpawnPositions };
+
+// Shortcut for garrison vehicles, otherwise gets spammy for statics
+if (!isNil {_veh getVariable "markerX"}) exitWith {};
+
+private _landingPad = _veh getVariable "LandingPad";
+if (!isNil "_landingPad") then { deleteVehicle _landingPad };
 
 private _side = _veh getVariable ["ownerSide", teamPlayer];
 private _vehCost = A3A_vehicleResourceCosts getOrDefault [typeof _veh, 0];

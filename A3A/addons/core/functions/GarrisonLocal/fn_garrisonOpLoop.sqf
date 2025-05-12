@@ -14,6 +14,7 @@ private _functionHM = createHashMapFromArray [
     ["remVehicle", A3A_fnc_remVehicleFromGarrisonLocal],
     ["remUnit", A3A_fnc_remUnitFromGarrisonLocal],
     ["spawnUnit", A3A_fnc_spawnUnitInGarrison],
+    ["spawnUnitCount", A3A_fnc_spawnUnitCountInGarrison],
     ["disband", A3A_fnc_disbandGarrison]
 ];
 

@@ -9,6 +9,8 @@ FIX_LINE_NUMBERS()
 
 params ["_vehicle"];
 
+Trace_1("Called with params %1", _this);
+
 private _marker = _vehicle getVariable "markerX";
 if (isNil "_marker") exitWith { Error_1("Vehicle %1 not in a garrison", _vehicle) };
 
@@ -36,7 +38,8 @@ if (_index < 0) exitWith { Error_2("Vehicle type %1 not found in garrison %2", t
 _vehicle setVariable ["markerX", nil, true];
 
 // Remove from active garrison if spawned
-private _machineID = A3A_garrisonMachine get _marker;
-if (!isNil {_machineID}) then {
-    ["remVehicle", [_marker, _vehicle]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
+if (!isNil {A3A_garrisonMachine get _marker}) then {
+    ["remVehicle", [_marker, _vehicle]] call A3A_fnc_garrisonOp;
 };
+
+Trace("Completed");

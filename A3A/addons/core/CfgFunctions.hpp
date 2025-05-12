@@ -246,6 +246,7 @@ class CfgFunctions
             class spawnVehicle {};
             class spawnVehicleAtMarker {};
             class spawnVehiclePrecise {};
+            class takeSpawnPosition {};
             class updateCAMark {};
             class vehAvailable {};
             class VEHdespawner {};
@@ -339,6 +340,7 @@ class CfgFunctions
             class initGarrisons {};
             class initPreJIP { preInit = 1; };
             class initSpawnPlaces {};
+            class initStaticPlaces {};
             class generateRoadblock {};
 
             class initVarCommon {};
@@ -449,6 +451,7 @@ class CfgFunctions
             class findNodesInDistance {};
             class findPath {};
             class findPathPrecheck {};
+            class findPathSimple {};
             class findPosOnRoute {};
             class getMarkerNavPoint {};
             class getNearestNavPoint {};
@@ -722,6 +725,7 @@ class CfgFunctions
             class createDataObject {};
             class createNamespace {};
             class deleteNamespace {};
+            class filterAndWeightArray {};
             class getAdmin {};
             class localLog {};
             class log {};

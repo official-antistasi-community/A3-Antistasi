@@ -6,6 +6,8 @@ FIX_LINE_NUMBERS()
 
 params ["_unit"];
 
+Trace_1("Called with params %1", _this);
+
 private _marker = _unit getVariable "markerX";
 if (isNil "_marker") exitWith { Error_1("Unit %1 not in a garrison", _unit) };
 
@@ -20,7 +22,8 @@ _troops deleteAt _index;
 _unit setVariable ["markerX", nil, true];
 
 // Remove from active garrison if spawned
-private _machineID = A3A_garrisonMachine get _marker;
-if (!isNil {_machineID}) then {
-    ["remUnit", [_marker, _unit]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
+if (!isNil {A3A_garrisonMachine get _marker}) then {
+    ["remUnit", [_marker, _unit]] call A3A_fnc_garrisonOp;
 };
+
+Trace("Completed");

@@ -1,0 +1,21 @@
+
+// Server-side function to add new units to enemy garrison
+
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
+params ["_marker", "_unitCount", "_quality"];
+
+Trace_1("Called with params %1", _this);
+
+// Add unit to server garrison data
+private _troops = A3A_garrison get _marker get "troops";
+_troops set [0, _troops#0 + _unitCount];
+// TODO: quality averaging
+
+// Add real unit if garrison is spawned
+if (!isNil {A3A_garrisonMachine get _marker}) then {
+    ["spawnUnitCount", [_marker, _unitCount, _quality]] call A3A_fnc_garrisonOp;
+};
+
+Trace("Completed");

@@ -8,21 +8,6 @@ Info("InitGarrisons started");
 private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["statics", []], ["vehicles", []], ["buildings", []] ];
 A3A_garrison set ["Synd_HQ", +_emptyGarrison];
 
-_fnc_initGarrison =
-{
-    params ["_marker", "_occGroups", "_invGroups"];
-    private _garrNum = [_marker] call A3A_fnc_garrisonSize;
-    private _side = sidesX getVariable _marker;
-    private _groupsRandom = [_occGroups, _invGroups] select (_side == Invaders);
-
-    private _garrison = [];
-    while {count _garrison < _garrNum} do {
-        _garrison append (selectRandom _groupsRandom);
-    };
-    _garrison resize _garrNum;
-    garrison setVariable [_marker, _garrison, true];
-    A3A_garrison set [_marker, +_emptyGarrison];            // probably don't need this yet...
-};
 
 private _updateMarkers = outposts + airportsX;			// To sort out the faction names & flags
 if (gameMode >= 3) then
@@ -37,11 +22,65 @@ if (gameMode >= 3) then
 { _x call A3A_fnc_mrkUpdate } forEach _updateMarkers;
 
 
-private _occGroups = (A3A_faction_occ get "groupsSquads") + (A3A_faction_occ get "groupsMedium");
-private _invGroups = (A3A_faction_inv get "groupsSquads") + (A3A_faction_inv get "groupsMedium");
-{ [_x, _occGroups, _invGroups] call _fnc_initGarrison } forEach airportsX + outposts;
+private _fnc_initGarrison =
+{
+    params ["_marker", "_occQuality", "_invQuality"];
+    private _side = sidesX getVariable _marker;
+    private _faction = Faction(_side);
+    private _quality = [_occQuality, _invQuality] select (_side == invaders);
+    private _isAirport = _marker in airportsX;
 
-private _milGroups = (A3A_faction_occ get "groupsMilitiaSquads") + (A3A_faction_occ get "groupsMilitiaMedium");
-{ [_x, _milGroups, _invGroups] call _fnc_initGarrison } forEach resourcesX + factories + seaports;
+    private _garrison = +_emptyGarrison;
+    private _troopCount = [_marker] call A3A_fnc_garrisonSize;
+    _garrison set ["troops", [_troopCount, _quality]];
+
+    private _statics = [];
+    private _vehicles = [];
+    {
+        private _placeType = _x;
+        private _slotType = [_vehicles, _statics] select ("static" in _x);
+        _y params ["_indexes", "_max", "_par"];
+
+        private _remIndexes = +_indexes;
+        for "_i" from 0 to (_par-1) do {
+            private _vehType = [_faction, _placeType] call A3A_fnc_selectGarrisonVehicleType;
+            if (isNil "_vehType") exitWith {};      // faction doesn't have vehicles of that type
+            if (_placeType == "vehicle") then { _slotType pushBack [_vehType, _i]; continue };
+            private _placeIndex = _remIndexes deleteAt floor random (count _remIndexes - 0.001);
+            _slotType pushBack [_vehType, _placeIndex];
+        };
+
+    } forEach (A3A_spawnPlaceStats get _marker);
+
+    _garrison set ["statics", _statics];
+    _garrison set ["vehicles", _vehicles];
+
+    A3A_garrison set [_marker, _garrison];
+};
+
+
+{ [_x, 1.5 + random 0.5, 2] call _fnc_initGarrison } forEach airportsX + outposts;
+
+{ [_x, 1 + random 0.5, 2] call _fnc_initGarrison } forEach resourcesX + factories + seaports;
+
+{ [_x, 0 + random 0.5, 3] call _fnc_initGarrison } forEach citiesX;
+
+
+// ok, need some special init function for roadblocks/watchposts?
+// could just pregen them for the moment?
+
+// but are roadblocks regenerated for each startup?
+
+    // maybe we have special init function for roadblocks/watchposts anyway, as they're semi-dynamic?
+
+
+
+{
+    if (!isOnRoad markerPos _x) then { [_x, 3, 3] call _fnc_initGarrison; continue };
+    [_x, 1 + random 0.5, 2] call _fnc_initGarrison;
+} forEach controlsX;
 
 Info("InitGarrisons completed");
+
+
+// add some shit to build outpost truck weighted arrays:

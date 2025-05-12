@@ -4,6 +4,8 @@ FIX_LINE_NUMBERS()
 
 params ["_marker", ["_feedback", false]];
 
+Trace_1("Called with params %1", _this);
+
 private _garrison = A3A_garrison get _marker;
 if (isNil "_garrison") exitWith {
     Error_1("Garrison %1 no longer exists", _marker);
@@ -19,8 +21,7 @@ if (isNil "_garrison") exitWith {
 
 // can't use despawn because statics might need keeping?
 
-private _machineID = A3A_garrisonMachine get _marker;
-["disband", [_marker]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
+["disband", [_marker]] call A3A_fnc_garrisonOp;
 
 private _costs = 0;
 private _hr = 0;

@@ -6,6 +6,8 @@ FIX_LINE_NUMBERS()
 
 params ["_marker", "_unitType", "_client"];
 
+Trace_1("Called with params %1", _this);
+
 if (sidesX getVariable [_marker, sideUnknown] != teamPlayer) exitWith {
 	[localize "STR_A3A_garrison_header", "Garrison lost"] remoteExecCall ["A3A_fnc_customHint", _client];
 };
@@ -41,11 +43,12 @@ _troops pushBack _unitType;
 // TODO: update marker?
 
 // Add real unit if garrison is spawned
-private _machineID = A3A_garrisonMachine get _marker;
-if (!isNil "_machineID") then {
-    ["spawnUnit", [_marker, _unitType]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
+if (!isNil {A3A_garrisonMachine get _marker}) then {
+    ["spawnUnit", [_marker, _unitType]] call A3A_fnc_garrisonOp;
 };
 
 // Print new garrison info in hint box on client
 // Probably doesn't need to be done unscheduled? Arguable
 [_marker, _client] spawn A3A_fnc_showSiteInfo;
+
+Trace("Completed");
