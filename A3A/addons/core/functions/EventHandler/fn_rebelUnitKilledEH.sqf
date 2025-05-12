@@ -1,7 +1,7 @@
 
 params ["_victim", "_killer"];
 
-[_victim] spawn A3A_fnc_postmortem;
+[_victim] remoteExec ["A3A_fnc_postmortem", 2];
 
 _victim setVariable ["spawner",nil,true];
 
