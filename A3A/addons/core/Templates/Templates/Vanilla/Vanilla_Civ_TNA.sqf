@@ -12,14 +12,14 @@ private _vehiclesCivCar = [
     "C_Quadbike_01_F", 0.8
     ,"C_Hatchback_01_F", 2.0
     ,"C_Hatchback_01_sport_F", 0.3
-    ,"C_Offroad_01_F", 0.5
+    ,"C_Offroad_01_F", 0.25
     ,"C_SUV_01_F", 0.5
     ,"C_Van_01_box_F",1.8
     ,"C_Van_02_vehicle_F", 1.0                // van from Orange
     ,"C_Van_02_transport_F", 0.2            // minibus
     ,"C_Offroad_02_unarmed_F", 2.5            // Apex 4WD
-    ,"C_Offroad_01_comms_F", 0.1            // Contact
-    ,"C_Offroad_01_covered_F", 0.1];
+    ,"C_Offroad_01_comms_F", 0.05            // Contact
+    ,"C_Offroad_01_covered_F", 0.05];
 private _vehiclesCivIndustrial = [
     "C_Van_01_transport_F", 1.0
     ,"C_Van_01_box_F",1.8
@@ -80,6 +80,7 @@ private _civUniforms = [
     "U_I_C_Soldier_Bandit_3_F",
     "U_I_C_Soldier_Bandit_4_F",
     "U_I_C_Soldier_Bandit_5_F",
+    "U_I_C_Soldier_Para_5_F",
     "U_C_Man_casual_1_F",
     "U_C_Man_casual_2_F",
     "U_C_Man_casual_3_F",
@@ -109,7 +110,19 @@ private _workerUniforms = [
     "U_C_WorkerCoveralls"
     ];
 
-private _dlcUniforms = [];
+
+private _dlcUniforms = [
+    "U_NikosBody",
+    "U_NikosAgedBody",
+    "U_OrestesBody",
+    "U_I_L_Uniform_01_tshirt_skull_F",
+    "U_I_L_Uniform_01_tshirt_black_F",
+    "U_I_L_Uniform_01_tshirt_sport_F",
+    "U_C_Scientist",
+    "U_C_Uniform_Scientist_02_formal_F",
+    "U_C_Uniform_Scientist_02_F",
+    "U_C_Uniform_Scientist_01_F"
+    ];
 
 if (allowDLCOrange) then {
   _dlcUniforms append [
@@ -181,7 +194,9 @@ private _civhats = [
     "H_Cap_tan",
     "H_StrawHat",
     "H_StrawHat_dark",
-    "H_Hat_checker"
+    "H_Hat_checker",
+    "H_Hat_Safari_olive_F",
+    "H_Hat_Safari_sand_F"
 ];
 
 ["headgear", _civHats] call _fnc_saveToTemplate;
@@ -193,7 +208,8 @@ _loadoutData set ["pressUniforms", _pressUniforms];
 _loadoutData set ["workerUniforms", _workerUniforms];
 _loadoutData set ["pressVests", ["V_Press_F"]];
 _loadoutData set ["helmets", _civHats];
-_loadoutData set ["pressHelmets", ["H_Cap_press"]];
+_loadoutData set ["pressHelmets", ["H_Cap_press", "H_PASGT_basic_blue_press_F", "H_PASGT_neckprot_blue_press_F"]];
+_loadoutData set ["backpacks", ["B_Messenger_Black_F", "B_Messenger_Gray_F","B_CivilianBackpack_01_Everyday_Vrana_F","B_CivilianBackpack_01_Sport_Green_F","B_CivilianBackpack_01_Sport_Blue_F","B_CivilianBackpack_01_Sport_Red_F"]];
 
 _loadoutData set ["maps", ["ItemMap"]];
 _loadoutData set ["watches", ["ItemWatch"]];
@@ -201,8 +217,14 @@ _loadoutData set ["compasses", ["ItemCompass"]];
 
 
 private _manTemplate = {
-    ["helmets"] call _fnc_setHelmet;
+    if(random [0,0.5,1] > 0.3) then {      
+        ["helmets"] call _fnc_setHelmet;
+    };
     ["uniforms"] call _fnc_setUniform;
+
+    if(random [0,0.5,1] > 0.8) then {      
+        ["backpacks"] call _fnc_setBackpack;
+    };
 
     ["items_medical_standard"] call _fnc_addItemSet;
 
@@ -211,7 +233,9 @@ private _manTemplate = {
     ["compasses"] call _fnc_addCompass;
 };
 private _workerTemplate = {
-    ["helmets"] call _fnc_setHelmet;
+    if(random [0,0.5,1] > 0.3) then {      
+        ["helmets"] call _fnc_setHelmet;
+    };
     ["workerUniforms"] call _fnc_setUniform;
 
     ["items_medical_standard"] call _fnc_addItemSet;
