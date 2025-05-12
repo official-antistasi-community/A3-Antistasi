@@ -1,6 +1,12 @@
 // IFA - CfgAmmo.hpp
 
 class CfgAmmo {
+
+    class LIB_Bullet_Vehicle_base;
+    class LIB_B_127x99_Ball : LIB_Bullet_Vehicle_base {
+        caliber = 1.43;
+        hit = 20;
+    };
     // Buffs to bring mortar effectiveness against unarmoured somewhere near vanilla against armoured
     class Sh_82mm_AMOS;
     class LIB_Sh_82_HE : Sh_82mm_AMOS {
