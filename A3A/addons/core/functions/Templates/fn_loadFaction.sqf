@@ -36,6 +36,7 @@ private _fnc_getFromTemplate = {
 private _loadoutNamespaces = [];
 private _fnc_createLoadoutData = {
 	private _namespace = createHashMap;
+	_namespace set ["shuffleBuffers", createHashMap];
 	_loadoutNamespaces pushBack _namespace;
 	_namespace
 };
@@ -65,6 +66,7 @@ private _fnc_generateAndSaveUnitToTemplate = {
 
 private _fnc_generateAndSaveUnitsToTemplate = {
 	params ["_prefix", "_unitTemplates", "_loadoutData"];
+	private _shuffleBuffers = _loadoutData get "shuffleBuffers";
 	{
 		_x params ["_name", "_template", ["_traits", []]];
 		private _finalName = format ["%1_%2", _prefix, _name];
