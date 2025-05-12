@@ -6,7 +6,7 @@
 ["spawnMarkerName", "LDF Support Corridor"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_Enoch_F"] call _fnc_saveToTemplate;
-["flagTexture", "a3\data_f_enoch\flags\flag_enoch_co.paa"] call _fnc_saveToTemplate;
+["flagTexture", "a3\data_f_enoch\flags\flag_eaf_co.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "flag_Enoch"] call _fnc_saveToTemplate;
 
 //////////////////////////
