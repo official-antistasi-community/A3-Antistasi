@@ -32,7 +32,7 @@
 ["vehiclesTanks", ["cwr3_b_m60a3", "cwr3_b_m60a3_tts", "cwr3_b_m1", "cwr3_b_m1a1"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["cwr3_b_m163"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["cwr3_b_boat"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
