@@ -9,16 +9,16 @@ params ["_marker", "_vehicle"];
 
 Trace_1("Called with params %1", _this);
 
-if (sidesX getVariable _marker != teamPlayer) exitWith {
-    // Is this actually an error? Could be cleaned up later...
-    Error("Attempted to add vehicle to non-rebel garrison");
-};
-
 private _oldMarker = _vehicle getVariable "markerX";
 if (!isNil "_oldMarker") then { [_vehicle] call A3A_fnc_remVehicleFromGarrison };
 
 if (_marker == "") then { _marker = [getPosATL _vehicle] call A3A_fnc_getMarkerForPos };
 if (_marker == "") exitWith {};
+
+if (sidesX getVariable _marker != teamPlayer) exitWith {
+    // Is this actually an error? Could be cleaned up later...
+    Error("Attempted to add vehicle to non-rebel garrison");
+};
 
 private _garrison = A3A_garrison get _marker;
 private _arrayType = call {

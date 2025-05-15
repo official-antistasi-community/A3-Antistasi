@@ -33,7 +33,7 @@ markersX apply {
 // Whatever
 controlsX = [];
 
-// Set up dummy markers + autogen roadblocks
+// Set up dummy markers
 call A3A_fnc_initBases;
 
 

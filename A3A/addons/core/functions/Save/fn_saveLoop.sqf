@@ -75,8 +75,8 @@ private _antennasDeadPositions = [];
 { _antennasDeadPositions pushBack getPos _x; } forEach antennasDead;
 ["antennas", _antennasDeadPositions] call A3A_fnc_setStatVariable;
 //["mrkNATO", (markersX - controlsX) select {sidesX getVariable [_x,sideUnknown] == Occupants}] call A3A_fnc_setStatVariable;
-["mrkSDK", (markersX - controlsX - outpostsFIA) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}] call A3A_fnc_setStatVariable;
-["mrkCSAT", (markersX - controlsX) select {sidesX getVariable [_x,sideUnknown] == Invaders}] call A3A_fnc_setStatVariable;
+["mrkSDK", markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer}] call A3A_fnc_setStatVariable;
+["mrkCSAT", markersX select {sidesX getVariable [_x,sideUnknown] == Invaders}] call A3A_fnc_setStatVariable;
 ["posHQ", [getMarkerPos respawnTeamPlayer,getPos fireX,[getDir boxX,getPos boxX],[getDir mapX,getPos mapX],getPos flagX,[getDir vehicleBox,getPos vehicleBox]]] call A3A_fnc_setStatVariable;
 ["dateX", date] call A3A_fnc_setStatVariable;
 ["skillFIA", skillFIA] call A3A_fnc_setStatVariable;
@@ -229,7 +229,7 @@ _arrayOutpostsFIA = [];
 
 {
 	_positionOutpost = getMarkerPos _x;
-	_arrayOutpostsFIA pushBack [_positionOutpost,garrison getVariable [_x,[]]];
+	_arrayOutpostsFIA pushBack [markerPos _x,[]];		// used to have garrison data here
 } forEach outpostsFIA;
 
 ["outpostsFIA", _arrayOutpostsFIA] call A3A_fnc_setStatVariable;

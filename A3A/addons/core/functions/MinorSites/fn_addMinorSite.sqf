@@ -18,8 +18,7 @@ _name setMarkerAlpha 0;
 
 sidesX setVariable [_name, _side, true];
 controlsX pushBack _name;
-markersX pushBack _name;
 spawner setVariable [_name, 2, true];
 
-// Don't publish controlsX & markersX here to avoid spam
+// Don't publish controlsX here to avoid spam
 _name

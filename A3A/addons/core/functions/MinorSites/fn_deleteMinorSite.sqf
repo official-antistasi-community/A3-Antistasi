@@ -17,9 +17,7 @@ deleteMarker _name;
 //sidesX setVariable [_name, _side, true];
 //spawner setVariable [_name, 2, true];
 controlsX deleteAt (controlsX find _name);
-markersX deleteAt (markersX find _name);
 
 if (_globalUpdate) then {
     publicVariable "controlsX";
-    publicVariable "markersX";
 };

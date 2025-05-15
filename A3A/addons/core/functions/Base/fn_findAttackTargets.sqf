@@ -62,7 +62,7 @@ private _maxThreatDist = distanceForAirAttack + 1000;
     //Debug_2("Marker %1, threat %2", _x, _threat);
     if (_threat == 0) then { continue };
     _markersXYT pushBack [markerPos _x # 0, markerPos _x # 1, _threat];
-} forEach markersX;
+} forEach (markersX + controlsX + outpostsFIA);
 
 
 // use these for target value determination

@@ -291,7 +291,6 @@ waitUntil { sleep 0.1; if !(isnil "theBoss") exitWith { true }; false };
 
 /* ------------------------------ endless cycle ----------------------------- */
 
-private _time = 1 / count (markersX);
 private _counter = 0;
 private _teamplayer = [];
 private _occupants = [];
@@ -333,8 +332,9 @@ do
         } forEach (allPlayers - entities "HeadlessClient_F");
     };
 
+    private _markers = markersX + controlsX + outpostsFIA;
     {
-        sleep _time;
+        sleep (1 / count _markers);
 
         _marker = _x;
         _position = getmarkerPos (_marker);
@@ -349,5 +349,5 @@ do
 
         if (_marker in citiesX) then { call _processCityCivMarker };
 
-    } forEach markersX;
+    } forEach _markers;
 };

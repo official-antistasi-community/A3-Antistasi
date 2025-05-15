@@ -18,5 +18,4 @@ private _toDelete = _indexes apply { controlsX select _x } select {
 if (_toDelete isEqualTo []) exitWith {};
 
 { [_x] call A3A_fnc_deleteMinorSite } forEach _toDelete;
-publicVariable "markersX";
 publicVariable "controlsX";

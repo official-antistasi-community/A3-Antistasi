@@ -65,15 +65,6 @@ if (isServer) then {
 	//Check if we have radios unlocked and update haveRadio.
 	call A3A_fnc_checkRadiosUnlocked;
 
-	// Don't have minor sites here, but they're not visible so it's fine
-	{
-		[_x] call A3A_fnc_mrkUpdate
-	} forEach markersX;
-
-	if (count outpostsFIA > 0) then {
-		markersX = markersX + outpostsFIA; publicVariable "markersX"
-	};
-
 	{
 		if (_x in destroyedSites) then {
 			sidesX setVariable [_x, Invaders, true];
@@ -88,7 +79,7 @@ if (isServer) then {
 	{
 		// troops
 		A3A_garrison = createHashMap;
-		private _rebelMarkers = markersX select { sidesX getVariable _x == teamPlayer };
+		private _rebelMarkers = outpostsFIA + (markersX select { sidesX getVariable _x == teamPlayer });
 		{
 			private _troops = garrison getVariable [_x, []];
 			private _garrison = createHashMapFromArray [ ["troops", _troops], ["statics", []], ["vehicles", []], ["buildings", []] ];
@@ -118,6 +109,11 @@ if (isServer) then {
 
 		// Could fix roadblock vehicle & garrison mortars here, probably not worth it though
 	};
+
+	// Don't have minor sites here, but they're not visible so it's fine
+	{
+		[_x] call A3A_fnc_mrkUpdate
+	} forEach markersX;
 
 	// Spawn in all garrison buildings
 	{

@@ -38,7 +38,6 @@ _garrison set ["troops", []];
 if (_marker in outpostsFIA) then {
     A3A_garrison set [_marker, nil];
     outpostsFIA = outpostsFIA - [_marker]; publicVariable "outpostsFIA";
-    markersX = markersX - [_marker]; publicVariable "markersX";
     deleteMarker _marker;
     sidesX setVariable [_marker, nil, true];
 };

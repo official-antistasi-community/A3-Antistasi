@@ -14,7 +14,6 @@ _marker setMarkerText _name;
 
 outpostsFIA = outpostsFIA + [_marker]; publicVariable "outpostsFIA";
 sidesX setVariable [_marker, teamPlayer, true];
-markersX = markersX + [_marker]; publicVariable "markersX";
 spawner setVariable [_marker, 2, true];         // start despawned
 //garrison setVariable [_marker, [], true];       // should be unused now...
 

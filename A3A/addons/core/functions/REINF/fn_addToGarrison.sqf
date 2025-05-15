@@ -18,7 +18,7 @@ onMapSingleClick "";
 if (!visibleMap) exitWith {};
 
 private _positionTel = positionTel;
-private _nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
+private _nearX = [markersX + outpostsFIA,_positionTel] call BIS_fnc_nearestPosition;
 
 if (_positionTel distance2D (getMarkerPos _nearX) > 50) exitWith {
     [_titleStr, format [localize "STR_A3A_garrison_fail_not_markerzone",FactionGet(reb,"name")]] call A3A_fnc_customHint;

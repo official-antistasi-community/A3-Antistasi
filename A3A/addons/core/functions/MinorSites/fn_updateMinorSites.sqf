@@ -67,5 +67,4 @@ _mainMarkers append airportsX;
 
 if (_sitesChanged) then {
 	publicVariable "controlsX";
-	publicVariable "markersX";
 };

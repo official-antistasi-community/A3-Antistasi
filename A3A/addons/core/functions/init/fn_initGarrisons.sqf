@@ -73,12 +73,13 @@ private _fnc_initGarrison =
 
     // maybe we have special init function for roadblocks/watchposts anyway, as they're semi-dynamic?
 
-
-
+// TODO: Work out where this should go
+/*
 {
     if (!isOnRoad markerPos _x) then { [_x, 3, 3] call _fnc_initGarrison; continue };
     [_x, 1 + random 0.5, 2] call _fnc_initGarrison;
 } forEach controlsX;
+*/
 
 Info("InitGarrisons completed");
 

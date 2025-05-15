@@ -14,8 +14,8 @@ hintC_arr_EH = findDisplay 72 displayAddEventHandler ["unload",{
 	};
 }];
 
-private _markersX = markersX select {sidesX getVariable [_x,sideUnknown] != teamPlayer};
-_markersX = _markersX - (controlsX select {!isOnRoad (getMarkerPos _x)});
+private _markersX = markersX + (controlsX select {isOnRoad (getMarkerPos _x)});
+_markersX select {sidesX getVariable [_x,sideUnknown] != teamPlayer};
 openMap [true,true];
 
 private _mrkDangerZone = [];

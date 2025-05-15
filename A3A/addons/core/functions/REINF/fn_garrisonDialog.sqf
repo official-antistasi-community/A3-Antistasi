@@ -24,7 +24,7 @@ if (!visibleMap && _noMarker) exitWith {};
 if (_noMarker) then {
 	_positionTel = positionTel;
 	positionXGarr = "";
-	_nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
+	_nearX = [markersX + outpostsFIA,_positionTel] call BIS_fnc_nearestPosition;
 } else {
 	_nearX = _marker;
 	_typeX = "rem";
