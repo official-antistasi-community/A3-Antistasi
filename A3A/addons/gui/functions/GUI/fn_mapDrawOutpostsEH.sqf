@@ -87,6 +87,8 @@ private _fnc_drawMarkers = {
     {
         private _side = sidesX getVariable _x;
         private _pos = markerPos _x;
+        private _txtMrkName = format ["Dum%1",_x];
+        if (_name isNotEqualTo "") then {_name = markerText _txtMrkName};
         [_pos, _sideColorHM get _side, _icon, _name] call _fnc_drawIcon;
     } forEach _markers;
 };
@@ -107,7 +109,10 @@ private _cityIcon = [A3A_Icon_Map_City, A3A_Icon_Map_Blank] select (_mapScale >=
 {
     private _color = _sideColorHM get (sidesX getVariable _x);
     if (_x in destroyedSites) then { _color = _colorBlack };
-    [markerPos _x, _color, _cityIcon, _x] call _fnc_drawIcon;
+    private _textMarker = format ["Dum%1",_x];
+    private _garrisonInfo = markerText _textMarker;
+    private _finalText = format ["%1%2", _x, _garrisonInfo];
+    [markerPos _x, _color, _cityIcon, _finalText] call _fnc_drawIcon;
 } forEach _visCities;
 
 [markerPos "Synd_HQ", [0,1,0,1], A3A_Icon_Map_HQ, "HQ"] call _fnc_drawIcon;
