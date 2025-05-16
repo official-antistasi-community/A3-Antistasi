@@ -13070,6 +13070,12 @@
         <Turkish>Performansı etkiler. Lütfen bunu dikkatli kullanın. Antistasi'nin kötü çalıştığını düşünüyorsanız daha düşük mesafelere ayarlayın.</Turkish>
         <Chinesesimp>影响性能。请小心使用。如果你觉得 Antistasi 运行不够流畅, 把它调到更低的距离。</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_maps_toggle_ui">
+        <Original>Toggle UI mode</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_maps_toggle_ui_tooltip">
+        <Original>Switch between opening old and new UI dialogs by default.</Original>
+      </Key>
     </Container>
     <Container name="gameMode_menu">
       <Key ID="STR_antistasi_dialogs_gameMode_menu">
