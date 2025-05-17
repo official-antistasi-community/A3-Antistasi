@@ -46,7 +46,7 @@ Version 3.9.0
    * :issue:`3499` Added 3CB civilian factions ADC and MEC
    * :issue:`3512` Updated WS and RF to 1.05 and 1.03 updates
    * :issue:`3518` Added 3CB US Marines faction
-   * :issue:`3519` Added 3CB US GAF faction
+   * :issue:`3519` Added 3CB GAF faction
    * :issue:`3588` Changed Assault Boat to RHIB in many factions
 
 .. admonition:: Terrain updates
