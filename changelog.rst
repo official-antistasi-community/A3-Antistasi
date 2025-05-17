@@ -23,7 +23,7 @@ Version 3.9.0
    * :issue:`3378` Added additional vehicle categories and an author section to the garage
    * :issue:`3440` Reworked airbase vehicle spawn selection
    * :issue:`3444` AI will now fast-rope from more helicopters
-   * :issue:`3472` Re-enabled scouting UAV support during HQ attacks
+   * :issue:`3472` Re-enabled scouting UAV support during attacks
    * :issue:`3493` Added better ACRE radio to starting equipment
    * :issue:`3501` Binocular magazine is now loaded from arsenal automatically
    * :issue:`3502` Improved accuracy on dive bombing planes
