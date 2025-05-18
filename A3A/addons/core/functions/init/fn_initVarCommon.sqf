@@ -18,6 +18,9 @@ debug = false;
 // Antistasi revive vest damage adjustments
 A3A_vestDamageAdj = createHashMap;
 
+// Data to prevent over-using the same loadouts
+A3A_loadoutShuffleBuffers = createHashMap;
+
 ////////////////////////////////////
 //     BEGIN SIDES AND COLORS    ///
 ////////////////////////////////////
