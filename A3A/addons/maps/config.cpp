@@ -34,6 +34,7 @@ class CfgMissions
         A3A_Mission(chernarus_winter)
         A3A_Mission(cup_chernarus_A3)
         A3A_Mission(Enoch)
+        A3A_Mission(Fallujah)
         A3A_Mission(gm_weferlingen_summer)
         A3A_Mission(gm_weferlingen_winter)
         A3A_Mission(isladuala3)

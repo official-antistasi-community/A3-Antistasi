@@ -6,6 +6,7 @@ class mapInfo {
     #include "Antistasi_chernarus_winter.chernarus_winter\mapInfo.hpp"
     #include "Antistasi_cup_chernarus_A3.cup_chernarus_A3\mapInfo.hpp"
     #include "Antistasi_Enoch.Enoch\mapInfo.hpp"
+    #include "Antistasi_Fallujah.Fallujah\mapInfo.hpp"
     #include "Antistasi_gm_weferlingen_summer.gm_weferlingen_summer\mapInfo.hpp"
     #include "Antistasi_gm_weferlingen_winter.gm_weferlingen_winter\mapInfo.hpp"
     #include "Antistasi_isladuala3.isladuala3\mapInfo.hpp"
