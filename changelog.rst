@@ -40,6 +40,7 @@ Version 3.9.0
    * :issue:`3571` Convoys now pick smarter start and end points
    * :issue:`3579` Successfully defended punishments reduce punishment chance
    * :issue:`3589` Airbases will sometimes spawn transport and light attack helis
+   * :issue:`3600` Players can set their own UI preference from the "Game Options" screen
 
 .. admonition:: Template updates
 
