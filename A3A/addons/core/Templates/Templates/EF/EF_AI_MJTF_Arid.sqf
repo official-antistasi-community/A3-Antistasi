@@ -32,8 +32,8 @@ private _APCs = ["EF_B_AAV9_MJTF_Des", "EF_B_AAV9_MJTF_Des"];
 private _Tanks = ["B_MBT_01_TUSK_F"];
 ["vehiclesAA", ["EF_B_MRAP_01_LAAD_MJTF_Des", "B_APC_Tracked_01_AA_F"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
-["vehiclesGunBoats", ["EF_B_CombatBoat_HMG_MJTF_Des", "EF_B_CombatBoat_AT_MJTF_Des"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["EF_B_CombatBoat_Unarmed_MJTF_Des","I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesGunBoats", ["EF_B_CombatBoat_HMG_MJTF_Des", "EF_B_CombatBoat_HMG_MJTF_Des", "EF_B_CombatBoat_AT_MJTF_Des"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["a3a_B_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["B_Plane_CAS_01_dynamicLoadout_F"]] call _fnc_saveToTemplate;
