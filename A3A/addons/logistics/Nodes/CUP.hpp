@@ -1,5 +1,6 @@
 class CUP_WheeledVehicles_CUP_WheeledVehicles_v3s_cup_v3s_open_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -32,7 +33,8 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_v3s_cup_v3s_open_p3d : TRIPLES(ADD
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_v3s_cup_v3s_transport_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
+    weaponBlackList[] = BL_MORTAR_AA;
     class Nodes
     {
         class Node1
@@ -65,6 +67,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_v3s_cup_v3s_transport_p3d : TRIPLE
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_Ural_cup_Ural_open2_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -97,7 +100,8 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_Ural_cup_Ural_open2_p3d : TRIPLES(
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_Ural_cup_Ural_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
+    weaponBlackList[] = BL_MORTAR_AA;
     class Nodes
     {
         class Node1
@@ -130,7 +134,8 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_Ural_cup_Ural_p3d : TRIPLES(ADDON,
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_MTVR_CUP_MTVR_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
+    weaponBlackList[] = BL_MORTAR_AA;
     class Nodes
     {
         class Node1
@@ -163,7 +168,8 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_MTVR_CUP_MTVR_p3d : TRIPLES(ADDON,
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_T810_CUP_t810_vp2_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
+    weaponBlackList[] = BL_MORTAR_AA;
     class Nodes
     {
         class Node1
@@ -196,7 +202,8 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_T810_CUP_t810_vp2_p3d : TRIPLES(AD
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_T810_CUP_t810_v_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
+    weaponBlackList[] = BL_MORTAR_AA;
     class Nodes
     {
         class Node1
@@ -229,6 +236,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_T810_CUP_t810_v_p3d : TRIPLES(ADDO
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_UpHMMWV_CUP_M1152_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -246,7 +254,8 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_UpHMMWV_CUP_M1152_p3d : TRIPLES(AD
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_NewM998_model_CUP_nM1038_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
+    weaponBlackList[] = BL_MORTAR_AA;
     class Nodes
     {
         class Node1
@@ -262,8 +271,14 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_NewM998_model_CUP_nM1038_p3d : TRI
     };
 };
 
+class CUP_I_nM1038_4s_DF_ION : CUP_WheeledVehicles_CUP_WheeledVehicles_NewM998_model_CUP_nM1038_p3d
+{
+    canLoadWeapon = 0;
+}
+
 class CUP_WheeledVehicles_CUP_WheeledVehicles_Pickup_CUP_Pickup_p3d : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -281,6 +296,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_Pickup_CUP_Pickup_p3d : TRIPLES(AD
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_Hilux_hiluxV2_unarmed : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -298,6 +314,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_Hilux_hiluxV2_unarmed : TRIPLES(AD
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_Hilux_hiluxV2_armored_unarmed : TRIPLES(ADDON,Nodes,Base)
 {
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -315,7 +332,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_Hilux_hiluxV2_armored_unarmed : TR
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_Datsun_CUP_datsun_civil_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-    canLoadWeapon = 0;
+    canLoadLowWeapons = 0;
     class Nodes
     {
         class Node1
@@ -329,6 +346,21 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_Datsun_CUP_datsun_civil_p3d : TRIP
             seats[] = {0};
         };
     };
+};
+
+class CUP_datsun_covered_wo_rear_door : CUP_WheeledVehicles_CUP_WheeledVehicles_Datsun_CUP_datsun_civil_p3d
+{
+    canLoadLowWeapons = 1;
+};
+
+class CUP_datsun_covered : CUP_WheeledVehicles_CUP_WheeledVehicles_Datsun_CUP_datsun_civil_p3d
+{
+    canLoadWeapon = 0;
+};
+
+class CUP_C_Datsun_Covered : CUP_datsun_covered
+{
+
 };
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_LR_model_LeftHand_CUP_LR_p3d: TRIPLES(ADDON,Nodes,Base)
