@@ -136,6 +136,7 @@ private _availParams = [_target, _side, _maxSpend, keys _supportTypesHM];
 {
     if (_maxSpend <= 0 and !(_x in _actSuppHM)) then { continue };          // Skip if we have no money and support type isn't active
     _y params ["_class", "_typeWeight", "_effRadius"];
+    if (_typeWeight == 0) then { continue };                        // special cases (eg. UAV) not used here
 
     // First fetch the weight factor derived from other recent strikes near target
     private _proxWeight = _classWeightsHM get _class;

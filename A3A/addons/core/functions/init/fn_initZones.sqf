@@ -18,46 +18,20 @@ if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower world
 
 [] call A3A_fnc_prepareMarkerArrays;
 
-private ["_name", "_sizeX", "_sizeY", "_size", "_pos", "_mrk"];
+// TODO: Read additional camps from config here?
 
-if ((toLower worldName) in ["altis", "chernarus_summer"]) then {
-	"((getText (_x >> ""type"")) == ""Hill"") &&
-	!((getText (_x >> ""name"")) isEqualTo """") &&
-	!(configName _x isEqualTo ""Magos"")"
-	configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
-
-		_name = configName _x;
-		_sizeX = getNumber (_x >> "radiusA");
-		_sizeY = getNumber (_x >> "radiusB");
-		_size = [_sizeX, _sizeY] select (_sizeX <= _sizeY);
-		_pos = getArray (_x >> "position");
-		_size = [_size, 50] select (_size < 10);
-		_mrk = createmarker [format ["%1", _name], _pos];
-		_mrk setMarkerSize [_size, _size];
-		_mrk setMarkerShape "ELLIPSE";
-		_mrk setMarkerBrush "SOLID";
-		_mrk setMarkerColor "ColorRed";
-		_mrk setMarkerText _name;
-		controlsX pushBack _name;
-	};
-};  //this only for Altis and Cherno
-if (debug) then {
-    Debug_1("Setting Spawn Points for %1.", worldname);
-};
-//We're doing it this way, because Dedicated servers world name changes case, depending on how the file is named.
-//And weirdly, == is not case sensitive.
-//this comments has not an information about the code
-
-(seaMarkers + seaSpawn + seaAttackSpawn + spawnPoints + detectionAreas) apply {_x setMarkerAlpha 0};
-defaultControlIndex = (count controlsX) - 1;
+(A3A_mapCamps + A3A_mapRoadblocks + seaMarkers + seaSpawn + seaAttackSpawn + spawnPoints + detectionAreas) apply {_x setMarkerAlpha 0};
 outpostsFIA = [];
 destroyedSites = [];
 garrison setVariable ["Synd_HQ", [], true];
-markersX = airportsX + resourcesX + factories + outposts + seaports + controlsX + ["Synd_HQ"];
+markersX = airportsX + resourcesX + factories + outposts + seaports + ["Synd_HQ"];
 markersX apply {
 	_x setMarkerAlpha 0;
 	spawner setVariable [_x, 2, true];
 };
+
+// Whatever
+controlsX = [];
 
 // Set up dummy markers + autogen roadblocks
 call A3A_fnc_initBases;
@@ -133,26 +107,35 @@ sidesX setVariable ["NATO_carrier", Occupants, true];
 sidesX setVariable ["CSAT_carrier", Invaders, true];
 
 
+Info("Setting up banks");
+
+banks = [];
+
+private _posBank = getArray (_mapInfo/"banks");
+if (_posBank isEqualTo []) then {banks = nearestObjects [[worldSize/2, worldSize/2], ["Land_Offices_01_V1_F"], worldSize]};
+
+{
+	private _bank = nearestObject [_x, "house"];
+	if (isNull _bank) then {
+		Error_1("Building not found at %1", _x);
+		continue;
+	};
+	banks pushBack _bank;
+} forEach _posBank;
+
+
 Info("Setting up antennas");
 
 antennasDead = [];
-banks = [];
 mrkAntennas = [];
 antennas = [];
-private _banktypes = ["Land_Offices_01_V1_F"];
 private _antennatypes = ["Land_TTowerBig_1_F", "Land_TTowerBig_2_F", "Land_Communication_F",
 "Land_Vysilac_FM","Land_A_TVTower_base","Land_Telek1", "Land_vn_tower_signal_01","land_gm_radio_antenna_01"];
 private ["_antenna", "_mrkFinal", "_antennaProv"];
-if (debug) then {
-    Debug("Setting up Radio Towers.");
-};
 
 private _posAntennas = getArray (_mapInfo/"antennas");
 private _blacklistIndex = getArray (_mapInfo/"antennasBlacklistIndex");
 private _hardCodedAntennas = _posAntennas isNotEqualTo [];
-
-private _posBank = getArray (_mapInfo/"banks");
-if ( _posBank isEqualTo []) then {banks = nearestObjects [[worldSize/2, worldSize/2], _banktypes, worldSize]};
 
 // Land_A_TVTower_base can't be destroyed, Land_Communication_F and Land_Vysilac_FM are not replaced with "Ruins" when destroyed.
 // This causes issues with persistent load and rebuild scripts, so we replace those with antennas that work properly.
@@ -264,21 +247,12 @@ if (count _posAntennas > 0) then {
 if (debug) then {
 	Error("Broken Radio Towers identified.");
 };
-if (count _posBank > 0) then {
-	for "_i" from 0 to (count _posBank - 1) do {
-		_bankProv = nearestObjects [_posBank select _i, _banktypes, 30];
 
-		if (count _bankProv > 0) then {
-			private _banco = _bankProv select 0;
-			banks = banks + [_banco];
-		};
-	};
-};
 
 // Make list of markers that don't have a proper road nearby
 // TODO: Nearly obsolete. Switch convoy code to road distance checks & markerNavPoint
 
-blackListDest = (markersX - controlsX - ["Synd_HQ"] - citiesX) select {
+blackListDest = (markersX - ["Synd_HQ"] - citiesX) select {
 	private _nearRoads = (getMarkerPos _x) nearRoads (([_x] call A3A_fnc_sizeMarker) * 1.5);
 //	_nearRoads = _nearRoads inAreaArray _x;
 	private _badSurfaces = ["#GdtForest", "#GdtRock", "#GdtGrassTall"];
@@ -315,7 +289,6 @@ publicVariable "airportsX";
 publicVariable "resourcesX";
 publicVariable "factories";
 publicVariable "outposts";
-publicVariable "controlsX";
 publicVariable "seaports";
 publicVariable "destroyedSites";
 publicVariable "forcedSpawn";
@@ -328,7 +301,6 @@ publicVariable "mrkAntennas";
 publicVariable "banks";
 publicVariable "seaSpawn";
 publicVariable "seaAttackSpawn";
-publicVariable "defaultControlIndex";
 publicVariable "detectionAreas";
 publicvariable "A3A_fuelStations";
 publicvariable "A3A_fuelStationTypes";

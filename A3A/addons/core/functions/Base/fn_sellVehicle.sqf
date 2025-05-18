@@ -36,26 +36,12 @@ FIX_LINE_NUMBERS()
 
 private _titleStr = localize "STR_A3A_fn_base_sellveh_sell";
 
-/*
-Blacklisted Assets
-
-The array below contains classnames of assets which are not allowed to be sold within Antistasi.
-Reason for this is that those items are one or more of the following:
-- can be aquired by means that don't cost anything and the ability to sell those would be an infinite money exploit.
-- are no proper "statics" in terms of weaponized statics but for example the ACE spotting scoped
-- something else
-*/
-_blacklistedAssets = [
-"ACE_I_SpottingScope","ACE_O_SpottingScope","ACE_O_T_SpottingScope","ACE_B_SpottingScope","ACE_B_T_SpottingScope","ACE_SpottingScopeObject",
-"O_Static_Designator_02_F","B_Static_Designator_01_F","B_W_Static_Designator_01_F",
-"vn_o_nva_spiderhole_01","vn_o_nva_spiderhole_02","vn_o_nva_spiderhole_03",
-"vn_o_pl_spiderhole_01","vn_o_pl_spiderhole_02","vn_o_pl_spiderhole_03",
-"vn_o_vc_spiderhole_01","vn_o_vc_spiderhole_02","vn_o_vc_spiderhole_03"];
-
 if (isNull _player) exitWith { Error("_player is null.") };
 if (isNull _veh) exitWith {[_titleStr, localize "STR_A3A_fn_base_sellveh_no_looking"] remoteExecCall ["A3A_fnc_customHint",_player];};
 
-if (_veh distance getMarkerPos respawnTeamPlayer > 50) exitWith {[_titleStr, localize "STR_A3A_fn_base_sellveh_no_closer"] remoteExecCall ["A3A_fnc_customHint",_player];};
+private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
+private _inArea = _friendlyMarkers findIf { count ([_player, _veh] inAreaArray _x) > 1 };
+if !(_inArea > -1) exitWith {[_titleStr, localize "STR_A3A_fn_base_sellveh_no_closer"] remoteExecCall ["A3A_fnc_customHint",_player];};
 
 if ({isPlayer _x} count crew _veh > 0) exitWith {[_titleStr, localize "STR_A3A_fn_base_sellveh_no_empty"] remoteExecCall ["A3A_fnc_customHint",_player];};
 

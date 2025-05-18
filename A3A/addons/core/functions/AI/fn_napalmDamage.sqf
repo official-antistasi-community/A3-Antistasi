@@ -8,6 +8,7 @@ Author: Caleb Serafin
 Arguments:
     <OBJECT> The targeted object. Is filtered within this function.
     <BOOL> If allowed to create particles and lights. Only set to true if this used on few objects at a time.
+    <SIDE> Side that deals the napalm damage
     <STRING> CancellationToken; pass with element 0 = true; if element 0 is false effects stop as-soon as possible.
 
 Return Value:
@@ -25,6 +26,7 @@ Example:
 params [
     ["_victim",objNull,[objNull]],
     ["_particles",false,[false]],
+    ["_side",sideUnknown,[sideUnknown]],
     ["_cancellationTokenUUID","",[ "" ]]
 ];
 private _filename = "functions\AI\fn_napalmDamage.sqf";
@@ -50,6 +52,10 @@ private _fnc_final = 'params ["_victim"];';                 // params ["_victim"
 private _invalidVictim = false;
 switch (true) do {
     case (_victim isKindOf "CAManBase"): {  // Man includes everything biological, even animals such as goats ect...
+        if (_victim == petros and _side in [Occupants, Invaders]) then {
+            _victim setVariable ["A3A_napalmHit", true, 2];         // Need to set in advance so it's there when the unit dies
+            _fnc_final = _fnc_final + 'if (alive _victim and !(_victim getVariable ["incapacitated", false])) then { _victim setVariable ["A3A_napalmHit", nil, 2] };';
+        };
         if (A3A_hasACEMedical) then {
             _fnc_onTick = _fnc_onTick +
             'if (alive _victim) then {

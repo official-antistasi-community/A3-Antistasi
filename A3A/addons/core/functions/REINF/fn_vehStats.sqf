@@ -1,7 +1,13 @@
 private _titleStr = localize "STR_A3A_fn_reinf_vehStats_title";
 
-
-if (count hcSelected player == 0) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_vehStats_select"] call A3A_fnc_customHint;};
+params ["_mode",["_group",[]]];
+if (_group isEqualTo []) then { // this logic is weird but theres not a great way to do it
+	if (count hcSelected player == 0) exitWith {
+		_group = [];
+	};
+	_group = hcSelected player;
+};
+if (_group isEqualTo []) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_vehStats_select"] call A3A_fnc_customHint;};
 
 private ["_groupX","_veh","_textX","_unitsX"];
 
@@ -64,11 +70,11 @@ if (_this select 0 == "mount") exitWith
 				};
 			};
 		};
-	} forEach hcSelected player;
+	} forEach _group;
 	if (_textX != "") then {[_titleStr, format ["%1",_textX]] call A3A_fnc_customHint;};
 	};
 _textX = "";
-_groupX = (hcSelected player select 0);
+_groupX = (_group select 0);
 player sideChat format [localize "STR_A3A_fn_reinf_vehStats_sitrep",groupID _groupX];
 _unitsX = units _groupX;
 _textX = format [localize "STR_A3A_fn_reinf_vehStats_status",groupID _groupX,{alive _x} count _unitsX,{[_x] call A3A_fnc_canFight} count _unitsX,_groupX getVariable ["taskX","Patrol"],behaviour (leader _groupX)];

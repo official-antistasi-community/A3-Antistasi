@@ -1,34 +1,41 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+#include "..\..\..\gui\dialogues\ids.inc" // include new UI ids for update
 private ["_typeX","_positionTel","_nearX","_garrison","_costs","_hr","_size"];
 private _titleStr = localize "STR_A3A_fn_reinf_garrDia_title";
 
 _typeX = _this select 0;
+params [["_typeX","add"],["_marker",""]];
+private _noMarker = (_marker isEqualTo "");
+if (_noMarker) then { // is normal mode
+	if (_typeX == "add") then {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_add"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_remove"] call A3A_fnc_customHint;};
 
-if (_typeX == "add") then {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_add"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_remove"] call A3A_fnc_customHint;};
+	if (!visibleMap) then {openMap true};
+	positionTel = [];
 
-if (!visibleMap) then {openMap true};
-positionTel = [];
+	onMapSingleClick "positionTel = _pos;";
 
-onMapSingleClick "positionTel = _pos;";
+	waitUntil {sleep 1; (count positionTel > 0) or (not visiblemap)};
+	onMapSingleClick "";
+};
+if (!visibleMap && _noMarker) exitWith {};
+if (_noMarker) then {
+	_positionTel = positionTel;
+	positionXGarr = "";
+	_nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
+} else {
+	_nearX = _marker;
+	_typeX = "rem";
+};
 
-waitUntil {sleep 1; (count positionTel > 0) or (not visiblemap)};
-onMapSingleClick "";
-
-if (!visibleMap) exitWith {};
-
-_positionTel = positionTel;
-positionXGarr = "";
-
-_nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
 _positionX = getMarkerPos _nearX;
 
-if (getMarkerPos _nearX distance _positionTel > 40) exitWith {
+if (_noMarker && {getMarkerPos _nearX distance _positionTel > 40}) exitWith { // lazy eval
 	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_click"] call A3A_fnc_customHint;
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -37,7 +44,7 @@ if (not(sidesX getVariable [_nearX,sideUnknown] == teamPlayer)) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 if ([_positionX] call A3A_fnc_enemyNearCheck) exitWith {
@@ -45,7 +52,7 @@ if ([_positionX] call A3A_fnc_enemyNearCheck) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -54,7 +61,7 @@ if (_nearX in forcedSpawn) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -68,7 +75,7 @@ if (_wPost && (_typeX isNotEqualTo "rem")) exitWith {
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 };
 
@@ -79,7 +86,7 @@ if (_typeX == "rem") then
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-		_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 	};
 	_costs = 0;
@@ -110,7 +117,7 @@ if (_typeX == "rem") then
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "build_menu";
+	if (_noMarker) then {_nul=CreateDialog "build_menu"};
 #endif
 	}
 else
@@ -122,7 +129,7 @@ else
 #ifdef UseDoomGUI
 	ERROR("Disabled due to UseDoomGUI Switch.")
 #else
-	_nul=CreateDialog "garrison_recruit";
+	if (_noMarker) then {_nul=CreateDialog "garrison_recruit"};
 #endif
 	sleep 1;
 	disableSerialization;
@@ -155,3 +162,12 @@ else
 		_ChildControl  ctrlSetTooltip format [_unitCostFull,server getVariable FactionGet(reb,"unitAA")];
 		};
 	};
+
+disableSerialization;
+
+private _display = findDisplay A3A_IDD_HQDIALOG; // if garrison menu open, update
+if !(isNull _display) then {
+	["updateGarrisonTab"] call A3A_GUI_fnc_hqDialog;
+	private _garrisonMap = _display displayCtrl A3A_IDC_GARRISONMAP;
+	_garrisonMap setVariable ["selectedMarker", ""]; // fix bug where garrison map would reset to 0 0 on dismiss
+};

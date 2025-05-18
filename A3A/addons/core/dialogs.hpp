@@ -874,13 +874,13 @@ class game_options 		{
 		class 8slots_L2: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
-			text = "";	//$STR_antistasi_dialogs_maps_ai_limiter;
+			text = $STR_antistasi_dialogs_maps_toggle_ui;
 			x = 0.272481 * safezoneW + safezoneX;
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			tooltip = "";	//$STR_antistasi_dialogs_maps_ai_limiter_tooltip;
-			//action = "if (call BIS_fnc_admin > 0 || isServer) then {closeDialog 0; nul = createDialog ""fps_limiter""} else {[""AI Limiter"", ""Only admins have access to this function.""] call A3A_fnc_customHint;};";
+			tooltip = $STR_antistasi_dialogs_maps_toggle_ui_tooltip;
+			action = "A3A_GUIDevPreview = !A3A_GUIDevPreview; profileNamespace setVariable ['AntistasiUseNewUI', A3A_GUIDevPreview]; ['UI toggle', format ['Switching to the %1 UI', ['old', 'new'] select A3A_GUIDevPreview]] call A3A_fnc_customHint;";
 		};
 		class 8slots_R2: A3A_core_BattleMenuRedButton
 		{
@@ -1318,7 +1318,7 @@ class radio_comm 		{
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Experimental Battle Menu. Work in Progress."; // Don't localize, tempory button.
-			action = "closeDialog 0; if (A3A_GUIDevPreview) then { _nul = createDialog ""A3A_MainDialog""; } else {[localize ""$STR_A3A_Params_GUIDevPreview_title"",""This parameter must be enabled in the Setup menu.""] call A3A_fnc_customHint; };";
+			action = "closeDialog 0; createDialog ""A3A_MainDialog""";
 		};
 		class 8slots_L3: A3A_core_BattleMenuRedButton
 		{

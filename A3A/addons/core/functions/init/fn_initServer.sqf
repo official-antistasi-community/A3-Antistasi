@@ -56,7 +56,8 @@ Info("Background init started");
 
 // Nav stuff, should have no parameter/save dependence at all
 call A3A_fnc_loadNavGrid;
-call A3A_fnc_addNodesNearMarkers;		// Needs data from both the above
+call A3A_fnc_addNodesNearMarkers;		    // Needs data from navgrid & initZones
+call A3A_fnc_generateRoadblockPairs;        // only needed on server
 
 // JNA preload, does some item type caching, no param dependence
 Info("Server JNA preload started");
@@ -178,6 +179,10 @@ if (_startType != "load") then {
 };
 
 // ********************** Post-load init ****************************************************
+
+// Initialize enemy roadblocks & specops sites
+// Either uses A3A_minorSitesHM from save, or generates from map markers if missing
+call A3A_fnc_initMinorSites;
 
 if (isClass (configFile >> "AntistasiServerMembers")) then
 {

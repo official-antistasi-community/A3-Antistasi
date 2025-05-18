@@ -38,17 +38,7 @@ switch (_type) do {
 		_possibleMarkers = _possibleMarkers select {spawner getVariable _x != 0};
 		//add controlsX not on roads and on the 'frontier'
 		private _controlsX = [controlsX] call _findIfNearAndHostile;
-		private _nearbyFriendlyMarkers = markersX select {
-			(getMarkerPos _x inArea [getMarkerPos respawnTeamPlayer, distanceMission+distanceSPWN, distanceMission+distanceSPWN, 0, false])
-			and (sidesX getVariable [_x,sideUnknown] isEqualTo teamPlayer)
-		};
-		_nearbyFriendlyMarkers deleteAt (_nearbyFriendlyMarkers find "Synd_HQ");
-		{
-			private _pos = getmarkerPos _x;
-			if !(isOnRoad _pos) then {
-				if (_nearbyFriendlyMarkers findIf {getMarkerPos _x distance _pos < distanceSPWN} != -1) then {_possibleMarkers pushBack _x};
-			};
-		}forEach _controlsX;
+		_possibleMarkers append (_controlsX select { !isOnRoad markerPos _x });
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
@@ -104,6 +94,18 @@ switch (_type) do {
 	};
 
 	case "LOG": {
+		// role three dice
+		private _spawnGunShop = random 12 + random 12 + random 12 + tierWar > 29;
+
+		private _gunShopCities = [];
+		if (_spawnGunShop && !bigAttackInProgress and tierWar > 3) then {
+			_gunShopCities = citiesX select {(getMarkerPos _x) distance2d (getMarkerPos respawnTeamPlayer) < distanceMission }
+				select { sidesX getVariable _x == Occupants } select { spawner getVariable _x != 0 };
+		};
+		if (_gunShopCities isNotEqualTo []) exitWith {
+			[selectRandom _gunShopCities] remoteExec ["A3A_fnc_GSMission", 2];		// Always on server to simplify shopping list
+		};
+
 		//Add unspawned outposts for ammo trucks, and seaports for salvage
 		_possibleMarkers = [seaports + outposts] call _findIfNearAndHostile;
 		_possibleMarkers = _possibleMarkers select {(_x in seaports) or (spawner getVariable _x != 0)};
@@ -185,14 +187,12 @@ switch (_type) do {
 		};
 		// only do the city convoys on flip?
 		private _markers = (airportsX + resourcesX + factories + seaports + outposts - blackListDest);
-		// Pre-filter the possible source bases to make this less n-squared
-		private _possibleBases = (airportsX + outposts) select { (getMarkerPos _x) distance (getMarkerPos respawnTeamPlayer) < distanceMission + 3000 };
 		private _convoyPairs = [];
 		{
 			private _site = _x;
-			if ((getMarkerPos _site) distance (getMarkerPos respawnTeamPlayer) > distanceMission) then {continue};
-			if (sidesX getVariable [_site, teamPlayer] == teamPlayer) then {continue};
-			private _base = [_site, _possibleBases] call A3A_fnc_findBasesForConvoy;
+			if (markerPos _site distance2d markerPos respawnTeamPlayer > distanceMission) then {continue};
+			if (sidesX getVariable _site == teamPlayer) then {continue};
+			private _base = [_site] call A3A_fnc_findBasesForConvoy;
 			if (_base != "") then {
 				_possibleMarkers pushBack _site;
 				_convoyPairs pushBack [_site, _base];

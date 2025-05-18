@@ -27,8 +27,10 @@ private _ctrlCnfrm = _disp displayCtrl HR_GRG_IDC_Confirm;
 private _ctrlLock = _disp displayCtrl HR_GRG_IDC_tLock;
 
 _ctrlLock ctrlEnable _enable;
-// first checks if the currently selected vehicle or category is air; then, checks if air is accessible, and toggles the button accordingly
-if (((HR_GRG_Cats findIf {ctrlShown _x} == 2) || (HR_GRG_SelectedVehicles#0 == 2)) && {!(call HR_GRG_Cnd_canAccessAir)}) then {
+
+private _selCat = HR_GRG_Cats findIf {ctrlShown _x};
+private _selVehicleCat = HR_GRG_SelectedVehicles#0;
+if ((_selCat in HR_GRG_BLOCKAIRINDEX || _selVehicleCat in HR_GRG_BLOCKAIRINDEX) && {!(call HR_GRG_Cnd_canAccessAir)}) then {
     _ctrlCnfrm ctrlEnable false;
     _ctrlCnfrm ctrlSetTextColor [0.7,0,0,1];
     _ctrlCnfrm ctrlSetTooltip localize "STR_HR_GRG_Generic_AirDisabled";

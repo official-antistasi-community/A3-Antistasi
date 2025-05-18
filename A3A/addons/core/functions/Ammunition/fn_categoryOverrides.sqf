@@ -9,8 +9,17 @@ private _categoryOverrideTable = [
 ["launch_NLAW_F", ["MissileLaunchers","Weapons","AT"]],
 ["hgun_PDW2000_F", ["SMGs","Weapons"]],
 ["hgun_Pistol_Signal_F", ["Unknown","Weapons"]],
+["arifle_RPK12_F", ["MachineGuns","Weapons"]],
+["arifle_RPK12_arid_F", ["MachineGuns","Weapons"]],
+["arifle_RPK12_lush_F", ["MachineGuns","Weapons"]],
+["hgun_esd_01_F", ["Unknown","Weapons"]],		// spectrum device
 
 //RHS
+["rhs_weap_m76", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_LB", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_LB_Folded", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_USA_LB", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_USA_LB_Folded", ["SniperRifles","Weapons"]],
 ["rhs_weap_vss", ["SniperRifles","Weapons"]],
 ["rhs_weap_vss_grip", ["SniperRifles","Weapons"]],
 ["rhs_weap_vss_npz", ["SniperRifles","Weapons"]],
@@ -52,6 +61,9 @@ private _categoryOverrideTable = [
 ["rhs_weap_rsp30_white", ["Unknown","Weapons"]],
 ["rhs_weap_rsp30_green", ["Unknown","Weapons"]],
 ["rhs_weap_rsp30_red", ["Unknown","Weapons"]],
+
+//Some sort of periscope
+["rhs_weap_tr8", ["Unknown","Weapons"]],
 
 // These have a rifle grenade muzzle but with no magazines or wells defined
 ["rhs_weap_m70b1", ["Rifles","Weapons"]],
@@ -226,7 +238,7 @@ private _categoryOverrideTable = [
 ["CUP_glaunch_Mk13", ["GrenadeLaunchers","Weapons"]],
 ["CUP_glaunch_M32", ["GrenadeLaunchers","Weapons"]],
 
-["CUP_launch_M136", ["RocketLaunchers","Weapons","AT"]],
+["CUP_launch_M136", ["RocketLaunchers","Weapons","AT","Disposable"]],
 ["CUP_launch_NLAW", ["RocketLaunchers","Weapons","AT"]],
 
 /*
@@ -463,13 +475,33 @@ private _categoryOverrideTable = [
 ["SPE_M2_Tripod", ["StaticWeaponParts","Items"]],
 ["SPE_GrW278_1_Barrel", ["StaticWeaponParts","Items"]],
 ["SPE_MLE_27_31_Stand", ["StaticWeaponParts","Items"]],
+["SPE_M3_Tripod", ["StaticWeaponParts","Items"]],
+["SPE_M2_50", ["StaticWeaponParts","Items"]],
+["SPEX_M2_60_Stand", ["StaticWeaponParts","Items"]],
+
+["SPE_Carbine_pouch", ["Unknown", "Weapons"]],
+["SPE_Carbine_pouch_od7", ["Unknown", "Weapons"]],
+
 ["SPE_Flammenwerfer41", ["Unknown", "Weapons"]],
 ["SPE_M2_Flamethrower", ["Unknown", "Weapons"]],
+
 ["SPE_K98_GW", ["Rifles","Weapons","GrenadeLaunchers"]],
 ["SPE_K98_Late_GW", ["Rifles","Weapons","GrenadeLaunchers"]],
 ["SPE_M1903A3_Springfield_M1_GL", ["Rifles","Weapons","GrenadeLaunchers"]],
 ["SPE_M1_Carbine_M8", ["Rifles","Weapons","GrenadeLaunchers"]],
-["SPE_M1_Garand_M7", ["Rifles","Weapons","GrenadeLaunchers"]] 
+["SPE_M1_Garand_M7", ["Rifles","Weapons","GrenadeLaunchers"]],
+
+// WS
+["glaunch_GLX_lxWS", ["GrenadeLaunchers","Weapons"]],
+["glaunch_GLX_camo_lxWS", ["GrenadeLaunchers","Weapons"]],
+["glaunch_GLX_ghex_lxWS", ["GrenadeLaunchers","Weapons"]],
+["glaunch_GLX_hex_lxWS", ["GrenadeLaunchers","Weapons"]],
+["glaunch_GLX_tan_lxWS", ["GrenadeLaunchers","Weapons"]],
+["glaunch_GLX_snake_lxWS", ["GrenadeLaunchers","Weapons"]],
+
+// SFP
+["sfp_flashlight", ["Unknown", "Weapons"]],
+["sfp_imgint_1010", ["Unknown", "Weapons"]]
 
 ];
 

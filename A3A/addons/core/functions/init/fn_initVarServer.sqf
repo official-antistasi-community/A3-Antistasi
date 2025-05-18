@@ -42,10 +42,7 @@ DECLARE_SERVER_VAR(distanceSPWN1, distanceSPWN*1.3);
 DECLARE_SERVER_VAR(distanceSPWN2, distanceSPWN*0.5);
 //Quantity of Civs to spawn in (most likely per client - Bob Murphy 26.01.2020)
 //DECLARE_SERVER_VAR(globalCivilianMax, 5);
-//The furthest distance the AI can attack from using helicopters or planes
-DECLARE_SERVER_VAR(distanceForAirAttack, 10000);
-//The furthest distance the AI can attack from using trucks and armour
-DECLARE_SERVER_VAR(distanceForLandAttack, 3000);			// now faction-adjusted  - if (A3A_hasIFA) then {5000} else {3000});
+
 //Max units we aim to spawn in. Still declared in initParams and modifiable in game options, but unused
 //DECLARE_SERVER_VAR(maxUnits, 140);
 
@@ -134,6 +131,8 @@ A3A_resourcesDefenceInv = A3A_balanceResourceRate * (A3A_invaderBalanceMul / 10)
 A3A_resourcesAttackOcc = -10 * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10);								// ~100 min to attack
 A3A_resourcesAttackInv = -10 * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10) * (A3A_invaderBalanceMul / 10) * 0.5;	// ~50 min to attack
 
+A3A_punishmentDefBuff = 0;
+
 // HQ knowledge values
 A3A_curHQInfoOcc = 0;			// 0-1 ranges for current HQ
 A3A_curHQInfoInv = 0;
@@ -167,7 +166,7 @@ A3A_tasksData = [];
 A3A_buildingsToSave = [];
 
 A3A_gcQueue = [];				// List of postmortem objects to clean up
-A3A_gcCleanTime = 1800;			// Base time for deleting postmortem objects
+A3A_gcCleanTime = 3600;			// Base time for deleting postmortem objects
 A3A_gcMaxBumps = 3;				// Max times to delay cleanup for an object that's near players
 
 hcArray = [];					// array of headless client IDs
@@ -466,7 +465,7 @@ ONLY_DECLARE_SERVER_VAR(A3A_utilityItemHM);
 
 //fast ropes are hard defined here, because of old fixed offsets.
 //fastrope needs to be rewritten and then we can get get ridd of this
-private _vehFastRope = ["O_Heli_Light_02_unarmed_F","B_Heli_Transport_01_camo_F","RHS_UH60M_d","UK3CB_BAF_Merlin_HC3_18_GPMG_DDPM_RM","UK3CB_BAF_Merlin_HC3_18_GPMG_Tropical_RM","RHS_Mi8mt_vdv","RHS_Mi8mt_vv","RHS_Mi8mt_Cargo_vv"];
+private _vehFastRope = FactionGet(all, "vehiclesHelisTransport");
 DECLARE_SERVER_VAR(vehFastRope, _vehFastRope);
 DECLARE_SERVER_VAR(A3A_vehClassToCrew,call A3A_fnc_initVehClassToCrew);
 
@@ -561,7 +560,7 @@ if (A3A_hasACE) then {
 ////////////////////////////////////
 //     ACRE ITEM MODIFICATIONS   ///
 ////////////////////////////////////
-if (A3A_hasACRE) then {FactionGet(reb,"initialRebelEquipment") append ["ACRE_PRC343","ACRE_PRC148","ACRE_PRC152","ACRE_SEM52SL"];};
+if (A3A_hasACRE) then {FactionGet(reb,"initialRebelEquipment") append ["ACRE_PRC343","ACRE_PRC148","ACRE_PRC152","ACRE_SEM52SL","ACRE_BF888S"];};
 if (A3A_hasACRE && startWithLongRangeRadio) then {FactionGet(reb,"initialRebelEquipment") append ["ACRE_SEM70", "ACRE_PRC117F", "ACRE_PRC77"];};
 
 ////////////////////////////////////

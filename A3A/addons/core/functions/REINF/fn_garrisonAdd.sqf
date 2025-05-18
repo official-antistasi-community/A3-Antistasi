@@ -1,16 +1,22 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_unitType"];
+params ["_unitType",["_markerX",""]];
+
+private _titleStr = localize "STR_A3A_garrison_header";
+
+if (_markerX isEqualTo "") then {_markerX = positionXGarr}; // var wont be defined otherwise
+
+if (not(sidesX getVariable [_markerX,sideUnknown] == teamPlayer)) exitWith {
+	[_titleStr, format [localize "STR_A3A_fn_reinf_garrDia_zone_belong",FactionGet(reb,"name")]] call A3A_fnc_customHint;
+};
 
 private _hr = server getVariable "hr";
-private _titleStr = localize "STR_A3A_garrison_header";
 
 if (_hr < 1) exitWith {
 	[_titleStr, localize "STR_A3A_garrison_error_no_hr"] call A3A_fnc_customHint;
 };
 
-private _markerX = positionXGarr;
 private _resourcesFIA = server getVariable "resourcesFIA";
 private _costs = server getVariable _unitType;
 

@@ -227,7 +227,7 @@ class Templates
     class WS_TURA : WS_Base
     {
         side = "Reb";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "\lxws\data_f_lxws\img\markers\Tura_CA.paa";
         name = "WS Tura";
         file = "WS_Reb_TURA";
         shortName = "Tura";
@@ -845,6 +845,15 @@ class Templates
         lore = $STR_A3A_templates_lore_3CB_AI_LDF;
     };
 
+    class 3CB_GAF : 3CBF_Base
+    {
+        side = "Occ";
+        flagTexture = "\UK3CB_Factions\addons\UK3CB_Factions_GAF\Flag\GAF_flag_co.paa";
+        name = "3CB GAF Temperate";
+        file = "3CB_AI_GAF";
+        climate[] = {"temperate"};
+    };
+
     class 3CBF_KRG : 3CBF_Base
     {
         side = "Occ";
@@ -854,6 +863,14 @@ class Templates
         climate[] = {"arid"};
         shortName = "KRG";
         lore = $STR_A3A_templates_lore_3CB_AI_KRG;
+    };
+    class 3CB_Marines_Temperate : 3CBF_Base
+    {
+        side = "Occ";
+        flagTexture = "a3\data_f\flags\flag_us_co.paa";
+        name = "3CB Marines Temperate";
+        file = "3CB_AI_Marines_Temperate";
+        climate[] = {"temperate"};
     };
     class 3CBF_ION_Arid : 3CBF_Base
     {
@@ -927,7 +944,7 @@ class Templates
     class 3CBF_CHC : 3CBF_Base
     {
         side = "Civ";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_chc\flag\chc_flag_co.paa";
         name = "3CB Cherno";
         file = "3CB_Civ_CHC";
         shortName = "Civilian";
@@ -937,7 +954,7 @@ class Templates
     class 3CBF_TKC : 3CBF_Base
     {
         side = "Civ";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_tkc\flag\tkc_flag_co.paa";
         name = "3CB Takistan";
         file = "3CB_Civ_TKC";
         maps[] = {"takistan","tem_anizay","kunduz"};
@@ -945,6 +962,28 @@ class Templates
         lore = $STR_A3A_templates_lore_TKC;
     };
 
+        class 3CBF_MEC : 3CBF_Base
+    {
+        side = "Civ";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_mec\flag\mec_flag_co.paa";
+        name = "3CB Middle Eastern";
+        file = "3CB_Civ_MEC";
+        maps[] = {"takistan","tem_anizay","kunduz"};
+        climate[] = {"arid"};
+        shortName = "Civilian";
+        lore = $STR_A3A_templates_lore_MEC;
+    };
+        class 3CBF_ADC : 3CBF_Base
+    {
+        side = "Civ";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_adc\flag\adc_flag_co.paa";
+        name = "3CB African Desert";
+        file = "3CB_Civ_ADC";
+        maps[] = {"takistan","tem_anizay","kunduz"};
+        climate[] = {"arid","tropical"};
+        shortName = "Civilian";
+        lore = $STR_A3A_templates_lore_ADC;
+    };
     // ***************************** 3CB BAF *****************************
 
     class 3CBBAF_Base

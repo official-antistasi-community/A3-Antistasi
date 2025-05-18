@@ -280,7 +280,8 @@ if (_markerX in resourcesX) then
 
 Debug_1("Notification and points done for marker change at %1", _markerX);
 
-{_nul = [_markerX,_x] spawn A3A_fnc_deleteControls} forEach controlsX;
+//[_markerX] call A3A_fnc_deleteNearSites;
+
 if (_winner == teamPlayer) then
 {
 	[] call A3A_fnc_tierCheck;

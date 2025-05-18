@@ -1,7 +1,9 @@
 ["attributesVehicles", [
     ["I_C_Offroad_02_LMG_F", ["rebCost", 500]],
     ["I_C_Offroad_02_unarmed_F", ["rebCost", 150]], //Slow, 4 seats only
-    
+
+    ["I_C_Boat_Transport_01_F", ["rebCost", 200]],      // terrible boat
+
     ["a3a_C_Heli_Transport_02_F", ["rebCost", 8000]]
 
 ]] call _fnc_saveToTemplate;

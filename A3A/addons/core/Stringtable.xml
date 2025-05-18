@@ -47,6 +47,7 @@
     <Container name="A3A_fn_ai">
       <Key ID="STR_A3A_fn_ai_artySupport_artyStrike">
         <Original>Mortar Strike</Original>
+        <German>Mörserschlag</German>
         <French>Frappe d'artillerie</French>
         <Korean>포병 타격</Korean>
         <Russian>Артиллерийский удар</Russian>
@@ -54,9 +55,11 @@
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_barrageHintHE">
         <Original>Mortar barrage is inbound, starting grid %1.</Original>
+        <Russian>Надвигается минометный обстрел, начало сетки %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_barrageHintSmoke">
         <Original>Smoke barrage is inbound, starting grid %1.</Original>
+        <Russian>Надвигается дымовая завеса, начало сетки %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_busy">
         <Original>Selected battery is busy right now.</Original>
@@ -153,9 +156,11 @@
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_precisionHintHE">
         <Original>Mortar fire support is inbound, grid %1</Original>
+        <Russian>Идет поддержка минометным огнем, сетка %1</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_precisionHintSmoke">
         <Original>Smoke rounds are inbound, grid %1.</Original>
+        <Russian>Прибывают дымовые снаряды, сетка %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_select">
         <Original>You must select an artillery group.</Original>
@@ -2144,17 +2149,7 @@
         <Chinesesimp>总部位置</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_marker">
-        <Original>You must click near a rebel map marker.</Original>
-        <Italian>Devi cliccare vicino a un marcatore sulla mappa.</Italian>
-        <Spanish>Debe clicar cerca de un marcador de mapa.</Spanish>
-        <French>Vous devez cliquer à côté d'un marqueur de carte.</French>
-        <Korean>맵 마커 근처를 클릭해야합니다.</Korean>
-        <Russian>Вы должны щелкнуть рядом с маркером на карте.</Russian>
-        <Polish>Musisz kliknąć w pobliżu znacznika na mapie.</Polish>
-        <Czech>Musíš kliknout blízko značky na mapě.</Czech>
-        <Portuguese>Precisas de clicar perto de um marcador do mapa.</Portuguese>
-        <Turkish>Harita İşaretlerinden birine tıklamanız gerek.</Turkish>
-        <Chinesesimp>你需要在地图标记附近单击</Chinesesimp>
+        <Original>You must select a rebel map marker.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_zone">
         <Original>Click on the zone you want to rebuild.</Original>
@@ -2197,19 +2192,6 @@
         <Turkish>Radyo Kulesi yeniden yapıldı.</Turkish>
         <Chinesesimp>通信塔已被重建</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_base_rebasset_no_nothing">
-        <Original>There is nothing to rebuild on this site.</Original>
-        <Italian>Non puoi ricostruire ciò.</Italian>
-        <Spanish>No puede reconstruir esto.</Spanish>
-        <French>Vous ne pouvez pas reconstruire ceci.</French>
-        <Korean>그것은 재건축할 수 없습니다.</Korean>
-        <Russian>Вы не можете восстановить это.</Russian>
-        <Polish>Nie można tego odbudować.</Polish>
-        <Czech>Toto nemůžeš znovu postavit.</Czech>
-        <Portuguese>Não podes reconstruir isso.</Portuguese>
-        <Turkish>Bunu yeniden yapamazsınız.</Turkish>
-        <Chinesesimp>你无法重建这个</Chinesesimp>
-      </Key>
       <Key ID="STR_A3A_fn_base_rebasset_no_money">
         <Original>You do not have enough money to rebuild any Asset. You need 5.000 €.</Original>
         <Italian>Non hai abbastanza denaro per ricostruire alcuna risorsa. Necessiti 5.000 €.</Italian>
@@ -2222,6 +2204,9 @@
         <Portuguese>Não tens dinheiro suficiente para reconstruir qualquer Ativo. Precisas de 5.000€.</Portuguese>
         <Turkish>Yeni ekipman yapmak için yeterinde paranız yok. 5.000 €'ya ihtiyacınız var.</Turkish>
         <Chinesesimp>你当前的资金不足以重建任何资产. 你需要 5.000 €.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_base_rebasset_no_nothing">
+        <Original>There is nothing to rebuild on this site.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_title">
         <Original>Rebuild Assets</Original>
@@ -2275,7 +2260,7 @@
         <Russian>%1 Ресурсы</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_sellveh_no_closer">
-        <Original>Vehicle must be closer than 50 meters to the HQ marker.</Original>
+        <Original>You must be near a friendly marker in order to sell vehicles.</Original>
         <Italian>Il veicolo deve essere entro 50 metri dal marcatore del quartier generale.</Italian>
         <Spanish>El vehículo debe estar a 50 metros o menos del marcador del CG.</Spanish>
         <French>Le Véhicule doit être à moins de 50 mètres du marqueur du quartier général.</French>
@@ -2565,6 +2550,9 @@
         <French>Extrême</French>
         <Korean>최대</Korean>
         <Russian>Экстрим</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_base_gc_hqCleaned">
+        <Original>HQ garbage deleted.</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_convoy">
@@ -2915,7 +2903,7 @@
       <Key ID="STR_A3A_fn_dialogs_fastTravelRadio_begin">
         <Original>Fast traveling, travel time: %1, please wait.</Original>
         <Korean>빠른 이동 중. 도착 시간까지: %1초, 잠시만 기다려 주십시오...</Korean>
-        <Russian>Быстрое перемещение: пожалуйста, подождите %1 сек.</Russian>
+        <Russian>Быстрое перемещение: пожалуйста, подождите %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_fastTravelRadio_end">
         <Original>You arrived at the destination.</Original>
@@ -2986,6 +2974,9 @@
         <Portuguese>A mover grupo %1 para o destino.</Portuguese>
         <Turkish>Grup %1 hedefe ilerliyor.</Turkish>
         <Chinesesimp>正在将组 %1 移动至目标。</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_dialogs_ftradio_generic_fail">
+        <Original>You cannot Fast Travel while: </Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_grp_select">
         <Original>You can select one group only to Fast Travel.</Original>
@@ -3123,6 +3114,7 @@
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_no_param">
         <Original>Fast travel is disabled for this server.</Original>
+        <Russian>Быстрое перемещение отключено на этом сервере.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_no_tow">
         <Original>You cannot Fast Travel with your Tow Rope out or a Vehicle attached.</Original>
@@ -3421,13 +3413,6 @@
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius">
         <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;&lt;br/&gt;More than 10 players are absent from HQ currently.</Original>
-        <Italian>Tutti i giocatori devono trovarsi entro 100m dal QG per riposare.</Italian>
-        <Spanish>Todos los jugadores deben estar en un radio de 100m del CG para poder descansar.</Spanish>
-        <French>Tous les joueurs doivent se trouver dans un rayon de 100 m du QG pour pouvoir se reposer.</French>
-        <Korean>모든 플레이어가 본부로부터 100미터 이내에 있어야 쉴 수 있습니다.</Korean>
-        <Russian>Все игроки должны находиться в радиусе 100 метров от штаба, чтобы иметь возможность отдохнуть.</Russian>
-        <Polish>Wszyscy gracze muszą znajdować się w promieniu 100 m od siedziby głównej, aby móc odpocząć.</Polish>
-        <Czech>Všichni hráči musí být v okruhu 100M od HQ abys mohl pustit odpočinek.</Czech>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius_players">
         <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;The following players are not at HQ: %1, and %2.</Original>
@@ -4116,6 +4101,9 @@
         <Original>Taxes Income&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;Manpower: +%1&lt;br/&gt;Money: +%2 €</Original>
         <Korean>세금 획득&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;인력: +%1&lt;br/&gt;자금: +%2 </Korean>
         <Russian>Доход&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;HR: +%1&lt;br/&gt;Деньги: +%2 €</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_init_initClient_addAct_recruitSquad">
+        <Original>Squad Recruitment</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_intel">
@@ -4961,6 +4949,43 @@
         <Czech>Konvoj se zásobami.</Czech>
         <Chinesesimp>补给运输车队</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_mission_conv_gunshop_text">
+        <Original>Our shipment of weapons has  been intercepted by the local authorities, and is being redirected as supplies for an %3. It's about to leave at %2 from an %1. Take the shipment back by any means.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conv_gunshop_title">
+        <Original>Recover Gun Shipment</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conv_start_location">
+        <Original>convoy start</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_title">
+        <Original>Gun Shop</Original>
+        <German>Waffenladen</German>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_text_meet">
+        <Original>My distant cousin Solomon Maru has contacted us. Rumor is that he sells items stolen from the enemy. He is in %1, go and meet him. He will only speak to the commander.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_text_wait">
+        <Original>Wait a few minutes for Solomon to arrange delivery of the goods.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_airdrop">
+        <Original>A friend is airdropping the cargo. I've marked the position on your map. Good luck.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_intercept">
+        <Original>Unfortunately enemies have intercepted your shipment. But you still have a chance to acquire it. Good luck.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_nomoney">
+        <Original>You can't afford these items. Stop wasting my time.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_wait">
+        <Original>Wait around while I arrange delivery of the goods. It shouldn't take long.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_supplydrop_title">
+        <Original>Supply Drop</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_supplydrop_text">
+        <Original>An enemy plane is airdropping supplies on this position. Get there with a truck and recover the crate. Be careful not to shoot down the plane!</Original>
+      </Key>
       <Key ID="STR_A3A_fn_mission_des_ante_text">
         <Original>We need to destroy or take a Radio Tower in %1. This will interrupt the coverage of %3 radio propaganda. Do it before %2.</Original>
         <Italian>Dobbiamo distruggere o catturare la Torre Radio a %1. Ciò interromperà la Rete di Propaganda %3. Falla entro %2.</Italian>
@@ -5629,7 +5654,7 @@
         <Chinesesimp>%1 没有足以能够拿取的资源</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_tBSteal_grab_yes">
-        <Original>You grabbed 100 € from the %1 Money Pool.&lt;br/&gt;&lt;br/&gt;This will affect your prestige and status among %1 forces.</Original>
+        <Original>You grabbed %1 € from the %2 Money Pool.&lt;br/&gt;&lt;br/&gt;This will affect your prestige and status among %2 forces.</Original>
         <Italian>Hai preso 100 € dal fondo %1.&lt;br/&gt;&lt;br/&gt;Ciò influirà sul tuo status tra le forze %1.</Italian>
         <French>Vous aves pris 100 € de la réserve d'argent de %1. &lt;br/&gt;&lt;br/&gt; Cela va affecter votre prestige et votre statut au sein des forces de %1.</French>
         <Korean>당신은 %1의 공동 자금에서 100€를 가져갔습니다.&lt;br/&gt;&lt;br/&gt;이는 %1의 군 내에서 당신의 지위와 위신에 영향을 미칠 것입니다.</Korean>
@@ -10348,7 +10373,7 @@
       <Key ID="STR_A3A_fn_support_showIntStpCll_MORTAR">
         <Original>%1 is setting up a mortar position.</Original>
         <Korean>%1 세력이 박격포를 준비 중</Korean>
-        <Russian>%1 минирует позицию.</Russian>
+        <Russian>%1 устанавливает позицию для миномета.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntStpCll_ORBITALSTRIKE">
         <Original>A %1 satellite is charging an orbital strike.</Original>
@@ -10646,6 +10671,12 @@
       <Key ID="STR_A3A_templates_lore_TKC">
         <Original>The remainder of the civilians who were unable to evacuate the combat zone, the Takistani civilians are always on alert and have learned not to trust anyone. Make sure you restore peace to their lands.</Original>
         <Russian>Оставшиеся мирные жители, которые не смогли эвакуироваться из зоны боевых действий, - такистанцы всегда начеку и научились никому не доверять. Убедитесь, что вы восстановили мир на их землях.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_MEC">
+        <Original>While the civilians are used to endless war, they are looking to live in peace.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_ADC">
+        <Original>Nothing less then the cradle of humanity, the last remnants won't flee from hostilities.</Original>
       </Key>
       <Key ID="STR_A3A_templates_lore_TKM">
         <Original>The Takistani militia is an unexpectedly well-armed group of civilians who hold a significant opposition to the foreign occupation and support the acting government is attempting to use to bolster its ranks. They use a variety of scavenged weapons, commonly relying on bolt-action rifles.</Original>
@@ -13038,6 +13069,12 @@
         <Czech>Má vliv na výkon. Prosím používejte s opatrností. Nastavte na nižší vzdálenosti pokud vaše Antistasi běží špatně.</Czech>
         <Turkish>Performansı etkiler. Lütfen bunu dikkatli kullanın. Antistasi'nin kötü çalıştığını düşünüyorsanız daha düşük mesafelere ayarlayın.</Turkish>
         <Chinesesimp>影响性能。请小心使用。如果你觉得 Antistasi 运行不够流畅, 把它调到更低的距离。</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_maps_toggle_ui">
+        <Original>Toggle UI mode</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_maps_toggle_ui_tooltip">
+        <Original>Switch between opening old and new UI dialogs by default.</Original>
       </Key>
     </Container>
     <Container name="gameMode_menu">

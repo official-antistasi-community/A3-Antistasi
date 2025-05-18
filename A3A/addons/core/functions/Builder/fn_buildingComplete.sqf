@@ -10,9 +10,10 @@ Arguments:
 
 params ["_target", ["_finished", true]];
 
-//remove from list
+// Remove from list. Let it clear out nulls
 A3A_unbuiltObjects deleteAt (A3A_unbuiltObjects find _target);
 publicVariable "A3A_unbuiltObjects";
+if (isNull _target) exitWith {};            // Possible if two engineers attempted to construct the same object, or a zeus delete
 deleteVehicle _target;
 
 // Cancel case

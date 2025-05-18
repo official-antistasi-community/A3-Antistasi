@@ -43,114 +43,76 @@ private _minMarkerSize = 12;
 private _maxMarkerSize = 32;
 private _markerSize = ((_maxMarkerSize + (_minMarkerSize - _maxMarkerSize) * ((_mapScale - _fadeStart) / (_fadeEnd - _fadeStart))) max _minMarkerSize) min _maxMarkerSize;
 
-// Get marker data
-private _outpostIconData = [];
-{
-    private _marker = _x;
-    private _type = "outpost";//_marker call A3A_fnc_getLocationMarkerType;  // ToDo define
-    private _name = "Outpost";//[_marker] call A3A_fnc_getLocationMarkerName;  // ToDo define
-    private _pos = getMarkerPos _marker;
-    private _side = sidesX getVariable [_marker,sideUnknown];
-    private _color = [1,1,1,1];
+private _mapPos = ctrlMapPosition _map;
+private _iconSize = [_markerSize*pixelW/2, _markerSize*pixelH/2];
+private _topLeft = _map ctrlMapScreenToWorld [_mapPos#0 - _iconSize#0, _mapPos#1 - _iconSize#1];
+private _botRight = _map ctrlMapScreenToWorld [_mapPos#0 + _mapPos#2 + _iconSize#0, _mapPos#1 + _mapPos#3 + _iconSize#1];
 
-    // TODO UI-update: add color for dead cities
-    switch (_side) do {
-        case (teamPlayer): {
-            _color = ["Map", "Independent"] call BIS_fnc_displayColorGet;
-        };
+private _mapCenter = (_topLeft vectorAdd _botRight) vectorMultiply 0.5;
+private _mapWidth = ((_botRight#0) - (_topLeft#0)) / 2;
+private _mapHeight = ((_botRight#1) - (_topLeft#1)) / 2;
 
-        case (Occupants): {
-            _color = ["Map", "BLUFOR"] call BIS_fnc_displayColorGet;
-        };
+// Precache all the colours
+private _sideColorHM = createHashMapFromArray [
+    [teamPlayer, ["Map", "Independent"] call BIS_fnc_displayColorGet],
+    [Occupants, ["Map", "BLUFOR"] call BIS_fnc_displayColorGet],
+    [Invaders, ["Map", "OPFOR"] call BIS_fnc_displayColorGet],
+    [civilian, ["Map", "Civilian"] call BIS_fnc_displayColorGet],
+    [sideUnknown, ["Map", "Unknown"] call BIS_fnc_displayColorGet]
+];
+private _sideFadeHM = keys _sideColorHM createHashMapFromArray (values _sideColorHM apply { [_x#0, _x#1, _x#2, _alpha] });
+private _colorBlack = [A3A_COLOR_BLACK] call FUNC(configColorToArray);
 
-        case (Invaders): {
-            _color = ["Map", "OPFOR"] call BIS_fnc_displayColorGet;
-        };
-
-        case (civilian): {
-            _color = ["Map", "Civilian"] call BIS_fnc_displayColorGet;
-        };
-
-        case (sideUnknown): {
-            _color = ["Map", "Unknown"] call BIS_fnc_displayColorGet;
-        };
-    };
-
-    private _fadedColor = [_color # 0, _color # 1, _color # 2, _alpha];
-    private _icon = A3A_Icon_Map_Blank;
-    if (_mapScale < _fadeEnd) then {
-        _icon = switch (_type) do {
-            case ("hq"): {
-                A3A_Icon_Map_HQ;
-            };
-
-            case ("city"): {
-                A3A_Icon_Map_City;
-            };
-
-            case ("factory"): {
-                A3A_Icon_Map_Factory;
-            };
-
-            case ("resource"): {
-                A3A_Icon_Map_Resource;
-            };
-
-            case ("seaport"): {
-                A3A_Icon_Map_Seaport;
-            };
-
-            case ("airport"): {
-                A3A_Icon_Map_Airport;
-            };
-
-            case ("outpost"): {
-                A3A_Icon_Map_Outpost;
-            };
-
-            case ("watchpost"): {
-                A3A_Icon_Map_Watchpost;
-            };
-
-            case ("roadblock"): {
-                A3A_Icon_Map_Roadblock;
-            };
-
-            default {
-                "\A3\ui_f\data\Map\Markers\Military\flag_CA.paa";
-            };
-        };
-    };
-
-    _outpostIconData pushBack [_name, _pos, _type, _icon, _color, _fadedColor];
-} forEach airportsX + resourcesX + factories + outposts + seaports + citiesX + outpostsFIA + ["Synd_HQ"];
-
-// TODO UI-update: add warning symbol for outposts under attack/enemies near
-
-{
-    // Draw icon
-    _x params ["_name", "_pos", "_type", "_icon", "_color", "_fadedColor"];
+private _fnc_drawIcon = {
+    params ["_pos", "_color", "_icon", "_name"];
     _map drawIcon [
         _icon, // texture
         _color,
         _pos,
         _markerSize, // width
         _markerSize, // height
-        0, // angle
-        "", // text
-        0 // shadow (outline if 2)
-    ];
-
-    // Draw text
-    if !(_type isEqualTo "city") then {_color = _fadedColor};
-    _map drawIcon [
-        "#(rgb,1,1,1)color(0,0,0,0)", // the icon itself is transparent
-        _color, // colour
-        _pos, // position
-        _markerSize, // width
-        _markerSize, // height
-        0, // angle
+        360, // angle: non-zero means it won't be outlined?
         _name, // text
         2 // shadow (outline if 2)
     ];
-} forEach _outpostIconData;
+};
+
+private _fnc_drawMarkers = {
+    params ["_markers", "_icon", "_name"];
+
+    // cull to window boundaries
+    _markers = _markers inAreaArrayIndexes [_mapCenter, _mapWidth, _mapHeight, 0, true] apply {_markers#_x};
+    if (_mapScale >= _fadeEnd) then { _icon = A3A_Icon_Map_Blank; _name = "" };
+
+    {
+        private _side = sidesX getVariable _x;
+        private _pos = markerPos _x;
+        private _txtMrkName = format ["Dum%1",_x];
+        if (_name isNotEqualTo "") then {_name = markerText _txtMrkName};
+        [_pos, _sideColorHM get _side, _icon, _name] call _fnc_drawIcon;
+    } forEach _markers;
+};
+
+[airportsX, A3A_Icon_Map_Airport, "Airbase"] call _fnc_drawMarkers;
+[outposts, A3A_Icon_Map_Outpost, "Outpost"] call _fnc_drawMarkers;
+[factories, A3A_Icon_Map_Factory, "Factory"] call _fnc_drawMarkers;
+[resourcesX, A3A_Icon_Map_Resource, "Resource"] call _fnc_drawMarkers;
+[seaports, A3A_Icon_Map_Seaport, "Seaport"] call _fnc_drawMarkers;
+
+private _roadblocks = outpostsFIA select { isOnRoad markerPos _x };
+[_roadblocks, A3A_Icon_Map_Roadblock, "Roadblock"] call _fnc_drawMarkers;
+[outpostsFIA - _roadblocks, A3A_Icon_Map_Watchpost, "Watchpost"] call _fnc_drawMarkers;
+
+// Cities are heavily special-case
+private _visCities = citiesX inAreaArrayIndexes [_mapCenter, _mapWidth, _mapHeight, 0, true] apply {citiesX#_x};
+private _cityIcon = [A3A_Icon_Map_City, A3A_Icon_Map_Blank] select (_mapScale >= _fadeEnd);
+{
+    private _color = _sideColorHM get (sidesX getVariable _x);
+    if (_x in destroyedSites) then { _color = _colorBlack };
+    private _textMarker = format ["Dum%1",_x];
+    private _garrisonInfo = markerText _textMarker;
+    private _finalText = format ["%1%2", _x, _garrisonInfo];
+    [markerPos _x, _color, _cityIcon, _finalText] call _fnc_drawIcon;
+} forEach _visCities;
+
+[markerPos "Synd_HQ", [0,1,0,1], A3A_Icon_Map_HQ, "HQ"] call _fnc_drawIcon;

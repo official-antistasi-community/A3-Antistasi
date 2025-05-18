@@ -28,7 +28,7 @@ if(_vehicle == "" || _marker == "") exitWith
 };
 
 private _vehicleObj = objNull;
-if(_vehicle isKindOf "Air") exitWith
+if ((_vehicle isKindOf "Air") || (_vehicle isKindOf "Ship")) exitWith
 {
     _vehicleObj = [_vehicle, getMarkerPos _marker, 100, 5, true] call A3A_fnc_safeVehicleSpawn;
     _vehicleObj;

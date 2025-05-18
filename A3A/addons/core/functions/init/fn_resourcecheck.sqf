@@ -66,7 +66,7 @@ while {true} do
 			garrison setVariable [_city,[],true];
 			[_city] call A3A_fnc_mrkUpdate;
 			sleep 5;
-			{_nul = [_city,_x] spawn A3A_fnc_deleteControls} forEach controlsX;
+			//[_city] call A3A_fnc_deleteNearSites;
 			[] call A3A_fnc_tierCheck;
 		};
 		if ((_supportGov > _supportReb) and (sidesX getVariable [_city,sideUnknown] == teamPlayer)) then
@@ -95,6 +95,9 @@ while {true} do
 
 	bombRuns = bombRuns + 0.25 * ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX);
 	publicVariable "bombRuns";
+
+	// Add & delete enemy camps and roadblocks
+	call A3A_fnc_updateMinorSites;
 
 	// Regular income of finite starting weapons
 	private _equipMul = A3A_balancePlayerScale / 30;		// difficulty scaled. Hmm.
