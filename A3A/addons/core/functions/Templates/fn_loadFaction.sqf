@@ -55,9 +55,9 @@ private _fnc_saveUnitToTemplate = {
 };
 
 private _fnc_generateAndSaveUnitToTemplate = {
-	params ["_name", "_template", "_loadoutData", ["_traits", []]];
+	params ["_name", "_template", "_loadoutData", "_traits", "_count"];
 	private _loadouts = [];
-	for "_i" from 1 to 5 do {
+	for "_i" from 1 to _count do {
 		_loadouts pushBack ([_template, _loadoutData] call A3A_fnc_loadout_builder);
 	};
 	[_name, _loadouts, _traits] call _fnc_saveUnitToTemplate;
@@ -65,11 +65,27 @@ private _fnc_generateAndSaveUnitToTemplate = {
 
 private _fnc_generateAndSaveUnitsToTemplate = {
 	params ["_prefix", "_unitTemplates", "_loadoutData"];
+
+	while {_unitTemplates isNotEqualTo []} do {
+		isNil {
+			private _endTime = diag_tickTime + 0.02;
+			while {_unitTemplates isNotEqualTo [] and diag_tickTime < _endTime} do {
+				private _unitLine = _unitTemplates deleteAt 0;			// not many of these, array shuffle is cheap
+
+				_unitLine params ["_name", "_template", ["_traits", []], ["_count", 5]];
+				private _finalName = format ["%1_%2", _prefix, _name];
+				[_finalName, _template, _loadoutData, _traits, _count] call _fnc_generateAndSaveUnitToTemplate;
+			};
+		};
+	};
+/*
+	// Without the unscheduled optimization, for reference
 	{
-		_x params ["_name", "_template", ["_traits", []]];
+		_x params ["_name", "_template", ["_traits", []], ["_count", 5]];
 		private _finalName = format ["%1_%2", _prefix, _name];
 		[_finalName, _template, _loadoutData, _traits] call _fnc_generateAndSaveUnitToTemplate;
 	} forEach _unitTemplates;
+*/
 };
 
 private _fnc_saveNames = {
