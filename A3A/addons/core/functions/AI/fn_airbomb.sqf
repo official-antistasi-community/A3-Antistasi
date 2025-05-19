@@ -10,7 +10,7 @@ FIX_LINE_NUMBERS()
 Debug_1("Executing on: %1", clientOwner);
 
 //Ensure reasonable bomb run lenght
-if(_bombRunLength < 100) then {_bombRunLength = 100};
+if(_bombRunLength < 40) then {_bombRunLength = 40};
 
 private _ammo = "";
 private _bombOffset = 0;
