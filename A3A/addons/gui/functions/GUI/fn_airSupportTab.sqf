@@ -45,9 +45,11 @@ switch (_mode) do
         _backButton ctrlShow true;
 
         // Display remaining air support points
-        private _airSupportPoints = round bombRuns;
+        private _airSupportPoints = floor bombRuns;
+        private _strikeCap = (4 + tierWar*2);
+        private _airStrikeCapInfo = format ["%1/%2",str _airSupportPoints,str _strikeCap];
         private _airSupportPointsText = _display displayCtrl A3A_IDC_AIRSUPPORTPOINTSTEXT;
-        _airSupportPointsText ctrlSetText str _airSupportPoints;
+        _airSupportPointsText ctrlSetText _airStrikeCapInfo;
 
         // Display name of aircraft used
         private _aircraftName = getText (configFile >> "CfgVehicles" >> ((FactionGet(reb,"vehiclesPlane")) # 0) >> "displayName");
