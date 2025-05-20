@@ -51,9 +51,22 @@ _pos2 = positionTel;
 positionTel = [];
 
 private _posHQ = markerPos "Synd_HQ";
-ServerInfo_6("Commander %1 [%2] called %3 airstrike from %4 to %5, %6m from HQ", name theBoss, getPlayerUID theBoss, _typeX, _pos1, _pos2, _pos1 distance _posHQ);
+_posHQ set [2,0]; // convert to 3d for vector calc
+private _distanceToHQ = [_pos1, _pos2, _posHQ] call {
+    // Find closest approach of A->B to C
+    params ["_posA", "_posB", "_posC"];
 
-private _distanceToHQ = ((abs (((_pos2#1 - _pos1#1) * _posHQ#0) - ((_pos2#0 - _pos1#0) * _posHQ#1) + (_pos2#0 * _pos1#1) - (_pos2#1 * _pos1#0))) / (sqrt (((_pos2#1 - _pos1#1)^2) + ((_pos2#0 - _pos1#0)^2))));
+    private _relA = _posC vectorDiff _posA;
+    private _relB = _posC vectorDiff _posB;
+    private _dir = _posA vectorFromTo _posB;
+
+    if (_relA vectorDotProduct _dir <= 0) exitWith { _posA distance _posC };
+    if (_relB vectorDotProduct _dir >= 0) exitWith { _posB distance _posC };
+    vectorMagnitude (_relA vectorCrossProduct _dir);
+};
+
+ServerInfo_6("Commander %1 [%2] called %3 airstrike from %4 to %5, %6m from HQ", name theBoss, getPlayerUID theBoss, _typeX, _pos1, _pos2, _distanceToHQ);
+
 
 if ((tkPunish > 0) && (_distanceToHQ < 100)) exitWith {
     [_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_no_distanceHQ"] call A3A_fnc_customHint;
