@@ -2365,9 +2365,9 @@
         <Chinesesimp>载具已出售</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_statistics_isComm">
-        <Original>Rank: %5 | HR: %1 | Your Money: %6 € | %11 Money: %2 € | Airstrikes: %7 | %9 Aggr: %3 | %10 Aggr: %4 | War Level: %8 | Undercover Mode: %12</Original>
-        <Korean>계급: %5 | 인력: %1 | 당신의 자금: %6 € | %11의 자금: %2 € | 공습: %7 | %9 공격성: %3 | %10 공격성: %4 | 전쟁 레벨: %8 | 위장 모드: %12</Korean>
-        <Russian>Ранг: %5 | HR: %1 | Ваши деньги: %6 € | Деньги %11: %2 € | Авиаудары: %7 | %9 Агрессия: %3 | %10 Агрессия: %4 | Уровень войны: %8 | Режим скрытности: %12</Russian>
+        <Original>Rank: %5 | HR: %1 | Your Money: %6 € | %10 Money: %2 € | %8 Aggr: %3 | %9 Aggr: %4 | War Level: %7 | Undercover Mode: %11</Original>
+        <Korean>계급: %5 | 인력: %1 | 당신의 자금: %6 € | %10의 자금: %2 € | %8 공격성: %3 | %9 공격성: %4 | 전쟁 레벨: %7 | 위장 모드: %11</Korean>
+        <Russian>Ранг: %5 | HR: %1 | Ваши деньги: %6 € | Деньги %10: %2 € | %8 Агрессия: %3 | %9 Агрессия: %4 | Уровень войны: %7 | Режим скрытности: %11</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_statistics_notComm">
         <Original>Commander: %3 | Rank: %2 | HR: %1 | Your Money: %4 € | %8 Aggr: %5 | %9 Aggr: %6 | War Level: %7 | Undercover Mode: %10</Original>
@@ -6498,6 +6498,9 @@
         <Czech>Ty a letecké vozidlo musí být v oblasti %1 letiště nebo HQ aby jsi ho mohl převést na body leteckého úderu.</Czech>
         <Chinesesimp>你在友军控制范围内的机场或者总部才能将空中载具转换成空中打击.</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_reinf_bombrun_no_cap">
+        <Original>You cannot convert this vehicle as it would give you %1 airstrike points, which brings you over the cap of %2 points.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_reinf_bombrun_no_destr">
         <Original>You can't convert a destroyed Air vehicle to Airstrikes.</Original>
         <Italian>Non puoi convertire Velivoli distrutt in Attacchi Aerei.</Italian>
@@ -7226,6 +7229,9 @@
         <Polish>Aby spełnić tą prośbe, musisz kontrolować lotnisko.</Polish>
         <Czech>Pro splnění tohoto požadavku musíte ovládat letiště.</Czech>
         <Chinesesimp>该请求要求你控制最起码一座机场.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_NatoBomb_no_distanceHQ">
+        <Original>Airstrike called off, this position is too close to HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_reinf_NatoBomb_no_radio">
         <Original>You need a radio in your inventory to be able to give orders to other squads.</Original>

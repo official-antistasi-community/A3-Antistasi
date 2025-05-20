@@ -10,7 +10,8 @@ FIX_LINE_NUMBERS()
 Debug_1("Executing on: %1", clientOwner);
 
 //Ensure reasonable bomb run lenght
-if(_bombRunLength < 100) then {_bombRunLength = 100};
+private _minLength = [100,40] select (_bombType isEqualTo "NAPALM");
+_bombRunLength = _bombRunLength max _minLength;
 
 private _ammo = "";
 private _bombOffset = 0;

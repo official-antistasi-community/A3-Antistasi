@@ -1925,7 +1925,7 @@
         <Chinesesimp>已使用的飞行器:</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_carpet_bombing">
-        <Original>Carpet Bombing</Original>
+        <Original>CARPET BOMBING&lt;br /&gt;1 POINT</Original>
         <German>Flächenbombardierung</German>
         <Italian>Bombardamento a Tappeto</Italian>
         <Spanish>Bombardeo en Alfombra</Spanish>
@@ -1939,7 +1939,7 @@
         <Chinesesimp>地毯式轰炸</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_he_bombs">
-        <Original>HE Bombs</Original>
+        <Original>HE BOMBS&lt;br /&gt;1 POINT</Original>
         <German>HE Bomben</German>
         <Italian>Bombe AE</Italian>
         <Spanish>Bombas HE</Spanish>
@@ -1967,7 +1967,7 @@
         <Chinesesimp>获得更多空袭点数来使用玩家选项卡-载具中的“加入至空袭”功能。</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_napalm">
-        <Original>Napalm Bomb</Original>
+        <Original>NAPALM BOMBS&lt;br /&gt;3 POINTS</Original>
         <German>Napalm Bomben</German>
         <Italian>Bombardamento al Napalm</Italian>
         <Spanish>Bomba de Napalm</Spanish>
@@ -1984,7 +1984,7 @@
         <Original>You have no airbases under your control</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_no_points_tooltip">
-        <Original>You have no air support points</Original>
+        <Original>You do not have enough air support points</Original>
         <German>Du hast keine Luftunterstützungspunkte</German>
         <Italian>Non hai punti supporto aereo.</Italian>
         <Spanish>No tiene puntos de apoyo aéreo</Spanish>
