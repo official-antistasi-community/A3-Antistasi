@@ -49,6 +49,7 @@ _eh2 = _unit addEventHandler ["HandleDamage",
 	nil;
 	}];
 selectPlayer _unit;
+_owner disableAI "ALL";
 
 _timeX = 60;
 
@@ -56,6 +57,7 @@ _unit addAction [localize "STR_A3A_fn_reinf_controlunit_return",{selectPlayer le
 
 waitUntil {sleep 1; [_titleStr, format [localize "STR_A3A_fn_reinf_controlunit_return_time", _timeX]] call A3A_fnc_customHint; _timeX = _timeX - 1; (_timeX == -1) or (isPlayer (leader group player))};
 
+_owner enableAI "ALL";
 removeAllActions _unit;
 selectPlayer (_unit getVariable ["owner",_unit]);
 //_unit setVariable ["owner",nil,true];
