@@ -40,13 +40,22 @@ while {true} do {
 };
 
 // selecting Aircraft
-private _heliPool = (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport") + (_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack");
-private _typeVehH = selectRandom (_heliPool select {_x isKindOf "Helicopter"});
-if (isNil "_typeVehH") exitWith {
+private _light = _faction get "vehiclesHelisLight";
+private _transport = _faction get "vehiclesHelisTransport";
+private _lightAttack = _faction get "vehiclesHelisLightAttack";
+private _fullAttack = _faction get "vehiclesHelisAttack";
+private _typePool = [];
+if (_light isNotEqualTo []) then {_typePool append [_light, 1]};
+if (_transport isNotEqualTo []) then {_typePool append [_transport, 1]};
+if (_lightAttack isNotEqualTo []) then {_typePool append [_lightAttack, 2]};
+if (_fullAttack isNotEqualTo []) then {_typePool append [_fullAttack, 1]};
+if (_typePool isEqualTo []) exitWith {
     Error("No aircrafts in arrays vehiclesHelisLight, vehiclesHelisTransport or vehiclesHelisAttack. Reselecting DES mission");
     ["DES"] remoteExec ["A3A_fnc_missionRequest",2];
 };
-private _isAttackHeli = _typeVehH in ((_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack"));
+private _heliType = selectRandomWeighted _typePool;
+private _typeVehH = selectRandom _heliType;
+private _isAttackHeli = _typeVehH in (_fullAttack + _lightAttack);
 
 //refining crash spawn position, to avoid exploding on spawn or "Armaing" during mission
 private _flatPos = [_posCrashOrigin, 0, 1000, 0, 0, 0.1] call BIS_fnc_findSafePos;
