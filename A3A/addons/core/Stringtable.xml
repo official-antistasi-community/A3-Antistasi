@@ -2366,8 +2366,8 @@
       </Key>
       <Key ID="STR_A3A_fn_base_statistics_isComm">
         <Original>Rank: %5 | HR: %1 | Your Money: %6 € | %10 Money: %2 € | %8 Aggr: %3 | %9 Aggr: %4 | War Level: %7 | Undercover Mode: %11</Original>
-        <Korean>계급: %5 | 인력: %1 | 당신의 자금: %6 € | %11의 자금: %2 € | 공습: %7 | %9 공격성: %3 | %10 공격성: %4 | 전쟁 레벨: %8 | 위장 모드: %12</Korean>
-        <Russian>Ранг: %5 | HR: %1 | Ваши деньги: %6 € | Деньги %11: %2 € | Авиаудары: %7 | %9 Агрессия: %3 | %10 Агрессия: %4 | Уровень войны: %8 | Режим скрытности: %12</Russian>
+        <Korean>계급: %5 | 인력: %1 | 당신의 자금: %6 € | %10의 자금: %2 € | %8 공격성: %3 | %9 공격성: %4 | 전쟁 레벨: %7 | 위장 모드: %11</Korean>
+        <Russian>Ранг: %5 | HR: %1 | Ваши деньги: %6 € | Деньги %10: %2 € | %8 Агрессия: %3 | %9 Агрессия: %4 | Уровень войны: %7 | Режим скрытности: %11</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_statistics_notComm">
         <Original>Commander: %3 | Rank: %2 | HR: %1 | Your Money: %4 € | %8 Aggr: %5 | %9 Aggr: %6 | War Level: %7 | Undercover Mode: %10</Original>

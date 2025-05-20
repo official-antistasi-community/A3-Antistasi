@@ -63,33 +63,38 @@ switch (_mode) do
         private _carpetButton = _display displayCtrl A3A_IDC_AIRSUPPORTCARPETBUTTON;
         private _napalmIcon = _display displayCtrl A3A_IDC_AIRSUPPORTNAPALMICON;
         private _napalmButton = _display displayCtrl A3A_IDC_AIRSUPPORTNAPALMBUTTON;
+        _heButton ctrlSetStructuredText parseText localize "STR_antistasi_dialogs_main_air_support_he_bombs";
+        _carpetButton ctrlSetStructuredText parseText localize "STR_antistasi_dialogs_main_air_support_carpet_bombing";
+        _napalmButton ctrlSetStructuredText parseText localize "STR_antistasi_dialogs_main_air_support_napalm";
 
-        // Check if there are enough air support points
-        if ((_airSupportPoints < 1) || ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0)) then
+        private _bombRunCosts = createHashMapFromArray [
+            ["HE",1],
+            ["CARPET",1],
+            ["NAPALM",3]
+        ];
+        private _hasNoAirport = ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0);
+        private _colorDisabled = ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         {
-            private _failMessage = "";
-            private _color = ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            if (_airSupportPoints < 1) then
+            _x params ["_type","_button","_icon"];
+            private _cost = _bombRunCosts get _type;
+            private _cannotAfford = (_cost > _airSupportPoints);
+            if (_cannotAfford || _hasNoAirport) then
             {
-                Trace("No air support points, disabling buttons");
-                _failMessage = localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-            } else {
-                Trace("No airports, disabling buttons");
-                _failMessage = localize "STR_antistasi_dialogs_main_air_support_no_base_tooltip";
+                private _failMessage = "";
+                if (_cannotAfford) then
+                {
+                    Trace_1("No air support points, disabling button %1",_type);
+                    _failMessage = localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
+                } else {
+                    Trace_1("No airports, disabling button %1",_type);
+                    _failMessage = localize "STR_antistasi_dialogs_main_air_support_no_base_tooltip";
+                };
+                _icon ctrlSetTextColor _colorDisabled;
+                _icon ctrlSetTooltip _failMessage;
+                _button ctrlEnable false;
+                _button ctrlSetTooltip _failMessage;
             };
-            _heIcon ctrlSetTextColor _color;
-            _heIcon ctrlSetTooltip _failMessage;
-            _heButton ctrlEnable false;
-            _heButton ctrlSetTooltip _failMessage;
-            _carpetIcon ctrlSetTextColor _color;
-            _carpetIcon ctrlSetTooltip _failMessage;
-            _carpetButton ctrlEnable false;
-            _carpetButton ctrlSetTooltip _failMessage;
-            _napalmIcon ctrlSetTextColor _color;
-            _napalmIcon ctrlSetTooltip _failMessage;
-            _napalmButton ctrlEnable false;
-            _napalmButton ctrlSetTooltip _failMessage;
-        };
+        } forEach [["HE",_heButton,_heIcon],["CARPET",_carpetButton,_carpetIcon],["NAPALM",_napalmButton,_napalmIcon]];
     };
 
     default

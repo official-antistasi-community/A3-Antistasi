@@ -53,8 +53,11 @@ positionTel = [];
 private _posHQ = markerPos "Synd_HQ";
 ServerInfo_6("Commander %1 [%2] called %3 airstrike from %4 to %5, %6m from HQ", name theBoss, getPlayerUID theBoss, _typeX, _pos1, _pos2, _pos1 distance _posHQ);
 
-if ((tkPunish > 0) && (((_pos1 distance2D _posHQ) < 100) || ((_pos2 distance2D _posHQ) < 100))) exitWith {
+private _distanceToHQ = ((abs (((_pos2#1 - _pos1#1) * _posHQ#0) - ((_pos2#0 - _pos1#0) * _posHQ#1) + (_pos2#0 * _pos1#1) - (_pos2#1 * _pos1#0))) / (sqrt (((_pos2#1 - _pos1#1)^2) + ((_pos2#0 - _pos1#0)^2))));
+
+if ((tkPunish > 0) && (_distanceToHQ < 100)) exitWith {
     [_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_no_distanceHQ"] call A3A_fnc_customHint;
+    deleteMarkerLocal _mrkOrig;
     ServerInfo("Rebel airstrike canceled due to distance from HQ");
 };
 

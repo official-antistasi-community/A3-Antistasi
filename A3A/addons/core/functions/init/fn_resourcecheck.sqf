@@ -94,11 +94,8 @@ while {true} do
 	server setVariable ["resourcesFIA", _resAdd + (server getVariable "resourcesFIA"), true];
 
 	private _newBombRuns = bombRuns + 0.25 * ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX);
-	private _strikeCap = (4 + tierWar*2);
-	if (_newBombRuns < _strikeCap) then {
-		bombRuns = _newBombRuns;
-		publicVariable "bombRuns";
-	};
+	bombRuns = _newBombRuns max (4 + tierWar*2);
+	publicVariable "bombRuns";
 
 	// Add & delete enemy camps and roadblocks
 	call A3A_fnc_updateMinorSites;
