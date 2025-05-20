@@ -170,11 +170,17 @@ if (_destinationX == boxX) then
 	{
 //	{if (_x distance boxX < 10) then {[petros,"hint","Ammobox Loaded", "Cargo"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach (call A3A_fnc_playableUnits);
 	if ((_originX isKindOf "ReammoBox_F") and (_originX != vehicleBox)) then {deleteVehicle _originX};
+	private _moneyText = "";
+	if (count _this > 3) then {
+		[0,_this select 3, true] spawn A3A_fnc_resourcesFIA;
+		private _resourcesText = format ["<t size='0.6' color='#C1C0BB'>" + localize "STR_A3A_fn_base_resourcesFIA_resources" + "<br/><br/></t>", FactionGet(reb,"name")];
+		private _moneyText = format ["<t size='0.5' color='#C1C0BB'>" + localize "STR_A3A_fn_base_resourcesFIA_money" + "</t><br/><br/><br/>","+", _resourcesFIA toFixed 0];
+	};
 	_updated = [] call A3A_fnc_arsenalManage;
 	if (_updated != "") then
 		{
-		_updated = format ["<t size='0.5' color='#C1C0BB'>" + localize "STR_A3A_fn_init_resourceCheck_arsenal" + "<br/><br/>%1</t>",_updated];
-		[petros,"income",_updated] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+		_moneyText = _moneyText + format ["<t size='0.5' color='#C1C0BB'>" + localize "STR_A3A_fn_init_resourceCheck_arsenal" + "<br/><br/>%1</t>",_updated];
+		[petros,"income",_resourcesText + _moneyText] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
 		};
 	}
 else
