@@ -44,21 +44,16 @@ private _light = _faction get "vehiclesHelisLight";
 private _transport = _faction get "vehiclesHelisTransport";
 private _lightAttack = _faction get "vehiclesHelisLightAttack";
 private _fullAttack = _faction get "vehiclesHelisAttack";
-private _lightWeight = 1;
-private _transportWeight = 1;
-private _lightAttackWeight = 2;
-private _fullAttackWeight = 1;
-private _noHelis = 0;
-if (count _light == 0) then {_lightWeight = 0; _noHelis = _noHelis + 1};
-if (count _transport == 0) then {_transportWeight = 0; _noHelis = _noHelis + 1};
-if (count _lightAttack == 0) then {_lightAttackWeight = 0; _noHelis = _noHelis + 1};
-if (count _fullAttack == 0) then {_fullAttackWeight = 0; _noHelis = _noHelis + 1};
-if (_noHelis == 4) exitWith {
+private _typePool = [];
+if (_light isNotEqualTo []) then {_typePool append [_light, 1]};
+if (_transport isNotEqualTo []) then {_typePool append [_transport, 1]};
+if (_lightAttack isNotEqualTo []) then {_typePool append [_lightAttack, 2]};
+if (_fullAttack isNotEqualTo []) then {_typePool append [_fullAttack, 1]};
+if (_typePool isEqualTo []) exitWith {
     Error("No aircrafts in arrays vehiclesHelisLight, vehiclesHelisTransport or vehiclesHelisAttack. Reselecting DES mission");
     ["DES"] remoteExec ["A3A_fnc_missionRequest",2];
 };
-private _weightsArray = [_light,_lightWeight,_transport,_transportWeight,_lightAttack,_lightAttackWeight,_fullAttack,_fullAttackWeight];
-private _heliType = selectRandomWeighted _weightsArray;
+private _heliType = selectRandomWeighted _typePool;
 private _typeVehH = selectRandom _heliType;
 private _isAttackHeli = _typeVehH in (_fullAttack + _lightAttack);
 
