@@ -154,7 +154,7 @@ if (count _backpcksFinal > 0) then
 		};
 	};
 
-if (count _this == 3) then
+if (count _this > 2) then
 	{
 	deleteVehicle _originX;
 	}
@@ -169,19 +169,24 @@ else
 if (_destinationX == boxX) then
 	{
 //	{if (_x distance boxX < 10) then {[petros,"hint","Ammobox Loaded", "Cargo"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach (call A3A_fnc_playableUnits);
-	if ((_originX isKindOf "ReammoBox_F") and (_originX != vehicleBox)) then {deleteVehicle _originX};
-	private _moneyText = "";
-	if (count _this > 3) then {
-		[0,_this select 3, true] spawn A3A_fnc_resourcesFIA;
-		private _resourcesText = format ["<t size='0.6' color='#C1C0BB'>" + localize "STR_A3A_fn_base_resourcesFIA_resources" + "<br/><br/></t>", FactionGet(reb,"name")];
-		private _moneyText = format ["<t size='0.5' color='#C1C0BB'>" + localize "STR_A3A_fn_base_resourcesFIA_money" + "</t><br/><br/><br/>","+", _resourcesFIA toFixed 0];
-	};
-	_updated = [] call A3A_fnc_arsenalManage;
-	if (_updated != "") then
-		{
-		_moneyText = _moneyText + format ["<t size='0.5' color='#C1C0BB'>" + localize "STR_A3A_fn_init_resourceCheck_arsenal" + "<br/><br/>%1</t>",_updated];
-		[petros,"income",_resourcesText + _moneyText] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
-		};
+    private _moneyText = "";
+    private _arsenalText = "";
+ 	if (count _this > 3) then { 
+        [0,_this select 3, true] spawn A3A_fnc_resourcesFIA; 
+        _moneyText = format ["<t size='0.6' color='#C1C0BB'>" + localize "STR_A3A_fn_base_resourcesFIA_resources" + "<br/><br/></t>", FactionGet(reb,"name")]; 
+        _moneyText = _moneyText + format ["<t size='0.5' color='#C1C0BB'>" + localize "STR_A3A_fn_base_resourcesFIA_money" + "</t><br/><br/><br/>","+", _this select 3];
+    };
+    _updated = [] call A3A_fnc_arsenalManage;
+    if (_updated != "") then 
+    { 
+        _arsenalText = format ["<t size='0.5' color='#C1C0BB'>" + localize "STR_A3A_fn_init_resourceCheck_arsenal" + "<br/><br/>%1</t>",_updated]; 
+        private _splitText = _arsenalText splitString ",";
+        _arsenalText = _splitText joinString "";
+        private _allButBoss = units teamplayer + units civilian - [theBoss];
+        [petros,"income",_arsenalText] remoteExec ["A3A_fnc_commsMP",_allButBoss];
+    }; 
+    private _fullText = [_moneyText,_arsenalText] joinString "";
+    [petros,"income",_fullText] remoteExec ["A3A_fnc_commsMP",theBoss];
 	}
 else
 	{
