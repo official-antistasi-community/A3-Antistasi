@@ -182,7 +182,7 @@ if (_destinationX == boxX) then
         _arsenalText = format ["<t size='0.5' color='#C1C0BB'>" + localize "STR_A3A_fn_init_resourceCheck_arsenal" + "<br/><br/>%1</t>",_updated]; 
         private _splitText = _arsenalText splitString ",";
         _arsenalText = _splitText joinString "";
-        private _allButBoss = units teamplayer + units civilian - [theBoss];
+        private _allButBoss = allPlayers - entities "HeadlessClient_F" - [theBoss];
         [petros,"income",_arsenalText] remoteExec ["A3A_fnc_commsMP",_allButBoss];
     }; 
     private _fullText = [_moneyText,_arsenalText] joinString "";
