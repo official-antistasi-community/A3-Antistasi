@@ -3,6 +3,100 @@ Changelog
 ==========
 
 
+Version 3.9.0
+===============
+
+.. note::
+   18th May 2024
+
+.. admonition:: Major
+   
+   * :issue:`3454` AI will now send boats for naval support during major attacks
+   * :issue:`3483` Added maps Napf and Napf Winter
+   * :issue:`3489` Added map Regero
+   * :issue:`3511` Added a gun shop where Petros' cousin, Solomon, sells small arms
+   * :issue:`3515` Fixed many bugs and added many features to new battle menu
+
+.. admonition:: Minor
+
+   * :issue:`3378` Added additional vehicle categories and an author section to the garage
+   * :issue:`3440` Reworked airbase vehicle spawn selection
+   * :issue:`3444` AI will now fast-rope from more helicopters
+   * :issue:`3472` Re-enabled scouting UAV support during attacks
+   * :issue:`3493` Added better ACRE radio to starting equipment
+   * :issue:`3501` Binocular magazine is now loaded from arsenal automatically
+   * :issue:`3502` Improved accuracy on dive bombing planes
+   * :issue:`3514` Added ACE Plotting Board to starting equipment
+   * :issue:`3521` TFAR radio distance is now boosted by friendly towers
+   * :issue:`3526` Statics are now sold for half their cost
+   * :issue:`3527` SPE bridges can no longer be destroyed
+   * :issue:`3532` Added tooltips to some new game setup options
+   * :issue:`3536` Explosive placement is now logged
+   * :issue:`3539` Petros can now die to enemy napalm
+   * :issue:`3540` MG car squads can now be bought from the new battle menu
+   * :issue:`3550` Softened corpse auto-cleanup rules
+   * :issue:`3570` Added ACE universal artillery rangetable to starting equipment
+   * :issue:`3571` Convoys now pick smarter start and end points
+   * :issue:`3579` Successfully defended punishments reduce punishment chance
+   * :issue:`3589` Airbases will sometimes spawn transport and light attack helis
+   * :issue:`3600` Players can set their own UI preference from the "Game Options" screen
+
+.. admonition:: Template updates
+
+   * :issue:`3499` Added 3CB civilian factions ADC and MEC
+   * :issue:`3512` Updated WS and RF to 1.05 and 1.03 updates
+   * :issue:`3518` Added 3CB US Marines faction
+   * :issue:`3519` Added 3CB GAF faction
+   * :issue:`3588` Changed Assault Boat to RHIB in many factions
+
+.. admonition:: Terrain updates
+
+   * :issue:`3528` Removed a few erroneous objects on Colombia
+   * :issue:`3544` Changed garage box to traditional red box on several maps
+
+.. admonition:: Bugfixes
+
+   * :issue:`3481` Fixed searching two squad leads for intel
+   * :issue:`3482` Fixed fake AI players being created
+   * :issue:`3496` Fixed paratroopers landing in water
+   * :issue:`3508` Fixed SOG factions using Greek names
+   * :issue:`3516` Fixed undercover breaking on vehicle repair
+   * :issue:`3517` Fixed wrong laptop hack string
+   * :issue:`3524` Fixed garage count not updating on open
+   * :issue:`3531` Fixed an error with support calls on AFK players
+   * :issue:`3531` Fixed an error with two players building the same object
+   * :issue:`3534` Placed speed limit on CAS to avoid lawn-darting
+   * :issue:`3535` Fixed resources spawning military instead of militia sniper patrols
+   * :issue:`3539` Fixed some Petros death bugs
+   * :issue:`3553` Fixed broken specops squads with missing UAVs
+   * :issue:`3574` Fixed some log spam from towing physics objects
+   * :issue:`3585` Fixed transport helos attempting to land too fast
+
+.. admonition:: Groundwork
+
+   * :issue:`3507` Added additional map customizability with valid banks and attack distances
+
+.. admonition:: Localization
+
+   * [No PRs] - Unfortunately no updates due to pipeline issues.
+
+.. admonition:: Tools
+
+
+.. admonition:: Refactor
+
+   * :issue:`3523` Refactored roadblock and SpecOp point placement and management
+   * :issue:`3586` Added baseWeapon automatic checking to loot scripts
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
 Version 3.8.0
 ===============
 

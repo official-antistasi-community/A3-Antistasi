@@ -15,6 +15,8 @@ params ["_side"];
 
 Info_1("Starting attack choice script for side %1", _side);
 
+// Decrease the punishment defence adjustment a bit each time invaders generate an attack
+if (_side == Invaders) then { A3A_punishmentDefBuff = 0 max (A3A_punishmentDefBuff - 0.25) };
 
 // Make a weighted list of rebel attack targets
 private _targetsAndWeights = [teamPlayer, _side] call A3A_fnc_findAttackTargets;

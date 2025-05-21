@@ -95,7 +95,7 @@ while {true} do {
     } forEach (_sites inAreaArrayIndexes [_pos, CAMP_MAX, CAMP_MAX]);
 };
 
-if (_added != _numToAdd) then {
+if (_added < _numToAdd) then {
     Info_1("Ran out of valid camp positions for %1", _side);
 };
 

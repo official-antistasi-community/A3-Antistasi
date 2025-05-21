@@ -326,7 +326,7 @@ _resDefOcc = _resDefOcc / A3A_balancePlayerScale;
 _resDefInv = _resDefInv / A3A_balancePlayerScale;
 
 // Enemy resources. Could hashmap this instead...
-["enemyResources", [_resDefOcc, _resDefInv, _resAttOcc, _resAttInv]] call A3A_fnc_setStatVariable;
+["enemyResources", [_resDefOcc, _resDefInv, _resAttOcc, _resAttInv, A3A_punishmentDefBuff]] call A3A_fnc_setStatVariable;
 
 // HQ knowledge
 ["HQKnowledge", [A3A_curHQInfoOcc, A3A_curHQInfoInv, A3A_oldHQInfoOcc, A3A_oldHQInfoInv]] call A3A_fnc_setStatVariable;

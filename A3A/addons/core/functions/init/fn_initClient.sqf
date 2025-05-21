@@ -108,6 +108,7 @@ player setVariable ["punish",0,true];
 player setVariable ["eligible",player call A3A_fnc_isMember,true];
 player setVariable ["A3A_playerUID",getPlayerUID player,true];			// Mark so that commander routines know for remote-controlling
 
+A3A_GUIDevPreview = profileNamespace getVariable ["AntistasiUseNewUI", true];
 musicON = false;
 recruitCooldown = 0;			//Prevents units being recruited too soon after being dismissed.
 incomeRep = false;

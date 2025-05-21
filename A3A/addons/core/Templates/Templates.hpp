@@ -851,7 +851,7 @@ class Templates
         flagTexture = "\UK3CB_Factions\addons\UK3CB_Factions_GAF\Flag\GAF_flag_co.paa";
         name = "3CB GAF Temperate";
         file = "3CB_AI_GAF";
-        climate[] = {"Temperate"};
+        climate[] = {"temperate"};
     };
 
     class 3CBF_KRG : 3CBF_Base
@@ -969,6 +969,7 @@ class Templates
         name = "3CB Middle Eastern";
         file = "3CB_Civ_MEC";
         maps[] = {"takistan","tem_anizay","kunduz"};
+        climate[] = {"arid"};
         shortName = "Civilian";
         lore = $STR_A3A_templates_lore_MEC;
     };
@@ -979,6 +980,7 @@ class Templates
         name = "3CB African Desert";
         file = "3CB_Civ_ADC";
         maps[] = {"takistan","tem_anizay","kunduz"};
+        climate[] = {"arid","tropical"};
         shortName = "Civilian";
         lore = $STR_A3A_templates_lore_ADC;
     };

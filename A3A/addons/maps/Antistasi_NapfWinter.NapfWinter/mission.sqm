@@ -17491,7 +17491,7 @@ class Mission
 									class PositionInfo
 									{
 										position[]={16886.121,43.474831,13762.59};
-										angles[]={6.2531958,4.042305,0.015998369};
+										angles[]={0,4.042305,0};
 									};
 									side="Empty";
 									flags=4;
@@ -40402,7 +40402,7 @@ class Mission
 								{
 									dataType="Marker";
 									position[]={14502.611,5.072,2783.48};
-									name="seap_5_mortar";
+									name="outp_25_mortar";
 									markerType="ELLIPSE";
 									type="ellipse";
 									colorName="ColorYellow";
@@ -41985,7 +41985,7 @@ class Mission
 						class Item119
 						{
 							dataType="Marker";
-							position[]={6713.9346,14.515488,16965.604};
+							position[]={6721.23,0.00136328,16955.1};
 							name="control_90";
 							markerType="RECTANGLE";
 							type="rectangle";
