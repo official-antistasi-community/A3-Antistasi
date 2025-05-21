@@ -69,9 +69,10 @@ private _utilityRefund = {
     } else {
         _toRefund = _object getVariable ['A3A_itemPrice', 0];
     };
-    if ("loot" in _flags) then {
-        _feedBack = "STR_HR_GRG_Feedback_addVehicle_LTC";
-        [_object, boxX, true] call A3A_fnc_ammunitionTransfer;
+    if ("loot" in _flags) exitWith {
+        ["STR_HR_GRG_Feedback_addVehicle_LTC"] remoteExec ["HR_GRG_fnc_Hint", _client];
+        [_object, boxX, true, _toRefund] call A3A_fnc_ammunitionTransfer;
+        true;
     };
 
     deleteVehicle _object;
