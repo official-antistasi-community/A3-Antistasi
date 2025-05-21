@@ -1686,7 +1686,7 @@ class Templates
         climate[] = {"arid"};
     };
 
-    class SEP_US_Winter : SEP_Base
+    class SEP_IHAC : SEP_Base
     {
         side = "Occ";
         flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_us.paa);

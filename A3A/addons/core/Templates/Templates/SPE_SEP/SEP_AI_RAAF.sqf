@@ -2,8 +2,8 @@
 //   Side Information   //
 //////////////////////////
 
-["name", "US"] call _fnc_saveToTemplate;
-["spawnMarkerName", "US support corridor"] call _fnc_saveToTemplate;
+["name", "RAAF"] call _fnc_saveToTemplate;
+["spawnMarkerName", "RAAF support corridor"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_US_F"] call _fnc_saveToTemplate;
 ["flagTexture", "a3\data_f\flags\flag_us_co.paa"] call _fnc_saveToTemplate;
@@ -27,7 +27,7 @@
 ["vehiclesTrucks", ["SEP_I_RAR_CCKW_353","SEP_I_RAR_CCKW_353","SEP_I_RAR_M3_Halftrack", "SEP_I_RAR_M3_Halftrack_Open"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["SPE_CCKW_353_Open"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["SEP_I_RAR_M3_Halftrack_Ammo","SEP_I_RAR_CCKW_353_Ammo","SEP_I_RAR_CCKW_353_Ammo"]] call _fnc_saveToTemplate;
-["vehiclesRepairTrucks", ["SEP_I_RAR_M3_Halftrack_Repair","SPE_CCKW_353_ReSEP_I_RAR_CCKW_353_Repairpair","SEP_I_RAR_CCKW_353_Repair"]] call _fnc_saveToTemplate;
+["vehiclesRepairTrucks", ["SEP_I_RAR_M3_Halftrack_Repair","SEP_I_RAR_CCKW_353_Repair","SEP_I_RAR_CCKW_353_Repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["SEP_I_RAR_M3_Halftrack_Fuel","SEP_I_RAR_CCKW_353_Fuel","SEP_I_RAR_CCKW_353_Fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["SEP_I_RAR_M3_Halftrack_Ambulance","SEP_I_RAR_CCKW_353_Ambulance","SEP_I_RAR_CCKW_353_Ambulance"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["SEP_I_RAR_M3A1_Halftrack","SEP_I_RAR_M3A1_Halftrack","SEP_I_RAR_M20_AUC"]] call _fnc_saveToTemplate;
@@ -78,7 +78,7 @@
 ["minefieldAT", ["SPE_US_M1A1_ATMINE"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["SPE_US_M3_Pressure_MINE", "SPE_US_M3_MINE"]] call _fnc_saveToTemplate;
 
-#include "SPE_Vehicle_Attributes.sqf"
+//#include "SPE_Vehicle_Attributes.sqf"
 
 /////////////////////
 ///  Identities   ///
