@@ -1742,4 +1742,25 @@ class Templates
         shortName = "FIA";
         lore = $STR_A3A_templates_lore_FIA;
     };
+
+    // ***************************** TFC *****************************
+
+    class TFC_Base
+    {
+        requiredAddons[] = {"TFC_Core_Data","TFC_SF_Data","tfc_rcaf_data_rcaf","TFC_CA_trucks","rhsgref_main"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\TFC);
+        logo = "\tfc_core\addons\data\images\tfc_ca_logo_ca.paa";
+        priority = 80;
+    };
+
+     class TFC_Canada : TFC_Base
+    {
+        side = "Occ";
+        flagTexture = "\tfc_core\addons\data\data\flags\flag_canada_co.paa";
+        name = "TFC Canada";
+        file = "TFC_AI_Canada";
+        climate[] = {};
+        shortName = "TFC";
+        lore = "";
+    };
 };
