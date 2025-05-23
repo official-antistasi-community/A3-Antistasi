@@ -1742,4 +1742,25 @@ class Templates
         shortName = "FIA";
         lore = $STR_A3A_templates_lore_FIA;
     };
+
+    // ***************************** CRO *****************************
+
+    class CRO_Base
+    {
+        requiredAddons[] = {"CRO_Base","rhsgref_main"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\CRO);
+        logo = "\cro_base\data\cromil_ca.paa";
+        priority = 80;
+    };
+
+    class CRO_Croatia : CRO_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\Croatia_ca.paa";
+        name = "CRO Croatian Army";
+        file = "CRO_AI_Croatia";
+        climate[] = {};
+        shortName = "Croatian Army";
+        lore = "";
+    };
 };
