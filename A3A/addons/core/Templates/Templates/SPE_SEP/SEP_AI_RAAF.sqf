@@ -6,8 +6,8 @@
 ["spawnMarkerName", "RAAF support corridor"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_US_F"] call _fnc_saveToTemplate;
-["flagTexture", "a3\data_f\flags\flag_us_co.paa"] call _fnc_saveToTemplate;
-["flagMarkerType", "SPE_Faction_US"] call _fnc_saveToTemplate;
+["flagTexture", "\A3\Data_F\Flags\Flag_AltisColonial_CO.paa"] call _fnc_saveToTemplate;
+["flagMarkerType", "flag_AltisColonial"] call _fnc_saveToTemplate;
 
 //////////////////////////
 //       Vehicles       //
@@ -38,8 +38,8 @@
 ["vehiclesHeavyTanks", []] call _fnc_saveToTemplate;
 ["vehiclesAA", ["SPE_US_M16_Halftrack"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
-["vehiclesGunBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesGunBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["SPE_P47"]] call _fnc_saveToTemplate;
@@ -705,6 +705,7 @@ private _policeTemplate = {
 };
 private _policeSLTemplate = {
     call _policeTemplate;
+    [selectRandom ["rifles", "shotGuns"]] call _fnc_setPrimary;
 };
 
 private _crewTemplate = {

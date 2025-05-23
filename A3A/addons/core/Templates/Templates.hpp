@@ -1667,7 +1667,7 @@ class Templates
     class SEP_US_Winter : SEP_Base
     {
         side = "Occ";
-        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_us.paa);
+        flagTexture = "\WW2\SPE_Core_t\Data_t\Flags\flag_USA_co.paa";
         name = "SEP US Winter";
         file = "SEP_AI_US_Winter";
         shortName = "US";
@@ -1678,18 +1678,18 @@ class Templates
     class SEP_RAAF : SEP_Base
     {
         side = "Occ";
-        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_us.paa);
+        flagTexture = "\A3\Data_F\Flags\Flag_AltisColonial_CO.paa";
         name = "SEP Royal Altian Armed Forces";
         file = "SEP_AI_RAAF";
         shortName = "RAAF";
-        lore = "Royal Altian Armed Forces of the colonial rule over Altis and Stratis";
+        lore = "Royal Altian Armed Forces of the colonial Altis";
         climate[] = {"arid"};
     };
 
     class SEP_IHAC : SEP_Base
     {
         side = "Occ";
-        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_us.paa);
+        flagTexture = "\SEP_MISC\data\SEP_Flag_FrenchTanoa_co.paa";
         name = "SEP Horizon Island Colonial Army";
         file = "SEP_AI_IHAC";
         shortName = "ÎHAC";
@@ -1697,21 +1697,10 @@ class Templates
         climate[] = {"tropical"};
     };
 
-    class SEP_WEH_Winter : SEP_Base
-    {
-        side = "Inv";
-        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_ger.paa);
-        name = "SEP Wehrmacht Central Winter";
-        file = "SEP_AI_WEH_Winter";
-        shortName = "WEH";
-        lore = "The homeland command of the German army";
-        climate[] = {"arctic"};
-    };
-
     class SEP_WEH_Core : SEP_Base
     {
         side = "Inv";
-        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_ger.paa);
+        flagTexture = "\WW2\SPE_Core_t\Data_t\Flags\flag_GER_co.paa";
         name = "SEP Wehrmacht Central";
         file = "SEP_AI_WEH_Core";
         shortName = "WEH";
@@ -1719,10 +1708,16 @@ class Templates
         climate[] = {"temperate"};
     };
 
-    class SEP_WEH_DAK : SEP_Base
+    class SEP_WEH_Winter : SEP_WEH_Core
     {
-        side = "Inv";
-        flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_ger.paa);
+        name = "SEP Wehrmacht Central Winter";
+        file = "SEP_AI_WEH_Winter";
+        climate[] = {"arctic"};
+    };
+
+
+    class SEP_WEH_DAK : SEP_WEH_Core
+    {
         name = "SEP Deutsche Afrika Korps";
         file = "SEP_AI_WEH_DAK";
         shortName = "DAK";

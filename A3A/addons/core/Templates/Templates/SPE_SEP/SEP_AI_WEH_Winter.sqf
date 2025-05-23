@@ -6,7 +6,7 @@
 ["spawnMarkerName", "WEH support corridor"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_FIA_F"] call _fnc_saveToTemplate;
-["flagTexture", "ww2\spe_core_t\decals_t\german\flag_ger_ca.paa"] call _fnc_saveToTemplate;
+["flagTexture", "\WW2\SPE_Core_t\Data_t\Flags\flag_GER_co.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "SPE_Faction_WEHRMACHT"] call _fnc_saveToTemplate;
 
 //////////////////////////
@@ -21,29 +21,29 @@
 ["surrenderCrate", "SPE_Weaponcrate_MP40_GER"] call _fnc_saveToTemplate;
 ["equipmentBox", "Box_NATO_Equip_F"] call _fnc_saveToTemplate;
 
-["vehiclesBasic", ["SPE_ST_R200_Unarmed"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["SPE_ST_R200_Unarmed","SPE_ST_R200_Hood"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["SPE_SdKfz250_1", "SPE_SdKfz250_1", "SPE_ST_R200_MG34", "SPE_ST_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
-["vehiclesTrucks", ["SPE_ST_OpelBlitz_Open", "SPE_ST_OpelBlitz", "SPE_ST_OpelBlitz", "SPE_OpelBlitz_Open"]] call _fnc_saveToTemplate;
-["vehiclesCargoTrucks", ["SPE_ST_OpelBlitz_Open"]] call _fnc_saveToTemplate;
-["vehiclesAmmoTrucks", ["SPE_ST_OpelBlitz_Ammo"]] call _fnc_saveToTemplate;
-["vehiclesRepairTrucks", ["SPE_ST_OpelBlitz_Repair"]] call _fnc_saveToTemplate;
-["vehiclesFuelTrucks", ["SPE_ST_OpelBlitz_Fuel"]] call _fnc_saveToTemplate;
-["vehiclesMedical", ["SPE_ST_OpelBlitz_Ambulance"]] call _fnc_saveToTemplate;
+["vehiclesBasic", ["SEP_B_GER_WIN_R200_Unarmed"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["SEP_B_GER_WIN_R200_Unarmed"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["SEP_B_GER_WIN_SdKfz_2501", "SEP_B_GER_WIN_SdKfz_2501", "SEP_B_GER_WIN_R200_MG34", "SEP_B_GER_WIN_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
+["vehiclesTrucks", ["SEP_B_GER_WIN_OpelBlitz", "SEP_B_GER_WIN_OpelBlitz", "SEP_B_GER_WIN_OpelBlitz", "SEP_B_GER_WIN_OpelBlitz_Open"]] call _fnc_saveToTemplate;
+["vehiclesCargoTrucks", ["SEP_B_GER_WIN_OpelBlitz_Open"]] call _fnc_saveToTemplate;
+["vehiclesAmmoTrucks", ["SEP_B_GER_WIN_OpelBlitz_Ammo"]] call _fnc_saveToTemplate;
+["vehiclesRepairTrucks", ["SEP_B_GER_WIN_OpelBlitz_Repair"]] call _fnc_saveToTemplate;
+["vehiclesFuelTrucks", ["SEP_B_GER_WIN_OpelBlitz_Fuel"]] call _fnc_saveToTemplate;
+["vehiclesMedical", ["SEP_B_GER_WIN_OpelBlitz_Ambulance"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
 ["vehiclesAPCs", []] call _fnc_saveToTemplate;
-["vehiclesIFVs", ["SPE_StuG_III_G_SKB","SPE_StuG_III_G_Late"]] call _fnc_saveToTemplate;
-["vehiclesLightTanks",["SPE_PzKpfwIII_N", "SPE_PzKpfwIII_L", "SPE_PzKpfwIII_M", "SPE_PzKpfwIII_J", "SPE_StuG_III_G_Late", "SPE_Nashorn"]] call _fnc_saveToTemplate;
-["vehiclesTanks", ["SPE_PzKpfwIII_M", "SPE_PzKpfwIV_G", "SPE_PzKpfwIV_G", "SPE_PzKpfwV_G"]] call _fnc_saveToTemplate;
-["vehiclesHeavyTanks", ["SPE_Jagdpanther_G1","SPE_PzKpfwVI_H1", "SPE_PzKpfwVI_H1", "SPE_PzKpfwV_G", "SPE_PzKpfwV_G", "SPE_PzKpfwV_G"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["SPE_ST_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
+["vehiclesIFVs", ["SEP_B_GER_WIN_StuG_III_G_SKB", "SEP_B_GER_WIN_StuG_III_G_Late", "SEP_B_GER_WIN_StuH_42"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks",["SEP_B_GER_WIN_PzKpfw_III_N", "SEP_B_GER_WIN_PzKpfw_III_L", "SEP_B_GER_WIN_PzKpfw_III_M", "SEP_B_GER_WIN_PzKpfw_III_J", "SEP_B_GER_WIN_StuG_III_G_Late", "SEP_B_GER_WIN_StuG_III_G_SKB", "SEP_B_GER_WIN_Nashorn"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["SEP_B_GER_WIN_PzKpfw_III_M", "SEP_B_GER_WIN_PzKpfw_III_M", "SEP_B_GER_WIN_PzKpfw_IV_G", "SEP_B_GER_WIN_PzKpfw_IV_G", "SEP_B_GER_WIN_PzKpfw_V_G"]] call _fnc_saveToTemplate;
+["vehiclesHeavyTanks", ["SEP_B_GER_WIN_Jagdpanther_G1","SEP_B_GER_WIN_PzKpfw_VI_H1", "SEP_B_GER_WIN_PzKpfw_VI_H1", "SEP_B_GER_WIN_PzKpfw_V_G", "SEP_B_GER_WIN_PzKpfw_V_G", "SEP_B_GER_WIN_PzKpfw_V_G"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["SEP_B_GER_WIN_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
-["vehiclesGunBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesGunBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["SPE_FW190F8"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["SPE_FW190F8"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["SEP_B_GER_WIN_FW190F8"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["SEP_B_GER_WIN_FW190F8"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["SPEX_C47_Skytrain"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;
@@ -51,34 +51,35 @@
 ["vehiclesHelisLightAttack", []] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", []] call _fnc_saveToTemplate;
 
-["vehiclesArtillery", ["SPE_leFH18"]] call _fnc_saveToTemplate;
+["vehiclesArtillery", ["SEP_B_GER_WIN_leFH18"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
-["SPE_leFH18", ["SPE_20x_Shell_105L28_Gr38_HE"]]
+["SPE_leFH18", ["SPE_8x_Shell_105L28_Gr39HlC_HEAT_Artillery","SPE_20x_Shell_105L28_Gr38_HE","SPE_20x_Shell_105L28_Gr38_NB"]]
 ]] call _fnc_saveToTemplate;
 
 ["uavsAttack", []] call _fnc_saveToTemplate;
 ["uavsPortable", []] call _fnc_saveToTemplate;
 
 //Config special vehicles
-["vehiclesMilitiaLightArmed", ["SPE_GER_R200_MG34"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaTrucks", ["SPE_OpelBlitz_Open"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaCars", ["SPE_GER_R200_Unarmed", "SPE_GER_R200_Hood"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["SEP_B_GER_WIN_R200_MG34"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaTrucks", ["SEP_B_GER_WIN_OpelBlitz_Open"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaCars", ["SEP_B_GER_WIN_R200_Hood"]] call _fnc_saveToTemplate;
 
 ["vehiclesPolice", ["SPE_Milice_R200_Unarmed", "SPE_Milice_R200_Hood"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["SPE_MG42_Lafette_Deployed", "SPE_MG34_Lafette_Deployed"]] call _fnc_saveToTemplate;
-["staticAT", ["SPE_leFH18_AT", "SPE_Pak40"]] call _fnc_saveToTemplate;
-["staticAA", ["SPE_FlaK_30", "SPE_FlaK_38"]] call _fnc_saveToTemplate;
-["staticMortars", ["SPE_GrW278_1"]] call _fnc_saveToTemplate;
+["staticMGs", ["SEP_B_GER_WIN_MG34_Lafette_Deployed", "SEP_B_GER_WIN_MG42_Lafette_Deployed"]] call _fnc_saveToTemplate;
+["staticAT", ["SEP_B_GER_WIN_leFH18_AT", "SEP_B_GER_WIN_Pak40"]] call _fnc_saveToTemplate;
+["staticAA", ["SEP_B_GER_WIN_FlaK_30", "SEP_B_GER_WIN_FlaK_38", "SEP_B_GER_WIN_FlaK_36_AA"]] call _fnc_saveToTemplate;
+["staticMortars", ["SEP_B_GER_WIN_GrW278_1"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "SPE_8Rnd_81mm_FA_Mle_1932_HE"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "SPE_8Rnd_81mm_FA_Mle_1932_Smoke"] call _fnc_saveToTemplate;
+["mortarMagazineFlare", "SPE_8Rnd_81mm_FA_Mle_1932_Illu"] call _fnc_saveToTemplate;
 
 //Minefield definition
 ["minefieldAT", ["SPE_US_M1A1_ATMINE"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["SPE_US_M3_Pressure_MINE", "SPE_US_M3_MINE"]] call _fnc_saveToTemplate;
 
-#include "SPE_Vehicle_Attributes.sqf"
+//#include "SPE_Vehicle_Attributes.sqf"
 
 /////////////////////
 ///  Identities   ///
@@ -86,10 +87,7 @@
 
 ["faces", ["LivonianHead_6","SPE_boyartsev","SPE_bykov","SPE_Connors","SPE_DAgostino","SPE_Davidson","SPE_Elliot","SPE_Grishka","SPE_Hauptmann","SPE_Klimakov","SPE_Krueger","SPE_Kuzmin","SPE_Neumann","SPE_Oberst","SPE_OBrien","SPE_Vasiliev","SPE_Walter","SPE_Wolf","Sturrock","WhiteHead_01","WhiteHead_02","WhiteHead_03","WhiteHead_04","WhiteHead_05","WhiteHead_06","WhiteHead_08","WhiteHead_09","WhiteHead_11","WhiteHead_12","WhiteHead_13","WhiteHead_14","WhiteHead_15","WhiteHead_18","WhiteHead_19","WhiteHead_20","WhiteHead_21"]] call _fnc_saveToTemplate;
 ["voices", ["spe_male01ger", "spe_male02ger"]] call _fnc_saveToTemplate;
-["milFaces", ["LivonianHead_6","SPE_Arnold","SPE_Connors","SPE_Davidson","SPE_Elliot","SPE_Oberst","SPE_Seppmeyer","SPE_Walter","WhiteHead_01","WhiteHead_02","WhiteHead_05","WhiteHead_06","WhiteHead_07","WhiteHead_08","WhiteHead_12","WhiteHead_15","WhiteHead_18"]] call _fnc_saveToTemplate;
-["milVoices", ["spe_male01fre", "spe_male02fre"]] call _fnc_saveToTemplate;
-["polFaces", ["LivonianHead_6","SPE_Arnold","SPE_Connors","SPE_Davidson","SPE_Elliot","SPE_Oberst","SPE_Seppmeyer","SPE_Walter","WhiteHead_01","WhiteHead_02","WhiteHead_05","WhiteHead_06","WhiteHead_07","WhiteHead_08","WhiteHead_12","WhiteHead_15","WhiteHead_18"]] call _fnc_saveToTemplate;
-["polVoices", ["spe_male01fre", "spe_male02fre"]] call _fnc_saveToTemplate;
+
 "SPE_GermanMen" call _fnc_saveNames;
 
 //////////////////////////
@@ -103,6 +101,7 @@ _loadoutData set ["rifles", [
 ["SPE_K98", "SPE_ACC_K98_Bayo", "", "", ["SPE_5Rnd_792x57", "SPE_5Rnd_792x57", "SPE_5Rnd_792x57_t"], [], ""]
 ]];
 _loadoutData set ["slRifles", [
+["SPE_STG44", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""],
 ["SPE_MP40", "", "", "", ["SPE_32Rnd_9x19", "SPE_32Rnd_9x19", "SPE_32rnd_9x19_t"], [], ""],
 ["SPE_G43", "", "", "", ["SPE_10Rnd_792x57", "SPE_10Rnd_792x57", "SPE_10Rnd_792x57_T"], [], ""],
 ["SPE_K98_Late", "SPE_ACC_K98_Bayo", "", "", ["SPE_5Rnd_792x57_SMK", "SPE_5Rnd_792x57_SMK", "SPE_5Rnd_792x57_t"], [], ""],
@@ -117,6 +116,7 @@ _loadoutData set ["SMGs", [
 ["SPE_MP40", "", "", "", ["SPE_32Rnd_9x19", "SPE_32Rnd_9x19", "SPE_32rnd_9x19_t"], [], ""]
 ]];
 _loadoutData set ["machineGuns", [
+["SPE_MG42", "", "", "", ["SPE_50Rnd_792x57", "SPE_50Rnd_792x57", "SPE_50Rnd_792x57_SMK"], [], ""],
 ["SPE_MG42", "", "", "", ["SPE_50Rnd_792x57", "SPE_50Rnd_792x57", "SPE_50Rnd_792x57_SMK"], [], ""],
 ["SPE_MG34", "", "", "", ["SPE_50Rnd_792x57", "SPE_50Rnd_792x57", "SPE_50Rnd_792x57_SMK"], [], ""]
 ]];
@@ -153,27 +153,34 @@ _loadoutData set ["radios", ["ItemRadio"]];
 _loadoutData set ["binoculars", ["SPE_Binocular_GER"]];
 _loadoutData set ["Flashlight", ["SPE_GER_FL_Signal_Flashlight"]];
 
-_loadoutData set ["uniforms", ["U_SPE_GER_Soldier_Boots", "U_SPE_GER_Soldier_Gaiters", "U_SPE_GER_MG_schutze", "U_SPE_GER_Gefreiter_Gaiters", "U_SPE_GER_Gefreiter", "U_SPE_GER_Oberschutze"]];
-_loadoutData set ["sniUniforms", []];
-_loadoutData set ["medUniforms", ["U_SPE_GER_Medic"]];
-_loadoutData set ["slUniforms", ["U_SPE_GER_Unterofficer"]];
+_loadoutData set ["uniforms", ["SEP_B_GER_U_Parka_wht", "SEP_B_GER_U_Parka_wht", "SEP_B_GER_U_Parka_grau_mix", "SEP_B_GER_U_Parka_grau"]];
+_loadoutData set ["sniUniforms", ["SEP_B_GER_U_Parka_wht"]];
+_loadoutData set ["medUniforms", ["SEP_B_GER_U_Parka_wht"]];
+_loadoutData set ["slUniforms", ["SEP_B_GER_U_Parka_grau_mix_uffz", "SEP_B_GER_U_Parka_wht"]];
 
-_loadoutData set ["vests", ["V_SPE_GER_VestMP40", "V_SPE_GER_VestG43", "V_SPE_GER_VestKar98", "V_SPE_DAK_VestKar98"]];
+_loadoutData set ["vests", ["V_SPE_GER_VestMP40", "V_SPE_GER_VestG43", "V_SPE_GER_VestKar98", "V_SPE_GER_VestG43"]];
 _loadoutData set ["glVests", ["V_SPE_US_Vest_Grenadier"]];
-_loadoutData set ["sniVests", ["V_SPE_GER_VestKar98", "V_SPE_DAK_VestKar98"]];
-_loadoutData set ["engVests", ["V_SPE_DAK_PioneerVest"]];
-_loadoutData set ["mgVests", ["V_SPE_DAK_VestMG", "V_SPE_GER_VestMG"]];
-_loadoutData set ["slVests", ["V_SPE_DAK_VestUnterofficer", "V_SPE_GER_FieldOfficer", "V_SPE_GER_VestUnterofficer"]];
+_loadoutData set ["medVests", ["V_SPE_GER_SaniVest", "V_SPE_GER_SaniVest2"]];
+_loadoutData set ["sniVests", ["V_SPE_GER_SniperBelt"]];
+_loadoutData set ["engVests", ["V_SPE_GER_PioneerVest", "V_SPE_GER_VestMP40"]];
+_loadoutData set ["mgVests", ["V_SPE_GER_VestMG"]];
+_loadoutData set ["slVests", ["V_SPE_GER_VestSTG", "V_SPE_GER_FieldOfficer", "V_SPE_GER_FieldOfficer", "V_SPE_GER_VestUnterofficer"]];
 
 _loadoutData set ["backpacks", ["B_SPE_GER_Tonister41_Frame_ST", "B_SPE_GER_Tonister41_Frame_Full_ST"]];
 _loadoutData set ["medBackpacks", ["B_SPE_GER_MedicBackpack_Empty"]];
 _loadoutData set ["slBackpacks", ["B_SPE_GER_Radio"]];
 _loadoutData set ["engBackpacks", ["B_SPE_GER_SapperBackpack_empty"]];
+_loadoutData set ["atBackpacks", ["B_SPE_GER_RPzB_Belt_bag", "B_SPE_GER_RPzB_Belt_bag_zelt"]];
 
-_loadoutData set ["helmets", ["H_SPE_GER_Helmet", "H_SPE_GER_Helmet_ns", "H_SPE_GER_HelmetUtility_Oak_OS"]];
-_loadoutData set ["sniHelmets", []];
+_loadoutData set ["helmets", ["H_HeadBandage_stained_F", 
+"SEP_B_GER_H_StahlhelmCover_maus", "SEP_B_GER_H_StahlhelmCover_maus_ns",
+"SEP_B_GER_H_StahlhelmCover_win", "SEP_B_GER_H_StahlhelmCover_win_ns",
+"SEP_B_GER_H_StahlhelmM40_WIN_1", "SEP_B_GER_H_StahlhelmM40_WIN_1_net", "SEP_B_GER_H_StahlhelmM40_WIN_1_utility","SEP_B_GER_H_StahlhelmM40_WIN_1_wire",
+"SEP_B_GER_H_Stahlhelm_WIN_2", "SEP_B_GER_H_Stahlhelm_WIN_2_utility", "SEP_B_GER_H_Stahlhelm_WIN_1", "SEP_B_GER_H_Stahlhelm_WIN_1_utility"
+]];
+_loadoutData set ["sniHelmets", ["SEP_B_GER_H_StahlhelmCover_win", "SEP_B_GER_H_StahlhelmCover_win_ns"]];
 _loadoutData set ["medHelmets", ["H_SPE_GER_Helmet_Medic"]];
-_loadoutData set ["slHelmets", ["H_SPE_GER_Cap_Offz"]];
+_loadoutData set ["slHelmets", ["SEP_B_GER_H_StahlhelmCover_win", "SEP_B_GER_H_StahlhelmCover_win_ns"]];
 
 _loadoutData set ["facewear", ["G_SPE_GER_GM30","G_SPE_Dust_Goggles","G_SPE_Dust_Goggles_2"]];
 
@@ -216,14 +223,14 @@ _loadoutData set ["items_unarmed_extras", []];
 ///////////////////////////////////////
 
 private _sfLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_sfLoadoutData set ["uniforms", ["U_SPE_ST_Soldier_E44_Camo", "U_SPE_ST_MGunner_E44", "U_SPE_ST_Soldier_E44_Camo2", "U_SPE_ST_Soldier_E44"]];
-_sfLoadoutData set ["medUniforms", ["U_SPE_ST_Medic_E44"]];
-_sfLoadoutData set ["slUniforms", ["U_SPE_ST_Unterofficier_E44"]];
+_sfLoadoutData set ["uniforms", ["SEP_B_GER_U_Parka_wht", "SEP_B_GER_U_Parka_wht", "SEP_B_GER_ST_U_Parka_maus", "SEP_B_GER_ST_U_Parka_maus_mix"]];
+_sfLoadoutData set ["medUniforms", []];
+_sfLoadoutData set ["slUniforms", []];
 
-_sfLoadoutData set ["helmets", ["H_SPE_ST_Helmet2", "H_SPE_ST_Helmet4"]];
-_sfLoadoutData set ["slHelmets", ["H_SPE_GER_Fieldcap2"]];
+_sfLoadoutData set ["helmets", ["SEP_B_GER_H_StahlhelmCover_win", "SEP_B_GER_H_StahlhelmCover_win_ns"]];
 
 _sfLoadoutData set ["rifles", [
+["SPE_G43", "", "", "", ["SPE_10Rnd_792x57", "SPE_10Rnd_792x57", "SPE_10Rnd_792x57_T"], [], ""],
 ["SPE_G43", "", "", "", ["SPE_10Rnd_792x57", "SPE_10Rnd_792x57", "SPE_10Rnd_792x57_T"], [], ""],
 ["SPE_STG44", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""],
 ["SPE_K98_Late_GW", "SPE_ACC_GW_SB_Empty", "", "", ["SPE_5Rnd_792x57_SMK", "SPE_5Rnd_792x57_SMK", "SPE_5Rnd_792x57_t"], ["SPE_1Rnd_G_PZGR_40", "SPE_1Rnd_G_SPRGR_30", "SPE_1Rnd_G_FLGR", "SPE_1Rnd_G_NBGR_42"], ""]
@@ -258,9 +265,11 @@ _sfLoadoutData set ["sniperRifles", [
 
 private _militaryLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
-_militaryLoadoutData set ["sniUniforms", ["U_SPE_GER_Soldier_camo", "U_SPE_GER_Soldier_camo4"]];
-_militaryLoadoutData set ["sniHelmets", ["H_SPE_GER_HelmetUtility_Oak_OS", "H_SPE_GER_HelmetUtility_Grass_OS", "H_SPE_GER_M38_2", "H_SPE_GER_Cap"]];
+_militaryLoadoutData set ["flamethrower", ["SPE_Flammenwerfer41"]];
+_militaryLoadoutData set ["flamethrowerMask", ["G_SPE_GER_GM30"]];
+_militaryLoadoutData set ["tankBackpack", ["B_SPE_GER_Flammenwerfer_41"]];
 //See LoadoutData
+
 ///////////////////////////////
 //    Police Loadout Data    //
 ///////////////////////////////
@@ -272,16 +281,10 @@ _policeLoadoutData set ["vests", ["V_SPE_milice_Vest_zwart_rifle", "V_SPE_milice
 _policeLoadoutData set ["helmets", ["H_SPE_Milice_Adrian", "H_SPE_Milice_Adrian_ns"]];
 _policeLoadoutData set ["slHelmets", ["H_SPE_Milice_beret_1"]];
 
-_policeLoadoutData set ["SMGs", [
-["SPE_MP35", "", "", "", ["SPE_24Rnd_MP35_9x19", "SPE_24Rnd_MP35_9x19", "SPE_24rnd_MP35_9x19_t"], [], ""]
-]];
 _policeLoadoutData set ["rifles", [
-["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""]
-]];
-_policeLoadoutData set ["shotGuns", [
-["SPE_Fusil_Mle_208_12", "", "", "", ["SPE_2Rnd_12x65_Slug", "SPE_2Rnd_12x65_No4_Buck", "SPE_2Rnd_12x65_Pellets"], [], ""],
-["SPE_Fusil_Mle_208_12", "", "", "", ["SPE_2Rnd_12x65_No4_Buck", "SPE_2Rnd_12x65_Slug", "SPE_2Rnd_12x65_Pellets"], [], ""],
-["SPE_Fusil_Mle_208_12", "", "", "", ["SPE_2Rnd_12x65_Pellets", "SPE_2Rnd_12x65_Slug", "SPE_2Rnd_12x65_No4_Buck"], [], ""]
+["SEP_WP_MP507", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "", "", "", [], [], ""]
 ]];
 
 ////////////////////////////////
@@ -291,59 +294,70 @@ _policeLoadoutData set ["shotGuns", [
 private _militiaLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
 
-_militiaLoadoutData set ["uniforms", ["U_SPE_milice_2"]];
-_militiaLoadoutData set ["medUniforms", ["U_SPE_milice_2_CD"]];
-_militiaLoadoutData set ["slUniforms", ["U_SPE_milice_2_CT"]];
+_militiaLoadoutData set ["uniforms", ["SEP_B_GER_U_FieldUniform_Volk", "SEP_B_GER_U_FieldUniform_Volk_Unblsd", "SEP_B_GER_U_FieldUniform_Volk_Unblsd_Gefr"]];
+_militiaLoadoutData set ["medUniforms", ["U_SPE_GER_Medic"]];
+_militiaLoadoutData set ["slUniforms", ["SEP_B_GER_U_FieldUniform_Volk_Unblsd_Unter"]];
+_militiaLoadoutData set ["sniUniforms", []];
 
-_militiaLoadoutData set ["vests", ["V_SPE_Milice_Vest_rifle", "V_SPE_milice_Vest_MG"]];
-_militiaLoadoutData set ["glVests", ["V_SPE_Milice_Vest_rifle"]];
-_militiaLoadoutData set ["sniVests", ["V_SPE_milice_Vest_rifle_sidearm"]];
-_militiaLoadoutData set ["engVests", ["V_SPE_milice_Vest_rifle_sidearm"]];
-_militiaLoadoutData set ["mgVests", ["V_SPE_milice_Vest_MG", "V_SPE_milice_Vest_MG_sidearm"]];
-_militiaLoadoutData set ["slVests", ["V_SPE_milice_Vest_smg", "V_SPE_milice_Vest_sidearm"]];
+_militiaLoadoutData set ["vests", ["V_SPE_Milice_Vest_rifle", "V_SPE_erla_VestKar98"]];
+_militiaLoadoutData set ["medVests", ["V_SPE_erla_SaniVest2"]];
+_militiaLoadoutData set ["glVests", ["V_SPE_Milice_Vest_rifle", "V_SPE_erla_VestKar98"]];
+_militiaLoadoutData set ["sniVests", ["V_SPE_Milice_Vest_rifle", "V_SPE_erla_VestKar98"]];
+_militiaLoadoutData set ["engVests", ["V_SPE_erla_PioneerVest"]];
+_militiaLoadoutData set ["mgVests", ["V_SPE_erla_VestMG"]];
+_militiaLoadoutData set ["slVests", ["V_SPE_erla_VestSTG"]];
 
-_militiaLoadoutData set ["backpacks", ["B_SPE_CIV_musette", "B_SPE_FFI_Gasbag"]];
+_militiaLoadoutData set ["backpacks", []];
 _militiaLoadoutData set ["medBackpacks", ["B_SPE_GER_MedicBackpack_Empty"]];
-_militiaLoadoutData set ["slBackpacks", ["B_SPE_Milice_Radio"]];
-_militiaLoadoutData set ["engBackpacks", ["B_SPE_CIV_musette"]];
+_militiaLoadoutData set ["slBackpacks", []];
+_militiaLoadoutData set ["atBackpacks", []];
+_militiaLoadoutData set ["engBackpacks", []];
 
-_militiaLoadoutData set ["helmets", ["H_SPE_Milice_Adrian", "H_SPE_Milice_Adrian_ns"]];
-_militiaLoadoutData set ["medHelmets", ["H_SPE_FR_Adrian_Medic"]];
-_militiaLoadoutData set ["slHelmets", ["H_SPE_Milice_beret_2"]];
+_militiaLoadoutData set ["helmets", ["SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "H_HeadBandage_clean_F", "H_HeadBandage_stained_F", "H_HeadBandage_bloody_F"]];
+_militiaLoadoutData set ["medHelmets", ["H_SPE_GER_Helmet_Medic"]];
+_militiaLoadoutData set ["slHelmets", ["SEP_B_GER_H_FieldCap_Gry"]];
+_militiaLoadoutData set ["sniHelmets", []];
 
 _militiaLoadoutData set ["ATLaunchers", []];
 _militiaLoadoutData set ["sidearms", []];
 
 _militiaLoadoutData set ["rifles", [
-["SPE_No3_Mk1_Enfield", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_770x56", "SPE_5Rnd_770x56"], [], ""],
-["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""],
-["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""]
+["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SPE_K98", "", "", "", [], [], ""],
+["SPE_K98_Late", "", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["shotGuns", [
 ["SPE_Fusil_Mle_208_12", "", "", "", ["SPE_2Rnd_12x65_Pellets"], [], ""],
 ["SPE_Fusil_Mle_208_12_Sawedoff", "", "", "", ["SPE_2Rnd_12x65_Pellets"], [], ""]
 ]];
 _militiaLoadoutData set ["slRifles", [
-["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""],
-["SPE_MP35", "", "", "", ["SPE_24Rnd_MP35_9x19", "SPE_24Rnd_MP35_9x19", "SPE_24rnd_MP35_9x19_t"], [], ""]
+["SEP_WP_MP507", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SPE_K98", "", "", "", [], [], ""],
+["SPE_K98_Late", "", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
-["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""]
+["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SPE_K98", "", "", "", [], [], ""],
+["SPE_K98_Late", "", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""]
+["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98_Sniper", "", "", "", ["SPE_5Rnd_792x57_t"], [], ""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
-["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""]
+["SEP_WP_Gewehr98_Sniper", "", "", "", ["SPE_5Rnd_792x57_t"], [], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [
-["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""],
-["SPE_MP35", "", "", "", ["SPE_24Rnd_MP35_9x19", "SPE_24Rnd_MP35_9x19", "SPE_24rnd_MP35_9x19_t"], [], ""]
+["SEP_WP_MP507", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SPE_K98", "", "", "", [], [], ""],
+["SPE_K98_Late", "", "", "", [], [], ""],
+["SPE_MP40", "", "", "", ["SPE_32Rnd_9x19"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
-["SPE_LMG_303_Mk2", "", "", "", ["SPE_30Rnd_770x56"], [], ""],
-["SPE_FM_24_M29", "", "", "", ["SPE_25Rnd_75x54"], [], ""],
-["SPE_FM_24_M29", "", "", "", ["SPE_25Rnd_75x54"], [], ""]
+["SEP_WP_MP507", "", "", "", [], [], ""],
+["SPE_MG42", "", "", "", ["SPE_50Rnd_792x57"], [], ""]
 ]];
 
 //////////////////////////
@@ -362,7 +376,7 @@ _pilotLoadoutData set ["helmets", ["H_SPE_GER_LW_PilotHelmet"]];
 _pilotLoadoutData set ["backpacks", ["B_SPE_GER_LW_Paradrop"]];
 
 private _officerLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_officerLoadoutData set ["slUniforms", ["U_SPE_GER_Hauptmann", "U_SPE_GER_Oberleutnant", "U_SPE_GER_Oberst"]];
+_officerLoadoutData set ["slUniforms", ["SEP_B_GER_ST_U_CoatOfficer"]];
 _officerLoadoutData set ["slVests", ["V_SPE_GER_PistolBelt"]];
 _officerLoadoutData set ["slHelmets", ["H_SPE_GER_OfficerCap"]];
 _officerLoadoutData set ["backpacks", []];
@@ -437,7 +451,7 @@ private _riflemanTemplate = {
 
 private _medicTemplate = {
     ["medHelmets"] call _fnc_setHelmet;
-    ["vests"] call _fnc_setVest;
+    [["medVests", "vests"] call _fnc_fallback] call _fnc_setVest;
     [["medUniforms", "uniforms"] call _fnc_fallback] call _fnc_setUniform;
     [["medBackpacks", "backpacks"] call _fnc_fallback] call _fnc_setBackpack;
     [selectRandom ["rifles", "SMGs"]] call _fnc_setPrimary;
@@ -518,25 +532,44 @@ private _explosivesExpertTemplate = {
     ["Flashlight"] call _fnc_addNVGs;
 };
 
+VAR_WEHW_FlamerThrower = 0;
+
 private _engineerTemplate = {
     ["helmets"] call _fnc_setHelmet;
     [["engVests", "vests"] call _fnc_fallback] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
-    [["engBackpacks", "backpacks"] call _fnc_fallback] call _fnc_setBackpack;
 
-    ["SMGs"] call _fnc_setPrimary;
-    ["primary", 8] call _fnc_addMagazines;
 
-    ["sidearms"] call _fnc_setHandgun;
-    ["handgun", 2] call _fnc_addMagazines;
+
+    if (VAR_WEHW_FlamerThrower == 5) then {
+        VAR_WEHW_FlamerThrower = VAR_WEHW_FlamerThrower + 1;
+        ["flamethrowerMask"] call _fnc_setFacewear;
+        ["tankBackpack"] call _fnc_setBackpack;
+        
+        ["flamethrower"] call _fnc_setPrimary;
+        ["primary", 3] call _fnc_addMagazines;
+
+        ["sidearms"] call _fnc_setHandgun;
+        ["handgun", 5] call _fnc_addMagazines;
+    } else {
+        VAR_WEHW_FlamerThrower = VAR_WEHW_FlamerThrower + 1;
+        [["engBackpacks", "backpacks"] call _fnc_fallback] call _fnc_setBackpack;
+
+        ["SMGs"] call _fnc_setPrimary;
+        ["primary", 8] call _fnc_addMagazines;
+
+        ["sidearms"] call _fnc_setHandgun;
+        ["handgun", 2] call _fnc_addMagazines;
+
+        if (random 1 > 0.5) then {["lightExplosives", 3] call _fnc_addItem;};
+
+        ["antiInfantryGrenades", 1] call _fnc_addItem;
+        ["items_engineer_extras"] call _fnc_addItemSet;
+    };
 
     ["items_medical_standard"] call _fnc_addItemSet;
-    ["items_engineer_extras"] call _fnc_addItemSet;
     ["items_miscEssentials"] call _fnc_addItemSet;
 
-    if (random 1 > 0.5) then {["lightExplosives", 3] call _fnc_addItem;};
-
-    ["antiInfantryGrenades", 1] call _fnc_addItem;
     ["smokeGrenades", 2] call _fnc_addItem;
 
     ["maps"] call _fnc_addMap;
@@ -545,6 +578,7 @@ private _engineerTemplate = {
     ["radios"] call _fnc_addRadio;
     ["Flashlight"] call _fnc_addNVGs;
 };
+
 
 private _latTemplate = {
     ["helmets"] call _fnc_setHelmet;
@@ -578,7 +612,7 @@ private _atTemplate = {
     ["facewear"] call _fnc_setFacewear;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
-    ["backpacks"] call _fnc_setBackpack;
+    [["atBackpacks", "backpacks"] call _fnc_fallback] call _fnc_setBackpack;
 
     [selectRandomWeighted ["rifles", 4, "SMGs", 1]] call _fnc_setPrimary;
     ["primary", 8] call _fnc_addMagazines;

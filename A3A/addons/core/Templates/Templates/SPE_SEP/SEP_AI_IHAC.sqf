@@ -128,6 +128,8 @@ _loadoutData set ["SMGs", [
 ["SPE_M3_GreaseGun", "", "", "", ["SPE_30Rnd_M3_GreaseGun_45ACP", "SPE_30Rnd_M3_GreaseGun_45ACP", "SPE_30Rnd_M3_GreaseGun_45ACP_t"], [], ""]
 ]];
 _loadoutData set ["machineGuns", [
+["SPE_M1918A0_BAR", "", "", "", ["SPE_20Rnd_762x63"], [], ""],
+["SPE_M1918A0_BAR", "", "", "", ["SPE_20Rnd_762x63"], [], ""],
 ["SPE_FM_24_M29", "", "", "", ["SPE_25Rnd_75x54", "SPE_25Rnd_75x54", "SPE_25Rnd_75x54_35P_AP"], [], ""],
 ["SPE_FM_24_M29", "", "", "", ["SPE_25Rnd_75x54"], [], ""],
 ["SPE_FM_24_M29", "", "", "", ["SPE_25Rnd_75x54"], [], ""]
@@ -686,7 +688,7 @@ private _policeTemplate = {
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
 
-    [selectRandom ["rifles", "shotGuns"]] call _fnc_setPrimary;
+    ["shotGuns"] call _fnc_setPrimary;
     ["primary", 3] call _fnc_addMagazines;
 
     ["sidearms"] call _fnc_setHandgun;
@@ -705,8 +707,7 @@ private _policeTemplate = {
 };
 private _policeSLTemplate = {
     call _policeTemplate;
-    ["slHelmets"] call _fnc_setHelmet;
-    [selectRandom ["rifles", "SMGs"]] call _fnc_setPrimary;
+    [selectRandom ["rifles", "shotGuns"]] call _fnc_setPrimary;
 };
 
 private _crewTemplate = {
