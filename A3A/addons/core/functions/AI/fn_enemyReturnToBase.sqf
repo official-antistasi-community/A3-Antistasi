@@ -38,6 +38,7 @@ if (!isNil "_AIScriptHandle") then { terminate _AIScriptHandle; };   // _group s
 // Turns out that this is actually bugged (for infantry?) and followed vs visible waypoints desync in unpredictable ways
 { deleteWaypoint _x } forEachReversed (waypoints _group);
 
+
 // Group in vehicle
 private _vehicle = vehicle leader _group;
 if (_vehicle != leader _group) exitWith

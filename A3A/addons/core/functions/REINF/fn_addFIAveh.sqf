@@ -43,7 +43,7 @@ private _fnc_placed = {
 	_vehicle setFuel random [0.10, 0.175, 0.25];
 	[_vehicle, teamPlayer] call A3A_fnc_AIVehInit;
 	if (_vehicle isKindOf "StaticWeapon") then {
-		["", _vehicle] remoteExecCall ["A3A_fnc_addVehicleToGarrison", 2];
+		["", _vehicle] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
 	};
 };
 

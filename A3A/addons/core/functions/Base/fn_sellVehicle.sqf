@@ -65,7 +65,7 @@ _costs = round (_costs * (1-damage _veh));
 [0,_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
 
 private _vehMarker = _veh getVariable "markerX";
-if (!isNil "_vehMarker") then { [_veh] call A3A_fnc_remVehicleFromGarrison };
+if (!isNil "_vehMarker") then { [_veh] call A3A_fnc_garrisonServer_remVehicle };
 
 [_veh,true] call A3A_fnc_empty;
 

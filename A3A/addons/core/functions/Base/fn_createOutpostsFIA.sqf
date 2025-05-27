@@ -7,7 +7,7 @@ private ["_typeX","_costs","_groupX","_unit","_radiusX","_roads","_road","_pos",
 _typeX = _this select 0;
 _positionTel = _this select 1;
 
-if (_typeX == "delete") exitWith {[localize "STR_A3A_fn_base_createoutpfia_create", localize "STR_A3A_fn_base_createoutpfia_outdated"] call A3A_fnc_customHint;};
+if (_typeX == "delete") exitWith {[localize "STR_A3A_fn_base_createoutpfia_create", localize "STR_A3A_fn_base_createoutpfia_outdated"] remoteExecCall ["A3A_fnc_customHint", theBoss]};
 
 _isRoad = isOnRoad _positionTel;
 
@@ -28,7 +28,7 @@ if (_isRoad) then
 	};
 
 _mrk = createMarkerLocal [format ["FIAPost%1", mapGridPosition _positionTel], _positionTel];
-if (_mrk == "") exitWith {["Create Outpost", "There's already a rebel outpost near that position"]};
+if (_mrk == "") exitWith {["Create Outpost", "There's already a rebel outpost near that position"] remoteExecCall ["A3A_fnc_customHint", theBoss]};
 _mrk setMarkerShape "ICON";
 
 _dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + 60];
@@ -43,7 +43,6 @@ _road = [getMarkerPos respawnTeamPlayer] call A3A_fnc_findNearestGoodRoad;
 _pos = position _road findEmptyPosition [1,30,"B_G_Van_01_transport_F"];
 _truckX = _typeVehX createVehicle _pos;
 [_truckX, teamPlayer] call A3A_fnc_AIVEHinit;
-//_nul = [_groupX] spawn dismountFIA;
 _groupX addVehicle _truckX;
 {[_x] call A3A_fnc_FIAinit} forEach units _groupX;
 leader _groupX setBehaviour "SAFE";
@@ -54,16 +53,13 @@ waitUntil {sleep 1; ({alive _x} count units _groupX == 0) or ({(alive _x) and (_
 
 if ({(alive _x) and (_x distance _positionTel < 10)} count units _groupX > 0) then {
 	if (isPlayer leader _groupX) then
-		{
+	{
 		_owner = (leader _groupX) getVariable ["owner",leader _groupX];
 		(leader _groupX) remoteExec ["removeAllActions",leader _groupX];
 		_owner remoteExec ["selectPlayer",leader _groupX];
-		//(leader _groupX) setVariable ["owner",_owner,true];
-		//{[_x] joinsilent group _owner} forEach units group _owner;
-		//[group _owner, _owner] remoteExec ["selectLeader", _owner];
 		waitUntil {!(isPlayer leader _groupX)};
 		sleep 5;			// Give client & server time to resolve the selectPlayer before we delete anything
-		};
+	};
 
 	[_taskId, "outpostsFIA", "SUCCEEDED"] call A3A_fnc_taskSetState;
 

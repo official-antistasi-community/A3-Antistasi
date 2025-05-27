@@ -40,7 +40,8 @@ if (_limit != -1 && {count _troops >= _limit}) exitWith {
 // Add unit to server garrison data
 _troops pushBack _unitType;
 
-// TODO: update marker?
+// Update the marker text if it's rebel
+if (sidesX getVariable _marker == teamPlayer) then { [_marker] call A3A_fnc_mrkUpdate };
 
 // Add real unit if garrison is spawned
 if (!isNil {A3A_garrisonMachine get _marker}) then {

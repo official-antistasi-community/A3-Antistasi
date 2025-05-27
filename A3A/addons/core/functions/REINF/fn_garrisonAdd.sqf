@@ -1,4 +1,4 @@
-// Client-side single unit type garrison adding from dialog
+// Old UI client-side single unit type garrison adding from dialog
 // Adding is a zero-information operation. We just ask server to add units and it responds
 
 #include "..\..\script_component.hpp"
@@ -13,4 +13,4 @@ if (sidesX getVariable [_marker, sideUnknown] != teamPlayer) exitWith {
 };
 
 // Sends customHint back to client with results
-[_marker, _unitType, clientOwner] remoteExecCall ["A3A_fnc_addUnitTypeToGarrison", 2];
+[_marker, _unitType, clientOwner, true] remoteExecCall ["A3A_fnc_garrisonServer_addUnitType", 2];

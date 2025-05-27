@@ -47,7 +47,7 @@ private _reinfTargets = [];         // elements are [[marker, type, numReq], wei
     private _par = A3A_spawnPlaceStats get _marker get "troops" select 0;                                     // no variance currently?
     private _cur = _garrison get "troops" select 0;          // [count, quality]
     if (_cur < _par) then {
-        private _weight = (_typeWeights get _x) * (1 - _countUsed / _par);
+        private _weight = 1 * (1 - _cur / _par);
         _reinfTargets pushBack [[_site, _x, _par - _cur], _weight];
     };
 
@@ -86,7 +86,7 @@ while {_totalReinf > 0} do
     {
         // Need to know class now for cost reasons
         private _vehClass = [_faction, _type, _target in airportsX] call A3A_fnc_selectGarrisonVehicleType;
-        _totalReinf = _totalReinf - (A3A_vehicleResourceCosts get [_vehClass, 0]);      // TODO: shouldn't ever be 0 now
+        _totalReinf = _totalReinf - (A3A_vehicleResourceCosts get _vehClass);      // TODO: shouldn't ever be 0 now
 
         [_side, _target, _type, _vehClass] spawn {
             params ["_side", "_marker", "_slotType", "_vehClass"];
@@ -111,8 +111,9 @@ while {_totalReinf > 0} do
                 Info_2("Reinf of %1 type %2 cancelled because no free places", _marker, _type);
             };
 
+            [A3A_vehicleResourceCosts get _vehClass, _side, "defence"] call A3A_fnc_addEnemyResources;
             private _placeNum = if (_slotType == "vehicle") then { _places # 0 } else { selectRandom _places };
-            [_marker, _vehClass, _garrisonType, _placeNum] call A3A_fnc_addVehicleTypeToGarrison;
+            [_marker, _vehClass, _garrisonType, _placeNum] remoteExecCall ["A3A_fnc_garrisonServer_addVehicleType", 2];
             Debug_3("Reinforcing %1 with vehicle %2", _marker, _vehClass);
         };
 
@@ -140,7 +141,8 @@ while {_totalReinf > 0} do
     Debug_3("Reinforcing garrison %1 from %2 with %3 troops", _target, _source, _numTroops);
     if (_source == _target) then {
         // Self-reinforce. Already know that we're not spawned, so this is fine
-        [_target, _numTroops, 2] remoteExecCall ["A3A_fnc_addUnitCountToGarrison", 2];
+        [10*_numTroops, _side, "defence"] call A3A_fnc_addEnemyResources;
+        [_target, _numTroops, 2] remoteExecCall ["A3A_fnc_garrisonServer_addUnitCount", 2];
         continue;
     };
     if ([distanceSPWN1, 1, getMarkerPos _target, teamPlayer] call A3A_fnc_distanceUnits) then {
@@ -149,6 +151,11 @@ while {_totalReinf > 0} do
         sleep 10;		// Might re-use this marker shortly, avoid collisions
     } else {
         // Otherwise just add troops directly
-        [_target, _numTroops, 2] remoteExecCall ["A3A_fnc_addUnitCountToGarrison", 2];
+        [10*_numTroops, _side, "defence"] call A3A_fnc_addEnemyResources;
+        [_target, _numTroops, 2] remoteExecCall ["A3A_fnc_garrisonServer_addUnitCount", 2];
     };
 };
+
+
+// This probably works, but better to choose a site first?
+// And then decide what to send to the site?

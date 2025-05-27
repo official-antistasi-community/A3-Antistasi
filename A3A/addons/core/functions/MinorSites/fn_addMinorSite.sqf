@@ -16,6 +16,12 @@ _name setMarkerSizeLocal [_mrkSize, _mrkSize];
 _name setMarkerShapeLocal "ELLIPSE";
 _name setMarkerAlpha 0;
 
+if (_type == "camp") then {
+    [_name, _side] call A3A_fnc_buildCamp;
+} else {
+    [_name, _side] call A3A_fnc_buildRoadblock;
+};
+
 sidesX setVariable [_name, _side, true];
 controlsX pushBack _name;
 spawner setVariable [_name, 2, true];

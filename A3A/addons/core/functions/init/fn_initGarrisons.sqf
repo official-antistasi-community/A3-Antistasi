@@ -66,21 +66,6 @@ private _fnc_initGarrison =
 { [_x, 0 + random 0.5, 3] call _fnc_initGarrison } forEach citiesX;
 
 
-// ok, need some special init function for roadblocks/watchposts?
-// could just pregen them for the moment?
-
-// but are roadblocks regenerated for each startup?
-
-    // maybe we have special init function for roadblocks/watchposts anyway, as they're semi-dynamic?
-
-// TODO: Work out where this should go
-/*
-{
-    if (!isOnRoad markerPos _x) then { [_x, 3, 3] call _fnc_initGarrison; continue };
-    [_x, 1 + random 0.5, 2] call _fnc_initGarrison;
-} forEach controlsX;
-*/
-
 Info("InitGarrisons completed");
 
 

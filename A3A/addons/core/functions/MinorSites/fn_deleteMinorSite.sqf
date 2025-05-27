@@ -1,4 +1,5 @@
 // Remove (nearly) all data for destroyed minor site
+// should be called unscheduled
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
@@ -11,13 +12,11 @@ if !(_name in A3A_minorSitesHM) then { Error("Minor site doesn't exist!") };
 if !(_name in controlsX) then { Error("No marker entry for site!") };
 
 A3A_minorSitesHM deleteAt _name;
-deleteMarker _name;
-
-// Leave sidesX and spawner entries to make old code safer
-//sidesX setVariable [_name, _side, true];
-//spawner setVariable [_name, 2, true];
 controlsX deleteAt (controlsX find _name);
 
-if (_globalUpdate) then {
-    publicVariable "controlsX";
-};
+//deleteMarker _name;
+// Site might still be spawned. Wait until it's despawned to delete the marker
+A3A_markersToDelete pushBack _name;
+sidesX setVariable [_name, teamPlayer, true];
+
+if (_globalUpdate) then { publicVariable "controlsX" };

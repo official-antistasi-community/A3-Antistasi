@@ -28,9 +28,10 @@ private _groupStatics = grpNull;
        	private _spawnParams = [_marker, _vtype, _posData] call A3A_fnc_takeSpawnPosition;
         if (_spawnParams isEqualType false) exitWith {};        // blocked by support mortar probably?
         isNil {
-            _vehicle = _class createVehicle [_class, _spawnParams#0, [], 0, "CAN_COLLIDE"];
-            _vehicle setDir _spawnParams#1;
-            _vehicle setVariable ["spawnPlace", _spawnParams#2];
+            _spawnParams params ["_placeType", "_pos", "_dir"];
+            _vehicle = _class createVehicle [_class, _pos, [], 0, "CAN_COLLIDE"];
+            _vehicle setDir _dir;
+            _vehicle setVariable ["spawnPlace", _posData];
         };
     } else {
         // Arbitrary placement (probably rebel)

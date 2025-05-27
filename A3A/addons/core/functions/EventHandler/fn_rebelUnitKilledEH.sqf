@@ -5,11 +5,18 @@ params ["_victim", "_killer"];
 
 _victim setVariable ["spawner",nil,true];
 
+/* Did this in EntityKilled instead...
 private _marker = _victim getVariable "markerX";
 if (!isNil "_marker") then {
     _victim setVariable ["markerX", nil, true];         // used for anything? Was bugged
     private _unitType = _victim getVariable "unitType";
-    [_marker, _unitType] remoteExecCall ["A3A_fnc_remUnitTypeFromGarrison", 2];
+    [_marker, _unit] remoteExecCall ["A3A_fnc_garrisonServer_remUnit", 2];
+};
+*/
+
+private _marker = _victim getVariable ["markerX", ""];
+if (_marker != "") then {
+    A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
 };
 
 if (side _killer == Occupants) then {

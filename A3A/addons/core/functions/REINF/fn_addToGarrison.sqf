@@ -1,3 +1,5 @@
+// Function for adding high command squad or player squad units to a rebel garrison
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 private _titleStr = localize "STR_A3A_garrison_header";
@@ -121,4 +123,4 @@ if (isNull _groupX) then {
     theBoss hcRemoveGroup _groupX;
 };
 
-[_nearX, _groupX, clientOwner] remoteExecCall ["A3A_fnc_addUnitsToGarrison", 2];
+[_nearX, _groupX, clientOwner] remoteExecCall ["A3A_fnc_garrisonServer_addGroup", 2];

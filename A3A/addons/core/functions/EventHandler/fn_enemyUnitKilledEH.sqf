@@ -91,13 +91,10 @@ else
 	};
 };
 
-private _victimLocation = _victim getVariable ["markerX", ""];
-if (_victimLocation != "") then
-{
-	if (sidesX getVariable [_victimLocation,sideUnknown] == _victimSide) then
-	{
-		[_victim getVariable "unitType",_victimSide,_victimLocation,-1] remoteExec ["A3A_fnc_garrisonUpdate",2];
-        [_victimLocation,_victimSide] remoteExec ["A3A_fnc_zoneCheck",2]
-	};
+/*
+// Handled in AIReactOnKill
+private _marker = _victim getVariable ["markerX", ""];
+if (_marker != "") then {
+    A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
 };
-
+*/

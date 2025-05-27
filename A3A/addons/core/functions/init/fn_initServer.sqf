@@ -272,8 +272,8 @@ addMissionEventHandler ["EntityKilled", {
 
     private _marker = _victim getVariable "markerX";
     if (!isNil "_marker") then {
-        if (_victim isKindOf "CAManBase") exitWith { [_victim] call A3A_fnc_remUnitFromGarrison }; 
-        [_victim] call A3A_fnc_remVehicleFromGarrison;
+        if (_victim isKindOf "CAManBase") exitWith { [_victim] call A3A_fnc_garrisonServer_remUnit }; 
+        [_victim] call A3A_fnc_garrisonServer_remVehicle;
     };
 
     if !(isNil {_victim getVariable "ownerSide"}) then {
@@ -289,14 +289,14 @@ if (A3A_hasACE) then {
     	params ["_object", "_hide"];
         if !(_object isKindOf "StaticWeapon") exitWith {};
         if !(_hide) exitWith {};
-        if (!isNil {_object getVariable "markerX"}) then { [_object] call A3A_fnc_remVehicleFromGarrison };
+        if (!isNil {_object getVariable "markerX"}) then { [_object] call A3A_fnc_garrisonServer_remVehicle };
     }] call CBA_fnc_addEventHandler;
 
     // Handler for detecting ACE cargo unload of static weapons
     ["ace_cargoUnloaded", {
         params ["_object", "_vehicle", "_unload"];
         if !(_object isKindOf "StaticWeapon") exitWith {};
-        ["", _object] call A3A_fnc_addVehicleToGarrison;
+        ["", _object] call A3A_fnc_garrisonServer_addVehicle;
     }] call CBA_fnc_addEventHandler;
 
     // Handler for detecting ACE drag/carry release of static weapons
@@ -304,7 +304,7 @@ if (A3A_hasACE) then {
         params ["_object", "_mass"];
         if !(_object isKindOf "StaticWeapon") exitWith {};
         if (_mass < 1) exitWith {};
-        ["", _object] call A3A_fnc_addVehicleToGarrison;
+        ["", _object] call A3A_fnc_garrisonServer_addVehicle;
     }] call CBA_fnc_addEventHandler;
 };
 

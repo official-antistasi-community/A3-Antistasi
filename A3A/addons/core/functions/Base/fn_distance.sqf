@@ -121,7 +121,8 @@ private _processFIAMarker = {
 
             // DISABLE marker
             spawner setVariable [_marker, DISABLED, true];
-            ["pause", [_marker]] call A3A_fnc_garrisonOp;
+            // minor sites are always rebel-side before deletion
+            ["pause", [_marker, _marker in A3A_markersToDelete]] call A3A_fnc_garrisonOp;
         };
 
         case DISABLED:
@@ -149,7 +150,7 @@ private _processFIAMarker = {
 
                 // DESPAWN this marker
                 spawner setVariable [_marker, DESPAWN, true];
-                ["despawn", [_marker]] call A3A_fnc_garrisonOp;
+                ["despawn", [_marker, _marker in A3A_markersToDelete]] call A3A_fnc_garrisonOp;
             };
         };
 
@@ -332,7 +333,7 @@ do
         } forEach (allPlayers - entities "HeadlessClient_F");
     };
 
-    private _markers = markersX + controlsX + outpostsFIA;
+    private _markers = markersX + controlsX + outpostsFIA + A3A_markersToDelete;
     {
         sleep (1 / count _markers);
 

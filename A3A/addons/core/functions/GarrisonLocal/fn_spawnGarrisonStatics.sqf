@@ -15,14 +15,14 @@ private _troops = _activeGarrison get "troops";
 private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side == teamPlayer);
 private _groupStatics = grpNull;
 {
-    _x params ["_class", "_posOrType", "_upOrPlace", "_vecDir"];
+    _x params ["_class", "_posData"];
 
     private _static = objNull;
-    if (_posOrType isEqualType "") then
+    if (_posData isEqualType 0) then
     {
         // Mortar/MG/AA spawn place
-        ((A3A_spawnPlacesHM get _marker) get _posOrType) params ["_pos", "_dir", "_building"];
-        if (damage _building >= 1 or isObjectHidden _building) then {
+        ((A3A_spawnPlacesHM get _marker) # _posData) params ["_pos", "_dir", "_building"];
+        if (!isNil "_building" and {damage _building >= 1 or isObjectHidden _building}) then {
             Info_2("Spawn of %1 in %2 blocked because building destroyed", _class, _marker);
             continue;
         };
@@ -35,18 +35,18 @@ private _groupStatics = grpNull;
             _static = createVehicle [_class, _pos, [], 0, "CAN_COLLIDE"];
             _static setDir _dir;
         };
-        };
     } else {
         // Arbitrary placement (probably rebel)
-        private _blockers = (ASLtoATL _posOrType) nearEntities ["StaticWeapon", 2];
+        _posData params ["_posWorld", "_vecUp", "_vecDir"];
+        private _blockers = (ASLtoATL _posWorld) nearEntities ["StaticWeapon", 2];
         if (_blockers isNotEqualTo []) then {
             Error_3("Spawn of %1 in %2 blocked by %3", _class, _marker, typeof (_blockers#0));
             continue;
         };
         isNil {
-            _static = createVehicle [_class, _posOrType, [], 0, "CAN_COLLIDE"];
-            _static setPosWorld _posOrType;
-            _static setVectorDirAndUp [_vecDir, _upOrPlace];
+            _static = createVehicle [_class, _posWorld, [], 0, "CAN_COLLIDE"];
+            _static setPosWorld _posWorld;
+            _static setVectorDirAndUp [_vecDir, _vecUp];
         };
     };
     _statics pushBack _static;

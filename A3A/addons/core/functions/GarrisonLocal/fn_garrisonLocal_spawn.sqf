@@ -9,10 +9,29 @@ Info_2("Spawning %2 garrison at marker %1", _marker, _side);
 Debug_1("Garrison data: %1", _newGarrison);
 
 private _garrison = createHashMapFromArray [["troops", []]], ["statics", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []]];
+_garrison set ["side", _side];
 A3A_activeGarrison set [_marker, _garrison];
 
+// Generate the type now so that we only need to do it once per spawn
+// TODO: if careful, everything except cities can be done with _ lookup?
+private _garrisonType = call {
+    if (_marker in citiesX) exitWith {"city"};
+    if (_marker find "roadblock" == 0) exitWith {"roadblock"};
+    if (_marker find "camp" == 0) exitWith {"camp"};
+    if (_marker find "FIAPost" == 0) exitWith {"rebPost"};      // change these?
+    if (_marker find "outpost" == 0) exitWith {"outpost"};
+    if (_marker find "resource" == 0) exitWith {"resource"};
+    if (_marker find "factory" == 0) exitWith {"factory"};
+    if (_marker find "seaport" == 0) exitWith {"seaport"};
+    if (_marker find "airport" == 0) exitWith {"airport"};
+    if (_marker == "Synd_HQ") exitWith {"hq"};
+    Error_1("Marker %1 type not identified", _marker);
+    "unknown";
+};
+_garrison set ["type", _garrisonType];
+
 // Spawn buildings first, so that flag/box don't trip over them
-if (_marker != "Synd_HQ") then {
+if !(_garrisonType == "hq") then {
     private _buildings = _garrison get "buildings";
     {
         _x params ["_class", "_posData"];
@@ -27,7 +46,7 @@ if (_marker != "Synd_HQ") then {
 };
 
 // Spawn flagpole
-if (_marker != "Synd_HQ" and !(_marker in citiesX)) then
+if !(_garrisonType in ["hq", "city", "roadblock", "camp", "rebPost"]) then
 {
     private _flag = createVehicle [_faction get "flag", _markerPos, [], 0, "NONE"];
     _flag setFlagTexture (_faction get "flagTexture");
@@ -38,7 +57,7 @@ if (_marker != "Synd_HQ" and !(_marker in citiesX)) then
 };
 
 // Spawn resource/factory civs
-if ((_marker in resourcesX) or (_marker in factories)) then {
+if (_garrisonType in ["resource", "factory"]) then {
     private _spawnedCivilians = [_marker, 4] call A3A_fnc_createResourceCiv;
     if !(isNil "_spawnedCivilians") then {
         (_garrison get "civGroups") pushBack (_spawnedCivilians # 0);
@@ -46,7 +65,7 @@ if ((_marker in resourcesX) or (_marker in factories)) then {
     };
 };
 
-if (_side != teamPlayer and { _marker in airportsX or _marker in outposts or _marker in seaports }) then {
+if (_side != teamPlayer and _garrisonType in ["airport", "outpost", "seaport"]) then {
     // Spawn intel
     // TODO: should be persistently placed
     if (random 100 < (40 + tierWar * 3)) then
@@ -61,7 +80,7 @@ if (_side != teamPlayer and { _marker in airportsX or _marker in outposts or _ma
 	[_ammoBox] call A3A_Logistics_fnc_addLoadAction;
     (_garrison get "vehicles") pushBack _ammoBox;
 	[_ammoBox] call A3A_fnc_fillLootCrate;
-	if !(_marker in seaports) exitWith {};
+	if !(_garrisonType == "seaport") exitWith {};
     {
         _ammoBox addItemCargoGlobal [_x, round random [2,6,8]];
     } forEach (A3A_faction_reb get "diveGear");

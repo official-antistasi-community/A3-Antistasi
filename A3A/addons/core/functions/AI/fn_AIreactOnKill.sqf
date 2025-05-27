@@ -28,6 +28,12 @@ FIX_LINE_NUMBERS()
 // TODO: what exactly should killer parameter be here?
 params ["_unit", "_group", "_killer"];
 
+// Need to fire this regardless of previous downs
+private _marker = _unit getVariable ["markerX", ""];
+if (_marker != "") then {
+    A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
+};
+
 if (_unit getVariable ["downedTimeout", 0] > time) exitWith {};         // only count each unit once, at least within timeout
 _unit setVariable ["downedTimeout", time + 1200];
 

@@ -167,7 +167,7 @@ while {_wave <= _maxWaves and !_victory} do
         };
 
         // Attempt to flip marker
-        [_mrkDest, _markerSide] remoteExec ["A3A_fnc_zoneCheck", 2];
+        ["zoneCheck", [_mrkDest]] remoteExecCall ["A3A_fnc_garrisonOp", 2];       // just make sure this is unscheduled
         sleep 10;
     };
     _wave = _wave + 1;

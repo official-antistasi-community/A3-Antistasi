@@ -1,92 +1,51 @@
+// Old-UI function to handle clicks on garrison map
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-#include "..\..\..\gui\dialogues\ids.inc" // include new UI ids for update
-private ["_typeX","_positionTel","_nearX","_garrison","_costs","_hr","_size"];
+
+params [["_typeX","add"]];
+
 private _titleStr = localize "STR_A3A_fn_reinf_garrDia_title";
 
-// TODO: Stop using this garbage for the new UI, reduce it to old UI code
-
-_typeX = _this select 0;
-params [["_typeX","add"],["_marker",""]];
-private _noMarker = (_marker isEqualTo "");
-if (_noMarker) then { // is normal mode
-	if (_typeX == "add") then {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_add"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_remove"] call A3A_fnc_customHint;};
-
-	if (!visibleMap) then {openMap true};
-	positionTel = [];
-
-	onMapSingleClick "positionTel = _pos;";
-
-	waitUntil {sleep 1; (count positionTel > 0) or (not visiblemap)};
-	onMapSingleClick "";
-};
-if (!visibleMap && _noMarker) exitWith {};
-if (_noMarker) then {
-	_positionTel = positionTel;
-	positionXGarr = "";
-	_nearX = [markersX + outpostsFIA,_positionTel] call BIS_fnc_nearestPosition;
+if (_typeX == "add") then {
+	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_add"] call A3A_fnc_customHint;
 } else {
-	_nearX = _marker;
-	_typeX = "rem";
+	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_remove"] call A3A_fnc_customHint;
 };
 
-_positionX = getMarkerPos _nearX;
+if (!visibleMap) then {openMap true};
+positionTel = [];
 
-if (_noMarker && {getMarkerPos _nearX distance _positionTel > 40}) exitWith { // lazy eval
-	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_zone_click"] call A3A_fnc_customHint;
-#ifdef UseDoomGUI
-	ERROR("Disabled due to UseDoomGUI Switch.")
-#else
-	if (_noMarker) then {_nul=CreateDialog "build_menu"};
-#endif
+onMapSingleClick "positionTel = _pos;";
+
+waitUntil {sleep 1; (count positionTel > 0) or (not visiblemap)};
+onMapSingleClick "";
+
+if (!visibleMap) exitWith {};
+
+private _positionTel = positionTel;
+private _nearX = [markersX + outpostsFIA, _positionTel] call BIS_fnc_nearestPosition;
+
+if (getMarkerPos _nearX distance2d _positionTel > 40) exitWith { // lazy eval
+	[localize "STR_A3A_fn_reinf_garrDia_title", localize "STR_A3A_fn_reinf_garrDia_zone_click"] call A3A_fnc_customHint;
+	createDialog "build_menu";
 };
 
-if (not(sidesX getVariable [_nearX,sideUnknown] == teamPlayer)) exitWith {
-	[_titleStr, format [localize "STR_A3A_fn_reinf_garrDia_zone_belong",FactionGet(reb,"name")]] call A3A_fnc_customHint;
-#ifdef UseDoomGUI
-	ERROR("Disabled due to UseDoomGUI Switch.")
-#else
-	if (_noMarker) then {_nul=CreateDialog "build_menu"};
-#endif
+if !(_marker call A3A_fnc_canEditGarrison) exitWith { createDialog "build_menu" };
+
+// Conditions passed, now either delete the garrison or open the recruiting menu
+
+if (_typeX == "rem") exitWith {
+	[_nearX, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
+	createDialog "build_menu";
 };
-if ([_positionX] call A3A_fnc_enemyNearCheck) exitWith {
-	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_no_enemy"] call A3A_fnc_customHint;
-#ifdef UseDoomGUI
-	ERROR("Disabled due to UseDoomGUI Switch.")
-#else
-	if (_noMarker) then {_nul=CreateDialog "build_menu"};
-#endif
-};
-
-if (_nearX in forcedSpawn) exitWith {
-	[_titleStr, localize "STR_A3A_fn_reinf_garrDia_no_att"] call A3A_fnc_customHint;
-#ifdef UseDoomGUI
-	ERROR("Disabled due to UseDoomGUI Switch.")
-#else
-	if (_noMarker) then {_nul=CreateDialog "build_menu"};
-#endif
-};
-
-
-//if (((_nearX in outpostsFIA) and !(isOnRoad _positionX)) /*or (_nearX in citiesX)*/ or (_nearX in controlsX)) exitWith {hint "You cannot manage garrisons on this kind of zone"; _nul=CreateDialog "garrison_menu"};
-//_outpostFIA = if (_nearX in outpostsFIA) then {true} else {false};
-//_wPost = if (_outpostFIA and !(isOnRoad getMarkerPos _nearX)) then {true} else {false};
-//_garrison = if (! _wpost) then {garrison getVariable [_nearX,[]]} else {FactionGet(reb,"groupSniper")};
-
-if (_typeX == "rem") exitWith
-{
-	[_nearX, true] remoteExecCall ["A3A_fnc_clearGarrison", 2];
-
-	CreateDialog "build_menu";
-};
-
 
 // Get server to send customHint with selected garrison data
 [_nearX, clientOwner] remoteExecCall ["A3A_fnc_showSiteInfo", 2];
 
 closeDialog 0;
 A3A_editingGarrison = _nearX;
-CreateDialog "garrison_recruit";
+createDialog "garrison_recruit";
 sleep 1;
 disableSerialization;
 

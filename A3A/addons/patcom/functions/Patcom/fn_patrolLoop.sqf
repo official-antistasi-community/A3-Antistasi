@@ -44,7 +44,7 @@ params [
     ["_searchBuildings", false]
 ];
 
-[_group, _patrolType, _minDist, _maxDist, _dist, _fromCenter, _centerPos, _searchBuildings] spawn {
+private _scriptHandle = [_group, _patrolType, _minDist, _maxDist, _dist, _fromCenter, _centerPos, _searchBuildings] spawn {
     params ["_group","_patrolType", "_minDist", "_maxDist", "_dist", "_fromCenter", "_centerPos", "_searchBuildings"];
     
     // Exit if the group is Null, or Empty.
@@ -73,3 +73,5 @@ params [
         sleep (round (((count allunits) / 2) * 1.2));
     };
 };
+
+_group setVariable ["A3A_AIScriptHandle", _scriptHandle];

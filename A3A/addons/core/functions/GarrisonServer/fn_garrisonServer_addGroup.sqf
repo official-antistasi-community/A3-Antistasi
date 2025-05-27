@@ -46,15 +46,18 @@ if (_earlyEscape) exitWith {};
 // Add to the server garrison data store
 (A3A_garrison get _marker get "troops") append units _group;
 
+// Update the marker text if it's rebel
+if (sidesX getVariable _marker == teamPlayer) then { [_marker] call A3A_fnc_mrkUpdate };
+
 // Add to the live garrison
 private _machineID = A3A_garrisonMachine get _marker;
 if (!isNil "_machineID") then {
-    _group setGroupOwner _machineID;
+    _group setGroupOwner _machineID;            // should outpace the garrison op?
     {
         _x setVariable ["markerX", _marker, true];
         _x setVariable ["spawner", nil, true];
     } forEach units _group;
-    ["addGroup", [_marker, _unitType]] call A3A_fnc_garrisonOp;
+    ["addGroup", [_marker, _group]] call A3A_fnc_garrisonOp;
 } else {
     { deleteVehicle _x } forEach units _group;
 };

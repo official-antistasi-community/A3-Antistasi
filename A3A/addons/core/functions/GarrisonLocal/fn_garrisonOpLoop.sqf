@@ -4,7 +4,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-private _functionHM = createHashMapFromArray [
+/*private _functionHM = createHashMapFromArray [
     ["spawn", A3A_fnc_spawnGarrison],
     ["despawn", A3A_fnc_despawnGarrison],
     ["pause", A3A_fnc_pauseGarrison],
@@ -15,8 +15,9 @@ private _functionHM = createHashMapFromArray [
     ["remUnit", A3A_fnc_remUnitFromGarrisonLocal],
     ["spawnUnit", A3A_fnc_spawnUnitInGarrison],
     ["spawnUnitCount", A3A_fnc_spawnUnitCountInGarrison],
-    ["disband", A3A_fnc_disbandGarrison]
+    ["changeSide", A3A_fnc_changeGarrisonSideLocal]
 ];
+*/
 
 while {true} do
 {
@@ -25,7 +26,7 @@ while {true} do
     private _nextOp = A3A_garrisonOps deleteAt 0;      // atomic on A3A_garrisonOps
     _nextOp params ["_opType", "_params"];
 
-    private _opFunc = _functionHM get _opType;
+    private _opFunc = missionNamespace getVariable ("A3A_fnc_garrisonLocal_" + _opType);
     if (isNil "_opFunc") then {
         Error_1("Operation %1 not found", _opType); 
         continue;

@@ -1032,7 +1032,8 @@ switch (_mode) do
         Trace("Dismissing garrison");
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _selectedMarker = _commanderMap getVariable ["selectedMarker", ""];
-        ["", _selectedMarker] spawn A3A_fnc_garrisonDialog;
+        if !(_selectedMarker call A3A_fnc_canEditGarrison) exitWith {};     // throws hints on failure
+    	[_selectedMarker, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
     };
 
     case ("showGarbageCleanOptions"):

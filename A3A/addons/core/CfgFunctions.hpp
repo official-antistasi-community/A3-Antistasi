@@ -52,6 +52,7 @@ class CfgFunctions
             class nearEnemy {};
             class paradrop {};
             class rearmCall {};
+            class rebelReturnToBase {};
             class recallGroup {};
             class smokeCoverAuto {};
             class staticAutoT {};
@@ -323,31 +324,43 @@ class CfgFunctions
 
         class GarrisonLocal {
             file = QPATHTOFOLDER(functions\GarrisonLocal);
-            class addGroupToGarrisonLocal {};
-            class addVehicleToGarrisonLocal {};
-            class despawnGarrison {};
-            class disbandGarrison {};
-            class garrisonOp {};
+            class garrisonLocal_addGroup {};
+            class garrisonLocal_addVehicle {};
+            class garrisonLocal_changeSide {};
+            class garrisonLocal_clear {};
+            class garrisonLocal_despawn {};
+            class garrisonLocal_pause {};
+            class garrisonLocal_remUnitType {};
+            class garrisonLocal_remVehicle {};
+            class garrisonLocal_spawn {};
+            class garrisonLocal_spawnUnit {};
+            class garrisonLocal_spawnUnitCount {};
+            class garrisonLocal_unpause {};
+            class garrisonLocal_zoneCheck {};
             class garrisonOpLoop {};
             class getGarrisonLimit {};
-            class pauseGarrison {};
-            class remUnitFromGarrisonLocal {};
-            class remVehicleFromGarrisonLocal {};
-            class spawnGarrison {};
-            class spawnUnitInGarrison {};
-            class unpauseGarrison {};
+            class spawnGarrisonPatrols {};
+            class spawnGarrisonSquads {};
+            class spawnGarrisonStatics {};
+            class spawnGarrisonVehicles {};
         };
 
         class GarrisonServer {
             file = QPATHTOFOLDER(functions\GarrisonServer);
-            class addUnitsToGarrison {};
-            class addUnitTypeToGarrison {};
-            class addVehicleToGarrison {};
-            class clearGarrison {};
-            class createRebelControl {};
             class garrisonInfo {};
-            class remUnitFromGarrison {};
-            class remVehicleFromGarrison {};
+            class garrisonOp {};
+            class garrisonServer_addGroup {};
+            class garrisonServer_addUnitCount {};
+            class garrisonServer_addUnitType {};
+            class garrisonServer_addVehicle {};
+            class garrisonServer_addVehicleType {};
+            class garrisonServer_clear {};
+            class garrisonServer_delete {};
+            class garrisonServer_remUnit {};
+            class garrisonServer_remUnitType {};
+            class garrisonServer_remVehicle {};
+            class garrisonServer_sendData {};
+            class selectGarrisonVehicleType {};
             class showSiteInfo {};
         };
 
@@ -361,28 +374,28 @@ class CfgFunctions
 
             //Other initialisation functions (generally called by the above)
             class briefing {};
+            class checkCampaignEnd {};
             class clientIdleChecker {};
-            class installClientEH {};
             class credits {};
             class initACE {};
             class initACEUnconsciousHandler {};
             class initBases {};
-            class initUtilityItems {};
             class initGarrisons {};
             class initPreJIP { preInit = 1; };
             class initSpawnPlaces {};
             class initStaticPlaces {};
+            class initUtilityItems {};
             class initVarCommon {};
             class initVarServer {};
             class initVehClassToCrew {};
             class initZones {};
             class initZeusLogging {};
+            class installClientEH {};
             class modBlacklist {};
             class playerMarkers {};
             class prepareMarkerArrays {};
             class resourcecheck {};
             class tags {};
-            class checkCampaignEnd {};
         };
 
         class Intel {
@@ -414,8 +427,12 @@ class CfgFunctions
         class MinorSites {
             file = QPATHTOFOLDER(functions\MinorSites);
             class addMinorSite {};
+            class buildCamp {};
+            class buildRoadblock {};
+            class createRebelControl {};
             class deleteMinorSite {};
             class deleteNearSites {};
+            class deleteRebelControl {};
             class generateCamps {};
             class generateRoadblockPairs {};
             class generateRoadblocks {};
@@ -551,6 +568,7 @@ class CfgFunctions
             class build {};
             class buildCreateVehicleCallback {};
             class buildMinefield {};
+            class canEditGarrison {};
             class canReinfPlayer {};
             class controlHCsquad {};
             class controlunit {};
@@ -563,7 +581,6 @@ class CfgFunctions
             class FIAskillAdd {};
             class garrisonAdd {};
             class garrisonDialog {};
-            class garrisonRemove {};
             class getHCSquadPrice {};
             class getHCSquadVehicleType {};
             class NATObomb {};

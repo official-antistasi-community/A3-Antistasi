@@ -79,8 +79,10 @@ if (_unitSide == Occupants) then {
 	[0, 1, getPos _unit] remoteExec ["A3A_fnc_citySupportChange", 2];
 };
 
-private _markerX = _unit getVariable "markerX";
-if (!isNil "_markerX") then { [_markerX, _unitSide] remoteExec ["A3A_fnc_zoneCheck", 2] };
+private _marker = _unit getVariable ["markerX", ""];
+if (_marker != "") then {
+    A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
+};
 
 
 // timed cleanup functions

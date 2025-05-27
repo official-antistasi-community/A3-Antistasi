@@ -144,6 +144,7 @@ A3A_curHQInfoInv = 0;
 A3A_oldHQInfoOcc = [];			// arrays of [xpos, ypos, knowledge]
 A3A_oldHQInfoInv = [];
 
+A3A_markersToDelete = [];		// list of markers to be cleared after despawning
 
 // These are silly, should be nil/true and local-defined only
 cityIsSupportChanging = false;
@@ -152,8 +153,6 @@ savingServer = true;					// lock out saves until this is changed
 
 prestigeIsChanging = false;
 
-zoneCheckInProgress = false;
-garrisonIsChanging = false;
 movingMarker = false;
 markersChanging = [];
 
