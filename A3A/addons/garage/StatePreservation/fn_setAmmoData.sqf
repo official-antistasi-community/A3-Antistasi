@@ -43,9 +43,8 @@ params ["_vehicle", "_ammoData"];
 if !(local _vehicle) exitWith {};
 if (_ammoData isEqualTo []) exitWith {};
 if (HR_GRG_hasAmmoSource && !HR_GRG_ServiceDisabled_Rearm) exitWith {};
-private _weaponData = _ammoData select {_x#0 == "TURRET"};
-private _pylonData = _ammoData select {_x#0 == "PYLON"};
-private _cargoData = _ammoData select {_x#0 == "CARGO"};
+private _weaponData = _ammoData select {!(_x#0)};
+private _pylonData = _ammoData - _weaponData;
 
 {_vehicle removeMagazinesTurret [_x#0,_x#1];} forEach (magazinesAllTurrets _vehicle select {!("pylon" in toLower (_x#0))}); //remove non pylon mags
 {_vehicle addMagazineTurret (_x#1)} forEach _weaponData; //restore non pylon magazines
@@ -55,10 +54,3 @@ private _cargoData = _ammoData select {_x#0 == "CARGO"};
     _vehicle setPylonLoadOut [_index, _mag, false, _turret]; //claims effect local, actually global
     _vehicle setAmmoOnPylon [_index, _count]; //global effect
 } forEach _pylonData;
-
-if (_cargoData isNotEqualTo []) then { // may be the case on older saves
-    _vehicle setAmmoCargo _cargoData#0#1; // no effect if not ammo vic
-    if (A3A_hasACE && (_cargoData#0#2 > -1)) then {
-        [_vehicle, _cargoData#0#2] call ace_rearm_fnc_setSupplyCount;
-    };
-};

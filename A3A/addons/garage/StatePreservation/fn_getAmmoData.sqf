@@ -40,7 +40,7 @@
 */
 params [["_veh", objNull, [objNull]]];
 
-private _nonPylon = magazinesAllTurrets _veh select {!("pylon" in toLower (_x#0))} apply { ["TURRET", [_x#0,_x#1,_x#2]] }; //[is Pylon, [magName, path, ammo]]
+private _nonPylon = magazinesAllTurrets _veh select {!("pylon" in toLower (_x#0))} apply { [false, [_x#0,_x#1,_x#2]] }; //[is Pylon, [magName, path, ammo]]
 
 private _pylonsCfg = (configFile >> "CfgVehicles" >> typeOf _veh >> "Components" >> "TransportPylonsComponent");
 private _pylonAmmo = [];
@@ -48,7 +48,7 @@ private _magName = getPylonMagazines _veh;
 {
     private _pylonIndex = _forEachIndex + 1;
     _pylonAmmo pushBack [
-        "PYLON"
+        true
         , [
             _pylonIndex
             , configName _x
@@ -59,9 +59,4 @@ private _magName = getPylonMagazines _veh;
     ];
 } forEach ("true" configClasses (_pylonsCfg >> "Pylons"));
 
-private _baseAmmoCargo = getAmmoCargo _vehicle;
-private _maxACEAmmoCargo = getNumber (configOf _vehicle/"ace_rearm_defaultSupply");
-private _currentACEAmmoCargo = if (A3A_hasAce) then { [_vehicle] call ace_rearm_fnc_getSupplyCount } else { -1 };
-private _cargoAmmo = [["CARGO",_baseAmmoCargo,_currentACEAmmoCargo]];
-
-_nonPylon + _pylonAmmo + _cargoAmmo
+_nonPylon + _pylonAmmo
