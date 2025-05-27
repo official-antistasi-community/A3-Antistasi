@@ -69,6 +69,12 @@ private _utilityRefund = {
     } else {
         _toRefund = _object getVariable ['A3A_itemPrice', 0];
     };
+    if ("ammo" in _flags) then {
+        _toRefund = floor (([_object] call A3A_fnc_remainingAmmo) * (_object getVariable ['A3A_itemPrice', 0]));
+        _feedBack = "STR_HR_GRG_Feedback_addVehicle_Ammo_sold";
+    } else {
+        _toRefund = _object getVariable ['A3A_itemPrice', 0];
+    };
     if ("loot" in _flags) then {
         _feedBack = "STR_HR_GRG_Feedback_addVehicle_LTC";
         [_object, boxX, true] call A3A_fnc_ammunitionTransfer;

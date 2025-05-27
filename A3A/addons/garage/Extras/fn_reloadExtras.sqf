@@ -187,8 +187,10 @@ private _getPercentageAmmo = {
     if (count _this isEqualTo 0) exitWith {0};
     private _sumPercent = 0;
     private _weaponsWithAmmo = 0;
+    private _ammo = +_this;
+    _ammo deleteAt 0;
     {
-        (if (_x#0) then { //pylon
+        (if (_x#0 == "PYLON") then { //pylon
             [_x#1#3, _x#1#4]
         } else { //muzzle
             [_x#1#0,_x#1#2]
@@ -198,7 +200,7 @@ private _getPercentageAmmo = {
         if (_maxAmmo <= 0) then { continue };
         _sumPercent = _sumPercent + (_count/_maxAmmo);
         _weaponsWithAmmo = _weaponsWithAmmo + 1;
-    } forEach _this;
+    } forEach _ammo;
     if (_weaponsWithAmmo > 0) then { _sumPercent / _weaponsWithAmmo } else { 1 };
 };
 
