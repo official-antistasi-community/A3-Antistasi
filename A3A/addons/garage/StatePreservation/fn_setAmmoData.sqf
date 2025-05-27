@@ -58,7 +58,7 @@ private _cargoData = _ammoData select {_x#0 == "CARGO"};
 
 if (_cargoData isNotEqualTo []) then { // may be the case on older saves
     _vehicle setAmmoCargo _cargoData#0#1; // no effect if not ammo vic
-    private _aceAmmo= _cargoData#0#2;
-    if (isNil "_aceAmmo") exitWith {};
-    [_vehicle, _cargoData#0#2] call ace_rearm_fnc_setSupplyCount;
+    if (A3A_hasACE && (_cargoData#0#2 > -1)) then {
+        [_vehicle, _cargoData#0#2] call ace_rearm_fnc_setSupplyCount;
+    };
 };
