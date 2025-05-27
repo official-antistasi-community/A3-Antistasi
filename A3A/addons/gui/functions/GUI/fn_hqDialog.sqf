@@ -33,6 +33,7 @@ params[["_mode","onLoad"], ["_params",[]]];
 
 // Get display and map control
 private _display = findDisplay A3A_IDD_HQDIALOG;
+if (isNull _display) exitWith {};               // server might use sendGarrisonData after the dialog is closed
 private _garrisonMap = _display displayCtrl A3A_IDC_GARRISONMAP;
 
 switch (_mode) do
@@ -344,9 +345,6 @@ switch (_mode) do
 
     case ("updateGarrisonTab"):
     {
-        _display = findDisplay A3A_IDD_HQDIALOG;
-        if (isNull _display) exitWith {};
-
         // Update titlebar
         _titleBar = _display displayCtrl A3A_IDC_HQDIALOGTITLEBAR;
         _titleBar ctrlSetText (localize "STR_antistasi_dialogs_hq_titlebar") + " > " + (localize "STR_antistasi_dialogs_hq_garrisons_titlebar");
@@ -374,22 +372,26 @@ switch (_mode) do
             ["garrisonMapClicked", [_hqMapPos]] call FUNC(hqDialog);
         };
 
+        private _garrison = _garrisonMap getVariable "currentGarrisonData";
+        if (isNil "_garrison") exitWith {};             // could happen if you clicked twice before server send data?
+        private _troops = _garrison getOrDefault ["troops", []];
+
         // Get the data from the marker
         private _position = getMarkerPos _selectedMarker;
         private _garrisonName = [_selectedMarker] call A3A_GUI_fnc_getLocationMarkerName;
-        private _garrison = garrison getVariable [_selectedMarker, []];
+        //private _garrison = garrison getVariable [_selectedMarker, []];
 
         // Get garrison counts
-        private _rifleman = {_x in FactionGet(reb,"unitRifle")} count _garrison;
-        private _squadLeader = {_x in FactionGet(reb,"unitSL")} count _garrison;
-        private _autorifleman = {_x in FactionGet(reb,"unitMG")} count _garrison;
-        private _grenadier = {_x in FactionGet(reb,"unitGL")} count _garrison;
-        private _medic = {_x in FactionGet(reb,"unitMedic")} count _garrison;
-        private _mortar = {_x in FactionGet(reb,"unitCrew")} count _garrison;
-        private _marksman = {_x in FactionGet(reb,"unitSniper")} count _garrison;
-        private _at = {_x in FactionGet(reb,"unitLAT")} count _garrison;
-        private _atMissile = {_x in FactionGet(reb,"unitAT")} count _garrison;
-        private _aaMissile = {_x in FactionGet(reb,"unitAA")} count _garrison;
+        private _rifleman = {_x in FactionGet(reb,"unitRifle")} count _troops;
+        private _squadLeader = {_x in FactionGet(reb,"unitSL")} count _troops;
+        private _autorifleman = {_x in FactionGet(reb,"unitMG")} count _troops;
+        private _grenadier = {_x in FactionGet(reb,"unitGL")} count _troops;
+        private _medic = {_x in FactionGet(reb,"unitMedic")} count _troops;
+        private _mortar = {_x in FactionGet(reb,"unitCrew")} count _troops;
+        private _marksman = {_x in FactionGet(reb,"unitSniper")} count _troops;
+        private _at = {_x in FactionGet(reb,"unitLAT")} count _troops;
+        private _atMissile = {_x in FactionGet(reb,"unitAT")} count _troops;
+        private _aaMissile = {_x in FactionGet(reb,"unitAA")} count _troops;
 
         // Get controls
         private _garrisonTitle = _display displayCtrl A3A_IDC_GARRISONTITLE;
@@ -648,6 +650,17 @@ switch (_mode) do
         ["updateMainTab"] call FUNC(hqDialog);
     };
 
+    case ("garrisonDataSent"):
+    {
+        _params params ["_marker", "_garrisonData"];
+
+        // If the data's from a previous click then ignore it
+        if (_marker != _garrisonMap getVariable ["selectedMarker" ""]) exitWith {};
+
+        _garrisonMap setVariable ["currentGarrisonData", _garrisonData];
+        ["updateGarrisonTab"] call FUNC(hqDialog);
+    };
+
     case ("garrisonMapClicked"):
     {
         // TODO UI-update: Clicking away from outposts should deselect current outpost
@@ -669,9 +682,12 @@ switch (_mode) do
 
         _garrisonMap setVariable ["selectedMarker", _selectedMarker];
         private _position = getMarkerPos _selectedMarker;
-        _garrisonMap setVariable ["selectMarkerData", [_position]];
+        _garrisonMap setVariable ["selectMarkerData", [_position]];         // unused?
 
-        ["updateGarrisonTab"] call FUNC(hqDialog);
+        // Will bounce data back through garrisonDataSent
+        [_selectedMarker] remoteExecCall [QFUNCMAIN(garrisonServer_sendData), 2];
+
+        //["updateGarrisonTab"] call FUNC(hqDialog);
     };
 
     // Updating the garrison numbers
@@ -715,8 +731,8 @@ switch (_mode) do
         };
 
         _unitType = A3A_faction_reb get _unitType;
-        [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonAdd);
-        // tab will update automatically
+        [_selectedMarker, _unitType, clientOwner] remoteExecCall [QFUNCMAIN(garrisonServer_addUnitType), 2];
+        [_selectedMarker] remoteExecCall [QFUNCMAIN(garrisonServer_sendData), 2];
     };
 
     case ("garrisonRemove"):
@@ -758,10 +774,9 @@ switch (_mode) do
             };
         };
 
-        Debug_2("Calling FUNCMAIN(garrisonRemove) with [%1,%2]", _unitType, _selectedMarker);
         _unitType = A3A_faction_reb get _unitType;
-        [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonRemove);
-        // tab will update automatically
+        [_unitType, _selectedMarker, clientOwner] remoteExecCall [QFUNCMAIN(garrisonServer_remUnitType), 2];
+        [_selectedMarker] remoteExecCall [QFUNCMAIN(garrisonServer_sendData), 2];
     };
 
     case ("dismissGarrison"):

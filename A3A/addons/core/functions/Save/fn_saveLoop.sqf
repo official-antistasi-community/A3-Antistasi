@@ -69,7 +69,7 @@ private ["_garrison"];
 ["gameMode", gameMode] call A3A_fnc_setStatVariable;					// backwards compatibility
 ["difficultyX", skillMult] call A3A_fnc_setStatVariable;				// backwards compatibiiity
 ["bombRuns", bombRuns] call A3A_fnc_setStatVariable;
-["smallCAmrk", smallCAmrk] call A3A_fnc_setStatVariable;
+["smallCAmrk", []] call A3A_fnc_setStatVariable;						// backwards compatibility
 ["membersX", membersX] call A3A_fnc_setStatVariable;
 private _antennasDeadPositions = [];
 { _antennasDeadPositions pushBack getPos _x; } forEach antennasDead;

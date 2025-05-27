@@ -118,7 +118,7 @@ private _broadcastReportedVehsAndStaticsToSave = {
 //_this is vehicle
 private _deleteFromReportedVehsAndStaticsToSave = {
     private _marker = _this getVariable "markerX";
-    if (!isNil "_marker") then { [_this] call A3A_fnc_remVehicleFromGarrison };     // must be done before deletion
+    if (!isNil "_marker") then { [_this] call A3A_fnc_garrisonServer_remVehicle };     // must be done before deletion
 };
 //_this is vehicle
 private _transferToArsenal = {

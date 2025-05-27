@@ -10,7 +10,7 @@ params ["_marker", "_vehicle"];
 Trace_1("Called with params %1", _this);
 
 private _oldMarker = _vehicle getVariable "markerX";
-if (!isNil "_oldMarker") then { [_vehicle] call A3A_fnc_remVehicleFromGarrison };
+if (!isNil "_oldMarker") then { [_vehicle] call A3A_fnc_garrisonServer_remVehicle };
 
 if (_marker == "") then { _marker = [getPosATL _vehicle] call A3A_fnc_getMarkerForPos };
 if (_marker == "") exitWith {};

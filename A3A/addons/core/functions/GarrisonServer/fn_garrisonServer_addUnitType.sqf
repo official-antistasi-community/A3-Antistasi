@@ -4,7 +4,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_unitType", "_client"];
+params ["_marker", "_unitType", "_client", ["_oldUI", false]];
 
 Trace_1("Called with params %1", _this);
 
@@ -50,6 +50,6 @@ if (!isNil {A3A_garrisonMachine get _marker}) then {
 
 // Print new garrison info in hint box on client
 // Probably doesn't need to be done unscheduled? Arguable
-[_marker, _client] spawn A3A_fnc_showSiteInfo;
+if (_oldUI) then { [_marker, _client] spawn A3A_fnc_showSiteInfo };
 
 Trace("Completed");

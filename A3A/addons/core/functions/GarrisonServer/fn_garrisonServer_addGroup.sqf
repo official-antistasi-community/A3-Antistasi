@@ -8,46 +8,32 @@ params ["_marker", "_group", "_client"];
 
 Trace_1("Called with params %1", _this);
 
-/*
-private _limit = [_marker] call A3A_fnc_getGarrisonLimit;
-private _troops = A3A_garrison get _marker get "troops";
-
-if (_limit != -1) then {
-    private _newGarrisonCount = count _unitsX + count _oldGarrison;
-
-    switch (true) do {
-        case (count _oldGarrison == _limit): {
-            [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_full_limit"] call A3A_fnc_customHint;
-            _earlyEscape = true;
-        };
-        case (_newGarrisonCount >= _limit): {
-            private _unitsToRefundCount = _newGarrisonCount - _limit;
-            private _unitsToRefund = _unitsX select [0, _unitsToRefundCount];
-            _unitsX deleteRange [0, _unitsToRefundCount];
-
-            private _refundMoney = 0;
-            {
-                private _unitType = _x getVariable "unitType";
-                _refundMoney = _refundMoney + (server getVariable _unitType);
-                deleteVehicle _x;
-            } forEach _unitsToRefund;
-
-            [count _unitsToRefund,_refundMoney] remoteExec ["A3A_fnc_resourcesFIA",2];
-            [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_exceed_limit"] call A3A_fnc_customHint;
-        };
-        default {
-            //proceed as usual
-        };
-    };
-};
-if (_earlyEscape) exitWith {};
-*/
-
 // Add to the server garrison data store
-(A3A_garrison get _marker get "troops") append units _group;
 
-// Update the marker text if it's rebel
-if (sidesX getVariable _marker == teamPlayer) then { [_marker] call A3A_fnc_mrkUpdate };
+if (sidesX getVariable _marker == teamPlayer) then
+{
+    // If it's rebel, just append the unit types and update the marker
+    private _unitTypes = units _group apply { _x getVariable "unitType" };
+    (A3A_garrison get _marker get "troops") append _unitTypes;
+
+    [_marker] call A3A_fnc_mrkUpdate
+}
+else
+{
+    // If enemy, need to adjust the quality based on the incoming units. Overkill to do it per unit, but whatever
+    private _typeQuality = ["other", "police", "militia", "regular", "SF"] createHashMapFromArray [0,0,1,2,3];
+    private _qualityTot = 0;
+    {
+        private _unitType = _x getVariable "unitType" splitString "_" select 1;
+        _qualityTot = _qualityTot + (_typeQuality getOrDefault [_unitType, 0]);
+    } forEach units _group;
+
+    private _troops = A3A_garrison get _marker get "troops";
+    private _newCount = _troops#0 + count units _group;
+    private _newQuality = (_troops#1 * _troops#0 + _qualityTot) / _newCount;
+    _troops set [1, _newQuality];
+    _troops set [0, _newCount];
+};
 
 // Add to the live garrison
 private _machineID = A3A_garrisonMachine get _marker;

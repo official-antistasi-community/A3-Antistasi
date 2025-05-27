@@ -67,7 +67,7 @@ isNil {
 		_item spawn {
 			// wait until the thing has settled before adding/switching it
 			sleep 2;
-			["", _this] remoteExecCall ["A3A_fnc_addVehicleToGarrison", 2];
+			["", _this] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
         };
     };
 

@@ -130,7 +130,7 @@ if (isNull _cargo || isNull _vehicle) exitWith {};//vehicle or cargo deleted
 
 // Add to garrison if it's inside one
 if (_cargo isKindOf "StaticWeapon") then {
-    ["", _cargo] remoteExecCall ["A3A_fnc_addVehicleToGarrison", 2];
+    ["", _cargo] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
     ["Static Deployed", "Static weapon has been deployed for use in a nearby garrison."] call A3A_fnc_customHint;
 };
 

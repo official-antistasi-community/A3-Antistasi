@@ -81,7 +81,7 @@ HR_GRG_fnc_Hint = {
 HR_GRG_fnc_vehInit = {
     if (_this isKindOf "StaticWeapon") then {
         // Add to garrison if placed within one
-        ["", _this] remoteExecCall ["A3A_fnc_addVehicleToGarrison", 2];
+        ["", _this] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
     };
     _this setVariable ["ownerX",getPlayerUID player,true];
     [_this, TeamPlayer] call A3A_fnc_AIVEHinit;

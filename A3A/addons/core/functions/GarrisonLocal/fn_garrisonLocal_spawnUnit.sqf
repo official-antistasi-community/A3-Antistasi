@@ -1,3 +1,5 @@
+// Spawn active unit in rebel garrison, ideally in current group
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
@@ -10,7 +12,7 @@ private _groups = _garrison get "groups";
 
 private _group = grpNull;
 {
-    if !(_x getVariable ["PATCOM_Controlled", false]) then { continue };
+    if !(_x getVariable ["PATCOM_Controlled", false]) then { continue };        // wat?
     if (count units _x < 8) exitWith { _group = _x };
 } forEach _groups;
 

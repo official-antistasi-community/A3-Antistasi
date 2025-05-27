@@ -14,10 +14,8 @@ private _newQuality = (_troops#0 * _troops#1 + _unitCount * _quality) / (_troops
 _troops set [0, _troops#0 + _unitCount];
 _troops set [1, _newQuality];
 
-// Update the marker text if it's rebel
-if (sidesX getVariable _marker == teamPlayer) then { [_marker] call A3A_fnc_mrkUpdate };
-
 // Add real unit if garrison is spawned
+// Shouldn't really happen because we don't use this if the garrison is spawned?
 if (!isNil {A3A_garrisonMachine get _marker}) then {
     ["spawnUnitCount", [_marker, _unitCount, _quality]] call A3A_fnc_garrisonOp;
 };

@@ -90,7 +90,7 @@ _veh setDir _dir;
 _veh enableSimulationGlobal false;			// busted, needs to run on server. Does it matter?
 
 // TODO: Can we even build off-marker? What then?
-["", _veh] remoteExecCall ["A3A_fnc_addVehicleToGarrison", 2];
+["", _veh] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
 
 
 //falta inicializarlo en veh init
