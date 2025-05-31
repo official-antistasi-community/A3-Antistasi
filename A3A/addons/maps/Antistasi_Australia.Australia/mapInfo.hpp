@@ -4,18 +4,18 @@ class australia {
 		{"Moreton Island",0},{"Tiwi Island",4},{"Rottnest Island", 0},{"Garden Island",0},{"Cape Peron", 14},{"Groote Eylandt", 54},{"Toowoomba", 442},{"Cairns", 833},{"Cape Melville",0},{"Kangaroo Island",0},{"Broken Hill",387},{"Tailem bend",141},{"Flinders Island",0},{"Mount Isa",84},{"Stuart Hwy",0},{"Weipa",208},{"Port Lincoln",86},{"Bathurst",86},{"Willcania",663},{"Smithton",42},{"Coober Pedy",246},{"Rockhampton",1285},{"NT",0},{"qld",0},{"nsw",1},{"vic",94},{"sa",0},{"Melbourne",1298},{"alice",507},{"Adelaide",1483},{"Perth",899},{"darwin",93},{"Brisbane",764},{"sydney",1857},{"pinegap",83},{"Tasmania",223},{"hobart",80},{"Brisbane",764},{"Army Base",170},{"Phillip Island",0},{"Eden",245},{"Launceston",230},{"Mildura",378}
 	};
 	//A few map names here do not disappear eg Moreton Island, Tiwi Island, King Island. Alot of islands
-	disabledTowns[] = {"Stuart Hwy", "Groote Eylandt", "Moreton Island", "West_australia", "NT", "sa", "qld", "King Island", "Garden Island", "Rottnest Island", "Tiwi Island", "Cape Melville", "Phillip Island", "Kangaroo Island"}; //no towns that need to be disabled
+	disabledTowns[] = {"Army Base","Stuart Hwy", "Groote Eylandt", "Moreton Island", "West_australia", "NT", "sa", "qld", "King Island", "Garden Island", "Rottnest Island", "Tiwi Island", "Cape Melville", "Phillip Island", "Kangaroo Island"}; //no towns that need to be disabled
 	antennas[] = {
-		{19677.8,24005.7,0.000545502},//blacklist
+		{19677.8,24005.7,0.000545502},//blacklist0
 		{19707.4,24041.9,2.28882e-05},
 		{19683.5,24085,-3.8147e-06},//blacklist
 		{19683.5,24085,0.000183105},//blacklist
 		{19692.7,24102.9,-0.000263214},//blacklist 4
-		{19202.8,24193,0.00166321},//blacklist
-		{19272.8,24280.5,-0.000347137},//blacklist
-		{19890.7,24439,0},//blacklist
+		{19202.8,24193,0.00166321},//blacklist 5
+		{19272.8,24280.5,-0.000347137},//blacklist 6
+		{19890.7,24439,0},//blacklist 7 
 		{19890.7,24439,0.00148582},//blacklist
-		{19896.1,24446.7,-3.8147e-06},
+		{19896.1,24446.7,-3.8147e-06},// black list 9
 		{19896.1,24446.7,0},
 		{19878.4,24456.5,0},//blacklist 11
 		{25928.1,12988.2,0.0575104},
@@ -45,15 +45,29 @@ class australia {
 		{36425.9,14241.6,0},//blacklist 36
 		{36439.4,14241.4,0},//blacklist 37
 		{36461.6,14248,0},//blacklist 38
-		{36461.6,14248,0}//blacklist 39
+		{36461.6,14248,0},//blacklist 39
+		{15219.367,15145.127,0},// added tower
+		{33255.539,8551.096,0},// added tower
+		{37926.72,16933.492,0},// added tower
+		{5113.370,15952.631,0},// added tower
+		{31067.402,30379.016,0},// added tower
+		{18078.064,36298.461,0},// added tower
+		{6217.244,11518.302,0},// added tower
+		{3856.618,14935.406,0},// added tower
+		{6413.718,18032.43,0},// added tower
+		{8800.054,26733.414,0},// added tower
+		{20306.994,28944.695,0},
+		{32212.74,2754.864,0},//added tower Tasmania airbase
+		{38073.523,20447.84,0},//added tower Brisbane airbase
+		{30688.502,12010.629,0}
 	};
 	antennasBlacklistIndex[] =
-		{0,2,3,4,5,6,7,8,11,16,17,18,22,23,25,26,27,28,30,31,32,33,35,36,37,38,39};
+		{0,2,3,4,5,6,7,8,9,11,16,17,18,22,23,25,26,27,28,30,31,32,33,35,36,37,38,39};
 	banks[] = {
 		{19808.3,24380.9,3.8147e-06},{19775.1,24407.7,0},{21956.5,25576.3,-0.000619888},{21973.3,25605.1,-0.000516891},{20744.7,12916.6,-0.782235},{27626.8,17081.1,-0.000335693},{31232.2,19983.1,-0.000125885},{31583.3,25168.4,-0.391495},{15879.6,33441.4,9.53674e-07},{30827.3,11333.1,-0.479738},{17509.3,34127.6,0},{6727.58,18023.6,-0.202614},{30853,10621.1,-0.765281},{31121.5,10601,-0.42619},{5754.34,18540.6,-0.00122261},{5774.74,18308.4,-0.490837},{32123.1,29848.2,-8.58307e-05},{34925.5,25883.1,-0.335293},{28405.5,35255.1,0.00220966},{34951,11697.2,-0.431705},{37962.6,20522.4,-0.416302},{36479.5,12987.8,-0.343521},{38312.9,20037,9.53674e-07},{36743,13009.2,0},{36744.3,12871.3,9.53674e-06},{36897.8,12961.4,-0.411804},{36825.3,12786.5,-0.445873},{33714.6,3353.86,-0.466493}
 	};
 	garrison[] = {
-		{},{"airport_4", "airport_7", "outpost_2", "resource_5"},{},{}
+		{},{"airport_4", "airport_7", "outpost_2", "resource_5","resource_16","factory_12","factory_11"},{},{}
 	};
 	fuelStationTypes[] = {
 		"Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_01_pump_F","Land_FuelStation_02_pump_F","Land_FuelStation_03_pump_F"
