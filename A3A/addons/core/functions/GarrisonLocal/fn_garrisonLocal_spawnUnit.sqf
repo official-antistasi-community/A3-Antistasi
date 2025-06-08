@@ -29,3 +29,5 @@ private _unit = [_group, _unitType, markerPos _marker, [], 0, "NONE"] call A3A_f
 if (_unitType isEqualTo FactionGet(reb,"unitSL")) then {_group selectLeader _unit};
 [_unit, _marker] call A3A_fnc_FIAinitBases;
 (_garrison get "troops") pushBack _unit;
+
+if (_unitType isEqualTo FactionGet(reb,"unitRifle")) then { [_marker] call A3A_fnc_garrisonLocal_updateStatics };

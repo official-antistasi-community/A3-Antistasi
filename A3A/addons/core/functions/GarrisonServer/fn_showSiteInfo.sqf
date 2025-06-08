@@ -47,7 +47,7 @@ private _text = call {
 
         private _power = [_marker] call A3A_fnc_getSideRadioTowerInfluence;
         private _powerName = if (_power == sideUnknown) then {"NONE"} else { Faction(_power) get "name" };
-        format [[localize "STR_A3A_fn_init_cityinfo_influ", _text, _powerName];
+        format [localize "STR_A3A_fn_init_cityinfo_influ", _text, _powerName];
     };
     if (_marker in airportsX) exitWith {
         _goodCount = 40;

@@ -3,18 +3,24 @@
     Data only used on server (initGarrisons & reinf)
 */
 
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
 params ["_markers"];
 
 A3A_spawnPlaceStats = createHashMap;
 {
     private _marker = _x;
     private _markerStats = createHashMap;
+    if (_marker in citiesX) then { A3A_spawnPlaceStats set [_x, _markerStats]; continue };
+
     private _spawnPlaces = A3A_spawnPlacesHM get _marker;
+    if (isNil "_spawnPlaces") then {
+        Error_1("No spawn places for marker %1", _marker);
+        continue;
+    };
     private _isAirport = _marker in airportsX;
-
-    private _garrSize = [_marker] call A3A_fnc_garrisonSize;        // also store frontline?
-    _markerStats set ["troops", [_garrSize, _garrSize]];
-
+    private _garrSize = A3A_garrisonSize get _marker;
     {
         private _placeType = _x;
         private _indexes = [];
@@ -35,7 +41,7 @@ A3A_spawnPlaceStats = createHashMap;
         };
         _markerStats set [_placeType, [_indexes, _maxPlaces, _parPlaces min _maxPlaces]];
 
-    } forEach ["staticMG", "staticAA" "staticMortar", "vehicle", "heli", "plane", "boat"];
+    } forEach ["staticMG", "staticAA", "staticMortar", "vehicleAA", "vehicleTruck", "vehicle", "heli", "plane", "boat"];
 
     A3A_spawnPlaceStats set [_x, _markerStats];
 

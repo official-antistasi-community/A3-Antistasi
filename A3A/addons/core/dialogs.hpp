@@ -114,7 +114,7 @@ class HQ_menu 			{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;if (player == theBoss) then {nul = [] spawn A3A_fnc_moveHQ;} else {[""Move HQ"", ""Only Player Commander has access to this function.""] call A3A_fnc_customHint;};";
+			action = "closeDialog 0;if (player == theBoss) then {[player] remoteExecCall ['A3A_fnc_moveHQ', 2]} else {[""Move HQ"", ""Only Player Commander has access to this function.""] call A3A_fnc_customHint;};";
 		};
 		class HQ_button_recruitUnit: A3A_core_BattleMenuRedButton
 		{

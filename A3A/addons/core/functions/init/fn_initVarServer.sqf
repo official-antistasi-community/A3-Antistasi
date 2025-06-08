@@ -65,6 +65,9 @@ DECLARE_SERVER_VAR(vehInGarage, []);
 //Should vegetation around HQ be cleared
 DECLARE_SERVER_VAR(chopForest, false);
 
+// Whether petros is currently being moved
+DECLARE_SERVER_VAR(A3A_petrosMoving, false);
+
 DECLARE_SERVER_VAR(skillFIA, 1);																		//Initial skill level for FIA soldiers
 //Initial Occupant Aggression
 DECLARE_SERVER_VAR(aggressionOccupants, 0);
@@ -405,17 +408,6 @@ private _undercoverVehicles = (arrayCivVeh - ["C_Quadbike_01_F"]) + FactionGet(r
 DECLARE_SERVER_VAR(undercoverVehicles, _undercoverVehicles);
 
 
-{
-    private _faction = _x;
-
-    if (FactionGet(civ,"vehiclesCivRepair") isEqualTo [] and random 1 < 0.1) exitWith { selectRandom (_faction get "vehiclesRepairTrucks") };
-	if (FactionGet(civ,"vehiclesCivFuel") isEqualTo [] and random 1 < 0.1) exitWith { selectRandom (_faction get "vehiclesFuelTrucks") };
-	private _types = if (!_isFIA) then {(_faction get "vehiclesTrucks") + (_faction get "vehiclesCargoTrucks")} else {_faction get "vehiclesMilitiaTrucks"};
-	_types = _types select { _x in FactionGet(all,"vehiclesCargoTrucks") };
-	if (count _types == 0) then { (_faction get "vehiclesCargoTrucks") } else { _types };
-	selectRandom _types;
-} forEach [A3A_faction_occ, A3A_faction_inv];
-
 //////////////////////////////////////
 //        ITEM INITIALISATION      ///
 //////////////////////////////////////
@@ -463,9 +455,10 @@ DECLARE_SERVER_VAR(A3A_vehClassToCrew,call A3A_fnc_initVehClassToCrew);
 // Default vehicle resource costs
 private _vehicleResourceCosts = createHashMap;
 
-{ _vehicleResourceCosts set [_x, 20] } forEach FactionGet(all, "staticAA") + FactionGet(all, "staticAT") + FactionGet(all, "staticMortars");
+{ _vehicleResourceCosts set [_x, 10] } forEach FactionGet(all, "staticMGs");
+{ _vehicleResourceCosts set [_x, 20] } forEach FactionGet(all, "staticAA") + FactionGet(all, "staticAT");
 { _vehicleResourceCosts set [_x, 20] } forEach FactionGet(all, "vehiclesLightUnarmed") + FactionGet(all, "vehiclesTrucks");
-{ _vehicleResourceCosts set [_x, 50] } forEach FactionGet(all, "vehiclesLightArmed");
+{ _vehicleResourceCosts set [_x, 50] } forEach FactionGet(all, "vehiclesLightArmed") + FactionGet(all, "staticMortars");
 { _vehicleResourceCosts set [_x, 60] } forEach FactionGet(all, "vehiclesLightAPCs");
 { _vehicleResourceCosts set [_x, 100] } forEach FactionGet(all, "vehiclesAPCs");
 { _vehicleResourceCosts set [_x, 150] } forEach FactionGet(all, "vehiclesAA") + FactionGet(all, "vehiclesArtillery") + FactionGet(all, "vehiclesIFVs") + FactionGet(all, "vehiclesLightTanks");
@@ -537,6 +530,32 @@ private _overrides = FactionGet(Reb, "attributesVehicles") + FactionGet(Occ, "at
 DECLARE_SERVER_VAR(A3A_vehicleResourceCosts, _vehicleResourceCosts);
 DECLARE_SERVER_VAR(A3A_groundVehicleThreat, _groundVehicleThreat);
 DECLARE_SERVER_VAR(A3A_rebelVehicleCosts, _rebelVehicleCosts);
+
+
+// Place type to vehicle validity mapping
+// For sanity checking saves & captured garrisons. Only used on server.
+A3A_validVehicles = createHashMap;
+{
+	private _valid = createHashMap;
+	_valid set ["staticMG", FactionGet(all, "staticMGs")];			// allow cross-faction use
+	_valid set ["staticAA", _x get "staticAA"];
+	_valid set ["staticAT", _x get "staticAT"];
+	_valid set ["staticMortar", _x get "staticMortar"];
+
+	_valid set ["vehicleAA", _x get "vehiclesAA"];
+	_valid set ["vehicleTruck", (_x get "vehiclesTrucks") + (_x get "vehiclesCargoTrucks") + (_x get "vehiclesAmmoTrucks")
+		+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
+	_valid set ["vehicle", (_valid get "vehicleTruck") + (_x get "vehiclesLightUnarmed") + (_x get "vehiclesTrucks") + (_x get "vehiclesLightArmed")
+		+ (_x get "vehiclesLightAPCs") + (_x get "vehiclesAPCs") + (_x get "vehiclesAA") + (_x get "vehiclesArtillery") + (_x get "vehiclesIFVs")
+		+ (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks")];
+
+	_valid set ["plane", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA") + (_x get "vehiclesPlanesTransport")];
+	_valid set ["heli", (_x get "vehiclesHelisLight") + (_x get "vehiclesHelisTransport") + (_x get "vehiclesHelisLightAttack") + (_x get "vehiclesHelisAttack")];
+	_valid set ["boat", (_x get "vehiclesTransportBoats") + (_x get "vehiclesGunBoats")];
+
+	A3A_validVehicles set [_x get "side", _valid];
+
+} forEach [A3A_faction_occ, A3A_faction_inv];
 
 ///////////////////////////
 //     MOD TEMPLATES    ///

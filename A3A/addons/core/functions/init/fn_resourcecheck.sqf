@@ -63,23 +63,22 @@ while {true} do
 			["TaskSucceeded", ["", format [localize "STR_A3A_fn_init_resourceCheck_cityChange",_city,FactionGet(reb,"name")]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 			sidesX setVariable [_city,teamPlayer,true];
 			[Occupants, 10, 60] remoteExec ["A3A_fnc_addAggression",2];
-			garrison setVariable [_city,[],true];
+			[_city, teamPlayer] call A3A_fnc_garrisonServer_changeSide;
 			[_city] call A3A_fnc_mrkUpdate;
 			sleep 5;
 			//[_city] call A3A_fnc_deleteNearSites;
-			[] call A3A_fnc_tierCheck;
 		};
 		if ((_supportGov > _supportReb) and (sidesX getVariable [_city,sideUnknown] == teamPlayer)) then
 		{
 			["TaskFailed", ["", format [localize "STR_A3A_fn_init_resourceCheck_cityChange",_city,FactionGet(occ,"name")]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
 			sidesX setVariable [_city,Occupants,true];
 			[Occupants, -10, 45] remoteExec ["A3A_fnc_addAggression",2];
-			garrison setVariable [_city,[],true];
+			[_city, Occupants] call A3A_fnc_garrisonServer_changeSide;
 			[_city] call A3A_fnc_mrkUpdate;
 			sleep 5;
-			[] call A3A_fnc_tierCheck;
 		};
 	} forEach citiesX;
+	[] call A3A_fnc_tierCheck;
 	[] spawn A3A_fnc_checkCampaignEnd; // check for population win
 	{
 		if ((sidesX getVariable [_x,sideUnknown] == teamPlayer) and !(_x in destroyedSites)) then

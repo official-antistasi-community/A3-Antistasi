@@ -112,13 +112,18 @@ private _buildingHM = createHashMap;
 
 params ["_markers"];
 
+private _usedBuildings = [];
+
 {
     private _radius = vectorMagnitude markerSize _x;
     private _buildings = nearestObjects [markerPos _x, keys _buildingHM, _radius, true];
     _buildings = _buildings inAreaArray _x;
 
-    private _places = A3A_spawnPlacesHM get _marker;        // should be generated already for other place types
+    private _places = A3A_spawnPlacesHM get _x;        // should be generated already for other place types
     {
+        if (_x in _usedBuildings) then {continue};       // don't re-use same building for different markers
+        _usedBuildings pushBack _x;
+
         private _building = _x;
         private _buildingPlaces = (_buildingHM get typeof _x);
         {

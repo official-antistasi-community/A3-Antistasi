@@ -41,7 +41,7 @@ PATCOM_VISUAL_RANGE = 400; // How far before PATCOM can start to detect enemies.
 PATCOM_TARGET_TIME = 120; // How long before PATCOM unit forgets about an enemy.
 PATCOM_ARTILLERY_MANAGER = true; // Allow Patcome to control AI Artillery. False is default A3 Artillery AI.
 PATCOM_ARTILLERY_DELAY = 30; // How quickly artillery becomes available again after firing in seconds.
-PATCOM_AI_STATICS = true; // Allow AI to find and arm statics near their group.
+PATCOM_AI_STATICS = false; // Allow AI to find and arm statics near their group.
 PATCOM_AI_STATIC_ARM = 120; // How long AI stay on static weapons after they arm them.
 
 ////////////////////////////////////////

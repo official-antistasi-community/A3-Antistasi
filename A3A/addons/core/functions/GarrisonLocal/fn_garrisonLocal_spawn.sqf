@@ -1,14 +1,15 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_side", "_newGarrison"];
+params ["_marker", "_newGarrison"];
 private _markerPos = markerPos _marker;
+private _side = sidesX getVariable _marker;         // Slightly dangerous
 private _faction = Faction(_side);
 
 Info_2("Spawning %2 garrison at marker %1", _marker, _side);
 Debug_1("Garrison data: %1", _newGarrison);
 
-private _garrison = createHashMapFromArray [["troops", []]], ["statics", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []]];
+private _garrison = createHashMapFromArray [["troops", []], ["statics", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []]];
 _garrison set ["side", _side];
 A3A_activeGarrison set [_marker, _garrison];
 
@@ -18,7 +19,7 @@ private _garrisonType = call {
     if (_marker in citiesX) exitWith {"city"};
     if (_marker find "roadblock" == 0) exitWith {"roadblock"};
     if (_marker find "camp" == 0) exitWith {"camp"};
-    if (_marker find "FIAPost" == 0) exitWith {"rebPost"};      // change these?
+    if (_marker find "RebPost" == 0) exitWith {"rebpost"};
     if (_marker find "outpost" == 0) exitWith {"outpost"};
     if (_marker find "resource" == 0) exitWith {"resource"};
     if (_marker find "factory" == 0) exitWith {"factory"};
@@ -30,31 +31,40 @@ private _garrisonType = call {
 };
 _garrison set ["type", _garrisonType];
 
+// Merge in spawn places & garrison size for minor sites if we haven't done so yet
+if !(_marker in A3A_spawnPlacesHM) then { A3A_spawnPlacesHM set [_marker, _newGarrison get "spawnPlaces"] };
+if !(_marker in A3A_garrisonSize) then { A3A_garrisonSize set [_marker, [_marker, true] call A3A_fnc_garrisonSize] };
+
+
 // Spawn buildings first, so that flag/box don't trip over them
 if !(_garrisonType == "hq") then {
-    private _buildings = _garrison get "buildings";
+    private _buildings = [];
     {
-        _x params ["_class", "_posData"];
-        _posData params ["_posWorld", "_vecUp", "_vecDir"];
+        _x params ["_class", "_posWorld", "_vecDir", "_vecUp"];
         isNil {
             private _building = createVehicle [_class, _posWorld, [], 0, "CAN_COLLIDE"];
             _building setPosWorld _posWorld;
             _building setVectorDirAndUp [_vecDir, _vecUp];
             _buildings pushBack _building;
         };
-    } forEach (_newGarrison get "buildings");
+    } forEach (_newGarrison getOrDefault ["buildings", []]);
+    _garrison set ["buildings", _buildings];
+} else {
+    _garrison set ["buildings", _newGarrison get "spawnedBuildings"];
 };
 
+
 // Spawn flagpole
-if !(_garrisonType in ["hq", "city", "roadblock", "camp", "rebPost"]) then
+if !(_garrisonType in ["hq", "city", "roadblock", "camp", "rebpost"]) then
 {
     private _flag = createVehicle [_faction get "flag", _markerPos, [], 0, "NONE"];
     _flag setFlagTexture (_faction get "flagTexture");
     _flag allowDamage false;
-    (_garrison get "buildings") pushBack _flag;
+    _garrison set ["flag", _flag];
     private _flagAction = ["take", "SDKFlag"] select (_side == teamPlayer);
     [_flag, _flagAction] remoteExec ["A3A_fnc_flagaction", 0, _flag];
 };
+
 
 // Spawn resource/factory civs
 if (_garrisonType in ["resource", "factory"]) then {
@@ -65,26 +75,54 @@ if (_garrisonType in ["resource", "factory"]) then {
     };
 };
 
+
 if (_side != teamPlayer and _garrisonType in ["airport", "outpost", "seaport"]) then {
     // Spawn intel
     // TODO: should be persistently placed
     if (random 100 < (40 + tierWar * 3)) then
     {
         private _large = random 100 < (30 + tierWar * 2);
-        [_markerX, _large] spawn A3A_fnc_placeIntel;
+        [_marker, _large] spawn A3A_fnc_placeIntel;
     };
 
-    // Spawn loot crate if it's off cooldown. TODO: Move to newGarrison data
-    if (garrison getVariable [_markerX + "_lootCD", 0] != 0) exitWith {};
+    // Spawn loot crate if it's off cooldown
+    if (_garrison getOrDefault ["lootCD", 0] != 0) exitWith {};
 	private _ammoBox = [_faction get "ammobox", _markerPos, 15, 5, true] call A3A_fnc_safeVehicleSpawn;
 	[_ammoBox] call A3A_Logistics_fnc_addLoadAction;
-    (_garrison get "vehicles") pushBack _ammoBox;
+    _garrison set ["ammoBox", _ammoBox];
 	[_ammoBox] call A3A_fnc_fillLootCrate;
-	if !(_garrisonType == "seaport") exitWith {};
-    {
-        _ammoBox addItemCargoGlobal [_x, round random [2,6,8]];
-    } forEach (A3A_faction_reb get "diveGear");
+
+	if (_garrisonType == "seaport") then {
+        {
+            _ammoBox addItemCargoGlobal [_x, round random [2,6,8]];
+        } forEach (A3A_faction_reb get "diveGear");
+    };
+    if (_garrisonType == "airport") then {
+		{
+			if (getText(configFile >> "CfgVehicles" >> _x >> "vehicleClass") isEqualTo "Backpacks") then {
+				_ammoBox addBackpackCargoGlobal [_x, round random [5,15,15]];
+			} else {
+				_ammoBox addItemCargoGlobal [_x, round random [5,15,15]];
+			};
+		} forEach (A3A_faction_reb get "flyGear");
+    };
 };
+
+
+// Spawn minefield (non-persistent for cost/benefit & perf reasons)
+if (_garrisonType == "camp") then {
+    private _mineTypes = (_faction get "minefieldAPERS");
+    private _placedMines = [];
+    for "_i" from 1 to 30 do {
+        private _mine = createMine [selectRandom _mineTypes, _markerPos, [], 200];
+        // Don't put mines on roads otherwise we might start blowing up civs
+        if (isOnRoad _mine or surfaceIsWater getPosATL _mine) then { deleteVehicle _mine; continue };
+        _side revealMine _mine;
+        _placedMines pushBack _mine;
+    };
+    _garrison set ["mines", _placedMines];
+};
+
 
 private _storedTroops = +(_newGarrison get "troops");
 
@@ -98,7 +136,7 @@ private _storedTroops = +(_newGarrison get "troops");
 [_garrison, _marker, _side, _storedTroops] call A3A_fnc_spawnGarrisonPatrols;
 
 // Spawn remainder as squads
-[_garrison, _marker, _side, _storedTroops] call A3A_fnc_spawnGarrisonSquads;
+[_garrison, _marker, _side, _storedTroops, true] call A3A_fnc_spawnGarrisonSquads;
 
 
 ["locationSpawned", [_marker, "RebelOutpost", true]] call EFUNC(Events,triggerEvent);

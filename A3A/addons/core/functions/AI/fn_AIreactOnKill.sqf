@@ -28,6 +28,8 @@ FIX_LINE_NUMBERS()
 // TODO: what exactly should killer parameter be here?
 params ["_unit", "_group", "_killer"];
 
+Trace_1("Called with parameters %1", _this);
+
 // Need to fire this regardless of previous downs
 private _marker = _unit getVariable ["markerX", ""];
 if (_marker != "") then {

@@ -128,72 +128,18 @@ if (_varName in _specialVarLoads) then {
             {_x revealMine _mineX} forEach _detected;
         };
     };
-    if (_varName == 'garrison') then {
-        private _loadoutNames = createHashMapFromArray ((
-                keys FactionGetOrDefault(occ,"loadouts",createHashMap)
-                + keys FactionGetOrDefault(inv,"loadouts",createHashMap)
-                + keys FactionGetOrDefault(reb,"loadouts",createHashMap)
-                + keys FactionGetOrDefault(civ,"loadouts",createHashMap)
-            ) apply {[toLower _x, _x]} );
-
-        {
-            private _marker = [_x select 0] call _translateMarker;
-            private _garrison = [];
-            private _replacements = switch (sidesX getVariable _marker) do {
-                case (Occupants): { (A3A_faction_occ get "groupsSquads") select 0 };
-                case (Invaders): { (A3A_faction_inv get "groupsSquads") select 0 };
-                default { A3A_faction_reb get "groupSquad" };
-            };
-
-            {
-                // skip garbage created by old bugs
-                if (isNil "_x") then { Debug("Garrison load | Removed nil entry"); continue };
-                if !(_x isEqualType "") then { Debug_2("Garrison load | Removed bad entry: %1 | Type %2", _x, typeName _x); continue };
-                if (_x isEqualTo "") then { Debug("Garrison load | Removed empty entry"); continue };
-
-                // fix for 2.4 -> 2.5 rebel garrison incompatibility
-                if (_x find "loadouts_rebel" == 0) then {
-                    _x = ("loadouts_reb" + (_x select [14]));
-                };
-                //templates move to hashmap case compat
-                private _loadoutName = toLower (_x select [13]);
-                _x = ( (_x select [0,13]) + (_loadoutNames getOrDefault [_loadoutName, ""]) );
-                if ( (_x select [0,13]) isEqualTo _x ) then {
-                    Debug_1("Garrison load | Replacing bad loadout name: %1", _x + _loadoutName);
-                    _x = selectRandom _replacements;					// Fix for pre-2.4 garrisons
-                };
-                //loadout name valid, add to garrison
-                _garrison pushBack _x;
-            } forEach (_x select 1);
-
-            garrison setVariable [_marker, _garrison, true];
-            if (count _x > 2) then { garrison setVariable [_marker + "_lootCD", _x select 2, true] };
-        } forEach _varvalue;
-    };
     if (_varName == 'newGarrison') then {
         A3A_garrison = _varValue;
     };
     if (_varName == 'outpostsFIA') then {
-        if (count (_varValue select 0) == 2) then {
-            {
-                _positionX = _x select 0;
-                _garrison = _x select 1;
-                _mrk = createMarkerLocal [format ["FIApost%1", mapGridPosition _positionX], _positionX];
-                if (_mrk == "") then {
-                    Error_1("Overlapped rebel outpost at %1 removed", _positionX); 
-                    continue;
-                };
-                _mrk setMarkerShapeLocal "ICON";
-                _mrk setMarkerTypeLocal "loc_bunker";
-                _mrk setMarkerColorLocal colorTeamPlayer;
-                if (isOnRoad _positionX) then {_mrk setMarkerText format ["%1 Roadblock",FactionGet(reb,"name")]} else {_mrk setMarkerText format ["%1 Watchpost",FactionGet(reb,"name")]};
-                spawner setVariable [_mrk,2,true];
-                if (count _garrison > 0) then {garrison setVariable [_mrk,_garrison,true]};
-                outpostsFIA pushBack _mrk;
-                sidesX setVariable [_mrk,teamPlayer,true];
-            } forEach _varvalue;
-            publicVariable "outpostsFIA";
-        };
+        A3A_rebPostGarrison = [];                   // garrison backwards compat
+        if (count (_varValue select 0) != 2) exitWith {};
+        {
+            _x params ["_position", "_garrison"];
+            [_position, [], []] call A3A_fnc_createRebelControl;
+            A3A_rebPostGarrison pushBack [_mrk, _garrison];
+        } forEach _varvalue;
+        publicVariable "outpostsFIA";
     };
     if (_varName == 'antennas') then {
         antennasDead = [];
@@ -277,55 +223,28 @@ if (_varName in _specialVarLoads) then {
         } forEach _varValue;
     };
     if (_varName == 'posHQ') then {
-        _posHQ = if (count _varValue >3) then {_varValue select 0} else {_varValue};
+        _posHQ = if (count _varValue > 3) then {_varValue select 0} else {_varValue};
         respawnTeamPlayer setMarkerPos _posHQ;
-        posHQ = getMarkerPos respawnTeamPlayer;
-        petros setPos _posHQ;
+        posHQ = _posHQ; publicVariable "posHQ";
         "Synd_HQ" setMarkerPos _posHQ;
+        petros setPosATL _posHQ;
         if (chopForest) then {
-            if (!isMultiplayer) then {{ _x hideObject true } foreach (nearestTerrainObjects [position petros,["tree","bush"],70])} else {{ _x hideObjectGlobal true } foreach (nearestTerrainObjects [position petros,["tree","bush"],70])};
+            { _x hideObjectGlobal true } foreach (nearestTerrainObjects [_posHQ, ["tree","bush"], 70]);
         };
         if (count _varValue == 3) then {
-            [] spawn A3A_fnc_buildHQ;
+            [_posHQ] call A3A_fnc_relocateHQObjects;
         } else {
-            fireX setPos (_varValue select 1);
+            fireX setPosATL (_varValue select 1);
             boxX setDir ((_varValue select 2) select 0);
-            boxX setPos ((_varValue select 2) select 1);
+            boxX setPosATL ((_varValue select 2) select 1);
             mapX setDir ((_varValue select 3) select 0);
-            mapX setPos ((_varValue select 3) select 1);
-            flagX setPos (_varValue select 4);
+            mapX setPosATL ((_varValue select 3) select 1);
+            flagX setPosATL (_varValue select 4);
             vehicleBox setDir ((_varValue select 5) select 0);
-            vehicleBox setPos ((_varValue select 5) select 1);
-        };
-    };
-    if (_varname == 'staticsX') then {
-        for "_i" from 0 to (count _varvalue) - 1 do {
-            (_varValue#_i) params ["_typeVeh", "_posVeh", "_xVectorUp", "_xVectorDir", "_state"];
-
-            // statics and buildings imported to garrison later
-            if (_typeVeh isKindOf "StaticWeapon") then { continue };
-            if (_typeVeh isKindOf "Building" and !(_typeVeh in A3A_utilityItemHM)) then { continue };
-            // Could check for the driver flag instead maybe?
-
-            private _veh = createVehicle [_typeVeh,[0,0,1000],[],0,"CAN_COLLIDE"];
-            isNil {
-                // pre 2.4.1 used ATL position. Very old versions used number direction, just skip that
-                if (A3A_saveVersion >= 20401) then { _veh setPosWorld _posVeh } else { _veh setPosATL _posVeh };
-                if (_xVectorUp isEqualType []) then { _veh setVectorDirAndUp [_xVectorDir,_xVectorUp] };
-            };
-
-            [_veh, teamPlayer] call A3A_fnc_AIVEHinit;                  // Calls initObject instead if it's a buyable item
-
-/* Obsolete?
-            if (isNil {_veh getVariable "A3A_canGarage"}) then {        // Buyable items should set this
-                if (_veh isKindOf "StaticWeapon") exitWith { staticsToSave pushBack _veh };
-                if (_veh isKindOf "Building") exitWith {
-                    _veh setVariable ["A3A_building", true, true];
-                    A3A_buildingsToSave pushBack _veh;
-                };
-            };*/
-            if (!isNil "_state")  then {
-                [_veh, _state] call HR_GRG_fnc_setState;
+            vehicleBox setPosATL ((_varValue select 5) select 1);
+            if (count _varValue >= 7) then {
+                petros setDir ((_varValue select 6) select 0);
+                petros setPosATL ((_varValue select 6) select 1);
             };
         };
     };

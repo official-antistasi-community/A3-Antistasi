@@ -2,9 +2,18 @@ params ["_markerX", ["_ignoreFrontier", false]];
 
 if ("carrier" in _markerX) exitWith { 0 };
 
-private _size = [_markerX] call A3A_fnc_sizeMarker;
 private _frontierX = if (_ignoreFrontier) then { false } else { [_markerX] call A3A_fnc_isFrontline };
 
+if (_markerX in citiesX) exitWith {
+    private _numCiv = server getVariable _markerX select 0;       // should be city pop?
+    2 * ceil (sqrt _numCiv / 2);
+};
+
+if (_markerX in controlsX) exitWith {
+    if (isOnRoad markerPos _markerX) then {6} else {8};
+};
+
+private _size = [_markerX] call A3A_fnc_sizeMarker;
 private _groups = 0;
 if (_markerX in airportsX) then
 {

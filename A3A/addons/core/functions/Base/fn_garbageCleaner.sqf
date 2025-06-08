@@ -34,6 +34,7 @@ sleep 0.5;
 } forEach (vehicles select {_x getVariable ["ownerSide", sideUnknown] == teamPlayer});
 
 // Cleanup constructed buildings
+/*
 private _rebMarkers = (airportsX + outposts + seaports + factories + resourcesX) select { sidesX getVariable _x == teamPlayer };
 _rebMarkers append outpostsFIA; _rebMarkers pushBack "Synd_HQ";
 
@@ -50,7 +51,7 @@ A3A_buildingsToSave = A3A_buildingsToSave select {
 	if (-1 != _indexes findIf { _building inArea _rebMarkers#_x } ) then { continueWith true };
 	deleteVehicle _x; false;
 };
-
+*/
 
 if (A3A_hasACE) then {
 	{ deleteVehicle _x } forEach (allMissionObjects "ACE_bodyBagObject");

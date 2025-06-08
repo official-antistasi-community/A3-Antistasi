@@ -2,6 +2,9 @@
 // Used by both old and new UI
 // Generates error hints directly, returns bool
 
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
 params ["_marker"];
 
 private _titleStr = localize "STR_A3A_fn_reinf_garrDia_title";

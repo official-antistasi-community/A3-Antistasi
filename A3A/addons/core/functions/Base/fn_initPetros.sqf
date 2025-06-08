@@ -16,7 +16,7 @@ private _weapon = ["Rifles"] call A3A_fnc_randomRifle;
 [petros, _weapon, "OpticsMid", 50] call A3A_fnc_addPrimaryAndMags;
 petros selectWeapon (primaryWeapon petros);
 
-if (petros == leader group petros) then {
+if (!A3A_petrosMoving) then {
 	group petros setGroupIdGlobal ["Petros","GroupColor4"];
 	petros disableAI "MOVE";
 	petros disableAI "AUTOTARGET";
@@ -48,6 +48,7 @@ petros addMPEventHandler ["mpkilled",
         _hr = server getVariable "hr";
         _res = server getVariable "resourcesFIA";
         [-1*(round(_hr*0.9)), -1*(round(_res*0.9))] spawn A3A_fnc_resourcesFIA;
+        A3A_petrosMoving = false; publicVariable "A3A_petrosMoving";
         [] spawn A3A_fnc_petrosDeathMonitor;
     }
     else

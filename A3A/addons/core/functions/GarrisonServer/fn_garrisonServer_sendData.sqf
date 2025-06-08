@@ -1,15 +1,19 @@
 // Server-side, unscheduled
-// sends specified garrison data to the new-UI function on the server
+// Sends specified garrison data to the new-UI function on the server
 
-params [_marker]        //, [_userCall, false]];
+// Currently there are no updates except when the UI requests them. Simpler control flow, almost always fine
 
-//if (_userCall) then { A3A_viewedGarrison = 
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
 
-// should only send if the commander is/was recently in the UI...
-// Alternatively, *only* update on requested changes. Simpler control flow...
+params ["_marker"];
+
+Trace_1("Called with params %1", _this);
 
 if !(_marker in A3A_garrison) exitWith {
     Error_1("Garrison %1 does not exist", _marker);
 };
 
 ["garrisonDataSent", [_marker, A3A_garrison get _marker]] remoteExecCall ["A3A_GUI_fnc_hqDialog", theBoss];
+
+Trace("Completed");

@@ -7,6 +7,10 @@ FIX_LINE_NUMBERS()
 
 params ["_marker"];
 
+Trace_1("Called with params %1", _this);
+
 A3A_markersToDelete deleteAt (A3A_markersToDelete find _marker);
 deleteMarker _marker;
 A3A_garrison deleteAt _marker;
+
+Trace("Completed");

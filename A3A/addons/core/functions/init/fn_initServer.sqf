@@ -30,6 +30,9 @@ switch (toLower worldname) do {
 	default {mapX setObjectTextureGlobal [0,"Pictures\Mission\whiteboard.jpg"];};
 };
 
+"Synd_HQ" setMarkerShape "ELLIPSE";
+"Synd_HQ" setMarkerSize [75,75];
+
 enableSaving [false,false];
 
 //Disable VN music
@@ -153,14 +156,11 @@ else
 
     // HQ placement setup
     private _posHQ = A3A_saveData get "startPos";
-    // Disable all nearby roadblocks/specops
-    {
-        if (markerPos _x distance _posHQ < distanceSPWN) then {
-            sidesX setVariable [_x, teamPlayer, true];
-        };
-    } forEach controlsX;
+    respawnTeamPlayer setMarkerPos _newPos;
+    "Synd_HQ" setMarkerPos _newPos;
+    posHQ = _posHQ; publicVariable "posHQ";     // hmm, remove this at some point
     petros setPos _posHQ;
-    [_posHQ, true] call A3A_fnc_relocateHQObjects;         // sets all the other vars
+    [_posHQ] call A3A_fnc_relocateHQObjects;
 };
 
 if (_startType != "load") then {

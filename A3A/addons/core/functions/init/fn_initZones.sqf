@@ -21,17 +21,19 @@ if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower world
 // TODO: Read additional camps from config here?
 
 (A3A_mapCamps + A3A_mapRoadblocks + seaMarkers + seaSpawn + seaAttackSpawn + spawnPoints + detectionAreas) apply {_x setMarkerAlpha 0};
-outpostsFIA = [];
-destroyedSites = [];
-garrison setVariable ["Synd_HQ", [], true];
 markersX = airportsX + resourcesX + factories + outposts + seaports + ["Synd_HQ"];
 markersX apply {
 	_x setMarkerAlpha 0;
 	spawner setVariable [_x, 2, true];
 };
 
-// Whatever
+outpostsFIA = [];
+destroyedSites = [];
 controlsX = [];
+
+sidesX setVariable ["Synd_HQ", teamPlayer, true];
+sidesX setVariable ["NATO_carrier", Occupants, true];
+sidesX setVariable ["CSAT_carrier", Invaders, true];
 
 // Set up dummy markers
 call A3A_fnc_initBases;
@@ -100,11 +102,26 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	server setVariable [_nameX, _info, true];
 };	//find in congigs faster then find location in 25000 radius
 
-
 markersX = markersX + citiesX;
-sidesX setVariable ["Synd_HQ", teamPlayer, true];
-sidesX setVariable ["NATO_carrier", Occupants, true];
-sidesX setVariable ["CSAT_carrier", Invaders, true];
+
+
+// Sort markers by ascending size. Useful for some operations.
+private _markerSort = markersX apply { [vectorMagnitude markerSize _x, _x] };
+_markerSort sort true;
+markersX = _markerSort apply { _x#1 };
+
+// Expected troop counts
+A3A_garrisonSize = createHashMap;
+{
+    private _garrSize = [_x, true] call A3A_fnc_garrisonSize;        // TODO: replace all uses of this function and then sort it out?
+    A3A_garrisonSize set [_x, _garrSize];
+} forEach (markersX - ["Synd_HQ"]);
+
+// Initialize static places, need the sorting for this
+[markersX - citiesX - ["Synd_HQ"]] call A3A_fnc_initStaticPlaces;
+
+// And now set up the max/par/index values per type (needs troop counts)
+[markersX - ["Synd_HQ"]] call A3A_fnc_initSpawnPlaceStats;
 
 
 Info("Setting up banks");

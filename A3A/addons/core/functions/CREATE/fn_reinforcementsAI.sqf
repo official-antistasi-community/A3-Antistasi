@@ -44,10 +44,11 @@ if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balanceP
 // Reduce loot crate cooldown if garrison is reasonably full
 {
 	call {
-		private _lootCD = garrison getVariable [_x + "_lootCD", 0];
+		private _garrison = A3A_garrison get _x;
+		private _lootCD = _garrison getOrDefault ["lootCD", 0];
 		if (_lootCD == 0) exitWith {};							// don't update unless changed
-		private _realSize = count (garrison getVariable [_x, []]);
-		private _maxSize = [_x, true] call A3A_fnc_garrisonSize;			// use non-frontline size
+		private _realSize = _garrison get "troops" select 0;
+		private _maxSize = A3A_garrisonSize get _x;			// use non-frontline size
 		if (_realSize / _maxSize < 0.75) exitWith {};
 		garrison setVariable [_x + "_lootCD", 0 max (_lootCD - 10), true];
 	};

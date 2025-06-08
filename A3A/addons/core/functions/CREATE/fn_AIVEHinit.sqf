@@ -114,16 +114,34 @@ else
 	{
 		if (_veh isKindOf "StaticWeapon") then
 		{
-			_veh setCenterOfMass [(getCenterOfMass _veh) vectorAdd [0, 0, -1], 0];
-
-			// Disassembly handler for removal from garrisons
-			_veh addEventHandler ["Disassembled", A3A_fnc_disassembledEH];
-			_veh setVariable ["A3A_disassembledEH", true];
-
+			//_veh setCenterOfMass [(getCenterOfMass _veh) vectorAdd [0, 0, -1], 0];
 			[_veh, "static"] remoteExec ["A3A_fnc_flagAction", [teamPlayer,civilian], _veh];
 		};
 	};
 };
+
+
+// Add global attach/detach handlers for garrison updates. Could check for cargo validity but these work with ACE too.
+// Statics only for ACE?
+
+// Do we actually need to account for captures with static weapons?
+// They have no ambient usage anymore, right?
+// Also could capture on loading rather than occupancy...
+
+// Vehicle shouldn't be installed now because we don't know if it's a garrison vehicle?
+
+// Maybe this is a bad idea because vehicle cargo will despawn?
+// Could maybe switch to moving vehicles into garrison only when they'd be GC'd, or on saves
+
+// Handlers for garrison add/remove & rebel capture handling
+if !(_veh isKindOf "StaticWeapon") then {
+	// Handles most cases when you'd want to merge the thing?
+    [_veh] remoteExecCall ["A3A_fnc_addVehGetInOutEH", 2];
+} else {
+	// Works with various ACE modules as well as Antistasi logistics/carry
+    [_veh] remoteExecCall ["A3A_fnc_addVehAttachDetachEH", 2];
+};
+
 
 if (_side == civilian) then
 {

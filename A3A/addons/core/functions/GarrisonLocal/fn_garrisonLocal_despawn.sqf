@@ -7,10 +7,11 @@ FIX_LINE_NUMBERS()
 params ["_marker", ["_toDelete", false]];
 
 private _garrison = A3A_activeGarrison get _marker;
+private _side = _garrison get "side";
 A3A_activeGarrison deleteAt _marker;
 
 // Timing arguable...
-["locationSpawned", [_marker, "RebelOutpost", false]] call EFUNC(Events,triggerEvent);
+//["locationSpawned", [_marker, "RebelOutpost", false]] call EFUNC(Events,triggerEvent);
 
 { if (alive _x) then { deleteVehicle _x }; } forEach (_garrison get "troops");
 { deleteGroup _x } forEach (_garrison get "groups");
@@ -19,13 +20,42 @@ A3A_activeGarrison deleteAt _marker;
 { deleteGroup _x } forEach (_garrison get "civGroups");
 
 { deleteVehicle _x } forEach (_garrison get "statics");
-{ deleteVehicle _x } forEach (_garrison get "vehicles");
-{ deleteVehicle _x } forEach (_garrison get "buildings");
 
+{
+    // Dump all attached logistics objects around the vehicle
+    // garrisonable ones will join & despawn through the detached handler
+    private _vehPos = getPosATL _x;
+    {
+        isNil {
+            detach _x;
+            private _rpos = _vehPos getPos [10, random 360];
+            _x setVehiclePosition [_rpos, [], 0, "NONE"];
+        };
+    } forEach (_x getVariable ["Cargo", []]);           // Antistasi logistics cargo
+    deleteVehicle _x;
+} forEach (_garrison get "vehicles");        // state stored on server side first
+
+if !(_marker == "Synd_HQ") then {
+    { deleteVehicle _x } forEach (_garrison get "buildings");
+};
+
+{ deleteVehicle _x } forEach (_garrison getOrDefault ["mines", []]);
+
+if ("flag" in _garrison) then { deleteVehicle (_garrison get "flag") };
+
+// If box was stolen then flag that to server. Else delete it
+if ("ammoBox" in _garrison) then {
+    private _ammoBox = _garrison get "ammoBox";
+    if (!alive _ammoBox or (_garrison get "side" == teamPlayer) or !(_ammoBox inArea _marker)) then {
+        _marker remoteExecCall ["A3A_fnc_garrisonServer_looted", 2];
+        continue;
+    };
+    deleteVehicle _ammoBox;
+};
 
 // Minor sites (both enemy and rebel?) should be deleted when despawned, if cleared
 // Two-stage though? Want to immediately announce destruction (from zoneCheck?)
 // Move marker name to deadMinorSites on server?
 // clean up cyclically in distance.sqf? No, marker might still need to exist. So trigger cleanup here
 
-if (_toDelete) then { _marker remoteExecCall ["A3A_fnc_garrisonServer_delete", 2] };
+if (_toDelete) exitWith { _marker remoteExecCall ["A3A_fnc_garrisonServer_delete", 2] };

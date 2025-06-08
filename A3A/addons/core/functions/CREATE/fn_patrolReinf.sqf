@@ -17,6 +17,7 @@ private _isLand = if (_lowAir) then { true } else {						// land markers guarant
 ServerInfo_5("Spawning PatrolReinf. Dest:%1 Orig:%2 Size:%3 Side:%4 Land:%5",_mrkDest,_mrkOrigin,_numTroops,_side,_isLand);
 
 private _vehicleType = if (_isLand) then {
+	[_mrkOrigin, 1] call A3A_fnc_addTimeForIdle;
 	selectRandom (_faction get "vehiclesTrucks");
 } else {
 	private _transportPlanes = _faction get "vehiclesPlanesTransport";
@@ -64,12 +65,15 @@ if (_isLand) then {
 	private _reinfWP = _cargoGroup addWaypoint [_posDest, 0];
 	_reinfWP setWaypointBehaviour "AWARE";
 
-	// Free the spawn position after 60 seconds
-	_vehicle spawn {
-		sleep 60;
-		if (isNull _this) exitWith {};
-		[_this getVariable "spawnPlace"] call A3A_fnc_freeSpawnPositions;
-		_this setVariable ["spawnPlace", nil];
+	private _startPos = getPosATL _vehicle;
+	sleep 10;
+	if (_startPos distance2d _vehicle < 10) then {
+        Error_2("Vehicle %1 failed to clear spawn at %2", _vehicle, _marker);
+        // teleport to first waypoint
+        // arguably should just return empty array...
+        private _wayPos = waypoints _crewGroup # 0;
+        _vehicle setVehiclePosition [_wayPos, [], 10, "NONE"];
+        _crewGroup setCurrentWaypoint 1;
 	};
 }
 else

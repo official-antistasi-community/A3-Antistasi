@@ -1,8 +1,15 @@
+// Now unscheduled
+// Scripted usage has no side-effects (aggro, counterattack) and fills the garrison if switched to enemy
+
 if (!isServer) exitWith {};
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_winner", "_markerX"];
+params ["_winner", "_markerX", "_scripted"];
+
+if (spawner getVariable _markerX != 2 and _scripted) exitWith {
+	["Marker change", "Site side cannot be changed unless despawned"] remoteExecCall ["A3A_fnc_customHint", remoteExecutedOwner];
+};
 
 private _positionX = getMarkerPos _markerX;
 private _loser = sidesX getVariable [_markerX,sideUnknown];
@@ -10,94 +17,19 @@ private _other = ([teamPlayer,Occupants,Invaders] - [_winner,_loser]) select 0;
 
 if ((_winner == teamPlayer) and (_markerX in airportsX) and (tierWar < 3)) exitWith {};
 if (_winner == _loser) exitWith {};
-if (_markerX in markersChanging) exitWith {};
-markersChanging pushBackUnique _markerX;
 
 Info_3("Changing side of %1 from %2 to %3", _markerX, _loser, _winner);
 
-// Find the flag object
-private _size = [_markerX] call A3A_fnc_sizeMarker;
-private _flagX = objNull;
-if ((!(_markerX in citiesX)) and (spawner getVariable _markerX != 2)) then
-{
-	private _flags = nearestObjects [_positionX, ["FlagCarrierCore"], _size];
-	if (count _flags == 0) exitWith { Error_1("No flag found in %1", _markerX) };
-	_flagX = _flags select 0;
-};
-
-
-garrison setVariable [_markerX,[],true];
 sidesX setVariable [_markerX,_winner,true];
 
-[_markerX] call A3A_fnc_mrkUpdate;
-
-// clear roadblocks related to this marker
-{[_markerX,_x] spawn A3A_fnc_deleteControls} forEach controlsX;
+// Do the garrison update
+[_markerX, _winner] call A3A_fnc_garrisonServer_changeSide;
 
 // Sort out war tier if necessary
 if (teamPlayer in [_loser, _winner]) then { [] call A3A_fnc_tierCheck };
 
-
-// Static/vehicle transfer and flag updates
-if (_winner == teamPlayer) then
-{
-	// Old garrison surrender
-	private _oldGarrison = units _loser select { _x getVariable ["markerX", ""] == _markerX };
-	{ [_x] remoteExec ["A3A_fnc_surrenderAction", _x] } forEach _oldGarrison;
-
-	// Spawn (empty) rebel garrison. Temporary while rebel & enemy are separate systems
-	isNil {
-		spawner setVariable [_markerX, 2, true];
-		private _machineID = call A3A_fnc_chooseMachineForGarrison;
-		A3A_garrisonMachine set [_markerX, _machineID];
-		["spawn", [_markerX, A3A_garrison get _markerX]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
-	};
-
-	//Convert all of the static weapons to teamPlayer, essentially. Add them to the live garrison.
-	private _statics = nearestObjects [_positionX, ["StaticWeapon"], _size * 1.5, true] inAreaArray _markerX;
-	{ [_x, teamPlayer, true] call A3A_fnc_vehKilledOrCaptured } forEach _statics;
-	[_markerX, _statics] call A3A_fnc_addVehiclesToGarrison;
-	_garrisonStatics append _staticWeapons;
-
-	if (!isNull _flagX) then
-	{
-		[_flagX,"SDKFlag"] remoteExec ["A3A_fnc_flagaction",0,_flagX];
-		[_flagX,FactionGet(reb,"flagTexture")] remoteExec ["setFlagTexture",_flagX];
-		//sleep 2;			// why?
-		//if (_markerX in seaports) then {[_flagX,"seaport"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_flagX]};
-	};
-}
-else
-{
-	if (_loser == teamPlayer) then {
-		A3A_garrisonMachine get _markerX;		// always spawned?
-		["disband", [_markerX, A3A_garrison get _markerX]] remoteExecCall ["A3A_fnc_garrisonOp", _machineID];
-
-		// probably temporary?
-		private _garrison = A3A_garrison get _markerX;
-		_garrison set ["statics", []];
-		_garrison set ["vehicles", []];
-		_garrison set ["buildings", []];
-	};
-
-	// Any reason to do this? The statics are arguably still rebel
-	//	{
-	//		[_x, _winner, true] call A3A_fnc_vehKilledOrCaptured;
-	//	} forEach _staticWeapons;
-
-	if (!isNull _flagX) then
-	{
-		if (_loser == teamPlayer) then
-		{
-			[_flagX,"remove"] remoteExec ["A3A_fnc_flagaction",0,_flagX];
-			sleep 2;
-			[_flagX,"take"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_flagX];
-		};
-
-		private _flagTexture = Faction(_winner) get "flagTexture";
-		[_flagX, _flagTexture] remoteExec ["setFlagTexture", _flagX];
-	};
-};
+// Update the visible marker
+[_markerX] call A3A_fnc_mrkUpdate;
 
 if !(_markerX in airportsX) then
 {
@@ -114,6 +46,10 @@ if !(_markerX in airportsX) then
 
 Debug_1("Side changed for %1", _markerX);
 
+// Change-only usage
+if (_scripted) exitWith {
+	if (_winner != teamPlayer) then { [_markerX] call A3A_fnc_buildEnemyGarrison };
+};
 
 // Generate counterattack
 if (_winner == teamPlayer) then
@@ -142,6 +78,7 @@ if (_winner == teamPlayer) then
 private _loserName = Faction(_loser) get "name";
 private _prestigeOccupants = [0, 0];
 private _prestigeInvaders = [0, 0];
+
 
 if (_markerX in airportsX) then
 {
@@ -291,7 +228,6 @@ if (teamPlayer in [_winner, _loser]) then {
     [Invaders, _prestigeInvaders#0, _prestigeInvaders#1, true] spawn A3A_fnc_addAggression;
 };
 
-markersChanging = markersChanging - [_markerX];
 ["markerChange", [_markerX, _winner]] call EFUNC(Events,triggerEvent);
 
 Info_1("Finished marker change at %1", _markerX);

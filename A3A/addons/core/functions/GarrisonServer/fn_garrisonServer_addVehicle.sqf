@@ -15,19 +15,25 @@ if (!isNil "_oldMarker") then { [_vehicle] call A3A_fnc_garrisonServer_remVehicl
 if (_marker == "") then { _marker = [getPosATL _vehicle] call A3A_fnc_getMarkerForPos };
 if (_marker == "") exitWith {};
 
-if (sidesX getVariable _marker != teamPlayer) exitWith {
+// Should work now, cleaned up on despawn if you leave junk in enemy garrisons
+/*if (sidesX getVariable _marker != teamPlayer) exitWith {
     // Is this actually an error? Could be cleaned up later...
     Error("Attempted to add vehicle to non-rebel garrison");
-};
+};*/
 
 private _garrison = A3A_garrison get _marker;
 private _arrayType = call {
     if (_vehicle isKindOf "StaticWeapon") exitWith {"statics"};
     if (fullCrew [_vehicle, "", true] isNotEqualTo []) exitWith {"vehicles"};
+    if (typeof _vehicle in A3A_utilityItemHM) exitWith {"vehicles"};
     "buildings";
 };
 
-(_garrison get _arrayType) pushBack [typeOf _vehicle, getPosWorld _vehicle, vectorUp _vehicle, vectorDir _vehicle];
+if (_arrayType == "buildings" and _marker == "Synd_HQ") then {
+    _garrison get "spawnedBuildings" pushBack _vehicle;
+};
+
+(_garrison get _arrayType) pushBack [typeOf _vehicle, getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle];
 _vehicle setVariable ["markerX", _marker, true];
 
 // Add to active garrison if spawned
@@ -36,7 +42,7 @@ if (!isNil "_machineID") then {
     _vehicle setOwner _machineID;           // TODO: potential driver issues?
     ["addVehicle", [_marker, _vehicle]] call A3A_fnc_garrisonOp;
 } else {
-    deleteVehicle _vehicle;     // TODO: might be problematic until enemy garrisons are supported
+    deleteVehicle _vehicle;
 };
 
 Trace("Completed");

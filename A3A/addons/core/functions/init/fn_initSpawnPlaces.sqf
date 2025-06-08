@@ -14,11 +14,11 @@ private _planeMarker = [];
 private _markerSplit = _marker splitString "_";
 private _markerPrefix = switch (_markerSplit select 0) do
 {
-    case ("airport"): {_markerPrefix = "airp_";};
-    case ("outpost"): {_markerPrefix = "outp_";};
-    case ("resource"): {_markerPrefix = "reso_";};
-    case ("factory"): {_markerPrefix = "fact_";};
-    case ("seaport"): {_markerPrefix = "seap_";};
+    case ("airport"): {"airp_"};
+    case ("outpost"): {"outp_"};
+    case ("resource"): {"reso_"};
+    case ("factory"): {"fact_"};
+    case ("seaport"): {"seap_"};
 };
 if (count _markerSplit > 1) then
 {
@@ -58,7 +58,7 @@ call {
     private _buildings = nearestObjects [getMarkerPos _marker, ["Land_Hangar_F", "Land_TentHangar_V1_F", "Land_Airport_01_hangar_F", "Land_Mil_hangar_EP1", "Land_Ss_hangar", "Land_Ss_hangard", "Land_vn_airport_01_hangar_f", "Land_vn_usaf_hangar_01", "Land_vn_usaf_hangar_02", "Land_vn_usaf_hangar_03"], _markerRadius, true];
     { _hangars pushBack _x } forEach (_buildings inAreaArray _marker);
 
-    _buildings = nearestObjects [getMarkerPos _marker, "Land_vn_helipad_base", "Helipad_Base_F"], _markerRadius, true];
+    _buildings = nearestObjects [getMarkerPos _marker, ["Helipad_Base_F", "Land_vn_helipad_base"], _markerRadius, true];
     { _helipads pushBack _x } forEach (_buildings inAreaArray _marker);
 
     private _heliCount = count _helipads;
@@ -100,7 +100,7 @@ private _vehicleSpawns = [];
 
     //Cleaning area
     private _radius = vectorMagnitude _size;
-    private _nearObjects = nearestTerrainObjects [markerPos _vehMarker, ["Tree","Bush", "Hide", "Rock", "Fence"], _radius, true]);
+    private _nearObjects = nearestTerrainObjects [markerPos _vehMarker, ["Tree", "Bush", "Hide", "Rock", "Fence"], _radius, true];
     { _x hideObjectGlobal true } foreach (_nearObjects inAreaArray _vehMarker);
 
     //Create the places
@@ -123,7 +123,7 @@ private _heliSpawns = [];
     _pos set [2, 0.4];
     {
         _x hideObjectGlobal true;
-    } foreach (nearestTerrainObjects [_pos, ["Tree","Bush", "Hide", "Rock"], 5, true]);
+    } foreach (nearestTerrainObjects [_pos, ["Tree", "Bush", "Hide", "Rock"], 5, true]);
     _heliSpawns pushBack [_pos, direction _x];
 } forEach _helipads;
 
@@ -173,12 +173,3 @@ if (_vehicleSpawns isNotEqualTo []) then {
 
 A3A_spawnPlacesHM set [_marker, _spawnPlaces];
 
-/*
-//Create the spawn places and initial used-slot arrays
-{
-    if (_x#0 isEqualTo []) then { continue };
-    private _varName = format ["%1_%2", _marker, _x#1];
-    spawner setVariable [_varName + "_places", _x#0, true];
-    spawner setVariable [_varName + "_used", (_x#0) apply {false}, true];
-} forEach [[_vehicleSpawns, "vehicle"], [_heliSpawns, "heli"], [_planeSpawns, "plane"], [_mortarSpawns, "mortar"]];
-*/

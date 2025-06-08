@@ -13,7 +13,7 @@ if(isNil "_type") then {
 	_type = selectRandom (_types - A3A_activeTasks);
 	_silent = true;
 };
-if (isNil "_type" or leader group petros != petros) exitWith { A3A_missionRequestInProgress = nil };
+if (isNil "_type" or A3A_petrosMoving) exitWith { A3A_missionRequestInProgress = nil };
 if (_type in A3A_activeTasks) exitWith {
 	if (!_silent) then {[petros,"globalChat",localize "STR_A3A_fn_mission_request_existing"] remoteExec ["A3A_fnc_commsMP",_requester]};
 	A3A_missionRequestInProgress = nil;

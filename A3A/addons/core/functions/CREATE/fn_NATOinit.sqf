@@ -43,19 +43,12 @@ if !(isNil "_isSpawner") then
 }
 else
 {
-    private _veh = objectParent _unit;
-    if (_marker != "") exitWith
-    {
+    if (_marker != "") exitWith {
         // Persistent garrison units are never spawners.
 	    _unit setVariable ["markerX",_marker,true];
-	    if ((spawner getVariable _marker != 0) && (isNull _veh)) then
-	    {
-            // Garrison drifted out of spawn range, disable simulation on foot units
-            // this is re-enabled in distance.sqf when spawn range is re-entered
-            [_unit,false] remoteExec ["enableSimulationGlobal",2];
-        };
     };
 
+    private _veh = objectParent _unit;
     if (_unit in (assignedCargo _veh)) exitWith
     {
         // Cargo units aren't spawners until they leave the vehicle.

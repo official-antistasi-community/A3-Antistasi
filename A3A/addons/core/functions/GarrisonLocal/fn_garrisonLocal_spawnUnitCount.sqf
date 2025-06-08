@@ -1,3 +1,5 @@
+// used for enemy garrisons only?
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
@@ -6,5 +8,7 @@ params ["_marker", "_unitCount", "_unitQuality"];
 private _garrison = A3A_activeGarrison get _marker;
 private _side = _garrison get "side";
 
-// TODO: This doesn't fully work because spawnGarrisonSquads doesn't consider already-spawned squads
-[_garrison, _marker, _side, [_unitCount, _unitQuality]] call A3A_fnc_spawnGarrisonSquads;
+[_garrison, _marker, _side, [_unitCount, _unitQuality], false] call A3A_fnc_spawnGarrisonSquads;
+
+// Hmm
+[_marker] call A3A_fnc_garrisonLocal_updateStatics;

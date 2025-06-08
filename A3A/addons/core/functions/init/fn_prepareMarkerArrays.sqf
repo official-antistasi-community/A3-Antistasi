@@ -96,22 +96,20 @@ private ["_split", "_start"];
 //DebugArray("Marker setup done, placement marker are", _placementMarker);
 
 
-// Autogenerate stuff like helipad placements for markers that don't have any defined spawn places
+
 
 private _majorMarkers = (airportsX + resourcesX + factories + outposts + seaports);
 
+// Autogenerate stuff like helipad placements for markers that don't have any defined spawn places
+A3A_spawnPlacesHM = createHashMap;
 {
-  [_x, _placeMarkers getOrDefault [_x, []]] call A3A_fnc_initSpawnPlaces;
+    [_x, _placeMarkers getOrDefault [_x, []]] call A3A_fnc_initSpawnPlaces;
 } forEach _majorMarkers;
 
-// Now initialize static places...
-[_majorMarkers] call A3A_fnc_initStaticPlaces;
-
-// And now set up the max/par/index values per type
-[_majorMarkers] call A3A_fnc_initSpawnPlaceStats;
 
 //TEMPORARY FIX TO DETECT SPAWN MARKERS
 {
   _nearestMarker = [spawnPoints, getMarkerPos _x] call BIS_fnc_nearestPosition;
   server setVariable [format ["spawn_%1", _x], _nearestMarker, true];
 } forEach airportsX;
+

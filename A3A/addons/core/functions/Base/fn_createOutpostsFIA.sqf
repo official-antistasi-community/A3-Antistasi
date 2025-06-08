@@ -9,32 +9,32 @@ _positionTel = _this select 1;
 
 if (_typeX == "delete") exitWith {[localize "STR_A3A_fn_base_createoutpfia_create", localize "STR_A3A_fn_base_createoutpfia_outdated"] remoteExecCall ["A3A_fnc_customHint", theBoss]};
 
+// Check for both marker name collision and nearby rebel posts
+private _nearPosts = outpostsFIA inAreaArrayIndexes [_positionTel, 300, 300];
+private _isNearMrk = markerShape format ["RebPost%1", mapGridPosition _positionTel] != "";
+if (count _nearPosts > 0 or _isNearMrk) exitWith {
+	["Create Outpost", "There's already a rebel outpost near that position"] remoteExecCall ["A3A_fnc_customHint", theBoss];
+};
+
 _isRoad = isOnRoad _positionTel;
 
-_textX = format [localize "STR_A3A_fn_base_croutpFIA_watchpost",FactionGet(reb,"name")];
 _typeGroup = FactionGet(reb,"groupSniper");
 _typeVehX = (FactionGet(reb,"vehiclesBasic")) # 0;
 _taskData = localize "STR_A3A_fn_createOutpostsFIA_OP_data";
 _taskTitle = localize "STR_A3A_fn_createOutpostsFIA_OP_title";
 private _tsk = "";
 
-if (_isRoad) then
-	{
-	_textX = format [localize "STR_A3A_fn_base_croutpFIA_roadblock",FactionGet(reb,"name")];
+if (_isRoad) then {
 	_typeGroup = FactionGet(reb,"groupAT") + [FactionGet(reb,"unitCrew")];
 	_typeVehX = (FactionGet(reb,"vehiclesTruck")) # 0;
 	_taskData = localize "STR_A3A_fn_createOutpostsFIA_RB_data";
 	_taskTitle = localize "STR_A3A_fn_createOutpostsFIA_RB_title";
-	};
-
-_mrk = createMarkerLocal [format ["FIAPost%1", mapGridPosition _positionTel], _positionTel];
-if (_mrk == "") exitWith {["Create Outpost", "There's already a rebel outpost near that position"] remoteExecCall ["A3A_fnc_customHint", theBoss]};
-_mrk setMarkerShape "ICON";
+};
 
 _dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + 60];
 _dateLimitNum = dateToNumber _dateLimit;
 private _taskId = "outpostsFIA" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[_taskData,_taskTitle,_mrk],_positionTel,false,0,true,"Move",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[_taskData,_taskTitle],_positionTel,false,0,true,"Move",true] call BIS_fnc_taskCreate;
 [_taskId, "outpostsFIA", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _groupX = [getMarkerPos respawnTeamPlayer, teamPlayer, _typeGroup] call A3A_fnc_spawnGroup;
@@ -65,11 +65,10 @@ if ({(alive _x) and (_x distance _positionTel < 10)} count units _groupX > 0) th
 
 	private _unitTypes = units _groupX select { alive _x } apply { _x getVariable "unitType" };
 	private _vehTypes = [[], [FactionGet(reb,"vehiclesLightArmed")#0]] select _isRoad;
-	[_mrk, _textX, _unitTypes, _vehTypes] remoteExecCall ["A3A_fnc_createRebelControl", 2];
+	[_positionTel, _unitTypes, _vehTypes] remoteExecCall ["A3A_fnc_createRebelControl", 2];
 } else {
 	[_taskId, "outpostsFIA", "FAILED"] call A3A_fnc_taskSetState;
 	sleep 3;
-	deleteMarker _mrk;
 };
 
 theBoss hcRemoveGroup _groupX;

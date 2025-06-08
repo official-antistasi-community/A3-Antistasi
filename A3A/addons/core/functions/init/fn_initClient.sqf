@@ -43,7 +43,7 @@ if !(isServer) then {
         call A3A_fnc_addNodesNearMarkers;
 
         // Could generate this locally instead if it's deterministic...
-        [clientOwner, "A3A_staticPlacesHM"] remoteExecCall ["publicVariableClient", 2];
+        [clientOwner, "A3A_spawnPlacesHM"] remoteExecCall ["publicVariableClient", 2];
     };
 
     if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
@@ -265,8 +265,8 @@ GVAR(keys_battleMenu) = false; //initilize key flags to false
 boxX allowDamage false;			// hmm...
 boxX addAction [localize "STR_A3A_fn_init_initclient_addact_transfer", {[] spawn A3A_fnc_empty;}, 4,1.5,true,true,"","!unitIsUAV _this"];
 flagX allowDamage false;
-flagX addAction [localize "STR_A3A_fn_init_initclient_addact_recruit", { if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_init_initclient_recunit", localize "STR_A3A_fn_init_initclient_recunit_no"] call A3A_fnc_customHint;} else { if (A3A_GUIDevPreview) then {createDialog "A3A_RecruitDialog";} else {[] spawn A3A_fnc_unit_recruit;};};},nil,0,false,true,"","(petros == leader group petros)",4];
-flagx addAction [localize "STR_A3A_fn_init_initClient_addAct_recruitSquad", { createDialog "A3A_RecruitSquadDialog"; },nil,0,false,true,"","A3A_GUIDevPreview and (_this == theBoss) and (petros == leader group petros)",4];
+flagX addAction [localize "STR_A3A_fn_init_initclient_addact_recruit", { if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_init_initclient_recunit", localize "STR_A3A_fn_init_initclient_recunit_no"] call A3A_fnc_customHint;} else { if (A3A_GUIDevPreview) then {createDialog "A3A_RecruitDialog";} else {[] spawn A3A_fnc_unit_recruit;};};},nil,0,false,true,"","!A3A_petrosMoving",4];
+flagx addAction [localize "STR_A3A_fn_init_initClient_addAct_recruitSquad", { createDialog "A3A_RecruitSquadDialog"; },nil,0,false,true,"","A3A_GUIDevPreview and (_this == theBoss) and !A3A_petrosMoving",4];
 
 //Adds a light to the flag
 private _flagLight = "#lightpoint" createVehicle (getPos flagX);

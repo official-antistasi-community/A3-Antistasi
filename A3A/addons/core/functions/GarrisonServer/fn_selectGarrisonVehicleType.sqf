@@ -1,7 +1,17 @@
 /*
-    Select vehicle type for garrison slot
+    Select suitable vehicle type for garrison slot
+
+    TODO: Lazy vehicle selection, fix it up at some point.
 
 Environment: Any?
+
+Parameters:
+    <HASHMAP> Faction to use
+    <STRING> Place type, "staticMG", "vehicle" etc.
+    <BOOL> True if it's for an airport
+
+Return value:
+    <STRING> Vehicle class, or nil if nothing suitable available in this faction
 */
 
 #include "..\..\script_component.hpp"
@@ -24,10 +34,10 @@ if (_placeType == "vehicle") exitWith {
     if (random 1 < 0.5) exitWith { selectRandomWeighted ([_side, _effTier] call A3A_fnc_getVehiclesGroundSupport) };
     selectRandomWeighted ([_side, _effTier] call A3A_fnc_getVehiclesGroundTransport);
 };
-if (_placeType == "mortar") exitWith { selectRandom (_faction get "staticMortars") };
+if (_placeType == "staticMortar") exitWith { selectRandom (_faction get "staticMortars") };
 if (_placeType == "staticAA") exitWith { selectRandom (_faction get "staticAA") };
 if (_placeType == "heli") exitWith { 
-    if (_isAirport and random 1 < 0.3) exitWith { selectRandom ((_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisAttackLight")) };
+    if (_isAirport and random 1 < 0.3) exitWith { selectRandom ((_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack")) };
     selectRandom ((_faction get "vehiclesHelisTransport") + (_faction get "vehiclesHelisLight"));
 };
 if (_placeType == "plane") exitWith {
@@ -35,4 +45,5 @@ if (_placeType == "plane") exitWith {
 };
 if (_placeType == "boat") exitWith { selectRandom (_faction get "vehiclesGunBoats") };
 
-// TODO: make sure nils are handled correctly
+Error_1("Place type %1 does not exist", _placeType);
+nil;

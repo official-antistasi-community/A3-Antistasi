@@ -18,4 +18,7 @@ private _garrison = A3A_activeGarrison get _marker;
 
 (_garrison get "groups") pushBack _group;
 (_garrison get "troops") append units _group;
-[_group, "Patrol_Defend", 0, 150, -1, true, markerPos _marker, false] call A3A_fnc_patrolLoop
+[_group, "Patrol_Defend", 0, 150, -1, true, markerPos _marker, false] call A3A_fnc_patrolLoop;
+
+// Will only work if they're close, but whatever
+[_marker] call A3A_fnc_garrisonLocal_updateStatics;

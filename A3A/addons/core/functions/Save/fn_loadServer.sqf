@@ -24,7 +24,7 @@ if (isServer) then {
 	["prestigeOPFOR"] call A3A_fnc_getStatVariable;
 	["prestigeBLUFOR"] call A3A_fnc_getStatVariable;
 	["resourcesFIA"] call A3A_fnc_getStatVariable;
-	["garrison"] call A3A_fnc_getStatVariable;
+//	["garrison"] call A3A_fnc_getStatVariable;			// loaded later if it's an old save
 	["skillFIA"] call A3A_fnc_getStatVariable;
 	["membersX"] call A3A_fnc_getStatVariable;
 	["vehInGarage"] call A3A_fnc_getStatVariable;
@@ -72,61 +72,71 @@ if (isServer) then {
 		};
 	} forEach citiesX;
 
+	// update war tier silently, calls updatePreference if changed
+	// Needed for garrison sanity checks
+	[true] call A3A_fnc_tierCheck;
 
-	// Backwards compatibility, copy garrison troops and statics into rebel garrisons
+	// ****************************************************************************************************
+	// Garrison backwards compatibility
 	A3A_garrison = ["newGarrison"] call A3A_fnc_returnSavedStat;
-	if (isNil "A3A_garrison") then
+
+	// Copy old garrison data into new garrisons
+	private _garrisonCompat = isNil "A3A_garrison";
+	if (_garrisonCompat) then { call A3A_fnc_convertSavedGarrisons };		// Creates & fills A3A_garrison
+
+	// Fill out any garrison that hasn't already been filled
+	// This might happen with map changes so we do it here rather than convertSavedGarrisons
+	private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["statics", []], ["vehicles", []], ["buildings", []] ];
 	{
-		// troops
-		A3A_garrison = createHashMap;
-		private _rebelMarkers = outpostsFIA + (markersX select { sidesX getVariable _x == teamPlayer });
-		{
-			private _troops = garrison getVariable [_x, []];
-			private _garrison = createHashMapFromArray [ ["troops", _troops], ["statics", []], ["vehicles", []], ["buildings", []] ];
-			A3A_garrison set [_x, _garrison];
-		} forEach _rebelMarkers;
+		if (_x in A3A_garrison) then { continue };
+		private _side = sidesX getVariable _x;
+		if (_side == teamPlayer) then { A3A_garrison set [_x, +_emptyGarrison]; continue };		// should be impossible?
 
-		// Too much of a pain to support, don't bother
-		if (A3A_saveVersion < 20401) exitWith {};
+		if (_x in A3A_minorSitesHM) then {				// If it's a 3.9.0 game
+			private _type = (A3A_minorSitesHM get _x) # 1;
+			[_x, _side] call ([A3A_fnc_buildRoadblock, A3A_fnc_buildCamp] select (_type == "camp"));
+		} else {
+			[_x] call A3A_fnc_buildEnemyGarrison;		// cities, or markers added to map
+		};
+	} forEach (markersX + controlsX);			// outpostsFIA should be fully handled by convertSavedGarrisons
 
-		// statics & buildings
-        {
-            _x params ["_typeVeh", "_posVeh", "_vecUp", "_vecDir", "_state"];
+	// Move saved statics & buildings into the correct garrisons
+	if (_garrisonCompat) then { call A3A_fnc_convertSavedStatics };
 
-            // ignore vehicles & utility items, spawned by loadStat
-			if (_typeVeh in A3A_utilityItemHM) then { continue };
-			private _isStatic = _typeVeh isKindOf "StaticWeapon";
-            if !(_isStatic or _typeVeh isKindOf "Building") then { continue };
-            // Could check for the driver flag instead maybe?
+	// **********************************************************************************************
 
-			_marker = [_posVeh] call A3A_fnc_getMarkerForPos;
-			if (_marker == "") then { continue };
-			if !(_marker in A3A_garrison) then { continue };			// non-rebel marker? maybe possible
-			private _array = A3A_garrison get _marker get (["buildings", "statics"] select _isStatic);
-			_array pushBack [_typeVeh, _posVeh, _vecUp, _vecDir];
+	// Validate garrison vehicles (in case of faction or logic change)
+	Debug("Starting garrison vehicle validation");
+	{
+		_x call A3A_fnc_garrisonServer_cleanup;
+	} forEach markersX;
+	Debug("Completed garrison vehicle validation");
 
-        } forEach (["staticsX"] call A3A_fnc_returnSavedStat);
+	// Backwards compat, delete mines that are within camp zones
+	private _campPositions = values A3A_minorSitesHM select { _x#1 == "camp" } apply { _x#0 };
+	{
+		if (_campPositions inAreaArray [getPosATL _x, 300, 300] isEqualTo []) then { continue };
+		deleteVehicle _x;
+	} forEach allMines;
 
-		// Could fix roadblock vehicle & garrison mortars here, probably not worth it though
-	};
-
-	// Don't have minor sites here, but they're not visible so it's fine
+	// Should have garrison data for this now
 	{
 		[_x] call A3A_fnc_mrkUpdate
 	} forEach markersX;
 
-	// Spawn in all garrison buildings
+
+	// Spawn in HQ buildings before we potentially place HQ objects on them
+	private _spawnedBuildings = [];
 	{
-		{
-			_x params ["_typeVeh", "_posData"];
-			_posData params ["_posVeh", "_vecUp", "_vecDir"];
-			isNil {
-				private _veh = createVehicle [_typeVeh, _posVeh, [], 0, "CAN_COLLIDE"];
-				_veh setPosWorld _posVeh;
-				_veh setVectorDirAndUp [_vecDir, _vecUp];
-			};
-		} forEach (_y get "buildings");
-	} forEach A3A_garrison;
+		_x params ["_typeVeh", "_posVeh", "_vecDir", "_vecUp"];
+		isNil {
+			private _veh = createVehicle [_typeVeh, _posVeh, [], 0, "CAN_COLLIDE"];
+			_veh setPosWorld _posVeh;
+			_veh setVectorDirAndUp [_vecDir, _vecUp];
+			_spawnedBuildings pushBack _veh;
+		};
+	} forEach (A3A_garrison get "Synd_HQ" get "buildings");
+	A3A_garrison get "Synd_HQ" set ["spawnedBuildings", _spawnedBuildings];
 
 
     //Load aggro stacks and level and calculate current level
@@ -136,20 +146,14 @@ if (isServer) then {
 
 	["chopForest"] call A3A_fnc_getStatVariable;
 
-	["posHQ"] call A3A_fnc_getStatVariable;
+	["posHQ"] call A3A_fnc_getStatVariable;				// second call, this one after buildings compat
 	["nextTick"] call A3A_fnc_getStatVariable;
-
-	// Still used for utility items and vehicles parked near HQ
-	["staticsX"] call A3A_fnc_getStatVariable;
 
 	{_x setPosATL getMarkerPos respawnTeamPlayer} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
 
 	// Move headless client logic objects near HQ so that firedNear EH etc. work more reliably
 	private _hcpos = markerPos respawnTeamPlayer vectorAdd [-100, -100, 0];
 	{ _x setPosATL _hcpos } forEach (entities "HeadlessClient_F");
-
-	// update war tier silently, calls updatePreference if changed
-	[true] call A3A_fnc_tierCheck;
 
 
     //Load state of testing timer

@@ -105,7 +105,11 @@ player addEventHandler ["WeaponAssembled", {
 }];
 
 player addEventHandler ["WeaponDisassembled", {
-    params ["", "_bag1", "_bag2"];
-    [objectParent _bag1] remoteExec ["A3A_fnc_postmortem", 2];
+    params ["", "_bag1", "_bag2", "_veh"];
+    [objectParent _bag1] remoteExec ["A3A_fnc_postmortem", 2];      // hmm, are these really 
     [objectParent _bag2] remoteExec ["A3A_fnc_postmortem", 2];
+    private _marker = _veh getVariable ["markerX", ""];
+    if (_marker != "") then {
+        [_veh] remoteExecCall ["A3A_fnc_garrisonServer_remVehicle", 2];
+    };
 }];

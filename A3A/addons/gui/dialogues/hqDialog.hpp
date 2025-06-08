@@ -82,7 +82,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                 {
                     idc = A3A_IDC_MOVEHQBUTTON;
                     text = $STR_antistasi_dialogs_hq_move_hq_button;
-                    onButtonClick = "[] spawn A3A_fnc_moveHQ; closeDialog 0";
+                    onButtonClick = "[player] remoteExecCall ['A3A_fnc_moveHQ', 2]; closeDialog 0";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 20 * GRID_W;
                     y = 53 * GRID_H;

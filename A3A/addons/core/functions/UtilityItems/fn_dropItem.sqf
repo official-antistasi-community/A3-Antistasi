@@ -62,14 +62,7 @@ isNil {
 
     [_item, true] remoteExecCall ["enableSimulationGlobal", 2];
 
-    if (_item isKindOf "StaticWeapon") then {
-        _item lock false
-		_item spawn {
-			// wait until the thing has settled before adding/switching it
-			sleep 2;
-			["", _this] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
-        };
-    };
+    if (_item isKindOf "StaticWeapon") then { _item lock false };
 
     _item spawn {
         sleep 1;

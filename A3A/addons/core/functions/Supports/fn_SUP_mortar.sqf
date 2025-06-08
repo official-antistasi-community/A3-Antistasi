@@ -42,8 +42,8 @@ if(count _possibleBases == 0) exitWith { Debug("No bases found for mortar suppor
 private _spawnRadius = 0;
 private _spawnParams = false;
 {
-    _spawnParams = [_x, "Mortar"] call A3A_fnc_findSpawnPosition;
-    if (_spawnParams isEqualType []) exitWith {};
+    private _placeIndex = A3A_spawnPlacesHM get _x findIf { _x#0 == "staticMortar" };
+    if (_placeIndex != -1) exitWith { _spawnParams = A3A_spawnPlacesHM # _placeIndex };
 } forEach _possibleBases;
 
 // Otherwise just put it somewhere near the flag

@@ -82,7 +82,7 @@ if (_earlyEscape) exitWith {
 };
 
 private _limit = [_nearX] call A3A_fnc_getGarrisonLimit;
-private _oldGarrison = garrison getVariable [_nearX, []];
+private _oldGarrison = A3A_garrison get _nearX get "troops";        // assume rebel garrison at this point...
 
 if (_limit != -1) then {
     private _newGarrisonCount = count _unitsX + count _oldGarrison;

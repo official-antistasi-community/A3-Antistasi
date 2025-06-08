@@ -8,6 +8,10 @@ params ["_marker", "_unitCount", "_quality"];
 
 Trace_1("Called with params %1", _this);
 
+if (sidesX getVariable _marker == teamPlayer) exitWith {
+    Error_1("Attempted to add unit count to rebel marker %1", _marker);
+};
+
 // Add troops to server garrison data, averaging the quality
 private _troops = A3A_garrison get _marker get "troops";
 private _newQuality = (_troops#0 * _troops#1 + _unitCount * _quality) / (_troops#0 + _unitCount);

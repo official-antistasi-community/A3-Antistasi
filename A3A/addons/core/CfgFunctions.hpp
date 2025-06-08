@@ -198,7 +198,6 @@ class CfgFunctions
             class translateVariable {};
             class unlockStatic {};
             class unlockVehicle {};
-            class updateRebelStatics {};
             class zoneCheck {};
         };
 
@@ -234,7 +233,6 @@ class CfgFunctions
             class calculateMarkerArea {};
             class cargoSeats {};
             class cleanserVeh {};
-            class countFreeSpawnPositions {};
             class createAIAirbase {};
             class createAICities {};
             class createAIcontrols {};
@@ -253,11 +251,7 @@ class CfgFunctions
             class crewTypeForVehicle {};
             class FIAinitBases {};
             class fillVehicleCrewCargo {};
-            class findSpawnPosition {};
-            class freeSpawnPositions {};
-            class garrisonReorg {};
             class garrisonSize {};
-            class garrisonUpdate {};
             class groupDespawner {};
             class invaderPunish {};
             class milBuildings {};
@@ -265,8 +259,10 @@ class CfgFunctions
             class mortarPos {};
             class NATOinit {};
             class patrolReinf {};
-            class reinforcementsAI {};
             class registerUnitType {};
+            class reinforcementsAI {};
+            class reinforceVehicle {};
+            class reinforceSide {};
             class remoteBattle {};
             class safeVehicleSpawn {};
             class singleAttack {};
@@ -274,8 +270,6 @@ class CfgFunctions
             class spawnVehicle {};
             class spawnVehicleAtMarker {};
             class spawnVehiclePrecise {};
-            class takeSpawnPosition {};
-            class updateCAMark {};
             class vehAvailable {};
             class VEHdespawner {};
             class vehKilledOrCaptured {};
@@ -315,7 +309,8 @@ class CfgFunctions
         class EventHandler {
             file = QPATHTOFOLDER(functions\EventHandler);
             class addArtilleryTrailEH {};
-            class disassembledEH {};
+            class addVehAttachDetachEH {};
+            class addVehGetInOutEH {};
             class enemyUnitDeletedEH {};
             class enemyUnitKilledEH {};
             class rebelUnitKilledEH {};
@@ -324,11 +319,14 @@ class CfgFunctions
 
         class GarrisonLocal {
             file = QPATHTOFOLDER(functions\GarrisonLocal);
+            class findPatrolPos {};
             class garrisonLocal_addGroup {};
             class garrisonLocal_addVehicle {};
+            class garrisonLocal_addVehicleType {};
             class garrisonLocal_changeSide {};
             class garrisonLocal_clear {};
             class garrisonLocal_despawn {};
+            class garrisonLocal_moveHQ {};
             class garrisonLocal_pause {};
             class garrisonLocal_remUnitType {};
             class garrisonLocal_remVehicle {};
@@ -336,6 +334,7 @@ class CfgFunctions
             class garrisonLocal_spawnUnit {};
             class garrisonLocal_spawnUnitCount {};
             class garrisonLocal_unpause {};
+            class garrisonLocal_updateStatics {};
             class garrisonLocal_zoneCheck {};
             class garrisonOpLoop {};
             class getGarrisonLimit {};
@@ -347,6 +346,7 @@ class CfgFunctions
 
         class GarrisonServer {
             file = QPATHTOFOLDER(functions\GarrisonServer);
+            class buildEnemyGarrison {};
             class garrisonInfo {};
             class garrisonOp {};
             class garrisonServer_addGroup {};
@@ -354,12 +354,17 @@ class CfgFunctions
             class garrisonServer_addUnitType {};
             class garrisonServer_addVehicle {};
             class garrisonServer_addVehicleType {};
+            class garrisonServer_changeSide {};
+            class garrisonServer_cleanup {};
             class garrisonServer_clear {};
             class garrisonServer_delete {};
+            class garrisonServer_looted {};
             class garrisonServer_remUnit {};
             class garrisonServer_remUnitType {};
             class garrisonServer_remVehicle {};
             class garrisonServer_sendData {};
+            class garrisonServer_updateStatics {};
+            class garrisonServer_updateVehData {};
             class selectGarrisonVehicleType {};
             class showSiteInfo {};
         };
@@ -383,6 +388,7 @@ class CfgFunctions
             class initGarrisons {};
             class initPreJIP { preInit = 1; };
             class initSpawnPlaces {};
+            class initSpawnPlaceStats {};
             class initStaticPlaces {};
             class initUtilityItems {};
             class initVarCommon {};
@@ -623,6 +629,8 @@ class CfgFunctions
         class Save {
             file = QPATHTOFOLDER(functions\Save);
             class collectSaveData {};
+            class convertSavedGarrisons {};
+            class convertSavedStatics {};
             class deleteSave {};
             class loadPlayer {};
             class loadServer {};
@@ -808,6 +816,7 @@ class CfgFunctions
             class createNamespace {};
             class deleteNamespace {};
             class filterAndWeightArray {};
+            class findEmptyPos {};
             class getAdmin {};
             class isEngineer {};
             class localLog {};

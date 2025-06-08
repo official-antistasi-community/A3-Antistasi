@@ -54,7 +54,7 @@ switch (_mode) do
         /*private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
         private _moveHqButton = _display displayCtrl A3A_IDC_MOVEHQBUTTON;
 
-        private _canMoveHQ = [] call FUNCMAIN(canMoveHQ);
+        private _canMoveHQ = [player] call FUNCMAIN(canMoveHQ);
         if (_canMoveHQ # 0) then {
             _moveHqButton ctrlEnable true;
             _moveHqButton ctrlSetTooltip "";
@@ -229,7 +229,7 @@ switch (_mode) do
         private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
         private _moveHqButton = _display displayCtrl A3A_IDC_MOVEHQBUTTON;
 
-        private _canMoveHQ = [] call FUNCMAIN(canMoveHQ);
+        private _canMoveHQ = [player] call FUNCMAIN(canMoveHQ);
         if (_canMoveHQ # 0) then {
             _moveHqButton ctrlEnable true;
             _moveHqButton ctrlSetTooltip "";
@@ -379,7 +379,6 @@ switch (_mode) do
         // Get the data from the marker
         private _position = getMarkerPos _selectedMarker;
         private _garrisonName = [_selectedMarker] call A3A_GUI_fnc_getLocationMarkerName;
-        //private _garrison = garrison getVariable [_selectedMarker, []];
 
         // Get garrison counts
         private _rifleman = {_x in FactionGet(reb,"unitRifle")} count _troops;
@@ -655,7 +654,7 @@ switch (_mode) do
         _params params ["_marker", "_garrisonData"];
 
         // If the data's from a previous click then ignore it
-        if (_marker != _garrisonMap getVariable ["selectedMarker" ""]) exitWith {};
+        if (_marker != _garrisonMap getVariable ["selectedMarker", ""]) exitWith {};
 
         _garrisonMap setVariable ["currentGarrisonData", _garrisonData];
         ["updateGarrisonTab"] call FUNC(hqDialog);
