@@ -352,7 +352,6 @@ A3A_startupState = "completed"; publicVariable "A3A_startupState";
 serverInitDone = true; publicVariable "serverInitDone";
 Info("Setting serverInitDone as true");
 
-
 // ********************* Initialize loops *******************************************
 
 A3A_garrisonOps = [];
