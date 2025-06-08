@@ -84,6 +84,7 @@ private _mortarGroups = [];
 
     if (_static isKindOf "StaticMortar") then {
         [_group] call A3A_fnc_artilleryAdd;
+        _group deleteGroupWhenEmpty true;
         _groups pushBack _group;
         _mortarGroups pushBack _group;
     };

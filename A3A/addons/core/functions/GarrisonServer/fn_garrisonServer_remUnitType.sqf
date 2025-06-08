@@ -7,12 +7,14 @@ params ["_marker", "_unitType", "_client"];
 
 Trace_1("Called with params %1", _this);
 
+private _titleStr = localize "STR_A3A_garrison_header";
+
 if (sidesX getVariable [_marker, sideUnknown] != teamPlayer) exitWith {
-	[localize "STR_A3A_garrison_header", "Garrison lost"] remoteExecCall ["A3A_fnc_customHint", _client];
+	[_titleStr, format [localize "STR_A3A_fn_reinf_garrDia_zone_belong",FactionGet(reb,"name")]] remoteExecCall ["A3A_fnc_customHint", _client];
 };
 
 if ([markerPos _marker] call A3A_fnc_enemyNearCheck) exitWith {
-	[localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_error_enemies_near"] remoteExecCall ["A3A_fnc_customHint", _client];
+	[_titleStr, localize "STR_A3A_garrison_error_enemies_near"] remoteExecCall ["A3A_fnc_customHint", _client];
 };
 
 if !(_marker in A3A_garrison) exitWith {
@@ -25,9 +27,9 @@ if (_troops find _unitType == -1) exitWith {
 };
 
 // ugh
-[1, server getVariable [_unitType, 0] / 2] spawn A3A_fnc_resourcesFIA;
+[1, (server getVariable [_unitType, 0]) / 2] spawn A3A_fnc_resourcesFIA;
 
-// Add unit to server garrison data
+// Remove unit from server garrison data
 _troops deleteAt (_troops find _unitType);
 
 // Update the marker text if it's rebel

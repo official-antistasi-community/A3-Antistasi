@@ -136,7 +136,7 @@ if (_varName in _specialVarLoads) then {
         if (count (_varValue select 0) != 2) exitWith {};
         {
             _x params ["_position", "_garrison"];
-            [_position, [], []] call A3A_fnc_createRebelControl;
+            [_position, []] call A3A_fnc_createRebelControl;
             A3A_rebPostGarrison pushBack [_mrk, _garrison];
         } forEach _varvalue;
         publicVariable "outpostsFIA";

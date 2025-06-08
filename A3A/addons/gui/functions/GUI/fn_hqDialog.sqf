@@ -774,16 +774,15 @@ switch (_mode) do
         };
 
         _unitType = A3A_faction_reb get _unitType;
-        [_unitType, _selectedMarker, clientOwner] remoteExecCall [QFUNCMAIN(garrisonServer_remUnitType), 2];
+        [_selectedMarker, _unitType, clientOwner] remoteExecCall [QFUNCMAIN(garrisonServer_remUnitType), 2];
         [_selectedMarker] remoteExecCall [QFUNCMAIN(garrisonServer_sendData), 2];
     };
 
     case ("dismissGarrison"):
     {
-        Trace("Dismissing garrison");
-
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
-        ["", _selectedMarker] spawn A3A_fnc_garrisonDialog;
+        [_selectedMarker, true] remoteExecCall [QFUNCMAIN(garrisonServer_clear), 2];
+        [_selectedMarker] remoteExecCall [QFUNCMAIN(garrisonServer_sendData), 2];
     };
 
     case ("skipTime"):

@@ -1,4 +1,5 @@
 // Old-UI function to handle clicks on garrison map
+// Client-local
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
@@ -31,7 +32,7 @@ if (getMarkerPos _nearX distance2d _positionTel > 40) exitWith { // lazy eval
 	createDialog "build_menu";
 };
 
-if !(_marker call A3A_fnc_canEditGarrison) exitWith { createDialog "build_menu" };
+if !(_nearX call A3A_fnc_canEditGarrison) exitWith { createDialog "build_menu" };
 
 // Conditions passed, now either delete the garrison or open the recruiting menu
 

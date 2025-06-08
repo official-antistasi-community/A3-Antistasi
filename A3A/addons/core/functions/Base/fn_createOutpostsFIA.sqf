@@ -64,8 +64,7 @@ if ({(alive _x) and (_x distance _positionTel < 10)} count units _groupX > 0) th
 	[_taskId, "outpostsFIA", "SUCCEEDED"] call A3A_fnc_taskSetState;
 
 	private _unitTypes = units _groupX select { alive _x } apply { _x getVariable "unitType" };
-	private _vehTypes = [[], [FactionGet(reb,"vehiclesLightArmed")#0]] select _isRoad;
-	[_positionTel, _unitTypes, _vehTypes] remoteExecCall ["A3A_fnc_createRebelControl", 2];
+	[_positionTel, _unitTypes] remoteExecCall ["A3A_fnc_createRebelControl", 2];
 } else {
 	[_taskId, "outpostsFIA", "FAILED"] call A3A_fnc_taskSetState;
 	sleep 3;

@@ -26,7 +26,7 @@ params ["_posOrMarker", "_radius", "_maxPlaces"];
 private _buildings = [_posOrMarker, _radius] call A3A_fnc_patrolEnterableBuildings;
 
 // Figure out how many units should be put in each building.
-private _unitsPerBuilding = 2 max ceil (_maxPlaces / count _buildings);
+private _unitsPerBuilding = 2 max ceil (_maxPlaces / (count _buildings max 1));
 
 private _places = [];
 while {_buildings isNotEqualTo []} do

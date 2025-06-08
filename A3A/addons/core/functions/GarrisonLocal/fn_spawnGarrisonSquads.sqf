@@ -92,6 +92,7 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
         [_unit, _marker] call _fnc_initUnit;
         sleep 0.1;
     } forEach _x;
+    _curGroup deleteGroupWhenEmpty true;
     _groups pushBack _curGroup;
     _troops append units _curGroup;
 

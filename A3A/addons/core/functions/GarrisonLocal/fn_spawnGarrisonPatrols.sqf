@@ -49,6 +49,7 @@ for "_i" from 1 to _numPatrols do
     private _typeGroup = selectRandom ([_lowGroupTypes, _highGroupTypes] select (_i <= _highPatrols));
     private _group = [_spawnPos, _side, _typeGroup] call A3A_fnc_spawnGroup;
     { [_x, _marker] call A3A_fnc_NATOinit } forEach units _group;
+    _group deleteGroupWhenEmpty true;
     _groups pushBack _group;
     _troops append units _group;
 

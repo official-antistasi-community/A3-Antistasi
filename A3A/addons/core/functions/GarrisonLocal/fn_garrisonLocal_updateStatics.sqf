@@ -35,7 +35,7 @@ _freeTroops = _freeTroops select { _x getVariable "unitType" == _crewType };
 if (_freeTroops isEqualTo []) then { continue };
 
 private _fnc_mountStatic = {
-    params [_unit, _static];
+    params ["_unit", "_static"];
 
     _unit enableAI "ALL";
     _unit setUnitPos "UP";
@@ -60,7 +60,9 @@ if (isNull _group) then { _group = createGroup _side; _garrison set ["staticGrou
     // If not under fire, could just pop them in? hmm
     private _nearTroops = _freeTroops inAreaArray [getPosATL _x, 50, 50];
     if (_nearTroops isEqualTo []) then { continue };
-    private _unit = _nearTroops deleteAt 0;
+    private _unit = _nearTroops # 0;
+    _freeTroops deleteAt (_freeTroops find _unit);
+
     [_unit] joinSilent _group;
     [_unit, _x] spawn _fnc_mountStatic;
 } forEach _freeStatics;

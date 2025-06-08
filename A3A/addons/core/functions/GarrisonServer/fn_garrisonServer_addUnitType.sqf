@@ -1,5 +1,6 @@
 
 // Server-only, unscheduled, for adding single unit type to rebel garrison
+// Kinda gross, handles the bad-input cases as well
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
@@ -8,30 +9,32 @@ params ["_marker", "_unitType", "_client", ["_oldUI", false]];
 
 Trace_1("Called with params %1", _this);
 
+private _titleStr = localize "STR_A3A_garrison_header";
+
 if (sidesX getVariable [_marker, sideUnknown] != teamPlayer) exitWith {
-	[localize "STR_A3A_garrison_header", "Garrison lost"] remoteExecCall ["A3A_fnc_customHint", _client];
+	[_titleStr, format [localize "STR_A3A_fn_reinf_garrDia_zone_belong",FactionGet(reb,"name")]] remoteExecCall ["A3A_fnc_customHint", _client];
 };
 
 private _hr = server getVariable "hr";
 if (_hr < 1) exitWith {
-	[localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_error_no_hr"] remoteExecCall ["A3A_fnc_customHint", _client];
+	[_titleStr, localize "STR_A3A_garrison_error_no_hr"] remoteExecCall ["A3A_fnc_customHint", _client];
 };
 
 private _resourcesFIA = server getVariable "resourcesFIA";
 private _costs = server getVariable _unitType;
 if (_costs > _resourcesFIA) exitWith {
-	[localize "STR_A3A_garrison_header",  format [localize "STR_A3A_garrison_error_no_money", _costs]] remoteExecCall ["A3A_fnc_customHint", _client];
+	[_titleStr,  format [localize "STR_A3A_garrison_error_no_money", _costs]] remoteExecCall ["A3A_fnc_customHint", _client];
 };
 
 if ([markerPos _marker] call A3A_fnc_enemyNearCheck) exitWith {
-	[localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_error_enemies_near"] remoteExecCall ["A3A_fnc_customHint", _client];
+	[_titleStr, localize "STR_A3A_garrison_error_enemies_near"] remoteExecCall ["A3A_fnc_customHint", _client];
 };
 
 // TODO: Do we still want this?
 private _troops = A3A_garrison get _marker get "troops";
 private _limit = [_marker] call A3A_fnc_getGarrisonLimit;
 if (_limit != -1 && {count _troops >= _limit}) exitWith {
-	[localize "STR_A3A_garrisons_header", localize "STR_A3A_garrison_reached_limit"] remoteExecCall ["A3A_fnc_customHint", _client];
+	[_titleStr, localize "STR_A3A_garrison_reached_limit"] remoteExecCall ["A3A_fnc_customHint", _client];
 };
 
 // ugh

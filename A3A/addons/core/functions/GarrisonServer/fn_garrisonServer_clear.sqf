@@ -9,10 +9,20 @@ params ["_marker", ["_feedback", false], ["_hqMove", false]];
 Trace_1("Called with params %1", _this);
 
 private _garrison = A3A_garrison get _marker;
+
+private _titleStr = localize "STR_A3A_garrison_header";
+
 if (isNil "_garrison") exitWith {
     Error_1("Garrison %1 no longer exists", _marker);
-    if (_feedback) then { ["Garrison", "Garrison no longer exists"] remoteExecCall ["A3A_fnc_customHint", theBoss] };
+    if (!_feedback) exitWith {};
+    [_titleStr, "Garrison no longer exists"] remoteExecCall ["A3A_fnc_customHint", theBoss];
 };
+
+if (sidesX getVariable [_marker, sideUnknown] != teamPlayer) exitWith {
+	if (!_feedback) exitWith {};
+    [_titleStr, format [localize "STR_A3A_fn_reinf_garrDia_zone_belong",FactionGet(reb,"name")]] remoteExecCall ["A3A_fnc_customHint", theBoss];
+};
+
 
 private _costs = 0;
 private _hr = 0;
