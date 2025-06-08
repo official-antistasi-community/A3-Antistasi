@@ -62,7 +62,7 @@ _map setVariable ["hcGroupData", _hcGroupData];
         "_groupIconColor"
     ];
 
-    private _position = getPos leader _group;
+    private _position = getPosATL leader _group;
 
     // Shorten group name if it's over 16 characters
     if (count _groupID > 16) then
@@ -77,9 +77,9 @@ _map setVariable ["hcGroupData", _hcGroupData];
         _position, // position
         32, // width
         32, // height
-        0, // angle
-        "", // text, no text for this
-        0 // shadow (outline if 2)
+        360, // angle
+        _groupID, // text, no text for this
+        2 // shadow (outline if 2)
     ];
 
     // Draw size indicator
@@ -104,16 +104,4 @@ _map setVariable ["hcGroupData", _hcGroupData];
         0 // shadow (outline if 2)
     ];
 
-
-    // Draw group name text
-    _map drawIcon [
-        "#(argb,1,1,1)color(0,0,0,0)", // transparent
-        _groupIconColor, // colour
-        _position, // position
-        32, // width
-        32, // height
-        0, // angle
-        _groupID, // text
-        2 // shadow (outline if 2)
-    ];
 } forEach _hcGroupData;

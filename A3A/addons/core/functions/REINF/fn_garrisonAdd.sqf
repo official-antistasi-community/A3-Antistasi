@@ -7,10 +7,8 @@ FIX_LINE_NUMBERS()
 params ["_unitType"];
 
 private _marker = A3A_editingGarrison;
-if (sidesX getVariable [_marker, sideUnknown] != teamPlayer) exitWith {
-	[localize "STR_A3A_garrison_header", "Garrison lost"];
-	closeDialog 0;
-};
+if (sidesX getVariable [_marker, sideUnknown] != teamPlayer) then { closeDialog 0 };
 
 // Sends customHint back to client with results
 [_marker, _unitType, clientOwner, true] remoteExecCall ["A3A_fnc_garrisonServer_addUnitType", 2];
+
