@@ -3,9 +3,6 @@ FIX_LINE_NUMBERS()
 	
 params ["_veh"];
 
-private _spawnPlace = _veh getVariable "spawnPlace";
-if (!isNil "_spawnPlace") then { [_spawnPlace] call A3A_fnc_freeSpawnPositions };
-
 // Shortcut for garrison vehicles, otherwise gets spammy for statics
 if (!isNil {_veh getVariable "markerX"}) exitWith {};
 

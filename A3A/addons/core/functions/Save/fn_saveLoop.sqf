@@ -137,17 +137,7 @@ _resourcesBackground = server getVariable "resourcesFIA";
 ["vehInGarage", [] + _vehInGarage] call A3A_fnc_setStatVariable;
 ["HR_Garage", [] call HR_GRG_fnc_getSaveData] call A3A_fnc_setStatVariable;
 
-// TODO: Move saveable utility items into garrisons
-_arrayEst = [];
-{
-	// Only store utility items here now. Maybe not even those?
-	// TODO: Do we need to refund the others?
-	//if (typeof _x in A3A_utilityItemHM and {"save" in (A3A_utilityItemHM get typeof _x)#4}) then {
-	//	_arrayEst pushBack [typeof _x, getPosWorld _x, vectorUp _x, vectorDir _x, [_x] call HR_GRG_fnc_getState];
-	//};
-} forEach (vehicles inAreaArray "Synd_HQ" select { alive _x });
-
-["staticsX", _arrayEst] call A3A_fnc_setStatVariable;
+["staticsX", []] call A3A_fnc_setStatVariable;			// backwards compat
 
 [] call A3A_fnc_arsenalManage;
 
@@ -177,6 +167,7 @@ private _rebMarkers = (markersX select { sidesX getVariable _x == teamPlayer }) 
 
 // Cull garrison data to what we want to save
 private _saveGarrison = +A3A_garrison;
+{ _saveGarrison deleteAt _x } forEach A3A_markersToDelete;			// don't save garrisons that we're deleting
 {
 	// potentially add other stuff we're not saving in here?
 	_y deleteAt "spawnedBuildings";

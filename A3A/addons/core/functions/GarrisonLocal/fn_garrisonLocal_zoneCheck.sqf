@@ -31,7 +31,7 @@ if (_type in ["camp", "roadblock", "rebpost"]) exitWith
 
     // Mark everything in the garrison (downed troops etc) as no longer in the garrison
     {
-        if (!isNull _x) then { _x setVariable ["markerX", false, true] };
+        if (!isNull _x) then { _x setVariable ["markerX", nil, true] };
     } forEach (_troops + (_garrison get "vehicles") + (_garrison get "statics"));
 
     // Should we signal camps too?

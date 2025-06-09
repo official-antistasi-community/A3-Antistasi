@@ -1,6 +1,7 @@
 // Final cleanup for destroyed minor sites
 // called after despawn
 // In theory, nothing should be touching the garrison after this?
+// TODO: Check reinf logic
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

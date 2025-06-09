@@ -211,24 +211,6 @@ if(_typeX in (FactionGet(all, "vehiclesArtillery") + FactionGet(all, "staticMort
 // MPKilled: Runs everywhere, regardless of target locality or install location
 // Destruction is handled in an EntityKilled mission event handler, in case of locality changes
 
-if (_side != teamPlayer) then
-{
-	// Vehicle stealing handler
-	// When a rebel first enters a vehicle, fire capture function
-	_veh addEventHandler ["GetIn", {
-
-		params ["_veh", "_role", "_unit"];
-		if (side group _unit != teamPlayer) exitWith {};		// only rebels can flip vehicles atm
-		private _oldside = _veh getVariable ["ownerSide", teamPlayer];
-		if (_oldside != teamPlayer) then
-		{
-			ServerDebug_2("%1 switching side from %2 to rebels", typeof _veh, _oldside);
-			[_veh, teamPlayer, true] call A3A_fnc_vehKilledOrCaptured;
-		};
-		_veh removeEventHandler ["GetIn", _thisEventHandler];
-	}];
-};
-
 
 // Handler for refunding vehicles after cleanup
 if (A3A_vehicleResourceCosts getOrDefault [typeof _veh, 0] > 0) then {
