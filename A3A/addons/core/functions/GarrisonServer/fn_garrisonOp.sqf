@@ -17,7 +17,7 @@ isNil {
     if (_opType == "despawn") then {
         if (_side != teamPlayer) then {
             // If it's an enemy marker then cleanup old/misplaced vehicles on despawn
-            _marker call A3A_fnc_garrisonServer_cleanup;
+            [_marker, false, false] call A3A_fnc_garrisonServer_cleanup;
         } else {
             // If it's a rebel marker then update vehicle fuel/ammo state
             _marker call A3A_garrisonServer_updateVehData;

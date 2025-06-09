@@ -78,7 +78,7 @@ if (isServer) then {
 
 	// ****************************************************************************************************
 	// Garrison backwards compatibility
-	A3A_garrison = ["newGarrison"] call A3A_fnc_returnSavedStat;
+	A3A_garrison = +(["newGarrison"] call A3A_fnc_returnSavedStat);
 
 	// Copy old garrison data into new garrisons
 	private _garrisonCompat = isNil "A3A_garrison";
@@ -108,7 +108,7 @@ if (isServer) then {
 	// Validate garrison vehicles (in case of faction or logic change)
 	Debug("Starting garrison vehicle validation");
 	{
-		_x call A3A_fnc_garrisonServer_cleanup;
+		[_x, true, false] call A3A_fnc_garrisonServer_cleanup;
 	} forEach markersX;
 	Debug("Completed garrison vehicle validation");
 

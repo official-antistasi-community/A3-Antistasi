@@ -75,6 +75,7 @@ else
 _unit addEventHandler ["HandleDamage", A3A_fnc_handleDamageAAF];
 _unit addEventHandler ["Killed", A3A_fnc_enemyUnitKilledEH];
 _unit addEventHandler ["Deleted", A3A_fnc_enemyUnitDeletedEH];
+_unit setVariable ["A3A_KilledEH", true];           // mark that it's installed at this locality
 
 private _baseSkill = (0.1 * A3A_enemySkillMul) + (0.07 * (1 max A3A_activePlayerCount^0.5)) + (0.01 * tierWar);
 private _skill = switch (true) do {

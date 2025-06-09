@@ -1,3 +1,6 @@
+// Local garrison function for adding an already-spawned group
+// Can be used by either enemy or rebel
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
@@ -6,12 +9,17 @@ params ["_marker", "_group"];
 // Assume that setGroupOwner has already been called by whatever called this function?
 // Makes sense, as that's probably from the server...
 
-// Add local killed EH if it's missing. Unit may not be at original locality
+// Add local killed & handleDamage EH if it's missing. Unit may not be at original locality
 {
-    if !(_x getVariable ["A3A_killedEH", false]) then {
-        _unit addEventHandler ["Killed", A3A_fnc_rebelUnitKilledEH];
-        _unit setVariable ["A3A_killedEH", true];
+    if (_x getVariable ["A3A_killedEH", false]) then { continue };
+    if (side _group == teamPlayer) then {
+        _x addEventHandler ["Killed", A3A_fnc_rebelUnitKilledEH];
+        [_x] call A3A_fnc_initRevive;
+    } else {
+        _x addEventHandler ["HandleDamage", A3A_fnc_handleDamageAAF];
+        _x addEventHandler ["Killed", A3A_fnc_enemyUnitKilledEH];
     };
+    _x setVariable ["A3A_killedEH", true];
 } forEach units _group;
 
 private _garrison = A3A_activeGarrison get _marker;

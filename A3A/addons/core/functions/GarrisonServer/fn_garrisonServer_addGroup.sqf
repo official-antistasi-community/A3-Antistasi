@@ -58,6 +58,7 @@ if (!isNil "_machineID") then {
 } else {
     { deleteVehicle _x } forEach units _group;
     deleteGroup _group;
+    [_marker, false, true] call A3A_fnc_garrisonServer_cleanup;
 };
 
 Trace("Completed");

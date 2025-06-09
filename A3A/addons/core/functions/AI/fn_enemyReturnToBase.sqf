@@ -69,9 +69,9 @@ if (_vehicle != leader _group) exitWith
 
 // Foot infantry
 // If specified marker is (still) valid, garrison at it
+// Can't check whether marker can take the troops here. Deal with that in garrison code.
 if (_marker != "") then {
     if (sidesX getVariable _marker != side _group) exitWith { _marker = "" }; 
-    if (A3A_garrisonSize get _marker - A3A_garrison get _marker get "troops" select 0 <= 0) exitWith { _marker = "" };
     if (markerPos _marker distance2d leader _group >= 500) exitWith { _marker = "" };
 };
 if (_marker != "") exitWith { [_group, _marker] call A3A_fnc_enemyGarrison };

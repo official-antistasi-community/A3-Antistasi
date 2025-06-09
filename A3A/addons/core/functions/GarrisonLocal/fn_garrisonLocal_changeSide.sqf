@@ -7,6 +7,9 @@
 // statics and vehicles stay
 // switch side of vehicles and statics?
 
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
 params ["_marker", "_newSide"];
 
 private _garrison = A3A_activeGarrison get _marker;
