@@ -58,7 +58,7 @@ if (!isNull _display) then
 	(_display displayCtrl 105) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitMG")];
 	(_display displayCtrl 126) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitMedic")];
 	(_display displayCtrl 107) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitSL")];
-	(_display displayCtrl 108) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitCrew")];		// TODO: replace with something else?
+//	(_display displayCtrl 108) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitCrew")];		// TODO: replace with something else?
 	(_display displayCtrl 109) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitGL")];
 	(_display displayCtrl 110) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitSniper")];
 	(_display displayCtrl 111) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitLAT")];

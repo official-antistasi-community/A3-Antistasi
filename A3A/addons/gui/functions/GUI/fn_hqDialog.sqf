@@ -386,7 +386,6 @@ switch (_mode) do
         private _autorifleman = {_x in FactionGet(reb,"unitMG")} count _troops;
         private _grenadier = {_x in FactionGet(reb,"unitGL")} count _troops;
         private _medic = {_x in FactionGet(reb,"unitMedic")} count _troops;
-        private _mortar = {_x in FactionGet(reb,"unitCrew")} count _troops;
         private _marksman = {_x in FactionGet(reb,"unitSniper")} count _troops;
         private _at = {_x in FactionGet(reb,"unitLAT")} count _troops;
         private _atMissile = {_x in FactionGet(reb,"unitAT")} count _troops;
@@ -399,7 +398,6 @@ switch (_mode) do
         private _autoriflemanNumber = _display displayCtrl A3A_IDC_AUTORIFLEMANNUMBER;
         private _grenadierNumber = _display displayCtrl A3A_IDC_GRENADIERNUMBER;
         private _medicNumber = _display displayCtrl A3A_IDC_MEDICNUMBER;
-        private _mortarNumber = _display displayCtrl A3A_IDC_MORTARNUMBER;
         private _marksmanNumber = _display displayCtrl A3A_IDC_MARKSMANNUMBER;
         private _atNumber = _display displayCtrl A3A_IDC_ATNUMBER;
         private _atMissileNumber = _display displayCtrl A3A_IDC_ATMISSILENUMBER;
@@ -415,7 +413,6 @@ switch (_mode) do
         _autoriflemanNumber ctrlSetText str _autorifleman;
         _grenadierNumber ctrlSetText str _grenadier;
         _medicNumber ctrlSetText str _medic;
-        _mortarNumber ctrlSetText str _mortar;
         _marksmanNumber ctrlSetText str _marksman;
         _atNumber ctrlSetText str _at;
         _atMissileNumber ctrlSetText str _atMissile;
@@ -432,8 +429,6 @@ switch (_mode) do
         _grenadierSubButton = _display displayCtrl A3A_IDC_GRENADIERSUBBUTTON;
         _medicAddButton = _display displayCtrl A3A_IDC_MEDICADDBUTTON;
         _medicSubButton = _display displayCtrl A3A_IDC_MEDICSUBBUTTON;
-        _mortarAddButton = _display displayCtrl A3A_IDC_MORTARADDBUTTON;
-        _mortarSubButton = _display displayCtrl A3A_IDC_MORTARSUBBUTTON;
         _marksmanAddButton = _display displayCtrl A3A_IDC_MARKSMANADDBUTTON;
         _marksmanSubButton = _display displayCtrl A3A_IDC_MARKSMANSUBBUTTON;
         _atAddButton = _display displayCtrl A3A_IDC_ATADDBUTTON;
@@ -457,8 +452,6 @@ switch (_mode) do
             _grenadierSubButton,
             _medicAddButton,
             _medicSubButton,
-            _mortarAddButton,
-            _mortarSubButton,
             _marksmanAddButton,
             _marksmanSubButton,
             _atAddButton,
@@ -483,7 +476,6 @@ switch (_mode) do
         if (_autorifleman < 1) then {_autoriflemanSubButton ctrlEnable false};
         if (_grenadier < 1) then {_grenadierSubButton ctrlEnable false};
         if (_medic < 1) then {_medicSubButton ctrlEnable false};
-        if (_mortar < 1) then {_mortarSubButton ctrlEnable false};
         if (_marksman < 1) then {_marksmanSubButton ctrlEnable false};
         if (_at < 1) then {_atSubButton ctrlEnable false};
         if (_atMissile < 1) then {_atMissileSubButton ctrlEnable false};
@@ -495,7 +487,6 @@ switch (_mode) do
         _autoriflemanPrice = server getVariable (FactionGet(reb,"unitMG"));
         _grenadierPrice = server getVariable (FactionGet(reb,"unitGL"));
         _medicPrice = server getVariable (FactionGet(reb,"unitMedic"));
-        _mortarPrice = (server getVariable FactionGet(reb,"unitCrew")) + ([FactionGet(reb,"staticMortars")#0] call FUNCMAIN(vehiclePrice));
         _marksmanPrice = server getVariable (FactionGet(reb,"unitSniper"));
         _atPrice = server getVariable (FactionGet(reb,"unitLAT"));
         _atMissilePrice = server getVariable (FactionGet(reb,"unitAT"));
@@ -507,7 +498,6 @@ switch (_mode) do
         _autoriflemanPriceText = _display displayCtrl A3A_IDC_AUTORIFLEMANPRICE;
         _grenadierPriceText = _display displayCtrl A3A_IDC_GRENADIERPRICE;
         _medicPriceText = _display displayCtrl A3A_IDC_MEDICPRICE;
-        _mortarPriceText = _display displayCtrl A3A_IDC_MORTARPRICE;
         _marksmanPriceText = _display displayCtrl A3A_IDC_MARKSMANPRICE;
         _atPriceText = _display displayCtrl A3A_IDC_ATPRICE;
         _atMissilePriceText = _display displayCtrl A3A_IDC_ATMISSILEPRICE;
@@ -518,7 +508,6 @@ switch (_mode) do
         _autoriflemanPriceText ctrlSetText str _autoriflemanPrice + "€";
         _grenadierPriceText ctrlSetText str _grenadierPrice + "€";
         _medicPriceText ctrlSetText str _medicPrice + "€";
-        _mortarPriceText ctrlSetText str _mortarPrice + "€";
         _marksmanPriceText ctrlSetText str _marksmanPrice + "€";
         _atPriceText ctrlSetText str _atPrice + "€";
         _atMissilePriceText ctrlSetText str _atMissilePrice + "€";
@@ -533,20 +522,10 @@ switch (_mode) do
         if (_factionMoney < _autoriflemanPrice || _hr < 1) then {_autoriflemanAddButton ctrlEnable false; _autoriflemanAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _grenadierPrice || _hr < 1) then {_grenadierAddButton ctrlEnable false; _grenadierAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _medicPrice || _hr < 1) then {_medicAddButton ctrlEnable false; _medicAddButton ctrlSetTooltip _noResourcesText};
-        if (_factionMoney < _mortarPrice || _hr < 1) then {_mortarAddButton ctrlEnable false; _mortarAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _marksmanPrice || _hr < 1) then {_marksmanAddButton ctrlEnable false; _marksmanAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _atPrice || _hr < 1) then {_atAddButton ctrlEnable false; _atAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _atMissilePrice || _hr < 1) then {_atMissileAddButton ctrlEnable false; _atMissileAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _aaMissilePrice || _hr < 1) then {_aaMissileAddButton ctrlEnable false; _aaMissileAddButton ctrlSetTooltip _noResourcesText};
-
-        // Disable add button for mortar if selecting marker in outpostsFIA;
-        private _noRoadblockMortarText = localize "STR_A3A_garrison_error_no_mortar";
-        if (_selectedMarker in outpostsFIA) then {
-            _mortarAddButton ctrlEnable false; 
-            _mortarAddButton ctrlSetTooltip _noRoadblockMortarText;
-            _mortarNumber ctrlSetText "0";
-            _mortarSubButton ctrlEnable false; // pretend like no mortars exist because the roadblock still has unitCrew for the vic
-        };
 
         ["updateGarrisonWepNum"] spawn A3A_GUI_fnc_hqDialog;
 
@@ -712,9 +691,6 @@ switch (_mode) do
             case ("medic"): {
                 "unitMedic";
             };
-            case ("mortar"): {
-                "unitCrew";
-            };
             case ("marksman"): {
                 "unitSniper";
             };
@@ -755,9 +731,6 @@ switch (_mode) do
             };
             case ("medic"): {
                 "unitMedic";
-            };
-            case ("mortar"): {
-                "unitCrew";
             };
             case ("marksman"): {
                 "unitSniper";
