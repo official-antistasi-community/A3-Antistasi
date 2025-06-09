@@ -122,5 +122,16 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
         private _spawnPos = [_markerPos, 0, _squadRad, 3.5] call A3A_fnc_findPatrolPos;
         { _x setVehiclePosition [_spawnPos, [], 3, "NONE"] } forEach units _curGroup;
         [_curGroup, "Patrol_Defend", 0, _squadRad, -1, true, _markerPos, false] call A3A_fnc_patrolLoop;
+
+        // Add UAV if it's a specops roaming group
+        if (_type == "camp" and _faction get "uavsPortable" isNotEqualTo []) then
+        {
+    		private _typeVeh = selectRandom (_faction get "uavsPortable");
+			private _uav = createVehicle [_typeVeh, getPosATL leader _curGroup, [], 0, "FLY"];
+			[_side, _uav] call A3A_fnc_createVehicleCrew;
+			(_garrison get "vehicles") pushBack _uav;
+            _troops append crew _uav;
+            crew _uav joinSilent _curGroup;             // deletes the previous group
+        };
     };
 } forEach _squads;
