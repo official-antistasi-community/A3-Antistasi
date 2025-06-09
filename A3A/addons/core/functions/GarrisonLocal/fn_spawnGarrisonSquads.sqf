@@ -16,13 +16,26 @@ private _markerPos = markerPos _marker;
 private _type = _activeGarrison get "type";
 private _groups = _activeGarrison get "groups";
 private _troops = _activeGarrison get "troops";
-private _maxRad = markerSize _marker # 0 min markerSize _marker # 1;
+private _markerRad = vectorMagnitude markerSize _marker;
+private _squadRad = markerSize _marker # 0 min markerSize _marker # 1;
 
 // Calculate size of building squad, if any
 private _garrSize = floor (2 * sqrt (A3A_garrisonSize get _marker) min (_totalTroops / 2));
-private _buildingPlaces = [_marker, vectorMagnitude markerSize _marker, _garrSize] call A3A_fnc_patrolGetBuildingPlaces;
+private _buildingPlaces = [_marker, _markerRad, _garrSize] call A3A_fnc_patrolGetBuildingPlaces;
 Debug_3("Found %1 building places out of %2 for %3 troops", count _buildingPlaces, _garrSize, _totalTroops);
-_garrSize = _garrSize min count _buildingPlaces;        // might have found fewer
+
+// Add sniper places in radio towers
+private _sniperCount = if (_side != teamPlayer) then {
+    private _buildings = nearestObjects [_markerPos, keys A3A_sniperBuildings, _markerRad] inAreaArray _marker;
+    {
+        private _relPos = A3A_sniperBuildings get typeof _x;
+        _buildingPlaces pushBack [_x modelToWorld _relPos, random 360];
+    } forEach _buildings;
+
+    reverse _buildingPlaces;        // use these first
+    count _buildings;
+};
+_garrSize = _garrSize min count _buildingPlaces;        // might have found fewer places
 
 
 private _squads = [];
@@ -79,6 +92,11 @@ else
     };
     _squads pushBack _garrSquad;
     reverse _squads;
+
+    // Replace garrison squad with snipers for high positions
+    for "_i" from 1 to (_sniperCount min count _garrSquad) do {
+        _garrSquad set [_i, _faction get "unitMarksman"];
+    };
 };
 Debug_1("Squads: %1", _squads);
 
@@ -101,9 +119,8 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
         [_curGroup, _buildingPlaces] call A3A_fnc_patrolGroupGarrison;
     } else {
         Debug_1("Placing squad in marker: %1", _x);
-        private _spawnPos = [_markerPos, 0, _maxRad, 3.5] call A3A_fnc_findPatrolPos;
+        private _spawnPos = [_markerPos, 0, _squadRad, 3.5] call A3A_fnc_findPatrolPos;
         { _x setVehiclePosition [_spawnPos, [], 3, "NONE"] } forEach units _curGroup;
-        private _maxRad = markerSize _marker # 0 min markerSize _marker # 1;
-        [_curGroup, "Patrol_Defend", 0, _maxRad, -1, true, _markerPos, false] call A3A_fnc_patrolLoop;
+        [_curGroup, "Patrol_Defend", 0, _squadRad, -1, true, _markerPos, false] call A3A_fnc_patrolLoop;
     };
 } forEach _squads;

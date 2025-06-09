@@ -160,6 +160,13 @@ A3A_lampTypes = [
 	"Lamps_Base_F", "PowerLines_base_F", "Land_LampDecor_F", "Land_LampHalogen_F", "Land_LampHarbour_F", "Land_LampShabby_F", "Land_NavigLight", "Land_runway_edgelight", "Land_PowerPoleWooden_L_F", "Land_SPE_StreetLamp_Off", "Land_SPE_StreetLamp", "Land_SPE_StreetLamp_pole_off", "Land_SPE_StreetLamp_pole", "Land_SPE_StreetLamp_wall_off", "Land_SPE_StreetLamp_wall", "Land_SPE_Ger_Lamp", "Land_SPE_US_Lamp", "Land_SPE_Onion_Lamp"
 ];
 
+// Sniper positions
+A3A_sniperBuildings = createHashMapFromArray [
+    // Radio towers
+    ["Land_TTowerBig_1_F", [0,2,3.81508]],
+    ["Land_TTowerBig_2_F", [0,1,0.785109]]
+];
+
 ////////////////////////////////////
 //     SOUNDS AND ANIMATIONS     ///
 ////////////////////////////////////
