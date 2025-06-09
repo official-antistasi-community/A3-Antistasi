@@ -22,7 +22,7 @@ _name setMarkerAlpha 0;
 // 3. post-garrison rework: Don't run the build
 // Solution: Do this shit again in convertSavedGarrisons
 
-if (!isNil "A3A_garrisons") then {      // Otherwise it's a load-from-save and garrisons will be loaded later
+if (!isNil "A3A_garrison") then {      // Otherwise it's a load-from-save and garrisons will be loaded later
     if (_type == "camp") then {
         [_name, _side] call A3A_fnc_buildCamp;
     } else {

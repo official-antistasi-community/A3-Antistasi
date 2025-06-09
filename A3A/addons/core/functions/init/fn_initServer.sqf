@@ -156,8 +156,8 @@ else
 
     // HQ placement setup
     private _posHQ = A3A_saveData get "startPos";
-    respawnTeamPlayer setMarkerPos _newPos;
-    "Synd_HQ" setMarkerPos _newPos;
+    respawnTeamPlayer setMarkerPos _posHQ;
+    "Synd_HQ" setMarkerPos _posHQ;
     posHQ = _posHQ; publicVariable "posHQ";     // hmm, remove this at some point
     petros setPos _posHQ;
     [_posHQ] call A3A_fnc_relocateHQObjects;
