@@ -127,7 +127,7 @@ private _heliSpawns = [];
     _heliSpawns pushBack [_pos, direction _x];
 } forEach _helipads;
 
-_planeSpawns = [];
+private _planeSpawns = [];
 {
     private _pos = getPosATL _x;
     _pos set [2, ((_pos select 2) + 0.1) max 0.1];
@@ -165,6 +165,10 @@ if (_vehicleSpawns isNotEqualTo []) then {
     private _truckPlace = _vehicleSpawns deleteAt 0;
     _spawnPlaces pushBack ["vehicleTruck", _truckPlace#0, _truckPlace#1];
 };
+
+// Add runway spawn marker
+private _runwaySpawn = [_marker] call A3A_fnc_getRunwayTakeoffForAirportMarker;
+if (_runwaySpawn isNotEqualTo []) then { _spawnPlaces pushBack ["runway", _runwaySpawn#0, _runwaySpawn#1] }; 
 
 {
     private _placeType = _x#1;
