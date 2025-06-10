@@ -26,8 +26,8 @@ if (_totalReinf <= 0) then {continue};
 private _sourceAirports = airportsX select {(sidesX getVariable [_x,sideUnknown] == _side) and (spawner getVariable _x == 2)};
 _sourceAirports pushBack (["NATO_carrier", "CSAT_carrier"] select (_side == Invaders));
 
-private _typeWeights = createHashMapFromArray [["staticMortar", 1], ["staticAT", 1], ["staticAA", 1], ["staticMG", 1], ["vehicleAA", 1], ["vehicleTruck", 1], ["vehicle", 0.4], ["heli", 0.3], ["plane", 0.3], ["boat", 0.6]];
-// TODO: special case weightings if faction is lacking equipment type (helis specifically?)
+private _typeWeights = createHashMapFromArray [["staticMortar", 1], ["staticAT", 1], ["staticAA", 1], ["staticMG", 1], ["vehicleAA", 1], ["vehicleTruck", 1], ["vehicle", 0.4], ["heli", 0.3], ["plane", 0.3], ["runway", 0.3], ["boat", 0.6]];
+private _noPlaceTypes = _faction get "noPlaceTypes";
 
 private _enemyAirfieldPositions = airportsX select {sidesX getVariable _x != _side} apply { markerPos _x };
 
@@ -56,6 +56,7 @@ private _weights = [];
     // Filter out rebel leftovers
     private _usedPlaces = ((_garrison get "vehicles") + (_garrison get "statics")) select {count _x == 2} apply {_x#1};
     {
+        if (_x in _noPlaceTypes) then { continue };     // Faction has no vehicles to put here
         _y params ["_places", "_max", "_par"];
         if (_par == 0) then { continue };               // probably shouldn't happen?
 
