@@ -29,9 +29,11 @@ private _freeStatics = [];
 
 if (_freeStatics isEqualTo []) then { continue };
 
-private _crewType = _faction get "unitRifle";
+private _crewTypes = if (_side == teamPlayer) then { [_faction get "unitRifle"] }
+    else { [_faction get "unitGrunt", _faction get "unitMilitiaGrunt"] };
+
 private _freeTroops = _garrison get "troops" select { vehicle _x == _x } select { _x call A3A_fnc_canFight };
-_freeTroops = _freeTroops select { _x getVariable "unitType" == _crewType };
+_freeTroops = _freeTroops select { _x getVariable "unitType" in _crewTypes };
 if (_freeTroops isEqualTo []) then { continue };
 
 private _fnc_mountStatic = {

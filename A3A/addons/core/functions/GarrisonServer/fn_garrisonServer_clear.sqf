@@ -61,13 +61,8 @@ if (!danger) then {
     [_hr, _costs] spawn A3A_fnc_resourcesFIA;        // TODO: should turn this thing into unscheduled
 };
 
-private _machineID = A3A_garrisonMachine get _marker;
-if (!isNil "_machineID") then {
-    if (_isPost) exitWith {
-        // Kinda iffy doing this outside distance.sqf
-        spawner setVariable [_marker, 2, true];
-        ["despawn", [_marker, true]] call A3A_fnc_garrisonOp;
-    };
+if (_marker in A3A_garrisonMachine) then {
+    if (_isPost) exitWith { [_marker] call A3A_fnc_garrisonServer_despawn };
     if (_hqMove) exitWith { ["moveHQ", [_marker, _danger]] call A3A_fnc_garrisonOp };
     ["clear", [_marker]] call A3A_fnc_garrisonOp;
 };

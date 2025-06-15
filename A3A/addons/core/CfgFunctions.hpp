@@ -326,11 +326,13 @@ class CfgFunctions
             class garrisonLocal_changeSide {};
             class garrisonLocal_clear {};
             class garrisonLocal_despawn {};
+            class garrisonLocal_despawnCiv {};
             class garrisonLocal_moveHQ {};
             class garrisonLocal_pause {};
             class garrisonLocal_remUnitType {};
             class garrisonLocal_remVehicle {};
             class garrisonLocal_spawn {};
+            class garrisonLocal_spawnCiv {};
             class garrisonLocal_spawnUnit {};
             class garrisonLocal_spawnUnitCount {};
             class garrisonLocal_unpause {};
@@ -338,14 +340,17 @@ class CfgFunctions
             class garrisonLocal_zoneCheck {};
             class garrisonOpLoop {};
             class getGarrisonLimit {};
+            class setupLootCrate {};
             class spawnGarrisonPatrols {};
             class spawnGarrisonSquads {};
             class spawnGarrisonStatics {};
             class spawnGarrisonVehicles {};
+            class spawnPoliceStation {};
         };
 
         class GarrisonServer {
             file = QPATHTOFOLDER(functions\GarrisonServer);
+            class buildCity {};
             class buildEnemyGarrison {};
             class garrisonInfo {};
             class garrisonOp {};
@@ -358,12 +363,13 @@ class CfgFunctions
             class garrisonServer_cleanup {};
             class garrisonServer_clear {};
             class garrisonServer_delete {};
+            class garrisonServer_despawn {};
             class garrisonServer_looted {};
             class garrisonServer_remUnit {};
             class garrisonServer_remUnitType {};
             class garrisonServer_remVehicle {};
             class garrisonServer_sendData {};
-            class garrisonServer_updateStatics {};
+            class garrisonServer_spawn {};
             class garrisonServer_updateVehData {};
             class selectGarrisonVehicleType {};
             class showSiteInfo {};
@@ -385,7 +391,9 @@ class CfgFunctions
             class initACE {};
             class initACEUnconsciousHandler {};
             class initBases {};
+            class initCivSpawnPlaces {};
             class initGarrisons {};
+            class initPoliceStations {};
             class initPreJIP { preInit = 1; };
             class initSpawnPlaces {};
             class initSpawnPlaceStats {};

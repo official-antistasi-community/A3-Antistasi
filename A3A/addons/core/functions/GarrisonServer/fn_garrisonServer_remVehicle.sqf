@@ -1,5 +1,6 @@
 
 // Server-side unscheduled function to remove active vehicles from garrison
+// Only used for rebels at the moment?
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
@@ -21,11 +22,13 @@ private _arrayType = call {
 };
 
 // Search for closest vehicle of correct type
+private _spawnPlaces = A3A_spawnPlacesHM get _marker;
 private _index = -1;
 private _minDist = 1e6;
 {
     if (typeof _vehicle != _x#0) then { continue };     // wrong vehicle type
-    private _dist = _vehicle distance2d _x#1;
+    private _placePos = if (_x#1 isEqualType 0) then { _spawnPlaces#(_x#1)#1 } else { _x#1 };
+    private _dist = _vehicle distance2d _placePos;
     if (_dist < _minDist) then { _index = _forEachIndex; _minDist = _dist };
 } forEach (_garrison get _arrayType);
 
@@ -35,8 +38,11 @@ if (_index < 0) exitWith { Error_2("Vehicle type %1 not found in garrison %2", t
 (_garrison get _arrayType) deleteAt _index;
 _vehicle setVariable ["markerX", nil, true];
 
+// No local updates for civ as they don't need to manage anything atm
+if ("_civ" in _marker) exitWith {};
+
 // Remove from active garrison if spawned
-if (!isNil {A3A_garrisonMachine get _marker}) then {
+if (_marker in A3A_garrisonMachine) then {
     ["remVehicle", [_marker, _vehicle]] call A3A_fnc_garrisonOp;
 };
 

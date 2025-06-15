@@ -13,6 +13,7 @@ private _updateMarkers = outposts + airportsX;			// To sort out the faction name
 if (gameMode >= 3) then
 {
     // Set everything to government control if we have no invaders
+    // Otherwise use the pre-init sides
     {
         if (sidesX getVariable _x == Occupants) then { continue };
         sidesX setVariable [_x, Occupants, true];
@@ -26,5 +27,15 @@ if (gameMode >= 3) then
 {
     [_x] call A3A_fnc_buildEnemyGarrison;
 } forEach (markersX - ["Synd_HQ"]);
+
+
+// Add police stations in cities (done before buildCity because they share vehicle places)
+call A3A_fnc_initPoliceStations;
+
+
+// Add boats & vehicles for cities
+{
+    [_x] call A3A_fnc_buildCity;
+} forEach citiesX;
 
 Info("InitGarrisons completed");

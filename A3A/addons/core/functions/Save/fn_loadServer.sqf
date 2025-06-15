@@ -91,14 +91,27 @@ if (isServer) then {
 		if (_x in A3A_garrison) then { continue };
 		private _side = sidesX getVariable _x;
 		if (_side == teamPlayer) then { A3A_garrison set [_x, +_emptyGarrison]; continue };		// should be impossible?
+		[_x] call A3A_fnc_buildEnemyGarrison;		// cities, or markers added to map
+	} forEach markersX;
 
-		if (_x in A3A_minorSitesHM) then {				// If it's a 3.9.0 game
-			private _type = (A3A_minorSitesHM get _x) # 1;
-			[_x, _side] call ([A3A_fnc_buildRoadblock, A3A_fnc_buildCamp] select (_type == "camp"));
-		} else {
-			[_x] call A3A_fnc_buildEnemyGarrison;		// cities, or markers added to map
-		};
-	} forEach (markersX + controlsX);			// outpostsFIA should be fully handled by convertSavedGarrisons
+	// outpostsFIA should be fully handled by convertSavedGarrisons
+
+	// This needs doing with 3.9.0 saves
+	{
+		if (_x in A3A_garrison) then { continue };
+		private _type = (A3A_minorSitesHM get _x) # 1;
+		private _side = sidesX getVariable _x;
+		[_x, _side] call ([A3A_fnc_buildRoadblock, A3A_fnc_buildCamp] select (_type == "camp"));
+	} forEach controlsX;
+
+	// Add police stations if missing
+	call A3A_fnc_initPoliceStations;
+
+	// Fill out city civ component if missing (should be done after police stations because they share vehicle places)
+	{
+		if ((_x + "_civ") in A3A_garrison) then { continue };
+		[_x] call A3A_fnc_buildCity;
+	} forEach citiesX;
 
 	// Move saved statics & buildings into the correct garrisons
 	if (_garrisonCompat) then { call A3A_fnc_convertSavedStatics };
@@ -106,6 +119,7 @@ if (isServer) then {
 	// **********************************************************************************************
 
 	// Validate garrison vehicles (in case of faction or logic change)
+	// TODO: Need to do this for city civ component too
 	Debug("Starting garrison vehicle validation");
 	{
 		[_x, true, false] call A3A_fnc_garrisonServer_cleanup;

@@ -547,7 +547,8 @@ A3A_validVehicles = createHashMap;
 		+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
 	_valid set ["vehicle", (_valid get "vehicleTruck") + (_x get "vehiclesLightUnarmed") + (_x get "vehiclesTrucks") + (_x get "vehiclesLightArmed")
 		+ (_x get "vehiclesLightAPCs") + (_x get "vehiclesAPCs") + (_x get "vehiclesAA") + (_x get "vehiclesArtillery") + (_x get "vehiclesIFVs")
-		+ (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks")];
+		+ (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks") + (_x get "vehiclesPolice")];
+	// TODO: add militia?
 
 	_valid set ["plane", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA") + (_x get "vehiclesPlanesTransport")];
 	_valid set ["heli", (_x get "vehiclesHelisLight") + (_x get "vehiclesHelisTransport") + (_x get "vehiclesHelisLightAttack") + (_x get "vehiclesHelisAttack")];

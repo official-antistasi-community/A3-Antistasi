@@ -14,6 +14,7 @@ private _markerPos = markerPos _marker;
 private _groups = _activeGarrison get "groups";
 private _vehicles = _activeGarrison get "vehicles";
 private _troops = _activeGarrison get "troops";
+private _places = A3A_spawnPlacesHM getOrDefault [_marker, _activeGarrison get "spawnPlaces"];
 
 private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side == teamPlayer);
 private _groupStatics = _activeGarrison getOrDefault ["staticGroup", grpNull];
@@ -24,7 +25,7 @@ private _groupStatics = _activeGarrison getOrDefault ["staticGroup", grpNull];
     private _fullCrew = false;
     if (_posData isEqualType 0) then
     {
-        private _spawnPlace = (A3A_spawnPlacesHM get _marker) # _posData;
+        private _spawnPlace = _places # _posData;
         _spawnPlace params ["_placeType", "_pos", "_dir", "_building"];
 
         // TODO: block conditions for vehicles? Anything nearby that's not markerX?

@@ -32,7 +32,7 @@ if (_troopsOnly) exitWith { Trace("Completed") };
 // - if not, swap for valid vehicle
 
 private _faction = Faction(_side);
-private _places = A3A_spawnPlacesHM get _marker;
+private _places = A3A_spawnPlacesHM getOrDefault [_marker, _garrison get "spawnPlaces"];
 private _valid = A3A_validVehicles get _side;
 private _isAirport = _marker in airportsX;
 

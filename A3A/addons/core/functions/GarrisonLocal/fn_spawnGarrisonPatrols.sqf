@@ -16,15 +16,16 @@ _storedTroops params ["_troopCount", "_quality"];
 private _groups = _activeGarrison get "groups";
 private _troops = _activeGarrison get "troops";
 
-private _numPatrols = call {
-    // No patrols if there are enemy markers nearby (TODO: should be size-dependent? cities not included?)
-    private _indexes = markersX inAreaArrayIndexes [markerPos _marker, 300, 300] select { sidesX getVariable markersX#_x != _side };
-    if (_indexes isNotEqualTo []) exitWith { 0 };
+// No patrols if there are enemy markers nearby (TODO: should be size-dependent?)
+private _indexes = markersX inAreaArrayIndexes [markerPos _marker, 300, 300] select { sidesX getVariable markersX#_x != _side };
+if (_type != "city" and _indexes isNotEqualTo []) exitWith {
+    Debug_2("Not spawning patrols for %1 due to enemy sites nearby");
+};
 
+private _numPatrols = call {
     private _maxTroops = A3A_garrisonSize getOrDefault [_marker, 0];
     private _patrolProp = call {
-        // City: 3/4 at max, 1/2 at min? Maybe with police station dependency
-        if (_type == "city") exitWith { 1 };     //linearConversion [0, _maxTroops, _troopCount, 0.5, 0.75, true] };
+        if (_type == "city") exitWith { 1 };     // Use all remaining troops (should be even number)
         // Normal garrison: None at half, 1/4 at max?
         linearConversion [_maxTroops/2, _maxTroops, _troopCount, 0, 0.25, true];
     };
@@ -41,9 +42,15 @@ private _highPatrols = round (_numPatrols * (_quality%1));
 private _minRad = 0;
 private _maxRad = markerSize _marker # 0 min markerSize _marker # 1;
 if (_type != "city") then { _minRad = _maxRad; _maxRad = _maxRad + 200 };
+private _station = _activeGarrison getOrDefault ["policeStation", objNull];
 
 for "_i" from 1 to _numPatrols do
 {
+    // Put last patrol close to police station if there is one
+    if (_i == _numPatrols and !isNull _station) then {
+        _markerPos = getPosATL _station;
+        _maxRad = 20;
+    };
     private _spawnPos = [_markerPos, _minRad, _maxRad, 3.5] call A3A_fnc_findPatrolPos;
 
     private _typeGroup = selectRandom ([_lowGroupTypes, _highGroupTypes] select (_i <= _highPatrols));

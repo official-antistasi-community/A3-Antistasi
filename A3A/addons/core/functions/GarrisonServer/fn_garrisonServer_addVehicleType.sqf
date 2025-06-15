@@ -25,7 +25,7 @@ private _garrison = A3A_garrison get _marker;
 (_garrison get _slotType) pushBack [_vehClass, _slotNum];
 
 // Add to active garrison if spawned
-if (!isNil {A3A_garrisonMachine get _marker}) then {
+if (_marker in A3A_garrisonMachine) then {
     ["addVehicleType", [_marker, _vehClass, _slotType, _slotNum]] call A3A_fnc_garrisonOp;
 };
 

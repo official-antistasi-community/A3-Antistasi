@@ -62,6 +62,10 @@ call A3A_fnc_loadNavGrid;
 call A3A_fnc_addNodesNearMarkers;		    // Needs data from navgrid & initZones
 call A3A_fnc_generateRoadblockPairs;        // only needed on server
 
+// Don't need these for displaying the map, no save dependence
+Info("Initializing civ spawn places");
+{ isNil { _x call A3A_fnc_initCivSpawnPlaces } } forEach citiesX;
+
 // JNA preload, does some item type caching, no param dependence
 Info("Server JNA preload started");
 ["Preload"] call jn_fnc_arsenal;
@@ -253,8 +257,21 @@ addMissionEventHandler ["BuildingChanged", {
         _newBuilding setVariable ["building", _oldBuilding];
 
         // Antenna dead/alive status is handled separately
-        if !(_oldBuilding in antennas || _oldBuilding in antennasDead) then {
+        if !(_oldBuilding in antennas || _oldBuilding in antennasDead) exitWith {
             destroyedBuildings pushBack _oldBuilding;
+        };
+
+        // Delete any furniture
+        private _attached = _oldBuilding getVariable "A3A_furniture";
+        if (!isNil "_attached") then {
+            { deleteVehicle _x } forEach _attached;
+        };
+
+        // If it's a police station, mark as destroyed
+        private _city = _oldBuilding getVariable "A3A_policeStation";
+        if (!isNil "_city") then {
+            A3A_garrison get _city set ["policeStation", false];
+            // should remove attached objects too? Probably add a function
         };
     };
 }];

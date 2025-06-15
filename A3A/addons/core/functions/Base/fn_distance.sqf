@@ -77,8 +77,7 @@ private _processEnemyMarker = {
                 exitWith {};
 
                 // DESPAWN this marker
-                spawner setVariable [_marker, DESPAWN, true];
-                ["despawn", [_marker]] call A3A_fnc_garrisonOp;
+                isNil { [_marker] call A3A_fnc_garrisonServer_despawn };
             };
         };
 
@@ -92,8 +91,7 @@ private _processEnemyMarker = {
                 && { !(_marker in forcedSpawn) } }) exitWith {};
 
             // ENABLE this marker
-            spawner setVariable [_marker, ENABLED, true];
-            ["spawn", [_marker, A3A_garrison get _marker]] call A3A_fnc_garrisonOp;
+            isNil { [_marker] call A3A_fnc_garrisonServer_spawn };
 
             // Prevent other routines taking spawn places 
             if !(_marker in citiesX or _marker in controlsX) then {
@@ -119,8 +117,7 @@ private _processFIAMarker = {
 
             // DISABLE marker
             spawner setVariable [_marker, DISABLED, true];
-            // minor sites are always rebel-side before deletion
-            ["pause", [_marker, _marker in A3A_markersToDelete]] call A3A_fnc_garrisonOp;
+            ["pause", [_marker]] call A3A_fnc_garrisonOp;
         };
 
         case DISABLED:
@@ -148,10 +145,8 @@ private _processFIAMarker = {
                     || { _players inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo [] })
                 exitWith {};
 
-
                 // DESPAWN this marker
-                spawner setVariable [_marker, DESPAWN, true];
-                ["despawn", [_marker, _marker in A3A_markersToDelete]] call A3A_fnc_garrisonOp;
+                isNil { [_marker] call A3A_fnc_garrisonServer_despawn };
             };
         };
 
@@ -165,8 +160,7 @@ private _processFIAMarker = {
                 && { !(_marker in forcedSpawn) } }) exitWith {};
 
             // ENABLE this marker
-            spawner setVariable [_marker, ENABLED, true];
-            ["spawn", [_marker, A3A_garrison get _marker]] call A3A_fnc_garrisonOp;
+            isNil { [_marker] call A3A_fnc_garrisonServer_spawn };
         };
     };
 };
@@ -191,7 +185,7 @@ private _processCityCivMarker = {
             if (spawner getVariable _timeKey > time) exitWith {};
 
             // DESPAWN marker
-            spawner setVariable [_spawnKey, DESPAWN, true];
+            isNil { [_spawnKey] call A3A_fnc_garrisonServer_despawn };
         };
 
         case DESPAWN:
@@ -199,9 +193,9 @@ private _processCityCivMarker = {
             // if no player is inside distanceSPWN, leave despawned
             if (_players inAreaArray [_position, distanceSPWN, distanceSPWN] isEqualTo []) exitWith {};
 
-            // ENABLED this marker
-            spawner setVariable [_spawnKey, ENABLED, true];
+            // ENABLE this marker
             spawner setVariable [_timeKey, time + 30, false];
+            isNil { [_spawnKey] call A3A_fnc_garrisonServer_spawn };
 
             if !(_marker in destroyedSites) then
             {
@@ -221,8 +215,9 @@ private _processCityCivMarker = {
 { spawner setVariable [_x + "_civ", 2] } forEach citiesX;
 
 // Pre-spawn rebel HQ
-spawner setVariable ["Synd_HQ", 0, true];
-["spawn", ["Synd_HQ", A3A_garrison get "Synd_HQ"]] call A3A_fnc_garrisonOp;
+isNil { ["Synd_HQ"] call A3A_fnc_garrisonServer_spawn };
+
+// Could wait until there's a player...
 
 /* ------------------------------ endless cycle ----------------------------- */
 

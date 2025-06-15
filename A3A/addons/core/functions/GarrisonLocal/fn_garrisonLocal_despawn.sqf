@@ -44,10 +44,12 @@ if !(_marker == "Synd_HQ") then {
 if ("flag" in _garrison) then { deleteVehicle (_garrison get "flag") };
 
 // If box was stolen then flag that to server. Else delete it
+// Event handlers still required in case of steal & save
 if ("ammoBox" in _garrison) then {
+    // Handle the cases where it wasn't looted directly
     private _ammoBox = _garrison get "ammoBox";
-    if (!alive _ammoBox or (_garrison get "side" == teamPlayer) or !(_ammoBox inArea _marker)) then {
-        _marker remoteExecCall ["A3A_fnc_garrisonServer_looted", 2];
+    if (!alive _ammoBox or (_garrison get "side" == teamPlayer) or !(_ammoBox inArea _marker)) exitWith {
+        [_marker, "crate"] remoteExecCall ["A3A_fnc_garrisonServer_looted", 2];
         continue;
     };
     deleteVehicle _ammoBox;

@@ -1,6 +1,7 @@
 // Server-side function to add currently-existing vehicles to garrison data
 // Will remove from any current garrison
 // Autodetects new garrison if _marker is empty string 
+// Only used for rebel vehicles atm, so don't need pool change?
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
@@ -37,9 +38,8 @@ if (_arrayType == "buildings" and _marker == "Synd_HQ") then {
 _vehicle setVariable ["markerX", _marker, true];
 
 // Add to active garrison if spawned
-private _machineID = A3A_garrisonMachine get _marker;
-if (!isNil "_machineID") then {
-    _vehicle setOwner _machineID;           // TODO: potential driver issues?
+if (_marker in A3A_garrisonMachine) then {
+    _vehicle setOwner (A3A_garrisonMachine get _marker);           // TODO: potential driver issues?
     ["addVehicle", [_marker, _vehicle]] call A3A_fnc_garrisonOp;
 } else {
     deleteVehicle _vehicle;

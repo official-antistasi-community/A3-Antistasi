@@ -11,8 +11,15 @@ Trace_1("Called with params %1", _this);
 private _garrison = A3A_garrison get _marker;
 _garrison set ["troops", [[0,0], []] select (_newSide == teamPlayer)];
 
-private _machineID = A3A_garrisonMachine get _marker;
-if (!isNil "_machineID") then {
+// Refresh loot & intel cooldowns if converted to enemy
+if (_newSide != teamPlayer) then {
+    if (_marker in resourcesX or {_marker in factories}) exitWith {};
+    private _lootCD = 120*16 / (A3A_garrisonSize get _marker);
+    _garrison set ["lootCD", _lootCD];
+    _garrison set ["intelCD", _lootCD];
+};
+
+if (_marker in A3A_garrisonMachine) then {
     ["changeSide", [_marker, _newSide]] call A3A_fnc_garrisonOp;
 };
 

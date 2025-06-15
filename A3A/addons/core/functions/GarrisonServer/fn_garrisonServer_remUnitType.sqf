@@ -36,7 +36,7 @@ _troops deleteAt (_troops find _unitType);
 if (sidesX getVariable _marker == teamPlayer) then { [_marker] call A3A_fnc_mrkUpdate };
 
 // Delete real unit if garrison is spawned
-if (!isNil {A3A_garrisonMachine get _marker}) then {
+if (_marker in A3A_garrisonMachine) then {
     ["remUnitType", [_marker, _unitType]] call A3A_fnc_garrisonOp;
 };
 

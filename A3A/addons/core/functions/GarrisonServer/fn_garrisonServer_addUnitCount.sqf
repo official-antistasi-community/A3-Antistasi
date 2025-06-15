@@ -20,7 +20,8 @@ _troops set [1, _newQuality];
 
 // Add real unit if garrison is spawned
 // Shouldn't really happen because we don't use this if the garrison is spawned?
-if (!isNil {A3A_garrisonMachine get _marker}) then {
+
+if (_marker in A3A_garrisonMachine) then {
     ["spawnUnitCount", [_marker, _unitCount, _quality]] call A3A_fnc_garrisonOp;
 };
 

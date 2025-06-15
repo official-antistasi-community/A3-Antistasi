@@ -1,9 +1,8 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_newGarrison"];
+params ["_marker", "_newGarrison", "_side"];
 private _markerPos = markerPos _marker;
-private _side = sidesX getVariable _marker;         // Slightly dangerous
 private _faction = Faction(_side);
 
 Info_2("Spawning %2 garrison at marker %1", _marker, _side);
@@ -77,35 +76,16 @@ if (_garrisonType in ["resource", "factory"]) then {
 
 
 if (_side != teamPlayer and _garrisonType in ["airport", "outpost", "seaport"]) then {
-    // Spawn intel
-    // TODO: should be persistently placed
-    if (random 100 < (40 + tierWar * 3)) then
-    {
+    // Spawn intel if it's off cooldown
+    if (_garrison getOrDefault ["lootCD", 0] <= 0) then {
         private _large = random 100 < (30 + tierWar * 2);
         [_marker, _large] spawn A3A_fnc_placeIntel;
     };
 
     // Spawn loot crate if it's off cooldown
-    if (_garrison getOrDefault ["lootCD", 0] != 0) exitWith {};
+    if (_garrison getOrDefault ["lootCD", 0] > 0) exitWith {};
 	private _ammoBox = [_faction get "ammobox", _markerPos, 15, 5, true] call A3A_fnc_safeVehicleSpawn;
-	[_ammoBox] call A3A_Logistics_fnc_addLoadAction;
-    _garrison set ["ammoBox", _ammoBox];
-	[_ammoBox] call A3A_fnc_fillLootCrate;
-
-	if (_garrisonType == "seaport") then {
-        {
-            _ammoBox addItemCargoGlobal [_x, round random [2,6,8]];
-        } forEach (A3A_faction_reb get "diveGear");
-    };
-    if (_garrisonType == "airport") then {
-		{
-			if (getText(configFile >> "CfgVehicles" >> _x >> "vehicleClass") isEqualTo "Backpacks") then {
-				_ammoBox addBackpackCargoGlobal [_x, round random [5,15,15]];
-			} else {
-				_ammoBox addItemCargoGlobal [_x, round random [5,15,15]];
-			};
-		} forEach (A3A_faction_reb get "flyGear");
-    };
+    [_ammoBox, true, _garrison, _marker] call A3A_fnc_setupLootCrate;
 };
 
 
@@ -131,6 +111,11 @@ private _storedTroops = +(_newGarrison get "troops");
 
 // Spawn vehicles
 [_garrison, _marker, _side, _storedTroops, _newGarrison get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
+
+// If there's a police station, spawn items & troops
+if (_newGarrison getOrDefault ["policeStation", false] isEqualType []) then {
+    [_garrison, _marker, _newGarrison, _storedTroops] call A3A_fnc_spawnPoliceStation;
+};
 
 // Spawn 2-man patrols
 [_garrison, _marker, _side, _storedTroops] call A3A_fnc_spawnGarrisonPatrols;

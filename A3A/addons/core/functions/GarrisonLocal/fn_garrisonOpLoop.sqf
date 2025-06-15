@@ -5,6 +5,7 @@
 FIX_LINE_NUMBERS()
 
 private _updateOps = ["updateStatics", "zoneCheck"];
+private _spawnOps = ["spawn", "spawnCiv"];
 
 while {true} do
 {
@@ -18,7 +19,7 @@ while {true} do
         continue;
     };
 
-    if (_opType != "spawn" and !(_params#0 in A3A_activeGarrison)) then {
+    if (!(_opType in _spawnOps) and !(_params#0 in A3A_activeGarrison)) then {
         Error_2("Called garrison op %1 while %2 was not spawned", _opType, _params#0); 
         continue;
     };

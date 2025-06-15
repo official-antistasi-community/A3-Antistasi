@@ -19,6 +19,7 @@ private _troops = _activeGarrison get "troops";
 private _markerRad = vectorMagnitude markerSize _marker;
 private _squadRad = markerSize _marker # 0 min markerSize _marker # 1;
 
+
 // Calculate size of building squad, if any
 private _garrSize = floor (2 * sqrt (A3A_garrisonSize get _marker) min (_totalTroops / 2));
 private _buildingPlaces = [_marker, _markerRad, _garrSize] call A3A_fnc_patrolGetBuildingPlaces;

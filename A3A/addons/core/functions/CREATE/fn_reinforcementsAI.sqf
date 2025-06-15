@@ -41,15 +41,20 @@ if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balanceP
 	[] spawn A3A_fnc_AAFroadPatrol;
 };
 
-// Reduce loot crate cooldown if garrison is reasonably full
+// Reduce loot crate & intel cooldowns if garrison is reasonably full
 {
-	call {
+	private _cdtype = _x;
+	{
 		private _garrison = A3A_garrison get _x;
-		private _lootCD = _garrison getOrDefault ["lootCD", 0];
-		if (_lootCD == 0) exitWith {};							// don't update unless changed
+		if !(_cdtype in _garrison) then { continue };
+
 		private _realSize = _garrison get "troops" select 0;
-		private _maxSize = A3A_garrisonSize get _x;			// use non-frontline size
-		if (_realSize / _maxSize < 0.75) exitWith {};
-		garrison setVariable [_x + "_lootCD", 0 max (_lootCD - 10), true];
-	};
-} forEach (airportsX + outposts + seaports);
+		private _maxSize = A3A_garrisonSize get _x;
+		if (_realSize / _maxSize < 0.7) then { continue };
+
+		private _newVal = (_garrison get _cdtype) - 10;
+		if (_newVal <= 0) then { _garrison deleteAt _cdtype; continue };
+		_garrison set [_cdtype, _newVal];
+
+	} forEach markersX;
+} forEach ["lootCD", "intelCD"];
