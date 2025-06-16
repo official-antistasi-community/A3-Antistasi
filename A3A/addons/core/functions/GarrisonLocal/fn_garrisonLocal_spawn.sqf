@@ -8,7 +8,7 @@ private _faction = Faction(_side);
 Info_2("Spawning %2 garrison at marker %1", _marker, _side);
 Debug_1("Garrison data: %1", _newGarrison);
 
-private _garrison = createHashMapFromArray [["troops", []], ["statics", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []]];
+private _garrison = createHashMapFromArray [["troops", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []]];
 _garrison set ["side", _side];
 A3A_activeGarrison set [_marker, _garrison];
 
@@ -106,10 +106,7 @@ if (_garrisonType == "camp") then {
 
 private _storedTroops = +(_newGarrison get "troops");
 
-// Spawn statics & crew
-[_garrison, _marker, _side, _storedTroops, _newGarrison get "statics"] call A3A_fnc_spawnGarrisonStatics;
-
-// Spawn vehicles
+// Spawn vehicles (including statics)
 [_garrison, _marker, _side, _storedTroops, _newGarrison get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
 
 // If there's a police station, spawn items & troops

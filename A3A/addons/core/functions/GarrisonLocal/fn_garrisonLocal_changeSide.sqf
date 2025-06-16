@@ -22,7 +22,7 @@ private _troops = _garrison get "troops";
 // If anyone is in a vehicle (static weapon, later?), get them out
 // Might have units occupying statics that aren't in this garrison, so we do this the daft way for now
 {
-    if (vehicle _x != _x) then {            // isKindOf "StaticWeapon"
+    if (vehicle _x != _x) then {
         group _x leaveVehicle vehicle _x;
         moveOut _x;
     };
@@ -53,7 +53,7 @@ _garrison set ["side", _newSide];
 {
     if (!alive _x) then { continue };
     [_x, _newSide, true] call A3A_fnc_vehKilledOrCaptured;      // should be local
-} forEach ((_garrison get "statics") + (_garrison get "vehicles"));
+} forEach (_garrison get "vehicles");
 
 
 // Switch flag actions & texture

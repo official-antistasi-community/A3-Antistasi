@@ -13,7 +13,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_vehClass", "_slotType", "_slotNum"];
+params ["_marker", "_vehClass", "_slotNum"];
 
 Trace_1("Called with params %1", _this);
 
@@ -22,11 +22,11 @@ if (sidesX getVariable _marker == teamPlayer) exitWith {
 };
 
 private _garrison = A3A_garrison get _marker;
-(_garrison get _slotType) pushBack [_vehClass, _slotNum];
+(_garrison get "vehicles") pushBack [_vehClass, _slotNum];
 
 // Add to active garrison if spawned
 if (_marker in A3A_garrisonMachine) then {
-    ["addVehicleType", [_marker, _vehClass, _slotType, _slotNum]] call A3A_fnc_garrisonOp;
+    ["addVehicleType", [_marker, _vehClass, _slotNum]] call A3A_fnc_garrisonOp;
 };
 
 Trace("Completed");

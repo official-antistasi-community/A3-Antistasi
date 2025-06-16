@@ -19,8 +19,6 @@ A3A_activeGarrison deleteAt _marker;
 { deleteVehicle _x } forEach (_garrison get "civs");
 { deleteGroup _x } forEach (_garrison get "civGroups");
 
-{ deleteVehicle _x } forEach (_garrison get "statics");
-
 {
     // Dump all attached logistics objects around the vehicle
     // garrisonable ones will join & despawn through the detached handler

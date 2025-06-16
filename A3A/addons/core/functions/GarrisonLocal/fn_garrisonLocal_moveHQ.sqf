@@ -31,11 +31,10 @@ if (!_danger) then {
 {
     if (!alive _x) then { continue };
     _x setVariable ["markerX", nil, true];
-} forEach ((_garrison get "statics") + (_garrison get "vehicles"));
+} forEach (_garrison get "vehicles");
 
 // Clear the units
 _garrison set ["troops", []];
 _garrison set ["groups", []];
-_garrison set ["statics", []];
 _garrison set ["vehicles", []];
 _garrison set ["buildings", []];

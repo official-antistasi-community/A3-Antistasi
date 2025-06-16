@@ -30,12 +30,10 @@ private _garrison = createHashMapFromArray [ ["buildings", []] ];
 private _troopCount = (0.7 + random 0.3) * (A3A_garrisonSize get _marker);
 _garrison set ["troops", [ceil _troopCount, _quality]];
 
-// Note: spawnPlaceStats has detailed place names (eg staticAA, vehicleTruck), garrison puts everything into vehicles or statics
-private _statics = [];
+// Note: spawnPlaceStats has detailed place names (eg staticAA, vehicleTruck), garrison puts everything into vehicles
 private _vehicles = [];
 {
     private _placeType = _x;
-    private _slotType = [_vehicles, _statics] select ("static" in _placeType);
     _y params ["_indexes", "_max", "_par"];
 
     private _remIndexes = +_indexes;
@@ -46,13 +44,11 @@ private _vehicles = [];
         // Use places in order for vehicles, otherwise randomly
         private _placeIndex = if (_placeType == "vehicle") then { _remIndexes deleteAt 0 }
             else { _remIndexes deleteAt floor random count _remIndexes };
-        _slotType pushBack [_vehType, _placeIndex];
+        _vehicles pushBack [_vehType, _placeIndex];
     };
 } forEach _spawnPlaceStats;
 
-_garrison set ["statics", _statics];
 _garrison set ["vehicles", _vehicles];
-
 A3A_garrison set [_marker, _garrison];
 
 _garrison;

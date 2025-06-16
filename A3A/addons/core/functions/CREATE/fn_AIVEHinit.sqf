@@ -109,15 +109,12 @@ else
 				} forEach crew _object1;
 			}];
 		};
-	}
-	else
-	{
-		if (_veh isKindOf "StaticWeapon") then
-		{
-			//_veh setCenterOfMass [(getCenterOfMass _veh) vectorAdd [0, 0, -1], 0];
-			[_veh, "static"] remoteExec ["A3A_fnc_flagAction", [teamPlayer,civilian], _veh];
-		};
 	};
+
+};
+
+if (_veh isKindOf "Land" and _veh emptyPositions "gunner" > 0) then {
+	[_veh, "static"] remoteExec ["A3A_fnc_flagAction", [teamPlayer,civilian], _veh];
 };
 
 

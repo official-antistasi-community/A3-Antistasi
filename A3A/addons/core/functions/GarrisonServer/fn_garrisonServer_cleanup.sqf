@@ -36,25 +36,22 @@ private _places = A3A_spawnPlacesHM getOrDefault [_marker, _garrison get "spawnP
 private _valid = A3A_validVehicles get _side;
 private _isAirport = _marker in airportsX;
 
+private _vehicles = _garrison get "vehicles";
 {
-    private _vehicles = _garrison get _x;
-    {
-        _x params ["_vehType", "_slotNum"];
+    _x params ["_vehType", "_slotNum"];
 
-        if !(_slotNum isEqualType 0) then {
-            _vehicles deleteAt _forEachIndex;
-            private _cost = A3A_vehicleResourceCosts getOrDefault [_vehType, 0];
-            [_cost, _side, "defence"] call A3A_fnc_addEnemyResources;
-            continue;
-        };
+    if !(_slotNum isEqualType 0) then {
+        _vehicles deleteAt _forEachIndex;
+        private _cost = A3A_vehicleResourceCosts getOrDefault [_vehType, 0];
+        [_cost, _side, "defence"] call A3A_fnc_addEnemyResources;
+        continue;
+    };
 
-        private _slotType = _places # _slotNum # 0;
-        if !(_vehType in (_valid get _slotType)) then {
-            // Arguably should refund this case if it's not a save?
-            _x set [0, [_faction, _slotType, _isAirport] call A3A_fnc_selectGarrisonVehicleType];
-        };
-
-    } forEachReversed _vehicles;
-} forEach ["statics", "vehicles"];
+    private _slotType = _places # _slotNum # 0;
+    if !(_vehType in (_valid get _slotType)) then {
+        // Arguably should refund this case if it's not a save?
+        _x set [0, [_faction, _slotType, _isAirport] call A3A_fnc_selectGarrisonVehicleType];
+    };
+} forEachReversed _vehicles;
 
 Trace("Completed");

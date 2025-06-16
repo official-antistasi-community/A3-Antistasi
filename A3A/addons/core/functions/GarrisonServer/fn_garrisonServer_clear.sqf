@@ -39,10 +39,9 @@ if (_isPost) then {
     // because we're clearing it out entirely
     {
         _costs = _costs + 0.5 * (_x call A3A_fnc_vehiclePrice);
-    } forEach ((_garrison get "vehicles") + (_garrison get "statics"));
+    } forEach (_garrison get "vehicles");
 
     _garrison set ["buildings", []];
-    _garrison set ["statics", []];
     _garrison set ["vehicles", []];
 
     [_marker] call A3A_fnc_deleteRebelControl;          // adds to A3A_markersToDelete, removes from outpostsFIA
@@ -52,7 +51,6 @@ if (_hqMove) then {
     A3A_buildingsToSave append (_garrison get "spawnedBuildings");
     _garrison set ["spawnedBuildings", []];
     _garrison set ["buildings", []];
-    _garrison set ["statics", []];
     _garrison set ["vehicles", []];
 };
 

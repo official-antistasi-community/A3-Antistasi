@@ -15,7 +15,6 @@ if (isNil "_marker") exitWith { Error_1("Vehicle %1 not in a garrison", _vehicle
 private _garrison = A3A_garrison get _marker;
 
 private _arrayType = call {
-    if (_vehicle isKindOf "StaticWeapon") exitWith {"statics"};
     if (fullCrew [_vehicle, "", true] isNotEqualTo []) exitWith {"vehicles"};
     if (typeof _vehicle in A3A_utilityItemHM) exitWith {"vehicles"};
     "buildings";

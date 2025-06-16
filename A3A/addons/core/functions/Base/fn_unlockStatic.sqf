@@ -15,4 +15,4 @@ _target setVariable ["lockedForAI", nil, true];
 private _marker = _target getVariable ["markerX", ""];      // should always be valid though? hmm
 if (_marker == "") exitWith {};
 
-[_marker] remoteExecCall ["A3A_fnc_garrisonServer_updateStatics", 2];
+["updateStatics", [_marker]] remoteExecCall ["A3A_fnc_garrisonOp", 2];

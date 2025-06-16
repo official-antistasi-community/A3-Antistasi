@@ -30,7 +30,7 @@ private _usedVehicles = [];
         Error_3("Vehicle type %1 not found in %2, reason: %3", _x#0, _marker, _reason);
         continue;
     };
-    _x set [4, _veh call HR_GRG_getVehState];
+    if !(_veh isKindOf "StaticWeapon") then { _x set [4, _veh call HR_GRG_getVehState] };
     _usedVehicles pushBack _veh;
 } forEach (_garrison get "vehicles");
 

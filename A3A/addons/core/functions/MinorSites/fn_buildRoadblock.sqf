@@ -32,15 +32,13 @@ if (random 15 <= tierWar + 3) then
     } forEach [_bunker1, _bunker2];
 
     private _type = selectRandom (_faction get "staticMGs");
-    _garrison set ["statics", [[_type, selectRandom [0,1]]]];
-    _garrison set ["vehicles", []];
+    _garrison set ["vehicles", [[_type, selectRandom [0,1]]]];
 }
 else
 {
-    _spawnPlaces pushBack ["vehicle", _center, _roadDir + 90];
+    _spawnPlaces pushBack ["vehicleRB", _center, _roadDir + 90];
     private _type = selectRandom (_faction get "vehiclesMilitiaLightArmed");
     _garrison set ["vehicles", [[_type, 0]]];
-    _garrison set ["statics", []];
 };
 
 // Flag? hmm...

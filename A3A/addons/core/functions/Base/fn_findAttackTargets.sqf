@@ -49,7 +49,7 @@ private _maxThreatDist = distanceForAirAttack + 1000;
     private _garrison = A3A_garrison get _x;
     private _threat = 10 * count (_garrison get "troops");
     if (_markerSide == teamPlayer) then {
-        _threat = _threat + 50 * (count (_garrison get "statics") + count (_garrison get "vehicles"));
+        _threat = _threat + 50 * count (_garrison get "vehicles");          // TODO: do this properly
     } else {
         // based on typical static count
         _threat = _threat + call {

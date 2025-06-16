@@ -54,7 +54,7 @@ private _weights = [];
     };
 
     // Filter out rebel leftovers
-    private _usedPlaces = ((_garrison get "vehicles") + (_garrison get "statics")) select {count _x == 2} apply {_x#1};
+    private _usedPlaces = (_garrison get "vehicles") select {count _x == 2} apply {_x#1};
     {
         if (_x in _noPlaceTypes) then { continue };     // Faction has no vehicles to put here
         _y params ["_places", "_max", "_par"];

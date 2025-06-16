@@ -7,7 +7,8 @@ params ["_marker"];
 private _garrison = A3A_activeGarrison get _marker;
 private _side = _garrison get "side";
 private _faction = Faction(_side);
-private _statics = _garrison get "statics";
+private _crewVar = ["A3A_crewed", "A3A_rebCrewed"] select (_side == teamPlayer);
+private _statics = _garrison get "vehicles";
 
 private _nearEnemies = call {
     private _enemySides = [teamPlayer, Occupants, Invaders] - [_side];
@@ -18,10 +19,11 @@ private _nearEnemies = call {
 
 private _freeStatics = [];
 {
-    if (!alive _x) then { _statics deleteAt _forEachIndex; continue };
     if (!isNull gunner _x) then { continue };
-    if (_x getVariable ["lockedForAI", false]) then { continue };
-    if (_x isKindOf "staticMortar") then { continue };              // yeah not dealing with that
+    if (!alive _x) then { _statics deleteAt _forEachIndex; continue };
+    if (_x isKindOf "StaticMortar") then { continue };                  // Not dealing with these yet
+    if (isNil {_x getVariable _crewVar}) then { continue };             // var set when vehicle is added to garrison
+    if (_side == teamPlayer and {_x getVariable ["lockedForAI", false]}) then { continue };
 
     if (_nearEnemies inAreaArray [getPosATL _x, 50, 50] isEqualTo []) then { _freeStatics pushBack _x };
 

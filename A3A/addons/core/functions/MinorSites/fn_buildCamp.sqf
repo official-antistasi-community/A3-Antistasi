@@ -1,6 +1,6 @@
 params ["_marker", "_side"];
 
-private _garrison = createHashMapFromArray [ ["statics", []], ["buildings", []], ["vehicles", []] ];
+private _garrison = createHashMapFromArray [ ["buildings", []], ["vehicles", []] ];
 
 // trivial for now. Could add some props later, maybe a static
 

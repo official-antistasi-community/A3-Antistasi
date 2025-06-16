@@ -86,7 +86,7 @@ if (isServer) then {
 
 	// Fill out any garrison that hasn't already been filled
 	// This might happen with map changes so we do it here rather than convertSavedGarrisons
-	private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["statics", []], ["vehicles", []], ["buildings", []] ];
+	private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["vehicles", []], ["buildings", []] ];
 	{
 		if (_x in A3A_garrison) then { continue };
 		private _side = sidesX getVariable _x;

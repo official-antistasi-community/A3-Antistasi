@@ -336,7 +336,6 @@ class CfgFunctions
             class setupLootCrate {};
             class spawnGarrisonPatrols {};
             class spawnGarrisonSquads {};
-            class spawnGarrisonStatics {};
             class spawnGarrisonVehicles {};
             class spawnPoliceStation {};
         };

@@ -44,8 +44,8 @@ private _textX = format [
     , count (_units#8)
     , count (_units#9)
     , count (_units#10)
-    , count (_garrison get "statics")
-    , count (_garrison get "vehicles")
+    , count (_garrison get "vehicles" select {_x isKindOf "StaticWeapon"})
+    , count (_garrison get "vehicles" select {!(_x isKindOf "staticWeapon")})
     , if (_limit != -1) then {format ["/%1", _limit]} else {""}
 ];
 

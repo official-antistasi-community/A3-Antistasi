@@ -24,7 +24,6 @@ if (_marker == "") exitWith {};
 
 private _garrison = A3A_garrison get _marker;
 private _arrayType = call {
-    if (_vehicle isKindOf "StaticWeapon") exitWith {"statics"};
     if (fullCrew [_vehicle, "", true] isNotEqualTo []) exitWith {"vehicles"};
     if (typeof _vehicle in A3A_utilityItemHM) exitWith {"vehicles"};
     "buildings";
@@ -36,6 +35,8 @@ if (_arrayType == "buildings" and _marker == "Synd_HQ") then {
 
 (_garrison get _arrayType) pushBack [typeOf _vehicle, getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle];
 _vehicle setVariable ["markerX", _marker, true];
+if !(_vehicle isKindOf "StaticWeapon") then { _vehicle setVariable ["lockedForAI", true, true] };
+
 
 // Add to active garrison if spawned
 if (_marker in A3A_garrisonMachine) then {

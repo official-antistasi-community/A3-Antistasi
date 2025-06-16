@@ -171,10 +171,11 @@ switch _typeX do
     };
     case "static":
     {
-        private _cond = "(isPlayer _this) and (_target getVariable ['ownerSide', teamPlayer] == teamPlayer) and (isNull attachedTo _target) and ";
+        private _cond = "(isPlayer _this) and (_target getVariable ['ownerSide', teamPlayer] == teamPlayer) and (!isNil {_target getVariable 'markerX'}) and ";
         _flag addAction [localize "STR_A3A_fn_base_flagaction_static_allow", A3A_fnc_unlockStatic, nil, 1, false, true, "", _cond+"!isNil {_target getVariable 'lockedForAI'}", 4];
         _flag addAction [localize "STR_A3A_fn_base_flagaction_static_prevent", A3A_fnc_lockStatic, nil, 1, false, true, "", _cond+"isNil {_target getVariable 'lockedForAI'}", 4];
     //    _flag addAction ["Kick AI off this weapon", A3A_fnc_lockStatic, nil, 1, true, false, "", _cond+"isNil {_target getVariable 'lockedForAI'} and !(isNull gunner _target) and !(isPlayer gunner _target)}", 4];
+        if !(_target isKindOf "StaticWeapon") exitWith {};
         _flag addAction [localize "STR_A3A_fn_base_flagaction_asset_move", A3A_fnc_carryItem, nil, 1.5, false, true, "",  _cond+"(count crew _target == 0) and (isNull objectParent _this) and !(call A3A_fnc_isCarrying)", 4];
     };
 };

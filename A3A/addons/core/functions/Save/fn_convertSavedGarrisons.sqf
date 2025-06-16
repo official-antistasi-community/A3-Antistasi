@@ -32,7 +32,7 @@ private _validMarkers = (markersX + outpostsFIA) createHashMapFromArray [];
 	private _troops = _x select 1;
 
 	if (_side == teamPlayer) then {
-		private _garrison = createHashMapFromArray [ ["vehicles", []], ["statics", []], ["buildings", []] ];
+		private _garrison = createHashMapFromArray [ ["vehicles", []], ["buildings", []] ];
 		private _troops = _troops apply {
 			if (!isNil "_x" and {_x in _rebLoadouts}) then { _x } else { selectRandom _rebReplacements };
 		};

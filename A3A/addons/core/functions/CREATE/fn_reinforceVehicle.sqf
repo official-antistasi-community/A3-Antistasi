@@ -32,8 +32,7 @@ if (sidesX getVariable _marker != _side) exitWith {
 // Determine free places. Can't re-use reinf code due to delay
 private _garrison = A3A_garrison get _marker;
 private _faction = [A3A_faction_occ, A3A_faction_inv] select (_side == Invaders);
-private _garrisonType = ["vehicles", "statics"] select ("static" in _slotType);
-private _usedPlaces = (_garrison get _garrisonType) apply {_x#1};
+private _usedPlaces = (_garrison get "vehicles") select {count _x == 2} apply {_x#1};
 private _possiblePlaces = A3A_spawnPlaceStats get _marker get _slotType select 0;
 private _places = _possiblePlaces - _usedPlaces;
 if (_places isEqualTo []) exitWith {
@@ -41,7 +40,7 @@ if (_places isEqualTo []) exitWith {
 };
 
 private _placeNum = if (_slotType == "vehicle") then { _places # 0 } else { selectRandom _places };
-[_marker, _vehClass, _garrisonType, _placeNum] call A3A_fnc_garrisonServer_addVehicleType;
+[_marker, _vehClass, _placeNum] call A3A_fnc_garrisonServer_addVehicleType;
 Info_2("Reinforcing %1 with vehicle %2", _marker, _vehClass);
 
 [-(A3A_vehicleResourceCosts get _vehClass), _side, "defence"] call A3A_fnc_addEnemyResources;

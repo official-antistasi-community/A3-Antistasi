@@ -30,7 +30,7 @@ private _posHQ = if (count _varValue > 3) then {_varValue select 0} else {_varVa
  	};
 
 	private _arrayType = call {
-		if (_typeVeh isKindOf "StaticWeapon") exitWith {"statics"};
+		if (_typeVeh isKindOf "StaticWeapon") exitWith {"vehicles"};
 		if (getNumber (configFile >> "CfgVehicles" >> _typeVeh >> "hasDriver") == 1) exitWith {"vehicles"};
 		if (_typeVeh in A3A_utilityItemHM) exitWith {"vehicles"};
 		"buildings";

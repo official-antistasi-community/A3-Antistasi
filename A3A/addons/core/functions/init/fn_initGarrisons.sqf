@@ -5,7 +5,7 @@ Info("InitGarrisons started");
 
 // This function is now only called for a new game
 
-private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["statics", []], ["vehicles", []], ["buildings", []] ];
+private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["vehicles", []], ["buildings", []] ];
 A3A_garrison set ["Synd_HQ", _emptyGarrison];
 
 
