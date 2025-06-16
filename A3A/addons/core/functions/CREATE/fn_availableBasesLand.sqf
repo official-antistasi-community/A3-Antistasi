@@ -32,7 +32,7 @@ private _weights = [];
     _x params ["_marker", "_navDist"];
     if (sidesX getVariable [_marker, sideUnknown] != _side) then {continue};
     if (dateToNumber date < server getVariable [_marker, 0]) then {continue};       // addTimeForIdle
-    if (A3A_spawnPlaceStats get _marker get "vehicle" select 0 isEqualTo []) then {continue};       // no vehicle spawn places
+    if !("vehicle" in (A3A_spawnPlaceStats get _marker)) then {continue};           // no vehicle spawn places
     if (A3A_garrison get _marker get "troops" select 0 < 16) then {continue};
     if (_rebelSpawners inAreaArray [markerPos _marker, 700, 700] isNotEqualTo []) then {continue};
 

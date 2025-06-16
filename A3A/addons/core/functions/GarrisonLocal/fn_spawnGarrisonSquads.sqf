@@ -70,7 +70,8 @@ else
 {
     // Randomly select squads of appropriate quality
     _storedTroops params ["_troopCount", "_quality"];
-    private _squadTypes = [[_faction get "groupPoliceSquad"], _faction get "groupsMilitiaSquads", _faction get "groupsSquads", _faction get "groupSpecOpsRandom"];
+    private _squadTypes = [[_faction get "groupPoliceSquad"], (_faction get "groupsMilitiaSquads") + (_faction get "groupsMilitiaMedium"),
+        (_faction get "groupsSquads") + (_faction get "groupsMedium"), _faction get "groupSpecOpsRandom"];
     private _numTotal = 0;
     private _numHigh = 0;
     private _highSquad = 0.5 < _quality%1;

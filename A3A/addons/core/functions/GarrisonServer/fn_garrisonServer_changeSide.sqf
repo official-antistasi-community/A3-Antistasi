@@ -17,6 +17,9 @@ if (_newSide != teamPlayer) then {
     private _lootCD = 120*16 / (A3A_garrisonSize get _marker);
     _garrison set ["lootCD", _lootCD];
     _garrison set ["intelCD", _lootCD];
+} else {
+    _garrison deleteAt "lootCD";
+    _garrison deleteAt "intelCD";
 };
 
 if (_marker in A3A_garrisonMachine) then {

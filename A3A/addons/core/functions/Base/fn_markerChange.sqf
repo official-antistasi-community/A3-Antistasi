@@ -127,7 +127,7 @@ if (_markerX in airportsX) then
 	};
 	["TaskSucceeded", ["", localize "STR_A3A_fn_base_markerChange_yesAirbase"]] remoteExec ["BIS_fnc_showNotification",_winner];
 	["TaskFailed", ["", localize "STR_A3A_fn_base_markerChange_noAirbase"]] remoteExec ["BIS_fnc_showNotification",_loser];
-	["TaskUpdated",["",format [localize "STR_A3A_fn_base_markerChange_otherAirbase",_textX]]] remoteExec ["BIS_fnc_showNotification",_other];
+	["TaskUpdated",["",format [localize "STR_A3A_fn_base_markerChange_otherAirbase",_loserName]]] remoteExec ["BIS_fnc_showNotification",_other];
 	killZones setVariable [_markerX,[],true];
 };
 if (_markerX in outposts) then
@@ -165,7 +165,7 @@ if (_markerX in outposts) then
 	};
 	["TaskSucceeded", ["", localize "STR_A3A_fn_base_markerChange_yesOutpost"]] remoteExec ["BIS_fnc_showNotification",_winner];
 	["TaskFailed", ["", localize "STR_A3A_fn_base_markerChange_noOutpost"]] remoteExec ["BIS_fnc_showNotification",_loser];
-	["TaskUpdated",["",format [localize "STR_A3A_fn_base_markerChange_otherOutpost",_textX]]] remoteExec ["BIS_fnc_showNotification",_other];
+	["TaskUpdated",["",format [localize "STR_A3A_fn_base_markerChange_otherOutpost",_loserName]]] remoteExec ["BIS_fnc_showNotification",_other];
 	killZones setVariable [_markerX,[],true];
 	};
 if (_markerX in seaports) then
@@ -184,7 +184,7 @@ if (_markerX in seaports) then
 	};
 	["TaskSucceeded", ["", localize "STR_A3A_fn_base_markerChange_yesSeaport"]] remoteExec ["BIS_fnc_showNotification",_winner];
 	["TaskFailed", ["", localize "STR_A3A_fn_base_markerChange_noSeaport"]] remoteExec ["BIS_fnc_showNotification",_loser];
-	["TaskUpdated",["",format [localize "STR_A3A_fn_base_markerChange_otherSeaport",_textX]]] remoteExec ["BIS_fnc_showNotification",_other];
+	["TaskUpdated",["",format [localize "STR_A3A_fn_base_markerChange_otherSeaport",_loserName]]] remoteExec ["BIS_fnc_showNotification",_other];
 	};
 if (_markerX in factories) then
 {
@@ -202,7 +202,7 @@ if (_markerX in factories) then
 	};
 	["TaskSucceeded", ["", localize "STR_A3A_fn_base_markerChange_yesFactory"]] remoteExec ["BIS_fnc_showNotification",_winner];
 	["TaskFailed", ["", localize "STR_A3A_fn_base_markerChange_noFactory"]] remoteExec ["BIS_fnc_showNotification",_loser];
-	["TaskUpdated",["",format [localize "STR_A3A_fn_base_markerChange_otherFactory",_textX]]] remoteExec ["BIS_fnc_showNotification",_other];
+	["TaskUpdated",["",format [localize "STR_A3A_fn_base_markerChange_otherFactory",_loserName]]] remoteExec ["BIS_fnc_showNotification",_other];
 };
 if (_markerX in resourcesX) then
 {
@@ -220,7 +220,7 @@ if (_markerX in resourcesX) then
 	};
 	["TaskSucceeded", ["", localize "STR_A3A_fn_base_markerChange_yesResource"]] remoteExec ["BIS_fnc_showNotification",_winner];
 	["TaskFailed", ["", localize "STR_A3A_fn_base_markerChange_noResource"]] remoteExec ["BIS_fnc_showNotification",_loser];
-	["TaskUpdated",["",format [localize "STR_A3A_fn_base_markerChange_otherResource",_textX]]] remoteExec ["BIS_fnc_showNotification",_other];
+	["TaskUpdated",["",format [localize "STR_A3A_fn_base_markerChange_otherResource",_loserName]]] remoteExec ["BIS_fnc_showNotification",_other];
 };
 
 if (teamPlayer in [_winner, _loser]) then {

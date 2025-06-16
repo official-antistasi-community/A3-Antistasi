@@ -39,6 +39,6 @@ private _vehicles = [];
 } forEach (_newGarrison get "vehicles");
 
 _garrison set ["vehicles", _vehicles];
-A3A_activeGarrison set [_spawnKey, createHashMap];
+A3A_activeGarrison set [_spawnKey, _garrison];
 
 Trace("Completed");

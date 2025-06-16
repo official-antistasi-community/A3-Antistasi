@@ -45,6 +45,7 @@ if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balanceP
 {
 	private _cdtype = _x;
 	{
+		if (sidesX getVariable _x == teamPlayer) then { continue };		// shouldn't really be necessary
 		private _garrison = A3A_garrison get _x;
 		if !(_cdtype in _garrison) then { continue };
 

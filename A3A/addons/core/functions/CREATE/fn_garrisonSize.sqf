@@ -38,5 +38,6 @@ else
         if (_frontierX) then {_groups = _groups + 1};
     };
 };
+_groups = _groups + 2;          // adjustment because patrols are no longer free
 
 4 * (_groups max 2);
