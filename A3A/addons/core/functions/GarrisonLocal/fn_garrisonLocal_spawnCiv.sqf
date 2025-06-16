@@ -1,6 +1,4 @@
-// Civ marker spawn. Input is real marker but server references by _civ
-
-// TODO: remVehicle needs server-side handling for this?
+// Civ marker spawn. Input is city marker + "_civ", not a real marker
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

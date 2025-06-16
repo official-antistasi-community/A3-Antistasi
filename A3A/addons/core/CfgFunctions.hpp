@@ -233,18 +233,11 @@ class CfgFunctions
             class calculateMarkerArea {};
             class cargoSeats {};
             class cleanserVeh {};
-            class createAIAirbase {};
-            class createAICities {};
-            class createAIcontrols {};
-            class createAIOutposts {};
-            class createAIResources {};
-            class createAISite {};
             class createAttackForceAir {};
             class createAttackForceLand {};
             class createAttackForceMixed {};
             class createAttackForceSea {};
             class createAttackVehicle {};
-            class createFIAOutposts2 {};
             class createUnit {};
             class createVehicleCrew {};
             class createVehicleQRFBehaviour {};
