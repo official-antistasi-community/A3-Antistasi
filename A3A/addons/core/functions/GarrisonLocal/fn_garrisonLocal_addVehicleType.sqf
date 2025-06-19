@@ -1,6 +1,9 @@
 // Spawn single vehicle of specified type in enemy garrison
 // Not used for buildings
 
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
 params ["_marker", "_class", "_slotNum"];
 
 private _garrison = A3A_activeGarrison get _marker;
@@ -8,12 +11,10 @@ private _garrison = A3A_activeGarrison get _marker;
 private _spawnPlace = (A3A_spawnPlacesHM get _marker) # _slotNum;
 _spawnPlace params ["_placeType", "_pos", "_dir", "_building"];         // uh, building should be pre-checked?
 
-// TODO: block conditions for vehicles? Anything nearby that's not markerX?
-/*private _blockers = _pos nearEntities ["StaticWeapon", 2];
-if (_blockers isNotEqualTo []) then {
+private _blockers = _pos nearEntities 8 select { _x getVariable ["markerX", ""] != _marker };
+if (_blockers isNotEqualTo []) exitWith {
     Error_3("Spawn of %1 in %2 blocked by %3", _class, _marker, typeof (_blockers#0));
-    continue;
-};*/
+};
 
 private _vehicle = objNull;
 isNil {

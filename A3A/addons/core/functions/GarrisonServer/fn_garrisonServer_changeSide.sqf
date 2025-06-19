@@ -27,5 +27,3 @@ if (_newSide != teamPlayer) then {
 if (_marker in A3A_garrisonMachine) then {
     ["changeSide", [_marker, _newSide]] call A3A_fnc_garrisonOp;
 };
-
-Trace("Completed");

@@ -13,6 +13,8 @@ if (_markerX in controlsX) exitWith {
     if (isOnRoad markerPos _markerX) then {6} else {8};
 };
 
+if (_markerX in outpostsFIA or _markerX == "SyndHQ") exitWith { 0 };
+
 private _size = [_markerX] call A3A_fnc_sizeMarker;
 private _groups = 0;
 if (_markerX in airportsX) then

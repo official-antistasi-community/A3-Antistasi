@@ -33,5 +33,3 @@ private _usedVehicles = [];
     if !(_veh isKindOf "StaticWeapon") then { _x set [4, _veh call HR_GRG_getVehState] };
     _usedVehicles pushBack _veh;
 } forEach (_garrison get "vehicles");
-
-Trace("Completed");

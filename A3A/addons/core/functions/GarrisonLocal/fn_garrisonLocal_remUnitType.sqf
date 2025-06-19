@@ -4,6 +4,8 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
+Trace_1("Called with %1", _this);
+
 params ["_marker", "_unitType"];
 
 private _troops = A3A_activeGarrison get _marker get "troops";

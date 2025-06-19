@@ -53,5 +53,3 @@ private _vehicles = _garrison get "vehicles";
         _x set [0, [_faction, _slotType, _isAirport] call A3A_fnc_selectGarrisonVehicleType];
     };
 } forEachReversed _vehicles;
-
-Trace("Completed");

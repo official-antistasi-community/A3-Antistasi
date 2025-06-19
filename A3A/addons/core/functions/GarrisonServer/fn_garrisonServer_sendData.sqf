@@ -15,5 +15,3 @@ if !(_marker in A3A_garrison) exitWith {
 };
 
 ["garrisonDataSent", [_marker, A3A_garrison get _marker]] remoteExecCall ["A3A_GUI_fnc_hqDialog", theBoss];
-
-Trace("Completed");

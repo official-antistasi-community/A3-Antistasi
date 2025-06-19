@@ -31,8 +31,12 @@ private _garrison = createHashMapFromArray [ ["troops", _troopTypes], ["vehicles
 if (isOnRoad _pos) then {
     private _road = roadAt _pos;
     private _roadDir = (getRoadInfo _road # 6) getDir (getRoadInfo _road # 7);
+
+    private _spawnPlaces = [["vehicleRB", _pos, _roadDir+90]];
+    _garrison set ["spawnPlaces", _spawnPlaces];
+    A3A_spawnPlacesHM set [_marker, _spawnPlaces];          // probably never used?
+
     private _vehClass = FactionGet(reb,"vehiclesLightArmed") # 0;
-    _garrison set ["spawnPlaces", [["vehicleRB", _pos, _roadDir+90]]];
     _garrison set ["vehicles", [[_vehClass, 0]]];
 };
 A3A_garrison set [_marker, _garrison];

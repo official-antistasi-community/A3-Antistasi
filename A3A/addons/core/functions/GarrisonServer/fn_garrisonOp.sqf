@@ -17,5 +17,3 @@ isNil {
     private _machineID = A3A_garrisonMachine get _marker;
     [[_opType, _params], { A3A_garrisonOps pushBack _this }] remoteExecCall ["call", _machineID];
 };
-
-Trace("Completed");

@@ -45,5 +45,3 @@ if (_marker in A3A_garrisonMachine) then {
 } else {
     deleteVehicle _vehicle;
 };
-
-Trace("Completed");

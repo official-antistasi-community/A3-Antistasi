@@ -20,22 +20,16 @@ if (_pool == "legacy") then {
 };
 
 
-if (A3A_hasACE) then
-{
-	if ((isNull _killer) || (_killer == _victim)) then
-	{
+if (A3A_hasACE) then {
+	if ((isNull _killer) || (_killer == _victim)) then {
 		_killer = _victim getVariable ["ace_medical_lastDamageSource", _killer];
 	};
-}
-else
-{
+} else {
     if (_victim getVariable ["incapacitated", false]) then {
-        private _downedBy = _victim getVariable "A3A_downedBy";
-        if (!isNil "_downedBy") then {
-            _killer = _downedBy;
-        };
+        _killer = _victim getVariable ["A3A_downedBy", _killer];
     };
 };
+
 
 if (_victimSide == Occupants or _victimSide == Invaders) then {
     [_victim, _victimGroup, _killer] spawn A3A_fnc_AIreactOnKill;

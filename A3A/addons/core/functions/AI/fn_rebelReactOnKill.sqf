@@ -1,6 +1,5 @@
 /*
-Author: Wurzel0701, Triada, jaj22, Spoffy, Barbolani
-    Defines and executes the behaviour of enemy AI in case of a down or KIA in their group
+    Defines and executes the behaviour of rebel AI in case of a down or KIA in their group
 
 Arguments:
     <OBJECT> The unit which was downed or killed.
@@ -10,18 +9,14 @@ Arguments:
 Return Value:
     <NIL>
 
-Scope: Server/HC, local to unit/group
+Scope: Local to unit/group
 Environment: Scheduled
 Public: Yes
-Dependencies:
-    <ARRAY> allMachineGuns
-    <BOOL> haveNV
-    <BOOL> hasIFA
-    <HashMap> A3A_faction_all
 
 Example:
-[_unit, _group, _killer] spawn A3A_fnc_AIreactOnKill;
+[_unit, _group, _killer] spawn A3A_fnc_rebelReactOnKill;
 */
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
@@ -42,9 +37,6 @@ _unit setVariable ["downedTimeout", time + 1200];
 //If _killer is not set or the same side (collision for example), abort here
 if((isNil "_killer") || {(isNull _killer) || {side (group _killer) == side _group}}) exitWith {};
 
-// Add the unit to recent kills for reaction purposes
-[side _group, getPosATL _unit, 10, _killer] remoteExec ["A3A_fnc_addRecentDamage", 2];
-
 if (_marker != "") then {
     // Fire this one even if group was eliminated, garrison expects regular response from group
     [_group, _marker, _killer] spawn {
@@ -56,22 +48,13 @@ if (_marker != "") then {
     };
 };
 
+/*
 private _enemy = objNull;
 private _activeGroupMembers = (units _group) select {_x call A3A_fnc_canFight};
 
 //No group member left in fighting condition, no reaction possible
 if(count _activeGroupMembers == 0) exitWith {};
 
-//Call help if possible
-if(_group getVariable ["A3A_canCallSupportAt", -1] < time) then {
-    [_group, _killer] spawn A3A_fnc_callForSupport;
-};
-
-if (!fleeing leader _group and random 1 < 0.5) then
-{
-    private _courage = leader _group skill "courage";
-    _group allowFleeing (2 - _courage - count _activeGroupMembers / count units _group);
-};
 
 if (_group getVariable ["A3A_reactingToKill", false]) exitWith {};      // don't spam this loop
 _group setVariable ["A3A_reactingToKill", true];
@@ -99,3 +82,4 @@ _group setVariable ["A3A_reactingToKill", true];
 } forEach _activeGroupMembers;
 
 _group setVariable ["A3A_reactingToKill", nil];
+*/

@@ -6,20 +6,19 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_activeGarrison", "_marker", "_side", "_storedTroops", "_storedVehicles"];
+params ["_garrison", "_marker", "_side", "_storedTroops", "_storedVehicles"];
+
 
 private _faction = Faction(_side);
 private _markerPos = markerPos _marker;
 
-private _groups = _activeGarrison get "groups";
-private _vehicles = _activeGarrison get "vehicles";
-private _troops = _activeGarrison get "troops";
+private _groups = _garrison get "groups";
+private _vehicles = _garrison get "vehicles";
+private _troops = _garrison get "troops";
 
 private _crewVar = ["A3A_crewed", "A3A_rebCrewed"] select (_side == teamPlayer);
-private _places = A3A_spawnPlacesHM getOrDefault [_marker, _activeGarrison get "spawnPlaces"];
+private _places = A3A_spawnPlacesHM get _marker;
 private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side == teamPlayer);
-private _groupStatics = createGroup _side;
-private _mortarGroups = [];
 {
     _x params ["_class", "_posData", "_vecDir", "_vecUp", "_state"];
 
@@ -35,11 +34,11 @@ private _mortarGroups = [];
             Info_2("Spawn of %1 in %2 blocked because building destroyed", _class, _marker);
             continue;
         };
-        /*private _blockers = _pos nearEntities ["StaticWeapon", 2];
+        private _blockers = _pos nearEntities 8 select { _x getVariable ["markerX", ""] != _marker };
         if (_blockers isNotEqualTo []) then {
             Error_3("Spawn of %1 in %2 blocked by %3", _class, _marker, typeof (_blockers#0));
             continue;
-        };*/
+        };
         isNil {
             _vehicle = createVehicle [_class, _pos, [], 0, "CAN_COLLIDE"];
             _vehicle setDir _dir;
@@ -50,11 +49,11 @@ private _mortarGroups = [];
     else
     {
         // Arbitrary placement (probably rebel)
-        /*private _blockers = (ASLtoATL _posData) nearEntities ["StaticWeapon", 2];
+        private _blockers = _posData nearEntities 8 select { _x getVariable ["markerX", ""] != _marker };
         if (_blockers isNotEqualTo []) then {
             Error_3("Spawn of %1 in %2 blocked by %3", _class, _marker, typeof (_blockers#0));
             continue;
-        };*/
+        };
         isNil {
             _vehicle = createVehicle [_class, _posData, [], 0, "CAN_COLLIDE"];
             _vehicle setPosWorld _posData;
@@ -77,7 +76,7 @@ private _mortarGroups = [];
         {[_x, _marker] call _fnc_initUnit} forEach units _group;
         _troops append units _group;
         _groups pushBack _group;
-        [_group, "Patrol_Area", 25, 100, 250, true, _markerPos, false] call A3A_fnc_patrolLoop;     // TODO: check for boat
+        [_group, "Patrol_Area", 25, 100, 250, true, _markerPos, false, false] call A3A_fnc_patrolLoop;     // TODO: check for boat
         sleep 0.1; continue;
     };
     if (isNil {_vehicle getVariable _crewVar}) then { sleep 0.1; continue };
@@ -93,23 +92,17 @@ private _mortarGroups = [];
         _storedTroops deleteAt _index;
     };
 
-    private _group = if (_vehicle isKindOf "StaticMortar") then { createGroup _side } else { _groupStatics };
+    private _groupType = ["staticGroup", "mortarGroup"] select (_vehicle isKindOf "StaticMortar");
+    private _group = _garrison get _groupType;
+    if (isNull _group) then { _group = createGroup _side; _garrison set [_groupType, _group] };
+
     private _unit = [_group, _unitType, _markerPos, [], 0, "NONE"] call A3A_fnc_createUnit;
     _unit assignAsGunner _vehicle;
     _unit moveInGunner _vehicle;
     _troops pushBack _unit;
     [_unit, _marker] call _fnc_initUnit;
+    if (_vehicle isKindOf "StaticMortar") then { _unit disableAI "CHECKVISIBLE" };
 
-    if (_vehicle isKindOf "StaticMortar") then {
-        [_group] call A3A_fnc_artilleryAdd;
-        _group deleteGroupWhenEmpty true;
-        _groups pushBack _group;
-        _mortarGroups pushBack _group;
-    };
     sleep 0.1;
 
 } forEach _storedVehicles;
-
-if (units _groupStatics isEqualTo []) then { deleteGroup _groupStatics };
-_garrison set ["staticGroup", _groupStatics];
-_garrison set ["mortarGroups", _mortarGroups];

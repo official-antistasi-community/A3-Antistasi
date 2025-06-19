@@ -2,6 +2,8 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
+Trace_1("Called with %1", _this);
+
 params ["_marker"];
 
 private _garrison = A3A_activeGarrison get _marker;
@@ -21,7 +23,6 @@ private _freeStatics = [];
 {
     if (!isNull gunner _x) then { continue };
     if (!alive _x) then { _statics deleteAt _forEachIndex; continue };
-    if (_x isKindOf "StaticMortar") then { continue };                  // Not dealing with these yet
     if (isNil {_x getVariable _crewVar}) then { continue };             // var set when vehicle is added to garrison
     if (_side == teamPlayer and {_x getVariable ["lockedForAI", false]}) then { continue };
 
@@ -39,7 +40,7 @@ _freeTroops = _freeTroops select { _x getVariable "unitType" in _crewTypes };
 if (_freeTroops isEqualTo []) then { continue };
 
 private _fnc_mountStatic = {
-    params ["_unit", "_static"];
+    params ["_unit", "_static", "_isMortar"];
 
     _unit enableAI "ALL";
     _unit setUnitPos "UP";
@@ -50,15 +51,12 @@ private _fnc_mountStatic = {
     sleep (_unit distance2d _static);
 
     if !(_unit call A3A_fnc_canFight) exitWith {};
-    if (_unit == gunner _static) exitWith {};
+    if (_unit == gunner _static) exitWith { if (_isMortar) then { _unit disableAI "CHECKVISIBLE" } };
 
-    // redo sanity checks...
+    // redo sanity checks, force unit in if they got close
     if (!alive _static or !isNull gunner _static or _static getVariable ["lockedForAI", false]) exitWith {};
-    if (_unit distance2d _static < 10) then { _unit moveInGunner _static };
+    if (_unit distance2d _static < 10) then { _unit moveInGunner _static; if (_isMortar) then { _unit disableAI "CHECKVISIBLE" } };
 };
-
-private _group = _garrison get "staticGroup";
-if (isNull _group) then { _group = createGroup _side; _garrison set ["staticGroup", _group] };
 
 {
     // If not under fire, could just pop them in? hmm
@@ -67,6 +65,11 @@ if (isNull _group) then { _group = createGroup _side; _garrison set ["staticGrou
     private _unit = _nearTroops # 0;
     _freeTroops deleteAt (_freeTroops find _unit);
 
+    private _isMortar = _x isKindOf "StaticMortar";
+    private _groupType = ["staticGroup", "mortarGroup"] select _isMortar;
+    private _group = _garrison get _groupType;
+    if (isNull _group) then { _group = createGroup _side; _garrison set [_groupType, _group] };
+
     [_unit] joinSilent _group;
-    [_unit, _x] spawn _fnc_mountStatic;
+    [_unit, _x, _isMortar] spawn _fnc_mountStatic;
 } forEach _freeStatics;

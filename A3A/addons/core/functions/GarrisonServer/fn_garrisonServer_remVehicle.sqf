@@ -44,5 +44,3 @@ if ("_civ" in _marker) exitWith {};
 if (_marker in A3A_garrisonMachine) then {
     ["remVehicle", [_marker, _vehicle]] call A3A_fnc_garrisonOp;
 };
-
-Trace("Completed");

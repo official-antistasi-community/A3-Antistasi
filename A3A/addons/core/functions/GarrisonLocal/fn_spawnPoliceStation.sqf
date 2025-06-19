@@ -99,6 +99,7 @@ for "_i" from 1 to _numUnits do
     sleep 0.1;
 };
 
+_garrison set ["buildingGroup", _curGroup];
 _garrison get "groups" pushBack _curGroup;
 _garrison get "troops" append units _curGroup;
 

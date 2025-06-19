@@ -52,6 +52,7 @@ class CfgFunctions
             class nearEnemy {};
             class paradrop {};
             class rearmCall {};
+            class rebelReactOnKill {};
             class rebelReturnToBase {};
             class recallGroup {};
             class smokeCoverAuto {};
@@ -304,6 +305,7 @@ class CfgFunctions
             class addArtilleryTrailEH {};
             class addVehAttachDetachEH {};
             class addVehGetInOutEH {};
+            class combatModeChangedEH {};
             class enemyUnitDeletedEH {};
             class enemyUnitKilledEH {};
             class rebelUnitKilledEH {};
@@ -320,6 +322,7 @@ class CfgFunctions
             class garrisonLocal_clear {};
             class garrisonLocal_despawn {};
             class garrisonLocal_despawnCiv {};
+            class garrisonLocal_enemyInfo {};
             class garrisonLocal_moveHQ {};
             class garrisonLocal_pause {};
             class garrisonLocal_remUnitType {};
@@ -666,6 +669,7 @@ class CfgFunctions
             class clearTargetArea {};
             class createSupport {};
             class getArtilleryRanges {};
+            class getMortarMags {};
             class initSupports {};
             class maxDefenceSpend {};
             class requestArtillery {};

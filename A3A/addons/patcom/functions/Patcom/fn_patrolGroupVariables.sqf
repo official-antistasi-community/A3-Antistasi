@@ -61,9 +61,6 @@ if ((side leader _group) == civilian) then {
     _group setVariable ["PATCOM_Controlled", true];
 } else {
 
-    // Units previous orders.
-    _group setVariable ["PATCOM_Previous_Orders", ""];
-
     // Patrol Type, Min Patrol, Max Patrol, Max Distance, From Center, Center Pos, Search Buildings
     if ((count (_group getVariable ["PATCOM_Patrol_Params", []])) == 0) then {
         _group setVariable ["PATCOM_Patrol_Params", ["Patrol_Area", 50, 100, -1, true, getPosATL (leader _group), false]];
@@ -71,7 +68,6 @@ if ((side leader _group) == civilian) then {
 
     _group setVariable ["PATCOM_Patrol_Home", getPosATL (leader _group)];
     _group setVariable ["PATCOM_Group_State", "CALM"];
-    _group setVariable ["PATCOM_COMBAT_CHECK", serverTime];
 
     // Set Group to being controlled by PATCOM so we don't init variables again.
     _group setVariable ["PATCOM_Controlled", true];

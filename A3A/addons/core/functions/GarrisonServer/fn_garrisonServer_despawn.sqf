@@ -31,5 +31,3 @@ if (_side != teamPlayer) then {
 
 ["despawn", [_marker, _marker in A3A_markersToDelete]] call A3A_fnc_garrisonOp;
 A3A_garrisonMachine deleteAt _marker;       // clear machine ID
-
-Trace("Completed");

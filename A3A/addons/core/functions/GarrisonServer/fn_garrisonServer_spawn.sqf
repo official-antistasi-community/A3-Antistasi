@@ -23,5 +23,3 @@ if ("_civ" in _marker) then {
     private _side = sidesX getVariable _marker;
     ["spawn", [_marker, _data, _side]] call A3A_fnc_garrisonOp;
 };
-
-Trace("Completed");

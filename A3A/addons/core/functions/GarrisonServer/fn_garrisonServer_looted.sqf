@@ -1,7 +1,12 @@
 // Used by local garrison despawn to mark that loot has been stolen on server side
 // Kinda iffy because garrison could remain spawned for a while? Whatever
 
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
 params ["_marker", "_type"];
+
+Trace_1("Called with params %1", _this);
 
 if (_type == "crate") then {
     private _lootCD = 120*16 / (A3A_garrisonSize get _marker);

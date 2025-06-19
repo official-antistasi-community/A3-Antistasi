@@ -24,5 +24,3 @@ _troops set [1, _newQuality];
 if (_marker in A3A_garrisonMachine) then {
     ["spawnUnitCount", [_marker, _unitCount, _quality]] call A3A_fnc_garrisonOp;
 };
-
-Trace("Completed");

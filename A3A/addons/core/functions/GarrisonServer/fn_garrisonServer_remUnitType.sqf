@@ -42,5 +42,3 @@ if (_marker in A3A_garrisonMachine) then {
 
 // Not called from old UI, don't need this one
 //[_marker, _client] spawn A3A_fnc_showSiteInfo;
-
-Trace("Completed");

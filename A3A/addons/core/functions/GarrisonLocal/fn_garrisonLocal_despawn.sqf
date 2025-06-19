@@ -4,6 +4,8 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
+Trace_1("Called with %1", _this);
+
 params ["_marker", ["_toDelete", false]];
 
 private _garrison = A3A_activeGarrison get _marker;
@@ -13,7 +15,10 @@ A3A_activeGarrison deleteAt _marker;
 // Timing arguable...
 //["locationSpawned", [_marker, "RebelOutpost", false]] call EFUNC(Events,triggerEvent);
 
-{ if (alive _x) then { deleteVehicle _x }; } forEach (_garrison get "troops");
+// Pretty dumb recovery logic
+{
+    if (_x getVariable ["incapacitated", false] and random 1 < 0.5) then { _x setDamage 1 } else { deleteVehicle _x };
+} forEach (_garrison get "troops" select { alive _x });
 { deleteGroup _x } forEach (_garrison get "groups");
 
 { deleteVehicle _x } forEach (_garrison get "civs");
@@ -24,10 +29,11 @@ A3A_activeGarrison deleteAt _marker;
     // garrisonable ones will join & despawn through the detached handler
     private _vehPos = getPosATL _x;
     {
+        private _cargo = _x#0;      // format is [object, node]
         isNil {
-            detach _x;
+            detach _cargo;
             private _rpos = _vehPos getPos [10, random 360];
-            _x setVehiclePosition [_rpos, [], 0, "NONE"];
+            _cargo setVehiclePosition [_rpos, [], 0, "NONE"];
         };
     } forEach (_x getVariable ["Cargo", []]);           // Antistasi logistics cargo
     deleteVehicle _x;

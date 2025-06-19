@@ -54,5 +54,3 @@ if (_marker in A3A_garrisonMachine) then {
 // Print new garrison info in hint box on client
 // Probably doesn't need to be done unscheduled? Arguable
 if (_oldUI) then { [_marker, _client] spawn A3A_fnc_showSiteInfo };
-
-Trace("Completed");

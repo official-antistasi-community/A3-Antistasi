@@ -1,3 +1,8 @@
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
+Trace_1("Called with %1", _this);
+
 params ["_marker", "_vehicle"];
 
 // Will happen if the vehicle was deleted immediately after. Probably not an issue.

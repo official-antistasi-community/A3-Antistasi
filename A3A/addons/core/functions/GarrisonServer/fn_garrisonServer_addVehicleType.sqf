@@ -28,5 +28,3 @@ private _garrison = A3A_garrison get _marker;
 if (_marker in A3A_garrisonMachine) then {
     ["addVehicleType", [_marker, _vehClass, _slotNum]] call A3A_fnc_garrisonOp;
 };
-
-Trace("Completed");

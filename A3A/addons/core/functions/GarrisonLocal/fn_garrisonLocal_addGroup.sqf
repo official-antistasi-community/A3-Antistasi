@@ -4,6 +4,8 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
+Trace_1("Called with %1", _this);
+
 params ["_marker", "_group"];
 
 // Assume that setGroupOwner has already been called by whatever called this function?
@@ -26,7 +28,10 @@ private _garrison = A3A_activeGarrison get _marker;
 
 (_garrison get "groups") pushBack _group;
 (_garrison get "troops") append units _group;
-[_group, "Patrol_Defend", 0, 150, -1, true, markerPos _marker, false] call A3A_fnc_patrolLoop;
+[_group, "Patrol_Defend", 0, 150, -1, true, markerPos _marker, false, false] call A3A_fnc_patrolLoop;
+_group deleteGroupWhenEmpty true;
+_group addEventHandler ["CombatModeChanged", A3A_fnc_combatModeChangedEH];
+
 
 // Will only work if they're close, but whatever
 [_marker] call A3A_fnc_garrisonLocal_updateStatics;

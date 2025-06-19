@@ -69,5 +69,3 @@ if (_feedback and !_danger) then {
     private _resultStr = format ["Garrison removed<br/><br/>Recovered Money: %1 €<br/>Recovered HR: %2", _costs, _hr];
     ["Garrison", _resultStr] remoteExecCall ["A3A_fnc_customHint", theBoss];
 };
-
-Trace("Completed");

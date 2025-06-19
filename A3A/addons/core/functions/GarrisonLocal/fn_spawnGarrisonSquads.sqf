@@ -37,6 +37,7 @@ private _sniperCount = if (_side != teamPlayer) then {
     count _buildings;
 };
 _garrSize = _garrSize min count _buildingPlaces;        // might have found fewer places
+if (!_init) then { _garrSize = 0 };
 
 
 private _squads = [];
@@ -112,18 +113,18 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
         [_unit, _marker] call _fnc_initUnit;
         sleep 0.1;
     } forEach _x;
-    _curGroup deleteGroupWhenEmpty true;
     _groups pushBack _curGroup;
     _troops append units _curGroup;
 
-    if (_init and _garrSize > 0 and _forEachIndex == 0) then {
+    if (_garrSize > 0 and _forEachIndex == 0) then {
         Debug_2("Placing squad in buildings: %1, %2", _x, _buildingPlaces);
         [_curGroup, _buildingPlaces] call A3A_fnc_patrolGroupGarrison;
+        _activeGarrison set ["buildingGroup", _curGroup];
     } else {
         Debug_1("Placing squad in marker: %1", _x);
         private _spawnPos = [_markerPos, 0, _squadRad, 3.5] call A3A_fnc_findPatrolPos;
         { _x setVehiclePosition [_spawnPos, [], 3, "NONE"] } forEach units _curGroup;
-        [_curGroup, "Patrol_Defend", 0, _squadRad, -1, true, _markerPos, false] call A3A_fnc_patrolLoop;
+        [_curGroup, "Patrol_Defend", 0, _squadRad, -1, true, _markerPos, false, false] call A3A_fnc_patrolLoop;
 
         // Add UAV if it's a specops roaming group
         if (_type == "camp" and _faction get "uavsPortable" isNotEqualTo []) then

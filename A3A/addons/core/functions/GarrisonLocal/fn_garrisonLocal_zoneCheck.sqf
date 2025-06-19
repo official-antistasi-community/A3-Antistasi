@@ -10,9 +10,9 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", ["_forced", false]];
+Trace_1("Called with %1", _this);
 
-Trace_1("Called with parameters %1", _this);
+params ["_marker", ["_forced", false]];
 
 private _garrison = A3A_activeGarrison get _marker;
 private _troops = _garrison get "troops";

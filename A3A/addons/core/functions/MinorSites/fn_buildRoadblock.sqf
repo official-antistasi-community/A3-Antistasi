@@ -47,5 +47,7 @@ else
 // but that would be identical for each roadblock at the moment? maybe type-based later
 
 _garrison set ["buildings", _buildings];
-_garrison set ["spawnPlaces", _spawnPlaces];        // special case, we just put the spawn places in the garrison
+_garrison set ["spawnPlaces", _spawnPlaces];        // so that it can be sent to garrisonLocal
+A3A_spawnPlacesHM set [_marker, _spawnPlaces];
+
 A3A_garrison set [_marker, _garrison];

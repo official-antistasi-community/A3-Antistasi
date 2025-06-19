@@ -1,5 +1,9 @@
+// Garrison-local function to spawn in garrison units & vehicles
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+
+Trace_1("Called with %1", _this);
 
 params ["_marker", "_newGarrison", "_side"];
 private _markerPos = markerPos _marker;
@@ -8,8 +12,8 @@ private _faction = Faction(_side);
 Info_2("Spawning %2 garrison at marker %1", _marker, _side);
 Debug_1("Garrison data: %1", _newGarrison);
 
-private _garrison = createHashMapFromArray [["troops", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []]];
-_garrison set ["side", _side];
+private _garrison = createHashMapFromArray [["troops", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []],
+    ["side", _side], ["buildingGroup", grpNull], ["staticGroup", grpNull], ["mortarGroup", grpNull] ];
 A3A_activeGarrison set [_marker, _garrison];
 
 // Generate the type now so that we only need to do it once per spawn
@@ -119,6 +123,14 @@ if (_newGarrison getOrDefault ["policeStation", false] isEqualType []) then {
 
 // Spawn remainder as squads
 [_garrison, _marker, _side, _storedTroops, true] call A3A_fnc_spawnGarrisonSquads;
+
+
+// Some general all-group stuff
+{
+    if (_side == teamPlayer) then { _x allowFleeing 0 };
+    _x deleteGroupWhenEmpty true;
+    _x addEventHandler ["CombatModeChanged", A3A_fnc_combatModeChangedEH];
+} forEach (_garrison get "groups");
 
 
 ["locationSpawned", [_marker, "RebelOutpost", true]] call EFUNC(Events,triggerEvent);

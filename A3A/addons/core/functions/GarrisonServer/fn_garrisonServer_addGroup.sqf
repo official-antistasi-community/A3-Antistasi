@@ -60,5 +60,3 @@ if (!isNil "_machineID") then {
     deleteGroup _group;
     [_marker, false, true] call A3A_fnc_garrisonServer_cleanup;
 };
-
-Trace("Completed");

@@ -27,5 +27,3 @@ if (sidesX getVariable _marker != teamPlayer) then {
 };
 
 // Don't need to do anything on local side, dead units are unambiguous
-
-Trace("Completed");

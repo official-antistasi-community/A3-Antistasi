@@ -1,6 +1,11 @@
 // Garrison-local function to clear out old HQ
 // Might be used while under attack, so account for that
 
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
+Trace_1("Called with %1", _this);
+
 params ["_marker", "_danger"];
 
 private _garrison = A3A_activeGarrison get _marker;

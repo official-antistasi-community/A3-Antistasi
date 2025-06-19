@@ -3,9 +3,9 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_spawnKey", "_newGarrison"];
+Trace_1("Called with %1", _this);
 
-Trace_2("Called with marker %1 and data %2");
+params ["_spawnKey", "_newGarrison"];
 
 // just a list of vehicles, or do we want other stuff?
 

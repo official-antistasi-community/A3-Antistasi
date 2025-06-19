@@ -4,11 +4,11 @@
         Calls artillery firemission to select a battery and fire at a given location.
 
     Arguments:
+        <Object> Mortar to use for artillery strike.
         <Array> Position where you want the artillery strike to happen.
         <Number> Area in which you want the artillery strike to happen in.
         <String> Type of round, "HE", "Flare", "Smoke".
         <Number> Number of rounds you want fired.
-        <Object> Unit who called in the artillery strike. (Mainly for debug purposes).
 
     Return Value:
         N/A
@@ -25,11 +25,11 @@
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-params ["_targetPos", "_area", "_roundType", "_rounds", "_callerGroup"];	
+params ["_mortar", "_targetPos", "_area", "_roundType", "_rounds"];     //, "_group"];
 
-private _batteryArray = [];
-private _side = side _callerGroup;
-
+//private _batteryArray = [];
+private _side = side _group;
+/*
 /////// GET ACTIVE BATTERY ARRAY FOR CALLERS SIDE \\\\\\\
 {
     if !(_x getVariable ["PATCOM_ArtilleryBusy", false]) then {
@@ -54,14 +54,18 @@ if (count _batteryArray == 0) exitWith {
 };
 
 private _selectedBattery = selectRandom _batteryArray;
+
+
+*/
+private _selectedBattery = _mortar;
 private _group = group (gunner _selectedBattery);
 private _batteryClass = (typeOf _selectedBattery);
 private _dayState = [] call A3A_fnc_getDayState;
 private _reloadTime = [_selectedBattery] call A3A_fnc_getReloadTime;
-private _shellType = "";
+private _roundType = "HE";
 
 // Set Artillery to busy
-_group setVariable ["PATCOM_ArtilleryBusy", true, true];
+_selectedBattery setVariable ["PATCOM_ArtilleryBusy", true, true];
 
 /////// CHECK IF UNITS ARE IN DANGER CLOSE PROXIMITY \\\\\\\
 if ([_targetPos, _area, _side] call A3A_fnc_artilleryDangerClose) then {
@@ -70,56 +74,49 @@ if ([_targetPos, _area, _side] call A3A_fnc_artilleryDangerClose) then {
     };
 
     if (_dayState == "EVENING" || {_dayState == "NIGHT"}) then {
-        _roundType = "FLARE"; // Need to add flare into templates.
+        _roundType = "Flare"; // Need to add flare into templates.
     } else {
-        _roundType = "SMOKE";
+        _roundType = "Smoke";
     };
 };
+Trace_1("Round type %1", _roundType);
 
 /////// GET ARTILLERY ROUND TYPE FROM TEMPLATES \\\\\\\
 private _faction = Faction(_side);
+private _shellType = "";
 if (_batteryClass in (_faction get "vehiclesArtillery")) then {
     private _shellArray = _faction get "magazines" get _batteryClass;
     _shellType = (_shellArray # 0);
 };
-if (_batteryClass in (_faction get "staticMortars")) then {
-    switch (_roundType) do {
-        case "HE": {
-            _shellType = _faction get "mortarMagazineHE";
-        };
-
-        case "SMOKE": {
-            _shellType = _faction get "mortarMagazineSmoke";
-        };
-        
-        case "FLARE": {
-            _shellType = _faction get "mortarMagazineFlare";
-        };
-
-        default {
-            _shellType = _faction get "mortarMagazineHE";
-        };
-    };
+if (_shellType == "" and _batteryClass isKindOf "StaticMortar") then {
+    private _mags = [_batteryClass] call A3A_fnc_getMortarMags;
+    _shellType = _mags get _roundType;
 };
 
 if (_shellType == "") exitWith {
-    ServerDebug_1("Unable to find ammoType for Classname - %1", _batteryClass);
+    ServerDebug_2("Unable to find ammoType %1 for %2", _roundType, _batteryClass);
+    _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false, true];
 };
+Trace_1("Shell type %1", _shellType);
+
 
 /////// FINAL ARTILLERY RANGE CHECK \\\\\\\
 if !(_targetPos inRangeOfArtillery [[_selectedBattery], _shellType]) exitWith {
     If (PATCOM_DEBUG) then {
         [leader _group, "OUT OF RANGE", 5, "Red"] call A3A_fnc_debugText3D;
     };
-    _group setVariable ["PATCOM_ArtilleryBusy", false, true];
+    _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false, true];
 };
 
 /////// DO ARTILLERY FIRE \\\\\\\
 [_group, _targetPos, _area, _selectedBattery, _shellType, _rounds, _reloadTime] spawn {
     params ["_group", "_targetPos", "_area", "_selectedBattery", "_shellType", "_rounds", "_reloadTime"];
 
+    sleep (20 + random 10);
+
     for "_i" from 1 to _rounds do {
-        private _finalTargetPos = [_targetPos, (random 50), _area, 0, 1, -1, 0] call A3A_fnc_getSafePos;
+        //private _finalTargetPos = [_targetPos, (random 50), _area, 0, 1, -1, 0] call A3A_fnc_getSafePos;
+        private _finalTargetPos = _targetPos getPos [random _area, random 360];
         _selectedBattery doArtilleryFire [_finalTargetPos, _shellType, 1];
         If (PATCOM_DEBUG) then {
             [leader _group, "ROUND AWAY", 1, "Green"] call A3A_fnc_debugText3D;
@@ -128,5 +125,5 @@ if !(_targetPos inRangeOfArtillery [[_selectedBattery], _shellType]) exitWith {
     };
 
     sleep PATCOM_ARTILLERY_DELAY;
-    _group setVariable ["PATCOM_ArtilleryBusy", false, true];
+    _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false, true];
 };

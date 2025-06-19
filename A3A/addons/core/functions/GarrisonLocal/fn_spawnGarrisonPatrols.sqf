@@ -67,7 +67,7 @@ for "_i" from 1 to _numPatrols do
         sleep 0.1;
     };
 
-    [_group, "Patrol_Area", _minRad, _maxRad, _maxRad, false, _markerPos, false] call A3A_fnc_patrolLoop;
+    [_group, "Patrol_Area", _minRad, _maxRad, -1, false, _markerPos, false, false] call A3A_fnc_patrolLoop;
 };
 
 _storedTroops set [0, (_troopCount) - 2*_numPatrols];

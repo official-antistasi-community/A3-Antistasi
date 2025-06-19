@@ -14,11 +14,20 @@ if (!isNil "_marker") then {
 };
 */
 
-private _marker = _victim getVariable ["markerX", ""];
-if (_marker != "") then {
-    A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
-};
+// Only care about immediate kills for accounting atm?
+/*if (A3A_hasACE) then {
+	if ((isNull _killer) || (_killer == _victim)) then {
+		_killer = _victim getVariable ["ace_medical_lastDamageSource", _killer];
+	};
+} else {
+    if (_victim getVariable ["incapacitated", false]) then {
+        _killer = _victim getVariable ["A3A_downedBy", _killer];
+    };
+};*/
 
+[_victim, group _victim, _killer] spawn A3A_fnc_rebelReactOnKill;
+
+// This is fairly odd...
 if (side _killer == Occupants) then {
     [0.25, 0, getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange", 2];
     [Occupants, -1, 30] remoteExec ["A3A_fnc_addAggression", 2];
