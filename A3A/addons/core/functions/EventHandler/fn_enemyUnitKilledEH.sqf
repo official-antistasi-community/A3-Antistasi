@@ -67,7 +67,8 @@ if (side (group _killer) == teamPlayer) then
     {
         //This doesn't trigger for dogs, only for surrendered units
         private _uid = (["AI",getPlayerUID _killer] select (isPlayer _killer));
-        Debug_2("aggroEvent | Rebel %1 [UID: %2] killed a surrendered unit", _killer, _uid);
+        private _name = name _killer;
+        Debug_2("aggroEvent | Rebel %1 [UID: %2 Name: %3] killed a surrendered unit", _killer, _uid, _name);
 		if (_victimSide == Occupants) then
 		{
 			[0,-2,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
