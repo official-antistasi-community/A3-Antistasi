@@ -23,9 +23,6 @@ private _totalReinf = 0.1 * ([A3A_resourcesDefenceOcc, A3A_resourcesDefenceInv] 
 Debug_2("%1 has %2 resources available for reinforcements", _side, _totalReinf);
 if (_totalReinf <= 0) then {continue};
 
-private _sourceAirports = airportsX select {(sidesX getVariable [_x,sideUnknown] == _side) and (spawner getVariable _x == 2)};
-_sourceAirports pushBack (["NATO_carrier", "CSAT_carrier"] select (_side == Invaders));
-
 private _typeWeights = createHashMapFromArray [["staticMortar", 1], ["staticAT", 1], ["staticAA", 1], ["staticMG", 1], ["vehicleAA", 1], ["vehicleTruck", 1], ["vehicle", 0.4], ["heli", 0.3], ["plane", 0.3], ["runway", 0.3], ["boat", 0.6]];
 private _noPlaceTypes = _faction get "noPlaceTypes";
 
@@ -73,11 +70,10 @@ private _weights = [];
 // problem: Need to record in-motion reinforcements?
 // or just assume for now that they'll arrive before the next reinf check
 
+private _rebelSpawners = units teamPlayer select { _x getVariable ["spawner", false] };
 
 while {_totalReinf > 0} do
 {
-    if (_sourceAirports isEqualTo []) exitWith {};
-
     Debug_1("Reinf data: %1", _markers);
     Debug_1("Reinf weights: %1", _weights);
 
@@ -95,12 +91,7 @@ while {_totalReinf > 0} do
     {
         // Need to know class now for cost reasons
         private _vehClass = [_faction, _type, _marker in airportsX] call A3A_fnc_selectGarrisonVehicleType;
-        if (isNil "_vehClass") then {
-            Error_2("Nil vehicle class returned for type %1, faction %2", _type, _faction);
-            _weights set [_index, 0];
-            continue;
-        };     // TODO: shouldn't happen
-        _totalReinf = _totalReinf - (A3A_vehicleResourceCosts get _vehClass);      // TODO: shouldn't ever be 0 now
+        _totalReinf = _totalReinf - (A3A_vehicleResourceCosts get _vehClass);
 
         [_side, _marker, _type, _vehClass] spawn A3A_fnc_reinforceVehicle;
 
@@ -111,16 +102,16 @@ while {_totalReinf > 0} do
     };
 
     //Find a suitable site to reinforce
-    private _source = "";
-    if (_lowAir) then {
-        _source = [_side, _marker] call A3A_fnc_availableBasesLand;         // TODO: check whether this can return itself
-        if (isNil "_source") then {
-            // No possible reinforcements for this location, remove it from the list
-            _weights set [_index, 0]; continue;
-        };
-    } else {
-        // TODO: Check current version of availableBasesAir after merge, needs to be close-biased here
-        _source = [_side, markerPos _marker] call A3A_fnc_availableBasesAir;
+    private _rebelsNear = _rebelSpawners inAreaArray [markerPos _marker, 1000, 1000] isNotEqualTo [];
+    private _isLand = true;
+    private _source = call {
+        if (!_rebelsNear and _marker in airportsX) exitWith { _marker };
+        [_side, _marker] call A3A_fnc_availableBasesLand;
+    };
+    if (isNil "_source") then { _source = [_side, markerPos _marker] call A3A_fnc_availableBasesAir; _isLand = false };
+    if (isNil "_source") then {
+        // No possible reinforcements for this location, remove it from the list
+        _weights set [_index, 0]; continue;
     };
 
     private _siteType = A3A_garrison get _marker get "type";
@@ -134,14 +125,14 @@ while {_totalReinf > 0} do
 
     Debug_3("Reinforcing garrison %1 from %2 with %3 troops", _marker, _source, _numTroops);
     if (_source == _marker) then {
-        // Self-reinforce. Already know that we're not spawned, so this is fine
+        // Self-reinforce
         [-10*_numTroops, _side, "defence"] call A3A_fnc_addEnemyResources;
         [_marker, _numTroops, _quality] remoteExecCall ["A3A_fnc_garrisonServer_addUnitCount", 2];
         continue;
     };
-    if ([distanceSPWN1, 1, getMarkerPos _marker, teamPlayer] call A3A_fnc_distanceUnits) then {
-        // If rebels are near the target, send a real reinforcement
-        [[_marker, _source, _numTroops, _quality, _side], "A3A_fnc_patrolReinf"] call A3A_fnc_scheduler;      // TODO: patrolReinf needs update
+    if (_rebelsNear or _rebelSpawners inAreaArray [markerPos _source, 1000, 1000] isNotEqualTo []) then {
+        // If rebels are near the target or source, send a real reinforcement
+        [[_marker, _source, _isLand, _numTroops, _quality, _side], "A3A_fnc_patrolReinf"] call A3A_fnc_scheduler;      // TODO: patrolReinf needs update
         sleep 10;		// Might re-use this marker shortly, avoid collisions
     } else {
         // Otherwise just add troops directly

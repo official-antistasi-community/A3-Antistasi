@@ -76,8 +76,10 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
         {[_x, _marker] call _fnc_initUnit} forEach units _group;
         _troops append units _group;
         _groups pushBack _group;
-        [_group, "Patrol_Area", 25, 100, 250, true, _markerPos, false, false] call A3A_fnc_patrolLoop;     // TODO: check for boat
-        sleep 0.1; continue;
+        if (_vehicle isKindOf "Land") then {
+            [_group, "Patrol_Area", 25, 100, 250, true, _markerPos, false, false] call A3A_fnc_patrolLoop;
+        };
+        sleep 0.3; continue;
     };
     if (isNil {_vehicle getVariable _crewVar}) then { sleep 0.1; continue };
 

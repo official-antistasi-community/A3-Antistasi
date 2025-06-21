@@ -51,10 +51,10 @@ if (count _vehicleMarker == 0) then
     Info_1("InitSpawnPlaces: Could not find any vehicle places on %1!", _marker);
 };
 
+private _markerRadius = vectorMagnitude markerSize _marker;
 private _hangars = [];
 private _helipads = [];
 call {
-    private _markerRadius = vectorMagnitude markerSize _marker;
     private _buildings = nearestObjects [getMarkerPos _marker, ["Land_Hangar_F", "Land_TentHangar_V1_F", "Land_Airport_01_hangar_F", "Land_Mil_hangar_EP1", "Land_Ss_hangar", "Land_Ss_hangard", "Land_vn_airport_01_hangar_f", "Land_vn_usaf_hangar_01", "Land_vn_usaf_hangar_02", "Land_vn_usaf_hangar_03"], _markerRadius, true];
     { _hangars pushBack _x } forEach (_buildings inAreaArray _marker);
 
@@ -144,7 +144,7 @@ private _planeSpawns = [];
     _planeSpawns pushBack [markerPos _x, markerDir _x];
 } forEach _planeMarker;
 
-_mortarSpawns = [];
+private _mortarSpawns = [];
 {
     private _pos = getMarkerPos _x;
     _pos set [2, ((_pos select 2) + 0.1) max 0.1];
@@ -166,6 +166,12 @@ if (_vehicleSpawns isNotEqualTo []) then {
     _spawnPlaces pushBack ["vehicleTruck", _truckPlace#0, _truckPlace#1];
 };
 
+private _nearSeaSpawns = seaSpawn inAreaArrayIndexes [markerPos _marker, _markerRadius, _markerRadius] apply { seaSpawn#_x };
+{
+    if !(markerPos _x inArea _marker) then { continue };
+    _spawnPlaces pushBack ["boat", markerPos _x, markerDir _x];
+} forEach _nearSeaSpawns;
+
 // Add runway spawn marker
 private _runwaySpawn = [_marker] call A3A_fnc_getRunwayTakeoffForAirportMarker;
 if (_runwaySpawn isNotEqualTo []) then { _spawnPlaces pushBack ["runway", _runwaySpawn#0, _runwaySpawn#1] }; 
@@ -176,4 +182,3 @@ if (_runwaySpawn isNotEqualTo []) then { _spawnPlaces pushBack ["runway", _runwa
 } forEach [[_vehicleSpawns, "vehicle"], [_heliSpawns, "heli"], [_planeSpawns, "plane"], [_mortarSpawns, "staticMortar"]];
 
 A3A_spawnPlacesHM set [_marker, _spawnPlaces];
-

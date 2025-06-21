@@ -1,7 +1,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_mrkDest", "_mrkOrigin", "_numTroops", "_quality", "_side"];
+params ["_mrkDest", "_mrkOrigin", "_isLand", "_numTroops", "_quality", "_side"];
 private _faction = Faction(_side);
 private _lowAir = _faction getOrDefault ["attributeLowAir", false];
 private _posDest = getMarkerPos _mrkDest;
@@ -10,12 +10,6 @@ private _posOrigin = getMarkerPos _mrkOrigin;
 private _squadTypes = [[_faction get "groupPoliceSquad"], (_faction get "groupsMilitiaSquads") + (_faction get "groupsMilitiaMedium"),
 	(_faction get "groupsSquads") + (_faction get "groupsMedium"), _faction get "groupSpecOpsRandom"];
 private _groupType = selectRandom (_squadTypes select round _quality);
-
-private _isLand = if (_lowAir) then { true } else {						// land markers guaranteed by reinforcementsAI for low air
-	private _targNavIndex = _mrkDest call A3A_fnc_getMarkerNavPoint;
-	private _suppMarkers = [_targNavIndex, _lowAir] call A3A_fnc_findLandSupportMarkers apply { _x#0 };
-	_mrkOrigin in _suppMarkers;
-};
 
 ServerInfo_5("Spawning PatrolReinf. Dest:%1 Orig:%2 Size:%3 Side:%4 Land:%5",_mrkDest,_mrkOrigin,_numTroops,_side,_isLand);
 
@@ -43,6 +37,7 @@ private _crewGroup = [_side, _vehicle] call A3A_fnc_createVehicleCrew;
 
 
 private _expectedCargo = ([_vehicleType, true] call BIS_fnc_crewCount) - ([_vehicleType, false] call BIS_fnc_crewCount);
+_expectedCargo = _expectedCargo min _numTroops;
 if (_expectedCargo < count _groupType) then { _groupType resize _expectedCargo };           // trim to cargo seat count
 private _cargoGroup = [_posOrigin, _side, _groupType, true, false] call A3A_fnc_spawnGroup;         // force spawn, should be pre-checked
 {
