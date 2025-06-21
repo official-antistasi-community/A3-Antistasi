@@ -46,8 +46,10 @@ else
 // so we need spawnPlaceStats too?
 // but that would be identical for each roadblock at the moment? maybe type-based later
 
+_garrison set ["type", "roadblock"];
 _garrison set ["buildings", _buildings];
 _garrison set ["spawnPlaces", _spawnPlaces];        // so that it can be sent to garrisonLocal
 A3A_spawnPlacesHM set [_marker, _spawnPlaces];
+A3A_garrisonSize set [_marker, 6];
 
 A3A_garrison set [_marker, _garrison];

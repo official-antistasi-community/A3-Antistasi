@@ -457,8 +457,8 @@ private _vehicleResourceCosts = createHashMap;
 
 { _vehicleResourceCosts set [_x, 10] } forEach FactionGet(all, "staticMGs");
 { _vehicleResourceCosts set [_x, 20] } forEach FactionGet(all, "staticAA") + FactionGet(all, "staticAT");
-{ _vehicleResourceCosts set [_x, 20] } forEach FactionGet(all, "vehiclesLightUnarmed") + FactionGet(all, "vehiclesTrucks");
-{ _vehicleResourceCosts set [_x, 50] } forEach FactionGet(all, "vehiclesLightArmed") + FactionGet(all, "staticMortars");
+{ _vehicleResourceCosts set [_x, 20] } forEach FactionGet(all, "vehiclesLightUnarmed") + FactionGet(all, "vehiclesTrucks") + FactionGet(all, "vehiclesCargoTrucks");
+{ _vehicleResourceCosts set [_x, 50] } forEach FactionGet(all, "vehiclesLightArmed") + FactionGet(all, "staticMortars") + FactionGet(all, "vehiclesUtilityTrucks");
 { _vehicleResourceCosts set [_x, 60] } forEach FactionGet(all, "vehiclesLightAPCs");
 { _vehicleResourceCosts set [_x, 100] } forEach FactionGet(all, "vehiclesAPCs");
 { _vehicleResourceCosts set [_x, 150] } forEach FactionGet(all, "vehiclesAA") + FactionGet(all, "vehiclesArtillery") + FactionGet(all, "vehiclesIFVs") + FactionGet(all, "vehiclesLightTanks");
@@ -543,12 +543,12 @@ A3A_validVehicles = createHashMap;
 	_valid set ["staticMortar", _x get "staticMortar"];
 
 	_valid set ["vehicleAA", _x get "vehiclesAA"];
+	_valid set ["vehiclePolice", _x get "vehiclesPolice"];
 	_valid set ["vehicleTruck", (_x get "vehiclesTrucks") + (_x get "vehiclesCargoTrucks") + (_x get "vehiclesAmmoTrucks")
 		+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
-	_valid set ["vehicle", (_valid get "vehicleTruck") + (_x get "vehiclesLightUnarmed") + (_x get "vehiclesTrucks") + (_x get "vehiclesLightArmed")
+	_valid set ["vehicle", (_valid get "vehicleTruck") + (_x get "vehiclesLightUnarmed") + (_x get "vehiclesLightArmed") + (_x get "vehiclesMilitiaCars")
 		+ (_x get "vehiclesLightAPCs") + (_x get "vehiclesAPCs") + (_x get "vehiclesAA") + (_x get "vehiclesArtillery") + (_x get "vehiclesIFVs")
-		+ (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks") + (_x get "vehiclesPolice")];
-	// TODO: add militia?
+		+ (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks") + (_x get "vehiclesMilitiaLightArmed")];
 
 	_valid set ["plane", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA") + (_x get "vehiclesPlanesTransport")];
 	_valid set ["heli", (_x get "vehiclesHelisLight") + (_x get "vehiclesHelisTransport") + (_x get "vehiclesHelisLightAttack") + (_x get "vehiclesHelisAttack")];

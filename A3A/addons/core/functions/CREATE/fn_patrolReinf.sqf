@@ -1,12 +1,15 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_mrkDest", "_mrkOrigin", "_numTroops", "_side"];
+params ["_mrkDest", "_mrkOrigin", "_numTroops", "_quality", "_side"];
 private _faction = Faction(_side);
 private _lowAir = _faction getOrDefault ["attributeLowAir", false];
 private _posDest = getMarkerPos _mrkDest;
 private _posOrigin = getMarkerPos _mrkOrigin;
-private _groupType = selectRandom (_faction get (if (_numTroops == 4) then {"groupsMedium"} else {"groupsSquads"}));
+
+private _squadTypes = [[_faction get "groupPoliceSquad"], (_faction get "groupsMilitiaSquads") + (_faction get "groupsMilitiaMedium"),
+	(_faction get "groupsSquads") + (_faction get "groupsMedium"), _faction get "groupSpecOpsRandom"];
+private _groupType = selectRandom (_squadTypes select round _quality);
 
 private _isLand = if (_lowAir) then { true } else {						// land markers guaranteed by reinforcementsAI for low air
 	private _targNavIndex = _mrkDest call A3A_fnc_getMarkerNavPoint;

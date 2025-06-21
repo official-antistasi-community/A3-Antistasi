@@ -169,8 +169,9 @@ private _rebMarkers = (markersX select { sidesX getVariable _x == teamPlayer }) 
 private _saveGarrison = +A3A_garrison;
 { _saveGarrison deleteAt _x } forEach A3A_markersToDelete;			// don't save garrisons that we're deleting
 {
-	// potentially add other stuff we're not saving in here?
+	// Add other stuff we're not saving in here
 	_y deleteAt "spawnedBuildings";
+	_y deleteAt "type";
 } forEach _saveGarrison;
 
 ["newGarrison", _saveGarrison] call A3A_fnc_setStatVariable;

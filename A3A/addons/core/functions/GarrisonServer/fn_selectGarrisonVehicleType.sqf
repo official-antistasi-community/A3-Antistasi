@@ -1,14 +1,12 @@
 /*
     Select suitable vehicle type for garrison slot
 
-    TODO: Lazy vehicle selection, fix it up at some point.
-
 Environment: Any?
 
 Parameters:
     <HASHMAP> Faction to use
     <STRING> Place type, "staticMG", "vehicle" etc.
-    <BOOL> True if it's for an airport
+    <BOOL> True if it's for an airport (could generalize to site type?)
 
 Return value:
     <STRING> Vehicle class, or nil if nothing suitable available in this faction
@@ -47,13 +45,14 @@ if (_placeType == "vehicleTruck") exitWith {
     _types = _types select { _x in FactionGet(all,"vehiclesCargoTrucks") };         // avoid troops-only trucks. Should prebuild?
     selectRandom _types;
 };
-if (_placeType == "vehicleAA") exitWith { selectRandom (_faction get "vehiclesAA") };
 if (_placeType == "vehicle") exitWith {
     if (random 1 < 0.2) exitWith { [["vehiclesRepairTrucks","vehiclesFuelTrucks","vehiclesAmmoTrucks"], [1,1,1]] call _fnc_selectFromLists };
-    private _effTier = [tierWar, tierWar+2] select _isAirport;      // TODO: no upgrade mechanism
+    private _effTier = [tierWar, tierWar+2] select _isAirport;
     if (random 1 < 0.5) exitWith { selectRandomWeighted ([_side, _effTier] call A3A_fnc_getVehiclesGroundSupport) };
     selectRandomWeighted ([_side, _effTier] call A3A_fnc_getVehiclesGroundTransport);
 };
+if (_placeType == "vehicleAA") exitWith { selectRandom (_faction get "vehiclesAA") };
+if (_placeType == "vehiclePolice") exitWith { selectRandom (_faction get "vehiclesPolice") };
 if (_placeType == "staticMortar") exitWith { selectRandom (_faction get "staticMortars") };
 if (_placeType == "staticAA") exitWith { selectRandom (_faction get "staticAA") };
 if (_placeType == "heli") exitWith { 

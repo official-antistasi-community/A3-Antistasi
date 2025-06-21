@@ -8,31 +8,15 @@ Trace_1("Called with %1", _this);
 params ["_marker", "_newGarrison", "_side"];
 private _markerPos = markerPos _marker;
 private _faction = Faction(_side);
+private _garrisonType = _newGarrison get "type";
 
 Info_2("Spawning %2 garrison at marker %1", _marker, _side);
 Debug_1("Garrison data: %1", _newGarrison);
 
 private _garrison = createHashMapFromArray [["troops", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []],
-    ["side", _side], ["buildingGroup", grpNull], ["staticGroup", grpNull], ["mortarGroup", grpNull] ];
+    ["side", _side], ["type", _garrisonType], ["buildingGroup", grpNull], ["staticGroup", grpNull], ["mortarGroup", grpNull] ];
 A3A_activeGarrison set [_marker, _garrison];
 
-// Generate the type now so that we only need to do it once per spawn
-// TODO: if careful, everything except cities can be done with _ lookup?
-private _garrisonType = call {
-    if (_marker in citiesX) exitWith {"city"};
-    if (_marker find "roadblock" == 0) exitWith {"roadblock"};
-    if (_marker find "camp" == 0) exitWith {"camp"};
-    if (_marker find "RebPost" == 0) exitWith {"rebpost"};
-    if (_marker find "outpost" == 0) exitWith {"outpost"};
-    if (_marker find "resource" == 0) exitWith {"resource"};
-    if (_marker find "factory" == 0) exitWith {"factory"};
-    if (_marker find "seaport" == 0) exitWith {"seaport"};
-    if (_marker find "airport" == 0) exitWith {"airport"};
-    if (_marker == "Synd_HQ") exitWith {"hq"};
-    Error_1("Marker %1 type not identified", _marker);
-    "unknown";
-};
-_garrison set ["type", _garrisonType];
 
 // Merge in spawn places & garrison size for minor sites if we haven't done so yet
 if !(_marker in A3A_spawnPlacesHM) then { A3A_spawnPlacesHM set [_marker, _newGarrison get "spawnPlaces"] };

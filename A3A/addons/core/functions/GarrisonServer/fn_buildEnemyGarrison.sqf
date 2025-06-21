@@ -16,9 +16,9 @@ if (isNil "_spawnPlaceStats") then {
 };
 
 private _isAirport = false;
-private _qMod = random 0.5 + tierWar/20;
+private _qMod = random 0.4 + tierWar/20;
 private _quality = call {
-    if (_marker in citiesX) exitWith {if (_side == Invaders) then {3} else {0 + _qMod}};
+    if (_marker in citiesX) exitWith {if (_side == Invaders) then {3} else {0.1 + _qMod}};
     if (_side == Invaders) then {_qMod = _qMod + 0.4};
     if (_marker in airportsX) exitWith {_isAirport = true; (1.5 + _qMod) min 2};
     if (_marker in outposts) exitWith {(1.4 + _qMod) min 2};

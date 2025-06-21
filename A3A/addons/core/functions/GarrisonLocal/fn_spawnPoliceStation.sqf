@@ -75,7 +75,7 @@ _activeGarrison get "buildings" append _furniture;
 _storedTroops params ["_count", "_quality"];
 private _buildingPositions = _station buildingPos -1;
 
-private _numUnits = (3 + round random 2) min (count _buildingPositions) min (_count);
+private _numUnits = (4 + round random 1) min (count _buildingPositions) min (_count);
 if ((_count - _numUnits) % 2 == 1) then { _numUnits = _numUnits - 1 };        // so that we have even number of patrols
 
 private _lowTypes = flatten (A3A_faction_occ get "groupsPoliceSmall");

@@ -52,6 +52,7 @@ private _weights = [];
         _weights pushBack (1 - _cur / _par);            // troop base weight is 1
         _markers pushBack [_marker, "troops", _par - _cur];
     };
+    if !(_marker in A3A_spawnPlaceStats) then { continue };     // roadblock/camp don't reinforce vehicles atm
 
     // Filter out rebel leftovers
     private _usedPlaces = (_garrison get "vehicles") select {count _x == 2} apply {_x#1};
@@ -67,7 +68,7 @@ private _weights = [];
 
     } forEach (A3A_spawnPlaceStats get _marker);        // hashmap, place type (_x) to [placeindexes, max, par]
 
-} forEach (airportsX + outposts + seaports + resourcesX + factories + citiesX);
+} forEach (markersX + controlsX);
 
 // problem: Need to record in-motion reinforcements?
 // or just assume for now that they'll arrive before the next reinf check
@@ -122,6 +123,8 @@ while {_totalReinf > 0} do
         _source = [_side, markerPos _marker] call A3A_fnc_availableBasesAir;
     };
 
+    private _siteType = A3A_garrison get _marker get "type";
+    private _quality = [_siteType, _side, random 0.4] call A3A_fnc_getSiteTroopQuality;
     private _numTroops = [4, 8] select (_needed > 4 and _totalReinf > 40 and random 1 > 0.3);
     _totalReinf = _totalReinf - _numTroops*10;
 
@@ -133,17 +136,17 @@ while {_totalReinf > 0} do
     if (_source == _marker) then {
         // Self-reinforce. Already know that we're not spawned, so this is fine
         [-10*_numTroops, _side, "defence"] call A3A_fnc_addEnemyResources;
-        [_marker, _numTroops, 2] remoteExecCall ["A3A_fnc_garrisonServer_addUnitCount", 2];
+        [_marker, _numTroops, _quality] remoteExecCall ["A3A_fnc_garrisonServer_addUnitCount", 2];
         continue;
     };
     if ([distanceSPWN1, 1, getMarkerPos _marker, teamPlayer] call A3A_fnc_distanceUnits) then {
         // If rebels are near the target, send a real reinforcement
-        [[_marker, _source, _numTroops, _side], "A3A_fnc_patrolReinf"] call A3A_fnc_scheduler;      // TODO: patrolReinf needs update
+        [[_marker, _source, _numTroops, _quality, _side], "A3A_fnc_patrolReinf"] call A3A_fnc_scheduler;      // TODO: patrolReinf needs update
         sleep 10;		// Might re-use this marker shortly, avoid collisions
     } else {
         // Otherwise just add troops directly
         [-10*_numTroops, _side, "defence"] call A3A_fnc_addEnemyResources;
-        [_marker, _numTroops, 2] remoteExecCall ["A3A_fnc_garrisonServer_addUnitCount", 2];
+        [_marker, _numTroops, _quality] remoteExecCall ["A3A_fnc_garrisonServer_addUnitCount", 2];
     };
 };
 
@@ -156,3 +159,5 @@ while {_totalReinf > 0} do
 // recalc: losing units or vehicles?
 // In this case, can we lose A3A_spawnPlaceStats?
 // recalc it as required instead?
+
+

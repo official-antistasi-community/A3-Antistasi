@@ -25,7 +25,7 @@ _iconMarker setMarkerTypeLocal "loc_bunker";
 _iconMarker setMarkerColorLocal colorTeamPlayer;
 _iconMarker setMarkerText format [localize _strTable, FactionGet(reb,"name")];;
 
-private _garrison = createHashMapFromArray [ ["troops", _troopTypes], ["vehicles", []], ["buildings", []] ];
+private _garrison = createHashMapFromArray [ ["troops", _troopTypes], ["vehicles", []], ["buildings", []], ["type", "rebpost"] ];
 
 // Add the MG vehicle. Use spawn place so we don't need to worry about precision
 if (isOnRoad _pos) then {
@@ -34,7 +34,7 @@ if (isOnRoad _pos) then {
 
     private _spawnPlaces = [["vehicleRB", _pos, _roadDir+90]];
     _garrison set ["spawnPlaces", _spawnPlaces];
-    A3A_spawnPlacesHM set [_marker, _spawnPlaces];          // probably never used?
+    A3A_spawnPlacesHM set [_marker, _spawnPlaces];
 
     private _vehClass = FactionGet(reb,"vehiclesLightArmed") # 0;
     _garrison set ["vehicles", [[_vehClass, 0]]];

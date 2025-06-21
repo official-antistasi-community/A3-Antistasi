@@ -53,7 +53,7 @@ private _fnc_checkRoadPlace = {
     private _nearObj = nearestTerrainObjects [_placePos, [], 5, false, true] - [_x];        // don't include the road
     if (_nearObj inAreaArray [_placePos, 2.4, 5, _roadDir, true] isNotEqualTo []) exitWith { false };
 
-    _vehPlaces pushBack ["vehicle", _placePos, _roadDir];
+    _vehPlaces pushBack ["civCar", _placePos, _roadDir];
     true;
 };
 
@@ -96,7 +96,7 @@ _places = _places select { nearestTerrainObjects [_x#0, ["ROCK"], 30, false, tru
     private _place = selectBestPlaces [_x#0, 15, "2*(waterDepth factor [0,0.01]) - waterDepth", 3, 1] select 0 select 0;
     private _sea = selectBestPlaces [_x#0, 15, "waterdepth", 3, 1] select 0 select 0;
 
-    _vehPlaces pushBack ["boat", _place, _place getDir _sea];
+    _vehPlaces pushBack ["civBoat", _place, _place getDir _sea];
 
 } forEach _places;
 

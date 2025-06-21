@@ -268,10 +268,13 @@ addMissionEventHandler ["BuildingChanged", {
         };
 
         // If it's a police station, mark as destroyed
+        // Might not be spawned, so can't depend on the furniture case
         private _city = _oldBuilding getVariable "A3A_policeStation";
         if (!isNil "_city") then {
             A3A_garrison get _city set ["policeStation", false];
-            // should remove attached objects too? Probably add a function
+            A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) - 4];
+            A3A_spawnPlaceStats deleteAt _city;
+            // Throw a destruction message too
         };
     };
 }];
@@ -300,7 +303,8 @@ addMissionEventHandler ["EntityKilled", {
     };
 }];
 
-if (A3A_hasACE) then {
+// Shouldn't need these now due to attach/detach covering all cases
+/*if (A3A_hasACE) then {
     // Handler for detecting ACE load of static weapons. God why?
     ["ace_common_hideObjectGlobal", {
     	params ["_object", "_hide"];
@@ -323,7 +327,7 @@ if (A3A_hasACE) then {
         if (_mass < 1) exitWith {};
         ["", _object] call A3A_fnc_garrisonServer_addVehicle;
     }] call CBA_fnc_addEventHandler;
-};
+};*/
 
 if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
     isClass (configfile >> "CfgPatches" >> "lambs_danger"))) then {

@@ -108,10 +108,10 @@ if (isServer) then {
 	call A3A_fnc_initPoliceStations;
 
 	// Fill out city civ component if missing (should be done after police stations because they share vehicle places)
-	{
-		if ((_x + "_civ") in A3A_garrison) then { continue };
-		[_x] call A3A_fnc_buildCity;
-	} forEach citiesX;
+	{ [_x] call A3A_fnc_buildCity } forEach citiesX;
+
+	// Add type info to markers
+	call A3A_fnc_initMarkerTypes;
 
 	// Move saved statics & buildings into the correct garrisons
 	if (_garrisonCompat) then { call A3A_fnc_convertSavedStatics };

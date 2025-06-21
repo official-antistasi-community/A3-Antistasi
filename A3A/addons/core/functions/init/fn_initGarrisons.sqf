@@ -28,14 +28,14 @@ if (gameMode >= 3) then
     [_x] call A3A_fnc_buildEnemyGarrison;
 } forEach (markersX - ["Synd_HQ"]);
 
-
 // Add police stations in cities (done before buildCity because they share vehicle places)
 call A3A_fnc_initPoliceStations;
 
-
 // Add boats & vehicles for cities
-{
-    [_x] call A3A_fnc_buildCity;
-} forEach citiesX;
+{ [_x] call A3A_fnc_buildCity } forEach citiesX;
+
+// Add type info to markers
+call A3A_fnc_initMarkerTypes;
+
 
 Info("InitGarrisons completed");

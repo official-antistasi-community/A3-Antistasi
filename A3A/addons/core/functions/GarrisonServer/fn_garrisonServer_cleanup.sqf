@@ -32,7 +32,7 @@ if (_troopsOnly) exitWith { Trace("Completed") };
 // - if not, swap for valid vehicle
 
 private _faction = Faction(_side);
-private _places = A3A_spawnPlacesHM getOrDefault [_marker, _garrison get "spawnPlaces"];
+private _places = A3A_spawnPlacesHM get _marker;
 private _valid = A3A_validVehicles get _side;
 private _isAirport = _marker in airportsX;
 
@@ -40,7 +40,7 @@ private _vehicles = _garrison get "vehicles";
 {
     _x params ["_vehType", "_slotNum"];
 
-    if !(_slotNum isEqualType 0) then {
+    if (_slotNum isEqualType [] or { _slotNum >= count _places }) then {
         _vehicles deleteAt _forEachIndex;
         private _cost = A3A_vehicleResourceCosts getOrDefault [_vehType, 0];
         [_cost, _side, "defence"] call A3A_fnc_addEnemyResources;

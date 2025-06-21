@@ -366,6 +366,7 @@ class CfgFunctions
             class garrisonServer_sendData {};
             class garrisonServer_spawn {};
             class garrisonServer_updateVehData {};
+            class getSiteTroopQuality {};
             class selectGarrisonVehicleType {};
             class showSiteInfo {};
         };
@@ -388,6 +389,7 @@ class CfgFunctions
             class initBases {};
             class initCivSpawnPlaces {};
             class initGarrisons {};
+            class initMarkerTypes {};
             class initPoliceStations {};
             class initPreJIP { preInit = 1; };
             class initSpawnPlaces {};

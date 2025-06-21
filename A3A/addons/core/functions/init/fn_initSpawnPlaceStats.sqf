@@ -15,10 +15,6 @@ A3A_spawnPlaceStats = createHashMap;
     if (_marker in citiesX) then { A3A_spawnPlaceStats set [_x, _markerStats]; continue };
 
     private _spawnPlaces = A3A_spawnPlacesHM get _marker;
-    if (isNil "_spawnPlaces") then {
-        Error_1("No spawn places for marker %1", _marker);
-        continue;
-    };
     private _isAirport = _marker in airportsX;
     private _garrSize = A3A_garrisonSize get _marker;
     {
