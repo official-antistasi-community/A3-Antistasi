@@ -37,6 +37,9 @@ switch (true) do {
     case ([_class] call HR_GRG_fnc_isAmmoSource): { 6 };
     case ([_class] call HR_GRG_fnc_isFuelSource): { 6 };
     case ([_class] call HR_GRG_fnc_isRepairSource): { 6 };
+
+    case (_class isKindOf "staticWeapon"): { 7 };   //some non-vanilla artillery is statics
+
     case (_editorCat isEqualTo "EdSubcat_Cars"): { [_class] call HR_GRG_isCivilian }; // Returns 0 (undercover) or 1 (not undercover) 
     case (_editorCat in ["EdSubcat_Tanks","EdSubcat_APCs","EdSubcat_AAs","EdSubcat_Artillery"]): { 2 };
     case (_editorCat in ["EdSubcat_Helicopters"]): { 3 };
@@ -62,7 +65,6 @@ switch (true) do {
     case (_class isKindOf "Helicopter"): { 3 };
     case (_class isKindOf "Plane"): { 4 };
     case (_class isKindOf "Ship"): { 5 };
-    case (_class isKindOf "staticWeapon"): { 7 }; //some non-vanilla artillery is statics
 
     default { -1 };
 };

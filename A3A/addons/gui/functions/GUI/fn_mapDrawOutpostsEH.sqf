@@ -64,28 +64,14 @@ private _sideFadeHM = keys _sideColorHM createHashMapFromArray (values _sideColo
 private _colorBlack = [A3A_COLOR_BLACK] call FUNC(configColorToArray);
 
 private _fnc_drawIcon = {
-    params ["_pos", "_color", "_icon"];
+    params ["_pos", "_color", "_icon", "_name"];
     _map drawIcon [
         _icon, // texture
         _color,
         _pos,
         _markerSize, // width
         _markerSize, // height
-        0, // angle
-        "", // text
-        0 // shadow (outline if 2)
-    ];
-};
-
-private _fnc_drawLabel = {
-    params ["_pos", "_color", "_name"];
-    _map drawIcon [
-        "#(argb,1,1,1)color(0,0,0,0)", // the icon itself is transparent
-        _color, // colour
-        _pos, // position
-        _markerSize, // width
-        _markerSize, // height
-        0, // angle
+        360, // angle: non-zero means it won't be outlined?
         _name, // text
         2 // shadow (outline if 2)
     ];
@@ -96,14 +82,14 @@ private _fnc_drawMarkers = {
 
     // cull to window boundaries
     _markers = _markers inAreaArrayIndexes [_mapCenter, _mapWidth, _mapHeight, 0, true] apply {_markers#_x};
-    if (_mapScale >= _fadeEnd) then { _icon = A3A_Icon_Map_Blank };
+    if (_mapScale >= _fadeEnd) then { _icon = A3A_Icon_Map_Blank; _name = "" };
 
     {
         private _side = sidesX getVariable _x;
         private _pos = markerPos _x;
-        [_pos, _sideColorHM get _side, _icon] call _fnc_drawIcon;
-        if (_mapScale >= _fadeEnd) then { continue };
-        [_pos, _sideFadeHM get _side, _name] call _fnc_drawLabel;
+        private _txtMrkName = format ["Dum%1",_x];
+        if (_name isNotEqualTo "") then {_name = markerText _txtMrkName};
+        [_pos, _sideColorHM get _side, _icon, _name] call _fnc_drawIcon;
     } forEach _markers;
 };
 
@@ -123,9 +109,10 @@ private _cityIcon = [A3A_Icon_Map_City, A3A_Icon_Map_Blank] select (_mapScale >=
 {
     private _color = _sideColorHM get (sidesX getVariable _x);
     if (_x in destroyedSites) then { _color = _colorBlack };
-    [markerPos _x, _color, _cityIcon] call _fnc_drawIcon;
-    [markerPos _x, _color, _x] call _fnc_drawLabel;
+    private _textMarker = format ["Dum%1",_x];
+    private _garrisonInfo = markerText _textMarker;
+    private _finalText = format ["%1%2", _x, _garrisonInfo];
+    [markerPos _x, _color, _cityIcon, _finalText] call _fnc_drawIcon;
 } forEach _visCities;
 
-[markerPos "Synd_HQ", [0,1,0,1], A3A_Icon_Map_HQ] call _fnc_drawIcon;
-[markerPos "Synd_HQ", [0,1,0,1], "HQ"] call _fnc_drawLabel;
+[markerPos "Synd_HQ", [0,1,0,1], A3A_Icon_Map_HQ, "HQ"] call _fnc_drawIcon;
