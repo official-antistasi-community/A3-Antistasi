@@ -102,20 +102,20 @@ if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balanceP
 
     // Only do anything if we're near max troops
     private _marker = _x;
-    private _garrison = A3A_garrison get _x;
+    private _garrison = A3A_garrison get _marker;
     _garrison get "troops" params ["_curTroops", "_quality"];
-    if (_curTroops < (A3A_garrisonSize get _x) * 0.8) then { continue };
+    if (_curTroops < (A3A_garrisonSize get _marker) * 0.8) then { continue };
 
-    private _siteType = A3A_garrison get _marker get "type";
+    private _siteType = _garrison get "type";
     private _newQuality = [_siteType, _side, 0.2] call A3A_fnc_getSiteTroopQuality;
     Debug_3("Adjusting troop quality from %1 to %2 at %3", _quality, _newQuality, _marker);
     _garrison get "troops" set [1, _newQuality * 0.2 + _quality * 0.8];
 
     private _vehicles = _garrison get "vehicles";
-    private _spawnStats = A3A_spawnPlaceStats get _x;
+    private _spawnStats = A3A_spawnPlaceStats get _marker;
     if (_vehicles isEqualTo [] or isNil "_spawnStats") then { continue };
 
-    private _spawnPlaces = A3A_spawnPlacesHM get _x;
+    private _spawnPlaces = A3A_spawnPlacesHM get _marker;
     private _usedPlaces = _vehicles select {count _x == 2} apply {_x#1};		// filter not necessary as it's despawned, but whatever
     private _faction = [A3A_faction_occ, A3A_faction_inv] select (_side == Invaders);
 

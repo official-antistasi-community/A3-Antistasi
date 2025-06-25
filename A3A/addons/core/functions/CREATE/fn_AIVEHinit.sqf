@@ -113,6 +113,7 @@ else
 
 };
 
+// Actions to allow/deny AIs from using the vehicles
 if (_veh isKindOf "Land" and _veh emptyPositions "gunner" > 0) then {
 	[_veh, "static"] remoteExec ["A3A_fnc_flagAction", [teamPlayer,civilian], _veh];
 };
@@ -194,11 +195,10 @@ if (_side == Invaders or _side == Occupants) then
     }];
 };
 
+// Add event handlers for smoke trails and pre-emptive AI ducking
 if(_typeX in (FactionGet(all, "vehiclesArtillery") + FactionGet(all, "staticMortars")) ) then
 {
-    [_veh] call A3A_fnc_addArtilleryTrailEH;
-// Redundant with support system?
-//	[_veh] remoteExec ["A3A_fnc_addArtilleryDetectionEH", 2];
+	[_veh] remoteExecCall ["A3A_fnc_addArtilleryFiredEH", 2];
 };
 
 // EH behaviour:

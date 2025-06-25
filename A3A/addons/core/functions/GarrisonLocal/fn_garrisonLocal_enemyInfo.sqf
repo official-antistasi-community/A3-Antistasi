@@ -8,6 +8,11 @@ Trace_1("Called with %1", _this);
 
 params ["_marker", "_type", "_enemy", "_knowsAbout"];
 
+// If we're firing a static attached to a truck, then the static is more important
+if (_enemy isKindOf "Man" and !(isNull objectParent _enemy)) then { _enemy = objectParent _enemy };
+
+Debug_1("Enemy type %1", _enemy);
+
 private _garrison = A3A_activeGarrison get _marker;
 
 // ignore mode changes that are triggered by related events
@@ -54,7 +59,7 @@ if (abs _threat > 0.01) then {
     // time falloff towards zero (even if negative)
     _threat = _threat - ((time - _threatTime) / 60) * _threat / abs _threat;
 };
-_threat = (_threat max 0) + 1;
+_threat = (_threat max 0) + ([1, 3] select (_type == "mortar"));
 _garrison set ["threatTime", time];
 _garrison set ["threat", _threat];
 
@@ -86,7 +91,8 @@ if (_threat > random 3) then
  
     // mortars are actually vehicles not groups here, but whatever
     if (_group in _mortars) then {
-        [_group, _targPos, 40, "HE", 4] call A3A_fnc_artilleryFireMission;
+        private _delay = [20 + random 10, 5 + random 5] select (_enemy isKindOf "StaticMortar");
+        [_group, _targPos, 40, "HE", 4, _delay] call A3A_fnc_artilleryFireMission;
         _threat = _threat - 4;
         ServerDebug_3("Ordering mortar %1 to attack %2 at %3", _group, _enemy, _marker);
         // should probably pay for it?

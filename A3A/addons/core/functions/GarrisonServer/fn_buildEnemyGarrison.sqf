@@ -26,7 +26,9 @@ private _quality = call {
     (1 + _qMod) min 2;
 };
 
-private _garrison = createHashMapFromArray [ ["buildings", []] ];
+// Might be used to rebuild a garrison after a sim capture, so keep the old static info if it exists
+private _garrison = A3A_garrison getOrDefaultCall [_marker, {createHashMap}];
+_garrison set ["buildings", []];
 private _troopCount = (0.7 + random 0.3) * (A3A_garrisonSize get _marker);
 _garrison set ["troops", [ceil _troopCount, _quality]];
 

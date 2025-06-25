@@ -9,6 +9,7 @@
         <Number> Area in which you want the artillery strike to happen in.
         <String> Type of round, "HE", "Flare", "Smoke".
         <Number> Number of rounds you want fired.
+        <Number> Setup delay before firing in seconds.
 
     Return Value:
         N/A
@@ -25,7 +26,7 @@
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-params ["_mortar", "_targetPos", "_area", "_roundType", "_rounds"];     //, "_group"];
+params ["_mortar", "_targetPos", "_area", "_roundType", "_rounds", ["_delay", PATCOM_ARTILLERY_DELAY]];
 
 //private _batteryArray = [];
 private _side = side _group;
@@ -109,14 +110,14 @@ if !(_targetPos inRangeOfArtillery [[_selectedBattery], _shellType]) exitWith {
 };
 
 /////// DO ARTILLERY FIRE \\\\\\\
-[_group, _targetPos, _area, _selectedBattery, _shellType, _rounds, _reloadTime] spawn {
-    params ["_group", "_targetPos", "_area", "_selectedBattery", "_shellType", "_rounds", "_reloadTime"];
+[_group, _targetPos, _area, _selectedBattery, _shellType, _rounds, _reloadTime, _delay] spawn {
+    params ["_group", "_targetPos", "_area", "_selectedBattery", "_shellType", "_rounds", "_reloadTime", "_delay"];
 
-    sleep (20 + random 10);
+    sleep _delay;
 
     for "_i" from 1 to _rounds do {
         //private _finalTargetPos = [_targetPos, (random 50), _area, 0, 1, -1, 0] call A3A_fnc_getSafePos;
-        private _finalTargetPos = _targetPos getPos [random _area, random 360];
+        private _finalTargetPos = _targetPos getPos [_area * sqrt random 1, random 360];
         _selectedBattery doArtilleryFire [_finalTargetPos, _shellType, 1];
         If (PATCOM_DEBUG) then {
             [leader _group, "ROUND AWAY", 1, "Green"] call A3A_fnc_debugText3D;
@@ -124,6 +125,5 @@ if !(_targetPos inRangeOfArtillery [[_selectedBattery], _shellType]) exitWith {
         sleep (_reloadTime + (2 + (random 4)));
     };
 
-    sleep PATCOM_ARTILLERY_DELAY;
     _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false, true];
 };

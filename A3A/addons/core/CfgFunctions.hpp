@@ -26,6 +26,7 @@ class CfgFunctions
             class coverage {};
             class destroyBuilding {};
             class doFlank {};
+            class duckMortar {};
             class enemyList {};
             class enemyGarrison {};
             class enemyReturnToBase {};
@@ -302,7 +303,7 @@ class CfgFunctions
 
         class EventHandler {
             file = QPATHTOFOLDER(functions\EventHandler);
-            class addArtilleryTrailEH {};
+            class addArtilleryFiredEH {};
             class addVehAttachDetachEH {};
             class addVehGetInOutEH {};
             class combatModeChangedEH {};
