@@ -461,6 +461,7 @@ class CfgFunctions
             class AS_specOP {};
             class AS_Traitor {};
             class CON_Outpost {};
+            class CON_PoliceStation {};
             class convoy {};
             class DES_Antenna {};
             class DES_Heli {};

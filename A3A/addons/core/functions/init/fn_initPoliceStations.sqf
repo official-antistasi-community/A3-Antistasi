@@ -44,7 +44,10 @@ private _policeSpawnStats =  createHashMapFromArray [ ["vehiclePolice", [[0], 1,
             private _carType = selectRandom (A3A_faction_occ get "vehiclesPolice");
             _garrison get "vehicles" pushBack [_carType, 0];
         };
-   };
+    };
+    // If we're loading from a save, police station might already be destroyed
+    if (_stationPos isEqualType false) then { continue };
+
     private _station = nearestBuilding _stationPos;
     _station setVariable ["A3A_policeStation", _city];          // So we can detect destruction
 
@@ -60,6 +63,7 @@ private _policeSpawnStats =  createHashMapFromArray [ ["vehiclePolice", [[0], 1,
     _minPlace set [0, "vehiclePolice"];                         // no longer civCar, so buildCity won't use it
     _garrison set ["spawnPlaces", [_minPlace]];                 // need this because it's post-initZones
     A3A_spawnPlaceStats set [_city, _policeSpawnStats];
+    A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) + 4];     // need more police to fill a station
 
 } forEach citiesX;
 

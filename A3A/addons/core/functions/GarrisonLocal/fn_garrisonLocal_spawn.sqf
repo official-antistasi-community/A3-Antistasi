@@ -5,13 +5,13 @@ FIX_LINE_NUMBERS()
 
 Trace_1("Called with %1", _this);
 
-params ["_marker", "_newGarrison", "_side"];
+params ["_marker", "_garrisonData", "_side"];
 private _markerPos = markerPos _marker;
 private _faction = Faction(_side);
-private _garrisonType = _newGarrison get "type";
+private _garrisonType = _garrisonData get "type";
 
 Info_2("Spawning %2 garrison at marker %1", _marker, _side);
-Debug_1("Garrison data: %1", _newGarrison);
+Debug_1("Garrison data: %1", _garrisonData);
 
 private _garrison = createHashMapFromArray [["troops", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []],
     ["side", _side], ["type", _garrisonType], ["buildingGroup", grpNull], ["staticGroup", grpNull], ["mortarGroup", grpNull] ];
@@ -19,7 +19,7 @@ A3A_activeGarrison set [_marker, _garrison];
 
 
 // Merge in spawn places & garrison size for minor sites if we haven't done so yet
-if !(_marker in A3A_spawnPlacesHM) then { A3A_spawnPlacesHM set [_marker, _newGarrison get "spawnPlaces"] };
+if !(_marker in A3A_spawnPlacesHM) then { A3A_spawnPlacesHM set [_marker, _garrisonData get "spawnPlaces"] };
 if !(_marker in A3A_garrisonSize) then { A3A_garrisonSize set [_marker, [_marker, true] call A3A_fnc_garrisonSize] };
 
 
@@ -34,10 +34,10 @@ if !(_garrisonType == "hq") then {
             _building setVectorDirAndUp [_vecDir, _vecUp];
             _buildings pushBack _building;
         };
-    } forEach (_newGarrison getOrDefault ["buildings", []]);
+    } forEach (_garrisonData getOrDefault ["buildings", []]);
     _garrison set ["buildings", _buildings];
 } else {
-    _garrison set ["buildings", _newGarrison get "spawnedBuildings"];
+    _garrison set ["buildings", _garrisonData get "spawnedBuildings"];
 };
 
 
@@ -92,14 +92,14 @@ if (_garrisonType == "camp") then {
 };
 
 
-private _storedTroops = +(_newGarrison get "troops");
+private _storedTroops = +(_garrisonData get "troops");
 
 // Spawn vehicles (including statics)
-[_garrison, _marker, _side, _storedTroops, _newGarrison get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
+[_garrison, _marker, _side, _storedTroops, _garrisonData get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
 
 // If there's a police station, spawn items & troops
-if (_newGarrison getOrDefault ["policeStation", false] isEqualType []) then {
-    [_garrison, _marker, _newGarrison, _storedTroops] call A3A_fnc_spawnPoliceStation;
+if (_garrisonData getOrDefault ["policeStation", false] isEqualType []) then {
+    [_garrison, _marker, _garrisonData, _storedTroops] call A3A_fnc_spawnPoliceStation;
 };
 
 // Spawn 2-man patrols
@@ -108,6 +108,10 @@ if (_newGarrison getOrDefault ["policeStation", false] isEqualType []) then {
 // Spawn remainder as squads
 [_garrison, _marker, _side, _storedTroops, true] call A3A_fnc_spawnGarrisonSquads;
 
+
+// Temporary watchpost stealth: apply if <5 units and none in vehicles
+//private _stealth = count (_garrison get "troops") < 5 and _garrison get "troops" findIf { vehicle _x != _x } == -1;
+// TODO: Need to teach patcom about stealth
 
 // Some general all-group stuff
 {

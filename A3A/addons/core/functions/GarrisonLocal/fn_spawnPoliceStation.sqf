@@ -3,7 +3,6 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-
 params ["_activeGarrison", "_marker", "_garrisonData", "_storedTroops"];
 
 if (_activeGarrison get "side" != Occupants) exitWith {};

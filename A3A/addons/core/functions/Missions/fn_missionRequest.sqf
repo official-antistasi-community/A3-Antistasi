@@ -57,6 +57,11 @@ switch (_type) do {
 		//find apropriate sites
 		_possibleMarkers = [outposts + resourcesX + (controlsX select {isOnRoad (getMarkerPos _x)})] call _findIfNearAndHostile;
 
+		// Add in occupant cities with active police stations
+/*		private _cities = citiesX inAreaArrayIndexes [getMarkerPos respawnTeamPlayer, distanceMission, distanceMission] apply { citiesX#_x };
+		_cities = _cities select { sidesX getVariable _x == Occupants } select { A3A_garrison get _x getOrDefault ["policeStation", false] isEqualType [] };
+		_possibleMarkers append _cities;
+*/
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
 				[petros,"globalChat",localize "STR_A3A_fn_mission_request_noConquest"] remoteExec ["A3A_fnc_commsMP",_requester];
@@ -64,6 +69,10 @@ switch (_type) do {
 			};
 		} else {
 			private _site = selectRandom _possibleMarkers;
+/*			if (_site in _cities) exitWith {
+				private _station = nearestBuilding (A3A_garrison get _site get "policeStation");
+				[_site, _station] spawn A3A_fnc_CON_PoliceStation;
+			};*/
 			[[_site],"A3A_fnc_CON_Outpost"] remoteExec ["A3A_fnc_scheduler",2];
 		};
 	};
@@ -155,6 +164,10 @@ switch (_type) do {
 		} else {
             Debug_1("City weights: %1", _weightedMarkers);
 			private _site = selectRandomWeighted _weightedMarkers;
+			private _stationPos = A3A_garrison get _site getOrDefault ["policeStation", false];
+			if (_stationPos isEqualType [] and sidesX getVariable _site == Occupants) exitWith {
+				[_site, nearestBuilding _stationPos] spawn A3A_fnc_CON_PoliceStation;
+			};
 			[[_site],"A3A_fnc_LOG_Supplies"] remoteExec ["A3A_fnc_scheduler",2];
 		};
 	};

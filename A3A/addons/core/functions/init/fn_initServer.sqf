@@ -256,11 +256,6 @@ addMissionEventHandler ["BuildingChanged", {
         _oldBuilding setVariable ["ruins", _newBuilding];
         _newBuilding setVariable ["building", _oldBuilding];
 
-        // Antenna dead/alive status is handled separately
-        if !(_oldBuilding in antennas || _oldBuilding in antennasDead) exitWith {
-            destroyedBuildings pushBack _oldBuilding;
-        };
-
         // Delete any furniture
         private _attached = _oldBuilding getVariable "A3A_furniture";
         if (!isNil "_attached") then {
@@ -274,7 +269,12 @@ addMissionEventHandler ["BuildingChanged", {
             A3A_garrison get _city set ["policeStation", false];
             A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) - 4];
             A3A_spawnPlaceStats deleteAt _city;
-            // Throw a destruction message too
+            ["TaskSucceeded", ["", "Police Station Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
+        };
+
+        // Antenna dead/alive status is handled separately
+        if !(_oldBuilding in antennas || _oldBuilding in antennasDead) exitWith {
+            destroyedBuildings pushBack _oldBuilding;
         };
     };
 }];
