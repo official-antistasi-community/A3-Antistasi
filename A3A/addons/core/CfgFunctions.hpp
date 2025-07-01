@@ -293,6 +293,7 @@ class CfgFunctions
             class fastTravelRadio {};
             class HQGameOptions {};
             class loadPreviousSession {};
+            class mapInfoDialog {};
             class mineDialog {};
             class persistentSave {};
             class skiptime {};

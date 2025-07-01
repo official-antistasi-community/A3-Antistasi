@@ -32,7 +32,6 @@ if (_marker == "") exitWith {
 private _side = sidesX getVariable [_marker,sideUnknown];
 private _faction = Faction(_side);
 private _nameFaction = _faction get "name";
-private _goodCount = 0;
 
 private _text = call {
     if (_marker == "Synd_HQ") exitWith {
@@ -41,7 +40,7 @@ private _text = call {
     if (_marker in citiesX) exitWith {
         if (_marker in destroyedSites) exitWith { format [localize "STR_A3A_fn_init_cityinfo_destr", _marker] };
 
-        (server getVariable _marker) params ["_numCiv", "", "_suppReb", "_suppOcc"];
+        (server getVariable _marker) params ["_numCiv", "", "_suppOcc", "_suppReb"];
         private _text = format [localize "STR_A3A_fn_init_cityinfo_overview_2",
             _marker, _numCiv, _suppOcc, _suppReb, "%", FactionGet(occ,"name"), FactionGet(reb,"name")];
 
@@ -50,24 +49,19 @@ private _text = call {
         format [localize "STR_A3A_fn_init_cityinfo_influ", _text, _powerName];
     };
     if (_marker in airportsX) exitWith {
-        _goodCount = 40;
         format [localize "STR_A3A_fn_init_cityinfo_airp_1", _nameFaction];
     };
     if (_marker in outposts) exitWith {
-        _goodCount = 24;
         format [localize "STR_A3A_fn_init_cityinfo_goutp_2", _nameFaction];
     };
     if (_marker in seaports) exitWith {
-        _goodCount = 20;
         format [localize "STR_A3A_fn_init_cityinfo_seap_1", _nameFaction];
     };
     if (_marker in resourcesX) exitWith {
-        _goodCount = 16;
         if (_marker in destroyedSites) exitWith { format ["%1 Resource<br/>DESTROYED", _nameFaction] };
         format [localize "STR_A3A_fn_init_cityinfo_reso_1", _nameFaction];
     };
     if (_marker in factories) exitWith {
-        _goodCount = 16;
         if (_marker in destroyedSites) exitWith { format ["%1 Factory<br/>DESTROYED", _nameFaction] };
         format [localize "STR_A3A_fn_init_cityinfo_fact_1", _nameFaction];
     };
@@ -81,11 +75,12 @@ if (_side == teamPlayer) then {
     private _garrInfo = [_marker] call A3A_fnc_garrisonInfo;
     _text = format ["%1<br/><br/>%2", _text, _garrInfo];
 } else {
-    private _troopCount = A3A_garrison get _marker get "troops";
-    private _garrLevel = if (_troopCount >= _goodCount) then {
+    private _troopCount = A3A_garrison get _marker get "troops" select 0;       // [count, quality]
+    private _maxTroops = A3A_garrisonSize get _marker;
+    private _garrLevel = if (_troopCount >= _maxTroops * 0.8) then {
         localize "STR_A3A_fn_garrison_getGarrisonStatus_good"
     } else {
-        if (_troopCount >= _goodCount/2) then {
+        if (_troopCount >= _maxTroops * 0.5) then {
             localize "STR_A3A_fn_garrison_getGarrisonStatus_weakened"
         } else {
             localize "STR_A3A_fn_garrison_getGarrisonStatus_decimated"
