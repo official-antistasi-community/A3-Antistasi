@@ -9,6 +9,7 @@ private _marker = _params # 0;
 
 Trace_1("Called with params %1", _this);
 
+// Also prevents any attempt to send ops to markersToDelete
 if !(_marker in A3A_garrisonMachine) exitWith {
     Error_2("Attempted to send op %1 to inactive marker %2", _opType, _marker);
 };

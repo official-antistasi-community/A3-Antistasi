@@ -40,24 +40,24 @@ if(count _possibleBases == 0) exitWith { Debug("No bases found for mortar suppor
 
 //Search for an outpost with a designated mortar position if possible
 private _spawnRadius = 0;
-private _spawnParams = false;
+private _spawnPos = false;
 {
-    private _placeIndex = A3A_spawnPlacesHM get _x findIf { _x#0 == "staticMortar" };
-    if (_placeIndex != -1) exitWith { _spawnParams = A3A_spawnPlacesHM # _placeIndex };
+    private _places = A3A_spawnPlacesHM get _x;
+    private _placeIndex = _places findIf { _x#0 == "staticMortar" };
+    if (_placeIndex != -1) exitWith { _spawnPos = _places # _placeIndex # 1 };
 } forEach _possibleBases;
 
 // Otherwise just put it somewhere near the flag
-if !(_spawnParams isEqualType []) then 
+if !(_spawnPos isEqualType []) then 
 {
     private _base = selectRandom _possibleBases;
-    _spawnParams = [markerPos _base, 0, nil];
+    _spawnPos = markerPos _base;
     _spawnRadius = 10;
 };
 
 
 // Spawn in mortar
-private _vehicle = [_vehType, _spawnParams#0, _spawnRadius, 5, true] call A3A_fnc_safeVehicleSpawn;
-_vehicle setVariable ["spawnPlace", _spawnParams#2];
+private _vehicle = [_vehType, _spawnPos, _spawnRadius, 5, true] call A3A_fnc_safeVehicleSpawn;
 _vehicle setVariable ["shellType", _shellType];
 [_vehicle, _side, _resPool] call A3A_fnc_AIVehInit;
 
@@ -76,7 +76,7 @@ if (_target isEqualType objNull) then {
 };
 
 // name, side, suppType, pos, radius, remTargets, targets
-private _suppData = [_supportName, _side, "MORTAR", _spawnParams#0, _maxRange, _targArray, _minRange];
+private _suppData = [_supportName, _side, "MORTAR", _spawnPos, _maxRange, _targArray, _minRange];
 A3A_activeSupports pushBack _suppData;
 [_suppData, _vehicle, _group, _delay, _reveal, false] spawn A3A_fnc_SUP_mortarRoutine;
 

@@ -1,14 +1,14 @@
 // Server-side function to remove unit from garrison
-// Currently only used on unit death
+// Currently only used on dead units and escaped surrenders
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_unit"];
+params ["_marker", "_unit"];
 
 Trace_1("Called with params %1", _this);
 
-private _marker = _unit getVariable "markerX";
+if (isNil "_marker") then { _marker = _unit getVariable "markerX" };
 if (isNil "_marker") exitWith { Error_1("Unit %1 not in a garrison", _unit) };
 
 // Don't change marker because local-side reactions might still need it
@@ -26,4 +26,4 @@ if (sidesX getVariable _marker != teamPlayer) then {
     _troops deleteAt _index;
 };
 
-// Don't need to do anything on local side, dead units are unambiguous
+// Don't need to do anything on local side, dead/deleted units are unambiguous

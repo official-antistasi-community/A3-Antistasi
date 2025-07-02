@@ -37,7 +37,7 @@ if !(_nearX call A3A_fnc_canEditGarrison) exitWith { createDialog "build_menu" }
 // Conditions passed, now either delete the garrison or open the recruiting menu
 
 if (_typeX == "rem") exitWith {
-	[_nearX, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
+	[_nearX, true, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
 	createDialog "build_menu";
 };
 

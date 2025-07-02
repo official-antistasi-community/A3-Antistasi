@@ -754,7 +754,7 @@ switch (_mode) do
     case ("dismissGarrison"):
     {
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
-        [_selectedMarker, true] remoteExecCall [QFUNCMAIN(garrisonServer_clear), 2];
+        [_selectedMarker, true, true] remoteExecCall [QFUNCMAIN(garrisonServer_clear), 2];
         [_selectedMarker] remoteExecCall [QFUNCMAIN(garrisonServer_sendData), 2];
     };
 

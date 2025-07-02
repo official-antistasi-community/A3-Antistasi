@@ -292,7 +292,7 @@ addMissionEventHandler ["EntityKilled", {
 
     private _marker = _victim getVariable "markerX";
     if (!isNil "_marker") then {
-        if (_victim isKindOf "CAManBase") exitWith { [_victim] call A3A_fnc_garrisonServer_remUnit }; 
+        if (_victim isKindOf "CAManBase") exitWith { [_marker, _victim] call A3A_fnc_garrisonServer_remUnit };
         [_victim] call A3A_fnc_garrisonServer_remVehicle;
     };
 

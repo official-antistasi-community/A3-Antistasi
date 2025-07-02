@@ -40,8 +40,8 @@ if (_type in ["camp", "roadblock", "rebpost"]) exitWith
         ["TaskSucceeded", ["", localize "STR_A3A_fn_base_craicts_rbDestr"]] remoteExec ["BIS_fnc_showNotification", _nearPlayers];
     };
 
-    // Tell the server to clear the site
-    [_marker] remoteExecCall [["A3A_fnc_deleteMinorSite", "A3A_fnc_deleteRebelControl"] select (_type == "rebpost"), 2];
+    // Tell the server to clear & delete the site
+    [_marker, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
 };
 
 // Otherwise it's a capturable site, so we continue with the check

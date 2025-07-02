@@ -29,5 +29,5 @@ if (_side != teamPlayer) then {
     _marker call A3A_garrisonServer_updateVehData;
 };
 
-["despawn", [_marker, _marker in A3A_markersToDelete]] call A3A_fnc_garrisonOp;
+["despawn", [_marker]] call A3A_fnc_garrisonOp;
 A3A_garrisonMachine deleteAt _marker;       // clear machine ID

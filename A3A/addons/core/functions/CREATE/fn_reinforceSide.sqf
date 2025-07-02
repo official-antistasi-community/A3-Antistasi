@@ -86,6 +86,11 @@ while {_totalReinf > 0} do
 
     Debug_3("Selected reinf of %1 type %2 needed %3", _marker, _type, _needed);
 
+    // If this marker was deleted since, avoid adding stuff to it
+    if (_marker in A3A_markersToDelete) then {
+        _weights set [_index, 0]; continue;
+    };
+
     // Currently non-troop reinf is just teleported in
     if (_type != "troops") then
     {

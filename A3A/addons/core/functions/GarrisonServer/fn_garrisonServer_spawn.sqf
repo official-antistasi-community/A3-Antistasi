@@ -10,6 +10,9 @@ Trace_1("Called with params %1", _this);
 if (_marker in A3A_garrisonMachine) exitWith {
     Error_1("Garrison %1 already spawned", _marker);
 };
+if (_marker in A3A_markersToDelete) exitWith {
+    Error_1("Garrison %1 being deleted, spawn blocked", _marker);
+};
 
 spawner setVariable [_marker, 0, true];
 

@@ -50,7 +50,7 @@ DECLARE_SERVER_VAR(distanceSPWN2, distanceSPWN*0.5);
 //DECLARE_SERVER_VAR(disabledMods, call A3A_fnc_initDisabledMods);
 
 // Used by headless clients for crate scaling
-DECLARE_SERVER_VAR(A3A_activePlayerCount, 1);
+DECLARE_SERVER_VAR(A3A_activePlayerCount, 0);
 
 //Legacy tool for scaling AI difficulty. Should die.
 DECLARE_SERVER_VAR(difficultyCoef, 0);

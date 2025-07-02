@@ -15,41 +15,12 @@ Trace_1("Called with %1", _this);
 params ["_marker", "_newSide"];
 
 private _garrison = A3A_activeGarrison get _marker;
-private _oldSide = _garrison get "side";
-private _troops = _garrison get "troops";
 
-// Ok, what to do with troops?
-// If close to enemies, surrender. Otherwise attempt RTB?
+// Handle retreat/surrender of troops. Don't touch vehicles.
+[_marker, true, false] call A3A_fnc_garrisonLocal_clear;
 
-// If anyone is in a vehicle (static weapon, later?), get them out
-// Might have units occupying statics that aren't in this garrison, so we do this the daft way for now
-{
-    if (vehicle _x != _x) then {
-        group _x leaveVehicle vehicle _x;
-        moveOut _x;
-    };
-} forEach (_garrison get "troops");
-
-sleep 0.1;
-
-// If close to the marker & enemy, just surrender
-if (_oldSide != teamPlayer) then {
-    private _nearTroops = _troops inAreaArray [markerPos _marker, 50, 50];
-    _troops = _troops - _nearTroops;
-    { [_x] spawn A3A_fnc_surrenderAction } forEach _nearTroops;
-
-    // Everyone else can try to run away
-    { _x spawn A3A_fnc_enemyReturnToBase } forEach (_garrison get "groups");
-} else {
-    { _x spawn A3A_fnc_rebelReturnToBase } forEach (_garrison get "groups");
-};
-
-
-// Clear the units
-_garrison set ["troops", []];
-_garrison set ["groups", []];
+// Now flip the side (retreat/surrender needs original side)
 _garrison set ["side", _newSide];
-
 
 //Convert all statics & vehicles
 {

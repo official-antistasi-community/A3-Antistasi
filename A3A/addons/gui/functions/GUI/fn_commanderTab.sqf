@@ -1033,7 +1033,7 @@ switch (_mode) do
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _selectedMarker = _commanderMap getVariable ["selectedMarker", ""];
         if !(_selectedMarker call A3A_fnc_canEditGarrison) exitWith {};     // throws hints on failure
-    	[_selectedMarker, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
+    	[_selectedMarker, true, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
     };
 
     case ("showGarbageCleanOptions"):

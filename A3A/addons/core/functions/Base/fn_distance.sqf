@@ -217,8 +217,6 @@ private _processCityCivMarker = {
 // Pre-spawn rebel HQ
 isNil { ["Synd_HQ"] call A3A_fnc_garrisonServer_spawn };
 
-// Could wait until there's a player...
-
 /* ------------------------------ endless cycle ----------------------------- */
 
 private _counter = 0;
@@ -266,9 +264,9 @@ do
     };
 
 
-    private _markers = markersX + controlsX + outpostsFIA + A3A_markersToDelete;
+    private _markers = markersX + controlsX + outpostsFIA;
     {
-        sleep (1 / count _markers);
+        sleep (1 / count _markers);     // there are hundreds, so 1/frame basically?
 
         private _marker = _x;
         private _position = getmarkerPos (_marker);

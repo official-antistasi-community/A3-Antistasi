@@ -41,4 +41,4 @@ fireX inflame false;
 [respawnTeamPlayer, 0, teamPlayer] call A3A_fnc_setMarkerAlphaForSide;
 [respawnTeamPlayer, 0, civilian] call A3A_fnc_setMarkerAlphaForSide;
 
-["Synd_HQ", true, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
+["Synd_HQ", false, true, true] call A3A_fnc_garrisonServer_clear;
