@@ -63,16 +63,24 @@ private _utilityRefund = {
 
     private _toRefund = 0;
     private _feedBack = "STR_HR_GRG_Feedback_addVehicle_Item_Stored";
-    if ("fuel" in _flags) then {
-        _toRefund = floor (([_object] call A3A_fnc_remainingFuel) * (_object getVariable ['A3A_itemPrice', 0]));
-        _feedBack = "STR_HR_GRG_Feedback_addVehicle_Fuel_sold";
-    } else {
-        _toRefund = _object getVariable ['A3A_itemPrice', 0];
-    };
+    private _itemPrice = _object getVariable ['A3A_itemPrice', 0];
     if ("loot" in _flags) exitWith {
         ["STR_HR_GRG_Feedback_addVehicle_LTC"] remoteExec ["HR_GRG_fnc_Hint", _client];
-        [_object, boxX, true, _toRefund] call A3A_fnc_ammunitionTransfer;
-        true;
+        [_object, boxX, true, _itemPrice] call A3A_fnc_ammunitionTransfer;
+        _itemPrice;
+    };
+    switch (true) do {
+        case ("fuel" in _flags): {
+            _toRefund = floor (([_object] call A3A_fnc_remainingFuel) * _itemPrice);
+            _feedBack = "STR_HR_GRG_Feedback_addVehicle_Fuel_sold";
+        };
+        case ("ammo" in _flags): {
+            _toRefund = floor (([_object] call A3A_fnc_remainingAmmo) * _itemPrice);
+            _feedBack = "STR_HR_GRG_Feedback_addVehicle_Ammo_sold";
+        };
+        default {
+            _toRefund = _itemPrice;
+        };
     };
 
     deleteVehicle _object;
