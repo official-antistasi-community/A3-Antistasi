@@ -208,7 +208,7 @@ switch (_mode) do
             _groupFastTravelButton ctrlSetFade 0.5;
             _groupFastTravelButton ctrlCommit 0;
             private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
-            _groupFastTravelButton ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
+            _groupFastTravelButton ctrlSetTooltip (_prettyString joinString ",\n\n");
         };
 
         private _groupCountText = _display displayCtrl A3A_IDC_HCGROUPCOUNT;

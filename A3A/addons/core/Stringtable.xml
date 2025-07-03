@@ -3418,7 +3418,7 @@
         <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;The following players are not at HQ: %1, and %2.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius_singleplayer">
-        <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;&lt;br/&gt;%1 is currently not at HQ.</Original>
+        <Original>All players must be in a 100m radius from HQ to be able to rest.\n\n%1 is currently not at HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_title">
         <Original>Skip Time / Rest</Original>
