@@ -29,7 +29,7 @@
 
 ["vehiclesBasic", ["vn_c_bicycle_01", "vn_b_wheeled_m274_02_03"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["vn_i_wheeled_m151_02", "vn_b_wheeled_m274_01_02"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["vn_o_car_04_mg_01", "vn_b_wheeled_m274_mg_01_02"]] call _fnc_saveToTemplate;
+private _vehiclesLightArmed = ["vn_o_car_04_mg_01", "vn_b_wheeled_m274_mg_01_02"];
 ["vehiclesTruck", ["vn_i_wheeled_m54_01"]] call _fnc_saveToTemplate;
 ["vehiclesAT", ["vn_b_wheeled_m151_mg_05", "vn_b_wheeled_m274_mg_02_02"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["vn_b_wheeled_m54_mg_02"]] call _fnc_saveToTemplate;
@@ -38,7 +38,16 @@
 
 ["vehiclesPlane", ["vn_o_air_mig19_gun"]] call _fnc_saveToTemplate;
 
-["vehiclesCivCar", ["vn_c_car_02_01", "vn_c_car_01_01","vn_c_car_03_01","vn_c_wheeled_m151_02","vn_c_wheeled_m151_01","vn_c_car_04_01"]] call _fnc_saveToTemplate;
+private _vehiclesCivCar = ["vn_c_car_02_01", "vn_c_car_01_01","vn_c_car_03_01","vn_c_wheeled_m151_02","vn_c_wheeled_m151_01","vn_c_car_04_01"];
+
+if (isClass (configFile >> "vnx_credits")) then {
+	_vehiclesCivCar append ["vnx_c_wheeled_tuktuk_01_01"];
+    _vehiclesLightArmed append ["vnx_o_wheeled_tuktuk_mg_01_vc","vnx_o_wheeled_tuktuk_mg_02_vc"];
+};
+
+["vehiclesLightArmed", _vehiclesLightArmed] call _fnc_saveToTemplate;
+["vehiclesCivCar", _vehiclesCivCar] call _fnc_saveToTemplate;
+
 ["vehiclesCivTruck", ["vn_b_wheeled_m54_01_airport"]] call _fnc_saveToTemplate;
 ["vehiclesCivHeli", ["vn_b_air_uh1d_04_09"]] call _fnc_saveToTemplate;
 ["vehiclesCivBoat", ["vn_c_boat_08_01"]] call _fnc_saveToTemplate;

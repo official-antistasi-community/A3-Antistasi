@@ -377,6 +377,22 @@ _pilotLoadoutData set ["uniforms", ["vn_o_uniform_nva_army_01_03"]];
 _pilotLoadoutData set ["vests", ["vn_o_vest_05"]];
 _pilotLoadoutData set ["helmets", ["vn_o_helmet_zsh3_02", "vn_o_helmet_zsh3_01"]];
 
+if (isClass (configFile >> "vnx_credits")) then {
+    (_policeLoadoutData get "shotGuns") append [
+    ["vnx_m77e", "", "", "", ["vnx_m77e_fl_mag","vnx_m77e_buck_mag"], [], ""],
+    ["vnx_m77e_shorty", "", "", "", ["vnx_m77e_so_mag"], [], ""]
+    ];
+    (_militiaLoadoutData get "SMGs") append [
+    ["vnx_m50_smg", "", "", "", ["vnx_m50_smg_t_mag", "vnx_m50_smg_mag"], [], ""]
+    ];
+    (_militaryLoadoutData get "SMGs") append [
+    ["vnx_m50_smg", "", "", "", ["vnx_m50_smg_t_mag", "vnx_m50_smg_mag"], [], ""]
+    ];
+    (_sfLoadoutData get "SMGs") append [
+    ["vnx_m50_smg", "", "", "", ["vnx_m50_smg_t_mag", "vnx_m50_smg_mag"], [], ""]
+    ];
+};
+
 /////////////////////////////////
 //    Unit Type Definitions    //
 /////////////////////////////////
