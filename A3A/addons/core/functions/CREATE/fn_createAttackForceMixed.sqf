@@ -31,7 +31,7 @@ private _targPos = if (_target isEqualType []) then { _target } else { markerPos
 
 private _faction = Faction(_side);
 private _lowAir = _faction getOrDefault ["attributeLowAir", false];
-private _tier = [tierWar, tierWar+2] select ("tierboost" in _modifiers);
+private _tier = [0,2] select ("tierboost" in _modifiers);
 
 private _resourcesSpent = 0;
 private _vehicles = [];
