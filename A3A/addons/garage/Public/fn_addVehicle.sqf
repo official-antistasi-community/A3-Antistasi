@@ -75,7 +75,7 @@ private _utilityRefund = {
         };
         case ("loot" in _flags): {
             _feedBack = "STR_HR_GRG_Feedback_addVehicle_LTC";
-            [_object, boxX, true] call A3A_fnc_ammunitionTransfer;
+            [_object, boxX, true, _toRefund] call A3A_fnc_ammunitionTransfer;
             _toRefund = _itemPrice;
         };
         default {
