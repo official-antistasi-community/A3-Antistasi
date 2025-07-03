@@ -135,7 +135,10 @@ if (_veh isKindOf "Land" and _veh emptyPositions "gunner" > 0) then {
 if !(_veh isKindOf "StaticWeapon") then {
 	// Handles most cases when you'd want to merge the thing?
     [_veh] remoteExecCall ["A3A_fnc_addVehGetInOutEH", 2];
-} else {
+};
+
+// Quadbikes also need to trigger on attach/detach
+if (_veh isKindOf "StaticWeapon" or { [_veh] call A3A_Logistics_fnc_isLoadable }) then {
 	// Works with various ACE modules as well as Antistasi logistics/carry
     [_veh] remoteExecCall ["A3A_fnc_addVehAttachDetachEH", 2];
 };

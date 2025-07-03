@@ -51,11 +51,22 @@ private _fnc_mountStatic = {
     sleep (_unit distance2d _static);
 
     if !(_unit call A3A_fnc_canFight) exitWith {};
-    if (_unit == gunner _static) exitWith { if (_isMortar) then { _unit disableAI "CHECKVISIBLE" } };
+    if (_unit == gunner _static) exitWith {
+        // Static might have been blocked or removed from garrison by now
+        if (_static getVariable ["lockedForAI", false] or _static getVariable ["markerX", ""] == "") exitWith {
+            group _unit leaveVehicle _static;
+            moveOut _unit;
+        };
+        if (_isMortar) then { _unit disableAI "CHECKVISIBLE" };
+    };
 
-    // redo sanity checks, force unit in if they got close
-    if (!alive _static or !isNull gunner _static or _static getVariable ["lockedForAI", false]) exitWith {};
-    if (_unit distance2d _static < 10) then { _unit moveInGunner _static; if (_isMortar) then { _unit disableAI "CHECKVISIBLE" } };
+    // Failed to mount. Redo sanity checks, force unit in if they got close
+    if (!alive _static or !isNull gunner _static) exitWith {};
+    if (_static getVariable ["lockedForAI", false] or _static getVariable ["markerX", ""] != "") exitWith {};
+    if (_unit distance2d _static < 10) then {
+        _unit moveInGunner _static;
+        if (_isMortar) then { _unit disableAI "CHECKVISIBLE" };
+    };
 };
 
 {

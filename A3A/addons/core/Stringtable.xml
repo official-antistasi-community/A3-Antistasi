@@ -1531,6 +1531,9 @@
         <Turkish>Kasayı kamyona aktar</Turkish>
         <Chinesesimp>将弹药箱转移到运输载具上面</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_vehicle_garrison">
+        <Original>Add vehicle to garrison</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_flagaction_vehiclebuy">
         <Original>Buy Vehicle</Original>
         <German>Fahrzeug kaufen</German>

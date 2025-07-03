@@ -41,7 +41,6 @@ class CfgFunctions
             class inmuneConvoy {};
             class interrogate {};
             class isBuildingPosition {};
-            class landThreatEval {};
             class liberaterefugee {};
             class liberatePOW {};
             class mineSweep {};
@@ -107,6 +106,7 @@ class CfgFunctions
 
         class Base {
             file = QPATHTOFOLDER(functions\Base);
+            class actionGarrisonVehicle {};
             class addActionBreachVehicle {};
             class addAggression {};
             class addEnemyResources {};

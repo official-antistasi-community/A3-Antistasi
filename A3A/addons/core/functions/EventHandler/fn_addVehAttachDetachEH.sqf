@@ -17,6 +17,8 @@ _veh addEventHandler ["Detached", {
 
     params ["_attachedObj", "_parentObj"];
 
+    if (!(_attachedObj isKindOf "StaticWeapon") and !(_attachedObject inArea "Synd_HQ")) exitWith {};      // quadbikes shouldn't be auto-added
+
     [_attachedObj] spawn {
         params ["_veh"];
 

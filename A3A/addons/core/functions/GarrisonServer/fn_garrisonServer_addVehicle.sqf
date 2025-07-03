@@ -35,7 +35,6 @@ if (_arrayType == "buildings" and _marker == "Synd_HQ") then {
 
 (_garrison get _arrayType) pushBack [typeOf _vehicle, getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle];
 _vehicle setVariable ["markerX", _marker, true];
-if !(_vehicle isKindOf "StaticWeapon") then { _vehicle setVariable ["lockedForAI", true, true] };
 
 
 // Add to active garrison if spawned

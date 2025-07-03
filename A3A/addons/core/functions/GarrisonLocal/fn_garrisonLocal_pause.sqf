@@ -12,6 +12,7 @@ _garrison set ["paused", true];
 
 // don't bother with buildings? or hideobject only?
 private _toChange = (_garrison get "troops") + (_garrison get "civs") + (_garrison get "vehicles");
+_toChange = _toChange select { alive _x };
 
 { _x enableSimulationGlobal false; _x allowDamage false } forEach _toChange;
 [_toChange, { { _x hideObjectGlobal true } forEach _this }] remoteExecCall ["call", 2];

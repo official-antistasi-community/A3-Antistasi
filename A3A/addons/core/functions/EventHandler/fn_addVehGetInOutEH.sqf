@@ -23,13 +23,15 @@ _veh addEventHandler ["GetIn", {
 }];
 
 _veh addEventHandler ["GetOut", {
-    // Handler for adding mobile vehicles to garrisons
+    // Handler for adding mobile vehicles to garrisons (now just HQ)
 
     params ["_veh", "_role", "_unit"];
     if (side group _unit != teamPlayer) exitWith {};		// Only care about rebels
+    if (crew _veh isNotEqualTo []) exitWith {};             // empty vehicles only
 
-    // If empty, add to garrison
-    if (crew _veh isEqualTo []) then {
-        ["", _veh] call A3A_fnc_garrisonServer_addVehicle;
+    if (!A3A_petrosMoving and { _veh inArea "Synd_HQ" }) then {
+    	["Synd_HQ", _veh] call A3A_fnc_garrisonServer_addVehicle;
+        _veh setVariable ["lockedForAI", true, true];
     };
 }];
+
