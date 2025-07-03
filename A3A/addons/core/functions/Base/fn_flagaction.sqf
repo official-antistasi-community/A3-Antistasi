@@ -135,7 +135,7 @@ switch _typeX do
         if (true) exitWith { ERROR("Disabled due to UseDoomGUI Switch.") };
 #endif
         removeAllActions _flag;
-        _flag addAction [localize "STR_A3A_fn_base_flagaction_recruit", {if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_base_flagaction_recruit", localize "STR_A3A_fn_base_flagaction_recruit_no"] call A3A_fnc_customHint;} else { [] spawn A3A_fnc_unit_recruit; };},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4];
+        _flag addAction [localize "STR_A3A_fn_base_flagaction_recruit", {if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_base_flagaction_recruit", localize "STR_A3A_fn_base_flagaction_recruit_no"] call A3A_fnc_customHint;} else { if (A3A_GUIDevPreview) then {createDialog "A3A_RecruitDialog";} else {[] spawn A3A_fnc_unit_recruit;};};},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4];
         _flag addAction [localize "STR_A3A_fn_base_flagaction_vehiclebuy", {if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {
             [localize "STR_A3A_fn_base_flagaction_vehiclebuy", localize "STR_A3A_fn_base_flagaction_vehiclebuy_no"] call A3A_fnc_customHint;
         } else {

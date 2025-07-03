@@ -285,7 +285,8 @@ addMissionEventHandler ["EntityKilled", {
     private _killerSide = side group (if (isNull _instigator) then {_killer} else {_instigator});
     if (isPlayer _killer) then {
         private _killerUID = getPlayerUID _killer;
-        Debug_3("%1 killed by %2. Killer UID: %3", typeof _victim, _killerSide, _killerUID);
+        private _killerName = name _killer;
+        Debug_4("%1 killed by %2 [UID: %3 Name: %4]", typeof _victim, _killerSide, _killerUID, _killerName);
     } else {
         Debug_2("%1 killed by %2", typeof _victim, _killerSide);
     };

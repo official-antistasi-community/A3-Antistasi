@@ -1,6 +1,6 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-params [["_hr",""],["_resourcesFIA",""]]; // nil protection
+params [["_hr",""],["_resourcesFIA",""],["_silent",false]]; // nil protection
 
 if !(_hr isEqualType 0) exitWith {Error("The first parameter, the added HR, must be a number");};
 if !(_resourcesFIA isEqualType 0) exitWith {Error("The second parameter, the added money, must be a number");};
@@ -20,6 +20,8 @@ if (_resourcesFIAT < 0) then {_resourcesFIAT = 0};
 server setVariable ["hr",_hrT,true];
 server setVariable ["resourcesFIA",_resourcesFIAT,true];
 resourcesIsChanging = false;
+
+if (_silent) exitWith {};
 
 _textX = "";
 _hrSim = "";
