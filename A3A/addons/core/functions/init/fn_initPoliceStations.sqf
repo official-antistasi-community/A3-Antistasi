@@ -19,6 +19,10 @@ if (_policeStationTypes isEqualTo []) exitWith {
 
 private _policeSpawnStats =  createHashMapFromArray [ ["vehiclePolice", [[0], 1, 1]] ];
 
+private _debugTypes = [];
+
+// netId -> city marker name for destruction detection
+A3A_policeStations = createHashMap;
 
 // Alternative: Do not save spawn places for police stations
 // Regen here and delete the vehicles if it disappeared
@@ -37,6 +41,7 @@ private _policeSpawnStats =  createHashMapFromArray [ ["vehiclePolice", [[0], 1,
             Info_1("No suitable buildings for police station in %1", _city);
             continue;
         };
+        _debugTypes insert [-1, _buildings apply {typeof _x}, true];
         _stationPos = getPosATL selectRandom _buildings;
         _garrison set ["policeStation", _stationPos];         // only need one entry? Hmm. LootCD & intelCD go elsewhere.
 
@@ -49,7 +54,7 @@ private _policeSpawnStats =  createHashMapFromArray [ ["vehiclePolice", [[0], 1,
     if (_stationPos isEqualType false) then { continue };
 
     private _station = nearestBuilding _stationPos;
-    _station setVariable ["A3A_policeStation", _city];          // So we can detect destruction
+    A3A_policeStations set [netId _station, _city];          // So we can detect destruction
 
     // Use closest city spawn place within 50m for police car
     private _places = A3A_spawnPlacesHM get (_city + "_civ") select { _x#0 == "civCar" };
@@ -67,6 +72,7 @@ private _policeSpawnStats =  createHashMapFromArray [ ["vehiclePolice", [[0], 1,
 
 } forEach citiesX;
 
+Debug_1("Police station types used: %1", _debugTypes);
 
 // better way of placing vehicle outside building:
 

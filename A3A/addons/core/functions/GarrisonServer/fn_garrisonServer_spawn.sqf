@@ -16,7 +16,7 @@ if (_marker in A3A_markersToDelete) exitWith {
 
 spawner setVariable [_marker, 0, true];
 
-private _machineID = call A3A_fnc_chooseMachineForGarrison;
+private _machineID = if (_marker == "Synd_HQ") then { 2 } else { call A3A_fnc_chooseMachineForGarrison };
 A3A_garrisonMachine set [_marker, _machineID];
 
 private _data = A3A_garrison get _marker;

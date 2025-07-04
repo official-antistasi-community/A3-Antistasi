@@ -117,7 +117,7 @@ _resourcesBackground = server getVariable "resourcesFIA";
 				if (vehicle _friendX != _friendX) then {
 					_veh = vehicle _friendX;
 					_typeVehX = typeOf _veh;
-					if (isNil {_veh get "markerX"}) then {
+					if (isNil {_veh getVariable "markerX"}) then {
 						if ((_veh isKindOf "StaticWeapon") or (driver _veh == _friendX)) then {
 							if ((group _friendX in (hcAllGroups theBoss)) or (!isMultiplayer)) then {
 								_resourcesBackground = _resourcesBackground + ([_typeVehX] call A3A_fnc_vehiclePrice);

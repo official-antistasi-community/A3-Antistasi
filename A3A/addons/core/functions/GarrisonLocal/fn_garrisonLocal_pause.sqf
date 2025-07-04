@@ -15,4 +15,5 @@ private _toChange = (_garrison get "troops") + (_garrison get "civs") + (_garris
 _toChange = _toChange select { alive _x };
 
 { _x enableSimulationGlobal false; _x allowDamage false } forEach _toChange;
+if (clientOwner == 2) exitWith { { _x hideObjectGlobal true } forEach _toChange };
 [_toChange, { { _x hideObjectGlobal true } forEach _this }] remoteExecCall ["call", 2];

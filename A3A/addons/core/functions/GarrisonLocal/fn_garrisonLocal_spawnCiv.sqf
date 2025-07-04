@@ -12,8 +12,12 @@ params ["_spawnKey", "_newGarrison"];
 private _garrison = createHashMap;
 private _vehicles = [];
 {
-    _x params ["_class", "_placeNum"];
-    private _spawnPlace = (A3A_spawnPlacesHM get _spawnKey) # _placeNum;
+    // Boats use special [class, pos, dir] format
+    private _class = _x#0;
+    private _spawnPlace = _x;
+    if (_x#1 isEqualType 0) then {
+        _spawnPlace = (A3A_spawnPlacesHM get _spawnKey) # (_x#1);
+    };
     _spawnPlace params ["_type", "_pos", "_dir"];
 
     // Block if there are any near entities at all?

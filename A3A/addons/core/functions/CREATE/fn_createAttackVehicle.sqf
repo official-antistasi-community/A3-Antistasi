@@ -48,10 +48,10 @@ if (_vehicleType isKindOf "Land") then {
     waitUntil { _spawnPos distance2d _vehicle > 10 or time > _spawnTime };
 
     if (_spawnPos distance2d _vehicle < 10) then {
-        Error_2("Vehicle %1 failed to clear spawn at %2", _vehicle, _marker);
+        Error_2("Vehicle %1 failed to clear spawn at %2", _vehicle, _markerOrigin);
         // teleport to first waypoint
         // arguably should just return empty array...
-        private _wayPos = waypoints _crewGroup # 0;
+        private _wayPos = waypointPosition (waypoints _crewGroup # 0);
         _vehicle setVehiclePosition [_wayPos, [], 10, "NONE"];
         _crewGroup setCurrentWaypoint 1;
     };

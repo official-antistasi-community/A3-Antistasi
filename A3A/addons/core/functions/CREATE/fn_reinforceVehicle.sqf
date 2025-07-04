@@ -23,10 +23,10 @@ sleep 300;          // lazy code, should check nearest base
 // Now check if garrison has enemies nearby
 private _nearRebels = units teamPlayer inAreaArray [markerPos _marker, 700, 700];
 if (-1 != _nearRebels findIf { _x getVariable ["spawner", false] }) exitWith {
-    Info_2("Reinf of %1 type %2 blocked by rebels", _marker, _type);
+    Info_2("Reinf of %1 type %2 blocked by rebels", _marker, _slotType);
 };
 if (sidesX getVariable _marker != _side) exitWith {
-    Info_2("Reinf of %1 type %2 blocked by side change", _marker, _type);
+    Info_2("Reinf of %1 type %2 blocked by side change", _marker, _slotType);
 };
 
 // Determine free places. Can't re-use reinf code due to delay
@@ -36,7 +36,7 @@ private _usedPlaces = (_garrison get "vehicles") select {count _x == 2} apply {_
 private _possiblePlaces = A3A_spawnPlaceStats get _marker get _slotType select 0;
 private _places = _possiblePlaces - _usedPlaces;
 if (_places isEqualTo []) exitWith {
-    Info_2("Reinf of %1 type %2 cancelled because no free places", _marker, _type);
+    Info_2("Reinf of %1 type %2 cancelled because no free places", _marker, _slotType);
 };
 
 private _placeNum = if (_slotType == "vehicle") then { _places # 0 } else { selectRandom _places };

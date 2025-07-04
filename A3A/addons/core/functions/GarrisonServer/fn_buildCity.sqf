@@ -39,10 +39,12 @@ for "_i" from 1 to _numParked do {
     _vehicles pushBack [_type, _placeNum];
 };
 
+// Boat spawn places aren't deterministic so we use absolute format instead
 for "_i" from 1 to _numBoats do {
     private _type = selectRandomWeighted civBoatsWeighted;
     private _placeNum = _boatPlaces deleteAt floor random count _boatPlaces;
-    _vehicles pushBack [_type, _placeNum];
+    (_spawnPlaces # _placeNum) params ["", "_pos", "_dir"];
+    _vehicles pushBack [_type, _pos, _dir];
 };
 
 _garrison set ["vehicles", _vehicles];

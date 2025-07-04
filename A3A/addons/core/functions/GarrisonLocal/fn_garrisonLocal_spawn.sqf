@@ -23,6 +23,14 @@ if !(_marker in A3A_spawnPlacesHM) then { A3A_spawnPlacesHM set [_marker, _garri
 if !(_marker in A3A_garrisonSize) then { A3A_garrisonSize set [_marker, [_marker, true] call A3A_fnc_garrisonSize] };
 
 
+// Remove vehicles parked too close to vehicle spawn places
+/*
+{
+    if !("vehicle" in _x#0) then { continue };
+    entities
+} forEach (A3A_spawnPlacesHM get _marker);
+*/
+
 // Spawn buildings first, so that flag/box don't trip over them
 if !(_garrisonType == "hq") then {
     private _buildings = [];

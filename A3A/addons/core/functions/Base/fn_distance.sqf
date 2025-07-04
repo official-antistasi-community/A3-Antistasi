@@ -25,8 +25,6 @@ Example: [] spawn A3A_fnc_distance;
 /*                                   defines                                  */
 /* -------------------------------------------------------------------------- */
 
-// the spawn units array will update ones at this count cycles
-#define COUNT_CYCLES 5
 #define ENABLED 0
 #define DISABLED 1
 #define DESPAWN 2
@@ -45,7 +43,7 @@ private _processEnemyMarker = {
             // or somebody opfor is inside distanceSPWN2
             // PvP disabled: or somebody blufor is Player and is inside distanceSPWN2
             // or this marker is forced spawn than exit (marker still ENABLED)
-            if (_teamplayer inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
+            if (_rebels inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
                 || { _enemies inAreaArray [_position, distanceSPWN2, distanceSPWN2] isNotEqualTo []
                 || { _marker in forcedSpawn } }) exitWith {};
 
@@ -59,7 +57,7 @@ private _processEnemyMarker = {
             // if somebody green is inside distanceSPWN
             // or somebody opfor is inside distanceSPWN2
             // or this marker is forced to spawn than ENABLE marker
-            if (_teamplayer inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
+            if (_rebels inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
                 || { _enemies inAreaArray [_position, distanceSPWN2, distanceSPWN2] isNotEqualTo []
                 || { _marker in forcedSpawn } })
             then
@@ -72,7 +70,7 @@ private _processEnemyMarker = {
             {
                 // if somebody green is inside distanceSPWN1
                 // or somebody opfor is inside distanceSPWN than exit (marker still DISABLED)
-                if (_teamplayer inAreaArray [_position, distanceSPWN1, distanceSPWN1] isNotEqualTo []
+                if (_rebels inAreaArray [_position, distanceSPWN1, distanceSPWN1] isNotEqualTo []
                     || { _enemies inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo [] })
                 exitWith {};
 
@@ -86,7 +84,7 @@ private _processEnemyMarker = {
             // if nobody green is inside distanceSPWN
             // and nobody opfor is inside distanceSPWN2
             // and marker is not forced to spawn than exit (marker still DESPAWN)
-            if (_teamplayer inAreaArray [_position, distanceSPWN, distanceSPWN] isEqualTo []
+            if (_rebels inAreaArray [_position, distanceSPWN, distanceSPWN] isEqualTo []
                 && { _enemies inAreaArray [_position, distanceSPWN2, distanceSPWN2] isEqualTo []
                 && { !(_marker in forcedSpawn) } }) exitWith {};
 
@@ -217,10 +215,28 @@ private _processCityCivMarker = {
 // Pre-spawn rebel HQ
 isNil { ["Synd_HQ"] call A3A_fnc_garrisonServer_spawn };
 
+// Wait until there's a rebel spawner before doing anything, mostly to prevent HQ being hidden on startup
+waitUntil { sleep 0.1; units teamPlayer findIf { _x getVariable ["spawner", false] } > -1 };
+
+// Special loop for quick re-enabling HQ
+/*0 spawn {
+    while {true} do {
+        sleep 0.1;
+        if (spawner getVariable "Synd_HQ" != 1) then { continue };
+
+        private _realPlayers = (allPlayers - entities "HeadlessClient_F") apply { _x getVariable ["owner", _x] };
+        if (_realPlayers inAreaArray [markerPos "Synd_HQ", 200, 200] isNotEqualTo []) then {
+            spawner setVariable ["Synd_HQ", ENABLED, true];
+            ["unpause", ["Synd_HQ"]] call A3A_fnc_garrisonOp;
+        };
+    };
+};*/
+
 /* ------------------------------ endless cycle ----------------------------- */
 
 private _counter = 0;
-private _teamplayer = [];
+private _hcs = [];
+private _rebels = [];
 private _occupants = [];
 private _invaders = [];
 private _players = [];
@@ -231,45 +247,37 @@ private ["_markers", "_marker", "_position"];
 while { true }
 do
 {
-    _counter = _counter + 1;
-
-    if (_counter > COUNT_CYCLES)
-    then
-    {
-        _counter = 0;
-
+    // Update enemies less often, not so obvious when it fucks up
+    if (_counter <= 0) then {
         // Only count one spawner per vehicle. SimpleVM is much faster with split selects
         _occupants = units Occupants select { _x getVariable ["spawner", false] } select { _x == effectiveCommander vehicle _x };
         _invaders = units Invaders select { _x getVariable ["spawner", false] } select { _x == effectiveCommander vehicle _x };
-
-        // No effective-commander optimization for players because it breaks on disconnection
-        _teamplayer = units teamPlayer select { _x getVariable ["spawner", false] };
-        // Exclude players in fast-moving fixed-wing aircraft
-        _teamplayer = _teamplayer select {
-            private _veh = vehicle _x;
-            !(_veh isKindOf "Plane") or {isTouchingGround _veh or speed _veh < 80}
-        };
-        // Add in rebel-controlled UAVs
-        _teamplayer append (allUnitsUAV select { side group _x == teamPlayer });
-
-        // Players array is used to spawn civilians in cities and rebel garrisons, so ignore airborne units and translate remote-control
-        _players = [];
-        {
-            private _rp = _x getVariable ["owner", _x];         // real player unit in remote-control case
-            private _veh = vehicle _rp;
-            if (!(_veh isKindOf "Air") or { speed _veh < 50 }) then { _players pushBack _rp };
-        } forEach (allPlayers - entities "HeadlessClient_F");
-
         _rebEnemies = _invaders + _occupants;
+        _hcs = entities "HeadlessClient_F";
+        _counter = 5;
     };
+    _counter = _counter - 1;
 
+    // No effective-commander optimization for players because it breaks on disconnection
+    // 0.05ms for 20 players, 20 HC, 20 garrison
+    _rebels = units teamPlayer select { _x getVariable ["spawner", false] };
+    // Exclude players in fast-moving fixed-wing aircraft
+    _rebels = _rebels - (_rebels select { vehicle _x isKindOf "Plane" } select { speed vehicle _x > 80 and !isTouchingGround vehicle _x });
+    // Add in rebel-controlled UAVs
+    _rebels append (allUnitsUAV select { side group _x == teamPlayer });
+
+    // Players array is used to spawn civilians in cities and rebel garrisons, so ignore airborne units and translate remote-control
+    // 0.02ms for 20 players.
+    private _realPlayers = (allPlayers - _hcs) apply { _x getVariable ["owner", _x] };
+    private _airPlayers = _realPlayers select { vehicle _x isKindOf "Air" } select { speed vehicle _x > 50 };
+    _players = _realPlayers - _airPlayers;
 
     private _markers = markersX + controlsX + outpostsFIA;
     {
         sleep (1 / count _markers);     // there are hundreds, so 1/frame basically?
 
         private _marker = _x;
-        private _position = getmarkerPos (_marker);
+        private _position = markerPos (_marker);
         private _side = sidesX getVariable _marker;
 
         if (_side == teamPlayer) then {

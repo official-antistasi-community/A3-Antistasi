@@ -252,25 +252,28 @@ addMissionEventHandler ["PlayerDisconnected",{
 addMissionEventHandler ["BuildingChanged", {
     params ["_oldBuilding", "_newBuilding", "_isRuin"];
 
-    if (_isRuin) then {
-        _oldBuilding setVariable ["ruins", _newBuilding];
-        _newBuilding setVariable ["building", _oldBuilding];
+    Debug_4("%1 (%2) changed to %3 (%4)", typeof _oldBuilding, netId _oldBuilding, typeof _newBuilding, netId _newBuilding);
+
+    // If it's a police station, mark as destroyed
+    // Might not be spawned, so can't depend on the furniture case
+    if (netId _oldBuilding in A3A_policeStations) then {
+        private _city = A3A_policeStations get netId _oldBuilding;
+        A3A_garrison get _city set ["policeStation", false];
+        A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) - 4];
+        A3A_spawnPlaceStats deleteAt _city;
+        A3A_policeStations deleteAt netId _oldBuilding;
+        ["TaskSucceeded", ["", "Police Station Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
 
         // Delete any furniture
-        private _attached = _oldBuilding getVariable "A3A_furniture";
-        if (!isNil "_attached") then {
-            { deleteVehicle _x } forEach _attached;
-        };
+        private _attached = _oldBuilding getVariable ["A3A_furniture", []];
+        { deleteVehicle _x } forEach _attached;
+    };
 
-        // If it's a police station, mark as destroyed
-        // Might not be spawned, so can't depend on the furniture case
-        private _city = _oldBuilding getVariable "A3A_policeStation";
-        if (!isNil "_city") then {
-            A3A_garrison get _city set ["policeStation", false];
-            A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) - 4];
-            A3A_spawnPlaceStats deleteAt _city;
-            ["TaskSucceeded", ["", "Police Station Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
-        };
+    if (_isRuin) then {
+
+        // TODO: this whole system doesn't work for buildings that have an intermediate damage model
+        _oldBuilding setVariable ["ruins", _newBuilding];
+        _newBuilding setVariable ["building", _oldBuilding];
 
         // Antenna dead/alive status is handled separately
         if !(_oldBuilding in antennas || _oldBuilding in antennasDead) exitWith {
