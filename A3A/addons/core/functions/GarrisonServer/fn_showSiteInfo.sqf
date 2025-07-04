@@ -15,7 +15,7 @@ if (_marker == "") exitWith {
     private _popDead = 0;
     private _pop = 0;
     {
-        (server getVariable _x) params ["_numCiv", "", "_suppReb", "_suppOcc"];
+        (server getVariable _x) params ["_numCiv", "", "_suppOcc", "_suppReb"];
         _pop = _pop + _numCiv;
         if (_x in destroyedSites) then { _popDead = _popDead + _numCiv; continue };
         _popReb = _popReb + (_numCiv * (_suppReb / 100));
