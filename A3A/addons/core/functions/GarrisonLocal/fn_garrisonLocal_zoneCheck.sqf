@@ -52,7 +52,7 @@ if (_type in ["camp", "roadblock", "rebpost"]) exitWith
 private _defenders = units _side inAreaArray _marker;
 _defenders insert [-1, units _side inAreaArray [_markerPos, 50, 50], true];
 private _defenderCount = count (_defenders select { _x call A3A_fnc_canFight });
-if (!_forced and _defenderCount >= 4) exitWith {
+if (!_forced and _defenderCount > 4) exitWith {
     Debug_3("ZoneCheck at %1 early out from %2 friendly %3 units", _marker, _defenderCount, _side);
 };
 
@@ -77,12 +77,16 @@ private _enemy2Count = 0;
     _enemy2Count = _enemy2Count + linearConversion [_capRadius/2, _capRadius, _markerPos distance2d _x, 1, 0, true];
 } forEach (units _enemy2 inAreaArray [_markerPos, _capRadius, _capRadius]);
 
+private _winner = if (_enemy1Count > _enemy2Count) then {_enemy1} else {_enemy2};
 
 Debug_7("ZoneCheck at %1 found %2 friendly %5 units, %3 enemy %6 units and %4 enemy %7 units", _marker, _defenderCount, _enemy1Count, _enemy2Count, _side, _enemy1, _enemy2);
 
+if (_side != teamPlayer and _defenderCount <= 2) exitWith {
+    [_winner, _marker] remoteExecCall ["A3A_fnc_markerChange", 2];
+};
+
 if (_enemy1Count max _enemy2Count > 3 * _defenderCount) then
 {
-    private _winner = if (_enemy1Count > _enemy2Count) then {_enemy1} else {_enemy2};
     //if (_winner isEqualTo teamPlayer) exitWith {Debug_2("Rebel auto capture of %1 was blocked, %1 remains side %2", _marker, _side)};
     [_winner, _marker] remoteExecCall ["A3A_fnc_markerChange", 2];
 };

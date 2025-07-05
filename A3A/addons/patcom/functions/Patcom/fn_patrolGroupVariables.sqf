@@ -72,6 +72,9 @@ if ((side leader _group) == civilian) then {
     // Set Group to being controlled by PATCOM so we don't init variables again.
     _group setVariable ["PATCOM_Controlled", true];
 
+    // Fuck this shit, groups should go where we tell them to
+    { _x disableAI "TARGET" } forEach units _group;
+
     if (PATCOM_DEBUG) then {
         {
             private _PathEH = _x addEventHandler ["PathCalculated", {

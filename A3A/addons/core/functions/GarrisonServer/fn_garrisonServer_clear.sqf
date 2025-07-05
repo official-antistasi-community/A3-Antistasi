@@ -84,7 +84,7 @@ if (_delete) then {
     [_marker] call A3A_fnc_deleteRebelControl;          // adds to A3A_markersToDelete, removes from outpostsFIA
 };
 
-if (_feedback and _safe) then {
+if (_feedback and _safe and (_costs > 0 or _hr > 0)) then {
     private _resultStr = format ["Garrison removed<br/><br/>Recovered Money: %1 €<br/>Recovered HR: %2", _costs, _hr];
     ["Garrison", _resultStr] remoteExecCall ["A3A_fnc_customHint", theBoss];
 };
