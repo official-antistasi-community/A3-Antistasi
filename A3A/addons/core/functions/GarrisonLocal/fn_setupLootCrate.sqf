@@ -26,11 +26,12 @@ if (_isLarge) then {
     _ammoBox call A3A_fnc_initObject;           // It's really a normal loot crate
 
     // fill loot
-    private _crateArray = [crateWepTypeMax, crateWepNumMax, crateItemTypeMax, crateItemNumMax, crateAmmoTypeMax, crateAmmoNumMax,
+    // wep, item, ammo, exp, attach, back, helm, vest, dev
+    private _crateArray = [3, 2, 0, 2, 2, 2, 2, 2, 0] apply { [_x, round random 2] };
+/*    private _crateArray = [crateWepTypeMax, crateWepNumMax, crateItemTypeMax, crateItemNumMax, crateAmmoTypeMax, crateAmmoNumMax,
         crateExplosiveTypeMax, crateExplosiveNumMax, crateAttachmentTypeMax, crateAttachmentNumMax, crateBackpackTypeMax, crateBackpackNumMax,
-        crateHelmetTypeMax, crateHelmetNumMax, crateVestTypeMax, crateVestNumMax, crateDeviceTypeMax, crateDeviceNumMax];
-    _crateArray = _crateArray apply { round (0.5 * _x) };
-    [_ammoBox] + _crateArray call A3A_fnc_fillLootCrate;
+        crateHelmetTypeMax, crateHelmetNumMax, crateVestTypeMax, crateVestNumMax, crateDeviceTypeMax, crateDeviceNumMax];*/
+    [_ammoBox] + flatten _crateArray call A3A_fnc_fillLootCrate;
 };
 
 // Extra event handlers so that we don't miss out on loot->save cases

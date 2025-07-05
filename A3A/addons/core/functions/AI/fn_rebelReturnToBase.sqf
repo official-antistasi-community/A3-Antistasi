@@ -31,7 +31,13 @@ private _potentials = outposts + airportsX + resourcesX + factories + seaports;
 _potentials = _potentials select { sidesX getVariable [_x, sideUnknown] == side _group };
 [_potentials + ["Synd_HQ"], leader _group] call BIS_fnc_nearestPosition;
 
-{ _x disableAI "AUTOCOMBAT"; _x disableAI "TARGET"; } forEach units _group;
+{
+    _x disableAI "AUTOCOMBAT";
+    _x disableAI "TARGET";
+    _x setUnitPos "UP";
+    _x doFollow leader _group;
+} forEach units _group;
+
 _group setBehaviourStrong "AWARE";
 private _wp = _group addWaypoint [markerPos _marker, 50];
 _group setCurrentWaypoint _wp;

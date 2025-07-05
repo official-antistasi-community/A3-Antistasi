@@ -53,7 +53,7 @@ for "_i" from 1 to _maxResourceCivilians do {
     // Add event handlers to civilian units.
     [_civUnit] spawn A3A_fnc_civilianInitEH;
 
-    sleep 0.5;
+    sleep 0.1;
     _civUnit addEventHandler ["Killed",
         {
             if (({alive _x} count (units group (_this select 0))) == 0) then {

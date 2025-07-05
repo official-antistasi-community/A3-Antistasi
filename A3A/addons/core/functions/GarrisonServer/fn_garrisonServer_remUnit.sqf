@@ -24,6 +24,7 @@ if (sidesX getVariable _marker != teamPlayer) then {
     private _index = _troops find _unitType;
     if (_index < 0) exitWith { Error_2("Unit type %1 not found in garrison %2", _unitType, _marker) };
     _troops deleteAt _index;
+    [_marker] call A3A_fnc_mrkUpdate;       // Update marker for new count
 };
 
 // Don't need to do anything on local side, dead/deleted units are unambiguous

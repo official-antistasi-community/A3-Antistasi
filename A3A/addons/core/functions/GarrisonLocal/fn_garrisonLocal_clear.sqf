@@ -1,5 +1,5 @@
-// Used from UI action to clear all troops from spawned rebel garrisons
-// Assume not used while under attack
+// Clear troops and potentially vehicles from garrison
+// Used by rebel UI actions, HQ moves, side changes and minor site deletion
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
@@ -30,10 +30,14 @@ sleep 0.1;
 if (!_isRebel) then
 {
     // If close to the marker & enemy, just surrender
-    private _nearTroops = _troops inAreaArray [markerPos _marker, 50, 50];
-    { [_x] spawn A3A_fnc_surrenderAction } forEach _nearTroops;
-    sleep 0.1;      // wait for surrender to be set
-
+/*    private _enemySide = [Occupants, Invaders] select (_garrison get "side" == Occupants);
+    private _nearEnemies = (units teamPlayer + units _enemySide) inAreaArray [markerPos _marker, 100, 100];
+    {
+        if (_nearEnemies inAreaArray [getPosATL _x, 20, 20] isEqualTo []) then { continue };
+        [_x] spawn A3A_fnc_surrenderAction;
+    } forEach _troops;
+    sleep 0.5;      // wait for surrender to be set
+*/
     // Everyone else can try to run away
     { _x spawn A3A_fnc_enemyReturnToBase } forEach _groups;
 } else {

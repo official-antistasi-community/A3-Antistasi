@@ -61,6 +61,24 @@ if !(_garrisonType in ["hq", "city", "roadblock", "camp", "rebpost"]) then
 };
 
 
+// Spawn everything else now so that statics etc don't get spawn-blocked
+private _storedTroops = +(_garrisonData get "troops");
+
+// Spawn vehicles (including statics)
+[_garrison, _marker, _side, _storedTroops, _garrisonData get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
+
+// If there's a police station, spawn items & troops
+if (_garrisonData getOrDefault ["policeStation", false] isEqualType []) then {
+    [_garrison, _marker, _garrisonData, _storedTroops] call A3A_fnc_spawnPoliceStation;
+};
+
+// Spawn 2-man patrols
+[_garrison, _marker, _side, _storedTroops] call A3A_fnc_spawnGarrisonPatrols;
+
+// Spawn remainder as squads
+[_garrison, _marker, _side, _storedTroops, true] call A3A_fnc_spawnGarrisonSquads;
+
+
 // Spawn resource/factory civs
 if (_garrisonType in ["resource", "factory"]) then {
     private _spawnedCivilians = [_marker, 4] call A3A_fnc_createResourceCiv;
@@ -98,23 +116,6 @@ if (_garrisonType == "camp") then {
     };
     _garrison set ["mines", _placedMines];
 };
-
-
-private _storedTroops = +(_garrisonData get "troops");
-
-// Spawn vehicles (including statics)
-[_garrison, _marker, _side, _storedTroops, _garrisonData get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
-
-// If there's a police station, spawn items & troops
-if (_garrisonData getOrDefault ["policeStation", false] isEqualType []) then {
-    [_garrison, _marker, _garrisonData, _storedTroops] call A3A_fnc_spawnPoliceStation;
-};
-
-// Spawn 2-man patrols
-[_garrison, _marker, _side, _storedTroops] call A3A_fnc_spawnGarrisonPatrols;
-
-// Spawn remainder as squads
-[_garrison, _marker, _side, _storedTroops, true] call A3A_fnc_spawnGarrisonSquads;
 
 
 // Temporary watchpost stealth: apply if <5 units and none in vehicles
