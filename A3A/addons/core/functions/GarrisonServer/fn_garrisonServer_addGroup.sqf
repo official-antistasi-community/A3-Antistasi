@@ -21,10 +21,10 @@ if (sidesX getVariable _marker == teamPlayer) then
 else
 {
     // If enemy, need to adjust the quality based on the incoming units. Overkill to do it per unit, but whatever
-    private _typeQuality = ["other", "police", "militia", "regular", "SF"] createHashMapFromArray [0,0,1,2,3];
+    private _typeQuality = ["other", "police", "militia", "military", "SF"] createHashMapFromArray [0,0,1,2,3];
     private _qualityTot = 0;
     {
-        private _unitType = _x getVariable "unitType" splitString "_" select 1;
+        private _unitType = _x getVariable "unitType" splitString "_" select 2;
         _qualityTot = _qualityTot + (_typeQuality getOrDefault [_unitType, 0]);
     } forEach units _group;
 
