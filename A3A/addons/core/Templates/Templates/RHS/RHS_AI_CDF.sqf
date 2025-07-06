@@ -20,7 +20,7 @@
 ["vehiclesBasic", ["I_Quadbike_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["rhsgref_cdf_b_reg_uaz", "rhsgref_cdf_b_reg_uaz_open", "rhsgref_BRDM2UM_b"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["rhsgref_cdf_b_reg_uaz_ags", "rhsgref_cdf_b_reg_uaz_dshkm", "rhsgref_cdf_b_ural_Zu23", "rhsgref_cdf_b_gaz66_zu23"]] call _fnc_saveToTemplate;
-["vehiclesTrucks", ["rhsgref_cdf_b_gaz66", "rhsgref_cdf_b_gaz66_flat", "rhsgref_cdf_b_gaz66o", "rhsgref_cdf_b_gaz66o_flat", "rhsgref_cdf_b_ural", "rhsgref_cdf_b_ural_open", "rhsgref_cdf_b_zil131", "rhsgref_cdf_b_zil131_flatbed_cover", "rhsgref_cdf_b_zil131_open", "rhsgref_cdf_b_zil131_flatbed"]] call _fnc_saveToTemplate;
+["vehiclesTrucks", ["rhsgref_cdf_b_gaz66", "rhsgref_cdf_b_gaz66o", "rhsgref_cdf_b_ural", "rhsgref_cdf_b_ural_open", "rhsgref_cdf_b_zil131", "rhsgref_cdf_b_zil131_open"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["rhsgref_cdf_b_gaz66", "rhsgref_cdf_b_gaz66_flat", "rhsgref_cdf_b_gaz66o", "rhsgref_cdf_b_gaz66o_flat", "rhsgref_cdf_b_ural", "rhsgref_cdf_b_ural_open", "rhsgref_cdf_b_zil131", "rhsgref_cdf_b_zil131_flatbed_cover", "rhsgref_cdf_b_zil131_open", "rhsgref_cdf_b_zil131_flatbed"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["rhsgref_cdf_b_gaz66_ammo"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["rhsgref_cdf_b_gaz66_repair", "rhsgref_cdf_b_ural_repair"]] call _fnc_saveToTemplate;
@@ -29,7 +29,7 @@
 ["vehiclesLightAPCs", ["rhsgref_cdf_b_btr60", "rhsgref_cdf_b_btr70", "rhsgref_cdf_b_btr80", "rhsgref_BRDM2_b", "rhsgref_BRDM2_ATGM_b", "rhsgref_BRDM2_HQ_b"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["rhsgref_cdf_b_bmd1", "rhsgref_cdf_b_bmd1k", "rhsgref_cdf_b_bmd1p", "rhsgref_cdf_b_bmd1pk", "rhsgref_cdf_b_bmd2", "rhsgref_cdf_b_bmd2k", "rhsgref_cdf_b_bmp1", "rhsgref_cdf_b_bmp1d", "rhsgref_cdf_b_bmp1k", "rhsgref_cdf_b_bmp1p", "rhsgref_cdf_b_bmp2e", "rhsgref_cdf_b_bmp2", "rhsgref_cdf_b_bmp2d", "rhsgref_cdf_b_bmp2k"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
-["vehiclesTanks", ["rhsgref_cdf_b_t72ba_tv", "rhsgref_cdf_b_t72bb_tv", "rhsgref_cdf_b_t80b_tv", "rhsgref_cdf_b_t80bv_tv"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["a3a_rhsgref_cdf_b_t72ba_tv", "a3a_rhsgref_cdf_b_t72bb_tv", "a3a_rhsgref_cdf_b_t80b_tv", "a3a_rhsgref_cdf_b_t80bv_tv", "a3a_rhsgref_cdf_b_t80u_tv", "a3a_rhsgref_cdf_b_t80uk_tv"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["rhsgref_cdf_b_zsu234"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
