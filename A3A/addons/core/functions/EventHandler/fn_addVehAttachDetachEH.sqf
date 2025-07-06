@@ -1,5 +1,8 @@
 // Always installed on server because they fire regardless of locality
 
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
 params ["_veh"];
 
 _veh addEventHandler ["Attached", {
@@ -17,13 +20,13 @@ _veh addEventHandler ["Detached", {
 
     params ["_attachedObj", "_parentObj"];
 
-    if (!(_attachedObj isKindOf "StaticWeapon") and !(_attachedObject inArea "Synd_HQ")) exitWith {};      // quadbikes shouldn't be auto-added
-
     [_attachedObj] spawn {
         params ["_veh"];
 
         // Wait for the thing to settle
         waitUntil { sleep 1; vectorMagnitude velocity _veh < 0.01 };
+
+        if (getNumber (configOf _veh >> "hasDriver") != 0 and !(_veh inArea "Synd_HQ")) exitWith {};      // quadbikes shouldn't be auto-added
         if (!isNull attachedTo _veh) exitWith {};           // might be attached again
         isNil { ["", _veh] call A3A_fnc_garrisonServer_addVehicle };
     };

@@ -17,7 +17,7 @@ FIX_LINE_NUMBERS()
 params ["_targetSide", "_side"];
 
 
-private _possibleStartBases = airportsX select {sidesX getVariable [_x, sideUnknown] == _side && [_x] call A3A_fnc_airportCanAttack};
+private _possibleStartBases = airportsX select {sidesX getVariable [_x, sideUnknown] == _side} select { [_x] call A3A_fnc_airportCanAttack };
 _possibleStartBases pushBack (["NATO_carrier", "CSAT_carrier"] select (_side == Invaders));
 private _airportPositions = _possibleStartBases apply { markerPos _x };
 

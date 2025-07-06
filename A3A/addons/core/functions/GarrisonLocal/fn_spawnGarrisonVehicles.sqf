@@ -65,7 +65,7 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
     _vehicles pushBack _vehicle;
     _vehicle setVariable ["markerX", _marker, true];
     if (!isNil "_state") then { [_vehicle, _state] call HR_GRG_fnc_setState };
-    [_vehicle, _side] call A3A_fnc_AIVEHinit;
+    [_vehicle, _side, "garrison"] call A3A_fnc_AIVEHinit;
 
     if (_fullCrew) then {
         private _countCrew = count fullCrew [_vehicle, "", true] - count fullCrew [_vehicle, "cargo", true];

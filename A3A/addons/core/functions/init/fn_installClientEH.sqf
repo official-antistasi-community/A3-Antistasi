@@ -97,6 +97,7 @@ player addEventHandler ["HandleHeal", {
 player addEventHandler ["WeaponAssembled", {
     private _veh = _this select 1;
     [_veh, teamPlayer] call A3A_fnc_AIVEHinit;		// will flip/capture if already initialized
+    if !(_veh isKindOf "StaticWeapon") exitWith {};         // Don't auto-garrison drones
     private _marker = [getPosATL _veh] call A3A_fnc_getMarkerForPos;
     if (_marker != "") then {
         [_marker, _veh] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];

@@ -53,7 +53,7 @@ if (_vehicleType isKindOf "Land") then {
         // arguably should just return empty array...
         private _wayPos = waypointPosition (waypoints _crewGroup # 0);
         _vehicle setVehiclePosition [_wayPos, [], 10, "NONE"];
-        _crewGroup setCurrentWaypoint 1;
+        _crewGroup setCurrentWaypoint [_crewGroup, 1];
     };
 };
 

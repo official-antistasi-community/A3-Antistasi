@@ -35,7 +35,7 @@ if (_arrayType == "buildings" and _marker == "Synd_HQ") then {
 
 (_garrison get _arrayType) pushBack [typeOf _vehicle, getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle];
 _vehicle setVariable ["markerX", _marker, true];
-
+_vehicle setVariable ["A3A_resPool", "garrison", true];
 
 // Add to active garrison if spawned
 if (_marker in A3A_garrisonMachine) then {
