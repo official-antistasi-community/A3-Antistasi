@@ -126,13 +126,6 @@ if (isServer) then {
 	} forEach markersX;
 	Debug("Completed garrison vehicle validation");
 
-	// Backwards compat, delete mines that are within camp zones
-	private _campPositions = values A3A_minorSitesHM select { _x#1 == "camp" } apply { _x#0 };
-	{
-		if (_campPositions inAreaArray [getPosATL _x, 300, 300] isEqualTo []) then { continue };
-		deleteVehicle _x;
-	} forEach allMines;
-
 	// Should have garrison data for this now
 	{
 		[_x] call A3A_fnc_mrkUpdate
