@@ -557,6 +557,10 @@ if (A3A_hasACE) then {
 	[] call A3A_fnc_aceModCompat;
 };
 
+if (isClass (configFile >> "CfgPatches" >> "cigs_core")) then {
+    FactionGet(reb,"initialRebelEquipment") append ( nil call cigs_core_fnc_getAllItems );
+};
+
 ////////////////////////////////////
 //     ACRE ITEM MODIFICATIONS   ///
 ////////////////////////////////////
