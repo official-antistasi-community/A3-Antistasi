@@ -35,8 +35,13 @@ A3A_policeStations = createHashMap;
 
     private _stationPos = _garrison get "policeStation";
     if (isNil "_stationPos") then {
-        private _buildings = nearestTerrainObjects [markerPos _city, ["House"], 100];
+        private _buildings = nearestTerrainObjects [markerPos _city, ["House", "Building"], 100];       // CUP needs "Building"
         _buildings = _buildings select { typeOf _x in _policeStationTypes } select { alive _x };        // isKindOf matching would pick up abandoned buildings
+        if (_buildings isEqualTo []) then {
+            // Try again with slightly larger radius
+            _buildings = nearestTerrainObjects [markerPos _city, ["House", "Building"], 150];
+            _buildings = _buildings select { typeOf _x in _policeStationTypes } select { alive _x };
+        };
         if (_buildings isEqualTo []) then {
             Info_1("No suitable buildings for police station in %1", _city);
             continue;
@@ -60,7 +65,7 @@ A3A_policeStations = createHashMap;
     private _places = A3A_spawnPlacesHM get (_city + "_civ") select { _x#0 == "civCar" };
     private _placePositions = _places apply { _x#1 };
     private _nearPlaces = _placePositions inAreaArrayIndexes [getPosATL _station, 50, 50] apply { _places # _x };
-    if (_nearPlaces isEqualTo []) then { continue };            // rely on cleanup to get rid of excess vehicle
+    if (_nearPlaces isEqualTo []) then { _garrison set ["vehicles", []]; continue };
 
     private _distances = _nearPlaces apply { _x#1 distance2d _station };
     private _minPlace = _nearPlaces select (_distances find selectMin _distances);

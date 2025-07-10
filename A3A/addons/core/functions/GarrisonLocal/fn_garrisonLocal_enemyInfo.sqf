@@ -43,14 +43,16 @@ _defenders = _defenders select { leader _x call A3A_fnc_canFight };
 _defenders = _defenders select { _x getVariable ["PATCOM_Patrol_Params", [""]] select 0 != "Patrol_Attack" };
 
 // Only include mortars that are far enough and aren't busy
-private _mortarUnits = units (_garrison get "mortarGroup") select { _x call A3A_fnc_canFight };
-private _mortars = _mortarUnits apply { vehicle _x } select { _x isKindOf "StaticMortar" };
+private _mortars = [];
+if (_type != "detect") then {
+    private _mortarUnits = units (_garrison get "mortarGroup") select { _x call A3A_fnc_canFight };
+    _mortars = _mortarUnits apply { vehicle _x } select { _x isKindOf "StaticMortar" };
 
-private _busy = _mortars select {!(_x getVariable ["PATCOM_ArtilleryBusy", false])};
-Trace_3("Mortars: %1 can fire; %2 not busy; %3 in range", count (_mortars select {canFire _x}), count _busy, count (_mortars select {_enemy distance2d _x > 100}) );
+    private _busy = _mortars select {!(_x getVariable ["PATCOM_ArtilleryBusy", false])};
+    Trace_3("Mortars: %1 can fire; %2 not busy; %3 in range", count (_mortars select {canFire _x}), count _busy, count (_mortars select {_enemy distance2d _x > 100}) );
 
-_mortars = _mortars select { canFire _x and !(_x getVariable ["PATCOM_ArtilleryBusy", false]) and _enemy distance2d _x > 100 };
-
+    _mortars = _mortars select { canFire _x and !(_x getVariable ["PATCOM_ArtilleryBusy", false]) and _enemy distance2d _x > 100 };
+};
 
 private _threatTime = _garrison getOrDefault ["threatTime", time];
 private _threat = _garrison getOrDefault ["threat", 0];

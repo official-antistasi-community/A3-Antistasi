@@ -50,7 +50,7 @@ if (_type in ["camp", "roadblock", "rebpost"]) exitWith
 // Only count defenders within the marker, in case of distant/stuck patrols
 // might need to implement minimum size for small markers?
 private _defenders = units _side inAreaArray _marker;
-_defenders insert [-1, units _side inAreaArray [_markerPos, 50, 50], true];
+_defenders insert [-1, units _side inAreaArray [_markerPos, 100, 100], true];
 private _defenderCount = count (_defenders select { _x call A3A_fnc_canFight });
 if (!_forced and _defenderCount > 4) exitWith {
     Debug_3("ZoneCheck at %1 early out from %2 friendly %3 units", _marker, _defenderCount, _side);
@@ -81,7 +81,7 @@ private _winner = if (_enemy1Count > _enemy2Count) then {_enemy1} else {_enemy2}
 
 Debug_7("ZoneCheck at %1 found %2 friendly %5 units, %3 enemy %6 units and %4 enemy %7 units", _marker, _defenderCount, _enemy1Count, _enemy2Count, _side, _enemy1, _enemy2);
 
-if (_side != teamPlayer and _defenderCount <= 2) exitWith {
+if (_winner == teamPlayer and _defenderCount <= 2) exitWith {       // guarantees >0 rebels by ordering
     [_winner, _marker] remoteExecCall ["A3A_fnc_markerChange", 2];
 };
 
