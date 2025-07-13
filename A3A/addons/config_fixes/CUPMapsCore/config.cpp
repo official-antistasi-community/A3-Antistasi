@@ -22,3 +22,4 @@ class CfgPatches
 class CfgVehicles {
     #include "houses.hpp"
 };
+#include "CfgWorlds.hpp"

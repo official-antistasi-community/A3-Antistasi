@@ -22,10 +22,9 @@ if (_objData isEqualTo []) exitWith {
 };
 
 private _furniture = [];
+private _intelPos = [];
 {
 	_x params ["_class", "_pos", "_dir"];
-
-    // Otherwise we attach the object so it's not simulated and can be cleared when the house is destroyed
 
     // Loot crate special case
     if (_class == "Box_NATO_Wps_F") then {
@@ -36,6 +35,8 @@ private _furniture = [];
         [_obj, false, _activeGarrison, _marker] call A3A_fnc_setupLootCrate;
         continue;
     };
+    // Direct intel position special case
+    if (_class == "Land_Document_01_F") then { _intelPosDir = _pos; continue };
 
 	private _obj = objNull;
     isNil {
@@ -44,27 +45,28 @@ private _furniture = [];
     	_obj setDir (_dir + getDir _station);
         _obj enableSimulationGlobal false;
     };
-    _furniture pushBack _obj;       // probably need to attach 
+    _furniture pushBack _obj;
 
     if (_class == "OfficeTable_01_old_F") then {
-        if (_garrisonData getOrDefault ["intelCD", 0] > 0) exitWith {};
-
-        // Intel spawning code, put papers on table (actually works for any table)
-        private _intelType = A3A_faction_occ get "placeIntel_itemMedium" select 0;          // assume this isn't a computer...
+        // Put intel papers on table (actually works for any table)
         private _bb = boundingBoxReal [_obj, "Geometry"];
-        private _deskSurf = getPosATL _obj vectorAdd [0, 0, _bb#1#2 - _bb#0#2];
-        private _intel = createVehicle [_intelType, _deskSurf, [], 0, "CAN_COLLIDE"];
-        _intel setVectorUp [0,0,1];
-        _intel setVariable ["side", Occupants, true];
-        _intel setVariable ["marker", _marker, true];              // so we know what to cool down
-        [_intel, "Intel_Medium"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_intel];
-        _furniture pushBack _intel;
+        _intelPos = getPosATL _obj vectorAdd [0, 0, _bb#1#2 - _bb#0#2];
     };
     if (_class == "Banner_01_F") then {
         _obj setObjectTextureGlobal [0, A3A_faction_occ get "flagTexture"];
     };
 
 } forEach _objData;
+
+if (_intelPos isNotEqualTo [] and _garrisonData getOrDefault ["intelCD", 0] <= 0) then {
+    private _intelType = A3A_faction_occ get "placeIntel_itemMedium" select 0;          // assume this isn't a computer...
+    private _intel = createVehicle [_intelType, _intelPos, [], 0, "CAN_COLLIDE"];
+    _intel setVectorUp [0,0,1];
+    _intel setVariable ["side", Occupants, true];
+    _intel setVariable ["marker", _marker, true];              // so we know what to cool down
+    [_intel, "Intel_Medium"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_intel];
+    _furniture pushBack _intel;
+};
 
 _station setVariable ["A3A_furniture", _furniture, 2];          // broadcast to server so it can be deleted on destruction
 _activeGarrison get "buildings" append _furniture;

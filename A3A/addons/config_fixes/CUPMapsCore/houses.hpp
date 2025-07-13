@@ -1,3 +1,4 @@
+// Chernarus
 
 // big red buildings
 class Land_HouseV2_04;
@@ -61,8 +62,7 @@ class Land_HouseV_1I4 : House
     };
 };
 
-// guardhouse. Furnished?
-
+// guardhouse
 class Land_Mil_Guardhouse : House
 {
     A3A_policeStationObjects[] = {
@@ -72,4 +72,94 @@ class Land_Mil_Guardhouse : House
         {"OfficeTable_01_old_F",{0.473633,3.71204,-1.67183},0},
         {"Land_ChairWood_F",{0.242676,3.26221,-1.67179},180}
     };
+};
+
+
+// Takistan
+
+// Large building with archway
+class House_EP1;
+class Land_House_C_3_EP1 : House_EP1
+{
+    A3A_policeStationObjects[] = {
+		{"Banner_01_F",{4.64648,4.80566,-1.15671},180},
+		{"Banner_01_F",{-6.01025,-4.28613,0.108753},0},
+		//{"Land_Document_01_F",{-7.53955,3.40527,0.573701},0},
+		{"OfficeTable_01_old_F",{-8.08887,0.990723,0.5737},270},
+		{"Land_ChairWood_F",{-7.74561,0.682617,0.573698},87},
+		{"Box_NATO_Wps_F",{-4.34985,-1.33154,0.5737},270}
+	};
+};
+
+// Rooms above garage
+class Land_House_C_10_EP1 : House_EP1
+{
+    A3A_policeStationObjects[] = {
+		{"Banner_01_F",{4.10693,-6.40137,0.47357},270},
+		{"Banner_01_F",{-5.88281,-0.116211,-0.567965},90},
+		//{"Land_Document_01_F",{-1.48706,-3.00977,-0.872},357},
+		{"OfficeTable_01_old_F",{0.990723,-3.20313,-0.871767},90},
+		{"Box_NATO_Wps_F",{-1.74634,7.67578,-0.870679},0}
+	};
+};
+
+// Pillar house
+class Land_House_C_4_EP1 : House_EP1
+{
+    A3A_policeStationObjects[] = {
+		{"Banner_01_F",{-1.32031,-4.16504,-2.45607},0},
+		{"Banner_01_F",{-2.53662,5.34375,-2.49399},180},
+		//{"Land_Document_01_F",{-2.78687,0.992188,-0.352016},0},
+		{"OfficeTable_01_old_F",{5.87207,0.950684,-0.352937},90},
+		{"Land_ChairWood_F",{5.45898,1.1582,-0.352777},267},
+		{"Box_NATO_Wps_F",{-4.104,2.80469,-0.351299},270}
+	};
+};
+
+// Corner house
+class Land_House_C_9_EP1 : House_EP1
+{
+    A3A_policeStationObjects[] = {
+		{"Banner_01_F",{-4.76563,-5.10449,-1.56915},45},
+		{"Banner_01_F",{3.8877,5.53906,-0.511545},270},
+		//{"Land_Document_01_F",{-1.31104,-1.68066,-0.154605},0}
+		{"OfficeTable_01_old_F",{1.01074,3.77832,-0.154604},180},
+		{"Land_ChairWood_F",{1.24463,4.20068,-0.154609},0},
+		{"Box_NATO_Wps_F",{3.86426,-5.16309,-0.154606},270},
+	};
+};
+
+// 3 storey wooden junk
+class Land_House_K_8_EP1 : House_EP1
+{
+    A3A_policeStationObjects[] = {
+		{"Banner_01_F",{3.03125,4.63916,-1.61143},180},
+		{"Banner_01_F",{-2.72266,-4.36377,-1.69419},0},
+		//{"Land_Document_01_F",{-2.479,3.53174,-2.59157},0},
+		{"OfficeTable_01_old_F",{2.29102,1.01465,-2.58644},90},
+		{"Land_ChairWood_F",{2.04541,1.17773,-2.58689},272},
+		{"Box_NATO_Wps_F",{-2.64648,-1.1333,3.35913},0}
+	};
+};
+
+// 2 storey junk with balcony
+class Land_House_K_7_EP1 : House_EP1
+{
+    A3A_policeStationObjects[] = {
+		{"Banner_01_F",{0.846191,2.45313,1.01782},270},
+		{"Banner_01_F",{-5.45801,-0.754883,1.23499},0},
+		{"Box_NATO_Wps_F",{-3.47754,4.35742,3.28789},360},
+		{"OfficeTable_01_old_F",{-3.81616,4.53857,-0.220809},0}
+	};
+};
+
+// Mud shack
+class Land_House_L_6_EP1 : House_EP1
+{
+    A3A_policeStationObjects[] = {
+		{"Banner_01_F",{-5.03833,-1.67188,-0.698441},90},
+		{"Banner_01_F",{8.10596,-0.0205078,1.90656},270},
+		{"Box_NATO_Wps_F",{4.25854,1.62256,1.27856},360},
+		{"OfficeTable_01_old_F",{1.70654,1.0542,-1.54344},90}
+	};
 };
