@@ -30,7 +30,7 @@ A3A_spawnPlaceStats = createHashMap;
             case "staticMortar": { [1, 2] select _isAirport };
             case "vehicleAA": { [0, 1] select _isAirport };
             case "vehicleTruck": { 1 };
-            case "vehicle": { [0, ceil (_maxPlaces / 2)] select _isAirport };
+            case "vehicle": { [0, 6 min ceil (_maxPlaces / 2)] select _isAirport };
             case "heli": { ceil (_garrSize / 15) };
             case "plane": { 3 };
             case "runway": { 1 };
