@@ -379,10 +379,6 @@ for "_i" from 0 to (count _civVehiclesWeighted - 2) step 2 do {
 	_civVehicles pushBack (_civVehiclesWeighted select _i);
 };
 
-_civVehicles append FactionGet(reb,"vehiclesCivCar");
-_civVehicles append FactionGet(reb,"vehiclesCivTruck");
-_civVehicles append FactionGet(reb,"vehiclesCivSupply");  // Box van from bank mission. TODO: Define in rebel template
-
 DECLARE_SERVER_VAR(arrayCivVeh, _civVehicles);
 DECLARE_SERVER_VAR(civVehiclesWeighted, _civVehiclesWeighted);
 
@@ -404,7 +400,8 @@ for "_i" from 0 to (count _civBoatData - 2) step 2 do {
 DECLARE_SERVER_VAR(civBoats, _civBoats);
 DECLARE_SERVER_VAR(civBoatsWeighted, _civBoatsWeighted);
 
-private _undercoverVehicles = (arrayCivVeh - ["C_Quadbike_01_F"]) + FactionGet(reb,"vehiclesCivBoat") + FactionGet(reb,"vehiclesCivHeli") + FactionGet(reb, "vehiclesCivPlane");
+private _undercoverVehicles = (arrayCivVeh - ["C_Quadbike_01_F"]) + FactionGet(reb,"vehiclesCivBoat") + FactionGet(reb,"vehiclesCivHeli") + FactionGet(reb, "vehiclesCivPlane")
+	+ FactionGet(reb,"vehiclesCivCar") + FactionGet(reb,"vehiclesCivTruck") + FactionGet(reb,"vehiclesCivSupply");
 DECLARE_SERVER_VAR(undercoverVehicles, _undercoverVehicles);
 
 
@@ -557,6 +554,8 @@ A3A_validVehicles = createHashMap;
 	A3A_validVehicles set [_x get "side", _valid];
 
 } forEach [A3A_faction_occ, A3A_faction_inv];
+
+A3A_validVehicles set [civilian, createHashMapFromArray [["civCar", arrayCivVeh], ["civBoat", civBoats]] ];
 
 ///////////////////////////
 //     MOD TEMPLATES    ///

@@ -119,11 +119,11 @@ if (isServer) then {
 	// **********************************************************************************************
 
 	// Validate garrison vehicles (in case of faction or logic change)
-	// TODO: Need to do this for city civ component too
 	Debug("Starting garrison vehicle validation");
+	private _civMarkers = citiesX apply { _x + "_civ" };
 	{
 		[_x, true, false] call A3A_fnc_garrisonServer_cleanup;
-	} forEach markersX;
+	} forEach (markersX + _civMarkers);
 	Debug("Completed garrison vehicle validation");
 
 	// Should have garrison data for this now
