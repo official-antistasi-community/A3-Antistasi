@@ -94,7 +94,7 @@ while {true} do
 	server setVariable ["resourcesFIA", _resAdd + (server getVariable "resourcesFIA"), true];
 
 	private _newBombRuns = bombRuns + 0.25 * ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX);
-	bombRuns = _newBombRuns max (4 + tierWar*2);
+	bombRuns = _newBombRuns min (4 + tierWar*2);
 	publicVariable "bombRuns";
 
 	// Add & delete enemy camps and roadblocks

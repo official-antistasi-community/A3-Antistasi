@@ -169,12 +169,14 @@ else
 if (_destinationX == boxX) then
 	{
 //	{if (_x distance boxX < 10) then {[petros,"hint","Ammobox Loaded", "Cargo"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach (call A3A_fnc_playableUnits);
+	if ((_originX isKindOf "ReammoBox_F") and (_originX != vehicleBox)) then {deleteVehicle _originX};
     private _moneyText = "";
     private _arsenalText = "";
- 	if (count _this > 3) then { 
-        [0,_this select 3, true] spawn A3A_fnc_resourcesFIA; 
+ 	if (count _this > 3 || {_originX getVariable ["A3A_canGarage",false]}) then {
+		private _refund = if (count _this > 3) then {_this select 3} else {_originX getVariable ['A3A_itemPrice', 0]};
+        [0,_refund, true] spawn A3A_fnc_resourcesFIA; 
         _moneyText = format ["<t size='0.6' color='#C1C0BB'>" + localize "STR_A3A_fn_base_resourcesFIA_resources" + "<br/><br/></t>", FactionGet(reb,"name")]; 
-        _moneyText = _moneyText + format ["<t size='0.5' color='#C1C0BB'>" + localize "STR_A3A_fn_base_resourcesFIA_money" + "</t><br/><br/><br/>","+", _this select 3];
+        _moneyText = _moneyText + format ["<t size='0.5' color='#C1C0BB'>" + localize "STR_A3A_fn_base_resourcesFIA_money" + "</t><br/><br/><br/>","+", _refund];
     };
     _updated = [] call A3A_fnc_arsenalManage;
     if (_updated != "") then 
@@ -186,6 +188,7 @@ if (_destinationX == boxX) then
         [petros,"income",_arsenalText] remoteExec ["A3A_fnc_commsMP",_allButBoss];
     }; 
     private _fullText = [_moneyText,_arsenalText] joinString "";
+	if (_fullText == "") exitWith {};
     [petros,"income",_fullText] remoteExec ["A3A_fnc_commsMP",theBoss];
 	}
 else
