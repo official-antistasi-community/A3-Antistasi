@@ -196,8 +196,7 @@ _prestigeBLUFOR = [];
 ["prestigeOPFOR", _prestigeOPFOR] call A3A_fnc_setStatVariable;
 ["prestigeBLUFOR", _prestigeBLUFOR] call A3A_fnc_setStatVariable;
 
-["occRadioKeys", occRadioKeys] call A3A_fnc_setStatVariable;
-["invRadioKeys", invRadioKeys] call A3A_fnc_setStatVariable;
+["radioKeys", [occRadioKeys,invRadioKeys]] call A3A_fnc_setStatVariable;
 
 _markersX = markersX - outpostsFIA - controlsX;
 _garrison = [];
