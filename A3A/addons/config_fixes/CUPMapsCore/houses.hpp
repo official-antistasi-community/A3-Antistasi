@@ -163,3 +163,68 @@ class Land_House_L_6_EP1 : House_EP1
 		{"OfficeTable_01_old_F",{1.70654,1.0542,-1.54344},90}
 	};
 };
+
+// Sahrani
+
+// plain 2-floor building
+class Land_Dum_mesto2 : House
+{
+    A3A_policeStationObjects[] = {
+        {"Banner_01_F",{-4.27979,0.0195313,-3.3359},90},
+        {"Banner_01_F",{4.11963,3.43896,-3.2539},270},
+        {"OfficeTable_01_old_F",{-0.308594,-0.578125,-0.946445},0},
+        {"Land_ChairWood_F",{-0.539551,-1.09229,-0.946446},183},
+        {"Box_NATO_Wps_F",{2.94238,7.58838,-0.946456},0}
+    };
+};
+
+// Similar building
+class Land_Dum_olezlina_closed;
+class Land_Dum_olezlina : Land_Dum_olezlina_closed
+{
+    A3A_policeStationObjects[] = {
+        {"Banner_01_F",{-3.43945,4.1167,-2.68105},180},
+        {"Banner_01_F",{0.0307617,-4.28857,-2.65978},0},
+        {"Box_NATO_Wps_F",{-7.56934,2.93799,-0.312598},90},
+        {"OfficeTable_01_old_F",{7.81055,2.07861,-0.312592},90},
+        {"Land_ChairWood_F",{7.31738,2.25439,-0.312592},272}
+    };
+};
+
+// 2-floor red building
+class Land_Panelak : House
+{
+    A3A_policeStationObjects[] = {
+        {"Banner_01_F",{-3.14746,4.91064,2.44453},180},
+        {"Banner_01_F",{3.25,4.90112,2.45364},180},
+        {"Box_NATO_Wps_F",{4.4668,-1.42432,2.769},270},
+        {"OfficeTable_01_old_F",{-5.45313,-2.68848,2.769},180},
+        {"Land_ChairWood_F",{-5.26074,-2.22168,2.76901},0}
+    };
+};
+
+// 3-story grey brick
+class Land_Dum_istan3_hromada2 : House
+{
+    A3A_policeStationObjects[] = {
+        {"Banner_01_F",{5.83887,4.40015,-3.1938},270},
+        {"Banner_01_F",{1.29346,-4.30273,0.1982},90},
+        {"Box_NATO_Wps_F",{6.05762,1.84375,2.08557},0},
+        {"OfficeTable_01_old_F",{-0.810547,5.48584,-1.28761},90},
+        {"Land_ChairWood_F",{-1.28857,5.64526,-1.28761},272}
+    };
+};
+
+// 2-storey cement
+//(also Land_Dum_olez_istan1_open2 by inheritance)
+class Land_Dum_olez_istan1_closed;
+class Land_Dum_olez_istan1 : Land_Dum_olez_istan1_closed
+{
+    A3A_policeStationObjects[] = {
+        {"Banner_01_F",{6.47559,-4.1084,-0.565529},0},
+        {"Banner_01_F",{-1.7312,4.11035,-0.647443},180},
+        {"OfficeTable_01_old_F",{-7.69019,-0.902344,-1.84642},270},
+        {"Land_ChairWood_F",{-7.21289,-1.14624,1.84642},90},
+        {"Box_NATO_Wps_F",{0.748779,2.97095,1.37253},270}
+    };
+};
