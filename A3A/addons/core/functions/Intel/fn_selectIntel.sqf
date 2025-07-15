@@ -89,11 +89,11 @@ if (_intelType == "Small") then
         {
             if(_side == Occupants) then
             {
-                occupantsRadioKeys = occupantsRadioKeys + 1;
+                occRadioKeys = occRadioKeys + 1;
             }
             else
             {
-                invaderRadioKeys = invaderRadioKeys + 1;
+                invRadioKeys = invRadioKeys + 1;
             };
             _text = format [localize "STR_A3A_fn_intel_select_decry_1", _sideName];
         };
@@ -133,11 +133,11 @@ if (_intelType == "Medium") then
             private _keyCount = round (3 + random 3);
             if(_side == Occupants) then
             {
-                occupantsRadioKeys = occupantsRadioKeys + _keyCount;
+                occRadioKeys = occRadioKeys + _keyCount;
             }
             else
             {
-                invaderRadioKeys = invaderRadioKeys + _keyCount;
+                invRadioKeys = invRadioKeys + _keyCount;
             };
             _text = format [localize "STR_A3A_fn_intel_select_decry_2", _sideName];
         };

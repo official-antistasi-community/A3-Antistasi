@@ -113,8 +113,8 @@ prestigeOPFOR = [75, 50] select cadetMode;												//Initial % support for NA
 prestigeBLUFOR = 0;																	//Initial % FIA support on each city
 
 // Don't need to be distributed
-occupantsRadioKeys = 0;
-invaderRadioKeys = 0;
+occRadioKeys = 0;
+invRadioKeys = 0;
 
 // Recent casualties/damage taken by enemies, format [X, Y, time * 1000 + value]
 A3A_recentDamageOcc = [];
