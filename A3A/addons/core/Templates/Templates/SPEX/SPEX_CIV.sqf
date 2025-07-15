@@ -2,16 +2,11 @@
 //       Vehicles       //
 //////////////////////////    
 
-["vehiclesCivCar", [
-    "SPE_GER_R200_Unarmed", 1, 
-    "SPE_GER_R200_Hood", 2,
-    "SPE_US_G503_MB_Open", 1, 
-    "SPE_US_G503_MB", 2 
-    ]] call _fnc_saveToTemplate;
+["vehiclesCivCar", []] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
-    "SPE_OpelBlitz_Open", 0.5, 
-    "SPE_OpelBlitz", 0.5 
+    "SPEX_GER_Bedford_MWD", 0.5, 
+    "SPEX_GER_Bedford_MWD_Open", 0.5 
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivBoat", [
