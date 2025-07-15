@@ -69,7 +69,7 @@
 ["vehiclesPolice", ["SPE_US_G503_MB"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["SPE_M1919A6_Bipod"]] call _fnc_saveToTemplate;
-["staticAT", ["SPE_57mm_M1"]] call _fnc_saveToTemplate;
+["staticAT", ["SPE_57mm_M1", "SPE_57mm_M1", "SPE_105mm_M3_Direct"]] call _fnc_saveToTemplate;
 ["staticAA", ["SPE_FR_M45_Quadmount"]] call _fnc_saveToTemplate;
 ["staticMortars", ["SPE_M1_81"]] call _fnc_saveToTemplate;
 
