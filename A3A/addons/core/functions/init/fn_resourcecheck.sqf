@@ -56,8 +56,7 @@ while {true} do
 		_resAdd = _resAdd + _resAddCity;
 		_hrAdd = _hrAdd + _hrAddCity;
 
-
-		// revuelta civil!!
+		// city flipping routine
 		if ((_supportGov < _supportReb) and (sidesX getVariable [_city,sideUnknown] == Occupants)) then
 		{
 			["TaskSucceeded", ["", format [localize "STR_A3A_fn_init_resourceCheck_cityChange",_city,FactionGet(reb,"name")]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
@@ -87,6 +86,8 @@ while {true} do
 			_resAdd = _resAdd + (300 * _resBoost);
 		};
 	} forEach resourcesX;
+
+	Debug_2("Occupant radio keys: %1 - Invader radio keys: %2", occRadioKeys, invRadioKeys);
 
 	_hrAdd = ceil _hrAdd;
 	_resAdd = ceil _resAdd;
