@@ -17,8 +17,8 @@
 ["mediKits", ["SPE_US_Medkit", "SPE_GER_Medkit"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
 ["toolKits", ["SPE_ToolKit"]] call _fnc_saveToTemplate;  // Relies on autodetection.
 
-["diveGear", [""]] call _fnc_saveToTemplate;
-["flyGear", [""]] call _fnc_saveToTemplate;
+["diveGear", ["U_SPE_FR_Tank_Crew"]] call _fnc_saveToTemplate;
+["flyGear", ["U_SPE_FR_Tank_Crew", "B_SPE_US_T5_erla"]] call _fnc_saveToTemplate;
 
 ["surrenderCrate", "SPE_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
 
@@ -26,10 +26,10 @@
 //       Vehicles       //
 //////////////////////////
 
-["vehiclesBasic", ["SPE_FFI_OpelBlitz_Open"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["LIB_Kfz1_sernyt","LIB_Kfz1_Hood_sernyt"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["SPE_US_M3_Halftrack","LIB_Kfz1_MG42_sernyt"]] call _fnc_saveToTemplate;
-["vehiclesTruck", ["SPE_US_M3_Halftrack_Unarmed"]] call _fnc_saveToTemplate;
+["vehiclesBasic", ["SPE_FFI_R200_Unarmed"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["SPE_FFI_R200_Hood"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["SPE_FFI_R200_MG34"]] call _fnc_saveToTemplate;
+["vehiclesTruck", ["SPE_FFI_OpelBlitz_Open"]] call _fnc_saveToTemplate;
 ["vehiclesAT", []] call _fnc_saveToTemplate;
 ["vehiclesAA", ["SPE_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
 
@@ -64,20 +64,23 @@
 ["vehicleHealthStation", ["", 75]] call _fnc_saveToTemplate;
 ["vehicleRepairStation", ["", 5000]] call _fnc_saveToTemplate;
 
+#include "SPE_Reb_Vehicle_Attributes.sqf"
+
 ///////////////////////////
 //  Rebel Starting Gear  //
 ///////////////////////////
 
 private _initialRebelEquipment = [
-    "SPE_Fusil_Mle_208_12", "SPE_Fusil_Mle_208_12_Sawedoff", "SPE_K98",
-    "SPE_2Rnd_12x65_Pellets", "SPE_2Rnd_12x65_Slug", "SPE_5Rnd_792x57",
+    "SPE_Fusil_Mle_208_12", "SPE_Fusil_Mle_208_12_Sawedoff",
+    "SPE_2Rnd_12x65_Pellets", "SPE_2Rnd_12x65_Slug","SPE_2Rnd_12x65_No4_Buck",
     "SPE_P08", "SPE_8Rnd_9x19_P08",
-    ["SPE_PzFaust_30m", 50], ["SPE_1Rnd_PzFaust_30m", 50],
+    ["SPE_Faustpatrone", 50], ["SPE_1Rnd_Faustpatrone", 50],
     ["SPE_Ladung_Small_MINE_mag", 10], ["SPE_US_TNT_half_pound_mag", 10], ["SPE_US_TNT_4pound_mag", 3], ["SPE_Ladung_Big_MINE_mag", 3],
-    "SPE_Shg24_Frag", "SPE_NB39", "SPE_US_Mk_1",
-    "V_SPE_US_Vest_M1919", "V_SPE_DAK_VestKar98",
-    "B_SPE_FFI_M36_Saboteur", "B_SPE_GER_MedicBackpack_Empty",
-    "SPE_Binocular_US"
+    "SPE_NB39", "SPE_Shg24",
+    "V_SPE_FFI_Vest_Pouch","V_SPE_FFI_Vest_Pouch_frag", "V_SPE_FFI_Vest_rifle","V_SPE_FFI_Vest_rifle_frag",
+    "V_SPE_FFI_Vest_rifle_pouch","V_SPE_FFI_Vest_SMG","V_SPE_FFI_Vest_SMG_frag","V_SPE_FFI_Vest_SMG_pouch",
+    "B_SPE_FFI_Gasbag", "B_SPE_CIV_musette", "B_SPE_CIV_satchel",
+    "SPE_Binocular_GER"
 ];
 
 if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr", "tf_anprc154"]};
@@ -86,10 +89,7 @@ if (A3A_hasTFAR && startWithLongRangeRadio) then {
     _initialRebelEquipment pushBack "tf_anprc155_coyote";
 };
 if (A3A_hasTFARBeta) then {_initialRebelEquipment append ["TFAR_microdagr", "TFAR_anprc154"]};
-if (A3A_hasTFARBeta && startWithLongRangeRadio) then {
-    _initialRebelEquipment pushBack "TFAR_anprc155";
-    _initialRebelEquipment pushBack "TFAR_anprc155_coyote";
-};
+if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote", "TFAR_anarc164", "a3a_TFAR_rt1523g_rhs", "a3a_TFAR_rt1523g_bwmod", "a3a_TFAR_rt1523g"]};
 
 ["initialRebelEquipment", _initialRebelEquipment] call _fnc_saveToTemplate;
 
@@ -122,6 +122,9 @@ private _rebUniforms = [
     "H_SPE_CIV_Fedora_Cap_6",
     "H_SPE_CIV_Worker_Cap_1",
     "H_SPE_CIV_Worker_Cap_2",
+    "H_SPE_CIV_Worker_Cap_3",
+    "H_SPE_CIV_Worker_Cap_1",
+    "H_SPE_CIV_Worker_Cap_2",
     "H_SPE_CIV_Worker_Cap_3"
 ]] call _fnc_saveToTemplate;          //Headgear used by Rebell Ai until you have Armored Headgear.
 
@@ -130,7 +133,8 @@ private _rebUniforms = [
 /////////////////////
 
 ["faces", ["LivonianHead_6","SPE_Arnold","SPE_Connors","SPE_Davidson","SPE_Elliot","SPE_Oberst","SPE_Seppmeyer","SPE_Walter","WhiteHead_01","WhiteHead_02","WhiteHead_05","WhiteHead_06","WhiteHead_07","WhiteHead_08","WhiteHead_12","WhiteHead_15","WhiteHead_18"]] call _fnc_saveToTemplate;
-["voices", ["Male01FRE","Male02FRE","Male03FRE"]] call _fnc_saveToTemplate;
+["voices", ["spe_male01fre", "spe_male02fre"]] call _fnc_saveToTemplate;
+"SPE_FrenchMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //

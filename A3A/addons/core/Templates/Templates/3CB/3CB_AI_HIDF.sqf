@@ -36,7 +36,7 @@
 ["vehiclesGunBoats", ["UK3CB_TKA_B_RHIB_Gunboat"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["UK3CB_B_LAV25_HIDF", "UK3CB_B_AAV_HIDF"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["UK3CB_B_Mystere_HIDF_CAS1"]] call _fnc_saveToTemplate;      // "RHSGREF_A29B_HIDF" -> needs laser activation
+["vehiclesPlanesCAS", ["UK3CB_B_Mystere_HIDF_CAS1", "RHSGREF_A29B_HIDF", "UK3CB_B_T28Trojan_HIDF_CAS"]] call _fnc_saveToTemplate;      // "UK3CB_B_Mystere_HIDF_CAS1" -> commented for testing of A29 & T28
 ["vehiclesPlanesAA", ["UK3CB_B_Mystere_HIDF_AA1"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["RHS_C130J"]] call _fnc_saveToTemplate;
 
@@ -83,6 +83,7 @@
 ["faces", ["TanoanHead_A3_01","TanoanHead_A3_02","TanoanHead_A3_03","TanoanHead_A3_04","TanoanHead_A3_05",
 "TanoanHead_A3_06","TanoanHead_A3_07","TanoanHead_A3_08"]] call _fnc_saveToTemplate;
 ["voices", ["Male01ENGFRE","Male02ENGFRE"]] call _fnc_saveToTemplate;
+"TanoanMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //
@@ -290,7 +291,7 @@ _policeLoadoutData set ["vests", ["V_TacVest_gen_F"]];
 _policeLoadoutData set ["helmets", ["H_MilCap_gen_F", "H_Beret_gen_F"]];
 
 _policeLoadoutData set ["SMGs", [
-["UK3CB_MP5", "", "", "", ["UK3CB_MP5_30Rnd_Magazine"], [], ""]
+["uk3cb_mat49", "", "", "", ["UK3CB_MAT49_32Rnd_9x19_Magazine"], [], ""]
 ]];
 _policeLoadoutData set ["shotGuns", [
 ["rhs_weap_M590_8RD", "", "", "", ["rhsusf_8Rnd_00Buck"], [], ""]
@@ -322,20 +323,22 @@ _militiaLoadoutData set ["grenadeLaunchers", [
 ]];
 _militiaLoadoutData set ["SMGs", [
 ["rhs_weap_m3a1", "", "", "", ["rhsgref_30rnd_1143x23_M1911B_SMG"], [], ""],
-["UK3CB_Sten", "", "", "", ["UK3CB_Sten_34Rnd_Magazine"], [], ""]
+["uk3cb_mat49", "", "", "", ["UK3CB_MAT49_32Rnd_9x19_Magazine"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
-["UK3CB_Bren", "", "", "", ["UK3CB_Bren_30Rnd_762x51_Magazine", "UK3CB_Bren_30Rnd_762x51_Magazine", "UK3CB_Bren_30Rnd_762x51_Magazine_GT"], [], ""],
-["UK3CB_Bren", "", "", "", ["UK3CB_Bren_30Rnd_762x51_Magazine", "UK3CB_Bren_30Rnd_762x51_Magazine", "UK3CB_Bren_30Rnd_762x51_Magazine_GT"], [], ""],
+["UK3CB_Bren_L4_LMG", "", "", "", ["UK3CB_Bren_30Rnd_762x51_Magazine", "UK3CB_Bren_30Rnd_762x51_Magazine", "UK3CB_Bren_30Rnd_762x51_Magazine_GT"], [], ""],
+["UK3CB_Bren_L4_LMG", "", "", "", ["UK3CB_Bren_30Rnd_762x51_Magazine", "UK3CB_Bren_30Rnd_762x51_Magazine", "UK3CB_Bren_30Rnd_762x51_Magazine_GT"], [], ""],
 ["rhs_weap_mg42", "", "", "rhsgref_mg42_acc_AAsight", ["rhsgref_50Rnd_792x57_SmK_drum", "rhsgref_50Rnd_792x57_SmK_drum", "rhsgref_50Rnd_792x57_SmK_alltracers_drum"], [], ""],
 ["UK3CB_M60", "", "", "", ["UK3CB_M60_100rnd_762x51", "UK3CB_M60_100rnd_762x51", "UK3CB_M60_100rnd_762x51_GT"], [], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["rhs_weap_m1garand_sa43", "", "", "", ["rhsgref_8Rnd_762x63_M2B_M1rifle"], [], ""]
+["rhs_weap_m1garand_sa43", "", "", "", ["rhsgref_8Rnd_762x63_M2B_M1rifle"], [], ""],
+["uk3cb_enfield_l42", "", "", "uk3cb_optic_no32", ["uk3cb_l42_enfield_762_10Rnd_magazine"], [], ""],
+["uk3cb_enfield_l8t", "", "", "uk3cb_optic_no32", ["uk3cb_l42_enfield_762_10Rnd_magazine"], [], ""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
-["rhs_weap_kar98k", "", "", "", ["rhsgref_5Rnd_792x57_kar98k"], [], ""],
-["rhs_weap_m38", "", "", "", ["rhsgref_5Rnd_762x54_m38"], [], ""]
+["uk3cb_enfield_l42", "", "", "uk3cb_optic_no32", ["uk3cb_l42_enfield_762_10Rnd_magazine"], [], ""],
+["uk3cb_enfield_l8t", "", "", "uk3cb_optic_no32", ["uk3cb_l42_enfield_762_10Rnd_magazine"], [], ""]
 ]];
 
 _militiaLoadoutData set ["ATLaunchers", [

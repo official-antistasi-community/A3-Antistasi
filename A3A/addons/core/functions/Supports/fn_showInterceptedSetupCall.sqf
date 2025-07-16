@@ -52,6 +52,10 @@ else
         {
             _text = format [localize "STR_A3A_fn_support_showIntStpCll_QRFLAND", _sideName];
         };
+        case ("TANK"):
+        {
+            _text = format [localize "STR_A3A_fn_support_showIntStpCll_TANK", _sideName];
+        };
         case ("AIRSTRIKE"):
         {
             _text = format [localize "STR_A3A_fn_support_showIntStpCll_AIRSTRIKE", _sideName];
@@ -109,7 +113,7 @@ private _timeStr = if(_setupTime < 60) then { "&lt;1" } else { str round (_setup
 
 if(_reveal >= 0.8) then
 {
-    if(toupper _supportType in ["QRFLAND", "QRFAIR", "COUNTERATTACK", "MAJORATTACK"]) then
+    if(toupper _supportType in ["QRFLAND", "QRFAIR", "COUNTERATTACK", "MAJORATTACK", "TANK"]) then
     {
         _text = [_text,format[localize "STR_A3A_fn_support_showIntStpCll_arrivalTime",_timeStr]] joinString " ";
     }

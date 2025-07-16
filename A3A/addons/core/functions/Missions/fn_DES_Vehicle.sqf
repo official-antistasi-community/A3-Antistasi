@@ -64,7 +64,7 @@ if (spawner getVariable _markerX == 0) then
 		{
 		waitUntil {sleep 1;({leader _groupX knowsAbout _x > 1.4} count ([distanceSPWN,0,leader _groupX,teamPlayer] call A3A_fnc_distanceUnits) > 0) or (dateToNumber date > _dateLimitNum) or (not alive _veh) or ({(_x getVariable ["spawner",false]) and (side group _x == teamPlayer)} count crew _veh > 0)};
 
-		if ({leader _groupX knowsAbout _x > 1.4} count ([distanceSPWN,0,leader _groupX,teamPlayer] call A3A_fnc_distanceUnits) > 0) then {_groupX addVehicle _veh;};x
+		if ({leader _groupX knowsAbout _x > 1.4} count ([distanceSPWN,0,leader _groupX,teamPlayer] call A3A_fnc_distanceUnits) > 0) then {_groupX addVehicle _veh;};
 		};
 
 	waitUntil {sleep 1;(dateToNumber date > _dateLimitNum) or (not alive _veh) or ({(_x getVariable ["spawner",false]) and (side group _x == teamPlayer)} count crew _veh > 0)};

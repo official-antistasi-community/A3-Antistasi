@@ -42,10 +42,8 @@ while {true} do
     private _lastScale = A3A_balancePlayerScale;
     A3A_balancePlayerScale = (A3A_activePlayerCount ^ 0.8 + 1 + tierWar / 4) / 6;           // Normalized to 1 == 5 players @ war tier 6
     A3A_balancePlayerScale = A3A_balancePlayerScale * (A3A_enemyBalanceMul / 10);
-    A3A_balanceVehicleCost = 100 + tierWar * 10;                                            // pretty close to true
-    A3A_balanceResourceRate = A3A_balancePlayerScale * A3A_balanceVehicleCost;          // base resources gained per 10 minutes
-    // back off the tier scaling a bit for reb vs occ vs inv, because you get some natural tier scaling due to attack choice
-    if (gameMode == 1) then { A3A_balanceResourceRate = A3A_balanceResourceRate * (1 - tierWar / 35) };
+    A3A_balanceVehicleCost = 100 + tierWar * 10;
+    A3A_balanceResourceRate = A3A_balancePlayerScale * ([A3A_balanceVehicleCost, 140] select (gameMode == 1));          // base resources gained per 10 minutes
     publicVariable "A3A_balancePlayerScale";            // needed for determining enemy skill on headless clients
 
     // Rescale defence resources when player count or difficulty changes
@@ -60,7 +58,7 @@ while {true} do
     {
         private _aggroMul = [1.0 + aggressionOccupants/200, 0.5 + aggressionOccupants/200] select (gameMode != 1);
         private _resRateDef = _aggroMul * A3A_balanceResourceRate / 10;
-        private _resRateAtk = _aggroMul * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10) / 15;       // Attack rate is 2/3 of defence
+        private _resRateAtk = _aggroMul * A3A_balanceResourceRate * (A3A_enemyAttackMul / 10) / 12;       // Attack rate is a bit lower than defence
 
         private _noAirport = -1 == airportsX findIf { sidesX getVariable _x == Occupants };
         if (_noAirport) then { _resRateDef = _resRateDef * 0.6; _resRateAtk = _resRateAtk * 0.6 };

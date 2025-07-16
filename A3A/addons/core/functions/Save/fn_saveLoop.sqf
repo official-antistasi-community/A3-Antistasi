@@ -31,7 +31,7 @@ private _namespace = [profileNamespace, missionProfileNamespace] select _saveToN
 	{
 		if (isNil {_playerData get _x}) then { continue };				// old game data will have missing entries
 		[_uid, _x, _playerData get _x] call A3A_fnc_savePlayerStat;
-	} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage"];
+	} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage","missionsCompleted"];
 } forEach A3A_playerSaveData;
 
 ["savedPlayers", keys A3A_playerSaveData] call A3A_fnc_setStatVariable;
@@ -87,8 +87,12 @@ private _antennasDeadPositions = [];
 ["maxUnits", 140] call A3A_fnc_setStatVariable;				        // backwards compatibility
 ["nextTick", nextTick - time] call A3A_fnc_setStatVariable;
 ["weather",[fogParams,rain]] call A3A_fnc_setStatVariable;
+["arsenalLimits", A3A_arsenalLimits] call A3A_fnc_setStatVariable;
+["rebelLoadouts", A3A_rebelLoadouts] call A3A_fnc_setStatVariable;
 private _destroyedPositions = destroyedBuildings apply { getPosATL _x };
 ["destroyedBuildings",_destroyedPositions] call A3A_fnc_setStatVariable;
+["controlsSDK",[]] call A3A_fnc_setStatVariable;					// backwards compatibility
+["minorSites", A3A_minorSitesHM] call A3A_fnc_setStatVariable;
 
 //Save aggression values
 ["aggressionOccupants", [aggressionLevelOccupants, aggressionStackOccupants]] call A3A_fnc_setStatVariable;
@@ -191,6 +195,8 @@ _prestigeBLUFOR = [];
 
 ["prestigeOPFOR", _prestigeOPFOR] call A3A_fnc_setStatVariable;
 ["prestigeBLUFOR", _prestigeBLUFOR] call A3A_fnc_setStatVariable;
+
+["radioKeys", [occRadioKeys,invRadioKeys]] call A3A_fnc_setStatVariable;
 
 _markersX = markersX - outpostsFIA - controlsX;
 _garrison = [];
@@ -322,7 +328,7 @@ _resDefOcc = _resDefOcc / A3A_balancePlayerScale;
 _resDefInv = _resDefInv / A3A_balancePlayerScale;
 
 // Enemy resources. Could hashmap this instead...
-["enemyResources", [_resDefOcc, _resDefInv, _resAttOcc, _resAttInv]] call A3A_fnc_setStatVariable;
+["enemyResources", [_resDefOcc, _resDefInv, _resAttOcc, _resAttInv, A3A_punishmentDefBuff]] call A3A_fnc_setStatVariable;
 
 // HQ knowledge
 ["HQKnowledge", [A3A_curHQInfoOcc, A3A_curHQInfoInv, A3A_oldHQInfoOcc, A3A_oldHQInfoInv]] call A3A_fnc_setStatVariable;
@@ -351,9 +357,6 @@ _dataX = [];
 
 ["killZones",_dataX] call A3A_fnc_setStatVariable;
 
-// Only save state of the hardcoded controls
-_controlsX = controlsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (controlsX find _x < defaultControlIndex)};
-["controlsSDK",_controlsX] call A3A_fnc_setStatVariable;
 
 // fuel rework
 _fuelAmountleftArray = [];

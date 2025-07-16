@@ -6,7 +6,7 @@
 //       Vehicles       //
 //////////////////////////
 
-["vehiclesCivCar", [
+private _vehiclesCivCar = [
     "C_Quadbike_01_F", 0.15
     ,"C_Hatchback_01_F", 1.0
     ,"C_Hatchback_01_sport_F", 0.15
@@ -17,10 +17,9 @@
     ,"C_Van_02_transport_F", 0.2            // minibus
     ,"C_Offroad_02_unarmed_F", 1.5            // Apex 4WD
     ,"C_Offroad_01_comms_F", 0.3            // Contact
-    ,"C_Offroad_01_covered_F", 0.3
-	]] call _fnc_saveToTemplate;
+    ,"C_Offroad_01_covered_F", 0.3];
 
-["vehiclesCivIndustrial", [
+private _vehiclesCivIndustrial = [
     "C_Van_01_transport_F", 1.0
     ,"C_Van_01_box_F", 0.8
     ,"C_Truck_02_transport_F", 0.5
@@ -28,27 +27,39 @@
     ,"C_Tractor_01_F", 0.3    
     ,"C_Truck_02_racing_lxWS", 0.2
 	,"C_Truck_02_flatbed_lxWS", 0.5
-	,"C_Truck_02_cargo_lxWS", 0.5
-	]] call _fnc_saveToTemplate;
+	,"C_Truck_02_cargo_lxWS", 0.5];
 
-["vehiclesCivBoat", [
+private _vehiclesCivBoat = [
     "C_Boat_Civil_01_rescue_F", 0.1            // motorboats
     ,"C_Boat_Civil_01_police_F", 0.1
     ,"C_Boat_Civil_01_F", 1.0
     ,"C_Rubberboat", 1.0                    // rescue boat
     ,"C_Boat_Transport_02_F", 1.0            // RHIB
-    ,"C_Scooter_Transport_01_F", 0.5]] call _fnc_saveToTemplate;
+    ,"C_Scooter_Transport_01_F", 0.5];
 
-["vehiclesCivRepair", [
+private _vehiclesCivRepair = [
     "C_Offroad_01_repair_F", 0.3
     ,"C_Van_02_service_F", 0.3                // orange
-    ,"C_Truck_02_box_F", 0.1]] call _fnc_saveToTemplate;
+    ,"C_Truck_02_box_F", 0.1];
 
-["vehiclesCivMedical", ["C_Van_02_medevac_F", 0.1]] call _fnc_saveToTemplate;
+private _vehiclesCivMedical = ["C_Van_02_medevac_F", 0.1];
 
-["vehiclesCivFuel", [
+private _vehiclesCivFuel = [
     "C_Van_01_fuel_F", 0.2
-    ,"C_Truck_02_fuel_F", 0.1]] call _fnc_saveToTemplate;
+    ,"C_Truck_02_fuel_F", 0.1];
+
+if ("rf" in A3A_enabledDLC) then {
+    _vehiclesCivCar append ["C_Pickup_rf", 1.25, "C_Pickup_covered_rf", 0.2];
+    _vehiclesCivRepair append ["C_Pickup_repair_rf", 0.2];
+    _vehiclesCivFuel append ["a3a_civ_Pickup_fuel_rf", 0.1];
+};
+
+["vehiclesCivCar", _vehiclesCivCar] call _fnc_saveToTemplate;
+["vehiclesCivIndustrial", _vehiclesCivIndustrial] call _fnc_saveToTemplate;
+["vehiclesCivBoat", _vehiclesCivBoat] call _fnc_saveToTemplate;
+["vehiclesCivRepair", _vehiclesCivRepair] call _fnc_saveToTemplate;
+["vehiclesCivMedical", _vehiclesCivMedical] call _fnc_saveToTemplate;
+["vehiclesCivFuel", _vehiclesCivFuel] call _fnc_saveToTemplate;
 
 /////////////////////
 ///  Identities   ///
@@ -102,6 +113,21 @@ if (allowDLCOrange) then {
     "U_C_Mechanic_01_F"
   ];
 };
+
+if ("rf" in A3A_enabledDLC) then {
+    private _RFleatherJackets = [
+        "U_C_PilotJacket_black_RF",
+        "U_C_PilotJacket_brown_RF",
+        "U_C_PilotJacket_lbrown_RF",
+        "U_C_PilotJacket_open_black_RF",
+        "U_C_PilotJacket_open_brown_RF",
+        "U_C_PilotJacket_open_lbrown_RF"];
+    _dlcUniforms append _RFleatherJackets;
+    if (A3A_climate in ["temperate","arctic"]) then {
+        _civUniforms append _RFleatherJackets;
+    };
+};
+
 _workerUniforms append [
 "U_C_ConstructionCoverall_Black_F",
 "U_C_ConstructionCoverall_Blue_F",

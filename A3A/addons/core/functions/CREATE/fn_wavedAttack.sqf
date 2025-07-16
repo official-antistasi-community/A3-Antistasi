@@ -18,8 +18,6 @@ params ["_mrkDest", "_mrkOrigin", "_maxWaves"];
 
 Info_3("Creating waved attack against %1 from %2 with %3 waves", _mrkDest, _mrkOrigin, _maxWaves);
 
-// TODO: move this to chooseAttack?
-bigAttackInProgress = true; publicVariable "bigAttackInProgress";
 forcedSpawn pushBack _mrkDest; publicVariable "forcedSpawn";
 
 private _targpos = markerPos _mrkDest;

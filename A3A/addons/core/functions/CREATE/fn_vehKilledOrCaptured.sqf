@@ -5,11 +5,12 @@
 	Params:
 	1. Object: Vehicle object
 	2. Side: Side of unit that captured or destroyed the vehicle
-	2. Bool (default false): True if captured, else destroyed
+	3. Bool (default false): True if captured, else destroyed
+	4. Object (default objNull): Killer vehicle. Used for passthrough to reaction functions
 */
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-params ["_veh", "_sideEnemy", ["_captured", false]];
+params ["_veh", "_sideEnemy", ["_captured", false], ["_killer", objNull]];
 
 private _type = typeof _veh;
 private _side = _veh getVariable ["ownerSide", teamPlayer];			// default because Zeus
@@ -38,7 +39,7 @@ if ((_side == Occupants or _side == Invaders) and _vehCost > 0) then
 		// Vehicle not pre-resourced, deplete both pools
 		[-_vehCost, _side, "legacy"] remoteExecCall ["A3A_fnc_addEnemyResources", 2];
 	};
-	[_side, getPos _veh, 2*_vehCost/3] remoteExec ["A3A_fnc_addRecentDamage", 2];		// other third applied in HandleDamage
+	[_side, getPos _veh, 2*_vehCost/3, _killer] remoteExec ["A3A_fnc_addRecentDamage", 2];		// other third applied in HandleDamage
 
 	if (_sideEnemy != teamPlayer) exitWith {};
 

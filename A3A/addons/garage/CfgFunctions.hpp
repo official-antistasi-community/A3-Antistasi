@@ -26,6 +26,8 @@ class CfgFunctions
             class requestSelectionChange {};
             class requestVehicle {};
             class selectionChange {};
+            class sellVehGRG {};
+            class sellVehGRGLocal {};
             class switchCategory {};
             class toggleConfirmBttn {};
             class toggleLock {};
@@ -61,11 +63,13 @@ class CfgFunctions
         class StatePreservation
         {
             file = QPATHTOFOLDER(StatePreservation);
+            class getAmmoCargo {};
             class getAmmoData {};
             class getDamage {};
             class getFuel {};
             class getState {};
             class prepPylons {};
+            class setAmmoCargo {};
             class setAmmoData {};
             class setDamage {};
             class setFuel {};

@@ -39,9 +39,11 @@ if (memberDistance <= 0 || !membershipEnabled) exitWith {};
 // Membership is rechecked in the case that a temporary membership is granted.
 while {!([player] call A3A_fnc_isMember) || _debugMode} do {
     private _nearestLeashCentre = getPosATL player;  // Only 2D pos is evaluated. Default to player position when no members or ff punishment is the exemption.
+    private _veh = vehicle player;
     private _withinLeash = switch (true) do {
         case (!isNil "A3A_FFPun_Jailed" && {(getPlayerUID player) in A3A_FFPun_Jailed}): { true };
         case (player == theBoss): { true };             // covered in playerLeashCheckPosition, but shortcut
+        case (_veh isKindOf "Plane" and {!isTouchingGround _veh or speed _veh > 100}): { true };          // no air spawning check, distance.sqf + margin
         // Add leash exemptions here.
         default { [getPosATL player,_nearestLeashCentre] call A3A_fnc_playerLeashCheckPosition };
     };

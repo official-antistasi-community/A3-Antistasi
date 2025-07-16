@@ -37,7 +37,7 @@ class A3A_RequestMissionDialog : A3A_DefaultDialog
         {
           idc = -1;
           text = $STR_antistasi_dialogs_mission_request_conquest;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""CON""]] call A3A_fnc_requestMissionDialog;";
+          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""CON""]] call A3A_GUI_fnc_requestMissionDialog;";
           sizeEx = GUI_TEXT_SIZE_LARGE;
           x = 7 * GRID_W;
           y = 34 * GRID_H;
@@ -61,7 +61,7 @@ class A3A_RequestMissionDialog : A3A_DefaultDialog
         {
           idc = -1;
           text = $STR_antistasi_dialogs_mission_request_destroy;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""DES""]] call A3A_fnc_requestMissionDialog;";
+          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""DES""]] call A3A_GUI_fnc_requestMissionDialog;";
           sizeEx = GUI_TEXT_SIZE_LARGE;
           x = 45 * GRID_W;
           y = 34 * GRID_H;
@@ -84,7 +84,7 @@ class A3A_RequestMissionDialog : A3A_DefaultDialog
         {
           idc = -1;
           text = $STR_antistasi_dialogs_mission_request_assassination;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""AS""]] call A3A_fnc_requestMissionDialog;";
+          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""AS""]] call A3A_GUI_fnc_requestMissionDialog;";
           sizeEx = GUI_TEXT_SIZE_LARGE;
           x = 83 * GRID_W;
           y = 34 * GRID_H;
@@ -108,7 +108,7 @@ class A3A_RequestMissionDialog : A3A_DefaultDialog
         {
           idc = -1;
           text = $STR_antistasi_dialogs_mission_request_convoy;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""CONVOY""]] call A3A_fnc_requestMissionDialog;";
+          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""CONVOY""]] call A3A_GUI_fnc_requestMissionDialog;";
           sizeEx = GUI_TEXT_SIZE_LARGE;
           x = 121 * GRID_W;
           y = 34 * GRID_H;
@@ -132,7 +132,7 @@ class A3A_RequestMissionDialog : A3A_DefaultDialog
         {
           idc = -1;
           text = $STR_antistasi_dialogs_mission_request_rescue;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""RES""]] call A3A_fnc_requestMissionDialog;";
+          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""RES""]] call A3A_GUI_fnc_requestMissionDialog;";
           sizeEx = GUI_TEXT_SIZE_LARGE;
           x = 26 * GRID_W;
           y = 76 * GRID_H;
@@ -156,7 +156,7 @@ class A3A_RequestMissionDialog : A3A_DefaultDialog
         {
           idc = -1;
           text = $STR_antistasi_dialogs_mission_request_logistics;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""LOG""]] call A3A_fnc_requestMissionDialog;";
+          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""LOG""]] call A3A_GUI_fnc_requestMissionDialog;";
           sizeEx = GUI_TEXT_SIZE_LARGE;
           x = 64 * GRID_W;
           y = 76 * GRID_H;
@@ -180,7 +180,7 @@ class A3A_RequestMissionDialog : A3A_DefaultDialog
         {
           idc = -1;
           text = $STR_antistasi_dialogs_mission_request_support;
-          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""SUPP""]] call A3A_fnc_requestMissionDialog;";
+          onButtonClick = "closeDialog 0; [""missionButtonClicked"", [""SUPP""]] call A3A_GUI_fnc_requestMissionDialog;";
           sizeEx = GUI_TEXT_SIZE_LARGE;
           x = 102 * GRID_W;
           y = 76 * GRID_H;

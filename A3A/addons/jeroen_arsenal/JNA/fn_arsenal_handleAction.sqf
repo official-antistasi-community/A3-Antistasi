@@ -47,7 +47,7 @@ _attachmentsContainers = [[],[],[]];
 	if!(isNil "_weaponAtt")then{
 
 		{
-			_atts = [_x select 1,_x select 2,_x select 3,_x select 5];
+			_atts = [_x select 1,_x select 2,_x select 3,_x select 6];
 			_atts = _atts - [""];
 			_attachments = _attachments + _atts;
 		} forEach _weaponAtt;

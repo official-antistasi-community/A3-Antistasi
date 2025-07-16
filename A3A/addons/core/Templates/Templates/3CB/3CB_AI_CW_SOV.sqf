@@ -47,7 +47,7 @@
 
 ["vehiclesArtillery", ["UK3CB_CW_SOV_O_LATE_2S1", "UK3CB_CW_SOV_O_LATE_2S3", "UK3CB_CW_SOV_O_LATE_BM21"]] call _fnc_saveToTemplate;         //this line determines artillery vehicles -- Example: ["vehiclesArtillery", ["B_MBT_01_arty_F"]] -- Array, can contain multiple assets
 ["magazines", createHashMapFromArray [
-["UK3CB_CW_SOV_O_LATE_2S1", ["rhs_mag_3of56_10"]],
+["UK3CB_CW_SOV_O_LATE_2S1", ["rhs_mag_3of56_35"]],
 ["UK3CB_CW_SOV_O_LATE_2S3",["rhs_mag_HE_2a33", "rhs_mag_WP_2a33"]],
 ["UK3CB_CW_SOV_O_LATE_BM21", ["rhs_mag_m21of_1"]]
 ]] call _fnc_saveToTemplate;
@@ -88,6 +88,7 @@
 "WhiteHead_14", "WhiteHead_15", "WhiteHead_16", "WhiteHead_18", "WhiteHead_19",
 "WhiteHead_20"]] call _fnc_saveToTemplate;
 ["voices", ["RHS_Male01RUS", "RHS_Male02RUS", "RHS_Male03RUS", "RHS_Male04RUS", "RHS_Male05RUS"]] call _fnc_saveToTemplate;
+"RussianMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //
@@ -259,7 +260,9 @@ _militaryLoadoutData set ["machineGuns", [
 ["rhs_weap_pkm", "", "", "", ["rhs_100Rnd_762x54mmR", "rhs_100Rnd_762x54mmR_green"], [], ""],
 ["rhs_weap_pkp", "", "", "", ["rhs_100Rnd_762x54mmR", "rhs_100Rnd_762x54mmR_green"], [], ""],
 ["UK3CB_RPK_74N", "", "", "", ["UK3CB_RPK74_60rnd_545x39_G", "UK3CB_RPK74_60rnd_545x39_G", "UK3CB_RPK74_60rnd_545x39_GT"], [], ""],
-["UK3CB_RPK", "", "", "", ["UK3CB_RPK_75rnd_762x39_G", "UK3CB_RPK_75rnd_762x39_G", "UK3CB_RPK_75rnd_762x39_GT"], [], ""]
+["UK3CB_RPK", "", "", "", ["UK3CB_RPK_75rnd_762x39_G", "UK3CB_RPK_75rnd_762x39_G", "UK3CB_RPK_75rnd_762x39_GT"], [], ""],
+["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39"], [], ""],
+["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_GM"], [], ""]
 ]];
 _militaryLoadoutData set ["marksmanRifles", [
 ["rhs_weap_svdp_wd", "", "", "rhs_acc_pso1m2", [], [], ""],
@@ -317,7 +320,9 @@ _militiaLoadoutData set ["grenadeLaunchers", [
 _militiaLoadoutData set ["machineGuns", [
 ["rhs_weap_pkm", "", "", "", ["rhs_100Rnd_762x54mmR", "rhs_100Rnd_762x54mmR_green"], [], ""],
 ["UK3CB_RPK_74N", "", "", "", ["UK3CB_RPK74_60rnd_545x39_G", "UK3CB_RPK74_60rnd_545x39_G", "UK3CB_RPK74_60rnd_545x39_GT"], [], ""],
-["UK3CB_RPK", "", "", "", ["UK3CB_RPK_75rnd_762x39_G", "UK3CB_RPK_75rnd_762x39_G", "UK3CB_RPK_75rnd_762x39_GT"], [], ""]
+["UK3CB_RPK", "", "", "", ["UK3CB_RPK_75rnd_762x39_G", "UK3CB_RPK_75rnd_762x39_G", "UK3CB_RPK_75rnd_762x39_GT"], [], ""],
+["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39"], [], ""],
+["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_GM"], [], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
 ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m2", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]

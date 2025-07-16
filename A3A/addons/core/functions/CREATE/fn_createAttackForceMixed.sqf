@@ -1,6 +1,6 @@
 /*  
 Maintainer: John Jordan
-    Create mixed air/land attack force
+    Create mixed air/land/sea attack force
 
 Scope: Server or HC
 Environment: Scheduled (potential long sleeps, returns after last vehicle spawned)
@@ -29,13 +29,51 @@ params ["_side", "_airbase", "_target", "_resPool", "_vehCount", "_delay", "_mod
 private _targPos = if (_target isEqualType []) then { _target } else { markerPos _target };
 // _modifiers ["tierboost", "specops", "airboost", "noairsupport"]
 
-private _lowAir = Faction(_side) getOrDefault ["attributeLowAir", false];
-private _tier = [tierWar, tierWar+2] select ("tierboost" in _modifiers);
+private _faction = Faction(_side);
+private _lowAir = _faction getOrDefault ["attributeLowAir", false];
+private _tier = [0,2] select ("tierboost" in _modifiers);
 
 private _resourcesSpent = 0;
 private _vehicles = [];
 private _crewGroups = [];
 private _cargoGroups = [];
+
+// Decision to send a naval force
+private _boatCount = round (random 0.5 + _vehCount / 6);
+private _seaPath = [];
+private _seaTime = 0;
+
+if (_boatCount > 0 && _target isEqualType "" && (_faction get "vehiclesGunBoats") isNotEqualTo []) then {
+    _seaPath = [_target, 300, 2000] call A3A_fnc_findSeaPath;
+    if (_seaPath isEqualTo []) exitWith {};
+
+    private _maxSpeed = -1;
+    {
+        private _speed = getNumber(configfile >> "CfgVehicles" >> _x >> "maxSpeed");
+        _maxSpeed = _speed max _maxSpeed;
+    } forEach (_faction get "vehiclesGunBoats");
+    _seaTime = 3600 * 2 / _maxSpeed; // speed in km/h, 2km to travel, convert to seconds
+
+    _vehCount = 0 max (_vehCount - _boatCount);
+};
+
+
+private _fnc_spawnNavalAttack = {
+    private _attackRatio = 0.3 + random 0.1 + tierWar/50;
+    private _attackCount = round (_boatCount * _attackRatio);
+    private _troops = ["Normal", "SpecOps"] select ("specops" in _modifiers);
+    ServerDebug_3("Attempting to spawn %1 sea vehicles including %2 attack with path %3", _boatCount, _attackCount, _seaPath);
+
+    private _data = [_side, _airbase, _targPos, _resPool, _boatCount, _attackCount, _tier, _troops, _seaPath] call A3A_fnc_createAttackForceSea;
+    _resourcesSpent = _resourcesSpent + _data#0;
+    _vehicles append _data#1;
+    _crewGroups append _data#2;
+    _cargoGroups append _data#3;
+
+    [-(_data#0), _side, _resPool] remoteExec ["A3A_fnc_addEnemyResources", 2];
+
+    ServerInfo_1("Spawn performed: Sea vehicles %1", _data#1 apply {typeOf _x});
+};
 
 private _landRatio = if ("airboost" in _modifiers) then {     // punishment, HQ attack
     if (_lowAir) exitWith { 0.5 + random 0.5 };
@@ -93,11 +131,21 @@ if (!isNil "_attackType") then {
     [_reveal, _side, _attackType, _targPos, _delay] remoteExec ["A3A_fnc_showInterceptedSetupCall", 2];
 };
 
-// Now we delay to synchronize with ground vehicle arrival
-if (_delay > 0) then {
+// Now we delay to synchronize with ground vehicle arrival. Both naval and air will arrive at another time, so both need a timer
+private _runningNavalFirst = false;
+private _delayBetween = 0;
+if (_delay >= 0) then {
     private _airTime = (markerPos _airbase distance2d _targPos) / 70;
-    ServerDebug_2("Remaining delay %1 and air travel time %2", _delay, _airTime);
-    sleep (0 max (_delay - _airTime));
+    ServerDebug_3("Remaining delay %1 air travel time %2 sea travel time %3", _delay, _airTime, _seaTime);
+    _runningNavalFirst = (_seaTime > _airTime);
+    _delayBetween = abs (_airTime - _seaTime);
+    private _firstSpawnDelay = _delay - (_airTime max _seaTime);
+    sleep (0 max _firstSpawnDelay);
+};
+
+if (_runningNavalFirst && _seaTime > 0) then {
+    call _fnc_spawnNavalAttack;
+    sleep _delayBetween;
 };
 
 if (_airBase != "") then            // uh, is that a thing
@@ -122,6 +170,11 @@ if (_airBase != "") then            // uh, is that a thing
     [-(_data#0), _side, _resPool] remoteExec ["A3A_fnc_addEnemyResources", 2];
 
     ServerInfo_1("Spawn performed: Air vehicles %1", _data#1 apply {typeOf _x});
+};
+
+if (!_runningNavalFirst && _seaTime > 0) then {
+    sleep _delayBetween;
+    call _fnc_spawnNavalAttack;
 };
 
 [_resourcesSpent, _vehicles, _crewGroups, _cargoGroups];

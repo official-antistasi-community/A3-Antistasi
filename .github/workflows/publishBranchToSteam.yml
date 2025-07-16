@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 5
     steps:
     - name: Checkout the code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3.3.0
 
     - name: Increment version locally
       run: chmod +x ./tools/incrementVersion.js &&
@@ -20,7 +20,7 @@ jobs:
       run: '.\tools\Builder\buildAddons.ps1 -WorkshopID ${{secrets.WORKSHOPID}}'
 
     - name: Upload build addon artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: A3A
         path: build\A3A
@@ -31,13 +31,13 @@ jobs:
     needs: [build]
     steps:
     - name: Download addon artifact
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v4
       with:
         name: A3A
         path: A3A
 
     - name: Publish to Steam Workshop
-      uses: arma-actions/workshop-upload@v1
+      uses: arma-actions/workshop-upload@v1.0.2
       with:
         appId: '107410'      # default
         itemId: ${{ secrets.WORKSHOPID }} # https://steamcommunity.com/sharedfiles/filedetails/?id=[...]]

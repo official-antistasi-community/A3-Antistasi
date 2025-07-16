@@ -13,6 +13,16 @@ class CfgUserActions {
         onActivate = ACTION(artyMenu);
     };
 
+    class GVAR(respawn) {
+        displayName = $STR_A3A_keybinds_CfgUserAct_respawn_DN;
+        tooltip = $STR_A3A_keybinds_CfgUserAct_respawn_tip;
+    };
+
+    class GVAR(selfRevive) {
+        displayName = $STR_A3A_keybinds_CfgUserAct_selfRevive_DN;
+        tooltip = $STR_A3A_keybinds_CfgUserAct_selfRevive_tip;
+    };
+
     class GVAR(infoBar) {
         displayName = $STR_A3A_keybinds_CfgUserAct_infoBar_DN;
         tooltip = $STR_A3A_keybinds_CfgUserAct_infoBar_tip;

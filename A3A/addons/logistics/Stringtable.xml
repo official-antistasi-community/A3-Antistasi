@@ -9,6 +9,7 @@
         <Spanish>Cargar 1% al vehículo más cercano.</Spanish>
         <French>Charger %1 dans le véhicule le plus proche.</French>
         <Korean>%1을(를) 가장 가까운 차량에 적재하십시오.</Korean>
+        <Russian>Загрузить %1 в ближайшее транспортное средство.</Russian>
         <Polish>Załaduj %1 do najbliższego pojazdu</Polish>
         <Czech>Naložit %1 do nejbližšího vozidla.</Czech>
         <Portuguese>Carregar %1 no veículo mais próximo.</Portuguese>
@@ -174,6 +175,7 @@
         <Spanish>&lt;t color='#00fff3'&gt;"%1" está siendo cargado en "%2" No queda más espacio.&lt;/t&gt;</Spanish>
         <French>&lt;t color='#00fff3'&gt;"%1" est chargé sur "%2" Il n'y a plus de place.&lt;/t&gt;</French>
         <Korean>&lt;t color='#00fff3'&gt;"%1"이(가) "%2"에 적재되었습니다. 더 이상 공간이 없습니다.&lt;/t&gt;</Korean>
+        <Russian>&lt;t color='#00fff3'&gt;"%1" загружен в "%2". Места больше нет.&lt;/t&gt;</Russian>
         <Czech>&lt;t color='#00fff3'&gt;"%1" je nakládáno do "%2" Už nezbylo žádné další místo.&lt;/t&gt;</Czech>
         <Portuguese>&lt;t color='#00fff3'&gt;"%1" foi carregado em "%2". Não há mais espaço.&lt;/t&gt;</Portuguese>
         <Turkish>&lt;t color='#00fff3'&gt;"%1" , "%2"'ye yüklendi. Boş yer kalmadı.&lt;/t&gt;</Turkish>

@@ -56,8 +56,7 @@ while {true} do
 		_resAdd = _resAdd + _resAddCity;
 		_hrAdd = _hrAdd + _hrAddCity;
 
-
-		// revuelta civil!!
+		// city flipping routine
 		if ((_supportGov < _supportReb) and (sidesX getVariable [_city,sideUnknown] == Occupants)) then
 		{
 			["TaskSucceeded", ["", format [localize "STR_A3A_fn_init_resourceCheck_cityChange",_city,FactionGet(reb,"name")]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
@@ -66,7 +65,7 @@ while {true} do
 			garrison setVariable [_city,[],true];
 			[_city] call A3A_fnc_mrkUpdate;
 			sleep 5;
-			{_nul = [_city,_x] spawn A3A_fnc_deleteControls} forEach controlsX;
+			//[_city] call A3A_fnc_deleteNearSites;
 			[] call A3A_fnc_tierCheck;
 		};
 		if ((_supportGov > _supportReb) and (sidesX getVariable [_city,sideUnknown] == teamPlayer)) then
@@ -88,13 +87,19 @@ while {true} do
 		};
 	} forEach resourcesX;
 
+	Debug_2("Occupant radio keys: %1 - Invader radio keys: %2", occRadioKeys, invRadioKeys);
+
 	_hrAdd = ceil _hrAdd;
 	_resAdd = ceil _resAdd;
 	server setVariable ["hr", _hrAdd + (server getVariable "hr"), true];
 	server setVariable ["resourcesFIA", _resAdd + (server getVariable "resourcesFIA"), true];
 
-	bombRuns = bombRuns + 0.25 * ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX);
+	private _newBombRuns = bombRuns + 0.25 * ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX);
+	bombRuns = _newBombRuns min (4 + tierWar*2);
 	publicVariable "bombRuns";
+
+	// Add & delete enemy camps and roadblocks
+	call A3A_fnc_updateMinorSites;
 
 	// Regular income of finite starting weapons
 	private _equipMul = A3A_balancePlayerScale / 30;		// difficulty scaled. Hmm.

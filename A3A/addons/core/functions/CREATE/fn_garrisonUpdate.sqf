@@ -52,3 +52,5 @@ if (isNil "_garrison") exitWith {garrisonIsChanging = false};
 garrison setVariable [_markerX,_garrison,true];
 if (_sideX == teamPlayer) then {[_markerX] call A3A_fnc_mrkUpdate};
 garrisonIsChanging = false;
+
+["updateGarrisonTab"] remoteExecCall ["A3A_GUI_fnc_hqDialog", theBoss];

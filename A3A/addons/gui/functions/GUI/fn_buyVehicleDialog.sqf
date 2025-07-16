@@ -1,19 +1,26 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles the initialization and updating of the Buy Vehicle dialog.
     This function should only be called from BuyVehicle onLoad and control activation EHs.
+
 Arguments:
     <STRING> Mode, only possible value for this dialog is "onLoad"
     <ARRAY<ANY>> Array of params for the mode when applicable. Params for specific modes are documented in the modes.
+
 Return Value:
     Nothing
+
 Scope: Clients, Local Arguments, Local Effect
 Environment: Scheduled for onLoad mode / Unscheduled for everything else unless specified
 Public: No
 Dependencies:
     None
+
 Example:
-    ["onLoad"] spawn A3A_fnc_buyVehicleDialog; // initialization
+    ["onLoad"] spawn A3A_GUI_fnc_buyVehicleDialog; // initialization
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -98,10 +105,10 @@ switch (_mode) do
         (A3A_faction_reb get 'staticAT') +
         (A3A_faction_reb get 'staticAA');
 
-        ["vehicles", [A3A_IDC_BUYCIVVEHICLEMAIN, A3A_IDC_CIVVEHICLESGROUP, _civilianVehicles]] call A3A_fnc_buyVehicleTabs;
-        ["vehicles", [A3A_IDC_BUYREBVEHICLEMAIN, A3A_IDC_REBVEHICLESGROUP, _militaryVehicles]] call A3A_fnc_buyVehicleTabs;
-        ["vehicles", [A3A_IDC_BUYSTATICMAIN, A3A_IDC_STATICSGROUP, _statics]] call A3A_fnc_buyVehicleTabs;
-        ["other"] call A3A_fnc_buyVehicleTabs;
+        ["vehicles", [A3A_IDC_BUYCIVVEHICLEMAIN, A3A_IDC_CIVVEHICLESGROUP, _civilianVehicles]] call A3A_GUI_fnc_buyVehicleTabs;
+        ["vehicles", [A3A_IDC_BUYREBVEHICLEMAIN, A3A_IDC_REBVEHICLESGROUP, _militaryVehicles]] call A3A_GUI_fnc_buyVehicleTabs;
+        ["vehicles", [A3A_IDC_BUYSTATICMAIN, A3A_IDC_STATICSGROUP, _statics]] call A3A_GUI_fnc_buyVehicleTabs;
+        ["other"] call A3A_GUI_fnc_buyVehicleTabs;
 
         // show the vehicle tab so that user don't freak out
         private _display = findDisplay A3A_IDD_BUYVEHICLEDIALOG;

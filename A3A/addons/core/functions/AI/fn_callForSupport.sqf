@@ -1,6 +1,6 @@
 /*  Simulates the call for support by a group by making the teamleader a bit more dumb for a time
 
-    Execution on: HC or Server
+    Execution on: HC or Server, group-local
 
     Scope: Internal
 
@@ -21,6 +21,10 @@ private _side = side _group;
 if(_side != Occupants and _side != Invaders) exitWith {
     Error_2("Non-enemy group %1 of side %2 managed to call callForSupport", _group, _side);
 };
+
+// Don't call support against units unless there's slightly more information than damage dealt
+// Should rule out calls for mines/charges but still pick up snipers (maybe only after the second kill)
+if (_target isKindOf "CAManBase" and { _group knowsAbout _target <= 1.5 }) exitWith {};
 
 //If groupleader is down, dont call support
 if !(_groupLeader call A3A_fnc_canFight) exitWith {};

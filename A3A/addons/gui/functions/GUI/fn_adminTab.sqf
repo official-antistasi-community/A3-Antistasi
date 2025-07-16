@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Admin tab of the Main dialog.
 
 Arguments:
@@ -17,6 +17,9 @@ Dependencies:
 
 Example:
     ["update"] call A3A_fnc_adminTab;
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -28,6 +31,7 @@ FIX_LINE_NUMBERS()
 params[["_mode","onLoad"], ["_params",[]]];
 
 // TODO UI-update: move these to some more sensible place:
+// Copied from A3A\addons\core\functions\Dialogs\fn_HQGameOptions.sqf
 private _civLimitMin = 0;
 private _civLimitMax = 150;
 private _spawnDistanceMin = 600;
@@ -56,47 +60,75 @@ switch (_mode) do
         _spawnDistanceSlider sliderSetPosition _spawnDistance;
         ctrlSetText [A3A_IDC_SPAWNDISTANCEEDITBOX, str _spawnDistance];
 
-        _aiLimiterSlider = _display displayCtrl A3A_IDC_AILIMITERSLIDER;
-        _aiLimiterSlider sliderSetRange [_aiLimiterMin, _aiLimiterMax];
-        _aiLimiterSlider sliderSetSpeed [10, 10];
-        _aiLimiter = missionNamespace getVariable ["maxUnits",0];
-        _aiLimiterSlider sliderSetPosition _aiLimiter;
-        ctrlSetText [A3A_IDC_AILIMITEREDITBOX, str _aiLimiter];
+        private _resetHQButton = _display displayCtrl A3A_IDC_RESETHQBUTTON;
+        _resetHQButton ctrlEnable false; // no seriously, what is this supposed to do?
 
+        // _aiLimiterSlider = _display displayCtrl A3A_IDC_AILIMITERSLIDER;
+        // _aiLimiterSlider sliderSetRange [_aiLimiterMin, _aiLimiterMax];
+        // _aiLimiterSlider sliderSetSpeed [10, 10];
+        // _aiLimiter = missionNamespace getVariable ["maxUnits",0];
+        // _aiLimiterSlider sliderSetPosition _aiLimiter;
+        // ctrlSetText [A3A_IDC_AILIMITEREDITBOX, str _aiLimiter];
+
+        // stat panel is updated by case in mainDialog
+    };
+
+    case ("updateStatPanel"):
+    {
         // Get Debug info
-        // TODO UI-update: change this to get server values instead when merging
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _debugText = _display displayCtrl A3A_IDC_DEBUGINFO;
-        private _missionTime = [time] call A3A_fnc_formatTime;
-        private _serverFps = (round (diag_fps * 10)) / 10; // TODO UI-update: Get actual server FPS, not just client
-        private _connectedHCs = 0; // TODO UI-update: get actual number of connected headless clients
-        private _players = 0; // TODO UI-update: get actual number of players connected
+        private _missionTime = format [[round serverTime,1,1,false,2,false,true] call A3A_fnc_timeSpan_format];
+        //private ["_serverFPS","_deadUnits","_allUnits","_countRebels","_countInvaders","_countOccupants","_countCiv","_countGroups","_players","_destroyedVehicles","_connectedHCs"];
+        private ["_serverFPS"];
 
-        // TODO UI-update: get actual unit counts
-        private _allUnits = count allUnits;
-        private _deadUnits = 1349;
-        private _countGroups = count allGroups;
-        private _countRebels = 16;
-        private _countInvaders = 5;
-        private _countOccupants = 37;
-        private _countCiv = 4096;
-        private _destroyedVehicles = 2;
+        if(!isNil "A3A_AdminData") then 
+        {
+            _serverFps = A3A_AdminData#0;
+            /*
+            _deadUnits = A3A_AdminData#1;
+            _allUnits = A3A_AdminData#2;
+            _countRebels = A3A_AdminData#4;
+            _countInvaders = A3A_AdminData#5;
+            _countOccupants = A3A_AdminData#6;
+            _countCiv = A3A_AdminData#7;
+            _countGroups = A3A_AdminData#8;
+            _players = A3A_AdminData#9;
+            _destroyedVehicles = A3A_AdminData#10;
+            _connectedHCs = A3A_AdminData#12;
+            */
+        } else {
+            _serverFps = (round (diag_fps * 10)) / 10;
+        };
+        _connectedHCs = count entities "HeadlessClient_F";
+        _players = count allPlayers - _connectedHCs;
+        _allUnits = count allUnits;
+        _deadUnits = count allDead;
+        _countGroups = count allGroups;
+        _countRebels = {side group _x == teamPlayer} count allUnits; // count undercover players
+        _countInvaders = {side _x == Invaders} count allUnits;
+        _countOccupants = {side _x == Occupants} count allUnits;
+        _countCiv = {side _x == civilian} count allUnits;
+        _destroyedVehicles = {!alive _x} count vehicles;
 
         // TODO UI-update: localize later, not final yet
-        private _formattedString = format [
-        "<t font='EtelkaMonospacePro' size='0.8'>
-        <t>Mission time:</t><t align='right'>%1</t><br />
-        <t>Server FPS:</t><t align='right'>%2</t><br />
-        <t>Connected HCs:</t><t align='right'>%3</t><br />
-        <t>Players:</t><t align='right'>%4</t><br />
-        <t>Groups</t><t align='right'>%5</t><br />
-        <t>Units:</t><t align='right'>%6</t><br />
-        <t>Dead units:</t><t align='right'>%7</t><br />
-        <t>Rebels:</t><t align='right'>%8</t><br />
-        <t>Invaders:</t><t align='right'>%9</t><br />
-        <t>Occupants:</t><t align='right'>%10</t><br />
-        <t>Civs:</t><t align='right'>%11</t><br />
-        <t>Wrecks:</t><t align='right'>%12</t>
-        </t>",
+        private _rawStrings = [
+        "<t font='EtelkaMonospacePro' size='0.8'>",
+        "<t>Mission time:</t><t align='right'>%1</t><br />",
+        "<t>Server FPS:</t><t align='right'>%2</t><br />",
+        "<t>Connected HCs:</t><t align='right'>%3</t><br />",
+        "<t>Players:</t><t align='right'>%4</t><br />",
+        "<t>Groups</t><t align='right'>%5</t><br />",
+        "<t>Units:</t><t align='right'>%6</t><br />",
+        "<t>Dead units:</t><t align='right'>%7</t><br />",
+        "<t>Rebels:</t><t align='right'>%8</t><br />",
+        "<t>Invaders:</t><t align='right'>%9</t><br />",
+        "<t>Occupants:</t><t align='right'>%10</t><br />",
+        "<t>Civs:</t><t align='right'>%11</t><br />",
+        "<t>Wrecks:</t><t align='right'>%12</t>"
+        ];
+        private _fullString = _rawStrings joinString "";
+        private _formattedString = format [_fullString,
         _missionTime,
         _serverFps,
         _connectedHCs,
@@ -111,8 +143,7 @@ switch (_mode) do
         _destroyedVehicles
         ];
 
-        _debugText ctrlSetStructuredText parseText _formattedString;
-
+        _debugText ctrlSetStructuredText parseText _formattedString; 
     };
 
     case ("civLimitSliderChanged"):
@@ -187,28 +218,76 @@ switch (_mode) do
         _commitAiButton ctrlSetText localize "STR_antistasi_dialogs_main_admin_ai_confirm_button";
         _commitAiButton ctrlAddEventHandler ["ButtonClick", {
             Trace("Confirmed AI Settings");
-            hint "Oh no you broke the server :(";
 
             private _display = findDisplay A3A_IDD_MAINDIALOG;
             private _civLimitEditBox = _display displayCtrl A3A_IDC_CIVLIMITEDITBOX;
             private _globalCivilianMax = floor parseNumber ctrlText _civLimitEditBox;
             private _spawnDistanceEditBox = _display displayCtrl A3A_IDC_SPAWNDISTANCEEDITBOX;
             private _distanceSPWN = floor parseNumber ctrlText _spawnDistanceEditBox;
-            private _aiLimiterEditBox = _display displayCtrl A3A_IDC_AILIMITEREDITBOX;
-            private _maxUnits = floor parseNumber ctrlText _aiLimiterEditBox;
+            //private _aiLimiterEditBox = _display displayCtrl A3A_IDC_AILIMITEREDITBOX;
+            //private _maxUnits = floor parseNumber ctrlText _aiLimiterEditBox;
 
             // TODO UI-update: Change when merging. Something like this but with "set" instead of "increase"?
-            // [player,"maxUnits","increase"] remoteExecCall ["A3A_fnc_HQGameOptions",2];
+            [player,"globalCivilianMax","set", _globalCivilianMax, true] remoteExecCall ["A3A_fnc_HQGameOptions",2];
+            [player,"distanceSPWN","set", _distanceSPWN, true] remoteExecCall ["A3A_fnc_HQGameOptions",2];
 
-            // TODO UI-update: Placeholder routine, don't merge! Has no security checks whatsoever
+            // Placeholder routine, don't merge! Has no security checks whatsoever
             // Trace_3("Changing AI Settings - globalCivilianMax:%1, distanceSPWN:%2, maxUnits:%3", _globalCivilianMax, _distanceSPWN, _maxUnits);
             // missionNamespace setVariable ["globalCivilianMax", _globalCivilianMax];
             // missionNamespace setVariable ["distanceSPWN", _distanceSPWN];
             // missionNamespace setVariable ["maxUnits", _maxUnits];
 
-
-            closeDialog 2;
+            // Don't Close.
+            //closeDialog 2;
         }];
+    };
+
+    case ("tpPetrosToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        petros setPos (player modelToWorld [0,2,0]);
+    };
+
+    case ("tpArsenalToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        boxX setPos (player modelToWorld [0,2,0]);
+    };
+
+    case ("tpVehicleToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        vehicleBox setPos (player modelToWorld [0,2,0]);
+    };
+
+    case ("tpFlagToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        flagX setPos (player modelToWorld [0,2,0]);
+    };
+
+    case ("tpTentToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        fireX setPos (player modelToWorld [0,2,0]);
+    };
+
+    case ("tpMapBoardToAdmin"): {
+        private _posHQ = getMarkerPos "Synd_HQ";
+        if (player distance2D _posHQ >= 50) exitWith {
+            [localize "STR_antistasi_dialogs_main_admin_tp_label", "You need to be within 50m of HQ to teleport assets."] call A3A_fnc_customHint;
+        };
+        mapX setPos (player modelToWorld [0,2,0]);
     };
 
     default

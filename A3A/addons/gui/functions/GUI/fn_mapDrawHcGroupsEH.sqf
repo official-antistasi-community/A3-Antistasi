@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Event Handler for drawing High Command group markers to the maps
 
 Arguments:
@@ -15,8 +15,13 @@ Dependencies:
     Map must be open
 
 Example:
-    _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawHcGroupsEH"];
+    _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawHcGroupsEH"];
+
+License: APL-ND
+
 */
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
 
 params ["_map"];
 
@@ -24,15 +29,15 @@ params ["_map"];
 private _oldHcGroupData = _map getVariable "hcGroupData";
 private _hcGroupData = [];
 {
-    private _groupData = [_x] call A3A_fnc_getGroupInfo;
+    private _groupData = [_x] call FUNC(getGroupInfo);
     _hcGroupData pushBack _groupData;
 } forEach hcallGroups player; // TODO UI-update: Replace with commander?
 _map setVariable ["hcGroupData", _hcGroupData];
 
-// TODO UI-update: Move to A3A_fnc_commanderTab
+// TODO UI-update: Move to FUNC(commanderTab)
 // Update commander tab when data changes
 /* if !(_oldHcGroupData isEqualTo _hcGroupData) then {
-["update"] call A3A_fnc_commanderTab;
+["update"] call FUNC(commanderTab);
 }; */
 
 {
@@ -57,7 +62,7 @@ _map setVariable ["hcGroupData", _hcGroupData];
         "_groupIconColor"
     ];
 
-    private _position = getPos leader _group;
+    private _position = getPosATL leader _group;
 
     // Shorten group name if it's over 16 characters
     if (count _groupID > 16) then
@@ -72,9 +77,9 @@ _map setVariable ["hcGroupData", _hcGroupData];
         _position, // position
         32, // width
         32, // height
-        0, // angle
-        "", // text, no text for this
-        0 // shadow (outline if 2)
+        360, // angle
+        _groupID, // text, no text for this
+        2 // shadow (outline if 2)
     ];
 
     // Draw size indicator
@@ -99,16 +104,4 @@ _map setVariable ["hcGroupData", _hcGroupData];
         0 // shadow (outline if 2)
     ];
 
-
-    // Draw group name text
-    _map drawIcon [
-        "#(rgb,1,1,1)color(0,0,0,0)", // transparent
-        _groupIconColor, // colour
-        _position, // position
-        32, // width
-        32, // height
-        0, // angle
-        _groupID, // text
-        2 // shadow (outline if 2)
-    ];
 } forEach _hcGroupData;

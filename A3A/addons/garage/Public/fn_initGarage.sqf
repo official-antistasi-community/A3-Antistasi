@@ -31,7 +31,7 @@ private _id = _object addAction [
     ", nil, 1.5, true, true, ""
     , "
     ((isNil {HR_GRG_Placing}) || {!HR_GRG_Placing})
-    && player isEqualTo vehicle player
+    && player isEqualTo vehicle player && _this == _this getVariable ['owner',objNull]
     ", 6
 ];
 _object setVariable ["HR_GRG_GarageID", _id, true];

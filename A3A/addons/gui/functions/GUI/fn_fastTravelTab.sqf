@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Fast Travel tab of the Main dialog.
 
 Arguments:
@@ -16,7 +16,10 @@ Dependencies:
     None
 
 Example:
-    ["update"] call A3A_fnc_fastTravelTab;
+    ["update"] call FUNC(fastTravelTab);
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -26,6 +29,12 @@ Example:
 FIX_LINE_NUMBERS()
 
 params[["_mode","update"], ["_params",[]]];
+
+// For now, we will use the old fastTravel until map selection is integrated.
+// closeDialog 1;
+// [] call A3A_fnc_fastTravelRadio;
+// if (true) exitWith {};
+
 
 switch (_mode) do
 {
@@ -40,11 +49,11 @@ switch (_mode) do
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         if (_hcMode) then {
             _backButton ctrlAddEventHandler ["MouseButtonClick", {
-                ["switchTab", ["commander"]] call A3A_fnc_mainDialog;
+                ["switchTab", ["commander"]] call FUNC(mainDialog);
             }];
         } else {
             _backButton ctrlAddEventHandler ["MouseButtonClick", {
-                ["switchTab", ["player"]] call A3A_fnc_mainDialog;
+                ["switchTab", ["player"]] call FUNC(mainDialog);
             }];
         };
         _backButton ctrlShow true;
@@ -70,21 +79,33 @@ switch (_mode) do
             private _infoText = "";
 
             // Player/Group name + location name
-            private _locationName = [_selectedMarker] call A3A_fnc_getLocationMarkerName;
+            private _locationName = [_selectedMarker] call A3A_GUI_fnc_getLocationMarkerName;
 
             // Check if location is valid for fast travel
-            private _canFastTravelToLocation = nil;
+            private _canFastTravelTuple = [];
             if (_hcMode) then {
                 private _hcGroup = _fastTravelMap getVariable "hcGroup";
-                _canFastTravelToLocation = [_hcGroup, _selectedMarker] call A3A_fnc_canFastTravelToLocation;
+                _canFastTravelTuple = [player, _hcGroup, markerPos _selectedMarker] call A3A_fnc_canFastTravel;
             } else {
-                _canFastTravelToLocation = [player, _selectedMarker] call A3A_fnc_canFastTravelToLocation;
+                _canFastTravelTuple = [player, player, markerPos _selectedMarker] call A3A_fnc_canFastTravel;
             };
-            if !(_canFastTravelToLocation # 0) exitWith {
-                // Not a valid location for fast travel
+            _canFastTravelTuple params ["_isFastTravelAllowed","_fastTravelBlockers"];
+            Trace_1("_canFastTravelTuple: %1", _canFastTravelTuple);
+            private _ftUnit = [player, leader (_fastTravelMap getVariable "hcGroup")] select _hcMode;
+            [_ftUnit, [vehicle _ftUnit], markerPos _selectedMarker] call FUNCMAIN(calculateFastTravelCost) params ["_fastTravelCost","_fastTravelTime"];
+            private _ftCostAllowed = (player getVariable ["moneyX", 0] >= _fastTravelCost);
 
+            if !(_isFastTravelAllowed && _ftCostAllowed) exitWith {
+                // Not a valid location for fast travel
+                Trace_1("_infoText: %1", '"'+_infoText+'"');
                 // Disable commit button and show what's wrong in info text
-                _infoText = _canFastTravelToLocation # 1;
+                private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
+                _infoText = _prettyString joinString "\n\n";
+                if (_isFastTravelAllowed && !_hcMode) then {
+                    private _costString = ["$",str _fastTravelCost] joinString "";
+                    _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_cost" + " " + _costString + ". <br/>" + localize "STR_antistasi_dialogs_main_fast_travel_noMoney";
+                    Trace_1("_infoText: %1", '"'+_infoText+'"');
+                };
                 _fastTravelCommitButton ctrlEnable false;
                 _fastTravelSelectText ctrlShow false;
                 _fastTravelInfoText ctrlShow true;
@@ -95,7 +116,7 @@ switch (_mode) do
                 _fastTravelMap ctrlMapAnimAdd [0.2, ctrlMapScale _fastTravelMap, _position];
                 ctrlMapAnimCommit _fastTravelMap;
             };
-
+            Trace_1("_infoText: %1", '"'+_infoText+'"');
             if (_hcMode) then {
                 // If we're in high command mode
                 private _hcGroup = _fastTravelMap getVariable "hcGroup";
@@ -105,16 +126,23 @@ switch (_mode) do
                 // If we're not in high command mode
                 _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_you_will_travel_to" + ":<br/>" + _locationName + "<br/><br/>";
             };
-
+            Trace_1("_infoText: %1", '"'+_infoText+'"');
             // Time
-            // TODO UI-update: Add case for calculating time for HC groups when in hc mode
-            private _fastTravelTime = [player, _selectedMarker] call A3A_fnc_getFastTravelTime;
-            private _timeString = [_fastTravelTime] call A3A_fnc_formatTime;
+            
+            private _timeString = [[_fastTravelTime] call FUNCMAIN(secondsToTimeSpan),0,0,false,2] call FUNCMAIN(timeSpan_format);
+            Trace_1("_infoText: %1", '"'+_infoText+'"');
             _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_time" + " " + _timeString + ".<br/><br/>";
 
+            Trace_1("_infoText: %1", '"'+_infoText+'"');
+            if (!_hcMode) then {
+                private _costString = ["$",str _fastTravelCost] joinString "";
+                _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_cost" + " " + _costString + ". ";
+                Trace_1("_infoText: %1", '"'+_infoText+'"');
+                if !(_ftCostAllowed) then {_infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_noMoney"};
+            };
             // Vehicle
             if (!_hcMode && vehicle player != player) then {
-                _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_vehicle";
+                _infoText = _infoText + "<br/><br/>" + localize "STR_antistasi_dialogs_main_fast_travel_vehicle";
             };
 
 
@@ -125,6 +153,7 @@ switch (_mode) do
             // Show info text
             _fastTravelInfoText ctrlShow true;
             // Update info text
+            Trace_1("_infoText: %1", '"'+_infoText+'"');
             _fastTravelInfoText ctrlSetStructuredText parseText _infoText;
             // Pan to location
             private _position = (_fastTravelMap getVariable "selectMarkerData") # 0;
@@ -161,7 +190,7 @@ switch (_mode) do
         // Find closest marker to the clicked position
         _params params ["_clickedPosition"];
         private _clickedWorldPosition = _fastTravelMap ctrlMapScreenToWorld _clickedPosition;
-        private _locations = airportsX + resourcesX + factories + outposts + seaports + citiesX + ["Synd_HQ"];
+        private _locations = airportsX + resourcesX + factories + outposts + seaports + citiesX + outpostsFIA + ["Synd_HQ"];
         private _selectedMarker = [_locations, _clickedWorldPosition] call BIS_fnc_nearestPosition;
         Debug_1("Selected marker: %1", _selectedMarker);
 
@@ -171,15 +200,15 @@ switch (_mode) do
         if (_distance > _maxDistance) exitWith
         {
             Debug("Distance too large, deselecting");
-            ["clearSelectedLocation"] call A3A_fnc_fastTravelTab;
-            ["update"] call A3A_fnc_fastTravelTab;
+            ["clearSelectedLocation"] call FUNC(fastTravelTab);
+            ["update"] call FUNC(fastTravelTab);
         };
 
         _fastTravelMap setVariable ["selectedMarker", _selectedMarker];
         private _position = getMarkerPos _selectedMarker;
         _fastTravelMap setVariable ["selectMarkerData", [_position]];
 
-        ["update"] call A3A_fnc_fastTravelTab;
+        ["update"] call FUNC(fastTravelTab);
     };
 
     case ("clearSelectedLocation"):
@@ -209,10 +238,10 @@ switch (_mode) do
         if (_hcMode) then {
             private _hcGroup = _fastTravelMap getVariable ["hcGroup", grpNull];
             closeDialog 1;
-            [_hcGroup, _marker] spawn A3A_fnc_fastTravel;
+            [_hcGroup,_marker,player] spawn A3A_fnc_fastTravelMove;
         } else {
             closeDialog 1;
-            [player, _marker] spawn A3A_fnc_fastTravel;
+            [player,_marker,player] spawn A3A_fnc_fastTravelMove;
         };
     };
 

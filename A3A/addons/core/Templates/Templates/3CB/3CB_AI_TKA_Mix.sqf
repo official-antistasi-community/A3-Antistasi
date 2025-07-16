@@ -83,6 +83,7 @@
 
 ["voices", ["Male01PER", "Male02PER", "Male03PER"]] call _fnc_saveToTemplate;
 ["faces", ["PersianHead_A3_01", "PersianHead_A3_02", "PersianHead_A3_03"]] call _fnc_saveToTemplate;
+"TakistaniMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //
@@ -408,7 +409,7 @@ _policeLoadoutData set ["shotGuns", [
 ]];
 
 _policeLoadoutData set ["SMGs", [
-["rhs_weap_pp2000", "", "", "", [], [], ""],
+["uk3cb_port_said_m45", "", "", "", [], [], ""],
 ["UK3CB_MP5", "", "", "", ["UK3CB_MP5_30Rnd_Magazine"], [""], ""],
 ["rhsusf_weap_MP7A2", "", "rhsusf_acc_wmx_bk", "rhsusf_acc_eotech_xps3", [], [], ""]
 ]];
@@ -452,8 +453,11 @@ _militiaLoadoutData set ["grenadeLaunchers", [
 ["UK3CB_HK33KA2_RIS_GL", "", "", "", ["UK3CB_HK33_30rnd_556x45_G", "UK3CB_HK33_30rnd_556x45_G", "UK3CB_HK33_30rnd_556x45_YT"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""],
 ["UK3CB_M16A2_UGL", "", "", "", ["rhs_mag_30Rnd_556x45_M855_Stanag", "rhs_mag_30Rnd_556x45_M855_Stanag", "rhs_mag_30Rnd_556x45_M855_Stanag_Tracer_Red"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""]
 ]];
-_militiaLoadoutData set ["SMGs", ["rhs_weap_pp2000"]];
-_militiaLoadoutData set ["machineGuns", ["rhs_weap_pkm"]];
+_militiaLoadoutData set ["SMGs", ["uk3cb_port_said_m45"]];
+_militiaLoadoutData set ["machineGuns", ["rhs_weap_pkm",
+["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39"], [], ""],
+["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_GM"], [], ""]
+]];
 _militiaLoadoutData set ["marksmanRifles", [
 ["rhs_weap_svdp", "", "", "rhs_acc_pso1m2", ["rhs_10Rnd_762x54mmR_7N1"], [], ""],
 ["UK3CB_G3SG1", "", "", "uk3cb_optic_STANAGZF_G3", [], [], ""]

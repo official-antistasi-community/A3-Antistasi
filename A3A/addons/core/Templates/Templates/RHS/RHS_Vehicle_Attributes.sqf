@@ -19,6 +19,7 @@
     // CDF trash planes
     ["rhs_l159_cdf_b_CDF", ["cost", 150]],
     ["rhs_l159_cdf_b_CDF_CAP", ["cost", 150]],
+    ["RHSGREF_A29B_HIDF", ["cost", 120]],
 
     // Apaches
 //  ["RHS_AH64D_GS", ["cost", 300]],           // no hellfires

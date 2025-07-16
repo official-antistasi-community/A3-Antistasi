@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Player Management tab of the Main dialog.
 
 Arguments:
@@ -16,7 +16,10 @@ Dependencies:
     None
 
 Example:
-    ["update"] call A3A_fnc_playerManagementTab;
+    ["update"] call FUNC(playerManagementTab);
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -26,6 +29,15 @@ Example:
 FIX_LINE_NUMBERS()
 
 params[["_mode","onLoad"], ["_params",[]]];
+
+private _fnc_selPlayerUID = {
+    private _display = findDisplay A3A_IDD_MAINDIALOG;
+    private _listBox = _display displayCtrl A3A_IDC_ADMINPLAYERLIST;
+    private _index = lnbCurSelRow _listBox;
+    private _playerUID = _listBox lnbText [_index, 2];
+    _playerUID;
+    // private _player = (str _playerUID) call BIS_fnc_getUnitByUID;
+};
 
 switch (_mode) do
 {
@@ -37,7 +49,7 @@ switch (_mode) do
         private _backButton = _display displayCtrl A3A_IDC_MAINDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
         _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["admin"]] call A3A_fnc_mainDialog;
+            ["switchTab", ["admin"]] call FUNC(mainDialog);
         }];
         _backButton ctrlShow true;
 
@@ -51,25 +63,22 @@ switch (_mode) do
 
             private _index = _listBox lnbAddRow [_name, _distance, _playerUID];
             if (_isMember) then {
-                _listBox lnbSetColor [[_index,0], [0.2,0.6,0.2,1]]; // TODO UI-update: use defined color
+                _listBox lnbSetColor [[_index,0], A3A_COLOR_MEMBER_SQF];
             } else {
-                _listBox lnbSetColor [[_index,0], [0.7,0.7,0.7,1]]; // TODO UI-update: use defined color
+                _listBox lnbSetColor [[_index,0], A3A_COLOR_GUEST_SQF];
             };
         } forEach allPlayers;
 
         _listBox lnbSetCurSelRow 0;
-        ["playerLbSelectionChanged"] spawn A3A_fnc_playerManagementTab;
+        ["playerLbSelectionChanged"] spawn FUNC(playerManagementTab);
     };
 
     // Player Management
     case ("playerLbSelectionChanged"):
     {
         // Needs scheduled environment
-
         private _display = findDisplay A3A_IDD_MAINDIALOG;
-        private _listBox = _display displayCtrl A3A_IDC_ADMINPLAYERLIST;
-        private _index = lnbCurSelRow _listBox;
-        private _playerUID = _listBox lnbText [_index, 2];
+        private _playerUID = call _fnc_selPlayerUID;
         Debug_1("_playerUID: %1", _playerUID);
         private _addButton = _display displayCtrl A3A_IDC_ADDMEMBERBUTTON;
         private _removeButton = _display displayCtrl A3A_IDC_REMOVEMEMBERBUTTON;
@@ -93,9 +102,11 @@ switch (_mode) do
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _listBox = _display displayCtrl A3A_IDC_ADMINPLAYERLIST;
         private _index = lbCurSel _listBox;
-        _listBox lnbSetColor [[_index,0], [0.2,0.6,0.2,1]];
-        // fakePlayers select _index setVariable ["isMember", true]; // TODO UI-update: use A3A_fnc_memberAdd
-        ["playerLbSelectionChanged"] spawn A3A_fnc_playerManagementTab;
+        _listBox lnbSetColor [[_index,0], A3A_COLOR_MEMBER_SQF];
+        private _playerUID = _listBox lnbText [_index, 2];
+        private _player = (str _playerUID) call BIS_fnc_getUnitByUID;
+        ["add",_player] call FUNCMAIN(memberAdd);
+        ["playerLbSelectionChanged"] spawn FUNC(playerManagementTab);
     };
 
     case ("adminRemoveMember"):
@@ -103,9 +114,46 @@ switch (_mode) do
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _listBox = _display displayCtrl A3A_IDC_ADMINPLAYERLIST;
         private _index = lbCurSel _listBox;
-        _listBox lnbSetColor [[_index,0], [0.7,0.7,0.7,1]];
-        // fakePlayers select _index setVariable ["isMember", false]; // TODO UI-update: use A3A_fnc_memberAdd
-        ["playerLbSelectionChanged"] spawn A3A_fnc_playerManagementTab;
+        _listBox lnbSetColor [[_index,0], A3A_COLOR_GUEST_SQF];
+        private _playerUID = _listBox lnbText [_index, 2];
+        private _player = (str _playerUID) call BIS_fnc_getUnitByUID;
+        ["remove",_player] call FUNCMAIN(memberAdd);
+        ["playerLbSelectionChanged"] spawn FUNC(playerManagementTab);
+    };
+
+    case ("tpToPlayer"):
+    {
+        private _playerUID = call _fnc_selPlayerUID;
+        private _player = (str _playerUID) call BIS_fnc_getUnitByUID;
+        // TODO UI-update prevent teleporting to self
+        //if (_player == player) exitWith 
+        player setPos getPos _player;
+    };
+
+    case ("tpPlayerToMe"):
+    {
+        private _playerUID = call _fnc_selPlayerUID;
+        private _player = (str _playerUID) call BIS_fnc_getUnitByUID;
+        _player setPos getPos player;
+    };
+
+    case ("adminKickPlayer"):
+    {
+        private _playerUID = call _fnc_selPlayerUID;
+        // TODO UI-update: kick UID
+    };
+
+    case ("adminBanPlayer"):
+    {
+        private _playerUID = call _fnc_selPlayerUID;
+        // TODO UI-update: ban UID
+    };
+
+    case ("adminCopyUID"):
+    {
+        private _playerUID = call _fnc_selPlayerUID;
+        // TODO UI-update: copy UID to clipboard
+        //[_playerUID] remoteExec ["copyToClipboard",2];
     };
 
     default

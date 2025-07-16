@@ -5,7 +5,8 @@ if (_unit getVariable "respawning") exitWith {};
 if (_unit != _unit getVariable ["owner",_unit]) exitWith {};
 if (!isPlayer _unit) exitWith {};
 
-if (!isNil "respawnMenu") then {(findDisplay 46) displayRemoveEventHandler ["KeyDown", respawnMenu]};
+removeAllUserActionEventHandlers ["A3A_core_respawn", "Activate"];
+removeAllUserActionEventHandlers ["A3A_core_selfRevive", "Activate"];
 _unit setVariable ["respawning",true];
 private _layer = ["A3A_infoCenter"] call BIS_fnc_rscLayer;
 ["Respawning",0,0,3,0,0,_layer] spawn bis_fnc_dynamicText;

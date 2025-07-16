@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles the initialization and tab switching on the Main Dialog (aka the Y-Menu).
     This function should only be called from MainDialog onLoad and control activation EHs.
 
@@ -17,8 +17,11 @@ Dependencies:
     None
 
 Example:
-    ["onLoad"] spawn A3A_fnc_mainDialog; // initialization
-    ["switchTab", ["player"]] call A3A_fnc_mainDialog; // switching to the player tab
+    ["onLoad"] spawn FUNC(mainDialog); // initialization
+    ["switchTab", ["player"]] call FUNC(mainDialog); // switching to the player tab
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -27,7 +30,10 @@ Example:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params[["_mode","onLoad"], ["_params",[]]];
+params[
+    ["_mode","onLoad"],
+    ["_params", []]
+];
 
 // Get display
 private _display = findDisplay A3A_IDD_MAINDIALOG;
@@ -39,13 +45,13 @@ switch (_mode) do
         Debug("MainDialog onLoad starting...");
 
         // Disable/hide unavailable tab buttons
-        if (player != theBoss) then {
+        if (player isNotEqualTo theBoss) then {
             private _commanderTabButton = _display displayCtrl A3A_IDC_COMMANDERTABBUTTON;
             _commanderTabButton ctrlEnable false;
             _commanderTabButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_tab_disabled_tooltip";
         };
 
-        if !((isServer && hasInterface) || admin owner player > 0) then {
+        if !([] call FUNCMAIN(isLocalAdmin)) then {
             private _adminTabButton = _display displayCtrl A3A_IDC_ADMINTABBUTTON;
             _adminTabButton ctrlEnable false;
             _adminTabButton ctrlshow false;
@@ -56,18 +62,22 @@ switch (_mode) do
         setGroupIconsVisible [false, false];
         setGroupIconsSelectable false;
 
-        // Show player tab content
-        ["switchTab", ["player"]] call A3A_fnc_mainDialog;
-
         // Cache group info in map control
         Debug("Caching group info");
 
+        private _autoSwitchGroups = player getVariable ["autoSwitchGroups",[]];
+        private _doAutoSwitch = _autoSwitchGroups isNotEqualTo [];
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
-        private _hcGroupData = [];
+        private _selHCGroups = if (_doAutoSwitch) then {
+            _autoSwitchGroups;
+        } else {
+            hcSelected player;
+        };
+        _hcGroupData = [];
         if (player == theBoss) then
         {
             {
-                private _groupData = [_x] call A3A_fnc_getGroupInfo;
+                private _groupData = [_x] call FUNC(getGroupInfo);
                 _hcGroupData pushBack _groupData;
             } forEach hcallGroups player;
         };
@@ -76,42 +86,50 @@ switch (_mode) do
 
         // Init selected group
         private _selectedGroup = grpNull;
-        if (count (hcSelected player) == 1) then
+
+        if (count _selHCGroups == 1) then
         {
-            _selectedGroup = (hcSelected player) # 0;
+            _selectedGroup = _selHCgroups # 0;
         };
         _commanderMap setVariable ["selectedGroup", _selectedGroup];
+        _commanderMap setVariable ["doAutoSwitch",_doAutoSwitch];
 
 
         // Commander map Draw EHs
         // Fire mission markers
-        private _fireMissionEH = _commanderMap ctrlAddEventHandler ["Draw","call A3A_fnc_fireMissionEH"];
+        private _fireMissionEH = _commanderMap ctrlAddEventHandler ["Draw","call A3A_GUI_fnc_fireMissionEH"];
         Debug_1("Adding Fire Mission Draw EH to commander map: %1", _fireMissionEH);
         // Select marker
-        private _commanderHcSelectEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawSelectEH"];
+        private _commanderHcSelectEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawSelectEH"];
         Debug_1("Adding HC group selection Draw EH to commander map: %1", _commanderHcSelectEH);
         // High command groups
-        private _commanderHcGroupsEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawHcGroupsEH"];
+        private _commanderHcGroupsEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawHcGroupsEH"];
         Debug_1("Adding HC group marker Draw EH to commander map: %1", _commanderHcGroupsEH);
         // Outposts
-        private _commanderOutpostsEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawOutpostsEH"];
+        private _commanderOutpostsEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
         Debug_1("Adding outposts Draw EH to commander map: %1", _commanderOutpostsEH);
         // User Markers
-        private _commanderUserMarkersEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawUserMarkersEH"];
+        private _commanderUserMarkersEH = _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawUserMarkersEH"];
         Debug_1("Adding user markers Draw EH to commander map: %1", _commanderUserMarkersEH);
-
-
-
 
         // Fast Travel map Draw EHs
         private _fastTravelMap = _display displayCtrl A3A_IDC_FASTTRAVELMAP;
         // Select marker
-        private _fastTravelSelectEH = _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawSelectEH"];
+        private _fastTravelSelectEH = _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawSelectEH"];
         Debug_1("Adding destination select marker Draw EH to Fast Travel map: %1", _fastTravelSelectEH);
         // Outposts
-        private _fastTravelOutpostsEH = _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawOutpostsEH"];
+        private _fastTravelOutpostsEH = _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
         Debug_1("Adding outposts Draw EH to Fast Travel map: %1", _fastTravelOutpostsEH);
+        // User Markers
+        private _commanderUserMarkersEH = _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawUserMarkersEH"];
+        Debug_1("Adding user markers Draw EH to Fast Travel map: %1", _commanderUserMarkersEH);
 
+        // Show player tab content
+        if !(_doAutoSwitch) then {
+            ["switchTab", ["player"]] call FUNC(mainDialog);
+        } else {
+            ["switchTab", ["commander"]] call FUNC(mainDialog);
+        };
 
         Debug("MainDialog onLoad complete.");
 
@@ -121,7 +139,7 @@ switch (_mode) do
                 _display = findDisplay 7000;
                 _commanderMap = _display displayCtrl 7201;
                 _mapScale = ctrlMapScale _commanderMap;
-                diag_log(format ["MAP SCALE: %1", _mapScale]);
+                //diag_log(format ["MAP SCALE: %1", _mapScale]);
                 sleep 1;
             };
         };
@@ -138,6 +156,12 @@ switch (_mode) do
         private _groupIcons = _display getVariable ["HCgroupIcons", [false,false]];
         setGroupIconsVisible _groupIcons;
         setGroupIconsSelectable true;
+
+        A3A_DoSendAdminData = false;
+        publicVariableServer "A3A_DoSendAdminData";
+
+        // stop admin tab if not nil
+        terminate (_display getVariable ["A3A_adminTabUpdateSpawn", scriptNull]);
 
         Debug("MainDialog onUnload complete.");
     };
@@ -170,8 +194,12 @@ switch (_mode) do
 
             case ("admin"):
             {
-                if ((isServer && hasInterface) || admin owner player > 0) then {
+                if ([] call FUNCMAIN(isLocalAdmin)) then {
                     _selectedTabIDC = A3A_IDC_ADMINTAB;
+                    // tell the server to start sending the admin data over the net to the admin
+                    A3A_DoSendAdminData = true;
+                    publicVariableServer "A3A_DoSendAdminData";
+                    [] remoteExecCall ["A3A_fnc_adminData", 2];
                 };
             };
 
@@ -243,56 +271,75 @@ switch (_mode) do
         private _selectedTabCtrl = _display displayCtrl _selectedTabIDC;
         _selectedTabCtrl ctrlShow true;
 
+        // stop admin tab if not nil
+        terminate (_display getVariable ["A3A_adminTabUpdateSpawn", scriptNull]);
+
         // Update tab
         Debug("Updating selected tab");
         switch (_selectedTab) do
         {
             case ("player"):
             {
-                ["update"] call A3A_fnc_playerTab;
+                ["update"] call FUNC(playerTab);
             };
 
             case ("commander"):
             {
-                ["update"] call A3A_fnc_commanderTab;
+                ["update"] call FUNC(commanderTab);
             };
 
             case ("admin"):
             {
-                ["update"] call A3A_fnc_adminTab;
+                ["update"] call FUNC(adminTab);
+                private _updateAdminTab = [] spawn 
+                {
+                    while {true} do 
+                    {
+                        ["updateStatPanel"] call FUNC(adminTab);
+                        sleep 1;
+                    };
+                };
+                _display setVariable ["A3A_adminTabUpdateSpawn", _updateAdminTab];
             };
 
             case ("fasttravel"):
             {
-                ["clearSelectedLocation"] call A3A_fnc_fastTravelTab;
-                ["update"] call A3A_fnc_fastTravelTab;
+                ["clearSelectedLocation"] call FUNC(fastTravelTab);
+                ["update"] call FUNC(fastTravelTab);
             };
 
             case ("construct"):
             {
-                ["update"] call A3A_fnc_constructTab;
+                ["update"] call FUNC(constructTab);
             };
 
             case ("aimanagement"):
             {
-                ["update"] call A3A_fnc_aiManagementTab;
+                ["update"] call FUNC(aiManagementTab);
             };
 
             case ("donate"):
             {
-                ["update"] call A3A_fnc_donateTab;
+                ["update"] call FUNC(donateTab);
             };
 
             case ("airsupport"):
             {
-                ["update"] call A3A_fnc_airSupportTab;
+                ["update"] call FUNC(airSupportTab);
             };
 
             case ("playermanagement"):
             {
-                ["update"] call A3A_fnc_playerManagementTab;
+                ["update"] call FUNC(playerManagementTab);
             };
         };
+    };
+
+    case ("uiEvent_hideTopBarCheckBox_checked"):
+    {
+        _params params [["_isCheckedNum", 0, [0]]];
+        private _isChecked = _isCheckedNum isEqualTo 1;
+        ["BATTLE_MENU_CHECKBOX", _isChecked] call FUNCMAIN(disableInfoBar);
     };
 
     default {

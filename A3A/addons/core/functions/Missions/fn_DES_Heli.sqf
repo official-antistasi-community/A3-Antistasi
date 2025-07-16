@@ -40,13 +40,22 @@ while {true} do {
 };
 
 // selecting Aircraft
-private _heliPool = (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport") + (_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack");
-private _typeVehH = selectRandom (_heliPool select {_x isKindOf "Helicopter"});
-if (isNil "_typeVehH") exitWith {
+private _light = _faction get "vehiclesHelisLight";
+private _transport = _faction get "vehiclesHelisTransport";
+private _lightAttack = _faction get "vehiclesHelisLightAttack";
+private _fullAttack = _faction get "vehiclesHelisAttack";
+private _typePool = [];
+if (_light isNotEqualTo []) then {_typePool append [_light, 1]};
+if (_transport isNotEqualTo []) then {_typePool append [_transport, 1]};
+if (_lightAttack isNotEqualTo []) then {_typePool append [_lightAttack, 2]};
+if (_fullAttack isNotEqualTo []) then {_typePool append [_fullAttack, 1]};
+if (_typePool isEqualTo []) exitWith {
     Error("No aircrafts in arrays vehiclesHelisLight, vehiclesHelisTransport or vehiclesHelisAttack. Reselecting DES mission");
     ["DES"] remoteExec ["A3A_fnc_missionRequest",2];
 };
-private _isAttackHeli = _typeVehH in ((_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack"));
+private _heliType = selectRandomWeighted _typePool;
+private _typeVehH = selectRandom _heliType;
+private _isAttackHeli = _typeVehH in (_fullAttack + _lightAttack);
 
 //refining crash spawn position, to avoid exploding on spawn or "Armaing" during mission
 private _flatPos = [_posCrashOrigin, 0, 1000, 0, 0, 0.1] call BIS_fnc_findSafePos;
@@ -83,8 +92,35 @@ while {_counter != _counterLimit} do {
     } else {_counter = _counter -1};
 };
 
+//creating ammobox if not armed
+_ammoBox = objNull;
+if (!_isAttackHeli) then {
+    _ammoBox = [_faction get "ammobox", _posCrash, 10, 5, true] call A3A_fnc_safeVehicleSpawn; // Allegedly there's alternative syntax that allows you to check which classnames can be slingloaded
+    // For that alternative syntax, no results are accurate for the ammoboxes we use so I'm spawning it to test it
+    if !(_heli canSlingLoad _ammoBox) exitWith {
+    	deleteVehicle _ammoBox;
+    };
+    // Otherwise when destroyed, ammoboxes sink 100m underground and are never cleared up
+    _ammoBox addEventHandler ["Killed", { [_this#0] spawn { sleep 10; deleteVehicle (_this#0) } }];
+    [_ammoBox] spawn A3A_fnc_fillLootCrate;
+    [_ammoBox] call A3A_Logistics_fnc_addLoadAction;
+};
+
 //creating mission marker near crash site
-private _posCrashMrk = _heli getRelPos [random 500,random 360];
+private _posCrashMrk = [0,0,0];
+private _crashMarkAttempt = 1;
+private _isWater = true;
+private _isInRange = false;
+
+while {_crashMarkAttempt < 10 && (_isWater || !_isInRange)} do {
+    Debug_1("Searching for marker position, attempt %1",_crashMarkAttempt);
+    _posCrashMrk = _heli getRelPos [random 500,random 360];
+    _isWater = surfaceIsWater _posCrashMrk;
+    _isInRange = (_posCrashMrk select [0,2]) findIf { (_x < 300) || (_x > worldSize - 300)} isEqualTo -1;
+    _crashMarkAttempt = _crashMarkAttempt + 1;
+};
+
+if (_crashMarkAttempt isEqualTo 10) then {Debug("Failed to find suitable position for marker, assigning to heli pos"); _posCrashMrk = getPos _heli;};
 private _taskMrk = createMarker [format ["DES%1", random 100],_posCrashMrk];
 _taskMrk setMarkerShape "ICON";
 
@@ -140,7 +176,8 @@ deleteGroup _groupX;
 
 //moving to crash site
 private _escortWP = _groupVeh addWaypoint [_posCrash, 0];
-_escortWP setWaypointType "GETOUT";
+//_escortWP setWaypointType "GETOUT";
+_escortWP setWaypointStatements ["true", "if !(local this) exitWith {}; (group this) leaveVehicle (assignedVehicle this)"];
 _escortWP setWaypointBehaviour "SAFE";
 Debug_2("Placed Group: %1 in Lite Vehicle and set waypoint %2", _typeGroup, _posCrash);
 
@@ -289,6 +326,7 @@ if (_vehR distance _heli < 50) then {
         private _notAlivePilots = true;
         {if ([_x] call A3A_fnc_canFight) exitWith {_notAlivePilots = false}}forEach units _pilots;
 
+        if (!isNull _ammoBox && _ammoBox distance _heli < 50) then {Debug("Crate is alive recovering now"); _heli setSlingLoad _ammoBox;};
 
         if (_typeVehH in ( (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport") )) then {
             if !(_typeVehH in (_faction get "vehiclesHelisLight")) then {
@@ -378,6 +416,8 @@ deleteMarker _taskMrk;
 deleteMarker _mrkCrash;
 
 //delete units, vehicles and groups
+if (!isNull _ammoBox && (getSlingLoad _heli == _ammoBox) && (_ammoBox distance _missionOriginPos < 400)) then {deleteVehicle _ammoBox;};
 {[_x] spawn A3A_fnc_vehDespawner} forEach _vehicles;
 {[_x] spawn A3A_fnc_groupDespawner} forEach _groups;
+
 Debug("Downed Heli clean up complete");

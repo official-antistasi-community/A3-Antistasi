@@ -39,7 +39,7 @@ if (player == leader _unit) then {
 	_unit setVariable ["owner", player, true];
 	_unit addEventHandler ["killed", {
 		_victim = _this select 0;
-		[_victim] spawn A3A_fnc_postmortem;
+		[_victim] remoteExec ["A3A_fnc_postmortem", 2];
 		_killer = _this select 1;
 		if (side _killer == Occupants) then {
 			_nul = [0.25,0,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];

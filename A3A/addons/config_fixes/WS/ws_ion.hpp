@@ -48,21 +48,21 @@ class a3a_ION_Truck_02_cargo_F : O_Truck_02_cargo_lxWS
     side = 1;
     crew = "B_ION_Soldier_lxWS";
     faction = "BLU_ION_lxWS";
-    hiddenSelectionsTextures[] = {"lxws\vehicles_f_lxws\data\truck_02\truck_02_kab_black_co.paa","lxws\vehicles_f_lxws\truck_02\data\truck_02_cargo_olive_co.paa","a3\soft_f_beta\truck_02\data\truck_02_int_co.paa","lxws\vehicles_f_lxws\truck_02\data\addons_black_co.paa"};
+    hiddenSelectionsTextures[] = {"lxws\vehicles_f_lxws\data\truck_02\truck_02_kab_black_co.paa","lxws\vehicles_f_lxws\truck_02\data\truck_02_cargo_black_co.paa","a3\soft_f_beta\truck_02\data\truck_02_int_co.paa","a3\soft_f_beta\truck_02\data\truck_02_chassis_opfor_co.paa","lxws\vehicles_f_lxws\truck_02\data\addons_black_co.paa"};
 };
 class a3a_ION_Truck_02_flatbed_F : O_Truck_02_flatbed_lxWS
 {
     side = 1;
     crew = "B_ION_Soldier_lxWS";
     faction = "BLU_ION_lxWS";
-    hiddenSelectionsTextures[] = {"lxws\vehicles_f_lxws\data\truck_02\truck_02_kab_black_co.paa","lxws\vehicles_f_lxws\truck_02\data\truck_02_cargo_olive_co.paa","a3\soft_f_beta\truck_02\data\truck_02_int_co.paa","lxws\vehicles_f_lxws\truck_02\data\addons_black_co.paa"};
+    hiddenSelectionsTextures[] = {"lxws\vehicles_f_lxws\data\truck_02\truck_02_kab_black_co.paa","lxws\vehicles_f_lxws\truck_02\data\truck_02_cargo_black_co.paa","a3\soft_f_beta\truck_02\data\truck_02_int_co.paa","a3\soft_f_beta\truck_02\data\truck_02_chassis_opfor_co.paa","lxws\vehicles_f_lxws\truck_02\data\addons_black_co.paa"};
 };
 class a3a_ION_Truck_02_zu23_F : O_Tura_Truck_02_aa_lxWS
 {
     side = 1;
     crew = "B_ION_Soldier_lxWS";
     faction = "BLU_ION_lxWS";
-    hiddenSelectionsTextures[] = {"lxws\vehicles_f_lxws\data\truck_02\truck_02_kab_black_co.paa","lxws\vehicles_f_lxws\truck_02\data\truck_02_cargo_olive_co.paa","a3\soft_f_beta\truck_02\data\truck_02_int_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_base_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_addon_1_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_addon_2_co.paa","lxws\vehicles_f_lxws\truck_02\data\addons_black_co.paa"};
+    hiddenSelectionsTextures[] = {"lxws\vehicles_f_lxws\data\truck_02\truck_02_kab_black_co.paa","lxws\vehicles_f_lxws\truck_02\data\truck_02_cargo_olive_co.paa","a3\soft_f_beta\truck_02\data\truck_02_int_co.paa","a3\soft_f_beta\truck_02\data\truck_02_chassis_opfor_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_base_green_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_green_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_addon_1_green_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_addon_2_green_co.paa","lxws\vehicles_f_lxws\truck_02\data\addons_black_co.paa"};
 };
 class a3a_ION_Offroad_armor : B_Tura_Offroad_armor_lxWS
 {
