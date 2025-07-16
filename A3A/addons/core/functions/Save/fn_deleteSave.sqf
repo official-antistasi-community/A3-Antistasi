@@ -47,7 +47,7 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 	"attackCountdownOccupants", "attackCountdownInvaders", "prestigeNATO", "prestigeCSAT",
 	"savedPlayers", "testingTimerIsActive", "HR_Garage", "A3A_fuelAmountleftArray", "HQKnowledge", "enemyResources",
 	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC", "arsenalLimits", "rebelLoadouts",
-	"minorSites", "newGarrison"];
+	"minorSites", "newGarrison", "radioKeys"];
 
 
 // Remove this campaign from the save list, if present

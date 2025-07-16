@@ -114,8 +114,8 @@ prestigeOPFOR = [75, 50] select cadetMode;												//Initial % support for NA
 prestigeBLUFOR = 0;																	//Initial % FIA support on each city
 
 // Don't need to be distributed
-occupantsRadioKeys = 0;
-invaderRadioKeys = 0;
+occRadioKeys = 0;
+invRadioKeys = 0;
 
 // New garrison data structure
 A3A_garrison = createHashMap;

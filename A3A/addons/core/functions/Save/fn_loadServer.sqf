@@ -23,6 +23,7 @@ if (isServer) then {
 	["weather"] call A3A_fnc_getStatVariable;
 	["prestigeOPFOR"] call A3A_fnc_getStatVariable;
 	["prestigeBLUFOR"] call A3A_fnc_getStatVariable;
+	["radioKeys"] call A3A_fnc_getStatVariable;
 	["resourcesFIA"] call A3A_fnc_getStatVariable;
 //	["garrison"] call A3A_fnc_getStatVariable;			// loaded later if it's an old save
 	["skillFIA"] call A3A_fnc_getStatVariable;

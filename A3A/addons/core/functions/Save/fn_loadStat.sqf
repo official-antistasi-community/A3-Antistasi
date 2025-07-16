@@ -34,7 +34,7 @@ private _specialVarLoads = [
     "chopForest","weather","killZones","jna_dataList","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
-    "minorSites", "newGarrison"
+    "minorSites", "newGarrison", "radioKeys"
 ];
 
 private _varName = _this select 0;
@@ -60,6 +60,11 @@ if (_varName in _specialVarLoads) then {
     //Keeping these for older saves
     if (_varName == 'prestigeNATO') then {[Occupants, _varValue, 120] call A3A_fnc_addAggression};
     if (_varName == 'prestigeCSAT') then {[Invaders, _varValue, 120] call A3A_fnc_addAggression};
+    if (_varName == 'radioKeys') then 
+    {
+        occRadioKeys = _varValue#0;
+        invRadioKeys = _varValue#1;
+    };
     if (_varName == 'aggressionOccupants') then
     {
         aggressionLevelOccupants = _varValue select 0;
