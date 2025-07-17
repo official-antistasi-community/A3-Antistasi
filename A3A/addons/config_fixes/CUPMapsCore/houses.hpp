@@ -153,6 +153,19 @@ class Land_House_K_7_EP1 : House_EP1
 	};
 };
 
+// 2 storey stone junk
+class Land_House_K_3_EP1 : House_EP1
+{
+    A3A_policeStationObjects[] = {
+		{"Banner_01_F",{-2.41626,-3.97363,0.483618},0},
+		{"Banner_01_F",{1.71167,6.99194,0.595251},180},
+		{"Box_NATO_Wps_F",{-0.909912,0.447998,2.98725},0},
+		{"OfficeTable_01_old_F",{-5.94702,-1.0415,-0.797737},270},
+		{"Land_ChairWood_F",{-5.60791,-1.2085,-0.797756},89}
+    };
+};
+
+
 // Mud shack
 class Land_House_L_6_EP1 : House_EP1
 {
@@ -163,6 +176,19 @@ class Land_House_L_6_EP1 : House_EP1
 		{"OfficeTable_01_old_F",{1.70654,1.0542,-1.54344},90}
 	};
 };
+
+// Mud shack, one floor L shape
+class Land_House_L_7_EP1 : House_EP1
+{
+    A3A_policeStationObjects[] = {
+		{"Banner_01_F",{-2.26831,4.67578,0.672165},180},
+		{"Banner_01_F",{3.94995,-2.74683,0.305955},0},
+		{"Box_NATO_Wps_F",{-5.49976,-3.01904,-0.932561},90},
+		{"OfficeTable_01_old_F",{-0.587646,2.94751,-0.263589},270},
+		{"Land_ChairWood_F",{-0.139404,2.6792,-0.263589},90}
+    };
+};
+
 
 // Sahrani
 
