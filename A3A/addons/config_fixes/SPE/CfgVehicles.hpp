@@ -95,6 +95,13 @@ class CfgVehicles
             class SPE_System_NumberMarkings {};
         };
         class AnimationSources : AnimationSources{
+            class hide_bridge_marking_source{
+                initPhase = 1;
+                displayName = "Hide Bridge Marking"
+                animPeriod = 1e-05;
+                source = "user";
+                useSource = 1;
+                };
             class hide_canopy_source{
                 initPhase = 1;
                 displayName = "Hide Canopy";
