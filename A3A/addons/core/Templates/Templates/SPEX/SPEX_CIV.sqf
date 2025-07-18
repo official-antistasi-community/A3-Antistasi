@@ -2,11 +2,18 @@
 //       Vehicles       //
 //////////////////////////    
 
-["vehiclesCivCar", []] call _fnc_saveToTemplate;
+["vehiclesCivCar", [
+    "a3a_SPE_R200", 0.5, 
+    "a3a_SPE_R200_Hood", 1.5,
+    "a3a_SPE_G503_MB_Open", 1.5, 
+    "a3a_SPE_G503_MB", 0.5 
+]] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
     "SPEX_GER_Bedford_MWD", 0.5, 
-    "SPEX_GER_Bedford_MWD_Open", 0.5 
+    "SPEX_GER_Bedford_MWD_Open", 1.5,
+    "SPEX_DAK_Bedford_MWD", 0.5, 
+    "SPEX_DAK_Bedford_MWD_Open", 1.5 
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivBoat", [
@@ -17,6 +24,9 @@
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivMedical", [
+    "SPE_OpelBlitz_Ambulance", 1.5, 
+    "SPE_CCKW_353_Ambulance", 1.5,
+    "SPE_FFI_OpelBlitz_Ambulance", 0.5
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivFuel", [
