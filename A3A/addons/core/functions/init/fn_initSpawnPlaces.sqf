@@ -157,7 +157,7 @@ private _mortarSpawns = [];
 private _spawnPlaces = [];
 
 // Vehicle slot special cases
-if (_markerSplit#0 == "airport") then {
+if (_markerSplit#0 == "airport" and _vehicleSpawns isNotEqualTo []) then {
     private _aaPlace = _vehicleSpawns deleteAt 0;
     _spawnPlaces pushBack ["vehicleAA", _aaPlace#0, _aaPlace#1];
 };
