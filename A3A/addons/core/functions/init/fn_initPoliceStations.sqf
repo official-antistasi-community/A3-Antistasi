@@ -17,9 +17,11 @@ if (_policeStationTypes isEqualTo []) exitWith {
 	Error("No police station types found in mapInfo for this map. No police stations will be generated");
 };
 
+private _minPop = getNumber (_mapInfo/"policeStationMinPop");
+
 private _policeSpawnStats =  createHashMapFromArray [ ["vehiclePolice", [[0], 1, 1]] ];
 
-private _debugTypes = [];
+//private _debugTypes = [];
 
 // netId -> city marker name for destruction detection
 A3A_policeStations = createHashMap;
@@ -39,6 +41,7 @@ A3A_policeStations = createHashMap;
         _buildings = _buildings select { typeOf _x in _policeStationTypes } select { alive _x };        // isKindOf matching would pick up abandoned buildings
         if (_buildings isEqualTo []) then {
             // Try again with slightly larger radius
+            Trace_1("Expanding search radius in %1", _city);
             _buildings = nearestTerrainObjects [markerPos _city, ["House", "Building"], 150];
             _buildings = _buildings select { typeOf _x in _policeStationTypes } select { alive _x };
         };
@@ -46,7 +49,11 @@ A3A_policeStations = createHashMap;
             Info_1("No suitable buildings for police station in %1", _city);
             continue;
         };
-        _debugTypes insert [-1, _buildings apply {typeof _x}, true];
+
+        private _types = _buildings apply { typeOf _x };
+        Trace_2("Police stations types in %1: %2", _city, _types arrayIntersect _types);
+
+        //_debugTypes insert [-1, _buildings apply {typeof _x}, true];
         _stationPos = getPosATL selectRandom _buildings;
         _garrison set ["policeStation", _stationPos];         // only need one entry? Hmm. LootCD & intelCD go elsewhere.
 
@@ -77,7 +84,7 @@ A3A_policeStations = createHashMap;
 
 } forEach citiesX;
 
-Debug_1("Police station types used: %1", _debugTypes);
+//Debug_1("Police station types used: %1", _debugTypes);
 
 // better way of placing vehicle outside building:
 
