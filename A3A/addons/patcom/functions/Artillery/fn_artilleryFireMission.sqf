@@ -78,33 +78,24 @@ if ([_targetPos, _area, _side] call A3A_fnc_artilleryDangerClose) then {
 
 /////// GET ARTILLERY ROUND TYPE FROM TEMPLATES \\\\\\\
 private _faction = Faction(_side);
+private _shellType = "";
 if (_batteryClass in (_faction get "vehiclesArtillery")) then {
     private _shellArray = _faction get "magazines" get _batteryClass;
     _shellType = (_shellArray # 0);
 };
-if (_batteryClass in (_faction get "staticMortars")) then {
-    switch (_roundType) do {
-        case "HE": {
-            _shellType = _faction get "mortarMagazineHE";
-        };
-
-        case "SMOKE": {
-            _shellType = _faction get "mortarMagazineSmoke";
-        };
-        
-        case "FLARE": {
-            _shellType = _faction get "mortarMagazineFlare";
-        };
-
-        default {
-            _shellType = _faction get "mortarMagazineHE";
-        };
-    };
+if (_shellType == "" and _batteryClass isKindOf "StaticMortar") then {
+    private _mags = [_batteryClass] call A3A_fnc_getMortarMags;
+    {
+        if (_y#0 == _roundType) exitWith {_shellType = _x};
+    } forEach _mags;
 };
 
 if (_shellType == "") exitWith {
-    ServerDebug_1("Unable to find ammoType for Classname - %1", _batteryClass);
+    ServerDebug_2("Unable to find ammoType %1 for %2", _roundType, _batteryClass);
+    _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false, true];
 };
+Trace_1("Shell type %1", _shellType);
+
 
 /////// FINAL ARTILLERY RANGE CHECK \\\\\\\
 if !(_targetPos inRangeOfArtillery [[_selectedBattery], _shellType]) exitWith {

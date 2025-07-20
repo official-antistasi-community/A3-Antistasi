@@ -657,6 +657,7 @@ class CfgFunctions
             class clearTargetArea {};
             class createSupport {};
             class getArtilleryRanges {};
+            class getMortarMags {};
             class initSupports {};
             class maxDefenceSpend {};
             class requestArtillery {};

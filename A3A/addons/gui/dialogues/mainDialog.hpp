@@ -858,6 +858,51 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 4 * GRID_H;
                         };
 
+                        class ShellTypeLabel : A3A_Text
+                        {
+                            idc = -1;
+                            text = $STR_antistasi_dialogs_main_hc_fire_mission_shell_type_label;
+                            colorBackground[] = A3A_COLOR_BACKGROUND;
+                            x = 2 * GRID_W;
+                            y = 13 * GRID_H;
+                            w = 20 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ShellTypeBox: A3A_ComboBox_Small 
+                        {
+                            idc = A3A_IDC_SHELLTYPEBOX;
+                            onLBSelChanged = "[""fireMissionSelectionChanged"",[""roundType""]] call A3A_GUI_fnc_commanderTab;";
+                            x = 22 * GRID_W;
+                            y = 13 * GRID_H;
+                            w = 30 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class AttributeLabel : A3A_Text
+                        {
+                            idc = A3A_IDC_ATTRIBUTELABEL;
+                            text = "";
+                            colorBackground[] = A3A_COLOR_BACKGROUND;
+                            x = 2 * GRID_W;
+                            y = 18 * GRID_H;
+                            w = 25 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class AttributeText : A3A_Text
+                        {
+                            idc = A3A_IDC_ATTRIBUTETEXT;
+                            text = "";
+                            colorBackground[] = A3A_COLOR_BACKGROUND;
+                            style = ST_RIGHT;
+                            x = 27 * GRID_W;
+                            y = 18 * GRID_H;
+                            w = 25 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        /*
                         class HeRoundsCountLabel : A3A_Text
                         {
                             idc = -1;
@@ -903,6 +948,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             w = 25 * GRID_W;
                             h = 4 * GRID_H;
                         };
+                        
 
                         class ShellTypeControlsGroup : A3A_ControlsGroupNoScrollbars
                         {
@@ -914,17 +960,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                             class controls
                             {
-                                class ShellTypeLabel : A3A_Text
-                                {
-                                    idc = -1;
-                                    text = $STR_antistasi_dialogs_main_hc_fire_mission_shell_type_label;
-                                    colorBackground[] = A3A_COLOR_BACKGROUND;
-                                    x = 0 * GRID_W;
-                                    y = 0 * GRID_H;
-                                    w = 20 * GRID_W;
-                                    h = 4 * GRID_H;
-                                };
-
+                                
                                 class HeButton : A3A_Button
                                 {
                                     idc = A3A_IDC_HEBUTTON;
@@ -959,14 +995,15 @@ class A3A_MainDialog : A3A_TabbedDialog
                                 };
                             };
                         };
+                        */
 
                         class MissionTypeControlsGroup : A3A_ControlsGroupNoScrollbars
                         {
                             idc = -1;
                             x = 2 * GRID_W;
-                            y = 32 * GRID_H;
+                            y = 27 * GRID_H;
                             w = 50 * GRID_W;
-                            h = 4 * GRID_H;
+                            h = 8 * GRID_H;
 
                             class controls
                             {
@@ -986,13 +1023,15 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     idc = A3A_IDC_POINTSTRIKEBUTTON;
                                     text = $STR_antistasi_dialogs_main_hc_fire_mission_type_point;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
+                                    tooltip = "Strike a point with as many rounds as asked as fast as possible.\n\nUsed for directly engaging any target of opportunity.\n\nUseful shells: HE, Smoke";
                                     onButtonClick = "[""fireMissionSelectionChanged"",[""point""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 20 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 15 * GRID_W;
                                     h = 4 * GRID_H;
 
-                                    // Colors, see HE button for clarification
+                                    // Colors are a bit different on these because we use them as radio buttons
+                                    // We disable them to show that they are active
                                     colorDisabled[] = A3A_COLOR_BUTTON_TEXT;
                                     colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
                                 };
@@ -1002,13 +1041,48 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     idc = A3A_IDC_BARRAGEBUTTON;
                                     text = $STR_antistasi_dialogs_main_hc_fire_mission_type_barrage;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
+                                    tooltip = "Create a rolling barrage between two points with 10-meter dispersion between impacts.\n\nUsed for routing enemies out of a specific area or street.\n\nUseful shells: HE, Smoke";
                                     onButtonClick = "[""fireMissionSelectionChanged"",[""barrage""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 35 * GRID_W;
                                     y = 0 * GRID_H;
                                     w = 15 * GRID_W;
                                     h = 4 * GRID_H;
 
-                                    // Colors, see HE button for clarification
+                                    // Colors, see point button for clarification
+                                    colorDisabled[] = A3A_COLOR_BUTTON_TEXT;
+                                    colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
+                                };
+
+                                class SuppressButton : A3A_Button
+                                {
+                                    idc = A3A_IDC_SUPPRESSBUTTON;
+                                    text = "Suppress";
+                                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                                    tooltip = "Suppress an area as many rounds as needed with a 10-second delay between impacts.\n\nUsed for clearing large areas and buying time to move.\n\nUseful shells: HE";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""suppress""]] call A3A_GUI_fnc_commanderTab;";
+                                    x = 20 * GRID_W;
+                                    y = 4 * GRID_H;
+                                    w = 15 * GRID_W;
+                                    h = 4 * GRID_H;
+
+                                    // Colors, see point button for clarification
+                                    colorDisabled[] = A3A_COLOR_BUTTON_TEXT;
+                                    colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
+                                };
+
+                                class ContButton : A3A_Button
+                                {
+                                    idc = A3A_IDC_CONTBUTTON;
+                                    text = "Cont";
+                                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                                    tooltip = "Continuously several rounds on a target over a long period of time.\n\nUsed to continuously illuminate an area with flares during nighttime.\n\nUseful shells: Illumination / Flare";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""cont""]] call A3A_GUI_fnc_commanderTab;";
+                                    x = 35 * GRID_W;
+                                    y = 4 * GRID_H;
+                                    w = 15 * GRID_W;
+                                    h = 4 * GRID_H;
+
+                                    // Colors, see point button for clarification
                                     colorDisabled[] = A3A_COLOR_BUTTON_TEXT;
                                     colorBackgroundDisabled[] = A3A_COLOR_BUTTON_ACTIVE;
                                 };
@@ -1171,6 +1245,114 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     y = 0 * GRID_H;
                                     w = 8 * GRID_W;
                                     h = 4 * GRID_H;
+                                };
+                            };
+                        };
+
+                        class RadiusControlsGroup : A3A_ControlsGroupNoScrollbars
+                        {
+                            idc = A3A_IDC_RADIUSCONTROLSGROUP;
+                            x = 2 * GRID_W;
+                            y = 47 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 4 * GRID_H;
+
+                            class controls
+                            {
+                                class RadiusLabel : A3A_Text
+                                {
+                                    idc = A3A_IDC_RADIUSLABEL;
+                                    text = "Radius";
+                                    colorBackground[] = A3A_COLOR_BACKGROUND;
+                                    x = 0 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 20 * GRID_W;
+                                    h = 4 * GRID_H;
+                                };
+
+                                class RadiusEditbox : A3A_Edit
+                                {
+                                    idc = A3A_IDC_RADIUSEDITBOX;
+                                    text = "";
+                                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                                    style = ST_RIGHT + ST_NO_RECT;
+                                    onLoad = "_this#0 ctrlEnable false";
+                                    colorDisabled[] = A3A_COLOR_TEXT;
+                                    colorBackground[] = A3A_COLOR_BLACK;
+                                    x = 20 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 22 * GRID_W;
+                                    h = 4 * GRID_H;
+                                };
+
+                                class AddRadiusButton : A3A_Button
+                                {
+                                    idc = A3A_IDC_ADDROUNDSBUTTON;
+                                    text = "+";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""addradius""]] call A3A_GUI_fnc_commanderTab;";
+                                    x = 42 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 4 * GRID_W;
+                                    h = 4 * GRID_H;
+                                };
+
+                                class SubRadiusButton : A3A_Button
+                                {
+                                    idc = A3A_IDC_SUBROUNDSBUTTON;
+                                    text = "-";
+                                    onButtonClick = "[""fireMissionSelectionChanged"",[""subradius""]] call A3A_GUI_fnc_commanderTab;";
+                                    x = 46 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 4 * GRID_W;
+                                    h = 4 * GRID_H;
+                                };
+                            };
+                        };
+
+                        class TimingControlsGroup : A3A_ControlsGroupNoScrollbars
+                        {
+                            idc = A3A_IDC_TIMINGCONTROLSGROUP;
+                            x = 2 * GRID_W;
+                            y = 47 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 4 * GRID_H;
+
+                            class controls
+                            {
+                                class TimingLabel : A3A_Text
+                                {
+                                    idc = A3A_IDC_TIMINGLABEL;
+                                    text = "Repeat Time";
+                                    colorBackground[] = A3A_COLOR_BACKGROUND;
+                                    x = 0 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 20 * GRID_W;
+                                    h = 4 * GRID_H;
+                                };
+
+                                class TimingEditBox : A3A_Edit
+                                {
+                                    idc = A3A_IDC_TIMINGEDITBOX;
+                                    text = "";
+                                    sizeEx = GUI_TEXT_SIZE_SMALL;
+                                    style = ST_RIGHT + ST_NO_RECT;
+                                    onLoad = "_this#0 ctrlEnable false";
+                                    colorDisabled[] = A3A_COLOR_TEXT;
+                                    colorBackground[] = A3A_COLOR_BLACK;
+                                    x = 20 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 10 * GRID_W;
+                                    h = 4 * GRID_H;
+                                };
+
+                                class TimingEditSlider : A3A_Slider
+                                {
+                                    idc = A3A_IDC_TIMINGEDITSLIDER;
+                                    x = 30 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 20 * GRID_W;
+                                    h = 4 * GRID_H;
+                                    onSliderPosChanged = "[""fireMissionSelectionChanged"",[""edittiming""]] call A3A_GUI_fnc_commanderTab;";
                                 };
                             };
                         };
