@@ -126,6 +126,7 @@ private _usedBuildings = [];
 
         private _building = _x;
         private _buildingPlaces = (_buildingHM get typeof _x);
+        if (isNil "_buildingPlaces") then { continue };             // currently possible due to isKindOf matching
         {
             private _pos = _building modelToWorld _x#1;
             private _dir = (_x#2 + getDir _building + 360) % 360;
