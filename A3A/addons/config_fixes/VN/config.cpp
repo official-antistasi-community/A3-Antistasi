@@ -11,7 +11,7 @@ class CfgPatches
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"vn_weapons", "cam_lao_nam_c"};
+        requiredAddons[] = {"loadorder_f_vietnam"};
         skipWhenMissingDependencies = 1;
         author = AUTHOR;
         authors[] = { AUTHORS };
