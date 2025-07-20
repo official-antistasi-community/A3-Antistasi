@@ -26,4 +26,7 @@ class SPE_Mortain {
 		// Some extra stuff from vanilla
 		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
 	};
+	policeStationTypes[] = {
+		"Land_SPE_House_Big_04", "Land_SPE_House_Big_02", "Land_SPE_Farmhouse_01", "Land_SPE_House_Small_01", "Land_SPE_House_Big_03"
+	};
 };
