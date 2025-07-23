@@ -2,9 +2,13 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_serverID", "_campaignID", "_worldname", ["_gametype", "Greenfor"]];
+params ["_serverID", "_campaignID", "_worldname", ["_gametype", "Greenfor"], ["_deleteConfigOnly",false]];
 
-Info_1("Deleting saved game with parameters %1", _this);
+if (_deleteConfigOnly) then {
+	Info_1("Deleting old config save variables with parameters %1", _this);
+} else {
+	Info_1("Deleting saved game with parameters %1", _this);
+};
 
 private _namespace = [profileNamespace, missionProfileNamespace] select (_serverID isEqualType false);
 
@@ -33,12 +37,7 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 
 } forEach _savedPlayers;
 
-
-// Delete all server data for specified campaign
-{
-	_namespace setVariable [_x + _postfix, nil];
-
-} forEach ["countCA", "gameMode", "difficultyX", "bombRuns", "smallCAmrk", "membersX", "antennas",
+private _varsToDelete = ["countCA", "gameMode", "difficultyX", "bombRuns", "smallCAmrk", "membersX", "antennas",
 	"mrkSDK", "mrkCSAT", "posHQ", "dateX", "skillFIA", "destroyedSites", "distanceSPWN", "civPerc",
 	"chopForest", "maxUnits", "nextTick", "weather", "destroyedBuildings", "aggressionOccupants",
 	"aggressionInvaders", "resourcesFIA", "hr", "vehInGarage", "staticsX", "jna_datalist",
@@ -49,6 +48,13 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC", "arsenalLimits", "rebelLoadouts",
 	"minorSites", "radioKeys"];
 
+if !(_deleteConfigOnly) then {_varsToDelete pushBack "json"};
+
+// Delete all server data for specified campaign
+{
+	_namespace setVariable [_x + _postfix, nil];
+
+} forEach _varsToDelete;
 
 // Remove this campaign from the save list, if present
 private _saveList = [_namespace getVariable "antistasiSavedGames"] param [0, [], [[]]];

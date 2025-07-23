@@ -8,6 +8,15 @@
 private _optionalVars = ["name", "version", "saveTime", "ended", "params", "factions", "DLC", "addonVics"];
 
 private _fnc_gameMissing = { isNil {"membersX" call A3A_fnc_returnSavedStat} };
+private _fnc_isJSON = {
+    params ["_game"];
+    _data = ["JSON"] call A3A_fnc_returnSavedStat;
+    if (isNil "_data") exitWith {false};
+    A3A_jsonSaveDataHM = fromJSON _data;
+    A3A_useJSONSave = true;
+    _game set ["hasJSONSave",true];
+    true;
+};
 private _saveData = [];
 private _campaignIDs = [];
 private _serverID = profileNameSpace getVariable ["ss_ServerID",""];
@@ -19,10 +28,11 @@ private _saveList = [profileNamespace getVariable "antistasiSavedGames"] param [
     _campaignIDs pushBack _cid;
     if (_gameType == "Blufor") then { continue };		   // maybe compatible, but complicates things
     A3A_saveTarget = [_serverID, _cid, _map];
-    if (call _fnc_gameMissing) then { continue };	   // check there's actually data
-
     private _game = createHashMapFromArray [["serverID", _serverID], ["gameID", _cid], ["map", _map]];
+    if (!([_game] call _fnc_isJSON) && {call _fnc_gameMissing}) then { continue };	   // check there's actually data
     { _game set [_x, _x call A3A_fnc_returnSavedStat] } forEach _optionalVars;
+    A3A_useJSONSave = false;
+    A3A_jsonSaveDataHM = createHashMap;
     _saveData pushBack _game;
 
 } forEach _saveList;
@@ -40,10 +50,11 @@ private _saveList2 = [missionProfileNamespace getVariable "antistasiSavedGames"]
 {
     _x params ["_cid", "_map"];
     A3A_saveTarget = [false, _cid, _map];
-    if (call _fnc_gameMissing) then { continue };	   // check there's actually data
-
     private _game = createHashMapFromArray [["serverID", false], ["gameID", _cid], ["map", _map]];
+     if (!([_game] call _fnc_isJSON) && {call _fnc_gameMissing}) then { continue };	   // check there's actually data
     { _game set [_x, _x call A3A_fnc_returnSavedStat] } forEach _optionalVars;
+    A3A_useJSONSave = false;
+    A3A_jsonSaveDataHM = createHashMap;
     _saveData pushBack _game;
 
 } forEach _saveList2;

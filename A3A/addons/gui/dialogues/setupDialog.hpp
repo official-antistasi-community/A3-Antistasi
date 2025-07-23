@@ -225,6 +225,24 @@ class A3A_SetupDialog : A3A_TabbedDialog
                     h = 6 * GRID_H;
                 };
 
+                class ExportButton: A3A_Button {
+                    idc = A3A_IDC_SETUP_EXPORTBUTTON;
+                    text = $STR_antistasi_dialogs_setup_exportSave;
+                    onButtonClick = "['exportSave'] call A3A_GUI_fnc_setupLoadgameTab";
+                    x = 126 * GRID_W;
+                    y = 70 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+                class ImportButton: A3A_Button {
+                    idc = A3A_IDC_SETUP_IMPORTBUTTON;
+                    text = $STR_antistasi_dialogs_setup_importSave;
+                    onButtonClick = "['importSave'] call A3A_GUI_fnc_setupLoadgameTab";
+                    x = 126 * GRID_W;
+                    y = 77 * GRID_H;
+                    w = 30 * GRID_W;
+                    h = 5 * GRID_H;
+                };
                 class DeleteButton: A3A_Button {
                     idc = A3A_IDC_SETUP_DELETEBUTTON;
                     text = $STR_antistasi_dialogs_setup_delete_game;
@@ -516,6 +534,84 @@ class A3A_SetupHQPosDialog
 class A3A_TextMultiCenter: A3A_Text
 {
     style = ST_CENTER + ST_MULTI + ST_NO_RECT;
+};
+
+class A3A_SetupTransferDialog
+{
+    idd = A3A_IDD_SETUPTRANSFERDIALOG;
+    onLoad = "['onLoad'] spawn A3A_GUI_fnc_setupTransferDialog";
+    onUnload = "['onUnload'] call A3A_GUI_fnc_setupTransferDialog";
+
+    #define DIALOG_X CENTER_X(80) // Global x pos of dialog
+    #define DIALOG_Y CENTER_Y(44) // Global y pos of dialog
+
+    class Controls
+    {
+        class Titlebar : A3A_TitlebarText
+        {
+            idc = -1;
+            text = $STR_antistasi_dialogs_setup_title_saveTransfer;
+            colorBackground[] = A3A_COLOR_TITLEBAR_BACKGROUND;
+            x = DIALOG_X;
+            y = DIALOG_Y - 5 * GRID_H;
+            w = 80 * GRID_W;
+            h = 5 * GRID_H;
+        };
+        class Background : A3A_Background
+        {
+            idc = -1;
+            x = DIALOG_X;
+            y = DIALOG_Y;
+            w = 80 * GRID_W;
+            h = 44 * GRID_H;
+        };
+        class TransferInfoText : A3A_TextMulti
+        {
+            text = "Preparing...";
+            idc = A3A_IDC_SETUP_TRANSFERINFOLEFTTEXT;
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 4 * GRID_H;
+            w = 72 * GRID_W;
+            h = 20 * GRID_H;
+        };
+        class TransferTextBox : A3A_Edit
+        {
+            text = "";
+            idc = A3A_IDC_SETUP_TRANSFERTEXTBOX;
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 24 * GRID_H;
+            w = 72 * GRID_W;
+            h = 7 * GRID_H;
+        };
+        class ConfirmText : A3A_TextMultiCenter
+        {
+            idc = A3A_IDC_SETUP_TRANSFERINFOCENTERTEXT;
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 4 * GRID_H;
+            w = 72 * GRID_W;
+            h = 27 * GRID_H;
+        };
+        class CancelButton : A3A_Button
+        {
+            idc = A3A_IDC_SETUP_TRANSFERCANCEL;
+            text = $STR_antistasi_dialogs_setup_confirm_cancel;
+            onButtonClick = "closeDialog 0";
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 35 * GRID_H;
+            w = 24 * GRID_W;
+            h = 5 * GRID_H;
+        };
+        class ImportButton : A3A_Button
+        {
+            idc = A3A_IDC_SETUP_TRANSFERIMPORT;
+            text = $STR_antistasi_dialogs_setup_importButton;
+            onButtonClick = "['importButtonPressed'] call A3A_GUI_fnc_setupTransferDialog";
+            x = DIALOG_X + 52 * GRID_W;
+            y = DIALOG_Y + 35 * GRID_H;
+            w = 24 * GRID_W;
+            h = 5 * GRID_H;
+        };
+    };
 };
 
 class A3A_SetupConfirmDialog

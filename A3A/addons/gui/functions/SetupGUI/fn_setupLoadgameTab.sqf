@@ -100,6 +100,24 @@ switch (_mode) do
                 ["fillParams"] call A3A_GUI_fnc_setupParamsTab;
             };
         };
+
+        private _index = _listboxCtrl getVariable ["rowIndex", -1];
+        private _exportButton = _display displayCtrl A3A_IDC_SETUP_EXPORTBUTTON;
+        if (_index == -1) exitWith {
+            _exportButton ctrlEnable false;
+            _exportButton ctrlSetTooltip localize "STR_antistasi_dialogs_setup_noExportSel";
+        };
+
+        /* Disabled for testing, reenable on merge
+        private _saveData = A3A_setup_saveData select _index;
+        private _saveHasJSON = _saveData getOrDefault ["hasJSONSave",false];
+        if !(_saveHasJSON) exitWith {
+            _exportButton ctrlEnable false;
+            _exportButton ctrlSetTooltip localize "STR_antistasi_dialogs_setup_noExportOld";
+        };
+        */
+        _exportButton ctrlEnable true;
+        _exportButton ctrlSetTooltip "";
     };
 
     case ("setSaveData"):
@@ -151,7 +169,8 @@ switch (_mode) do
     {
         private _saveData = createHashMap;
         private _confirmText = "";
-        if (cbChecked _newGameCtrl and !cbChecked _copyGameCtrl) then {
+        private _isNewGame = (cbChecked _newGameCtrl and !cbChecked _copyGameCtrl);
+        if (_isNewGame) then {
             _saveData set ["startType", "new"];
             _saveData set ["name", ctrlText (_display displayCtrl A3A_IDC_SETUP_NAMEEDITBOX)];
             _saveData set ["startPos", markerPos "Synd_HQ"];
@@ -174,6 +193,7 @@ switch (_mode) do
             _confirmText = _confirmText + format [localize "STR_A3A_fn_GUI_setupLoadgameTab_loadName" + ", ", _saveData get "name"];
         };
         _saveData set ["useNewNamespace", cbChecked (_display displayCtrl A3A_IDC_SETUP_NAMESPACECHECKBOX)];
+        A3A_useJSONSave = _isNewGame; // controls if the config save is deleted later
 
         // Factions tab: [factions, addonvics, DLC]
         private _factionData = ["getFactions"] call A3A_GUI_fnc_setupFactionsTab;
@@ -231,6 +251,24 @@ switch (_mode) do
     case ("setHQPos"):
     {
         createDialog "A3A_SetupHQPosDialog";
+    };
+
+    case ("exportSave"):
+    {
+        private _index = _listboxCtrl getVariable ["rowIndex", -1];
+        private _button = _display displayCtrl A3A_IDC_SETUP_EXPORTBUTTON;
+        if (_index == -1) exitWith {_button};
+
+        private _saveData = A3A_setup_saveData select _index;
+        _display setVariable ["exportSave", _saveData];
+        _display setVariable ["transferMode","export"];
+        createDialog "A3A_SetupTransferDialog";
+    };
+
+    case ("importSave"):
+    {
+        _display setVariable ["transferMode","import"];
+        createDialog "A3A_SetupTransferDialog";
     };
 
     case ("deleteGame"):

@@ -41,6 +41,10 @@ if (isClass (configFile/"CfgVehicles"/"vn_module_dynamicradiomusic_disable")) th
 call A3A_fnc_initVarCommon;
 call A3A_fnc_initZones;					// needed here because new-game setup needs to know where the markers are
 
+// Define variables for JSON save
+A3A_useJSONSave = false;
+A3A_jsonSaveDataHM = createHashMap;
+
 // Start up the monitor to handle the setup UI
 [] spawn A3A_fnc_setupMonitor;
 
@@ -114,6 +118,12 @@ if (_startType != "new") then
 {
     // Setup save info
     A3A_saveTarget = [A3A_saveData get "serverID", A3A_saveData get "gameID", worldName];
+
+    private _jsonData = ["JSON"] call A3A_fnc_returnSavedStat; // json save needs to happen after save target is updated but before loading any vars
+    if !(isNil "_jsonData") then {
+        A3A_useJSONSave = true;
+        A3A_jsonSaveDataHM = fromJSON _jsonData;
+    };
     // Sanity checks? hmm
 
     Info_1("Loading campaign with ID %1", A3A_saveData get "gameID");

@@ -24,6 +24,12 @@ private _translateMarker = {
     _mrk;
 };
 
+private _strToSide = createHashMapFromArray [
+    ["teamPlayer",teamPlayer],
+    ["Occupants",Occupants],
+    ["Invaders",Invaders]
+];
+
 //===========================================================================
 //ADD VARIABLES TO THIS ARRAY THAT NEED SPECIAL SCRIPTING TO LOAD
 private _specialVarLoads = [
@@ -99,7 +105,16 @@ if (_varName in _specialVarLoads) then {
         } forEach FactionGet(reb,"unitsSoldiers");
     };
     if (_varname == "HR_Garage") then {
-        [_varValue] call HR_GRG_fnc_loadSaveData;
+        private _grgData = _varValue;
+        private _cats = _grgData#0;
+        private _newGrgCats = [];
+        {
+            private _keys = (keys _x) apply {if (_x isEqualType 0) then {_x} else {call compile _x}};
+            private _hm = _keys createHashMapFromArray (values _x);
+            _newGrgCats pushback _hm;
+        } forEach _cats;
+        _grgData set [0, _newGrgCats];
+        [_grgData] call HR_GRG_fnc_loadSaveData;
     };
     if (_varName == 'vehInGarage') then { //convert old garage to new garage
         vehInGarage= [];
@@ -130,7 +145,7 @@ if (_varName in _specialVarLoads) then {
             (_varvalue select _i) params ["_typeMine", "_posMine", "_detected", "_dirMine"];
             private _mineX = createVehicle [_typeMine, _posMine, [], 0, "CAN_COLLIDE"];
             if !(isNil "_dirMine") then { _mineX setDir _dirMine };
-            {_x revealMine _mineX} forEach _detected;
+            {(_strToSide getorDefault [_x,_x]) revealMine _mineX} forEach _detected;
         };
     };
     if (_varName == 'garrison') then {
@@ -380,7 +395,7 @@ if (_varName in _specialVarLoads) then {
     };
     if (_varname == "minorSites") then {
         A3A_minorSitesHM = createHashMap;
-        { _y call A3A_fnc_addMinorSite } forEach _varValue;
+        { [_y#0, _y#1, _strToSide getorDefault [_y#2,_y#2], _y#3] call A3A_fnc_addMinorSite } forEach _varValue;
         // pair refs get sanity checked in initMinorSites later
     };
 

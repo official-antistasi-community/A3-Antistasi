@@ -18,6 +18,12 @@ private _saveToNewNamespace = _serverID isEqualType false;
 if (!_saveToNewNamespace) then { profileNamespace setVariable ["ss_serverID", _serverID] };			// backwards compatibility
 private _namespace = [profileNamespace, missionProfileNamespace] select _saveToNewNamespace;
 
+// If the save is not currently in JSON, it will delete the old save and add neccesary params
+if (!A3A_useJSONSave) then {
+	A3A_useJSONSave = true;
+	A3A_saveTarget params ["_serverID", "_campaignID", "_map"];
+	[_serverID, _campaignID, _map, nil, true] call A3A_fnc_deleteSave;
+};
 
 // Save each player with global flag
 {
@@ -92,7 +98,17 @@ private _antennasDeadPositions = [];
 private _destroyedPositions = destroyedBuildings apply { getPosATL _x };
 ["destroyedBuildings",_destroyedPositions] call A3A_fnc_setStatVariable;
 ["controlsSDK",[]] call A3A_fnc_setStatVariable;					// backwards compatibility
-["minorSites", A3A_minorSitesHM] call A3A_fnc_setStatVariable;
+private _modifiedSites = createHashMap;
+private _sideToStr = createHashMapFromArray [
+	[teamPlayer,"teamPlayer"],
+	[Occupants,"Occupants"],
+	[Invaders,"Invaders"]
+];
+{
+	private _newSide = _sideToStr getOrDefault [_y#2, _y#2];
+	_modifiedSites set [_x, [_y#0, _y#1, _newSide, _y#3]];
+} forEach A3A_minorSitesHM;
+["minorSites", _modifiedSites] call A3A_fnc_setStatVariable;
 
 //Save aggression values
 ["aggressionOccupants", [aggressionLevelOccupants, aggressionStackOccupants]] call A3A_fnc_setStatVariable;
@@ -136,7 +152,16 @@ _vehInGarage = _vehInGarage + vehInGarage;
 ["resourcesFIA", _resourcesBackground] call A3A_fnc_setStatVariable;
 ["hr", _hrBackground] call A3A_fnc_setStatVariable;
 ["vehInGarage", _vehInGarage] call A3A_fnc_setStatVariable;
-["HR_Garage", [] call HR_GRG_fnc_getSaveData] call A3A_fnc_setStatVariable;
+private _grgData = [] call HR_GRG_fnc_getSaveData;
+private _cats = _grgData#0;
+private _newGrgCats = [];
+{
+	private _keys = (keys _x) apply {str _x};
+	private _hm = _keys createHashMapFromArray (values _x);
+	_newGrgCats pushback _hm;
+} forEach _cats;
+_grgData set [0, _newGrgCats];
+["HR_Garage", _grgData] call A3A_fnc_setStatVariable;
 
 _arrayEst = [];
 {
@@ -226,13 +251,13 @@ private _mineChance = 500 / (500 max count allMines);
 	_dirMine = getDir _x;
 	_detected = [];
 	if (_x mineDetectedBy teamPlayer) then {
-		_detected pushBack teamPlayer
+		_detected pushBack "teamPlayer"
 	};
 	if (_x mineDetectedBy Occupants) then {
-		_detected pushBack Occupants
+		_detected pushBack "Occupants"
 	};
 	if (_x mineDetectedBy Invaders) then {
-		_detected pushBack Invaders
+		_detected pushBack "Invaders"
 	};
 	_arrayMines pushBack [_typeMine,_posMine,_detected,_dirMine];
 } forEach allMines;
@@ -375,6 +400,7 @@ _fuelAmountleftArray = [];
 //Saving the state of the testing timer
 ["testingTimerIsActive", testingTimerIsActive] call A3A_fnc_setStatVariable;
 
+["JSON",toJSON A3A_jsonSaveDataHM,true] call A3A_fnc_setStatVariable;
 if (_saveToNewNamespace) then { saveMissionProfileNamespace } else { saveProfileNamespace };
 
 savingServer = false;

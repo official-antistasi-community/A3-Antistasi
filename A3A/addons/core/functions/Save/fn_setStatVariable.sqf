@@ -1,8 +1,13 @@
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
 
-params ["_varName", "_varValue"];
+params ["_varName", "_varValue", ["_setToProfile",false]];
 A3A_saveTarget params ["_serverID", "_campaignID", "_map"];
-
 if (isNil "_varValue") exitWith {};			// hmm...
+
+if (A3A_useJSONSave && !_setToProfile) exitWith {
+	A3A_jsonSaveDataHM set [_varName, _varValue];
+};
 
 // Simple version for new missionProfileNamespace saves
 if (_serverID isEqualType false) exitWith {
