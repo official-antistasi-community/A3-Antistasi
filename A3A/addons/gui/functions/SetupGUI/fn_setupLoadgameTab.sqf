@@ -108,14 +108,13 @@ switch (_mode) do
             _exportButton ctrlSetTooltip localize "STR_antistasi_dialogs_setup_noExportSel";
         };
 
-        /* Disabled for testing, reenable on merge
         private _saveData = A3A_setup_saveData select _index;
         private _saveHasJSON = _saveData getOrDefault ["hasJSONSave",false];
         if !(_saveHasJSON) exitWith {
             _exportButton ctrlEnable false;
             _exportButton ctrlSetTooltip localize "STR_antistasi_dialogs_setup_noExportOld";
         };
-        */
+        
         _exportButton ctrlEnable true;
         _exportButton ctrlSetTooltip "";
     };

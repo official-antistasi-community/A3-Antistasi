@@ -46,7 +46,7 @@ switch (_mode) do
         _editCtrl ctrlShow true;
         _importButton ctrlShow false;
         private _saveData = _parent getVariable "exportSave";
-        _textLeftCtrl ctrlSetText format [localize "STR_antistasi_dialogs_setup_transfer_downloading",_saveData get "name",_saveData get "gameID"];
+        _textLeftCtrl ctrlSetStructuredText parseText format [localize "STR_antistasi_dialogs_setup_transfer_downloading",_saveData get "name",_saveData get "gameID"];
         [_saveData, {
             private _saveData = _this;
             _oldSaveTarget = A3A_saveTarget;
@@ -71,7 +71,7 @@ switch (_mode) do
         if (isNull _display) exitWith {}; // if display is closed during
         private _saveData = _parent getVariable "exportSave";
         _editCtrl ctrlSetText (toJSON A3A_jsonSaveDataHM);
-        _textLeftCtrl ctrlSetText format [localize "STR_antistasi_dialogs_setup_transfer_exportReady",_saveData get "name",_saveData get "gameID"];
+        _textLeftCtrl ctrlSetStructuredText parseText format [localize "STR_antistasi_dialogs_setup_transfer_exportReady",_saveData get "name",_saveData get "gameID"];
     };
 
     case ("import"):
@@ -80,7 +80,7 @@ switch (_mode) do
         _textCenterCtrl ctrlShow false;
         _editCtrl ctrlShow true;
         _importButton ctrlShow true;
-        _textLeftCtrl ctrlSetText format [localize "STR_antistasi_dialogs_setup_transfer_importReady",localize "STR_antistasi_dialogs_setup_import"];
+        _textLeftCtrl ctrlSetStructuredText parseText format [localize "STR_antistasi_dialogs_setup_transfer_importReady",localize "STR_antistasi_dialogs_setup_importButton"];
     };
 
     case ("importButtonPressed"):
@@ -104,9 +104,9 @@ switch (_mode) do
                 if (_x get "gameID" == _id) then {_isOverwrite = _x get "name"};
             } forEach A3A_setup_saveData;
             if !(_isOverwrite == "") then {
-                _textCenterCtrl ctrlSetText format [localize "STR_antistasi_dialogs_setup_transfer_importConfirm1",_name, _id, _isOverwrite];
+                _textCenterCtrl ctrlSetStructuredText parseText format [localize "STR_antistasi_dialogs_setup_transfer_importConfirm1",_name, _id, _isOverwrite];
             } else {
-                _textCenterCtrl ctrlSetText format [localize "STR_antistasi_dialogs_setup_transfer_importConfirm2",_name, _id];
+                _textCenterCtrl ctrlSetStructuredText parseText format [localize "STR_antistasi_dialogs_setup_transfer_importConfirm2",_name, _id];
             };
             
             _importButton ctrlEnable true;

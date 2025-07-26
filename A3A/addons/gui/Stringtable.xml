@@ -4263,7 +4263,7 @@
         <Russian>DLC и Аддоны</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_exportSave">
-        <Original>Import Save</Original>
+        <Original>Export Save</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_faction_tab_button">
         <Original>Factions</Original>

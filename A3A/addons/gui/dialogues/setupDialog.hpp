@@ -565,7 +565,7 @@ class A3A_SetupTransferDialog
             w = 80 * GRID_W;
             h = 44 * GRID_H;
         };
-        class TransferInfoText : A3A_TextMulti
+        class TransferInfoText : A3A_StructuredText
         {
             text = "Preparing...";
             idc = A3A_IDC_SETUP_TRANSFERINFOLEFTTEXT;
@@ -583,7 +583,7 @@ class A3A_SetupTransferDialog
             w = 72 * GRID_W;
             h = 7 * GRID_H;
         };
-        class ConfirmText : A3A_TextMultiCenter
+        class ConfirmText : A3A_StructuredText
         {
             idc = A3A_IDC_SETUP_TRANSFERINFOCENTERTEXT;
             x = DIALOG_X + 4 * GRID_W;
