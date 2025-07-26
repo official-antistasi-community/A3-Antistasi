@@ -365,6 +365,22 @@ class Params
         texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
         default = 0;
     };
+    class startWithILBERadios
+    {
+        attr[] = {"server"};
+        title = "[ILBE] Start with ILBE Radio Backpacks?";
+        values[] = {0,1};
+        texts[] = {"No","Yes"};
+        default = 1;
+    };
+    class startWithcTabItems
+    {
+        attr[] = {"server"};
+        title = "[cTab] Start with cTab Items?";
+        values[] = {0,1};
+        texts[] = {"No","Yes"};
+        default = 1;
+    };
     class helmetLossChance
     {
         title = $STR_A3A_Params_helmetLossChance_title;
