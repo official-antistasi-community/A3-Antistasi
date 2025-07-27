@@ -48,7 +48,8 @@ if (!_isRebel) then
     };
 
     // Otherwise retreat (maybe) and refund them if they're still alive after a while
-    { _x spawn A3A_fnc_rebelReturnToBase } forEach _groups;
+    private _wasHQ = _marker == "Synd_HQ";
+    { [_x, _wasHQ] spawn A3A_fnc_rebelReturnToBase } forEach _groups;
 };
 
 _garrison set ["troops", []];

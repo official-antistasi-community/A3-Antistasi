@@ -1,16 +1,18 @@
 /*
     Evacuate a rebel infantry group towards the nearest rebel marker
     Despawn with partial refund after two minutes
+    Assumes that spawner and markerX vars are already cleared, and units are on foot
 
     Parameters:
     1. <GROUP> Group to order
+    2. <BOOL> True if retreating from an HQ that was lost or moved under fire
 
     Environment: Any
 */
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_group"];
+params ["_group", "_wasHQ"];
 
 // should probably put all the leftovers into one group... but it's a pain so nope
 
@@ -26,10 +28,17 @@ if (!isNil "_AIScriptHandle") then { terminate _AIScriptHandle; };   // _group s
 { deleteWaypoint _x } forEachReversed (waypoints _group);
 
 
-// Retreat towards nearest friendly location (always exists, because HQ)
+// Retreat towards nearest friendly location
 private _potentials = outposts + airportsX + resourcesX + factories + seaports;
 _potentials = _potentials select { sidesX getVariable [_x, sideUnknown] == side _group };
-[_potentials + ["Synd_HQ"], leader _group] call BIS_fnc_nearestPosition;
+if (!_wasHQ) then { _potentials pushBack "Synd_HQ" };
+
+private _retreatPos = if (_potentials isEqualTo []) then {
+    // If we're running from HQ and there are no other markers, just run in random direction
+    getPosATL leader _group getPos [1000, random 360]
+} else {
+    markerPos ([_potentials, leader _group] call BIS_fnc_nearestPosition);
+};
 
 {
     _x disableAI "AUTOCOMBAT";
@@ -39,7 +48,7 @@ _potentials = _potentials select { sidesX getVariable [_x, sideUnknown] == side 
 } forEach units _group;
 
 _group setBehaviourStrong "AWARE";
-private _wp = _group addWaypoint [markerPos _marker, 50];
+private _wp = _group addWaypoint [_retreatPos, 50];
 _group setCurrentWaypoint _wp;
 ServerDebug_1("Group %1 escaping to rebel territory", _group);
 
@@ -57,7 +66,7 @@ ServerDebug_1("Group %1 escaping to rebel territory", _group);
         if (_x getVariable ["incapacitated", false]) then { _x setDamage 1; continue };
 
         _refundHR = _refundHR + 1;
-        _refundCash = _refundCash + (server getVariable [_x getVariable "unitType", 0] / 2);
+        _refundCash = _refundCash + 0.5 * (server getVariable [_x getVariable "unitType", 0]);
         deleteVehicle _x;
 
     } forEach units _group;
