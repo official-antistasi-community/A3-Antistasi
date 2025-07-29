@@ -49,6 +49,9 @@ private _disabledTowns = getArray (_mapInfo/"disabledTowns");
 {server setVariable [_x select 0,_x select 1]} forEach _townPopulations;
 private _hardCodedPopulation = _townPopulations isNotEqualTo [];
 
+private _popMult = getNumber (_mapInfo/"populationMult");
+if (_popMult == 0) then { _popMult = 1 };
+
 "(toLower getText (_x >> ""type"") in [""namecitycapital"",""namecity"",""namevillage"",""citycenter""]) &&
 !(getText (_x >> ""Name"") isEqualTo """") &&
 !((configName _x) in _disabledTowns)"
@@ -74,6 +77,9 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	else {
 		_numCiv = (count (nearestObjects [_pos, ["house"], _size]));
 	};
+
+	// This can be used without hardcoded population
+	_numCiv = ceil (_numCiv * _popMult);
 
 	_roads = nearestTerrainObjects [_pos, ["MAIN ROAD", "ROAD", "TRACK"], _size, true, true];
 	if (count _roads > 0) then {
