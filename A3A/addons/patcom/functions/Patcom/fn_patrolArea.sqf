@@ -65,7 +65,7 @@ if (_group getVariable "PATCOM_WaypointTime" < serverTime) exitWith {
 };
 
 // Check for current waypoints and make sure they are type MOVE for patrol
-if (currentWaypoint _group == count waypoints _group || waypointType [_group, currentWaypoint _group] != "MOVE") then {
+if ((waypointType [_group, currentWaypoint _group] != "MOVE") || ((waypointName [_group, currentWaypoint _group]) != "PATCOM_PATROL_AREA")) then {
     if (_searchBuildings) then {
         // Percentage chance on searching a nearby building.
         if (15 > random 100) exitWith {

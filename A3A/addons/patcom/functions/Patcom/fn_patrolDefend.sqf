@@ -35,6 +35,16 @@ params [
 
 private _leader = leader _group;
 
+// Get home position of the unit.
+private _groupHomePosition = _group getVariable "PATCOM_Patrol_Home";
+private _patrolParams = _group getVariable "PATCOM_Patrol_Params";
+
+// We check to see if the waypoint is still active after 3 minutes. If waypoint isn't complete the unit is likely stuck.
+if (_group getVariable "PATCOM_WaypointTime" < serverTime) exitWith {
+    // Return home
+    [_group, _groupHomePosition, "MOVE", "PATCOM_PATROL_DEFEND", -1, _patrolParams # 1] call A3A_fnc_patrolCreateWaypoint;
+};
+
 [_group, "SAFE", "LIMITED", "COLUMN", "WHITE", "AUTO"] call A3A_fnc_patrolSetCombatModes;
 _group setVariable ["PATCOM_Group_State", "CALM"];
 
