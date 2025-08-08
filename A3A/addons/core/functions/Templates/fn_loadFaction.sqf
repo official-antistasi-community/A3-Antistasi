@@ -50,18 +50,18 @@ private _allLoadouts = createHashMap;
 _dataStore set ["loadouts", _allLoadouts];
 
 private _fnc_saveUnitToTemplate = {
-	params ["_typeName", "_loadouts", ["_traits", []]];
-	private _unitDefinition = [_loadouts, _traits];
+	params ["_typeName", "_loadouts", ["_traits", []], ["_baseClass", ""]];
+	private _unitDefinition = [_loadouts, _traits, _baseClass];
 	_allLoadouts set [_typeName, _unitDefinition];
 };
 
 private _fnc_generateAndSaveUnitToTemplate = {
-	params ["_name", "_template", "_loadoutData", "_traits", "_count"];
+	params ["_name", "_template", "_loadoutData", "_traits", "_count", "_baseClass"];
 	private _loadouts = [];
 	for "_i" from 1 to _count do {
 		_loadouts pushBack ([_template, _loadoutData] call A3A_fnc_loadout_builder);
 	};
-	[_name, _loadouts, _traits] call _fnc_saveUnitToTemplate;
+	[_name, _loadouts, _traits, _baseClass] call _fnc_saveUnitToTemplate;
 };
 
 private _fnc_generateAndSaveUnitsToTemplate = {
@@ -74,9 +74,9 @@ private _fnc_generateAndSaveUnitsToTemplate = {
 			while {_unitTemplates isNotEqualTo [] and diag_tickTime < _endTime} do {
 				private _unitLine = _unitTemplates deleteAt 0;			// not many of these, array shuffle is cheap
 
-				_unitLine params ["_name", "_template", ["_traits", []], ["_count", 5]];
+				_unitLine params ["_name", "_template", ["_traits", []], ["_count", 5], ["_baseClass", ""]];
 				private _finalName = format ["%1_%2", _prefix, _name];
-				[_finalName, _template, _loadoutData, _traits, _count] call _fnc_generateAndSaveUnitToTemplate;
+				[_finalName, _template, _loadoutData, _traits, _count, _baseClass] call _fnc_generateAndSaveUnitToTemplate;
 			};
 		};
 	};
