@@ -3,7 +3,6 @@ FIX_LINE_NUMBERS()
 
 params ["_varname", ["_getFromProfile",false]];
 A3A_saveTarget params ["_serverID", "_campaignID", "_map", ["_jsonData", false]];
-diag_log _jsonData;
 _jsonStat = "EMPTY JSON ENTRY";
 if (!(_jsonData isEqualTo false) && !_getFromProfile) then {
 	if (_jsonData isEqualType false) then {
@@ -14,7 +13,6 @@ if (!(_jsonData isEqualTo false) && !_getFromProfile) then {
 		A3A_saveTarget set [3,_jsonData];
 	};
 	if (_varName == "json") exitWith {_jsonStat = A3A_saveTarget#3};
-	diag_log _jsonData;
 	_jsonStat = _jsonData getOrDefault [_varName,"EMPTY JSON ENTRY"];
 };
 if (_jsonStat isNotEqualTo "EMPTY JSON ENTRY") exitWith {_jsonStat};

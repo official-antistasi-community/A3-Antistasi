@@ -399,7 +399,6 @@ class CfgFunctions
             class resourcecheck {};
             class tags {};
             class uniqueID {};
-            
         };
 
         class Intel {

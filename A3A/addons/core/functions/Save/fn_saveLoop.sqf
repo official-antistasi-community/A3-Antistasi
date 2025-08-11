@@ -14,7 +14,6 @@ autoSaveTime = time + autoSaveInterval;
 
 // Select save namespace
 A3A_saveTarget params ["_serverID", "_campaignID", "_map", "_jsonSave"];
-diag_log A3A_saveTarget;
 private _saveToNewNamespace = _serverID isEqualType false;
 if (!_saveToNewNamespace) then { profileNamespace setVariable ["ss_serverID", _serverID] };			// backwards compatibility
 private _namespace = [profileNamespace, missionProfileNamespace] select _saveToNewNamespace;
@@ -46,6 +45,7 @@ _version = ["version", QUOTE(VERSION_FULL)];
 _saveTime = ["saveTime", systemTimeUTC];
 A3A_saveData set _version;
 A3A_saveData set _saveTime;
+A3A_saveData set _map;
 private _selectorVars = ["name", "version", "saveTime", "ended", "params", "factions", "DLC", "addonVics", "map", "json"];
 private _saveVars = createHashMap;
 {

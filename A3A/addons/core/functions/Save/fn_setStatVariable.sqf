@@ -3,7 +3,6 @@ FIX_LINE_NUMBERS()
 
 params ["_varName", "_varValue", ["_setToProfile",false]];
 A3A_saveTarget params ["_serverID", "_campaignID", "_map", "_jsonSave"];
-diag_log A3A_saveTarget;
 if (isNil "_varValue") exitWith {};			// hmm...
 
 if (!_setToProfile) exitWith {

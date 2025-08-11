@@ -29,12 +29,10 @@ private _saveList = [profileNamespace getVariable "antistasiSavedGames"] param [
             _selectorVars get _this;
         } else {
             _this call A3A_fnc_returnSavedStat;
-
         };
     }
     ] } forEach _optionalVars;
     _saveData pushBack _game;
-
 } forEach _saveList;
 
 private _oldCampaignID = profileNameSpace getVariable ["ss_CampaignID", ""];
@@ -48,7 +46,6 @@ if !(_oldCampaignID in _campaignIDs) then {
 // missionProfileNamespace saves
 private _saveList2 = [missionProfileNamespace getVariable "antistasiSavedGames"] param [0, [], [[]]];
 {
-    diag_log _x;
     _x params ["_cid", "_map", "_gameType", ["_selectorVars", createHashMap]];
     private _useListVars = (count _selectorVars > 0);
     private _isJSON = (_useListVars && {_selectorVars getOrDefault ["json",false]});
@@ -62,11 +59,9 @@ private _saveList2 = [missionProfileNamespace getVariable "antistasiSavedGames"]
             _selectorVars get _this;
         } else {
             _this call A3A_fnc_returnSavedStat;
-
         };
     }
     ] } forEach _optionalVars;
-    diag_log _game;
     _saveData pushBack _game;
 
 } forEach _saveList2;

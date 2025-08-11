@@ -114,7 +114,6 @@ switch (_mode) do
         } else { // second click confirms
             _textConfirmCtrl ctrlShow false;
             private _saveToNewNamespace = cbChecked _namespaceCB;
-            diag_log _saveToNewNamespace;
             _nameSpaceCB ctrlShow false;
             _namespaceText ctrlShow false;
             closeDialog 0;
@@ -127,11 +126,9 @@ switch (_mode) do
             _saveData set ["gameID", _newID];
             private _serverID = profileNamespace getVariable ["ss_serverID", ""];
             _serverID = [_serverID, false] select _saveToNewNamespace;
-            diag_log _serverID;
             _saveData set ["serverID",_serverID];
             if !(_saveToNewNamespace) then {_saveData set ["fileStr","Old"]};
             private _namespaceText = (["old","new"] select _saveToNewNamespace);
-            diag_log _namespaceText;
             Info_3("Adding save %1 to list through import with ID %2 to %3 namespace",_newName,_newID,_namespaceText)
             private _newGames = A3A_setup_saveData select {(_x get "serverID") isEqualType false};
             private _oldGames = A3A_setup_saveData - _newGames;
@@ -155,7 +152,6 @@ switch (_mode) do
                 A3A_jsonSaveDataHM = _importSave;
                 private _saveData = A3A_jsonSaveDataHM get "headerData";
                 private _serverID = _saveData get "serverID";
-                diag_log format ["_serverID: %1", _serverID];
                 private _map = _saveData get "map";
                 private _name = _saveData get "name";
                 _oldSaveTarget = A3A_saveTarget;

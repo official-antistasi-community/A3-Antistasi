@@ -119,8 +119,6 @@ if (_startType != "new") then
 {
     // Setup save info
     A3A_saveTarget = [A3A_saveData get "serverID", A3A_saveData get "gameID", worldName];
-    diag_log A3A_saveTarget;
-    
     call _fnc_jsonSetup;
 
     // Sanity checks? hmm
