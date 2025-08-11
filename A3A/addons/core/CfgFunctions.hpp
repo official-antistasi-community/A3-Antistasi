@@ -375,6 +375,7 @@ class CfgFunctions
 
             //Other initialisation functions (generally called by the above)
             class briefing {};
+            class checkCampaignEnd {};
             class cityinfo {};
             class clientIdleChecker {};
             class credits {};
@@ -397,7 +398,8 @@ class CfgFunctions
             class prepareMarkerArrays {};
             class resourcecheck {};
             class tags {};
-            class checkCampaignEnd {};
+            class uniqueID {};
+            
         };
 
         class Intel {

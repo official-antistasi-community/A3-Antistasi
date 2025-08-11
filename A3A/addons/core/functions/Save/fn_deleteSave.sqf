@@ -2,13 +2,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_serverID", "_campaignID", "_worldname", ["_gametype", "Greenfor"], ["_deleteConfigOnly",false]];
-
-if (_deleteConfigOnly) then {
-	Info_1("Deleting old config save variables with parameters %1", _this);
-} else {
-	Info_1("Deleting saved game with parameters %1", _this);
-};
+params ["_serverID", "_campaignID", "_worldname", ["_gametype", "Greenfor"]];
 
 private _namespace = [profileNamespace, missionProfileNamespace] select (_serverID isEqualType false);
 
@@ -37,7 +31,7 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 
 } forEach _savedPlayers;
 
-private _varsToDelete = ["countCA", "gameMode", "difficultyX", "bombRuns", "smallCAmrk", "membersX", "antennas",
+private _varsToDelete = ["json", "countCA", "gameMode", "difficultyX", "bombRuns", "smallCAmrk", "membersX", "antennas",
 	"mrkSDK", "mrkCSAT", "posHQ", "dateX", "skillFIA", "destroyedSites", "distanceSPWN", "civPerc",
 	"chopForest", "maxUnits", "nextTick", "weather", "destroyedBuildings", "aggressionOccupants",
 	"aggressionInvaders", "resourcesFIA", "hr", "vehInGarage", "staticsX", "jna_datalist",
@@ -47,8 +41,6 @@ private _varsToDelete = ["countCA", "gameMode", "difficultyX", "bombRuns", "smal
 	"savedPlayers", "testingTimerIsActive", "HR_Garage", "A3A_fuelAmountleftArray", "HQKnowledge", "enemyResources",
 	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC", "arsenalLimits", "rebelLoadouts",
 	"minorSites", "radioKeys"];
-
-if !(_deleteConfigOnly) then {_varsToDelete pushBack "json"};
 
 // Delete all server data for specified campaign
 {

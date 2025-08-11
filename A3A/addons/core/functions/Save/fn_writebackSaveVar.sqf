@@ -25,8 +25,21 @@ isNil {
     if (!isNil "_saveTarget") then { A3A_saveTarget = _saveTarget };
 
     [_varname, _varValue] call A3A_fnc_setStatVariable;
+    _namespaceFlag = (A3A_saveTarget#0 isEqualType false);
+    ["json",toJSON (A3A_saveTarget#3),true] call A3A_fnc_setStatVariable;
+    if (_varName in ["name", "version", "saveTime", "ended", "params", "factions", "DLC", "addonVics", "map", "json"]) then {
+        _namespace = [profileNamespace, missionProfileNamespace] select _namespaceFlag;
+        private _saveList = [_namespace getVariable "antistasiSavedGames"] param [0, [], [[]]];
+        private _saveIndex = (_saveList findIf { _x select 0 == (A3A_saveTarget#0) });
+        private _save = _saveList#_saveIndex;
+        private _saveVars = _save#3;
+        _saveVars set [_varname, _varValue];
+        _save set [3, _saveVars];
+        _saveList set [_saveIndex, _save];
+        _namespace setVariable ["antistasiSavedGames", _saveList];
+    };
 
-    if (A3A_saveTarget#0 isEqualType false) then { saveMissionProfileNamespace } else { saveProfileNamespace };
+    if (_namespaceFlag) then { saveMissionProfileNamespace } else { saveProfileNamespace };
 
     if (!isNil "_oldTarget") then { A3A_saveTarget = _oldTarget };
 };

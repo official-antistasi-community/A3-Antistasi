@@ -45,6 +45,7 @@ switch (_mode) do
         _display setVariable ["savedFactions", [[], [], []]];
         _display setVariable ["savedParams", []];
         _listboxCtrl setVariable ["rowIndex", -1];
+        (_display displayCtrl A3A_IDC_SETUP_NAMESPACECHECKBOX) cbSetChecked (!A3A_isLinux);
 
         // Do these programmatically so that we can reuse the column data
         private _headerCtrl = _display displayCtrl A3A_IDC_SETUP_SAVESHEADER;
@@ -109,7 +110,7 @@ switch (_mode) do
         };
 
         private _saveData = A3A_setup_saveData select _index;
-        private _saveHasJSON = _saveData getOrDefault ["hasJSONSave",false];
+        private _saveHasJSON = _saveData getOrDefault ["json",false];
         if !(_saveHasJSON) exitWith {
             _exportButton ctrlEnable false;
             _exportButton ctrlSetTooltip localize "STR_antistasi_dialogs_setup_noExportOld";

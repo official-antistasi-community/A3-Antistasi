@@ -531,11 +531,6 @@ class A3A_SetupHQPosDialog
     };
 };
 
-class A3A_TextMultiCenter: A3A_Text
-{
-    style = ST_CENTER + ST_MULTI + ST_NO_RECT;
-};
-
 class A3A_SetupTransferDialog
 {
     idd = A3A_IDD_SETUPTRANSFERDIALOG;
@@ -568,11 +563,39 @@ class A3A_SetupTransferDialog
         class TransferInfoText : A3A_StructuredText
         {
             text = "Preparing...";
-            idc = A3A_IDC_SETUP_TRANSFERINFOLEFTTEXT;
+            idc = A3A_IDC_SETUP_TRANSFERINFOTEXT;
             x = DIALOG_X + 4 * GRID_W;
             y = DIALOG_Y + 4 * GRID_H;
             w = 72 * GRID_W;
             h = 20 * GRID_H;
+        };
+        class TransferConfirmText : A3A_StructuredText
+        {
+            text = "";
+            idc = A3A_IDC_SETUP_TRANSFERCONFIRMTEXT;
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 4 * GRID_H;
+            w = 72 * GRID_W;
+            h = 8 * GRID_H;
+        };
+        class NamespaceCB : A3A_Checkbox
+        {
+            idc = A3A_IDC_SETUP_TRANSFERCB;
+            tooltip = $STR_antistasi_dialogs_setup_use_new_namespace_tooltip;
+            x = DIALOG_X + 4 * GRID_W;
+            y = DIALOG_Y + 12 * GRID_H;
+            w = 4 * GRID_W;
+            h = 4 * GRID_H;
+        };
+        class NamespaceText : A3A_Text
+        {
+            idc = A3A_IDC_SETUP_TRANSFERCBTEXT;
+            text = $STR_antistasi_dialogs_setup_use_new_namespace;
+            tooltip = $STR_antistasi_dialogs_setup_use_new_namespace_tooltip;
+            x = DIALOG_X + 8 * GRID_W;
+            y = DIALOG_Y + 10 * GRID_H;
+            w = 64 * GRID_W;
+            h = 8 * GRID_H;
         };
         class TransferTextBox : A3A_Edit
         {
@@ -582,14 +605,6 @@ class A3A_SetupTransferDialog
             y = DIALOG_Y + 24 * GRID_H;
             w = 72 * GRID_W;
             h = 7 * GRID_H;
-        };
-        class ConfirmText : A3A_StructuredText
-        {
-            idc = A3A_IDC_SETUP_TRANSFERINFOCENTERTEXT;
-            x = DIALOG_X + 4 * GRID_W;
-            y = DIALOG_Y + 4 * GRID_H;
-            w = 72 * GRID_W;
-            h = 27 * GRID_H;
         };
         class CancelButton : A3A_Button
         {
@@ -612,6 +627,11 @@ class A3A_SetupTransferDialog
             h = 5 * GRID_H;
         };
     };
+};
+
+class A3A_TextMultiCenter: A3A_Text
+{
+    style = ST_CENTER + ST_MULTI + ST_NO_RECT;
 };
 
 class A3A_SetupConfirmDialog

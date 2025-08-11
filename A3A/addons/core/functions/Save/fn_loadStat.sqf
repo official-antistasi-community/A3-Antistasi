@@ -24,10 +24,10 @@ private _translateMarker = {
     _mrk;
 };
 
-private _strToSide = createHashMapFromArray [
-    ["teamPlayer",teamPlayer],
-    ["Occupants",Occupants],
-    ["Invaders",Invaders]
+private _numToSide = createHashMapFromArray [
+    [0,teamPlayer],
+    [1,Occupants],
+    [2,Invaders]
 ];
 
 //===========================================================================
@@ -37,7 +37,7 @@ private _specialVarLoads = [
     "prestigeCSAT","posHQ","hr","armas","items","backpcks","ammunition","dateX","prestigeOPFOR",
     "prestigeBLUFOR","resourcesFIA","skillFIA","destroyedSites",
     "garrison","tasks","membersX","vehInGarage","destroyedBuildings","idlebases",
-    "chopForest","weather","killZones","jna_dataList","mrkCSAT","nextTick",
+    "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
     "minorSites", "radioKeys"
@@ -109,6 +109,7 @@ if (_varName in _specialVarLoads) then {
         private _cats = _grgData#0;
         private _newGrgCats = [];
         {
+            // json requires string keys, so garage numbers are saved as stringified numbers (e.g. "1") and parsed in-game as the actual numbers
             private _keys = (keys _x) apply {if (_x isEqualType 0) then {_x} else {call compile _x}};
             private _hm = _keys createHashMapFromArray (values _x);
             _newGrgCats pushback _hm;
@@ -145,7 +146,7 @@ if (_varName in _specialVarLoads) then {
             (_varvalue select _i) params ["_typeMine", "_posMine", "_detected", "_dirMine"];
             private _mineX = createVehicle [_typeMine, _posMine, [], 0, "CAN_COLLIDE"];
             if !(isNil "_dirMine") then { _mineX setDir _dirMine };
-            {(_strToSide getorDefault [_x,_x]) revealMine _mineX} forEach _detected;
+            {(_numToSide getorDefault [_x,Occupants]) revealMine _mineX} forEach _detected;
         };
     };
     if (_varName == 'garrison') then {
@@ -395,7 +396,7 @@ if (_varName in _specialVarLoads) then {
     };
     if (_varname == "minorSites") then {
         A3A_minorSitesHM = createHashMap;
-        { [_y#0, _y#1, _strToSide getorDefault [_y#2,_y#2], _y#3] call A3A_fnc_addMinorSite } forEach _varValue;
+        { [_y#0, _y#1, _numToSide getorDefault [_y#2,Occupants], _y#3] call A3A_fnc_addMinorSite } forEach _varValue;
         // pair refs get sanity checked in initMinorSites later
     };
 

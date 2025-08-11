@@ -13,17 +13,11 @@ Info("Starting persistent save");
 autoSaveTime = time + autoSaveInterval;
 
 // Select save namespace
-A3A_saveTarget params ["_serverID", "_campaignID"];
+A3A_saveTarget params ["_serverID", "_campaignID", "_map", "_jsonSave"];
+diag_log A3A_saveTarget;
 private _saveToNewNamespace = _serverID isEqualType false;
 if (!_saveToNewNamespace) then { profileNamespace setVariable ["ss_serverID", _serverID] };			// backwards compatibility
 private _namespace = [profileNamespace, missionProfileNamespace] select _saveToNewNamespace;
-
-// If the save is not currently in JSON, it will delete the old save and add neccesary params
-if (!A3A_useJSONSave) then {
-	A3A_useJSONSave = true;
-	A3A_saveTarget params ["_serverID", "_campaignID", "_map"];
-	[_serverID, _campaignID, _map, nil, true] call A3A_fnc_deleteSave;
-};
 
 // Save each player with global flag
 {
@@ -46,7 +40,20 @@ if (!A3A_useJSONSave) then {
 // Move this campaign to the end of the save list
 private _saveList = [_namespace getVariable "antistasiSavedGames"] param [0, [], [[]]];
 _saveList deleteAt (_saveList findIf { _x select 0 == _campaignID });
-_saveList pushBack [_campaignID, worldName, "Greenfor"];
+A3A_saveData set ["json",true];
+_map = ["map", worldName];
+_version = ["version", QUOTE(VERSION_FULL)];
+_saveTime = ["saveTime", systemTimeUTC];
+A3A_saveData set _version;
+A3A_saveData set _saveTime;
+private _selectorVars = ["name", "version", "saveTime", "ended", "params", "factions", "DLC", "addonVics", "map", "json"];
+private _saveVars = createHashMap;
+{
+	private _hmEntry = [_x, A3A_saveData get _x];
+	_hmEntry call A3A_fnc_setStatVariable;
+	_saveVars set _hmEntry;
+} forEach _selectorVars;
+_saveList pushBack [_campaignID, worldName, "Greenfor", _saveVars];
 _namespace setVariable ["antistasiSavedGames", _saveList];
 
 // Update the legacy campaign ID for backwards compatibility
@@ -63,15 +70,9 @@ Debug_1("Saving params: %1", _savedParams);
 
 ["params", _savedParams] call A3A_fnc_setStatVariable;
 
-// Save vars from save selector
-["name", A3A_saveData get "name"] call A3A_fnc_setStatVariable;
-["factions", A3A_saveData get "factions"] call A3A_fnc_setStatVariable;
-["DLC", A3A_saveData get "DLC"] call A3A_fnc_setStatVariable;
-["addonVics", A3A_saveData get "addonVics"] call A3A_fnc_setStatVariable;
-
 private ["_garrison"];
-["version", QUOTE(VERSION_FULL)] call A3A_fnc_setStatVariable;
-["saveTime", systemTimeUTC] call A3A_fnc_setStatVariable;
+_version call A3A_fnc_setStatVariable;
+_saveTime call A3A_fnc_setStatVariable;
 ["gameMode", gameMode] call A3A_fnc_setStatVariable;					// backwards compatibility
 ["difficultyX", skillMult] call A3A_fnc_setStatVariable;				// backwards compatibiiity
 ["bombRuns", bombRuns] call A3A_fnc_setStatVariable;
@@ -100,9 +101,9 @@ private _destroyedPositions = destroyedBuildings apply { getPosATL _x };
 ["controlsSDK",[]] call A3A_fnc_setStatVariable;					// backwards compatibility
 private _modifiedSites = createHashMap;
 private _sideToStr = createHashMapFromArray [
-	[teamPlayer,"teamPlayer"],
-	[Occupants,"Occupants"],
-	[Invaders,"Invaders"]
+	[teamPlayer,0],
+	[Occupants,1],
+	[Invaders,2]
 ];
 {
 	private _newSide = _sideToStr getOrDefault [_y#2, _y#2];
@@ -156,6 +157,7 @@ private _grgData = [] call HR_GRG_fnc_getSaveData;
 private _cats = _grgData#0;
 private _newGrgCats = [];
 {
+	// json requires string keys, so garage numbers are saved as stringified numbers (e.g. "1") and parsed in-game as the actual numbers
 	private _keys = (keys _x) apply {str _x};
 	private _hm = _keys createHashMapFromArray (values _x);
 	_newGrgCats pushback _hm;
@@ -206,7 +208,7 @@ _rebMarkers append outpostsFIA; _rebMarkers pushBack "Synd_HQ";
 
 _jna_dataList = [];
 _jna_dataList = _jna_dataList + jna_dataList;
-["jna_dataList", _jna_dataList] call A3A_fnc_setStatVariable;
+["jna_datalist", _jna_dataList] call A3A_fnc_setStatVariable;
 
 _prestigeOPFOR = [];
 _prestigeBLUFOR = [];
@@ -251,13 +253,13 @@ private _mineChance = 500 / (500 max count allMines);
 	_dirMine = getDir _x;
 	_detected = [];
 	if (_x mineDetectedBy teamPlayer) then {
-		_detected pushBack "teamPlayer"
+		_detected pushBack 0
 	};
 	if (_x mineDetectedBy Occupants) then {
-		_detected pushBack "Occupants"
+		_detected pushBack 1
 	};
 	if (_x mineDetectedBy Invaders) then {
-		_detected pushBack "Invaders"
+		_detected pushBack 2
 	};
 	_arrayMines pushBack [_typeMine,_posMine,_detected,_dirMine];
 } forEach allMines;
@@ -400,7 +402,7 @@ _fuelAmountleftArray = [];
 //Saving the state of the testing timer
 ["testingTimerIsActive", testingTimerIsActive] call A3A_fnc_setStatVariable;
 
-["JSON",toJSON A3A_jsonSaveDataHM,true] call A3A_fnc_setStatVariable;
+["json",toJSON (A3A_saveTarget#3),true] call A3A_fnc_setStatVariable;
 if (_saveToNewNamespace) then { saveMissionProfileNamespace } else { saveProfileNamespace };
 
 savingServer = false;

@@ -2,11 +2,14 @@
 FIX_LINE_NUMBERS()
 
 params ["_varName", "_varValue", ["_setToProfile",false]];
-A3A_saveTarget params ["_serverID", "_campaignID", "_map"];
+A3A_saveTarget params ["_serverID", "_campaignID", "_map", "_jsonSave"];
+diag_log A3A_saveTarget;
 if (isNil "_varValue") exitWith {};			// hmm...
 
-if (A3A_useJSONSave && !_setToProfile) exitWith {
-	A3A_jsonSaveDataHM set [_varName, _varValue];
+if (!_setToProfile) exitWith {
+	private _jsonData = A3A_saveTarget#3;
+	_jsonData set [_varName, _varValue];
+	A3A_saveTarget set [3, _jsonData];
 };
 
 // Simple version for new missionProfileNamespace saves

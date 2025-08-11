@@ -41,10 +41,6 @@ if (isClass (configFile/"CfgVehicles"/"vn_module_dynamicradiomusic_disable")) th
 call A3A_fnc_initVarCommon;
 call A3A_fnc_initZones;					// needed here because new-game setup needs to know where the markers are
 
-// Define variables for JSON save
-A3A_useJSONSave = false;
-A3A_jsonSaveDataHM = createHashMap;
-
 // Start up the monitor to handle the setup UI
 [] spawn A3A_fnc_setupMonitor;
 
@@ -110,6 +106,11 @@ if (gameMode != 1) then {
 };
 bookedSlots = floor ((memberSlots/100) * (playableSlotsNumber teamPlayer)); publicVariable "bookedSlots";
 
+private _fnc_jsonSetup = {
+    private _jsonData = ["json",true] call A3A_fnc_returnSavedStat;
+    if (isNil "_jsonData") then {_jsonData = createHashMap};
+    A3A_saveTarget pushBack _jsonData;
+};
 
 // ****************** Load save data or create new *********************************
 
@@ -118,12 +119,10 @@ if (_startType != "new") then
 {
     // Setup save info
     A3A_saveTarget = [A3A_saveData get "serverID", A3A_saveData get "gameID", worldName];
+    diag_log A3A_saveTarget;
+    
+    call _fnc_jsonSetup;
 
-    private _jsonData = ["JSON"] call A3A_fnc_returnSavedStat; // json save needs to happen after save target is updated but before loading any vars
-    if !(isNil "_jsonData") then {
-        A3A_useJSONSave = true;
-        A3A_jsonSaveDataHM = fromJSON _jsonData;
-    };
     // Sanity checks? hmm
 
     Info_1("Loading campaign with ID %1", A3A_saveData get "gameID");
@@ -173,19 +172,19 @@ else
     [_posHQ, true] call A3A_fnc_relocateHQObjects;         // sets all the other vars
 };
 
-if (_startType != "load") then {
+if ((_startType != "load")) then {
     // Set blank server ID if we don't have one already. They're pretty pointless
     private _serverID = profileNamespace getVariable ["ss_serverID", ""];
     _serverID = [_serverID, false] select (A3A_saveData get "useNewNamespace");
 
     // Create new campaign ID, avoiding collisions
-    private _allIDs = call A3A_fnc_collectSaveData apply { _x get "gameID" };
-    private _newID = str(floor(random(90000) + 10000));
-    while { _newID in _allIDs } do { _newID = str(floor(random(90000) + 10000)) };
+    private _newID = call A3A_fnc_uniqueID;
 
     Info_1("Creating new campaign with ID %1", _newID);
 
     A3A_saveTarget = [_serverID, _newID, worldName];
+
+    call _fnc_jsonSetup;
 };
 
 // ********************** Post-load init ****************************************************
@@ -233,6 +232,7 @@ publicVariable "theBoss";       // need to publish this even if empty
 // Needs params + factions. Might depend on saved data in the future
 call A3A_fnc_initSupports;
 
+diag_log jna_datalist;
 // Needs saved arsenal data
 call A3A_fnc_generateRebelGear;
 

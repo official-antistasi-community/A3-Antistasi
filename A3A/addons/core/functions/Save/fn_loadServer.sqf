@@ -40,7 +40,7 @@ if (isServer) then {
 	["bombRuns"] call A3A_fnc_getStatVariable;
 	["arsenalLimits"] call A3A_fnc_getStatVariable;
 	["rebelLoadouts"] call A3A_fnc_getStatVariable;
-	["jna_dataList"] call A3A_fnc_getStatVariable;
+	["jna_datalist"] call A3A_fnc_getStatVariable;
 	["minorSites"] call A3A_fnc_getStatVariable;
 	//===========================================================================
 

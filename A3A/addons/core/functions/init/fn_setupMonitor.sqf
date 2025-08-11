@@ -54,6 +54,8 @@ if (_autoLoadTime >= 0) then
 
 // startGame function needs to know setupPlayer for sanity-checking
 A3A_setupPlayer = objNull;
+// Autodetect Linux server for namespace flag
+A3A_isLinux = (productVersion # 6) isEqualTo "Linux";
 
 private _fnc_validAdmin = {
     admin owner _this == 2 or						// non-voted admin on DS
@@ -92,6 +94,7 @@ while {isNil "A3A_saveData"} do {
     A3A_setupPlayer = _players select _adminIndex;
     Info_1("Player %1 is now admin, sending them the save data", name A3A_setupPlayer);
     A3A_startupState = "adminsetup"; publicVariable "A3A_startupState";
+    publicVariable "A3A_isLinux";
 
     // Collect save data. Do this each time so consistency is maintained with deletes
     private _saveData = call A3A_fnc_collectSaveData;

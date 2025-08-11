@@ -4561,11 +4561,8 @@
       <Key ID="STR_antistasi_dialogs_setup_transfer_exportReady">
         <Original>Exporting save %1 with ID %2.&lt;br /&gt;&lt;br /&gt;Select the text box and use Ctrl-A and then Ctrl-C to copy the save to clipboard.</Original>
       </Key>
-      <Key ID="STR_antistasi_dialogs_setup_transfer_importConfirm1">
-        <Original>Confirm the import of save with name %1 and ID %2? This will overwrite the existing save with name %3.</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_setup_transfer_importConfirm2">
-        <Original>Confirm import of save with name %1 and ID %2</Original>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_importConfirm">
+        <Original>Confirm import of save %1?</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_importFail">
         <Original>Invalid save data</Original>
