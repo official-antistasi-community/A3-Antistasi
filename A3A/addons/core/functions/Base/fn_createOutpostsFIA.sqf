@@ -7,19 +7,24 @@ private ["_typeX","_costs","_groupX","_unit","_radiusX","_roads","_road","_pos",
 _typeX = _this select 0;
 _positionTel = _this select 1;
 
-if (_typeX == "delete") exitWith {["Create Outpost", "Deprecated option. Use Remove Garrison from HQ instead."] call A3A_fnc_customHint;};
+if (_typeX == "delete") exitWith {[localize "STR_A3A_fn_base_createoutpfia_create", localize "STR_A3A_fn_base_createoutpfia_outdated"] call A3A_fnc_customHint;};
 
 _isRoad = isOnRoad _positionTel;
 
-_textX = format ["%1 Observation Post",FactionGet(reb,"name")];
+_textX = format [localize "STR_A3A_fn_base_croutpFIA_watchpost",FactionGet(reb,"name")];
 _typeGroup = FactionGet(reb,"groupSniper");
 _typeVehX = (FactionGet(reb,"vehiclesBasic")) # 0;
+_taskData = localize "STR_A3A_fn_createOutpostsFIA_OP_data";
+_taskTitle = localize "STR_A3A_fn_createOutpostsFIA_OP_title";
 private _tsk = "";
+
 if (_isRoad) then
 	{
-	_textX = format ["%1 Roadblock",FactionGet(reb,"name")];
+	_textX = format [localize "STR_A3A_fn_base_croutpFIA_roadblock",FactionGet(reb,"name")];
 	_typeGroup = FactionGet(reb,"groupAT");
 	_typeVehX = (FactionGet(reb,"vehiclesTruck")) # 0;
+	_taskData = localize "STR_A3A_fn_createOutpostsFIA_RB_data";
+	_taskTitle = localize "STR_A3A_fn_createOutpostsFIA_RB_title";
 	};
 
 _mrk = createMarker [format ["FIAPost%1", random 1000], _positionTel];
@@ -28,7 +33,7 @@ _mrk setMarkerShape "ICON";
 _dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + 60];
 _dateLimitNum = dateToNumber _dateLimit;
 private _taskId = "outpostsFIA" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,["We are sending a team to establish a Watchpost/Roadblock. Use HC to send the team to their destination.","Post \ Roadblock Deploy",_mrk],_positionTel,false,0,true,"Move",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[_taskData,_taskTitle,_mrk],_positionTel,false,0,true,"Move",true] call BIS_fnc_taskCreate;
 [_taskId, "outpostsFIA", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _groupX = [getMarkerPos respawnTeamPlayer, teamPlayer, _typeGroup] call A3A_fnc_spawnGroup;
@@ -36,6 +41,7 @@ _groupX setGroupId ["Post"];
 _road = [getMarkerPos respawnTeamPlayer] call A3A_fnc_findNearestGoodRoad;
 _pos = position _road findEmptyPosition [1,30,"B_G_Van_01_transport_F"];
 _truckX = _typeVehX createVehicle _pos;
+[_truckX, teamPlayer] call A3A_fnc_AIVEHinit;
 //_nul = [_groupX] spawn dismountFIA;
 _groupX addVehicle _truckX;
 {[_x] call A3A_fnc_FIAinit} forEach units _groupX;

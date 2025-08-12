@@ -118,7 +118,7 @@ disableserialization;
 private _minItemsMember = {
 	params ["_index", "_item"];					// Arsenal tab index, item classname
 	private _min = jna_minItemMember select _index;
-	_min = A3A_arsenalLimits getOrDefault [_item, _min];
+	_min = A3A_arsenalLimits getOrDefault [_item, [_min]] select 0;
 	if (_index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG || _index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL) then {
 		_min = _min * getNumber (configfile >> "CfgMagazines" >> _item >> "count");
 	};
@@ -149,7 +149,7 @@ switch _mode do {
 		["customEvents",[_display]] call jn_fnc_vehicleArsenal;
 		["ColorTabs",[_display]] call jn_fnc_vehicleArsenal;
 
-		['showMessage',[_display,"Vehicle inventory"]] call jn_fnc_arsenal;
+		['showMessage',[_display, localize "STR_A3A_JNA_vehicle_title"]] call jn_fnc_arsenal;
 		["jn_fnc_arsenal"] call BIS_fnc_endLoadingScreen;
 	};
 
@@ -269,8 +269,8 @@ switch _mode do {
 		_ctrlButtonRandom = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONRANDOM;
 		_ctrlButtonRandom ctrlRemoveAllEventHandlers "buttonclick";
 		_ctrlButtonRandom ctrladdeventhandler ["buttonclick",{["Unload",[ctrlparent (_this select 0)]] call jn_fnc_vehicleArsenal;}];
-		_ctrlButtonRandom ctrlSetText "Unload";
-		_ctrlButtonRandom ctrlSetTooltip "Move items from car to arsenal";
+		_ctrlButtonRandom ctrlSetText localize "STR_A3A_JNA_text_unload";
+		_ctrlButtonRandom ctrlSetTooltip localize "STR_A3A_JNA_tooltop_unload";
 
 		_ctrlButtonExport = _display displayctrl IDC_RSCDISPLAYARSENAL_CONTROLSBAR_BUTTONEXPORT;
 		_ctrlButtonExport ctrlRemoveAllEventHandlers "buttonclick";
@@ -557,7 +557,7 @@ switch _mode do {
 			_ctrlList lnbsetcolor [[_r,1],_color];
 			_ctrlList lnbsetcolor [[_r,2],_color];
 			_text = _ctrlList lnbtext [_r,1];
-			_ctrlList lbsettooltip [_r * _columns,[_text,_text + "\n(Not compatible with currently equipped weapons)"] select _isIncompatible];
+			_ctrlList lbsettooltip [_r * _columns,[_text,_text + localize "STR_A3A_JNA_scope_incompatible"] select _isIncompatible];
 		};
 	};
 
@@ -646,7 +646,7 @@ switch _mode do {
 				//non-member limits
 				_min = [_index, _item] call _minItemsMember;
 				if((_amount <= _min) AND (_amount != -1) AND !([player] call A3A_fnc_isMember)) exitWith{
-					['showMessage',[_display,"We are low on this item, only members may use it"]] call jn_fnc_arsenal;
+					['showMessage',[_display, localize "STR_A3A_JNA_memberonly"]] call jn_fnc_arsenal;
 				};
 
 				//magazines are handeld by bullet count
@@ -693,7 +693,7 @@ switch _mode do {
 		};
 
 		["ColorTabs",[_display]] call jn_fnc_vehicleArsenal;
-		['showMessage',[_display,("Load"+str round (jnva_loadout_mass/_max *100)+"%")]] call jn_fnc_arsenal;
+		['showMessage',[_display,(localize "STR_A3A_JNA_vehicle_mass_load"+str round (jnva_loadout_mass/_max *100)+"%")]] call jn_fnc_arsenal;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////////////////// event

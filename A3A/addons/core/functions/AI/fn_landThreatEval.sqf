@@ -24,6 +24,6 @@ if (getMarkerPos _x distance _positionX < distanceSPWN) then
 		_threat = _threat + ({typeOf _x in FactionGet(reb,"staticMortars")} count _staticsX) + (2*({typeOf _x in FactionGet(reb,"staticAT")} count _staticsX))
 		};
 	};
-} forEach (markersX - citiesX - controlsX - outpostsFIA) select {sidesX getVariable [_x,sideUnknown] != _sideX};
+} forEach ((markersX - citiesX - controlsX - outpostsFIA) select {sidesX getVariable [_x,sideUnknown] != _sideX});
 
 _threat

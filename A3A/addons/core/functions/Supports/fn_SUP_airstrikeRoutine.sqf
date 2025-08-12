@@ -22,6 +22,11 @@ params ["_supportName", "_side", "_sleepTime", "_targetPos", "_airport", "_resPo
 //Sleep to simulate preparation time
 sleep _sleepTime;
 
+private _isCarpetBombing = false;
+if (_bombType == "CARPET") then {
+	_bombType = "HE";
+	_isCarpetBombing = true;
+};
 private _isHelicopter = _planeType isKindOf "Helicopter";
 private _spawnPos = (getMarkerPos _airport) vectorAdd [0, 0, if (_isHelicopter) then {150} else {500}];
 private _plane = createVehicle [_planeType, _spawnPos, [], 0, "FLY"];     // FLY forces 100m alt
@@ -38,15 +43,16 @@ _group deleteGroupWhenEmpty true;
     _x disableAI "TARGET";
     _x disableAI "AUTOTARGET";
 } forEach units _group;
+[-10 * count units _group, _side, _resPool] call A3A_fnc_addEnemyResources;
 
 // Should we really have these?
 _plane addEventHandler ["Killed", {
     params ["_plane"];
-    ["TaskSucceeded", ["", "Airstrike Vessel Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
+    ["TaskSucceeded", ["", localize "STR_A3A_fn_supports_airStrikeVesselDown"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
 }];
 
 //["_reveal", "_position", "_side", "_supportType", "_markerType", "_markerLifeTime"]
-[_reveal, _targetPos, _side, "Airstrike", 150, 120] spawn A3A_fnc_showInterceptedSupportCall;
+[_reveal, _targetPos, _side, "Airstrike", 150, 120] spawn A3A_fnc_showInterceptedSupportCall; // no better way to time this with the current system, unfortunately
 //[_side, format ["%1_coverage", _supportName]] spawn A3A_fnc_clearTargetArea;
 
 
@@ -57,7 +63,7 @@ if (_bombType == "HE") then {_bombCount = _bombCount * 2};
 private _bombParams = [_plane, _bombType, _bombCount, 200];
 private _flightSpeed = ["LIMITED", "NORMAL", "FULL"] select (round random [1, _aggroValue / 50, 0]);
 if (_isHelicopter) then {_flightSpeed = "FULL"};
-Info_3("Airstrike %1 will be carried out with %2 bombs at %3 speed", _supportName, _bombCount, toLower _flightSpeed);
+Info_5("Airstrike %1 against %2 with %3 %4 bombs at %5 speed", _supportName, _targetPos, _bombCount, _bombType, toLower _flightSpeed);
 
 _plane flyInHeight 150;
 private _minAltASL = (ATLToASL [_targetPos select 0, _targetPos select 1, 0])#2 +150;
@@ -67,6 +73,16 @@ private _startBombPosition = _targetPos getPos [100, _targDir + 180];
 _startBombPosition set [2, 150];
 private _endBombPosition = _targetPos getPos [100, _targDir];
 _endBombPosition set [2, 150];
+
+if (_isCarpetBombing) then {
+    _bombParams set [2, 5 max _bombCount];
+    _flightSpeed = "FULL";
+    //Extends and wiggles the start and end position to make it feel just a little more organic
+    _startBombPosition = _startBombPosition getPos [45 + random 10, _targDir + 180];
+    _startBombPosition set [2, 150];
+    _endBombPosition = _endBombPosition getPos [45 + random 10, _targDir];
+    _endBombPosition set [2, 150];
+};
 
 private _wp2 = _group addWaypoint [_startBombPosition, 0];
 _wp2 setWaypointType "MOVE";

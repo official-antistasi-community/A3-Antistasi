@@ -1,15 +1,18 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 private ["_typeX","_costs","_groupX","_unit","_radiusX","_roads","_road","_pos","_truckX","_textX","_mrk","_hr","_exists","_positionTel","_isRoad","_typeGroup","_resourcesFIA","_hrFIA"];
+private _titleStr = localize "STR_A3A_fn_base_outpdiag_title";
 
-if ("outpostsFIA" in A3A_activeTasks) exitWith {["Watchposts/Roadblocks", "We can only deploy / delete one Watchpost or Roadblock at a time."] call A3A_fnc_customHint;};
-if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {["Radio Required", "You need a radio in your inventory to be able to give orders to other squads."] call A3A_fnc_customHint;} else {["Radio-man Required", "You need a Radio Man in your group to be able to give orders to other squads"] call A3A_fnc_customHint;}};
+if ("outpostsFIA" in A3A_activeTasks) exitWith {[_titleStr, localize "STR_A3A_fn_base_outpdiag_no_one"] call A3A_fnc_customHint;};
+if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {[localize "STR_A3A_fn_base_outpdiag_radio", localize "STR_A3A_fn_base_outpdiag_no_radio"] call A3A_fnc_customHint;} 
+else {[localize "STR_A3A_fn_base_outpdiag_radioman", localize "STR_A3A_fn_base_outpdiag_no_radioman"] call A3A_fnc_customHint;}};
 
 _typeX = _this select 0;
 
 if (!visibleMap) then {openMap true};
 positionTel = [];
-if (_typeX != "delete") then {["Watchposts/Roadblocks", "Click on the position you wish to build the Watchpost or Roadblock. <br/><br/> Remember: to build Roadblocks you must click exactly on a road map section."] call A3A_fnc_customHint;} else {["Watchposts/Roadblocks", "Click on the Watchpost or Roadblock to delete."] call A3A_fnc_customHint;};
+if (_typeX != "delete") then {[_titleStr, localize "STR_A3A_fn_base_outpdiag_click_position"] call A3A_fnc_customHint;} 
+else {[_titleStr, localize "STR_A3A_fn_base_outpdiag_click_delete"] call A3A_fnc_customHint;};
 
 onMapSingleClick "positionTel = _pos;";
 
@@ -21,8 +24,8 @@ if (!visibleMap) exitWith {};
 _positionTel = positionTel;
 _pos = [];
 
-if ((_typeX == "delete") and (count outpostsFIA < 1)) exitWith {["Watchposts/Roadblocks", "No Watchposts or Roadblocks deployed to delete."] call A3A_fnc_customHint;};
-if ((_typeX == "delete") and ({(alive _x) and (!captive _x) and ((side _x == Occupants) or (side _x == Invaders)) and (_x distance _positionTel < 500)} count allUnits > 0)) exitWith {["Outposts/Roadblocks", "You cannot delete a Post while enemies are near it."] call A3A_fnc_customHint;};
+if ((_typeX == "delete") and (count outpostsFIA < 1)) exitWith {[_titleStr, localize "STR_A3A_fn_base_outpdiag_no_delete"] call A3A_fnc_customHint;};
+if ((_typeX == "delete") and ({(alive _x) and (!captive _x) and ((side _x == Occupants) or (side _x == Invaders)) and (_x distance _positionTel < 500)} count allUnits > 0)) exitWith {[_titleStr, localize "STR_A3A_fn_base_outpdiag_no_enemies"] call A3A_fnc_customHint;};
 
 _costs = 0;
 _hr = 0;
@@ -48,14 +51,14 @@ else
 	{
 	_mrk = [outpostsFIA,_positionTel] call BIS_fnc_nearestPosition;
 	_pos = getMarkerPos _mrk;
-	if (_positionTel distance _pos >10) exitWith {["Watchposts/Roadblocks", "No post nearby."] call A3A_fnc_customHint;};
+	if (_positionTel distance _pos >10) exitWith {[_titleStr, localize "STR_A3A_fn_base_outpdiag_no_post"] call A3A_fnc_customHint;};
 	};
 //if ((_typeX == "delete") and (_positionTel distance _pos >10)) exitWith {hint "No post nearby"};
 
 _resourcesFIA = server getVariable "resourcesFIA";
 _hrFIA = server getVariable "hr";
 
-if (((_resourcesFIA < _costs) or (_hrFIA < _hr)) and (_typeX!= "delete")) exitWith {["Watchposts/Roadblocks", format ["You lack of resources to build this Watchpost or Roadblock. <br/><br/> %1 HR and %2 € needed.",_hr,_costs]] call A3A_fnc_customHint;};
+if (((_resourcesFIA < _costs) or (_hrFIA < _hr)) and (_typeX!= "delete")) exitWith {[_titleStr, format [localize "STR_A3A_fn_base_outpdiag_no_resources",_hr,_costs]] call A3A_fnc_customHint;};
 
 if (_typeX != "delete") then
 	{

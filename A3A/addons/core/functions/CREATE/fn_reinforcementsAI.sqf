@@ -129,8 +129,8 @@ private _fnc_pickSquadType = {
 } forEach [Occupants, Invaders];
 
 
-// If there aren't too many road patrols around already, generate about 1.5 * playerScale per hour
-if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 4 < A3A_balancePlayerScale)) then {
+// If there aren't too many road patrols around already, generate about 3 * playerScale per hour
+if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balancePlayerScale)) then {
 	[] spawn A3A_fnc_AAFroadPatrol;
 };
 

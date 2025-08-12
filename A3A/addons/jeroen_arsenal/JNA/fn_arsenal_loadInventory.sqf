@@ -164,7 +164,7 @@ _itemCounts =+ _availableItems;
 		_item = _x select 0;
 		_amount = (_x select 1);
 		if (_amount != -1 && !_isMember) then {
-			_itemMin = A3A_arsenalLimits getOrDefault [_item, _arrayMin];
+			_itemMin = A3A_arsenalLimits getOrDefault [_item, [_arrayMin]] select 0;
 			if (_isMagArray) then { _itemMin = _itemMin * getNumber (configfile >> "CfgMagazines" >> _item >> "count") };
 			_subArray set [_foreachindex, [_item, (_amount - _itemMin) max 0]];
 		};
@@ -173,7 +173,7 @@ _itemCounts =+ _availableItems;
 } forEach _availableItems;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  assinged items
-_assignedItems = ((_inventory select 9) + [_inventory select 3] + [_inventory select 4] + [_inventory select 5]);					//todo add binocular batterys
+_assignedItems = ((_inventory select 9) + [_inventory select 3] + [_inventory select 4] + [_inventory select 5]);
 {
 	_item = _x;
 	_amount = 1;
@@ -195,11 +195,10 @@ _assignedItems = ((_inventory select 9) + [_inventory select 3] + [_inventory se
 			_item =_radioName;
 		};
 		
-        //Weapon Stack fix
-        private _weaponname = getText(configfile >> "CfgWeapons" >> _item >> "baseWeapon");
-        if!(_weaponname isEqualTo "")then{
-            _item = _weaponname
-        };
+		//Weapon Stack fix
+		if (isClass (configFile >> "CfgWeapons" >> _item)) then {
+			_item = _item call bis_fnc_baseWeapon;
+		};
 
         //RHS Sight Stack fix
         private _sightname = getText(configfile >> "CfgWeapons" >> _item >> "rhs_optic_base");
@@ -232,6 +231,18 @@ _assignedItems = ((_inventory select 9) + [_inventory select 3] + [_inventory se
 
 	};
 } forEach _assignedItems - [""];
+
+if (binocular player != "" && count (binocularMagazine player) == 0) then {
+	// Add first infinite binocular magazine to binocular if available
+	{
+		_item = _x;
+		_index = _item call jn_fnc_arsenal_itemType;
+
+		if ([_itemCounts select _index, _item] call jn_fnc_arsenal_itemCount == -1) exitWith {
+			player addBinocularItem _item;
+		};
+	} forEach (getArray (configFile >> "CfgWeapons" >> (binocular player) >> "magazines"));
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// weapons and attachments
 removebackpack player;
@@ -473,11 +484,11 @@ _reportReplaced = "";
 {
 	_nameNew = [_x select 0] call _lookupConfigName;
 	_nameOld = [_x select 1] call _lookupConfigName;
-	_reportReplaced = _reportReplaced + _nameOld + " has been kept, because there is no " + _nameNew + "\n";
+	_reportReplaced = _reportReplaced + _nameOld + localize "STR_A3A_JNA_loadinventory_kept" + "<br/>" + _nameNew + "\n";
 } forEach _arrayReplaced;
 
 if!(_reportReplaced isEqualTo "")then{
-	_reportTotal = ("These items were not in the Arsenal, so the originals have been kept:\n" + _reportReplaced+"\n");
+	_reportTotal = (localize "STR_A3A_JNA_loadinventory_notin_kept" + "<br/>" + _reportReplaced +"\n");
 };
 
 _reportMissing = "";
@@ -488,7 +499,7 @@ _reportMissing = "";
 }forEach _arrayMissing;
 
 if!(_reportMissing isEqualTo "")then{
-	_reportTotal = (_reportTotal+"These items were not in the Arsenal:\n" + _reportMissing+"\n");
+	_reportTotal = (_reportTotal + localize "STR_A3A_JNA_loadinventory_notin" + _reportMissing+"\n");
 };
 
 if!(_reportTotal isEqualTo "")then{

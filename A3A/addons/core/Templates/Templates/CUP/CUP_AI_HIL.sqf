@@ -32,7 +32,7 @@
 ["vehiclesTanks", ["CUP_B_Leopard2A6_HIL"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["CUP_B_M6LineBacker_USA_W", "CUP_B_nM1097_AVENGER_USA_WDL", "CUP_B_M163_Vulcan_USA"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["CUP_B_RHIB2Turret_USMC"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
@@ -45,10 +45,9 @@
 ["vehiclesHelisLightAttack", ["CUP_B_AW159_HIL","CUP_B_412_Military_Armed_AT_HIL","CUP_B_412_Military_Armed_HIL","CUP_B_412_dynamicLoadout_HIL"]] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", ["CUP_B_AH1Z_Dynamic_USMC"]] call _fnc_saveToTemplate;
 
-["vehiclesArtillery", ["CUP_B_M270_HE_HIL", "CUP_B_M270_DPICM_HIL"]] call _fnc_saveToTemplate;
+["vehiclesArtillery", ["CUP_B_M270_HE_HIL"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
-["CUP_B_M270_HE_HIL", ["CUP_12Rnd_MLRS_HE"]],
-["CUP_B_M270_DPICM_HIL", ["CUP_12Rnd_MLRS_DPICM"]]
+["CUP_B_M270_HE_HIL", ["CUP_12Rnd_MLRS_HE"]]
 ]] call _fnc_saveToTemplate;
 
 ["uavsAttack", ["CUP_B_USMC_DYN_MQ9"]] call _fnc_saveToTemplate;
@@ -91,6 +90,8 @@
 "TanoanHead_A3_06","TanoanHead_A3_07"]] call _fnc_saveToTemplate;
 
 ["voices", ["Male01FRE","Male02FRE","Male03FRE"]] call _fnc_saveToTemplate;
+
+"TanoanMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //

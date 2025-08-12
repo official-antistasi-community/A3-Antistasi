@@ -30,8 +30,10 @@ while {(alive _morty0) and (alive _morty1)} do
 
 	if (({(alive _x)} count units _groupX == count units _groupX) and !(unitReady _morty0)) then
 		{
-		_morty0 addBackpackGlobal _b0;
-		_morty1 addBackpackGlobal _b1;
+		if (!isNil "_b0") then {
+			_morty0 addBackpackGlobal _b0;
+			_morty1 addBackpackGlobal _b1;
+		};
 		unassignVehicle _morty1;
 		moveOut _morty1;
 		deleteVehicle _mortarX;

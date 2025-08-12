@@ -20,10 +20,15 @@
     ["UK3CB_ANA_B_L39_PYLON", ["cost", 150]],
     ["UK3CB_KRG_B_L39_PYLON", ["cost", 150]],
     ["UK3CB_LDF_B_L39_PYLON", ["cost", 150]],
-    ["UK3CB_KDF_B_L39_PYLON", ["cost", 150]],
+    ["UK3CB_TKA_B_L39_PYLON", ["cost", 150]],
     ["UK3CB_ADA_I_L39_PYLON", ["cost", 150]],
     ["rhs_l159_cdf_b_CDF_CAP", ["cost", 150]],
     ["RHSGREF_A29B_HIDF", ["cost", 120]],
+    ["UK3CB_AAF_B_T28Trojan_CAS", ["cost", 120]],
+    ["UK3CB_ION_B_Desert_T28Trojan_CAS", ["cost", 120]],
+    ["UK3CB_B_T28Trojan_HIDF_CAS", ["cost", 120]],
+    ["UK3CB_MDF_B_T28Trojan_CAS", ["cost", 120]],
+    ["UK3CB_MDF_B_T28Trojan_NAVY_CAS", ["cost", 120]],
     ["UK3CB_B_Mystere_HIDF_CAS1", ["cost", 200]],           // not many missiles. Gun is actually good though
     ["UK3CB_B_Mystere_HIDF_AA1", ["cost", 200]],            // no mid-range AA missiles
     ["UK3CB_MDF_B_Mystere_AA1", ["cost", 200]]

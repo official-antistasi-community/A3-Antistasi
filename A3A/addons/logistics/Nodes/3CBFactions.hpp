@@ -32,6 +32,24 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
     };
 };
 
+class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_hilux_uk3cb_hilux_civilian_closed_p3d : TRIPLES(ADDON,Nodes,Base)
+{
+    canLoadWeapon = 0;
+    class Nodes
+    {
+        class Node1
+        {
+            offset[] = {-0.05,-0.5,-0.634};
+            seats[] = {5};
+        };
+        class Node2
+        {
+            offset[] = {-0.05,-1.6,-0.634};
+            seats[] = {3,4,6};
+        };
+    };
+};
+
 class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_hilux_uk3cb_hilux_p3d : TRIPLES(ADDON,Nodes,Base)
 {
     class Nodes
@@ -716,6 +734,117 @@ class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehic
         {
             offset[] = {0,-3.3,-1};
             seats[] = {};
+        };
+    };
+};
+
+class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_scud_uk3cb_maz_543_open_p3d : TRIPLES(ADDON,Nodes,Base)
+{
+    class Nodes
+    {
+        class Node1
+        {
+            offset[] = {0,0.2,-0.35};
+            seats[] = {0,1};
+        };
+        class Node2
+        {
+            offset[] = {0,-0.6,-0.35};
+            seats[] = {2,3};
+        };
+        class Node3
+        {
+            offset[] = {0,-1.4,-0.35};
+            seats[] = {4,5};
+        };
+        class Node4
+        {
+            offset[] = {0,-2.2,-0.35};
+            seats[] = {6,7};
+        };
+        class Node5
+        {
+            offset[] = {0,-3,-0.35};
+            seats[] = {8,9};
+        };
+        class Node6
+        {
+            offset[] = {0,-3.8,-0.35};
+            seats[] = {10,11};
+        };
+    };
+};
+class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_scud_uk3cb_maz_543_closed_p3d : TRIPLES(ADDON,Nodes,Base)
+{
+    class Nodes
+    {
+        class Node1
+        {
+            offset[] = {0,0.2,-0.35};
+            seats[] = {0,1};
+        };
+        class Node2
+        {
+            offset[] = {0,-0.6,-0.35};
+            seats[] = {2,3};
+        };
+        class Node3
+        {
+            offset[] = {0,-1.4,-0.35};
+            seats[] = {4,5};
+        };
+        class Node4
+        {
+            offset[] = {0,-2.2,-0.35};
+            seats[] = {6,7};
+        };
+        class Node5
+        {
+            offset[] = {0,-3,-0.35};
+            seats[] = {8,9};
+        };
+        class Node6
+        {
+            offset[] = {0,-3.8,-0.35};
+            seats[] = {10,11};
+        };
+    };
+};
+class UK3CB_Factions_addons_UK3CB_Factions_Vehicles_wheeled_UK3CB_Factions_Vehicles_scud_uk3cb_maz_543_Recovery_p3d : TRIPLES(ADDON,Nodes,Base)
+{
+    class Nodes
+    {
+        class Node1
+        {
+            offset[] = {0,2.6,-3.25};
+        };
+        class Node2
+        {
+            offset[] = {0,1.8,-3.25};
+        };
+        class Node3
+        {
+            offset[] = {0,1,-3.25};
+        };
+        class Node4
+        {
+            offset[] = {0,0.2,-3.25};
+        };
+        class Node5
+        {
+            offset[] = {0,-0.6,-3.25};
+        };
+        class Node6
+        {
+            offset[] = {0,-1.4,-3.25};
+        };
+        class Node7
+        {
+            offset[] = {0,-2.2,-3.25};
+        };
+        class Node8
+        {
+            offset[] = {0,-3,-3.25};
         };
     };
 };

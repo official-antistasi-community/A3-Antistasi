@@ -9,7 +9,7 @@ if(!isnil "_getInGunnerActionID") then
 };
 
 _getInGunnerActionID = _vehicle addAction [
-	"Get in Static",
+	localize "STR_A3A_JNL_text_getinstatic",
 	{
 		private _vehicle = _this select 0;
 		player moveInGunner ([_vehicle] call jn_fnc_logistics_getCargo select 0);

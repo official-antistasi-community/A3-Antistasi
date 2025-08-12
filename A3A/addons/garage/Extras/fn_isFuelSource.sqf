@@ -20,20 +20,16 @@
 */
 params [ ["_vehicle", objNull, [objNull,""]] ];
 
-//handle obj input and class input
-private _vehType = if (_vehicle isEqualType objNull) then {typeOf _vehicle} else {_vehicle};
-if (_vehicle isEqualType "") then {_vehicle = objNull};
-
-if (_vehType isEqualTo "") exitWith {false}; //null obj passed
-private _vehCfg = configFile/"CfgVehicles"/_vehType;
-if (!isClass _vehCfg) exitWith {false}; //invalid class string passed
-
-if (A3A_hasAce) then { //Ace
-    _vehicle getVariable ["ace_refuel_currentFuelCargo", getNumber (_vehCfg >> "ace_refuel_fuelCargo")] > 0;
-} else { //Vanilla
-    if (isNull _vehicle) then {
-        getNumber (_vehCfg/"transportFuel") > 0
-    } else {
-        getFuelCargo _vehicle > 0
-    };
+if (_vehicle isEqualType objNull) then {
+    if (isNull _vehicle) exitWith {false};
+    if (getFuelCargo _vehicle > 0) exitWith {true};                                     // vanilla
+    private _fuelCargo = getNumber (configOf _vehicle/"ace_refuel_fuelCargo");
+    if (_vehicle getVariable ["ace_refuel_currentFuelCargo", _fuelCargo] > 0) exitWith {true};
+    false;
+} else {
+    private _vehCfg = configFile/"CfgVehicles"/_vehicle;
+    if (!isClass _vehCfg) exitWith {false}; //invalid class string passed
+    if (getNumber (_vehCfg/"transportFuel") > 0) exitWith {true};                       // vanilla
+    if (getNumber (_vehCfg/"ace_refuel_fuelCargo") > 0) exitWith {true};
+    false;
 };

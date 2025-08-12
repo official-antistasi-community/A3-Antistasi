@@ -1,3 +1,5 @@
+private _titleStr = localize "STR_A3A_fn_orgp_tBTogEli_titel";
+
 if !(isServer) exitWith {};
 params ["_playerX", ["_newBoss", objNull]];
 
@@ -14,29 +16,32 @@ if (_playerX getVariable ["eligible",false]) then
 		if(!isNull _newBoss && isPlayer _newBoss) then
 		{
 			if ([_newBoss] call A3A_fnc_makePlayerBossIfEligible) then {
-				_text = format ["You resign from being commander, choosing %1 as your successor.", name _newBoss];
+				_text = format [localize "STR_A3A_fn_orgp_tBTogEli_resign_choosing", name _newBoss];
 			}
 			else {
-				_text = format ["You resign from being commander. Your chosen successor (%1) was not eligible.", name _newBoss];
+				_text = format [localize "STR_A3A_fn_orgp_tBTogEli_resign_chosen", name _newBoss];
 			};
 		}
 		else {
-			_text = "You resign from being Commander. Others will take the command if there is someone suitable.";
+			_text = localize "STR_A3A_fn_orgp_tBTogEli_resign_others";
 		};
 	}
 	else
 	{
-		_text = "You decided not to be eligible for commander.";
+		_text = localize "STR_A3A_fn_orgp_tBTogEli_eligible_no";
 	};
 }
 else
 {
 	if ([_playerX] call A3A_fnc_isMember) then { _forceElection = true };
 	_playerX setVariable ["eligible",true,true];
-	_text = "You are now eligible to be commander of our forces.";
+	_text = localize "STR_A3A_fn_orgp_tBTogEli_eligible_yes";
 };
 
-["Commander", _text] remoteExec ["A3A_fnc_customHint", _playerX];
+
+[_titleStr, _text] remoteExec ["A3A_fnc_customHint", _playerX];
 
 // Will remove current boss if now ineligible
 [_forceElection] call A3A_fnc_assignBossIfNone;
+
+["update"] remoteExecCall ["A3A_GUI_fnc_playerTab", _playerX];

@@ -1,3 +1,5 @@
+// TODO: Delete unused script
+
 _checkX = false;
 _sideX = side (group player);
 _enemyFaction = if (_sideX == Occupants) then {Invaders} else {Occupants};

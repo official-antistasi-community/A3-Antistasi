@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="A3-Antistasi">
+  <Package name="A3-Antistasi logistics">
+    <Container name="Logistics">
+      <Key ID="STR_A3A_logi_addact_load">
+        <Original>Load %1 into nearest vehicle.</Original>
+        <German>%1 in Fahrzeug einladen.</German>
+        <Italian>Carica %1 nel veicolo più vicino.</Italian>
+        <Spanish>Cargar 1% al vehículo más cercano.</Spanish>
+        <French>Charger %1 dans le véhicule le plus proche.</French>
+        <Korean>%1을(를) 가장 가까운 차량에 적재하십시오.</Korean>
+        <Russian>Загрузить %1 в ближайшее транспортное средство.</Russian>
+        <Polish>Załaduj %1 do najbliższego pojazdu</Polish>
+        <Czech>Naložit %1 do nejbližšího vozidla.</Czech>
+        <Portuguese>Carregar %1 no veículo mais próximo.</Portuguese>
+        <Turkish>En yakın araca %1 yükleyin.</Turkish>
+        <Chinesesimp>将 %1 装载入附近的载具</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_addact_unload">
+        <Original>Unload Cargo</Original>
+        <German>Fracht abladen. </German>
+        <Italian>Scarica Carico</Italian>
+        <Spanish>Descargar</Spanish>
+        <French>Déchargement du Cargo</French>
+        <Korean>화물 내리기</Korean>
+        <Polish>Rozładuj ładunek</Polish>
+        <Czech>Vyložit náklad</Czech>
+        <Portuguese>Descarregar carga</Portuguese>
+        <Turkish>Yükü Boşalt</Turkish>
+        <Chinesesimp>卸下货物</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_addweaponaction_alreadyin">
+        <Original>Someone is already in the static.</Original>
+        <German>Jemand ist schon in dem Geschütz</German>
+        <Italian>Qualcuno è gia nella statica.</Italian>
+        <Spanish>Alguien está ocupando el equipamiento estático.</Spanish>
+        <French>Quelqu'un est déjà dans l'arme statique.</French>
+        <Korean>누군가 이미 고정화기에 있습니다.</Korean>
+        <Russian>Кто-то уже в этом статическом оружии.</Russian>
+        <Polish>Ktoś już się znajduje w broni stacjonarnej.</Polish>
+        <Czech>Někdo se již nachází ve statice.</Czech>
+        <Portuguese>Alguém já está na estática.</Portuguese>
+        <Turkish>Birisi çoktan statikte.</Turkish>
+        <Chinesesimp>固定式武器以被他人占用</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_addweaponaction_getin">
+        <Original>Get in %1 as Gunner.</Original>
+        <German>Steige als Schütze in %1 ein.</German>
+        <Italian>Sali nel %1 come Artigliere.</Italian>
+        <Spanish>Entrar en %1 como Artillero.</Spanish>
+        <French>Enter dans %1 en tant que tireur.</French>
+        <Korean>%1의 사수석에 탑승하십시오.</Korean>
+        <Russian>Сесть в %1 в роли Стрелка.</Russian>
+        <Polish>Wsiądź do %1 jako strzelec.</Polish>
+        <Czech>Nastoupit do %1 jako Střelec</Czech>
+        <Portuguese>Entre em %1 como Atirador.</Portuguese>
+        <Turkish>%1 'e nişancı olarak binin.</Turkish>
+        <Chinesesimp>作为炮手进入%1</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_gencargo_lackavailability">
+        <Original>Vehicle lacks the ability to load weapons.</Original>
+        <German>Das Fahrzeug hat nicht die Möglichkeit Waffen zu laden.</German>
+        <Italian>Il veicolo non ha la possibilità di caricare armi.</Italian>
+        <Spanish>El vehículo no es capaz de cargar armas.</Spanish>
+        <French>Le véhicule n'a pas la possibilité de charger des armes.</French>
+        <Korean>해당 차량은 무기를 탑재할 능력이 부족합니다.</Korean>
+        <Russian>В транспортном средстве отсутствует возможность загрузки оружия.</Russian>
+        <Polish>Pojazd nie posiada zdolności do załadowania broni.</Polish>
+        <Czech>Vozidlo nemůže naložit zbraně.</Czech>
+        <Portuguese>O veículo não tem capacidade para carregar armas.</Portuguese>
+        <Turkish>Bu araca silah yükleyemezsiniz.</Turkish>
+        <Chinesesimp>载具缺乏装载武器的能力</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_gencargo_lackcapacity">
+        <Original>Vehicle lacks the capacity for a cargo of this size. Capacity: </Original>
+        <German>Das Fahrzeug hat nicht die Kapazität für eine Ladung dieser Größe. Kapazität:</German>
+        <Italian>Il veicolo non ha la capienza per un carico di questa dimensione. Capienza:</Italian>
+        <Spanish>El vehículo no es capaz de soportar cargas de este tamaño. Capacidad: </Spanish>
+        <French>Le véhicule n'a pas assez de capacité pour une cargaison de cette taille. Capacité :</French>
+        <Korean>차량에 이 크기의 화물을 적재할 용량이 부족합니다. 용량:</Korean>
+        <Russian>Транспортному средству не хватает вместимости для груза такого размера. Ёмкость:</Russian>
+        <Polish>Pojazd nie posiada zdolności do załadowania ładunku tego rozmiaru. Pojemność:</Polish>
+        <Czech>Vozidlu chybí kapacita pro náklad této velikosti. Kapacita:</Czech>
+        <Portuguese>O veículo não tem capacidade para uma carga deste tamanho. Capacidade:</Portuguese>
+        <Turkish>Bu aracın kargo kapasitesi yetersiz. Kargo kapasitesi:</Turkish>
+        <Chinesesimp>载具的空间不够装载这个尺寸的货物. 空间大小：</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_gencargo_lacknodes">
+        <Original>Vehicle lacks nodes, define them or use a different vehicle.</Original>
+        <German>Dem Fahrzeug fehlen Knotenpunkte, definiere diese oder verwende ein anderes Fahrzeug.</German>
+        <Italian>Il veicolo non ha nodi, definiscili o usa un veicolo differente.</Italian>
+        <Spanish>Al vehículo le faltan nodos, defínalos  o utilice un vehículo distinto.</Spanish>
+        <French>Le véhicule n'a pas de points d'attache, définissez-les ou utilisez un véhicule différent.</French>
+        <Korean>차량에 노드가 없습니다. 해당 차량에 노드를 정의하거나 다른 차량을 사용하십시오.</Korean>
+        <Russian>В транспортном средстве отсутствуют узлы, определите их или используйте другое транспортное средство.</Russian>
+        <Polish>Pojazd nie posiada węzłów, zdefiniuj je albo użyj innego pojazdu.</Polish>
+        <Czech>Vozidlu chybí logistický uzel, nadefinuj jej nebo použij jiné vozidlo.</Czech>
+        <Portuguese>O veículo não possui nódulos, defina-os ou use um veículo diferente.</Portuguese>
+        <Turkish>Aracın bağlantı noktaları belirsiz, tanımlayın ya da başka bir araç kullanın.</Turkish>
+        <Chinesesimp>该载具缺少可用节点，定义该节点或者使用其他载具</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_load_being">
+        <Original>Cargo is already being loaded into the vehicle.</Original>
+        <German>Die Ladung wird bereits in das Fahrzeug geladen.</German>
+        <Italian>Il carico sta già venendo caricato nel veicolo.</Italian>
+        <Spanish>La carga ya está siendo cargada en el vehículo.</Spanish>
+        <French>La cargaison est déjà en train d'être chargée dans le véhicule.</French>
+        <Korean>차량에 이미 화물이 적재되었습니다.</Korean>
+        <Russian>Груз уже загружается в транспортное средство.</Russian>
+        <Polish>Ładunek jest w trackie załadowywania do pojazdu.</Polish>
+        <Czech>Náklad je již do vozidla nakládán.</Czech>
+        <Portuguese>A carga já está sendo carregada no veículo.</Portuguese>
+        <Turkish>Araca kargo çoktan yükleniyor.</Turkish>
+        <Chinesesimp>其他人正在尝试将货物载入该载具</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_mass_cargo">
+        <Original>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Cargo mass: &lt;/t&gt;</Original>
+        <German>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Frachtgewicht: &lt;/t&gt;</German>
+        <Italian>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Massa del carico: &lt;/t&gt;</Italian>
+        <Spanish>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Masa total de la carga: &lt;/t&gt;</Spanish>
+        <French>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Poids Cargaison : &lt;/t&gt;</French>
+        <Korean>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;화물량: &lt;/t&gt;</Korean>
+        <Russian>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Масса груза: &lt;/t&gt;</Russian>
+        <Polish>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Masa ładunku: &lt;/t&gt;</Polish>
+        <Czech>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Hmotnost nákladu: &lt;/t&gt;</Czech>
+        <Portuguese>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Carga Total: &lt;/t&gt;</Portuguese>
+        <Turkish>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Kargo kütlesi: &lt;/t&gt;</Turkish>
+        <Chinesesimp>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;货物质量: &lt;/t&gt;</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_mass_current">
+        <Original>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Current mass: &lt;/t&gt;</Original>
+        <German>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;aktuelles Gewicht: &lt;/t&gt;</German>
+        <Italian>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Massa corrente: &lt;/t&gt;</Italian>
+        <Spanish>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Masa actual: &lt;/t&gt;</Spanish>
+        <French>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Poids actuel : &lt;/t&gt;</French>
+        <Korean>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;현재 화물량: &lt;/t&gt;</Korean>
+        <Russian>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Текущая масса: &lt;/t&gt;</Russian>
+        <Polish>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Aktualna masa: &lt;/t&gt;</Polish>
+        <Czech>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Aktuální hmotnost: &lt;/t&gt;</Czech>
+        <Portuguese>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Carga atual: &lt;/t&gt;</Portuguese>
+        <Turkish>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Şu anki kütle: &lt;/t&gt;</Turkish>
+        <Chinesesimp>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;目前质量: &lt;/t&gt;</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_mass_default">
+        <Original>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Default mass: &lt;/t&gt;</Original>
+        <German>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Standardgewicht: &lt;/t&gt;</German>
+        <Italian>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Massa predefinita: &lt;/t&gt;</Italian>
+        <Spanish>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Masa por defecto: &lt;/t&gt;</Spanish>
+        <French>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Poids par défaut : &lt;/t&gt;</French>
+        <Korean>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;기본 화물량: &lt;/t&gt;</Korean>
+        <Russian>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Масса по умолчанию: &lt;/t&gt;</Russian>
+        <Polish>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Domyślna masa: &lt;/t&gt;</Polish>
+        <Czech>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Výchozí hmotnost: &lt;/t&gt;</Czech>
+        <Portuguese>&lt;br/&gt;&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Carga normal: &lt;/t&gt;</Portuguese>
+        <Turkish>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;Varsayılan kütle: &lt;/t&gt;</Turkish>
+        <Chinesesimp>&lt;t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'&gt;默认质量: &lt;/t&gt;</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_mass_loaded_freeslots">
+        <Original>&lt;t color='#00fff3'&gt;"%1" is loaded onto "%2". Free slots: "%3".&lt;/t&gt;</Original>
+        <German>&lt;t color='#00fff3'&gt;"%1" wird auf "%2" geladen. Frei verfügbare Plätze: "%3".&lt;/t&gt;</German>
+        <Italian>&lt;t color='#00fff3'&gt;"%1" è caricato in "%2". Slot liberi: "%3".&lt;/t&gt;</Italian>
+        <Spanish>&lt;t color='#00fff3'&gt;"%1" está siendo cargado en "%2". Espacios libres: "%3".&lt;/t&gt;</Spanish>
+        <French>&lt;t color='#00fff3'&gt;"%1" est chargé sur "%2". Emplacements libres : "%3".&lt;/t&gt;</French>
+        <Korean>&lt;t color='#00fff3'&gt;"%1"이(가) "%2"에 적재되었습니다. 사용 가능 슬롯: "%3".&lt;/t&gt;</Korean>
+        <Russian>&lt;t color='#00fff3'&gt;"%1" загружен в "%2". Свободных мест: "%3".&lt;/t&gt;</Russian>
+        <Polish>&lt;t color='#00fff3'&gt;"%1" is loaded onto "%2". Wolne miejsca: "%3".&lt;/t&gt;</Polish>
+        <Czech>&lt;t color='#00fff3'&gt;"%1" je nakládáno do "%2". Volné sloty: "%3".&lt;/t&gt;</Czech>
+        <Portuguese>&lt;t color='#00fff3'&gt;"%1" foi carregado em "%2". Espaços livres: "%3".&lt;/t&gt;</Portuguese>
+        <Turkish>&lt;t color='#00fff3'&gt;"%1" ,"%2"'ye yüklendi. Boş yerler: "%3".&lt;/t&gt;</Turkish>
+        <Chinesesimp>&lt;t color='#00fff3'&gt;"%1" 已经被装载入 "%2". 可用槽位: "%3".&lt;/t&gt;</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_mass_nospace">
+        <Original>&lt;t color='#00fff3'&gt;"%1" is loaded onto "%2". There is no more space.&lt;/t&gt;</Original>
+        <Italian>&lt;t color='#00fff3'&gt;"%1" è caricato in "%2" Non c'è più spazio.&lt;/t&gt;</Italian>
+        <Spanish>&lt;t color='#00fff3'&gt;"%1" está siendo cargado en "%2" No queda más espacio.&lt;/t&gt;</Spanish>
+        <French>&lt;t color='#00fff3'&gt;"%1" est chargé sur "%2" Il n'y a plus de place.&lt;/t&gt;</French>
+        <Korean>&lt;t color='#00fff3'&gt;"%1"이(가) "%2"에 적재되었습니다. 더 이상 공간이 없습니다.&lt;/t&gt;</Korean>
+        <Russian>&lt;t color='#00fff3'&gt;"%1" загружен в "%2". Места больше нет.&lt;/t&gt;</Russian>
+        <Czech>&lt;t color='#00fff3'&gt;"%1" je nakládáno do "%2" Už nezbylo žádné další místo.&lt;/t&gt;</Czech>
+        <Portuguese>&lt;t color='#00fff3'&gt;"%1" foi carregado em "%2". Não há mais espaço.&lt;/t&gt;</Portuguese>
+        <Turkish>&lt;t color='#00fff3'&gt;"%1" , "%2"'ye yüklendi. Boş yer kalmadı.&lt;/t&gt;</Turkish>
+        <Chinesesimp>&lt;t color='#00fff3'&gt;"%1" 已经被装载入 "%2" 已无可用空间.&lt;/t&gt;</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_mass_unloaded_freeslots">
+        <Original>&lt;t color='#00fff3'&gt;"%1" was unloaded from "%2". Free slots: "%3".&lt;/t&gt;</Original>
+        <German>&lt;t color='#00fff3'&gt;"%1" wurde entladen aus "%2". Frei verfügbare Plätze: "%3".&lt;/t&gt;</German>
+        <Italian>&lt;t color='#00fff3'&gt;"%1" è stato scaricato da "%2". Slot liberi: "%3".&lt;/t&gt;</Italian>
+        <Spanish>&lt;t color='#00fff3'&gt;"%1" fue descargado de "%2". Espacios libres: "%3".&lt;/t&gt;</Spanish>
+        <French>&lt;t color='#00fff3'&gt;"%1" a été déchargé de "%2". Emplacements libres : "%3".&lt;/t&gt;</French>
+        <Korean>&lt;t color='#00fff3'&gt;"%1"이(가) "%2"에 하역되었습니다. 사용 가능 슬롯: "%3".&lt;/t&gt;</Korean>
+        <Russian>&lt;t color='#00fff3'&gt;"%1"был выгружен из "%2". Свободных мест: "%3".&lt;/t&gt;</Russian>
+        <Polish>&lt;t color='#00fff3'&gt;"%1" został wyładowany z "%2". Wolne miejsca: "%3".&lt;/t&gt;</Polish>
+        <Czech>&lt;t color='#00fff3'&gt;"%1" bylo vyloženo z "%2". Volné sloty: "%3".&lt;/t&gt;</Czech>
+        <Portuguese>&lt;t color='#00fff3'&gt;"%1" foi descarregado de "%2". Espaços livres: "%3".&lt;/t&gt;</Portuguese>
+        <Turkish>&lt;t color='#00fff3'&gt;"%1" , "%2"'den boşaltıldı. Boş yerler: "%3".&lt;/t&gt;</Turkish>
+        <Chinesesimp>&lt;t color='#00fff3'&gt;"%1" 已经从"%2" 卸下 . 当前可用空间为: "%3".&lt;/t&gt;</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_salvagerope_nospace">
+        <Original>%1 does not have enough space to load %2.</Original>
+        <German>%1 hat nicht genug Platz um %2 zu laden.</German>
+        <Italian>%1 non ha abbastanza spazio per caricare %2</Italian>
+        <Spanish>%1 no tiene suficiente espacio para cargar %2.</Spanish>
+        <French>%1 n'a pas assez de place pour charger %2</French>
+        <Korean>%1은(는) %2을(를) 로드하기엔 공간이 부족합니다.</Korean>
+        <Russian>В %1 недостаточно места, чтобы загрузить %2.</Russian>
+        <Polish>%1 nie ma wystarczająco miejsce żeby załadować %2.</Polish>
+        <Czech>%1 nemá dostatek místa na naložení %2.</Czech>
+        <Portuguese>%1 não tem espaço suficiente para carregar %2.</Portuguese>
+        <Turkish>%1'in %2 için boş yeri yok.</Turkish>
+        <Chinesesimp>%1 没有剩余的空间来装载 %2.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_title">
+        <Original>Logistics</Original>
+        <German>Logistik</German>
+        <Italian>Logistica</Italian>
+        <Spanish>Logística</Spanish>
+        <French>Logistique</French>
+        <Korean>병참</Korean>
+        <Russian>Логистика</Russian>
+        <Polish>Logistyka</Polish>
+        <Czech>Logistika</Czech>
+        <Portuguese>Logística</Portuguese>
+        <Turkish>Lojistik</Turkish>
+        <Chinesesimp>后勤补给</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_tryload_helped">
+        <Original>%1 is being helped or no longer needs your help.</Original>
+        <German>%1 wird geholfen oder braucht deine Hilfe nicht mehr.</German>
+        <Italian>%1 sta venendo aiutato o non ha più bisogno del tuo aiuto.</Italian>
+        <Spanish>%1 ya está siendo ayudado o ya no necesita tu ayuda.</Spanish>
+        <French>%1 reçoit déjà de l'aide ou n'a plus besoin de votre aide.</French>
+        <Korean>%1이(가) 이미 도움을 받고 있거나 더 이상 도움이 필요하지 않습니다.</Korean>
+        <Russian>%1 получает помощь или больше не нуждается в вашей помощи.</Russian>
+        <Polish>%1 aktualnie udzielana jest pomoc, lub nie porzebuje już twojej pomocy.</Polish>
+        <Czech>1% je již pomáháno a nebo již nepotřebuje tvojí pomoc.</Czech>
+        <Portuguese>%1 está sendo ajudado ou não precisa mais da sua ajuda.</Portuguese>
+        <Turkish>%1'e yardım ediliyor ya da yardımınıza ihtiyacı yok.</Turkish>
+        <Chinesesimp>%1 正在接收帮助或者不再需要你的帮助</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_tryload_no">
+        <Original>%1 cannot be loaded.</Original>
+        <German>%1 kann nicht geladen werden.</German>
+        <Italian>%1 non può essere caricato.</Italian>
+        <Spanish>%1 no puede ser cargado.</Spanish>
+        <French>%1 ne peut pas être chargé.</French>
+        <Korean>%1을(를) 적재할 수 없습니다.</Korean>
+        <Russian>%1 не может быть загружен.</Russian>
+        <Polish>%1 nie może zostać załadowane.</Polish>
+        <Czech>%1 nemůže být naloženo.</Czech>
+        <Portuguese>%1 não pode ser carregado.</Portuguese>
+        <Turkish>%1 yüklenemez.</Turkish>
+        <Chinesesimp>%1 无法被装载.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_tryload_no_blocking">
+        <Original>%1 can not load cargo while units are blocking the cargo plane.</Original>
+        <German>%1 kann keine Fracht laden, wenn die Ladefläche blockiert wird.</German>
+        <Italian>%1 non può caricare il carico mentre le unità bloccano l'aereo da trasporto.</Italian>
+        <Spanish>%1 no puede cargar nada mientras haya unidades bloqueando la aeronave de carga.</Spanish>
+        <French>%1 ne peut pas charger la cargaison tant que des unités bloquent l'avion cargo.</French>
+        <Korean>%1은(는) 유닛이 화물기를 막고 있는 동안에는 화물을 적재할 수 없습니다.</Korean>
+        <Russian>%1 не может загрузить груз, пока юниты блокируют грузовой самолёт.</Russian>
+        <Polish>%1 nie może przewozić ładunku kiedy jednostki blokują samolot transportowy.</Polish>
+        <Czech>%1 nemůže naložit náklad pokud jednotky blokují nákladní letadlo.</Czech>
+        <Portuguese>1% não pode carregar a carga enquanto unidades estão bloqueando o avião cargueiro.</Portuguese>
+        <Turkish>%1, birimler kargo alanını bloke ederken yüklenemez.</Turkish>
+        <Chinesesimp>%1 无法在运输机被单位阻挡的情况下装载货物</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_tryload_no_mounted">
+        <Original>Can't load a static that's mounted.</Original>
+        <German>Kann montierten Gegenstand nicht einladen.</German>
+        <Italian>Non è possibile caricare una statica che è montata.</Italian>
+        <Spanish>No puedes cargar equipamiento estático que ya está montado.</Spanish>
+        <French>Impossible de charger une arme statique occupée.</French>
+        <Korean>탑재된 고정화기를 적재할 수는 없습니다.</Korean>
+        <Russian>Невозможно загрузить статическое оружие, в котором кто-то находится.</Russian>
+        <Polish>Nie można załadować zamontowanej broni statycznej.</Polish>
+        <Czech>Nemůžeš naložit statiku která je připevněná.</Czech>
+        <Portuguese>Não é possível carregar uma estática montada.</Portuguese>
+        <Turkish>Kurulu statikler yüklenemez.</Turkish>
+        <Chinesesimp>无法装载架设完毕的固定式武器</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_tryload_no_ontop">
+        <Original>%1 can not be mounted on a %2.</Original>
+        <German>%1 kann nicht auf %2 montiert werden.</German>
+        <Italian>%1 non può essere montato su %2.</Italian>
+        <Spanish>%1 no puede ser montado en %2.</Spanish>
+        <French>%1 ne peut pas être monté sur un(e) %2.</French>
+        <Korean>%2 위에 %1을(를) 탑재할 수 없습니다.</Korean>
+        <Russian>1% не может быть установлен на 2%</Russian>
+        <Polish>%1 nie może być zamontowany na %2.</Polish>
+        <Czech>%1 nemůže být připevněno na %2.</Czech>
+        <Portuguese>%1 não pode ser montado em %2.</Portuguese>
+        <Turkish>%1, %2'ye yüklenemez.</Turkish>
+        <Chinesesimp>%1 无法架设在 %2 上面.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_tryload_no_space">
+        <Original>%1 does not have enough space to load %2.</Original>
+        <German>%1 hat nicht genug Platz um %2 zu laden.</German>
+        <Italian>%1 non ha abbastanza spazio per caricare %2.</Italian>
+        <Spanish>%1 no tiene suficiente espacio para cargar %2. </Spanish>
+        <French>%1 n'a pas assez d'espace pour charger %2.</French>
+        <Korean>%1에 공간이 부족해 %2을(를) 적재할 수 없습니다.</Korean>
+        <Russian>В %1 недостаточно места для загрузки %2.</Russian>
+        <Polish>%1 nie ma wystarczająco miejsca żeby załadować %2.</Polish>
+        <Czech>%1 nemá dostatek místa na naložení %2.</Czech>
+        <Portuguese>%1 não tem espaço suficiente para carregar %2.</Portuguese>
+        <Turkish>%1'de %2 için gerekli yer yok.</Turkish>
+        <Chinesesimp>%1 没有足够的空间来装载 %2.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_tryload_no_unable">
+        <Original>%1 is unable to load any cargo.</Original>
+        <German>%1 kann keine Fracht laden.</German>
+        <Italian>%1 non può caricare alcun carico.</Italian>
+        <Spanish>%1 es incapaz de soportar ningún tipo de carga.</Spanish>
+        <French>%1 ne peut charger aucune cargaison.</French>
+        <Korean>%1은(는) 아무 화물도 적재할 수 없습니다.</Korean>
+        <Russian>%1 не может вместить какой-либо груз.</Russian>
+        <Polish>%1 nie jest wstanie załadować żadnego ładunku.</Polish>
+        <Czech>1% nemůže naložit žádný náklad.</Czech>
+        <Portuguese>%1 não consegue carregar nenhuma carga.</Portuguese>
+        <Turkish>%1'e kargo yüklenemez.</Turkish>
+        <Chinesesimp>%1 无法装载任何货物.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_tryload_nodesveh">
+        <Original>You can't load cargo into a destroyed vehicle.</Original>
+        <German>Du kannst keine Fracht in ein zerstörtes Fahrzeug laden.</German>
+        <Italian>Non puoi caricare il carico in un veicolo distrutto.</Italian>
+        <Spanish>No puedes cargar nada en un vehículo destruido.</Spanish>
+        <French>Vous ne pouvez pas charger de cargaison dans un véhicule détruit.</French>
+        <Korean>파괴된 차량에는 화물을 적재할 수 없습니다.</Korean>
+        <Russian>Вы не можете загрузить груз в уничтоженное транспортное средство.</Russian>
+        <Polish>Nie możesz załadować ładunku do zniszczonego pojazdu.</Polish>
+        <Czech>Nemůžeš naložit náklad do zničeného vozidla.</Czech>
+        <Portuguese>Você não pode carregar carga em um veículo destruído.</Portuguese>
+        <Turkish>Patlamış araçlara kargo yüklenemez.</Turkish>
+        <Chinesesimp>你无法将货物装入已经被摧毁的载具</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_tryload_nodexcargo">
+        <Original>You can't load destroyed cargo into a vehicle.</Original>
+        <German>Du kannst keine zerstörte Fracht in ein Fahrzeug laden.</German>
+        <Italian>Non puoi caricare carichi distrutti in un veicolo.</Italian>
+        <Spanish>No puedes cargar cargas destruidas en un vehículo.</Spanish>
+        <French>Vous ne pouvez pas charger de cargaison détruite dans un véhicule.</French>
+        <Korean>파괴된 화물을 차량에 적재할 수 없습니다.</Korean>
+        <Russian>Вы не можете загрузить уничтоженный груз в транспортное средство.</Russian>
+        <Polish>Nie możesz załadować zniszczonego ładunku do pojazdu.</Polish>
+        <Czech>Nemůžeš naložit zničený náklad do vozidla.</Czech>
+        <Portuguese>Você não pode carregar uma carga destruída em um veículo.</Portuguese>
+        <Turkish>Telef olmuş kargo araçlara yüklenemez.</Turkish>
+        <Chinesesimp>你无法将已被摧毁的载具装入其他载具</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_tryload_nodistance">
+        <Original>No vehicle is close enough.</Original>
+        <German>Es ist kein Fahrzeug in der nähe.</German>
+        <Italian>Nessun veicolo è abbastanza vicino.</Italian>
+        <Spanish>No hay ningún vehículo suficientemente cerca.</Spanish>
+        <French>Aucun véhicule n'est assez proche.</French>
+        <Korean>충분히 가까운 차량이 없습니다.</Korean>
+        <Russian>Ни одно транспортное средство не находится достаточно близко.</Russian>
+        <Polish>Żaden pojazd nie jest wystarczająco blisko.</Polish>
+        <Czech>Vozidlo není dostatečně blízko.</Czech>
+        <Portuguese>Nenhum veículo está perto o suficiente.</Portuguese>
+        <Turkish>Yakın civarda araç yok.</Turkish>
+        <Chinesesimp>附近无可用车辆</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_unload_no_already">
+        <Original>Cargo is already being unloaded from the vehicle.</Original>
+        <German>Die Ladung wird bereits aus dem Fahrzeug entladen.</German>
+        <Italian>Il carico sta già venendo scaricato dal veicolo.</Italian>
+        <Spanish>La carga ya está siendo descargada del vehículo.</Spanish>
+        <French>La cargaison est déjà en train d'être déchargée du véhicule.</French>
+        <Korean>이미 화물이 차량에서 하역되었습니다.</Korean>
+        <Russian>Груз уже выгружается из транспортного средства.</Russian>
+        <Polish>Ładunek jest w trakcie rozładowywania z pojazdu.</Polish>
+        <Czech>Náklad je již z vozidla vykládán.</Czech>
+        <Portuguese>A carga já está sendo descarregada do veículo.</Portuguese>
+        <Turkish>Kargo çoktan araçtan indiriliyor.</Turkish>
+        <Chinesesimp>其他人正在尝试从载具上卸下此货物</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_logi_unload_no_mounted">
+        <Original>Can't unload a static that's mounted.</Original>
+        <German>Kann montierten Gegenstand nicht entladen.</German>
+        <Italian>Non puoi scaricare una statica che è già montata.</Italian>
+        <Spanish>No puedes descargar equipamiento estático que ya está montado.</Spanish>
+        <French>Impossible de décharger une arme statique occupée.</French>
+        <Korean>탑재된 고정화기를 하역할 수 없습니다.</Korean>
+        <Russian>Невозможно загрузить статическое оружие, в котором кто-то находится.</Russian>
+        <Polish>Nie można wyładować broni stacjonarnej która jest zamontowana.</Polish>
+        <Czech>Nemůžeš naložit statiku které je přidělaná.</Czech>
+        <Portuguese>Não é possível descarregar uma estática montada.</Portuguese>
+        <Turkish>Kurulu taretler indirilemez.</Turkish>
+        <Chinesesimp>无法装载架设完毕的固定式武器</Chinesesimp>
+      </Key>
+    </Container>
+  </Package>
+</Project>

@@ -7,6 +7,8 @@ Arguments:
     None
 */
 
+private _titleStr = localize "STR_A3A_fn_init_clientidle_title";
+
 A3A_lastActiveTime = time;
 A3A_lastPlayerDir = getDir player;
 
@@ -38,7 +40,7 @@ while {true} do {
         player setVariable ["isAFK", true, [2, clientOwner]];
         [] spawn A3A_fnc_statistics;
         if (player == theBoss) then {
-            ["Client idle checker", "You are now considered AFK. You may lose commander if an election is triggered"] call A3A_fnc_customHint;
+            [_titleStr, localize "STR_A3A_fn_init_clientidle_warning"] call A3A_fnc_customHint;
         };
     };
 };

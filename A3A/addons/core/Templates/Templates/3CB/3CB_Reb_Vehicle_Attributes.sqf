@@ -19,13 +19,18 @@
 	
     //Rebel Light Unarmed
     ["UK3CB_ION_B_Winter_M998_2DR", ["rebCost", 500]],
+    ["UK3CB_LSM_B_BTR40", ["rebCost", 600]],
 	
     //Rebel Light Armed
     ["UK3CB_ION_B_Winter_M1025_M2", ["rebCost", 900]],
     ["UK3CB_ION_B_Winter_SUV_Armed", ["rebCost", 1000]],
+    ["UK3CB_LSM_B_Hilux_Mortar", ["rebCost", 1000]],
+    ["UK3CB_LSM_B_Hilux_Pkm", ["rebCost", 600]],
+    ["UK3CB_LSM_B_BTR40_MG", ["rebCost", 900]],
 	
 	//Rebel Static
     ["UK3CB_FIA_I_M240_High", ["rebCost", 300]],
     ["UK3CB_FIA_I_M240_Low", ["rebCost", 300]],
-    ["UK3CB_MEI_I_PKM_Low", ["rebCost", 300]]
+    ["UK3CB_MEI_I_PKM_Low", ["rebCost", 300]],
+    ["UK3CB_MEI_I_PKM_High", ["rebCost", 300]]
 ]] call _fnc_saveToTemplate;

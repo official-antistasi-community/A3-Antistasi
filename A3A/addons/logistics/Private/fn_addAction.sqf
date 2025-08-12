@@ -6,6 +6,8 @@
     Arguments:
     0. <Object> Object to add action to
     1. <String> Which action to add ("load"/"unload")
+    2. <String> JIP key
+    3. <Bool> Whether loading should break undercover
 
     Return Value:
     <nil>
@@ -17,13 +19,13 @@
 
     Example: [_object , _action] remoteExec ["A3A_Logistics_fnc_addAction", 0, _object];
 */
-params [["_object", objNull, [objNull]], "_action", ["_jipKey", "", [""]]];
+params [["_object", objNull, [objNull]], "_action", ["_jipKey", "", [""]], ["_breakUC",false]];
 if (isNull _object) exitWith {
     remoteExec ["", _jipKey]; //clear custom JIP
 };
 
 private _actionNames = (actionIDs _object) apply {(_object actionParams _x)#0};
-private _loadText = format ["Load %1 into nearest vehicle", getText (configFile >> "CfgVehicles" >> typeOf _object >> "displayName")];
+private _loadText = format [localize "STR_A3A_logi_addact_load", getText (configFile >> "CfgVehicles" >> typeOf _object >> "displayName")];
 
 switch (_action) do {
     case "load":{
@@ -32,10 +34,11 @@ switch (_action) do {
         [
             _loadText,
             {
-                params ["_target"];
+                params ["_target","_caller","_actionID","_breakUC"];
                 [_target] remoteExecCall ["A3A_Logistics_fnc_tryLoad",2];
+                if (_breakUC) then {_caller setCaptive false};
             },
-            nil,
+            _breakUC,
             -5,
             true,
             true,
@@ -54,7 +57,7 @@ switch (_action) do {
         ];
     };
     case "unload": {
-        private _text = "Unload Cargo";
+        private _text = localize "STR_A3A_logi_addact_unload";
         if (_text in _actionNames) exitWith {};
         private _unloadActionID = _object addAction
         [

@@ -1,5 +1,6 @@
-cutText ["You decided to rest for some time","BLACK",5];
+params [["_restTime",8,[0]]];
+cutText [localize "STR_A3A_fn_base_resourcecheckSkipTime_begin","BLACK",5];
 sleep 10;
-skiptime 8;
+skiptime _restTime;
 forceWeatherChange;
-cutText ["Time to go","BLACK IN",10];
+cutText [localize "STR_A3A_fn_base_resourcecheckSkipTime_end","BLACK IN",10];

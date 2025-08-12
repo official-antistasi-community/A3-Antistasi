@@ -11,6 +11,7 @@
         _posDestination: POSITION : The position of the target
         _markerOrigin: STRING : The marker from which the units are send
         _landPosBlacklist: ARRAY : A list of already blocked positions
+        _seaPath: ARRAY : Optional, needed for boats. Path of positions from landing point to deep sea
 
     Returns:
         _landPosBlacklist: ARRAY : The updated list of blocked positions
@@ -18,11 +19,11 @@
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-params ["_vehicle", "_crewGroup", "_cargoGroup", "_posDestination", "_markerOrigin", "_landPosBlacklist"];
+params ["_vehicle", "_crewGroup", "_cargoGroup", "_posDestination", "_markerOrigin", "_landPosBlacklist", "_seaPath"];
 
 
 private _vehType = typeof _vehicle;
-if (_vehicle isKindOf "Air") then
+if (_vehicle isKindOf "Air") exitWith
 {
     if (_vehType in FactionGet(all,"vehiclesHelisTransport") + FactionGet(all,"vehiclesHelisLight")) exitWith
     {
@@ -67,12 +68,48 @@ if (_vehicle isKindOf "Air") then
     _vehWP0 setWaypointBehaviour "COMBAT";
     _vehWP0 setWaypointType "SAD";
     _crewGroup setCombatMode "RED";
+    _landPosBlacklist;
 
+};
+
+if (_vehicle isKindOf "Ship") then {
+
+    private _isAttack = typeOf _vehicle in (A3A_faction_all get "vehiclesGunBoats");
+    _vehicle setVariable ["A3A_shipSpawnPos", getPosATL _vehicle];
+
+    if (!isNull _cargoGroup) then {
+        private _sideDir = _seaPath#0 vectorFromTo _seaPath#1;
+        _sideDir = vectorNormalized [_sideDir#1, -(_sideDir#0), 0];
+        if (random 1 < 0.5) then { _sideDir = _sideDir vectorMultiply -1 };
+        
+        // check along the coast until we find an unused location
+        private _landPos = _seaPath#1;
+        while { _landPosBlacklist inAreaArray [_landPos, 10, 10] isNotEqualTo [] } do {
+            _landPos = _landPos vectorAdd (_sideDir vectorMultiply 15);
+        };
+        _landPosBlacklist pushBack _landPos;
+
+        private _vehWP0 = _crewGroup addWaypoint [ASLtoATL _landPos, 0];
+        _vehWP0 setWaypointType "TR UNLOAD";
+        //_vehWP0 setWaypointCompletionRadius 200;
+        _vehWP0 setWaypointBehaviour "AWARE";
+        if !(_isAttack) then { _vehWP0 setWaypointStatements ["true","if !(local this) exitWith {}; [group this] spawn A3A_fnc_enemyReturnToBase"] };
+    };
+
+    if (_isAttack) then {
+        private _vehWP1 = _crewGroup addWaypoint [ASLtoATL (_seaPath#2), 0];
+        _vehWP1 setWaypointType "SAD";
+        _vehWP1 setWaypointBehaviour "COMBAT";
+    };
+
+    private _cargoWP1 = _cargoGroup addWaypoint [_posDestination, 0];
 }
 else            // ground vehicle
 {
     private _typeName = call {
         if (_vehType in FactionGet(all,"vehiclesTanks")) exitWith {"Tank"};
+        if (_vehType in FactionGet(all,"vehiclesLightTanks")) exitWith {"Tank"};
+        if (_vehType in FactionGet(all,"vehiclesHeavyTanks")) exitWith {"Tank"};
         if (_vehType in FactionGet(all,"vehiclesAA")) exitWith {"AA"};
         if (_vehType in FactionGet(all,"vehiclesArmor"))  exitWith {"APC"};
         if (_vehType in FactionGet(all,"vehiclesTrucks")) exitWith {"Truck"};
@@ -136,7 +173,7 @@ else            // ground vehicle
 
         //Set the waypoints for cargoGroup
         private _cargoWP0 = _cargoGroup addWaypoint [_landpos, 0];
-        _cargoWP0 setWaypointType "GETOUT";
+        //_cargoWP0 setWaypointType "GETOUT";
         _cargoWP0 setWaypointStatements ["true", "if !(local this) exitWith {}; (group this) leaveVehicle (assignedVehicle this); (group this) spawn A3A_fnc_attackDrillAI"];
         private _cargoWP1 = _cargoGroup addWaypoint [_posDestination, 0];
         _cargoWP1 setWaypointBehaviour "AWARE";
@@ -168,7 +205,7 @@ else            // ground vehicle
 
         //Set the waypoints for cargoGroup
         private _cargoWP0 = _cargoGroup addWaypoint [_landpos, 0];
-        _cargoWP0 setWaypointType "GETOUT";
+        //_cargoWP0 setWaypointType "GETOUT";
         _cargoWP0 setWaypointStatements ["true", "if !(local this) exitWith {}; (group this) leaveVehicle (assignedVehicle this); (group this) spawn A3A_fnc_attackDrillAI"];
         private _cargoWP1 = _cargoGroup addWaypoint [_posDestination, 0];
         _cargoWP1 setWaypointBehaviour "AWARE";

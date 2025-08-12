@@ -51,4 +51,14 @@ class AddonVics
         description = "A bike pack that extends the civilian vehicle pool";
         loadedMessage = "TCGM loaded, bikes added for civilians";
     };
+
+    class CUP
+    {
+        path = QPATHTOFOLDER(Templates\AddonVics);
+        requiredAddons[] = {"CUP_AirVehicles_Core"};
+        files[] = { {"Civ", "cup_veh_Civ.sqf"} };
+        displayName = "CUP civilian vehicle pack";
+        description = "A vehicle pack from CUP that extends the civilian vehicle pool";
+        loadedMessage = "CUP civilian loaded, civilian vehicle pool expanded";
+    };
 };

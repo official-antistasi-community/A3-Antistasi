@@ -31,7 +31,7 @@ PATCOM_Building_Blacklist = createHashMap;
 } forEach A3A_buildingBlacklist;
 
 // This HashMap contains a list of valid garrison positions.
-PATCOM_Garrison_Positions = createHashMapFromArray [
+PATCOM_Garrison_Positions_Whitelist = createHashMapFromArray [
     ["Land_Cargo_HQ_V1_F", [6,7,8]],
     ["Land_Cargo_HQ_V2_F", [6,7,8]],
     ["Land_Cargo_HQ_V3_F", [6,7,8]],

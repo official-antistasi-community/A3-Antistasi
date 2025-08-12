@@ -13,12 +13,12 @@ if(!canSuspend) exitWith
 
 if(isDedicated) exitWith {};
 
-if(isMultiplayer && {!isServer} && {!(call BIS_fnc_admin > 0)}) exitWith {["Convoy Debug", "Only server admins can execute the convoy debug!"] call A3A_fnc_customHint;};
+if(isMultiplayer && {!isServer} && {!(call BIS_fnc_admin > 0)}) exitWith {[localize "STR_A3A_fn_convoy_convdebug_title", localize "STR_A3A_fn_convoy_convdebug_admin"] call A3A_fnc_customHint;};
 
 player setVariable ["convoyDebug", true];
 sleep 1;
 
-_stop = player addAction ["Deactivate convoy debug", {(_this select 0) setVariable ["convoyDebug", false]; (_this select 0) removeAction (_this select 2);}, nil, 0, false, false, "", "_originalTarget == _this"];
+_stop = player addAction [localize "STR_A3A_fn_convoy_convdebug_deactivate", {(_this select 0) setVariable ["convoyDebug", false]; (_this select 0) removeAction (_this select 2);}, nil, 0, false, false, "", "_originalTarget == _this"];
 
 private _allConvoyMarker = [];
 while {player getVariable ["convoyDebug", false]} do

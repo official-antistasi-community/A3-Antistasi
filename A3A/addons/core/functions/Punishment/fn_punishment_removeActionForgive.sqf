@@ -27,7 +27,7 @@ params ["_name"];
 
 private _actionsSelf = actionIDs player;
 if ((!isNil "_actionsSelf") && {!(_actionsSelf isEqualTo [])}) then {  // All players will be scanned, in-case they were previously an admin.
-    private _actionName = ["[Forgive FF] ",_name,""] joinString """";
+    private _actionName = ["[" + localize "STR_A3A_fn_punishment_FF_addAcFor" + "]" ,_name,""] joinString """";
     {
         if (((player actionParams _x)#0) isEqualTo _actionName) exitWith {
             player removeAction _x;

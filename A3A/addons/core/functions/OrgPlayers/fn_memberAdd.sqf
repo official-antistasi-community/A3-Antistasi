@@ -1,27 +1,37 @@
-if (!(serverCommandAvailable "#logout") and (!isServer)) exitWith {["Membership", "Only Server Admins or hosters can add a new member."] call A3A_fnc_customHint;};
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
 
-if !(membershipEnabled) exitWith {["Membership", "Server Member feature is disabled."] call A3A_fnc_customHint;};
+params [["_mode","",[""]],["_target",objNull,[objNull]]];
 
-if (isNil "membersX") exitWith {["Membership", "Membership feature not yet initialised. Please try again later."] call A3A_fnc_customHint;};
+private _titleStr = localize "STR_A3A_fn_orgp_memAdd_titel";
 
-_target = cursortarget;
+if (!(serverCommandAvailable "#logout") and (!isServer)) exitWith {[_titleStr, localize "STR_A3A_fn_orgp_memAdd_no_admin"] call A3A_fnc_customHint;};
 
-if (!isPlayer _target) exitWith {["Membership", "You are not pointing to anyone."] call A3A_fnc_customHint;};
+if !(membershipEnabled) exitWith {[_titleStr, localize "STR_A3A_fn_orgp_memAdd_no_disabled"] call A3A_fnc_customHint;};
+
+if (isNil "membersX") exitWith {[_titleStr, localize "STR_A3A_fn_orgp_memAdd_no_initialised"] call A3A_fnc_customHint;};
+
+if (_target isEqualTo objNull) then {
+	_target = cursortarget;
+};
+if (!isPlayer _target) exitWith {[_titleStr, localize "STR_A3A_fn_orgp_memAdd_no_pointing"] call A3A_fnc_customHint;};
 _uid = getPlayerUID _target;
-if ((_this select 0 == "add") and ([_target] call A3A_fnc_isMember)) exitWith {["Membership", "The player is already a member of this server."] call A3A_fnc_customHint;};
-if ((_this select 0 == "remove") and  !([_target] call A3A_fnc_isMember)) exitWith {["Membership", "The player is not a member of this server."] call A3A_fnc_customHint;};
+if ((_mode == "add") and ([_target] call A3A_fnc_isMember)) exitWith {[_titleStr, localize "STR_A3A_fn_orgp_memAdd_no_already"] call A3A_fnc_customHint;};
+if ((_mode == "remove") and  !([_target] call A3A_fnc_isMember)) exitWith {[_titleStr, localize "STR_A3A_fn_orgp_memAdd_no_not"] call A3A_fnc_customHint;};
 
-if (_this select 0 == "add") then
+if (_mode == "add") then
 	{
 	membersX pushBackUnique _uid;
+	ServerInfo_4("Admin %1 (ID: %2) has added %3 (ID: %4) to the server members list.", name player, getPlayerUID player, name _target, _uid);
 	_target setVariable ["eligible", true, true];
-	["Membership", format ["%1 has been added to the Server Members List.",name _target]] call A3A_fnc_customHint;
-	["Membership", "You have been added to the Server Members list."] remoteExec ["A3A_fnc_customHint", _target];
+	[_titleStr, format [localize "STR_A3A_fn_orgp_memAdd_added_other",name _target]] call A3A_fnc_customHint;
+	[_titleStr, localize "STR_A3A_fn_orgp_memAdd_added_you"] remoteExec ["A3A_fnc_customHint", _target];
 	}
 else
 	{
 	membersX = membersX - [_uid];
-	["Membership", format ["%1 has been removed from the Server Members List.",name _target]] call A3A_fnc_customHint;
-	["Membership", "You have been removed from the Server Members list."] remoteExec ["A3A_fnc_customHint", _target];
+	ServerInfo_4("Admin %1 (ID: %2) has removed %3 (ID: %4) from the server members list.", name player, getPlayerUID player, name _target, _uid);
+	[_titleStr, format [localize "STR_A3A_fn_orgp_memAdd_removed_other",name _target]] call A3A_fnc_customHint;
+	[_titleStr, localize "STR_A3A_fn_orgp_memAdd_removed_you"] remoteExec ["A3A_fnc_customHint", _target];
 	};
 publicVariable "membersX";

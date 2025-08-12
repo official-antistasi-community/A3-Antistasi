@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="A3-Antistasi">
+  <Package name="A3-Antistasi jeroen_arsenal">
+    <Container name="JNA">
+      <Key ID="STR_A3A_JNA_ammoamount_amount0">
+        <Original>, but there is no ammo for it</Original>
+        <German>, aber es gibt keine Munition dafür</German>
+        <Italian>, ma non vi sono munizioni</Italian>
+        <Spanish>, pero no queda munición</Spanish>
+        <French>, mais il n'y a pas de munitions</French>
+        <Korean>, 하지만 탄약이 없습니다.</Korean>
+        <Russian>, но для этого нет боеприпасов</Russian>
+        <Polish>, ale nie ma amunicji do tego</Polish>
+        <Czech>, ale není tady žádná munice</Czech>
+        <Portuguese>, mas não há munição para a arma</Portuguese>
+        <Turkish>, ancak mühimmat yok</Turkish>
+        <Chinesesimp>, 但是它缺少弹药</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_ammoamount_amountmore0">
+        <Original>, but there are only a few shots for it</Original>
+        <German>, aber es gibt nur ein paar schuss dafür</German>
+        <Italian>, ma vi sono solo alcuni colpi</Italian>
+        <Spanish>, pero solo quedan un par de cargadores</Spanish>
+        <French>, mais il n'y a que quelque balles</French>
+        <Korean>, 하지만 몇발 밖에 없습니다.</Korean>
+        <Russian>, но для этого есть всего несколько выстрелов</Russian>
+        <Polish>, ale amunicji jest tylko na kilka strzałów</Polish>
+        <Czech>, ale je tady jen pár ran</Czech>
+        <Portuguese>, mas há pouca munição para a arma</Portuguese>
+        <Turkish>, ancak mühimmat çok az</Turkish>
+        <Chinesesimp>, 但是它能用的弹药就只剩下几发了</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_ammoamount_amountmore02">
+        <Original>, and there is still some ammo for it</Original>
+        <German>und es gibt noch etwas Munition dafür</German>
+        <Italian>, e vi sono ancora delle munizioni</Italian>
+        <Spanish>, y todavía queda algo de munición</Spanish>
+        <French>, et il y a encore un peu de munitions</French>
+        <Korean>, 그럭저럭 탄약이 남아있습니다.</Korean>
+        <Russian>, но для этого ещё осталось немного боеприпасов</Russian>
+        <Polish>, i nadal jest trochę amunicji do tego</Polish>
+        <Czech>, a je tu stále nějaká munice</Czech>
+        <Portuguese>, e temos munição para a arma</Portuguese>
+        <Turkish>, ancak biraz mühimmat var</Turkish>
+        <Chinesesimp>, 它还有些许备弹</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_ammoamount_amountmore09">
+        <Original>, and there is enough ammo for it</Original>
+        <German>und es gibt genug Munition für sie</German>
+        <Italian>, e vi sono abbastanza munizioni</Italian>
+        <Spanish>, y nos sobra  munición</Spanish>
+        <French>, et il y a assez de munitions</French>
+        <Korean>, 충분한 탄약이 남아있습니다.</Korean>
+        <Russian>, и для этого достаточно боеприпасов</Russian>
+        <Polish>, i jest wystarczająco amunicji do tego</Polish>
+        <Czech>, a je tu stále dostatek munice</Czech>
+        <Portuguese>, e temos bastante munição para a arma</Portuguese>
+        <Turkish>, ve yeterince mühimmat var</Turkish>
+        <Chinesesimp>, 它的备弹十分充足</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_assetamount_amount0">
+        <Original>Looks like I am the only one using this today</Original>
+        <German>Sieht so aus, als wäre ich der Einzige, der das heute benutzt</German>
+        <Italian>Sembra che sono l'unico che oggi l'utilizzerà</Italian>
+        <Spanish>Parece que soy el único que va a utilizar esto hoy</Spanish>
+        <French>On dirait que je suis le seul à l'utiliser aujourd'hui</French>
+        <Korean>오늘은 나만 이걸 사용할 것 같군</Korean>
+        <Russian>Похоже, я единственный, кто будет сегодня это использовать</Russian>
+        <Polish>Wygląda na to że jako jedyny będę tego dzisiaj używał</Polish>
+        <Czech>Vypadá to že jsem jediný kdo si to dnes vezme</Czech>
+        <Portuguese>Parece que sou o único usando isso hoje</Portuguese>
+        <Turkish>Görünen o ki bunu bugün bir tek ben kullanıyorum</Turkish>
+        <Chinesesimp>看来今天它的使用权就归我莫属了</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_assetamount_amount1">
+        <Original>The last one in the box</Original>
+        <German>Das letzte in der Schachtel</German>
+        <Italian>L'ultimo della cassa</Italian>
+        <Spanish>La última de la caja</Spanish>
+        <French>Le dernier dans la boîte</French>
+        <Korean>상자의 마지막 아이템</Korean>
+        <Russian>Последний в коробке</Russian>
+        <Polish>Ostatnia sztuka w pudełku</Polish>
+        <Czech>Poslední v krabici</Czech>
+        <Portuguese>A última unidade</Portuguese>
+        <Turkish>Kutudaki son</Turkish>
+        <Chinesesimp>最后一件在箱子里</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_assetamount_amountmore1">
+        <Original>If I want one I need to take it before some one else does</Original>
+        <German>Wenn ich eine haben will, muss ich sie nehmen, bevor es ein anderer tut.</German>
+        <Italian>Se ne voglio uno dovrò prenderlo prima che lo faccia qualcun'altro</Italian>
+        <Spanish>Si quiero una, debo cogerla antes de que otro lo haga</Spanish>
+        <French>Si j'en veux un, je dois le prendre avant que quelqu'un d'autre ne le fasse</French>
+        <Korean>원한다면 남들이 가져가기 전에 챙겨야한다</Korean>
+        <Russian>Если я хочу себе один я должен забрать его перед тем как кто-то другой возьмет</Russian>
+        <Polish>Jeśli chcę jednego, muszę to wziąć, zanim zrobi to ktoś inny</Polish>
+        <Czech>Pokud to chci, měl bych si to vzít než si to vezme někdo jiný</Czech>
+        <Portuguese>Se eu quiser uma, melhor pegar antes que alguem pegue</Portuguese>
+        <Turkish>Bundan istiyorsam diğerlerinden önce almam gerek</Turkish>
+        <Chinesesimp>如果我需要的话，我需要在别人之前先拿走</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_assetamount_amountmore10">
+        <Original>Many of these left</Original>
+        <German>Es ist noch viel übrig.</German>
+        <Italian>Ne sono rimasti tanti</Italian>
+        <Spanish>Quedan muchos todavía</Spanish>
+        <French>Il en reste beaucoup</French>
+        <Korean>충분히 남음</Korean>
+        <Russian>Много таких осталось</Russian>
+        <Polish>Wiele tego zostało</Polish>
+        <Czech>Je jich tu hodně</Czech>
+        <Portuguese>Temos muitas dessa ainda </Portuguese>
+        <Turkish>Bunlardan bir sürü var</Turkish>
+        <Chinesesimp>此类的物品还剩下许多</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_assetamount_amountmore3">
+        <Original>Some of these left</Original>
+        <German>Es ist noch ein wenig übrig.</German>
+        <Italian>Ne sono rimasti alcuni</Italian>
+        <Spanish>Quedan algunos todavía</Spanish>
+        <French>Il en reste quelque uns</French>
+        <Korean>몇몇개가 남음</Korean>
+        <Russian>Немного таких осталось</Russian>
+        <Polish>Trochę tego zostało</Polish>
+        <Czech>Je jich tu jenom pár</Czech>
+        <Portuguese>Temos algumas dessa ainda </Portuguese>
+        <Turkish>Bunlardan birkaç tane var</Turkish>
+        <Chinesesimp>此类的物品还剩下一些</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_assetamount_amountmore50">
+        <Original>More than enough for a whole army</Original>
+        <German>Mehr als genug für eine ganze Armee.</German>
+        <Italian>Abbastanza per un intero esercito</Italian>
+        <Spanish>Más que suficiente para armar a todo un ejército</Spanish>
+        <French>Assez pour toute une armée</French>
+        <Korean>군대를 무장시키고도 남을만큼 있습니다.</Korean>
+        <Russian>Более чем достаточно для всей армии</Russian>
+        <Polish>Więcej niż dla całej armii</Polish>
+        <Czech>Víc než dost pro celou armádu</Czech>
+        <Portuguese>Temos o bastante para um exército</Portuguese>
+        <Turkish>Bir orduluk kadar var</Turkish>
+        <Chinesesimp>此类的物品多得都能武装一支军队了</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_assetamount_amountunlimited">
+        <Original>More than enough for a whole army</Original>
+        <German>Mehr als genug für eine ganze Armee</German>
+        <Italian>Abbastanza per un intero esercito</Italian>
+        <Spanish>Más que suficiente para armar a todo un ejército</Spanish>
+        <French>Plus qu'assez pour toute une armée</French>
+        <Korean>군대를 무장시키고도 남을만큼 있습니다.</Korean>
+        <Russian>Более чем достаточно для всей армии</Russian>
+        <Polish>Więcej niż dla całej armii</Polish>
+        <Czech>Víc než dost pro celou armádu</Czech>
+        <Portuguese>Temos o bastante para um exército</Portuguese>
+        <Turkish>Bir orduluk kadar var</Turkish>
+        <Chinesesimp>此类物品的数量：无限火力，武德充沛</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_batteries_no_left">
+        <Original>Shit there are no more batteries</Original>
+        <German>Scheiße, es gibt keine Batterien mehr.</German>
+        <Italian>Cazzo non ci sono più batterie</Italian>
+        <Spanish>Mierda, no nos quedan más baterías</Spanish>
+        <French>Merde, il n'y a plus de piles</French>
+        <Korean>젠장 여분의 배터리가 없다.</Korean>
+        <Russian>Чёрт, батарей больше нет</Russian>
+        <Polish>Cholera, nie ma już żadnych baterii</Polish>
+        <Czech>Sakra, nejsou tu žádné baterky</Czech>
+        <Portuguese>Putz, não temos mais baterias</Portuguese>
+        <Turkish>Siktir, yeterli batarya yok</Turkish>
+        <Chinesesimp>该死的，我们的电池耗尽了</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_batteries_no_space">
+        <Original>I can't take batteries, I have no space for it</Original>
+        <German>Ich kann keine Batterien mitnehmen, ich habe keinen Platz dafür.</German>
+        <Italian>Non posso prendere le batterie, non ho spazio</Italian>
+        <Spanish>No puedo llevarme las baterías, no tengo espacio para ellas</Spanish>
+        <French>Je ne peux pas prendre de piles, je n'ai pas de place pour ça</French>
+        <Korean>공간이 없어서 배터리를 더 못 챙기겠어.</Korean>
+        <Russian>Я не могу взять батареи, у меня нет для них места</Russian>
+        <Polish>Nie mogę wziąć baterii, nie mam już miejsca</Polish>
+        <Czech>Nemůžu si vzít žádné baterky, nemám na ně místo</Czech>
+        <Portuguese>Não dá pra pegar baterias, não tem espaço</Portuguese>
+        <Turkish>Batarya alamam, yeterince yerim yok</Turkish>
+        <Chinesesimp>我塞不下多余的电池了，我没空间了</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_export_todo">
+        <Original>TODO</Original>
+        <German>zutun</German>
+        <Italian>Da fare</Italian>
+        <Spanish>Pendiente</Spanish>
+        <French>TODO</French>
+        <Korean>해야 할 일</Korean>
+        <Russian>СДЕЛАТЬ</Russian>
+        <Polish>DO WYKONANIA</Polish>
+        <Czech>CO UDĚLAT</Czech>
+        <Portuguese>EM DESENVOLVIMENTO</Portuguese>
+        <Turkish>YAPILACAKLAR</Turkish>
+        <Chinesesimp>待办事项</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_loading_error">
+        <Original>ERROR DURING ARSENAL LOAD</Original>
+        <German>FEHLER BEIM LADEN DES ARSENALS</German>
+        <Italian>ERRORE DURANTE IL CARICAMENTO DELL'ARSENALE</Italian>
+        <Spanish>ERROR AL CARGAR EL ARSENAL</Spanish>
+        <French>ERREUR PENDANT LE CHARGEMENT DE L'ARSENAL</French>
+        <Korean>무기고 불러오는 도중 오류 발생</Korean>
+        <Russian>ОШИБКА ВО ВРЕМЯ ЗАГРУЗКИ АРСЕНАЛА</Russian>
+        <Polish>BŁĄD PODCZAS ŁADOWANIA ARSENAŁU</Polish>
+        <Czech>CHYBA PŘI NAČÍTÁNÍ VYBAVENÍ</Czech>
+        <Portuguese>ERRO DURANTE LEITURA DO ARSENAL</Portuguese>
+        <Turkish>SANAL CEPHANELİK YÜKLENİRKEN HATA OLUŞTU</Turkish>
+        <Chinesesimp>加载武器库时出现错误</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_loadinventory_kept">
+        <Original> has been kept, because there is no </Original>
+        <German>wurde aufbewahrt, denn es gibt keine</German>
+        <Italian>è stato tenuto, poiché non vi è</Italian>
+        <Spanish>se ha mantenido, porque no hay</Spanish>
+        <French>a été conservé, car il n'y a pas</French>
+        <Korean>이(가) 다음 아이템이 없기 때문에 보관되었습니다:</Korean>
+        <Russian>сохранен, потому что отсутствует </Russian>
+        <Polish>został zachowany, ponieważ nie ma</Polish>
+        <Czech>Byli ponechány, protože neexistují</Czech>
+        <Portuguese>foi mantido, porque não há</Portuguese>
+        <Turkish>saklandı, çünkü şundan kalmadı</Turkish>
+        <Chinesesimp>已经被保存，因为当前缺少</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_loadinventory_notin">
+        <Original>These items were not in the Arsenal:</Original>
+        <Korean>다음 아이템은 무기고에 없습니다:</Korean>
+        <Russian>Этих предметов не было в Арсенале:</Russian>
+      </Key>
+      <Key ID="STR_A3A_JNA_loadinventory_notin_kept">
+        <Original>These items were not in the Arsenal, so the originals have been kept:</Original>
+        <Korean>다음 아이템들은 무기고에 없었기 때문에, 원본들이 보관되었습니다:</Korean>
+        <Russian>Этих предметов не было в Арсенале, поэтому были сохранены оригиналы:</Russian>
+      </Key>
+      <Key ID="STR_A3A_JNA_memberonly">
+        <Original>We are low on this item, only members may use it</Original>
+        <German>Dieser Gegenstand ist knapp, nur Mitglieder können ihn verwenden.</German>
+        <Italian>Siamo a corto di questo oggetto, solo i membri possono usarlo</Italian>
+        <Spanish>Tenemos escasas existencias de este objeto, solo los miembros pueden usarlo</Spanish>
+        <French>Nous sommes à court de cet article, seuls les membres peuvent l'utiliser</French>
+        <Korean>이 아이템이 별로 없으며 멤버만 사용할 수 있습니다</Korean>
+        <Russian>У нас заканчиваются запасы этого предмета, только членам команды разрешено его использовать</Russian>
+        <Polish>Posiadamy małą ilość tego przedmiotu, więc tylko członkowie mogą go używać</Polish>
+        <Czech>Máme toho málo, jenom členové si to mohou vzít.</Czech>
+        <Portuguese>Temos poucos desse item, apenas membros podem usar</Portuguese>
+        <Turkish>Bu eşyadan az sayıda var, sadece üyeler kullanabilir</Turkish>
+        <Chinesesimp>此物品短缺,只限服务器会员使用</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_rhs_error">
+        <Original>ERROR - Please report RPT to Antistasi Devs.</Original>
+        <Italian>ERRORE - Si prega di riportare l'RPT agli sviluppatori di Antistasi.</Italian>
+        <French>ERREUR - Veuillez signaler le RPT aux développeurs d'Antistasi.</French>
+        <Korean>오류 - 안티스타시 개발진에게 RPT 보고할 것</Korean>
+        <Russian>ОШИБКА - Отправьте RPT разработчикам Antistasi.</Russian>
+        <Czech>CHYBA - Prosím nahlašte RPT Antistasi Dev's</Czech>
+      </Key>
+      <Key ID="STR_A3A_JNA_scope_incompatible">
+        <Original>&lt;br/&gt;(Not compatible with currently equipped weapons)</Original>
+        <German>&lt;br/&gt; (Nicht kompatibel mit aktuell ausgerüsteten Waffen)</German>
+        <Italian>&lt;br/&gt;(Non compatibile con le armi equipaggiate)</Italian>
+        <French>&lt;br/&gt;(Pas compatible avec les armes actuellement équipées)</French>
+        <Korean>&lt;br/&gt;(현재 장착한 무기와 호환되지 않음)</Korean>
+        <Russian>&lt;br/&gt;(Несовместимо с имеющимся в данный момент оружием)</Russian>
+        <Czech>&lt;br/&gt;(Nekompatibilní s aktuálně vybavenými zbraněmi)</Czech>
+        <Chinesesimp>&lt;br/&gt;(与当前所装备的武器不兼容)</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_sort_amount">
+        <Original>Sort by amount</Original>
+        <German>Sortiere nach Menge</German>
+        <Italian>Ordina per quantità</Italian>
+        <Spanish>Organizar por cantidad</Spanish>
+        <French>Trier par quantité</French>
+        <Korean>수량으로 정렬</Korean>
+        <Russian>Сортировать по количеству</Russian>
+        <Polish>Sortuj po ilości</Polish>
+        <Czech>Seřadit podle počtu</Czech>
+        <Portuguese>Organizar por quantidade</Portuguese>
+        <Turkish>Miktara göre sırala</Turkish>
+        <Chinesesimp>根据数量排列</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_sort_default">
+        <Original>Default</Original>
+        <German>Standard</German>
+        <Italian>Predefinito</Italian>
+        <Spanish>Predeterminado</Spanish>
+        <French>Défaut</French>
+        <Korean>기본</Korean>
+        <Russian>По умолчанию</Russian>
+        <Polish>Domyślnie</Polish>
+        <Czech>Výchozí</Czech>
+        <Portuguese>Padrão</Portuguese>
+        <Turkish>Varsayılan</Turkish>
+        <Chinesesimp>默认</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_text_defaultgear">
+        <Original>Default gear</Original>
+        <German>Standard Ausrüstung</German>
+        <Italian>Equipaggiamento predefinito</Italian>
+        <Spanish>Equipamiento predeterminado</Spanish>
+        <French>Equipement par défaut</French>
+        <Korean>기본 장비</Korean>
+        <Russian>Экипировка по умолчанию</Russian>
+        <Polish>Domyślne wyposażenie</Polish>
+        <Czech>Výchozí vybavení</Czech>
+        <Portuguese>Equipamento padrão</Portuguese>
+        <Turkish>Varsayılan Ekipman</Turkish>
+        <Chinesesimp>默认装备</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_text_tocrate">
+        <Original>To crate</Original>
+        <German>zur Kiste</German>
+        <Italian>Alla cassa</Italian>
+        <Spanish>A la caja</Spanish>
+        <French>Ajouter vers la caisse</French>
+        <Korean>상자로</Korean>
+        <Russian>В ящик</Russian>
+        <Polish>Do skrzyni</Polish>
+        <Czech>Do bedny</Czech>
+        <Portuguese>P/ Caixa</Portuguese>
+        <Turkish>Yarat</Turkish>
+        <Chinesesimp>装入箱中</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_text_unload">
+        <Original>Unload</Original>
+        <German>entladen</German>
+        <Italian>Scarica</Italian>
+        <Spanish>Descargar</Spanish>
+        <French>Décharger</French>
+        <Korean>하역</Korean>
+        <Russian>Разгрузить</Russian>
+        <Polish>Wypakować</Polish>
+        <Czech>Vyložit</Czech>
+        <Portuguese>Descarregar</Portuguese>
+        <Turkish>Boşalt</Turkish>
+        <Chinesesimp>卸下</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_title">
+        <Original>Jeroen (Not) Limited Arsenal</Original>
+        <German>Jeroen (Not) Limited Arsenal</German>
+        <Italian>Arsenale (Non) Limitato Jeroen </Italian>
+        <Spanish>Jeroen (Not) Limited Arsenal</Spanish>
+        <French>Jeroen Arsenal (Pas) Limité</French>
+        <Korean>Jeroen의 한정된 (게 아닌) 무기고</Korean>
+        <Russian>Ограниченный Арсенал от Jeroen (Not)</Russian>
+        <Polish>(Nie) Limitowany Arsenał Jeroen'a</Polish>
+        <Czech>Jeroen (Not) Limited Arsenal</Czech>
+        <Portuguese>Jeroen (Not) Limited Arsenal</Portuguese>
+        <Turkish>Jeroen Sınırlı (olmayan) Cephaneliği</Turkish>
+        <Chinesesimp>Jeroen  (伪) 有限武器库</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_tooltip_defaultgear">
+        <Original>Add default items like radio and medical supplies</Original>
+        <German>Fügen Standardgegenstände wie Funkgeräte und medizinische Hilfsmittel hinzu</German>
+        <Italian>Aggiungi oggetti di base come le radio o presidi medici</Italian>
+        <Spanish>Añadir objetos por defecto como radios y suministros médicos</Spanish>
+        <French>Ajoutez des éléments par défaut comme la radio et les fournitures médicales</French>
+        <Korean>무전기와 의료물자같은 기본 아이템을 추가합니다</Korean>
+        <Russian>Добавить предметы по умолчанию, такие как радио и медицинские принадлежности.</Russian>
+        <Polish>Dodaj domyślne przedmioty takie jak radio czy zasoby medyczne</Polish>
+        <Czech>Přidat výchozí položky jako je rádio a zdravotnické zásoby</Czech>
+        <Portuguese>Adicionar itens básicos como rádios e kits médicos</Portuguese>
+        <Turkish>Radyo ve Sıhhı malzemeler gibi temel eşyaları yükle</Turkish>
+        <Chinesesimp>加入例如无线电以及医疗物质之类的默认物品</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_tooltip_tocrate">
+        <Original>Move items from crate inventory to arsenal</Original>
+        <German>Bewege Gegenstände aus der Kiste ins Arsenal</German>
+        <Italian>Sposta gli oggetti dall'inventario della cassa all'arsenale</Italian>
+        <Spanish>Mover objetos del inventario de la caja al arsenal</Spanish>
+        <French>Déplacer les objets de l'inventaire des caisses vers l'arsenal</French>
+        <Korean>상자 인벤토리의 아이템들을 무기고로 옮깁니다</Korean>
+        <Russian>Переместить предметы из инвентаря ящика в арсенал</Russian>
+        <Polish>Przenieś przedmioty z wyposażenia skrzyni do arsenału</Polish>
+        <Czech>Přesunout věci z bedny do arzenálu</Czech>
+        <Portuguese>Mover itens da caixa para o arsenal</Portuguese>
+        <Turkish>Eşyaları kutudan cephaneliğe yükle</Turkish>
+        <Chinesesimp>将箱子库存中的物品移入武器库</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_tooltop_unload">
+        <Original>Move items from car to arsenal</Original>
+        <German>Bewege Gegenstände aus Fahrzeug ins Arsenal</German>
+        <Italian>Sposta gli oggetti dal veicolo all'arsenale</Italian>
+        <Spanish>Mover objetos del vehículo al arsenal</Spanish>
+        <French>Déplacez les objets de la voiture vers l'arsenal</French>
+        <Korean>차량의 아이템들을 무기고로 옮깁니다</Korean>
+        <Russian>Переместить предметы из машины в арсенал</Russian>
+        <Polish>Przenieś przedmioty z samochodu do arsenału</Polish>
+        <Czech>Přesunout věci z vozidla do arzenálu</Czech>
+        <Portuguese>Mover itens do veículo para o arsenal</Portuguese>
+        <Turkish>Eşyaları arabadan cephaneliğe yükle</Turkish>
+        <Chinesesimp>将车辆中的物品移入武器库</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_vehicle_mass_load">
+        <Original>Load</Original>
+        <German>Laden</German>
+        <Italian>Carica</Italian>
+        <Spanish>Cargar</Spanish>
+        <French>Charger</French>
+        <Korean>적재</Korean>
+        <Russian>Нагрузка</Russian>
+        <Polish>Załaduj </Polish>
+        <Czech>Naložit</Czech>
+        <Portuguese>Carregar</Portuguese>
+        <Turkish>Yükle</Turkish>
+        <Chinesesimp>装载</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_vehicle_title">
+        <Original>Vehicle inventory</Original>
+        <German>Fahrzeug Inventar</German>
+        <Italian>Inventario del veicolo</Italian>
+        <Spanish>Inventario del vehículo</Spanish>
+        <French>Inventaire des véhicules</French>
+        <Korean>차량 인벤토리</Korean>
+        <Russian>Инвентарь транспортного средства</Russian>
+        <Polish>Ekwipunek pojazdu</Polish>
+        <Czech>Inventář vozidla</Czech>
+        <Portuguese>Inventário do veículo</Portuguese>
+        <Turkish>Araç envanteri</Turkish>
+        <Chinesesimp>载具库存</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JNA_weapon_low">
+        <Original>We are low on this item, only members may use it</Original>
+        <German>Dieser Gegenstand ist knapp, nur Mitglieder können ihn verwenden.</German>
+        <Italian>Siamo a corto di questo oggetto, solo i membri possono usarlo</Italian>
+        <Spanish>Tenemos escasas existencias de este objeto, solo los miembros pueden usarlo</Spanish>
+        <French>Nous sommes à court de cet article, seuls les membres peuvent l'utiliser</French>
+        <Korean>이 아이템이 별로 없으며 멤버만 사용할 수 있습니다</Korean>
+        <Russian>У нас мало этого предмета, только участники могут использовать его</Russian>
+        <Polish>Mamy małą ilość tego przedmiotu, tylko członkowie mogą go używać</Polish>
+        <Czech>Máme toho málo, jenom členové si to mohou vzít.</Czech>
+        <Portuguese>Temos poucos desse item, apenas membros podem usar</Portuguese>
+        <Turkish>Bu eşyadan az sayıda var, sadece üyeler kullanabilir</Turkish>
+        <Chinesesimp>此物品短缺,只限服务器会员使用</Chinesesimp>
+      </Key>
+    </Container>
+    <Container name="JND">
+      <Key ID="STR_A3A_JND_button_del">
+        <Original>Del</Original>
+        <German>Entf</German>
+        <Italian>Canc</Italian>
+        <Spanish>Borrar</Spanish>
+        <French>Suppr</French>
+        <Korean>삭제</Korean>
+        <Russian>Удалить</Russian>
+        <Polish>Usuń </Polish>
+        <Czech>Vymazat</Czech>
+        <Portuguese>Del</Portuguese>
+        <Turkish>Sil</Turkish>
+        <Chinesesimp>删除</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JND_button_load">
+        <Original>Load</Original>
+        <German>Laden</German>
+        <Italian>Carica</Italian>
+        <Spanish>Cargar</Spanish>
+        <French>Charger</French>
+        <Korean>적재</Korean>
+        <Russian>Загрузить</Russian>
+        <Polish>Załaduj</Polish>
+        <Czech>Načíst</Czech>
+        <Portuguese>Carregar</Portuguese>
+        <Turkish>Yükle</Turkish>
+        <Chinesesimp>加载</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JND_button_save">
+        <Original>Save</Original>
+        <German>Speichern</German>
+        <Italian>Salva</Italian>
+        <Spanish>Guardar</Spanish>
+        <French>Sauvegarder</French>
+        <Korean>저장</Korean>
+        <Russian>Сохранить</Russian>
+        <Polish>Zapisz</Polish>
+        <Czech>Uložit</Czech>
+        <Portuguese>Salvar</Portuguese>
+        <Turkish>Kaydet</Turkish>
+        <Chinesesimp>保存</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JND_button_undo">
+        <Original>-- Undo last save --</Original>
+        <German>-- Letztes Speichern rückgängig machen --</German>
+        <Italian>--Annulla ultimo salvataggio--</Italian>
+        <Spanish>-- Deshacer último guardado -- </Spanish>
+        <French>-- Annuler la dernière sauvegarde --</French>
+        <Korean>-- 마지막 저장으로 되돌리기 --</Korean>
+        <Russian>-- Отменить последнее сохранение --</Russian>
+        <Polish>-- Cofnij ostatni zapis --</Polish>
+        <Czech>-- Vrátit poslední uložení --</Czech>
+        <Portuguese>--Desfazer ultimo save--</Portuguese>
+        <Turkish>--Son yükleneni geri al--</Turkish>
+        <Chinesesimp>-- 撤销上一次的保存 --</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_JND_title">
+        <Original>Ultra Wide Extended Debug Console With Extra Save Buttons!</Original>
+        <German>Extrabreite Debug-Console mit zusätzlichen Speicherplätzen.</German>
+        <Italian>Console di Debug Ultra Wide con Bottoni di Salvataggio Extra!</Italian>
+        <Spanish>Super Amplia y Extendida Consola de Debug con Extra Butones de Guardado!</Spanish>
+        <French>Console de débogage étendue ultra large avec boutons de sauvegarde supplémentaires !</French>
+        <Korean>추가적인 저장 버튼이 있는 울트라 와이드로 확장된 디버그 콘솔!</Korean>
+        <Russian>Сверхширокая Расширенная Консоль Отладки с Дополнительными Кнопками Сохранения!</Russian>
+        <Czech>Ultra Široká Rozšířená Debug Konzole S Extra Ukládacíma Tlačítkama!</Czech>
+        <Chinesesimp>宇宙究极无敌扩展调试控制台 (搭载额外保存按钮)</Chinesesimp>
+      </Key>
+    </Container>
+  </Package>
+</Project>

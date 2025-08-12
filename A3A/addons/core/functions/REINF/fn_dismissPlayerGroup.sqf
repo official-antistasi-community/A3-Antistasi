@@ -1,8 +1,9 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 //if (!isServer) exitWith{};
+private _titleStr = localize "STR_A3A_fn_reinf_dissPlaGro_title";
 
-if (player != leader group player) exitWith {["Dismiss Group", "You cannot dismiss anyone if you are not the squad leader."] call A3A_fnc_customHint;};
+if (player != leader group player) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_dissPlaGro_no_sl"] call A3A_fnc_customHint;};
 
 private ["_units","_hr","_resourcesFIA","_unit","_newGroup"];
 
@@ -10,8 +11,8 @@ _units = _this select 0;
 _units = _units - [player];
 _units = _units select { !(isPlayer _x) && { !(_x == petros) } };
 if (_units isEqualTo []) exitWith {};
-if (_units findIf {!([_x] call A3A_fnc_canFight)} != -1) exitWith {["Dismiss Group", "You cannot disband suppressed, undercover or unconscious units."] call A3A_fnc_customHint;};
-player globalChat "Get out of my sight you useless scum!";
+if (_units findIf {!([_x] call A3A_fnc_canFight)} != -1) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_dissPlaGro_no_uncon"] call A3A_fnc_customHint;};
+player globalChat localize "STR_A3A_fn_reinf_dismissPlayerGroup_GTFO";
 
 _newGroup = createGroup teamPlayer;
 //if ({isPlayer _x} count units group player == 1) then {_ai = true; _newGroup = createGroup teamPlayer};
@@ -22,6 +23,8 @@ if ((_x getVariable "unitType") != FactionGet(reb,"unitUnarmed")) then
 	[_x] join _newGroup;
 	};
 } forEach _units;
+
+["update"] call A3A_GUI_fnc_aiManagementTab;
 
 if (recruitCooldown < time) then {recruitCooldown = time + 60} else {recruitCooldown = recruitCooldown + 60};
 

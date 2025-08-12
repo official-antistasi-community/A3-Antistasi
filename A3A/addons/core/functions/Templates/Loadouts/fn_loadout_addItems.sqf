@@ -142,7 +142,7 @@ private _backpackItems = if (_backpack isEqualTo []) then {[]} else {_backpack s
 					_uniformItems pushBack _itemInfo;
 					_uniformCurrentLoad = _uniformCurrentLoad +	_totalLoad;
 				};
-				case (_totalLoad < (_vestMaxLoad - _vestCurrentLoad)): {
+				case (_totalLoad < (_vestMaxLoad - _vestCurrentLoad) or _backpackMaxLoad == 0): {
 					_vestItems pushBack _itemInfo;
 					_vestCurrentLoad = _vestCurrentLoad + _totalLoad;
 				};

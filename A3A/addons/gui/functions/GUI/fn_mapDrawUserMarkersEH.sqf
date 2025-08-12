@@ -1,22 +1,25 @@
 /*
-    Maintainer: doomMetal
-      Draws user markers to map controls
-      Used for cases where we want only user created markers, not editor placed ones
+Maintainer: Caleb Serafin, DoomMetal
+    Draws user markers to map controls
+    Used for cases where we want only user created markers, not editor placed ones
 
-    Arguments:
-      None
-
-    Return Value:
-      None
-
-    Scope: internal
-    Environment: Unscheduled
-    Public: No
-    Dependencies:
+Arguments:
     None
 
-    Example:
-      _commanderMap ctrlAddEventHandler ["Draw", "_this call A3A_fnc_mapDrawUserMarkersEH"];
+Return Value:
+    None
+
+Scope: internal
+Environment: Unscheduled
+Public: No
+Dependencies:
+None
+
+Example:
+    _commanderMap ctrlAddEventHandler ["Draw", "_this call A3A_GUI_fnc_mapDrawUserMarkersEH"];
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\textures.inc"

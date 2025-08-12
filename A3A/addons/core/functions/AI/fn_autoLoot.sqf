@@ -4,11 +4,11 @@ _truckX = _this select 1;
 if ((isPlayer _unit) or (player != leader group player)) exitWith {};
 if !([_unit] call A3A_fnc_canFight) exitWith {};
 //_helping = _unit getVariable "helping";
-if (_unit getVariable ["helping",false]) exitWith {_unit groupChat "I cannot rearm right now. I'm healing a comrade"};
+if (_unit getVariable ["helping",false]) exitWith {_unit groupChat localize "STR_A3A_fn_ai_autoLoot_noHelping"};
 _rearming = _unit getVariable "rearming";
-if (_rearming) exitWith {_unit groupChat "I am currently rearming. Cancelling."; _unit setVariable ["rearming",false]};
-if (_unit == gunner _truckX) exitWith {_unit groupChat "I cannot rearm right now. I'm manning this gun"};
-if (!canMove _truckX) exitWith {_unit groupChat "It is useless to load my vehicle, as it needs repairs"};
+if (_rearming) exitWith {_unit groupChat localize "STR_A3A_fn_ai_autoLoot_noDoing"; _unit setVariable ["rearming",false]};
+if (_unit == gunner _truckX) exitWith {_unit groupChat localize "STR_A3A_fn_ai_autoLoot_noStatic"};
+if (!canMove _truckX) exitWith {_unit groupChat localize "STR_A3A_fn_ai_autoLoot_noRepairs"};
 
 _objectsX = [];
 _hasBox = false;
@@ -16,7 +16,7 @@ _weaponX = "";
 _weaponsX = [];
 _bigTimeOut = time + 120;
 _objectsX = nearestObjects [_unit, ["WeaponHolderSimulated", "GroundWeaponHolder", "WeaponHolder"], 50];
-if (count _objectsX == 0) exitWith {_unit groupChat "I see no corpses here to loot"};
+if (count _objectsX == 0) exitWith {_unit groupChat localize "STR_A3A_fn_ai_autoLoot_noCorpses"};
 
 _target = objNull;
 _distanceX = 51;
@@ -43,10 +43,10 @@ if (_unit distance _objectX < _distanceX) then
 	};
 } forEach _objectsX;
 
-if (isNull _target) exitWith {_unit groupChat "There is nothing to loot"};
+if (isNull _target) exitWith {_unit groupChat localize "STR_A3A_fn_ai_autoLoot_noLoot"};
 _target setVariable ["busy",true];
 _unit setVariable ["rearming",true];
-_unit groupChat "Starting looting";
+_unit groupChat localize "STR_A3A_fn_ai_autoLoot_startLoot";
 
 _originalLoadout = getUnitLoadout _unit;
 
@@ -178,7 +178,7 @@ while {_continuar and ([_unit] call A3A_fnc_canFight) and (_unit getVariable "re
 	};
 if (!_continuar) then
 	{
-	_unit groupChat "No more weapons to loot"
+	_unit groupChat localize "STR_A3A_fn_ai_autoLoot_noWeapons"
 	};
 //if (primaryWeapon _unit == "") then {_unit action ["TakeWeapon",_truckX,_Pweapon]; sleep 3};
 //if ((secondaryWeapon _unit == "") and (_Sweapon != "")) then {_unit action ["TakeWeapon",_truckX,_Sweapon]};

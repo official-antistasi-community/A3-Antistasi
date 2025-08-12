@@ -10,7 +10,7 @@ params ["_intel"];
 
 //Take intel from desk
 private _side = _intel getVariable "side";
-["Intel", "Intel documents taken."] call A3A_fnc_customHint;
+[localize "STR_A3A_fn_intel_title1", localize "STR_A3A_fn_intel_doc_success"] call A3A_fnc_customHint;
 ["Medium", _side] remoteExec ["A3A_fnc_selectIntel", 2];
 {
     [5,_x] call A3A_fnc_playerScoreAdd;

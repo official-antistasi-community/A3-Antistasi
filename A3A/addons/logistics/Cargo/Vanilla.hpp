@@ -105,6 +105,13 @@ class A3_Structures_F_Heli_Items_Luggage_PlasticCase_01_medium_F_p3d : TRIPLES(A
 {
     offset[] = {0,0,0.19};
     rotation[] = {1,0,0};
+    size = 1;
+};
+
+class A3_Structures_F_Heli_Items_Luggage_PlasticCase_01_large_F_p3d : TRIPLES(ADDON,Cargo,Base)
+{
+    offset[] = {0,0,0.39};
+    rotation[] = {0,1,0};
     size = 2;
 };
 
@@ -183,4 +190,39 @@ class A3_Structures_F_Heli_Ind_Cargo_Cargo10_red_F_p3d: TRIPLES(ADDON,Cargo,Base
     offset[] = {0,0.1,1.35};
     rotation[] = {1,0,0};
     size = 4;
+};
+
+class A3_Structures_F_Heli_Ind_Cargo_Cargo10_cyan_F_p3d : TRIPLES(ADDON,Cargo,Base)
+{
+    offset[] = {0,0.1,1.35};
+    rotation[] = {1,0,0};
+    size = 4;
+};
+
+class A3_Structures_F_Ind_Cargo_Cargo20_cyan_F_p3d : TRIPLES(ADDON,Cargo,Base)
+{
+    offset[] = {0,-0.3,1.3};
+    rotation[] = {1,0,0};
+    size = 7;
+};
+
+class A3_Structures_F_Ind_Cargo_Cargo40_cyan_F_p3d : TRIPLES(ADDON,Cargo,Base)
+{
+    offset[] = {0,-4.44,1.1.35};
+    rotation[] = {1,0,0};
+    size = 12;
+};
+
+class A3_Props_F_Exp_Commercial_Market_WoodenCrate_01_F_p3d : TRIPLES(ADDON,Cargo,Base)
+{
+    offset[] = {0,0,0.32};
+    rotation[] = {0,1,0};
+    size = 2;
+};
+
+class A3_Props_F_Exp_Commercial_Market_WoodenCrate_01_stack_x5_F_p3d : TRIPLES(ADDON,Cargo,Base)
+{
+    offset[] = {0,0.5,0.97};
+    rotation[] = {0,1,0};
+    size = 3;
 };

@@ -32,7 +32,7 @@
 ["vehiclesTanks", ["UK3CB_CW_US_B_EARLY_M1A1", "UK3CB_CW_US_B_EARLY_M60a3", "UK3CB_CW_US_B_EARLY_M60a1"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["RHS_M6_wd"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["UK3CB_TKA_B_RHIB_Gunboat", "UK3CB_TKA_B_RHIB"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["UK3CB_CW_US_B_LATE_LAV25", "UK3CB_CW_US_B_LATE_AAV"]] call _fnc_saveToTemplate;
 
@@ -89,6 +89,7 @@
 "WhiteHead_10","WhiteHead_11","WhiteHead_13","WhiteHead_14","WhiteHead_15",
 "WhiteHead_16","WhiteHead_17","WhiteHead_18","WhiteHead_19","WhiteHead_20","WhiteHead_21"]] call _fnc_saveToTemplate;
 ["voices", ["Male01ENG","Male02ENG","Male03ENG","Male04ENG","Male05ENG","Male06ENG","Male07ENG","Male08ENG","Male09ENG","Male10ENG","Male11ENG","Male12ENG"]] call _fnc_saveToTemplate;
+"NATOMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //

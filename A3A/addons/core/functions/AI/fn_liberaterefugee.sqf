@@ -2,7 +2,7 @@ params ["_unit", "_playerX"];
 
 if (captive _playerX) then { _playerX setCaptive false };
 
-_playerX globalChat "You are free. Come with us!";
+_playerX globalChat localize "STR_A3A_fn_ai_libPOW";
 sleep 3;
 
 [_unit] join group _playerX;
@@ -12,7 +12,9 @@ if (_timeout < 0) exitWith {};
 
 [_unit,"remove"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_unit];
 
-_unit globalChat "Thank you. I owe you my life!";
+private _responseNum = str selectRandom [1,2,3];
+_response = localize ("STR_A3A_fn_ai_captureX_libresponse" + _responseNum);
+_unit globalChat _response;
 _unit enableAI "MOVE";
 _unit enableAI "AUTOTARGET";
 _unit enableAI "TARGET";

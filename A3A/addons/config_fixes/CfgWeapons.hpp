@@ -1,4 +1,5 @@
 class Mode_SemiAuto;
-class CfgWeapons {
+class CfgWeapons 
+{
 	//#include "CfgWeapons\bomb_weapons.hpp"
 };

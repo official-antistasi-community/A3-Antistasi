@@ -66,34 +66,28 @@ private _cargoMass = _newMass - _defaultMass;
 private _msg = "";
 if (!_removeObject) then{
     if (_availableNodes == 0) then {
-        _msg = Format ["<t color='#00fff3'>""%1"" is loaded onto ""%2"" There is no more space.</t>", _objectName, _vehicleName, _availableNodes];
+        _msg = Format [localize "STR_A3A_logi_mass_nospace", _objectName, _vehicleName, _availableNodes];
     } else {
-        _msg = Format ["<t color='#00fff3'>""%1"" is loaded onto ""%2"". Free slots: ""%3"".</t>", _objectName, _vehicleName, _availableNodes];
+        _msg = Format [localize "STR_A3A_logi_mass_loaded_freeslots", _objectName, _vehicleName, _availableNodes];
     };
 } else {
-    _msg = Format ["<t color='#00fff3'>""%1"" was unloaded from ""%2"". Free slots: ""%3"".</t>", _objectName, _vehicleName, _availableNodes];
+    _msg = Format [localize "STR_A3A_logi_mass_unloaded_freeslots", _objectName, _vehicleName, _availableNodes];
 };
 
-private _text = format [
-    "
-    <img image='%1' size='2' align='left'/>
-    <t color='#a02e69' size='1.2' shadow='1' shadowColor='#000000' align='center'>%2</t><br/>
-    <t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'>Default mass: </t>
-    <t color='#00ff59' size='1.2' shadow='1' shadowColor='#000000' align='left'>%3</t><br/>
-    <t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'>Cargo mass: </t>
-    <t color='#00ff59' size='1.2' shadow='1' shadowColor='#000000' align='left'>%4</t><br/>
-    <t color='#00aafd' size='1.2' shadow='1' shadowColor='#000000' align='left'>Current mass: </t>
-    <t color='#00ff59' size='1.2' shadow='1' shadowColor='#000000' align='left'>%5</t><br/>
-    ",
-    getText(configFile >> "cfgVehicles" >> typeOf _vehicle >> "picture"),
-    getText(configFile >> "cfgVehicles" >> typeOf _vehicle >> "displayName"),
-    _defaultMass,
-    _cargoMass,
-    _defaultMass + _cargoMass
-];
-_text = _text + _msg;
+private _bodyText = (
+    format ["<img image='%1' size='2' align='left'/>", getText(configFile >> "cfgVehicles" >> typeOf _vehicle >> "picture")] +
+    format ["<t color='#a02e69' size='1.2' shadow='1' shadowColor='#000000' align='center'>%1</t><br/><br/>", getText(configFile >> "cfgVehicles" >> typeOf _vehicle >> "displayName")] +
+    format [localize "STR_A3A_logi_mass_default"] + 
+    format ["<t color='#00ff59' size='1.2' shadow='1' shadowColor='#000000' align='left'>%1</t><br/>", _defaultMass] +
+    format [localize "STR_A3A_logi_mass_cargo"] +
+    format ["<t color='#00ff59' size='1.2' shadow='1' shadowColor='#000000' align='left'>%1</t><br/>", _cargoMass] +
+    format [localize "STR_A3A_logi_mass_current"] +
+    format ["<t color='#00ff59' size='1.2' shadow='1' shadowColor='#000000' align='left'>%1</t><br/><br/>", _defaultMass + _cargoMass]
+);
 
-["LogisticsInfo", parseText _text] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner];
-["LogisticsInfo", parseText _text] remoteExec ["A3A_fnc_customHint", crew _vehicle];
+_bodyText = _bodyText + _msg;
+
+[localize "STR_A3A_logi_title", _bodyText] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner];
+if (!isNull driver _vehicle) then {[localize "STR_A3A_logi_title", _bodyText] remoteExecCall ["A3A_fnc_customHint", driver _vehicle]};
 
 nil;

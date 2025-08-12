@@ -5,11 +5,6 @@ FIX_LINE_NUMBERS()
 _markerX = _this select 0;
 
 _difficultX = if (random 10 < tierWar) then {true} else {false};
-_leave = false;
-_contactX = objNull;
-_groupContact = grpNull;
-_tsk = "";
-_tsk1 = "";
 
 _positionX = getMarkerPos _markerX;
 
@@ -45,7 +40,9 @@ _arrayAirports = airportsX select {sidesX getVariable [_x,sideUnknown] == Occupa
 _base = [_arrayAirports, _positionX] call BIS_Fnc_nearestPosition;
 _posBase = getMarkerPos _base;
 
-_traitor = [_groupTraitor, FactionGet(occ,"unitTraitor"), _posTraitor, [], 0, "NONE"] call A3A_fnc_createUnit;
+private _traitorIdentity = [A3A_faction_reb, FactionGet(occ,"unitTraitor")] call A3A_fnc_createRandomIdentity;
+_traitorIdentity set ["speaker", "NoVoice"];
+_traitor = [_groupTraitor, FactionGet(occ,"unitTraitor"), _posTraitor, [], 0, "NONE", _traitorIdentity] call A3A_fnc_createUnit;
 _traitor allowDamage false;
 _traitor setPos _posTraitor;
 _sol1 = [_groupTraitor, FactionGet(occ,"unitBodyguard"), _posSol1, [], 0, "NONE"] call A3A_fnc_createUnit;
@@ -55,8 +52,7 @@ _groupTraitor selectLeader _traitor;
 _posTsk = (position _houseX) getPos [random 100, random 360];
 
 private _taskId = "AS" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskID,[format ["A traitor has scheduled a meeting with %4 in %1. Kill him before he provides enough intel to give us trouble. Do this before %2. We don't where exactly this meeting will happen. You will recognise the building by the nearby Offroad and %3 presence.",_nameDest,_displayTime,FactionGet(occ,"name")],"Kill the Traitor",_markerX],_posTsk,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
-[[Occupants],_taskID+"B",[format ["We arranged a meeting in %1 with a %3 contact who may have vital information about their Headquarters position. Protect him until %2.",_nameDest,_displayTime,FactionGet(reb,"name")],"Protect Contact",_markerX],getPos _houseX,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskID,[format [localize "STR_A3A_fn_mission_as_traitor_text",_nameDest,_displayTime,FactionGet(occ,"name")],localize "STR_A3A_fn_mission_as_traitor_titel",_markerX],_posTsk,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
 [_taskId, "AS", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 traitorIntel = false; publicVariable "traitorIntel";
@@ -117,7 +113,11 @@ if (random 10 < 2.5) then
 
 {[_x,""] call A3A_fnc_NATOinit} forEach units _groupX;
 
-waitUntil {sleep 1; (traitorIntel) || {(dateToNumber date > _dateLimitNum) or {(not alive _traitor) or {({_traitor knowsAbout _x > 1.4} count ([500,0,_traitor,teamPlayer] call A3A_fnc_distanceUnits) > 0)}}}};
+waitUntil {sleep 1; 
+			(traitorIntel) || 
+			{(dateToNumber date > _dateLimitNum) ||
+			{(!([_traitor] call A3A_fnc_canFight)) ||
+			{({_traitor knowsAbout _x > 1.4} count ([500,0,_traitor,teamPlayer] call A3A_fnc_distanceUnits) > 0)}}}};
 
 if ({_traitor knowsAbout _x > 1.4} count ([500,0,_traitor,teamPlayer] call A3A_fnc_distanceUnits) > 0) then
 	{
@@ -132,14 +132,19 @@ if ({_traitor knowsAbout _x > 1.4} count ([500,0,_traitor,teamPlayer] call A3A_f
 	_wp1 setWaypointSpeed "FULL";
 	};
 
-waitUntil  {sleep 1; (traitorIntel) || {(dateToNumber date > _dateLimitNum) or {(not alive _traitor) or {(_traitor distance _posBase < 20)}}}};
 
-if (not alive _traitor || traitorIntel) then
+waitUntil {sleep 1; 
+			(traitorIntel) || 
+			{(dateToNumber date > _dateLimitNum) || 
+			{(!([_traitor] call A3A_fnc_canFight)) ||
+			{(_traitor distance _posBase < 20)}}}};
+
+if (!([_traitor] call A3A_fnc_canFight) || traitorIntel) then
 {
-	[_taskId, "AS", "SUCCEEDED", true] call A3A_fnc_taskSetState;
+	[_taskId, "AS", "SUCCEEDED", false] call A3A_fnc_taskSetState;
 	if(traitorIntel && (alive _traitor)) then
 	{
-		{[petros,"hint","Someone found some intel on the traitors family, he will not cause any problems any more!"] remoteExec ["A3A_fnc_commsMP",_x]} forEach ([500,0,_traitor,teamPlayer] call A3A_fnc_distanceUnits);
+		{[petros,"hint",localize "STR_A3A_fn_mission_as_traitor_hint"] remoteExec ["A3A_fnc_commsMP",_x]} forEach ([500,0,_traitor,teamPlayer] call A3A_fnc_distanceUnits);
 
 		moveOut _traitor;
 		_traitor join grpNull;
@@ -175,7 +180,7 @@ if (not alive _traitor || traitorIntel) then
 }
 else
 {
-	[_taskId, "AS", "FAILED", true] call A3A_fnc_taskSetState;
+	[_taskId, "AS", "FAILED", false] call A3A_fnc_taskSetState;
 	if (_difficultX) then {[-10,theBoss] call A3A_fnc_playerScoreAdd} else {[-10,theBoss] call A3A_fnc_playerScoreAdd};
 	if (dateToNumber date > _dateLimitNum) then
 	{

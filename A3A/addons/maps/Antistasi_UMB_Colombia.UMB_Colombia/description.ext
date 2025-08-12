@@ -1,0 +1,41 @@
+#include "..\missionDescription\master.hpp"
+
+OnLoadName = $STR_antistasi_mission_info_umb_colombia_mapname_short_text;
+OnLoadMission = $STR_antistasi_mission_info_umb_colombia_blurb_text;
+briefingName = $STR_antistasi_mission_info_umb_colombia_mapname_text;
+overviewText = $STR_antistasi_mission_info_umb_colombia_description_text;
+loadScreen = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
+overviewPicture = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
+
+class CfgNotifications
+{
+    #include "..\missionDescription\CfgNotificationsContents.hpp"
+};
+
+class CfgDebriefing {
+    #include "..\missionDescription\CfgDebriefingContents.hpp"
+	class End1
+	{
+		title = "V I C T O R Y";
+		subtitle = "Colombia is Ours!";
+		description = "The population of Colombia loves you!<br/>The brave soldiers have proven their valour, and Petros, Colombias new Prime Minister, could at last to have a nice holidays. A deserved rest in a Greek island with drinks and fine food.";
+		picture = "n_inf";
+		pictureColor[] = {0.0,0.5,0.0,1};
+	};
+    class petrosDead
+    {
+        title = "Petros is Dead";
+        subtitle = "Petros is Dead";
+        description = "Congratulations!: Petros is Dead. Now with rebels without a leader, you may think about joining them, and free Colombia";
+        picture = "b_unknown";
+        pictureColor[] = {0.5,0.0,0.0,1};
+    };
+    class destroyedSites
+    {
+        title = "Colombia is Destroyed";
+        subtitle = "Colombia got Destroyed by OPFOR";
+        description = "One third of the population in Colombia has been murdered by the OPFOR.<br/>Colombia no longer exists, nobody wants to live here.";
+        picture = "b_unknown";
+        pictureColor[] = {0.5,0.0,0.0,1};
+    };
+};

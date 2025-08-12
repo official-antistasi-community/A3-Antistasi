@@ -6,7 +6,8 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"A3A_core"};
+        // Needs A3 loadorder for arsenal limits dialog
+        requiredAddons[] = {"A3_Data_F_AoW_Loadorder", "A3A_core"};
         author = AUTHOR;
         authors[] = { AUTHORS };
         authorUrl = "";
@@ -22,9 +23,10 @@ class CfgPatches {
     #include "CfgFunctions.hpp"
 #endif
 
+
 // Whether order should be maintained is unknown.
 #include "dialogues\defines.hpp"
 #include "dialogues\textures.inc"
 #include "dialogues\controls.hpp"
 #include "dialogues\dialogs.hpp"
-#include "dialogues\statusBar.hpp"
+#include "dialogues\rsc.hpp"

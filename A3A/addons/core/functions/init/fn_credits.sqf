@@ -8,7 +8,7 @@ _title = if (worldName == "Tanoa") then {
 	} else {
 		"Antistasi"
 	};
-};
+}; //TODO: Clean this shit up
 
 _credits = [ [_title, [QUOTE(VERSION)]], [ "Authors:", ["Barbolani","Official Antistasi Community"] ] ];
 _layer = "credits1" call bis_fnc_rscLayer;

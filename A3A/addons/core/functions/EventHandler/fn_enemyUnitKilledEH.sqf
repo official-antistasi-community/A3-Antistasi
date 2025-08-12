@@ -11,7 +11,7 @@ if (_victim getVariable ["spawner",false]) then
 //Gather infos, trigger timed despawn
 private _victimGroup = group _victim;
 private _victimSide = side (group _victim);
-[_victim] spawn A3A_fnc_postmortem;
+[_victim] remoteExec ["A3A_fnc_postmortem", 2];
 
 // Deplete resource pools if we haven't paid for this unit in advance
 private _pool = _victim getVariable ["A3A_resPool", "legacy"];
@@ -26,6 +26,15 @@ if (A3A_hasACE) then
 	{
 		_killer = _victim getVariable ["ace_medical_lastDamageSource", _killer];
 	};
+}
+else
+{
+    if (_victim getVariable ["incapacitated", false]) then {
+        private _downedBy = _victim getVariable "A3A_downedBy";
+        if (!isNil "_downedBy") then {
+            _killer = _downedBy;
+        };
+    };
 };
 
 if (_victimSide == Occupants or _victimSide == Invaders) then {
@@ -44,7 +53,6 @@ if (side (group _killer) == teamPlayer) then
                 [_killer,false] remoteExec ["setCaptive",_killer];
             };
         };
-        _killer addRating 1000;
     };
     if (vehicle _killer isKindOf "StaticMortar") then
     {
@@ -58,16 +66,18 @@ if (side (group _killer) == teamPlayer) then
 	if (count weapons _victim < 1 && !(_victim getVariable ["isAnimal", false])) then
     {
         //This doesn't trigger for dogs, only for surrendered units
-        Debug("aggroEvent | Rebels killed a surrendered unit");
+        private _uid = (["AI",getPlayerUID _killer] select (isPlayer _killer));
+        private _name = name _killer;
+        Debug_3("aggroEvent | Rebel %1 [UID: %2 Name: %3] killed a surrendered unit", _killer, _uid, _name);
 		if (_victimSide == Occupants) then
 		{
-			[0,-2,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
+			[0,-2,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
 		};
         [_victimSide, 20, 30] remoteExec ["A3A_fnc_addAggression", 2];
 	}
 	else
 	{
-		[-1,1,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
+		[-1,1,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
         [_victimSide, 0.5, 45] remoteExec ["A3A_fnc_addAggression", 2];
 	};
 }
@@ -75,11 +85,11 @@ else
 {
 	if (_victimSide == Occupants) then
 	{
-		[-0.25,0,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
+		[-0.25,0,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
 	}
 	else
 	{
-		[0.25,0,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
+		[0.25,0,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
 	};
 };
 

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="A3-Antistasi">
-    <Package name="A3-Antistasi Mission">
-        <Container name="Events">
-        </Container>
-    </Package>
+  <Package name="A3-Antistasi events">
+    <Container name="Events">
+
+    </Container>
+  </Package>
 </Project>

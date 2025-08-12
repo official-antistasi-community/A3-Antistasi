@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles the initialization and updating of the Recruit Units dialog.
     This function should only be called from RecruitDialog onLoad and control activation EHs.
 
@@ -17,7 +17,10 @@ Dependencies:
     None
 
 Example:
-    ["onLoad"] spawn A3A_fnc_recruitDialog; // initialization
+    ["onLoad"] spawn FUNC(recruitDialog); // initialization
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -60,6 +63,12 @@ switch (_mode) do
         private _bombSpecialistIcon = _display displayCtrl  A3A_IDC_RECRUITBOMBSPECIALISTICON;
         private _bombSpecialistPriceText = _display displayCtrl  A3A_IDC_RECRUITBOMBSPECIALISTPRICE;
         private _bombSpecialistButton = _display displayCtrl  A3A_IDC_RECRUITBOMBSPECIALISTBUTTON;
+        private _atMissileIcon = _display displayCtrl  A3A_IDC_RECRUITATMISSILEICON;
+        private _atMissilePriceText = _display displayCtrl  A3A_IDC_RECRUITATMISSILEPRICE;
+        private _atMissileButton = _display displayCtrl  A3A_IDC_RECRUITATMISSILEBUTTON;
+        private _aaMissileIcon = _display displayCtrl  A3A_IDC_RECRUITAAMISSILEICON;
+        private _aaMissilePriceText = _display displayCtrl  A3A_IDC_RECRUITAAMISSILEPRICE;
+        private _aaMissileButton = _display displayCtrl  A3A_IDC_RECRUITAAMISSILEBUTTON;
 
         // Get unit prices
         private _militiamanPrice = server getVariable FactionGet(reb,"unitRifle");
@@ -70,6 +79,8 @@ switch (_mode) do
         private _marksmanPrice = server getVariable FactionGet(reb,"unitSniper");
         private _engineerPrice = server getVariable FactionGet(reb,"unitEng");
         private _bombSpecialistPrice = server getVariable FactionGet(reb,"unitExp");
+        private _atMissilePrice = server getVariable FactionGet(reb,"unitAT");
+        private _aaMissilePrice = server getVariable FactionGet(reb,"unitAA");
 
         // Update price labels
         _militiamanPriceText ctrlSetText ((str _militiamanPrice) + "€");
@@ -80,49 +91,95 @@ switch (_mode) do
         _marksmanPriceText ctrlSetText ((str _marksmanPrice) + "€");
         _engineerPriceText ctrlSetText ((str _engineerPrice) + "€");
         _bombSpecialistPriceText ctrlSetText ((str _bombSpecialistPrice) + "€");
+        _atMissilePriceText ctrlSetText ((str _atMissilePrice) + "€");
+        _aaMissilePriceText ctrlSetText ((str _aaMissilePrice) + "€");
 
         // Disable buttons and darken icon if not enough money or HR for the unit
-        private _money = player getVariable "moneyX";
+        private _money = if (player == theBoss) then { server getVariable "resourcesFIA" } else { player getVariable "moneyX" };
         private _hr = server getVariable "hr";
         if (_money < _militiamanPrice || _hr < 1) then {
             _militiamanButton ctrlEnable false;
-            _militiamanButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
-            _militiamanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _militiamanButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _militiamanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _autoriflemanPrice || _hr < 1) then {
             _autoriflemanButton ctrlEnable false;
-            _autoriflemanButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
-            _autoriflemanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _autoriflemanButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _autoriflemanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _grenadierPrice || _hr < 1) then {
             _grenadierButton ctrlEnable false;
-            _grenadierButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
-            _grenadierIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _grenadierButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _grenadierIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _antitankPrice || _hr < 1) then {
             _antitankButton ctrlEnable false;
-            _antitankButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
-            _antitankIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _antitankButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _antitankIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _medicPrice || _hr < 1) then {
             _medicButton ctrlEnable false;
-            _medicButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
-            _medicIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _medicButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _medicIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _marksmanPrice || _hr < 1) then {
             _marksmanButton ctrlEnable false;
-            _marksmanButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
-            _marksmanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _marksmanButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _marksmanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _engineerPrice || _hr < 1) then {
             _engineerButton ctrlEnable false;
-            _engineerButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
-            _engineerIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _engineerButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _engineerIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
         if (_money < _bombSpecialistPrice || _hr < 1) then {
             _bombSpecialistButton ctrlEnable false;
-            _bombSpecialistButton ctrlSetTooltip "You do not have enough money or HR for this unit type"; // TODO UI-update: stringtable
-            _bombSpecialistIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call A3A_fnc_configColorToArray);
+            _bombSpecialistButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _bombSpecialistIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if (_money < _atMissilePrice || _hr < 1) then {
+            _atMissileButton ctrlEnable false;
+            _atMissileButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _atMissileIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if (_money < _aaMissilePrice || _hr < 1) then {
+            _aaMissileButton ctrlEnable false;
+            _aaMissileButton ctrlSetTooltip localize "STR_antistasi_dialogs_recruit_units_error";
+            _aaMissileIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+
+        // Disable buttons and darken icon if not enough weapons
+        call A3A_fnc_fetchRebelGear;
+        private _noGearText = "Not enough weapons to recruit this unit type";
+        if !([A3A_faction_reb get "unitMG",false] call A3A_fnc_hasWeapons) then {
+            _autoriflemanButton ctrlEnable false;
+            _autoriflemanButton ctrlSetTooltip _noGearText;
+            _autoriflemanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if !([A3A_faction_reb get "unitGL",false] call A3A_fnc_hasWeapons) then {
+            _grenadierButton ctrlEnable false;
+            _grenadierButton ctrlSetTooltip _noGearText;
+            _grenadierIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if !([A3A_faction_reb get "unitLAT",false] call A3A_fnc_hasWeapons) then {
+            _antitankButton ctrlEnable false;
+            _antitankButton ctrlSetTooltip _noGearText;
+            _antitankIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if !([A3A_faction_reb get "unitSniper",false] call A3A_fnc_hasWeapons) then {
+            _marksmanButton ctrlEnable false;
+            _marksmanButton ctrlSetTooltip _noGearText;
+            _marksmanIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if !([A3A_faction_reb get "unitAT",false] call A3A_fnc_hasWeapons) then {
+            _atMissileButton ctrlEnable false;
+            _atMissileButton ctrlSetTooltip _noGearText;
+            _atMissileIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if !([A3A_faction_reb get "unitAA",false] call A3A_fnc_hasWeapons) then {
+            _aaMissileButton ctrlEnable false;
+            _aaMissileButton ctrlSetTooltip _noGearText;
+            _aaMissileIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
 
         Debug("RecruitDialog onLoad complete.");

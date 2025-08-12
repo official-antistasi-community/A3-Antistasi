@@ -1,5 +1,6 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+private _titleStr = localize "STR_A3A_garrison_header";
 
 params ["_incomingUnits"];
 
@@ -9,7 +10,7 @@ positionTel = [];
 showCommandingMenu "";
 onMapSingleClick "positionTel = _pos; true";
 
-[localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_select_zone"] call A3A_fnc_customHint;
+[_titleStr, localize "STR_A3A_garrison_select_zone"] call A3A_fnc_customHint;
 
 waitUntil {sleep 0.5; positionTel isNotEqualTo [] or {!visiblemap}};
 onMapSingleClick "";
@@ -20,15 +21,15 @@ private _positionTel = positionTel;
 private _nearX = [markersX,_positionTel] call BIS_fnc_nearestPosition;
 
 if (_positionTel distance2D (getMarkerPos _nearX) > 50) exitWith {
-    [localize "STR_A3A_garrison_header", format [localize "STR_A3A_garrison_fail_not_markerzone",FactionGet(reb,"name")]] call A3A_fnc_customHint;
+    [_titleStr, format [localize "STR_A3A_garrison_fail_not_markerzone",FactionGet(reb,"name")]] call A3A_fnc_customHint;
 };
 
 if (!(sidesX getVariable [_nearX,sideUnknown] == teamPlayer)) exitWith {
-    [localize "STR_A3A_garrison_header", format [localize "STR_A3A_garrison_fail_not_teamplayer",FactionGet(reb,"name")]] call A3A_fnc_customHint;
+    [_titleStr, format [localize "STR_A3A_garrison_fail_not_teamplayer",FactionGet(reb,"name")]] call A3A_fnc_customHint;
 };
 
 if (_nearX in outpostsFIA and {!isOnRoad getMarkerPos _nearX}) exitWith {
-    [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_fail_wrong_type"] call A3A_fnc_customHint;
+    [_titleStr, localize "STR_A3A_garrison_fail_wrong_type"] call A3A_fnc_customHint;
 };
 
 private _groupX = grpNull;
@@ -48,11 +49,11 @@ private _alreadyInGarrison = false;
     if !(isNil "_garrisondIn") then {_alreadyInGarrison = true};
 } forEach _unitsX;
 if _alreadyInGarrison exitWith {
-    [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_fail_already_in_garrison"] call A3A_fnc_customHint
+    [_titleStr, localize "STR_A3A_garrison_fail_already_in_garrison"] call A3A_fnc_customHint
 };
 
 if (groupID _groupX == "MineF" or groupID _groupX == "Post" or (isPlayer(leader _groupX))) exitWith {
-    [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_fail_no_specific_squads"] call A3A_fnc_customHint;
+    [_titleStr, localize "STR_A3A_garrison_fail_no_specific_squads"] call A3A_fnc_customHint;
 };
 
 {
@@ -60,7 +61,7 @@ if (groupID _groupX == "MineF" or groupID _groupX == "Post" or (isPlayer(leader 
 } forEach _unitsX;
 
 if (_earlyEscape) exitWith {
-    [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_fail_dead_units"] call A3A_fnc_customHint;
+    [_titleStr, localize "STR_A3A_garrison_fail_dead_units"] call A3A_fnc_customHint;
 };
 
 private _bannedTypes = FactionGet(civ, "unitMan") + 
@@ -75,7 +76,7 @@ private _bannedTypes = FactionGet(civ, "unitMan") +
     if (_unitType in _bannedTypes) exitWith {_earlyEscape = true};
 } forEach _unitsX;
 if (_earlyEscape) exitWith {
-    [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_fail_no_specific_units"] call A3A_fnc_customHint;
+    [_titleStr, localize "STR_A3A_garrison_fail_no_specific_units"] call A3A_fnc_customHint;
 };
 
 private _limit = [_nearX] call A3A_fnc_getGarrisonLimit;
@@ -86,7 +87,7 @@ if (_limit != -1) then {
 
     switch (true) do {
         case (count _oldGarrison == _limit): {
-            [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_full_limit"] call A3A_fnc_customHint;
+            [_titleStr, localize "STR_A3A_garrison_full_limit"] call A3A_fnc_customHint;
             _earlyEscape = true;
         };
         case (_newGarrisonCount >= _limit): {
@@ -102,7 +103,7 @@ if (_limit != -1) then {
             } forEach _unitsToRefund;
 
             [count _unitsToRefund,_refundMoney] remoteExec ["A3A_fnc_resourcesFIA",2];
-            [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_exceed_limit"] call A3A_fnc_customHint;
+            [_titleStr, localize "STR_A3A_garrison_exceed_limit"] call A3A_fnc_customHint;
         };
         default {
             //proceed as usual
@@ -114,9 +115,9 @@ if (_earlyEscape) exitWith {};
 if (isNull _groupX) then {
     _groupX = createGroup teamPlayer;
     _unitsX joinSilent _groupX;
-    [localize "STR_A3A_garrison_header", localize "STR_A3A_garrison_adding_to_garrison"] call A3A_fnc_customHint;
+    [_titleStr, localize "STR_A3A_garrison_adding_to_garrison"] call A3A_fnc_customHint;
 } else {
-    [localize "STR_A3A_garrison_header", format [localize "STR_A3A_garrison_adding_to_garrison_hc", groupID _groupX]] call A3A_fnc_customHint;
+    [_titleStr, format [localize "STR_A3A_garrison_adding_to_garrison_hc", groupID _groupX]] call A3A_fnc_customHint;
     theBoss hcRemoveGroup _groupX;
 };
 
@@ -188,5 +189,5 @@ if (!_noDeletion) then {
         }];
     } forEach (_unitsX select {alive _x});
     theBoss hcSetGroup [_groupX];
-    [localize "STR_A3A_garrison_header", format [localize "STR_A3A_garrison_fail_zone_lost", groupID _groupX]] call A3A_fnc_customHint;
+    [_titleStr, format [localize "STR_A3A_garrison_fail_zone_lost", groupID _groupX]] call A3A_fnc_customHint;
 };

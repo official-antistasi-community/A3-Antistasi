@@ -155,7 +155,7 @@ private _ammoBox = if (garrison getVariable [_markerX + "_lootCD", 0] == 0) then
 	// Otherwise when destroyed, ammoboxes sink 100m underground and are never cleared up
 	_ammoBox addEventHandler ["Killed", { [_this#0] spawn { sleep 10; deleteVehicle (_this#0) } }];
 	[_ammoBox] spawn A3A_fnc_fillLootCrate;
-	[_ammoBox] call A3A_Logistics_fnc_addLoadAction;
+	[_ammoBox, nil, true] call A3A_Logistics_fnc_addLoadAction;
 
 	if (_markerX in seaports) then {
 		[_ammoBox] spawn {
@@ -256,7 +256,7 @@ if (_spawnParameter isEqualType []) then
 		if (FactionGet(civ,"vehiclesCivFuel") isEqualTo [] and random 1 < 0.1) exitWith { selectRandom (_faction get "vehiclesFuelTrucks") };
 		private _types = if (!_isFIA) then {(_faction get "vehiclesTrucks") + (_faction get "vehiclesCargoTrucks")} else {_faction get "vehiclesMilitiaTrucks"};
 		_types = _types select { _x in FactionGet(all,"vehiclesCargoTrucks") };
-		if (count _types == 0) then { (_faction get "vehiclesCargoTrucks") } else { _types };
+		if (count _types == 0) then { _types = (_faction get "vehiclesCargoTrucks") };
 		selectRandom _types;
 	};
 	isNil {

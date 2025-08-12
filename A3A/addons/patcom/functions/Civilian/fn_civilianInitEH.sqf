@@ -27,8 +27,6 @@ params ["_unit"];
 _unit setSkill 0;
 _unit disableAI "TARGET";
 _unit disableAI "AUTOTARGET";
-//Stops civilians from shouting out commands.
-[_unit, selectRandom (A3A_faction_civ get "faces"), "NoVoice"] call A3A_fnc_setIdentity;
 
 _unit addEventHandler["FiredNear", {
     params ["_unit"];
@@ -88,7 +86,7 @@ _unit addEventHandler ["Killed", {
         };
     };
 
-    [_victim] spawn A3A_fnc_postmortem;
+    [_victim] remoteExec ["A3A_fnc_postmortem", 2];
 }];
 
 ["civInit", [_unit]] call EFUNC(Events,triggerEvent);

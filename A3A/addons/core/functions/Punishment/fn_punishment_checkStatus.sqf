@@ -32,7 +32,7 @@ License: MIT License, Copyright (c) 2019 Barbolani & The Official Antistasi Comm
 params [["_UID","",[""]]];
 private _fileName = "fn_punishment_checkStatus";
 
-if ((!tkPunish) || {_UID isEqualTo ""}) exitWith {false;};
+if ((tkPunish != 1) || {_UID isEqualTo ""}) exitWith {false;};
 
 private _offenceTotal = [missionNamespace,"A3A_FFPun",_UID,"offenceTotal",0] call A3A_fnc_getNestedObject;
 

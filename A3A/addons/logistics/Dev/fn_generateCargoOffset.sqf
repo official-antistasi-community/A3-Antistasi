@@ -16,7 +16,7 @@ if (isNull _vehicle || isNull _cargo) exitWith {"invalid params: null object(s)"
 
 //get vehicle nodes
 private _nodes = ([_vehicle] call FUNC(getVehicleNodes)) apply {_x#1};
-if (_nodes isEqualTo []) exitWith {"Vehicle lacks nodes, define them or use a different vehicle"};
+if (_nodes isEqualTo []) exitWith {localize "STR_A3A_logi_gencargo_lacknodes"};
 
 private _nodeConfig = [_vehicle] call FUNC(getNodeConfig);
 
@@ -29,8 +29,8 @@ _params params [
 ];
 if (_isWeapon isEqualType 0) then {_isWeapon = _isWeapon isEqualTo 1};
 
-if (count _nodes < _size) exitWith {"vehicle lacks the capacity for a cargo of this size. Capacity: " + str count _nodes};
-if (_isWeapon && 0 == getNumber (_nodeConfig/"canLoadWeapon")) exitWith {"vehicle lacks the ability to load weapons"};
+if (count _nodes < _size) exitWith {localize "STR_A3A_logi_gencargo_lackcapacity" + str count _nodes};
+if (_isWeapon && 0 == getNumber (_nodeConfig/"canLoadWeapon")) exitWith {localize "STR_A3A_logi_gencargo_lackavailability"};
 
 //calc general use data
 private _firstNode = _nodes#0;

@@ -35,10 +35,11 @@ _plane setVariable ["SupportData", _suppData];        // for use in EHs
 private _group = [_side, _plane] call A3A_fnc_createVehicleCrew;
 { [_x, nil, false, _resPool] call A3A_fnc_NATOinit } forEach units _group;
 _group deleteGroupWhenEmpty true;
+[-10 * count units _group, _side, _resPool] call A3A_fnc_addEnemyResources;
 
 _plane addEventHandler ["Killed", {
     params ["_plane"];
-    ["TaskSucceeded", ["", "Fighter Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
+    ["TaskSucceeded", ["", localize "STR_A3A_fn_supports_ASFDown"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
 }];
 
 
@@ -116,7 +117,7 @@ while {true} do
 
             _group setBehaviourStrong "AWARE";
             _group setCombatMode "YELLOW";
-            //_plane flyInHeight 1000;
+            _plane flyInHeight 1000; // make the plane resume default loiter height because arma 3
             _currentlyAttacking = false;
             _timeout = _timeout - 300;
         };

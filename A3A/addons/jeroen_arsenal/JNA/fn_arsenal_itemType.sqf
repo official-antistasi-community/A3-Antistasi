@@ -182,6 +182,7 @@ private _itemCategory = switch true do {
 			default {
 				// haaaaack
 				if (_item isKindOf ["SPE_MUZZLE_FAKEMAG", configFile >> "CfgMagazines"]) exitWith {"Junk"};
+				if (_item isKindOf ["LIB_MUZZLE_FAKEMAG", configFile >> "CfgMagazines"]) exitWith {"Junk"};
 				"Magazine";
 			};
 		};

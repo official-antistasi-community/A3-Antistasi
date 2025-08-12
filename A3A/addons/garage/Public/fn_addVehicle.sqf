@@ -63,15 +63,24 @@ private _utilityRefund = {
 
     private _toRefund = 0;
     private _feedBack = "STR_HR_GRG_Feedback_addVehicle_Item_Stored";
-    if ("fuel" in _flags) then {
-        _toRefund = floor (([_object] call A3A_fnc_remainingFuel) * (_object getVariable ['A3A_itemPrice', 0]));
-        _feedBack = "STR_HR_GRG_Feedback_addVehicle_Fuel_sold";
-    } else {
-        _toRefund = _object getVariable ['A3A_itemPrice', 0];
+    private _itemPrice = _object getVariable ['A3A_itemPrice', 0];
+    if ("loot" in _flags) exitWith {
+        ["STR_HR_GRG_Feedback_addVehicle_LTC"] remoteExec ["HR_GRG_fnc_Hint", _client];
+        [_object, boxX, true, _itemPrice] call A3A_fnc_ammunitionTransfer;
+        _itemPrice;
     };
-    if ("loot" in _flags) then {
-        _feedBack = "STR_HR_GRG_Feedback_addVehicle_LTC";
-        [_object, boxX, true] call A3A_fnc_ammunitionTransfer;
+    switch (true) do {
+        case ("fuel" in _flags): {
+            _toRefund = floor (([_object] call A3A_fnc_remainingFuel) * _itemPrice);
+            _feedBack = "STR_HR_GRG_Feedback_addVehicle_Fuel_sold";
+        };
+        case ("ammo" in _flags): {
+            _toRefund = floor (([_object] call A3A_fnc_remainingAmmo) * _itemPrice);
+            _feedBack = "STR_HR_GRG_Feedback_addVehicle_Ammo_sold";
+        };
+        default {
+            _toRefund = _itemPrice;
+        };
     };
 
     deleteVehicle _object;
@@ -97,7 +106,7 @@ if (_exit) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Crewed"] remoteExec ["HR_
 
     // valid vehicle for garage
 private _cat = [_class] call HR_GRG_fnc_getCatIndex;
-if (_cat isEqualTo -1) exitWith { ["STR_HR_GRG_Feedback_addVehicle_GenericFail"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+if (_cat < 0) exitWith { ["STR_HR_GRG_Feedback_addVehicle_GenericFail"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     //cap block
 private _capacity = 0;
@@ -154,6 +163,7 @@ private _addVehicle = {
     //check if compatible with garage
     private _class = typeOf _this;
     private _cat = [_class] call HR_GRG_fnc_getCatIndex;
+    if (_cat isEqualTo -2) exitWith {deleteVehicle _this;}; // deletes anything caught by the blacklist
     if (_cat isEqualTo -1) exitWith {};
     _catsRequiringUpdate pushBackUnique _cat;
 
@@ -164,8 +174,14 @@ private _addVehicle = {
     ];
     private _sourceIndex = _source find true;
 
+    //Disable locking if the player is already at the lock limit
+    if (_sourceIndex == -1 && _lockUID != "" && {[_lockUID] call HR_GRG_fnc_getLockCount >= _player call HR_GRG_getLockLimit}) then {
+        _lockUID = ""; _lockName = "";
+    };
+
     private _stateData = [_this] call HR_GRG_fnc_getState;
     private _customisation = [_this] call BIS_fnc_getVehicleCustomization;
+    private _lockTime = [systemTimeUTC, []] select (_lockUID isEqualTo "");
 
     //Antistasi adaptions
     _this call _transferToArsenal;
@@ -176,7 +192,7 @@ private _addVehicle = {
 
     //Add vehicle to garage
     private _vehUID = [] call HR_GRG_fnc_genVehUID;
-    (HR_GRG_Vehicles#_cat) set [_vehUID, [cfgDispName(_class), _class, _lockUID, "", _stateData, _lockName, _customisation]];
+    (HR_GRG_Vehicles#_cat) set [_vehUID, [cfgDispName(_class), _class, _lockUID, "", _stateData, _lockName, _customisation, _lockTime]];
 
     //register vehicle as a source
     if (_sourceIndex != -1) then {
@@ -211,7 +227,10 @@ private _refreshCode = {
     } forEach _cats;
     call HR_GRG_fnc_updateVehicleCount;
 };
-[ _catsRequiringUpdate, _refreshCode ] remoteExecCall ["call", HR_GRG_Users];
+
+if !(HR_GRG_Users isEqualTo []) then {
+    [ _catsRequiringUpdate, _refreshCode ] remoteExecCall ["call", HR_GRG_Users];
+};
 
 ["STR_HR_GRG_Feedback_addVehicle_Success", [cfgDispName(_class)] ] remoteExec ["HR_GRG_fnc_Hint", _client];
 true;

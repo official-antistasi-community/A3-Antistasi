@@ -21,10 +21,10 @@ _displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time po
 
 _nameDest = [_markerX] call A3A_fnc_localizar;
 _holdTime = if(_difficultX) then {4} else {2};
-_taskDescription = format ["%1 population is in need of supplies. We may improve our relationship with that city if we are the ones who provide them. I have placed a crate with supplies near our HQ. Deliver the crate to %1 city center, hold it there for %3 minutes and it's done. Do this before %2.",_nameDest,_displayTime, _holdTime];
+_taskDescription = format [localize "STR_A3A_fn_mission_log_supply_text",_nameDest,_displayTime, _holdTime];
 
 private _taskId = "SUPP" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskId,[_taskDescription,"City Supplies",_markerX],_positionX,false,0,true,"Heal",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskId,[_taskDescription,localize "STR_A3A_fn_mission_log_supply_titel",_markerX],_positionX,false,0,true,"Heal",true] call BIS_fnc_taskCreate;
 [_taskId, "SUPP", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 //Creating the box
@@ -32,11 +32,12 @@ _pos = (getMarkerPos respawnTeamPlayer) findEmptyPosition [1,50,"C_Van_01_box_F"
 _truckX = "Land_FoodSacks_01_cargo_brown_F" createVehicle _pos;
 _truckX enableRopeAttach true;
 _truckX allowDamage false;
+if (A3A_hasACE) then {[_truckX, _truckX] call ace_common_fnc_claim};
 [_truckX] call A3A_Logistics_fnc_addLoadAction;
-_truckX addAction ["Delivery infos",
+_truckX addAction [localize "STR_A3A_fn_mission_log_supply_addact_del_info",
 	{
-		_text = format ["Deliver this box to %1, unload it to start distributing to people",(_this select 0) getVariable "destinationX"]; //This need a rework
-		["Logistics Mission", _text] remoteExecCall ["A3A_fnc_customHint",_this select 2];	//This need a rework
+		_text = format [localize "STR_A3A_fn_mission_log_supply_hint_text1",(_this select 0) getVariable "destinationX"]; //This need a rework
+		[localize "STR_A3A_fn_mission_log_supply_hint_title", _text] remoteExecCall ["A3A_fnc_customHint",_this select 2];	//This need a rework
 	},
 	nil,
 	0,
@@ -81,8 +82,8 @@ else
 		{
 		while {(_countX > 0) and (_truckX distance _positionX < 40) and ({[_x] call A3A_fnc_canFight} count ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits) == count ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits)) and ({(side _x == Occupants) and (_x distance _truckX < 50)} count allUnits == 0) and (dateToNumber date < _dateLimitNum) and (isNull attachedTo _truckX)} do
 			{
-			_formatX = format ["Keep the area clear of hostiles for %1 more seconds", _countX];
-			{if (isPlayer _x) then {[petros,"hint",_formatX,"Logistics Mission"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits);
+			_formatX = format [localize "STR_A3A_fn_mission_log_supply_hint_text2", _countX];
+			{if (isPlayer _x) then {[petros,"hint",_formatX,localize "STR_A3A_fn_mission_log_supply_hint_title"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits);
 			sleep 1;
 			_countX = _countX - 1;
 			};
@@ -96,7 +97,7 @@ else
 		};
 		if ((dateToNumber date < _dateLimitNum) and !(isNull _truckX)) then
 			{
-			[petros,"hint","Supplies Delivered", "Logistics Mission"] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
+			[petros,"hint",localize "STR_A3A_fn_mission_log_supply_hint_text3", localize "STR_A3A_fn_mission_log_supply_hint_title"] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
 			[_taskId, "SUPP", "SUCCEEDED"] call A3A_fnc_taskSetState;
 			{if (_x distance _positionX < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
 			[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
@@ -112,9 +113,6 @@ else
 			};
 	};
 
-_ecpos = getpos _truckX;
-deleteVehicle _truckX;
-_emptybox = "Land_Pallet_F" createVehicle _ecpos;
-[_emptybox] spawn A3A_fnc_postmortem;
+deleteVehicle _truckX; // Previously an empty pallet was spawned here, but it has been removed. RIP
 
 [_taskId, "SUPP", 900] spawn A3A_fnc_taskDelete;

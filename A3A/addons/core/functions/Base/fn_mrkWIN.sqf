@@ -21,6 +21,8 @@ Example:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
+private _titleStr = localize "STR_A3A_fn_base_mrkwin_title";
+
 params ["_target","_caller","_actionID","_argument"];
 
 if (_caller isNotEqualTo player) exitWith {
@@ -37,8 +39,8 @@ private _outpostGridSquare = ((_markerPos#0 toFixed 0) call A3A_fnc_pad_3Digits)
 if (sidesX getVariable [_markerX,sideUnknown] == teamPlayer) exitWith {};
 
 if !(player call A3A_fnc_canFight) exitWith { ServerError("Action somehow used by dead or unconscious player?") };
-if (captive player) exitWith {["Capture", "You cannot Capture the Flag while Undercover."] call A3A_fnc_customHint;};
-if ((_markerX in airportsX) and (tierWar < 3)) exitWith {["Capture", "You cannot capture Airports until you reach War Level 3."] call A3A_fnc_customHint;};
+if (captive player) exitWith {[_titleStr, localize "STR_A3A_fn_base_mrkwin_no_undercover"] call A3A_fnc_customHint;};
+if ((_markerX in airportsX) and (tierWar < 3)) exitWith {[_titleStr, localize "STR_A3A_fn_base_mrkwin_no_wl3"] call A3A_fnc_customHint;};
 
 // This damn ineffective multiplayer lock will be fixed with a future library addition. Not worth the effort to fix At the Moment. - C.Serafin
 //Check if the flag is locked
@@ -47,7 +49,7 @@ if(_flagCaptureETA > serverTime) exitWith
 {
     private _timeSpan = [_flagCaptureETA - serverTime] call A3A_fnc_secondsToTimeSpan;
     private _secondsLeftString = [_timeSpan,0,0,false,1] call A3A_fnc_timeSpan_format;  // Only print most significant quantity.
-    ["Capture", "Flag pole being used, wait "+_secondsLeftString+"."] call A3A_fnc_customHint;
+    [_titleStr, format [localize "STR_A3A_fn_base_mrkwin_used", _secondsLeftString]] call A3A_fnc_customHint;
 };
 //Lock the flag
 _flagX setVariable ["A3A_flagCaptureETA", serverTime + 10, true];
@@ -78,10 +80,10 @@ if (_enemyValue > 2*_rebelValue) exitWith
 {
     ServerInfo_4("Outpost at %1 (%2): Flag capture cancelled due to enemy value (%3) greater than 2*rebel value (%4)", _outpostGridSquare, _markerX, _enemyValue, _rebelValue);
     if (difficultyOption "mapContentEnemy" == 1) then {
-        ["Capture", "The enemy still lurks about. Check your map and clear the area."] call A3A_fnc_customHint;
+        [_titleStr, localize "STR_A3A_fn_base_mrkwin_lurk_check"] call A3A_fnc_customHint;
     } else {
         // Remove map quote due to immersive difficulty.
-        ["Capture", "The enemy still lurks about. Hunt them down and clear the area."] call A3A_fnc_customHint;
+        [_titleStr, localize "STR_A3A_fn_base_mrkwin_lurk_hunt"] call A3A_fnc_customHint;
     }
 };
 
@@ -90,21 +92,21 @@ A3A_isPlayerCapturingFlag = true;
 player playMove "MountSide";
 
 private _cancellationToken = [false];
-private _cancelActionID = player addAction ["Abort Outpost Capture",
+private _cancelActionID = player addAction [localize "STR_A3A_fn_base_mrkwin_addact_abortCapture",
 {
     params ["_target","_caller","_actionID","_cancellationToken"];
     _cancellationToken set [0, true];
     A3A_isPlayerCapturingFlag = nil;
     player switchMove "";
     player removeAction _actionID;
-    ["Capture", "Aborted Outpost Capture"] call A3A_fnc_customHint;
+    [localize "STR_A3A_fn_base_mrkwin_title", localize "STR_A3A_fn_base_mrkwin_abort"] call A3A_fnc_customHint;
 
 }, _cancellationToken];
 // returnflag Icon should be 1.5 tiems bigger than takeflag icon. 2 * 1.5 = 3
 player setUserActionText [_cancelActionID,"Aborted Outpost Capture","<img size='3' image='\A3\ui_f\data\igui\cfg\actions\returnflag_ca.paa'/>"];
 
 // Capturing
-sleep 8;
+sleep 7;
 
 if (_cancellationToken #0) exitWith {
     ServerInfo_3("Outpost at %1 (%2): Flag capture aborted by %3", _outpostGridSquare, _markerX, str player);

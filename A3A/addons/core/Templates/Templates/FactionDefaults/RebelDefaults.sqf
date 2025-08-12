@@ -8,7 +8,7 @@
 ["toolKits", ["ToolKit"]] call _fnc_saveToTemplate;  // Relies on autodetection.
 ["itemMaps", ["ItemMap"]] call _fnc_saveToTemplate;  // Relies on autodetection.
 ["diveGear", ["U_I_Wetsuit", "V_RebreatherIA", "G_Diving"]] call _fnc_saveToTemplate;
-["flyGear", ["U_I_pilotCoveralls"]] call _fnc_saveToTemplate;
+["flyGear", ["U_I_pilotCoveralls","B_Parachute"]] call _fnc_saveToTemplate;
 
 ["surrenderCrate", "Box_IND_Wps_F"] call _fnc_saveToTemplate;
 
@@ -36,3 +36,4 @@ if(A3A_hasACE) then {
 //FIA Rebells as Example
 ["faces", ["GreekHead_A3_02","GreekHead_A3_03","GreekHead_A3_04","GreekHead_A3_05","GreekHead_A3_06","GreekHead_A3_07","GreekHead_A3_08","GreekHead_A3_09","Ioannou","Mavros"]] call _fnc_saveToTemplate;
 ["voices", ["Male01GRE", "Male02GRE", "Male03GRE", "Male04GRE", "Male05GRE", "Male06GRE"]] call _fnc_saveToTemplate;
+"GreekMen" call _fnc_saveNames;

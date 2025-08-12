@@ -25,13 +25,13 @@ params [["_object", objNull, [objNull]]];
 //check if action already on object
 if ((actionIDs _object) findIf {
     _params = _object actionParams _x;
-    (_params#0) isEqualTo "Load loot to crate"
+    (_params#0) isEqualTo "Load loot to crate" //TODO: Check needs to be changed to allow localization of addActions
 } != -1) exitWith {};
 
 
 //add load actions
 _object addAction [
-    "Load loot to crate",
+    localize "STR_A3A_fn_ltc_init_addact_ltc",
     {
         [_this#3, clientOwner] remoteExecCall ["A3A_fnc_canLoot", 2];
     },
@@ -47,7 +47,7 @@ _object addAction [
 ];
 
 _object addAction [
-    "Load loot from crate to vehicle",
+    localize "STR_A3A_fn_ltc_init_addact_ltv",
     {
         [_this#3, clientOwner] remoteExecCall ["A3A_fnc_canTransfer", 2];
     },

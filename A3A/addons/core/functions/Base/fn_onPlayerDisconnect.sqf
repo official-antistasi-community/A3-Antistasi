@@ -38,3 +38,4 @@ if (side group _unit == teamPlayer || side group _unit == sideUnknown) then
 // Preventing duping due to weapon loadout saves
 if (alive _realUnit && {!(_realUnit getVariable ["incapacitated", false])} ) then { deleteVehicle _realUnit }
 else { _realUnit setDamage 1 };			// finish off, if incapped
+false;

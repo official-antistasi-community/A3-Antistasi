@@ -86,7 +86,7 @@ if(_result) then
   markersX = markersX - [_roadblockMarker]; publicVariable "markersX";
   sidesX setVariable [_roadblockMarker, nil, true];
   [5, -5, (getMarkerPos _roadblockMarker)] remoteExec ["A3A_fnc_citySupportChange",2];
-  ["TaskFailed", ["", "Roadblock Lost"]] remoteExec ["BIS_fnc_showNotification", 2];
+  ["TaskFailed", ["", localize "STR_A3A_fn_base_roadblockFight_lost"]] remoteExec ["BIS_fnc_showNotification", 2];
 };
 
 _result;

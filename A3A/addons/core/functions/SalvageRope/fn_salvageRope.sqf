@@ -83,7 +83,7 @@ A3A_SR_LoadSalvage = {
     if (_return isEqualType 0) exitWith {
         private _cargoName = getText (configFile >> "CfgVehicles" >> typeOf _object >> "displayName");
         private _vehicleName = getText (configFile >> "CfgVehicles" >> typeOf _vehicle >> "displayName");
-        ["Logistics", format ["%1 does not have enough space to load %2.", _vehicleName, _cargoName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner];
+        [localize "STR_A3A_logi_title", format [localize "STR_A3A_logi_salvagerope_nospace", _vehicleName, _cargoName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner];
     };
     _return spawn A3A_Logistics_fnc_load;
 };
@@ -133,15 +133,15 @@ A3A_SR_attachRope = {
 
 //adding of actions
 A3A_SR_addplayerWinchActions = {
-    player addAction ["Deploy Winch", {
+    player addAction [localize "STR_A3A_fn_salvRope_addact_deploy", {
         [player] call A3A_SR_DeployWinch;
     }, nil, 0, false, true, "", "call A3A_SR_canDeployWinch"];
 
-    player addAction ["Stow Winch", {
+    player addAction [localize "STR_A3A_fn_salvRope_addact_stow", {
         [player] call A3A_SR_stowRope;
     }, nil, 0, false, true, "", "call A3A_SR_canStow"];
 
-    player addAction ["Attach Rope", {
+    player addAction [localize "STR_A3A_fn_salvRope_addact_attach", {
         [player] call A3A_SR_attachRope;
     }, nil, 0, false, true, "", "call A3A_SR_canAttach"];
 

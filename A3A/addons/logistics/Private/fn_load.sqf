@@ -23,7 +23,7 @@
 #include "..\script_component.hpp"
 params ["_cargo", "_vehicle", "_node", "_weapon", ["_instant", false, [true]]];
 
-if (_vehicle getVariable ["LoadingCargo", false]) exitWith {["Logistics", "Cargo is already being loaded into the vehicle"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner]; nil};
+if (_vehicle getVariable ["LoadingCargo", false]) exitWith {[localize "STR_A3A_logi_title", localize "STR_A3A_logi_load_being"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner]; nil};
 _vehicle setVariable ["LoadingCargo",true,true];
 
 //object string for jip

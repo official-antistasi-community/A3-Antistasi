@@ -25,7 +25,7 @@ params ["_cargo"];
 
 private _vehicles = (nearestObjects [_cargo,["Car","Ship","Tank","Helicopter"], 10]) - [_cargo];
 private _vehicle = _vehicles#0;
-if (isNil "_vehicle") exitWith {["Logistics", "No vehicle is close enough."] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner]};
+if (isNil "_vehicle") exitWith {[localize "STR_A3A_logi_title", localize "STR_A3A_logi_tryload_nodistance"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner]};
 
 private _return = [_vehicle, _cargo] call A3A_Logistics_fnc_canLoad;
 if (_return isEqualType 0) exitWith {
@@ -35,15 +35,15 @@ if (_return isEqualType 0) exitWith {
     if (_cargo isKindOf "CAManBase") then {_cargoName = name _cargo};
 
     switch _return do {
-        case -1: { ["Logistics", "You can't load cargo into a destroyed vehicle."] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
-        case -2: { ["Logistics", "You can't load destroyed cargo into a vehicle."] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
-        case -3: { ["Logistics", format ["%1 cannot be loaded.", _cargoName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
-        case -4: { ["Logistics", "Can't load a static that's mounted."] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
-        case -5: { ["Logistics", format ["%1 can not be mounted on a %2.", _cargoName, _vehicleName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] }; //vehicle in weapon blacklist
-        case -6: { ["Logistics", format ["%1 is being helped or no longer needs your help.",_cargoName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
-        case -7: { ["Logistics", format ["%1 is unable to load any cargo.", _vehicleName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
-        case -8: { ["Logistics", format ["%1 does not have enough space to load %2.", _vehicleName, _cargoName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
-        case -9: { ["Logistics", format ["%1 can not load cargo while units are blocking the cargo plane.", _vehicleName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
+        case -1: { [localize "STR_A3A_logi_title", localize "STR_A3A_logi_tryload_nodesveh"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
+        case -2: { [localize "STR_A3A_logi_title", localize "STR_A3A_logi_tryload_nodexcargo"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
+        case -3: { [localize "STR_A3A_logi_title", format [localize "STR_A3A_logi_tryload_no", _cargoName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
+        case -4: { [localize "STR_A3A_logi_title", localize "STR_A3A_logi_tryload_no_mounted"] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
+        case -5: { [localize "STR_A3A_logi_title", format [localize "STR_A3A_logi_tryload_no_ontop", _cargoName, _vehicleName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] }; //vehicle in weapon blacklist
+        case -6: { [localize "STR_A3A_logi_title", format [localize "STR_A3A_logi_tryload_helped",_cargoName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
+        case -7: { [localize "STR_A3A_logi_title", format [localize "STR_A3A_logi_tryload_no_unable", _vehicleName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
+        case -8: { [localize "STR_A3A_logi_title", format [localize "STR_A3A_logi_tryload_no_space", _vehicleName, _cargoName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
+        case -9: { [localize "STR_A3A_logi_title", format [localize "STR_A3A_logi_tryload_no_blocking", _vehicleName]] remoteExec ["A3A_fnc_customHint", remoteExecutedOwner] };
         default { Error_1("Unknown error code: %1", _return) };
     };
 };

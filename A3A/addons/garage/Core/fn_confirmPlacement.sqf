@@ -406,7 +406,7 @@ HR_GRG_EH_EF = addMissionEventHandler ["EachFrame", {
 
     if (HR_GRG_renderPlacementRays) then { //Debug render
         HR_GRG_dispSquare params ["_adjustment", "_square"];
-        _square params ["_a","_b"];
+        _square params ["_a","_b","_c"];
         drawLine3D [HR_GRG_dispVehicle modelToWorldVisual _adjustment,HR_GRG_dispVehicle modelToWorldVisual (_adjustment vectorAdd [_a,0,0]), [0.9,0,0,1]];
         drawLine3D [HR_GRG_dispVehicle modelToWorldVisual _adjustment,HR_GRG_dispVehicle modelToWorldVisual (_adjustment vectorAdd [0,_b,0]), [0.9,0,0,1]];
         drawLine3D [HR_GRG_dispVehicle modelToWorldVisual _adjustment,HR_GRG_dispVehicle modelToWorldVisual (_adjustment vectorAdd [0,0,_c]), [0.9,0,0,1]];

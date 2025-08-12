@@ -20,27 +20,17 @@
 */
 params [ ["_vehicle", objNull, [objNull,""]] ];
 
-//handle obj input and class input
-private _vehType = if (_vehicle isEqualType objNull) then {typeOf _vehicle} else {_vehicle};
-if (_vehicle isEqualType "") then {_vehicle = objNull};
-
-if (_vehType isEqualTo "") exitWith {false}; //null obj passed
-private _vehCfg = configFile/"CfgVehicles"/_vehType;
-if (!isClass _vehCfg) exitWith {false}; //invalid class string passed
-
-//check if is source
-if (A3A_hasAce) then { //Ace
-    private _aceCurrent = _vehicle getVariable ["ace_rearm_currentSupply", 0];
-    if (_aceCurrent < 0) exitWith {false};
-
-    private _ammoCap = getNumber (_vehCfg >> "transportAmmo");
-    private _aceDefault = getNumber (_vehCfg >> "ace_rearm_defaultSupply");
-    private _aceIsSupply = _vehicle getVariable ["ace_rearm_isSupplyVehicle", false];
-    (_aceDefault > 0) || {_aceIsSupply} || {_ammoCap > 0}
-} else { //Vanilla
-    if (isNull _vehicle) then {
-        getNumber (_vehCfg/"transportAmmo") > 0
-    } else {
-        getAmmoCargo _vehicle > 0
-    };
+if (_vehicle isEqualType objNull) then {
+    if (isNull _vehicle) exitWith {false};
+    if (getAmmoCargo _vehicle > 0) exitWith {true};                                     // vanilla
+    if (_vehicle getVariable ["ace_rearm_currentSupply", 0] < 0) exitWith {false};          // ACE but used up
+    if (_vehicle getVariable ["ace_rearm_isSupplyVehicle", false]) exitWith {true};
+    if (getNumber (configOf _vehicle/"ace_rearm_defaultSupply") > 0) exitWith {true};
+    false;
+} else {
+    private _vehCfg = configFile/"CfgVehicles"/_vehicle;
+    if (!isClass _vehCfg) exitWith {false}; //invalid class string passed
+    if (getNumber (_vehCfg/"transportAmmo") > 0) exitWith {true};                       // vanilla
+    if (getNumber (_vehCfg/"ace_rearm_defaultSupply") > 0) exitWith {true};
+    false;
 };

@@ -23,6 +23,7 @@
 */
 params ["_target", "_override"];
 scopeName "Main";
+private _titleStr = localize "STR_A3A_fn_ltc_title";
 
 private "_container";
 if (isNil "_override") then {
@@ -33,7 +34,7 @@ if (isNil "_override") then {
 };
 
 if (isNil "_container") exitWith {
-    ["Loot crate", "No vehicles nearby."] call A3A_fnc_customHint;
+    [_titleStr, localize "STR_A3A_fn_ltc_lfc_noveh"] call A3A_fnc_customHint;
     [_target, clientOwner, true] remoteExecCall ["A3A_fnc_canTransfer", 2];
 };
 
@@ -215,9 +216,9 @@ _return params ["_leftover", "_allUnlocked"];
 
 if (isNil "_override") then {
     if ((_leftover isEqualTo [[],[],[],[]]) or _allUnlocked) then {
-        ["Loot crate", format ["All loot transfered to %1.", getText (configFile >> "CfgVehicles" >> typeOf _container >> "displayname")]] call A3A_fnc_customHint;
+        [_titleStr, format [localize "STR_A3A_fn_ltc_lfc_transfered", getText (configFile >> "CfgVehicles" >> typeOf _container >> "displayname")]] call A3A_fnc_customHint;
     } else {
-        ["Loot crate", format ["Unable to transfer all loot to %1. %1 full.", getText (configFile >> "CfgVehicles" >> typeOf _container >> "displayname")]] call A3A_fnc_customHint;
+        [_titleStr, format [localize "STR_A3A_fn_ltc_lfc_no_full", getText (configFile >> "CfgVehicles" >> typeOf _container >> "displayname")]] call A3A_fnc_customHint;
     };
     [_target, clientOwner, true] remoteExecCall ["A3A_fnc_canTransfer", 2];
 };

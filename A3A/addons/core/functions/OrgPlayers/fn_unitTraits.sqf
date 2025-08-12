@@ -23,6 +23,8 @@ Example:
 FIX_LINE_NUMBERS()
 private _type = typeOf player;
 private _text = "";
+private _titleStr = localize "STR_A3A_fn_orgp_unitTraits_title";
+
 if(roleDescription player == "Default Commander") then
 {
     //Same values as teamleader
@@ -30,25 +32,46 @@ if(roleDescription player == "Default Commander") then
     player setUnitTrait ["audibleCoef",0.8];
     player setUnitTrait ["loadCoef",1.4];
     player setUnitTrait ["medic", true];
-	player setUnitTrait ["engineer", true];
-    _text = "Commander role.<br/><br/>The commander is a lightweight unit with increased camouflage, medical and engineering capabilities.";
+    player setUnitTrait ["explosiveSpecialist", true];
+    player setUnitTrait ["UAVHacker", true];
+    // ACE clears the engineer unitTrait and adds this var at CBA initPost, so we have to do it ourselves
+    if (missionNamespace getVariable ["ace_repair_enabled", false]) then { player setVariable ["ace_isEngineer", true, true] } else { player setUnitTrait ["engineer", true] };
+    _text = localize "STR_A3A_fn_orgp_unitTraits_commander1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_commander2";
 }
 else
 {
     switch (_type) do
     {
-    	//cases for greenfor missions
-    	case "I_G_medic_F":  {_text = "Medic role.<br/><br/>Medics do not have any bonus or penalties, but have the ability to use certain medical items for full health restoration."}; //reintroduced - 8th January 2020, Bob Murphy
-    	case "I_G_Soldier_TL_F": {player setUnitTrait ["camouflageCoef",0.8]; player setUnitTrait ["audibleCoef",0.8]; player setUnitTrait ["loadCoef",1.4]; _text = "Teamleader role.<br/><br/>Teamleader are more lightweight units with increased camouflage capabilities."}; //reintroduced - 8th January 2020, Bob Murphy
-    	case "I_G_Soldier_F":  {player setUnitTrait ["UAVHacker",true]; _text = "Rifleman role.<br/><br/>Riflemen do not have any bonus or penalties but can hack drones."}; //reintroduced - 8th January 2020, Bob Murphy
-    	case "I_G_Soldier_GL_F": {player setUnitTrait ["camouflageCoef",1.2]; player setUnitTrait ["loadCoef",0.8]; _text = "Grenadier role.<br/><br/>Grenadiers have a slight bonus on carry capacity, but are easy to spot."}; //reintroduced - 8th January 2020, Bob Murphy
-    	case "I_G_Soldier_AR_F": {player setUnitTrait ["audibleCoef",1.2]; player setUnitTrait ["loadCoef",0.8]; _text = "Autorifleman role.<br/><br/>Autoriflemen have a slight bonus on carry capacity, but make too much noise when they move."}; //reintroduced - 8th January 2020, Bob Murphy
-    	case "I_G_engineer_F":  {_text = "Engineer role.<br/><br/>Engineers do not have any bonus or penalties, but have the ability to use Repair Kits for vehicle repair."}; //reintroduced - 8th January 2020, Bob Murphy
- };
+    	case "I_G_medic_F": {
+            _text = localize "STR_A3A_fn_orgp_unitTraits_medic1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_medic2";
+        };
+    	case "I_G_Soldier_TL_F": {
+            player setUnitTrait ["camouflageCoef",0.8];
+            player setUnitTrait ["audibleCoef",0.8];
+            player setUnitTrait ["loadCoef",1.4];
+            _text = localize "STR_A3A_fn_orgp_unitTraits_teamlead1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_teamlead2";
+        };
+    	case "I_G_Soldier_F": {
+            player setUnitTrait ["UAVHacker",true];
+            _text = localize "STR_A3A_fn_orgp_unitTraits_rifle1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_rifle2";
+        };
+    	case "I_G_Soldier_GL_F": {
+            player setUnitTrait ["camouflageCoef",1.2];
+            player setUnitTrait ["loadCoef",0.8];
+            _text = localize "STR_A3A_fn_orgp_unitTraits_grenadier1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_grenadier2";
+        };
+    	case "I_G_Soldier_AR_F": {
+            player setUnitTrait ["audibleCoef",1.2];
+            player setUnitTrait ["loadCoef",0.8];
+            _text = localize "STR_A3A_fn_orgp_unitTraits_autorifle1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_autorifle2";
+        };
+    	case "I_G_engineer_F": {
+            _text = localize "STR_A3A_fn_orgp_unitTraits_engi1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_engi2";
+        };
+    };
 };
 
-if (isMultiPlayer) then
-{
+[_titleStr, format [localize "STR_A3A_fn_orgp_unitTraits_you",_text]] spawn {
 	sleep 5;
-	["Unit Traits", format ["You have selected %1.",_text]] call A3A_fnc_customHint;
+	_this call A3A_fnc_customHint;
 };

@@ -94,7 +94,6 @@ switch (_mode) do
         private _params = (_paramsTable getVariable "allCtrls") apply {
             private _cfg = _x getVariable "config";
             private _val = _x lbValue lbCurSel _x;
-            if (getArray (_cfg/"values") isEqualTo [0,1]) then { _val = _val != 0 };          // number -> bool
             [configName _cfg, _val];
         };
         _params;

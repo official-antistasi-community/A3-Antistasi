@@ -1,6 +1,8 @@
-if !(membershipEnabled) exitWith {["Membership", "Server Member feature is disabled."] call A3A_fnc_customHint;};
+private _titleStr = localize "STR_A3A_fn_orgp_memList_titel";
+
+if !(membershipEnabled) exitWith {[_titleStr, localize "STR_A3A_fn_orgp_memList_no_disabled"] call A3A_fnc_customHint;};
 private ["_countX"];
-_textX = "In Game Members<br/><br/>";
+_textX = localize "STR_A3A_fn_orgp_memList_members";
 _countN = 0;
 
 {
@@ -12,6 +14,6 @@ if (!isNull _playerX) then
 	};
 } forEach (call A3A_fnc_playableUnits);
 
-_textX = format ["%1<br/>No members:<br/>%2",_textX,_countN];
+_textX = format [localize "STR_A3A_fn_orgp_memList_members_count",_textX,_countN];
 
-["Membership", _textX] call A3A_fnc_customHint;
+[_titleStr, _textX] call A3A_fnc_customHint;

@@ -6,11 +6,11 @@ Maintainer: Caleb Serafin
     Authenticated caller must be theBoss or an admin.
 
 Arguments:
+    <OBJECT> Player executing the change.
     <STRING> Spawn Option
     <STRING> Action
-
-Return Value:
-    <ANY> nil.
+    <SCALAR> Amount to adjust by or set [DEFAULT: nil]
+    <BOOL> False to use hints. True to hide hints [DEFAULT: False]
 
 Scope: Server, Global Arguments, Global Effect
 Environment: Any
@@ -23,38 +23,23 @@ Example:
 params [
     ["_player",objNull,[objNull]],
     ["_option","",[""]],
-    ["_action","",[""]]
+    ["_action","",[""]],
+    ["_amount",nil,[nil,0]],
+    ["_noHints",false,[false]]
 ];
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-////////////////////
-// Authentication //
-////////////////////
-private _optionLocalisationTable = [["maxUnits","distanceSPWN","globalCivilianMax"],["AI Limit","Spawn Distance","Civilian Limit"]];
-private _hintTitle = "HQ Spawn Options";
-private _authenticate = _option in ["maxUnits","distanceSPWN","globalCivilianMax"];
-
-if (_authenticate && {!(_player == theBoss || admin owner _player > 0 || _player == player)}) exitWith {
-    [_hintTitle, "Only our Commander or admin has access to "+(_optionLocalisationTable#1#(_optionLocalisationTable#0 find _option))] remoteExecCall ["A3A_fnc_customHint",_player];
-    Error("ACCESS VIOLATION | "+ name _player + " ["+(getPlayerUID _player) + "] ["+ str owner _player +"] attempted calling restricted backing method "+str _this);
-    nil;
-};
-if (owner _player != remoteExecutedOwner) exitWith {
-    private _allPlayers = allPlayers;
-    private _index = _allPlayers findIf {owner _x == remoteExecutedOwner};
-    private _realPlayer = objNull;
-    if (_index != -1) then {
-        _realPlayer = _allPlayers#_index;
-    };
-    Error("HACKING | "+ name _realPlayer + " ["+(getPlayerUID _realPlayer) + "] ["+ str remoteExecutedOwner +"] attempted impersonating "+ name _player + " ["+(getPlayerUID _player) + "] ["+ str owner _player +"] while calling "+str _this);
-    nil;
+if (!isServer) exitWith {
+    Warning("A3A_fnc_HQGameOptions should be executed on the server.");
+    _this remoteExecCall ["A3A_fnc_HQGameOptions",2];
 };
 
-///////////////////////
-// Increase/Decrease //
-///////////////////////
-private _processAction = {
+private _optionLocalisationTable = [["maxUnits","distanceSPWN","globalCivilianMax"],[localize "STR_A3A_fn_dialogs_HQGameOptions_AILimit",localize "STR_A3A_fn_dialogs_HQGameOptions_spwnDistance",localize "STR_A3A_fn_dialogs_HQGameOptions_civLimit"]];
+private _hintTitle = localize "STR_A3A_fn_dialogs_HQGameOptions_title";
+
+// Increase/Decrease/Set
+private _fnc_processAction = {
     params["_option","_action","_upperLimit","_lowerLimit","_adjustmentAmount"];
     private _inRange = 2;   // 2 for in-range, 0 for low, 1 for high.
     private _invalid = false;
@@ -64,6 +49,11 @@ private _processAction = {
     switch (_action) do {
         case "decrease": { if (_originalAmount < _lowerLimit + _adjustmentAmount) then {_inRange = 0}; _adjustmentAmount = -_adjustmentAmount; };
         case "increase": { if (_originalAmount > _upperLimit - _adjustmentAmount) then {_inRange = 1}; };
+        case "set": {
+            if (_adjustmentAmount < _lowerLimit) then {_inRange = 0; };
+            if (_upperLimit < _adjustmentAmount) then {_inRange = 1; };
+            _adjustmentAmount = _adjustmentAmount - _originalAmount;
+        };
         default {
             _invalid = true;
             Error("INVALID METHOD | "+ name _player + " ["+(getPlayerUID _player) + "] ["+ str owner _player +"] called invalid backing method "+str _this);
@@ -79,8 +69,14 @@ private _processAction = {
         _hintText = " set to "+str _finalAmount;
         Info("SET | "+name _player+" ["+ getPlayerUID _player +"] ["+ str owner _player +"] changed "+_optionName+" from " + str _originalAmount +" to " + str _finalAmount);
     } else {
-        _hintText = " is already at "+(["lower","upper"] select _inRange)+" limit of "+str _originalAmount;
+        _hintText = " " + ([localize "STR_A3A_fn_dialogs_HQGameOptions_lower", localize "STR_A3A_fn_dialogs_HQGameOptions_upper"] select _inRange) + str _originalAmount;
     };
+
+    if (_noHints) exitWith {
+        if (_inRange != 2) then {
+            Warning(_hintText);
+        }
+     };
 
     private _graphic = "--------------------------------------------------";
     private _padding = _graphic;
@@ -94,14 +90,18 @@ private _processAction = {
     [_hintTitle, _optionName+_hintText+"<br/>"+_graphic+"<br/>"+_graphicLabel] remoteExecCall ["A3A_fnc_customHint",_player];
 };
 
-//////////////////////////
-// ADD NEW OPTIONS HERE //
-//////////////////////////
+private _fnc_valueOrDefault = {
+    params [["_value", _this#1]];
+    _value;
+};
+
+
+// ADD NEW OPTIONS HERE
 switch (_option) do {
-    case "maxUnits": { [_option,_action,200,80,10] call _processAction; };
-    case "globalCivilianMax": { [_option,_action,150,0,1] call _processAction; };
+    //case "maxUnits": { [_option,_action,200,80,[_amount,10] call _fnc_valueOrDefault] call _fnc_processAction; };
+    case "globalCivilianMax": { [_option,_action,150,0,[_amount,1] call _fnc_valueOrDefault] call _fnc_processAction; };
     case "distanceSPWN": {  // So close to generalising all of this away 😥, but then:
-        [_option,_action,2000,600,100] call _processAction;
+        [_option,_action,2000,600,[_amount,100] call _fnc_valueOrDefault] call _fnc_processAction;
         distanceSPWN1 = distanceSPWN * 1.3;
         distanceSPWN2 = distanceSPWN /2;
         publicVariable "distanceSPWN1";

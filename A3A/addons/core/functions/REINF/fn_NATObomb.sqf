@@ -1,14 +1,25 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-if (bombRuns < 1) exitWith {["Air Support", "You lack of enough Air Support to make this request."] call A3A_fnc_customHint;};
+private _titleStr = localize "STR_A3A_fn_reinf_NatoBomb_title";
+
+
+private _bombRunCosts = createHashMapFromArray [
+    ["HE",1],
+    ["CLUSTER",1],
+    ["NAPALM",3]
+];
+params [["_typeX","HE"]];
+private _cost = _bombRunCosts get _typeX;
+
+if (bombRuns < _cost) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_lack_supp"] call A3A_fnc_customHint;};
 //if (!allowPlayerRecruit) exitWith {hint "Server is very loaded. <br/>Wait one minute or change FPS settings in order to fulfill this request"};
-if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {["Air Support", "You need a radio in your inventory to be able to give orders to other squads."] call A3A_fnc_customHint;} else {["Air Support", "You need a Radio Man in your group to be able to give orders to other squads"] call A3A_fnc_customHint;}};
-if ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0) exitWith {["Air Support", "You need to control an airport in order to fulfill this request."] call A3A_fnc_customHint;};
-_typeX = _this select 0;
+if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_no_radio"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_no_radio2"] call A3A_fnc_customHint;}};
+if ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_no_control"] call A3A_fnc_customHint;};
+
 
 positionTel = [];
 
-["Air Support", "Select the spot from which the plane will start to drop the bombs."] call A3A_fnc_customHint;
+[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_select_start"] call A3A_fnc_customHint;
 
 if (!visibleMap) then {openMap true};
 onMapSingleClick "positionTel = _pos;";
@@ -25,9 +36,9 @@ _mrkorig = createMarkerLocal [format ["BRStart%1",random 1000], _pos1];
 _mrkorig setMarkerShapeLocal "ICON";
 _mrkorig setMarkerTypeLocal "hd_destroy";
 _mrkorig setMarkerColorLocal "ColorRed";
-_mrkOrig setMarkerTextLocal "Bomb Run Init";
+_mrkOrig setMarkerTextLocal localize "STR_A3A_fn_reinf_NATObomb_init";
 
-["Air Support", "Select the map position to which the plane will exit to calculate plane's route vector."] call A3A_fnc_customHint;
+[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_select_end"] call A3A_fnc_customHint;
 
 onMapSingleClick "positionTel = _pos;";
 
@@ -39,10 +50,33 @@ if (!visibleMap) exitWith {deleteMarker _mrkOrig};
 _pos2 = positionTel;
 positionTel = [];
 
+private _posHQ = markerPos "Synd_HQ";
+_posHQ set [2,0]; // convert to 3d for vector calc
+private _distanceToHQ = [_pos1, _pos2, _posHQ] call {
+    // Find closest approach of A->B to C
+    params ["_posA", "_posB", "_posC"];
+
+    private _relA = _posC vectorDiff _posA;
+    private _relB = _posC vectorDiff _posB;
+    private _dir = _posA vectorFromTo _posB;
+
+    if (_relA vectorDotProduct _dir <= 0) exitWith { _posA distance _posC };
+    if (_relB vectorDotProduct _dir >= 0) exitWith { _posB distance _posC };
+    vectorMagnitude (_relA vectorCrossProduct _dir);
+};
+
+ServerInfo_6("Commander %1 [%2] called %3 airstrike from %4 to %5, %6m from HQ", name theBoss, getPlayerUID theBoss, _typeX, _pos1, _pos2, _distanceToHQ);
+
+
+if ((tkPunish > 0) && (_distanceToHQ < 100)) exitWith {
+    [_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_no_distanceHQ"] call A3A_fnc_customHint;
+    deleteMarkerLocal _mrkOrig;
+    ServerInfo("Rebel airstrike canceled due to distance from HQ");
+};
+
 _ang = [_pos1,_pos2] call BIS_fnc_dirTo;
 
-
-bombRuns = bombRuns - 1;
+bombRuns = bombRuns - _cost;
 publicVariable "bombRuns";
 [] spawn A3A_fnc_statistics;
 
@@ -50,7 +84,7 @@ _mrkDest = createMarkerLocal [format ["BRFin%1",random 1000], _pos2];
 _mrkDest setMarkerShapeLocal "ICON";
 _mrkDest setMarkerTypeLocal "hd_destroy";
 _mrkDest setMarkerColorLocal "ColorRed";
-_mrkDest setMarkerTextLocal "Bomb Run Exit";
+_mrkDest setMarkerTextLocal localize "STR_A3A_fn_reinf_NATObomb_exit";
 
 //openMap false;
 private _typePlaneX = (FactionGet(reb,"vehiclesPlane")) # 0;
@@ -73,14 +107,14 @@ _plane flyInHeight 100;
 private _minAltASL = ATLToASL [_pos1 select 0, _pos1 select 1, 0];
 _plane flyInHeightASL [(_minAltASL select 2) +100, (_minAltASL select 2) +100, (_minAltASL select 2) +100];
 
-driver _plane sideChat "Starting Bomb Run. ETA 30 seconds.";
+driver _plane sideChat localize "STR_A3A_fn_reinf_NATObomb_run";
 _wp1 = group _plane addWaypoint [_pos1, 0];
 _wp1 setWaypointType "MOVE";
 if (!_isHelicopter) then { _wp1 setWaypointSpeed "LIMITED" };
 _wp1 setWaypointBehaviour "CARELESS";
 
 if(_typeX == "NAPALM" && !napalmEnabled) then {_typeX == "HE"};
-private _bombParams = [_plane, _typeX, 4, (_pos1 distance2D _pos2)];
+private _bombParams = [_plane, _typeX, [4,2] select (_typeX == "NAPALM"), (_pos1 distance2D _pos2)];
 (driver _plane) setVariable ["bombParams", _bombParams, true];
 
 [_pos1, driver _plane] spawn
@@ -105,7 +139,7 @@ waitUntil { sleep 2; (currentWaypoint group _plane == 4) or (time > _timeOut) or
 deleteMarkerLocal _mrkOrig;
 deleteMarkerLocal _mrkDest;
 
-if !(canMove _plane) then { sleep cleantime };		// let wreckage hang around for a bit
+if !(canMove _plane) then { sleep 3600 };		// let wreckage hang around for a bit
 deleteVehicle _plane;
 {deleteVehicle _x} forEach _planeCrew;
 deleteGroup _groupPlane;

@@ -59,6 +59,6 @@ private _valid = true;
         continue;
     };
 
-} forEach "true" configClasses (_eventCfg/"params");
+} forEach ("true" configClasses (_eventCfg/"params"));
 
 _valid;

@@ -16,7 +16,13 @@ if (isNil "_location") then {
 };
 
 private _oldPetros = petros;
-petros = [_groupPetros, FactionGet(reb,"unitPetros"), _location, [], 10, "NONE"] call A3A_fnc_createUnit;
+private _identity = createHashMapFromArray [
+    ["firstName", "Petros"],
+    ["face", "GreekHead_A3_01"], 
+    ["speaker", "Male06GRE"],
+    ["pitch", 1.1]
+];
+petros = [_groupPetros, FactionGet(reb,"unitPetros"), _location, [], 10, "NONE", _identity] call A3A_fnc_createUnit;
 publicVariable "petros";
 deleteVehicle _oldPetros;		// Petros should now be leader unless there's a player in the group
 

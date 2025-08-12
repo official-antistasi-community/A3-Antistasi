@@ -6,15 +6,15 @@
 
 	Params:
 		_className - Class of the equipment to unlock.
-
+		_noPublish - If true, don't broadcast the unlockedXXX arrays. For internal use.
 		_dontAddToArsenal - Avoid adding the item to the arsenal, and simply updates the appropriate variables. DO NOT USE UNLESS YOU HAVE A *VERY* GOOD REASON. Primarily used in save/loads.
 
 	Returns:
-		None
+		Array of categories for item
 **/
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-params ["_className", ["_dontAddToArsenal", false]];
+params ["_className", ["_noPublish", false], ["_dontAddToArsenal", false]];
 
 private _categories = _className call A3A_fnc_equipmentClassToCategories;
 
@@ -26,8 +26,8 @@ if (!_dontAddToArsenal) then {
 };
 
 {
-	private _categoryName = _x;
-	//Consider making this pushBackUnique.
-	(missionNamespace getVariable ("unlocked" + _categoryName)) pushBack _className;
-	publicVariable ("unlocked" + _categoryName);
+	(missionNamespace getVariable ("unlocked" + _x)) pushBackUnique _className;
+	if (!_noPublish) then { publicVariable ("unlocked" + _x) };
 } forEach _categories;
+
+_categories;

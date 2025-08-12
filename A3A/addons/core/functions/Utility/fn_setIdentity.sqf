@@ -1,23 +1,23 @@
 /*
-    Set face, voice, pitch and name of unit. Global effect and JIP-safe.
+Set face, voice, pitch and name of unit. Global effect and JIP-safe.
 
 Scope: Any
 Environment: Any
-Public: Yes
+Public: No, should be called once for every unit by A3A_fnc_createUnit. 
+    Quick successive calls to this function for the same unit may apply changes out of order.
 
 Arguments:
-    <OBJECT> Object to set identity for
-    <STRING> Optional: Face of unit
-    <STRING> Optional: Voice/speaker of unit
-    <STRING> Optional: (Voice) pitch of unit
-    <STRING> Optional: Name of unit
+    <OBJECT> _unit - unit to set identity for.
+    <HASHMAP> _identity - identity parameters, see _identity parameter of A3A_fnc_createUnit.
+
+Return value: <NIL>
 */
 
-params ["_unit"];           // Don't care about the other params here
+params ["_unit", "_identity"];
 
 if (isNull _unit) exitWith {};
 private _JIPID = "identity_" + netId _unit;
-([_JIPID] + _this) remoteExec ["A3A_fnc_setIdentityLocal", 0, _JIPID];
+[_JIPID, _unit, _identity] remoteExec ["A3A_fnc_setIdentityLocal", 0, _JIPID];
 
 // This won't be 100% reliable because it's only installed locally, but it'll avoid remoteExec spam on connection
 _unit addEventHandler ["Deleted", {

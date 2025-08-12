@@ -1,3 +1,4 @@
-class CfgMagazines {
+class CfgMagazines 
+{
 	
 };

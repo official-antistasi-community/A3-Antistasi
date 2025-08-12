@@ -25,6 +25,8 @@
 //blocks looting if nearby container is already looting
 params ["_crate", ["_owner",2], ["_done", false]];
 private _pos = getPos _crate;
+private _titleStr = localize "STR_A3A_fn_ltc_title";
+
 if (isNil "LTClootingAreas") then {LTClootingAreas = []};
 if (!_done) then {
     private _alreadyLootingPos = LTClootingAreas inAreaArray [_pos, 20, 20];
@@ -40,7 +42,7 @@ if (!_done) then {
             };
         };
     } else {
-        ["Loot crate", "Cooldown still active."] remoteExec ["A3A_fnc_customHint", _owner];
+        [_titleStr, localize "STR_A3A_fn_ltc_canl_cooldown"] remoteExec ["A3A_fnc_customHint", _owner];
     };
 
 } else {

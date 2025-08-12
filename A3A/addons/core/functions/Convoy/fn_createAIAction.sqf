@@ -436,43 +436,43 @@ if(_type == "convoy") then
       {
       	case "Ammunition":
       	{
-      		_text = format ["A convoy from %1 is about to depart at %2. It will provide ammunition to %3. Try to intercept it. Steal or destroy that truck before it reaches it's destination.",_nameOrigin,_displayTime,_nameDest];
-      		_taskTitle = "Ammo Convoy";
+      		_text = format [localize "STR_A3A_fn_convoy_craiact_ammo_text",_nameOrigin,_displayTime,_nameDest];
+      		_taskTitle = localize "STR_A3A_fn_convoy_craiact_ammo_title";
       		_taskIcon = "rearm";
       		_typeVehObj = selectRandom (_faction get "vehiclesAmmoTrucks");
       	};
       	case "Armor":
       	{
-      		_text = format ["A convoy from %1 is about to depart at %2. It will reinforce %3 with armored vehicles. Try to intercept it. Steal or destroy that thing before it reaches it's destination.",_nameOrigin,_displayTime,_nameDest];
-      		_taskTitle = "Armored Convoy";
+      		_text = format [localize "STR_A3A_fn_convoy_craiact_armored_text",_nameOrigin,_displayTime,_nameDest];
+      		_taskTitle = localize "STR_A3A_fn_convoy_craiact_armored_title";
       		_taskIcon = "Destroy";
       		_typeVehObj = selectRandom (_faction get "vehiclesAA");
       	};
       	case "Prisoners":
       	{
-      		_text = format ["A group os POW's is being transported from %1 to %3, and it's about to depart at %2. Try to intercept it. Kill or capture the truck driver to make them join you and bring them to HQ. Alive if possible.",_nameOrigin,_displayTime,_nameDest];
-      		_taskTitle = "Prisoner Convoy";
+      		_text = format [localize "STR_A3A_fn_convoy_craiact_prison_text",_nameOrigin,_displayTime,_nameDest];
+      		_taskTitle = localize "STR_A3A_fn_convoy_craiact_prison_title";
       		_taskIcon = "run";
       		_typeVehObj = selectRandom (_faction get "vehiclesTrucks");
       	};
       	case "Reinforcements":
       	{
-      		_text = format ["Reinforcements are being sent from %1 to %3 in a convoy, and it's about to depart at %2. Try to intercept and kill all the troops and vehicle objective.",_nameOrigin,_displayTime,_nameDest];
-      		_taskTitle = "Reinforcements Convoy";
+      		_text = format [localize "STR_A3A_fn_convoy_craiact_reinf_text",_nameOrigin,_displayTime,_nameDest];
+      		_taskTitle = localize "STR_A3A_fn_convoy_craiact_reinf_title";
       		_taskIcon = "run";
       		_typeVehObj = selectRandom (_faction get "vehiclesTrucks");
       	};
       	case "Money":
       	{
-      		_text = format ["A truck plenty of money is being moved from %1 to %3, and it's about to depart at %2. Steal that truck and bring it to HQ. Those funds will be very welcome.",_nameOrigin,_displayTime,_nameDest];
-      		_taskTitle = "Money Convoy";
+      		_text = format [localize "STR_A3A_fn_convoy_craiact_money_text",_nameOrigin,_displayTime,_nameDest];
+      		_taskTitle = localize "STR_A3A_fn_convoy_craiact_money_title";
       		_taskIcon = "move";
       		_typeVehObj = selectRandom (FactionGet(reb, "vehiclesCivSupply"));
       	};
       	case "Supplies":
       	{
-      		_text = format ["A truck with medical supplies destination %3 it's about to depart at %2 from %1. Steal that truck bring it to %3 and let people in there know it is %4 who's giving those supplies.",_nameOrigin,_displayTime,_nameDest,FactionGet(reb,"name")];
-      		_taskTitle = "Supply Convoy";
+      		_text = format [localize "STR_A3A_fn_convoy_craiact_supply_text",_nameOrigin,_displayTime,_nameDest,FactionGet(reb,"name")];
+      		_taskTitle = localize "STR_A3A_fn_convoy_craiact_supply_title";
       		_taskIcon = "heal";
       		_typeVehObj = selectRandom (FactionGet(reb, "vehiclesCivSupply"));
       	};

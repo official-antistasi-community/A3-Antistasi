@@ -29,7 +29,7 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 		private _varName = format ["player_%1_%2", _playerID, _x];
 		_namespace setVariable [_varname + _postfix, nil];
 
-	} forEach ["loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage", "moneyX"];
+	} forEach ["loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage", "moneyX","missionsCompleted"];
 
 } forEach _savedPlayers;
 
@@ -46,7 +46,8 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 	"outpostsFIA", "tasks", "idlebases", "idleassets", "killZones", "controlsSDK", "params",
 	"attackCountdownOccupants", "attackCountdownInvaders", "prestigeNATO", "prestigeCSAT",
 	"savedPlayers", "testingTimerIsActive", "HR_Garage", "A3A_fuelAmountleftArray", "HQKnowledge", "enemyResources",
-	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC"];
+	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC", "arsenalLimits", "rebelLoadouts",
+	"minorSites", "radioKeys"];
 
 
 // Remove this campaign from the save list, if present

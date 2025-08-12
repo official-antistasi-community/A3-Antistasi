@@ -30,12 +30,12 @@ private _vehName = getText (configFile >> "CfgVehicles" >> (typeof _truckX) >> "
 
 if (count _todo < 1) exitWith
 	{
-	if (count _this == 0) then {["Cargo", format ["Closest vehicle (%1) is empty.", _vehName]] call A3A_fnc_customHint;};
+	if (count _this == 0) then {[localize "STR_A3A_fn_ammo_cargo", format [localize "STR_A3A_fn_ammo_empty_vehicle_empty", _vehName]] call A3A_fnc_customHint;};
 	if (count _this == 2) then {deleteVehicle _truckX};
 	};
 
 if (count _this == 0) then {
-	["Cargo", format ["Transferred cargo from %1 to arsenal.", _vehName]] call A3A_fnc_customHint;
+	[localize "STR_A3A_fn_ammo_cargo", format [localize "STR_A3A_fn_ammo_empty_cargo_transferred", _vehName]] call A3A_fnc_customHint;
 };
 
 if (count _this == 2) then {

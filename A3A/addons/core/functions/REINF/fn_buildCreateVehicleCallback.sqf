@@ -4,6 +4,7 @@ private _positionX = ASLtoATL _posASL;
 
 private _isPlayer = if (player == build_engineerSelected) then {true} else {false};
 private _timeOut = time + 30;
+private _titleStr = localize "STR_A3A_fn_reinf_buildinfo_title";
 
 if (!_isPlayer) then
 {
@@ -13,7 +14,7 @@ else
 {
 	A3A_build_time = A3A_build_time / 2;
 	if ("ToolKit" in items player) then { A3A_build_time = A3A_build_time  * .6; }; // if toolkit in invertory then 40% reduction in time.
-	["Build Info", "Walk to the selected position to start building"] call A3A_fnc_customHint;
+	[_titleStr, localize "STR_A3A_fn_reinf_buildCreVehCall_walk"] call A3A_fnc_customHint;
 };
 
 build_targetLocation = _positionX;
@@ -32,7 +33,7 @@ waitUntil {sleep 1;(time > _timeOut) or (build_engineerSelected distance _positi
 if (time > _timeOut) exitWith
 {
 	build_cancelBuild = true;
-	["Build Info", "You didn't move to the position, construction has timed out."] call A3A_fnc_customHint;
+	[_titleStr, localize "STR_A3A_fn_reinf_buildCreVehCall_no_move"] call A3A_fnc_customHint;
 };
 
 build_atBuildLocation = true;
@@ -80,7 +81,7 @@ waitUntil  {sleep 5; !([build_engineerSelected] call A3A_fnc_canFight) or (build
 build_engineerSelected setVariable ["constructing",false];
 if (!_isPlayer) then {{build_engineerSelected enableAI _x} forEach ["ANIM","AUTOTARGET","FSM","MOVE","TARGET"]};
 
-if (time <= _timeOut) exitWith {["Build Info", "Construction cancelled."] call A3A_fnc_customHint;};
+if (time <= _timeOut) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_buildCreVehCall_cancelled"] call A3A_fnc_customHint;};
 if (!_isPlayer) then {build_engineerSelected doFollow (leader build_engineerSelected)};
 
 private _veh = createVehicle [_structureType, _positionX, [], 0, "CAN_COLLIDE"];

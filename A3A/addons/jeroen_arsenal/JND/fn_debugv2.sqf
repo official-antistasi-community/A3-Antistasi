@@ -46,7 +46,7 @@ fnc_debugv2_overwrite = {
 	_pos_title set [2,_pos_expressionBackground#2];
 	_ctrl_title ctrlSetPosition _pos_title;
 	_ctrl_title ctrlCommit 0;
-	_ctrl_title ctrlsettext "Ultra Wide Extended Debug Console With Extra Save Buttens!";
+	_ctrl_title ctrlsettext localize "STR_A3A_JND_title";
 
 	_ctrl_links = _display displayCtrl 11891;
 	_pos_links = ctrlposition _ctrl_links;
@@ -169,7 +169,7 @@ fnc_debugv2_overwrite = {
 					call compile _input;
 				}
 			],[
-				"Load",
+				localize "STR_A3A_JND_button_load",
 				_spacingY,
 				_button_length,
 				{
@@ -178,7 +178,7 @@ fnc_debugv2_overwrite = {
 					(UiNameSpace getVariable "jn_debugConsole_expression") ctrlsettext _text;
 				}
 			],[
-				"Save",
+				localize "STR_A3A_JND_button_save",
 				_spacingY,
 				_button_length,
 				{
@@ -204,7 +204,7 @@ fnc_debugv2_overwrite = {
 					((UiNameSpace getVariable "jn_debugConsole_buttons") # _index) ctrlSetText _name;
 				}
 			],[
-				"Del",
+				localize "STR_A3A_JND_button_del",
 				_spacingY*10,
 				_button_length,
 				{
@@ -270,7 +270,7 @@ fnc_debugv2_overwrite = {
 	_ctrl ctrlSetPosition [_posXFINAL + (_posX-_posXFINAL- _spacingY*2)/2+_spacingY,_posY,(_posX-_posXFINAL- _spacingY*2)/2,_button_hieght];
 
 	_ctrl ctrlCommit 0;
-	_ctrl ctrlSetText "-- Undo last save --";
+	_ctrl ctrlSetText localize "STR_A3A_JND_button_undo";
 	_ctrl ctrlAddEventHandler ["ButtonClick", {
 
 		_index = uiNameSpace getVariable ["jn_debugConsole_index_saved",-1];

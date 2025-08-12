@@ -24,6 +24,8 @@
 */
 //blocks transfer if container is already transfering
 params ["_crate", ["_owner",2], ["_done", false]];
+private _titleStr = localize "STR_A3A_fn_ltc_title";
+
 if (isNil "LTCTransferringCrates") then {LTCTransferringCrates = []};
 if (!_done) then {
 
@@ -38,7 +40,7 @@ if (!_done) then {
             };
         };
     } else {
-        ["Loot crate", "Already transfering."] remoteExec ["A3A_fnc_customHint", _owner];
+        [_titleStr, localize "STR_A3A_fn_ltc_cant_already"] remoteExec ["A3A_fnc_customHint", _owner];
     };
 
 

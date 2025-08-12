@@ -15,7 +15,7 @@ if(isNil "_type") then {
 };
 if (isNil "_type" or leader group petros != petros) exitWith { A3A_missionRequestInProgress = nil };
 if (_type in A3A_activeTasks) exitWith {
-	if (!_silent) then {[petros,"globalChat","I already gave you a mission of this type."] remoteExec ["A3A_fnc_commsMP",_requester]};
+	if (!_silent) then {[petros,"globalChat",localize "STR_A3A_fn_mission_request_existing"] remoteExec ["A3A_fnc_commsMP",_requester]};
 	A3A_missionRequestInProgress = nil;
 };
 
@@ -29,6 +29,7 @@ private _findIfNearAndHostile = {
 	_Markers
 };
 
+private _titleStr = localize "STR_A3A_fn_mission_request_title";
 private _possibleMarkers = [];
 switch (_type) do {
 	case "AS": {
@@ -37,22 +38,12 @@ switch (_type) do {
 		_possibleMarkers = _possibleMarkers select {spawner getVariable _x != 0};
 		//add controlsX not on roads and on the 'frontier'
 		private _controlsX = [controlsX] call _findIfNearAndHostile;
-		private _nearbyFriendlyMarkers = markersX select {
-			(getMarkerPos _x inArea [getMarkerPos respawnTeamPlayer, distanceMission+distanceSPWN, distanceMission+distanceSPWN, 0, false])
-			and (sidesX getVariable [_x,sideUnknown] isEqualTo teamPlayer)
-		};
-		_nearbyFriendlyMarkers deleteAt (_nearbyFriendlyMarkers find "Synd_HQ");
-		{
-			private _pos = getmarkerPos _x;
-			if !(isOnRoad _pos) then {
-				if (_nearbyFriendlyMarkers findIf {getMarkerPos _x distance _pos < distanceSPWN} != -1) then {_possibleMarkers pushBack _x};
-			};
-		}forEach _controlsX;
+		_possibleMarkers append (_controlsX select { !isOnRoad markerPos _x });
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
-				[petros,"globalChat","I have no assassination missions for you. Move our HQ closer to the enemy."] remoteExec ["A3A_fnc_commsMP",_requester];
-				[petros,"hint","Assassination Missions require cities, patrolled Jungles or Airports closer than 4Km from your HQ.", "Missions"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"globalChat",localize "STR_A3A_fn_mission_request_noAS"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"hint",localize "STR_A3A_fn_mission_request_noASHint", _titleStr] remoteExec ["A3A_fnc_commsMP",_requester];
 			};
 		} else {
 			private _site = selectRandom _possibleMarkers;
@@ -68,8 +59,8 @@ switch (_type) do {
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
-				[petros,"globalChat","I have no Conquest missions for you. Move our HQ closer to the enemy."] remoteExec ["A3A_fnc_commsMP",_requester];
-				[petros,"hint","Conquest Missions require roadblocks or outposts closer than 4Km from your HQ.", "Missions"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"globalChat",localize "STR_A3A_fn_mission_request_noConquest"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"hint",localize "STR_A3A_fn_mission_request_noConquestHint", _titleStr] remoteExec ["A3A_fnc_commsMP",_requester];
 			};
 		} else {
 			private _site = selectRandom _possibleMarkers;
@@ -92,8 +83,8 @@ switch (_type) do {
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
-				[petros,"globalChat","I have no destroy missions for you. Move our HQ closer to the enemy."] remoteExec ["A3A_fnc_commsMP",_requester];
-				[petros,"hint","Destroy Missions require Airbases or Radio Towers closer than 4Km from your HQ.", "Missions"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"globalChat",localize "STR_A3A_fn_mission_request_noDestroy"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"hint",localize "STR_A3A_fn_mission_request_noDestroyHint", _titleStr] remoteExec ["A3A_fnc_commsMP",_requester];
 			};
 		} else {
 			private _site = selectRandom _possibleMarkers;
@@ -103,6 +94,18 @@ switch (_type) do {
 	};
 
 	case "LOG": {
+		// role three dice
+		private _spawnGunShop = random 12 + random 12 + random 12 + tierWar > 29;
+
+		private _gunShopCities = [];
+		if (_spawnGunShop && !bigAttackInProgress and tierWar > 3) then {
+			_gunShopCities = citiesX select {(getMarkerPos _x) distance2d (getMarkerPos respawnTeamPlayer) < distanceMission }
+				select { sidesX getVariable _x == Occupants } select { spawner getVariable _x != 0 };
+		};
+		if (_gunShopCities isNotEqualTo []) exitWith {
+			[selectRandom _gunShopCities] remoteExec ["A3A_fnc_GSMission", 2];		// Always on server to simplify shopping list
+		};
+
 		//Add unspawned outposts for ammo trucks, and seaports for salvage
 		_possibleMarkers = [seaports + outposts] call _findIfNearAndHostile;
 		_possibleMarkers = _possibleMarkers select {(_x in seaports) or (spawner getVariable _x != 0)};
@@ -120,8 +123,8 @@ switch (_type) do {
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
-				[petros,"globalChat","I have no logistics missions for you. Move our HQ closer to the enemy."] remoteExec ["A3A_fnc_commsMP",_requester];
-				[petros,"hint","Logistics Missions require Outposts, Seaports or Banks closer than 4Km from your HQ.", "Missions"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"globalChat",localize "STR_A3A_fn_mission_request_noLogi"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"hint",localize "STR_A3A_fn_mission_request_noLogiHint", _titleStr] remoteExec ["A3A_fnc_commsMP",_requester];
 			};
 		} else {
 			private _site = selectRandom _possibleMarkers;
@@ -146,8 +149,8 @@ switch (_type) do {
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
-				[petros,"globalChat","I have no support missions for you. Move our HQ closer to the enemy."] remoteExec ["A3A_fnc_commsMP",_requester];
-				[petros,"hint","Support Missions require Cities closer than 4Km from your HQ.", "Missions"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"globalChat",localize "STR_A3A_fn_mission_request_noSupport"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"hint",localize "STR_A3A_fn_mission_request_noSupportHint", _titleSTR] remoteExec ["A3A_fnc_commsMP",_requester];
 			};
 		} else {
             Debug_1("City weights: %1", _weightedMarkers);
@@ -158,6 +161,7 @@ switch (_type) do {
 
 	case "RES": {
 		_possibleMarkers = [citiesX] call _findIfNearAndHostile;
+		_possibleMarkers = _possibleMarkers select {spawner getVariable _x != 0}; // so refugee missions don't get spawned on top of people -- might need to tweak if there arent enough unspawned sites
 		{
 			private _spawner = spawner getVariable _x;
 			if (_spawner != 0) then {_possibleMarkers pushBack _x};
@@ -165,8 +169,8 @@ switch (_type) do {
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
-				[petros,"globalChat","I have no rescue missions for you. Move our HQ closer to the enemy."] remoteExec ["A3A_fnc_commsMP",_requester];
-				[petros,"hint","Rescue Missions require Cities or Airports closer than 4Km from your HQ.", "Missions"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"globalChat",localize "STR_A3A_fn_mission_request_noRescue"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"hint",localize "STR_A3A_fn_mission_request_noRescueHint", _titleStr] remoteExec ["A3A_fnc_commsMP",_requester];
 			};
 		} else {
 			private _site = selectRandom _possibleMarkers;
@@ -177,20 +181,18 @@ switch (_type) do {
 	case "CONVOY": {
 		if (bigAttackInProgress) exitWith {
 			if (!_silent) then {
-				[petros,"globalChat","There is a big battle around, I don't think the enemy will send any convoy."] remoteExec ["A3A_fnc_commsMP",_requester];
-				[petros,"hint","Convoy Missions require a calmed status around the island, and now it is not the proper time.", "Missions"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"globalChat",localize "STR_A3A_fn_mission_request_noConvoyAttack"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"hint",localize "STR_A3A_fn_mission_request_noConvoyAttackHint", _titleStr] remoteExec ["A3A_fnc_commsMP",_requester];
 			};
 		};
 		// only do the city convoys on flip?
 		private _markers = (airportsX + resourcesX + factories + seaports + outposts - blackListDest);
-		// Pre-filter the possible source bases to make this less n-squared
-		private _possibleBases = (airportsX + outposts) select { (getMarkerPos _x) distance (getMarkerPos respawnTeamPlayer) < distanceMission + 3000 };
 		private _convoyPairs = [];
 		{
 			private _site = _x;
-			if ((getMarkerPos _site) distance (getMarkerPos respawnTeamPlayer) > distanceMission) then {continue};
-			if (sidesX getVariable [_site, teamPlayer] == teamPlayer) then {continue};
-			private _base = [_site, _possibleBases] call A3A_fnc_findBasesForConvoy;
+			if (markerPos _site distance2d markerPos respawnTeamPlayer > distanceMission) then {continue};
+			if (sidesX getVariable _site == teamPlayer) then {continue};
+			private _base = [_site] call A3A_fnc_findBasesForConvoy;
 			if (_base != "") then {
 				_possibleMarkers pushBack _site;
 				_convoyPairs pushBack [_site, _base];
@@ -200,8 +202,8 @@ switch (_type) do {
 		if (count _possibleMarkers == 0) then
 		{
 			if (!_silent) then {
-				[petros,"globalChat","I have no Convoy missions for you. Move our HQ closer to the enemy."] remoteExec ["A3A_fnc_commsMP",_requester];
-				[petros,"hint","Convoy Missions require nearby enemy facilities, with a road route to an idle base within 3km.", "Missions"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"globalChat",localize "STR_A3A_fn_mission_request_noConvoy"] remoteExec ["A3A_fnc_commsMP",_requester];
+				[petros,"hint",localize "STR_A3A_fn_mission_request_noConvoyHint", _titleStr] remoteExec ["A3A_fnc_commsMP",_requester];
 			};
 		} else {
 			private _convoyPair = selectRandom _convoyPairs;
@@ -215,7 +217,7 @@ switch (_type) do {
 };
 
 if (count _possibleMarkers > 0) then {
-	if (!_silent) then {[petros,"globalChat","I have a mission for you!"] remoteExec ["A3A_fnc_commsMP",_requester]};
+	if (!_silent) then {[petros,"globalChat",localize "STR_A3A_fn_mission_request_addMission"] remoteExec ["A3A_fnc_commsMP",_requester]};
 	sleep 3;			// delay lockout until the mission is registered
 };
 A3A_missionRequestInProgress = nil;

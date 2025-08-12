@@ -31,8 +31,9 @@ if(typeName (_this select 0) isEqualTo "SCALAR")then{//[_index, _item] and [_ind
 				if!(_radioName isEqualTo "")then{_item = _radioName};
 
 				//Weapon Stack fix
-				private _weaponname = getText(configfile >> "CfgWeapons" >> _item >> "baseWeapon");
-				if!(_weaponname isEqualTo "")then{_item = _weaponname};
+				if (isClass (configFile >> "CfgWeapons" >> _item)) then {
+					_item = _item call bis_fnc_baseWeapon;
+				};
 
 				//RHS Sight Stack fix
 				private _sightname = getText(configfile >> "CfgWeapons" >> _item >> "rhs_optic_base");

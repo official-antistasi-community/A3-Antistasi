@@ -16,7 +16,7 @@
 // probably should move to script_version.hpp?
 #define MINIMUM_MISSION_VERSION_AR 2,6,1
 
-#define REQUIRED_VERSION 2.06
+#define REQUIRED_VERSION 2.12
 
 #ifdef COMPONENT_BEAUTIFIED
     #define COMPONENT_NAME QUOTE(PREFIX - COMPONENT_BEAUTIFIED)

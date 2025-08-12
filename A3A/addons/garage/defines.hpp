@@ -343,7 +343,7 @@ class HR_GRG_RscControlsGroup
     };
 };
 
-class RscControlsGroupNoScrollbars: HR_GRG_RscControlsGroup
+class HR_GRG_RscControlsGroupNoScrollbars: HR_GRG_RscControlsGroup
 {
     class VScrollbar: VScrollbar
     {

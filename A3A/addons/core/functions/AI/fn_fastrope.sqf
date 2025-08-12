@@ -73,7 +73,7 @@ if (alive _veh) then
 		[_unit,""] remoteExec ["switchMove"];
 		sleep 0.5;
 		};
-	sleep 5 + random 2;
+	sleep (5 + random 2);
 	} forEach units _groupX;
 };
 

@@ -27,7 +27,7 @@ for "_i" from 0 to (_garCount - 1) do
 {
   _garData = _garrison select _i;
   _preData = _preferred select _i;
-  if(![_garData select 0, _preData select 0] call A3A_fnc_checkVehicleType) then
+  if !([_garData select 0, _preData select 0] call A3A_fnc_checkVehicleType) then
   {
     _garData set [0, [_preData select 0, _side] call A3A_fnc_selectVehicleType];
     if(_preData select 1 != 0) then
@@ -39,7 +39,7 @@ for "_i" from 0 to (_garCount - 1) do
     {
       _garData set [1, ["","",""]];
     };
-    if(![_garData select 2, _garData select 0, _preData select 2] call A3A_checkGroupType) then
+    if !([_garData select 2, _garData select 0, _preData select 2] call A3A_checkGroupType) then
     {
       _garData set [2, [_garData select 0, _preData select 2, _side] call A3A_fnc_selectGroupType];
     };

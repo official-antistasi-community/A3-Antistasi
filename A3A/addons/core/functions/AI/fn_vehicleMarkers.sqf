@@ -8,31 +8,17 @@ _side = side (group (driver _veh));
 _typeX = "_unknown";
 _formatX = "";
 _color = colorOccupants;
-if (_veh isKindOf "Truck" or _veh isKindOf "Car") then {_typeX = "_motor_inf"}
-	else
-		{
-		if (_veh isKindOf "Wheeled_APC_F") then {_typeX = "_mech_inf"}
-		else
-			{
-			if (_veh isKindOf "Tank") then {_typeX = "_armor"}
-			else
-				{
-				if (_veh isKindOf "Plane_Base_F") then {_typeX = "_plane"}
-				else
-					{
-					if (_veh isKindOf "UAV_02_base_F") then {_typeX = "_uav"}
-					else
-						{
-						if (_veh isKindOf "Helicopter") then {_typeX = "_air"}
-						else
-							{
-							if (_veh isKindOf "Boat_F") then {_typeX = "_naval"}
-							};
-						};
-					};
-				};
-			};
-		};
+_typeX = switch (true) do {
+	case (_veh isKindOf "Wheeled_APC_F"): {"_mech_inf"};
+	case (_veh isKindOf "Tank"): {"_armor"};
+	case (_veh isKindOf "Plane_Base_F"): {"_plane"};
+	case (_veh isKindOf "UAV_02_base_F"): {"_uav"};
+	case (_veh isKindOf "Helicopter"): {"_air"};
+	case (_veh isKindOf "Boat_F"): {"_naval"};
+	case (_veh isKindOf "Truck"): {"_motor_inf"};
+	case (_veh isKindOf "Car"): {"_motor_inf"};
+	default {"_motor_inf"};
+};
 
 if ((_side == teamPlayer) or (_side == sideUnknown)) then
 	{
