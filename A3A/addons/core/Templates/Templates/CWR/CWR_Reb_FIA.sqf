@@ -16,7 +16,7 @@
 ["vehiclesAA", ["cwr3_i_ural_zu23"]] call _fnc_saveToTemplate;
 ["vehiclesBoat", ["cwr3_i_zodiac"]] call _fnc_saveToTemplate;
 
-["vehiclesPlane", ["cwr3_i_cessna_t41"]] call _fnc_saveToTemplate;       // replace from civ varient s
+["vehiclesPlane", ["cwr3_c_cessna", "cwr3_i_camel", "cwr3_i_cessna_t41_armed"]] call _fnc_saveToTemplate;       // replace from civ varient s
 ["vehiclesCivPlane", ["cwr3_c_cessna"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["cwr3_i_uaz452_mev"]] call _fnc_saveToTemplate;
 

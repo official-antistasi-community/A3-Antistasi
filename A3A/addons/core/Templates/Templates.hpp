@@ -1734,7 +1734,7 @@ class Templates
     {
         requiredAddons[] = {"cwr3_core"};       
         basepath = QPATHTOFOLDER(Templates\Templates\CWR);
-        logo = "\CUP\Creatures\People\CUP_Creatures_People_Core\ui\logo_cup_ca_small.paa";
+        logo = "\cwr3\general\cwr3_core\data\cwr3_logo_128_ca.paa";
         priority = 70;
     };
 
@@ -1768,5 +1768,35 @@ class Templates
         file = "CWR_Reb_FIA";
         shortName = "FIA";
         lore = $STR_A3A_templates_lore_FIA;
+    };
+
+    class CWR_Civ : CWR_Base
+    {
+        side = "Civ";
+        flagTexture = "\CUP\BaseConfigs\CUP_BaseConfigs\data\Flags\flag_chernarus_co.paa";
+        name = "CWR CHC";
+        file = "CWR_Civ_CHC";
+        shortName = "Civilian";
+    };
+
+     // ***************************** CWR Brits *****************************
+
+    class CWRB_Base
+    {
+        requiredAddons[] = {"cwr3_expansion_uk"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\CWR);
+        logo = "\cwr3\general\cwr3_core\data\cwr3_logo_128_ca.paa";
+        priority = 70;
+    };
+
+    class CWR_BAF_Temprate : CWRB_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\Data_F\Flags\flag_uk_co.paa";
+        name = "CWR BAF Temperate";
+        file = "CWR_AI_BAF_Temperate";
+        climate[] = {"Temperate"};
+        shortName = "BAF";
+        lore = $STR_A3A_templates_lore_BAF;
     };
 };
