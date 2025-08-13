@@ -90,8 +90,8 @@ switch (_mode) do
         // Check for selected groups
         private _selectedGroup = _commanderMap getVariable ["selectedGroup", grpNull];
         private _doAutoSwitch = _commanderMap getVariable ["doAutoSwitch", false];
+        private _doAutoSwitchArty = _commanderMap getVariable ["doAutoSwitchArty", false];
         private _hasGroup = !(_selectedGroup isEqualTo grpNull);
-        /*
         private _isMortarVic = false;
         if (_hasGroup) then {
             {
@@ -103,10 +103,8 @@ switch (_mode) do
                 };
             } forEach (units _selectedGroup);
         };
-        */
 
         // Initialize fire mission vars
-        _fireMissionControlsGroup setVariable ["heSelected", true];
         _fireMissionControlsGroup setVariable ["pointSelected", true];
         _fireMissionControlsGroup setVariable ["roundsNumber", 1];
         _fireMissionControlsGroup setVariable ["availableHeRounds", 0];
@@ -130,25 +128,22 @@ switch (_mode) do
 
         switch (true) do 
         {
-            /*
-            case (_doAutoSwitch && _isMortarVic): { // If all is valid show fire mission view
+            case (_doAutoSwitchArty && _isMortarVic): { // If all is valid show fire mission view
                 {_x ctrlShow false} forEach _baseButtons; // expected to be done through single group view
                 ["updateFireMissionView"] call FUNC(commanderTab);
             };
-            */
             case (_hasGroup): { // If a group is selected show the single group view
                  ["updateSingleGroupView"] call FUNC(commanderTab);
             };
-            /*
-            case (_isArtyMenu): { // If no group is selected show the multiple groups view
+            case (_doAutoSwitchArty): { // If no group is selected show the multiple groups view
                 ["updateMultipleGroupsView"] call FUNC(commanderTab);
             };
-            */
             default {
                 
             };
         };
         _commanderMap setVariable ["doAutoSwitch", false];
+        _commanderMap setVariable ["doAutoSwitchArty", false];
     };
 
     case ("updateSingleGroupView"):
@@ -503,6 +498,8 @@ switch (_mode) do
         // Show fire mission view if not already shown
         if !(ctrlShown _fireMissionControlsGroup) then {
             _fireMissionControlsGroup ctrlShow true;
+            // can also be used for first-update stuff
+            _commanderMap setVariable ["selectFireMissionPos", true];
         };
 
         // Update rounds count
@@ -546,7 +543,6 @@ switch (_mode) do
 
         // States for selecting shell type, mission type and round counts are initialized
         // in update, we get them here
-        private _heShell = _fireMissionControlsGroup getVariable ["heSelected", true];
         private _pointStrike = _fireMissionControlsGroup getVariable ["pointSelected", true];
         private _roundsCount = _fireMissionControlsGroup getVariable ["roundsNumber", 1];
         private _startPos = _fireMissionControlsGroup getVariable ["startPos", nil];
@@ -611,7 +607,7 @@ switch (_mode) do
             private _text = format ["%1: %2",_description,_count];
             _lbNames pushBack _text;
             _lbEntryHM set [_text, _mag];
-            diag_log format ["index %1 type %2 text %3", _index, _mag, _text];
+            diag_log format ["index %1 type %2 text %3", _forEachIndex, _mag, _text];
         } forEach _shellCounts;
         _lbNames sort true;
         {

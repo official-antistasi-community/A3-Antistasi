@@ -28,7 +28,7 @@ switch (_key) do {
         // tl;dr: Do not rearrange this logic or clowns will eat your children.
         if (A3A_GUIDevPreview) then {
             createDialog "A3A_dummyDialog";
-            player setVariable ["autoSwitchGroups", hcSelected player];
+            player setVariable ["autoSwitchGroups", [hcSelected player, false]];
             [] spawn {
                 closeDialog 0;
                 waitUntil { showCommandingMenu ""; hcSelected player isEqualTo [] };
@@ -48,13 +48,25 @@ switch (_key) do {
     };
 
     case QGVAR(artyMenu): {
-        if (A3A_GUIDevPreview) exitWith {};
         if (player getVariable ["incapacitated",false]) exitWith {};
         if (player getVariable ["owner",player] != player) exitWith {};
-        if (player isNotEqualTo theBoss) exitWith {};
-        GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
-        [] spawn A3A_fnc_artySupport;
-        [] spawn { sleep 1; GVAR(keys_battleMenu) = false;};
+        if (player isEqualTo theBoss) then {
+            if (A3A_GUIDevPreview) then {
+                [] spawn {
+                    player setVariable ["autoSwitchGroups", [hcSelected player, true]];
+                    showCommandingMenu "";                          // clear the command menu so that we have the scroll wheel  
+                    private _timeout = time;  
+                    waitUntil { hcSelected player isEqualTo [] or time - _timeout > 1 };  
+                    createDialog "A3A_MainDialog";  
+                    sleep 1;  
+                    player setVariable ["autoSwitchGroups", []];  
+                };  
+            } else {
+                GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
+                [] spawn A3A_fnc_artySupport;
+                [] spawn { sleep 1; GVAR(keys_battleMenu) = false;};
+            };
+        };
     };
 
     case QGVAR(infoBar): {
