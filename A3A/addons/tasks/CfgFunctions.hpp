@@ -6,7 +6,7 @@ class CfgFunctions {
             class getSettings { postInit = 1; };
             class requestTask {};
             class runTask {};
-            class updateTaskState {};
+            //class updateTaskState {};
         };
 
         class Helpers { // task helper functions  |  Common functionality used by tasks or the params getters
@@ -22,11 +22,12 @@ class CfgFunctions {
         };
         class Tasks { // task  |  Passed task HM to store task instructions into
             file = QPATHTOFOLDER(Tasks);
-            class testTask {};
+            //class testTask {};
+            class LOG_Supplies {};
         };
 
         //Legacy missions
-        class LegacyParams {
+/*        class LegacyParams {
             file = QPATHTOFOLDER(Params\LegacyParams);
             class AS_Official_p {};
             class AS_specOP_p {};
@@ -42,5 +43,6 @@ class CfgFunctions {
             class LOG_Supplies {};
             class LOG_Ammo {};
         };
+*/
     };
 };

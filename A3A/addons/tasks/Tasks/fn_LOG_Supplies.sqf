@@ -1,5 +1,5 @@
 
-#include "..\..\script_component.hpp"
+#include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
 // only public vars:
@@ -7,10 +7,11 @@ FIX_LINE_NUMBERS()
 // checkpoint - key of checkpoint function (retrieves data for save)
 // interval - time until next update in seconds
 // lastUpdate - time previous update was run (from time command)
+
 // init call:
 // params ["_task", "_params", "_checkpoint"];
 // every other call: _this = task
-// could sanitize so that loadParams
+
 
 private _fnc_createBox = {
 	params ["_pos"];
@@ -28,19 +29,19 @@ private _fnc_createTask = {
 	private _displayTime = [(_this get "_endTime") - time] call FUNC(minutesFromNow);
 	private _holdTime = (_this get "_difficulty") * 2;
 
-	private _taskName = localize "STR_antistasi_LTasks_LOG_Supplies_title";
-	private _taskDesc = format [localize "STR_antistasi_LTasks_LOG_Supplies_description",_nameDest,_displayTime, _holdTime];
+	private _taskName = localize "STR_A3A_Tasks_LOG_Supplies_title";
+	private _taskDesc = format [localize "STR_A3A_Tasks_LOG_Supplies_description", _nameDest, _displayTime, _holdTime];
 	private _taskPos = markerPos (_this get "_marker");
 	private _notify = isNil {_this get "checkpoint"};
-	private _taskId = call A3A_fnc_genTaskUID;
-	[true, _taskId, [_desc,_taskName], _taskPos, false, -1, _notify, "Heal", true] call BIS_fnc_taskCreate;
+	private _taskId = call FUNC(genTaskUID);
+	[true, _taskId, [_taskDesc,_taskName], _taskPos, false, -1, _notify, "Heal", true] call BIS_fnc_taskCreate;
 	_this set ["_taskId", _taskId];
 };
 
-// Or: Pass in task with params and optionally checkpoint
-// maybe makes more sense?
 
-params ["_task", "_params", "_checkpoint"];
+params ["_params", "_checkpoint"];
+
+private _task = createHashMap;
 
 if (isNil "_checkpoint") then {
 	_params params ["_marker"];
@@ -50,7 +51,7 @@ if (isNil "_checkpoint") then {
 	[_boxPos] call _fnc_createBox;
 
 	// Determine end time and description
-	_difficulty = [1, 2] select (random 10 < tierWar);
+	private _difficulty = [1, 2] select (random 10 < tierWar);
 	if (sidesX getVariable _marker == teamPlayer) then { _difficulty = 1 };
 
 	_task set ["_marker", _marker];
@@ -73,11 +74,11 @@ _task set ["checkpoint", "c_started"];
 _task set ["state", "s_waitForPlace"];
 _task set ["interval", 1];
 
-_task set ["_hintTitle", localize "STR_A3A_LTasks_LOG_Supplies_title"];
+_task set ["_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_title"];
 
 _task set ["c_started", {
 	[_this get "_marker", getPosATL (_this get "_box"), (_this get "_endTime") - time, _this get "_difficulty"];
-};
+}];
 
 
 /////////////////////
@@ -85,12 +86,12 @@ _task set ["c_started", {
 /////////////////////
 
 // called with local vars _box and _marker
-private _fnc_placedCondition = {
+_task set ["_fnc_placedCondition", {
 	if (_box distance2d markerPos _marker > 40) exitWith {false};
 	if (spawner getVariable _marker != 0) exitWith { false };
 	if ((!isNull attachedTo _box) or (!isNull ropeAttachedTo _box)) exitWith { false };
 	true;
-};
+}];
 
 _task set ["s_waitForPlace",
 {
@@ -99,7 +100,7 @@ _task set ["s_waitForPlace",
 	// check if box has been (initially) placed
 	private _box = _this get "_box";
 	private _marker = _this get "_marker";
-	if !(call _fnc_placedCondition) exitWith {false};
+	if !(call (_this get "_fnc_placedCondition")) exitWith {false};
 
 	// Ok, now we go into the placed state
 	_this set ["state", "s_boxPlaced"];
@@ -111,10 +112,12 @@ _task set ["s_waitForPlace",
 	} forEach (units teamPlayer inAreaArray [getPosATL _box, 300, 300]);
 
 	// Get nearby enemies to move towards the box
+	// TODO: Sort this garbage out for new-garrison
 	{
 		if (_x != leader _x or {_x != vehicle _x}) then { continue };
 		group _x move getPosATL _box;
 	} forEach (units Occupants inAreaArray [getPosATL _box, 500, 500]);
+	false;
 
 	// Difficult version: Send a QRF instead of longer time?
 }];
@@ -126,23 +129,23 @@ _task set ["s_boxPlaced",
 	// Check if box has been picked up or deserted
 	private _box = _this get "_box";
 	private _marker = _this get "_marker";
-	if !(call _fnc_placedCondition) exitWith { _this set ["state", "s_waitForPlace"]; false };
+	if !(call (_this get "_fnc_placedCondition")) exitWith { _this set ["state", "s_waitForPlace"]; false };
 
 	private _blockTime = _this getOrDefault ["_blockTime", -1000];
 
 	// Check that there are friendlies nearby and enemies not nearby
-	if ([_x call A3A_fnc_canFight} count (units Occupants inAreaArray [getPosATL _box, 50, 50]) > 0
-		or ({_x call A3A_fnc_canFight} count (units teamPlayer inAreaArray [getPosATL _box, 50, 50]) == 0) exitWith {
-		if (time - _blockTime > 60) then {
-			[_this get "_hintTitle", localize "STR_A3A_LTasks_LOG_Supplies_condition", getPosATL _box, 50] call A3A_fnc_hintNear;
+	if ({_x call A3A_fnc_canFight} count (units Occupants inAreaArray [getPosATL _box, 50, 50]) > 0
+		or {_x call A3A_fnc_canFight} count (units teamPlayer inAreaArray [getPosATL _box, 50, 50]) == 0) exitWith {
+		if (time - _blockTime > 30) then {
+			[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_condition", getPosATL _box, 50] call FUNC(hintNear);
 			_this set ["_blockTime", time];
 		};
 		false;
 	};
 
 	// Safe delivery success if there are no enemies anywhere near
-	if (units Occupants inAreaArray [getPosATL _box, 500, 500]) exitWith {
-		[_this get "_hintTitle", localize "STR_A3A_LTasks_LOG_Supplies_deliveredSafe", getPosATL _box, 300] call A3A_fnc_hintNear;
+	if (units Occupants inAreaArray [getPosATL _box, 500, 500] isEqualTo []) exitWith {
+		[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_deliveredSafe", getPosATL _box, 300] call FUNC(hintNear);
 		_this set ["state", "s_succeeded"];	false;
 	};
 
@@ -153,14 +156,15 @@ _task set ["s_boxPlaced",
 
 	// Delivery completion success
 	if (_countdown <= 0) exitWith {
-		[_this get "_hintTitle", localize "STR_A3A_LTasks_LOG_Supplies_delivered", getPosATL _box, 300] call A3A_fnc_hintNear;
+		[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_delivered", getPosATL _box, 300] call FUNC(hintNear);
 		_this set ["state", "s_succeeded"];	false;
 	};
 
 	// Show the countdown if blocked on last check
 	if (_blockTime >= 0) then {
 		private _nearPlayers = playableUnits inAreaArray [getPosATL _box, 300, 300];
-		[_this get "_hintTitle", localize "STR_A3A_LTasks_LOG_Supplies_countdown", _countdown, _box, 50] remoteExecCall ["A3A_fnc_customHintCountdown", _nearPlayers];
+		private _endTime = serverTime + _countdown;
+		[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_countdown", _endTime, _box, 50] remoteExec ["A3A_fnc_customHintCountdown", _nearPlayers];
 		_this deleteAt "_blockTime";
 	};
 	false;
@@ -181,10 +185,10 @@ _task set ["s_succeeded", {
 
 	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
 	_this set ["state", "s_cleanup"]; false;
-};
+}];
 _task set ["s_failed", {
 	// Need a message here just to avoid the cooldown?
-	[_this get "_hintTitle", localize "STR_A3A_LTasks_LOG_Supplies_failed", getPosATL _box, 300] call A3A_fnc_hintNear;
+	[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_failed", getPosATL _box, 300] call FUNC(hintNear);
 
 	[5, -5, _this get "_marker"] remoteExec ["A3A_fnc_citySupportChange", 2];
 	[-10, theBoss] call A3A_fnc_playerScoreAdd;
@@ -210,3 +214,6 @@ _task set ["s_cleanup", {
 	};
 	true;		// delete the damned task
 }];
+
+// Return the task hashmap
+_task;

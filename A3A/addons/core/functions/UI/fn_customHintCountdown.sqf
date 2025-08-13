@@ -16,35 +16,31 @@ Parameters:
 
 params ["_headerText", "_bodyText", "_endTime", "_showCenter", "_showRadius"];
 
-private _fnc_removeMessage = {
-    isNil {
-        private _index = A3A_customHint_MSGs findIf { _x#1 == _this }
-        A3A_customHint_MSGs deleteAt _index;
-    };
-};
-
-private _lastText = "";
+private _lastMessage = [];
 
 while {true} do
 {
     // Timer expired, remove message and exit
     if (_endTime < serverTime) exitWith {
-        _lastText call _fnc_removeMessage;
+        A3A_customHint_MSGs deleteAt (A3A_customHint_MSGs find _lastMessage);
     };
 
     // Outside zone, remove last countdown message if present and then wait a bit
     if (!isNil "_showCenter" and {player distance2d _showCenter > _showRadius}) then {
-        _lastText call _fnc_removeMessage;
-        sleep 5; continue;
+        A3A_customHint_MSGs deleteAt (A3A_customHint_MSGs find _lastMessage);
+        sleep 1; continue;
     };
 
-    // Check if message has been replaced by another with the same title
-    private _index = A3A_customHint_MSGs findIf { _x#0 == _headerText };
-    if (_index != -1 and { A3A_customHint_MSGs#_index#1 != _lastText }) exitWith {};
+    // Ff message has been replaced by another with the same title, cancel
+    private _index = A3A_customHint_MSGs findIf { _x#0 == _headerText and !(_x isEqualRef _lastMessage) };
+    if (_index != -1) exitWith {};
 
-    // Now build the message
-    _lastText = format [_bodyText, round (_endTime - serverTime)];
-    isNil { [_headerText, _lastText, true] call A3A_fnc_customHint };
+    // Add/update the countdown message
+    isNil {
+        private _str = format [_bodyText, round (_endTime - serverTime)];
+        [_headerText, _str, true] call A3A_fnc_customHint;
+        _lastMessage = A3A_customHint_MSGs # (A3A_customHint_MSGs findIf { _x#0 == _headerText });        // Guaranteed to exist, because we just added it
+    };
 
     // Attempt to run on exact seconds, more or less
     sleep (0.1 + (_endTime - serverTime) % 1);

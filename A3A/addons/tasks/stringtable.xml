@@ -44,17 +44,26 @@
       <Key ID="STR_antistasi_LTasks_CON_Outpost_factory_description">
         <Original>%1 is being used to aid the enemy. Go there and capture it before %2.</Original>
       </Key>
-      <Key ID="STR_antistasi_LTasks_LOG_Supplies_title">
+      <Key ID="STR_A3A_Tasks_LOG_Supplies_title">
         <Original>City Supplies</Original>
       </Key>
-      <Key ID="STR_antistasi_LTasks_LOG_Supplies_description">
+      <Key ID="STR_A3A_Tasks_LOG_Supplies_description">
         <Original>%1 population is in need of supplies. We may improve our relationship with that city if we are the ones who provide them. I have placed a crate with supplies near our HQ. Deliver the crate to %1 city center, hold it there for %3 minutes and it's done. Do this before %2.</Original>
       </Key>
-      <Key ID="STR_antistasi_LTasks_LOG_Supplies_distributing_supplies">
+      <Key ID="STR_A3A_Tasks_LOG_Supplies_condition">
+        <Original>Distribution paused. We need friendly units close to the shipment and no enemies.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_Supplies_countdown">
         <Original>Keep distributing supplies for %1 more seconds.</Original>
       </Key>
-      <Key ID="STR_antistasi_LTasks_LOG_Supplies_supplies_delivered">
+      <Key ID="STR_A3A_Tasks_LOG_Supplies_delivered">
         <Original>Supplies Delivered.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_Supplies_deliveredSafe">
+        <Original>Supplies Delivered. There's no sign of enemies nearby so we can leave the locals to unload.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_Supplies_failed">
+        <Original>Supply delivery failed.</Original>
       </Key>
       <Key ID="STR_antistasi_LTasks_LOG_Ammo_title">
         <Original>Steal or Destroy Ammotruck</Original>

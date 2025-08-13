@@ -772,6 +772,7 @@ class CfgFunctions
         class UI {
             file = QPATHTOFOLDER(functions\UI);
             class customHint {};
+            class customHintCountdown {};
             class customHintDismiss {};
             class customHintInit {};
             class customHintRender {};

@@ -1,6 +1,6 @@
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
-private _emptyHM = createHashMap;
+/*private _emptyHM = createHashMap;
 params [["_taskHM", _emptyHM, [_emptyHM]]];
 
 //validation
@@ -101,3 +101,47 @@ _taskHM call (_taskHM getOrDefault ["destructor", {}]); //run task destructor to
 
 _taskHM call FUNC(updateTaskState); //update the task map info
 GVAR(activeTasks) deleteAt ( GVAR(activeTasks) findIf {(_x get "taskID") isEqualTo (_taskHM get "taskID")} ); // cleare from active task record
+*/
+
+
+// What are we doing here?
+
+// loop is just a while loop that waits for 
+
+// only public vars:
+// state - key of state function
+// checkpoint - key of checkpoint function (retrieves data for save)
+// interval - time until next update in seconds
+// lastUpdate - time previous update was run (from time command)
+
+// init call:
+// params ["_task", "_params", "_checkpoint"];
+// every other call: _this = task
+
+// inputs here would be task function/name and task params?
+
+if (!canSuspend) exitWith { "Error: Run this function scheduled" };
+
+params ["_taskFnc", "_params"];
+
+private _task = [_params, nil] call _taskFnc;
+//GVAR(activeTasks) pushBack _task;
+
+private _complete = false;
+while {true} do
+{
+    // Run unscheduled so that save/cancel can't hit halfway
+    isNil {
+        private _state = _task get "state";
+        _complete = _task call (_task get _state);
+    };
+    if (_complete) exitWith {};
+
+    _task set ["lastUpdate", time];
+    sleep (_task get "interval");
+};
+
+// remove from active tasks?
+//GVAR(activeTasks) deleteAt (GVAR(activeTasks) find _task);
+
+// should be the final reference, so task will no longer exist
