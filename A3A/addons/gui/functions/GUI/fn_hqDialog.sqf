@@ -265,10 +265,9 @@ switch (_mode) do
             _cityData params ["_numCiv", "_numVeh", "_supportGov", "_supportReb"];
 
             _totalPopulation = _totalPopulation + _numCiv;
-            _rebelPopulation = _rebelPopulation + (_numCiv * (_supportReb / 100));
-
-            if (_city in destroyedSites) then {
-                _deadPopulation = _deadPopulation + _numCiv;
+            if (_city in destroyedSites) then { _deadPopulation = _deadPopulation + _numCiv} else 
+            {
+                _rebelPopulation = _rebelPopulation + (_numCiv * (_supportReb / 100));
             };
         } forEach citiesX;
 
