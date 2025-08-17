@@ -164,6 +164,84 @@ A3A_lampTypes = [
 ];
 
 ////////////////////////////////////
+//    PLAYER UNIT DEFINITONS     ///
+////////////////////////////////////
+
+A3A_roleTraitHM = createHashMapFromArray [
+    ["rifleman", createHashMapFromArray [
+            ["camouflageCoef", 1.0],
+            ["audibleCoef", 1.0],
+            ["loadCoef", 1.0],
+            ["medic", false],
+            ["explosiveSpecialist", false],
+            ["UAVHacker", true],
+            ["engineer", false]
+        ]
+    ],
+    ["teamleader", createHashMapFromArray [
+            ["camouflageCoef", 0.8],
+            ["audibleCoef", 0.8],
+            ["loadCoef", 1.4],
+            ["medic", false],
+            ["explosiveSpecialist", false],
+            ["UAVHacker", false],
+            ["engineer", false]
+        ]
+    ],
+    ["grenadier", createHashMapFromArray [
+            ["camouflageCoef", 1.2],
+            ["audibleCoef", 1.0],
+            ["loadCoef", 0.8],
+            ["medic", false],
+            ["explosiveSpecialist", false],
+            ["UAVHacker", false],
+            ["engineer", false]
+        ]
+    ],
+    ["autorifleman", createHashMapFromArray [
+            ["camouflageCoef", 1.0],
+            ["audibleCoef", 1.2],
+            ["loadCoef", 0.8],
+            ["medic", false],
+            ["explosiveSpecialist", false],
+            ["UAVHacker", false],
+            ["engineer", false]
+        ]
+    ],
+    ["medic", createHashMapFromArray [
+            ["camouflageCoef", 1.0],
+            ["audibleCoef", 1.0],
+            ["loadCoef", 1.0],
+            ["medic", true],
+            ["explosiveSpecialist", false],
+            ["UAVHacker", false],
+			["engineer", false]
+        ]
+    ],
+    ["engineer", createHashMapFromArray [
+            ["camouflageCoef", 1.0],
+            ["audibleCoef", 1.0],
+            ["loadCoef", 1.0],
+            ["medic", false],
+            ["explosiveSpecialist", true],
+            ["UAVHacker", false],
+            ["engineer", true]
+        ]
+    ],
+    ["commander", createHashMapFromArray [
+            ["camouflageCoef", 0.8],
+            ["audibleCoef", 0.8],
+            ["loadCoef", 1.4],
+            ["medic", true],
+            ["explosiveSpecialist", true],
+            ["UAVHacker", true],
+            ["engineer", true]
+        ]
+    ]
+];
+
+
+////////////////////////////////////
 //     SOUNDS AND ANIMATIONS     ///
 ////////////////////////////////////
 Info("Compiling sounds and animations");

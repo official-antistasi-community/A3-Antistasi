@@ -5755,7 +5755,7 @@
         <Russian>Командир подал в отставку. Подходящего командира нет.</Russian>
         <Chinesesimp>指挥官已离线.目前没有合适的指挥官.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifle1">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifleman_1">
         <Original>Autorifleman role.</Original>
         <Italian>Ruolo Fuciliere Automatico.</Italian>
         <French>Rôle de Mitrailleur.</French>
@@ -5766,7 +5766,7 @@
         <Turkish>Makinalı Tüfek rolü</Turkish>
         <Chinesesimp>自动步枪手</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifle2">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifleman_2">
         <Original>Autoriflemen have a slight bonus on carry capacity, but make more noise when they move</Original>
         <Italian>I Fucilieri Automatici hanno un piccolo bonus sulla capacità di trasporto, però fanno troppo rumore quando si muovono.</Italian>
         <French>Les Mitrailleurs ont un léger bonus de capacité de transport, mais sont plus bruyants quand ils se déplacent.</French>
@@ -5776,7 +5776,7 @@
         <Czech>Kulometčíci mají menší bonus k maximální váze, kterou unesou, ale dělají větší hluk při pohybu</Czech>
         <Chinesesimp>自动步枪手在携带重量上略带优势, 但是在移动时会发出更大的动静.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_commander1">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_commander_1">
         <Original>Commander role.</Original>
         <Italian>Ruolo Comandante.</Italian>
         <French>Rôle de Commandant.</French>
@@ -5787,7 +5787,7 @@
         <Turkish>Komutan rolü</Turkish>
         <Chinesesimp>指挥官</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_commander2">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_commander_2">
         <Original>The commander is a lightweight unit with increased camouflage, medical and engineering capabilities</Original>
         <Italian>Il comandante è un'unità leggera con capacità mimetiche, mediche e di genio aumentate.</Italian>
         <French>Le commandant est une unité légère avec des capacités de camouflage, médical et d'ingéniérie augmentées.</French>
@@ -5797,7 +5797,7 @@
         <Czech>Velitel je lehká jednotka se zvýšenou kamufláží, a lékařskými a inženýrskými schopnostmi</Czech>
         <Chinesesimp>指挥官是一个高伪装，兼备医疗以及工程才能一体的轻量化单位</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_engi1">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_engineer_1">
         <Original>Engineer role.</Original>
         <Italian>Ruolo Geniere.</Italian>
         <French>Rôle d'Ingénieur.</French>
@@ -5808,7 +5808,7 @@
         <Turkish>Mühendis rolü</Turkish>
         <Chinesesimp>工程师</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_engi2">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_engineer_2">
         <Original>Engineers do not have any bonus or penalties, but have the ability to use Toolkits for vehicle repair</Original>
         <Italian>I Genieri non hanno bonus o penalità, ma hanno l'abilità di usare i Kit di Riparazioni per riparare i veicoli.</Italian>
         <French>Les Ingénieurs n'ont pas de bonus ou de malus, mais ils ont la capacité d'utiliser des Kits de Réparation pour réparer les véhicules.</French>
@@ -5818,7 +5818,7 @@
         <Czech>Inženýři nemají žádné bonusy ani penalizace, ale můžou používat opravovací sady na opravení vozidel</Czech>
         <Chinesesimp>工程师并没什么特殊的长处或短处，但是他们可以使用修理包来为载具提供修理</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier1">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier_1">
         <Original>Grenadier role.</Original>
         <Italian>Ruolo Granatiere.</Italian>
         <French>Rôle de Grenadier.</French>
@@ -5829,7 +5829,7 @@
         <Turkish>Bomba Atar rolü</Turkish>
         <Chinesesimp>榴弹手</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier2">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier_2">
         <Original>Grenadiers have a slight bonus on carry capacity, but are easy to spot</Original>
         <Italian>I granatieri hanno un piccolo bonus sulla capacità di trasporto, ma sono facili da avvistare.</Italian>
         <French>Les Grenadiers ont un léger bonus de capacité de transport, mais sont facile à réperer.</French>
@@ -5839,7 +5839,7 @@
         <Czech>Granátometčíci mají menší bonus k váze kterou unesou, ale dají se jednodušeji spatřit</Czech>
         <Chinesesimp>榴弹手在携带重量上略带优势, 但是更容易被敌人发现.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_medic1">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_medic_1">
         <Original>Medic role.</Original>
         <Italian>Ruolo Medico.</Italian>
         <French>Rôle de Médecin.</French>
@@ -5850,7 +5850,7 @@
         <Turkish>Sıhıye rolü</Turkish>
         <Chinesesimp>卫生员</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_medic2">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_medic_2">
         <Original>Medics do not have any bonus or penalties, but have the ability to use certain medical items for full health restoration</Original>
         <Italian>I Medici non hanno bonus o penalità, ma sono in grado di usare determinati oggetti medici per rigenerare totalmente la salute.</Italian>
         <French>Les Médecins n'ont pas de bonus ou de malus, mais ils ont la capacité d'utiliser certains objets médicaux afin de prodiguer des soins complets.</French>
@@ -5860,7 +5860,7 @@
         <Czech>Doktoři nemají žádné bonusy ani penalizace, ale můžou používat některé lékařské předměty k doplnění plného zdraví</Czech>
         <Chinesesimp>卫生员并没有什么额外的奖励或者处罚特长，但是他们可以使用特定的医疗物品进行全面的医疗救助.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_rifle1">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_rifle_1">
         <Original>Rifleman role.</Original>
         <Italian>Ruolo Fuciliere.</Italian>
         <French>Rôle de Fusilier.</French>
@@ -5871,7 +5871,7 @@
         <Turkish>Piyade rolü</Turkish>
         <Chinesesimp>步枪兵</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_rifle2">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_rifle_2">
         <Original>Riflemen do not have any bonus or penalties but can hack drones</Original>
         <Italian>I Fucilieri non hanno bonus o penalità ma possono hackerare i droni.</Italian>
         <French>Les Fusiliers n'ont pas de bonus ou de malus mais ils peuvent hacker des drones.</French>
@@ -5881,7 +5881,7 @@
         <Czech>Střelci nemají žádné bonusy ani penalizace, ale můžou hackovat drony</Czech>
         <Chinesesimp>步枪兵并没什么额外的奖励以及处罚特长，但是他们可以骇入无人机.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_teamlead1">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_teamleader_1">
         <Original>Teamleader role.</Original>
         <Italian>Ruolo Caposquadra.</Italian>
         <French>Rôle de Chef d'équipe.</French>
@@ -5892,7 +5892,7 @@
         <Turkish>Tim Komutan rolü</Turkish>
         <Chinesesimp>小组组长</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_teamlead2">
+      <Key ID="STR_A3A_fn_orgp_unitTraits_teamlead_2">
         <Original>Teamleader are more lightweight units with increased camouflage capabilities</Original>
         <Italian>I Caposquadra sono unità leggere con capacità mimetiche aumentate.</Italian>
         <French>Les Chefs d'équipe sont des unités légères avec des capacités de camouflage augmentées.</French>
@@ -5901,16 +5901,6 @@
         <Polish>Dowódcy sekcji to lżejsze jednostki o zwiększonych możliwościach kamuflażu.</Polish>
         <Czech>Velitel týmu je lehká jednotka se zvýšenou kamufláží</Czech>
         <Chinesesimp>小组组长是一个高伪装的轻量化单位</Chinesesimp>
-      </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_titel">
-        <Original>Unit Traits</Original>
-        <Italian>Caratteristiche Unità</Italian>
-        <French>Attributs d'Unité</French>
-        <Korean>유닛 특성</Korean>
-        <Russian>Роль</Russian>
-        <Polish>Cechy jednostek</Polish>
-        <Czech>Vlastnosti jednotky</Czech>
-        <Chinesesimp>单位特长</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_unitTraits_title">
         <Original>Unit Traits</Original>

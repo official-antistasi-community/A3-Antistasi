@@ -140,6 +140,7 @@ class CfgFunctions
             class garrisonInfo {};
             class getAggroLevelString {};
             class getRecentDamage {};
+            class getRoleCap {};
             class getVehiclesAirSupport {};
             class getVehicleSellPrice {};
             class getVehiclesGroundSupport {};
