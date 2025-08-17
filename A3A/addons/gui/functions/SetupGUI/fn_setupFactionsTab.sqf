@@ -228,7 +228,7 @@ switch (_mode) do
         // Fetch valid factions and filter based on checkboxes
         private _factions = +(_display getVariable "validFactions");
         if (!cbChecked (_display displayCtrl A3A_IDC_SETUP_IGNORECAMOCHECK)) then {
-            _factions = _factions apply { _x select { getArray (_x/"climate") isEqualTo [] or A3A_climate in getArray (_x/"climate") } };
+            _factions = _factions apply { _x select { getArray (_x/"climate") isEqualTo [] or ((getArray (_x/"climate") findIf {_x == A3A_climate}) > -1) } };
         };
         private _missingFactions = _factions apply { _x select { !(_x call _fnc_factionLoaded) } };
         _factions = _factions apply { _x select { _x call _fnc_factionLoaded } };
