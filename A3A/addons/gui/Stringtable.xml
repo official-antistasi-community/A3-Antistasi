@@ -3461,6 +3461,9 @@
       <Key ID="STR_antistasi_recruit_squad_error">
         <Original>You do not have enough money or HR for this group type</Original>
       </Key>
+      <Key ID="STR_antistasi_recruit_squad_notCompatible">
+        <Original>This squad type is not compatible with this modset</Original>
+      </Key>
     </Container>
     <Container name="dialog_recruit_units">
       <Key ID="STR_antistasi_dialogs_recruit_units_antitank">
