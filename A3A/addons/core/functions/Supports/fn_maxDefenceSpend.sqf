@@ -149,7 +149,7 @@ else
         //};
     } forEach _nearFriends;
 
-    _threatBalance = (2.6*_recentDamage + _enemyStr) / (1 + _friendStr + _recentDamage);
+    _threatBalance = (3.0*_recentDamage + _enemyStr) / (1 + _friendStr + _recentDamage);
     _threatBalance = 1 min (_threatBalance - 1);
     Debug_4("Threat balance %1 from: Recent damage %2 enemy strength %3 friend strength %4", _threatBalance, _recentDamage, _enemyStr, _friendStr);
 };
