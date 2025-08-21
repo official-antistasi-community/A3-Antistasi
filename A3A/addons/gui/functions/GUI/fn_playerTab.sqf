@@ -232,8 +232,9 @@ switch (_mode) do
 
             if !(isNull _vehicle) then {
                 // Check if vehicle is eligible for garage / sell, not a dude or house etc.
+                private _vehicleCat = ([typeOf _vehicle] call HR_GRG_fnc_getCatIndex);
                 private _canGarage = (
-                    ([typeOf _vehicle] call HR_GRG_fnc_getCatIndex >= 0) ||
+                    (_vehicleCat >= 0) ||
                     (_vehicle getVariable ['A3A_canGarage', false])
                 );
                 if (_canGarage) then {
@@ -267,7 +268,21 @@ switch (_mode) do
                         _unlockVehicleButton ctrlEnable false;
                         _unlockVehicleButton ctrlSetTooltip "Cannot lock static objects";
                     };
-
+                    // Aircraft specific checks
+                    if (_vehicleCat in [3,4]) then {
+                        private _friendlyMarkers = (airportsX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
+                        private _nearestHelipad = (nearestObjects [player, ["a3a_helipad"], 20, true])#0;
+                        private _inArea = ((_friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 }) || {if (isNull _nearestHelipad) exitWith {false}; (_vehicle distance2D _nearestHelipad) < 20});
+                        if !(_inArea) then {
+                            _addToGarageButton ctrlEnable false;
+                            if (_vehicleCat == HR_GRG_HELIPADACCESSIBLE) then {
+                                _addToGarageButton ctrlSetTooltip "Must be near friendly airbase or helipad to garage";
+                            } else {
+                                _addToGarageButton ctrlSetTooltip "Must be near friendly airbase to garage"
+                            };
+                        };                    
+                    };
+                    
                     // Change label on lock/unlock depending on vehicle lock state
                     // To be removed, vehicle locking isn't a thing anymore
                     /* private _unlockVehicleButton = _display displayCtrl A3A_IDC_UNLOCKVEHICLEBUTTON;

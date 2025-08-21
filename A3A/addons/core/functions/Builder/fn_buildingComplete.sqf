@@ -17,8 +17,8 @@ if (isNull _target) exitWith {};            // Possible if two engineers attempt
 deleteVehicle _target;
 
 // Cancel case
+private _price = _target getVariable ["A3A_build_price", 10];
 if (!_finished) exitWith {
-    private _price = _target getVariable ["A3A_build_price", 10];
     if (_price > 0) then { [0, _price] spawn A3A_fnc_resourcesFIA };
 };
 
@@ -34,6 +34,7 @@ _building setPosWorld (_target getVariable "A3A_build_pos");
 _building setVectorDirAndUp (_target getVariable "A3A_build_dir");
 _building setVariable ["A3A_building", true, true];            // Used to identify removable buildings
 A3A_buildingsToSave pushBack _building;
+if (_building distance2D "Synd_HQ" < 100) then {A3A_HQDetectionRadius = A3A_HQDetectionRadius + (_price/5)};
 
 // Allowing flagpole construction is probably not a good idea due to how markerChange handles flags atm
 if (_className isEqualTo (A3A_faction_reb get "flag")) then {

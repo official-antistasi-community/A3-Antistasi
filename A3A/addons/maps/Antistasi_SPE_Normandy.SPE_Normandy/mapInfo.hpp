@@ -24,6 +24,8 @@ class SPE_Normandy {
 		// SPE sandbag walls
 		{"Land_SPE_Sandbag_Long", 15}, {"Land_SPE_Sandbag_Short", 10}, {"Land_SPE_Sandbag_Nest", 15}, {"Land_SPE_Sandbag_Curve", 20},
 		// Some extra stuff from vanilla
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
 };

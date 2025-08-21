@@ -33,6 +33,8 @@ class gm_weferlingen_winter {
 		//small bunker
 		{"Land_Bunker_02_light_double_F", 500},
 		//big bunker
-		{"gm_bunker_command_01_plain", 5000}
+		{"gm_bunker_command_01_plain", 5000},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
 };

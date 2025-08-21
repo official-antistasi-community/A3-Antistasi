@@ -93,6 +93,7 @@ private _destroyedPositions = destroyedBuildings apply { getPosATL _x };
 ["destroyedBuildings",_destroyedPositions] call A3A_fnc_setStatVariable;
 ["controlsSDK",[]] call A3A_fnc_setStatVariable;					// backwards compatibility
 ["minorSites", A3A_minorSitesHM] call A3A_fnc_setStatVariable;
+["HQDetectionRadius", A3A_HQDetectionRadius] call A3A_fnc_setStatVariable;
 
 //Save aggression values
 ["aggressionOccupants", [aggressionLevelOccupants, aggressionStackOccupants]] call A3A_fnc_setStatVariable;

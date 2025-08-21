@@ -17,6 +17,7 @@ petros setBehaviour "SAFE";
 [group petros, 2] remoteExec ["setGroupOwner", 2];
 
 [getPos petros, false] remoteExec ["A3A_fnc_relocateHQObjects", 2];
+[{A3A_HQDetectionRadius = 500}] remoteExec ["call",2];
 
 sleep 5;
 ["HQPlaced", [getPos petros]] call EFUNC(Events,triggerEvent);

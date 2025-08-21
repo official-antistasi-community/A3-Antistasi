@@ -69,7 +69,8 @@ private _constructionObjects = [
     A3A_unbuiltObjects pushBack _planks;
 
     // Should be the only actions on this object, so we can just JIP on the object
-    private _holdTime = 1.6 * sqrt _price;
+    private _holdTime = 1.2 * sqrt _price;
+    if (_planks distance2D "Synd_HQ" < 100) then { _holdTime = _holdTime * 0.75}; // command has a half million dollars and cant build a petros bunker in less than a minute
     [_planks, _holdTime] remoteExecCall ["A3A_fnc_addBuildingActions", 0, _planks];
 
     // TODO: could trigger on unbuiltObjects change instead

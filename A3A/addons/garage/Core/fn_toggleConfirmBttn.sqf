@@ -30,12 +30,20 @@ _ctrlLock ctrlEnable _enable;
 
 private _selCat = HR_GRG_Cats findIf {ctrlShown _x};
 private _selVehicleCat = HR_GRG_SelectedVehicles#0;
-if ((_selCat in HR_GRG_BLOCKAIRINDEX || _selVehicleCat in HR_GRG_BLOCKAIRINDEX) && {!(call HR_GRG_Cnd_canAccessAir)}) then {
+private _limit = HR_GRG_accessLimit;
+
+if ((_limit isEqualTo "helipad") && {!(_selCat in HR_GRG_HELIPADACCESSIBLE) || !(_selVehicleCat in HR_GRG_HELIPADACCESSIBLE)}) exitWith {
+    _ctrlCnfrm ctrlEnable false;
+    _ctrlCnfrm ctrlSetTextColor [0.7,0,0,1];
+    _ctrlCnfrm ctrlSetTooltip localize "STR_HR_GRG_Generic_HelipadDisabled";
+};
+if ((_limit isEqualTo "") && {(_selCat in HR_GRG_BLOCKAIRINDEX || _selVehicleCat in HR_GRG_BLOCKAIRINDEX) && {!(call HR_GRG_Cnd_canAccessAir)}}) exitWith {
     _ctrlCnfrm ctrlEnable false;
     _ctrlCnfrm ctrlSetTextColor [0.7,0,0,1];
     _ctrlCnfrm ctrlSetTooltip localize "STR_HR_GRG_Generic_AirDisabled";
-} else {
-    _ctrlCnfrm ctrlEnable _enable;
-    _ctrlCnfrm ctrlSetTextColor [1,1,1,1];
-    _ctrlCnfrm ctrlSetTooltip "";
 };
+
+_ctrlCnfrm ctrlEnable _enable;
+_ctrlCnfrm ctrlSetTextColor [1,1,1,1];
+_ctrlCnfrm ctrlSetTooltip "";
+

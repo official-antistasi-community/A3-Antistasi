@@ -525,6 +525,9 @@
         <Turkish>Uçaklara yalnızca dost bir hava üssünden erişebilirsiniz.</Turkish>
         <Chinesesimp>你仅能在友方空军基地内存取飞行器</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Generic_HelipadDisabled">
+        <Original>You can only access garaged helicopters from helipads</Original>
+      </Key>
       <Key ID="STR_HR_GRG_Generic_Anim">
         <Original>Customize</Original>
         <German>Anpassen</German>

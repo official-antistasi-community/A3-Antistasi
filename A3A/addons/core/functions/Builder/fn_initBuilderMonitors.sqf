@@ -39,6 +39,7 @@ while { true } do {
 
     diag_log format ["Adding remove action for item %1", cursorObject];
     cursorObject setVariable ["A3A_build_removeAction", true];
+    private _price = cursorObject getVariable ["A3A_build_price",10];
     [
         cursorObject,
         "Destroy",
@@ -52,9 +53,10 @@ while { true } do {
             // refund? Nah
             // Just delete the thing, let server clear out the array on saving
             deleteVehicle (_this#0);
+            if (_this#0 distance2D "Synd_HQ" < 100) then {[_price, {A3A_HQDetectionRadius = A3A_HQDetectionRadius - (_this/5)}] remoteExec ["call",2]}
         },
         {},
         [],
-        10
+        0.4 * sqrt _price;
     ] call BIS_fnc_holdActionAdd;
 };
