@@ -1,11 +1,14 @@
 /*
     Function to find suitable patrol position for marker
 
-Arguments:
+    Arguments:
     <POSITION> ATL position for search center
     <NUMBER> Minimum search radius
     <NUMBER> Maximum search radius
     <NUMBER> Distance to check for nearby objects
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
 */
 
 params ["_mrkPos", "_minRad", "_maxRad", "_checkRad"];

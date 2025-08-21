@@ -1,3 +1,14 @@
+/*
+    Garrison-local function to crew empty statics with suitable active units.
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

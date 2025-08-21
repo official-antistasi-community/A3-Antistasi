@@ -1,14 +1,17 @@
 /*
-    Add vehicle/static of specific type to enemy garrison
+    Server-side function to add vehicle/static of specific type to enemy garrison
     Slot type/number selected at higher level
 
-    Used by? Just init and reinf, so enemy garrisons?
-    Vehicles never added in any other way? Not yet...
-*/
+    Environment: Unscheduled, server
 
-// Not used by init, because it just dumps classnames & places straight into the array?
-// Should reinf use random slot or not?
-// 
+    Arguments:
+    <STRING> Marker name of garrison.
+    <STRING> Classname of vehicle to add to garrison.
+    <NUMBER> Slot number to place vehicle (index into spawnPlaces).
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

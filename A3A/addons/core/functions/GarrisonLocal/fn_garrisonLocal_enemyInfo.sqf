@@ -1,5 +1,17 @@
-// Garrison-local function to handle incident reports
-// type can be "detect" or "damage"
+/*
+    Garrison-local function to handle incident reports (kills, detection)
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name.
+    <STRING> Event type, can be "detect" or "damage".
+    <OBJECT> Enemy object that triggered the event.
+    <NUMBER> Knowsabout value for enemy object.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

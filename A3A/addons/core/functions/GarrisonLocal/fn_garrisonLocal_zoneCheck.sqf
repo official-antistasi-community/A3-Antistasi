@@ -1,12 +1,16 @@
-/*  Checks if the marker should change its owner after a unit died and flips it if need be
-    Execution on: Server or HC (garrison local)
-    Environment: Spawned? Shouldn't matter? Arguably should be a garrisonOp?
-    Params:
-        _marker : STRING : Name of the marker the unit died on
-        _forced : BOOL : If it's not from a kill
-    Returns:
-        Nothing
+/*
+    Garrison-local function to check whether the garrison has been defeated.
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name.
+    <BOOL> True if it was a timed check from an attack function.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
 */
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 

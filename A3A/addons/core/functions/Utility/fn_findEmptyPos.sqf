@@ -3,17 +3,20 @@
     Combines distance check for small objects and raycast for large objects
     Includes annular distribution adjustment
 
-Arguments:
+    Arguments:
     <POSITION> ATL search position
     <NUMBER> Minimum search radius
     <NUMBER> Maximum search radius
     <NUMBER> Radius to check for nearby objects
     <NUMBER> Maximum number of attempts 
 
-Returns:
+    Returns:
     <POSITION> ATL empty position, or empty array 
 
-Performance: ~0.015ms per attempt
+    Performance: ~0.015ms per attempt
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
 */
 
 params ["_center", "_minDist", "_maxDist", "_checkRad", "_attempts"];

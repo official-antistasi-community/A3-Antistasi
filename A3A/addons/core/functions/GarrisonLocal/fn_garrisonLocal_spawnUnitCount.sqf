@@ -1,4 +1,16 @@
-// used for enemy garrisons only?
+/*
+    Garrison-local function to spawn active units in enemy garrison.
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name.
+    <NUMBER> Number of troops to spawn.
+    <NUMBER> Troop quality.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

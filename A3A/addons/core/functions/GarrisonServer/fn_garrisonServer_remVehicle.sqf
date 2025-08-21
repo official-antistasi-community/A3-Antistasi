@@ -1,6 +1,15 @@
+/*
+    Server-side function to remove active vehicle from garrison
+    Only used by rebels at the moment?
 
-// Server-side unscheduled function to remove active vehicles from garrison
-// Only used for rebels at the moment?
+    Environment: Unscheduled, server
+
+    Arguments:
+    <OBJECT> Vehicle to remove from garrison (garrison autodetected).
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

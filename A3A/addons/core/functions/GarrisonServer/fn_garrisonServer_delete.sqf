@@ -1,7 +1,15 @@
-// Final cleanup for destroyed minor sites
-// called after despawn
-// In theory, nothing should be touching the garrison after this?
-// TODO: Check reinf logic
+/*
+    Final cleanup for destroyed minor sites, called after despawn
+    In theory, nothing should be touching the garrison after this?
+
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

@@ -1,5 +1,14 @@
-// Server-side, unscheduled
-// Sends specified garrison data to the new-UI function on the server
+/*
+    Server-side function to send garrison data to the new-UI function on the commander machine
+
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 // Currently there are no updates except when the UI requests them. Simpler control flow, almost always fine
 

@@ -1,12 +1,23 @@
-// Used for intentional rebels troop clears, moving HQ
-// Destruction of rebel & enemy minor sites (set delete to true)
-// _delete parameter is ignored if it's not a minor site
+/*
+    Server-side function to intentionally clear troops from rebel site, inc moving HQ
+    Also destruction of rebel & enemy minor sites (set delete to true)
+
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+    <BOOL> True to delete site. Ignored if not a minor site.
+    <BOOL> (Optional) True to return feedback to commander.
+    <BOOL> (Optional) True if it's an HQ move.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
 Trace_1("Called with params %1", _this);
-
 
 params ["_marker", "_delete", ["_feedback", false], ["_hqMove", false]];
 

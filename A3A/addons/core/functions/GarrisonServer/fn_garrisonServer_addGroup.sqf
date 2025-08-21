@@ -1,5 +1,15 @@
+/*
+    Server-side function for adding live units to garrison
 
-// Server-side function for adding live units to (rebel?) garrison
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+    <GROUP> Group to add to garrison.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

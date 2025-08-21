@@ -1,4 +1,17 @@
-// Server-only, unscheduled, for removing single unit type from rebel garrison (UI-driven)
+/*
+    Server-side function to remove single unit type from rebel garrison
+    Used from UI, provides feedback to client
+
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+    <STRING> Unit type (loadout name).
+    <NUMBER> Machine ID of client.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

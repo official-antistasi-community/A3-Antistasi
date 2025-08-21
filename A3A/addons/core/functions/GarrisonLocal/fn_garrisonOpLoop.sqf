@@ -1,3 +1,14 @@
+/*
+    Garrison-local loop to process garrison ops sent by server.
+
+    Environment: Scheduled. Runs on server and HCs.
+
+    Arguments: None. Uses A3A_garrisonOps array as input.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
+
 // spawn only
 // HC and server, client allowed for testing?
 

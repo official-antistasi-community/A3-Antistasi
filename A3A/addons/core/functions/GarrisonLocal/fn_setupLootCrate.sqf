@@ -1,3 +1,14 @@
+/*
+    Worker function to fill garrison loot crates
+
+    Environment: Scheduled, garrison-local.
+
+    Arguments:
+    <OBJECT> Box or vehicle to fill.
+    <BOOL> True if it's a proper outpost crate vs police station crate.
+    <HASHMAP> Local garrison data.
+    <STRING> Marker name.
+*/
 
 params ["_ammoBox", "_isLarge", "_garrison", "_marker"];
 

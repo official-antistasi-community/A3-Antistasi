@@ -1,4 +1,15 @@
-// Civ marker spawn. Input is city marker + "_civ", not a real marker
+/*
+    Garrison-local function for spawning civilian "garrison"
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name (actually spawn key, citymarker + "_civ")
+    <HASHMAP> Garrison data from server.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

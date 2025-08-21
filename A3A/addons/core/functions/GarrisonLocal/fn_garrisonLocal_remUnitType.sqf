@@ -1,5 +1,15 @@
-// Used to reduce rebel garrisons
-// Assume not used while under attack
+/*
+    Garrison-local function to remove units from rebel garrisons using UI. Assumed safe.
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name.
+    <STRING> Unit type (loadout name).
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

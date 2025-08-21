@@ -1,5 +1,16 @@
+/*
+    Server-side function for adding new units to enemy garrison
 
-// Server-side function to add new units to enemy garrison
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+    <NUMBER> Troop count to add.
+    <NUMBER> Troop quality of added units.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

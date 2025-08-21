@@ -1,5 +1,17 @@
-// Clear troops and potentially vehicles from garrison
-// Used by rebel UI actions, HQ moves, side changes and minor site deletion
+/*
+    Garrison-local function for clearing troops and potentially vehicles from garrison
+    Used by rebel UI actions, HQ moves, side changes and minor site deletion
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name.
+    <BOOL> True if vehicles shouldn't be removed.
+    <BOOL> True if it's a safe cleanup (troops should be deleted directly).
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

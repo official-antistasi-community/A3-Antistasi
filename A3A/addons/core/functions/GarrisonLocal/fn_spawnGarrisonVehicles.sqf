@@ -1,13 +1,24 @@
 /*
-    Spawn vehicles (sometimes crewed) in garrison
-    Worker function for spawnGarrison, runs on server and HCs
+    Worker function to spawn statics and vehicles in garrison.
+    Crews all statics and selected vehicles.
+
+    Environment: Scheduled, used by garrison spawn functions.
+
+    Arguments:
+    <HASHMAP> Active garrison data.
+    <STRING> Marker name.
+    <SIDE> Marker side.
+    <ARRAY> Remaining troops to use, either loadout names for rebel or [count, quality] for enemy.
+    <ARRAY> Remaining vehicles to spawn.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
 */
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
 params ["_garrison", "_marker", "_side", "_storedTroops", "_storedVehicles"];
-
 
 private _faction = Faction(_side);
 private _markerPos = markerPos _marker;

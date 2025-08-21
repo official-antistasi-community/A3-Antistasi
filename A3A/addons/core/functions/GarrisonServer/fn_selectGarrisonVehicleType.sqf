@@ -1,15 +1,18 @@
 /*
     Select suitable vehicle type for garrison slot
 
-Environment: Any?
+    Environment: Any
 
-Parameters:
+    Parameters:
     <HASHMAP> Faction to use
     <STRING> Place type, "staticMG", "vehicle" etc.
     <BOOL> True if it's for an airport (could generalize to site type?)
 
-Return value:
+    Return value:
     <STRING> Vehicle class, or nil if nothing suitable available in this faction
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
 */
 
 #include "..\..\script_component.hpp"

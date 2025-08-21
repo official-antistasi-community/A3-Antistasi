@@ -1,4 +1,14 @@
 /*
+    Find places for statics in major sites and add them to A3A_spawnPlacesHM
+
+    Environment: Init only
+    Arguments: None
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
+
+/*
 // old spawning code example
 private _dir = (getDir _building) - 180;
 private _zpos = AGLToASL (_building buildingPos 1);

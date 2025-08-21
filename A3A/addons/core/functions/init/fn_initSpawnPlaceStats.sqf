@@ -1,6 +1,13 @@
 /*
     Generate indexes & max & par values for each place type on major markers
     Data only used on server (initGarrisons & reinf)
+
+    Environment: Init only
+    Arguments:
+    <ARRAY> Array of marker names to process.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
 */
 
 #include "..\..\script_component.hpp"

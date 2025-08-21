@@ -1,5 +1,16 @@
-// Local garrison function for adding an already-spawned group
-// Can be used by either enemy or rebel
+/*
+    Garrison-local function for adding an already-spawned group
+    Can be used for either enemy or rebel markers
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name.
+    <GROUP> Group to add to active garrison.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

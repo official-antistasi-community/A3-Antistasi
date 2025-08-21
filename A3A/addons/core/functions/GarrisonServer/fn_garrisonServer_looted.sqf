@@ -1,5 +1,15 @@
-// Used by local garrison despawn to mark that loot has been stolen on server side
-// Kinda iffy because garrison could remain spawned for a while? Whatever
+/*
+    Server-side function used by local garrison despawn to mark that loot has been stolen on server side
+
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+    <STRING> Loot type, can be "crate" or "intel".
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

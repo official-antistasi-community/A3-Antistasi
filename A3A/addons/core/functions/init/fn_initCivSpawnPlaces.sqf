@@ -1,5 +1,15 @@
-// Generate civ car and boat places for a city
-// run in pre-init, purely based on map
+/*
+    Generate civ car and boat places for a city
+    Car places should be deterministic. Boat places are not.
+
+    Environment: Pre-init
+
+    Arguments:
+    <ARRAY> Marker name of city.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 // Perf: About 5ms for a dense 200m radius
 

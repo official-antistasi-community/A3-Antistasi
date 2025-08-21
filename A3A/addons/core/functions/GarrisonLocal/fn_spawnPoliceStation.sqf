@@ -1,4 +1,17 @@
-// Spawn police station objects and static units
+/*
+    Worker function to spawn police station objects and static units.
+
+    Environment: Scheduled, used by garrison spawn functions.
+
+    Arguments:
+    <HASHMAP> Active garrison data.
+    <STRING> Marker name.
+    <HASHMAP> Garrison data from server.
+    <ARRAY> Remaining troops to use, either loadout names for rebel or [count, quality] for enemy.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

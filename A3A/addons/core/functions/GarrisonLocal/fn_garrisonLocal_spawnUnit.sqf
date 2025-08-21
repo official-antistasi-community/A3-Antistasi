@@ -1,4 +1,15 @@
-// Spawn active unit in rebel garrison, ideally in current group
+/*
+    Garrison-local function to spawn active unit in rebel garrison.
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name.
+    <STRING> Unit type (loadout name).
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

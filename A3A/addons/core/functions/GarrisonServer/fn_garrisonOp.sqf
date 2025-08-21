@@ -1,5 +1,15 @@
-// Server-side function to dispatch a garrison op to appropriate machine
-// scheduled & unscheduled usage is permitted
+/*
+    Server-side function to dispatch a garrison op to appropriate machine
+
+    Environment: Server, scheduled or unscheduled
+
+    Arguments:
+    <STRING> Garrison op type.
+    <ARRAY> Parameters for garrison op. First parameter is always marker name.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

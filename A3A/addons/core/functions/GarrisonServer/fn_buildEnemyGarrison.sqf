@@ -1,10 +1,18 @@
-// Create initial troop & vehicle data for enemy garrison
-// Used for both new campaigns and fixing up garrisons from older saves
-// For an old save, _troopCount is provided
+/*
+    Create initial troop & vehicle data for enemy garrison
+    Used for both new campaigns and fixing up garrisons from older saves
+
+    Environment: Server
+
+    Arguments:
+    <STRING> Marker name of major enemy site.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-
 
 params ["_marker"];
 

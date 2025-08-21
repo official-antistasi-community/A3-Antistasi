@@ -1,4 +1,13 @@
-// Choose suitable police station building & vehicle spawn in larger towns
+/*
+    Choose suitable police station building & vehicle spawn in larger towns
+
+    Environment: Init only
+    Arguments: None
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
+
 // Used if A3A_garrison doesn't have a police station entry already: Usually new campaigns or compat loading
 // A3A_garrison should exist with empty vehicles array already
 
@@ -19,9 +28,7 @@ if (_policeStationTypes isEqualTo []) exitWith {
 
 private _minPop = getNumber (_mapInfo/"policeStationMinPop");
 
-private _policeSpawnStats =  createHashMapFromArray [ ["vehiclePolice", [[0], 1, 1]] ];
-
-//private _debugTypes = [];
+private _policeSpawnStats = createHashMapFromArray [ ["vehiclePolice", [[0], 1, 1]] ];
 
 // netId -> city marker name for destruction detection
 A3A_policeStations = createHashMap;
@@ -53,7 +60,6 @@ A3A_policeStations = createHashMap;
         private _types = _buildings apply { typeOf _x };
         Trace_2("Police stations types in %1: %2", _city, _types arrayIntersect _types);
 
-        //_debugTypes insert [-1, _buildings apply {typeof _x}, true];
         _stationPos = getPosATL selectRandom _buildings;
         _garrison set ["policeStation", _stationPos];         // only need one entry? Hmm. LootCD & intelCD go elsewhere.
 
@@ -83,14 +89,6 @@ A3A_policeStations = createHashMap;
     A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) + 4];     // need more police to fill a station
 
 } forEach citiesX;
-
-//Debug_1("Police station types used: %1", _debugTypes);
-
-// better way of placing vehicle outside building:
-
-// in each cardinal direction, start from bbreal + 5m, then raycast inwards
-// hmm, might not find roads necessarily
-// better to 
 
 
 /*

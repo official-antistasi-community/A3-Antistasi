@@ -1,5 +1,14 @@
-// Despawn any garrison
-// Also used for removing rebel roadblocks/watchposts
+/*
+    Garrison-local function for despawning civilian "garrison"
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name (actually spawn key, citymarker + "_civ")
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

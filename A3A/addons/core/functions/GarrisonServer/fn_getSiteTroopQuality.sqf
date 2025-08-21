@@ -1,4 +1,17 @@
-// Get troop quality for site
+/*
+    Function to get troop quality for site at current war level
+
+    Environment: Any
+
+    Arguments:
+    <STRING> Site type of garrison (eg. "city", "airport")
+    <SIDE> Side of garrison.
+    <NUMBER> Quality adjustment, may be random.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
+
 // Same code as buildEnemyGarrison but uses siteType for speed
 
 params ["_siteType", "_side", "_mod"];

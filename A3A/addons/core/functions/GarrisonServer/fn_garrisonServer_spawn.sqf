@@ -1,4 +1,14 @@
-// Server-side spawn function for both military and civ garrisons
+/*
+    Server-side spawn function for both military and civ garrisons
+
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

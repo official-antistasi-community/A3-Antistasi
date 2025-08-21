@@ -1,3 +1,16 @@
+/*
+    Garrison-local function to remove vehicle object from active garrison data.
+
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name.
+    <OBJECT> Vehicle to remove from garrison.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 

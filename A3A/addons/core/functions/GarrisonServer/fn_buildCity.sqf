@@ -1,6 +1,16 @@
-// Set up spawn place stats for reinforcements
-// If not already existing, select cars and boats to place in city
-// Will avoid placing anything near police spawns
+/*
+    Generate spawn place stats for cities
+    If not already existing, also select cars and boats to place in city
+
+    Environment: Server, init/load only
+
+    Arguments:
+    <STRING> Marker name of town (not spawn key).
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
+
 
 params ["_marker"];
 

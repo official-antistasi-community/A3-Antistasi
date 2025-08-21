@@ -1,11 +1,16 @@
-// Function for retreat/surrender of defeated garrison
-// Garrison side should already be switched in sidesX - should be faster than garrison op
+/*
+    Garrison-local function for retreat/surrender of defeated garrison
+    Troops retreat/surrender, civs are retained, statics and vehicle switch side
 
-// what does it do:
-// only removes troops?
-// civilians stay
-// statics and vehicles stay
-// switch side of vehicles and statics?
+    Environment: Scheduled. Should only be called by garrisonOpLoop.
+
+    Arguments:
+    <STRING> Marker name.
+    <SIDE> Winning/new side.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

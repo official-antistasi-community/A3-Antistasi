@@ -1,7 +1,18 @@
-// Store state for rebel garrison vehicles on despawn/save
-// Server-side, unscheduled
+/*
+    Server-side function to store state for rebel garrison vehicles on despawn/save
+
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
+
 // Can't use the local garrison due to despawn->spawn timing issue
 // Maybe should workaround that with spawn lockout? later
+// Relies on object being somewhere near the original, because we don't store IDs.
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

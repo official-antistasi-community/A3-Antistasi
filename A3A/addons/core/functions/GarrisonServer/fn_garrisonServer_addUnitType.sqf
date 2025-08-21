@@ -1,6 +1,18 @@
+/*
+    Server-side function for adding single unit type to rebel garrison
+	Kinda gross, handles the bad-input feedback cases as well
 
-// Server-only, unscheduled, for adding single unit type to rebel garrison
-// Kinda gross, handles the bad-input cases as well
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+    <STRING> Unit type to add (loadout name).
+    <NUMBER> Machine ID of calling client.
+	<BOOL> True if called by old UI (customhints new garrison info to client).
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()

@@ -1,7 +1,16 @@
-// Server-side function to add currently-existing vehicles to garrison data
-// Will remove from any current garrison
-// Autodetects new garrison if _marker is empty string 
-// Only used for rebel vehicles atm, so don't need pool change?
+/*
+    Server-side function to add currently-existing vehicle to garrison data
+    Will remove from any current garrison
+
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison. Empty string to autodetect from vehicle position.
+    <OBJECT> Vehicle to add to garrison.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
@@ -15,12 +24,6 @@ if (!isNil "_oldMarker") then { [_vehicle] call A3A_fnc_garrisonServer_remVehicl
 
 if (_marker == "") then { _marker = [getPosATL _vehicle] call A3A_fnc_getMarkerForPos };
 if (_marker == "") exitWith {};
-
-// Should work now, cleaned up on despawn if you leave junk in enemy garrisons
-/*if (sidesX getVariable _marker != teamPlayer) exitWith {
-    // Is this actually an error? Could be cleaned up later...
-    Error("Attempted to add vehicle to non-rebel garrison");
-};*/
 
 private _garrison = A3A_garrison get _marker;
 private _arrayType = call {

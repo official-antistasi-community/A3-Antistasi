@@ -1,9 +1,16 @@
-// This is now server-only
+/*
+    Return formatted string with information for rebel garrison.
+
+    Environment: Server, probably unscheduled.
+
+    Arguments:
+    <STRING> Marker name.
+*/
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params["_marker"];
+params ["_marker"];
 
 private _garrison = A3A_garrison get _marker;
 private _limit = [_marker] call A3A_fnc_getGarrisonLimit;

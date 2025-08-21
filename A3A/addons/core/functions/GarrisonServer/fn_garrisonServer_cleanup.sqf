@@ -1,6 +1,18 @@
-// Used to cleanup off-faction vehicles and buildings from unspawned enemy garrisons
-// Also refund any excess troops
-// Don't touch buildings for now?
+/*
+    Server-side function to clean up off-faction vehicles from unspawned enemy or civ garrisons
+    Also refunds any excess troops
+
+    Environment: Unscheduled or init, server
+
+    Arguments:
+    <STRING> Marker name or spawn key of garrison.
+    <BOOL> True if called to sanity-check saves. Doesn't currently make a difference.
+    <BOOL> True for only cleanup excess troops, not vehicles.
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
+
 // side needs to be correct when called
 // initVarServer must be complete, and enemy resources must be set
 
