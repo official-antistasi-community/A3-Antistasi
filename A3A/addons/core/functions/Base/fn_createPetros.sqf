@@ -10,9 +10,9 @@ private _groupPetros = if (!A3A_petrosMoving) then {createGroup teamPlayer} else
 
 if (isNil "_location") then {
 	if (A3A_petrosMoving) then {
-		_location = getPosATL petros
+		_location = getPosATL petros getPos [random 10, random 360];
 	} else {
-		_location = getMarkerPos respawnTeamPlayer
+		_location = getMarkerPos respawnTeamPlayer getPos [random 10, random 360];
 	};
 };
 
@@ -23,7 +23,7 @@ private _identity = createHashMapFromArray [
     ["speaker", "Male06GRE"],
     ["pitch", 1.1]
 ];
-petros = [_groupPetros, FactionGet(reb,"unitPetros"), _location, [], 10, "NONE", _identity] call A3A_fnc_createUnit;
+petros = [_groupPetros, FactionGet(reb,"unitPetros"), _location, [], 0, "NONE", _identity] call A3A_fnc_createUnit;
 publicVariable "petros";
 deleteVehicle _oldPetros;		// Petros should now be leader unless there's a player in the group
 deleteGroup group _oldPetros;	// won't delete unless empty, should be safe
