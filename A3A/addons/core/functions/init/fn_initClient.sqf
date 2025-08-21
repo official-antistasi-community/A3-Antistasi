@@ -39,8 +39,9 @@ if !(isServer) then {
         call A3A_fnc_addNodesNearMarkers;
 
         // Could generate this locally instead if it's deterministic...
+        waitUntil { sleep 0.1; !isNil "A3A_spawnPlacesDone" };			// This one doesn't trigger until server background init
+        [clientOwner, "A3A_garrisonSize"] remoteExecCall ["publicVariableClient", 2];
         [clientOwner, "A3A_spawnPlacesHM"] remoteExecCall ["publicVariableClient", 2];
-
         waitUntil { sleep 0.1; !isNil "A3A_spawnPlacesHM" };			// Garrison functionality needs spawn places
 
         A3A_activeGarrison = createHashMap;

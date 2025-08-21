@@ -8,8 +8,9 @@ Trace_1("Called with %1", _this);
 
 params ["_marker", "_group"];
 
-// Assume that setGroupOwner has already been called by whatever called this function?
-// Makes sense, as that's probably from the server...
+// Group may not be local at this point, because setGroupOwner takes five seconds with zero ping. 
+// patrolLoop seems to work but updateStatics does not, because splitting the group leaves units at the wrong locality
+// Worked around in updateStatics
 
 // Add local killed & handleDamage EH if it's missing. Unit may not be at original locality
 {

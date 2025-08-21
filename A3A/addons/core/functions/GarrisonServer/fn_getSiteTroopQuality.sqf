@@ -10,6 +10,6 @@ call {
     if (_siteType == "airport") exitWith {(1.5 + _qMod) min 2};
     if (_siteType == "outpost") exitWith {(1.4 + _qMod) min 2};
     if (_siteType == "seaport") exitWith {(1.2 + _qMod) min 2};
-    if (_siteType == "camp") exitWith {3};
+    if (_siteType == "camp") exitWith {if (_side == Invaders) then {(2 + _qMod) min 3} else {(1 + 2*_qMod) min 3}};
     (1 + _qMod) min 2;              // resource, factory or roadblock
 };

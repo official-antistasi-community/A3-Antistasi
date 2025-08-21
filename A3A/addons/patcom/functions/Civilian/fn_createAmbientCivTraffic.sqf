@@ -22,7 +22,6 @@
         The marker must be provided from citiesX
 */
 
-if (!isServer and hasInterface) exitWith{};
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 

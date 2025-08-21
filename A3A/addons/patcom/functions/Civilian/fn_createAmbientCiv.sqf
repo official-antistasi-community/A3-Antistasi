@@ -24,9 +24,6 @@
 FIX_LINE_NUMBERS()
 params ["_markerX"];
 
-// We only want to run on the server and not on the players
-if (!isServer and hasInterface) exitWith{};
-
 if (_markerX in destroyedSites) exitWith {};
 
 private _spawnKey = _markerX + "_civ";

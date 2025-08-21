@@ -8522,6 +8522,12 @@
         <Turkish>Seçilen birlikleri garnizon olarak göndereceğiniz bölgeyi seçin.</Turkish>
         <Chinesesimp>选择您将作为驻军发送的区域。</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_garrison_vehicle_added">
+        <Original>Vehicle added to garrison. Cargo and inventory may not be preserved when you leave the area. Entering the vehicle will remove it from the garrison.</Original>
+      </Key>
+      <Key ID="STR_A3A_garrison_vehicle_outside">
+        <Original>This vehicle is not within a rebel garrison."</Original>
+      </Key>
       <Key ID="STR_A3A_garrisons_header">
         <Original>Garrisons</Original>
         <German>Garnisonen</German>

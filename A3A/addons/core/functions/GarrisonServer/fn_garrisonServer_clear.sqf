@@ -76,7 +76,8 @@ if (_safe) then {
 };
 
 if (_marker in A3A_garrisonMachine) then {
-    ["clear", [_marker, false, _safe]] call A3A_fnc_garrisonOp;
+    private _troopsOnly = !(_delete or _hqMove);
+    ["clear", [_marker, _troopsOnly, _safe]] call A3A_fnc_garrisonOp;
     if (_delete) then { [_marker] call A3A_garrisonServer_despawn };
 };
 

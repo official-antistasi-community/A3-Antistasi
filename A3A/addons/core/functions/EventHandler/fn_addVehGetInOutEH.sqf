@@ -28,6 +28,7 @@ _veh addEventHandler ["GetOut", {
     params ["_veh", "_role", "_unit"];
     if (side group _unit != teamPlayer) exitWith {};		// Only care about rebels
     if (crew _veh isNotEqualTo []) exitWith {};             // empty vehicles only
+    if !(_veh isNil "markerX") exitWith {};                 // already in a garrison
 
     if (!A3A_petrosMoving and { _veh inArea "Synd_HQ" }) then {
     	["Synd_HQ", _veh] call A3A_fnc_garrisonServer_addVehicle;

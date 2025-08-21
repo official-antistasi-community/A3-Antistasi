@@ -9,7 +9,7 @@ private _spawnOps = ["spawn", "spawnCiv"];
 
 while {true} do
 {
-    if (A3A_garrisonOps isEqualTo []) then { sleep 1; continue };
+    if (A3A_garrisonOps isEqualTo []) then { sleep 0.1; continue };
 
     private _nextOp = A3A_garrisonOps deleteAt 0;      // atomic on A3A_garrisonOps
     _nextOp params ["_opType", "_params"];

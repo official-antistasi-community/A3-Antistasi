@@ -67,7 +67,8 @@ if (_winner == teamPlayer) then
 	private _reveal = [markerPos _markerX] call A3A_fnc_calculateSupportCallReveal;
 	_reveal = [_loser, markerPos _markerX, _reveal] call A3A_fnc_useRadioKey;
 
-	[[_markerX, _loser, _vehCount, _reveal], "A3A_fnc_singleAttack"] call A3A_fnc_scheduler;
+	// Run on server for now because it needs availableBases functions
+	[_markerX, _loser, _vehCount, _reveal] spawn A3A_fnc_singleAttack;
 
 	// just estimates here. 
 	A3A_supportStrikes pushBack [_loser, "TROOPS", markerPos _markerX, time + 2700, 2700, _resources];

@@ -39,13 +39,17 @@ private _freeTroops = _garrison get "troops" select { vehicle _x == _x } select 
 _freeTroops = _freeTroops select { _x getVariable "unitType" in _crewTypes };
 if (_freeTroops isEqualTo []) then { continue };
 
+// Routine does not work on non-local units
+private _nonLocal = _freeTroops select { !local _x };
+_freeTroops = _freeTroops - _nonLocal;
+
 private _fnc_mountStatic = {
     params ["_unit", "_static", "_isMortar"];
 
     _unit enableAI "ALL";
     _unit setUnitPos "UP";
     _unit assignAsGunner _static;
-    _unit doMove (getPosATL _static);
+    //_unit doMove (getPosATL _static);
     [_unit] orderGetIn true;
 
     sleep (_unit distance2d _static);
@@ -84,3 +88,11 @@ private _fnc_mountStatic = {
     [_unit] joinSilent _group;
     [_unit, _x, _isMortar] spawn _fnc_mountStatic;
 } forEach _freeStatics;
+
+// If there are non-local units, fire this function again after 10 seconds
+if (_nonLocal isEqualTo []) exitWith {};
+_marker spawn {
+    sleep 10;
+    if !(_this in A3A_activeGarrison) exitWith {};
+    A3A_garrisonOps pushBack ["updateStatics", [_this]];
+};

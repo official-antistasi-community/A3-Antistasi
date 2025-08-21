@@ -200,7 +200,6 @@ class CfgFunctions
             class translateVariable {};
             class unlockStatic {};
             class unlockVehicle {};
-            class zoneCheck {};
         };
 
         class Builder {
@@ -325,7 +324,6 @@ class CfgFunctions
             class garrisonLocal_despawn {};
             class garrisonLocal_despawnCiv {};
             class garrisonLocal_enemyInfo {};
-            class garrisonLocal_moveHQ {};
             class garrisonLocal_pause {};
             class garrisonLocal_remUnitType {};
             class garrisonLocal_remVehicle {};
@@ -579,6 +577,7 @@ class CfgFunctions
             class addFIAveh {};
             class addSquadVeh {};
             class addToGarrison {};
+            class addToGarrisonServer {};
             class build {};
             class buildCreateVehicleCallback {};
             class buildMinefield {};

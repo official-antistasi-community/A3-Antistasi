@@ -57,14 +57,15 @@ Info("Background init started");
 // No reason not to do this early
 [] execVM QPATHTOFOLDER(Scripts\fn_advancedTowingInit.sqf);
 
+// Don't need these for displaying the map, no save dependence
+Info("Initializing civ spawn places");
+{ isNil { _x call A3A_fnc_initCivSpawnPlaces } } forEach citiesX;
+A3A_spawnPlacesDone = true; publicVariable "A3A_spawnPlacesDone";       // let the headless clients know
+
 // Nav stuff, should have no parameter/save dependence at all
 call A3A_fnc_loadNavGrid;
 call A3A_fnc_addNodesNearMarkers;		    // Needs data from navgrid & initZones
 call A3A_fnc_generateRoadblockPairs;        // only needed on server
-
-// Don't need these for displaying the map, no save dependence
-Info("Initializing civ spawn places");
-{ isNil { _x call A3A_fnc_initCivSpawnPlaces } } forEach citiesX;
 
 // JNA preload, does some item type caching, no param dependence
 Info("Server JNA preload started");
@@ -231,7 +232,7 @@ call A3A_fnc_initSupports;
 call A3A_fnc_generateRebelGear;
 
 // Needs A3A_rebelGear for equipping
-call A3A_fnc_createPetros;
+[getPosATL petros] call A3A_fnc_createPetros;           // preserve current position (potentially from save)
 
 // Some of these may already be unhidden but we make sure
 { _x hideObjectGlobal false } forEach [boxX, flagX, vehicleBox, fireX, mapX, petros];
@@ -423,5 +424,19 @@ savingServer = false;           // enable saving
     };
 };
 
+//Unit locality logging
+[] spawn {
+    if (logLevel < 3) exitWith {};
+    while {true} do
+    {
+        sleep 60;
+        if (allPlayers - entities "HeadlessClient_F" isEqualTo []) then { continue };
+
+        private _countSrv = { local _x } count allUnits;
+        private _countHC = { owner _x in hcArray } count allUnits;
+        private _countClient = count allUnits - _countSrv - _countHC;
+        Debug_3("Units on server: %1 HC: %2 clients: %3", _countSrv, _countHC, _countClient);
+    };
+};
 
 Info("initServer completed");

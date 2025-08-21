@@ -81,46 +81,4 @@ if (_earlyEscape) exitWith {
     [_titleStr, localize "STR_A3A_garrison_fail_no_specific_units"] call A3A_fnc_customHint;
 };
 
-private _limit = [_nearX] call A3A_fnc_getGarrisonLimit;
-private _oldGarrison = A3A_garrison get _nearX get "troops";        // assume rebel garrison at this point...
-
-if (_limit != -1) then {
-    private _newGarrisonCount = count _unitsX + count _oldGarrison;
-
-    switch (true) do {
-        case (count _oldGarrison == _limit): {
-            [_titleStr, localize "STR_A3A_garrison_full_limit"] call A3A_fnc_customHint;
-            _earlyEscape = true;
-        };
-        case (_newGarrisonCount >= _limit): {
-            private _unitsToRefundCount = _newGarrisonCount - _limit;
-            private _unitsToRefund = _unitsX select [0, _unitsToRefundCount];
-            _unitsX deleteRange [0, _unitsToRefundCount];
-
-            private _refundMoney = 0;
-            {
-                private _unitType = _x getVariable "unitType";
-                _refundMoney = _refundMoney + (server getVariable _unitType);
-                deleteVehicle _x;
-            } forEach _unitsToRefund;
-
-            [count _unitsToRefund,_refundMoney] remoteExec ["A3A_fnc_resourcesFIA",2];
-            [_titleStr, localize "STR_A3A_garrison_exceed_limit"] call A3A_fnc_customHint;
-        };
-        default {
-            //proceed as usual
-        };
-    };
-};
-if (_earlyEscape) exitWith {};
-
-if (isNull _groupX) then {
-    _groupX = createGroup teamPlayer;
-    _unitsX joinSilent _groupX;
-    [_titleStr, localize "STR_A3A_garrison_adding_to_garrison"] call A3A_fnc_customHint;
-} else {
-    [_titleStr, format [localize "STR_A3A_garrison_adding_to_garrison_hc", groupID _groupX]] call A3A_fnc_customHint;
-    theBoss hcRemoveGroup _groupX;
-};
-
-[_nearX, _groupX, clientOwner] remoteExecCall ["A3A_fnc_garrisonServer_addGroup", 2];
+[_nearX, _groupX, _unitsX, clientOwner] remoteExecCall ["A3A_fnc_addToGarrisonServer", 2];
