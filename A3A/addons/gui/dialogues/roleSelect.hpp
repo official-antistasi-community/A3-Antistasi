@@ -12,9 +12,6 @@ Replication and distribution of this file or parts of it without written permiss
 // gap2 starts 35 ends 37
 // picture starts 37 ends 78
 // gap3 starts 78 ends 80
-// ehhh....works?
-// picture is as close to 1920x1080 as is worth getting
-// actually fuck the padding, cut it to 2 on each side
 // check if its possible to put a divider line on y 34-35
 // or otherwise seperate the two controls sections somehow
 
@@ -39,7 +36,7 @@ class A3A_RoleSelectDialog : A3A_DefaultDialog
         // Left hand role buttons
         class RoleButtons : A3A_DefaultControlsGroup
         {
-            idc = A3A_IDC_ROLESELECTTABS;
+            idc = -1;
             x = DIALOG_X;
             y = DIALOG_Y;
             w = 35 * GRID_W;
@@ -198,7 +195,6 @@ class A3A_RoleSelectDialog : A3A_DefaultDialog
         };
 
         // Right hand content with selection buttons, image, description
-        // type shit?
         class BodyContent: A3A_DefaultControlsGroup
         {
             idc = A3A_IDC_ROLESELECTTABS;
@@ -221,7 +217,6 @@ class A3A_RoleSelectDialog : A3A_DefaultDialog
                 };
                 // end of picture is height 25
                 // add text boxes 5 units down?
-                // yeah, got plenty of space to kill here
                 class InfoLine1 : A3A_Text
                 {
                     idc = A3A_IDC_ROLEINFOTEXT1;
@@ -251,7 +246,7 @@ class A3A_RoleSelectDialog : A3A_DefaultDialog
                 };
                 class MainInfoButton : A3A_Button
                 {
-                    idc = A3A_IDC_ROLEINFOTEXT3;
+                    idc = A3A_IDC_ROLEMAININFOBUTTON;
                     text = "Main Info";
                     onButtonClick = "[""openInfo""] call A3A_GUI_fnc_roleSelectDialog;";
                     x = 2 * GRID_W;
@@ -261,7 +256,7 @@ class A3A_RoleSelectDialog : A3A_DefaultDialog
                 };
                 class SetRoleButton : A3A_Button
                 {
-                    idc = A3A_IDC_ROLEINFOTEXT3;
+                    idc = A3A_IDC_ROLEINFOSELECTROLE;
                     text = "Set Role";
                     onButtonClick = "[""selectRole""] call A3A_GUI_fnc_roleSelectDialog;";
                     x = (DIALOG_X - 22) * GRID_W;

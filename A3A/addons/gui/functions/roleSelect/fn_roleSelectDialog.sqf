@@ -1,6 +1,6 @@
 /*
-Copyright Ian Feickert, used with permission by the Antistasi Community project
-Replication and distribution of this file or parts of it without written permission by the author is strictly prohibited.
+Copyright 2025 Ian Feickert. All rights reserved.
+Used and distributed with permission by the Antistasi Community project.
 */
 
 /*
@@ -32,8 +32,8 @@ private _display = findDisplay A3A_IDD_ROLESELECTDIALOG;
 
 private _bannerImage = _display displayCtrl A3A_IDC_ROLEBANNERPICTURE;
 private _infoLine1 = _display displayCtrl A3A_IDC_ROLEINFOTEXT1;
-private _infoLine2 = _display displayCtrl A3A_IDC_ROLEINFOTEXT1;
-private _infoLine3 = _display displayCtrl A3A_IDC_ROLEINFOTEXT1;
+private _infoLine2 = _display displayCtrl A3A_IDC_ROLEINFOTEXT2;
+private _infoLine3 = _display displayCtrl A3A_IDC_ROLEINFOTEXT3;
 private _mainInfoButton = _display displayCtrl A3A_IDC_ROLEMAININFOBUTTON;
 private _setRoleButton = _display displayCtrl A3A_IDC_ROLESETROLEBUTTON;
 
@@ -64,7 +64,7 @@ switch (_mode) do
 		_display setVariable ["displayState",_roleName];
 		_imagePath = format ["x\A3A\addons\GUI\dialogues\textures\banner_%1.paa",_roleName];
 		_bannerImage ctrlSetText _imageName;
-		_currentCount = allPlayers count {getVariable ["A3A_Role", "none"] == _roleName};
+		_currentCount = allPlayers count {_x getVariable ["A3A_Role", "none"] == _roleName};
 		_maxCount = [_roleName] call FUNCMAIN(getRoleCap);
 		_firstLineText = localize format ["STR_antistasi_dialogs_roleselect_info_%1", _roleName];
 		_secondLineText = localize format ["STR_antistasi_dialogs_roleselect_utility_%1", _roleName];

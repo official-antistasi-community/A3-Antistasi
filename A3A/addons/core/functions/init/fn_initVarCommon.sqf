@@ -219,9 +219,9 @@ A3A_roleTraitHM = createHashMapFromArray [
         ]
     ],
     ["engineer", createHashMapFromArray [
-            ["camouflageCoef", 1.0],
-            ["audibleCoef", 1.0],
-            ["loadCoef", 1.0],
+            ["camouflageCoef", 0.9],
+            ["audibleCoef", 0.9],
+            ["loadCoef", 1.4],
             ["medic", false],
             ["explosiveSpecialist", true],
             ["UAVHacker", false],

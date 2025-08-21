@@ -380,6 +380,7 @@ boxX addAction [localize "STR_A3A_fn_init_initclient_addact_transfer", {[] spawn
 flagX allowDamage false;
 flagX addAction [localize "STR_A3A_fn_init_initclient_addact_recruit", { if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_init_initclient_recunit", localize "STR_A3A_fn_init_initclient_recunit_no"] call A3A_fnc_customHint;} else { if (A3A_GUIDevPreview) then {createDialog "A3A_RecruitDialog";} else {[] spawn A3A_fnc_unit_recruit;};};},nil,0,false,true,"","(petros == leader group petros)",4];
 flagx addAction [localize "STR_A3A_fn_init_initClient_addAct_recruitSquad", { createDialog "A3A_RecruitSquadDialog"; },nil,0,false,true,"","A3A_GUIDevPreview and (_this == theBoss) and (petros == leader group petros)",4];
+flagX addAction ["Change Role", { createDialog "A3A_RoleSelectDialog"; },nil,4,false,true,"","",4];
 
 //Adds a light to the flag
 private _flagLight = "#lightpoint" createVehicle (getPos flagX);
@@ -464,7 +465,7 @@ Info("initClient completed");
 // We can now ask for their preferred role
 _playerCount = count (allPlayers - (entities "HeadlessClient_F"));
 if (_playerCount > 1) then {
-    createDialog "A3A_RoleSelectionDialog"; // No need to ask for role if there's only one player
+    createDialog "A3A_RoleSelectDialog"; // No need to ask for role if there's only one player
 } else {
     player setVariable ["A3A_Role", "rifleman", true]; // commander was already setup player
 };

@@ -4042,7 +4042,7 @@
     </Container>
     <Container name="setup_dialog">
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_badFactions">
-        <Original>he currently selected factions are not loaded.\nGo to the Factions tab and select available factions.</Original>
+        <Original>The currently selected factions are not loaded.\nGo to the Factions tab and select available factions.</Original>
         <Russian>Выбранные в данный момент фракции не загружены.\nПерейдите на вкладку Фракции и выберите доступные фракции.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_copy">
