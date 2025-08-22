@@ -37,7 +37,7 @@
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["CUP_B_A10_DYN_USA"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["a3a_Plane_Fighter_03_grey_F"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["CUP_B_AV8B_DYN_USMC"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["CUP_B_C47_USA", "CUP_B_C130J_USMC"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["US85_UH60"]] call _fnc_saveToTemplate;

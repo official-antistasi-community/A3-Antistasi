@@ -22,7 +22,8 @@ class DOUBLES(ADDON,Nodes)
     #include "Nodes\VN.hpp"
     #include "Nodes\WS.hpp"
     #include "Nodes\SFP.hpp"
-     #include "Nodes\CWR.hpp"
+    #include "Nodes\CWR.hpp"
+    #include "Nodes\CSLA.hpp"
 };
 
 class DOUBLES(ADDON,Cargo)
