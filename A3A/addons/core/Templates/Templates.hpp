@@ -1716,7 +1716,6 @@ class Templates
 
     class CSLA_AI_US_Army_Temperate  : CSLA_Base
     {
-        basepath = QPATHTOFOLDER(Templates\CSLA); //the path to the folder the template is located in, this translates to "\x\A3AE\addons\templates\Templates\Vanilla"
         side = "Inv"; //the side the faction defaults to, one of the following: Inv, Occ, Reb, Civ
         flagTexture = "a3\data_f\flags\flag_us_co.paa"; //path to an icon to be displayed in the selector
         name = "US ARMY Temprate"; //the name shown in the selector

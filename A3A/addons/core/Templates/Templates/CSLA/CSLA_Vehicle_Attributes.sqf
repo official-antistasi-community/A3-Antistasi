@@ -6,6 +6,6 @@
     ["AFMC_M163", ["cost", 100]],
     ["CSLA_FIA_PLdvK59V3S", ["cost", 95]],
     ["CSLA_PLdvK59V3S_des", ["cost", 95]],
-    ["CSLA_PLdvK59V3S", ["cost", 95]],
+    ["CSLA_PLdvK59V3S", ["cost", 95]]
 
 ]] call _fnc_saveToTemplate;
