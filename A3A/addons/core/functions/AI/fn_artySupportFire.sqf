@@ -22,12 +22,13 @@ private _fnc_manageMarkers = {
 		_mrkEllipse setMarkerBrushLocal "FDIAGONAL";
 		private _radius = [30, _detail] select (_strikeType == "suppress");
 		_mrkEllipse setMarkerSizeLocal [_radius, _radius];
-		_mrkEllipse1 setMarkerColor "ColorGUER";
+		_mrkEllipse setMarkerColor "ColorGUER";
 	};
 	private _fnc_makeFinal = {
-		_mrkFinal1 setMarkerShapeLocal "ICON";
-		_mrkFinal1 setMarkerTypeLocal "hd_dot";
-		_mrkFinal1 setMarkerColor "ColorBlack";
+		params ["_mrkFinal"];
+		_mrkFinal setMarkerShapeLocal "ICON";
+		_mrkFinal setMarkerTypeLocal "hd_dot";
+		_mrkFinal setMarkerColor "ColorBlack";
 	};
 	private _mrkEllipse1 = createMarkerLocal [format ["Arty%1", random 100], _startPos];
 	[_mrkEllipse1] call _fnc_makeEllipse;
@@ -62,7 +63,7 @@ private _fnc_manageMarkers = {
 			private _mrkTextBarrage = format ["Barrage: %1x %2", str _rounds, _shortName];
 			_mrkBarrageLine setMarkerText _mrkTextBarrage;
 			_markers append [_mrkBarrageLine, _mrkEllipse2, _mrkFinal2];
-			_notiString = _mrkTextBarrage;
+			_notiString = format ["barrage: %1x %2", str _rounds, _shortName];
 		};
 		case ("suppress"): 
 		{
@@ -116,7 +117,7 @@ private _ang = if (_strikeType == "barrage") then {[_startPos,_detail] call BIS_
 	diag_log _this;
 	[_x, _roundsPerUnit, _typeAmmunition, _strikeType, _startPos, _interval, _ang, _detail] spawn {
 		diag_log _this;
-		params ["_piece", "_rounds", "_ammo", "_strikeType", "_startPos", "_interval", "_ang"," _radius"];
+		params ["_piece", "_rounds", "_ammo", "_strikeType", "_startPos", "_interval", "_ang", "_radius"];
 		private _pos = [_startPos,random 10,random 360] call BIS_fnc_relPos; // close by target position, they're not 100% accurate;
 		for "_r" from 1 to _rounds do
 		{

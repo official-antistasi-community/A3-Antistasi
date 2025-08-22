@@ -1098,7 +1098,7 @@ switch (_mode) do
         private _endPos = _fireMissionControlsGroup getVariable ["endPos", []];
         private _strikeRadius = _fireMissionControlsGroup getVariable ["strikeRadius", 200];
         private _strikeDelay = _fireMissionControlsGroup getVariable ["strikeDelay", 45];
-        private _detail = if (_strikeType == "barrage") then {_endPos} else {_shellDict#3};
+        private _detail = if (_strikeType == "barrage") then {_endPos} else {_strikeDelay};
 
         [_units,_shellType,_shortName,_strikeType,_roundsNumber,_startPos,_detail] spawn A3A_fnc_artySupportFire;
     };
