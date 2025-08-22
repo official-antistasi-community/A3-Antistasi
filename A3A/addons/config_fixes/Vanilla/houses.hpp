@@ -1,3 +1,6 @@
+// Copyright 2025 John Jordan. All Rights Reserved.
+// Used and distributed by the Antistasi Community project with permission.
+
 class House_F;
 class Land_i_House_Big_01_V1_F : House_F {
     A3A_policeStationObjects[] = {

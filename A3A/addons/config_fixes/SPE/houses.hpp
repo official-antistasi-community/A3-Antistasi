@@ -1,3 +1,6 @@
+// Copyright 2025 Ian Feickert. All Rights Reserved.
+// Used and distributed by the Antistasi Community project with permission.
+
 // SPE police stations
 class SPE_building_base;
 class SPE_agriculture_base;

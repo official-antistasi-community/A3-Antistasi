@@ -1,3 +1,6 @@
+// Copyright 2025 Ian Feickert. All Rights Reserved.
+// Used and distributed by the Antistasi Community project with permission.
+
 // VN police stations
 class Land_vn_building_urban_base;
 class Land_vn_building_urban_small_base;

@@ -1,3 +1,6 @@
+// Copyright 2025 John Jordan. All Rights Reserved.
+// Used and distributed by the Antistasi Community project with permission.
+
 // No inheritance here so very spammy
 
 // Summer houses
