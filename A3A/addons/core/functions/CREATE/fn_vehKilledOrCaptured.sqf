@@ -2,6 +2,10 @@
 	Updates enemy vehicle reserve pool, city support and aggro for vehicle destruction or capture
 	Also handles the ownerSide update and enabling despawner on rebel capture
 
+	Garrison updates handled in GetIn for captured (if mobile) and EntityKilled for killed
+
+	Environment: Server, unscheduled now?
+
 	Params:
 	1. Object: Vehicle object
 	2. Side: Side of unit that captured or destroyed the vehicle
@@ -10,12 +14,13 @@
 */
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+
 params ["_veh", "_sideEnemy", ["_captured", false], ["_killer", objNull]];
 
 private _type = typeof _veh;
 private _side = _veh getVariable ["ownerSide", teamPlayer];			// default because Zeus
 
-if (_captured && (_side == _sideEnemy)) exitWith {};
+if (_captured && (_side == _sideEnemy or !alive _veh)) exitWith {};
 
 private _act = if (_captured) then {"captured"} else {"destroyed"};
 ServerDebug_4("%1 of %2 %3 by %4", _type, _side, _act, _sideEnemy);
@@ -39,7 +44,9 @@ if ((_side == Occupants or _side == Invaders) and _vehCost > 0) then
 		// Vehicle not pre-resourced, deplete both pools
 		[-_vehCost, _side, "legacy"] remoteExecCall ["A3A_fnc_addEnemyResources", 2];
 	};
-	[_side, getPos _veh, 2*_vehCost/3, _killer] remoteExec ["A3A_fnc_addRecentDamage", 2];		// other third applied in HandleDamage
+
+	// Hmm. Shouldn't be added for a capture?
+	[_side, getPosATL _veh, 2*_vehCost/3, _killer] remoteExec ["A3A_fnc_addRecentDamage", 2];		// other third applied in HandleDamage
 
 	if (_sideEnemy != teamPlayer) exitWith {};
 
@@ -54,7 +61,7 @@ if (_side == civilian) then
 	if (_sideEnemy != teamPlayer) exitWith {};
 
 	// Punish players slightly for stealing cars. Code used to be in vehDespawner.
-	private _pos = position _veh;
+	private _pos = getPosATL _veh;
 	[0, -1, _pos] remoteExec ["A3A_fnc_citySupportChange", 2];
 
 	private _city = [citiesX, _pos] call BIS_fnc_nearestPosition;
@@ -76,10 +83,11 @@ if (_side == civilian) then
 if (_captured) then
 {
 	if (_sideEnemy == teamPlayer) then {
-		// Remove from vehicle despawner. Should work because this function is called locally to original vehicle creator
+		// Remove from vehicle despawner. Should work if called on the server, because HCs can only spawn enemy vehicles and clients can only spawn friendlies
 		private _despawnerHandle = _veh getVariable "A3A_despawnerHandle";
 		if (!isNil "_despawnerHandle") then { terminate _despawnerHandle; _veh setVariable ["A3A_despawnerHandle", nil]; };
 	};
 	// Do the actual side-switch
 	_veh setVariable ["ownerSide", _sideEnemy, true];
+
 };

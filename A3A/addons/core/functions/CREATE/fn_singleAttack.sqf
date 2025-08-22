@@ -49,7 +49,7 @@ while {true} do
     };
 
     // Attempt to flip marker
-    [_mrkDest, _markerSide] remoteExec ["A3A_fnc_zoneCheck", 2];
+    ["zoneCheck", [_mrkDest, true]] remoteExecCall ["A3A_fnc_garrisonOp", 2];       // could be three different machines...
     sleep 30;
 };
 

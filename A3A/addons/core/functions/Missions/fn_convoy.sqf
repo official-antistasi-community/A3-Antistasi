@@ -39,7 +39,6 @@ private _convoyTypes = [];
 if ((_mrkDest in airportsX) or (_mrkDest in outposts)) then
 {
     _convoyTypes = ["Ammunition","Armor"];
-    if (_mrkDest in outposts) then {if (((count (garrison getVariable [_mrkDest, []]))/2) >= [_mrkDest] call A3A_fnc_garrisonSize) then {_convoyTypes pushBack "Reinforcements"}};
 }
 else
 {
@@ -50,7 +49,6 @@ else
     else
     {
         if ((_mrkDest in resourcesX) or (_mrkDest in factories)) then {_convoyTypes = ["Money"]} else {_convoyTypes = ["Prisoners"]};
-        if (((count (garrison getVariable [_mrkDest, []]))/2) >= [_mrkDest] call A3A_fnc_garrisonSize) then {_convoyTypes pushBack "Reinforcements"};
     };
 };
 

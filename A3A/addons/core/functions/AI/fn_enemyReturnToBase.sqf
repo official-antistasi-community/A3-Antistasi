@@ -3,11 +3,6 @@
     Will choose appropriate base depending on occupied vehicle (if any)
     If optional marker is provided, will attempt to garrison foot troops there
 
-    NOTE:
-    This is pretty awful and should be reimplemented in an AI/commander/garrison rework
-    Fundamental problem with double-counting when adding to a despawned garrison in current system 
-    Plus perf problems with overstuff testing, nearest marker, near spawners etc.
-
     Parameters:
     1. <GROUP> Group to order
     2. <STRING> Nearby friendly marker to garrison (Optional)
@@ -37,6 +32,7 @@ if (!isNil "_AIScriptHandle") then { terminate _AIScriptHandle; };   // _group s
 // Remove any current waypoints
 // Turns out that this is actually bugged (for infantry?) and followed vs visible waypoints desync in unpredictable ways
 { deleteWaypoint _x } forEachReversed (waypoints _group);
+
 
 // Group in vehicle
 private _vehicle = vehicle leader _group;
@@ -68,8 +64,8 @@ if (_vehicle != leader _group) exitWith
 
 // Foot infantry
 // If specified marker is (still) valid, garrison at it
+// Can't check whether marker can take the troops here. Deal with that in garrison code.
 if (_marker != "") then {
-    if (([_marker] call A3A_fnc_garrisonSize) - count (garrison getVariable [_marker, []]) <= 0) exitWith { _marker = "" };
     if (sidesX getVariable _marker != side _group) exitWith { _marker = "" }; 
     if (markerPos _marker distance2d leader _group >= 500) exitWith { _marker = "" };
 };
@@ -83,7 +79,13 @@ if (isNil "_marker") exitWith {
 };
 [_group] spawn A3A_fnc_groupDespawner;
 
-{ _x disableAI "AUTOCOMBAT"; _x disableAI "TARGET"; } forEach units _group;
+{
+    _x disableAI "AUTOCOMBAT";
+    _x disableAI "TARGET";
+    _x setUnitPos "UP";
+    _x doFollow leader _group;          // in case they were a building garrison
+} forEach units _group;
+
 _group setBehaviourStrong "AWARE";
 private _wp = _group addWaypoint [markerPos _marker, 50];
 _group setCurrentWaypoint _wp;

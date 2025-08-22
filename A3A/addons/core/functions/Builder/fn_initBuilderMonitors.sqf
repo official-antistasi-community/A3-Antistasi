@@ -49,8 +49,9 @@ while { true } do {
         {},
         {},
         {
-            // refund? Nah
             // Just delete the thing, let server clear out the array on saving
+            private _obj = _this#0;
+            [_obj] remoteExecCall ["A3A_fnc_garrisonServer_remVehicle", 2];
             deleteVehicle (_this#0);
         },
         {},
