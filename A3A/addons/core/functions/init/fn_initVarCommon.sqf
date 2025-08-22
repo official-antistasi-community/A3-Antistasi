@@ -44,7 +44,7 @@ PATCOM_VISUAL_RANGE = 400; // How far before PATCOM can start to detect enemies.
 PATCOM_TARGET_TIME = 120; // How long before PATCOM unit forgets about an enemy.
 PATCOM_ARTILLERY_MANAGER = true; // Allow Patcome to control AI Artillery. False is default A3 Artillery AI.
 PATCOM_ARTILLERY_DELAY = 30; // How quickly artillery becomes available again after firing in seconds.
-PATCOM_AI_STATICS = true; // Allow AI to find and arm statics near their group.
+PATCOM_AI_STATICS = false; // Allow AI to find and arm statics near their group.
 PATCOM_AI_STATIC_ARM = 120; // How long AI stay on static weapons after they arm them.
 
 ////////////////////////////////////////
@@ -161,6 +161,13 @@ A3A_buildingBlacklist = [
 //Lights and Lamps array used for 'Blackout'
 A3A_lampTypes = [
 	"Lamps_Base_F", "PowerLines_base_F", "Land_LampDecor_F", "Land_LampHalogen_F", "Land_LampHarbour_F", "Land_LampShabby_F", "Land_NavigLight", "Land_runway_edgelight", "Land_PowerPoleWooden_L_F", "Land_SPE_StreetLamp_Off", "Land_SPE_StreetLamp", "Land_SPE_StreetLamp_pole_off", "Land_SPE_StreetLamp_pole", "Land_SPE_StreetLamp_wall_off", "Land_SPE_StreetLamp_wall", "Land_SPE_Ger_Lamp", "Land_SPE_US_Lamp", "Land_SPE_Onion_Lamp"
+];
+
+// Sniper positions
+A3A_sniperBuildings = createHashMapFromArray [
+    // Radio towers
+    ["Land_TTowerBig_1_F", [0,2,3.81508]],
+    ["Land_TTowerBig_2_F", [0,1,0.785109]]
 ];
 
 ////////////////////////////////////

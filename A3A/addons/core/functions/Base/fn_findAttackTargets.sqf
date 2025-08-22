@@ -17,7 +17,7 @@ FIX_LINE_NUMBERS()
 params ["_targetSide", "_side"];
 
 
-private _possibleStartBases = airportsX select {sidesX getVariable [_x, sideUnknown] == _side && [_x] call A3A_fnc_airportCanAttack};
+private _possibleStartBases = airportsX select {sidesX getVariable [_x, sideUnknown] == _side} select { [_x] call A3A_fnc_airportCanAttack };
 _possibleStartBases pushBack (["NATO_carrier", "CSAT_carrier"] select (_side == Invaders));
 private _airportPositions = _possibleStartBases apply { markerPos _x };
 
@@ -46,9 +46,10 @@ private _maxThreatDist = distanceForAirAttack + 1000;
     if (gameMode != 1 && _markerSide != _targetSide) then { continue };
     if (_airportPositions inAreaArray [markerPos _x, _maxThreatDist, _maxThreatDist] isEqualTo []) then { continue };
 
-    private _threat = 10 * count (garrison getVariable [_x, []]);
+    private _garrison = A3A_garrison get _x;
+    private _threat = 10 * count (_garrison get "troops");
     if (_markerSide == teamPlayer) then {
-        _threat = _threat + 50 * count (staticsToSave inAreaArray _x);
+        _threat = _threat + 50 * count (_garrison get "vehicles");          // TODO: do this properly
     } else {
         // based on typical static count
         _threat = _threat + call {
@@ -61,7 +62,7 @@ private _maxThreatDist = distanceForAirAttack + 1000;
     //Debug_2("Marker %1, threat %2", _x, _threat);
     if (_threat == 0) then { continue };
     _markersXYT pushBack [markerPos _x # 0, markerPos _x # 1, _threat];
-} forEach markersX;
+} forEach (markersX + controlsX + outpostsFIA);
 
 
 // use these for target value determination

@@ -2,6 +2,7 @@
 
     Execution on: HC or Server
 
+    Environment: Scheduled. Land vehicles delay after spawning until place is cleared
     Scope: Internal
 
     Parameters:
@@ -38,6 +39,23 @@ if(isNull _vehicle) exitWith {objNull};
 
 _landPosBlacklist = [_vehicle, _crewGroup, _cargoGroup, _posDestination, _markerOrigin, _landPosBlacklist, _seaPath] call A3A_fnc_createVehicleQRFBehaviour;
 ServerDebug_5("Spawn Performed: Created vehicle %1 with %2 crew (%3) and %4 cargo (%5)", typeof _vehicle, count units _crewGroup, _crewGroup, count units _cargoGroup, _cargoGroup);
+
+// Wait until land vehicle has cleared the spawn place.
+if (_vehicleType isKindOf "Land") then {
+
+    private _spawnPos = getPosATL _vehicle;
+    private _spawnTime = time + 10;
+    waitUntil { _spawnPos distance2d _vehicle > 10 or time > _spawnTime };
+
+    if (_spawnPos distance2d _vehicle < 10) then {
+        Error_2("Vehicle %1 failed to clear spawn at %2", _vehicle, _markerOrigin);
+        // teleport to first waypoint
+        // arguably should just return empty array...
+        private _wayPos = waypointPosition (waypoints _crewGroup # 0);
+        _vehicle setVehiclePosition [_wayPos, [], 10, "NONE"];
+        _crewGroup setCurrentWaypoint [_crewGroup, 1];
+    };
+};
 
 [_vehicle, _crewGroup, _cargoGroup, _landPosBlacklist];
 
