@@ -1,63 +1,121 @@
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-/*
-    Note: the task sets all feedback to players automaticly based on the info in the task hm passed to the task
-    the modifyable values are:
-        description, title, marker, destination, state, priority, showNotification, type, visibleIn3D
+private _fnc_createTask = {
+	private _nameDest = [_this get "_marker"] call A3A_fnc_localizar;
+	private _displayTime = [(_this get "_endTime") - time] call FUNC(minutesFromNow);
+	private _holdTime = (_this get "_difficulty") * 2;
 
-    note that TaskID is also available but should only be used when creating sub tasks, and NEVER modified within the task.
-    of the afformentioned only title is required, but it is recomended to set:
-        description, marker, and destination
-    in addition to the title
-*/
-_this set ["title", "Test task"];
-_this set ["description", "Test task description"];
-_this set ["destination", [allPlayers#0, true]];
+	private _taskName = localize "STR_A3A_Tasks_LOG_Supplies_title";
+	private _taskDesc = format [localize "STR_A3A_Tasks_LOG_Supplies_description", _nameDest, _displayTime, _holdTime];
+	private _taskPos = markerPos (_this get "_marker");
+	private _notify = isNil {_this get "checkpoint"};
+	private _taskId = call FUNC(genTaskUID);
+	[true, _taskId, [_taskDesc,_taskName], _taskPos, false, -1, _notify, "Heal", true] call BIS_fnc_taskCreate;
+	_this set ["_taskId", _taskId];
+};
 
-_this set ["constructor", { // Type: code | Required | Constructor to run at start of task
-    Info("Constructor called");
+
+params ["_params", "_checkpoint"];
+
+private _task = createHashMap;
+
+if (isNil "_checkpoint") then {
+	_params params ["_marker"];
+
+	// Determine end time and description
+	private _difficulty = [1, 2] select (random 10 < tierWar);
+	if (sidesX getVariable _marker == teamPlayer) then { _difficulty = 1 };
+
+	_task set ["_marker", _marker];
+	_task set ["_difficulty", _difficulty];
+	_task set ["_endTime", time + 60 * (15 + 30*_difficulty)];
+	_task call _fnc_createTask;
+}
+else {
+	_params params ["_marker", "_remTime", "_difficulty"];
+
+	_task set ["_marker", _marker];
+	_task set ["_difficulty", _difficulty];
+	_task set ["_endTime", time + _remTime];
+	_task call _fnc_createTask;
+};
+
+_task set ["checkpoint", "c_started"];
+_task set ["state", "s_waitForPlace"];
+_task set ["interval", 1];
+
+_task set ["_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_title"];
+
+_task set ["c_started", {
+	[_this get "_marker", (_this get "_endTime") - time, _this get "_difficulty"];
 }];
 
-_this set ["destructor", { // Type: code | Optional | Destructor to run at end of task
-    Info("Destructor called");
+
+/////////////////////
+// State functions //
+/////////////////////
+
+// called with local vars _box and _marker
+_task set ["_fnc_condition", {
+    // condition for the task to progres
+	true;
 }];
 
-_stages = [
-    createHashMapFromArray [
-        ["Init", { //Type: code | Optional | only stage 2 and beyond can use a stage init function
-            Info("Stage 1 init called");
-        }],
-        ["action", { //Type: code | Required | Action to be done in that stage
-            Info("Stage 1 action called");
-        }],
-        ["condition", { //Type: code | Required | Return type: bool | Condition to compleate the stage
-            false;
-        }],
-        ["required", true], //Type: bool | Optional | if the task needs the stage to succeed
-        ["reward", { //Type: code | Optional | the reward given for completing the stage
-            Info("Stage 1 reward called");
-        }],
-        ["rewardInstant", false], //Type: bool | Optional | if the reward should be given instantly on compleation of stage
-        ["timeout", 10] //Type: number | Optional | Time limit for the stage before auto fail
-    ]
-];
-_this set ["stages", _stages];
+_task set ["s_stage1",
+{
+	if (_this get "_endTime" < time) exitWith { _this set ["state", "s_failed"]; false };
 
-/*
-    to add sub tasks -> add them to the Children entry in the task hm
-    each one of these children should be a hashmap containing the same task information as the parent task,
-    but importantly the task needs the TaskID to be set to an array in the following format: [unique sub ID, ParentID]
+	if !(call (_this get "_fnc_condition")) exitWith {false};
 
-    example:
-    private _subTaskA = createHashMap;
-    _subTaskA set ["taskID", ["A", _this get "taskID"]];
-    _subTaskA set ["title", "Test sub task A"];
-    _subTaskA set ["description", "Test sub task A description"];
-    _this set ["Children", [_subTaskA]];
-*/
-private _subTaskA = createHashMap;
-_subTaskA set ["taskID", [call FUNC(genTaskUID), _this get "taskID"]];
-_subTaskA set ["title", "Test sub task A"];
-_subTaskA set ["description", "Test sub task A description"];
-_this set ["Children", [_subTaskA]]; // Type: Array of hashMaps | Optional | sub tasks of the main task
+	// Condition fulfilled, run any extra code
+	_this set ["state", "s_stage2"];
+
+	false;
+}];
+
+_task set ["s_stage2",
+{
+	if (_this get "_endTime" < time) exitWith { _this set ["state", "s_failed"]; false };
+	false;
+}];
+
+_task set ["s_succeeded", {
+	private _bonus = _this get "_difficulty";
+	private _marker = _this get "_marker";
+
+	private _playersInRange = (allPlayers - (entities "HeadlessClient_F")) inAreaArray [markerPos _marker, 250, 250];
+	{[10*_bonus * tierWar, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
+	[5*_bonus * tierWar, theBoss] call A3A_fnc_playerScoreAdd;
+
+	[-15 * _bonus, 15 * _bonus, _marker] remoteExec ["A3A_fnc_citySupportChange", 2];
+	[0, 200 * _bonus * tierWar] remoteExec ["A3A_fnc_resourcesFIA", 2];
+
+	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
+	_this set ["state", "s_cleanup"]; false;
+}];
+_task set ["s_failed", {
+	// Need a message here just to avoid the cooldown?
+	[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_failed", getPosATL _box, 300] call FUNC(hintNear);
+
+	[5, -5, _this get "_marker"] remoteExec ["A3A_fnc_citySupportChange", 2];
+	[-10, theBoss] call A3A_fnc_playerScoreAdd;
+
+	[_this get "_taskId", "FAILED"] call BIS_fnc_taskSetState;
+	_this set ["state", "s_cleanup"]; false;
+}];
+_task set ["s_cleanup", {
+	// just dismantle anything remaining
+
+	// TODO: task deletion, rate throttling?
+	// maybe we should restrict tasks based on request time not completion/failure time?
+	// so then throttling moves to the request management
+
+	(_this get "taskId") spawn {
+		[_this, true, true] call BIS_fnc_deleteTask;
+	};
+	true;		// delete the damned task
+}];
+
+// Return the task hashmap
+_task;
