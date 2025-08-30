@@ -15,15 +15,27 @@ class CfgFunctions {
             class minutesFromNow {};
             class nearFriendlyMarkers {};
             class nearHostileMarkers {};
+            class unitSpeakNearby {};
         };
         class Params { // params getter functions for the tasks  |  returns false if failed, otherwise params array
             file = QPATHTOFOLDER(Params);
             class testTask_p {};
+
+            class CON_broadcast_p {};
+            class LOG_equipDrop {};
+            class LOG_supplies {};
+            class SUPP_occReporter_p {};
+            class SUPP_rebReporter_p {};
         };
         class Tasks { // task  |  Passed task HM to store task instructions into
             file = QPATHTOFOLDER(Tasks);
-            //class testTask {};
-            class LOG_Supplies {};
+            class testTask {};
+
+            class CON_broadcast {};
+            class LOG_equipDrop {};
+            class LOG_supplies {};
+            class SUPP_occReporter {};
+            class SUPP_rebReporter {};
         };
 
         //Legacy missions
