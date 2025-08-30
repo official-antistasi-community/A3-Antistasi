@@ -51,9 +51,6 @@ if ((_side == Occupants or _side == Invaders) and _vehCost > 0) then
 	if (_sideEnemy != teamPlayer) exitWith {};
 
     [_side, round (_vehCost / 50), 45] remoteExec ["A3A_fnc_addAggression", 2];
-	if (_side == Occupants) then {
-		[-_vehCost / 100, _vehCost / 100, position _veh] remoteExec ["A3A_fnc_citySupportChange", 2];
-	};
 };
 
 if (_side == civilian) then
@@ -61,14 +58,13 @@ if (_side == civilian) then
 	if (_sideEnemy != teamPlayer) exitWith {};
 
 	// Punish players slightly for stealing cars. Code used to be in vehDespawner.
-	private _pos = getPosATL _veh;
-	[0, -1, _pos] remoteExec ["A3A_fnc_citySupportChange", 2];
+	private _city = _veh getVariable "markerX";			// TODO: Check whether the timing works for this
+	if (isNil "_city") exitWith {};
+	if ("_civ" in _city) then { _city = _city select [0, count _city - 4] };		// strip the _civ tag
 
-	private _city = [citiesX, _pos] call BIS_fnc_nearestPosition;
-	private _dataX = server getVariable _city;
-	private _prestigeOPFOR = _dataX select 2;		// government support?
-	if (random 100 > _prestigeOPFOR) exitWith {};
+	[-1, _city] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 
+	if (sidesX getVariable _city == teamPlayer or random 1 < 0.5) exitWith {};
 	{
 		private _thief = _x;
 		if ((captive _thief) and (isPlayer _thief)) then {
@@ -78,6 +74,7 @@ if (_side == civilian) then
 			if ((side _x == Occupants) and (_x distance _pos < distanceSPWN2)) then {_x reveal _thief};
 		} forEach allUnits;
 	} forEach crew _veh;
+
 };
 
 if (_captured) then

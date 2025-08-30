@@ -124,6 +124,7 @@ class CfgFunctions
             class chooseAttack {};
             class chooseMachineForGarrison {};
             class citiesToCivPatrol {};
+            class citySideChange {};
             class citySupportChange {};
             class commsMP {};
             class createBreachChargeText {};
@@ -171,10 +172,8 @@ class CfgFunctions
             class petrosDeathMonitor {};
             class placementSelection {};
             class playableUnits {};
-            class getSideRadioTowerInfluence {};
             class postmortem {};
             class postmortemLoop {};
-            class powerReorg {};
             class radioCheck {};
             class rebuildAssets {};
             class rebuildRadioTower {};
@@ -186,6 +185,7 @@ class CfgFunctions
             class revealToPlayer {};
             class scheduler {};
             class sellVehicle {};
+            class setCityTaskDelay {};
             class setMarkerAlphaForSide {};
             class setPlaneLoadout {};
             class singlePlayerBlackScreenWarning {};
@@ -826,6 +826,7 @@ class CfgFunctions
             class deleteNamespace {};
             class filterAndWeightArray {};
             class findEmptyPos {};
+            class findPosNearHouse {};
             class getAdmin {};
             class isEngineer {};
             class localLog {};

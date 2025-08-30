@@ -2,6 +2,7 @@
     A3A_fnc_customHintCountdown
     Adds and maintains message with client-side timer countdown timer in hint queue
     Disable by sending another customHint with the same header
+    This is a disgusting hack and should be replaced with a separate countdown display
 
 Environment: Scheduled, client-local
 
@@ -16,6 +17,8 @@ Parameters:
 
 params ["_headerText", "_bodyText", "_endTime", "_showCenter", "_showRadius"];
 
+// Clear any active messages with same header
+A3A_customHint_MSGs = A3A_customHint_MSGs select { _x#0 != _headerText };
 private _lastMessage = [];
 
 while {true} do

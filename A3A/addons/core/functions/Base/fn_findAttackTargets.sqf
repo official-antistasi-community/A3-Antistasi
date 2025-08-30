@@ -93,7 +93,7 @@ private _finalWeights = [];
     // Target value calc
     private _value = if (_x in citiesX) then {
         // just base this on population?
-        private _baseValue = sqrt ((server getVariable _x) # 0);                   // Low-value but threat is probably low too due to lack of garrison
+        private _baseValue = sqrt (A3A_cityPop get _x);                   // Low-value but threat is probably low too due to lack of garrison
         if (_side == Occupants) exitWith { _baseValue * (1.5 - tierWar / 10) };    // Occupants more likely to care about towns at low tiers
         _baseValue * (tierWar / 5) / (1 + A3A_punishmentDefBuff);                  // Invaders more likely to care at high tiers but devalued by failed punishments
     } else {

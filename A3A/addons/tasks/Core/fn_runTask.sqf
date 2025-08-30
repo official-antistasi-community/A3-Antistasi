@@ -125,16 +125,17 @@ if (!canSuspend) exitWith { "Error: Run this function scheduled" };
 params ["_taskFnc", "_params"];
 
 private _task = [_params, nil] call _taskFnc;
-//GVAR(activeTasks) pushBack _task;
+if (isNil QGVAR(activeTasks)) then { GVAR(activeTasks) = [] };
+GVAR(activeTasks) pushBack _task;
 
 private _complete = false;
 while {true} do
 {
     // Run unscheduled so that save/cancel can't hit halfway
-    isNil {
-        private _state = _task get "state";
-        _complete = _task call (_task get _state);
-    };
+    // No - missions may need to run significant spawning code
+    // Instead, missions should use unscheduled lockouts if they change checkpoint state
+    private _state = _task get "state";
+    _complete = _task call (_task get _state);
     if (_complete) exitWith {};
 
     _task set ["lastUpdate", time];
@@ -142,6 +143,6 @@ while {true} do
 };
 
 // remove from active tasks?
-//GVAR(activeTasks) deleteAt (GVAR(activeTasks) find _task);
+GVAR(activeTasks) deleteAt (GVAR(activeTasks) find _task);
 
 // should be the final reference, so task will no longer exist

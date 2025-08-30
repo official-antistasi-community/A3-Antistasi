@@ -262,8 +262,8 @@ switch (_mode) do
         private _deadPopulation = 0;
         {
             private _city = _x;
-            private _cityData = server getVariable _city;
-            _cityData params ["_numCiv", "_numVeh", "_supportGov", "_supportReb"];
+            private _cityData = A3A_cityData getVariable _city;
+            _cityData params ["_numCiv", "_supportReb"];
 
             _totalPopulation = _totalPopulation + _numCiv;
             _rebelPopulation = _rebelPopulation + (_numCiv * (_supportReb / 100));
@@ -326,14 +326,14 @@ switch (_mode) do
         private _trainingLevel = skillFIA;
         private _hrText = _display displayCtrl A3A_IDC_FACTIONHRTEXT;
         private _trainingText = _display displayCtrl A3A_IDC_FACTIONTRAININGTEXT;
-        _hrText ctrlSetText str _hr;
+        _hrText ctrlSetText str floor _hr;
         _trainingText ctrlSetText format ["%1 / 20", _trainingLevel];
         private _trainingTooltip = _display displayCtrl A3A_IDC_FACTIONTRAININGBUTTON;
         _trainingTooltip ctrlSetTooltip (format [localize "STR_antistasi_dialogs_hq_train_tooltip",1000 + (1.5*((skillFIA) *750))]);
 
         private _factionMoney = server getVariable ["resourcesFIA", 0];
         private _factionMoneyText = _display displayCtrl A3A_IDC_FACTIONMONEYTEXT;
-        _factionMoneyText ctrlSetText format ["%1 €", _factionMoney];
+        _factionMoneyText ctrlSetText format ["%1 €", floor _factionMoney];
 
         // Faction money slider update
         private _factionMoneySlider = _display displayCtrl A3A_IDC_FACTIONMONEYSLIDER;

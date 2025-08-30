@@ -73,14 +73,9 @@ if (_backpack != "") then {
 _unit setUnitLoadout [ [], [], [], [uniform _unit, []], [], [], "", "", [], ["","","","","",""] ];
 
 
-if (_unitSide == Occupants) then {
-	[-2, 0, getPos _unit] remoteExec ["A3A_fnc_citySupportChange", 2];
-} else {
-	[0, 1, getPos _unit] remoteExec ["A3A_fnc_citySupportChange", 2];
-};
-
 private _marker = _unit getVariable "markerX";
 if !(isNil "_marker") then {
+    [1, _marker] remoteExecCall ["A3A_fnc_citySupportChange", 2];
     A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
 };
 

@@ -34,7 +34,7 @@ else
 	sleep 5;            // don't block the destruction message?
 	[_taskId, "SUPP", "SUCCEEDED"] call A3A_fnc_taskSetState;
     [0,200] remoteExec ["A3A_fnc_resourcesFIA",2];
-    [-20, 20, _marker, false] remoteExec ["A3A_fnc_citySupportChange", 2];
+    [20, _marker, false] remoteExecCall ["A3A_fnc_citySupportChange", 2];           // no scaling? hmm
     {if (isPlayer _x) then {[10,_x] call A3A_fnc_playerScoreAdd}} forEach ([300,0,_taskPos,teamPlayer] call A3A_fnc_distanceUnits);
     [10,theBoss] call A3A_fnc_playerScoreAdd;
 };

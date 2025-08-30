@@ -34,13 +34,9 @@ private _spawnKey = _markerX + "_civ";
 
 private _groupsPatrol = [];
 private _vehPatrol = [];
-private _dataX = server getVariable _markerX;
+private _numCiv = A3A_cityData getVariable _markerX select 0;
 private _area = [_markerX] call A3A_fnc_sizeMarker;
 private _positionX = getMarkerPos (_markerX);
-private _numCiv = (_dataX#0);
-private _numVeh = (_dataX#1);
-private _prestigeOPFOR = (_dataX#2);
-private _prestigeBLUFOR = (_dataX#3);
 private _typeCiv = "";
 private _typeVehX = "";
 private _dirVeh = 0;

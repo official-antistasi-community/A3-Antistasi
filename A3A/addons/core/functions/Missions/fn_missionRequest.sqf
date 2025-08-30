@@ -148,8 +148,8 @@ switch (_type) do {
 		private _weightedMarkers = [];
 		{
 			private _dist = getMarkerPos _x distance2D getMarkerPos respawnTeamPlayer;
-			private _supportReb = (server getVariable _x) select 3;
-			if (_dist < distanceMission && _supportReb < 90) then {
+			private _supportReb = (A3A_cityData getVariable _x) select 1;
+			if (_dist < distanceMission && _supportReb < 80) then {
 				private _weight = (100 - _supportReb) * ((distanceMission - _dist) ^ 2);
 				_possibleMarkers pushBack _x;
 				_weightedMarkers append [_x, _weight];
@@ -168,7 +168,7 @@ switch (_type) do {
 			if (_stationPos isEqualType [] and sidesX getVariable _site == Occupants) exitWith {
 				[_site, nearestBuilding _stationPos] spawn A3A_fnc_CON_PoliceStation;
 			};
-			[[_site],"A3A_fnc_LOG_Supplies"] remoteExec ["A3A_fnc_scheduler",2];
+			[A3A_tasks_fnc_LOG_Supplies, [_site]] spawn A3A_tasks_fnc_runTask;
 		};
 	};
 

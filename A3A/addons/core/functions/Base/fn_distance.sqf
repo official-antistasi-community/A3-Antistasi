@@ -197,6 +197,7 @@ private _processCityCivMarker = {
 
             if !(_marker in destroyedSites) then
             {
+                [_marker] spawn A3A_tasks_fnc_selectCityTask;
                 [[_marker], "A3A_fnc_createAmbientCiv"] call A3A_fnc_scheduler;
                 [[_marker], "A3A_fnc_createAmbientCivTraffic"] call A3A_fnc_scheduler;
             };

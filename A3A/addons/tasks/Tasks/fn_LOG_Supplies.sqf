@@ -26,7 +26,7 @@ private _fnc_createBox = {
 
 private _fnc_createTask = {
 	private _nameDest = [_this get "_marker"] call A3A_fnc_localizar;
-	private _displayTime = [(_this get "_endTime") - time] call FUNC(minutesFromNow);
+	private _displayTime = [((_this get "_endTime") - time) / 60] call FUNC(minutesFromNow);
 	private _holdTime = (_this get "_difficulty") * 2;
 
 	private _taskName = localize "STR_A3A_Tasks_LOG_Supplies_title";
@@ -180,7 +180,7 @@ _task set ["s_succeeded", {
 	{[10*_bonus * tierWar, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
 	[5*_bonus * tierWar, theBoss] call A3A_fnc_playerScoreAdd;
 
-	[-15 * _bonus, 15 * _bonus, _marker] remoteExec ["A3A_fnc_citySupportChange", 2];
+	[15 * _bonus, _marker] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 	[0, 200 * _bonus * tierWar] remoteExec ["A3A_fnc_resourcesFIA", 2];
 
 	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
@@ -190,7 +190,6 @@ _task set ["s_failed", {
 	// Need a message here just to avoid the cooldown?
 	[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_failed", getPosATL _box, 300] call FUNC(hintNear);
 
-	[5, -5, _this get "_marker"] remoteExec ["A3A_fnc_citySupportChange", 2];
 	[-10, theBoss] call A3A_fnc_playerScoreAdd;
 
 	[_this get "_taskId", "FAILED"] call BIS_fnc_taskSetState;
@@ -209,7 +208,8 @@ _task set ["s_cleanup", {
 	// maybe we should restrict tasks based on request time not completion/failure time?
 	// so then throttling moves to the request management
 
-	(_this get "taskId") spawn {
+	(_this get "_taskId") spawn {
+		sleep 120;
 		[_this, true, true] call BIS_fnc_deleteTask;
 	};
 	true;		// delete the damned task

@@ -10,8 +10,8 @@ player addEventHandler ["FiredMan", {
     else {
         _city = [citiesX,_player] call BIS_fnc_nearestPosition;
         _size = [_city] call A3A_fnc_sizeMarker;
-        _dataX = server getVariable _city;
-        if (random 100 < _dataX select 2) then {
+        _cityData = A3A_cityData getVariable _city;
+        if (random 100 > _cityData select 1) then {            // reb support
             if (_player distance getMarkerPos _city < _size * 1.5) then {
                 _player setCaptive false;
                 if (vehicle _player != _player) then {
@@ -37,8 +37,8 @@ player addEventHandler ["InventoryOpened", {
         else {
             _city = [citiesX,_playerX] call BIS_fnc_nearestPosition;
             _size = [_city] call A3A_fnc_sizeMarker;
-            _dataX = server getVariable _city;
-            if (random 100 < _dataX select 2) then {
+            _cityData = A3A_cityData getVariable _city;
+            if (random 100 > _cityData select 1) then {            // reb support
                 if (_playerX distance getMarkerPos _city < _size * 1.5) then {
                     _playerX setCaptive false;
                 };
@@ -78,8 +78,8 @@ player addEventHandler ["HandleHeal", {
         else {
             _city = [citiesX,_player] call BIS_fnc_nearestPosition;
             _size = [_city] call A3A_fnc_sizeMarker;
-            _dataX = server getVariable _city;
-            if (random 100 < _dataX select 2) then {
+            _cityData = A3A_cityData getVariable _city;
+            if (random 100 > _cityData select 1) then {            // reb support
                 if (_player distance getMarkerPos _city < _size * 1.5) then {
                     _player setCaptive false;
                 };
@@ -113,4 +113,8 @@ player addEventHandler ["WeaponDisassembled", {
     if (_marker != "") then {
         [_veh] remoteExecCall ["A3A_fnc_garrisonServer_remVehicle", 2];
     };
+}];
+
+player addEventHandler ["Killed", {
+    [-1, 0] remoteExecCall ["A3A_fnc_resourcesFIA", 2];
 }];

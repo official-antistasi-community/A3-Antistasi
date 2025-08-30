@@ -28,13 +28,13 @@ private _translateMarker = {
 //ADD VARIABLES TO THIS ARRAY THAT NEED SPECIAL SCRIPTING TO LOAD
 private _specialVarLoads = [
     "outpostsFIA","minesX","staticsX","antennas","mrkNATO","mrkSDK","prestigeNATO",
-    "prestigeCSAT","posHQ","hr","armas","items","backpcks","ammunition","dateX","prestigeOPFOR",
+    "prestigeCSAT","posHQ","hr","armas","items","backpcks","ammunition","dateX",
     "prestigeBLUFOR","resourcesFIA","skillFIA","destroyedSites",
     "garrison","tasks","membersX","vehInGarage","destroyedBuildings","idlebases",
     "chopForest","weather","killZones","jna_dataList","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
-    "minorSites", "newGarrison", "radioKeys"
+    "minorSites", "newGarrison", "radioKeys", "cityData"
 ];
 
 private _varName = _this select 0;
@@ -171,38 +171,28 @@ if (_varName in _specialVarLoads) then {
         publicVariable "antennas";
         publicVariable "antennasDead";
     };
-    if (_varname == 'prestigeOPFOR') then {
-        if (count citiesX != count _varValue) exitWith {};          // it'll be the same in the next one
-        for "_i" from 0 to (count citiesX) - 1 do {
-            _city = citiesX select _i;
-            _dataX = server getVariable _city;
-            _numCiv = _dataX select 0;
-            _numVeh = _dataX select 1;
-            _prestigeOPFOR = _varvalue select _i;
-            _prestigeBLUFOR = _dataX select 3;
-            _dataX = [_numCiv,_numVeh,_prestigeOPFOR,_prestigeBLUFOR];
-            server setVariable [_city,_dataX,true];
-        };
-    };
-    if (_varname == 'prestigeBLUFOR') then {
+    if (_varname == 'prestigeBLUFOR') then {                        // this one is actually rebel support. Backwards compat.
         if (count citiesX != count _varValue) exitWith {
             Error("City count changed, setting approx support");
             {
                 if (sidesX getVariable _x != teamPlayer) then { continue };                // sides should be loaded first
-                private _dataX = (server getVariable _x select [0,2]) + [0,75];             // 75% rebel support
-                server setVariable [_x, _dataX, true];
+                private _dataX = (A3A_cityData getVariable _x);
+                _dataX set [1, 80];                                                      // 75% rebel support, no accumHR
+                A3A_cityData setVariable [_x, _dataX, true];
             } forEach citiesX;
         };
+        // City count matches, assume map didn't change and copy in support
         for "_i" from 0 to (count citiesX) - 1 do {
-            _city = citiesX select _i;
-            _dataX = server getVariable _city;
-            _numCiv = _dataX select 0;
-            _numVeh = _dataX select 1;
-            _prestigeOPFOR = _dataX select 2;
-            _prestigeBLUFOR = _varvalue select _i;
-            _dataX = [_numCiv,_numVeh,_prestigeOPFOR,_prestigeBLUFOR];
-            server setVariable [_city,_dataX,true];
+            private _city = citiesX select _i;
+            private _dataX = A3A_cityData getVariable _city;
+            _dataX set [1, _varvalue select _i];
+            A3A_cityData setVariable [_city, _dataX, true];
         };
+    };
+    if (_varname == 'cityData') then {                          // New replacement for above
+        {
+            A3A_cityData setVariable [_x, _y, true];
+        } forEach _varValue;
     };
     if (_varname == 'enemyResources') then {
         A3A_resourcesDefenceOcc = _varValue#0;

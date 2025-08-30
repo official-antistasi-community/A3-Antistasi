@@ -14,7 +14,11 @@ private _resourcesFIAT = server getVariable "resourcesFIA";
 _hrT = _hrT + _hr;
 _resourcesFIAT = round (_resourcesFIAT + _resourcesFIA);
 
-if (_hrT < 0) then {_hrT = 0};
+if (_hrT < 0) then {
+	// If we're using more HR than we have (eg. player respawn at 0 HR) then hurt nearby city support
+	[_hrT, markerPos "Synd_HQ"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+	_hrT = 0;
+};
 if (_resourcesFIAT < 0) then {_resourcesFIAT = 0};
 
 server setVariable ["hr",_hrT,true];

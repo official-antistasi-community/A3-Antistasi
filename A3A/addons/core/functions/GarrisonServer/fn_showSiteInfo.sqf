@@ -15,14 +15,13 @@ if (_marker == "") exitWith {
     private _popDead = 0;
     private _pop = 0;
     {
-        (server getVariable _x) params ["_numCiv", "", "_suppOcc", "_suppReb"];
+        (A3A_cityData getVariable _x) params ["_numCiv", "_suppReb"];
         _pop = _pop + _numCiv;
         if (_x in destroyedSites) then { _popDead = _popDead + _numCiv; continue };
         _popReb = _popReb + (_numCiv * (_suppReb / 100));
-        _popOcc = _popOcc + (_numCiv * (_suppOcc / 100));
     } forEach citiesX;
     _popReb = round _popReb;
-    _popOcc = round _popOcc;
+    _popOcc = round (_pop - _popReb - _popDead);
 
     private _text = format [localize "STR_A3A_fn_init_cityinfo_overview_1",
         _pop, _popReb, _popOcc, _popDead, FactionGet(occ,"name"), FactionGet(reb,"name"), getText (configfile >> "CfgWorlds" >> worldname >> "description")];
@@ -40,11 +39,15 @@ private _text = call {
     if (_marker in citiesX) exitWith {
         if (_marker in destroyedSites) exitWith { format [localize "STR_A3A_fn_init_cityinfo_destr", _marker] };
 
-        (server getVariable _marker) params ["_numCiv", "", "_suppOcc", "_suppReb"];
+        (A3A_cityData getVariable _marker) params ["_numCiv", "_suppReb"];
         private _text = format [localize "STR_A3A_fn_init_cityinfo_overview_2",
-            _marker, _numCiv, _suppOcc, _suppReb, "%", FactionGet(occ,"name"), FactionGet(reb,"name")];
+            _marker, _numCiv, 100-_suppReb, _suppReb, "%", FactionGet(occ,"name"), FactionGet(reb,"name")];
 
-        private _power = [_marker] call A3A_fnc_getSideRadioTowerInfluence;
+        private _power = call {
+            private _antenna = A3A_antennaMap get _marker;
+            if (!alive _antenna) exitWith {sideUnknown};
+            sidesX getVariable (A3A_antennaMap get netId _antenna);
+        };
         private _powerName = if (_power == sideUnknown) then {"NONE"} else { Faction(_power) get "name" };
         format [localize "STR_A3A_fn_init_cityinfo_influ", _text, _powerName];
     };
