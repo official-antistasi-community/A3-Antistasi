@@ -54,14 +54,15 @@ _faction set ["unitPoliceGrunt", unit(police, "Standard")];
 _faction set ["groupSentry", [unit(military, "Grenadier"), unit(military, "Rifleman")]];
 _faction set ["groupSniper", [unit(military, "Sniper"), unit(military, "Rifleman")]];
 _faction set ["groupsSmall", [_faction get "groupSentry", _faction get "groupSniper"]];
-_faction set ["groupAA", [unit(military, "SquadLeader"), unit(military, "AA"), unit(military, "AA"), unit(military, "Rifleman")]];
-_faction set ["groupAT", [unit(military, "SquadLeader"), unit(military, "AT"), unit(military, "AT"), unit(military, "Rifleman")]];
+_faction set ["groupAA", [unit(military, "SquadLeader"), unit(military, "AA"), unit(military, "Rifleman"), unit(military, "Rifleman")]];
+_faction set ["groupAT", [unit(military, "SquadLeader"), unit(military, "AT"), unit(military, "LAT"), unit(military, "Rifleman")]];
 _faction set ["groupsMedium", [
     [unit(military, "SquadLeader"), unit(military, "MachineGunner"), unit(military, "Grenadier"), unit(military, "LAT")]
     , _faction get "groupAA", _faction get "groupAT"
 ]];
-
+/*
 //old randomised behaviour maintained because... reasons
+// not anymore!
 private _squads = [];
 for "_i" from 1 to 5 do {
     _squads pushBack [
@@ -74,8 +75,17 @@ for "_i" from 1 to 5 do {
         selectRandomWeighted [unit(military, "Rifleman"), 2, unit(military, "Marksman"), 1],
         unit(military, "Medic")
     ];
+    //                                                                              SquadLeader, Medic, MachineGunner, Rifleman, Grenadier, LAT, AT, AA, Engineer, Marksman
+    // unit(military, "")
 };
-_faction set ["groupsSquads", _squads];
+*/
+_faction set ["groupsSquads", [
+    [unit(military, "SquadLeader"), unit(military, "Medic"),unit(military, "MachineGunner"),unit(military, "Rifleman"),unit(military, "Rifleman"),unit(military, "Engineer"),unit(military, "Grenadier"),unit(military, "LAT")],
+    [unit(military, "SquadLeader"), unit(military, "Medic"),unit(military, "MachineGunner"),unit(military, "Rifleman"),unit(military, "Rifleman"),unit(military, "Engineer"),unit(military, "Marksman"),unit(military, "LAT")],
+    [unit(military, "SquadLeader"), unit(military, "Medic"),unit(military, "MachineGunner"),unit(military, "Rifleman"),unit(military, "Rifleman"),unit(military, "Engineer"),unit(military, "Grenadier"),unit(military, "Marksman")],
+    [unit(military, "SquadLeader"), unit(military, "Medic"),unit(military, "MachineGunner"),unit(military, "Rifleman"),unit(military, "Rifleman"),unit(military, "Medic"),unit(military, "Grenadier"),unit(military, "AA")],
+    [unit(military, "SquadLeader"), unit(military, "Medic"),unit(military, "MachineGunner"),unit(military, "Rifleman"),unit(military, "Rifleman"),unit(military, "Engineer"),unit(military, "MachineGunner"),unit(military, "AT")]
+]];
 
 //specops
 _faction set ["groupSpecOps", [
@@ -131,7 +141,7 @@ for "_i" from 1 to 6 do {
     ];
 };
 _faction set ["groupsMilitiaMedium", _militiaMid];
-
+/*
 private _militiaSquads = [];
 for "_i" from 1 to 5 do {
     _militiaSquads pushBack [
@@ -146,7 +156,13 @@ for "_i" from 1 to 5 do {
         unit(militia, "Medic")
     ];
 };
-_faction set ["groupsMilitiaSquads", _militiaSquads];
+*/
+_faction set ["groupsMilitiaSquads", [
+    [unit(militia, "SquadLeader"),unit(militia, "Medic"),unit(militia, "Rifleman"),unit(militia, "Rifleman"),unit(militia, "Rifleman"),unit(militia, "Grenadier"),unit(militia, "LAT"),unit(militia, "ExplosivesExpert")],
+    [unit(militia, "SquadLeader"),unit(militia, "Medic"),unit(militia, "Rifleman"),unit(militia, "Rifleman"),unit(militia, "Rifleman"),unit(militia, "MachineGunner"),unit(militia, "LAT"),unit(militia, "ExplosivesExpert")],
+    [unit(militia, "SquadLeader"),unit(militia, "Medic"),unit(militia, "Rifleman"),unit(militia, "Rifleman"),unit(militia, "Rifleman"),unit(militia, "Grenadier"),unit(militia, "LAT"),unit(militia, "Marksman")],
+    [unit(militia, "SquadLeader"),unit(militia, "Medic"),unit(militia, "Rifleman"),unit(militia, "Rifleman"),unit(militia, "Rifleman"),unit(militia, "MachineGunner"),unit(militia, "MachineGunner"),unit(militia, "Marksman")]
+]];
 
 //police
 _faction set ["groupPolice", [_faction get "unitPoliceOfficer", _faction get "unitPoliceGrunt"]];

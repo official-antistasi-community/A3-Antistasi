@@ -57,7 +57,7 @@ while {true} do
 	call A3A_fnc_updateMinorSites;
 
 	// Regular income of finite starting weapons
-	private _equipMul = A3A_balancePlayerScale / 30;		// difficulty scaled. Hmm.
+	private _equipMul = A3A_balancePlayerScale / 15;		// difficulty scaled. Hmm.
 	{
 		if (_x isEqualType "") then { continue };
 		_x params ["_class", "_initCount"];
