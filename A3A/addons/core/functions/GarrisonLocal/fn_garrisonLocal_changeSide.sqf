@@ -37,6 +37,7 @@ _garrison set ["side", _newSide];
 // Switch flag actions & texture
 private _flag = _garrison get "flag";
 if (!isNil "_flag") then {
+    _flag setVariable ["A3A_flagFlipTime", time, true];
     [_flag, "remove"] remoteExecCall ["A3A_fnc_flagaction", 0];
     private _flagAction = ["take", "SDKFlag"] select (_newSide == teamPlayer);
     [_flag, _flagAction] remoteExecCall ["A3A_fnc_flagaction", 0, _flag];

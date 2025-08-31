@@ -570,4 +570,11 @@ class Params
         texts[] = {$STR_A3A_Params_generic_none, $STR_A3A_Params_logDebugConsole_nondev, $STR_A3A_Params_generic_all};
         default = 1;
     };
+    class A3A_flagGarageBlock
+    {
+        title = "Block flag functions on flag flip for X";
+        values[] = {0,3,5,10,20};
+        texts[] = {"Off", "3 minutes", "5 minutes", "10 minutes", "20 minutes"};
+        default = 0;
+    };
 };
