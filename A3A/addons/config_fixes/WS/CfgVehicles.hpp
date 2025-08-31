@@ -17,6 +17,7 @@ class CfgVehicles
     class O_Truck_02_transport_F;
     class O_Tura_Truck_02_aa_lxWS;
     class O_Tura_ZU23_lxWS;
+    class B_Heli_Attack_01_pylons_dynamicLoadout_F;
     class B_Heli_Transport_01_pylons_F;
 
     #include "ws_ifv.hpp"
