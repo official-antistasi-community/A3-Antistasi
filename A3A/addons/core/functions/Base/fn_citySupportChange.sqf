@@ -30,8 +30,8 @@ if (alive _antenna and _change > 0) then {
 // Cap rebel support to 0-100. Changes below 0 reduce accumHR
 _supportReb = (_supportReb + _change) min 100;
 if (_supportReb < 0) then {
+	_accumHR = _accumHR + (_supportReb / 5);			// 1 HR per 5 pop at size 100
 	_supportReb = 0;
-	_accumHR = _accumHR - (_change / 5);			// 1 HR per 5 pop at size 100
 };
 
 A3A_cityData setVariable [_city, [_numCiv, _supportReb, _accumHR, _taskDelay]];

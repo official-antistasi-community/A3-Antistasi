@@ -17,7 +17,6 @@ class CfgFunctions {
         };
         class Params { // params getter functions for the tasks  |  returns false if failed, otherwise params array
             file = QPATHTOFOLDER(Params);
-            class testTask_p {};
             class city_killcop_p {};
             class city_hostage_p {};
             class city_taxi_p {};

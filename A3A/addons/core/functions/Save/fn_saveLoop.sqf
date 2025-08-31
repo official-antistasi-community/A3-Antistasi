@@ -151,8 +151,9 @@ private _prestigeOPFOR = [];
 private _prestigeBLUFOR = [];
 private _cityDataHM = createHashMap;
 {
-	_dataX = A3A_cityData getVariable _x;
-	_cityDataHM set [_x, +_dataX];					// copy so that we can't overwrite later
+	_dataX = +(A3A_cityData getVariable _x);			// copy so that we don't accidentally modify
+	_dataX set [3, A3A_cityTaskTimer get _x];			// might want this later
+	_cityDataHM set [_x, _dataX];
 	_prestigeBLUFOR pushBack (_dataX select 1);
 	_prestigeOPFOR pushBack (100 - (_dataX select 1));
 } forEach citiesX;

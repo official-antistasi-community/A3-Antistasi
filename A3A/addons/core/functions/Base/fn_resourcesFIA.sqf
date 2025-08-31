@@ -16,7 +16,8 @@ _resourcesFIAT = round (_resourcesFIAT + _resourcesFIA);
 
 if (_hrT < 0) then {
 	// If we're using more HR than we have (eg. player respawn at 0 HR) then hurt nearby city support
-	[_hrT, markerPos "Synd_HQ"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+	private _nearCity = citiesX select selectRandom (citiesX inAreaArrayIndexes [markerPos "Synd_HQ", distanceMission, distanceMission]);
+	[_hrT, _nearCity] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 	_hrT = 0;
 };
 if (_resourcesFIAT < 0) then {_resourcesFIAT = 0};
