@@ -21,12 +21,12 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_posOrMarker", "_radius", "_maxPlaces"];
+params ["_posOrMarker", "_radius", "_maxPlaces", ["_maxPerBuilding", 2]];
 
 private _buildings = [_posOrMarker, _radius] call A3A_fnc_patrolEnterableBuildings;
 
 // Figure out how many units should be put in each building.
-private _unitsPerBuilding = 2 max ceil (_maxPlaces / (count _buildings max 1));
+private _unitsPerBuilding = _maxPerBuilding max ceil (_maxPlaces / (count _buildings max 1));
 
 private _places = [];
 while {_buildings isNotEqualTo []} do

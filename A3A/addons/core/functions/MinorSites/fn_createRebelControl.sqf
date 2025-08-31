@@ -48,7 +48,4 @@ outpostsFIA = outpostsFIA + [_marker];
 // Load-from-save usage, troops are later. Don't spam publicVariable.
 if (_troopTypes isNotEqualTo []) then { publicVariable "outpostsFIA" };
 
-// meh
-//[-5, 5, markerPos _marker] remoteExec ["A3A_fnc_citySupportChange", 2];
-
 ["RebelControlCreated", [_marker, isOnRoad _pos]] call EFUNC(Events,triggerEvent);

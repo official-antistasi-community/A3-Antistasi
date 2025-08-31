@@ -21,8 +21,8 @@ if (isServer) then {
 	["hr"] call A3A_fnc_getStatVariable;
 	["dateX"] call A3A_fnc_getStatVariable;
 	["weather"] call A3A_fnc_getStatVariable;
-	["prestigeOPFOR"] call A3A_fnc_getStatVariable;
 	["prestigeBLUFOR"] call A3A_fnc_getStatVariable;
+	["cityData"] call A3A_fnc_getStatVariable;
 	["radioKeys"] call A3A_fnc_getStatVariable;
 	["resourcesFIA"] call A3A_fnc_getStatVariable;
 //	["garrison"] call A3A_fnc_getStatVariable;			// loaded later if it's an old save

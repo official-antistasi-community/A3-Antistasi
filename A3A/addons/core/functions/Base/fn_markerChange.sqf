@@ -85,7 +85,6 @@ if (_markerX in airportsX) then
 {
 	if (_winner == teamPlayer) then
 	{
-		[0,10,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
         Debug("aggroEvent | Rebels took an airport");
 		if (_loser == Occupants) then
 		{
@@ -103,14 +102,6 @@ if (_markerX in airportsX) then
 	{
 		server setVariable [_markerX,dateToNumber date,true];
 		[_markerX,60] call A3A_fnc_addTimeForIdle;
-		if (_winner == Occupants) then
-		{
-			[10,0,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
-		}
-		else
-		{
-			[-10,-10,_positionX] remoteExec ["A3A_fnc_citySupportChange",2]
-		};
 		if (_loser == teamPlayer) then
 		{
             Debug("aggroEvent | Rebels lost an airport");

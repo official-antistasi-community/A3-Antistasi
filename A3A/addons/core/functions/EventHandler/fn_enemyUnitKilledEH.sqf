@@ -63,27 +63,16 @@ if (side (group _killer) == teamPlayer) then
         private _uid = (["AI",getPlayerUID _killer] select (isPlayer _killer));
         private _name = name _killer;
         Debug_3("aggroEvent | Rebel %1 [UID: %2 Name: %3] killed a surrendered unit", _killer, _uid, _name);
-		if (_victimSide == Occupants) then
-		{
-			[0,-2,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-		};
+		[-2, getPosATL _victim] remoteExecCall ["A3A_fnc_citySupportChange", 2];     // always punish rebels for murder
         [_victimSide, 20, 30] remoteExec ["A3A_fnc_addAggression", 2];
 	}
 	else
 	{
-		[-1,1,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
+        private _marker = _victim getVariable ["markerX", ""];
+        if (_marker != "") then {
+    		[1, _marker] remoteExecCall ["A3A_fnc_citySupportChange", 2];       // Enemies don't count unless they're local
+        };
         [_victimSide, 0.5, 45] remoteExec ["A3A_fnc_addAggression", 2];
-	};
-}
-else
-{
-	if (_victimSide == Occupants) then
-	{
-		[-0.25,0,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-	}
-	else
-	{
-		[0.25,0,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
 	};
 };
 

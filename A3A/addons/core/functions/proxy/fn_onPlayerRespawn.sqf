@@ -35,8 +35,6 @@ if (side group player == teamPlayer) then
 
 	if (_owner != _oldUnit) exitWith {[localize "STR_A3A_fn_proxy_remAI_titel", localize "STR_A3A_fn_proxy_remAI_text"] call A3A_fnc_customHint; selectPlayer _owner; disableUserInput false; deleteVehicle _newUnit};
 
-	_nul = [0,-1,getPosATL _oldUnit] remoteExec ["A3A_fnc_citySupportChange",2];
-
 	_score = _oldUnit getVariable ["score",0];
 	_punish = _oldUnit getVariable ["punish",0];
 	_moneyX = _oldUnit getVariable ["moneyX",0];
