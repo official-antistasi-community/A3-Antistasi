@@ -2,7 +2,7 @@
 params ["_flag","_access"];
 
 private _flipTime = _flag getVariable ["A3A_flagFlipTime",-99999]; // default unlocked? yeah, dont trust jip
-private _timeSinceFlip = time - _flipTime;
+private _timeSinceFlip = serverTime - _flipTime;
 private _flagAccessBlockTime = A3A_flagGarageBlock * 60;
 private _remainingTime = _flagAccessBlockTime - _timeSinceFlip; 
 if (_remainingTime > 0) exitWith {
