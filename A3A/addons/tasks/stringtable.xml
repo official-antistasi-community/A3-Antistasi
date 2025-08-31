@@ -89,6 +89,36 @@
       <Key ID="STR_A3A_Tasks_LOG_Supplies_failed">
         <Original>Supply delivery failed.</Original>
       </Key>
+      <Key ID="STR_A3A_Tasks_hostage_title">
+        <Original>Rescue hostage</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_hostage_desc">
+        <Original>A rebel commander's cousin is being held hostage in %1. Reach them before %2 and extract them to rebel territory.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_hostage_start">
+        <Original>I'm glad you're here. Take me to any rebel location and I'll figure it out from there.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_hostage_startDesc">
+        <Original>We've recovered the hostage. Take them to any rebel location by %1.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_hostage_angry">
+        <Original>Are you even trying to get anywhere? I'll find my own way out.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_killcop_title">
+        <Original>Deal with corrupt cop</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_killcop_desc">
+        <Original>A corrupt cop in %1 has been harassing civilians even more than usual. We've figured out some of his routine. Deal with him before %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_killcop_kill">
+        <Original>Good riddance. He won't be bothering anyone again.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_killcop_surrender">
+        <Original>"Looks like you've convinced the scumbag of the error of his ways. We'll find a good use for his talents.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_killcop_timeout">
+        <Original>We've lost track of the target. Maybe another time.</Original>
+      </Key>
       <Key ID="STR_A3A_Tasks_repair_title">
         <Original>Recover rebel vehicle</Original>
       </Key>

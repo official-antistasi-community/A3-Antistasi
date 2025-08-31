@@ -10,8 +10,21 @@ params ["_marker"];
 
 // Doesn't make sense for the dude to be standing in the street. Put him in a building place instead
 
-private _buildingPlaces = [_marker, 200, 1] call A3A_fnc_patrolGetBuildingPlaces;
-private _place = if (_buildingPlaces isEqualTo []) then { [markerPos _marker, 0] } else { _buildingPlaces # 0 };
+// Find building with places that's not too close to enemies or players
+private _markerPos = markerPos _marker;
+private _blockers = (units Occupants + units teamPlayer) inAreaArray [_markerPos, 250, 250];
+private _place = false;
+for "_i" from 1 to 10 do {
+    private _rpos = _markerPos getPos [200 * sqrt random 1, random 360];
+    private _house = nearestBuilding _rpos;
+    if (_blockers inAreaArray [getPosATL _house, 20, 20] isNotEqualTo []) then { continue };
+    private _placePos = selectRandom (_house buildingPos -1);
+    if (!isNil "_placePos") exitWith { _place = [_placePos, _house getRelDir _placePos] };
+};
+if (_place isEqualType false) exitWith {
+    Debug_1("Failed to find suitable place in %1", _marker);
+    false;
+};
 
 // Other condition is that we need somewhere to take the guy?
 // Allow cities within mission distance & within 3km of this city

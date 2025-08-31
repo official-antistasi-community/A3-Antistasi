@@ -37,7 +37,7 @@ private _addActionCode = {
 private _displayTime = [((_task get "_endTime") - time) / 60] call FUNC(minutesFromNow);
 private _taskDesc = format [localize "STR_A3A_Tasks_taxi_desc", _marker, _displayTime];
 private _taskId = call FUNC(genTaskUID);
-[true, _taskId, [_taskDesc, _task get "_hintTitle"], _startPos, false, -1, true, "Defend", true] call BIS_fnc_taskCreate;
+[true, _taskId, [_taskDesc, _task get "_hintTitle"], _startPos, false, -1, true, "Car", true] call BIS_fnc_taskCreate;
 _task set ["_taskId", _taskId];
 
 // find actual destination building
@@ -89,15 +89,13 @@ _task set ["s_waitForPickup", {
 _task set ["s_transit", {
     private _passenger = _this get "_passenger";
     if (!alive _passenger) exitWith {
-    	[-5, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
-        [-5, theBoss] call A3A_fnc_playerScoreAdd;
-
+    	[-2, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
         _this set ["state", "s_failure"]; false;
     };
 
     private _destPos = _this get "_destPos";
     private _vehSpeed = vectorMagnitude velocity vehicle _passenger;
-    if (vehicle _passenger distance2d _destPos < _this get "_destRad" and _vehSpeed < 5) exitWith {
+    if (vehicle _passenger distance2d _destPos < _this get "_destRad" and _vehSpeed < 2) exitWith {
 
         // What would be a good success hint? Not really needed?
         // Thanks for the lift. This will help the war effort in %1.
@@ -112,7 +110,7 @@ _task set ["s_transit", {
     };
 
     // If you go fast enough he'll stick around
-    if (time > _this get "_endTime" and _vehSpeed < 5) exitWith {
+    if (time > _this get "_endTime" and _vehSpeed < 2) exitWith {
 
         // Are you just driving me around in circles? I'm outta here.
         private _nearPlayers = units (_this get "_taxiGroup") inAreaArray [getPosATL _passenger, 50, 50];
@@ -134,7 +132,8 @@ _task set ["s_success", {
 	[5, theBoss] call A3A_fnc_playerScoreAdd;
 
     // TODO: Maybe both ends?
-	[5, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+    private _distance = markerPos (_this get "_marker") distance2d (_this get "_destPos");
+	[5 + _distance/400, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 	[0, 200] remoteExec ["A3A_fnc_resourcesFIA", 2];
 
 	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;

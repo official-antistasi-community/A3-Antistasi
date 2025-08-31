@@ -101,6 +101,7 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	_mrk setMarkerAlpha 0;
 	citiesX pushBack _nameX;
 	spawner setVariable [_nameX, 2, true];
+	spawner setVariable [_nameX + "_civ", 2, true];		// civ part of spawning
 
 	_dmrk = createMarkerLocal [format ["Dum%1", _nameX], _pos];
 	_dmrk setMarkerShapeLocal "ICON";

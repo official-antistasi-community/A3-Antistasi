@@ -64,16 +64,17 @@ _task set ["_destRad", _compRad];
 // Create the mechanic near the house. Put him undercover for now.
 private _emptyPos = [_house, 2] call A3A_fnc_findPosNearHouse;
 if (_emptyPos isEqualTo []) then { _emptyPos = getPosATL _house getPos [random 50, random 360] };
-private _mechanic = [createGroup [teamPlayer, true], FactionGet(civ, "unitMan"), _emptyPos, [], 0, "NONE"] call A3A_fnc_createUnit;
+private _mechanic = [createGroup [teamPlayer, true], FactionGet(reb, "unitEng"), _emptyPos, [], 0, "NONE"] call A3A_fnc_createUnit;
+_mechanic forceAddUniform selectRandom (A3A_faction_civ get "uniforms");
 _mechanic setCaptive true;
-_mechanic disableAI "PATH";
+_mechanic disableAI "FSM";
 _task set ["_mechanic", _mechanic];
 
 // Create the task
 private _displayTime = [((_task get "_endTime") - time) / 60] call FUNC(minutesFromNow);
 private _taskDesc = format [localize "STR_A3A_Tasks_repair_desc", _marker, _displayTime];
 private _taskId = call FUNC(genTaskUID);
-[true, _taskId, [_taskDesc, _task get "_hintTitle"], _task get "_car", false, -1, true, "car", true] call BIS_fnc_taskCreate;
+[true, _taskId, [_taskDesc, _task get "_hintTitle"], _task get "_car", false, -1, true, "use", true] call BIS_fnc_taskCreate;
 _task set ["_taskId", _taskId];
 
 // Also need a marker for the safehouse
@@ -103,12 +104,9 @@ _task set ["s_fetchCar", {
             [_this get "_hintTitle", localize "STR_A3A_Tasks_repair_defend", getPosATL _car, 50] call FUNC(hintNear);
         };
 
-        // Find spot next to car for mechanic to work
+        // Find spot behind car for mechanic to work
         _mechanic setCaptive false;
-        _mechanic enableAI "PATH";
-        private _width = (boundingBoxReal _car)#0#0;
-        if (_car getRelDir _mechanic > 180) then { _width = -_width };
-        _mechanic doMove (_car modelToWorld [_width, 0, 0]);
+        _mechanic doMove (_car modelToWorld [0, boundingBoxReal [_car, "Geometry"]#0#1, 0]);
 
         _this set ["_countShown", false];
         _this set ["state", "s_defendMechanic"]; false;
@@ -119,18 +117,24 @@ _task set ["s_fetchCar", {
 _task set ["s_defendMechanic", {
     private _car = _this get "_car";
     private _mechanic = _this get "_mechanic";
-    if (!alive _car or !alive _mechanic) exitWith { _this set ["state", "s_failure"]; false };
+    if (!alive _car or !alive _mechanic) exitWith {
+        [_this get "_hintTitle", "", getPosATL _car, 100] call FUNC(hintNear);
+        _this set ["state", "s_failure"]; false;
+    };
 
     // If the car gets moved then we return to park mode
     if (_car distance2d (_this get "_destPos") > (_this get "_destRad") or speed _car > 0.01) exitWith {
         [_this get "_hintTitle", localize "STR_A3A_Tasks_repair_nomove", getPosATL _car, 50] call FUNC(hintNear);
+        _mechanic switchMove "";
         _mechanic doMove getPosATL _mechanic;
         _this set ["state", "s_fetchCar"]; false;
     };
 
     // Make the mechanic play an animation once he gets to the car
-    if (moveToCompleted _mechanic and animationState _mechanic != medicAnims#0) then {
-        _mechanic playMoveNow medicAnims#0;
+    if (unitReady _mechanic and animationState _mechanic != medicAnims#1) then {
+        _mechanic lookAt _car;
+        _mechanic setDir (_mechanic getDir _car);
+        _mechanic playMoveNow medicAnims#1;
     };
 
 	// Need to know actual time since the previous update
@@ -181,6 +185,7 @@ _task set ["s_cleanup", {
     if (alive _mechanic) then {
         _mechanic setCaptive true;
         _mechanic switchMove "";
+        _mechanic doWatch objNull;
         _mechanic doMove (_this get "_destPos");
     };
     _mechanic spawn { sleep 60; deleteVehicle _this };

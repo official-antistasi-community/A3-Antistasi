@@ -23,7 +23,7 @@ if (_scaled) then {
 private _antenna = A3A_antennaMap get _city;
 if (alive _antenna and _change > 0) then {
 	private _antSide = sidesX getVariable (A3A_antennaMap get netId _antenna);
-	private _antScale = [0.5, 1.5] select (_antSide == teamPlayer);
+	private _antScale = [0.6, 1.5] select (_antSide == teamPlayer);
 	_change = _change * _antScale;
 };
 

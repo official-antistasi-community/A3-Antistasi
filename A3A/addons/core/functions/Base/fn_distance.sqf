@@ -210,9 +210,6 @@ private _processCityCivMarker = {
 /*                                    start                                   */
 /* -------------------------------------------------------------------------- */
 
-// Prepare spawner values for civ part of city spawning
-{ spawner setVariable [_x + "_civ", 2] } forEach citiesX;
-
 // Pre-spawn rebel HQ
 isNil { ["Synd_HQ"] call A3A_fnc_garrisonServer_spawn };
 

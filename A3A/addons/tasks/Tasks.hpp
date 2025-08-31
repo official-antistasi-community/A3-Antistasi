@@ -67,4 +67,17 @@ class CityTasks {
         version = 1; //version number of task, update when compatibility is broken between last version and new update
         weight = 1;
     };
+    class Hostage {
+        func = QFUNC(city_hostage); // the task information needed to run the task
+        params = QFUNC(city_hostage_p); // determines the parameters for a task, if no valid ones can be genereated return false
+        version = 1; //version number of task, update when compatibility is broken between last version and new update
+        weight = 1;
+    };
+    class KillCop {
+        func = QFUNC(city_killcop); // the task information needed to run the task
+        params = QFUNC(city_killcop_p); // determines the parameters for a task, if no valid ones can be genereated return false
+        version = 1; //version number of task, update when compatibility is broken between last version and new update
+        weight = 1;
+    };
+
 };
