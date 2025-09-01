@@ -165,7 +165,7 @@ switch (_type) do {
             Debug_1("City weights: %1", _weightedMarkers);
 			private _site = selectRandomWeighted _weightedMarkers;
 			private _stationPos = A3A_garrison get _site getOrDefault ["policeStation", false];
-			if (_stationPos isEqualType [] and sidesX getVariable _site == Occupants) exitWith {
+			if (random 1 < 0.5 and _stationPos isEqualType [] and sidesX getVariable _site == Occupants) exitWith {
 				[_site, nearestBuilding _stationPos] spawn A3A_fnc_CON_PoliceStation;
 			};
 			[A3A_tasks_fnc_LOG_Supplies, [_site]] spawn A3A_tasks_fnc_runTask;

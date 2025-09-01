@@ -164,7 +164,7 @@ _task set ["s_success", {
 	{[10, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
 	[5, theBoss] call A3A_fnc_playerScoreAdd;
 
-	[5, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+	[8, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 	[0, 100] spawn A3A_fnc_resourcesFIA;
 
 	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
