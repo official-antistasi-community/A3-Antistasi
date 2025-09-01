@@ -237,7 +237,7 @@ _task set ["s_waitForStart",
 
     // Perf saving condition: If all troops reached the city but it's not spawned then disable sim
     if (spawner getVariable _marker != 0 and {count (_troops inAreaArray [_pos, 500, 500]) == count _troops}) exitWith {
-        { _x enableSimulationGlobal false; _x hideObjectGlobal true } forEach (_this get "_vehicles");
+        { _x enableSimulationGlobal false; _x hideObjectGlobal true } forEach (_this get "_vehicles" select { _x isKindOf "Land" });
         { _x enableSimulationGlobal false; _x hideObjectGlobal true } forEach _troops;
         _this set ["state", "s_troopsPaused"]; false;
     };
@@ -255,7 +255,7 @@ _task set ["s_troopsPaused",
     };
 
     if (spawner getVariable _marker == 0) exitWith {
-        { _x enableSimulationGlobal true; _x hideObjectGlobal false } forEach (_this get "_vehicles");
+        { _x enableSimulationGlobal true; _x hideObjectGlobal false } forEach (_this get "_vehicles" select { _x isKindOf "Land" });
         { _x enableSimulationGlobal true; _x hideObjectGlobal false } forEach (_this get "_troops");
         _this set ["state", "s_waitForStart"]; false;
     };
@@ -292,8 +292,8 @@ _task set ["s_victory",
 
     // TODO: scale with city size
 	private _playersInRange = (allPlayers - entities "HeadlessClient_F") inAreaArray [markerPos _marker, 500, 500];
-	{[100, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[50, theBoss] call A3A_fnc_playerScoreAdd;
+	{[10, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
+	[10, theBoss] call A3A_fnc_playerScoreAdd;
 
 	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
     _this set ["state", "s_cleanup"]; false;
@@ -305,7 +305,7 @@ _task set ["s_defeat",
     private _marker = _this get "_marker";
     [-50, _marker, false] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 
-	[-20, theBoss] call A3A_fnc_playerScoreAdd;
+	[-10, theBoss] call A3A_fnc_playerScoreAdd;
 
 	[_this get "_taskId", "FAILED"] call BIS_fnc_taskSetState;
     _this set ["state", "s_cleanup"]; false;

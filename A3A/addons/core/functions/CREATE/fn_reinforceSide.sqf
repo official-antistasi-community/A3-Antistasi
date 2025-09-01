@@ -19,7 +19,7 @@ if (gamemode == 3 and _side == Invaders) exitWith {};
 
 private _faction = Faction(_side);
 private _lowAir = _faction getOrDefault ["attributeLowAir", false];
-private _totalReinf = 0.1 * ([A3A_resourcesDefenceOcc, A3A_resourcesDefenceInv] select (_side == Invaders));       // spend 10% of defence resources
+private _totalReinf = 0.2 * ([A3A_resourcesDefenceOcc, A3A_resourcesDefenceInv] select (_side == Invaders));       // spend 20% of defence resources
 Debug_2("%1 has %2 resources available for reinforcements", _side, _totalReinf);
 if (_totalReinf <= 0) then {continue};
 

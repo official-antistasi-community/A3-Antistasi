@@ -50,6 +50,14 @@ private _taskId = call FUNC(genTaskUID);
 [true, _taskId, [_taskDesc, _task get "_hintTitle"], _hostage, false, -1, true, "Meet", true] call BIS_fnc_taskCreate;
 _task set ["_taskId", _taskId];
 
+// Function to be run passenger-local on completion
+_task set ["_fnc_getOut", {
+    params ["_passenger", "_destPos"];
+    unassignVehicle _passenger;
+    moveOut _passenger;
+    [_passenger] joinSilent createGroup [civilian, true];
+    _passenger doMove _destPos;
+}];
 
 _task set ["state", "s_waitForPickup"];
 _task set ["interval", 1];
@@ -93,14 +101,15 @@ _task set ["s_transit", {
         _this set ["state", "s_failure"]; false;
     };
 
+
     private _curMarker = [getPosATL _hostage] call A3A_fnc_getMarkerForPos;
     private _vehSpeed = vectorMagnitude velocity vehicle _hostage;
     if (sidesX getVariable [_curMarker, sideUnknown] == teamPlayer and _vehSpeed < 2) exitWith {
-        moveOut _hostage;
-        [_hostage] joinSilent createGroup [civilian, true];
+
         private _house = nearestBuilding getPosATL _hostage;
         private _destPos = if (isNull _house) then { markerPos _curMarker } else { getPosATL _house };
-        group _hostage addWaypoint [_destPos, 0];     // should work even if wrong locality
+        [[_hostage, _destPos], _this get "_fnc_getOut"] remoteExec ["call", _hostage];
+
         _this set ["state", "s_success"]; false;
     };
 
@@ -111,9 +120,8 @@ _task set ["s_transit", {
         private _nearPlayers = units (_this get "_taxiGroup") inAreaArray [getPosATL _hostage, 50, 50];
         [_this get "_hintTitle", localize "STR_A3A_Tasks_hostage_angry"] remoteExecCall ["A3A_fnc_customHint", _nearPlayers];
 
-        moveOut _hostage;
-        [_hostage] joinSilent createGroup [civilian, true];
-        group _hostage addWaypoint [getPosATL _hostage getPos [1000, random 360], 50];     // should work even if wrong locality
+        private _destPos = getPosATL _hostage getPos [1000, random 360];
+        [[_hostage, _destPos], _this get "_fnc_getOut"] remoteExec ["call", _hostage];
 
         _this set ["state", "s_failure"]; false;
     };

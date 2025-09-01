@@ -47,6 +47,15 @@ private _compRad = (boundingBox _house # 2) + 20;
 _task set ["_destPos", getPosATL _house];
 _task set ["_destRad", _compRad];
 
+// Function to be run passenger-local on completion
+_task set ["_fnc_getOut", {
+    params ["_passenger", "_destPos"];
+    unassignVehicle _passenger;
+    moveOut _passenger;
+    [_passenger] joinSilent createGroup [civilian, true];
+    _passenger doMove _destPos;
+}];
+
 _task set ["state", "s_waitForPickup"];
 _task set ["interval", 1];
 
@@ -102,10 +111,7 @@ _task set ["s_transit", {
         //private _nearPlayers = units (_this get "_taxiGroup") inAreaArray [getPosATL _passenger, 50, 50];
         //[_this get "_hintTitle", localize "STR_A3A_Tasks_Taxi_happy"] remoteExecCall ["A3A_fnc_customHint", _nearPlayers];
 
-        moveOut _passenger;
-        [_passenger] joinSilent createGroup [civilian, true];
-        group _passenger addWaypoint [_this get "_destPos", 0];     // should work even if wrong locality
-
+        [[_passenger, _this get "_destPos"], _this get "_fnc_getOut"] remoteExec ["call", _passenger];
         _this set ["state", "s_success"]; false;
     };
 
@@ -116,10 +122,7 @@ _task set ["s_transit", {
         private _nearPlayers = units (_this get "_taxiGroup") inAreaArray [getPosATL _passenger, 50, 50];
         [_this get "_hintTitle", localize "STR_A3A_Tasks_taxi_angry"] remoteExecCall ["A3A_fnc_customHint", _nearPlayers];
 
-        moveOut _passenger;
-        [_passenger] joinSilent createGroup [civilian, true];
-        group _passenger addWaypoint [_this get "_destPos", 0];     // should work even if wrong locality
-
+        [[_passenger, _this get "_destPos"], _this get "_fnc_getOut"] remoteExec ["call", _passenger];
         _this set ["state", "s_failure"]; false;
     };
     false;
@@ -128,8 +131,8 @@ _task set ["s_transit", {
 _task set ["s_success", {
     // TODO: Reward should probably be based on distance
 	private _playersInRange = units (_this get "_taxiGroup") inAreaArray [getPosATL (_this get "_passenger"), 250, 250];
-	{[10, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[5, theBoss] call A3A_fnc_playerScoreAdd;
+	{[10 / count _playersInRange, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
+	[2, theBoss] call A3A_fnc_playerScoreAdd;
 
     // TODO: Maybe both ends?
     private _distance = markerPos (_this get "_marker") distance2d (_this get "_destPos");

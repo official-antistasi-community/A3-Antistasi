@@ -27,14 +27,14 @@ if !(_possible#0) exitWith {
 
 A3A_petrosMoving = true; publicVariable "A3A_petrosMoving";
 
-private _groupPetros = group petros;
-[petros] join theBoss;
-deleteGroup _groupPetros;
-
 // The enableAI commands will only affect localhost
 petros setBehaviour "AWARE";
 petros enableAI "MOVE";
 petros enableAI "AUTOTARGET";
+
+private _groupPetros = group petros;
+[petros] join theBoss;
+deleteGroup _groupPetros;
 
 fireX inflame false;
 

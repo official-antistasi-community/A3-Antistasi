@@ -31,7 +31,7 @@ _task set ["s_waitForKill", {
     private _target = _this get "_target";
     if (isNull _target) exitWith {
         // Despawned. Delete the mission and exit.
-   		[_this, true, true] call BIS_fnc_deleteTask;
+   		[_this get "_taskId", true, true] call BIS_fnc_deleteTask;
     	true;		                                    // delete the task
     };
 
