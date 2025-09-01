@@ -114,7 +114,3 @@ player addEventHandler ["WeaponDisassembled", {
         [_veh] remoteExecCall ["A3A_fnc_garrisonServer_remVehicle", 2];
     };
 }];
-
-player addEventHandler ["Killed", {
-    [-1, 0] remoteExecCall ["A3A_fnc_resourcesFIA", 2];
-}];

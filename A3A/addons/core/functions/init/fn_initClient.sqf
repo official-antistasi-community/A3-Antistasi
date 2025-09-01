@@ -196,6 +196,10 @@ player addEventHandler ["GetOutMan", {
     if (!isNull _handle) then { terminate _handle };
 }];
 
+player addEventHandler ["Killed", {
+    [-1, 0] remoteExecCall ["A3A_fnc_resourcesFIA", 2];
+}];
+
 // Prevent players getting shot by their own AIs. EH is respawn-persistent
 player addEventHandler ["HandleRating", {0}];
 

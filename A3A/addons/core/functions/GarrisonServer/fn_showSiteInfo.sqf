@@ -41,7 +41,7 @@ private _text = call {
 
         (A3A_cityData getVariable _marker) params ["_numCiv", "_suppReb"];
         private _text = format [localize "STR_A3A_fn_init_cityinfo_overview_2",
-            _marker, _numCiv, 100-_suppReb, _suppReb, "%", FactionGet(occ,"name"), FactionGet(reb,"name")];
+            _marker, _numCiv, 100-_suppReb toFixed 0, _suppReb toFixed 0, "%", FactionGet(occ,"name"), FactionGet(reb,"name")];
 
         private _power = call {
             private _antenna = A3A_antennaMap get _marker;
