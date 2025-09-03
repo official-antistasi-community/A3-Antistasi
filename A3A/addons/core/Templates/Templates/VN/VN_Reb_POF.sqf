@@ -34,7 +34,7 @@ private _vehiclesLightArmed = ["vn_o_car_04_mg_01", "vn_b_wheeled_m274_mg_01_02"
 ["vehiclesAT", ["vn_b_wheeled_m151_mg_05", "vn_b_wheeled_m274_mg_02_02"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["vn_b_wheeled_m54_mg_02"]] call _fnc_saveToTemplate;
 
-["vehiclesBoat", ["vn_o_boat_02_01"]] call _fnc_saveToTemplate;
+["vehiclesBoat", ["vn_o_boat_02_01","vn_b_boat_09_01"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlane", ["vn_o_air_mig19_gun"]] call _fnc_saveToTemplate;
 
