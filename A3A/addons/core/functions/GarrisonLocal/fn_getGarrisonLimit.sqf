@@ -33,7 +33,7 @@ if (A3A_rebelGarrisonLimit == -1) exitWith {-1};
 
 private _limit = switch (true) do {
     case (_marker in citiesX): {
-        2 * round (sqrt ((server getVariable _marker)#0) / 2);
+        2 * round (sqrt (A3A_cityPop get _marker) / 2);
     };
     case (_marker in airportsX): {
         round (A3A_rebelGarrisonLimit * 1.5)

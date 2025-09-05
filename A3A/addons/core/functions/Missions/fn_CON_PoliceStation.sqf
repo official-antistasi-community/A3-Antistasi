@@ -20,13 +20,14 @@ private _taskId = "SUPP" + str A3A_taskCount;
 [[teamPlayer,civilian],_taskId,[_textX,_taskName],_taskPos,false,0,true,"Target",true] call BIS_fnc_taskCreate;
 [_taskId, "SUPP", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
+private _startTime = time;
 private _timeout = time + 90*60;
 waitUntil {sleep 1; (time > _timeout) or (sidesX getVariable _marker == teamPlayer) or (!alive _policeStation)};
 
 if (time > _timeout) then
 {
 	[_taskId, "SUPP", "FAILED"] call A3A_fnc_taskSetState;
-    [-200, _markerSide] remoteExec ["A3A_fnc_timingCA",2];
+    //[-200, _markerSide] remoteExec ["A3A_fnc_timingCA",2];
     [-10,theBoss] call A3A_fnc_playerScoreAdd;
 }
 else
@@ -34,9 +35,10 @@ else
 	sleep 5;            // don't block the destruction message?
 	[_taskId, "SUPP", "SUCCEEDED"] call A3A_fnc_taskSetState;
     [0,200] remoteExec ["A3A_fnc_resourcesFIA",2];
-    [-20, 20, _marker, false] remoteExec ["A3A_fnc_citySupportChange", 2];
+    [20, _marker, false] remoteExecCall ["A3A_fnc_citySupportChange", 2];           // no scaling? hmm
     {if (isPlayer _x) then {[10,_x] call A3A_fnc_playerScoreAdd}} forEach ([300,0,_taskPos,teamPlayer] call A3A_fnc_distanceUnits);
     [10,theBoss] call A3A_fnc_playerScoreAdd;
 };
 
-[_taskId, "SUPP", 1200] spawn A3A_fnc_taskDelete;
+private _delay = 0 min (_startTime + 1200 - time);
+[_taskId, "SUPP", _delay] spawn A3A_fnc_taskDelete;

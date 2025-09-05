@@ -42,7 +42,7 @@ _buildings = nearestObjects [_positionX, ["House"], _locationRadius];
 Info_2("Spawning City Civilians in %1 with a radius of %2", _markerX, _locationRadius);
 
 private _city = if (_positionX isEqualType "") then {_positionX} else {[citiesX, _positionX] call BIS_fnc_nearestPosition};
-private _cityData = server getVariable _city;
+private _cityData = A3A_cityData getVariable _city;
 private _numCiv = round (1.5 * sqrt (_cityData # 0) * (1 - tierWar / 20));
 
 // We don't want to add too many civ's.

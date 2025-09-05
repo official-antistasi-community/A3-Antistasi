@@ -146,18 +146,22 @@ _jna_dataList = [];
 _jna_dataList = _jna_dataList + jna_dataList;
 ["jna_dataList", _jna_dataList] call A3A_fnc_setStatVariable;
 
-_prestigeOPFOR = [];
-_prestigeBLUFOR = [];
-
+// First two are backwards compat
+private _prestigeOPFOR = [];
+private _prestigeBLUFOR = [];
+private _cityDataHM = createHashMap;
 {
-	_city = _x;
-	_dataX = server getVariable _city;
-	_prestigeOPFOR = _prestigeOPFOR + [_dataX select 2];
-	_prestigeBLUFOR = _prestigeBLUFOR + [_dataX select 3];
+	_dataX = +(A3A_cityData getVariable _x);			// copy so that we don't accidentally modify
+	_dataX set [3, A3A_cityTaskTimer get _x];			// might want this later
+	_cityDataHM set [_x, _dataX];
+	_prestigeBLUFOR pushBack (_dataX select 1);
+	_prestigeOPFOR pushBack (100 - (_dataX select 1));
 } forEach citiesX;
 
+["cityData", _cityDataHM] call A3A_fnc_setStatVariable;
 ["prestigeOPFOR", _prestigeOPFOR] call A3A_fnc_setStatVariable;
 ["prestigeBLUFOR", _prestigeBLUFOR] call A3A_fnc_setStatVariable;
+
 
 // No backwards compat for now?
 ["garrison", []] call A3A_fnc_setStatVariable;

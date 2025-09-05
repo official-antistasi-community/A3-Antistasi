@@ -129,6 +129,7 @@ A3A_recentDamageOcc = [];
 A3A_recentDamageInv = [];
 
 // Balance params updated by aggressionUpdateLoop
+A3A_balancePlayerScaleBase = 1;
 A3A_balancePlayerScale = 1;					// Important due to load/save scaling to 1 playerScale
 A3A_balanceVehicleCost = 110;
 A3A_balanceResourceRate = A3A_balancePlayerScale * ([A3A_balanceVehicleCost, 140] select (gameMode == 1));
@@ -149,8 +150,12 @@ A3A_oldHQInfoInv = [];
 
 A3A_markersToDelete = [];		// list of markers to be cleared after despawning
 
+A3A_activeCityBattles = createHashMap;		// list of markers with active city battle missions
+
+A3A_cityTaskTimer = createHashMap;			// maybe temporary. List of times after which a city task can spawn
+{ [_x, 0, 900] call A3A_fnc_setCityTaskDelay } forEach citiesX; 			// 0-15min for pop 100 city
+
 // These are silly, should be nil/true and local-defined only
-cityIsSupportChanging = false;
 resourcesIsChanging = false;
 savingServer = true;					// lock out saves until this is changed
 

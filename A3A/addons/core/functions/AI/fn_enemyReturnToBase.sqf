@@ -44,13 +44,12 @@ if (_vehicle != leader _group) exitWith
     // Ignore captured marker, find nearest suitable base to return to
     if (_vehicle isKindOf "Air") then {
         _marker = [_group, airportsX + ["CSAT_carrier", "NATO_carrier"]] call _fnc_nearestBase;
-    };
-    if (_vehicle isKindOf "Ship") then {
-        _marker = _vehicle getVariable "A3A_shipSpawnPos";      // not a marker, but fixed later
     } else {
+        if (_vehicle isKindOf "Ship") exitWith {
+            _marker = _vehicle getVariable "A3A_shipSpawnPos";      // not a marker, but fixed later
+        };
         _marker = [_group, airportsX + outposts] call _fnc_nearestBase;
     };
-
     if (isNil "_marker") exitWith {};       // just carry on
 
     private _returnPos = if (_marker isEqualType "") then { markerPos _marker } else { _marker };
