@@ -5,7 +5,7 @@ if ("carrier" in _markerX) exitWith { 0 };
 private _frontierX = if (_ignoreFrontier) then { false } else { [_markerX] call A3A_fnc_isFrontline };
 
 if (_markerX in citiesX) exitWith {
-    private _numCiv = server getVariable _markerX select 0;       // should be city pop?
+    private _numCiv = A3A_cityPop get _markerX;       // should be city pop?
     2 * ceil (sqrt _numCiv / 2);
 };
 

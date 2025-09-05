@@ -139,7 +139,7 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
         [_curGroup, "Patrol_Defend", 0, _squadRad, -1, true, _markerPos, false, false] call A3A_fnc_patrolLoop;
 
         // Add UAV if it's a specops roaming group
-        if (_type == "camp" and _faction get "uavsPortable" isNotEqualTo []) then
+        if (_type == "camp" and {_storedTroops#1 > 2.2} and _faction get "uavsPortable" isNotEqualTo []) then
         {
     		private _typeVeh = selectRandom (_faction get "uavsPortable");
 			private _uav = createVehicle [_typeVeh, getPosATL leader _curGroup, [], 0, "FLY"];

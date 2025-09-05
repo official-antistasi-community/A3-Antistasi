@@ -29,7 +29,6 @@ if (!isNil "_marker") then {
 
 // This is fairly odd...
 if (side _killer == Occupants) then {
-    [0.25, 0, getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange", 2];
     [Occupants, -1, 30] remoteExec ["A3A_fnc_addAggression", 2];
 } else {
     if (side _killer == Invaders) then {

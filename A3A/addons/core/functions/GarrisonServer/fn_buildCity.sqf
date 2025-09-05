@@ -15,8 +15,7 @@
 params ["_marker"];
 
 private _spawnKey = _marker + "_civ";
-private _numCiv = server getVariable _marker select 0;
-_numCiv = 15 * sqrt _numCiv;
+private _numCiv = 15 * sqrt (A3A_cityPop get _marker);
 
 private _spawnPlaces = A3A_spawnPlacesHM get _spawnKey;
 private _carPlaces = [];

@@ -54,8 +54,7 @@ private _artyTargPos = _posDest getPos [_size/3, random 360];
 
 
 // Spawn in the "civilians" (rebel defenders)
-private _numCiv = (server getVariable _mrkDest) select 0;
-_numCiv = 4 + round sqrt (_numCiv);
+private _numCiv = 4 + round sqrt (A3A_cityPop get _mrkDest);
 if (_numCiv > 30) then {_numCiv = 30};
 
 private _civilians = [];
@@ -104,14 +103,14 @@ private _fnc_adjustNearCities = {
         private _dist = getMarkerPos _x distance2d _position;
         if (_dist > _maxDist) then { continue };
         private _suppChange = linearConversion [0, _maxDist, _dist, _maxSupport, 0, true];
-        [0,_suppChange,_x,false] spawn A3A_fnc_citySupportChange;		// don't scale this by pop
+        [_suppChange, _x, false] remoteExecCall ["A3A_fnc_citySupportChange", 2];		// don't scale this by pop
     } forEach citiesX;
 };
 
 if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time > _missionExpireTime)) then {
     Info_1("Rebels defeated a punishment attack against %1", _mrkDest);
     [_taskId, "invaderPunish", "SUCCEEDED"] call A3A_fnc_taskSetState;
-    [_posDest, 30, 3000] call _fnc_adjustNearCities;
+    [_posDest, 20, 3000] call _fnc_adjustNearCities;
 
     A3A_punishmentDefBuff = A3A_punishmentDefBuff + 1.25;
     [Occupants, -10, 90] remoteExec ["A3A_fnc_addAggression",2];
@@ -120,11 +119,11 @@ if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time 
 } else {
     Info_1("Rebels lost a punishment attack against %1", _mrkDest);
     [_taskId, "invaderPunish", "FAILED"] call A3A_fnc_taskSetState;
-    [_posDest, -30, 3000] call _fnc_adjustNearCities;
+    [_posDest, -20, 3000] call _fnc_adjustNearCities;
 
     // Invaders pay extra to destroy a city
-    private _citypop = (server getVariable _mrkDest) select 0;
-    [-4 * _citypop * A3A_balancePlayerScale, Invaders, "attack"] remoteExec ["A3A_fnc_addEnemyResources", 2];
+    private _citypop = A3A_cityPop get _mrkDest;
+    [-50 * sqrt _citypop * A3A_balancePlayerScale, Invaders, "attack"] remoteExec ["A3A_fnc_addEnemyResources", 2];
 
     destroyedSites = destroyedSites + [_mrkDest];
     publicVariable "destroyedSites";

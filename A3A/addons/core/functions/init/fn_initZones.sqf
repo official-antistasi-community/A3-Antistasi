@@ -44,13 +44,17 @@ Info("Setting up towns");
 //Disables Towns/Villages, Names can be found in configFile >> "CfgWorlds" >> "WORLDNAME" >> "Names"
 private ["_nameX", "_roads", "_numCiv", "_roadsProv", "_roadcon", "_dmrk", "_info"];
 
-private _townPopulations = getArray (_mapInfo/"population");
+private _townPop = createHashMapFromArray getArray (_mapInfo/"population");
 private _disabledTowns = getArray (_mapInfo/"disabledTowns");
-{server setVariable [_x select 0,_x select 1]} forEach _townPopulations;
-private _hardCodedPopulation = _townPopulations isNotEqualTo [];
+private _hardCodedPop = _townPop isNotEqualTo createHashMap;
 
 private _popMult = getNumber (_mapInfo/"populationMult");
 if (_popMult == 0) then { _popMult = 1 };
+
+// Stop putting random crap in server namespace
+A3A_cityData = [true] call A3A_fnc_createNamespace;		// city -> [pop, support, accumHR]? Might have variable pop at some point
+A3A_cityPop = createHashMap;							// city -> base pop, won't change
+
 
 "(toLower getText (_x >> ""type"") in [""namecitycapital"",""namecity"",""namevillage"",""citycenter""]) &&
 !(getText (_x >> ""Name"") isEqualTo """") &&
@@ -65,9 +69,9 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	_size = [_size, 400] select (_size < 400);
 	_numCiv = 0;
 
-	if (_hardCodedPopulation) then
+	if (_hardCodedPop) then
 	{
-		_numCiv = server getVariable [_nameX, server getVariable (configName _x)]; //backwards compat to config name based pop defines
+		_numCiv = _townPop getOrDefault [_nameX, _townPop get (configName _x)]; //backwards compat to config name based pop defines
 		if (isNil "_numCiv" || {!(_numCiv isEqualType 0)}) then
 		{
             Error_1("Bad population count data for %1", _nameX);
@@ -97,6 +101,7 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	_mrk setMarkerAlpha 0;
 	citiesX pushBack _nameX;
 	spawner setVariable [_nameX, 2, true];
+	spawner setVariable [_nameX + "_civ", 2, true];		// civ part of spawning
 
 	_dmrk = createMarkerLocal [format ["Dum%1", _nameX], _pos];
 	_dmrk setMarkerShapeLocal "ICON";
@@ -104,8 +109,12 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	_dmrk setMarkerColor colorOccupants;
 
 	sidesX setVariable [_mrk, Occupants, true];
-	_info = [_numCiv, _numVeh, 75, 0];				// initial 75% gov, 0% rebel support
-	server setVariable [_nameX, _info, true];
+
+	// ok, how much bulk HR? based on pop or sqrt pop? latter is safer...
+	private _info = [_numCiv, 0, 2 * sqrt _numCiv];				// initial full pop, 0% rebel support, 20 HR for 100 pop?
+	A3A_cityData setVariable [_nameX, _info, true];
+	A3A_cityPop set [_nameX, _numCiv];
+
 };	//find in congigs faster then find location in 25000 radius
 
 markersX = markersX + citiesX;
@@ -272,6 +281,21 @@ if (debug) then {
 };
 
 
+// Create marker -> antenna and antenna netID -> marker mappings
+A3A_antennaMap = createHashMap;
+private _siteMarkers = airportsX + resourcesX + factories + outposts + seaports;		// cities should not be associated with antennas
+{
+	private _nearMarker = [_siteMarkers, _x] call BIS_fnc_nearestPosition;
+	A3A_antennaMap set [_nearMarker, _x];				// gives us a fast way to lookup whether an outpost owns a radio tower
+	A3A_antennaMap set [netId _x, _nearMarker];			// To find what side owns a radio tower
+} forEach antennas;
+
+{
+	private _nearAnt = [antennas, markerPos _x] call BIS_fnc_nearestPosition;
+	A3A_antennaMap set [_x, _nearAnt];					// To determine which antenna influences a city
+} forEach citiesX;
+
+
 // Make list of markers that don't have a proper road nearby
 // TODO: Nearly obsolete. Switch convoy code to road distance checks & markerNavPoint
 
@@ -303,8 +327,6 @@ A3A_fuelStations apply {
 	};
 };
 
-
-
 publicVariable "blackListDest";
 publicVariable "markersX";
 publicVariable "citiesX";
@@ -327,6 +349,9 @@ publicVariable "seaAttackSpawn";
 publicVariable "detectionAreas";
 publicvariable "A3A_fuelStations";
 publicvariable "A3A_fuelStationTypes";
+publicVariable "A3A_antennaMap";
+publicVariable "A3A_cityPop";
+publicVariable "A3A_cityData";
 
 initZonesDone = true;				// signal headless clients that they can start nav init
 publicVariable "initZonesDone";

@@ -197,6 +197,7 @@ private _processCityCivMarker = {
 
             if !(_marker in destroyedSites) then
             {
+                [_marker] spawn A3A_tasks_fnc_selectCityTask;
                 [[_marker], "A3A_fnc_createAmbientCiv"] call A3A_fnc_scheduler;
                 [[_marker], "A3A_fnc_createAmbientCivTraffic"] call A3A_fnc_scheduler;
             };
@@ -208,9 +209,6 @@ private _processCityCivMarker = {
 /* -------------------------------------------------------------------------- */
 /*                                    start                                   */
 /* -------------------------------------------------------------------------- */
-
-// Prepare spawner values for civ part of city spawning
-{ spawner setVariable [_x + "_civ", 2] } forEach citiesX;
 
 // Pre-spawn rebel HQ
 isNil { ["Synd_HQ"] call A3A_fnc_garrisonServer_spawn };
