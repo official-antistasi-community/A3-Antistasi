@@ -32,12 +32,12 @@
 ["vehiclesTanks", ["TFC_MBT_Leopard2A4M_F"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["RHS_M6_wd"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
-["vehiclesGunBoats", ["B_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesGunBoats", ["rhsusf_mkvsoc"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["TFC_CP140_dynamicLoadout", "I_tfc_ct156"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["B_tfc_cf35b_F"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["RHS_A10"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["B_tfc_cf35b_F", "TFC_CF39_GRIPEN_F"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["tfc_cc177701"]] call _fnc_saveToTemplate;
 ["vehiclesAirPatrol", ["TFC_Bell206_training_unarmed"]] call _fnc_saveToTemplate;
 
@@ -278,9 +278,9 @@ _militaryLoadoutData set ["sidearms", [
 ///////////////////////////////
 
 private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData; // touch and shit breaks
-_policeLoadoutData set ["uniforms", ["U_B_GEN_Soldier_F", "U_B_GEN_Commander_F"]];
+_policeLoadoutData set ["uniforms", ["U_R_deu_2lt"]];
 _policeLoadoutData set ["vests", ["V_TacVest_blk_POLICE"]];
-_policeLoadoutData set ["helmets", ["H_Cap_police"]];
+_policeLoadoutData set ["helmets", ["TFC_CH_BCAP_Pilot_Blue"]];
 _policeLoadoutData set ["shotGuns", [
 ["rhs_weap_M590_8RD", "", "", "", ["rhsusf_8Rnd_00Buck", "rhsusf_8Rnd_Slug"], [], ""],
 ["rhs_weap_M590_5RD", "", "", "", ["rhsusf_5Rnd_00Buck", "rhsusf_5Rnd_Slug"], [], ""]
@@ -337,13 +337,22 @@ _crewLoadoutData set ["uniforms", ["TFC_CU_CombatUniform_tunic_cadpat_TW"]];
 _crewLoadoutData set ["vests", ["TFC_CV_BV_tw"]];
 _crewLoadoutData set ["helmets", ["rhsusf_cvc_green_helmet"]];
 _crewLoadoutData set ["carbines", [
-["TFC_W_c8a3", "", "", "TFC_WA_C79_Elcan", ["rhs_mag_30Rnd_556x45_M855_Stanag"], [], ""]
+["TFC_W_c8a3", "", "", "", ["rhs_mag_30Rnd_556x45_M855_Stanag"], [], ""]
 ]];
 
 private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["uniforms", ["TFC_CU_CombatUniform_Aircrew_TW"]];
 _pilotLoadoutData set ["vests", ["TFC_CV_AIRCREW_TEMPERATE"]];
 _pilotLoadoutData set ["helmets", ["TFC_CH_Helo_Pilot", "TFC_CH_Helo_Pilot_up"]];
+
+private _officerLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
+_officerLoadoutData set ["uniforms", ["U_A_deu_mjr"]];
+_officerLoadoutData set ["vests", ["tfc_vest_pico_dsx"]];
+_officerLoadoutData set ["helmets", ["TFC_CH_Beret_7RCTR", "TFC_CH_Beret_12eRBC"]];
+_officerLoadoutData set ["backpacks", []];
+_officerLoadoutData set ["SMGs", [
+["TFC_W_C8IUR", "", "TFC_WA_peq15_blk", "rhsusf_acc_T1_low", ["rhs_mag_30Rnd_556x45_M855A1_Stanag_Ranger", "rhs_mag_30Rnd_556x45_M855A1_Stanag_Ranger_Tracer_Red", "rhs_mag_30Rnd_556x45_Mk262_Stanag_Ranger"], [], ""]
+]];
 
 /////////////////////////////////
 //    Unit Type Definitions    //
