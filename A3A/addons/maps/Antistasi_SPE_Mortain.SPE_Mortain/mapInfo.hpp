@@ -28,4 +28,7 @@ class SPE_Mortain {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"Land_SPE_House_Big_04", "Land_SPE_House_Big_02", "Land_SPE_Farmhouse_01", "Land_SPE_House_Small_01", "Land_SPE_House_Big_03"
+	};
 };

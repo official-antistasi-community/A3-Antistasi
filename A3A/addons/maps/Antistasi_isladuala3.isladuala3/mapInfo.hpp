@@ -26,4 +26,10 @@ class isladuala3 {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		// middle-eastern buildings from Sahrani
+		"Land_Dum_istan3_hromada2", "Land_Dum_olez_istan1_open2", "Land_Dum_olez_istan1",
+		// Rooms above garage and pillar house from Takistan
+		"Land_House_C_10_EP1", "Land_House_C_4_EP1"
+	};
 };

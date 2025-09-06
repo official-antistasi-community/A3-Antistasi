@@ -29,4 +29,8 @@ class altis {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"Land_i_House_Big_01_V1_F", "Land_i_House_Big_01_V2_F", "Land_i_House_Big_01_V3_F",
+		"Land_i_House_Big_02_V1_F", "Land_i_House_Big_02_V2_F", "Land_i_House_Big_02_V3_F"
+	};
 };

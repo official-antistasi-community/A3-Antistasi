@@ -31,4 +31,7 @@ class cam_lao_nam {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"Land_vn_house_big_04_f", "Land_i_House_Big_02_V1_F", "Land_PoliceStation_01_F", "Land_vn_slum_03_f", "Land_vn_hut_village_01"
+	};
 };

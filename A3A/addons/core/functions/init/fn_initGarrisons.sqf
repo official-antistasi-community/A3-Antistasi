@@ -5,25 +5,15 @@ Info("InitGarrisons started");
 
 // This function is now only called for a new game
 
-_fnc_initGarrison =
-{
-    params ["_marker", "_occGroups", "_invGroups"];
-    private _garrNum = [_marker] call A3A_fnc_garrisonSize;
-    private _side = sidesX getVariable _marker;
-    private _groupsRandom = [_occGroups, _invGroups] select (_side == Invaders);
+private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["vehicles", []], ["buildings", []] ];
+A3A_garrison set ["Synd_HQ", _emptyGarrison];
 
-    private _garrison = [];
-    while {count _garrison < _garrNum} do {
-        _garrison append (selectRandom _groupsRandom);
-    };
-    _garrison resize _garrNum;
-    garrison setVariable [_marker, _garrison, true];
-};
 
 private _updateMarkers = outposts + airportsX;			// To sort out the faction names & flags
 if (gameMode >= 3) then
 {
     // Set everything to government control if we have no invaders
+    // Otherwise use the pre-init sides
     {
         if (sidesX getVariable _x == Occupants) then { continue };
         sidesX setVariable [_x, Occupants, true];
@@ -33,11 +23,19 @@ if (gameMode >= 3) then
 { _x call A3A_fnc_mrkUpdate } forEach _updateMarkers;
 
 
-private _occGroups = (A3A_faction_occ get "groupsSquads") + (A3A_faction_occ get "groupsMedium");
-private _invGroups = (A3A_faction_inv get "groupsSquads") + (A3A_faction_inv get "groupsMedium");
-{ [_x, _occGroups, _invGroups] call _fnc_initGarrison } forEach airportsX + outposts;
+// Quite a bit of duplicated effort here but it's probably not worth optimizing
+{
+    [_x] call A3A_fnc_buildEnemyGarrison;
+} forEach (markersX - ["Synd_HQ"]);
 
-private _milGroups = (A3A_faction_occ get "groupsMilitiaSquads") + (A3A_faction_occ get "groupsMilitiaMedium");
-{ [_x, _milGroups, _invGroups] call _fnc_initGarrison } forEach resourcesX + factories + seaports;
+// Add police stations in cities (done before buildCity because they share vehicle places)
+call A3A_fnc_initPoliceStations;
+
+// Add boats & vehicles for cities
+{ [_x] call A3A_fnc_buildCity } forEach citiesX;
+
+// Add type info to markers
+call A3A_fnc_initMarkerTypes;
+
 
 Info("InitGarrisons completed");

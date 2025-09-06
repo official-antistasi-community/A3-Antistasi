@@ -310,7 +310,7 @@ class Templates
 
     class VN_Base
     {
-        requiredAddons[] = {"vn_weapons"};
+        requiredAddons[] = {"loadorder_f_vietnam"};
         logo = "\vn\data_f_vietnam\logos\vn_sml_ca.paa";
         basepath = QPATHTOFOLDER(Templates\Templates\VN);
         priority = 20;

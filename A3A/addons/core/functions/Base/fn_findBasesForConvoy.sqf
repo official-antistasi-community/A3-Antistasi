@@ -3,6 +3,7 @@
 params ["_mrkDest", "_possibleBases", ["_maxDistance", distanceForLandAttack+1500]];
 
 private _side = sidesX getVariable [_mrkDest, teamPlayer];
+if (_side == teamPlayer) then { _side = Occupants };            // Might be called with rebel town as input
 private _suppMarkers = [_mrkDest, false] call A3A_fnc_findLandSupportMarkers;
 private _bases = [];
 {
@@ -13,7 +14,7 @@ private _bases = [];
     // Base validity checks
     if (spawner getVariable _base == 0) then {continue};
     if (dateToNumber date < server getVariable _base) then {continue}; 				// garrison not busy
-    if (count (garrison getVariable [_base,[]]) < 16) then {continue};	            // sufficient garrison
+    if (A3A_garrison get _base get "troops" select 0 < 16) then {continue};	            // sufficient garrison
     if ({_x == _mrkDest} count (killZones getVariable [_base,[]]) >= 3) then {continue};
 
     _bases pushBack _base;

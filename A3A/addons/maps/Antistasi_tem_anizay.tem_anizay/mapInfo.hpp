@@ -26,4 +26,9 @@ class tem_anizay {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		// From Takistan
+		"Land_House_C_3_EP1", "Land_House_C_10_EP1", "Land_House_C_4_EP1", "Land_House_C_9_EP1",
+		"Land_House_K_8_EP1", "Land_House_K_7_EP1", "Land_House_K_3_EP1", "Land_House_L_6_EP1", "Land_House_L_7_EP1"
+	};
 };

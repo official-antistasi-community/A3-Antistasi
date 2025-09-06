@@ -29,4 +29,8 @@ class tanoa {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"Land_House_Big_04_F", "Land_House_Big_03_F", "Land_House_Big_01_F", "Land_Shop_Town_01_F", "Land_Shop_Town_03_F",
+		"Land_House_Small_01_F", "Land_House_Small_02_F"
+	};
 };

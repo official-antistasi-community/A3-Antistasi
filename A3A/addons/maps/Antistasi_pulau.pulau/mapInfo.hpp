@@ -22,6 +22,7 @@ class pulau {
 		{"DefaultKeyPoint32",31},
 		{"Loholoho",233}
 	};
+	populationMult = 1.5;
 	disabledTowns[] = {"DefaultKeyPoint6","DefaultKeyPoint9","DefaultKeyPoint11","DefaultKeyPoint12","DefaultKeyPoint13","DefaultKeyPoint14","DefaultKeyPoint16","DefaultKeyPoint17","DefaultKeyPoint18","DefaultKeyPoint29","DefaultKeyPoint30","DefaultKeyPoint31"};
 	antennas[] = {
 		{6004.48,6269.15,-7.62939e-006},{5367.93,8981.39,0.00322723},{7329.88,2402.91,0.0544472},{1907,7127.88,0.0916786},{9409.2,3129.01,0.885342},{7075.77,1006.8,7.62939e-005},{2626.32,1945.44,0.00999451}
@@ -48,5 +49,13 @@ class pulau {
 		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
+	};
+	policeStationTypes[] = {
+		// From Tanoa
+		"Land_House_Big_04_F", "Land_House_Big_03_F", "Land_House_Big_01_F", "Land_Shop_Town_01_F", "Land_Shop_Town_03_F",
+		"Land_House_Small_01_F", "Land_House_Small_02_F",
+		// From Malden
+		"Land_i_House_Big_01_V1_F", "Land_i_House_Big_01_V2_F", "Land_i_House_Big_01_V3_F", "Land_i_House_Big_01_b_whiteblue_F", "Land_i_House_Big_01_b_blue_F", "Land_i_House_Big_01_b_pink_F", "Land_i_House_Big_01_b_yellow_F", "Land_i_House_Big_01_b_brown_F",
+		"Land_i_House_Big_02_V1_F", "Land_i_House_Big_02_V2_F", "Land_i_House_Big_02_V3_F",	"Land_i_House_Big_02_b_whiteblue_F", "Land_i_House_Big_02_b_blue_F", "Land_i_House_Big_02_b_pink_F", "Land_i_House_Big_02_b_yellow_F", "Land_i_House_Big_02_b_brown_F"
 	};
 };

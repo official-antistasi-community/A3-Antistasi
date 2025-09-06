@@ -26,4 +26,7 @@ class sara {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"Land_Dum_mesto2", "Land_Dum_olezlina", "Land_Panelak", "Land_Dum_istan3_hromada2", "Land_Dum_olez_istan1_open2", "Land_Dum_olez_istan1"
+	};
 };

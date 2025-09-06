@@ -26,4 +26,8 @@ class chernarus {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"Land_HouseV2_04_interier", "Land_HouseV2_02_Interier", "Land_A_Pub_01",
+		"Land_a_stationhouse", "Land_HouseV_1I4", "Land_Mil_Guardhouse"
+	};
 };

@@ -37,4 +37,10 @@ class gm_weferlingen_winter {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"land_gm_euro_house_11_d_win", "land_gm_euro_house_11_e_win", "land_gm_euro_house_11_w_win", "land_gm_euro_house_02_d_win", "land_gm_euro_house_02_e_win", "land_gm_euro_house_02_w_win",
+		"land_gm_euro_house_06_w_win", "land_gm_euro_house_06_d_win", "land_gm_euro_house_06_e_win", "land_gm_euro_house_09_d_win", "land_gm_euro_house_09_e_win", "land_gm_euro_house_09_w_win",
+		"land_gm_euro_house_10_w_win", "land_gm_euro_house_10_d_win", "land_gm_euro_house_10_e_win", "land_gm_euro_house_12_d_win", "land_gm_euro_house_12_e_win", "land_gm_euro_house_12_w_win",
+		"land_gm_euro_house_08_w_win", "land_gm_euro_house_08_d_win", "land_gm_euro_house_08_e_win"
+	};
 };
