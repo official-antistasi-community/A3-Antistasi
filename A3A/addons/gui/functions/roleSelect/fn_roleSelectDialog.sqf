@@ -34,41 +34,62 @@ private _bannerImage = _display displayCtrl A3A_IDC_ROLEBANNERPICTURE;
 private _infoLine1 = _display displayCtrl A3A_IDC_ROLEINFOTEXT1;
 private _infoLine2 = _display displayCtrl A3A_IDC_ROLEINFOTEXT2;
 private _infoLine3 = _display displayCtrl A3A_IDC_ROLEINFOTEXT3;
+private _infoLine4 = _display displayCtrl A3A_IDC_ROLEINFOTEXT4;
 private _mainInfoButton = _display displayCtrl A3A_IDC_ROLEMAININFOBUTTON;
-private _setRoleButton = _display displayCtrl A3A_IDC_ROLESETROLEBUTTON;
+private _setRoleButton = _display displayCtrl A3A_IDC_ROLEINFOSELECTROLE;
+private _listOfIcons = [
+	["rifleman", A3A_IDC_ROLERIFLEMANICON],
+	["autorifleman", A3A_IDC_ROLEAUTORIFLEMANICON],
+	["grenadier", A3A_IDC_ROLEGRENADIERICON],
+	["medic", A3A_IDC_ROLEMEDICICON],
+	["engineer", A3A_IDC_ROLEENGINEERICON],
+	["teamleader", A3A_IDC_ROLETLICON],
+	["commander", A3A_IDC_ROLECOMMANDICON]
+];
 
 switch (_mode) do
 {
     case ("onLoad"):
     {
-        // Open main info page
-		// but first! double check player count. dont want to bother new players with an intro screen when they're command by default
-		// actually we can do this when we're spawning the dialog
-		/*
-		_allPlayers = (allPlayers - (entities "HeadlessClient_F"));
-		if (count _allPlayers <= 1) exitWith {
-			_allPlayers#0 setVariable ["A3A_Role", "rifleman", true];
-			["closeDialog"] call
-		};
-		*/
 		["openInfo"] call FUNC(roleSelectDialog);
     };
-
+	case ("update"):
+	{
+		{
+			_x params ["_roleName", "_icon"];
+			_icon = _display displayCtrl _icon;
+			private _currentCount = {_x getVariable ["A3A_Role", "none"] == _roleName} count allPlayers;
+			private _maxCount = [_roleName] call FUNCMAIN(getRoleCap);
+			if (_currentCount < _maxCount || {_roleName == "rifleman" || {_roleName == "commander" && {theBoss isEqualTo objNull}}}) then {
+				_icon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
+            	_icon ctrlSetTooltip "";
+			} else {
+				_icon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+            	_icon ctrlSetTooltip localize "STR_antistasi_dialogs_roleselect_cannotTakeRoleFull";
+			};
+		} forEach _listOfIcons;
+	};
     case ("openRole"):
     {
+		["update"] call A3A_GUI_fnc_roleSelectDialog;
+
+		_infoLine2 ctrlShow true;
+		_infoLine3 ctrlShow true;
+		_infoLine4 ctrlShow false;
 		_mainInfoButton ctrlShow true;
 		_setRoleButton ctrlShow true;
-
-
-        _roleName = _params#0;
+        private _roleName = _params#0;
 		_display setVariable ["displayState",_roleName];
-		_imagePath = format ["x\A3A\addons\GUI\dialogues\textures\banner_%1.paa",_roleName];
-		_bannerImage ctrlSetText _imageName;
-		_currentCount = allPlayers count {_x getVariable ["A3A_Role", "none"] == _roleName};
-		_maxCount = [_roleName] call FUNCMAIN(getRoleCap);
-		_firstLineText = localize format ["STR_antistasi_dialogs_roleselect_info_%1", _roleName];
-		_secondLineText = localize format ["STR_antistasi_dialogs_roleselect_utility_%1", _roleName];
-		if (_roleName in ["rifleman, commander"]) then { // special counting cases
+
+		private _imagePath = format ["x\A3A\addons\GUI\dialogues\textures\banner_%1.paa",_roleName];
+		//_bannerImage ctrlSetText _imageName;
+		private _currentCount = {_x getVariable ["A3A_Role", "none"] == _roleName} count allPlayers;
+		private _maxCount = [_roleName] call FUNCMAIN(getRoleCap);
+		private _firstLineText = localize format ["STR_antistasi_dialogs_roleselect_info_%1", _roleName];
+		private _secondLineText = localize format ["STR_antistasi_dialogs_roleselect_utility_%1", _roleName];
+		private _fullSlotsText = format [localize "STR_antistasi_dialogs_roleselect_slots", localize format ["STR_antistasi_dialogs_roleselect_role_%1",_roleName], _currentCount, str _maxCount];
+		private _slotExplanation = localize "STR_antistasi_dialogs_roleselect_capExplanation";
+		if (tolower _roleName in ["rifleman", "commander"]) then { // special counting cases
 			if (_roleName == "rifleman") then {
 				_fullSlotsText = format [localize "STR_antistasi_dialogs_roleselect_slotsRifleman",_currentCount];
 				_slotExplanation = localize "STR_antistasi_dialogs_roleselect_capExplanationRifleman";
@@ -80,11 +101,8 @@ switch (_mode) do
 				};
 				_slotExplanation = localize "STR_antistasi_dialogs_roleselect_capExplanationCommander";
 			};
-		} else {
-			_fullSlotsText = format [localize "STR_antistasi_dialogs_roleselect_slots", format ["STR_antistasi_dialogs_roleselect_role_%1",_roleName], _currentCount, str _maxCount];
-			_slotExplanation = localize "STR_antistasi_dialogs_roleselect_capExplanation";
 		};
-		if (_currentCount >= _maxCount || (_roleName == "commander")) then {
+		if ((_currentCount >= _maxCount || (_roleName == "commander")) && {_roleName != "rifleman"}) then {
 			_setRoleButton ctrlEnable false;
 			if (_roleName == "commander") then {
 				_setRoleButton ctrlSetTooltip localize "STR_antistasi_dialogs_roleselect_capExplanationCommander";
@@ -104,24 +122,27 @@ switch (_mode) do
 	
 	case ("openInfo"):
 	{
+		["update"] call A3A_GUI_fnc_roleSelectDialog;
+
+		_infoLine2 ctrlShow false;
+		_infoLine3 ctrlShow false;
+		_infoLine4 ctrlShow true;
 		_mainInfoButton ctrlShow false;
 		_setRoleButton ctrlShow false;
 		_display setVariable ["displayState","info"];
 
-		_bannerImage ctrlSetText MainBannerImage; // TODO DEFINE
+		_bannerImage ctrlSetText A3A_MainBannerImage; // TODO DEFINE
 		_infoLine1 ctrlSetText (localize "STR_antistasi_dialogs_roleselect_welcome");
 		private _playerRole = player getVariable ["A3A_Role","none"];
 		if (_playerRole == "none") then {
-			_infoLine2 ctrlSetText (localize "STR_antistasi_dialogs_roleselect_welcomeNew");
+			_infoLine4 ctrlSetText (localize "STR_antistasi_dialogs_roleselect_welcomeNew");
 		} else {
 			private _text = format [localize "STR_antistasi_dialogs_roleselect_hasRole", localize format ["STR_antistasi_dialogs_roleselect_role_%1", _playerRole]];
 			if (player isEqualTo theBoss) then {
 				_text = [_text, localize "STR_antistasi_dialogs_roleselect_isCommander"] joinString " ";
 			};
-			_infoLine2 ctrlSetText _text;
+			_infoLine4 ctrlSetText _text;
 		};
-		_infoLine3 ctrlSetText "";
-		_infoLine3 ctrlSetTooltip "";
 		// Welcome to Antisasi! To get started, select a role from the list on the left and use "set role". You can revisit this screen any time by opening the Battle Menu with Y.
 		// Each role has different traits and quirks, so it is recommended to start as a rifleman if you are new to the game.
 		// Your current role is: %1.

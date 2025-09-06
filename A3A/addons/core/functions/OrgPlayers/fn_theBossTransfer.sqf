@@ -12,9 +12,8 @@ if (!isNull theBoss) then
 
 	theBoss synchronizeObjectsRemove [HC_commanderX];
 	HC_commanderX synchronizeObjectsRemove [theBoss];
+	[player getVariable ["A3A_Role","rifleman"],true] remoteExecCall ["A3A_fnc_unitTraits", theBoss];
 };
-
-[player getVariable ["A3A_Role","rifleman"],true] remoteExeCall ["A3A_fnc_unitTraits", theBoss];
 
 theBoss = _newBoss;
 publicVariable "theBoss";
@@ -54,7 +53,7 @@ else {
 		};
 	} forEach allGroups;
 };
-["commander",true] remoteExeCall ["A3A_fnc_unitTraits", theBoss];
+["commander",true] remoteExecCall ["A3A_fnc_unitTraits", theBoss];
 
 Debug_1("New boss %1 set.", name theBoss);
 
