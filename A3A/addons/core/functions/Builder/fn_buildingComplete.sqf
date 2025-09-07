@@ -17,7 +17,6 @@ if (isNull _target) exitWith {};            // Possible if two engineers attempt
 deleteVehicle _target;
 
 // Cancel case
-private _price = _target getVariable ["A3A_build_price", 10];
 if (!_finished) exitWith {
     if (_price > 0) then { [0, _price] spawn A3A_fnc_resourcesFIA };
 };
@@ -33,8 +32,6 @@ private _building = createVehicle [_target getVariable "A3A_build_class", [0,0,0
 _building setPosWorld (_target getVariable "A3A_build_pos");
 _building setVectorDirAndUp (_target getVariable "A3A_build_dir");
 _building setVariable ["A3A_building", true, true];            // Used to identify removable buildings
-
-A3A_buildingsToSave pushBack _building;
 
 // Add to garrison data if it's within one
 private _marker = [getPosATL _building] call A3A_fnc_getMarkerForPos;
