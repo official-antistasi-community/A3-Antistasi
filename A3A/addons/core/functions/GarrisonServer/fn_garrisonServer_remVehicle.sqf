@@ -44,6 +44,7 @@ if (_index < 0) exitWith { Error_2("Vehicle type %1 not found in garrison %2", t
 
 // Remove from server garrison data
 (_garrison get _arrayType) deleteAt _index;
+if (_arrayType == "buildings" && {_vehicle inArea "Synd_HQ"}) then {call A3A_fnc_calcBuildingReveal};
 _vehicle setVariable ["markerX", nil, true];
 
 // No local updates for civ as they don't need to manage anything atm

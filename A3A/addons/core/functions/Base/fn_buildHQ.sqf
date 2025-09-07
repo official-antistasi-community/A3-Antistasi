@@ -87,7 +87,7 @@ A3A_buildingsToSave = A3A_buildingsToSave - _buildingsInArea;
 
 	["Synd_HQ", _x] call A3A_fnc_garrisonServer_addVehicle;
 
-[getPos petros, false] remoteExec ["A3A_fnc_relocateHQObjects", 2];
-[{A3A_HQDetectionRadius = 500}] remoteExec ["call",2];
+} forEach (vehicles inAreaArray "Synd_HQ");
+call A3A_fnc_calcBuildingReveal;
 
 ["HQPlaced", [_newPos]] call EFUNC(Events,triggerEvent);

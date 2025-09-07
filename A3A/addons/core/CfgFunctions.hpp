@@ -208,6 +208,8 @@ class CfgFunctions
             class buildingComplete {};
             class buildingPlacer {};
             class buildingPlacerStart {};
+            class calcBuildingCosts {};
+            class calcBuildingReveal {};
             class initBuildableObjects {};
             class initBuilderMonitors {};
             class initPlacerDB {};

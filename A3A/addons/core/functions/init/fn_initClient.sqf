@@ -328,11 +328,11 @@ if (isMultiplayer) then {mapX addAction [localize "STR_A3A_fn_init_initclient_ad
 player addAction ["Open Heli Garage", 
 "
         if ([getPosATL player] call A3A_fnc_enemyNearCheck) exitWIth {[localize 'STR_A3A_fn_init_initclient_helipad',localize 'STR_A3A_fn_init_initclient_helipad_enemies'] spawn A3A_fnc_customHint};
-        _helipad = (nearestObjects [player, ['a3a_helipad'], 20, true])#0;
+        _helipad = (nearestObjects [player, ['a3a_helipad'], 8, true])#0;
         HR_GRG_accessPoint = _helipad;
         HR_GRG_accessLimit = 'helipad';
         createDialog 'HR_GRG_VehicleSelect';
-", nil, 4, true, true, "","(count (nearestObjects [player, ['a3a_helipad'], 20, true]) > 0) && (((isNil {HR_GRG_Placing}) || {!HR_GRG_Placing}) && player isEqualTo vehicle player && _this == _this getVariable ['owner',objNull])"
+", nil, 4, true, true, "","(count (nearestObjects [player, ['a3a_helipad'], 8, true]) > 0) && (((isNil {HR_GRG_Placing}) || {!HR_GRG_Placing}) && player isEqualTo vehicle player && _this == _this getVariable ['owner',objNull])"
 ];
 
 [] call A3A_fnc_unitTraits;

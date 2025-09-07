@@ -65,7 +65,6 @@ if (_varName in _specialVarLoads) then {
         occRadioKeys = _varValue#0;
         invRadioKeys = _varValue#1;
     };
-    if (_varName == 'HQDetectionRadius') then {A3A_HQDetectionRadius = _varValue};
     if (_varName == 'aggressionOccupants') then
     {
         aggressionLevelOccupants = _varValue select 0;

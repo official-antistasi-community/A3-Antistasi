@@ -97,10 +97,7 @@ HR_GRG_Cats = HR_GRG_CATIDCS apply {_disp displayCtrl _x}; //,HR_GRG_IDC_CatUnma
     _x ctrlShow false;
     _x ctrlEnable false;
 } forEach HR_GRG_Cats;
-private _defaultCat = switch (HR_GRG_accessLimit) do {
-    case ("helipad"): {HR_GRG_HELIPADACCESSIBLE};
-    default {0};
-};
+private _defaultCat = [0, HR_GRG_HELIPADACCESSIBLE#0] select (call HR_GRG_Cnd_isHelipad && {!(call HR_GRG_Cnd_isAirbase)});
 [_defaultCat] call HR_GRG_fnc_switchCategory;
 
 //sell button init

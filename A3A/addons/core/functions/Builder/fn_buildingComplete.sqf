@@ -35,7 +35,6 @@ _building setVectorDirAndUp (_target getVariable "A3A_build_dir");
 _building setVariable ["A3A_building", true, true];            // Used to identify removable buildings
 
 A3A_buildingsToSave pushBack _building;
-if (_building distance2D "Synd_HQ" < 100) then {A3A_HQDetectionRadius = A3A_HQDetectionRadius + (_price/5)};
 
 // Add to garrison data if it's within one
 private _marker = [getPosATL _building] call A3A_fnc_getMarkerForPos;

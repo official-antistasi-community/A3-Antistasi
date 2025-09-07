@@ -98,7 +98,7 @@ switch (_mode) do
 			_button setVariable ["model", _model];
 			_button setVariable ["price", _price];
 			_button ctrlCommit 0;
-			if (_ability isEqualTo "helipad" && {count ((((["Synd_HQ"] + outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}) apply {getMarkerPos _x}) inAreaArray [getPosATL player, 75, 75]) > 0}) then {
+			if (_ability isEqualTo "helipad" && {((((["Synd_HQ"] + outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}) apply {getMarkerPos _x}) inAreaArray [getPosATL player, 75, 75]) isEqualTo []}) then {
 				_button ctrlEnable false;
 				_button ctrlSetTooltip "You can only build helipads at captured friendly markers or HQ.";
 			};

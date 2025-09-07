@@ -33,8 +33,12 @@ HR_GRG_CP_closeCnd = {
     }
 };
 
-HR_GRG_Cnd_canAccessAir = {
+HR_GRG_Cnd_isAirbase = {
     count (airportsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (HR_GRG_accessPoint inArea _x)}) > 0
+};
+
+HR_GRG_Cnd_isHelipad = {
+    count (nearestObjects [player, ['a3a_helipad'], 20, true]) > 0
 };
 
 // Return lock limit for specified player

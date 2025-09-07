@@ -26,6 +26,7 @@ License: APL-ND
 #include "..\..\dialogues\defines.hpp"
 #include "..\..\dialogues\textures.inc"
 #include "..\..\script_component.hpp"
+#include "..\..\..\garage\CfgDefines.inc"
 FIX_LINE_NUMBERS()
 
 params[["_mode","update"], ["_params",[]]];
@@ -259,7 +260,9 @@ switch (_mode) do
                     // Garage check
                     private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
                     private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
-                    if !(_inArea > -1) then {
+                    private _nearHelipads = nearestObjects [player, ["a3a_helipad"], 20, true];
+                    private _isNearHelipad = (count _nearHelipads > 0) && {_vehicle isKindOf "Helicopter" && {_nearHelipads#0 distance2D _vehicle < 20}};
+                    if !(_inArea > -1 || _isNearHelipad) then {
                         _addToGarageButton ctrlEnable false;
                         _addToGarageButton ctrlSetTooltip "Must be near friendly marker to garage";
                     };
@@ -269,13 +272,13 @@ switch (_mode) do
                         _unlockVehicleButton ctrlSetTooltip "Cannot lock static objects";
                     };
                     // Aircraft specific checks
-                    if (_vehicleCat in [3,4]) then {
+                    if (_vehicleCat in HR_GRG_BLOCKAIRINDEX) then {
                         private _friendlyMarkers = (airportsX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
-                        private _nearestHelipad = (nearestObjects [player, ["a3a_helipad"], 20, true])#0;
-                        private _inArea = ((_friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 }) || {if (isNull _nearestHelipad) exitWith {false}; (_vehicle distance2D _nearestHelipad) < 20});
+                        private _nearestHelipads = (nearestObjects [player, ["a3a_helipad"], 20, true]);
+                        private _inArea = ((_friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 } != -1) || {(count _nearestHelipads > 0 && {(_vehicle distance2D (_nearestHelipads#0)) < 20})});
                         if !(_inArea) then {
                             _addToGarageButton ctrlEnable false;
-                            if (_vehicleCat == HR_GRG_HELIPADACCESSIBLE) then {
+                            if (_vehicleCat == (HR_GRG_HELIPADACCESSIBLE)#0) then {
                                 _addToGarageButton ctrlSetTooltip "Must be near friendly airbase or helipad to garage";
                             } else {
                                 _addToGarageButton ctrlSetTooltip "Must be near friendly airbase to garage"

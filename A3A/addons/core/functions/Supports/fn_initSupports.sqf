@@ -24,7 +24,7 @@ A3A_supportStrikes = [];
 A3A_activeSupports = [];
 
 // Current HQ detection radius
-A3A_HQDetectionRadius = 500;
+call A3A_fnc_calcBuildingReveal;
 
 // Interfaces:
 // Avail func: _weight = [_target, _side, _maxSpend?] call _availFunc;
