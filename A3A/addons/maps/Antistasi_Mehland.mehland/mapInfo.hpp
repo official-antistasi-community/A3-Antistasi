@@ -55,9 +55,9 @@ class mehland {
     {"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
     };
 policeStationTypes[] = {
-		"Land_PoliceStation_01_F", "Land_House_2B01_F", "Land_House_2B02_F", "Land_House_2B03_F", "Land_House_2B04_F",
-		"Land_House_2W01_F", "Land_House_2W02_F", "Land_House_2W03_F", "Land_House_2W04_F", "Land_House_2W05_F",
-		"Land_House_1B01_F", "Land_House_1W11_F", "Land_House_1W12_F", "Land_House_1W07_F",
-		"Land_House_1W02_F", "Land_House_1W09_F", "Land_House_1W05_F", "Land_House_1W06_F"
+		"land_policestation_01_f", "land_house_2b01_f", "land_house_2b02_f", "land_house_2b03_f", "land_house_2b04_f",
+		"land_house_2w01_f", "land_house_2w02_f", "land_house_2w03_f", "land_house_2w04_f", "land_house_2w05_f",
+		"land_house_1b01_f", "land_house_1w11_f", "land_house_1w12_f", "land_house_1w07_f",
+		"land_house_1w02_f", "land_house_1w09_f", "land_house_1w05_f", "land_house_1w06_f"
 	};
 };
