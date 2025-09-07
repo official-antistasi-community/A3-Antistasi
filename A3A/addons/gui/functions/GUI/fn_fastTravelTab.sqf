@@ -100,7 +100,7 @@ switch (_mode) do
                 Trace_1("_infoText: %1", '"'+_infoText+'"');
                 // Disable commit button and show what's wrong in info text
                 private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
-                _infoText = _prettyString joinString "<br/><br/>";
+                _infoText = _prettyString joinString "\n\n";
                 if (_isFastTravelAllowed && !_hcMode) then {
                     private _costString = ["$",str _fastTravelCost] joinString "";
                     _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_cost" + " " + _costString + ". <br/>" + localize "STR_antistasi_dialogs_main_fast_travel_noMoney";
@@ -190,7 +190,7 @@ switch (_mode) do
         // Find closest marker to the clicked position
         _params params ["_clickedPosition"];
         private _clickedWorldPosition = _fastTravelMap ctrlMapScreenToWorld _clickedPosition;
-        private _locations = airportsX + resourcesX + factories + outposts + seaports + citiesX + ["Synd_HQ"];
+        private _locations = airportsX + resourcesX + factories + outposts + seaports + citiesX + outpostsFIA + ["Synd_HQ"];
         private _selectedMarker = [_locations, _clickedWorldPosition] call BIS_fnc_nearestPosition;
         Debug_1("Selected marker: %1", _selectedMarker);
 

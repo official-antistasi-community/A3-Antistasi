@@ -12,6 +12,7 @@
         <Bool> Should patrol happen from center of spawn. False means that it uses it current position to patrol.
         <Array> Center Position of unit. Typically where it spawned.
         <Bool> Should this unit search buildings?
+        <Bool> Allow automatic switching to attack mode (optional, default true)
 
     Return Value:
         N/A
@@ -41,35 +42,41 @@ params [
     ["_dist", -1], 
     ["_fromCenter", true], 
     ["_centerPos", []], 
-    ["_searchBuildings", false]
+    ["_searchBuildings", false],
+    ["_autoAttack", true]
 ];
 
-[_group, _patrolType, _minDist, _maxDist, _dist, _fromCenter, _centerPos, _searchBuildings] spawn {
-    params ["_group","_patrolType", "_minDist", "_maxDist", "_dist", "_fromCenter", "_centerPos", "_searchBuildings"];
-    
-    // Exit if the group is Null, or Empty.
-    if ((isNull _group) || (({alive _x} count units _group) < 1)) exitWith {};
+// Exit if the group is Null, or Empty.
+if ((isNull _group) || (({alive _x} count units _group) < 1)) exitWith {};
 
-    if (count _centerPos < 3) then {
-        _centerPos = (getPosATL (leader _group));
-    };
+if (count _centerPos < 3) then {
+    _centerPos = (getPosATL (leader _group));
+};
 
-    if !((side leader _group) == civilian) then {
-        _group setVariable ["PATCOM_Patrol_Params", [_patrolType, _minDist, _maxDist, _dist, _fromCenter, _centerPos, _searchBuildings]];
-    };
+if (side _group != civilian) then {
+    _group setVariable ["PATCOM_Previous_Orders", _group getVariable "PATCOM_Patrol_Params"];
+    _group setVariable ["PATCOM_Patrol_Params", [_patrolType, _minDist, _maxDist, _dist, _fromCenter, _centerPos, _searchBuildings]];
+    _group setVariable ["PATCOM_AutoAttack", _autoAttack];
+};
 
-    // Will not run unless PATCOM_Controlled is set to false.
-    [_group] call A3A_fnc_patrolGroupVariables;
+// Will not run unless PATCOM_Controlled is set to false.
+[_group] call A3A_fnc_patrolGroupVariables;
 
+
+// Swap out the current loop if it's already running, to make it update immediately
+terminate (_group getVariable ["A3A_AIScriptHandle", scriptNull]);
+private _scriptHandle = [_group] spawn {
+    params ["_group"];
     while {true} do {
         if ((isNull _group) || (({alive _x} count units _group) < 1)) exitWith {};
 
-        if ((side leader _group) == civilian) then {
+        if ((side leader _group) == civilian) then {                // causes this to run on military groups after they're all downed. Bad?
             [_group] call A3A_fnc_patrolCivilianCommander;
         } else {
             [_group] call A3A_fnc_patrolCommander;
         };
 
-        sleep (round (((count allunits) / 2) * 1.2));
+        sleep (10 + count allunits / 10);
     };
 };
+_group setVariable ["A3A_AIScriptHandle", _scriptHandle];

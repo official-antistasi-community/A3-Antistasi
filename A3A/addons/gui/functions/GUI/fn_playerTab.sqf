@@ -36,6 +36,7 @@ switch (_mode) do
     {
         Trace("Updating Player tab");
         private _display = findDisplay A3A_IDD_MAINDIALOG;
+        if (isNull _display) exitWith {};
 
         // Disable buttons for functions that are unavailable
 
@@ -101,9 +102,9 @@ switch (_mode) do
         } else {
             _fastTravelButton ctrlEnable false;
             private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
-            _fastTravelButton ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
+            _fastTravelButton ctrlSetTooltip (_prettyString joinString ",\n\n");
             _fastTravelIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            _fastTravelIcon ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
+            _fastTravelIcon ctrlSetTooltip (_prettyString joinString ",\n\n");
         };
 
         // Construct
@@ -231,7 +232,11 @@ switch (_mode) do
 
             if !(isNull _vehicle) then {
                 // Check if vehicle is eligible for garage / sell, not a dude or house etc.
-                if (_vehicle isKindOf "Air" or _vehicle isKindOf "LandVehicle") then {
+                private _canGarage = (
+                    ([typeOf _vehicle] call HR_GRG_fnc_getCatIndex >= 0) ||
+                    (_vehicle getVariable ['A3A_canGarage', false])
+                );
+                if (_canGarage) then {
                     private _className = typeOf _vehicle;
                     private _configClass = configFile >> "CfgVehicles" >> _className;
                     private _displayName = getText (_configClass >> "displayName");
@@ -246,15 +251,21 @@ switch (_mode) do
                     private _vehiclePicture = _display displayCtrl A3A_IDC_VEHICLEPICTURE;
                     _vehiclePicture ctrlSetText _editorPreview;
 
+                    private _addToGarageButton = _display displayCtrl A3A_IDC_GARAGEVEHICLEBUTTON;
                     private _sellVehicleButton = _display displayCtrl A3A_IDC_SELLVEHICLEBUTTON;
+                    private _unlockVehicleButton = _display displayCtrl A3A_IDC_UNLOCKVEHICLEBUTTON;
 
                     // Garage check
                     private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
                     private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
                     if !(_inArea > -1) then {
-                        private _addToGarageButton = _display displayCtrl A3A_IDC_GARAGEVEHICLEBUTTON;
                         _addToGarageButton ctrlEnable false;
                         _addToGarageButton ctrlSetTooltip "Must be near friendly marker to garage";
+                    };
+                    if (_vehicle getVariable ['A3A_canGarage', false]) then {
+                        _addToGarageButton ctrlSetTooltip "Garaging this will delete it and refund the full cost";
+                        _unlockVehicleButton ctrlEnable false;
+                        _unlockVehicleButton ctrlSetTooltip "Cannot lock static objects";
                     };
 
                     // Change label on lock/unlock depending on vehicle lock state
@@ -276,6 +287,10 @@ switch (_mode) do
                             _sellVehicleButton ctrlEnable false;
                             _sellVehicleButton ctrlSetTooltip "Must be near friendly marker to sell";
                         }; 
+                        if (_vehicle getVariable ['A3A_canGarage', false]) then {
+                            _sellVehicleButton ctrlEnable false;
+                            _sellVehicleButton ctrlSetTooltip "Not sellable - garage instead";
+                        };
                         // Disable "add to air support" button if vehicle is not eligible
                         private _addToAirSupportButton = _display displayCtrl A3A_IDC_ADDTOAIRSUPPORTBUTTON;
                         if !(_vehicle isKindOf "Air") then {

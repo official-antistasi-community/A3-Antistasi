@@ -87,22 +87,11 @@ switch (_mode) do
             } forEach [_airSupportButton,_recruitSquadButton,_requestMissionButton,_createWatchpostButton,_removeGarrisonButton,_HCSquadsButton];
         };
 
-        // Initialize fire mission vars
-        _fireMissionControlsGroup setVariable ["heSelected", true];
-        _fireMissionControlsGroup setVariable ["pointSelected", true];
-        _fireMissionControlsGroup setVariable ["roundsNumber", 1];
-        _fireMissionControlsGroup setVariable ["availableHeRounds", 0];
-        _fireMissionControlsGroup setVariable ["availableSmokeRounds", 0];
-        _fireMissionControlsGroup setVariable ["startPos", nil];
-        _fireMissionControlsGroup setVariable ["endPos", nil];
-
-        // Set map to group selection mode
-        _commanderMap setVariable ["selectFireMissionPos", false];
-        _commanderMap setVariable ["selectFireMissionEndPos", false];
-
         // Check for selected groups
         private _selectedGroup = _commanderMap getVariable ["selectedGroup", grpNull];
+        private _doAutoSwitch = _commanderMap getVariable ["doAutoSwitch", false];
         private _hasGroup = !(_selectedGroup isEqualTo grpNull);
+        /*
         private _isMortarVic = false;
         if (_hasGroup) then {
             {
@@ -114,6 +103,21 @@ switch (_mode) do
                 };
             } forEach (units _selectedGroup);
         };
+        */
+
+        // Initialize fire mission vars
+        _fireMissionControlsGroup setVariable ["heSelected", true];
+        _fireMissionControlsGroup setVariable ["pointSelected", true];
+        _fireMissionControlsGroup setVariable ["roundsNumber", 1];
+        _fireMissionControlsGroup setVariable ["availableHeRounds", 0];
+        _fireMissionControlsGroup setVariable ["availableSmokeRounds", 0];
+        _fireMissionControlsGroup setVariable ["startPos", nil];
+        _fireMissionControlsGroup setVariable ["endPos", nil];
+        _fireMissionControlsGroup setVariable ["mortarGroup", _selectedGroup];
+
+        // Set map to group selection mode
+        _commanderMap setVariable ["selectFireMissionPos", false];
+        _commanderMap setVariable ["selectFireMissionEndPos", false];
 
         // Check for valid marker for dismissal
         if (_commanderMap getVariable ["selectedMarker",""] isEqualTo "") then {
@@ -126,10 +130,12 @@ switch (_mode) do
 
         switch (true) do 
         {
-            case (_hasGroup && _isMortarVic): { // If all is valid show fire mission view
+            /*
+            case (_doAutoSwitch && _isMortarVic): { // If all is valid show fire mission view
                 {_x ctrlShow false} forEach _baseButtons; // expected to be done through single group view
                 ["updateFireMissionView"] call FUNC(commanderTab);
             };
+            */
             case (_hasGroup): { // If a group is selected show the single group view
                  ["updateSingleGroupView"] call FUNC(commanderTab);
             };
@@ -142,6 +148,7 @@ switch (_mode) do
                 
             };
         };
+        _commanderMap setVariable ["doAutoSwitch", false];
     };
 
     case ("updateSingleGroupView"):
@@ -201,7 +208,7 @@ switch (_mode) do
             _groupFastTravelButton ctrlSetFade 0.5;
             _groupFastTravelButton ctrlCommit 0;
             private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
-            _groupFastTravelButton ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
+            _groupFastTravelButton ctrlSetTooltip (_prettyString joinString ",\n\n");
         };
 
         private _groupCountText = _display displayCtrl A3A_IDC_HCGROUPCOUNT;
@@ -504,7 +511,8 @@ switch (_mode) do
 
         // Update rounds count
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
-        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        private _group = _fireMissionControlsGroup getVariable ["mortarGroup", grpNull];
+        _commanderMap setVariable ["selectedGroup", grpNull];
         private _units = units _group;
 
         private _mortarHEMag = FactionGet(reb,"staticMortarMagHE");
@@ -593,16 +601,18 @@ switch (_mode) do
         // Disable fire button initially
         _fireButton ctrlEnable false;
 
+        private _roundType = "";
         if (_heShell) then
         {
             // HE
             _heButton ctrlEnable false;
             _smokeButton ctrlEnable true;
-
+            _roundType = _mortarHEMag;
         } else {
             // Smoke
             _smokeButton ctrlEnable false;
             _heButton ctrlEnable true;
+            _roundType = _mortarSmokeMag;
         };
 
         if (_pointStrike) then
@@ -710,15 +720,23 @@ switch (_mode) do
         // Add tooltip to fire button when unable to fire
         private _firebuttonTooltipText = "";
         private _availableRounds = [_smokeRoundsCount, _heRoundsCount] select _heShell;
+        private _isInRange = call {
+            if (isNil "_startPos") exitWith {false};
+            _startPos inRangeOfArtillery [[_artyArrayDef1#0],_roundType];
+        };
         switch (true) do
         {
             case (isNil "_startPos" || (!_pointStrike && isNil "_endPos")):
             {
-                _firebuttonTooltipText = _firebuttonTooltipText + localize "STR_antistasi_dialogs_main_hc_fire_mission_position_not_set_tooltip" + "\n"
+                _firebuttonTooltipText = localize "STR_antistasi_dialogs_main_hc_fire_mission_position_not_set_tooltip"
             };
             case (_roundsCount > _availableRounds):
             {
-                _firebuttonTooltipText = _firebuttonTooltipText + localize "STR_antistasi_dialogs_main_hc_fire_misison_no_ammo_tooltip" + "\n"
+                _firebuttonTooltipText = localize "STR_antistasi_dialogs_main_hc_fire_mission_no_ammo_tooltip"
+            };
+            case !(_isInRange):
+            {
+                _firebuttonTooltipText = localize "STR_antistasi_dialogs_main_hc_fire_mission_out_of_range_tooltip"
             };
         };
 
@@ -784,17 +802,16 @@ switch (_mode) do
                 Debug("Distance too large, deselecting item");
                 _commanderMap setVariable ["selectedGroup", grpNull];
                 _commanderMap setVariable ["selectedMarker", locationNull];
-                ["update"] call FUNC(commanderTab);
             };
         if (_selectedItem isEqualType grpNull) then {
             _commanderMap setVariable ["selectedGroup", _selectedItem];
             _commanderMap setVariable ["selectedMarker", locationNull];
+            ["update"] call FUNC(commanderTab); // Update single group view if applicable
         } else {
             _commanderMap setVariable ["selectedMarker", _selectedItem];
             _commanderMap setVariable ["selectMarkerData", [_selectedItemPosition]];
             _commanderMap setVariable ["selectedGroup", grpNull];
-        };
-        ["update"] call FUNC(commanderTab); // Update single group view if applicable
+        };  
     };
 
     case ("groupNameLabelClicked"):
@@ -979,7 +996,7 @@ switch (_mode) do
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
 
         // Get params for fire mission from controlsGroup
-        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        private _group = _fireMissionControlsGroup getVariable ["mortarGroup", grpNull];
         private _heSelected = _fireMissionControlsGroup getVariable ["heSelected", true];
         private _pointSelected = _fireMissionControlsGroup getVariable ["pointSelected", true];
         private _roundsNumber = _fireMissionControlsGroup getVariable ["roundsNumber", 0];
@@ -987,7 +1004,6 @@ switch (_mode) do
         private _endPos = _fireMissionControlsGroup getVariable ["endPos", []];
         private _artyArrayDef1 = _fireMissionControlsGroup getVariable ["artyArrayDef1", []];
         private _artyRoundsArr1 = _fireMissionControlsGroup getVariable ["artyRoundsArr1", []];
-
         // Debug stuff
         private _shell = if (_heSelected) then {"HE"} else {"Smoke"};
         private _type = if (_pointSelected) then {"Point"} else {"Barrage"};
@@ -1016,7 +1032,8 @@ switch (_mode) do
         Trace("Dismissing garrison");
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _selectedMarker = _commanderMap getVariable ["selectedMarker", ""];
-        ["", _selectedMarker] spawn A3A_fnc_garrisonDialog;
+        if !(_selectedMarker call A3A_fnc_canEditGarrison) exitWith {};     // throws hints on failure
+    	[_selectedMarker, true, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
     };
 
     case ("showGarbageCleanOptions"):

@@ -63,11 +63,13 @@ class CfgFunctions
         class StatePreservation
         {
             file = QPATHTOFOLDER(StatePreservation);
+            class getAmmoCargo {};
             class getAmmoData {};
             class getDamage {};
             class getFuel {};
             class getState {};
             class prepPylons {};
+            class setAmmoCargo {};
             class setAmmoData {};
             class setDamage {};
             class setFuel {};

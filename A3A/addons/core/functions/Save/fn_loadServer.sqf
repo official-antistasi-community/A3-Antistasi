@@ -21,11 +21,11 @@ if (isServer) then {
 	["hr"] call A3A_fnc_getStatVariable;
 	["dateX"] call A3A_fnc_getStatVariable;
 	["weather"] call A3A_fnc_getStatVariable;
-	["prestigeOPFOR"] call A3A_fnc_getStatVariable;
 	["prestigeBLUFOR"] call A3A_fnc_getStatVariable;
+	["cityData"] call A3A_fnc_getStatVariable;
+	["radioKeys"] call A3A_fnc_getStatVariable;
 	["resourcesFIA"] call A3A_fnc_getStatVariable;
-	["garrison"] call A3A_fnc_getStatVariable;
-	["usesWurzelGarrison"] call A3A_fnc_getStatVariable;
+//	["garrison"] call A3A_fnc_getStatVariable;			// loaded later if it's an old save
 	["skillFIA"] call A3A_fnc_getStatVariable;
 	["membersX"] call A3A_fnc_getStatVariable;
 	["vehInGarage"] call A3A_fnc_getStatVariable;
@@ -36,11 +36,11 @@ if (isServer) then {
 	["HQKnowledge"] call A3A_fnc_getStatVariable;
 //	["idlebases"] call A3A_fnc_getStatVariable;			// Might bring this back at some point
 	["killZones"] call A3A_fnc_getStatVariable;
-	["controlsSDK"] call A3A_fnc_getStatVariable;
 	["bombRuns"] call A3A_fnc_getStatVariable;
 	["arsenalLimits"] call A3A_fnc_getStatVariable;
 	["rebelLoadouts"] call A3A_fnc_getStatVariable;
 	["jna_dataList"] call A3A_fnc_getStatVariable;
+	["minorSites"] call A3A_fnc_getStatVariable;
 	//===========================================================================
 
 	//RESTORE THE STATE OF THE 'UNLOCKED' VARIABLES USING JNA_DATALIST
@@ -66,30 +66,86 @@ if (isServer) then {
 	//Check if we have radios unlocked and update haveRadio.
 	call A3A_fnc_checkRadiosUnlocked;
 
-	// Set enemy roadblock allegiance to match nearest main marker
-	private _mainMarkers = markersX - controlsX - outpostsFIA;
-	{
-		if (sidesX getVariable [_x,sideUnknown] != teamPlayer) then {
-			private _nearX = [_mainMarkers, markerPos _x] call BIS_fnc_nearestPosition;
-			private _sideX = sidesX getVariable [_nearX,sideUnknown];
-			sidesX setVariable [_x,_sideX,true];
-		};
-	} forEach controlsX;
-
-	{
-		[_x] call A3A_fnc_mrkUpdate
-	} forEach (markersX - controlsX);
-
-	if (count outpostsFIA > 0) then {
-		markersX = markersX + outpostsFIA; publicVariable "markersX"
-	};
-
 	{
 		if (_x in destroyedSites) then {
 			sidesX setVariable [_x, Invaders, true];
 			[_x] call A3A_fnc_destroyCity
 		};
 	} forEach citiesX;
+
+	// update war tier silently, calls updatePreference if changed
+	// Needed for garrison sanity checks
+	[true] call A3A_fnc_tierCheck;
+
+	// ****************************************************************************************************
+	// Garrison backwards compatibility
+	A3A_garrison = +(["newGarrison"] call A3A_fnc_returnSavedStat);
+
+	// Copy old garrison data into new garrisons
+	private _garrisonCompat = isNil "A3A_garrison";
+	if (_garrisonCompat) then { call A3A_fnc_convertSavedGarrisons };		// Creates & fills A3A_garrison
+
+	// Fill out any garrison that hasn't already been filled
+	// This might happen with map changes so we do it here rather than convertSavedGarrisons
+	private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["vehicles", []], ["buildings", []] ];
+	{
+		if (_x in A3A_garrison) then { continue };
+		private _side = sidesX getVariable _x;
+		if (_side == teamPlayer) then { A3A_garrison set [_x, +_emptyGarrison]; continue };		// should be impossible?
+		[_x] call A3A_fnc_buildEnemyGarrison;		// cities, or markers added to map
+	} forEach markersX;
+
+	// outpostsFIA should be fully handled by convertSavedGarrisons
+
+	// This needs doing with 3.9.0 saves
+	{
+		if (_x in A3A_garrison) then { continue };
+		private _type = (A3A_minorSitesHM get _x) # 1;
+		private _side = sidesX getVariable _x;
+		[_x, _side] call ([A3A_fnc_buildRoadblock, A3A_fnc_buildCamp] select (_type == "camp"));
+	} forEach controlsX;
+
+	// Add police stations if missing
+	call A3A_fnc_initPoliceStations;
+
+	// Fill out city civ component if missing (should be done after police stations because they share vehicle places)
+	{ [_x] call A3A_fnc_buildCity } forEach citiesX;
+
+	// Add type info to markers
+	call A3A_fnc_initMarkerTypes;
+
+	// Move saved statics & buildings into the correct garrisons
+	if (_garrisonCompat) then { call A3A_fnc_convertSavedStatics };
+
+	// **********************************************************************************************
+
+	// Validate garrison vehicles (in case of faction or logic change)
+	Debug("Starting garrison vehicle validation");
+	private _civMarkers = citiesX apply { _x + "_civ" };
+	{
+		[_x, true, false] call A3A_fnc_garrisonServer_cleanup;
+	} forEach (markersX + _civMarkers);
+	Debug("Completed garrison vehicle validation");
+
+	// Should have garrison data for this now
+	{
+		[_x] call A3A_fnc_mrkUpdate
+	} forEach markersX;
+
+
+	// Spawn in HQ buildings before we potentially place HQ objects on them
+	private _spawnedBuildings = [];
+	{
+		_x params ["_typeVeh", "_posVeh", "_vecDir", "_vecUp"];
+		isNil {
+			private _veh = createVehicle [_typeVeh, _posVeh, [], 0, "CAN_COLLIDE"];
+			_veh setPosWorld _posVeh;
+			_veh setVectorDirAndUp [_vecDir, _vecUp];
+			_spawnedBuildings pushBack _veh;
+		};
+	} forEach (A3A_garrison get "Synd_HQ" get "buildings");
+	A3A_garrison get "Synd_HQ" set ["spawnedBuildings", _spawnedBuildings];
+
 
     //Load aggro stacks and level and calculate current level
     ["aggressionOccupants"] call A3A_fnc_getStatVariable;
@@ -98,36 +154,15 @@ if (isServer) then {
 
 	["chopForest"] call A3A_fnc_getStatVariable;
 
-	["posHQ"] call A3A_fnc_getStatVariable;
+	["posHQ"] call A3A_fnc_getStatVariable;				// second call, this one after buildings compat
 	["nextTick"] call A3A_fnc_getStatVariable;
-	["staticsX"] call A3A_fnc_getStatVariable;
 
-	{_x setPos getMarkerPos respawnTeamPlayer} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
-	_sites = markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
+	{_x setPosATL getMarkerPos respawnTeamPlayer} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
 
 	// Move headless client logic objects near HQ so that firedNear EH etc. work more reliably
 	private _hcpos = markerPos respawnTeamPlayer vectorAdd [-100, -100, 0];
 	{ _x setPosATL _hcpos } forEach (entities "HeadlessClient_F");
 
-	tierPreference = 1;
-	publicVariable "tierPreference";
-	// update war tier silently, calls updatePreference if changed
-	[true] call A3A_fnc_tierCheck;
-
-	if (isNil "usesWurzelGarrison") then {
-		//Create the garrison new
-        Info("No WurzelGarrison found, creating new!");
-		[airportsX, "Airport", [0,0,0]] spawn A3A_fnc_createGarrison;	//New system
-		[resourcesX, "Other", [0,0,0]] spawn A3A_fnc_createGarrison;	//New system
-		[factories, "Other", [0,0,0]] spawn A3A_fnc_createGarrison;
-		[outposts, "Outpost", [1,1,0]] spawn A3A_fnc_createGarrison;
-		[seaports, "Other", [1,0,0]] spawn A3A_fnc_createGarrison;
-
-	} else {
-		//Garrison save in wurzelformat, load it
-        Info("WurzelGarrison found, loading it!");
-		["wurzelGarrison"] call A3A_fnc_getStatVariable;
-	};
 
     //Load state of testing timer
     ["testingTimerIsActive"] call A3A_fnc_getStatVariable;

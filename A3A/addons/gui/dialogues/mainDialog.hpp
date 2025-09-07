@@ -4,6 +4,62 @@
 
 #include "ids.inc"
 
+class A3A_DummyDialog
+{
+    idd = -1;
+    // Dumbass attempt to stop Arma crashing in map icon code: Preload the damned things.
+    class Controls {
+        class icon_0 : A3A_Picture {
+            text = A3A_Icon_Map_Airport;
+            colorText[] = {1,1,1,0.1};
+            x = 0;
+            y = 0;
+            w = 32*pixelW;
+            h = 32*pixelH;
+        };
+        class icon_1 : icon_0 {
+            text = A3A_Icon_Map_Outpost;
+            x = 32*pixelW;
+        };
+        class icon_2 : icon_0 {
+            text = A3A_Icon_Map_Seaport;
+            x = 64*pixelW;
+        };
+        class icon_3 : icon_0 {
+            text = A3A_Icon_Map_Factory;
+            x = 96*pixelW;
+        };
+        class icon_4 : icon_0 {
+            text = A3A_Icon_Map_Resource;
+            x = 128*pixelW;
+        };
+        class icon_5 : icon_0 {
+            text = A3A_Icon_Map_City;
+            x = 160*pixelW;
+        };
+        class icon_6 : icon_0 {
+            text = A3A_Icon_Map_Roadblock;
+            x = 192*pixelW;
+        };
+        class icon_7 : icon_0 {
+            text = A3A_Icon_Map_Watchpost;
+            x = 224*pixelW;
+        };
+        class icon_8 : icon_0 {
+            text = A3A_Icon_Map_HQ;
+            x = 256*pixelW;
+        };
+        class icon_9 : icon_0 {
+            text = A3A_Icon_Map_Blank;
+            x = 288*pixelW;
+        };
+        class icon_10 : icon_0 {
+            text = A3A_Select_Marker;
+            y = 32*pixelH;
+        };
+    };
+};
+
 class A3A_MainDialog : A3A_TabbedDialog
 {
     idd = A3A_IDD_MAINDIALOG;
@@ -315,7 +371,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class CommanderButton : A3A_Button
                 {
                     idc = A3A_IDC_COMMANDERBUTTON;
-                    onButtonClick = "[player, cursorTarget] call A3A_fnc_theBossToggleEligibility; [""update""] call A3A_GUI_fnc_playerTab;";
+                    onButtonClick = "[player, cursorTarget] remoteExecCall [""A3A_fnc_theBossToggleEligibility"", 2];";
                     x = 74 * GRID_W;
                     y = 34 * GRID_H;
                     w = 22 * GRID_W;
@@ -1123,7 +1179,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         {
                             idc = A3A_IDC_FIREBUTTON;
                             text = $STR_antistasi_dialogs_main_hc_fire_mission_fire_button;
-                            onbuttonClick = "[""fireMissionButtonClicked""] call A3A_GUI_fnc_commanderTab";
+                            onbuttonClick = "[""fireMissionButtonClicked""] call A3A_GUI_fnc_commanderTab; closeDialog 0;";
                             x = 17 * GRID_W;
                             y = 56 * GRID_H;
                             w = 20 * GRID_W;

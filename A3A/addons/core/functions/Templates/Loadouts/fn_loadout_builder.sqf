@@ -107,51 +107,51 @@ private _fnc_parseWeaponFormat = {
 	]
 };
 
+// Better than selectRandom: Uses each entry from the input array once in random order until it's empty
+private _fnc_selectShuffle = {
+	params ["_key"];
+	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
+	if (_data isEqualTo []) exitWith {""};
+	private _buffer = _shuffleBuffers getOrDefault [_key, [], true];
+	if (_buffer isEqualTo []) then { _buffer append _data };
+	_buffer deleteAt floor random count _buffer;
+};
+
 /////////////////////////////////////////////////////////////////
 //  Core Loadout functions - used to add items to the loadout  //
 /////////////////////////////////////////////////////////////////
 
 //Adds a helmet to the loadout, selected at random from the category in loadout data.
 private _fnc_setHelmet = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _helmet = selectRandom _data;
+	private _helmet = call _fnc_selectShuffle;		// passes on the input parameters (_key)
+	if (_helmet isEqualTo "") exitWith {};
 	[_finalLoadout, _helmet] call A3A_fnc_loadout_setHelmet;
 };
 
 private _fnc_setFacewear = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _facewear = selectRandom _data;
+	private _facewear = call _fnc_selectShuffle;
+	if (_facewear isEqualTo "") exitWith {};
 	[_finalLoadout, _facewear] call A3A_fnc_loadout_setFacewear;
 };
 
 //Adds a vest to the loadout, selected at random from the category in loadout data.
 private _fnc_setVest = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _vest = selectRandom _data;
+	private _vest = call _fnc_selectShuffle;
+	if (_vest isEqualTo "") exitWith {};
 	[_finalLoadout, _vest] call A3A_fnc_loadout_setVest
 };
 
 //Adds a uniform to the loadout, selected at random from the category in loadout data.
 private _fnc_setUniform = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _uniform = selectRandom _data;
+	private _uniform = call _fnc_selectShuffle;
+	if (_uniform isEqualTo "") exitWith {};
 	[_finalLoadout, _uniform] call A3A_fnc_loadout_setUniform
 };
 
 //Adds a backpack to the loadout, selected at random from the category in loadout data.
 private _fnc_setBackpack = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _backpack = selectRandom _data;
+	private _backpack = call _fnc_selectShuffle;
+	if (_backPack isEqualTo "") exitWith {};
 	[_finalLoadout, _backpack] call A3A_fnc_loadout_setBackpack
 };
 
@@ -160,10 +160,9 @@ private _primaryPrimaryMags = [];
 private _primarySecondaryMags = [];
 //Adds a primary weapon to the loadout, selected at random from the category in loadout data.
 private _fnc_setPrimary = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _weaponData = (selectRandom _data) call _fnc_parseWeaponFormat;
+	private _weapon = call _fnc_selectShuffle;
+	if (_weapon isEqualTo "") exitWith {};
+	private _weaponData = _weapon call _fnc_parseWeaponFormat;
 	_primaryPrimaryMags = _weaponData # 1;
 	_primarySecondaryMags = _weaponData # 2;
 	[_finalLoadout, "PRIMARY", _weaponData # 0] call A3A_fnc_loadout_setWeapon;
@@ -174,10 +173,9 @@ private _launcherPrimaryMags = [];
 private _launcherSecondaryMags = [];
 //Adds a launcher to the loadout, selected at random from the category in loadout data.
 private _fnc_setLauncher = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _weaponData = (selectRandom _data) call _fnc_parseWeaponFormat;
+	private _weapon = call _fnc_selectShuffle;
+	if (_weapon isEqualTo "") exitWith {};
+	private _weaponData = _weapon call _fnc_parseWeaponFormat;
 	_launcherPrimaryMags = _weaponData # 1;
 	_launcherSecondaryMags = _weaponData # 2;
 	[_finalLoadout, "LAUNCHER", _weaponData # 0] call A3A_fnc_loadout_setWeapon;
@@ -188,10 +186,9 @@ private _handgunPrimaryMags = [];
 private _handgunSecondaryMags = [];
 //Adds a handgun to the loadout, selected at random from the category in loadout data.
 private _fnc_setHandgun = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _weaponData = (selectRandom _data) call _fnc_parseWeaponFormat;
+	private _weapon = call _fnc_selectShuffle;
+	if (_weapon isEqualTo "") exitWith {};
+	private _weaponData = _weapon call _fnc_parseWeaponFormat;
 	_handgunPrimaryMags = _weaponData # 1;
 	_handgunSecondaryMags = _weaponData # 2;
 	[_finalLoadout, "HANDGUN", _weaponData # 0] call A3A_fnc_loadout_setWeapon;
@@ -231,11 +228,10 @@ private _fnc_addItemSet = {
 //Item can be a string class "myItem" or an array in unit loadout format ["myItem", 5]
 private _fnc_addItem = {
 	params ["_key", ["_amount", 1]];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
 
-	if (_data isEqualTo []) exitWith {};
+	private _item = _key call _fnc_selectShuffle;
+	if (_item isEqualTo "") exitWith {};
 
-	private _item =	selectRandom _data;
 	if (_item isEqualType []) then {
 		_item set [1, _amount];
 		_itemSets pushBack [_item];
@@ -251,64 +247,50 @@ private _fnc_addItem = {
 private _equipment = [];
 //Adds a map to the unit, select at random from the given category of loadout data.
 private _fnc_addMap = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _map = selectRandom _data;
+	private _map = call _fnc_selectShuffle;
+	if (_map isEqualTo "") exitWith {};
 	_equipment pushBack ["MAP", _map];
 };
 
 //Adds a watch to the unit, select at random from the given category of loadout data.
 private _fnc_addWatch = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _watch = selectRandom _data;
+	private _watch = call _fnc_selectShuffle;
+	if (_watch isEqualTo "") exitWith {};
 	_equipment pushBack ["WATCH", _watch];
 };
 
 //Adds a compass to the unit, select at random from the given category of loadout data.
 private _fnc_addCompass = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _compass = selectRandom _data;
+	private _compass = call _fnc_selectShuffle;
+	if (_compass isEqualTo "") exitWith {};
 	_equipment pushBack ["COMPASS", _compass];
 };
 
 //Adds a radio to the unit, select at random from the given category of loadout data.
 private _fnc_addRadio = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _radio = selectRandom _data;
+	private _radio = call _fnc_selectShuffle;
+	if (_radio isEqualTo "") exitWith {};
 	_equipment pushBack ["RADIO", _radio];
 };
 
 //Adds a gps to the unit, select at random from the given category of loadout data.
 private _fnc_addGPS = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _gps = selectRandom _data;
+	private _gps = call _fnc_selectShuffle;
+	if (_gps isEqualTo "") exitWith {};
 	_equipment pushBack ["GPS", _gps];
 };
 
 //Adds a gps to the unit, select at random from the given category of loadout data.
 private _fnc_addBinoculars = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _binoculars = selectRandom _data;
-	_equipment pushBack ["BINOCULARS", _binoculars];
+	private _binos = call _fnc_selectShuffle;
+	if (_binos isEqualTo "") exitWith {};
+	_equipment pushBack ["BINOCULARS", _binos];
 };
 
 //Adds a NVGs to the unit, select at random from the given category of loadout data.
 private _fnc_addNVGs = {
-	params ["_key"];
-	private _data = _loadoutDataForTemplate getOrDefault [_key, []];
-	if (_data isEqualTo []) exitWith {};
-	private _nvgs = selectRandom _data;
+	private _nvgs = call _fnc_selectShuffle;
+	if (_nvgs isEqualTo "") exitWith {};
 	_equipment pushBack ["NVG", _nvgs];
 };
 

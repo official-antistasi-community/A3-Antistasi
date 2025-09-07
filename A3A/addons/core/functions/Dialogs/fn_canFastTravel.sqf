@@ -31,9 +31,6 @@ params [
     ["_things", objNull, [objNull, grpNull, []]],
     ["_destination", nil, [[]], [2,3]]
 ];
-if (_things isEqualType objNull || _things isEqualType grpNull) then {
-    _things = [_things];
-};
 private _blockers = [];
 
 
@@ -41,7 +38,7 @@ private _blockers = [];
 
 private _isHC = false;
 private _groupX = grpNull;
-if (count hcSelected _player == 1) then {_groupX = hcSelected player select 0; _isHC = true} else {_groupX = group player};
+if (_things isEqualType grpNull) then {_groupX = _things; _isHC = true} else {_groupX = group player};
 
 if ((limitedFT == 2) && !(_isHC)) then {_blockers append ["no_param"]};
 if (count hcSelected _player > 1) then {_blockers append ["grp_select"]};
@@ -63,7 +60,7 @@ if (_checkX) then {_blockers append ["no_other"]};
 
 // generic blockers done, location-specific blockers now
 if !(isNil "_destination") then {
-    private _markersX = markersX + [respawnTeamPlayer];
+    private _markersX = markersX + outpostsFIA + [respawnTeamPlayer];
     _base = [_markersX, _destination] call BIS_Fnc_nearestPosition;
     if (((!_isHC) and (limitedFT == 1)) and ((_base != "SYND_HQ") and !(_base in airportsX))) then {_blockers append ["no_onlyhq"]};
     if ((sidesX getVariable [_base,sideUnknown]) in [Occupants, Invaders]) then {_blockers append ["no_enemy2"]};

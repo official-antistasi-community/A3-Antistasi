@@ -26,6 +26,7 @@ class CfgFunctions
             class coverage {};
             class destroyBuilding {};
             class doFlank {};
+            class duckMortar {};
             class enemyList {};
             class enemyGarrison {};
             class enemyReturnToBase {};
@@ -40,7 +41,6 @@ class CfgFunctions
             class inmuneConvoy {};
             class interrogate {};
             class isBuildingPosition {};
-            class landThreatEval {};
             class liberaterefugee {};
             class liberatePOW {};
             class mineSweep {};
@@ -52,6 +52,8 @@ class CfgFunctions
             class nearEnemy {};
             class paradrop {};
             class rearmCall {};
+            class rebelReactOnKill {};
+            class rebelReturnToBase {};
             class recallGroup {};
             class smokeCoverAuto {};
             class staticAutoT {};
@@ -63,6 +65,7 @@ class CfgFunctions
             class unitGetToCover {};
             class useFlares {};
             class VANTinfo {};
+            class vehicleConvoyHeliTravel{};
             class vehicleConvoyTravel {};
             class vehicleMarkers {};
         };
@@ -94,6 +97,7 @@ class CfgFunctions
             class launcherInfo {};
             class loot {};
             class randomRifle {};
+            class setCargoItems {};
             class setRebelLoadouts {};
             class transfer {};
             class unlockEquipment {};
@@ -102,6 +106,7 @@ class CfgFunctions
 
         class Base {
             file = QPATHTOFOLDER(functions\Base);
+            class actionGarrisonVehicle {};
             class addActionBreachVehicle {};
             class addAggression {};
             class addEnemyResources {};
@@ -117,13 +122,14 @@ class CfgFunctions
             class canManageAI {};
             class canMoveHQ {};
             class chooseAttack {};
+            class chooseMachineForGarrison {};
             class citiesToCivPatrol {};
+            class citySideChange {};
             class citySupportChange {};
             class commsMP {};
             class createBreachChargeText {};
             class createOutpostsFIA {};
             class createPetros {};
-            class deleteControls {};
             class destroyCity {};
             class distance {};
             class distanceUnits {};
@@ -136,8 +142,8 @@ class CfgFunctions
             class fogCheck {};
             class garbageCleaner {};
             class garbageCleanerTracker {};
-            class garrisonInfo {};
             class getAggroLevelString {};
+            class getMarkerForPos {};
             class getRecentDamage {};
             class getVehiclesAirSupport {};
             class getVehicleSellPrice {};
@@ -166,10 +172,8 @@ class CfgFunctions
             class petrosDeathMonitor {};
             class placementSelection {};
             class playableUnits {};
-            class getSideRadioTowerInfluence {};
             class postmortem {};
             class postmortemLoop {};
-            class powerReorg {};
             class radioCheck {};
             class rebuildAssets {};
             class rebuildRadioTower {};
@@ -181,6 +185,7 @@ class CfgFunctions
             class revealToPlayer {};
             class scheduler {};
             class sellVehicle {};
+            class setCityTaskDelay {};
             class setMarkerAlphaForSide {};
             class setPlaneLoadout {};
             class singlePlayerBlackScreenWarning {};
@@ -195,8 +200,6 @@ class CfgFunctions
             class translateVariable {};
             class unlockStatic {};
             class unlockVehicle {};
-            class updateRebelStatics {};
-            class zoneCheck {};
         };
 
         class Builder {
@@ -220,23 +223,6 @@ class CfgFunctions
             class setNestedObject {};
         };
 
-        class Convoy {
-            file = QPATHTOFOLDER(functions\Convoy);
-            class cleanConvoyMarker {};
-            class convoyDebug {};
-            class convoyMovement {};
-            class createAIAction {};
-            class createConvoy {};
-            class despawnConvoy {};
-            class findAirportForAirstrike {};
-            class followVehicle {};
-            class onConvoyArrival {};
-            class roadblockFight {};
-            class selectAndCreateVehicle {};
-            class spawnConvoy {};
-            class spawnConvoyLine {};
-        };
-
         class CREATE {
             file = QPATHTOFOLDER(functions\CREATE);
             class AAFroadPatrol {};
@@ -248,32 +234,18 @@ class CfgFunctions
             class calculateMarkerArea {};
             class cargoSeats {};
             class cleanserVeh {};
-            class countFreeSpawnPositions {};
-            class createAIAirbase {};
-            class createAICities {};
-            class createAIcontrols {};
-            class createAIOutposts {};
-            class createAIResources {};
-            class createAISite {};
             class createAttackForceAir {};
             class createAttackForceLand {};
             class createAttackForceMixed {};
             class createAttackForceSea {};
             class createAttackVehicle {};
-            class createFIAOutposts2 {};
-            class createSDKGarrisons {};
-            class createSDKgarrisonsTemp {};
             class createUnit {};
             class createVehicleCrew {};
             class createVehicleQRFBehaviour {};
             class crewTypeForVehicle {};
-            class cycleSpawn {};
             class FIAinitBases {};
-            class findSpawnPosition {};
-            class freeSpawnPositions {};
-            class garrisonReorg {};
+            class fillVehicleCrewCargo {};
             class garrisonSize {};
-            class garrisonUpdate {};
             class groupDespawner {};
             class invaderPunish {};
             class milBuildings {};
@@ -281,8 +253,10 @@ class CfgFunctions
             class mortarPos {};
             class NATOinit {};
             class patrolReinf {};
-            class reinforcementsAI {};
             class registerUnitType {};
+            class reinforcementsAI {};
+            class reinforceVehicle {};
+            class reinforceSide {};
             class remoteBattle {};
             class safeVehicleSpawn {};
             class singleAttack {};
@@ -290,7 +264,6 @@ class CfgFunctions
             class spawnVehicle {};
             class spawnVehicleAtMarker {};
             class spawnVehiclePrecise {};
-            class updateCAMark {};
             class vehAvailable {};
             class VEHdespawner {};
             class vehKilledOrCaptured {};
@@ -319,6 +292,7 @@ class CfgFunctions
             class fastTravelRadio {};
             class HQGameOptions {};
             class loadPreviousSession {};
+            class mapInfoDialog {};
             class mineDialog {};
             class persistentSave {};
             class skiptime {};
@@ -329,38 +303,72 @@ class CfgFunctions
 
         class EventHandler {
             file = QPATHTOFOLDER(functions\EventHandler);
-            class addArtilleryTrailEH {};
+            class addArtilleryFiredEH {};
+            class addVehAttachDetachEH {};
+            class addVehGetInOutEH {};
+            class combatModeChangedEH {};
             class enemyUnitDeletedEH {};
             class enemyUnitKilledEH {};
+            class rebelUnitKilledEH {};
             class vehicleDeletedEH {};
         };
 
-        class Garrison {
-            file = QPATHTOFOLDER(functions\Garrison);
-            class addGarrison {};
-            class addRequested {};
-            class checkGroupType {};
-            class checkVehicleType {};
-            class countGarrison {};
-            class createGarrison {};
-            class createGarrisonLine {};
-            class getGarrison {};
-            class getGarrisonRatio {};
-            class getGarrisonStatus {};
-            class getRequested {};
-            class getVehicleCrew {};
-            class initPreference {};
-            class logArray {};
-            class replenishGarrison {};
-            class selectGroupType {};
-            class selectReinfUnits {};
-            class selectVehicleType {};
-            class shouldReinforce {};
-            class updateGarrison {};
-            class updatePreference {};
-            class updateReinfState {};
-            class updateVehicles {};
+        class GarrisonLocal {
+            file = QPATHTOFOLDER(functions\GarrisonLocal);
+            class findPatrolPos {};
+            class garrisonLocal_addGroup {};
+            class garrisonLocal_addVehicle {};
+            class garrisonLocal_addVehicleType {};
+            class garrisonLocal_changeSide {};
+            class garrisonLocal_clear {};
+            class garrisonLocal_despawn {};
+            class garrisonLocal_despawnCiv {};
+            class garrisonLocal_enemyInfo {};
+            class garrisonLocal_pause {};
+            class garrisonLocal_remUnitType {};
+            class garrisonLocal_remVehicle {};
+            class garrisonLocal_spawn {};
+            class garrisonLocal_spawnCiv {};
+            class garrisonLocal_spawnUnit {};
+            class garrisonLocal_spawnUnitCount {};
+            class garrisonLocal_unpause {};
+            class garrisonLocal_updateStatics {};
+            class garrisonLocal_zoneCheck {};
+            class garrisonOpLoop {};
             class getGarrisonLimit {};
+            class setupLootCrate {};
+            class spawnGarrisonPatrols {};
+            class spawnGarrisonSquads {};
+            class spawnGarrisonVehicles {};
+            class spawnPoliceStation {};
+        };
+
+        class GarrisonServer {
+            file = QPATHTOFOLDER(functions\GarrisonServer);
+            class buildCity {};
+            class buildEnemyGarrison {};
+            class garrisonInfo {};
+            class garrisonOp {};
+            class garrisonServer_addGroup {};
+            class garrisonServer_addUnitCount {};
+            class garrisonServer_addUnitType {};
+            class garrisonServer_addVehicle {};
+            class garrisonServer_addVehicleType {};
+            class garrisonServer_changeSide {};
+            class garrisonServer_cleanup {};
+            class garrisonServer_clear {};
+            class garrisonServer_delete {};
+            class garrisonServer_despawn {};
+            class garrisonServer_looted {};
+            class garrisonServer_remUnit {};
+            class garrisonServer_remUnitType {};
+            class garrisonServer_remVehicle {};
+            class garrisonServer_sendData {};
+            class garrisonServer_spawn {};
+            class garrisonServer_updateVehData {};
+            class getSiteTroopQuality {};
+            class selectGarrisonVehicleType {};
+            class showSiteInfo {};
         };
 
         class init {
@@ -373,30 +381,32 @@ class CfgFunctions
 
             //Other initialisation functions (generally called by the above)
             class briefing {};
-            class cityinfo {};
+            class checkCampaignEnd {};
             class clientIdleChecker {};
             class credits {};
             class initACE {};
             class initACEUnconsciousHandler {};
             class initBases {};
-            class initUtilityItems {};
+            class initCivSpawnPlaces {};
             class initGarrisons {};
+            class initMarkerTypes {};
+            class initPoliceStations {};
             class initPreJIP { preInit = 1; };
             class initSpawnPlaces {};
-            class generateRoadblock {};
-
+            class initSpawnPlaceStats {};
+            class initStaticPlaces {};
+            class initUtilityItems {};
             class initVarCommon {};
             class initVarServer {};
-
             class initVehClassToCrew {};
             class initZones {};
             class initZeusLogging {};
+            class installClientEH {};
             class modBlacklist {};
             class playerMarkers {};
             class prepareMarkerArrays {};
             class resourcecheck {};
             class tags {};
-            class checkCampaignEnd {};
         };
 
         class Intel {
@@ -425,16 +435,37 @@ class CfgFunctions
             class lootToCrate {};
         };
 
+        class MinorSites {
+            file = QPATHTOFOLDER(functions\MinorSites);
+            class addMinorSite {};
+            class buildCamp {};
+            class buildRoadblock {};
+            class createRebelControl {};
+            class deleteMinorSite {};
+            class deleteNearSites {};
+            class deleteRebelControl {};
+            class generateCamps {};
+            class generateRoadblockPairs {};
+            class generateRoadblocks {};
+            class initMinorSites {};
+            class renderRoadblocks {};
+            class selectRoadBetweenMarkersNav {};
+            class selectRoadBetweenMarkersRand {};
+            class updateMinorSites {};
+        };
+
         class Missions {
             file = QPATHTOFOLDER(functions\Missions);
             class AS_Official {};
             class AS_specOP {};
             class AS_Traitor {};
             class CON_Outpost {};
+            class CON_PoliceStation {};
             class convoy {};
             class DES_Antenna {};
             class DES_Heli {};
             class DES_Vehicle {};
+            class GSMission {};
             class LOG_Ammo {};
             class LOG_Bank {};
             class LOG_Supplies {};
@@ -443,6 +474,7 @@ class CfgFunctions
             class REP_Antenna {};
             class RES_Prisoners {};
             class RES_Refugees {};
+            class supplyDrop {};
             class taskDelete {};
             class taskSetState {};
             class taskUpdate {};
@@ -498,6 +530,7 @@ class CfgFunctions
             class findNodesInDistance {};
             class findPath {};
             class findPathPrecheck {};
+            class findPathSimple {};
             class findPosOnRoute {};
             class findSeaPath {};
             class getMarkerNavPoint {};
@@ -544,10 +577,11 @@ class CfgFunctions
             class addFIAveh {};
             class addSquadVeh {};
             class addToGarrison {};
-            class autoGarrison {};
+            class addToGarrisonServer {};
             class build {};
             class buildCreateVehicleCallback {};
             class buildMinefield {};
+            class canEditGarrison {};
             class canReinfPlayer {};
             class controlHCsquad {};
             class controlunit {};
@@ -560,7 +594,6 @@ class CfgFunctions
             class FIAskillAdd {};
             class garrisonAdd {};
             class garrisonDialog {};
-            class garrisonRemove {};
             class getHCSquadPrice {};
             class getHCSquadVehicleType {};
             class NATObomb {};
@@ -603,6 +636,8 @@ class CfgFunctions
         class Save {
             file = QPATHTOFOLDER(functions\Save);
             class collectSaveData {};
+            class convertSavedGarrisons {};
+            class convertSavedStatics {};
             class deleteSave {};
             class loadPlayer {};
             class loadServer {};
@@ -638,6 +673,7 @@ class CfgFunctions
             class clearTargetArea {};
             class createSupport {};
             class getArtilleryRanges {};
+            class getMortarMags {};
             class initSupports {};
             class maxDefenceSpend {};
             class requestArtillery {};
@@ -753,6 +789,7 @@ class CfgFunctions
         class UI {
             file = QPATHTOFOLDER(functions\UI);
             class customHint {};
+            class customHintCountdown {};
             class customHintDismiss {};
             class customHintInit {};
             class customHintRender {};
@@ -787,6 +824,9 @@ class CfgFunctions
             class createDataObject {};
             class createNamespace {};
             class deleteNamespace {};
+            class filterAndWeightArray {};
+            class findEmptyPos {};
+            class findPosNearHouse {};
             class getAdmin {};
             class isEngineer {};
             class localLog {};
@@ -810,6 +850,7 @@ class CfgFunctions
             class initObject {};
             class initObjectRemote {};
             class isCarrying {};
+            class remainingAmmo {};
             class remainingFuel {};
             class rotateItem {};
         };

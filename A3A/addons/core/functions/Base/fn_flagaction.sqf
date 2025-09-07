@@ -30,11 +30,11 @@ switch _typeX do
     };
     case "petros":
     {
-        petros addAction [localize "STR_A3A_fn_base_flagaction_asset_move", A3A_fnc_carryItem,nil,0,false,true,"","(_this == theBoss) and (petros == leader group petros) and (isNull objectParent _this) and !(call A3A_fnc_isCarrying)"];
-        petros addAction [localize "STR_A3A_fn_base_flagaction_hq_build", A3A_fnc_buildHQ,nil,0,false,true,"","(_this == theBoss) and (petros != leader group petros)",4];
+        petros addAction [localize "STR_A3A_fn_base_flagaction_asset_move", A3A_fnc_carryItem,nil,0,false,true,"","(_this == theBoss) and !A3A_petrosMoving and (isNull objectParent _this) and !(call A3A_fnc_isCarrying)"];
+        petros addAction [localize "STR_A3A_fn_base_flagaction_hq_build", { remoteExecCall ["A3A_fnc_buildHQ", 2] },nil,0,false,true,"","(_this == theBoss) and A3A_petrosMoving",4];
 
-        petros addAction [localize "STR_A3A_fn_base_flagaction_hq_manage", { if (A3A_GUIDevPreview) then {createDialog "A3A_HqDialog"} else {call A3A_fnc_dialogHQ}; },nil,0,false,true,"","(_this == theBoss) and (petros == leader group petros)",4];
-        petros addAction [localize "STR_A3A_fn_base_flagaction_missionrequest", { if (A3A_GUIDevPreview) then {createDialog "A3A_RequestMissionDialog"} else {createDialog "mission_menu";}; },nil,0,false,true,"","(([_this] call A3A_fnc_isMember or _this == theBoss) and (petros == leader group petros))",4];
+        petros addAction [localize "STR_A3A_fn_base_flagaction_hq_manage", { if (A3A_GUIDevPreview) then {createDialog "A3A_HqDialog"} else {call A3A_fnc_dialogHQ}; },nil,0,false,true,"","(_this == theBoss) and !A3A_petrosMoving",4];
+        petros addAction [localize "STR_A3A_fn_base_flagaction_missionrequest", { if (A3A_GUIDevPreview) then {createDialog "A3A_RequestMissionDialog"} else {createDialog "mission_menu";}; },nil,0,false,true,"","([_this] call A3A_fnc_isMember or _this == theBoss) and !A3A_petrosMoving",4];
     };
     case "truckX":
     {
@@ -124,7 +124,7 @@ switch _typeX do
     };
     case "fireX":
     {
-        fireX addAction [localize "STR_A3A_fn_base_flagaction_firex_rest", A3A_fnc_skiptime,nil,0,false,true,"","(_this == theBoss)",4];
+        fireX addAction [localize "STR_A3A_fn_base_flagaction_firex_rest",{ [8] call A3A_fnc_skiptime },nil,0,false,true,"","(_this == theBoss)",4];
         fireX addAction [localize "STR_A3A_fn_base_flagaction_firex_forest", A3A_fnc_clearForest,nil,0,false,true,"","(_this == theBoss)",4];
         fireX addAction [localize "STR_A3A_fn_base_flagaction_firex_fog", { [10,[0,0,0]] remoteExec ["setFog",2]; },nil,0,false,true,"","(_this == theBoss)",4];
         fireX addAction [localize "STR_A3A_fn_base_flagaction_firex_rain", { [10,0] remoteExec ["setRain",2]; [60,0.25] remoteExec ["setOvercast",2] },nil,0,false,true,"","(_this == theBoss)",4];
@@ -135,7 +135,7 @@ switch _typeX do
         if (true) exitWith { ERROR("Disabled due to UseDoomGUI Switch.") };
 #endif
         removeAllActions _flag;
-        _flag addAction [localize "STR_A3A_fn_base_flagaction_recruit", {if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_base_flagaction_recruit", localize "STR_A3A_fn_base_flagaction_recruit_no"] call A3A_fnc_customHint;} else { [] spawn A3A_fnc_unit_recruit; };},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4];
+        _flag addAction [localize "STR_A3A_fn_base_flagaction_recruit", {if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_base_flagaction_recruit", localize "STR_A3A_fn_base_flagaction_recruit_no"] call A3A_fnc_customHint;} else { if (A3A_GUIDevPreview) then {createDialog "A3A_RecruitDialog";} else {[] spawn A3A_fnc_unit_recruit;};};},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4];
         _flag addAction [localize "STR_A3A_fn_base_flagaction_vehiclebuy", {if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {
             [localize "STR_A3A_fn_base_flagaction_vehiclebuy", localize "STR_A3A_fn_base_flagaction_vehiclebuy_no"] call A3A_fnc_customHint;
         } else {
@@ -171,10 +171,14 @@ switch _typeX do
     };
     case "static":
     {
-        private _cond = "(isPlayer _this) and (_target getVariable ['ownerSide', teamPlayer] == teamPlayer) and (isNull attachedTo _target) and ";
-        _flag addAction [localize "STR_A3A_fn_base_flagaction_static_allow", A3A_fnc_unlockStatic, nil, 1, false, true, "", _cond+"!isNil {_target getVariable 'lockedForAI'}", 4];
-        _flag addAction [localize "STR_A3A_fn_base_flagaction_static_prevent", A3A_fnc_lockStatic, nil, 1, false, true, "", _cond+"isNil {_target getVariable 'lockedForAI'}", 4];
-    //    _flag addAction ["Kick AI off this weapon", A3A_fnc_lockStatic, nil, 1, true, false, "", _cond+"isNil {_target getVariable 'lockedForAI'} and !(isNull gunner _target) and !(isPlayer gunner _target)}", 4];
+        private _cond = "(isPlayer _this) and (_target getVariable ['ownerSide', teamPlayer] == teamPlayer) and !(_target isNil 'markerX') and ";
+        _flag addAction [localize "STR_A3A_fn_base_flagaction_static_allow", A3A_fnc_unlockStatic, nil, 1, false, true, "", _cond+"!(_target isNil 'lockedForAI')", 4];
+        _flag addAction [localize "STR_A3A_fn_base_flagaction_static_prevent", A3A_fnc_lockStatic, nil, 1, false, true, "", _cond+"_target isNil 'lockedForAI'", 4];
+    //    _flag addAction ["Kick AI off this weapon", A3A_fnc_lockStatic, nil, 1, true, false, "", _cond+"_target isNil 'lockedForAI' and !(isNull gunner _target) and !(isPlayer gunner _target)}", 4];
+        if !(_flag isKindOf "StaticWeapon") exitWith {
+            private _cond = {(isPlayer _this) and (_target getVariable ['ownerSide', teamPlayer] == teamPlayer) and (_target isNil 'markerX') and (crew _target isEqualTo [])};
+            _flag addAction [localize "STR_A3A_fn_base_flagaction_vehicle_garrison", A3A_fnc_actionGarrisonVehicle, nil, 1, false, true, "", toString _cond, 4];
+        };
         _flag addAction [localize "STR_A3A_fn_base_flagaction_asset_move", A3A_fnc_carryItem, nil, 1.5, false, true, "",  _cond+"(count crew _target == 0) and (isNull objectParent _this) and !(call A3A_fnc_isCarrying)", 4];
     };
 };

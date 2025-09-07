@@ -12,7 +12,7 @@ aceItems = [
 	"ACE_MapTools",
 	"ACE_Flashlight_MX991",
 	"ACE_wirecutter",
-	"ACE_RangeTable_82mm",
+	"ACE_artilleryTable",
 	"ACE_PlottingBoard",
 	"ACE_EntrenchingTool",
 	"ACE_Cellphone",

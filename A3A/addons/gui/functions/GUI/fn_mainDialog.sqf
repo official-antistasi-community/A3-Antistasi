@@ -65,12 +65,13 @@ switch (_mode) do
         // Cache group info in map control
         Debug("Caching group info");
 
-        private _isArty = (player getVariable ["selHcGroups",[]] isNotEqualTo []);
+        private _autoSwitchGroups = player getVariable ["autoSwitchGroups",[]];
+        private _doAutoSwitch = _autoSwitchGroups isNotEqualTo [];
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
-        private _selHCGroups = if !(_isArty) then {
-            hcSelected player;
+        private _selHCGroups = if (_doAutoSwitch) then {
+            _autoSwitchGroups;
         } else {
-            player getVariable ["selHcGroups",[]];
+            hcSelected player;
         };
         _hcGroupData = [];
         if (player == theBoss) then
@@ -91,6 +92,7 @@ switch (_mode) do
             _selectedGroup = _selHCgroups # 0;
         };
         _commanderMap setVariable ["selectedGroup", _selectedGroup];
+        _commanderMap setVariable ["doAutoSwitch",_doAutoSwitch];
 
 
         // Commander map Draw EHs
@@ -118,9 +120,12 @@ switch (_mode) do
         // Outposts
         private _fastTravelOutpostsEH = _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawOutpostsEH"];
         Debug_1("Adding outposts Draw EH to Fast Travel map: %1", _fastTravelOutpostsEH);
+        // User Markers
+        private _commanderUserMarkersEH = _fastTravelMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawUserMarkersEH"];
+        Debug_1("Adding user markers Draw EH to Fast Travel map: %1", _commanderUserMarkersEH);
 
         // Show player tab content
-        if !(_isArty) then {
+        if !(_doAutoSwitch) then {
             ["switchTab", ["player"]] call FUNC(mainDialog);
         } else {
             ["switchTab", ["commander"]] call FUNC(mainDialog);

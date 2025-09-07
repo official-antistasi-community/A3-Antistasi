@@ -95,7 +95,7 @@ switch (_mode) do
         _aaMissilePriceText ctrlSetText ((str _aaMissilePrice) + "€");
 
         // Disable buttons and darken icon if not enough money or HR for the unit
-        private _money = player getVariable "moneyX";
+        private _money = if (player == theBoss) then { server getVariable "resourcesFIA" } else { player getVariable "moneyX" };
         private _hr = server getVariable "hr";
         if (_money < _militiamanPrice || _hr < 1) then {
             _militiamanButton ctrlEnable false;

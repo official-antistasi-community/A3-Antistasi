@@ -1170,3 +1170,8 @@ class A3A_ComboBox_Small : A3A_ComboBox
     sizeEx = GUI_TEXT_SIZE_SMALL;
     rowHeight = GUI_TEXT_SIZE_SMALL;
 };
+
+class A3A_Button_Small: A3A_Button
+{
+    sizeEx = GUI_TEXT_SIZE_SMALL;
+};

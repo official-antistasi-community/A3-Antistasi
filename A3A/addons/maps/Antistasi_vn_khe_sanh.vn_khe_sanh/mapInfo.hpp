@@ -52,4 +52,7 @@ class vn_khe_sanh {
 		// PAVN stuff
 		{"Land_vn_o_bunker_03", 40}, {"Land_vn_o_platform_06", 40}, {"Land_vn_fence_punji_01_03", 10}
 	};
+	policeStationTypes[] = {
+		"Land_vn_house_big_04_f", "Land_i_House_Big_02_V1_F", "Land_PoliceStation_01_F", "Land_vn_slum_03_f", "Land_vn_hut_village_01"
+	};
 };
