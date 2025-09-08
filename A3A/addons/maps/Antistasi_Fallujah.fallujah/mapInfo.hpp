@@ -1,6 +1,17 @@
 class Fallujah {
 	population[] = { 
-		{"Fallujah_text",625},{"Jolan_text",894},{"Mualimeen_text",715},{"Muhandisin_text",764},{"Shurta_text",631},{"Jeghaifi_text",677},{"Askari_text",655},{"Resafa_text",514},{"Nazal_text",626},{"Industrial_text",541},{"Sinai_text",483},{"Shuhada_text",481}
+		{"Fallujah_text",625},
+		{"Jolan_text",418},{"a3a_Jolan_South",435},
+		{"Mualimeen_text",416},{"a3a_Mualimeen_East",299},
+		{"Muhandisin_text",368},{"a3a_Muhandisin_East",369},
+		{"Shurta_text",315},{"a3a_Shurta_South",276},
+		{"Jeghaifi_text",386},{"a3a_Jeghaifi_South",324},
+		{"Askari_text",368},{"a3a_Askari_North",228},
+		{"Resafa_text",264},{"a3a_Resafa_South",210},
+		{"Nazal_text",333},{"a3a_Nazal_South",341},
+		{"Industrial_text",541},
+		{"Sinai_text",483},
+		{"Shuhada_text",220},{"a3a_Shuhada_West",200},{"a3a_Shuhada_East",345}
 	};
 	disabledTowns[] = {}; //no towns that need to be disabled
 	antennas[] = {
@@ -109,5 +120,10 @@ class Fallujah {
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
 		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+	};
+	policeStationTypes[] = {
+		"Land_House_C_3_EP1", "Land_House_C_10_EP1", "Land_House_C_4_EP1", "Land_House_C_9_EP1",
+		"Land_House_K_8_EP1", "Land_House_K_7_EP1", "Land_House_K_3_EP1", "Land_House_L_6_EP1", "Land_House_L_7_EP1",
+		"Land_House_C_5_V1_EP1","Land_House_C_5_V2_EP1","Land_House_C_5_V3_EP1","Land_House_C_4_EP1","Land_House_C_3_EP1","Land_House_C_11_EP1"
 	};
 };
