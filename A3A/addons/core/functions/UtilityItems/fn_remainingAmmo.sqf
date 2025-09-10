@@ -2,11 +2,11 @@
 Author: Tiny, adapted from Killerswin2
     find the remaining ammo cargo and returns a precentage 
 Arguments:
-0.  <object>    Object to find the remaining fuel cargo
+0.  <object>    Object to find the remaining ammo cargo
 
 
 Return Value:
-    <number>    percentile remaining fuel 0 -> 1
+    <number>    remaining ammo points
 
 Scope: Clients
 Environment: Unscheduled
@@ -14,7 +14,7 @@ Public: yes
 Dependencies:
 
 Example:
-    [_veh] call A3A_fnc_remainingFuel
+    [_veh] call A3A_fnc_remainingAmmo
 */
 
 params [["_vehicle", objNull, [objNull]]];

@@ -134,4 +134,7 @@ class CfgVehicles
         displayName = "WO CJ-2 (Open)";
         hiddenSelectionsTextures[] = {"ww2\spe_assets_t\vehicles\wheeled_u1_t\g503_mb\g503_1_co.paa","ww2\spe_assets_t\vehicles\wheeled_u1_t\g503_mb\g503_2_co.paa","ww2\spe_assets_t\vehicles\wheeled_u1_t\g503_mb\g503_3_co.paa","","","","","","","","",""};
     };
+    
+    #include "houses.hpp"
+
 };

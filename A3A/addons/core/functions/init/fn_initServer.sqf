@@ -30,6 +30,9 @@ switch (toLower worldname) do {
 	default {mapX setObjectTextureGlobal [0,"Pictures\Mission\whiteboard.jpg"];};
 };
 
+"Synd_HQ" setMarkerShape "ELLIPSE";
+"Synd_HQ" setMarkerSize [75,75];
+
 enableSaving [false,false];
 
 //Disable VN music
@@ -53,6 +56,11 @@ Info("Background init started");
 
 // No reason not to do this early
 [] execVM QPATHTOFOLDER(Scripts\fn_advancedTowingInit.sqf);
+
+// Don't need these for displaying the map, no save dependence
+Info("Initializing civ spawn places");
+{ isNil { _x call A3A_fnc_initCivSpawnPlaces } } forEach citiesX;
+A3A_spawnPlacesDone = true; publicVariable "A3A_spawnPlacesDone";       // let the headless clients know
 
 // Nav stuff, should have no parameter/save dependence at all
 call A3A_fnc_loadNavGrid;
@@ -153,14 +161,11 @@ else
 
     // HQ placement setup
     private _posHQ = A3A_saveData get "startPos";
-    // Disable all nearby roadblocks/specops
-    {
-        if (markerPos _x distance _posHQ < distanceSPWN) then {
-            sidesX setVariable [_x, teamPlayer, true];
-        };
-    } forEach controlsX;
+    respawnTeamPlayer setMarkerPos _posHQ;
+    "Synd_HQ" setMarkerPos _posHQ;
+    posHQ = _posHQ; publicVariable "posHQ";     // hmm, remove this at some point
     petros setPos _posHQ;
-    [_posHQ, true] call A3A_fnc_relocateHQObjects;         // sets all the other vars
+    [_posHQ] call A3A_fnc_relocateHQObjects;
 };
 
 if (_startType != "load") then {
@@ -227,7 +232,7 @@ call A3A_fnc_initSupports;
 call A3A_fnc_generateRebelGear;
 
 // Needs A3A_rebelGear for equipping
-call A3A_fnc_createPetros;
+[getPosATL petros] call A3A_fnc_createPetros;           // preserve current position (potentially from save)
 
 // Some of these may already be unhidden but we make sure
 { _x hideObjectGlobal false } forEach [boxX, flagX, vehicleBox, fireX, mapX, petros];
@@ -248,12 +253,31 @@ addMissionEventHandler ["PlayerDisconnected",{
 addMissionEventHandler ["BuildingChanged", {
     params ["_oldBuilding", "_newBuilding", "_isRuin"];
 
+    Debug_4("%1 (%2) changed to %3 (%4)", typeof _oldBuilding, netId _oldBuilding, typeof _newBuilding, netId _newBuilding);
+
+    // If it's a police station, mark as destroyed
+    // Might not be spawned, so can't depend on the furniture case
+    if (netId _oldBuilding in A3A_policeStations) then {
+        private _city = A3A_policeStations get netId _oldBuilding;
+        A3A_garrison get _city set ["policeStation", false];
+        A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) - 4];
+        A3A_spawnPlaceStats deleteAt _city;
+        A3A_policeStations deleteAt netId _oldBuilding;
+        ["TaskSucceeded", ["", "Police Station Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
+
+        // Delete any furniture
+        private _attached = _oldBuilding getVariable ["A3A_furniture", []];
+        { deleteVehicle _x } forEach _attached;
+    };
+
     if (_isRuin) then {
+
+        // TODO: this whole system doesn't work for buildings that have an intermediate damage model
         _oldBuilding setVariable ["ruins", _newBuilding];
         _newBuilding setVariable ["building", _oldBuilding];
 
         // Antenna dead/alive status is handled separately
-        if !(_oldBuilding in antennas || _oldBuilding in antennasDead) then {
+        if !(_oldBuilding in antennas || _oldBuilding in antennasDead) exitWith {
             destroyedBuildings pushBack _oldBuilding;
         };
     };
@@ -271,12 +295,44 @@ addMissionEventHandler ["EntityKilled", {
         Debug_2("%1 killed by %2", typeof _victim, _killerSide);
     };
 
+    private _marker = _victim getVariable "markerX";
+    if (!isNil "_marker") then {
+        if (_victim isKindOf "CAManBase") exitWith { [_marker, _victim] call A3A_fnc_garrisonServer_remUnit };
+        [_victim] call A3A_fnc_garrisonServer_remVehicle;
+    };
+
     if !(isNil {_victim getVariable "ownerSide"}) then {
         // Antistasi-created vehicle
         [_victim, _killerSide, false, _killer] call A3A_fnc_vehKilledOrCaptured;
         [_victim] spawn A3A_fnc_postmortem;
     };
 }];
+
+// Shouldn't need these now due to attach/detach covering all cases
+/*if (A3A_hasACE) then {
+    // Handler for detecting ACE load of static weapons. God why?
+    ["ace_common_hideObjectGlobal", {
+    	params ["_object", "_hide"];
+        if !(_object isKindOf "StaticWeapon") exitWith {};
+        if !(_hide) exitWith {};
+        if (!isNil {_object getVariable "markerX"}) then { [_object] call A3A_fnc_garrisonServer_remVehicle };
+    }] call CBA_fnc_addEventHandler;
+
+    // Handler for detecting ACE cargo unload of static weapons
+    ["ace_cargoUnloaded", {
+        params ["_object", "_vehicle", "_unload"];
+        if !(_object isKindOf "StaticWeapon") exitWith {};
+        ["", _object] call A3A_fnc_garrisonServer_addVehicle;
+    }] call CBA_fnc_addEventHandler;
+
+    // Handler for detecting ACE drag/carry release of static weapons
+    ["ace_common_setMass", {
+        params ["_object", "_mass"];
+        if !(_object isKindOf "StaticWeapon") exitWith {};
+        if (_mass < 1) exitWith {};
+        ["", _object] call A3A_fnc_garrisonServer_addVehicle;
+    }] call CBA_fnc_addEventHandler;
+};*/
 
 if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
     isClass (configfile >> "CfgPatches" >> "lambs_danger"))) then {
@@ -322,8 +378,10 @@ A3A_startupState = "completed"; publicVariable "A3A_startupState";
 serverInitDone = true; publicVariable "serverInitDone";
 Info("Setting serverInitDone as true");
 
-
 // ********************* Initialize loops *******************************************
+
+A3A_garrisonOps = [];
+[] spawn A3A_fnc_garrisonOpLoop;
 
 [] spawn A3A_fnc_postmortemLoop;                    // Postmortem cleanup loop
 [] spawn A3A_fnc_distance;                          // Marker spawn loop
@@ -366,5 +424,19 @@ savingServer = false;           // enable saving
     };
 };
 
+//Unit locality logging
+[] spawn {
+    if (logLevel < 3) exitWith {};
+    while {true} do
+    {
+        sleep 60;
+        if (allPlayers - entities "HeadlessClient_F" isEqualTo []) then { continue };
+
+        private _countSrv = { local _x } count allUnits;
+        private _countHC = { owner _x in hcArray } count allUnits;
+        private _countClient = count allUnits - _countSrv - _countHC;
+        Debug_3("Units on server: %1 HC: %2 clients: %3", _countSrv, _countHC, _countClient);
+    };
+};
 
 Info("initServer completed");

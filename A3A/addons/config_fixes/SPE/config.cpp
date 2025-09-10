@@ -20,7 +20,21 @@ class CfgPatches
     };
 };
 
-// Uncomment when needed
 #include "CfgVehicles.hpp"
 #include "CfgWeapons.hpp"
 #include "CfgAmmo.hpp"
+
+class CfgWorlds {
+    class CAWorld;
+    class SPE_Normandy : CAWorld {
+        class Names {
+            class Vil_Saint_Lo {
+                position[] = {11124,10652};
+            };
+            class Vil_Lengronne {
+                position[] = {712,718};
+            };
+        };
+    };
+};
+    

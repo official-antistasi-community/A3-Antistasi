@@ -16,10 +16,23 @@ _name setMarkerSizeLocal [_mrkSize, _mrkSize];
 _name setMarkerShapeLocal "ELLIPSE";
 _name setMarkerAlpha 0;
 
+// problem. three cases here:
+// 1. pre-roadblocks: Won't call this at all until after the save is loaded.
+// 2. pre-garrison: Need to actually run the build, but not yet?
+// 3. post-garrison rework: Don't run the build
+// Solution: Do this shit again in convertSavedGarrisons
+
+if (!isNil "A3A_garrison") then {      // Otherwise it's a load-from-save and garrisons will be loaded later
+    if (_type == "camp") then {
+        [_name, _side] call A3A_fnc_buildCamp;
+    } else {
+        [_name, _side] call A3A_fnc_buildRoadblock;
+    };
+};
+
 sidesX setVariable [_name, _side, true];
 controlsX pushBack _name;
-markersX pushBack _name;
 spawner setVariable [_name, 2, true];
 
-// Don't publish controlsX & markersX here to avoid spam
+// Don't publish controlsX here to avoid spam
 _name
