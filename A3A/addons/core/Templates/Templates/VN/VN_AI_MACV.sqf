@@ -39,23 +39,33 @@
 ["vehiclesFuelTrucks", ["vn_b_wheeled_m54_fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", []] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["vn_b_wheeled_m54_mg_03", "vn_b_wheeled_m54_mg_01", "vn_b_armor_m113_01"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", ["vn_b_armor_m113_acav_04", "vn_b_armor_m113_acav_02", "vn_b_armor_m113_acav_01", "vn_b_armor_m113_acav_06", "vn_b_armor_m113_acav_03", "vn_b_armor_m113_acav_05"]] call _fnc_saveToTemplate;
+private _vehiclesAPCs = ["vn_b_armor_m113_acav_04", "vn_b_armor_m113_acav_02", "vn_b_armor_m113_acav_01", "vn_b_armor_m113_acav_06", "vn_b_armor_m113_acav_03", "vn_b_armor_m113_acav_05"];
 ["vehiclesIFVs", ["vn_b_armor_m67_01_01"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["vn_b_armor_m41_01_02", "vn_b_armor_m48_01_01"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["vn_b_wheeled_m54_mg_02"]] call _fnc_saveToTemplate;
+private _vehiclesAA = ["vn_b_wheeled_m54_mg_02"];
 
 ["vehiclesTransportBoats", ["vn_o_boat_02_01", "vn_b_boat_10_01", "vn_b_boat_09_01"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["vn_b_boat_13_02", "vn_b_boat_06_02", "vn_b_boat_05_02", "vn_b_boat_12_02"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["vn_b_air_f4c_at", "vn_b_air_f100d_at"]] call _fnc_saveToTemplate;
+private _vehiclesPlanesCAS = ["vn_b_air_f4c_at", "vn_b_air_f100d_at"];
+
 ["vehiclesPlanesAA", ["vn_b_air_f4c_cap", "vn_b_air_f100d_cap"]] call _fnc_saveToTemplate;
 private _vehiclesPlanesTransport = [];
+private _vehiclesAirPatrol = ["vn_b_air_uh1d_02_01"];
 
 if (isClass (configFile >> "vnx_credits")) then {
+	_vehiclesAPCs append ["vnx_b_armor_lvtp5_01"];
+	_vehiclesAA append ["vnx_b_armor_m163_01"];
+	_vehiclesPlanesCAS append ["vnx_b_air_ov10a_usmc_mr"];
 	_vehiclesPlanesTransport append ["vnx_b_air_ac119_02_01"];
+	_vehiclesAirPatrol append ["vnx_b_air_ov10a_covey"];
 };
 
+["vehiclesAPCs", _vehiclesAPCs] call _fnc_saveToTemplate;
+["vehiclesAA", _vehiclesAA] call _fnc_saveToTemplate;
+["vehiclesAirPatrol", _vehiclesAirPatrol] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", _vehiclesPlanesCAS] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", _vehiclesPlanesTransport] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["vn_b_air_ch34_01_01"]] call _fnc_saveToTemplate;

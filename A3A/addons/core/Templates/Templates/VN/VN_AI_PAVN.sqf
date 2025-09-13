@@ -226,7 +226,7 @@ _sfLoadoutData set ["machineGuns", [
 "vn_dp28", "vn_pk"
 ]];
 _sfLoadoutData set ["marksmanRifles", [
-["vn_sks", "", "", "vn_o_3x_m9130", ["vn_sks_mag", "vn_sks_mag", "vn_sks_t_mag"], [], ""]
+["vn_sks", "", "", "vn_o_3x_sks", ["vn_sks_mag", "vn_sks_mag", "vn_sks_t_mag"], [], ""]
 ]];
 _sfLoadoutData set ["sniperRifles", [
 ["vn_m9130", "", "", "vn_o_3x_m9130", ["vn_m38_mag", "vn_m38_mag", "vn_m38_t_mag"], [], "vn_b_camo_m9130"],
@@ -258,7 +258,7 @@ _militaryLoadoutData set ["rifles", [
 ["vn_type56", "", "vn_b_type56", "", ["vn_type56_mag", "vn_type56_mag", "vn_type56_t_mag"], [], ""]
 ]];
 _militaryLoadoutData set ["slRifles", [
-["vn_sks", "", "", "vn_o_3x_m9130", ["vn_sks_mag", "vn_sks_mag", "vn_sks_t_mag"], [], ""],
+["vn_sks", "", "", "vn_o_3x_sks", ["vn_sks_mag", "vn_sks_mag", "vn_sks_t_mag"], [], ""],
 ["vn_type56", "", "vn_b_type56", "", ["vn_type56_mag", "vn_type56_mag", "vn_type56_t_mag"], [], ""]
 ]];
 _militaryLoadoutData set ["SMGs", [
@@ -279,7 +279,7 @@ _militaryLoadoutData set ["machineGuns", [
 "vn_dp28", "vn_pk"
 ]];
 _militaryLoadoutData set ["marksmanRifles", [
-["vn_sks", "", "", "vn_o_3x_m9130", ["vn_sks_mag", "vn_sks_mag", "vn_sks_t_mag"], [], ""]
+["vn_sks", "", "", "vn_o_3x_sks", ["vn_sks_mag", "vn_sks_mag", "vn_sks_t_mag"], [], ""]
 ]];
 _militaryLoadoutData set ["sniperRifles", [
 ["vn_m9130", "", "", "vn_o_3x_m9130", ["vn_m38_mag", "vn_m38_mag", "vn_m38_t_mag"], [], "vn_b_camo_m9130"],
@@ -335,7 +335,7 @@ _militiaLoadoutData set ["rifles", [
 ["vn_type56", "", "vn_b_type56", "", ["vn_type56_mag", "vn_type56_mag", "vn_type56_t_mag"], [], ""]
 ]];
 _militiaLoadoutData set ["slRifles", [
-["vn_sks", "", "", "vn_o_3x_m9130", ["vn_sks_mag", "vn_sks_mag", "vn_sks_t_mag"], [], ""],
+["vn_sks", "", "", "vn_o_3x_sks", ["vn_sks_mag", "vn_sks_mag", "vn_sks_t_mag"], [], ""],
 ["vn_type56", "", "vn_b_type56", "", ["vn_type56_mag", "vn_type56_mag", "vn_type56_t_mag"], [], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [
@@ -354,7 +354,7 @@ _militiaLoadoutData set ["machineGuns", [
 "vn_dp28"
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["vn_sks", "", "", "vn_o_3x_m9130", ["vn_sks_mag", "vn_sks_mag", "vn_sks_t_mag"], [], ""]
+["vn_sks", "", "", "vn_o_3x_sks", ["vn_sks_mag", "vn_sks_mag", "vn_sks_t_mag"], [], ""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
 ["vn_m9130", "", "", "vn_o_3x_m9130", ["vn_m38_mag", "vn_m38_mag", "vn_m38_t_mag"], [], "vn_b_camo_m9130"],
@@ -382,6 +382,26 @@ if (isClass (configFile >> "vnx_credits")) then {
     ["vnx_m77e", "", "", "", ["vnx_m77e_fl_mag","vnx_m77e_buck_mag"], [], ""],
     ["vnx_m77e_shorty", "", "", "", ["vnx_m77e_so_mag"], [], ""]
     ];
+    (_policeLoadoutData get "sidearms") append [
+    "vnx_c96"
+    ];
+    (_militiaLoadoutData get "sidearms") append [
+    "vnx_c96"
+    ];
+    (_militaryLoadoutData get "sidearms") append [
+    "vnx_c96"
+    ];
+    (_sfLoadoutData get "sidearms") append [
+    "vnx_c96"
+    ];
+    (_sfLoadoutData get "rifles") append [
+    ["vn_type56", "", "vn_b_type56", "", ["vn_type56_mag", "vn_type56_mag", "vn_type56_t_mag"], [], ""],
+    ["vn_type56", "", "vn_b_type56", "", ["vn_type56_mag", "vn_type56_mag", "vn_type56_t_mag"], [], ""],
+    ["vnx_stg44", "", "", "", ["vnx_stg44_mag", "vnx_stg44_mag", "vnx_stg44_t_mag"], [], ""]
+    ];
+    (_sfLoadoutData get "slRifles") append [
+    ["vnx_stg44", "", "", "", ["vnx_stg44_t_mag", "vnx_stg44_t_mag", "vnx_stg44_mag"], [], ""]
+    ];
     (_militiaLoadoutData get "SMGs") append [
     ["vnx_m50_smg", "", "", "", ["vnx_m50_smg_t_mag", "vnx_m50_smg_mag"], [], ""]
     ];
@@ -390,6 +410,21 @@ if (isClass (configFile >> "vnx_credits")) then {
     ];
     (_sfLoadoutData get "SMGs") append [
     ["vnx_m50_smg", "", "", "", ["vnx_m50_smg_t_mag", "vnx_m50_smg_mag"], [], ""]
+    ];
+    (_militiaLoadoutData get "rifles") append [
+    ["vnx_no4", "", "vnx_b_no4", "", [], ["vnx_no4_mag", "vnx_no4_mag", "vnx_no4_t_mag"], ""]
+    ];
+    (_militiaLoadoutData get "marksmanRifles") append [
+    "vnx_no4_sniper"
+    ];
+    (_militiaLoadoutData get "sniperRifles") append [
+    "vnx_no4_sniper"
+    ];
+    (_militaryLoadoutData get "marksmanRifles") append [
+    "vnx_no4_sniper"
+    ];
+    (_militaryLoadoutData get "sniperRifles") append [
+    "vnx_no4_sniper"
     ];
 };
 
