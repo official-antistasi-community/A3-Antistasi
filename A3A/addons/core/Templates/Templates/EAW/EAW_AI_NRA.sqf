@@ -116,17 +116,13 @@ _loadoutData set ["machineGuns", [
 ["EAW_FN30_Base", "", "", "", [], [], "EAW_FN30_Bipod"],
 ["EAW_ZB26_Base", "", "", "", [], [], "EAW_ZB26_Bipod"]
 ]];
-_loadoutData set ["marksmanRifles", [
-["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_SMK"], [], ""],
-["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_sS"], [], ""],
-["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t"], [], ""]
-]];
+_loadoutData set ["marksmanRifles", []];
 _loadoutData set ["sniperRifles", []];
 
 _loadoutData set ["lightATLaunchers", []];
 _loadoutData set ["ATLaunchers", ["LIB_M1A1_Bazooka"]];
 _loadoutData set ["AALaunchers", []];
-_loadoutData set ["sidearms", ["EAW_C96", "LIB_P08"]];
+_loadoutData set ["sidearms", ["EAW_C96", "EAW_C96", "LIB_P08"]];
 _loadoutData set ["slSidearms", ["EAW_Dao"]];
 
 _loadoutData set ["ATMines", []];
@@ -210,12 +206,17 @@ _sfLoadoutData set ["slRifles", [
     "LIB_G41",
     "EAW_MP28",
     "EAW_C96_Auto_Carbine",
+    ["EAW_Type24_Rifle_Base", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
+    ["LIB_K98", "LIB_ACC_K98_Bayo", "", "", [], ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t","LIB_5Rnd_792x57_sS","LIB_5Rnd_792x57_SMK"], ""],
     ["LIB_K98", "LIB_ACC_K98_Bayo", "", "", [], ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t","LIB_5Rnd_792x57_sS","LIB_5Rnd_792x57_SMK"], ""]
 ]];
 _sfLoadoutData set ["rifles", [
+    ["EAW_Type24_Rifle_Base", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
+    ["LIB_K98", "LIB_ACC_K98_Bayo", "", "", [], ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t","LIB_5Rnd_792x57_sS","LIB_5Rnd_792x57_SMK"], ""],
     ["LIB_K98", "LIB_ACC_K98_Bayo", "", "", [], ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t","LIB_5Rnd_792x57_sS","LIB_5Rnd_792x57_SMK"], ""]
 ]];
 _sfLoadoutData set ["carbines", [
+    ["LIB_K98", "LIB_ACC_K98_Bayo", "", "", [], ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t","LIB_5Rnd_792x57_sS","LIB_5Rnd_792x57_SMK"], ""],
     "EAW_MP28",
     "EAW_C96_Auto_Carbine"
 ]];
@@ -230,11 +231,13 @@ _sfLoadoutData set ["machineGuns", [
     "LIB_MG34"
 ]];
 _sfLoadoutData set ["marksmanRifles", [
-["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_SMK"], [], ""],
-["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_sS"], [], ""],
-["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t"], [], ""]
+    ["EAW_Type97_Sniper", "", "", "EAW_Type97_Sniper_Scope", [], [], ""],
+    ["EAW_Type97_Sniper", "", "", "EAW_Type97_Sniper_Scope", [], [], ""],
+    ["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_SMK"], [], ""],
+    ["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_sS"], [], ""],
+    ["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t"], [], ""]
 ]];
-_sfLoadoutData set ["slSidearms", ["LIB_P08"]];
+_sfLoadoutData set ["slSidearms", ["EAW_C96", "LIB_P08"]];
 /////////////////////////////////
 //    Military Loadout Data    //
 /////////////////////////////////
@@ -294,7 +297,9 @@ _militiaLoadoutData set ["slHelmets", ["EAW_Chinese_VisorCap_Blue"]];
 _militiaLoadoutData set ["NVGs", []];
 
 _militiaLoadoutData set ["rifles", [
-["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
+["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
+["EAW_Hanyang88_Base", "", "", "", [], [], ""],
+"EAW_C96_Carbine"
 ]];
 _militiaLoadoutData set ["carbines", [
 ["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
@@ -302,12 +307,12 @@ _militiaLoadoutData set ["carbines", [
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", []];
 _militiaLoadoutData set ["SMGs", [
-["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
+"EAW_Hanyang88_Base",
 "EAW_C96_Carbine",
 "EAW_C96_Auto_Carbine"
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
+["EAW_Hanyang88_Base", "", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["sidearms", ["EAW_Hanyang_Bayonet"]];
 _militiaLoadoutData set ["slSidearms", ["EAW_Dao"]];

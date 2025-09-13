@@ -200,26 +200,33 @@ _sfLoadoutData set ["facewear", ["EAW_CamoVest_2", "EAW_CamoVest_3", "EAW_CamoVe
 _sfLoadoutData set ["slRifles", [
     ["LIB_PPSh41_m", "", "", "", [], ["LIB_71Rnd_762x25", "LIB_71Rnd_762x25", "LIB_71Rnd_762x25", "LIB_71Rnd_762x25_t", "LIB_71Rnd_762x25_t2", "LIB_71Rnd_762x25_ap"], ""],
     ["LIB_SVT_40", "", "", "", [], ["LIB_10Rnd_762x54", "LIB_10Rnd_762x54", "LIB_10Rnd_762x54_t46", "LIB_10Rnd_762x54_t30", "LIB_10Rnd_762x54_t462", "LIB_10Rnd_762x54_t302", "LIB_10Rnd_762x54_d", "LIB_10Rnd_762x54_b30"], ""],
-    ["a3a_lib_AVT_40", "", "", "", [], ["LIB_10Rnd_762x54", "LIB_10Rnd_762x54", "LIB_10Rnd_762x54_t46", "LIB_10Rnd_762x54_t30", "LIB_10Rnd_762x54_t462", "LIB_10Rnd_762x54_t302", "LIB_10Rnd_762x54_d", "LIB_10Rnd_762x54_b30"], ""]
+    ["a3a_lib_AVT_40", "", "", "", [], ["LIB_10Rnd_762x54", "LIB_10Rnd_762x54", "LIB_10Rnd_762x54_t46", "LIB_10Rnd_762x54_t30", "LIB_10Rnd_762x54_t462", "LIB_10Rnd_762x54_t302", "LIB_10Rnd_762x54_d", "LIB_10Rnd_762x54_b30"], ""],
+    ["LIB_M9130", "LIB_ACC_M1891_Bayo", "", "", [], ["LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54_t46", "LIB_5Rnd_762x54_t30", "LIB_5Rnd_762x54_D", "LIB_5Rnd_762x54_b30"], ""],
+    ["LIB_M9130", "LIB_ACC_M1891_Bayo", "", "", [], ["LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54_t46", "LIB_5Rnd_762x54_t30", "LIB_5Rnd_762x54_D", "LIB_5Rnd_762x54_b30"], ""],
+    ["LIB_M9130", "LIB_ACC_M1891_Bayo", "", "", [], ["LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54_t46", "LIB_5Rnd_762x54_t30", "LIB_5Rnd_762x54_D", "LIB_5Rnd_762x54_b30"], ""]
 ]];
 _sfLoadoutData set ["rifles", [
     ["LIB_M9130", "LIB_ACC_M1891_Bayo", "", "", [], ["LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54_t46", "LIB_5Rnd_762x54_t30", "LIB_5Rnd_762x54_D", "LIB_5Rnd_762x54_b30"], ""]
 ]];
 _sfLoadoutData set ["carbines", [
-    ["LIB_SVT_40", "", "", "", [], ["LIB_10Rnd_762x54", "LIB_10Rnd_762x54", "LIB_10Rnd_762x54_t46", "LIB_10Rnd_762x54_t30", "LIB_10Rnd_762x54_t462", "LIB_10Rnd_762x54_t302", "LIB_10Rnd_762x54_d", "LIB_10Rnd_762x54_b30"], ""]
+    ["LIB_SVT_40", "", "", "", [], ["LIB_10Rnd_762x54", "LIB_10Rnd_762x54", "LIB_10Rnd_762x54_t46", "LIB_10Rnd_762x54_t30", "LIB_10Rnd_762x54_t462", "LIB_10Rnd_762x54_t302", "LIB_10Rnd_762x54_d", "LIB_10Rnd_762x54_b30"], ""],
+    ["LIB_M9130", "LIB_ACC_M1891_Bayo", "", "", [], ["LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54_t46", "LIB_5Rnd_762x54_t30", "LIB_5Rnd_762x54_D", "LIB_5Rnd_762x54_b30"], ""],
+    ["LIB_M9130", "LIB_ACC_M1891_Bayo", "", "", [], ["LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54_t46", "LIB_5Rnd_762x54_t30", "LIB_5Rnd_762x54_D", "LIB_5Rnd_762x54_b30"], ""]
 ]];
 _sfLoadoutData set ["SMGs", [
+    "EAW_C96_Auto_Carbine",
+    "EAW_C96_Auto_Carbine",
     ["LIB_PPSh41_m", "", "", "", [], ["LIB_71Rnd_762x25", "LIB_71Rnd_762x25", "LIB_71Rnd_762x25", "LIB_71Rnd_762x25_t", "LIB_71Rnd_762x25_t2", "LIB_71Rnd_762x25_ap"], ""],
     ["LIB_PPSh41_m", "", "", "", [], ["LIB_35Rnd_762x25", "LIB_35Rnd_762x25", "LIB_35Rnd_762x25_t", "LIB_35Rnd_762x25_t2", "LIB_35Rnd_762x25_ap"], ""],
     ["LIB_PPSh41_m", "", "", "", [], ["LIB_35Rnd_762x25", "LIB_35Rnd_762x25", "LIB_35Rnd_762x25_t", "LIB_35Rnd_762x25_t2", "LIB_35Rnd_762x25_ap"], ""]
 ]];
-_sfLoadoutData set ["machineGuns", [
-    ["LIB_DP28", "", "", "", ["LIB_47Rnd_762x54", "LIB_47Rnd_762x54", "LIB_47Rnd_762x54d"], [], ""]
-]];
 _sfLoadoutData set ["marksmanRifles", [
-["LIB_M9130PU", "", "", "", ["LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54_t46", "LIB_5Rnd_762x54_t30", "LIB_5Rnd_762x54_D", "LIB_5Rnd_762x54_b30"], [], ""]
+    ["LIB_M9130PU", "", "", "", ["LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54_t46", "LIB_5Rnd_762x54_t30", "LIB_5Rnd_762x54_D", "LIB_5Rnd_762x54_b30"], [], ""],
+    ["LIB_M9130PU", "", "", "", ["LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54", "LIB_5Rnd_762x54_t46", "LIB_5Rnd_762x54_t30", "LIB_5Rnd_762x54_D", "LIB_5Rnd_762x54_b30"], [], ""],
+    ["EAW_Type97_Sniper", "", "", "EAW_Type97_Sniper_Scope", [], [], ""],
+    ["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t"], [], ""]
 ]];
-_sfLoadoutData set ["slSidearms", ["LIB_P08"]];
+_sfLoadoutData set ["slSidearms", ["EAW_C96"]];
 /////////////////////////////////
 //    Military Loadout Data    //
 /////////////////////////////////
@@ -243,6 +250,7 @@ _militaryLoadoutData set ["carbines", [
 _militaryLoadoutData set ["SMGs", [
     "EAW_C96_Carbine",
     "EAW_C96_Carbine",
+    "EAW_C96_Auto_Carbine",
     "EAW_C96_Auto_Carbine",
     ["LIB_PPSh41_m", "", "", "", [], ["LIB_35Rnd_762x25", "LIB_35Rnd_762x25", "LIB_35Rnd_762x25_t", "LIB_35Rnd_762x25_t2"], ""]
 ]];
@@ -280,7 +288,8 @@ _militiaLoadoutData set ["NVGs", []];
 
 _militiaLoadoutData set ["rifles", [
     ["EAW_Type24_Rifle_Base", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
-    ["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
+    ["EAW_Hanyang88_Base", "", "", "", [], [], ""],
+    "EAW_C96_Carbine"
 ]];
 _militiaLoadoutData set ["carbines", [
     ["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
@@ -288,13 +297,13 @@ _militiaLoadoutData set ["carbines", [
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", []];
 _militiaLoadoutData set ["SMGs", [
-    ["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
+    ["EAW_Hanyang88_Base", "", "", "", [], [], ""],
     "EAW_C96_Carbine",
     "EAW_C96_Auto_Carbine"
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-    ["EAW_Type24_Rifle_Base", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
-    ["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
+    ["EAW_Type24_Rifle_Base", "", "", "", [], [], ""],
+    ["EAW_Hanyang88_Base", "", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["sidearms", ["EAW_Hanyang_Bayonet"]];
 _militiaLoadoutData set ["slSidearms", ["EAW_Dao"]];

@@ -193,6 +193,8 @@ _sfLoadoutData set ["facewear", ["EAW_CamoVest_2", "EAW_CamoVest_3", "EAW_CamoVe
 
 _sfLoadoutData set ["slRifles", [
     "EAW_MP28",
+    "EAW_MP28",
+    ["EAW_Type99_Long_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
     ["EAW_Type99_Long_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
     ["LIB_M1_Carbine", "", "", "", ["LIB_15Rnd_762x33", "LIB_15Rnd_762x33", "LIB_15Rnd_762x33_t"], [], ""],
     ["LIB_M1928_Thompson", "", "", "", ["LIB_50Rnd_45ACP", "LIB_30Rnd_45ACP", "LIB_30Rnd_45ACP", "LIB_30Rnd_45ACP_t"], [], ""]
@@ -203,14 +205,22 @@ _sfLoadoutData set ["rifles", [
 _sfLoadoutData set ["carbines", [
     ["LIB_M1_Carbine", "", "", "", ["LIB_15Rnd_762x33", "LIB_15Rnd_762x33", "LIB_15Rnd_762x33_t"], [], ""],
     ["EAW_Type99_Short_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
+    ["EAW_Type99_Long_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
+    ["EAW_Type99_Short_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
     ["EAW_Type99_Long_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
 ]];
 _sfLoadoutData set ["SMGs", [
     "EAW_MP28",
     "EAW_MP28",
+    "EAW_MP28",
+    "EAW_MP28",
     ["LIB_M1928_Thompson", "", "", "", ["LIB_50Rnd_45ACP", "LIB_30Rnd_45ACP", "LIB_30Rnd_45ACP", "LIB_30Rnd_45ACP_t"], [], ""]
 ]];
 _sfLoadoutData set ["machineGuns", [
+    ["EAW_Type99", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"],
+    ["EAW_Type99", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"],
+    ["EAW_Type99", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"],
+    ["EAW_Type99", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"],
     ["EAW_Type99", "EAW_Type30_Bayonet_Attach", "", "", [], [], "EAW_Type99_Bipod"]
 ]];
 _sfLoadoutData set ["marksmanRifles", [
@@ -236,6 +246,7 @@ _militaryLoadoutData set ["carbines", [
 ["EAW_Type38_Carbine_NoCover", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
 ]];
 _militaryLoadoutData set ["SMGs", [
+["EAW_Type99_Short", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
 ["EAW_Type99_Short", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""],
 "EAW_MP28"
 ]];
@@ -285,8 +296,7 @@ _militiaLoadoutData set ["carbines", [
 ["EAW_Type30_Rifle_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [
-["EAW_Type30_Rifle", "", "", "", [], [], ""],
-["EAW_Type30_Rifle_Stock2", "EAW_Type30_Bayonet_Attach", "", "", [], [], ""]
+["EAW_Type30_Rifle", "", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
 ["EAW_Type11_Base", "", "", "", [], [], "EAW_Type11_Bipod"]
@@ -689,6 +699,8 @@ private _unarmedTemplate = {
 
 private _traitorTemplate = {
     call _unarmedTemplate;
+    ["SMGs"] call _fnc_setPrimary;
+    ["primary", 2] call _fnc_addMagazines;
     ["sidearms"] call _fnc_setHandgun;
     ["handgun", 2] call _fnc_addMagazines;
 };
@@ -791,6 +803,6 @@ private _unitTypes = [
 //The following lines are determining the loadout for the unit used in the "kill the official" mission
 ["other", [["Official", _policeTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "kill the traitor" mission
-["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Traitor", _traitorTemplate]], _militiaLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "Invader Punishment" mission
 ["other", [["Unarmed", _UnarmedTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
