@@ -720,16 +720,18 @@ private _prefix = "SF";
 private _unitTypes = [
     ["SquadLeader", _squadLeaderTemplate],
     ["Rifleman", _riflemanTemplate],
-    ["Medic", _medicTemplate, [["medic", true]]],
-    ["Engineer", _engineerTemplate, [["engineer", true]]],
-    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]]],
-    ["Grenadier", _grenadierTemplate],
-    ["LAT", _latTemplate],
-    ["AT", _atTemplate],
-    ["AA", _aaTemplate],
-    ["MachineGunner", _machineGunnerTemplate],
-    ["Marksman", _marksmanTemplate],
-    ["Sniper", _sniperTemplate]
+    ["SquadLeader", _squadLeaderTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Rifleman", _riflemanTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Medic", _medicTemplate, [["medic", true]], nil, "B_soldier_Melee_Hybrid"],
+    ["Engineer", _engineerTemplate, [["engineer", true]], nil, "B_soldier_Melee_Hybrid"],
+    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]], nil, "B_soldier_Melee_Hybrid"],
+    ["Grenadier", _grenadierTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["LAT", _latTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["AT", _atTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["AA", _aaTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["MachineGunner", _machineGunnerTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Marksman", _marksmanTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Sniper", _sniperTemplate, nil, nil, "B_soldier_Melee_Hybrid"]
 ];
 
 [_prefix, _unitTypes, _sfLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
