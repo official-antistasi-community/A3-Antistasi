@@ -558,7 +558,7 @@ if (A3A_hasACE) then {
 };
 
 if (isClass (configFile >> "CfgPatches" >> "cigs_core")) then {
-    FactionGet(reb,"initialRebelEquipment") append ( call cigs_core_fnc_getAllItems );
+    FactionGet(reb,"initialRebelEquipment") append ( [] call cigs_core_fnc_getAllItems );
 };
 
 ////////////////////////////////////
