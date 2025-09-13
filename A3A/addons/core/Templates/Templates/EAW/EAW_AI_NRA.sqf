@@ -718,8 +718,6 @@ private _traitorTemplate = {
 /////////////////////////////
 private _prefix = "SF";
 private _unitTypes = [
-    ["SquadLeader", _squadLeaderTemplate],
-    ["Rifleman", _riflemanTemplate],
     ["SquadLeader", _squadLeaderTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
     ["Rifleman", _riflemanTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
     ["Medic", _medicTemplate, [["medic", true]], nil, "B_soldier_Melee_Hybrid"],
