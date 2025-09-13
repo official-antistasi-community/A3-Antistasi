@@ -747,18 +747,18 @@ private _unitTypes = [
 ///////////////////////
 private _prefix = "military";
 private _unitTypes = [
-    ["SquadLeader", _squadLeaderTemplate],
-    ["Rifleman", _riflemanTemplate],
-    ["Medic", _medicTemplate, [["medic", true]]],
-    ["Engineer", _engineerTemplate, [["engineer", true]]],
-    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]]],
-    ["Grenadier", _grenadierTemplate],
-    ["LAT", _latTemplate],
-    ["AT", _atTemplate],
-    ["AA", _aaTemplate],
-    ["MachineGunner", _machineGunnerTemplate],
-    ["Marksman", _marksmanTemplate],
-    ["Sniper", _sniperTemplate]
+    ["SquadLeader", _squadLeaderTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Rifleman", _riflemanTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Medic", _medicTemplate, [["medic", true]], nil, "B_soldier_Melee_Hybrid"],
+    ["Engineer", _engineerTemplate, [["engineer", true]], nil, "B_soldier_Melee_Hybrid"],
+    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]], nil, "B_soldier_Melee_Hybrid"],
+    ["Grenadier", _grenadierTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["LAT", _latTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["AT", _atTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["AA", _aaTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["MachineGunner", _machineGunnerTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Marksman", _marksmanTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Sniper", _sniperTemplate, nil, nil, "B_soldier_Melee_Hybrid"]
 ];
 
 [_prefix, _unitTypes, _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
@@ -768,8 +768,8 @@ private _unitTypes = [
 ////////////////////////
 private _prefix = "police";
 private _unitTypes = [
-    ["SquadLeader", _policeTemplate],
-    ["Standard", _policeTemplate]
+    ["SquadLeader", _policeTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Standard", _policeTemplate, nil, nil, "B_soldier_Melee_Hybrid"]
 ];
 
 [_prefix, _unitTypes, _policeLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
@@ -779,18 +779,18 @@ private _unitTypes = [
 ////////////////////////
 private _prefix = "militia";
 private _unitTypes = [
-    ["SquadLeader", _squadLeaderTemplate],
-    ["Rifleman", _riflemanTemplate],
-    ["Medic", _medicTemplate, [["medic", true]]],
-    ["Engineer", _engineerTemplate, [["engineer", true]]],
-    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]]],
-    ["Grenadier", _grenadierTemplate],
-    ["LAT", _latTemplate],
-    ["AT", _atTemplate],
-    ["AA", _aaTemplate],
-    ["MachineGunner", _machineGunnerTemplate],
-    ["Marksman", _marksmanTemplate],
-    ["Sniper", _sniperTemplate]
+    ["SquadLeader", _squadLeaderTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Rifleman", _riflemanTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Medic", _medicTemplate, [["medic", true]], nil, "B_soldier_Melee_Hybrid"],
+    ["Engineer", _engineerTemplate, [["engineer", true]], nil, "B_soldier_Melee_Hybrid"],
+    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]], nil, "B_soldier_Melee_Hybrid"],
+    ["Grenadier", _grenadierTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["LAT", _latTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["AT", _atTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["AA", _aaTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["MachineGunner", _machineGunnerTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Marksman", _marksmanTemplate, nil, nil, "B_soldier_Melee_Hybrid"],
+    ["Sniper", _sniperTemplate, nil, nil, "B_soldier_Melee_Hybrid"]
 ];
 
 [_prefix, _unitTypes, _militiaLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
@@ -800,12 +800,12 @@ private _unitTypes = [
 //////////////////////
 
 //The following lines are determining the loadout of vehicle crew
-["other", [["Crew", _crewTemplate]], _crewLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Crew", _crewTemplate]], _crewLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout of the pilots
-["other", [["Pilot", _crewTemplate]], _pilotLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Pilot", _crewTemplate]], _pilotLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the unit used in the "kill the official" mission
-["other", [["Official", _policeTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Official", _policeTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "kill the traitor" mission
-["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Traitor", _traitorTemplate]], _militiaLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "Invader Punishment" mission
-["other", [["Unarmed", _UnarmedTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Unarmed", _UnarmedTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
