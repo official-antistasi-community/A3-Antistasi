@@ -555,11 +555,13 @@ DECLARE_SERVER_VAR(A3A_rebelVehicleCosts, _rebelVehicleCosts);
 //and add new entries to the bottom of the list.
 if (A3A_hasACE) then {
 	[] call A3A_fnc_aceModCompat;
+
+	// has an unintended hard dependency on ace. will be fixed with cigs-rewrite 3.0.0.
+	if (isClass (configFile >> "CfgPatches" >> "cigs_core")) then {
+	    FactionGet(reb,"initialRebelEquipment") append ( [] call cigs_core_fnc_getAllItems );
+	};
 };
 
-if (isClass (configFile >> "CfgPatches" >> "cigs_core")) then {
-    FactionGet(reb,"initialRebelEquipment") append ( [] call cigs_core_fnc_getAllItems );
-};
 
 ////////////////////////////////////
 //     ACRE ITEM MODIFICATIONS   ///
