@@ -26,17 +26,17 @@
 // vehicles can be placed in more than one category if they fit between both. Cost will be derived by the higher category
 ["vehiclesBasic", ["LIB_Zis5v"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["LIB_Zis5v"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["EAW_Crossley"]] call _fnc_saveToTemplate;             // Should be armed, unarmoured to lightly armoured, with 0-4 passengers
+["vehiclesLightArmed", ["a3a_LIB_Willys_MB_M1919"]] call _fnc_saveToTemplate;             // Should be armed, unarmoured to lightly armoured, with 0-4 passengers
 ["vehiclesTrucks", ["LIB_Zis5v"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["EAW_Dodge1936_Pickup_Military_ROC"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["LIB_US6_Ammo"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["LIB_Zis6_Parm"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["LIB_Zis5v_Fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["LIB_Zis5v_Med"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", []] call _fnc_saveToTemplate;             // armed, lightly armoured, with 6-8 passengers 
-["vehiclesAPCs", []] call _fnc_saveToTemplate;                  // armed with enclosed turret, armoured, with 6-8 passengers
-["vehiclesIFVs", ["LIB_UniversalCarrier"]] call _fnc_saveToTemplate;                  // capable of surviving multiple rockets, cannon armed, with 6-8 passengers
-["vehiclesLightTanks", ["EAW_Type89_1937", "EAW_T26_NRA", "EAW_Vickers6Ton"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
+["vehiclesAPCs", []] call _fnc_saveToTemplate;
+["vehiclesIFVs", ["LIB_UniversalCarrier", "LIB_DAK_SdKfz251"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks", ["EAW_T26_NRA", "EAW_T26_NRA", "EAW_Vickers6Ton"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["EAW_ChiHa", "EAW_ChiHa_Kai"]] call _fnc_saveToTemplate;
 ["vehiclesHeavyTanks", ["LIB_T34_76"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
@@ -46,8 +46,8 @@
 ["vehiclesGunBoats", ["LIB_UK_LCI"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["LIB_Pe2", "LIB_P39"]] call _fnc_saveToTemplate;             // Will be used with CAS script, must be defined in setPlaneLoadout. Needs fixed gun and either rockets or missiles
-["vehiclesPlanesAA", ["LIB_P39","LIB_RA_P39_2","LIB_RA_P39_3"]] call _fnc_saveToTemplate;              // 
+["vehiclesPlanesCAS", ["EAW_AVG_P40", "EAW_HawkIII"]] call _fnc_saveToTemplate;             // Will be used with CAS script, must be defined in setPlaneLoadout. Needs fixed gun and either rockets or missiles
+["vehiclesPlanesAA", ["EAW_AVG_P40_AI", "EAW_i16_AI", "EAW_HawkIII_AI"]] call _fnc_saveToTemplate;              // 
 ["vehiclesPlanesTransport", ["LIB_Li2"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;            // ideally fragile & unarmed helis seating 4+
@@ -66,7 +66,7 @@
 ["uavsPortable", []] call _fnc_saveToTemplate;
 
 //Config special vehicles
-["vehiclesMilitiaLightArmed", ["EAW_Crossley"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["a3a_LIB_Willys_MB_M1919"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaTrucks", ["EAW_Dodge1936_Pickup_Military_IJA"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["EAW_Dodge1936_Pickup_Military_IJA"]] call _fnc_saveToTemplate;
 
@@ -74,7 +74,7 @@
 
 ["staticMGs", ["EAW_Type24_MG"]] call _fnc_saveToTemplate;
 ["staticAT", ["EAW_Type1_47mm_J", "EAW_ROC_Pak36"]] call _fnc_saveToTemplate;
-["staticAA", ["EAW_T98_20mm_AA", "EAW_T98_20mm_AA", "EAW_IJA_Type99_88_AA_1941"]] call _fnc_saveToTemplate;
+["staticAA", ["EAW_T98_20mm_AA", "EAW_T98_20mm_AA", "EAW_IJA_Type99_88_AA_1941", "LIB_61k"]] call _fnc_saveToTemplate;
 ["staticMortars", ["EAW_IJA_Type97_Mortar_1941J"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "EAW_Type97_81mm_HE"] call _fnc_saveToTemplate;
