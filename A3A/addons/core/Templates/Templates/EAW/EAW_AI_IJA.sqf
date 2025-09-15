@@ -19,16 +19,16 @@
 //       Vehicles       //
 //////////////////////////
 
-["ammobox", "B_supplyCrate_F"] call _fnc_saveToTemplate;
-["surrenderCrate", "Box_IND_Wps_F"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
-["equipmentBox", "Box_NATO_Equip_F"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
+["ammobox", "LIB_WeaponsBox_Big_SU"] call _fnc_saveToTemplate;
+["surrenderCrate", "LIB_Mine_AmmoBox_US"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
+["equipmentBox", "WW2_Cle_Container"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
 
 // vehicles can be placed in more than one category if they fit between both. Cost will be derived by the higher category
 ["vehiclesBasic", ["EAW_T94_Truck"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["EAW_T94_Truck"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["LIB_UK_DR_Willys_MB_M1919", "LIB_DAK_Kfz1_MG42", "EAW_Crossley"]] call _fnc_saveToTemplate;             // Should be armed, unarmoured to lightly armoured, with 0-4 passengers
-["vehiclesTrucks", ["EAW_T94_Truck","EAW_T94_Truck_1941J","EAW_T94_Truck_1941"]] call _fnc_saveToTemplate;
-["vehiclesCargoTrucks", ["EAW_T94_Truck","EAW_T94_Truck_1941J","EAW_T94_Truck_1941"]] call _fnc_saveToTemplate;
+["vehiclesTrucks", ["EAW_T94_Truck_1941J"]] call _fnc_saveToTemplate;
+["vehiclesCargoTrucks", ["EAW_T94_Truck_1941J"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["EAW_Dodge1936_Pickup_Military_Ammo_IJA"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["EAW_Dodge1936_Pickup_Military_Fuel_IJA"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["EAW_Dodge1936_Pickup_Military_Fuel_IJA"]] call _fnc_saveToTemplate;
@@ -83,8 +83,8 @@
 
 //Minefield definition
 //CFGVehicles variant of Mines are needed "ATMine", "APERSTripMine", "APERSMine"
-["minefieldAT", []] call _fnc_saveToTemplate;
-["minefieldAPERS", []] call _fnc_saveToTemplate;
+["minefieldAT", ["LIB_TMI_42_MINE"]] call _fnc_saveToTemplate;
+["minefieldAPERS", ["LIB_SMI_35_1_MINE","LIB_SMI_35_MINE", "LIB_shumine_42_MINE"]] call _fnc_saveToTemplate;
 
 #include "..\IFA\IFA_Vehicle_Attributes.sqf"
 
