@@ -39,7 +39,7 @@ class CfgMissions
         A3A_Mission(isladuala3)
         A3A_Mission(Kunduz)
         A3A_Mission(Malden)
-        A3A_Mission(Mehland)
+        A3A_Mission(mehland)
         A3A_Mission(Napf)
         A3A_Mission(NapfWinter)
         A3A_Mission(pulau)
