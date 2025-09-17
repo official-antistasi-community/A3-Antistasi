@@ -4,15 +4,15 @@
 
 ["vehiclesCivCar", ["LIB_GazM1_dirty", 1]] call _fnc_saveToTemplate;             //this line determines civilian cars -- Example: ["vehiclesCivCar", ["C_Offroad_01_F"]] -- Array, can contain multiple assets
 
-["vehiclesCivIndustrial", ["EAW_Dodge1936_Pickup", 1]] call _fnc_saveToTemplate;             //this line determines civilian trucks -- Example: ["vehiclesCivIndustrial", ["C_Truck_02_transport_F"]] -- Array, can contain multiple assets
+["vehiclesCivIndustrial", ["EAW_Dodge1936_Pickup", 0.3]] call _fnc_saveToTemplate;             //this line determines civilian trucks -- Example: ["vehiclesCivIndustrial", ["C_Truck_02_transport_F"]] -- Array, can contain multiple assets
 
 ["vehiclesCivHeli", []] call _fnc_saveToTemplate;             //this line determines civilian helis -- Example: ["vehiclesCivHeli", ["C_Heli_Light_01_civil_F"]] -- Array, can contain multiple assets
 
-["vehiclesCivBoat", ["B_Boat_Transport_01_F", 0.2]]             //this line determines civilian boats -- Example: ["vehiclesCivBoat", ["C_Boat_Civil_01_F"]] -- Array, can contain multiple assets
+["vehiclesCivBoat", ["B_Boat_Transport_01_F", 0.2]] call _fnc_saveToTemplate;             //this line determines civilian boats -- Example: ["vehiclesCivBoat", ["C_Boat_Civil_01_F"]] -- Array, can contain multiple assets
 
 ["vehiclesCivRepair", []] call _fnc_saveToTemplate;            //this line determines civilian repair vehicles
 
-["vehiclesCivMedical", []] call _fnc_saveToTemplate;        //this line determines civilian medic vehicles
+["vehiclesCivMedical", ["EAW_Dodge1936_Pickup_Military_Medical_IJA", 0.02]] call _fnc_saveToTemplate;        //this line determines civilian medic vehicles
 
 ["vehiclesCivFuel", []] call _fnc_saveToTemplate;            //this line determines civilian fuel vehicles
 
@@ -101,8 +101,8 @@ private _pressTemplate = {
 private _prefix = "militia";
 private _unitTypes = [
     ["Press", _pressTemplate],
-    ["Worker", _workerTemplate],
-    ["Man", _manTemplate]
+    ["Worker", _workerTemplate, nil, 10],
+    ["Man", _manTemplate, nil, 10]
 ];
 
 [_prefix, _unitTypes, _loadoutData] call _fnc_generateAndSaveUnitsToTemplate;

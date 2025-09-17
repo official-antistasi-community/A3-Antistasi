@@ -250,7 +250,7 @@ _militaryLoadoutData set ["helmets", ["EAW_M35","EAW_ROC_Brodie_Green","EAW_Chin
 _militaryLoadoutData set ["rifles", [
 ["EAW_Type24_Rifle_Base", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
 ["EAW_Type24_Rifle_Stock2", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
-["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
+["EAW_Hanyang88_Base_Bayonet", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
 ]];
 _militaryLoadoutData set ["grenadeLaunchers", []];
 _militaryLoadoutData set ["carbines", [
@@ -280,7 +280,7 @@ _policeLoadoutData set ["vests", ["EAW_C96_Vest_Dao"]];
 _policeLoadoutData set ["helmets", ["EAW_Chinese_Cap_1", "EAW_Chinese_VisorCap_Blue"]];
 
 _policeLoadoutData set ["carbines", [
-["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
+["EAW_Hanyang88_Base_Bayonet", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
 "EAW_C96_Carbine"
 ]];
 _policeLoadoutData set ["sidearms", ["EAW_Dao"]];
@@ -297,22 +297,22 @@ _militiaLoadoutData set ["slHelmets", ["EAW_Chinese_VisorCap_Blue"]];
 _militiaLoadoutData set ["NVGs", []];
 
 _militiaLoadoutData set ["rifles", [
-["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
-["EAW_Hanyang88_Base", "", "", "", [], [], ""],
+["EAW_Hanyang88_Base_Bayonet", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
+["EAW_Hanyang88_Base_Bayonet", "", "", "", [], [], ""],
 "EAW_C96_Carbine"
 ]];
 _militiaLoadoutData set ["carbines", [
-["EAW_Hanyang88_Base", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
+["EAW_Hanyang88_Base_Bayonet", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""],
 "EAW_C96_Carbine"
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", []];
 _militiaLoadoutData set ["SMGs", [
-"EAW_Hanyang88_Base",
+"EAW_Hanyang88_Base_Bayonet",
 "EAW_C96_Carbine",
 "EAW_C96_Auto_Carbine"
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["EAW_Hanyang88_Base", "", "", "", [], [], ""]
+["EAW_Hanyang88_Base_Bayonet", "", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["sidearms", ["EAW_Hanyang_Bayonet"]];
 _militiaLoadoutData set ["slSidearms", ["EAW_Dao"]];

@@ -8,6 +8,21 @@
 ["flagTexture", "\A3\Data_F\Flags\Flag_green_CO.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "Faction_INDFOR_EP1"] call _fnc_saveToTemplate;
 
+//////////////////////////
+//  Mission/HQ Objects  //
+//////////////////////////
+
+// All of bellow are optional overrides.
+["diveGear", [""]] call _fnc_saveToTemplate;
+["flyGear", ["U_LIB_US_Bomber_Pilot","B_LIB_US_Type5"]] call _fnc_saveToTemplate;
+["vehiclesCivSupply", ["a3a_lib_Zis6_BOX"]] call _fnc_saveToTemplate; //We should create a inert "box truck" version
+
+["surrenderCrate", "LIB_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
+
+//////////////////////////
+//       Vehicles       //
+//////////////////////////
+
 ["vehiclesBasic", ["LIB_Willys_MB"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["LIB_GazM1_SOV"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["a3a_LIB_Willys_MB_M1919"]] call _fnc_saveToTemplate;
@@ -15,7 +30,7 @@
 ["vehiclesAT", []] call _fnc_saveToTemplate;
 ["vehiclesAA", []] call _fnc_saveToTemplate;
 
-["vehiclesBoat", ["EAW_Daihatsu_LC_IJA"]] call _fnc_saveToTemplate;
+["vehiclesBoat", ["EAW_Daihatsu_LC_IJA", "B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlane", ["EAW_HawkIII", "EAW_i16"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["EAW_Dodge1936_Pickup_Military_Medical_IJA"]] call _fnc_saveToTemplate;
@@ -48,9 +63,8 @@
 ///////////////////////////
 
 private _initialRebelEquipment = [
-    "EAW_Type14", "EAW_Type14_Magazine",
     "LIB_FLARE_PISTOL", "LIB_1Rnd_flare_white",
-    "EAW_Hanyang_Bayonet", "EAW_Hanyang_Bayonet_Attach", "EAW_Dao",
+    "EAW_Hanyang_Bayonet", "EAW_Hanyang_Bayonet_Attach",
     "EAW_Chinese_Medic_Bag", "EAW_NRA_PouchesBottom", "EAW_NRA_PouchesTop", 
     "EAW_Bedroll_Tan", "EAW_Bedroll_2_Tan",
     "LIB_Binocular_UK",
@@ -130,21 +144,21 @@ private _riflemanTemplate = {
 
 private _prefix = "militia";
 private _unitTypes = [
-    ["Petros", _squadLeaderTemplate],
+    ["Petros", _squadLeaderTemplate, nil, 1],
     ["SquadLeader", _squadLeaderTemplate],
-    ["Rifleman", _riflemanTemplate],
+    ["Rifleman", _riflemanTemplate, nil, 10],
     ["staticCrew", _riflemanTemplate],
     ["Medic", _riflemanTemplate, [["medic", true]]],
     ["Engineer", _riflemanTemplate, [["engineer", true]]],
     ["ExplosivesExpert", _riflemanTemplate, [["explosiveSpecialist", true]]],
     ["Grenadier", _riflemanTemplate],
-    ["LAT", _riflemanTemplate],
+    ["LAT", _riflemanTemplate, nil, 10],
     ["AT", _riflemanTemplate],
     ["AA", _riflemanTemplate],
     ["MachineGunner", _riflemanTemplate],
     ["Marksman", _riflemanTemplate],
     ["Sniper", _riflemanTemplate],
-    ["Unarmed", _riflemanTemplate]
+    ["Unarmed", _riflemanTemplate, nil, 10]
 ];
 
 [_prefix, _unitTypes, _loadoutData] call _fnc_generateAndSaveUnitsToTemplate;
