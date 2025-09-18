@@ -73,8 +73,7 @@ private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 ["mortarMagazineFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
 
 if ("tanks" in A3A_enabledDLC) then {
-    _Tanks append ["a3a_MBT_02_cannon_black_F","a3a_MBT_02_cannon_black_F"]; 
-    _Tanks append ["a3a_MBT_04_cannon_black_F","a3a_MBT_04_command_black_F"]; 
+	["vehiclesHeavyTanks", ["a3a_MBT_04_cannon_black_F", "a3a_MBT_04_command_black_F"]] call _fnc_saveToTemplate;
 };
 if ("enoch" in A3A_enabledDLC) then {
     _vehiclesPolice append ["B_GEN_Offroad_01_comms_F","B_GEN_Offroad_01_covered_F"];
