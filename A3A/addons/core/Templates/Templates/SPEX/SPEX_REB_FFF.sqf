@@ -47,7 +47,7 @@
 
 ["staticMGs", ["SPE_MG34_Lafette_Deployed"]] call _fnc_saveToTemplate;
 ["staticAT", ["SPE_FR_57mm_M1"]] call _fnc_saveToTemplate;
-["staticAA", ["SPE_FR_M45_Quadmount"]] call _fnc_saveToTemplate;
+["staticAA", ["SPEX_DAK_FlaK_30"]] call _fnc_saveToTemplate;
 
 ["staticMortars", ["SPEX_M2_60", "SPEX_SBML_2_Inch_Mk7"]] call _fnc_saveToTemplate;
 ["staticMortarMagHE", "SPEX_8Rnd_60mmHE_M2_M49A2"] call _fnc_saveToTemplate;
@@ -77,7 +77,8 @@ private _initialRebelEquipment = [
     "SPE_2Rnd_12x65_Pellets", "SPE_2Rnd_12x65_Slug","SPE_2Rnd_12x65_No4_Buck",
     "SPEX_Enfield_No2", ["SPEX_Enfield_No2_late", 15], "SPEX_6rnd_9x20R",
     ["SPE_Ladung_Small_MINE_mag", 10], ["SPE_US_TNT_half_pound_mag", 10], ["SPE_US_TNT_4pound_mag", 3], ["SPE_Ladung_Big_MINE_mag", 3],
-    "SPE_NB39", ["SPE_Shg24", 50], ["SPE_Shg24x7", 20], 
+    "SPE_NB39", "SPE_Blendkorper_2H", ["SPE_Shg24", 50], ["SPE_Shg24x7", 20], 
+    "SPE_US_Mk_1","SPE_Type_A1_Lamp_Red","SPE_Type_A1_Lamp_White","SPE_Type_A1_Lamp_Orange","SPE_Type_A1_Lamp_Green","SPE_Type_A1_Lamp_Blue",
     "V_SPE_FFI_Vest_Pouch","V_SPE_FFI_Vest_Pouch_frag", "V_SPE_FFI_Vest_rifle","V_SPE_FFI_Vest_rifle_frag",
     "V_SPE_FFI_Vest_rifle_pouch","V_SPE_FFI_Vest_SMG","V_SPE_FFI_Vest_SMG_frag","V_SPE_FFI_Vest_SMG_pouch",
     "B_SPE_FFI_Gasbag", "B_SPE_CIV_musette", "B_SPE_CIV_satchel",
