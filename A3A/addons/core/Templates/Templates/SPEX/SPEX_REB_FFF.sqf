@@ -73,12 +73,11 @@
 ///////////////////////////
 
 private _initialRebelEquipment = [
-    "SPE_Fusil_Mle_208_12", "SPE_Fusil_Mle_208_12_Sawedoff",
+    "SPE_Fusil_Mle_208_12", ["SPE_Fusil_Mle_208_12_Sawedoff", 15],
     "SPE_2Rnd_12x65_Pellets", "SPE_2Rnd_12x65_Slug","SPE_2Rnd_12x65_No4_Buck",
-    "SPEX_Enfield_No2", "SPEX_Enfield_No2_late", "SPEX_6rnd_9x20R",
-    ["SPE_Faustpatrone", 50], ["SPE_1Rnd_Faustpatrone", 50],
+    "SPEX_Enfield_No2", ["SPEX_Enfield_No2_late", 15], "SPEX_6rnd_9x20R",
     ["SPE_Ladung_Small_MINE_mag", 10], ["SPE_US_TNT_half_pound_mag", 10], ["SPE_US_TNT_4pound_mag", 3], ["SPE_Ladung_Big_MINE_mag", 3],
-    "SPE_NB39", ["SPE_Shg24", 50], ["SPE_Shg24x7", 10], 
+    "SPE_NB39", ["SPE_Shg24", 50], ["SPE_Shg24x7", 20], 
     "V_SPE_FFI_Vest_Pouch","V_SPE_FFI_Vest_Pouch_frag", "V_SPE_FFI_Vest_rifle","V_SPE_FFI_Vest_rifle_frag",
     "V_SPE_FFI_Vest_rifle_pouch","V_SPE_FFI_Vest_SMG","V_SPE_FFI_Vest_SMG_frag","V_SPE_FFI_Vest_SMG_pouch",
     "B_SPE_FFI_Gasbag", "B_SPE_CIV_musette", "B_SPE_CIV_satchel",
