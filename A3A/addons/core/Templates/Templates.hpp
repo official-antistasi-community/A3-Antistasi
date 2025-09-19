@@ -1718,6 +1718,13 @@ class Templates
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_WEH;
     };
 
+    class SPEX_WEH_Trop : SPEX_WEH
+    {
+        name = "SPEX WEH DAK";
+        file = "SPEX_AI_WEH_Trop";
+        //climate[] = {"tropical","arid"};
+    };
+
     class SPEX_Reb : SPEX_Base
     {
         side = "Reb";
