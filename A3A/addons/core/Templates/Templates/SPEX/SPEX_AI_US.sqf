@@ -372,6 +372,8 @@ _pilotLoadoutData set ["vests", ["V_SPE_US_LifeVest"]];
 _pilotLoadoutData set ["helmets", ["H_SPE_US_Helmet_Pilot"]];
 _pilotLoadoutData set ["backpacks", ["B_SPE_US_TypeA3"]];
 
+_pilotLoadoutData set ["SMGs", []];
+
 private _officerLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _officerLoadoutData set ["slUniforms", ["U_SPE_US_Pilot_lthr", "U_SPE_US_Pilot"]];
 _officerLoadoutData set ["slVests", ["V_SPE_US_Vest_45_off", "V_SPE_US_Vest_45_high_off"]];
