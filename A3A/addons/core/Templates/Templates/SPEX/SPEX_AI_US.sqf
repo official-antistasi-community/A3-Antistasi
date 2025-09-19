@@ -157,7 +157,7 @@ _loadoutData set ["lightExplosives", ["SPE_US_TNT_half_pound_mag"]];
 _loadoutData set ["heavyExplosives", ["SPE_US_TNT_4pound_mag", "SPE_US_Bangalore_mag"]];
 
 _loadoutData set ["antiTankGrenades", []];
-_loadoutData set ["antiInfantryGrenades", ["SPE_US_Mk_2", "SPE_US_Mk_2_Yellow", "SPE_US_AN_M14"]];
+_loadoutData set ["antiInfantryGrenades", ["SPE_US_Mk_2", "SPE_US_Mk_2_Yellow", "SPE_US_Mk_3", "SPE_US_AN_M14"]];
 _loadoutData set ["smokeGrenades", ["SPE_US_M18"]];
 _loadoutData set ["signalsmokeGrenades", ["SPE_US_M18_Green", "SPE_US_M18_Red", "SPE_US_M18_Violet", "SPE_US_M18_Yellow"]];
 

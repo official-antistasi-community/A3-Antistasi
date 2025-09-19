@@ -139,8 +139,8 @@ _loadoutData set ["lightExplosives", ["SPE_Ladung_Small_MINE_mag"]];
 _loadoutData set ["heavyExplosives", ["SPE_Ladung_Big_MINE_mag"]];
 
 _loadoutData set ["antiTankGrenades", ["SPE_Shg24x7"]];
-_loadoutData set ["antiInfantryGrenades", ["SPE_Shg24","SPE_Shg24_Frag"]];
-_loadoutData set ["smokeGrenades", ["SPE_NB39", "SPE_NBK39b"]];
+_loadoutData set ["antiInfantryGrenades", ["SPE_Shg24","SPE_Shg24_Frag", "SPE_M39", "SPE_M39", "SPE_M39"]];
+_loadoutData set ["smokeGrenades", ["SPE_NB39", "SPE_NBK39b", "SPE_Blendkorper_2H"]];
 _loadoutData set ["signalsmokeGrenades", ["SPE_Handrauchzeichen_Yellow", "SPE_Handrauchzeichen_Red", "SPE_Handrauchzeichen_Violet"]];
 
 
@@ -313,6 +313,8 @@ _militiaLoadoutData set ["slHelmets", ["H_SPE_Milice_beret_2"]];
 
 _militiaLoadoutData set ["ATLaunchers", []];
 _militiaLoadoutData set ["sidearms", []];
+
+_militiaLoadoutData set ["antiInfantryGrenades", ["SPE_Shg24"]]
 
 _militiaLoadoutData set ["rifles", [
 ["SPEX_No1_Mk3_Enfield", "SPEX_ACC_P1907_Bayo", "", "", ["SPEX_10Rnd_770x56"], [], ""],

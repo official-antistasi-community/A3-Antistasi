@@ -130,9 +130,9 @@ _loadoutData set ["APMines", ["SPE_US_M3_Pressure_MINE_mag", "SPE_US_M3_MINE_mag
 _loadoutData set ["lightExplosives", ["SPE_US_TNT_half_pound_mag"]];
 _loadoutData set ["heavyExplosives", ["SPE_US_TNT_4pound_mag", "SPE_US_Bangalore_mag"]];
 
-_loadoutData set ["antiTankGrenades", []];
-_loadoutData set ["antiInfantryGrenades", ["SPE_US_Mk_2", "SPE_US_Mk_2_Yellow", "SPE_US_AN_M14"]];
-_loadoutData set ["smokeGrenades", ["SPE_US_M18"]];
+_loadoutData set ["antiTankGrenades", ["SPEX_CW_No74_Grenade", "SPEX_CW_No75_Grenade", "SPEX_CW_No82_Heavy", "SPEX_CW_No82_Light"]];
+_loadoutData set ["antiInfantryGrenades", ["SPEX_CW_No36_MKI", "SPEX_CW_No36_MKI", "SPEX_CW_No36_MKI", "SPEX_CW_No77"]];
+_loadoutData set ["smokeGrenades", ["SPEX_CW_No79", "SPEX_CW_No79", "SPEX_CW_No77"]];
 _loadoutData set ["signalsmokeGrenades", ["SPE_US_M18_Green", "SPE_US_M18_Red", "SPE_US_M18_Violet", "SPE_US_M18_Yellow"]];
 
 
@@ -142,8 +142,8 @@ _loadoutData set ["maps", ["ItemMap"]];
 _loadoutData set ["watches", ["SPE_US_ItemWatch"]];
 _loadoutData set ["compasses", ["SPE_US_ItemCompass"]];
 _loadoutData set ["radios", ["ItemRadio"]];
-_loadoutData set ["binoculars", ["SPE_Binocular_US"]];
-_loadoutData set ["Flashlight", ["SPE_US_FL_TL122"]];
+_loadoutData set ["binoculars", ["SPEX_Binocular_CW"]];
+_loadoutData set ["Flashlight", ["SPEX_CW_LE_No4_Signal_Flashlight"]];
 
 _loadoutData set ["uniforms", []];
 _loadoutData set ["medUniforms", []];
@@ -435,8 +435,6 @@ _pilotLoadoutData set ["vests", ["V_SPEX_CW_RAF_Schwimm"]];
 _pilotLoadoutData set ["helmets", ["H_SPEX_CW_SIDECAP_RAF_EM", "H_SPEX_CW_RAF_visor", "H_SPEX_CW_RAF_visor_EM", "H_SPEX_CW_SIDECAP_RAF_OFFZ"]];
 _pilotLoadoutData set ["backpacks", ["B_SPEX_CW_RAF_Paradrop"]];
 
-
-
 private _officerLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _officerLoadoutData set ["slUniforms", ["U_SPEX_CW_BD_Jerkin_Officer"]];
 _officerLoadoutData set ["slVests", ["V_SPEX_CW_Vest_P37_N103_rac_offz"]];
@@ -500,6 +498,7 @@ private _riflemanTemplate = {
     ["items_rifleman_extras"] call _fnc_addItemSet;
     ["items_miscEssentials"] call _fnc_addItemSet;
     ["antiInfantryGrenades", 2] call _fnc_addItem;
+    ["antiTankGrenades", 1] call _fnc_addItem;
     ["smokeGrenades", 2] call _fnc_addItem;
     ["lmgMag", 1] call _fnc_addItem;
 
@@ -579,7 +578,7 @@ private _explosivesExpertTemplate = {
     if (random 1 > 0.5) then {["atMines", 2] call _fnc_addItem;};
     if (random 1 > 0.5) then {["apMines", 2] call _fnc_addItem;};
 
-    ["antiInfantryGrenades", 1] call _fnc_addItem;
+    ["antiTankGrenades", 2] call _fnc_addItem;
     ["smokeGrenades", 1] call _fnc_addItem;
 
     ["maps"] call _fnc_addMap;
@@ -608,6 +607,7 @@ private _engineerTemplate = {
     if (random 1 > 0.5) then {["lightExplosives", 3] call _fnc_addItem;};
 
     ["antiInfantryGrenades", 1] call _fnc_addItem;
+    ["antiTankGrenades", 1] call _fnc_addItem;
     ["smokeGrenades", 2] call _fnc_addItem;
 
     ["maps"] call _fnc_addMap;
@@ -630,7 +630,7 @@ private _latTemplate = {
     ["items_medical_standard"] call _fnc_addItemSet;
     ["items_lat_extras"] call _fnc_addItemSet;
     ["items_miscEssentials"] call _fnc_addItemSet;
-    ["antiInfantryGrenades", 1] call _fnc_addItem;
+    ["antiTankGrenades", 1] call _fnc_addItem;
     ["smokeGrenades", 1] call _fnc_addItem;
 
     ["maps"] call _fnc_addMap;
@@ -655,7 +655,7 @@ private _atTemplate = {
     ["items_medical_standard"] call _fnc_addItemSet;
     ["items_at_extras"] call _fnc_addItemSet;
     ["items_miscEssentials"] call _fnc_addItemSet;
-    ["antiInfantryGrenades", 1] call _fnc_addItem;
+    ["antiTankGrenades", 1] call _fnc_addItem;
     ["smokeGrenades", 1] call _fnc_addItem;
 
     ["maps"] call _fnc_addMap;
