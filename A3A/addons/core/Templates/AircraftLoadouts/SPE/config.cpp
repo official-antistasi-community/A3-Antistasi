@@ -25,9 +25,8 @@ class A3A {
         {
             class baseCAS;
             class SPE_FW190F8 : baseCAS {
-                loadout[] = {"SPE_250Rnd_MG151","SPE_250Rnd_MG151","SPE_250Rnd_MG151","SPE_250Rnd_MG151","SPE_1Rnd_Timed_Short_SC50","SPE_3Rnd_M8_P47","SPE_1Rnd_SC500","SPE_3Rnd_M8_P47","SPE_1Rnd_Timed_Long_SC50"};
+                loadout[] = {"SPE_250Rnd_MG151","SPE_250Rnd_MG151","SPE_400Rnd_MG131","SPE_400Rnd_MG131","SPE_1Rnd_SC50","SPE_1Rnd_SC50","SPE_1Rnd_SC500","SPE_1Rnd_SC50","SPE_1Rnd_SC50"};
                 mainGun[] = {"SPE_2xMG151"};
-                rocketLauncher[] = {"SPE_M8_Launcher_P47"};
                 bombRacks[] = {"SPE_SC500_Bomb_Mount","SPE_SC50_Bomb_Mount"};
                 diveParams[] = {800, 300, 110, 55, 15, {1.5, -1}};
             };
