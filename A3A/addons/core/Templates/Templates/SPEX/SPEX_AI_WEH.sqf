@@ -315,20 +315,22 @@ _militiaLoadoutData set ["ATLaunchers", []];
 _militiaLoadoutData set ["sidearms", []];
 
 _militiaLoadoutData set ["rifles", [
-["SPE_No3_Mk1_Enfield", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_770x56", "SPE_5Rnd_770x56"], [], ""],
+["SPEX_No1_Mk3_Enfield", "SPEX_ACC_P1907_Bayo", "", "", ["SPEX_10Rnd_770x56"], [], ""],
+["SPE_No3_Mk1_Enfield", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_770x56"], [], ""],
+["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""],
 ["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""],
 ["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""]
 ]];
 _militiaLoadoutData set ["shotGuns", [
 ["SPE_Fusil_Mle_208_12", "", "", "", ["SPE_2Rnd_12x65_Pellets"], [], ""],
-["SPE_Fusil_Mle_208_12_Sawedoff", "", "", "", ["SPE_2Rnd_12x65_Pellets"], [], ""]
+["SPE_Fusil_Mle_208_12", "", "", "", ["SPE_2Rnd_12x65_Slug"], [], ""]
 ]];
 _militiaLoadoutData set ["slRifles", [
 ["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""],
 ["SPE_MP35", "", "", "", ["SPE_24Rnd_MP35_9x19", "SPE_24Rnd_MP35_9x19", "SPE_24rnd_MP35_9x19_t"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
-["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""]
+["SPEX_No1_Mk3_Enfield_GL", "SPEX_ACC_2HalfInch_GL_CUP", "SPEX_ACC_Enfield_No1_Wires", "", ["SPEX_10Rnd_770x56"], ["SPEX_1Rnd_G_No36_MKI", "SPEX_1Rnd_G_No68", "SPEX_1Rnd_G_No36_MKI"], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
 ["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""]
@@ -341,7 +343,9 @@ _militiaLoadoutData set ["SMGs", [
 ["SPE_MP35", "", "", "", ["SPE_24Rnd_MP35_9x19", "SPE_24Rnd_MP35_9x19", "SPE_24rnd_MP35_9x19_t"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
+["SPEX_LMG_303_Mk1", "", "", "", ["SPE_30Rnd_770x56"], [], ""],
 ["SPE_LMG_303_Mk2", "", "", "", ["SPE_30Rnd_770x56"], [], ""],
+["SPE_FM_24_M29", "", "", "", ["SPE_25Rnd_75x54"], [], ""],
 ["SPE_FM_24_M29", "", "", "", ["SPE_25Rnd_75x54"], [], ""],
 ["SPE_FM_24_M29", "", "", "", ["SPE_25Rnd_75x54"], [], ""]
 ]];
@@ -360,6 +364,8 @@ _pilotLoadoutData set ["uniforms", ["U_SPE_GER_LW_pilot", "U_SPE_GER_LW_pilot_al
 _pilotLoadoutData set ["vests", ["V_SPE_GER_PrivateBelt"]];
 _pilotLoadoutData set ["helmets", ["H_SPE_GER_LW_PilotHelmet"]];
 _pilotLoadoutData set ["backpacks", ["B_SPE_GER_LW_Paradrop"]];
+
+_pilotLoadoutData set ["SMGs", []];
 
 private _officerLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _officerLoadoutData set ["slUniforms", ["U_SPE_GER_Hauptmann", "U_SPE_GER_Oberleutnant", "U_SPE_GER_Oberst"]];
