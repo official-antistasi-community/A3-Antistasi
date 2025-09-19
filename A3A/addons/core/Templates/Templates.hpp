@@ -1698,6 +1698,16 @@ class Templates
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
     };
 
+    class SPEX_CW : SPEX_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3\Data_F\Flags\flag_uk_co.paa";
+        name = "SPEX Commonwealth";
+        file = "SPEX_AI_CW_Temperate";
+        shortName = "CW";
+        lore = $STR_A3A_templates_lore_IFA_AI_UK;
+    };
+
     class SPEX_WEH : SPEX_Base
     {
         side = "Occ";
