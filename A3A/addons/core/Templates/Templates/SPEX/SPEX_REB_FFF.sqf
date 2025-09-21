@@ -22,6 +22,8 @@
 
 ["surrenderCrate", "SPE_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
 
+["vehiclesCivSupply", ["SPE_FFI_OpelBlitz"]] call _fnc_saveToTemplate; //We should create a inert "box truck" version
+
 //////////////////////////
 //       Vehicles       //
 //////////////////////////
