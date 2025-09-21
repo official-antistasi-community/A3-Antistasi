@@ -139,3 +139,31 @@ class SPE_US_G503_MB : TRIPLES(ADDON,Nodes,Base)
 };
 class SPE_US_G503_MB_Armoured : SPE_US_G503_MB {};
 class SPE_US_G503_MB_Open : SPE_US_G503_MB {};
+
+
+class WW2_SPEX_addons_Assets_m_Vehicles_Trucks_m_Bedford_MWD_SPEX_Bedford_MWD_p3d : TRIPLES(ADDON,Nodes,Base)
+{
+    canLoadWeapon = 0;
+    class Nodes
+    {
+        class Node1
+        {
+            offset[] = {0,0,-0.25};
+            seats[] = {1, 2, 5};
+        };
+        class Node2
+        {
+            offset[] = {0,-0.8,-0.25};
+            seats[] = {3, 4};
+        };
+    };
+};
+
+class SPEX_CW_Bedford_MWD_Open : WW2_SPEX_addons_Assets_m_Vehicles_Trucks_m_Bedford_MWD_SPEX_Bedford_MWD_p3d {
+    canLoadWeapon = 1;
+};
+class SPEX_CW_trop_Bedford_MWD_Open : SPEX_CW_Bedford_MWD_Open {};
+class SPEX_PL_Bedford_MWD_Open : SPEX_CW_Bedford_MWD_Open {};
+class SPEX_ST_Bedford_MWD_Open : SPEX_CW_Bedford_MWD_Open {};
+class SPEX_GER_Bedford_MWD_Open : SPEX_CW_Bedford_MWD_Open {};
+class SPEX_DAK_Bedford_MWD_Open : SPEX_CW_Bedford_MWD_Open {};
