@@ -1708,6 +1708,13 @@ class Templates
         lore = $STR_A3A_templates_lore_IFA_AI_UK;
     };
 
+    class SPEX_CW_Trop : SPEX_CW
+    {
+        name = "SPEX Commonwealth NAC";
+        file = "SPEX_AI_CW_Trop";
+        //climate[] = {"tropical","arid"};
+    };
+
     class SPEX_WEH : SPEX_Base
     {
         side = "Occ";
