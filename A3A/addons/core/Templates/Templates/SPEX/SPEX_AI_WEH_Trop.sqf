@@ -148,10 +148,10 @@ _loadoutData set ["radios", ["ItemRadio"]];
 _loadoutData set ["binoculars", ["SPE_Binocular_GER"]];
 _loadoutData set ["Flashlight", ["SPE_GER_FL_Signal_Flashlight"]];
 
-_loadoutData set ["uniforms", ["U_SPEX_DAK_Feldbluse_short", "U_SPEX_DAK_Feldbluse_short_roll", "U_SPEX_DAK_Feldbluse_short_high", "U_SPEX_DAK_Feldbluse_short_high_roll"]];
-_loadoutData set ["sniUniforms", ["U_SPEX_DAK_Feldbluse_oberschutze"]];
-_loadoutData set ["medUniforms", ["U_SPEX_DAK_Feldbluse_medic", "U_SPEX_DAK_Feldbluse_medic_high"]];
-_loadoutData set ["slUniforms", ["U_SPEX_DAK_Feldbluse_high_roll"]];
+_loadoutData set ["uniforms", ["U_SPEX_DAK_Feldbluse_short_high_roll", "U_SPEX_DAK_Feldbluse_M42_short_high_roll", "U_SPEX_DAK_Feldbluse_high_roll", "U_SPEX_DAK_Feldbluse_gefreiter_putti"]];
+_loadoutData set ["sniUniforms", []];
+_loadoutData set ["medUniforms", ["U_SPEX_DAK_Feldbluse_medic"]];
+_loadoutData set ["slUniforms", ["U_SPEX_DAK_Feldbluse_uffz"]];
 
 _loadoutData set ["vests", ["V_SPE_GER_VestMP40", "V_SPE_GER_VestG43", "V_SPE_GER_VestKar98", "V_SPE_DAK_VestKar98"]];
 _loadoutData set ["glVests", []];
@@ -292,7 +292,7 @@ _militiaLoadoutData set ["uniforms", ["U_SPEX_LW_DAK_Feldbluse", "U_SPEX_LW_DAK_
 _militiaLoadoutData set ["medUniforms", ["U_SPEX_LW_DAK_Feldbluse_medic"]];
 _militiaLoadoutData set ["slUniforms", ["U_SPEX_LW_DAK_Feldbluse_leutnant"]];
 
-_militiaLoadoutData set ["helmets", ["H_SPEX_GER_DAK_PITH_LW","H_SPEX_GER_DAK_PITH_OP", "H_SPEX_GER_DAK_PITH_HEER_OP", "H_SPEX_GER_DAK_PITH_HEER", "H_SPEX_GER_DAK_PITH"]];
+_militiaLoadoutData set ["helmets", ["H_SPEX_GER_DAK_PITH_LW","H_SPEX_GER_DAK_PITH_OP", "H_SPEX_GER_DAK_PITH_HEER", "H_SPEX_GER_DAK_PITH"]];
 
 _militiaLoadoutData set ["sidearms", []];
 

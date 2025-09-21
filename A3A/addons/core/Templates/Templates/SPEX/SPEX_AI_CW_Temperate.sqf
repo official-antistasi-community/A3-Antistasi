@@ -310,8 +310,8 @@ _militaryLoadoutData set ["carbines", [
 ["SPEX_Sten_Mk5", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
 ["SPEX_No1_Mk3_late_Enfield", "SPEX_ACC_P1907_Bayo", "", "", ["SPEX_10Rnd_770x56"], [], ""],
 ["SPEX_No1_Mk3_late_Enfield", "SPEX_ACC_P1907_Bayo", "", "", ["SPEX_10Rnd_770x56"], [], ""],
-["SPEX_No4_Mk1_Enfield", "SPEX_ACC_No4_Mk2_Bayo", "", "", ["SPEX_10Rnd_770x56"], ["SPE_30Rnd_770x56"], ""],
-["SPEX_No4_Mk1_Enfield_dunkel", "SPEX_ACC_No4_Mk2_Bayo", "", "", ["SPEX_10Rnd_770x56"], ["SPE_30Rnd_770x56"], ""]
+["SPEX_No4_Mk1_Enfield", "SPEX_ACC_No4_Mk2_Bayo", "", "", ["SPEX_10Rnd_770x56"], [], ""],
+["SPEX_No4_Mk1_Enfield_dunkel", "SPEX_ACC_No4_Mk2_Bayo", "", "", ["SPEX_10Rnd_770x56"], [], ""]
 ]];
 _militaryLoadoutData set ["SMGs", [
 ["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],

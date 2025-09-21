@@ -10,8 +10,8 @@
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
-    "SPEX_GER_Bedford_MWD", 0.5, 
-    "SPEX_GER_Bedford_MWD_Open", 1.5,
+    "SPEX_GER_Bedford_MWD", 0.25, 
+    "SPEX_GER_Bedford_MWD_Open", 0.75,
     "SPEX_DAK_Bedford_MWD", 0.5, 
     "SPEX_DAK_Bedford_MWD_Open", 1.5 
 ]] call _fnc_saveToTemplate;
@@ -26,7 +26,9 @@
 ["vehiclesCivMedical", [
     "SPE_OpelBlitz_Ambulance", 1.5, 
     "SPE_CCKW_353_Ambulance", 1.5,
-    "SPE_FFI_OpelBlitz_Ambulance", 0.5
+    "SPE_FFI_OpelBlitz_Ambulance", 0.5, 
+    "SPEX_CW_G503_MB_Ambulance", 0.25,
+    "SPEX_CW_Trop_G503_MB_Ambulance", 0.25
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivFuel", [
