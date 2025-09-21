@@ -46,6 +46,19 @@
 ["vehiclesPlanesAA", ["SPE_FW190F8"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["SPEX_C47_Skytrain"]] call _fnc_saveToTemplate;
 
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+
+    ["vehiclesPlanesTransport", ["sab_fl_ju52"]] call _fnc_saveToTemplate;
+
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        ["vehiclesPlanesCAS", ["SPE_FW190F8"]] call _fnc_saveToTemplate;
+        ["vehiclesPlanesAA", ["SPE_FW190F8"]] call _fnc_saveToTemplate;
+    } else {
+        ["vehiclesPlanesCAS", ["SPE_FW190F8"]] call _fnc_saveToTemplate;
+        ["vehiclesPlanesAA", ["SPE_FW190F8"]] call _fnc_saveToTemplate;
+    };
+};
+
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", []] call _fnc_saveToTemplate;

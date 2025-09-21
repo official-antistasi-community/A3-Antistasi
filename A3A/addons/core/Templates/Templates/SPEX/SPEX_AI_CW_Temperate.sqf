@@ -46,6 +46,11 @@
 ["vehiclesPlanesAA", ["SPE_P47"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["SPEX_CW_C47_Dakota"]] call _fnc_saveToTemplate;
 
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    ["vehiclesPlanesCAS", ["sab_fl_dh98", "sab_fl_tempest", "sab_fl_hurricane_2", "sab_fl_hurricane_trop"]] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", ["sab_fl_hurricane","sab_fl_tempest","sab_fl_spitfire_mk1","sab_fl_spitfire_mk5","sab_fl_spitfire_mkxiv"]] call _fnc_saveToTemplate;
+};
+
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", []] call _fnc_saveToTemplate;
