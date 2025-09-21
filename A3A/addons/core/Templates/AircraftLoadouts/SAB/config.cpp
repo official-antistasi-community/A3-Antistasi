@@ -15,6 +15,24 @@ class CfgPatches {
     };
 };
 
+class CfgWeapons {
+    class GBU12BombLauncher;
+    class sab_fl_bomb_bay_weapon : GBU12BombLauncher{
+
+    };
+    class sab_fl_bomb_weapon : GBU12BombLauncher {
+        modes[] = {"burst","single"};
+
+    };
+};
+class CfgAmmo {
+    class Bo_GBU12_LGB;
+    class sab_fl_bomb_base_ammo : Bo_GBU12_LGB {
+        sideAirFriction = 0;
+    };
+};
+
+
 class A3A {
     class Loadouts
     {
@@ -26,12 +44,12 @@ class A3A {
 
             //British
             class sab_fl_tempest : baseCAS          {
-                loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_bomb_raf_1rnd_250_mag","sab_fl_bomb_raf_1rnd_250_mag","sab_fl_rocket_4rnd_rp3_mag"};
+                loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_bomb_raf_1rnd_500_mag","sab_fl_bomb_raf_1rnd_500_mag","sab_fl_rocket_4rnd_rp3_mag"};
                 mainGun[] = {"sab_fl_4x_cannon_weapon","sab_fl_4x_lmg_weapon"};
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                diveParams[] = {800, 300, 110, 55, 35, {22, 0}};
             };
             class sab_fl_dh98 : baseCAS             {
                 loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_bomb_raf_2rnd_1000_mag"};
@@ -39,7 +57,7 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_bay_weapon"};
-                diveParams[] = {800, 300, 110, 55, 15, {9, 0}};
+                diveParams[] = {800, 350, 110, 55, 25, {-22, 0}};
             };
             class sab_fl_hurricane_2 : baseCAS      {
                 loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_bomb_raf_1rnd_500_mag","sab_fl_bomb_raf_1rnd_500_mag","sab_fl_rocket_4rnd_rp3_mag"};                
@@ -47,7 +65,7 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                diveParams[] = {800, 300, 110, 55, 35, {22, 0}};
             };
             class sab_fl_hurricane_trop : baseCAS   {
                 loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_pod_s40mm_ap_pylon_mag","sab_fl_pod_s40mm_ap_pylon_mag","sab_fl_rocket_4rnd_rp3_mag"};
@@ -58,11 +76,11 @@ class A3A {
             //American
                 //USMC
             class sab_fl_f4f : baseCAS      {
-                loadout[] = {"sab_fl_bomb_allies_1rnd_250_mag","sab_fl_bomb_allies_1rnd_250_mag"};
+                loadout[] = {"sab_fl_bomb_raf_1rnd_500_mag","sab_fl_bomb_raf_1rnd_500_mag"};
                 mainGun[] = {"sab_fl_4x_hmg_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                diveParams[] = {800, 300, 110, 55, 35, {22, 0}};
             };
             class sab_fl_sbd : baseCAS      {
                 loadout[] = {"sab_fl_bomb_allies_1rnd_divebomber_500_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag"};
@@ -70,7 +88,7 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                diveParams[] = {800, 300, 110, 55, 35, {-8, 0}};
             };
             class sab_fl_f4u : baseCAS      {
                 loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_bomb_allies_1rnd_1000_mag","sab_fl_bomb_allies_1rnd_1000_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag"};
@@ -78,7 +96,7 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                diveParams[] = {800, 300, 110, 55, 35, {20, 0}};
             };
                 //USAF
             class sab_fl_p51b : baseCAS     {
@@ -87,15 +105,15 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                diveParams[] = {800, 300, 110, 55, 35, {20, 0}};
             };
             class sab_fl_p51d : baseCAS     {
                 loadout[] = {"sab_fl_rocket_3rnd_m10_mag","sab_fl_bomb_allies_1rnd_1000_mag","sab_fl_bomb_allies_1rnd_1000_mag","sab_fl_rocket_3rnd_m10_mag"};
                 mainGun[] = {"sab_fl_6x_hmg_weapon"};
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
-                bombRacks[] = {"sab_fl_bomb_weapon"};a
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                bombRacks[] = {"sab_fl_bomb_weapon"};
+                diveParams[] = {800, 300, 110, 55, 35, {20, 0}};
             };
 
             //German
@@ -104,7 +122,7 @@ class A3A {
                 mainGun[] = {"sab_fl_pod_37mm_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 300, 110, 55, 15, {9, 0}};
+                diveParams[] = {800, 500, 110, 55, 35, {62, 0}};
             };
 
             //Secret Weapons
@@ -117,7 +135,7 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_bay_weapon"};
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                diveParams[] = {800, 400, 110, 55, 35, {-4, 0}};
             };
                 //USAF
             class sab_sw_p40 : baseCAS     {
@@ -126,7 +144,7 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                diveParams[] = {800, 300, 110, 55, 35, {20, 0}};
             };
             class sab_sw_p38 : baseCAS     {
                 loadout[] = {"sab_fl_rocket_3rnd_m10_mag","sab_fl_bomb_allies_1rnd_500_mag","sab_fl_rocket_3rnd_m10_mag"};
@@ -134,7 +152,7 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 300, 110, 55, 15, {9, 0}};
+                diveParams[] = {800, 300, 110, 55, 35, {25, 0}};
             };
             class sab_sw_p61 : baseCAS     {
                 loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_bomb_allies_1rnd_1000_mag","sab_fl_bomb_allies_1rnd_1000_mag","sab_fl_rocket_4rnd_rp3_mag"};
@@ -142,7 +160,7 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 300, 110, 55, 15, {9, 0}};
+                diveParams[] = {800, 300, 110, 55, 35, {25, 0}};
             };
 
             //German
@@ -151,7 +169,7 @@ class A3A {
                 mainGun[] = {"sab_fl_pod_37mm_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 300, 110, 55, 15, {9, 0}};
+                diveParams[] = {800, 500, 110, 55, 35, {72, 0}};
             };
             class sab_sw_bf110 : baseCAS             {
                 loadout[] = {"sab_fl_rocket_1rnd_rp3_mag","sab_fl_bomb_axis_1rnd_500_mag","sab_fl_bomb_axis_1rnd_500_mag","sab_fl_rocket_1rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag"};
@@ -159,7 +177,7 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 300, 110, 55, 15, {9, 0}};
+                diveParams[] = {800, 350, 110, 55, 25, {25, 0}};
             };
             class sab_sw_ju87_3 : baseCAS     {
                 loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_pod_wb81_b_pylon_mag","sab_fl_bomb_axis_1rnd_divebomber_1000_mag","sab_fl_pod_wb81_b_pylon_mag","sab_fl_rocket_4rnd_rp3_mag"};
@@ -167,11 +185,12 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                diveParams[] = {800, 350, 110, 55, 25, {-20, 0}};
             };
             class sab_sw_ju87_2 : sab_sw_ju87_3     {
                 loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_pod_bk37_ap_pylon_mag","sab_fl_bomb_axis_1rnd_divebomber_1000_mag","sab_fl_pod_bk37_ap_pylon_mag","sab_fl_rocket_4rnd_rp3_mag"};
                 mainGun[] = {"sab_fl_pod_37mm_weapon","sab_fl_2x_lmg_weapon"};
+                diveParams[] = {800, 350, 110, 55, 25, {27, 0}};
             };
             class sab_sw_ju87 : sab_sw_ju87_3     {
                 loadout[] = {"sab_fl_pod_wb81_b_pylon_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_bomb_axis_1rnd_divebomber_1000_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_pod_wb81_b_pylon_mag"};
@@ -185,7 +204,7 @@ class A3A {
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 350, 110, 55, 15, {16.5, 0}};
+                diveParams[] = {800, 350, 110, 55, 25, {25, 0}};
             };
             class sab_sw_il2_2 : sab_sw_il2     {
                 loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_pod_ns37_ap_pylon_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_pod_ns37_ap_pylon_mag","sab_fl_rocket_4rnd_rp3_mag"};
