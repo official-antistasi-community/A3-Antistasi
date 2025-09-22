@@ -74,7 +74,7 @@ class A3A {
             };
 
             //American
-                //USMC
+                //USN
             class sab_fl_f4f : baseCAS      {
                 loadout[] = {"sab_fl_bomb_raf_1rnd_500_mag","sab_fl_bomb_raf_1rnd_500_mag"};
                 mainGun[] = {"sab_fl_4x_hmg_weapon"};
@@ -125,12 +125,22 @@ class A3A {
                 diveParams[] = {800, 500, 110, 55, 35, {62, 0}};
             };
 
+            //Japanese
+            class sab_fl_a6m : baseCAS      {
+                loadout[] = {"sab_fl_bomb_ijn_1rnd_divebomber_550_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag"};                
+                mainGun[] = {"sab_fl_2x_cannon_weapon", "sab_fl_2x_lmg_weapon"};
+                rocketLauncher[] = {"sab_fl_rocket_weapon"};
+
+                bombRacks[] = {"sab_fl_bomb_weapon"};
+                diveParams[] = {800, 300, 110, 55, 35, {25, 0}};
+            };
+
             //Secret Weapons
 
             //American
-                //USMC
+                //USN
             class sab_sw_tbf : baseCAS     {
-                loadout[] = {"sab_fl_rocket_3rnd_m10_mag","sab_fl_rocket_3rnd_m10_mag","sab_fl_rocket_3rnd_m10_mag","sab_fl_bomb_allies_4rnd_flat_500_mag","sab_fl_rocket_3rnd_m10_mag","sab_fl_rocket_3rnd_m10_mag","sab_fl_rocket_3rnd_m10_mag"};
+                loadout[] = {"sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_bomb_allies_4rnd_flat_500_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag"};
                 mainGun[] = {"sab_fl_2x_hmg_weapon"};
                 rocketLauncher[] = {"sab_fl_rocket_weapon"};
 
@@ -212,6 +222,23 @@ class A3A {
                 bombRacks[] = {};
                 diveParams[] = {};
             };
+
+            //Japanese
+            class sab_sw_d3a : baseCAS      {
+                loadout[] = {"sab_fl_bomb_ijn_1rnd_divebomber_550_mag","sab_fl_rocket_4rnd_rp3_mag","sab_fl_rocket_4rnd_rp3_mag"};                
+                mainGun[] = {"sab_fl_2x_lmg_weapon"};
+                rocketLauncher[] = {"sab_fl_rocket_weapon"};
+
+                bombRacks[] = {"sab_fl_bomb_weapon"};
+                diveParams[] = {800, 350, 110, 55, 35, {-10, 0}};
+            };
+            class sab_sw_b5n : baseCAS      {
+                loadout[] = {"sab_fl_bomb_ijn_1rnd_divebomber_550_mag"};
+                bombRacks[] = {"sab_fl_bomb_weapon"};
+                diveParams[] = {500, 300, 80, 55, 35, {40, 0}};
+            };
+
+
         };
         class CAPPlane
         {
@@ -229,7 +256,7 @@ class A3A {
             };
 
             //American
-                //USMC
+                //USN
             class sab_fl_f4f : baseCAP      {
                 loadout[] = {"",""};
             };
@@ -246,38 +273,54 @@ class A3A {
 
 
             //German
-            class sab_fl_he162 : baseCAP        {};
-            class sab_fl_bf109c : baseCAP        {};
-            class sab_fl_bf109e : baseCAP          {
+            class sab_fl_he162 : baseCAP    {};
+            class sab_fl_bf109c : baseCAP   {};
+            class sab_fl_bf109e : baseCAP   {
                 loadout[] = {"","",""};
             };
-            class sab_fl_bf109f : baseCAP          {
+            class sab_fl_bf109f : baseCAP   {
                 loadout[] = {"","",""};
             };
-            class sab_fl_bf109g : baseCAP          {
+            class sab_fl_bf109g : baseCAP   {
                 loadout[] = {"","",""};
             };
-            class sab_fl_bf109k : baseCAP          {
+            class sab_fl_bf109k : baseCAP   {
                 loadout[] = {"","",""};
             };
-            class sab_fl_fw190a : baseCAP          {
+            class sab_fl_fw190a : baseCAP   {
                 loadout[] = {"","",""};
             };
-            class sab_fl_fw190d : baseCAP          {
+            class sab_fl_fw190d : baseCAP   {
                 loadout[] = {"","",""};
             };
+
+            //Russian
+            class sab_fl_yak3 : baseCAP     {
+                loadout[] = {""};
+            };
+
+            //Japanese
+            class sab_fl_a6m2n : baseCAP    {
+                loadout[] = {"", ""};
+            };
+            class sab_fl_a6m : baseCAP      {
+                loadout[] = {"", "", ""};
+            };
+
+
             //Secret Weapons
 
             //American
-            class sab_sw_p40 : baseCAP          {
+                //USAF
+            class sab_sw_p40 : baseCAP      {
                 loadout[] = {"","",""};
             };
-            class sab_sw_p38 : baseCAP          {
+            class sab_sw_p38 : baseCAP      {
                 loadout[] = {"","","",""};
             };
 
             //German
-            class sab_sw_me262 : baseCAP            {
+            class sab_sw_me262 : baseCAP    {
                 loadout[] = {""};
             }
         };

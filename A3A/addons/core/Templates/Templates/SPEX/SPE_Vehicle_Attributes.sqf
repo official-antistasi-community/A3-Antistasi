@@ -10,3 +10,5 @@
     ["SPE_M8_LAC_ringMount", ["cost", 80]]
 
 ]] call _fnc_saveToTemplate;
+
+#include "..\..\AircraftLoadouts\SAB\SAB_Vehicle_Attributes.sqf"
