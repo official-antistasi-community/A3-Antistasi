@@ -2,7 +2,7 @@
 //   Rebel Information   //
 ///////////////////////////
 
-["name", "Rebel"] call _fnc_saveToTemplate;
+["name", "LIM"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_FIA_F"] call _fnc_saveToTemplate;
 ["flagTexture", "\A3\Data_F\Flags\Flag_green_CO.paa"] call _fnc_saveToTemplate;
@@ -63,12 +63,14 @@
 ///////////////////////////
 
 private _initialRebelEquipment = [
+    "EAW_Type14", ["EAW_Type14_Magazine", 80],
+    "LIB_WaltherPPK", ["LIB_7Rnd_765x17_PPK", 70],
     "LIB_FLARE_PISTOL", "LIB_1Rnd_flare_white",
     "EAW_Hanyang_Bayonet", "EAW_Hanyang_Bayonet_Attach",
     "EAW_Chinese_Medic_Bag", "EAW_NRA_PouchesBottom", "EAW_NRA_PouchesTop", 
     "EAW_Bedroll_Tan", "EAW_Bedroll_2_Tan",
-    "LIB_Binocular_UK",
-    ["LIB_STMI_MINE_mag", 3], ["LIB_TMI_42_MINE_mag", 3], ["LIB_Ladung_Small_MINE_mag", 10]
+    "LIB_Binocular_UK", ["LIB_Rg42", 10], ["LIB_No77", 10],
+    ["LIB_STMI_MINE_mag", 3], ["LIB_TMI_42_MINE_mag", 3], ["LIB_Ladung_Small_MINE_mag", 10], ["LIB_shumine_42_MINE_mag", 10]
 ];
 
 if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr","tf_anprc154"]};

@@ -49,6 +49,21 @@
 ["vehiclesPlanesAA", ["EAW_Ki27_AI","EAW_A4N_AI","EAW_Ki43_II_AI","EAW_Ki43_II_AI"]] call _fnc_saveToTemplate;              // 
 ["vehiclesPlanesTransport", ["LIB_C47_RAF"]] call _fnc_saveToTemplate;
 
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+
+    ["vehiclesPlanesTransport", ["sab_fl_ju52"]] call _fnc_saveToTemplate;
+
+    private _CAP = ["EAW_Ki27_AI","EAW_A4N_AI","EAW_Ki43_II_AI","EAW_Ki43_II_AI","sab_fl_a6m","sab_fl_a6m","sab_fl_a6m2n","sab_fl_a6m2n"];
+    private _CAS = ["EAW_Ki43_II","sab_fl_a6m"];
+
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        _CAS = _CAS + ["sab_sw_b5n","sab_sw_d3a","sab_sw_d3a"];
+    };
+
+    ["vehiclesPlanesCAS", _CAS] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", _CAP] call _fnc_saveToTemplate;
+};
+
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;            // ideally fragile & unarmed helis seating 4+
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
 // Should be capable of dealing damage to ground targets without additional scripting
@@ -102,7 +117,7 @@
 private _loadoutData = call _fnc_createLoadoutData;
 _loadoutData set ["rifles", []];
 _loadoutData set ["carbines", []];
-_loadoutData set ["grenadeLaunchers", ["EAW_Type89_Discharger"]];
+_loadoutData set ["grenadeLaunchers", []];
 _loadoutData set ["SMGs", []];
 _loadoutData set ["machineGuns", []];
 _loadoutData set ["marksmanRifles", []];
@@ -111,12 +126,12 @@ _loadoutData set ["sniperRifles", []];
 _loadoutData set ["lightATLaunchers", []];
 _loadoutData set ["ATLaunchers", ["LIB_M1A1_Bazooka"]];
 _loadoutData set ["sidearms", ["EAW_Type14"]];
-_loadoutData set ["slSidearms", ["EAW_Dao"]];
+_loadoutData set ["slSidearms", ["EAW_Type95"]];
 
-_loadoutData set ["ATMines", []];
-_loadoutData set ["APMines", []];
-_loadoutData set ["lightExplosives", []];
-_loadoutData set ["heavyExplosives", []];
+_loadoutData set ["ATMines", ["LIB_TMI_42_MINE_mag"]];
+_loadoutData set ["APMines", ["LIB_STMI_MINE_mag"]];
+_loadoutData set ["lightExplosives", ["LIB_Ladung_Small_MINE_mag"]];
+_loadoutData set ["heavyExplosives", ["LIB_Ladung_Big_MINE_mag", "LIB_US_TNT_4pound_mag"]];
 
 _loadoutData set ["antiTankGrenades", ["EAW_Type3_Grenade_Mag"]];
 _loadoutData set ["antiInfantryGrenades", ["EAW_Type91_Mag", "EAW_Type91_Trans_Mag", "EAW_Type97_Mag"]];
@@ -425,15 +440,8 @@ private _grenadierTemplate = {
     ["items_medical_standard"] call _fnc_addItemSet;
     ["items_grenadier_extras"] call _fnc_addItemSet;
     ["items_miscEssentials"] call _fnc_addItemSet;
-    _grenade = selectRandom ["antiInfantryGrenades", "grenadeLaunchers"];
-    if (_grenade isEqualTo "grenadeLaunchers") then {
-        ["antiInfantryGrenades", 2] call _fnc_addItem;
-        ["grenadeLaunchers"] call _fnc_setLauncher;
-        ["launcher", 2] call _fnc_addMagazines;
-    } else {
-        ["antiInfantryGrenades", 4] call _fnc_addItem;
-        ["antiTankGrenades", 2] call _fnc_addItem;
-    };
+    ["antiInfantryGrenades", 4] call _fnc_addItem;
+    ["antiTankGrenades", 2] call _fnc_addItem;
     ["smokeGrenades", 2] call _fnc_addItem;
 
     ["maps"] call _fnc_addMap;
@@ -803,6 +811,6 @@ private _unitTypes = [
 //The following lines are determining the loadout for the unit used in the "kill the official" mission
 ["other", [["Official", _policeTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "kill the traitor" mission
-["other", [["Traitor", _traitorTemplate]], _militiaLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "Invader Punishment" mission
 ["other", [["Unarmed", _UnarmedTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;

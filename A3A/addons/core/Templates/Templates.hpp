@@ -1653,7 +1653,7 @@ class Templates
     };
     class EAW_PLA : EAW_Base
     {
-        side = "Occ";
+        side = "Inv";
         flagTexture = "\x\A3A\addons\core\Pictures\Flags\ifa_sov.paa";
         name = "EAW PLA";
         file = "EAW_AI_PLA";
@@ -1667,7 +1667,7 @@ class Templates
         name = "EAW Rebel";
         file = "EAW_Reb";
         shortName = "EAW REB";
-        lore = "East Asian Rebels";
+        lore = "Local Independence Movement";
     };
     class EAW_Civ : EAW_Base
     {

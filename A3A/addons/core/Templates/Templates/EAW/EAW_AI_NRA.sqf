@@ -105,7 +105,7 @@
 private _loadoutData = call _fnc_createLoadoutData;
 _loadoutData set ["rifles", []];
 _loadoutData set ["carbines", []];
-_loadoutData set ["grenadeDischarger", ["EAW_Type89_Discharger"]];
+_loadoutData set ["grenadeDischarger", []];
 _loadoutData set ["grenadeLaunchers", [
 ["LIB_K98_GW", "LIB_ACC_GW_SB_Empty", "", "", [], ["LIB_1Rnd_G_SPRGR_30"], ""],
 ["LIB_K98_GW", "LIB_ACC_GW_SB_Empty", "", "", [], ["LIB_1Rnd_G_SPRGR_30", "LIB_1Rnd_G_PZGR_30"], ""],
@@ -122,18 +122,18 @@ _loadoutData set ["sniperRifles", []];
 _loadoutData set ["lightATLaunchers", []];
 _loadoutData set ["ATLaunchers", ["LIB_M1A1_Bazooka"]];
 _loadoutData set ["AALaunchers", []];
-_loadoutData set ["sidearms", ["EAW_C96", "EAW_C96", "LIB_P08"]];
+_loadoutData set ["sidearms", ["EAW_C96", "EAW_C96", "LIB_P08", "LIB_Colt_M1911"]];
 _loadoutData set ["slSidearms", ["EAW_Dao"]];
 
-_loadoutData set ["ATMines", []];
-_loadoutData set ["APMines", []];
-_loadoutData set ["lightExplosives", []];
-_loadoutData set ["heavyExplosives", []];
+_loadoutData set ["ATMines", ["LIB_TMI_42_MINE_mag"]];
+_loadoutData set ["APMines", ["LIB_STMI_MINE_mag"]];
+_loadoutData set ["lightExplosives", ["LIB_Ladung_Small_MINE_mag"]];
+_loadoutData set ["heavyExplosives", ["LIB_Ladung_Big_MINE_mag", "LIB_US_TNT_4pound_mag"]];
 
-_loadoutData set ["antiTankGrenades", ["EAW_Type3_Grenade_Mag", "EAW_Chinese_Grenade_Bundle_Mag"]];
+_loadoutData set ["antiTankGrenades", ["EAW_Type3_Grenade_Mag", "EAW_Chinese_Grenade_Bundle_Mag", "LIB_Pwm"]];
 _loadoutData set ["antiInfantryGrenades", ["EAW_Chinese_Grenade_Mag"]];
 _loadoutData set ["smokeGrenades", ["LIB_NB39"]];
-_loadoutData set ["signalsmokeGrenades", []];
+_loadoutData set ["signalsmokeGrenades", ["LIB_US_M18_Green","LIB_US_M18_Red","LIB_US_M18_Yellow"]];
 
 
 //Basic equipment. Shouldn't need touching most of the time.
@@ -237,7 +237,7 @@ _sfLoadoutData set ["marksmanRifles", [
     ["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_sS"], [], ""],
     ["LIB_K98ZF39", "", "", "", ["LIB_5Rnd_792x57","LIB_5Rnd_792x57","LIB_5Rnd_792x57_t"], [], ""]
 ]];
-_sfLoadoutData set ["slSidearms", ["EAW_C96", "LIB_P08"]];
+_sfLoadoutData set ["slSidearms", ["EAW_C96_Auto", "EAW_C96", "LIB_P08"]];
 /////////////////////////////////
 //    Military Loadout Data    //
 /////////////////////////////////
@@ -245,14 +245,13 @@ _sfLoadoutData set ["slSidearms", ["EAW_C96", "LIB_P08"]];
 private _militaryLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _militaryLoadoutData set ["uniforms", ["EAW_Chinese_Uniform_Green"]];
 _militaryLoadoutData set ["backpacks", ["EAW_Chinese_Backpack_1", "EAW_Chinese_Backpack_German", "EAW_Bedroll_Brown", "EAW_Bedroll_Brown"]];
-_militaryLoadoutData set ["helmets", ["EAW_M35","EAW_ROC_Brodie_Green","EAW_Chinese_Cap_Green"]];
+_militaryLoadoutData set ["helmets", ["EAW_M35","EAW_ROC_Brodie_Green","EAW_Chinese_Cap_Green","EAW_PlumBlossom_1"]];
 
 _militaryLoadoutData set ["rifles", [
 ["EAW_Type24_Rifle_Base", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
 ["EAW_Type24_Rifle_Stock2", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
 ["EAW_Hanyang88_Base_Bayonet", "EAW_Hanyang_Bayonet_Attach", "", "", [], [], ""]
 ]];
-_militaryLoadoutData set ["grenadeLaunchers", []];
 _militaryLoadoutData set ["carbines", [
 ["EAW_Type24_Rifle_Base", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
 ["EAW_Type24_Rifle_Stock2", "EAW_Type24_Bayonet_Attach", "", "", [], [], ""],
@@ -294,6 +293,7 @@ _militiaLoadoutData set ["uniforms", ["EAW_Chinese_Uniform"]];
 _militiaLoadoutData set ["backpacks", ["EAW_Bedroll_Tan"]];
 _militiaLoadoutData set ["helmets", ["EAW_Chinese_Cap_1", "EAW_ROC_Brodie_Blue", "EAW_Adrian"]];
 _militiaLoadoutData set ["slHelmets", ["EAW_Chinese_VisorCap_Blue"]];
+_militiaLoadoutData set ["sniHelmets", ["EAW_M35_Camo_1", "EAW_Chinese_Cap_2_Camo_1", "EAW_Chinese_Cap_1_Camo_1"]];
 _militiaLoadoutData set ["NVGs", []];
 
 _militiaLoadoutData set ["rifles", [
@@ -429,16 +429,9 @@ private _grenadierTemplate = {
     ["uniforms"] call _fnc_setUniform;
     ["backpacks"] call _fnc_setBackpack;
 
-    _grenade = ["grenadeLaunchers", selectRandom ["carbines", "rifles"]] call _fnc_fallback;
-    [_grenade] call _fnc_setPrimary;
+    [["grenadeLaunchers", selectRandom ["carbines", "rifles"]] call _fnc_fallback] call _fnc_setPrimary;
     ["primary", 5] call _fnc_addMagazines;
     ["primary", selectRandom [3,4,5]] call _fnc_addAdditionalMuzzleMagazines;
-    
-    if (_grenade isNotEqualTo "grenadeLaunchers") then {
-        ["grenadeDischarger"] call _fnc_setLauncher;
-        ["launcher", 2] call _fnc_addMagazines;
-    };
-
 
     ["items_medical_standard"] call _fnc_addItemSet;
     ["items_grenadier_extras"] call _fnc_addItemSet;
@@ -811,6 +804,6 @@ private _unitTypes = [
 //The following lines are determining the loadout for the unit used in the "kill the official" mission
 ["other", [["Official", _policeTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "kill the traitor" mission
-["other", [["Traitor", _traitorTemplate]], _militiaLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "Invader Punishment" mission
 ["other", [["Unarmed", _UnarmedTemplate]], _militaryLoadoutData, nil, nil, "B_soldier_Melee_Hybrid"] call _fnc_generateAndSaveUnitsToTemplate;
