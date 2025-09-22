@@ -50,6 +50,17 @@
 ["vehiclesPlanesAA", ["EAW_AVG_P40_AI", "EAW_i16_AI", "EAW_HawkIII_AI"]] call _fnc_saveToTemplate;              // 
 ["vehiclesPlanesTransport", ["LIB_Li2"]] call _fnc_saveToTemplate;
 
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+
+    private _CAP = ["sab_fl_yak3"];
+
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        _CAP = _CAP + ["sab_sw_i16","sab_sw_i16_2"];
+        ["vehiclesPlanesCAS", ["sab_sw_il2", "sab_sw_il2_2"]] call _fnc_saveToTemplate;
+    };
+    ["vehiclesPlanesAA", _CAP] call _fnc_saveToTemplate;
+};
+
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;            // ideally fragile & unarmed helis seating 4+
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
 // Should be capable of dealing damage to ground targets without additional scripting
