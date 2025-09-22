@@ -47,7 +47,19 @@
 ["vehiclesPlanesTransport", ["SPEX_C47_Skytrain"]] call _fnc_saveToTemplate;
 
 if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+
     ["vehiclesPlanesTransport", ["sab_fl_ju52"]] call _fnc_saveToTemplate;
+
+    private _CAP = ["SPE_FW190F8","sab_fl_bf109c","sab_fl_bf109e","sab_fl_bf109f","sab_fl_bf109g","sab_fl_bf109k","sab_fl_fw190a","sab_fl_fw190d","sab_fl_he162"];
+    private _CAS = ["SPE_FW190F8","sab_fl_ju88a"];
+
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        _CAP = _CAP + ["sab_sw_me262"];
+        _CAS = _CAS + ["sab_sw_ar234","sab_sw_bf110","sab_sw_ju87_2","sab_sw_ju87_3","sab_sw_ju87"];
+    };
+
+    ["vehiclesPlanesCAS", _CAS] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", _CAP] call _fnc_saveToTemplate;
 };
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;

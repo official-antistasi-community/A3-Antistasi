@@ -39,6 +39,11 @@
 ["vehiclesPlane", ["SPEX_CW_C47_Dakota", "SPE_FW190F8"]] call _fnc_saveToTemplate;
 ["vehiclesHeli", []] call _fnc_saveToTemplate;
 
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    ["vehiclesPlane", ["sab_fl_ju52", "sab_fl_yak3"]] call _fnc_saveToTemplate;
+    ["vehiclesBasic", ["SPE_FFI_R200_Unarmed","sab_fl_airfieldtractor","sab_fl_scooter_53"]] call _fnc_saveToTemplate;
+};
+
 ["vehiclesCivCar", []] call _fnc_saveToTemplate;
 ["vehiclesCivTruck", ["SPEX_GER_Bedford_MWD", "SPEX_GER_Bedford_MWD_Open"]] call _fnc_saveToTemplate;
 ["vehiclesCivHeli", []] call _fnc_saveToTemplate;
