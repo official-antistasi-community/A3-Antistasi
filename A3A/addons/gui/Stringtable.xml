@@ -4093,56 +4093,6 @@
         <Russian>%1 оккупанты и %2 захватчики?</Russian>
         <Czech>%1 okupanti a %2 vetřelci?</Czech>
       </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_ammoQuant">
-        <Original>Ammo quantity</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_backpack">
-        <Original>Backpack</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_close">
-        <Original>Close</Original>
-        <German>Schließen</German>
-        <Italian>Chiudi</Italian>
-        <Spanish>Cerrar</Spanish>
-        <French>Fermer</French>
-        <Korean>닫기</Korean>
-        <Russian>Закрыть</Russian>
-        <Polish>Zamknij</Polish>
-        <Czech>Zavřít</Czech>
-        <Portuguese>Fechar</Portuguese>
-        <Turkish>Yakın</Turkish>
-        <Chinesesimp>关闭</Chinesesimp>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_copyToAll">
-        <Original>Copy To All</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_headgear">
-        <Original>Headgear</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_priOptic">
-        <Original>Primary optic</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_priWeapon">
-        <Original>Primary weapon</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetAll">
-        <Original>Reset All</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetRole">
-        <Original>Reset Role</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_secWeapon">
-        <Original>Secondary weapon</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
-        <Original>Custom AI Loadouts</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_uniform">
-        <Original>Uniform</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_vest">
-        <Original>Vest</Original>
-      </Key>
       <Key ID="STR_antistasi_dialogs_setup_addonvics">
         <Original>Addon vehicles</Original>
         <German>Zusätzliche Fahrzeuge</German>
@@ -4588,8 +4538,7 @@
         <Original>Save the new campaign to AntistasiCommunity.vars instead of the main profile vars file. Warning: This may not work correctly on Linux servers due to an Arma bug.</Original>
       </Key>
     </Container>
-<<<<<<< HEAD
-    <Container name="setup_dialog">
+    <Container name="custom_loadouts">
       <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
         <Original>Custom AI Loadouts</Original>
       </Key>
@@ -4674,7 +4623,5 @@
         <Original>Total:</Original>
       </Key>
     </Container>
-=======
->>>>>>> unstable
   </Package>
 </Project>

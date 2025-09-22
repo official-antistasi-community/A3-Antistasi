@@ -27,29 +27,11 @@ sleep 0.5;
 { deleteVehicle _x } forEach (allMissionObjects "Leaflet_05_F");				// Drone drop leaflets
 { deleteVehicle _x } forEach (allMissionObjects "Ejection_Seat_Base_F");		// All vanilla ejection seats
 
-// Cleanup rebel vehicles
+// Cleanup non-garrison vehicles
 {
-	// Locked check is a hack for roadblock vehicles
-	if !(_x isKindOf "StaticWeapon" or unitIsUAV _x or locked _x > 1) then { [_x, 500] call _fnc_distCheck };
+	if (!isNil {_x getVariable "markerX"}) then { continue };
+	if !(_x isKindOf "StaticWeapon" or unitIsUAV _x) then { [_x, 500] call _fnc_distCheck };
 } forEach (vehicles select {_x getVariable ["ownerSide", sideUnknown] == teamPlayer});
-
-// Cleanup constructed buildings
-private _rebMarkers = (airportsX + outposts + seaports + factories + resourcesX) select { sidesX getVariable _x == teamPlayer };
-_rebMarkers append outpostsFIA; _rebMarkers pushBack "Synd_HQ";
-
-A3A_buildingsToSave = A3A_buildingsToSave select {
-	// Keep if there are rebel spawners within 500m
-	if (_rebelSpawners inAreaArray [getPosATL _x, 500, 500] isNotEqualTo []) then { continueWith true };
-
-	// Delete if outside mission distance (temporary)
-	if (_x distance2d markerPos "Synd_HQ" > distanceMission) then { deleteVehicle _x; continueWith false };
-
-	// Delete if not within a rebel marker
-	private _building = _x;
-	private _indexes = _rebMarkers inAreaArrayIndexes [getPosATL _x, 500, 500];
-	if (-1 != _indexes findIf { _building inArea _rebMarkers#_x } ) then { continueWith true };
-	deleteVehicle _x; false;
-};
 
 
 if (A3A_hasACE) then {
@@ -81,7 +63,6 @@ if (isClass (configFile/"CfgPatches"/"rhsgref_main")) then {//ToDo: these should
 	{ deleteVehicle _x } forEach (allMissionObjects "rhs_mi28_wing_right");         // another garbage piece not being cleaned
 	{ deleteVehicle _x } forEach (allMissionObjects "rhs_ka52_rps_rocket");         // ejection rocket? 
 	{ deleteVehicle _x } forEach (allMissionObjects "rhs_ka52_blade");              // blade for ka52
-
 };
 
 

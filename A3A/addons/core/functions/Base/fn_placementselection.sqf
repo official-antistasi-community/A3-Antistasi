@@ -14,8 +14,8 @@ hintC_arr_EH = findDisplay 72 displayAddEventHandler ["unload",{
 	};
 }];
 
-private _markersX = markersX select {sidesX getVariable [_x,sideUnknown] != teamPlayer};
-_markersX = _markersX - (controlsX select {!isOnRoad (getMarkerPos _x)});
+private _markersX = markersX + (controlsX select {isOnRoad (getMarkerPos _x)});
+_markersX select {sidesX getVariable [_x,sideUnknown] != teamPlayer};
 openMap [true,true];
 
 private _mrkDangerZone = [];
@@ -82,8 +82,8 @@ if (visiblemap) then {
 			sidesX setVariable [_x,teamPlayer,true];
 		};
 	} forEach _controlsX;
-	[_positionClicked] remoteExec ["A3A_fnc_createPetros", 2];
-	[_positionClicked, false] remoteExec ["A3A_fnc_relocateHQObjects", 2];
+	[_positionClicked] remoteExecCall ["A3A_fnc_createPetros", 2];
+	remoteExecCall ["A3A_fnc_buildHQ", 2];
 	openmap [false,false];
 
 	// Make sure petros is actually placed before we signal that we're done placing

@@ -40,7 +40,7 @@ private _varsToDelete = ["json", "countCA", "gameMode", "difficultyX", "bombRuns
 	"attackCountdownOccupants", "attackCountdownInvaders", "prestigeNATO", "prestigeCSAT",
 	"savedPlayers", "testingTimerIsActive", "HR_Garage", "A3A_fuelAmountleftArray", "HQKnowledge", "enemyResources",
 	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC", "arsenalLimits", "rebelLoadouts",
-	"minorSites", "radioKeys"];
+	"minorSites", "newGarrison", "radioKeys", "cityData"];
 
 // Delete all server data for specified campaign
 {
