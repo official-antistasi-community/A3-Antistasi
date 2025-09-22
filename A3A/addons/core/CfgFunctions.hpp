@@ -624,6 +624,9 @@ class CfgFunctions
             file = QPATHTOFOLDER(functions\Save);
             class collectSaveData {};
             class deleteSave {};
+            class exportSave {};
+            class finalizeSave {};
+            class importSave {};
             class loadPlayer {};
             class loadServer {};
             class savePlayer {};
@@ -632,7 +635,6 @@ class CfgFunctions
             class resetPlayer {};
             class retrievePlayerStat {};
             class returnSavedStat {};
-            class savePlayerStat {};
             class setStatVariable {};
             class saveLoop {};
             class writebackSaveVar {};

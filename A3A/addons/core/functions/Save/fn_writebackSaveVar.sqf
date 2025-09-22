@@ -18,28 +18,20 @@ FIX_LINE_NUMBERS()
 
 params ["_varName", "_varValue", "_saveTarget"];
 
+if (isNil "A3A_saveVersion") exitWith {};               // No data yet written for this game, don't add trash
+
 Info_1("Writing back save var with params %1", _this);
 
 isNil {
     private _oldTarget = if (!isNil "A3A_saveTarget") then { A3A_saveTarget };
-    if (!isNil "_saveTarget") then { A3A_saveTarget = _saveTarget };
-
-    [_varname, _varValue] call A3A_fnc_setStatVariable;
-    _namespaceFlag = (A3A_saveTarget#0 isEqualType false);
-    ["json",toJSON (A3A_saveTarget#3),true] call A3A_fnc_setStatVariable;
-    if (_varName in ["name", "version", "saveTime", "ended", "params", "factions", "DLC", "addonVics", "map", "json"]) then {
-        _namespace = [profileNamespace, missionProfileNamespace] select _namespaceFlag;
-        private _saveList = [_namespace getVariable "antistasiSavedGames"] param [0, [], [[]]];
-        private _saveIndex = (_saveList findIf { _x select 0 == (A3A_saveTarget#0) });
-        private _save = _saveList#_saveIndex;
-        private _saveVars = _save#3;
-        _saveVars set [_varname, _varValue];
-        _save set [3, _saveVars];
-        _saveList set [_saveIndex, _save];
-        _namespace setVariable ["antistasiSavedGames", _saveList];
+    if (!isNil "_saveTarget") then {                // In the rename case, we need to fetch the JSON save data if it exists
+        A3A_saveTarget = [_saveTarget#0, _saveTarget#1, _saveTarget#2, false];
+        private _json = ["json"] call A3A_fnc_returnSavedStat;
+        if (!isNil "_json") then { A3A_saveTarget set [3, fromJSON _json] };
     };
 
-    if (_namespaceFlag) then { saveMissionProfileNamespace } else { saveProfileNamespace };
+    [_varname, _varValue] call A3A_fnc_setStatVariable;
+    call A3A_fnc_finalizeSave;
 
     if (!isNil "_oldTarget") then { A3A_saveTarget = _oldTarget };
 };

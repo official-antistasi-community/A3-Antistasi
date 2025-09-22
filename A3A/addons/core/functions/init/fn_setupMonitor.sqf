@@ -19,6 +19,9 @@ private _addonVics = "true" configClasses (configFile/"A3A"/"AddonVics");
 private _loadedDLC = getLoadedModsInfo select { (_x#2) and !(_x#1 in ["A3","curator","argo","tacops"]) };
 _loadedDLC append (getLoadedModsInfo select { tolower (_x#1) in ["ef", "gm", "rf", "spe", "vn", "ws"] });
 
+// Autodetect linux server so that UI can set default namespace flag 
+private _isLinux = (productVersion # 6) isEqualTo "Linux";
+
 private _autoLoadTime = "autoLoadLastGame" call BIS_fnc_getParamValue;
 private _autoLoadData = nil;
 if (_autoLoadTime >= 0) then
@@ -54,8 +57,6 @@ if (_autoLoadTime >= 0) then
 
 // startGame function needs to know setupPlayer for sanity-checking
 A3A_setupPlayer = objNull;
-// Autodetect Linux server for namespace flag
-A3A_isLinux = (productVersion # 6) isEqualTo "Linux";
 
 private _fnc_validAdmin = {
     admin owner _this == 2 or						// non-voted admin on DS
@@ -94,12 +95,11 @@ while {isNil "A3A_saveData"} do {
     A3A_setupPlayer = _players select _adminIndex;
     Info_1("Player %1 is now admin, sending them the save data", name A3A_setupPlayer);
     A3A_startupState = "adminsetup"; publicVariable "A3A_startupState";
-    publicVariable "A3A_isLinux";
 
     // Collect save data. Do this each time so consistency is maintained with deletes
     private _saveData = call A3A_fnc_collectSaveData;
     DebugArray("Save data found:", _saveData);
-    ["sendData", [_saveData, _loadedPatches, _loadedDLC]] remoteExec ["A3A_GUI_fnc_setupDialog", A3A_setupPlayer];
+    ["sendData", [_saveData, _loadedPatches, _loadedDLC, _isLinux]] remoteExec ["A3A_GUI_fnc_setupDialog", A3A_setupPlayer];
 };
 
 Info("Setup monitor terminated");

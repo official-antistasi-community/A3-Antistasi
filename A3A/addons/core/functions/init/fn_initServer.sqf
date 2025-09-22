@@ -106,11 +106,6 @@ if (gameMode != 1) then {
 };
 bookedSlots = floor ((memberSlots/100) * (playableSlotsNumber teamPlayer)); publicVariable "bookedSlots";
 
-private _fnc_jsonSetup = {
-    private _jsonData = ["json",true] call A3A_fnc_returnSavedStat;
-    if (isNil "_jsonData") then {_jsonData = createHashMap};
-    A3A_saveTarget pushBack _jsonData;
-};
 
 // ****************** Load save data or create new *********************************
 
@@ -118,12 +113,13 @@ private _startType = A3A_saveData get "startType";
 if (_startType != "new") then
 {
     // Setup save info
-    A3A_saveTarget = [A3A_saveData get "serverID", A3A_saveData get "gameID", worldName];
-    call _fnc_jsonSetup;
+    A3A_saveTarget = [A3A_saveData get "serverID", A3A_saveData get "gameID", worldName, false];
+    private _json = ["json"] call A3A_fnc_returnSavedStat;
+    if (!isNil "_json") then { A3A_saveTarget set [3, fromJSON _json] };
 
     // Sanity checks? hmm
 
-    Info_1("Loading campaign with ID %1", A3A_saveData get "gameID");
+    Info_2("Loading campaign with ID %1, JSON %2", A3A_saveData get "gameID", !isNil "_json");
 
     // Do the actual game loading
     call A3A_fnc_loadServer;
@@ -170,19 +166,16 @@ else
     [_posHQ, true] call A3A_fnc_relocateHQObjects;         // sets all the other vars
 };
 
-if ((_startType != "load")) then {
+if (_startType != "load") then {
     // Set blank server ID if we don't have one already. They're pretty pointless
     private _serverID = profileNamespace getVariable ["ss_serverID", ""];
     _serverID = [_serverID, false] select (A3A_saveData get "useNewNamespace");
 
     // Create new campaign ID, avoiding collisions
     private _newID = call A3A_fnc_uniqueID;
+    A3A_saveTarget = [_serverID, _newID, worldName, false];
 
     Info_1("Creating new campaign with ID %1", _newID);
-
-    A3A_saveTarget = [_serverID, _newID, worldName];
-
-    call _fnc_jsonSetup;
 };
 
 // ********************** Post-load init ****************************************************

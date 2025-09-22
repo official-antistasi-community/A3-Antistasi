@@ -123,19 +123,25 @@ if (isServer) then {
     //Load state of testing timer
     ["testingTimerIsActive"] call A3A_fnc_getStatVariable;
 
-	// Load all player data into A3A_playerSaveData hashmap. Works around issues with game copies
-	_savedPlayers = "savedPlayers" call A3A_fnc_returnSavedStat;
+	// Load all player data into A3A_playerSaveData hashmap
+	private _savedPlayers = "savedPlayers" call A3A_fnc_returnSavedStat;
 	if (isNil "_savedPlayers") then { _savedPlayers = [] };
-	{
-		private _uid = _x;
-		private _playerData = createHashMap;
+	if (_savedPlayers isEqualType createHashMap) then {
+		A3A_playerSaveData = _savedPlayers;
+	} else {
+		// backwards compat with old array + separate vars format
+		// chuck this code after a couple of versions
 		{
-			_playerData set [_x, [_uid, _x] call A3A_fnc_retrievePlayerStat];
-		} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage","missionsCompleted"];
+			private _uid = _x;
+			private _playerData = createHashMap;
+			{
+				_playerData set [_x, [_uid, _x] call A3A_fnc_retrievePlayerStat];
+			} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage","missionsCompleted"];
 
-		if (isNil {_playerData get "moneyX"}) then { Error_1("Saved player %1 has no money var", _uid); continue };
-		A3A_playerSaveData set [_uid, _playerData];
-	} forEach _savedPlayers;
+			if (isNil {_playerData get "moneyX"}) then { Error_1("Saved player %1 has no money var", _uid); continue };
+			A3A_playerSaveData set [_uid, _playerData];
+		} forEach _savedPlayers;
+	};
 
     Info("Persistent Load Completed.");
 

@@ -37,9 +37,8 @@ switch (_mode) do
     case ("onLoad"):
     {
         // get run mode from parent
-        _mode = _parent getVariable "transferMode";
+        private _mode = ["export", "import"] select (_parent isNil "exportSave");
         [_mode] call A3A_GUI_fnc_setupTransferDialog;
-        _parent setVariable ["importStage","asking"];
     };
 
     case ("export"):
@@ -50,35 +49,28 @@ switch (_mode) do
         _namespaceCB ctrlShow false;
         _namespaceText ctrlShow false;
         _textConfirmCtrl ctrlShow false;
-        private _saveData = _parent getVariable "exportSave";
-        _textCtrl ctrlSetStructuredText parseText format [localize "STR_antistasi_dialogs_setup_transfer_downloading",_saveData get "name",_saveData get "gameID"];
-        [_saveData, {
-            private _saveData = _this;
-            _oldSaveTarget = A3A_saveTarget;
-            A3A_saveTarget = [_saveData get "serverID", _saveData get "gameID", _saveData get "map", _saveData get "json"];
-            private _rawJSON = (["json",true] call A3A_fnc_returnSavedStat);
-            A3A_jsonSaveDataHM = fromJSON _rawJSON;
-            A3A_jsonSaveDataHM set ["headerData",_saveData];
-            A3A_saveTarget = _oldSaveTarget;
-            remoteExecutedOwner publicVariableClient "A3A_jsonSaveDataHM";
-            ["exportDataReceived"] remoteExec ["A3A_GUI_fnc_setupTransferDialog", remoteExecutedOwner]
-        }] remoteExec ["call", 2];
+
+        private _saveHeader = _parent getVariable "exportSave";
+        _textCtrl ctrlSetStructuredText parseText format [localize "STR_antistasi_dialogs_setup_transfer_downloading", _saveHeader get "name", _saveHeader get "gameID"];
+
+        [_saveHeader] remoteExecCall ["A3A_fnc_exportSave", 2];
     };
 
     case ("exportDataReceived"):
     {
+        if (isNull _display) exitWith {};   // if display was closed during transfer
+
+        // Why would we need these again? Click off, click on?
         _textCtrl ctrlShow true;
         _editCtrl ctrlShow true;
         _importButton ctrlShow false;
         _namespaceCB ctrlSHow false;
         _namespaceText ctrlShow false;
         _textConfirmCtrl ctrlShow false;
-        // SCHEDULED !!!!!!!!!!
-        waitUntil {sleep 0.1; (count A3A_jsonSaveDataHM > 0) };
-        if (isNull _display) exitWith {}; // if display is closed during
-        private _saveData = _parent getVariable "exportSave";
-        _editCtrl ctrlSetText (toJSON A3A_jsonSaveDataHM);
-        _textCtrl ctrlSetStructuredText parseText format [localize "STR_antistasi_dialogs_setup_transfer_exportReady",_saveData get "name",_saveData get "gameID"];
+
+        _editCtrl ctrlSetText _params;
+        private _saveHeader = _parent getVariable "exportSave";
+        _textCtrl ctrlSetStructuredText parseText format [localize "STR_antistasi_dialogs_setup_transfer_exportReady", _saveHeader get "name", _saveHeader get "gameID"];
     };
 
     case ("import"):
@@ -97,78 +89,33 @@ switch (_mode) do
         _textCtrl ctrlShow false;
         _editCtrl ctrlShow false;
         _importButton ctrlShow true;
-        if (_parent getVariable ["importStage","asking"] == "asking") then { // first click asks
-            _textConfirmCtrl ctrlShow true;
-            _importButton ctrlEnable false;
-            private _inputText = ctrlText _editCtrl;
-            _textConfirmCtrl ctrlSetText "Working, please wait...";
-            A3A_jsonSaveDataHM = fromJSON _inputText;
-            private _name = A3A_jsonSaveDataHM get "name";
+
+        // first click asks
+        if (_display isNil "importData") exitWith
+        { 
+            private _importData = fromJSON ctrlText _editCtrl;
+            private _name = _importData get "name";
             if (isNil "_name") exitWith {_textConfirmCtrl ctrlSetStructuredText parseText "Invalid save data"; Debug("Failed to parse input data")}; // also trips if JSON conversion fails, e.g. malformed data
+            _display setVariable ["importData", _importData];
+
             _namespaceCB ctrlShow true;
             _namespaceText ctrlShow true;
-            _namespaceCB cbSetChecked (!A3A_isLinux);
+            _namespaceCB cbSetChecked !A3A_setup_isLinux;
             _textConfirmCtrl ctrlSetStructuredText parseText format [localize "STR_antistasi_dialogs_setup_transfer_importConfirm",_name];
+            _textConfirmCtrl ctrlShow true;
             _importButton ctrlEnable true;
-            _parent setVariable ["importStage","confirmed"];
-        } else { // second click confirms
-            _textConfirmCtrl ctrlShow false;
-            private _saveToNewNamespace = cbChecked _namespaceCB;
-            _nameSpaceCB ctrlShow false;
-            _namespaceText ctrlShow false;
-            closeDialog 0;
-            private _name = A3A_jsonSaveDataHM get "name";
-            private _newName = [localize "STR_antistasi_dialogs_setup_importButton",_name] joinString " "; // needs to happen on client so localize works
-            private _newID = call A3A_fnc_uniqueID;
-            //A3A_jsonSaveDataHM set ["name",_importName];
-            private _saveData = A3A_jsonSaveDataHM get "headerData";
-            _saveData set ["name",_newName];
-            _saveData set ["gameID", _newID];
-            private _serverID = profileNamespace getVariable ["ss_serverID", ""];
-            _serverID = [_serverID, false] select _saveToNewNamespace;
-            _saveData set ["serverID",_serverID];
-            if !(_saveToNewNamespace) then {_saveData set ["fileStr","Old"]};
-            private _namespaceText = (["old","new"] select _saveToNewNamespace);
-            Info_3("Adding save %1 to list through import with ID %2 to %3 namespace",_newName,_newID,_namespaceText)
-            private _newGames = A3A_setup_saveData select {(_x get "serverID") isEqualType false};
-            private _oldGames = A3A_setup_saveData - _newGames;
-            private _insertIndex = call {
-                private _importSaveTime = _saveData get "saveTime";
-                private _index = 0;
-                {
-                    private _selSaveTime = (_x get "saveTime");
-                    if (call {
-                        private _compare = [_importSaveTime, _selSaveTime];
-                        _compare sort false;
-                        (_compare#0 isEqualTo _importSaveTime)
-                    }) exitWith {_index = _forEachIndex};
-                } forEach ([_oldGames,_newGames] select _saveToNewNamespace);
-                _index;
-            };
-            A3A_setup_saveData insert [_insertIndex + ([count _newGames, 0] select (_saveToNewNamespace)), [_saveData]];
-            A3A_jsonSaveDataHM set ["headerData", _saveData];
-            [[A3A_jsonSaveDataHM, _newID, _saveToNewNamespace, _insertIndex], {
-                params ["_importSave","_campaignID", "_saveToNewNamespace", "_insertIndex"];
-                A3A_jsonSaveDataHM = _importSave;
-                private _saveData = A3A_jsonSaveDataHM get "headerData";
-                private _serverID = _saveData get "serverID";
-                private _map = _saveData get "map";
-                private _name = _saveData get "name";
-                _oldSaveTarget = A3A_saveTarget;
-                A3A_saveTarget = [_serverID, _campaignID, _map];
-                Info_1("Foreign save %1 imported by client",_name);
-                ["json",toJSON A3A_jsonSaveDataHM,true] call A3A_fnc_setStatVariable;
-                A3A_saveTarget = _oldSaveTarget;
-                private _namespace = [profileNamespace, missionProfileNamespace] select _saveToNewNamespace;
-                private _saveList = [_namespace getVariable "antistasiSavedGames"] param [0, [], [[]]];
-                _saveList insert [(count _saveList - _insertIndex), [[_campaignID, _map, "Greenfor", _saveData]]];
-                _namespace setVariable ["antistasiSavedGames", _saveList];
-                if (_saveToNewNamespace) then { saveMissionProfileNamespace } else { saveProfileNamespace };
-            }] remoteExecCall ["call",2];
-
-            _parent setVariable ["importStage",nil];
-            waitUntil { dialog };
-            ["setSaveData"] call A3A_GUI_fnc_setupLoadgameTab;
         };
+
+        // second click confirms
+        private _importData = _display getVariable "importData";
+        private _name = _importData get "name";
+        private _newName = [localize "STR_antistasi_dialogs_setup_importButton", _name] joinString " "; // needs to happen on client so localize works
+        _importData set ["name", _newName];
+        _importData set ["saveTime", systemTimeUTC];            // Plonk it on the top
+        [_importData, cbChecked _namespaceCB] remoteExecCall ["A3A_fnc_importSave", 2];
+
+        closeDialog 0;
+        A3A_setup_saveData = nil;
+        closeDialog 0;              // hopefully closes the parent... 
     };
 };
