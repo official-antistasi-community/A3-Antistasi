@@ -8,6 +8,10 @@
     // M8 is too powerful for a lightarmed and not powerful enough for lighttank
     ["SPE_M8_LAC", ["cost", 80]],
     ["SPE_M8_LAC_ringMount", ["cost", 80]]
+    
+
+    ["SPEX_GER_Sherman_I", ["cost", 230]],
+    ["SPEX_GER_Sherman_Vc", ["cost", 230]]
 
 ]] call _fnc_saveToTemplate;
 
