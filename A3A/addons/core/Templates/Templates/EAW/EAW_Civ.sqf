@@ -2,7 +2,12 @@
 //       Vehicles       //
 //////////////////////////    
 
-["vehiclesCivCar", ["LIB_GazM1_dirty", 1]] call _fnc_saveToTemplate;             //this line determines civilian cars -- Example: ["vehiclesCivCar", ["C_Offroad_01_F"]] -- Array, can contain multiple assets
+["vehiclesCivCar", [
+    "LIB_GazM1_dirty", 1,
+    "LIB_GazM1", 0.5,
+    "LIB_UK_DR_Willys_MB_Hood", 0.1,
+    "LIB_UK_DR_Willys_MB", 0.1
+    ]] call _fnc_saveToTemplate;             //this line determines civilian cars -- Example: ["vehiclesCivCar", ["C_Offroad_01_F"]] -- Array, can contain multiple assets
 
 ["vehiclesCivIndustrial", ["EAW_Dodge1936_Pickup", 0.3]] call _fnc_saveToTemplate;             //this line determines civilian trucks -- Example: ["vehiclesCivIndustrial", ["C_Truck_02_transport_F"]] -- Array, can contain multiple assets
 
