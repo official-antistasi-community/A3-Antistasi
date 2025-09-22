@@ -235,7 +235,7 @@ class A3A {
             class sab_sw_b5n : baseCAS      {
                 loadout[] = {"sab_fl_bomb_ijn_1rnd_divebomber_550_mag"};
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {500, 300, 80, 55, 35, {40, 0}};
+                diveParams[] = {500, 300, 80, 55, 35, {45, 0}};
             };
 
 
