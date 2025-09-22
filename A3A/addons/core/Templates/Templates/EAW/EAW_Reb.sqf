@@ -32,7 +32,12 @@
 
 ["vehiclesBoat", ["EAW_Daihatsu_LC_IJA", "B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
 
-["vehiclesPlane", ["EAW_HawkIII", "EAW_i16"]] call _fnc_saveToTemplate;
+["vehiclesPlane", ["EAW_i16"]] call _fnc_saveToTemplate;
+
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    ["vehiclesPlane", ["sab_fl_ju52", "sab_fl_bf109c"]] call _fnc_saveToTemplate;
+};
+
 ["vehiclesMedical", ["EAW_Dodge1936_Pickup_Military_Medical_IJA"]] call _fnc_saveToTemplate;
 
 ["vehiclesCivCar", ["LIB_GazM1_dirty"]] call _fnc_saveToTemplate;
@@ -40,7 +45,6 @@
 ["vehiclesCivHeli", []] call _fnc_saveToTemplate;
 ["vehiclesCivBoat", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesCivPlane", []] call _fnc_saveToTemplate;
-["vehiclesCivSupply", ["a3a_lib_Zis6_BOX"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["EAW_Type24_MG"]] call _fnc_saveToTemplate;
 ["staticAT", ["EAW_ROC_Pak36"]] call _fnc_saveToTemplate;
