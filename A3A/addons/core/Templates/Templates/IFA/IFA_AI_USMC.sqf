@@ -58,7 +58,7 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
     };
 
     ["vehiclesPlanesCAS", _CAS] call _fnc_saveToTemplate;
-    ["vehiclesPlanesAA", "sab_fl_f4f","sab_fl_f4u"] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", ["sab_fl_f4f","sab_fl_f4f","sab_fl_f4u"]] call _fnc_saveToTemplate;
 };
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;       
