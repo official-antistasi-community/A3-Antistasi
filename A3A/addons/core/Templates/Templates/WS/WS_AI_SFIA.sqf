@@ -241,8 +241,8 @@ _sfLoadoutData set ["binoculars", ["Laserdesignator"]];
 //["Weapon", "Muzzle", "Rail", "Sight", [], [], "Bipod"];
 
 _sfLoadoutData set ["slRifles", [
-["arifle_Katiba_C_F", "muzzle_snds_h", "acc_pointer_IR", "optic_MRCO", ["30Rnd_65x39_caseless_green","30Rnd_65x39_caseless_green_mag_Tracer"], [], ""],
-["arifle_Katiba_GL_F", "muzzle_snds_h", "acc_pointer_IR", "optic_Arco_blk_F", ["30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green_mag_Tracer"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
+["arifle_Katiba_C_F", "muzzle_snds_H", "acc_pointer_IR", "optic_MRCO", ["30Rnd_65x39_caseless_green","30Rnd_65x39_caseless_green_mag_Tracer"], [], ""],
+["arifle_Katiba_GL_F", "muzzle_snds_H", "acc_pointer_IR", "optic_Arco_blk_F", ["30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green_mag_Tracer"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
 ["arifle_SLR_Para_lxWS", "muzzle_snds_B_snd_F", "saber_light_ir_sand_lxWS", "optic_Holosight_blk_F", ["30Rnd_762x51_slr_reload_tracer_green_lxWS","30Rnd_762x51_slr_tracer_green_lxWS"], [], ""],
 ["arifle_Galat_lxWS", "suppressor_h_arid_lxWS", "saber_light_ir_arid_lxWS", "optic_MRCO", ["30Rnd_762x39_Mag_Green_F","30Rnd_762x39_Mag_Tracer_Green_F"], [], ""],
 ["arifle_VelkoR5_lxWS", "suppressor_l_sand_lxWS", "acc_pointer_IR_sand_lxWS", "optic_r1_high_sand_lxWS", ["35Rnd_556x45_Velko_reload_tracer_green_lxWS","35Rnd_556x45_Velko_tracer_green_lxWS"], [], ""],
@@ -256,12 +256,12 @@ _sfLoadoutData set ["rifles", [
 ["arifle_Velko_lxWS", "suppressor_l_sand_lxWS", "acc_pointer_IR_sand_lxWS", "optic_r1_high_sand_lxWS", ["35Rnd_556x45_Velko_reload_tracer_green_lxWS","35Rnd_556x45_Velko_tracer_green_lxWS"], [], ""]
 ]];
 _sfLoadoutData set ["carbines", [
-["arifle_Katiba_C_F", "muzzle_snds_h", "acc_pointer_IR", "optic_MRCO", ["30Rnd_65x39_caseless_green","30Rnd_65x39_caseless_green_mag_Tracer"], [], ""],
+["arifle_Katiba_C_F", "muzzle_snds_H", "acc_pointer_IR", "optic_MRCO", ["30Rnd_65x39_caseless_green","30Rnd_65x39_caseless_green_mag_Tracer"], [], ""],
 ["arifle_SLR_Para_lxWS", "muzzle_snds_B_snd_F", "saber_light_ir_sand_lxWS", "optic_Holosight_blk_F", ["30Rnd_762x51_slr_reload_tracer_green_lxWS","30Rnd_762x51_slr_tracer_green_lxWS"], [], ""],
 ["arifle_VelkoR5_lxWS", "suppressor_l_sand_lxWS", "acc_pointer_IR_sand_lxWS", "optic_r1_high_sand_lxWS", ["35Rnd_556x45_Velko_reload_tracer_green_lxWS","35Rnd_556x45_Velko_tracer_green_lxWS"], [], ""]
 ]];
 _sfLoadoutData set ["grenadeLaunchers", [
-["arifle_Katiba_GL_F", "muzzle_snds_h", "acc_pointer_IR", "optic_Holosight_blk_F", ["30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green_mag_Tracer"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
+["arifle_Katiba_GL_F", "muzzle_snds_H", "acc_pointer_IR", "optic_Holosight_blk_F", ["30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green", "30Rnd_65x39_caseless_green_mag_Tracer"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
 ["arifle_VelkoR5_GL_lxWS", "suppressor_l_sand_lxWS", "acc_pointer_IR_sand_lxWS", "optic_r1_high_sand_lxWS", ["35Rnd_556x45_Velko_reload_tracer_green_lxWS","35Rnd_556x45_Velko_tracer_green_lxWS"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
 ["glaunch_GLX_lxWS", "", "", "optic_MRCO", ["1Rnd_Pellet_Grenade_shell_lxWS", "1Rnd_HE_Grenade_shell"], ["1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell", "UGL_FlareGreen_F"], ""],
 ["sgun_aa40_lxWS", "muzzle_snds_12Gauge_lxWS", "acc_pointer_IR_sand_lxWS", "optic_Holosight", ["20Rnd_12Gauge_AA40_HE_Tan_lxWS", "8Rnd_12Gauge_AA40_HE_Tan_lxWS", "8Rnd_12Gauge_AA40_HE_Tan_lxWS"], [], ""]
