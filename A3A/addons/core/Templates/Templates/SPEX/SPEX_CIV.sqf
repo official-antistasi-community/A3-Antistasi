@@ -27,8 +27,8 @@
     "SPE_OpelBlitz_Ambulance", 1.5, 
     "SPE_CCKW_353_Ambulance", 1.5,
     "SPE_FFI_OpelBlitz_Ambulance", 0.5, 
-    "SPEX_CW_G503_MB_Ambulance", 0.25,
-    "SPEX_CW_Trop_G503_MB_Ambulance", 0.25
+    "SPEX_CW_G503_MB_Ambulance", 0.125,
+    "SPEX_CW_Trop_G503_MB_Ambulance", 0.125
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivFuel", [

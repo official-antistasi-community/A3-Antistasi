@@ -319,9 +319,12 @@ _militiaLoadoutData set ["ATLaunchers", ["SPE_PzFaust_60m"]];
 _militiaLoadoutData set ["antiInfantryGrenades", ["SPE_Shg24","SPE_Shg24","SPE_Shg24_Frag"]];
 
 _militiaLoadoutData set ["rifles", [
-["SPE_K98", "SPE_ACC_K98_Bayo", "", "", ["SPE_5Rnd_792x57", "SPE_5Rnd_792x57", "SPE_5Rnd_792x57_t"], [], ""]
+["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""],
+["SPE_K98", "SPE_ACC_K98_Bayo", "", "", ["SPE_5Rnd_792x57", "SPE_5Rnd_792x57", "SPE_5Rnd_792x57_t"], [], ""],
+["SPE_K98", "", "", "", ["SPE_5Rnd_792x57", "SPE_5Rnd_792x57", "SPE_5Rnd_792x57_t"], [], ""]
 ]];
 _militiaLoadoutData set ["shotGuns", [
+["SPE_Fusil_Mle_208_12", "", "", "", ["SPE_2Rnd_12x65_Slug","SPE_2Rnd_12x65_Pellets"], [], ""],
 ["SPE_Fusil_Mle_208_12", "", "", "", ["SPE_2Rnd_12x65_Pellets"], [], ""],
 ["SPE_Fusil_Mle_208_12", "", "", "", ["SPE_2Rnd_12x65_Slug"], [], ""]
 ]];
