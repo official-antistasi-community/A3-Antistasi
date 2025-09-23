@@ -268,6 +268,10 @@ addMissionEventHandler ["BuildingChanged", {
         // Delete any furniture
         private _attached = _oldBuilding getVariable ["A3A_furniture", []];
         { deleteVehicle _x } forEach _attached;
+
+        // Delete police car from garrison because the spawn place won't be saved
+        private _vehicles = A3A_garrison get _city get "vehicles";
+        A3A_garrison get _city set ["vehicles", _vehicles select { _x#1 isEqualType [] }];
     };
 
     if (_isRuin) then {
