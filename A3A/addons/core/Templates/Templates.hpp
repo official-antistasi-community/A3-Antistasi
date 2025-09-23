@@ -191,7 +191,7 @@ class Templates
         lore = $STR_A3A_templates_lore_CIV;
     };
     
-    class Vanilla_TNA : Vanilla_Base
+    class Vanilla_Civ_TNA : Vanilla_Base
     {
         side = "Civ";
         flagTexture = "\A3\Data_F_Exp\Flags\flag_Tanoa_CO.paa";
