@@ -193,7 +193,6 @@ switch (_mode) do
             _confirmText = _confirmText + format [localize "STR_A3A_fn_GUI_setupLoadgameTab_loadName" + ", ", _saveData get "name"];
         };
         _saveData set ["useNewNamespace", cbChecked (_display displayCtrl A3A_IDC_SETUP_NAMESPACECHECKBOX)];
-        A3A_useJSONSave = _isNewGame; // controls if the config save is deleted later
 
         // Factions tab: [factions, addonvics, DLC]
         private _factionData = ["getFactions"] call A3A_GUI_fnc_setupFactionsTab;

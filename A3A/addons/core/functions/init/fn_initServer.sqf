@@ -224,7 +224,6 @@ publicVariable "theBoss";       // need to publish this even if empty
 // Needs params + factions. Might depend on saved data in the future
 call A3A_fnc_initSupports;
 
-diag_log jna_datalist;
 // Needs saved arsenal data
 call A3A_fnc_generateRebelGear;
 

@@ -115,7 +115,7 @@ switch (_mode) do
         [_importData, cbChecked _namespaceCB] remoteExecCall ["A3A_fnc_importSave", 2];
 
         closeDialog 0;
-        A3A_setup_saveData = nil;
-        closeDialog 0;              // hopefully closes the parent... 
+        //A3A_setup_saveData = nil;
+        //closeDialog 0;              // hopefully closes the parent... 
     };
 };

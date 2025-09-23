@@ -122,12 +122,12 @@ switch (_mode) do
             private _realMap = _x get "map";
             _x set ["mapStr", _prettyMapHM getOrDefault [_realMap, _realMap]];
             _x set ["fileStr", ["Old", "New"] select ((_x get "serverID") isEqualType false)];
+            if (!isNil {_x get "version"}) then {
+                _x set ["verStr", (_x get "version") splitString "." select [0, 3] joinString "."];        // cap to a.b.c
+            };
             if (!isNil {_x get "ended"}) then { _x set ["timeStr", "Ended"]; continue };
             if (!isNil {_x get "saveTime"}) then {
                 _x set ["timeStr", [_x get "saveTime", systemTimeUTC] call _fnc_getTimeDiffString];
-            };
-            if (!isNil {_x get "version"}) then {
-                _x set ["verStr", (_x get "version") splitString "." select [0, 3] joinString "."];        // cap to a.b.c
             };
         } forEach _saveData;
 

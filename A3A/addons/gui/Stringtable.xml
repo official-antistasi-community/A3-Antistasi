@@ -4289,7 +4289,7 @@
         <Chinesesimp>载入游戏</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_noExportOld">
-        <Original>Only saves with a version after 3.9.0 can be exported. Load a game and run a persistent save to upgrade the version</Original>
+        <Original>Only saves of version 3.10.0 or later can be exported. Load a game and run a persistent save to upgrade the version</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_noExportSel">
         <Original>No save selected</Original>

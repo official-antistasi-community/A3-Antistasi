@@ -142,7 +142,7 @@ if (_varName in _specialVarLoads) then {
             (_varvalue select _i) params ["_typeMine", "_posMine", "_detected", "_dirMine"];
             private _mineX = createVehicle [_typeMine, _posMine, [], 0, "CAN_COLLIDE"];
             if !(isNil "_dirMine") then { _mineX setDir _dirMine };
-            {(_numToSide getorDefault [_x,Occupants]) revealMine _mineX} forEach _detected;
+            {(_numToSide getorDefault [_x, _x]) revealMine _mineX} forEach _detected;       // backwards compat: works with both number & side
         };
     };
     if (_varName == 'newGarrison') then {

@@ -18,7 +18,7 @@ FIX_LINE_NUMBERS()
 
 params ["_varName", "_varValue", "_saveTarget"];
 
-if (isNil "A3A_saveVersion") exitWith {};               // No data yet written for this game, don't add trash
+if (isNil "_saveTarget" and isNil "A3A_saveVersion") exitWith {};               // No data yet written for this game, don't add trash
 
 Info_1("Writing back save var with params %1", _this);
 
