@@ -29,7 +29,8 @@
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
 private _APCs = ["a3a_B_T_APC_Wheeled_01_cannon_F", "B_T_APC_Tracked_01_rcws_F"];           // CRV has no cargo: "B_T_APC_Tracked_01_CRV_F"
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
-private _Tanks = ["B_T_MBT_01_TUSK_F", "B_T_MBT_01_cannon_F"];
+["vehiclesTanks", ["B_T_MBT_01_cannon_F"]] call _fnc_saveToTemplate;
+["vehiclesHeavyTanks", ["B_T_MBT_01_TUSK_F"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["B_T_APC_Tracked_01_AA_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
@@ -115,7 +116,6 @@ if ("ef" in A3A_enabledDLC) then {
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;
 
 ["vehiclesAPCs", _APCs] call _fnc_saveToTemplate;
-["vehiclesTanks", _Tanks] call _fnc_saveToTemplate;
 
 ["vehiclesHelisTransport", _HelisTransport] call _fnc_saveToTemplate;
 
