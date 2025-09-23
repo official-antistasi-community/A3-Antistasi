@@ -7,7 +7,7 @@
     ["SPE_M20_AUC", ["cost", 60]],
     // M8 is too powerful for a lightarmed and not powerful enough for lighttank
     ["SPE_M8_LAC", ["cost", 80]],
-    ["SPE_M8_LAC_ringMount", ["cost", 80]]
+    ["SPE_M8_LAC_ringMount", ["cost", 80]],
     
     //Same as regular tanks, just rarer
     ["SPEX_GER_Sherman_I", ["cost", 230], ["threat", 300]],

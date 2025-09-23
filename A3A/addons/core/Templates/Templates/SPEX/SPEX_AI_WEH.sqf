@@ -330,7 +330,7 @@ _militiaLoadoutData set ["slHelmets", ["H_SPE_Milice_beret_2"]];
 _militiaLoadoutData set ["ATLaunchers", []];
 _militiaLoadoutData set ["sidearms", []];
 
-_militiaLoadoutData set ["antiInfantryGrenades", ["SPE_Shg24"]]
+_militiaLoadoutData set ["antiInfantryGrenades", ["SPE_Shg24"]];
 
 _militiaLoadoutData set ["rifles", [
 ["SPEX_No1_Mk3_Enfield", "SPEX_ACC_P1907_Bayo", "", "", ["SPEX_10Rnd_770x56"], [], ""],
