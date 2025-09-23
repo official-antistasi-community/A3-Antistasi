@@ -79,7 +79,7 @@ if ("expansion" in A3A_enabledDLC) then {
     _vehiclesLightArmed append ["a3a_LSV_02_AT_black_F","a3a_LSV_01_AT_black_F","O_LSV_02_armed_black_F","B_LSV_01_armed_black_F","O_LSV_02_armed_black_F","B_LSV_01_armed_black_F"];
 };
 if ("tanks" in A3A_enabledDLC) then {
-	["vehiclesHeavyTanks", ["a3a_MBT_04_cannon_black_F", "a3a_MBT_04_command_black_F"]] call _fnc_saveToTemplate;
+	["vehiclesHeavyTanks", ["a3a_MBT_04_cannon_black_F", "a3a_MBT_04_cannon_black_F", "a3a_MBT_04_command_black_F"]] call _fnc_saveToTemplate;
 };
 if ("enoch" in A3A_enabledDLC) then {
     _vehiclesPolice append ["B_GEN_Offroad_01_comms_F","B_GEN_Offroad_01_covered_F"];
