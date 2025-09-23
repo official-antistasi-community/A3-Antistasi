@@ -37,7 +37,7 @@ class CfgPatches {
         authorUrl = "";
         VERSION_CONFIG;
     };
-    /*
+    
     //ugly hack to deal with broken requiredAddons from EAW_Intros
     class WW2_SPE_Core_c_UI_MenuBackgrounds_c {};
     class WW2_SPE_Normandy_c {};
@@ -52,5 +52,4 @@ class CfgPatches {
     class WW2_SPE_Core_t_MenuBackgrounds_t {};
     class WW2_SPE_Core_t_GUI_t {};
     class WW2_SPE_Core_c_UI_MainMenu_c{};
-    */
 };
