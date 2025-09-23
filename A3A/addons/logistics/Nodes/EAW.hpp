@@ -33,7 +33,7 @@ class EAW_Cars2_EAW_T94_Truck : TRIPLES(ADDON,Nodes,Base)
         class Node1
         {
             offset[] = {0,0.15,-0.5};
-            seats[] = {0,7};
+            seats[] = {0,7, 12};
         };
         class Node2
         {
