@@ -21,6 +21,12 @@ A3A_vestDamageAdj = createHashMap;
 // Data to prevent over-using the same loadouts
 A3A_loadoutShuffleBuffers = createHashMap;
 
+// List of unit classnames Antistasi uses
+A3A_customUnitClasses = ["I_G_soldier_F", "I_G_Soldier_TL_F", "I_G_Soldier_AR_F", "I_G_medic_F", "I_G_engineer_F", "I_G_Soldier_GL_F", // Player units
+						"a3a_unit_west", "a3a_unit_east", "a3a_unit_civ", "a3a_unit_reb", "a3a_unit_reb_unarmed", "a3a_unit_reb_medic", "a3a_unit_reb_sniper", "a3a_unit_reb_marksman", // spawned units
+    					"a3a_unit_reb_lat", "a3a_unit_reb_mg", "a3a_unit_reb_exp", "a3a_unit_reb_gl", "a3a_unit_reb_sl", "a3a_unit_reb_eng", "a3a_unit_reb_at", "a3a_unit_reb_aa", "a3a_unit_reb_petros"
+];
+
 ////////////////////////////////////
 //     BEGIN SIDES AND COLORS    ///
 ////////////////////////////////////
