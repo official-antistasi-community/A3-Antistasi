@@ -433,6 +433,7 @@ private _crewLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _crewLoadoutData set ["uniforms", ["U_SPEX_CW_BD_open"]];
 _crewLoadoutData set ["vests", ["V_SPEX_CW_Vest_P37_N61_rac"]];
 _crewLoadoutData set ["helmets", ["H_SPEX_CW_beret_pz_no38_goggle","H_SPEX_CW_beret_pz_no38","H_SPEX_CW_beret_pz_goggle","H_SPEX_CW_beret_pz","H_SPEX_CW_Helmet_RAC_no38", "H_SPEX_CW_Helmet_RAC"]];
+_crewLoadoutData set ["backpacks", []];
 
 private _pilotLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["uniforms", ["U_SPEX_CW_RAF_BD", "U_SPEX_CW_RAF_BD_glove"]];
@@ -780,6 +781,7 @@ private _crewTemplate = {
     ["helmets"] call _fnc_setHelmet;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
+    ["backpacks"] call _fnc_setBackpack;
 
     ["SMGs"] call _fnc_setPrimary;
     ["primary", 2] call _fnc_addMagazines;
