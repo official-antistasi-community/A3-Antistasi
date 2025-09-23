@@ -36,12 +36,12 @@
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;             // armed, lightly armoured, with 6-8 passengers 
 ["vehiclesAPCs", []] call _fnc_saveToTemplate;                  // armed with enclosed turret, armoured, with 6-8 passengers
 ["vehiclesIFVs", ["LIB_UniversalCarrier", "LIB_DAK_SdKfz251"]] call _fnc_saveToTemplate;                  // capable of surviving multiple rockets, cannon armed, with 6-8 passengers
-["vehiclesLightTanks", ["EAW_T26_NRA", "EAW_Vickers6Ton", "EAW_Panzar1"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks", ["EAW_T26_NRA", "EAW_Vickers6Ton"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["EAW_ChiHa", "EAW_ChiHa_Kai"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
 
 
-["vehiclesTransportBoats", ["EAW_Daihatsu_LC_IJA"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["LIB_UK_LCI"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
@@ -99,6 +99,7 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 ["minefieldAPERS", ["LIB_SMI_35_1_MINE","LIB_SMI_35_MINE", "LIB_shumine_42_MINE"]] call _fnc_saveToTemplate;
 
 #include "..\IFA\IFA_Vehicle_Attributes.sqf"
+#include "EAW_Vehicle_Attributes.sqf"
 
 /////////////////////
 ///  Identities   ///
@@ -152,8 +153,8 @@ _loadoutData set ["signalsmokeGrenades", ["LIB_US_M18_Green","LIB_US_M18_Red","L
 //Basic equipment. Shouldn't need touching most of the time.
 //Mods might override this, or certain mods might want items removed (No GPSs in WW2, for example)
 _loadoutData set ["maps", ["ItemMap"]];
-_loadoutData set ["watches", ["ItemWatch"]];
-_loadoutData set ["compasses", ["ItemCompass"]];
+_loadoutData set ["watches", ["LIB_GER_ItemWatch"]];
+_loadoutData set ["compasses", ["LIB_GER_ItemCompass_deg"]];
 _loadoutData set ["radios", ["ItemRadio"]];
 _loadoutData set ["gpses", []];
 _loadoutData set ["NVGs", ["EAW_NanjingBand"]];
@@ -336,17 +337,11 @@ _militiaLoadoutData set ["slSidearms", ["EAW_Dao"]];
 
 private _crewLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
-/*
-private _crewLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
-_crewLoadoutData set ["uniforms", []];
-_crewLoadoutData set ["vests", []];
-_crewLoadoutData set ["helmets", []];
+_crewLoadoutData set ["facewear", ["G_LIB_GER_Headset"]];
+_crewLoadoutData set ["backpacks", []];
+_pilotLoadoutData set ["facewear", ["G_LIB_GER_Headset"]];
+_pilotLoadoutData set ["backpacks", ["B_LIB_US_TypeA3"]];
 
-private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
-_pilotLoadoutData set ["uniforms", []];
-_pilotLoadoutData set ["vests", []];
-_pilotLoadoutData set ["helmets", []];
-*/
 
 
 /////////////////////////////////
@@ -679,6 +674,7 @@ private _crewTemplate = {
     ["facewear"] call _fnc_setFacewear;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
+    ["backpacks"] call _fnc_setBackpack;
 
     ["carbines"] call _fnc_setPrimary;
     ["primary", 3] call _fnc_addMagazines;
