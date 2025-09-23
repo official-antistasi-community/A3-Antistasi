@@ -1570,6 +1570,15 @@ class Templates
         shortName = "US";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
     };
+    class IFA_USMC : IFA_US
+    {
+        side = "Occ";
+        flagTexture = "a3\data_f\flags\flag_us_co.paa";
+        name = "IFA US Marines";
+        file = "IFA_AI_USMC";
+        shortName = "USMC";
+        lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
+    };
     class IFA_UK : IFA_Base
     {
         side = "Occ";
