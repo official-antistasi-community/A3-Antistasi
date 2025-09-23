@@ -2117,111 +2117,103 @@ switch _mode do {
 		_item = _data select 0;
 		_amount = _data select 1;
 
-		_load = 0;
 		_items = [];
 		_itemChanged = false;
 
-		_ctrlLoadCargo = _display displayctrl IDC_RSCDISPLAYARSENAL_LOADCARGO;
-
-		//save old weight
-		_loadOld = switch _selected do{
-			case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM: {loaduniform player};
-			case IDC_RSCDISPLAYARSENAL_TAB_VEST: {loadvest player};
-			case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {loadbackpack player};
+		private _container = switch _selected do {
+			case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM: {uniformContainer player};
+			case IDC_RSCDISPLAYARSENAL_TAB_VEST: {vestContainer player;};
+			case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {backpackContainer player;};
 		};
+		if (isNil "_container") exitWith {};			// hit this once. Some sort of UI timing issue? Whatever.
 
+		// Count to add or remove
+		private _count = 1;
+		private _shift = uiNamespace getVariable ["arsenalShift", false];
+		private _ctrl = uiNamespace getVariable ["arsenalCtrl", false];
+		if (_shift && !_ctrl) then { _count = _count * 5 };
+		if (!_shift && _ctrl) then { _count = _count * 10 };
+		if (_shift && _ctrl) then { _count = _count * 25 };
 
-		//remove or add
-		_count = 1;
+		if (_amount == -1) then { _amount = 1e6 };			// should be high enough even for bullets. Simplifies logic.
+		private _isMag = _index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG,IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL];
+		private _magBullets = if (_isMag) then { getNumber (configFile >> "CfgMagazines" >> _item >> "count") };
 
-		if(((_amount > 0 || _amount == -1) || _add < 0) && (_add != 0))then{
+		private _change = 0;				// Amount we need to add to arsenal (in bullets, for mags)
+		if (_add > 0) then {//add
 
-			if (_add > 0) then {//add
-				_min = [_index, _item] call _minItemsMember;
-				if((_amount <= _min) AND (_amount != -1) AND !([player] call A3A_fnc_isMember)) exitWith{
-					['showMessage',[_display, localize "STR_A3A_JNA_memberonly"]] call jn_fnc_arsenal;
+			if (_amount == 0) exitWith {};
+			if (_isMag) then { _count = _count * _magBullets };
+
+			private _min = [_index, _item] call _minItemsMember;
+			if (player call A3A_fnc_isMember) then { _min = 0 };
+			if (_amount <= _min) exitWith {
+				['showMessage',[_display, localize "STR_A3A_JNA_memberonly"]] call jn_fnc_arsenal;
+			};
+			// Cap to amount available
+			_count = _count min (_amount - _min);
+
+			if (_isMag) then {
+				private _magCount = floor (_count / _magBullets);
+				private _remCount = _count % _magBullets;
+
+				while {!(_container canAdd [_item, _magCount])} do { _magCount = _magCount - 1 };
+				_container addMagazineAmmoCargo [_item, _magCount, _magBullets];
+				_change = _change - _magCount*_magBullets;
+
+				if (_remCount > 0 and _container canAdd _item) then {
+					_container addMagazineAmmoCargo [_item, 1, _remCount];
+					_change = _change - _remCount;
 				};
-				if(_index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG,IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL])then{//magazines are handeld by bullet count
-					//check if full mag can be optaind
-					_count = getNumber (configfile >> "CfgMagazines" >> _item >> "count");
-					if(_amount != -1)then{
-						if(_amount<_count)then{_count = _amount};
+			} else {
+				while {!(_container canAdd [_item, _count])} do { _count = _count - 1 };
+				_container addItemCargoGlobal [_item, _count];				// works on magazines too
+				_change = _change - _count;
+			};
+		} else {//remove
+			// Need to include everything from CfgMagazines here, otherwise the commands don't work
+			if (_isMag or _index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOTHROW, IDC_RSCDISPLAYARSENAL_TAB_CARGOPUT]) then {
+				private _mags = magazinesAmmoCargo _container;
+				clearMagazineCargoGlobal _container;
+				{
+					if(_x#0 isEqualTo _item && _count > 0) then {
+						_change = _change + _x#1;		// count the bullets removed
+						_count = _count - 1;
+					} else {
+						_container addMagazineAmmoCargo [_x#0, 1, _x#1];
 					};
-					_canAdd = false;
-					_container = switch _selected do{
-						case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM: {_canAdd = player canAddItemToUniform _item; uniformContainer player};
-						case IDC_RSCDISPLAYARSENAL_TAB_VEST: {_canAdd = player canAddItemToVest _item; vestContainer player;};
-						case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {_canAdd = player canAddItemToBackpack _item; backpackContainer player;};
+				} forEach _mags;
+			} else {
+				//save items in list and remove them, then re-add
+				private _items = itemCargo _container;
+				clearItemCargoGlobal _container;
+				{
+					if(_x isEqualTo _item && _count > 0) then {
+						_change = _change + 1;
+						_count = _count - 1;
+					} else {
+						_container addItemCargoGlobal [_x, 1];
 					};
-					if(_canAdd)then{
-						_container addMagazineAmmoCargo [_item,1,_count];
-					};
-				}else{
-					switch _selected do{
-						case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM: {player additemtouniform _item;};
-						case IDC_RSCDISPLAYARSENAL_TAB_VEST: {player additemtovest _item;};
-						case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {player additemtobackpack _item;};
-					};
-				};
-			} else {//remove
-				if(_index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG,IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL])then{
-
-					_container = switch _selected do{
-						case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM: {uniformContainer player};
-						case IDC_RSCDISPLAYARSENAL_TAB_VEST: {vestContainer player;};
-						case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {backpackContainer player;};
-					};
-
-					//save mags in list and remove them
-					_mags = magazinesAmmoCargo _container;
-					if (_mags findIf {(_x select 0) isEqualTo _item} == -1) exitWith {};
-					clearMagazineCargoGlobal _container;
-
-					//add back magazines exept the one that needs to be removed
-					_removed = false;
-					{
-						if((_x select 0) isEqualTo _item && !_removed)then{
-							_count = _x select 1;//this mag is removed
-							_removed = true;
-						}else{
-							_container addMagazineAmmoCargo [(_x select 0),1,(_x select 1)];
-						};
-					} forEach _mags;
-
-				}else{
-					switch _selected do{
-						case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM: {player removeitemfromuniform _item;};
-						case IDC_RSCDISPLAYARSENAL_TAB_VEST: {player removeitemfromvest _item;};
-						case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {player removeitemfrombackpack _item;};
-					};
-				};
+				} forEach _items;
 			};
 		};
 
-		//check if item was added
-		_load = switch _selected do{
-			case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM: {loaduniform player};
-			case IDC_RSCDISPLAYARSENAL_TAB_VEST: {loadvest player};
-			case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {loadbackpack player};
-		};
-
-		if!(_loadOld isEqualTo _load)then{
-			_amountOld = parseNumber (_ctrlList lnbtext [_lbcursel,2]);
-			if(_add > 0)then{
-				_ctrlList lnbsettext [[_lbcursel,2],str (_amountOld + _count)];
-				[_index, _item, _count]call jn_fnc_arsenal_removeItem;
-			}else{
-				_ctrlList lnbsettext [[_lbcursel,2],str (_amountOld - _count)];
-				[_index, _item, _count] call jn_fnc_arsenal_addItem;
+		if (_change != 0) then {
+			private _amountOld = parseNumber (_ctrlList lnbtext [_lbcursel,2]);
+			_ctrlList lnbsettext [[_lbcursel,2],str (_amountOld - _change)];
+			if (_change < 0) then {
+				[_index, _item, -_change] call jn_fnc_arsenal_removeItem;
+			} else {
+				[_index, _item, _change] call jn_fnc_arsenal_addItem;
 			};
 		};
 
-		_load = switch _selected do{
+		private _load = switch _selected do{
 			case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM: {loaduniform player};
 			case IDC_RSCDISPLAYARSENAL_TAB_VEST: {loadvest player};
 			case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {loadbackpack player};
 		};
-
+		private _ctrlLoadCargo = _display displayctrl IDC_RSCDISPLAYARSENAL_LOADCARGO;
 		_ctrlLoadCargo progresssetposition _load;
 
 		["SelectItemRight",[_display,_ctrlList,_index]] call jn_fnc_arsenal;
