@@ -363,7 +363,7 @@ class Templates
     {
         requiredAddons[] = {"A3_Aegis_Weapons_F_Aegis"};
         logo = "\A3_Aegis\Data_F_Aegis\Logos\arma3_aegis_logo_CA.paa";
-        basepath = QPATHTOFOLDER(Templates\Templates\Aegis)
+        basepath = QPATHTOFOLDER(Templates\Templates\Aegis);
         priority = 25;
     };
 
