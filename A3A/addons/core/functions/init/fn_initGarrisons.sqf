@@ -28,6 +28,9 @@ if (gameMode >= 3) then
     [_x] call A3A_fnc_buildEnemyGarrison;
 } forEach (markersX - ["Synd_HQ"]);
 
+// Initialize enemy roadblocks & specops sites
+call A3A_fnc_initMinorSites;
+
 // Add police stations in cities (done before buildCity because they share vehicle places)
 call A3A_fnc_initPoliceStations;
 
