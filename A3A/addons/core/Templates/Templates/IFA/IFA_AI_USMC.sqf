@@ -6,8 +6,8 @@
 ["spawnMarkerName", "USMC Support Corridor"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_FIA_F"] call _fnc_saveToTemplate;
-["flagTexture", "a3\data_f\flags\flag_us_co.paa"] call _fnc_saveToTemplate;
-["flagMarkerType", "flag_USA"] call _fnc_saveToTemplate;
+["flagTexture", "\ca\data\flag_usmc_co.paa"] call _fnc_saveToTemplate;
+["flagMarkerType", "Faction_USMC"] call _fnc_saveToTemplate;
 
 ["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 ["attributeLowAir", true] call _fnc_saveToTemplate;

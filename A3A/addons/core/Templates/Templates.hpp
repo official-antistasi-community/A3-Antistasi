@@ -1573,7 +1573,7 @@ class Templates
     class IFA_USMC : IFA_US
     {
         side = "Occ";
-        flagTexture = "a3\data_f\flags\flag_us_co.paa";
+        flagTexture = "\ca\data\flag_usmc_co.paa";
         name = "IFA US Marines";
         file = "IFA_AI_USMC";
         shortName = "USMC";
