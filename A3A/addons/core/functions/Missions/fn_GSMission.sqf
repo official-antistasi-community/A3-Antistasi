@@ -41,13 +41,14 @@ private _identity = createHashMapFromArray [
     ["pitch", 1.1]
 ];
 
-private _coolerPetros = [createGroup teamPlayer, FactionGet(reb,"unitPetros"), getMarkerPos _city, [], 10, "NONE", _identity] call A3A_fnc_createUnit;
+private _coolerPetros = [createGroup [teamPlayer, true], FactionGet(reb,"unitPetros"), getMarkerPos _city, [], 10, "NONE", _identity] call A3A_fnc_createUnit;
 // copy his drip. 
 private _notCoolPetrosLoadout = getUnitLoadout petros;
 _coolerPetros setUnitLoadout _notCoolPetrosLoadout;
 
 // place inside like a garrison.
-private _garrisonGroups = [group _coolerPetros, getMarkerPos _city, 200] call A3A_fnc_patrolGroupGarrison;
+private _buildingPlaces = [_city, 200, 1] call A3A_fnc_patrolGetBuildingPlaces;
+private _garrisonGroups = [group _coolerPetros, _buildingPlaces] call A3A_fnc_patrolGroupGarrison;
 [[teamPlayer,civilian],_taskId,[_textX,_taskTitle,""],getPosATL _coolerPetros,false,0,true,_taskIcon,true] call BIS_fnc_taskCreate;
 [_taskId, "LOG", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
@@ -180,4 +181,10 @@ sleep 5;
 [_dropPos, _gunshopList, _patrolGroup] spawn A3A_fnc_supplyDrop;
 
 _coolerPetros enableAI "ALL";
-[group _coolerPetros] spawn A3A_fnc_groupDespawner;
+
+// Custom despawner because it's a weird case. Solomon vanishes back into the shadows once players are gone.
+while {true} do {
+    sleep 10;
+    private _players = allPlayers - entities "HeadlessClient_F";
+    if (_players inAreaArray [getPosATL _coolerPetros, 200, 200] isEqualTo []) exitWith { deleteVehicle _coolerPetros };
+};

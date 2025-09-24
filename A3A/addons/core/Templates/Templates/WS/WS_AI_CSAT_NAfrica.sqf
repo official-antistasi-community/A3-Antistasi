@@ -32,7 +32,7 @@ private _cargoTrucks = ["O_Truck_02_transport_F", "O_Truck_02_covered_F", "O_Tru
 private _Tanks = ["O_MBT_02_cannon_F"];
 ["vehiclesAA", ["O_APC_Tracked_02_AA_F"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["O_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["O_Boat_Armed_01_hmg_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["a3a_APC_Wheeled_02_rcws_v2_F"]] call _fnc_saveToTemplate;
 
@@ -79,7 +79,7 @@ if ("enoch" in A3A_enabledDLC) then
 };
 if ("tanks" in A3A_enabledDLC) then
 {
-    _Tanks append ["O_MBT_04_cannon_F","O_MBT_04_command_F"]; 
+	["vehiclesHeavyTanks", ["O_MBT_04_cannon_F", "O_MBT_04_cannon_F", "O_MBT_04_command_F"]] call _fnc_saveToTemplate;
 };
 if ("expansion" in A3A_enabledDLC) then
 {

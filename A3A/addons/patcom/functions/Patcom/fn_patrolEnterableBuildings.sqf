@@ -1,11 +1,11 @@
 /*
-    Author: [Hazey]
+    Author: [Hazey] and John Jordan
     Description:
         Returns an array of enterable buildings
 
     Arguments:
-        <Array> Position you want to check for enterable houses
-        <Number> How far you want to check for enterable houses
+        <Array or String> Search center or marker. If marker, use area as constraint.
+        <Number> Maximum search radius
 
     Return Value:
         <Array> List of enterable houses.
@@ -23,13 +23,12 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_position", "_radius"];
-private _enterable = [];
+params ["_posOrMarker", "_radius"];
 
-{
-    if ([_x] call A3A_fnc_patrolBuildingEnterable) then {
-        _enterable pushback _x;
-    };
-} forEach (nearestObjects [_position, ["House","Building"], _radius]);
+private _buildings = if (_posOrMarker isEqualType "") then {
+    nearestObjects [markerPos _posOrMarker, ["House","Building"], _radius] inAreaArray _posOrMarker;
+} else {
+    nearestObjects [_posOrMarker, ["House","Building"], _radius];
+};
 
-_enterable;
+_buildings select { _x call A3A_fnc_patrolBuildingEnterable };

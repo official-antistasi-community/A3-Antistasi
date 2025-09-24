@@ -66,6 +66,78 @@ class CfgWorlds {
                 radiusB = 150;
                 type = "NameVillage";
             };
+            class vil_Worb {
+                name = "Worb";
+                position[] = {2523,7656};
+                radiusA = 150;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Horw {
+                name = "Horw";
+                position[] = {17231,13916};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Brienz {
+                name = "Brienz";
+                position[] = {14420.4,2956.29};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Sissach {
+                name = "Sissach";
+                position[] = {11224.5,8632.69};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Luzern {
+                name = "Luzern";
+                position[] = {14503.1,14136.4};
+                radiusA = 200;
+                radiusB = 200;
+                type = "NameCity";
+            };
+            class vil_Muttenz {
+                name = "Muttenz";
+                position[] = {6259.56,10349.7};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class Hof_Hungerschwand {
+                name = "Hof Hungerschwand";
+                position[] = {9009.93,3397.32};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Liestal {
+                name = "Liestal";
+                position[] = {12746.8,9583.47};
+                radiusA = 150;
+                radiusB = 150;
+                type = "NameVillage";
+            };
+            // Position changes for police stations
+            class vil_Bubendorf {
+                position[] = {3951.35,14350.5};
+                radiusA = 200;
+                radiusB = 200;
+            };
+            class vil_Lausen {
+                position[] = {12062.1,15421.9};
+                radiusA = 200;
+                radiusB = 200;
+            };
+            class vil_Wolhusen {
+                position[] = {14191.2,12738.4};
+                radiusA = 150;
+                radiusB = 150;
+            };
         };
     };
     class NapfWinter : CAWorld {
@@ -112,6 +184,78 @@ class CfgWorlds {
                 radiusA = 150;
                 radiusB = 150;
                 type = "NameVillage";
+            };
+            class vil_Worb {
+                name = "Worb";
+                position[] = {2523,7656};
+                radiusA = 150;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Horw {
+                name = "Horw";
+                position[] = {17231,13916};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Brienz {
+                name = "Brienz";
+                position[] = {14420.4,2956.29};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Sissach {
+                name = "Sissach";
+                position[] = {11224.5,8632.69};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Luzern {
+                name = "Luzern";
+                position[] = {14503.1,14136.4};
+                radiusA = 200;
+                radiusB = 200;
+                type = "NameCity";
+            };
+            class vil_Muttenz {
+                name = "Muttenz";
+                position[] = {6259.56,10349.7};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class Hof_Hungerschwand {
+                name = "Hof Hungerschwand";
+                position[] = {9009.93,3397.32};
+                radiusA = 100;
+                radiusB = 100;
+                type = "NameVillage";
+            };
+            class vil_Liestal {
+                name = "Liestal";
+                position[] = {12746.8,9583.47};
+                radiusA = 150;
+                radiusB = 150;
+                type = "NameVillage";
+            };
+            // Position changes for police stations
+            class vil_Bubendorf {
+                position[] = {3951.35,14350.5};
+                radiusA = 200;
+                radiusB = 200;
+            };
+            class vil_Lausen {
+                position[] = {12062.1,15421.9};
+                radiusA = 200;
+                radiusB = 200;
+            };
+            class vil_Wolhusen {
+                position[] = {14191.2,12738.4};
+                radiusA = 150;
+                radiusB = 150;
             };
         };
     };

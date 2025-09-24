@@ -18,6 +18,9 @@ debug = false;
 // Antistasi revive vest damage adjustments
 A3A_vestDamageAdj = createHashMap;
 
+// Data to prevent over-using the same loadouts
+A3A_loadoutShuffleBuffers = createHashMap;
+
 ////////////////////////////////////
 //     BEGIN SIDES AND COLORS    ///
 ////////////////////////////////////
@@ -41,7 +44,7 @@ PATCOM_VISUAL_RANGE = 400; // How far before PATCOM can start to detect enemies.
 PATCOM_TARGET_TIME = 120; // How long before PATCOM unit forgets about an enemy.
 PATCOM_ARTILLERY_MANAGER = true; // Allow Patcome to control AI Artillery. False is default A3 Artillery AI.
 PATCOM_ARTILLERY_DELAY = 30; // How quickly artillery becomes available again after firing in seconds.
-PATCOM_AI_STATICS = true; // Allow AI to find and arm statics near their group.
+PATCOM_AI_STATICS = false; // Allow AI to find and arm statics near their group.
 PATCOM_AI_STATIC_ARM = 120; // How long AI stay on static weapons after they arm them.
 
 ////////////////////////////////////////
@@ -146,7 +149,7 @@ A3A_milBuildingWhitelist = A3A_buildingWhitelist + [
 	"Land_vn_strazni_vez", "Land_vn_b_trench_firing_05", "Land_vn_cementworks_01_grey_f", "Land_vn_cementworks_01_brick_f", "Land_vn_radar_01_hq_f", "Land_vn_a_office01", "Land_SPE_Sandbag_Nest"
 ];
 A3A_buildingBlacklist = [
-	"Bridge_PathLod_base_F","Land_Slum_House03_F","Land_Bridge_01_PathLod_F","Land_Bridge_Asphalt_PathLod_F","Land_Bridge_Concrete_PathLod_F","Land_Bridge_HighWay_PathLod_F","Land_Bridge_01_F","Land_Bridge_Asphalt_F","Land_Bridge_Concrete_F","Land_Bridge_HighWay_F","Land_Canal_Wall_Stairs_F","warehouse_02_f",
+	"Bridge_PathLod_base_F","Land_Slum_House03_F","Land_Bridge_01_PathLod_F","Land_Bridge_Asphalt_PathLod_F","Land_Bridge_Concrete_PathLod_F","Land_Bridge_HighWay_PathLod_F","Land_Bridge_01_F","Land_Bridge_Asphalt_F","Land_Bridge_Concrete_F","Land_Bridge_HighWay_F","Land_Canal_Wall_Stairs_F","warehouse_02_f","Land_HouseV_1L2",
 	"cliff_wall_tall_f","cliff_wall_round_f","containerline_02_f","containerline_01_f","warehouse_01_f","quayconcrete_01_20m_f","airstripplatform_01_f","airport_02_terminal_f","cliff_wall_long_f","shop_town_05_f","Land_ContainerLine_01_F","Land_MilOffices_V1_F","Land_vn_b_trench_bunker_01_01","Land_vn_mil_barracks_i_ep1","Land_vn_barracks_03_f",
 	"Land_vn_barracks_01","Land_vn_b_trench_bunker_02_01","Land_vn_b_trench_bunker_02_02","Land_vn_hootch_01_12","Land_vn_hootch_01_11","Land_vn_barracks_02_f","Land_vn_hootch_01_01","Land_vn_barracks_05_f","Land_vn_barracks_04_f","Land_vn_barracks_03_01","Land_vn_barracks_03","Land_vn_barracks_03_02","Land_vn_b_trench_bunker_02_04",
 	"Land_vn_b_trench_bunker_02_03","Land_vn_b_trench_bunker_01_02","Land_vn_hootch_01_02","Land_vn_hootch_02_11","Land_vn_hootch_02_01","Land_vn_hootch_02_02","Land_vn_hootch_01_03","Land_vn_hootch_02_03","Land_vn_hootch_01_13","Land_vn_barracks_03_04","Land_vn_barracks_03_03","Land_vn_b_trench_bunker_03_02","Land_vn_b_trench_bunker_03_01",
@@ -158,6 +161,13 @@ A3A_buildingBlacklist = [
 //Lights and Lamps array used for 'Blackout'
 A3A_lampTypes = [
 	"Lamps_Base_F", "PowerLines_base_F", "Land_LampDecor_F", "Land_LampHalogen_F", "Land_LampHarbour_F", "Land_LampShabby_F", "Land_NavigLight", "Land_runway_edgelight", "Land_PowerPoleWooden_L_F", "Land_SPE_StreetLamp_Off", "Land_SPE_StreetLamp", "Land_SPE_StreetLamp_pole_off", "Land_SPE_StreetLamp_pole", "Land_SPE_StreetLamp_wall_off", "Land_SPE_StreetLamp_wall", "Land_SPE_Ger_Lamp", "Land_SPE_US_Lamp", "Land_SPE_Onion_Lamp"
+];
+
+// Sniper positions
+A3A_sniperBuildings = createHashMapFromArray [
+    // Radio towers
+    ["Land_TTowerBig_1_F", [0,2,3.81508]],
+    ["Land_TTowerBig_2_F", [0,1,0.785109]]
 ];
 
 ////////////////////////////////////

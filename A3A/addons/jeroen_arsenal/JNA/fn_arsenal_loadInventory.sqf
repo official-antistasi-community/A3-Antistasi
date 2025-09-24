@@ -195,11 +195,10 @@ _assignedItems = ((_inventory select 9) + [_inventory select 3] + [_inventory se
 			_item =_radioName;
 		};
 		
-        //Weapon Stack fix
-        private _weaponname = _item call bis_fnc_baseWeapon;
-        if!(_weaponname isEqualTo "")then{
-            _item = _weaponname
-        };
+		//Weapon Stack fix
+		if (isClass (configFile >> "CfgWeapons" >> _item)) then {
+			_item = _item call bis_fnc_baseWeapon;
+		};
 
         //RHS Sight Stack fix
         private _sightname = getText(configfile >> "CfgWeapons" >> _item >> "rhs_optic_base");

@@ -1531,6 +1531,9 @@
         <Turkish>Kasayı kamyona aktar</Turkish>
         <Chinesesimp>将弹药箱转移到运输载具上面</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_vehicle_garrison">
+        <Original>Add vehicle to garrison</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_flagaction_vehiclebuy">
         <Original>Buy Vehicle</Original>
         <German>Fahrzeug kaufen</German>
@@ -2365,9 +2368,9 @@
         <Chinesesimp>载具已出售</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_statistics_isComm">
-        <Original>Rank: %5 | HR: %1 | Your Money: %6 € | %11 Money: %2 € | Airstrikes: %7 | %9 Aggr: %3 | %10 Aggr: %4 | War Level: %8 | Undercover Mode: %12</Original>
-        <Korean>계급: %5 | 인력: %1 | 당신의 자금: %6 € | %11의 자금: %2 € | 공습: %7 | %9 공격성: %3 | %10 공격성: %4 | 전쟁 레벨: %8 | 위장 모드: %12</Korean>
-        <Russian>Ранг: %5 | HR: %1 | Ваши деньги: %6 € | Деньги %11: %2 € | Авиаудары: %7 | %9 Агрессия: %3 | %10 Агрессия: %4 | Уровень войны: %8 | Режим скрытности: %12</Russian>
+        <Original>Rank: %5 | HR: %1 | Your Money: %6 € | %10 Money: %2 € | %8 Aggr: %3 | %9 Aggr: %4 | War Level: %7 | Undercover Mode: %11</Original>
+        <Korean>계급: %5 | 인력: %1 | 당신의 자금: %6 € | %10의 자금: %2 € | %8 공격성: %3 | %9 공격성: %4 | 전쟁 레벨: %7 | 위장 모드: %11</Korean>
+        <Russian>Ранг: %5 | HR: %1 | Ваши деньги: %6 € | Деньги %10: %2 € | %8 Агрессия: %3 | %9 Агрессия: %4 | Уровень войны: %7 | Режим скрытности: %11</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_statistics_notComm">
         <Original>Commander: %3 | Rank: %2 | HR: %1 | Your Money: %4 € | %8 Aggr: %5 | %9 Aggr: %6 | War Level: %7 | Undercover Mode: %10</Original>
@@ -3418,7 +3421,7 @@
         <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;The following players are not at HQ: %1, and %2.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius_singleplayer">
-        <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;&lt;br/&gt;%1 is currently not at HQ.</Original>
+        <Original>All players must be in a 100m radius from HQ to be able to rest.\n\n%1 is currently not at HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_title">
         <Original>Skip Time / Rest</Original>
@@ -4821,6 +4824,12 @@
         <Korean>작전 구역 확보</Korean>
         <Russian>Защита Оперативной зоны</Russian>
         <Chinesesimp>肃清区域</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conq_police_text">
+        <Original>A police station is disturbing our operations in %1. Go there and destroy it before %2. You can ransack it for loot and intel first.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conq_police_title">
+        <Original>Destroy the police station</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_conv_ammo_text">
         <Original>A convoy from %1 is about to depart at %2. It will provide ammunition to %3. Try to intercept it. Steal or destroy that truck before it reaches its destination.</Original>
@@ -6498,6 +6507,9 @@
         <Czech>Ty a letecké vozidlo musí být v oblasti %1 letiště nebo HQ aby jsi ho mohl převést na body leteckého úderu.</Czech>
         <Chinesesimp>你在友军控制范围内的机场或者总部才能将空中载具转换成空中打击.</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_reinf_bombrun_no_cap">
+        <Original>You cannot convert this vehicle as it would give you %1 airstrike points, which brings you over the cap of %2 points.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_reinf_bombrun_no_destr">
         <Original>You can't convert a destroyed Air vehicle to Airstrikes.</Original>
         <Italian>Non puoi convertire Velivoli distrutt in Attacchi Aerei.</Italian>
@@ -7133,7 +7145,7 @@
         <Chinesesimp>这地方不存在可以调除的驻军</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_garrDia_no_wPost">
-        <Original>Additional garrison units cannot be added to observation posts.</Original>
+        <Original>Additional garrison units cannot be added to watchposts.</Original>
         <French>Les unités de garnison supplémentaires ne peuvent pas être ajoutées aux postes d'observation.</French>
         <Korean>관측소에는 주둔군을 더 추가할 수 없습니다.</Korean>
         <Russian>Дополнительные гарнизонные подразделения не могут быть добавлены к наблюдательным постам.</Russian>
@@ -7226,6 +7238,9 @@
         <Polish>Aby spełnić tą prośbe, musisz kontrolować lotnisko.</Polish>
         <Czech>Pro splnění tohoto požadavku musíte ovládat letiště.</Czech>
         <Chinesesimp>该请求要求你控制最起码一座机场.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_NatoBomb_no_distanceHQ">
+        <Original>Airstrike called off, this position is too close to HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_reinf_NatoBomb_no_radio">
         <Original>You need a radio in your inventory to be able to give orders to other squads.</Original>
@@ -8506,6 +8521,12 @@
         <Portuguese>Seleciona a zona para onde queres enviar as tropas selecionadas para guarnição.</Portuguese>
         <Turkish>Seçilen birlikleri garnizon olarak göndereceğiniz bölgeyi seçin.</Turkish>
         <Chinesesimp>选择您将作为驻军发送的区域。</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_garrison_vehicle_added">
+        <Original>Vehicle added to garrison. Cargo and inventory may not be preserved when you leave the area. Entering the vehicle will remove it from the garrison.</Original>
+      </Key>
+      <Key ID="STR_A3A_garrison_vehicle_outside">
+        <Original>This vehicle is not within a rebel garrison."</Original>
       </Key>
       <Key ID="STR_A3A_garrisons_header">
         <Original>Garrisons</Original>
@@ -11358,7 +11379,7 @@
         <Chinesesimp>拆除观察哨/路障</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_commander_comm_roadblock_delete_tooltip">
-        <Original>Remove selected observation post or roadblock, the money spent will be refunded</Original>
+        <Original>Remove selected watchpost or roadblock, the money spent will be refunded</Original>
         <Italian>Rimuovi il posto di osservazione o il posto di blocco selezionato, i soldi verranno rimborsati</Italian>
         <Spanish>Borra el punto de observación o bloqueo de carretera, el dinero sera reembolsado</Spanish>
         <French>Supprimer le poste d'observation ou le barrage routier sélectionné, l'argent sera remboursé</French>
@@ -13070,6 +13091,12 @@
         <Turkish>Performansı etkiler. Lütfen bunu dikkatli kullanın. Antistasi'nin kötü çalıştığını düşünüyorsanız daha düşük mesafelere ayarlayın.</Turkish>
         <Chinesesimp>影响性能。请小心使用。如果你觉得 Antistasi 运行不够流畅, 把它调到更低的距离。</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_maps_toggle_ui">
+        <Original>Toggle UI mode</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_maps_toggle_ui_tooltip">
+        <Original>Switch between opening old and new UI dialogs by default.</Original>
+      </Key>
     </Container>
     <Container name="gameMode_menu">
       <Key ID="STR_antistasi_dialogs_gameMode_menu">
@@ -13340,7 +13367,7 @@
         <Chinesesimp>出售载具</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_journal_entry_header_commander_12">
-        <Original>Observation Post</Original>
+        <Original>Watchpost</Original>
         <German>Beobachtungsposten</German>
         <Italian>Posto di Osservazione</Italian>
         <Spanish>Puesto de observación</Spanish>

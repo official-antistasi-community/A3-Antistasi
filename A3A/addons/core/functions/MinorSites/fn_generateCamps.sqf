@@ -54,16 +54,19 @@ private _weights = [];
     if (_bases inAreaArray [_campPos, distanceForLandAttack, distanceForLandAttack] isEqualTo []) then { continue };
 
     // reduce weight for other nearby camps
-    private _baseWeight = 1;
+    private _campWeight = 1;
     {
-        _baseWeight = _baseWeight - linearConversion [CAMP_MIN, CAMP_MAX, _x distance2d _campPos, 1, 0, true];
+        _campWeight = _campWeight - linearConversion [CAMP_MIN, CAMP_MAX, _x distance2d _campPos, 1, 0, true];
     } forEach (_curCamps inAreaArray [_campPos, CAMP_MAX, CAMP_MAX]);
-    if (_baseWeight <= 0) then { continue };
+    if (_campWeight <= 0) then { continue };
 
-    // Increase chance of spawning near rebel HQ
-    private _hqdist = _campPos distance2d markerPos "Synd_HQ";
+    // Increase chance of spawning near rebel HQ after game start
+    if (!isNil "serverInitDone") then {
+        private _hqdist = _campPos distance2d markerPos "Synd_HQ";
+        _campWeight = linearConversion [HQ_MIN, HQ_MAX, _hqdist, HQ_MUL*_campWeight, _campWeight, true];
+    };
+    _weights pushBack _campWeight;
     _sites pushBack _campPos;
-    _weights pushBack linearConversion [HQ_MIN, HQ_MAX, _hqdist, HQ_MUL*_baseWeight, _baseWeight, true];
 } forEach A3A_mapCamps;
 
 
@@ -95,7 +98,7 @@ while {true} do {
     } forEach (_sites inAreaArrayIndexes [_pos, CAMP_MAX, CAMP_MAX]);
 };
 
-if (_added != _numToAdd) then {
+if (_added < _numToAdd) then {
     Info_1("Ran out of valid camp positions for %1", _side);
 };
 

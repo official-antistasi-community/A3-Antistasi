@@ -23,5 +23,7 @@ clearBackpackCargoGlobal _vehicle;
     sleep 0.01;    // sleep here in case someone buys 1000 of something
 } forEach _items;
 
-private _reqMaxLoad = load _vehicle * maxLoad _vehicle;
-[_vehicle, _reqMaxLoad] remoteExec ["setMaxLoad", 2];
+if (load _vehicle > 1) then {
+    private _reqMaxLoad = load _vehicle * maxLoad _vehicle;
+    [_vehicle, _reqMaxLoad] remoteExec ["setMaxLoad", 2];
+};
