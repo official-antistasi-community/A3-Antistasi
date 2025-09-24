@@ -40,7 +40,7 @@
 ["vehiclesAA", ["UK3CB_CW_SOV_O_EARLY_ZsuTank"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
 
 
-["vehiclesTransportBoats", ["O_G_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["UK3CB_MDF_B_RHIB"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["UK3CB_CHD_O_Fishing_Boat_DSHKM"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["UK3CB_CW_SOV_O_EARLY_MTLB_PKT","UK3CB_CW_SOV_O_EARLY_MTLB_KPVT","UK3CB_CW_SOV_O_EARLY_MTLB_BMP"]] call _fnc_saveToTemplate;
 
@@ -892,7 +892,6 @@ private _unarmedTemplate = {
 
 private _traitorTemplate = {
     call _unarmedTemplate;
-    ["helmets"] call _fnc_setHelmet;
     ["traitorRifle"] call _fnc_setPrimary;
     ["primary", 2] call _fnc_addMagazines;
 
