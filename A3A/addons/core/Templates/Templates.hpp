@@ -1577,7 +1577,7 @@ class Templates
         name = "IFA US Marines";
         file = "IFA_AI_USMC";
         shortName = "USMC";
-        lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
+        lore = $STR_A3A_templates_lore_IFA_AI_USMC;
     };
     class IFA_UK : IFA_Base
     {
