@@ -157,9 +157,9 @@ _loadoutData set ["NVGs", []];
 _loadoutData set ["binoculars", ["LIB_Binocular_US"]];
 _loadoutData set ["rangefinders", ["LIB_Binocular_US"]];
 
-_loadoutData set ["uniforms", ["U_LIB_US_Rangers_Uniform", "U_LIB_US_Rangers_Private_1st", "U_LIB_US_Rangers_Corp"]];
-_loadoutData set ["slUniforms", ["U_LIB_US_Rangers_Sergeant"]];
-_loadoutData set ["engUniforms", ["U_LIB_US_Rangers_Eng"]];
+_loadoutData set ["uniforms", ["U_LIB_US_Private", "U_LIB_US_Private_1st", "U_LIB_US_Corp"]];
+_loadoutData set ["slUniforms", ["U_LIB_US_Sergeant"]];
+_loadoutData set ["engUniforms", ["U_LIB_US_Eng"]];
 _loadoutData set ["medUniforms", ["U_LIB_US_Rangers_Med"]];
 _loadoutData set ["vests", []];
 _loadoutData set ["backpacks", []];
@@ -207,7 +207,7 @@ _loadoutData set ["items_unarmed_extras", []];
 
 private _sfLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
-_sfLoadoutData set ["vests", ["V_LIB_US_Assault_Vest", "V_LIB_US_Assault_Vest_dday"]];
+_sfLoadoutData set ["vests", ["V_LIB_US_Assault_Vest", "V_LIB_US_Assault_Vest_Light"]];
 _sfLoadoutData set ["medVests", ["V_LIB_US_Assault_Vest_Light"]];
 _sfLoadoutData set ["slVests", ["V_LIB_US_Assault_Vest_Thompson"]];
 
@@ -310,7 +310,6 @@ _militaryLoadoutData set ["machineGuns", [
 ///////////////////////////////
 
 private _policeLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData; // touch and shit breaks
-_policeLoadoutData set ["uniforms", ["U_LIB_US_Private"]];
 _policeLoadoutData set ["vests", ["V_LIB_SOV_RA_Belt"]];
 _policeLoadoutData set ["helmets", ["H_LIB_US_Helmet"]]; //I did want a US Garrison/Side cap
 
@@ -324,9 +323,6 @@ _policeLoadoutData set ["rifles", [
 ////////////////////////////////
 
 private _militiaLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_militiaLoadoutData set ["uniforms", ["U_LIB_US_Private"]];
-_militiaLoadoutData set ["engUniforms", ["U_LIB_US_Eng"]];
-_militiaLoadoutData set ["slUniforms", ["U_LIB_US_Sergeant"]];
 _militiaLoadoutData set ["vests", ["V_LIB_US_Vest_Garand"]];
 _militiaLoadoutData set ["backpacks", ["B_LIB_US_M36"]];
 _militiaLoadoutData set ["atBackpacks", ["B_LIB_US_M36_Rocketbag_Empty"]];
