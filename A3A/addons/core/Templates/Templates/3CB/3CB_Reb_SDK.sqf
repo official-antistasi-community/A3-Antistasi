@@ -55,7 +55,7 @@ private _initialRebelEquipment = [
 "rhs_acc_2dpZenit", "Binocular"];
 
 _initialRebelEquipment append ["uk3cb_enfield_no4","uk3cb_enfield_no4_walnut","uk3cb_no4_enfield_303_10Rnd_magazine_Y","uk3cb_no4_enfield_303_10Rnd_magazine_YT",
-["uk3cb_1rnd_riflegrenade_mas_at_l", 20], ["uk3cb_1rnd_riflegrenade_mas_wp", 15], "uk3cb_1rnd_riflegrenade_mas_flare"];
+["uk3cb_1rnd_riflegrenade_mas_at_l", 60], ["uk3cb_1rnd_riflegrenade_mas_wp", 15], "uk3cb_1rnd_riflegrenade_mas_flare"];
 
 if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr", "tf_anprc154"]};
 if (A3A_hasTFAR && startWithLongRangeRadio) then {_initialRebelEquipment append ["tf_anprc155", "tf_anprc155_coyote"]};
