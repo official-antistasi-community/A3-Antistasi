@@ -31,8 +31,8 @@ class Params
     class limitedFT
     {
         title = $STR_A3A_Params_limitedFT_title;
-        values[] = {0,1};
-        texts[] = {$STR_A3A_Params_limitedFT_any, $STR_A3A_Params_limitedFT_hq};
+        values[] = {0,1,2};
+        texts[] = {$STR_A3A_Params_limitedFT_any, $STR_A3A_Params_limitedFT_hq, $STR_A3A_Params_generic_none};
         default = 1;
     };
     class civTraffic
@@ -105,6 +105,13 @@ class Params
         texts[] = {$STR_A3A_Params_generic_2min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_15min, $STR_A3A_Params_generic_30min, $STR_A3A_Params_generic_disabled};
         default = 900;
     };
+    class A3A_gcMaxObjects
+    {
+        title = $STR_A3A_Params_gcMaxObjects_title;
+        values[] = {50,100,150,200,300};
+        texts[] = {"50","100","150","200","300"};
+        default = 150;
+    };
     class A3A_GCThreshold
     {
         title = $STR_A3A_Params_GCThreshold_title;
@@ -132,6 +139,13 @@ class Params
         values[] = {1, 2, 3};
         texts[] = {$STR_A3A_Params_builderPermissions_tl, $STR_A3A_Params_builderPermissions_engi, $STR_A3A_Params_builderPermissions_both};
         default = 3;
+    };
+    class A3A_removeRestore
+    {
+        title = $STR_A3A_Params_removeRestore_title;
+        values[] = {0,1};
+        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
+        default = 0;
     };
 
     class SpacerMembership
@@ -221,6 +235,14 @@ class Params
         texts[] =  {"1.0x","1.1x","1.2x","1.3x","1.4x","1.5x"};
         default = 12;
     };
+    class A3A_enemyResponseTime
+    {
+        attr[] = {"server"};
+        title = $STR_A3A_Params_enemyResponseTime_title;
+        values[] = {20,15,10,7,5};
+        texts[] =  {$STR_A3A_Params_generic_veryslow, $STR_A3A_Params_generic_slow, $STR_A3A_Params_generic_normal, $STR_A3A_Params_generic_fast, $STR_A3A_Params_generic_veryfast};
+        default = 10;
+    };
     class A3A_attackHQProximityMul
     {
         attr[] = {"server"};
@@ -301,7 +323,7 @@ class Params
         title = $STR_A3A_Params_guestItemLimit_title;
         values[] = {0,10,15,25,40};
         texts[] = {$STR_A3A_Params_generic_nolimit,"10","15","25","40"};
-        default = 25;
+        default = 0;
     };
     class unlockedUnlimitedAmmo
     {
@@ -547,12 +569,5 @@ class Params
         values[] = {-1,1,2};
         texts[] = {$STR_A3A_Params_generic_none, $STR_A3A_Params_logDebugConsole_nondev, $STR_A3A_Params_generic_all};
         default = 1;
-    };
-    class A3A_GUIDevPreview
-    {
-        title = $STR_A3A_Params_GUIDevPreview_title;
-        values[] = {0,1};
-        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip, $STR_antistasi_dialogs_generic_button_yes_text};
-        default = 0;
     };
 };

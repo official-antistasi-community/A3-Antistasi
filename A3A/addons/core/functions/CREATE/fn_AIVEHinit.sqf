@@ -42,7 +42,8 @@ if (_side == teamPlayer) then
 };
 
 // Sync the vehicle textures if necessary
-_veh call A3A_fnc_vehicleTextureSync;
+// Removed 4-5-25 as trial. Vanilla vehicles seem to be fixed at least
+//_veh call A3A_fnc_vehicleTextureSync;
 
 
 private _typeX = typeOf _veh;
@@ -80,7 +81,7 @@ if (_veh isKindOf "Car" or _veh isKindOf "Tank") then
 }
 else
 {
-	if ( _typeX in (FactionGet(all,"vehiclesFixedWing") + FactionGet(all,"vehiclesHelis")) ) then
+	if (_veh isKindOf "Air") then
 	{
 		_veh addEventHandler ["GetIn",
 		{
@@ -101,21 +102,47 @@ else
 				_veh addEventHandler ["GetOut", {private ["_veh"];_veh = _this select 0; if ((isTouchingGround _veh) and (isEngineOn _veh)) then {if (side (_this select 2) != teamPlayer) then {if (_veh getVariable "within") then {_veh setVariable ["within",false]; [_veh] call A3A_fnc_smokeCoverAuto}}}}];
 				_veh addEventHandler ["GetIn", {private ["_veh"];_veh = _this select 0; if (side (_this select 2) != teamPlayer) then {_veh setVariable ["within",true]}}];
 			};
-		};
-	}
-	else
-	{
-		if (_veh isKindOf "StaticWeapon") then
-		{
-			_veh setCenterOfMass [(getCenterOfMass _veh) vectorAdd [0, 0, -1], 0];
-
-			if !(_typeX isKindOf "StaticMortar") then {
-				[_veh, "static"] remoteExec ["A3A_fnc_flagAction", [teamPlayer,civilian], _veh];
-				if (_side == teamPlayer && !isNil {serverInitDone}) then { [_veh] remoteExec ["A3A_fnc_updateRebelStatics", 2] };
-			};
+			_veh addEventHandler ["RopeAttach", {
+				params ["_object1", "_rope", "_object2"];
+				{
+					[_x, false] remoteExec ["setCaptive", _x];
+				} forEach crew _object1;
+			}];
 		};
 	};
+
 };
+
+// Actions to allow/deny AIs from using the vehicles
+if (_veh isKindOf "Land" and _veh emptyPositions "gunner" > 0) then {
+	[_veh, "static"] remoteExec ["A3A_fnc_flagAction", [teamPlayer,civilian], _veh];
+};
+
+
+// Add global attach/detach handlers for garrison updates. Could check for cargo validity but these work with ACE too.
+// Statics only for ACE?
+
+// Do we actually need to account for captures with static weapons?
+// They have no ambient usage anymore, right?
+// Also could capture on loading rather than occupancy...
+
+// Vehicle shouldn't be installed now because we don't know if it's a garrison vehicle?
+
+// Maybe this is a bad idea because vehicle cargo will despawn?
+// Could maybe switch to moving vehicles into garrison only when they'd be GC'd, or on saves
+
+// Handlers for garrison add/remove & rebel capture handling
+if !(_veh isKindOf "StaticWeapon") then {
+	// Handles most cases when you'd want to merge the thing?
+    [_veh] remoteExecCall ["A3A_fnc_addVehGetInOutEH", 2];
+};
+
+// Quadbikes also need to trigger on attach/detach
+if (_veh isKindOf "StaticWeapon" or { [_veh] call A3A_Logistics_fnc_isLoadable }) then {
+	// Works with various ACE modules as well as Antistasi logistics/carry
+    [_veh] remoteExecCall ["A3A_fnc_addVehAttachDetachEH", 2];
+};
+
 
 if (_side == civilian) then
 {
@@ -144,7 +171,7 @@ if (_side == Invaders or _side == Occupants) then
 
 		// Add 1/3 cost to recent casualties list on server
 		private _vehCost = A3A_vehicleResourceCosts getOrDefault [typeof _veh, 0];
-		[_veh getVariable "ownerSide", getPos _veh, _vehCost/3] remoteExec ["A3A_fnc_addRecentDamage", 2];
+		[_veh getVariable "ownerSide", getPos _veh, _vehCost/3, _source] remoteExec ["A3A_fnc_addRecentDamage", 2];
 
 		// Attempt to call for support if there's a crew. Assume local, should be true
 		if !(isNull group _veh) then { [group _veh, _source] spawn A3A_fnc_callForSupport };
@@ -171,11 +198,10 @@ if (_side == Invaders or _side == Occupants) then
     }];
 };
 
+// Add event handlers for smoke trails and pre-emptive AI ducking
 if(_typeX in (FactionGet(all, "vehiclesArtillery") + FactionGet(all, "staticMortars")) ) then
 {
-    [_veh] call A3A_fnc_addArtilleryTrailEH;
-// Redundant with support system?
-//	[_veh] remoteExec ["A3A_fnc_addArtilleryDetectionEH", 2];
+	[_veh] remoteExecCall ["A3A_fnc_addArtilleryFiredEH", 2];
 };
 
 // EH behaviour:
@@ -184,24 +210,6 @@ if(_typeX in (FactionGet(all, "vehiclesArtillery") + FactionGet(all, "staticMort
 // HandleDamage/Killed: Runs where installed, only if target is local
 // MPKilled: Runs everywhere, regardless of target locality or install location
 // Destruction is handled in an EntityKilled mission event handler, in case of locality changes
-
-if (_side != teamPlayer) then
-{
-	// Vehicle stealing handler
-	// When a rebel first enters a vehicle, fire capture function
-	_veh addEventHandler ["GetIn", {
-
-		params ["_veh", "_role", "_unit"];
-		if (side group _unit != teamPlayer) exitWith {};		// only rebels can flip vehicles atm
-		private _oldside = _veh getVariable ["ownerSide", teamPlayer];
-		if (_oldside != teamPlayer) then
-		{
-			ServerDebug_2("%1 switching side from %2 to rebels", typeof _veh, _oldside);
-			[_veh, teamPlayer, true] call A3A_fnc_vehKilledOrCaptured;
-		};
-		_veh removeEventHandler ["GetIn", _thisEventHandler];
-	}];
-};
 
 
 // Handler for refunding vehicles after cleanup

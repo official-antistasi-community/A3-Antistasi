@@ -1,9 +1,8 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-private ["_allMarker", "_placementMarker", "_split", "_start", "_data"];
 
-_allMarker = allMapMarkers;
-_placementMarker = [];
+private _allMarker = allMapMarkers;
+private _placeMarkers = createHashMap;
 
 airportsX = [];
 spawnPoints = [];
@@ -11,15 +10,16 @@ resourcesX = [];
 factories = [];
 outposts = [];
 seaports = [];
-controlsX = [];
 seaMarkers = [];
 seaSpawn = [];
 seaAttackSpawn = [];
 detectionAreas = [];
+A3A_mapRoadblocks = [];
+A3A_mapCamps = [];
 
 fnc_sortPlacementMarker =
 {
-  params ["_array", "_split"];
+  params ["_split"];
   private ["_type", "_number", "_start", "_index", "_name"];
 
   //Calculating linked main marker
@@ -49,18 +49,11 @@ fnc_sortPlacementMarker =
     _name = format ["%1_%2", _name, _split select _i];
   };
 
-  //Seting connection
-  _index = _array findIf {(_x select 0) == _type};
-  if(_index == -1) then
-  {
-    _array pushBack [_type, [_name]];
-  }
-  else
-  {
-    ((_array select _index) select 1) pushBack _name;
-  };
+  //Setting connection
+  (_placeMarkers getOrDefault [_type, [], true]) pushBack _name;
 };
 
+private ["_split", "_start"];
 {
   _split = _x splitString "_";
   _start = _split select 0;
@@ -73,7 +66,7 @@ fnc_sortPlacementMarker =
     case ("factory"): {factories pushBack _x;};
     case ("outpost"): {outposts pushBack _x;};
     case ("seaport"): {seaports pushBack _x;};
-    case ("control"): {controlsX pushBack _x;};
+    case ("control"): {if (isOnRoad markerPos _x) then {A3A_mapRoadblocks pushBack _x} else {A3A_mapCamps pushBack _x}};
     case ("seapatrol"): {seaMarkers pushBack _x;};
     case ("seaspawn"): {seaSpawn pushBack _x;};
     case ("seaattackspawn"): {seaAttackSpawn pushBack _x;};
@@ -91,7 +84,7 @@ fnc_sortPlacementMarker =
     case ("reso");
     case ("fact");
     case ("outp");
-    case ("seap"): {[_placementMarker, _split] call fnc_sortPlacementMarker;};
+    case ("seap"): {[_split] call fnc_sortPlacementMarker;};
 
     default
     {
@@ -102,21 +95,21 @@ fnc_sortPlacementMarker =
 
 //DebugArray("Marker setup done, placement marker are", _placementMarker);
 
-{
-    [_x select 0, _x select 1] call A3A_fnc_initSpawnPlaces;
-} forEach _placementMarker;
+
+
+
+private _majorMarkers = (airportsX + resourcesX + factories + outposts + seaports);
 
 // Autogenerate stuff like helipad placements for markers that don't have any defined spawn places
+A3A_spawnPlacesHM = createHashMap;
 {
-    private _spawnStr = format ["%1_vehicle_used", _x];
-    if (isNil { spawner getVariable _spawnStr }) then {
-        Debug_1("Generating additional spawn places for %1", _x);
-        [_x, []] call A3A_fnc_initSpawnPlaces;
-    };
-} forEach (airportsX + resourcesX + factories + outposts + seaports);
+    [_x, _placeMarkers getOrDefault [_x, []]] call A3A_fnc_initSpawnPlaces;
+} forEach _majorMarkers;
+
 
 //TEMPORARY FIX TO DETECT SPAWN MARKERS
 {
   _nearestMarker = [spawnPoints, getMarkerPos _x] call BIS_fnc_nearestPosition;
   server setVariable [format ["spawn_%1", _x], _nearestMarker, true];
 } forEach airportsX;
+

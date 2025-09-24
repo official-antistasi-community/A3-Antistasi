@@ -131,7 +131,7 @@ _arrayContains = {
 private _minItemsMember = {
 	params ["_index", "_item"];					// Arsenal tab index, item classname
 	private _min = jna_minItemMember select _index;
-	_min = A3A_arsenalLimits getOrDefault [_item, _min];
+	_min = A3A_arsenalLimits getOrDefault [_item, [_min]] select 0;
 	if (_index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG || _index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL) then {
 		_min = _min * getNumber (configfile >> "CfgMagazines" >> _item >> "count");
 	};
@@ -1343,7 +1343,7 @@ switch _mode do {
 					case (ctrlenabled (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_HANDGUN))): {handgunweapon player};
 					default {""};
 				};
-				_compatibleItems = _weapon call bis_fnc_compatibleItems;
+				_compatibleItems = compatibleItems _weapon;
 				if not (({_x == _item} count _compatibleItems > 0) || _item isequalto "")exitwith{
 					_ctrlList lbSetColor [_lbAdd, [1,1,1,0.25]];
 				};
@@ -1966,7 +1966,7 @@ switch _mode do {
 				};
 
 				//prevent selecting grey items, needs to be this complicated because bis_fnc_compatibleItems returns some crap resolts like optic_aco instead of Optic_Aco
-				_compatibleItems = _weapon call bis_fnc_compatibleItems;
+				_compatibleItems = compatibleItems _weapon;
 				if not (({_x == _item} count _compatibleItems > 0) || _item isequalto "")exitwith{
 					['TabSelectRight',[_display,_index]] call jn_fnc_arsenal;
 				};

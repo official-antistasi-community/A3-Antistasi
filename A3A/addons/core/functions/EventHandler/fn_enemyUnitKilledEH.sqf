@@ -11,7 +11,7 @@ if (_victim getVariable ["spawner",false]) then
 //Gather infos, trigger timed despawn
 private _victimGroup = group _victim;
 private _victimSide = side (group _victim);
-[_victim] spawn A3A_fnc_postmortem;
+[_victim] remoteExec ["A3A_fnc_postmortem", 2];
 
 // Deplete resource pools if we haven't paid for this unit in advance
 private _pool = _victim getVariable ["A3A_resPool", "legacy"];
@@ -20,22 +20,16 @@ if (_pool == "legacy") then {
 };
 
 
-if (A3A_hasACE) then
-{
-	if ((isNull _killer) || (_killer == _victim)) then
-	{
+if (A3A_hasACE) then {
+	if ((isNull _killer) || (_killer == _victim)) then {
 		_killer = _victim getVariable ["ace_medical_lastDamageSource", _killer];
 	};
-}
-else
-{
+} else {
     if (_victim getVariable ["incapacitated", false]) then {
-        private _downedBy = _victim getVariable "A3A_downedBy";
-        if (!isNil "_downedBy") then {
-            _killer = _downedBy;
-        };
+        _killer = _victim getVariable ["A3A_downedBy", _killer];
     };
 };
+
 
 if (_victimSide == Occupants or _victimSide == Invaders) then {
     [_victim, _victimGroup, _killer] spawn A3A_fnc_AIreactOnKill;
@@ -66,38 +60,26 @@ if (side (group _killer) == teamPlayer) then
 	if (count weapons _victim < 1 && !(_victim getVariable ["isAnimal", false])) then
     {
         //This doesn't trigger for dogs, only for surrendered units
-        Debug("aggroEvent | Rebels killed a surrendered unit");
-		if (_victimSide == Occupants) then
-		{
-			[0,-2,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-		};
+        private _uid = (["AI",getPlayerUID _killer] select (isPlayer _killer));
+        private _name = name _killer;
+        Debug_3("aggroEvent | Rebel %1 [UID: %2 Name: %3] killed a surrendered unit", _killer, _uid, _name);
+		[-2, getPosATL _victim] remoteExecCall ["A3A_fnc_citySupportChange", 2];     // always punish rebels for murder
         [_victimSide, 20, 30] remoteExec ["A3A_fnc_addAggression", 2];
 	}
 	else
 	{
-		[-1,1,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
+        private _marker = _victim getVariable ["markerX", ""];
+        if (_marker != "") then {
+    		[1, _marker] remoteExecCall ["A3A_fnc_citySupportChange", 2];       // Enemies don't count unless they're local
+        };
         [_victimSide, 0.5, 45] remoteExec ["A3A_fnc_addAggression", 2];
 	};
-}
-else
-{
-	if (_victimSide == Occupants) then
-	{
-		[-0.25,0,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-	}
-	else
-	{
-		[0.25,0,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-	};
 };
 
-private _victimLocation = _victim getVariable ["markerX", ""];
-if (_victimLocation != "") then
-{
-	if (sidesX getVariable [_victimLocation,sideUnknown] == _victimSide) then
-	{
-		[_victim getVariable "unitType",_victimSide,_victimLocation,-1] remoteExec ["A3A_fnc_garrisonUpdate",2];
-        [_victimLocation,_victimSide] remoteExec ["A3A_fnc_zoneCheck",2]
-	};
+/*
+// Handled in AIReactOnKill
+private _marker = _victim getVariable ["markerX", ""];
+if (_marker != "") then {
+    A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
 };
-
+*/

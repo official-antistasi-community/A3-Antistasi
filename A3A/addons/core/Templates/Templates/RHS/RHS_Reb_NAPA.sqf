@@ -23,7 +23,7 @@
 ["vehiclesCivCar", ["C_Offroad_01_F", "C_Hatchback_01_F", "C_Hatchback_01_sport_F", "C_SUV_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesCivTruck", ["RHS_Ural_Open_Civ_01", "C_Van_01_transport_F", "C_Van_02_transport_F", "C_Van_02_vehicle_F"]] call _fnc_saveToTemplate;
 ["vehiclesCivHeli", ["RHS_Mi8t_civilian"]] call _fnc_saveToTemplate;
-["vehiclesCivBoat", ["C_Boat_Civil_01_F", "C_Rubberboat"]] call _fnc_saveToTemplate;
+["vehiclesCivBoat", ["C_Boat_Civil_01_F", "C_Rubberboat", "rhsgref_civ_canoe"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["rhsgref_nat_DSHKM",  "rhsgref_nat_DSHKM_Mini_TriPod", "rhsgref_nat_NSV_TriPod", "rhs_KORD_high_VMF"]] call _fnc_saveToTemplate;
 ["staticAT", ["rhsgref_nat_SPG9"]] call _fnc_saveToTemplate;
@@ -57,7 +57,7 @@ private _initialRebelEquipment = [
 if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr", "tf_anprc154"]};
 if (A3A_hasTFAR && startWithLongRangeRadio) then {_initialRebelEquipment append ["tf_anprc155", "tf_anprc155_coyote"]};
 if (A3A_hasTFARBeta) then {_initialRebelEquipment append ["TFAR_microdagr", "TFAR_anprc154"]};
-if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote"]};
+if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote", "TFAR_anarc164", "a3a_TFAR_rt1523g_rhs", "a3a_TFAR_rt1523g_bwmod", "a3a_TFAR_rt1523g"]};
 _initialRebelEquipment append ["Chemlight_blue", "Chemlight_green", "Chemlight_red", "Chemlight_yellow"];
 ["initialRebelEquipment", _initialRebelEquipment] call _fnc_saveToTemplate;
 
@@ -75,8 +75,6 @@ private _rebUniforms = [
     "rhsgref_uniform_dpm_olive",
     "rhsgref_uniform_3color_desert",
     "rhsgref_uniform_gorka_1_f",
-    "rhsgref_uniform_TLA_1",
-    "rhsgref_uniform_TLA_2",
     "rhs_insurgent_uniform_1",
     "rhs_insurgent_uniform_2",
     "rhs_insurgent_uniform_3",

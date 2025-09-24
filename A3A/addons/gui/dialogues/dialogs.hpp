@@ -12,3 +12,5 @@ Maintainer: DoomMetal
 #include "arsenalLimitsDialog.hpp"
 #include "setupDialog.hpp"
 #include "teamLeaderBuilder.hpp"
+#include "customLoadoutsDialog.hpp"
+#include "gunShop.hpp"

@@ -21,34 +21,35 @@ private _factionDefaultFile = ["EnemyDefaults","EnemyDefaults","RebelDefaults","
 _factionDefaultFile = QPATHTOFOLDER(Templates\Templates\FactionDefaults) + "\" + _factionDefaultFile + ".sqf";
 
 private _faction = [[_factionDefaultFile,_file]] call A3A_fnc_loadFaction;
+_faction set ["side", _side];
 private _factionPrefix = ["occ", "inv", "reb", "civ"] #([west, east, independent, civilian] find _side);
 missionNamespace setVariable ["A3A_faction_" + _factionPrefix, _faction];
 [_faction, _factionPrefix] call A3A_fnc_compileGroups;
 
 private _baseUnitClass = switch (_side) do {
-    case west: { "B_G_Soldier_F" };
-    case east: { "O_G_Soldier_F" };
-    case independent: { "I_G_Soldier_F" };
-    case civilian: { "C_Man_1" };
+    case west: { "a3a_unit_west" };
+    case east: { "a3a_unit_east" };
+    case independent: { "a3a_unit_reb" };
+    case civilian: { "a3a_unit_civ" };
 };
 
 private _unitClassMap = if (_side isNotEqualTo independent) then { createHashMap } else {
     createHashMapFromArray [                // Cases matter. Lower case here because allVariables on namespace returns lowercase
-        ["militia_Unarmed", "I_G_Survivor_F"],
-        ["militia_Rifleman", "I_G_Soldier_F"],
-        ["militia_staticCrew", "I_G_Soldier_F"],
-        ["militia_Medic", "I_G_medic_F"],
-        ["militia_Sniper", "I_G_Sharpshooter_F"],
-        ["militia_Marksman", "I_G_Soldier_M_F"],
-        ["militia_LAT", "I_G_Soldier_LAT_F"],
-        ["militia_MachineGunner", "I_G_Soldier_AR_F"],
-        ["militia_ExplosivesExpert", "I_G_Soldier_exp_F"],
-        ["militia_Grenadier", "I_G_Soldier_GL_F"],
-        ["militia_SquadLeader", "I_G_Soldier_SL_F"],
-        ["militia_Engineer", "I_G_engineer_F"],
-        ["militia_AT", "I_Soldier_AT_F"],
-        ["militia_AA", "I_Soldier_AA_F"],
-        ["militia_Petros", "I_G_officer_F"]
+        ["militia_Unarmed", "a3a_unit_reb_unarmed"],
+        ["militia_Rifleman", "a3a_unit_reb"],
+        ["militia_staticCrew", "a3a_unit_reb"],
+        ["militia_Medic", "a3a_unit_reb_medic"],
+        ["militia_Sniper", "a3a_unit_reb_sniper"],
+        ["militia_Marksman", "a3a_unit_reb_marksman"],
+        ["militia_LAT", "a3a_unit_reb_lat"],
+        ["militia_MachineGunner", "a3a_unit_reb_mg"],
+        ["militia_ExplosivesExpert", "a3a_unit_reb_exp"],
+        ["militia_Grenadier", "a3a_unit_reb_gl"],
+        ["militia_SquadLeader", "a3a_unit_reb_sl"],
+        ["militia_Engineer", "a3a_unit_reb_eng"],
+        ["militia_AT", "a3a_unit_reb_at"],
+        ["militia_AA", "a3a_unit_reb_aa"],
+        ["militia_Petros", "a3a_unit_reb_petros"]
     ]
 };
 //validate loadouts
@@ -76,6 +77,14 @@ if (_side in [Occupants, Invaders]) then {
         ([_x, true] call BIS_fnc_crewCount) - ([_x, false] call BIS_fnc_crewCount) >= 4
     };
     _faction set ["vehiclesLightArmedTroop", _lightArmedTroop];
+
+    private _noType = [];
+    if ((_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack") + (_faction get "vehiclesHelisTransport")
+        + (_faction get "vehiclesHelisLight") isEqualTo []) then { _noType pushBack "heli" };
+    if (_faction get "staticAT" isEqualTo []) then { _noType pushBack "staticAT" };
+    if (_faction get "vehiclesGunBoats" isEqualTo []) then { _noType pushBack "boat" };
+    if ((_faction get "vehiclesPlanesAA") + (_faction get "vehiclesPlanesCAS") isEqualTo []) then { _noType append ["plane", "runway"] };
+    _faction set ["noPlaceTypes", _noType];
 };
 
 _faction;

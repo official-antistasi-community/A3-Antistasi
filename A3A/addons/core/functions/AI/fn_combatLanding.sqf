@@ -31,6 +31,8 @@ _vehWP0 setWaypointBehaviour "CARELESS";
 private _midHeight = [100, 150] select (A3A_climate isEqualTo "tropical");
 _helicopter flyInHeight _midHeight;
 
+waitUntil {sleep 1; (_helicopter distance2D _landPos) < 1500};
+_helicopter limitSpeed 250;         // just so the Osprey slows down a bit, really
 waitUntil {sleep 1; (_helicopter distance2D _landPos) < 600};
 
 _helicopter flyInHeight 0;                  // helps to keep it near the ground after landing

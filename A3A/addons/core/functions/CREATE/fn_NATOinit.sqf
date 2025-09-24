@@ -43,19 +43,12 @@ if !(isNil "_isSpawner") then
 }
 else
 {
-    private _veh = objectParent _unit;
-    if (_marker != "") exitWith
-    {
+    if (_marker != "") exitWith {
         // Persistent garrison units are never spawners.
 	    _unit setVariable ["markerX",_marker,true];
-	    if ((spawner getVariable _marker != 0) && (isNull _veh)) then
-	    {
-            // Garrison drifted out of spawn range, disable simulation on foot units
-            // this is re-enabled in distance.sqf when spawn range is re-entered
-            [_unit,false] remoteExec ["enableSimulationGlobal",2];
-        };
     };
 
+    private _veh = objectParent _unit;
     if (_unit in (assignedCargo _veh)) exitWith
     {
         // Cargo units aren't spawners until they leave the vehicle.
@@ -82,6 +75,7 @@ else
 _unit addEventHandler ["HandleDamage", A3A_fnc_handleDamageAAF];
 _unit addEventHandler ["Killed", A3A_fnc_enemyUnitKilledEH];
 _unit addEventHandler ["Deleted", A3A_fnc_enemyUnitDeletedEH];
+_unit setVariable ["A3A_KilledEH", true];           // mark that it's installed at this locality
 
 private _baseSkill = (0.1 * A3A_enemySkillMul) + (0.07 * (1 max A3A_activePlayerCount^0.5)) + (0.01 * tierWar);
 private _skill = switch (true) do {
@@ -166,7 +160,7 @@ if !(A3A_hasIFA) then
             private _lamps = _weaponItems arrayIntersect allLightAttachments;
             if (_lamps isEqualTo []) then
             {
-                private _compatibleLamps = ((primaryWeapon _unit) call BIS_fnc_compatibleItems) arrayIntersect allLightAttachments;
+                private _compatibleLamps = (compatibleItems (primaryWeapon _unit)) arrayIntersect allLightAttachments;
                 if !(_compatibleLamps isEqualTo []) then
                 {
                     _lamp = selectRandom _compatibleLamps;

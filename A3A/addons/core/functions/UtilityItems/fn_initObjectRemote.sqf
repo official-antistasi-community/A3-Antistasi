@@ -34,9 +34,9 @@ private _flags = (A3A_utilityItemHM get typeof _object) # 4;
 if ("move" in _flags) then {
     _object addAction [
         localize "STR_A3A_fn_UtilItem_initObjRem_addact_carry",
-        { [_this#3, true] call A3A_fnc_carryItem },
+        A3A_fnc_carryItem,
         _object, 1.5, true, true, "",
-        "([_this] call A3A_fnc_countAttachedObjects == 0)
+        "!(call A3A_fnc_isCarrying) and (vehicle _this == _this)
             and (isNull attachedTo _originalTarget)", 8
     ];
 };

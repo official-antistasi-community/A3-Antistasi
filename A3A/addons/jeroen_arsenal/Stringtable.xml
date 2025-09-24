@@ -229,10 +229,12 @@
       <Key ID="STR_A3A_JNA_loadinventory_notin">
         <Original>These items were not in the Arsenal:</Original>
         <Korean>다음 아이템은 무기고에 없습니다:</Korean>
+        <Russian>Этих предметов не было в Арсенале:</Russian>
       </Key>
       <Key ID="STR_A3A_JNA_loadinventory_notin_kept">
         <Original>These items were not in the Arsenal, so the originals have been kept:</Original>
         <Korean>다음 아이템들은 무기고에 없었기 때문에, 원본들이 보관되었습니다:</Korean>
+        <Russian>Этих предметов не было в Арсенале, поэтому были сохранены оригиналы:</Russian>
       </Key>
       <Key ID="STR_A3A_JNA_memberonly">
         <Original>We are low on this item, only members may use it</Original>

@@ -18,6 +18,7 @@ _caller setVariable ["intelSearchTime",time + _timeForSearch];
 _caller setVariable ["intelAnimsDone",false];
 _caller setVariable ["intelFound",false];
 _caller setVariable ["cancelIntelSearch",false];
+_caller setVariable ["intelSearching", true];
 
 _squadLeader setVariable ["intelSearchDone", true, true];
 
@@ -70,6 +71,7 @@ if(_wasCancelled) exitWith
     [localize "STR_A3A_fn_intel_title1", localize "STR_A3A_fn_intel_leader_cancel"] call A3A_fnc_customHint;
     _caller setVariable ["intelFound", nil];
     _squadLeader setVariable ["intelSearchDone", nil, true];
+    _caller setVariable ["intelSearching", nil];
 };
 
 if(_caller getVariable ["intelFound", false]) then
@@ -91,3 +93,4 @@ else
     _squadLeader setVariable ["intelSearchDone", nil, true];
 };
 _caller setVariable ["intelFound", nil];
+_caller setVariable ["intelSearching", nil];

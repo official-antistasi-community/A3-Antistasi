@@ -138,6 +138,7 @@ Maintainer: DoomMetal
 #define CENTER_Y(n) ((getResolution select 3) * 0.5 * pixelH) - (0.5 * (PX_H(n)))
 
 // Text sizes
+#define GUI_TEXT_SIZE_TINY (GRID_H * 2.75) // Don't know where this fits
 #define GUI_TEXT_SIZE_SMALL (GRID_H * 3.2) // Fits inside 3*GRID_H
 #define GUI_TEXT_SIZE_MEDIUM (GRID_H * 4.2)  // Fits inside 4*GRID_H
 #define GUI_TEXT_SIZE_LARGE (GRID_H * 5) // Fits inside 6*GRID_H
@@ -206,6 +207,13 @@ Maintainer: DoomMetal
 #define A3A_COLOR_COMMANDER {1,0.9,0.5,1}
 #define A3A_COLOR_ELIGIBLE {0.7,0.7,0.7,1}
 #define A3A_COLOR_INELIGIBLE {0.5,0.5,0.5,1}
+
+// Membership
+#define A3A_COLOR_GUEST_SQF [0.7,0.7,0.7,1]
+#define A3A_COLOR_MEMBER_SQF [0.2,0.6,0.2,1]
+
+// Unit price
+#define A3A_COLOR_UNITPRICE {1,1,1,0.25}
 
 
 ///////////

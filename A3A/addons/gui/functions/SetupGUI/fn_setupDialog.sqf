@@ -54,9 +54,9 @@ switch (_mode) do
     case ("onLoad"):
     {
         if (isNil "A3A_setup_saveData") exitWith { Error("onLoad somehow called without save data") };
-        ["fillFactions", [true]] call A3A_fnc_setupFactionsTab;
-        ["setSaveData"] call A3A_fnc_setupLoadgameTab;
-        ["switchTab", ["loadgame"]] call A3A_fnc_setupDialog;
+        ["fillFactions", [true]] call A3A_GUI_fnc_setupFactionsTab;
+        ["setSaveData"] call A3A_GUI_fnc_setupLoadgameTab;
+        ["switchTab", ["loadgame"]] call A3A_GUI_fnc_setupDialog;
     };
 
     case ("onUnload"):
@@ -93,15 +93,15 @@ switch (_mode) do
 
         switch (_selectedTab) do
         {
-            case ("loadgame"): { ["update"] call A3A_fnc_setupLoadgameTab };
-            case ("factions"): { ["update"] call A3A_fnc_setupFactionsTab };
-            case ("params"): { ["update"] call A3A_fnc_setupParamsTab };
+            case ("loadgame"): { ["update"] call A3A_GUI_fnc_setupLoadgameTab };
+            case ("factions"): { ["update"] call A3A_GUI_fnc_setupFactionsTab };
+            case ("params"): { ["update"] call A3A_GUI_fnc_setupParamsTab };
         };
     };
 
     case ("sendData"):
     {
-        _params params ["_saveData", "_loadedPatches", "_loadedDLC"];
+        _params params ["_saveData", "_loadedPatches", "_loadedDLC", "_isLinux"];
 
         // Generate user map names
         private _prettyMapHM = createHashMapFromArray [
@@ -116,27 +116,29 @@ switch (_mode) do
             ,["tem_anizay", "Anizay"]
             ,["cup_chernarus_A3", "Cherno 2020"]
             ,["SPE_Normandy", "Normandy"]
+            ,["SPE_Mortain", "Mortain"]
         ];
         {
             private _realMap = _x get "map";
             _x set ["mapStr", _prettyMapHM getOrDefault [_realMap, _realMap]];
             _x set ["fileStr", ["Old", "New"] select ((_x get "serverID") isEqualType false)];
+            if (!isNil {_x get "version"}) then {
+                _x set ["verStr", (_x get "version") splitString "." select [0, 3] joinString "."];        // cap to a.b.c
+            };
             if (!isNil {_x get "ended"}) then { _x set ["timeStr", "Ended"]; continue };
             if (!isNil {_x get "saveTime"}) then {
                 _x set ["timeStr", [_x get "saveTime", systemTimeUTC] call _fnc_getTimeDiffString];
-            };
-            if (!isNil {_x get "version"}) then {
-                _x set ["verStr", (_x get "version") splitString "." select [0, 3] joinString "."];        // cap to a.b.c
             };
         } forEach _saveData;
 
         A3A_setup_saveData = _saveData;
         A3A_setup_loadedPatches = _loadedPatches;
         A3A_setup_loadedDLC = _loadedDLC;
+        A3A_setup_isLinux = _isLinux;
 
         if (!isNull _display) exitWith {
             Error("Server sent data while dialog is open? Curious");
-            ["onLoad"] spawn A3A_fnc_setupDialog;                                // Should rebuild dialog with new data. Hopefully.
+            ["onLoad"] spawn A3A_GUI_fnc_setupDialog;                                // Should rebuild dialog with new data. Hopefully.
         };
 
         if (isNull findDisplay 46 or !isNull findDisplay 49 or dialog) then {

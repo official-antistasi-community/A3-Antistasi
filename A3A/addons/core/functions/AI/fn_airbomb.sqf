@@ -10,7 +10,8 @@ FIX_LINE_NUMBERS()
 Debug_1("Executing on: %1", clientOwner);
 
 //Ensure reasonable bomb run lenght
-if(_bombRunLength < 100) then {_bombRunLength = 100};
+private _minLength = [100,40] select (_bombType isEqualTo "NAPALM");
+_bombRunLength = _bombRunLength max _minLength;
 
 private _ammo = "";
 private _bombOffset = 0;
@@ -58,15 +59,15 @@ for "_i" from 1 to _bombCount do
         if (_bombType == "NAPALM") then
         {
             // Pass the position in because it might detonate pre-spawn
-            [_bomb, _bombPos] spawn
+            [_bomb, _bombPos, side group _plane] spawn
             {
-                params ["_bomb", "_bombPos"];
+                params ["_bomb", "_bombPos", "_bombSide"];
                 while {!isNull _bomb} do
                 {
                     _bombPos = getPosATL _bomb;
                     sleep 0.1;
                 };
-                [_bombPos] remoteExec ["A3A_fnc_napalm",2];
+                [_bombPos, _bombSide] remoteExec ["A3A_fnc_napalm",2];
             };
         };
     };

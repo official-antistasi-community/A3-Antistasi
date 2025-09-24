@@ -9,7 +9,7 @@ class isladuala3 {
 	antennasBlacklistIndex[] = {0,1};
 	banks[] = {}; //no suitable building available (What is a suitable building?)
 	garrison[] = {
-		{},{"airport_1","seaport_1","seaport_9","resource_1","resource_19","factory_1","outpost_1","outpost_2","outpost_3"},{},{"control_130","control_131","control_132","control_133","control_134","control_135","control_136","control_137","control_138","control_139","control_143","control_63","control_74","control_75","control_76","control_77","control_78","control_79","control_80","control_81","control_82"}
+		{},{"airport_1","seaport_1","seaport_9","resource_1","resource_19","factory_1","outpost_1","outpost_2","outpost_3"},{},{"control_130","control_131","control_132","control_133","control_134","control_135","control_136","control_137","control_138","control_143","control_63","control_74","control_76","control_77","control_78","control_79","control_80","control_81","control_82"}
 	};
 	fuelStationTypes[] = {"Land_A_FuelStation_Feed","Land_Ind_FuelStation_Feed_EP1","Land_FuelStation_Feed_PMC","Land_Fuelstation","Land_Fuelstation_army","Land_Benzina_schnell"};
 	climate = "arid";
@@ -23,5 +23,11 @@ class isladuala3 {
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
 		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+	};
+	policeStationTypes[] = {
+		// middle-eastern buildings from Sahrani
+		"Land_Dum_istan3_hromada2", "Land_Dum_olez_istan1_open2", "Land_Dum_olez_istan1",
+		// Rooms above garage and pillar house from Takistan
+		"Land_House_C_10_EP1", "Land_House_C_4_EP1"
 	};
 };

@@ -24,10 +24,11 @@ private _weights = [];
     if (sidesX getVariable [_x,sideUnknown] != _side) then {continue};
     if (dateToNumber date < server getVariable [_x, 0]) then {continue};
     if (spawner getVariable _x == 0) then {continue};              // don't need spawn places, so this is fine
-    if (count (garrison getVariable [_x,[]]) < 16) then {continue};
+    if (A3A_garrison get _x get "troops" select 0 < 16) then {continue};
 
     _freeAirports pushBack _x;
-    _weights pushBack (1 / (markerPos _x distance2D _targPos)^2);
+    private _effDist = abs ((markerPos _x distance2D _targPos) - 5000);     // prefer mid-distance spawns
+    _weights pushBack (1 / _effDist^2);
 } forEach airportsX;
 
 // Carrier/air corridor is always available

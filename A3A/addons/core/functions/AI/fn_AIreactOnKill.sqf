@@ -28,6 +28,14 @@ FIX_LINE_NUMBERS()
 // TODO: what exactly should killer parameter be here?
 params ["_unit", "_group", "_killer"];
 
+Trace_1("Called with parameters %1", _this);
+
+// Need to fire this regardless of previous downs
+private _marker = _unit getVariable ["markerX", ""];
+if (_marker != "") then {
+    A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
+};
+
 if (_unit getVariable ["downedTimeout", 0] > time) exitWith {};         // only count each unit once, at least within timeout
 _unit setVariable ["downedTimeout", time + 1200];
 
@@ -35,7 +43,18 @@ _unit setVariable ["downedTimeout", time + 1200];
 if((isNil "_killer") || {(isNull _killer) || {side (group _killer) == side _group}}) exitWith {};
 
 // Add the unit to recent kills for reaction purposes
-[side _group, getPosATL _unit, 10] remoteExec ["A3A_fnc_addRecentDamage", 2];
+[side _group, getPosATL _unit, 10, _killer] remoteExec ["A3A_fnc_addRecentDamage", 2];
+
+if (_marker != "") then {
+    // Fire this one even if group was eliminated, garrison expects regular response from group
+    [_group, _marker, _killer] spawn {
+        params ["_group", "_marker", "_killer"];
+        sleep (4 + random 4);
+        private _knowsAbout = _group knowsAbout _killer;
+        if !(leader _group call A3A_fnc_canFight) then { _knowsAbout = 0 };
+        A3A_garrisonOps pushBack ["enemyInfo", [_marker, "damage", _killer, _knowsAbout]];
+    };
+};
 
 private _enemy = objNull;
 private _activeGroupMembers = (units _group) select {_x call A3A_fnc_canFight};
@@ -46,11 +65,6 @@ if(count _activeGroupMembers == 0) exitWith {};
 //Call help if possible
 if(_group getVariable ["A3A_canCallSupportAt", -1] < time) then {
     [_group, _killer] spawn A3A_fnc_callForSupport;
-};
-
-// Call for Local battery support.
-if (PATCOM_ARTILLERY_MANAGER) then {
-    [getPos _killer, (random 150), "HE", (round (1 + tierWar / 2)), _group] call A3A_fnc_artilleryFireMission;
 };
 
 if (!fleeing leader _group and random 1 < 0.5) then

@@ -8,6 +8,5 @@ enableDebugConsole[] = {
     "76561198087513761", //Hakon
     "76561198000461190", //John Jordan
     "76561198016623887", //Lazejun
-    "76561198041429764", //Killer
 };
 allowFunctionsRecompile = 1;

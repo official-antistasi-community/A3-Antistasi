@@ -10,7 +10,7 @@ class A3A_PlacerHints {
     fadeOut = 0;
     duration = 999999;
     enableSimulation = 1;
-    onLoad = "['onLoad', _this] spawn A3A_fnc_setUpPlacerHints";
+    onLoad = "['onLoad', _this] spawn A3A_GUI_fnc_setUpPlacerHints";
     class controls {
         class TestText: A3A_Text {
             idc = IDC_PLACERHINT_TEST_TEXT;

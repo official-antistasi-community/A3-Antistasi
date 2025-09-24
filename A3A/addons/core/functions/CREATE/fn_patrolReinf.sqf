@@ -1,22 +1,20 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_mrkDest", "_mrkOrigin", "_numTroops", "_side"];
+params ["_mrkDest", "_mrkOrigin", "_isLand", "_numTroops", "_quality", "_side"];
 private _faction = Faction(_side);
 private _lowAir = _faction getOrDefault ["attributeLowAir", false];
 private _posDest = getMarkerPos _mrkDest;
 private _posOrigin = getMarkerPos _mrkOrigin;
-private _groupType = selectRandom (_faction get (if (_numTroops == 4) then {"groupsMedium"} else {"groupsSquads"}));
 
-private _isLand = if (_lowAir) then { true } else {						// land markers guaranteed by reinforcementsAI for low air
-	private _targNavIndex = _mrkDest call A3A_fnc_getMarkerNavPoint;
-	private _suppMarkers = [_targNavIndex, _lowAir] call A3A_fnc_findLandSupportMarkers apply { _x#0 };
-	_mrkOrigin in _suppMarkers;
-};
+private _squadTypes = [[_faction get "groupPoliceSquad"], (_faction get "groupsMilitiaSquads") + (_faction get "groupsMilitiaMedium"),
+	(_faction get "groupsSquads") + (_faction get "groupsMedium"), _faction get "groupSpecOpsRandom"];
+private _groupType = selectRandom (_squadTypes select round _quality);
 
 ServerInfo_5("Spawning PatrolReinf. Dest:%1 Orig:%2 Size:%3 Side:%4 Land:%5",_mrkDest,_mrkOrigin,_numTroops,_side,_isLand);
 
 private _vehicleType = if (_isLand) then {
+	[_mrkOrigin, 1] call A3A_fnc_addTimeForIdle;
 	selectRandom (_faction get "vehiclesTrucks");
 } else {
 	private _transportPlanes = _faction get "vehiclesPlanesTransport";
@@ -39,6 +37,7 @@ private _crewGroup = [_side, _vehicle] call A3A_fnc_createVehicleCrew;
 
 
 private _expectedCargo = ([_vehicleType, true] call BIS_fnc_crewCount) - ([_vehicleType, false] call BIS_fnc_crewCount);
+_expectedCargo = _expectedCargo min _numTroops;
 if (_expectedCargo < count _groupType) then { _groupType resize _expectedCargo };           // trim to cargo seat count
 private _cargoGroup = [_posOrigin, _side, _groupType, true, false] call A3A_fnc_spawnGroup;         // force spawn, should be pre-checked
 {
@@ -64,12 +63,15 @@ if (_isLand) then {
 	private _reinfWP = _cargoGroup addWaypoint [_posDest, 0];
 	_reinfWP setWaypointBehaviour "AWARE";
 
-	// Free the spawn position after 60 seconds
-	_vehicle spawn {
-		sleep 60;
-		if (isNull _this) exitWith {};
-		[_this getVariable "spawnPlace"] call A3A_fnc_freeSpawnPositions;
-		_this setVariable ["spawnPlace", nil];
+	private _startPos = getPosATL _vehicle;
+	sleep 10;
+	if (_startPos distance2d _vehicle < 10) then {
+        Error_2("Vehicle %1 failed to clear spawn at %2", _vehicle, _mrkOrigin);
+        // teleport to first waypoint
+        // arguably should just return empty array...
+        private _wayPos = waypointPosition (waypoints _crewGroup # 0);
+        _vehicle setVehiclePosition [_wayPos, [], 10, "NONE"];
+        _crewGroup setCurrentWaypoint [_crewGroup, 1];
 	};
 }
 else
@@ -88,7 +90,8 @@ else
 		_returnWP setWaypointStatements ["true", "if (!local this or !alive this) exitWith {}; deleteVehicle (vehicle this); {deleteVehicle _x} forEach thisList"];
 
 		_getoutWP = _cargoGroup addWaypoint [_landpos, 0];
-		_getoutWP setWaypointType "GETOUT";
+		//_getoutWP setWaypointType "GETOUT";
+		_getoutWP setWaypointStatements ["true", "if !(local this) exitWith {}; (group this) leaveVehicle (assignedVehicle this)"];
 		_reinfWP = _cargoGroup addWaypoint [_posDest, 0];
 		_reinfWP setWaypointBehaviour "AWARE";
 		_landWP synchronizeWaypoint [_getoutWP];

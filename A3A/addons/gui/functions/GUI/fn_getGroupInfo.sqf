@@ -1,5 +1,12 @@
 // TODO UI-update: update header
 
+/*
+Maintainer: Caleb Serafin, DoomMetal
+
+License: APL-ND
+
+*/
+
 // Returns info about a group
 // Group name, position, alive/combat ready counts, vehicle status etc.
 // Mostly rewritten stuff from REINF/fn_vehStats.sqf
@@ -71,7 +78,7 @@ if (!(isNull(_group getVariable ["mortarsX",objNull])) or ({_x call A3A_fnc_type
 };
 
 // Get group vehicle
-private _groupVehicle = [_group] call A3A_fnc_getGroupVehicle;
+private _groupVehicle = [_group] call FUNC(getGroupVehicle);
 
 // Get group icon
 private _groupIconId = _group getVariable "BIS_MARTA_ICON_TYPE";

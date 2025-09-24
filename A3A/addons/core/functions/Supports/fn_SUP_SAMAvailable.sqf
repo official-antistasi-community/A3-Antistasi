@@ -17,6 +17,11 @@ params ["_target", "_side", "_maxSpend", "_availTypes"];
 
 if !(_target isKindOf "Air") exitWith { 0 };     // can't hit anything except air
 
-// Should limit to certain templates?
+private _targThreat = A3A_vehicleResourceCosts getOrDefault [typeOf _target, 0];
+_targThreat = _targThreat + (_target getVariable ["A3A_airKills", 0]);
 
-1;          // maybe set higher, especially if it's fixed-wing aircraft?
+// Avoid using SAMs against low-threat targets unless it's a low air faction
+private _lowAir = Faction(_side) getOrDefault ["attributeLowAir", false];
+if (!_lowAir) then { _targThreat = _targThreat - 150 };
+
+_targThreat / 500;

@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Event Handler for drawing select markers to maps.
 
     Draws a pulsing selection marker on the position specified in
@@ -19,11 +19,16 @@ Dependencies:
     Dialog with map must be open
 
 Example:
-    _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_fnc_mapDrawSelectEH"];
+    _commanderMap ctrlAddEventHandler ["Draw","_this call A3A_GUI_fnc_mapDrawSelectEH"];
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\defines.hpp"
 #include "..\..\dialogues\textures.inc"
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
 
 params ["_map"];
 
@@ -62,7 +67,7 @@ if (_dir == 0) then
 };
 _map setVariable ["selectMarkerData", [_position, _radius, _dir]];
 
-private _color = [A3A_COLOR_SELECT_MARKER] call A3A_fnc_configColorToArray;
+private _color = [A3A_COLOR_SELECT_MARKER] call FUNC(configColorToArray);
 
 _map drawIcon [
 A3A_Select_Marker,

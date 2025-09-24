@@ -33,10 +33,14 @@ private _garage = _playerHM get "personalGarage";
 if (isNil "_garage" || {!(_garage isEqualType [])}) then {_garage = []};
 [_garage, _playerId] call HR_GRG_fnc_addVehiclesByClass;
 
+private _missions = _playerHM get "missionsCompleted";
+if (isNil "_missions" || { !(_missions isEqualType 0) }) then {_missions = 0};
+
 _unit setVariable ["score", _score, true];
 _unit setUnitRank _rank;
 _unit setVariable ["rankX", _rank, true];
 _unit setVariable ["moneyX", _money, true];
+_unit setVariable ["missionsCompleted",_missions,true];
 
 [] remoteExec ["A3A_fnc_statistics", _unit];
 _unit setVariable ["canSave", true, true];

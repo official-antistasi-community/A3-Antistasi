@@ -1,5 +1,5 @@
 /*
-function: A3A_fnc_setupHQPosDialog
+function: A3A_GUI_fnc_setupHQPosDialog
     Handles the initialization and tab switching on the setup dialog.
     This function should only be called from setupDialog onLoad and control activation EHs.
 
@@ -37,7 +37,7 @@ switch (_mode) do
     case ("onLoad"):
     {
         // Draw hatched danger zones
-        private _mainMarkers = (markersX - controlsX - ["Synd_HQ"]);
+        private _mainMarkers = markersX - ["Synd_HQ"];
         private _mrkDangerZone = [];
         {
             _mrk = createMarkerLocal [format ["dangerzone%1", count _mrkDangerZone], markerPos _x];

@@ -32,21 +32,12 @@ private _fnc_initMarkerList =
 			server setVariable [_x, 0, true];           // TODO: check if these two need to be global
         };
 
-		[_x, _roadblockPositions] call A3A_fnc_generateRoadblock;
-
 	} forEach _markers;
 };
 
 
 private _mapInfoRoot = if (isClass (missionConfigFile/"A3A"/"mapInfo"/toLower worldName)) then {missionConfigFile} else {configFile};
 getArray (_mapInfoRoot/"A3A"/"mapInfo"/toLower worldName/"garrison") params ["", ["_mrkCSAT",[],[[]]], "", ["_controlsCSAT",[],[[]]]];
-
-// This only sets the sides for mission-file roadblocks. Generated ones are handled by generateRoadblock
-private _controlsNATO = controlsX - _controlsCSAT;
-{sidesX setVariable [_x, Occupants, true]} forEach _controlsNATO;
-{sidesX setVariable [_x, Invaders, true]} forEach _controlsCSAT;
-
-private _roadblockPositions = controlsX apply { markerPos _x };
 
 [_mrkCSAT, airportsX, "flag_NATO", localize "STR_A3A_fn_init_initBases_airbase", true] call _fnc_initMarkerList;
 [_mrkCSAT, resourcesX, "loc_rock", localize "STR_A3A_fn_init_initBases_resources"] call _fnc_initMarkerList;

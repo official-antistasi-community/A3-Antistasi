@@ -6,7 +6,7 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"A3A_Events"};
+        requiredAddons[] = {"A3A_events"};
         author = AUTHOR;
         authors[] = { AUTHORS };
         authorUrl = "";
@@ -60,3 +60,6 @@ class CfgMPGameTypes {
 };
 
 #include "CfgMarkers.hpp"
+
+// Base AI unit definitions
+#include "CfgVehicles.hpp"

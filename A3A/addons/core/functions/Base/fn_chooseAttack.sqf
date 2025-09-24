@@ -15,6 +15,8 @@ params ["_side"];
 
 Info_1("Starting attack choice script for side %1", _side);
 
+// Decrease the punishment defence adjustment a bit each time invaders generate an attack
+if (_side == Invaders) then { A3A_punishmentDefBuff = 0 max (A3A_punishmentDefBuff - 0.25) };
 
 // Make a weighted list of rebel attack targets
 private _targetsAndWeights = [teamPlayer, _side] call A3A_fnc_findAttackTargets;
@@ -92,11 +94,14 @@ if (_targetMrk in citiesX) exitWith {
     if (_side == Invaders) then {
         // Punishment, unsimulated
         Info_2("Starting punishment mission from %1 to %2", _originMrk, _targetMrk);
+        [-400, _side, "attack"] call A3A_fnc_addEnemyResources;
+        bigAttackInProgress = true; publicVariable "bigAttackInProgress";
         [_targetMrk, _originMrk] spawn A3A_fnc_invaderPunish;
     } else {
         // Supply convoy, unsimulated
         // Do we allow these even if there's already a convoy? Probably not harmful.
         Info_2("Sending supply convoy from %1 to %2", _originMrk, _targetMrk);
+        [-200, _side, "attack"] call A3A_fnc_addEnemyResources;
         [[_targetMrk, _originMrk, "Supplies", "attack"],"A3A_fnc_convoy"] call A3A_fnc_scheduler;
     };
     true;
@@ -104,6 +109,8 @@ if (_targetMrk in citiesX) exitWith {
 
 if (_targetMrk == "Synd_HQ") exitWith {
     Info_2("Starting HQ attack from %1", _originMrk);
+    [-400, _side, "attack"] call A3A_fnc_addEnemyResources;
+    bigAttackInProgress = true; publicVariable "bigAttackInProgress";
     [_side, _originMrk] spawn A3A_fnc_attackHQ;
     true;
 };
@@ -114,6 +121,8 @@ if((spawner getVariable _targetMrk) != 2 || (sidesX getVariable _targetMrk) == t
     // Sending real attack, execute the fight
     private _waves = round (1 + random 1 + _localThreat / 1000);         // TODO: magic number
     Info_3("Starting waved attack with %1 waves from %2 to %3", _waves, _originMrk, _targetMrk);
+    [-400, _side, "attack"] call A3A_fnc_addEnemyResources;
+    bigAttackInProgress = true; publicVariable "bigAttackInProgress";
     [_targetMrk, _originMrk, _waves] spawn A3A_fnc_wavedAttack;
     true;
 }
@@ -128,28 +137,17 @@ else
 
     // land units are a bit cheaper, attack is generally more expensive than defence
     private _atkResources = _defResources + _localThreat + _flyoverThreat;
-    _atkResources = _atkResources * (0.75 + 2^(-_countLandAttackBases));
+    _atkResources = 400 + _atkResources * (0.75 + 2^(-_countLandAttackBases));
     [-_atkResources, _side, "attack"] call A3A_fnc_addEnemyResources;
 
     // Flip marker and add garrison once flipped
-    [_side, _targetMrk] spawn A3A_fnc_markerChange;        // add simulation param here? or just rely on spawn status?
+    isNil {
+        [_side, _targetMrk, false] call A3A_fnc_markerChange;        // add simulation param here? or just rely on spawn status?
+    };
     Info_4("Simulated capture of %1 by %2, atk resources %3, def resources %4", _targetMrk, _side, _atkResources, _defResources);
 
-    sleep 10;
-    if (sidesX getVariable _targetMrk != _side) exitWith {
-        Error_2("%1 still not switched to side %2 after 10 seconds", _targetMrk, _side);
-        false;
-    };
-
     // Get the garrison for free because we already paid for them in the simulated attack
-    private _maxTroops = 12 max round ((0.5 + random 0.5) * ([_targetMrk] call A3A_fnc_garrisonSize));
-    private _soldiers = [];
-    private _faction = Faction(_side);
-    while {count _soldiers < _maxTroops} do {
-        _soldiers append selectRandom ((_faction get "groupsSquads") + (_faction get "groupsMedium"));
-    };
-    _soldiers resize _maxTroops;
-    [_soldiers, _side, _targetMrk, 0] spawn A3A_fnc_garrisonUpdate;
+    [_targetMrk] call A3A_fnc_buildEnemyGarrison;
     true;
 };
 

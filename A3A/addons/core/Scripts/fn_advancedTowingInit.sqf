@@ -370,7 +370,7 @@ SA_Attach_Tow_Ropes = {
 					[["The tow ropes are too short. Move vehicle closer.", false],"SA_Hint",_player] call SA_RemoteExec;
 				} else {
 					[_vehicle,_player] call SA_Drop_Tow_Ropes;
-					_helper = "Land_Can_V2_F" createVehicle position _cargo;
+					_helper = "a3a_tow_helper" createVehicle position _cargo;
 					_helper attachTo [_cargo, _cargoHitch];
 					_helper setVariable ["SA_Cargo",_cargo,true];
 					hideObject _helper;
@@ -419,7 +419,7 @@ SA_Pickup_Tow_Ropes = {
 			detach _attachedObj;
 			deleteVehicle _attachedObj;
 		} forEach ropeAttachedObjects _vehicle;
-		_helper = "Land_Can_V2_F" createVehicle position _player;
+		_helper = "a3a_tow_helper" createVehicle position _player;
 		{
 			[_helper, [0, 0, 0], [0,0,-1]] ropeAttachTo _x;
 			_helper attachTo [_player, [-0.1, 0.1, 0.15], "Pelvis"];
@@ -663,7 +663,7 @@ SA_Pickup_Tow_Ropes_Action_Check = {
 };
 
 SA_Can_Pickup_Tow_Ropes = {
-	isNull (player getVariable ["SA_Tow_Ropes_Vehicle", objNull]) && count (missionNamespace getVariable ["SA_Nearby_Tow_Vehicles",[]]) > 0 && vehicle player == player;
+	isNull (player getVariable ["SA_Tow_Ropes_Vehicle", objNull]) && count (missionNamespace getVariable ["SA_Nearby_Tow_Vehicles",[]]) > 0 && vehicle player == player && !(call A3A_fnc_isCarrying);
 };
 
 SA_TOW_SUPPORTED_VEHICLES = [
@@ -730,7 +730,7 @@ SA_Hint = {
 
 SA_Hide_Object_Global = {
 	params ["_obj"];
-	if ( _obj isKindOf "Land_Can_V2_F" ) then {
+	if ( _obj isKindOf "a3a_tow_helper" ) then {
 		hideObjectGlobal _obj;
 	};
 };
@@ -803,6 +803,17 @@ if (hasInterface) then {
 			};
 			missionNamespace setVariable ["SA_Nearby_Tow_Vehicles", (call SA_Find_Nearby_Tow_Vehicles)];
 			sleep 2;
+		};
+	};
+};
+
+if (isServer) then {
+	[] spawn {
+		while {true} do {
+			// Delete any (leftover) helper objects attached to dead or deleted objects
+			private _helpers = 8 allObjects 1 select { typeOf _x == "a3a_tow_helper" };
+			{ if (!alive attachedTo _x) then { deleteVehicle _x } } forEach _helpers;
+			sleep 600;
 		};
 	};
 };

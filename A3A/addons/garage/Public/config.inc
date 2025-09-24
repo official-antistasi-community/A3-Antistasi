@@ -19,7 +19,7 @@
 HR_GRG_Prefix = "Antistasi";
 
 // Condition for whether the player can override garage locks
-HR_GRG_isCmdClient = {
+HR_GRG_canOverrideLock = {
     (isServer && hasInterface && _this isEqualTo player) //Lan host
     || {admin owner _this > 0} //admin
     || {_this isEqualTo theBoss && _this call A3A_fnc_isMember } //member-commander
@@ -79,9 +79,10 @@ HR_GRG_fnc_Hint = {
     ] call A3A_fnc_customHint;
 };
 HR_GRG_fnc_vehInit = {
-    if (_this isKindOf "StaticWeapon") then {staticsToSave pushBack _this; publicVariable "staticsToSave"};
+    // Add to garrison if placed within one
     _this setVariable ["ownerX",getPlayerUID player,true];
     [_this, TeamPlayer] call A3A_fnc_AIVEHinit;
+    ["", _this] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
 }; //is passed vehicle as _this
 HR_GRG_onOpenEvent = {
     //hide Antistasi's top information string as it has no use in the Garage
@@ -91,6 +92,15 @@ HR_GRG_onOpenEvent = {
 HR_GRG_onCloseEvent = {
     //show Antistasi's top information string
     ["GARAGE", false] call A3A_fnc_disableInfoBar;
+};
+
+// Function to check if the vehicle class is undercover
+HR_GRG_isCivilian = {
+    params [
+        ["_class", ""]
+    ];
+
+    [1, 0] select (_class in undercoverVehicles);
 };
 
 //CBA settings
@@ -133,3 +143,23 @@ if (isClass (configfile >> "CBA_Extended_EventHandlers")) then {
     }] call CBA_fnc_addSetting;
 
 };
+
+// sell button
+HR_GRG_disableSellButton = false;
+
+HR_GRG_addResources = {
+    params ["_money"];
+    [0,_money] call A3A_fnc_resourcesFIA;
+};
+
+HR_GRG_canSell = {_this isEqualTo theBoss};
+
+HR_GRG_getVehicleSellPrice = {
+    private _disableSale = false;
+    if (_disableSale) exitWith {0};
+    params ["_veh"];
+    [_veh] call A3A_fnc_getVehicleSellPrice;
+};
+
+
+

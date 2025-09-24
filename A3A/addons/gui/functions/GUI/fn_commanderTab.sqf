@@ -1,5 +1,5 @@
 /*
-Maintainer: DoomMetal
+Maintainer: Caleb Serafin, DoomMetal
     Handles updating and controls on the Commander tab of the Main dialog.
 
 Arguments:
@@ -16,7 +16,10 @@ Dependencies:
     None
 
 Example:
-    ["update"] call A3A_fnc_commanderTab;
+    ["update"] call FUNC(commanderTab);
+
+License: APL-ND
+
 */
 
 #include "..\..\dialogues\ids.inc"
@@ -39,6 +42,14 @@ private _noRadioControlsGroup = _display displayCtrl A3A_IDC_NORADIOCONTROLSGROU
 private _garbageCleanControlsGroup = _display displayCtrl A3A_IDC_GARBAGECLEANCONTROLSGROUP;
 private _airSupportButton = _display displayCtrl A3A_IDC_AIRSUPPORTBUTTON;
 private _garbageCleanButton = _display displayCtrl A3A_IDC_GARBAGECLEANBUTTON;
+private _arsenalLimitsButton = _display displayCtrl A3A_IDC_ARSENALLIMITSBUTTON;
+private _customizeLoadoutsButton = _display displayCtrl A3A_IDC_CUSTOMIZELOADOUTSBUTTON;
+private _recruitSquadButton = _display displayCtrl A3A_IDC_RECRUITSQUADCMDBUTTON;
+private _requestMissionButton = _display displayCtrl A3A_IDC_MISSIONREQUESTBUTTON;
+private _createWatchpostButton = _display displayCtrl A3A_IDC_ADDWATCHPOSTBUTTON;
+private _removeGarrisonButton = _display displayCtrl A3A_IDC_REMOVEGARRISONBUTTON;
+private _HCSquadsButton = _display displayCtrl A3A_IDC_HCSQUADSBUTTON;
+private _baseButtons = [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_recruitSquadButton,_requestMissionButton,_createWatchpostButton,_removeGarrisonButton,_HCSquadsButton];
 
 switch (_mode) do
 {
@@ -58,17 +69,41 @@ switch (_mode) do
         _noRadioControlsGroup ctrlShow false;
         _garbageCleanControlsGroup ctrlShow false;
 
-        // Show Air Support and Garbage Clean buttons
-        _airSupportButton ctrlShow true;
-        _garbageCleanButton ctrlShow true;
+        // Show base buttons
+        {_x ctrlShow true} forEach _baseButtons;
 
         // Check for radio, most of this isn't usable without one
         if !([player] call A3A_fnc_hasRadio) exitWith
         {
+            // TODO UI-update: Fix the UI overlay order
+            /*
             _noRadioControlsGroup ctrlShow true;
             _airSupportButton ctrlEnable false;
             _airSupportButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_no_radio";
+            */
+            {
+                _x ctrlEnable false;
+                _x ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_no_radio";
+            } forEach [_airSupportButton,_recruitSquadButton,_requestMissionButton,_createWatchpostButton,_removeGarrisonButton,_HCSquadsButton];
         };
+
+        // Check for selected groups
+        private _selectedGroup = _commanderMap getVariable ["selectedGroup", grpNull];
+        private _doAutoSwitch = _commanderMap getVariable ["doAutoSwitch", false];
+        private _hasGroup = !(_selectedGroup isEqualTo grpNull);
+        /*
+        private _isMortarVic = false;
+        if (_hasGroup) then {
+            {
+                private _veh = vehicle _x;
+                if (_veh isEqualTo _x) then {continue};
+                if (( "Artillery" in (getArray (configfile >> "CfgVehicles" >> typeOf _veh >> "availableForSupportTypes")))) then
+		        {
+		            _isMortarVic = true;
+                };
+            } forEach (units _selectedGroup);
+        };
+        */
 
         // Initialize fire mission vars
         _fireMissionControlsGroup setVariable ["heSelected", true];
@@ -78,21 +113,42 @@ switch (_mode) do
         _fireMissionControlsGroup setVariable ["availableSmokeRounds", 0];
         _fireMissionControlsGroup setVariable ["startPos", nil];
         _fireMissionControlsGroup setVariable ["endPos", nil];
+        _fireMissionControlsGroup setVariable ["mortarGroup", _selectedGroup];
 
         // Set map to group selection mode
         _commanderMap setVariable ["selectFireMissionPos", false];
         _commanderMap setVariable ["selectFireMissionEndPos", false];
 
-        // Check for selected groups
-        private _selectedGroup = _commanderMap getVariable ["selectedGroup", grpNull];
-        if !(_selectedGroup isEqualTo grpNull) then
-        {
-            // If a group is selected show the single group view
-            ["updateSingleGroupView"] call A3A_fnc_commanderTab;
+        // Check for valid marker for dismissal
+        if (_commanderMap getVariable ["selectedMarker",""] isEqualTo "") then {
+            _removeGarrisonButton ctrlEnable false;
+            _removeGarrisonButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_no_marker";
         } else {
-            // If no group is selected show the multiple groups view
-            ["updateMultipleGroupsView"] call A3A_fnc_commanderTab;
+            _removeGarrisonButton ctrlEnable true;
+            _removeGarrisonButton ctrlSetTooltip "";
         };
+
+        switch (true) do 
+        {
+            /*
+            case (_doAutoSwitch && _isMortarVic): { // If all is valid show fire mission view
+                {_x ctrlShow false} forEach _baseButtons; // expected to be done through single group view
+                ["updateFireMissionView"] call FUNC(commanderTab);
+            };
+            */
+            case (_hasGroup): { // If a group is selected show the single group view
+                 ["updateSingleGroupView"] call FUNC(commanderTab);
+            };
+            /*
+            case (_isArtyMenu): { // If no group is selected show the multiple groups view
+                ["updateMultipleGroupsView"] call FUNC(commanderTab);
+            };
+            */
+            default {
+                
+            };
+        };
+        _commanderMap setVariable ["doAutoSwitch", false];
     };
 
     case ("updateSingleGroupView"):
@@ -100,13 +156,14 @@ switch (_mode) do
         _multipleGroupsView ctrlShow false;
         _multipleGroupsBackground ctrlShow false;
         _multipleGroupsLabel ctrlShow false;
+        {_x ctrlShow false} forEach _baseButtons;
         _singleGroupView ctrlShow true;
 
         // Hide fire mission button initially
         private _fireMissionButton = _display displayCtrl A3A_IDC_HCFIREMISSIONBUTTON;
         _fireMissionButton ctrlShow false;
 
-        private _groupInfo = [_selectedGroup] call A3A_fnc_getGroupInfo;
+        private _groupInfo = [_selectedGroup] call FUNC(getGroupInfo);
         _groupInfo params [
             "_group",
             "_groupID",
@@ -138,19 +195,20 @@ switch (_mode) do
         _groupNameText ctrlSetText _groupID;
 
         private _groupFastTravelButton = _display displayCtrl A3A_IDC_HCFASTTRAVELBUTTON;
-        private _canFastTravel = [_group] call A3A_fnc_canFastTravel;
-        if (_canFastTravel # 0) then {
+        [player, _group] call A3A_fnc_canFastTravel params ["_isFastTravelAllowed","_fastTravelBlockers"];
+        if (_isFastTravelAllowed) then {
             _groupFastTravelButton ctrlEnable true;
             // ShortcutButtons doesn't change texture color when disabled so we have to use fade
             _groupFastTravelButton ctrlSetFade 0;
             _groupFastTravelButton ctrlCommit 0;
-            _groupFastTravelButton ctrlSetTooltip ""; // TODO: descriptive tooltip?
+            _groupFastTravelButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_fast_travel"; // TODO: descriptive tooltip?
         } else {
             _groupFastTravelButton ctrlEnable false;
             // ShortcutButtons doesn't change texture color when disabled so we have to use fade
             _groupFastTravelButton ctrlSetFade 0.5;
             _groupFastTravelButton ctrlCommit 0;
-            _groupFastTravelButton ctrlSetTooltip (_canFastTravel # 1);
+            private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
+            _groupFastTravelButton ctrlSetTooltip (_prettyString joinString ",\n\n");
         };
 
         private _groupCountText = _display displayCtrl A3A_IDC_HCGROUPCOUNT;
@@ -247,7 +305,8 @@ switch (_mode) do
         _groupCombatModeText ctrlSetText _combatMode;
 
         private _groupVehicleText = _display displayCtrl A3A_IDC_HCGROUPVEHICLE;
-        _groupVehicleText ctrlSetStructuredText parseText "<t align='right'>Super long vehicle name bla bla</t>"; // TODO UI-update: Update with actual vehicle name
+        private _groupVehicleName = getText(configfile >> "CfgVehicles" >> typeOf _groupVehicle >> "displayName");
+        _groupVehicleText ctrlSetStructuredText parseText format ["<t align='right'>%1</t>", _groupVehicleName]; 
 
         // Pan to group location
         _commanderMap ctrlMapAnimAdd [0.2, ctrlMapScale _commanderMap, getPos _groupLeader];
@@ -257,6 +316,7 @@ switch (_mode) do
     case ("updateMultipleGroupsView"):
     {
         _singleGroupView ctrlShow false;
+        {_x ctrlShow false} forEach _baseButtons;
         _multipleGroupsView ctrlShow true;
         _multipleGroupsBackground ctrlShow true;
         _multipleGroupsLabel ctrlShow true;
@@ -318,7 +378,7 @@ switch (_mode) do
                 private _display = findDisplay A3A_IDD_MAINDIALOG;
                 private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
                 _commanderMap setVariable ["selectedGroup", _control getVariable "groupToSelect"];
-                ["update"] call A3A_fnc_commanderTab;
+                ["update"] call FUNC(commanderTab);
             }];
             _groupNameLabel ctrlSetPosition [0, 0, 54 * GRID_W, 6 * GRID_H];
             _groupNameLabel ctrlSetBackgroundColor [0,0,0,1];
@@ -451,16 +511,19 @@ switch (_mode) do
 
         // Update rounds count
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
-        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        private _group = _fireMissionControlsGroup getVariable ["mortarGroup", grpNull];
+        _commanderMap setVariable ["selectedGroup", grpNull];
         private _units = units _group;
 
-        SDKMortarHEMag;
-        SDKMortarSmokeMag;
+        private _mortarHEMag = FactionGet(reb,"staticMortarMagHE");
+        private _mortarSmokeMag = FactionGet(reb,"staticMortarMagSmoke");
 
         private _heRoundsCount = 0;
         private _smokeRoundsCount = 0;
 
         private _checkedVehicles = [];
+        private _artyArrayDef1 = [];
+        private _artyRoundsArr1 = [];
 
         {
             private _veh = vehicle _x;
@@ -471,19 +534,23 @@ switch (_mode) do
                     if ((canFire _veh) and (alive _veh)) then
                     {
                         {
-                            if (_x # 0 == SDKMortarHEMag) then
+                            if (_x # 0 == _mortarHEMag) then
                             {
                                 _heRoundsCount = _heRoundsCount + _x # 1;
                             };
 
-                            if (_x # 0 == SDKMortarSmokeMag) then
+                            if (_x # 0 == _mortarSmokeMag) then
                             {
                                 _smokeRoundsCount = _smokeRoundsCount + _x # 1;
                             };
                         } forEach magazinesAmmo _veh;
+                        if ((_heRoundsCount > 0) || (_smokeRoundsCount > 0)) then {
+                            _artyArrayDef1 pushBack _veh;
+                            _artyRoundsArr1 pushBack (((magazinesAmmo _veh) select 0)select 1);
+                        };
 
                         _checkedVehicles pushBack _veh;
-                    };
+                    }; // [["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_Flare_white",8],["8Rnd_82mm_Mo_Smoke_white",8]]
                 };
             };
         } forEach _units;
@@ -492,6 +559,8 @@ switch (_mode) do
 
         _fireMissionControlsGroup setVariable ["availableHeRounds", _heRoundsCount];
         _fireMissionControlsGroup setVariable ["availableSmokeRounds", _smokeRoundsCount];
+        _fireMissionControlsGroup setVariable ["artyArrayDef1", _artyArrayDef1];
+        _fireMissionControlsGroup setVariable ["artyRoundsArr1", _artyRoundsArr1];
 
         private _heRoundsText = _display displayCtrl A3A_IDC_HEROUNDSTEXT;
         private _smokeRoundsText = _display displayCtrl A3A_IDC_SMOKEROUNDSTEXT;
@@ -532,16 +601,18 @@ switch (_mode) do
         // Disable fire button initially
         _fireButton ctrlEnable false;
 
+        private _roundType = "";
         if (_heShell) then
         {
             // HE
             _heButton ctrlEnable false;
             _smokeButton ctrlEnable true;
-
+            _roundType = _mortarHEMag;
         } else {
             // Smoke
             _smokeButton ctrlEnable false;
             _heButton ctrlEnable true;
+            _roundType = _mortarSmokeMag;
         };
 
         if (_pointStrike) then
@@ -591,6 +662,7 @@ switch (_mode) do
             if (!isNil "_startPos" && !isNil "_endPos") then
             {
                 _roundsCount = round ((_startPos distance _endPos) / 10);
+                _fireMissionControlsGroup setVariable ["roundsNumber", _roundsCount];
             };
         };
 
@@ -648,15 +720,23 @@ switch (_mode) do
         // Add tooltip to fire button when unable to fire
         private _firebuttonTooltipText = "";
         private _availableRounds = [_smokeRoundsCount, _heRoundsCount] select _heShell;
+        private _isInRange = call {
+            if (isNil "_startPos") exitWith {false};
+            _startPos inRangeOfArtillery [[_artyArrayDef1#0],_roundType];
+        };
         switch (true) do
         {
             case (isNil "_startPos" || (!_pointStrike && isNil "_endPos")):
             {
-                _firebuttonTooltipText = _firebuttonTooltipText + localize "STR_antistasi_dialogs_main_hc_fire_mission_position_not_set_tooltip" + "\n"
+                _firebuttonTooltipText = localize "STR_antistasi_dialogs_main_hc_fire_mission_position_not_set_tooltip"
             };
             case (_roundsCount > _availableRounds):
             {
-                _firebuttonTooltipText = _firebuttonTooltipText + localize "STR_antistasi_dialogs_main_hc_fire_misison_no_ammo_tooltip" + "\n"
+                _firebuttonTooltipText = localize "STR_antistasi_dialogs_main_hc_fire_mission_no_ammo_tooltip"
+            };
+            case !(_isInRange):
+            {
+                _firebuttonTooltipText = localize "STR_antistasi_dialogs_main_hc_fire_mission_out_of_range_tooltip"
             };
         };
 
@@ -686,7 +766,7 @@ switch (_mode) do
             private _fireMissionControlsGroup = _display displayCtrl A3A_IDC_FIREMISSONCONTROLSGROUP;
             _fireMissionControlsGroup setVariable ["startPos", _clickedWorldPosition];
             _commanderMap setVariable ["selectFireMissionPos", false];
-            ["updateFireMissionView"] call A3A_fnc_commanderTab;
+            ["updateFireMissionView"] call FUNC(commanderTab);
             Trace_1("Set fire mission startPos: %1", _clickedWorldPosition);
         };
 
@@ -697,36 +777,41 @@ switch (_mode) do
             private _fireMissionControlsGroup = _display displayCtrl A3A_IDC_FIREMISSONCONTROLSGROUP;
             _fireMissionControlsGroup setVariable ["endPos", _clickedWorldPosition];
             _commanderMap setVariable ["selectFireMissionEndPos", false];
-            ["updateFireMissionView"] call A3A_fnc_commanderTab;
+            ["updateFireMissionView"] call FUNC(commanderTab);
             Trace_1("Set fire mission endPos: %1", _clickedWorldPosition);
         };
 
+        /*
         if (count hcAllGroups player < 1) exitWith {
             Debug("CommanderMap clicked but there are no HC groups to select.");
             _commanderMap setVariable ["selectedGroup", grpNull];
         };
+        */
 
-        // Find closest HC squad to the clicked position
-        Trace("Selecting HC group");
-        private _selectedGroup = [hcAllGroups player, _clickedWorldPosition] call BIS_fnc_nearestPosition;
-        Trace_1("_selectedGroup: %1", groupId _selectedGroup);
-        private _selectedGroupMapPos = _commanderMap ctrlMapWorldToScreen getPos leader _selectedGroup;
+        // Find closest HC squad or marker to the clicked position
+        private _selectableMarkers = airportsX + resourcesX + factories + outposts + seaports + citiesX + outpostsFIA + ["Synd_HQ"];
+        private _selectableGroups = hcAllGroups player;
+        private _selectOptions = _selectableMarkers + _selectableGroups;
+        private _selectedItem = [_selectOptions, _clickedWorldPosition] call BIS_fnc_nearestPosition;
+        private _selectedItemPosition = if (_selectedItem isEqualType grpNull) then {getPos leader _selectedItem;} else {getMarkerPos _selectedItem;};
+        private _selectedItemMapPos = _commanderMap ctrlMapWorldToScreen _selectedItemPosition;
         private _maxDistance = 6 * GRID_W; // TODO UI-update: Move somewhere else?
-        private _distance = _selectedGroupMapPos distance _clickedPosition;
+        private _distance = _selectedItemMapPos distance _clickedPosition;
         Trace_4("_selectedGroupMapPos %1, _clickedPosition %2, _maxDistance %3, _distance %4", _selectedGroupMapPos, _clickedPosition, _maxDistance, _distance);
-
-        // If clicked position is nowhere near any hc groups, deselect all units
-        // and show list view
         if (_distance > _maxDistance) exitWith {
-            Debug("Distance too large, deselecting group");
+                Debug("Distance too large, deselecting item");
+                _commanderMap setVariable ["selectedGroup", grpNull];
+                _commanderMap setVariable ["selectedMarker", locationNull];
+            };
+        if (_selectedItem isEqualType grpNull) then {
+            _commanderMap setVariable ["selectedGroup", _selectedItem];
+            _commanderMap setVariable ["selectedMarker", locationNull];
+            ["update"] call FUNC(commanderTab); // Update single group view if applicable
+        } else {
+            _commanderMap setVariable ["selectedMarker", _selectedItem];
+            _commanderMap setVariable ["selectMarkerData", [_selectedItemPosition]];
             _commanderMap setVariable ["selectedGroup", grpNull];
-            ["update"] call A3A_fnc_commanderTab;
-        };
-
-        _commanderMap setVariable ["selectedGroup", _selectedGroup];
-
-        // Update single group view
-        ["update"] call A3A_fnc_commanderTab;
+        };  
     };
 
     case ("groupNameLabelClicked"):
@@ -735,7 +820,7 @@ switch (_mode) do
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
         _commanderMap setVariable ["selectedGroup", grpNull];
-        ["update"] call A3A_fnc_commanderTab;
+        ["update"] call FUNC(commanderTab);
     };
 
     case ("groupRemoteControlButtonClicked"):
@@ -743,8 +828,35 @@ switch (_mode) do
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
         private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        if (_group isNotEqualTo grpNull) then {
+            closeDialog 1;
+            [[_group]] spawn A3A_fnc_controlHCSquad;
+        }
+    };
+
+    case ("groupMountButtonClicked"):
+    {
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
+        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        ["mount",[_group]] spawn A3A_fnc_vehStats;
+    };
+
+    case ("groupAddVehicleButtonClicked"):
+    {
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
+        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        [_group] spawn A3A_fnc_addSquadVeh;
+    };
+
+    case ("groupGarrisonButtonClicked"):
+    {
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
+        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
         closeDialog 1;
-        [_group] spawn A3A_fnc_controlHCsquad;
+        [[_group]] spawn A3A_fnc_addToGarrison;
     };
 
     case ("groupDismissButtonClicked"):
@@ -757,7 +869,7 @@ switch (_mode) do
         [[_group]] spawn A3A_fnc_dismissSquad;
         // TODO UI-update: might need a slight delay here, tab gets updated before squad has been completely dismissed
         // leaving it visible in the list even though it should be gone
-        ["update"] call A3A_fnc_commanderTab;
+        ["update"] call FUNC(commanderTab);
     };
 
     case ("groupFastTravelButtonClicked"):
@@ -766,8 +878,8 @@ switch (_mode) do
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
         private _fastTravelMap = _display displayCtrl A3A_IDC_FASTTRAVELMAP;
         private _selectedGroup = _commanderMap getVariable "selectedGroup";
-        ["setHcMode", [true, _selectedGroup]] call A3A_fnc_fastTravelTab;
-        ["switchTab", ["fasttravel"]] call A3A_fnc_mainDialog;
+        ["setHcMode", [true, _selectedGroup]] call FUNC(fastTravelTab);
+        ["switchTab", ["fasttravel"]] call FUNC(mainDialog);
     };
 
     case ("fireMissionSelectionChanged"):
@@ -874,7 +986,7 @@ switch (_mode) do
         };
 
         // Update fire mission view to show changes
-        ["updateFireMissionView"] call A3A_fnc_commanderTab;
+        ["updateFireMissionView"] call FUNC(commanderTab);
     };
 
     case ("fireMissionButtonClicked"):
@@ -884,13 +996,14 @@ switch (_mode) do
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
 
         // Get params for fire mission from controlsGroup
-        private _group = _commanderMap getVariable ["selectedGroup", grpNull];
+        private _group = _fireMissionControlsGroup getVariable ["mortarGroup", grpNull];
         private _heSelected = _fireMissionControlsGroup getVariable ["heSelected", true];
         private _pointSelected = _fireMissionControlsGroup getVariable ["pointSelected", true];
         private _roundsNumber = _fireMissionControlsGroup getVariable ["roundsNumber", 0];
         private _startPos = _fireMissionControlsGroup getVariable ["startPos", []];
         private _endPos = _fireMissionControlsGroup getVariable ["endPos", []];
-
+        private _artyArrayDef1 = _fireMissionControlsGroup getVariable ["artyArrayDef1", []];
+        private _artyRoundsArr1 = _fireMissionControlsGroup getVariable ["artyRoundsArr1", []];
         // Debug stuff
         private _shell = if (_heSelected) then {"HE"} else {"Smoke"};
         private _type = if (_pointSelected) then {"Point"} else {"Barrage"};
@@ -898,28 +1011,29 @@ switch (_mode) do
         // private _debugStr = format["FIRE MISSION- Shell: %1, Type: %2, Rounds: %3, StartPos: %4, EndPos: %5", _shell, _type, _roundsNumber, _startPos, _endPos];
         // Debug(_debugStr);
 
-        // Set the necessary global variables
+        private ["_typeAmmunition","_rounds","_positionTel","_positionTel2"];
         Debug_1("_heSelected: %1", _heSelected);
         if (_heSelected) then
         {
-            typeAmmunition = SDKMortarHEMag;
+            _typeAmmunition = FactionGet(reb,"staticMortarMagHE");
         } else {
-            typeAmmunition = SDKMortarSmokeMag;
+            _typeAmmunition = FactionGet(reb,"staticMortarMagSmoke");
         };
-        if (_pointSelected) then
-        {
-            typeArty = "NORMAL";
-        } else {
-            typeArty = "BARRAGE";
-        };
-        roundsX = _roundsNumber;
+        _rounds = _roundsNumber;
 
-        positionTel = _startPos;
-        if (typeArty == "BARRAGE") then {
-            positionTel2 = _endPos;
-        };
+        _positionTel = _startPos;
+        _positionTel2 = _endPos;
 
-        [[_group]] spawn A3A_fnc_artySupport;
+        [_typeAmmunition,_rounds,_artyArrayDef1,_artyRoundsArr1,_positionTel,_positionTel2] spawn A3A_fnc_artySupportFire;
+    };
+
+    case ("removeGarrisonButtonClicked"):
+    {
+        Trace("Dismissing garrison");
+        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        private _selectedMarker = _commanderMap getVariable ["selectedMarker", ""];
+        if !(_selectedMarker call A3A_fnc_canEditGarrison) exitWith {};     // throws hints on failure
+    	[_selectedMarker, true, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
     };
 
     case ("showGarbageCleanOptions"):
@@ -944,14 +1058,19 @@ switch (_mode) do
         {
             [] remoteExec ["A3A_fnc_garbageCleaner",2];
         } else {
-            ["Garbage Cleaner", "Only Player Commander has access to this function."] call A3A_fnc_customHint; // TODO UI-update: stringtable this
+            ["Garbage Cleaner", localize "STR_antistasi_dialogs_main_commanderOnly"] call A3A_fnc_customHint;
         };
     };
 
     case ("garbageCleanHqButtonClicked"):
     {
-        closeDialog 2;
-        ["Garbage Cleaner", "HQ only garbage clean yet to be implemented."] call A3A_fnc_customHint;
+        closedialog 1;
+        if (player == theBoss) then
+        {
+            [] remoteExec ["A3A_fnc_HQgarbageClean",2];
+        } else {
+            ["Garbage Cleaner", localize "STR_antistasi_dialogs_main_commanderOnly"] call A3A_fnc_customHint;
+        };
     };
 
     default

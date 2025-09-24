@@ -67,6 +67,7 @@ setVar("vehiclesAPCs", OccAndInv("vehiclesAPCs") );
 setVar("vehiclesIFVs", OccAndInv("vehiclesIFVs") );
 setVar("vehiclesLightTanks", OccAndInv("vehiclesLightTanks"));
 setVar("vehiclesTanks", OccAndInv("vehiclesTanks"));
+setVar("vehiclesHeavyTanks", OccAndInv("vehiclesHeavyTanks"));
 setVar("vehiclesAA", OccAndInv("vehiclesAA"));
 setVar("vehiclesArtillery", OccAndInv("vehiclesArtillery"));
 setVar("vehiclesTransportAir", OccAndInv("vehiclesHelisLight") + OccAndInv("vehiclesHelisTransport") + OccAndInv("vehiclesPlanesTransport") );
@@ -77,6 +78,9 @@ setVar("vehiclesHelisTransport", OccAndInv("vehiclesHelisTransport"));
 setVar("vehiclesPlanesAA", OccAndInv("vehiclesPlanesAA"));
 setVar("vehiclesPlanesCAS", OccAndInv("vehiclesPlanesCAS"));
 setVar("vehiclesPlanesTransport", OccAndInv("vehiclesPlanesTransport"));
+setVar("vehiclesAirPatrol", OccAndInv("vehiclesAirPatrol"));
+setVar("vehiclesTransportBoats",OccAndInv("vehiclesTransportBoats"));
+setVar("vehiclesGunBoats",OccAndInv("vehiclesGunBoats"));
 setVar("staticMortars", OccAndInv("staticMortars") + Reb("staticMortars"));
 setVar("staticAA", OccAndInv("staticAA") + Reb("staticAA"));
 setVar("staticAT", OccAndInv("staticAT") + Reb("staticAT"));
@@ -135,6 +139,7 @@ setVar("vehiclesLight", _carsArmed + _carsUnarmed);
 private _vehArmor =
 getVar("vehiclesTanks")
 + getVar("vehiclesLightTanks")
++ getVar("vehiclesHeavyTanks")
 + getVar("vehiclesAA")
 + getVar("vehiclesArtillery")
 + getVar("vehiclesLightAPCs")
@@ -153,6 +158,13 @@ setVar("vehiclesReb", _vehReb);
 //trucks that can cary logistics cargo
 private _vehCargoTrucks = (_vehTrucks + OccAndInv("vehiclesCargoTrucks")) select { [_x] call A3A_Logistics_fnc_getVehCapacity > 1 };
 setVar("vehiclesCargoTrucks", _vehCargoTrucks);
+
+private _vehUtilityTrucks = 
+OccAndInv("vehiclesAmmoTrucks")
++ OccAndInv("vehiclesRepairTrucks")
++ OccAndInv("vehiclesFuelTrucks")
++ OccAndInv("vehiclesMedical");
+setVar("vehiclesUtilityTrucks", _vehUtilityTrucks);
 
 missionNamespace setVariable ["A3A_faction_all", A3A_faction_all, true];
 A3A_faction_all

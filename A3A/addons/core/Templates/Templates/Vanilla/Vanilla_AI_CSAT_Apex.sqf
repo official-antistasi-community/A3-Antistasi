@@ -19,7 +19,7 @@
 
 ["vehiclesBasic", ["O_T_Quadbike_01_ghex_F"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["O_T_LSV_02_unarmed_F","O_T_MRAP_02_ghex_F"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed",["O_T_MRAP_02_hmg_ghex_F","O_T_MRAP_02_hmg_ghex_F","O_T_MRAP_02_gmg_ghex_F","O_T_LSV_02_armed_F","O_T_LSV_02_AT_F"]] call _fnc_saveToTemplate;
+private _lightArmed = ["O_T_MRAP_02_hmg_ghex_F","O_T_MRAP_02_hmg_ghex_F","O_T_MRAP_02_gmg_ghex_F","O_T_LSV_02_armed_F","O_T_LSV_02_AT_F"];
 ["vehiclesTrucks", ["O_T_Truck_02_transport_F","O_T_Truck_02_F","O_T_Truck_03_transport_ghex_F","O_T_Truck_03_covered_ghex_F"]] call _fnc_saveToTemplate;
 private _cargoTrucks = ["O_T_Truck_02_transport_F","O_T_Truck_02_F","O_T_Truck_03_transport_ghex_F","O_T_Truck_03_covered_ghex_F"];
 ["vehiclesAmmoTrucks", ["O_T_Truck_03_ammo_ghex_F","O_T_Truck_02_Ammo_F"]] call _fnc_saveToTemplate;
@@ -32,7 +32,7 @@ private _vehiclesIFVs = ["a3a_T_APC_Tracked_02_cannon_F"];
 private _Tanks = ["O_T_MBT_02_cannon_ghex_F"];
 ["vehiclesAA", ["O_T_APC_Tracked_02_AA_ghex_F"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["O_T_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["O_T_Boat_Armed_01_hmg_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["a3a_T_APC_Wheeled_02_rcws_v2_F"]] call _fnc_saveToTemplate;
 
@@ -42,8 +42,8 @@ private _Tanks = ["O_T_MBT_02_cannon_ghex_F"];
 
 ["vehiclesHelisLight", ["O_Heli_Light_02_unarmed_F"]] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", ["O_Heli_Transport_04_bench_black_F","O_Heli_Transport_04_covered_black_F"]] call _fnc_saveToTemplate;
-["vehiclesHelisLightAttack", ["O_Heli_Light_02_dynamicLoadout_F", "O_Heli_Light_02_F"]] call _fnc_saveToTemplate; 
-["vehiclesHelisAttack", ["O_Heli_Attack_02_black_F", "O_Heli_Attack_02_dynamicLoadout_black_F"]] call _fnc_saveToTemplate;
+["vehiclesHelisLightAttack", ["O_Heli_Light_02_dynamicLoadout_F"]] call _fnc_saveToTemplate; 
+["vehiclesHelisAttack", ["O_Heli_Attack_02_dynamicLoadout_black_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["O_T_MBT_02_arty_ghex_F"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
@@ -54,9 +54,9 @@ private _Tanks = ["O_T_MBT_02_cannon_ghex_F"];
 ["uavsPortable", ["O_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles - militia vehicles are mostly used in the early game, police cars are being used by troops around cities -- Example:
-["vehiclesMilitiaLightArmed", ["O_T_LSV_02_armed_F","O_T_LSV_02_AT_F"]] call _fnc_saveToTemplate;
+private _vehiclesMilitiaLightArmed = ["O_T_LSV_02_armed_F","O_T_LSV_02_AT_F"];
 ["vehiclesMilitiaTrucks", ["O_T_Truck_02_F"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaCars", ["O_T_LSV_02_unarmed_F"]] call _fnc_saveToTemplate;
+private _vehiclesMilitiaCars = ["O_T_LSV_02_unarmed_F"];
 
 private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 
@@ -84,11 +84,24 @@ if ("enoch" in A3A_enabledDLC) then {
     _vehiclesPolice append ["B_GEN_Offroad_01_comms_F","B_GEN_Offroad_01_covered_F"];
 };
 if ("tanks" in A3A_enabledDLC) then {
-    _Tanks append ["O_T_MBT_04_cannon_F","O_T_MBT_04_command_F"];
+	["vehiclesHeavyTanks", ["O_T_MBT_04_cannon_F", "O_T_MBT_04_cannon_F", "O_T_MBT_04_command_F"]] call _fnc_saveToTemplate;
 };
 if ("orange" in A3A_enabledDLC) then {
     _vehiclesPolice append ["B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
 };
+if ("rf" in A3A_enabledDLC) then {
+    _vehiclesPolice append ["a3a_police_Pickup_rf", "B_GEN_Pickup_covered_rf", "a3a_police_Pickup_comms_rf"];
+    _vehiclesMilitiaCars append ["O_T_Pickup_rf"];
+    _vehiclesMilitiaLightArmed append ["a3a_ghex_Pickup_mmg_rf", "O_T_Pickup_rcws_rf"];
+    _lightArmed append ["O_T_Pickup_rcws_rf", "O_T_Pickup_rcws_rf"];
+};
+if ("ef" in A3A_enabledDLC) then {
+    ["vehiclesGunBoats", ["EF_O_CombatBoat_HMG_OPF", "EF_O_CombatBoat_AT_OPF"]] call _fnc_saveToTemplate;
+};
+
+["vehiclesLightArmed",_lightArmed] call _fnc_saveToTemplate;
+["vehiclesMilitiaCars", _vehiclesMilitiaCars] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", _vehiclesMilitiaLightArmed] call _fnc_saveToTemplate;
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;
 
 ["vehiclesTanks", _Tanks] call _fnc_saveToTemplate; 
@@ -400,6 +413,18 @@ private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["uniforms", ["U_O_PilotCoveralls"]];
 _pilotLoadoutData set ["vests", ["V_BandollierB_khk"]];
 _pilotLoadoutData set ["helmets", ["H_CrewHelmetHeli_O", "H_PilotHelmetHeli_O"]];
+_pilotLoadoutData set ["facewear", ["G_Aviator","G_Squares_Tinted","G_Tactical_Black"]];
+
+private _officerLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
+_officerLoadoutData set ["uniforms", ["U_O_T_Officer_F", "U_O_ParadeUniform_01_CSAT_F", "U_O_ParadeUniform_01_CSAT_decorated_F"]];
+_officerLoadoutData set ["vests", ["V_TacVest_khk", "V_LegStrapBag_olive_F"]];
+_officerLoadoutData set ["helmets", ["H_ParadeDressCap_01_CSAT_F"]];
+_officerLoadoutData set ["backpacks", []];
+_officerLoadoutData set ["SMGs", [
+["arifle_Katiba_C_F", "", "acc_pointer_IR", "optic_Holosight_blk_F", [], [], ""],
+["arifle_Katiba_C_F", "", "acc_flashlight", "optic_ACO_grn", [], [], ""]
+]];
+
 
 if ("mark" in A3A_enabledDLC) then {
     (_sfLoadoutData get "machineGuns") append [
@@ -422,6 +447,41 @@ if ("mark" in A3A_enabledDLC) then {
     ["srifle_DMR_05_hex_F", "", "acc_pointer_IR", "optic_KHS_blk", [], [], "bipod_02_F_hex"],
     ["srifle_DMR_05_blk_F", "", "acc_pointer_IR", "optic_LRPS", [], [], "bipod_02_F_hex"]
     ];
+};
+if ("rf" in A3A_enabledDLC) then {
+    (_sfLoadoutData get "slRifles") append [
+    ["arifle_ash12_wood_RF","suppressor_127x55_small_wood_RF","acc_pointer_IR","optic_Arco_ghex_F",["20Rnd_127x55_Mag_wood_RF","20Rnd_127x55_Mag_wood_RF","20Rnd_127x55_Mag_wood_RF"], [], ""],
+    ["arifle_ash12_wood_RF","suppressor_127x55_small_wood_RF","acc_pointer_IR","optic_Arco_ghex_F",["20Rnd_127x55_Mag_wood_RF","20Rnd_127x55_Mag_wood_RF","20Rnd_127x55_Mag_wood_RF"], [], ""]
+    ];
+    (_sfLoadoutData get "rifles") append [["arifle_ash12_wood_RF","suppressor_127x55_small_wood_RF","acc_pointer_IR","optic_Holosight_lush_F",["20Rnd_127x55_Mag_wood_RF","20Rnd_127x55_Mag_wood_RF","20Rnd_127x55_Mag_wood_RF"], [], ""]];
+    (_sfLoadoutData get "grenadeLaunchers") append [["arifle_ash12_GL_wood_RF", "suppressor_127x55_small_wood_RF", "acc_pointer_IR", "optic_Holosight_lush_F", ["20Rnd_127x55_Mag_wood_RF","20Rnd_127x55_Mag_wood_RF","20Rnd_127x55_Mag_wood_RF"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]];
+    (_sfLoadoutData get "marksmanRifles") append [
+    ["arifle_ash12_LR_wood_RF","suppressor_127x55_big_wood_RF","acc_pointer_IR","optic_Arco_ghex_F",["10Rnd_127x55_Mag_wood_RF","10Rnd_127x55_Mag_wood_RF","10Rnd_127x55_Mag_wood_RF"], [], "bipod_02_F_hex"],
+    ["arifle_ash12_LR_wood_RF","suppressor_127x55_big_wood_RF","acc_pointer_IR","optic_DMS",["10Rnd_127x55_Mag_wood_RF","10Rnd_127x55_Mag_wood_RF","10Rnd_127x55_Mag_wood_RF"], [], "bipod_02_F_hex"],
+    ["arifle_ash12_LR_wood_RF","suppressor_127x55_big_wood_RF","acc_pointer_IR","optic_SOS",["10Rnd_127x55_Mag_wood_RF","10Rnd_127x55_Mag_wood_RF","10Rnd_127x55_Mag_wood_RF"], [], "bipod_02_F_hex"]  
+    ];
+    (_sfLoadoutData get "helmets") append [
+        "H_HelmetHeavy_GHex_RF",
+        "H_HelmetHeavy_Simple_GHex_RF",
+        "H_HelmetHeavy_VisorUp_GHex_RF"
+    ];
+    (_policeLoadoutData get "sidearms") append ["hgun_Glock19_RF"];
+    (_sfLoadoutData get "SMGs") append [
+    ["SMG_01_black_RF", "muzzle_snds_acp", "", "optic_Holosight", [], [], ""],
+    ["SMG_01_black_RF", "muzzle_snds_acp", "", "optic_Aco_smg", [], [], ""]
+    ];
+    (_militaryLoadoutData get "SMGs") append [
+    ["SMG_01_black_RF", "", "", "optic_Holosight", [], [], ""],
+    ["SMG_01_black_RF", "", "", "optic_Aco_smg", [], [], ""]
+    ];
+    (_militiaLoadoutData get "SMGs") append [
+    ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "", [], [], ""]
+    ];
+    (_policeLoadoutData get "SMGs") append [
+    ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Holosight", [], [], ""],
+    ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Aco_smg", [], [], ""]
+    ];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
 };
 
 /////////////////////////////////
@@ -921,7 +981,7 @@ private _unitTypes = [
 
 ["other", [["Pilot", _crewTemplate]], _pilotLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the unit used in the "kill the official" mission
-["other", [["Official", _squadLeaderTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Official", _policeTemplate]], _officerLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "kill the traitor" mission
 ["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "Invader Punishment" mission

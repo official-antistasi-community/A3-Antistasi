@@ -1,7 +1,7 @@
 class A3A_BuyVehicleDialog : A3A_TabbedDialog
 {
-  idd = A3A_IDD_BUYVEHICLEDIALOG;
-  onLoad = "[""onLoad""] spawn A3A_fnc_buyVehicleDialog";
+    idd = A3A_IDD_BUYVEHICLEDIALOG;
+    onLoad = "[""onLoad""] spawn A3A_GUI_fnc_buyVehicleDialog";
 
     class Controls
     {
@@ -29,7 +29,7 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_vehicle_tab_civ;
-                    onButtonClick = "[""switchTab"", [""civilian""]] call A3A_fnc_buyVehicleDialog";
+                    onButtonClick = "[""switchTab"", [""civilian""]] call A3A_GUI_fnc_buyVehicleDialog";
                     x = 0;
                     y = 0;
                     w = 30 * GRID_W;
@@ -40,7 +40,7 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_vehicle_tab_reb;
-                    onButtonClick = "[""switchTab"", [""rebel""]] call A3A_fnc_buyVehicleDialog";
+                    onButtonClick = "[""switchTab"", [""rebel""]] call A3A_GUI_fnc_buyVehicleDialog";
                     x = 30 * GRID_W;
                     y = 0;
                     w = 30 * GRID_W;
@@ -51,7 +51,7 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_vehicle_tab_static;
-                    onButtonClick = "[""switchTab"", [""static""]] call A3A_fnc_buyVehicleDialog";
+                    onButtonClick = "[""switchTab"", [""static""]] call A3A_GUI_fnc_buyVehicleDialog";
                     x = 60 * GRID_W;
                     y = 0;
                     w = 30 * GRID_W;
@@ -62,7 +62,7 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_vehicle_tab_other;
-                    onButtonClick = "[""switchTab"", [""other""]] call A3A_fnc_buyVehicleDialog";
+                    onButtonClick = "[""switchTab"", [""other""]] call A3A_GUI_fnc_buyVehicleDialog";
                     x = 90 * GRID_W;
                     y = 0;
                     w = 30 * GRID_W;

@@ -19,7 +19,7 @@
 ["itemMaps", ["vn_b_item_map"]] call _fnc_saveToTemplate;  // Relies on autodetection.
 
 ["diveGear", ["vn_b_uniform_seal_09_01", "vn_b_acc_seal_01", "vn_b_vest_seal_01"]] call _fnc_saveToTemplate;
-["flyGear", ["vn_b_uniform_heli_01_01"]] call _fnc_saveToTemplate;
+["flyGear", ["vn_b_uniform_heli_01_01","vn_i_pack_parachute_01"]] call _fnc_saveToTemplate;
 
 ["surrenderCrate", "vn_o_ammobox_04"] call _fnc_saveToTemplate;
 
@@ -112,6 +112,7 @@ private _rebUniforms = [
 
 ["faces", ["AsianHead_A3_01", "AsianHead_A3_02", "AsianHead_A3_03", "AsianHead_A3_04", "AsianHead_A3_05", "AsianHead_A3_06", "AsianHead_A3_07"]] call _fnc_saveToTemplate;
 ["voices", ["vie"]] call _fnc_saveToTemplate;
+"vietmen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //

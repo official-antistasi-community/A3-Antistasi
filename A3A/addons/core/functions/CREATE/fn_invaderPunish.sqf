@@ -19,8 +19,6 @@ params ["_mrkDest", "_mrkOrigin", "_delay"];
 
 ServerInfo_2("Launching CSAT Punishment Against %1 from %2", _mrkDest, _mrkOrigin);
 
-// Mostly to prevent fast travel
-bigAttackInProgress = true; publicVariable "bigAttackInProgress";
 forcedSpawn pushBack _mrkDest; publicVariable "forcedSpawn";
 
 private _posDest = getMarkerPos _mrkDest;
@@ -56,8 +54,7 @@ private _artyTargPos = _posDest getPos [_size/3, random 360];
 
 
 // Spawn in the "civilians" (rebel defenders)
-private _numCiv = (server getVariable _mrkDest) select 0;
-_numCiv = 4 + round sqrt (_numCiv);
+private _numCiv = 4 + round sqrt (A3A_cityPop get _mrkDest);
 if (_numCiv > 30) then {_numCiv = 30};
 
 private _civilians = [];
@@ -106,26 +103,27 @@ private _fnc_adjustNearCities = {
         private _dist = getMarkerPos _x distance2d _position;
         if (_dist > _maxDist) then { continue };
         private _suppChange = linearConversion [0, _maxDist, _dist, _maxSupport, 0, true];
-        [0,_suppChange,_x,false] spawn A3A_fnc_citySupportChange;		// don't scale this by pop
+        [_suppChange, _x, false] remoteExecCall ["A3A_fnc_citySupportChange", 2];		// don't scale this by pop
     } forEach citiesX;
 };
 
 if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time > _missionExpireTime)) then {
     Info_1("Rebels defeated a punishment attack against %1", _mrkDest);
     [_taskId, "invaderPunish", "SUCCEEDED"] call A3A_fnc_taskSetState;
-    [_posDest, 30, 3000] call _fnc_adjustNearCities;
+    [_posDest, 20, 3000] call _fnc_adjustNearCities;
 
+    A3A_punishmentDefBuff = A3A_punishmentDefBuff + 1.25;
     [Occupants, -10, 90] remoteExec ["A3A_fnc_addAggression",2];
     {if (isPlayer _x) then {[10,_x] call A3A_fnc_playerScoreAdd}} forEach ([500,0,_posDest,teamPlayer] call A3A_fnc_distanceUnits);
     [10,theBoss] call A3A_fnc_playerScoreAdd;
 } else {
     Info_1("Rebels lost a punishment attack against %1", _mrkDest);
     [_taskId, "invaderPunish", "FAILED"] call A3A_fnc_taskSetState;
-    [_posDest, -30, 3000] call _fnc_adjustNearCities;
+    [_posDest, -20, 3000] call _fnc_adjustNearCities;
 
     // Invaders pay extra to destroy a city
-    private _citypop = (server getVariable _mrkDest) select 0;
-    [-4 * _citypop * A3A_balancePlayerScale, Invaders, "attack"] remoteExec ["A3A_fnc_addEnemyResources", 2];
+    private _citypop = A3A_cityPop get _mrkDest;
+    [-50 * sqrt _citypop * A3A_balancePlayerScale, Invaders, "attack"] remoteExec ["A3A_fnc_addEnemyResources", 2];
 
     destroyedSites = destroyedSites + [_mrkDest];
     publicVariable "destroyedSites";
@@ -137,7 +135,7 @@ if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time 
     [_mrkDest] call A3A_fnc_destroyCity;
     // Putting this stuff here is a bit gross, but currently there's no cityFlip function. Usually done by resourceCheck.
     sidesX setVariable [_mrkDest, Invaders, true];
-    garrison setVariable [_mrkDest, [], true];
+	[_mrkDest, Invaders] remoteExecCall ["A3A_fnc_garrisonServer_changeSide", 2];
     [_mrkDest] call A3A_fnc_mrkUpdate;
     [] spawn A3A_fnc_checkCampaignEnd; // If a town is destroyed, check for loss
 };
@@ -151,7 +149,7 @@ forcedSpawn = forcedSpawn - [_mrkDest]; publicVariable "forcedSpawn";
 
 // Order remaining aggressor units back to base, hand them to the group despawner
 { [_x] spawn A3A_fnc_VEHDespawner } forEach _vehicles;
-{ [_x] spawn A3A_fnc_enemyReturnToBase } forEach _crewGroups + _cargoGroups;
+{ [_x] spawn A3A_fnc_enemyReturnToBase } forEach (_crewGroups + _cargoGroups);
 
 // When the city marker is despawned, get rid of the civilians
 waitUntil {sleep 5; (spawner getVariable _mrkDest == 2)};

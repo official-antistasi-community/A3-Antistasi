@@ -61,7 +61,7 @@ _unit addEventHandler ["Killed", {
     };
 
     if (_victim == _killer) then {
-        _nul = [-1,-1,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
+        [-1, getPosATL _victim] remoteExecCall ["A3A_fnc_citySupportChange", 2];        // what case is this?
     } else {
         if (isPlayer _killer) then {
             if (_victim getVariable "unitType" == FactionGet(civ, "unitWorker")) then {_killer addRating 1000};
@@ -69,24 +69,15 @@ _unit addEventHandler ["Killed", {
         };
         _multiplier = 1;
         if ((_victim getVariable "unitType") == FactionGet(civ, "unitPress")) then {_multiplier = 3};
-        switch (true) do {
-            //Must be group, in case they're undercover.
-            case (side group _killer == teamPlayer): {
-                ServerDebug("aggroEvent | Rebels killed a civilian");
-                [Occupants, 10 * _multiplier, 60] remoteExec ["A3A_fnc_addAggression",2];
-                [1,0,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-            };
-            case (side group _killer == Occupants): {
-                [Occupants, -5 * _multiplier, 60] remoteExec ["A3A_fnc_addAggression",2];
-                [0,1,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-            };
-            case (side group _killer == Invaders): {
-                [-1,1,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-            };
+        //Must be group, in case they're undercover.
+        if (side group _killer == teamPlayer) then {
+            ServerDebug("aggroEvent | Rebels killed a civilian");
+            [Occupants, 10 * _multiplier, 60] remoteExec ["A3A_fnc_addAggression",2];
+            [-1 * _multiplier, getPosATL _victim] remoteExecCall ["A3A_fnc_citySupportChange", 2];
         };
     };
 
-    [_victim] spawn A3A_fnc_postmortem;
+    [_victim] remoteExec ["A3A_fnc_postmortem", 2];
 }];
 
 ["civInit", [_unit]] call EFUNC(Events,triggerEvent);

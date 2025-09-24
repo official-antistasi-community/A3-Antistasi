@@ -35,7 +35,7 @@ private _spawnPos = false;
 private _spawnDir = false;
 
 for "_i" from 1 to 10 do {
-    //systemChat format ["Attempt %1", _i];
+    if (_roads isEqualTo []) exitWith {};
     private _road = selectRandom _roads;
     (getRoadInfo _road) params ["", "_roadWidth", "", "", "", "", "_begPos", "_endPos"];
 

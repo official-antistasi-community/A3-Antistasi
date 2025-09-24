@@ -1,16 +1,22 @@
 /*
-Author: [Killerswin2, Hakon (Stole his bb code)]
-	creates the controls for the dialog. Picture and Button are created. Data Saved to buttons. 
+Maintainer: Caleb Serafin, Killerswin2, Hakon
+	Creates the controls for the dialog. Picture and Button are created. Data Saved to buttons.
+
 Arguments:
-1. <string> string for initilizer
+	<string> string for initilizer
+
 Return Value:
-NONE
+	NONE
+
 Scope: Client
 Environment: scheduled
-Public: 
-no
+Public: No
 Example:
-["onLoad"] spawn A3A_fnc_teamLeaderRTSPlacerDialog
+	["onLoad"] spawn A3A_GUI_fnc_teamLeaderRTSPlacerDialog
+
+License: APL-ND
+	As of 1st July 2024 Ellis Nielsen, the owner of the code, has transfered the ownership to Calep Serafin.
+
 */
 
 
@@ -45,7 +51,7 @@ switch (_mode) do
 		_moneyCtrl ctrlSetText format ["%1 €", A3A_building_EHDB # AVAILABLE_MONEY];
 
 		private _buildableObjects = A3A_buildableObjects;
-		
+
 		private _boxWidth = round ((ctrlPosition _buildControlsGroup # 2) / GRID_W);
 		private _itemsPerRow = floor ((_boxWidth - 6) / 36);			// minimum 32 + 4 grids per tile
 		private _itemWidth = floor ((_boxWidth - 6 - 4*_itemsPerRow) / _itemsPerRow);
@@ -62,13 +68,13 @@ switch (_mode) do
 			private _displayName = getText (_configClass >> "displayName");
 			private _editorPreview = getText (_configClass >> "editorPreview");
 			private _model = getText (_configClass >> "model");
-	
+
 			private _hasVehiclePreview = fileExists _editorPreview;
 
             if (!_hasVehiclePreview) then {
                 _editorPreview = A3A_PlaceHolder_NoVehiclePreview;
             };
-	
+
 			private _itemXpos = (4 + (4 + _itemWidth) * (_forEachIndex % _itemsPerRow)) * GRID_W;
 			private _itemYpos = (floor (_forEachIndex / _itemsPerRow)) * (34 * GRID_H);
 
@@ -83,7 +89,7 @@ switch (_mode) do
 			_previewPicture ctrlSetPosition [0, 0, _itemWidth * GRID_W, 24 * GRID_H];
 			_previewPicture ctrlSetText _editorPreview;
 			_previewPicture ctrlCommit 0;
-	
+
 			private _button = _display ctrlCreate ["A3A_ButtonSmallText", A3A_IDC_TEAMLEADERBUILDBUTTON, _itemControlsGroup];
 			_button ctrlSetPosition [0, 24 * GRID_H, _itemWidth * GRID_W, 6 * GRID_H];
 			_button ctrlSetText _displayName;
@@ -135,7 +141,7 @@ switch (_mode) do
 			_buildTime ctrlSetPosition[1 * GRID_W, 19 * GRID_H, 4 * GRID_W, 4 * GRID_H];
 			_buildTime ctrlSetText A3A_Icon_Construct;
 			_buildTime ctrlCommit 0;
-	
+
 			// show stuff
 			_itemControlsGroup ctrlSetFade 0;
             _itemControlsGroup ctrlCommit 0.1;
@@ -157,7 +163,7 @@ switch (_mode) do
 			} else {
 				A3A_cam camCommand "manual on";
 			};
-			
+
 		}];
 
 		// _txt = _display ctrlCreate[ "A3A_StructuredText", -1];

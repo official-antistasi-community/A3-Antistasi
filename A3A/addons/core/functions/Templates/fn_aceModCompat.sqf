@@ -12,7 +12,8 @@ aceItems = [
 	"ACE_MapTools",
 	"ACE_Flashlight_MX991",
 	"ACE_wirecutter",
-	"ACE_RangeTable_82mm",
+	"ACE_artilleryTable",
+	"ACE_PlottingBoard",
 	"ACE_EntrenchingTool",
 	"ACE_Cellphone",
 	"ACE_CableTie",
@@ -62,10 +63,11 @@ aceMedItems = [
 	"ACE_suture"
 ];
 
-aceMedItemsBlood = [
+aceMedItemsNonKat = [
 	"ACE_bloodIV",
 	"ACE_bloodIV_250",
-	"ACE_bloodIV_500"
+	"ACE_bloodIV_500",
+	"ACE_painkillers"
 ];
 
 advItems = [
@@ -210,6 +212,7 @@ aceFoodItems = [
 	"ACE_MRE_SteakVegetables"
 ];
 
+/*
 publicVariable "aceItems";
 publicVariable "aceMedItems";
 publicVariable "aceMedItemsBlood";
@@ -217,6 +220,7 @@ publicVariable "advItems";
 publicVariable "katMedItems";
 publicVariable "aceCoolingItems";
 publicVariable "aceFoodItems";
+*/
 
 ////////////////////////////////////
 //   ACE ITEMS MODIFICATIONS     ///
@@ -227,7 +231,7 @@ FactionGet(reb,"initialRebelEquipment") append aceItems;
 //ACE medical starting items
 if (A3A_hasACEMedical && !A3A_hasKAT) then {
 	FactionGet(reb,"initialRebelEquipment") append aceMedItems;
-	FactionGet(reb,"initialRebelEquipment") append aceMedItemsBlood;
+	FactionGet(reb,"initialRebelEquipment") append aceMedItemsNonKat;
 };
 
 if (A3A_hasADV) then {
