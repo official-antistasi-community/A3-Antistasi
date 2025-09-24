@@ -10,6 +10,7 @@
 ["flagMarkerType", "Faction_USMC"] call _fnc_saveToTemplate;
 
 ["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
+["attributeMoreTrucks", true] call _fnc_saveToTemplate;         // Use more truck for transports
 ["attributeLowAir", true] call _fnc_saveToTemplate;
 ["placeIntel_itemLarge", ["Land_Document_01_F",-155,false]] call _fnc_saveToTemplate;
 
