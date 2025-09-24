@@ -13,6 +13,10 @@
 //       Vehicles       //
 //////////////////////////
 
+
+["attributeLowAir", true] call _fnc_saveToTemplate;             // Use fewer air units in general
+["attributeMoreTrucks", true] call _fnc_saveToTemplate;         // Use more truck for transports
+
 ["ammobox", "B_supplyCrate_F"] call _fnc_saveToTemplate;
 ["surrenderCrate", "Box_IND_Wps_F"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
 ["equipmentBox", "Box_NATO_Equip_F"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
@@ -64,9 +68,9 @@
 ["vehiclesMilitiaTrucks", ["UK3CB_CW_SOV_O_EARLY_Zil131_Covered"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["UK3CB_CW_SOV_O_EARLY_UAZ_Closed","UK3CB_CW_SOV_O_EARLY_UAZ_Open"]] call _fnc_saveToTemplate;
 
-["vehiclesPolice", []] call _fnc_saveToTemplate;
+["vehiclesPolice", ["UK3CB_ARD_O_Hilux_Open", "UK3CB_ARD_O_Hilux_Pkm", "UK3CB_B_M151_Jeep_Closed_HIDF", "UK3CB_B_M151_Jeep_Open_HIDF"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["rhsgref_cdf_b_DSHKM","RHS_M2StaticMG_D"]] call _fnc_saveToTemplate;
+["staticMGs", ["rhsgref_cdf_b_DSHKM","RHS_M2StaticMG_D", "UK3CB_NAP_I_PKM_High"]] call _fnc_saveToTemplate;
 ["staticAT", ["rhsgref_cdf_b_SPG9","rhsgref_cdf_b_SPG9M"]] call _fnc_saveToTemplate;
 ["staticAA", ["RHS_ZU23_MSV","rhs_Igla_AA_pod_msv"]] call _fnc_saveToTemplate;
 ["staticMortars", ["rhs_2b14_82mm_msv"]] call _fnc_saveToTemplate;
