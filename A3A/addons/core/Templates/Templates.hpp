@@ -978,14 +978,13 @@ class Templates
         shortName = "FIA";
         lore = $STR_A3A_templates_lore_FIA;
     };
-    class 3CB_SDK : 3CBF_Base
+    class 3CB_TFIA : 3CBF_Base
     {
         side = "Reb";
         flagTexture = "\A3\Data_F_Exp\Flags\flag_Tanoa_CO.paa";
         name = "3CB TFIA";
         file = "3CB_Reb_SDK";
         maps[] = {"Tanoa"};
-        climate[] = {"tropical"};
     };
     class 3CB_Reb_LSM : 3CBF_Base
     {
