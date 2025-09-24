@@ -9,6 +9,8 @@ class CfgAmmo {
     class LIB_B_127x99_Ball : LIB_Bullet_Vehicle_base {
         caliber = 1.43;
         hit = 20;
+        //Approximation of .50 cal ball ammunition as opposed to .50 call armour piercing
+        //Should still be plenty strong but not the end all be all
     };
     class LIB_B_37mm_61k_AP : LIB_Bullet_AP_base {
         ace_vehicle_damage_incendiary = 0.5;
