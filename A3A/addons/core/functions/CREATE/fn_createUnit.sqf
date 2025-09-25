@@ -40,9 +40,9 @@ private _unit = if (_unitDefinition isEqualTo []) then {
     _unitDefinition params ["_loadouts", "_traits", "_unitClass"];
     private _u = _group createUnit [_unitClass, _position, _markers, _placement, _special];
     if !(_unitClass in A3A_customUnitClasses) then {
-        _u joinSilent grpNull;
+        [_u] joinSilent grpNull;
         (group _u) deleteGroupWhenEmpty true;
-        _u joinSilent _group;
+        [_u] joinSilent _group;
     };
 
     // shuffle select, uses each entry once until empty, then refills
