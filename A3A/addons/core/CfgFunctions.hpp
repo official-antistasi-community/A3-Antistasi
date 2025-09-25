@@ -174,7 +174,6 @@ class CfgFunctions
             class playableUnits {};
             class postmortem {};
             class postmortemLoop {};
-            class radioCheck {};
             class rebuildAssets {};
             class rebuildRadioTower {};
             class relocateHQObjects {};
@@ -306,6 +305,7 @@ class CfgFunctions
             class addArtilleryFiredEH {};
             class addVehAttachDetachEH {};
             class addVehGetInOutEH {};
+            class buildingChangedEH {};
             class combatModeChangedEH {};
             class enemyUnitDeletedEH {};
             class enemyUnitKilledEH {};

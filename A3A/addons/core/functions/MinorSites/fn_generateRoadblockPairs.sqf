@@ -125,7 +125,6 @@ private _markerConn = createHashMap;
 // Calculate value of each marker
 // Mostly ripped from findAttackTargets
 private _markerVal = createHashMap;
-private _radioTowers = antennas + antennasDead;
 {
     // Do we still special-case cities?
     if (_x in citiesX) then {
@@ -134,7 +133,7 @@ private _radioTowers = antennas + antennasDead;
         continue;
     };
     private _value = call {
-        if (_x in outposts) exitWith { [20, 25] select (count (_radioTowers inAreaArray _x) > 0) };
+        if (_x in outposts) exitWith { [20, 25] select (_x in A3A_antennaMap) };
         if (_x in seaports) exitWith { 20 };
         if (_x in airportsX) exitWith { 60 };
         if (_x in factories) exitWith { 15 };

@@ -40,8 +40,7 @@ Debug_1("Saving params: %1", _savedParams);
 // Simple values
 ["bombRuns", bombRuns] call A3A_fnc_setStatVariable;
 ["membersX", membersX] call A3A_fnc_setStatVariable;
-private _antennasDeadPositions = antennasDead apply { getPosATL _x };
-["antennas", _antennasDeadPositions] call A3A_fnc_setStatVariable;
+["antennas", A3A_antennas select { !alive _x } apply { getPosATL _x }] call A3A_fnc_setStatVariable;
 ["mrkSDK", markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer}] call A3A_fnc_setStatVariable;
 ["mrkCSAT", markersX select {sidesX getVariable [_x,sideUnknown] == Invaders}] call A3A_fnc_setStatVariable;
 ["posHQ", [getMarkerPos respawnTeamPlayer,getPosATL fireX,[getDir boxX,getPosATL boxX],[getDir mapX,getPosATL mapX],getPosATL flagX,[getDir vehicleBox,getPosATL vehicleBox],[getDir petros,getPosATL petros]]] call A3A_fnc_setStatVariable;
@@ -53,8 +52,7 @@ private _antennasDeadPositions = antennasDead apply { getPosATL _x };
 ["weather",[fogParams,rain]] call A3A_fnc_setStatVariable;
 ["arsenalLimits", A3A_arsenalLimits] call A3A_fnc_setStatVariable;
 ["rebelLoadouts", A3A_rebelLoadouts] call A3A_fnc_setStatVariable;
-private _destroyedPositions = destroyedBuildings apply { getPosATL _x };
-["destroyedBuildings", _destroyedPositions] call A3A_fnc_setStatVariable;
+["destroyedBuildings", A3A_destroyedBuildings apply { getPosATL _x }] call A3A_fnc_setStatVariable;
 ["aggressionOccupants", [aggressionLevelOccupants, aggressionStackOccupants]] call A3A_fnc_setStatVariable;
 ["aggressionInvaders", [aggressionLevelInvaders, aggressionStackInvaders]] call A3A_fnc_setStatVariable;
 ["radioKeys", [occRadioKeys,invRadioKeys]] call A3A_fnc_setStatVariable;
@@ -125,8 +123,6 @@ _jna_dataList = _jna_dataList + jna_dataList;
 ["jna_datalist", _jna_dataList] call A3A_fnc_setStatVariable;
 
 // First two are backwards compat
-private _prestigeOPFOR = [];
-private _prestigeBLUFOR = [];
 private _cityDataHM = createHashMap;
 {
 	_dataX = +(A3A_cityData getVariable _x);			// copy so that we don't accidentally modify
