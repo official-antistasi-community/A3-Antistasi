@@ -18,15 +18,20 @@ FIX_LINE_NUMBERS()
 
 params ["_varName", "_varValue", "_saveTarget"];
 
+if (isNil "_saveTarget" and isNil "A3A_saveVersion") exitWith {};               // No data yet written for this game, don't add trash
+
 Info_1("Writing back save var with params %1", _this);
 
 isNil {
     private _oldTarget = if (!isNil "A3A_saveTarget") then { A3A_saveTarget };
-    if (!isNil "_saveTarget") then { A3A_saveTarget = _saveTarget };
+    if (!isNil "_saveTarget") then {                // In the rename case, we need to fetch the JSON save data if it exists
+        A3A_saveTarget = [_saveTarget#0, _saveTarget#1, _saveTarget#2, false];
+        private _json = ["json"] call A3A_fnc_returnSavedStat;
+        if (!isNil "_json") then { A3A_saveTarget set [3, fromJSON _json] };
+    };
 
     [_varname, _varValue] call A3A_fnc_setStatVariable;
-
-    if (A3A_saveTarget#0 isEqualType false) then { saveMissionProfileNamespace } else { saveProfileNamespace };
+    call A3A_fnc_finalizeSave;
 
     if (!isNil "_oldTarget") then { A3A_saveTarget = _oldTarget };
 };
