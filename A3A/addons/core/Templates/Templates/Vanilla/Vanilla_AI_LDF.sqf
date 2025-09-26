@@ -6,7 +6,7 @@
 ["spawnMarkerName", "LDF Support Corridor"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_Enoch_F"] call _fnc_saveToTemplate;
-["flagTexture", "a3\data_f_enoch\flags\flag_enoch_co.paa"] call _fnc_saveToTemplate;
+["flagTexture", "a3\data_f_enoch\flags\flag_eaf_co.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "flag_Enoch"] call _fnc_saveToTemplate;
 
 //////////////////////////
@@ -29,10 +29,11 @@ private _cargoTrucks = ["I_E_Truck_02_transport_F", "I_E_Truck_02_F"];
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["I_E_APC_tracked_03_cannon_F", "B_T_APC_Wheeled_01_cannon_F", "B_T_APC_Tracked_01_rcws_F"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["a3a_E_APC_tracked_03_cannon_F"]] call _fnc_saveToTemplate;
-private _Tanks = ["B_T_MBT_01_TUSK_F", "B_T_MBT_01_cannon_F"];
+["vehiclesTanks", ["B_T_MBT_01_cannon_F"]] call _fnc_saveToTemplate;
+["vehiclesHeavyTanks", ["B_T_MBT_01_TUSK_F"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["B_T_APC_Tracked_01_AA_F"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["I_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["B_T_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 
@@ -42,8 +43,8 @@ private _Tanks = ["B_T_MBT_01_TUSK_F", "B_T_MBT_01_cannon_F"];
 
 private _vehiclesHelisLight = ["I_E_Heli_light_03_unarmed_F", "B_Heli_Light_01_F"];
 private _HelisTransport = ["B_Heli_Transport_01_camo_F"];
-private _vehiclesHelisLightAttack = ["I_E_Heli_light_03_dynamicLoadout_F", "B_Heli_Light_01_armed_F"];
-private _vehiclesHelisAttack = ["B_Heli_Attack_01_F"];
+private _vehiclesHelisLightAttack = ["I_E_Heli_light_03_dynamicLoadout_F", "B_Heli_Light_01_armed_F", "a3a_Heli_Transport_01_pylons_green_F"];
+private _vehiclesHelisAttack = ["B_Heli_Attack_01_dynamicLoadout_F","B_Heli_Attack_01_dynamicLoadout_F","B_Heli_Attack_01_pylons_dynamicLoadout_F"];
 
 ["vehiclesArtillery", ["B_T_MBT_01_arty_F", "I_E_Truck_02_MRL_F"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
@@ -94,15 +95,21 @@ if ("orange" in A3A_enabledDLC) then {
     _vehiclesPolice append ["I_E_Van_02_transport_MP_F"];
     ["vehiclesMilitiaTrucks", ["I_E_Van_02_transport_F", "I_E_Van_02_vehicle_F"]] call _fnc_saveToTemplate;
 };
+if ("ef" in A3A_enabledDLC) then {
+    ["vehiclesGunBoats", ["EF_O_CombatBoat_HMG_OPF_R", "EF_O_CombatBoat_AT_OPF_R"]] call _fnc_saveToTemplate;
+    _vehiclesHelisAttack append ["EF_B_AH99J_NATO"];
+};
 if ("rf" in A3A_enabledDLC) then {
     _vehiclesPolice append ["a3a_police_Pickup_rf", "B_GEN_Pickup_covered_rf", "a3a_police_Pickup_comms_rf"];
     _HelisTransport append ["I_E_Heli_EC_01A_military_RF"];
     _vehiclesHelisLight append ["I_E_Heli_light_03_unarmed_RF"];
     _vehiclesHelisLightAttack append ["a3a_LDF_Heli_light_03_dynamicLoadout_rf"];
-    _vehiclesHelisAttack append ["a3a_LDF_Heli_EC_02_rf"];
+    _vehiclesHelisAttack = ["a3a_LDF_Heli_EC_02_rf"];
     _vehiclesMilitiaCars append ["I_E_Pickup_rf"];
-    _vehiclesMilitiaLightArmed append ["a3a_LDF_Pickup_mmg_rf"];
+    _vehiclesMilitiaLightArmed append ["a3a_LDF_Pickup_mmg_rf", "a3a_LDF_Pickup_rcws_rf"];
+    _lightArmed append ["a3a_LDF_Pickup_rcws_rf"];
 };
+
 ["vehiclesHelisLight", _vehiclesHelisLight] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", _vehiclesHelisLightAttack] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", _vehiclesHelisAttack] call _fnc_saveToTemplate;
@@ -114,7 +121,6 @@ if ("rf" in A3A_enabledDLC) then {
 
 ["vehiclesCargoTrucks", _cargoTrucks] call _fnc_saveToTemplate;
 
-["vehiclesTanks", _Tanks] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", _HelisTransport] call _fnc_saveToTemplate;
 
 ["vehiclesMilitiaCars", _vehiclesMilitiaCars] call _fnc_saveToTemplate;
@@ -493,12 +499,25 @@ if ("rf" in A3A_enabledDLC) then {
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Holosight", [], [], ""],
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Aco_smg", [], [], ""]
     ];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
     (_sfLoadoutData get "helmets") append [
     "H_HelmetB_plain_sb_geo_RF",
     "H_HelmetHeavy_Olive_RF",
     "H_HelmetHeavy_Simple_Olive_RF",
     "H_HelmetHeavy_VisorUp_Olive_RF"];
     (_militaryLoadoutData get "helmets") append ["H_HelmetB_plain_sb_geo_RF"];
+    // LDF is a NATO aligned military, drop a lot of their cheap launchers for MAAWS and NLAW.
+    private _lightLaunchersAppend = [ // 1/2 chance of LAT being psrl
+    ["launch_PSRL1_geo_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    private _medLaunchersAppend = [ // 1/4 chance of MAT being psrl
+    ["launch_PSRL1_geo_RF", "", "", "", ["PSRL1_FRAG_RF", "PSRL1_HE_RF", "PSRL1_AT_RF"], [], ""], // issued for anti structure
+    ["launch_PSRL1_PWS_geo_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    {
+        (_x get "lightATLaunchers") append _lightLaunchersAppend;
+        (_x get "ATLaunchers") append _medLaunchersAppend;
+    } forEach [_militiaLoadoutData, _militaryLoadoutData, _sfLoadoutData];
 };
 
 /////////////////////////////////

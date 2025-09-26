@@ -11,7 +11,7 @@
 
 ["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 ["attributeLowAir", true] call _fnc_saveToTemplate;
-["placeIntel_itemLarge", ["Intel_File2_F",-155,false]] call _fnc_saveToTemplate;
+["placeIntel_itemLarge", ["Land_Document_01_F",-155,false]] call _fnc_saveToTemplate;
 
 //////////////////////////
 //       Vehicles       //
@@ -219,14 +219,14 @@ _sfLoadoutData set ["atBackpacks", ["B_LIB_US_Backpack_RocketBag_Empty"]];
 _sfLoadoutData set ["lightATLaunchers", [
 ["LIB_M1_Garand_M7", "LIB_ACC_GL_M7", "", "", [], ["LIB_1Rnd_G_M9A1"], ""]
 ]];
-_sfLoadoutData set ["slWeapons", ["LIB_M1928_Thompson", "LIB_M1928A1_Thompson", "LIB_M1_Garand", "LIB_M1A1_Carbine", "LIB_M1A1_Carbine"]];
+_sfLoadoutData set ["slWeapons", ["LIB_M1928_Thompson", "LIB_M1928A1_Thompson", "LIB_M1_Garand", "LIB_M1A1_Carbine", "LIB_M1A1_Carbine","a3a_lib_M2_Carbine"]];
 _sfLoadoutData set ["rifles", ["LIB_M1_Garand", "LIB_M1A1_Carbine"]];
 _sfLoadoutData set ["carbines", ["LIB_M1A1_Carbine","a3a_lib_M2_Carbine"]];
 _sfLoadoutData set ["grenadeLaunchers", [
 ["LIB_M1_Garand_M7", "LIB_ACC_GL_M7", "", "", [], ["LIB_1Rnd_G_Mk2"], ""],
 ["LIB_M1_Garand_M7", "LIB_ACC_GL_M7", "", "", [], ["LIB_1Rnd_G_Mk2", "LIB_1Rnd_G_M9A1"], ""]
 ]];
-_sfLoadoutData set ["SMGs", ["LIB_M1928_Thompson", "LIB_M1A1_Thompson", "LIB_M1A1_Carbine"]];
+_sfLoadoutData set ["SMGs", ["LIB_M1928_Thompson", "LIB_M1A1_Thompson", "LIB_M1A1_Carbine","a3a_lib_M2_Carbine"]];
 _sfLoadoutData set ["machineGuns", ["LIB_M1918A2_BAR", "LIB_M1919A6"]];
 /////////////////////////////////
 //    Military Loadout Data    //

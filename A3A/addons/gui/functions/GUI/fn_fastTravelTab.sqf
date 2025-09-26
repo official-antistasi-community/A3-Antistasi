@@ -79,7 +79,7 @@ switch (_mode) do
             private _infoText = "";
 
             // Player/Group name + location name
-            private _locationName = "Outpost";//[_selectedMarker] call A3A_fnc_getLocationMarkerName;  // ToDo define
+            private _locationName = [_selectedMarker] call A3A_GUI_fnc_getLocationMarkerName;
 
             // Check if location is valid for fast travel
             private _canFastTravelTuple = [];
@@ -91,12 +91,21 @@ switch (_mode) do
             };
             _canFastTravelTuple params ["_isFastTravelAllowed","_fastTravelBlockers"];
             Trace_1("_canFastTravelTuple: %1", _canFastTravelTuple);
+            private _ftUnit = [player, leader (_fastTravelMap getVariable "hcGroup")] select _hcMode;
+            [_ftUnit, [vehicle _ftUnit], markerPos _selectedMarker] call FUNCMAIN(calculateFastTravelCost) params ["_fastTravelCost","_fastTravelTime"];
+            private _ftCostAllowed = (player getVariable ["moneyX", 0] >= _fastTravelCost);
 
-            if !(_isFastTravelAllowed) exitWith {
+            if !(_isFastTravelAllowed && _ftCostAllowed) exitWith {
                 // Not a valid location for fast travel
                 Trace_1("_infoText: %1", '"'+_infoText+'"');
                 // Disable commit button and show what's wrong in info text
-                _infoText = _fastTravelBlockers joinString ", ";
+                private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
+                _infoText = _prettyString joinString "\n\n";
+                if (_isFastTravelAllowed && !_hcMode) then {
+                    private _costString = ["$",str _fastTravelCost] joinString "";
+                    _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_cost" + " " + _costString + ". <br/>" + localize "STR_antistasi_dialogs_main_fast_travel_noMoney";
+                    Trace_1("_infoText: %1", '"'+_infoText+'"');
+                };
                 _fastTravelCommitButton ctrlEnable false;
                 _fastTravelSelectText ctrlShow false;
                 _fastTravelInfoText ctrlShow true;
@@ -119,16 +128,21 @@ switch (_mode) do
             };
             Trace_1("_infoText: %1", '"'+_infoText+'"');
             // Time
-            // TODO UI-update: Add case for calculating time for HC groups when in hc modelToWorld
-            [player, [vehicle player], markerPos _selectedMarker] call FUNCMAIN(calculateFastTravelCost) params ["_fastTravelCost","_fastTravelTime"];
+            
             private _timeString = [[_fastTravelTime] call FUNCMAIN(secondsToTimeSpan),0,0,false,2] call FUNCMAIN(timeSpan_format);
             Trace_1("_infoText: %1", '"'+_infoText+'"');
             _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_time" + " " + _timeString + ".<br/><br/>";
 
             Trace_1("_infoText: %1", '"'+_infoText+'"');
+            if (!_hcMode) then {
+                private _costString = ["$",str _fastTravelCost] joinString "";
+                _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_cost" + " " + _costString + ". ";
+                Trace_1("_infoText: %1", '"'+_infoText+'"');
+                if !(_ftCostAllowed) then {_infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_noMoney"};
+            };
             // Vehicle
             if (!_hcMode && vehicle player != player) then {
-                _infoText = _infoText + localize "STR_antistasi_dialogs_main_fast_travel_vehicle";
+                _infoText = _infoText + "<br/><br/>" + localize "STR_antistasi_dialogs_main_fast_travel_vehicle";
             };
 
 
@@ -176,7 +190,7 @@ switch (_mode) do
         // Find closest marker to the clicked position
         _params params ["_clickedPosition"];
         private _clickedWorldPosition = _fastTravelMap ctrlMapScreenToWorld _clickedPosition;
-        private _locations = airportsX + resourcesX + factories + outposts + seaports + citiesX + ["Synd_HQ"];
+        private _locations = airportsX + resourcesX + factories + outposts + seaports + citiesX + outpostsFIA + ["Synd_HQ"];
         private _selectedMarker = [_locations, _clickedWorldPosition] call BIS_fnc_nearestPosition;
         Debug_1("Selected marker: %1", _selectedMarker);
 
@@ -224,10 +238,10 @@ switch (_mode) do
         if (_hcMode) then {
             private _hcGroup = _fastTravelMap getVariable ["hcGroup", grpNull];
             closeDialog 1;
-            [] spawn FUNCMAIN(fastTravelRadio);
+            [_hcGroup,_marker,player] spawn A3A_fnc_fastTravelMove;
         } else {
             closeDialog 1;
-            [] spawn FUNCMAIN(fastTravelRadio);
+            [player,_marker,player] spawn A3A_fnc_fastTravelMove;
         };
     };
 

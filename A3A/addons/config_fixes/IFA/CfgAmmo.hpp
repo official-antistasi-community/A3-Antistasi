@@ -12,4 +12,10 @@ class CfgAmmo {
     class LIB_Sh_60_HE : LIB_Sh_82_HE {
         indirectHitRange = 11;
     };
+
+    // Make the bombs more consistent
+    class BombCore;
+    class LIB_Bomb_base : BombCore {
+        sideAirFriction = 0;
+    };
 };

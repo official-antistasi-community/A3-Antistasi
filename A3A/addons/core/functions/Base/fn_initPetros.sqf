@@ -12,10 +12,11 @@ removeGoggles petros;
 private _vest = selectRandomWeighted (A3A_rebelGear get "ArmoredVests");
 if (_vest == "") then { _vest = selectRandomWeighted (A3A_rebelGear get "CivilianVests") };
 petros addVest _vest;
-[petros, "Rifles"] call A3A_fnc_randomRifle;
+private _weapon = ["Rifles"] call A3A_fnc_randomRifle;
+[petros, _weapon, "OpticsMid", 50] call A3A_fnc_addPrimaryAndMags;
 petros selectWeapon (primaryWeapon petros);
 
-if (petros == leader group petros) then {
+if (!A3A_petrosMoving) then {
 	group petros setGroupIdGlobal ["Petros","GroupColor4"];
 	petros disableAI "MOVE";
 	petros disableAI "AUTOTARGET";
@@ -27,62 +28,27 @@ if (petros == leader group petros) then {
 
 [petros,true] call A3A_fnc_punishment_FF_addEH;
 
-petros addEventHandler
-[
-    "HandleDamage",
-    {
-    _part = _this select 1;
-    _damage = _this select 2;
-    _injurer = _this select 3;
-
-    _victim = _this select 0;
-    _instigator = _this select 6;
-    if (isPlayer _injurer) then
-    {
-        _damage = (_this select 0) getHitPointDamage (_this select 7);
-    };
-    if ((isNull _injurer) or (_injurer == petros)) then {_damage = 0};
-        if (_part == "") then
-        {
-            if (_damage > 1) then
-            {
-                if (!(petros getVariable ["incapacitated",false])) then
-                {
-                    petros setVariable ["incapacitated",true,true];
-                    _damage = 0.9;
-                    if (!isNull _injurer) then {[petros,side _injurer] spawn A3A_fnc_unconscious} else {[petros,sideUnknown] spawn A3A_fnc_unconscious};
-                }
-                else
-                {
-                    _overall = (petros getVariable ["overallDamage",0]) + (_damage - 1);
-                    if (_overall > 1) then
-                    {
-                        petros removeAllEventHandlers "HandleDamage";
-                    }
-                    else
-                    {
-                        petros setVariable ["overallDamage",_overall];
-                        _damage = 0.9;
-                    };
-                };
-            };
-        };
-    _damage;
-    }
-];
+// Install the handleDamage EH on server & commander machines
+//call A3A_fnc_addPetrosEventHandlers;
+//if (!isNull theBoss) then { remoteExecCall ["A3A_fnc_addPetrosEventHandlers", theBoss] };
 
 petros addMPEventHandler ["mpkilled",
 {
     removeAllActions petros;
     if (!isServer) exitWith {};
 
+    // Because setDamage 1 sets the killer to self, replace it if possible
     _killer = _this select 1;
-    if ((side _killer == Invaders) or (side _killer == Occupants) and !(isPlayer _killer) and !(isNull _killer)) then
+    _killer = petros getVariable ["ace_medical_lastDamageSource", _killer];
+    //_killer = petros getVariable ["A3A_downedBy", _killer];			// this one can't exist atm
+
+    if ((side _killer == Invaders) or (side _killer == Occupants) or petros getVariable ["A3A_napalmHit", false]) then
     {
         garrison setVariable ["Synd_HQ", [], true];
         _hr = server getVariable "hr";
         _res = server getVariable "resourcesFIA";
         [-1*(round(_hr*0.9)), -1*(round(_res*0.9))] spawn A3A_fnc_resourcesFIA;
+        A3A_petrosMoving = false; publicVariable "A3A_petrosMoving";
         [] spawn A3A_fnc_petrosDeathMonitor;
     }
     else

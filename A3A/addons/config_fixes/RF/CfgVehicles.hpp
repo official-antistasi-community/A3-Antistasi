@@ -11,11 +11,17 @@ class CfgVehicles
     class B_Pickup_rf;
     class I_G_Pickup_rf;
     class Heli_light_03_base_F;
-    class B_Heli_light_03_unarmed_rf;
+	class Heli_light_03_unarmed_base_F;
+    class B_Heli_light_03_unarmed_rf : Heli_light_03_unarmed_base_F{
+		class EventHandlers;
+	};
     class Heli_EC_01_base_rf;
     class B_Heli_EC_04_military_rf;
     class B_Heli_EC_03_rf;
     class I_Pickup_aat_rf;
+    class B_Heli_light_03_dynamicLoadout_rf;
+    class Heli_EC_02_base_rf;
+    class I_Pickup_rcws_rf;
 
     class a3a_armored_Pickup_rf : I_G_Pickup_rf {
         animationList[] = {"hide_bullbar",0.2,"hide_fuel_tank",1,"hide_snorkel",1,"hide_antenna",1,"hide_trunk_cover",1,"hide_trunk_door",0,"trunk_door_open",0,"hide_armor_window_armor_top",0,"window_armor_hatch_L_rot",1,"window_armor_hatch_R_rot",0,"door_F_L_open",0,"door_F_R_open",0,"door_R_L_open",0,"door_R_R_open",0,"hide_rack",1,"hide_rack_spotlights",1,"hide_frame",1,"hide_sidesteps",0.5};
@@ -113,63 +119,8 @@ class CfgVehicles
         textureList[] = {};
         hiddenSelectionstextures[] = {"\lxRF\vehicles_rf\pickup_01\Data\pickup_01_ext_gendarmerie_co.paa","\lxRF\vehicles_rf\pickup_01\Data\pickup_01_adds_gendarmerie_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_ext2_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_AAT_olive_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_Launcher_black_co.paa","\lxRF\vehicles_rf\pickup_01\Data\pickup_01_service_gendarmerie_co.paa"};
     };
-    
-    class Heli_light_03_dynamicLoadout_base_F: Heli_light_03_base_F {
-        class Components;
-    };
-    class B_Heli_light_03_dynamicLoadout_rf: Heli_light_03_dynamicLoadout_base_F {
-        class Components : Components {
-            class TransportPylonsComponent;
-        };
-    };
-    class a3a_Heli_light_03_dynamicLoadout_rf : B_Heli_light_03_dynamicLoadout_rf { // !!!! This is the Olive paint by default. It's more of a bluish-gray though
-       class Components : Components {
-            class TransportPylonsComponent : TransportPylonsComponent {
-                class Presets {
-                    class Default {
-                        attachment[] = {"PylonRack_19Rnd_missiles_gray_RF","PylonWeapon_1000Rnd_20x102mm_shells_gray_RF","PylonRack_19Rnd_missiles_gray_RF","PylonWeapon_1000Rnd_20x102mm_shells_gray_RF"};
-                        displayName = "Default";
-                    };
-                    class Empty {
-                        attachment[] = {};
-                        displayName = "Empty";
-                    };
-                };
-                class Pylons {
-                    class PylonLeft1 {
-                        attachment = "PylonRack_19Rnd_missiles_gray_RF";
-                        hardpoints[] = {"DAR","DAGR","B_SHIEKER","UNI_SCALPEL","20MM_TWIN_CANNON","B_ASRRAM_EJECTOR","WEAPON_PODS_RF","B_BOMB_PYLON"};
-                        priority = 5;
-                        turret[] = {0};
-                        UIposition[] = {"0.06 + 0.02",0.4};
-                    };
-                    class PylonLeft2 {
-                        attachment = "PylonWeapon_1000Rnd_20x102mm_shells_gray_RF";
-                        hardpoints[] = {"DAR","DAGR","B_SHIEKER","UNI_SCALPEL","20MM_TWIN_CANNON","B_ASRRAM_EJECTOR","WEAPON_PODS_RF","B_BOMB_PYLON"};
-                        priority = 4;
-                        turret[] = {0};
-                        UIposition[] = {"0.08 + 0.02",0.35};
-                    };
-                    class PylonRight1 {
-                        attachment = "PylonRack_19Rnd_missiles_gray_RF";
-                        hardpoints[] = {"DAR","DAGR","B_SHIEKER","UNI_SCALPEL","20MM_TWIN_CANNON","B_ASRRAM_EJECTOR","WEAPON_PODS_RF","B_BOMB_PYLON"};
-                        priority = 5;
-                        mirroredMissilePos = 1;
-                        turret[] = {0};
-                        UIposition[] = {"0.59 + 0.04",0.4};
-                    };
-                    class PylonRight2 {
-                        attachment = "PylonWeapon_1000Rnd_20x102mm_shells_gray_RF";
-                        hardpoints[] = {"DAR","DAGR","B_SHIEKER","UNI_SCALPEL","20MM_TWIN_CANNON","B_ASRRAM_EJECTOR","WEAPON_PODS_RF","B_BOMB_PYLON"};
-                        priority = 4;
-                        mirroredMissilePos = 2;
-                        turret[] = {0};
-                        UIposition[] = {"0.57 + 0.04",0.35};
-                    };
-
-                };
-            };
-        };
+    class a3a_Heli_light_03_dynamicLoadout_rf : B_Heli_light_03_dynamicLoadout_rf {
+		class EventHandlers;
     };
     class a3a_AAF_Heli_light_03_dynamicLoadout_rf : a3a_Heli_light_03_dynamicLoadout_rf {
         textureList[] = {};
@@ -191,6 +142,13 @@ class CfgVehicles
         textureList[] = {};
         hiddenSelectionsTextures[] = {"\A3\Air_F_EPB\Heli_Light_03\data\Heli_Light_03_base_CO.paa","\lxRF\air_rf\Heli_Light_03\data\wildcat_addons_green_co.paa"};
     };
+    class a3a_navy_Heli_light_03_dynamicLoadout_rf : a3a_Heli_light_03_dynamicLoadout_rf {
+		class EventHandlers : EventHandlers{
+			postinit = "if (local (_this select 0)) then {[(_this select 0), """", [], true] call bis_fnc_initVehicle;}";
+		};
+        textureList[] = {"NAVY", 0.1, "NAVY_CAMO", 1};
+        hiddenSelectionsTextures[] = {"\lxRF\air_rf\Heli_Light_03\data\Heli_Light_03_base_navy_CO.paa","\lxRF\air_rf\Heli_Light_03\data\wildcat_addons_navy_co.paa"};
+    };
     class a3a_AAF_Heli_light_03_unarmed_rf : B_Heli_light_03_unarmed_rf {
         textureList[] = {};
         hiddenSelectionsTextures[] = {"\A3\Air_F_EPB\Heli_Light_03\data\Heli_Light_03_base_INDP_CO.paa","\lxRF\air_rf\Heli_Light_03\data\wildcat_addons_INDP_co.paa"};
@@ -207,66 +165,19 @@ class CfgVehicles
         textureList[] = {};
         hiddenSelectionsTextures[] = {"\lxRF\air_rf\Heli_Light_03\data\Heli_Light_03_base_tan_CO.paa","\lxRF\air_rf\Heli_Light_03\data\wildcat_addons_tan_co.paa"};
     };
-
-    class Heli_EC_02_base_rf: Heli_EC_01_base_rf {
-        class Components;
+    class a3a_navy_Heli_light_03_unarmed_rf : B_Heli_light_03_unarmed_rf {
+		class EventHandlers : EventHandlers{
+			postinit = "if (local (_this select 0)) then {[(_this select 0), """", [], true] call bis_fnc_initVehicle;}";
+		};
+        textureList[] = {"NAVY", 1, "NAVY_CAMO", 0.1};
+        hiddenSelectionsTextures[] = {"\lxRF\air_rf\Heli_Light_03\data\Heli_Light_03_base_navy_CO.paa","\lxRF\air_rf\Heli_Light_03\data\wildcat_addons_navy_co.paa"};
     };
+
     class a3a_Heli_EC_02_rf : Heli_EC_02_base_rf { // Default camo is a lovely tan, perfect for patrolling your local desert
         scope = 2;
         faction = "IND_F";
         side = 2;
         hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_09_tan_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_09_tan_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_09_tan_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
-        class Components : Components {
-            class TransportPylonsComponent {
-                uiPicture = "\lxRF\air_rf\heli_medium_ec\data\UI\heli_medium_ec_02_3DEN_CA.paa";
-                class Presets {
-                    class AT {
-                        attachment[] = {"PylonRack_4Rnd_LG_scalpel","PylonRack_4Rnd_LG_scalpel","PylonRack_4Rnd_LG_scalpel","PylonRack_4Rnd_LG_scalpel"};
-                        displayName = "AT";
-                    };
-                    class Default {
-                        attachment[] = {"PylonRack_19Rnd_missiles_olive_rf","PylonRack_4Rnd_LG_scalpel","PylonRack_4Rnd_LG_scalpel","PylonRack_19Rnd_missiles_olive_rf"};
-                        displayName = "Default";
-                    };
-                    class Empty {
-                        attachment[] = {};
-                        displayName = "Empty";  
-                    }; 
-                };
-                class Pylons {
-                    class PylonLeft1 {
-                        attachment = "PylonRack_19Rnd_missiles_olive_RF";
-                        hardpoints[] = {"DAR","DAGR","B_SHIEKER","UNI_SCALPEL","20MM_TWIN_CANNON","B_ASRRAM_EJECTOR","WEAPON_PODS_RF","B_BOMB_PYLON"};
-                        priority = 5;
-                        turret[] = {0};
-                        UIposition[] = {0.06,0.4};
-                    };
-                    class PylonLeft2 {
-                        attachment = "PylonRack_4Rnd_LG_scalpel";
-                        hardpoints[] = {"DAR","DAGR","B_SHIEKER","UNI_SCALPEL","20MM_TWIN_CANNON","B_ASRRAM_EJECTOR","WEAPON_PODS_RF","B_BOMB_PYLON"};
-                        priority = 4;
-                        turret[] = {0};
-                        UIposition[] = {0.08,0.35};
-                    };
-                    class PylonRight1 {
-                        attachment = "PylonRack_4Rnd_LG_scalpel";
-                        hardpoints[] = {"DAR","DAGR","B_SHIEKER","UNI_SCALPEL","20MM_TWIN_CANNON","B_ASRRAM_EJECTOR","WEAPON_PODS_RF","B_BOMB_PYLON"};
-                        priority = 5;
-                        mirroredMissilePos = 2;
-                        turret[] = {0};
-                        UIposition[] = {0.57,0.35};
-                    };
-                    class PylonRight2 {
-                        attachment = "PylonRack_19Rnd_missiles_olive_RF";
-                        hardpoints[] = {"DAR","DAGR","B_SHIEKER","UNI_SCALPEL","20MM_TWIN_CANNON","B_ASRRAM_EJECTOR","WEAPON_PODS_RF","B_BOMB_PYLON"};
-                        priority = 4;
-                        mirroredMissilePos = 1;
-                        turret[] = {0};
-                        UIposition[] = {0.59,0.4};
-                    };
-                };
-            };
-        };
     };
     class a3a_LDF_Heli_EC_02_rf : a3a_Heli_EC_02_rf {
         factions = "IND_E_F";
@@ -283,8 +194,38 @@ class CfgVehicles
         hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_34_dark_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_light_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_34_dark_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_34_dark_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_light_co.paa"};
     };
     class a3a_sfia_Heli_EC_02_rf : a3a_Heli_EC_02_rf {
-        textureList[] = {};
+        textureList[] = {"CAMO_SFIA", 1, "CAMO_AFRICA", 0.5};
         hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_01_sfia_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_01_sfia_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_01_sfia_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
+    };
+    class a3a_ION_Heli_EC_02_rf : a3a_Heli_EC_02_rf {
+        textureList[] = {};
+        hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
+    };
+    class a3a_navy_Heli_EC_02_rf : a3a_Heli_EC_02_rf {
+        textureList[] = {"MARINE", 1};
+		hiddenSelectionsMaterials[] = {"\lxrf\air_rf\heli_medium_ec\data\as332_exterior_01.rvmat","\lxrf\air_rf\heli_medium_ec\data\as332_int_cargo.rvmat"};
+        hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
+    };
+    class a3a_navy_Heli_EC_04_military_rf : B_Heli_EC_04_military_rf {
+        textureList[] = {"MARINE", 1};
+		hiddenSelectionsMaterials[] = {"\lxrf\air_rf\heli_medium_ec\data\as332_exterior_01.rvmat","\lxrf\air_rf\heli_medium_ec\data\as332_int_cargo.rvmat"};
+		hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_04_marineblue_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_04_marineblue_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_04_marineblue_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
+    };
+    class a3a_navy_Heli_EC_03_rf : B_Heli_EC_03_rf {
+        textureList[] = {"MARINE", 1};
+		hiddenSelectionsMaterials[] = {"\lxrf\air_rf\heli_medium_ec\data\as332_exterior_01.rvmat","\lxrf\air_rf\heli_medium_ec\data\as332_int_cargo.rvmat"};
+		hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_04_marineblue_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_04_marineblue_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_04_marineblue_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
+    };
+	class I_Heli_EC_01A_military_RF;
+    class a3a_sfia_Heli_EC_04_military_rf : I_Heli_EC_01A_military_RF {
+        textureList[] = {"CAMO_SFIA", 1, "CAMO_AFRICA", 0.1};
+		hiddenSelectionsMaterials[] = {"\lxrf\air_rf\heli_medium_ec\data\as332_exterior_01.rvmat","\lxrf\air_rf\heli_medium_ec\data\as332_int_cargo.rvmat"};
+		hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_01_sfia_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_01_sfia_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_01_sfia_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
+    };
+    class a3a_sfia_Heli_EC_03_rf : B_Heli_EC_03_rf {
+        textureList[] = {"CAMO_SFIA", 0.1, "CAMO_AFRICA", 1};
+		hiddenSelectionsMaterials[] = {"\lxrf\air_rf\heli_medium_ec\data\as332_exterior_01.rvmat","\lxrf\air_rf\heli_medium_ec\data\as332_int_cargo.rvmat"};
+		hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_01_sfia_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_01_sfia_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_01_sfia_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
     };
     class a3a_tan_Heli_EC_04_military_rf : B_Heli_EC_04_military_rf {
         textureList[] = {};
@@ -302,9 +243,15 @@ class CfgVehicles
         textureList[] = {};
         hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
     };
-    class a3a_ION_Heli_EC_02_rf : a3a_Heli_EC_02_rf {
-        textureList[] = {};
-        hiddenSelectionsTextures[] = {"\lxRF\air_rf\heli_medium_ec\data\as332_exterior_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa","#(rgb,1024,1024,1)ui('lxRF_MFDMinimap','lxRF_MFDMinimap')","\lxRF\air_rf\heli_medium_ec\data\as332_adds_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_exterior_06_ion_co.paa","\lxRF\air_rf\heli_medium_ec\data\as332_int_cargo_co.paa"};
-    };
 
+    // 1.1 classes
+
+    class a3a_LDF_Pickup_rcws_rf : I_Pickup_rcws_rf {
+        textureList[] = {};
+        hiddenSelectionsTextures[] = {"\lxRF\vehicles_rf\pickup_01\Data\pickup_01_ext_ldf_co.paa","\lxRF\vehicles_rf\pickup_01\Data\pickup_01_adds_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_ext2_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_AAT_olive_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_launcher_co.paa","\lxRF\vehicles_rf\pickup_01\Data\pickup_01_service_ldf_co.paa"};
+    };
+    class a3a_ADF_Pickup_rcws_rf : I_Pickup_rcws_rf {
+        textureList[] = {};
+        hiddenSelectionsTextures[] = {"\lxRF\vehicles_rf\pickup_01\Data\pickup_01_ext_argana_royal_co.paa","\lxRF\vehicles_rf\pickup_01\Data\pickup_01_adds_argana_co.paa","\lxrf\vehicles_rf\pickup_01\data\pickup_01_ext2_co.paa","lxrf\vehicles_rf\pickup_01\Data\RCWS\rcws_tan_co.paa","\lxRF\vehicles_rf\pickup_01\Data\pickup_01_service_argana_royal_co.paa"};
+    };
 };

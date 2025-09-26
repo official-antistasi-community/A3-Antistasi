@@ -32,7 +32,7 @@
 ["vehiclesTanks", ["cwr3_b_m60a3", "cwr3_b_m60a3_tts", "cwr3_b_m1", "cwr3_b_m1a1"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["cwr3_b_m163"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["cwr3_b_boat"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
@@ -128,7 +128,7 @@ _loadoutData set ["watches", ["ItemWatch"]];
 _loadoutData set ["compasses", ["ItemCompass"]];
 _loadoutData set ["radios", ["ItemRadio"]];
 _loadoutData set ["gpses", ["ItemGPS"]];
-_loadoutData set ["NVGs", []];
+_loadoutData set ["NVGs", ["cwr3_o_nvg_pnv57_tsh3"]];
 _loadoutData set ["binoculars", ["Binocular"]];
 _loadoutData set ["rangefinders", ["Rangefinder"]];
 
@@ -163,9 +163,9 @@ private _mmItems = [];
 private _sfmmItems = [""];
 
 if (A3A_hasACE) then {
-	_slItems append ["ACE_microDAGR", "ACE_DAGR"];
-	_eeItems append ["ACE_Clacker", "ACE_DefusalKit"];
-	_mmItems append ["ACE_RangeCard", "ACE_ATragMX", "ACE_Kestrel4500"];
+    _slItems append ["ACE_microDAGR", "ACE_DAGR"];
+    _eeItems append ["ACE_Clacker", "ACE_DefusalKit"];
+    _mmItems append ["ACE_RangeCard", "ACE_ATragMX", "ACE_Kestrel4500"];
 };
 
 _loadoutData set ["items_squadLeader_extras", _slItems];
@@ -204,7 +204,6 @@ _sfLoadoutData set ["atBackpacks", ["cwr3_b_backpack_alice"]];
 _sfLoadoutData set ["helmets", ["cwr3_b_headgear_protec_full", "cwr3_b_headgear_protec_full_goggles", "cwr3_b_headgear_protec_half"]];
 _sfLoadoutData set ["slHat", ["cwr3_b_headgear_protec_half_headset_goggles"]];
 _sfLoadoutData set ["sniHats", ["cwr3_b_headgear_protec_half_plain"]];
-_sfLoadoutData set ["NVGs", ["cwr3_o_nvg_pnv57_tsh3"]];
 _sfLoadoutData set ["binoculars", ["CUP_SOFLAM"]];
 //["Weapon", "Muzzle", "Rail", "Sight", [], [], "Bipod"];
 
@@ -320,10 +319,10 @@ _policeLoadoutData set ["vests", ["V_TacVest_blk_POLICE"]];
 _policeLoadoutData set ["helmets", ["H_Cap_police"]];
 
 _policeLoadoutData set ["shotGuns", [
-    ["CUP_sgun_CZ584", "", "", "", ["CUP_1Rnd_12Gauge_Pellets_No00_Buck"], [], ""]
+    ["CUP_sgun_CZ584", "", "", "", ["CUP_1Rnd_12Gauge_Pellets_No00_Buck"], ["CUP_1Rnd_762x51_CZ584"], ""]
 ]];
 _policeLoadoutData set ["SMGs", [
-["CUP_smg_M3A1_blk", "", "", "", ["CUP_30Rnd_45ACP_M3A1_BLK_M"], [], ""],
+    ["CUP_smg_M3A1_blk", "", "", "", ["CUP_30Rnd_45ACP_M3A1_BLK_M"], [], ""],
     ["CUP_smg_M3A1_blk", "", "", "", ["CUP_30Rnd_45ACP_M3A1_BLK_M"], [], ""]
 ]];
 _policeLoadoutData set ["sidearms", [
@@ -342,6 +341,7 @@ _militiaLoadoutData set ["backpacks", ["cwr3_b_backpack_alice", "cwr3_i_bergen_b
 _militiaLoadoutData set ["slBackpacks", ["cwr3_b_backpack_radio"]];
 _militiaLoadoutData set ["atBackpacks", ["cwr3_b_backpack_alice"]];
 _militiaLoadoutData set ["helmets", ["cwr3_b_headgear_m1_olive"]];
+_militiaLoadoutData set ["NVGs", []];
 
 _militiaLoadoutData set ["rifles", [
     ["CUP_arifle_M16A1", "", "", "", ["CUP_30Rnd_556x45_Stanag"], [], ""]
@@ -733,9 +733,14 @@ private _policeTemplate = {
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
 
-
-    [selectRandom ["SMGs", "shotGuns"]] call _fnc_setPrimary;
-    ["primary", 5] call _fnc_addMagazines;
+    private _weapon = selectRandom ["SMGs", "shotGuns"];
+    [_weapon] call _fnc_setPrimary;
+    if (_weapon == "shotGuns") then {
+        ["primary", 10] call _fnc_addMagazines;
+    } else {
+        ["primary", 3] call _fnc_addMagazines;
+    };
+    ["primary", 5] call _fnc_addAdditionalMuzzleMagazines;
 
     ["sidearms"] call _fnc_setHandgun;
     ["handgun", 2] call _fnc_addMagazines;

@@ -4,7 +4,8 @@ FIX_LINE_NUMBERS()
 #define OccAndInv(VEH) (FactionGet(occ, VEH) + FactionGet(inv, VEH))
 private _titleStr = localize "STR_A3A_fn_reinf_bombrun_title";
 private _owner = _veh getVariable "ownerX";
-private _wrongOwner = !(isNil "_owner" && {_owner isEqualType ""} && {getPlayerUID player != _owner});
+private _wrongOwner = !(isNil "_owner" || {getPlayerUID player isEqualTo _owner});   //Returns false if no owner, false if is owner, true if is not owner
+private _typeX = typeOf _veh;
 
 private _exitReason = switch (true) do {
 	case (isNull _veh):                                         {"looking"};
@@ -46,6 +47,13 @@ _pointsX = 2;
 
 if (_typeX in (FactionGet(all,"vehiclesHelisAttack") + FactionGet(all,"vehiclesHelisLightAttack"))) then {_pointsX = 5};
 if (_typeX in (OccAndInv("vehiclesPlanesCAS") + OccAndInv("vehiclesPlanesAA"))) then {_pointsX = 10};
+
+private _strikeCap = (4 + tierWar*2); // 10 when you unlock airstrikes, enough for a single CAS plane to be converted. 24 at WL10
+if ((floor bombRuns + _pointsX) > _strikeCap) exitWith {
+	[_titleStr, format [localize "STR_A3A_fn_reinf_bombrun_no_cap",_pointsX,_strikeCap]] call A3A_fnc_customHint;
+    false;
+};
+
 deleteVehicle _veh;
 [_titleStr, format [localize "STR_A3A_fn_reinf_bombrun_increased",_pointsX]] call A3A_fnc_customHint;
 bombRuns = bombRuns + _pointsX;

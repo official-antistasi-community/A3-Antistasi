@@ -127,7 +127,7 @@ _loadoutData set ["watches", ["ItemWatch"]];
 _loadoutData set ["compasses", ["ItemCompass"]];
 _loadoutData set ["radios", ["ItemRadio"]];
 _loadoutData set ["gpses", []];
-_loadoutData set ["NVGs", []];
+_loadoutData set ["NVGs", ["CUP_NVG_1PN138"]];
 _loadoutData set ["binoculars", ["Binocular"]];
 _loadoutData set ["rangefinders", ["Rangefinder"]];
 
@@ -341,6 +341,7 @@ _militiaLoadoutData set ["slBackpacks", ["cwr3_o_backpack_harness_roll"]];
 _militiaLoadoutData set ["atBackpacks", ["CUP_B_RPGPack_Khaki"]];
 _militiaLoadoutData set ["helmets", ["cwr3_i_headgear_beanie_od", "cwr3_o_headgear_ssh68"]];
 _militiaLoadoutData set ["sniHats", ["cwr3_o_ushanka"]];
+_militiaLoadoutData set ["NVGs", []];
 
 _militiaLoadoutData set ["rifles", [
     ["CUP_arifle_AK74", "", "", "", ["CUP_30Rnd_545x39_AK_M"], [], ""],

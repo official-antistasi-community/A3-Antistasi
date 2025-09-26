@@ -18,48 +18,24 @@ if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower world
 
 [] call A3A_fnc_prepareMarkerArrays;
 
-private ["_name", "_sizeX", "_sizeY", "_size", "_pos", "_mrk"];
+// TODO: Read additional camps from config here?
 
-if ((toLower worldName) in ["altis", "chernarus_summer"]) then {
-	"((getText (_x >> ""type"")) == ""Hill"") &&
-	!((getText (_x >> ""name"")) isEqualTo """") &&
-	!(configName _x isEqualTo ""Magos"")"
-	configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
-
-		_name = configName _x;
-		_sizeX = getNumber (_x >> "radiusA");
-		_sizeY = getNumber (_x >> "radiusB");
-		_size = [_sizeX, _sizeY] select (_sizeX <= _sizeY);
-		_pos = getArray (_x >> "position");
-		_size = [_size, 50] select (_size < 10);
-		_mrk = createmarker [format ["%1", _name], _pos];
-		_mrk setMarkerSize [_size, _size];
-		_mrk setMarkerShape "ELLIPSE";
-		_mrk setMarkerBrush "SOLID";
-		_mrk setMarkerColor "ColorRed";
-		_mrk setMarkerText _name;
-		controlsX pushBack _name;
-	};
-};  //this only for Altis and Cherno
-if (debug) then {
-    Debug_1("Setting Spawn Points for %1.", worldname);
-};
-//We're doing it this way, because Dedicated servers world name changes case, depending on how the file is named.
-//And weirdly, == is not case sensitive.
-//this comments has not an information about the code
-
-(seaMarkers + seaSpawn + seaAttackSpawn + spawnPoints + detectionAreas) apply {_x setMarkerAlpha 0};
-defaultControlIndex = (count controlsX) - 1;
-outpostsFIA = [];
-destroyedSites = [];
-garrison setVariable ["Synd_HQ", [], true];
-markersX = airportsX + resourcesX + factories + outposts + seaports + controlsX + ["Synd_HQ"];
+(A3A_mapCamps + A3A_mapRoadblocks + seaMarkers + seaSpawn + seaAttackSpawn + spawnPoints + detectionAreas) apply {_x setMarkerAlpha 0};
+markersX = airportsX + resourcesX + factories + outposts + seaports + ["Synd_HQ"];
 markersX apply {
 	_x setMarkerAlpha 0;
 	spawner setVariable [_x, 2, true];
 };
 
-// Set up dummy markers + autogen roadblocks
+outpostsFIA = [];
+destroyedSites = [];
+controlsX = [];
+
+sidesX setVariable ["Synd_HQ", teamPlayer, true];
+sidesX setVariable ["NATO_carrier", Occupants, true];
+sidesX setVariable ["CSAT_carrier", Invaders, true];
+
+// Set up dummy markers
 call A3A_fnc_initBases;
 
 
@@ -68,10 +44,17 @@ Info("Setting up towns");
 //Disables Towns/Villages, Names can be found in configFile >> "CfgWorlds" >> "WORLDNAME" >> "Names"
 private ["_nameX", "_roads", "_numCiv", "_roadsProv", "_roadcon", "_dmrk", "_info"];
 
-private _townPopulations = getArray (_mapInfo/"population");
+private _townPop = createHashMapFromArray getArray (_mapInfo/"population");
 private _disabledTowns = getArray (_mapInfo/"disabledTowns");
-{server setVariable [_x select 0,_x select 1]} forEach _townPopulations;
-private _hardCodedPopulation = _townPopulations isNotEqualTo [];
+private _hardCodedPop = _townPop isNotEqualTo createHashMap;
+
+private _popMult = getNumber (_mapInfo/"populationMult");
+if (_popMult == 0) then { _popMult = 1 };
+
+// Stop putting random crap in server namespace
+A3A_cityData = [true] call A3A_fnc_createNamespace;		// city -> [pop, support, accumHR]? Might have variable pop at some point
+A3A_cityPop = createHashMap;							// city -> base pop, won't change
+
 
 "(toLower getText (_x >> ""type"") in [""namecitycapital"",""namecity"",""namevillage"",""citycenter""]) &&
 !(getText (_x >> ""Name"") isEqualTo """") &&
@@ -86,9 +69,9 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	_size = [_size, 400] select (_size < 400);
 	_numCiv = 0;
 
-	if (_hardCodedPopulation) then
+	if (_hardCodedPop) then
 	{
-		_numCiv = server getVariable [_nameX, server getVariable (configName _x)]; //backwards compat to config name based pop defines
+		_numCiv = _townPop getOrDefault [_nameX, _townPop get (configName _x)]; //backwards compat to config name based pop defines
 		if (isNil "_numCiv" || {!(_numCiv isEqualType 0)}) then
 		{
             Error_1("Bad population count data for %1", _nameX);
@@ -98,6 +81,9 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	else {
 		_numCiv = (count (nearestObjects [_pos, ["house"], _size]));
 	};
+
+	// This can be used without hardcoded population
+	_numCiv = ceil (_numCiv * _popMult);
 
 	_roads = nearestTerrainObjects [_pos, ["MAIN ROAD", "ROAD", "TRACK"], _size, true, true];
 	if (count _roads > 0) then {
@@ -115,6 +101,7 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	_mrk setMarkerAlpha 0;
 	citiesX pushBack _nameX;
 	spawner setVariable [_nameX, 2, true];
+	spawner setVariable [_nameX + "_civ", 2, true];		// civ part of spawning
 
 	_dmrk = createMarkerLocal [format ["Dum%1", _nameX], _pos];
 	_dmrk setMarkerShapeLocal "ICON";
@@ -122,37 +109,65 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	_dmrk setMarkerColor colorOccupants;
 
 	sidesX setVariable [_mrk, Occupants, true];
-	_info = [_numCiv, _numVeh, 75, 0];				// initial 75% gov, 0% rebel support
-	server setVariable [_nameX, _info, true];
+
+	// ok, how much bulk HR? based on pop or sqrt pop? latter is safer...
+	private _info = [_numCiv, 0, 2 * sqrt _numCiv];				// initial full pop, 0% rebel support, 20 HR for 100 pop?
+	A3A_cityData setVariable [_nameX, _info, true];
+	A3A_cityPop set [_nameX, _numCiv];
+
 };	//find in congigs faster then find location in 25000 radius
 
-
 markersX = markersX + citiesX;
-sidesX setVariable ["Synd_HQ", teamPlayer, true];
-sidesX setVariable ["NATO_carrier", Occupants, true];
-sidesX setVariable ["CSAT_carrier", Invaders, true];
+
+
+// Sort markers by ascending size. Useful for some operations.
+private _markerSort = markersX apply { [vectorMagnitude markerSize _x, _x] };
+_markerSort sort true;
+markersX = _markerSort apply { _x#1 };
+
+// Expected troop counts
+A3A_garrisonSize = createHashMap;
+{
+    private _garrSize = [_x, true] call A3A_fnc_garrisonSize;        // TODO: replace all uses of this function and then sort it out?
+    A3A_garrisonSize set [_x, _garrSize];
+} forEach (markersX - ["Synd_HQ"]);
+
+// Initialize static places, need the sorting for this
+[markersX - citiesX - ["Synd_HQ"]] call A3A_fnc_initStaticPlaces;
+
+// And now set up the max/par/index values per type (needs troop counts)
+[markersX - ["Synd_HQ"]] call A3A_fnc_initSpawnPlaceStats;
+
+
+Info("Setting up banks");
+
+banks = [];
+
+private _posBank = getArray (_mapInfo/"banks");
+if (_posBank isEqualTo []) then {banks = nearestObjects [[worldSize/2, worldSize/2], ["Land_Offices_01_V1_F"], worldSize]};
+
+{
+	private _bank = nearestObject [_x, "house"];
+	if (isNull _bank) then {
+		Error_1("Building not found at %1", _x);
+		continue;
+	};
+	banks pushBack _bank;
+} forEach _posBank;
 
 
 Info("Setting up antennas");
 
 antennasDead = [];
-banks = [];
 mrkAntennas = [];
 antennas = [];
-private _banktypes = ["Land_Offices_01_V1_F"];
 private _antennatypes = ["Land_TTowerBig_1_F", "Land_TTowerBig_2_F", "Land_Communication_F",
 "Land_Vysilac_FM","Land_A_TVTower_base","Land_Telek1", "Land_vn_tower_signal_01","land_gm_radio_antenna_01"];
 private ["_antenna", "_mrkFinal", "_antennaProv"];
-if (debug) then {
-    Debug("Setting up Radio Towers.");
-};
 
 private _posAntennas = getArray (_mapInfo/"antennas");
 private _blacklistIndex = getArray (_mapInfo/"antennasBlacklistIndex");
 private _hardCodedAntennas = _posAntennas isNotEqualTo [];
-
-private _posBank = getArray (_mapInfo/"banks");
-if ( _posBank isEqualTo []) then {banks = nearestObjects [[worldSize/2, worldSize/2], _banktypes, worldSize]};
 
 // Land_A_TVTower_base can't be destroyed, Land_Communication_F and Land_Vysilac_FM are not replaced with "Ruins" when destroyed.
 // This causes issues with persistent load and rebuild scripts, so we replace those with antennas that work properly.
@@ -264,21 +279,27 @@ if (count _posAntennas > 0) then {
 if (debug) then {
 	Error("Broken Radio Towers identified.");
 };
-if (count _posBank > 0) then {
-	for "_i" from 0 to (count _posBank - 1) do {
-		_bankProv = nearestObjects [_posBank select _i, _banktypes, 30];
 
-		if (count _bankProv > 0) then {
-			private _banco = _bankProv select 0;
-			banks = banks + [_banco];
-		};
-	};
-};
+
+// Create marker -> antenna and antenna netID -> marker mappings
+A3A_antennaMap = createHashMap;
+private _siteMarkers = airportsX + resourcesX + factories + outposts + seaports;		// cities should not be associated with antennas
+{
+	private _nearMarker = [_siteMarkers, _x] call BIS_fnc_nearestPosition;
+	A3A_antennaMap set [_nearMarker, _x];				// gives us a fast way to lookup whether an outpost owns a radio tower
+	A3A_antennaMap set [netId _x, _nearMarker];			// To find what side owns a radio tower
+} forEach antennas;
+
+{
+	private _nearAnt = [antennas, markerPos _x] call BIS_fnc_nearestPosition;
+	A3A_antennaMap set [_x, _nearAnt];					// To determine which antenna influences a city
+} forEach citiesX;
+
 
 // Make list of markers that don't have a proper road nearby
 // TODO: Nearly obsolete. Switch convoy code to road distance checks & markerNavPoint
 
-blackListDest = (markersX - controlsX - ["Synd_HQ"] - citiesX) select {
+blackListDest = (markersX - ["Synd_HQ"] - citiesX) select {
 	private _nearRoads = (getMarkerPos _x) nearRoads (([_x] call A3A_fnc_sizeMarker) * 1.5);
 //	_nearRoads = _nearRoads inAreaArray _x;
 	private _badSurfaces = ["#GdtForest", "#GdtRock", "#GdtGrassTall"];
@@ -306,8 +327,6 @@ A3A_fuelStations apply {
 	};
 };
 
-
-
 publicVariable "blackListDest";
 publicVariable "markersX";
 publicVariable "citiesX";
@@ -315,7 +334,6 @@ publicVariable "airportsX";
 publicVariable "resourcesX";
 publicVariable "factories";
 publicVariable "outposts";
-publicVariable "controlsX";
 publicVariable "seaports";
 publicVariable "destroyedSites";
 publicVariable "forcedSpawn";
@@ -328,10 +346,12 @@ publicVariable "mrkAntennas";
 publicVariable "banks";
 publicVariable "seaSpawn";
 publicVariable "seaAttackSpawn";
-publicVariable "defaultControlIndex";
 publicVariable "detectionAreas";
 publicvariable "A3A_fuelStations";
 publicvariable "A3A_fuelStationTypes";
+publicVariable "A3A_antennaMap";
+publicVariable "A3A_cityPop";
+publicVariable "A3A_cityData";
 
 initZonesDone = true;				// signal headless clients that they can start nav init
 publicVariable "initZonesDone";

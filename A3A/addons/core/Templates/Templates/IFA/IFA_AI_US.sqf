@@ -11,7 +11,7 @@
 
 ["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 ["attributeLowAir", true] call _fnc_saveToTemplate;
-["placeIntel_itemLarge", ["Intel_File2_F",-155,false]] call _fnc_saveToTemplate;
+["placeIntel_itemLarge", ["Land_Document_01_F",-155,false]] call _fnc_saveToTemplate;
 
 //////////////////////////
 //       Vehicles       //
@@ -24,7 +24,7 @@
 // vehicles can be placed in more than one category if they fit between both. Cost will be derived by the higher category
 ["vehiclesBasic", ["LIB_US_Willys_MB"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["LIB_US_Willys_MB", "LIB_US_Willys_MB_Hood"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["LIB_US_Willys_MB_M1919", "LIB_US_Scout_M3_FFV"]] call _fnc_saveToTemplate;             // Should be armed, unarmoured to lightly armoured, with 0-4 passengers
+["vehiclesLightArmed", ["LIB_US_Willys_MB_M1919", "LIB_US_Scout_M3_FFV", "LIB_M8_Greyhound"]] call _fnc_saveToTemplate;             // Should be armed, unarmoured to lightly armoured, with 0-4 passengers
 ["vehiclesTrucks", ["LIB_US_GMC_Tent","LIB_US_GMC_Tent"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["LIB_US_GMC_Tent","LIB_US_GMC_Open"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["LIB_US_GMC_Ammo"]] call _fnc_saveToTemplate;
@@ -36,8 +36,8 @@
 ["vehiclesIFVs", ["LIB_M4A3_75"]] call _fnc_saveToTemplate;                  // capable of surviving multiple rockets, cannon armed, with 6-8 passengers
 
 private _vehiclesLightTanks = ["LIB_M8_Greyhound", "LIB_M3A3_Stuart","LIB_M5A1_Stuart"];        //There's an argument to be made to put the Greyhound in lightArmed too, leaving it here for the moment though
-private _vehiclesTanks = ["LIB_M4A3_76","LIB_M4A3_76_HVSS","LIB_M4A3_75","LIB_M4A3_75"];
-private _vehiclesHeavyTanks = [];
+private _vehiclesTanks = ["LIB_M4A3_76","LIB_M4A3_75","LIB_M4A3_75"];
+private _vehiclesHeavyTanks = ["LIB_M4A3_76_HVSS"];
 
 
 ["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate; //Fake "truck with bofors"
@@ -212,7 +212,7 @@ _sfLoadoutData set ["lightATLaunchers", [
 ["LIB_M1_Garand_M7", "LIB_ACC_GL_M7", "", "", [], ["LIB_1Rnd_G_M9A1"], ""]
 ]];
 _sfLoadoutData set ["slWeapons", ["LIB_M1928_Thompson", "LIB_M1928A1_Thompson", "LIB_M1_Garand", "LIB_M1A1_Carbine", "LIB_M1A1_Carbine"]];
-_sfLoadoutData set ["rifles", ["LIB_M1_Garand", "LIB_M1A1_Carbine"]];
+_sfLoadoutData set ["rifles", ["LIB_M1_Garand", "LIB_M1A1_Carbine","a3a_lib_M2_Carbine"]];
 _sfLoadoutData set ["carbines", ["LIB_M1A1_Carbine","a3a_lib_M2_Carbine"]];
 _sfLoadoutData set ["grenadeLaunchers", [
 ["LIB_M1_Garand_M7", "LIB_ACC_GL_M7", "", "", [], ["LIB_1Rnd_G_Mk2"], ""],

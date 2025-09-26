@@ -63,7 +63,32 @@ class A3A {
         };
         class Helicopter
         {
-
+            class baseHelicopter;
+            class B_Heli_Light_01_dynamicLoadout_F : baseHelicopter {
+                loadout[] = { "PylonRack_12Rnd_missiles","PylonRack_12Rnd_PG_missiles" };
+            };
+            class a3a_Heli_Light_01_ION_F : B_Heli_Light_01_dynamicLoadout_F {};
+            class B_Heli_Attack_01_dynamicLoadout_F : baseHelicopter {
+                loadout[] = { "PylonMissile_1Rnd_LG_scalpel","PylonMissile_1Rnd_LG_scalpel","PylonRack_12Rnd_missiles","PylonRack_12Rnd_missiles","PylonMissile_1Rnd_LG_scalpel","PylonMissile_1Rnd_LG_scalpel" };
+            };
+            class I_Heli_light_03_dynamicLoadout_F : baseHelicopter {
+                loadout[] = { "PylonRack_7Rnd_Rocket_04_HE_F","PylonRack_7Rnd_Rocket_04_AP_F" };
+            };
+            class I_E_Heli_light_03_dynamicLoadout_F : I_Heli_light_03_dynamicLoadout_F {
+                loadout[] = { "PylonRack_12Rnd_missiles","PylonRack_12Rnd_PG_missiles" };
+            };
+            class O_Heli_Light_02_dynamicLoadout_F : baseHelicopter {
+                loadout[] = { "PylonWeapon_2000Rnd_65x39_belt","PylonRack_19Rnd_Rocket_Skyfire" };
+            };
+            class a3a_Heli_Light_02_black_F : O_Heli_Light_02_dynamicLoadout_F {};
+            class O_Heli_Attack_02_dynamicLoadout_F : baseHelicopter {
+                loadout[] = { "PylonRack_4Rnd_LG_scalpel","PylonRack_20Rnd_Rocket_03_HE_F","PylonRack_20Rnd_Rocket_03_AP_F","PylonRack_4Rnd_LG_scalpel" };
+            };
+            class O_Heli_Attack_02_dynamicLoadout_black_F : O_Heli_Attack_02_dynamicLoadout_F {};
+            class B_Heli_Transport_01_pylons_F : baseHelicopter {
+                loadout[] = { "PylonRack_12Rnd_missiles","PylonRack_12Rnd_missiles","PylonRack_12Rnd_missiles","PylonRack_12Rnd_missiles" };
+            };
+            class a3a_Heli_Transport_01_pylons_green_F : B_Heli_Transport_01_pylons_F {};
         };
     };
 };

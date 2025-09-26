@@ -15,6 +15,8 @@ params ["_side"];
 
 Info_1("Starting attack choice script for side %1", _side);
 
+// Decrease the punishment defence adjustment a bit each time invaders generate an attack
+if (_side == Invaders) then { A3A_punishmentDefBuff = 0 max (A3A_punishmentDefBuff - 0.25) };
 
 // Make a weighted list of rebel attack targets
 private _targetsAndWeights = [teamPlayer, _side] call A3A_fnc_findAttackTargets;
@@ -139,24 +141,13 @@ else
     [-_atkResources, _side, "attack"] call A3A_fnc_addEnemyResources;
 
     // Flip marker and add garrison once flipped
-    [_side, _targetMrk] spawn A3A_fnc_markerChange;        // add simulation param here? or just rely on spawn status?
+    isNil {
+        [_side, _targetMrk, false] call A3A_fnc_markerChange;        // add simulation param here? or just rely on spawn status?
+    };
     Info_4("Simulated capture of %1 by %2, atk resources %3, def resources %4", _targetMrk, _side, _atkResources, _defResources);
 
-    sleep 10;
-    if (sidesX getVariable _targetMrk != _side) exitWith {
-        Error_2("%1 still not switched to side %2 after 10 seconds", _targetMrk, _side);
-        false;
-    };
-
     // Get the garrison for free because we already paid for them in the simulated attack
-    private _maxTroops = 12 max round ((0.5 + random 0.5) * ([_targetMrk] call A3A_fnc_garrisonSize));
-    private _soldiers = [];
-    private _faction = Faction(_side);
-    while {count _soldiers < _maxTroops} do {
-        _soldiers append selectRandom ((_faction get "groupsSquads") + (_faction get "groupsMedium"));
-    };
-    _soldiers resize _maxTroops;
-    [_soldiers, _side, _targetMrk, 0] spawn A3A_fnc_garrisonUpdate;
+    [_targetMrk] call A3A_fnc_buildEnemyGarrison;
     true;
 };
 

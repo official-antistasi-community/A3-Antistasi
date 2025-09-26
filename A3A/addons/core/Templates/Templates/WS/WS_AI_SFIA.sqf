@@ -6,7 +6,7 @@
 
 ["flag", "Flag_SFIA_lxWS"] call _fnc_saveToTemplate;
 ["flagTexture", "\lxws\data_f_lxws\img\flags\flag_SFIA_CO.paa"] call _fnc_saveToTemplate;
-["flagMarkerType", "a3a_flag_SFIA"] call _fnc_saveToTemplate;
+["flagMarkerType", "lxWS_flag_SFIA"] call _fnc_saveToTemplate;
 
 //////////////////////////
 //       Vehicles       //
@@ -18,7 +18,7 @@
 
 ["vehiclesBasic", ["B_Quadbike_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["O_Tura_Offroad_armor_lxWS"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["O_Tura_Offroad_armor_AT_lxWS","O_Tura_Offroad_armor_armed_lxWS", "O_Tura_Offroad_armor_armed_lxWS", "O_SFIA_Truck_02_aa_lxWS"]] call _fnc_saveToTemplate;
+private _lightArmed = ["O_Tura_Offroad_armor_AT_lxWS","O_Tura_Offroad_armor_armed_lxWS", "O_Tura_Offroad_armor_armed_lxWS", "O_SFIA_Truck_02_aa_lxWS"];
 ["vehiclesTrucks", ["O_SFIA_Truck_02_transport_lxWS","O_SFIA_Truck_02_covered_lxWS"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["O_SFIA_Truck_02_flatbed_lxWS","O_SFIA_Truck_02_cargo_lxWS","O_SFIA_Truck_02_transport_lxWS","O_SFIA_Truck_02_covered_lxWS"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["O_SFIA_Truck_02_Ammo_lxWS"]] call _fnc_saveToTemplate;
@@ -32,7 +32,7 @@
 ["vehiclesAA", ["O_SFIA_APC_Tracked_02_AA_lxWS"]] call _fnc_saveToTemplate; 
 
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["B_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["O_SFIA_APC_Wheeled_02_hmg_lxWS"]] call _fnc_saveToTemplate;
 
@@ -84,8 +84,17 @@ if ("rf" in A3A_enabledDLC) then {
     _vehiclesPolice append ["a3a_police_Pickup_rf", "B_GEN_Pickup_covered_rf", "a3a_police_Pickup_comms_rf"];
     _vehiclesMilitiaCars append ["O_Pickup_rf"];
     _vehiclesMilitiaLightArmed append ["a3a_hex_Pickup_mmg_rf","a3a_hex_Pickup_mmg_rf"];
+    ["vehiclesHelisLight", ["a3a_sfia_Heli_EC_04_military_rf"]] call _fnc_saveToTemplate;
+    ["vehiclesHelisTransport", ["a3a_sfia_Heli_EC_04_military_rf"]] call _fnc_saveToTemplate;
+    ["vehiclesHelisLightAttack", ["a3a_sfia_Heli_EC_03_rf"]] call _fnc_saveToTemplate;
     _vehiclesHelisAttack append ["a3a_sfia_Heli_EC_02_rf"];
+    _lightArmed append ["O_Tura_Pickup_01_Rocket_rf", "O_Tura_Offroad_armor_armed_lxWS"];
 };
+if ("ef" in A3A_enabledDLC) then {
+    ["vehiclesGunBoats", ["EF_O_CombatBoat_HMG_OPF", "EF_O_CombatBoat_AT_OPF"]] call _fnc_saveToTemplate;
+};
+
+["vehiclesLightArmed", _lightArmed] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", _vehiclesHelisAttack] call _fnc_saveToTemplate;
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", _vehiclesMilitiaCars] call _fnc_saveToTemplate;
@@ -125,8 +134,8 @@ _loadoutData set ["sniperRifles", []];
 _loadoutData set ["lightATLaunchers", [
 ["launch_MRAWS_sand_F", "", "acc_pointer_IR", "", ["MRAWS_HEAT55_F", "MRAWS_HE_F"], [], ""],
 ["launch_MRAWS_sand_F", "", "acc_pointer_IR", "", ["MRAWS_HE_F","MRAWS_HEAT55_F"], [], ""],
-["launch_RPG32_F", "", "", "", ["RPG32_F", "RPG32_HE_F"], [], ""],
-["launch_RPG32_F", "", "", "", ["RPG32_HE_F", "RPG32_F"], [], ""]
+["launch_RPG32_tan_lxWS", "", "", "", ["RPG32_F", "RPG32_HE_F"], [], ""],
+["launch_RPG32_tan_lxWS", "", "", "", ["RPG32_HE_F", "RPG32_F"], [], ""]
 ]];
 _loadoutData set ["ATLaunchers", [
 ["launch_MRAWS_sand_F", "", "acc_pointer_IR", "", ["MRAWS_HEAT_F", "MRAWS_HEAT55_F"], [], ""]
@@ -154,8 +163,8 @@ _loadoutData set ["signalsmokeGrenades", ["SmokeShellYellow", "SmokeShellRed", "
 if ("expansion" in A3A_enabledDLC) then {
     _loadoutData set ["lightATLaunchers", [
     "launch_RPG7_F", "launch_RPG7_F",
-    ["launch_RPG32_F", "", "", "", ["RPG32_F", "RPG32_HE_F"], [], ""],
-    ["launch_RPG32_F", "", "", "", ["RPG32_HE_F", "RPG32_F"], [], ""]
+    ["launch_RPG32_tan_lxWS", "", "", "", ["RPG32_F", "RPG32_HE_F"], [], ""],
+    ["launch_RPG32_tan_lxWS", "", "", "", ["RPG32_HE_F", "RPG32_F"], [], ""]
     ]];
 };
 
@@ -328,7 +337,7 @@ _militaryLoadoutData set ["SMGs", [
 _militaryLoadoutData set ["machineGuns", [
 ["LMG_S77_lxWS", "", "", "", ["100Rnd_762x51_S77_Green_lxWS", "100Rnd_762x51_S77_Green_Tracer_lxWS"], [], ""],
 ["LMG_S77_lxWS", "", "", selectRandom _milSights, ["100Rnd_762x51_S77_Green_lxWS", "100Rnd_762x51_S77_Green_Tracer_lxWS"], [], ""],
-["arifle_Velko_lxWS", "", "", "optic_MRCO", ["50Rnd_556x45_Velko_reload_tracer_green_lxWS", "50Rnd_556x45_Velko_tracer_green_lxWS"], [], ""]
+["arifle_Velko_lxWS", "", "", "optic_MRCO", ["50Rnd_556x45_Velko_reload_tracer_green_lxWS", "50Rnd_556x45_Velko_tracer_green_lxWS", "35Rnd_556x45_Velko_reload_tracer_green_lxWS","35Rnd_556x45_Velko_tracer_green_lxWS"], [], ""]
 ]];
 _militaryLoadoutData set ["marksmanRifles", [
 ["arifle_SLR_lxWS", "", "acc_flashlight", "optic_SOS", ["20Rnd_762x51_slr_reload_tracer_green_lxWS"], [], ""],
@@ -387,8 +396,8 @@ _militiaLoadoutData set ["grenadeLaunchers", [
 ]];
 _militiaLoadoutData set ["SMGs", ["hgun_PDW2000_F"]];
 _militiaLoadoutData set ["machineGuns", [
-["arifle_Galat_lxWS", "", "saber_light_lxWS", "", ["75Rnd_762x39_Mag_F", "75Rnd_762x39_Mag_Tracer_F"], [], ""],
-["arifle_SLR_V_lxWS", "", "", "", ["30Rnd_762x51_slr_reload_tracer_green_lxWS", "30Rnd_762x51_slr_tracer_green_lxWS"], [], ""]
+["arifle_Galat_lxWS", "", "saber_light_lxWS", "", ["75Rnd_762x39_Mag_F", "30Rnd_762x39_Mag_Green_F","30Rnd_762x39_Mag_Tracer_Green_F"], [], ""],
+["arifle_Galat_lxWS", "", "saber_light_lxWS", "", ["75Rnd_762x39_Mag_Tracer_F", "30Rnd_762x39_Mag_Green_F","30Rnd_762x39_Mag_Tracer_Green_F"], [], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
 ["arifle_SLR_lxWS", "", "acc_flashlight", "optic_MRCO", ["20Rnd_762x51_slr_reload_tracer_green_lxWS"], [], ""],
@@ -494,8 +503,21 @@ if ("rf" in A3A_enabledDLC) then {
     (_sfLoadoutData get "sidearms") append ["hgun_DEagle_RF"];
 
     (_policeLoadoutData get "sidearms") append ["hgun_Glock19_RF"];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
 
     _officerLoadoutData set ["sidearms", ["hgun_DEagle_RF","hgun_DEagle_bronze_RF","hgun_DEagle_classic_RF","hgun_DEagle_copper_RF","hgun_DEagle_gold_RF"]];
+
+    // SFIA uses a few of the launchers as high-yield SF weapons
+    private _lightLaunchersAppend = [ // 1/3 chance of LAT being psrl
+    ["launch_PSRL1_sand_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_sand_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_HE_RF"], [], ""]
+    ];
+    private _medLaunchersAppend = [ // 2/3 chance of MAT being psrl
+    ["launch_PSRL1_PWS_sand_RF", "", "", "", ["PSRL1_HE_RF", "PSRL1_AT_RF", "PSRL1_AT_RF"], [], ""],
+    ["launch_PSRL1_PWS_sand_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_HEAT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    (_sfLoadoutData get "lightATLaunchers") append _lightLaunchersAppend;
+    (_sfLoadoutData get "ATLaunchers") append _medLaunchersAppend;
 };
 
 /////////////////////////////////

@@ -8,10 +8,10 @@
 ["flagTexture", "cwr3\general\cwr3_flags\data\fia.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "cwr3_faction_fia"] call _fnc_saveToTemplate;
 
-["vehiclesBasic", ["cwr3_c_jawa"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["cwr3_i_uaz"]] call _fnc_saveToTemplate;
+["vehiclesBasic", ["I_G_Quadbike_01_F"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["cwr3_i_uaz", "cwr3_i_uaz_open", "cwr3_i_uaz452"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["cwr3_i_uaz_dshkm"]] call _fnc_saveToTemplate;
-["vehiclesTruck", ["cwr3_i_ural"]] call _fnc_saveToTemplate;
+["vehiclesTruck", ["cwr3_i_ural", "cwr3_i_btr40"]] call _fnc_saveToTemplate;
 ["vehiclesAT", ["cwr3_i_uaz_spg9"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["cwr3_i_ural_zu23"]] call _fnc_saveToTemplate;
 ["vehiclesBoat", ["cwr3_i_zodiac"]] call _fnc_saveToTemplate;
@@ -66,10 +66,8 @@ if (A3A_hasTFAR && startWithLongRangeRadio) then {
     _initialRebelEquipment pushBack "tf_anprc155_coyote";
 };
 if (A3A_hasTFARBeta) then {_initialRebelEquipment append ["TFAR_microdagr", "TFAR_anprc154"]};
-if (A3A_hasTFARBeta && startWithLongRangeRadio) then {
-    _initialRebelEquipment pushBack "TFAR_anprc155";
-    _initialRebelEquipment pushBack "TFAR_anprc155_coyote";
-};
+if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote", "TFAR_anarc164", "a3a_TFAR_rt1523g_rhs", "a3a_TFAR_rt1523g_bwmod", "a3a_TFAR_rt1523g"]};
+
 
 _initialRebelEquipment append ["Chemlight_blue","Chemlight_green","Chemlight_red","Chemlight_yellow"];
 

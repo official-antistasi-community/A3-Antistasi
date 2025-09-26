@@ -40,16 +40,16 @@
 ["vehiclesPlanesAA", ["UK3CB_LDF_B_MIG21_AA", "UK3CB_LDF_B_MIG29SM", "UK3CB_LDF_B_L39_PYLON"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["UK3CB_LDF_B_C130J"]] call _fnc_saveToTemplate;
 
-["vehiclesHelisLight", ["UK3CB_LDF_B_Mi8", "UK3CB_LFR_B_Bell412_FLIR"]] call _fnc_saveToTemplate;
-["vehiclesHelisTransport", ["UK3CB_LDF_B_Mi8AMT"]] call _fnc_saveToTemplate;
-["vehiclesHelisLightAttack", ["UK3CB_LDF_B_Mi8AMTSh"]] call _fnc_saveToTemplate;
-["vehiclesHelisAttack", ["UK3CB_LDF_B_Mi_24P", "UK3CB_LDF_B_Mi_24V"]] call _fnc_saveToTemplate;
+["vehiclesHelisLight", ["UK3CB_LDF_B_Mi8AMT"]] call _fnc_saveToTemplate;
+["vehiclesHelisTransport", ["UK3CB_LDF_B_Mi8"]] call _fnc_saveToTemplate;
+["vehiclesHelisLightAttack", ["UK3CB_LDF_B_Mi_24P", "UK3CB_LDF_B_Mi8AMTSh"]] call _fnc_saveToTemplate;
+["vehiclesHelisAttack", ["UK3CB_LDF_B_Mi_24V", "UK3CB_LDF_B_Mi_24G_UPK23"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["UK3CB_LDF_B_2S1", "UK3CB_LDF_B_RM70", "UK3CB_LDF_B_RM70_MG", "UK3CB_LDF_B_T810_MLRS"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
 ["UK3CB_LDF_B_2S1", ["rhs_mag_3of56_35"]],
 ["UK3CB_LDF_B_RM70", ["uk3cb_40nd_mag_122mm_rockets"]],
-["UK3CB_LDF_B_RM70_MG", ["rhs_mag_40Rnd_122mm_rockets"]],
+["UK3CB_LDF_B_RM70_MG", ["uk3cb_40nd_mag_122mm_rockets"]],
 ["UK3CB_LDF_B_T810_MLRS", ["rhs_mag_40Rnd_122mm_rockets"]]
 ]] call _fnc_saveToTemplate;
 
@@ -57,11 +57,13 @@
 ["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles
+["vehiclesAirPatrol", ["UK3CB_LDF_B_Mi8", "UK3CB_LFR_B_Bell412_FLIR", "UK3CB_LFR_B_Cessna_172", "UK3CB_LFR_B_C400"]] call _fnc_saveToTemplate;
+
 ["vehiclesMilitiaLightArmed", ["UK3CB_LNM_B_Hilux_M2", "UK3CB_LNM_B_LR_M2", "UK3CB_LNM_B_LR_SF_M2", "UK3CB_LNM_B_Offroad_M2", "UK3CB_LNM_B_Pickup_M2"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaTrucks", ["UK3CB_LNM_B_Ural_Open", "UK3CB_LNM_B_Van_Transport", "UK3CB_LNM_B_Zil131_Open", "UK3CB_LNM_B_Zil131_Covered", "UK3CB_LNM_B_Ural"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["UK3CB_LNM_B_Pickup", "UK3CB_LNM_B_Offroad", "UK3CB_LNM_B_LR_Closed", "UK3CB_LNM_B_LR_Open", "UK3CB_LNM_B_Hilux_Open", "UK3CB_LNM_B_Hilux_Closed"]] call _fnc_saveToTemplate;
 
-["vehiclesPolice", ["UK3CB_ADP_B_Hilux_Closed"]] call _fnc_saveToTemplate;
+["vehiclesPolice", ["UK3CB_LFR_B_LR_Closed", "UK3CB_LFR_B_Landcruiser", "UK3CB_LFR_B_Offroad_Comms"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["UK3CB_LDF_B_DSHKM", "UK3CB_LDF_B_M2_TriPod"]] call _fnc_saveToTemplate;
 ["staticAT", ["UK3CB_LDF_B_TOW_TriPod"]] call _fnc_saveToTemplate;
@@ -375,21 +377,27 @@ _militaryLoadoutData set ["sniperRifles", [
 ///////////////////////////////
 
 private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_policeLoadoutData set ["uniforms", ["U_B_GEN_Soldier_F", "U_B_GEN_Commander_F"]];
-_policeLoadoutData set ["vests", ["V_TacVest_blk_POLICE"]];
-_policeLoadoutData set ["helmets", ["H_Cap_police"]];
+_policeLoadoutData set ["slUniforms", ["UK3CB_LFR_B_U_Officer_01", "UK3CB_LFR_B_U_Officer_02", "UK3CB_LFR_B_U_Officer_03", "UK3CB_LFR_B_U_Officer_04"]];
+_policeLoadoutData set ["uniforms", ["UK3CB_LFR_B_U_RANGER_05", "UK3CB_LFR_B_U_RANGER_06", "UK3CB_LFR_B_U_RANGER_07"]];
+_policeLoadoutData set ["vests", ["UK3CB_LFR_B_V_TacVest_BRN", "UK3CB_LFR_B_V_TacVest_OLI", "V_Pocketed_olive_F", "V_LegStrapBag_olive_F", "V_Rangemaster_belt"]];
+_policeLoadoutData set ["helmets", ["H_Hat_Safari_olive_F", "H_Booniehat_khk"]];
+
 _policeLoadoutData set ["shotGuns", [
 ["rhs_weap_M590_8RD", "", "", "", ["rhsusf_8Rnd_00Buck", "rhsusf_8Rnd_Slug"], [], ""],
+["rhs_weap_M590_8RD", "", "", "", ["rhsusf_8Rnd_Slug", "rhsusf_8Rnd_00Buck"], [], ""],
 ["rhs_weap_M590_5RD", "", "", "", ["rhsusf_5Rnd_00Buck", "rhsusf_5Rnd_Slug"], [], ""]
 ]];
-_policeLoadoutData set ["SMGs", [
-["UK3CB_MP5A2", "", "uk3cb_acc_surefiregrip", "rhsusf_acc_compm4", [], [], ""],
-["UK3CB_HK33KA2_RIS", "", "rhsusf_acc_M952V", "rhsusf_acc_compm4", [], [], ""],
-["UK3CB_MP5A2", "", "uk3cb_acc_surefiregrip", "", [], [], ""],
-["UK3CB_HK33KA2_RIS", "", "rhsusf_acc_M952V", "", [], [], ""]
+_policeLoadoutData set ["rifles", [
+["rhs_weap_kar98k", "", "", "", ["rhsgref_5Rnd_792x57_kar98k"], [], ""],
+["rhs_weap_m38", "", "", "", ["rhsgref_5Rnd_762x54_m38"], [], ""],
+["UK3CB_CZ550", "", "", "", ["UK3CB_CZ550_5rnd_Mag"], [], ""]
+]];
+_policeLoadoutData set ["slRifles", [
+["rhs_weap_m76", "", "", "", ["rhssaf_10Rnd_792x57_m76_tracer","rhsgref_10Rnd_792x57_m76"], [], ""]
 ]];
 _policeLoadoutData set ["sidearms", [
-["UK3CB_USP", "", "acc_flashlight_pistol", "", [], [], ""]
+"UK3CB_CZ75", "UK3CB_BHP", "rhsusf_weap_m1911a1",
+["rhsusf_weap_glock17g4", "", "acc_flashlight_pistol", "", ["rhsusf_mag_17Rnd_9x19_JHP"], [], ""]
 ]];
 
 ////////////////////////////////
@@ -433,7 +441,6 @@ _militiaLoadoutData set ["machineGuns", [
 ["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_GM"], [], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m2", ["rhs_10Rnd_762x54mmR_7N1"], [], ""],
 ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m2", ["rhs_10Rnd_762x54mmR_7N1"], [], ""],
 ["UK3CB_CZ550", "", "", "uk3cb_optic_sro", ["UK3CB_CZ550_5rnd_Mag"], [], ""]
 ]];
@@ -801,7 +808,7 @@ private _policeTemplate = {
     ["uniforms"] call _fnc_setUniform;
 
 
-    [selectRandom["SMGs", "shotGuns"]] call _fnc_setPrimary;
+    [selectRandom["rifles", "shotGuns"]] call _fnc_setPrimary;
     ["primary", 3] call _fnc_addMagazines;
 
     ["sidearms"] call _fnc_setHandgun;
@@ -816,6 +823,12 @@ private _policeTemplate = {
     ["watches"] call _fnc_addWatch;
     ["compasses"] call _fnc_addCompass;
     ["radios"] call _fnc_addRadio;
+};
+private _policeSLTemplate = {
+    call _policeTemplate;
+    ["slUniforms"] call _fnc_setUniform;
+    [selectRandom["slRifles", "shotGuns"]] call _fnc_setPrimary;
+    ["primary", 3] call _fnc_addMagazines;
 };
 
 private _crewTemplate = {
@@ -922,7 +935,7 @@ private _unitTypes = [
 ////////////////////////
 private _prefix = "police";
 private _unitTypes = [
-    ["SquadLeader", _policeTemplate],
+    ["SquadLeader", _policeSLTemplate],
     ["Standard", _policeTemplate]
 ];
 

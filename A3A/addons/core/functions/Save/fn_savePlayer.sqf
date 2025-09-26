@@ -47,9 +47,11 @@ _playerHM set ["loadoutPlayer", _loadout];
 
 private _scorePlayer = _playerUnit getVariable ["score", 0];
 private _rankPlayer = _playerUnit getVariable ["rankX", "PRIVATE"];		// rank _unit fails on corpses
+private _missions = _playerUnit getVariable ["missionsCompleted",0];
 _playerHM set ["scorePlayer", _scorePlayer];
 _playerHM set ["rankPlayer", _rankPlayer];
 _playerHM set ["personalGarage", []];
+_playerHM set ["missionsCompleted",_missions];
 
 private _totalMoney = _playerUnit getVariable ["moneyX", 0];
 if (_shouldStripLoadout) then { _totalMoney = round (_totalMoney * 0.85) };
@@ -67,7 +69,7 @@ if (_globalSave) then
 				_totalMoney = _totalMoney + _unitPrice;
 			};
 			private _veh = vehicle _x;
-			if (_veh == _x || {_veh in staticsToSave}) exitWith {};
+			if (_veh == _x || !isNil {_veh getVariable "markerX"}) exitWith {};
 			if (_x == driver _veh || {_x == gunner _veh && _veh isKindOf "StaticWeapon"}) then {
 				private _vehPrice = [typeof _veh] call A3A_fnc_vehiclePrice;
 				_totalMoney = _totalMoney + _vehPrice;

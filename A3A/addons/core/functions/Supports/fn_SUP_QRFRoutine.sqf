@@ -75,7 +75,9 @@ while {true} do
     };
 
     // Attempt to flip marker in case it was left empty
-    if (!isNil "_nearMrk") then { [_nearMrk, sidesX getVariable _nearMrk] remoteExec ["A3A_fnc_zoneCheck", 2] };
+    if (!isNil "_nearMrk") then {
+        ["zoneCheck", [_nearMrk, true]] remoteExecCall ["A3A_fnc_garrisonOp", 2];      // bounce through server
+    };
     sleep 30;
 };
 

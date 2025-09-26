@@ -10,9 +10,13 @@ params ["_intel"];
 
 //Take intel from desk
 private _side = _intel getVariable "side";
+private _marker = _intel getVariable "marker";
 [localize "STR_A3A_fn_intel_title1", localize "STR_A3A_fn_intel_doc_success"] call A3A_fnc_customHint;
 ["Medium", _side] remoteExec ["A3A_fnc_selectIntel", 2];
 {
     [5,_x] call A3A_fnc_playerScoreAdd;
 } forEach ([50,0,_intel,teamPlayer] call A3A_fnc_distanceUnits);
 deleteVehicle _intel;
+if (!isNil "_marker") then {
+    [_marker, "intel"] remoteExecCall ["A3A_fnc_garrisonServer_looted", 2];
+};

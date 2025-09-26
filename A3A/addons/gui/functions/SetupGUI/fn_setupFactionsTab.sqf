@@ -151,7 +151,7 @@ switch (_mode) do
         private _requiredAddons = getArray(_path/"requiredAddons") + getArray(_path/"forceDLC") - ["ws","vn","gm","spe"]; // CDLCs are listed twice for forced DLC and dependency
         private _prettyAddonHM = createHashMapFromArray [ // TODO: Do we want to trim down the dependencies list? CUP Vehicles has dependencies on CUP Units and CUP Vehicles
             ["Weapons_1_F_lxWS", "Western Sahara CDLC"]
-            ,["vn_weapons", "S.O.G Prairie Fire CDLC"]
+            ,["loadorder_f_vietnam", "S.O.G Prairie Fire CDLC"]
             ,["rhsgref_main", "RHSGREF"]
             ,["rhssaf_main", "RHSSAF"]
             ,["UK3CB_Factions_Vehicles_SUV", "3CB Factions"]
@@ -169,6 +169,7 @@ switch (_mode) do
             ,["IFA3_Core", "IFA3 AIO"]
             ,["Swedish_Forces_Pack","Swedish Forces Pack"]
             ,["cwr3_core","Cold War Rearmed 3"]
+            ,["WW2_SPEX_Assets_c_Characters_Americans_c","SPEX - Spearhead Extended"]
         ];
 
         private _prettyAddons = _requiredAddons apply 

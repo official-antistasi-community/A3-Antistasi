@@ -65,6 +65,7 @@ class A3A {
                 rocketLauncher[] = {"rhs_weap_s8t"};
                 missileLauncher[] = {"uk3cb_weap_kh25ma_Launcher"};
             };
+            class UK3CB_GAF_B_MIG21_AT : UK3CB_TKA_B_MIG21_AT {};
             
             class UK3CB_AAF_B_Gripen_G : baseCAS {
                 loadout[] = {"","","PylonRack_Missile_AGM_02_x1","PylonRack_Missile_AGM_02_x1","PylonRack_Missile_AGM_02_x2","PylonRack_Missile_AGM_02_x2"};
@@ -93,6 +94,7 @@ class A3A {
             class UK3CB_LDF_B_MIG29SM : rhs_mig29sm_vvs {};
             class UK3CB_KDF_B_MIG29SM : rhs_mig29sm_vvs {};
             class UK3CB_AAF_O_MIG29S : rhs_mig29sm_vvs {};
+            class UK3CB_GAF_B_MIG29S : rhs_mig29sm_vvs {};
             class UK3CB_CSAT_A_O_MIG29SM : rhs_mig29sm_vvs{};
             class UK3CB_CSAT_B_O_MIG29SM : rhs_mig29sm_vvs{};
             class UK3CB_CSAT_F_O_MIG29SM : rhs_mig29sm_vvs{};
@@ -121,6 +123,7 @@ class A3A {
                 loadout[] = {"rhs_mag_R73M_APU73","rhs_mag_R73M_APU73","rhs_mag_R73M_APU73","rhs_mag_R73M_APU73"};
             };
             class UK3CB_TKA_B_MIG21_AA : UK3CB_LDF_B_MIG21_AA {};
+            class UK3CB_GAF_B_MIG21_AA : UK3CB_LDF_B_MIG21_AA {};
             
             class UK3CB_B_Mystere_HIDF_AA1 : baseCAP {
                 loadout[] = {"PylonRack_1Rnd_Missile_AA_04_F","PylonRack_1Rnd_AAA_missiles","PylonRack_1Rnd_AAA_missiles","PylonRack_1Rnd_Missile_AA_04_F"};

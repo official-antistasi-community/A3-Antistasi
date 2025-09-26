@@ -41,9 +41,10 @@ private _initData = [
     ["TANK",          "TARGET", 0.5, 0.5,   0, 100,  "", ""],                            // balanced against CAS, lowAir based
     ["QRFLAND",       "TROOPS", 1.0, 1.4,   0,   0,  "", ""],
     ["QRFAIR",        "TROOPS", 0.5, 0.1,   0,   0,  "", ""],
-    ["CARPETBOMBS",     "AREA", 0.5, 0.1, 200,   0, "u", ""],                            // balanced against airstrikes
+    ["CARPETBOMBS",     "AREA", 0.5, 0.1, 200,   0, "u", "vehiclesPlanesCAS"],            // balanced against airstrikes
     ["SAM",           "TARGET", 1.0, 1.0,   0, 100,  "", ""],                             // balanced against ASF
-    ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""]
+    ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""],
+    ["UAV",             "AREA", 0.0, 0.0,   0,   0,  "", "uavsAttack"]                    // Not used for support calls 
 //    ["GUNSHIP",    ["AREA",   0.2,  50,   0]],                 // uh. Does AREA work for this? Only lasts 5 minutes so maybe...
 ];
 

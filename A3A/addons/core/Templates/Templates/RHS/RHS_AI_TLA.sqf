@@ -35,7 +35,7 @@
 ["vehiclesAA", ["rhs_zsu234_aa"]] call _fnc_saveToTemplate;
 
 
-["vehiclesTransportBoats", ["rhsgref_hidf_rhib","B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["rhsgref_hidf_rhib","I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["rhsusf_mkvsoc"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["rhsgref_tla_btr60","rhs_bmp1_msv", "rhs_bmp1k_msv", "rhs_bmp1p_msv","rhsgref_BRDM2_HQ_msv","rhsgref_BRDM2UM_msv","rhsgref_BRDM2_msv"]] call _fnc_saveToTemplate;
 
@@ -346,6 +346,60 @@ _pilotLoadoutData set ["vests", ["rhsgref_TacVest_ERDL"]];
 _pilotLoadoutData set ["SMGs", ["rhs_weap_m3a1"]];
 _pilotLoadoutData set ["helmets", ["rhs_zsh7a_mike_green", "rhs_zsh7a_mike_green_alt"]];
 
+if (isClass (configFile >> "CfgPatches" >> "UK3CB_Factions_CHD_O")) then {
+    (_militaryLoadoutData get "rifles") append [
+    ["UK3CB_M16A2", "", "", "", ["rhs_mag_20Rnd_556x45_M193_2MAG_Stanag", "rhs_mag_20Rnd_556x45_M193_Stanag", "rhs_mag_20Rnd_556x45_M193_Stanag", "rhs_mag_20Rnd_556x45_M196_Stanag_Tracer_Red"], [], ""]
+    ];
+    (_militaryLoadoutData get "carbines") append [
+    ["UK3CB_M16A1", "", "", "", ["rhs_mag_20Rnd_556x45_M196_2MAG_Stanag_Tracer_Red", "rhs_mag_20Rnd_556x45_M193_Stanag", "rhs_mag_20Rnd_556x45_M193_Stanag", "rhs_mag_20Rnd_556x45_M196_Stanag_Tracer_Red"], [], ""]
+    ];
+    (_militaryLoadoutData get "grenadeLaunchers") append [
+    ["UK3CB_M16A2_UGL", "", "", "", ["rhs_mag_20Rnd_556x45_M193_Stanag", "rhs_mag_20Rnd_556x45_M193_Stanag", "rhs_mag_20Rnd_556x45_M196_Stanag_Tracer_Red"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""]
+    ];
+    (_militaryLoadoutData get "SMGs") append [
+    "rhs_weap_m3a1",
+    ["uk3cb_ppsh41", "", "", "", ["uk3cb_PPSH_35rnd_magazine", "uk3cb_PPSH_35rnd_magazine_G", "uk3cb_PPSH_35rnd_magazine_GM", "uk3cb_PPSH_35rnd_magazine_GT"], [], ""],
+    ["uk3cb_ppsh41", "", "", "", ["uk3cb_PPSH_71rnd_magazine_GM", "uk3cb_PPSH_35rnd_magazine_G", "uk3cb_PPSH_35rnd_magazine_GM", "uk3cb_PPSH_35rnd_magazine_GT"], [], ""]
+    ];
+    (_militaryLoadoutData get "machineGuns") append [
+    ["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_G", "UK3CB_RPD_100rnd_762x39_GM", "UK3CB_RPD_100rnd_762x39_GT"], [], ""],
+    ["UK3CB_RPK", "", "", "", ["rhs_75Rnd_762x39mm", "UK3CB_RPK_40rnd_762x39_G", "UK3CB_RPK_40rnd_762x39_GM", "UK3CB_RPK_40rnd_762x39_GT"], [], ""],
+    ["UK3CB_M60", "", "", "", ["UK3CB_M60_100rnd_762x51", "UK3CB_M60_100rnd_762x51_R", "UK3CB_M60_100rnd_762x51_RM", "UK3CB_M60_100rnd_762x51_RT"], [], ""]
+    ];
+    (_militaryLoadoutData get "marksmanRifles") append [
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m21", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]
+    ];
+    (_militaryLoadoutData get "sniperRifles") append [
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m21", ["rhs_10Rnd_762x54mmR_7N1"], [], ""],
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_1pn93_1", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]
+    ];
+
+    (_militiaLoadoutData get "rifles") append [
+    ["uk3cb_sks_01", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""]
+    ];
+    (_militiaLoadoutData get "carbines") append [
+    ["uk3cb_sks_01", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""]
+    ];
+    (_militiaLoadoutData get "SMGs") append [
+    "rhs_weap_m3a1",
+    ["uk3cb_ppsh41", "", "", "", ["uk3cb_PPSH_35rnd_magazine", "uk3cb_PPSH_35rnd_magazine_G", "uk3cb_PPSH_35rnd_magazine_GM", "uk3cb_PPSH_35rnd_magazine_GT"], [], ""],
+    ["uk3cb_ppsh41", "", "", "", ["uk3cb_PPSH_71rnd_magazine_GM", "uk3cb_PPSH_35rnd_magazine_G", "uk3cb_PPSH_35rnd_magazine_GM", "uk3cb_PPSH_35rnd_magazine_GT"], [], ""]
+    ];
+    (_militiaLoadoutData get "machineGuns") append [
+    ["UK3CB_RPD", "", "", "", ["UK3CB_RPD_100rnd_762x39", "UK3CB_RPD_100rnd_762x39_G", "UK3CB_RPD_100rnd_762x39_GM", "UK3CB_RPD_100rnd_762x39_GT"], [], ""],
+    ["UK3CB_RPK", "", "", "", ["UK3CB_RPK_40rnd_762x39", "UK3CB_RPK_40rnd_762x39_G", "UK3CB_RPK_40rnd_762x39_GM", "UK3CB_RPK_40rnd_762x39_GT"], [], ""]
+    ];
+    (_militiaLoadoutData get "sniperRifles") append [
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m21", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]
+    ];
+
+    (_policeLoadoutData get "rifles") append [
+    ["uk3cb_sks_01", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""]
+    ];
+    (_policeLoadoutData get "SMGs") append [
+    ["uk3cb_ppsh41", "", "", "", ["uk3cb_PPSH_35rnd_magazine", "uk3cb_PPSH_35rnd_magazine_G", "uk3cb_PPSH_35rnd_magazine_GM", "uk3cb_PPSH_35rnd_magazine_GT"], [], ""]
+    ];
+};
 
 /////////////////////////////////
 //    Unit Type Definitions    //

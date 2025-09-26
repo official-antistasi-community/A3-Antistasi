@@ -390,6 +390,23 @@ _pilotLoadoutData set ["uniforms", ["rhs_uniform_df15_tan"]];
 _pilotLoadoutData set ["vests", ["rhs_vest_commander"]];
 _pilotLoadoutData set ["helmets", ["rhs_zsh7a_mike_alt", "rhs_zsh7a_mike", "rhs_zsh7a_mike_green", "rhs_zsh7a_mike_green_alt"]];
 
+if (isClass (configFile >> "CfgPatches" >> "UK3CB_Factions_Vehicles_SUV")) then {
+    (_militaryLoadoutData get "marksmanRifles") append [
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m21", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]
+    ];
+    (_militaryLoadoutData get "sniperRifles") append [
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m21", ["rhs_10Rnd_762x54mmR_7N1"], [], ""],
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_1pn93_1", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]
+    ];
+
+    (_militiaLoadoutData get "sniperRifles") append [
+    ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m21", ["rhs_10Rnd_762x54mmR_7N1"], [], ""]
+    ];
+
+    (_policeLoadoutData get "rifles") append [
+    ["uk3cb_sks_01", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""]
+    ];
+};
 /////////////////////////////////
 //    Unit Type Definitions    //
 /////////////////////////////////
