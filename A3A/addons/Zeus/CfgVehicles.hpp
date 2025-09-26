@@ -135,7 +135,7 @@ class CfgVehicles
     
     class a3a_unit_west_rifleman : a3a_unit_west {
         class EventHandlers : EventHandlers {
-            init = "#include '\x\A3A\addons\Zeus\initUnitLoadout.sqf';"
+            PostInit = "this call A3A_fnc_initUnitLoadout";
         };
 		displayName = "Rifleman";
         editorSubcategory = "a3a_military";

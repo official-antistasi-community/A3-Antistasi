@@ -3,7 +3,7 @@
 class CfgPatches {
     class ADDON {
         name = COMPONENT_NAME;
-        units[] = {};
+        units[] = {"a3a_unit_west_rifleman"};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {"A3A_Events", "A3A_core", "A3A_config_fixes"};
@@ -13,7 +13,16 @@ class CfgPatches {
         VERSION_CONFIG;
     };
 };
-
+class CfgFunctions
+{
+    class A3A
+    {
+		class zeus{
+            file = QPATHTOFOLDER(functions);
+			class initUnitLoadout{};
+		}
+	};
+};
 class CfgEditorCategories
 {
 	class a3a_occupants
