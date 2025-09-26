@@ -20,7 +20,7 @@ private _fnc_setInterference = {
             _coreSignal params ["_Px", "_maxSignal"];
             private _sendInterference = player getVariable ["tf_sendingDistanceMultiplicator", 1];
 
-            [_Px * _sendInterference, _maxSignal]
+            [(_Px * _sendInterference) min 1, _maxSignal]
 
         }] call acre_api_fnc_setCustomSignalFunc;
     }
