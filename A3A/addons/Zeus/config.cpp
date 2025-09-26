@@ -3,7 +3,9 @@
 class CfgPatches {
     class ADDON {
         name = COMPONENT_NAME;
-        units[] = {"a3a_unit_west_rifleman"};
+        units[] = {
+			"a3a_unit_west_sniper", "a3a_unit_west_marksman", "a3a_unit_west_machinegunner", "a3a_unit_west_AA", "a3a_unit_west_AT", "a3a_unit_west_LAT", "a3a_unit_west_grenadier", "a3a_unit_west_explosivesexpert", "a3a_unit_west_engineer", "a3a_unit_west_medic", "a3a_unit_west_squadleader", "a3a_unit_west_rifleman"
+		};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
         requiredAddons[] = {"A3A_Events", "A3A_core", "A3A_config_fixes"};

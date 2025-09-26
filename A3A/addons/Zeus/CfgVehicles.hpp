@@ -135,10 +135,103 @@ class CfgVehicles
     
     class a3a_unit_west_rifleman : a3a_unit_west {
         class EventHandlers : EventHandlers {
-            PostInit = "this call A3A_fnc_initUnitLoadout";
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
         };
 		displayName = "Rifleman";
         editorSubcategory = "a3a_military";
         scopeCurator = 2;
+        A3A_loadout = "military_Rifleman";
+    };
+    class a3a_unit_west_squadleader : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "Squad Leader";
+        A3A_loadout = "military_SquadLeader";
+    };
+    class a3a_unit_west_medic : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "Medic";
+        A3A_loadout = "military_Medic";
+        attendant = 1;
+        nameSound = "veh_infantry_medic_s";
+        picture = "pictureHeal";
+        role = "CombatLifeSaver";
+        textPlural = "medics";
+        textSingular = "medic";
+    };
+    class a3a_unit_west_engineer : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "Engineer";
+        A3A_loadout = "military_Engineer";
+        engineer = 1;
+        canDeactivateMines = 1;
+        icon = "iconManEngineer";
+        picture = "pictureRepair";
+        role = "Sapper";
+    };
+    class a3a_unit_west_explosivesexpert : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "Explosives Expert";
+        A3A_loadout = "military_ExplosivesExpert";
+        canDeactivateMines = 1;
+        icon = "iconManExplosive";
+        picture = "pictureExplosive";
+        role = "Sapper";
+    };
+    class a3a_unit_west_grenadier : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "Grenadier";
+        A3A_loadout = "military_Grenadier";
+    };
+    class a3a_unit_west_LAT : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "LAT";
+        A3A_loadout = "military_LAT";
+    };
+    class a3a_unit_west_AT : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "AT";
+        A3A_loadout = "military_AT";
+    };
+    class a3a_unit_west_AA : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "AA";
+        A3A_loadout = "military_AA";
+    };
+    class a3a_unit_west_machinegunner : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "Machine Gunner";
+        A3A_loadout = "military_MachineGunner";
+    };
+    class a3a_unit_west_marksman : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "Marksman";
+        A3A_loadout = "military_Marksman";
+    };
+    class a3a_unit_west_sniper : a3a_unit_west_rifleman {
+        class EventHandlers : EventHandlers {
+            PostInit = "params ['_entity']; _entity call A3A_fnc_initUnitLoadout";
+        };
+		displayName = "Sniper";
+        A3A_loadout = "military_Sniper";
     };
 };
