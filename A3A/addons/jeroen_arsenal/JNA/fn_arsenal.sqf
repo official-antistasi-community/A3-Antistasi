@@ -2122,8 +2122,8 @@ switch _mode do {
 
 		private _container = switch _selected do {
 			case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM: {uniformContainer player};
-			case IDC_RSCDISPLAYARSENAL_TAB_VEST: {vestContainer player;};
-			case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {backpackContainer player;};
+			case IDC_RSCDISPLAYARSENAL_TAB_VEST: {vestContainer player};
+			case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {backpackContainer player};
 		};
 		if (isNil "_container") exitWith {};			// hit this once. Some sort of UI timing issue? Whatever.
 
@@ -2136,8 +2136,8 @@ switch _mode do {
 		if (_shift && _ctrl) then { _count = _count * 25 };
 
 		if (_amount == -1) then { _amount = 1e6 };			// should be high enough even for bullets. Simplifies logic.
-		private _isMag = _index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG,IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL];
-		private _magBullets = if (_isMag) then { getNumber (configFile >> "CfgMagazines" >> _item >> "count") };
+		private _isMag = _index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG, IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, IDC_RSCDISPLAYARSENAL_TAB_CARGOTHROW, IDC_RSCDISPLAYARSENAL_TAB_CARGOPUT];
+		private _magBullets = if (_isMag) then { getNumber (configFile >> "CfgMagazines" >> _item >> "count") } else { 1 };
 
 		private _change = 0;				// Amount we need to add to arsenal (in bullets, for mags)
 		if (_add > 0) then {//add
@@ -2153,12 +2153,12 @@ switch _mode do {
 			// Cap to amount available
 			_count = _count min (_amount - _min);
 
-			if (_isMag) then {
+			if (_magBullets > 1) then {
 				private _magCount = floor (_count / _magBullets);
 				private _remCount = _count % _magBullets;
 
-				while {!(_container canAdd [_item, _magCount])} do { _magCount = _magCount - 1 };
-				_container addMagazineAmmoCargo [_item, _magCount, _magBullets];
+				while {_magCount > 0 and !(_container canAdd [_item, _magCount])} do { _magCount = _magCount - 1 };
+				_container addItemCargoGlobal [_item, _magCount];
 				_change = _change - _magCount*_magBullets;
 
 				if (_remCount > 0 and _container canAdd _item) then {
@@ -2166,13 +2166,12 @@ switch _mode do {
 					_change = _change - _remCount;
 				};
 			} else {
-				while {!(_container canAdd [_item, _count])} do { _count = _count - 1 };
+				while {_count > 0 and !(_container canAdd [_item, _count])} do { _count = _count - 1 };
 				_container addItemCargoGlobal [_item, _count];				// works on magazines too
 				_change = _change - _count;
 			};
 		} else {//remove
-			// Need to include everything from CfgMagazines here, otherwise the commands don't work
-			if (_isMag or _index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOTHROW, IDC_RSCDISPLAYARSENAL_TAB_CARGOPUT]) then {
+			if (_isMag) then {
 				private _mags = magazinesAmmoCargo _container;
 				clearMagazineCargoGlobal _container;
 				{
