@@ -719,18 +719,18 @@ private _traitorTemplate = {
 /////////////////////////////
 private _prefix = "SF";
 private _unitTypes = [
-    ["SquadLeader", _squadLeaderTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Rifleman", _riflemanTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Medic", _medicTemplate, [["medic", true]], nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Engineer", _engineerTemplate, [["engineer", true]], nil, "EAW_Japanese_NCO_1940_AI"],
-    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]], nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Grenadier", _grenadierTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["LAT", _latTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["AT", _atTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["AA", _aaTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["MachineGunner", _machineGunnerTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Marksman", _marksmanTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Sniper", _sniperTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"]
+    ["SquadLeader", _squadLeaderTemplate, nil, nil],
+    ["Rifleman", _riflemanTemplate, nil, nil],
+    ["Medic", _medicTemplate, [["medic", true]], nil],
+    ["Engineer", _engineerTemplate, [["engineer", true]], nil],
+    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]], nil],
+    ["Grenadier", _grenadierTemplate, nil, nil],
+    ["LAT", _latTemplate, nil, nil],
+    ["AT", _atTemplate, nil, nil],
+    ["AA", _aaTemplate, nil, nil],
+    ["MachineGunner", _machineGunnerTemplate, nil, nil],
+    ["Marksman", _marksmanTemplate, nil, nil],
+    ["Sniper", _sniperTemplate, nil, nil]
 ];
 
 [_prefix, _unitTypes, _sfLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
@@ -748,18 +748,18 @@ private _unitTypes = [
 ///////////////////////
 private _prefix = "military";
 private _unitTypes = [
-    ["SquadLeader", _squadLeaderTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Rifleman", _riflemanTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Medic", _medicTemplate, [["medic", true]], nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Engineer", _engineerTemplate, [["engineer", true]], nil, "EAW_Japanese_NCO_1940_AI"],
-    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]], nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Grenadier", _grenadierTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["LAT", _latTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["AT", _atTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["AA", _aaTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["MachineGunner", _machineGunnerTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Marksman", _marksmanTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Sniper", _sniperTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"]
+    ["SquadLeader", _squadLeaderTemplate, nil, nil],
+    ["Rifleman", _riflemanTemplate, nil, nil],
+    ["Medic", _medicTemplate, [["medic", true]], nil],
+    ["Engineer", _engineerTemplate, [["engineer", true]], nil],
+    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]], nil],
+    ["Grenadier", _grenadierTemplate, nil, nil],
+    ["LAT", _latTemplate, nil, nil],
+    ["AT", _atTemplate, nil, nil],
+    ["AA", _aaTemplate, nil, nil],
+    ["MachineGunner", _machineGunnerTemplate, nil, nil],
+    ["Marksman", _marksmanTemplate, nil, nil],
+    ["Sniper", _sniperTemplate, nil, nil]
 ];
 
 [_prefix, _unitTypes, _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
@@ -769,8 +769,8 @@ private _unitTypes = [
 ////////////////////////
 private _prefix = "police";
 private _unitTypes = [
-    ["SquadLeader", _policeTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Standard", _policeTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"]
+    ["SquadLeader", _policeTemplate, nil, nil],
+    ["Standard", _policeTemplate, nil, nil]
 ];
 
 [_prefix, _unitTypes, _policeLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
@@ -780,18 +780,18 @@ private _unitTypes = [
 ////////////////////////
 private _prefix = "militia";
 private _unitTypes = [
-    ["SquadLeader", _squadLeaderTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Rifleman", _riflemanTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Medic", _medicTemplate, [["medic", true]], nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Engineer", _engineerTemplate, [["engineer", true]], nil, "EAW_Japanese_NCO_1940_AI"],
-    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]], nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Grenadier", _grenadierTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["LAT", _latTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["AT", _atTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["AA", _aaTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["MachineGunner", _machineGunnerTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Marksman", _marksmanTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"],
-    ["Sniper", _sniperTemplate, nil, nil, "EAW_Japanese_NCO_1940_AI"]
+    ["SquadLeader", _squadLeaderTemplate, nil, nil],
+    ["Rifleman", _riflemanTemplate, nil, nil],
+    ["Medic", _medicTemplate, [["medic", true]], nil],
+    ["Engineer", _engineerTemplate, [["engineer", true]], nil],
+    ["ExplosivesExpert", _explosivesExpertTemplate, [["explosiveSpecialist", true]], nil],
+    ["Grenadier", _grenadierTemplate, nil, nil],
+    ["LAT", _latTemplate, nil, nil],
+    ["AT", _atTemplate, nil, nil],
+    ["AA", _aaTemplate, nil, nil],
+    ["MachineGunner", _machineGunnerTemplate, nil, nil],
+    ["Marksman", _marksmanTemplate, nil, nil],
+    ["Sniper", _sniperTemplate, nil, nil]
 ];
 
 [_prefix, _unitTypes, _militiaLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
@@ -801,12 +801,12 @@ private _unitTypes = [
 //////////////////////
 
 //The following lines are determining the loadout of vehicle crew
-["other", [["Crew", _crewTemplate]], _crewLoadoutData, nil, nil, "EAW_Japanese_NCO_1940_AI"] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Crew", _crewTemplate]], _crewLoadoutData, nil, nil] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout of the pilots
-["other", [["Pilot", _crewTemplate]], _pilotLoadoutData, nil, nil, "EAW_Japanese_NCO_1940_AI"] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Pilot", _crewTemplate]], _pilotLoadoutData, nil, nil] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the unit used in the "kill the official" mission
-["other", [["Official", _policeTemplate]], _militaryLoadoutData, nil, nil, "EAW_Japanese_NCO_1940_AI"] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Official", _policeTemplate]], _militaryLoadoutData, nil, nil] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "kill the traitor" mission
-["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData, nil, nil, "EAW_Japanese_NCO_1940_AI"] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData, nil, nil] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "Invader Punishment" mission
-["other", [["Unarmed", _UnarmedTemplate]], _militaryLoadoutData, nil, nil, "EAW_Japanese_NCO_1940_AI"] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Unarmed", _UnarmedTemplate]], _militaryLoadoutData, nil, nil] call _fnc_generateAndSaveUnitsToTemplate;
