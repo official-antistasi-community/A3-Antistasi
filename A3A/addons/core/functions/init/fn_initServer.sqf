@@ -121,10 +121,13 @@ private _startType = A3A_saveData get "startType";
 if (_startType != "new") then
 {
     // Setup save info
-    A3A_saveTarget = [A3A_saveData get "serverID", A3A_saveData get "gameID", worldName];
+    A3A_saveTarget = [A3A_saveData get "serverID", A3A_saveData get "gameID", worldName, false];
+    private _json = ["json"] call A3A_fnc_returnSavedStat;
+    if (!isNil "_json") then { A3A_saveTarget set [3, fromJSON _json] };
+
     // Sanity checks? hmm
 
-    Info_1("Loading campaign with ID %1", A3A_saveData get "gameID");
+    Info_2("Loading campaign with ID %1, JSON %2", A3A_saveData get "gameID", !isNil "_json");
 
     // Do the actual game loading
     call A3A_fnc_loadServer;
@@ -174,20 +177,13 @@ if (_startType != "load") then {
     _serverID = [_serverID, false] select (A3A_saveData get "useNewNamespace");
 
     // Create new campaign ID, avoiding collisions
-    private _allIDs = call A3A_fnc_collectSaveData apply { _x get "gameID" };
-    private _newID = str(floor(random(90000) + 10000));
-    while { _newID in _allIDs } do { _newID = str(floor(random(90000) + 10000)) };
+    private _newID = call A3A_fnc_uniqueID;
+    A3A_saveTarget = [_serverID, _newID, worldName, false];
 
     Info_1("Creating new campaign with ID %1", _newID);
-
-    A3A_saveTarget = [_serverID, _newID, worldName];
 };
 
 // ********************** Post-load init ****************************************************
-
-// Initialize enemy roadblocks & specops sites
-// Either uses A3A_minorSitesHM from save, or generates from map markers if missing
-call A3A_fnc_initMinorSites;
 
 if (isClass (configFile >> "AntistasiServerMembers")) then
 {
