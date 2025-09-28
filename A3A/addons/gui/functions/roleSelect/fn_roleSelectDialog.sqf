@@ -81,8 +81,8 @@ switch (_mode) do
         private _roleName = _params#0;
 		_display setVariable ["displayState",_roleName];
 
-		private _imagePath = format ["x\A3A\addons\GUI\dialogues\textures\banner_%1.paa",_roleName];
-		//_bannerImage ctrlSetText _imageName;
+		private _imagePath = format ["x\A3A\addons\GUI\dialogues\textures\banner_%1.jpg",_roleName];
+		_bannerImage ctrlSetText _imagePath;
 		private _currentCount = {_x getVariable ["A3A_Role", "none"] == _roleName} count allPlayers;
 		private _maxCount = [_roleName] call FUNCMAIN(getRoleCap);
 		private _firstLineText = localize format ["STR_antistasi_dialogs_roleselect_info_%1", _roleName];

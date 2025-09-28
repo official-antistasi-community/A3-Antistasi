@@ -206,7 +206,6 @@ class A3A_RoleSelectDialog
                 class BannerPicture : A3A_Picture
                 {
                     idc = A3A_IDC_ROLEBANNERPICTURE;
-                    colorText[]= A3A_COLOR_TEXT_DARKER;
                     text = "";
                     x = 53 * GRID_W;
                     y = 3 * GRID_H;
