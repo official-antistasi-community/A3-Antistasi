@@ -5,13 +5,13 @@
 
 class CfgPatches 
 {
-    class PATCHNAME(Mehland) 
+    class PATCHNAME(mehland) 
     {
         name = COMPONENT_NAME;
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"A3_Data_F_AoW_Loadorder","Mehland"};
+        requiredAddons[] = {"A3_Data_F_AoW_Loadorder","mehland"};
         skipWhenMissingDependencies = 1;
         author = AUTHOR;
         authors[] = { AUTHORS };
@@ -23,7 +23,7 @@ class CfgPatches
 
 class CfgWorlds {
     class CAWorld;
-    class Mehland : CAWorld {
+    class mehland : CAWorld {
         class Names {
             class Kanalen_By_NameCity {
                 position[] = {4195,17864};
