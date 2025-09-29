@@ -4,21 +4,9 @@ OnLoadName = $STR_antistasi_mission_info_lingor_mapname_short_text;
 OnLoadMission = $STR_antistasi_mission_info_lingor_blurb_text;
 briefingName = $STR_antistasi_mission_info_lingor_mapname_text;
 overviewText = $STR_antistasi_mission_info_lingor_description_text;
-loadScreen = LOAD_SCREEN_IMAGE;
-overviewPicture = OVERVIEW_IMAGE;
+loadScreen = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
+overviewPicture = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
 
-class CfgDiscordRichPresence 
-{
-    applicationID="1270380812684230746";
-    defaultDetails="In campaign";
-    defaultState="Lingor";
-    defaultLargeImageKey="lingor";
-    defaultLargeImageText="Rebelling in Lingor";
-    defaultSmallImageKey="au-logo";
-    defaultSmallImageText="Antistasi Ultimate";
-    useTimeElapsed=1;
-};
-//Steam Workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=718649903
 class CfgNotifications
 {
     #include "..\missionDescription\CfgNotificationsContents.hpp"
@@ -26,4 +14,28 @@ class CfgNotifications
 
 class CfgDebriefing {
     #include "..\missionDescription\CfgDebriefingContents.hpp"
+	class End1
+	{
+		title = "V I C T O R Y";
+		subtitle = "Lingor is Ours!";
+		description = "The population of Lingor loves you!<br/>The brave soldiers have proven their valour, and Petros, Lingor's new Prime Minister, could at last to have a nice holidays. A deserved rest in a Greek island with drinks and fine food.";
+		picture = "n_inf";
+		pictureColor[] = {0.0,0.5,0.0,1};
+	};
+    class petrosDead
+    {
+        title = "Petros is Dead";
+        subtitle = "Petros is Dead";
+        description = "Congratulations!: Petros is Dead. Now with rebels without a leader, you may think about joining them, and free Lingor";
+        picture = "b_unknown";
+        pictureColor[] = {0.5,0.0,0.0,1};
+    };
+    class destroyedSites
+    {
+        title = "Isla Duala is Destroyed";
+        subtitle = "Isla Duala got Destroyed by OPFOR";
+        description = "One third of the population in Lingor has been murdered by the OPFOR.<br/>Lingor no longer exists, nobody wants to live here.";
+        picture = "b_unknown";
+        pictureColor[] = {0.5,0.0,0.0,1};
+    };
 };
