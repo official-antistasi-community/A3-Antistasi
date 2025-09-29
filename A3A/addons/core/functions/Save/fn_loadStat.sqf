@@ -24,6 +24,8 @@ private _translateMarker = {
     _mrk;
 };
 
+private _numToSide = createHashMapFromArray [ [0,teamPlayer], [1,Occupants], [2,Invaders] ];
+
 //===========================================================================
 //ADD VARIABLES TO THIS ARRAY THAT NEED SPECIAL SCRIPTING TO LOAD
 private _specialVarLoads = [
@@ -31,7 +33,7 @@ private _specialVarLoads = [
     "prestigeCSAT","posHQ","hr","armas","items","backpcks","ammunition","dateX",
     "prestigeBLUFOR","resourcesFIA","skillFIA","destroyedSites",
     "garrison","tasks","membersX","vehInGarage","destroyedBuildings","idlebases",
-    "chopForest","weather","killZones","jna_dataList","mrkCSAT","nextTick",
+    "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
     "minorSites", "newGarrison", "radioKeys", "cityData"
@@ -99,7 +101,17 @@ if (_varName in _specialVarLoads) then {
         } forEach FactionGet(reb,"unitsSoldiers");
     };
     if (_varname == "HR_Garage") then {
-        [_varValue] call HR_GRG_fnc_loadSaveData;
+        private _grgData = _varValue;
+        private _cats = _grgData#0;
+        private _newGrgCats = [];
+        {
+            // json requires string keys, so garage numbers are saved as stringified numbers (e.g. "1") and parsed in-game as the actual numbers
+            private _keys = (keys _x) apply {if (_x isEqualType 0) then {_x} else {call compile _x}};
+            private _hm = _keys createHashMapFromArray (values _x);
+            _newGrgCats pushback _hm;
+        } forEach _cats;
+        _grgData set [0, _newGrgCats];
+        [_grgData] call HR_GRG_fnc_loadSaveData;
     };
     if (_varName == 'vehInGarage') then { //convert old garage to new garage
         vehInGarage= [];
@@ -130,7 +142,7 @@ if (_varName in _specialVarLoads) then {
             (_varvalue select _i) params ["_typeMine", "_posMine", "_detected", "_dirMine"];
             private _mineX = createVehicle [_typeMine, _posMine, [], 0, "CAN_COLLIDE"];
             if !(isNil "_dirMine") then { _mineX setDir _dirMine };
-            {_x revealMine _mineX} forEach _detected;
+            {(_numToSide getorDefault [_x, _x]) revealMine _mineX} forEach _detected;       // backwards compat: works with both number & side
         };
     };
     if (_varName == 'newGarrison') then {
@@ -141,7 +153,7 @@ if (_varName in _specialVarLoads) then {
         if (count (_varValue select 0) != 2) exitWith {};
         {
             _x params ["_position", "_garrison"];
-            [_position, []] call A3A_fnc_createRebelControl;
+            private _mrk = [_position, []] call A3A_fnc_createRebelControl;
             A3A_rebPostGarrison pushBack [_mrk, _garrison];
         } forEach _varvalue;
         publicVariable "outpostsFIA";
@@ -289,18 +301,10 @@ if (_varName in _specialVarLoads) then {
         _varValue call A3A_fnc_setRebelLoadouts;        // updates version numbers
     };
     if (_varname == "minorSites") then {
+        if (A3A_saveVersion < 31000) exitWith {};         // pre-garrison pre-JSON version, just remake with init
         A3A_minorSitesHM = createHashMap;
-        { _y call A3A_fnc_addMinorSite } forEach _varValue;
+        { [_y#0, _y#1, _numToSide get _y#2, _y#3] call A3A_fnc_addMinorSite } forEach _varValue;
         // pair refs get sanity checked in initMinorSites later
-    };
-
-    if(_varname == 'testingTimerIsActive') then
-    {
-        if(_varValue) then
-        {
-            [] spawn A3A_fnc_startTestingTimer;
-        };
-        testingTimerIsActive = _varValue;
     };
 } else {
     call compile format ["%1 = %2",_varName,_varValue];

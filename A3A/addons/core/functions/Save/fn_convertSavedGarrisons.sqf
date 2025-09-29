@@ -1,6 +1,6 @@
 
 // Initialize new garrison data from old garrison data, filling where missing
-// controlsX and outpostsFIA should be built first, sidesX should be valid
+// outpostsFIA should be built first, sidesX should be valid
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
