@@ -6,7 +6,7 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"vn_weapons"};
+        requiredAddons[] = {"loadorder_f_vietnam"};
         skipWhenMissingDependencies = 1;
         author = AUTHOR;
         authors[] = { AUTHORS };

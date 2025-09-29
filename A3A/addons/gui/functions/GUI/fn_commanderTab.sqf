@@ -208,7 +208,7 @@ switch (_mode) do
             _groupFastTravelButton ctrlSetFade 0.5;
             _groupFastTravelButton ctrlCommit 0;
             private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
-            _groupFastTravelButton ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
+            _groupFastTravelButton ctrlSetTooltip (_prettyString joinString ",\n\n");
         };
 
         private _groupCountText = _display displayCtrl A3A_IDC_HCGROUPCOUNT;
@@ -1032,7 +1032,8 @@ switch (_mode) do
         Trace("Dismissing garrison");
         private _display = findDisplay A3A_IDD_MAINDIALOG;
         private _selectedMarker = _commanderMap getVariable ["selectedMarker", ""];
-        ["", _selectedMarker] spawn A3A_fnc_garrisonDialog;
+        if !(_selectedMarker call A3A_fnc_canEditGarrison) exitWith {};     // throws hints on failure
+    	[_selectedMarker, true, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
     };
 
     case ("showGarbageCleanOptions"):

@@ -28,8 +28,12 @@ Info("initACEUnconsciousHandler started");
             };
         };
 
-		if (_realSide == Occupants || _realSide == Invaders) then {
+		// In theory this might be called for civilians?
+		if (_realSide == Occupants || _realSide == Invaders) exitWith {
 			[_unit, group _unit, _unit getVariable ["ace_medical_lastDamageSource", objNull]] spawn A3A_fnc_AIReactOnKill;
+		};
+		if (_realSide == teamPlayer) exitWith {
+			[_unit, group _unit, _unit getVariable ["ace_medical_lastDamageSource", objNull]] spawn A3A_fnc_rebelReactOnKill;
 		};
 	};
 
