@@ -23,7 +23,7 @@
 
 ["vehiclesBasic", ["SEP_I_IHTC_G503_MB_Armoured"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["SEP_I_IHTC_G503_MB_Armoured"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["SEP_I_IHTC_M20_AUC","SEP_I_IHTC_G503_MB_M1919_Armoured","SEP_I_IHTC_G503_MB_M1919_Armoured","SEP_I_IHTC_G503_MB_M1919_Armoured"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["SEP_I_IHTC_CCKW_353_M2","SEP_I_IHTC_M20_AUC","SEP_I_IHTC_G503_MB_M1919_Armoured","SEP_I_IHTC_G503_MB_M1919_Armoured","SEP_I_IHTC_G503_MB_M1919_Armoured"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["SEP_I_IHTC_CCKW_353","SEP_I_IHTC_CCKW_353","SEP_I_IHTC_M3_Halftrack", "SEP_I_IHTC_M3_Halftrack_Open"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["SPE_CCKW_353_Open"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["SEP_I_IHTC_M3_Halftrack_Ammo","SEP_I_IHTC_CCKW_353_Ammo","SEP_I_IHTC_CCKW_353_Ammo"]] call _fnc_saveToTemplate;
@@ -46,6 +46,19 @@
 ["vehiclesPlanesAA", ["SPE_P47"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["SPEX_C47_Skytrain"]] call _fnc_saveToTemplate;
 
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    private _CAS = ["sab_fl_p51b"];
+    private _CAP = ["sab_fl_p51b"];
+
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        _CAS = _CAS + ["sab_sw_p40"];
+        _CAP = _CAP + ["sab_sw_p40"];
+    };
+    ["vehiclesPlanesCAS", _CAS] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", _CAP] call _fnc_saveToTemplate;
+};
+
+
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", []] call _fnc_saveToTemplate;
@@ -66,7 +79,7 @@
 
 ["vehiclesPolice", ["SEP_I_IHTC_G503_MB"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["SPE_M1919A6_Bipod", "SEP_I_IHTC_FM24_M24_Bipod"]] call _fnc_saveToTemplate;
+["staticMGs", ["SEP_I_IHTC_FM24_M24_Bipod"]] call _fnc_saveToTemplate;
 ["staticAT", ["SPE_57mm_M1"]] call _fnc_saveToTemplate;
 ["staticAA", ["SPE_FR_M45_Quadmount"]] call _fnc_saveToTemplate;
 ["staticMortars", ["SEP_I_IHTC_MLE_27_31"]] call _fnc_saveToTemplate;
@@ -79,7 +92,7 @@
 ["minefieldAT", ["SPE_US_M1A1_ATMINE"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["SPE_US_M3_Pressure_MINE", "SPE_US_M3_MINE"]] call _fnc_saveToTemplate;
 
-//#include "SPE_Vehicle_Attributes.sqf"
+#include "SPE_Vehicle_Attributes.sqf"
 
 /////////////////////
 ///  Identities   ///

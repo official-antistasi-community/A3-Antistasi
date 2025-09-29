@@ -1656,7 +1656,7 @@ class Templates
     };
     // ***************************** SPE with SPEX and SEP *****************************
 
-    class SEP_Base : SPE_IFA_Base
+    class SEP_Base : SPEX_Base
     {
         requiredAddons[] = {"ww2_spe_assets_c_characters_germans_c","WW2_SPEX_Assets_c_Characters_Americans_c"};
         basepath = QPATHTOFOLDER(Templates\Templates\SPE_SEP);
@@ -1675,14 +1675,14 @@ class Templates
         climate[] = {"arctic"};
     };
 
-    class SEP_RAAF : SEP_Base
+    class SEP_ACAF : SEP_Base
     {
         side = "Occ";
         flagTexture = "\A3\Data_F\Flags\Flag_AltisColonial_CO.paa";
-        name = "SEP Royal Altian Armed Forces";
         file = "SEP_AI_RAAF";
-        shortName = "RAAF";
-        lore = "Royal Altian Armed Forces of the colonial Altis";
+        name = "SEP Altis Colonial Armed Forces";
+        shortName = "ACAF";
+        lore = "The Altis Colonial Armed Forces occupies the islands of Altis and Stratis on behalf of the British Empire";
         climate[] = {"arid"};
     };
 
@@ -1713,16 +1713,6 @@ class Templates
         name = "SEP Wehrmacht Central Winter";
         file = "SEP_AI_WEH_Winter";
         climate[] = {"arctic"};
-    };
-
-
-    class SEP_WEH_DAK : SEP_WEH_Core
-    {
-        name = "SEP Deutsche Afrika Korps";
-        file = "SEP_AI_WEH_DAK";
-        shortName = "DAK";
-        lore = "The German Africa Corps";
-        climate[] = {"tropical","arid"};
     };
 
     class SEP_Reb_AK : SEP_Base
