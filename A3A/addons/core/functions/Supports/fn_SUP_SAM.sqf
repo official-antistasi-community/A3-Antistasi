@@ -31,8 +31,8 @@ private _weights = [];
 
     if (_target isEqualType objNull and {!isNull _target}) then {
         private _targDir = _pos getDir _targPos;
-        private _intersectPoint = (ATLtoASL _pos) getPos [250, _targDir] vectorAdd [0,0,300];
-        if (terrainIntersectASL [_intersectPoint, getPosASL _target]) then {continue};
+        private _intercept = ATLtoASL _pos vectorAdd [300*sin _targDir, 300*cos _targDir, 200];
+        if (terrainIntersectASL [_intercept, getPosASL _target]) then {continue};
     };
 
     _airports pushBack _x;
@@ -51,7 +51,7 @@ private _group = [_side, _launcher] call A3A_fnc_createVehicleCrew;
 [_launcher, _side, _resPool] call A3A_fnc_AIVEHInit;
 _group deleteGroupWhenEmpty true;
 { [_x, nil, false, _resPool] call A3A_fnc_NATOinit } forEach units _group;
-
+_group setCombatMode "WHITE";        // Don't let them fire on their own
 
 private _aggro = if(_side == Occupants) then {aggressionOccupants} else {aggressionInvaders};
 if (_delay < 0) then { _delay = (0.5 + random 1) * (100 - _aggro + 22*A3A_enemyResponseTime) };
