@@ -195,8 +195,8 @@ switch (_mode) do
         _groupNameText ctrlSetText _groupID;
 
         private _groupFastTravelButton = _display displayCtrl A3A_IDC_HCFASTTRAVELBUTTON;
-        [player, _group] call A3A_fnc_canFastTravel params ["_isFastTravelAllowed","_fastTravelBlockers"];
-        if (_isFastTravelAllowed) then {
+        private _fastTravelBlockers = [player, _group] call A3A_fnc_canFastTravel;
+        if (_fastTravelBlockers isEqualTo []) then {
             _groupFastTravelButton ctrlEnable true;
             // ShortcutButtons doesn't change texture color when disabled so we have to use fade
             _groupFastTravelButton ctrlSetFade 0;

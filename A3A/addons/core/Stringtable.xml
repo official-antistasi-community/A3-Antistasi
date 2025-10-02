@@ -3105,15 +3105,7 @@
         <Turkish>Oyuncu grupları sadece Karargah ya da Hava üslerine hızlı yolculuk yapabilirler.</Turkish>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_no_other">
-        <Original>You cannot Fast Travel if you don't have a driver in all your vehicles or your vehicles are damaged and cannot move or your group is in a boat.</Original>
-        <Italian>Non puoi effettuare il Viaggio Rapido se non hai un guidatore in tutti i tuoi veicoli o i tuoi veicoli sono danneggiati e non possono muoversi o il tuo gruppo si trova in un'imbarcazione.</Italian>
-        <Spanish>No puede usar el viaje rápido si no tiene un conductor en todos sus vehículos o sus vehículos están dañados y no pueden moverse o su grupo está en una embarcación.</Spanish>
-        <French>Vous ne pouvez pas voyager rapidement si vous n'avez pas de chauffeur dans tous vos véhicules ou si vos véhicules sont endommagés et ne peuvent pas bouger ou si votre groupe est dans un bateau.</French>
-        <Korean>당신은 모든 차량에 운전수가 없거나 차량이 고장나서 이동이 불가능한 경우 또는 그룹이 배에 탄 경우 빠른 이동을 할 수 없습니다.</Korean>
-        <Russian>Если у вас нет водителя во всех транспортных средствах, если ваши транспортные средства повреждены и не могут двигаться, или если ваш отряд находится в лодке, вы не можете совершать быстрые перемещение.</Russian>
-        <Polish>Nie można podróżować szybko, jeśli nie ma kierowcy we wszystkich pojazdach, pojazdy są uszkodzone i nie mogą się poruszać lub grupa znajduje się na łodzi.</Polish>
-        <Czech>Nemůžeš rychle cestovat pokud nemáš řidiče ve všech svých vozidlech, vozidla jsou požkozené a nemohou se hýbat nebo tvoje skupina je na lodi.</Czech>
-        <Portuguese>Não podes fazer Viagem Rápida se não tens um condutor em todos os veículos ou os veículos estão danificados e não se conseguem mexer ou o grupo está num barco.</Portuguese>
+        <Original>You cannot Fast Travel if your vehicle cannot move or isn't a land vehicle.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_no_param">
         <Original>Fast travel is disabled for this server.</Original>
@@ -3128,6 +3120,9 @@
         <Russian>Вы не можете быстро перемещаться, когда буксировочный трос вытащен или к нему присоединено транспортное средство.</Russian>
         <Polish>Nie można szybko podróżować z wyciągniętą liną holowniczą lub podłączonym pojazdem.</Polish>
         <Czech>Nemůžeš rychle cestovat pokud tažné lano je vytažené nebo na něm je připojené vozidlo.</Czech>
+      </Key>
+      <Key ID="STR_A3A_fn_dialogs_ftradio_not_driver">
+        <Original>Fast travel of a vehicle must be initiated by the driver.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_title">
         <Original>Fast Travel</Original>
