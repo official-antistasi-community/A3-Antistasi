@@ -24,6 +24,7 @@ class mapInfo {
     #include "Antistasi_Tembelan.Tembelan\mapInfo.hpp"
     #include "Antistasi_tem_anizay.tem_anizay\mapInfo.hpp"
     #include "Antistasi_tem_kujari.tem_kujari\mapInfo.hpp"
+    #include "Antistasi_tem_vinjesvingenc.tem_vinjesvingenc\mapInfo.hpp"
     #include "Antistasi_UMB_Colombia.UMB_Colombia\mapInfo.hpp"
     #include "Antistasi_vn_khe_sanh.vn_khe_sanh\mapInfo.hpp"
     #include "Antistasi_vt7.vt7\mapInfo.hpp"

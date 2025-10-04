@@ -51,6 +51,7 @@ class CfgMissions
         A3A_Mission(Tembelan)
         A3A_Mission(tem_anizay)
         A3A_Mission(tem_kujari)
+        A3A_Mission(tem_vinjesvingenc)
         A3A_Mission(UMB_Colombia)
         A3A_Mission(vn_khe_sanh)
         A3A_Mission(vt7)
