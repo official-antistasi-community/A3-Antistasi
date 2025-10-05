@@ -1,9 +1,9 @@
 #include "..\missionDescription\master.hpp"
 
-OnLoadName = STR_A3A_maps_Vinjesvingen_mapname_short;
-OnLoadMission = STR_A3A_maps_Vinjesvingen_loadText;
-briefingName = STR_A3A_maps_Vinjesvingen_mapname;
-overviewText = STR_A3A_maps_Vinjesvingen_description;
+OnLoadName = $STR_A3A_maps_Vinjesvingen_mapname_short;
+OnLoadMission = $STR_A3A_maps_Vinjesvingen_loadText;
+briefingName = $STR_A3A_maps_Vinjesvingen_mapname;
+overviewText = $STR_A3A_maps_Vinjesvingen_description;
 loadScreen = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
 overviewPicture = "Pictures\Mission\pic.jpg"; // NB, this will resolve from root
 
