@@ -1,3 +1,12 @@
+/*
+Copyright 2025 Ian Feickert. All rights reserved.
+Used and distributed with permission by the Antistasi Community project.
+*/
+
+/*
+    Advertisement for community servers
+*/
+
 class A3A_CommunityAdvertisement
 {
     idd = A3A_IDD_COMMUNITYADVERTISEMENT;

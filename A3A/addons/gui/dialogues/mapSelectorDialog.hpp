@@ -1,3 +1,12 @@
+/*
+Copyright 2025 Ian Feickert. All rights reserved.
+Used and distributed with permission by the Antistasi Community project.
+*/
+
+/*
+    Map selector config setup
+*/
+
 class A3A_MapSelectorDialog
 {
     idd = A3A_IDD_MAPSELECTORDIALOG;

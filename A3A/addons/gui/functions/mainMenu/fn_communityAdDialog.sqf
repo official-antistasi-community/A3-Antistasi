@@ -4,7 +4,7 @@ Used and distributed with permission by the Antistasi Community project.
 */
 
 /*
-    Handles all interaction to the Map selector menu.
+    Handles all interaction to the community ad menu.
 	Should only be called from the menu.
 	This function is pre-loaded and uses different function calls because it runs in the main menu without a mission.
 
