@@ -1206,6 +1206,18 @@
         <Czech>Antistasi - Osvobození Kolumbie</Czech>
         <Chinesesimp>Antistasi - 解放 哥伦比亚</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_maps_Vinjesvingen_mapname_short">
+        <Original>Antistasi Vinjesvingen</Original>
+      </Key>
+      <Key ID="STR_A3A_maps_Vinjesvingen_mapname">
+        <Original>Antistasi - Liberation of Vinjesvingen</Original>
+      </Key>
+      <Key ID="STR_A3A_maps_Vinjesvingen_description">
+        <Original>Liberate this picturesque fjord from the occupation, defeat the invasion</Original>
+      </Key>
+      <Key ID="STR_A3A_maps_Vinjesvingen_loadText">
+        <Original>Because nothing is more important than free pickled herring.</Original>
+      </Key>
       <Key ID="STR_antistasi_mission_info_vn_khe_sanh_blurb_text">
         <Original>Another jungle, another fight.</Original>
         <German>Ein anderer Dschungel, ein anderer Kampf.</German>
