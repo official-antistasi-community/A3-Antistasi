@@ -74,7 +74,7 @@
         <Turkish>Antistasi - Altis'in Kurtuluşu</Turkish>
         <Chinesesimp>Antistasi - 解放 Altis</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_mission_info_anizay_blurb_text">
+      <Key ID="STR_antistasi_mission_info_tem_anizay_blurb_text">
         <Original>Fought on the camel's back</Original>
         <German>Kampf auf dem Kamelrücken</German>
         <Italian>Combattuta a cammello</Italian>
@@ -88,7 +88,7 @@
         <Turkish>Deve sırtında savaş</Turkish>
         <Chinesesimp>在骆驼背上战斗</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_mission_info_anizay_description_text">
+      <Key ID="STR_antistasi_mission_info_tem_anizay_description_text">
         <Original>Be the Resistance Leader. Fight against a superior enemy in technology, number, assets and vehicles. Use guerrilla tactics in a totally dynamic world, with around 18 sidemissions, everywhere, anytime, anything.</Original>
         <German>Sei ein Anführer des Widerstands. Kämpfe gegen einen technologisch und zahlenmäßigen überlegenen Feind. Nutze Guerillataktiken in einer vollständig dynamischen Welt mit 18 möglichen Sekundärmissionen. Es könnte jederzeit und überall alles passieren...</German>
         <Italian>Sii il leader della Resistenza. Combatti contro un nemico superiore in tecnologia, numero, risorse e veicoli. Usa tattiche di guerriglia in un mondo totalmente dinamico, con circa 18 missioni secondarie, ovunque, in qualsiasi momento e con ogni cosa.</Italian>
@@ -102,7 +102,7 @@
         <Turkish>Direniş Lideri olun. Teknoloji, sayı, kaynak ve araçlarda üstün bir düşmana karşı savaşın. Her yerde ve her zaman yaklaşık 18 yan görevle tamamen dinamik bir dünyada gerilla taktiklerini kullanın.</Turkish>
         <Chinesesimp>成为抵抗军领袖。与技术、数量、资产和载具远胜于你的强大敌人作战。面对完全动态的世界和大约18种支线任务, 任何时间, 任何地点, 任何情况, 运用游击战术。</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_mission_info_anizay_mapname_short_text">
+      <Key ID="STR_antistasi_mission_info_tem_anizay_mapname_short_text">
         <Original>Antistasi Anizay</Original>
         <German>Antistasi Anizay</German>
         <Italian>Antistasi Anizay</Italian>
@@ -116,7 +116,7 @@
         <Turkish>Antistasi Anizay</Turkish>
         <Chinesesimp>Antistasi Anizay</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_mission_info_anizay_mapname_text">
+      <Key ID="STR_antistasi_mission_info_tem_anizay_mapname_text">
         <Original>Antistasi - Liberation of Anizay</Original>
         <German>Antistasi - Befreiung von Anizay</German>
         <Italian>Antistasi - Liberazione di Anizay</Italian>
@@ -580,7 +580,7 @@
         <Czech>Antistasi - Osvobození Ostrova Duala</Czech>
         <Chinesesimp>Antistasi - 解放 Isla Duala</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_mission_info_kujari_blurb_text">
+      <Key ID="STR_antistasi_mission_info_tem_kujari_blurb_text">
         <Original>African Action</Original>
         <Italian>Azione Africana</Italian>
         <French>Action africaine</French>
@@ -590,7 +590,7 @@
         <Czech>Africká Mise</Czech>
         <Chinesesimp>非洲阵营</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_mission_info_kujari_description_text">
+      <Key ID="STR_antistasi_mission_info_tem_kujari_description_text">
         <Original>Be the Resistance Leader. Fight against a superior enemy in technology, number, assets and vehicles. Use guerrilla tactics in a totally dynamic world, with around 18 sidemissions, everywhere, anytime, anything.</Original>
         <Italian>Sii il leader della Resistenza. Combatti contro un nemico superiore in tecnologia, numero, risorse e veicoli. Usa tattiche di guerriglia in un mondo totalmente dinamico, con circa 18 missioni secondarie, ovunque, in qualsiasi momento e con ogni cosa.</Italian>
         <French>Devenez le Chef de la Résistance. Battez-vous contre un ennemi en surnombre et avec un niveau technologique supérieur. Utilisez les tactiques des Guerrillas dans un monde complétement dynamique, avec environ 18 missions secondaires. Quand vous voulez, où vous voulez, avec ce que vous voulez.</French>
@@ -600,7 +600,7 @@
         <Czech>Buďte vůdcem odboje. Bojujte proti nadřazenému nepříteli v technologii, počtu, majetku a vozidlech. Použijte partyzánskou taktiku ve zcela dynamickém světě, přibližně s 18 vedlejšími misemi, všude kdykoli a cokoli.</Czech>
         <Chinesesimp>成为抵抗军领袖。与技术、数量、资产和载具远胜于你的强大敌人作战。面对完全动态的世界和大约18种支线任务, 任何时间, 任何地点, 任何情况, 运用游击战术。</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_mission_info_kujari_mapname_short_text">
+      <Key ID="STR_antistasi_mission_info_tem_kujari_mapname_short_text">
         <Original>Antistasi Kujari</Original>
         <Italian>Antistasi Kujari</Italian>
         <French>Antistasi Kujari</French>
@@ -610,7 +610,7 @@
         <Czech>Antistasi Kujari</Czech>
         <Chinesesimp>Antistasi Kujari</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_mission_info_kujari_mapname_text">
+      <Key ID="STR_antistasi_mission_info_tem_kujari_mapname_text">
         <Original>Antistasi - Liberation of Kujari</Original>
         <Italian>Antistasi - Liberazione del Kujari</Italian>
         <French>Antistasi - Libération de Kujari</French>

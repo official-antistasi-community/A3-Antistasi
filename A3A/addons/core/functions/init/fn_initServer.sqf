@@ -189,6 +189,7 @@ if (_startType != "load") then {
 // Either uses A3A_minorSitesHM from save, or generates from map markers if missing
 call A3A_fnc_initMinorSites;
 
+A3A_useRemarks = 0;
 if (isClass (configFile >> "AntistasiServerMembers")) then
 {
     Info("Loading external member list");
@@ -201,6 +202,9 @@ if (isClass (configFile >> "AntistasiServerMembers")) then
     // Load data from the classes
     private _memberClasses = "true" configClasses (configFile >> "AntistasiServerMembers" >> "MembersClasses");
     {membersX pushBackUnique (getText (_x >> "uid"))} forEach _memberClasses;
+
+    // Load remark setting
+    if (isNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks") || {debug}) then {A3A_useRemarks = getNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks")};
 };
 
 // TODO: Do we need this? maybe...
@@ -222,6 +226,7 @@ addMissionEventHandler ["OnUserAdminStateChanged", {
 }];
 
 publicVariable "membersX";
+publicVariable "A3A_useRemarks";
 publicVariable "theBoss";       // need to publish this even if empty
 
 

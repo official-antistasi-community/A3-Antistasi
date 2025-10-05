@@ -27,4 +27,8 @@ class sara {
 	policeStationTypes[] = {
 		"Land_Dum_mesto2", "Land_Dum_olezlina", "Land_Panelak", "Land_Dum_istan3_hromada2", "Land_Dum_olez_istan1_open2", "Land_Dum_olez_istan1"
 	};
+	requiredMods = "CUP Terrains - Core and CUP Terrains - Maps";
+	size = 20.5;
+	cityCount = 41;
+	airbaseCount = 5;
 };

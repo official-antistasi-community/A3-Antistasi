@@ -53,6 +53,15 @@ class CfgFunctions {
             class sortCGList {};
         };
 
+        class mainMenu {
+            file = QPATHTOFOLDER(functions\mainMenu);
+            class communityAdDialog {};
+            class mapSelectorDialog {};
+            class optionsDialog {};
+            class remarksDialog {};
+            class showInterruptButtons {};
+        };
+
         class objectHelpers {
             file = QPATHTOFOLDER(functions\objectHelpers);
             class sizeOf {};

@@ -150,6 +150,7 @@ class CfgFunctions
             class getVehiclesGroundSupport {};
             class getVehiclesGroundTransport {};
             class hasWeapons {};
+            class hideCorpses {};
             class HQGarbageClean {};
             class vehicleBoxRestore {};
             class initPetros {};

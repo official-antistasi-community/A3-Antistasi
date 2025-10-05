@@ -16588,5 +16588,13 @@
         <Chinesesimp>与指挥部班组车辆管理相关的选项</Chinesesimp>
       </Key>
     </Container>
+    <Container name="client_options">
+      <Key ID="STR_antistasi_client_options_useMusic">
+        <Original>Use Music</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_hideCorpses">
+        <Original>Hide far corpses to save performance</Original>
+      </Key>
+    </Container>
   </Package>
 </Project>

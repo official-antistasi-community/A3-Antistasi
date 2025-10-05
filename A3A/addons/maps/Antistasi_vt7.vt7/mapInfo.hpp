@@ -30,4 +30,8 @@ class vt7 {
 		"Land_House_1B01_F", "Land_House_1W11_F", "Land_House_1W12_F", "Land_House_1W07_F",
 		"Land_House_1W02_F", "Land_House_1W09_F", "Land_House_1W05_F", "Land_House_1W06_F"
 	};
+	requiredMods = "Virolahti - Valtatie 7 & CUP Terrains - Core";
+	size = 18;
+	cityCount = 38;
+	airbaseCount = 5;
 };

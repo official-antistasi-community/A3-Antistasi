@@ -352,6 +352,8 @@ if (A3A_hasACE) then {call A3A_fnc_initACE};
 
 [allCurators] call A3A_fnc_initZeusLogging;
 
+["loadSettings"] call A3A_GUI_fnc_optionsDialog;
+
 A3A_aliveTime = time;
 
 initClientDone = true;

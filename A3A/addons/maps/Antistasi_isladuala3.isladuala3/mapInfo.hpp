@@ -30,4 +30,8 @@ class isladuala3 {
 		// Rooms above garage and pillar house from Takistan
 		"Land_House_C_10_EP1", "Land_House_C_4_EP1"
 	};
+	requiredMods = "Isla Duala and CUP Terrains - Core";
+	size = 10.2;
+	cityCount = 55;
+	airbaseCount = 6;
 };

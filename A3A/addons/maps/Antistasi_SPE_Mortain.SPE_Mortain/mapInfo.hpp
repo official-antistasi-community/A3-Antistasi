@@ -29,4 +29,8 @@ class SPE_Mortain {
 	policeStationTypes[] = {
 		"Land_SPE_House_Big_04", "Land_SPE_House_Big_02", "Land_SPE_Farmhouse_01", "Land_SPE_House_Small_01", "Land_SPE_House_Big_03"
 	};
+	requiredMods = "Spearhead 1944 CDLC";
+	size = 8.2;
+	cityCount = 27;
+	airbaseCount = 6;
 };

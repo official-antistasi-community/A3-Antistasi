@@ -1,4 +1,5 @@
 class stratis {
+	debug = 1;
 	population[] = {};
 	disabledTowns[] = {};
 	antennas[] = {};
@@ -19,4 +20,8 @@ class stratis {
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
 		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
 	};
+	requiredMods = "";
+	size = 8.2;
+	cityCount = 8;
+	airbaseCount = 1;
 };

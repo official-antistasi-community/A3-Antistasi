@@ -40,4 +40,8 @@ class kunduz {
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
 		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
 	};
+	requiredMods = "Kunduz, Afghanistan";
+	size = 5.1;
+	cityCount = 12;
+	airbaseCount = 1;
 };

@@ -14,3 +14,7 @@ Maintainer: DoomMetal
 #include "teamLeaderBuilder.hpp"
 #include "customLoadoutsDialog.hpp"
 #include "gunShop.hpp"
+#include "mapSelectorDialog.hpp"
+#include "communityAdDialog.hpp"
+#include "optionsDialog.hpp"
+#include "remarksDialog.hpp"

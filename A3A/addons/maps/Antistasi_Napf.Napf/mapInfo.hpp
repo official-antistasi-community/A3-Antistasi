@@ -51,4 +51,8 @@ class Napf {
 		// North Sahrani
 		"Land_Dum_mesto2", "Land_Dum_olezlina"
 	};
+	requiredMods = "Napf Island A3 and CUP Terrains - Core";
+	size = 20.5;
+	cityCount = 62;
+	airbaseCount = 4;
 };

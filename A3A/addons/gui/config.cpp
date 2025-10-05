@@ -30,3 +30,6 @@ class CfgPatches {
 #include "dialogues\controls.hpp"
 #include "dialogues\dialogs.hpp"
 #include "dialogues\rsc.hpp"
+
+#include "mainmenu.hpp"
+#include "interruptMenu.hpp"
