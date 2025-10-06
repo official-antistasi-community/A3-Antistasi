@@ -39,6 +39,19 @@ class CfgWorlds {
                 radiusB = 150;
                 type = "NameVillage";               // NameCity also works, I don't think Antistasi cares
             };
+            // Moves for police station centrality
+            class orellan {
+                position[] = {4252,1540};
+            };
+            class phazena {
+                position[] = {1361,7770};
+            };
+            class tarisol {
+                position[] = {2491,9821};
+            };
+            class xibo {
+                position[] = {7120,8474};
+            };
         };
     };
 };

@@ -44,6 +44,7 @@ class CfgFunctions {
             class setupParamsTab {};
             class setupConfirmDialog {};
             class setupHQPosDialog {};
+            class setupTransferDialog {};
         };
 
         class controlsHelpers {

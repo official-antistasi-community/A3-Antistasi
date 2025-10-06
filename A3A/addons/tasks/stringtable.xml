@@ -44,6 +44,30 @@
       <Key ID="STR_antistasi_LTasks_CON_Outpost_factory_description">
         <Original>%1 is being used to aid the enemy. Go there and capture it before %2.</Original>
       </Key>
+      <Key ID="STR_A3A_Tasks_cityBattle_title">
+        <Original>Battle for %1</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_cityBattle_description">
+        <Original>This is our chance to turn %1 to our side. An uprising has been prepared, and the enemy have sent a suppression force. Talk to the rebel leader or attack the enemy forces before %2 to start the battle.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_cityBattle_start">
+        <Original>Trigger the uprising</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_cityBattle_timeout">
+        <Original>We have lost our opportunity. We will need to rebuild support in %1 before we have another chance to take it.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_cityBattle_description2">
+        <Original>The uprising in %1 has begun! Help them destroy the oppressors before %2 and the city will be ours.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_cityBattle_started">
+        <Original>The battle for %1 has started!</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_cityBattle_victoryDesc">
+        <Original>Glorious victory in %1! The oppressors will not dare to return after this humiliation.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_cityBattle_defeatDesc">
+        <Original>The uprising has been defeated. We will need to rebuild support in %1 before we have another chance to take it.</Original>
+      </Key>
       <Key ID="STR_A3A_Tasks_LOG_Supplies_title">
         <Original>City Supplies</Original>
       </Key>
@@ -64,6 +88,75 @@
       </Key>
       <Key ID="STR_A3A_Tasks_LOG_Supplies_failed">
         <Original>Supply delivery failed.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_hostage_title">
+        <Original>Rescue hostage</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_hostage_desc">
+        <Original>A rebel commander's cousin is being held hostage in %1. Reach them before %2 and extract them to rebel territory.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_hostage_start">
+        <Original>I'm glad you're here. Take me to any rebel location and I'll figure it out from there.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_hostage_startDesc">
+        <Original>We've recovered the hostage. Take them to any rebel location by %1.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_hostage_angry">
+        <Original>Are you even trying to get anywhere? I'll find my own way out.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_killcop_title">
+        <Original>Deal with corrupt cop</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_killcop_desc">
+        <Original>A corrupt cop in %1 has been harassing civilians even more than usual. We've figured out some of his routine. Deal with him before %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_killcop_kill">
+        <Original>Good riddance. He won't be bothering anyone again.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_killcop_surrender">
+        <Original>"Looks like you've convinced the scumbag of the error of his ways. We'll find a good use for his talents.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_killcop_timeout">
+        <Original>We've lost track of the target. Maybe another time.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_repair_title">
+        <Original>Recover rebel vehicle</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_repair_desc">
+        <Original>A rebel vehicle carrying hidden contraband broke down in %1, and the cops are sniffing around it. Get it to the marked safehouse nearby before %2 so we can recover the goods.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_repair_markername">
+        <Original>Safehouse</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_repair_defend">
+        <Original>Good, you've brought the vehicle. Now keep our agent covered while he extracts the goods.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_repair_nomove">
+        <Original>Leave the vehicle parked near the house or we can't work on it!</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_repair_countdown">
+        <Original>Keep the agent covered for %1 more seconds</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_repair_success">
+        <Original>Excellent, we've recovered the goods. You can keep the vehicle if you like.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_taxi_title">
+        <Original>Transport rebel agent</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_taxi_desc">
+        <Original>A rebel agent in %1 needs an escort for important business. He'll make it worth our trouble if we help him. Pick him up before %2. Make sure you bring a vehicle.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_taxi_leave">
+        <Original>Tell him you're ready to leave</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_taxi_start">
+        <Original>The rebel agent has joined your squad. Take him to his destination in %1.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_taxi_startDesc">
+        <Original>We've picked up the rebel agent. Get him safely to his destination in %1 before %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_taxi_angry">
+        <Original>Are you just driving me around in circles? I'm outta here.</Original>
       </Key>
       <Key ID="STR_antistasi_LTasks_LOG_Ammo_title">
         <Original>Steal or Destroy Ammotruck</Original>

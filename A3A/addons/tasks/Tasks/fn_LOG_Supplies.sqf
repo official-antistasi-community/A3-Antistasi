@@ -26,7 +26,7 @@ private _fnc_createBox = {
 
 private _fnc_createTask = {
 	private _nameDest = [_this get "_marker"] call A3A_fnc_localizar;
-	private _displayTime = [(_this get "_endTime") - time] call FUNC(minutesFromNow);
+	private _displayTime = [((_this get "_endTime") - time) / 60] call FUNC(minutesFromNow);
 	private _holdTime = (_this get "_difficulty") * 2;
 
 	private _taskName = localize "STR_A3A_Tasks_LOG_Supplies_title";
@@ -47,13 +47,16 @@ if (isNil "_checkpoint") then {
 	_params params ["_marker"];
 
 	// Specify larger object to leave space around box
-	private _boxPos = (getMarkerPos respawnTeamPlayer) findEmptyPosition [1,50,"C_Van_01_box_F"];
+	private _hqpos = getMarkerPos respawnTeamPlayer;
+	private _boxPos = _hqPos findEmptyPosition [1,75,"C_Van_01_box_F"];
+	if (_boxPos isEqualTo []) then { _boxPos = _hqPos findEmptyPosition [1,75,"Land_FoodSacks_01_cargo_brown_F"] };
+	if (_boxPos isEqualTo []) then { _boxPos = _hqPos getPos [75 * sqrt random 1, random 360] };
 	[_boxPos] call _fnc_createBox;
 
 	// Determine end time and description
-	private _difficulty = [1, 2] select (random 10 < tierWar);
+	private _difficulty = 1; //[1, 2] select (random 10 < tierWar);
 	if (sidesX getVariable _marker == teamPlayer) then { _difficulty = 1 };
-
+	
 	_task set ["_marker", _marker];
 	_task set ["_difficulty", _difficulty];
 	_task set ["_endTime", time + 60 * (15 + 30*_difficulty)];
@@ -69,6 +72,8 @@ else {
 	_task set ["_endTime", time + _remTime];
 	_task call _fnc_createTask;
 };
+
+A3A_activeTasks pushBack "SUPP";			// backwards compat with missionRequest
 
 _task set ["checkpoint", "c_started"];
 _task set ["state", "s_waitForPlace"];
@@ -105,6 +110,7 @@ _task set ["s_waitForPlace",
 	// Ok, now we go into the placed state
 	_this set ["state", "s_boxPlaced"];
 	_this set ["_countdown", 120 * (_this get "_difficulty")];			// maybe shouldn't reset?
+	_this set ["_blockTime", time];
 
 	// Remove captive from friendlies
 	{
@@ -131,12 +137,10 @@ _task set ["s_boxPlaced",
 	private _marker = _this get "_marker";
 	if !(call (_this get "_fnc_placedCondition")) exitWith { _this set ["state", "s_waitForPlace"]; false };
 
-	private _blockTime = _this getOrDefault ["_blockTime", -1000];
-
 	// Check that there are friendlies nearby and enemies not nearby
 	if ({_x call A3A_fnc_canFight} count (units Occupants inAreaArray [getPosATL _box, 50, 50]) > 0
 		or {_x call A3A_fnc_canFight} count (units teamPlayer inAreaArray [getPosATL _box, 50, 50]) == 0) exitWith {
-		if (time - _blockTime > 30) then {
+		if (time - (_this getOrDefault ["_blockTime", -30]) > 30) then {
 			[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_condition", getPosATL _box, 50] call FUNC(hintNear);
 			_this set ["_blockTime", time];
 		};
@@ -161,7 +165,7 @@ _task set ["s_boxPlaced",
 	};
 
 	// Show the countdown if blocked on last check
-	if (_blockTime >= 0) then {
+	if ("_blockTime" in _this) then {
 		private _nearPlayers = playableUnits inAreaArray [getPosATL _box, 300, 300];
 		private _endTime = serverTime + _countdown;
 		[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_countdown", _endTime, _box, 50] remoteExec ["A3A_fnc_customHintCountdown", _nearPlayers];
@@ -170,27 +174,26 @@ _task set ["s_boxPlaced",
 	false;
 }];
 
-
 _task set ["s_succeeded", {
 	private _bonus = _this get "_difficulty";
 	private _marker = _this get "_marker";
 
 	// TODO: pull this shit out
 	private _playersInRange = (allPlayers - (entities "HeadlessClient_F")) inAreaArray [markerPos _marker, 250, 250];
-	{[10*_bonus * tierWar, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[5*_bonus * tierWar, theBoss] call A3A_fnc_playerScoreAdd;
+	{[5*_bonus, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
+	[5*_bonus, theBoss] call A3A_fnc_playerScoreAdd;
 
-	[-15 * _bonus, 15 * _bonus, _marker] remoteExec ["A3A_fnc_citySupportChange", 2];
-	[0, 200 * _bonus * tierWar] remoteExec ["A3A_fnc_resourcesFIA", 2];
+	[15 * _bonus, _marker] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+	[0, 200 * _bonus] remoteExec ["A3A_fnc_resourcesFIA", 2];
 
 	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
 	_this set ["state", "s_cleanup"]; false;
 }];
 _task set ["s_failed", {
 	// Need a message here just to avoid the cooldown?
+	private _box = _this get "_box";
 	[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_failed", getPosATL _box, 300] call FUNC(hintNear);
 
-	[5, -5, _this get "_marker"] remoteExec ["A3A_fnc_citySupportChange", 2];
 	[-10, theBoss] call A3A_fnc_playerScoreAdd;
 
 	[_this get "_taskId", "FAILED"] call BIS_fnc_taskSetState;
@@ -209,7 +212,18 @@ _task set ["s_cleanup", {
 	// maybe we should restrict tasks based on request time not completion/failure time?
 	// so then throttling moves to the request management
 
-	(_this get "taskId") spawn {
+	// reverse-engineer task start time
+	private _startTime = (_this get "_endTime") - 60 * (15 + 30*(_this get "_difficulty"));
+	private _clearTime = 0 max ((_startTime + 1200) - time);
+	Trace_3("Start time %1; time %2; clearTime %3", _startTime, time, _clearTime);
+	_clearTime spawn {
+		sleep _this;
+		A3A_activeTasks deleteAt (A3A_activeTasks find "SUPP");
+		publicVariable "A3A_activeTasks";
+	};
+
+	(_this get "_taskId") spawn {
+		sleep 120;
 		[_this, true, true] call BIS_fnc_deleteTask;
 	};
 	true;		// delete the damned task

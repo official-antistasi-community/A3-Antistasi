@@ -6,9 +6,8 @@ class CfgFunctions {
             class getSettings { postInit = 1; };
             class requestTask {};
             class runTask {};
-            //class updateTaskState {};
+            class selectCityTask {};
         };
-
         class Helpers { // task helper functions  |  Common functionality used by tasks or the params getters
             file = QPATHTOFOLDER(Helpers);
             class hintNear {};
@@ -19,8 +18,11 @@ class CfgFunctions {
         };
         class Params { // params getter functions for the tasks  |  returns false if failed, otherwise params array
             file = QPATHTOFOLDER(Params);
-            class testTask_p {};
-
+            class city_killcop_p {};
+            class city_hostage_p {};
+            class city_taxi_p {};
+            class city_repair_p {};
+          
             class CON_broadcast_p {};
             class LOG_equipDrop {};
             class LOG_supplies {};
@@ -29,32 +31,19 @@ class CfgFunctions {
         };
         class Tasks { // task  |  Passed task HM to store task instructions into
             file = QPATHTOFOLDER(Tasks);
-            class testTask {};
-
+            //class testTask {};
+            class cityBattle {};
+            class LOG_Supplies {};
+            class city_killcop {};
+            class city_hostage {};
+            class city_taxi {};
+            class city_repair {};
+          
             class CON_broadcast {};
             class LOG_equipDrop {};
             class LOG_supplies {};
             class SUPP_occReporter {};
             class SUPP_rebReporter {};
         };
-
-        //Legacy missions
-/*        class LegacyParams {
-            file = QPATHTOFOLDER(Params\LegacyParams);
-            class AS_Official_p {};
-            class AS_specOP_p {};
-            class CON_Outpost_p {};
-            class LOG_Supplies_p {};
-            class LOG_Ammo_p {};
-        };
-        class LegacyTasks {
-            file = QPATHTOFOLDER(Tasks\LegacyTasks);
-            class AS_Official {};
-            class AS_specOP {};
-            class CON_Outpost {};
-            class LOG_Supplies {};
-            class LOG_Ammo {};
-        };
-*/
     };
 };

@@ -108,7 +108,7 @@ player setUserActionText [_cancelActionID,"Aborted Outpost Capture","<img size='
 // Capturing
 sleep 7;
 
-if (_cancellationToken #0) exitWith {
+if (_cancellationToken #0 or !(player call A3A_fnc_canFight)) exitWith {
     ServerInfo_3("Outpost at %1 (%2): Flag capture aborted by %3", _outpostGridSquare, _markerX, str player);
 };
 A3A_isPlayerCapturingFlag = nil;
@@ -127,4 +127,4 @@ player playMove "";
 } forEach ([_capRadius,0,_markerPos,teamPlayer] call A3A_fnc_distanceUnits);
 
 ServerInfo_3("Outpost at %1 (%2): Flag capture completed by %3", _outpostGridSquare, _markerX, str player);
-[teamPlayer,_markerX] remoteExec ["A3A_fnc_markerChange",2];
+[teamPlayer, _markerX, false] remoteExecCall ["A3A_fnc_markerChange",2];

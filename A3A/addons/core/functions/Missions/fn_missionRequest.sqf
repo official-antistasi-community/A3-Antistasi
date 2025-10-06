@@ -13,7 +13,7 @@ if(isNil "_type") then {
 	_type = selectRandom (_types - A3A_activeTasks);
 	_silent = true;
 };
-if (isNil "_type" or leader group petros != petros) exitWith { A3A_missionRequestInProgress = nil };
+if (isNil "_type" or A3A_petrosMoving) exitWith { A3A_missionRequestInProgress = nil };
 if (_type in A3A_activeTasks) exitWith {
 	if (!_silent) then {[petros,"globalChat",localize "STR_A3A_fn_mission_request_existing"] remoteExec ["A3A_fnc_commsMP",_requester]};
 	A3A_missionRequestInProgress = nil;
@@ -59,6 +59,11 @@ switch (_type) do {
 		private _broadcastParams = call A3A_tasks_fnc_CON_broadcast_p;
 		if (random 1 < 0.2 && !(_broadcastParams isEqualType false)) exitWith {[A3A_tasks_fnc_CON_broadcast, _broadcastParams] call A3A_tasks_fnc_runTask};
 
+		// Add in occupant cities with active police stations
+/*		private _cities = citiesX inAreaArrayIndexes [getMarkerPos respawnTeamPlayer, distanceMission, distanceMission] apply { citiesX#_x };
+		_cities = _cities select { sidesX getVariable _x == Occupants } select { A3A_garrison get _x getOrDefault ["policeStation", false] isEqualType [] };
+		_possibleMarkers append _cities;
+*/
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
 				[petros,"globalChat",localize "STR_A3A_fn_mission_request_noConquest"] remoteExec ["A3A_fnc_commsMP",_requester];
@@ -66,6 +71,10 @@ switch (_type) do {
 			};
 		} else {
 			private _site = selectRandom _possibleMarkers;
+/*			if (_site in _cities) exitWith {
+				private _station = nearestBuilding (A3A_garrison get _site get "policeStation");
+				[_site, _station] spawn A3A_fnc_CON_PoliceStation;
+			};*/
 			[[_site],"A3A_fnc_CON_Outpost"] remoteExec ["A3A_fnc_scheduler",2];
 		};
 	};
@@ -144,8 +153,8 @@ switch (_type) do {
 		private _weightedMarkers = [];
 		{
 			private _dist = getMarkerPos _x distance2D getMarkerPos respawnTeamPlayer;
-			private _supportReb = (server getVariable _x) select 3;
-			if (_dist < distanceMission && _supportReb < 90) then {
+			private _supportReb = (A3A_cityData getVariable _x) select 1;
+			if (_dist < distanceMission && _supportReb < 80) then {
 				private _weight = (100 - _supportReb) * ((distanceMission - _dist) ^ 2);
 				_possibleMarkers pushBack _x;
 				_weightedMarkers append [_x, _weight];
@@ -165,7 +174,11 @@ switch (_type) do {
 		} else {
             Debug_1("City weights: %1", _weightedMarkers);
 			private _site = selectRandomWeighted _weightedMarkers;
-			[[_site],"A3A_fnc_LOG_Supplies"] remoteExec ["A3A_fnc_scheduler",2];
+			private _stationPos = A3A_garrison get _site getOrDefault ["policeStation", false];
+			if (random 1 < 0.5 and _stationPos isEqualType [] and sidesX getVariable _site == Occupants) exitWith {
+				[_site, nearestBuilding _stationPos] spawn A3A_fnc_CON_PoliceStation;
+			};
+			[A3A_tasks_fnc_LOG_Supplies, [_site]] spawn A3A_tasks_fnc_runTask;
 		};
 	};
 

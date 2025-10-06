@@ -1,53 +1,62 @@
+// This function is now unscheduled only
+// If <0 is provided, it reduces the accumHR value instead
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+
 if (!isServer) exitWith {Error("Server-only function miscalled")};
 
-waitUntil {!cityIsSupportChanging};
-cityIsSupportChanging = true;
+Trace_1("Params: %1", _this);
 
-params [["_changeGov",""], ["_changeReb",""], ["_pos","",["",[]]], ["_scaled", true], ["_isRadio", false]]; // nil protection
-if !(_changeGov isEqualType 0) exitWith {Error("The first parameter, the government support, must be a number");};
-if !(_changeReb isEqualType 0) exitWith {Error("The second parameter, the rebel support, must be a number");};
-if (_pos isEqualTo "") exitWith {Error("The third parameter, the position, must be a string (city name) or array (coordinates)");};
+params [["_change",""], ["_pos",""], ["_scaled", true]]; // nil protection
+if !(_change isEqualType 0) exitWith {Error("The first parameter, the support change, must be a number");};
+if !(_city isEqualType "") exitWith {Error("The second parameter, the position, must be a string (city name) or array (coordinates)");};
 
 private _city = if (_pos isEqualType "") then {_pos} else {[citiesX, _pos] call BIS_fnc_nearestPosition};
-private _cityData = server getVariable _city;
-if (isNil "_cityData" || {!(_cityData isEqualType [])}) exitWith
-{
-	cityIsSupportChanging = false;
-    Error_1("No data found for city %1", _city);
+if (A3A_cityData isNil _city) exitWith {Error_1("City %1 not found in city data", _city);};
+
+private _cityData = A3A_cityData getVariable _city;
+_cityData params ["_numCiv", "_supportReb", "_accumHR", "_taskDelay"];		// add task delay? Could save it then...
+
+if (_scaled) then {
+	_change = 10 * _change / sqrt _numCiv;			// normalized to 1 = 1% at size 100
 };
-_cityData params ["_numCiv", "_numVeh", "_supportGov", "_supportReb"];
 
-// Radio propaganda can't increase support above 30% or decrease below 50%
-if (_isRadio) then {
-	if (_changeGov > 0) then { _changeGov = (30 - _supportGov) max 0 min _changeGov };
-	if (_changeGov < 0) then { _changeGov = (50 - _supportGov) min 0 max _changeGov };
-
-	if (_changeReb > 0) then { _changeReb = (30 - _supportReb) max 0 min _changeReb };
-	if (_changeReb < 0) then { _changeReb = (50 - _supportReb) min 0 max _changeReb };
-}
-else {
-	// Most non-radio changes are scaled inversely by city population, so less effect on large towns
-	if (_scaled) then {
-		private _popScale = 200 / (_numCiv max 50);
-		_changeGov = _changeGov * _popScale;
-		_changeReb = _changeReb * _popScale;
+if (_change > 0) then {
+	private _antenna = A3A_antennaMap get _city;
+	if (!alive _antenna) then { _change = _change * 1.5 } else {
+		private _antSide = sidesX getVariable (A3A_antennaMap get netId _antenna);
+		_change = _change * ([1, 2] select (_antSide == teamPlayer));
 	};
+	private _stationPos = A3A_garrison get _site getOrDefault ["policeStation", false];
+	if (_stationPos isEqualTo []) then { _change = _change * 1.5 };
 };
 
-// Cap total to 100 and minimums to 0
-_supportGov = 0 max (_supportGov + _changeGov);
-_supportReb = 0 max (_supportReb + _changeReb);
+Trace_2("City %1 change %2", _city, _change);
 
-private _supportTotal = _supportGov + _supportReb;
-if (_supportTotal > 100) then {
-	_supportGov = _supportGov * (100 / _supportTotal);
-	_supportReb = _supportReb * (100 / _supportTotal);
+// Cap rebel support to 0-100. Changes below 0 reduce accumHR
+_supportReb = (_supportReb + _change) min 100;
+if (_supportReb < 0) then {
+	_accumHR = _accumHR + (_supportReb / 5);			// 1 HR per 5 pop at size 100
+	_supportReb = 0;
 };
 
-_cityData = [_numCiv, _numVeh, _supportGov, _supportReb];
+A3A_cityData setVariable [_city, [_numCiv, _supportReb, _accumHR, _taskDelay]];
 
-server setVariable [_city,_cityData,true];
-cityIsSupportChanging = false;
-true
+// Flip logic...
+private _citySide = sidesX getVariable _city;
+if (_supportReb > 80 and _citySide != teamPlayer) then
+{
+	// Run cityBattle task if it's a significant town
+	if (_city in A3A_activeCityBattles) exitWith {};			// might be possible?
+	if (_numCiv >= 70) exitWith {
+		A3A_activeCityBattles set [_city, true];
+		[A3A_tasks_fnc_cityBattle, [_city]] spawn A3A_tasks_fnc_runTask;
+	};
+	[_city, true] call A3A_fnc_citySideChange;			// just autoflip for small stuff
+};
+if (_supportReb < 40 and _citySide == teamPlayer) then {
+	[_city, false] call A3A_fnc_citySideChange;
+};
+
+true;

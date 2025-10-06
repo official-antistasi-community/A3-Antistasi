@@ -1531,6 +1531,9 @@
         <Turkish>Kasayı kamyona aktar</Turkish>
         <Chinesesimp>将弹药箱转移到运输载具上面</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_vehicle_garrison">
+        <Original>Add vehicle to garrison</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_flagaction_vehiclebuy">
         <Original>Buy Vehicle</Original>
         <German>Fahrzeug kaufen</German>
@@ -4822,6 +4825,12 @@
         <Russian>Защита Оперативной зоны</Russian>
         <Chinesesimp>肃清区域</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_mission_conq_police_text">
+        <Original>A police station is disturbing our operations in %1. Go there and destroy it before %2. You can ransack it for loot and intel first.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conq_police_title">
+        <Original>Destroy the police station</Original>
+      </Key>
       <Key ID="STR_A3A_fn_mission_conv_ammo_text">
         <Original>A convoy from %1 is about to depart at %2. It will provide ammunition to %3. Try to intercept it. Steal or destroy that truck before it reaches its destination.</Original>
         <Italian>Un convoglio da %1 è in procinto di partire alle %2. Trasporta munizioni verso %3. Prova ad intercettarlo. Ruba o distruggi i veicoli prima che raggiungano la destinazione.</Italian>
@@ -7136,7 +7145,7 @@
         <Chinesesimp>这地方不存在可以调除的驻军</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_garrDia_no_wPost">
-        <Original>Additional garrison units cannot be added to observation posts.</Original>
+        <Original>Additional garrison units cannot be added to watchposts.</Original>
         <French>Les unités de garnison supplémentaires ne peuvent pas être ajoutées aux postes d'observation.</French>
         <Korean>관측소에는 주둔군을 더 추가할 수 없습니다.</Korean>
         <Russian>Дополнительные гарнизонные подразделения не могут быть добавлены к наблюдательным постам.</Russian>
@@ -8512,6 +8521,12 @@
         <Portuguese>Seleciona a zona para onde queres enviar as tropas selecionadas para guarnição.</Portuguese>
         <Turkish>Seçilen birlikleri garnizon olarak göndereceğiniz bölgeyi seçin.</Turkish>
         <Chinesesimp>选择您将作为驻军发送的区域。</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_garrison_vehicle_added">
+        <Original>Vehicle added to garrison. Cargo and inventory may not be preserved when you leave the area. Entering the vehicle will remove it from the garrison.</Original>
+      </Key>
+      <Key ID="STR_A3A_garrison_vehicle_outside">
+        <Original>This vehicle is not within a rebel garrison."</Original>
       </Key>
       <Key ID="STR_A3A_garrisons_header">
         <Original>Garrisons</Original>
@@ -11364,7 +11379,7 @@
         <Chinesesimp>拆除观察哨/路障</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_commander_comm_roadblock_delete_tooltip">
-        <Original>Remove selected observation post or roadblock, the money spent will be refunded</Original>
+        <Original>Remove selected watchpost or roadblock, the money spent will be refunded</Original>
         <Italian>Rimuovi il posto di osservazione o il posto di blocco selezionato, i soldi verranno rimborsati</Italian>
         <Spanish>Borra el punto de observación o bloqueo de carretera, el dinero sera reembolsado</Spanish>
         <French>Supprimer le poste d'observation ou le barrage routier sélectionné, l'argent sera remboursé</French>
@@ -13352,7 +13367,7 @@
         <Chinesesimp>出售载具</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_journal_entry_header_commander_12">
-        <Original>Observation Post</Original>
+        <Original>Watchpost</Original>
         <German>Beobachtungsposten</German>
         <Italian>Posto di Osservazione</Italian>
         <Spanish>Puesto de observación</Spanish>

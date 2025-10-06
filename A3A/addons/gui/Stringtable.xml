@@ -4093,56 +4093,6 @@
         <Russian>%1 оккупанты и %2 захватчики?</Russian>
         <Czech>%1 okupanti a %2 vetřelci?</Czech>
       </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_ammoQuant">
-        <Original>Ammo quantity</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_backpack">
-        <Original>Backpack</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_close">
-        <Original>Close</Original>
-        <German>Schließen</German>
-        <Italian>Chiudi</Italian>
-        <Spanish>Cerrar</Spanish>
-        <French>Fermer</French>
-        <Korean>닫기</Korean>
-        <Russian>Закрыть</Russian>
-        <Polish>Zamknij</Polish>
-        <Czech>Zavřít</Czech>
-        <Portuguese>Fechar</Portuguese>
-        <Turkish>Yakın</Turkish>
-        <Chinesesimp>关闭</Chinesesimp>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_copyToAll">
-        <Original>Copy To All</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_headgear">
-        <Original>Headgear</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_priOptic">
-        <Original>Primary optic</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_priWeapon">
-        <Original>Primary weapon</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetAll">
-        <Original>Reset All</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_resetRole">
-        <Original>Reset Role</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_secWeapon">
-        <Original>Secondary weapon</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
-        <Original>Custom AI Loadouts</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_uniform">
-        <Original>Uniform</Original>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_custom_loadouts_vest">
-        <Original>Vest</Original>
-      </Key>
       <Key ID="STR_antistasi_dialogs_setup_addonvics">
         <Original>Addon vehicles</Original>
         <German>Zusätzliche Fahrzeuge</German>
@@ -4262,6 +4212,9 @@
         <Original>DLC and Addons</Original>
         <Russian>DLC и Аддоны</Russian>
       </Key>
+      <Key ID="STR_antistasi_dialogs_setup_exportSave">
+        <Original>Export Save</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_setup_faction_tab_button">
         <Original>Factions</Original>
         <German>Fraktionen</German>
@@ -4279,6 +4232,12 @@
       <Key ID="STR_antistasi_dialogs_setup_factionInfo">
         <Original>Faction Information</Original>
         <Russian>Информация о фракции</Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_importButton">
+        <Original>IMPORT</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_importSave">
+        <Original>Import Save</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_infoPanel_header">
         <Original>%1 Information</Original>
@@ -4328,6 +4287,12 @@
         <Portuguese>Carregar jogo</Portuguese>
         <Turkish>Oyun yükle</Turkish>
         <Chinesesimp>载入游戏</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_noExportOld">
+        <Original>Only saves of version 3.10.0 or later can be exported. Load a game and run a persistent save to upgrade the version</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_noExportSel">
+        <Original>No save selected</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_new_save_name">
         <Original>New save name</Original>
@@ -4529,6 +4494,9 @@
         <Turkish>ANTİSTASİ KURULUMU</Turkish>
         <Chinesesimp>ANTISTASI设置</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_setup_title_saveTransfer">
+        <Original>SAVE TRANSFER</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_setup_toggleAddons_addons">
         <Original>Switch to Addons</Original>
         <Russian>Переключить на аддон</Russian>
@@ -4536,6 +4504,21 @@
       <Key ID="STR_antistasi_dialogs_setup_toggleAddons_DLC">
         <Original>Switch to DLCs</Original>
         <Russian>Переключить на ДЛС</Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_downloading">
+        <Original>Downloading data for save %1 with ID %2 from server, please wait...</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_exportReady">
+        <Original>Exporting save %1 with ID %2.&lt;br /&gt;&lt;br /&gt;Select the text box and use Ctrl-A and then Ctrl-C to copy the save to clipboard.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_importConfirm">
+        <Original>Confirm import of save %1?</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_importFail">
+        <Original>Invalid save data</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_importReady">
+        <Original>Paste your save into the text box below and use the %1 button to import it.</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_use_new_namespace">
         <Original>New save method</Original>
@@ -4555,8 +4538,7 @@
         <Original>Save the new campaign to AntistasiCommunity.vars instead of the main profile vars file. Warning: This may not work correctly on Linux servers due to an Arma bug.</Original>
       </Key>
     </Container>
-<<<<<<< HEAD
-    <Container name="setup_dialog">
+    <Container name="custom_loadouts">
       <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
         <Original>Custom AI Loadouts</Original>
       </Key>
@@ -4641,7 +4623,5 @@
         <Original>Total:</Original>
       </Key>
     </Container>
-=======
->>>>>>> unstable
   </Package>
 </Project>

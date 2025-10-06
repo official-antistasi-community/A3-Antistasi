@@ -34,7 +34,9 @@ private _minutes = floor ((_dayTime - _hours) * 60);
 
 // calculate time from now
 _minutes = _minutes + _minutesDiff;
-_hours = _hours + floor (_minutes/60);
+_hours = (_hours + floor (_minutes/60)) % 24;
 _minutes = floor (_minutes % 60);
 
-str _hours + ":" + str _minutes;
+format ["%1:%2",
+	(["","0"] select (_hours < 10)) + str _hours,
+	(["","0"] select (_minutes < 10)) + str _minutes];

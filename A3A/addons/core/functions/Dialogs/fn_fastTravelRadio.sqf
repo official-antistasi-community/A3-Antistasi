@@ -8,7 +8,7 @@ private _titleStr = localize "STR_A3A_fn_dialogs_ftradio_title";
 
 if (limitedFT == 2) exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_param"] call A3A_fnc_customHint;};
 
-_markersX = markersX + [respawnTeamPlayer];
+_markersX = markersX + outpostsFIA + [respawnTeamPlayer];
 
 _esHC = false;
 if (count hcSelected player > 1) exitWith {[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_grp_select"] call A3A_fnc_customHint;};
