@@ -191,6 +191,7 @@ _task set ["s_succeeded", {
 }];
 _task set ["s_failed", {
 	// Need a message here just to avoid the cooldown?
+	private _box = _this get "_box";
 	[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_failed", getPosATL _box, 300] call FUNC(hintNear);
 
 	[-10, theBoss] call A3A_fnc_playerScoreAdd;

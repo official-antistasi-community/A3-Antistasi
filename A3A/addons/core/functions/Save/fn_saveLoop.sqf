@@ -4,8 +4,6 @@ if (!isServer) exitWith {
     Error("Miscalled server-only function");
 };
 
-if (savingServer) exitWith {[localize "STR_A3A_fn_save_saveLoop_title1", localize "STR_A3A_fn_save_saveLoop_progress"] remoteExecCall ["A3A_fnc_customHint",theBoss]};
-savingServer = true;
 Info("Starting persistent save");
 [localize "STR_A3A_fn_save_saveLoop_title2",localize "STR_A3A_fn_save_saveLoop_saving"] remoteExecCall ["A3A_fnc_customHint",0,false];
 
@@ -13,41 +11,16 @@ Info("Starting persistent save");
 autoSaveTime = time + autoSaveInterval;
 
 // Select save namespace
-A3A_saveTarget params ["_serverID", "_campaignID"];
-private _saveToNewNamespace = _serverID isEqualType false;
-if (!_saveToNewNamespace) then { profileNamespace setVariable ["ss_serverID", _serverID] };			// backwards compatibility
-private _namespace = [profileNamespace, missionProfileNamespace] select _saveToNewNamespace;
-
+A3A_saveTarget params ["_serverID", "_campaignID", "_map"];
+A3A_saveTarget set [3, createHashMap];							// new saves are always JSON
 
 // Save each player with global flag
 {
 	[getPlayerUID _x, _x, true] call A3A_fnc_savePlayer;
 } forEach (call A3A_fnc_playableUnits);
+["savedPlayers", A3A_playerSaveData] call A3A_fnc_setStatVariable;			// new format, just store the hashmap
 
-// Now write back all the player data
-{
-	private _uid = _x;
-	private _playerData = _y;
-	{
-		if (isNil {_playerData get _x}) then { continue };				// old game data will have missing entries
-		[_uid, _x, _playerData get _x] call A3A_fnc_savePlayerStat;
-	} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage","missionsCompleted"];
-} forEach A3A_playerSaveData;
-
-["savedPlayers", keys A3A_playerSaveData] call A3A_fnc_setStatVariable;
-
-
-// Move this campaign to the end of the save list
-private _saveList = [_namespace getVariable "antistasiSavedGames"] param [0, [], [[]]];
-_saveList deleteAt (_saveList findIf { _x select 0 == _campaignID });
-_saveList pushBack [_campaignID, worldName, "Greenfor"];
-_namespace setVariable ["antistasiSavedGames", _saveList];
-
-// Update the legacy campaign ID for backwards compatibility
-if (!_saveToNewNamespace) then { _namespace setVariable ["ss_campaignID", _campaignID] };
-
-
-// Save persistent global variables defined in params config
+// Collect the persistent global variables defined in params config
 private _savedParams = [];
 {
     if (getArray (_x/"texts") isEqualTo [""]) then { continue };       // spacer/title
@@ -55,24 +28,19 @@ private _savedParams = [];
 } forEach ("true" configClasses (configFile/"A3A"/"Params"));
 Debug_1("Saving params: %1", _savedParams);
 
+// Write the header values, some from loadGame UI
 ["params", _savedParams] call A3A_fnc_setStatVariable;
-
-// Save vars from save selector
-["name", A3A_saveData get "name"] call A3A_fnc_setStatVariable;
-["factions", A3A_saveData get "factions"] call A3A_fnc_setStatVariable;
-["DLC", A3A_saveData get "DLC"] call A3A_fnc_setStatVariable;
-["addonVics", A3A_saveData get "addonVics"] call A3A_fnc_setStatVariable;
-
-private ["_garrison"];
 ["version", QUOTE(VERSION_FULL)] call A3A_fnc_setStatVariable;
 ["saveTime", systemTimeUTC] call A3A_fnc_setStatVariable;
-["gameMode", gameMode] call A3A_fnc_setStatVariable;					// backwards compatibility
-["difficultyX", skillMult] call A3A_fnc_setStatVariable;				// backwards compatibiiity
+["map", _map] call A3A_fnc_setStatVariable;						// just here for exporting really
+{
+	[_x, A3A_saveData get _x] call A3A_fnc_setStatVariable;
+} forEach ["name", "factions", "DLC", "addonVics"];
+
+// Simple values
 ["bombRuns", bombRuns] call A3A_fnc_setStatVariable;
-["smallCAmrk", []] call A3A_fnc_setStatVariable;						// backwards compatibility
 ["membersX", membersX] call A3A_fnc_setStatVariable;
-private _antennasDeadPositions = [];
-{ _antennasDeadPositions pushBack getPos _x; } forEach antennasDead;
+private _antennasDeadPositions = antennasDead apply { getPosATL _x };
 ["antennas", _antennasDeadPositions] call A3A_fnc_setStatVariable;
 ["mrkSDK", markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer}] call A3A_fnc_setStatVariable;
 ["mrkCSAT", markersX select {sidesX getVariable [_x,sideUnknown] == Invaders}] call A3A_fnc_setStatVariable;
@@ -80,24 +48,27 @@ private _antennasDeadPositions = [];
 ["dateX", date] call A3A_fnc_setStatVariable;
 ["skillFIA", skillFIA] call A3A_fnc_setStatVariable;
 ["destroyedSites", destroyedSites] call A3A_fnc_setStatVariable;
-["distanceSPWN", distanceSPWN] call A3A_fnc_setStatVariable;		// backwards compatibility
-["civPerc", globalCivilianMax] call A3A_fnc_setStatVariable;		// backwards compatibility
 ["chopForest", chopForest] call A3A_fnc_setStatVariable;
-["maxUnits", 140] call A3A_fnc_setStatVariable;				        // backwards compatibility
 ["nextTick", nextTick - time] call A3A_fnc_setStatVariable;
 ["weather",[fogParams,rain]] call A3A_fnc_setStatVariable;
 ["arsenalLimits", A3A_arsenalLimits] call A3A_fnc_setStatVariable;
 ["rebelLoadouts", A3A_rebelLoadouts] call A3A_fnc_setStatVariable;
 private _destroyedPositions = destroyedBuildings apply { getPosATL _x };
-["destroyedBuildings",_destroyedPositions] call A3A_fnc_setStatVariable;
-["controlsSDK",[]] call A3A_fnc_setStatVariable;					// backwards compatibility
-["minorSites", A3A_minorSitesHM] call A3A_fnc_setStatVariable;
-["HQDetectionRadius", A3A_HQDetectionRadius] call A3A_fnc_setStatVariable;
-["radioKeys", [occRadioKeys,invRadioKeys]] call A3A_fnc_setStatVariable;
-
-//Save aggression values
+["destroyedBuildings", _destroyedPositions] call A3A_fnc_setStatVariable;
 ["aggressionOccupants", [aggressionLevelOccupants, aggressionStackOccupants]] call A3A_fnc_setStatVariable;
 ["aggressionInvaders", [aggressionLevelInvaders, aggressionStackInvaders]] call A3A_fnc_setStatVariable;
+["radioKeys", [occRadioKeys,invRadioKeys]] call A3A_fnc_setStatVariable;
+["HQDetectionRadius", A3A_HQDetectionRadius] call A3A_fnc_setStatVariable;
+["HQKnowledge", [A3A_curHQInfoOcc, A3A_curHQInfoInv, A3A_oldHQInfoOcc, A3A_oldHQInfoInv]] call A3A_fnc_setStatVariable;
+
+// Convert side values because JSON doesn't support them
+private _modifiedSites = createHashMap;
+private _sideToStr = createHashMapFromArray [[teamPlayer,0], [Occupants,1],	[Invaders,2]];
+{
+	private _newSide = _sideToStr getOrDefault [_y#2, _y#2];
+	_modifiedSites set [_x, [_y#0, _y#1, _newSide, _y#3]];
+} forEach A3A_minorSitesHM;
+["minorSites", _modifiedSites] call A3A_fnc_setStatVariable;
 
 private ["_hrBackground","_resourcesBackground","_veh","_typeVehX","_weaponsX","_ammunition","_items","_backpcks","_containers","_arrayEst","_posVeh","_dierVeh","_prestigeOPFOR","_prestigeBLUFOR","_city","_dataX","_markersX","_garrison","_arrayMrkMF","_arrayOutpostsFIA","_positionOutpost","_typeMine","_posMine","_detected","_typesX","_exists","_friendX"];
 
@@ -136,16 +107,23 @@ _resourcesBackground = server getVariable "resourcesFIA";
 ["resourcesFIA", _resourcesBackground] call A3A_fnc_setStatVariable;
 ["hr", _hrBackground] call A3A_fnc_setStatVariable;
 
-["vehInGarage", [] + _vehInGarage] call A3A_fnc_setStatVariable;
-["HR_Garage", [] call HR_GRG_fnc_getSaveData] call A3A_fnc_setStatVariable;
-
-["staticsX", []] call A3A_fnc_setStatVariable;			// backwards compat
+private _grgData = [] call HR_GRG_fnc_getSaveData;
+private _cats = _grgData#0;
+private _newGrgCats = [];
+{
+	// json requires string keys, so garage numbers are saved as stringified numbers (e.g. "1") and parsed in-game as the actual numbers
+	private _keys = (keys _x) apply {str _x};
+	private _hm = _keys createHashMapFromArray (values _x);
+	_newGrgCats pushback _hm;
+} forEach _cats;
+_grgData set [0, _newGrgCats];
+["HR_Garage", _grgData] call A3A_fnc_setStatVariable;
 
 [] call A3A_fnc_arsenalManage;
 
 _jna_dataList = [];
 _jna_dataList = _jna_dataList + jna_dataList;
-["jna_dataList", _jna_dataList] call A3A_fnc_setStatVariable;
+["jna_datalist", _jna_dataList] call A3A_fnc_setStatVariable;
 
 // First two are backwards compat
 private _prestigeOPFOR = [];
@@ -155,17 +133,9 @@ private _cityDataHM = createHashMap;
 	_dataX = +(A3A_cityData getVariable _x);			// copy so that we don't accidentally modify
 	_dataX set [3, A3A_cityTaskTimer get _x];			// might want this later
 	_cityDataHM set [_x, _dataX];
-	_prestigeBLUFOR pushBack (_dataX select 1);
-	_prestigeOPFOR pushBack (100 - (_dataX select 1));
 } forEach citiesX;
 
 ["cityData", _cityDataHM] call A3A_fnc_setStatVariable;
-["prestigeOPFOR", _prestigeOPFOR] call A3A_fnc_setStatVariable;
-["prestigeBLUFOR", _prestigeBLUFOR] call A3A_fnc_setStatVariable;
-
-
-// No backwards compat for now?
-["garrison", []] call A3A_fnc_setStatVariable;
 
 // Update rebel garrison vehicle states. Can do this on active data because it doesn't change anything
 private _rebMarkers = (markersX select { sidesX getVariable _x == teamPlayer }) + outpostsFIA;
@@ -199,15 +169,9 @@ private _mineChance = 200 / (200 max count allMines);
 	_posMine = getPosATL _x;
 	_dirMine = getDir _x;
 	_detected = [];
-	if (_x mineDetectedBy teamPlayer) then {
-		_detected pushBack teamPlayer
-	};
-	if (_x mineDetectedBy Occupants) then {
-		_detected pushBack Occupants
-	};
-	if (_x mineDetectedBy Invaders) then {
-		_detected pushBack Invaders
-	};
+	if (_x mineDetectedBy teamPlayer) then { _detected pushBack 0 };
+	if (_x mineDetectedBy Occupants) then { _detected pushBack 1 };
+	if (_x mineDetectedBy Invaders) then { _detected pushBack 2 };
 	_arrayMines pushBack [_typeMine,_posMine,_detected,_dirMine];
 } forEach allMines;
 
@@ -295,10 +259,7 @@ _resDefInv = _resDefInv / A3A_balancePlayerScale;
 // Enemy resources. Could hashmap this instead...
 ["enemyResources", [_resDefOcc, _resDefInv, _resAttOcc, _resAttInv, A3A_punishmentDefBuff]] call A3A_fnc_setStatVariable;
 
-// HQ knowledge
-["HQKnowledge", [A3A_curHQInfoOcc, A3A_curHQInfoInv, A3A_oldHQInfoOcc, A3A_oldHQInfoInv]] call A3A_fnc_setStatVariable;
-
-// these are obsolete? idlebases is only used short-term now, idleassets is dead
+// these are obsolete? idlebases is only used short-term now
 /*
 _dataX = [];
 {
@@ -306,13 +267,6 @@ _dataX = [];
 } forEach airportsX + outposts;
 
 ["idlebases",_dataX] call A3A_fnc_setStatVariable;
-
-_dataX = [];
-{
-	_dataX pushBack [_x,timer getVariable _x];
-} forEach (FactionGet(all,"vehiclesArmor") + FactionGet(all,"vehiclesFixedWing") + FactionGet(all,"vehiclesHelisTransport") + FactionGet(all,"vehiclesHelisAttack") + FactionGet(occ,"staticAT") + FactionGet(occ,"staticAA") + FactionGet(inv,"staticAT") + FactionGet(inv,"staticAA") + FactionGet(occ,"vehiclesGunBoats") + FactionGet(inv,"vehiclesGunBoats"));
-
-["idleassets",_dataX] call A3A_fnc_setStatVariable;
 */
 
 _dataX = [];
@@ -340,9 +294,9 @@ _fuelAmountleftArray = [];
 //Saving the state of the testing timer
 ["testingTimerIsActive", testingTimerIsActive] call A3A_fnc_setStatVariable;
 
-if (_saveToNewNamespace) then { saveMissionProfileNamespace } else { saveProfileNamespace };
+// Write the JSON blob to the save header & complete
+call A3A_fnc_finalizeSave;
 
-savingServer = false;
 _saveHintText = ["<t size='1.5'>",FactionGet(reb,"name")," ",localize "STR_A3A_fn_save_saveLoop_text_asset"," ",_hrBackground toFixed 0,localize "STR_A3A_fn_save_saveLoop_text_money"," ",_resourcesBackground toFixed 0," ",localize "STR_A3A_fn_save_saveLoop_text_options"] joinString "";
 [localize "STR_A3A_fn_save_saveLoop_title2",_saveHintText] remoteExecCall ["A3A_fnc_customHint",0,false];
 Info("Persistent Save Completed");

@@ -51,7 +51,7 @@ _task set ["_policeGroup", _policeGroup];
 
 // Select a building further away for the garage
 private _radius = 500 min vectorMagnitude markerSize _marker;
-private _houses = nearestTerrainObjects [markerPos _marker, ["House"], _radius];
+private _houses = nearestObjects [markerPos _marker, ["House"], _radius];
 private _house = selectRandom _houses;
 for "_i" from 1 to 10 do {
     private _house2 = selectRandom _houses;
