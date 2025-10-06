@@ -34,7 +34,6 @@ if (_siteX in _destroyedSites) exitWith {
     private _nameX = [_siteX] call A3A_fnc_localizar;
     [_titleStr, format [localize "STR_A3A_fn_base_rebasset_done_1", _nameX]] call A3A_fnc_customHint;
 
-    [0,10,_positionTel] remoteExec ["A3A_fnc_citySupportChange",2];
     [Occupants, 10, 30] remoteExec ["A3A_fnc_addAggression",2];
     [Invaders, 10, 30] remoteExec ["A3A_fnc_addAggression",2];
     destroyedSites = destroyedSites - [_siteX];

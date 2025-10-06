@@ -1,5 +1,6 @@
 class CfgVehicles {
-
+    #include "houses.hpp"
+  
     class vn_static_mortar_m2_base;
     class vn_b_army_static_mortar_m2 : vn_static_mortar_m2_base {
         class Turrets;

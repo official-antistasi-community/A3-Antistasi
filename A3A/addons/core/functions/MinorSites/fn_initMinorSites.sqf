@@ -54,7 +54,6 @@ if (!isNil "A3A_minorSitesHM") exitWith {
 
     // Update the old marker data
     publicVariable "controlsX";
-    publicVariable "markersX";
 
     Info("Finished checking pair references for roadblocks");
 };
@@ -113,4 +112,3 @@ Info("Roadblock and camp generation complete");
 
 // Update the old marker data
 publicVariable "controlsX";
-publicVariable "markersX";

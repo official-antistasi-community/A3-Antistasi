@@ -79,7 +79,7 @@ if ("enoch" in A3A_enabledDLC) then
 };
 if ("tanks" in A3A_enabledDLC) then
 {
-    _Tanks append ["O_MBT_04_cannon_F","O_MBT_04_command_F"]; 
+	["vehiclesHeavyTanks", ["O_MBT_04_cannon_F", "O_MBT_04_cannon_F", "O_MBT_04_command_F"]] call _fnc_saveToTemplate;
 };
 if ("expansion" in A3A_enabledDLC) then
 {
