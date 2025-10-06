@@ -63,15 +63,24 @@ private _utilityRefund = {
 
     private _toRefund = 0;
     private _feedBack = "STR_HR_GRG_Feedback_addVehicle_Item_Stored";
-    if ("fuel" in _flags) then {
-        _toRefund = floor (([_object] call A3A_fnc_remainingFuel) * (_object getVariable ['A3A_itemPrice', 0]));
-        _feedBack = "STR_HR_GRG_Feedback_addVehicle_Fuel_sold";
-    } else {
-        _toRefund = _object getVariable ['A3A_itemPrice', 0];
+    private _itemPrice = _object getVariable ['A3A_itemPrice', 0];
+    if ("loot" in _flags) exitWith {
+        ["STR_HR_GRG_Feedback_addVehicle_LTC"] remoteExec ["HR_GRG_fnc_Hint", _client];
+        [_object, boxX, true, _itemPrice] call A3A_fnc_ammunitionTransfer;
+        _itemPrice;
     };
-    if ("loot" in _flags) then {
-        _feedBack = "STR_HR_GRG_Feedback_addVehicle_LTC";
-        [_object, boxX, true] call A3A_fnc_ammunitionTransfer;
+    switch (true) do {
+        case ("fuel" in _flags): {
+            _toRefund = floor (([_object] call A3A_fnc_remainingFuel) * _itemPrice);
+            _feedBack = "STR_HR_GRG_Feedback_addVehicle_Fuel_sold";
+        };
+        case ("ammo" in _flags): {
+            _toRefund = floor (([_object] call A3A_fnc_remainingAmmo) * _itemPrice);
+            _feedBack = "STR_HR_GRG_Feedback_addVehicle_Ammo_sold";
+        };
+        default {
+            _toRefund = _itemPrice;
+        };
     };
 
     deleteVehicle _object;
@@ -84,7 +93,12 @@ private _utilityRefund = {
     };
     _toRefund
 };
-if (_vehicle getVariable ['A3A_canGarage', false]) exitwith { [_vehicle] call _utilityRefund };
+
+if (_vehicle getVariable ['A3A_canGarage', false]) exitwith {
+    private _marker = _vehicle getVariable "markerX";
+    if (!isNil "_marker") then { isNil { [_vehicle] call A3A_fnc_garrisonServer_remVehicle } };     // must be done before deletion
+    [_vehicle] call _utilityRefund;
+};
 
     //Towing
 if !((_vehicle getVariable ["SA_Tow_Ropes",objNull]) isEqualTo objNull) exitWith {["STR_HR_GRG_Feedback_addVehicle_SATow"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
@@ -114,11 +128,11 @@ if (
 
 //here to allow adaption of external Antistasi system without needing to addapt code under APL-ND
 private _broadcastReportedVehsAndStaticsToSave = {
-    publicVariable "staticsToSave";
 };
 //_this is vehicle
 private _deleteFromReportedVehsAndStaticsToSave = {
-    staticsToSave deleteAt (staticsToSave find _this);
+    private _marker = _this getVariable "markerX";
+    if (!isNil "_marker") then { isNil { [_this] call A3A_fnc_garrisonServer_remVehicle } };     // must be done before deletion
 };
 //_this is vehicle
 private _transferToArsenal = {

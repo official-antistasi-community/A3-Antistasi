@@ -44,4 +44,11 @@ class umb_colombia {
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
 		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
 	};
+	policeStationTypes[] = {
+		// Malden types
+		"Land_i_House_Big_01_V1_F", "Land_i_House_Big_01_V2_F", "Land_i_House_Big_01_V3_F", "Land_i_House_Big_01_b_whiteblue_F", "Land_i_House_Big_01_b_blue_F", "Land_i_House_Big_01_b_pink_F", "Land_i_House_Big_01_b_yellow_F", "Land_i_House_Big_01_b_brown_F",
+		"Land_i_House_Big_02_V1_F", "Land_i_House_Big_02_V2_F", "Land_i_House_Big_02_V3_F",	"Land_i_House_Big_02_b_whiteblue_F", "Land_i_House_Big_02_b_blue_F", "Land_i_House_Big_02_b_pink_F", "Land_i_House_Big_02_b_yellow_F", "Land_i_House_Big_02_b_brown_F",
+		// Tanoa types
+		"Land_House_Big_04_F", "Land_House_Big_03_F", "Land_House_Big_01_F", "Land_House_Small_01_F", "Land_House_Small_02_F"
+	};
 };

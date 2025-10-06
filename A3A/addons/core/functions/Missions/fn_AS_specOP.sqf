@@ -29,7 +29,6 @@ waitUntil  {sleep 5; (dateToNumber date > _dateLimitNum) or (sidesX getVariable 
 if (dateToNumber date > _dateLimitNum) then
 {
 	[_taskId, "AS", "FAILED"] call A3A_fnc_taskSetState;
-	[5,0,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
 	[-200, _sideX] remoteExec ["A3A_fnc_timingCA",2];
 	[-10,theBoss] call A3A_fnc_playerScoreAdd;
 }
@@ -38,7 +37,6 @@ else
 	private _bonus = [1, 1.5] select _difficultX;
 	[_taskId, "AS", "SUCCEEDED"] call A3A_fnc_taskSetState;
 	[0,200*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-	[0,5,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
 	[800*_bonus, _sideX] remoteExec ["A3A_fnc_timingCA",2];
 	{if (isPlayer _x) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach ([500,0,_positionX,teamPlayer] call A3A_fnc_distanceUnits);
 	[10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;

@@ -35,8 +35,18 @@ if !(isServer) then {
         [] call A3A_fnc_patrolInit;
 
         call A3A_fnc_loadNavGrid;
-        waitUntil { sleep 0.1; !isNil "serverInitDone" };			// addNodesNearMarkers needs marker lists
+        waitUntil { sleep 0.1; !isNil "initZonesDone" };			// addNodesNearMarkers needs marker lists
         call A3A_fnc_addNodesNearMarkers;
+
+        // Could generate this locally instead if it's deterministic...
+        waitUntil { sleep 0.1; !isNil "A3A_spawnPlacesDone" };			// This one doesn't trigger until server background init
+        [clientOwner, "A3A_garrisonSize"] remoteExecCall ["publicVariableClient", 2];
+        [clientOwner, "A3A_spawnPlacesHM"] remoteExecCall ["publicVariableClient", 2];
+        waitUntil { sleep 0.1; !isNil "A3A_spawnPlacesHM" };			// Garrison functionality needs spawn places
+
+        A3A_activeGarrison = createHashMap;
+        A3A_garrisonOps = [];
+        0 spawn A3A_fnc_garrisonOpLoop;
     };
 
     if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
@@ -88,6 +98,7 @@ if (!isServer) then {
 
 // Headless clients register with server and bail out at this point
 if (!isServer and !hasInterface) exitWith {
+
     player setPosATL (markerPos respawnTeamPlayer vectorAdd [-100, -100, 0]);
     [clientOwner] remoteExecCall ["A3A_fnc_addHC",2];
 };
@@ -145,130 +156,11 @@ if (isNil "ace_noradio_enabled" or {!ace_noradio_enabled}) then {
 [player] call A3A_fnc_dress;
 
 player setvariable ["compromised",0];
-player addEventHandler ["FiredMan", {
-    _player = _this select 0;
-    if (captive _player) then {
-        //if ({((side _x== Invaders) or (side _x== Occupants)) and (_x knowsAbout player > 1.4)} count allUnits > 0) then
-        if ({if (((side _x == Occupants) or (side _x == Invaders)) and (_x distance player < 300)) exitWith {1}} count allUnits > 0) then {
-            [_player,false] remoteExec ["setCaptive",0,_player];
-            _player setCaptive false;
-        }
-        else {
-            _city = [citiesX,_player] call BIS_fnc_nearestPosition;
-            _size = [_city] call A3A_fnc_sizeMarker;
-            _dataX = server getVariable _city;
-            if (random 100 < _dataX select 2) then {
-                if (_player distance getMarkerPos _city < _size * 1.5) then {
-                    [_player,false] remoteExec ["setCaptive",0,_player];
-                    _player setCaptive false;
-                    if (vehicle _player != _player) then {
-                        {if (isPlayer _x) then {[_x,false] remoteExec ["setCaptive",0,_x]; _x setCaptive false}} forEach ((assignedCargo (vehicle _player)) + (crew (vehicle _player)) - [player]);
-                    };
-                };
-            };
-        };
-    };
-}];
-player addEventHandler ["InventoryOpened", {
-    private ["_playerX","_containerX","_typeX"];
-    _control = false;
-    _playerX = _this select 0;
-    if (captive _playerX) then {
-        _containerX = _this select 1;
-        _typeX = typeOf _containerX;
-        if (((_containerX isKindOf "Man") and (!alive _containerX)) or (_typeX in [A3A_faction_occ get "ammobox", A3A_faction_inv get "ammobox"])) then {
-            if ({if (((side _x== Invaders) or (side _x== Occupants)) and (_x knowsAbout _playerX > 1.4)) exitWith {1}} count allUnits > 0) then{
-                [_playerX,false] remoteExec ["setCaptive",0,_playerX];
-                _playerX setCaptive false;
-            }
-            else {
-                _city = [citiesX,_playerX] call BIS_fnc_nearestPosition;
-                _size = [_city] call A3A_fnc_sizeMarker;
-                _dataX = server getVariable _city;
-                if (random 100 < _dataX select 2) then {
-                    if (_playerX distance getMarkerPos _city < _size * 1.5) then {
-                        [_playerX,false] remoteExec ["setCaptive",0,_playerX];
-                        _playerX setCaptive false;
-                    };
-                };
-            };
-        };
-    };
-    _control
-}];
-/*
-player addEventHandler ["InventoryClosed", {
-    _control = false;
-    _uniform = uniform player;
-    _typeSoldier = getText (configfile >> "CfgWeapons" >> _uniform >> "ItemInfo" >> "uniformClass");
-    _sideType = getNumber (configfile >> "CfgVehicles" >> _typeSoldier >> "side");
-    if ((_sideType == 1) or (_sideType == 0) and (_uniform != "")) then {
-        if !(player getVariable ["disguised",false]) then {
-            hint "You are wearing an enemy uniform, this will make the AI attack you. Beware!";
-            player setVariable ["disguised",true];
-            player addRating (-1*(2001 + rating player));
-        };
-    }
-    else {
-        if (player getVariable ["disguised",false]) then {
-            hint "You removed your enemy uniform";
-            player addRating (rating player * -1);
-        };
-    };
-    _control
-}];
-*/
-player addEventHandler ["HandleHeal", {
-    _player = _this select 0;
-    if (captive _player) then {
-        if ({((side _x== Invaders) or (side _x== Occupants)) and (_x knowsAbout player > 1.4)} count allUnits > 0) then {
-            [_player,false] remoteExec ["setCaptive",0,_player];
-            _player setCaptive false;
-        }
-        else {
-            _city = [citiesX,_player] call BIS_fnc_nearestPosition;
-            _size = [_city] call A3A_fnc_sizeMarker;
-            _dataX = server getVariable _city;
-            if (random 100 < _dataX select 2) then {
-                if (_player distance getMarkerPos _city < _size * 1.5) then {
-                    [_player,false] remoteExec ["setCaptive",0,_player];
-                    _player setCaptive false;
-                };
-            };
-        };
-    };
-}];
 
-// notes:
-// Static weapon objects are persistent through assembly/disassembly
-// The bags are not persistent, object IDs change each time
-// Static weapon position seems to follow bag1, but it's not an attached object
-// Can use objectParent to identify backpack of static weapon
+// Install the non respawn-persistent client event handlers
+call A3A_fnc_installClientEH;
 
-player addEventHandler ["WeaponAssembled", {
-    private _veh = _this select 1;
-    [_veh, teamPlayer] call A3A_fnc_AIVEHinit;		// will flip/capture if already initialized
-    if (_veh isKindOf "StaticWeapon") then {
-        if (not(_veh in staticsToSave)) then {
-            staticsToSave pushBack _veh;
-            publicVariable "staticsToSave";
-        };
-        _markersX = markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
-        _pos = position _veh;
-        [_veh] call A3A_Logistics_fnc_addLoadAction;
-        if (_markersX findIf {_pos inArea _x} != -1) then {[localize "STR_A3A_fn_init_initclient_statdepl", localize "STR_A3A_fn_init_initclient_statdepl_confirm"] call A3A_fnc_customHint;};
-    };
-}];
-
-player addEventHandler ["WeaponDisassembled", {
-    private _bag1 = _this select 1;
-    private _bag2 = _this select 2;
-    //_bag1 = objectParent (_this select 1);
-    //_bag2 = objectParent (_this select 2);
-    [_bag1] remoteExec ["A3A_fnc_postmortem", 2];
-    [_bag2] remoteExec ["A3A_fnc_postmortem", 2];
-}];
-
+// These are respawn-persistent so we install them here
 player addEventHandler ["GetInMan", {
     params ["_unit", "_role", "_veh", "_turret"];
     _exit = false;
@@ -301,6 +193,10 @@ player addEventHandler ["GetOutMan", {
     Debug_2("Terminating airspace control for player %1, vehicle %2", _unit, typeof _veh);
     private _handle = _unit getVariable ["airspaceControlHandle", scriptNull];
     if (!isNull _handle) then { terminate _handle };
+}];
+
+player addEventHandler ["Killed", {
+    [-1, 0] remoteExecCall ["A3A_fnc_resourcesFIA", 2];
 }];
 
 // Prevent players getting shot by their own AIs. EH is respawn-persistent
@@ -377,8 +273,8 @@ GVAR(keys_battleMenu) = false; //initilize key flags to false
 boxX allowDamage false;			// hmm...
 boxX addAction [localize "STR_A3A_fn_init_initclient_addact_transfer", {[] spawn A3A_fnc_empty;}, 4,1.5,true,true,"","!unitIsUAV _this"];
 flagX allowDamage false;
-flagX addAction [localize "STR_A3A_fn_init_initclient_addact_recruit", { if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_init_initclient_recunit", localize "STR_A3A_fn_init_initclient_recunit_no"] call A3A_fnc_customHint;} else {createDialog "A3A_RecruitDialog";};},nil,0,false,true,"","(petros == leader group petros)",4];
-flagx addAction [localize "STR_A3A_fn_init_initClient_addAct_recruitSquad", { createDialog "A3A_RecruitSquadDialog"; },nil,0,false,true,"","(_this == theBoss) and (petros == leader group petros)",4];
+flagX addAction [localize "STR_A3A_fn_init_initclient_addact_recruit", { if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {[localize "STR_A3A_fn_init_initclient_recunit", localize "STR_A3A_fn_init_initclient_recunit_no"] call A3A_fnc_customHint;} else { createDialog "A3A_RecruitDialog"; };},nil,0,false,true,"","!A3A_petrosMoving",4];
+flagx addAction [localize "STR_A3A_fn_init_initClient_addAct_recruitSquad", { createDialog "A3A_RecruitSquadDialog"; },nil,0,false,true,"","(_this == theBoss) and !A3A_petrosMoving",4];
 
 //Adds a light to the flag
 private _flagLight = "#lightpoint" createVehicle (getPos flagX);
@@ -424,7 +320,7 @@ mapX addAction [localize "STR_A3A_fn_init_initclient_addact_gameOpt", {
 #endif
     nil;
 },nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
-mapX addAction [localize "STR_A3A_fn_init_initclient_addact_mapinfo", A3A_fnc_cityinfo,nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
+mapX addAction [localize "STR_A3A_fn_init_initclient_addact_mapinfo", A3A_fnc_mapInfoDialog,nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
 if (isMultiplayer) then {mapX addAction [localize "STR_A3A_fn_init_initclient_addact_ailoadinfo", { [] remoteExec ["A3A_fnc_AILoadInfo",2];},nil,0,false,true,"",""]}; // should be no reason to restrict the aiLoadInfo to anyone
 
 [] call A3A_fnc_unitTraits;

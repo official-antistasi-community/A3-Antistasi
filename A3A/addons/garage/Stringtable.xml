@@ -156,6 +156,9 @@
         <Turkish>Düşmanlar yakınınızdayken araçları garaja koyamazsınız</Turkish>
         <Chinesesimp>你不能在敌人附近存放载具</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Feedback_addVehicle_Ammo_sold">
+        <Original>Ammo crate sold</Original>
+      </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_Fuel_sold">
         <Original>Fuel sold</Original>
         <German>Treibstoff verkauft</German>

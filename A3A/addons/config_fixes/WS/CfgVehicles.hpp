@@ -17,6 +17,8 @@ class CfgVehicles
     class O_Truck_02_transport_F;
     class O_Tura_Truck_02_aa_lxWS;
     class O_Tura_ZU23_lxWS;
+    class B_Heli_Attack_01_pylons_dynamicLoadout_F;
+    class B_Heli_Transport_01_pylons_F;
 
     #include "ws_ifv.hpp"
     #include "ws_ion.hpp"
@@ -115,5 +117,10 @@ class CfgVehicles
         crew = "I_E_Soldier_F";
         faction = "IND_E_F";
         hiddenSelectionsTextures[] = {"a3\soft_f_enoch\truck_02\data\truck_02_kab_eaf_co.paa","lxws\vehicles_f_lxws\truck_02\data\truck_02_cargo_eaf_co.paa","a3\soft_f_beta\truck_02\data\truck_02_int_co.paa","a3\soft_f_enoch\truck_02\data\truck_02_chassis_eaf_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_base_green_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_green_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_addon_1_green_co.paa","lxws\vehicles_f_lxws\zu23\data\zu23_addon_2_green_co.paa","lxws\vehicles_f_lxws\truck_02\data\addons_black_co.paa"};
+    };
+    
+    //Tan-Camo
+    class a3a_Heli_Attack_01_pylons_dynamicLoadout_sand_F : B_Heli_Attack_01_pylons_dynamicLoadout_F {
+        hiddenSelectionTextures[] = {"\lxWS\air_f_lxWS\Data\NATO\lxWS_Heli_Attack_01_sand_CO.paa"};
     };
 };

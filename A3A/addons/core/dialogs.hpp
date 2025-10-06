@@ -114,7 +114,7 @@ class HQ_menu 			{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0;if (player == theBoss) then {nul = [] spawn A3A_fnc_moveHQ;} else {[""Move HQ"", ""Only Player Commander has access to this function.""] call A3A_fnc_customHint;};";
+			action = "closeDialog 0;if (player == theBoss) then {[player] remoteExecCall ['A3A_fnc_moveHQ', 2]} else {[""Move HQ"", ""Only Player Commander has access to this function.""] call A3A_fnc_customHint;};";
 		};
 		class HQ_button_recruitUnit: A3A_core_BattleMenuRedButton
 		{
@@ -320,12 +320,12 @@ class garrison_recruit 			{
 		class HQ_button_explosive: A3A_core_BattleMenuRedButton
 		{
 			idc = 108;
-			text = $STR_antistasi_dialogs_garrison_spawn_mortar_text;
+			text = "";		//$STR_antistasi_dialogs_garrison_spawn_mortar_text;
 			x = 0.482498 * safezoneW + safezoneX;
 			y = 0.464003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "nul = [A3A_faction_reb get 'unitCrew'] spawn A3A_fnc_garrisonAdd";
+			action = "";		//nul = [A3A_faction_reb get 'unitCrew'] spawn A3A_fnc_garrisonAdd";
 		};
 		class HQ_button_grenadier: A3A_core_BattleMenuRedButton
 		{
