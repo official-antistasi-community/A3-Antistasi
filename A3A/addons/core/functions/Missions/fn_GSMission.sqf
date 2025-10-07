@@ -47,7 +47,8 @@ private _notCoolPetrosLoadout = getUnitLoadout petros;
 _coolerPetros setUnitLoadout _notCoolPetrosLoadout;
 
 // place inside like a garrison.
-private _garrisonGroups = [group _coolerPetros, getMarkerPos _city, 200] call A3A_fnc_patrolGroupGarrison;
+private _buildingPlaces = [_city, 200, 1] call A3A_fnc_patrolGetBuildingPlaces;
+private _garrisonGroups = [group _coolerPetros, _buildingPlaces] call A3A_fnc_patrolGroupGarrison;
 [[teamPlayer,civilian],_taskId,[_textX,_taskTitle,""],getPosATL _coolerPetros,false,0,true,_taskIcon,true] call BIS_fnc_taskCreate;
 [_taskId, "LOG", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 

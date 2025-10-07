@@ -1,36 +1,10 @@
-params ["_newPosition", "_isNewGame"];
+// Reset positions of all HQ objects except petros
+// Server, unscheduled
 
-// Update cur/old HQ knowledge. Shouldn't be interrupted
-isNil {
-	if (_isNewGame) exitWith {};
-	private _oldPos = markerPos "Synd_HQ";
-	_oldPos set [2, A3A_curHQInfoOcc];
-	A3A_oldHQInfoOcc pushBack +_oldPos;
-	A3A_curHQInfoOcc = 0;
-	{
-		private _dist = _x distance2d _newPosition;
-		A3A_curHQInfoOcc = A3A_curHQInfoOcc max linearConversion [0, 1000, _dist, _x#2, 0, true];
-	} forEach A3A_oldHQInfoOcc;
-
-	_oldPos set [2, A3A_curHQInfoInv];
-	A3A_oldHQInfoInv pushBack +_oldPos;
-	A3A_curHQInfoInv = 0;
-	{
-		private _dist = _x distance2d _newPosition;
-		A3A_curHQInfoInv = A3A_curHQInfoInv max linearConversion [0, 1000, _dist, _x#2, 0, true];
-	} forEach A3A_oldHQInfoInv;
-};
-
-respawnTeamPlayer setMarkerPos _newPosition;
-posHQ = _newPosition; publicVariable "posHQ";
-"Synd_HQ" setMarkerPos _newPosition;
-chopForest = false; publicVariable "chopForest";
-
-[respawnTeamPlayer, 1, teamPlayer] call A3A_fnc_setMarkerAlphaForSide;
-[respawnTeamPlayer, 1, civilian] call A3A_fnc_setMarkerAlphaForSide;
+params ["_newPos"];
 
 // Move headless client logic objects near HQ so that firedNear EH etc. work more reliably
-private _hcpos = _newPosition vectorAdd [-100, -100, 0];
+private _hcpos = _newPos vectorAdd [-100, -100, 0];
 { _x setPosATL _hcpos } forEach (entities "HeadlessClient_F");
 
 private _alignNormals = {
@@ -38,7 +12,7 @@ private _alignNormals = {
 	_thing setVectorUp surfaceNormal getPos _thing;
 };
 
-private _firePos = [_newPosition, 3, getDir petros] call BIS_Fnc_relPos;
+private _firePos = [_newPos, 3, getDir petros] call BIS_Fnc_relPos;
 //Extra height on the fire to avoid it clipping into the ground
 fireX setPos (_firePos vectorAdd [0,0,0.1]);
 _rnd = getdir petros;
@@ -65,5 +39,3 @@ vehicleBox hideObjectGlobal false;
 mapX hideObjectGlobal false;
 fireX hideObjectGlobal false;
 flagX hideObjectGlobal false;
-
-
