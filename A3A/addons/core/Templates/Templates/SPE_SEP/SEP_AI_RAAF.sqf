@@ -33,7 +33,7 @@
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["SPEX_CW_Trop_M5_Halftrack"]] call _fnc_saveToTemplate; //These got no protected  turret, sufficent troop capacity, cost reduced
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
-["vehiclesLightTanks",["SPEX_CW_M8_LAC", "SPEX_CW_M8_LAC_ringMount"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks",["SPEX_CW_Trop_Humber_MkII", "SPEX_CW_M8_LAC", "SPEX_CW_M8_LAC_ringMount"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["SPEX_CW_Cromwell_Mk5"]] call _fnc_saveToTemplate;
 ["vehiclesHeavyTanks", []] call _fnc_saveToTemplate;
 ["vehiclesAA", ["SPE_US_M16_Halftrack"]] call _fnc_saveToTemplate;
@@ -83,7 +83,7 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 ["minefieldAT", ["SPE_US_M1A1_ATMINE"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["SPE_US_M3_Pressure_MINE", "SPE_US_M3_MINE"]] call _fnc_saveToTemplate;
 
-#include "SPE_Vehicle_Attributes.sqf"
+#include "SEP_Vehicle_Attributes.sqf"
 
 /////////////////////
 ///  Identities   ///
@@ -108,6 +108,7 @@ _loadoutData set ["rifles", [
 ]];
 _loadoutData set ["slRifles", [
     ["SPEX_Sten_Mk5", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
+    ["SPEX_Sten_Mk5", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
     ["SPEX_M1928A1_Thompson", "", "", "", ["SPE_20Rnd_Thompson_45ACP_t", "SPE_20Rnd_Thompson_45ACP"], [], ""]
 ]];
 _loadoutData set ["shotGuns", [
@@ -128,6 +129,7 @@ _loadoutData set ["grenadeLaunchers", [
     ["SPEX_No1_Mk3_late_Enfield_GL", "SPEX_ACC_2HalfInch_GL_CUP", "SPEX_ACC_Enfield_No1_Wires", "", ["SPEX_10Rnd_770x56"], ["SPEX_1Rnd_G_No36_MKI", "SPEX_1Rnd_G_No68", "SPEX_1Rnd_G_No36_MKI"], ""]
 ]];
 _loadoutData set ["SMGs", [
+    ["SPEX_Sten_Mk5", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
     ["SPEX_Sten_Mk5", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
     ["SPEX_Sten_Mk5", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
     ["SPEX_M1928A1_Thompson", "", "", "", ["SPE_20Rnd_Thompson_45ACP_t", "SPE_20Rnd_Thompson_45ACP"], [], ""]
@@ -262,12 +264,16 @@ _sfLoadoutData set ["slRifles", [
     ["SPE_M1918A0_BAR", "", "", "", ["SPE_20Rnd_762x63_M2_AP"], [], ""]
 ]];
 _sfLoadoutData set ["rifles", [
+    ["SPEX_No4_Mk1_Enfield_Scoped_dunkel", "", "", "", ["SPEX_10Rnd_770x56_AP_MKI"], [], ""],
     ["SPEX_Sten_Mk6_Suppressed", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
-    ["SPEX_M1928A1_Thompson", "", "", "", ["SPE_30Rnd_Thompson_45ACP", "SPE_30Rnd_Thompson_45ACP", "SPE_30Rnd_Thompson_45ACP_t"], [], ""],
-    ["SPEX_M1928A1_Thompson", "", "", "", ["SPEX_50Rnd_Thompson_45ACP", "SPE_30Rnd_Thompson_45ACP", "SPE_30Rnd_Thompson_45ACP_t"], [], ""],
+    ["SPEX_M1928_Thompson", "", "", "", ["SPE_30Rnd_Thompson_45ACP", "SPE_30Rnd_Thompson_45ACP", "SPE_30Rnd_Thompson_45ACP_t"], [], ""],
+    ["SPE_M1918A0_BAR", "", "", "", ["SPE_20Rnd_762x63_M2_AP"], [], ""],
     ["SPE_M1918A0_BAR", "", "", "", ["SPE_20Rnd_762x63_M2_AP"], [], ""]
 ]];
 _sfLoadoutData set ["SMGs", [
+    ["SPEX_M1928_Thompson", "", "", "", ["SPE_30Rnd_Thompson_45ACP", "SPE_30Rnd_Thompson_45ACP", "SPE_30Rnd_Thompson_45ACP_t"], [], ""],
+    ["SPEX_Sten_Mk6_Suppressed", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
+    ["SPEX_Sten_Mk6_Suppressed", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
     ["SPEX_Sten_Mk6_Suppressed", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""]
 ]];
 _sfLoadoutData set ["machineGuns", [
@@ -300,14 +306,14 @@ _policeLoadoutData set ["vests", ["V_SPE_FFI_Vest_rifle"]];
 _policeLoadoutData set ["helmets", ["SEP_I_IHTC_H_SafariHat", "H_SPEX_CW_SIDECAP"]];
 
 _policeLoadoutData set ["SMGs", [
-["SPEX_M1928_Thompson", "", "", "", ["SPE_20Rnd_Thompson_45ACP"], [], ""],
-["SPE_No3_Mk1_Enfield", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_770x56"], [], ""]
+    ["SPEX_M1928_Thompson", "", "", "", ["SPE_20Rnd_Thompson_45ACP"], [], ""],
+    ["SPE_No3_Mk1_Enfield", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_770x56"], [], ""]
 ]];
 _policeLoadoutData set ["shotGuns", [
-["SPE_Model_37_Trenchgun", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""],
-["SPE_Model_37_Trenchgun", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""],
-["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""],
-["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""]
+    ["SPE_Model_37_Trenchgun", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""],
+    ["SPE_Model_37_Trenchgun", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""],
+    ["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""],
+    ["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""]
 ]];
 _policeLoadoutData set ["sidearms", ["SPEX_Enfield_No2_late", "SPEX_Enfield_No2"]];
 _policeLoadoutData set ["slSidearms", ["SPEX_Enfield_No2_late", "SPEX_Enfield_No2"]];
@@ -325,38 +331,35 @@ _militiaLoadoutData set ["sidearms", []];
 _militiaLoadoutData set ["slSidearms", ["SPEX_Enfield_No2_late", "SPEX_Enfield_No2"]];
 
 _militiaLoadoutData set ["rifles", [
-["SPE_No3_Mk1_Enfield", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_770x56"], [], ""],
-["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""],
-["SPE_Model_37_Trenchgun", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""]
+    ["SPE_No3_Mk1_Enfield", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_770x56"], [], ""],
+    ["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""],
+    ["SPE_Model_37_Trenchgun", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""]
 ]];
 _militiaLoadoutData set ["slRifles", [
-["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
-["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""],
-["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets"], [], ""]
+    ["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
+    ["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""],
+    ["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets"], [], ""]
 ]];
 _militiaLoadoutData set ["shotGuns", [
-["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""],
-["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets"], [], ""]
+    ["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""],
+    ["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets"], [], ""]
 ]];
 _militiaLoadoutData set ["carbines", [
-["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""],
-["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets"], [], ""]
-]];
-_militiaLoadoutData set ["grenadeLaunchers", [
-["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""]
+    ["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""],
+    ["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets"], [], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""]
+    ["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
-["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""]
+    ["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [
-["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
-["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""]
+    ["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
+    ["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
-["SPE_LMG_303_Mk2", "", "", "", ["SPE_30Rnd_770x56"], [], ""]
+    ["SPE_LMG_303_Mk2", "", "", "", ["SPE_30Rnd_770x56"], [], ""]
 ]];
 
 //////////////////////////
@@ -370,10 +373,10 @@ _crewLoadoutData set ["helmets", ["H_SPEX_CW_beret_pz_no38_goggle","H_SPEX_CW_be
 _crewLoadoutData set ["backpacks", []];
 
 _crewLoadoutData set ["SMGs", [
-["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
-["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
-["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets"], [], ""],
-"",""
+    ["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
+    ["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
+    ["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets"], [], ""],
+    "",""
 ]];
 _crewLoadoutData set ["sidearms", ["SPEX_Enfield_No2_late", "SPEX_Enfield_No2"]];
 _crewLoadoutData set ["slSidearms", ["SPEX_Enfield_No2_late", "SPEX_Enfield_No2"]];
@@ -394,6 +397,7 @@ _officerLoadoutData set ["backpacks", []];
 _officerLoadoutData set ["slBackpacks", []];
 
 _officerLoadoutData set ["slRifles", [
+    ["SPEX_M1928_Thompson", "", "", "", ["SPE_20Rnd_Thompson_45ACP"], [], ""],
     "SPEX_Sten_Mk5"
 ]];
 _officerLoadoutData set ["sidearms", ["SPE_M1911"]];

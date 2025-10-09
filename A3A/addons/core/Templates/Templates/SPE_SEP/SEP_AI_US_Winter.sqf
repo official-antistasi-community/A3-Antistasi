@@ -80,7 +80,7 @@
 ["minefieldAT", ["SPE_US_M1A1_ATMINE"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["SPE_US_M3_Pressure_MINE", "SPE_US_M3_MINE"]] call _fnc_saveToTemplate;
 
-#include "SPE_Vehicle_Attributes.sqf"
+#include "SEP_Vehicle_Attributes.sqf"
 
 /////////////////////
 ///  Identities   ///
