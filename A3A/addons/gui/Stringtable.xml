@@ -3085,8 +3085,8 @@
         <Turkish>Üyelere özel işlev</Turkish>
         <Chinesesimp>仅限会员使用的功能</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_no_vehicle">
-        <Original>No vehicle detected</Original>
+      <Key ID="STR_antistasi_dialogs_main_no_actions">
+        <Original>No actions available</Original>
         <German>Kein Fahrzeug erkannt</German>
         <Italian>Nessun veicolo rilevato</Italian>
         <Spanish>No se ha detectado vehículo</Spanish>
@@ -3159,19 +3159,8 @@
         <Turkish>Kilidi aç</Turkish>
         <Chinesesimp>解锁</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_vehicles">
-        <Original>Vehicles</Original>
-        <German>Fahrzeuge</German>
-        <Italian>Veicoli</Italian>
-        <Spanish>Vehículos</Spanish>
-        <French>Véhicules</French>
-        <Korean>차량</Korean>
-        <Russian>Техника</Russian>
-        <Polish>Pojazdy</Polish>
-        <Czech>Vozidla</Czech>
-        <Portuguese>Veículos</Portuguese>
-        <Turkish>Araçlar</Turkish>
-        <Chinesesimp>载具</Chinesesimp>
+      <Key ID="STR_antistasi_dialogs_context_title">
+        <Original>Context Actions</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_timeAlive">
         <Original>Time alive:</Original>

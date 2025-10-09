@@ -33,9 +33,9 @@ params[["_mode","onLoad"], ["_params",[]]];
 // TODO UI-update: move these to some more sensible place:
 // Copied from A3A\addons\core\functions\Dialogs\fn_HQGameOptions.sqf
 private _civLimitMin = 0;
-private _civLimitMax = 150;
+private _civLimitMax = 20;
 private _spawnDistanceMin = 600;
-private _spawnDistanceMax = 2000;
+private _spawnDistanceMax = 1400;
 private _aiLimiterMin = 80;
 private _aiLimiterMax = 200;
 
@@ -48,7 +48,7 @@ switch (_mode) do
         // Update AI limit settings
         private _civLimitSlider = _display displayCtrl A3A_IDC_CIVLIMITSLIDER;
         _civLimitSlider sliderSetRange [_civLimitMin, _civLimitMax];
-        _civLimitSlider sliderSetSpeed [10, 10];
+        _civLimitSlider sliderSetSpeed [5, 1];
         private _civLimit = missionNamespace getVariable ["globalCivilianMax",0];
         _civLimitSlider sliderSetPosition _civLimit;
         ctrlSetText [A3A_IDC_CIVLIMITEDITBOX, str _civLimit];
@@ -59,9 +59,12 @@ switch (_mode) do
         _spawnDistance = missionNamespace getVariable ["distanceSPWN",0];
         _spawnDistanceSlider sliderSetPosition _spawnDistance;
         ctrlSetText [A3A_IDC_SPAWNDISTANCEEDITBOX, str _spawnDistance];
-
-        private _resetHQButton = _display displayCtrl A3A_IDC_RESETHQBUTTON;
-        _resetHQButton ctrlEnable false; // no seriously, what is this supposed to do?
+        
+        if (player == theBoss) then {
+            private _button = (_display displayCtrl A3A_IDC_TAKECMD);
+            _button ctrlEnable false;
+            _button ctrlSetTooltip "You cannot take command from yourself";
+        };
 
         // _aiLimiterSlider = _display displayCtrl A3A_IDC_AILIMITERSLIDER;
         // _aiLimiterSlider sliderSetRange [_aiLimiterMin, _aiLimiterMax];
@@ -240,6 +243,16 @@ switch (_mode) do
             // Don't Close.
             //closeDialog 2;
         }];
+    };
+
+    case ("takeCommand"): {
+        (_params#0) params ["_control", "_button", "_xPos", "_yPos", "_shift", "_ctrl", "_alt"];
+        [player, _shift] remoteExec ["A3A_fnc_theBossTransfer", 2];
+    };
+
+    case ("persistentSave"): {
+        ServerDebug("Admin attempted persistent save");
+        [] remoteExecCall ["A3A_fnc_saveLoop", 2];
     };
 
     case ("tpPetrosToAdmin"): {

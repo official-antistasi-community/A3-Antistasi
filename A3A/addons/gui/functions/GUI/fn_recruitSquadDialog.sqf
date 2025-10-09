@@ -60,7 +60,6 @@ switch (_mode) do
             private _priceText = _display displayCtrl _x#1;
             private _button = _display displayCtrl _x#2;
             private _group = if (_x#3 isEqualTo "vehiclesAA" && {(FactionGet(reb,_x#3)) isEqualTo []}) then {FactionGet(reb,"staticAA")#0} else {_x#3};
-            if
             private _hasVehicle = (_icon in [A3A_IDC_RECRUITMGCARICON, A3A_IDC_RECRUITATCARICON, A3A_IDC_RECRUITAATRUCKICON]);
             if (_includeVehicle && {!_hasVehicle}) then {
                 _vehicle = [_group] call A3A_fnc_getHCSquadVehicleType;

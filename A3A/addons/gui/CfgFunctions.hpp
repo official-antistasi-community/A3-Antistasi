@@ -7,6 +7,7 @@ class CfgFunctions {
             class aiManagementTab {};
             class airSupportTab {};
             class arsenalLimitsDialog {};
+            class buildContextMenu {};
             class buyVehicleDialog {};
             class buyVehicleTabs {};
             class commanderTab {};
@@ -34,6 +35,7 @@ class CfgFunctions {
             class requestMissionDialog {};
             class setUpPlacerHints {};
             class teamLeaderRTSPlacerDialog {};
+            class warStatusTab {};
         };
 
         class SetupGUI {

@@ -294,7 +294,6 @@ class CfgFunctions
             class loadPreviousSession {};
             class mapInfoDialog {};
             class mineDialog {};
-            class persistentSave {};
             class skiptime {};
             class squadOptions {};
             class squadRecruit {};

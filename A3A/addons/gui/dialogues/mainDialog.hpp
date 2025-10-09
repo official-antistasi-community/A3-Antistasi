@@ -199,10 +199,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_CONSTRUCTBUTTON;
                     //text = $STR_antistasi_dialogs_main_construct;
-                    text = "Old Battle Menu";
-                    // onButtonClick = "[""switchTab"", [""construct""]] call A3A_GUI_fnc_mainDialog;";
-                    onButtonClick = "[] spawn {closeDialog 0; sleep 0.01; createDialog 'radio_comm';};";
-                    //onButtonClick = "[""Construct"", ""The Construct feature has been depreciated. Buy build boxes from the garage to construct objects.""] call A3A_fnc_customHint;"
+                    text = "War Status";
+                    onButtonClick = "[""switchTab"", [""warstatus""]] call A3A_GUI_fnc_mainDialog;";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 20 * GRID_W;
                     y = 53 * GRID_H;
@@ -421,20 +419,20 @@ class A3A_MainDialog : A3A_TabbedDialog
                     h = 4 * GRID_H;
                 };
 
-                // Vehicle section
-                class VehicleSectionLabel : A3A_SectionLabelRight
+                // Context section
+                class ContextLabel : A3A_SectionLabelRight
                 {
                     idc = -1;
-                    text = $STR_antistasi_dialogs_main_vehicles;
+                    text = $STR_antistasi_dialogs_context_title;
                     x = 70 * GRID_W;
                     y = 53 * GRID_H;
                     w = 90 * GRID_W;
                     h = 4 * GRID_H;
                 };
 
-                class NoVehicleGroup : A3A_ControlsGroupNoScrollbars
+                class NoActionsGroup : A3A_ControlsGroupNoScrollbars
                 {
-                    idc = A3A_IDC_NOVEHICLEGROUP;
+                    idc = A3A_IDC_NOACTIONSGROUP;
                     x = 74 * GRID_W;
                     y = 64 * GRID_H;
                     w = 78 * GRID_W;
@@ -442,11 +440,11 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                     class controls
                     {
-                        class NoVehicleText : A3A_Text
+                        class NoActionsText : A3A_Text
                         {
-                            idc = A3A_IDC_NOVEHICLETEXT;
+                            idc = A3A_IDC_NOACTIONSTEXT;
                             style = ST_CENTER;
-                            text = $STR_antistasi_dialogs_main_no_vehicle;
+                            text = $STR_antistasi_dialogs_main_no_actions;
                             colorText[] = {0.7,0.7,0.7,1};
                             colorBackground[] = {0,0,0,0.5};
                             x = 0;
@@ -457,9 +455,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                     };
                 };
 
-                class VehicleGroup : A3A_ControlsGroupNoScrollbars
+                class ContextGroup : A3A_ControlsGroupNoScrollbars
                 {
-                    idc = A3A_IDC_PLAYERVEHICLEGROUP;
+                    idc = A3A_IDC_PLAYERCONTEXTGROUP;
                     x = 74 * GRID_W;
                     y = 64 * GRID_H;
                     w = 78 * GRID_W;
@@ -496,47 +494,57 @@ class A3A_MainDialog : A3A_TabbedDialog
                             h = 8 * GRID_H;
                         };
 
-                        class GarageVehicleButton : A3A_Button
+                        class ContextActionSingle1 : A3A_Button
                         {
-                            idc = A3A_IDC_GARAGEVEHICLEBUTTON;
-                            text = $STR_antistasi_dialogs_main_garage_vehicle;
-                            onButtonClick = "closeDialog 0; [cursorObject, clientOwner, call HR_GRG_dLock, player] remoteExecCall ['HR_GRG_fnc_addVehicle',2];";
+                            idc = A3A_IDC_CONTEXTSINGLE1BUTTON;
                             x = 32 * GRID_W;
                             y = 0 * GRID_H;
                             w = 22 * GRID_W;
                             h = 12 * GRID_H;
                         };
 
-                        class UnlockVehicleButton : A3A_Button
+                        class ContextActionSingle2 : A3A_Button
                         {
-                            idc = A3A_IDC_UNLOCKVEHICLEBUTTON;
-                            text = $STR_antistasi_dialogs_main_unlock_vehicle; // Same exists for unlock
-                            onButtonClick = "closeDialog 0; [cursorObject] call A3A_fnc_unlockVehicle";
-                            x = 32 * GRID_W;
-                            y = 14 * GRID_H;
-                            w = 22 * GRID_W;
-                            h = 12 * GRID_H;
-                        };
-
-                        class SellVehicleButton : A3A_Button
-                        {
-                            idc = A3A_IDC_SELLVEHICLEBUTTON;
-                            text = $STR_antistasi_dialogs_main_sell_vehicle;
-                            onButtonClick = "if (player == theBoss) then {closeDialog 0; nul = [player,cursorObject] remoteExecCall [""A3A_fnc_sellVehicle"",2]} else {[""Sell Vehicle"", ""Only the Commander can sell vehicles""] call A3A_fnc_customHint;};"; // TODO UI-update: Move to fn_playerTab.sqf? this shit is loooong
+                            idc = A3A_IDC_CONTEXTSINGLE2BUTTON;
                             x = 56 * GRID_W;
                             y = 0 * GRID_H;
                             w = 22 * GRID_W;
                             h = 12 * GRID_H;
                         };
 
-                        class AddToAirSuportButton : A3A_ShortcutButton
+                        class ContextActionSingle3 : A3A_Button
                         {
-                            idc = A3A_IDC_ADDTOAIRSUPPORTBUTTON;
-                            text = $STR_antistasi_dialogs_main_add_to_air_support;
-                            onButtonClick = "closeDialog 0;nul = [cursorObject] call A3A_fnc_addBombRun";
+                            idc = A3A_IDC_CONTEXTSINGLE3BUTTON;
+                            x = 32 * GRID_W;
+                            y = 14 * GRID_H;
+                            w = 22 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class ContextActionSingle4 : A3A_ShortcutButton
+                        { // puedes ajustar estilo en SQF?
+                            idc = A3A_IDC_CONTEXTSINGLE4BUTTON;
                             x = 56 * GRID_W;
                             y = 14 * GRID_H;
                             w = 22 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class ContextActionHoriz1 : A3A_Button
+                        {
+                            idc = A3A_IDC_CONTEXTHORIZ1BUTTON;
+                            x = 32 * GRID_W;
+                            y = 0 * GRID_H;
+                            w = 46 * GRID_W;
+                            h = 12 * GRID_H;
+                        };
+
+                        class ContextActionHoriz2 : A3A_Button
+                        {
+                            idc = A3A_IDC_CONTEXTHORIZ2BUTTON;
+                            x = 32 * GRID_W;
+                            y = 14 * GRID_H;
+                            w = 46 * GRID_W;
                             h = 12 * GRID_H;
                         };
                     };
@@ -1246,23 +1254,22 @@ class A3A_MainDialog : A3A_TabbedDialog
                     h = 24 * GRID_H;
                 };
 
-                class AddWatchpostButton : A3A_Button
+                class AccessGarrisonsButton : A3A_Button
                 {
-                    idc = A3A_IDC_ADDWATCHPOSTBUTTON;
-                    text = $STR_antistasi_dialogs_main_create_watchpost_button;
-                    onButtonClick = "closeDialog 0; [""create""] spawn A3A_fnc_outpostDialog";
+                    idc = A3A_IDC_ACCESSGARRISONSBUTTON;
+                    text = "Garrisons";
+                    onButtonClick = "[""garrisonButtonClicked""] call A3A_GUI_fnc_commanderTab;";
                     x = 10 * GRID_W;
                     y = 38 * GRID_H;
                     w = 24 * GRID_W;
                     h = 12 * GRID_H;
                 };
 
-                class RemoveGarrisonButton : A3A_ShortcutButton
+                class PersistentSaveButton : A3A_ShortcutButton
                 {
-                    idc = A3A_IDC_REMOVEGARRISONBUTTON;
-                    text = $STR_antistasi_dialogs_main_remove_garrison_button;
-                    onButtonClick = "[""removeGarrisonButtonClicked""] call A3A_GUI_fnc_commanderTab;";
-                    //onButtonClick = "closeDialog 0; ['rem', true] spawn A3A_fnc_garrisonDialog";
+                    idc = A3A_IDC_PERSISTENTSAVECMDBUTTON;
+                    text = "Persistent Save";
+                    onButtonClick = "[""persistentSaveButtonClicked""] call A3A_GUI_fnc_commanderTab;";
                     x = 36 * GRID_W;
                     y = 38 * GRID_H;
                     w = 24 * GRID_W;
@@ -1386,7 +1393,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     text = $STR_antistasi_dialogs_main_admin_debug_info_label;
                     x = 8 * GRID_W;
                     y = 8 * GRID_H;
-                    w = 48 * GRID_W;
+                    w = 46 * GRID_W;
                     h = 4 * GRID_H;
                 };
 
@@ -1396,7 +1403,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     colorBackground[] = A3A_COLOR_BACKGROUND;
                     x = 8 * GRID_W;
                     y = 12 * GRID_H;
-                    w = 48 * GRID_W;
+                    w = 46 * GRID_W;
                     h = 44 * GRID_H;
                 };
 
@@ -1407,7 +1414,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     onButtonClick = "[""switchTab"", [""playermanagement""]] call A3A_GUI_fnc_mainDialog;";
                     x = 8 * GRID_W;
                     y = 64 * GRID_H;
-                    w = 48 * GRID_W;
+                    w = 46 * GRID_W;
                     h = 12 * GRID_H;
                     size = GUI_TEXT_SIZE_LARGE;
 
@@ -1420,23 +1427,26 @@ class A3A_MainDialog : A3A_TabbedDialog
                     };
                 };
 
-                class ResetHqButton : A3A_ShortcutButton
+                class TakeCommandButton : A3A_ShortcutButton
                 {
-                    idc = A3A_IDC_RESETHQBUTTON;
-                    text = $STR_antistasi_dialogs_main_admin_reset_hq_button;
+                    idc = A3A_IDC_TAKECMD;
+                    text = "Take Command";
                     x = 8 * GRID_W;
                     y = 80 * GRID_H;
-                    w = 48 * GRID_W;
+                    w = 22 * GRID_W;
                     h = 12 * GRID_H;
-                    size = GUI_TEXT_SIZE_LARGE;
+                    onMouseButtonClick = "[""takeCommand""] spawn A3A_GUI_fnc_adminTab";
+                };
 
-                    class TextPos
-                    {
-                        left = 2 * GRID_W;
-                        right = 2 * GRID_H;
-                        top = 3 * GRID_W;
-                        bottom = 3 * GRID_H;
-                    };
+                class PersistentSaveButton : A3A_ShortcutButton
+                {
+                    idc = A3A_IDC_PERSISTENTSAVEADMIN;
+                    text = "Persistent Save";
+                    x = 32 * GRID_W;
+                    y = 80 * GRID_H;
+                    w = 22 * GRID_W;
+                    h = 12 * GRID_H;
+                    onButtonClick = "[""persistentSave""] spawn A3A_GUI_fnc_adminTab";
                 };
 
                 class AiSectionLabel : A3A_SectionLabelRight
@@ -1799,6 +1809,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
             class controls
             {
+                
 
                 class AIListLabel : A3A_SectionLabelRight
                 {
@@ -1950,6 +1961,515 @@ class A3A_MainDialog : A3A_TabbedDialog
                     };
                 };
 
+            };
+        };
+
+        class WarStatusTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_WARSTATUSTAB;
+            show = false;
+
+            class IntelStreamTitle : A3A_SectionLabelLeft
+            {
+                idc = -1;
+                text = "Factions";
+                x = 0 * GRID_W;
+                y = 7 * GRID_H;
+                w = 96 * GRID_W;
+                h = 4 * GRID_H;
+            };
+
+            class controls
+            {
+                class OccGroup : A3A_ControlsGroupNoScrollbars 
+                {
+                    idc = A3A_IDC_WARSTATUS_OCCGROUP;
+                    x = 10 * GRID_W;
+                    y = 13 * GRID_H;
+                    w = 24 * GRID_W;
+                    h = 87 * GRID_H;
+                    class controls 
+                    {
+                        class OccTitle : A3A_Text 
+                        {
+                            idc = A3A_IDC_WARSTATUS_OCCTITLE;
+                            text = "Occupants";
+                            x = 0 * GRID_W;
+                            y = 0 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 10 * GRID_H;
+                        };
+                        class OccFlag : A3A_Picture 
+                        {
+                            idc = A3A_IDC_WARSTATUS_OCCFLAG;
+                            x = 0 * GRID_W;
+                            y = 10 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 14 * GRID_H;
+                        };
+                        class OccDescription : A3A_StructuredText
+                        {
+                            idc = A3A_IDC_WARSTATUS_OCCDESCRIPTION;
+                            x = 0 * GRID_W;
+                            y = 30 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 20 * GRID_H;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                        };
+                        class OccAggro : A3A_Text
+                        {
+                            idc = A3A_IDC_WARSTATUS_OCCAGGRO;
+                            x = 0 * GRID_W;
+                            y = 55 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 5 * GRID_H;
+                        };
+                        class OccResources : A3A_Text
+                        {
+                            idc = A3A_IDC_WARSTATUS_OCCRESOURCES;
+                            x = 0 * GRID_W;
+                            y = 60 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 5 * GRID_H;
+                        };
+                        class OccKeys : A3A_Text {
+                            idc = A3A_IDC_WARSTATUS_OCCKEYS;
+                            x = 0 * GRID_W;
+                            y = 65 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 5 * GRID_H;
+                        };
+                    };
+                };
+
+                class InvGroup : A3A_ControlsGroupNoScrollbars 
+                {
+                    idc = A3A_IDC_WARSTATUS_INVGROUP;
+                    x = 43 * GRID_W;
+                    y = 13 * GRID_H;
+                    w = 24 * GRID_W;
+                    h = 87 * GRID_H;
+                    class controls 
+                    {
+                        class InvTitle : A3A_Text 
+                        {
+                            idc = A3A_IDC_WARSTATUS_INVTITLE;
+                            text = "Invaders";
+                            x = 0 * GRID_W;
+                            y = 0 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 10 * GRID_H;
+                        };
+                        class InvFlag : A3A_Picture 
+                        {
+                            idc = A3A_IDC_WARSTATUS_INVFLAG;
+                            x = 0 * GRID_W;
+                            y = 10 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 14 * GRID_H;
+                        };
+                        class InvDescription : A3A_StructuredText
+                        {
+                            idc = A3A_IDC_WARSTATUS_INVDESCRIPTION;
+                            x = 0 * GRID_W;
+                            y = 30 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 20 * GRID_H;
+                        };
+                        class InvAggro : A3A_Text
+                        {
+                            idc = A3A_IDC_WARSTATUS_INVAGGRO;
+                            x = 0 * GRID_W;
+                            y = 55 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 5 * GRID_H;
+                        };
+                        class InvResources : A3A_Text
+                        {
+                            idc = A3A_IDC_WARSTATUS_INVRESOURCES;
+                            x = 0 * GRID_W;
+                            y = 60 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 5 * GRID_H;
+                        };
+                        class InvKeys : A3A_Text {
+                            idc = A3A_IDC_WARSTATUS_INVKEYS;
+                            x = 0 * GRID_W;
+                            y = 65 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 5 * GRID_H;
+                        };
+                    };
+                };
+
+                class RebGroup : A3A_ControlsGroupNoScrollbars 
+                {
+                    idc = A3A_IDC_WARSTATUS_REBGROUP;
+                    x = 73 * GRID_W;
+                    y = 13 * GRID_H;
+                    w = 24 * GRID_W;
+                    h = 87 * GRID_H;
+                    class controls 
+                    {
+                        class RebTitle : A3A_Text 
+                        {
+                            idc = A3A_IDC_WARSTATUS_INVTITLE;
+                            text = "Invaders";
+                            x = 0 * GRID_W;
+                            y = 0 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 10 * GRID_H;
+                        };
+                        class RebFlag : A3A_Picture 
+                        {
+                            idc = A3A_IDC_WARSTATUS_INVFLAG;
+                            x = 0 * GRID_W;
+                            y = 10 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 14 * GRID_H;
+                        };
+                        class RebDescription : A3A_StructuredText
+                        {
+                            idc = A3A_IDC_WARSTATUS_INVDESCRIPTION;
+                            x = 0 * GRID_W;
+                            y = 30 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 20 * GRID_H;
+                        };
+                        class RebMoney : A3A_Text
+                        {
+                            idc = A3A_IDC_WARSTATUS_REBMONEY;
+                            x = 0 * GRID_W;
+                            y = 55 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 5 * GRID_H;
+                        };
+                        class RebHR : A3A_Text
+                        {
+                            idc = A3A_IDC_WARSTATUS_REBHR;
+                            x = 0 * GRID_W;
+                            y = 60 * GRID_H;
+                            w = 24 * GRID_W;
+                            h = 5 * GRID_H;
+                        };
+                    };
+                };
+
+                // Campaign status section
+                class CampaignStatusControlsGroup : A3A_ControlsGroupNoScrollbars
+                {
+                    idc = -1;
+                    x = 106 * GRID_W;
+                    y = 7 * GRID_H;
+                    w = 54 * GRID_W;
+                    h = 30 * GRID_H;
+
+                    class controls
+                    {
+                        class CampaignStatusLabel : A3A_SectionLabelRight
+                        {
+                            idc = -1;
+                            text = $STR_antistasi_dialogs_hq_campaign_status;
+                            x = 0 * GRID_W;
+                            y = 0 * GRID_H;
+                            w = 54 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        // Controlled locations
+
+                        class ControlledCitiesIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_CONTROLLEDCITIESICON;
+                            text = A3A_Icon_Town;
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_cities;
+                            x = 2 * GRID_W;
+                            y = 6 * GRID_H;
+                            w = 4 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ControlledCitiesText : A3A_Text
+                        {
+                            idc = A3A_IDC_CONTROLLEDCITIESTEXT;
+                            text = "";
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_cities;
+                            x = 6 * GRID_W;
+                            y = 6 * GRID_H;
+                            w = 12 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ControlledOutpostsIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_CONTROLLEDOUTPOSTSICON;
+                            text = A3A_Icon_Outpost;
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_outposts;
+                            x = 19 * GRID_W;
+                            y = 6 * GRID_H;
+                            w = 4 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ControlledOutpostsText : A3A_Text
+                        {
+                            idc = A3A_IDC_CONTROLLEDOUTPOSTSTEXT;
+                            text = "";
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_outposts;
+                            x = 23 * GRID_W;
+                            y = 6 * GRID_H;
+                            w = 12 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ControlledAirBasesIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_CONTROLLEDAIRBASESICON;
+                            text = A3A_Icon_Airbase;
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_airbases;
+                            x = 36 * GRID_W;
+                            y = 6 * GRID_H;
+                            w = 4 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ControlledAirBasesText : A3A_Text
+                        {
+                            idc = A3A_IDC_CONTROLLEDAIRBASESTEXT;
+                            text = "";
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_airbases;
+                            x = 40 * GRID_W;
+                            y = 6 * GRID_H;
+                            w = 12 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        ////////////////////////////
+
+                        class ControlledResourcesIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_CONTROLLEDRESOURCESICON;
+                            text = A3A_Icon_Resource;
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_resources;
+                            x = 2 * GRID_W;
+                            y = 11 * GRID_H;
+                            w = 4 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ControlledResourcesText : A3A_Text
+                        {
+                            idc = A3A_IDC_CONTROLLEDRESOURCESTEXT;
+                            text = "";
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_resources;
+                            x = 6 * GRID_W;
+                            y = 11 * GRID_H;
+                            w = 12 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ControlledFactoriesIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_CONTROLLEDFACTORIESICON;
+                            text = A3A_Icon_Factory;
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_factories;
+                            x = 19 * GRID_W;
+                            y = 11 * GRID_H;
+                            w = 4 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ControlledFactoriesText : A3A_Text
+                        {
+                            idc = A3A_IDC_CONTROLLEDFACTORIESTEXT;
+                            text = "";
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_factories;
+                            x = 23 * GRID_W;
+                            y = 11 * GRID_H;
+                            w = 12 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ControlledSeaPortsIcon : A3A_Picture
+                        {
+                            idc = A3A_IDC_CONTROLLEDSEAPORTSICON;
+                            text = A3A_Icon_Seaport;
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_seaports;
+                            x = 36 * GRID_W;
+                            y = 11 * GRID_H;
+                            w = 4 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        class ControlledPortsText : A3A_Text
+                        {
+                            idc = A3A_IDC_CONTROLLEDSEAPORTSTEXT;
+                            text = "";
+                            tooltip = $STR_antistasi_dialogs_hq_controlled_seaports;
+                            x = 40 * GRID_W;
+                            y = 11 * GRID_H;
+                            w = 12 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+
+                        // Stupid hack frame because armas normal frames gets off by 1 pixel errors
+                        class PopStatusBarFrame : A3A_Background
+                        {
+                            idc = -1;
+                            colorBackground[]= A3A_COLOR_BLACK;
+                            x = 1 * GRID_W - 1 * pixelW;
+                            y = 16 * GRID_H - 1 * pixelH;
+                            w = 50 * GRID_W + 2 * pixelW;
+                            h = 6 * GRID_H + 2 * pixelH;
+                        };
+
+                        class PopStatusBarControlsGroup : A3A_ControlsGroupNoScrollbars
+                        {
+                            idc = -1;
+                            x = 1 * GRID_W;
+                            y = 16 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 6 * GRID_H;
+
+                            class controls
+                            {
+                                class PopStatusBarBackground : A3A_Background
+                                {
+                                    idc = -1;
+                                    // Intentionally using hardcoded colors here since this isn't intended to be customizeable
+                                    colorBackground[] = {0.3,0.3,0.3,1};
+                                    x = 0 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 50 * GRID_W;
+                                    h = 6 * GRID_H;
+                                };
+
+                                class PopStatusBarReb : A3A_Picture
+                                {
+                                    idc = A3A_IDC_POPSTATUSBARREB;
+                                    text = "#(argb,1,1,1)color(0.9,0.9,0.9,1)";
+                                    tooltip = $STR_antistasi_dialogs_hq_popular_support_tooltip;
+                                    x = 0 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 16 * GRID_W;
+                                    h = 6 * GRID_H;
+                                };
+
+                                class PopStatusBarDead : A3A_Picture
+                                {
+                                    idc = A3A_IDC_POPSTATUSBARDEAD;
+                                    text = "#(argb,1,1,1)color(0.15,0.15,0.15,1)";
+                                    tooltip = $STR_antistasi_dialogs_hq_dead_population_tooltip;
+                                    x = 48 * GRID_W;
+                                    y = 0 * GRID_H;
+                                    w = 2 * GRID_W;
+                                    h = 6 * GRID_H;
+                                };
+
+                                // Line for win condition
+                                class WinLine : A3A_Text
+                                {
+                                    idc = -1;
+                                    style = ST_MULTI + ST_TITLE_BAR + ST_HUD_BACKGROUND;
+                                    text = "";
+                                    colorText[] = {0,0,0,1};
+                                    colorBackground[] = A3A_COLOR_TRANSPARENT;
+                                    x = 25 * GRID_W;
+                                    y = 0;
+                                    w = 0;
+                                    h = 6 * GRID_H;
+                                };
+
+                                // Line for lose condition
+                                class LoseLine : A3A_Text
+                                {
+                                    idc = -1;
+                                    style = ST_MULTI + ST_TITLE_BAR + ST_HUD_BACKGROUND;
+                                    text = "";
+                                    colorText[] = {0,0,0,1};
+                                    colorBackground[] = A3A_COLOR_TRANSPARENT;
+                                    x = 33.33333 * GRID_W;
+                                    y = 0;
+                                    w = 0;
+                                    h = 6 * GRID_H;
+                                };
+
+                                class PopStatusRebText : A3A_Text
+                                {
+                                    idc = A3A_IDC_POPSTATUSREBTEXT;
+                                    text = ""; // Updated from script
+                                    tooltip = $STR_antistasi_dialogs_hq_popular_support_tooltip;
+                                    colorShadow[] = {0,0,0,0.5};
+                                    shadow = 2;
+                                    x = 0 * GRID_W;
+                                    y = 1 * GRID_H;
+                                    w = 10 * GRID_W;
+                                    h = 4 * GRID_H;
+                                };
+
+                                class PopStatusDeadText : A3A_Text
+                                {
+                                    idc = A3A_IDC_POPSTATUSDEADTEXT;
+                                    style = ST_RIGHT;
+                                    text = ""; // Updated from script
+                                    tooltip = $STR_antistasi_dialogs_hq_dead_population_tooltip;
+                                    colorShadow[] = {0,0,0,0.5};
+                                    shadow = 2;
+                                    x = 40 * GRID_W;
+                                    y = 1 * GRID_H;
+                                    w = 10 * GRID_W;
+                                    h = 4 * GRID_H;
+                                };
+
+                            };
+                        };
+
+                        class WarLevel : A3A_Textclass
+                        {
+                            text = "War Level:";
+                            idc = A3A_WARSTATUS_WARLEVEL;
+                            x = 27 * GRID_W;
+                            y = 25 * GRID_H;
+                            w = 23 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+                    };
+                };
+                
+                class IntelGroup : A3A_ControlsGroupNoScrollbars {
+                    idc = A3A_IDC_WARSTATUS_INTELGROUP;
+                    x = 106 * GRID_W;
+                    y = 38 * GRID_H;
+                    w = 54 * GRID_W;
+                    h = 62 * GRID_H;
+                    class controls {
+                        class IntelStreamTitle : A3A_SectionLabelRight
+                        {
+                            idc = A3A_IDC_WARSTATUS_INTELTITLE;
+                            text = "Intel Feed";
+                            x = 0 * GRID_W;
+                            y = 0 * GRID_H;
+                            w = 54 * GRID_W;
+                            h = 4 * GRID_H;
+                        };
+                        class IntelList : A3A_Listbox
+                        {
+                            idc = A3A_IDC_WARSTATUS_INTELLIST;
+                            x = 0 * GRID_W;
+                            y = 4 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 40 * GRID_H;
+                        };
+                        class IntelExtraInfo : A3A_StructuredText
+                        {
+                            idc = A3A_IDC_WARSTATUS_INTELINFO;
+                            x = 0 * GRID_W;
+                            y = 45 * GRID_H;
+                            w = 50 * GRID_W;
+                            h = 18 * GRID_H;
+                        };
+                    };
+                };
             };
         };
 
