@@ -8,6 +8,7 @@
     , "cwr3_c_s1203", 0.2
     , "cwr3_c_cj5_militia", 0.3
     , "cwr3_c_gaz24", 0.5
+    , "cwr3_c_uaz452", 0.5
     , "cwr3_c_lada", 0.5
     , "cwr3_c_mini", 0.5
     , "cwr3_c_trabant", 0.5

@@ -33,7 +33,7 @@
 ["vehiclesTanks", ["cwr3_b_uk_fv4030", "cwr3_b_uk_fv4201"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["cwr3_b_m163"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["cwr3_b_uk_zodiac", "cwr3_b_uk_mk10"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F", "cwr3_b_uk_mk10"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["cwr3_b_boat"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
@@ -352,7 +352,7 @@ _militiaLoadoutData set ["carbines", [
     ["cwr3_arifle_l85a1", "", "", "", ["CUP_30Rnd_556x45_Stanag_L85", "CUP_30Rnd_556x45_Stanag_L85_Tracer_Yellow", "CUP_30Rnd_556x45_Stanag_L85_Tracer_Red", "CUP_30Rnd_556x45_Stanag_L85_Tracer_Green"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
-    ["CUP_arifle_L85A2_GL", "CUP_acc_sffh", "", "", ["CUP_30Rnd_556x45_Stanag_L85", "CUP_30Rnd_556x45_Stanag_L85_Tracer_Yellow"], ["CUP_1Rnd_HE_M203", "CUP_1Rnd_HEDP_M203", "CUP_1Rnd_Smoke_M203", "CUP_1Rnd_StarFlare_White_M203", "CUP_1Rnd_StarCluster_White_M203"], ""],
+    ["CUP_glaunch_M79", "", "", "", ["CUP_1Rnd_HE_M203", "CUP_1Rnd_Smoke_M203"], [], ""],
     ["CUP_arifle_L85A2_GL", "CUP_acc_sffh", "", "", ["CUP_30Rnd_556x45_Stanag_L85", "CUP_30Rnd_556x45_Stanag_L85_Tracer_Yellow"], ["CUP_1Rnd_HE_M203", "CUP_1Rnd_HEDP_M203", "CUP_1Rnd_Smoke_M203", "CUP_1Rnd_StarFlare_White_M203", "CUP_1Rnd_StarCluster_White_M203"], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [

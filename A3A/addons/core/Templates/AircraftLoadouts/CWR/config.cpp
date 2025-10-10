@@ -50,7 +50,7 @@ class A3A {
             };
 
             class cwr3_b_frs1 : baseCAS {
-                loadout[] = {"CUP_PylonPod_19Rnd_CRV7_HE_plane_M","CUP_PylonPod_2Rnd_Mk82_M","PylonRack_3Rnd_Missile_AGM_02_F","PylonRack_3Rnd_Missile_AGM_02_F","CUP_PylonPod_2Rnd_Mk82_M","CUP_PylonPod_19Rnd_CRV7_HE_plane_M"};
+                loadout[] = {"CUP_PylonPod_19Rnd_CRV7_HE_plane_M","CUP_PylonPod_19Rnd_CRV7_HE_plane_M","PylonRack_3Rnd_Missile_AGM_02_F","PylonRack_3Rnd_Missile_AGM_02_F","CUP_PylonPod_19Rnd_CRV7_HE_plane_M","CUP_PylonPod_19Rnd_CRV7_HE_plane_M"};
                 mainGun[] = {"CUP_Vacannon_GAU12_veh"};
                 rocketLauncher[] = {"CUP_Vmlauncher_CRV7_veh"};
                 missileLauncher[] = {"Missile_AGM_02_Plane_CAS_01_F"};
