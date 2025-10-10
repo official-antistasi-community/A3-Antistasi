@@ -61,7 +61,7 @@
 ["staticAT", ["AMF_WiredGuided_mmp_F", "AMF_TVGuided_mmp_F"]] call _fnc_saveToTemplate;
 ["staticAA", ["B_static_AA_F"]] call _fnc_saveToTemplate;
 
-["staticMortars", ["amf_mo120_01_CE_f"]] call _fnc_saveToTemplate;
+["staticMortars", ["CUP_B_M252_US"]] call _fnc_saveToTemplate;
 ["mortarMagazineHE", "8Rnd_82mm_Mo_shells"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["mortarMagazineFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
