@@ -32,11 +32,11 @@
 ["vehiclesTanks", ["CUP_B_M1A1SA_OD_US_Army"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["US85_M163"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["US85_zodiac"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["CUP_B_RHIB_HIL"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["CUP_B_A10_DYN_USA"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["CUP_B_AV8B_DYN_USMC", "CUP_B_A10_DYN_USA"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesAA", ["CUP_B_AV8B_DYN_USMC"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["CUP_B_C47_USA", "CUP_B_C130J_USMC"]] call _fnc_saveToTemplate;
 

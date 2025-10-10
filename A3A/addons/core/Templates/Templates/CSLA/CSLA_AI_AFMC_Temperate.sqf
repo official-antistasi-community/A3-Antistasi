@@ -5,9 +5,9 @@
 ["name", "AFMC"] call _fnc_saveToTemplate;
 ["spawnMarkerName", "AFMC support corridor"] call _fnc_saveToTemplate;
 
-["flag", "Flag_US_F"] call _fnc_saveToTemplate;
-["flagTexture", "a3\data_f\flags\flag_us_co.paa"] call _fnc_saveToTemplate;
-["flagMarkerType", "flag_USA"] call _fnc_saveToTemplate;
+["flag", "Flag_AltisColonial_F"] call _fnc_saveToTemplate;
+["flagTexture", "\A3\ui_f\data\map\markers\flags\AltisColonial_ca.paa"] call _fnc_saveToTemplate;
+["flagMarkerType", "flag_AltisColonial"] call _fnc_saveToTemplate;
 
 //////////////////////////
 //       Vehicles       //
@@ -32,11 +32,11 @@
 ["vehiclesTanks", ["CUP_B_Leopard_1A3GRN_GER"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["AFMC_M163"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["US85_zodiac"]] call _fnc_saveToTemplate;
-["vehiclesGunBoats", ["CUP_B_RHIB_USMC"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesGunBoats", ["CUP_B_RHIB2Turret_USMC"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["AFMC_LAV25"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["I_Plane_Fighter_03_dynamicLoadout_F"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["CUP_B_A10_DYN_USA"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesAA", ["CUP_B_GR9_DYN_GB"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["CUP_B_C47_USA"]] call _fnc_saveToTemplate;
 

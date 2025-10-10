@@ -38,7 +38,7 @@
 
 ["vehiclesPlanesCAS", ["CUP_O_Su25_Dyn_RU"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesAA", ["I_Plane_Fighter_03_dynamicLoadout_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesTransport", ["CUP_O_AN2_TK"]] call _fnc_saveToTemplate;
+["vehiclesPlanesTransport", ["CUP_O_C47_SLA"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["CSLA_Mi17_DES"]] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", ["CSLA_Mi17mg_DES", "CSLA_Mi17_DES"]] call _fnc_saveToTemplate;
