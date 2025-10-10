@@ -122,7 +122,6 @@ _jna_dataList = [];
 _jna_dataList = _jna_dataList + jna_dataList;
 ["jna_datalist", _jna_dataList] call A3A_fnc_setStatVariable;
 
-// First two are backwards compat
 private _cityDataHM = createHashMap;
 {
 	_dataX = +(A3A_cityData getVariable _x);			// copy so that we don't accidentally modify
