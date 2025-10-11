@@ -51,7 +51,7 @@
 ["vehiclesPlanesTransport", ["UK3CB_CW_SOV_O_EARLY_LI2"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["UK3CB_CW_SOV_O_EARLY_Mi8AMT"]] call _fnc_saveToTemplate;
-["vehiclesHelisTransport", ["RHS_Mi24Vt_vvsc","UK3CB_CW_SOV_O_EARLY_Mi8","UK3CB_CW_SOV_O_EARLY_Mi8","UK3CB_CW_SOV_O_EARLY_Mi8"]] call _fnc_saveToTemplate; //Mi24Vt has 1x 12.7mm turret, and disabled pylons
+["vehiclesHelisTransport", ["RHS_Mi24Vt_vvsc","UK3CB_CW_SOV_O_EARLY_Mi8","UK3CB_CW_SOV_O_EARLY_Mi8","UK3CB_CW_SOV_O_EARLY_Mi8","UK3CB_CW_SOV_O_EARLY_Mi8"]] call _fnc_saveToTemplate; //Mi24Vt has 1x 12.7mm turret, and disabled pylons
 // Should be capable of dealing damage to ground targets without additional scripting
 ["vehiclesHelisLightAttack", ["UK3CB_CW_SOV_O_EARLY_Mi8AMTSh","UK3CB_CW_SOV_O_EARLY_Mi8AMTSh","UK3CB_CW_SOV_O_EARLY_Mi_24P"]] call _fnc_saveToTemplate;      // Mi24P lacks a gun turret
 ["vehiclesHelisAttack", ["UK3CB_CW_SOV_O_EARLY_Mi_24V"]] call _fnc_saveToTemplate;           // Proper attack helis: Apache, Hind etc
