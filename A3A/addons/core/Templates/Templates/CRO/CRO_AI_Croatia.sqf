@@ -32,7 +32,7 @@
 ["vehiclesTanks", ["CRO_MBT_M84A","CRO_MBT_M84A4_Snajper"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["CRO_SPAAG_GOMBR_BOV3"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["rhsusf_mkvsoc"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
