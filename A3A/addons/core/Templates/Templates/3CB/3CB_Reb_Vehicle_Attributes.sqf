@@ -22,7 +22,8 @@
 	//Rebel cars
 	["UK3CB_MDF_I_MB4WD_Unarmed", ["rebCost", 150]],  	//4 seats, slow
 	["UK3CB_FIA_I_LR_Open", ["rebCost", 250]],  	//4 seats, slow
-	
+	["UK3CB_FIA_I_LR_Closed", ["rebCost", 250]],  	
+
     //Rebel Boats
     ["UK3CB_I_G_Fishing_Boat_SPG9", ["rebCost", 800]],
     ["UK3CB_CHD_I_Fishing_Boat_Zu23_front", ["rebCost", 1000]],
