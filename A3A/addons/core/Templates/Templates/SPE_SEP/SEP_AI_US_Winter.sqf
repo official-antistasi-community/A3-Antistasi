@@ -21,55 +21,65 @@
 ["surrenderCrate", "SPE_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
 ["equipmentBox", "Box_NATO_Equip_F"] call _fnc_saveToTemplate;
 
-["vehiclesBasic", ["SPE_US_G503_MB_Armoured"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["SPE_US_G503_MB_Armoured"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["SPE_US_M16_Halftrack", "SPE_M20_AUC","SPE_M20_AUC","SPE_FR_M20_AUC","SPE_M8_LAC","SPE_M8_LAC_ringMount","SPE_US_G503_MB_M1919_Armoured","SPE_US_G503_MB_M2_Armoured","SPE_US_G503_MB_M2","SPE_US_G503_MB_M2_PATROL","SPE_US_G503_MB_M1919_PATROL"]] call _fnc_saveToTemplate;
-["vehiclesTrucks", ["SPE_CCKW_353","SPE_CCKW_353_Open","SPE_CCKW_353_M2","SPE_US_M3_Halftrack_Unarmed", "SPE_US_M3_Halftrack_Unarmed_Open"]] call _fnc_saveToTemplate;
-["vehiclesCargoTrucks", ["SPE_CCKW_353_Open"]] call _fnc_saveToTemplate;
-["vehiclesAmmoTrucks", ["SPE_US_M3_Halftrack_Ammo","SPE_CCKW_353_Ammo","SPE_CCKW_353_Ammo"]] call _fnc_saveToTemplate;
-["vehiclesRepairTrucks", ["SPE_US_M3_Halftrack_Repair","SPE_CCKW_353_Repair","SPE_CCKW_353_Repair"]] call _fnc_saveToTemplate;
-["vehiclesFuelTrucks", ["SPE_US_M3_Halftrack_Fuel","SPE_CCKW_353_Fuel","SPE_CCKW_353_Fuel"]] call _fnc_saveToTemplate;
-["vehiclesMedical", ["SPE_US_M3_Halftrack_Ambulance","SPE_CCKW_353_Ambulance","SPE_US_G503_MB_Ambulance"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
-["vehiclesAPCs", ["SPE_US_M3_Halftrack","SPE_M20_AUC"]] call _fnc_saveToTemplate; //These got no protected  turret, sufficent troop capacity, cost reduced
-["vehiclesIFVs", ["SPE_M4A0_75_Early", "SPE_M4A0_75","SPE_M4A0_composite","SPE_M4A0_105","SPE_M4A3_105","SPE_M10"]] call _fnc_saveToTemplate;
-["vehiclesLightTanks",["SPE_M18_Hellcat","SPE_M18_Hellcat","SPE_M10"]] call _fnc_saveToTemplate;
-["vehiclesTanks", ["SPE_M4A1_75_erla","SPE_M4A1_76", "SPE_M4A1_75","SPE_M4A3_75","SPE_M4A3_76"]] call _fnc_saveToTemplate;
-["vehiclesHeavyTanks", ["SPE_M4A1_T34_Calliope_Direct","SPE_M4A3_T34_Calliope_Direct"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["SPE_US_M16_Halftrack"]] call _fnc_saveToTemplate;
+["vehiclesBasic", ["SEP_I_US_WIN_G503_MB_Armoured"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["SEP_I_US_WIN_G503_MB_Armoured"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["SEP_I_US_WIN_M16_Halftrack", "SEP_I_US_WIN_M20_AUC","SEP_I_US_WIN_M20_AUC","SEP_I_US_WIN_M8_LAC","SEP_I_US_WIN_M8_LAC_ringMount","SEP_I_US_WIN_G503_MB_M1919_Armoured","SEP_I_US_WIN_G503_MB_M2_Armoured","SEP_I_US_WIN_G503_MB_M2","SEP_I_US_WIN_G503_MB_M2_Patrol","SEP_I_US_WIN_G503_MB_M1919_Patrol"]] call _fnc_saveToTemplate;
+["vehiclesTrucks", ["SEP_I_US_WIN_CCKW_353","SEP_I_US_WIN_CCKW_353","SEP_I_US_WIN_CCKW_353_M2","SEP_I_US_WIN_M3_Halftrack", "SEP_I_US_WIN_M3_Halftrack_Open"]] call _fnc_saveToTemplate;
+["vehiclesCargoTrucks", ["SEP_I_US_WIN_CCKW_353_Open"]] call _fnc_saveToTemplate;
+["vehiclesAmmoTrucks", ["SEP_I_US_WIN_M3_Halftrack_Ammo","SEP_I_US_WIN_CCKW_353_Ammo","SEP_I_US_WIN_CCKW_353_Ammo"]] call _fnc_saveToTemplate;
+["vehiclesRepairTrucks", ["SEP_I_US_WIN_M3_Halftrack_Repair","SEP_I_US_WIN_CCKW_353_Repair","SEP_I_US_WIN_CCKW_353_Repair"]] call _fnc_saveToTemplate;
+["vehiclesFuelTrucks", ["SEP_I_US_WIN_M3_Halftrack_Fuel","SEP_I_US_WIN_CCKW_353_Fuel","SEP_I_US_WIN_CCKW_353_Fuel"]] call _fnc_saveToTemplate;
+["vehiclesMedical", ["SEP_I_US_WIN_M3_Halftrack_Ambulance","SEP_I_US_WIN_CCKW_353_Ambulance","SEP_I_US_WIN_CCKW_353_Ambulance"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["SEP_I_US_WIN_M20_AUC"]] call _fnc_saveToTemplate;
+["vehiclesAPCs", ["SEP_I_US_WIN_M3A1_Halftrack"]] call _fnc_saveToTemplate; //These got no protected  turret, sufficent troop capacity, cost reduced
+["vehiclesIFVs", ["SEP_I_US_WIN_M4A1_75_erla", "SEP_I_US_WIN_M4A1_75","SEP_I_US_WIN_M4A0","SEP_I_US_WIN_M4A0_105","SEP_I_US_WIN_M4A3_105","SEP_I_US_WIN_M10"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks",["SEP_I_US_WIN_M18_Hellcat","SEP_I_US_WIN_M18_Hellcat","SEP_I_US_WIN_M10"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["SEP_I_US_WIN_M4A0_75","SEP_I_US_WIN_M4A3_75","SEP_I_US_WIN_M4A3_75", "SEP_I_US_WIN_M4A1_76","SEP_I_US_WIN_M4A3_76"]] call _fnc_saveToTemplate;
+["vehiclesHeavyTanks", ["SEP_I_US_WIN_M4A1_T34_Calliope_Direct","SEP_I_US_WIN_M4A3_T34_Calliope_Direct"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["SEP_I_US_WIN_M16_Halftrack"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["SPE_P47"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["SPE_P47"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["SEP_I_US_WIN_P47D"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["SEP_I_US_WIN_P47D"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["SPEX_C47_Skytrain"]] call _fnc_saveToTemplate;
+
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    private _CAS = ["SEP_I_US_WIN_P47D","sab_fl_p51b","sab_fl_p51d", "sab_fl_f4u"];
+
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        _CAS = _CAS + ["sab_sw_p40","sab_sw_p38","sab_sw_p61"];
+    };
+    ["vehiclesPlanesCAS", _CAS] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", ["SEP_I_US_WIN_P47D","sab_fl_p51b","sab_fl_p51d"]] call _fnc_saveToTemplate;
+};
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", []] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", []] call _fnc_saveToTemplate;
 
-["vehiclesArtillery", ["SPE_M4A1_T34_Calliope","SPE_M4A3_T34_Calliope","SPE_105mm_M3","SPE_105mm_M3","SPE_105mm_M3"]] call _fnc_saveToTemplate;
+["vehiclesArtillery", ["SEP_I_US_WIN_M4A1_T34_Calliope_Direct","SEP_I_US_WIN_M4A3_T34_Calliope_Direct","SEP_I_US_WIN_105mm_M3","SEP_I_US_WIN_105mm_M3","SEP_I_US_WIN_105mm_M3"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
-["SPE_M4A1_T34_Calliope", ["SPE_60Rnd_M8"]],
-["SPE_M4A3_T34_Calliope", ["SPE_60Rnd_M8"]],
-["SPE_105mm_M3", ["SPE_20x_Shell_M3_M1_HE_Artillery","SPE_8x_Shell_M3_M67_HEAT_Artillery"]]
+["SEP_I_US_WIN_M4A1_T34_Calliope_Direct", ["SPE_60Rnd_M8"]],
+["SEP_I_US_WIN_M4A3_T34_Calliope_Direct", ["SPE_60Rnd_M8"]],
+["SEP_I_US_WIN_105mm_M3", ["SPE_20x_Shell_M3_M1_HE_Artillery","SPE_8x_Shell_M3_M67_HEAT_Artillery"]]
 ]] call _fnc_saveToTemplate;
 
 ["uavsAttack", []] call _fnc_saveToTemplate;
 ["uavsPortable", []] call _fnc_saveToTemplate;
 
 //Config special vehicles
-["vehiclesMilitiaLightArmed", ["SPE_FR_M20_AUC","SPE_US_G503_MB_M1919"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaTrucks", ["SPE_CCKW_353_Open"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaCars", ["SPE_US_G503_MB_Open"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["SEP_I_US_WIN_G503_MB_M1919", "SEP_I_US_WIN_G503_MB_M1919_Patrol"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaTrucks", ["SEP_I_US_WIN_CCKW_353_Open"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaCars", ["SEP_I_US_WIN_G503_MB_Open"]] call _fnc_saveToTemplate;
 
-["vehiclesPolice", ["SPE_US_G503_MB"]] call _fnc_saveToTemplate;
+["vehiclesPolice", ["SEP_I_US_WIN_G503_MB"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["SPE_M1919A6_Bipod"]] call _fnc_saveToTemplate;
-["staticAT", ["SPE_57mm_M1"]] call _fnc_saveToTemplate;
+["staticAT", ["SEP_I_US_WIN_57mm_M1"]] call _fnc_saveToTemplate;
 ["staticAA", ["SPE_FR_M45_Quadmount"]] call _fnc_saveToTemplate;
 ["staticMortars", ["SPE_M1_81"]] call _fnc_saveToTemplate;
 
@@ -157,7 +167,7 @@ _loadoutData set ["lightExplosives", ["SPE_US_TNT_half_pound_mag"]];
 _loadoutData set ["heavyExplosives", ["SPE_US_TNT_4pound_mag", "SPE_US_Bangalore_mag"]];
 
 _loadoutData set ["antiTankGrenades", []];
-_loadoutData set ["antiInfantryGrenades", ["SPE_US_Mk_2", "SPE_US_Mk_2_Yellow", "SPE_US_AN_M14"]];
+_loadoutData set ["antiInfantryGrenades", ["SPE_US_Mk_2", "SPE_US_Mk_2_Yellow", "SPE_US_Mk_3", "SPE_US_AN_M14"]];
 _loadoutData set ["smokeGrenades", ["SPE_US_M18"]];
 _loadoutData set ["signalsmokeGrenades", ["SPE_US_M18_Green", "SPE_US_M18_Red", "SPE_US_M18_Violet", "SPE_US_M18_Yellow"]];
 
@@ -171,10 +181,10 @@ _loadoutData set ["radios", ["ItemRadio"]];
 _loadoutData set ["binoculars", ["SPE_Binocular_US"]];
 _loadoutData set ["Flashlight", ["SPE_US_FL_TL122"]];
 
-_loadoutData set ["uniforms", ["U_SPE_US_Private", "U_SPE_US_Private_1st", "U_SPE_US_Private_late"]];
-_loadoutData set ["medUniforms", ["U_SPE_US_Med"]];
-_loadoutData set ["engUniforms", ["U_SPE_US_Technician"]];
-_loadoutData set ["slUniforms", ["U_SPE_US_CC_1LT", "U_SPE_US_Sergeant"]];
+_loadoutData set ["uniforms", ["SEP_I_US_U_Coat_snow", "SEP_I_US_U_Coat_snow", "SEP_I_US_U_M43_snow", "SEP_I_US_U_M43_trop_snow"]];
+_loadoutData set ["medUniforms", ["SEP_I_US_U_M43_snow"]];
+_loadoutData set ["engUniforms", ["SEP_I_US_U_M43_trop_snow"]];
+_loadoutData set ["slUniforms", ["SEP_I_US_U_Coat_snow"]];
 
 _loadoutData set ["vests", ["V_SPE_US_Vest_Carbine", "V_SPE_US_Vest_Garand", "V_SPE_US_Vest_Garand_M43"]];
 _loadoutData set ["glVests", ["V_SPE_US_Vest_Grenadier"]];
@@ -190,10 +200,10 @@ _loadoutData set ["slBackpacks", ["B_SPE_US_Radio_packboard"]];
 _loadoutData set ["glBackpacks", ["B_SPE_US_Backpack_Bandoleer_Grenadier_1903"]];
 _loadoutData set ["engBackpacks", ["B_SPE_US_Backpack_eng"]];
 
-_loadoutData set ["helmets", ["H_SPE_US_Helmet", "H_SPE_US_Helmet_Net", "H_SPE_US_Helmet_Net_ns", "H_SPE_US_Helmet_Net_os", "H_SPE_US_Helmet_ns", "H_SPE_US_Helmet_os"]];
+_loadoutData set ["helmets", ["SEP_I_US_H_M1Helmet_WIN_os", "SEP_I_US_H_M1Helmet_WIN_ns", "SEP_I_US_H_M1Helmet_WIN", "SEP_I_US_H_M1Helmet_Cover_WIN_os", "SEP_I_US_H_M1Helmet_Cover_WIN_ns", "SEP_I_US_H_M1Helmet_Cover_WIN"]];
 _loadoutData set ["medHelmets", ["H_SPE_US_Helmet_Med","H_SPE_US_Helmet_Med_ns","H_SPE_US_Helmet_Med_os"]];
-_loadoutData set ["slHelmets", ["H_SPE_US_Helmet_Cap", "H_SPE_US_Helmet_First_lieutenant", "H_SPE_US_Helmet_Net_os"]];
-_loadoutData set ["sniHelmets", ["H_SPE_US_Helmet_Scrim_ns"]];
+_loadoutData set ["slHelmets", []];
+_loadoutData set ["sniHelmets", []];
 
 //Item *set* definitions. These are added in their entirety to unit loadouts. No randomisation is applied.
 _loadoutData set ["items_medical_basic", ["BASIC"] call A3A_fnc_itemset_medicalSupplies];
@@ -234,10 +244,10 @@ _loadoutData set ["items_unarmed_extras", []];
 ///////////////////////////////////////
 
 private _sfLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_sfLoadoutData set ["uniforms", ["U_SPE_US_Rangers_Uniform", "U_SPE_US_Rangers_Private_1st"]];
-_sfLoadoutData set ["medUniforms", ["U_SPE_US_Rangers_Med"]];
-_sfLoadoutData set ["engUniforms", ["U_SPE_US_Rangers_Technician"]];
-_sfLoadoutData set ["slUniforms", ["U_SPE_US_Rangers_Sergeant", "U_SPE_US_Rangers_Corp"]];
+_sfLoadoutData set ["uniforms", ["SEP_I_US_U_Coat_snow"]];
+_sfLoadoutData set ["medUniforms", ["SEP_I_US_U_Coat_snow"]];
+_sfLoadoutData set ["engUniforms", ["SEP_I_US_U_Coat_snow"]];
+_sfLoadoutData set ["slUniforms", ["SEP_I_US_U_Coat_snow"]];
 
 _sfLoadoutData set ["vests", ["V_SPE_US_Assault_Vest", "V_SPE_US_Assault_Vest_Light", "V_SPE_US_Assault_Vest_rifle"]];
 _sfLoadoutData set ["glVests", ["V_SPE_US_Assault_Vest_Bag"]];
@@ -246,10 +256,6 @@ _sfLoadoutData set ["medVests", ["V_SPE_US_Assault_Vest_alt"]];
 _sfLoadoutData set ["engVests", ["V_SPE_US_Assault_Vest_eng"]];
 _sfLoadoutData set ["mgVests", ["V_SPE_US_Assault_Vest_Bag"]];
 _sfLoadoutData set ["slVests", ["V_SPE_US_Assault_Vest_alt", "V_SPE_US_Assault_Vest_rifle_M43"]];
-
-_sfLoadoutData set ["helmets", ["H_SPE_US_Rangers_Helmet", "H_SPE_US_Rangers_Helmet_ns", "H_SPE_US_Rangers_Helmet_os", "H_SPE_US_Helmet_Net_os", "H_SPE_US_Helmet_ns", "H_SPE_US_Helmet_os"]];
-_sfLoadoutData set ["medHelmets", ["H_SPE_US_Helmet_Med"]];
-_sfLoadoutData set ["slHelmets", ["H_SPE_US_Rangers_Helmet_First_lieutenant", "H_SPE_US_Rangers_Helmet_Second_lieutenant", "H_SPE_US_Rangers_Helmet_Cap", "H_SPE_US_Rangers_Helmet_NCO"]];
 
 _sfLoadoutData set ["slRifles", [
 ["SPE_M1A1_Thompson", "", "", "", ["SPE_30Rnd_Thompson_45ACP", "SPE_30Rnd_Thompson_45ACP", "SPE_30Rnd_Thompson_45ACP_t"], [], ""],
@@ -283,10 +289,10 @@ private _militaryLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
 private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
-_policeLoadoutData set ["uniforms", ["U_SPE_milice_3"]];
+_policeLoadoutData set ["uniforms", ["SEP_I_US_U_Coat_snow"]];
 _policeLoadoutData set ["vests", ["V_SPE_milice_Vest_zwart_rifle", "V_SPE_milice_Vest_zwart_rifle_sidearm","V_SPE_milice_Vest_zwart_sidearm"]];
-_policeLoadoutData set ["helmets", ["H_SPE_Milice_Adrian", "H_SPE_Milice_Adrian_ns"]];
-_policeLoadoutData set ["slHelmets", ["H_SPE_Milice_beret_1", "H_SPE_Milice_beret_2"]];
+_policeLoadoutData set ["helmets", ["H_SPE_US_MP_Helmet_White", "H_SPE_US_MP_Helmet_White_ns", "H_SPE_US_MP_Helmet_White_os"]];
+_policeLoadoutData set ["slHelmets", ["H_SPE_US_MP_Helmet_White"]];
 
 _policeLoadoutData set ["SMGs", [
 ["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""]
@@ -305,15 +311,10 @@ _policeLoadoutData set ["shotGuns", [
 
 private _militiaLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
-_militiaLoadoutData set ["uniforms", ["U_SPE_FR_HBT_Uniform", "U_SPE_FR_HBT_Uniform_Trop"]];
+_militiaLoadoutData set ["uniforms", ["SEP_I_US_U_M43_snow", "SEP_I_US_U_M43_trop_snow"]];
 _militiaLoadoutData set ["medUniforms", []];
 _militiaLoadoutData set ["engUniforms", []];
 _militiaLoadoutData set ["slUniforms", []];
-
-_militiaLoadoutData set ["helmets", ["H_SPE_FR_Adrian", "H_SPE_FR_Adrian_ns"]];
-_militiaLoadoutData set ["medHelmets", ["H_SPE_FR_Adrian_Medic_ns"]];
-_militiaLoadoutData set ["slHelmets", ["H_SPE_FR_Adrian_net","H_SPE_FR_Adrian_net_ns"]];
-_militiaLoadoutData set ["sniHelmets", ["H_SPE_FR_Adrian_cover_ns"]];
 
 _militiaLoadoutData set ["ATLaunchers", []];
 _militiaLoadoutData set ["sidearms", []];
@@ -362,18 +363,20 @@ _militiaLoadoutData set ["machineGuns", [
 //////////////////////////
 
 private _crewLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_crewLoadoutData set ["uniforms", ["U_SPE_US_Tank_Crew", "U_SPE_US_Tank_Crew2", "U_SPE_US_Tank_Crew3"]];
+_crewLoadoutData set ["uniforms", ["H_SPE_US_Helmet_Tank_M1_Scrim", "H_SPE_US_Helmet_Tank_M1_OS", "H_SPE_US_Helmet_Tank_M1_NS", "U_SPE_US_Tank_Crew", "U_SPE_US_Tank_Crew2", "U_SPE_US_Tank_Crew3"]];
 _crewLoadoutData set ["vests", ["V_SPE_US_Vest_45"]];
 _crewLoadoutData set ["helmets", ["H_SPE_US_Helmet_Tank_polar", "H_SPE_US_Helmet_Tank_polar_tapes"]];
+_crewLoadoutData set ["backpacks", []];
 
 private _pilotLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["uniforms", ["U_SPE_US_Pilot", "U_SPE_US_Pilot_2"]];
 _pilotLoadoutData set ["vests", ["V_SPE_US_LifeVest"]];
 _pilotLoadoutData set ["helmets", ["H_SPE_US_Helmet_Pilot"]];
 _pilotLoadoutData set ["backpacks", ["B_SPE_US_TypeA3"]];
+_pilotLoadoutData set ["SMGs", []];
 
 private _officerLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_officerLoadoutData set ["slUniforms", ["U_SPE_US_Pilot_lthr", "U_SPE_US_Pilot"]];
+_officerLoadoutData set ["slUniforms", ["SEP_I_US_U_Coat_brn"]];
 _officerLoadoutData set ["slVests", ["V_SPE_US_Vest_45_off", "V_SPE_US_Vest_45_high_off"]];
 _officerLoadoutData set ["slHelmets", ["H_SPE_US_Pilot_Cap", "H_SPE_US_Pilot_Cap_Khaki"]];
 _officerLoadoutData set ["backpacks", []];

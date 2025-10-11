@@ -65,7 +65,7 @@
 ["vehicleHealthStation", ["", 75]] call _fnc_saveToTemplate;
 ["vehicleRepairStation", ["", 5000]] call _fnc_saveToTemplate;
 
-#include "SPE_Reb_Vehicle_Attributes.sqf"
+#include "SEP_Vehicle_Attributes.sqf"
 
 ///////////////////////////
 //  Rebel Starting Gear  //

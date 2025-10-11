@@ -344,7 +344,8 @@ _militiaLoadoutData set ["ATLaunchers", []];
 _militiaLoadoutData set ["sidearms", []];
 
 _militiaLoadoutData set ["rifles", [
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr98_Bayo", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
 ["SPE_K98_Late", "", "", "", [], [], ""]
 ]];
@@ -353,33 +354,38 @@ _militiaLoadoutData set ["shotGuns", [
 ["SPE_Fusil_Mle_208_12_Sawedoff", "", "", "", ["SPE_2Rnd_12x65_Pellets"], [], ""]
 ]];
 _militiaLoadoutData set ["slRifles", [
-["SEP_WP_MP507", "", "", "", [], [], ""],
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_MP507", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
-["SPE_K98_Late", "", "", "", [], [], ""]
+["SPE_K98_Late", "", "", "", [], [], ""],
+["SPE_MP40", "", "", "", ["SPE_32Rnd_9x19"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr98_Bayo", "", "", [], [], ""],
 ["SEP_WP_Gewehr98", "", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
 ["SPE_K98_Late", "", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
+["SEP_WP_Gewehr98_Sniper", "", "", "", ["SPE_5Rnd_792x57_t"], [], ""],
 ["SEP_WP_Gewehr98_Sniper", "", "", "", ["SPE_5Rnd_792x57_t"], [], ""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
 ["SEP_WP_Gewehr98_Sniper", "", "", "", ["SPE_5Rnd_792x57_t"], [], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [
-["SEP_WP_MP507", "", "", "", [], [], ""],
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_MP507", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""],
+["SEP_WP_MP507", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
 ["SPE_K98_Late", "", "", "", [], [], ""],
-["SPE_MP40", "", "", "", ["SPE_32Rnd_9x19"], [], ""]
+["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
+["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
-["SEP_WP_MP507", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
+["SEP_WP_MP507", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""],
 ["SPE_MG42", "", "", "", ["SPE_50Rnd_792x57"], [], ""]
 ]];
 

@@ -1685,7 +1685,7 @@ class Templates
 
     class SEP_Base : SPEX_Base
     {
-        requiredAddons[] = {"ww2_spe_assets_c_characters_germans_c","WW2_SPEX_Assets_c_Characters_Americans_c"};
+        requiredAddons[] = {"ww2_spe_assets_c_characters_germans_c","WW2_SPEX_Assets_c_Characters_Americans_c", "SEP_I_CW_Core"};
         basepath = QPATHTOFOLDER(Templates\Templates\SPE_SEP);
         logo = "SEP_MISC\data\SEP_LogoOver_ca.paa";
         priority = 85;

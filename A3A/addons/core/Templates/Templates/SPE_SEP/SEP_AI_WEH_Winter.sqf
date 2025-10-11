@@ -301,15 +301,17 @@ _militaryLoadoutData set ["tankBackpack", ["B_SPE_GER_Flammenwerfer_41"]];
 
 private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
-_policeLoadoutData set ["uniforms", ["SEP_B_GER_U_Suit_Blk", "SEP_B_GER_U_Suit_Swetr_Brn","SEP_B_GER_U_Suit_Gry", "SEP_B_GER_U_Coverall_Blu", "SEP_B_GER_U_Coverall_Blu"]];
+_policeLoadoutData set ["uniforms", ["SEP_B_GER_U_Mantel_M36_Gaiters"]];
 _policeLoadoutData set ["vests", ["V_SPE_FFI_Vest_rifle", "V_SPE_FFI_Vest_rifle_frag","V_SPE_FFI_Vest_rifle_pouch"]];
-_policeLoadoutData set ["helmets", ["SEP_B_GER_H_FieldCap_Gry"]];
-_policeLoadoutData set ["slHelmets", ["SEP_B_GER_H_FieldCap_Brn"]];
+_policeLoadoutData set ["helmets", ["SEP_B_GER_H_Stahlhelm_M35_gry"]];
+_policeLoadoutData set ["slHelmets", ["SEP_B_GER_H_Stahlhelm_M35_gry"]];
 _policeLoadoutData set ["slUniforms", []];
+
+_policeLoadoutData set ["facewear", ["SEP_B_GER_F_Feld_Gorget"]];
 
 _policeLoadoutData set ["rifles", [
 ["SEP_WP_MP507", "", "", "", [], [], ""],
-["SPE_Sten_Mk2", "", "", "", [], [], ""],
+["SEP_WP_MAS38", "", "", "", [], [], ""],
 ["SEP_WP_Gewehr98", "", "", "", [], [], ""],
 ["SEP_WP_Gewehr98", "", "", "", [], [], ""],
 ["SEP_WP_Gewehr98", "", "", "", [], [], ""]
@@ -350,8 +352,8 @@ _militiaLoadoutData set ["ATLaunchers", []];
 _militiaLoadoutData set ["sidearms", []];
 
 _militiaLoadoutData set ["rifles", [
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr98_Bayo", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
 ["SPE_K98_Late", "", "", "", [], [], ""]
 ]];
@@ -361,19 +363,19 @@ _militiaLoadoutData set ["shotGuns", [
 ]];
 _militiaLoadoutData set ["slRifles", [
 ["SEP_WP_MP507", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""],
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
 ["SPE_K98_Late", "", "", "", [], [], ""],
 ["SPE_MP40", "", "", "", ["SPE_32Rnd_9x19"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr98_Bayo", "", "", [], [], ""],
 ["SEP_WP_Gewehr98", "", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
 ["SPE_K98_Late", "", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SEP_WP_Gewehr98_Sniper", "", "", "", ["SPE_5Rnd_792x57_t"], [], ""],
 ["SEP_WP_Gewehr98_Sniper", "", "", "", ["SPE_5Rnd_792x57_t"], [], ""]
 ]];
@@ -383,14 +385,14 @@ _militiaLoadoutData set ["sniperRifles", [
 _militiaLoadoutData set ["SMGs", [
 ["SEP_WP_MP507", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""],
 ["SEP_WP_MP507", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""],
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
 ["SPE_K98_Late", "", "", "", [], [], ""],
 ["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
 ["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
-["SEP_WP_Gewehr98", "", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SEP_WP_MP507", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""],
 ["SPE_MG42", "", "", "", ["SPE_50Rnd_792x57"], [], ""]
 ]];
@@ -775,6 +777,7 @@ private _policeTemplate = {
     ["helmets"] call _fnc_setHelmet;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
+    ["facewear"] call _fnc_setFacewear;
 
     ["rifles"] call _fnc_setPrimary;
     ["primary", 3] call _fnc_addMagazines;
