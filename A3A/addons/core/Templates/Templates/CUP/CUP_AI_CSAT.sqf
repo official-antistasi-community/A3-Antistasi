@@ -32,7 +32,7 @@
 ["vehiclesTanks", ["CUP_O_T55_CSAT", "CUP_O_T72_CSAT", "CUP_O_T90MS_CSAT"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["CUP_O_ZSU23_Afghan_CSAT", "CUP_O_ZSU23_CSAT"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["I_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["CUP_O_PBX_RU"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 

@@ -30,7 +30,7 @@
 ["vehiclesAPCs", ["CUP_O_BTR90_RU", "CUP_O_BTR80A_CAMO_RU", "CUP_O_BTR80A_DESERT_RU"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["CUP_O_BMP3_RU", "CUP_O_BMP2_RU"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["CUP_O_T90M_RU", "CUP_O_T90M_CAMO_RU"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["CUP_O_2S6M_RU"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["CUP_O_ZSU23_SLA"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["CUP_O_PBX_RU"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["CUP_B_RHIB2Turret_USMC"]] call _fnc_saveToTemplate;
@@ -102,10 +102,10 @@ _loadoutData set ["missileATLaunchers", [
 ]];
 _loadoutData set ["lightATLaunchers", ["CUP_launch_RPG26"]];
 _loadoutData set ["ATLaunchers", [
-    ["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_OG7_M", "CUP_PG7VM_M"], [], ""],
-    ["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_OG7_M", "CUP_PG7VL_M"], [], ""],
-    ["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_OG7_M", "CUP_PG7VR_M"], [], ""],
-    ["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_OG7_M", "CUP_TBG7V_M"], [], ""]
+    ["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_PG7VM_M", "CUP_OG7_M"], [], ""],
+    ["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_PG7VM_M", "CUP_OG7_M"], [], ""],
+    ["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_PG7VM_M", "CUP_OG7_M"], [], ""],
+    ["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_PG7VM_M", "CUP_OG7_M"], [], ""]
 ]];
 _loadoutData set ["AALaunchers", [
     ["CUP_launch_Igla", "", "", "", [""], [], ""]

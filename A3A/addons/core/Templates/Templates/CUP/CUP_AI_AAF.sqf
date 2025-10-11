@@ -19,25 +19,25 @@
 
 ["vehiclesBasic", ["O_Quadbike_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["CUP_I_LR_Transport_AAF", "I_MRAP_03_F"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["I_MRAP_03_gmg_F", "I_MRAP_03_hmg_F", "CUP_I_LR_MG_AAF", "CUP_I_LR_SF_GMG_AAF", "CUP_I_LR_SF_HMG_AAF"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["I_MRAP_03_gmg_F", "I_MRAP_03_hmg_F", "CUP_I_LR_MG_AAF", "CUP_I_LR_SF_GMG_AAF", "CUP_I_LR_SF_HMG_AAF", "I_LT_01_cannon_F", "I_LT_01_AT_F"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["I_Truck_02_transport_F", "I_Truck_02_covered_F"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", []] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["I_Truck_02_ammo_F"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["I_Truck_02_box_F"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["I_Truck_02_fuel_F"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["I_Truck_02_medical_F"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["CUP_I_M113A3_HQ_AAF", "CUP_I_M113A3_AAF", "I_LT_01_cannon_F", "I_LT_01_AT_F"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["CUP_I_M113A3_HQ_AAF", "CUP_I_M113A3_AAF"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["CUP_B_FV510_GB_W", "CUP_B_MCV80_GB_W"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["a3a_APC_Wheeled_03_cannon_F"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["CUP_B_Leopard_1A3GRN_GER", "CUP_B_Leopard2A6_GER"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["CUP_I_ZSU23_AAF", "CUP_I_M163_Vulcan_AAF", "CUP_I_ZSU23_Afghan_AAF"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["I_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["CUP_B_RHIB_USMC"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["CUP_I_L39_AAF", "CUP_I_SU34_AAF", "CUP_I_AV8B_DYN_AAF"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["I_Plane_Fighter_04_F"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["I_Plane_Fighter_04_F", "CUP_I_SU34_AAF", "CUP_I_AV8B_DYN_AAF"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["CUP_I_C130J_AAF"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["CUP_I_412_Mil_Transport_AAF"]] call _fnc_saveToTemplate;

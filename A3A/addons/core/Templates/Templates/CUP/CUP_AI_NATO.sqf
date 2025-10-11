@@ -33,7 +33,7 @@
 ["vehiclesTanks", ["CUP_B_M1A2C_TUSK_NATO_T", "CUP_B_M1A2C_TUSK_II_NATO_T", "CUP_B_Challenger2_Woodland_BAF", "CUP_B_Leopard2A6_GER"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["CUP_B_M6LineBacker_NATO_T", "CUP_B_nM1097_AVENGER_NATO_T", "B_T_APC_Tracked_01_AA_F"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["CUP_B_RHIB_USMC"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["B_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
