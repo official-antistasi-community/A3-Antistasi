@@ -302,7 +302,7 @@ _policeLoadoutData set ["slHelmets", ["SEP_B_GER_H_FieldCap_Brn"]];
 _policeLoadoutData set ["slUniforms", []];
 
 _policeLoadoutData set ["rifles", [
-["SEP_WP_MP507", "", "", "", [], [], ""],
+["SEP_WP_MP507", "", "", "", ["SPE_30Rnd_792x33"], [], ""],
 ["SEP_WP_Gewehr98", "", "", "", [], [], ""],
 ["SEP_WP_Gewehr98", "", "", "", [], [], ""],
 ["SPE_K98_Late", "", "", "", [], [], ""],
@@ -345,6 +345,7 @@ _militiaLoadoutData set ["sidearms", []];
 
 _militiaLoadoutData set ["rifles", [
 ["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr98_Bayo", "", "", [], [], ""],
+["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
 ["SPE_K98_Late", "", "", "", [], [], ""]

@@ -349,7 +349,7 @@ _militiaLoadoutData set ["marksmanRifles", [
 _militiaLoadoutData set ["sniperRifles", [
 ["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""]
 ]];
-_militiaLoadoutData set ["SMGs", [,
+_militiaLoadoutData set ["SMGs", [
 ["SEP_WP_MAS38", "", "", "", ["SEP_WP_MAS38_Mag"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [

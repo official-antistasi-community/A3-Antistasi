@@ -310,7 +310,7 @@ _policeLoadoutData set ["slUniforms", []];
 _policeLoadoutData set ["facewear", ["SEP_B_GER_F_Feld_Gorget"]];
 
 _policeLoadoutData set ["rifles", [
-["SEP_WP_MP507", "", "", "", [], [], ""],
+["SEP_WP_MP507", "", "", "", ["SPE_30Rnd_792x33"], [], ""],
 ["SEP_WP_MAS38", "", "", "", [], [], ""],
 ["SEP_WP_Gewehr98", "", "", "", [], [], ""],
 ["SEP_WP_Gewehr98", "", "", "", [], [], ""],
@@ -343,7 +343,7 @@ _militiaLoadoutData set ["slBackpacks", []];
 _militiaLoadoutData set ["atBackpacks", []];
 _militiaLoadoutData set ["engBackpacks", []];
 
-_militiaLoadoutData set ["helmets", ["SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "H_HeadBandage_clean_F", "H_HeadBandage_stained_F", "H_HeadBandage_bloody_F"]];
+_militiaLoadoutData set ["helmets", ["SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "H_HeadBandage_clean_F", "H_HeadBandage_stained_F", "H_HeadBandage_bloody_F"]];
 _militiaLoadoutData set ["medHelmets", ["H_SPE_GER_Helmet_Medic"]];
 _militiaLoadoutData set ["slHelmets", ["SEP_B_GER_H_FieldCap_Gry"]];
 _militiaLoadoutData set ["sniHelmets", []];
