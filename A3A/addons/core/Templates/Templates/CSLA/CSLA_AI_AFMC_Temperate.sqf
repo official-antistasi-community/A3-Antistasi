@@ -40,8 +40,8 @@
 ["vehiclesPlanesAA", ["CUP_B_GR9_DYN_GB"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["CUP_B_C47_USA"]] call _fnc_saveToTemplate;
 
-["vehiclesHelisLight", ["AFMC_UH60"]] call _fnc_saveToTemplate;
-["vehiclesHelisTransport", ["AFMC_UH60M240"]] call _fnc_saveToTemplate;
+["vehiclesHelisLight", ["CUP_I_UH1H_TK_GUE"]] call _fnc_saveToTemplate;
+["vehiclesHelisTransport", ["AFMC_UH60M240", "AFMC_UH60"]] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", ["US85_MH60FFAR"]] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", ["AFMC_AH1F"]] call _fnc_saveToTemplate;
 

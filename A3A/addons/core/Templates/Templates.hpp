@@ -1714,13 +1714,13 @@ class Templates
         priority = 70;
     };
 
-    class CSLA_AI_US_Army_Temperate  : CSLA_Base
+    class CSLA_AI_US_Army_temperate  : CSLA_Base
     {
         side = "Inv"; //the side the faction defaults to, one of the following: Inv, Occ, Reb, Civ
         flagTexture = "a3\data_f\flags\flag_us_co.paa"; //path to an icon to be displayed in the selector
-        name = "US ARMY Temprate"; //the name shown in the selector
-        file = "CSLA_AI_US_Army_Temperate "; //the template file name
-        climate[] = {"Temperate"}; //climate that the template is meant for
+        name = "US ARMY temperate"; //the name shown in the selector
+        file = "CSLA_AI_US_Army_temperate "; //the template file name
+        climate[] = {"temperate"}; //climate that the template is meant for
     };
 
      class CSLA_AI_US_Army_Arid : CSLA_Base
@@ -1733,13 +1733,13 @@ class Templates
         shortName = "US ARMY";
     };
     
-    class CSLA_AI_CSLA_Temperate : CSLA_Base
+    class CSLA_AI_CSLA_temperate : CSLA_Base
     {
         side = "Occ";
         flagTexture = "\A3\ui_f\data\map\markers\flags\CzechRepublic_ca.paa";
-        name = "CSLA Temperate";
-        file = "CSLA_AI_CSLA_Temperate";
-        climate[] = {"Temperate"};
+        name = "CSLA temperate";
+        file = "CSLA_AI_CSLA_temperate";
+        climate[] = {"temperate"};
         shortName = "CSLA";
     };
 
@@ -1753,23 +1753,23 @@ class Templates
         shortName = "CSLA";
     };
 
-    class CSLA_AI_AFMC_Temperate : CSLA_Base
+    class CSLA_AI_AFMC_temperate : CSLA_Base
     {
         side = "Inv";
         flagTexture = "\A3\ui_f\data\map\markers\flags\nato_ca.paa";
-        name = "AFMC Temperate";
-        file = "CSLA_AI_AFMC_Temperate";
-        climate[] = {"Temperate"};
+        name = "AFMC temperate";
+        file = "CSLA_AI_AFMC_temperate";
+        climate[] = {"temperate"};
         shortName = "AFMC";
     };
 
-    class CSLA_AI_FIA_Temperate : CSLA_Base
+    class CSLA_AI_FIA_temperate : CSLA_Base
     {
         side = "Occ";
         flagTexture = "a3\data_f\flags\flag_fia_co.paa";
         name = "FIA";
-        file = "CSLA_AI_FIA_Temperate";
-        climate[] = {"Temperate"};
+        file = "CSLA_AI_FIA_temperate";
+        climate[] = {"temperate"};
         shortName = "FIA";
     };
 
