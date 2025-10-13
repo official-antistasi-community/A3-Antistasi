@@ -105,7 +105,6 @@ switch (_mode) do
         };
 
         // Initialize fire mission vars
-        _fireMissionControlsGroup setVariable ["pointSelected", true];
         _fireMissionControlsGroup setVariable ["roundsNumber", 1];
         _fireMissionControlsGroup setVariable ["availableHeRounds", 0];
         _fireMissionControlsGroup setVariable ["availableSmokeRounds", 0];
@@ -543,7 +542,6 @@ switch (_mode) do
 
         // States for selecting shell type, mission type and round counts are initialized
         // in update, we get them here
-        private _pointStrike = _fireMissionControlsGroup getVariable ["pointSelected", true];
         private _roundsCount = _fireMissionControlsGroup getVariable ["roundsNumber", 1];
         private _startPos = _fireMissionControlsGroup getVariable ["startPos", nil];
         private _endPos = _fireMissionControlsGroup getVariable ["endPos", nil];
@@ -581,21 +579,7 @@ switch (_mode) do
 
         // Disable fire button initially
         _fireButton ctrlEnable false;
-
-        /*
-        // Turn magazines into detailed information
-        private _artyShellDetails = createHashMap;
-        {
-            private _type = _x;
-            private _count = _y;
-            private _shellDetails = [_type] call A3A_fnc_detectShellType;
-            _shellDetails set [0, _count];
-            _artyShellDetails set [_type, _shellDetails];
-            diag_log format ["type %1 details %2", _type, _shellDetails];
-        } forEach _artyRounds;
-        _fireMissionControlsGroup setVariable ["artyShellDetails", _artyShellDetails];
-        diag_log format ["arty shell details %1", _artyShellDetails];
-        */
+        
         // Add shells to listbox
         lbClear A3A_IDC_SHELLTYPEBOX;
         private _lbEntryHM = createHashMap;
@@ -749,7 +733,7 @@ switch (_mode) do
         _timingPosEditSlider sliderSetRange [30,90];
         _timingPosEditSlider sliderSetSpeed [5,5,5];
         if (_selection in ["roundType", "cont"]) then {
-            if (_shellDict#0 == "FLARE") then {_interval = _shellDict#3};
+            if (_shellDict#0 == "FLARE") then {_interval = (_shellDict#3 - 5)};
             _timingPosEditSlider sliderSetPosition _interval;
             _fireMissionControlsGroup setVariable ["strikeDelay", _interval];
         };
@@ -764,7 +748,7 @@ switch (_mode) do
         };
         switch (true) do
         {
-            case (isNil "_startPos" || (!_pointStrike && isNil "_endPos")):
+            case (isNil "_startPos" || ((_strikeType == "barrage") && isNil "_endPos")):
             {
                 _firebuttonTooltipText = localize "STR_antistasi_dialogs_main_hc_fire_mission_position_not_set_tooltip"
             };
@@ -1098,7 +1082,12 @@ switch (_mode) do
         private _endPos = _fireMissionControlsGroup getVariable ["endPos", []];
         private _strikeRadius = _fireMissionControlsGroup getVariable ["strikeRadius", 200];
         private _strikeDelay = _fireMissionControlsGroup getVariable ["strikeDelay", 45];
-        private _detail = if (_strikeType == "barrage") then {_endPos} else {_strikeDelay};
+        private _detail = switch (_strikeType) do {
+            case ("barrage"): {_fireMissionControlsGroup getVariable ["endPos", []]};
+            case ("suppress"): {_fireMissionControlsGroup getVariable ["strikeRadius", 200]};
+            case ("cont"): {_fireMissionControlsGroup getVariable ["strikeDelay", 45]};
+            default {0};
+        };
 
         [_units,_shellType,_shortName,_strikeType,_roundsNumber,_startPos,_detail] spawn A3A_fnc_artySupportFire;
     };

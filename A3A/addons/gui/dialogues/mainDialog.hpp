@@ -1023,7 +1023,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     idc = A3A_IDC_POINTSTRIKEBUTTON;
                                     text = $STR_antistasi_dialogs_main_hc_fire_mission_type_point;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
-                                    tooltip = "Strike a point with as many rounds as asked as fast as possible.\n\nUsed for directly engaging any target of opportunity.\n\nUseful shells: HE, Smoke";
+                                    tooltip = $STR_antistasi_dialogs_main_hc_fire_mission_desc_point;
                                     onButtonClick = "[""fireMissionSelectionChanged"",[""point""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 20 * GRID_W;
                                     y = 0 * GRID_H;
@@ -1041,7 +1041,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                                     idc = A3A_IDC_BARRAGEBUTTON;
                                     text = $STR_antistasi_dialogs_main_hc_fire_mission_type_barrage;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
-                                    tooltip = "Create a rolling barrage between two points with 10-meter dispersion between impacts.\n\nUsed for routing enemies out of a specific area or street.\n\nUseful shells: HE, Smoke";
+                                    tooltip = $STR_antistasi_dialogs_main_hc_fire_mission_desc_barrage;
                                     onButtonClick = "[""fireMissionSelectionChanged"",[""barrage""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 35 * GRID_W;
                                     y = 0 * GRID_H;
@@ -1056,9 +1056,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                                 class SuppressButton : A3A_Button
                                 {
                                     idc = A3A_IDC_SUPPRESSBUTTON;
-                                    text = "Suppress";
+                                    text = $STR_antistasi_dialogs_main_hc_fire_mission_type_suppress;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
-                                    tooltip = "Suppress an area as many rounds as needed with a 10-second delay between impacts.\n\nUsed for clearing large areas and buying time to move.\n\nUseful shells: HE";
+                                    tooltip = $STR_antistasi_dialogs_main_hc_fire_mission_desc_suppress;
                                     onButtonClick = "[""fireMissionSelectionChanged"",[""suppress""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 20 * GRID_W;
                                     y = 4 * GRID_H;
@@ -1073,9 +1073,9 @@ class A3A_MainDialog : A3A_TabbedDialog
                                 class ContButton : A3A_Button
                                 {
                                     idc = A3A_IDC_CONTBUTTON;
-                                    text = "Cont";
+                                    text = $STR_antistasi_dialogs_main_hc_fire_mission_type_cont;
                                     sizeEx = GUI_TEXT_SIZE_SMALL;
-                                    tooltip = "Continuously several rounds on a target over a long period of time.\n\nUsed to continuously illuminate an area with flares during nighttime.\n\nUseful shells: Illumination / Flare";
+                                    tooltip = $STR_antistasi_dialogs_main_hc_fire_mission_desc_cont;
                                     onButtonClick = "[""fireMissionSelectionChanged"",[""cont""]] call A3A_GUI_fnc_commanderTab;";
                                     x = 35 * GRID_W;
                                     y = 4 * GRID_H;

@@ -50,7 +50,7 @@ private _fnc_manageMarkers = {
 			[_mrkEllipse2] call _fnc_makeEllipse;
 			private _mrkFinal2 = createMarkerLocal [format ["Arty%1", random 100], _endPos];
 			[_mrkFinal2] call _fnc_makeFinal;
-			_ang = [_startPos,_endPos] call BIS_fnc_dirTo;
+			_ang = _startPos getDir _endPos;
 			_barrageCenterX = (_startPos#0 + _endPos#0)/2;
 			_barrageCenterY = (_startPos#1 + _endPos#1)/2;
 			private _mrkBarrageLine = createMarkerLocal [format ["ArtyBarrage%1", random 100], [_barrageCenterX,_barrageCenterY]];
@@ -59,9 +59,9 @@ private _fnc_manageMarkers = {
 			_mrkBarrageLine setMarkerColorLocal "ColorGUER";
 			_mrkBarrageLine setMarkerBrushLocal "FDIAGONAL";
 			_distance = _startPos distance2D _endPos;
-			_mrkBarrageLine setMarkerSize [30, _distance/2];
+			_mrkBarrageLine setMarkerSizeLocal [30, _distance/2];
 			private _mrkTextBarrage = format ["Barrage: %1x %2", str _rounds, _shortName];
-			_mrkBarrageLine setMarkerText _mrkTextBarrage;
+			_mrkFinal1 setMarkerText _mrkTextBarrage;
 			_markers append [_mrkBarrageLine, _mrkEllipse2, _mrkFinal2];
 			_notiString = format ["barrage: %1x %2", str _rounds, _shortName];
 		};
@@ -69,7 +69,7 @@ private _fnc_manageMarkers = {
 		{
 			private _mrkText1 = format ["Mortar suppression: %1x %2", str _rounds, _shortName];
 			_mrkFinal1 setMarkerText _mrkText1;
-			_mrkEllipse setMarkerSize [_detail, _detail];
+			_mrkEllipse1 setMarkerSize [_detail, _detail];
 			_notiString = format ["suppression: %1x %2", str _rounds, _shortName]; 
 		};
 		case ("cont"): 
@@ -94,7 +94,7 @@ private _fnc_manageMarkers = {
 
 private _eta = (_units#0) getArtilleryETA [_startPos, ((getArtilleryAmmo [_units#0])#0)];
 _textX = if (_rounds == 1) then {
-	format ["Acknowledged. Fire mission is inbound. ETA %1 secs to impact.",round _eta];
+	format [localize "STR_A3A_fn_ai_artySupport_yesSingle",round _eta];
 } else {
 	format [localize "STR_A3A_fn_ai_artySupport_yesBarrage",round _eta]
 };
@@ -105,16 +105,16 @@ private _strikeTime = time + _eta;
 _startPos = [_startPos,random 10,random 360] call BIS_fnc_relPos; // close by target position, they're not 100% accurate
 
 private _intervalHM = createHashMapFromArray [
-		["point",2],
-		["barrage",3],
-		["suppress",10],
+		["point",0],
+		["barrage",0],
+		["suppress",8],
 		["cont", _detail]
 	];
 private _interval = _intervalHM get _strikeType;
 private _roundsPerUnit = floor (_rounds / (count _units));
-private _ang = if (_strikeType == "barrage") then {[_startPos,_detail] call BIS_fnc_dirTo;} else {9};
+private _ang = if (_strikeType == "barrage") then {_startPos getDir _detail} else {0};
 {
-	diag_log _this;
+	diag_log _x;
 	[_x, _roundsPerUnit, _typeAmmunition, _strikeType, _startPos, _interval, _ang, _detail] spawn {
 		diag_log _this;
 		params ["_piece", "_rounds", "_ammo", "_strikeType", "_startPos", "_interval", "_ang", "_radius"];
@@ -128,7 +128,7 @@ private _ang = if (_strikeType == "barrage") then {[_startPos,_detail] call BIS_
 			};
 			if (_strikeType == "suppress") then 
 			{
-				_pos = [_startPos,_radius, random 360] call BIS_fnc_relPos
+				_pos = [_startPos,random _radius, random 360] call BIS_fnc_relPos;
 			};
 			sleep _interval;
 			waitUntil {sleep 0.1; _piece weaponReloadingTime [gunner _piece, currentWeapon _piece] == 0};
