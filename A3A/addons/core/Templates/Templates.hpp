@@ -1710,16 +1710,16 @@ class Templates
 
     class SPEX_CW_Trop : SPEX_CW
     {
-        name = "SPEX CW North African Campaign";
+        name = "SPEX Commonwealth NAC";
         file = "SPEX_AI_CW_Trop";
-        climate[] = {"tropical","arid"};
+        //climate[] = {"tropical","arid"};
     };
 
     class SPEX_WEH : SPEX_Base
     {
         side = "Occ";
         flagTexture = QPATHTOFOLDER(Templates\Templates\SPEX\flag_ger.paa);
-        name = "SPEX Wehrmacht";
+        name = "SPEX WEH";
         file = "SPEX_AI_WEH";
         shortName = "WEH";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_WEH;
@@ -1727,9 +1727,9 @@ class Templates
 
     class SPEX_WEH_Trop : SPEX_WEH
     {
-        name = "SPEX Deutsches Afrikakorps";
+        name = "SPEX WEH DAK";
         file = "SPEX_AI_WEH_Trop";
-        climate[] = {"tropical","arid"};
+        //climate[] = {"tropical","arid"};
     };
 
     class SPEX_Reb : SPEX_Base
