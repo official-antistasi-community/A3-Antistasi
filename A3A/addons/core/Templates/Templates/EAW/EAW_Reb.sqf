@@ -67,8 +67,7 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 ///////////////////////////
 
 private _initialRebelEquipment = [
-    "EAW_Type14", ["EAW_Type14_Magazine", 120],
-    "LIB_WaltherPPK", ["LIB_7Rnd_765x17_PPK", 105],
+    "LIB_WaltherPPK", "LIB_7Rnd_765x17_PPK",
     "LIB_Welrod_mk1","LIB_6Rnd_9x19_Welrod",
     "LIB_FLARE_PISTOL", "LIB_1Rnd_flare_white",
     "EAW_Hanyang_Bayonet", "EAW_Hanyang_Bayonet_Attach",
