@@ -84,7 +84,7 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 
 ["vehiclesPolice", ["LIB_Kfz1_Hood_sernyt"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["EAW_Type24_MG"]] call _fnc_saveToTemplate;
+["staticMGs", ["a3a_mmg_02_high"]] call _fnc_saveToTemplate;
 ["staticAT", ["EAW_ROC_Pak36"]] call _fnc_saveToTemplate;
 ["staticAA", ["EAW_T98_20mm_AA", "EAW_T98_20mm_AA", "EAW_IJA_Type99_88_AA_1941", "LIB_61k"]] call _fnc_saveToTemplate;
 ["staticMortars", ["LIB_GrWr34","LIB_GrWr34_g"]] call _fnc_saveToTemplate;
