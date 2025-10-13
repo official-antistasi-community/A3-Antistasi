@@ -1710,9 +1710,10 @@ class Templates
 
     class SPEX_CW_Trop : SPEX_CW
     {
-        name = "SPEX Commonwealth NAC";
+        name = "SPEX CW NAC";
         file = "SPEX_AI_CW_Trop";
-        //climate[] = {"tropical","arid"};
+        climate[] = {"tropical","arid"};
+        lore = "British and Commonwealth Expidition for the North Africa Campaign.";
     };
 
     class SPEX_WEH : SPEX_Base
@@ -1729,7 +1730,8 @@ class Templates
     {
         name = "SPEX WEH DAK";
         file = "SPEX_AI_WEH_Trop";
-        //climate[] = {"tropical","arid"};
+        climate[] = {"tropical","arid"};
+        lore = "German Africa Corps";
     };
 
     class SPEX_Reb : SPEX_Base
