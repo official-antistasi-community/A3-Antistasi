@@ -398,7 +398,7 @@ _officerLoadoutData set ["slRifles", [
 //However, these exist in case you really do want to do a lot of custom alterations.
 
 private _squadLeaderTemplate = {
-    ["slHelmets"] call _fnc_setHelmet;
+    [["slHelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
     [["slVests", "vests"] call _fnc_fallback] call _fnc_setVest;
     [["slUniforms", "uniforms"] call _fnc_fallback] call _fnc_setUniform;
 
@@ -449,7 +449,7 @@ private _riflemanTemplate = {
 };
 
 private _medicTemplate = {
-    ["medHelmets"] call _fnc_setHelmet;
+    [["medHelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
     [["medVests", "vests"] call _fnc_fallback] call _fnc_setVest;
     [["medUniforms", "uniforms"] call _fnc_fallback] call _fnc_setUniform;
     [["medBackpacks", "backpacks"] call _fnc_fallback] call _fnc_setBackpack;
@@ -656,7 +656,7 @@ private _machineGunnerTemplate = {
 };
 
 private _marksmanTemplate = {
-    ["sniHelmets"] call _fnc_setHelmet;
+    [["sniHelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
     [["sniVests", "vests"] call _fnc_fallback] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
 
@@ -681,7 +681,7 @@ private _marksmanTemplate = {
 };
 
 private _sniperTemplate = {
-    ["sniHelmets"] call _fnc_setHelmet;
+    [["sniHelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
     [["sniVests", "vests"] call _fnc_fallback] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
 
@@ -736,6 +736,7 @@ private _crewTemplate = {
     ["helmets"] call _fnc_setHelmet;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
+    ["backpacks"] call _fnc_setBackpack;
 
     ["SMGs"] call _fnc_setPrimary;
     ["primary", 3] call _fnc_addMagazines;

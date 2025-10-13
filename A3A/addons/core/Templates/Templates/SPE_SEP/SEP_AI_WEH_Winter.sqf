@@ -346,7 +346,8 @@ _militiaLoadoutData set ["engBackpacks", []];
 _militiaLoadoutData set ["helmets", ["SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "SEP_B_GER_H_FieldCap_Gry", "H_HeadBandage_clean_F", "H_HeadBandage_stained_F", "H_HeadBandage_bloody_F"]];
 _militiaLoadoutData set ["medHelmets", ["H_SPE_GER_Helmet_Medic"]];
 _militiaLoadoutData set ["slHelmets", ["SEP_B_GER_H_FieldCap_Gry"]];
-_militiaLoadoutData set ["sniHelmets", []];
+
+_militiaLoadoutData set ["facewear", []];
 
 _militiaLoadoutData set ["ATLaunchers", []];
 _militiaLoadoutData set ["sidearms", []];
@@ -411,6 +412,7 @@ _pilotLoadoutData set ["uniforms", ["U_SPE_GER_LW_pilot", "U_SPE_GER_LW_pilot_al
 _pilotLoadoutData set ["vests", ["V_SPE_GER_PrivateBelt"]];
 _pilotLoadoutData set ["helmets", ["H_SPE_GER_LW_PilotHelmet"]];
 _pilotLoadoutData set ["backpacks", ["B_SPE_GER_LW_Paradrop"]];
+_pilotLoadoutData set ["SMGs", []];
 
 private _officerLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _officerLoadoutData set ["slUniforms", ["SEP_B_GER_ST_U_CoatOfficer"]];
@@ -433,7 +435,7 @@ _officerLoadoutData set ["slRifles", [
 //However, these exist in case you really do want to do a lot of custom alterations.
 
 private _squadLeaderTemplate = {
-    ["slHelmets"] call _fnc_setHelmet;
+    [["slHelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
     [["slVests", "vests"] call _fnc_fallback] call _fnc_setVest;
     [["slUniforms", "uniforms"] call _fnc_fallback] call _fnc_setUniform;
 
@@ -487,7 +489,7 @@ private _riflemanTemplate = {
 };
 
 private _medicTemplate = {
-    ["medHelmets"] call _fnc_setHelmet;
+    [["medHelmets", "helmets"] call _fnc_fallback] call _fnc_setHelmet;
     [["medVests", "vests"] call _fnc_fallback] call _fnc_setVest;
     [["medUniforms", "uniforms"] call _fnc_fallback] call _fnc_setUniform;
     [["medBackpacks", "backpacks"] call _fnc_fallback] call _fnc_setBackpack;
@@ -806,6 +808,7 @@ private _crewTemplate = {
     ["helmets"] call _fnc_setHelmet;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
+    ["backpacks"] call _fnc_setBackpack;
 
     ["SMGs"] call _fnc_setPrimary;
     ["primary", 3] call _fnc_addMagazines;
