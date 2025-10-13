@@ -95,7 +95,6 @@ _loadoutData set ["SMGs", []];
 _loadoutData set ["machineGuns", []];
 _loadoutData set ["marksmanRifles", []];
 _loadoutData set ["sniperRifles", []];
-
 _loadoutData set ["missileATLaunchers", [
     ["US85_M47", "", "", "", ["US85_M47_Mag"], [], ""],
     ["US85_M47", "", "", "", ["US85_M47_Mag"], [], ""]

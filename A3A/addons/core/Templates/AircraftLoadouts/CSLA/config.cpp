@@ -28,12 +28,14 @@ class A3A {
                 missileLauncher[] = {"CUP_Vmlauncher_AGM65pod_veh"};
             };
             
-            class CUP_I_L39_AAF : baseCAS {
-                loadout[] = {"CUP_PylonPod_32Rnd_S5_plane_M","PylonRack_1Rnd_Missile_AGM_01_F","PylonRack_1Rnd_Missile_AGM_01_F","CUP_PylonPod_32Rnd_S5_plane_M"};
+            class CUP_B_L39_CZ_GREY : baseCAS {
+                loadout[] = {"CUP_PylonPod_20Rnd_S8_plane_M","PylonRack_1Rnd_Missile_AGM_01_F","PylonRack_1Rnd_Missile_AGM_01_F","CUP_PylonPod_20Rnd_S8_plane_M"};
                 mainGun[] = {"CUP_Vacannon_GSh23L_L39"};
-                rocketLauncher[] = {"CUP_Vmlauncher_S5_veh"};
+                rocketLauncher[] = {"CUP_Vmlauncher_S8_veh"};
                 missileLauncher[] = {"Missile_AGM_01_Plane_CAS_02_F"};
             };
+            class CUP_B_L39_CZ : CUP_B_L39_CZ_GREY {};
+            class CUP_O_L39_TK : CUP_B_L39_CZ_GREY {};
             class CUP_O_Su25_Dyn_RU : baseCAS {
                 loadout[] = {"","CUP_PylonPod_32Rnd_S5_plane_M","CUP_PylonPod_32Rnd_S5_plane_M","CUP_PylonPod_1Rnd_Kh29_M","CUP_PylonPod_1Rnd_Kh29_M","CUP_PylonPod_1Rnd_Kh29_M","CUP_PylonPod_1Rnd_Kh29_M","CUP_PylonPod_32Rnd_S5_plane_M","CUP_PylonPod_32Rnd_S5_plane_M",""};
                 mainGun[] = {"CUP_Vacannon_GSh302K_veh"};
@@ -50,6 +52,11 @@ class A3A {
             class a3a_Plane_Fighter_03_grey_F : baseCAP {
                 loadout[] = {"PylonRack_1Rnd_Missile_AA_04_F","PylonRack_1Rnd_GAA_missiles","PylonRack_1Rnd_GAA_missiles","PylonWeapon_300Rnd_20mm_shells","PylonRack_1Rnd_GAA_missiles","PylonRack_1Rnd_GAA_missiles","PylonRack_1Rnd_Missile_AA_04_F"};
             };
+            class CUP_B_L39_CZ_GREY : baseCAP {
+                loadout[] = {"PylonMissile_Missile_AA_R73_x1","PylonMissile_Missile_AA_R77_x1","PylonMissile_Missile_AA_R77_x1","PylonMissile_Missile_AA_R73_x1"};
+            };
+            class CUP_B_L39_CZ : CUP_B_L39_CZ_GREY {};
+            class CUP_O_L39_TK : CUP_B_L39_CZ_GREY {};
         };
         class Helicopter
         {

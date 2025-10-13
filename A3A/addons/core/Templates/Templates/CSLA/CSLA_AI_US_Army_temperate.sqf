@@ -101,9 +101,12 @@ _loadoutData set ["marksmanRifles", []];
 _loadoutData set ["sniperRifles", []];
 _loadoutData set ["lightATLaunchers", []];
 _loadoutData set ["ATLaunchers", []];
-_loadoutData set ["missileATLaunchers", []];
+_loadoutData set ["missileATLaunchers", [
+    ["US85_M47", "", "", "", ["US85_M47_Mag"], [], ""],
+    ["US85_M47", "", "", "", ["US85_M47_Mag"], [], ""]
+]];
 _loadoutData set ["AALaunchers", [
-"US85_FIM92"
+    ["US85_FIM92", "", "", "", ["US85_FIM92_Mag"], [], ""]
 ]];
 _loadoutData set ["sidearms", []];
 
