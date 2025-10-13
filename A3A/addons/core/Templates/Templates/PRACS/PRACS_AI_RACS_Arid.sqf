@@ -19,25 +19,25 @@
 
 ["vehiclesBasic", ["B_Quadbike_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["PRACS_M1025", "PRACS_M1097_Scout", "PRACS_M998_cargo_topped", "PRACS_M998_Command"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["PRACS_M1025_Mk19", "PRACS_M1151_M240", "PRACS_M1151_M2", "PRACS_M1151_Mk19", "PRACS_M1165_M134_QSB", "PRACS_M1165_M2", "PRACS_M1165_Mk19", "PRACS_BMR_ATGM_TOW", "PRACS_BMR_ATGM"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["PRACS_M1025_Mk19", "PRACS_M1151_M240", "PRACS_M1151_M2", "PRACS_M1151_Mk19", "PRACS_M1165_M134_QSB", "PRACS_M1165_M2", "PRACS_M1165_Mk19", "PRACS_BMR_ATGM_TOW", "PRACS_BMR_ATGM", "PRACS_M1117", "PRACS_M1117"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["PRACS_M250", "PRACS_m548_open"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["PRACS_M450", "PRACS_M250_flat_bed", "PRACS_m548"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["PRACS_m548_ammo", "PRACS_M250_Ammo", "PRACS_m548_arty_tender"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["PRACS_M250_Repair", "PRACS_M88", "PRACS_M250_Salvage"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["PRACS_HEMMTT_Fueler", "PRACS_m548_fuel", "PRACS_M250_fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["PRACS_M250_AMB", "PRACS_BMR_AMB", "PRACS_M577", "PRACS_M113_MED"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["PRACS_M577", "PRACS_M113_M240", "PRACS_BMR_M2"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", ["PRACS_BMR_A3_GA1", "PRACS_BMR_A3_M2", "PRACS_BMR_A3_M3_SFOD", "PRACS_BMR_A3_Mk19", "PRACS_M113_mk19", "PRACS_M1117"]] call _fnc_saveToTemplate;
-["vehiclesIFVs", ["PRACS_Pizarro", "PRACS_Pizarro_SLE","PRACS_FV107","PRACS_VEC_M242"]] call _fnc_saveToTemplate;
-["vehiclesLightTanks", ["PRACS_Pizarro_SLE", "PRACS_FV101", "PRACS_VEC_MGS"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["PRACS_M113_M240", "PRACS_M113_M240", "PRACS_M113_M2", "PRACS_BMR_M2"]] call _fnc_saveToTemplate;
+["vehiclesAPCs", ["PRACS_M113_M2", "PRACS_M113_M2", "PRACS_BMR_A3_M2", "PRACS_BMR_A3_M2", "PRACS_BMR_A3_M2", "PRACS_BMR_A3_GA1", "PRACS_BMR_A3_M3_SFOD", "PRACS_BMR_A3_Mk19", "PRACS_M113_mk19"]] call _fnc_saveToTemplate;
+["vehiclesIFVs", ["PRACS_Pizarro", "PRACS_Pizarro_SLE"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks", ["PRACS_Pizarro_SLE", "PRACS_FV101", "PRACS_FV101", "PRACS_VEC_MGS"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["PRACS_M1A1_AIM","PRACS_M60A3","PRACS_M60S"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["PRACS_M163_MACHBET","PRACS_M163_PIVADS","PRACS_M163_VADS","PRACS_M985_AD","PRACS_M985_AD"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["PRACS_Zodiac"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["PRACS_Mk5_SOCR"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["PRACS_M113_M240", "PRACS_M113_mk19"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["PRACS_A4M", "PRACS_F16CJR", "PRACS_F16CJR", "PRACS_MirageV", "PRACS_Mohawk"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["PRACS_A4M", "PRACS_A4M", "PRACS_F16CJR", "PRACS_MirageV", "PRACS_Mohawk"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesAA", ["PRACS_F16", "PRACS_MirageIII"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["PRACS_C130"]] call _fnc_saveToTemplate;
 ["vehiclesAirPatrol", ["PRACS_E2C"]] call _fnc_saveToTemplate;
@@ -47,10 +47,16 @@
 ["vehiclesHelisLightAttack", ["PRACS_UH1H_CAS", "PRACS_AH6M", "PRACS_RAH6"]] call _fnc_saveToTemplate; 
 ["vehiclesHelisAttack", ["PRACS_Sa330_Puma_SOCAT", "PRACS_AH1S"]] call _fnc_saveToTemplate;
 
-["vehiclesArtillery", ["PRACS_M109A6", "PRACS_M430"]] call _fnc_saveToTemplate;        
+["vehiclesArtillery", ["PRACS_M109A6", "PRACS_M430", "PRACS_M101", "PRACS_M101", "PRACS_M101", "PRACS_M102", "PRACS_M102", "PRACS_M102", "PRACS_M114", "PRACS_M114", "PRACS_M198", "PRACS_M198", "PRACS_M1", "PRACS_M1", "PRACS_M115"]] call _fnc_saveToTemplate;        
 ["magazines", createHashMapFromArray [
 ["PRACS_M109A6", ["PRACS_155mm_HE_M109A6_x25"]],
-["PRACS_M430", ["PRACS_M31A2_MLRS_X12"]]
+["PRACS_M430", ["PRACS_M31A2_MLRS_X12"]],
+["PRACS_M101", ["PRACS_105mm_HE_M101_x25"]],
+["PRACS_M102", ["PRACS_105mm_HE_M102_x25"]],
+["PRACS_M114", ["PRACS_155mm_HE_M114_x25"]],
+["PRACS_M198", ["PRACS_155mm_HE_M198_x25"]],
+["PRACS_M1", ["PRACS_155mm_HE_M1_x25"]],
+["PRACS_M115", ["PRACS_203mm_HE_M106_x30"]]
 ]] call _fnc_saveToTemplate;
 
 ["uavsAttack", ["B_UAV_02_dynamicLoadout_F"]] call _fnc_saveToTemplate;     

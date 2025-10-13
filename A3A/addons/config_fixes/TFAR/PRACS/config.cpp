@@ -10,8 +10,7 @@ class CfgPatches
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"A3_Data_F_AoW_Loadorder","tfar_backpacks","rhs_c_troops"}; // add pracs racs addon
-        author = AUTHOR;
+        requiredAddons[] = {"A3_Data_F_AoW_Loadorder","tfar_backpacks","rhs_c_troops","PRACS_Core"};
         authors[] = { AUTHORS };
         authorUrl = "";
         skipWhenMissingDependencies = 1;

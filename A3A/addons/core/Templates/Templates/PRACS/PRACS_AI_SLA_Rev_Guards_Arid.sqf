@@ -37,8 +37,8 @@
 ["vehiclesGunBoats", ["PRACS_SLA_GoFast_gun"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["PRACS_SLA_BTR80A", "PRACS_SLA_BTR80", "PRACS_SLA_BRDM"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["PRACS_SLA_MiG27", "PRACS_SLA_SU22", "PRACS_SLA_Su25"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["PRACS_SLA_MIG28", "PRACS_SLA_MIG28", "PRACS_SLA_MiG29", "PRACS_SLA_MiG23", "PRACS_SLA_MiG21"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["PRACS_SLA_Su25", "PRACS_SLA_Su25", "PRACS_SLA_Su25", "PRACS_SLA_MiG27", "PRACS_SLA_SU22"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["PRACS_SLA_MiG29", "PRACS_SLA_MiG29", "PRACS_SLA_MiG29", "PRACS_SLA_MiG29", "PRACS_SLA_MIG28", "PRACS_SLA_MIG28", "PRACS_SLA_MiG23", "PRACS_SLA_MiG21"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["PRACS_AN12B"]] call _fnc_saveToTemplate;
 ["vehiclesAirPatrol", ["PRACS_SLA_Z11W_Especas"]] call _fnc_saveToTemplate;
 
@@ -47,8 +47,9 @@
 ["vehiclesHelisLightAttack", ["PRACS_SLA_Z11W_ATK2", "PRACS_SLA_Z11W_ATK_Especas"]] call _fnc_saveToTemplate; 
 ["vehiclesHelisAttack", ["PRACS_SLA_Mi24D", "PRACS_SLA_Mi24V_UPK"]] call _fnc_saveToTemplate;
 
-["vehiclesArtillery", ["PRACS_SLA_2s1", "PRACS_SLA_2S3"]] call _fnc_saveToTemplate;        
+["vehiclesArtillery", ["PRACS_SLA_M46", "PRACS_SLA_2s1", "PRACS_SLA_2S3", "PRACS_SLA_2S3"]] call _fnc_saveToTemplate;        
 ["magazines", createHashMapFromArray [
+["PRACS_SLA_M46", ["PRACS_130mm_X32"]],
 ["PRACS_SLA_2s1", ["rhs_mag_3of56_35"]],
 ["PRACS_SLA_2S3", ["rhs_mag_HE_2a33"]]
 ]] call _fnc_saveToTemplate;
@@ -118,11 +119,10 @@ _LoadoutData set ["lightATLaunchers", [
 "rhs_weap_rpg75"
 ]];
 
-_loadoutData set ["antiInfantryGrenades", ["rhs_mag_rgd5"]];
-_loadoutData set ["smokeGrenades", ["SmokeShell"]];
-_loadoutData set ["signalsmokeGrenades", ["SmokeShellYellow", "SmokeShellRed", "SmokeShellPurple", "SmokeShellOrange"]];
+_loadoutData set ["antiInfantryGrenades", ["rhs_mag_rgo", "rhs_mag_rgd5"]];
+_loadoutData set ["smokeGrenades", ["rhs_mag_rdg2_white"]];
+_loadoutData set ["signalsmokeGrenades", ["rhs_mag_nspd"]];
 
-//Basic equipment. Shouldn't need touching most of the time.
 //Mods might override this, or certain mods might want items removed (No GPSs in WW2, for example)
 _loadoutData set ["maps", ["ItemMap"]];
 _loadoutData set ["watches", ["ItemWatch"]];

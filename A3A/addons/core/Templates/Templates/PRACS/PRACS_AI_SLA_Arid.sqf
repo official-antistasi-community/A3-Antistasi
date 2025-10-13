@@ -26,19 +26,19 @@
 ["vehiclesRepairTrucks", ["PRACS_SLA_URAL_Repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["PRACS_SLA_URAL_Fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["PRACS_SLA_Ural_AMB", "PRACS_SLA_MTLB_AMB"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["PRACS_SLA_Type63", "PRACS_SLA_Type63", "PRACS_SLA_Type63_AGS", "PRACS_SLA_BTR60",  "PRACS_SLA_MTLB_ZU23"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["PRACS_SLA_Type63", "PRACS_SLA_Type63", "PRACS_SLA_Type63_AGS", "PRACS_SLA_BTR60"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["PRACS_SLA_BTR60", "PRACS_SLA_BMP1"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["PRACS_SLA_BMP2"]] call _fnc_saveToTemplate;
 ["vehicleslightTanks", ["PRACS_SLA_BMD1"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["PRACS_SLA_T72B", "PRACS_SLA_T72BV"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["PRACS_SLA_Ural_ZPU4", "PRACS_SLA_Type63_ADA", "PRACS_SLA_MTLB_S60", "PRACS_SLA_ZSU23", "PRACS_SLA_ZSU23", "PRACS_SLA_ZSU23"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["PRACS_SLA_Ural_ZPU4", "PRACS_SLA_MTLB_ZU23", "PRACS_SLA_Type63_ADA", "PRACS_SLA_MTLB_S60", "PRACS_SLA_ZSU23", "PRACS_SLA_ZSU23"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["PRACS_SLA_GoFast"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["PRACS_SLA_GoFast_gun"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["PRACS_SLA_BTR60", "PRACS_SLA_BRDM"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["PRACS_SLA_MiG27", "PRACS_SLA_SU22", "PRACS_SLA_Su25"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["PRACS_SLA_MiG21", "PRACS_SLA_MiG23", "PRACS_SLA_MIG28", "PRACS_SLA_MIG28", "PRACS_SLA_MiG29"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["PRACS_SLA_SU22", "PRACS_SLA_SU22", "PRACS_SLA_MiG27", "PRACS_SLA_Su25"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["PRACS_SLA_MiG21", "PRACS_SLA_MiG21", "PRACS_SLA_MiG23", "PRACS_SLA_MiG23", "PRACS_SLA_MIG28", "PRACS_SLA_MiG29"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["PRACS_AN12B"]] call _fnc_saveToTemplate;
 ["vehiclesAirPatrol", ["PRACS_SLA_Z11W"]] call _fnc_saveToTemplate;
 
@@ -47,8 +47,9 @@
 ["vehiclesHelisLightAttack", ["PRACS_SLA_Z11W_ATK", "PRACS_SLA_Z11W_ATK2", "PRACS_SLA_Mi17Sh", "PRACS_SLA_Mi17Sh_UPK"]] call _fnc_saveToTemplate; 
 ["vehiclesHelisAttack", ["PRACS_SLA_Mi24D", "PRACS_SLA_Mi24V_UPK"]] call _fnc_saveToTemplate;
 
-["vehiclesArtillery", ["PRACS_SLA_2s1", "PRACS_SLA_2S3"]] call _fnc_saveToTemplate;        
+["vehiclesArtillery", ["PRACS_SLA_M46", "PRACS_SLA_M46", "PRACS_SLA_2s1", "PRACS_SLA_2S3"]] call _fnc_saveToTemplate;        
 ["magazines", createHashMapFromArray [
+["PRACS_SLA_M46", ["PRACS_130mm_X32"]],
 ["PRACS_SLA_2s1", ["rhs_mag_3of56_35"]],
 ["PRACS_SLA_2S3", ["rhs_mag_HE_2a33"]]
 ]] call _fnc_saveToTemplate;
@@ -59,7 +60,7 @@
 ["uavsPortable", ["O_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles - militia vehicles are mostly used in the early game, police cars are being used by troops around cities -- Example:
-["vehiclesMilitiaLightArmed", ["PRACS_SLA_UAZ_DSHKM", "PRACS_SLA_UAZ_SPG9", "PRACS_SLA_BRDM_HQ_PKT"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["PRACS_SLA_UAZ_DSHKM", "PRACS_SLA_UAZ_SPG9"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaTrucks", ["PRACS_SLA_URAL_Open", "PRACS_SLA_MTLB"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["PRACS_SLA_UAZ"]] call _fnc_saveToTemplate;
 
@@ -120,9 +121,9 @@ _LoadoutData set ["lightATLaunchers", [
 "rhs_weap_rpg75"
 ]];
 
-_loadoutData set ["antiInfantryGrenades", ["rhs_mag_rgd5"]];
-_loadoutData set ["smokeGrenades", ["SmokeShell"]];
-_loadoutData set ["signalsmokeGrenades", ["SmokeShellYellow", "SmokeShellRed", "SmokeShellPurple", "SmokeShellOrange"]];
+_loadoutData set ["antiInfantryGrenades", ["rhs_mag_rgo", "rhs_mag_rgd5"]];
+_loadoutData set ["smokeGrenades", ["rhs_mag_rdg2_white"]];
+_loadoutData set ["signalsmokeGrenades", ["rhs_mag_nspd"]];
 
 //Basic equipment. Shouldn't need touching most of the time.
 //Mods might override this, or certain mods might want items removed (No GPSs in WW2, for example)
@@ -381,16 +382,17 @@ _militiaLoadoutData set ["grenadeLaunchers", [
 ]];
 _militiaLoadoutData set ["machineGuns", [
 ["rhs_weap_pkm","","","",["rhs_100Rnd_762x54mmR", "rhs_100Rnd_762x54mmR", "rhs_100Rnd_762x54mmR_green"],[],""],
-["rhs_weap_pm63","rhs_acc_dtkakm","","",["rhs_75Rnd_762x39mm", "rhs_75Rnd_762x39mm", "rhs_75Rnd_762x39mm_tracer"],[],""]
+["rhs_weap_pm63","rhs_acc_dtkakm","","",["rhs_75Rnd_762x39mm", "rhs_75Rnd_762x39mm_tracer", "rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm"],[],""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-["rhs_weap_m38_rail","","","rhs_acc_okp7_picatinny",["rhsgref_5Rnd_762x54_m38"],[],""]
+["rhs_weap_m38","","","",["rhsgref_5Rnd_762x54_m38"],[],""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
 ["rhs_weap_svdp","","","rhs_acc_pso1m2",["rhs_10Rnd_762x54mmR_7N1"],[],""]
 ]];
 _militiaLoadoutData set ["lightATLaunchers", ["rhs_weap_rpg18"]];
 _militiaLoadoutData set ["ATLaunchers", [
+["rhs_weap_rpg7", "", "", "", ["rhs_rpg7_PG7V_mag", "rhs_rpg7_PG7V_mag"], [], ""],
 ["rhs_weap_rpg7", "", "", "", ["rhs_rpg7_PG7V_mag", "rhs_rpg7_OG7V_mag"], [], ""],
 ["rhs_weap_rpg7", "", "", "", ["rhs_rpg7_OG7V_mag", "rhs_rpg7_PG7V_mag"], [], ""]
 ]];
