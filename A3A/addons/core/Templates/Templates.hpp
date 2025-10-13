@@ -191,7 +191,7 @@ class Templates
         lore = $STR_A3A_templates_lore_CIV;
     };
     
-    class Vanilla_TNA : Vanilla_Base
+    class Vanilla_Civ_TNA : Vanilla_Base
     {
         side = "Civ";
         flagTexture = "\A3\Data_F_Exp\Flags\flag_Tanoa_CO.paa";
@@ -310,7 +310,7 @@ class Templates
 
     class VN_Base
     {
-        requiredAddons[] = {"vn_weapons"};
+        requiredAddons[] = {"loadorder_f_vietnam"};
         logo = "\vn\data_f_vietnam\logos\vn_sml_ca.paa";
         basepath = QPATHTOFOLDER(Templates\Templates\VN);
         priority = 20;
@@ -363,7 +363,7 @@ class Templates
     {
         requiredAddons[] = {"A3_Aegis_Weapons_F_Aegis"};
         logo = "\A3_Aegis\Data_F_Aegis\Logos\arma3_aegis_logo_CA.paa";
-        basepath = QPATHTOFOLDER(Templates\Templates\Aegis)
+        basepath = QPATHTOFOLDER(Templates\Templates\Aegis);
         priority = 25;
     };
 
