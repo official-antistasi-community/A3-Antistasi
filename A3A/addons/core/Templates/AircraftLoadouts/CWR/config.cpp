@@ -48,13 +48,6 @@ class A3A {
                 rocketLauncher[] = {"CUP_Vmlauncher_FFAR_veh"};
                 missileLauncher[] = {"CUP_Vmlauncher_AGM65pod_veh"};
             };
-
-            class cwr3_b_frs1 : baseCAS {
-                loadout[] = {"CUP_PylonPod_19Rnd_CRV7_HE_plane_M","CUP_PylonPod_19Rnd_CRV7_HE_plane_M","PylonRack_3Rnd_Missile_AGM_02_F","PylonRack_3Rnd_Missile_AGM_02_F","CUP_PylonPod_19Rnd_CRV7_HE_plane_M","CUP_PylonPod_19Rnd_CRV7_HE_plane_M"};
-                mainGun[] = {"CUP_Vacannon_GAU12_veh"};
-                rocketLauncher[] = {"CUP_Vmlauncher_CRV7_veh"};
-                missileLauncher[] = {"Missile_AGM_02_Plane_CAS_01_F"};
-            };
         };
         class CAPPlane
         {
@@ -78,15 +71,7 @@ class A3A {
         class Helicopter
         {
              class baseHelicopter;
-             class cwr3_b_uk_lynx_ah7_cas : baseHelicopter {
-                loadout[] = {"CUP_PylonPod_1200Rnd_TE1_Red_Tracer_M621_20mm_HE_M","CUP_PylonPod_19Rnd_CRV7_HE_M"};
-            };
-
-            class cwr3_b_uk_lynx_ah7_tow : baseHelicopter {
-                loadout[] = {"CUP_PylonPod_19Rnd_CRV7_KEP_M","CUP_PylonPod_2Rnd_AGM114K_Hellfire_II_M"};
-            };
-
-            class cwr3_b_ah64 : baseHelicopter {
+             class cwr3_b_ah64 : baseHelicopter {
                 loadout[] = {"CUP_PylonPod_19Rnd_Rocket_FFAR_M","CUP_PylonPod_4Rnd_AGM114K_Hellfire_II_M","CUP_PylonPod_4Rnd_AGM114K_Hellfire_II_M","CUP_PylonPod_19Rnd_Rocket_FFAR_M","","CUP_PylonPod_1Rnd_AIM_9L_Sidewinder_M"};
             };
 

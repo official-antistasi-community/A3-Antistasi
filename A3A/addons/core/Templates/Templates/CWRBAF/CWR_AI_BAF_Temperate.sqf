@@ -18,19 +18,19 @@
 ["equipmentBox", "Box_NATO_Equip_F"] call _fnc_saveToTemplate;
 
 ["vehiclesBasic", ["B_Quadbike_01_F"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["cwr3_b_uk_landrover", "cwr3_b_m151"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["CUP_B_LR_MG_GB_W", "cwr3_b_m151_m2"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["cwr3_b_uk_landrover"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["CUP_B_LR_MG_GB_W"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["cwr3_b_uk_fv620_transport", "cwr3_b_m939"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["cwr3_b_uk_fv620_transport"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["cwr3_b_uk_fv620_reammo"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["cwr3_b_uk_fv620_repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["cwr3_b_uk_fv620_refuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["cwr3_b_uk_landrover_mev", "cwr3_b_uk_fv432_mev"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["cwr3_b_uk_fv432_hq", "cwr3_b_uk_fv432_gpmg"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["cwr3_b_uk_fv432_gpmg"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["cwr3_b_uk_fv432_peak"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["cwr3_b_uk_fv510"]] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", ["cwr3_b_uk_fv101", "cwr3_b_uk_fv107"]] call _fnc_saveToTemplate;
-["vehiclesTanks", ["cwr3_b_uk_fv4030", "cwr3_b_uk_fv4201"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["cwr3_b_uk_fv4201", "cwr3_b_uk_fv4201", "cwr3_b_uk_fv4030"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["cwr3_b_m163"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F", "cwr3_b_uk_mk10"]] call _fnc_saveToTemplate;
@@ -38,7 +38,7 @@
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["cwr3_b_frs1"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["cwr3_b_frs1"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["cwr3_b_frs1", "cwr3_b_uk_f4m"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["cwr3_b_c130"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["cwr3_b_uk_lynx_ah7_transport"]] call _fnc_saveToTemplate;
@@ -53,7 +53,7 @@
 ["uavsPortable", []] call _fnc_saveToTemplate;
 
 ["vehiclesMilitiaLightArmed", ["CUP_B_LR_MG_GB_W"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaTrucks", ["cwr3_b_uk_fv620_transport"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaTrucks", ["cwr3_expansion_uk"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["cwr3_b_uk_landrover"]] call _fnc_saveToTemplate;
 ["vehiclesPolice", ["B_GEN_Offroad_01_gen_F"]] call _fnc_saveToTemplate;
 
@@ -82,8 +82,8 @@
 "WhiteHead_09","WhiteHead_10","WhiteHead_11","WhiteHead_12","WhiteHead_13",
 "WhiteHead_14","WhiteHead_15","WhiteHead_16","WhiteHead_17","WhiteHead_18",
 "WhiteHead_19","WhiteHead_20","WhiteHead_21"]] call _fnc_saveToTemplate;
-["voices", ["CUP_D_Male01_GB_BAF","CUP_D_Male02_GB_BAF","CUP_D_Male03_GB_BAF","CUP_D_Male04_GB_BAF","CUP_D_Male05_GB_BAF"]] call _fnc_saveToTemplate;
-"NATOMen" call _fnc_saveNames;
+["voices", ["Male01ENGB", "Male02ENGB", "Male03ENGB", "Male04ENGB", "Male05ENGB"]] call _fnc_saveToTemplate;
+"cwr3_british_names" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //
@@ -232,7 +232,6 @@ _sfLoadoutData set ["SMGs", [
     ["CUP_smg_MP5SD6", "", "", "", ["CUP_30Rnd_Subsonic_9x19_MP5", "CUP_30Rnd_Red_Tracer_9x19_MP5"], [], ""]
 ]];
 _sfLoadoutData set ["machineGuns", [
-    ["cwr3_lmg_bren", "", "", "", ["cwr3_30rnd_762x51_bren_m"], [], ""],
     ["CUP_lmg_FNMAG", "", "", "", ["CUP_100Rnd_TE4_LRT4_White_Tracer_762x51_Belt_M", "CUP_100Rnd_TE4_LRT4_Yellow_Tracer_762x51_Belt_M"], [], ""]
 ]];
 _sfLoadoutData set ["marksmanRifles", [
@@ -363,7 +362,7 @@ _militiaLoadoutData set ["machineGuns", [
     ["cwr3_lmg_bren", "", "", "", ["cwr3_30rnd_762x51_bren_m"], [], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-    ["cwr3_srifle_l42a1_no23", "", "", "CUP_optic_no23mk2", ["CUP_5Rnd_762x51_M24"], [], ""]
+    ["cwr3_arifle_l1a1_wood", "", "", "cwr3_optic_suit", ["CUP_20Rnd_762x51_FNFAL_M"], [], ""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
     ["cwr3_srifle_l42a1_no23", "", "", "CUP_optic_no23mk2", ["CUP_5Rnd_762x51_M24"], [], ""]

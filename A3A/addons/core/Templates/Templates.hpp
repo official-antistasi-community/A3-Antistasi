@@ -1744,7 +1744,6 @@ class Templates
         flagTexture = "a3\data_f\flags\flag_us_co.paa";
         name = "CWR US Temprate";
         file = "CWR_AI_US_Army_Temperate";
-        climate[] = {"Temperate"};
         shortName = "US Army";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_US;
     };
@@ -1755,7 +1754,6 @@ class Templates
         flagTexture = "\cwr3\general\cwr3_core\data\flag_ussr_co.paa";
         name = "CWR USSR Temperate";
         file = "CWR_AI_USSR_Temperate";
-        climate[] = {"Temperate"};
         shortName = "USSR";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_Sov;
     };
@@ -1784,7 +1782,7 @@ class Templates
     class CWRB_Base
     {
         requiredAddons[] = {"cwr3_expansion_uk"};       
-        basepath = QPATHTOFOLDER(Templates\Templates\CWR);
+        basepath = QPATHTOFOLDER(Templates\Templates\CWRBAF);
         logo = "\cwr3\general\cwr3_core\data\cwr3_logo_128_ca.paa";
         priority = 70;
     };
@@ -1795,7 +1793,6 @@ class Templates
         flagTexture = "\A3\Data_F\Flags\flag_uk_co.paa";
         name = "CWR BAF Temperate";
         file = "CWR_AI_BAF_Temperate";
-        climate[] = {"Temperate"};
         shortName = "BAF";
         lore = $STR_A3A_templates_lore_BAF;
     };
