@@ -43,6 +43,7 @@ class A3A_RoleSelectDialog
             y = DIALOG_Y;
             w = DIALOG_W * GRID_W;
             h = DIALOG_H * GRID_H;
+            colorBackground[] = {0.2,0.2,0.2,0.9}; // darker than normal
         };
 
         class Controls : A3A_DefaultControlsGroup
@@ -228,7 +229,7 @@ class A3A_RoleSelectDialog
                     x = 43 * GRID_W;
                     y = 60 * GRID_H;
                     w = 93 * GRID_W;
-                    h = 12 * GRID_H;
+                    h = 14 * GRID_H;
                 };
                 class InfoLine3 : A3A_StructuredText
                 {

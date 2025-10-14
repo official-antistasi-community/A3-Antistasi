@@ -16578,5 +16578,10 @@
         <Chinesesimp>与指挥部班组车辆管理相关的选项</Chinesesimp>
       </Key>
     </Container>
+    <Container name="role_names">
+      <Key ID="STR_A3A_role_names_rebel">
+        <Original>Rebel</Original>
+      </Key>
+    </Container>
   </Package>
 </Project>

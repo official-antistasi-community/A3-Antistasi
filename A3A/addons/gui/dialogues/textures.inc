@@ -138,5 +138,3 @@ Maintainer: DoomMetal
 #define A3A_Icon_shopping_cart       A3A_GUI_QTEXTURE_PATH_OF(shopping_cart_ca.paa)
 #define A3A_Icon_filter         A3A_GUI_QTEXTURE_PATH_OF(filter_ca.paa)
 #define A3A_Icon_list           A3A_GUI_QTEXTURE_PATH_OF(list_ca.paa)
-
-#define A3A_MainBannerImage        A3A_PlaceHolder_NoVehiclePreview

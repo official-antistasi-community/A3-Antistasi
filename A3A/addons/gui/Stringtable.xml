@@ -4597,7 +4597,7 @@
         <Original>Commander</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_commander">
-        <Original>The commander is the top ranking soldier in the field. They manage most things related to the rebelion, but still hold their weight in a gunfight.</Original>
+        <Original>The commander is the top ranking soldier in the field. They manage the rebellion's affairs, while being able to perform medical and engineer tasks.</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_commander">
         <Original>Commanders handle AI and garrisons as well as coordinating fire support when needed. They have superior stealth for recon but suffer a stamina penalty.</Original>
