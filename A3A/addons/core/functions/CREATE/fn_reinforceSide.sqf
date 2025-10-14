@@ -65,7 +65,7 @@ private _weights = [];
 
     } forEach (A3A_spawnPlaceStats get _marker);        // hashmap, place type (_x) to [placeindexes, max, par]
 
-} forEach (markersX + controlsX);
+} forEach (markersX - citiesX + controlsX);
 
 // problem: Need to record in-motion reinforcements?
 // or just assume for now that they'll arrive before the next reinf check
