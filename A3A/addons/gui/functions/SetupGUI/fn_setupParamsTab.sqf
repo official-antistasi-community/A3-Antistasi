@@ -52,7 +52,11 @@ switch (_mode) do
 				_valsCtrl lbSetValue [_index, _x];
             } forEach _vals;
             private _default = getNumber (_x/"default");
-            if (_configName in _specialDefaults) then {_default = (_mapInfo/_configName) call BIS_fnc_getCfgData};
+            if (_configName in _specialDefaults) then {
+                private _class = (_mapInfo/_configName);
+                if !(isClass _class) exitWith {};
+                _default = _class call BIS_fnc_getCfgData;
+            };
             _valsCtrl lbSetCurSel (_vals find _default);
             _allCtrls pushBack _valsCtrl;
 
