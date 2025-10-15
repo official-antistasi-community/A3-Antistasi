@@ -89,9 +89,9 @@ private _initialRebelEquipment = [
 ];
 
 if ("expansion" in A3A_enabledDLC) then {
-    _initialRebelEquipment append [["launch_RPG7_F", 15], ["RPG7_F", 45], "hgun_Pistol_01_F", "10Rnd_9x21_Mag"];
+    _initialRebelEquipment append [["launch_RPG7_F", 10], ["RPG7_F", 30], "hgun_Pistol_01_F", "10Rnd_9x21_Mag"];
 } else {
-    _initialRebelEquipment append [["launch_RPG32_F", 15], ["RPG32_F", 30]];
+    _initialRebelEquipment append [["launch_RPG32_F", 10], ["RPG32_F", 30]];
 };
 if ("enoch" in A3A_enabledDLC) then {
     _initialRebelEquipment append ["sgun_HunterShotgun_01_F", "sgun_HunterShotgun_01_sawedoff_F", "2Rnd_12Gauge_Pellets", "2Rnd_12Gauge_Slug"];

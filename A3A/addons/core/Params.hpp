@@ -333,6 +333,14 @@ class Params
         texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
         default = 0;
     };
+    class allowUnguidedLaunchers
+    {
+        attr[] = {"server"};
+        title = $STR_A3A_Params_allowUnguidedLaunchers_title;
+        values[] = {1,0};
+        texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
+        default = 0;
+    };
     class allowGuidedLaunchers
     {
         attr[] = {"server"};

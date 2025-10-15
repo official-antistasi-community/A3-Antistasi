@@ -8743,6 +8743,9 @@
         <Polish>[Eksperymentalne] Pozwól wrogowi wykorzystać futurystyczne wsparcie</Polish>
         <Chinesesimp>实验性] 允许敌人使用未来科技化支援</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Params_allowUnguidedLaunchers_title">
+        <Original>Should Rocket Launchers become unlocked?</Original>
+      </Key>
       <Key ID="STR_A3A_Params_allowGuidedLaunchers_title">
         <Original>Should Guided Launchers become unlocked?</Original>
         <Italian>I lanciarazzi guidati dovrebbero essere sbloccati?</Italian>

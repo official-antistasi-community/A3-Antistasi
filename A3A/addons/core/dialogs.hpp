@@ -2226,12 +2226,12 @@ class squad_recruit 			{
 		class HQ_button_ATteamM: A3A_core_BattleMenuRedButton
 		{
 			idc = 110;
-			text = "";
+			text = $STR_antistasi_dialogs_squad_recruit_aa_car;
 			x = 0.272481 * safezoneW + safezoneX;
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			// action = "closeDialog 0;nul = [(A3A_faction_reb get 'staticAA') # 0] spawn A3A_fnc_addFIAsquadHC";
+			action = "closeDialog 0;nul = [(A3A_faction_reb get 'staticAA') # 0] spawn A3A_fnc_addFIAsquadHC";
 		};
 
 		class HQ_button_mortar: A3A_core_BattleMenuRedButton

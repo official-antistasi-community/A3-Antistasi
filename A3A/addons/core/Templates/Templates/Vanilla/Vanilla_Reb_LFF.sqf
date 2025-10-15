@@ -92,9 +92,9 @@ private _initialRebelEquipment = [
 "acc_flashlight","acc_flashlight_smg_01","acc_flashlight_pistol"];
 
 if ("expansion" in A3A_enabledDLC) then {
-    _initialRebelEquipment append [["launch_RPG7_F", 15], ["RPG7_F", 45], "hgun_Pistol_01_F", "10Rnd_9x21_Mag"];
+    _initialRebelEquipment append [["launch_RPG7_F", 10], ["RPG7_F", 30], "hgun_Pistol_01_F", "10Rnd_9x21_Mag"];
 } else {
-    _initialRebelEquipment append [["launch_RPG32_green_F", 15], ["RPG32_F", 30]];
+    _initialRebelEquipment append [["launch_RPG32_green_F", 10], ["RPG32_F", 30]];
 };
 
 if ("rf" in A3A_enabledDLC) then {

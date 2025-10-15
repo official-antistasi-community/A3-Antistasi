@@ -47,7 +47,7 @@
 
 private _initialRebelEquipment = [
 "rhs_weap_type94_new", "rhs_weap_tt33", "rhs_weap_Izh18", "rhs_weap_kar98k",
-["rhs_weap_rpg75", 10],
+["rhs_weap_rpg75", 20],
 ["IEDUrbanSmall_Remote_Mag", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],
 "rhs_mag_6x8mm_mhp", "rhs_mag_762x25_8", "rhsgref_1Rnd_00Buck", "rhsgref_1Rnd_Slug", "rhsgref_5Rnd_792x57_kar98k", "rhs_grenade_mkii_mag", "rhs_grenade_mki_mag", "rhs_mag_rdg2_black", "rhs_grenade_m15_mag",
 "B_FieldPack_blk", "B_FieldPack_cbr", "B_FieldPack_green_F", "B_FieldPack_khk", "B_FieldPack_oli",
