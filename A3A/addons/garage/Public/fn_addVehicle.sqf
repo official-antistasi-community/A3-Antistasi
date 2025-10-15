@@ -35,6 +35,7 @@ if (!alive _vehicle) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Destroyed"] rem
 if (locked _vehicle > 1) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Locked"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 if (_player isNotEqualTo vehicle _player) exitWith { ["STR_HR_GRG_Feedback_addVehicle_inVehicle"] remoteExec ["HR_GRG_fnc_Hint", _client] ; false };
 if (_player distance _vehicle > 25) exitWith {["STR_HR_GRG_Feedback_addVehicle_Distance"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+if (!isNull attachedTo _vehicle) exitWith {["STR_HR_GRG_Feedback_addVehicle_Attached"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     //Valid area
 private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
@@ -51,12 +52,12 @@ if ([getPosATL _player] call A3A_fnc_enemyNearCheck) exitWith {
 
 //Utility refund
 private _utilityRefund = {
-    params ["_object", ["_instantRefund", true]];
+    params ["_object"];
 
     // canGarage true means it's in the utilityItem lists
     private _flags = (A3A_utilityItemHM get typeof _object) # 4;
 
-    if ("cmmdr" in _flags && _player isNotEqualTo theBoss && _instantRefund) exitWith {
+    if ("cmmdr" in _flags && _player isNotEqualTo theBoss) exitWith {
         ["STR_HR_GRG_Feedback_addVehicle_commander_only"] remoteExec ["HR_GRG_fnc_Hint", _client];
         false;
     };
@@ -84,14 +85,9 @@ private _utilityRefund = {
     };
 
     deleteVehicle _object;
-    if (_instantRefund) exitWith {
-        if (_toRefund > 0) then {
-            [0,_toRefund] spawn A3A_fnc_resourcesFIA;
-        };
-        [_feedBack] remoteExec ["HR_GRG_fnc_Hint", _client];
-        true;
-    };
-    _toRefund
+    if (_toRefund > 0) then { [0,_toRefund] spawn A3A_fnc_resourcesFIA };
+    [_feedBack] remoteExec ["HR_GRG_fnc_Hint", _client];
+    true;
 };
 
 if (_vehicle getVariable ['A3A_canGarage', false]) exitwith {
@@ -139,21 +135,6 @@ private _transferToArsenal = {
     [_this,boxX] call A3A_fnc_ammunitionTransfer;
 };
 
-//_this is vehicle
-private _unloadAceCargo = {
-    private _toRefund = 0;
-    {
-        if !(_x isEqualType objNull) then { continue };
-        if (typeOf _x in ["ACE_Wheel", "ACE_Track"]) then { continue };
-        [_x, _this] call ace_cargo_fnc_unloadItem;
-
-        if (_x getVariable ['A3A_canGarage', false]) then { _toRefund = _toRefund + ([_x, false] call _utilityRefund) };
-    } forEach (_this getVariable ["ace_cargo_loaded", []]);
-
-    if (_toRefund > 0) then {
-        [_toRefund] remoteExec ["A3A_fnc_resourcesPlayer", _client];
-    };
-};
 
 //---------------------------------------------------------|
 // Everything above this line is under the license: MIT    |
@@ -191,7 +172,6 @@ private _addVehicle = {
     //Antistasi adaptions
     _this call _transferToArsenal;
     _this call _deleteFromReportedVehsAndStaticsToSave;
-    _this call _unloadAceCargo;
 
     deleteVehicle _this;
 
@@ -211,9 +191,18 @@ private _addVehicle = {
 private _locking = if (_lockUID isEqualTo "") then {false} else {true};
 private _lockName = if (_locking) then { name _player } else { "" };
 private _catsRequiringUpdate = [];
+
+// Remove ACE cargo first, otherwise it'll be stuck underground forever
+{
+    if !(_x isEqualType objNull) then { continue };
+    if (typeOf _x in ["ACE_Wheel", "ACE_Track"]) then { continue };
+    [_x, _vehicle] call ace_cargo_fnc_unloadItem;
+} forEach (_vehicle getVariable ["ace_cargo_loaded", []]);
+
+// Can only deal correctly with static weapons here. Drop everything else where it is.
 {
     detach _x;
-    _x call _addVehicle;
+    if (_x isKindOf "StaticWeapon") then { _x call _addVehicle };
 } forEach attachedObjects _vehicle;
 _vehicle call _addVehicle;
 
