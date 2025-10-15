@@ -21,8 +21,8 @@ switch (_mode) do
     case ("onLoad"):
     {
         private _specialDefaults = ["distanceSPWN"];
-        private _mapInfo = missionConfigFile/"A3A"/"mapInfo"/toLower worldName;
-        if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower worldName};
+        private _mapInfo = missionConfigFile/"A3A"/"mapInfo"/toLower worldName/"MapParams";
+        if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower worldName/"MapParams"};
         private _allCtrls = [];
         private _rowCount = -1;
         {
