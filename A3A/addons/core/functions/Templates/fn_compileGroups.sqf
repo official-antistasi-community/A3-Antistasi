@@ -118,6 +118,7 @@ for "_i" from 1 to 6 do {
 _faction set ["groupSpecOpsRandom", _specOpsRandom];
 
 _faction set ["groupSpecOpsSniper", [unit(SF, "Sniper"), unit(SF, "Rifleman")]];
+_faction set ["groupsSpecOpsSmall", [_faction get "groupSpecOpsSniper"]];
 
 //militia
 _faction set ["groupsMilitiaSmall", [
@@ -169,6 +170,7 @@ _faction set ["groupPoliceSquad", [
     _faction get "unitPoliceOfficer", _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt"
     , _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt"
 ]];
+_faction set ["groupsPoliceSmall", [_faction get "groupPolice"]];
 
 };
 

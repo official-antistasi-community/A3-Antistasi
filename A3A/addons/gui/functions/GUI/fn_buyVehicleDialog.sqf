@@ -95,15 +95,15 @@ switch (_mode) do
         (A3A_faction_reb get 'vehiclesLightArmed') +
         (A3A_faction_reb get 'vehiclesMedical') +
         (A3A_faction_reb get 'vehiclesAT') +
-        (A3A_faction_reb get 'vehiclesAA') +
+        //(A3A_faction_reb get 'vehiclesAA') +
         (A3A_faction_reb get 'vehiclesBoat') +
         (A3A_faction_reb get 'vehiclesPlane');
 
         private _statics = 
         (A3A_faction_reb get 'staticMGs') +
         (A3A_faction_reb get 'staticMortars') +
-        (A3A_faction_reb get 'staticAT') +
-        (A3A_faction_reb get 'staticAA');
+        //(A3A_faction_reb get 'staticAA') +
+        (A3A_faction_reb get 'staticAT');
 
         ["vehicles", [A3A_IDC_BUYCIVVEHICLEMAIN, A3A_IDC_CIVVEHICLESGROUP, _civilianVehicles]] call A3A_GUI_fnc_buyVehicleTabs;
         ["vehicles", [A3A_IDC_BUYREBVEHICLEMAIN, A3A_IDC_REBVEHICLESGROUP, _militaryVehicles]] call A3A_GUI_fnc_buyVehicleTabs;
@@ -111,9 +111,11 @@ switch (_mode) do
         ["other"] call A3A_GUI_fnc_buyVehicleTabs;
 
         // show the vehicle tab so that user don't freak out
+        _defaultTab = [A3A_IDC_BUYCIVVEHICLEMAIN, A3A_IDC_BUYREBVEHICLEMAIN] select (count _civilianVehicles == 0);
         private _display = findDisplay A3A_IDD_BUYVEHICLEDIALOG;
-        private _selectedTabCtrl = _display displayCtrl A3A_IDC_BUYCIVVEHICLEMAIN;
+        private _selectedTabCtrl = _display displayCtrl _defaultTab;
         _selectedTabCtrl ctrlShow true;
+        player setCaptive false;
 
     };
 

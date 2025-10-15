@@ -129,7 +129,8 @@ private _radioTowers = antennas + antennasDead;
 {
     // Do we still special-case cities?
     if (_x in citiesX) then {
-        _markerVal set [_x, sqrt ((server getVariable _x) # 0)];
+        private _cityData = A3A_cityData getVariable _x; 
+        _markerVal set [_x, sqrt (_citydata # 0)];
         continue;
     };
     private _value = call {
