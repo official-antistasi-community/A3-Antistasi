@@ -8,7 +8,7 @@ private _remainingTime = _flagAccessBlockTime - _timeSinceFlip;
 if (_remainingTime > 0) exitWith {
     private _prettyTime = [_remainingTime,1,1,false,2,false,true] call A3A_fnc_timeSpan_format;
     private _menus = createHashMapFromArray [
-        ["garage", localize "STR_HR_GRG_addVehicle_Action"],
+        ["garage", localize "STR_A3A_fn_base_flagaction_garage"],
         ["buy", localize "STR_A3A_fn_base_flagaction_buyveh"],
         ["unit", localize "STR_A3A_fn_base_flagaction_recruit"]
     ];

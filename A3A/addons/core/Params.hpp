@@ -147,6 +147,13 @@ class Params
         texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
         default = 0;
     };
+    class A3A_flagGarageBlock
+    {
+        title = $STR_A3A_Params_garageAccessTimer_title;
+        values[] = {0,3,5,10,20};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min, $STR_A3A_Params_generic_20min};
+        default = 10;
+    };
 
     class SpacerMembership
     {
@@ -196,13 +203,6 @@ class Params
         values[] = {4000,5000,6000,7000,8000,10000,16000,-1};  // 16000 is left as backwards compatibility
         texts[] = {$STR_A3A_Params_generic_4km, $STR_A3A_Params_generic_5km, $STR_A3A_Params_generic_6km, $STR_A3A_Params_generic_7km, $STR_A3A_Params_generic_8km, $STR_A3A_Params_generic_10km, $STR_A3A_Params_generic_16km, $STR_A3A_Params_generic_unlimited};
         default = 5000;
-    };
-    class A3A_flagGarageBlock
-    {
-        title = $STR_A3A_Params_garageAccessTimer_title;
-        values[] = {0,3,5,10,20};
-        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min, $STR_A3A_Params_generic_20min};
-        default = 0;
     };
 
     class SpacerBalance

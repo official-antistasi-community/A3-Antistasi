@@ -1307,6 +1307,9 @@
         <Turkish>8 saat boyunca dinlen</Turkish>
         <Chinesesimp>休息8个小时</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_garage">
+        <Original>Garage</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_flagaction_heal_carry">
         <Original>Carry %1</Original>
         <German>%1 tragen</German>
@@ -9173,11 +9176,6 @@
         <Polish>Próg czyszczenia śmieci dla automatycznego czyszczenia śmieci</Polish>
         <Chinesesimp>自动化垃圾清理阈值</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_Params_generic_3min">
-        <Original>3 minutes</Original>
-      </Key>
-      <Key ID="STR_A3A_Params_generic_5min">
-        <Original>5 minutes</Original>
       <Key ID="STR_A3A_Params_generic_10km">
         <Original>10 km</Original>
         <German>10km</German>
@@ -9263,6 +9261,9 @@
         <Russian>2 минуты</Russian>
         <Polish>2 minuty</Polish>
         <Chinesesimp>2 分钟</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_Params_generic_3min">
+        <Original>3 minutes</Original>
       </Key>
       <Key ID="STR_A3A_Params_generic_30min">
         <Original>30 minutes</Original>
