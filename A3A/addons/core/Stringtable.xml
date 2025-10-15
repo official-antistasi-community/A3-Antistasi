@@ -1176,6 +1176,12 @@
         <Turkish>Bu eşyayı hareket ettir</Turkish>
         <Chinesesimp>移动此物品</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_buylootbox">
+        <Original>Buy Loot Box</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_buylootbox_enemies">
+        <Original>You cannot purchase loot boxes when enemies are nearby.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_flagaction_buyveh">
         <Original>Buy Vehicle</Original>
         <German>Fahrzeug kaufen</German>
@@ -1677,6 +1683,12 @@
         <French>Poste d'observation près de %1</French>
         <Korean>%1 인근 관측초소</Korean>
         <Russian>Наблюдательный пост рядом с %1</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_base_manageFlagAccess_title">
+        <Original>Service Access</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_manageFlagAccess_main">
+        <Original>The rebel logistics network needs more time to connect to this recently captured area.&lt;br/&gt;&lt;br/&gt;You can access the %1 menu in %2.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_markerChange_noAirbase">
         <Original>Airbase Lost</Original>
@@ -9144,6 +9156,9 @@
         <Polish>Tryb gry - NIE zmieniaj tego w trakcie misji</Polish>
         <Chinesesimp>游玩模式 - 请勿在游玩过程中改变此选项</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Params_garageAccessTimer_title">
+        <Original>Simulate logistics by blocking flag functions after capture for X minutes</Original>
+      </Key>
       <Key ID="STR_A3A_Params_gcMaxObjects_title">
         <Original>Maximum number of corpses and wrecks</Original>
         <Russian>Максимальное количество трупов и обломков</Russian>
@@ -9158,6 +9173,11 @@
         <Polish>Próg czyszczenia śmieci dla automatycznego czyszczenia śmieci</Polish>
         <Chinesesimp>自动化垃圾清理阈值</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Params_generic_3min">
+        <Original>3 minutes</Original>
+      </Key>
+      <Key ID="STR_A3A_Params_generic_5min">
+        <Original>5 minutes</Original>
       <Key ID="STR_A3A_Params_generic_10km">
         <Original>10 km</Original>
         <German>10km</German>

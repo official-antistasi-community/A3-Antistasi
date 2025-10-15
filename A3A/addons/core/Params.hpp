@@ -197,6 +197,13 @@ class Params
         texts[] = {$STR_A3A_Params_generic_4km, $STR_A3A_Params_generic_5km, $STR_A3A_Params_generic_6km, $STR_A3A_Params_generic_7km, $STR_A3A_Params_generic_8km, $STR_A3A_Params_generic_10km, $STR_A3A_Params_generic_16km, $STR_A3A_Params_generic_unlimited};
         default = 5000;
     };
+    class A3A_flagGarageBlock
+    {
+        title = $STR_A3A_Params_garageAccessTimer_title;
+        values[] = {0,3,5,10,20};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min, $STR_A3A_Params_generic_20min};
+        default = 0;
+    };
 
     class SpacerBalance
     {
@@ -569,12 +576,5 @@ class Params
         values[] = {-1,1,2};
         texts[] = {$STR_A3A_Params_generic_none, $STR_A3A_Params_logDebugConsole_nondev, $STR_A3A_Params_generic_all};
         default = 1;
-    };
-    class A3A_flagGarageBlock
-    {
-        title = "Block flag functions on flag flip for X";
-        values[] = {0,3,5,10,20};
-        texts[] = {"Off", "3 minutes", "5 minutes", "10 minutes", "20 minutes"};
-        default = 0;
     };
 };
