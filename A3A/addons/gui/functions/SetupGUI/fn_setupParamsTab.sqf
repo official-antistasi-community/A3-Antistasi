@@ -20,11 +20,15 @@ switch (_mode) do
 {
     case ("onLoad"):
     {
+        private _specialDefaults = ["distanceSPWN"];
+        private _mapInfo = missionConfigFile/"A3A"/"mapInfo"/toLower worldName;
+        if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower worldName};
         private _allCtrls = [];
         private _rowCount = -1;
         {
             _rowCount = _rowCount + 1;
 
+            private _configName = configName _x;
             private _textCtrl = _display ctrlCreate ["A3A_Text_Small", -1, _paramsTable];
             _textCtrl ctrlSetPosition [0, GRID_H*_rowCount*4, GRID_W*112, GRID_H*4];
             _textCtrl ctrlCommit 0;                 // needed?
@@ -48,6 +52,7 @@ switch (_mode) do
 				_valsCtrl lbSetValue [_index, _x];
             } forEach _vals;
             private _default = getNumber (_x/"default");
+            if (_configName in _specialDefaults) then {_default = (_mapInfo/_configName) call BIS_fnc_getCfgData};
             _valsCtrl lbSetCurSel (_vals find _default);
             _allCtrls pushBack _valsCtrl;
 
