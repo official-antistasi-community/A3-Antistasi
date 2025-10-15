@@ -126,14 +126,8 @@ if (_varName in _specialVarLoads) then {
             private _building = nearestObjects [_x, ["House"], 1, true] select 0;
             call {
                 if (isNil "_building") exitWith { Error_1("No building found at %1", _x)};
-                if (_building in antennas) exitWith { Info("Antenna in destroyed building list, ignoring")};
-
-                private _ruin = [_building] call BIS_fnc_createRuin;
-                if (isNull _ruin) exitWith {
-                    Error_1("Loading Destroyed Buildings: Unable to create ruin for %1", typeOf _building);
-                };
-
-                destroyedBuildings pushBack _building;
+                if (_building in A3A_antennas) exitWith { Info("Antenna in destroyed building list, ignoring")};
+                A3A_destroyedBuildings pushBack _building;      // store for update after the BuildingChanged EH is installed
             };
         } forEach _varValue;
     };
@@ -159,29 +153,11 @@ if (_varName in _specialVarLoads) then {
         publicVariable "outpostsFIA";
     };
     if (_varName == 'antennas') then {
-        antennasDead = [];
-        for "_i" from 0 to (count _varvalue - 1) do {
-            _posAnt = _varvalue select _i;
-            _mrk = [mrkAntennas, _posAnt] call BIS_fnc_nearestPosition;
-            _antenna = [antennas,_mrk] call BIS_fnc_nearestPosition;
-            {if ([antennas,_x] call BIS_fnc_nearestPosition == _antenna) then {[_x,false] spawn A3A_fnc_blackout}} forEach citiesX;
-            antennas = antennas - [_antenna];
-            antennasDead pushBack _antenna;
-            _antenna removeAllEventHandlers "Killed";
-
-            private _ruin = [_antenna] call BIS_fnc_createRuin;
-
-            if !(isNull _ruin) then {
-                //JIP on the _ruin, as repairRuinedBuilding will delete the ruin.
-                [_antenna, true] remoteExec ["hideObject", 0, _ruin];
-            } else {
-                Error_1("Loading Antennas: Unable to create ruin for %1", typeOf _antenna);
-            };
-
-            deleteMarker _mrk;
-        };
-        publicVariable "antennas";
-        publicVariable "antennasDead";
+        {
+            private _antenna = [A3A_antennas, _x] call BIS_fnc_nearestPosition;
+            if (_antenna distance2d _x > 10) then { Error_1("No antenna found near %1", _x); continue };
+            A3A_destroyedBuildings pushBackUnique _antenna;         // for processing after EH is installed
+        } forEach _varValue;
     };
     if (_varname == 'prestigeBLUFOR') then {                        // this one is actually rebel support. Backwards compat.
         if (count citiesX != count _varValue) exitWith {
