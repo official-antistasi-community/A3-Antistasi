@@ -7,6 +7,7 @@
 //putting them there though skews the weighting too much in their favour.
 ["attributesVehicles", [
     ["LIB_T34_76", ["cost", 230], ["threat", 300]],
+    ["LIB_M4A3_75", ["cost", 230], ["threat", 300]],
     ["LIB_SdKfz_7_AA", ["cost", 80]],
     ["LIB_Zis5v_61K", ["cost", 60]], //There's a lack of AA vehicles in IFA for not-germany, fortunately AA vehicles aren't that important with IFA
     ["LIB_SdKfz251_captured_FFV", ["cost", 60]],
