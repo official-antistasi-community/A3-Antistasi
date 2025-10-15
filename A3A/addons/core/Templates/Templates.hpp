@@ -614,6 +614,16 @@ class Templates
         shortName = "NAPA";
         lore = $STR_A3A_templates_lore_NAPA;
     };
+	
+    class RHS_SDK : RHS_Base
+    {
+        side = "Reb";
+        flagTexture = "\A3\Data_F_exp\Flags\Flag_Synd_CO.paa";
+        name = "RHS SDK";
+        file = "RHS_Reb_SDK";
+        maps[] = {"Tanoa"};
+        climate[] = {"tropical"};
+    };
 
     class RHS_Civ : RHS_Base
     {
@@ -771,6 +781,16 @@ class Templates
         climate[] = {"temperate","tropical","arctic"};
         shortName = "CW SOV";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_Sov;
+    };
+	
+    class 3CBF_TLA : 3CBF_Base
+    {
+        side = "Inv";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_cw_sov\flag\cw_sov_army_flag_co.paa";
+        name = "3CB TLA";
+        file = "3CB_AI_TLA";
+        maps[] = {"tanoa"};
+        climate[] = {"tropical"};
     };
 
     class 3CBF_CW_US : 3CBF_Base
@@ -957,6 +977,14 @@ class Templates
         file = "3CB_Reb_FIA";
         shortName = "FIA";
         lore = $STR_A3A_templates_lore_FIA;
+    };
+    class 3CB_TFIA : 3CBF_Base
+    {
+        side = "Reb";
+        flagTexture = "\A3\Data_F_Exp\Flags\flag_Tanoa_CO.paa";
+        name = "3CB TFIA";
+        file = "3CB_Reb_SDK";
+        maps[] = {"Tanoa"};
     };
     class 3CB_Reb_LSM : 3CBF_Base
     {
