@@ -8526,7 +8526,7 @@
         <Original>Vehicle added to garrison. Cargo and inventory may not be preserved when you leave the area. Entering the vehicle will remove it from the garrison.</Original>
       </Key>
       <Key ID="STR_A3A_garrison_vehicle_outside">
-        <Original>This vehicle is not within a rebel garrison."</Original>
+        <Original>This vehicle is not within a rebel garrison.</Original>
       </Key>
       <Key ID="STR_A3A_garrisons_header">
         <Original>Garrisons</Original>

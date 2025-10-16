@@ -422,7 +422,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 // Context section
                 class ContextLabel : A3A_SectionLabelRight
                 {
-                    idc = -1;
+                    idc = A3A_IDC_CONTEXTLABEL;
                     text = $STR_antistasi_dialogs_context_title;
                     x = 70 * GRID_W;
                     y = 53 * GRID_H;
@@ -476,7 +476,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                         class VehicleNameBackground : A3A_Background
                         {
-                            idc = -1;
+                            idc = A3A_IDC_VEHICLENAMEBACKGROUND;
                             x = 0;
                             y = 17 * GRID_H;
                             w = 30 * GRID_W;
@@ -1984,60 +1984,64 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class OccGroup : A3A_ControlsGroupNoScrollbars 
                 {
                     idc = A3A_IDC_WARSTATUS_OCCGROUP;
-                    x = 10 * GRID_W;
-                    y = 13 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 87 * GRID_H;
+                    x = 5 * GRID_W;
+                    y = 6 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 94 * GRID_H;
                     class controls 
                     {
-                        class OccTitle : A3A_Text 
+                        class OccTitle : A3A_SectionLabelCenter
                         {
                             idc = A3A_IDC_WARSTATUS_OCCTITLE;
                             text = "Occupants";
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 10 * GRID_H;
+                            w = 28 * GRID_W;
+                            h = 4 * GRID_H;
                         };
                         class OccFlag : A3A_Picture 
                         {
                             idc = A3A_IDC_WARSTATUS_OCCFLAG;
                             x = 0 * GRID_W;
-                            y = 10 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 14 * GRID_H;
+                            y = 6 * GRID_H;
+                            w = 28 * GRID_W;
+                            h = 19 * GRID_H;
                         };
                         class OccDescription : A3A_StructuredText
                         {
                             idc = A3A_IDC_WARSTATUS_OCCDESCRIPTION;
-                            x = 0 * GRID_W;
-                            y = 30 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 20 * GRID_H;
-                            sizeEx = GUI_TEXT_SIZE_SMALL;
+                            x = -1 * GRID_W;
+                            y = 28 * GRID_H;
+                            w = 30 * GRID_W;
+                            h = 43 * GRID_H;
+                            size = GUI_TEXT_SIZE_SMALL;
+                            style = ST_CENTER;
                         };
                         class OccAggro : A3A_Text
                         {
                             idc = A3A_IDC_WARSTATUS_OCCAGGRO;
                             x = 0 * GRID_W;
-                            y = 55 * GRID_H;
+                            y = 72 * GRID_H;
                             w = 24 * GRID_W;
                             h = 5 * GRID_H;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
                         };
                         class OccResources : A3A_Text
                         {
                             idc = A3A_IDC_WARSTATUS_OCCRESOURCES;
                             x = 0 * GRID_W;
-                            y = 60 * GRID_H;
+                            y = 77 * GRID_H;
                             w = 24 * GRID_W;
                             h = 5 * GRID_H;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
                         };
                         class OccKeys : A3A_Text {
                             idc = A3A_IDC_WARSTATUS_OCCKEYS;
                             x = 0 * GRID_W;
-                            y = 65 * GRID_H;
+                            y = 82 * GRID_H;
                             w = 24 * GRID_W;
                             h = 5 * GRID_H;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
                         };
                     };
                 };
@@ -2045,59 +2049,64 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class InvGroup : A3A_ControlsGroupNoScrollbars 
                 {
                     idc = A3A_IDC_WARSTATUS_INVGROUP;
-                    x = 43 * GRID_W;
-                    y = 13 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 87 * GRID_H;
+                    x = 38 * GRID_W;
+                    y = 6 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 94 * GRID_H;
                     class controls 
                     {
-                        class InvTitle : A3A_Text 
+                        class InvTitle : A3A_SectionLabelCenter
                         {
                             idc = A3A_IDC_WARSTATUS_INVTITLE;
                             text = "Invaders";
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 10 * GRID_H;
+                            w = 28 * GRID_W;
+                            h = 4 * GRID_H;
                         };
                         class InvFlag : A3A_Picture 
                         {
                             idc = A3A_IDC_WARSTATUS_INVFLAG;
                             x = 0 * GRID_W;
-                            y = 10 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 14 * GRID_H;
+                            y = 6 * GRID_H;
+                            w = 28 * GRID_W;
+                            h = 19 * GRID_H;
                         };
                         class InvDescription : A3A_StructuredText
                         {
                             idc = A3A_IDC_WARSTATUS_INVDESCRIPTION;
-                            x = 0 * GRID_W;
-                            y = 30 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 20 * GRID_H;
+                            x = -1 * GRID_W;
+                            y = 28 * GRID_H;
+                            w = 30 * GRID_W;
+                            h = 43 * GRID_H;
+                            size = GUI_TEXT_SIZE_SMALL;
+                            style = ST_CENTER;
                         };
                         class InvAggro : A3A_Text
                         {
                             idc = A3A_IDC_WARSTATUS_INVAGGRO;
                             x = 0 * GRID_W;
-                            y = 55 * GRID_H;
+                            y = 72 * GRID_H;
                             w = 24 * GRID_W;
                             h = 5 * GRID_H;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
                         };
                         class InvResources : A3A_Text
                         {
                             idc = A3A_IDC_WARSTATUS_INVRESOURCES;
                             x = 0 * GRID_W;
-                            y = 60 * GRID_H;
+                            y = 77 * GRID_H;
                             w = 24 * GRID_W;
                             h = 5 * GRID_H;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
                         };
                         class InvKeys : A3A_Text {
                             idc = A3A_IDC_WARSTATUS_INVKEYS;
                             x = 0 * GRID_W;
-                            y = 65 * GRID_H;
+                            y = 82 * GRID_H;
                             w = 24 * GRID_W;
                             h = 5 * GRID_H;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
                         };
                     };
                 };
@@ -2105,52 +2114,56 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class RebGroup : A3A_ControlsGroupNoScrollbars 
                 {
                     idc = A3A_IDC_WARSTATUS_REBGROUP;
-                    x = 73 * GRID_W;
-                    y = 13 * GRID_H;
-                    w = 24 * GRID_W;
-                    h = 87 * GRID_H;
+                    x = 71 * GRID_W;
+                    y = 6 * GRID_H;
+                    w = 28 * GRID_W;
+                    h = 94 * GRID_H;
                     class controls 
                     {
-                        class RebTitle : A3A_Text 
+                        class RebTitle : A3A_SectionLabelCenter
                         {
-                            idc = A3A_IDC_WARSTATUS_INVTITLE;
-                            text = "Invaders";
+                            idc = A3A_IDC_WARSTATUS_REBTITLE;
+                            text = "Rebels";
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 10 * GRID_H;
+                            w = 28 * GRID_W;
+                            h = 4 * GRID_H;
                         };
                         class RebFlag : A3A_Picture 
                         {
-                            idc = A3A_IDC_WARSTATUS_INVFLAG;
+                            idc = A3A_IDC_WARSTATUS_REBFLAG;
                             x = 0 * GRID_W;
-                            y = 10 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 14 * GRID_H;
+                            y = 6 * GRID_H;
+                            w = 28 * GRID_W;
+                            h = 19 * GRID_H;
                         };
                         class RebDescription : A3A_StructuredText
                         {
-                            idc = A3A_IDC_WARSTATUS_INVDESCRIPTION;
-                            x = 0 * GRID_W;
-                            y = 30 * GRID_H;
-                            w = 24 * GRID_W;
-                            h = 20 * GRID_H;
+                            idc = A3A_IDC_WARSTATUS_REBDESCRIPTION;
+                            x = -1 * GRID_W;
+                            y = 28 * GRID_H;
+                            w = 30 * GRID_W;
+                            h = 43 * GRID_H;
+                            size = GUI_TEXT_SIZE_SMALL;
+                            style = ST_CENTER;
                         };
                         class RebMoney : A3A_Text
                         {
                             idc = A3A_IDC_WARSTATUS_REBMONEY;
                             x = 0 * GRID_W;
-                            y = 55 * GRID_H;
+                            y = 72 * GRID_H;
                             w = 24 * GRID_W;
                             h = 5 * GRID_H;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
                         };
                         class RebHR : A3A_Text
                         {
                             idc = A3A_IDC_WARSTATUS_REBHR;
                             x = 0 * GRID_W;
-                            y = 60 * GRID_H;
+                            y = 77 * GRID_H;
                             w = 24 * GRID_W;
                             h = 5 * GRID_H;
+                            sizeEx = GUI_TEXT_SIZE_SMALL;
                         };
                     };
                 };
@@ -2160,13 +2173,13 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = -1;
                     x = 106 * GRID_W;
-                    y = 7 * GRID_H;
+                    y = 6 * GRID_H;
                     w = 54 * GRID_W;
                     h = 30 * GRID_H;
 
                     class controls
                     {
-                        class CampaignStatusLabel : A3A_SectionLabelRight
+                        class CampaignStatusLabel : A3A_SectionLabelCenter
                         {
                             idc = -1;
                             text = $STR_antistasi_dialogs_hq_campaign_status;
@@ -2424,7 +2437,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                             };
                         };
 
-                        class WarLevel : A3A_Textclass
+                        class WarLevel : A3A_Text
                         {
                             text = "War Level:";
                             idc = A3A_WARSTATUS_WARLEVEL;
@@ -2439,11 +2452,11 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class IntelGroup : A3A_ControlsGroupNoScrollbars {
                     idc = A3A_IDC_WARSTATUS_INTELGROUP;
                     x = 106 * GRID_W;
-                    y = 38 * GRID_H;
+                    y = 40 * GRID_H;
                     w = 54 * GRID_W;
                     h = 62 * GRID_H;
                     class controls {
-                        class IntelStreamTitle : A3A_SectionLabelRight
+                        class IntelStreamTitle : A3A_SectionLabelCenter
                         {
                             idc = A3A_IDC_WARSTATUS_INTELTITLE;
                             text = "Intel Feed";
@@ -2455,10 +2468,10 @@ class A3A_MainDialog : A3A_TabbedDialog
                         class IntelList : A3A_Listbox
                         {
                             idc = A3A_IDC_WARSTATUS_INTELLIST;
-                            x = 0 * GRID_W;
-                            y = 4 * GRID_H;
-                            w = 50 * GRID_W;
-                            h = 40 * GRID_H;
+                            x = 4 * GRID_W;
+                            y = 6 * GRID_H;
+                            w = 46 * GRID_W;
+                            h = 38 * GRID_H;
                         };
                         class IntelExtraInfo : A3A_StructuredText
                         {

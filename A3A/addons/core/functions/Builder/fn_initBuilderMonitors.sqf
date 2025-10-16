@@ -15,6 +15,7 @@ Info("initBuilderMonitors started2");
 
 // EH to draw icons for nearby under-construction objects
 A3A_buildDrawIconsEH = addMissionEventHandler ["Draw3D", {
+    if !(A3A_drawBuilderIcons) exitWith {};
     {
         // when we get farther away we increase the transparency
         private _normalizedDistance = 1 - ((_x distance player) / 100);
@@ -36,6 +37,7 @@ A3A_buildDrawIconsEH = addMissionEventHandler ["Draw3D", {
 while { true } do {
     if (isNil { cursorObject getVariable "A3A_building" }) then { sleep 1; continue };
     if (!isNil { cursorObject getVariable "A3A_build_removeAction" }) then { sleep 1; continue };
+    if (!A3A_showBuilderActions) then { sleep 1; continue };
 
     diag_log format ["Adding remove action for item %1", cursorObject];
     cursorObject setVariable ["A3A_build_removeAction", true];

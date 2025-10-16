@@ -38,6 +38,8 @@ private _occDescription = _display displayCtrl A3A_IDC_WARSTATUS_OCCDESCRIPTION;
 private _invDescription = _display displayCtrl A3A_IDC_WARSTATUS_INVDESCRIPTION;
 private _occAggro = _display displayCtrl A3A_IDC_WARSTATUS_OCCAGGRO;
 private _invAggro = _display displayCtrl A3A_IDC_WARSTATUS_INVAGGRO;
+private _occResources = _display displayCtrl A3A_IDC_WARSTATUS_OCCRESOURCES;
+private _invResources = _display displayCtrl A3A_IDC_WARSTATUS_INVRESOURCES;
 private _occKeys = _display displayCtrl A3A_IDC_WARSTATUS_OCCKEYS;
 private _invKeys = _display displayCtrl A3A_IDC_WARSTATUS_INVKEYS;
 private _rebFlag = _display displayCtrl A3A_IDC_WARSTATUS_REBFLAG;
@@ -69,15 +71,17 @@ switch (_mode) do
         _invDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Inv_template" >> "lore");
         _occDescription ctrlSetStructuredText parseText _occDesc;
         _invDescription ctrlSetStructuredText parseText _invDesc;
-        _occAggro ctrlSetText str aggressionLevelOccupants;
-        _invAggro ctrlSetText str aggressionLevelInvaders;
-        _occKeys ctrlSetText str occRadioKeys;
-        _invKeys ctrlSetText str invRadioKeys;
+        _occAggro ctrlSetText format ["Aggression:<br/>%1", [aggressionLevelOccupants] call FUNCMAIN(getAggroLevelString)];
+        _invAggro ctrlSetText format ["Aggression:<br/>%1", [aggressionLevelInvaders] call FUNCMAIN(getAggroLevelString)];
+        _occResources ctrlSetText format ["Resources (?*): %1", "High"];
+        _invResources ctrlSetText format ["Resources (?*): %1", "High"];
+        _occKeys ctrlSetText format ["Radio Keys: %1", occRadioKeys];
+        _invKeys ctrlSetText format ["Radio Keys: %1", invRadioKeys];
         _rebFlag ctrlSetText (Faction(teamPlayer) get "flagTexture");
         _rebDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Reb_template" >> "lore");
         _rebDescription ctrlSetStructuredText parseText _rebDesc;
-        _rebMoney ctrlSetText str (server getVariable "resourcesFIA");
-        _rebHR ctrlSetText str (server getVariable "hr");
+        _rebMoney ctrlSetText format ["Money: %1", str (server getVariable "resourcesFIA")];
+        _rebHR ctrlSetText format ["HR: %1", str (server getVariable "HR")];
 
 
 
