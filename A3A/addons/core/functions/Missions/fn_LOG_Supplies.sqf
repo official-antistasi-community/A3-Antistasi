@@ -57,7 +57,6 @@ _bonus = if (_difficultX) then {2} else {1};
 if ((dateToNumber date > _dateLimitNum) or (isNull _truckX)) then
 	{
 	[_taskId, "SUPP", "FAILED"] call A3A_fnc_taskSetState;
-	[5*_bonus,-5*_bonus,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
 	[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
 	}
 else
@@ -101,14 +100,13 @@ else
 			[_taskId, "SUPP", "SUCCEEDED"] call A3A_fnc_taskSetState;
 			{if (_x distance _positionX < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
 			[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
-			[-15*_bonus,15*_bonus,_markerX] remoteExec ["A3A_fnc_citySupportChange",2];
+			[15*_bonus, _markerX] remoteExecCall ["A3A_fnc_citySupportChange", 2];
             Debug("aggroEvent | Rebels won a supply mission");
 			[Occupants, -10, 60] remoteExec ["A3A_fnc_addAggression",2];
 			}
 		else
 			{
 			[_taskId, "SUPP", "FAILED"] call A3A_fnc_taskSetState;
-			[5*_bonus,-5*_bonus,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
 			[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
 			};
 	};

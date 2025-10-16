@@ -48,6 +48,8 @@ class A3A {
                 missileLauncher[] = {"Missile_AGM_02_Plane_CAS_01_F"};
             };
             class UK3CB_MDF_B_Mystere_CAS1 : UK3CB_B_Mystere_HIDF_CAS1{};
+            class a3a_UK3CB_Fake_Mig : UK3CB_B_Mystere_HIDF_CAS1{};
+            class a3a_UK3CB_Fake_Sabre : UK3CB_B_Mystere_HIDF_CAS1{};
             
             class UK3CB_ADA_B_L39_PYLON : baseCAS {
                 loadout[] = {"PylonRack_7Rnd_Rocket_04_AP_F","PylonRack_3Rnd_LG_scalpel","PylonRack_12Rnd_missiles","PylonWeapon_300Rnd_20mm_shells","PylonRack_12Rnd_missiles","PylonRack_3Rnd_LG_scalpel","PylonRack_7Rnd_Rocket_04_AP_F"};
@@ -65,6 +67,8 @@ class A3A {
                 rocketLauncher[] = {"rhs_weap_s8t"};
                 missileLauncher[] = {"uk3cb_weap_kh25ma_Launcher"};
             };
+            class UK3CB_GAF_B_MIG21_AT : UK3CB_TKA_B_MIG21_AT {};
+            class UK3CB_CW_SOV_O_EARLY_MIG21_AT : UK3CB_TKA_B_MIG21_AT {};
             
             class UK3CB_AAF_B_Gripen_G : baseCAS {
                 loadout[] = {"","","PylonRack_Missile_AGM_02_x1","PylonRack_Missile_AGM_02_x1","PylonRack_Missile_AGM_02_x2","PylonRack_Missile_AGM_02_x2"};
@@ -93,6 +97,7 @@ class A3A {
             class UK3CB_LDF_B_MIG29SM : rhs_mig29sm_vvs {};
             class UK3CB_KDF_B_MIG29SM : rhs_mig29sm_vvs {};
             class UK3CB_AAF_O_MIG29S : rhs_mig29sm_vvs {};
+            class UK3CB_GAF_B_MIG29S : rhs_mig29sm_vvs {};
             class UK3CB_CSAT_A_O_MIG29SM : rhs_mig29sm_vvs{};
             class UK3CB_CSAT_B_O_MIG29SM : rhs_mig29sm_vvs{};
             class UK3CB_CSAT_F_O_MIG29SM : rhs_mig29sm_vvs{};
@@ -121,15 +126,28 @@ class A3A {
                 loadout[] = {"rhs_mag_R73M_APU73","rhs_mag_R73M_APU73","rhs_mag_R73M_APU73","rhs_mag_R73M_APU73"};
             };
             class UK3CB_TKA_B_MIG21_AA : UK3CB_LDF_B_MIG21_AA {};
+            class UK3CB_GAF_B_MIG21_AA : UK3CB_LDF_B_MIG21_AA {};
+            class UK3CB_CW_SOV_O_EARLY_MIG21_AA : UK3CB_LDF_B_MIG21_AA {};
             
             class UK3CB_B_Mystere_HIDF_AA1 : baseCAP {
                 loadout[] = {"PylonRack_1Rnd_Missile_AA_04_F","PylonRack_1Rnd_AAA_missiles","PylonRack_1Rnd_AAA_missiles","PylonRack_1Rnd_Missile_AA_04_F"};
             };
             class UK3CB_MDF_B_Mystere_AA1 : UK3CB_B_Mystere_HIDF_AA1 {};
+            class a3a_UK3CB_Fake_Mig : UK3CB_B_Mystere_HIDF_AA1{};
+            class a3a_UK3CB_Fake_Sabre : UK3CB_B_Mystere_HIDF_AA1{};
         };
         class Helicopter
         {
-
+            class baseHelicopter;
+            class UK3CB_CW_SOV_O_EARLY_Mi_24V : baseHelicopter {
+                loadout[] = {"rhs_mag_b8v20a_s8df","rhs_mag_b8v20a_s8df","rhs_mag_9M114M_Mi24_2x","rhs_mag_9M114M_Mi24_2x","rhs_mag_9M17p_Mi24_2x","rhs_mag_9M17p_Mi24_2x","rhs_ASO2_CMFlare_Chaff_Magazine_x4"};
+            };
+            class UK3CB_CW_SOV_O_EARLY_Mi_24P : baseHelicopter {
+                loadout[] = {"rhs_mag_upk23_mixed","rhs_mag_apu68m3_s24b","rhs_mag_ub32_s5ko","rhs_mag_ub32_s5ko","rhs_mag_9M17p_Mi24_2x","rhs_mag_9M17p_Mi24_2x","rhs_ASO2_CMFlare_Chaff_Magazine_x4"};
+            };
+            class UK3CB_CW_SOV_O_EARLY_Mi8AMTSh : baseHelicopter {
+                loadout[] = {"rhs_mag_upk23_mixed","rhs_mag_upk23_mixed","rhs_mag_ub32_s5k1","rhs_mag_ub32_s5k1","rhs_mag_ub32_s5m1","rhs_mag_ub32_s5m1","rhs_ASO2_CMFlare_Chaff_Magazine_x4"};
+            };
         };
     };
 };

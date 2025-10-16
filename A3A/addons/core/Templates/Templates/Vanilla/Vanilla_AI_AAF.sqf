@@ -32,7 +32,7 @@ private _cargoTrucks = ["I_Truck_02_transport_F", "I_Truck_02_covered_F"];
 ["vehiclesTanks", ["I_MBT_03_cannon_F"]] call _fnc_saveToTemplate;
 private _AA = ["I_LT_01_AA_F"];
 
-["vehiclesTransportBoats", ["I_Boat_Transport_01_F", "I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["I_APC_Wheeled_03_cannon_F", "I_MRAP_03_hmg_F", "I_MRAP_03_gmg_F", "I_MRAP_03_F"]] call _fnc_saveToTemplate;
 
@@ -43,7 +43,7 @@ private _AA = ["I_LT_01_AA_F"];
 private _vehiclesHelisLight = ["I_Heli_light_03_unarmed_F"];
 private _vehiclesHelisTransport = ["I_Heli_Transport_02_F"];
 private _vehiclesHelisLightAttack = ["I_Heli_light_03_dynamicLoadout_F"];
-private _vehiclesHelisAttack = ["B_Heli_Attack_01_dynamicLoadout_F"];
+private _vehiclesHelisAttack = ["B_Heli_Attack_01_dynamicLoadout_F","B_Heli_Attack_01_dynamicLoadout_F","B_Heli_Attack_01_pylons_dynamicLoadout_F"];
 
 ["vehiclesArtillery", ["I_Truck_02_MRL_F", "B_MBT_01_arty_F"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
@@ -104,7 +104,8 @@ if ("rf" in A3A_enabledDLC) then {
     _vehiclesHelisLightAttack append ["a3a_AAF_Heli_light_03_dynamicLoadout_rf"];
     _vehiclesHelisAttack = ["a3a_AAF_Heli_EC_02_rf"];
     _vehiclesMilitiaCars append ["I_Pickup_rf"];
-    _vehiclesMilitiaLightArmed append ["I_Pickup_mmg_rf","I_Pickup_hmg_rf"];
+    _vehiclesMilitiaLightArmed append ["I_Pickup_mmg_rf","I_Pickup_hmg_rf","I_Pickup_rcws_rf"];
+    _lightArmed append ["I_Pickup_rcws_rf"];
 };
 
 ["vehiclesHelisLight", _vehiclesHelisLight] call _fnc_saveToTemplate;
@@ -457,13 +458,14 @@ if ("rf" in A3A_enabledDLC) then {
     ["SMG_01_black_RF", "", "", "optic_Holosight", [], [], ""],
     ["SMG_01_black_RF", "", "", "optic_Aco_smg", [], [], ""]
     ];
-    (_militiaLoadoutData get "SMGs") append [
+    (_militiaLoadoutData get "SMGs") append [ 
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "", [], [], ""]
     ];
     (_policeLoadoutData get "SMGs") append [
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Holosight", [], [], ""],
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Aco_smg", [], [], ""]
     ];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
     (_sfLoadoutData get "helmets") append [
     "H_HelmetIA_sb_digital_RF",
     "H_HelmetHeavy_Olive_RF",
@@ -471,6 +473,25 @@ if ("rf" in A3A_enabledDLC) then {
     "H_HelmetHeavy_VisorUp_Olive_RF"];
     (_militaryLoadoutData get "helmets") append ["H_HelmetIA_sb_digital_RF"];
     (_militiaLoadoutData get "helmets") append ["H_HelmetIA_sb_digital_RF"];
+    // AAF hold onto a lot of stockpile PSRL launchers and warheads and issues them everywhere
+    private _lightLaunchersAppend = [ // 2/3 chance of LAT being psrl against NLAW
+    ["launch_PSRL1_digi_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    private _medLaunchersSet = [ // 3/4 chance of MAT being psrl
+    ["launch_PSRL1_digi_RF", "", "", "", ["PSRL1_FRAG_RF", "PSRL1_HE_RF", "PSRL1_AT_RF"], [], ""], // issued for anti structure
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_HE_RF"], [], ""],
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_MRAWS_green_rail_F", "", "acc_pointer_IR", "", ["MRAWS_HEAT_F", "MRAWS_HEAT55_F"], [], ""],
+    ["launch_MRAWS_green_F", "", "acc_pointer_IR", "", ["MRAWS_HEAT_F", "MRAWS_HE_F"], [], ""]
+    ];
+    {
+        (_x get "lightATLaunchers") append _lightLaunchersAppend;
+        _x set ["ATLaunchers", _medLaunchersSet];
+    } forEach [_militiaLoadoutData, _militaryLoadoutData, _sfLoadoutData];
 };
 
 

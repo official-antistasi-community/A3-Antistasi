@@ -73,7 +73,7 @@ if (_vehNodes isEqualType []) then {
             _ctrlExtraMounts lbSetTextRight [_index, format ["Size: %1", _size]];
             Trace_4("Mount Added to list | Class: %1 | UID: %2 | Checked: %3 | Size: %4", _staticClass, _x, (_checkedOut isEqualTo HR_GRG_PlayerUID), _type);
         };
-    } forEach (HR_GRG_Vehicles#4);//statics
+    } forEach (HR_GRG_Vehicles#HR_GRG_STATICINDEX);//statics
     lbSort _ctrlExtraMounts;
 };
 if (_reloadMounts) then { [] call HR_GRG_fnc_reloadMounts };
@@ -142,6 +142,28 @@ private _spacer = composeText [lineBreak, lineBreak];
 private _topBar = composeText [
     image cfgIcon(_class), " ", cfgDispName(_class)
 ];
+
+//update Origins panel
+private _Origins = _disp displayCtrl HR_GRG_IDC_OriginsPanel;
+private _itemCfg = configfile >> "cfgvehicles" >> _class;
+private _dlc = "";
+private _addons = configsourceaddonlist _itemCfg;
+if (count _addons > 0) then {
+	private _mods = configsourcemodlist (configfile >> "CfgPatches" >> _addons select 0);
+	if (count _mods > 0) then {
+		_dlc = _mods select 0;
+	};
+};
+private _dlcParams = modParams [_dlc,["logo","logoOver"]];
+private _logo = _dlcParams param [0,""];
+private _logoOver = _dlcParams param [1,""];
+private _fieldManualTopicAndHint = getarray (configfile >> "cfgMods" >> _dlc >> "fieldManualTopicAndHint");
+_Origins ctrlsetfade 0;
+_Origins ctrlseteventhandler ["buttonclick",format ["if (count %1 > 0) then {(%1 + [ctrlparent (_this select 0)]) call bis_fnc_openFieldManual;};",_fieldManualTopicAndHint]];
+private _OriginsText = composeText [
+    image _logo, " ",[_itemCfg,_Origins] call bis_fnc_overviewauthor
+];
+_Origins ctrlSetStructuredText _OriginsText;
 
 //is source
 private _source = [

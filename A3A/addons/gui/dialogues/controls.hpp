@@ -639,9 +639,9 @@ class A3A_MapControl
     stickY[] = {0.2,["Gamma",1,1.5]};
     moveOnEdges = 1;
     x = "SafeZoneXAbs";
-    y = SafeZoneY + 1.5 * GUI_GRID_H;
+    y = SafeZoneY + 1.5 * GRID_H;
     w = "SafeZoneWAbs";
-    h = SafeZoneH - 1.5 * GUI_GRID_H;
+    h = SafeZoneH - 1.5 * GRID_H;
     shadow = 0;
     ptsPerSquareSea = 5;
     ptsPerSquareTxt = 20;
@@ -683,10 +683,10 @@ class A3A_MapControl
     {
         colorBackground[] = {1,1,1,0.5};
         color[] = {0,0,0,1};
-        x = SafeZoneX + GUI_GRID_W;
-        y = SafeZoneY + safezoneH - 4.5 * GUI_GRID_H;
-        w = 10 * GUI_GRID_W;
-        h = 3.5 * GUI_GRID_H;
+        x = SafeZoneX + GRID_W;
+        y = SafeZoneY + safezoneH - 4.5 * GRID_H;
+        w = 10 * GRID_W;
+        h = 3.5 * GRID_H;
         font = "RobotoCondensed";
         sizeEx = GUI_TEXT_SIZE_SMALL;
     };
@@ -1169,4 +1169,9 @@ class A3A_ComboBox_Small : A3A_ComboBox
 {
     sizeEx = GUI_TEXT_SIZE_SMALL;
     rowHeight = GUI_TEXT_SIZE_SMALL;
+};
+
+class A3A_Button_Small: A3A_Button
+{
+    sizeEx = GUI_TEXT_SIZE_SMALL;
 };

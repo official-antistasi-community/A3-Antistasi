@@ -37,7 +37,7 @@ switch (_mode) do
     case ("onLoad"):
     {
         // Draw hatched danger zones
-        private _mainMarkers = (markersX - controlsX - ["Synd_HQ"]);
+        private _mainMarkers = markersX - ["Synd_HQ"];
         private _mrkDangerZone = [];
         {
             _mrk = createMarkerLocal [format ["dangerzone%1", count _mrkDangerZone], markerPos _x];

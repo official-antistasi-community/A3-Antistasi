@@ -79,9 +79,10 @@ HR_GRG_fnc_Hint = {
     ] call A3A_fnc_customHint;
 };
 HR_GRG_fnc_vehInit = {
-    if (_this isKindOf "StaticWeapon") then {staticsToSave pushBack _this; publicVariable "staticsToSave"};
+    // Add to garrison if placed within one
     _this setVariable ["ownerX",getPlayerUID player,true];
     [_this, TeamPlayer] call A3A_fnc_AIVEHinit;
+    ["", _this] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
 }; //is passed vehicle as _this
 HR_GRG_onOpenEvent = {
     //hide Antistasi's top information string as it has no use in the Garage
@@ -91,6 +92,15 @@ HR_GRG_onOpenEvent = {
 HR_GRG_onCloseEvent = {
     //show Antistasi's top information string
     ["GARAGE", false] call A3A_fnc_disableInfoBar;
+};
+
+// Function to check if the vehicle class is undercover
+HR_GRG_isCivilian = {
+    params [
+        ["_class", ""]
+    ];
+
+    [1, 0] select (_class in undercoverVehicles);
 };
 
 //CBA settings

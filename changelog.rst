@@ -3,6 +3,197 @@ Changelog
 ==========
 
 
+Version 3.9.0
+===============
+
+.. note::
+   18th May 2024
+
+.. admonition:: Major
+   
+   * :issue:`3454` AI will now send boats for naval support during major attacks
+   * :issue:`3483` Added maps Napf and Napf Winter
+   * :issue:`3489` Added map Regero
+   * :issue:`3511` Added a gun shop where Petros' cousin, Solomon, sells small arms
+   * :issue:`3515` Fixed many bugs and added many features to new battle menu
+
+.. admonition:: Minor
+
+   * :issue:`3378` Added additional vehicle categories and an author section to the garage
+   * :issue:`3440` Reworked airbase vehicle spawn selection
+   * :issue:`3444` AI will now fast-rope from more helicopters
+   * :issue:`3472` Re-enabled scouting UAV support during attacks
+   * :issue:`3493` Added better ACRE radio to starting equipment
+   * :issue:`3501` Binocular magazine is now loaded from arsenal automatically
+   * :issue:`3502` Improved accuracy on dive bombing planes
+   * :issue:`3514` Added ACE Plotting Board to starting equipment
+   * :issue:`3521` TFAR radio distance is now boosted by friendly towers
+   * :issue:`3526` Statics are now sold for half their cost
+   * :issue:`3527` SPE bridges can no longer be destroyed
+   * :issue:`3532` Added tooltips to some new game setup options
+   * :issue:`3536` Explosive placement is now logged
+   * :issue:`3539` Petros can now die to enemy napalm
+   * :issue:`3540` MG car squads can now be bought from the new battle menu
+   * :issue:`3550` Softened corpse auto-cleanup rules
+   * :issue:`3570` Added ACE universal artillery rangetable to starting equipment
+   * :issue:`3571` Convoys now pick smarter start and end points
+   * :issue:`3579` Successfully defended punishments reduce punishment chance
+   * :issue:`3589` Airbases will sometimes spawn transport and light attack helis
+   * :issue:`3600` Players can set their own UI preference from the "Game Options" screen
+
+.. admonition:: Template updates
+
+   * :issue:`3499` Added 3CB civilian factions ADC and MEC
+   * :issue:`3512` Updated WS and RF to 1.05 and 1.03 updates
+   * :issue:`3518` Added 3CB US Marines faction
+   * :issue:`3519` Added 3CB GAF faction
+   * :issue:`3588` Changed Assault Boat to RHIB in many factions
+
+.. admonition:: Terrain updates
+
+   * :issue:`3528` Removed a few erroneous objects on Colombia
+   * :issue:`3544` Changed garage box to traditional red box on several maps
+
+.. admonition:: Bugfixes
+
+   * :issue:`3481` Fixed searching two squad leads for intel
+   * :issue:`3482` Fixed fake AI players being created
+   * :issue:`3496` Fixed paratroopers landing in water
+   * :issue:`3508` Fixed SOG factions using Greek names
+   * :issue:`3516` Fixed undercover breaking on vehicle repair
+   * :issue:`3517` Fixed wrong laptop hack string
+   * :issue:`3524` Fixed garage count not updating on open
+   * :issue:`3531` Fixed an error with support calls on AFK players
+   * :issue:`3531` Fixed an error with two players building the same object
+   * :issue:`3534` Placed speed limit on CAS to avoid lawn-darting
+   * :issue:`3535` Fixed resources spawning military instead of militia sniper patrols
+   * :issue:`3539` Fixed some Petros death bugs
+   * :issue:`3553` Fixed broken specops squads with missing UAVs
+   * :issue:`3574` Fixed some log spam from towing physics objects
+   * :issue:`3585` Fixed transport helos attempting to land too fast
+
+.. admonition:: Groundwork
+
+   * :issue:`3507` Added additional map customizability with valid banks and attack distances
+
+.. admonition:: Localization
+
+   * [No PRs] - Unfortunately no updates due to pipeline issues.
+
+.. admonition:: Tools
+
+
+.. admonition:: Refactor
+
+   * :issue:`3523` Refactored roadblock and SpecOp point placement and management
+   * :issue:`3586` Added baseWeapon automatic checking to loot scripts
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
+Version 3.8.0
+===============
+
+.. note::
+   29th December 2024
+
+.. admonition:: Major
+
+   * :issue:`3441` & :issue:`3442` Added Expeditionary Forces MJTF factions and added EF integration in Vanilla and Western Sahara templates
+   * :issue:`3392` Added UI and supporting code to set custom loadouts for rebel troops
+
+.. admonition:: Minor
+
+   * :issue:`3376` Changed to have more frequent militia vehicles/transports early game
+   * :issue:`3388` Implemented mortar/artillery support ranging shot and walking barrage
+   * :issue:`3389` Added injector success and UID logging
+   * :issue:`3430` Turned Carpet bombing into triple airstrike
+   * :issue:`3459` Added various TFAR backpacks and to multiple templates
+   * :issue:`3462` Improved loot-to-crate to dump to single weapon holder
+
+.. admonition:: Template updates
+
+   * :issue:`3182` Added 3CB CSAT Scimitar, Gryphon, Bear, and Viper regiment
+   * :issue:`3407` Updated Vanilla/WS Factions, fine tuning, officer loadouts, further RF integration in vanilla and WS factions
+   * :issue:`3413` & :issue:`3429` & :issue:`3460` Added CWR3 Factions Templates
+   * :issue:`3414` Added Aegis Factions Compatibility
+   * :issue:`3428` Added SPEX Factions Templates
+   * :issue:`3442` Added 3CBF weapon integration into RHS factions
+   * :issue:`3437` Updated IFA Faction Templates to solve a bug with the large intel item. Adds Churchills to the IFA UK faction IFV lineup
+   * :issue:`3451` Fixed missing comma and incorrect artillery classnames in CUP template in BAF, ION
+   * :issue:`3452` Updated 3CB LDF with the Livonian Armed Forest Rangers, and corrected magazine classname for the rocket artillery
+   * :issue:`3457` Fixed NVG entry in RHS HIDF
+
+.. admonition:: Terrain updates
+
+   * :issue:`3424` & :issue:`3448` & :issue:`3463` Updated Isla Duala to hide "bad" objects, cull obsolete enemy locations and to be taken off of 'dev' status, hence being available to play
+
+.. admonition:: Bugfixes
+
+   * :issue:`3386` Flattened out support responses and block support calls for mine kills
+   * :issue:`3390` Fixed HQ actions being available through remote controls
+   * :issue:`3393` Fixed skill upgrade tooltip not updating
+   * :issue:`3395` Fixed errors caused by tags function
+   * :issue:`3397` Fixed arsenal not clearing client IDs on disconnect
+   * :issue:`3402` Prevented rebels AIs being equipped with VN melee weapons
+   * :issue:`3406` Fixed base class for srifle_GM6_snake_lxWS
+   * :issue:`3418` Fixed precedence error in mortar/arty support routine
+   * :issue:`3416` Fixed custom WS Kamaz Textures
+   * :issue:`3436` Fixed debug line in fn_setPlaneLoadout.sqf
+   * :issue:`3446` Fixed wrong owner check in fn_addBombRun.sqf
+   * :issue:`3455` Fixed and optimized spawner selection
+   * :issue:`3458` Fixed issue with Rebel Loadouts
+   * :issue:`3473` Fixed issue with Rebel Airstrike
+
+.. admonition:: Groundwork
+
+   * :issue:`3423` Added Helicopter Config Loadout capability
+
+.. admonition:: Localization
+
+   * [No PRs] - Unfortunately no updates due to pipeline issues.
+
+.. admonition:: Tools
+
+   * :issue:`3401` Added Seat drawing dev function
+
+.. admonition:: Refactor
+
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
+Version 3.7.1
+===============
+
+.. note::
+   8th October 2024
+
+.. admonition:: Bugfixes
+
+   * :issue:`3409` Fix CUP disposable missile launchers breaking init after CBA 3.18 update
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
 Version 3.7.0
 ===============
 

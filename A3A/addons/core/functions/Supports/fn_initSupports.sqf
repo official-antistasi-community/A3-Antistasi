@@ -43,7 +43,8 @@ private _initData = [
     ["QRFAIR",        "TROOPS", 0.5, 0.1,   0,   0,  "", ""],
     ["CARPETBOMBS",     "AREA", 0.5, 0.1, 200,   0, "u", "vehiclesPlanesCAS"],            // balanced against airstrikes
     ["SAM",           "TARGET", 1.0, 1.0,   0, 100,  "", ""],                             // balanced against ASF
-    ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""]
+    ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""],
+    ["UAV",             "AREA", 0.0, 0.0,   0,   0,  "", "uavsAttack"]                    // Not used for support calls 
 //    ["GUNSHIP",    ["AREA",   0.2,  50,   0]],                 // uh. Does AREA work for this? Only lasts 5 minutes so maybe...
 ];
 
@@ -105,15 +106,9 @@ A3A_supportMarkerTypes = [];     // format [markerName, markerType, hasRadio, de
     A3A_supportMarkersXYI pushBack [_pos#0, _pos#1, _forEachIndex];
 } forEach A3A_supportMarkerTypes;
 
-// Find nearest marker for each radio tower and mark it in markersDetail
+// Increase defenceMul for markers with radio towers
 {
-    private _closeMrk = A3A_supportMarkersXYI inAreaArray [getPosATL _x, 500, 500];
-    if (_closeMrk isEqualTo []) then { continue };
-    private _nearest = [_closeMrk, _x] call BIS_fnc_nearestPosition;
-    (A3A_supportMarkerTypes select (_nearest#2)) set [2, true];          // mark as having radio tower
-} forEach (antennas + antennasDead);        // ugh
-
-{
-    // increase defenceMul if it's a radio tower
-    if (_x#2) then { _x set [3, (_x#3) + RADIO_TOWER_BONUS] };
+    if (_x#1 == "Town" or !(_x#0 in A3A_antennaMap)) then { continue };
+    _x set [2, true];
+    _x set [3, (_x#3) + RADIO_TOWER_BONUS];
 } forEach A3A_supportMarkerTypes;

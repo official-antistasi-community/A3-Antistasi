@@ -24,16 +24,19 @@ private _translateMarker = {
     _mrk;
 };
 
+private _numToSide = createHashMapFromArray [ [0,teamPlayer], [1,Occupants], [2,Invaders] ];
+
 //===========================================================================
 //ADD VARIABLES TO THIS ARRAY THAT NEED SPECIAL SCRIPTING TO LOAD
 private _specialVarLoads = [
     "outpostsFIA","minesX","staticsX","antennas","mrkNATO","mrkSDK","prestigeNATO",
-    "prestigeCSAT","posHQ","hr","armas","items","backpcks","ammunition","dateX","prestigeOPFOR",
+    "prestigeCSAT","posHQ","hr","armas","items","backpcks","ammunition","dateX",
     "prestigeBLUFOR","resourcesFIA","skillFIA","destroyedSites",
     "garrison","tasks","membersX","vehInGarage","destroyedBuildings","idlebases",
-    "chopForest","weather","killZones","jna_dataList","controlsSDK","mrkCSAT","nextTick",
+    "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
-    "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts"
+    "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
+    "minorSites", "newGarrison", "radioKeys", "cityData"
 ];
 
 private _varName = _this select 0;
@@ -54,16 +57,16 @@ if (_varName in _specialVarLoads) then {
     if (_varName == 'mrkNATO') then {{sidesX setVariable [[_x] call _translateMarker,Occupants,true]} forEach _varValue;};
     if (_varName == 'mrkCSAT') then {{sidesX setVariable [[_x] call _translateMarker,Invaders,true]} forEach _varValue;};
     if (_varName == 'mrkSDK') then {{sidesX setVariable [[_x] call _translateMarker,teamPlayer,true]} forEach _varValue;};
-    if (_varName == 'controlsSDK') then {
-        {
-            sidesX setVariable [_x,teamPlayer,true]
-        } forEach _varValue;
-    };
     if (_varName == 'chopForest') then {chopForest = _varValue; publicVariable "chopForest"};
     if (_varName == 'jna_dataList') then {jna_dataList = +_varValue};
     //Keeping these for older saves
     if (_varName == 'prestigeNATO') then {[Occupants, _varValue, 120] call A3A_fnc_addAggression};
     if (_varName == 'prestigeCSAT') then {[Invaders, _varValue, 120] call A3A_fnc_addAggression};
+    if (_varName == 'radioKeys') then 
+    {
+        occRadioKeys = _varValue#0;
+        invRadioKeys = _varValue#1;
+    };
     if (_varName == 'aggressionOccupants') then
     {
         aggressionLevelOccupants = _varValue select 0;
@@ -98,7 +101,17 @@ if (_varName in _specialVarLoads) then {
         } forEach FactionGet(reb,"unitsSoldiers");
     };
     if (_varname == "HR_Garage") then {
-        [_varValue] call HR_GRG_fnc_loadSaveData;
+        private _grgData = _varValue;
+        private _cats = _grgData#0;
+        private _newGrgCats = [];
+        {
+            // json requires string keys, so garage numbers are saved as stringified numbers (e.g. "1") and parsed in-game as the actual numbers
+            private _keys = (keys _x) apply {if (_x isEqualType 0) then {_x} else {call compile _x}};
+            private _hm = _keys createHashMapFromArray (values _x);
+            _newGrgCats pushback _hm;
+        } forEach _cats;
+        _grgData set [0, _newGrgCats];
+        [_grgData] call HR_GRG_fnc_loadSaveData;
     };
     if (_varName == 'vehInGarage') then { //convert old garage to new garage
         vehInGarage= [];
@@ -113,14 +126,8 @@ if (_varName in _specialVarLoads) then {
             private _building = nearestObjects [_x, ["House"], 1, true] select 0;
             call {
                 if (isNil "_building") exitWith { Error_1("No building found at %1", _x)};
-                if (_building in antennas) exitWith { Info("Antenna in destroyed building list, ignoring")};
-
-                private _ruin = [_building] call BIS_fnc_createRuin;
-                if (isNull _ruin) exitWith {
-                    Error_1("Loading Destroyed Buildings: Unable to create ruin for %1", typeOf _building);
-                };
-
-                destroyedBuildings pushBack _building;
+                if (_building in A3A_antennas) exitWith { Info("Antenna in destroyed building list, ignoring")};
+                A3A_destroyedBuildings pushBack _building;      // store for update after the BuildingChanged EH is installed
             };
         } forEach _varValue;
     };
@@ -129,140 +136,58 @@ if (_varName in _specialVarLoads) then {
             (_varvalue select _i) params ["_typeMine", "_posMine", "_detected", "_dirMine"];
             private _mineX = createVehicle [_typeMine, _posMine, [], 0, "CAN_COLLIDE"];
             if !(isNil "_dirMine") then { _mineX setDir _dirMine };
-            {_x revealMine _mineX} forEach _detected;
+            {(_numToSide getorDefault [_x, _x]) revealMine _mineX} forEach _detected;       // backwards compat: works with both number & side
         };
     };
-    if (_varName == 'garrison') then {
-        private _loadoutNames = createHashMapFromArray ((
-                keys FactionGetOrDefault(occ,"loadouts",createHashMap)
-                + keys FactionGetOrDefault(inv,"loadouts",createHashMap)
-                + keys FactionGetOrDefault(reb,"loadouts",createHashMap)
-                + keys FactionGetOrDefault(civ,"loadouts",createHashMap)
-            ) apply {[toLower _x, _x]} );
-
-        {
-            private _marker = [_x select 0] call _translateMarker;
-            private _garrison = [];
-            private _replacements = switch (sidesX getVariable _marker) do {
-                case (Occupants): { (A3A_faction_occ get "groupsSquads") select 0 };
-                case (Invaders): { (A3A_faction_inv get "groupsSquads") select 0 };
-                default { A3A_faction_reb get "groupSquad" };
-            };
-
-            {
-                // skip garbage created by old bugs
-                if (isNil "_x") then { Debug("Garrison load | Removed nil entry"); continue };
-                if !(_x isEqualType "") then { Debug_2("Garrison load | Removed bad entry: %1 | Type %2", _x, typeName _x); continue };
-                if (_x isEqualTo "") then { Debug("Garrison load | Removed empty entry"); continue };
-
-                // fix for 2.4 -> 2.5 rebel garrison incompatibility
-                if (_x find "loadouts_rebel" == 0) then {
-                    _x = ("loadouts_reb" + (_x select [14]));
-                };
-                //templates move to hashmap case compat
-                private _loadoutName = toLower (_x select [13]);
-                _x = ( (_x select [0,13]) + (_loadoutNames getOrDefault [_loadoutName, ""]) );
-                if ( (_x select [0,13]) isEqualTo _x ) then {
-                    Debug_1("Garrison load | Replacing bad loadout name: %1", _x + _loadoutName);
-                    _x = selectRandom _replacements;					// Fix for pre-2.4 garrisons
-                };
-                //loadout name valid, add to garrison
-                _garrison pushBack _x;
-            } forEach (_x select 1);
-
-            garrison setVariable [_marker, _garrison, true];
-            if (count _x > 2) then { garrison setVariable [_marker + "_lootCD", _x select 2, true] };
-        } forEach _varvalue;
-    };
-    if (_varName == 'wurzelGarrison') then {
-        {
-            garrison setVariable [format ["%1_garrison", (_x select 0)], +(_x select 1), true];
-            garrison setVariable [format ["%1_requested", (_x select 0)], +(_x select 2), true];
-            garrison setVariable [format ["%1_over", (_x select 0)], +(_x select 3), true];
-            [(_x select 0)] call A3A_fnc_updateReinfState;
-        } forEach _varvalue;
+    if (_varName == 'newGarrison') then {
+        A3A_garrison = _varValue;
     };
     if (_varName == 'outpostsFIA') then {
-        if (count (_varValue select 0) == 2) then {
-            {
-                _positionX = _x select 0;
-                _garrison = _x select 1;
-                _mrk = createMarker [format ["FIApost%1", random 1000], _positionX];
-                _mrk setMarkerShape "ICON";
-                _mrk setMarkerType "loc_bunker";
-                _mrk setMarkerColor colorTeamPlayer;
-                if (isOnRoad _positionX) then {_mrk setMarkerText format ["%1 Roadblock",FactionGet(reb,"name")]} else {_mrk setMarkerText format ["%1 Watchpost",FactionGet(reb,"name")]};
-                spawner setVariable [_mrk,2,true];
-                if (count _garrison > 0) then {garrison setVariable [_mrk,_garrison,true]};
-                outpostsFIA pushBack _mrk;
-                sidesX setVariable [_mrk,teamPlayer,true];
-            } forEach _varvalue;
-            publicVariable "outpostsFIA";
-        };
+        A3A_rebPostGarrison = [];                   // garrison backwards compat
+        if (count (_varValue select 0) != 2) exitWith {};
+        {
+            _x params ["_position", "_garrison"];
+            private _mrk = [_position, []] call A3A_fnc_createRebelControl;
+            A3A_rebPostGarrison pushBack [_mrk, _garrison];
+        } forEach _varvalue;
+        publicVariable "outpostsFIA";
     };
     if (_varName == 'antennas') then {
-        antennasDead = [];
-        for "_i" from 0 to (count _varvalue - 1) do {
-            _posAnt = _varvalue select _i;
-            _mrk = [mrkAntennas, _posAnt] call BIS_fnc_nearestPosition;
-            _antenna = [antennas,_mrk] call BIS_fnc_nearestPosition;
-            {if ([antennas,_x] call BIS_fnc_nearestPosition == _antenna) then {[_x,false] spawn A3A_fnc_blackout}} forEach citiesX;
-            antennas = antennas - [_antenna];
-            antennasDead pushBack _antenna;
-            _antenna removeAllEventHandlers "Killed";
-
-            private _ruin = [_antenna] call BIS_fnc_createRuin;
-
-            if !(isNull _ruin) then {
-                //JIP on the _ruin, as repairRuinedBuilding will delete the ruin.
-                [_antenna, true] remoteExec ["hideObject", 0, _ruin];
-            } else {
-                Error_1("Loading Antennas: Unable to create ruin for %1", typeOf _antenna);
-            };
-
-            deleteMarker _mrk;
-        };
-        publicVariable "antennas";
-        publicVariable "antennasDead";
+        {
+            private _antenna = [A3A_antennas, _x] call BIS_fnc_nearestPosition;
+            if (_antenna distance2d _x > 10) then { Error_1("No antenna found near %1", _x); continue };
+            A3A_destroyedBuildings pushBackUnique _antenna;         // for processing after EH is installed
+        } forEach _varValue;
     };
-    if (_varname == 'prestigeOPFOR') then {
-        if (count citiesX != count _varValue) exitWith {};          // it'll be the same in the next one
-        for "_i" from 0 to (count citiesX) - 1 do {
-            _city = citiesX select _i;
-            _dataX = server getVariable _city;
-            _numCiv = _dataX select 0;
-            _numVeh = _dataX select 1;
-            _prestigeOPFOR = _varvalue select _i;
-            _prestigeBLUFOR = _dataX select 3;
-            _dataX = [_numCiv,_numVeh,_prestigeOPFOR,_prestigeBLUFOR];
-            server setVariable [_city,_dataX,true];
-        };
-    };
-    if (_varname == 'prestigeBLUFOR') then {
+    if (_varname == 'prestigeBLUFOR') then {                        // this one is actually rebel support. Backwards compat.
         if (count citiesX != count _varValue) exitWith {
             Error("City count changed, setting approx support");
             {
                 if (sidesX getVariable _x != teamPlayer) then { continue };                // sides should be loaded first
-                private _dataX = (server getVariable _x select [0,2]) + [0,75];             // 75% rebel support
-                server setVariable [_x, _dataX, true];
+                private _dataX = (A3A_cityData getVariable _x);
+                _dataX set [1, 80];                                                      // 75% rebel support, no accumHR
+                A3A_cityData setVariable [_x, _dataX, true];
             } forEach citiesX;
         };
+        // City count matches, assume map didn't change and copy in support
         for "_i" from 0 to (count citiesX) - 1 do {
-            _city = citiesX select _i;
-            _dataX = server getVariable _city;
-            _numCiv = _dataX select 0;
-            _numVeh = _dataX select 1;
-            _prestigeOPFOR = _dataX select 2;
-            _prestigeBLUFOR = _varvalue select _i;
-            _dataX = [_numCiv,_numVeh,_prestigeOPFOR,_prestigeBLUFOR];
-            server setVariable [_city,_dataX,true];
+            private _city = citiesX select _i;
+            private _dataX = A3A_cityData getVariable _city;
+            _dataX set [1, _varvalue select _i];
+            A3A_cityData setVariable [_city, _dataX, true];
         };
+    };
+    if (_varname == 'cityData') then {                          // New replacement for above
+        {
+            A3A_cityData setVariable [_x, _y, true];
+        } forEach _varValue;
     };
     if (_varname == 'enemyResources') then {
         A3A_resourcesDefenceOcc = _varValue#0;
         A3A_resourcesDefenceInv = _varValue#1;
         A3A_resourcesAttackOcc = _varValue#2;
         A3A_resourcesAttackInv = _varValue#3;
+        if (count _varValue > 4) then { A3A_punishmentDefBuff = _varValue#4 };
     };
     if (_varname == 'HQKnowledge') then {
         A3A_curHQInfoOcc = _varValue#0;
@@ -281,60 +206,30 @@ if (_varName in _specialVarLoads) then {
         } forEach _varValue;
     };
     if (_varName == 'posHQ') then {
-        _posHQ = if (count _varValue >3) then {_varValue select 0} else {_varValue};
-        {
-            if (getMarkerPos _x distance _posHQ < 1000) then {
-                sidesX setVariable [_x,teamPlayer,true];
-            };
-        } forEach controlsX;
+        _posHQ = if (count _varValue > 3) then {_varValue select 0} else {_varValue};
         respawnTeamPlayer setMarkerPos _posHQ;
-        posHQ = getMarkerPos respawnTeamPlayer;
-        petros setPos _posHQ;
+        posHQ = _posHQ; publicVariable "posHQ";
         "Synd_HQ" setMarkerPos _posHQ;
+        petros setPosATL _posHQ;
         if (chopForest) then {
-            if (!isMultiplayer) then {{ _x hideObject true } foreach (nearestTerrainObjects [position petros,["tree","bush"],70])} else {{ _x hideObjectGlobal true } foreach (nearestTerrainObjects [position petros,["tree","bush"],70])};
+            { _x hideObjectGlobal true } foreach (nearestTerrainObjects [_posHQ, ["tree","bush"], 70]);
         };
         if (count _varValue == 3) then {
-            [] spawn A3A_fnc_buildHQ;
+            [_posHQ] call A3A_fnc_relocateHQObjects;
         } else {
-            fireX setPos (_varValue select 1);
+            fireX setPosATL (_varValue select 1);
             boxX setDir ((_varValue select 2) select 0);
-            boxX setPos ((_varValue select 2) select 1);
+            boxX setPosATL ((_varValue select 2) select 1);
             mapX setDir ((_varValue select 3) select 0);
-            mapX setPos ((_varValue select 3) select 1);
-            flagX setPos (_varValue select 4);
+            mapX setPosATL ((_varValue select 3) select 1);
+            flagX setPosATL (_varValue select 4);
             vehicleBox setDir ((_varValue select 5) select 0);
-            vehicleBox setPos ((_varValue select 5) select 1);
-        };
-        {_x setPos _posHQ} forEach ((call A3A_fnc_playableUnits) select {side _x == teamPlayer});
-    };
-    if (_varname == 'staticsX') then {
-        for "_i" from 0 to (count _varvalue) - 1 do {
-            (_varValue#_i) params ["_typeVehX", "_posVeh", "_xVectorUp", "_xVectorDir", "_state"];
-            private _veh = createVehicle [_typeVehX,[0,0,1000],[],0,"CAN_COLLIDE"];
-            // This is only here to handle old save states. Could be removed after a few version itterations. -Hazey
-            if (_xVectorUp isEqualType 0) then { // We have to check number because old save state might still be using getDir. -Hazey
-                _veh setDir _xVectorUp; //is direction due to old save
-                _veh setVectorUp surfaceNormal (_posVeh);
-                _veh setPosATL _posVeh;
-            } else {
-                if (A3A_saveVersion >= 20401) then { _veh setPosWorld _posVeh } else { _veh setPosATL _posVeh };
-                _veh setVectorDirAndUp [_xVectorDir,_xVectorUp];
-            };
-            [_veh, teamPlayer] call A3A_fnc_AIVEHinit;                  // Calls initObject instead if it's a buyable item
-
-            if (isNil {_veh getVariable "A3A_canGarage"}) then {        // Buyable items should set this
-                if (_veh isKindOf "StaticWeapon") exitWith { staticsToSave pushBack _veh };
-                if (_veh isKindOf "Building") exitWith {
-                    _veh setVariable ["A3A_building", true, true];
-                    A3A_buildingsToSave pushBack _veh;
-                };
-            };
-            if (!isNil "_state")  then {
-                [_veh, _state] call HR_GRG_fnc_setState;
+            vehicleBox setPosATL ((_varValue select 5) select 1);
+            if (count _varValue >= 7) then {
+                petros setDir ((_varValue select 6) select 0);
+                petros setPosATL ((_varValue select 6) select 1);
             };
         };
-        publicVariable "staticsToSave";
     };
     if (_varname == 'tasks') then {
 /*
@@ -381,14 +276,11 @@ if (_varName in _specialVarLoads) then {
     if (_varname == "rebelLoadouts") then {
         _varValue call A3A_fnc_setRebelLoadouts;        // updates version numbers
     };
-
-    if(_varname == 'testingTimerIsActive') then
-    {
-        if(_varValue) then
-        {
-            [] spawn A3A_fnc_startTestingTimer;
-        };
-        testingTimerIsActive = _varValue;
+    if (_varname == "minorSites") then {
+        if (A3A_saveVersion < 31000) exitWith {};         // pre-garrison pre-JSON version, just remake with init
+        A3A_minorSitesHM = createHashMap;
+        { [_y#0, _y#1, _numToSide get _y#2, _y#3] call A3A_fnc_addMinorSite } forEach _varValue;
+        // pair refs get sanity checked in initMinorSites later
     };
 } else {
     call compile format ["%1 = %2",_varName,_varValue];

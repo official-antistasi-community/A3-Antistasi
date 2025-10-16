@@ -42,7 +42,7 @@ private _vehiclesLightTanks = ["a3a_lib_PzKpfwIV_noShield"];
 ["vehiclesAA", ["LIB_FlakPanzerIV_Wirbelwind", "LIB_FlakPanzerIV_Wirbelwind", "LIB_SdKfz_7_AA"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
 
 
-["vehiclesTransportBoats", ["LIB_LCA"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["LIB_LCI"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 

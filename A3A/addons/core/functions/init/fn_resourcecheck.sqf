@@ -12,75 +12,31 @@ while {true} do
 	waitUntil {sleep 15; time >= nextTick};
     waitUntil {sleep 10; A3A_activePlayerCount > 0};
 
-	private _resAdd = 25;//0
-	private _hrAdd = 0;//0
-	private _popReb = 0;
-	private _popGov = 0;
-	private _popKilled = 0;
-	private _popTotal = 0;
+	private _resAdd = 50;//0
+	private _hrAdd = 3; // A3A_balancePlayerScaleBase;
 
 	private _suppBoost = 0.5 * (1+ ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count seaports));
 	private _resBoost = 1 + (0.25*({(sidesX getVariable [_x,sideUnknown] == teamPlayer) and !(_x in destroyedSites)} count factories));
 
 	{
 		private _city = _x;
-		private _resAddCity = 0;
-		private _hrAddCity = 0;
-		private _cityData = server getVariable _city;
-		_cityData params ["_numCiv", "_numVeh", "_supportGov", "_supportReb"];
+		if (_city in destroyedSites) then { continue };
 
-		_popTotal = _popTotal + _numCiv;
-		if (_city in destroyedSites) then { _popKilled = _popKilled + _numCiv; continue };
+		private _cityData = A3A_cityData getVariable _city;
+		_cityData params ["_numCiv", "_supportReb"];
 
-		_popReb = _popReb + (_numCiv * (_supportReb / 100));
-		_popGov = _popGov + (_numCiv * (_supportGov / 100));
-
-		private _radioTowerSide = [_city] call A3A_fnc_getSideRadioTowerInfluence;
-		switch (_radioTowerSide) do
-		{
-			case teamPlayer: {[-1,_suppBoost,_city,false,true] spawn A3A_fnc_citySupportChange};
-			case Occupants: {[1,-1,_city,false,true] spawn A3A_fnc_citySupportChange};
-			case Invaders: {[-1,-1,_city,false,true] spawn A3A_fnc_citySupportChange};
-		};
-
-		_resAddCity = _numCiv * (_supportReb / 100) / 3;
-		_hrAddCity = _numCiv * (_supportReb / 10000);
-
-		if (sidesX getVariable [_city,sideUnknown] == Occupants) then
-		{
-			_resAddCity = _resAddCity / 2;
-			_hrAddCity = _hrAddCity / 2;
-		};
-		if (_radioTowerSide != teamPlayer) then { _resAddCity = _resAddCity / 2 };
+		private _ownerMul = [0.5, 1] select (sidesX getVariable _city == teamPlayer);
+		private _resAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100);
+		private _hrAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 10000);
 
 		_resAdd = _resAdd + _resAddCity;
 		_hrAdd = _hrAdd + _hrAddCity;
 
-
-		// revuelta civil!!
-		if ((_supportGov < _supportReb) and (sidesX getVariable [_city,sideUnknown] == Occupants)) then
-		{
-			["TaskSucceeded", ["", format [localize "STR_A3A_fn_init_resourceCheck_cityChange",_city,FactionGet(reb,"name")]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
-			sidesX setVariable [_city,teamPlayer,true];
-			[Occupants, 10, 60] remoteExec ["A3A_fnc_addAggression",2];
-			garrison setVariable [_city,[],true];
-			[_city] call A3A_fnc_mrkUpdate;
-			sleep 5;
-			{_nul = [_city,_x] spawn A3A_fnc_deleteControls} forEach controlsX;
-			[] call A3A_fnc_tierCheck;
-		};
-		if ((_supportGov > _supportReb) and (sidesX getVariable [_city,sideUnknown] == teamPlayer)) then
-		{
-			["TaskFailed", ["", format [localize "STR_A3A_fn_init_resourceCheck_cityChange",_city,FactionGet(occ,"name")]]] remoteExec ["BIS_fnc_showNotification",teamPlayer];
-			sidesX setVariable [_city,Occupants,true];
-			[Occupants, -10, 45] remoteExec ["A3A_fnc_addAggression",2];
-			garrison setVariable [_city,[],true];
-			[_city] call A3A_fnc_mrkUpdate;
-			sleep 5;
-			[] call A3A_fnc_tierCheck;
-		};
 	} forEach citiesX;
+
+	[] call A3A_fnc_tierCheck;
 	[] spawn A3A_fnc_checkCampaignEnd; // check for population win
+
 	{
 		if ((sidesX getVariable [_x,sideUnknown] == teamPlayer) and !(_x in destroyedSites)) then
 		{
@@ -88,13 +44,17 @@ while {true} do
 		};
 	} forEach resourcesX;
 
-	_hrAdd = ceil _hrAdd;
-	_resAdd = ceil _resAdd;
-	server setVariable ["hr", _hrAdd + (server getVariable "hr"), true];
-	server setVariable ["resourcesFIA", _resAdd + (server getVariable "resourcesFIA"), true];
+	Debug_2("Occupant radio keys: %1 - Invader radio keys: %2", occRadioKeys, invRadioKeys);
 
-	bombRuns = bombRuns + 0.25 * ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX);
+	server setVariable ["hr", _hrAdd + (server getVariable "hr"), true];
+	server setVariable ["resourcesFIA", ceil _resAdd + (server getVariable "resourcesFIA"), true];
+
+	private _newBombRuns = bombRuns + 0.25 * ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX);
+	bombRuns = _newBombRuns min (4 + tierWar*2);
 	publicVariable "bombRuns";
+
+	// Add & delete enemy camps and roadblocks
+	call A3A_fnc_updateMinorSites;
 
 	// Regular income of finite starting weapons
 	private _equipMul = A3A_balancePlayerScale / 30;		// difficulty scaled. Hmm.
@@ -106,7 +66,7 @@ while {true} do
 		private _arsenalTab = _class call jn_fnc_arsenal_itemType;
 		[_arsenalTab, _class, _count] call jn_fnc_arsenal_addItem;
 	} forEach (A3A_faction_reb get "initialRebelEquipment");
-    private _textX = format ["<t size='0.6' color='#C1C0BB'>" + (localize "STR_A3A_fn_init_resourceCheck_income"), _hrAdd, _resAdd];
+    private _textX = format ["<t size='0.6' color='#C1C0BB'>" + (localize "STR_A3A_fn_init_resourceCheck_income"), _hrAdd toFixed 1, ceil _resAdd];
 	private _textArsenal = [] call A3A_fnc_arsenalManage;
 	if (_textArsenal != "") then {_textX = format ["%1<br/>" + localize "STR_A3A_fn_init_resourceCheck_arsenal" + "<br/><br/>%2", _textX, _textArsenal]};
 	[petros, "taxRep", _textX] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
@@ -114,7 +74,6 @@ while {true} do
 	[] call A3A_fnc_generateRebelGear;
 
 	[] call A3A_fnc_FIAradio;
-    [] call A3A_fnc_cleanConvoyMarker;
 
     // Random-walk the defence multipliers for markers to add some persistent variation
     // Maybe add some logic to this later
@@ -140,9 +99,9 @@ while {true} do
 
 	private _missionChance = 5 * A3A_activePlayerCount;
 	if ((!bigAttackInProgress) and (random 100 < _missionChance)) then {[] spawn A3A_fnc_missionRequest};
-	//Removed from scheduler for now, as it errors on Headless Clients.
-	//[[],"A3A_fnc_reinforcementsAI"] call A3A_fnc_scheduler;
+
 	[] spawn A3A_fnc_reinforcementsAI;
+
 	{
 	_veh = _x;
 	if ((_veh isKindOf "StaticWeapon") and ({isPlayer _x} count crew _veh == 0) and (alive _veh)) then
@@ -152,27 +111,24 @@ while {true} do
 		};
 	} forEach vehicles;
 	sleep 3;
-    _numWreckedAntennas = count antennasDead;
-	//Probability of spawning a mission in.
-    _shouldSpawnRepairThisTick = round(random 100) < 20;
-    if ((_numWreckedAntennas > 0) && _shouldSpawnRepairThisTick && !("REP" in A3A_activeTasks)) then
+
+	// 20% chance of spawning a radio tower repair mission
+    if ({ !alive _x } count A3A_antennas > 0 && round random 100 < 20 && !("REP" in A3A_activeTasks)) then
+	{
+		private _potentials = [];
 		{
-		_potentials = [];
-		{
-		_markerX = [markersX, _x] call BIS_fnc_nearestPosition;
-		if ((sidesX getVariable [_markerX,sideUnknown] == Occupants) and (spawner getVariable _markerX == 2)) exitWith
-			{
-			_potentials pushBack [_markerX,_x];
+			private _marker = A3A_antennaMap get netId _x;
+			if (sidesX getVariable _marker == Occupants and spawner getVariable _marker == 2) then {
+				_potentials pushBack [_marker, _x];
 			};
-		} forEach antennasDead;
-		if (count _potentials > 0) then
-			{
-			_potential = selectRandom _potentials;
-			[[_potential select 0,_potential select 1],"A3A_fnc_REP_Antenna"] call A3A_fnc_scheduler;
-			};
-		}
+		} forEach (A3A_antennas select { !alive _x });
+
+		if (_potentials isEqualTo []) exitWith {};
+		private _missionTarg = selectRandom _potentials;
+		_missionTarg spawn A3A_fnc_REP_Antenna;
+	}
 	else
-		{
+	{
 		_changingX = false;
 		{
 		_chance = 5;
@@ -187,7 +143,7 @@ while {true} do
 			};
 		} forEach ((destroyedSites - citiesX) select {sidesX getVariable [_x,sideUnknown] != teamPlayer});
 		if (_changingX) then {publicVariable "destroyedSites"};
-		};
+	};
 
 	sleep 4;
 };

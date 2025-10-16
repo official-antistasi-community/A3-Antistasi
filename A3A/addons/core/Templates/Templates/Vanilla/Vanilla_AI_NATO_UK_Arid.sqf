@@ -32,7 +32,7 @@ private _APCs = ["a3a_B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F"];   
 private _Tanks = ["B_MBT_01_TUSK_F", "B_MBT_01_cannon_F"];
 ["vehiclesAA", ["B_APC_Tracked_01_AA_F"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["B_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["a3a_B_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 
@@ -42,8 +42,8 @@ private _Tanks = ["B_MBT_01_TUSK_F", "B_MBT_01_cannon_F"];
 
 ["vehiclesHelisLight", ["B_Heli_Light_01_F"]] call _fnc_saveToTemplate;
 private _HelisTransport = ["B_Heli_Transport_01_F","B_CTRG_Heli_Transport_01_sand_F"];
-["vehiclesHelisLightAttack", ["B_Heli_Light_01_dynamicLoadout_F"]] call _fnc_saveToTemplate;
-["vehiclesHelisAttack", ["B_Heli_Attack_01_dynamicLoadout_F"]] call _fnc_saveToTemplate;
+["vehiclesHelisLightAttack", ["B_Heli_Light_01_dynamicLoadout_F","B_Heli_Transport_01_pylons_F"]] call _fnc_saveToTemplate;
+["vehiclesHelisAttack", ["B_Heli_Attack_01_dynamicLoadout_F","B_Heli_Attack_01_dynamicLoadout_F","B_Heli_Attack_01_pylons_dynamicLoadout_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["B_MBT_01_arty_F","B_MBT_01_mlrs_F"]] call _fnc_saveToTemplate; //this line determines artillery vehicles -- Example: ["vehiclesArtillery", ["B_MBT_01_arty_F"]] -- Array, can contain multiple assets
 //new magazines storing methode, all vehicle magazines should be defined here in format [Vehicle class, [magazines]],
@@ -478,6 +478,7 @@ if ("rf" in A3A_enabledDLC) then {
     _militiaLoadoutData set ["sidearms", [
     ["hgun_Glock19_Tan_RF", "", "acc_flashlight_pistol", "", [], [], ""]
     ]];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
 };
 if ("mark" in A3A_enabledDLC) then {
     (_sfLoadoutData get "machineGuns") append [
