@@ -185,7 +185,6 @@ class CfgFunctions
             class revealToPlayer {};
             class scheduler {};
             class sellVehicle {};
-            class setCityTaskDelay {};
             class setMarkerAlphaForSide {};
             class setPlaneLoadout {};
             class singlePlayerBlackScreenWarning {};

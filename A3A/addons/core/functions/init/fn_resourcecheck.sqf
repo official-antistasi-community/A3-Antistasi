@@ -13,7 +13,7 @@ while {true} do
     waitUntil {sleep 10; A3A_activePlayerCount > 0};
 
 	private _resAdd = 50;//0
-	private _hrAdd = 3; // A3A_balancePlayerScaleBase;
+	private _hrAdd = 2; // A3A_balancePlayerScaleBase;
 
 	private _suppBoost = 0.5 * (1+ ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count seaports));
 	private _resBoost = 1 + (0.25*({(sidesX getVariable [_x,sideUnknown] == teamPlayer) and !(_x in destroyedSites)} count factories));

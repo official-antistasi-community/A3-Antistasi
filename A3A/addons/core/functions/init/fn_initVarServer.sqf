@@ -152,8 +152,8 @@ A3A_markersToDelete = [];		// list of markers to be cleared after despawning
 
 A3A_activeCityBattles = createHashMap;		// list of markers with active city battle missions
 
-A3A_cityTaskTimer = createHashMap;			// maybe temporary. List of times after which a city task can spawn
-{ [_x, 0, 900] call A3A_fnc_setCityTaskDelay } forEach citiesX; 			// 0-15min for pop 100 city
+A3A_cityTaskTimer = createHashMap;			// Accumulators for city task chance
+{ A3A_cityTaskTimer set [_x, -0.1] } forEach citiesX;
 
 // These are silly, should be nil/true and local-defined only
 resourcesIsChanging = false;
