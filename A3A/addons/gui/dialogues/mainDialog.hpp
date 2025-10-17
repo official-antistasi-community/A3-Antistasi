@@ -2925,9 +2925,8 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                 class KickPlayerButton : A3A_ShortcutButton
                 {
-                    idc = -1;
+                    idc = A3A_IDC_KICKPLAYERBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_kick_player_button;
-                    onButtonClick = "[""adminKickPlayer""] call A3A_GUI_fnc_playerManagementTab";
                     x = 120 * GRID_W;
                     y = 52 * GRID_H;
                     w = 32 * GRID_W;
@@ -2936,9 +2935,8 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                 class BanPlayerButton : A3A_ShortcutButton
                 {
-                    idc = -1;
+                    idc = A3A_IDC_BANPLAYERBUTTON;
                     text = $STR_antistasi_dialogs_main_admin_ban_player_button;
-                    onButtonClick = "[""adminBanPlayer""] call A3A_GUI_fnc_playerManagementTab";
                     x = 120 * GRID_W;
                     y = 67 * GRID_H;
                     w = 32 * GRID_W;
@@ -2972,6 +2970,64 @@ class A3A_MainDialog : A3A_TabbedDialog
             idc = -1;
             x = DIALOG_X + DIALOG_W * GRID_W - 5 * GRID_W;
             y = DIALOG_Y - 10 * GRID_H;
+        };
+    };
+};
+
+
+class A3A_AdminCopyUID
+{
+    idd = A3A_IDD_ADMINCOPY;
+    onLoad = "['onLoad'] spawn A3A_GUI_fnc_adminCopyUIDDialog";
+
+    class Controls
+    {
+        class Titlebar : A3A_TitlebarText
+        {
+            idc = -1;
+            text = "COPY USER ID";
+            colorBackground[] = A3A_COLOR_TITLEBAR_BACKGROUND;
+            x = CENTER_X(48);
+            y = CENTER_Y(31) - 5 * GRID_H;
+            w = 48 * GRID_W;
+            h = 5 * GRID_H;
+        };
+        class Background : A3A_Background
+        {
+            idc = -1;
+            x = CENTER_X(48);
+            y = CENTER_Y(31);
+            w = 48 * GRID_W;
+            h = 31 * GRID_H;
+        };
+        class TransferInfoText : A3A_StructuredText
+        {
+            text = "Copy the user's ID from the box by highlighting it and using Ctrl + C.";
+            idc = A3A_IDC_ADMINCOPY_INFO;
+            x = CENTER_X(48) + 2 * GRID_W;
+            y = CENTER_Y(31) + 2 * GRID_H;
+            w = 44 * GRID_W;
+            h = 14 * GRID_H;
+        };
+        class UIDBox : A3A_Edit
+        {
+            text = "";
+            idc = A3A_IDC_ADMINCOPY_UIDTEXT;
+            x = CENTER_X(48) + 2 * GRID_W;
+            y = CENTER_Y(31) + 16 * GRID_H;
+            w = 44 * GRID_W;
+            h = 6 * GRID_H;
+            canModify = 0;
+        };
+        class CancelButton : A3A_Button
+        {
+            idc = A3A_IDC_ADMINCOPY_CANCEL;
+            text = $STR_antistasi_dialogs_setup_confirm_cancel;
+            onButtonClick = "closeDialog 0";
+            x = CENTER_X(48) + 2 * GRID_W;
+            y = CENTER_Y(31) + 24 * GRID_H;
+            w = 18 * GRID_W;
+            h = 5 * GRID_H;
         };
     };
 };

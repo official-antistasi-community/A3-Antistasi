@@ -3,6 +3,7 @@ class CfgFunctions {
     class ADDON {
         class GUI {
             file = QPATHTOFOLDER(functions\GUI);
+            class adminCopyUIDDialog {};
             class adminTab {};
             class aiManagementTab {};
             class airSupportTab {};
