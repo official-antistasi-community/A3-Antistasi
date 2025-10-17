@@ -433,9 +433,6 @@ _militiaLoadoutData set ["rifles", [
 ["PRACS_CETME_FS","","","",["PRACS_20rd_CETME_mag", "PRACS_20rd_CETME_mag", "PRACS_20rd_CETME_T_mag"],[],""]
 ]];
 _militiaLoadoutData set ["carbines", [
-["PRACS_rk62", "", "", "rhsusf_acc_T1_low", ["PRACS_30Rnd_762x39_Rk_7N6_mag", "PRACS_30Rnd_762x39_Rk_7N6_mag", "PRACS_30Rnd_762x39_Rk_T_mag", "PRACS_30Rnd_762x39_Rk_PS_mag"], [], ""],
-["PRACS_rk62", "", "", "rhsusf_acc_T1_low", ["PRACS_30Rnd_762x39_Rk_7N6_mag", "PRACS_30Rnd_762x39_Rk_7N6_mag", "PRACS_30Rnd_762x39_Rk_T_mag", "PRACS_30Rnd_762x39_Rk_PS_mag"], [], ""],
-["PRACS_rk62", "", "", "rhsusf_acc_T1_high", ["PRACS_30Rnd_762x39_Rk_7N6_mag", "PRACS_30Rnd_762x39_Rk_7N6_mag", "PRACS_30Rnd_762x39_Rk_T_mag", "PRACS_30Rnd_762x39_Rk_PS_mag"], [], ""],
 ["PRACS_galil_SAR","","","",["PRACS_35rd_Galil_mag", "PRACS_35rd_Galil_mag"],[],""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
