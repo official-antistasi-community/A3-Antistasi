@@ -123,6 +123,9 @@
         <Czech>C: Zrušit %1</Czech>
         <Chinesesimp>C键: 取消 %1</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_teamleader_placer_cannotBuildHelipad">
+        <Original>You can only build helipads at captured friendly markers or HQ.</Original>
+      </Key>
       <Key ID="STR_antistasi_teamleader_placer_e_key">
         <Original>E: Rotate counter-clockwise</Original>
         <German>E: Gegen Uhrzeigersinn rotieren</German>

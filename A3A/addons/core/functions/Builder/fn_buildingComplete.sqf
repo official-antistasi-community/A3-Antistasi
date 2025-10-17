@@ -18,6 +18,7 @@ deleteVehicle _target;
 
 // Cancel case
 if (!_finished) exitWith {
+    private _price = _target getVariable ["A3A_build_price", 10];
     if (_price > 0) then { [0, _price] spawn A3A_fnc_resourcesFIA };
 };
 
