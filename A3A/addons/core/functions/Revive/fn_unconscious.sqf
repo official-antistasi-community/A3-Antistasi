@@ -19,6 +19,11 @@ if (isPlayer _unit) then
 	openMap false;
 
 	if (_injurer != Invaders) then {_unit setCaptive true};
+
+	if (A3A_sendDownedNotification) then {
+		[_unit, localize "STR_A3A_fn_revive_downed_help"] remoteExec ["groupChat", 0];
+	};
+
 	{
 		if ((!isPlayer _x) and (vehicle _x != _x) and (_x distance _unit < 50)) then {unassignVehicle _x; [_x] orderGetIn false}
 	} forEach units group _unit;
