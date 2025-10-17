@@ -28,7 +28,7 @@
 ["vehiclesMedical", ["PRACS_M250_AMB", "PRACS_BMR_AMB", "PRACS_M577", "PRACS_M113_MED"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["PRACS_M113_M240", "PRACS_M113_M240", "PRACS_M113_M2", "PRACS_BMR_M2"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["PRACS_M113_M2", "PRACS_M113_M2", "PRACS_BMR_A3_M2", "PRACS_BMR_A3_M2", "PRACS_BMR_A3_M2", "PRACS_BMR_A3_GA1", "PRACS_BMR_A3_M3_SFOD", "PRACS_BMR_A3_Mk19", "PRACS_M113_mk19"]] call _fnc_saveToTemplate;
-["vehiclesIFVs", ["PRACS_Pizarro", "PRACS_Pizarro_SLE"]] call _fnc_saveToTemplate;
+["vehiclesIFVs", ["PRACS_Pizarro", "PRACS_Pizarro_SLE", "PRACS_BMR_IFV", "PRACS_BMR_IFV"]] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", ["PRACS_Pizarro_SLE", "PRACS_FV101", "PRACS_FV101", "PRACS_VEC_MGS"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["PRACS_M1A1_AIM","PRACS_M60A3","PRACS_M60S"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["PRACS_M163_MACHBET","PRACS_M163_PIVADS","PRACS_M163_VADS","PRACS_M985_AD","PRACS_M985_AD"]] call _fnc_saveToTemplate;

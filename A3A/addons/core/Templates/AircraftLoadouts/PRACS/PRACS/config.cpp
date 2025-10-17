@@ -22,10 +22,10 @@ class A3A {
         {
             class baseCAS;
             class PRACS_A4M : baseCAS {
-                loadout[] = {"PRACS_AGM65_F_X2","PRACS_AGM65_F_X2","PRACS_70mm_FFAR_X19","PRACS_70mm_FFAR_X19","PRACS_70mm_FFAR_X19"};
+                loadout[] = {"PRACS_AGM65_TL_X2","PRACS_AGM65_TL_X2","PRACS_70mm_FFAR_X19","PRACS_70mm_FFAR_X19","PRACS_70mm_FFAR_X19"};
                 mainGun[] = {"PRACS_DEFA_552_30mm"};
                 rocketLauncher[] = {"PRACS_FFARLauncher"};
-                missileLauncher[] = {"PRACS_AGM65F_launcher"};
+                missileLauncher[] = {"PRACS_AGM65_launcher"};
             };
             class PRACS_F16CJR : baseCAS {
                 loadout[] = {"","","","","PRACS_70mm_FFAR_X19","PRACS_70mm_FFAR_X19","PRACS_AGM65_TL_X2","PRACS_AGM65_TL_X2","","PRACS_F16_CFT_X1"};
@@ -40,7 +40,7 @@ class A3A {
                 missileLauncher[] = {"PRACS_AGM65_launcher"};
             };
             class PRACS_Mohawk : baseCAS {
-                loadout[] = {"PRACS_70mm_FFAR_Left_X38","PRACS_70mm_FFAR_Right_X38","PRACS_Hellfire_RDR_X2","PRACS_Hellfire_RDR_X2","PRACS_Mk83_X1","PRACS_Mk83_X1"};
+                loadout[] = {"PRACS_70mm_FFAR_Left_X38","PRACS_70mm_FFAR_Right_X38","PRACS_Hellfire_RDR_X2","PRACS_Hellfire_RDR_X2","RACS_Hellfire_RDR_X2","RACS_Hellfire_RDR_X2"};
                 mainGun[] = {"PRACS_MR39B_20mm"};
                 rocketLauncher[] = {"PRACS_FFARLauncher"};
                 missileLauncher[] = {"PRACS_AGM114L_Launcher"};
