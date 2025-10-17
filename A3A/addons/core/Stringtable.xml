@@ -16588,5 +16588,43 @@
         <Chinesesimp>与指挥部班组车辆管理相关的选项</Chinesesimp>
       </Key>
     </Container>
+    <Container name="intelfeed">
+      <Key ID="STR_A3A_intelfeed_title_attack_imminent">
+        <Original>%1 attack imminent</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_attack_imminent">
+        <Original>Our sources believe that %1 forces will begin a major attack within the next 5 minutes.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_attack_time">
+        <Original>%2 mins until %1 attack</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_attack_time">
+        <Original>%2 is reported to have the resources to launch an attack in %1 if our calculations are right.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_def_resources">
+        <Original>%1 resources: %2</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_def_resources">
+        <Original>our sources report that %1 has %2 defence resources</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_decryption_key">
+        <Original>%1 decryption key found</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_decryption_key">
+        <Original>we found a %1 decryption key, it will be useful for decoding their radio transmissions.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_key_pack">
+        <Original>%1 key pack found</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_key_pack">
+        <Original>we found a pack of %1 decryption keys, they will be very helpful in reading their support calls.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_weapon_unlock">
+        <Original>Weapon unlock</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_weapon_unlock">
+        <Original>we found supply data for the %1, and it has been made available in the arsenal</Original>
+      </Key>
+    </Container>
   </Package>
 </Project>

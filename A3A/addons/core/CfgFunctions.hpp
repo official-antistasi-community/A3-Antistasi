@@ -419,6 +419,7 @@ class CfgFunctions
             class searchIntelOnLeader {};
             class selectIntel {};
             class showIntel {};
+            class updateIntelFeed {};
         };
 
         class keybinds {

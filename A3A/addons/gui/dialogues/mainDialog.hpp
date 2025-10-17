@@ -2439,7 +2439,6 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                         class WarLevel : A3A_Text
                         {
-                            text = "War Level:";
                             idc = A3A_WARSTATUS_WARLEVEL;
                             x = 27 * GRID_W;
                             y = 25 * GRID_H;
@@ -2454,7 +2453,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                     x = 106 * GRID_W;
                     y = 40 * GRID_H;
                     w = 54 * GRID_W;
-                    h = 62 * GRID_H;
+                    h = 60 * GRID_H;
                     class controls {
                         class IntelStreamTitle : A3A_SectionLabelCenter
                         {
@@ -2465,13 +2464,14 @@ class A3A_MainDialog : A3A_TabbedDialog
                             w = 54 * GRID_W;
                             h = 4 * GRID_H;
                         };
-                        class IntelList : A3A_Listbox
+                        class IntelList : A3A_Listbox_Small
                         {
                             idc = A3A_IDC_WARSTATUS_INTELLIST;
                             x = 4 * GRID_W;
                             y = 6 * GRID_H;
                             w = 46 * GRID_W;
                             h = 38 * GRID_H;
+                            onLBSelChanged = "['intelSelected'] call A3A_GUI_fnc_warStatusTab";
                         };
                         class IntelExtraInfo : A3A_StructuredText
                         {
@@ -2479,7 +2479,8 @@ class A3A_MainDialog : A3A_TabbedDialog
                             x = 0 * GRID_W;
                             y = 45 * GRID_H;
                             w = 50 * GRID_W;
-                            h = 18 * GRID_H;
+                            h = 15 * GRID_H;
+                            size = GUI_TEXT_SIZE_SMALL;
                         };
                     };
                 };

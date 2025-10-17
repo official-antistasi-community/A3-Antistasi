@@ -64,11 +64,14 @@ if (_intelType == "Small") then
             if(_nextAttack < 5) then
             {
                 _text = format [localize "STR_A3A_fn_intel_select_time_1", _sideName];
+                ["attack_imminent", _side, [[_sideName], [_sideName]]] call A3A_fnc_updateIntelFeed;
             }
             else
             {
                 _text = format [localize "STR_A3A_fn_intel_select_time_2", _sideName, round (_nextAttack)];
+                ["attack_time", _side, [[_sideName, round (_nextAttack)], [_sideName, round (_nextAttack)]]] call A3A_fnc_updateIntelFeed;
             };
+            
         };
         case (DEF_RESOURCES):
         {
@@ -77,13 +80,15 @@ if (_intelType == "Small") then
 
             private _fraction = _defRes / _defResCap;
             private _fmt = call {
-                if (_fraction > 0.75) exitWith { localize "STR_A3A_fn_intel_select_reso_1" };
-                if (_fraction > 0.50) exitWith { localize "STR_A3A_fn_intel_select_reso_2" };
-                if (_fraction > 0.25) exitWith { localize "STR_A3A_fn_intel_select_reso_3" };
-                if (_fraction > 0.00) exitWith { localize "STR_A3A_fn_intel_select_reso_4" };
-                localize "STR_A3A_fn_intel_select_reso_5";
+                if (_fraction > 0.75) exitWith { [localize "STR_A3A_fn_intel_select_reso_1", "Very High"] };
+                if (_fraction > 0.50) exitWith { [localize "STR_A3A_fn_intel_select_reso_2", "Medium"] };
+                if (_fraction > 0.25) exitWith { [localize "STR_A3A_fn_intel_select_reso_3", "Low"] };
+                if (_fraction > 0.00) exitWith { [localize "STR_A3A_fn_intel_select_reso_4", "Very Low"] };
+                [localize "STR_A3A_fn_intel_select_reso_5", "Empty"];
             };
-            _text = format [_fmt, _sideName];
+            _text = format [_fmt#0, _sideName];
+            ["def_resources", _side, [[_sideName, _fmt#1], [_sideName, _fmt#1], _fmt#1]] call A3A_fnc_updateIntelFeed;
+
         };
         case (DECRYPTION_KEY):
         {
@@ -96,6 +101,7 @@ if (_intelType == "Small") then
                 invRadioKeys = invRadioKeys + 1;
             };
             _text = format [localize "STR_A3A_fn_intel_select_decry_1", _sideName];
+            ["decryption_key", _side, [[_sideName], [_sideName]]] call A3A_fnc_updateIntelFeed;
         };
         case (CONVOY):
         {
@@ -140,6 +146,7 @@ if (_intelType == "Medium") then
                 invRadioKeys = invRadioKeys + _keyCount;
             };
             _text = format [localize "STR_A3A_fn_intel_select_decry_2", _sideName];
+            ["key_pack", _side, [[_sideName], [_sideName]]] call A3A_fnc_updateIntelFeed;
         };
 /*
         // These are meaningless at the moment
@@ -206,6 +213,7 @@ if (_intelType == "Large") then
 
             private _weaponName = getText (configFile >> "CfgWeapons" >> _newWeapon >> "displayName");
             _text = format [localize "STR_A3A_fn_intel_select_weap_1", _weaponName];
+            ["weapon_unlock", _side, [[], [_weaponName]]] call A3A_fnc_updateIntelFeed;
         };
         case (MONEY):
         {

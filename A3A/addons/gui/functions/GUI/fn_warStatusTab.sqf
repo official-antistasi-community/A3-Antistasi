@@ -30,8 +30,8 @@ FIX_LINE_NUMBERS()
 
 params[["_mode","onLoad"], ["_params",[]]];
 private _display = findDisplay A3A_IDD_MAINDIALOG;
-private _intelList = _display displayCtrl A3A_IDC_WARSTATUS_INTELTLIST;
-private _intelInfo = _display displayCtrl A3A_IDC_WARSTATUS_INTELTINFO;
+private _intelList = _display displayCtrl A3A_IDC_WARSTATUS_INTELLIST;
+private _intelInfo = _display displayCtrl A3A_IDC_WARSTATUS_INTELINFO;
 private _occFlag = _display displayCtrl A3A_IDC_WARSTATUS_OCCFLAG;
 private _invFlag = _display displayCtrl A3A_IDC_WARSTATUS_INVFLAG;
 private _occDescription = _display displayCtrl A3A_IDC_WARSTATUS_OCCDESCRIPTION;
@@ -47,13 +47,15 @@ private _rebDescription = _display displayCtrl A3A_IDC_WARSTATUS_REBDESCRIPTION;
 private _rebMoney = _display displayCtrl A3A_IDC_WARSTATUS_REBMONEY;
 private _rebHR = _display displayCtrl A3A_IDC_WARSTATUS_REBHR;
 
+private _warLevel = _display displayCtrl A3A_WARSTATUS_WARLEVEL;
+
 switch (_mode) do
 {
     case ("update"):
     {
         Trace("Updating War Status Tab");
         // Show back button
-        
+
         if (isNull _display) exitWith {};
         private _backButton = _display displayCtrl A3A_IDC_MAINDIALOGBACKBUTTON;
         _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
@@ -61,29 +63,44 @@ switch (_mode) do
             ["switchTab", ["player"]] call FUNC(mainDialog);
         }];
         _backButton ctrlShow true;
-        _intelList lbAdd "Test";
-        _intelList lbAdd "Test";
-        _intelList lbAdd "Test";
-        _intelInfo ctrlSetStructuredText parseText "Test";
+        if (isNil "A3A_resourcesLastOcc") then {A3A_resourcesLastOcc = ["Unknown"]};
+        if (isNil "A3A_resourcesLastInv") then {A3A_resourcesLastInv = ["Unknown"]};
+        lbClear _intelList;
+        _warLevel ctrlSetText format ["War Level: %1", tierWar];
         _occFlag ctrlSetText (Faction(Occupants) get "flagTexture");
         _invFlag ctrlSetText (Faction(Invaders) get "flagTexture");
         _occDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Occ_template" >> "lore");
         _invDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Inv_template" >> "lore");
         _occDescription ctrlSetStructuredText parseText _occDesc;
         _invDescription ctrlSetStructuredText parseText _invDesc;
-        _occAggro ctrlSetText format ["Aggression:<br/>%1", [aggressionLevelOccupants] call FUNCMAIN(getAggroLevelString)];
-        _invAggro ctrlSetText format ["Aggression:<br/>%1", [aggressionLevelInvaders] call FUNCMAIN(getAggroLevelString)];
-        _occResources ctrlSetText format ["Resources (?*): %1", "High"];
-        _invResources ctrlSetText format ["Resources (?*): %1", "High"];
+        
+        _occAggro ctrlSetText format ["Aggression: %1", [aggressionLevelOccupants] call FUNCMAIN(getAggroLevelString)];
+        _invAggro ctrlSetText format ["Aggression: %1", [aggressionLevelInvaders] call FUNCMAIN(getAggroLevelString)];
+        
+        _occResources ctrlSetText format ["Resources: %1", A3A_resourcesLastOcc#0];
+        if (count A3A_resourcesLastOcc > 1) then {
+            _occResources ctrlSetTooltip format ["Time since last update: %1",
+                [[serverTime-(A3A_resourcesLastOcc#1)] call A3A_fnc_secondsToTimeSpan,0,0,false,2] call A3A_fnc_timeSpan_format
+            ]
+        } else {
+            _occResources ctrlSetTooltip "No known resource information";
+        };
+        _invResources ctrlSetText format ["Resources: %1", A3A_resourcesLastInv#0];
+        if (count A3A_resourcesLastInv > 1) then {
+            _invResources ctrlSetTooltip format ["Time since last update: %1",
+                [[serverTime-(A3A_resourcesLastInv#1)] call A3A_fnc_secondsToTimeSpan,0,0,false,2] call A3A_fnc_timeSpan_format
+            ]
+        } else {
+            _invResources ctrlSetTooltip "No known resource information";
+        };
+        
         _occKeys ctrlSetText format ["Radio Keys: %1", occRadioKeys];
         _invKeys ctrlSetText format ["Radio Keys: %1", invRadioKeys];
         _rebFlag ctrlSetText (Faction(teamPlayer) get "flagTexture");
         _rebDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Reb_template" >> "lore");
         _rebDescription ctrlSetStructuredText parseText _rebDesc;
-        _rebMoney ctrlSetText format ["Money: %1", str (server getVariable "resourcesFIA")];
+        _rebMoney ctrlSetText format ["Money: %1€", str (server getVariable "resourcesFIA")];
         _rebHR ctrlSetText format ["HR: %1", str (server getVariable "HR")];
-
-
 
         // Get location data
         private _controlledCities = {sidesX getVariable [_x, sideUnknown] == teamPlayer} count citiesX;
@@ -164,11 +181,22 @@ switch (_mode) do
 
         
 
+        if (isNil "A3A_clientIntelLog") then {A3A_clientIntelLog = []};
+        {
+            _x params ["_short", "_desc", "_time"];
+            diag_log _x;
+            private _fancyTime = [_time * 3600,2,2,false,[1,3],true,false] call A3A_fnc_timeSpan_format;
+            private _index = _intelList lbAdd format ["%1: %2", _fancyTime, _short];
+            diag_log [_index, format ["At %1, %2", _fancyTime, _desc]];
+            _intelList lbSetData [_index, format ["At %1, %2", _fancyTime, _desc]];
+        } forEach A3A_clientIntelLog;
     };
 
-    case ("clearAIListboxSelection"):
+    case ("intelSelected"):
     {
-    
+        private _entry = lbCurSel _intelList;
+        diag_log (_intelList lbData _entry);
+        _intelInfo ctrlSetStructuredText parseText (_intelList lbData _entry);
     };
 
     default
