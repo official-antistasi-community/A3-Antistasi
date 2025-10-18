@@ -204,7 +204,6 @@ if (isPlayer A3A_setupPlayer) then {
     // Add current admin (setupPlayer) to members list and make them commander
     membersX pushBackUnique getPlayerUID A3A_setupPlayer;
     theBoss = A3A_setupPlayer;
-    ["commander",true] remoteExecCall ["A3A_fnc_unitTraits",theBoss];
 };
 
 // Add admin as member on state change

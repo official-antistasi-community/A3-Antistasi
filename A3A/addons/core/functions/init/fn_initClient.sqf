@@ -355,12 +355,11 @@ A3A_aliveTime = time;
 initClientDone = true;
 Info("initClient completed");
 
-// We can now ask for their preferred role
-_playerCount = count (allPlayers - (entities "HeadlessClient_F"));
-if (_playerCount > 1) then {
-    createDialog "A3A_RoleSelectDialog"; // No need to ask for role if there's only one player
+if (player == theBoss) then {
+    player setVariable ["A3A_Role", "rifleman", true];
+    ["commander",true] remoteExecCall ["A3A_fnc_unitTraits",theBoss];
 } else {
-    player setVariable ["A3A_Role", "rifleman", true]; // commander was already setup player
+    createDialog "A3A_RoleSelectDialog"; // player will be commander if they set up the game
 };
 
 if(!isMultiplayer) then

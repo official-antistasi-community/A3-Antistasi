@@ -23,10 +23,18 @@ FIX_LINE_NUMBERS()
 private _hintTitle = localize "STR_A3A_fn_orgp_unitTraits_title";
 params [["_roleName", player getVariable ["A3A_Role", "rifleman"]], ["_silent",false]];
 
-private _isCommander = (_roleName == "commander");
+private _isCommander = (player isEqualTo theBoss);
 
-if !(_isCommander) then {
-    player setVariable ["A3A_Role", _roleName, true];
+// We never want commander perks to be overwritten so the check is enforced here
+// For all non-commander roles, nothing changes, we assign the normal role
+// For the commander, we give them the commander perks, but have the original role still on their person. Someone should never have "commander" as their role.
+// So we retain the picked role, give them the commander perks, give them the picked role's messaging, but append a message saying that the traits dont take effect.
+
+private _preferredRole = _roleName;
+
+if (_isCommander) then {
+    if (_roleName != "commander") then {player setVariable ["A3A_Role", _roleName, true];};
+    _roleName = "commander";
 };
 
 // Set the unit traits
@@ -46,8 +54,8 @@ private _traitHM = A3A_roleTraitHM get _roleName;
 
 // Quit if silent (commander moves around)
 if (_silent) exitWith {};
-_textArr = [format [localize "STR_A3A_fn_orgp_unitTraits_you",localize format ["STR_A3A_fn_orgp_unitTraits_%1_1", _roleName]], localize format ["STR_A3A_fn_orgp_unitTraits_%1_2", _roleName]];
-if (player isEqualTo theBoss) then {
+_textArr = [format [localize "STR_A3A_fn_orgp_unitTraits_you",localize format ["STR_A3A_fn_orgp_unitTraits_%1_1", _preferredRole]], localize format ["STR_A3A_fn_orgp_unitTraits_%1_2", _preferredRole]];
+if (_isCommander) then {
     // append extra text letting player know the role doesnt take effect until they lose command
     _textArr pushBack (localize "STR_antistasi_dialogs_roleselect_isCommander");
 };
