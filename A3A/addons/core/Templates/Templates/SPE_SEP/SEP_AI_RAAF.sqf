@@ -303,7 +303,7 @@ private _militaryLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
 _policeLoadoutData set ["vests", ["V_SPE_FFI_Vest_rifle"]];
-_policeLoadoutData set ["helmets", ["SEP_I_IHTC_H_SafariHat", "H_SPEX_CW_SIDECAP"]];
+_policeLoadoutData set ["helmets", ["H_SPE_US_MP_Helmet_White", "H_SPE_US_MP_Helmet_White", "H_SPE_US_MP_Helmet_White_ns","H_SPE_US_MP_Helmet_White_os"]];
 
 _policeLoadoutData set ["SMGs", [
     ["SPEX_M1928_Thompson", "", "", "", ["SPE_20Rnd_Thompson_45ACP"], [], ""],
@@ -595,6 +595,8 @@ private _latTemplate = {
 };
 
 private _atTemplate = {
+    private _launcher = ["ATLaunchers", "lightATLaunchers"] call _fnc_fallback;
+    if (_launcher == "lightATLaunchers") exitWith {call _latTemplate};
     ["helmets"] call _fnc_setHelmet;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;

@@ -318,6 +318,9 @@ private _militiaLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
 _militiaLoadoutData set ["helmets", ["H_SPE_US_jeep_cap", "SEP_I_IHTC_H_CoconutHelmet","SEP_I_IHTC_H_SafariHat","H_SPE_US_HBT_cap"]];
 
+_militiaLoadoutData set ["lightATLaunchers", [
+["SPE_M1903A3_Springfield_M1_GL", "SPE_ACC_GL_M1", "", "", ["SPE_5Rnd_762x63", "SPE_5Rnd_762x63", "SPE_5Rnd_762x63_t"], ["SPE_1Rnd_G_M9A1", "SPE_1Rnd_G_M9A1", "SPE_1Rnd_G_M17A1"], ""]
+]];
 _militiaLoadoutData set ["ATLaunchers", []];
 _militiaLoadoutData set ["sidearms", []];
 
@@ -585,6 +588,8 @@ private _latTemplate = {
 };
 
 private _atTemplate = {
+    private _launcher = ["ATLaunchers", "lightATLaunchers"] call _fnc_fallback;
+    if (_launcher == "lightATLaunchers") exitWith {call _latTemplate};
     ["helmets"] call _fnc_setHelmet;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;

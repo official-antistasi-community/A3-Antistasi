@@ -1793,7 +1793,7 @@ class Templates
     class SEP_Reb_FRAS : SEP_Base
     {
         side = "Reb";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "\A3\Data_F\Flags\Flag_Altis_CO.paa";
         name = "SEP FRAS";
         file = "SEP_REB_FRAS";
         shortName = "FRAS"; // Free Republic of Altis and Stratis

@@ -21,10 +21,10 @@
 ["surrenderCrate", "SPE_Weaponcrate_MP40_GER"] call _fnc_saveToTemplate;
 ["equipmentBox", "Box_NATO_Equip_F"] call _fnc_saveToTemplate;
 
-["vehiclesBasic", ["SEP_B_GER_WIN_R200_Unarmed"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["SEP_B_GER_WIN_R200_Unarmed"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["SEP_B_GER_WIN_SdKfz_2501", "SEP_B_GER_WIN_SdKfz_2501", "SEP_B_GER_WIN_R200_MG34", "SEP_B_GER_WIN_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
-["vehiclesTrucks", ["SEP_B_GER_WIN_OpelBlitz", "SEP_B_GER_WIN_OpelBlitz", "SEP_B_GER_WIN_OpelBlitz", "SEP_B_GER_WIN_OpelBlitz_Open"]] call _fnc_saveToTemplate;
+["vehiclesBasic", ["SEP_B_GER_Sturm_WIN_R200_Hood"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["SEP_B_GER_Sturm_WIN_R200_Hood"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["SEP_B_GER_WIN_SdKfz_2501", "SEP_B_GER_WIN_SdKfz_2501", "SEP_B_GER_Sturm_WIN_R200_MG34", "SEP_B_GER_WIN_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
+["vehiclesTrucks", ["SEP_B_GER_Sturm_WIN_OpelBlitz", "SEP_B_GER_Sturm_WIN_OpelBlitz_Open"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["SEP_B_GER_WIN_OpelBlitz_Open"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["SEP_B_GER_WIN_OpelBlitz_Ammo"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["SEP_B_GER_WIN_OpelBlitz_Repair"]] call _fnc_saveToTemplate;
@@ -78,10 +78,10 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 
 //Config special vehicles
 ["vehiclesMilitiaLightArmed", ["SEP_B_GER_WIN_R200_MG34"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaTrucks", ["SEP_B_GER_WIN_OpelBlitz_Open"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaTrucks", ["SEP_B_GER_WIN_OpelBlitz", "SEP_B_GER_WIN_OpelBlitz_Open"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["SEP_B_GER_WIN_R200_Hood"]] call _fnc_saveToTemplate;
 
-["vehiclesPolice", ["SPE_Milice_R200_Unarmed", "SPE_Milice_R200_Hood"]] call _fnc_saveToTemplate;
+["vehiclesPolice", ["SPE_Milice_R200_Hood"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["SEP_B_GER_WIN_MG34_Lafette_Deployed", "SEP_B_GER_WIN_MG42_Lafette_Deployed"]] call _fnc_saveToTemplate;
 ["staticAT", ["SEP_B_GER_WIN_leFH18_AT", "SEP_B_GER_WIN_Pak40"]] call _fnc_saveToTemplate;
@@ -199,13 +199,12 @@ _loadoutData set ["atBackpacks", ["B_SPE_GER_RPzB_Belt_bag", "B_SPE_GER_RPzB_Bel
 
 _loadoutData set ["helmets", ["H_HeadBandage_stained_F", 
 "SEP_B_GER_H_StahlhelmCover_maus", "SEP_B_GER_H_StahlhelmCover_maus_ns",
-"SEP_B_GER_H_StahlhelmCover_win", "SEP_B_GER_H_StahlhelmCover_win_ns",
 "SEP_B_GER_H_StahlhelmM40_WIN_1", "SEP_B_GER_H_StahlhelmM40_WIN_1_net", "SEP_B_GER_H_StahlhelmM40_WIN_1_utility","SEP_B_GER_H_StahlhelmM40_WIN_1_wire",
 "SEP_B_GER_H_Stahlhelm_WIN_2", "SEP_B_GER_H_Stahlhelm_WIN_2_utility", "SEP_B_GER_H_Stahlhelm_WIN_1", "SEP_B_GER_H_Stahlhelm_WIN_1_utility"
 ]];
-_loadoutData set ["sniHelmets", ["SEP_B_GER_H_StahlhelmCover_win", "SEP_B_GER_H_StahlhelmCover_win_ns"]];
+_loadoutData set ["sniHelmets", []];
 _loadoutData set ["medHelmets", ["H_SPE_GER_Helmet_Medic"]];
-_loadoutData set ["slHelmets", ["SEP_B_GER_H_StahlhelmCover_win", "SEP_B_GER_H_StahlhelmCover_win_ns"]];
+_loadoutData set ["slHelmets", []];
 
 _loadoutData set ["facewear", ["G_SPE_GER_GM30","G_SPE_Dust_Goggles","G_SPE_Dust_Goggles_2"]];
 
@@ -251,8 +250,6 @@ private _sfLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _sfLoadoutData set ["uniforms", ["SEP_B_GER_U_Parka_wht", "SEP_B_GER_U_Parka_wht", "SEP_B_GER_ST_U_Parka_maus", "SEP_B_GER_ST_U_Parka_maus_mix"]];
 _sfLoadoutData set ["medUniforms", []];
 _sfLoadoutData set ["slUniforms", []];
-
-_sfLoadoutData set ["helmets", ["SEP_B_GER_H_StahlhelmCover_win", "SEP_B_GER_H_StahlhelmCover_win_ns"]];
 
 _sfLoadoutData set ["rifles", [
 ["SPE_G43", "", "", "", ["SPE_10Rnd_792x57", "SPE_10Rnd_792x57", "SPE_10Rnd_792x57_T"], [], ""],
@@ -403,7 +400,7 @@ _militiaLoadoutData set ["machineGuns", [
 //////////////////////////
 
 private _crewLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_crewLoadoutData set ["uniforms", ["U_SPE_GER_Tank_crew_private", "U_SPE_GER_lehr_gefreiter", "U_SPE_GER_lehr_unterofficer"]];
+_crewLoadoutData set ["uniforms", ["U_SPE_GER_Tank_crew_private"]];
 _crewLoadoutData set ["vests", ["V_SPE_GER_TankPrivateBelt"]];
 _crewLoadoutData set ["helmets", ["H_SPE_GER_TankPrivateCap3", "H_SPE_GER_TankPrivateCap", "H_SPE_GER_TankPrivateCap2"]];
 

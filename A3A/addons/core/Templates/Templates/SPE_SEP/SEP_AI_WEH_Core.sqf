@@ -297,7 +297,7 @@ private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
 _policeLoadoutData set ["uniforms", ["SEP_B_GER_U_Suit_Blk", "SEP_B_GER_U_Suit_Swetr_Brn","SEP_B_GER_U_Suit_Gry", "SEP_B_GER_U_Coverall_Blu", "SEP_B_GER_U_Coverall_Blu"]];
 _policeLoadoutData set ["vests", ["V_SPE_FFI_Vest_rifle", "V_SPE_FFI_Vest_rifle_frag","V_SPE_FFI_Vest_rifle_pouch"]];
-_policeLoadoutData set ["helmets", ["SEP_B_GER_H_FieldCap_Gry"]];
+_policeLoadoutData set ["helmets", ["SEP_B_GER_H_FieldCap_Brn"]];
 _policeLoadoutData set ["slHelmets", ["SEP_B_GER_H_FieldCap_Brn"]];
 _policeLoadoutData set ["slUniforms", []];
 
@@ -397,7 +397,7 @@ _militiaLoadoutData set ["machineGuns", [
 //////////////////////////
 
 private _crewLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_crewLoadoutData set ["uniforms", ["U_SPE_GER_Tank_crew_private", "U_SPE_GER_lehr_gefreiter", "U_SPE_GER_lehr_unterofficer"]];
+_crewLoadoutData set ["uniforms", ["U_SPE_GER_Tank_crew_private"]];
 _crewLoadoutData set ["vests", ["V_SPE_GER_TankPrivateBelt"]];
 _crewLoadoutData set ["helmets", ["H_SPE_GER_TankPrivateCap3", "H_SPE_GER_TankPrivateCap", "H_SPE_GER_TankPrivateCap2"]];
 
