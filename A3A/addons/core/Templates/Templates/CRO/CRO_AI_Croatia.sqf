@@ -25,7 +25,7 @@
 ["vehiclesAmmoTrucks", ["CRO_Truck_TAM150_Ammo_Open"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["CRO_Truck_TAM150_Repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["CRO_Truck_TAM150_Refuel"]] call _fnc_saveToTemplate;
-["vehiclesMedical", []] call _fnc_saveToTemplate;
+["vehiclesMedical", ["CRO_AMV_BOV_San"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["CRO_APC_BOV_M86", "CRO_APC_BOV_M86_M2", "CRO_ATGM_GOMBR_BOV_M83"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["CRO_AMV_BOVP127", "CRO_AMV_BOVP40ABG", "CRO_AMV_BOVP30L"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["CRO_IFV_M80A", "CRO_IFV_M2A2ODS_W"]] call _fnc_saveToTemplate;
@@ -184,19 +184,20 @@ _sfLoadoutData set ["NVGs", ["rhsusf_ANPVS_15"]];
 _sfLoadoutData set ["binoculars", ["rhssaf_zrak_rd7j"]];
 
 _sfLoadoutData set ["slRifles", [
-["rhs_weap_vhsd2", "rhsusf_acc_nt4_black", "rhsusf_acc_wmx_bk", "rhsusf_acc_su230", ["rhssaf_30rnd_556x45_MDIM_G36"], [], "rhsusf_acc_tdstubby_blk"],
-["rhs_weap_vhsd2", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15A", "rhsusf_acc_su230_mrds", ["rhssaf_30rnd_556x45_SOST_G36"], [], "rhsusf_acc_grip1"],
-["rhs_weap_vhsd2_bg", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15_bk", "rhsusf_acc_compm4", ["rhssaf_30rnd_556x45_MDIM_G36"], ["rhs_mag_M441_HE", "rhs_mag_M397_HET", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""]
+["rhs_weap_vhsd2", "rhsusf_acc_nt4_black", "rhsusf_acc_wmx_bk", "rhsusf_acc_su230", ["rhsgref_30rnd_556x45_vhs2"], [], "rhsusf_acc_grip2"],
+["rhs_weap_vhsd2", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15A", "rhsusf_acc_su230_mrds", ["rhsgref_30rnd_556x45_vhs2_t"], [], "rhsusf_acc_kac_grip"],
+["rhs_weap_vhsd2_bg", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15A", "rhsusf_acc_compm4", ["rhsgref_30rnd_556x45_vhs2"], ["rhs_mag_M441_HE", "rhs_mag_M397_HET", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""]
 ]];
 _sfLoadoutData set ["rifles", [
-["rhs_weap_vhsk2", "rhsusf_acc_nt4_black", "", "rhsusf_acc_eotech_552", ["rhssaf_30rnd_556x45_SPR_G36"], [], "rhsusf_acc_grip2"],
-["rhs_weap_vhsd2_ct15x", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15_bk", "", ["rhssaf_30rnd_556x45_SPR_G36"], [], "rhsusf_acc_rvg_blk"]
+["rhs_weap_hk416d145", "rhsusf_acc_nt4_black", "", "rhsusf_acc_compm4", ["rhs_mag_30Rnd_556x45_Mk262_Stanag"], [], "rhsusf_acc_grip1"],
+["rhs_weap_vhsk2", "rhsusf_acc_rotex5_grey", "", "rhsusf_acc_eotech_552", ["rhssaf_30rnd_556x45_TDIM_G36"], [], "rhsusf_acc_grip3"],
+["rhs_weap_vhsd2_ct15x", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15side_bk", "", ["rhssaf_30rnd_556x45_MDIM_G36"], [], "rhsusf_acc_tdstubby_blk"]
 ]];
 _sfLoadoutData set ["carbines", [
 ["rhs_weap_hk416d10", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15_bk", "rhsusf_acc_su230", ["rhs_mag_30Rnd_556x45_M855A1_PMAG_Tracer_Red"], [], "rhsusf_acc_grip1"]
 ]];
 _sfLoadoutData set ["grenadeLaunchers", [
-["rhs_weap_vhsd2_bg_ct15x", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15_bk", "", ["rhssaf_30rnd_556x45_SPR_G36"], ["rhs_mag_M441_HE", "rhs_mag_M397_HET", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""],
+["rhs_weap_hk416d10_m320", "rhsusf_acc_rotex5_grey", "rhsusf_acc_anpeq15A", "rhsusf_acc_compm4", ["rhs_mag_30Rnd_556x45_Mk318_Stanag"], ["rhs_mag_M441_HE", "rhs_mag_M397_HET", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""],
 ["rhs_weap_vhsd2_bg", "rhsusf_acc_nt4_black", "rhsusf_acc_anpeq15side_bk", "rhsusf_acc_g33_xps3", ["rhssaf_30rnd_556x45_TDIM_G36"], ["rhs_mag_M441_HE", "rhs_mag_M397_HET", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""]
 ]];
 _sfLoadoutData set ["SMGs", [
@@ -204,8 +205,8 @@ _sfLoadoutData set ["SMGs", [
 ]];
 _sfLoadoutData set ["machineGuns", [
 ["rhs_weap_m84", "", "", "", ["rhssaf_250Rnd_762x54R"], [], ""],
-["rhs_weap_m249_pip", "rhsusf_acc_nt4_black", "", "", ["rhsusf_100Rnd_556x45_mixed_soft_pouch"], [], "rhsusf_acc_saw_bipod"],
-["rhs_weap_fnmag", "muzzle_snds_H_MG", "", "rhsusf_acc_ELCAN", ["rhsusf_100Rnd_762x51_m80a1epr"], [], ""]
+["rhs_weap_m249_pip", "rhsusf_acc_rotex5_grey", "", "", ["rhsusf_200Rnd_556x45_mixed_soft_pouch"], [], "rhsusf_acc_saw_bipod"],
+["rhs_weap_fnmag", "", "", "rhsusf_acc_ELCAN", ["rhsusf_100Rnd_762x51_m80a1epr"], [], ""]
 ]];
 _sfLoadoutData set ["marksmanRifles", [
 ["rhs_weap_sr25", "rhsusf_acc_SR25S", "rhsusf_acc_anpeq15_bk", "rhsusf_acc_M8541", ["rhsusf_20Rnd_762x51_SR25_m993_Mag"], [], "rhsusf_acc_harris_bipod"]
