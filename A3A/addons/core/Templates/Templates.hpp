@@ -1672,11 +1672,14 @@ class Templates
 
     // ***************************** SPE with SPEX *****************************
 
-    class SPEX_Base : SPE_IFA_Base
+    class SPEX_Base
     {
         requiredAddons[] = {"ww2_spe_assets_c_characters_germans_c","WW2_SPEX_Assets_c_Characters_Americans_c"};
         basepath = QPATHTOFOLDER(Templates\Templates\SPEX);
         logo = QPATHTOFOLDER(Templates\Templates\SPEX\spe_logo.paa);
+        priority = 80;
+        equipFlags[] = {"lowTech"};
+        forceDLC[] = {"spe"};
     };
 
     class SPEX_US : SPEX_Base
