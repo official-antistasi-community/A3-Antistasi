@@ -15,7 +15,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_vehicle"];
+params ["_marker", "_vehicle", ["_doRevealCalc", true]];
 
 Trace_1("Called with params %1", _this);
 
@@ -32,7 +32,7 @@ private _arrayType = call {
     "buildings";
 };
 
-if (_arrayType == "buildings" and _marker == "Synd_HQ") then {
+if (_arrayType == "buildings" and _marker == "Synd_HQ" and _doRevealCalc) then {
     _garrison get "spawnedBuildings" pushBack _vehicle;
     call A3A_fnc_calcBuildingReveal;
 };

@@ -16,3 +16,9 @@ call A3A_fnc_initBuildableObjects;
 private _mapInfo = missionConfigFile/"A3A"/"mapInfo"/toLower worldName;
 if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower worldName};
 A3A_buildableObjects = getArray (_mapInfo/"buildObjects");
+
+A3A_buildingPriceHM = createHashMapFromArray A3A_buildableObjects; // you can feed 3-element arrays to createHashMapFromArray, it will ignore anything after the first two for each entry
+diag_log time;
+diag_log "Test";
+
+A3A_buildableObjects

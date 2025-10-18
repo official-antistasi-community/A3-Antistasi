@@ -58,7 +58,6 @@ private _destroyedPositions = destroyedBuildings apply { getPosATL _x };
 ["aggressionOccupants", [aggressionLevelOccupants, aggressionStackOccupants]] call A3A_fnc_setStatVariable;
 ["aggressionInvaders", [aggressionLevelInvaders, aggressionStackInvaders]] call A3A_fnc_setStatVariable;
 ["radioKeys", [occRadioKeys,invRadioKeys]] call A3A_fnc_setStatVariable;
-["HQDetectionRadius", A3A_HQDetectionRadius] call A3A_fnc_setStatVariable;
 ["HQKnowledge", [A3A_curHQInfoOcc, A3A_curHQInfoInv, A3A_oldHQInfoOcc, A3A_oldHQInfoInv]] call A3A_fnc_setStatVariable;
 
 // Convert side values because JSON doesn't support them
