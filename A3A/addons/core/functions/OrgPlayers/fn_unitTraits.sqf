@@ -35,6 +35,7 @@ private _preferredRole = _roleName;
 if (_isCommander) then {
     if (_roleName != "commander") then {player setVariable ["A3A_Role", _roleName, true];};
     _roleName = "commander";
+    _preferredRole = "rifleman"; // fallback, should never be visible
 };
 
 // Set the unit traits
