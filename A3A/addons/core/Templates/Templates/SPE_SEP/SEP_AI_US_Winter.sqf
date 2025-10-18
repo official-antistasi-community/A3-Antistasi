@@ -30,8 +30,8 @@
 ["vehiclesRepairTrucks", ["SEP_I_US_WIN_M3_Halftrack_Repair","SEP_I_US_WIN_CCKW_353_Repair","SEP_I_US_WIN_CCKW_353_Repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["SEP_I_US_WIN_M3_Halftrack_Fuel","SEP_I_US_WIN_CCKW_353_Fuel","SEP_I_US_WIN_CCKW_353_Fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["SEP_I_US_WIN_M3_Halftrack_Ambulance","SEP_I_US_WIN_CCKW_353_Ambulance","SEP_I_US_WIN_CCKW_353_Ambulance"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["SEP_I_US_WIN_M20_AUC"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", ["SEP_I_US_WIN_M3A1_Halftrack"]] call _fnc_saveToTemplate; //These got no protected  turret, sufficent troop capacity, cost reduced
+["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
+["vehiclesAPCs", ["SEP_I_US_WIN_M3A1_Halftrack", "SEP_I_US_WIN_M20_AUC"]] call _fnc_saveToTemplate; //These got no protected  turret, sufficent troop capacity, cost reduced
 ["vehiclesIFVs", ["SEP_I_US_WIN_M4A1_75_erla", "SEP_I_US_WIN_M4A1_75","SEP_I_US_WIN_M4A0","SEP_I_US_WIN_M4A0_105","SEP_I_US_WIN_M4A3_105","SEP_I_US_WIN_M10"]] call _fnc_saveToTemplate;
 ["vehiclesLightTanks",["SEP_I_US_WIN_M18_Hellcat","SEP_I_US_WIN_M18_Hellcat","SEP_I_US_WIN_M10"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["SEP_I_US_WIN_M4A0_75","SEP_I_US_WIN_M4A3_75","SEP_I_US_WIN_M4A3_75", "SEP_I_US_WIN_M4A1_76","SEP_I_US_WIN_M4A3_76"]] call _fnc_saveToTemplate;

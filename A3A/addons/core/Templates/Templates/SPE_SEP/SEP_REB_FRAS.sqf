@@ -3,28 +3,32 @@
 //   Rebel Information   //
 ///////////////////////////
 
-["name", "FFF"] call _fnc_saveToTemplate;
+["name", "FRAS"] call _fnc_saveToTemplate;
 
 ["flag", "SPE_FlagCarrier_FFF"] call _fnc_saveToTemplate;
-["flagTexture", "\WW2\SPE_Core_t\Data_t\Flags\flag_FFF_co.paa"] call _fnc_saveToTemplate;
-["flagMarkerType", "flag_FIA"] call _fnc_saveToTemplate;
+["flagTexture", "\A3\Data_F\Flags\Flag_Altis_CO.paa"] call _fnc_saveToTemplate;
+["flagMarkerType", "flag_Altis"] call _fnc_saveToTemplate;
 
 private _rebUniforms = [
-    "U_SPE_FFI_Casual_1_trop",
-    "U_SPE_FFI_Casual_2",
-    "U_SPE_FFI_Casual_2_trop",
-    "U_SPE_FFI_Casual_4_trop",
-    "U_SPE_FFI_Casual_5",
-    "U_SPE_FFI_Casual_5_trop",
-    "U_SPE_FFI_Casual_7_trop",
-    "U_SPE_FFI_Jacket_bruin",
-    "U_SPE_FFI_Jacket_bruin_swetr",
-    "U_SPE_FFI_Jacket_grijs",
-    "U_SPE_FFI_Jacket_grijs_swetr",
-    "U_SPE_FFI_Jacket_zwart_Alt",
-    "U_SPE_FFI_Worker_2_trop",
-    "U_SPE_FFI_Worker_3_trop",
-    "U_SPE_FFI_Worker_4"
+    "U_SPE_CIV_Citizen_1_trop",
+    "U_SPE_CIV_Citizen_2_trop",
+    "U_SPE_CIV_Citizen_3_trop",
+    "U_SPE_CIV_Citizen_4_trop",
+    "U_SPE_CIV_Citizen_5_trop",
+    "U_SPE_CIV_Citizen_6_trop",
+    "U_SPE_CIV_Citizen_7_trop",
+    "U_SPE_CIV_Worker_1_trop",
+    "U_SPE_CIV_Worker_1_trop",
+    "U_SPE_CIV_Worker_2_trop",
+    "U_SPE_CIV_Worker_2_trop",
+    "U_SPE_CIV_Worker_3_trop",
+    "U_SPE_CIV_Worker_3_trop",
+    "U_SPE_CIV_Worker_4_trop",
+    "U_SPE_CIV_Worker_4_trop",
+    "U_SPE_CIV_Worker_Coverall_2_trop",
+    "U_SPE_CIV_Worker_Coverall_2_trop",
+    "U_SPE_CIV_Worker_Coverall_3_trop",
+    "U_SPE_CIV_Worker_Coverall_3_trop"
 ];          //Uniforms given to Normal Rebels
 
 ["uniforms", _rebUniforms] call _fnc_saveToTemplate;         //These Items get added to the Arsenal
@@ -48,9 +52,11 @@ private _rebUniforms = [
 ///  Identities   ///
 /////////////////////
 
-["faces", ["LivonianHead_6","SPE_Arnold","SPE_Connors","SPE_Davidson","SPE_Elliot","SPE_Oberst","SPE_Seppmeyer","SPE_Walter","WhiteHead_01","WhiteHead_02","WhiteHead_05","WhiteHead_06","WhiteHead_07","WhiteHead_08","WhiteHead_12","WhiteHead_15","WhiteHead_18"]] call _fnc_saveToTemplate;
-["voices", ["spe_male01fre", "spe_male02fre"]] call _fnc_saveToTemplate;
-"SPE_FrenchMen" call _fnc_saveNames;
+["faces", ["GreekHead_A3_02","GreekHead_A3_03","GreekHead_A3_04",
+"GreekHead_A3_05","GreekHead_A3_06","GreekHead_A3_07","GreekHead_A3_08",
+"GreekHead_A3_09","Ioannou","Mavros"]] call _fnc_saveToTemplate;
+["voices", ["Male01GRE", "Male02GRE", "Male03GRE", "Male04GRE", "Male05GRE", "Male06GRE"]] call _fnc_saveToTemplate;
+"GreekMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //
