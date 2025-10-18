@@ -30,8 +30,8 @@
 ["vehiclesRepairTrucks", ["SEP_I_IHTC_M3_Halftrack_Repair","SEP_I_IHTC_CCKW_353_Repair","SEP_I_IHTC_CCKW_353_Repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["SEP_I_IHTC_M3_Halftrack_Fuel","SEP_I_IHTC_CCKW_353_Fuel","SEP_I_IHTC_CCKW_353_Fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["SEP_I_IHTC_M3_Halftrack_Ambulance","SEP_I_IHTC_CCKW_353_Ambulance","SEP_I_IHTC_G503_MB_Ambulance"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["SEP_I_IHTC_M20_AUC","SEP_I_IHTC_M3A1_Halftrack","SEP_I_IHTC_M3A1_Halftrack"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", []] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
+["vehiclesAPCs", ["SEP_I_IHTC_M20_AUC","SEP_I_IHTC_M3A1_Halftrack","SEP_I_IHTC_M3A1_Halftrack"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
 ["vehiclesLightTanks",["SEP_I_IHTC_M8_LAC","SEP_I_IHTC_M8_LAC_ringMount"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["SEP_I_IHTC_M4A1_75"]] call _fnc_saveToTemplate;
