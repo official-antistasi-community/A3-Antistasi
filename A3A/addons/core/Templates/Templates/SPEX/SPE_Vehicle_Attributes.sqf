@@ -4,6 +4,8 @@
     ["SPE_FW190F8", ["cost", 75]],
 
     ["SPE_US_M3_Halftrack", ["cost", 60]],
+    ["SPEX_CW_M5_Halftrack", ["cost", 60]],
+    ["SPEX_CW_Trop_M5_Halftrack", ["cost", 60]],
     ["SPE_M20_AUC", ["cost", 60]],
     // M8 is too powerful for a lightarmed and not powerful enough for lighttank
     ["SPE_M8_LAC", ["cost", 80]],
