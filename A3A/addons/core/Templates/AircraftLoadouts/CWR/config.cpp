@@ -71,7 +71,7 @@ class A3A {
         class Helicopter
         {
              class baseHelicopter;
-             class cwr3_b_ah64 : baseHelicopter {
+            class cwr3_b_ah64 : baseHelicopter {
                 loadout[] = {"CUP_PylonPod_19Rnd_Rocket_FFAR_M","CUP_PylonPod_4Rnd_AGM114K_Hellfire_II_M","CUP_PylonPod_4Rnd_AGM114K_Hellfire_II_M","CUP_PylonPod_19Rnd_Rocket_FFAR_M","","CUP_PylonPod_1Rnd_AIM_9L_Sidewinder_M"};
             };
 

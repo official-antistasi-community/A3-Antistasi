@@ -10,7 +10,7 @@ class CfgPatches
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"A3_Data_F_AoW_Loadorder","cwr3_air_weapons"};
+        requiredAddons[] = {"A3_Data_F_AoW_Loadorder","cwr3_air_weapons","cwr3_vehicle_f4_uk"};
         author = AUTHOR;
         authors[] = { AUTHORS };
         authorUrl = "";
@@ -19,5 +19,4 @@ class CfgPatches
     };
 };
 
-#include "CfgMagazines.hpp"
 #include "CfgVehicles.hpp"

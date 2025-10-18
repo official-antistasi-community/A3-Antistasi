@@ -53,7 +53,7 @@
 ["uavsPortable", []] call _fnc_saveToTemplate;
 
 ["vehiclesMilitiaLightArmed", ["CUP_B_LR_MG_GB_W"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaTrucks", ["cwr3_expansion_uk"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaTrucks", ["cwr3_b_m939_open"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["cwr3_b_uk_landrover"]] call _fnc_saveToTemplate;
 ["vehiclesPolice", ["B_GEN_Offroad_01_gen_F"]] call _fnc_saveToTemplate;
 
