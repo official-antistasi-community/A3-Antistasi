@@ -356,8 +356,8 @@ initClientDone = true;
 Info("initClient completed");
 
 if (player == theBoss) then {
-    player setVariable ["A3A_Role", "rifleman", true];
-    ["commander",true] remoteExecCall ["A3A_fnc_unitTraits",theBoss];
+    player setVariable ["A3A_Role", "rifleman"];
+    ["commander",true] call A3A_fnc_unitTraits;
 } else {
     createDialog "A3A_RoleSelectDialog"; // player will be commander if they set up the game
 };

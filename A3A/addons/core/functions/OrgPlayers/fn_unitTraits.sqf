@@ -25,17 +25,14 @@ params [["_roleName", player getVariable ["A3A_Role", "rifleman"]], ["_silent",f
 
 private _isCommander = (player isEqualTo theBoss);
 
-// We never want commander perks to be overwritten so the check is enforced here
-// For all non-commander roles, nothing changes, we assign the normal role
-// For the commander, we give them the commander perks, but have the original role still on their person. Someone should never have "commander" as their role.
-// So we retain the picked role, give them the commander perks, give them the picked role's messaging, but append a message saying that the traits dont take effect.
-
 private _preferredRole = _roleName;
 
+if (_roleName != "commander") then {
+    player setVariable ["A3A_Role", _roleName, true];
+};
+
 if (_isCommander) then {
-    if (_roleName != "commander") then {player setVariable ["A3A_Role", _roleName, true];};
     _roleName = "commander";
-    _preferredRole = "rifleman"; // fallback, should never be visible
 };
 
 // Set the unit traits

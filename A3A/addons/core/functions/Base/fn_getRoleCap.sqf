@@ -9,5 +9,5 @@ Even 2-3 medics in a squad is pretty slim for low-pop. Increase minimum.
 
 if (_roleName in ["rifleman", "commander"]) exitWith { -1 };
 
-_playerCount = count (allPlayers - (entities "HeadlessClient_F"));
+private _playerCount = count (allPlayers - (entities "HeadlessClient_F"));
 floor (((_playerCount - 3) / 9) + 3); // 3-11 players = 3, 12-20 = 4, 21-29 = 5, 30-38 = 6, 39+ = 7
