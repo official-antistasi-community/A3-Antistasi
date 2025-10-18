@@ -4666,6 +4666,107 @@
         <Original>Save the new campaign to AntistasiCommunity.vars instead of the main profile vars file. Warning: This may not work correctly on Linux servers due to an Arma bug.</Original>
       </Key>
     </Container>
+    <Container name="role_select">
+      <Key ID="STR_antistasi_dialogs_roleselect_role_rifleman">
+        <Original>Rifleman</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_rifleman">
+        <Original>The Rifleman is the backbone of every army. Fast and versatile, riflemen are able to go anywhere and do anything.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_rifleman">
+        <Original>Riflemen incur no bonuses or penalties, but are able to hack enemy UAVs if they are found capturable.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_autorifleman">
+        <Original>Autorifleman</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_autorifleman">
+        <Original>Autoriflemen provide the most basic and effective form of fire support: suppression with machine guns.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_autorifleman">
+        <Original>Autoriflemen have better stamina and recovery (can carry more items over distance), but are loud when they move, alerting enemies.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_grenadier">
+        <Original>Grenadier</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_grenadier">
+        <Original>Grenadiers carry grenade launchers to supplement the offensive with explosive, smoke, or flare rounds.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_grenadier">
+        <Original>Grenadiers have better stamina and recovery, but are more easily visible to enemies.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_medic">
+        <Original>Medic</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_medic">
+        <Original>Medics will always keep the squad in the fight, no matter what happens. They are the most important unit in the squad, and should be protected.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_medic">
+        <Original>Medics can do a variety of medical actions faster and also have expanded medical abilities. However, they have worse stamina and are spotted easier.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_engineer">
+        <Original>Engineer</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_engineer">
+        <Original>Engineers work day and night to keep the rebellion and their tech alive, with a good engineer saving tons of time for the squad.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_engineer">
+        <Original>Engineers can repair vehicles, breach enemy armor, build fortifications, defuse mines, and more. They incur a penalty to stamina and a buff to stealth.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_teamleader">
+        <Original>Team Leader</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_teamleader">
+        <Original>A band of rebels without a team leader is barely more than a mob. Team leaders pull their units together and lead their squads to victory.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_teamleader">
+        <Original>Team leaders are quite stealthy with buffs to visual and audible stealth, but have worse stamina.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_commander">
+        <Original>Commander</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_commander">
+        <Original>The commander is the top ranking soldier in the field. They manage the rebellion's affairs, while being able to perform medical and engineer tasks.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_commander">
+        <Original>Commanders handle AI and garrisons as well as coordinating fire support when needed. They have superior stealth for recon but suffer a stamina penalty.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsRifleman">
+        <Original>Riflemen: %1. (?*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_capExplanationRifleman">
+        <Original>There is no cap to the number of Rifleman players.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsCommander">
+        <Original>%1 is the current faction Commander. (?*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderSelf">
+        <Original>You are currently the faction's Commander. (?*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_capExplanationCommander">
+        <Original>The faction can only have one commander, and you must be assigned the spot.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slots">
+        <Original>%1: %2/%3. (?*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_capExplanation">
+        <Original>The cap of slots per role (excluding riflemen and the commander) increases as the player count increases. The number per role increases linearly from 3 slots at 3 players to 6 slots at 38 players.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_welcome">
+        <Original>Welcome to Antistasi! To get started, select a role from the list on the left and use "set role". You can revisit this screen any time by opening the Battle Menu with Y.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_welcomeNew">
+        <Original>Each role has different traits and quirks, so it is recommended to start as a rifleman if you are new to the game. Note that no role has locked weapons; the roles simply determine what traits you start with.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_hasRole">
+        <Original>You are currently a %1.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_isCommander">
+        <Original>However, since you are the commander, you have the traits listed in the "Commander" tab until you resign.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_cannotTakeRoleFull">
+        <Original>This role is full.</Original>
+      </Key>
+    </Container>
     <Container name="custom_loadouts">
       <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
         <Original>Custom AI Loadouts</Original>
