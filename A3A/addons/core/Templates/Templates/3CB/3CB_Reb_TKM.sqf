@@ -49,7 +49,7 @@
 private _initialRebelEquipment = [
 "UK3CB_BHP", "rhs_weap_tt33",
 "uk3cb_enfield_no4","uk3cb_enfield_no3", 
-["rhs_weap_rpg75", 20],
+["rhs_weap_rpg75", 25],
 ["IEDUrbanSmall_Remote_Mag", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],
 "UK3CB_BHP_9_13Rnd", "rhs_mag_762x25_8", "uk3cb_no4_enfield_303_10Rnd_magazine", "uk3cb_no4_enfield_303_10Rnd_magazine_GT", "uk3cb_1rnd_riflegrenade_mas_flare", "rhs_grenade_mkii_mag", "rhs_grenade_mki_mag", "rhs_mag_rdg2_black", "rhs_grenade_m15_mag",
 "UK3CB_CHC_C_B_MED", "UK3CB_B_Bedroll_Backpack", "UK3CB_TKC_C_B_Sidor_MED", "UK3CB_CW_SOV_O_LATE_B_Sidor_RIF", "UK3CB_CW_SOV_O_EARLY_B_Sidor_RIF",

@@ -158,6 +158,7 @@ else
 
     Info("Initial arsenal unlocks completed");
     call A3A_fnc_checkRadiosUnlocked;
+    [] call A3A_fnc_arsenalManage;
 
     // HQ placement setup
     private _posHQ = A3A_saveData get "startPos";

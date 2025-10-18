@@ -510,9 +510,9 @@ _fnc_setPriceIfValid =
 { [_rebelVehicleCosts, _x, 400] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticMGs");
 { [_rebelVehicleCosts, _x, 1300] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesAT");
 { [_rebelVehicleCosts, _x, 1000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticAT");
-{ [_rebelVehicleCosts, _x, 3000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticAA");
-{ [_rebelVehicleCosts, _x, 3600] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesAA");
-{ [_rebelVehicleCosts, _x, 2200] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticMortars");
+{ [_rebelVehicleCosts, _x, 1600] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticAA");
+{ [_rebelVehicleCosts, _x, 2000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesAA");
+{ [_rebelVehicleCosts, _x, 1600] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticMortars");
 { [_rebelVehicleCosts, _x, 5000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesCivHeli");
 { [_rebelVehicleCosts, _x, 5000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesPlane") + FactionGet(reb, "vehiclesCivPlane");
 

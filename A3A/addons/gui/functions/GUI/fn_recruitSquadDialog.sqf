@@ -94,6 +94,10 @@ switch (_mode) do
         private _groupsSDKSniper = FactionGet(reb,"groupSniper");
         private _vehSDKMG = FactionGet(reb,"vehiclesLightArmed")#0;
         private _vehSDKAT = FactionGet(reb,"vehiclesAT")#0;
+
+        // Special case for AA: Specify static AA if there are no AA vehicles
+        private _rebAACars = FactionGet(reb,"vehiclesAA");
+        private _vehSDKAA = if (_rebAACars isEqualTo []) then { FactionGet(reb,"staticAA")#0 } else { _rebAACars#0 };
         
         // Classnames for vehicles
         private _infSquadVehicle = "";
@@ -134,6 +138,8 @@ switch (_mode) do
         _mgCarButton setVariable ["vehicle", ""];
         _atCarButton setVariable ["squadType", _vehSDKAT];
         _atCarButton setVariable ["vehicle", ""];
+        _aaTruckButton setVariable ["squadType", _vehSDKAA];
+        _aaTruckButton setVariable ["vehicle", ""];
 
         // Get prices
         private _infSquadPrice = [_groupsSDKSquad, _infSquadVehicle] call A3A_fnc_getHCSquadPrice;
@@ -145,6 +151,7 @@ switch (_mode) do
         private _sniperTeamPrice = [_groupsSDKSniper, _sniperTeamVehicle] call A3A_fnc_getHCSquadPrice;
         private _mgCarPrice = [_vehSDKMG] call A3A_fnc_getHCSquadPrice;
         private _atCarPrice = [_vehSDKAT] call A3A_fnc_getHCSquadPrice;
+        private _aaTruckPrice = [_vehSDKAA] call A3A_fnc_getHCSquadPrice;
 
         // Split money and HR from price array
         _infSquadPrice params ["_infSquadMoney", "_infSquadHr"];
@@ -156,6 +163,7 @@ switch (_mode) do
         _sniperTeamPrice params ["_sniperTeamMoney", "_sniperTeamHr"];
         _mgCarPrice params ["_mgCarMoney", "_mgCarHr"];
         _atCarPrice params ["_atCarMoney", "_atCarHr"];
+        _aaTruckPrice params ["_aaTruckMoney", "_aaTruckHr"];
 
         // Update price labels
         _infSquadPriceText ctrlSetText (format ["%1 € %2 HR", _infSquadMoney, _infSquadHr]);
@@ -167,6 +175,7 @@ switch (_mode) do
         _sniperTeamPriceText ctrlSetText (format ["%1 € %2 HR", _sniperTeamMoney, _sniperTeamHr]);
         _mgCarPriceText ctrlSetText (format ["%1 € %2 HR", _mgCarMoney, _mgCarHr]);
         _atCarPriceText ctrlSetText (format ["%1 € %2 HR", _atCarMoney, _atCarHr]);
+        _aaTruckPriceText ctrlSetText (format ["%1 € %2 HR", _aaTruckMoney, _aaTruckHr]);
 
         // Disable buttons and darken icon if not enough money or HR for the squad
         private _money = server getVariable "resourcesFIA";
@@ -216,6 +225,11 @@ switch (_mode) do
             _atCarButton ctrlEnable false;
             _atCarButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
             _atCarIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+        };
+        if (_money < _aaTruckMoney || _hr < _aaTruckHr) then {
+            _aaTruckButton ctrlEnable false;
+            _aaTruckButton ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";
+            _aaTruckIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         };
     };
 

@@ -82,7 +82,7 @@ private _initialRebelEquipment = [
 "Binocular","hgun_Pistol_Signal_F","6Rnd_GreenSignal_F","6Rnd_RedSignal_F",
 "acc_flashlight","acc_flashlight_smg_01","acc_flashlight_pistol"
 ];
-_initialRebelEquipment append [["launch_RPG7_F", 10], ["RPG7_F", 30]];
+_initialRebelEquipment append [["launch_RPG7_F", 10], ["RPG7_F", 25]];
 
 if ("enoch" in A3A_enabledDLC) then {
     _initialRebelEquipment append ["sgun_HunterShotgun_01_F", "sgun_HunterShotgun_01_sawedoff_F", "2Rnd_12Gauge_Pellets", "2Rnd_12Gauge_Slug"];

@@ -49,7 +49,7 @@
 private _initialRebelEquipment = [
 "rhs_weap_makarov_pm", "rhs_weap_tt33",
 "a3a_UK3CB_CZ550_8mm",
-["rhs_weap_rpg75", 20],
+["rhs_weap_rpg75", 25],
 ["IEDUrbanSmall_Remote_Mag", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],
 "rhs_mag_9x18_8_57N181S", "rhs_mag_762x25_8", "rhsgref_5Rnd_792x57_kar98k", "rhs_grenade_sthgr43_mag", "rhs_grenade_nbhgr39_mag",
 "UK3CB_CHC_C_B_MED", "UK3CB_B_Bedroll_Backpack", "UK3CB_TKC_C_B_Sidor_MED", "UK3CB_CW_SOV_O_LATE_B_Sidor_RIF", "UK3CB_CW_SOV_O_EARLY_B_Sidor_RIF",
