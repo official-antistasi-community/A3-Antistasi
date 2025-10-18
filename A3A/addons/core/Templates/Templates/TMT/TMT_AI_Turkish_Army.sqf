@@ -30,10 +30,10 @@
 ["vehiclesAPCs", ["TMT_ACV300_W_M242"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["TMT_M60A3_W","TMT_LEO2A4_w"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["TMT_Landrover_w_AA"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["TMT_Landrover_w_AA", "CUP_B_M163_Vulcan_USA"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
-["vehiclesGunBoats", ["B_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
+["vehiclesGunBoats", ["CUP_B_RHIB_USMC"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["a3a_Plane_Fighter_03_grey_F"]] call _fnc_saveToTemplate;
@@ -61,10 +61,10 @@
 
 ["vehiclesPolice", ["B_GEN_Offroad_01_gen_F"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["I_G_HMG_02_high_F"]] call _fnc_saveToTemplate;
-["staticAT", ["B_static_AT_F"]] call _fnc_saveToTemplate;
-["staticAA", ["B_static_AA_F"]] call _fnc_saveToTemplate;
-["staticMortars", ["B_Mortar_01_F"]] call _fnc_saveToTemplate;
+["staticMGs", ["CUP_B_M2StaticMG_USMC"]] call _fnc_saveToTemplate;
+["staticAT", ["CUP_B_TOW2_TriPod_USMC"]] call _fnc_saveToTemplate;
+["staticAA", ["CUP_B_Stinger_AA_pod_Base_USMC"]] call _fnc_saveToTemplate;
+["staticMortars", ["CUP_B_M252_USMC"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "8Rnd_82mm_Mo_shells"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
@@ -300,11 +300,12 @@ private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData; // touch an
 _policeLoadoutData set ["uniforms", ["tmt_police_combat_tshirt_uniform"]];
 _policeLoadoutData set ["vests", ["V_TacVest_blk_POLICE"]];
 _policeLoadoutData set ["helmets", ["tmt_MilCap_police"]];
+
 _policeLoadoutData set ["SMGs", [
-["TMT_SAR109", "", "", "", [], [], ""]
+    ["TMT_SAR109_Grip", "", "", "", ["TMT_30Rnd_9x19_Mag_SAR109"], [], ""]
 ]];
 _policeLoadoutData set ["sidearms", [
-["TMT_Zigana_PX9", "", "", "", ["TMT_16Rnd_9x19_Mag_Tracer_Green"], [], ""]
+    ["TMT_Canik_TP9EliteSCombat_blk", "", "", "", ["TMT_16Rnd_9x19_Mag"], [], ""]
 ]];
 ////////////////////////////////
 //    Militia Loadout Data    //
