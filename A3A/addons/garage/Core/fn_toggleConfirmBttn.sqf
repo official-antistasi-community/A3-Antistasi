@@ -40,8 +40,7 @@ private _fnc_disable = {
     _ctrlCnfrm ctrlSetTooltip _this;
 };
 
-_isHelipad = (HR_GRG_accessLimit == "helipad");
-if (_isHelipad) exitWith {
+if (HR_GRG_accessLimit == "helipad") exitWith {
     if (_selVehicleCat in HR_GRG_HELIPADACCESSIBLE) then {
         call _fnc_enable;
     } else {

@@ -32,9 +32,9 @@ private _arrayType = call {
     "buildings";
 };
 
-if (_arrayType == "buildings" and _marker == "Synd_HQ" and _doRevealCalc) then {
+if (_arrayType == "buildings" and _marker == "Synd_HQ") then {
     _garrison get "spawnedBuildings" pushBack _vehicle;
-    call A3A_fnc_calcBuildingReveal;
+    if (_doRevealCalc) then {call A3A_fnc_calcBuildingReveal};
 };
 
 (_garrison get _arrayType) pushBack [typeOf _vehicle, getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle];

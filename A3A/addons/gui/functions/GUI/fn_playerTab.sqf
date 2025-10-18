@@ -260,8 +260,8 @@ switch (_mode) do
                     // Garage check
                     private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
                     private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
-                    private _nearHelipads = nearestObjects [player, ["a3a_helipad"], 20, true];
-                    private _isNearHelipad = (count _nearHelipads > 0) && {_vehicle isKindOf "Helicopter" && {_nearHelipads#0 distance2D _vehicle < 20}};
+                    private _nearHelipads = nearestObjects [_vehicle, ["a3a_helipad"], 30, true];
+                    private _isNearHelipad = (count _nearHelipads > 0) && {_vehicle isKindOf "Helicopter"};
                     if !(_inArea > -1 || _isNearHelipad) then {
                         _addToGarageButton ctrlEnable false;
                         _addToGarageButton ctrlSetTooltip "Must be near friendly marker to garage";

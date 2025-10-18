@@ -37,10 +37,6 @@ HR_GRG_Cnd_isAirbase = {
     count (airportsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (HR_GRG_accessPoint inArea _x)}) > 0
 };
 
-HR_GRG_Cnd_isHelipad = {
-    count (nearestObjects [player, ['a3a_helipad'], 20, true]) > 0
-};
-
 // Return lock limit for specified player
 HR_GRG_getLockLimit = {
     [HR_GRG_LockLimit_Guest, HR_GRG_LockLimit_Member] select (_this call A3A_fnc_isMember);

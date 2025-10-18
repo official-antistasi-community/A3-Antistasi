@@ -39,8 +39,8 @@ if (_player distance _vehicle > 25) exitWith {["STR_HR_GRG_Feedback_addVehicle_D
     //Valid area
 private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
 private _inArea = _friendlyMarkers findIf { count ([_player, _vehicle] inAreaArray _x) > 1 };
-private _nearHelipads = nearestObjects [player, ["a3a_helipad"], 20, true];
-private _isNearHelipad = (count _nearHelipads > 0) && {_vehicle isKindOf "Helicopter" && {_nearHelipads#0 distance2D _vehicle < 50}};
+private _nearHelipads = nearestObjects [_vehicle, ["a3a_helipad"], 30, true];
+private _isNearHelipad = (count _nearHelipads > 0) && (_vehicle isKindOf "Helicopter");
 if (_inArea == -1 && {!_isNearHelipad}) exitWith {["STR_HR_GRG_Feedback_addVehicle_badLocation",[FactionGet(reb,"name")]] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     //No hostiles near
