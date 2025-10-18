@@ -28,13 +28,13 @@
 ["vehiclesMedical", ["AMF_VBMR_SAN_CE"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["AMF_VBMR_ARX30_CE"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["AMF_VBCI_CE_01_F"]] call _fnc_saveToTemplate;
-["vehiclesIFVs", ["AMF_EBRC_CE_01"]] call _fnc_saveToTemplate;
-["vehiclesLightTanks", ["B_AMF_AMX10_RCR_01_F", "B_AMF_AMX10_RCR_SEPAR_01_F"]] call _fnc_saveToTemplate;
+["vehiclesIFVs", []] call _fnc_saveToTemplate;
+["vehiclesLightTanks", ["B_AMF_AMX10_RCR_01_F", "B_AMF_AMX10_RCR_SEPAR_01_F", "AMF_EBRC_CE_01"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["B_AMF_TANK_01", "B_AMF_TANK_CE_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["AMF_VBMR_MISTRAL_CE"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
-["vehiclesGunBoats", ["B_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
+["vehiclesGunBoats", ["CUP_B_RHIB_USMC"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["AMF_RAFALE_M_01_F"]] call _fnc_saveToTemplate;
@@ -76,8 +76,8 @@
 /////////////////////
 
 ["faces", ["GreekHead_A3_02","GreekHead_A3_03","GreekHead_A3_04","GreekHead_A3_05","GreekHead_A3_06","GreekHead_A3_07","GreekHead_A3_08","GreekHead_A3_09","Ioannou","Mavros"]] call _fnc_saveToTemplate;
-["voices", ["Male01GRE","Male02GRE","Male03GRE","Male04GRE","Male05GRE","Male06GRE"]] call _fnc_saveToTemplate;
-"GreekMen" call _fnc_saveNames;
+["voices", ["Male01FRE","Male02FRE","Male03FRE"]] call _fnc_saveToTemplate;
+"NATOMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //
@@ -98,7 +98,7 @@ _loadoutData set ["ATLaunchers", [
     ["AMF_Eryx", "", "", "", ["Eryx_HEAT"], [], ""]
 ]];
 _loadoutData set ["AALaunchers", [
-    ["launch_B_Titan_F", "", "", "", ["Titan_AA"], [], ""]
+    ["CUP_launch_FIM92Stinger", "", "", "", [""], [], ""]
 ]];
 
 _loadoutData set ["sidearms", []];
@@ -212,7 +212,7 @@ _sfLoadoutData set ["carbines", [
 ]];
 _sfLoadoutData set ["grenadeLaunchers", [
     ["AMF_614_long_01_F", "AMF_ROTEX_V", "", "AMF_xps3_magnifier_side", ["30Rnd_556x45_Stanag_Tracer_Green"], ["AMF_RFG_AC58", "AMF_RFG_APAV40"], ""],
-    ["AMF_614_long_HK269_01_F", "AMF_ROTEX_V", "", "AMF_schmidt_benderx4", ["30Rnd_556x45_Stanag_Tracer_Red"], ["1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
+    ["AMF_614_long_HK269_01_F", "muzzle_snds_M", "", "AMF_schmidt_benderx4", ["30Rnd_556x45_Stanag_Tracer_Red"], ["1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
 ]];
 _sfLoadoutData set ["SMGs", [
     ["amf_hk_mp5_01_f", "muzzle_snds_L", "", "", ["30Rnd_9x19_mag_red_Tracer"], [], ""]
@@ -269,6 +269,7 @@ _militaryLoadoutData set ["SMGs", [
 ]];
 _militaryLoadoutData set ["machineGuns", [
     ["amf_aanf1_01_f", "", "", "", ["50Rnd_762x51_band"], [], ""],
+    ["CUP_lmg_FNMAG_RIS_modern", "", "", "", ["CUP_100Rnd_TE4_LRT4_Red_Tracer_762x51_Belt_M"], [], ""],
     ["amf_mini_mg_01_f", "", "", "", ["150Rnd_MINI_MG_mag_tracer_yellow"], [], "amf_acc_mini_grip5"]
 ]];
 _militaryLoadoutData set ["marksmanRifles", [
@@ -310,13 +311,13 @@ _militiaLoadoutData set ["atBackpacks", ["amf_tecpack_70L_BME"]];
 _militiaLoadoutData set ["helmets", ["AMF_Casque_F1", "AMF_Casque_F1_CE", "AMF_Casque_F1_DA", "AMF_Casque_F1_Olive", "AMF_kepi_legio_01", "AMF_kepi_legio_03"]];
 
 _militiaLoadoutData set ["rifles", [
-    ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag"], [], ""],
-    ["AMF_RFF2_01_F", "", "", "", ["10Rnd_762x51_Mag"], [], ""]
+    ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag"], [], ""]
 ]];
 _militiaLoadoutData set ["carbines", [
     ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
+    ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag"], ["AMF_RFG_AC58"], ""],
     ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag"], ["AMF_RFG_APAV40"], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [
