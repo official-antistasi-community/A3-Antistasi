@@ -3,8 +3,6 @@ if (isNil "A3A_buildingPriceHM") then {call A3A_fnc_initBuildableObjects}; // ne
 private _garrison = A3A_garrison get _marker;
 private _buildings = _garrison getOrDefault ["buildings", []];
 private _total = 0;
-diag_log A3A_buildableObjects;
-diag_log A3A_buildingPriceHM;
 {
     private _type = _x#0;
     private _price = A3A_buildingPriceHM getOrDefault [_type, 0];
