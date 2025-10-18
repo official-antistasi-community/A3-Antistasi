@@ -61,10 +61,11 @@ switch (_mode) do
             private _button = _display displayCtrl _x#2;
             private _group = if (_x#3 isEqualTo "vehiclesAA" && {(FactionGet(reb,_x#3)) isEqualTo []}) then {FactionGet(reb,"staticAA")#0} else {_x#3};
             private _hasVehicle = (_icon in [A3A_IDC_RECRUITMGCARICON, A3A_IDC_RECRUITATCARICON, A3A_IDC_RECRUITAATRUCKICON]);
+            private _vehicle = "";
             if (_includeVehicle && {!_hasVehicle}) then {
                 _vehicle = [_group] call A3A_fnc_getHCSquadVehicleType;
             };
-            if (isNull _group) exitWith {
+            if (_group isEqualTo []) exitWith {
                 _button ctrlEnable false;
                 _button ctrlSetTooltip localize "STR_antistasi_recruit_squad_notCompatible";
                 _icon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
@@ -73,7 +74,7 @@ switch (_mode) do
             _button setVariable ["vehicle", if (_hasVehicle) then {""} else {_vehicle}];
             private _price = [_group, _vehicle] call A3A_fnc_getHCSquadPrice;
             _price params ["_reqMoney", "_reqHR"];
-            _priveText ctrlSetText (format ["%1 € %2 HR", _reqMoney, _reqHR]);
+            _priceText ctrlSetText (format ["%1 € %2 HR", _reqMoney, _reqHR]);
             if (_money < _reqMoney || _hr < _reqHR) then {
                 _button ctrlEnable false;
                 _button ctrlSetTooltip localize "STR_antistasi_recruit_squad_error";

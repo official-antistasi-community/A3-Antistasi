@@ -63,7 +63,7 @@ switch (_mode) do
         if (player == theBoss) then {
             private _button = (_display displayCtrl A3A_IDC_TAKECMD);
             _button ctrlEnable false;
-            _button ctrlSetTooltip "You cannot take command from yourself";
+            _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_admin_take_command_self";
         };
 
         // _aiLimiterSlider = _display displayCtrl A3A_IDC_AILIMITERSLIDER;

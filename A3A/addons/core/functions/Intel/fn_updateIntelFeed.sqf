@@ -23,13 +23,8 @@ switch (toLowerANSI _type) do {
 };
 
 _params params ["_shortParams","_descParams"];
-diag_log _params;
-diag_log _shortParams;
-diag_log _descParams;
 private _title = localize (format ["STR_A3A_intelFeed_title_%1", _type]);
 private _desc = localize (format ["STR_A3A_intelFeed_desc_%1", _type]);
-diag_log _title;
-diag_log _desc;
 _shortParams insert [0, [_title]];
 _descParams insert [0, [_desc]];
 

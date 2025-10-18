@@ -969,6 +969,9 @@
       <Key ID="STR_antistasi_dialogs_hq_train_tooltip">
         <Original>This will cost € %1</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_train_maxed">
+        <Original>Rebel training maxed!</Original>
+      </Key>
     </Container>
     <Container name="dialog_hq_garrisons">
       <Key ID="STR_antistasi_dialogs_hq_garrisons_at">
@@ -1195,6 +1198,12 @@
         <Turkish>%1 için dinlenin</Turkish>
         <Chinesesimp>休息 %1</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_rest_notime_text">
+        <Original>No rest for the wicked...</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_rest_notime_tooltip">
+        <Original>You must select a period of time to sleep for</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_hq_wakeup_text">
         <Original>Time will be %2 when you wake up.</Original>
         <German>Es ist %2 wenn du aufwachst.</German>
@@ -1378,11 +1387,11 @@
         <Turkish>SAVAŞ SEÇENEKLERİ</Turkish>
         <Chinesesimp>战斗选项</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_remove_garrison_button">
-        <Original>Remove Garrison</Original>
+      <Key ID="STR_antistasi_dialogs_main_persistent_save_button">
+        <Original>Persistent Save</Original>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_create_watchpost_button">
-        <Original>Create WP/RB</Original>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_button">
+        <Original>Garrisons</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_squads_button">
         <Original>High Command Squads</Original>
@@ -1646,6 +1655,12 @@
         <Portuguese>Distância de Geração</Portuguese>
         <Turkish>Doğma Mesafesi</Turkish>
         <Chinesesimp>生成距离</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_command_button">
+        <Original>Take Command</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_command_self">
+        <Original>You cannot take command from yourself</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_admin_tp_arsenal_box_button">
         <Original>Arsenal Box</Original>
@@ -3172,6 +3187,124 @@
         <Original>Kills:</Original>
       </Key>
     </Container>
+    <Container name="dialog_main_context">
+      <Key ID="STR_antistasi_dialogs_main_context_title_main">
+        <Original>Context Actions</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_vehicle">
+        <Original>Vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_aircraft">
+        <Original>Aircraft</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_construction">
+        <Original>Construction</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_HQ">
+        <Original>HQ</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_label_construction">
+        <Original>Construction</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_label_HQ">
+        <Original>Headquarters</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_hideActions">
+        <Original>Hide Removal Actions</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_showActions">
+        <Original>Show Removal Actions</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_hideIcons">
+        <Original>Hide Unbuilt Icons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_showIcons">
+        <Original>Show Unbuilt Icons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_addBombRun">
+        <Original>Add to air support</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_garage">
+        <Original>Garage Vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_toggleAI1">
+        <Original>Allow AI to use</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_toggleAI2">
+        <Original>Block AI from using</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_addToGarrison">
+        <Original>Add vehicle to garrison</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_away">
+        <Original>Must be near friendly marker to garage</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_utility">
+        <Original>Garaging this will delete it and refund the full cost</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_addBombRun_nearValid">
+        <Original>Must be near airbase or HQ to add to air support</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_gen_notRebVic">
+        <Original>Vehicle is not a rebel vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_addToGarrison_alreadyIn">
+        <Original>Vehicle is already in a garrison</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_addToGarrison_crewed">
+        <Original>Vehicle must be uncrewed</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_HQ_changeRole">
+        <Original>Change Role</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_HQ_vehArsenal">
+        <Original>Vehicle Arsenal</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_HQ_beDriver">
+        <Original>Must be driver of a vehicle to modify its inventory</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_construction_needEngineer">
+        <Original>Must be an engineer</Original>
+      </Key>
+    </Container>
+    <Container name="dialog_main_war_status">
+      <Key ID="STR_antistasi_dialogs_main_warstatus_main">
+        <Original>War Status</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_occupants">
+        <Original>Occupants</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_invaders">
+        <Original>Invaders</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_rebels">
+        <Original>Rebels</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_intelfeed">
+        <Original>Intel Feed</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_aggro">
+        <Original>Aggression: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_resources">
+        <Original>Resources: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_lastResourcesUpdate">
+        <Original>Time since last update: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_noResourcesUpdate">
+        <Original>No known resource information</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_radioKeys">
+        <Original>Radio Keys: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_money">
+        <Original>Money: %1€</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_HR">
+        <Original>HR: %1</Original>
+      </Key>
+    </Container>
     <Container name="dialog_mission_request">
       <Key ID="STR_antistasi_dialogs_mission_request_assassination">
         <Original>Assassination</Original>
@@ -4616,6 +4749,14 @@
       </Key>
       <Key ID="STR_antistasi_gun_shop_total_cost_text">
         <Original>Total:</Original>
+      </Key>
+    </Container>
+    <Container name="admin_copy_id">
+      <Key ID="STR_antistasi_admincopyid_title">
+        <Original>COPY USER ID</Original>
+      </Key>
+      <Key ID="STR_antistasi_admincopyid_main">
+        <Original>Copy the user's ID from the box by highlighting it and using Ctrl + C.</Original>
       </Key>
     </Container>
   </Package>

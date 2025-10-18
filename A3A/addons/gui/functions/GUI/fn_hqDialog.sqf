@@ -332,7 +332,7 @@ switch (_mode) do
         if (_trainingLevel < 20) then {
             _trainingButton ctrlSetTooltip (format [localize "STR_antistasi_dialogs_hq_train_tooltip",1000 + (1.5*((skillFIA) *750))]);
         } else {
-            _trainingButton ctrlSetTooltip "Rebel training maxed!";
+            _trainingButton ctrlSetTooltip localize "STR_antistasi_dialogs_hq_train_maxed";
             _trainingButton ctrlEnable false;
         };
 
@@ -610,8 +610,8 @@ switch (_mode) do
             format [localize "STR_antistasi_dialogs_hq_rest_text" + "<br />" + localize "STR_antistasi_dialogs_hq_wakeup_text", _restTimeString, _postRestTimeString];
         } else {
             _restButton ctrlEnable false;
-            _restButton ctrlSetTooltip "You must select a period of time to sleep for"; // tooltip later cleared by ability to rest check
-            "No rest for the wicked...";
+            _restButton ctrlSetTooltip localize "STR_antistasi_dialogs_hq_rest_notime_tooltip"; // tooltip later cleared by ability to rest check
+            localize "STR_antistasi_dialogs_hq_rest_notime_text";
         };
         _restText ctrlSetStructuredText parseText _message;
     };

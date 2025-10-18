@@ -98,6 +98,8 @@ switch (_mode) do
             _removeButton ctrlShow false;
         };
         private _name = name _player;
+        _kickButton ctrlEnable false;
+        _banButton ctrlEnable false;
         /*
         player setVariable ["adminSelectedPlayer", _name];
         _kickButton ctrlRemoveAllEventHandlers "ButtonClick";

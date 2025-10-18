@@ -1579,6 +1579,9 @@
         <Turkish>Çöp Temizlendi. &lt;br/&gt;Son ÇT %1 kadar önceydi.</Turkish>
         <Chinesesimp>杂物清理完毕.&lt;br/&gt;距离上次杂物清理已过去%1.</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_gc_hq_running">
+        <Original>Cleaning the HQ area of garbage...</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_gc_title">
         <Original>Garbage Cleaner</Original>
         <German>Aufräumen</German>
@@ -2368,9 +2371,9 @@
         <Chinesesimp>载具已出售</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_statistics_isComm">
-        <Original>Rank: %5 | HR: %1 | Your Money: %6 € | %10 Money: %2 € | %8 Aggr: %3 | %9 Aggr: %4 | War Level: %7 | Undercover Mode: %11</Original>
-        <Korean>계급: %5 | 인력: %1 | 당신의 자금: %6 € | %10의 자금: %2 € | %8 공격성: %3 | %9 공격성: %4 | 전쟁 레벨: %7 | 위장 모드: %11</Korean>
-        <Russian>Ранг: %5 | HR: %1 | Ваши деньги: %6 € | Деньги %10: %2 € | %8 Агрессия: %3 | %9 Агрессия: %4 | Уровень войны: %7 | Режим скрытности: %11</Russian>
+        <Original>Rank: %5 | HR: %1 | Your Money: %6 € | %11 Money: %2 € | Airstrikes: %7 | %9 Aggr: %3 | %10 Aggr: %4 | War Level: %8 | Undercover Mode: %12</Original>
+        <Korean>계급: %5 | 인력: %1 | 당신의 자금: %6 € | %11의 자금: %2 € | 공습: %7 | %9 공격성: %3 | %10 공격성: %4 | 전쟁 레벨: %8 | 위장 모드: %12</Korean>
+        <Russian>Ранг: %5 | HR: %1 | Ваши деньги: %6 € | Деньги %11: %2 € | Авиаудары: %7 | %9 Агрессия: %3 | %10 Агрессия: %4 | Уровень войны: %8 | Режим скрытности: %12</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_statistics_notComm">
         <Original>Commander: %3 | Rank: %2 | HR: %1 | Your Money: %4 € | %8 Aggr: %5 | %9 Aggr: %6 | War Level: %7 | Undercover Mode: %10</Original>
@@ -3876,6 +3879,9 @@
         <Korean>민간인 제한:</Korean>
         <Russian>Лимит гражданских:</Russian>
         <Chinesesimp>平民限制:</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_init_initclient_gameOpt_obsolete">
+        <Original>The game options have moved! Run a persistent save from the Commander or Admin menus on the new battle menu, adjust the AI limits from the Admin tab, or adjust your client settings in the Escape menu.</Original>
       </Key>
       <Key ID="STR_A3A_fn_init_initclient_gameOpt_limFT">
         <Original>Limited Fast Travel:</Original>
@@ -16599,13 +16605,13 @@
         <Original>%2 mins until %1 attack</Original>
       </Key>
       <Key ID="STR_A3A_intelfeed_desc_attack_time">
-        <Original>%2 is reported to have the resources to launch an attack in %1 if our calculations are right.</Original>
+        <Original>%1 is reported to have the resources to launch an attack in %2 if our calculations are right.</Original>
       </Key>
       <Key ID="STR_A3A_intelfeed_title_def_resources">
         <Original>%1 resources: %2</Original>
       </Key>
       <Key ID="STR_A3A_intelfeed_desc_def_resources">
-        <Original>our sources report that %1 has %2 defence resources</Original>
+        <Original>our sources report that %1 has %2 defence resources.</Original>
       </Key>
       <Key ID="STR_A3A_intelfeed_title_decryption_key">
         <Original>%1 decryption key found</Original>
@@ -16623,7 +16629,7 @@
         <Original>Weapon unlock</Original>
       </Key>
       <Key ID="STR_A3A_intelfeed_desc_weapon_unlock">
-        <Original>we found supply data for the %1, and it has been made available in the arsenal</Original>
+        <Original>we found supply data for the %1, and it has been made available in the arsenal.</Original>
       </Key>
     </Container>
   </Package>

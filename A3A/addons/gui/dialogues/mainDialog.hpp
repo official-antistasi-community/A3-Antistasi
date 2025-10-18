@@ -199,7 +199,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 {
                     idc = A3A_IDC_CONSTRUCTBUTTON;
                     //text = $STR_antistasi_dialogs_main_construct;
-                    text = "War Status";
+                    text = $STR_antistasi_dialogs_main_warstatus_main;
                     onButtonClick = "[""switchTab"", [""warstatus""]] call A3A_GUI_fnc_mainDialog;";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 20 * GRID_W;
@@ -1257,7 +1257,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class AccessGarrisonsButton : A3A_Button
                 {
                     idc = A3A_IDC_ACCESSGARRISONSBUTTON;
-                    text = "Garrisons";
+                    text = $STR_antistasi_dialogs_main_garrisons_button;
                     onButtonClick = "[""garrisonButtonClicked""] call A3A_GUI_fnc_commanderTab;";
                     x = 10 * GRID_W;
                     y = 38 * GRID_H;
@@ -1268,7 +1268,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class PersistentSaveButton : A3A_ShortcutButton
                 {
                     idc = A3A_IDC_PERSISTENTSAVECMDBUTTON;
-                    text = "Persistent Save";
+                    text = $STR_antistasi_dialogs_main_persistent_save_button;
                     onButtonClick = "[""persistentSaveButtonClicked""] call A3A_GUI_fnc_commanderTab;";
                     x = 36 * GRID_W;
                     y = 38 * GRID_H;
@@ -1430,7 +1430,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class TakeCommandButton : A3A_ShortcutButton
                 {
                     idc = A3A_IDC_TAKECMD;
-                    text = "Take Command";
+                    text = $STR_antistasi_dialogs_main_admin_take_command_button;
                     x = 8 * GRID_W;
                     y = 80 * GRID_H;
                     w = 22 * GRID_W;
@@ -1441,7 +1441,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                 class PersistentSaveButton : A3A_ShortcutButton
                 {
                     idc = A3A_IDC_PERSISTENTSAVEADMIN;
-                    text = "Persistent Save";
+                    text = $STR_antistasi_dialogs_main_persistent_save_button;
                     x = 32 * GRID_W;
                     y = 80 * GRID_H;
                     w = 22 * GRID_W;
@@ -1809,7 +1809,6 @@ class A3A_MainDialog : A3A_TabbedDialog
 
             class controls
             {
-                
 
                 class AIListLabel : A3A_SectionLabelRight
                 {
@@ -1969,16 +1968,6 @@ class A3A_MainDialog : A3A_TabbedDialog
             idc = A3A_IDC_WARSTATUSTAB;
             show = false;
 
-            class IntelStreamTitle : A3A_SectionLabelLeft
-            {
-                idc = -1;
-                text = "Factions";
-                x = 0 * GRID_W;
-                y = 7 * GRID_H;
-                w = 96 * GRID_W;
-                h = 4 * GRID_H;
-            };
-
             class controls
             {
                 class OccGroup : A3A_ControlsGroupNoScrollbars 
@@ -1993,7 +1982,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         class OccTitle : A3A_SectionLabelCenter
                         {
                             idc = A3A_IDC_WARSTATUS_OCCTITLE;
-                            text = "Occupants";
+                            text = $STR_antistasi_dialogs_main_warstatus_occupants;
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
                             w = 28 * GRID_W;
@@ -2058,7 +2047,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         class InvTitle : A3A_SectionLabelCenter
                         {
                             idc = A3A_IDC_WARSTATUS_INVTITLE;
-                            text = "Invaders";
+                            text = $STR_antistasi_dialogs_main_warstatus_invaders;
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
                             w = 28 * GRID_W;
@@ -2123,7 +2112,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         class RebTitle : A3A_SectionLabelCenter
                         {
                             idc = A3A_IDC_WARSTATUS_REBTITLE;
-                            text = "Rebels";
+                            text = $STR_antistasi_dialogs_main_warstatus_rebels;
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
                             w = 28 * GRID_W;
@@ -2439,7 +2428,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                         class WarLevel : A3A_Text
                         {
-                            idc = A3A_WARSTATUS_WARLEVEL;
+                            idc = A3A_IDC_WARSTATUS_WARLEVEL;
                             x = 27 * GRID_W;
                             y = 25 * GRID_H;
                             w = 23 * GRID_W;
@@ -2458,7 +2447,7 @@ class A3A_MainDialog : A3A_TabbedDialog
                         class IntelStreamTitle : A3A_SectionLabelCenter
                         {
                             idc = A3A_IDC_WARSTATUS_INTELTITLE;
-                            text = "Intel Feed";
+                            text = $STR_antistasi_dialogs_main_warstatus_intelfeed;
                             x = 0 * GRID_W;
                             y = 0 * GRID_H;
                             w = 54 * GRID_W;
@@ -2985,7 +2974,7 @@ class A3A_AdminCopyUID
         class Titlebar : A3A_TitlebarText
         {
             idc = -1;
-            text = "COPY USER ID";
+            text = $STR_antistasi_admincopyid_title;
             colorBackground[] = A3A_COLOR_TITLEBAR_BACKGROUND;
             x = CENTER_X(48);
             y = CENTER_Y(31) - 5 * GRID_H;
@@ -3002,7 +2991,7 @@ class A3A_AdminCopyUID
         };
         class TransferInfoText : A3A_StructuredText
         {
-            text = "Copy the user's ID from the box by highlighting it and using Ctrl + C.";
+            text = $STR_antistasi_admincopyid_main;
             idc = A3A_IDC_ADMINCOPY_INFO;
             x = CENTER_X(48) + 2 * GRID_W;
             y = CENTER_Y(31) + 2 * GRID_H;

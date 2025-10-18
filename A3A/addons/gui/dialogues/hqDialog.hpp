@@ -1425,7 +1425,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     text = $STR_antistasi_dialogs_hq_garrisons_build_watchpost_button;
                     onButtonClick = "[""buildWatchpost""] spawn A3A_GUI_fnc_hqDialog"; // TODO UI-update: Replace placeholder when merging
                     x = 10 * GRID_W;
-                    y = 80 * GRID_H;
+                    y = 64 * GRID_H;
                     w = 22 * GRID_W;
                     h = 12 * GRID_H;
                 };

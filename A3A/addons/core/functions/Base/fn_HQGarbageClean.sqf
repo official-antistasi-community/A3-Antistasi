@@ -6,7 +6,7 @@ FIX_LINE_NUMBERS()
 
 private _playersNearHQ = (allPlayers - entities "HeadlessClient_F") select {_x distance2D markerPos "Synd_HQ" < 100};
 _playersNearHQ pushBackUnique theBoss;
-[localize "STR_A3A_fn_base_gc_title", "Cleaning the HQ area of garbage..."] remoteExec ["A3A_fnc_customHint", _playersNearHQ];
+[localize "STR_A3A_fn_base_gc_title", localize "STR_A3A_fn_base_gc_hq_running"] remoteExec ["A3A_fnc_customHint", _playersNearHQ];
 Info("Cleaning garbage near HQ...");
 
 private _cleanPos = getMarkerPos "Synd_HQ";
