@@ -70,8 +70,7 @@ if (_intelType == "Small") then
             {
                 _text = format [localize "STR_A3A_fn_intel_select_time_2", _sideName, round (_nextAttack)];
                 ["attack_time", _side, [[_sideName, round (_nextAttack)], [_sideName, round (_nextAttack)]]] call A3A_fnc_updateIntelFeed;
-            };
-            
+            }; 
         };
         case (DEF_RESOURCES):
         {
