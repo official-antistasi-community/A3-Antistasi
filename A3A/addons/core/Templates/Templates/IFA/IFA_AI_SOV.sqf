@@ -49,6 +49,14 @@ private _vehiclesHeavyTanks = ["LIB_JS2_43"];
 ["vehiclesPlanesAA", ["LIB_P39","LIB_RA_P39_2","LIB_RA_P39_3"]] call _fnc_saveToTemplate;              // 
 ["vehiclesPlanesTransport", ["LIB_Li2"]] call _fnc_saveToTemplate;
 
+
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        ["vehiclesPlanesCAS", ["LIB_Pe2","sab_sw_il2", "sab_sw_il2_2"]] call _fnc_saveToTemplate;
+    };
+    ["vehiclesPlanesAA", ["LIB_P39","sab_fl_yak3"]] call _fnc_saveToTemplate;
+};
+
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;            // ideally fragile & unarmed helis seating 4+
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
 // Should be capable of dealing damage to ground targets without additional scripting
