@@ -359,7 +359,7 @@ _militiaLoadoutData set ["SMGs", [
     ["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
-    ["SPE_LMG_303_Mk2", "", "", "", ["SPE_30Rnd_770x56"], [], ""]
+    ["SPEX_LMG_303_Mk1", "", "", "", ["SPE_30Rnd_770x56"], [], ""]
 ]];
 
 //////////////////////////
