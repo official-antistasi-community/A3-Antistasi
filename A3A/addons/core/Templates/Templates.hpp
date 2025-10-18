@@ -1743,7 +1743,7 @@ class Templates
     {
         side = "Occ";
         flagTexture = "\A3\Data_F\Flags\Flag_AltisColonial_CO.paa";
-        file = "SEP_AI_RAAF";
+        file = "SEP_AI_ACAF";
         name = "SEP Altis Colonial Armed Forces";
         shortName = "ACAF";
         lore = "The Altis Colonial Armed Forces occupies the islands of Altis and Stratis on behalf of the British Empire";
