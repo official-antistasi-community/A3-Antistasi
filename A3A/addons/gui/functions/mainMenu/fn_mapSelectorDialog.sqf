@@ -36,7 +36,6 @@ private _thisFunc = (uiNamespace getVariable "A3A_GUI_fnc_mapSelectorDialog");
 
 params ["_mode", "_params"];
 
-Info_1("Map selector dialog called with mode %1", _mode);
 _display = findDisplay A3A_IDD_MAPSELECTORDIALOG;
 private _mapLB = _display displayCtrl A3A_IDC_MAPSELECT_MAPLB;
 private _selBannerButton = _display displayCtrl A3A_IDC_MAPSELECT_SELECTBANNERPICTURE;

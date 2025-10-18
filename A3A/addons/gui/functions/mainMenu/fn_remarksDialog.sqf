@@ -26,17 +26,18 @@ Return Value:
 
 FIX_LINE_NUMBERS()
 
-// 6 + 3 + 17 + 24 + 17 + 24 + 3 + 3 (+7 for delimiters) = 104
+// 6 + 3 + 17 + 24 + 17 + 24 (+5 for delimiters) = 94
+// Timestamp length is 85 chars, fixed
 // Max diag_log length is 1044
-#define DETAILSCAP 900
+// 1044 - 94 - 85 = 865
+#define DETAILSCAP 860
 #define DELIMITER "|"
 
 private _thisFunc = (uiNamespace getVariable "A3A_GUI_fnc_remarksDialog");
-private _fnc_hint = {["Remarks",localize _this] call A3A_fnc_customHint};
+private _fnc_hint = {["Remarks",_this] call A3A_fnc_customHint};
 
 params ["_mode", "_params"];
 
-Info_1("Remarks dialog called with mode %1", _mode);
 _display = findDisplay A3A_IDD_REMARKS;
 private _types = [
     ["POS", "Positive"],
@@ -100,13 +101,8 @@ switch (_mode) do
         private _senderUID = getPlayerUID player;
         private _senderName = profileName;
         private _targetUID = _targetCombo lbData lbCurSel _targetCombo;
-        private _targetComplete = "COM";
-        private _targetName = if (_targetUID == "0000") then {
-            // manual entry, dont know how long the input is
-            private _fullName = ctrlText _targetEdit;
-            private _clippedName = _fullName select [0,23];
-            if (_fullName != _clippedName) then {_targetComplete = "INC"};
-            _clippedName;
+        private _targetName = if (_targetUID == "MANUAL") then {
+            ctrlText _targetEdit;
         } else {
             private _target = _targetUID call BIS_fnc_getUnitByUID;
             _name = if (_target isEqualTo objNull) then {
@@ -114,17 +110,16 @@ switch (_mode) do
             } else {
                 name _target;
             };
-            _name;
+            _name
         };
+        _targetName = _targetName splitString DELIMITER joinString "";
         if (count _targetName == 0) exitWith {"You must select a valid user or submit a name" call _fnc_hint};
         private _details = ctrlText _detailsEdit;
         // filter details for delimiter and then trim
         private _filtered = _details splitString DELIMITER joinString "";
         if (count _filtered == 0) exitWith {"You must provide some sort of context for the remark" call _fnc_hint};
-        private _filteredClipped = _filtered select [0, DETAILSCAP - 1];
-        private _detailsComplete = ["INC", "COM"] select (_filtered == _filteredClipped);
 
-        private _endStr = [_prefix, _type, _senderUID, _senderName, _targetUID, _targetName, _targetComplete, _filteredClipped, _detailsComplete] joinString DELIMITER;
+        private _endStr = [_prefix, _type, _senderUID, _senderName, _targetUID, _targetName, _filtered] joinString DELIMITER;
         ServerInfo(_endStr)
         _detailsEdit ctrlSetText "";
         _display closeDisplay 0;

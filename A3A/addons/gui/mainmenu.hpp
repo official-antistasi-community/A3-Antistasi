@@ -40,6 +40,7 @@ class RscDisplayMain : RscStandardDisplay
     enableDisplay = 0;
 	class controls
 	{
+		/*
 		delete Spotlight;
 		delete Spotlight1;
 		delete Spotlight2;
@@ -68,6 +69,7 @@ class RscDisplayMain : RscStandardDisplay
 			onButtonClick="finddisplay 0 createDisplay 'A3A_MapSelectorDialog';";
 			onLoad="";
 		};
+		*/
 
 		class GroupSingleplayer : RscControlsGroupNoScrollbars 
 		{

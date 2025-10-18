@@ -32,7 +32,6 @@ private _thisFunc = (uiNamespace getVariable "A3A_GUI_fnc_communityAdDialog");
 
 params ["_mode", "_params"];
 
-Info_1("Community ad dialog called with mode %1", _mode);
 _display = findDisplay A3A_IDD_COMMUNITYADVERTISEMENT;
 private _picture = _display displayCtrl A3A_IDC_COMMAD_PICTURE;
 private _mainText = _display displayCtrl A3A_IDC_COMMAD_MAINTEXT;

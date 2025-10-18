@@ -12,7 +12,6 @@ private _thisFunc = (uiNamespace getVariable "A3A_GUI_fnc_optionsDialog");
 
 params["_mode", "_params"];
 
-Info_1("Client options dialog called with mode %1", _mode);
 // Get display
 private _display = findDisplay A3A_IDD_CLIENTOPTIONS;
 private _paramsTable = _display displayCtrl A3A_IDC_OPTIONS_TABLE;

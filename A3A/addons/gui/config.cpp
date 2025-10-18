@@ -15,9 +15,24 @@ class CfgPatches {
     };
 };
 
+class A3A {
 #if __A3_DEBUG__
-    class A3A {
-        #include "CfgFunctions.hpp"
+    #include "CfgFunctions.hpp"
+#endif
+};
+
+#if __A3_DEBUG__
+    class CfgFunctions {
+        class A3A_GUI {
+            class mainMenu {
+                file = QPATHTOFOLDER(functions\mainMenu);
+                class communityAdDialog {};
+                class mapSelectorDialog {};
+                class optionsDialog {};
+                class remarksDialog {};
+                class showInterruptButtons {};
+            };
+        };
     };
 #else
     #include "CfgFunctions.hpp"
