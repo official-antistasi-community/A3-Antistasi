@@ -122,7 +122,7 @@ class A3A {
                 mainGun[] = {"sab_fl_pod_37mm_weapon"};
 
                 bombRacks[] = {"sab_fl_bomb_weapon"};
-                diveParams[] = {800, 500, 110, 55, 35, {62, 0}};
+                diveParams[] = {1000, 500, 110, 55, 35, {66, 0}};
             };
 
             //Japanese
