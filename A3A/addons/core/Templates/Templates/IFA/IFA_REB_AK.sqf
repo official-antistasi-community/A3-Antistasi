@@ -35,6 +35,10 @@
 ["vehiclesPlane", ["LIB_C47_RAF"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["LIB_Zis5v_Med"]] call _fnc_saveToTemplate;
 
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    ["vehiclesPlane", ["sab_fl_ju52", "sab_fl_g50"]] call _fnc_saveToTemplate;
+};
+
 ["vehiclesCivCar", ["LIB_GazM1_dirty", "LIB_GazM1"]] call _fnc_saveToTemplate;
 ["vehiclesCivTruck", ["LIB_CIV_FFI_CitC4", "LIB_CIV_FFI_CitC4_3"]] call _fnc_saveToTemplate;
 ["vehiclesCivHeli", []] call _fnc_saveToTemplate;
