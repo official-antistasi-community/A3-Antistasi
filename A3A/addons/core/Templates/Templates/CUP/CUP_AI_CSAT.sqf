@@ -211,7 +211,7 @@ _sfLoadoutData set ["grenadeLaunchers", [
     ["arifle_Katiba_GL_F", "muzzle_snds_H", "CUP_acc_ANPEQ_2_grey", "CUP_optic_OKP_7_rail", ["30Rnd_65x39_caseless_green"], ["CUP_1Rnd_HE_M203", "CUP_1Rnd_StarCluster_White_M203"], ""]
 ]];
 _sfLoadoutData set ["SMGs", [
-    ["CUP_arifle_AKS_Gold", "CUP_muzzle_Bizon", "", "", ["CUP_40Rnd_TE4_LRT4_Green_Tracer_762x39_RPK_M"], [], ""]
+    ["CUP_smg_bizon", "CUP_muzzle_Bizon", "", "", ["CUP_64Rnd_9x19_Bizon_M"], [], ""]
 ]];
 _sfLoadoutData set ["machineGuns", [
     ["CUP_lmg_PKM_B50_vfg", "CUP_muzzle_snds_KZRZP_PK_woodland", "", "", ["CUP_100Rnd_TE4_LRT4_762x54_PK_Tracer_Red_M"], [], ""],

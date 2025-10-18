@@ -313,7 +313,7 @@ _policeLoadoutData set ["sidearms", [
 ////////////////////////////////
 
 private _militiaLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_militiaLoadoutData set ["uniforms", ["U_BG_Guerilla1_1", "U_BG_leader"]];
+_militiaLoadoutData set ["uniforms", ["U_I_CombatUniform", "U_I_CombatUniform_shortsleeve"]];
 _militiaLoadoutData set ["vests", ["V_Chestrig_oli", "V_TacVest_oli", "CUP_V_B_PASGT_no_bags_OD"]];
 _militiaLoadoutData set ["sniVests", ["CUP_V_O_RUS_RPS_Smersh_SVD_ModernOlive"]];
 _militiaLoadoutData set ["backpacks", ["I_Fieldpack_oli_LAT2"]];

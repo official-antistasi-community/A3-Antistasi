@@ -26,7 +26,7 @@
 ["vehiclesRepairTrucks", ["CUP_O_Kamaz_6396_repair_RUS_M"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["CUP_O_Kamaz_6396_fuel_RUS_M"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["CUP_O_Kamaz_6396_medical_RUS_M"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["CUP_O_BTR90_HQ_RU", "CUP_O_BRDM2_ATGM_RUS", "CUP_O_BRDM2_RUS"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["CUP_O_BTR90_HQ_RU", "CUP_O_BRDM2_RUS"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["CUP_O_BTR90_RU", "CUP_O_BTR80A_CAMO_RU", "CUP_O_BTR80A_DESERT_RU"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["CUP_O_BMP3_RU", "CUP_O_BMP2_RU"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["CUP_O_T90M_RU", "CUP_O_T90M_CAMO_RU"]] call _fnc_saveToTemplate;
