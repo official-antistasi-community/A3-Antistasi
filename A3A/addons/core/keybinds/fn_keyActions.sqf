@@ -26,17 +26,18 @@ switch (_key) do {
         // Problem 4: Unless there's a dialog open, the default Y key bind will also open or ping Zeus.
         // Problem 5: Arma likes to refire the key events when you close a dialog.
         // tl;dr: Do not rearrange this logic or clowns will eat your children.
-        if (A3A_GUIDevPreview) then {
-            createDialog "A3A_dummyDialog";
-            player setVariable ["autoSwitchGroups", hcSelected player];
-            [] spawn {
-                closeDialog 0;
-                waitUntil { showCommandingMenu ""; hcSelected player isEqualTo [] };
-                createDialog "A3A_MainDialog";
-                sleep 1; 
-                GVAR(keys_battleMenu) = false;
-            };
-        } else {
+
+        createDialog "A3A_dummyDialog";
+        player setVariable ["autoSwitchGroups", hcSelected player];
+        [] spawn {
+            closeDialog 0;
+            waitUntil { showCommandingMenu ""; hcSelected player isEqualTo [] };
+            createDialog "A3A_MainDialog";
+            sleep 1; 
+            GVAR(keys_battleMenu) = false;
+        };
+        // Old Battle Menu Opem
+        /*
     #ifdef UseDoomGUI
             ERROR("Disabled due to UseDoomGUI Switch.")
     #else
@@ -44,9 +45,11 @@ switch (_key) do {
             createDialog "radio_comm";
     #endif
             [] spawn { sleep 1; GVAR(keys_battleMenu) = false; };   
-        };
+        */
     };
 
+    // Old Battle Menu function
+    /*
     case QGVAR(artyMenu): {
         if (A3A_GUIDevPreview) exitWith {};
         if (player getVariable ["incapacitated",false]) exitWith {};
@@ -56,6 +59,7 @@ switch (_key) do {
         [] spawn A3A_fnc_artySupport;
         [] spawn { sleep 1; GVAR(keys_battleMenu) = false;};
     };
+    */
 
     case QGVAR(infoBar): {
     #ifdef UseDoomGUI
