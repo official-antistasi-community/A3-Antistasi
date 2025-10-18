@@ -324,8 +324,6 @@ mapX addAction [localize "STR_A3A_fn_init_initclient_addact_gameOpt", {
 mapX addAction [localize "STR_A3A_fn_init_initclient_addact_mapinfo", A3A_fnc_mapInfoDialog,nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
 if (isMultiplayer) then {mapX addAction [localize "STR_A3A_fn_init_initclient_addact_ailoadinfo", { [] remoteExec ["A3A_fnc_AILoadInfo",2];},nil,0,false,true,"",""]}; // should be no reason to restrict the aiLoadInfo to anyone
 
-[] call A3A_fnc_unitTraits;
-
 // Get list of buildable objects, has map (and template?) dependency
 call A3A_fnc_initBuildableObjects;
 
@@ -356,6 +354,13 @@ A3A_aliveTime = time;
 
 initClientDone = true;
 Info("initClient completed");
+
+if (player == theBoss) then {
+    player setVariable ["A3A_Role", "rifleman"];
+    ["commander",true] call A3A_fnc_unitTraits;
+} else {
+    createDialog "A3A_RoleSelectDialog"; // player will be commander if they set up the game
+};
 
 if(!isMultiplayer) then
 {

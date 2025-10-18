@@ -145,6 +145,7 @@ class CfgFunctions
             class getAggroLevelString {};
             class getMarkerForPos {};
             class getRecentDamage {};
+            class getRoleCap {};
             class getVehiclesAirSupport {};
             class getVehicleSellPrice {};
             class getVehiclesGroundSupport {};
