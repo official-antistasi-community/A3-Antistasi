@@ -204,7 +204,7 @@ _sfLoadoutData set ["SMGs", [
 ["CRO_smg_MP5SD", "", "", "", ["CRO_30Rnd_9x21_Stanag"], [], ""]
 ]];
 _sfLoadoutData set ["machineGuns", [
-["rhs_weap_m84", "", "", "", ["rhssaf_250Rnd_762x54R"], [], ""],
+["rhs_weap_pkm", "", "", "", ["rhssaf_250Rnd_762x54R"], [], ""],
 ["rhs_weap_m249_pip", "rhsusf_acc_rotex5_grey", "", "", ["rhsusf_200Rnd_556x45_mixed_soft_pouch"], [], "rhsusf_acc_saw_bipod"],
 ["rhs_weap_fnmag", "", "", "rhsusf_acc_ELCAN", ["rhsusf_100Rnd_762x51_m80a1epr"], [], ""]
 ]];
@@ -262,7 +262,7 @@ _militaryLoadoutData set ["grenadeLaunchers", [
 ["rhs_weap_vhsd2_bg", "", "", "rhsusf_acc_RX01_NoFilter", ["rhssaf_30rnd_556x45_Tracers_G36", "rhssaf_30rnd_556x45_MDIM_G36"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""]
 ]];
 _militaryLoadoutData set ["machineGuns", [
-["rhs_weap_m84", "", "", "", ["rhssaf_250Rnd_762x54R"], [], ""],
+["rhs_weap_pkm", "", "", "", ["rhssaf_250Rnd_762x54R"], [], ""],
 ["rhs_weap_m249_pip", "rhsusf_acc_SFMB556", "", "", ["rhsusf_200rnd_556x45_M855_box"], [], "rhsusf_acc_saw_bipod"],
 ["rhs_weap_fnmag", "rhsusf_acc_ARDEC_M240", "", "rhsusf_acc_ELCAN", ["rhsusf_100Rnd_762x51"], [], ""]
 ]];
