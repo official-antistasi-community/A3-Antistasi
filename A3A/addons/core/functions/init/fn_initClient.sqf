@@ -83,14 +83,14 @@ while {true} do {
 
 Info("Server started, continuing with client init");
 
-call A3A_fnc_installSchrodingersBuildingFix;
+//call A3A_fnc_installSchrodingersBuildingFix;
 
 if (!isServer) then {
     // get server to send us the current destroyedBuildings list, hide them locally
-    "destroyedBuildings" addPublicVariableEventHandler {
-        { hideObject _x } forEach (_this select 1);
-    };
-    [clientOwner, "destroyedBuildings"] remoteExecCall ["publicVariableClient", 2];
+    //"A3A_destroyedBuildings" addPublicVariableEventHandler {
+    //    { hideObject _x } forEach (_this select 1);
+    //};
+    //[clientOwner, "A3A_destroyedBuildings"] remoteExecCall ["publicVariableClient", 2];
 
     boxX call jn_fnc_arsenal_init;
     if (A3A_hasACEMedical) then { call A3A_fnc_initACEUnconsciousHandler };
