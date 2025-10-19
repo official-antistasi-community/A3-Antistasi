@@ -1176,6 +1176,12 @@
         <Turkish>Bu eşyayı hareket ettir</Turkish>
         <Chinesesimp>移动此物品</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_buylootbox">
+        <Original>Buy Loot Box</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_buylootbox_enemies">
+        <Original>You cannot purchase loot boxes when enemies are nearby.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_flagaction_buyveh">
         <Original>Buy Vehicle</Original>
         <German>Fahrzeug kaufen</German>
@@ -1300,6 +1306,9 @@
         <Portuguese>Descansar por 8 horas</Portuguese>
         <Turkish>8 saat boyunca dinlen</Turkish>
         <Chinesesimp>休息8个小时</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_garage">
+        <Original>Garage</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_flagaction_heal_carry">
         <Original>Carry %1</Original>
@@ -1677,6 +1686,12 @@
         <French>Poste d'observation près de %1</French>
         <Korean>%1 인근 관측초소</Korean>
         <Russian>Наблюдательный пост рядом с %1</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_base_manageFlagAccess_title">
+        <Original>Service Access</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_manageFlagAccess_main">
+        <Original>The rebel logistics network needs more time to connect to this recently captured area.&lt;br/&gt;&lt;br/&gt;You can access the %1 menu in %2.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_markerChange_noAirbase">
         <Original>Airbase Lost</Original>
@@ -9147,6 +9162,9 @@
         <Polish>Tryb gry - NIE zmieniaj tego w trakcie misji</Polish>
         <Chinesesimp>游玩模式 - 请勿在游玩过程中改变此选项</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Params_garageAccessTimer_title">
+        <Original>Simulate logistics by blocking flag functions after capture for X minutes</Original>
+      </Key>
       <Key ID="STR_A3A_Params_gcMaxObjects_title">
         <Original>Maximum number of corpses and wrecks</Original>
         <Russian>Максимальное количество трупов и обломков</Russian>
@@ -9246,6 +9264,9 @@
         <Russian>2 минуты</Russian>
         <Polish>2 minuty</Polish>
         <Chinesesimp>2 分钟</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_Params_generic_3min">
+        <Original>3 minutes</Original>
       </Key>
       <Key ID="STR_A3A_Params_generic_30min">
         <Original>30 minutes</Original>

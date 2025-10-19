@@ -141,11 +141,13 @@ switch _typeX do
         } else {
             [_this#0, 'buy'] call A3A_fnc_manageFlagAccess;
         }},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4];
-        _flag addAction ["Buy Loot Box", {if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {
-            [localize "STR_A3A_fn_base_flagaction_vehiclebuy", "You cannot purchase loot boxes when enemies are nearby."] call A3A_fnc_customHint;
-        } else {
-            [player, a3a_faction_reb get "surrenderCrate"] call A3A_fnc_buyItem;
-        }},nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4];
+        _flag addAction [localize "STR_A3A_fn_base_flagaction_buylootbox", {
+            if ([getPosATL player] call A3A_fnc_enemyNearCheck) then {
+                [localize "STR_A3A_fn_base_flagaction_vehiclebuy", localize "STR_A3A_fn_base_flagaction_buylootbox_enemies"] call A3A_fnc_customHint;
+            } else {
+                [player, a3a_faction_reb get "surrenderCrate"] call A3A_fnc_buyItem;
+            };
+        },nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull])",4];
         [_flag, true] call HR_GRG_fnc_initGarage;
     };
     case "Intel_Small":
