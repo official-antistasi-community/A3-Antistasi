@@ -26,6 +26,7 @@ License: APL-ND
 #include "..\..\dialogues\defines.hpp"
 #include "..\..\dialogues\textures.inc"
 #include "..\..\script_component.hpp"
+#include "..\..\..\garage\CfgDefines.inc"
 FIX_LINE_NUMBERS()
 
 params[["_mode","update"], ["_params",[]]];
@@ -101,10 +102,10 @@ switch (_mode) do
 
         } else {
             _fastTravelButton ctrlEnable false;
-            private _prettyString = _fastTravelBlockers apply {localize format ["STR_A3A_fn_dialogs_ftradio_" + _x]};
-            _fastTravelButton ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
+            private _prettyString = localize format ["STR_A3A_fn_dialogs_ftradio_" + _fastTravelBlockers#0];
+            _fastTravelButton ctrlSetTooltip _prettyString;
             _fastTravelIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            _fastTravelIcon ctrlSetTooltip (_prettyString joinString ", <br/><br/>");
+            _fastTravelIcon ctrlSetTooltip _prettyString;
         };
 
         // Construct
@@ -218,121 +219,9 @@ switch (_mode) do
         private _money = player getVariable "moneyX";
         _moneyText ctrlSetText format[localize "STR_antistasi_dialogs_main_player_money_text", _money];
 
-        // Vehicle section
-        private _vehicleGroup = _display displayCtrl A3A_IDC_PLAYERVEHICLEGROUP;
-        private _noVehicleGroup = _display displayCtrl A3A_IDC_NOVEHICLEGROUP;
-
-        // Vehicle section is only available to members -- REMOVED
-        // if ([player] call A3A_fnc_isMember) then {
-
-            // Attempt to get vehicle from cursorObject
-            _vehicle = cursorObject; // was cursorTarget
-            // TODO UI-update: Add fallback to select the closest eligible vehicle in sight
-            // TODO UI-update: Add check for distance
-
-            if !(isNull _vehicle) then {
-                // Check if vehicle is eligible for garage / sell, not a dude or house etc.
-                private _canGarage = (
-                    ([typeOf _vehicle] call HR_GRG_fnc_getCatIndex >= 0) ||
-                    (_vehicle getVariable ['A3A_canGarage', false])
-                );
-                if (_canGarage) then {
-                    private _className = typeOf _vehicle;
-                    private _configClass = configFile >> "CfgVehicles" >> _className;
-                    private _displayName = getText (_configClass >> "displayName");
-                    private _editorPreview = getText (_configClass >> "editorPreview");
-
-                    private _vehicleNameLabel = _display displayCtrl A3A_IDC_VEHICLENAMELABEL;
-                    _vehicleNameLabel ctrlSetText _displayName;
-                    // For some reason the text control becomes active showing an ugly
-                    // white border, we disable it here to avoid that
-                    _vehicleNameLabel ctrlEnable false;
-
-                    private _vehiclePicture = _display displayCtrl A3A_IDC_VEHICLEPICTURE;
-                    _vehiclePicture ctrlSetText _editorPreview;
-
-                    private _addToGarageButton = _display displayCtrl A3A_IDC_GARAGEVEHICLEBUTTON;
-                    private _sellVehicleButton = _display displayCtrl A3A_IDC_SELLVEHICLEBUTTON;
-                    private _unlockVehicleButton = _display displayCtrl A3A_IDC_UNLOCKVEHICLEBUTTON;
-
-                    // Garage check
-                    private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
-                    private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
-                    if !(_inArea > -1) then {
-                        _addToGarageButton ctrlEnable false;
-                        _addToGarageButton ctrlSetTooltip "Must be near friendly marker to garage";
-                    };
-                    if (_vehicle getVariable ['A3A_canGarage', false]) then {
-                        _addToGarageButton ctrlSetTooltip "Garaging this will delete it and refund the full cost";
-                        _unlockVehicleButton ctrlEnable false;
-                        _unlockVehicleButton ctrlSetTooltip "Cannot lock static objects";
-                    };
-
-                    // Change label on lock/unlock depending on vehicle lock state
-                    // To be removed, vehicle locking isn't a thing anymore
-                    /* private _unlockVehicleButton = _display displayCtrl A3A_IDC_UNLOCKVEHICLEBUTTON;
-                    private _vehicleOwner = _vehicle getVariable ["ownerX", nil];
-                    private _vehicleIsLocked = !(isNil "_vehicleOwner");
-                    if (_vehicleIsLocked) then {
-                        _unlockVehicleButton ctrlSetText localize "STR_antistasi_dialogs_main_unlock_vehicle";
-                        _unlockVehicleButton ctrlSetTooltip format ["Vehicle is locked by %1", _vehicleOwner]; // TODO UI-update: localize
-                    } else {
-                        _unlockVehicleButton ctrlSetText localize "STR_antistasi_dialogs_main_lock_vehicle";
-                        _unlockVehicleButton ctrlSetTooltip "";
-                    }; */
-
-                    if (player == theBoss) then {
-                        // Sell check, uses same condition as garage + boss
-                        if !(_inArea > -1) then {
-                            _sellVehicleButton ctrlEnable false;
-                            _sellVehicleButton ctrlSetTooltip "Must be near friendly marker to sell";
-                        }; 
-                        if (_vehicle getVariable ['A3A_canGarage', false]) then {
-                            _sellVehicleButton ctrlEnable false;
-                            _sellVehicleButton ctrlSetTooltip "Not sellable - garage instead";
-                        };
-                        // Disable "add to air support" button if vehicle is not eligible
-                        private _addToAirSupportButton = _display displayCtrl A3A_IDC_ADDTOAIRSUPPORTBUTTON;
-                        if !(_vehicle isKindOf "Air") then {
-                            _addToAirSupportButton ctrlEnable false;
-                            _addToAirSupportButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_not_eligible_vehicle_tooltip";
-                        };
-                        //Valid area to convert to air support
-                        private _friendlyMarkers = (["Synd_HQ"] + airportsX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
-                        private _inArea = _friendlyMarkers findIf { count ([player, _vehicle] inAreaArray _x) > 1 };
-                        if (!(_inArea > -1) && (_vehicle isKindOf "Air")) then { 
-                            _addToAirSupportButton ctrlEnable false;
-                            _addToAirSupportButton ctrlSetTooltip "Must be near airbase or HQ to add to air support";
-                        };
-                    } else {
-                        // Enable only "garage" and "lock/unlock" buttons to regular players
-                        private _sellVehicleButton = _display displayCtrl A3A_IDC_SELLVEHICLEBUTTON;
-                        _sellVehicleButton ctrlEnable false;
-                        _sellVehicleButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_only_tooltip";
-                        private _addToAirSupportButton = _display displayCtrl A3A_IDC_ADDTOAIRSUPPORTBUTTON;
-                        _addToAirSupportButton ctrlEnable false;
-                        _addToAirSupportButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_only_tooltip";
-                    };
-                    // Show vehicle group
-                    _noVehicleGroup ctrlShow false;
-                    _vehicleGroup ctrlShow true;
-                } else {
-                    // Show no vehicle message
-                    _vehicleGroup ctrlShow false;
-                    _noVehicleGroup ctrlShow true;
-                };
-            } else {
-                // Show no vehicle message
-                _vehicleGroup ctrlShow false;
-                _noVehicleGroup ctrlShow true;
-            };
-        /* } else {
-            // Show not member message
-            _vehicleGroup ctrlShow false;
-            _noVehicleGroup ctrlShow true;
-            private _noVehicleText = _display displayCtrl A3A_IDC_NOVEHICLETEXT;
-            _noVehicleText ctrlSetText localize "STR_antistasi_dialogs_main_members_only";
-        }; */
+        // Context menu is completely seperate. Build there.
+        [] call FUNC(buildContextMenu);
+        
     };
 
     default {

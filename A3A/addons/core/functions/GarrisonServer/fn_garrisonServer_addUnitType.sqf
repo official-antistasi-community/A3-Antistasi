@@ -1,0 +1,68 @@
+/*
+    Server-side function for adding single unit type to rebel garrison
+	Kinda gross, handles the bad-input feedback cases as well
+
+    Environment: Unscheduled, server
+
+    Arguments:
+    <STRING> Marker name of garrison.
+    <STRING> Unit type to add (loadout name).
+    <NUMBER> Machine ID of calling client.
+	<BOOL> True if called by old UI (customhints new garrison info to client).
+
+    Copyright 2025 John Jordan. All Rights Reserved.
+    Used and distributed by the Antistasi Community project with permission.
+*/
+
+#include "..\..\script_component.hpp"
+FIX_LINE_NUMBERS()
+
+params ["_marker", "_unitType", "_client", ["_oldUI", false]];
+
+Trace_1("Called with params %1", _this);
+
+private _titleStr = localize "STR_A3A_garrison_header";
+
+if (sidesX getVariable [_marker, sideUnknown] != teamPlayer) exitWith {
+	[_titleStr, format [localize "STR_A3A_fn_reinf_garrDia_zone_belong",FactionGet(reb,"name")]] remoteExecCall ["A3A_fnc_customHint", _client];
+};
+
+private _hr = server getVariable "hr";
+if (_hr < 1) exitWith {
+	[_titleStr, localize "STR_A3A_garrison_error_no_hr"] remoteExecCall ["A3A_fnc_customHint", _client];
+};
+
+private _resourcesFIA = server getVariable "resourcesFIA";
+private _costs = server getVariable _unitType;
+if (_costs > _resourcesFIA) exitWith {
+	[_titleStr,  format [localize "STR_A3A_garrison_error_no_money", _costs]] remoteExecCall ["A3A_fnc_customHint", _client];
+};
+
+if ([markerPos _marker] call A3A_fnc_enemyNearCheck) exitWith {
+	[_titleStr, localize "STR_A3A_garrison_error_enemies_near"] remoteExecCall ["A3A_fnc_customHint", _client];
+};
+
+// TODO: Do we still want this?
+private _troops = A3A_garrison get _marker get "troops";
+private _limit = [_marker] call A3A_fnc_getGarrisonLimit;
+if (_limit != -1 && {count _troops >= _limit}) exitWith {
+	[_titleStr, localize "STR_A3A_garrison_reached_limit"] remoteExecCall ["A3A_fnc_customHint", _client];
+};
+
+// ugh
+[-1,-_costs] spawn A3A_fnc_resourcesFIA;
+
+// Add unit to server garrison data
+_troops pushBack _unitType;
+
+// Update the marker text if it's rebel
+if (sidesX getVariable _marker == teamPlayer) then { [_marker] call A3A_fnc_mrkUpdate };
+
+// Add real unit if garrison is spawned
+if (_marker in A3A_garrisonMachine) then {
+    ["spawnUnit", [_marker, _unitType]] call A3A_fnc_garrisonOp;
+};
+
+// Print new garrison info in hint box on client
+// Probably doesn't need to be done unscheduled? Arguable
+if (_oldUI) then { [_marker, _client] spawn A3A_fnc_showSiteInfo };

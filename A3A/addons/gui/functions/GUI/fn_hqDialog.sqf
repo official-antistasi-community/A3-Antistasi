@@ -33,6 +33,7 @@ params[["_mode","onLoad"], ["_params",[]]];
 
 // Get display and map control
 private _display = findDisplay A3A_IDD_HQDIALOG;
+if (isNull _display) exitWith {};               // server might use sendGarrisonData after the dialog is closed
 private _garrisonMap = _display displayCtrl A3A_IDC_GARRISONMAP;
 
 switch (_mode) do
@@ -47,13 +48,14 @@ switch (_mode) do
         setGroupIconsSelectable false;
 
         // Show main tab content
-        ["switchTab", ["main"]] call FUNC(hqDialog);
+        private _shownTab = ["garrison", "main"] select (player isNil "A3A_showGarrisonMenu");
+        ["switchTab", [_shownTab]] call FUNC(hqDialog);
 
         // Move HQ button
         /*private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
         private _moveHqButton = _display displayCtrl A3A_IDC_MOVEHQBUTTON;
 
-        private _canMoveHQ = [] call FUNCMAIN(canMoveHQ);
+        private _canMoveHQ = [player] call FUNCMAIN(canMoveHQ);
         if (_canMoveHQ # 0) then {
             _moveHqButton ctrlEnable true;
             _moveHqButton ctrlSetTooltip "";
@@ -77,7 +79,7 @@ switch (_mode) do
         private _restSlider = _display displayCtrl A3A_IDC_RESTSLIDER;
         _restSlider sliderSetRange [0,24];
         _restSlider sliderSetSpeed [1,1];
-        _restSlider sliderSetPosition 0;
+        _restSlider sliderSetPosition 8;
         ["restSliderChanged"] spawn FUNC(hqDialog);
 
         // Garrison tab map drawing EHs
@@ -228,7 +230,7 @@ switch (_mode) do
         private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
         private _moveHqButton = _display displayCtrl A3A_IDC_MOVEHQBUTTON;
 
-        private _canMoveHQ = [] call FUNCMAIN(canMoveHQ);
+        private _canMoveHQ = [player] call FUNCMAIN(canMoveHQ);
         if (_canMoveHQ # 0) then {
             _moveHqButton ctrlEnable true;
             _moveHqButton ctrlSetTooltip "";
@@ -261,14 +263,13 @@ switch (_mode) do
         private _deadPopulation = 0;
         {
             private _city = _x;
-            private _cityData = server getVariable _city;
-            _cityData params ["_numCiv", "_numVeh", "_supportGov", "_supportReb"];
+            private _cityData = A3A_cityData getVariable _city;
+            _cityData params ["_numCiv", "_supportReb"];
 
             _totalPopulation = _totalPopulation + _numCiv;
-            _rebelPopulation = _rebelPopulation + (_numCiv * (_supportReb / 100));
-
-            if (_city in destroyedSites) then {
-                _deadPopulation = _deadPopulation + _numCiv;
+            if (_city in destroyedSites) then { _deadPopulation = _deadPopulation + _numCiv} else 
+            {
+                _rebelPopulation = _rebelPopulation + (_numCiv * (_supportReb / 100));
             };
         } forEach citiesX;
 
@@ -325,14 +326,19 @@ switch (_mode) do
         private _trainingLevel = skillFIA;
         private _hrText = _display displayCtrl A3A_IDC_FACTIONHRTEXT;
         private _trainingText = _display displayCtrl A3A_IDC_FACTIONTRAININGTEXT;
-        _hrText ctrlSetText str _hr;
+        _hrText ctrlSetText str floor _hr;
         _trainingText ctrlSetText format ["%1 / 20", _trainingLevel];
-        private _trainingTooltip = _display displayCtrl A3A_IDC_FACTIONTRAININGBUTTON;
-        _trainingTooltip ctrlSetTooltip (format [localize "STR_antistasi_dialogs_hq_train_tooltip",1000 + (1.5*((skillFIA) *750))]);
+        private _trainingButton = _display displayCtrl A3A_IDC_FACTIONTRAININGBUTTON;
+        if (_trainingLevel < 20) then {
+            _trainingButton ctrlSetTooltip (format [localize "STR_antistasi_dialogs_hq_train_tooltip",1000 + (1.5*((skillFIA) *750))]);
+        } else {
+            _trainingButton ctrlSetTooltip localize "STR_antistasi_dialogs_hq_train_maxed";
+            _trainingButton ctrlEnable false;
+        };
 
         private _factionMoney = server getVariable ["resourcesFIA", 0];
         private _factionMoneyText = _display displayCtrl A3A_IDC_FACTIONMONEYTEXT;
-        _factionMoneyText ctrlSetText format ["%1 €", _factionMoney];
+        _factionMoneyText ctrlSetText format ["%1 €", floor _factionMoney];
 
         // Faction money slider update
         private _factionMoneySlider = _display displayCtrl A3A_IDC_FACTIONMONEYSLIDER;
@@ -344,20 +350,21 @@ switch (_mode) do
 
     case ("updateGarrisonTab"):
     {
-        _display = findDisplay A3A_IDD_HQDIALOG;
-        if (isNull _display) exitWith {};
-
         // Update titlebar
         _titleBar = _display displayCtrl A3A_IDC_HQDIALOGTITLEBAR;
         _titleBar ctrlSetText (localize "STR_antistasi_dialogs_hq_titlebar") + " > " + (localize "STR_antistasi_dialogs_hq_garrisons_titlebar");
 
-        // Show back button
-        private _backButton = _display displayCtrl A3A_IDC_HQDIALOGBACKBUTTON;
-        _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
-        _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["main"]] call FUNC(hqDialog);
-        }];
-        _backButton ctrlShow true;
+        // Show back button, only if from main
+        if ((_display isNil "A3A_showGarrisonMenu") && {player isNil "A3A_showGarrisonMenu"}) then {
+            private _backButton = _display displayCtrl A3A_IDC_HQDIALOGBACKBUTTON;
+            _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
+            _backButton ctrlAddEventHandler ["MouseButtonClick", {
+                ["switchTab", ["main"]] call FUNC(hqDialog);
+            }];
+            _backButton ctrlShow true;
+        } else {
+            _display setVariable ["A3A_showGarrisonMenu", true];
+        };
 
         // Show map if not already visible
         if (!ctrlShown _garrisonMap) then {_garrisonMap ctrlShow true;};
@@ -374,22 +381,24 @@ switch (_mode) do
             ["garrisonMapClicked", [_hqMapPos]] call FUNC(hqDialog);
         };
 
+        private _garrison = _garrisonMap getVariable "currentGarrisonData";
+        if (isNil "_garrison") exitWith {};             // could happen if you clicked twice before server send data?
+        private _troops = _garrison getOrDefault ["troops", []];
+
         // Get the data from the marker
         private _position = getMarkerPos _selectedMarker;
         private _garrisonName = [_selectedMarker] call A3A_GUI_fnc_getLocationMarkerName;
-        private _garrison = garrison getVariable [_selectedMarker, []];
 
         // Get garrison counts
-        private _rifleman = {_x in FactionGet(reb,"unitRifle")} count _garrison;
-        private _squadLeader = {_x in FactionGet(reb,"unitSL")} count _garrison;
-        private _autorifleman = {_x in FactionGet(reb,"unitMG")} count _garrison;
-        private _grenadier = {_x in FactionGet(reb,"unitGL")} count _garrison;
-        private _medic = {_x in FactionGet(reb,"unitMedic")} count _garrison;
-        private _mortar = {_x in FactionGet(reb,"unitCrew")} count _garrison;
-        private _marksman = {_x in FactionGet(reb,"unitSniper")} count _garrison;
-        private _at = {_x in FactionGet(reb,"unitLAT")} count _garrison;
-        private _atMissile = {_x in FactionGet(reb,"unitAT")} count _garrison;
-        private _aaMissile = {_x in FactionGet(reb,"unitAA")} count _garrison;
+        private _rifleman = {_x in FactionGet(reb,"unitRifle")} count _troops;
+        private _squadLeader = {_x in FactionGet(reb,"unitSL")} count _troops;
+        private _autorifleman = {_x in FactionGet(reb,"unitMG")} count _troops;
+        private _grenadier = {_x in FactionGet(reb,"unitGL")} count _troops;
+        private _medic = {_x in FactionGet(reb,"unitMedic")} count _troops;
+        private _marksman = {_x in FactionGet(reb,"unitSniper")} count _troops;
+        private _at = {_x in FactionGet(reb,"unitLAT")} count _troops;
+        private _atMissile = {_x in FactionGet(reb,"unitAT")} count _troops;
+        private _aaMissile = {_x in FactionGet(reb,"unitAA")} count _troops;
 
         // Get controls
         private _garrisonTitle = _display displayCtrl A3A_IDC_GARRISONTITLE;
@@ -398,7 +407,6 @@ switch (_mode) do
         private _autoriflemanNumber = _display displayCtrl A3A_IDC_AUTORIFLEMANNUMBER;
         private _grenadierNumber = _display displayCtrl A3A_IDC_GRENADIERNUMBER;
         private _medicNumber = _display displayCtrl A3A_IDC_MEDICNUMBER;
-        private _mortarNumber = _display displayCtrl A3A_IDC_MORTARNUMBER;
         private _marksmanNumber = _display displayCtrl A3A_IDC_MARKSMANNUMBER;
         private _atNumber = _display displayCtrl A3A_IDC_ATNUMBER;
         private _atMissileNumber = _display displayCtrl A3A_IDC_ATMISSILENUMBER;
@@ -414,7 +422,6 @@ switch (_mode) do
         _autoriflemanNumber ctrlSetText str _autorifleman;
         _grenadierNumber ctrlSetText str _grenadier;
         _medicNumber ctrlSetText str _medic;
-        _mortarNumber ctrlSetText str _mortar;
         _marksmanNumber ctrlSetText str _marksman;
         _atNumber ctrlSetText str _at;
         _atMissileNumber ctrlSetText str _atMissile;
@@ -431,8 +438,6 @@ switch (_mode) do
         _grenadierSubButton = _display displayCtrl A3A_IDC_GRENADIERSUBBUTTON;
         _medicAddButton = _display displayCtrl A3A_IDC_MEDICADDBUTTON;
         _medicSubButton = _display displayCtrl A3A_IDC_MEDICSUBBUTTON;
-        _mortarAddButton = _display displayCtrl A3A_IDC_MORTARADDBUTTON;
-        _mortarSubButton = _display displayCtrl A3A_IDC_MORTARSUBBUTTON;
         _marksmanAddButton = _display displayCtrl A3A_IDC_MARKSMANADDBUTTON;
         _marksmanSubButton = _display displayCtrl A3A_IDC_MARKSMANSUBBUTTON;
         _atAddButton = _display displayCtrl A3A_IDC_ATADDBUTTON;
@@ -456,8 +461,6 @@ switch (_mode) do
             _grenadierSubButton,
             _medicAddButton,
             _medicSubButton,
-            _mortarAddButton,
-            _mortarSubButton,
             _marksmanAddButton,
             _marksmanSubButton,
             _atAddButton,
@@ -482,7 +485,6 @@ switch (_mode) do
         if (_autorifleman < 1) then {_autoriflemanSubButton ctrlEnable false};
         if (_grenadier < 1) then {_grenadierSubButton ctrlEnable false};
         if (_medic < 1) then {_medicSubButton ctrlEnable false};
-        if (_mortar < 1) then {_mortarSubButton ctrlEnable false};
         if (_marksman < 1) then {_marksmanSubButton ctrlEnable false};
         if (_at < 1) then {_atSubButton ctrlEnable false};
         if (_atMissile < 1) then {_atMissileSubButton ctrlEnable false};
@@ -494,7 +496,6 @@ switch (_mode) do
         _autoriflemanPrice = server getVariable (FactionGet(reb,"unitMG"));
         _grenadierPrice = server getVariable (FactionGet(reb,"unitGL"));
         _medicPrice = server getVariable (FactionGet(reb,"unitMedic"));
-        _mortarPrice = (server getVariable FactionGet(reb,"unitCrew")) + ([FactionGet(reb,"staticMortars")#0] call FUNCMAIN(vehiclePrice));
         _marksmanPrice = server getVariable (FactionGet(reb,"unitSniper"));
         _atPrice = server getVariable (FactionGet(reb,"unitLAT"));
         _atMissilePrice = server getVariable (FactionGet(reb,"unitAT"));
@@ -506,7 +507,6 @@ switch (_mode) do
         _autoriflemanPriceText = _display displayCtrl A3A_IDC_AUTORIFLEMANPRICE;
         _grenadierPriceText = _display displayCtrl A3A_IDC_GRENADIERPRICE;
         _medicPriceText = _display displayCtrl A3A_IDC_MEDICPRICE;
-        _mortarPriceText = _display displayCtrl A3A_IDC_MORTARPRICE;
         _marksmanPriceText = _display displayCtrl A3A_IDC_MARKSMANPRICE;
         _atPriceText = _display displayCtrl A3A_IDC_ATPRICE;
         _atMissilePriceText = _display displayCtrl A3A_IDC_ATMISSILEPRICE;
@@ -517,7 +517,6 @@ switch (_mode) do
         _autoriflemanPriceText ctrlSetText str _autoriflemanPrice + "€";
         _grenadierPriceText ctrlSetText str _grenadierPrice + "€";
         _medicPriceText ctrlSetText str _medicPrice + "€";
-        _mortarPriceText ctrlSetText str _mortarPrice + "€";
         _marksmanPriceText ctrlSetText str _marksmanPrice + "€";
         _atPriceText ctrlSetText str _atPrice + "€";
         _atMissilePriceText ctrlSetText str _atMissilePrice + "€";
@@ -532,20 +531,10 @@ switch (_mode) do
         if (_factionMoney < _autoriflemanPrice || _hr < 1) then {_autoriflemanAddButton ctrlEnable false; _autoriflemanAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _grenadierPrice || _hr < 1) then {_grenadierAddButton ctrlEnable false; _grenadierAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _medicPrice || _hr < 1) then {_medicAddButton ctrlEnable false; _medicAddButton ctrlSetTooltip _noResourcesText};
-        if (_factionMoney < _mortarPrice || _hr < 1) then {_mortarAddButton ctrlEnable false; _mortarAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _marksmanPrice || _hr < 1) then {_marksmanAddButton ctrlEnable false; _marksmanAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _atPrice || _hr < 1) then {_atAddButton ctrlEnable false; _atAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _atMissilePrice || _hr < 1) then {_atMissileAddButton ctrlEnable false; _atMissileAddButton ctrlSetTooltip _noResourcesText};
         if (_factionMoney < _aaMissilePrice || _hr < 1) then {_aaMissileAddButton ctrlEnable false; _aaMissileAddButton ctrlSetTooltip _noResourcesText};
-
-        // Disable add button for mortar if selecting marker in outpostsFIA;
-        private _noRoadblockMortarText = localize "STR_A3A_garrison_error_no_mortar";
-        if (_selectedMarker in outpostsFIA) then {
-            _mortarAddButton ctrlEnable false; 
-            _mortarAddButton ctrlSetTooltip _noRoadblockMortarText;
-            _mortarNumber ctrlSetText "0";
-            _mortarSubButton ctrlEnable false; // pretend like no mortars exist because the roadblock still has unitCrew for the vic
-        };
 
         ["updateGarrisonWepNum"] spawn A3A_GUI_fnc_hqDialog;
 
@@ -609,14 +598,21 @@ switch (_mode) do
 
     case ("restSliderChanged"):
     {
+        private _restButton = _display displayCtrl A3A_IDC_RESTBUTTON;
         private _restSlider = _display displayCtrl A3A_IDC_RESTSLIDER;
         private _restText = _display displayCtrl A3A_IDC_RESTTEXT;
         private _timeHours = sliderPosition _restSlider;
         private _restTimeString = [_timeHours * 60 * 60,1,1,false,2,false,true] call FUNCMAIN(timeSpan_format);
-
-        private _postRestTime = (daytime + _timeHours) * 60 * 60;
-        private _postRestTimeString = [_postRestTime,2,2,false,[1,3],true,false] call FUNCMAIN(timeSpan_format);
-        private _message = format [localize "STR_antistasi_dialogs_hq_rest_text" + "<br />" + localize "STR_antistasi_dialogs_hq_wakeup_text", _restTimeString, _postRestTimeString];
+        private _message = if (_timeHours > 0) then {
+            _restButton ctrlEnable true;
+            private _postRestTime = (daytime + _timeHours) * 60 * 60;
+            private _postRestTimeString = [_postRestTime,2,2,false,[1,3],true,false] call FUNCMAIN(timeSpan_format);
+            format [localize "STR_antistasi_dialogs_hq_rest_text" + "<br />" + localize "STR_antistasi_dialogs_hq_wakeup_text", _restTimeString, _postRestTimeString];
+        } else {
+            _restButton ctrlEnable false;
+            _restButton ctrlSetTooltip localize "STR_antistasi_dialogs_hq_rest_notime_tooltip"; // tooltip later cleared by ability to rest check
+            localize "STR_antistasi_dialogs_hq_rest_notime_text";
+        };
         _restText ctrlSetStructuredText parseText _message;
     };
 
@@ -648,6 +644,17 @@ switch (_mode) do
         ["updateMainTab"] call FUNC(hqDialog);
     };
 
+    case ("garrisonDataSent"):
+    {
+        _params params ["_marker", "_garrisonData"];
+
+        // If the data's from a previous click then ignore it
+        if (_marker != _garrisonMap getVariable ["selectedMarker", ""]) exitWith {};
+
+        _garrisonMap setVariable ["currentGarrisonData", _garrisonData];
+        ["updateGarrisonTab"] call FUNC(hqDialog);
+    };
+
     case ("garrisonMapClicked"):
     {
         // TODO UI-update: Clicking away from outposts should deselect current outpost
@@ -669,9 +676,12 @@ switch (_mode) do
 
         _garrisonMap setVariable ["selectedMarker", _selectedMarker];
         private _position = getMarkerPos _selectedMarker;
-        _garrisonMap setVariable ["selectMarkerData", [_position]];
+        _garrisonMap setVariable ["selectMarkerData", [_position]];         // unused?
 
-        ["updateGarrisonTab"] call FUNC(hqDialog);
+        // Will bounce data back through garrisonDataSent
+        [_selectedMarker] remoteExecCall [QFUNCMAIN(garrisonServer_sendData), 2];
+
+        //["updateGarrisonTab"] call FUNC(hqDialog);
     };
 
     // Updating the garrison numbers
@@ -697,9 +707,6 @@ switch (_mode) do
             case ("medic"): {
                 "unitMedic";
             };
-            case ("mortar"): {
-                "unitCrew";
-            };
             case ("marksman"): {
                 "unitSniper";
             };
@@ -715,8 +722,8 @@ switch (_mode) do
         };
 
         _unitType = A3A_faction_reb get _unitType;
-        [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonAdd);
-        // tab will update automatically
+        [_selectedMarker, _unitType, clientOwner] remoteExecCall [QFUNCMAIN(garrisonServer_addUnitType), 2];
+        [_selectedMarker] remoteExecCall [QFUNCMAIN(garrisonServer_sendData), 2];
     };
 
     case ("garrisonRemove"):
@@ -741,9 +748,6 @@ switch (_mode) do
             case ("medic"): {
                 "unitMedic";
             };
-            case ("mortar"): {
-                "unitCrew";
-            };
             case ("marksman"): {
                 "unitSniper";
             };
@@ -758,18 +762,16 @@ switch (_mode) do
             };
         };
 
-        Debug_2("Calling FUNCMAIN(garrisonRemove) with [%1,%2]", _unitType, _selectedMarker);
         _unitType = A3A_faction_reb get _unitType;
-        [_unitType, _selectedMarker] spawn FUNCMAIN(garrisonRemove);
-        // tab will update automatically
+        [_selectedMarker, _unitType, clientOwner] remoteExecCall [QFUNCMAIN(garrisonServer_remUnitType), 2];
+        [_selectedMarker] remoteExecCall [QFUNCMAIN(garrisonServer_sendData), 2];
     };
 
     case ("dismissGarrison"):
     {
-        Trace("Dismissing garrison");
-
         private _selectedMarker = _garrisonMap getVariable ["selectedMarker", ""];
-        ["", _selectedMarker] spawn A3A_fnc_garrisonDialog;
+        [_selectedMarker, true, true] remoteExecCall [QFUNCMAIN(garrisonServer_clear), 2];
+        [_selectedMarker] remoteExecCall [QFUNCMAIN(garrisonServer_sendData), 2];
     };
 
     case ("skipTime"):
@@ -781,19 +783,13 @@ switch (_mode) do
         closeDialog 1;
     };
 
-    /*
+    
     case ("buildWatchpost"):
     {
         closeDialog 1;
         ["create"] spawn FUNCMAIN(outpostDialog);
     };
 
-    case ("removeWatchpost"):
-    {
-        // TODO UI-update: this was apparently deprecated and uses dismiss garrison instead, considering replacing/removing this button
-        closeDialog 1;
-    };
-    */
 
     case ("rebuildAssets"):
     {

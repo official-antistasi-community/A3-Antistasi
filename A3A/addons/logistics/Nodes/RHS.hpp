@@ -790,3 +790,15 @@ class rhsusf_addons_rhsusf_hmmwv_rhsusf_m998_2dr : TRIPLES(ADDON,Nodes,Base)
         };
     };
 };
+
+class rhsusf_addons_rhsusf_hmmwv_rhsusf_m998_4dr : TRIPLES(ADDON,Nodes,Base)
+{
+    class Nodes
+    {
+        class Node1
+        {
+            offset[] = {0,-1.4,-0.9};
+        };
+    };
+};
+

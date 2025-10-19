@@ -14,3 +14,4 @@ Maintainer: DoomMetal
 #include "teamLeaderBuilder.hpp"
 #include "customLoadoutsDialog.hpp"
 #include "gunShop.hpp"
+#include "roleSelect.hpp"

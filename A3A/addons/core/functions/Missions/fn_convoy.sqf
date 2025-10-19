@@ -39,7 +39,6 @@ private _convoyTypes = [];
 if ((_mrkDest in airportsX) or (_mrkDest in outposts)) then
 {
     _convoyTypes = ["Ammunition","Armor"];
-    if (_mrkDest in outposts) then {if (((count (garrison getVariable [_mrkDest, []]))/2) >= [_mrkDest] call A3A_fnc_garrisonSize) then {_convoyTypes pushBack "Reinforcements"}};
 }
 else
 {
@@ -50,7 +49,6 @@ else
     else
     {
         if ((_mrkDest in resourcesX) or (_mrkDest in factories)) then {_convoyTypes = ["Money"]} else {_convoyTypes = ["Prisoners"]};
-        if (((count (garrison getVariable [_mrkDest, []]))/2) >= [_mrkDest] call A3A_fnc_garrisonSize) then {_convoyTypes pushBack "Reinforcements"};
     };
 };
 
@@ -371,7 +369,6 @@ if (_convoyType == "Armor") then
     else
     {
         [true, false, 400*_bonus, 10*_bonus, 10, 120, "armor"] call _fnc_applyResults;
-        [0,5*_bonus,_posDest] remoteExec ["A3A_fnc_citySupportChange",2];
     };
 };
 
@@ -397,7 +394,6 @@ if (_convoyType == "Prisoners") then
             [true, false, 400*_bonus, _bonus*_countX/2, 10, 120, "prisoner"] call _fnc_applyResults;
 
             [_countX,_countX*300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-            [0,10*_bonus,_posSpawn] remoteExec ["A3A_fnc_citySupportChange",2];
         };
     };
 };
@@ -408,7 +404,6 @@ if (_convoyType == "Reinforcements") then
     if ({_x call A3A_fnc_canFight} count _reinforcementsX == 0) then
     {
         [true, false, 400*_bonus, 10*_bonus, 10, 120, "reinforcement"] call _fnc_applyResults;
-        [0,10*_bonus,_posSpawn] remoteExec ["A3A_fnc_citySupportChange",2];
     }
     else
     {
@@ -469,18 +464,18 @@ if (_convoyType == "Supplies") then
             if (_vehObj distance _posDest < _arrivalDist) then
             {
                 [true, false, 200*_bonus, 10*_bonus, 5, 120, "supply"] call _fnc_applyResults;
-                [0,15*_bonus,_mrkDest] remoteExec ["A3A_fnc_citySupportChange",2];
+                [15*_bonus, _mrkDest] remoteExecCall ["A3A_fnc_citySupportChange", 2];
             }
             else
             {
                 [false, false, 0, -5, 0, 0, "supply"] call _fnc_applyResults;
-                [0,-5*_bonus,_mrkDest] remoteExec ["A3A_fnc_citySupportChange",2];
+                [-5, _mrkDest] remoteExecCall ["A3A_fnc_citySupportChange", 2];
             };
         }
         else
         {
             [false, true, 0, -10, 0, 0, "supply"] call _fnc_applyResults;
-            [15*_bonus,0,_mrkDest] remoteExec ["A3A_fnc_citySupportChange",2];
+            [-15, _mrkDest] remoteExecCall ["A3A_fnc_citySupportChange", 2];
         };
     };
 };

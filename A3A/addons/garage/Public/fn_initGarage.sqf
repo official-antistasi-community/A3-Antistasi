@@ -27,6 +27,7 @@ private _id = _object addAction [
     localize "STR_HR_GRG_openGarage_Action"
     , "
         HR_GRG_accessPoint = _this#0;
+        HR_GRG_accessLimit = 'flag';
         createDialog 'HR_GRG_VehicleSelect';
     ", nil, 1.5, true, true, ""
     , "
