@@ -49,3 +49,5 @@ if (isClass (configFile >> "CfgPatches" >> "FA_WW2_Tanks")) then {
         ["FA_T26", ["cost", 60]]
     ];
 };
+
+#include "..\..\AircraftLoadouts\SAB\SAB_Vehicle_Attributes.sqf"
