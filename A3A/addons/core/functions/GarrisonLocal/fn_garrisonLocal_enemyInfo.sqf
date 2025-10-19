@@ -98,6 +98,7 @@ if (_threat > random 3) then
     };
     if (isNil "_group") exitWith {
         ServerDebug_1("Nothing usable within range at %1", _marker);
+        if (_type == "detect") exitWith {};             // Do not call cheap supports vs spotted targets
         [_garrison get "side", _enemy, markerPos _marker, _knowsAbout, 0.7] remoteExec ["A3A_fnc_requestSupport", 2];
     };
 

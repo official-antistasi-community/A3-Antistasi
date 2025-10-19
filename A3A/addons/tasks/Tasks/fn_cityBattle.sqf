@@ -163,7 +163,7 @@ _task set ["s_spawnEnemies",
     // Create the enemy force
     // Not executed at init because it's fairly slow
     private _marker = _this get "_marker";
-    private _vehCount = round (1 + random 1 + 0.1 * sqrt (A3A_cityPop get _marker) + A3A_balancePlayerScale);
+    private _vehCount = round (1 + random 1 + 0.13 * sqrt (A3A_cityPop get _marker) + 1.2 * A3A_balancePlayerScale);
 
     private _airbase = [Occupants, markerPos _marker] call A3A_fnc_availableBasesAir;
 

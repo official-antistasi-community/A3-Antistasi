@@ -103,7 +103,7 @@ A3A_supportMarkerTypes = [];     // format [markerName, markerType, hasRadio, de
 { A3A_supportMarkerTypes pushBack [_x, "Resource", false, 0.4] } forEach resourcesX;
 { A3A_supportMarkerTypes pushBack [_x, "Factory", false, 0.5] } forEach factories;
 {
-    private _locSpend = 0.1 + 0.015 * sqrt (A3A_cityPop get _x);
+    private _locSpend = 0.15 + 0.015 * sqrt (A3A_cityPop get _x);
     A3A_supportMarkerTypes pushBack [_x, "Town", false, _locSpend];
 } forEach citiesX;
 {

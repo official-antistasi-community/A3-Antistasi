@@ -27,6 +27,8 @@ private _typeWeights = createHashMapFromArray [["staticMortar", 1], ["staticAT",
 private _noPlaceTypes = _faction get "noPlaceTypes";
 
 private _enemyAirfieldPositions = airportsX select {sidesX getVariable _x != _side} apply { markerPos _x };
+private _reinfMarkers = markersX + controlsX + (destroyedSites select { _x in citiesX });
+
 
 private _markers = [];         // [marker, type, numReq]
 private _weights = [];
@@ -65,7 +67,7 @@ private _weights = [];
 
     } forEach (A3A_spawnPlaceStats get _marker);        // hashmap, place type (_x) to [placeindexes, max, par]
 
-} forEach (markersX - citiesX + controlsX);
+} forEach _reinfMarkers;
 
 // problem: Need to record in-motion reinforcements?
 // or just assume for now that they'll arrive before the next reinf check
