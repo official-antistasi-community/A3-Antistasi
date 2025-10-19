@@ -11,6 +11,8 @@
 // need to lock the car after you leave it there?
 // nah, just a hold for 30 seconds
 
+
+
 #include "..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
@@ -74,8 +76,10 @@ _task set ["_mechanic", _mechanic];
 private _displayTime = [((_task get "_endTime") - time) / 60] call FUNC(minutesFromNow);
 private _taskDesc = format [localize "STR_A3A_Tasks_repair_desc", _marker, _displayTime];
 private _taskId = call FUNC(genTaskUID);
-[true, _taskId, [_taskDesc, _task get "_hintTitle"], _task get "_car", false, -1, true, "use", true] call BIS_fnc_taskCreate;
+[true, _taskId, [_taskDesc, _task get "_hintTitle"], _task get "_car", false, -1, false, "use", true] call BIS_fnc_taskCreate;
 _task set ["_taskId", _taskId];
+[_taskId, "CREATED", markerPos _marker, 1300] call FUNC(taskNotifyNear);
+
 
 // Also need a marker for the safehouse
 private _houseMrk = createMarkerLocal ["task_repair_" + _taskId, getPosATL _house];
@@ -119,6 +123,7 @@ _task set ["s_defendMechanic", {
     private _mechanic = _this get "_mechanic";
     if (!alive _car or !alive _mechanic) exitWith {
         [_this get "_hintTitle", "", getPosATL _car, 100] call FUNC(hintNear);
+        [_this get "_taskId", "FAILED", getPosATL _car, 200] call FUNC(taskNotifyNear);
         _this set ["state", "s_failure"]; false;
     };
 
@@ -160,19 +165,28 @@ _task set ["s_defendMechanic", {
 }];
 
 _task set ["s_success", {
-	private _playersInRange = allPlayers inAreaArray [getPosATL (_this get "_car"), 100, 100];
-	{[10, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
+    private _car = _this get "_car";
+	private _playersInRange = allPlayers inAreaArray [getPosATL _car, 100, 100];
+	{[5, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
 	[5, theBoss] call A3A_fnc_playerScoreAdd;
 
 	[8, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
-	[0, 100] spawn A3A_fnc_resourcesFIA;
 
-	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
+    // Fix up the car and add some explosives to the cargo
+    _car setHitPointDamage ["hitEngine", 0];
+    private _magazine = selectRandom allExplosiveCharges;
+    if (!isNil "_magazine") then {
+        private _magweight = 5 max getNumber (configFile >> "CfgMagazines" >> _magazine >> "mass");
+        _car addItemCargoGlobal [_magazine, ceil (50 / _magweight)];
+    };
+
+    [_this get "_taskId", "SUCCEEDED", getPosATL _car, 100] call FUNC(taskNotifyNear);
+	[_this get "_taskId", "SUCCEEDED", false] call BIS_fnc_taskSetState;
 	_this set ["state", "s_cleanup"]; false;
 }];
 
 _task set ["s_failure", {
-	[_this get "_taskId", "FAILED"] call BIS_fnc_taskSetState;
+	[_this get "_taskId", "FAILED", false] call BIS_fnc_taskSetState;
 	_this set ["state", "s_cleanup"]; false;
 }];
 
@@ -191,6 +205,7 @@ _task set ["s_cleanup", {
     _mechanic spawn { sleep 60; deleteVehicle _this };
 
     // Clean up the goons
+    // TODO: sync them with garrison maybe...
     [_this get "_policeGroup"] spawn A3A_fnc_groupDespawner;
 
 	(_this get "_taskId") spawn {

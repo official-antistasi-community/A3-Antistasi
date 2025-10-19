@@ -37,8 +37,9 @@ private _addActionCode = {
 private _displayTime = [((_task get "_endTime") - time) / 60] call FUNC(minutesFromNow);
 private _taskDesc = format [localize "STR_A3A_Tasks_taxi_desc", _marker, _displayTime];
 private _taskId = call FUNC(genTaskUID);
-[true, _taskId, [_taskDesc, _task get "_hintTitle"], _startPos, false, -1, true, "Car", true] call BIS_fnc_taskCreate;
+[true, _taskId, [_taskDesc, _task get "_hintTitle"], _startPos, false, -1, false, "Car", true] call BIS_fnc_taskCreate;
 _task set ["_taskId", _taskId];
+[_taskId, "CREATED", markerPos _marker, 1300] call FUNC(taskNotifyNear);
 
 // find actual destination building
 private _radius = 500 min vectorMagnitude markerSize _destMrk;
@@ -99,6 +100,7 @@ _task set ["s_transit", {
     private _passenger = _this get "_passenger";
     if (!alive _passenger) exitWith {
     	[-2, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+        [_this get "_taskId", "FAILED", getPosATL _passenger, 100] call FUNC(taskNotifyNear);
         _this set ["state", "s_failure"]; false;
     };
 
@@ -139,12 +141,13 @@ _task set ["s_success", {
 	[5 + _distance/400, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 	[0, 200] remoteExec ["A3A_fnc_resourcesFIA", 2];
 
-	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
+    [_this get "_taskId", "SUCCEEDED", getPosATL (_this get "_passenger"), 100] call FUNC(taskNotifyNear);
+	[_this get "_taskId", "SUCCEEDED", false] call BIS_fnc_taskSetState;
 	_this set ["state", "s_cleanup"]; false;
 }];
 
 _task set ["s_failure", {
-	[_this get "_taskId", "FAILED"] call BIS_fnc_taskSetState;
+	[_this get "_taskId", "FAILED", false] call BIS_fnc_taskSetState;
 	_this set ["state", "s_cleanup"]; false;
 }];
 
