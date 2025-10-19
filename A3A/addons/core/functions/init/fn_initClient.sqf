@@ -83,14 +83,14 @@ while {true} do {
 
 Info("Server started, continuing with client init");
 
-call A3A_fnc_installSchrodingersBuildingFix;
+//call A3A_fnc_installSchrodingersBuildingFix;
 
 if (!isServer) then {
     // get server to send us the current destroyedBuildings list, hide them locally
-    "destroyedBuildings" addPublicVariableEventHandler {
-        { hideObject _x } forEach (_this select 1);
-    };
-    [clientOwner, "destroyedBuildings"] remoteExecCall ["publicVariableClient", 2];
+    //"A3A_destroyedBuildings" addPublicVariableEventHandler {
+    //    { hideObject _x } forEach (_this select 1);
+    //};
+    //[clientOwner, "A3A_destroyedBuildings"] remoteExecCall ["publicVariableClient", 2];
 
     boxX call jn_fnc_arsenal_init;
     if (A3A_hasACEMedical) then { call A3A_fnc_initACEUnconsciousHandler };
@@ -120,6 +120,8 @@ player setVariable ["eligible",player call A3A_fnc_isMember,true];
 player setVariable ["A3A_playerUID",getPlayerUID player,true];			// Mark so that commander routines know for remote-controlling
 
 A3A_GUIDevPreview = profileNamespace getVariable ["AntistasiUseNewUI", true];
+A3A_drawBuilderIcons = false; // manage visibility of builder interactions
+A3A_showBuilderActions = false;
 musicON = false;
 recruitCooldown = 0;			//Prevents units being recruited too soon after being dismissed.
 incomeRep = false;
@@ -312,25 +314,18 @@ mapX addAction [localize "STR_A3A_fn_init_initclient_addact_gameOpt", {
         localize "STR_A3A_fn_init_initclient_gameOpt_limFT"+" "+ ([localize "STR_antistasi_dialogs_generic_button_no_text",localize "STR_antistasi_dialogs_generic_button_yes_text"] select limitedFT) +"<br/>"+
         localize "STR_A3A_fn_init_initclient_gameOpt_spawnDist"+" "+ str distanceSPWN + "m" +"<br/>"+
         localize "STR_A3A_fn_init_initclient_gameOpt_civLim"+" "+ str globalCivilianMax +"<br/>"+
-        localize "STR_A3A_fn_init_initclient_gameOpt_timeGC"+" "+ ([[serverTime-A3A_lastGarbageCleanTime] call A3A_fnc_secondsToTimeSpan,1,0,false,2,false,true] call A3A_fnc_timeSpan_format)
+        localize "STR_A3A_fn_init_initclient_gameOpt_timeGC"+" "+ ([[serverTime-A3A_lastGarbageCleanTime] call A3A_fnc_secondsToTimeSpan,1,0,false,2,false,true] call A3A_fnc_timeSpan_format)+"<br/><br/>"+
+        localize "STR_A3A_fn_init_initclient_gameOpt_obsolete"
     ] call A3A_fnc_customHint;
-#ifdef UseDoomGUI
-    ERROR("Disabled due to UseDoomGUI Switch.")
-#else
-    CreateDialog "game_options";
-#endif
     nil;
 },nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
 mapX addAction [localize "STR_A3A_fn_init_initclient_addact_mapinfo", A3A_fnc_mapInfoDialog,nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
 if (isMultiplayer) then {mapX addAction [localize "STR_A3A_fn_init_initclient_addact_ailoadinfo", { [] remoteExec ["A3A_fnc_AILoadInfo",2];},nil,0,false,true,"",""]}; // should be no reason to restrict the aiLoadInfo to anyone
 
-[] call A3A_fnc_unitTraits;
-
 // Get list of buildable objects, has map (and template?) dependency
 call A3A_fnc_initBuildableObjects;
 
 // Start cursorObject monitor loop for adding removeStructure actions
-// Note: unitTraits must run first to add engineer trait to default commander
 0 spawn A3A_fnc_initBuilderMonitors;
 
 
@@ -356,6 +351,13 @@ A3A_aliveTime = time;
 
 initClientDone = true;
 Info("initClient completed");
+
+if (player == theBoss) then {
+    player setVariable ["A3A_Role", "rifleman"];
+    ["commander",true] call A3A_fnc_unitTraits;
+} else {
+    createDialog "A3A_RoleSelectDialog"; // player will be commander if they set up the game
+};
 
 if(!isMultiplayer) then
 {
