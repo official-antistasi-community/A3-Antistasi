@@ -152,7 +152,7 @@ class Params
         title = $STR_A3A_Params_garageAccessTimer_title;
         values[] = {0,3,5,10,20};
         texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min, $STR_A3A_Params_generic_20min};
-        default = 10;
+        default = 5;
     };
 
     class SpacerMembership
