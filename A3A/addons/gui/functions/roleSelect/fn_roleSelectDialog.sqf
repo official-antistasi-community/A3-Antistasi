@@ -97,7 +97,11 @@ switch (_mode) do
 				if (player == theBoss) then {
 					_fullSlotsText = localize "STR_antistasi_dialogs_roleselect_slotsCommanderSelf";
 				} else {
-					_fullSlotsText = format [localize "STR_antistasi_dialogs_roleselect_slotsCommander",name theBoss];
+					if (theBoss isEqualTo objNull) then {
+						_fullSlotsText = localize "STR_antistasi_dialogs_roleselect_slotsCommanderNone";
+					} else {
+						_fullSlotsText = format [localize "STR_antistasi_dialogs_roleselect_slotsCommander",name theBoss];
+					};
 				};
 				_slotExplanation = localize "STR_antistasi_dialogs_roleselect_capExplanationCommander";
 			};

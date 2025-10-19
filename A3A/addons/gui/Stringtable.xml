@@ -4737,16 +4737,19 @@
         <Original>There is no cap to the number of Rifleman players.</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsCommander">
-        <Original>%1 is the current faction Commander. (?*)</Original>
+        <Original>%1 is the current faction Commander (*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderNone">
+        <Original>The faction currently has no Commander (*)</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderSelf">
-        <Original>You are currently the faction's Commander. (?*)</Original>
+        <Original>You are currently the faction's Commander (*)</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capExplanationCommander">
         <Original>The faction can only have one commander, and you must be assigned the spot.</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slots">
-        <Original>%1: %2/%3. (?*)</Original>
+        <Original>%1: %2/%3  (*)</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capExplanation">
         <Original>The cap of slots per role (excluding riflemen and the commander) increases as the player count increases. The number per role increases linearly from 3 slots at 3 players to 6 slots at 38 players.</Original>
