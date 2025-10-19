@@ -3954,7 +3954,7 @@
         <Original>Helipad</Original>
       </Key>
       <Key ID="STR_A3A_fn_init_initclient_helipad_enemies">
-        <Original>You cannot access the helipad garage while enemies are nearby</Original>
+        <Original>You cannot access the helipad garage while enemies are nearby.</Original>
       </Key>
       <Key ID="STR_A3A_fn_init_initclient_member_admin">
         <Original>You are not in the member's list, but as you are Server Admin, you have been added. Welcome!</Original>
