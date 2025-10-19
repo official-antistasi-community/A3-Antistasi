@@ -1,13 +1,13 @@
 ["attributesVehicles", [
     // light armed Cars
-    ["CUP_I_Datsun_PK", ["rebCost", 600]],
+    ["CUP_I_Datsun_PK", ["rebCost", 500]],
     
     // light armed boats
     ["CUP_I_RHIB_RACS", ["rebCost", 1000]],
         
     // civ cars
-    ["CUP_C_Pickup_unarmed_CIV", ["rebcost", 300]],
-    ["CUP_C_SUV_CIV", ["rebcost", 400]],
+    ["CUP_C_Pickup_unarmed_CIV", ["rebcost", 400]],
+    ["CUP_C_SUV_CIV", ["rebcost", 450]],
 
     // civ trucks
     ["CUP_C_Ikarus_Chernarus", ["rebcost", 500]],

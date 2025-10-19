@@ -58,7 +58,7 @@ _faction set ["groupAA", [unit(military, "SquadLeader"), unit(military, "AA"), u
 _faction set ["groupAT", [unit(military, "SquadLeader"), unit(military, "AT"), unit(military, "LAT"), unit(military, "Rifleman")]];
 _faction set ["groupsMedium", [
     [unit(military, "SquadLeader"), unit(military, "MachineGunner"), unit(military, "Grenadier"), unit(military, "LAT")]
-    , _faction get "groupAA", _faction get "groupAT"
+    , _faction get "groupAA", _faction get "groupAT", _faction get "groupAT"
 ]];
 /*
 //old randomised behaviour maintained because... reasons
