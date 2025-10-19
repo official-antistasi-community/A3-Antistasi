@@ -1,17 +1,18 @@
-// Hide corpses further than 50m away for performance
+// Hide corpses further than XXm away for performance
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-#define SHOWRADIUS 50
+params [["_radius", 0]];
+if (!isNil "A3A_hideCorpses_handler") then {terminate A3A_hideCorpses_handler};
+A3A_hideCorpses_handler = _thisScript;
 
-params [["_state", 0]];
-A3A_hideBodies = (_state isEqualTo 1);
+A3A_hideBodies = (_radius > 0);
 if !(A3A_hideBodies) exitWith {};
 
 while {A3A_hideBodies} do {
     private _corpses = alldeadmen;
-    private _nearCorpses = allDeadMen inAreaArray [player, SHOWRADIUS, SHOWRADIUS];
+    private _nearCorpses = allDeadMen inAreaArray [player, _radius, _radius];
     private _corpsesToHide = _corpses - _nearCorpses;
     {
         if !(isObjectHidden _x) then {_x hideObject true};
