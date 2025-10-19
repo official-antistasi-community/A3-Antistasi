@@ -29,7 +29,7 @@ switch (_mode) do
 {
     case ("onLoad"):
     {
-        _playerUID = player getVariable ["lastViewedUID", "No Player Selected"];
+        _playerUID = player getVariable ["A3A_lastViewedUID", "No Player Selected"];
         _editBox ctrlSetText _playerUID;
     };
 };

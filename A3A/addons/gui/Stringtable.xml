@@ -3711,7 +3711,7 @@
         <Original>You do not have enough money or HR for this unit type</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_units_noWeapons">
-        <Original>You do not have the weapons neccesary to equip this unit</Original>
+        <Original>You do not have the weapons necessary to equip this unit</Original>
       </Key>
     </Container>
     <Container name="dialogs_generic">

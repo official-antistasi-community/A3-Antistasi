@@ -165,7 +165,7 @@ switch (_mode) do
     case ("adminCopyUID"):
     {
         private _playerUID = call _fnc_selPlayerUID;
-        player setVariable ["lastViewedUID", _playerUID];
+        player setVariable ["A3A_lastViewedUID", _playerUID];
         createDialog "A3A_AdminCopyUID";
     };
 

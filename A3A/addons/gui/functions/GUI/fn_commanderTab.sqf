@@ -1027,11 +1027,11 @@ switch (_mode) do
     {
         Trace("Showing garrison menu");
         closeDialog 0;
-        player setVariable ["showGarrisonMenu", true];
+        player setVariable ["A3A_showGarrisonMenu", true];
         0 spawn {
             createDialog "A3A_HqDialog";
             uiSleep 1;
-            player setVariable ["showGarrisonMenu", nil];
+            player setVariable ["A3A_showGarrisonMenu", nil];
         };
     };
 

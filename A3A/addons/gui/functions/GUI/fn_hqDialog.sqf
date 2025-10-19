@@ -48,7 +48,7 @@ switch (_mode) do
         setGroupIconsSelectable false;
 
         // Show main tab content
-        private _shownTab = ["garrison", "main"] select (player isNil "showGarrisonMenu");
+        private _shownTab = ["garrison", "main"] select (player isNil "A3A_showGarrisonMenu");
         ["switchTab", [_shownTab]] call FUNC(hqDialog);
 
         // Move HQ button
@@ -355,7 +355,7 @@ switch (_mode) do
         _titleBar ctrlSetText (localize "STR_antistasi_dialogs_hq_titlebar") + " > " + (localize "STR_antistasi_dialogs_hq_garrisons_titlebar");
 
         // Show back button, only if from main
-        if ((_display isNil "showGarrisonMenu") && {player isNil "showGarrisonMenu"}) then {
+        if ((_display isNil "A3A_showGarrisonMenu") && {player isNil "A3A_showGarrisonMenu"}) then {
             private _backButton = _display displayCtrl A3A_IDC_HQDIALOGBACKBUTTON;
             _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
             _backButton ctrlAddEventHandler ["MouseButtonClick", {
@@ -363,7 +363,7 @@ switch (_mode) do
             }];
             _backButton ctrlShow true;
         } else {
-            _display setVariable ["showGarrisonMenu", true];
+            _display setVariable ["A3A_showGarrisonMenu", true];
         };
 
         // Show map if not already visible
