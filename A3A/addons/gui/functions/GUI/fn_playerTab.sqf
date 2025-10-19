@@ -26,6 +26,7 @@ License: APL-ND
 #include "..\..\dialogues\defines.hpp"
 #include "..\..\dialogues\textures.inc"
 #include "..\..\script_component.hpp"
+#include "..\..\..\garage\CfgDefines.inc"
 FIX_LINE_NUMBERS()
 
 params[["_mode","update"], ["_params",[]]];

@@ -35,6 +35,11 @@ class CfgVehicles
 			assembleTo = "a3a_hmg_02_high";
 		};
 	};
+	class a3a_mmg_02_high_weapon : I_G_HMG_02_high_weapon_F{
+		class assembleInfo : assembleInfo {
+			assembleTo = "a3a_mmg_02_high";
+		};
+	};
 	class HMG_02_high_base_F;
 	class B_G_HMG_02_high_F : HMG_02_high_base_F{
 		class AnimationSources;
@@ -87,6 +92,50 @@ class CfgVehicles
 			class MainTurret : MainTurret{
 				magazines[] = {"LIB_100Rnd_127x99_M2","LIB_100Rnd_127x99_M2","LIB_100Rnd_127x99_M2","LIB_100Rnd_127x99_M2"};
 				weapons[] = {"LIB_M2"};
+			};
+		};
+		animationList[] ={};
+	};
+	class a3a_mmg_02_high : a3a_hmg_02_high{
+		displayName = ".30 M2HB (AA Tripod)";
+		class AnimationSources : AnimationSources{
+			class Hide_Shield {
+				animPeriod = 0.01;
+				initPhase = 0;
+				source = "user";
+				useSource = 1;
+			};
+			class Hide_Rail {
+				animPeriod = 0.01;
+				initPhase = 1;
+				source = "user";
+				useSource = 1;
+			};
+			class Revolving {
+				source = "revolving";
+				weapon = "lib_maxim_m30";
+			};
+			class muzzle_source {
+				source = "reload";
+				weapon = "lib_maxim_m30";
+			};
+			class muzzle_source_rot {
+				source = "ammorandom";
+				weapon = "lib_maxim_m30";
+			};
+			class ReloadAnim {
+				source = "reload";
+				weapon = "lib_maxim_m30";
+			};
+			class ReloadMagazine {
+				source = "reloadmagazine";
+				weapon = "lib_maxim_m30";
+			};
+		};
+		class Turrets : Turrets{
+			class MainTurret : MainTurret{
+				magazines[] = {"lib_250rnd_7_62x54R_maxim_D","lib_250rnd_7_62x54R_maxim_D","lib_250rnd_7_62x54R_maxim_D","lib_250rnd_7_62x54R_maxim_D"};
+				weapons[] = {"lib_maxim_m30"};
 			};
 		};
 		animationList[] ={};

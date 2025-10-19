@@ -21,6 +21,7 @@
 ["flyGear", ["U_SPE_FR_Tank_Crew", "B_SPE_US_T5_erla"]] call _fnc_saveToTemplate;
 
 ["surrenderCrate", "SPE_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
+["vehiclesCivSupply", ["SPE_FFI_OpelBlitz"]] call _fnc_saveToTemplate; //We should create a inert "box truck" version
 
 //////////////////////////
 //       Vehicles       //

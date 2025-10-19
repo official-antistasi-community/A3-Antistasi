@@ -25,6 +25,7 @@ License: APL-ND
 #include "..\..\dialogues\defines.hpp"
 #include "..\..\dialogues\textures.inc"
 #include "..\..\script_component.hpp"
+#include "..\..\..\garage\CfgDefines.inc"
 FIX_LINE_NUMBERS()
 
 #define CONSTRUCTIMAGE "\A3\EditorPreviews_F_Exp\Data\CfgVehicles\Land_WoodenCrate_01_F.jpg"
@@ -119,6 +120,20 @@ switch (true) do {
                     if !(_inArea > -1) exitWith {
                         _button ctrlEnable false;
                         _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_garage_away";
+                    };
+                    private _inArea = true;
+                    if (_vehType in HR_GRG_BLOCKAIRINDEX) then {
+                        private _friendlyMarkers = (airportsX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
+                        private _nearestHelipads = (nearestObjects [_vehicle, ["a3a_helipad"], 30, true]);
+                        _inArea = ((_friendlyMarkers findIf { _vehicle inArea _x} != -1) || (count _nearestHelipads > 0 && (_vehicle isKindOf "Helicopter")));              
+                    };
+                    if !(_inArea) exitWith {
+                        _button ctrlEnable false;
+                        if (_vehType == (HR_GRG_HELIPADACCESSIBLE)#0) then {
+                            _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_garage_airbase_helipad";
+                        } else {
+                            _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_garage_airbase";
+                        };
                     };
                     if (_vehicle getVariable ['A3A_canGarage', false]) then {
                         _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_garage_utility";

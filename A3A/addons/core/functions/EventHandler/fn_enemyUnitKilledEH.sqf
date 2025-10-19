@@ -69,9 +69,7 @@ if (side (group _killer) == teamPlayer) then
 	else
 	{
         private _marker = _victim getVariable ["markerX", ""];
-        if (_marker != "") then {
-    		[1, _marker] remoteExecCall ["A3A_fnc_citySupportChange", 2];       // Enemies don't count unless they're local
-        };
+        [1, [_marker, getPosATL _victim] select (_marker == "")] remoteExecCall ["A3A_fnc_citySupportChange", 2];
         [_victimSide, 0.5, 45] remoteExec ["A3A_fnc_addAggression", 2];
 	};
 };

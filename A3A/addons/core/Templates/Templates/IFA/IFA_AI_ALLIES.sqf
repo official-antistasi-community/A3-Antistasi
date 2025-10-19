@@ -18,7 +18,7 @@
 //////////////////////////
 
 ["ammobox", "LIB_WeaponsBox_Big_SU"] call _fnc_saveToTemplate;
-["surrenderCrate", "LIB_BasicAmmunitionBox_US"] call _fnc_saveToTemplate;
+["surrenderCrate", "LIB_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
 ["equipmentBox", "WW2_Cle_Container"] call _fnc_saveToTemplate;
 
 // vehicles can be placed in more than one category if they fit between both. Cost will be derived by the higher category

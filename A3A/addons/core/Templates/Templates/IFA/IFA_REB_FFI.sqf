@@ -17,7 +17,7 @@
 ["flyGear", ["U_LIB_US_Bomber_Pilot","B_LIB_US_Type5"]] call _fnc_saveToTemplate;
 ["vehiclesCivSupply", ["a3a_lib_Zis6_BOX"]] call _fnc_saveToTemplate; //We should create a inert "box truck" version
 
-["surrenderCrate", "LIB_BasicWeaponsBox_GER"] call _fnc_saveToTemplate;
+["surrenderCrate", "LIB_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
 
 //////////////////////////
 //       Vehicles       //
