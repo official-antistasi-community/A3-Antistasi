@@ -21,14 +21,14 @@ if (isServer) then {
 	["hr"] call A3A_fnc_getStatVariable;
 	["dateX"] call A3A_fnc_getStatVariable;
 	["weather"] call A3A_fnc_getStatVariable;
-	["prestigeBLUFOR"] call A3A_fnc_getStatVariable;
+	["prestigeBLUFOR"] call A3A_fnc_getStatVariable;		// backwards compat, overwritten by cityData
 	["cityData"] call A3A_fnc_getStatVariable;
 	["radioKeys"] call A3A_fnc_getStatVariable;
 	["resourcesFIA"] call A3A_fnc_getStatVariable;
 //	["garrison"] call A3A_fnc_getStatVariable;			// loaded later if it's an old save
 	["skillFIA"] call A3A_fnc_getStatVariable;
 	["membersX"] call A3A_fnc_getStatVariable;
-	["vehInGarage"] call A3A_fnc_getStatVariable;
+	["vehInGarage"] call A3A_fnc_getStatVariable;			// backwards compat, overwritten by HR_Garage
     ["HR_Garage"] call A3A_fnc_getStatVariable;
     ["A3A_fuelAmountleftArray"] call A3A_fnc_getStatVariable;
 	["destroyedBuildings"] call A3A_fnc_getStatVariable;
@@ -39,7 +39,7 @@ if (isServer) then {
 	["bombRuns"] call A3A_fnc_getStatVariable;
 	["arsenalLimits"] call A3A_fnc_getStatVariable;
 	["rebelLoadouts"] call A3A_fnc_getStatVariable;
-	["jna_dataList"] call A3A_fnc_getStatVariable;
+	["jna_datalist"] call A3A_fnc_getStatVariable;
 	["minorSites"] call A3A_fnc_getStatVariable;
 	//===========================================================================
 
@@ -78,7 +78,7 @@ if (isServer) then {
 	[true] call A3A_fnc_tierCheck;
 
 	// ****************************************************************************************************
-	// Garrison backwards compatibility
+	// Garrison backwards compatibility & update
 	A3A_garrison = +(["newGarrison"] call A3A_fnc_returnSavedStat);
 
 	// Copy old garrison data into new garrisons
@@ -97,13 +97,8 @@ if (isServer) then {
 
 	// outpostsFIA should be fully handled by convertSavedGarrisons
 
-	// This needs doing with 3.9.0 saves
-	{
-		if (_x in A3A_garrison) then { continue };
-		private _type = (A3A_minorSitesHM get _x) # 1;
-		private _side = sidesX getVariable _x;
-		[_x, _side] call ([A3A_fnc_buildRoadblock, A3A_fnc_buildCamp] select (_type == "camp"));
-	} forEach controlsX;
+	// Sync minor site data & generate if missing
+	call A3A_fnc_initMinorSites;
 
 	// Add police stations if missing
 	call A3A_fnc_initPoliceStations;
@@ -167,19 +162,25 @@ if (isServer) then {
     //Load state of testing timer
     ["testingTimerIsActive"] call A3A_fnc_getStatVariable;
 
-	// Load all player data into A3A_playerSaveData hashmap. Works around issues with game copies
-	_savedPlayers = "savedPlayers" call A3A_fnc_returnSavedStat;
+	// Load all player data into A3A_playerSaveData hashmap
+	private _savedPlayers = "savedPlayers" call A3A_fnc_returnSavedStat;
 	if (isNil "_savedPlayers") then { _savedPlayers = [] };
-	{
-		private _uid = _x;
-		private _playerData = createHashMap;
+	if (_savedPlayers isEqualType createHashMap) then {
+		A3A_playerSaveData = _savedPlayers;
+	} else {
+		// backwards compat with old array + separate vars format
+		// chuck this code after a couple of versions
 		{
-			_playerData set [_x, [_uid, _x] call A3A_fnc_retrievePlayerStat];
-		} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage","missionsCompleted"];
+			private _uid = _x;
+			private _playerData = createHashMap;
+			{
+				_playerData set [_x, [_uid, _x] call A3A_fnc_retrievePlayerStat];
+			} forEach ["moneyX", "loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage","missionsCompleted"];
 
-		if (isNil {_playerData get "moneyX"}) then { Error_1("Saved player %1 has no money var", _uid); continue };
-		A3A_playerSaveData set [_uid, _playerData];
-	} forEach _savedPlayers;
+			if (isNil {_playerData get "moneyX"}) then { Error_1("Saved player %1 has no money var", _uid); continue };
+			A3A_playerSaveData set [_uid, _playerData];
+		} forEach _savedPlayers;
+	};
 
     Info("Persistent Load Completed.");
 

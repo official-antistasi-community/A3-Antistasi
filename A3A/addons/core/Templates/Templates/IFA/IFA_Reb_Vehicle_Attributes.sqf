@@ -19,3 +19,5 @@
     ["LIB_M2_60", ["rebCost", 1000]],
     ["LIB_61k", ["rebCost", 2000]]
 ]] call _fnc_saveToTemplate;
+
+#include "..\..\AircraftLoadouts\SAB\SAB_Vehicle_Attributes.sqf"

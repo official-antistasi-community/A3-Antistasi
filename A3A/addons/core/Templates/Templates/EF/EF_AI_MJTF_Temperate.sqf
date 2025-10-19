@@ -42,7 +42,7 @@ private _Tanks = ["B_T_MBT_01_TUSK_F"];
 
 private _vehiclesHelisLight = ["a3a_Heli_Light_01_ION_F"];
 private _HelisTransport = ["EF_B_Heli_Transport_01_MJTF_Des"];
-private _vehiclesHelisLightAttack = ["a3a_Heli_Light_01_dynamicLoadout_ION_F"]; //Black, not ION livery
+private _vehiclesHelisLightAttack = ["a3a_Heli_Light_01_dynamicLoadout_ION_F","a3a_Heli_Transport_01_pylons_green_F"]; //Black, not ION livery
 private _vehiclesHelisAttack = ["EF_B_AH99J_MJTF_Des"];
 
 ["vehiclesArtillery", ["B_T_MBT_01_mlrs_F"]] call _fnc_saveToTemplate; //this line determines artillery vehicles -- Example: ["vehiclesArtillery", ["B_MBT_01_arty_F"]] -- Array, can contain multiple assets

@@ -121,10 +121,13 @@ private _startType = A3A_saveData get "startType";
 if (_startType != "new") then
 {
     // Setup save info
-    A3A_saveTarget = [A3A_saveData get "serverID", A3A_saveData get "gameID", worldName];
+    A3A_saveTarget = [A3A_saveData get "serverID", A3A_saveData get "gameID", worldName, false];
+    private _json = ["json"] call A3A_fnc_returnSavedStat;
+    if (!isNil "_json") then { A3A_saveTarget set [3, fromJSON _json] };
+
     // Sanity checks? hmm
 
-    Info_1("Loading campaign with ID %1", A3A_saveData get "gameID");
+    Info_2("Loading campaign with ID %1, JSON %2", A3A_saveData get "gameID", !isNil "_json");
 
     // Do the actual game loading
     call A3A_fnc_loadServer;
@@ -175,20 +178,13 @@ if (_startType != "load") then {
     _serverID = [_serverID, false] select (A3A_saveData get "useNewNamespace");
 
     // Create new campaign ID, avoiding collisions
-    private _allIDs = call A3A_fnc_collectSaveData apply { _x get "gameID" };
-    private _newID = str(floor(random(90000) + 10000));
-    while { _newID in _allIDs } do { _newID = str(floor(random(90000) + 10000)) };
+    private _newID = call A3A_fnc_uniqueID;
+    A3A_saveTarget = [_serverID, _newID, worldName, false];
 
     Info_1("Creating new campaign with ID %1", _newID);
-
-    A3A_saveTarget = [_serverID, _newID, worldName];
 };
 
 // ********************** Post-load init ****************************************************
-
-// Initialize enemy roadblocks & specops sites
-// Either uses A3A_minorSitesHM from save, or generates from map markers if missing
-call A3A_fnc_initMinorSites;
 
 if (isClass (configFile >> "AntistasiServerMembers")) then
 {
@@ -251,38 +247,11 @@ addMissionEventHandler ["PlayerDisconnected",{
     false;
 }];
 
-addMissionEventHandler ["BuildingChanged", {
-    params ["_oldBuilding", "_newBuilding", "_isRuin"];
+addMissionEventHandler ["BuildingChanged", A3A_fnc_buildingChangedEH];
 
-    Debug_4("%1 (%2) changed to %3 (%4)", typeof _oldBuilding, netId _oldBuilding, typeof _newBuilding, netId _newBuilding);
-
-    // If it's a police station, mark as destroyed
-    // Might not be spawned, so can't depend on the furniture case
-    if (netId _oldBuilding in A3A_policeStations) then {
-        private _city = A3A_policeStations get netId _oldBuilding;
-        A3A_garrison get _city set ["policeStation", false];
-        A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) - 4];
-        A3A_spawnPlaceStats deleteAt _city;
-        A3A_policeStations deleteAt netId _oldBuilding;
-        ["TaskSucceeded", ["", "Police Station Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
-
-        // Delete any furniture
-        private _attached = _oldBuilding getVariable ["A3A_furniture", []];
-        { deleteVehicle _x } forEach _attached;
-    };
-
-    if (_isRuin) then {
-
-        // TODO: this whole system doesn't work for buildings that have an intermediate damage model
-        _oldBuilding setVariable ["ruins", _newBuilding];
-        _newBuilding setVariable ["building", _oldBuilding];
-
-        // Antenna dead/alive status is handled separately
-        if !(_oldBuilding in antennas || _oldBuilding in antennasDead) exitWith {
-            destroyedBuildings pushBack _oldBuilding;
-        };
-    };
-}];
+// Now destroy the saved buildings so that BuildingChanged registers them correctly
+private _savedDestroyed = A3A_destroyedBuildings; A3A_destroyedBuildings = [];
+{ _x setDamage [1, false] } forEach _savedDestroyed;
 
 addMissionEventHandler ["EntityKilled", {
     params ["_victim", "_killer", "_instigator"];
@@ -389,8 +358,6 @@ A3A_garrisonOps = [];
 [] spawn A3A_fnc_resourcecheck;                     // 10-minute loop
 [] spawn A3A_fnc_aggressionUpdateLoop;              // 1-minute loop
 [] spawn A3A_fnc_garbageCleanerTracker;             // 5-minute loop
-
-savingServer = false;           // enable saving
 
 // Autosave loop. Save if there were any players on the server since the last save.
 [] spawn {
