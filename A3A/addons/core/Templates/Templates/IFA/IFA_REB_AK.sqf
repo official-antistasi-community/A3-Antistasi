@@ -83,6 +83,7 @@ switch (A3A_climate) do
 ///////////////////////////
 
 private _initialRebelEquipment = [
+["LIB_Faustpatrone", 20], "LIB_1Rnd_Faustpatrone",
 "LIB_WaltherPPK", "LIB_7Rnd_765x17_PPK",
 ["LIB_M1895", 15], "LIB_7Rnd_762x38",
 ["LIB_DELISLE", 2],["LIB_7Rnd_45ACP_DeLisle", 14],

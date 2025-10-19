@@ -27,12 +27,15 @@ private _count = objNull;
 {
 	_type = _x select 0;
 	_magConfig = configFile >> "CfgMagazines" >> _type;
+	_ammo = getText(_magConfig >> "ammo");
+	_cfgAmmo = configFile >> "CfgAmmo" >> _ammo;
 	_capacity = 1 max getNumber (_magConfig >> "count");			// Avoid div-by-zero on broken/missing config
 
 	// control unlocking missile launcher magazines
 	// the capacity check is an optimisation to bypass the config check. ~18% perf gain on the loop.
-	if (_capacity != 1 || allowGuidedLaunchers isEqualTo 1 ||
-		{!(getText (_magConfig >> "ammo") isKindOf "MissileBase")}) then {
+	if (_capacity != 1 
+	|| {allowGuidedLaunchers isEqualTo 1 && {tolower getText(_cfgAmmo >> "simulation") == "shotmissile"}}
+	|| {allowUnguidedLaunchers isEqualTo 1 && {tolower getText(_cfgAmmo >> "simulation") == "shotrocket"}}) then {
 		_bullets = _x select 1;
 		_count = floor (_bullets/_capacity);
 		_magazine pushBack [_type,_count];
@@ -49,6 +52,7 @@ private _categoriesToPublish = createHashMap;
 
 		private _categories = _item call A3A_fnc_equipmentClassToCategories;
 		if ("MissileLaunchers" in _categories && {allowGuidedLaunchers == 0}) exitWith {};
+		if ("RocketLaunchers" in _categories && {allowUnguidedLaunchers == 0}) exitWith {};
 		if ("Explosives" in _categories && {allowUnlockedExplosives == 0}) exitWith {};
 		if ("Backpacks" in _categories && {_item in allBackpacksTool}) exitWith {};			// should be UAV & static backpacks
 		if ("StaticWeaponParts" in _categories) exitWith {};

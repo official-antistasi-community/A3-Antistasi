@@ -21,8 +21,8 @@ private _fnc_addArrayToWeights = {
 
 private _vehWeights = [];
 
-private _lightAHWeight =   [70, 65, 60, 55, 50, 45, 40, 35, 30, 25] select _level;
-private _AHWeight =        [ 5, 10, 15, 20, 25, 30, 35, 40, 45, 50] select _level;
+private _lightAHWeight =   [70, 65, 62, 59, 55, 50, 44, 38, 32, 25] select _level;
+private _AHWeight =        [ 0, 2, 5, 9, 15, 21, 27, 34, 42, 50] select _level;
 private _casWeight =       [ 2,  4,  6,  8, 10, 12, 14, 16, 18, 20] select _level;
 
 // eventually add dive bombers?

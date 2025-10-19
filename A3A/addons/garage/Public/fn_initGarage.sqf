@@ -28,7 +28,7 @@ private _id = _object addAction [
     , "
         HR_GRG_accessPoint = _this#0;
         HR_GRG_accessLimit = 'flag';
-        createDialog 'HR_GRG_VehicleSelect';
+        [_this#0, 'garage'] call A3A_fnc_manageFlagAccess;
     ", nil, 1.5, true, true, ""
     , "
     ((isNil {HR_GRG_Placing}) || {!HR_GRG_Placing})

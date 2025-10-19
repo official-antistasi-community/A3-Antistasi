@@ -1,12 +1,12 @@
 (["attributesVehicles"] call _fnc_getFromTemplate) append [
     // civ cars
-    ["cwr3_c_mini", ["rebcost", 150]],
-    ["cwr3_c_rapid", ["rebcost", 180]],
-    ["cwr3_c_trabant", ["rebcost", 150]],
+    ["cwr3_c_mini", ["rebcost", 400]],
+    ["cwr3_c_rapid", ["rebcost", 450]],
+    ["cwr3_c_trabant", ["rebcost", 400]],
 
     // civ trucks
-    ["cwr3_c_bus", ["rebcost", 500]],
-    ["cwr3_c_uaz452", ["rebcost", 250]],
+    ["cwr3_c_bus", ["rebcost", 800]],
+    ["cwr3_c_uaz452", ["rebcost", 600]],
 
     // civ plane
     ["cwr3_c_cessna", ["rebcost", 5000]],

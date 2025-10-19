@@ -147,6 +147,13 @@ class Params
         texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
         default = 0;
     };
+    class A3A_flagGarageBlock
+    {
+        title = $STR_A3A_Params_garageAccessTimer_title;
+        values[] = {0,3,5,10,20};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min, $STR_A3A_Params_generic_20min};
+        default = 5;
+    };
 
     class SpacerMembership
     {
@@ -329,6 +336,14 @@ class Params
     {
         attr[] = {"server"};
         title = $STR_A3A_Params_unlockedUnlimitedAmmo_title;
+        values[] = {1,0};
+        texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
+        default = 0;
+    };
+    class allowUnguidedLaunchers
+    {
+        attr[] = {"server"};
+        title = $STR_A3A_Params_allowUnguidedLaunchers_title;
         values[] = {1,0};
         texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
         default = 0;
