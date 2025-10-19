@@ -57,10 +57,11 @@ class mehland {
     {"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
     {"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
     };
-policeStationTypes[] = {
+    policeStationTypes[] = {
 		"land_policestation_01_f", "land_house_2b01_f", "land_house_2b02_f", "land_house_2b03_f", "land_house_2b04_f",
 		"land_house_2w01_f", "land_house_2w02_f", "land_house_2w03_f", "land_house_2w04_f", "land_house_2w05_f",
 		"land_house_1b01_f", "land_house_1w11_f", "land_house_1w12_f", "land_house_1w07_f",
 		"land_house_1w02_f", "land_house_1w09_f", "land_house_1w05_f", "land_house_1w06_f"
 	};
+    distanceForAirAttack = 15000;
 };
