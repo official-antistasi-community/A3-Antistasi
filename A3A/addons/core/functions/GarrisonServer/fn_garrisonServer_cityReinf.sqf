@@ -16,8 +16,6 @@ FIX_LINE_NUMBERS()
 
 params ["_marker", "_troopCount"];
 
-Trace_1("Called with params %1", _this);
-
 // Add to the server garrison data store
 
 private _garrison = A3A_garrison get _marker;
@@ -26,6 +24,7 @@ if (_troops#0 >= A3A_garrisonSize get _marker) exitWith {};         // maxed
 private _reinf = _troopCount + (_garrison getOrDefault ["reinfCount", 0]);
 
 while {_reinf >= 2} do {
+    Trace_1("Reinforcing city %1", _marker);
     _troops set [0, (_troops#0) + 2];
     _reinf = _reinf - 2;
     if (_marker in A3A_garrisonMachine) then {
