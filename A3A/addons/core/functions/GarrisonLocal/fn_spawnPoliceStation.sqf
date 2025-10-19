@@ -20,7 +20,7 @@ params ["_activeGarrison", "_marker", "_garrisonData", "_storedTroops"];
 
 if (_activeGarrison get "side" != Occupants) exitWith {};
 
-private _buildingPos = _garrisonData get "policeStation";
+private _buildingPos = _garrisonData get "policeStation";       // should be guaranteed position on call
 private _station = nearestBuilding _buildingPos;
 if (!alive _station) exitWith {
     Error("Police station already destroyed?");

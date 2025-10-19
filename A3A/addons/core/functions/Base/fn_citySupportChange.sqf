@@ -12,7 +12,13 @@ params [["_change",""], ["_pos",""], ["_scaled", true]]; // nil protection
 if !(_change isEqualType 0) exitWith {Error("The first parameter, the support change, must be a number");};
 if !(_city isEqualType "") exitWith {Error("The second parameter, the position, must be a string (city name) or array (coordinates)");};
 
-private _city = if (_pos isEqualType "") then {_pos} else {[citiesX, _pos] call BIS_fnc_nearestPosition};
+private _city = if (_pos isEqualType "") then {_pos} else {
+	// Other enemies still count if within city marker for now
+	private _nearCities = citiesX inAreaArrayIndexes [_pos, 500, 500] apply { citiesX#_x };
+	private _nearCities = _nearCities select { _pos inArea _x };
+	selectRandom _nearCities;
+};
+if (isNil "_city") exitWith {};			// Unit not in city
 if (A3A_cityData isNil _city) exitWith {Error_1("City %1 not found in city data", _city);};
 
 private _cityData = A3A_cityData getVariable _city;

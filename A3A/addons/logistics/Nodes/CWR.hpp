@@ -173,3 +173,29 @@ class cwr3_vehicles_cwr3_ural_cwr3_ural_flatbed_p3d : TRIPLES(ADDON,Nodes,Base)
         };
     };
 };
+
+class cwr3_vehicles_cwr3_lr_cwr3_lr_fia_p3d : TRIPLES(ADDON,Nodes,Base)
+{
+        class Nodes
+    {
+        class Node1
+        {
+            offset[] = {0,-0.1,-0.7};
+            seats[] = {3,4};
+        };
+        class Node2
+        {
+            offset[] = {0,-0.9,-0.7};
+            seats[] = {5,6};
+        };
+        class Node3
+        {
+            offset[] = {0,-1.7,-0.7};
+            seats[] = {7,1};
+        };
+        class Node4
+        {
+            offset[] = {0,-2.5,-0.7};
+        };
+    };
+};

@@ -138,7 +138,7 @@
         <Original>Keep the agent covered for %1 more seconds</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_repair_success">
-        <Original>Excellent, we've recovered the goods. You can keep the vehicle if you like.</Original>
+        <Original>Excellent, we've recovered the goods. You can keep the vehicle if you like. We've left some presents in it.</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_taxi_title">
         <Original>Transport rebel agent</Original>

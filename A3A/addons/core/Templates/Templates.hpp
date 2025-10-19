@@ -1789,6 +1789,24 @@ class Templates
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
     };
 
+    class SPEX_CW : SPEX_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3\Data_F\Flags\flag_uk_co.paa";
+        name = "SPEX Commonwealth";
+        file = "SPEX_AI_CW_Temperate";
+        shortName = "CW";
+        lore = $STR_A3A_templates_lore_IFA_AI_UK;
+    };
+
+    class SPEX_CW_Trop : SPEX_CW
+    {
+        name = "SPEX CW NAC";
+        file = "SPEX_AI_CW_Trop";
+        climate[] = {"tropical","arid"};
+        lore = "British and Commonwealth expeditionary forces in Africa during the North Africa Campaign.";
+    };
+
     class SPEX_WEH : SPEX_Base
     {
         side = "Occ";
@@ -1797,6 +1815,14 @@ class Templates
         file = "SPEX_AI_WEH";
         shortName = "WEH";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_WEH;
+    };
+
+    class SPEX_WEH_Trop : SPEX_WEH
+    {
+        name = "SPEX WEH DAK";
+        file = "SPEX_AI_WEH_Trop";
+        climate[] = {"tropical","arid"};
+        lore = "Deutsches Afrikakorps, German Africa Corps, was the German expeditionary forces in Africa during the North Africa Campaign";
     };
 
     class SPEX_Reb : SPEX_Base
@@ -1825,7 +1851,7 @@ class Templates
     {
         requiredAddons[] = {"cwr3_core"};       
         basepath = QPATHTOFOLDER(Templates\Templates\CWR);
-        logo = "\CUP\Creatures\People\CUP_Creatures_People_Core\ui\logo_cup_ca_small.paa";
+        logo = "\cwr3\general\cwr3_core\data\cwr3_logo_128_ca.paa";
         priority = 70;
     };
 
@@ -1835,7 +1861,6 @@ class Templates
         flagTexture = "a3\data_f\flags\flag_us_co.paa";
         name = "CWR US Temprate";
         file = "CWR_AI_US_Army_Temperate";
-        climate[] = {"Temperate"};
         shortName = "US Army";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_US;
     };
@@ -1846,7 +1871,6 @@ class Templates
         flagTexture = "\cwr3\general\cwr3_core\data\flag_ussr_co.paa";
         name = "CWR USSR Temperate";
         file = "CWR_AI_USSR_Temperate";
-        climate[] = {"Temperate"};
         shortName = "USSR";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_Sov;
     };
@@ -1859,5 +1883,261 @@ class Templates
         file = "CWR_Reb_FIA";
         shortName = "FIA";
         lore = $STR_A3A_templates_lore_FIA;
+    };
+
+    class CWR_Civ : CWR_Base
+    {
+        side = "Civ";
+        flagTexture = "\CUP\BaseConfigs\CUP_BaseConfigs\data\Flags\flag_chernarus_co.paa";
+        name = "CWR CHC";
+        file = "CWR_Civ_CHC";
+        shortName = "Civilian";
+    };
+
+     // ***************************** CWR Brits *****************************
+
+    class CWRB_Base
+    {
+        requiredAddons[] = {"cwr3_expansion_uk"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\CWRBAF);
+        logo = "\cwr3\general\cwr3_core\data\cwr3_logo_128_ca.paa";
+        priority = 70;
+    };
+
+    class CWR_BAF_Temprate : CWRB_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\Data_F\Flags\flag_uk_co.paa";
+        name = "CWR BAF Temperate";
+        file = "CWR_AI_BAF_Temperate";
+        shortName = "BAF";
+        lore = $STR_A3A_templates_lore_BAF;
+    };
+  
+    // ***************************** CRO *****************************
+
+    class CRO_Base
+    {
+        requiredAddons[] = {"CRO_Base","rhsgref_main"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\CRO);
+        logo = "\cro_base\data\cromil_ca.paa";
+        priority = 80;
+    };
+
+    class CRO_Croatia : CRO_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\Croatia_ca.paa";
+        name = "CRO Croatian Army";
+        file = "CRO_AI_Croatia";
+        climate[] = {};
+        shortName = "Croatian Army";
+        lore = "";
+    };
+
+    // ***************************** AMF *****************************
+
+    class AMF_Base
+    {
+        requiredAddons[] = {"AMF_FAMAS","CUP_AirVehicles_Core"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\AMF);
+        logo = "\AMF_Pack_Corps\Logos\AMF\AMF_services_128.paa";
+        priority = 80;
+    };
+
+    class AMF_France : AMF_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\France_ca.paa";
+        name = "AMF French Army";
+        file = "AMF_AI_France";
+        climate[] = {};
+        shortName = "French Army";
+        lore = "";
+    };
+
+    // ***************************** TMT *****************************
+
+    class TMT_Base
+    {
+        requiredAddons[] = {"TMT_Core","CUP_AirVehicles_Core"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\TMT);
+        logo = "\TMT\TMT_Core\Data\TMT_Logo.paa";
+        priority = 80;
+    };
+
+     class TMT_Turkish_Army : TMT_Base
+    {
+        side = "Occ";
+        flagTexture = "TMT\TMT_Core\Data\TR_ca.paa";
+        name = "TMT Turkish Army";
+        file = "TMT_AI_Turkish_Army";
+        climate[] = {};
+        shortName = "Turkish Army";
+        lore = "";
+    };
+  
+     // ***************************** CSLA *****************************
+
+    class CSLA_Base
+    {
+        requiredAddons[] = {"CUP_Creatures_People_Civil_Russia", "CUP_BaseConfigs", "CUP_AirVehicles_Core", "CSLA_UI"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\CSLA);
+        logo = "\CSLA_cfg\Logos\csla_logo.paa";
+        priority = 70;
+    };
+
+    class CSLA_AI_US_Army_temperate  : CSLA_Base
+    {
+        side = "Inv"; //the side the faction defaults to, one of the following: Inv, Occ, Reb, Civ
+        flagTexture = "a3\data_f\flags\flag_us_co.paa"; //path to an icon to be displayed in the selector
+        name = "US Army Temperate"; //the name shown in the selector
+        file = "CSLA_AI_US_Army_temperate "; //the template file name
+        climate[] = {"temperate"}; //climate that the template is meant for
+        shortName = "US Army";
+    };
+
+    class CSLA_AI_US_Army_Arid : CSLA_Base
+    {
+        side = "Inv";
+        flagTexture = "a3\data_f\flags\flag_us_co.paa";
+        name = "US Army Arid";
+        file = "CSLA_AI_US_Army_Arid";
+        climate[] = {"arid"};
+        shortName = "US Army";
+    };
+    
+    class CSLA_AI_CSLA_temperate : CSLA_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\CzechRepublic_ca.paa";
+        name = "CSLA temperate";
+        file = "CSLA_AI_CSLA_temperate";
+        climate[] = {"temperate"};
+        shortName = "CSLA";
+    };
+
+    class CSLA_AI_CSLA_Arid : CSLA_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\CzechRepublic_ca.paa";
+        name = "CSLA Arid";
+        file = "CSLA_AI_CSLA_Arid";
+        climate[] = {"Arid"};
+        shortName = "CSLA";
+    };
+
+    class CSLA_AI_AFMC_temperate : CSLA_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\nato_ca.paa";
+        name = "AFMC temperate";
+        file = "CSLA_AI_AFMC_temperate";
+        climate[] = {"temperate"};
+        shortName = "AFMC";
+    };
+
+    class CSLA_AI_FIA_temperate : CSLA_Base
+    {
+        side = "Occ";
+        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        name = "FIA";
+        file = "CSLA_AI_FIA_temperate";
+        climate[] = {"temperate"};
+        shortName = "FIA";
+    };
+
+    class CSLA_Reb_NAPA : CSLA_Base
+    {
+        side = "Reb";
+        flagTexture = "cup\baseconfigs\cup_baseconfigs\data\flags\flag_napa_co.paa";
+        name = "CSLA NAPA";
+        file = "CSLA_Reb_NAPA";
+        climate[] = {"Temperate"};
+        shortName = "NAPA";
+    };
+
+    class CSLA_Civ_TC : CSLA_Base
+    {
+        side = "Civ";
+        flagTexture = "\CUP\BaseConfigs\CUP_BaseConfigs\data\Flags\flag_tka_co.paa";
+        name = "CIV_TC";
+        file = "CSLA_Civ_TC";
+        climate[] = {"Temperate"};
+        shortName = "FIA";
+    };
+  
+    // **************** PRACS *****************
+
+    class PRACS_RACS_Base
+    {
+        requiredAddons[] = {"PRACS_Core"}; 
+        basepath = QPATHTOFOLDER(Templates\Templates\PRACS); 
+        logo = "PRACS_Core\Logo\ProjectRACS_mod_ca.paa"; // to be done
+        maps[] = {"sara"};
+        priority = 80;
+    };
+
+    class RACS_Arid : PRACS_RACS_Base
+    {
+        side = "Occ";
+        flagTexture = "\PRACS_Core\Flags\KingdomofSahrani_co.paa";
+        name = "PRACS RACS Arid";
+        file = "PRACS_AI_RACS_Arid";
+        climate[] = {"arid"};
+        shortName = "RACS";
+        lore = $STR_A3A_templates_lore_CUP_AI_RACS;
+    };
+
+    class RACS_Temperate : RACS_Arid
+    {
+        name = "PRACS RACS Temperate";
+        file = "PRACS_AI_RACS_Temperate";
+        climate[] = {"temperate"};
+    };
+
+    class PRACS_SLA_Base
+    {
+        requiredAddons[] = {"PRACS_SLA_Core"}; 
+        basepath = QPATHTOFOLDER(Templates\Templates\PRACS); 
+        logo = "PRACS_SLA_Core\Logo\pracs_sla_mod_ca.paa";
+        maps[] = {"sara"};
+        priority = 80;
+    };
+
+    class SLA_Arid : PRACS_SLA_Base
+    {
+        side = "Inv";
+        flagTexture = "\PRACS_SLA_Core\Flags\flag_north_co.paa";
+        name = "PRACS SLA Arid";
+        climate[] = {"arid"};
+        file = "PRACS_AI_SLA_Arid";
+        shortName = "SLA";
+        lore = $STR_A3A_templates_lore_CUP_AI_SLA;
+    };
+
+    class SLA_Temperate : SLA_Arid
+    {
+        name = "PRACS SLA Temperate";
+        file = "PRACS_AI_SLA_Temperate";
+        climate[] = {"temperate"};
+    };
+
+    class SLA_Rev_Guards_Arid : PRACS_SLA_Base
+    {
+        side = "Inv";
+        flagTexture = "\PRACS_SLA_Core\Flags\flag_north_co.paa";
+        name = "PRACS SLA Guards Arid";
+        climate[] = {"arid"};
+        file = "PRACS_AI_SLA_Rev_Guards_Arid";
+        shortName = "SLA Guards";
+        lore = $STR_A3A_templates_lore_CUP_AI_SLA;
+    };
+
+    class SLA_Rev_Guards_Temperate : SLA_Rev_Guards_Arid
+    {
+        name = "PRACS SLA Guards Temperate";
+        file = "PRACS_AI_SLA_Rev_Guards_Temperate";
+        climate[] = {"temperate"};
     };
 };

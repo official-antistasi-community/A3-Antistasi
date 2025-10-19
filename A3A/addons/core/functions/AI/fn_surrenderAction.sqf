@@ -77,6 +77,8 @@ private _marker = _unit getVariable "markerX";
 if !(isNil "_marker") then {
     [1, _marker] remoteExecCall ["A3A_fnc_citySupportChange", 2];
     A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
+} else {
+    [1, getPosATL _unit] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 };
 
 
