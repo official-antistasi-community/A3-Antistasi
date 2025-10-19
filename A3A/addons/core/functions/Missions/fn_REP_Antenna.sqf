@@ -71,7 +71,6 @@ if (spawner getVariable _markerX != 2) then
 if (dateToNumber date > _dateLimitNum) then
 	{
 	[_taskId, "REP", "FAILED"] call A3A_fnc_taskSetState;
-	//[5,0,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
 	[-200, Occupants] remoteExec ["A3A_fnc_timingCA",2];
 	[-10,theBoss] call A3A_fnc_playerScoreAdd;
 	[_antennaDead] remoteExec ["A3A_fnc_rebuildRadioTower", 2];

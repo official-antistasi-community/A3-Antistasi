@@ -12,6 +12,7 @@ class DOUBLES(ADDON,Nodes)
     #include "Nodes\D3S.hpp"
     #include "Nodes\GM.hpp"
     #include "Nodes\IFA.hpp"
+    #include "Nodes\PRACS.hpp"
     #include "Nodes\RDS.hpp"
     #include "Nodes\RF.hpp"
     #include "Nodes\RHS.hpp"
@@ -22,8 +23,10 @@ class DOUBLES(ADDON,Nodes)
     #include "Nodes\VN.hpp"
     #include "Nodes\WS.hpp"
     #include "Nodes\SFP.hpp"
-     #include "Nodes\CWR.hpp"
     #include "Nodes\AMF.hpp"
+    #include "Nodes\TMT.hpp"
+    #include "Nodes\CWR.hpp"
+    #include "Nodes\CSLA.hpp"
 };
 
 class DOUBLES(ADDON,Cargo)

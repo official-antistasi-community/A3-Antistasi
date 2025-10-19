@@ -1531,6 +1531,9 @@
         <Turkish>Kasayı kamyona aktar</Turkish>
         <Chinesesimp>将弹药箱转移到运输载具上面</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_vehicle_garrison">
+        <Original>Add vehicle to garrison</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_flagaction_vehiclebuy">
         <Original>Buy Vehicle</Original>
         <German>Fahrzeug kaufen</German>
@@ -1575,6 +1578,9 @@
         <Portuguese>Lixo apagado.&lt;br/&gt;Última LL foi há %1</Portuguese>
         <Turkish>Çöp Temizlendi. &lt;br/&gt;Son ÇT %1 kadar önceydi.</Turkish>
         <Chinesesimp>杂物清理完毕.&lt;br/&gt;距离上次杂物清理已过去%1.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_base_gc_hq_running">
+        <Original>Cleaning the HQ area of garbage...</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_gc_title">
         <Original>Garbage Cleaner</Original>
@@ -3418,7 +3424,7 @@
         <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;The following players are not at HQ: %1, and %2.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius_singleplayer">
-        <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;&lt;br/&gt;%1 is currently not at HQ.</Original>
+        <Original>All players must be in a 100m radius from HQ to be able to rest.\n\n%1 is currently not at HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_title">
         <Original>Skip Time / Rest</Original>
@@ -3874,6 +3880,9 @@
         <Russian>Лимит гражданских:</Russian>
         <Chinesesimp>平民限制:</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_init_initclient_gameOpt_obsolete">
+        <Original>The game options have moved! Run a persistent save from the Commander or Admin menus on the new battle menu, adjust the AI limits from the Admin tab, or adjust your client settings in the Escape menu.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_init_initclient_gameOpt_limFT">
         <Original>Limited Fast Travel:</Original>
         <Italian>Limite Viaggio Rapido:</Italian>
@@ -3940,6 +3949,12 @@
         <Czech>Obecné informace</Czech>
         <Turkish>Genel bilgi</Turkish>
         <Chinesesimp>基本信息</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_init_initclient_helipad">
+        <Original>Helipad</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_init_initclient_helipad_enemies">
+        <Original>You cannot access the helipad garage while enemies are nearby.</Original>
       </Key>
       <Key ID="STR_A3A_fn_init_initclient_member_admin">
         <Original>You are not in the member's list, but as you are Server Admin, you have been added. Welcome!</Original>
@@ -4821,6 +4836,12 @@
         <Korean>작전 구역 확보</Korean>
         <Russian>Защита Оперативной зоны</Russian>
         <Chinesesimp>肃清区域</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conq_police_text">
+        <Original>A police station is disturbing our operations in %1. Go there and destroy it before %2. You can ransack it for loot and intel first.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conq_police_title">
+        <Original>Destroy the police station</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_conv_ammo_text">
         <Original>A convoy from %1 is about to depart at %2. It will provide ammunition to %3. Try to intercept it. Steal or destroy that truck before it reaches its destination.</Original>
@@ -5755,8 +5776,8 @@
         <Russian>Командир подал в отставку. Подходящего командира нет.</Russian>
         <Chinesesimp>指挥官已离线.目前没有合适的指挥官.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifle1">
-        <Original>Autorifleman role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifleman_1">
+        <Original>Autorifleman role</Original>
         <Italian>Ruolo Fuciliere Automatico.</Italian>
         <French>Rôle de Mitrailleur.</French>
         <Korean>자동소총수 역할</Korean>
@@ -5766,8 +5787,8 @@
         <Turkish>Makinalı Tüfek rolü</Turkish>
         <Chinesesimp>自动步枪手</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifle2">
-        <Original>Autoriflemen have a slight bonus on carry capacity, but make more noise when they move</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifleman_2">
+        <Original>Autoriflemen have a slight bonus on carry capacity, but make more noise when they move.</Original>
         <Italian>I Fucilieri Automatici hanno un piccolo bonus sulla capacità di trasporto, però fanno troppo rumore quando si muovono.</Italian>
         <French>Les Mitrailleurs ont un léger bonus de capacité de transport, mais sont plus bruyants quand ils se déplacent.</French>
         <Korean>자동소총수는 운반 용량에 약간의 보너스를 가지지만, 이동할 때 더 큰 소리를 냅니다.</Korean>
@@ -5776,8 +5797,8 @@
         <Czech>Kulometčíci mají menší bonus k maximální váze, kterou unesou, ale dělají větší hluk při pohybu</Czech>
         <Chinesesimp>自动步枪手在携带重量上略带优势, 但是在移动时会发出更大的动静.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_commander1">
-        <Original>Commander role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_commander_1">
+        <Original>Commander role</Original>
         <Italian>Ruolo Comandante.</Italian>
         <French>Rôle de Commandant.</French>
         <Korean>지휘관 역할</Korean>
@@ -5787,8 +5808,8 @@
         <Turkish>Komutan rolü</Turkish>
         <Chinesesimp>指挥官</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_commander2">
-        <Original>The commander is a lightweight unit with increased camouflage, medical and engineering capabilities</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_commander_2">
+        <Original>The commander is a lightweight unit with increased camouflage, medical and engineering capabilities.</Original>
         <Italian>Il comandante è un'unità leggera con capacità mimetiche, mediche e di genio aumentate.</Italian>
         <French>Le commandant est une unité légère avec des capacités de camouflage, médical et d'ingéniérie augmentées.</French>
         <Korean>지휘관은 위장, 의료, 공병 능력이 향상된 경량 유닛입니다.</Korean>
@@ -5797,8 +5818,8 @@
         <Czech>Velitel je lehká jednotka se zvýšenou kamufláží, a lékařskými a inženýrskými schopnostmi</Czech>
         <Chinesesimp>指挥官是一个高伪装，兼备医疗以及工程才能一体的轻量化单位</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_engi1">
-        <Original>Engineer role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_engineer_1">
+        <Original>Engineer role</Original>
         <Italian>Ruolo Geniere.</Italian>
         <French>Rôle d'Ingénieur.</French>
         <Korean>공병 역할</Korean>
@@ -5808,8 +5829,8 @@
         <Turkish>Mühendis rolü</Turkish>
         <Chinesesimp>工程师</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_engi2">
-        <Original>Engineers do not have any bonus or penalties, but have the ability to use Toolkits for vehicle repair</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_engineer_2">
+        <Original>Engineers do not have any bonus or penalties, but have the ability to use Toolkits for vehicle repair.</Original>
         <Italian>I Genieri non hanno bonus o penalità, ma hanno l'abilità di usare i Kit di Riparazioni per riparare i veicoli.</Italian>
         <French>Les Ingénieurs n'ont pas de bonus ou de malus, mais ils ont la capacité d'utiliser des Kits de Réparation pour réparer les véhicules.</French>
         <Korean>공병은 아무 보너스나 패널티가 없지만, 차량 수리를 위해 도구모음을 사용할 수 있는 능력이 있습니다.</Korean>
@@ -5818,8 +5839,8 @@
         <Czech>Inženýři nemají žádné bonusy ani penalizace, ale můžou používat opravovací sady na opravení vozidel</Czech>
         <Chinesesimp>工程师并没什么特殊的长处或短处，但是他们可以使用修理包来为载具提供修理</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier1">
-        <Original>Grenadier role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier_1">
+        <Original>Grenadier role</Original>
         <Italian>Ruolo Granatiere.</Italian>
         <French>Rôle de Grenadier.</French>
         <Korean>유탄수 역할</Korean>
@@ -5829,8 +5850,8 @@
         <Turkish>Bomba Atar rolü</Turkish>
         <Chinesesimp>榴弹手</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier2">
-        <Original>Grenadiers have a slight bonus on carry capacity, but are easy to spot</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier_2">
+        <Original>Grenadiers have a slight bonus on carry capacity, but are easy to spot.</Original>
         <Italian>I granatieri hanno un piccolo bonus sulla capacità di trasporto, ma sono facili da avvistare.</Italian>
         <French>Les Grenadiers ont un léger bonus de capacité de transport, mais sont facile à réperer.</French>
         <Korean>유탄수는 운반 용량에 보너스를 가지지만, 발견되기 더 쉬워집니다.</Korean>
@@ -5839,8 +5860,8 @@
         <Czech>Granátometčíci mají menší bonus k váze kterou unesou, ale dají se jednodušeji spatřit</Czech>
         <Chinesesimp>榴弹手在携带重量上略带优势, 但是更容易被敌人发现.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_medic1">
-        <Original>Medic role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_medic_1">
+        <Original>Medic role</Original>
         <Italian>Ruolo Medico.</Italian>
         <French>Rôle de Médecin.</French>
         <Korean>의무병 역할</Korean>
@@ -5850,8 +5871,8 @@
         <Turkish>Sıhıye rolü</Turkish>
         <Chinesesimp>卫生员</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_medic2">
-        <Original>Medics do not have any bonus or penalties, but have the ability to use certain medical items for full health restoration</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_medic_2">
+        <Original>Medics do not have any bonus or penalties, but have the ability to use certain medical items for full health restoration.</Original>
         <Italian>I Medici non hanno bonus o penalità, ma sono in grado di usare determinati oggetti medici per rigenerare totalmente la salute.</Italian>
         <French>Les Médecins n'ont pas de bonus ou de malus, mais ils ont la capacité d'utiliser certains objets médicaux afin de prodiguer des soins complets.</French>
         <Korean>의무병은 보너스나 패널티가 없지만, 완치를 위해 특정한 의료품을 사용할 수 있는 능력이 있습니다.</Korean>
@@ -5860,8 +5881,8 @@
         <Czech>Doktoři nemají žádné bonusy ani penalizace, ale můžou používat některé lékařské předměty k doplnění plného zdraví</Czech>
         <Chinesesimp>卫生员并没有什么额外的奖励或者处罚特长，但是他们可以使用特定的医疗物品进行全面的医疗救助.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_rifle1">
-        <Original>Rifleman role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_rifleman_1">
+        <Original>Rifleman role</Original>
         <Italian>Ruolo Fuciliere.</Italian>
         <French>Rôle de Fusilier.</French>
         <Korean>소총수 역할</Korean>
@@ -5871,8 +5892,8 @@
         <Turkish>Piyade rolü</Turkish>
         <Chinesesimp>步枪兵</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_rifle2">
-        <Original>Riflemen do not have any bonus or penalties but can hack drones</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_rifleman_2">
+        <Original>Riflemen do not have any bonus or penalties but can hack drones.</Original>
         <Italian>I Fucilieri non hanno bonus o penalità ma possono hackerare i droni.</Italian>
         <French>Les Fusiliers n'ont pas de bonus ou de malus mais ils peuvent hacker des drones.</French>
         <Korean>소총수는 보너스나 패널티가 없지만, 무인기를 해킹할 수 있습니다.</Korean>
@@ -5881,8 +5902,8 @@
         <Czech>Střelci nemají žádné bonusy ani penalizace, ale můžou hackovat drony</Czech>
         <Chinesesimp>步枪兵并没什么额外的奖励以及处罚特长，但是他们可以骇入无人机.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_teamlead1">
-        <Original>Teamleader role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_teamleader_1">
+        <Original>Teamleader role</Original>
         <Italian>Ruolo Caposquadra.</Italian>
         <French>Rôle de Chef d'équipe.</French>
         <Korean>조장 역할</Korean>
@@ -5892,8 +5913,8 @@
         <Turkish>Tim Komutan rolü</Turkish>
         <Chinesesimp>小组组长</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_teamlead2">
-        <Original>Teamleader are more lightweight units with increased camouflage capabilities</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_teamleader_2">
+        <Original>Teamleader are more lightweight units with increased camouflage capabilities.</Original>
         <Italian>I Caposquadra sono unità leggere con capacità mimetiche aumentate.</Italian>
         <French>Les Chefs d'équipe sont des unités légères avec des capacités de camouflage augmentées.</French>
         <Korean>조장은 위장 능력이 향상된 경량 유닛입니다.</Korean>
@@ -5901,16 +5922,6 @@
         <Polish>Dowódcy sekcji to lżejsze jednostki o zwiększonych możliwościach kamuflażu.</Polish>
         <Czech>Velitel týmu je lehká jednotka se zvýšenou kamufláží</Czech>
         <Chinesesimp>小组组长是一个高伪装的轻量化单位</Chinesesimp>
-      </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_titel">
-        <Original>Unit Traits</Original>
-        <Italian>Caratteristiche Unità</Italian>
-        <French>Attributs d'Unité</French>
-        <Korean>유닛 특성</Korean>
-        <Russian>Роль</Russian>
-        <Polish>Cechy jednostek</Polish>
-        <Czech>Vlastnosti jednotky</Czech>
-        <Chinesesimp>单位特长</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_unitTraits_title">
         <Original>Unit Traits</Original>
@@ -5923,7 +5934,7 @@
         <Chinesesimp>单位特长</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_unitTraits_you">
-        <Original>You have selected %1.</Original>
+        <Original>You have selected the %1.</Original>
         <Italian>Hai selezionato %1.</Italian>
         <French>Vous avez sélectionné %1.</French>
         <Korean>당신은 %1을(를) 선택했습니다.</Korean>
@@ -6497,6 +6508,9 @@
         <Polish>Ty i pojazd powietrzny musicie znajdować się na obszarze %1 lotniska lub kwatery głównej, aby móc przekształcić je w "wsparcie z powietrza".</Polish>
         <Czech>Ty a letecké vozidlo musí být v oblasti %1 letiště nebo HQ aby jsi ho mohl převést na body leteckého úderu.</Czech>
         <Chinesesimp>你在友军控制范围内的机场或者总部才能将空中载具转换成空中打击.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_bombrun_no_cap">
+        <Original>You cannot convert this vehicle as it would give you %1 airstrike points, which brings you over the cap of %2 points.</Original>
       </Key>
       <Key ID="STR_A3A_fn_reinf_bombrun_no_destr">
         <Original>You can't convert a destroyed Air vehicle to Airstrikes.</Original>
@@ -7133,7 +7147,7 @@
         <Chinesesimp>这地方不存在可以调除的驻军</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_garrDia_no_wPost">
-        <Original>Additional garrison units cannot be added to observation posts.</Original>
+        <Original>Additional garrison units cannot be added to watchposts.</Original>
         <French>Les unités de garnison supplémentaires ne peuvent pas être ajoutées aux postes d'observation.</French>
         <Korean>관측소에는 주둔군을 더 추가할 수 없습니다.</Korean>
         <Russian>Дополнительные гарнизонные подразделения не могут быть добавлены к наблюдательным постам.</Russian>
@@ -7226,6 +7240,9 @@
         <Polish>Aby spełnić tą prośbe, musisz kontrolować lotnisko.</Polish>
         <Czech>Pro splnění tohoto požadavku musíte ovládat letiště.</Czech>
         <Chinesesimp>该请求要求你控制最起码一座机场.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_NatoBomb_no_distanceHQ">
+        <Original>Airstrike called off, this position is too close to HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_reinf_NatoBomb_no_radio">
         <Original>You need a radio in your inventory to be able to give orders to other squads.</Original>
@@ -8506,6 +8523,12 @@
         <Portuguese>Seleciona a zona para onde queres enviar as tropas selecionadas para guarnição.</Portuguese>
         <Turkish>Seçilen birlikleri garnizon olarak göndereceğiniz bölgeyi seçin.</Turkish>
         <Chinesesimp>选择您将作为驻军发送的区域。</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_garrison_vehicle_added">
+        <Original>Vehicle added to garrison. Cargo and inventory may not be preserved when you leave the area. Entering the vehicle will remove it from the garrison.</Original>
+      </Key>
+      <Key ID="STR_A3A_garrison_vehicle_outside">
+        <Original>This vehicle is not within a rebel garrison.</Original>
       </Key>
       <Key ID="STR_A3A_garrisons_header">
         <Original>Garrisons</Original>
@@ -10291,7 +10314,7 @@
         <Russian>Спецназ</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntSPTCll_SAMLONG">
-        <Original>Confirmed launch of %1 SAM.</Original>
+        <Original>%1 SAM is acquiring a target.</Original>
         <Korean>%1 세력의 지대공미사일 발사가 확인됨</Korean>
         <Russian>Подтверждена работа ЗРК %1</Russian>
       </Key>
@@ -10607,6 +10630,9 @@
       <Key ID="STR_A3A_templates_lore_IFA_AI_UK">
         <Original>The United Kingdom was at the forefront of World War II, a final show of force from a once-great empire. They commonly use a variety of home-grown weapons like the Sten and Enfield, mixed with a variety of American export weaponry.</Original>
         <Russian>Великобритания была на переднем крае Второй мировой войны - последняя демонстрация силы некогда великой империи. Они обычно используют различные виды отечественного оружия, такие как "Стен" и "Энфилд", в сочетании с американским экспортным оружием.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_IFA_AI_USMC">
+        <Original>The United States Marine Corps fought in the Pacific campaign during World War II. The US Marines prefer their Springfield rifles and Browning Automatics.</Original>
       </Key>
       <Key ID="STR_A3A_templates_lore_ION">
         <Original>Ruthless and willing to do anything for a quick buck, the private military corporation of ION Services, Incorporated and it's diverse set of contractors believe every job has a reasonable price. The company buys assets in bulk for dirt-cheap, and there is no standard-issue rifle.</Original>
@@ -11358,7 +11384,7 @@
         <Chinesesimp>拆除观察哨/路障</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_commander_comm_roadblock_delete_tooltip">
-        <Original>Remove selected observation post or roadblock, the money spent will be refunded</Original>
+        <Original>Remove selected watchpost or roadblock, the money spent will be refunded</Original>
         <Italian>Rimuovi il posto di osservazione o il posto di blocco selezionato, i soldi verranno rimborsati</Italian>
         <Spanish>Borra el punto de observación o bloqueo de carretera, el dinero sera reembolsado</Spanish>
         <French>Supprimer le poste d'observation ou le barrage routier sélectionné, l'argent sera remboursé</French>
@@ -13346,7 +13372,7 @@
         <Chinesesimp>出售载具</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_journal_entry_header_commander_12">
-        <Original>Observation Post</Original>
+        <Original>Watchpost</Original>
         <German>Beobachtungsposten</German>
         <Italian>Posto di Osservazione</Italian>
         <Spanish>Puesto de observación</Spanish>
@@ -16565,6 +16591,49 @@
         <Polish>Opcje związane z zarządzaniem pojazdami w oddziałach kontrolowanych przez HC</Polish>
         <Czech>Možnosti související se správou vozidel v jednotkách kontrolovaných HC</Czech>
         <Chinesesimp>与指挥部班组车辆管理相关的选项</Chinesesimp>
+      </Key>
+    </Container>
+    <Container name="intelfeed">
+      <Key ID="STR_A3A_intelfeed_title_attack_imminent">
+        <Original>%1 attack imminent</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_attack_imminent">
+        <Original>Our sources believe that %1 forces will begin a major attack within the next 5 minutes.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_attack_time">
+        <Original>%2 mins until %1 attack</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_attack_time">
+        <Original>%1 is reported to have the resources to launch an attack in %2 if our calculations are right.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_def_resources">
+        <Original>%1 resources: %2</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_def_resources">
+        <Original>our sources report that %1 has %2 defence resources.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_decryption_key">
+        <Original>%1 decryption key found</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_decryption_key">
+        <Original>we found a %1 decryption key, it will be useful for decoding their radio transmissions.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_key_pack">
+        <Original>%1 key pack found</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_key_pack">
+        <Original>we found a pack of %1 decryption keys, they will be very helpful in reading their support calls.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_weapon_unlock">
+        <Original>Weapon unlock</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_weapon_unlock">
+        <Original>we found supply data for the %1, and it has been made available in the arsenal.</Original>
+      </Key>
+    </Container>
+    <Container name="role_names">
+      <Key ID="STR_A3A_role_names_rebel">
+        <Original>Rebel</Original>
       </Key>
     </Container>
   </Package>

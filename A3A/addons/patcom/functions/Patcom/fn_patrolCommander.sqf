@@ -37,31 +37,36 @@ if (count units _group == 0) exitWith {
     };
 };
 
-private _knownEnemies = [_group] call A3A_fnc_patrolGetEnemies;
 private _patrolParams = _group getVariable "PATCOM_Patrol_Params";
 private _currentOrders = _patrolParams # 0;
 
 // Handle Patrol Formations, Exits if already set and time not expired.
 [leader _group] call A3A_fnc_patrolHandleFormation;
 
-// Check if enemy combat is near.
-if (count _knownEnemies > 0) then {
-    if ((_currentOrders != "Patrol_Attack") && (_currentOrders != "Patrol_Water")) then {
-            _group setVariable ["PATCOM_Previous_Orders", _currentOrders];
 
-            // Set Current Orders to Attack.
-            _currentOrders = "Patrol_Attack";
-            _group setVariable ["PATCOM_Group_State", "COMBAT"];
-        };
+// If autoattack is enabled, check if enemies are near and change to attack orders
+if (_group getVariable ["PATCOM_AutoAttack", true]) then {
+    if (_currentOrders in ["Patrol_Attack", "Patrol_Water"]) exitWith {};
+
+    private _knownEnemies = _group targets [true, PATCOM_VISUAL_RANGE, [], PATCOM_TARGET_TIME];
+    if (_knownEnemies isEqualTo []) exitWith {};
+    private _distances = _knownEnemies apply { _x distance2d leader _group };
+    private _nearEnemy = _knownEnemies select (_distances find selectMin _distances);       // fuck Arma
+
+    // Set Current Orders to Attack.
+    _group setVariable ["PATCOM_Previous_Orders", _patrolParams];
+    _patrolParams = ["Patrol_Attack", 0, 50, -1, false, getPosATL _nearEnemy, false];     // mostly irrelevant
+    _currentOrders = _patrolParams # 0;
+    _group setVariable ["PATCOM_Group_State", "COMBAT"];            // what does this do?
 };
+
 
 If (PATCOM_DEBUG) then {
     ServerDebug_3("PATCOM | Group: %1 | Current Orders: %2 | Group State: %3", _group, _currentOrders, _group getVariable "PATCOM_Group_State");
 };
 
 if (_currentOrders == "Patrol_Attack") exitWith {
-    // Give group waypoint to nearest Known Enemy.
-    [_group, _knownEnemies] call A3A_fnc_patrolAttack;
+    [_group, _patrolParams#2, _patrolParams#5] call A3A_fnc_patrolAttack;
 };
 
 if (_currentOrders == "Patrol_Defend") exitWith {

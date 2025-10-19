@@ -85,6 +85,7 @@ HR_GRG_cleanUp = {
     HR_GRG_keyHint = nil;
     HR_GRG_placing = false;
     HR_GRG_accessPoint = objNull;
+    HR_GRG_accessLimit = nil;
 };
 
 //create display vehicle localy

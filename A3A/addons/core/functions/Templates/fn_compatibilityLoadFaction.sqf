@@ -21,6 +21,7 @@ private _factionDefaultFile = ["EnemyDefaults","EnemyDefaults","RebelDefaults","
 _factionDefaultFile = QPATHTOFOLDER(Templates\Templates\FactionDefaults) + "\" + _factionDefaultFile + ".sqf";
 
 private _faction = [[_factionDefaultFile,_file]] call A3A_fnc_loadFaction;
+_faction set ["side", _side];
 private _factionPrefix = ["occ", "inv", "reb", "civ"] #([west, east, independent, civilian] find _side);
 missionNamespace setVariable ["A3A_faction_" + _factionPrefix, _faction];
 [_faction, _factionPrefix] call A3A_fnc_compileGroups;
@@ -76,6 +77,14 @@ if (_side in [Occupants, Invaders]) then {
         ([_x, true] call BIS_fnc_crewCount) - ([_x, false] call BIS_fnc_crewCount) >= 4
     };
     _faction set ["vehiclesLightArmedTroop", _lightArmedTroop];
+
+    private _noType = [];
+    if ((_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack") + (_faction get "vehiclesHelisTransport")
+        + (_faction get "vehiclesHelisLight") isEqualTo []) then { _noType pushBack "heli" };
+    if (_faction get "staticAT" isEqualTo []) then { _noType pushBack "staticAT" };
+    if (_faction get "vehiclesGunBoats" isEqualTo []) then { _noType pushBack "boat" };
+    if ((_faction get "vehiclesPlanesAA") + (_faction get "vehiclesPlanesCAS") isEqualTo []) then { _noType append ["plane", "runway"] };
+    _faction set ["noPlaceTypes", _noType];
 };
 
 _faction;
