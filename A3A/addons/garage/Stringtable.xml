@@ -31,7 +31,7 @@
         <Chinesesimp>&lt;img image='\A3\ui_f\data\GUI\Rsc\RscDisplayArsenal\spaceGarage_ca.paa'&gt;&lt;/img&gt; 车库 %1</Chinesesimp>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_airBlocked">
-        <Original>You can't garage an aircraft while you are not near an Airport which belongs to %1. Please move your aircraft to an Airport under your control to garage it</Original>
+        <Original>You can't garage an aircraft while you are not near an airbase which belongs to %1, or a built helipad for helicopters.</Original>
         <German>Du kannst kein Flugzeug einparken solange du nicht in der Nähe eines Flughafens bist, der %1 gehört. Bitte bewegen dein Flugzeug zu einem Flughafen, den du kontrollierst, um es zu parken.</German>
         <Italian>Non puoi inserire un veivolo nel garage se ti trovi lontano da un Aereoporto di appartenenza %1. Per favore sposta il veivolo ad un aereoporto sotto il controllo alleato in modo da poter conservarlo nel garage</Italian>
         <Spanish>No puede almacenar una aeronave si no está cerca de un aeropuerto que pertenezca a %1. Por favor, mueva su aeronave a un aeropuerto bajo su control para almacenarla</Spanish>
@@ -43,6 +43,9 @@
         <Portuguese>Não podes guardar um avião enquanto não estiveres perto de um Aeroporto que pertença a %1. Por favor, move o avião para um Aeroporto que controles para o guardar</Portuguese>
         <Turkish>%1'e ait bir Havaalanının yakınında değilken bir uçağı garaja alamazsınız. Garajı kullanabilmek için lütfen uçağınızı kontrolünüz altındaki bir Havaalanına götürün</Turkish>
         <Chinesesimp>你不能在不属于 1% 的机场附近存放飞行器，移动到附近的友军机场来存取它</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Feedback_addVehicle_Attached">
+        <Original>You can't garage an object that's attached to another vehicle</Original>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_badLocation">
         <Original>You and the vehicle need to be in a %1 garrisons surroundings in order to garage a it</Original>
@@ -155,6 +158,9 @@
         <Portuguese>Não podes guardar veículos enquanto tens inimigos perto de ti</Portuguese>
         <Turkish>Düşmanlar yakınınızdayken araçları garaja koyamazsınız</Turkish>
         <Chinesesimp>你不能在敌人附近存放载具</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Feedback_addVehicle_Ammo_sold">
+        <Original>Ammo crate sold</Original>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_Fuel_sold">
         <Original>Fuel sold</Original>
@@ -521,6 +527,9 @@
         <Portuguese>Só podes aceder aos aviões a partir de uma base aérea amiga</Portuguese>
         <Turkish>Uçaklara yalnızca dost bir hava üssünden erişebilirsiniz.</Turkish>
         <Chinesesimp>你仅能在友方空军基地内存取飞行器</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_HelipadDisabled">
+        <Original>You can only access garaged helicopters from helipads</Original>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Anim">
         <Original>Customize</Original>

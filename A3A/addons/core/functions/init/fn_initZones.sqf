@@ -21,19 +21,21 @@ if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower world
 // TODO: Read additional camps from config here?
 
 (A3A_mapCamps + A3A_mapRoadblocks + seaMarkers + seaSpawn + seaAttackSpawn + spawnPoints + detectionAreas) apply {_x setMarkerAlpha 0};
-outpostsFIA = [];
-destroyedSites = [];
-garrison setVariable ["Synd_HQ", [], true];
 markersX = airportsX + resourcesX + factories + outposts + seaports + ["Synd_HQ"];
 markersX apply {
 	_x setMarkerAlpha 0;
 	spawner setVariable [_x, 2, true];
 };
 
-// Whatever
+outpostsFIA = [];
+destroyedSites = [];
 controlsX = [];
 
-// Set up dummy markers + autogen roadblocks
+sidesX setVariable ["Synd_HQ", teamPlayer, true];
+sidesX setVariable ["NATO_carrier", Occupants, true];
+sidesX setVariable ["CSAT_carrier", Invaders, true];
+
+// Set up dummy markers
 call A3A_fnc_initBases;
 
 
@@ -42,10 +44,17 @@ Info("Setting up towns");
 //Disables Towns/Villages, Names can be found in configFile >> "CfgWorlds" >> "WORLDNAME" >> "Names"
 private ["_nameX", "_roads", "_numCiv", "_roadsProv", "_roadcon", "_dmrk", "_info"];
 
-private _townPopulations = getArray (_mapInfo/"population");
+private _townPop = createHashMapFromArray getArray (_mapInfo/"population");
 private _disabledTowns = getArray (_mapInfo/"disabledTowns");
-{server setVariable [_x select 0,_x select 1]} forEach _townPopulations;
-private _hardCodedPopulation = _townPopulations isNotEqualTo [];
+private _hardCodedPop = _townPop isNotEqualTo createHashMap;
+
+private _popMult = getNumber (_mapInfo/"populationMult");
+if (_popMult == 0) then { _popMult = 1 };
+
+// Stop putting random crap in server namespace
+A3A_cityData = [true] call A3A_fnc_createNamespace;		// city -> [pop, support, accumHR]? Might have variable pop at some point
+A3A_cityPop = createHashMap;							// city -> base pop, won't change
+
 
 "(toLower getText (_x >> ""type"") in [""namecitycapital"",""namecity"",""namevillage"",""citycenter""]) &&
 !(getText (_x >> ""Name"") isEqualTo """") &&
@@ -60,9 +69,9 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	_size = [_size, 400] select (_size < 400);
 	_numCiv = 0;
 
-	if (_hardCodedPopulation) then
+	if (_hardCodedPop) then
 	{
-		_numCiv = server getVariable [_nameX, server getVariable (configName _x)]; //backwards compat to config name based pop defines
+		_numCiv = _townPop getOrDefault [_nameX, _townPop get (configName _x)]; //backwards compat to config name based pop defines
 		if (isNil "_numCiv" || {!(_numCiv isEqualType 0)}) then
 		{
             Error_1("Bad population count data for %1", _nameX);
@@ -72,6 +81,9 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	else {
 		_numCiv = (count (nearestObjects [_pos, ["house"], _size]));
 	};
+
+	// This can be used without hardcoded population
+	_numCiv = ceil (_numCiv * _popMult);
 
 	_roads = nearestTerrainObjects [_pos, ["MAIN ROAD", "ROAD", "TRACK"], _size, true, true];
 	if (count _roads > 0) then {
@@ -89,6 +101,7 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	_mrk setMarkerAlpha 0;
 	citiesX pushBack _nameX;
 	spawner setVariable [_nameX, 2, true];
+	spawner setVariable [_nameX + "_civ", 2, true];		// civ part of spawning
 
 	_dmrk = createMarkerLocal [format ["Dum%1", _nameX], _pos];
 	_dmrk setMarkerShapeLocal "ICON";
@@ -96,15 +109,34 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	_dmrk setMarkerColor colorOccupants;
 
 	sidesX setVariable [_mrk, Occupants, true];
-	_info = [_numCiv, _numVeh, 75, 0];				// initial 75% gov, 0% rebel support
-	server setVariable [_nameX, _info, true];
+
+	// ok, how much bulk HR? based on pop or sqrt pop? latter is safer...
+	private _info = [_numCiv, 0, 2 * sqrt _numCiv];				// initial full pop, 0% rebel support, 20 HR for 100 pop?
+	A3A_cityData setVariable [_nameX, _info, true];
+	A3A_cityPop set [_nameX, _numCiv];
+
 };	//find in congigs faster then find location in 25000 radius
 
-
 markersX = markersX + citiesX;
-sidesX setVariable ["Synd_HQ", teamPlayer, true];
-sidesX setVariable ["NATO_carrier", Occupants, true];
-sidesX setVariable ["CSAT_carrier", Invaders, true];
+
+
+// Sort markers by ascending size. Useful for some operations.
+private _markerSort = markersX apply { [vectorMagnitude markerSize _x, _x] };
+_markerSort sort true;
+markersX = _markerSort apply { _x#1 };
+
+// Expected troop counts
+A3A_garrisonSize = createHashMap;
+{
+    private _garrSize = [_x, true] call A3A_fnc_garrisonSize;        // TODO: replace all uses of this function and then sort it out?
+    A3A_garrisonSize set [_x, _garrSize];
+} forEach (markersX - ["Synd_HQ"]);
+
+// Initialize static places, need the sorting for this
+[markersX - citiesX - ["Synd_HQ"]] call A3A_fnc_initStaticPlaces;
+
+// And now set up the max/par/index values per type (needs troop counts)
+[markersX - ["Synd_HQ"]] call A3A_fnc_initSpawnPlaceStats;
 
 
 Info("Setting up banks");
@@ -126,16 +158,13 @@ if (_posBank isEqualTo []) then {banks = nearestObjects [[worldSize/2, worldSize
 
 Info("Setting up antennas");
 
-antennasDead = [];
-mrkAntennas = [];
-antennas = [];
+A3A_mrkAntennas = [];
+A3A_antennas = [];
 private _antennatypes = ["Land_TTowerBig_1_F", "Land_TTowerBig_2_F", "Land_Communication_F",
 "Land_Vysilac_FM","Land_A_TVTower_base","Land_Telek1", "Land_vn_tower_signal_01","land_gm_radio_antenna_01"];
-private ["_antenna", "_mrkFinal", "_antennaProv"];
 
 private _posAntennas = getArray (_mapInfo/"antennas");
 private _blacklistIndex = getArray (_mapInfo/"antennasBlacklistIndex");
-private _hardCodedAntennas = _posAntennas isNotEqualTo [];
 
 // Land_A_TVTower_base can't be destroyed, Land_Communication_F and Land_Vysilac_FM are not replaced with "Ruins" when destroyed.
 // This causes issues with persistent load and rebuild scripts, so we replace those with antennas that work properly.
@@ -148,7 +177,7 @@ private _replaceBadAntenna = {
 			private _otherSections = nearestObjects [_antenna, ["Land_A_TVTower_Mid", "Land_A_TVTower_Top"], 200];
 			{ hideObjectGlobal _x; } forEach _otherSections;
 		};
-		private _antennaPos = getPos _antenna;
+		private _antennaPos = getPosATL _antenna;
 		_antennaPos set [2, 0];
 		private _antennaClass = if (worldName == "chernarus_summer") then { "Land_Telek1" } else { "Land_TTowerBig_2_F" };
 		_antenna = createVehicle [_antennaClass, _antennaPos, [], 0, "NONE"];
@@ -156,97 +185,47 @@ private _replaceBadAntenna = {
 	_antenna;
 };
 
-if (!_hardCodedAntennas) then {
-    antennas = nearestObjects [[worldSize /2, worldSize/2], _antennatypes, worldSize];
-
-    private _replacedAntennas = [];
-    { _replacedAntennas pushBack ([_x] call _replaceBadAntenna); } forEach antennas;
-    antennas = _replacedAntennas;
-
-    antennas apply {
-        _mrkFinal = createMarker [format ["Ant%1", mapGridPosition _x], position _x];
-        _mrkFinal setMarkerShape "ICON";
-        _mrkFinal setMarkerType "loc_Transmitter";
-        _mrkFinal setMarkerColor "ColorBlack";
-        _mrkFinal setMarkerText "Radio Tower";
-        mrkAntennas pushBack _mrkFinal;
-        _x addEventHandler [
-            "Killed",
-            {
-                _antenna = _this select 0;
-                _antenna removeAllEventHandlers "Killed";
-
-                citiesX apply {
-                    if ([antennas,_x] call BIS_fnc_nearestPosition == _antenna) then {
-                        [_x, false] spawn A3A_fnc_blackout;
-                    };
-                };
-
-                _mrk = [mrkAntennas, _antenna] call BIS_fnc_nearestPosition;
-                antennas = antennas - [_antenna];
-                antennasDead pushBack _antenna;
-                deleteMarker _mrk;
-                publicVariable "antennas";
-                publicVariable "antennasDead";
-                ["TaskSucceeded", ["", "Radio Tower Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
-                ["TaskFailed", ["", "Radio Tower Destroyed"]] remoteExec ["BIS_fnc_showNotification", Occupants];
-            }
-        ];
-    };
-};
-
-if (debug) then {
-    Debug("Radio Tower built.");
-    Debug("Finding broken Radio Towers.");
-};
-if (count _posAntennas > 0) then {
-	for "_i" from 0 to (count _posAntennas - 1) do {
-		_antennaProv = nearestObjects [_posAntennas select _i, _antennaTypes, 35];
-
-		if (count _antennaProv > 0) then {
-			_antenna = _antennaProv select 0;
-
-			if (_i in _blacklistIndex) then {
-				_antenna setdamage 1;
-			} else {
-				_antenna = ([_antenna] call _replaceBadAntenna);
-				antennas pushBack _antenna;
-				_mrkFinal = createMarker [format ["Ant%1", mapGridPosition _antenna], _posAntennas select _i];
-				_mrkFinal setMarkerShape "ICON";
-				_mrkFinal setMarkerType "loc_Transmitter";
-				_mrkFinal setMarkerColor "ColorBlack";
-				_mrkFinal setMarkerText "Radio Tower";
-				mrkAntennas pushBack _mrkFinal;
-
-				_antenna addEventHandler [
-					"Killed",
-					{
-						_antenna = _this select 0;
-						_antenna removeAllEventHandlers "Killed";
-
-						citiesX apply {
-							if ([antennas, _x] call BIS_fnc_nearestPosition == _antenna) then {
-								[_x, false] spawn A3A_fnc_blackout
-							};
-						};
-
-						_mrk = [mrkAntennas, _antenna] call BIS_fnc_nearestPosition;
-						antennas = antennas - [_antenna];
-						antennasDead pushBack  _antenna;
-						deleteMarker _mrk;
-						publicVariable "antennas";
-						publicVariable "antennasDead";
-						["TaskSucceeded", ["", "Radio Tower Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
-						["TaskFailed", ["", "Radio Tower Destroyed"]] remoteExec ["BIS_fnc_showNotification", Occupants];
-					}
-				];
-			};
-		};
+{
+	private _antenna = nearestObjects [_x, _antennaTypes, 35, true] select 0;
+	if (isNil "_antenna") then {
+		Error_1("No antennas found at %1", _x);
+		continue;
 	};
+	if (_forEachIndex in _blacklistIndex) then {
+		_antenna setDamage [1, false];
+	} else {
+		A3A_antennas pushBack (_antenna call _replaceBadAntenna);
+	};
+} forEach _posAntennas;
+
+if (_posAntennas isEqualTo []) then {
+    private _antennas = nearestObjects [[worldSize /2, worldSize/2], _antennatypes, worldSize];
+    A3A_antennas = _antennas apply { _x call _replaceBadAntenna };
 };
-if (debug) then {
-	Error("Broken Radio Towers identified.");
-};
+
+{
+	_mrkFinal = createMarkerLocal [format ["Ant%1", mapGridPosition _x], getPosATL _x];
+	_mrkFinal setMarkerShapeLocal "ICON";
+	_mrkFinal setMarkerTypeLocal "loc_Transmitter";
+	_mrkFinal setMarkerColorLocal "ColorBlack";
+	_mrkFinal setMarkerText "Radio Tower";
+	A3A_mrkAntennas pushBack _mrkFinal;
+} forEach A3A_antennas;
+
+
+// Create marker -> antenna and antenna netID -> marker mappings
+A3A_antennaMap = createHashMap;
+private _siteMarkers = airportsX + resourcesX + factories + outposts + seaports;		// cities should not be associated with antennas
+{
+	private _nearMarker = [_siteMarkers, _x] call BIS_fnc_nearestPosition;
+	A3A_antennaMap set [_nearMarker, _x];				// gives us a fast way to lookup whether an outpost owns a radio tower
+	A3A_antennaMap set [netId _x, _nearMarker];			// To find what side owns a radio tower
+} forEach A3A_antennas;
+
+{
+	private _nearAnt = [A3A_antennas, markerPos _x] call BIS_fnc_nearestPosition;
+	A3A_antennaMap set [_x, _nearAnt];					// To determine which antenna influences a city
+} forEach citiesX;
 
 
 // Make list of markers that don't have a proper road nearby
@@ -269,18 +248,16 @@ if( _fuelStationTypes isEqualTo [] ) then {_fuelStationTypes = ["Land_FuelStatio
 A3A_fuelStationTypes = _fuelStationTypes;
 A3A_fuelStations = nearestObjects [[worldSize/2, worldSize/2], _fuelStationTypes, worldSize];
 A3A_fuelStations apply {
-	_mrkFinalFuel = createMarker [format ["Ant%1", mapGridPosition _x], position _x];
-	_mrkFinalFuel setMarkerShape "ICON";
-	_mrkFinalFuel setMarkerType "loc_Fuelstation";
-	_mrkFinalFuel setMarkerColor "ColorWhite";
-	_mrkFinalFuel setMarkerText "Fuel station";
+	_mrkFinalFuel = createMarkerLocal [format ["Fuel%1", mapGridPosition _x], position _x];
+	_mrkFinalFuel setMarkerShapeLocal "ICON";
+	_mrkFinalFuel setMarkerTypeLocal "loc_Fuelstation";
+	_mrkFinalFuel setMarkerColorLocal "ColorWhite";
+	_mrkFinalFuel setMarkerTextLocal "Fuel station";
 	_mrkFinalFuel setMarkerAlpha 0.75;
 	if(A3A_hasACE) then {
 		[_x, 250] call ace_refuel_fnc_setFuel; // only call on fuels that are not blacklisted and first zone init.
 	};
 };
-
-
 
 publicVariable "blackListDest";
 publicVariable "markersX";
@@ -295,15 +272,16 @@ publicVariable "forcedSpawn";
 publicVariable "outpostsFIA";
 publicVariable "seaMarkers";
 publicVariable "spawnPoints";
-publicVariable "antennas";
-publicVariable "antennasDead";
-publicVariable "mrkAntennas";
 publicVariable "banks";
 publicVariable "seaSpawn";
 publicVariable "seaAttackSpawn";
 publicVariable "detectionAreas";
+publicVariable "A3A_antennas";
 publicvariable "A3A_fuelStations";
 publicvariable "A3A_fuelStationTypes";
+publicVariable "A3A_antennaMap";
+publicVariable "A3A_cityPop";
+publicVariable "A3A_cityData";
 
 initZonesDone = true;				// signal headless clients that they can start nav init
 publicVariable "initZonesDone";

@@ -20,6 +20,7 @@ class CfgVehicles
 	class a3a_lib_Zis6_BOX : LIB_Zis6_Parm {
 		displayName = "ZIS-5V (Box)";
 		transportRepair = 0;
+		ace_repair_canRepair = 0;
 		typicalCargo[] = {"LIB_FFI_LAT_Soldier"};
 		faction = "LIB_FFI";
 		side = 2;
@@ -37,9 +38,17 @@ class CfgVehicles
 	class HMG_02_high_base_F;
 	class B_G_HMG_02_high_F : HMG_02_high_base_F{
 		class AnimationSources;
+		class Turrets;
 	};
-	class a3a_hmg_02_high : B_G_HMG_02_high_F{
-		displayName = ".50 M2HB (Raised)";
+	class a3a_hmg_02_high_base : B_G_HMG_02_high_F{
+		scope = 0;
+		class Turrets : Turrets{
+			class MainTurret;
+		};
+	};
+	class a3a_hmg_02_high : a3a_hmg_02_high_base{
+		scope = 2;
+		displayName = ".50 M2HB (AA Tripod)";
 		class AnimationSources : AnimationSources{
 			class Hide_Shield {
 				animPeriod = 0.01;
@@ -52,6 +61,32 @@ class CfgVehicles
 				initPhase = 1;
 				source = "user";
 				useSource = 1;
+			};
+			class Revolving {
+				source = "revolving";
+				weapon = "LIB_M2";
+			};
+			class muzzle_source {
+				source = "reload";
+				weapon = "LIB_M2";
+			};
+			class muzzle_source_rot {
+				source = "ammorandom";
+				weapon = "LIB_M2";
+			};
+			class ReloadAnim {
+				source = "reload";
+				weapon = "LIB_M2";
+			};
+			class ReloadMagazine {
+				source = "reloadmagazine";
+				weapon = "LIB_M2";
+			};
+		};
+		class Turrets : Turrets{
+			class MainTurret : MainTurret{
+				magazines[] = {"LIB_100Rnd_127x99_M2","LIB_100Rnd_127x99_M2","LIB_100Rnd_127x99_M2","LIB_100Rnd_127x99_M2"};
+				weapons[] = {"LIB_M2"};
 			};
 		};
 		animationList[] ={};
