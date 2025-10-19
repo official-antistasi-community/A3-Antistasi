@@ -60,7 +60,7 @@ switch (_mode) do
 			_icon = _display displayCtrl _icon;
 			private _currentCount = {_x getVariable ["A3A_Role", "none"] == _roleName} count allPlayers;
 			private _maxCount = [_roleName] call FUNCMAIN(getRoleCap);
-			if (_currentCount < _maxCount || {_roleName == "rifleman" || {_roleName == "commander" && {theBoss isEqualTo objNull}}}) then {
+			if (_currentCount < _maxCount || {_roleName == "rifleman" || {_roleName == "commander" && {isNull theBoss}}}) then {
 				_icon ctrlSetTextColor ([A3A_COLOR_WHITE] call FUNC(configColorToArray));
             	_icon ctrlSetTooltip "";
 			} else {
@@ -97,7 +97,7 @@ switch (_mode) do
 				if (player == theBoss) then {
 					_fullSlotsText = localize "STR_antistasi_dialogs_roleselect_slotsCommanderSelf";
 				} else {
-					if (theBoss isEqualTo objNull) then {
+					if (isNull theBoss) then {
 						_fullSlotsText = localize "STR_antistasi_dialogs_roleselect_slotsCommanderNone";
 					} else {
 						_fullSlotsText = format [localize "STR_antistasi_dialogs_roleselect_slotsCommander",name theBoss];

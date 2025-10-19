@@ -69,8 +69,8 @@ switch (_mode) do
         _warLevel ctrlSetText ([localize "STR_antistasi_dialogs_hq_war_level", str tierWar] joinString ": ");
         _occFlag ctrlSetText (Faction(Occupants) get "flagTexture");
         _invFlag ctrlSetText (Faction(Invaders) get "flagTexture");
-        _occDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Occ_template" >> "lore");
-        _invDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Inv_template" >> "lore");
+        private _occDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Occ_template" >> "lore");
+        private _invDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Inv_template" >> "lore");
         _occDescription ctrlSetStructuredText parseText _occDesc;
         _invDescription ctrlSetStructuredText parseText _invDesc;
         
@@ -97,7 +97,7 @@ switch (_mode) do
         _occKeys ctrlSetText format [localize "STR_antistasi_dialogs_main_warstatus_radioKeys", occRadioKeys];
         _invKeys ctrlSetText format [localize "STR_antistasi_dialogs_main_warstatus_radioKeys", invRadioKeys];
         _rebFlag ctrlSetText (Faction(teamPlayer) get "flagTexture");
-        _rebDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Reb_template" >> "lore");
+        private _rebDesc = getText (configFile >> "A3A" >> "Templates" >> missionNamespace getVariable "A3A_Reb_template" >> "lore");
         _rebDescription ctrlSetStructuredText parseText _rebDesc;
         _rebMoney ctrlSetText format [localize "STR_antistasi_dialogs_main_warstatus_money", str (server getVariable "resourcesFIA")];
         _rebHR ctrlSetText format [localize "STR_antistasi_dialogs_main_warstatus_HR", str (server getVariable "HR")];
