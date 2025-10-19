@@ -347,9 +347,6 @@ if (A3A_hasACE) then {call A3A_fnc_initACE};
 
 [allCurators] call A3A_fnc_initZeusLogging;
 
-A3A_drawBuilderIcons = true;
-A3A_showBuilderActions = true;
-
 A3A_aliveTime = time;
 
 initClientDone = true;
