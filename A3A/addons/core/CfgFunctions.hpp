@@ -294,7 +294,6 @@ class CfgFunctions
             class loadPreviousSession {};
             class mapInfoDialog {};
             class mineDialog {};
-            class persistentSave {};
             class skiptime {};
             class squadOptions {};
             class squadRecruit {};
@@ -421,6 +420,7 @@ class CfgFunctions
             class searchIntelOnLeader {};
             class selectIntel {};
             class showIntel {};
+            class updateIntelFeed {};
         };
 
         class keybinds {
