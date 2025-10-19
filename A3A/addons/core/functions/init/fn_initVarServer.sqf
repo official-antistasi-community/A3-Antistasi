@@ -109,10 +109,6 @@ DECLARE_SERVER_VAR(A3A_unbuiltObjects, []);
 //We shouldn't need to sync these.
 Info("Setting server only variables");
 
-// horrible naming
-prestigeOPFOR = [75, 50] select cadetMode;												//Initial % support for NATO on each city
-prestigeBLUFOR = 0;																	//Initial % FIA support on each city
-
 // Don't need to be distributed
 occRadioKeys = 0;
 invRadioKeys = 0;
@@ -157,17 +153,12 @@ A3A_cityTaskTimer = createHashMap;			// maybe temporary. List of times after whi
 
 // These are silly, should be nil/true and local-defined only
 resourcesIsChanging = false;
-savingServer = true;					// lock out saves until this is changed
-
 prestigeIsChanging = false;
-
-movingMarker = false;
-markersChanging = [];
 
 playerHasBeenPvP = [];
 
 A3A_playerSaveData = createHashMap;
-destroyedBuildings = [];		// synced only on join, to avoid spam on change
+A3A_destroyedBuildings = [];		// server side only now
 
 testingTimerIsActive = false;
 
@@ -569,7 +560,13 @@ A3A_validVehicles set [civilian, createHashMapFromArray [["civCar", arrayCivVeh]
 //and add new entries to the bottom of the list.
 if (A3A_hasACE) then {
 	[] call A3A_fnc_aceModCompat;
+
+	// has an unintended hard dependency on ace. will be fixed with cigs-rewrite 3.0.0.
+	if (isClass (configFile >> "CfgPatches" >> "cigs_core")) then {
+	    FactionGet(reb,"initialRebelEquipment") append ( [] call cigs_core_fnc_getAllItems );
+	};
 };
+
 
 ////////////////////////////////////
 //     ACRE ITEM MODIFICATIONS   ///

@@ -14,6 +14,12 @@
     ["UK3CB_AAF_B_M1117", ["cost", 80], ["threat", 100]],
     ["UK3CB_ANA_B_M1117", ["cost", 80], ["threat", 100]],
     ["UK3CB_TKA_O_GAZ_Vodnik_Cannon", ["cost", 80], ["threat", 100]],
+	
+	
+    ["UK3CB_CW_SOV_O_EARLY_T72A", ["cost", 230], ["threat", 300]],
+
+    // Trash tank
+    ["UK3CB_ARD_O_T34", ["cost", 150], ["threat", 200]],
 
     // Trash planes
     ["UK3CB_AAF_B_L39_PYLON", ["cost", 150]],
@@ -22,6 +28,7 @@
     ["UK3CB_LDF_B_L39_PYLON", ["cost", 150]],
     ["UK3CB_TKA_B_L39_PYLON", ["cost", 150]],
     ["UK3CB_ADA_I_L39_PYLON", ["cost", 150]],
+    ["UK3CB_CW_SOV_O_EARLY_LI2_ARMED", ["cost", 75]],
     ["rhs_l159_cdf_b_CDF_CAP", ["cost", 150]],
     ["RHSGREF_A29B_HIDF", ["cost", 120]],
     ["UK3CB_AAF_B_T28Trojan_CAS", ["cost", 120]],

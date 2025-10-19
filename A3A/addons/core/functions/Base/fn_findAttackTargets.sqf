@@ -65,9 +65,6 @@ private _maxThreatDist = distanceForAirAttack + 1000;
 } forEach (markersX + controlsX + outpostsFIA);
 
 
-// use these for target value determination
-private _radioTowers = antennas + antennasDead;
-
 private _lowAir = Faction(_side) getOrDefault ["attributeLowAir", false];
 
 // Build list of friendly bases with ground attack capability
@@ -98,7 +95,7 @@ private _finalWeights = [];
         _baseValue * (tierWar / 5) / (1 + A3A_punishmentDefBuff);                  // Invaders more likely to care at high tiers but devalued by failed punishments
     } else {
         private _baseValue = call {
-            if (_x in outposts) exitWith { [20, 25] select (count (_radioTowers inAreaArray _x) > 0) };
+            if (_x in outposts) exitWith { [20, 25] select (_x in A3A_antennaMap) };
             if (_x == "Synd_HQ") exitWith { 60 };
             if (_x in seaports) exitWith { 20 };
             if (_x in airportsX) exitWith { [60, 90] select (count _possibleStartBases == 1) };        // If down to carrier, more important to take an airfield
