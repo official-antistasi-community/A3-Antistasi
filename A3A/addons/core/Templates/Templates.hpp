@@ -1661,6 +1661,60 @@ class Templates
         shortName = "CIV";
         lore = $STR_A3A_templates_IFA_CIV_PL;
     };
+    // ***************************** EAW with IFA *****************************
+    class EAW_Base : IFA_Base
+    {
+        requiredAddons[] = {"IFA3_Core", "EAW_Weapons2"};
+        basepath = QPATHTOFOLDER(Templates\Templates\EAW);
+        logo = "";
+        priority = 70;
+        lore = "";
+    };
+    class EAW_IJA : EAW_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3\Data_F\Flags\Flag_red_CO.paa";
+        name = "EAW IJA";
+        file = "EAW_AI_IJA";
+        shortName = "EAW IJA";
+        lore = "Imperial Japanese Army";
+    };
+    class EAW_NRA : EAW_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\Data_F\Flags\Flag_blue_CO.paa";
+        name = "EAW NRA";
+        file = "EAW_AI_NRA";
+        shortName = "EAW NRA";
+        lore = "National Revolutionary Army";
+    };
+    class EAW_PLA : EAW_Base
+    {
+        side = "Inv";
+        flagTexture = "\x\A3A\addons\core\Pictures\Flags\ifa_sov.paa";
+        name = "EAW PLA";
+        file = "EAW_AI_PLA";
+        shortName = "EAW PLA";
+        lore = "People's Liberation Army";
+    };
+    class EAW_Reb : EAW_Base
+    {
+        side = "Reb";
+        flagTexture = "\A3\Data_F\Flags\Flag_green_CO.paa";
+        name = "EAW Rebel";
+        file = "EAW_Reb";
+        shortName = "EAW REB";
+        lore = "Local Independence Movement";
+    };
+    class EAW_Civ : EAW_Base
+    {
+        side = "Civ";
+        flagTexture = "\A3\Data_F\Flags\Flag_green_CO.paa";
+        name = "EAW Civilians";
+        file = "EAW_Civ";
+        shortName = "EAW CIV";
+        lore = "East Asian Civilians";
+    };
     // ***************************** SPE with IFA *****************************
 
     class SPE_IFA_Base

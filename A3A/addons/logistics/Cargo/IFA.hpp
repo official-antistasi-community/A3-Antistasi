@@ -27,8 +27,8 @@ class WW2_Assets_m_Weapons_Mortars_m_IF_GrWr34_p3d : TRIPLES(ADDON,Cargo,Base)
 class WW2_Assets_m_Weapons_Ammoboxes_m_WW2_Cle_Container_p3d : TRIPLES(ADDON,Cargo,Base)
 {
     offset[] = {0,0,0};
-    rotation[] = {90,0,0};
-    size = 2;
+    rotation[] = {1,0,0};
+    size = 3;
     recoil = 0;
 };
 class WW2_Assets_m_Weapons_Ammoboxes_m_IF_GER_Weapons_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -63,14 +63,14 @@ class WW2_Assets_m_Weapons_Ammoboxes_m_IF_GER_Weapons_Big_p3d : TRIPLES(ADDON,Ca
 {
     offset[] = {0,0.5,0};
     rotation[] = {0,0,0};
-    size = 2;
+    size = 3;
     recoil = 0;
 };
 class WW2_Assets_m_Weapons_Ammoboxes_m_IF_SU_Weapons_Big_p3d : TRIPLES(ADDON,Cargo,Base)
 {
     offset[] = {0.3,0,0};
     rotation[] = {0,0,0};
-    size = 2;
+    size = 3;
     recoil = 0;
 };
 
