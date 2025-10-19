@@ -18,15 +18,15 @@
 ["equipmentBox", "Box_NATO_Equip_F"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
 
 ["vehiclesBasic", ["O_Quadbike_01_F"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["a3a_Offroad_01_green_F", "B_AMF_VAB_ULTIMA_X8_F"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["amf_pvp_01_mag_CE_f", "AMF_VBL_CE_762_01_F", "AMF_VBL_CE_127_01_F", "amf_VBAE_01_CE_f", "AMF_VBMR_DEF_CE", "AMF_VBMR_HMG_CE", "AMF_VBMR_COMMANDEMENT_CE", "AMF_VBMR_VOA_CE"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["B_AMF_VAB_ULTIMA_X8_F"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["amf_VBAE_01_CE_f", "amf_VBAE_02_CE_f", "amf_VBAE_03_CE_f", "AMF_VBMR_L_CE_01"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["AMF_GBC180_PERS_02"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["AMF_GBC180_ViV_02", "AMF_GBC180_PLATEAU_02"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["AMF_GBC180_AmmoTruck_02"]] call _fnc_saveToTemplate;
-["vehiclesRepairTrucks", ["B_Truck_01_Repair_F"]] call _fnc_saveToTemplate;
-["vehiclesFuelTrucks", ["B_Truck_01_fuel_F"]] call _fnc_saveToTemplate;
+["vehiclesRepairTrucks", ["AMF_GBC180_MECA_01"]] call _fnc_saveToTemplate;
+["vehiclesFuelTrucks", ["CUP_B_MTVR_Refuel_USA"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["AMF_VBMR_SAN_CE"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["AMF_VBMR_ARX30_CE"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["AMF_VBMR_ARX30_CE", "AMF_VBMR_MMP_CE"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["AMF_VBCI_CE_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", ["B_AMF_AMX10_RCR_01_F", "B_AMF_AMX10_RCR_SEPAR_01_F", "AMF_EBRC_CE_01"]] call _fnc_saveToTemplate;
@@ -34,7 +34,7 @@
 ["vehiclesAA", ["AMF_VBMR_MISTRAL_CE"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
-["vehiclesGunBoats", ["CUP_B_RHIB_USMC"]] call _fnc_saveToTemplate;
+["vehiclesGunBoats", ["CUP_B_RHIB_USMC", "CUP_B_RHIB2Turret_USMC"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["AMF_RAFALE_M_01_F"]] call _fnc_saveToTemplate;
@@ -46,20 +46,20 @@
 ["vehiclesHelisLightAttack", ["AMF_gazelle_minigun_f"]] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", ["AMF_TIGRE_01"]] call _fnc_saveToTemplate;
 
-["vehiclesArtillery", ["amf_CAESAR_01_CE_f"]] call _fnc_saveToTemplate;
-["magazines", createHashMapFromArray [["amf_CAESAR_01_CE_f", ["CUP_12Rnd_MLRS_HE"]]]] call _fnc_saveToTemplate;
+["vehiclesArtillery", ["CUP_B_M119_US"]] call _fnc_saveToTemplate;
+["magazines", createHashMapFromArray [["CUP_B_M119_US", ["CUP_30Rnd_105mmHE_M119_M"]]]] call _fnc_saveToTemplate;
 
 ["uavsAttack", []] call _fnc_saveToTemplate;
 ["uavsPortable", ["I_UAV_01_F"]] call _fnc_saveToTemplate;
 
-["vehiclesMilitiaLightArmed", ["AMF_VB2L_CE_762_01_F"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaTrucks", ["B_G_Van_02_transport_F"]] call _fnc_saveToTemplate;
-["vehiclesMilitiaCars", ["a3a_Offroad_01_green_F"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["amf_pvp_01_top_CE_f"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaTrucks", ["AMF_GBC180_PERS_01"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaCars", ["amf_pvp_01_mag_CE_f"]] call _fnc_saveToTemplate;
 ["vehiclesPolice", ["B_GEN_Offroad_01_gen_F"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["I_G_HMG_02_high_F"]] call _fnc_saveToTemplate;
+["staticMGs", ["CUP_B_M2StaticMG_US"]] call _fnc_saveToTemplate;
 ["staticAT", ["AMF_WiredGuided_mmp_F", "AMF_TVGuided_mmp_F"]] call _fnc_saveToTemplate;
-["staticAA", ["B_static_AA_F"]] call _fnc_saveToTemplate;
+["staticAA", ["CUP_B_CUP_Stinger_AA_pod_US", "CUP_B_RBS70_ACR"]] call _fnc_saveToTemplate;
 
 ["staticMortars", ["CUP_B_M252_US"]] call _fnc_saveToTemplate;
 ["mortarMagazineHE", "8Rnd_82mm_Mo_shells"] call _fnc_saveToTemplate;
