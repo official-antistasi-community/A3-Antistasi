@@ -54,6 +54,11 @@ if (str (_display) != "no display") then
 	_costs = 2*_crewCost + ([(FactionGet(reb,"vehiclesAT")) # 0] call A3A_fnc_vehiclePrice);
 	_ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_dialogs_squadOptions",_costs,_costHR];
 
+	_ChildControl = _display displayCtrl 110;
+	_costHR = 2;
+	_costs = 2*_crewCost + ([(FactionGet(reb,"vehiclesTruck")) # 0] call A3A_fnc_vehiclePrice) + ([(FactionGet(reb,"staticAA")) # 0] call A3A_fnc_vehiclePrice);
+	_ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_dialogs_squadOptions",_costs,_costHR];
+
 	_ChildControl = _display displayCtrl 111;
 	_costHR = 2;
 	_costs = 2*_crewCost + ([(FactionGet(reb,"staticMortars")) # 0] call A3A_fnc_vehiclePrice);

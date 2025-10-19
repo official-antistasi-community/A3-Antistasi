@@ -18,6 +18,6 @@ if (_remainingTime > 0) exitWith {
 switch (_access) do {
     case ("garage"): {createDialog 'HR_GRG_VehicleSelect'};
     case ("buy"): {createDialog "A3A_BuyVehicleDialog"};
-    case ("unit"): {[] spawn A3A_fnc_unit_recruit;};
+    case ("unit"): {createDialog "A3A_RecruitDialog"};
 };
 

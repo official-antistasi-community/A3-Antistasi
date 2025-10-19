@@ -7,8 +7,8 @@
     ["UK3CB_C_SUV", ["rebCost", 350]], //No Cargo 6 Seats
     ["UK3CB_C_Pickup", ["rebCost", 400]], //Cargo, 9 Seats
     ["UK3CB_C_Hilux_Open", ["rebCost", 400]],//Cargo, 8 Seats
-	  ["UK3CB_C_S1203", ["rebCost", 250]], 
-	  ["UK3CB_C_MMT", ["rebCost", 25]], 
+    ["UK3CB_C_S1203", ["rebCost", 250]], 
+    ["UK3CB_C_MMT", ["rebCost", 25]], 
   
     //Civ Trucks
     ["UK3CB_TKC_C_Kamaz_Open", ["rebCost", 800]], //17 Seats 80 Speed
