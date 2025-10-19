@@ -1807,6 +1807,27 @@ class Templates
         lore = $STR_A3A_templates_lore_FIA;
     };
 
+    // ***************************** TMT *****************************
+
+    class TMT_Base
+    {
+        requiredAddons[] = {"TMT_Core","CUP_AirVehicles_Core"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\TMT);
+        logo = "\TMT\TMT_Core\Data\TMT_Logo.paa";
+        priority = 80;
+    };
+
+     class TMT_Turkish_Army : TMT_Base
+    {
+        side = "Occ";
+        flagTexture = "TMT\TMT_Core\Data\TR_ca.paa";
+        name = "TMT Turkish Army";
+        file = "TMT_AI_Turkish_Army";
+        climate[] = {};
+        shortName = "Turkish Army";
+        lore = "";
+    };
+  
      // ***************************** CSLA *****************************
 
     class CSLA_Base
@@ -1896,6 +1917,7 @@ class Templates
         climate[] = {"Temperate"};
         shortName = "FIA";
     };
+  
     // **************** PRACS *****************
 
     class PRACS_RACS_Base
