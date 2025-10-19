@@ -1258,7 +1258,7 @@ class Templates
         shortName = "CSAT";
         lore = $STR_A3A_templates_lore_CSAT;
     };
-        class CUP_NATO : CUP_Base
+    class CUP_NATO : CUP_Base
     {
         side = "Inv";
         flagTexture = "\A3\Data_F\Flags\Flag_NATO_CO.paa";
@@ -1268,7 +1268,7 @@ class Templates
         shortName = "NATO";
         lore = $STR_A3A_templates_lore_NATO;
     };
-        class CUP_VDV_Temperate : CUP_Base
+    class CUP_VDV_Temperate : CUP_Base
     {
         side = "Inv"; 
         flagTexture = "\CUP\BaseConfigs\CUP_BaseConfigs\data\Flags\flag_rus_co.paa"; 
