@@ -3,10 +3,12 @@ class CfgFunctions {
     class ADDON {
         class GUI {
             file = QPATHTOFOLDER(functions\GUI);
+            class adminCopyUIDDialog {};
             class adminTab {};
             class aiManagementTab {};
             class airSupportTab {};
             class arsenalLimitsDialog {};
+            class buildContextMenu {};
             class buyVehicleDialog {};
             class buyVehicleTabs {};
             class commanderTab {};
@@ -18,6 +20,8 @@ class CfgFunctions {
             class fireMissionEH {};
             class getGroupInfo {};
             class getGroupVehicle {};
+            class getLocationMarkerName {};
+            class getLocationMarkerType {};
             class getVehicleCrewCount {};
             class hqDialog {};
             class mainDialog {};
@@ -32,6 +36,7 @@ class CfgFunctions {
             class requestMissionDialog {};
             class setUpPlacerHints {};
             class teamLeaderRTSPlacerDialog {};
+            class warStatusTab {};
         };
 
         class SetupGUI {
@@ -42,6 +47,7 @@ class CfgFunctions {
             class setupParamsTab {};
             class setupConfirmDialog {};
             class setupHQPosDialog {};
+            class setupTransferDialog {};
         };
 
         class controlsHelpers {
@@ -54,6 +60,31 @@ class CfgFunctions {
         class objectHelpers {
             file = QPATHTOFOLDER(functions\objectHelpers);
             class sizeOf {};
+        };
+
+        class roleSelect {
+            file = QPATHTOFOLDER(functions\roleSelect);
+            class roleSelectDialog {};
+        };
+
+        class gunShop {
+            file = QPATHTOFOLDER(functions\gunShop);
+            class addItemToBlackList {};
+            class addToCart {};
+            class blackListedItems {};
+            class calculateItemPrice {};
+            class checkOut {};
+            class createFilters {};
+            class createGunShopTab {};
+            class fetchGunShopLists {};
+            class gatherGunShopLists {};
+            class gunShop {};
+            class handleSearchEvents {};
+            class lcgRand {};
+            class updateCartNumber{};
+            class updateCartPositions {};
+            class updateFilters {};
+            class updateTotalCost {};
         };
     };
 };

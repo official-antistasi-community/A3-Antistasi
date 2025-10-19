@@ -23,6 +23,9 @@ A3A_supportStrikes = [];
 // _target is [unit, position] array, or [] for free
 A3A_activeSupports = [];
 
+// Current HQ detection radius
+call A3A_fnc_calcBuildingReveal;
+
 // Interfaces:
 // Avail func: _weight = [_target, _side, _maxSpend?] call _availFunc;
 // Create func:  _resCost = [_suppname, _side, _resPool, _maxSpend, _target, _targpos, _reveal, _delay] call _createFunc;
@@ -43,7 +46,8 @@ private _initData = [
     ["QRFAIR",        "TROOPS", 0.5, 0.1,   0,   0,  "", ""],
     ["CARPETBOMBS",     "AREA", 0.5, 0.1, 200,   0, "u", "vehiclesPlanesCAS"],            // balanced against airstrikes
     ["SAM",           "TARGET", 1.0, 1.0,   0, 100,  "", ""],                             // balanced against ASF
-    ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""]
+    ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""],
+    ["UAV",             "AREA", 0.0, 0.0,   0,   0,  "", "uavsAttack"]                    // Not used for support calls 
 //    ["GUNSHIP",    ["AREA",   0.2,  50,   0]],                 // uh. Does AREA work for this? Only lasts 5 minutes so maybe...
 ];
 
@@ -98,22 +102,19 @@ A3A_supportMarkerTypes = [];     // format [markerName, markerType, hasRadio, de
 { A3A_supportMarkerTypes pushBack [_x, "Outpost", false, 0.6] } forEach outposts;
 { A3A_supportMarkerTypes pushBack [_x, "Resource", false, 0.4] } forEach resourcesX;
 { A3A_supportMarkerTypes pushBack [_x, "Factory", false, 0.5] } forEach factories;
-{ A3A_supportMarkerTypes pushBack [_x, "Town", false, 0.3] } forEach citiesX;
+{
+    private _locSpend = 0.15 + 0.015 * sqrt (A3A_cityPop get _x);
+    A3A_supportMarkerTypes pushBack [_x, "Town", false, _locSpend];
+} forEach citiesX;
 {
     _x pushBack (0.5 + random 0.5);         // current random defence multiplier
     private _pos = markerPos (_x#0);
     A3A_supportMarkersXYI pushBack [_pos#0, _pos#1, _forEachIndex];
 } forEach A3A_supportMarkerTypes;
 
-// Find nearest marker for each radio tower and mark it in markersDetail
+// Increase defenceMul for markers with radio towers
 {
-    private _closeMrk = A3A_supportMarkersXYI inAreaArray [getPosATL _x, 500, 500];
-    if (_closeMrk isEqualTo []) then { continue };
-    private _nearest = [_closeMrk, _x] call BIS_fnc_nearestPosition;
-    (A3A_supportMarkerTypes select (_nearest#2)) set [2, true];          // mark as having radio tower
-} forEach (antennas + antennasDead);        // ugh
-
-{
-    // increase defenceMul if it's a radio tower
-    if (_x#2) then { _x set [3, (_x#3) + RADIO_TOWER_BONUS] };
+    if (_x#1 == "Town" or !(_x#0 in A3A_antennaMap)) then { continue };
+    _x set [2, true];
+    _x set [3, (_x#3) + RADIO_TOWER_BONUS];
 } forEach A3A_supportMarkerTypes;

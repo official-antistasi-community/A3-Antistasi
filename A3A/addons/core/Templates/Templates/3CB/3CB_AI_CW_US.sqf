@@ -32,7 +32,7 @@
 ["vehiclesTanks", ["UK3CB_CW_US_B_EARLY_M1A1", "UK3CB_CW_US_B_EARLY_M60a3", "UK3CB_CW_US_B_EARLY_M60a1"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["RHS_M6_wd"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["UK3CB_TKA_B_RHIB_Gunboat", "UK3CB_TKA_B_RHIB"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["UK3CB_CW_US_B_LATE_LAV25", "UK3CB_CW_US_B_LATE_AAV"]] call _fnc_saveToTemplate;
 

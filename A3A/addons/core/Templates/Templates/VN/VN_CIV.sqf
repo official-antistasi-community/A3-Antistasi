@@ -10,13 +10,19 @@
 //       Vehicles       //
 //////////////////////////
 
-["vehiclesCivCar", [
+private _vehiclesCivCar = [
     "vn_c_wheeled_m151_02", 1.8
     ,"vn_c_wheeled_m151_01", 1.8
     ,"vn_c_car_02_01", 1.5
     ,"vn_c_car_03_01", 1
     ,"vn_c_car_01_01", 0.8
-    ,"vn_c_bicycle_01", 0.2]] call _fnc_saveToTemplate;
+    ,"vn_c_bicycle_01", 0.2];
+
+if (isClass (configFile >> "vnx_credits")) then {
+	_vehiclesCivCar append ["vnx_c_wheeled_tuktuk_01_01", 2];
+};
+
+["vehiclesCivCar", _vehiclesCivCar] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
     "vn_b_wheeled_m54_01_airport", 0.2
@@ -61,6 +67,7 @@
 /////////////////////
 
 ["faces", ["AsianHead_A3_01","AsianHead_A3_02","AsianHead_A3_03","AsianHead_A3_04","AsianHead_A3_05","AsianHead_A3_06","AsianHead_A3_07"]] call _fnc_saveToTemplate;
+"vietmen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //

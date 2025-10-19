@@ -32,9 +32,12 @@
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_guest_warning">
         <Original>As a guest commander you can't reduce arsenal limits below default, or below values set by members.</Original>
+        <Russian>Как приглашенный командир, вы не можете уменьшать лимиты арсенала ниже значений по умолчанию или ниже значений, установленных участниками.</Russian>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_hint_title">
         <Original>Arsenal Guest Limits</Original>
+        <German>Arsenal Gast Limit</German>
+        <Russian>Лимит Арсенала гостей</Russian>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_limit">
         <Original>Limit</Original>
@@ -66,6 +69,7 @@
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_reset_tooltip">
         <Original>Reset all items in this category to the default guest limit</Original>
+        <Russian>Сбросьте для всех товаров в этой категории лимит гостей по умолчанию</Russian>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_step">
         <Original>STEP</Original>
@@ -118,6 +122,9 @@
         <Russian>C: Отменить %1</Russian>
         <Czech>C: Zrušit %1</Czech>
         <Chinesesimp>C键: 取消 %1</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_teamleader_placer_cannotBuildHelipad">
+        <Original>You can only build helipads at captured friendly markers or HQ.</Original>
       </Key>
       <Key ID="STR_antistasi_teamleader_placer_e_key">
         <Original>E: Rotate counter-clockwise</Original>
@@ -354,14 +361,14 @@
         <Chinesesimp>炮手</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_buy_vehicle_loot_tooltip">
-        <Original>This item can collect loot&lt;br/&gt;%1 max load is %2</Original>
-        <German>Dieser Gegenstand kann Beute laden&lt;br/&gt;%1 maximale Kapazität ist %2</German>
-        <Italian>Quest'oggetto può accumulare loot&lt;br/&gt;il carico massimo di %1 è %2</Italian>
-        <Spanish>Este objeto puede recolectar loot&lt;br/&gt;La carga máxima de %1 es %2</Spanish>
-        <French>Cet objet peut collecter du butin&lt;br/&gt;%1 charge max est %2</French>
-        <Korean>이 아이템은 전리품을 수집할 수 있습니다.&lt;br/&gt;%1의 최대 수용량은 %2입니다.</Korean>
-        <Russian>Этот объект может собирать вещи&lt;br/&gt;%1 с максимальной вместимостью в %2</Russian>
-        <Czech>Tento předmět může sbírat loot&lt;br/&gt;%1 maximální kapacita je %2</Czech>
+        <Original>This item can collect loot\n%1 max load is %2</Original>
+        <German>Dieser Gegenstand kann Beute laden\n%1 maximale Kapazität ist %2</German>
+        <Italian>Quest'oggetto può accumulare loot\nil carico massimo di %1 è %2</Italian>
+        <Spanish>Este objeto puede recolectar loot\nLa carga máxima de %1 es %2</Spanish>
+        <French>Cet objet peut collecter du butin\n%1 charge max est %2</French>
+        <Korean>이 아이템은 전리품을 수집할 수 있습니다.\n%1의 최대 수용량은 %2입니다.</Korean>
+        <Russian>Этот объект может собирать вещи\n%1 с максимальной вместимостью в %2</Russian>
+        <Czech>Tento předmět může sbírat loot\n%1 maximální kapacita je %2</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_buy_vehicle_med_tooltip">
         <Original>This item has medical capability</Original>
@@ -406,14 +413,14 @@
         <Chinesesimp>普通乘客座位</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_buy_vehicle_refuel_tooltip">
-        <Original>This item can refuel others&lt;br/&gt;%1 max fuel is %2</Original>
-        <German>Dieser Gegenstand kann andere betanken&lt;br/&gt;%1 Maximaler Füllstand ist %2</German>
-        <Italian>Questo oggetto può rifornire altri&lt;br/&gt;%1 massimo carburante è %2</Italian>
-        <Spanish>Este objeto puede repostar a otros&lt;br/&gt;El combustible máximo de %1 es %2</Spanish>
-        <French>Cet objet peut ravitailler les autres&lt;br/&gt;%1 carburant max est %2</French>
-        <Korean>이 아이템은 다른 차량을 재급유할 수 있습니다.&lt;br/&gt;%1의 최대 연료량은 %2입니다.</Korean>
-        <Russian>Этот объект может заправлять технику&lt;br/&gt;%1 с запасом топлива в %2</Russian>
-        <Czech>Tento předmět může tankovat ostatní&lt;br/&gt;%1 maximální palivo je %2</Czech>
+        <Original>This item can refuel others\n%1 max fuel is %2</Original>
+        <German>Dieser Gegenstand kann andere betanken\n%1 Maximaler Füllstand ist %2</German>
+        <Italian>Questo oggetto può rifornire altri\n%1 massimo carburante è %2</Italian>
+        <Spanish>Este objeto puede repostar a otros\nEl combustible máximo de %1 es %2</Spanish>
+        <French>Cet objet peut ravitailler les autres\n%1 carburant max est %2</French>
+        <Korean>이 아이템은 다른 차량을 재급유할 수 있습니다.\n%1의 최대 연료량은 %2입니다.</Korean>
+        <Russian>Этот объект может заправлять технику\n%1 с запасом топлива в %2</Russian>
+        <Czech>Tento předmět může tankovat ostatní\n%1 maximální palivo je %2</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_buy_vehicle_repair_tooltip">
         <Original>This item can repair other vehicles</Original>
@@ -719,14 +726,14 @@
         <Chinesesimp>已控制的海港</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_dead_population_tooltip">
-        <Original>Dead population&lt;br/&gt;You lose when this hits 33%</Original>
-        <German>Tote Bevölkerung&lt;br/&gt;Du verlierst wenn es 33% erreicht</German>
-        <Italian>Popolazione morta&lt;br/&gt;Perderai se raggiungerà il 33%</Italian>
-        <Spanish>Población fallecida&lt;br/&gt;Cuando llegue al 33% fracasará la misión</Spanish>
-        <French>Population morte&lt;br/&gt;Vous perdez quand cela atteint 33%</French>
-        <Korean>사망한 인구&lt;br/&gt;33% 이상 잃으면 패배합니다</Korean>
-        <Russian>Мертвое население&lt;br/&gt;Вы проиграете, когда оно достигнет 33%</Russian>
-        <Czech>Mrtvá populace&lt;br/&gt; prohrajete, pokud bude 33%</Czech>
+        <Original>Dead population\nYou lose when this hits 33%</Original>
+        <German>Tote Bevölkerung\nDu verlierst wenn es 33% erreicht</German>
+        <Italian>Popolazione morta\nPerderai se raggiungerà il 33%</Italian>
+        <Spanish>Población fallecida\nCuando llegue al 33% fracasará la misión</Spanish>
+        <French>Population morte\nVous perdez quand cela atteint 33%</French>
+        <Korean>사망한 인구\n33% 이상 잃으면 패배합니다</Korean>
+        <Russian>Мертвое население\nВы проиграете, когда оно достигнет 33%</Russian>
+        <Czech>Mrtvá populace\n prohrajete, pokud bude 33%</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_faction_money_label">
         <Original>Faction money:</Original>
@@ -841,14 +848,14 @@
         <Chinesesimp>占领方的进攻性</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_popular_support_tooltip">
-        <Original>Popular support&lt;br/&gt;You need 50% to win</Original>
-        <German>Unterstützung der Bevölkerung&lt;br/&gt;Du brauchst 50% um zu gewinnen</German>
-        <Italian>Supporto della popolazione&lt;br/&gt;Hai bisogno del 50% per vincere</Italian>
-        <Spanish>Apoyo Popular&lt;br/&gt;Necesita el 50% para ganar</Spanish>
-        <French>Support populaire&lt;br/&gt;Vous avez besoin de 50% pour gagner</French>
-        <Korean>시민의 지지율&lt;br/&gt;50%를 넘으면 이깁니다</Korean>
-        <Russian>Поддержка населения&lt;br/&gt;Вам необходимо 50% для победы</Russian>
-        <Czech>Popularita&lt;br/&gt; K vítezství potřebujete 50%</Czech>
+        <Original>Popular support\nYou need 50% to win</Original>
+        <German>Unterstützung der Bevölkerung\nDu brauchst 50% um zu gewinnen</German>
+        <Italian>Supporto della popolazione\nHai bisogno del 50% per vincere</Italian>
+        <Spanish>Apoyo Popular\nNecesita el 50% para ganar</Spanish>
+        <French>Support populaire\nVous avez besoin de 50% pour gagner</French>
+        <Korean>시민의 지지율\n50%를 넘으면 이깁니다</Korean>
+        <Russian>Поддержка населения\nВам необходимо 50% для победы</Russian>
+        <Czech>Popularita\n K vítezství potřebujete 50%</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_rest_button">
         <Original>Rest</Original>
@@ -962,10 +969,16 @@
         <Turkish>Savaş seviyesi:</Turkish>
         <Chinesesimp>战争等级：</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_train_tooltip">
+        <Original>This will cost € %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_train_maxed">
+        <Original>Rebel training maxed!</Original>
+      </Key>
     </Container>
     <Container name="dialog_hq_garrisons">
       <Key ID="STR_antistasi_dialogs_hq_garrisons_at">
-        <Original>AT</Original>
+        <Original>Light AT</Original>
         <German>AT</German>
         <Italian>AT</Italian>
         <Spanish>AT</Spanish>
@@ -1188,6 +1201,12 @@
         <Turkish>%1 için dinlenin</Turkish>
         <Chinesesimp>休息 %1</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_rest_notime_text">
+        <Original>No rest for the wicked...</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_rest_notime_tooltip">
+        <Original>You must select a period of time to sleep for</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_hq_wakeup_text">
         <Original>Time will be %2 when you wake up.</Original>
         <German>Es ist %2 wenn du aufwachst.</German>
@@ -1201,6 +1220,15 @@
         <Portuguese>Serão %2 quando acordares.</Portuguese>
         <Turkish>Uyandığınızda saat %2 olacak.</Turkish>
         <Chinesesimp>你醒来的时候应该是 %2。</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_garrisons_atMissile">
+        <Original>AT Missile</Original>
+      </Key>
+      <Key ID="STR_antistasi_hq_garrisons_aaMissile">
+        <Original>AA Missile</Original>
+      </Key>
+      <Key ID="STR_A3A_garrison_error_no_weapons">
+        <Original>Not enough weapons for this unit type</Original>
       </Key>
     </Container>
     <Container name="dialog_hq_minefields">
@@ -1361,6 +1389,21 @@
         <Portuguese>OPÇÕES DE BATALHA</Portuguese>
         <Turkish>SAVAŞ SEÇENEKLERİ</Turkish>
         <Chinesesimp>战斗选项</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_persistent_save_button">
+        <Original>Persistent Save</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_button">
+        <Original>Garrisons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_squads_button">
+        <Original>High Command Squads</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_convertToSquad_button">
+        <Original>Convert To HC Squad</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_commanderOnly">
+        <Original>Only Player Commander has access to this function.</Original>
       </Key>
     </Container>
     <Container name="dialog_main_admin">
@@ -1616,6 +1659,12 @@
         <Turkish>Doğma Mesafesi</Turkish>
         <Chinesesimp>生成距离</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_command_button">
+        <Original>Take Command</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_command_self">
+        <Original>You cannot take command from yourself</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_admin_tp_arsenal_box_button">
         <Original>Arsenal Box</Original>
         <German>Arsenal Box</German>
@@ -1837,14 +1886,14 @@
         <Chinesesimp>解散单位</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip">
-        <Original>You can only remote control single units&lt;br/&gt;Select exactly one AI in the list</Original>
-        <German>Du kannst nur einzelne Einheiten fernsteuern&lt;br/&gt;Wähle eine einzelne KI aus der Liste aus</German>
-        <Italian>Puoi controllare remotamente solo singole unità&lt;br/&gt;Seleziona esattamente un'IA dalla lista</Italian>
-        <Spanish>Sólo puede contorlar una unidad de forma remota&lt;br/&gt;Seleccione exactamente una en la lista de la IA</Spanish>
-        <French>Vous ne pouvez contrôler à distance que des unités individuelles&lt;br/&gt;Sélectionnez exactement une IA dans la liste</French>
-        <Korean>단일 유닛만 원격 조종 가능합니다&lt;br/&gt;목록에서 인공지능을 정확히 하나만 선택하십시오</Korean>
-        <Russian>Вы можете удаленное управлять только одним юнитом&lt;br/&gt;Выберете конкретно одного ИИ из списка</Russian>
-        <Czech>Můžete ovládat pouze jednotlivé jednotky&lt;br/&gt;Vyber přesně jedno AI z listu</Czech>
+        <Original>You can only remote control single units\nSelect exactly one AI in the list</Original>
+        <German>Du kannst nur einzelne Einheiten fernsteuern\nWähle eine einzelne KI aus der Liste aus</German>
+        <Italian>Puoi controllare remotamente solo singole unità\nSeleziona esattamente un'IA dalla lista</Italian>
+        <Spanish>Sólo puede contorlar una unidad de forma remota\nSeleccione exactamente una en la lista de la IA</Spanish>
+        <French>Vous ne pouvez contrôler à distance que des unités individuelles\nSélectionnez exactement une IA dans la liste</French>
+        <Korean>단일 유닛만 원격 조종 가능합니다\n목록에서 인공지능을 정확히 하나만 선택하십시오</Korean>
+        <Russian>Вы можете удаленное управлять только одним юнитом\nВыберете конкретно одного ИИ из списка</Russian>
+        <Czech>Můžete ovládat pouze jednotlivé jednotky\nVyber přesně jedno AI z listu</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_ai_management_select_ai_tooltip">
         <Original>Select AI in the list</Original>
@@ -1874,6 +1923,9 @@
         <Turkish>Geçici YZ Kontrolü</Turkish>
         <Chinesesimp>暂时控制AI</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip_petros">
+        <Original>You cannot remote control Petros</Original>
+      </Key>
     </Container>
     <Container name="dialog_main_air_support">
       <Key ID="STR_antistasi_dialogs_main_air_support_aircraft_used">
@@ -1891,7 +1943,7 @@
         <Chinesesimp>已使用的飞行器:</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_carpet_bombing">
-        <Original>Carpet Bombing</Original>
+        <Original>CARPET BOMBING&lt;br /&gt;1 POINT</Original>
         <German>Flächenbombardierung</German>
         <Italian>Bombardamento a Tappeto</Italian>
         <Spanish>Bombardeo en Alfombra</Spanish>
@@ -1905,7 +1957,7 @@
         <Chinesesimp>地毯式轰炸</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_he_bombs">
-        <Original>HE Bombs</Original>
+        <Original>HE BOMBS&lt;br /&gt;1 POINT</Original>
         <German>HE Bomben</German>
         <Italian>Bombe AE</Italian>
         <Spanish>Bombas HE</Spanish>
@@ -1933,7 +1985,7 @@
         <Chinesesimp>获得更多空袭点数来使用玩家选项卡-载具中的“加入至空袭”功能。</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_napalm">
-        <Original>Napalm Bomb</Original>
+        <Original>NAPALM BOMBS&lt;br /&gt;3 POINTS</Original>
         <German>Napalm Bomben</German>
         <Italian>Bombardamento al Napalm</Italian>
         <Spanish>Bomba de Napalm</Spanish>
@@ -1946,8 +1998,11 @@
         <Turkish>Napalm Bombası</Turkish>
         <Chinesesimp>凝固汽油弹</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_air_support_no_base_tooltip">
+        <Original>You have no airbases under your control</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_no_points_tooltip">
-        <Original>You have no air support points</Original>
+        <Original>You do not have enough air support points</Original>
         <German>Du hast keine Luftunterstützungspunkte</German>
         <Italian>Non hai punti supporto aereo.</Italian>
         <Spanish>No tiene puntos de apoyo aéreo</Spanish>
@@ -2102,7 +2157,7 @@
         <Turkish>İn</Turkish>
         <Chinesesimp>离开载具</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_hc_fire_misison_no_ammo_tooltip">
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_no_ammo_tooltip">
         <Original>Not enough ammo</Original>
         <German>Nicht genügend Munition</German>
         <Italian>Mancano munizioni</Italian>
@@ -2115,6 +2170,9 @@
         <Portuguese>Munição insuficiente</Portuguese>
         <Turkish>Yeterli cephane yok</Turkish>
         <Chinesesimp>弹药不足</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_out_of_range_tooltip">
+        <Original>Position out of range</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo">
         <Original>Ammo</Original>
@@ -2579,14 +2637,14 @@
         <Chinesesimp>&lt;t align='center'&gt;你没有高级指挥官权限。&lt;/t&gt;&lt;br /&gt;&lt;t align='center'&gt;你无法在旗杆处招募他们。&lt;/t&gt;</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_unit_count_tooltip">
-        <Original>Number of units in the group&lt;br/&gt;Able to combat / Total number of units</Original>
-        <German>&lt;br/&gt;Anzahl der Saldaten in der Gruppe&lt;br/&gt;Fähig zu kämpfen / Gesammtanzahl der Soldaten</German>
-        <Italian>Numero di unità nel gruppo&lt;br/&gt;Abili al combattimento / Numero totale di unità</Italian>
-        <Spanish>Número de unidades en el grupo&lt;br/&gt;Capaces de combatir / Total número de unidades</Spanish>
-        <French>Unités dans le groupe&lt;br/&gt;Prêtes au combat / Nombre totale d'unités</French>
-        <Korean>해당 그룹 내 유닛 수&lt;br/&gt;전투 가능 / 총 유닛 수</Korean>
-        <Russian>Количество человек в группе&lt;br/&gt;Боеспособных / Всего</Russian>
-        <Czech>Počet jednotek ve skupině&lt;br/&gt;Bojeschopných / celkový počet jednotek</Czech>
+        <Original>Number of units in the group\nAble to combat / Total number of units</Original>
+        <German>\nAnzahl der Saldaten in der Gruppe\nFähig zu kämpfen / Gesammtanzahl der Soldaten</German>
+        <Italian>Numero di unità nel gruppo\nAbili al combattimento / Numero totale di unità</Italian>
+        <Spanish>Número de unidades en el grupo\nCapaces de combatir / Total número de unidades</Spanish>
+        <French>Unités dans le groupe\nPrêtes au combat / Nombre totale d'unités</French>
+        <Korean>해당 그룹 내 유닛 수\n전투 가능 / 총 유닛 수</Korean>
+        <Russian>Количество человек в группе\nБоеспособных / Всего</Russian>
+        <Czech>Počet jednotek ve skupině\nBojeschopných / celkový počet jednotek</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_vehicle">
         <Original>Vehicle</Original>
@@ -2615,6 +2673,21 @@
         <Portuguese>Controlar remotamente líder do grupo</Portuguese>
         <Turkish>Grup liderini uzaktan kumanda et</Turkish>
         <Chinesesimp>远程控制组长</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_arsenal_limits_button">
+        <Original>Arsenal Limits</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_customize_loadouts_button">
+        <Original>Customize Loadouts</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_button">
+        <Original>Garrisons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_recruit_squad_button">
+        <Original>Recruit Squad</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_commander_no_marker">
+        <Original>Select a rebel marker to remove garrison</Original>
       </Key>
     </Container>
     <Container name="dialog_main_donate">
@@ -2760,6 +2833,12 @@
         <Turkish>Şuraya gideceksin:</Turkish>
         <Chinesesimp>你将会快速旅行至</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_fast_travel_cost">
+        <Original>This action will cost</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_fast_travel_noMoney">
+        <Original>You cannot afford this.</Original>
+      </Key>
     </Container>
     <Container name="dialog_main_player">
       <Key ID="STR_antistasi_dialogs_main_add_to_air_support">
@@ -2791,14 +2870,14 @@
         <Chinesesimp>AI管理</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_ai_management_no_ai_tooltip">
-        <Original>Needs AI group members&lt;br/&gt;You can recruit them at the flag</Original>
-        <German>Benötigt KI-Gruppenmitglieder&lt;br/&gt; Du kannst diese an der Flagge rekrutieren</German>
-        <Italian>Necessita membri del gruppo IA&lt;br/&gt;Puoi reclutarli alla bandiera</Italian>
-        <Spanish>Necesita grupo de miembros de la IA&lt;br/&gt;Puede reclutarlos en la bandera</Spanish>
-        <French>Nécessite des membres du groupe IA&lt;br/&gt;Vous pouvez les recruter au drapeau</French>
-        <Korean>인공지능 분대원 필요&lt;br/&gt;깃발에서 모집할 수 있습니다.</Korean>
-        <Russian>Необходимы ИИ в отряде&lt;br/&gt;Вы можете нанять их у Флага</Russian>
-        <Czech>Potřebuje AI členy skupiny&lt;br/&gt;Můžete je narekrutovat u vlajky</Czech>
+        <Original>Needs AI group members\nYou can recruit them at the flag</Original>
+        <German>Benötigt KI-Gruppenmitglieder\n Du kannst diese an der Flagge rekrutieren</German>
+        <Italian>Necessita membri del gruppo IA\nPuoi reclutarli alla bandiera</Italian>
+        <Spanish>Necesita grupo de miembros de la IA\nPuede reclutarlos en la bandera</Spanish>
+        <French>Nécessite des membres du groupe IA\nVous pouvez les recruter au drapeau</French>
+        <Korean>인공지능 분대원 필요\n깃발에서 모집할 수 있습니다.</Korean>
+        <Russian>Необходимы ИИ в отряде\nВы можете нанять их у Флага</Russian>
+        <Czech>Potřebuje AI členy skupiny\nMůžete je narekrutovat u vlajky</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_ai_management_sl_tooltip">
         <Original>Only available to squad leaders</Original>
@@ -2955,7 +3034,7 @@
         <Chinesesimp>快速旅行</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_fast_travel_tooltip">
-        <Original>This is a placeholder</Original>
+        <Original>Fast travel to a friendly location</Original>
         <German>Dies ist ein Platzhalter</German>
         <Italian>Questo è un segnaposto</Italian>
         <Spanish>Esto es un marcador de posición</Spanish>
@@ -3024,8 +3103,8 @@
         <Turkish>Üyelere özel işlev</Turkish>
         <Chinesesimp>仅限会员使用的功能</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_no_vehicle">
-        <Original>No vehicle detected</Original>
+      <Key ID="STR_antistasi_dialogs_main_no_actions">
+        <Original>No actions available</Original>
         <German>Kein Fahrzeug erkannt</German>
         <Italian>Nessun veicolo rilevato</Italian>
         <Spanish>No se ha detectado vehículo</Spanish>
@@ -3054,6 +3133,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_player_money_text">
         <Original>Current money: € %1</Original>
+        <Russian>Текущий баланс: € %1</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_sell_vehicle">
         <Original>Sell</Original>
@@ -3097,19 +3177,141 @@
         <Turkish>Kilidi aç</Turkish>
         <Chinesesimp>解锁</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_vehicles">
-        <Original>Vehicles</Original>
-        <German>Fahrzeuge</German>
-        <Italian>Veicoli</Italian>
-        <Spanish>Vehículos</Spanish>
-        <French>Véhicules</French>
-        <Korean>차량</Korean>
-        <Russian>Техника</Russian>
-        <Polish>Pojazdy</Polish>
-        <Czech>Vozidla</Czech>
-        <Portuguese>Veículos</Portuguese>
-        <Turkish>Araçlar</Turkish>
-        <Chinesesimp>载具</Chinesesimp>
+      <Key ID="STR_antistasi_dialogs_context_title">
+        <Original>Context Actions</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_player_timeAlive">
+        <Original>Time alive:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_player_missions">
+        <Original>Missions:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_player_kills">
+        <Original>Kills:</Original>
+      </Key>
+    </Container>
+    <Container name="dialog_main_context">
+      <Key ID="STR_antistasi_dialogs_main_context_title_main">
+        <Original>Context Actions</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_vehicle">
+        <Original>Vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_aircraft">
+        <Original>Aircraft</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_construction">
+        <Original>Construction</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_HQ">
+        <Original>HQ</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_label_construction">
+        <Original>Construction</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_label_HQ">
+        <Original>Headquarters</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_hideActions">
+        <Original>Hide Removal Actions</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_showActions">
+        <Original>Show Removal Actions</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_hideIcons">
+        <Original>Hide Unbuilt Icons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_showIcons">
+        <Original>Show Unbuilt Icons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_addBombRun">
+        <Original>Add to air support</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_garage">
+        <Original>Garage Vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_toggleAI1">
+        <Original>Allow AI to use</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_toggleAI2">
+        <Original>Block AI from using</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_addToGarrison">
+        <Original>Add vehicle to garrison</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_away">
+        <Original>Must be near friendly marker to garage</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_airbase_helipad">
+        <Original>Must be near friendly airbase or helipad to garage</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_airbase">
+        <Original>Must be near friendly airbase to garage</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_utility">
+        <Original>Garaging this will delete it and refund the full cost</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_addBombRun_nearValid">
+        <Original>Must be near airbase or HQ to add to air support</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_gen_notRebVic">
+        <Original>Vehicle is not a rebel vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_addToGarrison_alreadyIn">
+        <Original>Vehicle is already in a garrison</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_addToGarrison_crewed">
+        <Original>Vehicle must be uncrewed</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_HQ_changeRole">
+        <Original>Change Role</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_HQ_vehArsenal">
+        <Original>Vehicle Arsenal</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_HQ_beDriver">
+        <Original>Must be driver of a vehicle to modify its inventory</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_construction_needEngineer">
+        <Original>Must be an engineer</Original>
+      </Key>
+    </Container>
+    <Container name="dialog_main_war_status">
+      <Key ID="STR_antistasi_dialogs_main_warstatus_main">
+        <Original>War Status</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_occupants">
+        <Original>Occupants</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_invaders">
+        <Original>Invaders</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_rebels">
+        <Original>Rebels</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_intelfeed">
+        <Original>Intel Feed</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_aggro">
+        <Original>Aggression: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_resources">
+        <Original>Resources: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_lastResourcesUpdate">
+        <Original>Time since last update: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_noResourcesUpdate">
+        <Original>No known resource information</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_radioKeys">
+        <Original>Radio Keys: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_money">
+        <Original>Money: %1€</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_HR">
+        <Original>HR: %1</Original>
       </Key>
     </Container>
     <Container name="dialog_mission_request">
@@ -3225,6 +3427,12 @@
         <Turkish>Görev İste</Turkish>
         <Chinesesimp>请求任务</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_mission_request_noCommander">
+        <Original>Only the Commander has access to this function.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_mission_request_title">
+        <Original>Mission Request</Original>
+      </Key>
     </Container>
     <Container name="dialog_recruit_squad">
       <Key ID="STR_antistasi_dialogs_recruit_squad_aa_truck">
@@ -3269,6 +3477,17 @@
         <Turkish>AT Takımı</Turkish>
         <Chinesesimp>反坦克班组</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_squad_eng_squad">
+        <Original>Engineer Squad</Original>
+        <Italian>Squadra Ingegneri</Italian>
+        <Spanish>Escuadra de Ingenieros</Spanish>
+        <French>Escouade d'ingénieurs</French>
+        <Korean>공병 분대</Korean>
+        <Russian>Инженеры</Russian>
+        <Polish>Drużyna Inżynierów</Polish>
+        <Czech>Inženýrská družstvo</Czech>
+        <Chinesesimp>工程师班组</Chinesesimp>
+      </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_include_vehicle_label">
         <Original>Include vehicle</Original>
         <German>Fahrzeug hinzufügen</German>
@@ -3284,7 +3503,7 @@
         <Chinesesimp>包含载具</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_inf_squad">
-        <Original>Inf. Squad</Original>
+        <Original>Infantry Squad</Original>
         <German>Inf. Trupp</German>
         <Italian>Squadra di Fant.</Italian>
         <Spanish>Escuadra de Inf.</Spanish>
@@ -3298,7 +3517,7 @@
         <Chinesesimp>步兵小队</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_inf_team">
-        <Original>Inf. Team</Original>
+        <Original>Infantry Team</Original>
         <German>Inf. Team</German>
         <Italian>Team di Fant.</Italian>
         <Spanish>Equipo de inf.</Spanish>
@@ -3310,6 +3529,9 @@
         <Portuguese>Equipa Infantaria</Portuguese>
         <Turkish>Piyade Takımı</Turkish>
         <Chinesesimp>步兵班组</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_squad_mg_car">
+        <Original>MG Car</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_mg_team">
         <Original>MG Team</Original>
@@ -3366,6 +3588,12 @@
         <Portuguese>RECRUTAR PELOTÃO</Portuguese>
         <Turkish>BİRLİĞİ GÖREVE AL</Turkish>
         <Chinesesimp>招募小队</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_recruit_squad_error">
+        <Original>You do not have enough money or HR for this group type</Original>
+      </Key>
+      <Key ID="STR_antistasi_recruit_squad_notCompatible">
+        <Original>This squad type is not compatible with this modset</Original>
       </Key>
     </Container>
     <Container name="dialog_recruit_units">
@@ -3487,6 +3715,12 @@
         <Portuguese>RECRUTAR UNIDADES</Portuguese>
         <Turkish>BİRİMLERİ GÖREVE AL</Turkish>
         <Chinesesimp>招募单位</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_units_error">
+        <Original>You do not have enough money or HR for this unit type</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_units_noWeapons">
+        <Original>You do not have the weapons necessary to equip this unit</Original>
       </Key>
     </Container>
     <Container name="dialogs_generic">
@@ -3929,23 +4163,24 @@
         <Chinesesimp>已购买车辆</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_recruit_squad_spawn_message">
-        <Original>Group %1 at your command.&lt;br/&gt;&lt;br/&gt;Groups are managed from the High Command bar (Default: CTRL+SPACE)&lt;br/&gt;&lt;br/&gt;If the group gets stuck, use the AI Control feature to make them start moving. Mounted Static teams tend to get stuck (solving this is WiP)&lt;br/&gt;&lt;br/&gt;To assign a vehicle for this group, look at some vehicle, and use Vehicle Squad Mngmt option in Y menu</Original>
-        <German>Einheit %1 zu Ihrer Verfügung.&lt;br/&gt;&lt;br/&gt;Die Einheit wird über die Oberkommando-Leiste kontrolliert (Default: CTRL+SPACE)&lt;br/&gt;&lt;br/&gt;Falls die Einheit stecken bleibt, nutze das AI-Kontroll-Übernahme feature um sie wieder in bewegung zu versetzen. Teams welche statische Waffen verwenden bleiben oft stecken (beim Lösen des Wegpunktes)&lt;br/&gt;&lt;br/&gt;Um ein Fahrzeug einer EInheit hinzuzufügen, selektiere die Einheit Oberkommando-Leiste und schaue ein Fahrzeug an, anschließend Nutze das Z-Menu. </German>
-        <Italian>Gruppo %1 al tuo comando.&lt;br/&gt;&lt;br/&gt;I gruppi vengono gestiti dalla barra dell'Alto Comando(Default: CTRL+SPAZIO)&lt;br/&gt;&lt;br/&gt;Se il gruppo si blocca, usa il controllo IA per farli muovere. Le squadre statiche motorizzate di solito si incastrano facilmente. (Stiamo cercando di risolvere questo problema)&lt;br/&gt;&lt;br/&gt;Per assegnare un veicolo a questo gruppo, guarda il veicolo, e usa l'opzione Gestione Veicolo di Squadra nel menu che apri con Y</Italian>
-        <Spanish>Grupo %1 a sus órdenes.&lt;br/&gt;&lt;br/&gt;Los grupos son gestionados desde la barra de Alto Mando (Por defecto: CTRL+ESPACIO)&lt;br/&gt;&lt;br/&gt;Si el grupo queda atascado, use la opción de Control de IA para hacer que se muevan de nuevo. Los equipos Estáticos Montados tienden a atascarse (resolver esto es WiP)&lt;br/&gt;&lt;br/&gt;Para asignar un vehículo a este grupo, mire hacia un vehículo y use la opción de Gestión de Vehículo de Escuadra en el menú de Y</Spanish>
-        <French>Groupe %1 à votre commande.&lt;br/&gt;&lt;br/&gt;Les groupes sont gérés depuis la barre de commande supérieure (par défaut: CTRL+ESPACE)&lt;br/&gt;&lt;br/&gt;Si le groupe se coince, utilisez la fonction contrôle temporaire de l'IA pour les déplacer. Les équipes statiques montées ont tendance à rester bloquées (résoudre cela est WiP)&lt;br/&gt;&lt;br/&gt;Pour attribuer un véhicule à ce groupe, regardez un véhicule et utilisez l'option Vehicle Squad Mngmt dans le menu Y</French>
-        <Korean>%1 그룹은 이제 당신 휘하에 있습니다.&lt;br/&gt;&lt;br/&gt;그룹은 하이 커맨드 표시줄(기본값: 컨트롤+ 스페이스)에서 관리됩니다.&lt;br/&gt;&lt;br/&gt;그룹이 끼인다면 인공지능 조종 기능을 이용하여 이동을 시키십시오. 탑재된 고정화기 팀이 끼이는 경향이 있습니다 (해결 중에 있습니다).&lt;br/&gt;&lt;br/&gt;이 그룹에 차량을 할당하려면 차량을 보고 Y 메뉴의 차량 분대 관리 설정을 사용하십시오.</Korean>
-        <Russian>Группа %1 под вашим командованием.&lt;br/&gt;&lt;br/&gt;Управление группами происходит из панели Командования (По стандарту: CTRL+SPACE)&lt;br/&gt;&lt;br/&gt;Если группа застряла, используйте Управление ИИ чтобы заставить их двигаться. Отряды со статичным вооружение любят застревать (Это решается с помощью WiP)&lt;br/&gt;&lt;br/&gt;Чтобы назначить технику к этой группе, посмотрите на неё и используйте Управление Техникой Отряда в меню на клавише Y.</Russian>
-        <Polish>Grupuj %1 na twoje polecenie.&lt;br/&gt;&lt;br/&gt;Grupy są zarządzane z paska naczelnego dowodzenia (domyślnie: CTRL+SPACJA)&lt;br/&gt;&lt;br/&gt;Jeśli grupa utknie, przejmij nad nimi kontrolę, by zaczęli się ruszać. Drużyny z bronią statyczną mają tendencję do zacinania się (rozwiązanie jest WiP)&lt;br/&gt;&lt;br/&gt;Aby przypisać pojazd do grupy, spójrz na jakiś pojazd i użyj opcji Zarządzanie składem pojazdów w menu Y</Polish>
-        <Czech>Skupina %1 na váš příkaz.&lt;br/&gt;&lt;br/&gt;Skupiny jsou spravovány z panelu vyššího veliteství (výchozí: Ctrl+Space)&lt;br/&gt;&lt;br/&gt;Pokud se skupina uvízne, použijte funkci ovládání AI aby jste je přiměli se znovu pohybovat. Rozestavěné statické týmy mají tendenci uvíznout (Je to v řešení)&lt;br/&gt;&lt;br/&gt;K přiřazení vozidla do této skupiny, podívejte se na nějaké vozidlo a použijte Management vozidla jednotek tlačítko v Y menu</Czech>
-        <Portuguese>Grupo %1 a teu comando.&lt;br/&gt;&lt;br/&gt;Grupos são geridos através da barra do Alto Comando (Default: CTRL+SPACE)&lt;br/&gt;&lt;br/&gt;Se o grupo ficar preso, usa a ferramenta Controlo IA para os fazeres mexer. Equipas de Armas Estáticas Montadas tendem a ficar presas (sendo resolvido em WiP)&lt;br/&gt;&lt;br/&gt;Para atribuir um veículo a este grupo, olha para um veículo e usa a opção Gestão de Veículo de Pelotão no menu Y</Portuguese>
-        <Turkish>%1 grubu emrinizde.&lt;br/&gt;&lt;br/&gt;Gruplar, Yüksek Komuta çubuğundan yönetilir (Varsayılan: CTRL+SPACE)&lt;br/&gt;&lt;br/&gt;Grup takılırsa, YZ Kontrol özelliğini kullanarak hareket etmeye başlamalarını sağlayın. Statik silah kullanan ekipler takılıp kalma eğilimindedir (bunu çözmek WiP'dir)&lt;br/&gt;&lt;br/&gt;Bu gruba bir araç atamak için bazı araçlara bakın ve Y menüsünde Araç Ekibi Yönetimi seçeneğini kullanın</Turkish>
-        <Chinesesimp>%1 小组受你指挥。&lt;br/&gt;&lt;br/&gt;使用高级指挥菜单命令小组。(默认键位: CTRL+空格)&lt;br/&gt;&lt;br/&gt;如果小组卡住不动，可以先用AI控制功能来让他们动起来。已部署的固定式武器小组通常会卡住。(解决方案还在开发中)&lt;br/&gt;&lt;br/&gt;要想给小组分配一辆载具，看向该载具，然后使用Y键菜单中的载具小队管理选项</Chinesesimp>
+        <Original>Group %1 at your command.\n\nGroups are managed from the High Command bar (Default: CTRL+SPACE)\n\nIf the group gets stuck, use the AI Control feature to make them start moving. Mounted Static teams tend to get stuck (solving this is WiP)\n\nTo assign a vehicle for this group, look at some vehicle, and use Vehicle Squad Mngmt option in Y menu</Original>
+        <German>Einheit %1 zu Ihrer Verfügung.\n\nDie Einheit wird über die Oberkommando-Leiste kontrolliert (Default: CTRL+SPACE)\n\nFalls die Einheit stecken bleibt, nutze das AI-Kontroll-Übernahme feature um sie wieder in bewegung zu versetzen. Teams welche statische Waffen verwenden bleiben oft stecken (beim Lösen des Wegpunktes)\n\nUm ein Fahrzeug einer EInheit hinzuzufügen, selektiere die Einheit Oberkommando-Leiste und schaue ein Fahrzeug an, anschließend Nutze das Z-Menu. </German>
+        <Italian>Gruppo %1 al tuo comando.\n\nI gruppi vengono gestiti dalla barra dell'Alto Comando(Default: CTRL+SPAZIO)\n\nSe il gruppo si blocca, usa il controllo IA per farli muovere. Le squadre statiche motorizzate di solito si incastrano facilmente. (Stiamo cercando di risolvere questo problema)\n\nPer assegnare un veicolo a questo gruppo, guarda il veicolo, e usa l'opzione Gestione Veicolo di Squadra nel menu che apri con Y</Italian>
+        <Spanish>Grupo %1 a sus órdenes.\n\nLos grupos son gestionados desde la barra de Alto Mando (Por defecto: CTRL+ESPACIO)\n\nSi el grupo queda atascado, use la opción de Control de IA para hacer que se muevan de nuevo. Los equipos Estáticos Montados tienden a atascarse (resolver esto es WiP)\n\nPara asignar un vehículo a este grupo, mire hacia un vehículo y use la opción de Gestión de Vehículo de Escuadra en el menú de Y</Spanish>
+        <French>Groupe %1 à votre commande.\n\nLes groupes sont gérés depuis la barre de commande supérieure (par défaut: CTRL+ESPACE)\n\nSi le groupe se coince, utilisez la fonction contrôle temporaire de l'IA pour les déplacer. Les équipes statiques montées ont tendance à rester bloquées (résoudre cela est WiP)\n\nPour attribuer un véhicule à ce groupe, regardez un véhicule et utilisez l'option Vehicle Squad Mngmt dans le menu Y</French>
+        <Korean>%1 그룹은 이제 당신 휘하에 있습니다.\n\n그룹은 하이 커맨드 표시줄(기본값: 컨트롤+ 스페이스)에서 관리됩니다.\n\n그룹이 끼인다면 인공지능 조종 기능을 이용하여 이동을 시키십시오. 탑재된 고정화기 팀이 끼이는 경향이 있습니다 (해결 중에 있습니다).\n\n이 그룹에 차량을 할당하려면 차량을 보고 Y 메뉴의 차량 분대 관리 설정을 사용하십시오.</Korean>
+        <Russian>Группа %1 под вашим командованием.\n\nУправление группами происходит из панели Командования (По стандарту: CTRL+SPACE)\n\nЕсли группа застряла, используйте Управление ИИ чтобы заставить их двигаться. Отряды со статичным вооружение любят застревать (Это решается с помощью WiP)\n\nЧтобы назначить технику к этой группе, посмотрите на неё и используйте Управление Техникой Отряда в меню на клавише Y.</Russian>
+        <Polish>Grupuj %1 na twoje polecenie.\n\nGrupy są zarządzane z paska naczelnego dowodzenia (domyślnie: CTRL+SPACJA)\n\nJeśli grupa utknie, przejmij nad nimi kontrolę, by zaczęli się ruszać. Drużyny z bronią statyczną mają tendencję do zacinania się (rozwiązanie jest WiP)\n\nAby przypisać pojazd do grupy, spójrz na jakiś pojazd i użyj opcji Zarządzanie składem pojazdów w menu Y</Polish>
+        <Czech>Skupina %1 na váš příkaz.\n\nSkupiny jsou spravovány z panelu vyššího veliteství (výchozí: Ctrl+Space)\n\nPokud se skupina uvízne, použijte funkci ovládání AI aby jste je přiměli se znovu pohybovat. Rozestavěné statické týmy mají tendenci uvíznout (Je to v řešení)\n\nK přiřazení vozidla do této skupiny, podívejte se na nějaké vozidlo a použijte Management vozidla jednotek tlačítko v Y menu</Czech>
+        <Portuguese>Grupo %1 a teu comando.\n\nGrupos são geridos através da barra do Alto Comando (Default: CTRL+SPACE)\n\nSe o grupo ficar preso, usa a ferramenta Controlo IA para os fazeres mexer. Equipas de Armas Estáticas Montadas tendem a ficar presas (sendo resolvido em WiP)\n\nPara atribuir um veículo a este grupo, olha para um veículo e usa a opção Gestão de Veículo de Pelotão no menu Y</Portuguese>
+        <Turkish>%1 grubu emrinizde.\n\nGruplar, Yüksek Komuta çubuğundan yönetilir (Varsayılan: CTRL+SPACE)\n\nGrup takılırsa, YZ Kontrol özelliğini kullanarak hareket etmeye başlamalarını sağlayın. Statik silah kullanan ekipler takılıp kalma eğilimindedir (bunu çözmek WiP'dir)\n\nBu gruba bir araç atamak için bazı araçlara bakın ve Y menüsünde Araç Ekibi Yönetimi seçeneğini kullanın</Turkish>
+        <Chinesesimp>%1 小组受你指挥。\n\n使用高级指挥菜单命令小组。(默认键位: CTRL+空格)\n\n如果小组卡住不动，可以先用AI控制功能来让他们动起来。已部署的固定式武器小组通常会卡住。(解决方案还在开发中)\n\n要想给小组分配一辆载具，看向该载具，然后使用Y键菜单中的载具小队管理选项</Chinesesimp>
       </Key>
     </Container>
     <Container name="setup_dialog">
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_badFactions">
-        <Original>The currently selected factions are not loaded.&lt;br/&gt;Go to the Factions tab and select available factions.</Original>
+        <Original>The currently selected factions are not loaded.\nGo to the Factions tab and select available factions.</Original>
+        <Russian>Выбранные в данный момент фракции не загружены.\nПерейдите на вкладку Фракции и выберите доступные фракции.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_copy">
         <Original>Copy game with ID %1</Original>
@@ -3992,6 +4227,7 @@
         <Italian>%1 occupanti e %2 invasori?</Italian>
         <French>%1 occupants et %2 envahisseurs ?</French>
         <Korean>%1이(가) 점령군이고 %2이(가) 침략군입니까?</Korean>
+        <Russian>%1 оккупанты и %2 захватчики?</Russian>
         <Czech>%1 okupanti a %2 vetřelci?</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_addonvics">
@@ -4078,6 +4314,9 @@
         <Turkish>Eski Oyunu Kopyala</Turkish>
         <Chinesesimp>加载之前的存档</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_setup_copy_old_game_tooltip">
+        <Original>Load an old campaign with a new ID. This option can be used to move a campaign to or from the new save method, or just to make an additional copy for experiments. The new game won't exist on disk until it's saved.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_setup_create_new_game">
         <Original>Create new game</Original>
         <German>Erstelle neuen Spielstand</German>
@@ -4108,6 +4347,10 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_dlc">
         <Original>DLC and Addons</Original>
+        <Russian>DLC и Аддоны</Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_exportSave">
+        <Original>Export Save</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_faction_tab_button">
         <Original>Factions</Original>
@@ -4125,9 +4368,17 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_factionInfo">
         <Original>Faction Information</Original>
+        <Russian>Информация о фракции</Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_importButton">
+        <Original>IMPORT</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_importSave">
+        <Original>Import Save</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_infoPanel_header">
         <Original>%1 Information</Original>
+        <Russian>%1 Информация</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_invaders">
         <Original>Invaders</Original>
@@ -4157,6 +4408,9 @@
         <Turkish>Eski parametreleri yükle</Turkish>
         <Chinesesimp>复制之前的参数</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_setup_load_old_params_tooltip">
+        <Original>Use the parameters from the selected campaign when creating the new one.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_setup_loadgame_tab_button">
         <Original>Load Game</Original>
         <German>Lade Spielstand</German>
@@ -4170,6 +4424,12 @@
         <Portuguese>Carregar jogo</Portuguese>
         <Turkish>Oyun yükle</Turkish>
         <Chinesesimp>载入游戏</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_noExportOld">
+        <Original>Only saves of version 3.10.0 or later can be exported. Load a game and run a persistent save to upgrade the version</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_noExportSel">
+        <Original>No save selected</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_new_save_name">
         <Original>New save name</Original>
@@ -4257,6 +4517,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_prettyAddons">
         <Original>Required Addons: %1</Original>
+        <Russian>Требуется аддон: %1</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_rebels">
         <Original>Rebels</Original>
@@ -4370,14 +4631,34 @@
         <Turkish>ANTİSTASİ KURULUMU</Turkish>
         <Chinesesimp>ANTISTASI设置</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_setup_title_saveTransfer">
+        <Original>SAVE TRANSFER</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_setup_toggleAddons_addons">
         <Original>Switch to Addons</Original>
+        <Russian>Переключить на аддон</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_toggleAddons_DLC">
         <Original>Switch to DLCs</Original>
+        <Russian>Переключить на ДЛС</Russian>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_downloading">
+        <Original>Downloading data for save %1 with ID %2 from server, please wait...</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_exportReady">
+        <Original>Exporting save %1 with ID %2.&lt;br /&gt;&lt;br /&gt;Select the text box and use Ctrl-A and then Ctrl-C to copy the save to clipboard.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_importConfirm">
+        <Original>Confirm import of save %1?</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_importFail">
+        <Original>Invalid save data</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_setup_transfer_importReady">
+        <Original>Paste your save into the text box below and use the %1 button to import it.</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_use_new_namespace">
-        <Original>Use New Save file</Original>
+        <Original>New save method</Original>
         <German>Nutze neue Spielstand Datei</German>
         <Italian>Usa Nuovo File di Salvataggio</Italian>
         <Spanish>Usar fichero de Partida nueva</Spanish>
@@ -4390,8 +4671,115 @@
         <Turkish>Yeni kayıt dosyası kullan</Turkish>
         <Chinesesimp>使用新的存档文件</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_setup_use_new_namespace_tooltip">
+        <Original>Save the new campaign to AntistasiCommunity.vars instead of the main profile vars file. Warning: This may not work correctly on Linux servers due to an Arma bug.</Original>
+      </Key>
     </Container>
-    <Container name="setup_dialog">
+    <Container name="role_select">
+      <Key ID="STR_antistasi_dialogs_roleselect_role_rifleman">
+        <Original>Rifleman</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_rifleman">
+        <Original>The Rifleman is the backbone of every army. Fast and versatile, riflemen are able to go anywhere and do anything.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_rifleman">
+        <Original>Riflemen incur no bonuses or penalties, but are able to hack enemy UAVs if they are found capturable.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_autorifleman">
+        <Original>Autorifleman</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_autorifleman">
+        <Original>Autoriflemen provide the most basic and effective form of fire support: suppression with machine guns.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_autorifleman">
+        <Original>Autoriflemen have better stamina and recovery (can carry more items over distance), but are loud when they move, alerting enemies.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_grenadier">
+        <Original>Grenadier</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_grenadier">
+        <Original>Grenadiers carry grenade launchers to supplement the offensive with explosive, smoke, or flare rounds.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_grenadier">
+        <Original>Grenadiers have better stamina and recovery, but are more easily visible to enemies.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_medic">
+        <Original>Medic</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_medic">
+        <Original>Medics will always keep the squad in the fight, no matter what happens. They are the most important unit in the squad, and should be protected.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_medic">
+        <Original>Medics can do a variety of medical actions faster and also have expanded medical abilities. However, they have worse stamina and are spotted easier.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_engineer">
+        <Original>Engineer</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_engineer">
+        <Original>Engineers work day and night to keep the rebellion and their tech alive, with a good engineer saving tons of time for the squad.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_engineer">
+        <Original>Engineers can repair vehicles, breach enemy armor, build fortifications, defuse mines, and more. They incur a penalty to stamina and a buff to stealth.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_teamleader">
+        <Original>Team Leader</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_teamleader">
+        <Original>A band of rebels without a team leader is barely more than a mob. Team leaders pull their units together and lead their squads to victory.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_teamleader">
+        <Original>Team leaders are quite stealthy with buffs to visual and audible stealth, but have worse stamina.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_commander">
+        <Original>Commander</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_commander">
+        <Original>The commander is the top ranking soldier in the field. They manage the rebellion's affairs, while being able to perform medical and engineer tasks.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_commander">
+        <Original>Commanders handle AI and garrisons as well as coordinating fire support when needed. They have superior stealth for recon but suffer a stamina penalty.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsRifleman">
+        <Original>Riflemen: %1. (?*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_capExplanationRifleman">
+        <Original>There is no cap to the number of Rifleman players.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsCommander">
+        <Original>%1 is the current faction Commander (*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderNone">
+        <Original>The faction currently has no Commander (*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderSelf">
+        <Original>You are currently the faction's Commander (*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_capExplanationCommander">
+        <Original>The faction can only have one commander, and you must be assigned the spot.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slots">
+        <Original>%1: %2/%3  (*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_capExplanation">
+        <Original>The cap of slots per role (excluding riflemen and the commander) increases as the player count increases. The number per role increases linearly from 3 slots at 3 players to 6 slots at 38 players.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_welcome">
+        <Original>Welcome to Antistasi! To get started, select a role from the list on the left and use "set role". You can revisit this screen any time by opening the Battle Menu with Y.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_welcomeNew">
+        <Original>Each role has different traits and quirks, so it is recommended to start as a rifleman if you are new to the game. Note that no role has locked weapons; the roles simply determine what traits you start with.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_hasRole">
+        <Original>You are currently a %1.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_isCommander">
+        <Original>However, since you are the commander, you have the traits listed in the "Commander" tab until you resign.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_cannotTakeRoleFull">
+        <Original>This role is full.</Original>
+      </Key>
+    </Container>
+    <Container name="custom_loadouts">
       <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
         <Original>Custom AI Loadouts</Original>
       </Key>
@@ -4430,6 +4818,58 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_resetAll">
         <Original>Reset All</Original>
+      </Key>
+    </Container>
+    <Container name="dialog_gun_shop_dialog">
+      <Key ID="STR_antistasi_gun_shop_title">
+        <Original>Gun Shop</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_rifle_tab_button">
+        <Original>Primary</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_handguns_tab_button">
+        <Original>Handguns</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_launchers_tab_button">
+        <Original>Secondary</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_grenades_tab_button">
+        <Original>Grenades</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_explosives_tab_button">
+        <Original>Explosives</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_magazines_tab_button">
+        <Original>Magazines</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_optics_tab_button">
+        <Original>Optics</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_rails_tab_button">
+        <Original>Rails</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_muzzles_tab_button">
+        <Original>Muzzles</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_bipods_tab_button">
+        <Original>Bipods</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_add_to_cart_button_text">
+        <Original>Add to Cart</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_checkout_button_text">
+        <Original>Checkout</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_total_cost_text">
+        <Original>Total:</Original>
+      </Key>
+    </Container>
+    <Container name="admin_copy_id">
+      <Key ID="STR_antistasi_admincopyid_title">
+        <Original>COPY USER ID</Original>
+      </Key>
+      <Key ID="STR_antistasi_admincopyid_main">
+        <Original>Copy the user's ID from the box by highlighting it and using Ctrl + C.</Original>
       </Key>
     </Container>
   </Package>

@@ -1,12 +1,13 @@
-private ["_chance","_pos","_markerX","_return"];
+// Logic for determining whether to reveal enemy vehicles?
 
-_chance = tierWar*3;
-{_pos = getPos _x;
-_markerX = [outposts,_pos] call BIS_fnc_nearestPosition;
-if ((sidesX getVariable [_markerX,sideUnknown] == teamPlayer) and (alive _x)) then {_chance = _chance + 4};
-} forEach antennas;
-_return = false;
-if (debug) then {_chance = 100};
+private _chance = tierWar*3;
+{
+	if (!alive _x) then { continue };
+	private _marker = A3A_antennaMap get netId _x;
+	if (sidesX getVariable _marker == teamPlayer) then {_chance = _chance + 4};
+} forEach A3A_antennas;
+
+private _return = false;
 
 if (random 100 < _chance) then
 	{

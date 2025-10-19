@@ -137,7 +137,7 @@ if (isClass (configfile >> "CfgPatches" >> "Tornado_AWS")) then {
 ["vehiclesTanks", ["BWA3_Leopard2_Fleck"]] call _fnc_saveToTemplate;
 ["vehiclesAA", _AA] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", _gunboats] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", _Amphibious] call _fnc_saveToTemplate;
 

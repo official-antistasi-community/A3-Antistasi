@@ -99,7 +99,7 @@ class Templates
     class Vanilla_LDF : Vanilla_Base
     {
         side = "Occ";
-        flagTexture = "a3\data_f_enoch\flags\flag_enoch_co.paa";
+        flagTexture = "a3\data_f_enoch\flags\flag_eaf_co.paa";
         name = "A3 LDF";
         file = "Vanilla_AI_LDF";
         maps[] = {"enoch","vt7"};
@@ -168,17 +168,42 @@ class Templates
         shortName = "LFF";
         lore = $STR_A3A_templates_lore_LFF;
     };
+
     class Vanilla_Civ : Vanilla_Base
     {
         side = "Civ";
-        flagTexture = "a3\data_f\flags\flag_aaf_co.paa";
-        name = "A3 Civilians";
+        flagTexture = "\A3\Data_F\Flags\Flag_Altis_CO.paa";
+        name = "A3 Altian Civilians";
         file = "Vanilla_Civ";
-        shortName = "Civilian";
+        shortName = "Altian";
+        maps[] = {"altis"};
+        lore = $STR_A3A_templates_lore_CIV;
+    };
+    
+    class Vanilla_Civ_LIV : Vanilla_Base
+    {
+        side = "Civ";
+        flagTexture = "\a3\Data_F_Enoch\Flags\flag_Enoch_CO.paa";
+        name = "A3 Livonian Civilians";
+        file = "Vanilla_Civ_LIV";
+        shortName = "Livonian";
+        maps[] = {"enoch","vt7"};
+        lore = $STR_A3A_templates_lore_CIV;
+    };
+    
+    class Vanilla_Civ_TNA : Vanilla_Base
+    {
+        side = "Civ";
+        flagTexture = "\A3\Data_F_Exp\Flags\flag_Tanoa_CO.paa";
+        name = "A3 Tanoan Civilians";
+        file = "Vanilla_Civ_TNA";
+        shortName = "Tanoan";
+        maps[] = {"Tanoa"};
         lore = $STR_A3A_templates_lore_CIV;
     };
 
     // ***************************** Western Sahara *****************************
+    
     class WS_Base : Vanilla_Base
     {
         requiredAddons[] = {"Weapons_1_F_lxWS"};
@@ -227,7 +252,7 @@ class Templates
     class WS_TURA : WS_Base
     {
         side = "Reb";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "\lxws\data_f_lxws\img\markers\Tura_CA.paa";
         name = "WS Tura";
         file = "WS_Reb_TURA";
         shortName = "Tura";
@@ -251,7 +276,9 @@ class Templates
         shortName = "NATO";
         lore = $STR_A3A_templates_lore_NATO;     
     };
-	
+
+    // ***************************** EF *****************************
+
     class EF_Base : Vanilla_Base
     {
         requiredAddons[] = {"EF_Data"};
@@ -283,7 +310,7 @@ class Templates
 
     class VN_Base
     {
-        requiredAddons[] = {"vn_weapons"};
+        requiredAddons[] = {"loadorder_f_vietnam"};
         logo = "\vn\data_f_vietnam\logos\vn_sml_ca.paa";
         basepath = QPATHTOFOLDER(Templates\Templates\VN);
         priority = 20;
@@ -336,7 +363,7 @@ class Templates
     {
         requiredAddons[] = {"A3_Aegis_Weapons_F_Aegis"};
         logo = "\A3_Aegis\Data_F_Aegis\Logos\arma3_aegis_logo_CA.paa";
-        basepath = QPATHTOFOLDER(Templates\Templates\Aegis)
+        basepath = QPATHTOFOLDER(Templates\Templates\Aegis);
         priority = 25;
     };
 
@@ -587,6 +614,16 @@ class Templates
         shortName = "NAPA";
         lore = $STR_A3A_templates_lore_NAPA;
     };
+	
+    class RHS_SDK : RHS_Base
+    {
+        side = "Reb";
+        flagTexture = "\A3\Data_F_exp\Flags\Flag_Synd_CO.paa";
+        name = "RHS SDK";
+        file = "RHS_Reb_SDK";
+        maps[] = {"Tanoa"};
+        climate[] = {"tropical"};
+    };
 
     class RHS_Civ : RHS_Base
     {
@@ -745,6 +782,16 @@ class Templates
         shortName = "CW SOV";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_Sov;
     };
+	
+    class 3CBF_TLA : 3CBF_Base
+    {
+        side = "Inv";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_cw_sov\flag\cw_sov_army_flag_co.paa";
+        name = "3CB TLA";
+        file = "3CB_AI_TLA";
+        maps[] = {"tanoa"};
+        climate[] = {"tropical"};
+    };
 
     class 3CBF_CW_US : 3CBF_Base
     {
@@ -845,6 +892,15 @@ class Templates
         lore = $STR_A3A_templates_lore_3CB_AI_LDF;
     };
 
+    class 3CB_GAF : 3CBF_Base
+    {
+        side = "Occ";
+        flagTexture = "\UK3CB_Factions\addons\UK3CB_Factions_GAF\Flag\GAF_flag_co.paa";
+        name = "3CB GAF Temperate";
+        file = "3CB_AI_GAF";
+        climate[] = {"temperate"};
+    };
+
     class 3CBF_KRG : 3CBF_Base
     {
         side = "Occ";
@@ -854,6 +910,14 @@ class Templates
         climate[] = {"arid"};
         shortName = "KRG";
         lore = $STR_A3A_templates_lore_3CB_AI_KRG;
+    };
+    class 3CB_Marines_Temperate : 3CBF_Base
+    {
+        side = "Occ";
+        flagTexture = "a3\data_f\flags\flag_us_co.paa";
+        name = "3CB Marines Temperate";
+        file = "3CB_AI_Marines_Temperate";
+        climate[] = {"temperate"};
     };
     class 3CBF_ION_Arid : 3CBF_Base
     {
@@ -914,6 +978,14 @@ class Templates
         shortName = "FIA";
         lore = $STR_A3A_templates_lore_FIA;
     };
+    class 3CB_TFIA : 3CBF_Base
+    {
+        side = "Reb";
+        flagTexture = "\A3\Data_F_Exp\Flags\flag_Tanoa_CO.paa";
+        name = "3CB TFIA";
+        file = "3CB_Reb_SDK";
+        maps[] = {"Tanoa"};
+    };
     class 3CB_Reb_LSM : 3CBF_Base
     {
         side = "Reb";
@@ -927,7 +999,7 @@ class Templates
     class 3CBF_CHC : 3CBF_Base
     {
         side = "Civ";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_chc\flag\chc_flag_co.paa";
         name = "3CB Cherno";
         file = "3CB_Civ_CHC";
         shortName = "Civilian";
@@ -937,7 +1009,7 @@ class Templates
     class 3CBF_TKC : 3CBF_Base
     {
         side = "Civ";
-        flagTexture = "a3\data_f\flags\flag_fia_co.paa";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_tkc\flag\tkc_flag_co.paa";
         name = "3CB Takistan";
         file = "3CB_Civ_TKC";
         maps[] = {"takistan","tem_anizay","kunduz"};
@@ -945,6 +1017,28 @@ class Templates
         lore = $STR_A3A_templates_lore_TKC;
     };
 
+        class 3CBF_MEC : 3CBF_Base
+    {
+        side = "Civ";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_mec\flag\mec_flag_co.paa";
+        name = "3CB Middle Eastern";
+        file = "3CB_Civ_MEC";
+        maps[] = {"takistan","tem_anizay","kunduz"};
+        climate[] = {"arid"};
+        shortName = "Civilian";
+        lore = $STR_A3A_templates_lore_MEC;
+    };
+        class 3CBF_ADC : 3CBF_Base
+    {
+        side = "Civ";
+        flagTexture = "uk3cb_factions\addons\uk3cb_factions_adc\flag\adc_flag_co.paa";
+        name = "3CB African Desert";
+        file = "3CB_Civ_ADC";
+        maps[] = {"takistan","tem_anizay","kunduz"};
+        climate[] = {"arid","tropical"};
+        shortName = "Civilian";
+        lore = $STR_A3A_templates_lore_ADC;
+    };
     // ***************************** 3CB BAF *****************************
 
     class 3CBBAF_Base
@@ -1504,6 +1598,15 @@ class Templates
         shortName = "US";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
     };
+    class IFA_USMC : IFA_US
+    {
+        side = "Occ";
+        flagTexture = "\ca\data\flag_usmc_co.paa";
+        name = "IFA US Marines";
+        file = "IFA_AI_USMC";
+        shortName = "USMC";
+        lore = $STR_A3A_templates_lore_IFA_AI_USMC;
+    };
     class IFA_UK : IFA_Base
     {
         side = "Occ";
@@ -1706,7 +1809,7 @@ class Templates
 
      // ***************************** CSLA *****************************
 
-     class CSLA_Base
+    class CSLA_Base
     {
         requiredAddons[] = {"CUP_Creatures_People_Civil_Russia", "CUP_BaseConfigs", "CUP_AirVehicles_Core", "CSLA_UI"};       
         basepath = QPATHTOFOLDER(Templates\Templates\CSLA);
@@ -1792,5 +1895,78 @@ class Templates
         file = "CSLA_Civ_TC";
         climate[] = {"Temperate"};
         shortName = "FIA";
+    };
+    // **************** PRACS *****************
+
+    class PRACS_RACS_Base
+    {
+        requiredAddons[] = {"PRACS_Core"}; 
+        basepath = QPATHTOFOLDER(Templates\Templates\PRACS); 
+        logo = "PRACS_Core\Logo\ProjectRACS_mod_ca.paa"; // to be done
+        maps[] = {"sara"};
+        priority = 80;
+    };
+
+    class RACS_Arid : PRACS_RACS_Base
+    {
+        side = "Occ";
+        flagTexture = "\PRACS_Core\Flags\KingdomofSahrani_co.paa";
+        name = "PRACS RACS Arid";
+        file = "PRACS_AI_RACS_Arid";
+        climate[] = {"arid"};
+        shortName = "RACS";
+        lore = $STR_A3A_templates_lore_CUP_AI_RACS;
+    };
+
+    class RACS_Temperate : RACS_Arid
+    {
+        name = "PRACS RACS Temperate";
+        file = "PRACS_AI_RACS_Temperate";
+        climate[] = {"temperate"};
+    };
+
+    class PRACS_SLA_Base
+    {
+        requiredAddons[] = {"PRACS_SLA_Core"}; 
+        basepath = QPATHTOFOLDER(Templates\Templates\PRACS); 
+        logo = "PRACS_SLA_Core\Logo\pracs_sla_mod_ca.paa";
+        maps[] = {"sara"};
+        priority = 80;
+    };
+
+    class SLA_Arid : PRACS_SLA_Base
+    {
+        side = "Inv";
+        flagTexture = "\PRACS_SLA_Core\Flags\flag_north_co.paa";
+        name = "PRACS SLA Arid";
+        climate[] = {"arid"};
+        file = "PRACS_AI_SLA_Arid";
+        shortName = "SLA";
+        lore = $STR_A3A_templates_lore_CUP_AI_SLA;
+    };
+
+    class SLA_Temperate : SLA_Arid
+    {
+        name = "PRACS SLA Temperate";
+        file = "PRACS_AI_SLA_Temperate";
+        climate[] = {"temperate"};
+    };
+
+    class SLA_Rev_Guards_Arid : PRACS_SLA_Base
+    {
+        side = "Inv";
+        flagTexture = "\PRACS_SLA_Core\Flags\flag_north_co.paa";
+        name = "PRACS SLA Guards Arid";
+        climate[] = {"arid"};
+        file = "PRACS_AI_SLA_Rev_Guards_Arid";
+        shortName = "SLA Guards";
+        lore = $STR_A3A_templates_lore_CUP_AI_SLA;
+    };
+
+    class SLA_Rev_Guards_Temperate : SLA_Rev_Guards_Arid
+    {
+        name = "PRACS SLA Guards Temperate";
+        file = "PRACS_AI_SLA_Rev_Guards_Temperate";
+        climate[] = {"temperate"};
     };
 };

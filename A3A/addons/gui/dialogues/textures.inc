@@ -45,6 +45,7 @@ Maintainer: DoomMetal
 #define A3A_Icon_Destroy            A3A_GUI_QTEXTURE_PATH_OF(icon_destroy.paa)
 #define A3A_Icon_Dismiss            A3A_GUI_QTEXTURE_PATH_OF(icon_dismiss.paa)
 #define A3A_Icon_Driver             A3A_GUI_QTEXTURE_PATH_OF(icon_driver.paa)
+#define A3A_Icon_Eng_Squad          A3A_GUI_QTEXTURE_PATH_OF(icon_eng_squad.paa)
 #define A3A_Icon_FastTravel         A3A_GUI_QTEXTURE_PATH_OF(icon_fasttravel.paa)
 #define A3A_Icon_FFV                A3A_GUI_QTEXTURE_PATH_OF(icon_ffv.paa)
 #define A3A_Icon_Garrison           A3A_GUI_QTEXTURE_PATH_OF(icon_garrison.paa)
@@ -61,6 +62,7 @@ Maintainer: DoomMetal
 #define A3A_Icon_Inf_Team           A3A_GUI_QTEXTURE_PATH_OF(icon_inf_team.paa)
 #define A3A_Icon_Logistics          A3A_GUI_QTEXTURE_PATH_OF(icon_logistics.paa)
 #define A3A_Icon_Medic              A3A_GUI_QTEXTURE_PATH_OF(icon_medic.paa)
+#define A3A_Icon_MG_Car             A3A_GUI_QTEXTURE_PATH_OF(icon_mg_car.paa)
 #define A3A_Icon_MG_Team            A3A_GUI_QTEXTURE_PATH_OF(icon_mg_team.paa)
 #define A3A_Icon_Minefield          A3A_GUI_QTEXTURE_PATH_OF(icon_minefield.paa)
 #define A3A_Icon_Mortar_Team        A3A_GUI_QTEXTURE_PATH_OF(icon_mortar_team.paa)
@@ -130,3 +132,9 @@ Maintainer: DoomMetal
 #define A3A_Icon_key_r       A3A_GUI_QTEXTURE_PATH_OF(keys\r_key_ca.paa)
 #define A3A_Icon_key_shift        A3A_GUI_QTEXTURE_PATH_OF(keys\shift_key_ca.paa)
 #define A3A_Icon_key_space       A3A_GUI_QTEXTURE_PATH_OF(keys\space_key_ca.paa)
+
+
+//gun shop 
+#define A3A_Icon_shopping_cart       A3A_GUI_QTEXTURE_PATH_OF(shopping_cart_ca.paa)
+#define A3A_Icon_filter         A3A_GUI_QTEXTURE_PATH_OF(filter_ca.paa)
+#define A3A_Icon_list           A3A_GUI_QTEXTURE_PATH_OF(list_ca.paa)

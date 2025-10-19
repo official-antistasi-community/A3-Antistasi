@@ -79,6 +79,8 @@ setVar("vehiclesPlanesAA", OccAndInv("vehiclesPlanesAA"));
 setVar("vehiclesPlanesCAS", OccAndInv("vehiclesPlanesCAS"));
 setVar("vehiclesPlanesTransport", OccAndInv("vehiclesPlanesTransport"));
 setVar("vehiclesAirPatrol", OccAndInv("vehiclesAirPatrol"));
+setVar("vehiclesTransportBoats",OccAndInv("vehiclesTransportBoats"));
+setVar("vehiclesGunBoats",OccAndInv("vehiclesGunBoats"));
 setVar("staticMortars", OccAndInv("staticMortars") + Reb("staticMortars"));
 setVar("staticAA", OccAndInv("staticAA") + Reb("staticAA"));
 setVar("staticAT", OccAndInv("staticAT") + Reb("staticAT"));
@@ -156,6 +158,13 @@ setVar("vehiclesReb", _vehReb);
 //trucks that can cary logistics cargo
 private _vehCargoTrucks = (_vehTrucks + OccAndInv("vehiclesCargoTrucks")) select { [_x] call A3A_Logistics_fnc_getVehCapacity > 1 };
 setVar("vehiclesCargoTrucks", _vehCargoTrucks);
+
+private _vehUtilityTrucks = 
+OccAndInv("vehiclesAmmoTrucks")
++ OccAndInv("vehiclesRepairTrucks")
++ OccAndInv("vehiclesFuelTrucks")
++ OccAndInv("vehiclesMedical");
+setVar("vehiclesUtilityTrucks", _vehUtilityTrucks);
 
 missionNamespace setVariable ["A3A_faction_all", A3A_faction_all, true];
 A3A_faction_all
