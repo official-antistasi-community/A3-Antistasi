@@ -324,7 +324,6 @@ if (isMultiplayer) then {mapX addAction [localize "STR_A3A_fn_init_initclient_ad
 call A3A_fnc_initBuildableObjects;
 
 // Start cursorObject monitor loop for adding removeStructure actions
-// Note: unitTraits must run first to add engineer trait to default commander
 0 spawn A3A_fnc_initBuilderMonitors;
 
 

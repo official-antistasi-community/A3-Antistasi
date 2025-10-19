@@ -53,7 +53,7 @@ private _containerLabel = _display displayCtrl A3A_IDC_CONTEXTLABEL;
 private _disableAll = [_contextSingle1Button, _contextSingle2Button, _contextSingle3Button, _contextSingle4Button, _contextHoriz1Button, _contextHoriz2Button, _noActionsGroup];
 {_x ctrlShow false; _x ctrlEnable false;} forEach _disableAll;
 
-_vehType = if ( !isClass (configFile >> "CfgVehicles" >> typeOf _vehicle) ) then { -1 } else {[typeOf _vehicle] call HR_GRG_fnc_getCatIndex};
+private _vehType = if ( !isClass (configFile >> "CfgVehicles" >> typeOf _vehicle) ) then { -1 } else {[typeOf _vehicle] call HR_GRG_fnc_getCatIndex};
 private _containerTitle = "";
 
 // First case: Has valid vehicle as cursorObject

@@ -10,8 +10,8 @@ Arguments: None
 FIX_LINE_NUMBERS()
 
 Info("initBuilderMonitors started");
-if !(player call A3A_fnc_isEngineer) exitWith {};
-Info("initBuilderMonitors started2");
+
+waitUntil {sleep 0.1; !isNil "A3A_showBuilderActions"};
 
 // EH to draw icons for nearby under-construction objects
 A3A_buildDrawIconsEH = addMissionEventHandler ["Draw3D", {
@@ -35,18 +35,17 @@ A3A_buildDrawIconsEH = addMissionEventHandler ["Draw3D", {
 // cursorObject monitor loop to add deconstruction actions to built structures
 // (better than spamming 1000 extra remoteExecs on init, probably)
 while { true } do {
+    if (!A3A_showBuilderActions) then { sleep 1; continue };
     if (isNil { cursorObject getVariable "A3A_building" }) then { sleep 1; continue };
     if (!isNil { cursorObject getVariable "A3A_build_removeAction" }) then { sleep 1; continue };
-    if (!A3A_showBuilderActions) then { sleep 1; continue };
 
-    diag_log format ["Adding remove action for item %1", cursorObject];
     cursorObject setVariable ["A3A_build_removeAction", true];
     [
         cursorObject,
         "Destroy",
         "a3\ui_f\data\igui\cfg\actions\repair_ca.paa",
         "a3\ui_f\data\igui\cfg\actions\repair_ca.paa",
-        "true",                                         // was player getUnitTrait 'engineer'
+        "A3A_showBuilderActions",
         "[player] call A3A_fnc_canFight",
         {},
         {},
