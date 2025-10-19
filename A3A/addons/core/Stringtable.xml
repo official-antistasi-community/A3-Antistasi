@@ -6844,6 +6844,18 @@
         <Polish>Kontroluj oddział</Polish>
         <Chinesesimp>控制班组</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_reinf_controlunit_fasttravel">
+        <Original>Fast travel to player</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_controlunit_ft_enemynear">
+        <Original>You cannot fast travel while engaged by enemies.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_controlunit_ft_enemynear2">
+        <Original>You cannot fast travel to a target position that's engaged by enemies.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_controlunit_ft_traveltime">
+        <Original>%1 will arrive in %2 seconds.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_reinf_controlunit_no_belong">
         <Original>You cannot control a unit which does not belong to %1.</Original>
         <Italian>Non puoi controllare un'unità che non appartiene a %1.</Italian>
