@@ -1771,7 +1771,7 @@ class Templates
     {
         requiredAddons[] = {"cwr3_core"};       
         basepath = QPATHTOFOLDER(Templates\Templates\CWR);
-        logo = "\CUP\Creatures\People\CUP_Creatures_People_Core\ui\logo_cup_ca_small.paa";
+        logo = "\cwr3\general\cwr3_core\data\cwr3_logo_128_ca.paa";
         priority = 70;
     };
 
@@ -1781,7 +1781,6 @@ class Templates
         flagTexture = "a3\data_f\flags\flag_us_co.paa";
         name = "CWR US Temprate";
         file = "CWR_AI_US_Army_Temperate";
-        climate[] = {"Temperate"};
         shortName = "US Army";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_US;
     };
@@ -1792,7 +1791,6 @@ class Templates
         flagTexture = "\cwr3\general\cwr3_core\data\flag_ussr_co.paa";
         name = "CWR USSR Temperate";
         file = "CWR_AI_USSR_Temperate";
-        climate[] = {"Temperate"};
         shortName = "USSR";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_Sov;
     };
@@ -1807,6 +1805,35 @@ class Templates
         lore = $STR_A3A_templates_lore_FIA;
     };
 
+    class CWR_Civ : CWR_Base
+    {
+        side = "Civ";
+        flagTexture = "\CUP\BaseConfigs\CUP_BaseConfigs\data\Flags\flag_chernarus_co.paa";
+        name = "CWR CHC";
+        file = "CWR_Civ_CHC";
+        shortName = "Civilian";
+    };
+
+     // ***************************** CWR Brits *****************************
+
+    class CWRB_Base
+    {
+        requiredAddons[] = {"cwr3_expansion_uk"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\CWRBAF);
+        logo = "\cwr3\general\cwr3_core\data\cwr3_logo_128_ca.paa";
+        priority = 70;
+    };
+
+    class CWR_BAF_Temprate : CWRB_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\Data_F\Flags\flag_uk_co.paa";
+        name = "CWR BAF Temperate";
+        file = "CWR_AI_BAF_Temperate";
+        shortName = "BAF";
+        lore = $STR_A3A_templates_lore_BAF;
+    };
+  
     // ***************************** CRO *****************************
 
     class CRO_Base
