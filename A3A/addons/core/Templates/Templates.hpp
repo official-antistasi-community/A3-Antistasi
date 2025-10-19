@@ -1735,6 +1735,24 @@ class Templates
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
     };
 
+    class SPEX_CW : SPEX_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3\Data_F\Flags\flag_uk_co.paa";
+        name = "SPEX Commonwealth";
+        file = "SPEX_AI_CW_Temperate";
+        shortName = "CW";
+        lore = $STR_A3A_templates_lore_IFA_AI_UK;
+    };
+
+    class SPEX_CW_Trop : SPEX_CW
+    {
+        name = "SPEX CW NAC";
+        file = "SPEX_AI_CW_Trop";
+        climate[] = {"tropical","arid"};
+        lore = "British and Commonwealth expeditionary forces in Africa during the North Africa Campaign.";
+    };
+
     class SPEX_WEH : SPEX_Base
     {
         side = "Occ";
@@ -1743,6 +1761,14 @@ class Templates
         file = "SPEX_AI_WEH";
         shortName = "WEH";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_WEH;
+    };
+
+    class SPEX_WEH_Trop : SPEX_WEH
+    {
+        name = "SPEX WEH DAK";
+        file = "SPEX_AI_WEH_Trop";
+        climate[] = {"tropical","arid"};
+        lore = "Deutsches Afrikakorps, German Africa Corps, was the German expeditionary forces in Africa during the North Africa Campaign";
     };
 
     class SPEX_Reb : SPEX_Base
