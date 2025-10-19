@@ -1237,7 +1237,7 @@ class Templates
         shortName = "HIL";
         lore = $STR_A3A_templates_lore_CUP_AI_HIL;
     };
-        class CUP_AAF : CUP_Base
+    class CUP_AAF : CUP_Base
     {
         side = "Occ";
         flagTexture = "a3\data_f\flags\flag_aaf_co.paa";
@@ -1248,7 +1248,7 @@ class Templates
         shortName = "AAF";
         lore = $STR_A3A_templates_lore_AAF;
     };
-        class CUP_CSAT : CUP_Base
+    class CUP_CSAT : CUP_Base
     {
         side = "Inv";
         flagTexture = "A3\Data_F\Flags\Flag_CSAT_CO.paa";
