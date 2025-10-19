@@ -38,6 +38,7 @@ while { true } do {
     if (!isNil { cursorObject getVariable "A3A_build_removeAction" }) then { sleep 1; continue };
 
     cursorObject setVariable ["A3A_build_removeAction", true];
+    private _price = cursorObject getVariable ["A3A_build_price",10];
     [
         cursorObject,
         "Destroy",
@@ -55,6 +56,6 @@ while { true } do {
         },
         {},
         [],
-        10
+        0.4 * sqrt _price
     ] call BIS_fnc_holdActionAdd;
 };
