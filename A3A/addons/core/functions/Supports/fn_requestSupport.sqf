@@ -33,8 +33,7 @@ A3A_activeSupports = A3A_activeSupports select { _x#4 > 0 };                // r
 // HQ knowledge update
 call {
     private _hqDist = _target distance2d markerPos "Synd_HQ";
-    private _bunker = markerPos "Synd_HQ" nearObjects ["Land_Bunker_01_tall_F", 50] isNotEqualTo [];
-    private _maxSpot = (500 + random 1000) * ([0.5, 1] select _bunker);
+    private _maxSpot = 250 + A3A_HQDetectionRadius + random 500;
     _hqSpot = (1 + random 1) * linearConversion [0, _maxSpot, _hqDist, 1, 0, true]; 
     if (_hqSpot <= 0) exitWith {};
 

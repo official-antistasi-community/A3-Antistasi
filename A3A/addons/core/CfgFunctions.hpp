@@ -145,6 +145,7 @@ class CfgFunctions
             class getAggroLevelString {};
             class getMarkerForPos {};
             class getRecentDamage {};
+            class getRoleCap {};
             class getVehiclesAirSupport {};
             class getVehicleSellPrice {};
             class getVehiclesGroundSupport {};
@@ -174,7 +175,6 @@ class CfgFunctions
             class playableUnits {};
             class postmortem {};
             class postmortemLoop {};
-            class radioCheck {};
             class rebuildAssets {};
             class rebuildRadioTower {};
             class relocateHQObjects {};
@@ -207,6 +207,8 @@ class CfgFunctions
             class buildingComplete {};
             class buildingPlacer {};
             class buildingPlacerStart {};
+            class calcBuildingCosts {};
+            class calcBuildingReveal {};
             class initBuildableObjects {};
             class initBuilderMonitors {};
             class initPlacerDB {};
@@ -293,7 +295,6 @@ class CfgFunctions
             class loadPreviousSession {};
             class mapInfoDialog {};
             class mineDialog {};
-            class persistentSave {};
             class skiptime {};
             class squadOptions {};
             class squadRecruit {};
@@ -305,6 +306,7 @@ class CfgFunctions
             class addArtilleryFiredEH {};
             class addVehAttachDetachEH {};
             class addVehGetInOutEH {};
+            class buildingChangedEH {};
             class combatModeChangedEH {};
             class enemyUnitDeletedEH {};
             class enemyUnitKilledEH {};
@@ -421,6 +423,7 @@ class CfgFunctions
             class searchIntelOnLeader {};
             class selectIntel {};
             class showIntel {};
+            class updateIntelFeed {};
         };
 
         class keybinds {
@@ -676,6 +679,7 @@ class CfgFunctions
             class calculateSupportCallReveal {};
             class clearTargetArea {};
             class createSupport {};
+            class findArtilleryPos {};
             class getArtilleryRanges {};
             class getMortarMags {};
             class initSupports {};
