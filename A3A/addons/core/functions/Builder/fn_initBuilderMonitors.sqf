@@ -11,8 +11,6 @@ FIX_LINE_NUMBERS()
 
 Info("initBuilderMonitors started");
 
-waitUntil {sleep 0.1; !isNil "A3A_showBuilderActions"};
-
 // EH to draw icons for nearby under-construction objects
 A3A_buildDrawIconsEH = addMissionEventHandler ["Draw3D", {
     if !(A3A_drawBuilderIcons) exitWith {};
