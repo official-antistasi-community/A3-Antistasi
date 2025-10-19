@@ -59,6 +59,11 @@ class CfgFunctions {
             class sizeOf {};
         };
 
+        class roleSelect {
+            file = QPATHTOFOLDER(functions\roleSelect);
+            class roleSelectDialog {};
+        };
+
         class gunShop {
             file = QPATHTOFOLDER(functions\gunShop);
             class addItemToBlackList {};

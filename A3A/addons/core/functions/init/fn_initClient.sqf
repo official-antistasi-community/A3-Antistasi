@@ -83,14 +83,14 @@ while {true} do {
 
 Info("Server started, continuing with client init");
 
-call A3A_fnc_installSchrodingersBuildingFix;
+//call A3A_fnc_installSchrodingersBuildingFix;
 
 if (!isServer) then {
     // get server to send us the current destroyedBuildings list, hide them locally
-    "destroyedBuildings" addPublicVariableEventHandler {
-        { hideObject _x } forEach (_this select 1);
-    };
-    [clientOwner, "destroyedBuildings"] remoteExecCall ["publicVariableClient", 2];
+    //"A3A_destroyedBuildings" addPublicVariableEventHandler {
+    //    { hideObject _x } forEach (_this select 1);
+    //};
+    //[clientOwner, "A3A_destroyedBuildings"] remoteExecCall ["publicVariableClient", 2];
 
     boxX call jn_fnc_arsenal_init;
     if (A3A_hasACEMedical) then { call A3A_fnc_initACEUnconsciousHandler };
@@ -335,8 +335,6 @@ player addAction ["Open Heli Garage",
 ", nil, 4, true, true, "","(count (nearestObjects [player, ['a3a_helipad'], 8, true]) > 0) && {((isNil 'HR_GRG_Placing') || {!HR_GRG_Placing}) && player isEqualTo vehicle player && _this == _this getVariable ['owner',objNull]}"
 ];
 
-[] call A3A_fnc_unitTraits;
-
 // Get list of buildable objects, has map (and template?) dependency
 call A3A_fnc_initBuildableObjects;
 
@@ -367,6 +365,13 @@ A3A_aliveTime = time;
 
 initClientDone = true;
 Info("initClient completed");
+
+if (player == theBoss) then {
+    player setVariable ["A3A_Role", "rifleman"];
+    ["commander",true] call A3A_fnc_unitTraits;
+} else {
+    createDialog "A3A_RoleSelectDialog"; // player will be commander if they set up the game
+};
 
 if(!isMultiplayer) then
 {

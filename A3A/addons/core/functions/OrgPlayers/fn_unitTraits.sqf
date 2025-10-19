@@ -1,77 +1,61 @@
 /*
-Author: Barbolani
-Maintainer: DoomMetal, MeltedPixel, Bob-Murphy, Wurzel0701
+Maintainer: Tiny
     Sets the units traits (camouflage, medic, engineer) for the selected role of the player
-    THIS FILE DEPENDS ON ONLY THE DEFAULT COMMANDER HAVING A ROLE DESCRIPTION!
 
 Arguments:
-    <NULL>
+    Role name
 
 Return Value:
     <NULL>
 
 Scope: Local
 Environment: Any
-Public: No
+Public: Yes
 Dependencies:
-    <NULL>
+    A3A_roleTraitHM
 
 Example:
-    [] spawn A3A_fnc_unitTraits;
+    ["medic"] spawn A3A_fnc_unitTraits;
 */
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-private _type = typeOf player;
-private _text = "";
-private _titleStr = localize "STR_A3A_fn_orgp_unitTraits_title";
+#define CUSTOMTRAITLIST [] // shouldnt need any of these but they're here if needed
+private _hintTitle = localize "STR_A3A_fn_orgp_unitTraits_title";
+params [["_roleName", player getVariable ["A3A_Role", "rifleman"]], ["_silent",false]];
 
-if(roleDescription player == "Default Commander") then
+private _isCommander = (player isEqualTo theBoss);
+
+private _preferredRole = _roleName;
+
+if (_roleName != "commander") then {
+    player setVariable ["A3A_Role", _roleName, true];
+};
+
+if (_isCommander) then {
+    _roleName = "commander";
+};
+
+// Set the unit traits
+private _traitHM = A3A_roleTraitHM get _roleName;
 {
-    //Same values as teamleader
-    player setUnitTrait ["camouflageCoef",0.8];
-    player setUnitTrait ["audibleCoef",0.8];
-    player setUnitTrait ["loadCoef",1.4];
-    player setUnitTrait ["medic", true];
-    player setUnitTrait ["explosiveSpecialist", true];
-    player setUnitTrait ["UAVHacker", true];
-    // ACE clears the engineer unitTrait and adds this var at CBA initPost, so we have to do it ourselves
-    if (missionNamespace getVariable ["ace_repair_enabled", false]) then { player setVariable ["ace_isEngineer", true, true] } else { player setUnitTrait ["engineer", true] };
-    _text = localize "STR_A3A_fn_orgp_unitTraits_commander1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_commander2";
-}
-else
-{
-    switch (_type) do
-    {
-    	case "I_G_medic_F": {
-            _text = localize "STR_A3A_fn_orgp_unitTraits_medic1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_medic2";
-        };
-    	case "I_G_Soldier_TL_F": {
-            player setUnitTrait ["camouflageCoef",0.8];
-            player setUnitTrait ["audibleCoef",0.8];
-            player setUnitTrait ["loadCoef",1.4];
-            _text = localize "STR_A3A_fn_orgp_unitTraits_teamlead1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_teamlead2";
-        };
-    	case "I_G_Soldier_F": {
-            player setUnitTrait ["UAVHacker",true];
-            _text = localize "STR_A3A_fn_orgp_unitTraits_rifle1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_rifle2";
-        };
-    	case "I_G_Soldier_GL_F": {
-            player setUnitTrait ["camouflageCoef",1.2];
-            player setUnitTrait ["loadCoef",0.8];
-            _text = localize "STR_A3A_fn_orgp_unitTraits_grenadier1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_grenadier2";
-        };
-    	case "I_G_Soldier_AR_F": {
-            player setUnitTrait ["audibleCoef",1.2];
-            player setUnitTrait ["loadCoef",0.8];
-            _text = localize "STR_A3A_fn_orgp_unitTraits_autorifle1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_autorifle2";
-        };
-    	case "I_G_engineer_F": {
-            _text = localize "STR_A3A_fn_orgp_unitTraits_engi1" + "<br/>" + localize "STR_A3A_fn_orgp_unitTraits_engi2";
-        };
+    _name = _x;
+    _value = _y;
+    if (_name == "engineer" && (missionNamespace getVariable ["ace_repair_enabled", false])) exitWith {
+        // ACE engineer magic
+        player setVariable ["ace_isEngineer", _value, true];
     };
-};
+    if (_name == "code") exitWith {
+        [player] call _value;
+    };
+    player setUnitTrait [_name, _value, (_name in CUSTOMTRAITLIST)];
+} forEach _traitHM;
 
-[_titleStr, format [localize "STR_A3A_fn_orgp_unitTraits_you",_text]] spawn {
-	sleep 5;
-	_this call A3A_fnc_customHint;
+// Quit if silent (commander moves around)
+if (_silent) exitWith {};
+_textArr = [format [localize "STR_A3A_fn_orgp_unitTraits_you",localize format ["STR_A3A_fn_orgp_unitTraits_%1_1", _preferredRole]], localize format ["STR_A3A_fn_orgp_unitTraits_%1_2", _preferredRole]];
+if (_isCommander) then {
+    // append extra text letting player know the role doesnt take effect until they lose command
+    _textArr pushBack (localize "STR_antistasi_dialogs_roleselect_isCommander");
 };
+_text = _textArr joinString "<br/><br/>"; // assemble all info and add spacers
+[_hintTitle, _text] spawn A3A_fnc_customHint;

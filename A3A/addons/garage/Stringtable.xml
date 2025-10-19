@@ -44,6 +44,9 @@
         <Turkish>%1'e ait bir Havaalanının yakınında değilken bir uçağı garaja alamazsınız. Garajı kullanabilmek için lütfen uçağınızı kontrolünüz altındaki bir Havaalanına götürün</Turkish>
         <Chinesesimp>你不能在不属于 1% 的机场附近存放飞行器，移动到附近的友军机场来存取它</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Feedback_addVehicle_Attached">
+        <Original>You can't garage an object that's attached to another vehicle</Original>
+      </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_badLocation">
         <Original>You and the vehicle need to be in a %1 garrisons surroundings in order to garage a it</Original>
         <German>Du musst dich mit dem Fahrzeug in der Nähe eines 1% Standorts befinden um es in einer Garage zu parken.</German>

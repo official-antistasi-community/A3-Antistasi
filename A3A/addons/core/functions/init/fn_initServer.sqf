@@ -248,42 +248,11 @@ addMissionEventHandler ["PlayerDisconnected",{
     false;
 }];
 
-addMissionEventHandler ["BuildingChanged", {
-    params ["_oldBuilding", "_newBuilding", "_isRuin"];
+addMissionEventHandler ["BuildingChanged", A3A_fnc_buildingChangedEH];
 
-    Debug_4("%1 (%2) changed to %3 (%4)", typeof _oldBuilding, netId _oldBuilding, typeof _newBuilding, netId _newBuilding);
-
-    // If it's a police station, mark as destroyed
-    // Might not be spawned, so can't depend on the furniture case
-    if (netId _oldBuilding in A3A_policeStations) then {
-        private _city = A3A_policeStations get netId _oldBuilding;
-        A3A_garrison get _city set ["policeStation", false];
-        A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) - 4];
-        A3A_spawnPlaceStats deleteAt _city;
-        A3A_policeStations deleteAt netId _oldBuilding;
-        ["TaskSucceeded", ["", "Police Station Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
-
-        // Delete any furniture
-        private _attached = _oldBuilding getVariable ["A3A_furniture", []];
-        { deleteVehicle _x } forEach _attached;
-
-        // Delete police car from garrison because the spawn place won't be saved
-        private _vehicles = A3A_garrison get _city get "vehicles";
-        A3A_garrison get _city set ["vehicles", _vehicles select { _x#1 isEqualType [] }];
-    };
-
-    if (_isRuin) then {
-
-        // TODO: this whole system doesn't work for buildings that have an intermediate damage model
-        _oldBuilding setVariable ["ruins", _newBuilding];
-        _newBuilding setVariable ["building", _oldBuilding];
-
-        // Antenna dead/alive status is handled separately
-        if !(_oldBuilding in antennas || _oldBuilding in antennasDead) exitWith {
-            destroyedBuildings pushBack _oldBuilding;
-        };
-    };
-}];
+// Now destroy the saved buildings so that BuildingChanged registers them correctly
+private _savedDestroyed = A3A_destroyedBuildings; A3A_destroyedBuildings = [];
+{ _x setDamage [1, false] } forEach _savedDestroyed;
 
 addMissionEventHandler ["EntityKilled", {
     params ["_victim", "_killer", "_instigator"];
@@ -390,8 +359,6 @@ A3A_garrisonOps = [];
 [] spawn A3A_fnc_resourcecheck;                     // 10-minute loop
 [] spawn A3A_fnc_aggressionUpdateLoop;              // 1-minute loop
 [] spawn A3A_fnc_garbageCleanerTracker;             // 5-minute loop
-
-savingServer = false;           // enable saving
 
 // Autosave loop. Save if there were any players on the server since the last save.
 [] spawn {
