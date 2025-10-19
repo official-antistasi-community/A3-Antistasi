@@ -28,5 +28,6 @@ waitUntil {
 	(_roadblockTemp && {spawner getVariable _markerX == 2}) or
 	((garrison getVariable [_markerX + "_lastAttack", 0]) + 600 < serverTime)
 };
+// TODO: move this to new garrison logic?
 
 [_markerX] call BIS_fnc_deleteTask;

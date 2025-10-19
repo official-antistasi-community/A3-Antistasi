@@ -20,22 +20,16 @@ if (_pool == "legacy") then {
 };
 
 
-if (A3A_hasACE) then
-{
-	if ((isNull _killer) || (_killer == _victim)) then
-	{
+if (A3A_hasACE) then {
+	if ((isNull _killer) || (_killer == _victim)) then {
 		_killer = _victim getVariable ["ace_medical_lastDamageSource", _killer];
 	};
-}
-else
-{
+} else {
     if (_victim getVariable ["incapacitated", false]) then {
-        private _downedBy = _victim getVariable "A3A_downedBy";
-        if (!isNil "_downedBy") then {
-            _killer = _downedBy;
-        };
+        _killer = _victim getVariable ["A3A_downedBy", _killer];
     };
 };
+
 
 if (_victimSide == Occupants or _victimSide == Invaders) then {
     [_victim, _victimGroup, _killer] spawn A3A_fnc_AIreactOnKill;
@@ -69,37 +63,21 @@ if (side (group _killer) == teamPlayer) then
         private _uid = (["AI",getPlayerUID _killer] select (isPlayer _killer));
         private _name = name _killer;
         Debug_3("aggroEvent | Rebel %1 [UID: %2 Name: %3] killed a surrendered unit", _killer, _uid, _name);
-		if (_victimSide == Occupants) then
-		{
-			[0,-2,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-		};
+		[-2, getPosATL _victim] remoteExecCall ["A3A_fnc_citySupportChange", 2];     // always punish rebels for murder
         [_victimSide, 20, 30] remoteExec ["A3A_fnc_addAggression", 2];
 	}
 	else
 	{
-		[-1,1,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
+        private _marker = _victim getVariable ["markerX", ""];
+        [1, [_marker, getPosATL _victim] select (_marker == "")] remoteExecCall ["A3A_fnc_citySupportChange", 2];
         [_victimSide, 0.5, 45] remoteExec ["A3A_fnc_addAggression", 2];
 	};
-}
-else
-{
-	if (_victimSide == Occupants) then
-	{
-		[-0.25,0,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-	}
-	else
-	{
-		[0.25,0,getPosATL _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-	};
 };
 
-private _victimLocation = _victim getVariable ["markerX", ""];
-if (_victimLocation != "") then
-{
-	if (sidesX getVariable [_victimLocation,sideUnknown] == _victimSide) then
-	{
-		[_victim getVariable "unitType",_victimSide,_victimLocation,-1] remoteExec ["A3A_fnc_garrisonUpdate",2];
-        [_victimLocation,_victimSide] remoteExec ["A3A_fnc_zoneCheck",2]
-	};
+/*
+// Handled in AIReactOnKill
+private _marker = _victim getVariable ["markerX", ""];
+if (_marker != "") then {
+    A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
 };
-
+*/

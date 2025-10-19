@@ -35,11 +35,14 @@ if (!alive _vehicle) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Destroyed"] rem
 if (locked _vehicle > 1) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Locked"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 if (_player isNotEqualTo vehicle _player) exitWith { ["STR_HR_GRG_Feedback_addVehicle_inVehicle"] remoteExec ["HR_GRG_fnc_Hint", _client] ; false };
 if (_player distance _vehicle > 25) exitWith {["STR_HR_GRG_Feedback_addVehicle_Distance"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+if (!isNull attachedTo _vehicle) exitWith {["STR_HR_GRG_Feedback_addVehicle_Attached"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     //Valid area
 private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
 private _inArea = _friendlyMarkers findIf { count ([_player, _vehicle] inAreaArray _x) > 1 };
-if !(_inArea > -1) exitWith {["STR_HR_GRG_Feedback_addVehicle_badLocation",[FactionGet(reb,"name")]] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+private _nearHelipads = nearestObjects [_vehicle, ["a3a_helipad"], 30, true];
+private _isNearHelipad = (count _nearHelipads > 0) && (_vehicle isKindOf "Helicopter");
+if (_inArea == -1 && {!_isNearHelipad}) exitWith {["STR_HR_GRG_Feedback_addVehicle_badLocation",[FactionGet(reb,"name")]] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     //No hostiles near
 
@@ -51,12 +54,12 @@ if ([getPosATL _player] call A3A_fnc_enemyNearCheck) exitWith {
 
 //Utility refund
 private _utilityRefund = {
-    params ["_object", ["_instantRefund", true]];
+    params ["_object"];
 
     // canGarage true means it's in the utilityItem lists
     private _flags = (A3A_utilityItemHM get typeof _object) # 4;
 
-    if ("cmmdr" in _flags && _player isNotEqualTo theBoss && _instantRefund) exitWith {
+    if ("cmmdr" in _flags && _player isNotEqualTo theBoss) exitWith {
         ["STR_HR_GRG_Feedback_addVehicle_commander_only"] remoteExec ["HR_GRG_fnc_Hint", _client];
         false;
     };
@@ -84,16 +87,16 @@ private _utilityRefund = {
     };
 
     deleteVehicle _object;
-    if (_instantRefund) exitWith {
-        if (_toRefund > 0) then {
-            [0,_toRefund] spawn A3A_fnc_resourcesFIA;
-        };
-        [_feedBack] remoteExec ["HR_GRG_fnc_Hint", _client];
-        true;
-    };
-    _toRefund
+    if (_toRefund > 0) then { [0,_toRefund] spawn A3A_fnc_resourcesFIA };
+    [_feedBack] remoteExec ["HR_GRG_fnc_Hint", _client];
+    true;
 };
-if (_vehicle getVariable ['A3A_canGarage', false]) exitwith { [_vehicle] call _utilityRefund };
+
+if (_vehicle getVariable ['A3A_canGarage', false]) exitwith {
+    private _marker = _vehicle getVariable "markerX";
+    if (!isNil "_marker") then { isNil { [_vehicle] call A3A_fnc_garrisonServer_remVehicle } };     // must be done before deletion
+    [_vehicle] call _utilityRefund;
+};
 
     //Towing
 if !((_vehicle getVariable ["SA_Tow_Ropes",objNull]) isEqualTo objNull) exitWith {["STR_HR_GRG_Feedback_addVehicle_SATow"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
@@ -117,38 +120,24 @@ if ((call HR_GRG_VehCap - _capacity) < (_countStatics + 1)) exitWith { ["STR_HR_
 
 //Block air garage outside of airbase
 if (
-    (_class isKindOf "Air")
-    && {count (airportsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (_player inArea _x)}) < 1} //no airports
+    ((_class isKindOf "Air")
+    && {count (airportsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (_player inArea _x)}) < 1 //no airports
+    }) && {!_isNearHelipad} // near helipad
 ) exitWith {["STR_HR_GRG_Feedback_addVehicle_airBlocked", [FactionGet(reb,"name")]] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
 //here to allow adaption of external Antistasi system without needing to addapt code under APL-ND
 private _broadcastReportedVehsAndStaticsToSave = {
-    publicVariable "staticsToSave";
 };
 //_this is vehicle
 private _deleteFromReportedVehsAndStaticsToSave = {
-    staticsToSave deleteAt (staticsToSave find _this);
+    private _marker = _this getVariable "markerX";
+    if (!isNil "_marker") then { isNil { [_this] call A3A_fnc_garrisonServer_remVehicle } };     // must be done before deletion
 };
 //_this is vehicle
 private _transferToArsenal = {
     [_this,boxX] call A3A_fnc_ammunitionTransfer;
 };
 
-//_this is vehicle
-private _unloadAceCargo = {
-    private _toRefund = 0;
-    {
-        if !(_x isEqualType objNull) then { continue };
-        if (typeOf _x in ["ACE_Wheel", "ACE_Track"]) then { continue };
-        [_x, _this] call ace_cargo_fnc_unloadItem;
-
-        if (_x getVariable ['A3A_canGarage', false]) then { _toRefund = _toRefund + ([_x, false] call _utilityRefund) };
-    } forEach (_this getVariable ["ace_cargo_loaded", []]);
-
-    if (_toRefund > 0) then {
-        [_toRefund] remoteExec ["A3A_fnc_resourcesPlayer", _client];
-    };
-};
 
 //---------------------------------------------------------|
 // Everything above this line is under the license: MIT    |
@@ -186,7 +175,6 @@ private _addVehicle = {
     //Antistasi adaptions
     _this call _transferToArsenal;
     _this call _deleteFromReportedVehsAndStaticsToSave;
-    _this call _unloadAceCargo;
 
     deleteVehicle _this;
 
@@ -206,9 +194,18 @@ private _addVehicle = {
 private _locking = if (_lockUID isEqualTo "") then {false} else {true};
 private _lockName = if (_locking) then { name _player } else { "" };
 private _catsRequiringUpdate = [];
+
+// Remove ACE cargo first, otherwise it'll be stuck underground forever
+{
+    if !(_x isEqualType objNull) then { continue };
+    if (typeOf _x in ["ACE_Wheel", "ACE_Track"]) then { continue };
+    [_x, _vehicle] call ace_cargo_fnc_unloadItem;
+} forEach (_vehicle getVariable ["ace_cargo_loaded", []]);
+
+// Can only deal correctly with static weapons here. Drop everything else where it is.
 {
     detach _x;
-    _x call _addVehicle;
+    if (_x isKindOf "StaticWeapon") then { _x call _addVehicle };
 } forEach attachedObjects _vehicle;
 _vehicle call _addVehicle;
 
