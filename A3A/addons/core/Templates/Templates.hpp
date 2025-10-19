@@ -1807,6 +1807,27 @@ class Templates
         lore = $STR_A3A_templates_lore_FIA;
     };
 
+    // ***************************** AMF *****************************
+
+    class AMF_Base
+    {
+        requiredAddons[] = {"AMF_FAMAS","CUP_AirVehicles_Core"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\AMF);
+        logo = "\AMF_Pack_Corps\Logos\AMF\AMF_services_128.paa";
+        priority = 80;
+    };
+
+    class AMF_France : AMF_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\France_ca.paa";
+        name = "AMF French Army";
+        file = "AMF_AI_France";
+        climate[] = {};
+        shortName = "French Army";
+        lore = "";
+    };
+
     // ***************************** TMT *****************************
 
     class TMT_Base
