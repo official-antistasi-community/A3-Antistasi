@@ -10312,7 +10312,7 @@
         <Russian>Спецназ</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntSPTCll_SAMLONG">
-        <Original>Confirmed launch of %1 SAM.</Original>
+        <Original>%1 SAM is acquiring a target.</Original>
         <Korean>%1 세력의 지대공미사일 발사가 확인됨</Korean>
         <Russian>Подтверждена работа ЗРК %1</Russian>
       </Key>

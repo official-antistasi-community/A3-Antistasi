@@ -45,7 +45,8 @@ if (_airports isEqualTo []) exitWith {
 
 private _airport = _airports selectRandomWeighted _weights;
 private _launcherType = ["B_SAM_System_03_F", "O_SAM_System_04_F"] select (_side == Invaders);
-private _launcher = [_launcherType, markerPos _airport, 50, 5, true] call A3A_fnc_safeVehicleSpawn;
+private _spawnPos = [markerPos _airport, 10, 100] call A3A_fnc_findArtilleryPos;
+private _launcher = createVehicle [_launcherType, _spawnPos, [], 0, "NONE"];
 
 private _group = [_side, _launcher] call A3A_fnc_createVehicleCrew;
 [_launcher, _side, _resPool] call A3A_fnc_AIVEHInit;

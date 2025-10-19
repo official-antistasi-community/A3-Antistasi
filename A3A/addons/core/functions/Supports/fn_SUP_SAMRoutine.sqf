@@ -55,7 +55,7 @@ while {true} do
         Debug_2("Next target for %2 is %1", _suppTarget, _supportName);
 
         [_reveal, getPosATL _targetObj, _side, "SAM", _targetObj, 60] spawn A3A_fnc_showInterceptedSupportCall;
-        
+
         _targTimeout = (time + 120);
         _acquisition = 0;
     };
@@ -87,7 +87,7 @@ while {true} do
     Debug("Firing at target");
     //_launcher reveal [_targetObj, 4];           // does this do anything?
     _launcher fireAtTarget [_targetObj];
-    [_reveal, getPosATL _targetObj, _side, "SAM", _targetObj, 60] spawn A3A_fnc_showInterceptedSupportCall;
+    //[_reveal, getPosATL _targetObj, _side, "SAM", _targetObj, 60] spawn A3A_fnc_showInterceptedSupportCall;
     _missiles = _missiles - 1;
     _targTimeout = (time + 120);
     sleep 5;        // make sure we reload before firing again, even if missile is destroyed
