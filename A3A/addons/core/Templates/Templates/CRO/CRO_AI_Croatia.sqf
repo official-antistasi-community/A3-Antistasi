@@ -19,14 +19,14 @@
 
 ["vehiclesBasic", ["B_Quadbike_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["CRO_HMMWV_M1151_W", "CRO_MRAP_M1232_W"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["CRO_HMMWV_GMBR_M1151_PKM_W", "CRO_HMMWV_GMBR_M1151_Mk19_W", "CRO_HMMWV_GMBR_M1151_M2_W", "CRO_MRAP_M1240A1_M240_W", "CRO_MRAP_M1240A1_M2_W", "CRO_MRAP_M1240A1_Mk19_W", "CRO_MRAP_M1232_Mk19_W", "CRO_MRAP_M1232_M2_W"]] call _fnc_saveToTemplate;
-["vehiclesTrucks", ["CRO_Truck_TAM110_Open", "CRO_Truck_TAM110", "CRO_Truck_TAM150_Open", "CRO_Truck_TAM150"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["CRO_HMMWV_GMBR_M1151_PKM_W", "CRO_HMMWV_GMBR_M1151_Mk19_W", "CRO_HMMWV_GMBR_M1151_M2_W", "CRO_MRAP_M1240A1_M240_W", "CRO_MRAP_M1240A1_M2_W", "CRO_MRAP_M1240A1_Mk19_W", "CRO_MRAP_M1232_Mk19_W", "CRO_MRAP_M1232_M2_W", "CRO_ATGM_GOMBR_BOV_M83"]] call _fnc_saveToTemplate;
+["vehiclesTrucks", [ "CRO_Truck_TAM110", "CRO_Truck_TAM150_Open", "CRO_Truck_TAM150"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["CRO_Truck_TAM150_Flatbed"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["CRO_Truck_TAM150_Ammo_Open"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["CRO_Truck_TAM150_Repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["CRO_Truck_TAM150_Refuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["CRO_AMV_BOV_San"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["CRO_APC_BOV_M86", "CRO_APC_BOV_M86_M2", "CRO_ATGM_GOMBR_BOV_M83"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["CRO_APC_BOV_M86", "CRO_APC_BOV_M86_M2"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["CRO_AMV_BOVP127", "CRO_AMV_BOVP40ABG", "CRO_AMV_BOVP30L"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["CRO_IFV_M80A", "CRO_IFV_M2A2ODS_W"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["CRO_MBT_M84A","CRO_MBT_M84A4_Snajper"]] call _fnc_saveToTemplate;
@@ -301,8 +301,7 @@ _policeLoadoutData set ["shotGuns", [
 ["rhs_weap_M590_5RD", "", "", "", ["rhsusf_5Rnd_00Buck", "rhsusf_5Rnd_Slug"], [], ""]
 ]];
 _policeLoadoutData set ["SMGs", [
-["CRO_smg_MP5", "", "", "", [], [], ""],
-["rhs_weap_M590_5RD", "", "", "", [], [], ""]
+["CRO_smg_MP5", "", "", "", [], [], ""]
 ]];
 _policeLoadoutData set ["sidearms", [
 ["rhsusf_weap_glock17g4", "", "acc_flashlight_pistol", "", ["rhsusf_mag_17Rnd_9x19_JHP"], [], ""]
@@ -335,7 +334,7 @@ _militiaLoadoutData set ["SMGs", [
 ["CRO_smg_MP5", "", "", "", [], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
-["rhs_weap_m84", "", "", "", ["rhs_100Rnd_762x54mmR_green"], [], ""],
+["rhs_weap_pkm", "", "", "", ["rhs_100Rnd_762x54mmR_green"], [], ""],
 ["rhs_weap_m249", "", "", "", ["rhsusf_100Rnd_556x45_M855_mixed_soft_pouch"], [], "rhsusf_acc_saw_bipod"]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
