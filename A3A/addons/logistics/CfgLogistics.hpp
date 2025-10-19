@@ -23,6 +23,7 @@ class DOUBLES(ADDON,Nodes)
     #include "Nodes\VN.hpp"
     #include "Nodes\WS.hpp"
     #include "Nodes\SFP.hpp"
+    #include "Nodes\CRO.hpp"
     #include "Nodes\AMF.hpp"
     #include "Nodes\TMT.hpp"
     #include "Nodes\CWR.hpp"
