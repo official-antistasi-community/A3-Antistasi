@@ -3242,6 +3242,12 @@
       <Key ID="STR_antistasi_dialogs_main_context_garage_away">
         <Original>Must be near friendly marker to garage</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_airbase_helipad">
+        <Original>Must be near friendly airbase or helipad to garage</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_airbase">
+        <Original>Must be near friendly airbase to garage</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_context_garage_utility">
         <Original>Garaging this will delete it and refund the full cost</Original>
       </Key>
