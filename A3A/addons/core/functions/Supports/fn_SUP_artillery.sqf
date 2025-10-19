@@ -38,7 +38,8 @@ if(count _possibleBases == 0) exitWith { Debug("Couldn't find a suitable base fo
 private _base = selectRandom _possibleBases;
 
 // Spawn in artillery
-private _vehicle = [_vehType, markerPos _base, 50, 5, true] call A3A_fnc_safeVehicleSpawn;
+private _spawnPos = [markerPos _base, 10, 100] call A3A_fnc_findArtilleryPos;
+private _vehicle = createVehicle [_vehType, _spawnPos, [], 0, "NONE"];
 _vehicle setVariable ["shellType", _shellType];
 [_vehicle, _side, _resPool] call A3A_fnc_AIVehInit;
 

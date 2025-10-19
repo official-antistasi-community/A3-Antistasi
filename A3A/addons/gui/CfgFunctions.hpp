@@ -3,10 +3,12 @@ class CfgFunctions {
     class ADDON {
         class GUI {
             file = QPATHTOFOLDER(functions\GUI);
+            class adminCopyUIDDialog {};
             class adminTab {};
             class aiManagementTab {};
             class airSupportTab {};
             class arsenalLimitsDialog {};
+            class buildContextMenu {};
             class buyVehicleDialog {};
             class buyVehicleTabs {};
             class commanderTab {};
@@ -34,6 +36,7 @@ class CfgFunctions {
             class requestMissionDialog {};
             class setUpPlacerHints {};
             class teamLeaderRTSPlacerDialog {};
+            class warStatusTab {};
         };
 
         class SetupGUI {
@@ -57,6 +60,11 @@ class CfgFunctions {
         class objectHelpers {
             file = QPATHTOFOLDER(functions\objectHelpers);
             class sizeOf {};
+        };
+
+        class roleSelect {
+            file = QPATHTOFOLDER(functions\roleSelect);
+            class roleSelectDialog {};
         };
 
         class gunShop {

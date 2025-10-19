@@ -23,6 +23,9 @@ A3A_supportStrikes = [];
 // _target is [unit, position] array, or [] for free
 A3A_activeSupports = [];
 
+// Current HQ detection radius
+call A3A_fnc_calcBuildingReveal;
+
 // Interfaces:
 // Avail func: _weight = [_target, _side, _maxSpend?] call _availFunc;
 // Create func:  _resCost = [_suppname, _side, _resPool, _maxSpend, _target, _targpos, _reveal, _delay] call _createFunc;

@@ -33,7 +33,7 @@ HR_GRG_CP_closeCnd = {
     }
 };
 
-HR_GRG_Cnd_canAccessAir = {
+HR_GRG_Cnd_isAirbase = {
     count (airportsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (HR_GRG_accessPoint inArea _x)}) > 0
 };
 

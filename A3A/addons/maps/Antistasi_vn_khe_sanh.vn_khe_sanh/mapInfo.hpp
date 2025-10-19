@@ -50,7 +50,9 @@ class vn_khe_sanh {
 		// Higher sandbag/metal walls + junk
 		{"Land_vn_b_trench_revetment_tall_03", 20}, {"Land_vn_b_trench_revetment_05_01", 30}, {"Land_vn_barricade_01_4m_f", 30},
 		// PAVN stuff
-		{"Land_vn_o_bunker_03", 40}, {"Land_vn_o_platform_06", 40}, {"Land_vn_fence_punji_01_03", 10}
+		{"Land_vn_o_bunker_03", 40}, {"Land_vn_o_platform_06", 40}, {"Land_vn_fence_punji_01_03", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
 	policeStationTypes[] = {
 		"Land_vn_house_big_04_f", "Land_i_House_Big_02_V1_F", "Land_PoliceStation_01_F", "Land_vn_slum_03_f", "Land_vn_hut_village_01"
