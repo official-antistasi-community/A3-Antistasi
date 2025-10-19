@@ -221,6 +221,8 @@ addMissionEventHandler ["OnUserAdminStateChanged", {
 publicVariable "membersX";
 publicVariable "theBoss";       // need to publish this even if empty
 
+// Setup buildable objects. Needed for HQ radius in initSupports
+call A3A_fnc_initBuildableObjects;
 
 // Needs params + factions. Might depend on saved data in the future
 call A3A_fnc_initSupports;

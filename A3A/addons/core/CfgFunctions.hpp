@@ -186,7 +186,6 @@ class CfgFunctions
             class revealToPlayer {};
             class scheduler {};
             class sellVehicle {};
-            class setCityTaskDelay {};
             class setMarkerAlphaForSide {};
             class setPlaneLoadout {};
             class singlePlayerBlackScreenWarning {};
@@ -209,6 +208,8 @@ class CfgFunctions
             class buildingComplete {};
             class buildingPlacer {};
             class buildingPlacerStart {};
+            class calcBuildingCosts {};
+            class calcBuildingReveal {};
             class initBuildableObjects {};
             class initBuilderMonitors {};
             class initPlacerDB {};
@@ -320,6 +321,7 @@ class CfgFunctions
             class garrisonLocal_addGroup {};
             class garrisonLocal_addVehicle {};
             class garrisonLocal_addVehicleType {};
+            class garrisonLocal_cityReinf {};
             class garrisonLocal_changeSide {};
             class garrisonLocal_clear {};
             class garrisonLocal_despawn {};
@@ -355,6 +357,7 @@ class CfgFunctions
             class garrisonServer_addUnitType {};
             class garrisonServer_addVehicle {};
             class garrisonServer_addVehicleType {};
+            class garrisonServer_cityReinf {};
             class garrisonServer_changeSide {};
             class garrisonServer_cleanup {};
             class garrisonServer_clear {};

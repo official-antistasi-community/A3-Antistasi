@@ -322,6 +322,17 @@ mapX addAction [localize "STR_A3A_fn_init_initclient_addact_gameOpt", {
 mapX addAction [localize "STR_A3A_fn_init_initclient_addact_mapinfo", A3A_fnc_mapInfoDialog,nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
 if (isMultiplayer) then {mapX addAction [localize "STR_A3A_fn_init_initclient_addact_ailoadinfo", { [] remoteExec ["A3A_fnc_AILoadInfo",2];},nil,0,false,true,"",""]}; // should be no reason to restrict the aiLoadInfo to anyone
 
+// allow player to open any nearby helipads
+player addAction ["Open Heli Garage", 
+"
+        if ([getPosATL player] call A3A_fnc_enemyNearCheck) exitWith {[localize 'STR_A3A_fn_init_initclient_helipad',localize 'STR_A3A_fn_init_initclient_helipad_enemies'] call A3A_fnc_customHint};
+        _helipad = (nearestObjects [player, ['a3a_helipad'], 8, true])#0;
+        HR_GRG_accessPoint = _helipad;
+        HR_GRG_accessLimit = 'helipad';
+        createDialog 'HR_GRG_VehicleSelect';
+", nil, 4, true, true, "","(count (nearestObjects [player, ['a3a_helipad'], 8, true]) > 0) && {((isNil 'HR_GRG_Placing') || {!HR_GRG_Placing}) && player isEqualTo vehicle player && _this == _this getVariable ['owner',objNull]}"
+];
+
 // Get list of buildable objects, has map (and template?) dependency
 call A3A_fnc_initBuildableObjects;
 
