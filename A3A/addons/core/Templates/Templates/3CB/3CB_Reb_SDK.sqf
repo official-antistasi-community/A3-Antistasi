@@ -52,7 +52,11 @@ private _initialRebelEquipment = [
 "rhs_mag_9x18_8_57N181S", "rhs_mag_762x25_8", "rhsgref_1Rnd_00Buck", "rhsgref_1Rnd_Slug", "rhs_mag_f1", "rhs_grenade_mki_mag", "rhs_mag_rdg2_black", "rhs_grenade_m15_mag",
 "B_FieldPack_blk", "B_FieldPack_cbr", "B_FieldPack_green_F", "B_FieldPack_khk", "B_FieldPack_oli",
 "rhsgref_chestrig", "rhsgref_chicom", "rhs_vydra_3m", "rhs_vest_pistol_holster", "rhs_vest_commander", "rhs_6sh46", "rhsgref_alice_webbing",
-"rhs_acc_2dpZenit", "Binocular"];
+"rhs_acc_2dpZenit", "Binocular",
+"rhs_weap_rsp30_white",
+"rhs_weap_rsp30_green",
+"rhs_weap_rsp30_red"
+];
 
 _initialRebelEquipment append ["uk3cb_enfield_no4","uk3cb_enfield_no4_walnut","uk3cb_no4_enfield_303_10Rnd_magazine_Y","uk3cb_no4_enfield_303_10Rnd_magazine_YT",
 ["uk3cb_1rnd_riflegrenade_mas_at_l", 60], ["uk3cb_1rnd_riflegrenade_mas_wp", 15], "uk3cb_1rnd_riflegrenade_mas_flare"];
