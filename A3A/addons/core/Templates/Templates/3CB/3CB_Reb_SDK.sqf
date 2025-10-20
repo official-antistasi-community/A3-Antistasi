@@ -24,7 +24,7 @@
 ["vehiclesCivCar", ["C_Offroad_02_unarmed_F", "UK3CB_C_LandRover_Closed", "UK3CB_C_LandRover_Open", "UK3CB_C_Datsun_Open", "UK3CB_C_Gaz24", "UK3CB_C_Skoda", "UK3CB_C_S1203", "UK3CB_C_MMT"]] call _fnc_saveToTemplate;
 ["vehiclesCivTruck", ["RHS_Ural_Open_Civ_02","C_Van_01_transport_F", "C_Van_02_transport_F", "C_Van_02_vehicle_F"]] call _fnc_saveToTemplate;
 ["vehiclesCivHeli", ["UK3CB_C_Mi8AMT_ADC"]] call _fnc_saveToTemplate;
-["vehiclesCivBoat", ["UK3CB_CHC_C_Fishing_Boat", "C_Rubberboat"]] call _fnc_saveToTemplate;
+["vehiclesCivBoat", ["UK3CB_CHC_C_Fishing_Boat", "C_Rubberboat", "rhsgref_civ_canoe"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["rhsgref_tla_g_DSHKM",  "rhsgref_tla_g_DSHKM_Mini_TriPod", "rhsgref_hidf_m2_static_minitripod", "UK3CB_NAP_I_PKM_High",  "UK3CB_NAP_I_PKM_Low"]] call _fnc_saveToTemplate;
 ["staticAT", ["rhsgref_tla_g_SPG9"]] call _fnc_saveToTemplate;
