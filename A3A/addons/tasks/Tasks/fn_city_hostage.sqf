@@ -135,7 +135,7 @@ _task set ["s_success", {
 
 	[10, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 
-    [_this get "_taskId", "SUCCEEDED", getPosATL (_this get "hostage"), 100] call FUNC(taskNotifyNear);
+    [_this get "_taskId", "SUCCEEDED", getPosATL (_this get "_hostage"), 100] call FUNC(taskNotifyNear);
     [_this get "_taskId", "SUCCEEDED", false] call BIS_fnc_taskSetState;
 	_this set ["state", "s_cleanup"]; false;
 }];
