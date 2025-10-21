@@ -124,7 +124,7 @@ if (isNil "_checkpoint") then {
 	_task set ["_endTime", time + 1800];
 
     private _numCiv = (A3A_cityData getVariable _marker) select 0;
-    _numCiv = 30 min (4 + round sqrt _numCiv);
+    _numCiv = 30 min (round sqrt _numCiv);
     _task set ["_numCiv", _numCiv];
 
     _task call _fnc_spawnLeader;
@@ -168,7 +168,7 @@ _task set ["s_spawnEnemies",
     private _airbase = [Occupants, markerPos _marker] call A3A_fnc_availableBasesAir;
 
     //params ["_side", "_airbase", "_target", "_resPool", "_vehCount", "_delay", "_modifiers", "_attackType", "_reveal"];
-    private _data = [Occupants, _airbase, _marker, "defence", _vehCount, -1, ["lowair"]] call A3A_fnc_createAttackForceMixed;
+    private _data = [Occupants, _airbase, _marker, "defence", _vehCount, 300, ["lowair"]] call A3A_fnc_createAttackForceMixed;
     _data params ["_resources", "_vehicles", "_crewGroups", "_cargoGroups"];
     _this set ["_vehicles", _vehicles];
     _this set ["_crewGroups", _crewGroups];
@@ -267,7 +267,7 @@ _task set ["s_battleStarted",
     private _troops = _this get "_troops";
     private _civilians = _this get "_civilians";
 
-    if (time > _this get "_endTime" or {_x call A3A_fnc_canFight} count _troops < count _troops / 3) exitWith {
+    if (time > _this get "_endTime" or {_x call A3A_fnc_canFight} count _troops < count _troops / 4) exitWith {
         private _taskDesc = format [localize "STR_A3A_Tasks_cityBattle_victoryDesc", _marker];
         [_this get "_taskId", [_taskDesc, _this get "_hintTitle", ""]] call BIS_fnc_taskSetDescription;
         _this set ["state", "s_victory"]; false;

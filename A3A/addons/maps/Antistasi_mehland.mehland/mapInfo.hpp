@@ -66,4 +66,5 @@ class mehland {
 		"land_house_1w02_f", "land_house_1w09_f", "land_house_1w05_f", "land_house_1w06_f"
 	};
     distanceForAirAttack = 15000;
+    distanceForLandAttack = 4100;
 };
