@@ -28,6 +28,7 @@ params ["_mode", "_params"];
 
 Debug_1("Role select dialog called with mode %1", _mode);
 
+private _hintTitle = localize "STR_A3A_fn_orgp_unitTraits_title";
 private _display = findDisplay A3A_IDD_ROLESELECTDIALOG;
 
 private _bannerImage = _display displayCtrl A3A_IDC_ROLEBANNERPICTURE;
@@ -71,7 +72,7 @@ switch (_mode) do
 	};
     case ("openRole"):
     {
-		["update"] call A3A_GUI_fnc_roleSelectDialog;
+		["update"] call FUNC(roleSelectDialog);
 
 		_infoLine2 ctrlShow true;
 		_infoLine3 ctrlShow true;
@@ -126,7 +127,7 @@ switch (_mode) do
 	
 	case ("openInfo"):
 	{
-		["update"] call A3A_GUI_fnc_roleSelectDialog;
+		["update"] call FUNC(roleSelectDialog);
 
 		_infoLine2 ctrlShow false;
 		_infoLine3 ctrlShow false;
@@ -148,14 +149,14 @@ switch (_mode) do
 			};
 			_infoLine4 ctrlSetText _text;
 		};
-		// Welcome to Antisasi! To get started, select a role from the list on the left and use "set role". You can revisit this screen any time by opening the Battle Menu with Y.
-		// Each role has different traits and quirks, so it is recommended to start as a rifleman if you are new to the game.
-		// Your current role is: %1.
-		// However, since you are the commander, you have the traits listed in the "Commander" tab until you resign.
 	};
 	case ("selectRole"):
 	{
 		private _roleName = _display getVariable ["displayState","none"];
+
+		["openRole",[_roleName]] call FUNC(roleSelectDialog);
+
+		if !(ctrlEnabled _setRoleButton) exitWith {[_hintTitle, localize "STR_antistasi_dialogs_roleselect_cannotTakeRoleFull"] call A3A_fnc_customHint};
 		
 		[_roleName] call FUNCMAIN(unitTraits);
 		closeDialog 0;
