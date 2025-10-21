@@ -24,7 +24,7 @@
 ["vehiclesCivCar", ["C_Offroad_01_F", "C_Offroad_02_unarmed_F"]] call _fnc_saveToTemplate;
 ["vehiclesCivTruck", ["RHS_Ural_Open_Civ_02","C_Van_01_transport_F", "C_Van_02_transport_F", "C_Van_02_vehicle_F"]] call _fnc_saveToTemplate;
 ["vehiclesCivHeli", ["RHS_Mi8t_civilian"]] call _fnc_saveToTemplate;
-["vehiclesCivBoat", ["C_Boat_Civil_01_F", "C_Rubberboat"]] call _fnc_saveToTemplate;
+["vehiclesCivBoat", ["C_Boat_Civil_01_F", "C_Rubberboat", "rhsgref_civ_canoe"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["rhsgref_tla_g_DSHKM",  "rhsgref_tla_g_DSHKM_Mini_TriPod", "rhsgref_hidf_m2_static_minitripod"]] call _fnc_saveToTemplate;
 ["staticAT", ["rhsgref_tla_g_SPG9"]] call _fnc_saveToTemplate;
@@ -51,17 +51,21 @@
 
 private _initialRebelEquipment = [
 "rhs_weap_makarov_pm", "rhs_weap_tt33", "rhs_weap_Izh18", "rhs_weap_m38","rhs_weap_m38_rail",
-["rhs_weap_rpg18", 50],
+["rhs_weap_rpg18", 30],
 ["IEDUrbanSmall_Remote_Mag", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],
 "rhs_mag_9x18_8_57N181S", "rhs_mag_762x25_8", "rhsgref_1Rnd_00Buck", "rhsgref_1Rnd_Slug", "rhsgref_5Rnd_762x54_m38", "rhs_mag_f1", "rhs_grenade_mki_mag", "rhs_mag_rdg2_black", "rhs_grenade_m15_mag",
 "B_FieldPack_blk", "B_FieldPack_cbr", "B_FieldPack_green_F", "B_FieldPack_khk", "B_FieldPack_oli",
 "rhsgref_chestrig", "rhsgref_chicom", "rhs_vydra_3m", "rhs_vest_pistol_holster", "rhs_vest_commander", "rhs_6sh46", "rhsgref_alice_webbing",
-"rhs_acc_2dpZenit", "Binocular"];
+"rhs_acc_2dpZenit", "Binocular",
+"rhs_weap_rsp30_white",
+"rhs_weap_rsp30_green",
+"rhs_weap_rsp30_red"
+];
 
 if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr", "tf_anprc154"]};
 if (A3A_hasTFAR && startWithLongRangeRadio) then {_initialRebelEquipment append ["tf_anprc155", "tf_anprc155_coyote"]};
 if (A3A_hasTFARBeta) then {_initialRebelEquipment append ["TFAR_microdagr", "TFAR_anprc154"]};
-if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote"]};
+if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote", "TFAR_anarc164", "a3a_TFAR_rt1523g_rhs", "a3a_TFAR_rt1523g_bwmod", "a3a_TFAR_rt1523g"]};
 _initialRebelEquipment append ["Chemlight_blue", "Chemlight_green", "Chemlight_red", "Chemlight_yellow"];
 
 
