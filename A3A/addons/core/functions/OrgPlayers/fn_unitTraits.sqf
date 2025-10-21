@@ -43,10 +43,11 @@ private _traitHM = A3A_roleTraitHM get _roleName;
     if (_name == "engineer") then {
         A3A_drawBuilderIcons = _value;
         A3A_showBuilderActions = _value;
-    };
-    if ((_name == "engineer") && (missionNamespace getVariable ["ace_repair_enabled", false])) exitWith {
-        // ACE engineer magic
-        player setVariable ["ace_isEngineer", _value, true];
+        if (missionNamespace getVariable ["ace_repair_enabled", false]) then {
+            // ACE engineer magic
+            player setVariable ["ace_isEngineer", _value, true];
+            continue
+        };
     };
     if (_name == "code") exitWith {
         [player] call _value;
