@@ -4740,7 +4740,7 @@
         <Original>Commanders handle AI and garrisons as well as coordinating fire support when needed. They have superior stealth for recon but suffer a stamina penalty.</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsRifleman">
-        <Original>Riflemen: %1. (?*)</Original>
+        <Original>Riflemen: %1 (*)</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capExplanationRifleman">
         <Original>There is no cap to the number of Rifleman players.</Original>

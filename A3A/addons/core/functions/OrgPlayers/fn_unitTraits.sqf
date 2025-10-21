@@ -46,6 +46,7 @@ private _traitHM = A3A_roleTraitHM get _roleName;
         if (missionNamespace getVariable ["ace_repair_enabled", false]) then {
             // ACE engineer magic
             player setVariable ["ace_isEngineer", _value, true];
+            continue
         };
     };
     if (_name == "code") exitWith {

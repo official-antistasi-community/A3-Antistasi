@@ -163,6 +163,7 @@ switch (_mode) do
         private _commanderText = _display displayCtrl A3A_IDC_COMMANDERTEXT;
         private _commanderButton = _display displayCtrl A3A_IDC_COMMANDERBUTTON;
         private _moneyText = _display displayCtrl A3A_IDC_MONEYTEXT;
+        private _infoBarCB = _display displayCtrl A3A_IDC_HIDETOPBARCHECKBOX;
 
         _playerNameText ctrlSetText name player;
 
@@ -218,6 +219,8 @@ switch (_mode) do
         // Update money
         private _money = player getVariable "moneyX";
         _moneyText ctrlSetText format[localize "STR_antistasi_dialogs_main_player_money_text", _money];
+
+        _infoBarCB cbSetChecked !(ctrlShown ((uiNameSpace getVariable "H8erHUD") displayCtrl 1001));
 
         // Context menu is completely seperate. Build there.
         [] call FUNC(buildContextMenu);
