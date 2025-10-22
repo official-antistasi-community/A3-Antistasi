@@ -267,6 +267,12 @@ _task set ["s_battleStarted",
     private _troops = _this get "_troops";
     private _civilians = _this get "_civilians";
 
+    if (_marker in destroyedSites) exitWith {
+        // Not very likely (space laser?) but should be handled
+        [_this get "_taskId", "FAILED", false] call BIS_fnc_taskSetState;
+        _this set ["state", "s_cleanup"]; false;
+    };
+
     if (time > _this get "_endTime" or {_x call A3A_fnc_canFight} count _troops < count _troops / 4) exitWith {
         private _taskDesc = format [localize "STR_A3A_Tasks_cityBattle_victoryDesc", _marker];
         [_this get "_taskId", [_taskDesc, _this get "_hintTitle", ""]] call BIS_fnc_taskSetDescription;
@@ -278,6 +284,8 @@ _task set ["s_battleStarted",
         [_this get "_taskId", [_taskDesc, _this get "_hintTitle", ""]] call BIS_fnc_taskSetDescription;
         _this set ["state", "s_defeat"]; false;
     };
+
+
     false;
 }];
 
