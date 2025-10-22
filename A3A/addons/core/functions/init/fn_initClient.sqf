@@ -11,6 +11,20 @@ Info_1("Client version: %1", QUOTE(VERSION_FULL));
 
 // *************************** Client pre-setup init *******************************
 
+// Public variable order testing
+A3A_publicVarTime = time;
+if (!isNil "serverInitDone" and !isNil "A3A_utilityItemHM") then {
+    ServerInfo_1("publicVariable ordering for %1: Both arrived before initClient", clientOwner);
+};
+"serverInitDone" addPublicVariableEventHandler {
+    if (isNil "A3A_utilityItemHM") exitWith { A3A_publicVarTime = time };
+    ServerInfo_2("publicVariable ordering for %1: serverInitDone arrived %2 after", clientOwner, time - A3A_publicVarTime);
+};
+"A3A_utilityItemHM" addPublicVariableEventHandler {
+    if (isNil "serverInitDone") exitWith { A3A_publicVarTime = time };
+    ServerInfo_2("publicVariable ordering for %1: A3A_utilityItemHM arrived %2 after", clientOwner, time - A3A_publicVarTime);
+};
+
 if (!requiredVersion QUOTE(REQUIRED_VERSION)) exitWith { Error("Arma version is out of date") };
 if (call A3A_fnc_modBlacklist) exitWith {};
 
