@@ -43,7 +43,7 @@ _object setVariable ["A3A_canGarage", true, true];
 _object setVariable ["A3A_itemPrice", _price, true];
 
 if ("save" in _flags) then {
-    ["", _object] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
+    [_object] remoteExec ["A3A_fnc_rebelVehPlacedWorker", 2];
     [_object] remoteExecCall ["A3A_fnc_addVehAttachDetachEH", 2];
 };
 
