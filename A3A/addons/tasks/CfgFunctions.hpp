@@ -14,6 +14,7 @@ class CfgFunctions {
             class minutesFromNow {};
             class nearFriendlyMarkers {};
             class nearHostileMarkers {};
+            class taskNotifyNear {};
         };
         class Params { // params getter functions for the tasks  |  returns false if failed, otherwise params array
             file = QPATHTOFOLDER(Params);

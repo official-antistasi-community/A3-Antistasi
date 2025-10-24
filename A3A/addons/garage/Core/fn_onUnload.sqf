@@ -53,3 +53,4 @@ if (HR_GRG_Placing) exitWith {};
 //remove check out
 [clientOwner, player, "HR_GRG_fnc_releaseAllVehicles"] remoteExecCall ["HR_GRG_fnc_execForGarageUsers", 2]; //run code on server as HR_GRG_Users is maintained ONLY on the server
 HR_GRG_accessPoint = objNull;
+HR_GRG_accessLimit = nil;

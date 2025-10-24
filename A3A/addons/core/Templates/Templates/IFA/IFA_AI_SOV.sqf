@@ -18,7 +18,7 @@
 //////////////////////////
 
 ["ammobox", "LIB_WeaponsBox_Big_SU"] call _fnc_saveToTemplate;
-["surrenderCrate", "LIB_Lone_Big_Box"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
+["surrenderCrate", "LIB_Mine_AmmoBox_US"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
 ["equipmentBox", "WW2_Cle_Container"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
 
 // vehicles can be placed in more than one category if they fit between both. Cost will be derived by the higher category
@@ -48,6 +48,14 @@ private _vehiclesHeavyTanks = ["LIB_JS2_43"];
 ["vehiclesPlanesCAS", ["LIB_Pe2","LIB_P39"]] call _fnc_saveToTemplate;             // Will be used with CAS script, must be defined in setPlaneLoadout. Needs fixed gun and either rockets or missiles
 ["vehiclesPlanesAA", ["LIB_P39","LIB_RA_P39_2","LIB_RA_P39_3"]] call _fnc_saveToTemplate;              // 
 ["vehiclesPlanesTransport", ["LIB_Li2"]] call _fnc_saveToTemplate;
+
+
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        ["vehiclesPlanesCAS", ["LIB_Pe2","sab_sw_il2", "sab_sw_il2_2"]] call _fnc_saveToTemplate;
+    };
+    ["vehiclesPlanesAA", ["LIB_P39","sab_fl_yak3"]] call _fnc_saveToTemplate;
+};
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;            // ideally fragile & unarmed helis seating 4+
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;

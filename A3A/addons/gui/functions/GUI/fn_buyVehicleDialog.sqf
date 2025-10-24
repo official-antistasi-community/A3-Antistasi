@@ -102,8 +102,8 @@ switch (_mode) do
         private _statics = 
         (A3A_faction_reb get 'staticMGs') +
         (A3A_faction_reb get 'staticMortars') +
-        (A3A_faction_reb get 'staticAT') +
-        (A3A_faction_reb get 'staticAA');
+        (A3A_faction_reb get 'staticAA') +
+        (A3A_faction_reb get 'staticAT');
 
         ["vehicles", [A3A_IDC_BUYCIVVEHICLEMAIN, A3A_IDC_CIVVEHICLESGROUP, _civilianVehicles]] call A3A_GUI_fnc_buyVehicleTabs;
         ["vehicles", [A3A_IDC_BUYREBVEHICLEMAIN, A3A_IDC_REBVEHICLESGROUP, _militaryVehicles]] call A3A_GUI_fnc_buyVehicleTabs;

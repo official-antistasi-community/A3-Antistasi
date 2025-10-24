@@ -31,7 +31,7 @@
         <Chinesesimp>&lt;img image='\A3\ui_f\data\GUI\Rsc\RscDisplayArsenal\spaceGarage_ca.paa'&gt;&lt;/img&gt; 车库 %1</Chinesesimp>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_airBlocked">
-        <Original>You can't garage an aircraft while you are not near an Airport which belongs to %1. Please move your aircraft to an Airport under your control to garage it</Original>
+        <Original>You can't garage an aircraft while you are not near an airbase which belongs to %1, or a built helipad for helicopters.</Original>
         <German>Du kannst kein Flugzeug einparken solange du nicht in der Nähe eines Flughafens bist, der %1 gehört. Bitte bewegen dein Flugzeug zu einem Flughafen, den du kontrollierst, um es zu parken.</German>
         <Italian>Non puoi inserire un veivolo nel garage se ti trovi lontano da un Aereoporto di appartenenza %1. Per favore sposta il veivolo ad un aereoporto sotto il controllo alleato in modo da poter conservarlo nel garage</Italian>
         <Spanish>No puede almacenar una aeronave si no está cerca de un aeropuerto que pertenezca a %1. Por favor, mueva su aeronave a un aeropuerto bajo su control para almacenarla</Spanish>
@@ -527,6 +527,9 @@
         <Portuguese>Só podes aceder aos aviões a partir de uma base aérea amiga</Portuguese>
         <Turkish>Uçaklara yalnızca dost bir hava üssünden erişebilirsiniz.</Turkish>
         <Chinesesimp>你仅能在友方空军基地内存取飞行器</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_HelipadDisabled">
+        <Original>You can only access garaged helicopters from helipads</Original>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Anim">
         <Original>Customize</Original>

@@ -161,6 +161,7 @@ else
 
     Info("Initial arsenal unlocks completed");
     call A3A_fnc_checkRadiosUnlocked;
+    [] call A3A_fnc_arsenalManage;
 
     // HQ placement setup
     private _posHQ = A3A_saveData get "startPos";
@@ -226,6 +227,8 @@ publicVariable "membersX";
 publicVariable "A3A_useRemarks";
 publicVariable "theBoss";       // need to publish this even if empty
 
+// Setup buildable objects. Needed for HQ radius in initSupports
+call A3A_fnc_initBuildableObjects;
 
 // Needs params + factions. Might depend on saved data in the future
 call A3A_fnc_initSupports;

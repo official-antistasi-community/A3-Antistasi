@@ -47,8 +47,9 @@ _task set ["_policeGroup", _policeGroup];
 private _displayTime = [((_task get "_endTime") - time) / 60] call FUNC(minutesFromNow);
 private _taskDesc = format [localize "STR_A3A_Tasks_hostage_desc", _marker, _displayTime];
 private _taskId = call FUNC(genTaskUID);
-[true, _taskId, [_taskDesc, _task get "_hintTitle"], _hostage, false, -1, true, "Meet", true] call BIS_fnc_taskCreate;
+[true, _taskId, [_taskDesc, _task get "_hintTitle"], _hostage, false, -1, false, "Meet", true] call BIS_fnc_taskCreate;
 _task set ["_taskId", _taskId];
+[_taskId, "CREATED", markerPos _marker, 1300] call FUNC(taskNotifyNear);
 
 // Function to be run passenger-local on completion
 _task set ["_fnc_getOut", {
@@ -98,9 +99,9 @@ _task set ["s_transit", {
     if (!alive _hostage) exitWith {
         [-2, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
         [-2, theBoss] call A3A_fnc_playerScoreAdd;
+        [_this get "_taskId", "FAILED", getPosATL _hostage, 100] call FUNC(taskNotifyNear);
         _this set ["state", "s_failure"]; false;
     };
-
 
     private _curMarker = [getPosATL _hostage] call A3A_fnc_getMarkerForPos;
     private _vehSpeed = vectorMagnitude velocity vehicle _hostage;
@@ -109,7 +110,6 @@ _task set ["s_transit", {
         private _house = nearestBuilding getPosATL _hostage;
         private _destPos = if (isNull _house) then { markerPos _curMarker } else { getPosATL _house };
         [[_hostage, _destPos], _this get "_fnc_getOut"] remoteExec ["call", _hostage];
-
         _this set ["state", "s_success"]; false;
     };
 
@@ -135,12 +135,13 @@ _task set ["s_success", {
 
 	[10, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 
-	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
+    [_this get "_taskId", "SUCCEEDED", getPosATL (_this get "_hostage"), 100] call FUNC(taskNotifyNear);
+    [_this get "_taskId", "SUCCEEDED", false] call BIS_fnc_taskSetState;
 	_this set ["state", "s_cleanup"]; false;
 }];
 
 _task set ["s_failure", {
-	[_this get "_taskId", "FAILED"] call BIS_fnc_taskSetState;
+	[_this get "_taskId", "FAILED", false] call BIS_fnc_taskSetState;
 	_this set ["state", "s_cleanup"]; false;
 }];
 

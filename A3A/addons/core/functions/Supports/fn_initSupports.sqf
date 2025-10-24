@@ -23,6 +23,9 @@ A3A_supportStrikes = [];
 // _target is [unit, position] array, or [] for free
 A3A_activeSupports = [];
 
+// Current HQ detection radius
+call A3A_fnc_calcBuildingReveal;
+
 // Interfaces:
 // Avail func: _weight = [_target, _side, _maxSpend?] call _availFunc;
 // Create func:  _resCost = [_suppname, _side, _resPool, _maxSpend, _target, _targpos, _reveal, _delay] call _createFunc;
@@ -99,7 +102,10 @@ A3A_supportMarkerTypes = [];     // format [markerName, markerType, hasRadio, de
 { A3A_supportMarkerTypes pushBack [_x, "Outpost", false, 0.6] } forEach outposts;
 { A3A_supportMarkerTypes pushBack [_x, "Resource", false, 0.4] } forEach resourcesX;
 { A3A_supportMarkerTypes pushBack [_x, "Factory", false, 0.5] } forEach factories;
-{ A3A_supportMarkerTypes pushBack [_x, "Town", false, 0.3] } forEach citiesX;
+{
+    private _locSpend = 0.15 + 0.015 * sqrt (A3A_cityPop get _x);
+    A3A_supportMarkerTypes pushBack [_x, "Town", false, _locSpend];
+} forEach citiesX;
 {
     _x pushBack (0.5 + random 0.5);         // current random defence multiplier
     private _pos = markerPos (_x#0);
