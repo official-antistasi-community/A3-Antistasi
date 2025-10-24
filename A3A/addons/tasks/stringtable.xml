@@ -147,7 +147,7 @@
         <Original>A rebel agent in %1 needs an escort for important business. He'll make it worth our trouble if we help him. Pick him up before %2. Make sure you bring a vehicle.</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_taxi_leave">
-        <Original>Tell him you're ready to leave</Original>
+        <Original>Tell him to follow you</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_taxi_start">
         <Original>The rebel agent has joined your squad. Take him to his destination in %1.</Original>
