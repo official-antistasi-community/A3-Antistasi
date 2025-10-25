@@ -186,8 +186,6 @@ if (_startType != "load") then {
 
 // ********************** Post-load init ****************************************************
 
-A3A_useRemarks = 0;
-
 if (isClass (configFile >> "AntistasiServerMembers")) then
 {
     Info("Loading external member list");

@@ -31,7 +31,7 @@ switch (_mode) do
             _x params ["_cfg","_value"];
             private _action = getText (A3A_SETUP_CONFIGFILE/"A3A"/"clientOptions"/_cfg/"stateChange");
             if (_action isEqualTo "") then {continue};
-            [_value] spawn (compile _action);
+            _value spawn (compile _action);
         } forEach _toSet;
     };			
     case ("requestOpen"):
@@ -151,7 +151,7 @@ switch (_mode) do
             _x params ["_cfg","_value"];
             private _action = getText (A3A_SETUP_CONFIGFILE/"A3A"/"clientOptions"/_cfg/"stateChange");
             if (_action isEqualTo "") then {continue};
-            [_value] spawn (compile _action);
+            _value spawn (compile _action);
             Info_2("Client setting updated: Name %1 new value %2", _cfg, _value);
         } forEach _mismatches;
         _display closeDisplay 0;
