@@ -85,7 +85,7 @@ HR_GRG_fnc_vehInit = {
     // Add to garrison if placed within one
     _this setVariable ["ownerX",getPlayerUID player,true];
     [_this, TeamPlayer] call A3A_fnc_AIVEHinit;
-    ["", _this] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
+    [_this] remoteExec ["A3A_fnc_rebelVehPlacedWorker", 2];
 }; //is passed vehicle as _this
 HR_GRG_onOpenEvent = {
     //hide Antistasi's top information string as it has no use in the Garage

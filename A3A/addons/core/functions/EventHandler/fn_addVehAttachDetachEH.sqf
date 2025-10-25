@@ -20,15 +20,5 @@ _veh addEventHandler ["Detached", {
 
     params ["_attachedObj", "_parentObj"];
 
-    [_attachedObj] spawn {
-        params ["_veh"];
-
-        // Wait for the thing to settle
-        waitUntil { sleep 1; vectorMagnitude velocity _veh < 0.01 };
-
-        if (isNull _veh) exitWith {};                       // might have been deleted immediately after detaching
-        if (getNumber (configOf _veh >> "hasDriver") != 0 and !(_veh inArea "Synd_HQ")) exitWith {};      // quadbikes shouldn't be auto-added
-        if (!isNull attachedTo _veh) exitWith {};           // might be attached again
-        isNil { ["", _veh] call A3A_fnc_garrisonServer_addVehicle };
-    };
+    [_attachedObj] spawn A3A_fnc_rebelVehPlacedWorker;
 }];

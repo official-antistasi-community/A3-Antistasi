@@ -371,6 +371,7 @@ class CfgFunctions
             class garrisonServer_spawn {};
             class garrisonServer_updateVehData {};
             class getSiteTroopQuality {};
+            class rebelVehPlacedWorker {};
             class selectGarrisonVehicleType {};
             class showSiteInfo {};
         };

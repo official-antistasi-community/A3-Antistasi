@@ -267,17 +267,27 @@ _task set ["s_battleStarted",
     private _troops = _this get "_troops";
     private _civilians = _this get "_civilians";
 
-    if (time > _this get "_endTime" or {_x call A3A_fnc_canFight} count _troops < count _troops / 4) exitWith {
+    if (_marker in destroyedSites) exitWith {
+        // Not very likely (space laser?) but should be handled
+        [_this get "_taskId", "FAILED", false] call BIS_fnc_taskSetState;
+        _this set ["state", "s_cleanup"]; false;
+    };
+
+    private _civProp = ({_x call A3A_fnc_canFight} count _civilians) / count _civilians;
+    private _enemyProp = ({_x call A3A_fnc_canFight} count _troops) / count _troops;
+
+    if ((time > _this get "_endTime" and _civProp >= 0.5) or _enemyProp < 0.25) exitWith {
         private _taskDesc = format [localize "STR_A3A_Tasks_cityBattle_victoryDesc", _marker];
         [_this get "_taskId", [_taskDesc, _this get "_hintTitle", ""]] call BIS_fnc_taskSetDescription;
         _this set ["state", "s_victory"]; false;
     };
 
-    if (time > _this get "_minLossTime" and {{alive _x} count _civilians < count _civilians / 4}) exitWith {
+    if ((time > _this get "_minLossTime" and _civProp < 0.25) or time > _this get "_endTime") exitWith {
         private _taskDesc = format [localize "STR_A3A_Tasks_cityBattle_defeatDesc", _marker];
         [_this get "_taskId", [_taskDesc, _this get "_hintTitle", ""]] call BIS_fnc_taskSetDescription;
         _this set ["state", "s_defeat"]; false;
     };
+
     false;
 }];
 

@@ -269,7 +269,8 @@ switch (_mode) do
             _totalPopulation = _totalPopulation + _numCiv;
             if (_city in destroyedSites) then { _deadPopulation = _deadPopulation + _numCiv} else 
             {
-                _rebelPopulation = _rebelPopulation + (_numCiv * (_supportReb / 100));
+                private _ownerMul = [0.5, 1] select (sidesX getVariable _city == teamPlayer);
+                _rebelPopulation = _rebelPopulation + _ownerMul * _numCiv * _supportReb / 100;
             };
         } forEach citiesX;
 

@@ -18,6 +18,7 @@ FIX_LINE_NUMBERS()
 params ["_marker", "_vehicle", ["_doRevealCalc", true]];
 
 Trace_1("Called with params %1", _this);
+Trace_1("Vehicle position %1", getPosATL _vehicle);
 
 private _oldMarker = _vehicle getVariable "markerX";
 if (!isNil "_oldMarker") then { [_vehicle] call A3A_fnc_garrisonServer_remVehicle };
