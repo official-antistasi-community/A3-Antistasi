@@ -7,4 +7,5 @@ private _typeTexture = [[_taskId] call BIS_fnc_taskType] call BIS_fnc_taskTypeIc
 private _title = [_taskId] call BIS_fnc_taskDescription select 1 select 0;      // For some reason this is an array of arrays of strings...
 
 private _nearPlayers = playableUnits inAreaArray [_center, _radius, _radius];
+if (_nearPlayers isEqualTo []) exitWith {};
 [_notifyType, [_typeTexture, _title]] remoteExecCall ["BIS_fnc_showNotification", _nearPlayers];
