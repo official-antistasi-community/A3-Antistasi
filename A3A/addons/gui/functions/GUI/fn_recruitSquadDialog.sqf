@@ -59,7 +59,6 @@ switch (_mode) do
             private _icon = _display displayCtrl _x#0;
             private _priceText = _display displayCtrl _x#1;
             private _button = _display displayCtrl _x#2;
-            diag_log (_x#3);
             private _group = if ((_x#3) isEqualTo []) then {
                 if (_x#0 isEqualTo A3A_IDC_RECRUITAATRUCKICON) then {
                     FactionGet(reb,"staticAA")#0
@@ -67,7 +66,6 @@ switch (_mode) do
                     []
                 };
             } else {selectRandom (_x#3)};
-            diag_log _group;
             private _hasVehicle = (_x#0 in [A3A_IDC_RECRUITMGCARICON, A3A_IDC_RECRUITATCARICON, A3A_IDC_RECRUITAATRUCKICON]);
             private _vehicle = "";
             if (_includeVehicle && {!_hasVehicle}) then {
