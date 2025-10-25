@@ -94,7 +94,9 @@ _loadoutData set ["sniperRifles", []];
 
 _loadoutData set ["lightATLaunchers", ["AMF_AT4CS_Loaded"]];
 _loadoutData set ["ATLaunchers", [
-    ["AMF_LRAC89_F", "", "", "", ["AMF_AC89mm_F1"], [], ""],
+    ["AMF_LRAC89_F", "", "", "", ["AMF_AC89mm_F1"], [], ""]
+]];
+_loadoutData set ["missileATLaunchers", [
     ["AMF_Eryx", "", "", "", ["Eryx_HEAT"], [], ""]
 ]];
 _loadoutData set ["AALaunchers", [
