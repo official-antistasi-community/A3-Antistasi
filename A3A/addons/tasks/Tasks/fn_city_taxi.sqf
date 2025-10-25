@@ -19,9 +19,9 @@ _task set ["_endTime", time + 15*60];
 private _passenger = [createGroup [civilian, true], FactionGet(civ, "unitMan"), _startPos, [], 0, "NONE"] call A3A_fnc_createUnit;
 _passenger setDir _startDir;
 _passenger disableAI "PATH";
-_hostage disableAI "FSM";      // attempt to prevent occasional case of jumping out and running off
-_hostage disableAI "AUTOCOMBAT";
-group _hostage setBehaviourStrong "SAFE";
+_passenger disableAI "FSM";      // attempt to prevent occasional case of jumping out and running off
+_passenger disableAI "AUTOCOMBAT";
+group _passenger setBehaviourStrong "SAFE";
 _task set ["_passenger", _passenger];
 
 // Add global action
