@@ -66,16 +66,16 @@ switch (_mode) do
                     []
                 };
             } else {selectRandom (_x#3)};
-            private _hasVehicle = (_x#0 in [A3A_IDC_RECRUITMGCARICON, A3A_IDC_RECRUITATCARICON, A3A_IDC_RECRUITAATRUCKICON]);
-            private _vehicle = "";
-            if (_includeVehicle && {!_hasVehicle}) then {
-                _vehicle = [_group] call A3A_fnc_getHCSquadVehicleType;
-            };
             if (_group isEqualTo []) then {
                 _button ctrlEnable false;
                 _button ctrlSetTooltip localize "STR_antistasi_recruit_squad_notCompatible";
                 _icon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
                 continue
+            };
+            private _hasVehicle = (_x#0 in [A3A_IDC_RECRUITMGCARICON, A3A_IDC_RECRUITATCARICON, A3A_IDC_RECRUITAATRUCKICON]);
+            private _vehicle = "";
+            if (_includeVehicle && {!_hasVehicle}) then {
+                _vehicle = [_group] call A3A_fnc_getHCSquadVehicleType;
             };
             _button setVariable ["squadType", _group];
             _button setVariable ["vehicle", if (_hasVehicle) then {""} else {_vehicle}];
