@@ -19,7 +19,7 @@
 
 ["vehiclesBasic", ["B_Quadbike_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["PRACS_M1025", "PRACS_M1097_Scout", "PRACS_M998_cargo_open", "PRACS_M998_cargo_topped", "PRACS_M998_Command"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["PRACS_M1025_Mk19", "PRACS_M1151_M240", "PRACS_M1151_M2", "PRACS_M1151_Mk19", "PRACS_M1165_M134_QSB", "PRACS_M1165_M2", "PRACS_M1165_Mk19", "PRACS_BMR_ATGM_TOW", "PRACS_BMR_ATGM", "PRACS_M1117", "PRACS_M1117"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["PRACS_M1025_Mk19", "PRACS_M1151_M240", "PRACS_M1151_M2", "PRACS_M1151_Mk19", "PRACS_M1165_M134_QSB", "PRACS_M1165_M2", "PRACS_M1165_Mk19", "PRACS_BMR_ATGM", "PRACS_BMR_ATGM", "PRACS_M1117", "PRACS_M1117"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["PRACS_M250_open", "PRACS_M250", "PRACS_m548_open"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["PRACS_M450", "PRACS_M250_flat_bed", "PRACS_m548"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["PRACS_m548_ammo", "PRACS_M250_Ammo", "PRACS_m548_arty_tender"]] call _fnc_saveToTemplate;
