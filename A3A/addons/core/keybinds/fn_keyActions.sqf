@@ -37,12 +37,8 @@ switch (_key) do {
                 GVAR(keys_battleMenu) = false;
             };
         } else {
-    #ifdef UseDoomGUI
-            ERROR("Disabled due to UseDoomGUI Switch.")
-    #else
             closeDialog 0;
             createDialog "radio_comm";
-    #endif
             [] spawn { sleep 1; GVAR(keys_battleMenu) = false; };   
         };
     };
@@ -58,9 +54,6 @@ switch (_key) do {
     };
 
     case QGVAR(infoBar): {
-    #ifdef UseDoomGUI
-        ERROR("Disabled due to UseDoomGUI Switch.")
-    #else
         if (isNull (uiNameSpace getVariable "H8erHUD")) exitWith {};
 
         private _display = uiNameSpace getVariable "H8erHUD";
@@ -68,14 +61,11 @@ switch (_key) do {
         private _keyName = actionKeysNames QGVAR(infoBar);
         _keyName = _keyName select [1, count _keyName - 2];
 
-        if (ctrlShown _infoBarControl) then {
-            ["KEYS", true] call A3A_fnc_disableInfoBar;
-            [localize "STR_antistasi_dialogs_toggle_info_bar_title", format [localize "STR_antistasi_dialogs_toggle_info_bar_body_off", _keyName], false] call A3A_fnc_customHint;
-        } else {
-            ["KEYS", false] call A3A_fnc_disableInfoBar;
-            [localize "STR_antistasi_dialogs_toggle_info_bar_title", format [localize "STR_antistasi_dialogs_toggle_info_bar_body_on", _keyName] , false] call A3A_fnc_customHint;
-        };
-    #endif
+        private _isShown = ctrlShown _infoBarControl;
+        ["KEYS", _isShown] call A3A_fnc_disableInfoBar;
+        private _string = ["on", "off"] select _isShown;
+        if (profileNamespace getVariable ["A3A_doInfobarHint", false]) exitWith {};
+        [localize "STR_antistasi_dialogs_toggle_info_bar_title", format [localize format ["STR_antistasi_dialogs_toggle_info_bar_body_%1", _string], _keyName], false] call A3A_fnc_customHint;
     };
 
     case QGVAR(earPlugs): {

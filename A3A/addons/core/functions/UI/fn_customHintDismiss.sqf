@@ -27,6 +27,7 @@ License: MIT License, Copyright (c) 2019 Barbolani & The Official Antistasi Comm
 */
 params [["_dismissAll",false]];
 private _filename = "fn_customHintDismiss.sqf";
+private _deleted = [];
 
 if (!hasInterface || !A3A_customHintEnable) exitWith {false;}; // Disabled for server & HC.
 if (_dismissAll) then {
@@ -34,9 +35,10 @@ if (_dismissAll) then {
 } else {
     if !(count A3A_customHint_MSGs isEqualTo 0) then {
         private _lastMSGIndex = count A3A_customHint_MSGs - 1;
-        A3A_customHint_MSGs deleteAt _lastMSGIndex;
+        _deleted = A3A_customHint_MSGs deleteAt _lastMSGIndex;
     };
 };
+if (count _deleted > 0) then {_deleted call A3A_fnc_customHintDismissAction};
 A3A_customHint_UpdateTime = serverTime;
 [] call A3A_fnc_customHintRender;  // Instant update will be preffered when user is dismissing notifications.
 true;

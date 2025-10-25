@@ -59,16 +59,25 @@ switch (_mode) do
             private _icon = _display displayCtrl _x#0;
             private _priceText = _display displayCtrl _x#1;
             private _button = _display displayCtrl _x#2;
-            private _group = if (_x#3 isEqualTo "vehiclesAA" && {(FactionGet(reb,_x#3)) isEqualTo []}) then {FactionGet(reb,"staticAA")#0} else {_x#3};
-            private _hasVehicle = (_icon in [A3A_IDC_RECRUITMGCARICON, A3A_IDC_RECRUITATCARICON, A3A_IDC_RECRUITAATRUCKICON]);
+            diag_log (_x#3);
+            private _group = if ((_x#3) isEqualTo []) then {
+                if (_x#0 isEqualTo A3A_IDC_RECRUITAATRUCKICON) then {
+                    FactionGet(reb,"staticAA")#0
+                } else {
+                    []
+                };
+            } else {selectRandom (_x#3)};
+            diag_log _group;
+            private _hasVehicle = (_x#0 in [A3A_IDC_RECRUITMGCARICON, A3A_IDC_RECRUITATCARICON, A3A_IDC_RECRUITAATRUCKICON]);
             private _vehicle = "";
             if (_includeVehicle && {!_hasVehicle}) then {
                 _vehicle = [_group] call A3A_fnc_getHCSquadVehicleType;
             };
-            if (_group isEqualTo []) exitWith {
+            if (_group isEqualTo []) then {
                 _button ctrlEnable false;
                 _button ctrlSetTooltip localize "STR_antistasi_recruit_squad_notCompatible";
                 _icon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
+                continue
             };
             _button setVariable ["squadType", _group];
             _button setVariable ["vehicle", if (_hasVehicle) then {""} else {_vehicle}];
@@ -85,13 +94,13 @@ switch (_mode) do
             [A3A_IDC_RECRUITINFSQUADICON, A3A_IDC_RECRUITINFSQUADPRICE, A3A_IDC_RECRUITINFSQUADBUTTON, FactionGet(reb,"groupSquad")],
             [A3A_IDC_RECRUITENGSQUADICON, A3A_IDC_RECRUITENGSQUADPRICE, A3A_IDC_RECRUITENGSQUADBUTTON, FactionGet(reb,"groupSquadEng")],
             [A3A_IDC_RECRUITINFTEAMICON, A3A_IDC_RECRUITINFTEAMPRICE, A3A_IDC_RECRUITINFTEAMBUTTON, FactionGet(reb,"groupMedium")],
-            [A3A_IDC_RECRUITMGTEAMICON, A3A_IDC_RECRUITMGTEAMPRICE, A3A_IDC_RECRUITMGTEAMBUTTON, FactionGet(reb,"staticMGs")#0],
+            [A3A_IDC_RECRUITMGTEAMICON, A3A_IDC_RECRUITMGTEAMPRICE, A3A_IDC_RECRUITMGTEAMBUTTON, FactionGet(reb,"staticMGs")],
             [A3A_IDC_RECRUITATTEAMICON, A3A_IDC_RECRUITATTEAMPRICE, A3A_IDC_RECRUITATTEAMBUTTON, FactionGet(reb,"groupAT")],
-            [A3A_IDC_RECRUITMORTARTEAMICON, A3A_IDC_RECRUITMORTARTEAMPRICE, A3A_IDC_RECRUITMORTARTEAMBUTTON, FactionGet(reb,"staticMortars")#0],
+            [A3A_IDC_RECRUITMORTARTEAMICON, A3A_IDC_RECRUITMORTARTEAMPRICE, A3A_IDC_RECRUITMORTARTEAMBUTTON, FactionGet(reb,"staticMortars")],
             [A3A_IDC_RECRUITSNIPERTEAMICON, A3A_IDC_RECRUITSNIPERTEAMPRICE, A3A_IDC_RECRUITSNIPERTEAMBUTTON, FactionGet(reb,"groupSniper")],
-            [A3A_IDC_RECRUITMGCARICON, A3A_IDC_RECRUITMGCARPRICE, A3A_IDC_RECRUITMGCARBUTTON, FactionGet(reb,"vehiclesLightArmed")#0],
-            [A3A_IDC_RECRUITATCARICON, A3A_IDC_RECRUITATCARPRICE, A3A_IDC_RECRUITATCARBUTTON, FactionGet(reb,"vehiclesAT")#0],
-            [A3A_IDC_RECRUITAATRUCKICON, A3A_IDC_RECRUITAATRUCKPRICE, A3A_IDC_RECRUITAATRUCKBUTTON, "vehiclesAA"]
+            [A3A_IDC_RECRUITMGCARICON, A3A_IDC_RECRUITMGCARPRICE, A3A_IDC_RECRUITMGCARBUTTON, FactionGet(reb,"vehiclesLightArmed")],
+            [A3A_IDC_RECRUITATCARICON, A3A_IDC_RECRUITATCARPRICE, A3A_IDC_RECRUITATCARBUTTON, FactionGet(reb,"vehiclesAT")],
+            [A3A_IDC_RECRUITAATRUCKICON, A3A_IDC_RECRUITAATRUCKPRICE, A3A_IDC_RECRUITAATRUCKBUTTON, FactionGet(reb,"vehiclesAA")]
         ];
         // Readability improvement? Yeah, probably...
     };

@@ -15504,7 +15504,7 @@
         <Chinesesimp>使用该选项将你面前的玩家从会员列表中移除</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_toggle_info_bar_body_off">
-        <Original>You've turned off the top information bar. To enable it, press %1.</Original>
+        <Original>You've turned off the top information bar. To enable it, press %1.&lt;br/&gt;&lt;br/&gt;Dismiss this hint to hide this popup in the future.</Original>
         <Italian>Hai disabilitato la Barra Informazioni. Per abilitarla, premi %1.</Italian>
         <Spanish>Has ocultado la barra de información superior. Para activarla, pulsa %1</Spanish>
         <French>Vous avez désactivé la barre d'informations supérieure. Pour l'activer, appuyez sur %1.</French>
@@ -15515,7 +15515,7 @@
         <Chinesesimp>你关闭了顶部信息栏。 要启用它，请按%1。</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_toggle_info_bar_body_on">
-        <Original>You've turned on the top information bar. To disable it, press %1.</Original>
+        <Original>You've turned on the top information bar. To disable it, press %1.&lt;br/&gt;&lt;br/&gt;Dismiss this hint to hide this popup in the future.</Original>
         <Italian>Hai abilitato la Barra Informazioni. Per disabilitarla, premi %1.</Italian>
         <Spanish>Has activado la barra de información superior. Para ocultarla, pulsa %1</Spanish>
         <French>Vous avez activé la barre d'informations supérieure. Pour la désactiver, appuyez sur %1.</French>
