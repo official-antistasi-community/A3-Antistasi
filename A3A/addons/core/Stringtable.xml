@@ -16640,6 +16640,9 @@
       <Key ID="STR_antistasi_client_options_hideCorpses">
         <Original>Hide far corpses in this radius to save performance</Original>
       </Key>
+      <Key ID="STR_antistasi_client_options_hideInfobarHint">
+        <Original>Hide hints for info bar toggle</Original>
+      </Key>
     </Container>
     <Container name="intelfeed">
       <Key ID="STR_A3A_intelfeed_title_attack_imminent">
