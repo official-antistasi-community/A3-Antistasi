@@ -27,9 +27,10 @@ HR_GRG_canOverrideLock = {
 
 //condition to automatically close garage/placement as if canceled
 HR_GRG_CP_closeCnd = {
+    params [["_closeDistance", 25]];
     (!([player] call A3A_fnc_canFight))
     || {(!isNull HR_GRG_accessPoint)
-        && {player distance HR_GRG_accessPoint > 25}
+        && {player distance HR_GRG_accessPoint > _closeDistance}
     }
 };
 

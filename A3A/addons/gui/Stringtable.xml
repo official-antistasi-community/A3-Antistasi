@@ -3177,6 +3177,9 @@
         <Turkish>Kilidi aç</Turkish>
         <Chinesesimp>解锁</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatustooltip">
+        <Original>View available intel and information about the game</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_context_title">
         <Original>Context Actions</Original>
       </Key>
