@@ -55,6 +55,7 @@ switch (_key) do {
 
     case QGVAR(infoBar): {
         if (isNull (uiNameSpace getVariable "H8erHUD")) exitWith {};
+        if (isNil "A3A_hideInfobarHints") exitWith {};
 
         private _display = uiNameSpace getVariable "H8erHUD";
         private _infoBarControl = _display displayCtrl 1001;
@@ -64,7 +65,7 @@ switch (_key) do {
         private _isShown = ctrlShown _infoBarControl;
         ["KEYS", _isShown] call A3A_fnc_disableInfoBar;
         private _string = ["on", "off"] select _isShown;
-        if (localNamespace getVariable ["A3A_blockInfobarHint", false]) exitWith {};
+        if (A3A_hideInfobarHints) exitWith {};
         [localize "STR_antistasi_dialogs_toggle_info_bar_title", format [localize format ["STR_antistasi_dialogs_toggle_info_bar_body_%1", _string], _keyName], false] call A3A_fnc_customHint;
     };
 

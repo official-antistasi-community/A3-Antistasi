@@ -25,7 +25,7 @@
 
     License: APL-ND
 */
-#include "..\script_component.hpp"
+#include "defines.inc"
 #include "\a3\ui_f\hpp\definedikcodes.inc"
 params [
     ["_class", "", [""]]
@@ -100,7 +100,7 @@ HR_GRG_dispVehicle lockInventory true;
 HR_GRG_dispVehicle setDir HR_GRG_dir;
 
 private _vehicleType = [_class] call HR_GRG_fnc_getCatIndex;
-HR_GRG_placeDistance = [25, 150] select (_vehicleType in [3, 4, 5]);
+HR_GRG_placeDistance = [25, 150] select (_vehicleType in (HR_GRG_BLOCKAIRINDEX + HR_GRG_BOATINDEX));
 [HR_GRG_dispVehicle, HR_GRG_curTexture, HR_GRG_curAnims] call BIS_fnc_initVehicle;
 HR_GRG_dispMounts = [];
 {

@@ -122,6 +122,7 @@ player setVariable ["A3A_playerUID",getPlayerUID player,true];			// Mark so that
 A3A_GUIDevPreview = profileNamespace getVariable ["AntistasiUseNewUI", true];
 A3A_drawBuilderIcons = false; // manage visibility of builder interactions
 A3A_showBuilderActions = false;
+A3A_hideInfobarHints = false;
 musicON = false;
 recruitCooldown = 0;			//Prevents units being recruited too soon after being dismissed.
 incomeRep = false;
