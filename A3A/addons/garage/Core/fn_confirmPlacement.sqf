@@ -100,7 +100,7 @@ HR_GRG_dispVehicle lockInventory true;
 HR_GRG_dispVehicle setDir HR_GRG_dir;
 
 private _vehicleType = [_class] call HR_GRG_fnc_getCatIndex;
-HR_GRG_placeDistance = [50, 200] select (_vehicleType in [3, 4, 5]);
+HR_GRG_placeDistance = [25, 150] select (_vehicleType in [3, 4, 5]);
 [HR_GRG_dispVehicle, HR_GRG_curTexture, HR_GRG_curAnims] call BIS_fnc_initVehicle;
 HR_GRG_dispMounts = [];
 {

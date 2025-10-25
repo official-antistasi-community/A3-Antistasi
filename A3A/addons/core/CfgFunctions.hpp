@@ -800,7 +800,6 @@ class CfgFunctions
             class customHint {};
             class customHintCountdown {};
             class customHintDismiss {};
-            class customHintDismissAction {};
             class customHintInit {};
             class customHintRender {};
             class shader_ratioToHex {};
