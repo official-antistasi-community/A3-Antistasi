@@ -42,7 +42,7 @@ class mehland {
         {2277.85,8427.54,0}
     };
     garrison[] = {
-        {},{"seaport_5","airport_2","outpost_13","outpost_20","resource_10","control_12","control_11","control_13"},{},{"control_12","control_11","control_13"}};
+        {},{"airport_1","outpost_9","outpost_10","outpost_8","seaport_4","control_10","control_14","control_87","control_88"},{},{"control_10","control_14","control_87","control_88"}};
     fuelStationTypes[] = {
         "Land_Fuelstation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_03_pump_F","Land_FuelStation_02_pump_F"
     };
