@@ -129,7 +129,7 @@ class A3A_createRemark
                     w = 96 * GRID_W;
                     h = 38 * GRID_H;
                     colorBackground[] = {0.1,0.1,0.1,0.5};
-                    maxChars = 900;
+                    maxChars = 860;
                     style = ST_LEFT + ST_MULTI;
                     sizeEx = GUI_TEXT_SIZE_SMALL;
                 };

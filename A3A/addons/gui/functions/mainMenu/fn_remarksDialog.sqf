@@ -38,7 +38,7 @@ private _fnc_hint = {["Remarks",_this] call A3A_fnc_customHint};
 
 params ["_mode", "_params"];
 
-_display = findDisplay A3A_IDD_REMARKS;
+private _display = findDisplay A3A_IDD_REMARKS;
 private _types = [
     ["POS", "Positive"],
     ["NEU", "Neutral"],
