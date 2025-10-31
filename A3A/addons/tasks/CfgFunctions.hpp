@@ -15,6 +15,7 @@ class CfgFunctions {
             class nearFriendlyMarkers {};
             class nearHostileMarkers {};
             class unitSpeakNearby {};
+            class taskNotifyNear {};
         };
         class Params { // params getter functions for the tasks  |  returns false if failed, otherwise params array
             file = QPATHTOFOLDER(Params);

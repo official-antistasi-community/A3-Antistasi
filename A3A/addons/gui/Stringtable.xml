@@ -123,6 +123,9 @@
         <Czech>C: Zrušit %1</Czech>
         <Chinesesimp>C键: 取消 %1</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_teamleader_placer_cannotBuildHelipad">
+        <Original>You can only build helipads at captured friendly markers or HQ.</Original>
+      </Key>
       <Key ID="STR_antistasi_teamleader_placer_e_key">
         <Original>E: Rotate counter-clockwise</Original>
         <German>E: Gegen Uhrzeigersinn rotieren</German>
@@ -969,6 +972,9 @@
       <Key ID="STR_antistasi_dialogs_hq_train_tooltip">
         <Original>This will cost € %1</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_train_maxed">
+        <Original>Rebel training maxed!</Original>
+      </Key>
     </Container>
     <Container name="dialog_hq_garrisons">
       <Key ID="STR_antistasi_dialogs_hq_garrisons_at">
@@ -1195,6 +1201,12 @@
         <Turkish>%1 için dinlenin</Turkish>
         <Chinesesimp>休息 %1</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_hq_rest_notime_text">
+        <Original>No rest for the wicked...</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_hq_rest_notime_tooltip">
+        <Original>You must select a period of time to sleep for</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_hq_wakeup_text">
         <Original>Time will be %2 when you wake up.</Original>
         <German>Es ist %2 wenn du aufwachst.</German>
@@ -1378,11 +1390,11 @@
         <Turkish>SAVAŞ SEÇENEKLERİ</Turkish>
         <Chinesesimp>战斗选项</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_remove_garrison_button">
-        <Original>Remove Garrison</Original>
+      <Key ID="STR_antistasi_dialogs_main_persistent_save_button">
+        <Original>Persistent Save</Original>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_create_watchpost_button">
-        <Original>Create WP/RB</Original>
+      <Key ID="STR_antistasi_dialogs_main_garrisons_button">
+        <Original>Garrisons</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_squads_button">
         <Original>High Command Squads</Original>
@@ -1646,6 +1658,12 @@
         <Portuguese>Distância de Geração</Portuguese>
         <Turkish>Doğma Mesafesi</Turkish>
         <Chinesesimp>生成距离</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_command_button">
+        <Original>Take Command</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_admin_take_command_self">
+        <Original>You cannot take command from yourself</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_admin_tp_arsenal_box_button">
         <Original>Arsenal Box</Original>
@@ -3085,8 +3103,8 @@
         <Turkish>Üyelere özel işlev</Turkish>
         <Chinesesimp>仅限会员使用的功能</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_no_vehicle">
-        <Original>No vehicle detected</Original>
+      <Key ID="STR_antistasi_dialogs_main_no_actions">
+        <Original>No actions available</Original>
         <German>Kein Fahrzeug erkannt</German>
         <Italian>Nessun veicolo rilevato</Italian>
         <Spanish>No se ha detectado vehículo</Spanish>
@@ -3159,19 +3177,11 @@
         <Turkish>Kilidi aç</Turkish>
         <Chinesesimp>解锁</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_vehicles">
-        <Original>Vehicles</Original>
-        <German>Fahrzeuge</German>
-        <Italian>Veicoli</Italian>
-        <Spanish>Vehículos</Spanish>
-        <French>Véhicules</French>
-        <Korean>차량</Korean>
-        <Russian>Техника</Russian>
-        <Polish>Pojazdy</Polish>
-        <Czech>Vozidla</Czech>
-        <Portuguese>Veículos</Portuguese>
-        <Turkish>Araçlar</Turkish>
-        <Chinesesimp>载具</Chinesesimp>
+      <Key ID="STR_antistasi_dialogs_main_warstatustooltip">
+        <Original>View available intel and information about the game</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_context_title">
+        <Original>Context Actions</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_timeAlive">
         <Original>Time alive:</Original>
@@ -3181,6 +3191,130 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_player_kills">
         <Original>Kills:</Original>
+      </Key>
+    </Container>
+    <Container name="dialog_main_context">
+      <Key ID="STR_antistasi_dialogs_main_context_title_main">
+        <Original>Context Actions</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_vehicle">
+        <Original>Vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_aircraft">
+        <Original>Aircraft</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_construction">
+        <Original>Construction</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_title_HQ">
+        <Original>HQ</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_label_construction">
+        <Original>Construction</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_label_HQ">
+        <Original>Headquarters</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_hideActions">
+        <Original>Hide Removal Actions</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_showActions">
+        <Original>Show Removal Actions</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_hideIcons">
+        <Original>Hide Unbuilt Icons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_showIcons">
+        <Original>Show Unbuilt Icons</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_addBombRun">
+        <Original>Add to air support</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_garage">
+        <Original>Garage Vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_toggleAI1">
+        <Original>Allow AI to use</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_toggleAI2">
+        <Original>Block AI from using</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_button_addToGarrison">
+        <Original>Add vehicle to garrison</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_away">
+        <Original>Must be near friendly marker to garage</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_airbase_helipad">
+        <Original>Must be near friendly airbase or helipad to garage</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_airbase">
+        <Original>Must be near friendly airbase to garage</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_garage_utility">
+        <Original>Garaging this will delete it and refund the full cost</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_addBombRun_nearValid">
+        <Original>Must be near airbase or HQ to add to air support</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_gen_notRebVic">
+        <Original>Vehicle is not a rebel vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_addToGarrison_alreadyIn">
+        <Original>Vehicle is already in a garrison</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_addToGarrison_crewed">
+        <Original>Vehicle must be uncrewed</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_HQ_changeRole">
+        <Original>Change Role</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_HQ_vehArsenal">
+        <Original>Vehicle Arsenal</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_HQ_beDriver">
+        <Original>Must be driver of a vehicle to modify its inventory</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_construction_needEngineer">
+        <Original>Must be an engineer</Original>
+      </Key>
+    </Container>
+    <Container name="dialog_main_war_status">
+      <Key ID="STR_antistasi_dialogs_main_warstatus_main">
+        <Original>War Status</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_occupants">
+        <Original>Occupants</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_invaders">
+        <Original>Invaders</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_rebels">
+        <Original>Rebels</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_intelfeed">
+        <Original>Intel Feed</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_aggro">
+        <Original>Aggression: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_resources">
+        <Original>Resources: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_lastResourcesUpdate">
+        <Original>Time since last update: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_noResourcesUpdate">
+        <Original>No known resource information</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_radioKeys">
+        <Original>Radio Keys: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_money">
+        <Original>Money: %1€</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_warstatus_HR">
+        <Original>HR: %1</Original>
       </Key>
     </Container>
     <Container name="dialog_mission_request">
@@ -3461,6 +3595,9 @@
       <Key ID="STR_antistasi_recruit_squad_error">
         <Original>You do not have enough money or HR for this group type</Original>
       </Key>
+      <Key ID="STR_antistasi_recruit_squad_notCompatible">
+        <Original>This squad type is not compatible with this modset</Original>
+      </Key>
     </Container>
     <Container name="dialog_recruit_units">
       <Key ID="STR_antistasi_dialogs_recruit_units_antitank">
@@ -3584,6 +3721,9 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_units_error">
         <Original>You do not have enough money or HR for this unit type</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_recruit_units_noWeapons">
+        <Original>You do not have the weapons necessary to equip this unit</Original>
       </Key>
     </Container>
     <Container name="dialogs_generic">
@@ -4538,6 +4678,110 @@
         <Original>Save the new campaign to AntistasiCommunity.vars instead of the main profile vars file. Warning: This may not work correctly on Linux servers due to an Arma bug.</Original>
       </Key>
     </Container>
+    <Container name="role_select">
+      <Key ID="STR_antistasi_dialogs_roleselect_role_rifleman">
+        <Original>Rifleman</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_rifleman">
+        <Original>The Rifleman is the backbone of every army. Fast and versatile, riflemen are able to go anywhere and do anything.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_rifleman">
+        <Original>Riflemen incur no bonuses or penalties, but are able to hack enemy UAVs if they are found capturable.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_autorifleman">
+        <Original>Autorifleman</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_autorifleman">
+        <Original>Autoriflemen provide the most basic and effective form of fire support: suppression with machine guns.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_autorifleman">
+        <Original>Autoriflemen have better stamina and recovery (can carry more items over distance), but are loud when they move, alerting enemies.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_grenadier">
+        <Original>Grenadier</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_grenadier">
+        <Original>Grenadiers carry grenade launchers to supplement the offensive with explosive, smoke, or flare rounds.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_grenadier">
+        <Original>Grenadiers have better stamina and recovery, but are more easily visible to enemies.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_medic">
+        <Original>Medic</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_medic">
+        <Original>Medics will always keep the squad in the fight, no matter what happens. They are the most important unit in the squad, and should be protected.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_medic">
+        <Original>Medics can do a variety of medical actions faster and also have expanded medical abilities. However, they have worse stamina and are spotted easier.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_engineer">
+        <Original>Engineer</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_engineer">
+        <Original>Engineers work day and night to keep the rebellion and their tech alive, with a good engineer saving tons of time for the squad.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_engineer">
+        <Original>Engineers can repair vehicles, breach enemy armor, build fortifications, defuse mines, and more. They incur a penalty to stamina and a buff to stealth.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_teamleader">
+        <Original>Team Leader</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_teamleader">
+        <Original>A band of rebels without a team leader is barely more than a mob. Team leaders pull their units together and lead their squads to victory.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_teamleader">
+        <Original>Team leaders are quite stealthy with buffs to visual and audible stealth, but have worse stamina.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_role_commander">
+        <Original>Commander</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_info_commander">
+        <Original>The commander is the top ranking soldier in the field. They manage the rebellion's affairs, while being able to perform medical and engineer tasks.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_utility_commander">
+        <Original>Commanders handle AI and garrisons as well as coordinating fire support when needed. They have superior stealth for recon but suffer a stamina penalty.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsRifleman">
+        <Original>Riflemen: %1 (*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_capExplanationRifleman">
+        <Original>There is no cap to the number of Rifleman players.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsCommander">
+        <Original>%1 is the current faction Commander (*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderNone">
+        <Original>The faction currently has no Commander (*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderSelf">
+        <Original>You are currently the faction's Commander (*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_capExplanationCommander">
+        <Original>The faction can only have one commander, and you must be assigned the spot.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_slots">
+        <Original>%1: %2/%3  (*)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_capExplanation">
+        <Original>The cap of slots per role (excluding riflemen and the commander) increases as the player count increases. The number per role increases linearly from 3 slots at 3 players to 6 slots at 38 players.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_welcome">
+        <Original>Welcome to Antistasi! To get started, select a role from the list on the left and use "set role". You can revisit this screen any time by opening the Battle Menu with Y.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_welcomeNew">
+        <Original>Each role has different traits and quirks, so it is recommended to start as a rifleman if you are new to the game. Note that no role has locked weapons; the roles simply determine what traits you start with.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_hasRole">
+        <Original>You are currently a %1.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_isCommander">
+        <Original>However, since you are the commander, you have the traits listed in the "Commander" tab until you resign.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_cannotTakeRoleFull">
+        <Original>This role is full.</Original>
+      </Key>
+    </Container>
     <Container name="custom_loadouts">
       <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
         <Original>Custom AI Loadouts</Original>
@@ -4621,6 +4865,14 @@
       </Key>
       <Key ID="STR_antistasi_gun_shop_total_cost_text">
         <Original>Total:</Original>
+      </Key>
+    </Container>
+    <Container name="admin_copy_id">
+      <Key ID="STR_antistasi_admincopyid_title">
+        <Original>COPY USER ID</Original>
+      </Key>
+      <Key ID="STR_antistasi_admincopyid_main">
+        <Original>Copy the user's ID from the box by highlighting it and using Ctrl + C.</Original>
       </Key>
     </Container>
   </Package>

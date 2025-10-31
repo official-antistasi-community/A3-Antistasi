@@ -60,6 +60,20 @@ allCivilianVests deleteAt (allCivilianVests find "vn_b_vest_seal_01");
 //WHY is there no clean list?
 //allArmoredHeadgear = allHeadgear select {getNumber (configfile >> "CfgWeapons" >> _x >> "ItemInfo" >> "HitpointsProtectionInfo" >> "Head" >> "armor") > 0};
 allCosmeticHeadgear = allHeadgear - allArmoredHeadgear;
+{allCosmeticHeadgear deleteAt (allCosmeticHeadgear find _x)} forEach [
+	"H_SPE_GER_ST_M40_cap",
+	"H_SPE_GER_ST_M40_cap_hp",
+	"H_SPE_GER_ST_M40_cap_Offz",
+	"H_SPE_GER_ST_M40_cap_Offz_hp",
+	"H_SPE_GER_ST_M40_cap_Offz_2",
+	"H_SPE_GER_ST_M40_Pz_cap",
+	"H_SPE_GER_ST_M40_Pz_cap_headset",
+	'H_SPE_GER_ST_M40_Pz_cap_Offz',
+	"H_SPE_GER_ST_M40_Pz_cap_Offz_headset",
+	"H_SPE_GER_ST_M40_Pz_cap_Offz_2",
+	"H_SPE_GER_ST_M40_Pz_cap_2",
+	"H_SPE_GER_ST_M40_cap_2"
+];
 
 //////////////////
 //   Glasses   ///

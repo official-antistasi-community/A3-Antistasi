@@ -15,7 +15,7 @@ Public: No
 Dependencies:
 
 Example:
-    [_object, _jipKey] remoteExec [A3A_fnc_initObjectRemote, _jipKey];
+    [_object, _jipKey] remoteExecCall [A3A_fnc_initObjectRemote, _jipKey];
 */
 #include "..\..\script_component.hpp"
 
@@ -30,6 +30,9 @@ if (isNil "initClientDone") then {
 };
 
 private _flags = (A3A_utilityItemHM get typeof _object) # 4;
+if (isNil "_flags") then {
+    Error_4("initObjectRemote error: JIP %1, utilityItem %2, object %3, data %4", isRemoteExecutedJIP, !isNil "A3A_utilityItemHM", typeof _object, A3A_utilityItemHM get typeof _object);
+};
 
 if ("move" in _flags) then {
     _object addAction [

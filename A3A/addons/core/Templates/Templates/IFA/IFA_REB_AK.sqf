@@ -17,7 +17,7 @@
 ["flyGear", ["U_LIB_US_Bomber_Pilot","B_LIB_US_Type5"]] call _fnc_saveToTemplate;
 ["vehiclesCivSupply", ["a3a_lib_Zis6_BOX"]] call _fnc_saveToTemplate; //We should create a inert "box truck" version
 
-["surrenderCrate", "LIB_Lone_Big_Box"] call _fnc_saveToTemplate;
+["surrenderCrate", "LIB_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
 
 //////////////////////////
 //       Vehicles       //
@@ -34,6 +34,10 @@
 
 ["vehiclesPlane", ["LIB_C47_RAF"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["LIB_Zis5v_Med"]] call _fnc_saveToTemplate;
+
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    ["vehiclesPlane", ["sab_fl_ju52", "sab_fl_g50"]] call _fnc_saveToTemplate;
+};
 
 ["vehiclesCivCar", ["LIB_GazM1_dirty", "LIB_GazM1"]] call _fnc_saveToTemplate;
 ["vehiclesCivTruck", ["LIB_CIV_FFI_CitC4", "LIB_CIV_FFI_CitC4_3"]] call _fnc_saveToTemplate;
@@ -79,8 +83,11 @@ switch (A3A_climate) do
 ///////////////////////////
 
 private _initialRebelEquipment = [
+["LIB_Faustpatrone", 20], "LIB_1Rnd_Faustpatrone",
 "LIB_WaltherPPK", "LIB_7Rnd_765x17_PPK",
 ["LIB_M1895", 15], "LIB_7Rnd_762x38",
+["LIB_DELISLE", 2],["LIB_7Rnd_45ACP_DeLisle", 14],
+"LIB_Welrod_mk1","LIB_6Rnd_9x19_Welrod",
 "LIB_FLARE_PISTOL", "LIB_1Rnd_flare_white",
 "V_LIB_SOV_RA_Belt", 
 ["LIB_Ladung_Small_MINE_mag", 10],
