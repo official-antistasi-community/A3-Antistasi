@@ -64,7 +64,7 @@ switch (_mode) do
             if (_texts isEqualTo [""]) then { continue };       // spacer
 
             private _valsCtrl = _display ctrlCreate ["A3A_ComboBox_Small", _rowCount + A3A_IDC_SETUP_PARAMSROWS, _paramsTable];
-            _valsCtrl ctrlSetPosition [GRID_W*66, GRID_H*_rowCount*4, GRID_W*32, GRID_H*4];
+            _valsCtrl ctrlSetPosition [GRID_W*65, GRID_H*_rowCount*4, GRID_W*32, GRID_H*4];
             _valsCtrl ctrlCommit 0;
             _valsCtrl setVariable ["config", _x];
             {

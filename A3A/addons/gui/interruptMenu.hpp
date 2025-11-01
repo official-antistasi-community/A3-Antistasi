@@ -8,7 +8,7 @@ class A3A_OptionsBase : RscButtonMenu
 	onLoad = "[_this#0, 'options'] call (uiNamespace getVariable 'A3A_GUI_fnc_showInterruptButtons');";
 	x = "1 * 			(			(			(safezoneW / safezoneH) min 1.2) / 40) + (safezoneX)";
 	y = "1 * 			(			(			((safezoneW / safezoneH)) / 40)) + (safeZoneY)";
-	h = "1 * 			(			(			((safezoneW / safezoneH)) / 40))";
+	h = "1 * 			(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 	w = "15 * 			(			(			(safezoneW / safezoneH) min 1.2) / 40)";
 	/*
 	class TextPos 

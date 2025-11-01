@@ -52,7 +52,7 @@ class A3A_ClientOptions
                     idc = A3A_IDC_OPTIONS_TABLE;
                     x = 1 * GRID_W;
                     y = 1 * GRID_H;
-                    w = 98 * GRID_W;
+                    w = 97 * GRID_W;
                     h = 64 * GRID_H;
                 };
                 class CloseButton : A3A_Button 
