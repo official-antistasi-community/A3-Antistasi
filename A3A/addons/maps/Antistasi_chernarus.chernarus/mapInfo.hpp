@@ -27,7 +27,13 @@ class chernarus {
 		{"a3a_helipad", 1500, "helipad"}
 	};
 	policeStationTypes[] = {
+// Use different houses if CUP interiors is loaded
+#if __has_include("\z\LSR\addons\patch_contact_in_cup_c\config.bin")
+		"Land_HouseV_2L", "Land_HouseV2_02", "Land_HouseV2_03B", "Land_HouseV2_04_interier", "Land_houseV_2T1", "Land_houseV_2T2", "Land_HouseV2_01A", "Land_HouseV2_01B",
+		"Land_HouseV_2I", "Land_HouseV_3I4"," Land_HouseV_1T", "Land_HouseV_1I2", "Land_HouseV_3I2", "Land_HouseV_1L1", "Land_HouseV_1L2", "Land_A_Pub_01"
+#else
 		"Land_HouseV2_04_interier", "Land_HouseV2_02_Interier", "Land_A_Pub_01",
 		"Land_a_stationhouse", "Land_HouseV_1I4", "Land_Mil_Guardhouse"
+#endif
 	};
 };
