@@ -31,4 +31,8 @@ class SPE_Normandy {
 	policeStationTypes[] = {
 		"Land_SPE_House_Big_04", "Land_SPE_House_Big_02", "Land_SPE_Farmhouse_01", "Land_SPE_House_Small_01", "Land_SPE_House_Big_03"
 	};
+	requiredMods = "Spearhead 1944 CDLC";
+	size = 12.3;
+	cityCount = 92;
+	airbaseCount = 5;
 };

@@ -30,4 +30,8 @@ class chernarus {
 		"Land_HouseV2_04_interier", "Land_HouseV2_02_Interier", "Land_A_Pub_01",
 		"Land_a_stationhouse", "Land_HouseV_1I4", "Land_Mil_Guardhouse"
 	};
+	requiredMods = "CUP Terrains - Core and CUP Terrains - Maps";
+	size = 15.4;
+	cityCount = 46;
+	airbaseCount = 3;
 };

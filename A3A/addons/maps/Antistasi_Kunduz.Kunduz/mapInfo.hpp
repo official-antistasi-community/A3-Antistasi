@@ -42,4 +42,8 @@ class kunduz {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	requiredMods = "Kunduz, Afghanistan";
+	size = 5.1;
+	cityCount = 12;
+	airbaseCount = 1;
 };

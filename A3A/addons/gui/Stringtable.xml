@@ -4867,6 +4867,178 @@
         <Original>Total:</Original>
       </Key>
     </Container>
+    <Container name="map_selector">
+      <Key ID="STR_antistasi_mapSelector_onload_text">
+        <Original>Welcome to Antistasi!&lt;br /&gt;Use the information button to view basic gamemode info or select a map on the left side to start a game.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_information_text">
+        <Original>Welcome to Antistasi! Antistasi is a gamemode where you play as a small rebel force fighting the tyrannical occupants and ruthless invaders, attempting to kick them both out and regain the country for yourself and your people. The first step to playing is selecting your preferred map. Beginners are recommended to start on Altis.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_information_text2">
+        <Original>Select any map from the left-hand list to view information on it. Switch between Banner and Map Board views with the top buttons. Launch your mission with the Play buttons.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_noSP_text">
+        <Original>To play a solo game, select "Host Game" and use the default options. Due to internal technical limitations, Antistasi cannot be played in a true singleplayer, scenario-like mode and you must instead host a game, but unless you set it up specifically, no one outside your local network can join it. This restriction may be resolved over the coming versions - stay tuned!</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_mainTitle">
+        <Original>ANTISTASI</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_infoTitle">
+        <Original>INFORMATION</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_bannerTitle">
+        <Original>BANNER</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_mapTitle">
+        <Original>MAP</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_backButton">
+        <Original>Back</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_playSPButton">
+        <Original>Play Solo</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_playMPButton">
+        <Original>Host Game</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_reqMods">
+        <Original>Required mods: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_noReqMods">
+        <Original>None</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_failReqMods">
+        <Original>You cannot play %1 as the required mod(s) are not loaded.\nRequired mods: %2</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_mapStats">
+        <Original>Climate: %1&lt;br /&gt;&lt;br /&gt;Map size:&lt;br /&gt;%2km x %2km&lt;br /&gt;&lt;br /&gt;Cities: %3&lt;br /&gt;&lt;br /&gt;Banks: %4&lt;br /&gt;&lt;br /&gt;Airbases: %5</Original>
+      </Key>
+    </Container>
+    <Container name="map_descriptions">
+      <Key ID="STR_antistasi_mapSelector_description_altis">
+        <Original>Altis is the classic Antistasi map, great for beginners and veterans alike, featuring a variety of terrain and strategies. This map is quite large and has something for everyone.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_cam_lao_nam">
+        <Original>Cam Lao Nam is the traditional Vietnam map, with dense jungles and entrenched outposts that require a unique gameplay style to tackle and conquer.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_chernarus">
+        <Original>Chernarus is the classic DayZ and Arma 2 map, small enough to allow for a quick completion but varied enough to keep the experience engaging for beginners and veterans alike.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_chernarus_summer">
+        <Original>A variation of the classic Chernarus map, in a lively summer season.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_chernarus_winter">
+        <Original>A variation of the classic Chernarus map, with a few inches of snow to boot.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_cup_chernarus_A3">
+        <Original>Chernarus 2020 is a sequel to the classic Chernarus map, with new assets, reworked terrain features, and a slightly larger map. This map may have client performance issues.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_enoch">
+        <Original>Livonia is split between forests and rolling wheat fields, with urban environments and open areas benefiting long-range and close-quarters gameplay.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_gm_weferlingen_summer">
+        <Original>Weferlingen is a large map, sparsely populated with objectives and composed of open fields for long-range and armored combat. This version takes place in a lively summer season.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_gm_weferlingen_winter">
+        <Original>Weferlingen is a large map, sparsely populated with objectives and composed of open fields for long-range and armored combat. This is the winter version, with a thick snow coating.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_isladuala3">
+        <Original>Isla Duala is a country split by war, with deserts and tropical environments across a very objective-dense map. New players may struggle with the density map.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_kunduz">
+        <Original>Kunduz is a tiny, cramped map desert map. This map is good for a very quick run from start to end of Antistasi, without any fluff. It is not recommended for long-term play.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_malden">
+        <Original>Malden is a compact, dense map with plenty of urban areas, close quarters combat, and a highly accessible road network that may make the map difficult to new players.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_Napf">
+        <Original>Napf is a Swiss specialty of rolling hills and dense forests. With sparse objectives and forgiving terrain, new players should consider this map.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_NapfWinter">
+        <Original>This is a version of Napf, in a rainy or winter environment.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_pulau">
+        <Original>Pulau is split into 2 islands in a dense tropical jungle, similar to Tanoa, where close-quarters combat reigns supreme. New players may struggle with the thick jungle foliage.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_regero">
+        <Original>Regero consists mainly of arid terrain and sharp hills. With a variety of terrain, it provides interesting gameplay for infantry but aircraft may struggle with the elevation.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_sara">
+        <Original>Sahrani is a varied terrain where all types of gameplay can flourish on an open sandbox. However, like many CUP terrains, many of the buildings are non-functional.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_SPE_Mortain">
+        <Original>Mortain is a World War II themed map, with enough hedges, walls, and village houses to keep engagement distances to a minimum in true World War II style.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_SPE_Normandy">
+        <Original>Normandy is similar to Mortain with additional varied terrain in places, with fields and orchards, but the wholehearted focus is still on World War II assaults.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_stratis">
+        <Original>Stratis is not intended for play with Antistasi, but is compatible for testing purposes and for those who dare.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_takistan">
+        <Original>Takistan is the most frequent Middle-Eastern Antistasi map, compact but with enough objectives to service a short but full campaign. Rolling hills encourage long-range tactics.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_tanoa">
+        <Original>Tanoa is split between 5 islands, with thick jungles leading to close-quarters fights. Performance may struggle and new players may struggle with the visibility AI has.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_tembelan">
+        <Original>Tembelan Island is an extremely dense island, with a few forests and plenty of urban areas. Close quarters combat and large-scale assaults are frequent sights here.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_tem_anizay">
+        <Original>Anizay is a compact desert map with a massive urban city to the northwest, leading to a variety of tactics and gameplay styles. Its size leads to many short campaigns.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_tem_kujari">
+        <Original>Kujari is an African map with sparse forests, open areas, and enough cities to provide a new experience every time you play. It's large enough to sustain a longer campaign.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_umb_colombia">
+        <Original>Colombia is one of the few South American maps, with dense jungles and open fields interspersed. New players may struggle with the thickness of the foliage against AI.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_vn_khe_sanh">
+        <Original>Khe Sanh is a similar trademark Vietnam map to Cam Lao Nam, with slightly less dense jungles in a more compact and ruthless terrain. New players may struggle iwth this map.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_vt7">
+        <Original>Virolahti is dominated by forests and mainly flat terrain, requiring new strategies with less cover and concealment. Veteran players may enjoy this map.</Original>
+      </Key>
+    </Container>
+    <Container name="community_advertisement">
+      <Key ID="STR_antistasi_commad_splashText">
+        <Original>The Antistasi Official Community servers are the best place to drop in and play Antistasi, 24/7. The community maintains two servers that rotate through the most popular maps and modsets, with a large playerbase keeping the servers active.&lt;br /&gt;Use the Links button to download the modset, or join the servers now if you've loaded the correct mods.</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_linkText">
+        <Original>Antistasi Discord: discord.gg/antistasi&lt;br /&gt;Teamspeak (required to play servers): %1&lt;br /&gt;Main server address: %2&lt;br /&gt;Ports: %3</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_showTestServers">
+        <Original>Show Test Servers</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_joinMain1">
+        <Original>Join Main Server 1</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_joinTest1">
+        <Original>Join Test Server 1</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_joinMain2">
+        <Original>Join Main Server 2</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_joinTest2">
+        <Original>Join Test Server 2</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_back">
+        <Original>Back</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_links">
+        <Original>Links</Original>
+      </Key>
+      <Container name="options_dialog">
+      <Key ID="STR_antistasi_clientOptions_title">
+        <Original>ANTISTASI OPTIONS</Original>
+      </Key>
+      <Key ID="STR_antistasi_clientOptions_backButton">
+        <Original>Back</Original>
+      </Key>
+      <Key ID="STR_antistasi_clientoptions_saveButton">
+        <Original>Save</Original>
+      </Key>
+    </Container>
     <Container name="admin_copy_id">
       <Key ID="STR_antistasi_admincopyid_title">
         <Original>COPY USER ID</Original>

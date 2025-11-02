@@ -198,6 +198,9 @@ if (isClass (configFile >> "AntistasiServerMembers")) then
     // Load data from the classes
     private _memberClasses = "true" configClasses (configFile >> "AntistasiServerMembers" >> "MembersClasses");
     {membersX pushBackUnique (getText (_x >> "uid"))} forEach _memberClasses;
+
+    // Load remark setting
+    if (isNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks") || {debug}) then {A3A_useRemarks = getNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks")};
 };
 
 // TODO: Do we need this? maybe...
@@ -219,6 +222,7 @@ addMissionEventHandler ["OnUserAdminStateChanged", {
 }];
 
 publicVariable "membersX";
+publicVariable "A3A_useRemarks";
 publicVariable "theBoss";       // need to publish this even if empty
 
 // Setup buildable objects. Needed for HQ radius in initSupports

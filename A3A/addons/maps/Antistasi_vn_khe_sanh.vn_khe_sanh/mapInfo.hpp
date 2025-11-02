@@ -57,4 +57,8 @@ class vn_khe_sanh {
 	policeStationTypes[] = {
 		"Land_vn_house_big_04_f", "Land_i_House_Big_02_V1_F", "Land_PoliceStation_01_F", "Land_vn_slum_03_f", "Land_vn_hut_village_01"
 	};
+	requiredMods = "S.O.G. Prairie Fire CDLC";
+	size = 15.4;
+	cityCount = 92;
+	airbaseCount = 4;
 };

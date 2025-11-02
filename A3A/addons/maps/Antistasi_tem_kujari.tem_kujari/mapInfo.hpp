@@ -46,4 +46,8 @@ class tem_kujari {
 		"Land_House_C_3_EP1", "Land_House_C_10_EP1", "Land_House_C_4_EP1", "Land_House_C_9_EP1",
 		"Land_House_K_8_EP1", "Land_House_K_7_EP1", "Land_House_K_3_EP1", "Land_House_L_6_EP1", "Land_House_L_7_EP1"
 	};
+	requiredMods = "Kujari and CUP Terrains - Core";
+	size = 16.4;
+	cityCount = 60;
+	airbaseCount = 5;
 };

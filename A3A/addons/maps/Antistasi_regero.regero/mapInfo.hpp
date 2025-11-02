@@ -41,4 +41,8 @@ class regero {
         // From Sahrani
 		"Land_Dum_mesto2", "Land_Dum_olezlina", "Land_Panelak", "Land_Dum_istan3_hromada2", "Land_Dum_olez_istan1_open2", "Land_Dum_olez_istan1"
 	};
+    requiredMods = "Kingdom of Regero and CUP Terrains - Core";
+    size = 10.2;
+    cityCount = 28;
+    airbaseCount = 7;
 };

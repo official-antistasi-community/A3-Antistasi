@@ -33,4 +33,8 @@ class altis {
 		"Land_i_House_Big_01_V1_F", "Land_i_House_Big_01_V2_F", "Land_i_House_Big_01_V3_F",
 		"Land_i_House_Big_02_V1_F", "Land_i_House_Big_02_V2_F", "Land_i_House_Big_02_V3_F"
 	};
+	requiredMods = "";
+	size = 30.7;
+	cityCount = 48;
+	airbaseCount = 6;
 };
