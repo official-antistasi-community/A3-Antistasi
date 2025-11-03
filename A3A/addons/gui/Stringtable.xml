@@ -2202,6 +2202,9 @@
         <Turkish>HE</Turkish>
         <Chinesesimp>高爆弹</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_he_detail">
+        <Original>Impact radius</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_smoke">
         <Original>Smoke</Original>
         <German>Rauch</German>
@@ -2215,6 +2218,12 @@
         <Portuguese>Fumo</Portuguese>
         <Turkish>Sis</Turkish>
         <Chinesesimp>烟雾弹</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_smoke_detail">
+        <Original>Cover time</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_flare_detail">
+        <Original>Burn time</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_button">
         <Original>Fire Mission</Original>

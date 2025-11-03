@@ -513,7 +513,6 @@ switch (_mode) do
                             _x params ["_type","_currentCount"];
                             private _existingCount = _shellCounts getOrDefault [_type,0];
                             _shellCounts set [_type, _currentCount + _existingCount];
-                            diag_log format ["foreachindex %1 type %2 count %3", _forEachIndex, _type, _currentCount];
                         } forEach magazinesAmmo _veh;
                         private _dict = [typeOf _veh] call A3A_fnc_getMortarMags;
                         {_artyDictionary set [_x,_y];} forEach _dict; // automatically covers repeats
@@ -522,11 +521,8 @@ switch (_mode) do
                 };
             };
         } forEach _units;
-        diag_log format ["mortarobjs %1",_mortarObjs];
         _fireMissionControlsGroup setVariable ["mortarObjs", _mortarObjs];
-        diag_log format ["shellcounts %1", _shellCounts];
         _fireMissionControlsGroup setVariable ["shellCounts", _shellCounts];
-        diag_log format ["artyDictionary %1", _artyDictionary];
         _fireMissionControlsGroup setVariable ["artyDictionary", _artyDictionary];
 
         // TODO UI-update: check if unit is ready to fire etc, or do we already do that?
@@ -582,7 +578,6 @@ switch (_mode) do
             private _text = format ["%1: %2",_description,_count];
             _lbNames pushBack _text;
             _lbEntryHM set [_text, _mag];
-            diag_log format ["index %1 type %2 text %3", _forEachIndex, _mag, _text];
         } forEach _shellCounts;
         _lbNames sort true;
         {
@@ -591,16 +586,12 @@ switch (_mode) do
         } forEach _lbNames;
         if (lbCurSel A3A_IDC_SHELLTYPEBOX == -1) then {
             private _heMagsDict = _artyDictionary apply {if (_y#0 == "HE") then {_x} else {""}};
-            diag_log _heMagsDict;
             private _heMagsCount = _shellCounts apply {_x};
-            diag_log _heMagsCount;
             private _heMags = _heMagsCount arrayIntersect _heMagsDict;
-            diag_log _heMags;
             private _lbTargetIndex = -1;
             for "_i" from 0 to (lbSize A3A_IDC_SHELLTYPEBOX - 1) do {
                 if (_shellTypeBox lbData _i == (_heMags#0)) exitWith {_lbTargetIndex = _i}
             };
-            diag_log _lbTargetIndex;
             _shellTypeBox lbSetCurSel _lbTargetIndex;
         };
         
@@ -613,12 +604,8 @@ switch (_mode) do
         private _attributeLabel = _display displayCtrl A3A_IDC_ATTRIBUTELABEL;
         private _attributeText = _display displayCtrl A3A_IDC_ATTRIBUTETEXT;
         private _attribute = _shellDict#3;
-        private _label = switch (_shellDict#0) do {
-            case ("HE"): { "Impact radius" };
-            case ("SMOKE"): { "Cover time" };
-            case ("FLARE"): { "Burn time" };
-            default { "???" }
-        };
+        private _label = localize format ["STR_antistasi_dialogs_main_hc_fire_mission_ammo_%1_detail", toLowerANSI (_shellDict#0)];
+        if (_label isEqualTo "") then {_label = "???"};
         private _textFormat = format ["%1%2",_attribute,["s","m"] select (_shellDict#0 == "HE")];
         _attributeLabel ctrlSetText _label;
         _attributeText ctrlSetText _textFormat;
@@ -948,8 +935,6 @@ switch (_mode) do
                 private _shellTypeBox = _display displayCtrl A3A_IDC_SHELLTYPEBOX;
                 private _shellCounts = _fireMissionControlsGroup getVariable ["shellCounts", createHashMap];
                 private _shellType = _shellTypeBox lbData lbCurSel _shellTypeBox;
-                diag_log _shellCounts;
-                diag_log _shellType;
                 private _availableAmmo = 0;
                 {
                     if (_x == _shellType) exitWith {_availableAmmo = _y};
@@ -1061,7 +1046,6 @@ switch (_mode) do
         private _index = lbCurSel _shellTypeBox;
         private _shellType = _shellTypeBox lbData _index;
         private _vics = _fireMissionControlsGroup getVariable ["mortarObjs", []];
-        diag_log _vics;
         private _units = _vics select {((magazinesAmmo _x) findIf {(_x#0 == _shellType)}) > -1};
         private _artyDictionary = _fireMissionControlsGroup getVariable ["artyDictionary", createHashMap];
         private _shellDict = _artyDictionary get _shellType;
