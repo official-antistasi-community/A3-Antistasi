@@ -46,10 +46,10 @@ private _arsenalLimitsButton = _display displayCtrl A3A_IDC_ARSENALLIMITSBUTTON;
 private _customizeLoadoutsButton = _display displayCtrl A3A_IDC_CUSTOMIZELOADOUTSBUTTON;
 private _recruitSquadButton = _display displayCtrl A3A_IDC_RECRUITSQUADCMDBUTTON;
 private _requestMissionButton = _display displayCtrl A3A_IDC_MISSIONREQUESTBUTTON;
-private _createWatchpostButton = _display displayCtrl A3A_IDC_ADDWATCHPOSTBUTTON;
-private _removeGarrisonButton = _display displayCtrl A3A_IDC_REMOVEGARRISONBUTTON;
+private _garrisonButton = _display displayCtrl A3A_IDC_ACCESSGARRISONSBUTTON;
+private _persistentSaveButton = _display displayCtrl A3A_IDC_PERSISTENTSAVECMDBUTTON;
 private _HCSquadsButton = _display displayCtrl A3A_IDC_HCSQUADSBUTTON;
-private _baseButtons = [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_recruitSquadButton,_requestMissionButton,_createWatchpostButton,_removeGarrisonButton,_HCSquadsButton];
+private _baseButtons = [_airSupportButton,_garbageCleanButton,_arsenalLimitsButton,_customizeLoadoutsButton,_recruitSquadButton,_requestMissionButton,_garrisonButton,_persistentSaveButton,_HCSquadsButton];
 
 switch (_mode) do
 {
@@ -84,7 +84,7 @@ switch (_mode) do
             {
                 _x ctrlEnable false;
                 _x ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_no_radio";
-            } forEach [_airSupportButton,_recruitSquadButton,_requestMissionButton,_createWatchpostButton,_removeGarrisonButton,_HCSquadsButton];
+            } forEach [_airSupportButton,_recruitSquadButton,_requestMissionButton,_garrisonButton,_HCSquadsButton];
         };
 
         // Check for selected groups
@@ -115,15 +115,6 @@ switch (_mode) do
         // Set map to group selection mode
         _commanderMap setVariable ["selectFireMissionPos", false];
         _commanderMap setVariable ["selectFireMissionEndPos", false];
-
-        // Check for valid marker for dismissal
-        if (_commanderMap getVariable ["selectedMarker",""] isEqualTo "") then {
-            _removeGarrisonButton ctrlEnable false;
-            _removeGarrisonButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_commander_no_marker";
-        } else {
-            _removeGarrisonButton ctrlEnable true;
-            _removeGarrisonButton ctrlSetTooltip "";
-        };
 
         switch (true) do 
         {
@@ -189,8 +180,8 @@ switch (_mode) do
         _groupNameText ctrlSetText _groupID;
 
         private _groupFastTravelButton = _display displayCtrl A3A_IDC_HCFASTTRAVELBUTTON;
-        [player, _group] call A3A_fnc_canFastTravel params ["_isFastTravelAllowed","_fastTravelBlockers"];
-        if (_isFastTravelAllowed) then {
+        private _fastTravelBlockers = [player, _group] call A3A_fnc_canFastTravel;
+        if (_fastTravelBlockers isEqualTo []) then {
             _groupFastTravelButton ctrlEnable true;
             // ShortcutButtons doesn't change texture color when disabled so we have to use fade
             _groupFastTravelButton ctrlSetFade 0;
@@ -1092,13 +1083,21 @@ switch (_mode) do
         [_units,_shellType,_shortName,_strikeType,_roundsNumber,_startPos,_detail] spawn A3A_fnc_artySupportFire;
     };
 
-    case ("removeGarrisonButtonClicked"):
+    case ("persistentSaveButtonClicked"):
     {
-        Trace("Dismissing garrison");
-        private _display = findDisplay A3A_IDD_MAINDIALOG;
-        private _selectedMarker = _commanderMap getVariable ["selectedMarker", ""];
-        if !(_selectedMarker call A3A_fnc_canEditGarrison) exitWith {};     // throws hints on failure
-    	[_selectedMarker, true, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2];
+        ServerDebug("Commander attempted persistent save");
+        [] remoteExecCall ["A3A_fnc_saveLoop", 2];
+    };
+    case ("garrisonButtonClicked"):
+    {
+        Trace("Showing garrison menu");
+        closeDialog 0;
+        player setVariable ["A3A_showGarrisonMenu", true];
+        0 spawn {
+            createDialog "A3A_HqDialog";
+            uiSleep 1;
+            player setVariable ["A3A_showGarrisonMenu", nil];
+        };
     };
 
     case ("showGarbageCleanOptions"):

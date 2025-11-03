@@ -85,8 +85,9 @@ A3A_buildingsToSave = A3A_buildingsToSave - _buildingsInArea;
 		if (count crew _x != 0) then { continue };
 	};
 
-	["Synd_HQ", _x] call A3A_fnc_garrisonServer_addVehicle;
+	["Synd_HQ", _x, false] call A3A_fnc_garrisonServer_addVehicle;
 
 } forEach (vehicles inAreaArray "Synd_HQ");
+call A3A_fnc_calcBuildingReveal;
 
 ["HQPlaced", [_newPos]] call EFUNC(Events,triggerEvent);

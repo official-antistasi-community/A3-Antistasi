@@ -82,15 +82,17 @@ private _enemy2Count = 0;
 } forEach (units _enemy2 inAreaArray [_markerPos, _capRadius, _capRadius]);
 
 private _winner = if (_enemy1Count > _enemy2Count) then {_enemy1} else {_enemy2};
+private _maxEnemies = _enemy1Count max _enemy2Count;
 
 Debug_7("ZoneCheck at %1 found %2 friendly %5 units, %3 enemy %6 units and %4 enemy %7 units", _marker, _defenderCount, _enemy1Count, _enemy2Count, _side, _enemy1, _enemy2);
+
+if (_maxEnemies < 1) exitWith {};               // Avoid re-flipping due to asymmetric checks
 
 if (_winner == teamPlayer and _defenderCount <= 2) exitWith {       // guarantees >0 rebels by ordering
     [_winner, _marker] remoteExecCall ["A3A_fnc_markerChange", 2];
 };
 
-if (_enemy1Count max _enemy2Count > 3 * _defenderCount) then
-{
+if (_maxEnemies > 3 * _defenderCount) then {
     //if (_winner isEqualTo teamPlayer) exitWith {Debug_2("Rebel auto capture of %1 was blocked, %1 remains side %2", _marker, _side)};
     [_winner, _marker] remoteExecCall ["A3A_fnc_markerChange", 2];
 };

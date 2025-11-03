@@ -136,6 +136,7 @@ if (isServer) then {
 			private _veh = createVehicle [_typeVeh, _posVeh, [], 0, "CAN_COLLIDE"];
 			_veh setPosWorld _posVeh;
 			_veh setVectorDirAndUp [_vecDir, _vecUp];
+			_veh setVariable ["A3A_building", true, true];
 			_spawnedBuildings pushBack _veh;
 		};
 	} forEach (A3A_garrison get "Synd_HQ" get "buildings");

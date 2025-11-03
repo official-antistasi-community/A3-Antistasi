@@ -21,13 +21,12 @@ if (_take) then {
     };
 
     // Publish ruin->building link for nearby buildings
-    private _nearBuildings = destroyedBuildings inAreaArray [getPosATL _box, 100, 100];
+    private _nearRuins = getPosATL _box nearObjects ["Ruins", 100];
     {
-        private _ruin = _x getVariable ["ruins", objNull];
-        if (isNull _ruin) then { _ruin = _x getVariable ["BIS_fnc_createRuin_ruin", objNull] };
-        if (isNull _ruin) then { continue };
+        private _building = _x getVariable ["building", objNull];
+        if (isNull _building) then { continue };
         _ruin setVariable ["building", _x, owner player];
-    } forEach _nearBuildings;
+    } forEach _nearRuins;
 
     private _money = _box getVariable ["A3A_itemPrice", 0];
     _box setVariable ["A3A_itemPrice", 0, true];

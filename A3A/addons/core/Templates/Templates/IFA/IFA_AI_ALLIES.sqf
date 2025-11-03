@@ -18,7 +18,7 @@
 //////////////////////////
 
 ["ammobox", "LIB_WeaponsBox_Big_SU"] call _fnc_saveToTemplate;
-["surrenderCrate", "LIB_BasicAmmunitionBox_US"] call _fnc_saveToTemplate;
+["surrenderCrate", "LIB_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
 ["equipmentBox", "WW2_Cle_Container"] call _fnc_saveToTemplate;
 
 // vehicles can be placed in more than one category if they fit between both. Cost will be derived by the higher category
@@ -45,13 +45,18 @@ private _vehiclesHeavyTanks = ["LIB_Churchill_Mk7","LIB_Churchill_Mk7_Crocodile"
 ["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate; //Fake "truck with bofors"
 
 
-["vehiclesTransportBoats", ["LIB_LCA", "LIB_LCVP"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["LIB_LCI"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["LIB_P47","LIB_RAF_P39"]] call _fnc_saveToTemplate;             // Will be used with CAS script, must be defined in setPlaneLoadout. Needs fixed gun and either rockets or missiles
 ["vehiclesPlanesAA", ["LIB_P47","LIB_RAF_P39","LIB_US_P39","LIB_US_P39_2"]] call _fnc_saveToTemplate;              // 
 ["vehiclesPlanesTransport", ["LIB_C47_RAF", "LIB_C47_Skytrain", "LIB_C47_Skytrain"]] call _fnc_saveToTemplate;
+
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    ["vehiclesPlanesCAS", ["LIB_P47","sab_fl_p51b","sab_fl_p51d", "sab_fl_dh98", "sab_fl_tempest", "sab_fl_hurricane_trop"]] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", ["LIB_P47","sab_fl_p51b","sab_fl_p51d", "sab_fl_tempest","sab_fl_spitfire_mkxiv","sab_fl_spitfire_mk5"]] call _fnc_saveToTemplate;
+};
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;       
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;

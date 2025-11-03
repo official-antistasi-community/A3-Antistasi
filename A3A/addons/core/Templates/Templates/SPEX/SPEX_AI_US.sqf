@@ -46,6 +46,16 @@
 ["vehiclesPlanesAA", ["SPE_P47"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["SPEX_C47_Skytrain"]] call _fnc_saveToTemplate;
 
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    private _CAS = ["SPE_P47","sab_fl_p51b","sab_fl_p51d", "sab_fl_f4u"];
+
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        _CAS = _CAS + ["sab_sw_p40","sab_sw_p38","sab_sw_p61"];
+    };
+    ["vehiclesPlanesCAS", _CAS] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", ["SPE_P47","sab_fl_p51b","sab_fl_p51d"]] call _fnc_saveToTemplate;
+};
+
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", []] call _fnc_saveToTemplate;
@@ -69,7 +79,7 @@
 ["vehiclesPolice", ["SPE_US_G503_MB"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["SPE_M1919A6_Bipod"]] call _fnc_saveToTemplate;
-["staticAT", ["SPE_57mm_M1"]] call _fnc_saveToTemplate;
+["staticAT", ["SPE_57mm_M1", "SPE_57mm_M1", "SPE_105mm_M3_Direct"]] call _fnc_saveToTemplate;
 ["staticAA", ["SPE_FR_M45_Quadmount"]] call _fnc_saveToTemplate;
 ["staticMortars", ["SPE_M1_81"]] call _fnc_saveToTemplate;
 
@@ -157,7 +167,7 @@ _loadoutData set ["lightExplosives", ["SPE_US_TNT_half_pound_mag"]];
 _loadoutData set ["heavyExplosives", ["SPE_US_TNT_4pound_mag", "SPE_US_Bangalore_mag"]];
 
 _loadoutData set ["antiTankGrenades", []];
-_loadoutData set ["antiInfantryGrenades", ["SPE_US_Mk_2", "SPE_US_Mk_2_Yellow", "SPE_US_AN_M14"]];
+_loadoutData set ["antiInfantryGrenades", ["SPE_US_Mk_2", "SPE_US_Mk_2_Yellow", "SPE_US_Mk_3", "SPE_US_AN_M14"]];
 _loadoutData set ["smokeGrenades", ["SPE_US_M18"]];
 _loadoutData set ["signalsmokeGrenades", ["SPE_US_M18_Green", "SPE_US_M18_Red", "SPE_US_M18_Violet", "SPE_US_M18_Yellow"]];
 
@@ -365,12 +375,15 @@ private _crewLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _crewLoadoutData set ["uniforms", ["U_SPE_US_Tank_Crew", "U_SPE_US_Tank_Crew2", "U_SPE_US_Tank_Crew3"]];
 _crewLoadoutData set ["vests", ["V_SPE_US_Vest_45"]];
 _crewLoadoutData set ["helmets", ["H_SPE_US_Helmet_Tank_polar", "H_SPE_US_Helmet_Tank_polar_tapes"]];
+_crewLoadoutData set ["backpacks", []];
 
 private _pilotLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["uniforms", ["U_SPE_US_Pilot", "U_SPE_US_Pilot_2"]];
 _pilotLoadoutData set ["vests", ["V_SPE_US_LifeVest"]];
 _pilotLoadoutData set ["helmets", ["H_SPE_US_Helmet_Pilot"]];
 _pilotLoadoutData set ["backpacks", ["B_SPE_US_TypeA3"]];
+
+_pilotLoadoutData set ["SMGs", []];
 
 private _officerLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _officerLoadoutData set ["slUniforms", ["U_SPE_US_Pilot_lthr", "U_SPE_US_Pilot"]];
@@ -733,6 +746,7 @@ private _crewTemplate = {
     ["helmets"] call _fnc_setHelmet;
     ["vests"] call _fnc_setVest;
     ["uniforms"] call _fnc_setUniform;
+    ["backpacks"] call _fnc_setBackpack;
 
     ["SMGs"] call _fnc_setPrimary;
     ["primary", 3] call _fnc_addMagazines;

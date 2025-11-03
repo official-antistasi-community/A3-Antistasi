@@ -233,6 +233,11 @@ switch (_mode) do
             {
                 _selectedTabIDC = A3A_IDC_PLAYERMANAGEMENTTAB;
             };
+
+            case ("warstatus"):
+            {
+                _selectedTabIDC = A3A_IDC_WARSTATUSTAB;
+            };
         };
 
         // Log attempt at accessing tab without permission
@@ -253,7 +258,8 @@ switch (_mode) do
             A3A_IDC_AIMANAGEMENTTAB,
             A3A_IDC_DONATETAB,
             A3A_IDC_AIRSUPPORTTAB,
-            A3A_IDC_PLAYERMANAGEMENTTAB
+            A3A_IDC_PLAYERMANAGEMENTTAB,
+            A3A_IDC_WARSTATUSTAB
         ];
 
         // Hide all tabs
@@ -332,6 +338,11 @@ switch (_mode) do
             case ("playermanagement"):
             {
                 ["update"] call FUNC(playerManagementTab);
+            };
+
+            case ("warstatus"):
+            {
+                ["update"] call FUNC(warStatusTab);
             };
         };
     };
