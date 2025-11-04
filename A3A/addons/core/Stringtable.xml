@@ -10488,6 +10488,38 @@
         <Korean>%1 파괴됨</Korean>
         <Russian>%1 уничтожен</Russian>
       </Key>
+      <Key ID="STR_notifiers_SUP_execute_UAV">
+          <Original>A %1 recon UAV started circling the area</Original>
+          <Russian>БПЛА разведки %1 барражирует над локацией</Russian>
+          <Korean>%1의 정찰 무인기가 해당 지역을 배회하기 시작했습니다.</Korean>
+      </Key>
+      <Key ID="STR_notifiers_SUP_execute_UAV_marker">
+          <Original>Recon UAV Area</Original>
+          <Russian>Зона действия БПЛА разведки</Russian>
+          <Korean>정찰 무인기 구역</Korean>
+      </Key>
+      <Key ID="STR_notifiers_SUP_execute_UAVAttack">
+          <Original>A %1 attack UAV started circling the area</Original>
+          <Russian>Ударный БПЛА %1 барражирует над локацией</Russian>
+          <Korean>%1의 공격 무인기가 해당 지역을 배회하기 시작했습니다.</Korean>
+      </Key>
+      <Key ID="STR_notifiers_SUP_execute_UAVAttack_marker">
+          <Original>Attack UAV Area</Original>
+          <Russian>Зона действия ударного БПЛА</Russian>
+          <Korean>공격 무인기 구역</Korean>
+      </Key>
+      <Key ID="STR_notifiers_SUP_setup_UAV">
+          <Original>%1 is sending a spotting UAV</Original>
+          <Russian>%1 запускают разведывательный БПЛА</Russian>
+          <Chinesesimp>%1 派出侦察无人机</Chinesesimp>
+          <Korean>%1이(가) 감적 무인기를 보내는 중입니다</Korean>
+          <French>%1 envoie un drone de repérage</French>
+      </Key>
+      <Key ID="STR_notifiers_SUP_setup_UAVAttack">
+          <Original>%1 is sending an attack UAV</Original>
+          <Russian>%1 запускают ударный БПЛА</Russian>
+          <Korean>%1이(가) 공격 무인기를 보내는 중입니다.</Korean>
+      </Key>
     </Container>
     <Container name="A3A_templates">
       <Key ID="STR_A3A_templates_IFA_CIV_FR">
