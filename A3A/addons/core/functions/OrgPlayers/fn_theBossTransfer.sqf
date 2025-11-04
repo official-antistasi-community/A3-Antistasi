@@ -12,7 +12,7 @@ if (!isNull theBoss) then
 
 	theBoss synchronizeObjectsRemove [HC_commanderX];
 	HC_commanderX synchronizeObjectsRemove [theBoss];
-	[player getVariable ["A3A_Role","rifleman"],true] remoteExecCall ["A3A_fnc_unitTraits", theBoss];
+	[nil,true] remoteExecCall ["A3A_fnc_unitTraits", theBoss];
 };
 
 theBoss = _newBoss;
