@@ -84,7 +84,8 @@ switch (_mode) do
 
 		private _imagePath = format ["x\A3A\addons\GUI\dialogues\textures\banner_%1.jpg",_roleName];
 		_bannerImage ctrlSetText _imagePath;
-		private _currentCount = {_x getVariable ["A3A_Role", "none"] == _roleName} count allPlayers;
+		private _currentPlayers = allPlayers select {_x getVariable ["A3A_Role", "none"] == _roleName};
+		private _currentCount = count _currentPlayers;
 		private _maxCount = [_roleName] call FUNCMAIN(getRoleCap);
 		private _firstLineText = localize format ["STR_antistasi_dialogs_roleselect_info_%1", _roleName];
 		private _secondLineText = localize format ["STR_antistasi_dialogs_roleselect_utility_%1", _roleName];
@@ -106,6 +107,11 @@ switch (_mode) do
 				};
 				_slotExplanation = localize "STR_antistasi_dialogs_roleselect_capExplanationCommander";
 			};
+		};
+		if (_roleName != "commander" && (_currentCount > 0)) then {
+			private _playerList = _currentPlayers apply {name _x};
+			private _formattedList = ([localize "STR_antistasi_dialogs_roleselect_capNames"] + _playerList) joinString "\n";
+			_slotExplanation = [_slotExplanation, _formattedList] joinString "\n\n";
 		};
 		if ((_currentCount >= _maxCount || (_roleName == "commander")) && {_roleName != "rifleman"}) then {
 			_setRoleButton ctrlEnable false;
