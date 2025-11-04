@@ -4766,6 +4766,9 @@
       <Key ID="STR_antistasi_dialogs_roleselect_capExplanation">
         <Original>The cap of slots per role (excluding riflemen and the commander) increases as the player count increases. The number per role increases linearly from 3 slots at 3 players to 6 slots at 38 players.</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_roleselect_capNames">
+        <Original>Players in this role:</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_welcome">
         <Original>Welcome to Antistasi! To get started, select a role from the list on the left and use "set role". You can revisit this screen any time by opening the Battle Menu with Y.</Original>
       </Key>

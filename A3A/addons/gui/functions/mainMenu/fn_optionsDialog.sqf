@@ -139,21 +139,22 @@ switch (_mode) do
             private _tableEntry = _tableParams#_tableIndex;
             if ((_tableEntry#1) != _value) then {_mismatches pushBack _tableEntry};
         } forEach _playerParams;
-        if (count _mismatches == 0) exitWith {};
-        {
-            _x params ["_cfg","_value"];
-            private _searchText =  format ["A3A_clientOptions_%1", _cfg];
-            profileNamespace setVariable [_searchText, _value];
-        } forEach _tableParams;
-        saveprofilenamespace;
-        // These are now the values that were changed
-        {
-            _x params ["_cfg","_value"];
-            private _action = getText (A3A_SETUP_CONFIGFILE/"A3A"/"clientOptions"/_cfg/"stateChange");
-            if (_action isEqualTo "") then {continue};
-            _value spawn (compile _action);
-            Info_2("Client setting updated: Name %1 new value %2", _cfg, _value);
-        } forEach _mismatches;
+        if (count _mismatches > 0) then {
+            {
+                _x params ["_cfg","_value"];
+                private _searchText =  format ["A3A_clientOptions_%1", _cfg];
+                profileNamespace setVariable [_searchText, _value];
+            } forEach _tableParams;
+            saveprofilenamespace;
+            // These are now the values that were changed
+            {
+                _x params ["_cfg","_value"];
+                private _action = getText (A3A_SETUP_CONFIGFILE/"A3A"/"clientOptions"/_cfg/"stateChange");
+                if (_action isEqualTo "") then {continue};
+                _value spawn (compile _action);
+                Info_2("Client setting updated: Name %1 new value %2", _cfg, _value);
+            } forEach _mismatches;
+        };
         _display closeDisplay 0;
 	};
 	case ("handleCloseButton"):
