@@ -10,7 +10,7 @@ Trace_1("Params: %1", _this);
 
 params [["_change",""], ["_pos",""], ["_scaled", true]]; // nil protection
 if !(_change isEqualType 0) exitWith {Error("The first parameter, the support change, must be a number");};
-if !(_city isEqualType "") exitWith {Error("The second parameter, the position, must be a string (city name) or array (coordinates)");};
+if (_pos isEqualTo "") exitWith {Error("The second parameter, the position, must be a string (city name) or array (coordinates)");};
 
 private _city = if (_pos in citiesX) then {_pos} else {
 	// Other enemies still count if within city marker for now
