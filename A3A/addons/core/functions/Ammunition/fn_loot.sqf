@@ -73,6 +73,16 @@ switch (teamPlayer) do {
      case independent: {_lootDeviceBag append rebelBackpackDevice};
      default {_lootDeviceBag append occupantBackpackDevice};
 };
+// balance radio packs and drone bag weighting
+private _countRadios = count allBackpacksRadio;
+private _countDevice = count _lootDeviceBag;
+if (_countRadios > _countDevice) then {
+     _droneList = _lootDeviceBag;
+     _quantity = ceil (_countRadios / _countDevice);
+     for "_i" from 1 to _quantity do {
+          _lootDeviceBag append _droneList;
+     };
+};
 lootDevice append _lootDeviceBag + allBackpacksRadio;
 
 ////////////////////////////////////
