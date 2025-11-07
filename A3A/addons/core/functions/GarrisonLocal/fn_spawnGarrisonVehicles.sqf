@@ -118,7 +118,7 @@ private _fnc_isBlocked = {
 
     private _groupType = ["staticGroup", "mortarGroup"] select (_vehicle isKindOf "StaticMortar");
     private _group = _garrison get _groupType;
-    if (isNull _group) then { _group = createGroup _side; _garrison set [_groupType, _group] };
+    if (isNull _group) then { _group = createGroup _side; _groups pushBack _group; _garrison set [_groupType, _group] };
 
     private _unit = [_group, _unitType, _markerPos, [], 0, "NONE"] call A3A_fnc_createUnit;
     _unit assignAsGunner _vehicle;
