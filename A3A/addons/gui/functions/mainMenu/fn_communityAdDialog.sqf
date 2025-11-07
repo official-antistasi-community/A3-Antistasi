@@ -54,7 +54,7 @@ private _numberText = _display displayCtrl A3A_IDC_COMMAD_IMAGENUMBER;
 private _images = [
     ["mainBanner", ["Hombre", "Tiny", "Plaquer", "badmotherz"]],
     ["medec1", ["Medec"]],
-    ["gasmaskdude1", ["GasMaskDude"]],
+    ["anonymous1", ["Anonymous"]],
     ["tiny1", ["Tiny"]],
     ["tiny2", ["Tiny"]],
     ["badmotherz1", ["badmotherz"]],
