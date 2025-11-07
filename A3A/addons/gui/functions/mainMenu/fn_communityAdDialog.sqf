@@ -67,9 +67,8 @@ switch (_mode) do
 {
     case ("onLoad"):
     {
-        _picture ctrlSetTooltip "test3";
         _display setVariable ["mode", "links"];
-        private _imageSwitchPrompt = "Use the arrows to switch between pictures from the community servers";
+        private _imageSwitchPrompt = localize "STR_antistasi_commad_switchTooltip";
         _forwardButton ctrlSetTooltip _imageSwitchPrompt;
         _backButton ctrlSetTooltip _imageSwitchPrompt;
         _numberText ctrlSetTooltip _imageSwitchPrompt;
@@ -118,9 +117,9 @@ switch (_mode) do
         (_images select _newImage) params ["_path", "_credits"];
         _picture ctrlSetText format ["%1\%2%3.jpg", _imagesFolder, ["submission_", ""] select (_newImage isEqualTo 0), _path];
         _fullCreditsText = if (_newImage == 0) then {
-            format (["Use the forward and backward buttons to view images from the community servers.\n\nAntistasi Banner\nComposed by %1\nImages by %1, %2\nSoldiers from %3, %4"] + _credits);
+            format ([localize "STR_antistasi_commad_creditsMain"] + _credits);
         } else {
-            format ["Credits: %1", _credits joinString ", "];
+            format [localize "STR_antistasi_commad_credits", _credits joinString ", "];
         };
         _picture ctrlSetTooltip _fullCreditsText;
 	};

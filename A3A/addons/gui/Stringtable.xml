@@ -5031,6 +5031,15 @@
       <Key ID="STR_antistasi_commad_links">
         <Original>Links</Original>
       </Key>
+      <Key ID="STR_antistasi_commad_switchTooltip">
+        <Original>Links</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_credits">
+        <Original>Credits: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_creditsMain">
+        <Original>Use the forward and backward buttons to view images from the community servers.\n\nAntistasi Banner\nComposed by %1\nImages by %1, %2\nSoldiers from %3, %4</Original>
+      </Key>
       <Container name="options_dialog">
       <Key ID="STR_antistasi_clientOptions_title">
         <Original>ANTISTASI OPTIONS</Original>
