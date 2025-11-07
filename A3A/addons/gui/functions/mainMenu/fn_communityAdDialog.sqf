@@ -48,12 +48,32 @@ private _ports = [
     ["Test 2", 2402]
 ];
 
+private _forwardButton = _display displayCtrl A3A_IDC_COMMAD_IMAGEFORWARD;
+private _backButton = _display displayCtrl A3A_IDC_COMMAD_IMAGEBACK;
+private _numberText = _display displayCtrl A3A_IDC_COMMAD_IMAGENUMBER;
+private _images = [
+    ["mainBanner", ["Hombre", "Tiny", "Plaquer", "badmotherz"]],
+    ["medec1", ["Medec"]],
+    ["gasmaskdude1", ["GasMaskDude"]],
+    ["tiny1", ["Tiny"]],
+    ["tiny2", ["Tiny"]],
+    ["badmotherz1", ["badmotherz"]],
+    ["tiny3", ["Tiny"]],
+    ["tiny4", ["Tiny"]],
+    ["enfield1", ["Enfield"]]
+];
+
 switch (_mode) do
 {
     case ("onLoad"):
     {
-        _picture ctrlSetText QPATHTOFOLDER(dialogues\textures\banner\communityBanner.jpg);
+        _picture ctrlSetTooltip "test3";
         _display setVariable ["mode", "links"];
+        private _imageSwitchPrompt = "Use the arrows to switch between pictures from the community servers";
+        _forwardButton ctrlSetTooltip _imageSwitchPrompt;
+        _backButton ctrlSetTooltip _imageSwitchPrompt;
+        _numberText ctrlSetTooltip _imageSwitchPrompt;
+        ["handleImageChange", ["none"]] call _thisFunc;
         ["handleToggleButton"] call _thisFunc;
         ["testCBChecked"] call _thisFunc;
     };
@@ -77,6 +97,32 @@ switch (_mode) do
         _joinMainServer2Button ctrlShow !_state;
         _joinTestServer1Button ctrlShow _state;
         _joinTestServer2Button ctrlShow _state;
+	};
+    case ("handleImageChange"):
+	{
+		_params params ["_mode"];
+        private _imagesFolder = QPATHTOFOLDER(dialogues\textures\banner);
+        private _countImages = count _images;
+        private _currentImage = _display getVariable ["currentImage", 0];
+        private _newImage = _currentImage;
+        if (_mode == "forward") then {
+            _newImage = _currentImage + 1;
+        } else {
+            if (_mode == "back") then {
+                _newImage = _currentImage - 1;
+            };
+        };
+        if ((_newImage < 0) || (_newImage >= _countImages)) then {_newImage = _currentImage};
+        _display setVariable ["currentImage", _newImage];
+        _numberText ctrlSetText format ["%1/%2", _newImage + 1, _countImages];
+        (_images select _newImage) params ["_path", "_credits"];
+        _picture ctrlSetText format ["%1\%2%3.jpg", _imagesFolder, ["submission_", ""] select (_newImage isEqualTo 0), _path];
+        _fullCreditsText = if (_newImage == 0) then {
+            format (["Use the forward and backward buttons to view images from the community servers.\n\nAntistasi Banner\nComposed by %1\nImages by %1, %2\nSoldiers from %3, %4"] + _credits);
+        } else {
+            format ["Credits: %1", _credits joinString ", "];
+        };
+        _picture ctrlSetTooltip _fullCreditsText;
 	};
 	case ("handleBackButton"):
 	{
