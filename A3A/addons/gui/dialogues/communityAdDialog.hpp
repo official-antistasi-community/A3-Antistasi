@@ -45,6 +45,33 @@ class A3A_CommunityAdvertisement
             h = 5 * GRID_H;
         };
 
+        class ReverseButton : A3A_BackButton
+        {
+            idc = A3A_IDC_COMMAD_IMAGEBACK;
+            x = CENTER_X(100) + 77 * GRID_W;
+            y = CENTER_Y(100) - 5 * GRID_H;
+            onMouseButtonClick = "['handleImageChange', ['back']] spawn (uinamespace getvariable 'A3A_GUI_fnc_communityAdDialog')";
+        };
+
+        class ForwardButton : ReverseButton
+        {
+            idc = A3A_IDC_COMMAD_IMAGEFORWARD;
+            x = CENTER_X(100) + 82 * GRID_W;
+            onMouseButtonClick = "['handleImageChange', ['forward']] spawn (uinamespace getvariable 'A3A_GUI_fnc_communityAdDialog')";
+            text = "\A3\ui_f\data\GUI\RscCommon\RscHTML\arrow_right_ca.paa";
+        };
+
+        class PageNumber : A3A_Text
+        {
+            idc = A3A_IDC_COMMAD_IMAGENUMBER;
+            x = CENTER_X(100) + 90 * GRID_W;
+            y = CENTER_Y(100) - 5 * GRID_H;
+            w = 10 * GRID_W;
+            h = 5 * GRID_H;
+            text = "";
+            sizeEx = GUI_TEXT_SIZE_LARGE;
+        };
+
         class MainContent : A3A_DefaultControlsGroup
         {
             idc = A3A_IDC_COMMAD_MAINCONTENT;

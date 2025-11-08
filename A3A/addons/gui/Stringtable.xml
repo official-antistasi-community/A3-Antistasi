@@ -5027,7 +5027,7 @@
         <Original>Colombia is one of the few South American maps, with dense jungles and open fields interspersed. New players may struggle with the thickness of the foliage against AI.</Original>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_vn_khe_sanh">
-        <Original>Khe Sanh is a similar trademark Vietnam map to Cam Lao Nam, with slightly less dense jungles in a more compact and ruthless terrain. New players may struggle iwth this map.</Original>
+        <Original>Khe Sanh is a similar trademark Vietnam map to Cam Lao Nam, with slightly less dense jungles in a more compact and ruthless terrain. New players may struggle with this map.</Original>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_vt7">
         <Original>Virolahti is dominated by forests and mainly flat terrain, requiring new strategies with less cover and concealment. Veteran players may enjoy this map.</Original>
@@ -5060,6 +5060,15 @@
       </Key>
       <Key ID="STR_antistasi_commad_links">
         <Original>Links</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_switchTooltip">
+        <Original>Links</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_credits">
+        <Original>Credits: %1</Original>
+      </Key>
+      <Key ID="STR_antistasi_commad_creditsMain">
+        <Original>Use the forward and backward buttons to view images from the community servers.\n\nAntistasi Banner\nComposed by %1\nImages by %1, %2\nSoldiers from %3, %4</Original>
       </Key>
       <Container name="options_dialog">
       <Key ID="STR_antistasi_clientOptions_title">

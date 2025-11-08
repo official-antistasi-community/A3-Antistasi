@@ -141,8 +141,7 @@ switch (_mode) do
 		_mainInfoButton ctrlShow false;
 		_setRoleButton ctrlShow false;
 		_display setVariable ["displayState","info"];
-		_path = format ["x\A3A\addons\maps\Antistasi_%1.%1\Pictures\Mission\pic.jpg", worldName];
-		_bannerImage ctrlSetText _path;
+		_bannerImage ctrlSetText QPATHTOFOLDER(dialogues\textures\banner\mainBanner.jpg);;
 		
 		_infoLine1 ctrlSetText (localize "STR_antistasi_dialogs_roleselect_welcome");
 		private _playerRole = player getVariable ["A3A_Role","none"];
