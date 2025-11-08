@@ -111,7 +111,7 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	sidesX setVariable [_mrk, Occupants, true];
 
 	// ok, how much bulk HR? based on pop or sqrt pop? latter is safer...
-	private _info = [_numCiv, 0, 2 * sqrt _numCiv];				// initial full pop, 0% rebel support, 20 HR for 100 pop?
+	private _info = [_numCiv, 0, sqrt _numCiv];				// initial full pop, 0% rebel support, 10 HR for 100 pop (multiplied by map factor on award)
 	A3A_cityData setVariable [_nameX, _info, true];
 	A3A_cityPop set [_nameX, _numCiv];
 
@@ -258,6 +258,22 @@ A3A_fuelStations apply {
 		[_x, 250] call ace_refuel_fnc_setFuel; // only call on fuels that are not blacklisted and first zone init.
 	};
 };
+
+// Generate rebel resource multipliers based on the map
+private _reqGarrison = 0;
+_reqGarrison = _reqGarrison + 30 * count airportsX;
+_reqGarrison = _reqGarrison + 20 * (count outposts + count seaports);
+_reqGarrison = _reqGarrison + 10 * (count factories + count resourcesX);
+
+private _sumPop = 0;
+{ _sumPop = _sumPop + sqrt (A3A_cityPop get _x) } forEach citiesX;
+
+// Goal for incremental income is 5HR at half-map support per 10min tick
+A3A_rebelHRTickMult = 10 / _sumPop;
+
+// Goal for lump sum is to fill garrisons
+A3A_rebelHRLumpMult = _reqGarrison / _sumPop;
+
 
 publicVariable "blackListDest";
 publicVariable "markersX";
