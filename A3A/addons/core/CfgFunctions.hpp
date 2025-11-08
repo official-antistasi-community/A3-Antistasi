@@ -11,6 +11,7 @@ class CfgFunctions
             class AIreactOnKill {};
             class artySupport {};
             class artySupportFire {};
+            class artySupportFireOld {};
             class artySupportMarkers {};
             class askHelp {};
             class assaultBuilding {};
