@@ -27,7 +27,7 @@ while {true} do
 
 		private _ownerMul = [0.5, 1] select (sidesX getVariable _city == teamPlayer);
 		private _resAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100);
-		private _hrAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 10000);
+		private _hrAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100) * A3A_rebelHRTickMult;
 
 		_resAdd = _resAdd + _resAddCity;
 		_hrAdd = _hrAdd + _hrAddCity;
