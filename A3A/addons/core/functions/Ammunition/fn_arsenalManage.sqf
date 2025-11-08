@@ -18,28 +18,25 @@ private _nv = (jna_dataList select IDC_RSCDISPLAYARSENAL_TAB_NVGS) select {_x se
 private _helmets = (jna_dataList select IDC_RSCDISPLAYARSENAL_TAB_HEADGEAR) select {_x select 1 != -1};
 private _vests = (jna_dataList select IDC_RSCDISPLAYARSENAL_TAB_VEST) select {_x select 1 != -1};
 
-private _type = objNull;
-private _magazine = [];
-private _magConfig = objNull;
-private _capacity = objNull;
-private _bullets = objNull;
-private _count = objNull;
-{
-	_type = _x select 0;
-	_magConfig = configFile >> "CfgMagazines" >> _type;
-	_capacity = 1 max getNumber (_magConfig >> "count");			// Avoid div-by-zero on broken/missing config
 
-	// control unlocking missile launcher magazines
+private _magsToUnlock = [];
+private _blockedSims = [];
+if (allowGuidedLaunchers == 0) then { _blockedSims pushBack "shotmissile" };
+if (allowUnguidedLaunchers == 0) then { _blockedSims pushBack "shotrocket" };
+{
+	_x params ["_type", "_bullets"];
+	private _magConfig = configFile >> "CfgMagazines" >> _type;
+	private _ammoConfig = configFile >> "CfgAmmo" >> getText (_magConfig >> "ammo");
+	private _capacity = 1 max getNumber (_magConfig >> "count");			// Avoid div-by-zero on broken/missing config
+
+	// control unlocking launcher magazines
 	// the capacity check is an optimisation to bypass the config check. ~18% perf gain on the loop.
-	if (_capacity != 1 || allowGuidedLaunchers isEqualTo 1 ||
-		{!(getText (_magConfig >> "ammo") isKindOf "MissileBase")}) then {
-		_bullets = _x select 1;
-		_count = floor (_bullets/_capacity);
-		_magazine pushBack [_type,_count];
-	};
+	if (_capacity == 1 && {tolower getText (_ammoConfig >> "simulation") in _blockedSims}) then { continue };
+
+	_magsToUnlock pushBack [_type, floor (_bullets/_capacity)];
 } forEach _magazines;
 
-private _allExceptNVs = _weapons + _explosives + _backpacks + _items + _optics + _helmets + _vests + _magazine;
+private _allExceptNVs = _weapons + _explosives + _backpacks + _items + _optics + _helmets + _vests + _magsToUnlock;
 
 private _categoriesToPublish = createHashMap;
 {
@@ -49,6 +46,7 @@ private _categoriesToPublish = createHashMap;
 
 		private _categories = _item call A3A_fnc_equipmentClassToCategories;
 		if ("MissileLaunchers" in _categories && {allowGuidedLaunchers == 0}) exitWith {};
+		if ("RocketLaunchers" in _categories && {allowUnguidedLaunchers == 0}) exitWith {};
 		if ("Explosives" in _categories && {allowUnlockedExplosives == 0}) exitWith {};
 		if ("Backpacks" in _categories && {_item in allBackpacksTool}) exitWith {};			// should be UAV & static backpacks
 		if ("StaticWeaponParts" in _categories) exitWith {};

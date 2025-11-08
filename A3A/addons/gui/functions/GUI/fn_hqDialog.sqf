@@ -48,7 +48,8 @@ switch (_mode) do
         setGroupIconsSelectable false;
 
         // Show main tab content
-        ["switchTab", ["main"]] call FUNC(hqDialog);
+        private _shownTab = ["garrison", "main"] select (player isNil "A3A_showGarrisonMenu");
+        ["switchTab", [_shownTab]] call FUNC(hqDialog);
 
         // Move HQ button
         /*private _moveHqIcon = _display displayCtrl A3A_IDC_MOVEHQICON;
@@ -78,7 +79,7 @@ switch (_mode) do
         private _restSlider = _display displayCtrl A3A_IDC_RESTSLIDER;
         _restSlider sliderSetRange [0,24];
         _restSlider sliderSetSpeed [1,1];
-        _restSlider sliderSetPosition 0;
+        _restSlider sliderSetPosition 8;
         ["restSliderChanged"] spawn FUNC(hqDialog);
 
         // Garrison tab map drawing EHs
@@ -268,7 +269,8 @@ switch (_mode) do
             _totalPopulation = _totalPopulation + _numCiv;
             if (_city in destroyedSites) then { _deadPopulation = _deadPopulation + _numCiv} else 
             {
-                _rebelPopulation = _rebelPopulation + (_numCiv * (_supportReb / 100));
+                private _ownerMul = [0.5, 1] select (sidesX getVariable _city == teamPlayer);
+                _rebelPopulation = _rebelPopulation + _ownerMul * _numCiv * _supportReb / 100;
             };
         } forEach citiesX;
 
@@ -327,8 +329,13 @@ switch (_mode) do
         private _trainingText = _display displayCtrl A3A_IDC_FACTIONTRAININGTEXT;
         _hrText ctrlSetText str floor _hr;
         _trainingText ctrlSetText format ["%1 / 20", _trainingLevel];
-        private _trainingTooltip = _display displayCtrl A3A_IDC_FACTIONTRAININGBUTTON;
-        _trainingTooltip ctrlSetTooltip (format [localize "STR_antistasi_dialogs_hq_train_tooltip",1000 + (1.5*((skillFIA) *750))]);
+        private _trainingButton = _display displayCtrl A3A_IDC_FACTIONTRAININGBUTTON;
+        if (_trainingLevel < 20) then {
+            _trainingButton ctrlSetTooltip (format [localize "STR_antistasi_dialogs_hq_train_tooltip",1000 + (1.5*((skillFIA) *750))]);
+        } else {
+            _trainingButton ctrlSetTooltip localize "STR_antistasi_dialogs_hq_train_maxed";
+            _trainingButton ctrlEnable false;
+        };
 
         private _factionMoney = server getVariable ["resourcesFIA", 0];
         private _factionMoneyText = _display displayCtrl A3A_IDC_FACTIONMONEYTEXT;
@@ -348,13 +355,17 @@ switch (_mode) do
         _titleBar = _display displayCtrl A3A_IDC_HQDIALOGTITLEBAR;
         _titleBar ctrlSetText (localize "STR_antistasi_dialogs_hq_titlebar") + " > " + (localize "STR_antistasi_dialogs_hq_garrisons_titlebar");
 
-        // Show back button
-        private _backButton = _display displayCtrl A3A_IDC_HQDIALOGBACKBUTTON;
-        _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
-        _backButton ctrlAddEventHandler ["MouseButtonClick", {
-            ["switchTab", ["main"]] call FUNC(hqDialog);
-        }];
-        _backButton ctrlShow true;
+        // Show back button, only if from main
+        if ((_display isNil "A3A_showGarrisonMenu") && {player isNil "A3A_showGarrisonMenu"}) then {
+            private _backButton = _display displayCtrl A3A_IDC_HQDIALOGBACKBUTTON;
+            _backButton ctrlRemoveAllEventHandlers "MouseButtonClick";
+            _backButton ctrlAddEventHandler ["MouseButtonClick", {
+                ["switchTab", ["main"]] call FUNC(hqDialog);
+            }];
+            _backButton ctrlShow true;
+        } else {
+            _display setVariable ["A3A_showGarrisonMenu", true];
+        };
 
         // Show map if not already visible
         if (!ctrlShown _garrisonMap) then {_garrisonMap ctrlShow true;};
@@ -588,14 +599,21 @@ switch (_mode) do
 
     case ("restSliderChanged"):
     {
+        private _restButton = _display displayCtrl A3A_IDC_RESTBUTTON;
         private _restSlider = _display displayCtrl A3A_IDC_RESTSLIDER;
         private _restText = _display displayCtrl A3A_IDC_RESTTEXT;
         private _timeHours = sliderPosition _restSlider;
         private _restTimeString = [_timeHours * 60 * 60,1,1,false,2,false,true] call FUNCMAIN(timeSpan_format);
-
-        private _postRestTime = (daytime + _timeHours) * 60 * 60;
-        private _postRestTimeString = [_postRestTime,2,2,false,[1,3],true,false] call FUNCMAIN(timeSpan_format);
-        private _message = format [localize "STR_antistasi_dialogs_hq_rest_text" + "<br />" + localize "STR_antistasi_dialogs_hq_wakeup_text", _restTimeString, _postRestTimeString];
+        private _message = if (_timeHours > 0) then {
+            _restButton ctrlEnable true;
+            private _postRestTime = (daytime + _timeHours) * 60 * 60;
+            private _postRestTimeString = [_postRestTime,2,2,false,[1,3],true,false] call FUNCMAIN(timeSpan_format);
+            format [localize "STR_antistasi_dialogs_hq_rest_text" + "<br />" + localize "STR_antistasi_dialogs_hq_wakeup_text", _restTimeString, _postRestTimeString];
+        } else {
+            _restButton ctrlEnable false;
+            _restButton ctrlSetTooltip localize "STR_antistasi_dialogs_hq_rest_notime_tooltip"; // tooltip later cleared by ability to rest check
+            localize "STR_antistasi_dialogs_hq_rest_notime_text";
+        };
         _restText ctrlSetStructuredText parseText _message;
     };
 
@@ -766,19 +784,13 @@ switch (_mode) do
         closeDialog 1;
     };
 
-    /*
+    
     case ("buildWatchpost"):
     {
         closeDialog 1;
         ["create"] spawn FUNCMAIN(outpostDialog);
     };
 
-    case ("removeWatchpost"):
-    {
-        // TODO UI-update: this was apparently deprecated and uses dismiss garrison instead, considering replacing/removing this button
-        closeDialog 1;
-    };
-    */
 
     case ("rebuildAssets"):
     {

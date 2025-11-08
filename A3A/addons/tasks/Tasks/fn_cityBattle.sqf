@@ -124,7 +124,7 @@ if (isNil "_checkpoint") then {
 	_task set ["_endTime", time + 1800];
 
     private _numCiv = (A3A_cityData getVariable _marker) select 0;
-    _numCiv = 30 min (4 + round sqrt _numCiv);
+    _numCiv = 30 min (round sqrt _numCiv);
     _task set ["_numCiv", _numCiv];
 
     _task call _fnc_spawnLeader;
@@ -162,14 +162,13 @@ _task set ["s_spawnEnemies",
 {
     // Create the enemy force
     // Not executed at init because it's fairly slow
-    // TODO: should be scaled somewhat by town size
     private _marker = _this get "_marker";
-    private _vehCount = round (2 + random 1 + A3A_balancePlayerScale);
+    private _vehCount = round (1 + random 1 + 0.13 * sqrt (A3A_cityPop get _marker) + 1.2 * A3A_balancePlayerScale);
 
     private _airbase = [Occupants, markerPos _marker] call A3A_fnc_availableBasesAir;
 
     //params ["_side", "_airbase", "_target", "_resPool", "_vehCount", "_delay", "_modifiers", "_attackType", "_reveal"];
-    private _data = [Occupants, _airbase, _marker, "defence", _vehCount, -1, ["lowair"]] call A3A_fnc_createAttackForceMixed;
+    private _data = [Occupants, _airbase, _marker, "defence", _vehCount, 300, ["lowair"]] call A3A_fnc_createAttackForceMixed;
     _data params ["_resources", "_vehicles", "_crewGroups", "_cargoGroups"];
     _this set ["_vehicles", _vehicles];
     _this set ["_crewGroups", _crewGroups];
@@ -268,17 +267,27 @@ _task set ["s_battleStarted",
     private _troops = _this get "_troops";
     private _civilians = _this get "_civilians";
 
-    if (time > _this get "_endTime" or {_x call A3A_fnc_canFight} count _troops < count _troops / 3) exitWith {
+    if (_marker in destroyedSites) exitWith {
+        // Not very likely (space laser?) but should be handled
+        [_this get "_taskId", "FAILED", false] call BIS_fnc_taskSetState;
+        _this set ["state", "s_cleanup"]; false;
+    };
+
+    private _civProp = ({_x call A3A_fnc_canFight} count _civilians) / count _civilians;
+    private _enemyProp = ({_x call A3A_fnc_canFight} count _troops) / count _troops;
+
+    if ((time > _this get "_endTime" and _civProp >= 0.5) or _enemyProp < 0.25) exitWith {
         private _taskDesc = format [localize "STR_A3A_Tasks_cityBattle_victoryDesc", _marker];
         [_this get "_taskId", [_taskDesc, _this get "_hintTitle", ""]] call BIS_fnc_taskSetDescription;
         _this set ["state", "s_victory"]; false;
     };
 
-    if (time > _this get "_minLossTime" and {{alive _x} count _civilians < count _civilians / 4}) exitWith {
+    if ((time > _this get "_minLossTime" and _civProp < 0.25) or time > _this get "_endTime") exitWith {
         private _taskDesc = format [localize "STR_A3A_Tasks_cityBattle_defeatDesc", _marker];
         [_this get "_taskId", [_taskDesc, _this get "_hintTitle", ""]] call BIS_fnc_taskSetDescription;
         _this set ["state", "s_defeat"]; false;
     };
+
     false;
 }];
 

@@ -52,7 +52,7 @@ private _highPatrols = round (_numPatrols * (_quality%1));
 private _minRad = 0;
 private _maxRad = markerSize _marker # 0 min markerSize _marker # 1;
 if (_type != "city") then { _minRad = _maxRad; _maxRad = _maxRad + 200 };
-private _station = _activeGarrison getOrDefault ["policeStation", objNull];
+private _station = _activeGarrison getOrDefault ["policeStation", objNull];     // in local garrison data it's an object
 
 for "_i" from 1 to _numPatrols do
 {

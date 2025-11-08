@@ -33,10 +33,16 @@ class regero {
 		{"Land_BagFence_Long_F", 10}, {"Land_BagFence_Round_F", 10}, {"Land_BagFence_Short_F", 10},
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
 	policeStationTypes[] = {
         // From Sahrani
 		"Land_Dum_mesto2", "Land_Dum_olezlina", "Land_Panelak", "Land_Dum_istan3_hromada2", "Land_Dum_olez_istan1_open2", "Land_Dum_olez_istan1"
 	};
+    requiredMods = "Kingdom of Regero and CUP Terrains - Core";
+    size = 10.2;
+    cityCount = 28;
+    airbaseCount = 7;
 };
