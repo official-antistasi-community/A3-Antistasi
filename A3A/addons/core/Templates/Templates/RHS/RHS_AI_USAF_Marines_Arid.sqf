@@ -1,3 +1,4 @@
+
 //////////////////////////
 //   Side Information   //
 //////////////////////////
@@ -29,7 +30,7 @@
 ["vehiclesLightAPCs", ["rhsusf_M1117_D", "rhsusf_m113d_usarmy", "rhsusf_m113d_usarmy_M240", "rhsusf_m113d_usarmy_MK19", "rhsusf_M1232_MC_M2_usmc_d", "rhsusf_M1232_MC_M2_usmc_d", "rhsusf_M1232_MC_MK19_usmc_d", "rhsusf_M1078A1P2_B_M2_D_fmtv_usarmy", "rhsusf_M1083A1P2_B_M2_D_fmtv_usarmy"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["rhsusf_stryker_m1126_m2_d", "rhsusf_stryker_m1126_mk19_d", "rhsusf_stryker_m1127_m2_d", "rhsusf_stryker_m1132_m2_np_d", "RHS_M2A2", "RHS_M2A3"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["RHS_M2A2_BUSKI", "RHS_M2A3_BUSKI", "RHS_M2A3_BUSKIII"]] call _fnc_saveToTemplate;
-["vehiclesTanks", ["rhsusf_m1a1fep_d","rhsusf_m1a2sep1d_usarmy","rhsusf_m1a2sep1tuskiid_usarmy","rhsusf_m1a2sep2d_usarmy"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["a3a_rhsusf_m1a1fep_d","a3a_rhsusf_m1a1aimd_usarmy_f","a3a_rhsusf_m1a1aim_tuski_d","a3a_rhsusf_m1a2sep1tuskiid_usarmy_f"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["RHS_M6"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
