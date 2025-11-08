@@ -12,6 +12,6 @@
     //statics
     ["vn_b_army_static_m2_scoped_high", ["rebCost", 600]], //scoped hmg, 8x scope
     ["vn_i_static_m101_01", ["rebCost", 1700]], //105mm Anti-tank gun, big
-    ["vn_i_static_mortar_m29", ["rebCost", 2000]], //81mm mortar
+    ["a3a_vn_b_static_mortar_m29", ["rebCost", 2000]], //81mm mortar
     ["vn_b_boat_09_01", ["rebCost", 700]] //assault boat with M60s
 ]] call _fnc_saveToTemplate;

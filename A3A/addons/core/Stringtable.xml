@@ -249,7 +249,7 @@
         <Chinesesimp>收到. 重炮火力投送中. 预计%1 秒后首发着弹.</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_yesSingle">
-        <Original>Acknowledged. Fire mission is inbound. %2 %3 fired. ETA %1 secs.</Original>
+        <Original>Acknowledged. Fire mission is inbound. ETA %1 secs to impact.</Original>
         <Korean>확인. 사격 임무 시작. %2 %3 사격했다. 착탄 예상 시간은 %1초다.</Korean>
         <Russian>Принято. Огневая поддержка на подходе. %2 %3 выстрелов. Ждите %1 сек.</Russian>
         <Chinesesimp>收到. 重炮火力投送中.%2 %3 发射完毕. 预计%1 秒后着弹.</Chinesesimp>

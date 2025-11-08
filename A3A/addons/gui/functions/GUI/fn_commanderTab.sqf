@@ -90,8 +90,8 @@ switch (_mode) do
         // Check for selected groups
         private _selectedGroup = _commanderMap getVariable ["selectedGroup", grpNull];
         private _doAutoSwitch = _commanderMap getVariable ["doAutoSwitch", false];
+        private _doAutoSwitchArty = _commanderMap getVariable ["doAutoSwitchArty", false];
         private _hasGroup = !(_selectedGroup isEqualTo grpNull);
-        /*
         private _isMortarVic = false;
         if (_hasGroup) then {
             {
@@ -103,11 +103,8 @@ switch (_mode) do
                 };
             } forEach (units _selectedGroup);
         };
-        */
 
         // Initialize fire mission vars
-        _fireMissionControlsGroup setVariable ["heSelected", true];
-        _fireMissionControlsGroup setVariable ["pointSelected", true];
         _fireMissionControlsGroup setVariable ["roundsNumber", 1];
         _fireMissionControlsGroup setVariable ["availableHeRounds", 0];
         _fireMissionControlsGroup setVariable ["availableSmokeRounds", 0];
@@ -121,25 +118,22 @@ switch (_mode) do
 
         switch (true) do 
         {
-            /*
-            case (_doAutoSwitch && _isMortarVic): { // If all is valid show fire mission view
+            case (_doAutoSwitchArty && _isMortarVic): { // If all is valid show fire mission view
                 {_x ctrlShow false} forEach _baseButtons; // expected to be done through single group view
                 ["updateFireMissionView"] call FUNC(commanderTab);
             };
-            */
             case (_hasGroup): { // If a group is selected show the single group view
                  ["updateSingleGroupView"] call FUNC(commanderTab);
             };
-            /*
-            case (_isArtyMenu): { // If no group is selected show the multiple groups view
+            case (_doAutoSwitchArty): { // If no group is selected show the multiple groups view
                 ["updateMultipleGroupsView"] call FUNC(commanderTab);
             };
-            */
             default {
                 
             };
         };
         _commanderMap setVariable ["doAutoSwitch", false];
+        _commanderMap setVariable ["doAutoSwitchArty", false];
     };
 
     case ("updateSingleGroupView"):
@@ -485,20 +479,18 @@ switch (_mode) do
     case ("updateFireMissionView"):
     {
         Trace("Updating Fire Mission View");
-        private _display = findDisplay A3A_IDD_MAINDIALOG;
+        _params params [["_selection",""]];
 
         // Hide group views
-        private _multipleGroupsView = _display displayCtrl A3A_IDC_HCMULTIPLEGROUPSVIEW;
-        private _singleGroupView = _display displayCtrl A3A_IDC_HCSINGLEGROUPVIEW;
         _multipleGroupsView ctrlShow false;
         _singleGroupView ctrlShow false;
 
         // Show fire mission view if not already shown
-        private _fireMissionControlsGroup = _display displayCtrl A3A_IDC_FIREMISSONCONTROLSGROUP;
         if !(ctrlShown _fireMissionControlsGroup) then {
             _fireMissionControlsGroup ctrlShow true;
+            // can also be used for first-update stuff
+            _commanderMap setVariable ["selectFireMissionPos", true];
         };
-
 
         // Update rounds count
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
@@ -506,74 +498,48 @@ switch (_mode) do
         _commanderMap setVariable ["selectedGroup", grpNull];
         private _units = units _group;
 
-        private _mortarHEMag = FactionGet(reb,"staticMortarMagHE");
-        private _mortarSmokeMag = FactionGet(reb,"staticMortarMagSmoke");
-
-        private _heRoundsCount = 0;
-        private _smokeRoundsCount = 0;
-
-        private _checkedVehicles = [];
-        private _artyArrayDef1 = [];
-        private _artyRoundsArr1 = [];
-
+        private _mortarObjs = [];
+        private _shellCounts = createHashMap;
+        private _artyDictionary = createHashMap;
         {
             private _veh = vehicle _x;
-            if ((_veh != _x) and (not(_veh in _checkedVehicles))) then
+            if ((_veh != _x) and (not(_veh in _mortarObjs))) then
             {
                 if (( "Artillery" in (getArray (configfile >> "CfgVehicles" >> typeOf _veh >> "availableForSupportTypes")))) then
                 {
                     if ((canFire _veh) and (alive _veh)) then
                     {
                         {
-                            if (_x # 0 == _mortarHEMag) then
-                            {
-                                _heRoundsCount = _heRoundsCount + _x # 1;
-                            };
-
-                            if (_x # 0 == _mortarSmokeMag) then
-                            {
-                                _smokeRoundsCount = _smokeRoundsCount + _x # 1;
-                            };
+                            _x params ["_type","_currentCount"];
+                            private _existingCount = _shellCounts getOrDefault [_type,0];
+                            _shellCounts set [_type, _currentCount + _existingCount];
                         } forEach magazinesAmmo _veh;
-                        if ((_heRoundsCount > 0) || (_smokeRoundsCount > 0)) then {
-                            _artyArrayDef1 pushBack _veh;
-                            _artyRoundsArr1 pushBack (((magazinesAmmo _veh) select 0)select 1);
-                        };
-
-                        _checkedVehicles pushBack _veh;
+                        private _dict = [typeOf _veh] call A3A_fnc_getMortarMags;
+                        {_artyDictionary set [_x,_y];} forEach _dict; // automatically covers repeats
+                        _mortarObjs pushBackUnique _veh;
                     }; // [["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_Flare_white",8],["8Rnd_82mm_Mo_Smoke_white",8]]
                 };
             };
         } forEach _units;
+        _fireMissionControlsGroup setVariable ["mortarObjs", _mortarObjs];
+        _fireMissionControlsGroup setVariable ["shellCounts", _shellCounts];
+        _fireMissionControlsGroup setVariable ["artyDictionary", _artyDictionary];
 
         // TODO UI-update: check if unit is ready to fire etc, or do we already do that?
 
-        _fireMissionControlsGroup setVariable ["availableHeRounds", _heRoundsCount];
-        _fireMissionControlsGroup setVariable ["availableSmokeRounds", _smokeRoundsCount];
-        _fireMissionControlsGroup setVariable ["artyArrayDef1", _artyArrayDef1];
-        _fireMissionControlsGroup setVariable ["artyRoundsArr1", _artyRoundsArr1];
-
-        private _heRoundsText = _display displayCtrl A3A_IDC_HEROUNDSTEXT;
-        private _smokeRoundsText = _display displayCtrl A3A_IDC_SMOKEROUNDSTEXT;
-
-        _heRoundsText ctrlSetText str _heRoundsCount;
-        _smokeRoundsText ctrlSetText str _smokeRoundsCount;
-
-
         // States for selecting shell type, mission type and round counts are initialized
         // in update, we get them here
-        private _heShell = _fireMissionControlsGroup getVariable ["heSelected", true];
-        private _pointStrike = _fireMissionControlsGroup getVariable ["pointSelected", true];
         private _roundsCount = _fireMissionControlsGroup getVariable ["roundsNumber", 1];
         private _startPos = _fireMissionControlsGroup getVariable ["startPos", nil];
         private _endPos = _fireMissionControlsGroup getVariable ["endPos", nil];
 
 
         // Update controls based on what is selected
-        private _heButton = _display displayCtrl A3A_IDC_HEBUTTON;
-        private _smokeButton = _display displayCtrl A3A_IDC_SMOKEBUTTON;
+        private _shellTypeBox = _display displayCtrl A3A_IDC_SHELLTYPEBOX;
         private _pointStrikeButton = _display displayCtrl A3A_IDC_POINTSTRIKEBUTTON;
         private _barrageButton = _display displayCtrl A3A_IDC_BARRAGEBUTTON;
+        private _suppressButton = _display displayCtrl A3A_IDC_SUPPRESSBUTTON;
+        private _contButton = _display displayCtrl A3A_IDC_CONTBUTTON;
         private _roundsControlsGroup = _display displayCtrl A3A_IDC_ROUNDSCONTROLSGROUP;
         private _roundsEditBox = _display displayCtrl A3A_IDC_ROUNDSEDITBOX;
         private _addRoundsButton = _display displayCtrl A3A_IDC_ADDROUNDSBUTTON;
@@ -587,58 +553,74 @@ switch (_mode) do
         private _endPosLabel = _display displayCtrl A3A_IDC_ENDPOSITIONLABEL;
         private _endPosEditBox = _display displayCtrl A3A_IDC_ENDPOSITIONEDITBOX;
 
+        private _radiusControlsGroup = _display displayCtrl A3A_IDC_RADIUSCONTROLSGROUP;
+        private _radiusLabel = _display displayCtrl A3A_IDC_RADIUSLABEL;
+        private _radiusEditBox = _display displayCtrl A3A_IDC_RADIUSEDITBOX;
+
+        private _timingControlsGroup = _display displayCtrl A3A_IDC_TIMINGCONTROLSGROUP;
+        private _timingPosLabel = _display displayCtrl A3A_IDC_TIMINGLABEL;
+        private _timingPosEditBox = _display displayCtrl A3A_IDC_TIMINGEDITBOX;
+        private _timingPosEditSlider = _display displayCtrl A3A_IDC_TIMINGEDITSLIDER;
+
         private _fireButton = _display displayCtrl A3A_IDC_FIREBUTTON;
 
         // Disable fire button initially
         _fireButton ctrlEnable false;
-
-        private _roundType = "";
-        if (_heShell) then
+        
+        // Add shells to listbox
+        lbClear A3A_IDC_SHELLTYPEBOX;
+        private _lbEntryHM = createHashMap;
+        private _lbNames = [];
         {
-            // HE
-            _heButton ctrlEnable false;
-            _smokeButton ctrlEnable true;
-            _roundType = _mortarHEMag;
-        } else {
-            // Smoke
-            _smokeButton ctrlEnable false;
-            _heButton ctrlEnable true;
-            _roundType = _mortarSmokeMag;
+            private _mag = _x;
+            private _count = _y;
+            private _description = (_artyDictionary get _mag)#2;
+            private _text = format ["%1: %2",_description,_count];
+            _lbNames pushBack _text;
+            _lbEntryHM set [_text, _mag];
+        } forEach _shellCounts;
+        _lbNames sort true;
+        {
+            private _index = _shellTypeBox lbAdd _x;
+            _shellTypeBox lbSetData [_index, _lbEntryHM get _x];
+        } forEach _lbNames;
+        if (lbCurSel A3A_IDC_SHELLTYPEBOX == -1) then {
+            private _heMagsDict = _artyDictionary apply {if (_y#0 == "HE") then {_x} else {""}};
+            private _heMagsCount = _shellCounts apply {_x};
+            private _heMags = _heMagsCount arrayIntersect _heMagsDict;
+            private _lbTargetIndex = -1;
+            for "_i" from 0 to (lbSize A3A_IDC_SHELLTYPEBOX - 1) do {
+                if (_shellTypeBox lbData _i == (_heMags#0)) exitWith {_lbTargetIndex = _i}
+            };
+            _shellTypeBox lbSetCurSel _lbTargetIndex;
         };
+        
+        private _shellType = _shellTypeBox lbData lbCurSel _shellTypeBox;
+        private _shellDict = _artyDictionary get _shellType;
+        private _roundsRem = _shellCounts get _shellType;
 
-        if (_pointStrike) then
-        {
-            // Point strike
+        private _strikeType = _fireMissionControlsGroup getVariable ["strikeType", "point"];
 
-            _pointStrikeButton ctrlEnable false;
-            _barrageButton ctrlEnable true;
+        private _attributeLabel = _display displayCtrl A3A_IDC_ATTRIBUTELABEL;
+        private _attributeText = _display displayCtrl A3A_IDC_ATTRIBUTETEXT;
+        private _attribute = _shellDict#3;
+        private _label = localize format ["STR_antistasi_dialogs_main_hc_fire_mission_ammo_%1_detail", toLowerANSI (_shellDict#0)];
+        if (_label isEqualTo "") then {_label = "???"};
+        private _textFormat = format ["%1%2",_attribute,["s","m"] select (_shellDict#0 == "HE")];
+        _attributeLabel ctrlSetText _label;
+        _attributeText ctrlSetText _textFormat;
+        _pointStrikeButton ctrlEnable !(_strikeType == "point");
+        _barrageButton ctrlEnable !(_strikeType == "barrage");
+        _suppressButton ctrlEnable !(_strikeType == "suppress");
+        _contButton ctrlEnable !(_strikeType == "cont");
 
-            // Change text on start position label
-            _startPosLabel ctrlSetText localize "STR_antistasi_dialogs_main_hc_fire_mission_position_label";
+        _startPosLabel ctrlSetText ([localize "STR_antistasi_dialogs_main_hc_fire_mission_position_label",localize "STR_antistasi_dialogs_main_hc_fire_mission_position_start_label"] select (_strikeType == "barrage"));
 
-            // Hide endPos controlsGroup
-            _endPosControlsGroup ctrlShow false;
+        _endPosControlsGroup ctrlShow (_strikeType == "barrage");
+        _radiusControlsGroup ctrlShow (_strikeType == "suppress");
+        _timingControlsGroup ctrlShow (_strikeType == "cont");
 
-            // Enable rounds buttons, remove tooltips
-            _addRoundsButton ctrlEnable true;
-            _addRoundsButton ctrlSetTooltip "";
-            _subRoundsButton ctrlEnable true;
-            _subRoundsButton ctrlSetTooltip "";
-            _roundsEditBox ctrlSetTooltip "";
-
-
-        } else {
-            // Barrage
-
-            _barrageButton ctrlEnable false;
-            _pointStrikeButton ctrlEnable true;
-
-            // Show endPos controlsGroup
-            _endPosControlsGroup ctrlShow true;
-
-            // Change text on start position label
-            _startPosLabel ctrlSetText localize "STR_antistasi_dialogs_main_hc_fire_mission_position_start_label";
-
+        if (_strikeType == "barrage") then {
             // Disable rounds buttons and editBox, show tooltip
             _tooltipText = localize "STR_antistasi_dialogs_main_hc_fire_mission_rounds_barrage_tooltip";
             _addRoundsButton ctrlEnable false;
@@ -655,6 +637,17 @@ switch (_mode) do
                 _roundsCount = round ((_startPos distance _endPos) / 10);
                 _fireMissionControlsGroup setVariable ["roundsNumber", _roundsCount];
             };
+        } else {
+            // Enable rounds buttons, remove tooltips
+            _addRoundsButton ctrlEnable true;
+            _addRoundsButton ctrlSetTooltip "";
+            _subRoundsButton ctrlEnable true;
+            _subRoundsButton ctrlSetTooltip "";
+            _roundsEditBox ctrlSetTooltip "";
+        };
+        if (_roundsCount > _roundsRem) then {
+            _roundsCount = _roundsRem;
+            _fireMissionControlsGroup setVariable ["roundsNumber", _roundsCount];
         };
 
         _roundsEditBox ctrlSetText str _roundsCount;
@@ -708,20 +701,36 @@ switch (_mode) do
             };
         };
 
+        Trace("Updating radius boxes...");
+        private _radius = _fireMissionControlsGroup getVariable ["strikeRadius", 200];
+        _radiusEditBox ctrlSetText str _radius;
+
+        Trace("Updating interval boxes...");
+        
+        private _interval = _fireMissionControlsGroup getVariable ["strikeDelay", 45];
+        _timingPosEditSlider sliderSetRange [30,90];
+        _timingPosEditSlider sliderSetSpeed [5,5,5];
+        if (_selection in ["roundType", "cont"]) then {
+            if (_shellDict#0 == "FLARE") then {_interval = (_shellDict#3 - 5)};
+            _timingPosEditSlider sliderSetPosition _interval;
+            _fireMissionControlsGroup setVariable ["strikeDelay", _interval];
+        };
+        _timingPosEditBox ctrlSetText format ["%1s", _interval];
+
+
         // Add tooltip to fire button when unable to fire
         private _firebuttonTooltipText = "";
-        private _availableRounds = [_smokeRoundsCount, _heRoundsCount] select _heShell;
         private _isInRange = call {
             if (isNil "_startPos") exitWith {false};
-            _startPos inRangeOfArtillery [[_artyArrayDef1#0],_roundType];
+            _startPos inRangeOfArtillery [[_mortarObjs#0],_shellType];
         };
         switch (true) do
         {
-            case (isNil "_startPos" || (!_pointStrike && isNil "_endPos")):
+            case (isNil "_startPos" || ((_strikeType == "barrage") && isNil "_endPos")):
             {
                 _firebuttonTooltipText = localize "STR_antistasi_dialogs_main_hc_fire_mission_position_not_set_tooltip"
             };
-            case (_roundsCount > _availableRounds):
+            case (_roundsCount > _roundsRem):
             {
                 _firebuttonTooltipText = localize "STR_antistasi_dialogs_main_hc_fire_mission_no_ammo_tooltip"
             };
@@ -884,53 +893,52 @@ switch (_mode) do
 
         switch (_selection) do
         {
-            case ("he"):
+            case ("roundType"):
             {
-                _fireMissionControlsGroup setVariable ["heSelected", true];
-                // Set rounds number back to 1 or 0 depending on point/barrage mode
-                if (_fireMissionControlsGroup getVariable ["pointSelected", false]) then
-                {
-                    _fireMissionControlsGroup setVariable ["roundsNumber", 1];
-                } else {
-                    _fireMissionControlsGroup setVariable ["roundsNumber", 0];
-                };
-            };
-
-            case ("smoke"):
-            {
-                _fireMissionControlsGroup setVariable ["heSelected", false];
-                // Set rounds number back to 1 or 0 depending on point/barrage mode
-                if (_fireMissionControlsGroup getVariable ["pointSelected", false]) then
-                {
-                    _fireMissionControlsGroup setVariable ["roundsNumber", 1];
-                } else {
-                    _fireMissionControlsGroup setVariable ["roundsNumber", 0];
-                };
+                private _shellTypeBox = _display displayCtrl A3A_IDC_SHELLTYPEBOX;
+                private _index = lbCurSel _shellTypeBox;
+                private _shellData = _shellTypeBox lbData _index;
+                _fireMissionControlsGroup setVariable ["shellType", _shellData];
             };
 
             case ("point"):
             {
-                _fireMissionControlsGroup setVariable ["pointSelected", true];
+                _fireMissionControlsGroup setVariable ["strikeType", "point"];
                 // Set rounds number back to 1
                 _fireMissionControlsGroup setVariable ["roundsNumber", 1];
             };
 
             case ("barrage"):
             {
-                _fireMissionControlsGroup setVariable ["pointSelected", false];
+                _fireMissionControlsGroup setVariable ["strikeType", "barrage"];
                 // Set rounds number to 0, nubmer decided by barrage length
                 _fireMissionControlsGroup setVariable ["roundsNumber", 0];
+            };
+
+            case ("suppress"):
+            {
+                _fireMissionControlsGroup setVariable ["strikeType", "suppress"];
+                // Set rounds number back to 1
+                _fireMissionControlsGroup setVariable ["roundsNumber", 1];
+            };
+
+            case ("cont"):
+            {
+                _fireMissionControlsGroup setVariable ["strikeType", "cont"];
+                // Set rounds number back to 1
+                _fireMissionControlsGroup setVariable ["roundsNumber", 1];
             };
 
             case ("addround"):
             {
                 // Check for available ammo
+                private _shellTypeBox = _display displayCtrl A3A_IDC_SHELLTYPEBOX;
+                private _shellCounts = _fireMissionControlsGroup getVariable ["shellCounts", createHashMap];
+                private _shellType = _shellTypeBox lbData lbCurSel _shellTypeBox;
                 private _availableAmmo = 0;
-                if (_fireMissionControlsGroup getVariable ["heSelected", true]) then {
-                    _availableAmmo = _fireMissionControlsGroup getVariable ["availableHeRounds", 0];
-                } else {
-                    _availableAmmo = _fireMissionControlsGroup getVariable ["availableSmokeRounds", 0];
-                };
+                {
+                    if (_x == _shellType) exitWith {_availableAmmo = _y};
+                } forEach _shellCounts;
 
                 Trace_1("Available ammo: %1", _availableAmmo);
 
@@ -941,7 +949,7 @@ switch (_mode) do
                 // Check if num exceeds available ammo
                 if (_newNumber > _availableAmmo) then {_newNumber = _availableAmmo};
 
-                // Set new rounds count
+                // Set new rounds count-
                 _fireMissionControlsGroup setVariable ["roundsNumber", _newNumber];
 
                 Trace_1("Rounds count now at %1", _newNumber);
@@ -974,10 +982,56 @@ switch (_mode) do
                 private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
                 _commanderMap setVariable ["selectFireMissionEndPos", true];
             };
+
+            case ("addradius"):
+            {
+                // Add 1
+                private _previousNumber = _fireMissionControlsGroup getVariable ["strikeRadius", 200];
+                private _newNumber = _previousNumber + 25;
+
+                // Clamp value between 100 and 400
+                if (_newNumber > 400) then {_newNumber = 400};
+
+                // Set new rounds count
+                _fireMissionControlsGroup setVariable ["strikeRadius", _newNumber];
+
+                Trace_1("Radius now at %1", _newNumber);
+            };
+
+            case ("subradius"):
+            {
+                // Subtract 1
+                private _previousNumber = _fireMissionControlsGroup getVariable ["strikeRadius", 100];
+                private _newNumber = _previousNumber - 25;
+
+                // Clamp value between 100 and 400
+                if (_newNumber < 100) then {_newNumber = 100};
+
+                // Set new rounds count
+                _fireMissionControlsGroup setVariable ["strikeRadius", _newNumber];
+
+                Trace_1("Radius now at %1", _newNumber);
+            };
+
+            case ("edittiming"):
+            {
+                private _slider = _display displayCtrl A3A_IDC_TIMINGEDITSLIDER;
+                // Slider is already clamped between 30 and 90 seconds
+                private _position = sliderPosition _slider;
+
+                _fireMissionControlsGroup setVariable ["strikeDelay", _position];
+
+                Trace_1("Radius now at %1", _newNumber);
+            };
         };
 
-        // Update fire mission view to show changes
-        ["updateFireMissionView"] call FUNC(commanderTab);
+        /*
+        if (_selection != "edittiming") then { // slider updates happen every frame basically
+            // Update fire mission view to show changes
+            ["updateFireMissionView"] call FUNC(commanderTab);
+        };
+        */
+        ["updateFireMissionView", [_selection]] call FUNC(commanderTab);
     };
 
     case ("fireMissionButtonClicked"):
@@ -987,35 +1041,30 @@ switch (_mode) do
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
 
         // Get params for fire mission from controlsGroup
-        private _group = _fireMissionControlsGroup getVariable ["mortarGroup", grpNull];
-        private _heSelected = _fireMissionControlsGroup getVariable ["heSelected", true];
-        private _pointSelected = _fireMissionControlsGroup getVariable ["pointSelected", true];
+        
+        private _shellTypeBox = _display displayCtrl A3A_IDC_SHELLTYPEBOX;
+        private _index = lbCurSel _shellTypeBox;
+        private _shellType = _shellTypeBox lbData _index;
+        private _vics = _fireMissionControlsGroup getVariable ["mortarObjs", []];
+        private _units = _vics select {((magazinesAmmo _x) findIf {(_x#0 == _shellType)}) > -1};
+        private _artyDictionary = _fireMissionControlsGroup getVariable ["artyDictionary", createHashMap];
+        private _shellDict = _artyDictionary get _shellType;
+        private _shortName = _shellDict#2;
+        private _strikeType = _fireMissionControlsGroup getVariable ["strikeType", "point"];
         private _roundsNumber = _fireMissionControlsGroup getVariable ["roundsNumber", 0];
         private _startPos = _fireMissionControlsGroup getVariable ["startPos", []];
+
         private _endPos = _fireMissionControlsGroup getVariable ["endPos", []];
-        private _artyArrayDef1 = _fireMissionControlsGroup getVariable ["artyArrayDef1", []];
-        private _artyRoundsArr1 = _fireMissionControlsGroup getVariable ["artyRoundsArr1", []];
-        // Debug stuff
-        private _shell = if (_heSelected) then {"HE"} else {"Smoke"};
-        private _type = if (_pointSelected) then {"Point"} else {"Barrage"};
-
-        // private _debugStr = format["FIRE MISSION- Shell: %1, Type: %2, Rounds: %3, StartPos: %4, EndPos: %5", _shell, _type, _roundsNumber, _startPos, _endPos];
-        // Debug(_debugStr);
-
-        private ["_typeAmmunition","_rounds","_positionTel","_positionTel2"];
-        Debug_1("_heSelected: %1", _heSelected);
-        if (_heSelected) then
-        {
-            _typeAmmunition = FactionGet(reb,"staticMortarMagHE");
-        } else {
-            _typeAmmunition = FactionGet(reb,"staticMortarMagSmoke");
+        private _strikeRadius = _fireMissionControlsGroup getVariable ["strikeRadius", 200];
+        private _strikeDelay = _fireMissionControlsGroup getVariable ["strikeDelay", 45];
+        private _detail = switch (_strikeType) do {
+            case ("barrage"): {_fireMissionControlsGroup getVariable ["endPos", []]};
+            case ("suppress"): {_fireMissionControlsGroup getVariable ["strikeRadius", 200]};
+            case ("cont"): {_fireMissionControlsGroup getVariable ["strikeDelay", 45]};
+            default {0};
         };
-        _rounds = _roundsNumber;
 
-        _positionTel = _startPos;
-        _positionTel2 = _endPos;
-
-        [_typeAmmunition,_rounds,_artyArrayDef1,_artyRoundsArr1,_positionTel,_positionTel2] spawn A3A_fnc_artySupportFire;
+        [_units,_shellType,_shortName,_strikeType,_roundsNumber,_startPos,_detail] spawn A3A_fnc_artySupportFire;
     };
 
     case ("persistentSaveButtonClicked"):

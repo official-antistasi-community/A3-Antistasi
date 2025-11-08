@@ -2202,6 +2202,9 @@
         <Turkish>HE</Turkish>
         <Chinesesimp>高爆弹</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_he_detail">
+        <Original>Impact radius</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_smoke">
         <Original>Smoke</Original>
         <German>Rauch</German>
@@ -2215,6 +2218,12 @@
         <Portuguese>Fumo</Portuguese>
         <Turkish>Sis</Turkish>
         <Chinesesimp>烟雾弹</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_smoke_detail">
+        <Original>Cover time</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_flare_detail">
+        <Original>Burn time</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_button">
         <Original>Fire Mission</Original>
@@ -2440,20 +2449,6 @@
         <Turkish>Sis</Turkish>
         <Chinesesimp>烟雾弹</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_type_barrage">
-        <Original>Barrage</Original>
-        <German>Sperrfeuers</German>
-        <Italian>Sbarramento</Italian>
-        <Spanish>Bombardeo</Spanish>
-        <French>Barrage</French>
-        <Korean>연발</Korean>
-        <Russian>Заградительный</Russian>
-        <Polish>Ostrzał zaporowy</Polish>
-        <Czech>Salva</Czech>
-        <Portuguese>Barragem</Portuguese>
-        <Turkish>Yaylım Ateşi</Turkish>
-        <Chinesesimp>弹幕</Chinesesimp>
-      </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_type_label">
         <Original>Mission type</Original>
         <German>Auftragstyp</German>
@@ -2481,6 +2476,38 @@
         <Portuguese>Ponto</Portuguese>
         <Turkish>Nokta</Turkish>
         <Chinesesimp>点</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_type_barrage">
+        <Original>Barrage</Original>
+        <German>Sperrfeuers</German>
+        <Italian>Sbarramento</Italian>
+        <Spanish>Bombardeo</Spanish>
+        <French>Barrage</French>
+        <Korean>연발</Korean>
+        <Russian>Заградительный</Russian>
+        <Polish>Ostrzał zaporowy</Polish>
+        <Czech>Salva</Czech>
+        <Portuguese>Barragem</Portuguese>
+        <Turkish>Yaylım Ateşi</Turkish>
+        <Chinesesimp>弹幕</Chinesesimp>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_type_suppress">
+        <Original>Suppress</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_type_cont">
+        <Original>Cont</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_desc_point">
+        <Original>Strike a point with as many rounds as asked as fast as possible.\n\nUsed for directly engaging any target of opportunity.\n\nUseful shells: HE, Smoke</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_desc_barrage">
+        <Original>Create a rolling barrage between two points with 10-meter dispersion between impacts.\n\nUsed for routing enemies out of a specific area or street.\n\nUseful shells: HE, Smoke</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_desc_suppress">
+        <Original>Suppress an area as many rounds as needed with a 10-second delay between impacts.\n\nUsed for clearing large areas and buying time to move.\n\nUseful shells: HE</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_desc_cont">
+        <Original>Continuously fire several rounds on a target over a long period of time.\n\nUsed to continuously illuminate an area with flares during nighttime.\n\nUseful shells: Illumination / Flare</Original>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_garrison">
         <Original>Garrison</Original>

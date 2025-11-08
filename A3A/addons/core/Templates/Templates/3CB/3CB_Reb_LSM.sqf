@@ -29,7 +29,7 @@
 ["staticMGs", ["UK3CB_NAP_I_DSHKM", "UK3CB_MEI_I_PKM_High", "UK3CB_MEI_I_PKM_Low", "UK3CB_MEI_I_DSHkM_Mini_TriPod"]] call _fnc_saveToTemplate;
 ["staticAT", ["UK3CB_UN_I_SPG9"]] call _fnc_saveToTemplate;
 ["staticAA", ["UK3CB_UN_I_ZU23"]] call _fnc_saveToTemplate;
-["staticMortars", ["UK3CB_FIA_I_M252"]] call _fnc_saveToTemplate;
+["staticMortars", ["a3a_RHS_M252"]] call _fnc_saveToTemplate;
 ["staticMortarMagHE", "rhs_12Rnd_m821_HE"] call _fnc_saveToTemplate;
 ["staticMortarMagSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["staticMortarMagFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;

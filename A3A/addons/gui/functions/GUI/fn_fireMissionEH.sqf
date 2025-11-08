@@ -31,9 +31,10 @@ private _fireMissionControlsGroup = _display displayCtrl A3A_IDC_FIREMISSONCONTR
 
 private _startPos = _fireMissionControlsGroup getVariable ["startPos", nil];
 private _endPos = _fireMissionControlsGroup getVariable ["endPos", nil];
-private _pointStrike = _fireMissionControlsGroup getVariable ["pointSelected", true];
+private _strikeType = _fireMissionControlsGroup getVariable ["strikeType", "point"];
 
-if (_pointStrike && !isNil "_startPos") then {
+
+if ((_strikeType != "barrage") && !isNil "_startPos") then {
     // Draw icon
     _commanderMap drawIcon [
         "\A3\ui_f\data\Map\Markers\Military\destroy_CA.paa", // icon path
@@ -47,7 +48,7 @@ if (_pointStrike && !isNil "_startPos") then {
     ];
 };
 
-if (!_pointStrike) then {
+if ((_strikeType == "barrage")) then {
     if (!isNil "_startPos") then {
         // Draw start pos marker
         _commanderMap drawIcon [
