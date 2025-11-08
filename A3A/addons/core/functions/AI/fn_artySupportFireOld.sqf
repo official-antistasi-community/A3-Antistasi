@@ -125,13 +125,7 @@ for "_i" from 0 to (count _artyArrayDef1) - 1 do
 if (_typeArty != "BARRAGE") then
 	{
 	sleep 5;
-    diag_log _artyArrayDef1;
-    diag_log (_artyArrayDef1 select 0);
-    diag_log _positionTel;
-    diag_log (getArtilleryAmmo [(_artyArrayDef1 select 0)]);
-    diag_log ((_artyArrayDef1 select 0) getArtilleryETA [_positionTel, ((getArtilleryAmmo [(_artyArrayDef1 select 0)]) select 0)]);
 	_eta = (_artyArrayDef1 select 0) getArtilleryETA [_positionTel, ((getArtilleryAmmo [(_artyArrayDef1 select 0)]) select 0)];
-    diag_log _eta;
 	_timeX = time + _eta - 5;
 	_roundPlural = if ((_roundsMax - _rounds) == 1) then {localize "STR_A3A_fn_ai_artySupport_singleRound"} else {localize "STR_A3A_fn_ai_artySupport_multiRound"};
 	_textX = format [localize "STR_A3A_fn_ai_artySupport_yesSingle",round _eta,_roundsMax - _rounds, _roundPlural];
