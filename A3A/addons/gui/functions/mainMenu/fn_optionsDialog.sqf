@@ -37,7 +37,8 @@ switch (_mode) do
     case ("requestOpen"):
 	{
 		if !(isNull findDisplay 46) then {
-            findDisplay 46 createDisplay "A3A_ClientOptions";
+            findDisplay 49 closeDisplay 1;
+            createDialog "A3A_ClientOptions";
         } else {
             findDisplay 0 createDisplay "A3A_ClientOptions";
         };

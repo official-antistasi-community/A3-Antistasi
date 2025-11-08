@@ -4973,13 +4973,16 @@
         <Original>Weferlingen is a large map, sparsely populated with objectives and composed of open fields for long-range and armored combat. This is the winter version, with a thick snow coating.</Original>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_isladuala3">
-        <Original>Isla Duala is a country split by war, with deserts and tropical environments across a very objective-dense map. New players may struggle with the density map.</Original>
+        <Original>Isla Duala is a country split by war, with deserts and tropical environments across a very objective-dense map. New players may struggle with the density of the map.</Original>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_kunduz">
         <Original>Kunduz is a tiny, cramped map desert map. This map is good for a very quick run from start to end of Antistasi, without any fluff. It is not recommended for long-term play.</Original>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_malden">
         <Original>Malden is a compact, dense map with plenty of urban areas, close quarters combat, and a highly accessible road network that may make the map difficult to new players.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mapSelector_description_mehland">
+        <Original>Mehland is a Scandinavian map with plenty of water, modern urban areas, and bridges. The features of the map are quite unique, but new players may struggle with the size.</Original>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_Napf">
         <Original>Napf is a Swiss specialty of rolling hills and dense forests. With sparse objectives and forgiving terrain, new players should consider this map.</Original>

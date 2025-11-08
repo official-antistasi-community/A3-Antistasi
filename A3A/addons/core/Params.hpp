@@ -321,8 +321,8 @@ class Params
     class minWeaps
     {
         title = $STR_A3A_Params_minWeaps_title;
-        values[] = {15,25,40,-1};
-        texts[] = {"15","25","40", $STR_A3A_Params_generic_nounlocks};
+        values[] = {5,10,15,25,40,50,-1};
+        texts[] = {"5","10","15","25","40","50", $STR_A3A_Params_generic_nounlocks};
         default = 25;
     };
     class A3A_guestItemLimit

@@ -67,4 +67,8 @@ class mehland {
 	};
     distanceForAirAttack = 15000;
     distanceForLandAttack = 4100;
+    requiredMods = "Mehland and Really Useless Objects Pack";
+    size = 20.5;
+    cityCount = 103;
+    airbaseCount = 5;
 };

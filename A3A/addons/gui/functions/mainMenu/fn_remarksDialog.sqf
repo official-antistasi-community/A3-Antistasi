@@ -54,12 +54,8 @@ switch (_mode) do
 {
     case ("requestOpen"):
 	{
-		if !(isNull findDisplay 46) then {
-            findDisplay 46 createDisplay "A3A_createRemark";
-        } else {
-            findDisplay 0 createDisplay "A3A_createRemark";
-            Error("Somehow opened createRemark without display 46?");
-        };
+        findDisplay 49 closeDisplay 1;
+        createDialog "A3A_createRemark";
 	};
     case ("onLoad"):
     {
@@ -99,7 +95,7 @@ switch (_mode) do
 		private _prefix = "REMARK";
         private _type = _typeCombo lbData lbCurSel _typeCombo;
         private _senderUID = getPlayerUID player;
-        private _senderName = profileName;
+        private _senderName = profileName splitString DELIMITER joinString "";
         private _targetUID = _targetCombo lbData lbCurSel _targetCombo;
         private _targetName = if (_targetUID == "MANUAL") then {
             ctrlText _targetEdit;

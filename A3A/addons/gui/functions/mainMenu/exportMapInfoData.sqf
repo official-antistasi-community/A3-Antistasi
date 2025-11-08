@@ -1,6 +1,6 @@
 // Not in cfgfunctions, not called directly, likely useful in future.
 
-// params [["_map", "", ["",[]]]];
+params [["_map", "", ["",[]]]];
 
 _map = [];
 if (_map isEqualTo "") then {_map = worldName};
@@ -53,6 +53,8 @@ _dataList;
 "size = 5.1;cityCount = 12;"],
 ["malden",
 "size = 12.8;cityCount = 15;"],
+["mehland",
+"size = 20.5;cityCount = 103;"]
 ["Napf",
 "size = 20.5;cityCount = 62;"],
 ["NapfWinter",
