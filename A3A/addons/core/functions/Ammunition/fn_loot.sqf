@@ -67,23 +67,11 @@ lootVest append allArmoredVests + allCivilianVests;
 /////////////////////
 //   Device Bags  ///
 /////////////////////
-private _lootDeviceBag = [];
-
-switch (teamPlayer) do {
-     case independent: {_lootDeviceBag append rebelBackpackDevice};
-     default {_lootDeviceBag append occupantBackpackDevice};
+lootDevice = allBackpacksRadio;
+_quantity = (count allBackpacksRadio / count rebelBackpackDevice) max 1;
+for "_i" from 1 to _quantity do {
+     lootDevice append rebelBackpackDevice;
 };
-// balance radio packs and drone bag weighting
-private _countRadios = count allBackpacksRadio;
-private _countDevice = count _lootDeviceBag;
-if (_countRadios > _countDevice) then {
-     _droneList = _lootDeviceBag;
-     _quantity = ceil (_countRadios / _countDevice);
-     for "_i" from 1 to _quantity do {
-          _lootDeviceBag append _droneList;
-     };
-};
-lootDevice append _lootDeviceBag + allBackpacksRadio;
 
 ////////////////////////////////////
 //      REBEL STARTING ITEMS     ///
