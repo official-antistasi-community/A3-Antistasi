@@ -1,7 +1,8 @@
 params
 [
     ["_marker", "", [""]],
-    ["_vehicle", "", [""]]
+    ["_vehicle", "", [""]],
+    "_posDest"
 ];
 
 /*  Spawns the given vehicle at the given marker, only works if the marker as spawn places defined, not recommended for planes
@@ -13,6 +14,7 @@ params
     Params:
         _marker : STRING : The name of the marker, where the vehicle should be spawned in
         _vehicle : STRING : The configname of the vehicle, which should be spawned in
+        _posDest : ARRAY : Optional approximate target position, for determining spawn heading of aircraft
 
     Returns:
         OBJECT : The vehicle object, objNull if spawn wasnt possible
@@ -31,6 +33,11 @@ private _vehicleObj = objNull;
 if ((_vehicle isKindOf "Air") || (_vehicle isKindOf "Ship")) exitWith
 {
     _vehicleObj = [_vehicle, getMarkerPos _marker, 100, 5, true] call A3A_fnc_safeVehicleSpawn;
+    if !(isNil "_posDest") then {
+        private _rVel = velocityModelSpace _vehicleObj;
+        _vehicleObj setDir (_vehicleObj getDir _posDest);
+        _vehicleObj setVelocityModelSpace _rVel;
+    };
     _vehicleObj;
 };
 
