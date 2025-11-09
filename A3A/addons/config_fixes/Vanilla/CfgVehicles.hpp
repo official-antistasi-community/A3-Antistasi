@@ -14,5 +14,6 @@ class CfgVehicles
 #include "ifv.hpp"
 #include "sea.hpp"
 #include "soft.hpp"
+#include "static.hpp"
 #include "houses.hpp"
 };
