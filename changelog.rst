@@ -129,7 +129,7 @@ Version 3.10.0
 .. admonition:: Groundwork
 
    * :issue:`3667` Added a new mission framework to allow for additional missions to be created
-   * :issue:`3699` (PLANNED) Default spawn distance can be set per-map in mapInfo.hpp
+   * :issue:`3699` Default spawn distance can be set per-map in mapInfo.hpp
 
 
 .. admonition:: Localization
