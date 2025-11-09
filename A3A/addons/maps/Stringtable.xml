@@ -466,6 +466,18 @@
         <Turkish>Antistasi - Baltık Devrimi</Turkish>
         <Chinesesimp>Antistasi - 波罗的海革命</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_mission_info_Fallujah_blurb_text">
+        <Original>Seven Days in Fallujah Alpha Version</Original>
+      </Key>
+      <Key ID="STR_antistasi_mission_info_Fallujah_description_text">
+        <Original>Be the Resistance Leader. Fight against a superior enemy in technology, number, assets and vehicles. Use guerrilla tactics in a totally dynamic world, with around 18 sidemissions, everywhere, anytime, anything.</Original>
+      </Key>
+      <Key ID="STR_antistasi_mission_info_Fallujah_mapname_short_text">
+        <Original>Antistasi Fallujah</Original>
+      </Key>
+      <Key ID="STR_antistasi_mission_info_Fallujah_mapname_text">
+        <Original>Antistasi - The Fallujah Insurgency</Original>
+      </Key>
       <Key ID="STR_antistasi_mission_info_gm_weferlingen_summer_blurb_text">
         <Original>United Germany is Best Germany.</Original>
         <Italian>La Germania Unita è la Germania Migliore</Italian>

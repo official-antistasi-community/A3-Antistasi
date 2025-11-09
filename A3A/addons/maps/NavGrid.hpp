@@ -6,6 +6,7 @@ class NavGrid {
     chernarus_winter = QPATHTOFOLDER(Antistasi_chernarus_winter.chernarus_winter\navGrid.sqf);
     cup_chernarus_A3 = QPATHTOFOLDER(Antistasi_cup_chernarus_A3.cup_chernarus_A3\navGrid.sqf);
     Enoch = QPATHTOFOLDER(Antistasi_Enoch.Enoch\navGrid.sqf);
+    Fallujah = QPATHTOFOLDER(Antistasi_Fallujah.Fallujah\navGrid.sqf);
     gm_weferlingen_summer = QPATHTOFOLDER(Antistasi_gm_weferlingen_summer.gm_weferlingen_summer\navGrid.sqf);
     gm_weferlingen_winter = QPATHTOFOLDER(Antistasi_gm_weferlingen_winter.gm_weferlingen_winter\navGrid.sqf);
     isladuala3 = QPATHTOFOLDER(Antistasi_isladuala3.isladuala3\navGrid.sqf);
