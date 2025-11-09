@@ -79,7 +79,7 @@ Version 3.10.0
 <br/>Added S.O.G. Nickel Steel support, requires the S.O.G Prairie Fire CDLC
 <br/>Moved T-140 Angara to heavy tank category
 <br/>Added support for Flying Legends in the Spearhead 1944 CDLC, IFA3, and EAW templates
-<br/>Added several new factions for Spearhead Extended
+<br/>Added Added new Commonwealth and Africa Corp factions for SPEX - Spearhead Extended
 <br/>Added EAW modset support, requires IFA3 (new factions IJA, NRA, PLA, LIM)
 <br/>Added new faction USMC to IFA3 modset
 <br/>Added new faction SDK to RHS modset
@@ -121,7 +121,7 @@ Version 3.10.0
 <br/>Groundwork
 <br/>
 <br/>Added a new mission framework to allow for additional missions to be created
-<br/>(PLANNED) Default spawn distance can be set per-map in mapInfo.hpp
+<br/>Default spawn distance can be set per-map in mapInfo.hpp
 <br/>
 <br/>
 <br/>Localization
