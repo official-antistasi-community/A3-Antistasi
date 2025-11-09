@@ -87,7 +87,7 @@ Version 3.10.0
    * :issue:`3641` Added S.O.G. Nickel Steel support, requires the S.O.G Prairie Fire CDLC
    * :issue:`3677` Moved T-140 Angara to heavy tank category
    * :issue:`3678` Added support for Flying Legends in the Spearhead 1944 CDLC, IFA3, and EAW templates
-   * :issue:`3678` Added several new factions for Spearhead Extended
+   * :issue:`3678` Added new Commonwealth and Africa Corp factions for SPEX - Spearhead Extended
    * :issue:`3680` Added EAW modset support, requires IFA3 (new factions IJA, NRA, PLA, LIM)
    * :issue:`3683` Added new faction USMC to IFA3 modset
    * :issue:`3684` Added new faction SDK to RHS modset
