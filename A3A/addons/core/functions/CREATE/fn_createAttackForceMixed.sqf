@@ -12,7 +12,7 @@ Arguments:
     <STRING> Resource pool to use
     <INTEGER> Total number of vehicles to create
     <SCALAR> Minimum arrival delay in seconds. -1 will force immediate spawn, otherwise will attempt to sync air/ground arrival  
-    <ARRAY> Array of modifier strings: ["tierboost", "specops", "airboost", "noairsupport"]
+    <ARRAY> Array of modifier strings: ["tierboost", "specops", "airboost", "noairsupport", "lowair"]
     <STRING> Optional: Attack type for showInterceptedSetupCall. Won't show anything if missing
     <SCALAR> Optional: Reveal value for showInterceptedSetupCall
 
@@ -30,8 +30,8 @@ private _targPos = if (_target isEqualType []) then { _target } else { markerPos
 // _modifiers ["tierboost", "specops", "airboost", "noairsupport"]
 
 private _faction = Faction(_side);
-private _lowAir = _faction getOrDefault ["attributeLowAir", false];
-private _tier = [tierWar, tierWar+2] select ("tierboost" in _modifiers);
+private _lowAir = _faction getOrDefault ["attributeLowAir", false] or ("lowair" in _modifiers);
+private _tier = [0,2] select ("tierboost" in _modifiers);
 
 private _resourcesSpent = 0;
 private _vehicles = [];

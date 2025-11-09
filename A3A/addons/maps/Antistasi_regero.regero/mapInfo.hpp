@@ -1,9 +1,9 @@
 class regero {
     population[] = {
-        {"elguapo",25},{"angelito",101},{"corona",25},{"sanhernando",30},{"quentao",39},
-        {"santafuero",51},{"farallon",25},{"mantolin",392},{"carbado",25},{"mellana",45},
-        {"sanferes",27},{"ango",27},{"tarolla",44},{"puentora",27},{"yarra",70},
-        {"chatto",36},{"woodend",25},{"westrubicon",26},{"lagolon",25},{"hillgrove",25},
+        {"elguapo",25},{"angelito",200},{"corona",25},{"sanhernando",30},{"quentao",39},
+        {"santafuero",100},{"farallon",25},{"mantolin",392},{"carbado",25},{"mellana",45},
+        {"sanferes",27},{"ango",27},{"tarolla",130},{"puentora",27},{"yarra",130},
+        {"chatto",36},{"woodend",25},{"westrubicon",70},{"lagolon",25},{"hillgrove",25},
         {"wattleglen",25},{"eastrubicon",25},{"clayton",54},{"sanisabel",364},{"portonuevo",403},
         {"cartera",78},{"viggo",67},{"desay",25}
     };
@@ -33,6 +33,16 @@ class regero {
 		{"Land_BagFence_Long_F", 10}, {"Land_BagFence_Round_F", 10}, {"Land_BagFence_Short_F", 10},
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+        // From Sahrani
+		"Land_Dum_mesto2", "Land_Dum_olezlina", "Land_Panelak", "Land_Dum_istan3_hromada2", "Land_Dum_olez_istan1_open2", "Land_Dum_olez_istan1"
+	};
+    requiredMods = "Kingdom of Regero and CUP Terrains - Core";
+    size = 10.2;
+    cityCount = 28;
+    airbaseCount = 7;
 };

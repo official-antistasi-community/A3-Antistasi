@@ -21,6 +21,18 @@ class enoch {
 		{"Land_BagFence_01_short_green_F", 10}, {"Land_BagFence_01_round_green_F", 10}, {"Land_BagFence_01_long_green_F", 10},
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"Land_PoliceStation_01_F", "Land_House_2B01_F", "Land_House_2B02_F", "Land_House_2B03_F", "Land_House_2B04_F",
+		"Land_House_2W01_F", "Land_House_2W02_F", "Land_House_2W03_F", "Land_House_2W04_F", "Land_House_2W05_F",
+		"Land_House_1B01_F", "Land_House_1W11_F", "Land_House_1W12_F", "Land_House_1W07_F",
+		"Land_House_1W02_F", "Land_House_1W09_F", "Land_House_1W05_F", "Land_House_1W06_F"
+	};
+	requiredMods = "Contact DLC";
+	size = 12.8;
+	cityCount = 28;
+	airbaseCount = 4;
 };

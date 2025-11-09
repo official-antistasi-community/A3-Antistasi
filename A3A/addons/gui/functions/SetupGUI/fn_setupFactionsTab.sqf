@@ -150,26 +150,39 @@ switch (_mode) do
         _infoLabel ctrlSetText format [localize "STR_antistasi_dialogs_setup_infoPanel_header",_shortName];
         private _requiredAddons = getArray(_path/"requiredAddons") + getArray(_path/"forceDLC") - ["ws","vn","gm","spe"]; // CDLCs are listed twice for forced DLC and dependency
         private _prettyAddonHM = createHashMapFromArray [ // TODO: Do we want to trim down the dependencies list? CUP Vehicles has dependencies on CUP Units and CUP Vehicles
-            ["Weapons_1_F_lxWS", "Western Sahara CDLC"]
-            ,["vn_weapons", "S.O.G Prairie Fire CDLC"]
-            ,["rhsgref_main", "RHSGREF"]
-            ,["rhssaf_main", "RHSSAF"]
-            ,["UK3CB_Factions_Vehicles_SUV", "3CB Factions"]
-            ,["UK3CB_BAF_Weapons", "3CB BAF Weapons"]
-            ,["UK3CB_BAF_Vehicles", "3CB BAF Vehicles"]
-            ,["UK3CB_BAF_Units_Common", "3CB BAF Units"]
-            ,["UK3CB_BAF_Equipment", "3CB BAF Equipment"]
-            ,["CUP_Creatures_People_Civil_Russia", "CUP Units"]
-            ,["CUP_BaseConfigs", "CUP Weapons"]
-            ,["CUP_AirVehicles_Core", "CUP Vehicles"]
-            ,["uns_weap_w", "Unsung"]
-            ,["gm_weapons_items", "Global Mobilization CDLC"]
-            ,["bwa3_common", "BWMod"]
-            ,["ww2_spe_assets_c_characters_germans_c", "Spearhead 1944 CDLC"]
-            ,["IFA3_Core", "IFA3 AIO"]
-            ,["Swedish_Forces_Pack","Swedish Forces Pack"]
-            ,["cwr3_core","Cold War Rearmed 3"]
-            ,["WW2_SPEX_Assets_c_Characters_Americans_c","SPEX - Spearhead Extended"]
+            ["AMF_FAMAS", "AMF_AIO"],
+            ["bwa3_common", "BWMod"],
+            ["CRO_Base", "CROMIL v3.3 (Croatian Military Mod)"],
+            ["CSLA_UI", "CSLA Iron Curtain CDLC"],
+            ["CUP_AirVehicles_Core", "CUP Vehicles"],
+            ["CUP_BaseConfigs", "CUP Weapons"],
+            ["CUP_Creatures_People_Civil_Russia", "CUP Units"],
+            ["cwr3_core","Cold War Rearmed 3"],
+            ["cwr3_expansion_uk", "Cold War Rearmed III - British Armed Forces"],
+            ["EAW_Weapons2", "East Asia War 1937"],
+            ["gm_weapons_items", "Global Mobilization CDLC"],
+            ["IFA3_Core", "IFA3 AIO"],
+            ["loadorder_f_vietnam", "S.O.G Prairie Fire CDLC"],
+            ["PRACS_Core", "Project RACS 2023"],
+            ["PRACS_SLA_Core", "Project RACS SLA 2023"],
+            ["rhsgref_main", "RHSGREF"],
+            ["rhssaf_main", "RHSSAF"],
+            ["SEP_I_CW_Core","Spearhead Expansion Project"],
+            ["Swedish_Forces_Pack","Swedish Forces Pack"],
+            ["TFC_CA_trucks", "TFC_CA"],
+            ["TFC_Core_Data", "TFC_CORE"],
+            ["tfc_rcaf_data_rcaf", "TFC_RCAF"],
+            ["TFC_SF_Data", "TFC_SF"],
+            ["TMT_Core", "TMT - Turkish Forces"],
+            ["UK3CB_BAF_Equipment", "3CB BAF Equipment"],
+            ["UK3CB_BAF_Units_Common", "3CB BAF Units"],
+            ["UK3CB_BAF_Vehicles", "3CB BAF Vehicles"],
+            ["UK3CB_BAF_Weapons", "3CB BAF Weapons"],
+            ["UK3CB_Factions_Vehicles_SUV", "3CB Factions"],
+            ["uns_weap_w", "Unsung"],
+            ["Weapons_1_F_lxWS", "Western Sahara CDLC"],
+            ["ww2_spe_assets_c_characters_germans_c", "Spearhead 1944 CDLC"],
+            ["WW2_SPEX_Assets_c_Characters_Americans_c","SPEX - Spearhead Extended"]
         ];
 
         private _prettyAddons = _requiredAddons apply 

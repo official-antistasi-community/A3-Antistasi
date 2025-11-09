@@ -1,0 +1,136 @@
+Version 3.10.0
+<br/>
+<br/>
+<br/>Major
+<br/>
+<br/>Garrison rework
+<br/>- Added police stations: Ransack them for loot and intel, and destroy them for a support boost
+<br/>- Rebels will now automatically flip flags once they've overpowered the enemy presence on a marker
+<br/>- Improved persistence across the board; cities, garrison unit counts, airfield vics are all persistent
+<br/>Added support for JSON saves and save importing / exporting
+<br/>Added map Mehland
+<br/>City / HR rework
+<br/>- Flipping cities is now more dependent on doing tasks instead of killing enemies
+<br/>- Minor city missions spawn, little things that are useful to flip towns
+<br/>- To permanently flip a city, you must fight a battle for it as a mission when support is high enough
+<br/>Rebalances to vehicles and equipment
+<br/>- Rebalanced prices of vehicles and statics
+<br/>- Rebalanced enemy attack helicopter frequency, group compositions, and response speed
+<br/>- Changed number of starting RPGs and added a setting to block unlocking unguided AT
+<br/>Antistasi maps and information can be accessed directly from the main menu
+<br/>
+<br/>
+<br/>Minor
+<br/>   
+<br/>Optimized config sorting to improve game start time
+<br/>Improved loadout randomization
+<br/>Changed some config values to better balance IFA3 factions
+<br/>Added cap to airstrike points and increased cost of napalm strikes
+<br/>Ammo cargo is now tracked and persistent in the garage with ACE
+<br/>Garrison rework - Minor
+<br/>- Players can now garrison armed vics for AI to use
+<br/>- Garrisons will wake up quicker and be more willing to react to threats
+<br/>- PATCOM mortars appear in more places, and are rebalanced to fire more counterbattery and less at infantry
+<br/>- HQ radius increased to 75 meters
+<br/>- Buildings always persist near rebel markers regardless of HQ distance
+<br/>- AI will duck down to avoid incoming mortar fire
+<br/>Additional logging for kills against civs and surrenders
+<br/>Additional logging for money transfer
+<br/>Added support for Immersion Cigs - Rewrite
+<br/>Radio decryption keys are now saved on game save/load
+<br/>Upgraded the high-command mortar UI with more fire mission options, including illumination rounds
+<br/>New menu for role selection, use from new battle menu
+<br/>- Commander perks are now granted to the acting commander
+<br/>- Role counts are now capped dynamically by player count
+<br/>- Minor adjustments to role perks
+<br/>Minor builder updates
+<br/>- Decreased time to build everywhere, decreased further near HQ
+<br/>- Buildings near HQ now make it more overt to enemies
+<br/>- Added a functional buildable helipad
+<br/>City/HR rework - HR income is rebalanced and player spawns eat into HR
+<br/>Added a parameter to block garage access for a certain period after flip
+<br/>Shift/Control keys now work to give yourself multiple items at once in personal arsenal
+<br/>Minor rework to fast travel mechanics
+<br/>Added a menu on the in-game escape menu for client settings. More will be added here with future updates
+<br/>Added a menu to send remarks from in-game (community servers)
+<br/>Additional New Battle Menu updates
+<br/>- Added a context menu that provides actions depending on where you are and what you're looking at
+<br/>- Currently has actions while looking at vehicles, at HQ, and looking at construction
+<br/>- With this, you can change your role, access the vehicle arsenal, and toggle the builder screen clutter
+<br/>- Added buttons for common actions to Commander and Admin tabs
+<br/>- Replaced the Old Battle Menu button with a war status tab, you can view some previously invisible intel through here
+<br/>Counterattacks are now managed by garrisons
+<br/>The default bind to toggle the top bar is moved to Ctrl + F12. The hints can be toggled in the options menu
+<br/>Boats and aircraft can be placed further away from the garage now (150m instead of 25m)
+<br/>Added extra options for the weapon unlock number setting
+<br/>Air QRF and attack vehicles face the direction of travel when they spawn in 
+<br/>Increased the traverse arc of the vanilla static Titan launchers
+<br/>
+<br/>
+<br/>Template updates
+<br/>
+<br/>Added PRACS modset support, requires RHS (new factions RACS, SLA, SLA Revolutionary Guard)
+<br/>Added CSLA CDLC support, requires CUP (new factions US Army, AFMC, CSLA, FIA, NAPA)
+<br/>Added per-map civilian faction to Vanilla
+<br/>Added TMT mod support, requires CUP (new faction Turkish Army)
+<br/>Added AMF mod support, requires CUP (new faction French Army)
+<br/>Added CROMIL mod support, requires RHS (new faction Croatian Army)
+<br/>Updated Global Mobilization CDLC factions to the 1.6 update
+<br/>Added S.O.G. Nickel Steel support, requires the S.O.G Prairie Fire CDLC
+<br/>Moved T-140 Angara to heavy tank category
+<br/>Added support for Flying Legends in the Spearhead 1944 CDLC, IFA3, and EAW templates
+<br/>Added Added new Commonwealth and Africa Corp factions for SPEX - Spearhead Extended
+<br/>Added EAW modset support, requires IFA3 (new factions IJA, NRA, PLA, LIM)
+<br/>Added new faction USMC to IFA3 modset
+<br/>Added new faction SDK to RHS modset
+<br/>Added new factions TLA and TFIA to 3CB modset
+<br/>Added hand flares to RHS and 3CB rebel factions
+<br/>Changed the intel items on IFA and EAW
+<br/>   
+<br/>   
+<br/>Terrain updates
+<br/>
+<br/>Added support for the Interiors for CUP mod on Chernarus and Napf
+<br/>
+<br/>
+<br/>Bugfixes
+<br/>
+<br/>Fixed the helis in the Destroy Heli mission spawning at inconsistent rates
+<br/>Fixed a bug where the loot crate refund text would overwrite the unlock text
+<br/>Fixed a bug where the player would run off while remote-controlling an AI
+<br/>Fixed several new battle menu bugs
+<br/>Fixed a case where the war level calculation for counterattacks would be doubled
+<br/>Fixed a bug where watchposts would sometimes be called observation posts
+<br/>Garrison rework - Rebel garrisoned mortars will now actually engage enemies
+<br/>Fixed a bug where the dead population wouldn't be calculated correctly
+<br/>Fixed a bug where AI would garrison a building with no interior
+<br/>Fixed template climates being case sensitive
+<br/>Fixed a bug where rebel training would be capped incorrectly
+<br/>Fixed multiple RPT error cases
+<br/>Fixed multiple bugs related to attached objects and cargo when garaging
+<br/>Fixed a bug where extensive map drawings would lag the UI maps
+<br/>Fixed multiple bugs related to the SAM support
+<br/>Fixed a few smaller New Battle Menu bugs
+<br/>Fixed a bug where QRFs would not be sent before flag flip
+<br/>Fixed a bug where UAV bags would spawn rarely or not at all
+<br/>Fixed multiple bugs with the gun shop mission
+<br/>Fixed some helis not taking off after a combat landing
+<br/>Fixed a bug where certain modded vehicles with attachments would cause errors
+<br/>   
+<br/>
+<br/>Groundwork
+<br/>
+<br/>Added a new mission framework to allow for additional missions to be created
+<br/>Default spawn distance can be set per-map in mapInfo.hpp
+<br/>
+<br/>
+<br/>Localization
+<br/>
+<br/>Unfortunately no updates due to pipeline issues.
+<br/>
+<br/>
+<br/>Refactor
+<br/>
+<br/>City/HR rework: City Supplies task is moved to the new framework and should be more reliable
+<br/>Radio tower and building destruction rework; radio towers should behave more reliably now
+<br/>Updated internal translation array for mod names

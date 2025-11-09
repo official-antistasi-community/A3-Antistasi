@@ -42,6 +42,24 @@ class Napf {
 		{"Land_fort_artillery_nest_EP1", 200}, {"Land_fort_rampart_EP1", 50}, {"Fort_Barricade", 50}, {"Fence", 20}, {"FenceWood", 10}, {"FenceWoodPalet", 10},
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+// Use different Chernarus houses if CUP interiors is loaded
+#if __has_include("\z\LSR\addons\patch_contact_in_cup_c\config.bin")
+		"Land_HouseV_2L", "Land_HouseV2_02", "Land_HouseV2_03B", "Land_HouseV2_04_interier", "Land_houseV_2T1", "Land_houseV_2T2", "Land_HouseV2_01A", "Land_HouseV2_01B",
+		"Land_HouseV_2I", "Land_HouseV_3I4"," Land_HouseV_1T", "Land_HouseV_1I2", "Land_HouseV_3I2", "Land_HouseV_1L1", "Land_HouseV_1L2", "Land_A_Pub_01",
+#else
+		"Land_HouseV2_04_interier", "Land_HouseV2_02_Interier", "Land_A_Pub_01",
+		//"Land_a_stationhouse", "Land_HouseV_1I4", "Land_Mil_Guardhouse"
+#endif
+		// North Sahrani
+		"Land_Dum_mesto2", "Land_Dum_olezlina"
+	};
+	requiredMods = "Napf Island A3 and CUP Terrains - Core";
+	size = 20.5;
+	cityCount = 62;
+	airbaseCount = 4;
 };

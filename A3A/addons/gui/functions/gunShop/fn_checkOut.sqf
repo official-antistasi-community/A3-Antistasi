@@ -3,10 +3,7 @@
 #include "..\..\dialogues\defines.hpp"
 
 
-
-if(isNil "A3A_shoppingCart") then {
-	A3A_shoppingCart = createHashMap;
-};
+if (isNil "A3A_shoppingCart") exitWith {};		// UI timing?
 
 private _totalCost = 0;
 {
@@ -22,13 +19,11 @@ private _totalCost = 0;
 
 if (_totalCost <= 0) exitWith {};		// If we hit checkout with nothing in the cart, just ignore
 
-// check if you can afford here.
-
-if((player == theBoss && server getVariable ["resourcesFIA", 0] < _totalCost)) exitWith {
+// Check costs here because otherwise the dialog will be closed
+if (server getVariable ["resourcesFIA", 0] < _totalCost) exitWith {
     [localize "STR_A3A_Utility_Items_Purchase_Title", localize "STR_A3A_Utility_Items_Insufficient_Funds"] call A3A_fnc_customHint;
 };
 
-if (player == theBoss) then { [0, -_totalCost] remoteExec ["A3A_fnc_resourcesFIA", 2] };
 private _shoppingCartList = [];
 {
 	private _key = _x;
@@ -38,7 +33,9 @@ private _shoppingCartList = [];
 
 } forEach A3A_shoppingCart;
 
-[[_totalCost, _shoppingCartList], {A3A_shoppingList = _this}] remoteExec ["call", 2];
+// Send shopping list to server, in case it's no longer possible to buy for some reason
+A3A_shoppingList = [_totalCost, _shoppingCartList];
+publicVariableServer "A3A_shoppingList";
 
 A3A_shoppingCart = nil;
 

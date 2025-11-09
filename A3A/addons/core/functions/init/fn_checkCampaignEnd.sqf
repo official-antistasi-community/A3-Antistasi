@@ -23,23 +23,22 @@ Example:
 FIX_LINE_NUMBERS()
 
 private _popReb = 0;
-private _popGov = 0;
 private _popKilled = 0;
 private _popTotal = 0;
 
 {
     private _city = _x;
-    private _cityData = server getVariable _city;
-    _cityData params ["_numCiv", "_numVeh", "_supportGov", "_supportReb"];	
+    private _cityData = A3A_cityData getVariable _city;
+    _cityData params ["_numCiv", "_suppReb"];
+
     _popTotal = _popTotal + _numCiv;
-    if (_city in destroyedSites) then { _popKilled = _popKilled + _numCiv} else 
-    {
-        _popReb = _popReb + (_numCiv * (_supportReb / 100));
-        _popGov = _popGov + (_numCiv * (_supportGov / 100)); // support only matters if the city isn't destroyed
-    };
+    if (_city in destroyedSites) then { _popKilled = _popKilled + _numCiv; continue };
+    private _ownerMul = [0.5, 1] select (sidesX getVariable _city == teamPlayer);
+    _popReb = _popReb + _ownerMul * _numCiv * _suppReb / 100;
+
 } forEach citiesX;
 
-_popReport = format["Total Pop: %1, Dead Pop: %2, Rebel Support: %3, Gov Support: %4", _popTotal, _popKilled, _popReb, _popGov];
+_popReport = format["Total Pop: %1, Dead Pop: %2, Rebel Support: %3", _popTotal, _popKilled, _popReb];
 Info(_popReport);
 
 sleep 5; //This lets players have a few seconds after an event before the win/loss screen shows
@@ -48,7 +47,7 @@ if (_popKilled > (_popTotal / 3)) then {
     isNil { ["ended", true] call A3A_fnc_writebackSaveVar };
     ["destroyedSites",false,true] remoteExec ["BIS_fnc_endMission"];
 };
-if ((_popReb > _popGov) and ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == count airportsX)) then {
+if (_popReb > (_popTotal / 2) and ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == count airportsX)) then {
     isNil { ["ended", true] call A3A_fnc_writebackSaveVar };
     ["end1",true,true,true,true] remoteExec ["BIS_fnc_endMission",0];
 };

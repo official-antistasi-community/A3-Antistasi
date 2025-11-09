@@ -4,8 +4,6 @@ FIX_LINE_NUMBERS()
 
 params ["_serverID", "_campaignID", "_worldname", ["_gametype", "Greenfor"]];
 
-Info_1("Deleting saved game with parameters %1", _this);
-
 private _namespace = [profileNamespace, missionProfileNamespace] select (_serverID isEqualType false);
 
 private _postfix = if (_serverID isEqualTo false) then { _campaignID } else
@@ -33,12 +31,7 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 
 } forEach _savedPlayers;
 
-
-// Delete all server data for specified campaign
-{
-	_namespace setVariable [_x + _postfix, nil];
-
-} forEach ["countCA", "gameMode", "difficultyX", "bombRuns", "smallCAmrk", "membersX", "antennas",
+private _varsToDelete = ["json", "countCA", "gameMode", "difficultyX", "bombRuns", "smallCAmrk", "membersX", "antennas",
 	"mrkSDK", "mrkCSAT", "posHQ", "dateX", "skillFIA", "destroyedSites", "distanceSPWN", "civPerc",
 	"chopForest", "maxUnits", "nextTick", "weather", "destroyedBuildings", "aggressionOccupants",
 	"aggressionInvaders", "resourcesFIA", "hr", "vehInGarage", "staticsX", "jna_datalist",
@@ -47,8 +40,13 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 	"attackCountdownOccupants", "attackCountdownInvaders", "prestigeNATO", "prestigeCSAT",
 	"savedPlayers", "testingTimerIsActive", "HR_Garage", "A3A_fuelAmountleftArray", "HQKnowledge", "enemyResources",
 	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC", "arsenalLimits", "rebelLoadouts",
-	"minorSites"];
+	"minorSites", "newGarrison", "radioKeys", "cityData"];
 
+// Delete all server data for specified campaign
+{
+	_namespace setVariable [_x + _postfix, nil];
+
+} forEach _varsToDelete;
 
 // Remove this campaign from the save list, if present
 private _saveList = [_namespace getVariable "antistasiSavedGames"] param [0, [], [[]]];
