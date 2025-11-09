@@ -38,7 +38,7 @@ Version 3.10.0
    * :issue:`3632` Garrison rework - Minor
     - Players can now garrison armed vics for AI to use
     - Garrisons will wake up quicker and be more willing to react to threats
-    - PATCOM mortars appear in more places, and are rebelanced to fire more counterbattery and less at infantry
+    - PATCOM mortars appear in more places, and are rebalanced to fire more counterbattery and less at infantry
     - HQ radius increased to 75 meters
     - Buildings always persist near rebel markers regardless of HQ distance
     - AI will duck down to avoid incoming mortar fire
@@ -71,8 +71,9 @@ Version 3.10.0
    * :issue:`3721` The default bind to toggle the top bar is moved to Ctrl + F12. The hints can be toggled in the options menu
    * :issue:`3721` Boats and aircraft can be placed further away from the garage now (150m instead of 25m)
    * :issue:`3730` Added extra options for the weapon unlock number setting
-   * :issue:`3739` QRF and attack vehicles face the direction of travel when they spawn in 
+   * :issue:`3739` Air QRF and attack vehicles face the direction of travel when they spawn in 
    * :issue:`3741` Increased the traverse arc of the vanilla static Titan launchers
+   
 
 .. admonition:: Template updates
 
@@ -98,6 +99,7 @@ Version 3.10.0
 .. admonition:: Terrain updates
 
    * :issue:`3726` Added support for the Interiors for CUP mod on Chernarus and Napf
+   
 
 .. admonition:: Bugfixes
 
@@ -108,7 +110,7 @@ Version 3.10.0
    * :issue:`3639` Fixed a case where the war level calculation for counterattacks would be doubled
    * :issue:`3631` Fixed a bug where watchposts would sometimes be called observation posts
    * :issue:`3632` Garrison rework - Rebel garrisoned mortars will now actually engage enemies
-   * :issue:`3656` Fixed a bug where the dead population wouldnt be calculated correctly
+   * :issue:`3656` Fixed a bug where the dead population wouldn't be calculated correctly
    * :issue:`3658` Fixed a bug where AI would garrison a building with no interior
    * :issue:`3661` Fixed template climates being case sensitive
    * :issue:`3664` Fixed a bug where rebel training would be capped incorrectly
@@ -133,10 +135,7 @@ Version 3.10.0
 .. admonition:: Localization
 
    * [No PRs] - Unfortunately no updates due to pipeline issues.
-
-
-.. admonition:: Tools
-
+   
 
 .. admonition:: Refactor
 
