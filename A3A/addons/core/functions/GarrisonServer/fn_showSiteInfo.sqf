@@ -18,7 +18,8 @@ if (_marker == "") exitWith {
         (A3A_cityData getVariable _x) params ["_numCiv", "_suppReb"];
         _pop = _pop + _numCiv;
         if (_x in destroyedSites) then { _popDead = _popDead + _numCiv; continue };
-        _popReb = _popReb + (_numCiv * (_suppReb / 100));
+        private _ownerMul = [0.5, 1] select (sidesX getVariable _x == teamPlayer);
+        _popReb = _popReb + _ownerMul * _numCiv * _suppReb / 100;
     } forEach citiesX;
     _popReb = round _popReb;
     _popOcc = round (_pop - _popReb - _popDead);

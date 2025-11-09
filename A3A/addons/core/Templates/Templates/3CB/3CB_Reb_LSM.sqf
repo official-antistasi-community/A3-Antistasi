@@ -29,7 +29,7 @@
 ["staticMGs", ["UK3CB_NAP_I_DSHKM", "UK3CB_MEI_I_PKM_High", "UK3CB_MEI_I_PKM_Low", "UK3CB_MEI_I_DSHkM_Mini_TriPod"]] call _fnc_saveToTemplate;
 ["staticAT", ["UK3CB_UN_I_SPG9"]] call _fnc_saveToTemplate;
 ["staticAA", ["UK3CB_UN_I_ZU23"]] call _fnc_saveToTemplate;
-["staticMortars", ["UK3CB_FIA_I_M252"]] call _fnc_saveToTemplate;
+["staticMortars", ["a3a_RHS_M252"]] call _fnc_saveToTemplate;
 ["staticMortarMagHE", "rhs_12Rnd_m821_HE"] call _fnc_saveToTemplate;
 ["staticMortarMagSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["staticMortarMagFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
@@ -49,7 +49,7 @@
 private _initialRebelEquipment = [
 "rhs_weap_makarov_pm", "rhs_weap_tt33",
 "a3a_UK3CB_CZ550_8mm",
-["rhs_weap_rpg75", 50],
+["rhs_weap_rpg75", 25],
 ["IEDUrbanSmall_Remote_Mag", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],
 "rhs_mag_9x18_8_57N181S", "rhs_mag_762x25_8", "rhsgref_5Rnd_792x57_kar98k", "rhs_grenade_sthgr43_mag", "rhs_grenade_nbhgr39_mag",
 "UK3CB_CHC_C_B_MED", "UK3CB_B_Bedroll_Backpack", "UK3CB_TKC_C_B_Sidor_MED", "UK3CB_CW_SOV_O_LATE_B_Sidor_RIF", "UK3CB_CW_SOV_O_EARLY_B_Sidor_RIF",

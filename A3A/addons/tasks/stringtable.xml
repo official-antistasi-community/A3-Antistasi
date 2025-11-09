@@ -138,7 +138,7 @@
         <Original>Keep the agent covered for %1 more seconds</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_repair_success">
-        <Original>Excellent, we've recovered the goods. You can keep the vehicle if you like.</Original>
+        <Original>Excellent, we've recovered the goods. You can keep the vehicle if you like. We've left some presents in it.</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_taxi_title">
         <Original>Transport rebel agent</Original>
@@ -147,7 +147,7 @@
         <Original>A rebel agent in %1 needs an escort for important business. He'll make it worth our trouble if we help him. Pick him up before %2. Make sure you bring a vehicle.</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_taxi_leave">
-        <Original>Tell him you're ready to leave</Original>
+        <Original>Tell him to follow you</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_taxi_start">
         <Original>The rebel agent has joined your squad. Take him to his destination in %1.</Original>

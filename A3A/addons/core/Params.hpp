@@ -147,6 +147,13 @@ class Params
         texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
         default = 0;
     };
+    class A3A_flagGarageBlock
+    {
+        title = $STR_A3A_Params_garageAccessTimer_title;
+        values[] = {0,3,5,10,20};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min, $STR_A3A_Params_generic_20min};
+        default = 5;
+    };
 
     class SpacerMembership
     {
@@ -314,8 +321,8 @@ class Params
     class minWeaps
     {
         title = $STR_A3A_Params_minWeaps_title;
-        values[] = {15,25,40,-1};
-        texts[] = {"15","25","40", $STR_A3A_Params_generic_nounlocks};
+        values[] = {5,10,15,25,40,50,-1};
+        texts[] = {"5","10","15","25","40","50", $STR_A3A_Params_generic_nounlocks};
         default = 25;
     };
     class A3A_guestItemLimit
@@ -329,6 +336,14 @@ class Params
     {
         attr[] = {"server"};
         title = $STR_A3A_Params_unlockedUnlimitedAmmo_title;
+        values[] = {1,0};
+        texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
+        default = 0;
+    };
+    class allowUnguidedLaunchers
+    {
+        attr[] = {"server"};
+        title = $STR_A3A_Params_allowUnguidedLaunchers_title;
         values[] = {1,0};
         texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
         default = 0;

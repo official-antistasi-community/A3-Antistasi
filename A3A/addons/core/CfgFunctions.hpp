@@ -6,10 +6,13 @@ class CfgFunctions
         class AI {
             file = QPATHTOFOLDER(functions\AI);
             class AIdrag {};
+            class AIfollow {};
             class airbomb {};
             class AIreactOnKill {};
             class artySupport {};
             class artySupportFire {};
+            class artySupportFireOld {};
+            class artySupportMarkers {};
             class askHelp {};
             class assaultBuilding {};
             class attackDrillAI {};
@@ -145,11 +148,13 @@ class CfgFunctions
             class getAggroLevelString {};
             class getMarkerForPos {};
             class getRecentDamage {};
+            class getRoleCap {};
             class getVehiclesAirSupport {};
             class getVehicleSellPrice {};
             class getVehiclesGroundSupport {};
             class getVehiclesGroundTransport {};
             class hasWeapons {};
+            class hideCorpses {};
             class HQGarbageClean {};
             class vehicleBoxRestore {};
             class initPetros {};
@@ -159,6 +164,7 @@ class CfgFunctions
             class localizar {};
             class lockStatic {};
             class logPerformance {};
+            class manageFlagAccess {};
             class markerChange {};
             class moveHQ {};
             class mrkUpdate {};
@@ -174,7 +180,6 @@ class CfgFunctions
             class playableUnits {};
             class postmortem {};
             class postmortemLoop {};
-            class radioCheck {};
             class rebuildAssets {};
             class rebuildRadioTower {};
             class relocateHQObjects {};
@@ -185,7 +190,6 @@ class CfgFunctions
             class revealToPlayer {};
             class scheduler {};
             class sellVehicle {};
-            class setCityTaskDelay {};
             class setMarkerAlphaForSide {};
             class setPlaneLoadout {};
             class singlePlayerBlackScreenWarning {};
@@ -208,6 +212,8 @@ class CfgFunctions
             class buildingComplete {};
             class buildingPlacer {};
             class buildingPlacerStart {};
+            class calcBuildingCosts {};
+            class calcBuildingReveal {};
             class initBuildableObjects {};
             class initBuilderMonitors {};
             class initPlacerDB {};
@@ -294,7 +300,6 @@ class CfgFunctions
             class loadPreviousSession {};
             class mapInfoDialog {};
             class mineDialog {};
-            class persistentSave {};
             class skiptime {};
             class squadOptions {};
             class squadRecruit {};
@@ -306,6 +311,7 @@ class CfgFunctions
             class addArtilleryFiredEH {};
             class addVehAttachDetachEH {};
             class addVehGetInOutEH {};
+            class buildingChangedEH {};
             class combatModeChangedEH {};
             class enemyUnitDeletedEH {};
             class enemyUnitKilledEH {};
@@ -319,6 +325,7 @@ class CfgFunctions
             class garrisonLocal_addGroup {};
             class garrisonLocal_addVehicle {};
             class garrisonLocal_addVehicleType {};
+            class garrisonLocal_cityReinf {};
             class garrisonLocal_changeSide {};
             class garrisonLocal_clear {};
             class garrisonLocal_despawn {};
@@ -354,6 +361,7 @@ class CfgFunctions
             class garrisonServer_addUnitType {};
             class garrisonServer_addVehicle {};
             class garrisonServer_addVehicleType {};
+            class garrisonServer_cityReinf {};
             class garrisonServer_changeSide {};
             class garrisonServer_cleanup {};
             class garrisonServer_clear {};
@@ -367,6 +375,7 @@ class CfgFunctions
             class garrisonServer_spawn {};
             class garrisonServer_updateVehData {};
             class getSiteTroopQuality {};
+            class rebelVehPlacedWorker {};
             class selectGarrisonVehicleType {};
             class showSiteInfo {};
         };
@@ -420,6 +429,7 @@ class CfgFunctions
             class searchIntelOnLeader {};
             class selectIntel {};
             class showIntel {};
+            class updateIntelFeed {};
         };
 
         class keybinds {
@@ -675,6 +685,7 @@ class CfgFunctions
             class calculateSupportCallReveal {};
             class clearTargetArea {};
             class createSupport {};
+            class findArtilleryPos {};
             class getArtilleryRanges {};
             class getMortarMags {};
             class initSupports {};
