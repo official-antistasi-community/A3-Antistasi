@@ -39,11 +39,11 @@
 ["vehiclesPlanesCAS", ["rhsgref_cdf_su25"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesAA", ["rhssaf_airforce_l_18_101"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["USAF_C130J"]] call _fnc_saveToTemplate;
-["vehiclesAirPatrol", ["CRO_HeliTransport_UH60M_MEV_W"]] call _fnc_saveToTemplate;
+["vehiclesAirPatrol", ["CRO_HeliTransport_UH60M_M134_W"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["CRO_Heli_Mi8MTV1"]] call _fnc_saveToTemplate;
-["vehiclesHelisTransport", ["CRO_HeliTransport_UH60M_M134_W", "CRO_HeliTransport_UH60M_ESSS_W", "CRO_HeliTransport_UH60M_W", "CRO_Heli_Mi171Sh"]] call _fnc_saveToTemplate;
-["vehiclesHelisLightAttack", ["CRO_Heli_Mi171Sh_S8"]] call _fnc_saveToTemplate; 
+["vehiclesHelisTransport", ["CRO_HeliTransport_UH60M_M134_W", "CRO_HeliTransport_UH60M_W", "CRO_HeliTransport_UH60M_W", "CRO_Heli_Mi171Sh", "CRO_Heli_Mi171Sh", "CRO_Heli_Mi8MTV1"]] call _fnc_saveToTemplate;
+["vehiclesHelisLightAttack", ["CRO_Heli_Mi171Sh_S8", "CRO_Heli_Mi171Sh_S8", "CRO_HeliTransport_UH60M_ESSS_W"]] call _fnc_saveToTemplate; 
 ["vehiclesHelisAttack", ["rhsgref_cdf_Mi24D"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["CRO_SPH_2S1_W"]] call _fnc_saveToTemplate;        
@@ -328,7 +328,7 @@ _militiaLoadoutData set ["carbines", [
 ["CRO_arifle_AKS", "", "", "", ["rhssaf_30Rnd_762x39mm_M67", "rhssaf_30Rnd_762x39mm_M78_tracer"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
-["rhs_weap_akm_gp25", "", "", "", ["rhssaf_30Rnd_762x39mm_M67", "rhssaf_30Rnd_762x39mm_M78_tracer"], ["rhs_VG40SZ", "rhs_VG40TB", "rhs_VOG25", "rhs_VG40OP_white"], ""]
+["rhs_weap_akm_gp25", "", "", "", ["rhssaf_30Rnd_762x39mm_M67", "rhssaf_30Rnd_762x39mm_M78_tracer"], ["rhs_VOG25", "rhs_VOG25", "rhs_VG40TB", "rhs_VG40OP_white"], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [
 ["CRO_smg_MP5", "", "", "", [], [], ""]
