@@ -38,6 +38,7 @@ class CfgMissions
         A3A_Mission(gm_weferlingen_winter)
         A3A_Mission(isladuala3)
         A3A_Mission(Kunduz)
+        A3A_Mission(lingor3)
         A3A_Mission(Malden)
         A3A_Mission(mehland)
         A3A_Mission(Napf)
