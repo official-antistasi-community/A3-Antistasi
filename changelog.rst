@@ -27,7 +27,6 @@ Version 3.10.0
     - Changed number of starting RPGs and added a setting to block unlocking unguided AT
    * :issue:`3693` Antistasi maps and information can be accessed directly from the main menu
 
-
 .. admonition:: Minor
    
    * :issue:`3564` Optimized config sorting to improve game start time
@@ -73,7 +72,6 @@ Version 3.10.0
    * :issue:`3730` Added extra options for the weapon unlock number setting
    * :issue:`3739` Air QRF and attack vehicles face the direction of travel when they spawn in 
    * :issue:`3741` Increased the traverse arc of the vanilla static Titan launchers
-   
 
 .. admonition:: Template updates
 
@@ -95,12 +93,10 @@ Version 3.10.0
    * :issue:`3708` Added hand flares to RHS and 3CB rebel factions
    * :issue:`3735` Changed the intel items on IFA and EAW
    
-   
 .. admonition:: Terrain updates
 
    * :issue:`3726` Added support for the Interiors for CUP mod on Chernarus and Napf
    
-
 .. admonition:: Bugfixes
 
    * :issue:`3609` Fixed the helis in the Destroy Heli mission spawning at inconsistent rates
@@ -124,25 +120,21 @@ Version 3.10.0
    * :issue:`3733` Fixed multiple bugs with the gun shop mission
    * :issue:`3738` Fixed some helis not taking off after a combat landing
    * :issue:`3742` Fixed a bug where certain modded vehicles with attachments would cause errors
-   
 
 .. admonition:: Groundwork
 
    * :issue:`3667` Added a new mission framework to allow for additional missions to be created
    * :issue:`3699` Default spawn distance can be set per-map in mapInfo.hpp
 
-
 .. admonition:: Localization
 
    * [No PRs] - Unfortunately no updates due to pipeline issues.
-   
 
 .. admonition:: Refactor
 
    * :issue:`3667` City/HR rework: City Supplies task is moved to the new framework and should be more reliable
    * :issue:`3685` Radio tower and building destruction rework; radio towers should behave more reliably now
    * :issue:`3695` Updated internal translation array for mod names
-
 
 .. warning::
 
