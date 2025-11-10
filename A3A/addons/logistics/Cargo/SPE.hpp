@@ -34,6 +34,7 @@ class WW2_SPE_Assets_m_Vehicles_StaticWeapons_m_SPE_MG42_Lafette_High_p3d : TRIP
     size = 2;
     recoil = 150;
 	isWeapon = 1;
+    weaponType = TYPE_MG;
 };
 class WW2_SPE_Assets_m_Vehicles_StaticWeapons_m_SPE_MG34_Lafette_High_p3d : TRIPLES(ADDON,Cargo,Base)
 {
@@ -42,6 +43,7 @@ class WW2_SPE_Assets_m_Vehicles_StaticWeapons_m_SPE_MG34_Lafette_High_p3d : TRIP
     size = 2;
     recoil = 150;
 	isWeapon = 1;
+    weaponType = TYPE_MG;
 };
 //AA
 //Flak 30/38 same Model
@@ -52,6 +54,7 @@ class WW2_SPE_Assets_m_Vehicles_StaticWeapons_m_SPE_Flak_38_p3d : TRIPLES(ADDON,
     size = 4;
     recoil = 1500;
 	isWeapon = 1;
+    weaponType = TYPE_AA;
 };
 class WW2_SPE_Assets_m_Vehicles_StaticWeapons_m_SPE_M45_p3d : TRIPLES(ADDON,Cargo,Base)
 {
@@ -60,6 +63,7 @@ class WW2_SPE_Assets_m_Vehicles_StaticWeapons_m_SPE_M45_p3d : TRIPLES(ADDON,Carg
     size = 4;
     recoil = 250;
 	isWeapon = 1;
+    weaponType = TYPE_AA;
 };
 //Mortars
 class WW2_SPE_Assets_m_Weapons_Mortars_m_SPE_M1_Mortar_p3d : TRIPLES(ADDON,Cargo,Base)
@@ -69,6 +73,8 @@ class WW2_SPE_Assets_m_Weapons_Mortars_m_SPE_M1_Mortar_p3d : TRIPLES(ADDON,Cargo
     size = 2;
     recoil = 2000;
 	isWeapon = 1;
+    weaponType = TYPE_MORTAR;
+    disallowOnBoat = 1;
 };
 class WW2_SPE_Assets_m_Weapons_Mortars_m_SPE_Brandt_81mm_p3d : TRIPLES(ADDON,Cargo,Base)
 {
@@ -77,6 +83,8 @@ class WW2_SPE_Assets_m_Weapons_Mortars_m_SPE_Brandt_81mm_p3d : TRIPLES(ADDON,Car
     size = 2;
     recoil = 2000;
 	isWeapon = 1;
+    weaponType = TYPE_MORTAR;
+    disallowOnBoat = 1;
 };
 // Fuel Barrels
 class WW2_SPE_Structures_Military_Supplies_SPE_Fuel_Barrel_US_p3d : TRIPLES(ADDON,Cargo,Base)
