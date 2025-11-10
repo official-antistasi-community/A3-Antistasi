@@ -25,8 +25,8 @@ class CfgFunctions {
             class city_repair_p {};
           
             class CON_broadcast_p {};
-            class LOG_equipDrop {};
-            class LOG_supplies {};
+            class LOG_equipDrop_p {};
+            class LOG_supplies_p {};
             class SUPP_occReporter_p {};
             class SUPP_rebReporter_p {};
         };

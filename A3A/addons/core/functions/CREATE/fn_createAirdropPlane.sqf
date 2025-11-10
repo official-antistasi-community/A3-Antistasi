@@ -5,7 +5,7 @@ params ["_targPos", ["_side", Occupants], ["_flightAlt", 0], ["_spawnPos", []] ,
 
 _sideHM = Faction(_side);
 
-if (_planeClass isEqualTo "") then {
+if (_planeType isEqualTo "") then {
     // Use a transport plane if possible
     _planeType = selectRandom (_sideHM get "vehiclesPlanesTransport");
     if (isNil "_planeType") then { _planeType = selectRandom (_sideHM get "vehiclesHelisTransport") };
@@ -18,7 +18,7 @@ private _dropPos = _targPos vectorAdd (wind vectorMultiply -_flightAlt / 10);
 
 if (_spawnPos isEqualTo []) then {
     private _airport = [Occupants, _dropPos] call A3A_fnc_availableBasesAir;
-    private _spawnPos = if (isNil "_airport") then { 
+    _spawnPos = if (isNil "_airport") then { 
         Error("No airport found for supply drop");
         _dropPos getPos [5000, random 360];
     } else {

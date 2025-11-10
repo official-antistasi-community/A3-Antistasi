@@ -8,48 +8,51 @@ private _fnc_createTask = {
 	private _holdTime = ((_this get "_difficulty") * 3) + 2;
 
 	private _taskName = "Disrupt Broadcast";
-	private _taskDesc = format ["
-    %1 has currently shut down all non-state media sources in a massive media blackout to run an informational broadcast on the crimes of %2 forces. Several engineers are broadcasting from a radio tower at %3. We need a team to get there, take down the broadcast, reactivate it within %4 seconds before people leave to show our own footage, and hold the area until the %5 minute broadcast completes. We need to move before their broadcast completes at %6.
-    
-    ", FactionGet(occ,"name"), FactionGet(reb,"name"), _nameDest, _convertTime, _holdTime, _displayTime];
-	private _taskPos = markerPos (_this get "_marker");
+	private _taskDesc = format ["%1 has currently shut down all non-state media sources in a massive media blackout to run an informational broadcast on the crimes of %2 forces. Several engineers are broadcasting from a radio tower at %3. We need a team to get there, take down the broadcast, reactivate it within %4 seconds before people leave to show our own footage, and hold the area until the %5 minute broadcast completes. We need to move before their broadcast completes at %6.", FactionGet(occ,"name"), FactionGet(reb,"name"), _nameDest, _convertTime, _holdTime, _displayTime];
+	private _taskPos = getPosATL (_this get "_radioTower");
 	private _taskId = call FUNC(genTaskUID);
 	[true, _taskId, [_taskDesc,_taskName], _taskPos, false, -1, true, "Upload", true] call BIS_fnc_taskCreate;
 	_this set ["_taskId", _taskId];
 };
 private _fnc_spawnHackableObject = {
-    params ["_pos"];
-    private _laptopType = _faction get "placeIntel_itemLarge";
+    private _startPos = getPos (_this get "_radioTower");
+    private _techie = _this get "_technician";
+    private _pos = _startPos findEmptyPosition [3, 15, (_faction get "placeIntel_desk")#0];
+    private _laptopType = (_faction get "placeIntel_itemLarge")#0;
     private _laptop = objNull;
     if (_laptopType isEqualTo "Land_Laptop_unfolded_F") then {
         (_faction get "placeIntel_desk") params ["_classname_desk","_azimuth"];
         private _desk = createVehicle [_classname_desk, [0, 0, 0], [], 0, "CAN_COLLIDE"];
-        _desk setDir (getDir _building + _azimuth);
+        _desk setDir _azimuth;
         _desk setPosATL _pos;
-        _desk setVelocity [0, 0, -1];
-
-        sleep 5;
         _desk enableSimulation false;
+
+        sleep 1;
         _laptop = createVehicle [_laptopType, [0,0,0], [], 0, "CAN_COLLIDE"];
         [_desk, _laptop, [0.5, 0, 0.82], _azimuth] call BIS_fnc_relPosObject;
+        private _anim = "Acts_Accessing_Computer_Loop";
+        [_laptop, _techie, [0, 0.650, -0.82], _azimuth + 180] call BIS_fnc_relPosObject;
+        [_techie, _anim] remoteExec ["switchMove"];
     } else {
         // use a base game antenna
-        _laptopType = "C_Offroad_01_F";
+        _laptopType = "OmniDirectionalAntenna_01_black_F";
         _laptop = createVehicle [_laptopType, _pos, [], 0, "CAN_COLLIDE"];
     };
     _laptop enableSimulation false;
     _laptop allowDamage false;
-    _laptop setVariable ["_taskID",_taskID,_laptop];
+    private _id = _this get "_taskId";
+    diag_log ["_id: %1", _id];
+    _laptop setVariable ["_taskID",_id,true];
     [
         _laptop,														        // Object the action is attached to
         "Upload Broadcast",													    // Title of the action
         "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_unloaddevice_ca.paa",    // Idle icon shown on screen
         "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_unloaddevice_ca.paa",	// Progress icon shown on screen
-        "(!(missionNamespace getVariable [[(_target#0 getVariable '_taskID'),'UploadComplete'] joinString '',false]) && {_this distance _target < 3});",									        // Condition for the action to be shown
+        "(!(missionNamespace getVariable [[(_target getVariable '_taskID'),'UploadComplete'] joinString '',false]) && {_this distance _target < 3});",									        // Condition for the action to be shown
         "_caller distance _target < 3",									        // Condition for the action to progress
         {},																        // Code executed when action starts
         {},																        // Code executed on every progress tick
-        {missionNamespace setVariable [[(_this#0 getVariable "_taskID"),"UploadComplete"] joinString "",true,true];},							                                            // Code executed on completion
+        {missionNamespace setVariable [[(_this#0 getVariable "_taskID"),"UploadComplete"] joinString "",true,true];}, // Code executed on completion
         {},																        // Code executed on interrupted
         [],																        // Arguments passed to the scripts as _this select 3
         10,																        // Action duration in seconds
@@ -63,38 +66,37 @@ params ["_params", "_checkpoint"];
 
 private _task = createHashMap;
 
-_params params ["_radioTower"];
-_marker =  [markersX,_radioTower] call BIS_fnc_nearestPosition;
+_params params ["_marker", "_radioTower"];
 
 // Determine end time and description
 private _difficulty = [1, 2] select (random 10 < tierWar);
 
-// anything to construct should go here
-private _faction = Faction(Occupants);
-private _rtPos = getPos _radioTower;
-private _technician = [_rtPos, Occupants, [_faction get "unitGrunt"]] call A3A_fnc_spawnGroup;
-_technician call A3A_fnc_NATOinit;
-private _deskPos = [_rtPos, 2, random 360] call BIS_fnc_relPos;
-[_deskPos] call _fnc_spawnHackableObject;
-//spawning guard inf
-_guard = [[_rtPos,10,random 360], Occupants, _faction get "groupsMedium"] call A3A_fnc_spawnGroup;
-{[_x] call A3A_fnc_NATOinit} forEach units _guard;
-
-//tell guard group to guard desk
-_guardWP = [_guard, _deskPos, 10] call BIS_fnc_taskPatrol;
-private _laptopAnim = "";
-_technician switchMove [_laptopAnim];
-_tasl set ["_radioTower", _radioTower];
-_task set ["_technician", _technician];
 _task set ["_marker", _marker];
 _task set ["_difficulty", _difficulty];
 _task set ["_endTime", time + 60 * (30 + 30*_difficulty)];
+_task set ["_radioTower", _radioTower];
 _task call _fnc_createTask;
 
 _task set ["state", "s_waitForBroadcastDown"];
 _task set ["interval", 1];
 
 _task set ["_hintTitle", "Broadcast"];
+
+// anything to construct should go here
+private _faction = Faction(Occupants);
+private _rtPos = getPos _radioTower;
+private _technicianGroup = [_rtPos, Occupants, [_faction get "unitGrunt"]] call A3A_fnc_spawnGroup;
+private _technician = units _technicianGroup#0;
+_task set ["_technician", _technician];
+[_technician] call A3A_fnc_NATOinit;
+_technician removeWeaponGlobal (primaryWeapon _technician);
+_task call _fnc_spawnHackableObject;
+//spawning guard inf
+_guard = [[_rtPos,10,random 360] call BIS_fnc_relPos, Occupants, selectRandom (_faction get "groupsMedium")] call A3A_fnc_spawnGroup;
+{[_x] call A3A_fnc_NATOinit} forEach units _guard;
+
+//tell guard group to guard desk
+_guardWP = [_guard, _deskPos, 20] call BIS_fnc_taskPatrol;
 
 
 /////////////////////
@@ -105,7 +107,7 @@ _task set ["s_waitForBroadcastDown",
 {
 	if (_this get "_endTime" < time) exitWith { _this set ["state", "s_failed"]; false };
 
-	if (animationState (_this get "_technician") isNotEqualTo (toLower _laptopAnim)) exitWith {
+	if (animationState (_this get "_technician") isNotEqualTo ("acts_accessing_computer_loop")) exitWith {
         // Condition fulfilled, run any extra code
         _this set ["_countdownBroadcastDown", 240 / (_this get "_difficulty")];			// maybe shouldn't reset?
 
@@ -130,7 +132,7 @@ _task set ["s_broadcastDown",
 {
 	if (_this get "_endTime" < time) exitWith { _this set ["state", "s_failed"]; false };
 
-	if !(missionNamespace getVariable [[(_target#0 getVariable '_taskID'),'UploadComplete'] joinString '',false]) exitWith {
+	if !(missionNamespace getVariable [[(_this getVariable '_taskID'),'UploadComplete'] joinString '',false]) exitWith {
         _this set ["state", "s_holdingBroadcast"];
         _this set ["_countdownHoldingBroadcast", ((_this get "_difficulty") * 3) + 2];
         private _rtPos = getPos (_this get "_radioTower");
@@ -162,7 +164,7 @@ _task set ["s_holdingBroadcast",
 	if (_this get "_endTime" < time) exitWith { _this set ["state", "s_failed"]; false };
     private _destroyer = _this get "_destroyer";
     private _rtPos = getPos (_this get "_radioTower");
-    private _taskID = _this get "_taskID";
+    private _taskID = _this get "_taskId";
     if (isNull _destroyer || {!(_destroyer call A3A_fnc_canFight)}) then {
         private _nearEnemies = (units Occupants) inAreaArray [_rtPos, 30, 30];
         private _closest = [objNull, 50];
@@ -187,7 +189,7 @@ _task set ["s_holdingBroadcast",
         [_this get "_hintTitle", "Enemies have reached and disrupted the broadcast.", _this get "_marker", 300] call FUNC(hintNear);
 		_this set ["state", "s_failed"];	
         false;
-    }
+    };
 
     private _timeDiff = time - (_this get "lastUpdate");
 	private _countdown = (_this get "_countdownHoldingBroadcast") - _timeDiff;

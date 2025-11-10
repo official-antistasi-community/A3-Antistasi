@@ -3,14 +3,15 @@ FIX_LINE_NUMBERS()
 
 
 private _fnc_createTask = {
-	private _side = FactionGet((_this get "_side"), "name");
+    private _side = (_this get "_side");
+    private _faction = Faction(_side);
+    private _nameSide = _faction get "name";
 	private _displayTime = [(_this get "_pickupTime") - time] call FUNC(minutesFromNow);
 
 	private _taskName = "Equipment Drop";
-	private _taskDesc = format ["
-    %1 logistics forces are running a resupply paradrop for the special forces units on the frontline. If we're able to intercept the drop, it could garner us some valuable resources. We've seen standard units in position to secure the drop. Get to the drop zone, kill the escort, and get the supply drop before the %1 SF show up. The drop is expected to come over at around %2.
-    ", _side, _displayTime];
-	private _taskPos = [(markerPos (_this get "_dropPos")), random 250 + 20, random 360] call BIS_fnc_relPos;
+	private _taskDesc = format ["%1 logistics forces are running a resupply paradrop for the special forces units on the frontline. If we're able to intercept the drop, it could garner us some valuable resources. We've seen standard units in position to secure the drop. Get to the drop zone, kill the escort, and get the supply drop before the %1 SF show up. The drop is expected to come over at around %2.", _nameSide, _displayTime];
+    private _dropPos = (_this get "_dropPos");
+	private _taskPos = [_dropPos, random 250 + 20, random 360] call BIS_fnc_relPos;
 	private _taskId = call FUNC(genTaskUID);
 	[true, _taskId, [_taskDesc,_taskName], _taskPos, false, -1, true, "Airdrop", true] call BIS_fnc_taskCreate;
 	_this set ["_taskId", _taskId];
@@ -21,39 +22,44 @@ params ["_params", "_checkpoint"];
 
 private _task = createHashMap;
 
-_params params ["_dropPos"];
+_params params ["_dropPos", "_side"];
+diag_log format ["params %1", _params];
+if (_side isEqualTo teamPlayer) then {_side = Occupants};
 
 // Determine end time and description
 private _difficulty = [1, 2] select (random 10 < tierWar);
-private _dropPos = [0,0,0];
 
+_task set ["_side", _side];
 _task set ["_dropPos", _dropPos];
 _task set ["_difficulty", _difficulty];
 _task set ["_pickupTime", time + 60 * (6 + random 6)];
+_task set ["_endTime", time + 60 * 60];
+diag_log (_task get "_dropPos");
 _task call _fnc_createTask;
 
 _task set ["state", "s_waitForPlaneSpawn"];
 _task set ["interval", 1];
 
 _task set ["_hintTitle", "Equipment Drop"];
-private _vehPool = FactionGet((_this get "_side"),"vehiclesLightArmed");
-private _fallback = FactionGet((_this get "_side"),"vehiclesLightArmed");
+private _faction = Faction(_side);
+private _vehPool = _faction get "vehiclesLightArmed";
+private _fallback = _faction get "vehiclesLightUnarmed";
 if (_vehPool isEqualTo []) then {_vehPool append _fallback};
 private _vehClass = if !(_vehPool isEqualTo []) then {
     _vehPool#0; // TODO: replace with vehiclesAirborneLight
 } else { "" };
 _task set ["_vehClass", _vehClass];
-_task set ["_crateClass", FactionGet((_this get "_side"),"ammobox")];
+_task set ["_crateClass", _faction get "ammobox"];
 
 //spawning guard inf
-_guard = [[_dropPos,50,random 360], (_this get "_side"), selectRandom (_faction get "groupsSquads")] call A3A_fnc_spawnGroup;
+_guard = [[_dropPos,50,random 360] call BIS_fnc_relPos, _side, selectRandom (_faction get "groupsSquads")] call A3A_fnc_spawnGroup;
 {[_x] call A3A_fnc_NATOinit} forEach units _guard;
-_this set ["_guard",_guard];
+_task set ["_guard",_guard];
 // spawning sf
-_sf = [[_dropPos,300,random 360], (_this get "_side"), selectRandom (_faction get "groupsSquads")] call A3A_fnc_spawnGroup;
+_sf = [[_dropPos,300,random 360] call BIS_fnc_relPos, _side, _faction get "groupSpecOps"] call A3A_fnc_spawnGroup;
 {[_x] call A3A_fnc_NATOinit} forEach units _sf;
-_this set ["_sf", _sf];
-_this set ["_holdUntilPlayers", random 1 < 0.5];
+_task set ["_sf", _sf];
+_task set ["_holdUntilPlayers", random 1 < 0.5];
 
 /////////////////////
 // State functions //
@@ -63,7 +69,7 @@ _task set ["s_waitForPlaneSpawn",
 {
 	if (_this get "_endTime" < time) exitWith { _this set ["state", "s_failed"]; false };
 
-	if (_this get "_pickupTime" < time) exitWith {false};
+	if (_this get "_pickupTime" > time) exitWith {false};
 
 	// Condition fulfilled, run any extra code
 	_this set ["state", "s_waitForDrop"];
@@ -79,16 +85,16 @@ _task set ["s_waitForDrop",
 	if (_this get "_endTime" < time) exitWith { _this set ["state", "s_failed"]; false };
     private _plane = _this get "_plane";
     if ((!alive _plane) || (!canMove _plane)) exitWith { _this set ["state", "s_failed"]; false };
-    if (currentWaypoint _plane isEqualTo 0) exitWith {false};
+    if (currentWaypoint (group driver _plane) isEqualTo 0) exitWith {false};
     _this set ["state", "s_waitForLanding"];
     _this spawn {
-        _plane = _this get ["_plane"];
-        _vehClass = _this get ["_vehClass"];
-        _crateType = _this get ["_crateClass"];
+        _plane = _this get "_plane";
+        _vehClass = _this get "_vehClass";
+        _crateType = _this get "_crateClass";
         {
             private _lastDroppedPos = getPosATL _plane;
     
-           [_plane,_x#0,_x#1, _x#2 _this] spawn {
+           [_plane,_x#0,_x#1, _x#2, _this] spawn {
                 private _fnc_cleanup = {
                     deleteVehicle ((_obj) getVariable ["A3A_smoke", objNull]);
                 };
