@@ -1292,6 +1292,48 @@ class Templates
         shortName = "HIL";
         lore = $STR_A3A_templates_lore_CUP_AI_HIL;
     };
+    class CUP_AAF : CUP_Base
+    {
+        side = "Occ";
+        flagTexture = "a3\data_f\flags\flag_aaf_co.paa";
+        name = "CUP AAF";
+        file = "CUP_AI_AAF";
+        maps[] = {"altis"};
+        climate[] = {};
+        shortName = "AAF";
+        lore = $STR_A3A_templates_lore_AAF;
+    };
+    class CUP_CSAT : CUP_Base
+    {
+        side = "Inv";
+        flagTexture = "A3\Data_F\Flags\Flag_CSAT_CO.paa";
+        name = "CUP CSAT";
+        file = "CUP_AI_CSAT";
+        climate[] = {};
+        shortName = "CSAT";
+        lore = $STR_A3A_templates_lore_CSAT;
+    };
+    class CUP_NATO : CUP_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3\Data_F\Flags\Flag_NATO_CO.paa";
+        name = "CUP NATO";
+        file = "CUP_AI_NATO";
+        climate[] = {};
+        shortName = "NATO";
+        lore = $STR_A3A_templates_lore_NATO;
+    };
+    class CUP_VDV_Temperate : CUP_Base
+    {
+        side = "Inv"; 
+        flagTexture = "\CUP\BaseConfigs\CUP_BaseConfigs\data\Flags\flag_rus_co.paa"; 
+        name = "CUP VDV Temperate"; 
+        file = "CUP_AI_VDV_Temperate"; 
+        climate[] = {"temperate"};
+        shortName = "VDV";
+        lore = $STR_A3A_templates_lore_VDV;
+    };
+
     class CUP_TKM : CUP_Base
     {
         side = "Reb";
