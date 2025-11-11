@@ -39,6 +39,7 @@ addons[]=
 	"A3_Props_F_Enoch_Military_Camps",
 	"A3_Structures_F_EPC_Civ_InfoBoards",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Modules_F_Curator_Curator",
 	"A3_Modules_F_Hc",
 	"A3_Structures_F_Mil_BagBunker",
@@ -66,7 +67,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=18;
+		items=19;
 		class Item0
 		{
 			className="A3_Ui_F";
@@ -180,6 +181,12 @@ class AddonsMetaData
 		{
 			className="CUP_CAMisc";
 			name="CUP_CAMisc";
+		};
+		class Item18
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };

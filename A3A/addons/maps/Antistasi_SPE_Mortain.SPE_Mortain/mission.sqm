@@ -36,6 +36,7 @@ addons[]=
 	"WW2_SPE_Core_c_EditorPreviews_c",
 	"WW2_SPE_Assets_c_Vehicles_SimpleObjects_c",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Ui_F",
 	"WW2_SPE_Core_c_UI_Gui_c",
 	"WW2_SPE_Assets_c_Vehicles_Planes_c_FW190F8",
@@ -59,7 +60,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=20;
+		items=21;
 		class Item0
 		{
 			className="A3_Structures_F_Ind";
@@ -181,6 +182,12 @@ class AddonsMetaData
 		{
 			className="WW2_SPE_Structures2_c";
 			name="WW2_SPE_Structures2_c";
+		};
+		class Item20
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };

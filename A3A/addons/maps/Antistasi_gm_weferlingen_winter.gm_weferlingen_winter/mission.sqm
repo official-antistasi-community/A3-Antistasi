@@ -31,6 +31,7 @@ sourceName="Antistasi-Weferlingen";
 addons[]=
 {
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Ui_F",
 	"A3_Structures_F_Enoch_Decals_Horizontal",
 	"A3_Structures_F_Enoch_Infrastructure_Railways",
@@ -57,7 +58,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=18;
+		items=19;
 		class Item0
 		{
 			className="A3_Modules_F";
@@ -183,6 +184,12 @@ class AddonsMetaData
 			name="Arma 3 Contact Platform - Civilian Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
+		};
+		class Item18
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };

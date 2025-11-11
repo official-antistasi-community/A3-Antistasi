@@ -33,6 +33,7 @@ addons[]=
 	"A3_Structures_F_Wrecks",
 	"A3_Structures_F_Enoch_Wrecks",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Mil_Cargo",
 	"CUP_Misc3_Config",
 	"A3_Signs_F",
@@ -88,7 +89,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=31;
+		items=32;
 		class Item0
 		{
 			className="A3_Structures_F_Wrecks";
@@ -287,6 +288,12 @@ class AddonsMetaData
 		{
 			className="CUP_Editor_A2_Roads_Config";
 			name="CUP_Editor_A2_Roads_Config";
+		};
+		class Item31
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };

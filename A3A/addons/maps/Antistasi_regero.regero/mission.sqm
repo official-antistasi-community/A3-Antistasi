@@ -36,6 +36,7 @@ addons[]=
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Structures_F_Mil_TentHangar",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Ui_F",
 	"CUP_Buildings_Config",
 	"A3_Structures_F_Mil_Fortification",
@@ -95,7 +96,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=26;
+		items=27;
 		class Item0
 		{
 			className="A3_Structures_F_Ind";
@@ -273,6 +274,12 @@ class AddonsMetaData
 			name="Arma 3 Zeus Update - Scripted Modules";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
+		};
+		class Item26
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };
