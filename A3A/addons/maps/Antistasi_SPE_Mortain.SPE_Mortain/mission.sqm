@@ -60,7 +60,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=20;
+		items=21;
 		class Item0
 		{
 			className="A3_Structures_F_Ind";
@@ -182,6 +182,12 @@ class AddonsMetaData
 		{
 			className="WW2_SPE_Structures2_c";
 			name="WW2_SPE_Structures2_c";
+		};
+		class Item20
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };

@@ -131,7 +131,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=64;
+		items=65;
 		class Item0
 		{
 			className="A3_Structures_F";
@@ -500,6 +500,12 @@ class AddonsMetaData
 		{
 			className="CUP_CAStructures_E_Ind_Ind_FuelStation";
 			name="CUP_CAStructures_E_Ind_Ind_FuelStation";
+		};
+		class Item64
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };
