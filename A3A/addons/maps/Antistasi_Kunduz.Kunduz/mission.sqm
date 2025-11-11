@@ -32,6 +32,7 @@ addons[]=
 {
 	"A3_Structures_F_Ind_Cargo",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Weapons_F_Ammoboxes",
 	"A3_Characters_F",
 	"A3_Structures_F_EPC_Civ_InfoBoards",

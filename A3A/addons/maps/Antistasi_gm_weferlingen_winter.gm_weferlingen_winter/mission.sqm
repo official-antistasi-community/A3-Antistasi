@@ -31,6 +31,7 @@ sourceName="Antistasi-Weferlingen";
 addons[]=
 {
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Ui_F",
 	"A3_Structures_F_Enoch_Decals_Horizontal",
 	"A3_Structures_F_Enoch_Infrastructure_Railways",

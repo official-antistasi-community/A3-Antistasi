@@ -37,6 +37,7 @@ addons[]=
 	"CUP_WarfareBuildings",
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Modules_F",
+	"A3A_core",
 	"CUP_Terrains_Winter_Objects",
 	"A3_Structures_F_Enoch_Civilian_Sheds",
 	"CUP_CAStructures_Mil",

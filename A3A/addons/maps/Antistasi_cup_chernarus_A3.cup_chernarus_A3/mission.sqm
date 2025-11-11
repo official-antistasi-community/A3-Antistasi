@@ -35,6 +35,7 @@ addons[]=
 	"A3_Structures_F_Exp_Military_Fortifications",
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Mil_Helipads",
 	"CUP_Misc3_Config",
 	"A3_Structures_F_Enoch_Civilian_Sheds",

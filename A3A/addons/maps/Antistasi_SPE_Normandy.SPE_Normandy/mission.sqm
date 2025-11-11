@@ -44,6 +44,7 @@ addons[]=
 	"A3_Structures_F_Exp_Walls_Polewalls",
 	"A3_Structures_F_Mil_TentHangar",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Civ_Market",
 	"A3_Props_F_Exp_Commercial_Market",
 	"A3_Structures_F_Enoch_Military_Bunkers",

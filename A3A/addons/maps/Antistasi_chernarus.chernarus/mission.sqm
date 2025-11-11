@@ -37,6 +37,7 @@ addons[]=
 	"A3_Structures_F_Mil_Helipads",
 	"CUP_Misc3_Config",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Enoch_Civilian_Sheds",
 	"CUP_CAStructures_Mil",
 	"CUP_CAMisc_ACR_Sign_Mines",

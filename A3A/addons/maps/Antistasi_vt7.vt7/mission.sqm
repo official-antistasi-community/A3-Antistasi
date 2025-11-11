@@ -32,6 +32,7 @@ addons[]=
 {
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Mil_TentHangar",
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Structures_F_Exp_Military_Fortifications",

@@ -33,6 +33,7 @@ addons[]=
 	"A3_Structures_F_Wrecks",
 	"A3_Structures_F_Enoch_Wrecks",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Mil_Cargo",
 	"CUP_Misc3_Config",
 	"A3_Signs_F",

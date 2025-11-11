@@ -36,6 +36,7 @@ addons[]=
 	"WW2_SPE_Core_c_EditorPreviews_c",
 	"WW2_SPE_Assets_c_Vehicles_SimpleObjects_c",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Ui_F",
 	"WW2_SPE_Core_c_UI_Gui_c",
 	"WW2_SPE_Assets_c_Vehicles_Planes_c_FW190F8",

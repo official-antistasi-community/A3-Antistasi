@@ -40,6 +40,7 @@ addons[]=
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Structures_F_Exp_Military_Fortifications",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Walls",
 	"A3_Structures_F_Mil_BagFence",
 	"CUP_Misc_e_Config",

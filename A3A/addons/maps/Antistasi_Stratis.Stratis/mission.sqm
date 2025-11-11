@@ -34,6 +34,7 @@ addons[]=
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Ui_F",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Structures_F_Ind_SolarPowerPlant",
 	"A3_Structures_F_Ind_Transmitter_Tower",

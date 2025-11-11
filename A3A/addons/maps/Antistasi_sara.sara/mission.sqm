@@ -43,6 +43,7 @@ addons[]=
 	"CUP_StandaloneTerrains_Core_Faction",
 	"A3_Structures_F_Exp_Commercial_Warehouses",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Ui_F",
 	"CUP_CAMisc",
 	"A3_Structures_F_EPA_Mil_Scrapyard",

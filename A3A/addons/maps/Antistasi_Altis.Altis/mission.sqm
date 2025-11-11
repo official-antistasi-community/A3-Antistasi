@@ -38,6 +38,7 @@ addons[]=
 	"A3_Structures_F_Ind_AirPort",
 	"A3_Structures_F_Exp_Infrastructure_Airports",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Mil_Fortification",
 	"A3_Structures_F_Walls",
 	"A3_Structures_F_Ind_Cargo",

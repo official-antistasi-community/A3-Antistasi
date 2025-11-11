@@ -33,6 +33,7 @@ addons[]=
 	"A3_Ui_F",
 	"structures_f_vietnam_c",
 	"A3_Modules_F",
+	"A3A_core",
 	"weapons_f_vietnam_c",
 	"A3_Characters_F",
 	"A3_Weapons_F",

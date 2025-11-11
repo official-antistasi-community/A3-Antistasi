@@ -44,6 +44,7 @@ addons[]=
 	"A3_Structures_F_Exp_Military_Fortifications",
 	"CUP_CAStructures_E_HouseC",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Ind_AirPort",
 	"A3_Structures_F_Mil_Barracks",
 	"A3_Structures_F_Tank_Military_Fortifications",

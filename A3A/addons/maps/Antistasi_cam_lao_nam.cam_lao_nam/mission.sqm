@@ -35,6 +35,7 @@ addons[]=
 	"A3_Weapons_F",
 	"modules_f_vietnam",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Modules_F_Curator_Curator",
 	"A3_Modules_F_Hc",
 	"A3_Structures_F_Exp_Military_Flags",
