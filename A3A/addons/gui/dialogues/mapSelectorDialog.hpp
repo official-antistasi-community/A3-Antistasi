@@ -39,7 +39,7 @@ class A3A_MapSelectorDialog
 
         class MapBoardView : A3A_ControlsGroupNoScrollbars
         {
-            idc = A3A_IDD_MAPSELECT_PICTUREMAPGROUP;
+            idc = A3A_IDC_MAPSELECT_PICTUREMAPGROUP;
 
             x = CENTER_X(41) + 2.5 * GRID_W;
             y = CENTER_Y(41) - 13 * GRID_H;
