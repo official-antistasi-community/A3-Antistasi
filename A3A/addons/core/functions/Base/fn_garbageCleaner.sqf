@@ -20,7 +20,8 @@ Debug("Moving dead solders out of vehicles...")
 Debug("Finished moving soldiers out of vehicles; executing garbage clean.")
 sleep 0.5;
 
-{ deleteVehicle _x } forEach allDead;
+{ deleteVehicle _x } forEach allDeadMen;
+{ deleteVehicle _x } forEach (vehicles select {!alive _x});				// allDead doesn't include 0-crew vehicles like the large fuel tank
 { deleteVehicle _x } forEach (allMissionObjects "WeaponHolder");
 { deleteVehicle _x } forEach (allMissionObjects "WeaponHolderSimulated");
 { if (isNull attachedTo _x) then { [_x, 500] call _fnc_distCheck } } forEach (allMissionObjects FactionGet(reb,"surrenderCrate"));// Surrender boxes
