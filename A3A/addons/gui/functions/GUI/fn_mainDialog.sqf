@@ -65,7 +65,7 @@ switch (_mode) do
         // Cache group info in map control
         Debug("Caching group info");
 
-        private _autoSwitchGroups = player getVariable ["autoSwitchGroups", []];
+        private _autoSwitchGroups = player getVariable ["autoSwitchGroups", [[], false]];
         private _doAutoSwitch = (_autoSwitchGroups#0) isNotEqualTo [];
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
         private _selHCGroups = if (_doAutoSwitch) then {

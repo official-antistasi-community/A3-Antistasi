@@ -124,7 +124,7 @@ if (isNil "_checkpoint") then {
 	_task set ["_endTime", time + 1800];
 
     private _numCiv = (A3A_cityData getVariable _marker) select 0;
-    _numCiv = 30 min (round sqrt _numCiv);
+    _numCiv = 30 min (3 + round sqrt _numCiv);
     _task set ["_numCiv", _numCiv];
 
     _task call _fnc_spawnLeader;
@@ -163,7 +163,7 @@ _task set ["s_spawnEnemies",
     // Create the enemy force
     // Not executed at init because it's fairly slow
     private _marker = _this get "_marker";
-    private _vehCount = round (1 + random 1 + 0.13 * sqrt (A3A_cityPop get _marker) + 1.2 * A3A_balancePlayerScale);
+    private _vehCount = round (0.7 + random 0.5 + 0.13 * sqrt (A3A_cityPop get _marker) + 1.3 * A3A_balancePlayerScale);
 
     private _airbase = [Occupants, markerPos _marker] call A3A_fnc_availableBasesAir;
 
@@ -205,7 +205,7 @@ _task set ["s_waitForStart",
     {
          // Set timers
         _this set ["_endTime", time + 1200];        // 20 minutes maximum to take the city
-        _this set ["_minLossTime", time + 300];     // 5 minutes minimum before checking for loss condition
+        _this set ["_minLossTime", time + 600];     // 10 minutes minimum before checking for loss condition
 
         // Set mission description to current state
         private _nameDest = [_marker] call A3A_fnc_localizar;
@@ -276,7 +276,7 @@ _task set ["s_battleStarted",
     private _civProp = ({_x call A3A_fnc_canFight} count _civilians) / count _civilians;
     private _enemyProp = ({_x call A3A_fnc_canFight} count _troops) / count _troops;
 
-    if ((time > _this get "_endTime" and _civProp >= 0.5) or _enemyProp < 0.25) exitWith {
+    if ((time > _this get "_endTime" and _civProp >= 0.5) or _enemyProp < 0.3) exitWith {
         private _taskDesc = format [localize "STR_A3A_Tasks_cityBattle_victoryDesc", _marker];
         [_this get "_taskId", [_taskDesc, _this get "_hintTitle", ""]] call BIS_fnc_taskSetDescription;
         _this set ["state", "s_victory"]; false;
@@ -334,8 +334,11 @@ _task set ["s_cleanup",
         {deleteGroup _x} forEach _civGroups;
     };
 
-    // Remove from active city battles (added on call)
-    A3A_activeCityBattles deleteAt (_this get "_marker");
+    // Remove from active city battles after 10min (added on call)
+    (_this get "_marker") spawn {
+        sleep 600;
+        A3A_activeCityBattles deleteAt _this;
+    };
 
 	(_this get "_taskId") spawn {
 		sleep 1200;

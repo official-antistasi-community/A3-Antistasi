@@ -11402,18 +11402,6 @@
         <Turkish>Karakol - Kontrol Noktası</Turkish>
         <Chinesesimp>观察哨 - 路障</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_commander_comm_roadblock_delete">
-        <Original>Outpost-Roadblock Delete</Original>
-        <Italian>Elimina Punto di osservazione - Posti di Blocco</Italian>
-        <Spanish>Borrar P. Observación - Bloqueo</Spanish>
-        <French>Suppression de Poste d'Obs. - Barrage routier</French>
-        <Korean>감시초소 - 검문소 제거</Korean>
-        <Russian>Удалить НП / БП</Russian>
-        <Polish>Usuń Stanowisko Obserwacyjne - Blokade Drogową</Polish>
-        <Czech>O.Post-Odstranit zátaras</Czech>
-        <Turkish>Karakol - Kontrol Noktası Kaldır</Turkish>
-        <Chinesesimp>拆除观察哨/路障</Chinesesimp>
-      </Key>
       <Key ID="STR_antistasi_dialogs_commander_comm_roadblock_delete_tooltip">
         <Original>Remove selected watchpost or roadblock, the money spent will be refunded</Original>
         <Italian>Rimuovi il posto di osservazione o il posto di blocco selezionato, i soldi verranno rimborsati</Italian>

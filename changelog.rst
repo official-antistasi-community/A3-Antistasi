@@ -3,6 +3,34 @@ Changelog
 ==========
 
 
+Version 3.10.1
+===============
+
+.. note::
+   11th November 2025
+
+.. admonition:: Minor
+
+   * :issue:`3750` Make city battles easier for solo players and reduce city battle quantity on some maps
+
+.. admonition:: Bugfixes
+
+   * :issue:`3748` Fixed a bug where some maps had missing dependencies and would fail to launch on some servers
+   * :issue:`3749` Fixed a typo in a localization entry for the Mehland map
+   * :issue:`3752` Fixed rebuildAssets eating money for live radio towers
+   * :issue:`3753` Re-added persistent save button to old UI (commander menu)
+   * :issue:`3756` Fixed a bug where you could not access the new UI from the old UI
+   * :issue:`3756` Fixed a few minor log spam errors with missing definitions
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
 Version 3.10.0
 ===============
 

@@ -44,6 +44,7 @@ addons[]=
 	"A3_Structures_F_Exp_Walls_Polewalls",
 	"A3_Structures_F_Mil_TentHangar",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Civ_Market",
 	"A3_Props_F_Exp_Commercial_Market",
 	"A3_Structures_F_Enoch_Military_Bunkers",
@@ -70,7 +71,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=26;
+		items=27;
 		class Item0
 		{
 			className="A3_Ui_F";
@@ -234,6 +235,12 @@ class AddonsMetaData
 			name="Arma 3 Contact Platform - Decorative and Mission Objects";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
+		};
+		class Item26
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };

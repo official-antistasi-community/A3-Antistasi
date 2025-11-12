@@ -32,6 +32,7 @@ addons[]=
 {
 	"A3_Structures_F_Ind_Cargo",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Weapons_F_Ammoboxes",
 	"A3_Characters_F",
 	"A3_Structures_F_EPC_Civ_InfoBoards",
@@ -74,7 +75,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=16;
+		items=17;
 		class Item0
 		{
 			className="A3_Structures_F_Ind";
@@ -186,6 +187,12 @@ class AddonsMetaData
 			name="Arma 3 Apex - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
+		};
+		class Item16
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };

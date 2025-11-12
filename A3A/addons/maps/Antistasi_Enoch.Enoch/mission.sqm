@@ -36,6 +36,7 @@ addons[]=
 	"A3_Ui_F",
 	"A3_Structures_F_Mil_Fortification",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Walls",
 	"A3_Structures_F_Enoch_Military_Barracks",
 	"A3_Structures_F_Enoch_Walls_Concrete",
@@ -74,7 +75,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=17;
+		items=18;
 		class Item0
 		{
 			className="A3_Structures_F_Mil";
@@ -193,6 +194,12 @@ class AddonsMetaData
 			name="Arma 3 Contact Platform - Commercial Buildings";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
+		};
+		class Item17
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };

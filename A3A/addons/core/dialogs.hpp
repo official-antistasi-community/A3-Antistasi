@@ -1807,13 +1807,12 @@ class commander_comm 		{
 		class 10slots_L4: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
-			text = $STR_antistasi_dialogs_commander_comm_roadblock_delete;
+			text = $STR_antistasi_dialogs_main_persistent_save_button;
 			x = 0.272481 * safezoneW + safezoneX;
 			y = 0.562025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			tooltip = $STR_antistasi_dialogs_commander_comm_roadblock_delete_tooltip;
-			action = "if (player == theBoss) then {closeDialog 0; [""delete""] spawn A3A_fnc_outpostDialog} else {[""Outposts/Roadblocks"", ""You're not the Commander!""] call A3A_fnc_customHint;};";
+			action = "if (player == theBoss) then {closeDialog 0; [] remoteExecCall ['A3A_fnc_saveLoop', 2];}";
 		};
 		class 10slots_R4: A3A_core_BattleMenuRedButton
 		{
