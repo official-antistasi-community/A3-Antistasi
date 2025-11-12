@@ -17,6 +17,8 @@ Version 3.10.1
 
    * :issue:`3748` Fixed a bug where some maps had missing dependencies and would fail to launch on some servers
    * :issue:`3749` Fixed a typo in a localization entry for the Mehland map
+   * :issue:`3752` Fixed rebuildAssets eating money for live radio towers
+   * :issue:`3753` Re-added persistent save button to old UI (commander menu)
 
 .. warning::
 
