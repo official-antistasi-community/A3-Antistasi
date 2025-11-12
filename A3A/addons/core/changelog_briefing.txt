@@ -13,6 +13,7 @@ Version 3.10.1
 <br/>Fixed rebuildAssets eating money for live radio towers
 <br/>Re-added persistent save button to old UI (commander menu)
 <br/>Fixed a bug where you could not access the new UI from the old UI
+<br/>Fixed a few minor log spam errors with missing definitions
 <br/>
 <br/>
 <br/>
