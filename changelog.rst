@@ -19,6 +19,8 @@ Version 3.10.1
    * :issue:`3749` Fixed a typo in a localization entry for the Mehland map
    * :issue:`3752` Fixed rebuildAssets eating money for live radio towers
    * :issue:`3753` Re-added persistent save button to old UI (commander menu)
+   * :issue:`3756` Fixed a bug where you could not access the new UI from the old UI
+   * :issue:`3756` Fixed a few minor log spam errors with missing definitions
 
 .. warning::
 
