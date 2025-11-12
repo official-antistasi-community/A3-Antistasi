@@ -1,4 +1,21 @@
-Version 3.10.0
+Version 3.10.1
+<br/>
+<br/>
+<br/>Minor
+<br/>
+<br/>Make city battles easier for solo players and reduce city battle quantity on some maps
+<br/>
+<br/>
+<br/>Bugfixes
+<br/>
+<br/>Fixed a bug where some maps had missing dependencies and would fail to launch on some servers
+<br/>Fixed a typo in a localization entry for the Mehland map
+<br/>Fixed rebuildAssets eating money for live radio towers
+<br/>Re-added persistent save button to old UI (commander menu)
+<br/>
+<br/>
+<br/>
+<br/>Version 3.10.0
 <br/>
 <br/>
 <br/>Major
