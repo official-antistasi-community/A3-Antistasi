@@ -41,7 +41,7 @@ if (_siteX in _destroyedSites) exitWith {
     [0,-5000] remoteExec ["A3A_fnc_resourcesFIA",2];
 };
 
-if (_siteX in A3A_antennaMap and !(_siteX in citiesX)) exitWith {
+if (_siteX in A3A_antennaMap and !(_siteX in citiesX) and {!alive (A3A_antennaMap get _siteX)}) exitWith {
     [_titleStr, localize "STR_A3A_fn_base_rebasset_done_2"] call A3A_fnc_customHint;
     [A3A_antennaMap get _siteX] remoteExec ["A3A_fnc_rebuildRadioTower", 2];
     [0,-5000] remoteExec ["A3A_fnc_resourcesFIA",2];
