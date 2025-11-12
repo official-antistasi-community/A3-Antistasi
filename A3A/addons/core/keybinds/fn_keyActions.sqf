@@ -13,11 +13,10 @@ switch (_key) do {
     // Actions below here aren't valid until the game is started and client init is complete
     if (isNil "initClientDone") exitWith {};
 
-    case ("newgui");
     case QGVAR(battleMenu): {
         if (player getVariable ["incapacitated",false]) exitWith {};
         if (player getVariable ["owner",player] != player) exitWith {};
-        if (GVAR(keys_battleMenu) && !(_key == "newgui")) exitWith {};         // fucking thing actually refires on closeDialog?
+        if (GVAR(keys_battleMenu)) exitWith {};         // fucking thing actually refires on closeDialog?
         if (dialog) exitWith {};
         GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
 
@@ -28,7 +27,7 @@ switch (_key) do {
         // Problem 4: Unless there's a dialog open, the default Y key bind will also open or ping Zeus.
         // Problem 5: Arma likes to refire the key events when you close a dialog.
         // tl;dr: Do not rearrange this logic or clowns will eat your children.
-        if (A3A_GUIDevPreview || (_key == "newgui")) then {
+        if (A3A_GUIDevPreview) then {
             createDialog "A3A_dummyDialog";
             player setVariable ["autoSwitchGroups", [hcSelected player, false]];
             [] spawn {
