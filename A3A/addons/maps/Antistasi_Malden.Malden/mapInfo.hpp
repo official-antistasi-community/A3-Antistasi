@@ -31,4 +31,7 @@ class malden {
 	size = 12.8;
 	cityCount = 15;
 	airbaseCount = 3;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

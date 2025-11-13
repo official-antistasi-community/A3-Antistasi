@@ -45,4 +45,7 @@ class regero {
     size = 10.2;
     cityCount = 28;
     airbaseCount = 7;
+    class MapParams {
+		distanceSPWN = 700;
+	};
 };

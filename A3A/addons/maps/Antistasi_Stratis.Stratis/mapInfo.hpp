@@ -26,4 +26,7 @@ class stratis {
 	size = 8.2;
 	cityCount = 8;
 	airbaseCount = 1;
+	class MapParams {
+		distanceSPWN = 1400;
+	};
 };
