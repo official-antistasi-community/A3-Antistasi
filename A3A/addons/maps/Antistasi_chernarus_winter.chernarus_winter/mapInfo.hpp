@@ -40,4 +40,7 @@ class chernarus_winter {
 	size = 15.4;
 	cityCount = 46;
 	airbaseCount = 3;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

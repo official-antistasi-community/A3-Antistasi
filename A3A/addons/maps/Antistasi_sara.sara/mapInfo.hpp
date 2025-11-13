@@ -33,4 +33,7 @@ class sara {
 	size = 20.5;
 	cityCount = 41;
 	airbaseCount = 5;
+	class MapParams {
+		distanceSPWN = 900;
+	};
 };

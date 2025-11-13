@@ -52,8 +52,8 @@ class Params
     class distanceSPWN
     {
         title = $STR_A3A_Params_distanceSPWN_title;
-        values[] = {700,800,900,1000,1100,1200};
-        texts[] = {"700","800","900","1000","1100","1200"};
+        values[] = {600,700,800,900,1000,1100,1200};
+        texts[] = {"600","700","800","900","1000","1100","1200"};
         default = 1000;
     };
     class enemyNearDistance
