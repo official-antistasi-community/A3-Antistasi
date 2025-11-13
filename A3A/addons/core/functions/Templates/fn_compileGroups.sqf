@@ -166,6 +166,7 @@ _faction set ["groupsMilitiaSquads", [
 
 //police
 _faction set ["groupPolice", [_faction get "unitPoliceOfficer", _faction get "unitPoliceGrunt"]];
+_faction set ["groupPoliceEscort", [_faction get "unitPoliceOfficer", _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt"]];
 _faction set ["groupPoliceSquad", [
     _faction get "unitPoliceOfficer", _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt"
     , _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt", _faction get "unitPoliceGrunt"
