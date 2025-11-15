@@ -7,7 +7,7 @@ class stubbhult {
         {"eldshult",69},{"ostra_bokeberg",57},{"langaryd",64}
     };
     disabledTowns[] = {
-        "bockshult","sofieslatt","gussbo","ekenaso","bohult","vallshult","saxhult","norra_bokeberg","hokhult",
+        "bockshult","sofieslatt","gussbo","ekenaso","bohult","vallshult","saxhult","norra_bokeberg","hokhult","eldshult"
     };
     antennas[] = {
         {5643.8,7265.82,0},{5540.82,5020.95,0},
@@ -45,6 +45,9 @@ class stubbhult {
     {"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
 };
 policeStationTypes[] = {
-		"Land_PoliceStation_01_F"
+		"Land_PoliceStation_01_F", "Land_House_2B01_F", "Land_House_2B02_F", "Land_House_2B03_F", "Land_House_2B04_F",
+		"Land_House_2W01_F", "Land_House_2W02_F", "Land_House_2W03_F", "Land_House_2W04_F", "Land_House_2W05_F",
+		"Land_House_1B01_F", "Land_House_1W11_F", "Land_House_1W12_F", "Land_House_1W07_F",
+		"Land_House_1W02_F", "Land_House_1W09_F", "Land_House_1W05_F", "Land_House_1W06_F"
 	};
 };
