@@ -92,7 +92,7 @@ if (isClass (configFile >> "vnx_credits")) then {
 ["staticMGs", ["vn_b_army_static_m2_high", "vn_b_army_static_m2_high", "vn_b_army_static_m60_high", "vn_b_army_static_m1919a4_high"]] call _fnc_saveToTemplate;
 ["staticAT", ["vn_b_army_static_tow", "vn_b_army_static_m40a1rr"]] call _fnc_saveToTemplate;
 ["staticAA", ["vn_b_army_static_m45", "vn_b_navy_static_l70mk2", "vn_b_navy_static_l60mk3"]] call _fnc_saveToTemplate;
-["staticMortars", ["vn_b_army_static_mortar_m2"]] call _fnc_saveToTemplate;
+["staticMortars", ["a3a_vn_b_static_mortar_m2"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "vn_mortar_m2_mag_he_x8"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "vn_mortar_m2_mag_wp_x8"] call _fnc_saveToTemplate;

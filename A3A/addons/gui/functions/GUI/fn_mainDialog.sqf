@@ -65,11 +65,11 @@ switch (_mode) do
         // Cache group info in map control
         Debug("Caching group info");
 
-        private _autoSwitchGroups = player getVariable ["autoSwitchGroups",[]];
-        private _doAutoSwitch = _autoSwitchGroups isNotEqualTo [];
+        private _autoSwitchGroups = player getVariable ["autoSwitchGroups", [[], false]];
+        private _doAutoSwitch = (_autoSwitchGroups#0) isNotEqualTo [];
         private _commanderMap = _display displayCtrl A3A_IDC_COMMANDERMAP;
         private _selHCGroups = if (_doAutoSwitch) then {
-            _autoSwitchGroups;
+            _autoSwitchGroups#0;
         } else {
             hcSelected player;
         };
@@ -92,7 +92,8 @@ switch (_mode) do
             _selectedGroup = _selHCgroups # 0;
         };
         _commanderMap setVariable ["selectedGroup", _selectedGroup];
-        _commanderMap setVariable ["doAutoSwitch",_doAutoSwitch];
+        _commanderMap setVariable ["doAutoSwitch",(_doAutoSwitch || (_autoSwitchGroups#1))];
+        _commanderMap setVariable ["doAutoSwitchArty",_autoSwitchGroups#1];
 
 
         // Commander map Draw EHs
@@ -125,7 +126,7 @@ switch (_mode) do
         Debug_1("Adding user markers Draw EH to Fast Travel map: %1", _commanderUserMarkersEH);
 
         // Show player tab content
-        if !(_doAutoSwitch) then {
+        if !(_doAutoSwitch || (_autoSwitchGroups#1)) then {
             ["switchTab", ["player"]] call FUNC(mainDialog);
         } else {
             ["switchTab", ["commander"]] call FUNC(mainDialog);

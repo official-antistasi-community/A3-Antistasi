@@ -52,9 +52,13 @@ if (_vehicle != leader _group) exitWith
     };
     if (isNil "_marker") exitWith {};       // just carry on
 
-    private _returnPos = if (_marker isEqualType "") then { markerPos _marker } else { _marker };
-    { _x disableAI "AUTOCOMBAT" } forEach units _group;
+    {
+        _x disableAI "AUTOCOMBAT";
+        _x setVariable ["retreating", true, true];
+    } forEach units _group;
     _group setBehaviourStrong "AWARE";
+
+    private _returnPos = if (_marker isEqualType "") then { markerPos _marker } else { _marker };
     private _wp = _group addWaypoint [_returnPos, 50];
     ServerDebug_2("Group %1 with vehicle %2 returning to base", _group, typeof vehicle leader _group);
     _group setCurrentWaypoint _wp;
@@ -83,9 +87,21 @@ if (isNil "_marker") exitWith {
     _x disableAI "TARGET";
     _x setUnitPos "UP";
     _x doFollow leader _group;          // in case they were a building garrison
+    _x setVariable ["retreating", true, true];
 } forEach units _group;
-
 _group setBehaviourStrong "AWARE";
+
 private _wp = _group addWaypoint [markerPos _marker, 50];
 _group setCurrentWaypoint _wp;
 ServerDebug_1("Group %1 returning to base on foot", _group);
+
+// Make units surrender if they haven't managed to move within a reasonable time
+{
+    _x spawn {
+        private _startPos = getPosATL _this;
+        sleep (50 + random 20);
+        if (!alive _this or _this getVariable ["incapacitated", false]) exitWith {};
+        if (_this distance2d _startPos > 20) exitWith {};
+        _this spawn A3A_fnc_surrenderAction;
+    };
+} forEach units _group;

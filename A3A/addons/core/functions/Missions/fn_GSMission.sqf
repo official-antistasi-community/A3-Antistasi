@@ -69,48 +69,57 @@ _coolerPetros addEventHandler ["killed", {
     };
 }];
 
-private _conditionCode = "(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer) and (_this == theBoss)";
+private _fnc_despawner = {
+    // Custom despawner because it's a weird case. Solomon vanishes back into the shadows once players are gone.
+    params ["_coolerPetros"];
+    _coolerPetros enableAI "ALL";
+    while {true} do {
+        sleep 10;
+        private _players = allPlayers - entities "HeadlessClient_F";
+        if (_players inAreaArray [_coolerPetros, 200, 200] isEqualTo []) exitWith { deleteVehicle _coolerPetros };
+    };
+};
 
 private _addActionCode = {
-    params ["_coolerPetros", "_conditionCode"];
+    params ["_coolerPetros"];
+    private _condition = toString { _this == theBoss and _target isNil "A3A_gunShopComplete" and !(_target getVariable ["incapacitated", false]) };
     _coolerPetros addAction [localize "STR_A3A_fn_mission_gunshop_title", {
         params ["_target", "_caller"];
         [_target, false] remoteExec ["setCaptive", _target];			// Solomon is now suspicious
         createDialog "A3A_gunShop";
-    },nil,0,false,true,"",_conditionCode, 4];
+    },nil,0,false,true,"",_condition, 4];
 };
 
-// do this global, because any one can become the commander
-[[_coolerPetros, _conditionCode], _addActionCode] remoteExec ["call", 0, _coolerPetros];
+// do this global, because anyone can become the commander
+[_coolerPetros, _addActionCode] remoteExec ["call", 0, _coolerPetros];
 
 
 // Create a wandering patrol
-private _spawnPosition = [markerPos _city, 0, 200, 2, 0, -1, 0] call A3A_fnc_getSafePos;
-if (_spawnPosition isEqualTo [0,0]) exitWith {
-    ServerDebug("Unable to find spawn position for patrol unit.");
-};
-
+private _spawnPosition = [markerPos _city, 0, 200, 2] call A3A_fnc_findPatrolPos;
 private _patrolTypes = A3A_faction_occ get (["groupsSmall", "groupSpecOpsRandom"] select (tierWar > random 12));
 private _patrolGroup = [_spawnPosition, Occupants, selectRandom _patrolTypes, false, true] call A3A_fnc_spawnGroup;
 {[_x, ""] call A3A_fnc_NATOinit} forEach units _patrolGroup;
-
 [_patrolGroup, "Patrol_Area", 0, 200, 200, true, markerPos _city] call A3A_fnc_patrolLoop;
 
 
 private _timeout = time + 3600;
+waitUntil { sleep 1; !isNil "A3A_shoppingList" || (time > _timeout) || (!alive _coolerPetros) };
 
-waitUntil{sleep 1; !isNil "A3A_shoppingList" || (time > _timeout) || (!alive _coolerPetros) };
+_coolerPetros setVariable ["A3A_gunShopComplete", true, true];
 
-if((time > _timeout) || (!alive _coolerPetros)) exitWith {
+if (isNil "A3A_shoppingList") exitWith {
     [_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState; 
     [_taskId, "LOG", 600, true] spawn A3A_fnc_taskDelete;
+    [_patrolGroup] spawn A3A_fnc_enemyReturnToBase;
+    _coolerPetros spawn _fnc_despawner;
 };
 
-[_coolerPetros, 0] remoteExec ["removeAction", 0, _coolerPetros];
-
+// Successful purchase, so pay for the shopping list now
+A3A_shoppingList params ["_totalCost", "_gunshopList"];
+[0, -_totalCost] remoteExec ["A3A_fnc_resourcesFIA", 2];
 
 // Now we delay for a couple of minutes for immersion
-private _nearPlayers = units teamPlayer inAreaArray [getPosATL _coolerPetros, 100, 100] select { isPlayer _x };
+private _nearPlayers = units teamPlayer inAreaArray [_coolerPetros, 100, 100] select { isPlayer _x };
 [_coolerPetros, localize "STR_A3A_fn_mission_gunshop_wait"] remoteExec ["globalChat", _nearPlayers];
 [_taskId, [localize "STR_A3A_fn_mission_gunshop_text_wait", _taskTitle, ""]] call BIS_fnc_taskSetDescription;
 
@@ -119,13 +128,10 @@ private _nearPlayers = units teamPlayer inAreaArray [getPosATL _coolerPetros, 10
 
 sleep (60 + random 60);
 
-
 // do they get a crate or are they fucked?
 // Tier 8, cheap basket: 21% chance of convoy mission
 // Tier 8, 20k basket: 50% chance of convoy mission
-A3A_shoppingList params ["_totalCost", "_gunshopList"];
 private _noCrate = (floor random 12 ) + (floor random 12) + (floor random 12) > ceil (29 - tierWar - (_totalCost/5000));
-
 private _convoyPair = [];
 if(_noCrate) then
 {
@@ -158,9 +164,8 @@ if (_noCrate and _convoyPair isNotEqualTo []) exitWith
     private _args = _convoyPair + ["GunShop","legacy",-1, _gunshopList];
     [_args, "A3A_fnc_convoy"] remoteExec ["A3A_fnc_scheduler", 2];
 
-    _coolerPetros enableAI "ALL";
-    [group _coolerPetros] spawn A3A_fnc_groupDespawner;
     [_patrolGroup] spawn A3A_fnc_enemyReturnToBase;
+    _coolerPetros spawn _fnc_despawner;
 };
 
 
@@ -178,13 +183,6 @@ for "_i" from 1 to 10 do {
 
 // Create the supply drop
 sleep 5;
-[_dropPos, _gunshopList, _patrolGroup] spawn A3A_fnc_supplyDrop;
+[_dropPos, _gunshopList, _patrolGroup] spawn A3A_fnc_supplyDrop;        // patralGroup handed off to supply drop control
 
-_coolerPetros enableAI "ALL";
-
-// Custom despawner because it's a weird case. Solomon vanishes back into the shadows once players are gone.
-while {true} do {
-    sleep 10;
-    private _players = allPlayers - entities "HeadlessClient_F";
-    if (_players inAreaArray [getPosATL _coolerPetros, 200, 200] isEqualTo []) exitWith { deleteVehicle _coolerPetros };
-};
+_coolerPetros spawn _fnc_despawner;

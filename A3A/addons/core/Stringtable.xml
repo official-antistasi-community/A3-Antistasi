@@ -249,7 +249,7 @@
         <Chinesesimp>收到. 重炮火力投送中. 预计%1 秒后首发着弹.</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_yesSingle">
-        <Original>Acknowledged. Fire mission is inbound. %2 %3 fired. ETA %1 secs.</Original>
+        <Original>Acknowledged. Fire mission is inbound. ETA %1 secs to impact.</Original>
         <Korean>확인. 사격 임무 시작. %2 %3 사격했다. 착탄 예상 시간은 %1초다.</Korean>
         <Russian>Принято. Огневая поддержка на подходе. %2 %3 выстрелов. Ждите %1 сек.</Russian>
         <Chinesesimp>收到. 重炮火力投送中.%2 %3 发射完毕. 预计%1 秒后着弹.</Chinesesimp>
@@ -11402,18 +11402,6 @@
         <Turkish>Karakol - Kontrol Noktası</Turkish>
         <Chinesesimp>观察哨 - 路障</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_commander_comm_roadblock_delete">
-        <Original>Outpost-Roadblock Delete</Original>
-        <Italian>Elimina Punto di osservazione - Posti di Blocco</Italian>
-        <Spanish>Borrar P. Observación - Bloqueo</Spanish>
-        <French>Suppression de Poste d'Obs. - Barrage routier</French>
-        <Korean>감시초소 - 검문소 제거</Korean>
-        <Russian>Удалить НП / БП</Russian>
-        <Polish>Usuń Stanowisko Obserwacyjne - Blokade Drogową</Polish>
-        <Czech>O.Post-Odstranit zátaras</Czech>
-        <Turkish>Karakol - Kontrol Noktası Kaldır</Turkish>
-        <Chinesesimp>拆除观察哨/路障</Chinesesimp>
-      </Key>
       <Key ID="STR_antistasi_dialogs_commander_comm_roadblock_delete_tooltip">
         <Original>Remove selected watchpost or roadblock, the money spent will be refunded</Original>
         <Italian>Rimuovi il posto di osservazione o il posto di blocco selezionato, i soldi verranno rimborsati</Italian>
@@ -16622,6 +16610,26 @@
         <Polish>Opcje związane z zarządzaniem pojazdami w oddziałach kontrolowanych przez HC</Polish>
         <Czech>Možnosti související se správou vozidel v jednotkách kontrolovaných HC</Czech>
         <Chinesesimp>与指挥部班组车辆管理相关的选项</Chinesesimp>
+      </Key>
+    </Container>
+    <Container name="client_options">
+      <Key ID="STR_antistasi_client_options_useMusic">
+        <Original>Use Music</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_useNewUI">
+        <Original>Use New UI</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_useNewUI_title">
+        <Original>Development</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_useNewUI_body">
+        <Original>The old UI menus do not have all of the features of the new UI and may be removed at any time. It is recommended to use the new UI, but the old UI will remain available in case of bugs.</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_hideCorpses">
+        <Original>Hide far corpses in this radius to save performance</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_hideInfobarHint">
+        <Original>Hide hints for info bar toggle</Original>
       </Key>
     </Container>
     <Container name="intelfeed">

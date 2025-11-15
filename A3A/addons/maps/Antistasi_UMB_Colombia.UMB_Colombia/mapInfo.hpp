@@ -53,4 +53,8 @@ class umb_colombia {
 		// Tanoa types
 		"Land_House_Big_04_F", "Land_House_Big_03_F", "Land_House_Big_01_F", "Land_House_Small_01_F", "Land_House_Small_02_F"
 	};
+	requiredMods = "UMB Colombia";
+	size = 20.5;
+	cityCount = 40;
+	airbaseCount = 7;
 };

@@ -34,6 +34,7 @@ addons[]=
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Ui_F",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Structures_F_Ind_SolarPowerPlant",
 	"A3_Structures_F_Ind_Transmitter_Tower",
@@ -54,7 +55,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=11;
+		items=12;
 		class Item0
 		{
 			className="A3_Structures_F_Mil";
@@ -131,6 +132,12 @@ class AddonsMetaData
 			name="Arma 3 Malden - Buildings and Structures";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
+		};
+		class Item11
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };

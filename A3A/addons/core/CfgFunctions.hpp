@@ -11,6 +11,8 @@ class CfgFunctions
             class AIreactOnKill {};
             class artySupport {};
             class artySupportFire {};
+            class artySupportFireOld {};
+            class artySupportMarkers {};
             class askHelp {};
             class assaultBuilding {};
             class attackDrillAI {};
@@ -152,6 +154,7 @@ class CfgFunctions
             class getVehiclesGroundSupport {};
             class getVehiclesGroundTransport {};
             class hasWeapons {};
+            class hideCorpses {};
             class HQGarbageClean {};
             class vehicleBoxRestore {};
             class initPetros {};

@@ -52,6 +52,7 @@ if !(_garrisonType == "hq") then {
             private _building = createVehicle [_class, _posWorld, [], 0, "CAN_COLLIDE"];
             _building setPosWorld _posWorld;
             _building setVectorDirAndUp [_vecDir, _vecUp];
+            _building setVariable ["A3A_building", true, true];
             _buildings pushBack _building;
         };
     } forEach (_garrisonData getOrDefault ["buildings", []]);

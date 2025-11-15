@@ -74,21 +74,15 @@ if (abs _threat > 0.01) then {
     _threat = _threat - ((time - _threatTime) / 60) * _threat / abs _threat;
 };
 _threat = (_threat max 0) + ([1, 3] select (_type == "mortar"));
-_garrison set ["threatTime", time];
-_garrison set ["threat", _threat];
 
 Trace_2("%1 current threat %2", _marker, _threat);
-
-if (_defenders isEqualTo [] and _mortars isEqualTo []) exitWith {
-    ServerDebug_1("No defensive units available at %1", _marker);
-};
-
 
 if (_threat > random 3) then
 {
     // Send a response
     private _minDist = selectMin markerSize _marker;
     private _group = call {
+        if (_enemy isKindOf "Air") exitWith {};             // garrison can't deal with air
         private _dist = _enemy distance2d markerPos _marker;
         // At very long range, restrict to mortars
         if (_dist > _minDist + 200 + random 300) exitWith { selectRandom _mortars };
@@ -101,6 +95,7 @@ if (_threat > random 3) then
         private _side = _garrison get "side";
         if (_type == "detect" or _side == teamPlayer) exitWith {};             // Do not call cheap supports vs spotted targets
         [_side, _enemy, markerPos _marker, _knowsAbout, 0.7] remoteExec ["A3A_fnc_requestSupport", 2];
+        _threat = 0;                  // don't spam support calls
     };
 
     private _precisionOff = random (60 - (_knowsAbout / 4) * 50);
@@ -120,4 +115,5 @@ if (_threat > random 3) then
     };
 };
 
+_garrison set ["threatTime", time];
 _garrison set ["threat", _threat];

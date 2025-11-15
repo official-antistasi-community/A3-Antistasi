@@ -1,4 +1,5 @@
 class stratis {
+	debug = 1;
 	population[] = {};
 	disabledTowns[] = {};
 	antennas[] = {};
@@ -21,4 +22,8 @@ class stratis {
 		// Helipad
 		{"a3a_helipad", 1500, "helipad"}
 	};
+	requiredMods = "";
+	size = 8.2;
+	cityCount = 8;
+	airbaseCount = 1;
 };

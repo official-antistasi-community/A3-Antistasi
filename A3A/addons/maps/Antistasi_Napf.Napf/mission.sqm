@@ -40,6 +40,7 @@ addons[]=
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Structures_F_Exp_Military_Fortifications",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Structures_F_Walls",
 	"A3_Structures_F_Mil_BagFence",
 	"CUP_Misc_e_Config",
@@ -82,7 +83,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=28;
+		items=29;
 		class Item0
 		{
 			className="A3_Structures_F_Enoch";
@@ -264,6 +265,12 @@ class AddonsMetaData
 			name="Arma 3 Alpha - Characters and Clothing";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
+		};
+		class Item28
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
 		};
 	};
 };

@@ -10,7 +10,7 @@ Trace_1("Params: %1", _this);
 
 params [["_change",""], ["_pos",""], ["_scaled", true]]; // nil protection
 if !(_change isEqualType 0) exitWith {Error("The first parameter, the support change, must be a number");};
-if !(_city isEqualType "") exitWith {Error("The second parameter, the position, must be a string (city name) or array (coordinates)");};
+if (_pos isEqualTo "") exitWith {Error("The second parameter, the position, must be a string (city name) or array (coordinates)");};
 
 private _city = if (_pos in citiesX) then {_pos} else {
 	// Other enemies still count if within city marker for now
@@ -55,10 +55,14 @@ A3A_cityData setVariable [_city, [_numCiv, _supportReb, _accumHR, _taskDelay]];
 private _citySide = sidesX getVariable _city;
 if (_supportReb > 80 and _citySide != teamPlayer) then
 {
-	// Run cityBattle task if it's a significant town
 	if (_city in A3A_activeCityBattles) exitWith {};			// might be possible?
 	if (count keys A3A_activeCityBattles > 0) exitWith {};		// don't allow multiple simultaneous city battles for now
-	if (_numCiv >= 70) exitWith {
+
+	// Run cityBattle task if it's a significant town
+	// Avoid generating city battles in smaller cities if defence resources are low
+	private _minPop = A3A_minCityBattlePop * linearConversion [0, 1000, A3A_resourcesDefenceOcc, 1.4, 1.0, true];
+	Trace_3("City %1 numCiv %2, city battle minPop %3", _city, sqrt _numCiv, _minPop);
+	if (sqrt _numCiv >= _minPop) exitWith {
 		A3A_activeCityBattles set [_city, true];
 		[A3A_tasks_fnc_cityBattle, [_city]] spawn A3A_tasks_fnc_runTask;
 	};

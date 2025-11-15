@@ -30,4 +30,8 @@ class takistan {
 		"Land_House_C_3_EP1", "Land_House_C_10_EP1", "Land_House_C_4_EP1", "Land_House_C_9_EP1",
 		"Land_House_K_8_EP1", "Land_House_K_7_EP1", "Land_House_K_3_EP1", "Land_House_L_6_EP1", "Land_House_L_7_EP1"
 	};
+	requiredMods = "CUP Terrains - Core and CUP Terrains - Maps";
+	size = 12.8;
+	cityCount = 30;
+	airbaseCount = 2;
 };
