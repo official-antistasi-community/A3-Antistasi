@@ -97,7 +97,7 @@ private _mlaunchersAA = [];
         _amount = _amount min (_magcount/2);
     };*/
 
-    if ("RocketLaunchers" in _categories) then { [_rlaunchers, _class, _amount] call _fnc_addItem; continue };
+    if ("RocketLaunchers" in _categories) then { [_rlaunchers, _class, _amount] call _fnc_addItemNoUnlocks; continue };
     if ("MissileLaunchers" in _categories) then {
         if ("AA" in _categories) exitWith { [_mlaunchersAA, _class, _amount] call _fnc_addItemNoUnlocks };
         if ("AT" in _categories) exitWith { [_mlaunchersAT, _class, _amount] call _fnc_addItemNoUnlocks };

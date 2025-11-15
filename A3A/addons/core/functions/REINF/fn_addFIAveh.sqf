@@ -42,7 +42,7 @@ private _fnc_placed = {
 	};
 	_vehicle setFuel random [0.10, 0.175, 0.25];
 	[_vehicle, teamPlayer] call A3A_fnc_AIVehInit;
-	["", _vehicle] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
+	[_vehicle] remoteExec ["A3A_fnc_rebelVehPlacedWorker", 2];
 };
 
 [_typeVehX, _fnc_placed, {false}, [_cost], nil, nil, nil, _extraMessage] call HR_GRG_fnc_confirmPlacement;

@@ -98,6 +98,9 @@ if (_threat > random 3) then
     };
     if (isNil "_group") exitWith {
         ServerDebug_1("Nothing usable within range at %1", _marker);
+        private _side = _garrison get "side";
+        if (_type == "detect" or _side == teamPlayer) exitWith {};             // Do not call cheap supports vs spotted targets
+        [_side, _enemy, markerPos _marker, _knowsAbout, 0.7] remoteExec ["A3A_fnc_requestSupport", 2];
     };
 
     private _precisionOff = random (60 - (_knowsAbout / 4) * 50);

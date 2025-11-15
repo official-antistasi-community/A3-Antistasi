@@ -12,8 +12,16 @@ params [["_change",""], ["_pos",""], ["_scaled", true]]; // nil protection
 if !(_change isEqualType 0) exitWith {Error("The first parameter, the support change, must be a number");};
 if !(_city isEqualType "") exitWith {Error("The second parameter, the position, must be a string (city name) or array (coordinates)");};
 
-private _city = if (_pos isEqualType "") then {_pos} else {[citiesX, _pos] call BIS_fnc_nearestPosition};
+private _city = if (_pos in citiesX) then {_pos} else {
+	// Other enemies still count if within city marker for now
+	if (_pos isEqualType "") then { _pos = markerPos _pos };			// could be passed non-city marker
+	private _nearCities = citiesX inAreaArrayIndexes [_pos, 500, 500] apply { citiesX#_x };
+	private _nearCities = _nearCities select { _pos inArea _x };
+	selectRandom _nearCities;
+};
+if (isNil "_city") exitWith {};			// Unit not in city
 if (A3A_cityData isNil _city) exitWith {Error_1("City %1 not found in city data", _city);};
+if (_city in destroyedSites) exitWith {};
 
 private _cityData = A3A_cityData getVariable _city;
 _cityData params ["_numCiv", "_supportReb", "_accumHR", "_taskDelay"];		// add task delay? Could save it then...
@@ -49,6 +57,7 @@ if (_supportReb > 80 and _citySide != teamPlayer) then
 {
 	// Run cityBattle task if it's a significant town
 	if (_city in A3A_activeCityBattles) exitWith {};			// might be possible?
+	if (count keys A3A_activeCityBattles > 0) exitWith {};		// don't allow multiple simultaneous city battles for now
 	if (_numCiv >= 70) exitWith {
 		A3A_activeCityBattles set [_city, true];
 		[A3A_tasks_fnc_cityBattle, [_city]] spawn A3A_tasks_fnc_runTask;
