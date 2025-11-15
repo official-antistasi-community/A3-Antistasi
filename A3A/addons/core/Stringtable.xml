@@ -16675,5 +16675,19 @@
         <Original>Rebel</Original>
       </Key>
     </Container>
+    <Container name="mod_blacklist">
+      <Key ID="STR_A3A_mod_blacklist_title">
+        <Original>Mod Blacklist</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_serverHint">
+        <Original>The following mods present on the server are known to be broken with Antistasi:&lt;br/&gt;%1&lt;br/&gt;Removing these mods is highly recommended.</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_warningTitle">
+        <Original>Blacklisted Mod Detected!</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_warningText">
+        <Original>Antistasi has detected a blacklisted mod on your client:&lt;br/&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;It is highly recommended that you remove this mod; it may break the gamemode in unpredictable ways.<br/><br/>Dev comment: %2</Original>
+      </Key>
+    </Container>
   </Package>
 </Project>

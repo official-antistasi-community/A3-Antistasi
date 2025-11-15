@@ -26,7 +26,7 @@ if (!isNil "serverInitDone" and !isNil "A3A_utilityItemHM") then {
 };
 
 if (!requiredVersion QUOTE(REQUIRED_VERSION)) exitWith { Error("Arma version is out of date") };
-if (call A3A_fnc_modBlacklist) exitWith {};
+[] spawn A3A_fnc_modBlacklist;
 
 //Disables rabbits and snakes, because they cause the log to be filled with "20:06:39 Ref to nonnetwork object Agent 0xf3b4a0c0"
 //Can re-enable them if we find the source of the bug.
@@ -63,15 +63,6 @@ if !(isServer) then {
         0 spawn A3A_fnc_garrisonOpLoop;
     };
 
-    if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
-        isClass (configfile >> "CfgPatches" >> "lambs_danger"))) then {
-        // disable lambs danger fsm entrypoint
-        ["CAManBase", "InitPost", {
-            params ["_unit"];
-            (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
-            _unit setVariable ["lambs_danger_disableAI", true];
-        }] call CBA_fnc_addClassEventHandler;
-    };
 };
 
 // Server/client version check
