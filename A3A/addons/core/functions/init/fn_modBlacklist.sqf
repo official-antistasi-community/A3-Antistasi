@@ -13,7 +13,8 @@ private _blacklistedHM = createHashMapFromArray [ // ["Mod Name As Seen On Steam
 	["Zulu Headless Client (ZHC)", [{isClass (configfile >> "CfgPatches" >> "zhc_main")}, "Antistasi is reliant on its own scripts for using headless clients"]],
 	["Werthles' Headless Module", [{isClass (configfile >> "CfgPatches" >> "Werthles_WHK")}, "Antistasi is reliant on its own scripts for using headless clients"]],
 	["Advanced Rappelling", [{isClass (configfile >> "CfgPatches" >> "AR_AdvancedRappelling") && (isServer && (productVersion # 6) isEqualTo "Linux")}, "Breaks AI movement on Linux servers"]],
-	["Advanced Urban Rappelling", [{isClass (configfile >> "CfgPatches" >> "AUR_AdvancedUrbanRappelling") && (isServer && (productVersion # 6) isEqualTo "Linux")}, "Breaks AI movement on Linux servers"]]
+	["Advanced Urban Rappelling", [{isClass (configfile >> "CfgPatches" >> "AUR_AdvancedUrbanRappelling") && (isServer && (productVersion # 6) isEqualTo "Linux")}, "Breaks AI movement on Linux servers"]],
+	["ACE Medical", [{isClass (configFile >> "CfgSounds" >> "ACE_heartbeat_fast_3") && {!isMultiplayer}}, "Breaks respawning in singleplayer. Download the ACE No Medical mod to get the rest of the ACE features without the broken Medical"]], // broken only in real sp
 ];
 
 private _badMods = [];
