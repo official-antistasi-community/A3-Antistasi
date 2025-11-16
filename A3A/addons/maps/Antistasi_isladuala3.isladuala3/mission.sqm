@@ -8,15 +8,15 @@ class EditorData
 	toggles=1537;
 	class ItemIDProvider
 	{
-		nextID=5604;
+		nextID=5606;
 	};
 	class MarkerIDProvider
 	{
-		nextID=12;
+		nextID=14;
 	};
 	class LayerIndexProvider
 	{
-		nextID=5994;
+		nextID=6105;
 	};
 	class Camera
 	{
@@ -6506,7 +6506,7 @@ class Mission
 					name="airport_5";
 					class Entities
 					{
-						items=55;
+						items=56;
 						class Item0
 						{
 							dataType="Marker";
@@ -7354,9 +7354,17 @@ class Mission
 							angle=179.31004;
 							id=4916;
 						};
+						class Item55
+						{
+							dataType="Marker";
+							position[]={4332.2002,15.25,2219.073};
+							name="airp_5_flag";
+							type="mil_flag";
+							id=5604;
+						};
 					};
 					id=265;
-					atlOffset=0.21574593;
+					atlOffset=0.10787296;
 				};
 				class Item5
 				{
