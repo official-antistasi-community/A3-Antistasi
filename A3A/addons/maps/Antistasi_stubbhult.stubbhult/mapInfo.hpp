@@ -1,10 +1,23 @@
 class stubbhult {
     population[] = {
-        {"gussbo",49},{"aker",48},{"bockshult",60},{"ekenas",99},{"bexet",72},{"hylte",134},{"yaberg",54},{"gullanabba",348},{"balshult",170},
-        {"femsjo",91},{"hallaboke",51},{"saraboke",93},{"hokhult",23},{"boalt",135},{"lojenas",71},{"sodra_bokeberg",29},{"norra_bokeberg",30},
-        {"backhasten",19},{"rangalsbo",55},{"rangelsnas",35},{"ekenaso",10},{"krakshult",55},{"kalvhult",93},{"gnosjo",46},{"bohult",26},
-        {"hjalmshult",35},{"sofieslatt",36},{"mjalahult",44},{"vallshult",47},{"saxhult",14},{"unnaryd",21},{"yttre_mjala",58},{"dohult",25},
-        {"eldshult",69},{"ostra_bokeberg",57},{"langaryd",64}
+        {"gussbo",49},{"aker",48},
+        {"bockshult",60},{"ekenas",99},
+        {"bexet",72},{"hylte",134},
+        {"yaberg",54},{"gullanabba",348},
+        {"balshult",170},{"femsjo",91},
+        {"hallaboke",51},{"saraboke",93},
+        {"hokhult",23},{"boalt",135},
+        {"lojenas",71},{"sodra_bokeberg",29},
+        {"norra_bokeberg",30},{"backhasten",19},
+        {"rangalsbo",55},{"rangelsnas",35},
+        {"ekenaso",10},{"krakshult",55},
+        {"kalvhult",93},{"gnosjo",46},
+        {"bohult",26},{"hjalmshult",35},
+        {"sofieslatt",36},{"mjalahult",44},
+        {"vallshult",47},{"saxhult",14},
+        {"unnaryd",21},{"yttre_mjala",58},
+        {"dohult",25},{"eldshult",69},
+        {"ostra_bokeberg",57},{"langaryd",64}
     };
     disabledTowns[] = {
         "bockshult","sofieslatt","gussbo","ekenaso","bohult","vallshult","saxhult","norra_bokeberg","hokhult","eldshult"
@@ -52,6 +65,6 @@ policeStationTypes[] = {
 	};
     requiredMods = "Stubbhult";
 	size = 12.3;
-	cityCount = 24;
+	cityCount = 26;
 	airbaseCount = 4;
 };
