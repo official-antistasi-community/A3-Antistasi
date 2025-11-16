@@ -393,6 +393,7 @@ class CfgFunctions
             class checkCampaignEnd {};
             class clientIdleChecker {};
             class credits {};
+            class getMarkerPrefix {};
             class initACE {};
             class initACEUnconsciousHandler {};
             class initBases {};
