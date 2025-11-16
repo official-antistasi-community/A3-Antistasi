@@ -25,7 +25,7 @@ if (_take) then {
     {
         private _building = _x getVariable ["building", objNull];
         if (isNull _building) then { continue };
-        _ruin setVariable ["building", _x, owner player];
+        _x setVariable ["building", _building, owner _player];
     } forEach _nearRuins;
 
     private _money = _box getVariable ["A3A_itemPrice", 0];
