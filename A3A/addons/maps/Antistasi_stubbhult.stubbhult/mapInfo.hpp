@@ -50,4 +50,8 @@ policeStationTypes[] = {
 		"Land_House_1B01_F", "Land_House_1W11_F", "Land_House_1W12_F", "Land_House_1W07_F",
 		"Land_House_1W02_F", "Land_House_1W09_F", "Land_House_1W05_F", "Land_House_1W06_F"
 	};
+    requiredMods = "Stubbhult";
+	size = 12.3;
+	cityCount = 24;
+	airbaseCount = 4;
 };
