@@ -1123,6 +1123,9 @@
         <Turkish>Savaş Seviyesi Değişti&lt;br/&gt;&lt;br/&gt;Şu anki Seviye: %1</Turkish>
         <Chinesesimp>战争等级变动&lt;br/&gt;&lt;br/&gt;当前等级为: %1</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_createoutpfia_alreadynear">
+        <Original>There's already a rebel outpost near that position</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_createoutpfia_create">
         <Original>Create Outpost</Original>
         <German>Aussenposten erstellen</German>
