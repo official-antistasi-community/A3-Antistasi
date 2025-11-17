@@ -1,6 +1,10 @@
-_veh = cursortarget;
+// Client-side, used by both old & new UI. New UI calls with vehicle as parameter.
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+
+params [["_veh", cursorTarget]];			// cursorTarget is kinda sus but whatever
+
 #define OccAndInv(VEH) (FactionGet(occ, VEH) + FactionGet(inv, VEH))
 private _titleStr = localize "STR_A3A_fn_reinf_bombrun_title";
 private _owner = _veh getVariable "ownerX";
@@ -54,8 +58,6 @@ if ((floor bombRuns + _pointsX) > _strikeCap) exitWith {
     false;
 };
 
-deleteVehicle _veh;
 [_titleStr, format [localize "STR_A3A_fn_reinf_bombrun_increased",_pointsX]] call A3A_fnc_customHint;
-bombRuns = bombRuns + _pointsX;
-publicVariable "bombRuns";
-[] remoteExec ["A3A_fnc_statistics",theBoss];
+
+[_veh, _pointsX] remoteExecCall ["A3A_fnc_addBombRunServer", 2];
