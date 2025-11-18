@@ -21,7 +21,7 @@ class A3A {
 
 
 #define A3A_BriefingName QUOTE(Antistasi Community - VERSION)
-#define A3A_Mission(MAPNAME) class Antistasi_##MAPNAME { briefingName = A3A_BriefingName; directory = x\A3A\addons\maps\Antistasi_##MAPNAME##.##MAPNAME; overviewPicture = "a3\Missions_F_Oldman\Data\img\overview.paa"; overviewText = "Test"; author = "Antistasi Dev Team";};
+#define A3A_Mission(MAPNAME) class Antistasi_##MAPNAME { briefingName = A3A_BriefingName; directory = x\A3A\addons\maps\Antistasi_##MAPNAME##.##MAPNAME; overviewPicture = "x\A3A\addons\maps\Antistasi_##MAPNAME##.##MAPNAME\Pictures\Mission\pic.jpg"; author = "Antistasi Dev Team";};
 
 class CfgMissions
 {
