@@ -48,12 +48,6 @@ if (_autoLoadTime >= 0) then
         Info("No usable saves found for automatic loading");
         _autoLoadTime = -1;
     };
-    private _index = if (isAutoTest) then {
-        private _preferredGame = profileNamespace getVariable ["A3A_preferredTestingSave", 0];
-        _saveData findIf {(_x get "gameID") isEqualTo _preferredGame};
-    } else {
-        0;
-    };
     _autoLoadData = _saveData select _index;
     _autoLoadData set ["startType", "load"];
     Info_1("Save ID %1 selected for automatic loading", _autoLoadData get "gameID");
