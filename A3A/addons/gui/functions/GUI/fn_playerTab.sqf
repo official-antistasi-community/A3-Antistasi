@@ -158,6 +158,7 @@ switch (_mode) do
         private _playerRankPicture = _display displayCtrl A3A_IDC_PLAYERRANKPICTURE;
         private _aliveText = _display displayCtrl A3A_IDC_ALIVETEXT;
         private _missionsText = _display displayCtrl A3A_IDC_MISSIONSTEXT;
+        private _killsLabel = _display displayCtrl A3A_IDC_KILLSLABEL;
         private _killsText = _display displayCtrl A3A_IDC_KILLSTEXT;
         private _commanderPicture = _display displayCtrl A3A_IDC_COMMANDERPICTURE;
         private _commanderText = _display displayCtrl A3A_IDC_COMMANDERTEXT;
@@ -176,8 +177,13 @@ switch (_mode) do
         private _missions = player getVariable ["missionsCompleted",0];
         _missionsText ctrlSetText str _missions;
 
-        private _kills = (getPlayerScores player)#0;
-        _killsText ctrlSetText str _kills;
+        if (isMultiplayer) then {
+            _killsText ctrlSetText str ((getPlayerScores player)#0);
+        } else {
+            _killsLabel ctrlShow false;
+            _killsText ctrlShow false;
+        };
+        
 
         // Update commander icon/text/button
         // TODO UI-update: Add member check

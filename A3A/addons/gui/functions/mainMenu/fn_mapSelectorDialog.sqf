@@ -249,18 +249,20 @@ switch (_mode) do
 		} else { // if none selected, launch normally
 			private _map = _mapLB lbData (lbCurSel _mapLB);
 			if (_mode == "SP") then {
-				["handleInformationButton", ["noSP"]] call _thisFunc;
-				//["startSPGame", [_map]] call _thisFunc;
+				//["handleInformationButton", ["noSP"]] call _thisFunc;
+				["startSPGame", [_map]] call _thisFunc;
 			} else {
 				["startMPGame", [_map]] call _thisFunc;
 			};
 			
 		};
     };
-	/*
 	case ("startSPGame"):
 	{
 		_params params ["_map"];
+		_display closeDisplay 0;
+		playMission ["", (configFile >> "CfgMissions" >> "MPMissions" >> format ["Antistasi_%1", _map])];
+		/*
 		hostMission [configFile >> "CfgMissions" >> "MPMissions" >> format ["Antistasi_%1", _map], _display];
 		0 spawn {
 			// Temporary until we revert Antistasi to being able to run in SP
@@ -270,9 +272,9 @@ switch (_mode) do
 			ctrlActivate _hostContinue;
 			// cant continue after this. display will come up on its own and trip mpSetupLoaded
 		};
+		*/
 		
 	};
-	*/
 	case ("startMPGame"):
 	{
 		_params params ["_map"];

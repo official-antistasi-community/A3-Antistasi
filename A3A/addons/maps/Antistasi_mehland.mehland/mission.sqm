@@ -168,27 +168,6 @@ class ScenarioData
 {
 	author="Antistasi Dev Team";
 };
-class CustomAttributes
-{
-	class Category0
-	{
-		name="Scenario";
-		class Attribute0
-		{
-			property="EnableDebugConsole";
-			expression="true";
-			class Value
-			{
-				class data
-				{
-					singleType="SCALAR";
-					value=1;
-				};
-			};
-		};
-		nAttributes=1;
-	};
-};
 class Mission
 {
 	assetType="Free";

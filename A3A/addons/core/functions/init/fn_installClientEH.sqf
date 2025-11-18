@@ -1,3 +1,4 @@
+if (!isMultiplayer) then {call A3A_fnc_newPlayerSetup};
 
 player addEventHandler ["FiredMan", {
     _player = _this select 0;

@@ -82,7 +82,7 @@ class RscDisplayMain : RscStandardDisplay
                     text = "Antistasi";
                     tooltip = "Start an Antistasi Game";
                     y = "(5 * 	1.5) * 	(pixelH * pixelGrid * 2) + 	(pixelH)";
-					onButtonClick="finddisplay 0 createDisplay 'A3A_MapSelectorDialog';";
+					onButtonClick="playMission ['', '\A3\Missions_F_Bootcamp\Scenarios\Arsenal.VR'];";
 				};
 			};
 		};
