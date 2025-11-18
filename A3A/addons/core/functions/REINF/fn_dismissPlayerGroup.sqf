@@ -54,7 +54,8 @@ if ([_unit] call A3A_fnc_canFight) then
 	};
 deleteVehicle _x;
 } forEach units _newGroup;
-if (!isMultiplayer) then {_nul = [_hr,_resourcesFIA] remoteExec ["A3A_fnc_resourcesFIA",2];} else {_nul = [_hr,0] remoteExec ["A3A_fnc_resourcesFIA",2]; [_resourcesFIA] call A3A_fnc_resourcesPlayer};
+[_hr,0] remoteExec ["A3A_fnc_resourcesFIA",2]; 
+[_resourcesFIA] call A3A_fnc_resourcesPlayer;
 {boxX addWeaponCargoGlobal [_x,1]} forEach _weaponsX;
 {boxX addMagazineCargoGlobal [_x,1]} forEach _ammunition;
 {boxX addItemCargoGlobal [_x,1]} forEach _items;

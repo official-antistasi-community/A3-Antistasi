@@ -11,6 +11,12 @@ Info_1("Client version: %1", QUOTE(VERSION_FULL));
 
 // *************************** Client pre-setup init *******************************
 
+// Clear out the singleplayer AI as soon as possible
+if !(isMultiplayer) then {
+    private _units = units group player;
+    {deleteVehicle _x} forEach (_units - [player])
+};
+
 // Public variable order testing
 A3A_publicVarTime = time;
 if (!isNil "serverInitDone" and !isNil "A3A_utilityItemHM") then {
@@ -175,50 +181,9 @@ if (isNil "ace_noradio_enabled" or {!ace_noradio_enabled}) then {
 
 player setvariable ["compromised",0];
 
-// Install the non respawn-persistent client event handlers
+// Install of the variables and event handlers that we need for a joining player
+call A3A_fnc_newPlayerSetup;
 call A3A_fnc_installClientEH;
-
-// These are respawn-persistent so we install them here
-player addEventHandler ["GetInMan", {
-    params ["_unit", "_role", "_veh", "_turret"];
-    _exit = false;
-    if !([player] call A3A_fnc_isMember) then {
-        if (!isNil {_veh getVariable "A3A_locked"}) then {
-            _owner = _veh getVariable "ownerX";
-            if ({getPlayerUID _x == _owner} count (units group player) == 0) then {
-                [localize "STR_A3A_fn_init_initclient_warning", localize "STR_A3A_fn_init_initclient_vehlocked"] call A3A_fnc_customHint;
-                moveOut _unit;
-                _exit = true;
-            };
-        };
-    };
-    if (!_exit) then {
-        if ((typeOf _veh) in undercoverVehicles) then {
-            if !(_veh getVariable ["A3A_reported", false]) then {
-                [] spawn A3A_fnc_goUndercover;
-            };
-        };
-        if (_veh isKindOf "Air") then {
-            Debug_2("Installing airspace control for player %1, vehicle %2", _unit, typeof _veh);
-            private _handle = [_unit, _veh] spawn A3A_fnc_airspaceControl;
-            _unit setVariable ["airspaceControlHandle", _handle];
-        };
-    };
-}];
-
-player addEventHandler ["GetOutMan", {
-    params ["_unit", "_role", "_veh", "_turret"];
-    Debug_2("Terminating airspace control for player %1, vehicle %2", _unit, typeof _veh);
-    private _handle = _unit getVariable ["airspaceControlHandle", scriptNull];
-    if (!isNull _handle) then { terminate _handle };
-}];
-
-player addEventHandler ["Killed", {
-    [-1, 0] remoteExecCall ["A3A_fnc_resourcesFIA", 2];
-}];
-
-// Prevent players getting shot by their own AIs. EH is respawn-persistent
-player addEventHandler ["HandleRating", {0}];
 
 // Prevent squad icons showing in 3d display in high command
 addMissionEventHandler ["CommandModeChanged", {
@@ -374,9 +339,4 @@ if (player == theBoss) then {
     ["commander",true] call A3A_fnc_unitTraits;
 } else {
     createDialog "A3A_RoleSelectDialog"; // player will be commander if they set up the game
-};
-
-if(!isMultiplayer) then
-{
-    [] spawn A3A_fnc_singlePlayerBlackScreenWarning;
 };

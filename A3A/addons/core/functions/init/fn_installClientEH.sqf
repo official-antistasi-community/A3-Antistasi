@@ -1,4 +1,3 @@
-
 player addEventHandler ["FiredMan", {
     _player = _this select 0;
     if (!captive _player) exitWith {false};
