@@ -69,15 +69,19 @@ _newUnit setUnitLoadout [[],[],[],[selectRandom ((A3A_faction_civ get "uniforms"
 if (!isPlayer (leader group player)) then {(group player) selectLeader player};
 
 call A3A_fnc_installClientEH;
+
 // When LAN hosting, Bohemia's Zeus module code will cause the player lose Zeus access if the body is deleted after respawning.
 // This is a workaround that re-assigns curator to the player if their body is deleted.
 // It will only run on LAN hosted MP, where the hoster is *always* admin, so we shouldn't run into any issues.
 // Secondary issue: We make a new unit when you respawn in SP meaning we need to unlink the module first. But we only need to work with one curator.
+// The body deletion bug persists there as well.
+
 if (isServer) then {
 	if !(isMultiplayer) then {
 		private _module = allCurators#0;
 		unassignCurator _module;
 		_newUnit assignCurator _module;
+		call A3A_fnc_newPlayerSetup;
 	};
 	_oldUnit addEventHandler ["Deleted", {
 		[] spawn {

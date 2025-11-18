@@ -1,4 +1,4 @@
-// Sets up the vars that a new unit needs to work as a player.
+// Sets up the vars that a new unit needs to work as a player, the "respawn-persistent" stuff that isnt actually persistent because of how we do SP respawns
 // Mostly yoinked from initClient and onPlayerRespawn
 // Basically includes everything that doesnt get carried over on respawn, so what we can run when a new unit is placed down
 

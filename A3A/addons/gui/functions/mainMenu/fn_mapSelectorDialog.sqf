@@ -48,11 +48,6 @@ private _playMPButton = _display displayCtrl A3A_IDC_MAPSELECT_PLAYMP;
 private _pictureMapCtrl = _display displayCtrl A3A_IDC_MAPSELECT_PICTUREMAPBOARD;
 private _mapBoardText = _display displayCtrl A3A_IDC_MAPSELECT_MAPBOARDTEXT;
 private _reqModsText = _display displayCtrl A3A_IDC_MAPSELECT_REQUIREDMODSTEXT;
-//private _debugIDTitle = _display displayCtrl A3A_IDC_MAPSELECT_DEBUGIDTITLE;
-//private _debugMapTitle = _display displayCtrl A3A_IDC_MAPSELECT_DEBUGMAPTITLE;
-//private _debugIDEdit = _display displayCtrl A3A_IDC_MAPSELECT_DEBUGIDEDIT;
-//private _debugMapText = _display displayCtrl A3A_IDC_MAPSELECT_DEBUGMAPTEXT;
-//private _debugGroup = [_debugIDTitle, _debugMapTitle, _debugIDEdit, _debugMapText];
 private _mapInfoPath = configFile >> "A3A" >> "mapInfo";
 
 switch (_mode) do
@@ -64,7 +59,6 @@ switch (_mode) do
 		_pictureMapCtrl ctrlShow false;
 		_pictureCtrl ctrlShow true;
 		_mapBoardText ctrlShow false;
-		//{_x ctrlShow false} forEach _debugGroup;
 		_reqModsText ctrlShow false;
 		_selBannerButton ctrlEnable false;
 		_selMapButton ctrlEnable false;
@@ -138,11 +132,7 @@ switch (_mode) do
 			_playMPButton ctrlSetTooltip format [localize "STR_antistasi_mapSelector_failReqMods", _mapText, _reqModsFormat];
 		};
 		//if (ctrlShown _debugMapText) then {
-		if (false) then {
-			_debugMapText ctrlSetText _map;
-		} else {
-			_infoText ctrlSetStructuredText parseText localize format ["STR_antistasi_mapSelector_description_%1", _map];
-		};
+		_infoText ctrlSetStructuredText parseText localize format ["STR_antistasi_mapSelector_description_%1", _map];
 	};
 	case ("handleInformationButton"):
 	{
@@ -156,11 +146,8 @@ switch (_mode) do
 		_selMapButton ctrlEnable false;
 		_playSPButton ctrlEnable false;
 		_playMPButton ctrlEnable false;
-		//{_x ctrlShow false} forEach _debugGroup;
-		_display setVariable ["debugClickCount", 0];
 		_mapLB lbSetCurSel -1;
 		_noPictureText ctrlSetStructuredText parseText localize format ["STR_antistasi_mapSelector_%1_text", _infoType];
-		if (_infoType in ["noSP"]) exitWith {_infoText ctrlSetText ""};
 		_infoText ctrlSetStructuredText parseText localize format ["STR_antistasi_mapSelector_%1_text2", _infoType];
 
 	};
@@ -211,91 +198,18 @@ switch (_mode) do
 		, _airbaseCount
 		];
 		_mapBoardText ctrlSetStructuredText parseText _final;
-		
 	};
-    case ("handlePlayButton"):
-    {
-		_params params ["_mode","_mouseData"];
-		// Having a special "debug mode" on the map selector to speed up testing was considered. We cant effectively click through the menus, so this functionality was scrapped.
-		/*
-		_mouseData params ["_control", "_button", "_xPos", "_yPos", "_shift", "_ctrl", "_alt"];
-		if (_shift && _ctrl) then {
-			
-		
-			_currentClickCount = _display getVariable ["debugClickCount", 0];
-			_currentClickCount = _currentClickCount + 1;
-			_display setVariable ["debugClickCount", _currentClickCount];
-			if (_currentClickCount == 1) then {
-				_infoText ctrlSetText "";
-				// if ctrl + shift selected, load dev info and increment counter
-				{_x ctrlShow true} forEach _debugGroup;
-				_debugPrefMap = profileNamespace getVariable ["A3A_debugPrefMap", "altis"];
-				_debugPrefID = profileNamespace getVariable ["A3A_debugPrefID", ""];
-				if (_debugPrefMap == "") then {_mapLB lbData lbCurSel _mapLB};
-				_debugIDEdit ctrlSetText _debugPrefID;
-				_debugMapText ctrlSetText _debugPrefMap;
-			} else {
-				// if ctrl + shift selected x2, set parameters and launch
-				_debugPrefID = ctrlText _debugIDEdit;
-				_debugPrefMap = ctrlText _debugMapText;
-				profileNamespace setVariable ["A3A_debugPrefID", _debugPrefID];
-				profileNamespace setVariable ["A3A_debugPrefMap", _debugPrefMap];
-				profileNamespace setVariable ["A3A_autoRunDebug", true];
-				saveprofilenamespace;
-				["startSPGame", [_debugPrefMap]] call _thisFunc;;
-			};
-		*/
-		if (false) then {
-		} else { // if none selected, launch normally
-			private _map = _mapLB lbData (lbCurSel _mapLB);
-			if (_mode == "SP") then {
-				//["handleInformationButton", ["noSP"]] call _thisFunc;
-				["startSPGame", [_map]] call _thisFunc;
-			} else {
-				["startMPGame", [_map]] call _thisFunc;
-			};
-			
-		};
-    };
 	case ("startSPGame"):
 	{
 		_params params ["_map"];
 		_display closeDisplay 0;
 		playMission ["", (configFile >> "CfgMissions" >> "MPMissions" >> format ["Antistasi_%1", _map])];
-		/*
-		hostMission [configFile >> "CfgMissions" >> "MPMissions" >> format ["Antistasi_%1", _map], _display];
-		0 spawn {
-			// Temporary until we revert Antistasi to being able to run in SP
-			// host mission and server settings menu
-			private _hostMenu = findDisplay 132;
-			private _hostContinue = _hostMenu displayCtrl 1;
-			ctrlActivate _hostContinue;
-			// cant continue after this. display will come up on its own and trip mpSetupLoaded
-		};
-		*/
-		
 	};
 	case ("startMPGame"):
 	{
 		_params params ["_map"];
 		hostMission [configFile >> "CfgMissions" >> "MPMissions" >> format ["Antistasi_%1", _map], _display];
 	};
-	/*
-	case ("mpSetupLoaded"):
-	{
-		private _setupMenu = findDisplay 70;
-		private _setupLB = _setupMenu displayCtrl 109;
-		waitUntil {lbSize _setupLB > 0};
-		_setupLB lbSetCurSel 1;
-		_setupLB lbSetCurSel 1;
-		_setupLB lbSetCurSel 1;
-		_setupLB ctrlSetMousePosition [0.5, 0.5];
-		_list = ((allControls findDisplay 70) apply {[ctrlText _x, buttonAction _x, ctrlClassName _x, ctrlIDC _x]});
-		_list2 = (["ui"] + allVariables uiNamespace + ["display"] + allVariables _setupMenu + ["control"] + allVariables _setupLB); 
-		private _setupContinue = _setupMenu displayCtrl 1;
-		_setupContinue ctrlActivate true;
-	};
-	*/
 	case ("handleBackButton"):
 	{
 		// close dialog

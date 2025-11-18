@@ -183,6 +183,7 @@ player setvariable ["compromised",0];
 
 // Install of the variables and event handlers that we need for a joining player
 call A3A_fnc_newPlayerSetup;
+call A3A_fnc_installClientEH;
 
 // Prevent squad icons showing in 3d display in high command
 addMissionEventHandler ["CommandModeChanged", {

@@ -77,7 +77,7 @@ _resourcesBackground = server getVariable "resourcesFIA";
 	_friendX = _x;
 	if ((_friendX getVariable ["spawner",false]) and (side group _friendX == teamPlayer))then {
 		if ((alive _friendX) and (!isPlayer _friendX)) then {
-			if ((isPlayer leader _friendX) or (group _friendX in (hcAllGroups theBoss)) and (not((group _friendX) getVariable ["esNATO",false]))) then {
+			if ((group _friendX in hcAllGroups theBoss) and !((group _friendX) getVariable ["esNATO",false])) then {
 				_resourcesBackground = _resourcesBackground + (server getVariable [(_friendX getVariable "unitType"),0]) / 2;
 				_backpck = backpack _friendX;
 				if (_backpck != "") then {
@@ -89,7 +89,7 @@ _resourcesBackground = server getVariable "resourcesFIA";
 					_typeVehX = typeOf _veh;
 					if (isNil {_veh getVariable "markerX"}) then {
 						if ((_veh isKindOf "StaticWeapon") or (driver _veh == _friendX)) then {
-							if ((group _friendX in (hcAllGroups theBoss))) then {
+							if (group _friendX in hcAllGroups theBoss) then {
 								_resourcesBackground = _resourcesBackground + ([_typeVehX] call A3A_fnc_vehiclePrice);
 								if (count attachedObjects _veh != 0) then {{_resourcesBackground = _resourcesBackground + ([typeOf _x] call A3A_fnc_vehiclePrice)} forEach attachedObjects _veh};
 							};
