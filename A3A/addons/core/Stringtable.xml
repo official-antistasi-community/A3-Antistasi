@@ -5369,7 +5369,7 @@
         <Chinesesimp>战俘</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_res_refu_text1">
-        <Original>A group of smugglers have been arrested in %1 and they are about to be sent to prison. Go there and free them in order to make them join our cause. Do this before %2.</Original>
+        <Original>A group of smugglers have been arrested in %1 and they are about to be sent to prison. Go there, free them, and bring them back to HQ in order to make them join our cause. Do this before %2.</Original>
         <Italian>Un gruppo di contrabbandieri è stato arrestato a %1 e stanno per essere incarcerati. Recati sul posto e liberali per reclutarli. Fallo entro %2.</Italian>
         <Spanish>Un grupo de contrabandistas ha sido arrestado en %1 y están a punto de ser enviados a prisión. Ve allí y libéralos para que se unan a nuestra causa. Hazlo antes de las %2.</Spanish>
         <French>Un groupe de contrebandiers a été arrêté à %1 et sont sur le point d'être envoyés en prison. Allez là bas et liberez-les afin de les faire rejoindre notre cause. Faites le avant %2.</French>
