@@ -500,7 +500,7 @@
         <Chinesesimp>同志,这里是 %1. 我受伤了！</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_ai_heal_ready">
-        <Original>You are ready %1.</Original>
+        <Original>You are ready, %1.</Original>
         <Korean>치료가 끝났다, %1.</Korean>
         <Russian>Вы готовы %1.</Russian>
         <Chinesesimp>你已经痊愈了%1</Chinesesimp>
