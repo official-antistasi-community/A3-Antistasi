@@ -108,6 +108,7 @@ for "_i" from 1 to _numUnits do
     _unit setDir (_station getRelDir _placePos);
     [_unit, _marker] call A3A_fnc_NATOinit;
     _unit setUnitPos "UP";
+    _unit setVariable ["A3A_forcedStance", "UP"];
     dostop _unit;
 
     sleep 0.1;
