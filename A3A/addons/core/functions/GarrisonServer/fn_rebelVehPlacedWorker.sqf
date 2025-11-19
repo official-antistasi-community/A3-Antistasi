@@ -17,7 +17,7 @@ params ["_veh"];
 // Wait for the thing to settle
 waitUntil { sleep 0.1; vectorMagnitude velocity _veh < 0.01 };
 
-if (isNull _veh) exitWith {};                       // might have been deleted immediately after detaching
+if (!alive _veh) exitWith {};                       // might have been deleted immediately after detaching
 if (!isNull attachedTo _veh) exitWith {};           // might be attached again
 if !(_veh isNil "markerX") exitWith {};             // Already added to a marker apparently
 
