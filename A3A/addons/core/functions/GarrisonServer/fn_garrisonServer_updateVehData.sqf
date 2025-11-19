@@ -29,7 +29,8 @@ private _garrison = A3A_garrison get _marker;
 
 private _usedVehicles = [];
 {
-    private _veh = nearestObject [_x#1, _x#0];          // position, type
+    if (_x#1 isEqualType 0) then { continue };                     // don't bother dealing with placed vehicles for now
+    private _veh = nearestObject [ASLtoATL (_x#1), _x#0];          // position, type
     // sanity checks?
     private _reason = call {
         if (isNull _veh) exitWith { "missing" };
@@ -41,6 +42,8 @@ private _usedVehicles = [];
         Error_3("Vehicle type %1 not found in %2, reason: %3", _x#0, _marker, _reason);
         continue;
     };
-    if !(_veh isKindOf "StaticWeapon") then { _x set [4, _veh call HR_GRG_getVehState] };
+    // Update pos/dir, in case it got nudged
+    _x set [1, getPosWorld _veh]; _x set [2, vectorDir _veh]; _x set [3, vectorUp _veh];
+    if !(_veh isKindOf "StaticWeapon") then { _x set [4, _veh call HR_GRG_fnc_getState] };
     _usedVehicles pushBack _veh;
 } forEach (_garrison get "vehicles");

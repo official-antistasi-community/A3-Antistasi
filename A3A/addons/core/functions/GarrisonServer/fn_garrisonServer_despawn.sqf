@@ -36,7 +36,7 @@ if (_side != teamPlayer) then {
     [_marker, false, false] call A3A_fnc_garrisonServer_cleanup;
 } else {
     // If it's a rebel marker then update vehicle fuel/ammo state
-    _marker call A3A_garrisonServer_updateVehData;
+    _marker call A3A_fnc_garrisonServer_updateVehData;
 };
 
 ["despawn", [_marker]] call A3A_fnc_garrisonOp;
