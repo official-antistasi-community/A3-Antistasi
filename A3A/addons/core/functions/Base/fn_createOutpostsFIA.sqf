@@ -7,15 +7,6 @@ private ["_typeX","_costs","_groupX","_unit","_radiusX","_roads","_road","_pos",
 _typeX = _this select 0;
 _positionTel = _this select 1;
 
-if (_typeX == "delete") exitWith {[localize "STR_A3A_fn_base_createoutpfia_create", localize "STR_A3A_fn_base_createoutpfia_outdated"] remoteExecCall ["A3A_fnc_customHint", theBoss]};
-
-// Check for both marker name collision and nearby rebel posts
-private _nearPosts = outpostsFIA inAreaArrayIndexes [_positionTel, 300, 300];
-private _isNearMrk = markerShape format ["RebPost%1", mapGridPosition _positionTel] != "";
-if (count _nearPosts > 0 or _isNearMrk) exitWith {
-	["Create Outpost", "There's already a rebel outpost near that position"] remoteExecCall ["A3A_fnc_customHint", theBoss];
-};
-
 _isRoad = isOnRoad _positionTel;
 
 _typeGroup = FactionGet(reb,"groupSniper");
@@ -38,7 +29,7 @@ private _taskId = "outpostsFIA" + str A3A_taskCount;
 [_taskId, "outpostsFIA", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 _groupX = [getMarkerPos respawnTeamPlayer, teamPlayer, _typeGroup] call A3A_fnc_spawnGroup;
-_groupX setGroupId ["Post"];
+_groupX setGroupIdGlobal ["Post"];
 _road = [getMarkerPos respawnTeamPlayer] call A3A_fnc_findNearestGoodRoad;
 _pos = position _road findEmptyPosition [1,30,"B_G_Van_01_transport_F"];
 _truckX = _typeVehX createVehicle _pos;
