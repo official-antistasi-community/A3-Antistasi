@@ -48,7 +48,7 @@
         <Original>Battle for %1</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_cityBattle_description">
-        <Original>This is our chance to turn %1 to our side. An uprising has been prepared, and the enemy have sent a suppression force. Talk to the local leader for the uprising at the task marker or attack the enemy forces before %2 to start the battle.</Original>
+        <Original>This is our chance to turn %1 to our side. An uprising has been prepared, and the enemy have sent a suppression force. Talk to the town's local leader at the task marker or attack the enemy forces before %2 to start the battle.</Original>
       </Key>
       <Key ID="STR_A3A_Tasks_cityBattle_start">
         <Original>Trigger the uprising</Original>
