@@ -742,6 +742,10 @@ class CfgFunctions
             class SUP_tankRoutine {};
             class SUP_UAV {};
             class SUP_UAVRoutine {};
+            class SUP_UAVAvailable {};
+            class SUP_UAVAttack {};
+            class SUP_UAVAttackRoutine {};
+            class SUP_UAVAttackAvailable {};
         };
 
         class FunctionsTemplates {
