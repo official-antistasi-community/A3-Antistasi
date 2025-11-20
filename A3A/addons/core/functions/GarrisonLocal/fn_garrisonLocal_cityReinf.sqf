@@ -58,6 +58,7 @@ if (alive _station) then {
         _unit setDir (_station getRelDir _x);
         [_unit, _marker] call A3A_fnc_NATOinit;
         _unit setUnitPos "UP";
+        _unit setVariable ["A3A_forcedStance", "UP"];
         dostop _unit;
     } forEach _unitPositions;
     _stationUsed = true;
