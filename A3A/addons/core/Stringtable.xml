@@ -2896,9 +2896,7 @@
         <Chinesesimp>清除树林</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_createDialog_SLPS_line1">
-        <Original>Antistasi has a custom save system similar to other CTIs.&lt;br/&gt;&lt;br/&gt;To Save: Your commander needs to go to the &lt;t color='#f0d498'&gt;Map Board&lt;/t&gt;, scroll-select &lt;t color='#f0d498'&gt;""Game Options""&lt;/t&gt; and click on the &lt;t color='#f0d498'&gt;""Persistent Save""&lt;/t&gt; button.</Original>
-        <Korean>안티스타시에는 다른 CTI 모드와 유사한 사용자 정의 저장 시스템이 있습니다.&lt;br/&gt;&lt;br/&gt;저장 방법: 지휘관은 &lt;t color='#f0d498'&gt;지도 화이트보드&lt;/t&gt;로 이동하여 스크롤 선택으로&lt;t color='#f0d498'&gt;""게임 설정""&lt;/t&gt;을 선택하고 &lt;t color='#f0d498'&gt;""영구 저장""&lt;/t&gt; 버튼을 누르십시오.</Korean>
-        <Russian>В Antistasi есть собственная система сохранения, похожая на другие CTI.&lt;br/&gt;&lt;br/&gt; Чтобы сохранить: Ваш командир должен подойти к &lt;t color='#f0d498'&gt;Карте&lt;/t&gt;, открыть &lt;t color='#f0d498'&gt;""Параметры""&lt;/t&gt; и нажать на кнопку &lt;t color='#f0d498'&gt;""Сохранение""&lt;/t&gt;.</Russian>
+        <Original>Antistasi has a custom save system similar to other CTIs.&lt;br/&gt;&lt;br/&gt;To Save: Go to the &lt;t color='#f0d498'&gt;Battle Menu (%1)&lt;/t&gt;, select the Commander or Admin tab and then click the &lt;t color='#f0d498'&gt;"Persistent Save"&lt;/t&gt; button.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_createDialog_SLPS_line2">
         <Original>Current parameters are configured to auto-save every %1 minutes.</Original>
