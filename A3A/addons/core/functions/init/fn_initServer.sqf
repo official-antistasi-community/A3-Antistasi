@@ -77,6 +77,9 @@ A3A_backgroundInitDone = true;
 Info("Server Initialising PATCOM Variables");
 [] call A3A_fnc_patrolInit;
 
+Info("Checking for blacklisted mods on server");
+[] spawn A3A_fnc_modBlacklist;
+
 // **************** Starting game, param-dependent init *******************************
 
 // Wait until we have selected/created save data
@@ -309,16 +312,6 @@ addMissionEventHandler ["EntityKilled", {
         ["", _object] call A3A_fnc_garrisonServer_addVehicle;
     }] call CBA_fnc_addEventHandler;
 };*/
-
-if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
-    isClass (configfile >> "CfgPatches" >> "lambs_danger"))) then {
-    // disable lambs danger fsm entrypoint
-    ["CAManBase", "InitPost", {
-        params ["_unit"];
-        (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
-        _unit setVariable ["lambs_danger_disableAI", true];
-    }] call CBA_fnc_addClassEventHandler;
-};
 
 // Could replace these with entityCreated handler instead...
 if(A3A_hasZen) then {
