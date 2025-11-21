@@ -118,6 +118,7 @@ class CfgFunctions
             class addTimeForIdle {};
             class aggressionUpdateLoop {};
             class AILoadInfo {};
+            class airdropCargo {};
             class airspaceControl {};
             class blackout {};
             class buildHQ {};
@@ -240,6 +241,7 @@ class CfgFunctions
             class calculateMarkerArea {};
             class cargoSeats {};
             class cleanserVeh {};
+            class createAirdropPlane {};
             class createAttackForceAir {};
             class createAttackForceLand {};
             class createAttackForceMixed {};

@@ -80,4 +80,4 @@ class CityTasks {
         weight = 1;
     };
 
-};
+

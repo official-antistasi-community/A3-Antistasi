@@ -14,6 +14,7 @@ class CfgFunctions {
             class minutesFromNow {};
             class nearFriendlyMarkers {};
             class nearHostileMarkers {};
+            class unitSpeakNearby {};
             class taskNotifyNear {};
         };
         class Params { // params getter functions for the tasks  |  returns false if failed, otherwise params array
@@ -22,6 +23,12 @@ class CfgFunctions {
             class city_hostage_p {};
             class city_taxi_p {};
             class city_repair_p {};
+          
+            class CON_broadcast_p {};
+            class LOG_equipDrop_p {};
+            class LOG_supplies_p {};
+            class SUPP_occReporter_p {};
+            class SUPP_rebReporter_p {};
         };
         class Tasks { // task  |  Passed task HM to store task instructions into
             file = QPATHTOFOLDER(Tasks);
@@ -32,6 +39,12 @@ class CfgFunctions {
             class city_hostage {};
             class city_taxi {};
             class city_repair {};
+          
+            class CON_broadcast {};
+            class LOG_equipDrop {};
+            class LOG_supplies {};
+            class SUPP_occReporter {};
+            class SUPP_rebReporter {};
         };
     };
 };
