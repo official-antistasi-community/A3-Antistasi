@@ -131,9 +131,9 @@ private _cityDataHM = createHashMap;
 
 ["cityData", _cityDataHM] call A3A_fnc_setStatVariable;
 
-// Update rebel garrison vehicle states. Can do this on active data because it doesn't change anything
+// Update rebel garrison vehicle states for spawned garrisons. Can do this on active data because it doesn't change anything
 private _rebMarkers = (markersX select { sidesX getVariable _x == teamPlayer }) + outpostsFIA;
-{ _x call A3A_fnc_garrisonServer_updateVehData } forEach _rebMarker;
+{ _x call A3A_fnc_garrisonServer_updateVehData } forEach (_rebMarkers select { spawner getVariable _x != 2 });
 
 // Cull garrison data to what we want to save
 private _saveGarrison = +A3A_garrison;
