@@ -251,10 +251,6 @@ dlcs[]=
 	"Expansion"
 };
 randomSeed=6975511;
-class ScenarioData
-{
-	author="Bob Murphy";
-};
 class CustomAttributes
 {
 	class Category0
