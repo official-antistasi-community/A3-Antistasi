@@ -39,7 +39,7 @@ A3A_spawnPlaceStats = createHashMap;
             case "vehicleTruck": { 1 };
             case "vehicle": { [0, 6 min ceil (_maxPlaces / 2)] select _isAirport };
             case "heli": { ceil (_garrSize / 15) };
-            case "plane": { 3 };
+            case "plane": { [0, 3] select _isAirport };         // in case outposts overlap airports
             case "runway": { 1 };
             case "boat": { 1 };
         };
