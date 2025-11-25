@@ -15797,7 +15797,7 @@
         <Chinesesimp>服务器加载完毕</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_feedback_serverinfo_mismatch">
-        <Original>Version mismatch error:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;Client: %2</Original>
+        <Original>Error: Version mismatch on client and server:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;&lt;br/&gt;Client: %2&lt;br/&gt;&lt;br/&gt;Ensure you are running the most recent version of Antistasi - The Mod on the server and your computer.</Original>
         <Italian>Errore, versione non corrispondente:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;Client: %2</Italian>
         <Spanish>Error de discordancia de versión:&lt;br&gt;&lt;br/&gt;Servidor: %1&lt;br/&gt;Cliente: %2</Spanish>
         <French>Erreur d'incohérence de version :&lt;br/&gt;&lt;br/&gt;Serveur : %1&lt;br/&gt;Client : %2</French>

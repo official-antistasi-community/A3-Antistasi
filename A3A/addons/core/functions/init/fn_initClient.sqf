@@ -26,7 +26,6 @@ if (!isNil "serverInitDone" and !isNil "A3A_utilityItemHM") then {
 };
 
 if (!requiredVersion QUOTE(REQUIRED_VERSION)) exitWith { Error("Arma version is out of date") };
-[] spawn A3A_fnc_modBlacklist;
 
 //Disables rabbits and snakes, because they cause the log to be filled with "20:06:39 Ref to nonnetwork object Agent 0xf3b4a0c0"
 //Can re-enable them if we find the source of the bug.
@@ -70,7 +69,7 @@ waitUntil { sleep 0.1; !isNil "initZonesDone" };
 if (isNil "A3A_serverVersion") then { A3A_serverVersion = "pre-3.3" };
 if (A3A_clientVersion != A3A_serverVersion) exitWith {
     private _errorStr = format [localize "STR_A3A_feedback_serverinfo_mismatch", A3A_serverVersion, A3A_clientVersion];
-    [localize "STR_A3A_feedback_serverinfo", _errorStr] call A3A_fnc_customHint;
+    localize "STR_A3A_feedback_serverinfo" hintC parseText _errorStr;
 };
 
 // Show server startup state hints
@@ -89,6 +88,7 @@ while {true} do {
 Info("Server started, continuing with client init");
 
 //call A3A_fnc_installSchrodingersBuildingFix;
+[] spawn A3A_fnc_modBlacklist;
 
 if (!isServer) then {
     // get server to send us the current destroyedBuildings list, hide them locally

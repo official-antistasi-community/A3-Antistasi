@@ -76,8 +76,11 @@ A3A_backgroundInitDone = true;
 Info("Server Initialising PATCOM Variables");
 [] call A3A_fnc_patrolInit;
 
-Info("Checking for blacklisted mods on server");
-[] spawn A3A_fnc_modBlacklist;
+if !(hasInterface) then { // already runs client side
+    Info("Checking for blacklisted mods on server");
+    [] spawn A3A_fnc_modBlacklist;
+};
+
 
 // **************** Starting game, param-dependent init *******************************
 

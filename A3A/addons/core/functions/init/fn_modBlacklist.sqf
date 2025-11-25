@@ -1,13 +1,12 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 if !(canSuspend) exitWith {};
-if !(isNil "A3A_modsChecked") exitWith {};
 
 private _blacklistedHM = createHashMapFromArray [ // ["Mod Name As Seen On Steam", [{condition}, "Dev Comment"],
 	// All of these strings dont need to be localized
 	["LAMBS_Danger", [{isClass (configfile >> "CfgPatches" >> "lambs_danger")}, "Causes AI to walk away from garrisons and ignore tasks assigned by Antistasi"]],
 	["Vcom", [{isClass (configfile >> "CfgPatches" >> "VCOM_AI")}, "Breaks Antistasi AI and also causes AI to attempt to steal random vehicles"]],
-	["ALiVE", [{isClass (configfile >> "CfgVehicles" >> "ALiVE_require")}, "Antistasi has its own save system and AI command system"]],
+	["ALiVE", [{isClass (configfile >> "CfgVehicles" >> "ALiVE_require")}, "Antistasi has its own save system and AI command system, stops game from starting entirely"]], // also hard breaks game start LOL
 	["MCC Sandbox 4", [{missionNamespace getVariable ["MCC_isMode",false]}, ""]], // blocked from a while ago, could find no solid info
 	["ASR AI3", [{"asr_ai3_main" in activatedAddons}, ""]], // blocked from a while ago, could find no solid info
 	["Project Injury Reaction (PiR)", [{isClass (configfile >> "CfgPatches" >> "PiR")}, "Breaks the death / unconscious states for Antistasi medical. May work fine with ACE Medical."]],
@@ -29,8 +28,6 @@ private _formattedBadMods = _badMods joinString ", ";
 
 Error_1("Blacklisted mods detected: %1. Removing these mods is recommended.", _formattedBadMods)
 
-A3A_modsChecked = true;
-
 // this can be a single case for right now
 if ("LAMBS_Danger" in _badMods) then {
 	// disable lambs danger fsm entrypoint
@@ -44,15 +41,15 @@ if ("LAMBS_Danger" in _badMods) then {
 
 if !(hasInterface) exitWith {
 	waitUntil {sleep 0.5; count playableUnits > 0};
-	[localize "STR_A3A_mod_blacklist_title", format [localize "STR_A3A_mod_blacklist_serverHint", _badMods joinString "<br/>"]] call A3A_fnc_customHint;
+	[localize "STR_A3A_mod_blacklist_title", format [localize "STR_A3A_mod_blacklist_serverHint", _badMods joinString "<br/>"]] remoteExec [A3A_fnc_customHint, playableUnits#0];
 };
 
 {
 	private _mod = _x;
 	private _devComment = (_blacklistedHM get _mod)#1;
 	if (_devComment isEqualTo "") then {_devComment = "None"};
-	sleep 0.1;
-	localize "STR_A3A_mod_blacklist_warningTitle" hintC parseText format [localize "STR_A3A_mod_blacklist_warningText", _mod, _devComment];
 	waitUntil {sleep 0.1; isNull findDisplay 72};
 	hintSilent "";
+	localize "STR_A3A_mod_blacklist_warningTitle" hintC parseText format [localize "STR_A3A_mod_blacklist_warningText", _mod, _devComment];
 } forEach _badMods;
+hintSilent "";
