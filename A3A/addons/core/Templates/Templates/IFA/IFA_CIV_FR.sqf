@@ -86,7 +86,7 @@ private _pressTemplate = {
 private _prefix = "militia";
 private _unitTypes = [
     ["Press", _pressTemplate],
-    ["Worker", _workerTemplate, nil, 10],
+    ["Worker", _workerTemplate],
     ["Man", _manTemplate, nil, 10]
 ];
 

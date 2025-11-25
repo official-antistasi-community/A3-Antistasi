@@ -265,8 +265,8 @@ private _pressTemplate = {
 private _prefix = "militia";
 private _unitTypes = [
     ["Press", _pressTemplate],
-    ["Worker", _workerTemplate, nil, 10],
-    ["Man", _manTemplate, nil, 10]
+    ["Worker", _workerTemplate],
+    ["Man", _manTemplate, nil, 15]
 ];
 
 [_prefix, _unitTypes, _loadoutData] call _fnc_generateAndSaveUnitsToTemplate;
