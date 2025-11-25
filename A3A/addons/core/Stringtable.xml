@@ -16686,7 +16686,7 @@
         <Original>Blacklisted Mod Detected!</Original>
       </Key>
       <Key ID="STR_A3A_mod_blacklist_warningText">
-        <Original>Antistasi has detected a blacklisted mod on your client:&lt;br/&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;It is highly recommended that you remove this mod; it may break the gamemode in unpredictable ways.<br/><br/>Dev comment: %2</Original>
+        <Original>Antistasi has detected a blacklisted mod on your client:&lt;br/&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;It is highly recommended that you remove this mod; it may break the gamemode in unpredictable ways.&lt;br/&gt;&lt;br/&gt;Dev comment: %2</Original>
       </Key>
     </Container>
   </Package>

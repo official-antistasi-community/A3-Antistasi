@@ -1,6 +1,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 if !(canSuspend) exitWith {};
+if !(isNil "A3A_modsChecked") exitWith {};
 
 private _blacklistedHM = createHashMapFromArray [ // ["Mod Name As Seen On Steam", [{condition}, "Dev Comment"],
 	// All of these strings dont need to be localized
@@ -14,7 +15,7 @@ private _blacklistedHM = createHashMapFromArray [ // ["Mod Name As Seen On Steam
 	["Werthles' Headless Module", [{isClass (configfile >> "CfgPatches" >> "Werthles_WHK")}, "Antistasi is reliant on its own scripts for using headless clients"]],
 	["Advanced Rappelling", [{isClass (configfile >> "CfgPatches" >> "AR_AdvancedRappelling") && (isServer && (productVersion # 6) isEqualTo "Linux")}, "Breaks AI movement on Linux servers"]],
 	["Advanced Urban Rappelling", [{isClass (configfile >> "CfgPatches" >> "AUR_AdvancedUrbanRappelling") && (isServer && (productVersion # 6) isEqualTo "Linux")}, "Breaks AI movement on Linux servers"]],
-	["ACE Medical", [{isClass (configFile >> "CfgSounds" >> "ACE_heartbeat_fast_3") && {!isMultiplayer}}, "Breaks respawning in singleplayer. Download the ACE No Medical mod to get the rest of the ACE features without the broken Medical"]], // broken only in real sp
+	["ACE Medical", [{isClass (configFile >> "CfgSounds" >> "ACE_heartbeat_fast_3") && {!isMultiplayer}}, "Breaks respawning in singleplayer. Download the ACE No Medical mod to get the rest of the ACE features without the broken medical"]] // broken only in real sp
 ];
 
 private _badMods = [];
@@ -27,6 +28,8 @@ if (count _badMods == 0) exitWith {};
 private _formattedBadMods = _badMods joinString ", ";
 
 Error_1("Blacklisted mods detected: %1. Removing these mods is recommended.", _formattedBadMods)
+
+A3A_modsChecked = true;
 
 // this can be a single case for right now
 if ("LAMBS_Danger" in _badMods) then {
