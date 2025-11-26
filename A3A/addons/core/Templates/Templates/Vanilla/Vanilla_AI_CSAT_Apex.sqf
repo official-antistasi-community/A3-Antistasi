@@ -29,8 +29,9 @@ private _cargoTrucks = ["O_T_Truck_02_transport_F","O_T_Truck_02_F","O_T_Truck_0
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["a3a_T_APC_Wheeled_02_rcws_v2_F"]] call _fnc_saveToTemplate;
 private _vehiclesIFVs = ["a3a_T_APC_Tracked_02_cannon_F"];
+private _vehiclesLightTanks = [];
 private _Tanks = ["O_T_MBT_02_cannon_ghex_F"];
-["vehiclesAA", ["O_T_APC_Tracked_02_AA_ghex_F"]] call _fnc_saveToTemplate;
+private _vehiclesAA = ["O_T_APC_Tracked_02_AA_ghex_F"];
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["O_T_Boat_Armed_01_hmg_F"]] call _fnc_saveToTemplate;
@@ -45,10 +46,10 @@ private _Tanks = ["O_T_MBT_02_cannon_ghex_F"];
 ["vehiclesHelisLightAttack", ["O_Heli_Light_02_dynamicLoadout_F"]] call _fnc_saveToTemplate; 
 ["vehiclesHelisAttack", ["O_Heli_Attack_02_dynamicLoadout_black_F"]] call _fnc_saveToTemplate;
 
-["vehiclesArtillery", ["O_T_MBT_02_arty_ghex_F"]] call _fnc_saveToTemplate;
-["magazines", createHashMapFromArray [
+private _vehiclesArtillery = ["O_T_MBT_02_arty_ghex_F"];
+private _magazines = createHashMapFromArray [
 ["O_T_MBT_02_arty_ghex_F", ["32Rnd_155mm_Mo_shells_O"]]
-]] call _fnc_saveToTemplate;
+];
 
 ["uavsAttack", ["O_UAV_02_dynamicLoadout_F","O_T_UAV_04_CAS_F"]] call _fnc_saveToTemplate;
 ["uavsPortable", ["O_UAV_01_F"]] call _fnc_saveToTemplate;
@@ -97,6 +98,12 @@ if ("rf" in A3A_enabledDLC) then {
 };
 if ("ef" in A3A_enabledDLC) then {
     ["vehiclesGunBoats", ["EF_O_CombatBoat_HMG_OPF", "EF_O_CombatBoat_AT_OPF"]] call _fnc_saveToTemplate;
+    _vehiclesAA append ["EF_O_Gyra_Antiair_OPF_T"];
+    _vehiclesArtillery append ["EF_O_Gyra_Mortar_OPF_T"];
+    _magazines set ["EF_O_Gyra_Mortar_OPF_T", ["EF_6Rnd_120mm_Mo_shells"]];
+    _lightArmed append ["EF_O_Gyra_HMG_OPF_T", "EF_O_Gyra_HMG_OPF_T"];
+    _lightUnarmed append ["EF_O_Gyra_OPF_T"];
+    _vehiclesLightTanks append ["EF_O_Gyra_Armed_OPF_T"];
 };
 
 ["vehiclesLightArmed",_lightArmed] call _fnc_saveToTemplate;
@@ -104,9 +111,13 @@ if ("ef" in A3A_enabledDLC) then {
 ["vehiclesMilitiaLightArmed", _vehiclesMilitiaLightArmed] call _fnc_saveToTemplate;
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;
 
-["vehiclesTanks", _Tanks] call _fnc_saveToTemplate; 
 ["vehiclesIFVs", _vehiclesIFVs] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", _cargoTrucks] call _fnc_saveToTemplate;
+["vehiclesTanks", _Tanks] call _fnc_saveToTemplate; 
+["vehiclesLightTanks", _vehiclesLightTanks] call _fnc_saveToTemplate;
+["vehiclesAA", _vehiclesAA] call _fnc_saveToTemplate;
+["vehiclesArtillery", _vehiclesArtillery] call _fnc_saveToTemplate;
+["magazines", _magazines] call _fnc_saveToTemplate;
 
 #include "Vanilla_Vehicle_Attributes.sqf"
 
@@ -482,6 +493,27 @@ if ("rf" in A3A_enabledDLC) then {
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Aco_smg", [], [], ""]
     ];
     _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
+};
+if ("ef" in A3A_enabledDLC) then {
+    _officerLoadoutData set ["SMGs", [
+        ["EF_smg_Diplomat", "", "", "optic_Aco_smg", [], [], ""]
+    ]];
+    _crewLoadoutData set ["SMGs", [
+        ["EF_smg_Diplomat_Ghex", "", "", "", [], [], ""]
+    ]];
+    _pilotLoadoutData set ["SMGs", [
+        ["EF_smg_Diplomat_Ghex", "", "", "", [], [], ""]
+    ]];
+    (_sfLoadoutData get "SMGs") append [
+        ["EF_smg_Diplomat", "ef_snds_diplomat", "acc_pointer_IR", "optic_Aco_smg", [], [], ""],
+        ["EF_smg_Diplomat", "ef_snds_diplomat", "acc_pointer_IR", "optic_Aco_smg", [], [], ""],
+        ["EF_smg_Diplomat", "ef_snds_diplomat", "acc_pointer_IR", "optic_Aco_smg", [], [], ""],
+        ["EF_smg_Diplomat", "ef_snds_diplomat", "acc_pointer_IR", "optic_Aco_smg", [], [], ""]
+    ];
+    (_militaryLoadoutData get "SMGs") append [
+        ["EF_smg_Diplomat_Ghex", "", "", "optic_Aco_smg", [], [], ""],
+        ["EF_smg_Diplomat_Ghex", "", "", "optic_Aco_smg", [], [], ""]
+    ];
 };
 
 /////////////////////////////////
