@@ -65,12 +65,19 @@ if !(isServer) then {
 };
 
 // Server/client version check
-waitUntil { sleep 0.1; !isNil "initZonesDone" };
+waitUntil { sleep 0.1; getClientState == "BRIEFING READ" and !isNil "initZonesDone" };
 if (isNil "A3A_serverVersion") then { A3A_serverVersion = "pre-3.3" };
-if (A3A_clientVersion != A3A_serverVersion) exitWith {
+if (A3A_clientVersion != A3A_serverVersion) then {
     private _errorStr = format [localize "STR_A3A_feedback_serverinfo_mismatch", A3A_serverVersion, A3A_clientVersion];
+    Error_2("Version mismatch: Server %1, client %2", A3A_serverVersion, A3A_clientVersion);
     localize "STR_A3A_feedback_serverinfo" hintC parseText _errorStr;
+    waitUntil {sleep 0.01; isNull findDisplay 72};
+    hintSilent "";
 };
+
+// Should be called after server sends A3A_serverBadMods
+// Blocks until the hintCs are done if it's a real client
+[] call A3A_fnc_modBlacklist;
 
 // Show server startup state hints
 if (isNil "A3A_startupState") then { A3A_startupState = "waitserver" };
@@ -88,7 +95,6 @@ while {true} do {
 Info("Server started, continuing with client init");
 
 //call A3A_fnc_installSchrodingersBuildingFix;
-[] spawn A3A_fnc_modBlacklist;
 
 if (!isServer) then {
     // get server to send us the current destroyedBuildings list, hide them locally
@@ -103,7 +109,7 @@ if (!isServer) then {
 
 // Headless clients register with server and bail out at this point
 if (!isServer and !hasInterface) exitWith {
-
+    if (A3A_clientVersion != A3A_serverVersion) exitWith {};            // Do not use HCs that have a version mismatch
     player setPosATL (markerPos respawnTeamPlayer vectorAdd [-100, -100, 0]);
     [clientOwner] remoteExecCall ["A3A_fnc_addHC",2];
 };

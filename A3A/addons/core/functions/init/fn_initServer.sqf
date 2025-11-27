@@ -39,6 +39,11 @@ if (isClass (configFile/"CfgVehicles"/"vn_module_dynamicradiomusic_disable")) th
     A3A_VN_MusicModule = (createGroup sideLogic) createUnit ["vn_module_dynamicradiomusic_disable", [worldSize, worldSize,0], [],0,"NONE"];
 };
 
+if !(hasInterface) then {       // Only needs client call on localhost
+    Info("Checking for blacklisted mods on server");
+    [] call A3A_fnc_modBlacklist;
+};
+
 // Shouldn't be anything with dependencies in here
 call A3A_fnc_initVarCommon;
 call A3A_fnc_initZones;					// needed here because new-game setup needs to know where the markers are
@@ -75,11 +80,6 @@ A3A_backgroundInitDone = true;
 
 Info("Server Initialising PATCOM Variables");
 [] call A3A_fnc_patrolInit;
-
-if !(hasInterface) then { // already runs client side
-    Info("Checking for blacklisted mods on server");
-    [] spawn A3A_fnc_modBlacklist;
-};
 
 
 // **************** Starting game, param-dependent init *******************************
