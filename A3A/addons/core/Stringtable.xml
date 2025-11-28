@@ -15798,7 +15798,7 @@
         <Chinesesimp>服务器加载完毕</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_feedback_serverinfo_mismatch">
-        <Original>Version mismatch error:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;Client: %2</Original>
+        <Original>Error: Version mismatch on client and server:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;&lt;br/&gt;Client: %2&lt;br/&gt;&lt;br/&gt;Ensure you are running the most recent version of Antistasi - The Mod on the server and your computer.</Original>
         <Italian>Errore, versione non corrispondente:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;Client: %2</Italian>
         <Spanish>Error de discordancia de versión:&lt;br&gt;&lt;br/&gt;Servidor: %1&lt;br/&gt;Cliente: %2</Spanish>
         <French>Erreur d'incohérence de version :&lt;br/&gt;&lt;br/&gt;Serveur : %1&lt;br/&gt;Client : %2</French>
@@ -16674,6 +16674,20 @@
     <Container name="role_names">
       <Key ID="STR_A3A_role_names_rebel">
         <Original>Rebel</Original>
+      </Key>
+    </Container>
+    <Container name="mod_blacklist">
+      <Key ID="STR_A3A_mod_blacklist_title">
+        <Original>Blacklisted Mod Detected!</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_titleServer">
+        <Original>Blacklisted Mod On Server!</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_text">
+        <Original>Antistasi has detected a blacklisted mod on your client:&lt;br/&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;It is highly recommended that you remove this mod; it may break the gamemode in unpredictable ways.&lt;br/&gt;&lt;br/&gt;Dev comment: %2</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_textServer">
+        <Original>Antistasi has detected a blacklisted mod on your server:&lt;br/&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;It is highly recommended that you remove this mod; it may break the gamemode in unpredictable ways.&lt;br/&gt;&lt;br/&gt;Dev comment: %2</Original>
       </Key>
     </Container>
   </Package>
