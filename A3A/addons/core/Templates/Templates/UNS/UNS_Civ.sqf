@@ -109,7 +109,7 @@ private _prefix = "militia";
 private _unitTypes = [
     ["Press", _pressTemplate],
     ["Worker", _workerTemplate],
-    ["Man", _manTemplate]
+    ["Man", _manTemplate, nil, 10]
 ];
 
 [_prefix, _unitTypes, _loadoutData] call _fnc_generateAndSaveUnitsToTemplate;
