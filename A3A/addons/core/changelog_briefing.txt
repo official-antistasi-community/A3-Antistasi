@@ -1,4 +1,35 @@
-Version 3.10.1
+Version 3.10.2
+<br/>
+<br/>
+<br/>Minor
+<br/>
+<br/>Mod blacklisting improvements; now you will be notified clearly about any mods you load broken with Antistasi
+<br/>
+<br/>
+<br/>Template updates
+<br/>
+<br/>Increased the variety of civilian loadouts in many civilian factions
+<br/>Updated vanilla, WS, and EF templates for compatibility with the EF CDLC 1.1 update
+<br/>
+<br/>
+<br/>Bugfixes
+<br/>
+<br/>Fixed a bug where buyable objects like fuel tanks would not be garbage cleaned when killed
+<br/>Fixed a bug where the new UI could break when opened from the old menu
+<br/>Fixed a bug where the repair function on the building placer menu was broken on dedicated servers
+<br/>Fixed a bug where rebel unit types wouldn't transfer in from pre-3.10.0 saves
+<br/>Fixed several bugs with roadblock creation
+<br/>Fixed an outdated description on game start for how to save the game
+<br/>Fixed a few bugs with vehicle persistence in rebel garrisons
+<br/>Fixed a bug where you could overfill garrisons with squads
+<br/>Fixed a few small stringtable errors
+<br/>Fixed a few erroneous editor settings in some maps
+<br/>Fixed a bug where AIs would get stuck prone after ducking mortars
+<br/>Fixed a bug where planes would spawn in outposts
+<br/>
+<br/>
+<br/>
+<br/>Version 3.10.1
 <br/>
 <br/>
 <br/>Minor
