@@ -24,8 +24,10 @@ private _fnc_generateList = {
     while {_itemCount > 0 and _allItems isNotEqualTo []} do {
         private _item = _allItems deleteAt floor random count _allItems;
         private _price = [_item, _cfgType] call A3A_GUI_fnc_calculateItemPrice;
-        private _stock = ceil (_maxStock * (0.3 + random 0.7));
-        _itemPriceList set [_item, [_price call _fnc_roundPrice, _stock]];
+        private _stockGS = ceil (_maxStock * (0.3 + random 0.7));
+        private _stockArsenal = [jna_dataList select (_item call jn_fnc_arsenal_itemType), _item] call jn_fnc_arsenal_itemCount;
+        if (_stockArsenal isEqualTo -1) then { _stockArsenal = "unlocked" };
+        _itemPriceList set [_item, [_price call _fnc_roundPrice, _stockGS, _stockArsenal]];
         _itemCount = _itemCount - 1;
     };
     _itemPriceList;
@@ -69,8 +71,12 @@ if (_minCount >= 100) then {
         if !(_mag in allMagazines) then {continue};     // use Antistasi blacklisting? kinda expensive but whatever
 
         private _price = [_mag, "mag"] call A3A_GUI_fnc_calculateItemPrice;
-        private _stock = ceil (15 + random 15);
-        _magsPrices set [_mag, [_price call _fnc_roundPrice, _stock]];
+        private _stockGS = ceil (15 + random 15);
+        // TODO: replace 26 with constant? Will require including "\A3\Ui_f\hpp\defineResinclDesign.inc" and replacing 26 with IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL
+        private _stockArsenal = [jna_dataList select 26, _mag] call jn_fnc_arsenal_itemCount;
+        private _capacity = getNumber (configFile >> "CfgMagazines" >> _mag >> "count");
+        if (_stockArsenal isEqualTo -1) then { _stockArsenal = "unlocked" } else { _stockArsenal = _stockArsenal / _capacity };
+        _magsPrices set [_mag, [_price call _fnc_roundPrice, _stockGS, _stockArsenal]];
     } forEach _weapons;
 
     _gunShopData set [A3A_IDC_GUN_SHOP_MAGAZINES_TAB, _magsPrices];

@@ -119,7 +119,7 @@ private _createdCtrls = [];
 
 {
     private _className = _x;
-    _y params ["_itemPrice", "_stock"];
+    _y params ["_itemPrice", "_stockGS", "_stockArsenal"];
 
     private _configClass = _config >> _className;
     private _displayName = getText (_configClass >> "displayName");
@@ -162,7 +162,7 @@ private _createdCtrls = [];
 
     private _displayStock = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
     _displayStock ctrlSetPosition _stockBox;
-    private _stockStr = str _stock + " in stock";           // TODO: stringtable
+    private _stockStr = str _stockGS + " in stock; " + ([str _stockArsenal, _stockArsenal] select (_stockArsenal isEqualType "")) + " in arsenal; " + str minWeaps + " to unlock";           // TODO: stringtable, make this control bigger
     _displayStock ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#63DDFF' shadow='2'>%1</t>", _stockStr]);
     _displayStock ctrlCommit 0;
 
@@ -184,17 +184,17 @@ private _createdCtrls = [];
     _button setVariable ["className", _className];
     _button setVariable ["selectedTabIDC", _selectedTabIDC];
     _button setVariable ["price", _itemPrice];
-    _button setVariable ["stock", _stock];
+    _button setVariable ["stock", _stockGS];
 
     _button ctrladdeventhandler ["ButtonClick", {
         params ["_control"];
         private _className = _control getVariable ["className", ""];
         private _selectedTabIDC = _control getVariable ["selectedTabIDC", ""];
         private _price = _control getVariable ["price", ""];
-        private _stock = _control getVariable ["stock", 0];
+        private _stockGS = _control getVariable ["stock", 0];
         if(_className isEqualTo "" || _selectedTab isEqualTo "") exitwith {};
 
-        [_className, _price, 1, _stock] call A3A_GUI_fnc_addToCart;
+        [_className, _price, 1, _stockGS] call A3A_GUI_fnc_addToCart;
 
         call A3A_GUI_fnc_updateCartNumber;
 
