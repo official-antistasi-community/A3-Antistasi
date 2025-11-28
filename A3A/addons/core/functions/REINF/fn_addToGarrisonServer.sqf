@@ -32,13 +32,15 @@ if (_limit != -1 and _newGarrisonCount >= _limit) then {
     [_titleStr, localize "STR_A3A_garrison_exceed_limit"] remoteExecCall ["A3A_fnc_customHint", _player];
 };
 
+// Units may not delete immediately so we create a temporary group
+private _garrisonGroup = createGroup [teamPlayer, true];
+_unitsX joinSilent _garrisonGroup;
 if (isNull _groupX) then {
-    _groupX = createGroup teamPlayer;
-    _unitsX joinSilent _groupX;
     [_titleStr, localize "STR_A3A_garrison_adding_to_garrison"] remoteExecCall ["A3A_fnc_customHint", _player];
 } else {
     [_titleStr, format [localize "STR_A3A_garrison_adding_to_garrison_hc", groupID _groupX]] remoteExecCall ["A3A_fnc_customHint", _player];
     theBoss hcRemoveGroup _groupX;
+    _groupX deleteGroupWhenEmpty true;
 };
 
-[_nearX, _groupX, _player] remoteExecCall ["A3A_fnc_garrisonServer_addGroup", 2];
+[_nearX, _garrisonGroup] remoteExecCall ["A3A_fnc_garrisonServer_addGroup", 2];

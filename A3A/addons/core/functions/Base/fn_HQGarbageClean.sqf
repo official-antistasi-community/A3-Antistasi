@@ -33,7 +33,8 @@ Debug("Moving dead solders out of vehicles at HQ...")
 Debug("Finished moving soldiers out of vehicles at HQ; executing garbage clean.")
 sleep 0.5;
 
-[allDead, true] call _fnc_objNearHQ;
+[allDeadMen, true] call _fnc_objNearHQ;
+[vehicles select {!alive _x}, true] call _fnc_objNearHQ;				// allDead doesn't include 0-crew vehicles like the large fuel tank
 [allMissionObjects "WeaponHolder", true] call _fnc_objNearHQ;
 [allMissionObjects "WeaponHolderSimulated", true] call _fnc_objNearHQ;
 

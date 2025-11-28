@@ -30,8 +30,9 @@ private _vehiclesLightArmed = ["a3a_LSV_02_AT_black_F","a3a_LSV_01_AT_black_F","
 ["vehiclesLightAPCs", ["B_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["a3a_APC_Wheeled_03_cannon_blufor_F","a3a_B_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["a3a_APC_Wheeled_03_cannon_blufor_F"]] call _fnc_saveToTemplate;
+private _vehiclesLightTanks = [];
 private _Tanks = ["a3a_MBT_02_cannon_black_F"];
-["vehiclesAA", ["B_APC_Tracked_01_AA_F"]] call _fnc_saveToTemplate;
+private _vehiclesAA = ["B_APC_Tracked_01_AA_F"];
 
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
@@ -47,10 +48,10 @@ private _Tanks = ["a3a_MBT_02_cannon_black_F"];
 ["vehiclesHelisLightAttack", ["a3a_Heli_Light_01_dynamicLoadout_ION_F", "a3a_Heli_Light_02_black_F"]] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", ["O_Heli_Attack_02_dynamicLoadout_black_F"]] call _fnc_saveToTemplate;
 
-["vehiclesArtillery", ["B_MBT_01_arty_F"]] call _fnc_saveToTemplate;
-["magazines", createHashMapFromArray [
-["B_MBT_01_arty_F",["32Rnd_155mm_Mo_shells"]]
-]] call _fnc_saveToTemplate;
+private _vehiclesArtillery = ["B_MBT_01_arty_F"];
+private _magazines = createHashMapFromArray [
+["B_MBT_01_arty_F", ["32Rnd_155mm_Mo_shells"]]
+];
 
 ["uavsAttack", ["B_T_UAV_03_dynamicLoadout_F","B_UAV_02_dynamicLoadout_F"]] call _fnc_saveToTemplate;
 ["uavsPortable", []] call _fnc_saveToTemplate;
@@ -97,13 +98,24 @@ if ("rf" in A3A_enabledDLC) then {
 };
 if ("ef" in A3A_enabledDLC) then {
     ["vehiclesGunBoats", ["EF_B_CombatBoat_HMG_NATO", "EF_B_CombatBoat_AT_NATO"]] call _fnc_saveToTemplate;
+    _vehiclesAA = ["a3a_black_Gyra_Antiair_EF"];
+    _vehiclesArtillery = ["a3a_black_Gyra_Mortar_EF"];
+    _magazines set ["a3a_black_Gyra_Mortar_EF", ["EF_6Rnd_120mm_Mo_shells"]];
+    _vehiclesLightArmed append ["a3a_black_Gyra_HMG_EF", "a3a_black_Gyra_HMG_EF", "a3a_black_Gyra_HMG_EF"];
+    _vehiclesLightUnarmed append ["a3a_black_Gyra_EF"];
+    _vehiclesLightTanks append ["a3a_black_Gyra_Armed_EF"];
 };
-["vehiclesTanks", _Tanks] call _fnc_saveToTemplate;
+
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", _vehiclesMilitiaCars] call _fnc_saveToTemplate;
 ["vehiclesMilitiaLightArmed", _vehiclesMilitiaLightArmed] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", _vehiclesLightUnarmed] call _fnc_saveToTemplate;
-["vehiclesLightArmed", _vehiclesLightArmed] call _fnc_saveToTemplate;   
+["vehiclesLightArmed", _vehiclesLightArmed] call _fnc_saveToTemplate;
+["vehiclesTanks", _Tanks] call _fnc_saveToTemplate; 
+["vehiclesLightTanks", _vehiclesLightTanks] call _fnc_saveToTemplate;
+["vehiclesAA", _vehiclesAA] call _fnc_saveToTemplate;
+["vehiclesArtillery", _vehiclesArtillery] call _fnc_saveToTemplate;
+["magazines", _magazines] call _fnc_saveToTemplate;
 
 //Minefield definition
 //CFGVehicles variant of Mines are needed "ATMine", "APERSTripMine", "APERSMine"
@@ -519,6 +531,25 @@ if ("mark" in A3A_enabledDLC) then {
     ["srifle_DMR_02_F", "", "acc_pointer_IR", "optic_LRPS", [], [], "bipod_01_F_blk"]];
 };
 if ("ef" in A3A_enabledDLC) then {
+    _officerLoadoutData set ["SMGs", [
+        ["EF_smg_Diplomat", "", "", "optic_Aco_smg", [], [], ""]
+    ]];
+    _crewLoadoutData set ["SMGs", [
+        ["EF_smg_Diplomat", "", "", "", [], [], ""]
+    ]];
+    _pilotLoadoutData set ["SMGs", [
+        ["EF_smg_Diplomat", "", "", "", [], [], ""]
+    ]];
+    _sfLoadoutData set ["SMGs", [
+        ["EF_smg_Diplomat", "ef_snds_diplomat", "acc_pointer_IR", "optic_Aco_smg", [], [], ""],
+        ["EF_smg_Diplomat", "ef_snds_diplomat", "acc_pointer_IR", "ef_optic_microsight", [], [], ""],
+        ["EF_smg_Diplomat", "ef_snds_diplomat", "acc_pointer_IR", "optic_Holosight_smg_blk_F", [], [], ""]
+    ]];
+    (_militaryLoadoutData get "SMGs") append [
+        ["EF_smg_Diplomat", "", "", "optic_Aco_smg", [], [], ""],
+        ["EF_smg_Diplomat", "", "", "optic_Aco_smg", [], [], ""],
+        ["EF_smg_Diplomat", "", "", "optic_Aco_smg", [], [], ""]
+    ];
     (_sfLoadoutData get "slRifles") append [
     ["ef_arifle_mxar_black", "ef_snds_mxar", "acc_pointer_IR", "optic_Hamr", ["30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag_Tracer"], [], ""],
     ["ef_arifle_mxar_gl_black", "ef_snds_mxar", "acc_pointer_IR", "optic_MRCO", ["30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag_Tracer"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
@@ -539,7 +570,6 @@ if ("ef" in A3A_enabledDLC) then {
     ["srifle_DMR_02_camo_F", "muzzle_snds_338_green", "", "ef_optic_mbs_khk", [], [], "bipod_01_F_mtp"]
     ];
 };
-
 
 /////////////////////////////////
 //    Unit Type Definitions    //

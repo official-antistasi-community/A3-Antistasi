@@ -500,7 +500,7 @@
         <Chinesesimp>同志,这里是 %1. 我受伤了！</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_ai_heal_ready">
-        <Original>You are ready %1.</Original>
+        <Original>You are ready, %1.</Original>
         <Korean>치료가 끝났다, %1.</Korean>
         <Russian>Вы готовы %1.</Russian>
         <Chinesesimp>你已经痊愈了%1</Chinesesimp>
@@ -1122,6 +1122,9 @@
         <Portuguese>Nível de Guerra mudou&lt;br/&gt;&lt;br/&gt;Nível Atual: %1</Portuguese>
         <Turkish>Savaş Seviyesi Değişti&lt;br/&gt;&lt;br/&gt;Şu anki Seviye: %1</Turkish>
         <Chinesesimp>战争等级变动&lt;br/&gt;&lt;br/&gt;当前等级为: %1</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_base_createoutpfia_alreadynear">
+        <Original>There's already a rebel outpost near that position</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_createoutpfia_create">
         <Original>Create Outpost</Original>
@@ -2896,9 +2899,7 @@
         <Chinesesimp>清除树林</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_createDialog_SLPS_line1">
-        <Original>Antistasi has a custom save system similar to other CTIs.&lt;br/&gt;&lt;br/&gt;To Save: Your commander needs to go to the &lt;t color='#f0d498'&gt;Map Board&lt;/t&gt;, scroll-select &lt;t color='#f0d498'&gt;""Game Options""&lt;/t&gt; and click on the &lt;t color='#f0d498'&gt;""Persistent Save""&lt;/t&gt; button.</Original>
-        <Korean>안티스타시에는 다른 CTI 모드와 유사한 사용자 정의 저장 시스템이 있습니다.&lt;br/&gt;&lt;br/&gt;저장 방법: 지휘관은 &lt;t color='#f0d498'&gt;지도 화이트보드&lt;/t&gt;로 이동하여 스크롤 선택으로&lt;t color='#f0d498'&gt;""게임 설정""&lt;/t&gt;을 선택하고 &lt;t color='#f0d498'&gt;""영구 저장""&lt;/t&gt; 버튼을 누르십시오.</Korean>
-        <Russian>В Antistasi есть собственная система сохранения, похожая на другие CTI.&lt;br/&gt;&lt;br/&gt; Чтобы сохранить: Ваш командир должен подойти к &lt;t color='#f0d498'&gt;Карте&lt;/t&gt;, открыть &lt;t color='#f0d498'&gt;""Параметры""&lt;/t&gt; и нажать на кнопку &lt;t color='#f0d498'&gt;""Сохранение""&lt;/t&gt;.</Russian>
+        <Original>Antistasi has a custom save system similar to other CTIs.&lt;br/&gt;&lt;br/&gt;To Save: Go to the &lt;t color='#f0d498'&gt;Battle Menu (%1)&lt;/t&gt;, select the Commander or Admin tab and then click the &lt;t color='#f0d498'&gt;"Persistent Save"&lt;/t&gt; button.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_createDialog_SLPS_line2">
         <Original>Current parameters are configured to auto-save every %1 minutes.</Original>
@@ -5369,7 +5370,7 @@
         <Chinesesimp>战俘</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_res_refu_text1">
-        <Original>A group of smugglers have been arrested in %1 and they are about to be sent to prison. Go there and free them in order to make them join our cause. Do this before %2.</Original>
+        <Original>A group of smugglers have been arrested in %1 and they are about to be sent to prison. Go there, free them, and bring them back to HQ in order to make them join our cause. Do this before %2.</Original>
         <Italian>Un gruppo di contrabbandieri è stato arrestato a %1 e stanno per essere incarcerati. Recati sul posto e liberali per reclutarli. Fallo entro %2.</Italian>
         <Spanish>Un grupo de contrabandistas ha sido arrestado en %1 y están a punto de ser enviados a prisión. Ve allí y libéralos para que se unan a nuestra causa. Hazlo antes de las %2.</Spanish>
         <French>Un groupe de contrebandiers a été arrêté à %1 et sont sur le point d'être envoyés en prison. Allez là bas et liberez-les afin de les faire rejoindre notre cause. Faites le avant %2.</French>
@@ -15797,7 +15798,7 @@
         <Chinesesimp>服务器加载完毕</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_feedback_serverinfo_mismatch">
-        <Original>Version mismatch error:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;Client: %2</Original>
+        <Original>Error: Version mismatch on client and server:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;&lt;br/&gt;Client: %2&lt;br/&gt;&lt;br/&gt;Ensure you are running the most recent version of Antistasi - The Mod on the server and your computer.</Original>
         <Italian>Errore, versione non corrispondente:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;Client: %2</Italian>
         <Spanish>Error de discordancia de versión:&lt;br&gt;&lt;br/&gt;Servidor: %1&lt;br/&gt;Cliente: %2</Spanish>
         <French>Erreur d'incohérence de version :&lt;br/&gt;&lt;br/&gt;Serveur : %1&lt;br/&gt;Client : %2</French>
@@ -16673,6 +16674,20 @@
     <Container name="role_names">
       <Key ID="STR_A3A_role_names_rebel">
         <Original>Rebel</Original>
+      </Key>
+    </Container>
+    <Container name="mod_blacklist">
+      <Key ID="STR_A3A_mod_blacklist_title">
+        <Original>Blacklisted Mod Detected!</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_titleServer">
+        <Original>Blacklisted Mod On Server!</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_text">
+        <Original>Antistasi has detected a blacklisted mod on your client:&lt;br/&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;It is highly recommended that you remove this mod; it may break the gamemode in unpredictable ways.&lt;br/&gt;&lt;br/&gt;Dev comment: %2</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_textServer">
+        <Original>Antistasi has detected a blacklisted mod on your server:&lt;br/&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;It is highly recommended that you remove this mod; it may break the gamemode in unpredictable ways.&lt;br/&gt;&lt;br/&gt;Dev comment: %2</Original>
       </Key>
     </Container>
   </Package>
