@@ -12,6 +12,7 @@ class mapInfo {
     #include "Antistasi_Kunduz.Kunduz\mapInfo.hpp"
     #include "Antistasi_lingor3.lingor3\mapInfo.hpp"
     #include "Antistasi_Malden.Malden\mapInfo.hpp"
+    #include "Antistasi_mehland.mehland\mapInfo.hpp"
     #include "Antistasi_Napf.Napf\mapInfo.hpp"
     #include "Antistasi_NapfWinter.NapfWinter\mapInfo.hpp"
     #include "Antistasi_pulau.pulau\mapInfo.hpp"

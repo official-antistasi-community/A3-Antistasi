@@ -9,6 +9,7 @@
     <NUMBER> Maximum search radius
     <NUMBER> Radius to check for nearby objects
     <NUMBER> Maximum number of attempts 
+    <BOOL> Optional: True to check firing angles for artillery/SAM, default false
 
     Returns:
     <POSITION> ATL empty position, or empty array 
@@ -19,7 +20,7 @@
     Used and distributed by the Antistasi Community project with permission.
 */
 
-params ["_center", "_minDist", "_maxDist", "_checkRad", "_attempts"];
+params ["_center", "_minDist", "_maxDist", "_checkRad", "_attempts", ["_artyCheck", false]];
 
 // Annular distribution adjustment. Split into rectangle and triangle.
 private _diffDist = _maxDist - _minDist;
@@ -42,6 +43,17 @@ for "_i" from 1 to _attempts do {
     if (surfaceIsWater _tpos) then { continue };            // could do gradient check too?
     if (nearestTerrainObjects [_tpos, [], _objRad, false, true] - (_tpos nearRoads _objRad) isNotEqualTo []) then { continue };
     if (_tpos nearEntities _checkRad isNotEqualTo []) then { continue };
+
+    if (_artyCheck) then {
+        if (surfaceNormal _tpos # 2 < 0.996) then { continue };     // 5 degree max gradient
+        private _startPos = ATLtoASL _tpos vectorAdd [0,0,2];
+        private _intersect = false;
+        for "_deg" from 0 to 315 step 45 do {
+            private _endPos = ATLtoASL _tpos vectorAdd [200 * sin _deg, 200 * cos _deg, 100];
+            if (lineIntersectsSurfaces [_startPos, _endPos] isNotEqualTo []) exitWith {_intersect = true};
+        };
+        if (_intersect) then { continue };
+    };
 
     // 45-degree ray checks for larger objects
     if (lineIntersectsSurfaces [ATLtoASL (_tpos vectorAdd _lOff#0), ATLtoASL (_tpos vectorAdd _lOff#1)] isNotEqualTo []) then {continue};

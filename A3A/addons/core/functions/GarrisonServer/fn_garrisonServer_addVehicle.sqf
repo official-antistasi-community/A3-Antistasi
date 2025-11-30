@@ -15,9 +15,10 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_vehicle"];
+params ["_marker", "_vehicle", ["_doRevealCalc", true]];
 
 Trace_1("Called with params %1", _this);
+Trace_1("Vehicle position %1", getPosATL _vehicle);
 
 private _oldMarker = _vehicle getVariable "markerX";
 if (!isNil "_oldMarker") then { [_vehicle] call A3A_fnc_garrisonServer_remVehicle };
@@ -34,9 +35,11 @@ private _arrayType = call {
 
 if (_arrayType == "buildings" and _marker == "Synd_HQ") then {
     _garrison get "spawnedBuildings" pushBack _vehicle;
+    if (_doRevealCalc) then {call A3A_fnc_calcBuildingReveal};
 };
 
 (_garrison get _arrayType) pushBack [typeOf _vehicle, getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle];
+
 _vehicle setVariable ["markerX", _marker, true];
 _vehicle setVariable ["A3A_resPool", "garrison", true];
 

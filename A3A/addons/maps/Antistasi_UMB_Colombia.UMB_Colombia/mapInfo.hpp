@@ -42,7 +42,9 @@ class umb_colombia {
 		{"Land_BagFence_01_short_green_F", 10}, {"Land_BagFence_01_round_green_F", 10}, {"Land_BagFence_01_long_green_F", 10},
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
 	policeStationTypes[] = {
 		// Malden types
@@ -51,4 +53,8 @@ class umb_colombia {
 		// Tanoa types
 		"Land_House_Big_04_F", "Land_House_Big_03_F", "Land_House_Big_01_F", "Land_House_Small_01_F", "Land_House_Small_02_F"
 	};
+	requiredMods = "UMB Colombia";
+	size = 20.5;
+	cityCount = 40;
+	airbaseCount = 7;
 };

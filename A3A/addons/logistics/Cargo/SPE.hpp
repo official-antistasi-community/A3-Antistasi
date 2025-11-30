@@ -20,9 +20,9 @@ class WW2_SPE_Structures_Military_Supplies_SPE_Ammobox_German_04_p3d : TRIPLES(A
 };
 class WW2_SPE_Structures_Military_Supplies_SPE_US_Crate_Explosives_p3d : TRIPLES(ADDON,Cargo,Base)
 {
-    offset[] = {0,0.7,0.21};
+    offset[] = {0,0.0,0.21};
     rotation[] = {0,0,0};
-    size = 2;
+    size = 1;
     recoil = 0;
 };
 //Weapons

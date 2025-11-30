@@ -15,7 +15,7 @@ if (_rebel) then {
 	if (_forceSupport >= 0) then { _cityData set [1, _forceSupport max _cityData#1] };
 	sidesX setVariable [_city, teamPlayer, true];
 	[Occupants, 10, 60] spawn A3A_fnc_addAggression;
-	[_cityData#2 max 0, 0] spawn A3A_fnc_resourcesFIA;
+	[A3A_rebelHRLumpMult * (_cityData#2 max 0), 0] spawn A3A_fnc_resourcesFIA;
 	[_city, teamPlayer] call A3A_fnc_garrisonServer_changeSide;
 	//[_city] call A3A_fnc_deleteNearSites;
 } else {

@@ -34,13 +34,6 @@ private _toDelete = [];
     } forEach A3A_minorSitesHM;
 } forEach [Occupants, Invaders];
 
-if (_toDelete isNotEqualTo []) then {
-    Info_1("Deleting minor markers %1", _toDelete);
-    {
-        if (_x in A3A_markersToDelete) then { continue };
-        isNil { [_x, true] call A3A_fnc_garrisonServer_clear };         // calls deleteMinorSite after clearing garrison
-    } forEach _toDelete;
-};
 
 // Some placeholder stuff to add new roadblocks & camps
 _mainMarkers append airportsX;
@@ -67,6 +60,13 @@ _mainMarkers append airportsX;
 	};
 } forEach [Invaders, Occupants];
 
-if (_sitesChanged) then {
+if (_sitesChanged and _toDelete isEqualTo []) exitWith {
 	publicVariable "controlsX";
 };
+
+// Hacky workaround: Delete sites after adding so that it doesn't re-add the same one and fuck up the marker accounting
+Info_1("Deleting minor markers %1", _toDelete);
+{
+    if (_x in A3A_markersToDelete) then { continue };
+    isNil { [_x, true] call A3A_fnc_garrisonServer_clear };         // calls deleteMinorSite after clearing garrison
+} forEach _toDelete;

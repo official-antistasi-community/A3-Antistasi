@@ -17,6 +17,9 @@
     ["vn_o_air_mig19_at", ["cost", 150]],
     ["vn_o_air_mig19_cap", ["cost", 200]],
     ["vn_b_air_f100d_at", ["cost", 150]],
-    ["vn_b_air_f100d_cap", ["cost", 200]]
+    ["vn_b_air_f100d_cap", ["cost", 200]],
+    
+    // PT76 with slightly better armor and gunner
+    ["vn_o_armor_type63_01", ["cost", 180]]
 
 ]] call _fnc_saveToTemplate;

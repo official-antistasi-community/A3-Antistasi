@@ -10,7 +10,7 @@ Arguments:
     <OBJECT> The target object to be attacked.
     <POS> Position of caller (used for defence resource allocation).
     <NUMBER> Precision of support, should be based on knowledge of target (0 min, 4 max).
-    <NUMBER> How much information to reveal about support, 0 low 1 high.
+    <NUMBER> Optional multiplier to use for max defence spend, default 1
 
 Examples:
     [Occupants, _enemyUnit, getposATL _injured, 4, 0.75] call A3A_fnc_requestSupport;
@@ -18,7 +18,7 @@ Examples:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_side", "_target", "_caller", "_precision", "_reveal"];        // might not be a unit, so we can't just use caller
+params ["_side", "_target", "_caller", "_precision", ["_maxResMod", 1]];        // might not be a unit, so we can't just use caller
 
 waitUntil { isNil "A3A_supportCallInProgress" };
 A3A_supportCallInProgress = true;
@@ -33,8 +33,7 @@ A3A_activeSupports = A3A_activeSupports select { _x#4 > 0 };                // r
 // HQ knowledge update
 call {
     private _hqDist = _target distance2d markerPos "Synd_HQ";
-    private _bunker = markerPos "Synd_HQ" nearObjects ["Land_Bunker_01_tall_F", 50] isNotEqualTo [];
-    private _maxSpot = (500 + random 1000) * ([0.5, 1] select _bunker);
+    private _maxSpot = 250 + A3A_HQDetectionRadius + random 500;
     _hqSpot = (1 + random 1) * linearConversion [0, _maxSpot, _hqDist, 1, 0, true]; 
     if (_hqSpot <= 0) exitWith {};
 
@@ -58,9 +57,12 @@ private _deprecisionRange = random (100 - (_precision/4) * 80);
 private _targPos = _target getPos [_deprecisionRange, random 360];
 Debug_2("Final target %1 at position %2", _target, _targPos);
 
+// Get the reveal value while we have the call position
+private _reveal = [_caller, _side] call A3A_fnc_calculateSupportCallReveal;
+
 
 // Determine maximum resource spend with this target & caller
-private _maxSpend = [_side, _target, _caller] call A3A_fnc_maxDefenceSpend;
+private _maxSpend = [_side, _target, _caller, _maxResMod] call A3A_fnc_maxDefenceSpend;
 Debug_1("Resource max spend %1", _maxSpend);
 
 

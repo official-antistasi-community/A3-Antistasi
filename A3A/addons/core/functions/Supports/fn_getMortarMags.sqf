@@ -7,7 +7,9 @@ Arguments:
     <STRING> Classname of mortar vehicle
 
 Returns:
-    <HASHMAP> keys ["HE", "Smoke", "Flare"], values magazine classes
+    <HASHMAP> keys of magazine names, values [type, round count, round short description, round detail]. 
+    Type in ["HE", "Smoke", "Flare", "Unknown"]. 
+    Detail is [explosion radius, burn life time, light life time] depending on type
 
 Examples:
     ["B_Mortar_01_F"] call A3A_fnc_getMortarMags;
@@ -39,9 +41,13 @@ private _weapon = getArray (_turretCfg >> "Weapons") # 0;
 private _weaponCfg = configFile >> "CfgWeapons" >> _weapon;
 
 // Ok have the weapon now, so grind through the mags...
-private _simTrans = createHashMapFromArray [["shotshell", "HE"], ["shotilluminating", "Flare"], ["shotsmoke", "Smoke"]];
-private _output = createHashMap;
+private _simTrans = createHashMapFromArray [ // simulation <-> [type, code for stat]
+    ["shotshell",           ["HE",      {getNumber (_this >> "indirectHitRange")}]], 
+    ["shotilluminating",    ["FLARE",   {getNumber (_this >> "timeToLive")}]], 
+    ["shotsmoke",           ["SMOKE",   {getNumber (_this >> "timeToLive")}]]
+]; // add any custom cases to this HM as well
 
+private _output = createHashMap;
 private _magazines = getArray (_weaponCfg >> "magazines");
 {
     private _ammo = getText (configFile >> "CfgMagazines" >> _x >> "ammo");
@@ -55,11 +61,14 @@ private _magazines = getArray (_weaponCfg >> "magazines");
 	};
 		
 	private _sim = tolower getText (_ammoCfg >> "simulation");
-    if !(_sim in _simTrans) then { continue };
-    private _type = _simTrans get _sim;
-    if (_type in _output) then { continue };        // Use the first valid one
+    private _shellType = _simTrans getOrDefault [_sim, ["Unknown",{""}]];
+    _shellType params ["_type","_detailCode"];
+    private _magConfig = configFile >> "CfgMagazines" >> _x;
+    private _roundCount = getNumber (_magConfig >> "count");
+    private _description = getText (_magConfig >> "displayNameShort");
+    private _detail = _ammoCfg call _detailCode;
 
-	_output set [_type, _x];
+	_output set [_x, [_type, _roundCount, _description, _detail]];
 
 } forEach _magazines;
 

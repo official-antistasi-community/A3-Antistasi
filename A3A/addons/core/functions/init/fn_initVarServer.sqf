@@ -109,10 +109,6 @@ DECLARE_SERVER_VAR(A3A_unbuiltObjects, []);
 //We shouldn't need to sync these.
 Info("Setting server only variables");
 
-// horrible naming
-prestigeOPFOR = [75, 50] select cadetMode;												//Initial % support for NATO on each city
-prestigeBLUFOR = 0;																	//Initial % FIA support on each city
-
 // Don't need to be distributed
 occRadioKeys = 0;
 invRadioKeys = 0;
@@ -152,22 +148,17 @@ A3A_markersToDelete = [];		// list of markers to be cleared after despawning
 
 A3A_activeCityBattles = createHashMap;		// list of markers with active city battle missions
 
-A3A_cityTaskTimer = createHashMap;			// maybe temporary. List of times after which a city task can spawn
-{ [_x, 0, 900] call A3A_fnc_setCityTaskDelay } forEach citiesX; 			// 0-15min for pop 100 city
+A3A_cityTaskTimer = createHashMap;			// Accumulators for city task chance
+{ A3A_cityTaskTimer set [_x, -0.1] } forEach citiesX;
 
 // These are silly, should be nil/true and local-defined only
 resourcesIsChanging = false;
-savingServer = true;					// lock out saves until this is changed
-
 prestigeIsChanging = false;
-
-movingMarker = false;
-markersChanging = [];
 
 playerHasBeenPvP = [];
 
 A3A_playerSaveData = createHashMap;
-destroyedBuildings = [];		// synced only on join, to avoid spam on change
+A3A_destroyedBuildings = [];		// server side only now
 
 testingTimerIsActive = false;
 
@@ -185,6 +176,8 @@ membersX = [];					// These two published later by startGame
 theBoss = objNull;
 
 createHashMap call A3A_fnc_setRebelLoadouts;		// sets version times, no dependencies
+
+A3A_useRemarks = 0;
 
 ///////////////////////////////////////////
 //     INITIALISING ITEM CATEGORIES     ///
@@ -501,14 +494,18 @@ _fnc_setPriceIfValid =
 };
 
 { [_rebelVehicleCosts, _x, 50] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesBasic");
-{ [_rebelVehicleCosts, _x, 200] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesCivCar") + FactionGet(reb, "vehiclesCivBoat");
+{ [_rebelVehicleCosts, _x, 300] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesCivCar") + FactionGet(reb, "vehiclesCivBoat");
 { [_rebelVehicleCosts, _x, 600] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesCivTruck") + FactionGet(reb, "vehiclesMedical");
 { [_rebelVehicleCosts, _x, 300] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesTruck");
-{ [_rebelVehicleCosts, _x, 200] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesLightUnarmed");
-{ [_rebelVehicleCosts, _x, 700] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesLightArmed") + FactionGet(reb, "vehiclesAT");
-{ [_rebelVehicleCosts, _x, 400] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticMGs") + FactionGet(reb, "vehiclesBoat");
-{ [_rebelVehicleCosts, _x, 800] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticAT") + FactionGet(reb, "staticAA") + FactionGet(reb, "staticMortars");
-{ [_rebelVehicleCosts, _x, 1200] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesAA");
+{ [_rebelVehicleCosts, _x, 150] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesLightUnarmed");
+{ [_rebelVehicleCosts, _x, 700] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesLightArmed");
+{ [_rebelVehicleCosts, _x, 150] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesBoat");
+{ [_rebelVehicleCosts, _x, 400] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticMGs");
+{ [_rebelVehicleCosts, _x, 1300] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesAT");
+{ [_rebelVehicleCosts, _x, 1000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticAT");
+{ [_rebelVehicleCosts, _x, 1600] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticAA");
+{ [_rebelVehicleCosts, _x, 2000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesAA");
+{ [_rebelVehicleCosts, _x, 1600] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticMortars");
 { [_rebelVehicleCosts, _x, 5000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesCivHeli");
 { [_rebelVehicleCosts, _x, 5000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesPlane") + FactionGet(reb, "vehiclesCivPlane");
 

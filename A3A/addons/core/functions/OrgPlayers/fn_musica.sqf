@@ -1,4 +1,4 @@
-
+if (count _this > 0) then {musicON = ((_this#0) isEqualTo 1)};
 
 if (!musicON) exitWith {1 fadeMusic 0.5; playMusic ""};
 /*

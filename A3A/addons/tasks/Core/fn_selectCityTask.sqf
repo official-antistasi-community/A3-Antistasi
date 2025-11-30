@@ -8,11 +8,18 @@ params ["_marker", ["_force", false]];
 private _breakOut = call {
     if (_force) exitWith {false};
     if (sidesX getVariable _marker != Occupants) exitWith {true};
-    if (time < A3A_cityTaskTimer get _marker) exitWith {true};
     if (_marker in A3A_activeCityBattles) exitWith {true};
-    false;
+
+    private _chance = A3A_cityTaskTimer get _marker;
+    if (random 1 < _chance) exitWith {false};
+
+    // 15% chance per minute of 100-pop town generating a mission after 20 calls
+    A3A_cityTaskTimer set [_marker, _chance + 0.002 * sqrt (A3A_cityPop get _marker)];
+    true;
 };
 if (_breakOut) exitWith {""};
+
+A3A_cityTaskTimer set [_marker, -0.25];         // reset the chance so that we can't spawn another mission for a while
 
 private _ranTask = "";
 private _allTasks = "true" configClasses CTASKS_CFG;
@@ -47,7 +54,6 @@ while {_allTasks isNotEqualTo []} do {
 
     Trace_2("Running task %1 in city %2", _taskName, _marker);
     [_taskFnc, _params] spawn A3A_tasks_fnc_runTask;
-    [_marker, 900, 1800] call A3A_fnc_setCityTaskDelay;
     _ranTask = _taskName;
     break;
 };

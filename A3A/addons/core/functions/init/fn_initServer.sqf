@@ -13,7 +13,6 @@ Info_1("Server version: %1", QUOTE(VERSION_FULL));
 
 if (isClass (missionConfigFile/"CfgFunctions"/"A3A")) exitWith {};          // Pre-mod mission will break. Messaging handled in initPreJIP
 if (!requiredVersion QUOTE(REQUIRED_VERSION)) exitWith { Error("Arma version is out of date") };
-if (call A3A_fnc_modBlacklist) exitWith {};
 
 // hide all the HQ objects
 {
@@ -38,6 +37,11 @@ enableSaving [false,false];
 //Disable VN music
 if (isClass (configFile/"CfgVehicles"/"vn_module_dynamicradiomusic_disable")) then {
     A3A_VN_MusicModule = (createGroup sideLogic) createUnit ["vn_module_dynamicradiomusic_disable", [worldSize, worldSize,0], [],0,"NONE"];
+};
+
+if !(hasInterface) then {       // Only needs client call on localhost
+    Info("Checking for blacklisted mods on server");
+    [] call A3A_fnc_modBlacklist;
 };
 
 // Shouldn't be anything with dependencies in here
@@ -76,6 +80,7 @@ A3A_backgroundInitDone = true;
 
 Info("Server Initialising PATCOM Variables");
 [] call A3A_fnc_patrolInit;
+
 
 // **************** Starting game, param-dependent init *******************************
 
@@ -161,6 +166,7 @@ else
 
     Info("Initial arsenal unlocks completed");
     call A3A_fnc_checkRadiosUnlocked;
+    [] call A3A_fnc_arsenalManage;
 
     // HQ placement setup
     private _posHQ = A3A_saveData get "startPos";
@@ -197,6 +203,9 @@ if (isClass (configFile >> "AntistasiServerMembers")) then
     // Load data from the classes
     private _memberClasses = "true" configClasses (configFile >> "AntistasiServerMembers" >> "MembersClasses");
     {membersX pushBackUnique (getText (_x >> "uid"))} forEach _memberClasses;
+
+    // Load remark setting
+    if (isNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks") || {debug}) then {A3A_useRemarks = getNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks")};
 };
 
 // TODO: Do we need this? maybe...
@@ -218,8 +227,11 @@ addMissionEventHandler ["OnUserAdminStateChanged", {
 }];
 
 publicVariable "membersX";
+publicVariable "A3A_useRemarks";
 publicVariable "theBoss";       // need to publish this even if empty
 
+// Setup buildable objects. Needed for HQ radius in initSupports
+call A3A_fnc_initBuildableObjects;
 
 // Needs params + factions. Might depend on saved data in the future
 call A3A_fnc_initSupports;
@@ -246,42 +258,11 @@ addMissionEventHandler ["PlayerDisconnected",{
     false;
 }];
 
-addMissionEventHandler ["BuildingChanged", {
-    params ["_oldBuilding", "_newBuilding", "_isRuin"];
+addMissionEventHandler ["BuildingChanged", A3A_fnc_buildingChangedEH];
 
-    Debug_4("%1 (%2) changed to %3 (%4)", typeof _oldBuilding, netId _oldBuilding, typeof _newBuilding, netId _newBuilding);
-
-    // If it's a police station, mark as destroyed
-    // Might not be spawned, so can't depend on the furniture case
-    if (netId _oldBuilding in A3A_policeStations) then {
-        private _city = A3A_policeStations get netId _oldBuilding;
-        A3A_garrison get _city set ["policeStation", false];
-        A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) - 4];
-        A3A_spawnPlaceStats deleteAt _city;
-        A3A_policeStations deleteAt netId _oldBuilding;
-        ["TaskSucceeded", ["", "Police Station Destroyed"]] remoteExec ["BIS_fnc_showNotification", teamPlayer];
-
-        // Delete any furniture
-        private _attached = _oldBuilding getVariable ["A3A_furniture", []];
-        { deleteVehicle _x } forEach _attached;
-
-        // Delete police car from garrison because the spawn place won't be saved
-        private _vehicles = A3A_garrison get _city get "vehicles";
-        A3A_garrison get _city set ["vehicles", _vehicles select { _x#1 isEqualType [] }];
-    };
-
-    if (_isRuin) then {
-
-        // TODO: this whole system doesn't work for buildings that have an intermediate damage model
-        _oldBuilding setVariable ["ruins", _newBuilding];
-        _newBuilding setVariable ["building", _oldBuilding];
-
-        // Antenna dead/alive status is handled separately
-        if !(_oldBuilding in antennas || _oldBuilding in antennasDead) exitWith {
-            destroyedBuildings pushBack _oldBuilding;
-        };
-    };
-}];
+// Now destroy the saved buildings so that BuildingChanged registers them correctly
+private _savedDestroyed = A3A_destroyedBuildings; A3A_destroyedBuildings = [];
+{ _x setDamage [1, false] } forEach _savedDestroyed;
 
 addMissionEventHandler ["EntityKilled", {
     params ["_victim", "_killer", "_instigator"];
@@ -334,16 +315,6 @@ addMissionEventHandler ["EntityKilled", {
     }] call CBA_fnc_addEventHandler;
 };*/
 
-if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
-    isClass (configfile >> "CfgPatches" >> "lambs_danger"))) then {
-    // disable lambs danger fsm entrypoint
-    ["CAManBase", "InitPost", {
-        params ["_unit"];
-        (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
-        _unit setVariable ["lambs_danger_disableAI", true];
-    }] call CBA_fnc_addClassEventHandler;
-};
-
 // Could replace these with entityCreated handler instead...
 if(A3A_hasZen) then {
     ["zen_common_createZeus", {
@@ -388,8 +359,6 @@ A3A_garrisonOps = [];
 [] spawn A3A_fnc_resourcecheck;                     // 10-minute loop
 [] spawn A3A_fnc_aggressionUpdateLoop;              // 1-minute loop
 [] spawn A3A_fnc_garbageCleanerTracker;             // 5-minute loop
-
-savingServer = false;           // enable saving
 
 // Autosave loop. Save if there were any players on the server since the last save.
 [] spawn {

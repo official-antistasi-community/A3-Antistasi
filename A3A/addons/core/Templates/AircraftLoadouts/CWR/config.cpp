@@ -63,6 +63,41 @@ class A3A {
             class cwr3_o_mig23 : baseCAP {
                 loadout[] = {"PylonMissile_Missile_AA_R73_x1","PylonMissile_Missile_AA_R73_x1","PylonMissile_Missile_AA_R73_x1","PylonMissile_Missile_AA_R73_x1","PylonMissile_Missile_AA_R77_x1"};
             };
+
+            class cwr3_b_frs1 : baseCAP {
+                loadout[] = {"CUP_PylonPod_2Rnd_AIM_9L_LAU_Sidewinder_M","CUP_PylonPod_1Rnd_AIM_120_AMRAAM_M","CUP_PylonPod_2Rnd_AIM_120_AMRAAM_M","CUP_PylonPod_2Rnd_AIM_120_AMRAAM_M","CUP_PylonPod_1Rnd_AIM_120_AMRAAM_M","CUP_PylonPod_2Rnd_AIM_9L_LAU_Sidewinder_M"};
+            };
+        };
+        class Helicopter
+        {
+             class baseHelicopter;
+            class cwr3_b_ah64 : baseHelicopter {
+                loadout[] = {"CUP_PylonPod_19Rnd_Rocket_FFAR_M","CUP_PylonPod_4Rnd_AGM114K_Hellfire_II_M","CUP_PylonPod_4Rnd_AGM114K_Hellfire_II_M","CUP_PylonPod_19Rnd_Rocket_FFAR_M","","CUP_PylonPod_1Rnd_AIM_9L_Sidewinder_M"};
+            };
+
+            class cwr3_b_kiowa_dyn : baseHelicopter {
+                loadout[] = {"CUP_PylonPod_2Rnd_AGM114K_Hellfire_II_M","CUP_PylonPod_1200Rnd_TE1_Red_Tracer_GAU19L_M"};
+            };
+
+            class cwr3_b_uh1_gunship : baseHelicopter {
+                loadout[] = {"CUP_PylonPod_CMFlare_Chaff","CUP_PylonPod_CMFlare_Chaff","CUP_PylonPod_19Rnd_Rocket_FFAR_M","CUP_PylonPod_19Rnd_Rocket_FFAR_M","CUP_PylonPod_1200Rnd_TE1_Red_Tracer_GAU19A_M","CUP_PylonPod_1200Rnd_TE1_Red_Tracer_GAU19A_M"};
+            };
+
+            class cwr3_b_uh60_x4_esss : baseHelicopter {
+                loadout[] = {"CUP_PylonPod_19Rnd_Rocket_FFAR_M","CUP_PylonPod_1200Rnd_TE1_Red_Tracer_30x113mm_M789_HEDP_M","CUP_PylonPod_1200Rnd_TE1_Red_Tracer_30x113mm_M789_HEDP_M","CUP_PylonPod_19Rnd_Rocket_FFAR_M"};
+            };
+
+            class cwr3_o_mi24p : baseHelicopter {
+                loadout[] = {"CUP_PylonPod_2Rnd_AT2_M","CUP_PylonPod_32Rnd_S5_M","CUP_PylonPod_32Rnd_S5_M","CUP_PylonPod_32Rnd_S5_M","CUP_PylonPod_32Rnd_S5_M","CUP_PylonPod_2Rnd_AT2_M"};
+            };
+
+            class cwr3_o_mi8_mtv3 : baseHelicopter {
+                loadout[] = {"CUP_PylonPod_32Rnd_S5_M","CUP_PylonPod_250Rnd_TE2_Green_Tracer_GSh23_23mm_APHE_M","CUP_PylonPod_2Rnd_Igla_M","CUP_PylonPod_32Rnd_S5_M"};
+            };
+
+            class cwr3_o_mi24v : baseHelicopter {
+                loadout[] = {"CUP_PylonPod_2Rnd_AT6_M","CUP_PylonPod_20Rnd_S8N_CCIP_M","CUP_PylonPod_250Rnd_TE2_Green_Tracer_GSh23_23mm_APHE_M","CUP_PylonPod_2Rnd_Igla_M","CUP_PylonPod_20Rnd_S8N_CCIP_M","CUP_PylonPod_2Rnd_AT6_M"};
+            };
         };
     };
 };

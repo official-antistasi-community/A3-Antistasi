@@ -48,6 +48,9 @@ Info("initACEUnconsciousHandler started");
 	if (_realSide != Occupants && _realSide != Invaders) exitWith {};
 	if (_unit getVariable ["surrendered", false]) exitWith {};		// don't surrender twice
 
+	// surrender if we woke up while retreating
+	if !(_unit isNil "retreating") exitWith { [_unit] spawn A3A_fnc_surrenderAction };
+
 	// surrender if we don't have a primary weapon
 	if (primaryWeapon _unit == "") exitWith { [_unit] spawn A3A_fnc_surrenderAction };
 

@@ -33,7 +33,8 @@ private _popTotal = 0;
 
     _popTotal = _popTotal + _numCiv;
     if (_city in destroyedSites) then { _popKilled = _popKilled + _numCiv; continue };
-    _popReb = _popReb + (_numCiv * (_suppReb / 100));
+    private _ownerMul = [0.5, 1] select (sidesX getVariable _city == teamPlayer);
+    _popReb = _popReb + _ownerMul * _numCiv * _suppReb / 100;
 
 } forEach citiesX;
 

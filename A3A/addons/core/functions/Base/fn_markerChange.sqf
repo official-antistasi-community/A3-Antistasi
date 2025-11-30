@@ -52,7 +52,7 @@ if (_scripted) exitWith {
 };
 
 // Generate counterattack
-if (_winner == teamPlayer) then
+/*if (_winner == teamPlayer) then
 {
 	// Cap to 0.6 max to reward captures without previous support calls
 	private _resources = [_loser, teamPlayer, _markerX, 0.6] call A3A_fnc_maxDefenceSpend;
@@ -74,7 +74,7 @@ if (_winner == teamPlayer) then
 	A3A_supportStrikes pushBack [_loser, "TROOPS", markerPos _markerX, time + 2700, 2700, _resources];
     A3A_supportSpends pushBack [_loser, markerPos _markerX, markerPos _markerX, _resources, time];
 };
-
+*/
 
 private _loserName = Faction(_loser) get "name";
 private _prestigeOccupants = [0, 0];

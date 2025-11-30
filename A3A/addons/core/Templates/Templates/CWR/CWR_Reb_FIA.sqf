@@ -16,7 +16,7 @@
 ["vehiclesAA", ["cwr3_i_ural_zu23"]] call _fnc_saveToTemplate;
 ["vehiclesBoat", ["cwr3_i_zodiac"]] call _fnc_saveToTemplate;
 
-["vehiclesPlane", ["cwr3_i_cessna_t41"]] call _fnc_saveToTemplate;       // replace from civ varient s
+["vehiclesPlane", ["cwr3_c_cessna", "cwr3_i_camel"]] call _fnc_saveToTemplate;       // replace from civ varient s
 ["vehiclesCivPlane", ["cwr3_c_cessna"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["cwr3_i_uaz452_mev"]] call _fnc_saveToTemplate;
 
@@ -51,7 +51,7 @@ private _initialRebelEquipment = [
     "CUP_sgun_CZ584", "cwr3_srifle_l42a1",
     "CUP_1Rnd_12Gauge_Pellets_No4_Buck", "CUP_1Rnd_762x51_CZ584", "CUP_5Rnd_762x51_M24",
     "CUP_hgun_Makarov", "CUP_8Rnd_9x18_Makarov_M",
-    ["CUP_launch_RPG18", 50],
+    ["CUP_launch_RPG18", 20],
     ["IEDUrbanSmall_Remote_Mag", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],
     "CUP_HandGrenade_RGD5", "SmokeShell",
     "CUP_V_I_Carrier_Belt", "CUP_V_I_Guerilla_Jacket", "CUP_V_I_RACS_Carrier_Rig_2", "CUP_V_I_RACS_Carrier_Rig_wdl_2",

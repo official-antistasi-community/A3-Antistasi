@@ -23,6 +23,7 @@ params ["_vehicle", ["_instant", false, [true]]];
 private _fileName = "fn_logistics_unload";
 
 private _loaded = _vehicle getVariable ["Cargo", []];
+if (_loaded isEqualTo []) exitWith {};                  // in case this function was called without cargo in the vehicle (happens with garage + bad mods)
 private _lastLoaded = false;
 if ((count _loaded) isEqualTo 1) then {_lastLoaded = true};
 (_loaded#0) params ["_cargo", "_node"];

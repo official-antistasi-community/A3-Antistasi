@@ -91,7 +91,9 @@ if (_batteryClass in (_faction get "vehiclesArtillery")) then {
 };
 if (_shellType == "" and _batteryClass isKindOf "StaticMortar") then {
     private _mags = [_batteryClass] call A3A_fnc_getMortarMags;
-    _shellType = _mags get _roundType;
+    {
+        if (_y#0 == _roundType) exitWith {_shellType = _x};
+    } forEach _mags;
 };
 
 if (_shellType == "") exitWith {

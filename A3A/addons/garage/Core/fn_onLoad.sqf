@@ -97,7 +97,8 @@ HR_GRG_Cats = HR_GRG_CATIDCS apply {_disp displayCtrl _x}; //,HR_GRG_IDC_CatUnma
     _x ctrlShow false;
     _x ctrlEnable false;
 } forEach HR_GRG_Cats;
-[0] call HR_GRG_fnc_switchCategory;
+private _defaultCat = [0, HR_GRG_HELIPADACCESSIBLE#0] select (HR_GRG_accessLimit == "helipad");
+[_defaultCat] call HR_GRG_fnc_switchCategory;
 
 //sell button init
 
