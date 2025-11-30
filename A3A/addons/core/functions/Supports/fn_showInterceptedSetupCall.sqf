@@ -44,6 +44,10 @@ else
         {
             _text = format [localize "STR_A3A_fn_support_showIntStpCll_COUNTERATTACK", _sideName];
         };
+        case ("BROADCAST"):
+        {
+            _text = format ["%1 is sending units to disrupt the broadcast.", _sideName];
+        };
         case ("QRFAIR"):
         {
             _text = format [localize "STR_A3A_fn_support_showIntStpCll_QRFAIR", _sideName];

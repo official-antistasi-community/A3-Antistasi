@@ -56,6 +56,8 @@ switch (_type) do {
 	case "CON": {
 		//find apropriate sites
 		_possibleMarkers = [outposts + resourcesX + (controlsX select {isOnRoad (getMarkerPos _x)})] call _findIfNearAndHostile;
+		private _broadcastParams = call A3A_tasks_fnc_CON_broadcast_p;
+		if (random 1 < 0.2 && !(_broadcastParams isEqualType false)) exitWith {[A3A_tasks_fnc_CON_broadcast, _broadcastParams] call A3A_tasks_fnc_runTask};
 
 		// Add in occupant cities with active police stations
 /*		private _cities = citiesX inAreaArrayIndexes [getMarkerPos respawnTeamPlayer, distanceMission, distanceMission] apply { citiesX#_x };
@@ -103,6 +105,9 @@ switch (_type) do {
 	};
 
 	case "LOG": {
+		private _equipDropParams = call A3A_tasks_fnc_LOG_equipDrop_p;
+		if (random 1 < 0.2 && !(_equipDropParams isEqualType false)) exitWith {[A3A_tasks_fnc_LOG_equipDrop, _equipDropParams] call A3A_tasks_fnc_runTask};
+
 		// role three dice
 		private _spawnGunShop = random 12 + random 12 + random 12 + tierWar > 29;
 
@@ -155,6 +160,11 @@ switch (_type) do {
 				_weightedMarkers append [_x, _weight];
 			};
 		}forEach (citiesX - destroyedSites);
+
+		private _rebReporterParams = call A3A_tasks_fnc_SUPP_rebReporter_p;
+		if (random 1 < 0.3 && !(_rebReporterParams isEqualType false)) exitWith {[A3A_tasks_fnc_SUPP_rebReporter, _rebReporterParams] call A3A_tasks_fnc_runTask};
+		private _occReporterParams = call A3A_tasks_fnc_SUPP_occReporter_p;
+		if (random 1 < 0.1 && !(_occReporterParams isEqualType false)) exitWith {[A3A_tasks_fnc_SUPP_occReporter, _occReporterParams] call A3A_tasks_fnc_runTask};
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
@@ -223,6 +233,10 @@ switch (_type) do {
 			[_convoyPair,"A3A_fnc_convoy"] remoteExec ["A3A_fnc_scheduler",2];
 		};
 	};
+
+	// This is testing code so we can spawn any missions being tested easily and have both the old and new mission frameworks at once. When all missions are rewritten we can change the rest of the func
+	// also need to figure out the categories cause this is stupid
+	private _testTasks = ["EquipDrop","Broadcast","RebReporter","OccReporter","PunishRescue"];
 
 	default {
         Error_1("%1 is not an accepted task type.", _type);
