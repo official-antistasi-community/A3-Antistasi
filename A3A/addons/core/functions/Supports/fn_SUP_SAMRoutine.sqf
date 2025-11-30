@@ -28,6 +28,7 @@ private _timeout = time + 900;
 private _targTimeout = 0;
 private _acquisition = 0;
 private _missiles = 4;
+private _weapon = weapons _launcher # 0;
 while {true} do
 {
     // check if launcher/crew are intact
@@ -54,7 +55,7 @@ while {true} do
         Debug_2("Next target for %2 is %1", _suppTarget, _supportName);
 
         [_reveal, getPosATL _targetObj, _side, "SAM", _targetObj, 60] spawn A3A_fnc_showInterceptedSupportCall;
-        
+
         _targTimeout = (time + 120);
         _acquisition = 0;
     };
@@ -69,12 +70,14 @@ while {true} do
     };
 
     // Update acquisition depending on whether path to target is blocked
-    private _dir = _launcher getDir _targetObj;
-    private _intercept = (getPosASL _launcher) getPos [250, _dir] vectorAdd [0,0,300];
+    private _targdir = _launcher getDir _targetObj;
+    private _intercept = getPosASL _launcher vectorAdd [300*sin _targdir, 300*cos _targdir, 200];
     private _isBlocked = terrainIntersectASL [_intercept, getPosASL _targetObj];
-    _acquisition = _acquisition + ([0.1, -0.1] select _isBlocked);
+    private _vecDir = getPosASL _launcher vectorFromTo getPosASL _targetObj;
+    private _outOfArc = (_launcher weaponDirection _weapon) vectorDotProduct _vecDir < 0.707;      // 45 degrees
+    _acquisition = _acquisition + ([0.1, -0.1] select (_isBlocked or _outOfArc));
     _acquisition = 1 min _acquisition max 0;
-    _launcher doWatch _intercept;
+    _launcher doWatch ASLtoATL _intercept;              // doWatch uses ATL
     if (_acquisition < 1) then { sleep 1; continue };
 
     // wait for previous missile to have effect (or not)
@@ -82,12 +85,12 @@ while {true} do
 
     // Actually fire
     Debug("Firing at target");
-    _launcher reveal [_targetObj, 4];           // does this do anything?
+    //_launcher reveal [_targetObj, 4];           // does this do anything?
     _launcher fireAtTarget [_targetObj];
-    [_reveal, getPosATL _targetObj, _side, "SAM", _targetObj, 60] spawn A3A_fnc_showInterceptedSupportCall;
+    //[_reveal, getPosATL _targetObj, _side, "SAM", _targetObj, 60] spawn A3A_fnc_showInterceptedSupportCall;
     _missiles = _missiles - 1;
     _targTimeout = (time + 120);
-    sleep 1;
+    sleep 5;        // make sure we reload before firing again, even if missile is destroyed
 };
 
 _suppData set [4, 0];       // zero radius to signal termination

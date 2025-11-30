@@ -20,7 +20,7 @@ params ["_activeGarrison", "_marker", "_garrisonData", "_storedTroops"];
 
 if (_activeGarrison get "side" != Occupants) exitWith {};
 
-private _buildingPos = _garrisonData get "policeStation";
+private _buildingPos = _garrisonData get "policeStation";       // should be guaranteed position on call
 private _station = nearestBuilding _buildingPos;
 if (!alive _station) exitWith {
     Error("Police station already destroyed?");
@@ -108,6 +108,7 @@ for "_i" from 1 to _numUnits do
     _unit setDir (_station getRelDir _placePos);
     [_unit, _marker] call A3A_fnc_NATOinit;
     _unit setUnitPos "UP";
+    _unit setVariable ["A3A_forcedStance", "UP"];
     dostop _unit;
 
     sleep 0.1;

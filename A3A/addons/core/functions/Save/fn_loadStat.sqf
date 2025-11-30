@@ -24,6 +24,8 @@ private _translateMarker = {
     _mrk;
 };
 
+private _numToSide = createHashMapFromArray [ [0,teamPlayer], [1,Occupants], [2,Invaders] ];
+
 //===========================================================================
 //ADD VARIABLES TO THIS ARRAY THAT NEED SPECIAL SCRIPTING TO LOAD
 private _specialVarLoads = [
@@ -31,7 +33,7 @@ private _specialVarLoads = [
     "prestigeCSAT","posHQ","hr","armas","items","backpcks","ammunition","dateX",
     "prestigeBLUFOR","resourcesFIA","skillFIA","destroyedSites",
     "garrison","tasks","membersX","vehInGarage","destroyedBuildings","idlebases",
-    "chopForest","weather","killZones","jna_dataList","mrkCSAT","nextTick",
+    "chopForest","weather","killZones","jna_datalist","mrkCSAT","nextTick",
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
     "minorSites", "newGarrison", "radioKeys", "cityData"
@@ -99,7 +101,17 @@ if (_varName in _specialVarLoads) then {
         } forEach FactionGet(reb,"unitsSoldiers");
     };
     if (_varname == "HR_Garage") then {
-        [_varValue] call HR_GRG_fnc_loadSaveData;
+        private _grgData = _varValue;
+        private _cats = _grgData#0;
+        private _newGrgCats = [];
+        {
+            // json requires string keys, so garage numbers are saved as stringified numbers (e.g. "1") and parsed in-game as the actual numbers
+            private _keys = (keys _x) apply {if (_x isEqualType 0) then {_x} else {call compile _x}};
+            private _hm = _keys createHashMapFromArray (values _x);
+            _newGrgCats pushback _hm;
+        } forEach _cats;
+        _grgData set [0, _newGrgCats];
+        [_grgData] call HR_GRG_fnc_loadSaveData;
     };
     if (_varName == 'vehInGarage') then { //convert old garage to new garage
         vehInGarage= [];
@@ -114,14 +126,8 @@ if (_varName in _specialVarLoads) then {
             private _building = nearestObjects [_x, ["House"], 1, true] select 0;
             call {
                 if (isNil "_building") exitWith { Error_1("No building found at %1", _x)};
-                if (_building in antennas) exitWith { Info("Antenna in destroyed building list, ignoring")};
-
-                private _ruin = [_building] call BIS_fnc_createRuin;
-                if (isNull _ruin) exitWith {
-                    Error_1("Loading Destroyed Buildings: Unable to create ruin for %1", typeOf _building);
-                };
-
-                destroyedBuildings pushBack _building;
+                if (_building in A3A_antennas) exitWith { Info("Antenna in destroyed building list, ignoring")};
+                A3A_destroyedBuildings pushBack _building;      // store for update after the BuildingChanged EH is installed
             };
         } forEach _varValue;
     };
@@ -130,7 +136,7 @@ if (_varName in _specialVarLoads) then {
             (_varvalue select _i) params ["_typeMine", "_posMine", "_detected", "_dirMine"];
             private _mineX = createVehicle [_typeMine, _posMine, [], 0, "CAN_COLLIDE"];
             if !(isNil "_dirMine") then { _mineX setDir _dirMine };
-            {_x revealMine _mineX} forEach _detected;
+            {(_numToSide getorDefault [_x, _x]) revealMine _mineX} forEach _detected;       // backwards compat: works with both number & side
         };
     };
     if (_varName == 'newGarrison') then {
@@ -141,35 +147,17 @@ if (_varName in _specialVarLoads) then {
         if (count (_varValue select 0) != 2) exitWith {};
         {
             _x params ["_position", "_garrison"];
-            [_position, []] call A3A_fnc_createRebelControl;
+            private _mrk = [_position, []] call A3A_fnc_createRebelControl;
             A3A_rebPostGarrison pushBack [_mrk, _garrison];
         } forEach _varvalue;
         publicVariable "outpostsFIA";
     };
     if (_varName == 'antennas') then {
-        antennasDead = [];
-        for "_i" from 0 to (count _varvalue - 1) do {
-            _posAnt = _varvalue select _i;
-            _mrk = [mrkAntennas, _posAnt] call BIS_fnc_nearestPosition;
-            _antenna = [antennas,_mrk] call BIS_fnc_nearestPosition;
-            {if ([antennas,_x] call BIS_fnc_nearestPosition == _antenna) then {[_x,false] spawn A3A_fnc_blackout}} forEach citiesX;
-            antennas = antennas - [_antenna];
-            antennasDead pushBack _antenna;
-            _antenna removeAllEventHandlers "Killed";
-
-            private _ruin = [_antenna] call BIS_fnc_createRuin;
-
-            if !(isNull _ruin) then {
-                //JIP on the _ruin, as repairRuinedBuilding will delete the ruin.
-                [_antenna, true] remoteExec ["hideObject", 0, _ruin];
-            } else {
-                Error_1("Loading Antennas: Unable to create ruin for %1", typeOf _antenna);
-            };
-
-            deleteMarker _mrk;
-        };
-        publicVariable "antennas";
-        publicVariable "antennasDead";
+        {
+            private _antenna = [A3A_antennas, _x] call BIS_fnc_nearestPosition;
+            if (_antenna distance2d _x > 10) then { Error_1("No antenna found near %1", _x); continue };
+            A3A_destroyedBuildings pushBackUnique _antenna;         // for processing after EH is installed
+        } forEach _varValue;
     };
     if (_varname == 'prestigeBLUFOR') then {                        // this one is actually rebel support. Backwards compat.
         if (count citiesX != count _varValue) exitWith {
@@ -289,18 +277,10 @@ if (_varName in _specialVarLoads) then {
         _varValue call A3A_fnc_setRebelLoadouts;        // updates version numbers
     };
     if (_varname == "minorSites") then {
+        if (A3A_saveVersion < 31000) exitWith {};         // pre-garrison pre-JSON version, just remake with init
         A3A_minorSitesHM = createHashMap;
-        { _y call A3A_fnc_addMinorSite } forEach _varValue;
+        { [_y#0, _y#1, _numToSide get _y#2, _y#3] call A3A_fnc_addMinorSite } forEach _varValue;
         // pair refs get sanity checked in initMinorSites later
-    };
-
-    if(_varname == 'testingTimerIsActive') then
-    {
-        if(_varValue) then
-        {
-            [] spawn A3A_fnc_startTestingTimer;
-        };
-        testingTimerIsActive = _varValue;
     };
 } else {
     call compile format ["%1 = %2",_varName,_varValue];

@@ -128,7 +128,7 @@ else
     if (_targetSide == teamPlayer) then {
         private _maxSpendProp = 0.1 + (_enemyStr / (1 + 30 * A3A_activePlayerCount)) ^ 0.6;
         Debug_1("Max spend by rebel threat proportion: %1", _maxSpendProp);
-        _maxSpendLoc = _maxSpendLoc min _maxSpendProp;
+        _maxSpendLoc = _maxSpendLoc * _maxSpendProp;
     };
 
     // Prevent overreacting to threats: recentDamage + enemyStr - friendlyStr

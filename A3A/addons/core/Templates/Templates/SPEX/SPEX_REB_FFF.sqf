@@ -22,6 +22,8 @@
 
 ["surrenderCrate", "SPE_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
 
+["vehiclesCivSupply", ["SPE_FFI_OpelBlitz"]] call _fnc_saveToTemplate; //We should create a inert "box truck" version
+
 //////////////////////////
 //       Vehicles       //
 //////////////////////////
@@ -29,26 +31,32 @@
 ["vehiclesBasic", ["SPE_FFI_R200_Unarmed"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["SPE_FFI_R200_Hood"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["SPE_FFI_R200_MG34"]] call _fnc_saveToTemplate;
-["vehiclesTruck", ["SPE_FFI_OpelBlitz_Open"]] call _fnc_saveToTemplate;
+["vehiclesTruck", ["SPE_FFI_OpelBlitz", "SPE_FFI_OpelBlitz_Open"]] call _fnc_saveToTemplate;
 ["vehiclesAT", []] call _fnc_saveToTemplate;
 ["vehiclesAA", ["SPE_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
 
 ["vehiclesBoat", ["I_G_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
-["vehiclesRepair", ["SPE_OpelBlitz_Repair"]] call _fnc_saveToTemplate;
-["vehiclesPlane", ["SPE_FW190F8"]] call _fnc_saveToTemplate;
+["vehiclesPlane", ["SPEX_CW_C47_Dakota", "SPE_FW190F8"]] call _fnc_saveToTemplate;
 ["vehiclesHeli", []] call _fnc_saveToTemplate;
 
-["vehiclesCivCar", ["SPE_GER_R200_Unarmed","SPE_GER_R200_Hood","SPE_US_G503_MB","SPE_US_G503_MB_Open"]] call _fnc_saveToTemplate;
-["vehiclesCivTruck", ["SPE_FFI_OpelBlitz"]] call _fnc_saveToTemplate;
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    ["vehiclesPlane", ["sab_fl_ju52", "sab_fl_yak3"]] call _fnc_saveToTemplate;
+    ["vehiclesBasic", ["SPE_FFI_R200_Unarmed","sab_fl_airfieldtractor","sab_fl_scooter_53"]] call _fnc_saveToTemplate;
+};
+
+["vehiclesCivCar", []] call _fnc_saveToTemplate;
+["vehiclesCivTruck", ["SPEX_GER_Bedford_MWD", "SPEX_GER_Bedford_MWD_Open"]] call _fnc_saveToTemplate;
 ["vehiclesCivHeli", []] call _fnc_saveToTemplate;
 ["vehiclesCivBoat", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesCivPlane", []] call _fnc_saveToTemplate;
 
+["vehiclesMedical", ["SPE_FFI_OpelBlitz_Ambulance"]] call _fnc_saveToTemplate;
+
 ["staticMGs", ["SPE_MG34_Lafette_Deployed"]] call _fnc_saveToTemplate;
 ["staticAT", ["SPE_FR_57mm_M1"]] call _fnc_saveToTemplate;
-["staticAA", ["SPE_FR_M45_Quadmount"]] call _fnc_saveToTemplate;
+["staticAA", ["SPEX_DAK_FlaK_30"]] call _fnc_saveToTemplate;
 
-["staticMortars", ["SPEX_M2_60"]] call _fnc_saveToTemplate;
+["staticMortars", ["SPEX_M2_60", "SPEX_SBML_2_Inch_Mk7"]] call _fnc_saveToTemplate;
 ["staticMortarMagHE", "SPEX_8Rnd_60mmHE_M2_M49A2"] call _fnc_saveToTemplate;
 ["staticMortarMagSmoke", "SPEX_8Rnd_60mmWP_M2_M302"] call _fnc_saveToTemplate;
 ["staticMortarMagFlare", "SPEX_8Rnd_60mmIllu_M2_M83"] call _fnc_saveToTemplate;
@@ -72,12 +80,13 @@
 ///////////////////////////
 
 private _initialRebelEquipment = [
-    "SPE_Fusil_Mle_208_12", "SPE_Fusil_Mle_208_12_Sawedoff",
+    "SPE_Fusil_Mle_208_12", ["SPE_Fusil_Mle_208_12_Sawedoff", 15],
     "SPE_2Rnd_12x65_Pellets", "SPE_2Rnd_12x65_Slug","SPE_2Rnd_12x65_No4_Buck",
-    "SPE_P08", "SPE_8Rnd_9x19_P08",
-    ["SPE_Faustpatrone", 50], ["SPE_1Rnd_Faustpatrone", 50],
+    ["SPE_Faustpatrone", 30], ["SPE_1Rnd_Faustpatrone", 30],
+    "SPEX_Enfield_No2", ["SPEX_Enfield_No2_late", 15], "SPEX_6rnd_9x20R",
     ["SPE_Ladung_Small_MINE_mag", 10], ["SPE_US_TNT_half_pound_mag", 10], ["SPE_US_TNT_4pound_mag", 3], ["SPE_Ladung_Big_MINE_mag", 3],
-    "SPE_NB39", "SPE_Shg24",
+    "SPE_NB39", "SPE_Blendkorper_2H", ["SPE_Shg24", 50], ["SPE_Shg24x7", 20], 
+    "SPE_US_Mk_1","SPE_Type_A1_Lamp_Red","SPE_Type_A1_Lamp_White","SPE_Type_A1_Lamp_Orange","SPE_Type_A1_Lamp_Green","SPE_Type_A1_Lamp_Blue",
     "V_SPE_FFI_Vest_Pouch","V_SPE_FFI_Vest_Pouch_frag", "V_SPE_FFI_Vest_rifle","V_SPE_FFI_Vest_rifle_frag",
     "V_SPE_FFI_Vest_rifle_pouch","V_SPE_FFI_Vest_SMG","V_SPE_FFI_Vest_SMG_frag","V_SPE_FFI_Vest_SMG_pouch",
     "B_SPE_FFI_Gasbag", "B_SPE_CIV_musette", "B_SPE_CIV_satchel",

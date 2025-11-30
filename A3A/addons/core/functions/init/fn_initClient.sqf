@@ -11,8 +11,21 @@ Info_1("Client version: %1", QUOTE(VERSION_FULL));
 
 // *************************** Client pre-setup init *******************************
 
+// Public variable order testing
+A3A_publicVarTime = time;
+if (!isNil "serverInitDone" and !isNil "A3A_utilityItemHM") then {
+    ServerInfo_1("publicVariable ordering for %1: Both arrived before initClient", clientOwner);
+};
+"serverInitDone" addPublicVariableEventHandler {
+    if (isNil "A3A_utilityItemHM") exitWith { A3A_publicVarTime = time };
+    ServerInfo_2("publicVariable ordering for %1: serverInitDone arrived %2 after", clientOwner, time - A3A_publicVarTime);
+};
+"A3A_utilityItemHM" addPublicVariableEventHandler {
+    if (isNil "serverInitDone") exitWith { A3A_publicVarTime = time };
+    ServerInfo_2("publicVariable ordering for %1: A3A_utilityItemHM arrived %2 after", clientOwner, time - A3A_publicVarTime);
+};
+
 if (!requiredVersion QUOTE(REQUIRED_VERSION)) exitWith { Error("Arma version is out of date") };
-if (call A3A_fnc_modBlacklist) exitWith {};
 
 //Disables rabbits and snakes, because they cause the log to be filled with "20:06:39 Ref to nonnetwork object Agent 0xf3b4a0c0"
 //Can re-enable them if we find the source of the bug.
@@ -49,24 +62,22 @@ if !(isServer) then {
         0 spawn A3A_fnc_garrisonOpLoop;
     };
 
-    if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
-        isClass (configfile >> "CfgPatches" >> "lambs_danger"))) then {
-        // disable lambs danger fsm entrypoint
-        ["CAManBase", "InitPost", {
-            params ["_unit"];
-            (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
-            _unit setVariable ["lambs_danger_disableAI", true];
-        }] call CBA_fnc_addClassEventHandler;
-    };
 };
 
 // Server/client version check
-waitUntil { sleep 0.1; !isNil "initZonesDone" };
+waitUntil { sleep 0.1; getClientState == "BRIEFING READ" and !isNil "initZonesDone" };
 if (isNil "A3A_serverVersion") then { A3A_serverVersion = "pre-3.3" };
-if (A3A_clientVersion != A3A_serverVersion) exitWith {
+if (A3A_clientVersion != A3A_serverVersion) then {
     private _errorStr = format [localize "STR_A3A_feedback_serverinfo_mismatch", A3A_serverVersion, A3A_clientVersion];
-    [localize "STR_A3A_feedback_serverinfo", _errorStr] call A3A_fnc_customHint;
+    Error_2("Version mismatch: Server %1, client %2", A3A_serverVersion, A3A_clientVersion);
+    localize "STR_A3A_feedback_serverinfo" hintC parseText _errorStr;
+    waitUntil {sleep 0.01; isNull findDisplay 72};
+    hintSilent "";
 };
+
+// Should be called after server sends A3A_serverBadMods
+// Blocks until the hintCs are done if it's a real client
+[] call A3A_fnc_modBlacklist;
 
 // Show server startup state hints
 if (isNil "A3A_startupState") then { A3A_startupState = "waitserver" };
@@ -83,14 +94,14 @@ while {true} do {
 
 Info("Server started, continuing with client init");
 
-call A3A_fnc_installSchrodingersBuildingFix;
+//call A3A_fnc_installSchrodingersBuildingFix;
 
 if (!isServer) then {
     // get server to send us the current destroyedBuildings list, hide them locally
-    "destroyedBuildings" addPublicVariableEventHandler {
-        { hideObject _x } forEach (_this select 1);
-    };
-    [clientOwner, "destroyedBuildings"] remoteExecCall ["publicVariableClient", 2];
+    //"A3A_destroyedBuildings" addPublicVariableEventHandler {
+    //    { hideObject _x } forEach (_this select 1);
+    //};
+    //[clientOwner, "A3A_destroyedBuildings"] remoteExecCall ["publicVariableClient", 2];
 
     boxX call jn_fnc_arsenal_init;
     if (A3A_hasACEMedical) then { call A3A_fnc_initACEUnconsciousHandler };
@@ -98,7 +109,7 @@ if (!isServer) then {
 
 // Headless clients register with server and bail out at this point
 if (!isServer and !hasInterface) exitWith {
-
+    if (A3A_clientVersion != A3A_serverVersion) exitWith {};            // Do not use HCs that have a version mismatch
     player setPosATL (markerPos respawnTeamPlayer vectorAdd [-100, -100, 0]);
     [clientOwner] remoteExecCall ["A3A_fnc_addHC",2];
 };
@@ -120,6 +131,9 @@ player setVariable ["eligible",player call A3A_fnc_isMember,true];
 player setVariable ["A3A_playerUID",getPlayerUID player,true];			// Mark so that commander routines know for remote-controlling
 
 A3A_GUIDevPreview = profileNamespace getVariable ["AntistasiUseNewUI", true];
+A3A_drawBuilderIcons = false; // manage visibility of builder interactions
+A3A_showBuilderActions = false;
+A3A_hideInfobarHints = false;
 musicON = false;
 recruitCooldown = 0;			//Prevents units being recruited too soon after being dismissed.
 incomeRep = false;
@@ -312,25 +326,18 @@ mapX addAction [localize "STR_A3A_fn_init_initclient_addact_gameOpt", {
         localize "STR_A3A_fn_init_initclient_gameOpt_limFT"+" "+ ([localize "STR_antistasi_dialogs_generic_button_no_text",localize "STR_antistasi_dialogs_generic_button_yes_text"] select limitedFT) +"<br/>"+
         localize "STR_A3A_fn_init_initclient_gameOpt_spawnDist"+" "+ str distanceSPWN + "m" +"<br/>"+
         localize "STR_A3A_fn_init_initclient_gameOpt_civLim"+" "+ str globalCivilianMax +"<br/>"+
-        localize "STR_A3A_fn_init_initclient_gameOpt_timeGC"+" "+ ([[serverTime-A3A_lastGarbageCleanTime] call A3A_fnc_secondsToTimeSpan,1,0,false,2,false,true] call A3A_fnc_timeSpan_format)
+        localize "STR_A3A_fn_init_initclient_gameOpt_timeGC"+" "+ ([[serverTime-A3A_lastGarbageCleanTime] call A3A_fnc_secondsToTimeSpan,1,0,false,2,false,true] call A3A_fnc_timeSpan_format)+"<br/><br/>"+
+        localize "STR_A3A_fn_init_initclient_gameOpt_obsolete"
     ] call A3A_fnc_customHint;
-#ifdef UseDoomGUI
-    ERROR("Disabled due to UseDoomGUI Switch.")
-#else
-    CreateDialog "game_options";
-#endif
     nil;
 },nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
 mapX addAction [localize "STR_A3A_fn_init_initclient_addact_mapinfo", A3A_fnc_mapInfoDialog,nil,0,false,true,"","(isPlayer _this) and (_this == _this getVariable ['owner',objNull]) and (side (group _this) == teamPlayer)", 4];
 if (isMultiplayer) then {mapX addAction [localize "STR_A3A_fn_init_initclient_addact_ailoadinfo", { [] remoteExec ["A3A_fnc_AILoadInfo",2];},nil,0,false,true,"",""]}; // should be no reason to restrict the aiLoadInfo to anyone
 
-[] call A3A_fnc_unitTraits;
-
 // Get list of buildable objects, has map (and template?) dependency
 call A3A_fnc_initBuildableObjects;
 
 // Start cursorObject monitor loop for adding removeStructure actions
-// Note: unitTraits must run first to add engineer trait to default commander
 0 spawn A3A_fnc_initBuilderMonitors;
 
 
@@ -352,10 +359,19 @@ if (A3A_hasACE) then {call A3A_fnc_initACE};
 
 [allCurators] call A3A_fnc_initZeusLogging;
 
+["loadSettings"] call A3A_GUI_fnc_optionsDialog;
+
 A3A_aliveTime = time;
 
 initClientDone = true;
 Info("initClient completed");
+
+if (player == theBoss) then {
+    player setVariable ["A3A_Role", "rifleman"];
+    ["commander",true] call A3A_fnc_unitTraits;
+} else {
+    createDialog "A3A_RoleSelectDialog"; // player will be commander if they set up the game
+};
 
 if(!isMultiplayer) then
 {

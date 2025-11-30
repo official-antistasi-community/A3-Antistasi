@@ -18,9 +18,9 @@ _task set ["_endTime", time + 20*60];
 private _displayTime = [((_task get "_endTime") - time) / 60] call FUNC(minutesFromNow);
 private _taskDesc = format [localize "STR_A3A_Tasks_killcop_desc", _marker, _displayTime];
 private _taskId = call FUNC(genTaskUID);
-[true, _taskId, [_taskDesc, _task get "_hintTitle"], _target, false, -1, true, "Kill", true] call BIS_fnc_taskCreate;
+[true, _taskId, [_taskDesc, _task get "_hintTitle"], _target, false, -1, false, "Kill", true] call BIS_fnc_taskCreate;
 _task set ["_taskId", _taskId];
-
+[_taskId, "CREATED", markerPos _marker, 1300] call FUNC(taskNotifyNear);
 
 _task set ["state", "s_waitForKill"];
 _task set ["interval", 1];
@@ -51,8 +51,8 @@ _task set ["s_waitForKill", {
     if (time > _this get "_endTime") exitWith {
         // "We've lost track of the target. Maybe another time"
 		[_this get "_hintTitle", localize "STR_A3A_Tasks_killcop_timeout", getPosATL _target, 200] call FUNC(hintNear);
-    	[_this get "_taskId", "FAILED"] call BIS_fnc_taskSetState;
-        _this set ["state", "s_cleanup"]; false;        
+    	[_this get "_taskId", "FAILED", false] call BIS_fnc_taskSetState;
+        _this set ["state", "s_cleanup"]; false;
     };
     false;
 }];
@@ -66,8 +66,9 @@ _task set ["s_success", {
 
 	[_value, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 
-	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
-    _this set ["state", "s_cleanup"]; false;        
+    [_this get "_taskId", "SUCCEEDED", getPosATL _target, 200] call FUNC(taskNotifyNear);
+	[_this get "_taskId", "SUCCEEDED", false] call BIS_fnc_taskSetState;
+    _this set ["state", "s_cleanup"]; false;
 }];
 
 _task set ["s_cleanup", {

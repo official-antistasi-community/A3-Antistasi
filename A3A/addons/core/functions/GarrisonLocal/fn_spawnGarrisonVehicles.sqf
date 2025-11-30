@@ -30,6 +30,24 @@ private _troops = _garrison get "troops";
 private _crewVar = ["A3A_crewed", "A3A_rebCrewed"] select (_side == teamPlayer);
 private _places = A3A_spawnPlacesHM get _marker;
 private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side == teamPlayer);
+
+// Shouldn't be any units/vehicles from marker at this point
+private _potentialBlockers = (allDead + (_markerPos nearEntities vectorMagnitude markerSize _marker)) inAreaArray _marker;
+
+// pass in _pos, _class and _marker
+private _fnc_isBlocked = {
+    private _blockers = _potentialBlockers inAreaArray [_pos, 8, 8];
+    {
+        if (alive _x and !(_x isKindOf "WeaponHolderSimulated")) then { continue };
+        _blockers deleteAt _forEachIndex;
+        deleteVehicle _x;
+        sleep 0.01;                 // otherwise might spawn vehicle in same frame & before deletion
+    } forEachReversed _blockers;
+    if (_blockers isEqualTo []) exitWith { false };
+    Error_3("Spawn of %1 in %2 blocked by %3", _class, _marker, typeof (_blockers#0));
+    true;
+};
+
 {
     _x params ["_class", "_posData", "_vecDir", "_vecUp", "_state"];
 
@@ -45,11 +63,7 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
             Info_2("Spawn of %1 in %2 blocked because building destroyed", _class, _marker);
             continue;
         };
-        private _blockers = _pos nearEntities 8 select { _x getVariable ["markerX", ""] != _marker };
-        if (_blockers isNotEqualTo []) then {
-            Error_3("Spawn of %1 in %2 blocked by %3", _class, _marker, typeof (_blockers#0));
-            continue;
-        };
+        if (call _fnc_isBlocked) then { continue };
         isNil {
             _vehicle = createVehicle [_class, _pos, [], 0, "CAN_COLLIDE"];
             _vehicle setDir _dir;
@@ -60,11 +74,8 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
     else
     {
         // Arbitrary placement (probably rebel)
-        private _blockers = _posData nearEntities 8 select { _x getVariable ["markerX", ""] != _marker };
-        if (_blockers isNotEqualTo []) then {
-            Error_3("Spawn of %1 in %2 blocked by %3", _class, _marker, typeof (_blockers#0));
-            continue;
-        };
+        private _pos = ASLtoAGL _posData;           // blocker check is currently 2d anyway, but keep it consistent
+        if (call _fnc_isBlocked) then { continue };
         isNil {
             _vehicle = createVehicle [_class, _posData, [], 0, "CAN_COLLIDE"];
             _vehicle setPosWorld _posData;
@@ -107,7 +118,7 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
 
     private _groupType = ["staticGroup", "mortarGroup"] select (_vehicle isKindOf "StaticMortar");
     private _group = _garrison get _groupType;
-    if (isNull _group) then { _group = createGroup _side; _garrison set [_groupType, _group] };
+    if (isNull _group) then { _group = createGroup _side; _groups pushBack _group; _garrison set [_groupType, _group] };
 
     private _unit = [_group, _unitType, _markerPos, [], 0, "NONE"] call A3A_fnc_createUnit;
     _unit assignAsGunner _vehicle;

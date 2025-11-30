@@ -44,6 +44,7 @@ private _retreatPos = if (_potentials isEqualTo []) then {
     _x disableAI "AUTOCOMBAT";
     _x disableAI "TARGET";
     _x setUnitPos "UP";
+    _x setVariable ["A3A_forcedStance", "UP"];
     _x doFollow leader _group;
 } forEach units _group;
 

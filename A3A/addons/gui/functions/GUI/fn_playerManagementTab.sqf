@@ -83,9 +83,12 @@ switch (_mode) do
         private _addButton = _display displayCtrl A3A_IDC_ADDMEMBERBUTTON;
         private _removeButton = _display displayCtrl A3A_IDC_REMOVEMEMBERBUTTON;
 
+        private _kickButton = _display displayCtrl A3A_IDC_KICKPLAYERBUTTON;
+        private _banButton = _display displayCtrl A3A_IDC_BANPLAYERBUTTON;
+
         // TODO UI-update: this probably needs some changes to work properly
         // private _player = allPlayers select _index;
-        private _player = (str _playerUID) call BIS_fnc_getUnitByUID;
+        private _player = (_playerUID) call BIS_fnc_getUnitByUID;
         Debug_1("_player: %1", _player);
         if ([_player] call A3A_fnc_isMember) then {
             _addButton ctrlShow false;
@@ -94,6 +97,28 @@ switch (_mode) do
             _addButton ctrlShow true;
             _removeButton ctrlShow false;
         };
+        private _name = name _player;
+        _kickButton ctrlEnable false;
+        _banButton ctrlEnable false;
+        /*
+        player setVariable ["adminSelectedPlayer", _name];
+        _kickButton ctrlRemoveAllEventHandlers "ButtonClick";
+        _kickButton ctrlAddEventHandler ["ButtonClick", {
+            private _name = player getVariable ["adminSelectedPlayer",""];
+            if (_name == "") exitWith {};
+            diag_log _name;
+            _command = format ["#kick %1", _name];
+            diag_log _command;
+            serverCommand _command;
+        }];
+        _banButton ctrlRemoveAllEventHandlers "ButtonClick";
+        _banButton ctrlAddEventHandler ["ButtonClick", {
+            private _name = player getVariable ["adminSelectedPlayer",""];
+            if (_name == "") exitWith {};
+            _command = format ["#kick %1", _name];
+            serverCommand _command;
+        }];
+        */
     };
 
     // Debug cases, to be removed/changed when merging
@@ -104,7 +129,7 @@ switch (_mode) do
         private _index = lbCurSel _listBox;
         _listBox lnbSetColor [[_index,0], A3A_COLOR_MEMBER_SQF];
         private _playerUID = _listBox lnbText [_index, 2];
-        private _player = (str _playerUID) call BIS_fnc_getUnitByUID;
+        private _player = (_playerUID) call BIS_fnc_getUnitByUID;
         ["add",_player] call FUNCMAIN(memberAdd);
         ["playerLbSelectionChanged"] spawn FUNC(playerManagementTab);
     };
@@ -116,7 +141,7 @@ switch (_mode) do
         private _index = lbCurSel _listBox;
         _listBox lnbSetColor [[_index,0], A3A_COLOR_GUEST_SQF];
         private _playerUID = _listBox lnbText [_index, 2];
-        private _player = (str _playerUID) call BIS_fnc_getUnitByUID;
+        private _player = (_playerUID) call BIS_fnc_getUnitByUID;
         ["remove",_player] call FUNCMAIN(memberAdd);
         ["playerLbSelectionChanged"] spawn FUNC(playerManagementTab);
     };
@@ -124,7 +149,7 @@ switch (_mode) do
     case ("tpToPlayer"):
     {
         private _playerUID = call _fnc_selPlayerUID;
-        private _player = (str _playerUID) call BIS_fnc_getUnitByUID;
+        private _player = (_playerUID) call BIS_fnc_getUnitByUID;
         // TODO UI-update prevent teleporting to self
         //if (_player == player) exitWith 
         player setPos getPos _player;
@@ -133,27 +158,15 @@ switch (_mode) do
     case ("tpPlayerToMe"):
     {
         private _playerUID = call _fnc_selPlayerUID;
-        private _player = (str _playerUID) call BIS_fnc_getUnitByUID;
+        private _player = (_playerUID) call BIS_fnc_getUnitByUID;
         _player setPos getPos player;
-    };
-
-    case ("adminKickPlayer"):
-    {
-        private _playerUID = call _fnc_selPlayerUID;
-        // TODO UI-update: kick UID
-    };
-
-    case ("adminBanPlayer"):
-    {
-        private _playerUID = call _fnc_selPlayerUID;
-        // TODO UI-update: ban UID
     };
 
     case ("adminCopyUID"):
     {
         private _playerUID = call _fnc_selPlayerUID;
-        // TODO UI-update: copy UID to clipboard
-        //[_playerUID] remoteExec ["copyToClipboard",2];
+        player setVariable ["A3A_lastViewedUID", _playerUID];
+        createDialog "A3A_AdminCopyUID";
     };
 
     default

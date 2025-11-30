@@ -9,9 +9,11 @@ class DOUBLES(ADDON,Nodes)
     #include "Nodes\3CBBAF.hpp"
     #include "Nodes\3CBFactions.hpp"
     #include "Nodes\CUP.hpp"
+    #include "Nodes\EAW.hpp"
     #include "Nodes\D3S.hpp"
     #include "Nodes\GM.hpp"
     #include "Nodes\IFA.hpp"
+    #include "Nodes\PRACS.hpp"
     #include "Nodes\RDS.hpp"
     #include "Nodes\RF.hpp"
     #include "Nodes\RHS.hpp"
@@ -22,7 +24,11 @@ class DOUBLES(ADDON,Nodes)
     #include "Nodes\VN.hpp"
     #include "Nodes\WS.hpp"
     #include "Nodes\SFP.hpp"
-     #include "Nodes\CWR.hpp"
+    #include "Nodes\CRO.hpp"
+    #include "Nodes\AMF.hpp"
+    #include "Nodes\TMT.hpp"
+    #include "Nodes\CWR.hpp"
+    #include "Nodes\CSLA.hpp"
 };
 
 class DOUBLES(ADDON,Cargo)
@@ -41,6 +47,7 @@ class DOUBLES(ADDON,Cargo)
     #include "Cargo\ACE.hpp"
     #include "Cargo\BWA3.hpp"
     #include "Cargo\CUP.hpp"
+    #include "Cargo\EAW.hpp"
     #include "Cargo\GM.hpp"
     #include "Cargo\IFA.hpp"
     #include "Cargo\RHS.hpp"

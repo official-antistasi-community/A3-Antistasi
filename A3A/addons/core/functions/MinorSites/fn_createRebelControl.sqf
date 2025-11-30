@@ -49,3 +49,5 @@ outpostsFIA = outpostsFIA + [_marker];
 if (_troopTypes isNotEqualTo []) then { publicVariable "outpostsFIA" };
 
 ["RebelControlCreated", [_marker, isOnRoad _pos]] call EFUNC(Events,triggerEvent);
+
+_marker;        // loadstat needs this as a return value

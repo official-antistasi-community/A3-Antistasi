@@ -109,7 +109,9 @@ class cup_chernarus_A3 {
 		{"Land_fort_artillery_nest_EP1", 200}, {"Land_fort_rampart_EP1", 50}, {"Fort_Barricade", 50}, {"Fence", 20}, {"FenceWood", 10}, {"FenceWoodPalet", 10}, 
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
 	policeStationTypes[] = {
 		// From Livonia
@@ -118,4 +120,8 @@ class cup_chernarus_A3 {
 		"Land_House_1B01_F", "Land_House_1W11_F", "Land_House_1W12_F", "Land_House_1W07_F",
 		"Land_House_1W02_F", "Land_House_1W09_F", "Land_House_1W05_F", "Land_House_1W06_F"
 	};
+	requiredMods = "CUP Terrains - Core and CUP Terrains - Maps 2.0";
+	size = 15.4;
+	cityCount = 72;
+	airbaseCount = 3;
 };

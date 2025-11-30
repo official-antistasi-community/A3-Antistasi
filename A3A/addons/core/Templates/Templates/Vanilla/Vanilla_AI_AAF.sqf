@@ -43,7 +43,7 @@ private _AA = ["I_LT_01_AA_F"];
 private _vehiclesHelisLight = ["I_Heli_light_03_unarmed_F"];
 private _vehiclesHelisTransport = ["I_Heli_Transport_02_F"];
 private _vehiclesHelisLightAttack = ["I_Heli_light_03_dynamicLoadout_F"];
-private _vehiclesHelisAttack = ["B_Heli_Attack_01_dynamicLoadout_F"];
+private _vehiclesHelisAttack = ["B_Heli_Attack_01_dynamicLoadout_F","B_Heli_Attack_01_dynamicLoadout_F","B_Heli_Attack_01_pylons_dynamicLoadout_F"];
 
 ["vehiclesArtillery", ["I_Truck_02_MRL_F", "B_MBT_01_arty_F"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [

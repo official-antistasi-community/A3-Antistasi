@@ -83,12 +83,12 @@ switch (_type) do {
 		_possibleMarkers = _possibleMarkers select {spawner getVariable _x != 0};
 		//append occupants antennas to list
 		{
-			private _nearbyMarker = [markersX, getPos _x] call BIS_fnc_nearestPosition;
+			private _nearbyMarker = A3A_antennaMap get netId _x;
 			if (
-				(sidesX getVariable [_nearbyMarker,sideUnknown] == Occupants)
-				&& (getPos _x distance getMarkerPos respawnTeamPlayer < distanceMission)
+				(sidesX getVariable _nearbyMarker == Occupants)
+				&& (getPosATL _x distance getMarkerPos respawnTeamPlayer < distanceMission)
 				) then {_possibleMarkers pushBack _x};
-		}forEach antennas;
+		} forEach (A3A_antennas select {alive _x});
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
@@ -98,7 +98,7 @@ switch (_type) do {
 		} else {
 			private _site = selectRandom _possibleMarkers;
 			if (_site in airportsX) then {if (random 10 < 6) then {[[_site],"A3A_fnc_DES_Vehicle"] remoteExec ["A3A_fnc_scheduler",2]} else {[[_site],"A3A_fnc_DES_Heli"] remoteExec ["A3A_fnc_scheduler",2]}};
-			if (_site in antennas) then {[[_site],"A3A_fnc_DES_antenna"] remoteExec ["A3A_fnc_scheduler",2]}
+			if (_site in A3A_antennas) then {[[_site],"A3A_fnc_DES_antenna"] remoteExec ["A3A_fnc_scheduler",2]}
 		};
 	};
 
