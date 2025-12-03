@@ -137,7 +137,7 @@ while {_totalReinf > 0} do
         [_marker, _numTroops, _quality] remoteExecCall ["A3A_fnc_garrisonServer_addUnitCount", 2];
         continue;
     };
-    if (_rebelsNear or _rebelSpawners inAreaArray [markerPos _source, 1000, 1000] isNotEqualTo []) then {
+    if (_rebelsNear or _rebelSpawners inAreaArray [markerPos _source, 1000, 1000] isNotEqualTo [] or ( random 120 > (count allUnits - 4))) then {
         // If rebels are near the target or source, send a real reinforcement
         [[_marker, _source, _isLand, _numTroops, _quality, _side], "A3A_fnc_patrolReinf"] call A3A_fnc_scheduler;      // TODO: patrolReinf needs update
         sleep 10;		// Might re-use this marker shortly, avoid collisions
