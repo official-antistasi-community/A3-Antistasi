@@ -26,7 +26,6 @@ private _fnc_generateList = {
         private _price = [_item, _cfgType] call A3A_GUI_fnc_calculateItemPrice;
         private _stockGS = ceil (_maxStock * (0.3 + random 0.7));
         private _stockArsenal = [jna_dataList select (_item call jn_fnc_arsenal_itemType), _item] call jn_fnc_arsenal_itemCount;
-        if (_stockArsenal isEqualTo -1) then { _stockArsenal = "unlocked" };
         _itemPriceList set [_item, [_price call _fnc_roundPrice, _stockGS, _stockArsenal]];
         _itemCount = _itemCount - 1;
     };
