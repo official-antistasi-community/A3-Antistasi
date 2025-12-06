@@ -47,8 +47,8 @@ switch(_selectedTab) do
 
     _pictureBox = [0, 0, 6, 6];
     _displayBox = [7.5, 0, 55.5, 3];
-    _priceBox = [13, 3, 61, 3];
-    _stockBox = [20, 3, 54, 3];
+    _priceBox = [13, 3, 6, 3];
+    _stockBox = [20, 3, 30, 3];
     _logoBox = [70, 0, 6, 6];
     _addBox = [76, 0, 24, 6];
 
@@ -162,8 +162,17 @@ private _createdCtrls = [];
 
     private _displayStock = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
     _displayStock ctrlSetPosition _stockBox;
-    private _stockStr = str _stockGS + " in stock; " + ([str _stockArsenal, _stockArsenal] select (_stockArsenal isEqualType "")) + " in arsenal; " + str minWeaps + " to unlock";           // TODO: stringtable, make this control bigger
+    private _stockStr = str _stockGS + " in stock"; // TODO: stringtable
+    private _stockArsenalStr = switch true do {
+        case (_stockArsenal isEqualTo -1): { "Unlocked in arsenal" }; // just in case, but unlocked items shouldn't be here
+        case (minWeaps isEqualTo -1): { format ["%1 in arsenal; Unlocks disabled", _stockArsenal] };
+        case (_className in AllMissileLaunchers && {allowGuidedLaunchers isEqualTo 0});
+        case (_className in AllRocketLaunchers && {allowUnguidedLaunchers isEqualTo 0});
+        case (_className in AllExplosives && {allowUnlockedExplosives isEqualTo 0}): { format ["%1 in arsenal; Unlocks disabled for this equipment type", _stockArsenal] };
+        default { format ["%1 in arsenal; %2 to unlock", _stockArsenal, minWeaps] };
+    }; // TODO: stringtable
     _displayStock ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#63DDFF' shadow='2'>%1</t>", _stockStr]);
+    _displayStock ctrlSetTooltip _stockArsenalStr;
     _displayStock ctrlCommit 0;
 
     private _displayPrice = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
