@@ -4896,6 +4896,21 @@
       <Key ID="STR_antistasi_gun_shop_total_cost_text">
         <Original>Total:</Original>
       </Key>
+      <Key ID="STR_antistasi_gun_shop_stock_gs">
+        <Original>%1 in stock</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_stock_arsenal">
+        <Original>%1 in arsenal</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_unlock_amount">
+        <Original>%1 to unlock</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_unlocks_disabled">
+        <Original>Unlocks disabled</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_unlocks_disabled_specific">
+        <Original>Unlocks disabled for this equipment type</Original>
+      </Key>
     </Container>
     <Container name="map_selector">
       <Key ID="STR_antistasi_mapSelector_onload_text">

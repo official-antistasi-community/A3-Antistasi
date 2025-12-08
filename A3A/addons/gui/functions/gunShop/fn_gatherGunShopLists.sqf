@@ -25,7 +25,7 @@ private _fnc_generateList = {
         private _item = _allItems deleteAt floor random count _allItems;
         private _price = [_item, _cfgType] call A3A_GUI_fnc_calculateItemPrice;
         private _stockGS = ceil (_maxStock * (0.3 + random 0.7));
-        private _stockArsenal = [jna_dataList select (_item call jn_fnc_arsenal_itemType), _item] call jn_fnc_arsenal_itemCount;
+        private _stockArsenal = _arsenalCountHM getOrDefault [_item, 0];
         _itemPriceList set [_item, [_price call _fnc_roundPrice, _stockGS, _stockArsenal]];
         _itemCount = _itemCount - 1;
     };
@@ -38,24 +38,28 @@ A3A_gunShopData = createHashMap;
 // Set up the item price cache
 if (isNil "A3A_itemPriceCache") then { A3A_itemPriceCache = createHashMap };
 
+// Build arsenal item quantity lookup table
+private _arsenalCountHM = createHashMap;
+{ _arsenalCountHM insert _x } forEach ((jna_dataList select [0,3]) + (jna_dataList select [18,9]));
+
 private _gunShopData = createHashMap;
 
 private _glOnly = allGrenadeLaunchers select { (_x call A3A_fnc_equipmentClassToCategories) # 0 != "Rifles" };
-_gunShopData set [A3A_IDC_GUN_SHOP_PRIMARY_TAB, ["weapon", _minCount*3, 15, (allRifles + allSniperRifles + allMachineGuns + allSMGs + allShotguns + _glOnly) - unlockedItems] call _fnc_generateList];
-_gunShopData set [A3A_IDC_GUN_SHOP_HANDGUN_TAB, ["weapon", _minCount, 15, +allHandguns - unlockedItems] call _fnc_generateList];
-_gunShopData set [A3A_IDC_GUN_SHOP_SECONDARY_TAB, ["weapon", _minCount, 8, (allMissileLaunchers + allRocketLaunchers) - unlockedItems] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_PRIMARY_TAB, ["weapon", _minCount*3, 15, (allRifles + allSniperRifles + allMachineGuns + allSMGs + allShotguns + _glOnly) - unlockedWeapons] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_HANDGUN_TAB, ["weapon", _minCount, 15, +allHandguns - unlockedHandguns] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_SECONDARY_TAB, ["weapon", _minCount, 8, (allMissileLaunchers + allRocketLaunchers) - unlockedWeapons] call _fnc_generateList];
 
-_gunShopData set [A3A_IDC_GUN_SHOP_GRENADES_TAB, ["mag", _minCount, 30, +allGrenades - unlockedItems] call _fnc_generateList];      // check smoke etc
-_gunShopData set [A3A_IDC_GUN_SHOP_EXPLOSIVES_TAB, ["mag", _minCount, 20, (allMine + allMineDirectional + allMineBounding) - unlockedItems] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_GRENADES_TAB, ["mag", _minCount, 30, +allGrenades - unlockedGrenades] call _fnc_generateList];      // check smoke etc
+_gunShopData set [A3A_IDC_GUN_SHOP_EXPLOSIVES_TAB, ["mag", _minCount, 20, (allMine + allMineDirectional + allMineBounding) - unlockedMine] call _fnc_generateList];
 
-_gunShopData set [A3A_IDC_GUN_SHOP_OPTICS_TAB, ["item", _minCount, 8, +allOptics - unlockedItems] call _fnc_generateList];
-_gunShopData set [A3A_IDC_GUN_SHOP_RAILS_TAB, ["item", _minCount, 8, +allPointerAttachments - unlockedItems] call _fnc_generateList];
-_gunShopData set [A3A_IDC_GUN_SHOP_MUZZLES_TAB, ["item", _minCount, 8, +allMuzzleAttachments - unlockedItems] call _fnc_generateList];
-_gunShopData set [A3A_IDC_GUN_SHOP_BIPODS_TAB, ["item", _minCount, 8, +allBipods - unlockedItems] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_OPTICS_TAB, ["item", _minCount, 8, +allOptics - unlockedOptics] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_RAILS_TAB, ["item", _minCount, 8, +allPointerAttachments - unlockedPointerAttachments] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_MUZZLES_TAB, ["item", _minCount, 8, +allMuzzleAttachments - unlockedMuzzleAttachments] call _fnc_generateList];
+_gunShopData set [A3A_IDC_GUN_SHOP_BIPODS_TAB, ["item", _minCount, 8, +allBipods - unlockedBipods] call _fnc_generateList];
 
 if (_minCount >= 100) then {
     private _allMags = allMagBullet + allMagShotgun + allMagMissile + allMagRocket + allMagShell + allMagSmokeShell + allMagFlare;
-    _gunShopData set [A3A_IDC_GUN_SHOP_MAGAZINES_TAB, ["mag", _minCount, 30, _allMags - unlockedItems] call _fnc_generateList];
+    _gunShopData set [A3A_IDC_GUN_SHOP_MAGAZINES_TAB, ["mag", _minCount, 30, _allMags - unlockedMagazines] call _fnc_generateList];
 } else {
     // Special case for magazines, base on previous weapons
     private _weapons = keys (_gunShopData get A3A_IDC_GUN_SHOP_PRIMARY_TAB);
@@ -71,9 +75,8 @@ if (_minCount >= 100) then {
 
         private _price = [_mag, "mag"] call A3A_GUI_fnc_calculateItemPrice;
         private _stockGS = ceil (15 + random 15);
-        // TODO: replace 26 with constant? Will require including "\A3\Ui_f\hpp\defineResinclDesign.inc" and replacing 26 with IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL
-        private _stockArsenal = [jna_dataList select 26, _mag] call jn_fnc_arsenal_itemCount;
-        private _capacity = getNumber (configFile >> "CfgMagazines" >> _mag >> "count");
+        private _stockArsenal = _arsenalCountHM getOrDefault [_mag, 0];
+        private _capacity = getNumber (configFile >> "CfgMagazines" >> _mag >> "count") max 1;
         if (_stockArsenal isNotEqualTo -1) then { _stockArsenal = _stockArsenal / _capacity };
         _magsPrices set [_mag, [_price call _fnc_roundPrice, _stockGS, _stockArsenal]];
     } forEach _weapons;

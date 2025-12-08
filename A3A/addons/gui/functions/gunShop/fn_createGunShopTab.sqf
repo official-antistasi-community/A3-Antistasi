@@ -162,15 +162,15 @@ private _createdCtrls = [];
 
     private _displayStock = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
     _displayStock ctrlSetPosition _stockBox;
-    private _stockStr = str _stockGS + " in stock"; // TODO: stringtable
+    private _stockStr = format [localize "STR_antistasi_gun_shop_stock_gs", _stockGS];
     private _stockArsenalStr = switch true do {
-        case (_stockArsenal isEqualTo -1): { "Unlocked in arsenal" }; // just in case, but unlocked items shouldn't be here
-        case (minWeaps isEqualTo -1): { format ["%1 in arsenal; Unlocks disabled", _stockArsenal] };
+        case (_stockArsenal isEqualTo -1): { format [localize "STR_antistasi_gun_shop_stock_arsenal", "Unlocked"] }; // just in case, but unlocked items shouldn't be here
+        case (minWeaps isEqualTo -1): { format [localize "STR_antistasi_gun_shop_stock_arsenal" + "; " + localize "STR_antistasi_gun_shop_unlocks_disabled", _stockArsenal] };
         case (_className in AllMissileLaunchers && {allowGuidedLaunchers isEqualTo 0});
         case (_className in AllRocketLaunchers && {allowUnguidedLaunchers isEqualTo 0});
-        case (_className in AllExplosives && {allowUnlockedExplosives isEqualTo 0}): { format ["%1 in arsenal; Unlocks disabled for this equipment type", _stockArsenal] };
-        default { format ["%1 in arsenal; %2 to unlock", _stockArsenal, minWeaps] };
-    }; // TODO: stringtable
+        case (_className in AllExplosives && {allowUnlockedExplosives isEqualTo 0}): { format [localize "STR_antistasi_gun_shop_stock_arsenal" + "; " + localize "STR_antistasi_gun_shop_unlocks_disabled_specific", _stockArsenal] };
+        default { format [localize "STR_antistasi_gun_shop_stock_arsenal" + "; ", _stockArsenal] + format [localize "STR_antistasi_gun_shop_unlock_amount", minWeaps] };
+    };
     _displayStock ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#63DDFF' shadow='2'>%1</t>", _stockStr]);
     _displayStock ctrlSetTooltip _stockArsenalStr;
     _displayStock ctrlCommit 0;
