@@ -312,7 +312,7 @@ class A3A_MainDialog : A3A_TabbedDialog
 
                 class KillsLabel : A3A_Text
                 {
-                    idc = -1;
+                    idc = A3A_IDC_KILLSLABEL;
                     text = $STR_antistasi_dialogs_player_kills;
                     x = 98 * GRID_W;
                     y = 27 * GRID_H;

@@ -192,7 +192,6 @@ class CfgFunctions
             class sellVehicle {};
             class setMarkerAlphaForSide {};
             class setPlaneLoadout {};
-            class singlePlayerBlackScreenWarning {};
             class sizeMarker {};
             class splitVehicleCrewIntoOwnGroups {};
             class startBreachVehicle {};
@@ -412,6 +411,7 @@ class CfgFunctions
             class initZeusLogging {};
             class installClientEH {};
             class modBlacklist {};
+            class newPlayerSetup {};
             class playerMarkers {};
             class prepareMarkerArrays {};
             class resourcecheck {};
