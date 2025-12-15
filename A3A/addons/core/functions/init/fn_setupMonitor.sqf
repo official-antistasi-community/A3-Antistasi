@@ -50,7 +50,7 @@ if (_autoLoadTime >= 0 || isAutoTest) then
     };
     private _index = if (isAutoTest) then {
         private _preferredGame = profileNamespace getVariable ["A3A_preferredTestingSave", 0];
-        _saveData findIf {diag_log (_x get "gameID"); (_x get "gameID") isEqualTo _preferredGame};
+        _saveData findIf {(_x get "gameID") isEqualTo _preferredGame};
     } else {
         0;
     };
