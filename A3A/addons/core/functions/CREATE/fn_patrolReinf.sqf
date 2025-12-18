@@ -19,7 +19,7 @@ private _vehicleType = if (_isLand) then {
 	if (count _groupType <= 4) then { _transportTruck = selectRandom (_faction get "vehiclesMilitiaCars") } //Militia cars has the capacity, military usual includes Hunter/M-ATV and similar with only 3 cargo seats
 	else
 	{
-		if (round _quality < 3) then { _transportTruck = selectRandom (_faction get "vehiclesMilitiaTrucks") } //low quality gets the militia truck
+		if (round _quality < 2) then { _transportTruck = selectRandom (_faction get "vehiclesMilitiaTrucks") } //low quality gets the militia truck
 	};
 	_transportTruck;
 } else {
