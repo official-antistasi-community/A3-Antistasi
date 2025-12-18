@@ -7,7 +7,7 @@ params ["_marker", ["_force", false]];
 
 private _breakOut = call {
     if (_force) exitWith {false};
-    if (sidesX getVariable _marker != Occupants) exitWith {true};
+    if (sidesX getVariable _marker == teamPlayer) exitWith {true};
     if (_marker in A3A_activeCityBattles) exitWith {true};
 
     private _chance = A3A_cityTaskTimer get _marker;

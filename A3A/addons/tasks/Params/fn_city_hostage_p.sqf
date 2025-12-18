@@ -5,7 +5,8 @@ params ["_marker"];
 
 // Find building with places that's not too close to enemies or players
 private _markerPos = markerPos _marker;
-private _eblockers = units Occupants inAreaArray [_markerPos, 250, 250];
+private _enemySide = sidesX getVariable _marker;
+private _eblockers = units _enemySide inAreaArray [_markerPos, 250, 250];
 private _rblockers = units teamPlayer inAreaArray [_markerPos, 250, 250];
 private _house = objNull;
 for "_i" from 1 to 10 do {

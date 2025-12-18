@@ -18,7 +18,7 @@ params ["_siteType", "_side", "_mod"];
 
 private _qMod = tierWar/20 + _mod;
 call {
-    if (_siteType == "city") exitWith {if (_side == Invaders) then {3} else {0.1 + _qMod}};
+    if (_siteType == "city") exitWith {if (_side == Invaders) then {1 + _qMod} else {0.1 + _qMod}};
     if (_side == Invaders) then {_qMod = _qMod + 0.4};
     if (_siteType == "airport") exitWith {(1.5 + _qMod) min 2};
     if (_siteType == "outpost") exitWith {(1.4 + _qMod) min 2};

@@ -27,7 +27,7 @@ private _typeWeights = createHashMapFromArray [["staticMortar", 1], ["staticAT",
 private _noPlaceTypes = _faction get "noPlaceTypes";
 
 private _enemyAirfieldPositions = airportsX select {sidesX getVariable _x != _side} apply { markerPos _x };
-private _reinfMarkers = markersX + controlsX + (destroyedSites select { _x in citiesX });
+private _reinfMarkers = airportsX + resourcesX + factories + outposts + seaports + controlsX + (destroyedSites select { _x in citiesX });
 
 
 private _markers = [];         // [marker, type, numReq]

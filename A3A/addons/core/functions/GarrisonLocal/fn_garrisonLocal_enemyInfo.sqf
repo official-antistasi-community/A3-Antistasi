@@ -5,9 +5,10 @@
 
     Arguments:
     <STRING> Marker name.
-    <STRING> Event type, can be "detect" or "damage".
+    <STRING> Event type, can be "detect", "damage", "mortar" or "mission".
     <OBJECT> Enemy object that triggered the event.
     <NUMBER> Knowsabout value for enemy object.
+    <NUMBER> Optional: Extra threat to add.
 
     Copyright 2025 John Jordan. All Rights Reserved.
     Used and distributed by the Antistasi Community project with permission.
@@ -18,12 +19,10 @@ FIX_LINE_NUMBERS()
 
 Trace_1("Called with %1", _this);
 
-params ["_marker", "_type", "_enemy", "_knowsAbout"];
+params ["_marker", "_type", "_enemy", "_knowsAbout", ["_threatBoost", 0]];
 
 // If we're firing a static attached to a truck, then the static is more important
 if (_enemy isKindOf "Man" and !(isNull objectParent _enemy)) then { _enemy = objectParent _enemy };
-
-Debug_1("Enemy type %1", _enemy);
 
 private _garrison = A3A_activeGarrison get _marker;
 
@@ -56,7 +55,7 @@ _defenders = _defenders select { _x getVariable ["PATCOM_Patrol_Params", [""]] s
 
 // Only include mortars that are far enough and aren't busy
 private _mortars = [];
-if (_type != "detect") then {
+if (_type in ["damage", "mortar"]) then {
     private _mortarUnits = units (_garrison get "mortarGroup") select { _x call A3A_fnc_canFight };
     _mortars = _mortarUnits apply { vehicle _x } select { _x isKindOf "StaticMortar" };
 
@@ -73,7 +72,7 @@ if (abs _threat > 0.01) then {
     // time falloff towards zero (even if negative)
     _threat = _threat - ((time - _threatTime) / 60) * _threat / abs _threat;
 };
-_threat = (_threat max 0) + ([1, 3] select (_type == "mortar"));
+_threat = (_threat max 0) + ([1, 3] select (_type == "mortar")) + _threatBoost;
 
 Trace_2("%1 current threat %2", _marker, _threat);
 
