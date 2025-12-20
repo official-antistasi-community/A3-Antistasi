@@ -122,7 +122,7 @@ while {_totalReinf > 0} do
     };
 
     private _siteType = A3A_garrison get _marker get "type";
-    private _quality = [_siteType, _side, random 0.4] call A3A_fnc_getSiteTroopQuality;
+    private _quality = [_siteType, _marker, _side] call A3A_fnc_getSiteTroopQuality;
     private _numTroops = [4, 8] select (_needed > 4 and _totalReinf > 40 and random 1 > 0.3);
     _totalReinf = _totalReinf - _numTroops*10;
 
