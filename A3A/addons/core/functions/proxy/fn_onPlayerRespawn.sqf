@@ -53,9 +53,6 @@ _newUnit addOwnedMine _x;
 	};
 } forEach (units group player);
 
-
-// don't reinit revive because damage handlers are respawn-persistent
-//if (!A3A_hasACEMedical) then {[_newUnit] call A3A_fnc_initRevive};
 disableUserInput false;
 //_newUnit enableSimulation true;
 if (_oldUnit == theBoss) then
@@ -77,12 +74,6 @@ call A3A_fnc_installClientEH;
 // The body deletion bug persists there as well.
 
 if (isServer) then {
-	if !(isMultiplayer) then {
-		private _module = allCurators#0;
-		unassignCurator _module;
-		_newUnit assignCurator _module;
-		call A3A_fnc_newPlayerSetup;
-	};
 	_oldUnit addEventHandler ["Deleted", {
 		[] spawn {
 			sleep 1;		// should ensure that the bug unassigns first

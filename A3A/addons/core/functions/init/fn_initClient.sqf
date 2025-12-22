@@ -11,12 +11,6 @@ Info_1("Client version: %1", QUOTE(VERSION_FULL));
 
 // *************************** Client pre-setup init *******************************
 
-// Clear out the singleplayer AI as soon as possible
-if !(isMultiplayer) then {
-    private _units = units group player;
-    {deleteVehicle _x} forEach (_units - [player])
-};
-
 // Public variable order testing
 A3A_publicVarTime = time;
 if (!isNil "serverInitDone" and !isNil "A3A_utilityItemHM") then {

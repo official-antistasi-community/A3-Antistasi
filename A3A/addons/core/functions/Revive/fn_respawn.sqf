@@ -20,6 +20,11 @@ _unit spawn {
     _newPlayer = [_group, "a3a_unit_player", getMarkerPos "respawn_guerrila", [],0, "NONE"] call A3A_fnc_createUnit;
     selectPlayer _newPlayer;
     [_this] joinSilent grpNull;
+    [_newPlayer] call A3A_fnc_initRevive;
+    private _module = allCurators#0;
+    unassignCurator _module;
+    _newPlayer assignCurator _module;
+    call A3A_fnc_newPlayerSetup;
     [_newPlayer, _this] call A3A_fnc_onPlayerRespawn;
     _this setDamage 1;
     _this setVariable ["respawning",false];
