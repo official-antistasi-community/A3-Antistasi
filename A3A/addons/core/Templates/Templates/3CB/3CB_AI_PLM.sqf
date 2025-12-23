@@ -2,12 +2,12 @@
 //   Side Information   //
 //////////////////////////
 //Tanoan Liberation Army, natural enemies of the HIDF, CW US, US, and SDK
-["name", "TLA"] call _fnc_saveToTemplate;
-["spawnMarkerName", "TLA Support Corridor"] call _fnc_saveToTemplate;
+["name", "PLM"] call _fnc_saveToTemplate;
+["spawnMarkerName", "PLM Support Corridor"] call _fnc_saveToTemplate;
 
 ["flag", "Flag_CW_SOV_ARMY"] call _fnc_saveToTemplate;
-["flagTexture", "uk3cb_factions\addons\uk3cb_factions_cw_sov\flag\cw_sov_army_flag_co.paa"] call _fnc_saveToTemplate;
-["flagMarkerType", "UK3CB_Marker_CW_SOV_ARMY"] call _fnc_saveToTemplate;
+["flagTexture", "\UK3CB_Factions\addons\UK3CB_Factions_PLM\Flag\PLM_flag_co.paa"] call _fnc_saveToTemplate;
+["flagMarkerType", "UK3CB_Marker_PLM"] call _fnc_saveToTemplate;
 
 //////////////////////////
 //       Vehicles       //
@@ -293,7 +293,6 @@ _militaryLoadoutData set ["sniperRifles", [
     ["UK3CB_SVD_OLD", "", "", "rhs_acc_pso1m2", ["UK3CB_SVD_10rnd_762x54","UK3CB_SVD_10rnd_762x54_G", "UK3CB_SVD_10rnd_762x54_GT"], [], ""]
 ]];
 _militaryLoadoutData set ["sidearms", [
-    ["rhs_weap_pb_6p9", "", "", "", ["rhs_mag_9x18_8_57N181S"], [], ""],
     "rhs_weap_tt33","rhs_weap_makarov_pm"]];
 
 ///////////////////////////////
@@ -399,7 +398,7 @@ _crewLoadoutData set ["SMGs", [
     "uk3cb_ppsh41",
     "rhs_weap_m92"
 ]];
-_crewLoadoutData set ["sidearms", ["rhs_weap_tt33"]];
+_crewLoadoutData set ["sidearms", ["rhs_weap_tt33", "rhs_weap_makarov_pm"]];
 
 private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["uniforms", ["rhs_uniform_afghanka_grey"]];
@@ -411,7 +410,7 @@ _pilotLoadoutData set ["SMGs", [
     "rhs_weap_m3a1", 
     ["uk3cb_mat49", "", "", "", ["UK3CB_MAT49_32Rnd_9x19_Magazine_G", "UK3CB_MAT49_32Rnd_9x19_Magazine_GT", "UK3CB_MAT49_32Rnd_9x19_Magazine"], [], ""]
 ]];
-_pilotLoadoutData set ["sidearms", ["rhs_weap_tt33"]];
+_pilotLoadoutData set ["sidearms", ["rhs_weap_tt33", "rhs_weap_makarov_pm"]];
 
 private _officialLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _officialLoadoutData set ["uniforms", ["UK3CB_TKP_I_U_CombatUniform_BLK"]];
