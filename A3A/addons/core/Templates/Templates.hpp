@@ -786,9 +786,29 @@ class Templates
     class 3CBF_TLA : 3CBF_Base
     {
         side = "Inv";
-        flagTexture = "uk3cb_factions\addons\uk3cb_factions_cw_sov\flag\cw_sov_army_flag_co.paa";
+        flagTexture = "\rhsafrf\addons\rhs_main\data\Flag_trn_CO.paa";
         name = "3CB TLA";
         file = "3CB_AI_TLA";
+        maps[] = {"tanoa"};
+        climate[] = {"tropical"};
+    };
+	
+    class 3CBF_PLM : 3CBF_Base
+    {
+        side = "Occ";
+        flagTexture = "\UK3CB_Factions\addons\UK3CB_Factions_PLM\Flag\PLM_flag_co.paa";
+        name = "3CB PLM";
+        file = "3CB_AI_PLM";
+        maps[] = {"tanoa"};
+        climate[] = {"tropical"};
+    };
+	
+    class 3CBF_TNM : 3CBF_Base
+    {
+        side = "Inv";
+        flagTexture = "\UK3CB_Factions\addons\UK3CB_Factions_TNM\Flag\TNM_flag_co.paa";
+        name = "3CB TNM";
+        file = "3CB_AI_TNM";
         maps[] = {"tanoa"};
         climate[] = {"tropical"};
     };
