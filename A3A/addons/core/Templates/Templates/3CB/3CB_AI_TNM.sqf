@@ -201,7 +201,7 @@ _sfLoadoutData set ["facewear", []];
 //["Weapon", "Muzzle", "Rail", "Sight", [], [], "Bipod"];
 
 _sfLoadoutData set ["slRifles", [
-    ["UK3CB_M16A2_UGL", "rhsusf_acc_rotex5_grey", "", "rhsusf_acc_RX01_NoFilter", ["rhs_mag_20Rnd_556x45_M193_Stanag", "rhs_mag_20Rnd_556x45_M193_2MAG_Stanag", "rhs_mag_20Rnd_556x45_M196_Stanag_Tracer_Red", "rhs_mag_20Rnd_556x45_M196_2MAG_Stanag_Tracer_Red"], ["rhs_mag_M433_HEDP", "rhs_mag_M433_HEDP", "rhs_mag_m714_White", "rhs_mag_m713_Red", "rhs_mag_m662_red", "rhs_mag_m661_green"], ""]
+    ["UK3CB_M16A2_UGL", "rhsusf_acc_rotex5_grey", "", "rhsusf_acc_RX01_NoFilter", ["rhs_mag_20Rnd_556x45_M193_Stanag", "rhs_mag_20Rnd_556x45_M193_2MAG_Stanag", "rhs_mag_20Rnd_556x45_M196_Stanag_Tracer_Red", "rhs_mag_20Rnd_556x45_M196_2MAG_Stanag_Tracer_Red"], ["rhs_mag_M433_HEDP", "rhs_mag_M433_HEDP", "rhs_mag_m714_White", "rhs_mag_m713_Red", "rhs_mag_m662_red", "rhs_mag_m661_green"], ""],
     ["UK3CB_M16A3_UGL", "rhsusf_acc_rotex5_grey", "", "rhsusf_acc_compm4", ["rhs_mag_20Rnd_556x45_M193_Stanag", "rhs_mag_20Rnd_556x45_M193_2MAG_Stanag", "rhs_mag_20Rnd_556x45_M196_Stanag_Tracer_Red", "rhs_mag_20Rnd_556x45_M196_2MAG_Stanag_Tracer_Red"], ["rhs_mag_M433_HEDP", "rhs_mag_M433_HEDP", "rhs_mag_m714_White", "rhs_mag_m713_Red", "rhs_mag_m662_red", "rhs_mag_m661_green"], ""]
 ]];
 _sfLoadoutData set ["rifles", [    
