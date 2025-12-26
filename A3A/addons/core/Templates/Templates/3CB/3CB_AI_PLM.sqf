@@ -36,7 +36,7 @@
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", ["UK3CB_PLM_O_T34"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["UK3CB_PLM_O_T55"]] call _fnc_saveToTemplate;
-["vehiclesHeavyTanks", []] call _fnc_saveToTemplate;             // Just to push up the T-72 probability at higher war levels
+["vehiclesHeavyTanks", []] call _fnc_saveToTemplate;
 ["vehiclesAA", ["UK3CB_PLM_O_BTR40_ZU23", "UK3CB_PLM_O_Ural_Zu23"]] call _fnc_saveToTemplate;
 
 
@@ -258,18 +258,23 @@ private _militaryLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _militaryLoadoutData set ["uniforms", ["UK3CB_PLM_B_U_CombatUniform_01", "UK3CB_PLM_B_U_CombatUniform_02"]];
 _militaryLoadoutData set ["SLuniforms", ["UK3CB_PLM_B_U_Officer_CombatUniform_01"]];
 _militaryLoadoutData set ["vests", ["rhs_chicom","rhs_chicom_khk", "rhs_6b2","rhs_6b2_holster", "rhs_vydra_3m"]];
-_militaryLoadoutData set ["helmets", ["UK3CB_PLM_B_H_SSh68","UK3CB_PLM_B_H_SSh68_Covered", "rhsgref_M56","UK3CB_PLM_B_H_Headband_Red","UK3CB_PLM_B_H_Fieldcap_Early_GRN", "UK3CB_H_CAP_PLM"]];
+_militaryLoadoutData set ["helmets", ["UK3CB_PLM_B_H_SSh68","UK3CB_PLM_B_H_SSh68","UK3CB_PLM_B_H_SSh68_Covered", "rhsgref_M56","rhsgref_M56","UK3CB_PLM_B_H_Headband_Red","UK3CB_PLM_B_H_Fieldcap_Early_GRN", "UK3CB_H_CAP_PLM"]];
 
 _militaryLoadoutData set ["slRifles", [
+    ["uk3cb_sks_02", "", "", "", ["UK3CB_AK47_30Rnd_Magazine_GT", "UK3CB_AK47_30Rnd_Magazine_G", "UK3CB_AK47_30Rnd_Magazine"], [], ""],
     ["rhs_weap_akms_gp25", "rhs_acc_dtkakm", "", "", ["UK3CB_AK47_30Rnd_Magazine_GT", "UK3CB_AK47_30Rnd_Magazine_G", "UK3CB_AK47_30Rnd_Magazine"], ["rhs_VOG25", "rhs_VG40OP_red", "rhs_GRD40_Green", "rhs_VG40OP_white", "rhs_GRD40_White"], ""],
     ["rhs_weap_akm_gp25", "rhs_acc_dtkakm", "", "", ["UK3CB_AK47_30Rnd_Magazine_GT", "UK3CB_AK47_30Rnd_Magazine_G", "UK3CB_AK47_30Rnd_Magazine"], ["rhs_VOG25", "rhs_VG40OP_green", "rhs_GRD40_Red", "rhs_VG40OP_white", "rhs_GRD40_White"], ""]
 ]];
 _militaryLoadoutData set ["rifles", [
     ["uk3cb_sks_01", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""],
     ["uk3cb_sks_01_sling", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""],
-    ["uk3cb_sks_02", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""]
+    ["uk3cb_sks_01", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""],
+    ["uk3cb_sks_01_sling", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""],
+    ["uk3cb_sks_02", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""],
+    ["uk3cb_sks_02", "", "", "", ["UK3CB_AK47_30Rnd_Magazine_GT", "UK3CB_AK47_30Rnd_Magazine_G", "UK3CB_AK47_30Rnd_Magazine"], [], ""]
 ]];
 _militaryLoadoutData set ["carbines", [
+    ["uk3cb_sks_02", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""],
     ["uk3cb_sks_01", "", "", "", ["uk3cb_10rnd_magazine_sks", "uk3cb_10rnd_magazine_sks_G", "uk3cb_10rnd_magazine_sks_GT"], [], ""],
     ["rhs_weap_akm", "", "", "", ["UK3CB_AK47_30Rnd_Magazine_GT", "UK3CB_AK47_30Rnd_Magazine_G", "UK3CB_AK47_30Rnd_Magazine"], [], ""],
     ["rhs_weap_akms", "", "", "", ["UK3CB_AK47_30Rnd_Magazine_GT", "UK3CB_AK47_30Rnd_Magazine_G", "UK3CB_AK47_30Rnd_Magazine"], [], ""]
@@ -303,8 +308,7 @@ private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
 _policeLoadoutData set ["uniforms", ["UK3CB_PLM_B_U_Shorts_Uniform_07"]];
 _policeLoadoutData set ["vests", ["UK3CB_V_SOV_CHICOM_GRN_TAN","UK3CB_V_SOV_CHICOM_GRN", "UK3CB_V_SOV_CHICOM_TAN_GRN","UK3CB_V_SOV_CHICOM_TAN"]];
-_policeLoadoutData set ["helmets", ["UK3CB_H_CAP_PLM_BLK", "UK3CB_PLM_B_H_Fieldcap_Early_BLK", "UK3CB_PLM_B_H_SSh68_Covered_BLK", "UK3CB_PLM_B_H_SSh68_BLK"]];
-_policeLoadoutData set ["facewear", ["rhsusf_shemagh2_grn", "rhs_scarf","UK3CB_G_Bandanna_red_check"]];
+_policeLoadoutData set ["helmets", ["UK3CB_H_CAP_PLM_BLK", "UK3CB_PLM_B_H_Fieldcap_Early_BLK", "UK3CB_PLM_B_H_SSh68_BLK"]];
 _policeLoadoutData set ["NVGs", []];
 _policeLoadoutData set ["gpses", []];
 
@@ -346,6 +350,8 @@ _militiaLoadoutData set ["heavyATLaunchers", [
 ]];
 
 _militiaLoadoutData set ["slRifles", [
+    "rhs_weap_m38","rhs_weap_m38","rhs_weap_m38",
+    ["rhs_weap_akm", "", "", "", ["UK3CB_AK47_30Rnd_Magazine_GT", "UK3CB_AK47_30Rnd_Magazine_G", "UK3CB_AK47_30Rnd_Magazine"], [], ""],
     ["rhs_weap_akms_gp25", "rhs_acc_dtkakm", "", "", ["UK3CB_AK47_30Rnd_Magazine_GT", "UK3CB_AK47_30Rnd_Magazine_G", "UK3CB_AK47_30Rnd_Magazine"], ["rhs_VOG25", "rhs_VG40OP_red", "rhs_GRD40_Green", "rhs_VG40OP_white", "rhs_GRD40_White"], ""],
     ["rhs_weap_akm_gp25", "rhs_acc_dtkakm", "", "", ["UK3CB_AK47_30Rnd_Magazine_GT", "UK3CB_AK47_30Rnd_Magazine_G", "UK3CB_AK47_30Rnd_Magazine"], ["rhs_VOG25", "rhs_VG40OP_green", "rhs_GRD40_Red", "rhs_VG40OP_white", "rhs_GRD40_White"], ""]
 ]];
@@ -387,30 +393,17 @@ _militiaLoadoutData set ["traitorRifle", [
 //////////////////////////
 
 private _crewLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
-_crewLoadoutData set ["uniforms", ["rhs_uniform_afghanka"]];
+_crewLoadoutData set ["uniforms", ["UK3CB_PLM_O_U_CombatUniform_01"]];
 _crewLoadoutData set ["vests", ["rhs_vest_pistol_holster","rhs_vest_commander"]];
-_crewLoadoutData set ["facewear", ["rhs_balaclava1_olive","rhs_balaclava","",""]];
+_crewLoadoutData set ["facewear", ["rhs_balaclava1_olive","rhs_balaclava","G_Balaclava_blk","UK3CB_G_Bandanna_red"]];
 _crewLoadoutData set ["helmets", ["rhs_tsh4","rhs_tsh4_ess"]];
 
-_crewLoadoutData set ["SMGs", [
-    "rhs_weap_m3a1", 
-    ["uk3cb_mat49", "", "", "", ["UK3CB_MAT49_32Rnd_9x19_Magazine_G", "UK3CB_MAT49_32Rnd_9x19_Magazine_GT", "UK3CB_MAT49_32Rnd_9x19_Magazine"], [], ""],
-    "uk3cb_ppsh41",
-    "rhs_weap_m92"
-]];
-_crewLoadoutData set ["sidearms", ["rhs_weap_tt33", "rhs_weap_makarov_pm"]];
-
 private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
-_pilotLoadoutData set ["uniforms", ["rhs_uniform_afghanka_grey"]];
+_pilotLoadoutData set ["uniforms", ["UK3CB_PLM_O_U_CombatUniform_01"]];
 _pilotLoadoutData set ["vests", ["rhs_vest_pistol_holster","rhs_vest_commander"]];
-_pilotLoadoutData set ["facewear", ["G_Aviator"]];
-_pilotLoadoutData set ["helmets", ["rhs_zsh7a_mike_alt", "rhs_zsh7a_mike", "rhs_zsh7a_mike_green", "rhs_zsh7a_mike_green_alt"]];
+_pilotLoadoutData set ["facewear", ["G_Aviator", "G_Balaclava_blk", "UK3CB_G_Bandanna_red"]];
+_pilotLoadoutData set ["helmets", ["rhs_tsh4","rhs_tsh4_ess"]];
 
-_pilotLoadoutData set ["SMGs", [
-    "rhs_weap_m3a1", 
-    ["uk3cb_mat49", "", "", "", ["UK3CB_MAT49_32Rnd_9x19_Magazine_G", "UK3CB_MAT49_32Rnd_9x19_Magazine_GT", "UK3CB_MAT49_32Rnd_9x19_Magazine"], [], ""]
-]];
-_pilotLoadoutData set ["sidearms", ["rhs_weap_tt33", "rhs_weap_makarov_pm"]];
 
 private _officialLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _officialLoadoutData set ["uniforms", ["UK3CB_TKP_I_U_CombatUniform_BLK"]];
