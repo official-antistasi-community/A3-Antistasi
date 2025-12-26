@@ -259,6 +259,7 @@ _militaryLoadoutData set ["rifles", [
 _militaryLoadoutData set ["carbines", [
     ["uk3cb_m2carbine", "", "", "", ["UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], [], ""],
     ["uk3cb_m2a1_carbine", "", "", "", ["UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], [], ""],
+    ["uk3cb_m2a1_carbine", "", "", "", ["UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], [], ""],
     ["UK3CB_AR10_Porto_Carbine_Sup_OD", "", "", "", ["UK3CB_AR10_20rnd_762x51_RT", "UK3CB_AR10_20rnd_762x51_R", "UK3CB_AR10_20rnd_762x51"], [], ""],
     ["UK3CB_AR10_Porto_Carbine_Sup_OD", "", "", "", ["UK3CB_AR10_20rnd_762x51_RT", "UK3CB_AR10_20rnd_762x51_R", "UK3CB_AR10_20rnd_762x51"], [], ""],
     ["UK3CB_AR10_Porto_Carbine_Sup_OD", "", "", "", ["UK3CB_AR10_20rnd_762x51_RT", "UK3CB_AR10_20rnd_762x51_R", "UK3CB_AR10_20rnd_762x51"], [], ""],
