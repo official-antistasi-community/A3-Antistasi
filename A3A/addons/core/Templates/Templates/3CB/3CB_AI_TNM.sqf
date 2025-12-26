@@ -1,7 +1,6 @@
 //////////////////////////
 //   Side Information   //
 //////////////////////////
-//Tanoan Liberation Army, natural enemies of the HIDF, CW US, US, and SDK
 ["name", "TNM"] call _fnc_saveToTemplate;
 ["spawnMarkerName", "TNM Support Corridor"] call _fnc_saveToTemplate;
 
@@ -26,13 +25,13 @@
 ["vehiclesLightArmed", ["UK3CB_B_M939_Guntruck_HIDF","UK3CB_FIA_B_LR_SF_WMIK_M2_M240","UK3CB_FIA_B_LR_SF_WMIK_M2_M240","UK3CB_FIA_B_LR_SF_WMIK_MILAN_M240","UK3CB_FIA_B_LR_SF_WMIK_MK19_M240"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["UK3CB_TNM_B_LR_Softtop_Transport_Closed", "UK3CB_B_M939_Open_HIDF"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["UK3CB_TNM_B_Van_transport"]] call _fnc_saveToTemplate;
-["vehiclesAmmoTrucks", ["UK3CB_PLM_O_BTR40_REAMMO","UK3CB_PLM_O_Ural_Ammo"]] call _fnc_saveToTemplate;
-["vehiclesRepairTrucks", ["UK3CB_PLM_O_BTR40_REPAIR","UK3CB_PLM_O_Ural_Repair"]] call _fnc_saveToTemplate;
-["vehiclesFuelTrucks", ["UK3CB_PLM_O_BTR40_REFUEL","UK3CB_PLM_O_Ural_Fuel"]] call _fnc_saveToTemplate;
-["vehiclesMedical", ["UK3CB_PLM_O_BTR40_AMBULANCE"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["UK3CB_PLM_O_BRDM2"]] call _fnc_saveToTemplate;
+["vehiclesAmmoTrucks", ["UK3CB_TNM_B_LR_Softtop_Reammo_Closed","UK3CB_TNM_B_LR_Softtop_Reammo_Open","UK3CB_TNM_B_LR_Opentop_Reammo"]] call _fnc_saveToTemplate;
+["vehiclesRepairTrucks", ["UK3CB_TNM_B_LR_Softtop_Repair_Closed","UK3CB_TNM_B_LR_Softtop_Repair_Open","UK3CB_TNM_B_LR_Opentop_Repair"]] call _fnc_saveToTemplate;
+["vehiclesFuelTrucks", ["UK3CB_TNM_B_LR_Softtop_Refuel_Closed","UK3CB_TNM_B_LR_Softtop_Refuel_Open","UK3CB_TNM_B_LR_Opentop_Refuel"]] call _fnc_saveToTemplate;
+["vehiclesMedical", ["UK3CB_TNM_B_LR_Softtop_Reammo_Closed","UK3CB_TNM_B_LR_Softtop_Reammo_Open","UK3CB_TNM_B_LR_Opentop_Reammo"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["a3a_rhs_m113_hidf_M240", "rhsgref_hidf_m113a3_m2"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", []] call _fnc_saveToTemplate;
-["vehiclesIFVs", []] call _fnc_saveToTemplate;
+["vehiclesIFVs", ["UK3CB_B_LAV25_HIDF"]] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", []] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["UK3CB_B_M60A3_HIDF", "UK3CB_B_M60A1_HIDF", "UK3CB_TNM_B_T55"]] call _fnc_saveToTemplate;
 ["vehiclesHeavyTanks", []] call _fnc_saveToTemplate;             // Just to push up the T-72 probability at higher war levels
@@ -70,7 +69,7 @@
 
 ["vehiclesPolice", ["UK3CB_TNM_B_Pickup"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["RHS_M2StaticMG_WD"]] call _fnc_saveToTemplate;
+["staticMGs", ["RHS_M2StaticMG_WD", "RHS_M2StaticMG_WD", "UK3CB_B_Static_M240_High_HIDF"]] call _fnc_saveToTemplate;
 ["staticAT", ["RHS_TOW_TriPod_WD"]] call _fnc_saveToTemplate;
 ["staticAA", ["RHS_Stinger_AA_pod_D"]] call _fnc_saveToTemplate;
 ["staticMortars", ["a3a_RHS_M252"]] call _fnc_saveToTemplate;
@@ -82,7 +81,7 @@
 //Minefield definition
 //CFGVehicles variant of Mines are needed "ATMine", "APERSTripMine", "APERSMine"
 ["minefieldAT", ["rhsusf_mine_M19"]] call _fnc_saveToTemplate;
-["minefieldAPERS", ["rhs_mine_Mk2_tripwire", "rhsusf_mine_m49a1_6m"]] call _fnc_saveToTemplate;
+["minefieldAPERS", ["rhs_mine_mk2_pressure", "rhs_mine_Mk2_tripwire", "rhsusf_mine_m49a1_6m"]] call _fnc_saveToTemplate;
 
 #include "3CBFactions_Vehicle_Attributes.sqf"
 
@@ -275,9 +274,10 @@ _militaryLoadoutData set ["grenadeLaunchers", [
 _militaryLoadoutData set ["SMGs", [
     ["uk3cb_m2carbine", "", "", "", ["UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], [], ""],
     ["uk3cb_m2a1_carbine", "", "", "", ["UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], [], ""],
-    ["rhs_weap_m3a1", "", "", "", ["rhs_weap_m3a1","rhsgref_30rnd_1143x23_M1T_SMG","rhsgref_30rnd_1143x23_M1T_2mag_SMG","rhsgref_30rnd_1143x23_M1911B_2mag_SMG"], [], ""],
-    ["rhs_weap_m3a1", "", "", "", ["rhs_weap_m3a1","rhsgref_30rnd_1143x23_M1T_SMG","rhsgref_30rnd_1143x23_M1T_2mag_SMG","rhsgref_30rnd_1143x23_M1911B_2mag_SMG"], [], ""],
-    ["uk3cb_thompson_m1a1", "", "", "", ["UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine_RT","UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine_R","UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine"], [], ""]
+    ["rhs_weap_m3a1", "", "", "", ["rhsgref_30rnd_1143x23_M1911B_SMG","rhsgref_30rnd_1143x23_M1T_SMG","rhsgref_30rnd_1143x23_M1T_2mag_SMG","rhsgref_30rnd_1143x23_M1911B_2mag_SMG"], [], ""],
+    ["rhs_weap_m3a1", "", "", "", ["rhsgref_30rnd_1143x23_M1911B_SMG","rhsgref_30rnd_1143x23_M1T_SMG","rhsgref_30rnd_1143x23_M1T_2mag_SMG","rhsgref_30rnd_1143x23_M1911B_2mag_SMG"], [], ""],
+    ["uk3cb_thompson_m1a1", "", "", "", ["UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine_RT","UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine_R","UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine", "UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine_RT","UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine_R","UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine"], [], ""],
+    ["uk3cb_thompson_m1a1", "", "", "", ["UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine_RT","UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine_R","UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine", "UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine_RT","UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine_R","UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine"], [], ""]
 ]];
 _militaryLoadoutData set ["machineGuns", [
     ["UK3CB_M60", "", "", "", ["UK3CB_M60_100rnd_762x51_RM", "UK3CB_M60_100rnd_762x51"], [], ""],
@@ -310,7 +310,7 @@ _policeLoadoutData set ["NVGs", []];
 _policeLoadoutData set ["gpses", []];
 
 _policeLoadoutData set ["rifles", [
-    ["uk3cb_m1_advisor_carbine", "", "", "", ["UK3CB_M1_30Rnd_30Carbine_Magazine_W", "UK3CB_M1_15Rnd_30Carbine_Magazine_RT", "UK3CB_M1_15Rnd_30Carbine_Magazine_RT"], [], ""],
+    ["uk3cb_m1_advisor_carbine", "", "", "", ["UK3CB_M1_30Rnd_30Carbine_Magazine_W", "UK3CB_M1_15Rnd_30Carbine_Magazine_R", "UK3CB_M1_15Rnd_30Carbine_Magazine_R", "UK3CB_M1_15Rnd_30Carbine_Magazine_R"], [], ""],
     ["UK3CB_M1903A1", "", "", "", ["UK3CB_M1903A1_3006_5rnd_Magazine", "UK3CB_M1903A1_3006_5rnd_Magazine_RT", "UK3CB_M1903A1_3006_5rnd_Magazine_R"], [], ""],
     ["rhs_weap_M590_8RD", "", "", "", ["rhsusf_8Rnd_Slug", "rhsusf_8Rnd_Slug", "rhsusf_8Rnd_Slug", "rhsusf_8Rnd_00Buck", "rhsusf_8Rnd_00Buck"], [], ""]
 ]];
@@ -332,21 +332,25 @@ _militiaLoadoutData set ["vests", ["rhsgref_alice_webbing", "rhsgref_chestrig"]]
 _militiaLoadoutData set ["helmets", ["UK3CB_TNM_B_H_Cap_KHK","UK3CB_TNM_B_H_Cap_CAC", "UK3CB_TNM_B_H_BoonieHat_KHK","UK3CB_TNM_B_H_BoonieHat_CAC","UK3CB_TNM_B_H_Bandanna_KHK", "UK3CB_TNM_B_H_Bandanna_CAC"]];
 
 _militiaLoadoutData set ["ATLaunchers", [
-    ["rhs_weap_rpg7", "", "", "",["rhs_rpg7_PG7V_mag", "rhs_rpg7_PG7V_mag", "rhs_rpg7_OG7V_mag"], [], ""],
-    ["rhs_weap_rpg7", "", "", "",["rhs_rpg7_OG7V_mag", "rhs_rpg7_PG7V_mag", "rhs_rpg7_PG7V_mag"], [], ""],
-    ["rhs_weap_rpg7", "", "", "",["rhs_rpg7_PG7V_mag", "rhs_rpg7_type69_airburst_mag", "rhs_rpg7_OG7V_mag"], [], ""]
+    ["rhs_weap_rpg7", "", "", "",["rhs_rpg7_type69_airburst_mag", "rhs_rpg7_PG7V_mag", "rhs_rpg7_PG7V_mag"], [], ""],
+    "rhs_weap_m72a7", 
+    "uk3cb_m72a1_law_loaded"
 ]];
 _militiaLoadoutData set ["heavyATLaunchers", [
-    ["rhs_weap_rpg7", "", "", "",["rhs_rpg7_PG7V_mag"], [], ""]
+    ["rhs_weap_rpg7", "", "", "",["rhs_rpg7_PG7V_mag", "rhs_rpg7_PG7V_mag", "rhs_rpg7_type69_airburst_mag"], [], ""],
+    "rhs_weap_m72a7", 
+    "uk3cb_m72a1_law_loaded"
 ]];
 
 _militiaLoadoutData set ["slRifles", [
+    ["rhs_weap_m1garand_sa43", "", "", "", ["rhsgref_8Rnd_762x63_Tracer_M1T_M1rifle", "rhsgref_8Rnd_762x63_M2B_M1rifle", "rhsgref_8Rnd_762x63_M2B_M1rifle"], [], ""],
     ["uk3cb_m2a1_carbine", "", "", "", ["UK3CB_M1_30Rnd_30Carbine_Magazine_R", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], ["uk3cb_1rnd_riflegrenade_mas_ap", "uk3cb_1rnd_riflegrenade_mas_wp", "uk3cb_1rnd_riflegrenade_mas_flare"], ""],
     ["uk3cb_m2carbine", "", "", "", ["UK3CB_M1_30Rnd_30Carbine_Magazine_R", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], ["uk3cb_1rnd_riflegrenade_mas_dp", "uk3cb_1rnd_riflegrenade_mas_wp", "uk3cb_1rnd_riflegrenade_mas_flare"], ""]
 ]];
 _militiaLoadoutData set ["rifles", [
     ["uk3cb_m1carbine", "", "", "", ["UK3CB_M1_15Rnd_30Carbine_Magazine_R", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], [], ""],
     ["UK3CB_M1903A1", "", "", "", ["UK3CB_M1903A1_3006_5rnd_Magazine", "UK3CB_M1903A1_3006_5rnd_Magazine_RT", "UK3CB_M1903A1_3006_5rnd_Magazine_R"], [], ""],
+    ["rhs_weap_m1garand_sa43", "", "", "", ["rhsgref_8Rnd_762x63_Tracer_M1T_M1rifle", "rhsgref_8Rnd_762x63_M2B_M1rifle", "rhsgref_8Rnd_762x63_M2B_M1rifle"], [], ""],
     ["rhs_weap_m1garand_sa43", "", "", "", ["rhsgref_8Rnd_762x63_Tracer_M1T_M1rifle", "rhsgref_8Rnd_762x63_M2B_M1rifle", "rhsgref_8Rnd_762x63_M2B_M1rifle"], [], ""],
     ["uk3cb_m2carbine", "", "", "", ["UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], [], ""]
 ]];
@@ -356,13 +360,13 @@ _militiaLoadoutData set ["carbines", [
     ["uk3cb_m1a1_carbine", "", "", "", ["UK3CB_M1_15Rnd_30Carbine_Magazine_R", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
-    ["uk3cb_m1a1_carbine", "", "", "", ["UK3CB_M1_30Rnd_30Carbine_Magazine_R", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], ["uk3cb_1rnd_riflegrenade_mas_dp", "uk3cb_1rnd_riflegrenade_mas_wp", "uk3cb_1rnd_riflegrenade_mas_flare"], ""]
+    ["uk3cb_m1carbine", "", "", "", ["UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], ["uk3cb_1rnd_riflegrenade_mas_dp", "uk3cb_1rnd_riflegrenade_mas_dp", "uk3cb_1rnd_riflegrenade_mas_wp", "uk3cb_1rnd_riflegrenade_mas_flare"], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [
     ["uk3cb_m2a1_carbine", "", "", "", ["UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine", "UK3CB_M1_15Rnd_30Carbine_Magazine"], [], ""],
-    ["rhs_weap_m3a1", "", "", "", ["rhs_weap_m3a1","rhsgref_30rnd_1143x23_M1T_SMG","rhsgref_30rnd_1143x23_M1T_2mag_SMG","rhsgref_30rnd_1143x23_M1911B_2mag_SMG"], [], ""],
+    ["rhs_weap_m3a1", "", "", "", ["rhsgref_30rnd_1143x23_M1911B_SMG","rhsgref_30rnd_1143x23_M1T_SMG","rhsgref_30rnd_1143x23_M1T_2mag_SMG","rhsgref_30rnd_1143x23_M1911B_2mag_SMG"], [], ""],
     ["uk3cb_thompson_m1a1", "", "", "", ["UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine_RT","UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine_R","UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine"], [], ""],
-    ["uk3cb_thompson_m1928a1", "", "", "", ["UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine_RT","UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine_R","UK3CB_Thompson_30rnd_1143x23_M1911B_Magazine"], [], ""]
+    ["uk3cb_thompson_m1928a1", "", "", "", ["UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine_RT","UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine_R","UK3CB_Thompson_20rnd_1143x23_M1911B_Magazine"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
     ["UK3CB_M1919A4_Browning", "", "", "", ["UK3CB_M1919_50Rnd_3006_Magazine_RT", "UK3CB_M1919_50Rnd_3006_Magazine_RM", "UK3CB_M1919_50Rnd_3006_Magazine_R", "UK3CB_M1919_50Rnd_3006_Magazine"], [], ""]
@@ -393,10 +397,12 @@ _crewLoadoutData set ["helmets", ["UK3CB_TNM_B_H_Radio_Cap_CAC_BLK"]];
 _crewLoadoutData set ["SMGs", [
     "rhs_weap_m3a1", 
     "rhs_weap_m3a1", 
-    "rhs_weap_m3a1", 
+    "rhs_weap_m3a1",
+    "uk3cb_m1_advisor_carbine",
+    "uk3cb_m1_advisor_carbine",
+    "uk3cb_m1_advisor_carbine", 
     "uk3cb_ar18_carbine",
-    "uk3cb_ar18_shorty",
-    "uk3cb_m1_advisor_carbine"
+    "uk3cb_ar18_shorty"
 ]];
 
 private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
@@ -408,10 +414,12 @@ _pilotLoadoutData set ["helmets", ["UK3CB_TNM_B_H_Radio_Cap_CAC_AIR", "UK3CB_TNM
 _pilotLoadoutData set ["SMGs", [
     "rhs_weap_m3a1", 
     "rhs_weap_m3a1", 
-    "rhs_weap_m3a1", 
+    "rhs_weap_m3a1",
+    "uk3cb_m1_advisor_carbine",
+    "uk3cb_m1_advisor_carbine",
+    "uk3cb_m1_advisor_carbine", 
     "uk3cb_ar18_carbine",
-    "uk3cb_ar18_shorty",
-    "uk3cb_m1_advisor_carbine"
+    "uk3cb_ar18_shorty"
 ]];
 
 private _officialLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
