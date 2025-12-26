@@ -787,7 +787,7 @@ class Templates
     {
         side = "Inv";
         flagTexture = "\rhsafrf\addons\rhs_main\data\Flag_trn_CO.paa";
-        name = "3CB TLA";
+        name = "3CB Cold War TLA";
         file = "3CB_AI_TLA";
         maps[] = {"tanoa"};
         climate[] = {"tropical"};
@@ -797,7 +797,7 @@ class Templates
     {
         side = "Occ";
         flagTexture = "\UK3CB_Factions\addons\UK3CB_Factions_PLM\Flag\PLM_flag_co.paa";
-        name = "3CB PLM";
+        name = "3CB Cold War PLM";
         file = "3CB_AI_PLM";
         maps[] = {"tanoa"};
         climate[] = {"tropical"};
@@ -807,7 +807,7 @@ class Templates
     {
         side = "Inv";
         flagTexture = "\UK3CB_Factions\addons\UK3CB_Factions_TNM\Flag\TNM_flag_co.paa";
-        name = "3CB TNM";
+        name = "3CB Cold War TNM";
         file = "3CB_AI_TNM";
         maps[] = {"tanoa"};
         climate[] = {"tropical"};
