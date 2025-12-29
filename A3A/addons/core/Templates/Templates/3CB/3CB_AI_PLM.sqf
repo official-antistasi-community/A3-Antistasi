@@ -203,7 +203,9 @@ _sfLoadoutData set ["facewear", []];
 //["Weapon", "Muzzle", "Rail", "Sight", [], [], "Bipod"];
 
 _sfLoadoutData set ["lightATLaunchers", [
-    ["rhs_weap_rpg7", "", "", "rhs_acc_1pn93_2",["rhs_rpg7_type69_airburst_mag", "rhs_rpg7_OG7V_mag", "rhs_rpg7_PG7V_mag"], [], ""]
+    ["rhs_weap_rpg7", "", "", "rhs_acc_1pn93_2",["rhs_rpg7_type69_airburst_mag", "rhs_rpg7_OG7V_mag", "rhs_rpg7_PG7V_mag"], [], ""], 
+    "rhs_weap_rpg26",
+    "rhs_weap_rshg2"
 ]];
 _sfLoadoutData set ["ATLaunchers", [
     ["rhs_weap_rpg7", "", "", "rhs_acc_pgo7v3",["rhs_rpg7_PG7V_mag", "rhs_rpg7_PG7VS_mag"], [], ""],
@@ -215,7 +217,7 @@ _sfLoadoutData set ["heavyATLaunchers", [
     ["rhs_weap_rpg7", "", "", "rhs_acc_pgo7v3",["rhs_rpg7_TBG7V_mag","rhs_rpg7_PG7VL_mag","rhs_rpg7_PG7VR_mag"], [], ""]
 ]];
 _sfLoadoutData set ["slRifles", [
-    ["rhs_weap_akms_gp25", "rhs_acc_pbs1", "", "rhs_acc_1pn93_1", ["UK3CB_AK47_30Rnd_Magazine"], ["rhs_VOG25", "rhs_VG40OP_red", "rhs_GRD40_Green", "rhs_VG40OP_white", "rhs_GRD40_White"], ""],
+    ["rhs_weap_akmn_gp25", "rhs_acc_pbs1", "", "rhs_acc_1pn93_1", ["UK3CB_AK47_30Rnd_Magazine"], ["rhs_VOG25", "rhs_VG40OP_red", "rhs_GRD40_Green", "rhs_VG40OP_white", "rhs_GRD40_White"], ""],
     ["rhs_weap_akmn_gp25", "rhs_acc_pbs1", "", "rhs_acc_1pn93_2", ["UK3CB_AK47_30Rnd_Magazine"], ["rhs_VOG25", "rhs_VG40OP_green", "rhs_GRD40_Red", "rhs_VG40OP_white", "rhs_GRD40_White"], ""]
 ]];
 _sfLoadoutData set ["rifles", [
@@ -225,7 +227,7 @@ _sfLoadoutData set ["carbines", [
     ["rhs_weap_akmn", "rhs_acc_pbs1", "", "rhs_acc_1pn93_2", ["UK3CB_AK47_30Rnd_Magazine"], [], ""]
 ]];
 _sfLoadoutData set ["grenadeLaunchers", [
-    ["rhs_weap_akms_gp25", "rhs_acc_pbs1", "", "rhs_acc_1pn93_1", ["UK3CB_AK47_30Rnd_Magazine"], ["rhs_VOG25", "rhs_VOG25", "rhs_VOG25P", "rhs_VG40OP_white", "rhs_GRD40_White"], ""],
+    ["rhs_weap_akmn_gp25", "rhs_acc_pbs1", "", "rhs_acc_1pn93_1", ["UK3CB_AK47_30Rnd_Magazine"], ["rhs_VOG25", "rhs_VOG25", "rhs_VOG25P", "rhs_VG40OP_white", "rhs_GRD40_White"], ""],
     ["rhs_weap_akmn_gp25", "rhs_acc_pbs1", "", "rhs_acc_1pn93_2", ["UK3CB_AK47_30Rnd_Magazine"], ["rhs_VOG25", "rhs_VOG25", "rhs_VOG25P", "rhs_VG40OP_white", "rhs_VG40MD"], ""]
 ]];
 _sfLoadoutData set ["SMGs", [
