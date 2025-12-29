@@ -1016,6 +1016,17 @@ class Templates
         shortName = "LSM";
         lore = $STR_A3A_templates_lore_3CB_Reb_LSM;
     };
+
+    class 3CBF_SPI : 3CBF_Base
+    {
+        side = "Civ";
+        flagTexture = "\A3\Data_F_Exp\Flags\flag_Tanoa_CO.paa";
+        name = "3CB South Pacific";
+        file = "3CB_Civ_SPI";
+        shortName = "Civilian";
+        lore = $STR_A3A_templates_lore_CIV;
+    };
+
     class 3CBF_CHC : 3CBF_Base
     {
         side = "Civ";
