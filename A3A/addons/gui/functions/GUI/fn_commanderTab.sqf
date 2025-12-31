@@ -503,23 +503,18 @@ switch (_mode) do
         private _artyDictionary = createHashMap;
         {
             private _veh = vehicle _x;
-            if ((_veh != _x) and (not(_veh in _mortarObjs))) then
+            if (_veh == _x or _veh in _mortarObjs) then {continue};
+            if !("Artillery" in getArray (configfile >> "CfgVehicles" >> typeOf _veh >> "availableForSupportTypes")) then {continue};
+            if !(canFire _veh) then {continue};
             {
-                if (( "Artillery" in (getArray (configfile >> "CfgVehicles" >> typeOf _veh >> "availableForSupportTypes")))) then
-                {
-                    if ((canFire _veh) and (alive _veh)) then
-                    {
-                        {
-                            _x params ["_type","_currentCount"];
-                            private _existingCount = _shellCounts getOrDefault [_type,0];
-                            _shellCounts set [_type, _currentCount + _existingCount];
-                        } forEach magazinesAmmo _veh;
-                        private _dict = [typeOf _veh] call A3A_fnc_getMortarMags;
-                        {_artyDictionary set [_x,_y];} forEach _dict; // automatically covers repeats
-                        _mortarObjs pushBackUnique _veh;
-                    }; // [["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_Flare_white",8],["8Rnd_82mm_Mo_Smoke_white",8]]
-                };
-            };
+                _x params ["_type","_currentCount"];
+                private _existingCount = _shellCounts getOrDefault [_type,0];
+                _shellCounts set [_type, _currentCount + _existingCount];
+            } forEach magazinesAmmo _veh;
+            private _dict = [typeOf _veh] call A3A_fnc_getMortarMags;
+            {_artyDictionary set [_x,_y];} forEach _dict; // automatically covers repeats
+            _mortarObjs pushBackUnique _veh;
+            // [["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_Flare_white",8],["8Rnd_82mm_Mo_Smoke_white",8]]
         } forEach _units;
         _fireMissionControlsGroup setVariable ["mortarObjs", _mortarObjs];
         _fireMissionControlsGroup setVariable ["shellCounts", _shellCounts];
@@ -1047,6 +1042,10 @@ switch (_mode) do
         private _shellType = _shellTypeBox lbData _index;
         private _vics = _fireMissionControlsGroup getVariable ["mortarObjs", []];
         private _units = _vics select {((magazinesAmmo _x) findIf {(_x#0 == _shellType)}) > -1};
+        if (_units findIf {_x getVariable ["A3A_artyInUse", false]} != -1) exitWith {
+            ["Artillery menu", localize "STR_antistasi_dialogs_main_artilleryInUse"] call A3A_fnc_customHint;
+        };
+
         private _artyDictionary = _fireMissionControlsGroup getVariable ["artyDictionary", createHashMap];
         private _shellDict = _artyDictionary get _shellType;
         private _shortName = _shellDict#2;
@@ -1064,6 +1063,7 @@ switch (_mode) do
             default {0};
         };
 
+        { _x setVariable ["A3A_artyInUse", true, true] } forEach _units;
         [_units,_shellType,_shortName,_strikeType,_roundsNumber,_startPos,_detail] spawn A3A_fnc_artySupportFire;
     };
 
