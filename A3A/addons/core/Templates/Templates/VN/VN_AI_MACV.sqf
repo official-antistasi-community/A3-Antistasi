@@ -2,8 +2,8 @@
 //   Side Information   //
 //////////////////////////
 
-["name", "US Army"] call _fnc_saveToTemplate;
-["spawnMarkerName", "US Army Support Corridor"] call _fnc_saveToTemplate;
+["name", "MACV"] call _fnc_saveToTemplate;
+["spawnMarkerName", "MACV Support Corridor"] call _fnc_saveToTemplate;
 
 ["flag", "vn_flag_usa"] call _fnc_saveToTemplate;
 ["flagTexture", "vn\objects_f_vietnam\flags\data\vn_flag_01_usa_co.paa"] call _fnc_saveToTemplate;
