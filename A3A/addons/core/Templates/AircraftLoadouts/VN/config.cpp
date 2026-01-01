@@ -28,7 +28,7 @@ class A3A {
             };
             
             class vn_b_air_f100d_at : baseCAS {
-                loadout[] = {"vn_rocket_ffar_f4_lau59_m229_he_x21","vn_rocket_ffar_f4_lau59_m229_he_x21","vn_fuel_f100_335_camo_01_mag","vn_missile_agm12c_mag_01_x1","vn_missile_agm12c_mag_01_x1"};
+                loadout[] = {"vn_rocket_ffar_f4_lau59_m229_he_x21","vn_rocket_ffar_f4_lau59_m229_he_x21","vn_fuel_f100_335_camo_01_mag","vn_fuel_f100_335_camo_01_mag","vn_missile_agm12c_mag_01_x1","vn_missile_agm12c_mag_01_x1"};
                 mainGun[] = {"vn_m39a1_v_quad"};
                 rocketLauncher[] = {"vn_rocket_ffar_275in_launcher_m229"};
                 missileLauncher[] = {"vn_missile_agm12c_launcher"};
