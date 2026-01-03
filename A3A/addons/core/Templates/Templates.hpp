@@ -149,7 +149,7 @@ class Templates
         flagTexture = "\A3\Data_F_exp\Flags\Flag_Synd_CO.paa";
         name = "A3 SDK";
         file = "Vanilla_Reb_SDK";
-        maps[] = {"Tanoa"};
+        maps[] = {"tanoa"};
         climate[] = {"tropical"};
         forceDLC[] = {"expansion"};
         shortName = "SDK";
@@ -198,7 +198,7 @@ class Templates
         name = "A3 Tanoan Civilians";
         file = "Vanilla_Civ_TNA";
         shortName = "Tanoan";
-        maps[] = {"Tanoa"};
+        maps[] = {"tanoa"};
         lore = $STR_A3A_templates_lore_CIV;
     };
 
@@ -468,7 +468,7 @@ class Templates
         flagTexture = "\A3\Data_F_exp\Flags\Flag_Synd_CO.paa";
         name = "Aegis SDK";
         file = "Aegis_Reb_SDK";
-        maps[] = {"Tanoa"};
+        maps[] = {"tanoa"};
         climate[] = {"tropical"};
         forceDLC[] = {"expansion"};
     };
@@ -545,7 +545,7 @@ class Templates
         flagTexture = "\A3\Data_F_Exp\Flags\flag_GEN_CO.paa";
         name = "RHS HIDF";
         file = "RHS_AI_HIDF";
-        maps[] = {"Tanoa"};
+        maps[] = {"tanoa"};
         climate[] = {"tropical"};
         logo = "\rhsgref\addons\rhsgref_main\data\rhs_logo_ca.paa";
         shortName = "HIDF";
@@ -558,7 +558,7 @@ class Templates
         flagTexture = "\rhsafrf\addons\rhs_main\data\Flag_trn_CO.paa";
         name = "RHS TLA";
         file = "RHS_AI_TLA";
-        maps[] = {"Tanoa"};
+        maps[] = {"tanoa"};
         climate[] = {"tropical"};
         logo = "\rhsgref\addons\rhsgref_main\data\rhs_logo_ca.paa";
         shortName = "TLA";
@@ -621,7 +621,7 @@ class Templates
         flagTexture = "\A3\Data_F_exp\Flags\Flag_Synd_CO.paa";
         name = "RHS SDK";
         file = "RHS_Reb_SDK";
-        maps[] = {"Tanoa"};
+        maps[] = {"tanoa"};
         climate[] = {"tropical"};
     };
 
@@ -967,6 +967,8 @@ class Templates
         flagTexture = "\UK3CB_Factions\addons\UK3CB_Factions_CCM\Flag\ccm_i_flag_co.paa";
         name = "3CB CCM";
         file = "3CB_Reb_CNM";
+        climate[] = {"temperate", "arctic"};
+        maps[] = {"chernarus","chernarus_summer","chernarus_winter","cup_chernarus_a3"};
         shortName = "CCM";
         lore = $STR_A3A_templates_lore_3CB_Reb_CCM;
     };
@@ -986,6 +988,7 @@ class Templates
         name = "3CB TKM";
         file = "3CB_Reb_TKM";
         maps[] = {"takistan","tem_anizay","kunduz"};
+        climate[] = {"arid"};
         shortName = "TKM";
         lore = $STR_A3A_templates_lore_TKM;
     };
@@ -996,6 +999,8 @@ class Templates
         name = "3CB FIA";
         file = "3CB_Reb_FIA";
         shortName = "FIA";
+        climate[] = {"arid"};
+        maps[] = {"altis","malden","sara","tembelan"};
         lore = $STR_A3A_templates_lore_FIA;
     };
     class 3CB_TFIA : 3CBF_Base
@@ -1004,7 +1009,8 @@ class Templates
         flagTexture = "\A3\Data_F_Exp\Flags\flag_Tanoa_CO.paa";
         name = "3CB TFIA";
         file = "3CB_Reb_SDK";
-        maps[] = {"Tanoa"};
+        climate[] = {"tropical"};
+        maps[] = {"tanoa", "umb_colombia", "pulau"};
     };
     class 3CB_Reb_LSM : 3CBF_Base
     {
@@ -1012,6 +1018,7 @@ class Templates
         flagTexture = "\UK3CB_Factions\addons\UK3CB_Factions_LSM\Flag\LSM_flag_co.paa";
         name = "3CB LSM";
         file = "3CB_Reb_LSM";
+        climate[] = {"temperate"};
         maps[] = {"enoch"};
         shortName = "LSM";
         lore = $STR_A3A_templates_lore_3CB_Reb_LSM;
@@ -1024,6 +1031,20 @@ class Templates
         name = "3CB South Pacific";
         file = "3CB_Civ_SPI";
         shortName = "Civilian";
+        climate[] = {"tropical"};
+        maps[] = {"tanoa", "umb_colombia", "pulau"};
+        lore = $STR_A3A_templates_lore_CIV;
+    };
+
+    class 3CBF_RAS : 3CBF_Base
+    {
+        side = "Civ";
+        flagTexture = "\A3\Data_F\Flags\Flag_Altis_CO.paa";
+        name = "3CB Mediterranean";
+        file = "3CB_Civ_RAS";
+        shortName = "Civilian";
+        climate[] = {"arid"};
+        maps[] = {"altis","malden","sara","tembelan"};
         lore = $STR_A3A_templates_lore_CIV;
     };
 
@@ -1033,6 +1054,8 @@ class Templates
         flagTexture = "uk3cb_factions\addons\uk3cb_factions_chc\flag\chc_flag_co.paa";
         name = "3CB Cherno";
         file = "3CB_Civ_CHC";
+        climate[] = {"temperate"};
+        maps[] = {"chernarus","chernarus_summer","chernarus_winter","cup_chernarus_a3"};
         shortName = "Civilian";
         lore = $STR_A3A_templates_lore_CHC;
     };
@@ -1043,29 +1066,30 @@ class Templates
         flagTexture = "uk3cb_factions\addons\uk3cb_factions_tkc\flag\tkc_flag_co.paa";
         name = "3CB Takistan";
         file = "3CB_Civ_TKC";
-        maps[] = {"takistan","tem_anizay","kunduz"};
+        maps[] = {"takistan","kunduz"};
+        climate[] = {"arid"};
         shortName = "Civilian";
         lore = $STR_A3A_templates_lore_TKC;
     };
 
-        class 3CBF_MEC : 3CBF_Base
+    class 3CBF_MEC : 3CBF_Base
     {
         side = "Civ";
         flagTexture = "uk3cb_factions\addons\uk3cb_factions_mec\flag\mec_flag_co.paa";
         name = "3CB Middle Eastern";
         file = "3CB_Civ_MEC";
-        maps[] = {"takistan","tem_anizay","kunduz"};
+        maps[] = {"tem_anizay","kunduz"};
         climate[] = {"arid"};
         shortName = "Civilian";
         lore = $STR_A3A_templates_lore_MEC;
     };
-        class 3CBF_ADC : 3CBF_Base
+    class 3CBF_ADC : 3CBF_Base
     {
         side = "Civ";
         flagTexture = "uk3cb_factions\addons\uk3cb_factions_adc\flag\adc_flag_co.paa";
         name = "3CB African Desert";
         file = "3CB_Civ_ADC";
-        maps[] = {"takistan","tem_anizay","kunduz"};
+        maps[] = {"isladuala3", "tem_kujari", "regero"};
         climate[] = {"arid","tropical"};
         shortName = "Civilian";
         lore = $STR_A3A_templates_lore_ADC;
@@ -1665,7 +1689,7 @@ class Templates
         flagTexture = "\x\A3A\addons\core\Pictures\Flags\ifa_ak.paa";
         name = "IFA Polish Resistance";
         file = "IFA_REB_AK";
-        maps[] = {"Staszow"};
+        maps[] = {"staszow"};
         climate[] = {};
         shortName = "AK";
         lore = $STR_A3A_templates_IFA_REB_AK;
@@ -1687,7 +1711,7 @@ class Templates
         flagTexture = "\x\A3A\addons\core\Pictures\Flags\ifa_pl.paa";
         name = "IFA Polish";
         file = "IFA_CIV_PL";
-        maps[] = {"Staszow"};
+        maps[] = {"staszow"};
         climate[] = {};
         shortName = "CIV";
         lore = $STR_A3A_templates_IFA_CIV_PL;
@@ -2054,7 +2078,7 @@ class Templates
         flagTexture = "\A3\ui_f\data\map\markers\flags\CzechRepublic_ca.paa";
         name = "CSLA Arid";
         file = "CSLA_AI_CSLA_Arid";
-        climate[] = {"Arid"};
+        climate[] = {"arid"};
         shortName = "CSLA";
     };
 
@@ -2084,7 +2108,7 @@ class Templates
         flagTexture = "cup\baseconfigs\cup_baseconfigs\data\flags\flag_napa_co.paa";
         name = "CSLA NAPA";
         file = "CSLA_Reb_NAPA";
-        climate[] = {"Temperate"};
+        climate[] = {"temperate"};
         shortName = "NAPA";
     };
 
@@ -2094,7 +2118,7 @@ class Templates
         flagTexture = "\CUP\BaseConfigs\CUP_BaseConfigs\data\Flags\flag_tka_co.paa";
         name = "CIV_TC";
         file = "CSLA_Civ_TC";
-        climate[] = {"Temperate"};
+        climate[] = {"temperate"};
         shortName = "FIA";
     };
   
