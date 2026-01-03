@@ -9,20 +9,20 @@
 ["vehiclesCivCar", [
     "UK3CB_C_Ikarus_RED", 0.001                    // bus, dangerously large
     ,"UK3CB_C_Datsun_Closed", 0.01
-    ,"UK3CB_C_Datsun_Open", 2.5            // cargo-capable
-    ,"UK3CB_C_Hatchback", 5.5
+    ,"UK3CB_C_Datsun_Open", 5.0            // cargo-capable
+    ,"UK3CB_C_Hatchback", 10.0
     ,"UK3CB_C_Hilux_Closed", 1.0
     ,"UK3CB_C_Hilux_Open", 0.5            // cargo-capable
     ,"UK3CB_C_LandRover_Softtop_Transport_Closed", 0.5        // land rovers
     ,"UK3CB_C_LandRover_Softtop_Transport_Open", 1.5
-    ,"UK3CB_C_Sedan", 5.5
+    ,"UK3CB_C_Sedan", 10.0
     ,"UK3CB_C_Skoda", 5.5
     ,"UK3CB_C_Gaz24", 2.5
     ,"UK3CB_C_Octavia", 0.3
     ,"UK3CB_C_Landcruiser", 0.3
     ,"UK3CB_C_Lada", 1.0
     ,"UK3CB_C_Pickup", 1.0
-    ,"C_Offroad_02_unarmed_F", 0.25]] call _fnc_saveToTemplate;
+    ,"C_Offroad_02_unarmed_F", 1.25]] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
     "UK3CB_C_Forklift", 0.005
@@ -109,10 +109,10 @@ private _pressUniforms = [
 
 private _workerUniforms = [
     "UK3CB_CHC_C_U_Overall_01",
-    "UK3CB_CHC_C_U_Overall_02"
+    "UK3CB_CHC_C_U_Overall_02",
     "UK3CB_CHC_C_U_Overall_03",
     "UK3CB_CHC_C_U_Overall_04",
-    "UK3CB_CHC_C_U_Overall_05",
+    "UK3CB_CHC_C_U_Overall_05"
     ];
 
 ["uniforms", _civUniforms + _pressUniforms + _workerUniforms] call _fnc_saveToTemplate;
@@ -146,7 +146,7 @@ _loadoutData set ["helmets", _civHats];
 _loadoutData set ["facewear", ["G_Respirator_white_F", "G_Spectacles_Tinted", "G_Squares_Tinted", "G_Aviator", "G_Lady_Blue", "G_Shades_Black", "G_Sport_Greenblack", "G_Sport_Blackyellow", "G_Shades_Red"]];
 _loadoutData set ["workFacewear", ["G_Respirator_yellow_F", "G_EyeProtectors_F", "G_Lowprofile"]];
 _loadoutData set ["workHelmets", ["H_EarProtectors_yellow_F", "H_Construction_earprot_orange_F", "H_Construction_headset_orange_F", "H_Construction_earprot_yellow_F", "H_Construction_headset_yellow_F", "H_Construction_basic_white_F"]];
-_loadoutData set ["pressHelmets", ["H_Cap_press", "H_PASGT_basic_blue_press_F", "H_PASGT_neckprot_blue_press_F"]];
+_loadoutData set ["pressHelmets", ["H_Cap_press", "H_Cap_press", "H_Cap_press", "H_PASGT_basic_blue_press_F", "H_PASGT_neckprot_blue_press_F"]];
 
 _loadoutData set ["backpacks", ["B_Messenger_Coyote_F", "B_Messenger_Gray_F", "B_Messenger_Black_F", "B_CivilianBackpack_01_Everyday_Vrana_F", "B_CivilianBackpack_01_Sport_Blue_F", "B_CivilianBackpack_01_Sport_Green_F", "B_CivilianBackpack_01_Sport_Red_F", "B_LegStrapBag_black_F", "B_LegStrapBag_coyote_F"]];
 
