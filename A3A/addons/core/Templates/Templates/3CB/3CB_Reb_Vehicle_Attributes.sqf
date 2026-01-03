@@ -2,6 +2,9 @@
     // smaller plane, AKA cheaper
     ["UK3CB_C_AC500", ["rebCost", 4000]],
 
+    //Bikes
+    ["UK3CB_C_MMT", ["rebCost", 50]],
+
     //Civ Cars
     ["UK3CB_C_Golf", ["rebCost", 225]], //No Cargo, 5 Seats, 200 speed
     ["UK3CB_C_SUV", ["rebCost", 350]], //No Cargo 6 Seats
