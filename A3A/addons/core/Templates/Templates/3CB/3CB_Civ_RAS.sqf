@@ -75,9 +75,15 @@
 //////////////////////////
 
 private _civUniforms = [
+    "U_C_Poloshirt_blue",
+    "U_C_Poloshirt_burgundy",
+    "U_C_Poloshirt_redwhite",
     "U_C_Man_casual_1_F",
     "U_C_Man_casual_2_F",
     "U_C_Man_casual_3_F",
+    "U_C_Man_casual_4_F",
+    "U_C_Man_casual_5_F",
+    "U_C_Man_casual_6_F",
     "U_C_ArtTShirt_01_v1_F",
     "U_C_ArtTShirt_01_v2_F",
     "U_C_ArtTShirt_01_v3_F",
@@ -154,6 +160,9 @@ private _manTemplate = {
     if(random [0,0.5,1] > 0.3) then {      
         ["helmets"] call _fnc_setHelmet;
     };
+    if(random [0,0.5,1] > 0.7) then {      
+        ["backpacks"] call _fnc_setBackpack;
+    };
     ["uniforms"] call _fnc_setUniform;
 
     ["items_medical_standard"] call _fnc_addItemSet;
@@ -163,9 +172,7 @@ private _manTemplate = {
     ["compasses"] call _fnc_addCompass;
 };
 private _workerTemplate = {
-    if(random [0,0.5,1] > 0.3) then {      
-        ["helmets"] call _fnc_setHelmet;
-    };
+    ["workHelmets"] call _fnc_setHelmet;
     ["workerUniforms"] call _fnc_setUniform;
 
     ["items_medical_standard"] call _fnc_addItemSet;
