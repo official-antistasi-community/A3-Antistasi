@@ -22,7 +22,8 @@
     ,"UK3CB_C_Landcruiser", 0.3
     ,"UK3CB_C_Lada", 1.0
     ,"UK3CB_C_Pickup", 1.0
-    ,"C_Offroad_02_unarmed_F", 1.25]] call _fnc_saveToTemplate;
+    ,"C_Offroad_02_unarmed_F", 1.25
+    ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
     "UK3CB_C_Forklift", 0.005
@@ -98,8 +99,7 @@ private _civUniforms = [
     "U_C_Man_casual_6_F",
     "U_C_Man_casual_4_F",
     "U_C_Man_casual_5_F",
-    "UK3CB_ADC_C_Shorts_U_06",
-    "UK3CB_ADC_C_U_WORK_01"
+    "UK3CB_ADC_C_Shorts_U_06"
 ];
 
 private _pressUniforms = [
@@ -160,7 +160,9 @@ private _manTemplate = {
     ["uniforms"] call _fnc_setUniform;
     ["facewear"] call _fnc_setFacewear;
 
-    if (random [0, 5, 10] > 6.66) then {["backpacks"] call _fnc_setBackpack;}
+    if(random [0,0.5,1] > 0.7) then {      
+        ["backpacks"] call _fnc_setBackpack;
+    };
 
     ["items_medical_standard"] call _fnc_addItemSet;
 
