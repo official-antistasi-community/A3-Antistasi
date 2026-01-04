@@ -410,7 +410,7 @@ _pilotLoadoutData set ["helmets", ["rhs_tsh4","rhs_tsh4_ess"]];
 private _officialLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _officialLoadoutData set ["uniforms", ["UK3CB_TKP_I_U_CombatUniform_BLK"]];
 _officialLoadoutData set ["rifles", ["rhs_weap_akms_folded"]];
-_officialLoadoutData set ["carbines", ["rhs_weap_aks74un_folded"]];
+_officialLoadoutData set ["carbines", ["rhs_weap_akms_folded"]];
 _officialLoadoutData set ["vests", ["rhs_gear_OFF"]];
 _officialLoadoutData set ["facewear", ["rhs_googles_black", "G_Squares_Tinted","G_Aviator","G_Aviator"]];
 _officialLoadoutData set ["helmets", ["UK3CB_H_MilCap_VEG"]];
