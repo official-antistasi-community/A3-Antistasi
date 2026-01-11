@@ -108,8 +108,9 @@ if (HR_GRG_disableSellButton) then {
 
 //extras list init
 if (
-    !HR_GRG_Pylons_Enabled //Pylon editing disabled
-    || {!HR_GRG_hasAmmoSource} //or ammo source not registered
+    (!HR_GRG_useNewPylonSys) &&
+    (!HR_GRG_Pylons_Enabled //Pylon editing disabled
+    || {!HR_GRG_hasAmmoSource}) //or ammo source not registered
 ) then {
     private _pylonBttn = _disp displayCtrl HR_GRG_IDC_BttnPylons;
     _pylonBttn ctrlEnable false;

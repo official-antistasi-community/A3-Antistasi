@@ -5086,5 +5086,61 @@
         <Original>Copy the user's ID from the box by highlighting it and using Ctrl + C.</Original>
       </Key>
     </Container>
+    <Container name="veh_service_dialog">
+      <Key ID="STR_antistasi_vehService_hintTitle">
+        <Original>Service Vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_applyPoints">
+        <Original>APPLY (%1 POINTS)</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_applyRefuel">
+        <Original>APPLY (%1 LITERS)</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_nothingRearm">
+        <Original>Nothing to rearm</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_nothingRepair">
+        <Original>Nothing to repair</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_nothingRefuel">
+        <Original>Nothing to refuel</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noNearRearm">
+        <Original>No ammo truck in vicinity</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noNearRepair">
+        <Original>No repair truck in vicinity</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noNearRefuel">
+        <Original>No fuel truck in vicinity</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noCargoRearm">
+        <Original>The ammo truck %1 %2m away only has %3 points left</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noCargoRepair">
+        <Original>The repair truck %1 %2m away only has %3 points left</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noCargoRefuel">
+        <Original>The fuel truck %1 %2m away only has %3 liters of fuel left</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_costRearm">
+        <Original>%1 points for %2 rounds of %3</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_costRepair">
+        <Original>%1 points to repair %3</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_costRefuel">
+        <Original>%1 liters to refuel the vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_tooFarRearm">
+        <Original>The target vehicle was moved too far away and cannot be rearmed.</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_tooFarRepair">
+        <Original>The target vehicle was moved too far away and cannot be repaired.</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_tooFarRefuel">
+        <Original>The target vehicle was moved too far away and cannot be refueled.</Original>
+      </Key>
+    </Container>
   </Package>
 </Project>

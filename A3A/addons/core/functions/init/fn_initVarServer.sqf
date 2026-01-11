@@ -595,6 +595,24 @@ Info("Creating pricelist");
 	server setVariable [_x, _y, true];
 } forEach A3A_rebelVehicleCosts;
 
+////////////////////////////////////
+//     UNIT AND VEHICLE CARGO    ///
+////////////////////////////////////
+
+private _resourceVehValues = createHashMap;
+
+{
+	{
+		_resourceVehValues set [_x, 25000];
+	} forEach (_x get "vehiclesAmmoTrucks");
+} forEach [A3A_faction_occ, A3A_faction_inv];
+
+{
+	_resourceVehValues set [_x, 25000];
+} forEach [A3A_faction_reb get "vehicleAmmoStation"];
+//+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
+
+DECLARE_SERVER_VAR(A3A_resourceVehValues, _resourceVehValues);
 
 /////////////////////////////////////////
 //     SYNCHRONISE SERVER VARIABLES   ///

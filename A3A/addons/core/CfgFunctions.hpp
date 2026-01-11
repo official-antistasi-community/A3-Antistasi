@@ -98,8 +98,10 @@ class CfgFunctions
             class itemSort {};
             class itemType {};
             class launcherInfo {};
+            class lookForSupplyVehicle {};
             class loot {};
             class randomRifle {};
+            class serviceVehicle {};
             class setCargoItems {};
             class setRebelLoadouts {};
             class transfer {};

@@ -86,6 +86,13 @@ _presetComboCtrl ctrlAddEventHandler ["LBSelChanged", {_this call HR_GRG_fnc_Pyl
 
 HR_GRG_Pylon_GeneralCtrls = [_cbCtrl, _presetComboCtrl];
 
+// quickly make pylon change warning in new system
+if (HR_GRG_useNewPylonSys) then {
+    private _warnCtrl = _disp displayCtrl HR_GRG_IDC_ExtraPylonsNewSysWarning;
+    _warnCtrl ctrlSetText "To edit pylons, use the RRR action (?)";
+    _warnCtrl ctrlSetTooltip "While looking at a vehicle, the RRR action will be visible in the Y-menu and you can change pylon loadout there";
+};
+
 ////////////////////
 // Dynamic pylons //
 ////////////////////
@@ -102,7 +109,7 @@ private _curPylons = getPylonMagazines HR_GRG_previewVeh;
     _textCtrl ctrlSetPosition [
         0
         , _baseOffset
-        , 10 * GRID_NOUISCALE_W
+        , 12 * GRID_NOUISCALE_W
         , 3 * GRID_NOUISCALE_H
     ];
     _textCtrl ctrlCommit 0;

@@ -25,6 +25,7 @@
 FIX_LINE_NUMBERS()
 params ["_ctrl", "_index"];
 Trace_2("Pylon changed Ctrl: %1 | Index: %2",_ctrl , _index);
+if (HR_GRG_useNewPylonSys) exitWith {};
 {
     _x params ["_combo", "_mirroredIndex", "", "_originalIndex"];
     if (_ctrl == _combo) exitWith {

@@ -71,7 +71,7 @@ if !(isServer) then {
 };
 
 // Server/client version check
-waitUntil { sleep 0.1; getClientState == "BRIEFING READ" and !isNil "initZonesDone" };
+waitUntil { sleep 0.1; getClientState in ["BRIEFING READ", "NONE"] and !isNil "initZonesDone" };
 if (isNil "A3A_serverVersion") then { A3A_serverVersion = "pre-3.3" };
 if (A3A_clientVersion != A3A_serverVersion) then {
     private _errorStr = format [localize "STR_A3A_feedback_serverinfo_mismatch", A3A_serverVersion, A3A_clientVersion];
