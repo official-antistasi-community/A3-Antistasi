@@ -117,6 +117,8 @@ private _vehicleSpawns = [];
     };
 } forEach _vehicleMarker;
 
+reverse _vehicleSpawns;         // so that first spot is used for attack vehicles and last is used for parking
+
 private _heliSpawns = [];
 {
     private _pos = getPosATL _x;
