@@ -9,7 +9,7 @@
         <Number> Maximum number of positions to return
 
     Return Value:
-        <Array> Array of [positionATL, dir] for building places
+        <Array> Array of [positionAGL, dir] for building places (AGL, ew)
 
     Scope: Any
     Environment: Any
