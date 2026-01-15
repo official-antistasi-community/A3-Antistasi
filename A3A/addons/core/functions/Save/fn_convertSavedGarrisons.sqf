@@ -17,7 +17,8 @@ private _translateMarker = {
 A3A_garrison = createHashMap;
 
 // Rebels simply get replaced if they're not a recognised loadout
-private _rebLoadouts = A3A_faction_reb get "loadouts";
+// "loadouts" hashmap only contains the "militia_Rifleman" part
+private _rebLoadouts = keys (A3A_faction_reb get "loadouts") apply { "loadouts_reb_" + _x } createHashMapFromArray [];
 private _rebReplacements = A3A_faction_reb get "groupSquad";
 
 private _validMarkers = (markersX + outpostsFIA) createHashMapFromArray [];

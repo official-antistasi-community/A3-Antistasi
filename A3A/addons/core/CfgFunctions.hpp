@@ -584,6 +584,7 @@ class CfgFunctions
         class REINF {
             file = QPATHTOFOLDER(functions\REINF);
             class addBombRun {};
+            class addBombRunServer {};
             class addFIAsquadHC {};
             class addFIAveh {};
             class addSquadVeh {};

@@ -26,7 +26,6 @@ if (!isNil "serverInitDone" and !isNil "A3A_utilityItemHM") then {
 };
 
 if (!requiredVersion QUOTE(REQUIRED_VERSION)) exitWith { Error("Arma version is out of date") };
-if (call A3A_fnc_modBlacklist) exitWith {};
 
 //Disables rabbits and snakes, because they cause the log to be filled with "20:06:39 Ref to nonnetwork object Agent 0xf3b4a0c0"
 //Can re-enable them if we find the source of the bug.
@@ -63,24 +62,22 @@ if !(isServer) then {
         0 spawn A3A_fnc_garrisonOpLoop;
     };
 
-    if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
-        isClass (configfile >> "CfgPatches" >> "lambs_danger"))) then {
-        // disable lambs danger fsm entrypoint
-        ["CAManBase", "InitPost", {
-            params ["_unit"];
-            (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
-            _unit setVariable ["lambs_danger_disableAI", true];
-        }] call CBA_fnc_addClassEventHandler;
-    };
 };
 
 // Server/client version check
-waitUntil { sleep 0.1; !isNil "initZonesDone" };
+waitUntil { sleep 0.1; getClientState == "BRIEFING READ" and !isNil "initZonesDone" };
 if (isNil "A3A_serverVersion") then { A3A_serverVersion = "pre-3.3" };
-if (A3A_clientVersion != A3A_serverVersion) exitWith {
+if (A3A_clientVersion != A3A_serverVersion) then {
     private _errorStr = format [localize "STR_A3A_feedback_serverinfo_mismatch", A3A_serverVersion, A3A_clientVersion];
-    [localize "STR_A3A_feedback_serverinfo", _errorStr] call A3A_fnc_customHint;
+    Error_2("Version mismatch: Server %1, client %2", A3A_serverVersion, A3A_clientVersion);
+    localize "STR_A3A_feedback_serverinfo" hintC parseText _errorStr;
+    waitUntil {sleep 0.01; isNull findDisplay 72};
+    hintSilent "";
 };
+
+// Should be called after server sends A3A_serverBadMods
+// Blocks until the hintCs are done if it's a real client
+[] call A3A_fnc_modBlacklist;
 
 // Show server startup state hints
 if (isNil "A3A_startupState") then { A3A_startupState = "waitserver" };
@@ -112,7 +109,7 @@ if (!isServer) then {
 
 // Headless clients register with server and bail out at this point
 if (!isServer and !hasInterface) exitWith {
-
+    if (A3A_clientVersion != A3A_serverVersion) exitWith {};            // Do not use HCs that have a version mismatch
     player setPosATL (markerPos respawnTeamPlayer vectorAdd [-100, -100, 0]);
     [clientOwner] remoteExecCall ["A3A_fnc_addHC",2];
 };

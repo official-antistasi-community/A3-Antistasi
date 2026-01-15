@@ -3,6 +3,45 @@ Changelog
 ==========
 
 
+Version 3.10.2
+===============
+
+.. note::
+   27th November 2025
+
+.. admonition:: Minor
+
+   * :issue:`3760` Mod blacklisting improvements; now you will be notified clearly about any mods you load broken with Antistasi
+
+.. admonition:: Template updates
+
+   * :issue:`3747` Increased the variety of civilian loadouts in many civilian factions
+   * :issue:`3780` Updated vanilla, WS, and EF templates for compatibility with the EF CDLC 1.1 update
+
+.. admonition:: Bugfixes
+
+   * :issue:`3754` Fixed a bug where buyable objects like fuel tanks would not be garbage cleaned when killed
+   * :issue:`3757` Fixed a bug where the new UI could break when opened from the old menu
+   * :issue:`3764` Fixed a bug where the repair function on the building placer menu was broken on dedicated servers
+   * :issue:`3767` Fixed a bug where rebel unit types wouldn't transfer in from pre-3.10.0 saves
+   * :issue:`3768` Fixed several bugs with roadblock creation
+   * :issue:`3769` Fixed an outdated description on game start for how to save the game
+   * :issue:`3771` Fixed a few bugs with vehicle persistence in rebel garrisons
+   * :issue:`3772` Fixed a bug where you could overfill garrisons with squads
+   * :issue:`3774` Fixed a few small stringtable errors
+   * :issue:`3776` Fixed a few erroneous editor settings in some maps
+   * :issue:`3777` Fixed a bug where AIs would get stuck prone after ducking mortars
+   * :issue:`3779` Fixed a bug where planes would spawn in outposts
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
 Version 3.10.1
 ===============
 
