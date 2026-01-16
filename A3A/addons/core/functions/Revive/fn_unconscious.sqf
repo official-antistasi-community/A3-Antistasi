@@ -146,7 +146,7 @@ if (alive _unit) then
 {
 	_unit setUnconscious false;
 	//_unit playMoveNow "AmovPpneMstpSnonWnonDnon_healed";
-	_unit playMoveNow "unconsciousoutprone";
+	//_unit playMoveNow "unconsciousoutprone";
 	_unit setBleedingremaining 0;
 
 	// Temp invulnerability on revive
