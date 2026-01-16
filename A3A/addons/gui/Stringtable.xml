@@ -1402,6 +1402,9 @@
       <Key ID="STR_antistasi_dialogs_main_convertToSquad_button">
         <Original>Convert To HC Squad</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_artilleryInUse">
+        <Original>One or more selected artillery pieces is already firing. Wait for it to finish.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_commanderOnly">
         <Original>Only Player Commander has access to this function.</Original>
       </Key>
@@ -4896,6 +4899,21 @@
       <Key ID="STR_antistasi_gun_shop_total_cost_text">
         <Original>Total:</Original>
       </Key>
+      <Key ID="STR_antistasi_gun_shop_stock_gs">
+        <Original>%1 in stock</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_stock_arsenal">
+        <Original>%1 in arsenal</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_unlock_amount">
+        <Original>%1 to unlock</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_unlocks_disabled">
+        <Original>Unlocks disabled</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_unlocks_disabled_specific">
+        <Original>Unlocks disabled for this equipment type</Original>
+      </Key>
     </Container>
     <Container name="map_selector">
       <Key ID="STR_antistasi_mapSelector_onload_text">
@@ -4906,9 +4924,6 @@
       </Key>
       <Key ID="STR_antistasi_mapSelector_information_text2">
         <Original>Select any map from the left-hand list to view information on it. Switch between Banner and Map Board views with the top buttons. Launch your mission with the Play buttons.</Original>
-      </Key>
-      <Key ID="STR_antistasi_mapSelector_noSP_text">
-        <Original>To play a solo game, select "Host Game" and use the default options. Due to internal technical limitations, Antistasi cannot be played in a true singleplayer, scenario-like mode and you must instead host a game, but unless you set it up specifically, no one outside your local network can join it. This restriction may be resolved over the coming versions - stay tuned!</Original>
       </Key>
       <Key ID="STR_antistasi_mapSelector_mainTitle">
         <Original>ANTISTASI</Original>

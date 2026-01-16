@@ -16,6 +16,9 @@ FIX_LINE_NUMBERS()
 
 params ["_marker"];
 
+if !(_marker in markersX) exitWith {
+    Error_1("Marker %1 is not a major marker", _marker);
+};
 private _side = sidesX getVariable _marker;
 private _faction = Faction(_side);
 private _spawnPlaceStats = A3A_spawnPlaceStats get _marker;
@@ -23,16 +26,14 @@ if (isNil "_spawnPlaceStats") then {
     Error_1("Marker %1 not found in spawnPlaceStats", _marker);
 };
 
-private _isAirport = false;
-private _qMod = random 0.4 + tierWar/20;
-private _quality = call {
-    if (_marker in citiesX) exitWith {if (_side == Invaders) then {3} else {0.1 + _qMod}};
-    if (_side == Invaders) then {_qMod = _qMod + 0.4};
-    if (_marker in airportsX) exitWith {_isAirport = true; (1.5 + _qMod) min 2};
-    if (_marker in outposts) exitWith {(1.4 + _qMod) min 2};
-    if (_marker in seaports) exitWith {(1.2 + _qMod) min 2};
-    (1 + _qMod) min 2;
+private _siteType = call {
+    if (_marker in citiesX) exitWith {"city"};
+    if (_marker in airportsX) exitWith {"airport"};
+    if (_marker in outposts) exitWith {"outpost"};
+    if (_marker in seaports) exitWith {"seaport"};
+    "factory";
 };
+private _quality = [_siteType, _marker, _side] call A3A_fnc_getSiteTroopQuality;
 
 // Might be used to rebuild a garrison after a sim capture, so keep the old static info if it exists
 private _garrison = A3A_garrison getOrDefaultCall [_marker, {createHashMap}];
@@ -48,7 +49,7 @@ private _vehicles = [];
 
     private _remIndexes = +_indexes;
     for "_i" from 1 to _par do {
-        private _vehType = [_faction, _placeType, _isAirport] call A3A_fnc_selectGarrisonVehicleType;
+        private _vehType = [_faction, _placeType, _siteType == "airport"] call A3A_fnc_selectGarrisonVehicleType;
         if (isNil "_vehType") exitWith {};      // faction doesn't have vehicles of that type
 
         // Use places in order for vehicles, otherwise randomly

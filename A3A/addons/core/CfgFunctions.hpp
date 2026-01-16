@@ -67,7 +67,6 @@ class CfgFunctions
             class undercoverAI {};
             class unitGetToCover {};
             class useFlares {};
-            class VANTinfo {};
             class vehicleConvoyHeliTravel{};
             class vehicleConvoyTravel {};
             class vehicleMarkers {};
@@ -192,7 +191,6 @@ class CfgFunctions
             class sellVehicle {};
             class setMarkerAlphaForSide {};
             class setPlaneLoadout {};
-            class singlePlayerBlackScreenWarning {};
             class sizeMarker {};
             class splitVehicleCrewIntoOwnGroups {};
             class startBreachVehicle {};
@@ -249,6 +247,7 @@ class CfgFunctions
             class createVehicleCrew {};
             class createVehicleQRFBehaviour {};
             class crewTypeForVehicle {};
+            class enemyCityAttack {};
             class FIAinitBases {};
             class fillVehicleCrewCargo {};
             class garrisonSize {};
@@ -393,6 +392,7 @@ class CfgFunctions
             class checkCampaignEnd {};
             class clientIdleChecker {};
             class credits {};
+            class getMarkerPrefix {};
             class initACE {};
             class initACEUnconsciousHandler {};
             class initBases {};
@@ -412,6 +412,7 @@ class CfgFunctions
             class initZeusLogging {};
             class installClientEH {};
             class modBlacklist {};
+            class newPlayerSetup {};
             class playerMarkers {};
             class prepareMarkerArrays {};
             class resourcecheck {};

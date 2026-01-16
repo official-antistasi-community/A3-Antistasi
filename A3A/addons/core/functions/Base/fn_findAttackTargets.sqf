@@ -21,8 +21,8 @@ private _possibleStartBases = airportsX select {sidesX getVariable [_x, sideUnkn
 _possibleStartBases pushBack (["NATO_carrier", "CSAT_carrier"] select (_side == Invaders));
 private _airportPositions = _possibleStartBases apply { markerPos _x };
 
-private _possibleTargets = airportsX + outposts + seaports + factories + resourcesX;
-if (_targetSide == teamPlayer) then {_possibleTargets = _possibleTargets + citiesX};
+private _possibleTargets = airportsX + outposts + seaports + factories + resourcesX + (citiesX - destroyedSites);
+//if (_targetSide == teamPlayer) then {_possibleTargets = _possibleTargets + citiesX};      // enemy cities are now valid targets
 _possibleTargets = _possibleTargets select {sidesX getVariable [_x,sideUnknown] == _targetSide};
 
 // Add rebel HQ as attack target if the enemy side knows about it
@@ -47,19 +47,20 @@ private _maxThreatDist = distanceForAirAttack + 1000;
     if (_airportPositions inAreaArray [markerPos _x, _maxThreatDist, _maxThreatDist] isEqualTo []) then { continue };
 
     private _garrison = A3A_garrison get _x;
-    private _threat = 10 * count (_garrison get "troops");
-    if (_markerSide == teamPlayer) then {
-        _threat = _threat + 50 * count (_garrison get "vehicles");          // TODO: do this properly
+    private _threat = if (_markerSide == teamPlayer) then {
+        private _threat = 10 * count (_garrison get "troops");
+        _threat + 50 * count (_garrison get "vehicles");          // TODO: do this properly
     } else {
         // based on typical static count
-        _threat = _threat + call {
+        private _threat = 10 * (_garrison get "troops" select 0);
+        _threat + call {
             if (_x in controlsX or _x in seaports) exitWith { 50 };
             if (_x in outposts) exitWith { 150 };
             if (_x in airportsX) exitWith { 600 };
             0;
         };
     };
-    //Debug_2("Marker %1, threat %2", _x, _threat);
+    //Debug_2("Marker %1, threat %2", _x, _threat);           // temp, disable for release
     if (_threat == 0) then { continue };
     _markersXYT pushBack [markerPos _x # 0, markerPos _x # 1, _threat];
 } forEach (markersX + controlsX + outpostsFIA);
@@ -89,6 +90,7 @@ private _finalWeights = [];
 
     // Target value calc
     private _value = if (_x in citiesX) then {
+        if (_targetSide != teamPlayer) exitWith { A3A_garrisonSize get _x };        // enemies treat each other's towns as a military target
         // just base this on population?
         private _baseValue = sqrt (A3A_cityPop get _x);                   // Low-value but threat is probably low too due to lack of garrison
         if (_side == Occupants) exitWith { _baseValue * (1.5 - tierWar / 10) };    // Occupants more likely to care about towns at low tiers
@@ -102,7 +104,7 @@ private _finalWeights = [];
             if (_x in factories) exitWith { 15 };
             10;     // resources
         };
-        _baseValue + ([_x, true] call A3A_fnc_garrisonSize) / 2;         // Bit of preference for large/defensible targets. Don't use frontline adjustment here
+        _baseValue + (A3A_garrisonSize get _x) / 2;         // Bit of preference for large/defensible targets. Don't use frontline adjustment here
     };
 
     // calculate local target difficulty

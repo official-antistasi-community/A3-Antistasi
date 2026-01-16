@@ -39,7 +39,7 @@ _group lockWP true;         // hmm
     _x params ["_placePos", "_placeDir"];
 
     private _unit = _units deleteAt 0;
-    _unit setPosATL _placePos;
+    _unit setPosASL AGLtoASL _placePos;
     _unit setdir _placeDir;
     _unit setUnitPos "UP";
     _unit setVariable ["A3A_forcedStance", "UP"];

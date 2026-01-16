@@ -35,9 +35,14 @@ private _ang = if (_strikeType == "barrage") then {_startPos getDir _detail} els
 {
 	[_x, _roundsPerUnit, _typeAmmunition, _strikeType, _startPos, _interval, _ang, _detail] spawn {
 		params ["_piece", "_rounds", "_ammo", "_strikeType", "_startPos", "_interval", "_ang", "_radius"];
+
+		private _eh = _piece addEventHandler ["Fired", { _this#0 setVariable ["A3A_artyFired", true] }];
+
 		private _pos = [_startPos,random 10,random 360] call BIS_fnc_relPos; // close by target position, they're not 100% accurate;
 		for "_r" from 1 to _rounds do
 		{
+			Trace_1("Firing round %1", _r);
+			_piece setVariable ["A3A_artyFired", nil];
 			_piece commandArtilleryFire [_pos,_ammo,1];
 			if (_strikeType == "barrage") then
 			{
@@ -47,8 +52,21 @@ private _ang = if (_strikeType == "barrage") then {_startPos getDir _detail} els
 			{
 				_pos = [_startPos, _radius * sqrt random 1, random 360] call BIS_fnc_relPos;
 			};
+
+			private _timeout = time + 20;
 			sleep _interval;
-			waitUntil {sleep 0.1; _piece weaponReloadingTime [gunner _piece, currentWeapon _piece] == 0};
+			waitUntil { sleep 0.1; !(_piece isNil "A3A_artyFired") or time > _timeout };
+			if (_piece isNil "A3A_artyFired") exitWith {
+				private _weaponState = weaponState [_piece, [0]];
+				Error_2("Arty failed to fire round #%1; order %2; state %3", _r, _this, _weaponState);
+			};
+			waitUntil {
+				sleep 0.1;
+				weaponState [_piece, [0]] params ["", "", "", "", "", "_reloadPhase", "_magPhase"];
+				_reloadPhase max _magPhase == 0;
+			};
 		};
+		_piece removeEventHandler ["Fired", _eh];
+		_piece setVariable ["A3A_artyInUse", nil, true];
 	};
-} forEach _units; // all mortar gunners	
+} forEach _units; // all mortar gunners	 JJ: Lies, this is mortar vehicles
