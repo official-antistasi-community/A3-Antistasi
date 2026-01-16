@@ -1402,6 +1402,9 @@
       <Key ID="STR_antistasi_dialogs_main_convertToSquad_button">
         <Original>Convert To HC Squad</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_artilleryInUse">
+        <Original>One or more selected artillery pieces is already firing. Wait for it to finish.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_commanderOnly">
         <Original>Only Player Commander has access to this function.</Original>
       </Key>
