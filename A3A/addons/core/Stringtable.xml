@@ -1165,6 +1165,9 @@
         <Korean>%1 관측초소</Korean>
         <Russian>%1 Наблюдательный пост</Russian>
       </Key>
+      <Key ID="STR_A3A_fn_base_enemyCityAttack">
+        <Original>%1 is attempting to take %3 from %2</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_flagaction_asset_move">
         <Original>Move this asset</Original>
         <German>Diesen Gegenstand bewegen</German>

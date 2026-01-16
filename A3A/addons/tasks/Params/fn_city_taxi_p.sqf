@@ -12,7 +12,7 @@ params ["_marker"];
 
 // Find building with places that's not too close to enemies or players
 private _markerPos = markerPos _marker;
-private _blockers = (units Occupants + units teamPlayer) inAreaArray [_markerPos, 250, 250];
+private _blockers = allUnits inAreaArray [_markerPos, 250, 250] select { side group _x != civilian };
 private _place = false;
 for "_i" from 1 to 10 do {
     private _rpos = _markerPos getPos [200 * sqrt random 1, random 360];

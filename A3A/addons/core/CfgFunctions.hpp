@@ -67,7 +67,6 @@ class CfgFunctions
             class undercoverAI {};
             class unitGetToCover {};
             class useFlares {};
-            class VANTinfo {};
             class vehicleConvoyHeliTravel{};
             class vehicleConvoyTravel {};
             class vehicleMarkers {};
@@ -249,6 +248,7 @@ class CfgFunctions
             class createVehicleCrew {};
             class createVehicleQRFBehaviour {};
             class crewTypeForVehicle {};
+            class enemyCityAttack {};
             class FIAinitBases {};
             class fillVehicleCrewCargo {};
             class garrisonSize {};

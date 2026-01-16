@@ -29,12 +29,14 @@ private _findIfNearAndHostile = {
 	_Markers
 };
 
+private _activeCities = citiesX - destroyedSites;
+
 private _titleStr = localize "STR_A3A_fn_mission_request_title";
 private _possibleMarkers = [];
 switch (_type) do {
 	case "AS": {
 		//find apropriate sites
-		_possibleMarkers = [airportsX + citiesX] call _findIfNearAndHostile;
+		_possibleMarkers = [airportsX + _activeCities] call _findIfNearAndHostile;
 		_possibleMarkers = _possibleMarkers select {spawner getVariable _x != 0};
 		//add controlsX not on roads and on the 'frontier'
 		private _controlsX = [controlsX] call _findIfNearAndHostile;
@@ -108,8 +110,8 @@ switch (_type) do {
 
 		private _gunShopCities = [];
 		if (_spawnGunShop && !bigAttackInProgress and tierWar > 3) then {
-			_gunShopCities = citiesX select {(getMarkerPos _x) distance2d (getMarkerPos respawnTeamPlayer) < distanceMission }
-				select { sidesX getVariable _x == Occupants } select { spawner getVariable _x != 0 };
+			_gunShopCities = _activeCities select {(getMarkerPos _x) distance2d (getMarkerPos respawnTeamPlayer) < distanceMission }
+				select { sidesX getVariable _x != teamPlayer } select { spawner getVariable _x != 0 };
 		};
 		if (_gunShopCities isNotEqualTo []) exitWith {
 			[selectRandom _gunShopCities] remoteExec ["A3A_fnc_GSMission", 2];		// Always on server to simplify shopping list
@@ -154,7 +156,7 @@ switch (_type) do {
 				_possibleMarkers pushBack _x;
 				_weightedMarkers append [_x, _weight];
 			};
-		}forEach (citiesX - destroyedSites);
+		} forEach _activeCities;
 
 		if (count _possibleMarkers == 0) then {
 			if (!_silent) then {
@@ -165,7 +167,7 @@ switch (_type) do {
             Debug_1("City weights: %1", _weightedMarkers);
 			private _site = selectRandomWeighted _weightedMarkers;
 			private _stationPos = A3A_garrison get _site getOrDefault ["policeStation", false];
-			if (random 1 < 0.5 and _stationPos isEqualType [] and sidesX getVariable _site == Occupants) exitWith {
+			if (random 1 < 0.5 and _stationPos isEqualType [] and sidesX getVariable _site != teamPlayer) exitWith {
 				[_site, nearestBuilding _stationPos] spawn A3A_fnc_CON_PoliceStation;
 			};
 			[A3A_tasks_fnc_LOG_Supplies, [_site]] spawn A3A_tasks_fnc_runTask;

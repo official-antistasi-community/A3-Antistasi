@@ -117,12 +117,11 @@ _task set ["s_waitForPlace",
 		if (captive _x) then { [_x, false] remoteExec ["setCaptive", _x] };
 	} forEach (units teamPlayer inAreaArray [getPosATL _box, 300, 300]);
 
-	// Get nearby enemies to move towards the box
-	// TODO: Sort this garbage out for new-garrison
-	{
-		if (_x != leader _x or {_x != vehicle _x}) then { continue };
-		group _x move getPosATL _box;
-	} forEach (units Occupants inAreaArray [getPosATL _box, 500, 500]);
+	// Pick random nearby player to send enemies towards
+	private _player = allPlayers inAreaArray [getPosATL _box, 20, 20] select 0;
+	if (!isNil "_player") then {
+		["enemyInfo", [_marker, "mission", _player, 1.5, 3]] call A3A_fnc_garrisonOp;
+	};
 	false;
 
 	// Difficult version: Send a QRF instead of longer time?
@@ -138,7 +137,8 @@ _task set ["s_boxPlaced",
 	if !(call (_this get "_fnc_placedCondition")) exitWith { _this set ["state", "s_waitForPlace"]; false };
 
 	// Check that there are friendlies nearby and enemies not nearby
-	if ({_x call A3A_fnc_canFight} count (units Occupants inAreaArray [getPosATL _box, 50, 50]) > 0
+	private _enemyUnits = units Occupants + units Invaders;
+	if ({_x call A3A_fnc_canFight} count (_enemyUnits inAreaArray [getPosATL _box, 50, 50]) > 0
 		or {_x call A3A_fnc_canFight} count (units teamPlayer inAreaArray [getPosATL _box, 50, 50]) == 0) exitWith {
 		if (time - (_this getOrDefault ["_blockTime", -30]) > 30) then {
 			[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_condition", getPosATL _box, 50] call FUNC(hintNear);
@@ -148,7 +148,7 @@ _task set ["s_boxPlaced",
 	};
 
 	// Safe delivery success if there are no enemies anywhere near
-	if (units Occupants inAreaArray [getPosATL _box, 500, 500] isEqualTo []) exitWith {
+	if (_enemyUnits inAreaArray [getPosATL _box, 500, 500] isEqualTo []) exitWith {
 		[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_deliveredSafe", getPosATL _box, 300] call FUNC(hintNear);
 		_this set ["state", "s_succeeded"];	false;
 	};

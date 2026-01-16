@@ -164,11 +164,12 @@ _task set ["s_spawnEnemies",
     // Not executed at init because it's fairly slow
     private _marker = _this get "_marker";
     private _vehCount = round (0.7 + random 0.5 + 0.13 * sqrt (A3A_cityPop get _marker) + 1.3 * A3A_balancePlayerScale);
+    private _enemySide = sidesX getVariable _marker;
 
-    private _airbase = [Occupants, markerPos _marker] call A3A_fnc_availableBasesAir;
+    private _airbase = [_enemySide, markerPos _marker] call A3A_fnc_availableBasesAir;
 
     //params ["_side", "_airbase", "_target", "_resPool", "_vehCount", "_delay", "_modifiers", "_attackType", "_reveal"];
-    private _data = [Occupants, _airbase, _marker, "defence", _vehCount, 300, ["lowair"]] call A3A_fnc_createAttackForceMixed;
+    private _data = [_enemySide, _airbase, _marker, "defence", _vehCount, 300, ["lowair"]] call A3A_fnc_createAttackForceMixed;
     _data params ["_resources", "_vehicles", "_crewGroups", "_cargoGroups"];
     _this set ["_vehicles", _vehicles];
     _this set ["_crewGroups", _crewGroups];
@@ -176,8 +177,8 @@ _task set ["s_spawnEnemies",
     _this set ["_troops", flatten (_cargoGroups apply { units _x })];
 
     // May as well do it properly here. Unlike actual attacks, needs supportSpends otherwise it'll send QRFs on top
-    A3A_supportStrikes pushBack [Occupants, "TROOPS", markerPos _marker, time + 3600, 3600, _resources];
-    A3A_supportSpends pushBack [Occupants, markerPos _marker, markerPos _marker, _resources, time];
+    A3A_supportStrikes pushBack [_enemySide, "TROOPS", markerPos _marker, time + 3600, 3600, _resources];
+    A3A_supportSpends pushBack [_enemySide, markerPos _marker, markerPos _marker, _resources, time];
 
     _task set ["state", "s_waitForStart"];
     _task set ["interval", 10];
@@ -297,7 +298,7 @@ _task set ["s_victory",
 {
     // flip the town
     private _marker = _this get "_marker";
-    [_marker, true, 80] remoteExecCall ["A3A_fnc_citySideChange", 2];
+    [_marker, teamPlayer, 80] remoteExecCall ["A3A_fnc_citySideChange", 2];
 
     // TODO: scale with city size
 	private _playersInRange = (allPlayers - entities "HeadlessClient_F") inAreaArray [markerPos _marker, 500, 500];

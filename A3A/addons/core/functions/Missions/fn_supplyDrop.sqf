@@ -1,4 +1,4 @@
-/*  "Mission" that uses an occupant plane to airdrop supplies 
+/*  "Mission" that uses an enemy plane to airdrop supplies
 
 Scope: Server or HC
 Environment: Spawned
@@ -7,12 +7,13 @@ Arguments:
     <POSITION> Attempted drop position
     <ARRAY> Contains [classname, amount] pairs of items to put in crate
     <GROUP> Patrol group to move towards the drop after the chute deploys
+    <SIDE> Side to generate plane for
 */
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_targPos", "_gear", "_patrolGroup"];
+params ["_targPos", "_gear", "_patrolGroup", "_side"];
 
 // Not a real mission but we should have a task so everyone knows about it
 private _taskText = localize "STR_A3A_fn_mission_supplydrop_text";
@@ -25,8 +26,8 @@ while { [_taskId] call BIS_fnc_taskExists } do { _taskId = "SupplyDrop" + str fl
 [[teamPlayer,civilian],_taskId,[_taskText,_taskTitle,""],_targPos,false,0,true,_taskIcon,true] call BIS_fnc_taskCreate;
 
 // Use a transport plane if possible
-private _planeType = selectRandom (A3A_faction_occ get "vehiclesPlanesTransport");
-if (isNil "_planeType") then { _planeType = selectRandom (A3A_faction_occ get "vehiclesHelisTransport") };
+private _planeType = selectRandom (Faction(_side) get "vehiclesPlanesTransport");
+if (isNil "_planeType") then { _planeType = selectRandom (Faction(_side) get "vehiclesHelisTransport") };
 private _isHeli = _planeType isKindOf "Helicopter";
 private _flightAlt = [500, 500] select _isHeli;         // too much drift above 500...
 
@@ -35,7 +36,7 @@ private _flightAlt = [500, 500] select _isHeli;         // too much drift above 
 private _dropPos = _targPos vectorAdd (wind vectorMultiply -_flightAlt / 10);
 
 // Spawn transport plane or heli at airfield with usual crew (but no cargo)
-private _airport = [Occupants, _dropPos] call A3A_fnc_availableBasesAir;
+private _airport = [_side, _dropPos] call A3A_fnc_availableBasesAir;
 private _spawnPos = if (isNil "_airport") then { 
     Error("No airport found for supply drop");
     _dropPos getPos [5000, random 360];
@@ -50,9 +51,9 @@ _plane setDir _targDir;
 _plane setPosATL _spawnPos;                                           // setPosATL kills velocity
 _plane setVelocityModelSpace [0, [100, 50] select _isHeli, 0];
 _plane flyInHeight _flightAlt;
-[_plane, Occupants, "legacy"] call A3A_fnc_AIVEHInit;
+[_plane, _side, "legacy"] call A3A_fnc_AIVEHInit;
 
-private _group = [Occupants, _plane] call A3A_fnc_createVehicleCrew;
+private _group = [_side, _plane] call A3A_fnc_createVehicleCrew;
 _group deleteGroupWhenEmpty true;
 {
     [_x, nil, false, "legacy"] call A3A_fnc_NATOinit; 
