@@ -60,7 +60,7 @@ private _maxThreatDist = distanceForAirAttack + 1000;
             0;
         };
     };
-    Debug_2("Marker %1, threat %2", _x, _threat);           // temp, disable for release
+    //Debug_2("Marker %1, threat %2", _x, _threat);           // temp, disable for release
     if (_threat == 0) then { continue };
     _markersXYT pushBack [markerPos _x # 0, markerPos _x # 1, _threat];
 } forEach (markersX + controlsX + outpostsFIA);

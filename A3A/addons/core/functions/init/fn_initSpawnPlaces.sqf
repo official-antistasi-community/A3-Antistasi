@@ -10,20 +10,7 @@ private _hangarMarker = [];
 private _mortarMarker = [];
 private _planeMarker = [];
 
-//Calculating marker prefix
-private _markerSplit = _marker splitString "_";
-private _markerPrefix = switch (_markerSplit select 0) do
-{
-    case ("airport"): {"airp_"};
-    case ("outpost"): {"outp_"};
-    case ("resource"): {"reso_"};
-    case ("factory"): {"fact_"};
-    case ("seaport"): {"seap_"};
-};
-if (count _markerSplit > 1) then
-{
-    _markerPrefix = format ["%1%2_", _markerPrefix, _markerSplit select 1];
-};
+private _markerPrefix = _marker call A3A_fnc_getMarkerPrefix;
 
 //Sort markers
 private _markerPos = getMarkerPos _marker;
@@ -41,6 +28,7 @@ private _markerPos = getMarkerPos _marker;
         case ("hangar"): {_hangarMarker pushBack _fullName;};
         case ("plane"): {_planeMarker pushBack _fullName;};
         case ("mortar"): {_mortarMarker pushBack _fullName;};
+        // "flag" also exists but we ignore it here aside from setting the marker alpha
     };
     _fullName setMarkerAlpha 0;
 } forEach _placementMarker;
@@ -157,7 +145,7 @@ private _mortarSpawns = [];
 private _spawnPlaces = [];
 
 // Vehicle slot special cases
-if (_markerSplit#0 == "airport" and _vehicleSpawns isNotEqualTo []) then {
+if ("airport" in _marker and _vehicleSpawns isNotEqualTo []) then {
     private _aaPlace = _vehicleSpawns deleteAt 0;
     _spawnPlaces pushBack ["vehicleAA", _aaPlace#0, _aaPlace#1];
 };
