@@ -87,11 +87,17 @@ else
         (_faction get "groupsSquads") + (_faction get "groupsMedium"), _faction get "groupSpecOpsRandom"];
     private _numTotal = 0;
     private _numHigh = 0;
-    private _highSquad = 0.5 < _quality%1;
     private _garrSquad = [];
     while { _numTotal < _troopCount } do {
 
-        private _squad = selectRandom (_squadTypes # ([floor _quality, ceil _quality] select _highSquad));
+        // Don't know how large the squad is until we pick it, but err on the high side
+        private _highSquad = (_numHigh + 7*0.5) / (_numTotal + 7) < _quality%1;
+        private _origSquad = +selectRandom (_squadTypes # ([floor _quality, ceil _quality] select _highSquad));
+
+        // Scramble so we don't end up with bias
+        private _squad = [_origSquad deleteAt 0];
+        while {_origSquad isNotEqualTo []} do { _squad pushBack (_origSquad deleteAt floor random count _origSquad) };
+
         _squad = _squad select [0, _troopCount - _numTotal];                // clip to troop count
         if (count _garrSquad < _garrSize) then {
             _squad = _squad select [0, _garrSize - count _garrSquad];       // clip to garrison size
@@ -100,10 +106,8 @@ else
             _squads pushBack _squad;
         };
 
-        // Quality rebalancing
         if (_highSquad) then { _numHigh = _numHigh + count _squad };
         _numTotal = _numTotal + count _squad;
-        _highSquad = (_numHigh / _numTotal) < _quality%1;
     };
     _squads pushBack _garrSquad;
     reverse _squads;
