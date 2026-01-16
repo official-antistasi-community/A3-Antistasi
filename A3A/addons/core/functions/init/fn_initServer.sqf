@@ -14,6 +14,13 @@ Info_1("Server version: %1", QUOTE(VERSION_FULL));
 if (isClass (missionConfigFile/"CfgFunctions"/"A3A")) exitWith {};          // Pre-mod mission will break. Messaging handled in initPreJIP
 if (!requiredVersion QUOTE(REQUIRED_VERSION)) exitWith { Error("Arma version is out of date") };
 
+// Clear out the singleplayer AI and HCs as soon as possible
+if !(isMultiplayer) then {
+    private _hcs = entities "HeadlessClient_F";
+    private _units = units group player;
+    {deleteVehicle _x} forEach (_hcs + _units - [player] );
+};
+
 // hide all the HQ objects
 {
     _x enableRopeAttach false;

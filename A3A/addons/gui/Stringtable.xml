@@ -4907,9 +4907,6 @@
       <Key ID="STR_antistasi_mapSelector_information_text2">
         <Original>Select any map from the left-hand list to view information on it. Switch between Banner and Map Board views with the top buttons. Launch your mission with the Play buttons.</Original>
       </Key>
-      <Key ID="STR_antistasi_mapSelector_noSP_text">
-        <Original>To play a solo game, select "Host Game" and use the default options. Due to internal technical limitations, Antistasi cannot be played in a true singleplayer, scenario-like mode and you must instead host a game, but unless you set it up specifically, no one outside your local network can join it. This restriction may be resolved over the coming versions - stay tuned!</Original>
-      </Key>
       <Key ID="STR_antistasi_mapSelector_mainTitle">
         <Original>ANTISTASI</Original>
       </Key>

@@ -163,48 +163,6 @@ class A3A_MapSelectorDialog
                     w = 73 * GRID_W;
                     h = 5 * GRID_H;
                 };
-                // Dead controls for a scrapped testing mode
-                /*
-                class DebugIDTitle : A3A_StructuredText 
-                {
-                    idc = A3A_IDC_MAPSELECT_DEBUGIDTITLE;
-                    colorBackground[] = {0,0,0,0};
-                    x = 37 * GRID_W;
-                    y = 49 * GRID_H;
-                    w = 25 * GRID_W;
-                    h = 5 * GRID_H;
-                    text = "Game ID:";
-                };
-                class DebugMapTitle : A3A_StructuredText 
-                {
-                    idc = A3A_IDC_MAPSELECT_DEBUGMAPTITLE;
-                    colorBackground[] = {0,0,0,0};
-                    x = 37 * GRID_W;
-                    y = 56 * GRID_H;
-                    w = 25 * GRID_W;
-                    h = 5 * GRID_H;
-                    text = "Testing Map:";
-                };
-                class DebugIDEdit : A3A_Edit
-                {
-                    idc = A3A_IDC_MAPSELECT_DEBUGIDEDIT;
-                    colorBackground[] = {0,0,0,0};
-                    x = 62 * GRID_W;
-                    y = 49 * GRID_H;
-                    w = 10 * GRID_W;
-                    h = 5 * GRID_H;
-                };
-                class DebugMapText : A3A_StructuredText 
-                {
-                    idc = A3A_IDC_MAPSELECT_DEBUGMAPTEXT;
-                    colorBackground[] = {0,0,0,0};
-                    x = 62 * GRID_W;
-                    y = 56 * GRID_H;
-                    w = 40 * GRID_W;
-                    h = 5 * GRID_H;
-                    text = "None";
-                };
-                */
                 class BackButton : A3A_Button
                 {
                     idc = A3A_IDC_MAPSELECT_BACK;
@@ -225,7 +183,7 @@ class A3A_MapSelectorDialog
                     w = 22 * GRID_W;
                     h = 5 * GRID_H;
                     text = $STR_antistasi_mapSelector_playSPButton;
-                    onMouseButtonClick = "['handlePlayButton', ['SP',_this]] spawn (uinamespace getvariable 'A3A_GUI_fnc_mapSelectorDialog')";
+                    onMouseButtonClick = "['startSPGame'] spawn (uinamespace getvariable 'A3A_GUI_fnc_mapSelectorDialog')";
                 };
                 class PlayMPButton : A3A_Button
                 {
@@ -236,7 +194,7 @@ class A3A_MapSelectorDialog
                     w = 22 * GRID_W;
                     h = 5 * GRID_H;
                     text = $STR_antistasi_mapSelector_playMPButton;
-                    onMouseButtonClick = "['handlePlayButton', ['MP',_this]] spawn (uinamespace getvariable 'A3A_GUI_fnc_mapSelectorDialog')";
+                    onMouseButtonClick = "['startMPGame'] spawn (uinamespace getvariable 'A3A_GUI_fnc_mapSelectorDialog')";
                 };
             };
         };
