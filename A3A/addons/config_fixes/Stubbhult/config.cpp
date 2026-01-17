@@ -25,29 +25,49 @@ class CfgWorlds {
         class Names {
             // These are marked as "Name". Fix to "NameVillage".
             class sodra_bokeberg {
-                position[] = {6477.68,1786.03};
+                position[] = {6507,1777};
                 radiusA = 200;                      // I think these are supposed to be outer/inner radius but Antistasi uses them as X/Y. Probably a bug.
                 radiusB = 200;
                 type = "NameVillage";               // NameCity also works, I don't think Antistasi cares
             };
             class mjalahult {
-                position[] = {3648.89,1503.48,};
+                position[] = {3616,1474};     // Also bad position
                 radiusA = 200;
                 radiusB = 200;
                 type = "NameVillage";
-        };
+            };
             class hallaboke {
-                position[] = {3272.56,4237.83};
+                position[] = {3211,4300};
                 radiusA = 200;
                 radiusB = 200;
                 type = "NameVillage";
-    };
+            };
             class lojenas {
-                position[] = {5634.71,2285.48};
+                position[] = {5688,2295};
                 radiusA = 200;
                 radiusB = 200;
                 type = "NameVillage";
-};
-};
-};
+            };
+
+            // These have bad positions
+            class norra_bokeberg {
+                position[] = {7679,2499};
+            };
+            class vallshult {
+                position[] = {4772,921};
+            };
+            class sofieslatt {
+                position[] = {1409,9545};
+            };
+            class eldshult {
+                position[] = {8785,11793};
+            };
+            class hjalmshult {
+                position[] = {10808,3610};
+            };
+            class gullanabba {
+                position[] = {6922,6891};
+            };
+        };
+    };
 };

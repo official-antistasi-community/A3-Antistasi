@@ -2,25 +2,25 @@ class stubbhult {
     population[] = {
         {"gussbo",49},{"aker",48},
         {"bockshult",60},{"ekenas",99},
-        {"bexet",72},{"hylte",134},
+        {"bexet",72},{"hylte",160},
         {"yaberg",54},{"gullanabba",348},
         {"balshult",170},{"femsjo",91},
-        {"hallaboke",51},{"saraboke",93},
+        {"hallaboke",65},{"saraboke",93},
         {"hokhult",23},{"boalt",135},
-        {"lojenas",71},{"sodra_bokeberg",29},
-        {"norra_bokeberg",30},{"backhasten",19},
+        {"lojenas",90},{"sodra_bokeberg",50},
+        {"norra_bokeberg",50},{"backhasten",19},
         {"rangalsbo",55},{"rangelsnas",35},
         {"ekenaso",10},{"krakshult",55},
         {"kalvhult",93},{"gnosjo",46},
         {"bohult",26},{"hjalmshult",35},
         {"sofieslatt",36},{"mjalahult",44},
         {"vallshult",47},{"saxhult",14},
-        {"unnaryd",21},{"yttre_mjala",58},
+        {"unnaryd",21},{"yttre_mjala",75},
         {"dohult",25},{"eldshult",69},
-        {"ostra_bokeberg",57},{"langaryd",64}
+        {"ostra_bokeberg",75},{"langaryd",64}
     };
     disabledTowns[] = {
-        "bockshult","sofieslatt","gussbo","ekenaso","bohult","vallshult","saxhult","norra_bokeberg","hokhult","eldshult"
+        "backhasten","bockshult","gussbo","ekenaso","bohult","saxhult","hokhult"
     };
     antennas[] = {
         {5643.8,7265.82,0},{5540.82,5020.95,0},
@@ -38,8 +38,9 @@ class stubbhult {
     banks[] = {
         {2405.14,5072.26,0},{8623.46,9843.15,0},{1252.83,10667.1,0}
     };
+    // Note: City marker names use the text name, not config class for some reason
     garrison[] = {
-        {},{"outpost_6","factory_1","outpost_7","outpost_25","resource_31"},
+        {},{"outpost_6","factory_1","outpost_7","outpost_25","resource_31","Hylte","Sofieslätt","Kalvhult","Kråkshult","Bexet"},
         {},{"control_4","control_5"}
     };
     fuelStationTypes[] = {
@@ -48,16 +49,16 @@ class stubbhult {
     };
     climate = "temperate";
     buildObjects[] = {
-    // Large vanilla tropical structures
-    {"Land_BagBunker_01_large_green_F", 300}, {"Land_HBarrier_01_tower_green_F", 300}, {"Land_BagBunker_01_small_green_F", 60},
-    {"Land_Shed_09_F", 120}, {"Land_Shed_10_F", 140},
-    // vanilla tropical sandbag walls
-    {"Land_BagFence_01_short_green_F", 10}, {"Land_BagFence_01_round_green_F", 10}, {"Land_BagFence_01_long_green_F", 10},
-    // Non-camo vanilla stuff
-    {"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5},
-    {"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
-};
-policeStationTypes[] = {
+        // Large vanilla tropical structures
+        {"Land_BagBunker_01_large_green_F", 300}, {"Land_HBarrier_01_tower_green_F", 300}, {"Land_BagBunker_01_small_green_F", 60},
+        {"Land_Shed_09_F", 120}, {"Land_Shed_10_F", 140},
+        // vanilla tropical sandbag walls
+        {"Land_BagFence_01_short_green_F", 10}, {"Land_BagFence_01_round_green_F", 10}, {"Land_BagFence_01_long_green_F", 10},
+        // Non-camo vanilla stuff
+        {"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5},
+        {"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+    };
+    policeStationTypes[] = {
 		"Land_PoliceStation_01_F", "Land_House_2B01_F", "Land_House_2B02_F", "Land_House_2B03_F", "Land_House_2B04_F",
 		"Land_House_2W01_F", "Land_House_2W02_F", "Land_House_2W03_F", "Land_House_2W04_F", "Land_House_2W05_F",
 		"Land_House_1B01_F", "Land_House_1W11_F", "Land_House_1W12_F", "Land_House_1W07_F",
