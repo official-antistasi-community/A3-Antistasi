@@ -155,7 +155,7 @@ private _fnc_weaponPriceCalculator = {
             if (_firstMode == "this") exitWith { _modeCfg = _weaponCfg };
             _modeCfg = _weaponCfg >> _firstMode;
         };
-        private _dispersion = getNumber (_modeCfg >> "dispersion");
+        private _dispersion = 0.0001 max getNumber (_modeCfg >> "dispersion");
         _dispMul =  (0.001 / _dispersion) ^ 0.5;
     };
 

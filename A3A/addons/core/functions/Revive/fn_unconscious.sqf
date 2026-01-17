@@ -76,7 +76,7 @@ if (_isPlayer) then
 
 
 private _nextRequest = 0;
-while {(time < _bleedOut) and (_unit getVariable ["incapacitated",false]) and (alive _unit)} do
+while {(time < _bleedOut) and (_unit getVariable ["incapacitated",false]) and (alive _unit) and !(_unit getVariable ["respawning", false])} do
 {
 	// Space out help requests increasingly with failures
 	private _helper = _unit getVariable ["helped", objNull];
@@ -134,7 +134,7 @@ else
 	};
 };
 
-if (_isPlayer and (_unit getVariable ["respawn",false])) exitWith {};
+if (_isPlayer and ((_unit getVariable ["respawn",false]) || (_unit getVariable ["respawning",false]))) exitWith {};
 
 if (time > _bleedOut) exitWith
 {
@@ -146,7 +146,7 @@ if (alive _unit) then
 {
 	_unit setUnconscious false;
 	//_unit playMoveNow "AmovPpneMstpSnonWnonDnon_healed";
-	_unit playMoveNow "unconsciousoutprone";
+	//_unit playMoveNow "unconsciousoutprone";
 	_unit setBleedingremaining 0;
 
 	// Temp invulnerability on revive
