@@ -35,9 +35,6 @@ sidesX setVariable ["Synd_HQ", teamPlayer, true];
 sidesX setVariable ["NATO_carrier", Occupants, true];
 sidesX setVariable ["CSAT_carrier", Invaders, true];
 
-// Set up dummy markers
-call A3A_fnc_initBases;
-
 
 Info("Setting up towns");
 
@@ -94,21 +91,13 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 
 	_mrk = createmarkerLocal [format ["%1", _nameX], _pos];
 	_mrk setMarkerSizeLocal [_size, _size];
-	_mrk setMarkerShapeLocal "RECTANGLE";
+	_mrk setMarkerShapeLocal "ELLIPSE";
 	_mrk setMarkerBrushLocal "SOLID";
-	_mrk setMarkerColorLocal colorOccupants;
 	_mrk setMarkerTextLocal _nameX;
 	_mrk setMarkerAlpha 0;
 	citiesX pushBack _nameX;
 	spawner setVariable [_nameX, 2, true];
 	spawner setVariable [_nameX + "_civ", 2, true];		// civ part of spawning
-
-	_dmrk = createMarkerLocal [format ["Dum%1", _nameX], _pos];
-	_dmrk setMarkerShapeLocal "ICON";
-	_dmrk setMarkerTypeLocal "loc_Ruin";
-	_dmrk setMarkerColor colorOccupants;
-
-	sidesX setVariable [_mrk, Occupants, true];
 
 	// ok, how much bulk HR? based on pop or sqrt pop? latter is safer...
 	private _info = [_numCiv, 0, sqrt _numCiv];				// initial full pop, 0% rebel support, 10 HR for 100 pop (multiplied by map factor on award)
@@ -137,6 +126,10 @@ A3A_garrisonSize = createHashMap;
 
 // And now set up the max/par/index values per type (needs troop counts)
 [markersX - ["Synd_HQ"]] call A3A_fnc_initSpawnPlaceStats;
+
+
+// Set up dummy markers and starting sides
+call A3A_fnc_initBases;
 
 
 Info("Setting up banks");
