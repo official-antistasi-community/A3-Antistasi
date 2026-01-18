@@ -9,41 +9,40 @@ if (!isNil "_cacheVal") exitWith { _cacheVal };
 
 // _simType and _subVelocity also passed in
 private _fnc_payloadValue = {
-	params ["_cfgAmmo", "_log"];
-	
-	if !(_simType in _utilSims) exitWith {
-		private _hit = getNumber (_cfgAmmo >> "hit");
-		private _indirHit = getNumber (_cfgAmmo >> "indirectHit");
-		private _indirRange = getNumber (_cfgAmmo >> "indirectHitRange");
-		if (_simType in _mineSims and getNumber (_cfgAmmo >> "directionalExplosion") != 0) then {
-			_indirHit = _indirHit * getNumber (_cfgAmmo >> "explosionAngle") / 180;
-		};
-		private _caliber = getNumber(_cfgAmmo >> "caliber");
-		private _penetration = (15/1000) * _caliber * _subVelocity;		// should be mm of RHS steel
-		
-		private _indirPayload = _indirHit*_indirRange;
-		_indirPayload = if (_simType in _mineSims) then { _indirPayload^0.7 } else { 0.4*_indirPayload^1 };
-		if (_indirHit > 0) then {_indirPayload = _indirPayload + 10*_indirPayload^0.5};		// "trigger cost"
+    params ["_cfgAmmo", "_log"];
 
-		private _guidanceMod = [0, 300] select (getNumber (_cfgAmmo >> "weaponLockSystem") != 0);
-		//if (_log) then {diag_log format ["Hit %1, indir %2, indirRange %3, caliber %4, pen %5, guidance %6", _hit, _indirHit, _indirRange, _caliber, _penetration, _guidanceMod]};
-		
-		_hit = _hit min _penetration*1.5;		// hack to workaround RHS AT weirdness
-		0.1*(_hit + _penetration)^1.2 + _indirPayload + _guidanceMod;
-	};
-	if (_simType == "shotilluminating") exitWith {
-		private _intensity = getNumber (_cfgAmmo >> "intensity");
-		private _brightness = 2500 * getNumber (_cfgAmmo >> "brightness") ^ 2;
-		private _timeToLive = getNumber (_cfgAmmo >> "timeToLive");
-		//if (_log) then {diag_log format ["Intensity %1, brightness %2, ttl %3", _intensity, _brightness, _timeToLive]};
-		_timeToLive * (_intensity max _brightness) / 8000;
-	};
-	60;		// Smokes are all the same?
+    if !(_simType in _utilSims) exitWith {
+        private _hit = getNumber (_cfgAmmo >> "hit");
+        private _indirHit = getNumber (_cfgAmmo >> "indirectHit");
+        private _indirRange = getNumber (_cfgAmmo >> "indirectHitRange");
+        if (_simType in _mineSims and getNumber (_cfgAmmo >> "directionalExplosion") != 0) then {
+            _indirHit = _indirHit * getNumber (_cfgAmmo >> "explosionAngle") / 180;
+        };
+        private _caliber = getNumber(_cfgAmmo >> "caliber");
+        private _penetration = (15/1000) * _caliber * _subVelocity;		// should be mm of RHS steel
+
+        private _indirPayload = _indirHit*_indirRange;
+        _indirPayload = if (_simType in _mineSims) then { _indirPayload^0.7 } else { 0.4*_indirPayload^1 };
+        if (_indirHit > 0) then {_indirPayload = _indirPayload + 10*_indirPayload^0.5};		// "trigger cost"
+
+        private _guidanceMod = [0, 300] select (getNumber (_cfgAmmo >> "weaponLockSystem") != 0);
+        //if (_log) then {diag_log format ["Hit %1, indir %2, indirRange %3, caliber %4, pen %5, guidance %6", _hit, _indirHit, _indirRange, _caliber, _penetration, _guidanceMod]};
+
+        _hit = _hit min _penetration*1.5;		// hack to workaround RHS AT weirdness
+        0.1*(_hit + _penetration)^1.2 + _indirPayload + _guidanceMod;
+    };
+    if (_simType == "shotilluminating") exitWith {
+        private _intensity = getNumber (_cfgAmmo >> "intensity");
+        private _brightness = 2500 * getNumber (_cfgAmmo >> "brightness") ^ 2;
+        private _timeToLive = getNumber (_cfgAmmo >> "timeToLive");
+        //if (_log) then {diag_log format ["Intensity %1, brightness %2, ttl %3", _intensity, _brightness, _timeToLive]};
+        _timeToLive * (_intensity max _brightness) / 8000;
+    };
+    60;		// Smokes are all the same?
 };
 
-// Normalized for 50cal at approx 10
 private _fnc_ammoPriceCalculator = {
-	params ["_className", ["_log", false]];
+    params ["_className", ["_log", false]];
 
     // No way to get reasonable initSpeed from CfgAmmo, need to read from CfgMagazines
     if (isNil "A3A_ammoInitSpeed") then {
@@ -54,81 +53,81 @@ private _fnc_ammoPriceCalculator = {
         } forEach ("true" configClasses (configFile >> "CfgMagazines"));
     };
 
-	private _cfgAmmo = configFile >> "CfgAmmo" >> _className;
-	if (!isClass _cfgAmmo) exitWith { Error_1("Ammo %1 does not exist", _className); 10000 };
-	if (isNumber (_cfgAmmo >> "A3A_price")) exitWith { getNumber (_cfgAmmo >> "A3A_price") };
+    private _cfgAmmo = configFile >> "CfgAmmo" >> _className;
+    if (!isClass _cfgAmmo) exitWith { Error_1("Ammo %1 does not exist", _className); 10000 };
+    if (isNumber (_cfgAmmo >> "A3A_price")) exitWith { getNumber (_cfgAmmo >> "A3A_price") };
 
     private _rocketSims = ["shotrocket", "shotmissile"];
     private _utilSims = ["shotsmoke", "shotsmokex", "shotilluminating", "shotnvgmarker"];
     private _mineSims = ["shotmine", "shotdirectionalbomb", "shotboundingmine", "shotgrenade"];
 
-	private _simType = tolower getText(_cfgAmmo >> "simulation");
-	//if (_log) then {diag_log format ["Data for ammo %1:", _className]};
+    private _simType = tolower getText(_cfgAmmo >> "simulation");
+    //if (_log) then {diag_log format ["Data for ammo %1:", _className]};
 
-	private _guidanceMod = call {
-		if (getNumber (_cfgAmmo >> "weaponLockSystem") != 0) exitWith { getNumber (_cfgAmmo >> "missileLockMaxDistance") / 40 };
-		if (getNumber (_cfgAmmo >> "manualControl") != 0) exitWith { getNumber (_cfgAmmo >> "maxControlRange") / 40 };
-		0;
-	};
+    private _guidanceMod = call {
+        if (getNumber (_cfgAmmo >> "weaponLockSystem") != 0) exitWith { getNumber (_cfgAmmo >> "missileLockMaxDistance") / 40 };
+        if (getNumber (_cfgAmmo >> "manualControl") != 0) exitWith { getNumber (_cfgAmmo >> "maxControlRange") / 40 };
+        0;
+    };
 
     // Add in thrust for rockets and maneuvrability for guided missiles (iron bombs are missile sim, so need to check guidance)
-	private _velocity = A3A_ammoInitSpeed getOrDefault [_className, 0];
-	private _totThrust = 0;
-	if (_simType in _rocketSims) then {
-		_totThrust = getNumber (_cfgAmmo >> "thrust") * getNumber (_cfgAmmo >> "thrustTime");
+    private _velocity = A3A_ammoInitSpeed getOrDefault [_className, 0];
+    private _totThrust = 0;
+    if (_simType in _rocketSims) then {
+        _totThrust = getNumber (_cfgAmmo >> "thrust") * getNumber (_cfgAmmo >> "thrustTime");
         if (_guidanceMod > 0) then {
             private _maneuvrability = getNumber (_cfgAmmo >> "maxSpeed")^2 * getNumber (_cfgAmmo >> "maneuvrability") / 1500;
             _maneuvrability = _maneuvrability max (getNumber (_cfgAmmo >> "maxSpeed") * getNumber (_cfgAmmo >> "maneuvrability") / 5);
             //if (_log) then {diag_log format ["thrust %1, maxSpeed %2, maneuvrability %3, guidanceMod %4", _totThrust, getNumber (_cfgAmmo >> "maxSpeed"), getNumber (_cfgAmmo >> "maneuvrability"), _guidanceMod]};
-    		_totThrust = _totThrust + _maneuvrability;
+            _totThrust = _totThrust + _maneuvrability;
         };
-	};
-	//if (_log) then {diag_log format ["Sim %1, velocity %2, thrust %3, guidanceMod %4", _simType, _velocity, _totThrust, _guidanceMod]};
-	
-	// submunitionAmmo can be either [type, prob, type2, prob2] array or just type string
-	private _subAmmoType = getText (_cfgAmmo >> "submunitionAmmo");
-	if (isArray (_cfgAmmo >> "submunitionAmmo")) then { _subAmmoType = getArray (_cfgAmmo >> "submunitionAmmo") # 0 };
+    };
+    //if (_log) then {diag_log format ["Sim %1, velocity %2, thrust %3, guidanceMod %4", _simType, _velocity, _totThrust, _guidanceMod]};
 
-	private _subVelocity = _velocity;       // used for payload value later
-	private _subCount = 1;
-	while {_subAmmoType != ""} do
-	{
-		private _subConeType = getArray (_cfgAmmo >> "submunitionConeType");
-		if (count _subConeType >= 2) then {
-			private _thisSubCount = if (_subConeType#1 isEqualType 0) then { _subConeType#1 } else { count (_subConeType#1) };
-			_subCount = _subCount * _thisSubCount;
-		};
-		if (getNumber (_cfgAmmo >> "submunitionInitSpeed") > 0) then {                // _simType != "shotdeploy" ? Not sure which is correct
+    // submunitionAmmo can be either [type, prob, type2, prob2] array or just type string
+    private _subAmmoType = getText (_cfgAmmo >> "submunitionAmmo");
+    if (isArray (_cfgAmmo >> "submunitionAmmo")) then { _subAmmoType = getArray (_cfgAmmo >> "submunitionAmmo") # 0 };
+
+    private _subVelocity = _velocity;       // used for payload value later
+    private _subCount = 1;
+    while {_subAmmoType != ""} do
+    {
+        private _subConeType = getArray (_cfgAmmo >> "submunitionConeType");
+        if (count _subConeType >= 2) then {
+            private _thisSubCount = if (_subConeType#1 isEqualType 0) then { _subConeType#1 } else { count (_subConeType#1) };
+            _subCount = _subCount * _thisSubCount;
+        };
+        if (getNumber (_cfgAmmo >> "submunitionInitSpeed") > 0) then {                // _simType != "shotdeploy" ? Not sure which is correct
             _subVelocity = getNumber (_cfgAmmo >> "submunitionInitSpeed");
-    		_totThrust = _totThrust + (_subVelocity - _velocity);
+            _totThrust = _totThrust + (_subVelocity - _velocity);
         };
 
         // Submunitions can have thrust/guidance/maneuver too. Add that in.
-		_cfgAmmo = configFile >> "CfgAmmo" >> _subAmmoType;			// replace main ammo
-		_simType = tolower getText (_cfgAmmo >> "simulation");
-		if (_simType in _rocketSims) then {
-			_subVelocity = _subVelocity + getNumber (_cfgAmmo >> "thrust") * getNumber (_cfgAmmo >> "thrustTime");
+        _cfgAmmo = configFile >> "CfgAmmo" >> _subAmmoType;			// replace main ammo
+        _simType = tolower getText (_cfgAmmo >> "simulation");
+        if (_simType in _rocketSims) then {
+            _subVelocity = _subVelocity + getNumber (_cfgAmmo >> "thrust") * getNumber (_cfgAmmo >> "thrustTime");
             if (getNumber (_cfgAmmo >> "weaponLockSystem") != 0) then {
                 private _maneuvrability = getNumber (_cfgAmmo >> "maxSpeed")^2 * getNumber (_cfgAmmo >> "maneuvrability") / 1500;
                 //if (_log) then {diag_log format ["thrust %1, maxSpeed %2, maneuvrability %3", _totThrust, getNumber (_cfgAmmo >> "maxSpeed"), getNumber (_cfgAmmo >> "maneuvrability")]};
                 _totThrust = _totThrust + _maneuvrability;
             };
-		};
-		//if (_log) then {diag_log format ["SubammoType %1, subVelocity %2, subCount %3", _subAmmoType, _subVelocity, _subCount]};
+        };
+        //if (_log) then {diag_log format ["SubammoType %1, subVelocity %2, subCount %3", _subAmmoType, _subVelocity, _subCount]};
 
-		// iteration, in case of chained submunitions
-		_subAmmoType = getText (_cfgAmmo >> "submunitionAmmo");
-		if (isArray (_cfgAmmo >> "submunitionAmmo")) then { _subAmmoType = getArray (_cfgAmmo >> "submunitionAmmo") # 0 };
-	};
+        // iteration, in case of chained submunitions
+        _subAmmoType = getText (_cfgAmmo >> "submunitionAmmo");
+        if (isArray (_cfgAmmo >> "submunitionAmmo")) then { _subAmmoType = getArray (_cfgAmmo >> "submunitionAmmo") # 0 };
+    };
 
-	// hit & indirHit for final projectile (assuming original doesn't matter for subProjectile)
-	private _payload = [_cfgAmmo, _log] call _fnc_payloadValue;
-	private _totPayload = _payload * _subCount + _guidanceMod;
+    // hit & indirHit for final projectile (assuming original doesn't matter for subProjectile)
+    private _payload = [_cfgAmmo, _log] call _fnc_payloadValue;
+    private _totPayload = _payload * _subCount + _guidanceMod;
 
     // Normalized to 5.56/6.5mm ~= 1
-	private _price = 0.0002 * (450 + _velocity + _totThrust) * _totPayload;
-	//if (_log) then {diag_log format ["Payload %1, vMul %2, Price %3, end", _totPayload, 450 + _velocity + _totThrust, _price]};
-	_price;
+    private _price = 0.0002 * (450 + _velocity + _totThrust) * _totPayload;
+    //if (_log) then {diag_log format ["Payload %1, vMul %2, Price %3, end", _totPayload, 450 + _velocity + _totThrust, _price]};
+    _price;
 };
 
 private _fnc_ammoPriceCalculatorCache = {
