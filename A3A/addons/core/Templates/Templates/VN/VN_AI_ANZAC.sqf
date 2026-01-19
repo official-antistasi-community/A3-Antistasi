@@ -110,7 +110,7 @@ if (isClass (configFile >> "vnx_credits")) then {
 "WhiteHead_13", "WhiteHead_15", "WhiteHead_16", "WhiteHead_17", "WhiteHead_18",
 "WhiteHead_20", "WhiteHead_21"]] call _fnc_saveToTemplate;
 ["voices", ["Male01ENG", "Male02ENG", "Male03ENG", "Male04ENG", "Male05ENG", "Male06ENG", "Male07ENG", "Male08ENG", "Male09ENG", "Male10ENG", "Male11ENG", "Male12ENG"]] call _fnc_saveToTemplate;
-"NATOMen" call _fnc_saveNames;
+"EnglishMen" call _fnc_saveNames;
 
 //////////////////////////
 //       Loadouts       //
@@ -322,8 +322,10 @@ _policeLoadoutData set ["uniforms", ["vn_b_uniform_macv_01_03"]];
 _policeLoadoutData set ["vests", ["vn_b_vest_usarmy_13"]];
 _policeLoadoutData set ["helmets", ["vn_b_helmet_m1_01_02"]];
 
-_policeLoadoutData set ["rifles", [
-["vn_m16", "", "", "", ["vn_m16_20_mag", "vn_m16_20_mag", "vn_m16_20_t_mag"], [], ""]
+_policeLoadoutData set ["carbines", [
+["vn_m1carbine", "", "", "", ["vn_carbine_15_mag", "vn_carbine_15_mag", "vn_carbine_15_t_mag"], [], ""],
+["vn_m1carbine", "", "", "", ["vn_carbine_15_mag", "vn_carbine_15_mag", "vn_carbine_15_t_mag"], [], ""],
+["vn_m2carbine", "", "", "", ["vn_carbine_15_mag", "vn_carbine_15_mag", "vn_carbine_15_t_mag"], [], ""]
 ]];
 _policeLoadoutData set ["shotGuns", [
 ["vn_m1897", "", "", "", ["vn_m1897_buck_mag", "vn_m1897_fl_mag"], [], ""]
@@ -760,7 +762,7 @@ private _policeTemplate = {
 	["vests"] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
 
-	[selectRandom ["rifles", "shotGuns"]] call _fnc_setPrimary;
+	[selectRandom ["carbines", "shotGuns"]] call _fnc_setPrimary;
 	["primary", 3] call _fnc_addMagazines;
 
 	["sidearms"] call _fnc_setHandgun;
