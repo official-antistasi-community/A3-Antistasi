@@ -23,7 +23,7 @@ private _totalReinf = 0.2 * ([A3A_resourcesDefenceOcc, A3A_resourcesDefenceInv] 
 Debug_2("%1 has %2 resources available for reinforcements", _side, _totalReinf);
 if (_totalReinf <= 0) then {continue};
 
-private _typeWeights = createHashMapFromArray [["staticMortar", 1], ["staticAT", 1], ["staticAA", 1], ["staticMG", 1], ["vehicleAA", 1], ["vehicleTruck", 1], ["vehicle", 0.4], ["heli", 0.3], ["plane", 0.3], ["runway", 0.3], ["boat", 0.6]];
+private _typeWeights = createHashMapFromArray [["staticMortar", 1], ["staticAT", 1], ["staticAA", 1], ["staticMG", 1], ["vehicleAA", 1], ["vehicleArty", 0.3], ["vehicleSAM", 0.5], ["vehicleTruck", 1], ["vehicle", 0.4], ["heli", 0.3], ["plane", 0.3], ["runway", 0.3], ["boat", 0.6]];
 private _noPlaceTypes = _faction get "noPlaceTypes";
 
 private _enemyAirfieldPositions = airportsX select {sidesX getVariable _x != _side} apply { markerPos _x };
