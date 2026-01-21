@@ -70,7 +70,8 @@ setVar("vehiclesTanks", OccAndInv("vehiclesTanks"));
 setVar("vehiclesHeavyTanks", OccAndInv("vehiclesHeavyTanks"));
 setVar("vehiclesAA", OccAndInv("vehiclesAA"));
 setVar("vehiclesArtillery", OccAndInv("vehiclesArtillery"));
-setVar("vehiclesSAM", ["B_SAM_System_03_F", "O_SAM_System_04_F"]);
+private _sams = ["B_SAM_System_03_F", "O_SAM_System_04_F"];         // temp
+setVar("vehiclesSAM", _sams);
 setVar("vehiclesTransportAir", OccAndInv("vehiclesHelisLight") + OccAndInv("vehiclesHelisTransport") + OccAndInv("vehiclesPlanesTransport") );
 setVar("vehiclesHelisLight", OccAndInv("vehiclesHelisLight"));
 setVar("vehiclesHelisLightAttack", OccAndInv("vehiclesHelisLightAttack"));
@@ -166,6 +167,14 @@ OccAndInv("vehiclesAmmoTrucks")
 + OccAndInv("vehiclesFuelTrucks")
 + OccAndInv("vehiclesMedical");
 setVar("vehiclesUtilityTrucks", _vehUtilityTrucks);
+
+
+// Create support vehicle types hashmap for garrisons
+A3A_supportVehTypes = createHashMap;
+{ A3A_supportVehTypes set [_x, "vehiclesAA"] } forEach (A3A_faction_all get "vehiclesAA");
+{ A3A_supportVehTypes set [_x, "vehiclesSAM"] } forEach (A3A_faction_all get "vehiclesSAM");
+{ A3A_supportVehTypes set [_x, "vehiclesArtillery"] } forEach (A3A_faction_all get "vehiclesArtillery");
+{ A3A_supportVehTypes set [_x, "staticMortars"] } forEach (A3A_faction_all get "staticMortars");
 
 missionNamespace setVariable ["A3A_faction_all", A3A_faction_all, true];
 A3A_faction_all

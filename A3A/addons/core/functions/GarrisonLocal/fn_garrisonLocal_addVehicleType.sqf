@@ -16,7 +16,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_class", "_slotNum"];
+params ["_marker", "_class", "_slotNum", "_idNum"];
 
 private _garrison = A3A_activeGarrison get _marker;
 
@@ -37,6 +37,7 @@ isNil {
 
 _garrison get "vehicles" pushBack _vehicle;
 _vehicle setVariable ["markerX", _marker, true];
+_vehicle setVariable ["A3A_vehID", _idNum, [2, clientOwner]];
 [_vehicle, _garrison get "side"] call A3A_fnc_AIVEHinit;
 
 // Set reb crew var in case it's transferred later

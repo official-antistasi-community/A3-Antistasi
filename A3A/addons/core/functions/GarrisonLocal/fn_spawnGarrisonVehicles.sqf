@@ -49,7 +49,7 @@ private _fnc_isBlocked = {
 };
 
 {
-    _x params ["_class", "_posData", "_vecDir", "_vecUp", "_state"];
+    _x params ["_class", "_posData", "_state", "_idNum"];
 
     private _vehicle = objNull;
     private _fullCrew = false;
@@ -74,11 +74,12 @@ private _fnc_isBlocked = {
     else
     {
         // Arbitrary placement (probably rebel)
-        private _pos = ASLtoAGL _posData;           // blocker check is currently 2d anyway, but keep it consistent
+        _posData params ["_posWorld", "_vecDir", "_vecUp"];
+        private _pos = ASLtoAGL _posWorld;           // blocker check is currently 2d anyway, but keep it consistent
         if (call _fnc_isBlocked) then { continue };
         isNil {
-            _vehicle = createVehicle [_class, _posData, [], 0, "CAN_COLLIDE"];
-            _vehicle setPosWorld _posData;
+            _vehicle = createVehicle [_class, _pos, [], 0, "CAN_COLLIDE"];
+            _vehicle setPosWorld _posWorld;
             _vehicle setVectorDirAndUp [_vecDir, _vecUp];
         };
     };
@@ -86,6 +87,7 @@ private _fnc_isBlocked = {
 
     _vehicles pushBack _vehicle;
     _vehicle setVariable ["markerX", _marker, true];
+    _vehicle setVariable ["A3A_vehID", _idNum, [2, clientOwner]];
     if (!isNil "_state") then { [_vehicle, _state] call HR_GRG_fnc_setState };
     [_vehicle, _side, "garrison"] call A3A_fnc_AIVEHinit;
 
