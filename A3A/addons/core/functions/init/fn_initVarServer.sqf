@@ -539,7 +539,7 @@ A3A_validVehicles = createHashMap;
 	_valid set ["staticMG", FactionGet(all, "staticMGs")];			// allow cross-faction use
 	_valid set ["staticAA", _x get "staticAA"];
 	_valid set ["staticAT", _x get "staticAT"];
-	_valid set ["staticMortar", _x get "staticMortar"];
+	_valid set ["staticMortar", _x get "staticMortars"];
 
 	_valid set ["vehicleAA", _x get "vehiclesAA"];
 	_valid set ["vehicleSAM", ["B_SAM_System_03_F", "O_SAM_System_04_F"]];		// temp
@@ -561,6 +561,17 @@ A3A_validVehicles = createHashMap;
 } forEach [A3A_faction_occ, A3A_faction_inv];
 
 A3A_validVehicles set [civilian, createHashMapFromArray [["civCar", arrayCivVeh], ["civBoat", civBoats]] ];
+
+
+// Create support vehicle types hashmap for garrisons
+// Used on garrison-local side as well as server
+private _supportVehTypes = createHashMap;
+{ _supportVehTypes set [_x, "vehiclesAA"] } forEach FactionGet(all, "vehiclesAA");
+{ _supportVehTypes set [_x, "vehiclesSAM"] } forEach FactionGet(all, "vehiclesSAM");
+{ _supportVehTypes set [_x, "vehiclesArtillery"] } forEach FactionGet(all, "vehiclesArtillery");
+{ _supportVehTypes set [_x, "staticMortars"] } forEach FactionGet(all, "staticMortars");
+
+DECLARE_SERVER_VAR(A3A_supportVehTypes, _supportVehTypes);
 
 ///////////////////////////
 //     MOD TEMPLATES    ///

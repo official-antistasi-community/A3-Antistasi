@@ -53,6 +53,7 @@ if (_arrayType == "buildings" && (_marker == "Synd_HQ")) then {call A3A_fnc_calc
 if ("_civ" in _marker) exitWith {};
 
 // Remove from active garrison if spawned
+// TODO: Need to handle support vehicles if we start using this for non-rebels
 if (_marker in A3A_garrisonMachine) then {
     ["remVehicle", [_marker, _vehicle]] call A3A_fnc_garrisonOp;
 };

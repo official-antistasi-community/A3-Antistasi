@@ -42,7 +42,7 @@ A3A_garrison get "Synd_HQ" set ["type", "hq"];
     private _supportVehicles = createHashMap;
     {
         private _supportType = A3A_supportVehTypes get _x#0;
-        _supportVehicles set [_x#3, [_supportType, 0]];
+        _supportVehicles set [_x#3, ["ready", _supportType]];
     } forEach (_garrison get "vehicles" select {_x#0 in A3A_supportVehTypes});
 
     _garrison set ["supportVehicles", _supportVehicles];

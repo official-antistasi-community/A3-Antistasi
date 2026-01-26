@@ -25,10 +25,15 @@ private _garrisonType = _garrisonData get "type";
 Info_2("Spawning %2 garrison at marker %1", _marker, _side);
 Debug_1("Garrison data: %1", _garrisonData);
 
-private _garrison = createHashMapFromArray [["troops", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []],
-    ["side", _side], ["type", _garrisonType], ["buildingGroup", grpNull], ["staticGroup", grpNull], ["mortarGroup", grpNull] ];
-A3A_activeGarrison set [_marker, _garrison];
-
+// May already have entry if there are active supports
+private _garrison = A3A_activeGarrison get _marker;
+if (isNil "_garrison") then {
+    _garrison = createHashMapFromArray [ ["troops", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []], ["vehActions", []],
+        ["side", _side], ["buildingGroup", grpNull], ["staticGroup", grpNull], ["mortarGroup", grpNull] ];
+    A3A_activeGarrison set [_marker, _garrison];
+};
+_garrison set ["state", "enabled"];
+_garrison set ["type", _garrisonType];      // Won't be set by vehicle actions
 
 // Merge in spawn places & garrison size for minor sites if we haven't done so yet
 if !(_marker in A3A_spawnPlacesHM) then { A3A_spawnPlacesHM set [_marker, _garrisonData get "spawnPlaces"] };

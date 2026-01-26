@@ -74,7 +74,7 @@ private _isAirport = _marker in airportsX;
 
 private _vehicles = _garrison get "vehicles";
 {
-    _x params ["_vehType", "_slotNum"];
+    _x params ["_vehType", "_slotNum", "", "_vehID"];
 
     if (_slotNum isEqualType [] or { _slotNum >= count _places }) then {
         _vehicles deleteAt _forEachIndex;
@@ -88,6 +88,11 @@ private _vehicles = _garrison get "vehicles";
     if !(_vehType in (_valid get _slotType)) then {
         // Arguably should refund this case if it's not a save?
         _x set [0, [_faction, _slotType, _isAirport] call A3A_fnc_selectGarrisonVehicleType];
+        if (_x#0 in A3A_supportVehTypes) then {
+            (_garrison get "supportVehicles") set [_vehID, ["ready", A3A_supportVehTypes get _x#0]];
+        } else {
+            (_garrison get "supportVehicles") deleteAt _vehID;
+        };
         Debug_3("%1 (slot type %2) not valid, swapping to %3", _vehType, _slotType, _x#0);
     };
 } forEachReversed _vehicles;

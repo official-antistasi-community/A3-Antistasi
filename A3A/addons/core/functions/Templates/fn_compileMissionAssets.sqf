@@ -169,12 +169,5 @@ OccAndInv("vehiclesAmmoTrucks")
 setVar("vehiclesUtilityTrucks", _vehUtilityTrucks);
 
 
-// Create support vehicle types hashmap for garrisons
-A3A_supportVehTypes = createHashMap;
-{ A3A_supportVehTypes set [_x, "vehiclesAA"] } forEach (A3A_faction_all get "vehiclesAA");
-{ A3A_supportVehTypes set [_x, "vehiclesSAM"] } forEach (A3A_faction_all get "vehiclesSAM");
-{ A3A_supportVehTypes set [_x, "vehiclesArtillery"] } forEach (A3A_faction_all get "vehiclesArtillery");
-{ A3A_supportVehTypes set [_x, "staticMortars"] } forEach (A3A_faction_all get "staticMortars");
-
 missionNamespace setVariable ["A3A_faction_all", A3A_faction_all, true];
 A3A_faction_all

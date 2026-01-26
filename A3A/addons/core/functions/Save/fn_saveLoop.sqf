@@ -147,6 +147,7 @@ private _saveGarrison = +A3A_garrison;
 
 	// Convert vehicles to older storage format
 	// TODO: Simplify this to one line after another version
+	if ("_civ" in _x) then { continue };		// civ internal format didn't change
 	{
 		if (_x#1 isEqualType 0) then {
 			_x resize ([3,2] select isNil {_x#2});		// remove ID, and state if nil

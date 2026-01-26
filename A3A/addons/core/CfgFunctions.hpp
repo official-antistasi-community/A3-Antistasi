@@ -339,6 +339,8 @@ class CfgFunctions
             class garrisonLocal_spawnUnitCount {};
             class garrisonLocal_unpause {};
             class garrisonLocal_updateStatics {};
+            class garrisonLocal_vehAction {};
+            class garrisonLocal_vehActionEnd {};
             class garrisonLocal_zoneCheck {};
             class garrisonOpLoop {};
             class getGarrisonLimit {};
@@ -373,6 +375,8 @@ class CfgFunctions
             class garrisonServer_sendData {};
             class garrisonServer_spawn {};
             class garrisonServer_updateVehData {};
+            class garrisonServer_vehAction {};
+            class garrisonServer_vehActionSetState {};
             class getSiteTroopQuality {};
             class rebelVehPlacedWorker {};
             class selectGarrisonVehicleType {};

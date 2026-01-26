@@ -18,7 +18,6 @@ FIX_LINE_NUMBERS()
 params ["_marker", "_vehicle", ["_doRevealCalc", true]];
 
 Trace_1("Called with params %1", _this);
-Trace_1("Vehicle position %1", getPosATL _vehicle);
 
 private _oldMarker = _vehicle getVariable "markerX";
 if (!isNil "_oldMarker") then { [_vehicle] call A3A_fnc_garrisonServer_remVehicle };
@@ -49,7 +48,7 @@ if (_arrayType == "buildings") then {
 
     // Add to garrison support vehicles
     if (typeOf _vehicle in A3A_supportVehTypes) then {
-        (_garrison get "supportVehicles") set [_vehID, [A3A_supportVehTypes get typeOf _vehicle, 0]];
+        (_garrison get "supportVehicles") set [_vehID, ["ready", A3A_supportVehTypes get typeOf _vehicle]];
     };
 };
 
@@ -57,7 +56,7 @@ _vehicle setVariable ["markerX", _marker, true];
 _vehicle setVariable ["A3A_resPool", "garrison", true];
 
 // Add to active garrison if spawned
-if (_marker in A3A_garrisonMachine) then {
+if (spawner getVariable _marker != 2) then {
     private _machine = A3A_garrisonMachine get _marker;
     if (_vehID >= 0) then { _vehicle setVariable ["A3A_vehID", _vehID, _machine] };
     _vehicle setOwner _machine;           // TODO: potential driver issues?

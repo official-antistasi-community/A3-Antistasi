@@ -16,7 +16,7 @@ params ["_mrkPos", "_minRad", "_maxRad", ["_exclude", []]];
 
 private _checkFnc = {
     if (surfaceNormal _tpos # 2 < 0.996) exitWith {true};     // 5 degree max gradient
-    if (_exclude inAreaArray [_tpos, 20, 20] isNotEqualTo []) exitWith {true};
+    if (_exclude inAreaArray [_tpos, _excDist, _excDist] isNotEqualTo []) exitWith {true};
     private _startPos = ATLtoASL _tpos vectorAdd [0,0,2];
     private _intersect = false;
     for "_deg" from 0 to 315 step 45 do {
@@ -27,6 +27,12 @@ private _checkFnc = {
 };
 
 // Make 50 radial attempts
+private _excDist = 20;
+private _pos = [_mrkPos, _minRad, _maxRad, 6, 50, _checkFnc] call A3A_fnc_findEmptyPos;
+if (_pos isNotEqualTo []) exitWith {_pos};
+
+// Make another 50 attempts with smaller exclusion radius
+_excDist = 10;
 private _pos = [_mrkPos, _minRad, _maxRad, 6, 50, _checkFnc] call A3A_fnc_findEmptyPos;
 if (_pos isNotEqualTo []) exitWith {_pos};
 

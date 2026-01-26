@@ -36,8 +36,7 @@ if (_newSide != teamPlayer) then {
     _garrison deleteAt "intelCD";
 };
 
-// should probably do crewed vehicle re-check...
-
+// Need to call this even if unspawned. Clears any vehicle actions.
 if (_marker in A3A_garrisonMachine) then {
     ["changeSide", [_marker, _newSide]] call A3A_fnc_garrisonOp;
 };
