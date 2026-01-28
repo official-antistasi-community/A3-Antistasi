@@ -18,32 +18,32 @@
 ["equipmentBox", "Box_NATO_Equip_F"] call _fnc_saveToTemplate;
 
 ["vehiclesBasic", ["UK3CB_AAF_B_M1030"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["UK3CB_AAF_B_M1151", "UK3CB_AAF_B_M998_4DR", "UK3CB_AAF_B_M998_2DR", "UK3CB_AAF_B_LR_Closed", "UK3CB_AAF_B_LR_Open"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["UK3CB_AAF_B_M1151", "UK3CB_AAF_B_M998_4DR", "UK3CB_AAF_B_M998_2DR", "UK3CB_AAF_B_LR_Closed", "UK3CB_AAF_B_LR_Open", "UK3CB_AAF_B_LR_SF_WMIK_FFV", "UK3CB_AAF_B_LR_WMIK_FFV", "UK3CB_AAF_B_Dingo"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["UK3CB_AAF_B_M1151_GPK_M2", "UK3CB_AAF_B_M1151_GPK_M240", "UK3CB_AAF_B_M1151_OGPK_M2", "UK3CB_AAF_B_M1151_OGPK_M240", "UK3CB_AAF_B_SUV_Armed",
-"UK3CB_AAF_I_LR_SF_M2", "UK3CB_AAF_B_LR_M2", "UK3CB_AAF_I_GAZ_Vodnik_Cannon"]] call _fnc_saveToTemplate;
-["vehiclesTrucks", ["UK3CB_AAF_B_M939_Open", "UK3CB_AAF_B_M939", "UK3CB_AAF_B_MTVR_Closed", "UK3CB_AAF_B_MTVR_Open"]] call _fnc_saveToTemplate;
+"UK3CB_AAF_I_LR_SF_M2", "UK3CB_AAF_B_LR_M2", "UK3CB_AAF_I_GAZ_Vodnik_Cannon", "UK3CB_AAF_B_LR_SF_WMIK_M2_M240", "UK3CB_AAF_B_LR_SF_WMIK_M240_M240", "UK3CB_AAF_B_LR_SF_WMIK_MILAN_M240", "UK3CB_AAF_B_LR_WMIK_M2", "UK3CB_AAF_B_LR_WMIK_M240", "UK3CB_AAF_B_LR_WMIK_MG3", "UK3CB_AAF_B_LR_WMIK_MK19", "UK3CB_AAF_B_LR_SF_WMIK_MK19_M240", "UK3CB_AAF_B_Dingo_MG3", "UK3CB_AAF_B_Dingo_HMG", "UK3CB_AAF_B_Dingo_GMG", "UK3CB_AAF_B_M939_ZU23", "UK3CB_AAF_B_MTVR_ZU23"]] call _fnc_saveToTemplate;
+["vehiclesTrucks", ["UK3CB_AAF_B_M939_Open", "UK3CB_AAF_B_M939", "UK3CB_AAF_B_MTVR_Closed", "UK3CB_AAF_B_MTVR_Open", "UK3CB_AAF_B_M977_Transport_Open", "UK3CB_AAF_B_M977_Transport_Covered"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["UK3CB_AAF_I_M939_Recovery", "UK3CB_AAF_B_MTVR_Recovery"]] call _fnc_saveToTemplate;
-["vehiclesAmmoTrucks", ["UK3CB_AAF_B_MTVR_Reammo", "UK3CB_AAF_B_M939_Reammo"]] call _fnc_saveToTemplate;
-["vehiclesRepairTrucks", ["UK3CB_AAF_B_M939_Repair", "UK3CB_AAF_B_MTVR_Repair"]] call _fnc_saveToTemplate;
-["vehiclesFuelTrucks", ["UK3CB_AAF_B_MTVR_Refuel", "UK3CB_AAF_B_M939_Fuel"]] call _fnc_saveToTemplate;
+["vehiclesAmmoTrucks", ["UK3CB_AAF_B_MTVR_Reammo", "UK3CB_AAF_B_M939_Reammo", "UK3CB_AAF_B_M977A4_Reammo", "UK3CB_AAF_B_LR_Softtop_Reammo_Open"]] call _fnc_saveToTemplate;
+["vehiclesRepairTrucks", ["UK3CB_AAF_B_M939_Repair", "UK3CB_AAF_B_MTVR_Repair", "UK3CB_AAF_B_M977A4_Repair", "UK3CB_AAF_B_LR_Softtop_Repair_Open"]] call _fnc_saveToTemplate;
+["vehiclesFuelTrucks", ["UK3CB_AAF_B_MTVR_Refuel", "UK3CB_AAF_B_M939_Fuel", "UK3CB_AAF_B_M977A4_Fuel", "UK3CB_AAF_B_LR_Softtop_Refuel_Open"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["UK3CB_AAF_B_M113_AMB", "UK3CB_AAF_O_MTLB_AMB"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["UK3CB_AAF_B_LAV25_HQ", "UK3CB_AAF_B_M113_M2", "UK3CB_AAF_B_M113_MK19", "UK3CB_AAF_I_GAZ_Vodnik_PKT", "UK3CB_AAF_I_GAZ_Vodnik_KVPT", "UK3CB_AAF_B_M1117","UK3CB_AAF_O_MTLB_KPVT", "UK3CB_AAF_O_MTLB_PKT"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", ["UK3CB_AAF_B_LAV25", "UK3CB_AAF_B_LAV25", "UK3CB_AAF_B_AAV", "UK3CB_AAF_B_AAV", "UK3CB_AAF_O_MTLB_ZU23", "UK3CB_AAF_O_MTLB_BMP", "UK3CB_AAF_O_MTLB_Cannon"]] call _fnc_saveToTemplate;
-["vehiclesIFVs", []] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["UK3CB_AAF_B_LAV25_HQ", "UK3CB_AAF_B_M113_M2", "UK3CB_AAF_B_M113_MK19", "UK3CB_AAF_I_GAZ_Vodnik_PKT", "UK3CB_AAF_I_GAZ_Vodnik_KVPT", "UK3CB_AAF_B_M1117","UK3CB_AAF_O_MTLB_KPVT", "UK3CB_AAF_O_MTLB_PKT", "UK3CB_AAF_O_BTR90_HQ"]] call _fnc_saveToTemplate;
+["vehiclesAPCs", ["UK3CB_AAF_B_LAV25", "UK3CB_AAF_B_LAV25", "UK3CB_AAF_B_AAV", "UK3CB_AAF_B_AAV", "UK3CB_AAF_O_MTLB_ZU23", "UK3CB_AAF_O_MTLB_BMP", "UK3CB_AAF_O_MTLB_Cannon", "UK3CB_AAF_I_BMP1", "UK3CB_AAF_O_BTR90"]] call _fnc_saveToTemplate;
+["vehiclesIFVs", ["UK3CB_AAF_I_BMP2K", "UK3CB_AAF_I_BMP2"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["UK3CB_AAF_B_M60A3", "UK3CB_AAF_I_T72BC", "UK3CB_AAF_B_FV4201", "UK3CB_AAF_B_M1A1"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["UK3CB_AAF_O_ZsuTank"]] call _fnc_saveToTemplate; //UK3CB_AAF_O_2S6M_Tunguska
+["vehiclesAA", ["UK3CB_AAF_O_ZsuTank"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["UK3CB_AAF_B_RHIB"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["UK3CB_AAF_B_RHIB_Gunboat"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["UK3CB_AAF_B_AAV"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["UK3CB_AAF_B_L39_PYLON", "UK3CB_AAF_B_T28Trojan_CAS"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["UK3CB_AAF_O_MIG29S"]] call _fnc_saveToTemplate;
-["vehiclesPlanesTransport", ["UK3CB_AAF_B_C130J"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["UK3CB_AAF_B_L39_PYLON", "UK3CB_AAF_B_T28Trojan_CAS", "UK3CB_AAF_I_Su25SM"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["UK3CB_AAF_O_MIG29S", "UK3CB_AAF_B_Gripen"]] call _fnc_saveToTemplate;
+["vehiclesPlanesTransport", ["UK3CB_AAF_B_C130J", "UK3CB_AAF_B_Osprey_IDWS_HMG"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["UK3CB_AAF_B_UH1H", "UK3CB_AAF_B_Benches_MH9", "UK3CB_AAF_B_Bell412_Utility"]] call _fnc_saveToTemplate;
-["vehiclesHelisTransport", ["UK3CB_AAF_B_UH60M2", "UK3CB_AAF_B_UH60M", "UK3CB_AAF_O_Mi8AMT", "UK3CB_AAF_O_Mi8", "UK3CB_AAF_I_UH1H_M240"]] call _fnc_saveToTemplate;
-["vehiclesHelisLightAttack", ["UK3CB_AAF_B_UH1H_GUNSHIP", "UK3CB_AAF_I_Mi8AMTSh", "UK3CB_AAF_B_Bell412_Armed", "UK3CB_AAF_B_Bell412_Armed_AT"]] call _fnc_saveToTemplate;
+["vehiclesHelisTransport", ["UK3CB_AAF_B_UH60M2", "UK3CB_AAF_B_UH60M", "UK3CB_AAF_O_Mi8AMT", "UK3CB_AAF_O_Mi8", "UK3CB_AAF_I_UH1H_M240", "UK3CB_AAF_B_Osprey_MG", "UK3CB_AAF_B_Osprey_HMG", "UK3CB_AAF_B_Osprey_IDWS_HMG"]] call _fnc_saveToTemplate;
+["vehiclesHelisLightAttack", ["UK3CB_AAF_B_UH1H_GUNSHIP", "UK3CB_AAF_I_Mi8AMTSh", "UK3CB_AAF_B_Bell412_Armed", "UK3CB_AAF_B_Bell412_Armed_AT", "UK3CB_AAF_B_AH9", "UK3CB_AAF_I_Mi_24P"]] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", ["UK3CB_AAF_B_AH1Z_GS", "UK3CB_AAF_B_AH1Z", "UK3CB_AAF_I_Mi_24V"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["UK3CB_AAF_B_M109", "UK3CB_AAF_B_M270_MLRS_HE", "UK3CB_AAF_B_M270_MLRS_CLUSTER"]] call _fnc_saveToTemplate;
@@ -57,15 +57,15 @@
 ["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles
-["vehiclesMilitiaLightArmed", ["UK3CB_AAF_I_LR_SF_M2", "UK3CB_AAF_I_LR_M2", "UK3CB_AAF_I_Offroad_M2", "UK3CB_AAF_I_UAZ_MG"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["UK3CB_AAF_I_LR_SF_M2", "UK3CB_AAF_I_LR_M2", "UK3CB_AAF_I_Offroad_M2", "UK3CB_AAF_B_Pickup_M2", "UK3CB_AAF_I_UAZ_MG", "UK3CB_AAF_B_LR_WMIK_MG3"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaTrucks", ["UK3CB_AAF_I_Ural_Open"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["UK3CB_AAF_I_UAZ_Open", "UK3CB_AAF_I_UAZ_Closed"]] call _fnc_saveToTemplate;
 
 ["vehiclesPolice", ["UK3CB_APD_B_LandRover_Closed", "UK3CB_APD_B_LandRover_Open", "UK3CB_APD_B_Pickup", "UK3CB_APD_B_SUV_POL", "UK3CB_APD_I_Hilux_Closed", "UK3CB_APD_I_Hilux_Open", "UK3CB_APD_I_Landcruiser_POL"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["RHS_M2StaticMG_D"]] call _fnc_saveToTemplate;
-["staticAT", ["RHS_TOW_TriPod_D"]] call _fnc_saveToTemplate;
-["staticAA", ["RHS_Stinger_AA_pod_D"]] call _fnc_saveToTemplate;
+["staticMGs", ["RHS_M2StaticMG_D", "UK3CB_AAF_B_M240_High"]] call _fnc_saveToTemplate;
+["staticAT", ["RHS_TOW_TriPod_D", "UK3CB_AAF_B_Milan_High"]] call _fnc_saveToTemplate;
+["staticAA", ["RHS_Stinger_AA_pod_D", "UK3CB_AAF_B_RBS70"]] call _fnc_saveToTemplate;
 ["staticMortars", ["a3a_RHS_M252"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "rhs_12Rnd_m821_HE"] call _fnc_saveToTemplate;

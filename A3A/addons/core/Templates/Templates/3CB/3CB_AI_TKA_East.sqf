@@ -19,39 +19,40 @@
 
 ["vehiclesBasic", ["B_Quadbike_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["UK3CB_TKA_O_SUV_Armoured", "UK3CB_TKA_O_Tigr_FFV", "UK3CB_TKA_O_BRDM2_UM", "UK3CB_TKA_O_UAZ_Closed", "UK3CB_TKA_O_UAZ_Open", "UK3CB_TKA_O_BTR40"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["UK3CB_TKA_O_Hilux_Dshkm", "UK3CB_TKA_O_Hilux_GMG", "UK3CB_TKA_O_LR_SF_M2", "UK3CB_TKA_O_LR_SF_M2", "UK3CB_TKA_O_GAZ_Vodnik_Cannon", "UK3CB_TKA_O_Tigr_STS", "UK3CB_TKA_B_Ural_Zu23"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["UK3CB_TKA_O_Hilux_Dshkm", "UK3CB_TKA_O_Hilux_GMG", "UK3CB_TKA_O_LR_SF_M2", "UK3CB_TKA_O_LR_SF_M2", "UK3CB_TKA_O_GAZ_Vodnik_Cannon", "UK3CB_TKA_O_Tigr_STS", "UK3CB_TKA_B_Ural_Zu23", "UK3CB_TKA_O_BTR40_ZU23", "UK3CB_TKA_O_BTR40_DSHKMS", "UK3CB_TKA_O_BTR40_GMG", "UK3CB_TKA_O_BTR40_METIS", "UK3CB_TKA_O_BTR40_PKM", "UK3CB_TKA_O_LR_SF_WMIK_METIS_PKM", "UK3CB_TKA_O_LR_SF_WMIK_PKM_PKM", "UK3CB_TKA_O_LR_Opentop_PKM", "UK3CB_TKA_O_LR_SF_WMIK_DSHKM_PKM"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["UK3CB_TKA_B_Ural_Open", "UK3CB_TKA_B_Ural"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["UK3CB_TKA_B_Ural_Recovery"]] call _fnc_saveToTemplate;
-["vehiclesAmmoTrucks", ["UK3CB_TKA_B_Ural_Ammo"]] call _fnc_saveToTemplate;
-["vehiclesRepairTrucks", ["UK3CB_TKA_B_Ural_Repair"]] call _fnc_saveToTemplate;
-["vehiclesFuelTrucks", ["UK3CB_TKA_B_Ural_Fuel"]] call _fnc_saveToTemplate;
-["vehiclesMedical", ["UK3CB_TKA_O_GAZ_Vodnik_MedEvac"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["UK3CB_TKA_O_BRDM2_HQ", "UK3CB_TKA_O_BRDM2", "UK3CB_TKA_O_GAZ_Vodnik_PKT", "UK3CB_TKA_O_GAZ_Vodnik_KVPT", "UK3CB_TKA_O_BTR40_MG", "UK3CB_TKA_O_MTLB_KPVT", "UK3CB_TKA_O_MTLB_PKT"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", ["UK3CB_TKA_O_BMP1", "UK3CB_TKA_O_BMP2", "UK3CB_TKA_O_BMP2K", "UK3CB_TKA_O_BTR60", "UK3CB_TKA_O_BTR70", "UK3CB_TKA_O_BTR80", "UK3CB_TKA_O_BTR80a", "UK3CB_TKA_O_MTLB_ZU23", "UK3CB_TKA_O_MTLB_BMP", "UK3CB_TKA_O_MTLB_Cannon"]] call _fnc_saveToTemplate;
+["vehiclesAmmoTrucks", ["UK3CB_TKA_B_Ural_Ammo", "UK3CB_TKA_O_BTR40_REAMMO"]] call _fnc_saveToTemplate;
+["vehiclesRepairTrucks", ["UK3CB_TKA_B_Ural_Repair", "UK3CB_TKA_O_BTR40_REPAIR"]] call _fnc_saveToTemplate;
+["vehiclesFuelTrucks", ["UK3CB_TKA_B_Ural_Fuel", "UK3CB_TKA_O_BTR40_REFUEL"]] call _fnc_saveToTemplate;
+["vehiclesMedical", ["UK3CB_TKA_O_GAZ_Vodnik_MedEvac", "UK3CB_TKA_O_BTR40_AMBULANCE"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["UK3CB_TKA_O_BRDM2_HQ", "UK3CB_TKA_O_BRDM2", "UK3CB_TKA_O_GAZ_Vodnik_PKT", "UK3CB_TKA_O_GAZ_Vodnik_KVPT", "UK3CB_TKA_O_BTR40_MG", "UK3CB_TKA_O_MTLB_KPVT", "UK3CB_TKA_O_MTLB_PKT", "UK3CB_TKA_O_BTR90_HQ"]] call _fnc_saveToTemplate;
+["vehiclesAPCs", ["UK3CB_TKA_O_BMP1", "UK3CB_TKA_O_BMP2", "UK3CB_TKA_O_BMP2K", "UK3CB_TKA_O_BTR60", "UK3CB_TKA_O_BTR70", "UK3CB_TKA_O_BTR80", "UK3CB_TKA_O_BTR80a", "UK3CB_TKA_O_MTLB_ZU23", "UK3CB_TKA_O_MTLB_BMP", "UK3CB_TKA_O_MTLB_Cannon", "UK3CB_TKA_O_BTR90"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["UK3CB_TKA_O_BMP2", "UK3CB_TKA_O_BMP2K"]] call _fnc_saveToTemplate;
-["vehiclesTanks", ["UK3CB_TKA_B_T72BM", "UK3CB_TKA_B_T72A", "UK3CB_TKA_B_T72B", "UK3CB_TKA_B_T55"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks", ["UK3CB_TKA_O_T34", "UK3CB_TKA_B_T55"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["UK3CB_TKA_B_T72BM", "UK3CB_TKA_B_T72A", "UK3CB_TKA_B_T72B"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["UK3CB_TKA_B_ZsuTank"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["UK3CB_TKA_B_RHIB"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["UK3CB_TKA_B_RHIB_Gunboat"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["UK3CB_TKA_O_BMP2", "UK3CB_TKA_O_BTR70"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["UK3CB_TKA_B_Su25SM_CAS", "UK3CB_TKA_B_MIG21_AT"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["UK3CB_TKA_O_MIG29SM", "UK3CB_TKA_B_MIG21_AA"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["UK3CB_TKA_B_Su25SM_CAS", "UK3CB_TKA_B_MIG21_AT", "UK3CB_TKA_O_L39_CAS"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["UK3CB_TKA_O_MIG29SM", "UK3CB_TKA_B_MIG21_AA", "UK3CB_TKA_O_L39_AA"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["UK3CB_TKA_B_C130J"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["UK3CB_TKA_B_UH1H"]] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", ["UK3CB_TKA_B_UH1H_M240", "UK3CB_TKA_B_Mi8AMT", "UK3CB_TKA_B_Mi8"]] call _fnc_saveToTemplate;
-["vehiclesHelisLightAttack", ["UK3CB_TKA_O_UH1H_GUNSHIP", "UK3CB_TKA_B_Mi8AMTSh"]] call _fnc_saveToTemplate;
-["vehiclesHelisAttack", ["UK3CB_TKA_B_Mi_24P", "UK3CB_TKA_B_Mi_24V"]] call _fnc_saveToTemplate;
+["vehiclesHelisLightAttack", ["UK3CB_TKA_O_UH1H_GUNSHIP", "UK3CB_TKA_B_Mi8AMTSh", "UK3CB_TKA_B_Mi_24P"]] call _fnc_saveToTemplate;
+["vehiclesHelisAttack", ["UK3CB_TKA_B_Mi_24V"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["UK3CB_TKA_B_BM21"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
 ["UK3CB_TKA_B_BM21", ["rhs_mag_m21of_1"]]
 ]] call _fnc_saveToTemplate;
 
-["uavsAttack", ["B_UAV_02_dynamicLoadout_F"]] call _fnc_saveToTemplate;
-["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
+["uavsAttack", ["UK3CB_TKA_O_KA137_PKM"]] call _fnc_saveToTemplate;
+["uavsPortable", ["UK3CB_TKA_U_O_Shahed"]] call _fnc_saveToTemplate;
 
 //Config special vehicles
 ["vehiclesMilitiaLightArmed", ["UK3CB_TKA_O_Hilux_Dshkm", "UK3CB_TKA_O_Hilux_Dshkm", "UK3CB_TKA_O_SUV_Armed"]] call _fnc_saveToTemplate;     // Armed UAZs have bridge problems
@@ -208,6 +209,7 @@ _sfLoadoutData set ["slRifles", [
 ["rhs_weap_ak105_zenitco01", "rhs_acc_dtk4short", "rhs_acc_perst3_2dp_h", "rhs_acc_1p29", ["rhs_30Rnd_545x39_7N22_AK"], [], "rhs_acc_grip_ffg2"],
 ["rhs_weap_ak74m_zenitco01", "rhs_acc_dtk4short", "rhs_acc_perst3_2dp_h", "rhs_acc_1p78", ["rhs_30Rnd_545x39_7N22_AK"], [], "rhs_acc_grip_ffg2"],
 ["rhs_weap_ak74m_zenitco01", "rhs_acc_dtk4short", "rhs_acc_perst3_2dp_h", "rhs_acc_1p29", ["rhs_30Rnd_545x39_7N22_AK"], [], "rhs_acc_grip_ffg2"],
+["UK3CB_AK12", "rhs_acc_dtk4short", "rhs_acc_perst1ik_ris", "rhs_acc_1p87", ["UK3CB_AK12_30rnd_Magazine"], [], ""],
 ["rhs_weap_ak103_gp25", "rhs_acc_dtk4screws", "", "rhs_acc_1p78", ["rhs_30Rnd_762x39mm_89"], ["rhs_VOG25", "rhs_VOG25", "rhs_VG40TB", "rhs_VG40OP_white"], ""],
 ["rhs_weap_ak103_gp25", "rhs_acc_dtk4screws", "", "rhs_acc_1p29", ["rhs_30Rnd_762x39mm_89"], ["rhs_VOG25", "rhs_VOG25", "rhs_VG40TB", "rhs_VG40OP_white"], ""],
 ["rhs_weap_ak74m_gp25", "rhs_acc_dtk4short", "", "rhs_acc_1p78", ["rhs_30Rnd_545x39_7N22_AK"], ["rhs_VOG25", "rhs_VOG25", "rhs_VG40TB", "rhs_VG40OP_white"], ""],
@@ -285,6 +287,8 @@ _militaryLoadoutData set ["binoculars", ["Laserdesignator"]];
 _militaryLoadoutData set ["slRifles", [
 ["rhs_weap_ak74n", "rhs_acc_dtk3", "rhs_acc_perst1ik", "rhs_acc_1p29", ["rhs_30Rnd_545x39_7N10_AK"], [], ""],
 ["rhs_weap_ak74n", "rhs_acc_dtk3", "rhs_acc_perst1ik", "rhs_acc_1p78", ["rhs_30Rnd_545x39_7N10_AK"], [], ""],
+["UK3CB_RK62", "rhs_acc_dtkakm", "rhs_acc_perst1ik", "rhs_acc_1p29", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], [], ""],
+["UK3CB_RK62", "rhs_acc_dtk1l", "rhs_acc_perst1ik", "rhs_acc_1p29", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], [], ""],
 ["rhs_weap_akmn", "rhs_acc_dtkakm", "rhs_acc_perst1ik", "rhs_acc_1p29", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], [], ""],
 ["rhs_weap_akmn", "rhs_acc_dtkakm", "rhs_acc_perst1ik", "rhs_acc_1p78", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], [], ""],
 ["rhs_weap_akmn_gp25", "rhs_acc_dtkakm", "", "rhs_acc_1p29", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], ["rhs_VOG25", "rhs_VOG25", "rhs_VOG25P", "rhs_VG40OP_white"], ""],
@@ -295,6 +299,8 @@ _militaryLoadoutData set ["slRifles", [
 _militaryLoadoutData set ["rifles", [
 ["rhs_weap_akmn", "rhs_acc_dtkakm", "rhs_acc_perst1ik", "rhs_acc_pkas", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], [], ""],
 ["rhs_weap_akmn", "rhs_acc_dtkakm", "rhs_acc_perst1ik", "rhs_acc_1p63", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], [], ""],
+["UK3CB_AEK971", "", "rhs_acc_perst1ik", "rhs_acc_nita", ["UK3CB_AEK971_30rnd_Magazine", "UK3CB_AK12_30rnd_Magazine_R"], [], ""],
+["UK3CB_AEK971", "rhs_acc_dtk2", "rhs_acc_perst1ik", "", ["UK3CB_AEK971_30rnd_Magazine", "UK3CB_AK12_30rnd_Magazine_R"], [], ""],
 ["rhs_weap_ak74n", "rhs_acc_dtk3", "rhs_acc_perst1ik", "rhs_acc_pkas", ["rhs_30Rnd_545x39_7N10_AK"], [], ""],
 ["rhs_weap_ak74n", "rhs_acc_dtk3", "rhs_acc_perst1ik", "rhs_acc_1p63", ["rhs_30Rnd_545x39_7N10_AK"], [], ""]
 ]];
@@ -334,7 +340,8 @@ _policeLoadoutData set ["helmets", ["UK3CB_TKP_B_H_Patrolcap_TAN"]];
 
 _policeLoadoutData set ["antiInfantryGrenades", ["rhs_mag_fakel", "rhs_mag_fakels", "rhs_mag_plamyam"]];
 _policeLoadoutData set ["rifles", [
-["rhs_weap_ak103_1", "rhs_acc_dtk", "", "", ["rhs_10Rnd_762x39mm"], [], ""]
+["rhs_weap_ak103_1", "rhs_acc_dtk", "", "", ["rhs_10Rnd_762x39mm"], [], ""],
+["uk3cb_saiga12k", "", "", "",["uk3cb_saiga_10rnd_12g_buckshot_magazine", "uk3cb_saiga_10rnd_12g_slug_magazine"], [], ""]
 ]];
 _policeLoadoutData set ["SMGs", ["uk3cb_port_said_m45"]];
 _policeLoadoutData set ["sidearms", [
