@@ -45,35 +45,62 @@ private _vehNodes = [HR_GRG_previewVeh] call A3A_Logistics_fnc_getVehicleNodes;
 private _vehModel = getText (configFile >> "CfgVehicles" >> typeOf HR_GRG_previewVeh >> "model");
 if (_vehNodes isEqualType []) then {
     private _capacity = count _vehNodes;
+    private _allCategories = [0, 1, 2, 5, 6, 7];
+
     {
-        _y params ["_displayName", "_staticClass", "_lockedUID", "_checkedOut"];
+        private _categoryID = _x;
+        private _categoryData = HR_GRG_Vehicles param [_categoryID, createHashMap];
 
-        private _block =false;
-        if !(_lockedUID in ["", HR_GRG_PlayerUID]) then {_block = true};
-        if !(_checkedOut in ["", HR_GRG_PlayerUID]) then {_block = true};
-        if !(isClass (configFile >> "CfgVehicles" >> _class)) then {_block = true};
-        private _cargoCfg = [_staticClass] call A3A_Logistics_fnc_getCargoConfig;
+        if (typeName _categoryData == "HASHMAP" && count _categoryData > 0) then {
+            {
+                private _vehicleID = _x;
+                private _vehicleData = _categoryData get _vehicleID;
 
-        //check if its loadable
-        private _size = getNumber (_cargoCfg/"size");
+                if (typeName _vehicleData == "ARRAY" && count _vehicleData >= 4) then {
+                    private _displayName = _vehicleData param [0, ""];
+                    private _class = _vehicleData param [1, ""];
+                    private _lockedUID = _vehicleData param [2, ""];
+                    private _checkedOut = _vehicleData param [3, ""];
 
-        //is weapon allowed
-        private _blackList = getArray (_cargoCfg/"blackList");
-        private _allowed = (
-            !(_vehModel in _blackList || typeOf HR_GRG_previewVeh in _blackList) //vehicle not in cargos blacklist
-            && {getNumber (_nodeCfg/"canLoadWeapon") > 0}// if cargo is weapon check that its allowed
-        );
+                    if (_class != "") then {
+                        private _block = false;
+                        if !(_lockedUID in ["", HR_GRG_PlayerUID]) then {_block = true};
+                        if !(_checkedOut in ["", HR_GRG_PlayerUID]) then {_block = true};
+                        if !(isClass (configFile >> "CfgVehicles" >> _class)) then {_block = true};
 
-        //add entry
-        if ( (_allowed) && (_size != -1) && (_capacity >= _size) && !_block) then { //static is loadable and vehicle can fit it
-            private _index = _ctrlExtraMounts lbAdd _displayName;
-            _ctrlExtraMounts lbSetData [_index, _staticClass];
-            _ctrlExtraMounts lbSetValue [_index, _x];
-            _ctrlExtraMounts lbsetpicture [_index,checkboxTextures select (_checkedOut isEqualTo HR_GRG_PlayerUID)];
-            _ctrlExtraMounts lbSetTextRight [_index, format ["Size: %1", _size]];
-            Trace_4("Mount Added to list | Class: %1 | UID: %2 | Checked: %3 | Size: %4", _staticClass, _x, (_checkedOut isEqualTo HR_GRG_PlayerUID), _type);
+                        if (!_block) then {
+                            private _cargoCfg = [_class] call A3A_Logistics_fnc_getCargoConfig;
+
+                            if (!isNull _cargoCfg) then {
+                                private _size = getNumber (_cargoCfg/"size");
+                                private _blackList = getArray (_cargoCfg/"blackList");
+
+                                private _canLoadWeapon = 0;
+                                if (!isNil "_nodeCfg") then {
+                                    _canLoadWeapon = getNumber (_nodeCfg/"canLoadWeapon");
+                                };
+
+                                private _allowed = (
+                                    !(_vehModel in _blackList || typeOf HR_GRG_previewVeh in _blackList)
+                                    && {_canLoadWeapon > 0}
+                                );
+
+                                //add entry
+                                if ( (_allowed) && (_size != -1) && (_capacity >= _size) && !_block) then {
+                                    private _index = _ctrlExtraMounts lbAdd _displayName;
+                                    _ctrlExtraMounts lbSetData [_index, _class];
+                                    _ctrlExtraMounts lbSetValue [_index, _vehicleID];
+                                    _ctrlExtraMounts lbsetpicture [_index, checkboxTextures select (_checkedOut isEqualTo HR_GRG_PlayerUID)];
+                                    _ctrlExtraMounts lbSetTextRight [_index, format ["Size: %1", _size]];
+                                    Trace_4("Mount Added to list | Class: %1 | UID: %2 | Checked: %3 | Size: %4", _class, _vehicleID, (_checkedOut isEqualTo HR_GRG_PlayerUID), _type);
+                                };
+                            };
+                        };
+                    };
+                };
+            } forEach keys _categoryData;
         };
-    } forEach (HR_GRG_Vehicles#HR_GRG_STATICINDEX);//statics
+    } forEach _allCategories;
     lbSort _ctrlExtraMounts;
 };
 if (_reloadMounts) then { [] call HR_GRG_fnc_reloadMounts };

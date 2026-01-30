@@ -115,8 +115,18 @@ if (_cat < 0) exitWith { ["STR_HR_GRG_Feedback_addVehicle_GenericFail"] remoteEx
 private _capacity = 0;
 { _capacity = _capacity + count _x } forEach HR_GRG_Vehicles;
 
-private _countStatics = {_x isKindOf "StaticWeapon"} count (attachedObjects _vehicle);
-if ((call HR_GRG_VehCap - _capacity) < (_countStatics + 1)) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Capacity"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };//HR_GRG_VehCap is defined in config.inc
+// Count all attachedObjects that can be added to the garage
+private _countMounts = {
+    private _obj = _x;
+    // Skip utility items
+    if (_obj getVariable ['A3A_canGarage', false]) exitWith { false };
+    // Check the category
+    private _objCat = [typeOf _obj] call HR_GRG_fnc_getCatIndex;
+    // If the category is valid (>=0) and the object is not blacklisted (cat != -2
+    (_objCat >= 0)
+} count attachedObjects _vehicle;
+
+if ((call HR_GRG_VehCap - _capacity) < (_countMounts + 1)) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Capacity"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };//HR_GRG_VehCap is defined in config.inc
 
 //Block air garage outside of airbase
 if (
@@ -202,10 +212,21 @@ private _catsRequiringUpdate = [];
     [_x, _vehicle] call ace_cargo_fnc_unloadItem;
 } forEach (_vehicle getVariable ["ace_cargo_loaded", []]);
 
-// Can only deal correctly with static weapons here. Drop everything else where it is.
+// Function to check if an object can be added to the garage
+private _fnc_canAddToGarage = {
+    params ["_obj"];
+    // Skip utility items (they are processed separately)
+    if (_obj getVariable ['A3A_canGarage', false]) exitWith { false };
+    // Check the category
+    private _cat = [typeOf _obj] call HR_GRG_fnc_getCatIndex;
+    // If the category is valid (>=0) and not blacklisted (cat != -2)
+    (_cat >= 0)
+};
+
+// Process all attachedObjects that can be added to the garage
 {
     detach _x;
-    if (_x isKindOf "StaticWeapon") then { _x call _addVehicle };
+    if ([_x] call _fnc_canAddToGarage) then { _x call _addVehicle };
 } forEach attachedObjects _vehicle;
 _vehicle call _addVehicle;
 

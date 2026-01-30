@@ -31,8 +31,18 @@ Trace_4("Finding available mount | UID: %1 | Vehicle ID: %2 | Reserving: %3 | Cl
 private _failed = { ["STR_HR_GRG_Feedback_requestMount_Denied"] remoteExec ["HR_GRG_fnc_Hint", _owner]; [true] remoteExecCall ["HR_GRG_fnc_toggleConfirmBttn", _owner]; false };
 if (!isServer) exitWith _failed;
 
-private _cat = HR_GRG_vehicles#HR_GRG_STATICINDEX;
-private _mount = _cat get _vehUID;
+private _mount = nil;
+private _foundCategory = nil
+
+{
+    if (_vehUID in keys _x) then {
+        _mount = _x get _vehUID;
+        _foundCategory = _x;
+    };
+} forEach HR_GRG_Vehicles;
+
+if (isNil "_mount") exitWith _failed;
+
 private _CheckedUID = ["",_UID] select (_newIconIndex isEqualTo 1);
 
 //block checkout condition

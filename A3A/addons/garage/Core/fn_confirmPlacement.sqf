@@ -32,7 +32,7 @@ params [
     , ["_callBackPlace", {}]
     , ["_callBackCheck", {[false]}]
     , ["_callBackArgs", []]
-    , ["_mounts", [], [[]]]
+    , ["_mounts", [], [[]]]  // Now it contains: [class, UID, state, customisation]
     , ["_pylons", [], [[]]]
     , "_state"
     , ["_extraText", "", [""]]
@@ -104,8 +104,18 @@ HR_GRG_placeDistance = [25, 150] select (_vehicleType in (HR_GRG_BLOCKAIRINDEX +
 [HR_GRG_dispVehicle, HR_GRG_curTexture, HR_GRG_curAnims] call BIS_fnc_initVehicle;
 HR_GRG_dispMounts = [];
 {
-    private _static = (_x#0) createVehicleLocal HR_GRG_pos;
-    [_static, _x#2] call HR_GRG_fnc_setState;
+    _x params ["_mountClass", "_mountUID", "_mountState", "_mountCustomisation"];
+    
+    private _static = _mountClass createVehicleLocal HR_GRG_pos;
+    
+    if (count _mountState > 0) then {
+        [_static, _mountState] call HR_GRG_fnc_setState;
+    };
+    
+    if (count _mountCustomisation > 0) then {
+        ([_static] + _mountCustomisation) call BIS_fnc_initVehicle;
+    };
+    
     _static enableSimulation false;
     _static allowDamage false;
 
@@ -286,8 +296,18 @@ HR_GRG_EH_keyDown = findDisplay 46 displayAddEventHandler ["KeyDown", {
 
         //create and load cargo
         {
-            private _static = (_x#0) createVehicle _pos;
-            [_static, _x#2] call HR_GRG_fnc_setState;
+            _x params ["_mountClass", "_mountUID", "_mountState", "_mountCustomisation"];
+
+            private _static = _mountClass createVehicle _pos;
+
+            if (count _mountState > 0) then {
+                [_static, _mountState] call HR_GRG_fnc_setState;
+            };
+
+            if (count _mountCustomisation > 0) then {
+                ([_static] + _mountCustomisation) call BIS_fnc_initVehicle;
+            };
+
             _static allowDamage false;
             private _nodes = [_veh, _static] call A3A_Logistics_fnc_canLoad;
             if (_nodes isEqualType 0) exitWith {};

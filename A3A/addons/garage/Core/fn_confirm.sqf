@@ -48,7 +48,7 @@ HR_GRG_Mounts = HR_GRG_Mounts apply {
             _mountData = _category get _mountUID;
             _mountCategoryID = _categoryIndex;
         };
-    } forEach [0, 1, 2, 3, 4, 5, 6, 7];
+    } forEach [0, 1, 2, 5, 6, 7];
     
     if (isNil "_mountData") then {
         [_mountClass, _mountUID, [], []];
