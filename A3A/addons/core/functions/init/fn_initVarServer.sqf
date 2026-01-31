@@ -542,7 +542,7 @@ A3A_validVehicles = createHashMap;
 	_valid set ["staticMortar", _x get "staticMortars"];
 
 	_valid set ["vehicleAA", _x get "vehiclesAA"];
-	_valid set ["vehicleSAM", ["B_SAM_System_03_F", "O_SAM_System_04_F"]];		// temp
+	_valid set ["vehicleSAM", _x get "vehiclesSAM"];
 	_valid set ["vehicleArty", _x get "vehiclesArtillery"];
 	_valid set ["vehiclePolice", _x get "vehiclesPolice"];
 	_valid set ["vehicleTruck", (_x get "vehiclesTrucks") + (_x get "vehiclesCargoTrucks") + (_x get "vehiclesAmmoTrucks")

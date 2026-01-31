@@ -89,8 +89,27 @@ if !(_garrisonType in ["hq", "city", "roadblock", "camp", "rebpost"]) then
 // Spawn everything else now so that statics etc don't get spawn-blocked
 private _storedTroops = +(_garrisonData get "troops");
 
+// Subtract units spawned as vehAction crews
+if (_side != teamPlayer) then {
+    private _countSpawned = 0;
+    {
+        _countSpawned = _countSpawned + ({alive _x} count units (_x#2));
+    } forEach (_garrison get "vehActions");
+    _storedTroops set [0, 0 max ((_storedTroops#0) - _countSpawned)];
+};
+
 // Spawn vehicles (including statics)
 [_garrison, _marker, _side, _storedTroops, _garrisonData get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
+
+// Spawn a radar system if there's an AA launcher in the garrison
+if (_side != teamPlayer and _garrisonType == "airport") then {
+    private _factionSAMs = _faction get "vehiclesSAM";
+    if (_factionSAMs isEqualTo [] or _faction get "vehiclesRadar" isEqualTo []) exitWith {};
+    if (_garrisonData get "vehicles" findIf { _x#0 in _factionSAMs } == -1) exitWith {};
+    private _radarPos = [_flagPos, 150, 20] call A3A_fnc_findArtilleryPos;
+    private _radar = createVehicle [selectRandom (_faction get "vehiclesRadar"), _radarPos, [], 0, "NONE"];
+    _garrison get "vehicles" pushBack _radar;
+};
 
 // If there's a police station, spawn items & troops
 if (_garrisonData getOrDefault ["policeStation", false] isEqualType []) then {
