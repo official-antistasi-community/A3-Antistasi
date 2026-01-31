@@ -26,12 +26,13 @@ if (sidesX getVariable _marker == teamPlayer) exitWith {
 
 private _garrison = A3A_garrison get _marker;
 private _vehID = _garrison get "nextVehID";
-(_garrison get "vehicles") pushBack [_vehClass, _slotNum, nil, _vehID];
+private _vehEntry = [_vehClass, _slotNum, nil, _vehID];
+(_garrison get "vehicles") pushBack _vehEntry;
 _garrison set ["nextVehID", _vehID+1];
 
 // Add to garrison support vehicles
 if (_vehClass in A3A_supportVehTypes) then {
-    (_garrison get "supportVehicles") set [_vehID, ["ready", A3A_supportVehTypes get _vehClass]];
+    (_garrison get "supportVehicles") set [_vehID, ["ready", A3A_supportVehTypes get _vehClass, _vehEntry]];
 };
 
 // Add to active garrison if spawned

@@ -47,7 +47,8 @@ _vehicle setVariable ["markerX", nil, true];
 _garrison get "supportVehicles" deleteAt _vehID;            // Remove from support vehicles array, if it's in there
 
 // Recalculate HQ building reveal value
-if (_arrayType == "buildings" && (_marker == "Synd_HQ")) then {call A3A_fnc_calcBuildingReveal};
+// exitWith because HQ buildings are managed on the server side
+if (_arrayType == "buildings" && (_marker == "Synd_HQ")) exitWith {call A3A_fnc_calcBuildingReveal};
 
 // No local updates for civ as they don't need to manage anything atm
 if ("_civ" in _marker) exitWith {};

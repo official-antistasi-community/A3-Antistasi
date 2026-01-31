@@ -89,7 +89,7 @@ private _vehicles = _garrison get "vehicles";
         // Arguably should refund this case if it's not a save?
         _x set [0, [_faction, _slotType, _isAirport] call A3A_fnc_selectGarrisonVehicleType];
         if (_x#0 in A3A_supportVehTypes) then {
-            (_garrison get "supportVehicles") set [_vehID, ["ready", A3A_supportVehTypes get _x#0]];
+            (_garrison get "supportVehicles") set [_vehID, ["ready", A3A_supportVehTypes get _x#0, _x]];
         } else {
             (_garrison get "supportVehicles") deleteAt _vehID;
         };

@@ -349,6 +349,8 @@ class CfgFunctions
             class spawnGarrisonSquads {};
             class spawnGarrisonVehicles {};
             class spawnPoliceStation {};
+            class vehActionArty {};
+            class vehActionSAM {};
         };
 
         class GarrisonServer {
@@ -729,7 +731,6 @@ class CfgFunctions
             class SUP_gunshipSpawn {};
             class SUP_mortar {};
             class SUP_mortarAvailable {};
-            class SUP_mortarRoutine {};
             class SUP_orbitalStrike {};
             class SUP_orbitalStrikeAvailable {};
             class SUP_orbitalStrikeImpactEffects {};
@@ -742,7 +743,6 @@ class CfgFunctions
             class SUP_QRFRoutine {};
             class SUP_SAM {};
             class SUP_SAMAvailable {};
-            class SUP_SAMRoutine {};
             class SUP_tank {};
             class SUP_tankAvailable {};
             class SUP_tankRoutine {};

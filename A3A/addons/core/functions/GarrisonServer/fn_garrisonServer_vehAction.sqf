@@ -6,7 +6,7 @@
     Arguments:
     <STRING> Marker name of garrison. Empty string to autodetect from vehicle position.
     <NUMBER> Vehicle ID to spawn.
-    <OBJECT or POSITION> Target to pass through to vehicle action.
+    <ARRAY> Arbitrary data to pass through to the vehicle action.
 
     Returns bool, true if successful
 
@@ -17,7 +17,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker", "_vehID", "_target"];
+params ["_marker", "_vehID", "_actionData"];
 
 Trace_1("Called with params %1", _this);
 
@@ -53,6 +53,6 @@ if !(_marker in A3A_garrisonMachine) then {
 private _vehicles = _garrison get "vehicles";
 private _vehData = _vehicles select (_vehicles findIf { _x#3 == _vehID });
 private _side = sidesX getVariable _marker;
-["vehAction", [_marker, _vehData, _side, _target]] call A3A_fnc_garrisonOp;
+["vehAction", [_marker, _vehData, _side, _actionData]] call A3A_fnc_garrisonOp;
 
 true;

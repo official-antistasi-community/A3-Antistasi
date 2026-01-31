@@ -8,7 +8,7 @@
     <STRING> Marker name.
     <ARRAY> Vehicle data: [_class, _placement, _state, _idNum] from server garrison
     <SIDE> Garrison side (needed if garrison isn't spawned)
-    <TARGET> Position or object for vehicle to attack
+    <ARRAY> Arbitrary array of action-specific data
 
     Copyright 2025 John Jordan. All Rights Reserved.
     Used and distributed by the Antistasi Community project with permission.
@@ -19,7 +19,7 @@ FIX_LINE_NUMBERS()
 
 Trace_1("Called with %1", _this);
 
-params ["_marker", "_vehData", "_side", "_target"];
+params ["_marker", "_vehData", "_side", "_actionData"];
 _vehData params ["_class", "_posData", "_state", "_vehID"];
 
 // If there's no active garrison data (unspawned garrison) then set it up
@@ -87,26 +87,22 @@ if (_garrison get "state" == "paused") then {
 private _vehType = A3A_supportVehTypes getOrDefault [typeOf _vehicle, "none"];
 Trace_1("Running vehicle action %1", _vehType);
 
-// Temporary test payload
-[_marker, _vehID] spawn {
-    sleep 30;
-    A3A_garrisonOps pushBack ["vehActionEnd", _this];
-};
-
-/*
 switch (_vehType) do {
-    case "staticMortars";
+    case "staticMortars": {
+        [_marker, _vehID, _vehicle, _actionData, false] spawn A3A_fnc_vehActionArty;
+    };
     case "vehiclesArtillery": {
-        // cut-down support artillery routine
+        [_marker, _vehID, _vehicle, _actionData, true] spawn A3A_fnc_vehActionArty;
     };
     case "vehiclesSAM": {
-        // cut-down support SAM routine
+        [_marker, _vehID, _vehicle, _actionData] spawn A3A_fnc_vehActionSAM;
     };
     case "none";
     case "vehiclesAA": {
-        // Reveal target and then despawn after X time?
+        // Temporary test payload
+        [_marker, _vehID] spawn {
+            sleep 30;
+            A3A_garrisonOps pushBack ["vehActionEnd", _this];
+        };
     };
 };
-*/
-
-

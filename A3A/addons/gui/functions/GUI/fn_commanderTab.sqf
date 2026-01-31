@@ -511,7 +511,7 @@ switch (_mode) do
                 private _existingCount = _shellCounts getOrDefault [_type,0];
                 _shellCounts set [_type, _currentCount + _existingCount];
             } forEach magazinesAmmo _veh;
-            private _dict = [typeOf _veh] call A3A_fnc_getMortarMags;
+            private _dict = [typeOf _veh] call A3A_fnc_getMortarMags select 0;
             {_artyDictionary set [_x,_y];} forEach _dict; // automatically covers repeats
             _mortarObjs pushBackUnique _veh;
             // [["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_shells",8],["8Rnd_82mm_Mo_Flare_white",8],["8Rnd_82mm_Mo_Smoke_white",8]]

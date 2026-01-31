@@ -43,12 +43,13 @@ if (_arrayType == "buildings") then {
     // Need a global(ish) ID for this vehicle
     _vehID = _garrison get "nextVehID";
     _vehicle setVariable ["A3A_vehID", _vehID];
-    (_garrison get "vehicles") pushBack [typeof _vehicle, [getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle], nil, _vehID];
+    private _vehEntry = [typeof _vehicle, [getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle], nil, _vehID];
+    (_garrison get "vehicles") pushBack _vehEntry;
     _garrison set ["nextVehID", _vehID+1];
 
     // Add to garrison support vehicles
     if (typeOf _vehicle in A3A_supportVehTypes) then {
-        (_garrison get "supportVehicles") set [_vehID, ["ready", A3A_supportVehTypes get typeOf _vehicle]];
+        (_garrison get "supportVehicles") set [_vehID, ["ready", A3A_supportVehTypes get typeOf _vehicle, _vehEntry]];
     };
 };
 
