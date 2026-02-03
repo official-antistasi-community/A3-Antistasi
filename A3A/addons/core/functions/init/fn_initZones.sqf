@@ -58,38 +58,46 @@ A3A_cityPop = createHashMap;							// city -> base pop, won't change
 !((configName _x) in _disabledTowns)"
 configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 
-	_nameX = getText (_x >> "Name");
-	_sizeX = getNumber (_x >> "radiusA");
-	_sizeY = getNumber (_x >> "radiusB");
-	_size = [_sizeY, _sizeX] select (_sizeX > _sizeY);
-	_pos = getArray (_x >> "position");
-	_size = [_size, 400] select (_size < 400);
-	_numCiv = 0;
+	private _nameX = getText (_x >> "Name");
+	private _pos = getArray (_x >> "position");
 
+	// Recenter to nearest road
+	private _roads = nearestTerrainObjects [_pos, ["MAIN ROAD", "ROAD", "TRACK"], 300, true, true];
+	if (count _roads > 0) then {
+		_pos = _roads select 0;
+	};
+
+	// Automatically find suitable size for city marker
+	// Calculates an approximate base density for town center and then searches for radius where relative density has fallen below threshold
+	private _lastCiv = count nearestObjects [_pos, ["house","ruins"], 150];
+	private _baseCiv = 0.08 * (8 max _lastCiv^0.7);
+	private _size = 150;
+	while {_size < 500} do {
+		private _testSize = _size + 50;
+		private _testCiv = count nearestObjects [_pos, ["house","ruins"], _testSize];
+		private _ratio = (_testCiv - _lastCiv) / (_baseCiv * _testSize^0.7);
+		if (_ratio < 0.33) exitWith { _size = _size + 150*_ratio };
+		_size = _size + 50;
+		_lastCiv = _testCiv;
+	};
+
+	// Search hardcoded pop data for city, or just count houses if missing
+	private _numCiv = 0;
 	if (_hardCodedPop) then
 	{
 		_numCiv = _townPop getOrDefault [_nameX, _townPop get (configName _x)]; //backwards compat to config name based pop defines
 		if (isNil "_numCiv" || {!(_numCiv isEqualType 0)}) then
 		{
             Error_1("Bad population count data for %1", _nameX);
-			_numCiv = (count (nearestObjects [_pos, ["house"], _size]));
+			_numCiv = count nearestObjects [_pos, ["house"], _size];
 		};
 	}
 	else {
-		_numCiv = (count (nearestObjects [_pos, ["house"], _size]));
+		_numCiv = count nearestObjects [_pos, ["house"], _size];
 	};
-
-	// This can be used without hardcoded population
 	_numCiv = ceil (_numCiv * _popMult);
 
-	_roads = nearestTerrainObjects [_pos, ["MAIN ROAD", "ROAD", "TRACK"], _size, true, true];
-	if (count _roads > 0) then {
-		// Move marker position to the nearest road, if any
-		_pos = _roads select 0;
-	};
-	_numVeh = (count _roads) min (_numCiv / 3);
-
-	_mrk = createmarkerLocal [format ["%1", _nameX], _pos];
+	private _mrk = createmarkerLocal [format ["%1", _nameX], _pos];
 	_mrk setMarkerSizeLocal [_size, _size];
 	_mrk setMarkerShapeLocal "ELLIPSE";
 	_mrk setMarkerBrushLocal "SOLID";
@@ -104,7 +112,7 @@ configClasses (configfile >> "CfgWorlds" >> worldName >> "Names") apply {
 	A3A_cityData setVariable [_nameX, _info, true];
 	A3A_cityPop set [_nameX, _numCiv];
 
-};	//find in congigs faster then find location in 25000 radius
+};
 
 markersX = markersX + citiesX;
 
