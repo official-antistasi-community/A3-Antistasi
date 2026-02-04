@@ -107,7 +107,7 @@ if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balanceP
     if (_curTroops < (A3A_garrisonSize get _marker) * 0.8) then { continue };
 
     private _siteType = _garrison get "type";
-    private _newQuality = [_siteType, _side, 0.2] call A3A_fnc_getSiteTroopQuality;
+    private _newQuality = [_siteType, _marker, _side] call A3A_fnc_getSiteTroopQuality;
     Debug_3("Adjusting troop quality from %1 to %2 at %3", _quality, _newQuality, _marker);
     _garrison get "troops" set [1, _newQuality * 0.2 + _quality * 0.8];
 

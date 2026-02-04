@@ -67,7 +67,6 @@ class CfgFunctions
             class undercoverAI {};
             class unitGetToCover {};
             class useFlares {};
-            class VANTinfo {};
             class vehicleConvoyHeliTravel{};
             class vehicleConvoyTravel {};
             class vehicleMarkers {};
@@ -250,6 +249,7 @@ class CfgFunctions
             class createVehicleCrew {};
             class createVehicleQRFBehaviour {};
             class crewTypeForVehicle {};
+            class enemyCityAttack {};
             class FIAinitBases {};
             class fillVehicleCrewCargo {};
             class garrisonSize {};
@@ -394,6 +394,7 @@ class CfgFunctions
             class checkCampaignEnd {};
             class clientIdleChecker {};
             class credits {};
+            class getMarkerPrefix {};
             class initACE {};
             class initACEUnconsciousHandler {};
             class initBases {};
@@ -473,20 +474,18 @@ class CfgFunctions
             class AS_specOP {};
             class AS_Traitor {};
             class CON_Outpost {};
-            class CON_PoliceStation {};
             class convoy {};
             class DES_Antenna {};
             class DES_Heli {};
             class DES_Vehicle {};
-            class GSMission {};
+            class LOG_Gunshop {};
             class LOG_Ammo {};
             class LOG_Bank {};
-            class LOG_Supplies {};
             class LOG_Salvage {};
-            class missionRequest {};
             class REP_Antenna {};
             class RES_Prisoners {};
             class RES_Refugees {};
+            class SUP_PoliceStation {};
             class supplyDrop {};
             class taskDelete {};
             class taskSetState {};

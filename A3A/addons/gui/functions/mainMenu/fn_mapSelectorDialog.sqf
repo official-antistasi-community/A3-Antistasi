@@ -201,12 +201,13 @@ switch (_mode) do
 	};
 	case ("startSPGame"):
 	{
-		_params params ["_map"];
+		_map = _mapLB lbData lbCurSel _mapLB;
 		_display closeDisplay 0;
 		playMission ["", (configFile >> "CfgMissions" >> "MPMissions" >> format ["Antistasi_%1", _map])];
 	};
 	case ("startMPGame"):
 	{
+		_map = _mapLB lbData lbCurSel _mapLB;
 		_params params ["_map"];
 		hostMission [configFile >> "CfgMissions" >> "MPMissions" >> format ["Antistasi_%1", _map], _display];
 	};

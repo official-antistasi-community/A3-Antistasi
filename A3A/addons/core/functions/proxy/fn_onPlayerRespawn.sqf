@@ -53,15 +53,13 @@ _newUnit addOwnedMine _x;
 	};
 } forEach (units group player);
 
-
-// don't reinit revive because damage handlers are respawn-persistent
-//if (!A3A_hasACEMedical) then {[_newUnit] call A3A_fnc_initRevive};
 disableUserInput false;
 //_newUnit enableSimulation true;
 if (_oldUnit == theBoss) then
 	{
 	[_newUnit, true] remoteExec ["A3A_fnc_theBossTransfer", 2];
 	};
+ 
 //Give them a map, in case they're commander and need to replace petros.
 _newUnit setUnitLoadout [[],[],[],[selectRandom ((A3A_faction_civ get "uniforms") + (A3A_faction_reb get "uniforms")), []],[],[],[],"",[],
 [(selectRandom unlockedmaps),"","",(selectRandom unlockedCompasses),(selectRandom unlockedwatches),""]];
@@ -77,12 +75,6 @@ call A3A_fnc_installClientEH;
 // The body deletion bug persists there as well.
 
 if (isServer) then {
-	if !(isMultiplayer) then {
-		private _module = allCurators#0;
-		unassignCurator _module;
-		_newUnit assignCurator _module;
-		call A3A_fnc_newPlayerSetup;
-	};
 	_oldUnit addEventHandler ["Deleted", {
 		[] spawn {
 			sleep 1;		// should ensure that the bug unassigns first

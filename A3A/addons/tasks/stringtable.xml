@@ -1,7 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="A3-Antistasi">
-  <Package name="A3-Antistasi Mission">
-    <Container name="Legacy tasks">
+  <Package name="A3-Antistasi Tasks">
+    <Container name="TaskRequest">
+      <Key ID="STR_A3A_Tasks_requestTask_addMission">
+        <Original>I have a mission for you, check the task menu for details.</Original>
+        <Korean>할 임무가 있습니다. 자세한 내용은 임무 메뉴를 확인하십시오.</Korean>
+        <Russian>У меня есть для вас задание, подробности смотрите в меню задач.</Russian>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_existing">
+        <Original>I already gave you that type of mission, check your task menu.</Original>
+        <Korean>이미 해당 유형의 임무를 주었습니다. 임무 메뉴를 확인하십시오.</Korean>
+        <Russian>Я уже давал вам задания такого типа, проверьте свое меню задач.</Russian>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_no_AS">
+        <Original>I have no assassination missions for you.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_no_CON">
+        <Original>I have no Conquest missions for you.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_no_CONVOY">
+        <Original>I have no Convoy missions for you.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_no_DES">
+        <Original>I have no Destroy missions for you.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_no_LOG">
+        <Original>I have no Logistics missions for you.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_no_SUPP">
+        <Original>I have no Support missions for you.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_no_RES">
+        <Original>I have no Rescue missions for you.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_noHint_AS">
+        <Original>Assassination missions require enemy cities, airbases, or SF-patrolled areas within 4km of HQ.</Original>
+        <Korean>암살 임무에는 본부로부터 4km 이내의 도시, 공군 기지 또는 특수부대 순찰 구역이 필요합니다.</Korean>
+        <Russian>Миссии по уничтожению требуют наличия городов, авиабаз или патрулируемых районов в радиусе 4 км от штаба.</Russian>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_noHint_CON">
+        <Original>Conquest missions require outposts, roadblocks, or resource markers within 4km of HQ.</Original>
+        <Korean>점령 임무는 본부로부터 4km 이내에 전초기지, 검문소 또는 자원채취소가 필요합니다.</Korean>
+        <Russian>Для миссий по захвату требуются аванпосты, блокпосты или ресурсы в радиусе 4 км от штаба.</Russian>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_noHint_CONVOY">
+        <Original>Convoy missions require two idle bases with a road route near HQ, and no major attacks in progress.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_noHint_DES">
+        <Original>Destroy missions require airbases or enemy radio towers within 4km of HQ.</Original>
+        <Korean>파괴 임무에는 본부로부터 4km 이내에 있는 공군 기지나 적 통신탑이 필요합니다.</Korean>
+        <Russian>Для выполнения миссий по уничтожению требуются авиабазы или радиовышки противника в радиусе 4 км от штаба.</Russian>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_noHint_LOG">
+        <Original>Logistics missions require outposts, seaports, or banks within 4km of HQ.</Original>
+        <Korean>병참 임무에는 본부로부터 4km 이내에 전초기지, 항구 또는 은행이 필요합니다.</Korean>
+        <Russian>Для логистических миссий требуются аванпосты, морские порты или банки в радиусе 4 км от штаба.</Russian>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_noHint_RES">
+        <Original>Rescue missions are random, but you need cities or outposts within 4km of HQ.</Original>
+        <Korean>구출 임무는 무작위이지만 본부로부터 4km 이내에 도시나 전초기지가 필요합니다.</Korean>
+        <Russian>Спасательные миссии проводятся случайным образом, но вам нужны города или аванпосты в радиусе 4 км от штаба</Russian>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_noHint_SUPP">
+        <Original>Support missions require cities within 4km of HQ.</Original>
+        <Korean>지원 임무에는 본부로부터 4km 이내에 도시가 필요합니다.</Korean>
+        <Russian>Для миссий поддержки требуются города в радиусе 4 км от штаба.</Russian>
+      </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_title">
+        <Original>Missions</Original>
+        <French>Missions</French>
+        <Korean>임무</Korean>
+        <Russian>Миссии</Russian>
+      </Key>
+    </Container>
+    <Container name="Tasks">
       <Key ID="STR_antistasi_LTasks_AS_official_title">
         <Original>Kill the Officer</Original>
       </Key>

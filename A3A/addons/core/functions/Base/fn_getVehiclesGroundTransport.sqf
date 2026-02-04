@@ -10,6 +10,8 @@ Return value:
     <ARRAY> [vehType, weight, vehType2, weight2, ...]
 */
 params ["_side", "_level"];
+
+if (_side == Invaders) then {_level = _level + 1};
 _level = (_level max 1 min 10) - 1;
 private _faction = [A3A_faction_occ, A3A_faction_inv] select (_side == Invaders);
 
@@ -45,13 +47,9 @@ if (_faction get "vehiclesAPCs" isEqualTo []) then {
     _lapcWeight = _lapcWeight + _apcWeight;
 };
 
-// only occupants use militia vehicle types?
-if (_side == Occupants) then
-{
-    [_faction get "vehiclesPolice", _policeWeight] call _fnc_addArrayToWeights;
-    [_faction get "vehiclesMilitiaCars", _milCarWeight] call _fnc_addArrayToWeights;
-    [_faction get "vehiclesMilitiaTrucks", _milTruckWeight] call _fnc_addArrayToWeights;
-};
+[_faction get "vehiclesPolice", _policeWeight] call _fnc_addArrayToWeights;
+[_faction get "vehiclesMilitiaCars", _milCarWeight] call _fnc_addArrayToWeights;
+[_faction get "vehiclesMilitiaTrucks", _milTruckWeight] call _fnc_addArrayToWeights;
 [_faction get "vehiclesLightUnarmed", _carWeight] call _fnc_addArrayToWeights;
 [_faction get "vehiclesLightArmedTroop", _armedCarWeight] call _fnc_addArrayToWeights;
 [_faction get "vehiclesTrucks", _truckWeight] call _fnc_addArrayToWeights;

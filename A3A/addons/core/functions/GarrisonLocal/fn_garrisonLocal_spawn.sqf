@@ -62,10 +62,17 @@ if !(_garrisonType == "hq") then {
 };
 
 
+// If a flag marker is provided, use that for flag & ammobox
+private _flagPos = _markerPos;
+if (_garrisonType in A3A_markerPrefixHM) then {
+    private _flagMarker = (_marker call A3A_fnc_getMarkerPrefix) + "flag";
+    if (markerShape _flagMarker != "") then { _flagPos = markerPos _flagMarker };
+};
+
 // Spawn flagpole
 if !(_garrisonType in ["hq", "city", "roadblock", "camp", "rebpost"]) then
 {
-    private _flag = createVehicle [_faction get "flag", _markerPos, [], 0, "NONE"];
+    private _flag = createVehicle [_faction get "flag", _flagPos, [], 0, "NONE"];
     _flag setFlagTexture (_faction get "flagTexture");
     _flag allowDamage false;
     _garrison set ["flag", _flag];
@@ -74,8 +81,9 @@ if !(_garrisonType in ["hq", "city", "roadblock", "camp", "rebpost"]) then
 };
 
 
-// Spawn everything else now so that statics etc don't get spawn-blocked
 private _storedTroops = +(_garrisonData get "troops");
+// If it's an enemy roadblock or camp then don't mix the troop types
+if (_garrisonType in ["roadblock", "camp"]) then { _storedTroops set [1, round (_storedTroops#1)] };
 
 // Spawn vehicles (including statics)
 [_garrison, _marker, _side, _storedTroops, _garrisonData get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
@@ -111,7 +119,7 @@ if (_side != teamPlayer and _garrisonType in ["airport", "outpost", "seaport"]) 
 
     // Spawn loot crate if it's off cooldown
     if (_garrison getOrDefault ["lootCD", 0] > 0) exitWith {};
-	private _ammoBox = [_faction get "ammobox", _markerPos, 15, 5, true] call A3A_fnc_safeVehicleSpawn;
+	private _ammoBox = [_faction get "ammobox", _flagPos, 10, 5, true] call A3A_fnc_safeVehicleSpawn;
     [_ammoBox, true, _garrison, _marker] call A3A_fnc_setupLootCrate;
 };
 

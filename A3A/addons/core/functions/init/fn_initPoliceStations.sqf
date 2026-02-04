@@ -63,8 +63,9 @@ A3A_policeStations = createHashMap;
         _stationPos = getPosATL selectRandom _buildings;
         _garrison set ["policeStation", _stationPos];         // only need one entry? Hmm. LootCD & intelCD go elsewhere.
 
-        if (sidesX getVariable _city == Occupants) then {
-            private _carType = selectRandom (A3A_faction_occ get "vehiclesPolice");
+        private _citySide = sidesX getVariable _city;
+        if (_citySide != teamPlayer) then {
+            private _carType = selectRandom (Faction(_citySide) get "vehiclesPolice");
             _garrison get "vehicles" pushBack [_carType, 0];
         };
     };
