@@ -37,6 +37,7 @@ class CfgFunctions {
             class LOG_Bank_p {};
             class LOG_Gunshop_p {};
             class LOG_Salvage_p {};
+            class LOG_Weapons_p {};
             class RES_Prisoners_p {};
             class RES_Refugees_p {};
             class SUP_PoliceStation_p {};
@@ -50,6 +51,7 @@ class CfgFunctions {
             class city_taxi {};
             class city_repair {};
             class SUP_Supplies {};
+            class LOG_Weapons {};
         };
     };
 };

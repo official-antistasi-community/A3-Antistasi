@@ -833,6 +833,7 @@ class CfgFunctions
             class adminData {};
             class basicBackpack {};
             class boxCollisionCheck {};
+            class checkRoadPlace {};
             class classNameToModel {};
             class countAttachedObjects {};
             class createDataObject {};
