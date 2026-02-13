@@ -154,7 +154,9 @@ _task set ["_boardFnc",
 {
     params ["_truck", "_group", "_troops", "_destMrk"];
 
-    // Standard retreat stuff, except without the setUnitPos
+    // Make new group because orderGetIn breaks if you call it after the leader gets killed
+    private _group = createGroup [side _group, true];
+    _troops select { _x call A3A_fnc_canFight } joinSilent _group;
     {
         _x enableAI "ANIM";
         _x enableAI "PATH";
@@ -162,9 +164,8 @@ _task set ["_boardFnc",
         _x disableAI "TARGET";
         _x setUnitPos "UP";
         _x setVariable ["A3A_forcedStance", "UP"];
-        _x doFollow leader _group;
         _x setVariable ["retreating", true, true];
-    } forEach units _group;
+    } forEach _troops;
     _group setBehaviourStrong "AWARE";
 
     // If truck can move, no enemy and not too far then attempt to board
@@ -172,15 +173,16 @@ _task set ["_boardFnc",
     if (canMove _truck and !(driver _truck call A3A_fnc_canFight) and _truckDist < 100) then {
         _group addVehicle _truck;
         _troops orderGetIn true;
-        sleep (_truckDist/2);
+        sleep (10 + _truckDist/2);
     };
+
+    private _wp = _group addWaypoint [markerPos _destMrk, 50];
+    _group setCurrentWaypoint _wp;
 
     // Whether they're in the vehicle or not, the rest is the same
     [_group] spawn A3A_fnc_groupDespawner;
     [_truck] spawn A3A_fnc_vehDespawner;         // probably already done, but whatever
 
-    private _wp = _group addWaypoint [markerPos _destMrk, 50];
-    _group setCurrentWaypoint _wp;
 }];
 
 
@@ -212,6 +214,9 @@ _task set ["s_waitForRepair",
 
     // If one or more of crew group is down then get out of here
     if (_this get "_crewTroops" findIf { !(_x call A3A_fnc_canFight) } != -1) exitWith {
+        if (canMove _truck) then {
+            [_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Weapons_escape", getPosATL _truck, 300] call FUNC(hintNear);
+        };
         _this set ["state", "s_boardTruck"]; false;
     };
 
@@ -250,16 +255,25 @@ _task set ["s_boardTruck",
 
 _task set ["s_crateWatch",
 {
+    // crate was despawned by truck despawn
     private _crate = _this get "_crate";
+    if (isNull _crate) exitWith {
+        _this set ["state", "s_failed"]; false;
+    };
+
     if (_crate distance2d markerPos "Synd_HQ" < 100) exitWith {
         _this set ["state", "s_succeeded"]; false;
     };
 
-    // crate no longer attached to anything? Despawn & fail if no rebels in range
-    if (isNull attachedTo _crate and units teamPlayer inAreaArray [_crate, 200, 200] isEqualTo []) exitWith {
+    // Prevent the crate despawning if it's been in recent rebel possession
+    private _rebelsNear = units teamPlayer inAreaArray [_crate, 200, 200] isNotEqualTo [];      // shouldn't include corpses?
+    if (_rebelsNear) then { _this set ["_crateTimeout", time + 10*60] };
+
+    if (isNull attachedTo _crate and _this getOrDefault ["_crateTimeout", 0] < time) exitWith {
         deleteVehicle _crate;
         _this set ["state", "s_failed"]; false;
     };
+
     false;
 }];
 
