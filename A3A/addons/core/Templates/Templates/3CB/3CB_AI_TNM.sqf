@@ -33,7 +33,7 @@
 ["vehiclesAPCs", []] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["UK3CB_B_LAV25_HIDF"]] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", []] call _fnc_saveToTemplate;
-["vehiclesTanks", ["UK3CB_B_M60A3_HIDF", "UK3CB_B_M60A1_HIDF", "UK3CB_TNM_B_T55"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["UK3CB_B_M60A1_HIDF", "UK3CB_TNM_B_T55"]] call _fnc_saveToTemplate;
 ["vehiclesHeavyTanks", []] call _fnc_saveToTemplate;             // Just to push up the T-72 probability at higher war levels
 ["vehiclesAA", ["a3a_green_M270_Avenger"]] call _fnc_saveToTemplate;
 
@@ -42,7 +42,7 @@
 ["vehiclesGunBoats", ["UK3CB_TKA_B_RHIB_Gunboat"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["RHSGREF_A29B_HIDF", "UK3CB_B_T28Trojan_HIDF_CAS"]] call _fnc_saveToTemplate;      // "UK3CB_B_Mystere_HIDF_CAS1" -> commented for testing of A29 & T28
+["vehiclesPlanesCAS", ["RHSGREF_A29B_HIDF", "UK3CB_B_T28Trojan_HIDF_CAS"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesAA", ["UK3CB_B_Mystere_HIDF_AA1"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["UK3CB_B_C47_Late_HIDF"]] call _fnc_saveToTemplate;
 

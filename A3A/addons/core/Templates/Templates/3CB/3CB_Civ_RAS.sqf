@@ -6,8 +6,6 @@
 //       Vehicles       //
 //////////////////////////
 
-//TODO: Vehicles, and preferably their spawn chances, need to be added/removed/adjusted depending on the loaded factions. Stopgap fix for RF now.
-
 ["vehiclesCivCar", [
     "UK3CB_C_Ikarus_RED", 0.001                    // bus, dangerously large
     ,"UK3CB_C_Datsun_Closed", 0.01

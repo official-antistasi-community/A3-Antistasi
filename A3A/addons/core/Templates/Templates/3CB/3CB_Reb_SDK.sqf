@@ -21,7 +21,7 @@
 ["vehiclesCivPlane", ["UK3CB_C_Cessna_172"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["UK3CB_FIA_I_LR_Softtop_Ambulance_Open"]] call _fnc_saveToTemplate;
 
-["vehiclesCivCar", ["UK3CB_C_Datsun_Open", "UK3CB_C_Gaz24", "UK3CB_C_Skoda", "UK3CB_C_S1203", "UK3CB_C_MMT"]] call _fnc_saveToTemplate;
+["vehiclesCivCar", ["UK3CB_C_Datsun_Open", "UK3CB_C_Sedan", "UK3CB_C_Skoda", "UK3CB_C_S1203", "UK3CB_C_MMT"]] call _fnc_saveToTemplate;
 ["vehiclesCivTruck", ["UK3CB_C_LandRover_Closed", "UK3CB_C_LandRover_Open", "RHS_Ural_Open_Civ_02", "C_Offroad_02_unarmed_F", "C_Van_01_transport_F", "C_Van_02_transport_F", "C_Van_02_vehicle_F"]] call _fnc_saveToTemplate;
 ["vehiclesCivHeli", ["UK3CB_CHC_I_Mi8AMT"]] call _fnc_saveToTemplate;
 ["vehiclesCivBoat", ["UK3CB_CHC_C_Fishing_Boat", "C_Rubberboat", "rhsgref_civ_canoe"]] call _fnc_saveToTemplate;
@@ -47,7 +47,7 @@
 ///////////////////////////
 
 private _initialRebelEquipment = [
-"rhs_weap_makarov_pm", "rhsusf_weap_m1911a1", "rhs_weap_Izh18",
+"a3a_rhs_weap_pb_6p9_noSup", "rhsusf_weap_m1911a1", "rhs_weap_Izh18",
 ["IEDUrbanSmall_Remote_Mag", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],["rhs_weap_rpg18", 5],
 "rhs_mag_9x18_8_57N181S", "rhsusf_mag_7x45acp_MHP", "rhsgref_1Rnd_00Buck", "rhsgref_1Rnd_Slug", "rhs_mag_f1", "rhs_grenade_mki_mag", "rhs_mag_rdg2_black", "rhs_grenade_m15_mag",
 "B_FieldPack_blk", "B_FieldPack_cbr", "B_FieldPack_green_F", "B_FieldPack_khk", "B_FieldPack_oli",
