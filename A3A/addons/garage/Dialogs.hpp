@@ -338,21 +338,11 @@ class HR_GRG_VehicleSelect
                     colorBackground[] = {0,0,0,1};
                 };
 
-                class HR_GRG_NewSysWarning: HR_GRG_RscText
-                {
-                    idc = HR_GRG_IDC_ExtraPylonsNewSysWarning;
-                    x = 1 * GRID_NOUISCALE_W;
-                    y = 5;
-                    w = 37 * GRID_NOUISCALE_W;
-                    h = 8 * GRID_NOUISCALE_H;
-                    colorBackground[] = {0,0,0,0};
-                };
-
                 class HR_GRG_ExtraPylons: HR_GRG_RscControlsGroup
                 {
                     idc = HR_GRG_IDC_ExtraPylons;
                     x = 0;
-                    y = 10 * GRID_NOUISCALE_H;
+                    y = 4 * GRID_NOUISCALE_H;
                     w = 38 * GRID_NOUISCALE_W;
                     h = safeZoneH - (70 * GRID_NOUISCALE_H); // Screen height - title and buttons height 51
                 };

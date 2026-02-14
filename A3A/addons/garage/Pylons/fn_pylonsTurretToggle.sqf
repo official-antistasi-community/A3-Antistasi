@@ -25,7 +25,6 @@
 #include "defines.inc"
 FIX_LINE_NUMBERS()
 params ["_ctrl", "_switch", "_turret"];
-if (HR_GRG_useNewPylonSys) exitWith {};
 
 if (_switch && !(HR_GRG_Turrets isEqualTo [])) then {
     _turret = [[0], []] select ((_ctrl getVariable "HR_GRG_turret") isEqualTo [0]);

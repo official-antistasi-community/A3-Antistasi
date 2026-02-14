@@ -1,9 +1,11 @@
 /*
-  Main Dialog - aka the Y-menu
+  Vehicle Service Dialog
 */
 
 #include "ids.inc"
 class ctrlStaticPictureKeepAspect;
+
+// NEW BOX SIZE IS 49 x 86
 
 class A3A_VehServiceDialog
 {
@@ -11,8 +13,8 @@ class A3A_VehServiceDialog
     onLoad = "[""onLoad""] spawn A3A_GUI_fnc_vehServiceDialog";
     onUnload = "[""onUnload""] call A3A_GUI_fnc_vehServiceDialog";
 
-    #define DIALOG_W 90
-    #define DIALOG_H 113
+    #define DIALOG_W 104
+    #define DIALOG_H 82
     #define DIALOG_X CENTER_X(DIALOG_W) // Global x pos of dialog
     #define DIALOG_Y CENTER_Y(DIALOG_H) // Global y pos of dialog
 
@@ -29,11 +31,11 @@ class A3A_VehServiceDialog
         {
             idc = A3A_IDC_VEHSERVICE_PYLONPICTURE;
             text = "";
-            onLoad = "_this#0 ctrlEnable false";
-            x = DIALOG_X + 2 * GRID_W;
+            onLoad = "(_this#0) ctrlEnable false";
+            x = DIALOG_X + 27 * GRID_W;
             y = DIALOG_Y + 16 * GRID_H;
-            w = 86 * GRID_W;
-            h = 86 * GRID_H;
+            w = 50 * GRID_W;
+            h = 49 * GRID_H;
         };
     };
 
@@ -65,10 +67,10 @@ class A3A_VehServiceDialog
                 {
                     idc = A3A_IDC_VEHSERVICE_AMMOTABBUTTON;
                     text = "AMMO";
-                    onButtonClick = "[""switchTab"", [""ammo""]] call A3A_GUI_fnc_vehServiceDialog;";
+                    onButtonClick = "[""switchTab"", [""rearm""]] call A3A_GUI_fnc_vehServiceDialog;";
                     x = 2 * GRID_W;
                     y = 2 * GRID_H;
-                    w = 20 * GRID_W;
+                    w = 22 * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -77,9 +79,9 @@ class A3A_VehServiceDialog
                     idc = A3A_IDC_VEHSERVICE_PYLONTABBUTTON;
                     text = "PYLONS";
                     onButtonClick = "[""switchTab"", [""pylon""]] call A3A_GUI_fnc_vehServiceDialog;";
-                    x = 24 * GRID_W;
+                    x = 28 * GRID_W;
                     y = 2 * GRID_H;
-                    w = 20 * GRID_W;
+                    w = 22 * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -88,9 +90,9 @@ class A3A_VehServiceDialog
                     idc = A3A_IDC_VEHSERVICE_REPAIRTABBUTTON;
                     text = "REPAIR";
                     onButtonClick = "[""switchTab"", [""repair""]] call A3A_GUI_fnc_vehServiceDialog;";
-                    x = 46 * GRID_W;
+                    x = 54 * GRID_W;
                     y = 2 * GRID_H;
-                    w = 20 * GRID_W;
+                    w = 22 * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -99,9 +101,9 @@ class A3A_VehServiceDialog
                     idc = A3A_IDC_VEHSERVICE_REFUELTABBUTTON;
                     text = "REFUEL";
                     onButtonClick = "[""switchTab"", [""refuel""]] call A3A_GUI_fnc_vehServiceDialog;";
-                    x = 68 * GRID_W;
+                    x = 80 * GRID_W;
                     y = 2 * GRID_H;
-                    w = 20 * GRID_W;
+                    w = 22 * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -118,12 +120,23 @@ class A3A_VehServiceDialog
                 class ResourceVehicleData : A3A_Text
                 {
                     idc = A3A_IDC_VEHSERVICE_RESOURCEVEHICLEDATA;
-                    text = "HEMTT Ammo (573 points remaining)";
+                    text = "HEMTT Ammo (88888 points remaining)";
                     style = ST_RIGHT;
                     x = 26 * GRID_W;
                     y = 9 * GRID_H;
-                    w = 62 * GRID_W;
+                    w = 76 * GRID_W;
                     h = 5 * GRID_H;
+                };
+
+                class ResetButton : A3A_Button
+                {
+                    idc = -1;
+                    text = "Reset Changes";
+                    onButtonClick = "[""reset""] call A3A_GUI_fnc_vehServiceDialog;";
+                    x = 2 * GRID_W;
+                    y = 74 * GRID_H;
+                    w = 27 * GRID_W;
+                    h = 6 * GRID_H;
                 };
 
                 class FullRestoreButton : A3A_Button
@@ -131,33 +144,33 @@ class A3A_VehServiceDialog
                     idc = -1;
                     text = "Full Rearm";
                     onButtonClick = "[""fullRestore""] call A3A_GUI_fnc_vehServiceDialog;";
-                    x = 2 * GRID_W;
-                    y = 104 * GRID_H;
-                    w = 30 * GRID_W;
-                    h = 7 * GRID_H;
+                    x = 31 * GRID_W;
+                    y = 74 * GRID_H;
+                    w = 22 * GRID_W;
+                    h = 6 * GRID_H;
                 };
 
                 class ApplyButton : A3A_Button
                 {
                     idc = A3A_IDC_VEHSERVICE_APPLYBUTTON;
-                    text = "Apply (cost: 573 points)";
-                    onButtonClick = "[""apply""] call A3A_GUI_fnc_vehServiceDialog;";
-                    x = 58 * GRID_W;
-                    y = 104 * GRID_H;
-                    w = 30 * GRID_W;
-                    h = 7 * GRID_H;
+                    text = "Apply (cost: 88888 points)";
+                    onButtonClick = "[""checkout""] call A3A_GUI_fnc_vehServiceDialog;";
+                    x = 55 * GRID_W;
+                    y = 74 * GRID_H;
+                    w = 47 * GRID_W;
+                    h = 6 * GRID_H;
                 };
 
                 class PylonPresets : A3A_Combobox
                 {
                     idc = A3A_IDC_VEHSERVICE_PYLONPRESETS;
-                    x = 36 * GRID_W;
-                    y = 104 * GRID_H;
-                    w = 20 * GRID_W;
+                    x = 2 * GRID_W;
+                    y = 67 * GRID_H;
+                    w = 41 * GRID_W;
                     h = 5 * GRID_H;
                 };
 
-                // data box is 86x86. factor top and bottom space
+                // data box is 49x86. factor top and bottom space
 
                 // repair + ammo
 
@@ -165,16 +178,16 @@ class A3A_VehServiceDialog
                     idc = A3A_IDC_VEHSERVICE_DYNAMICTABLEBACKGROUND;
                     x = 2 * GRID_W;
                     y = 16 * GRID_H;
-                    w = 86 * GRID_W;
-                    h = 86 * GRID_H;
+                    w = 100 * GRID_W;
+                    h = 56 * GRID_H;
                 };
                 class DynamicTable : A3A_ControlsGroup
                 {
                     idc = A3A_IDC_VEHSERVICE_DYNAMICTABLE;
                     x = 2 * GRID_W;
                     y = 16 * GRID_H;
-                    w = 86 * GRID_W;
-                    h = 86 * GRID_H;
+                    w = 100 * GRID_W;
+                    h = 56 * GRID_H;
                 };
 
                 // refuel
@@ -192,7 +205,7 @@ class A3A_VehServiceDialog
         {
             idc = -1;
             x = DIALOG_X + DIALOG_W * GRID_W - 5 * GRID_W;
-            y = DIALOG_Y - 10 * GRID_H;
+            y = DIALOG_Y - 5 * GRID_H;
         };
     };
 };

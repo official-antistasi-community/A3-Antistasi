@@ -5115,7 +5115,7 @@
         <Original>APPLY (%1 LITERS)</Original>
       </Key>
       <Key ID="STR_antistasi_vehService_nothingRearm">
-        <Original>Nothing to rearm</Original>
+        <Original>Nothing to rearm or all selected pylons are full on ammo</Original>
       </Key>
       <Key ID="STR_antistasi_vehService_nothingRepair">
         <Original>Nothing to repair</Original>
@@ -5142,7 +5142,13 @@
         <Original>The fuel truck %1 %2m away only has %3 liters of fuel left</Original>
       </Key>
       <Key ID="STR_antistasi_vehService_costRearm">
-        <Original>%1 points for %2 rounds of %3</Original>
+        <Original>Buying %1 rounds of %2 for %3 points</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_refund">
+        <Original>Selling %1 rounds of %2 for %4 value of %3 points</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_swapping">
+        <Original>Swapping %1 between hardpoints</Original>
       </Key>
       <Key ID="STR_antistasi_vehService_costRepair">
         <Original>%1 points to repair %3</Original>
