@@ -79,7 +79,6 @@ class CfgFunctions
             class allMagazines {};
             class ammunitionTransfer {};
             class arsenalManage {};
-            class calcVehAmmoPrice {};
             class categoryOverrides {};
             class checkRadiosUnlocked {};
             class configSort {};

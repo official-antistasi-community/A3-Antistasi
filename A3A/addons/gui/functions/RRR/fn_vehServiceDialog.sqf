@@ -387,6 +387,7 @@ switch (_mode) do
 
         ([_mode, getPosATL player, 25] call A3A_fnc_lookForSupplyVehicle) params ["_selSupplyVehicle", "_remCargo"];
         _display setVariable ["A3A_supplyVehicle", _selSupplyVehicle];
+        if (isNil "A3A_itemPriceCache") then { A3A_itemPriceCache = createHashMap };
 
         switch (_mode) do {
             case "rearm": {
@@ -406,7 +407,8 @@ switch (_mode) do
                         _maxTotalRounds * _percentDiff
                     };
 
-                    private _roundPrice = [_magName] call A3A_fnc_calcVehAmmoPrice;
+                    private _ammoName = getText (configFile >> "CfgMagazines" >> _magName >> "ammo");
+                    private _roundPrice = [_ammoName, "ammo"] call A3A_GUI_fnc_calculateItemPrice;
                     private _orderPrice = _roundPrice * _roundsToBuy;
                     _totalCost = _totalCost + _orderPrice;
 
@@ -416,7 +418,7 @@ switch (_mode) do
 
                 {
                     _x params ["_name", "_roundsToBuy", "_orderPrice", "_prettyName"];
-                    _prettyPurchaseList pushBack format [localize format ["STR_antistasi_vehService_cost%1", _stringSuffix], _roundsToBuy, _prettyName, _orderPrice];
+                    _prettyPurchaseList pushBack format [localize format ["STR_antistasi_vehService_cost%1", _stringSuffix], _roundsToBuy, _prettyName, round _orderPrice];
                 } forEach _purchaseList;
             };
             case ("pylon"): {
@@ -434,8 +436,8 @@ switch (_mode) do
 
                     private _oldMaxRounds = getNumber (configFile >> "CfgMagazines" >> _magName >> "count");
 
-                    
-                    private _oldRoundPrice = [_magName] call A3A_fnc_calcVehAmmoPrice;
+                    private _oldAmmoName = getText (configFile >> "CfgMagazines" >> _magName >> "ammo");
+                    private _oldRoundPrice = [_oldAmmoName, "ammo"] call A3A_GUI_fnc_calculateItemPrice;
                     private _oldRoundsToBuy = _oldMaxRounds - _countRounds;
                     private _oldOrderPrice = _oldRoundPrice * _oldRoundsToBuy;
 
@@ -460,7 +462,8 @@ switch (_mode) do
                     };
 
                     if (_uiMag isNotEqualTo "") then {
-                        private _newRoundPrice = [_uiMag] call A3A_fnc_calcVehAmmoPrice;
+                        private _newAmmoName = getText (configFile >> "CfgMagazines" >> _uiMag >> "ammo");
+                        private _newRoundPrice = [_newAmmoName, "ammo"] call A3A_GUI_fnc_calculateItemPrice;
                         private _newMaxRounds = getNumber (configFile >> "CfgMagazines" >> _uiMag >> "count");
                         private _newOrderPrice = _newRoundPrice * _newMaxRounds;
                         _totalCost = _totalCost + _newOrderPrice;
