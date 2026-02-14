@@ -26,14 +26,16 @@ private _vehCfg = if (_vehicle isEqualType objNull) then {
     configFile/"CfgVehicles"/_vehicle;
 };
 
-if (getNumber (_vehCfg/"transportAmmo") > 0) exitWith {true};           // vanilla
-if (getNumber (_vehCfg/"ace_rearm_defaultSupply") > 0) exitWith {true}; // ace
-
 if (_vehicle isEqualType objNull) then {
     if (isNull _vehicle) exitWith {false};
+    if ([_vehicle, "rearm"] call HR_GRG_getResourceCargo < 1) exitWith {false};
+    if (getNumber (_vehCfg/"transportAmmo") > 0) exitWith {true};           // vanilla
+    if (getNumber (_vehCfg/"ace_rearm_defaultSupply") > 0) exitWith {true}; // ace
     if (_vehicle getVariable ["ace_rearm_isSupplyVehicle", false]) exitWith {true};
     false;
 } else {
+    if (getNumber (_vehCfg/"transportAmmo") > 0) exitWith {true};           // vanilla
+    if (getNumber (_vehCfg/"ace_rearm_defaultSupply") > 0) exitWith {true}; // ace
     if (!isClass _vehCfg) exitWith {false}; //invalid class string passed
     false;
 };

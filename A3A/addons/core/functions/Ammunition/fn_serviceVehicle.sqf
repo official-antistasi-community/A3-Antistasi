@@ -65,14 +65,14 @@ switch (_mode) do {
         {
             
 
-            _x params ["_name", "_roundsToBuy", "_orderPrice", ["_turretPath", [0]]];
+            _x params ["_name", "_roundsToBuy", "_orderPrice", "", "", "", ["_turretPath", [0]]];
             
             // icky part
             // Ok so we need to figure out how many full mags are needed and how many bullets are in the last partial mag
             // this is complicated by the fact that any number of these mags could be partial mags
             // fuck it, figure out how many rounds the vic should have, remove all magazines, add full mags, add partial mag
             private _magData = _magsCombined select (_magsCombined findif {_x#0 isEqualTo _name}); // really is just _forEachIndex
-            _magData params ["_magName", "_totalAmmo", "_magCount", "_turretPath"];
+            _magData params ["_magName", "_totalAmmo", "_magCount"];
             private _roundsPerMag = getNumber (configFile >> "CfgMagazines" >> _name >> "count");
             private _maxTotalRounds = _magCount * _roundsPerMag;
             private _targetRounds = _roundsToBuy + _totalAmmo;
@@ -94,7 +94,7 @@ switch (_mode) do {
                 _veh addMagazineTurret [_name, _turretPath, _partialMagSize];
             };
             
-        } forEach (_purchaseList get "purchase");
+        } forEach _purchaseList;
     };
     case "pylon":
     {

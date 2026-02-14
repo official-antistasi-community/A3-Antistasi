@@ -166,4 +166,24 @@ HR_GRG_getVehicleSellPrice = {
 };
 
 
+// antistasi resource cargo
+
+HR_GRG_useNewPylonSys = true; // new rearm system, blocks pylons entirely. turn off for old behavior
+HR_GRG_useNewRearmSys = true; // new rearm system
+HR_GRG_useNewRepairSys = false; // new repair system
+HR_GRG_useNewRefuelSys = false; // new refuel system
+
+HR_GRG_getResourceCargo = {
+    params ["_veh", "_search"];
+    [_veh, _search, false] call A3A_fnc_getResourceCargo;
+};
+
+HR_GRG_setResourceCargo = {
+    diag_log "running";
+    params ["_veh", "_search", "_value"];
+    private _searchVar = format ["A3A_%1Cargo", _search];
+    diag_log format ["searchvar: %1", _searchVar];
+    diag_log _value;
+    _veh setVariable [_searchVar, _value, true];
+};
 

@@ -601,16 +601,18 @@ Info("Creating pricelist");
 
 private _resourceVehValues = createHashMap;
 
+private _rearmHM = createHashMap;
 {
 	{
-		_resourceVehValues set [_x, 25000];
-	} forEach (_x get "vehiclesAmmoTrucks");
-} forEach [A3A_faction_occ, A3A_faction_inv];
+		_rearmHM set [_x, 25000];
+	} forEach _x;
+} forEach [A3A_faction_occ get "vehiclesAmmoTrucks", A3A_faction_inv get "vehiclesAmmoTrucks"];
 
 {
-	_resourceVehValues set [_x, 25000];
+	_rearmHM set [_x, 25000];
 } forEach [A3A_faction_reb get "vehicleAmmoStation"];
 //+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
+_resourceVehValues set ["rearm", _rearmHM];
 
 DECLARE_SERVER_VAR(A3A_resourceVehValues, _resourceVehValues);
 

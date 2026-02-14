@@ -106,15 +106,17 @@ if (HR_GRG_disableSellButton) then {
     _disp displayCtrl HR_GRG_IDC_SellVeh ctrlEnable false;
 };
 
-//extras list init
-if (
-    !HR_GRG_Pylons_Enabled //Pylon editing disabled
-    || {!HR_GRG_hasAmmoSource} //or ammo source not registered
-) then {
+private _pylonsDisabled = switch (true) do {
+    case HR_GRG_useNewPylonSys: {"newSys"};
+    case !HR_GRG_Pylons_Enabled: {"setting"};
+    case !HR_GRG_hasAmmoSource: {"noAmmo"};
+    default {""};
+};
+if (_pylonsDisabled isNotEqualTo "") then {
     private _pylonBttn = _disp displayCtrl HR_GRG_IDC_BttnPylons;
     _pylonBttn ctrlEnable false;
     _pylonBttn ctrlSetTextColor [0.7,0,0,1];
-    _pylonBttn ctrlSetTooltip localize "STR_HR_GRG_Generic_PylonDisabled";
+    _pylonBttn ctrlSetTooltip localize format ["STR_HR_GRG_Generic_PylonDisabled_%1", _pylonsDisabled];
 };
 [false] call HR_GRG_fnc_reloadExtras;
 

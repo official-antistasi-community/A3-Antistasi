@@ -92,6 +92,7 @@ class CfgFunctions
             class fillLootCrate {};
             class generateRebelGear {};
             class getRadio {};
+            class getResourceCargo {};
             class hasARadio {};
             class itemConfig {};
             class itemConfigMass {};

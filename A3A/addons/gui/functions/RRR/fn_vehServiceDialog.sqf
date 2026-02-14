@@ -535,7 +535,7 @@ switch (_mode) do
             };
             case (_remCargo < _totalCost): {
                 private _ammoTruckName = [typeOf _selSupplyVehicle, "CfgVehicles"] call _fnc_getName;
-                format [localize format ["STR_antistasi_vehService_noCargo%1", _stringSuffix], _ammoTruckName, player distance _selSupplyVehicle, _remCargo];
+                format [localize format ["STR_antistasi_vehService_noCargo%1", _stringSuffix], _ammoTruckName, round (player distance _selSupplyVehicle), _remCargo];
             };
             default {""};
         };

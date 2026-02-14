@@ -5,29 +5,11 @@ private _nearVehicles = (nearestObjects [_targPos, ["LandVehicle", "ThingX"], _r
     alive _x && {(side group _x) in [sideUnknown, teamPlayer] && {speed _x < 1}}
 };
 
-private _sortCondition = switch (_vehType) do {
-    case "rearm";
-    case "pylon": {{_x call HR_GRG_fnc_isAmmoSource}};
-    case "repair": {{_x call HR_GRG_fnc_isFuelSource}};
-    case "refuel": {{_x call HR_GRG_fnc_isRepairSource}};
-};
+if (_vehType isEqualTo "pylon") then {_vehType = "rearm"};
+private _cargoVar = format ["A3A_%1Cargo", _vehType];
+private _index = _nearVehicles findIf {([_x, _vehType] call A3A_fnc_getResourceCargo) > -1};
+if (_index isEqualTo -1) exitWith {[objNull, -1]};
+private _selVeh = _nearVehicles#_index;
+private _finalCargo = [_selVeh, _vehType] call A3A_fnc_getResourceCargo;
 
-private _trimmedList = _nearVehicles select _sortCondition;
-if (count _trimmedList == 0) exitWith {[objNull, -1]};
-private _selVeh = _trimmedList#0;
-
-private _searchVar = _vehType;
-if (_searchVar isEqualTo "pylon") then {_searchVar = "rearm"};
-private _cargoVar = format ["A3A_%1Cargo", _searchVar];
-diag_log _selVeh;
-diag_log _cargoVar;
-private _remCargo = _selVeh getVariable [_cargoVar, -1];
-diag_log _remCargo;
-// everything will get cargo when queried
-if (_remCargo isEqualTo -1) then {
-    _defaultCargo = A3A_resourceVehValues get (typeof _selVeh);
-    _selVeh setVariable [_cargoVar, _defaultCargo, true];
-    _remCargo = _defaultCargo;
-};
-
-[_selVeh, floor _remCargo]
+[_selVeh, _finalCargo]
