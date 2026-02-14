@@ -26,11 +26,11 @@
 ["vehiclesRepairTrucks", ["UK3CB_TKA_B_Ural_Repair", "UK3CB_TKA_O_BTR40_REPAIR"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["UK3CB_TKA_B_Ural_Fuel", "UK3CB_TKA_O_BTR40_REFUEL"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["UK3CB_TKA_O_GAZ_Vodnik_MedEvac", "UK3CB_TKA_O_BTR40_AMBULANCE"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["UK3CB_TKA_O_BRDM2_HQ", "UK3CB_TKA_O_BRDM2", "UK3CB_TKA_O_GAZ_Vodnik_PKT", "UK3CB_TKA_O_GAZ_Vodnik_KVPT", "UK3CB_TKA_O_BTR40_MG", "UK3CB_TKA_O_MTLB_KPVT", "UK3CB_TKA_O_MTLB_PKT", "UK3CB_TKA_O_BTR90_HQ"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["UK3CB_TKA_O_BRDM2_HQ", "UK3CB_TKA_O_BRDM2", "UK3CB_TKA_O_GAZ_Vodnik_PKT", "UK3CB_TKA_O_GAZ_Vodnik_KVPT", "UK3CB_TKA_O_BTR40_MG", "UK3CB_TKA_O_MTLB_KPVT", "UK3CB_TKA_O_MTLB_PKT"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["UK3CB_TKA_O_BMP1", "UK3CB_TKA_O_BMP2", "UK3CB_TKA_O_BMP2K", "UK3CB_TKA_O_BTR60", "UK3CB_TKA_O_BTR70", "UK3CB_TKA_O_BTR80", "UK3CB_TKA_O_BTR80a", "UK3CB_TKA_O_MTLB_ZU23", "UK3CB_TKA_O_MTLB_BMP", "UK3CB_TKA_O_MTLB_Cannon", "UK3CB_TKA_O_BTR90"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["UK3CB_TKA_O_BMP2", "UK3CB_TKA_O_BMP2K"]] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", ["UK3CB_TKA_O_T34", "UK3CB_TKA_B_T55"]] call _fnc_saveToTemplate;
-["vehiclesTanks", ["UK3CB_TKA_B_T72BM", "UK3CB_TKA_B_T72A", "UK3CB_TKA_B_T72B"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["UK3CB_TKA_B_T72BM", "UK3CB_TKA_B_T72A", "UK3CB_TKA_B_T72B", "UK3CB_TKA_B_T55"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["UK3CB_TKA_B_ZsuTank"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["UK3CB_TKA_B_RHIB"]] call _fnc_saveToTemplate;
@@ -287,8 +287,6 @@ _militaryLoadoutData set ["binoculars", ["Laserdesignator"]];
 _militaryLoadoutData set ["slRifles", [
 ["rhs_weap_ak74n", "rhs_acc_dtk3", "rhs_acc_perst1ik", "rhs_acc_1p29", ["rhs_30Rnd_545x39_7N10_AK"], [], ""],
 ["rhs_weap_ak74n", "rhs_acc_dtk3", "rhs_acc_perst1ik", "rhs_acc_1p78", ["rhs_30Rnd_545x39_7N10_AK"], [], ""],
-["UK3CB_RK62", "rhs_acc_dtkakm", "rhs_acc_perst1ik", "rhs_acc_1p29", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], [], ""],
-["UK3CB_RK62", "rhs_acc_dtk1l", "rhs_acc_perst1ik", "rhs_acc_1p29", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], [], ""],
 ["rhs_weap_akmn", "rhs_acc_dtkakm", "rhs_acc_perst1ik", "rhs_acc_1p29", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], [], ""],
 ["rhs_weap_akmn", "rhs_acc_dtkakm", "rhs_acc_perst1ik", "rhs_acc_1p78", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], [], ""],
 ["rhs_weap_akmn_gp25", "rhs_acc_dtkakm", "", "rhs_acc_1p29", ["rhs_30Rnd_762x39mm", "rhs_30Rnd_762x39mm_tracer"], ["rhs_VOG25", "rhs_VOG25", "rhs_VOG25P", "rhs_VG40OP_white"], ""],

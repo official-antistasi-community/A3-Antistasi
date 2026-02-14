@@ -27,7 +27,7 @@
 ["vehiclesRepairTrucks", ["UK3CB_AAF_B_M939_Repair", "UK3CB_AAF_B_MTVR_Repair", "UK3CB_AAF_B_M977A4_Repair", "UK3CB_AAF_B_LR_Softtop_Repair_Open"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["UK3CB_AAF_B_MTVR_Refuel", "UK3CB_AAF_B_M939_Fuel", "UK3CB_AAF_B_M977A4_Fuel", "UK3CB_AAF_B_LR_Softtop_Refuel_Open"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["UK3CB_AAF_B_M113_AMB", "UK3CB_AAF_O_MTLB_AMB"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["UK3CB_AAF_B_LAV25_HQ", "UK3CB_AAF_B_M113_M2", "UK3CB_AAF_B_M113_MK19", "UK3CB_AAF_I_GAZ_Vodnik_PKT", "UK3CB_AAF_I_GAZ_Vodnik_KVPT", "UK3CB_AAF_B_M1117","UK3CB_AAF_O_MTLB_KPVT", "UK3CB_AAF_O_MTLB_PKT", "UK3CB_AAF_O_BTR90_HQ"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["UK3CB_AAF_B_LAV25_HQ", "UK3CB_AAF_B_M113_M2", "UK3CB_AAF_B_M113_MK19", "UK3CB_AAF_I_GAZ_Vodnik_PKT", "UK3CB_AAF_I_GAZ_Vodnik_KVPT", "UK3CB_AAF_B_M1117","UK3CB_AAF_O_MTLB_KPVT", "UK3CB_AAF_O_MTLB_PKT"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["UK3CB_AAF_B_LAV25", "UK3CB_AAF_B_LAV25", "UK3CB_AAF_B_AAV", "UK3CB_AAF_B_AAV", "UK3CB_AAF_O_MTLB_ZU23", "UK3CB_AAF_O_MTLB_BMP", "UK3CB_AAF_O_MTLB_Cannon", "UK3CB_AAF_I_BMP1", "UK3CB_AAF_O_BTR90"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["UK3CB_AAF_I_BMP2K", "UK3CB_AAF_I_BMP2"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["UK3CB_AAF_B_M60A3", "UK3CB_AAF_I_T72BC", "UK3CB_AAF_B_FV4201", "UK3CB_AAF_B_M1A1"]] call _fnc_saveToTemplate;
@@ -57,7 +57,7 @@
 ["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles
-["vehiclesMilitiaLightArmed", ["UK3CB_AAF_I_LR_SF_M2", "UK3CB_AAF_I_LR_M2", "UK3CB_AAF_I_Offroad_M2", "UK3CB_AAF_B_Pickup_M2", "UK3CB_AAF_I_UAZ_MG", "UK3CB_AAF_B_LR_WMIK_MG3"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["UK3CB_AAF_I_LR_SF_M2", "UK3CB_AAF_I_LR_M2", "UK3CB_AAF_I_Offroad_M2", "UK3CB_AAF_I_UAZ_MG", "UK3CB_AAF_B_LR_WMIK_MG3"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaTrucks", ["UK3CB_AAF_I_Ural_Open"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["UK3CB_AAF_I_UAZ_Open", "UK3CB_AAF_I_UAZ_Closed"]] call _fnc_saveToTemplate;
 
