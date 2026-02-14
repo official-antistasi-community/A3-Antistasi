@@ -86,7 +86,6 @@ _presetComboCtrl ctrlAddEventHandler ["LBSelChanged", {_this call HR_GRG_fnc_Pyl
 
 HR_GRG_Pylon_GeneralCtrls = [_cbCtrl, _presetComboCtrl];
 
-
 ////////////////////
 // Dynamic pylons //
 ////////////////////

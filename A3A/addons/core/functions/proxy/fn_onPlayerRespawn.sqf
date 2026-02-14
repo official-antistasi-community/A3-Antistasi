@@ -59,7 +59,6 @@ if (_oldUnit == theBoss) then
 	{
 	[_newUnit, true] remoteExec ["A3A_fnc_theBossTransfer", 2];
 	};
- 
 //Give them a map, in case they're commander and need to replace petros.
 _newUnit setUnitLoadout [[],[],[],[selectRandom ((A3A_faction_civ get "uniforms") + (A3A_faction_reb get "uniforms")), []],[],[],[],"",[],
 [(selectRandom unlockedmaps),"","",(selectRandom unlockedCompasses),(selectRandom unlockedwatches),""]];
