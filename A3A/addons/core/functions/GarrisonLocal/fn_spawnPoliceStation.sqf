@@ -18,7 +18,9 @@ FIX_LINE_NUMBERS()
 
 params ["_activeGarrison", "_marker", "_garrisonData", "_storedTroops"];
 
-if (_activeGarrison get "side" != Occupants) exitWith {};
+if (_activeGarrison get "side" == teamPlayer) exitWith {};
+private _side = _activeGarrison get "side";
+private _faction = Faction(_side);
 
 private _buildingPos = _garrisonData get "policeStation";       // should be guaranteed position on call
 private _station = nearestBuilding _buildingPos;
@@ -66,16 +68,16 @@ private _intelPos = [];
         _intelPos = getPosATL _obj vectorAdd [0, 0, _bb#1#2 - _bb#0#2];
     };
     if (_class == "Banner_01_F") then {
-        _obj setObjectTextureGlobal [0, A3A_faction_occ get "flagTexture"];
+        _obj setObjectTextureGlobal [0, _faction get "flagTexture"];
     };
 
 } forEach _objData;
 
 if (_intelPos isNotEqualTo [] and _garrisonData getOrDefault ["intelCD", 0] <= 0) then {
-    private _intelType = A3A_faction_occ get "placeIntel_itemMedium" select 0;          // assume this isn't a computer...
+    private _intelType = _faction get "placeIntel_itemMedium" select 0;          // assume this isn't a computer...
     private _intel = createVehicle [_intelType, _intelPos, [], 0, "CAN_COLLIDE"];
     _intel setVectorUp [0,0,1];
-    _intel setVariable ["side", Occupants, true];
+    _intel setVariable ["side", _side, true];
     _intel setVariable ["marker", _marker, true];              // so we know what to cool down
     [_intel, "Intel_Medium"] remoteExec ["A3A_fnc_flagaction",[teamPlayer,civilian],_intel];
     _furniture pushBack _intel;
@@ -92,8 +94,8 @@ private _buildingPositions = _station buildingPos -1;
 private _numUnits = (4 + round random 1) min (count _buildingPositions) min (_count);
 if ((_count - _numUnits) % 2 == 1) then { _numUnits = _numUnits - 1 };        // so that we have even number of patrols
 
-private _lowTypes = flatten (A3A_faction_occ get "groupsPoliceSmall");
-private _highTypes = flatten (A3A_faction_occ get "groupsMilitiaSmall");
+private _lowTypes = flatten (_faction get "groupsPoliceSmall");
+private _highTypes = flatten (_faction get "groupsMilitiaSmall");
 private _highUnits = round (_numUnits * (_quality%1));
 
 private _curGroup = createGroup _side;
@@ -108,6 +110,7 @@ for "_i" from 1 to _numUnits do
     _unit setDir (_station getRelDir _placePos);
     [_unit, _marker] call A3A_fnc_NATOinit;
     _unit setUnitPos "UP";
+    _unit setVariable ["A3A_forcedStance", "UP"];
     dostop _unit;
 
     sleep 0.1;

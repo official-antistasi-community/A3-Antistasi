@@ -4,7 +4,7 @@ private _garrison = createHashMapFromArray [ ["buildings", []], ["vehicles", []]
 
 // trivial for now. Could add some props later, maybe a static
 
-private _quality = ["camp", _side, 0.2] call A3A_fnc_getSiteTroopQuality;
+private _quality = ["camp", "", _side] call A3A_fnc_getSiteTroopQuality;
 _garrison set ["type", "camp"];
 _garrison set ["troops", [8, _quality]];
 _garrison set ["spawnPlaces", []];      // none atm

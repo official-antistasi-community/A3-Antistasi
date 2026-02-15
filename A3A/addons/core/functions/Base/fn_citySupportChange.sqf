@@ -66,10 +66,10 @@ if (_supportReb > 80 and _citySide != teamPlayer) then
 		A3A_activeCityBattles set [_city, true];
 		[A3A_tasks_fnc_cityBattle, [_city]] spawn A3A_tasks_fnc_runTask;
 	};
-	[_city, true] call A3A_fnc_citySideChange;			// just autoflip for small stuff
+	[_city, teamPlayer] call A3A_fnc_citySideChange;			// just autoflip for small stuff
 };
 if (_supportReb < 40 and _citySide == teamPlayer) then {
-	[_city, false] call A3A_fnc_citySideChange;
+	[_city, Occupants] call A3A_fnc_citySideChange;			// TODO: figure out which side to flip to
 };
 
 true;

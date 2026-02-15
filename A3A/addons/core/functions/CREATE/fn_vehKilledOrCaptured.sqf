@@ -71,7 +71,7 @@ if (_side == civilian) then
 			[_thief, false] remoteExec ["setCaptive", _thief];
 		};
 		{
-			if ((side _x == Occupants) and (_x distance _pos < distanceSPWN2)) then {_x reveal _thief};
+			if ((side _x != teamPlayer) and (_x distance _pos < distanceSPWN2)) then {_x reveal _thief};
 		} forEach allUnits;
 	} forEach crew _veh;
 

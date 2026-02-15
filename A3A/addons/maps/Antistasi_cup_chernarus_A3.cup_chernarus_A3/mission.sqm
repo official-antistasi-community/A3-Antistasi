@@ -215,10 +215,6 @@ dlcs[]=
 	"Enoch"
 };
 randomSeed=5703879;
-class ScenarioData
-{
-	author="Bob Murphy";
-};
 class Mission
 {
 	class Intel

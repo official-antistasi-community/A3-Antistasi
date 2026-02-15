@@ -51,8 +51,8 @@ for "_i" from 1 to _bombCount do
     sleep _timeBetweenBombs;
     if (alive _plane) then
     {
-        private _bombPos = (getPosATL _plane) vectorAdd [0, 0, -5];
-        _bomb = _ammo createvehicle _bombPos;
+        private _bombPos = (ASLtoAGL getPosASL _plane) vectorAdd [0, 0, -5];
+        _bomb = _ammo createvehicle _bombPos;       // Uses AGL. Undocumented
         _bomb setDir (getDir _plane);
         _bomb setVelocity [0,0,-50];
         _bomb setShotParents [_plane, driver _plane];           // server exec, really?

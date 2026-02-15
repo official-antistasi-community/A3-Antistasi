@@ -86,6 +86,7 @@ if (isNil "_marker") exitWith {
     _x disableAI "AUTOCOMBAT";
     _x disableAI "TARGET";
     _x setUnitPos "UP";
+    _x setVariable ["A3A_forcedStance", "UP"];
     _x doFollow leader _group;          // in case they were a building garrison
     _x setVariable ["retreating", true, true];
 } forEach units _group;

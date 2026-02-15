@@ -38,13 +38,14 @@ private _addActionCode = {
 [_hostage, _addActionCode] remoteExec ["call", 0, _hostage];
 
 // Create cops
+private _enemySide = sidesX getVariable _marker;
 private _groupType = ["groupsPoliceSmall", "groupsMilitiaSmall"] select (random 8 < tierWar);
-private _policeGroup = createGroup [Occupants, true];
+private _policeGroup = createGroup [_enemySide, true];
 {
     private _pos = _positions deleteAt (floor random count _positions);
     private _unit = [_policeGroup, _x, _pos, [], 0, "NONE"] call A3A_fnc_createUnit;
     [_unit, "", false, "legacy"] call A3A_fnc_NATOinit;
-} forEach selectRandom (A3A_faction_occ get _groupType);
+} forEach selectRandom (Faction(_enemySide) get _groupType);
 _task set ["_policeGroup", _policeGroup];
 
 // Create the task

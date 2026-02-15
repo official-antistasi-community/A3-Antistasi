@@ -15,6 +15,9 @@ if (!isServer) exitWith {};
 
 params ["_city"];
 
+private _enemySide = sidesX getVariable _city; 
+if (_enemySide == teamPlayer) then {_enemySide == Occupants};
+
 private _nameDest = [_city] call A3A_fnc_localizar;
 private _textX = format [localize "STR_A3A_fn_mission_gunshop_text_meet", _nameDest];
 private _taskState = "CREATED";
@@ -65,7 +68,7 @@ _coolerPetros addEventHandler ["killed", {
 
     // Punish rebels if they killed Solomon
     if ((isPlayer _killer) and (side _killer == teamPlayer)) then {
-        [Occupants, 20, 60] remoteExecCall ["A3A_fnc_addAggression", 2];
+        [_enemySide, 20, 60] remoteExecCall ["A3A_fnc_addAggression", 2];
     };
 }];
 
@@ -96,8 +99,8 @@ private _addActionCode = {
 
 // Create a wandering patrol
 private _spawnPosition = [markerPos _city, 0, 200, 2] call A3A_fnc_findPatrolPos;
-private _patrolTypes = A3A_faction_occ get (["groupsSmall", "groupSpecOpsRandom"] select (tierWar > random 12));
-private _patrolGroup = [_spawnPosition, Occupants, selectRandom _patrolTypes, false, true] call A3A_fnc_spawnGroup;
+private _patrolTypes = Faction(_enemySide) get (["groupsSmall", "groupSpecOpsRandom"] select (tierWar > random 12));
+private _patrolGroup = [_spawnPosition, _enemySide, selectRandom _patrolTypes, false, true] call A3A_fnc_spawnGroup;
 {[_x, ""] call A3A_fnc_NATOinit} forEach units _patrolGroup;
 [_patrolGroup, "Patrol_Area", 0, 200, 200, true, markerPos _city] call A3A_fnc_patrolLoop;
 
@@ -140,14 +143,14 @@ if(_noCrate) then
     private _maxDist = 0;
     {
         private _site = _x;
-        if (sidesX getVariable _site != Occupants) then {continue};
+        if (sidesX getVariable _site != _enemySide) then {continue};
         if (markerPos _site distance2d markerPos respawnTeamPlayer > distanceMission+1000) then {continue};
 
         private _suppMarkers = [_site, false] call A3A_fnc_findLandSupportMarkers;
         {
             _x params ["_base", "_dist"];
             if (spawner getVariable _base == 0) then {continue};
-            if (sidesX getVariable _base != Occupants) then {continue};
+            if (sidesX getVariable _base != _enemySide) then {continue};
             if (_dist > _maxDist) then { _convoyPair = [_site, _base]; _maxDist = _dist };
 
         } forEach _suppMarkers;
@@ -183,6 +186,6 @@ for "_i" from 1 to 10 do {
 
 // Create the supply drop
 sleep 5;
-[_dropPos, _gunshopList, _patrolGroup] spawn A3A_fnc_supplyDrop;        // patralGroup handed off to supply drop control
+[_dropPos, _gunshopList, _patrolGroup, _enemySide] spawn A3A_fnc_supplyDrop;        // patralGroup handed off to supply drop control
 
 _coolerPetros spawn _fnc_despawner;
