@@ -20,7 +20,6 @@ switch (_mode) do
 {
     case ("onLoad"):
     {
-        private _specialDefaults = ["distanceSPWN"];
         private _mapInfo = missionConfigFile/"A3A"/"mapInfo"/toLower worldName/"MapParams";
         if (!isClass _mapInfo) then {_mapInfo = configFile/"A3A"/"mapInfo"/toLower worldName/"MapParams"};
         private _allCtrls = [];
@@ -52,11 +51,8 @@ switch (_mode) do
 				_valsCtrl lbSetValue [_index, _x];
             } forEach _vals;
             private _default = getNumber (_x/"default");
-            if (_configName in _specialDefaults) then {
-                private _class = (_mapInfo/_configName);
-                if !(isClass _class) exitWith {};
-                _default = _class call BIS_fnc_getCfgData;
-            };
+            private _mapValue = (_mapInfo/_configName) call BIS_fnc_getCfgData;
+            if !(isNil "_mapValue") then { _default = _mapValue};
             _valsCtrl lbSetCurSel (_vals find _default);
             _allCtrls pushBack _valsCtrl;
 
