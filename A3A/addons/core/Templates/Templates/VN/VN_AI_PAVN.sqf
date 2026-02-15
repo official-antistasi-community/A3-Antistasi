@@ -19,7 +19,7 @@
 
 // All fo bellow are optional overrides
 ["firstAidKits", ["vn_o_item_firstaidkit"]] call _fnc_saveToTemplate;
-["mediKits", ["vn_o_item_medikit_01"]] call _fnc_saveToTemplate;
+["mediKits", ["vn_b_item_medikit_01"]] call _fnc_saveToTemplate;
 
 ["placeIntel_desk", ["Land_vn_us_common_table_01",0]] call _fnc_saveToTemplate;
 ["placeIntel_itemMedium", ["Land_vn_file1_f",-25,false]] call _fnc_saveToTemplate;

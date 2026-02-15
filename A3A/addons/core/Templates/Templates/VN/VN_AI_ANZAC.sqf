@@ -208,7 +208,7 @@ _sfLoadoutData set ["glVests", ["vn_b_vest_sas_02"]];
 _sfLoadoutData set ["slVests", ["vn_b_vest_sas_04"]];
 _sfLoadoutData set ["backpacks", ["vn_b_pack_p44_01", "vn_b_pack_p44_02"]];
 _sfLoadoutData set ["engBackpacks", ["vn_b_pack_p08_02"]];
-_sfLoadoutData set ["helmets", [["vn_b_headband_01","vn_b_bandana_08","vn_b_boonie_06_01","vn_b_boonie_08_01","vn_b_boonie_02_08", "", "", ""]]];
+_sfLoadoutData set ["helmets", ["vn_b_headband_01","vn_b_bandana_08","vn_b_boonie_06_01","vn_b_boonie_08_01","vn_b_boonie_02_08", "", "", ""]];
 _sfLoadoutData set ["binoculars", ["vn_anpvs2_binoc"]];
 
 _sfLoadoutData set ["rifles", [
@@ -458,8 +458,6 @@ private _squadLeaderTemplate = {
 	["primary", 8] call _fnc_addMagazines;
 	["primary", 4] call _fnc_addAdditionalMuzzleMagazines;
 
-	["lightATLaunchers"] call _fnc_setLauncher;
-
 	["sidearms"] call _fnc_setHandgun;
 	["handgun", 4] call _fnc_addMagazines;
 	["handgun", 4] call _fnc_addAdditionalMuzzleMagazines;
@@ -482,8 +480,6 @@ private _riflemanTemplate = {
 	["helmets"] call _fnc_setHelmet;
 	["vests"] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
-
-	["lightATLaunchers"] call _fnc_setLauncher;
 
 	["rifles"] call _fnc_setPrimary;
 	["primary", 8] call _fnc_addMagazines;
