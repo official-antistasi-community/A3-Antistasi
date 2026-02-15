@@ -48,17 +48,17 @@ if (_autoLoadTime >= 0 || isAutoTest) then
         Info("No usable saves found for automatic loading");
         _autoLoadTime = -1;
     };
+    private _preferredGame = profileNamespace getVariable ["A3A_preferredTestingSave", 0];
     private _index = if (isAutoTest) then {
-        private _preferredGame = profileNamespace getVariable ["A3A_preferredTestingSave", 0];
         _saveData findIf {(_x get "gameID") isEqualTo _preferredGame};
     } else {
         0;
     };
-    if (_index isEqualTo -1) exitWith {Info("Autotest could not find a save to autoload")};
+    if (_index isEqualTo -1) exitWith {Info_1("Selected autotest save ID %1 does not exist", _preferredGame)};
     _autoLoadData = _saveData select _index;
     _autoLoadData set ["startType", "load"];
     Info_1("Save ID %1 selected for automatic loading", _autoLoadData get "gameID");
-    _autoLoadTime = time + _autoLoadTime;
+    _autoLoadTime = (time + _autoLoadTime) max 0;
 };
 
 
@@ -76,8 +76,7 @@ A3A_startupState = _waitState; publicVariable "A3A_startupState";
 // Setup monitor loop
 while {isNil "A3A_saveData"} do {
     sleep 1;
-
-    if ((isNull A3A_setupPlayer and _autoLoadTime != -1 and time > _autoLoadTime) || isAutoTest) then {
+    if ((_autoLoadTime != -1) and ((isNull A3A_setupPlayer and time > _autoLoadTime) || isAutoTest)) then { // save data found, then (no player and past autostart timer) OR autotest
         [_autoLoadData] call A3A_fnc_startGame;
         _autoLoadTime = -1;
         continue;					// if autoload save wasn't valid then carry on
