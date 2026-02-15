@@ -21,7 +21,7 @@
 ["vehiclesLightUnarmed", ["rhsusf_m1151_usarmy_d","UK3CB_KRG_B_M998_2DR","UK3CB_KRG_B_M998_4DR","UK3CB_ADA_B_LR_Closed","UK3CB_ADA_B_LR_Open"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["rhsusf_m1151_m2_v1_usarmy_d","rhsusf_m1151_m240_v1_usarmy_d","rhsusf_m1151_m2_v2_usarmy_d","rhsusf_m1151_m240_v2_usarmy_d",
 "UK3CB_ADA_B_LR_M2","UK3CB_ADA_B_LR_SF_M2", "UK3CB_KRG_B_M939_ZU23", "UK3CB_KRG_B_MTVR_ZU23"]] call _fnc_saveToTemplate;
-["vehiclesTrucks", ["UK3CB_KRG_B_MTVR_Open","UK3CB_KRG_B_MTVR_Closed","UK3CB_KRG_B_M939_Open","UK3CB_KRG_B_M939_Closed", "UK3CB_AAF_B_M977_Transport_Open", "UK3CB_AAF_B_M977_Transport_Covered"]] call _fnc_saveToTemplate;
+["vehiclesTrucks", ["UK3CB_KRG_B_MTVR_Open","UK3CB_KRG_B_MTVR_Closed","UK3CB_KRG_B_M939_Open","UK3CB_KRG_B_M939_Closed"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["UK3CB_KRG_B_MTVR_Recovery","UK3CB_KRG_B_M939_Recovery"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["UK3CB_B_MTVR_Reammo_DES"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["UK3CB_B_MTVR_Repair_DES"]] call _fnc_saveToTemplate;
