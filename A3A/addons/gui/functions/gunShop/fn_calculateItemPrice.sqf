@@ -9,7 +9,7 @@ if (!isNil "_cacheVal") exitWith { _cacheVal };
 
 // _simType and _subVelocity also passed in
 private _fnc_payloadValue = {
-    params ["_cfgAmmo", "_log"];
+    params ["_cfgAmmo", "_isHEAT", "_log"];
 
     if !(_simType in _utilSims) exitWith {
         private _hit = getNumber (_cfgAmmo >> "hit");
@@ -20,27 +20,31 @@ private _fnc_payloadValue = {
         };
         private _caliber = getNumber(_cfgAmmo >> "caliber");
         private _penetration = (15/1000) * _caliber * _subVelocity;		// should be mm of RHS steel
+        _hit = _hit min _penetration*1.5;  // hack to workaround RHS AT weirdness
 
         private _indirPayload = _indirHit*_indirRange;
-        _indirPayload = if (_simType in _mineSims) then { _indirPayload^0.7 } else { 0.4*_indirPayload^1 };
-        if (_indirHit > 0) then {_indirPayload = _indirPayload + 10*_indirPayload^0.5};		// "trigger cost"
+        _indirPayload = if (_simType in _mineSims) then { _indirPayload^0.7 } else { 1.6*_indirPayload^0.8 };
 
-        private _guidanceMod = [0, 300] select (getNumber (_cfgAmmo >> "weaponLockSystem") != 0);
+        private _fuseCost = 3*_indirPayload^0.4;		// use to buff cost of small HE rounds
+        if (_isHEAT or getNumber (_cfgAmmo >> "explosive") > 0) then { _fuseCost = _fuseCost + _penetration^0.6 };		// add on HEAT rounds
+        private _guidanceMod = [0, 50] select (getNumber (_cfgAmmo >> "weaponLockSystem") != 0);
         //if (_log) then {diag_log format ["Hit %1, indir %2, indirRange %3, caliber %4, pen %5, guidance %6", _hit, _indirHit, _indirRange, _caliber, _penetration, _guidanceMod]};
 
-        _hit = _hit min _penetration*1.5;		// hack to workaround RHS AT weirdness
-        0.1*(_hit + _penetration)^1.2 + _indirPayload + _guidanceMod;
+        private _payloadVal = 0.1*(_hit + _penetration)^1.2 + _indirPayload + _fuseCost/2 + _guidanceMod/2;
+        [_payloadVal, _fuseCost + _guidanceMod];
     };
     if (_simType == "shotilluminating") exitWith {
         private _intensity = getNumber (_cfgAmmo >> "intensity");
         private _brightness = 2500 * getNumber (_cfgAmmo >> "brightness") ^ 2;
         private _timeToLive = getNumber (_cfgAmmo >> "timeToLive");
         //if (_log) then {diag_log format ["Intensity %1, brightness %2, ttl %3", _intensity, _brightness, _timeToLive]};
-        _timeToLive * (_intensity max _brightness) / 8000;
+        [_timeToLive * (_intensity max _brightness) / 8000, 0];
     };
-    60;		// Smokes are all the same?
+    if (_simType == "shotcm") exitWith { [20, 0] };
+    [60, 0];		// Smokes are all the same?
 };
 
+// Normalized for 50cal at approx 4
 private _fnc_ammoPriceCalculator = {
     params ["_className", ["_log", false]];
 
@@ -58,7 +62,7 @@ private _fnc_ammoPriceCalculator = {
     if (isNumber (_cfgAmmo >> "A3A_price")) exitWith { getNumber (_cfgAmmo >> "A3A_price") };
 
     private _rocketSims = ["shotrocket", "shotmissile"];
-    private _utilSims = ["shotsmoke", "shotsmokex", "shotilluminating", "shotnvgmarker"];
+    private _utilSims = ["shotsmoke", "shotsmokex", "shotilluminating", "shotnvgmarker", "shotcm"];
     private _mineSims = ["shotmine", "shotdirectionalbomb", "shotboundingmine", "shotgrenade"];
 
     private _simType = tolower getText(_cfgAmmo >> "simulation");
@@ -76,10 +80,10 @@ private _fnc_ammoPriceCalculator = {
     if (_simType in _rocketSims) then {
         _totThrust = getNumber (_cfgAmmo >> "thrust") * getNumber (_cfgAmmo >> "thrustTime");
         if (_guidanceMod > 0) then {
-            private _maneuvrability = getNumber (_cfgAmmo >> "maxSpeed")^2 * getNumber (_cfgAmmo >> "maneuvrability") / 1500;
-            _maneuvrability = _maneuvrability max (getNumber (_cfgAmmo >> "maxSpeed") * getNumber (_cfgAmmo >> "maneuvrability") / 5);
-            //if (_log) then {diag_log format ["thrust %1, maxSpeed %2, maneuvrability %3, guidanceMod %4", _totThrust, getNumber (_cfgAmmo >> "maxSpeed"), getNumber (_cfgAmmo >> "maneuvrability"), _guidanceMod]};
-            _totThrust = _totThrust + _maneuvrability;
+            private _manHigh = getNumber (_cfgAmmo >> "maxSpeed")^1.8 * getNumber (_cfgAmmo >> "maneuvrability") / 200;
+            private _manLow = getNumber (_cfgAmmo >> "maxSpeed") * getNumber (_cfgAmmo >> "maneuvrability") / 3;
+            //if (_log) then {diag_log format ["thrust %1, maxSpeed %2, manuver %3, manHigh %4, manLow %5, guidanceMod %6", _totThrust, getNumber (_cfgAmmo >> "maxSpeed"), getNumber (_cfgAmmo >> "maneuvrability"), _manHigh, _manLow, _guidanceMod]};
+            _totThrust = _totThrust + (_manHigh max _manLow);
         };
     };
     //if (_log) then {diag_log format ["Sim %1, velocity %2, thrust %3, guidanceMod %4", _simType, _velocity, _totThrust, _guidanceMod]};
@@ -88,8 +92,9 @@ private _fnc_ammoPriceCalculator = {
     private _subAmmoType = getText (_cfgAmmo >> "submunitionAmmo");
     if (isArray (_cfgAmmo >> "submunitionAmmo")) then { _subAmmoType = getArray (_cfgAmmo >> "submunitionAmmo") # 0 };
 
-    private _subVelocity = _velocity;       // used for payload value later
+    private _subVelocity = _velocity;           // used for payload value later
     private _subCount = 1;
+    private _probablyHEAT = false;
     while {_subAmmoType != ""} do
     {
         private _subConeType = getArray (_cfgAmmo >> "submunitionConeType");
@@ -97,7 +102,8 @@ private _fnc_ammoPriceCalculator = {
             private _thisSubCount = if (_subConeType#1 isEqualType 0) then { _subConeType#1 } else { count (_subConeType#1) };
             _subCount = _subCount * _thisSubCount;
         };
-        if (getNumber (_cfgAmmo >> "submunitionInitSpeed") > 0) then {                // _simType != "shotdeploy" ? Not sure which is correct
+        _probablyHEAT = count _subConeType < 2;										// single projectile so treat as HEAT warhead later
+        if (getNumber (_cfgAmmo >> "submunitionInitSpeed") > 0) then {				// _simType != "shotdeploy" ? Not sure which is correct
             _subVelocity = getNumber (_cfgAmmo >> "submunitionInitSpeed");
             _totThrust = _totThrust + (_subVelocity - _velocity);
         };
@@ -108,7 +114,7 @@ private _fnc_ammoPriceCalculator = {
         if (_simType in _rocketSims) then {
             _subVelocity = _subVelocity + getNumber (_cfgAmmo >> "thrust") * getNumber (_cfgAmmo >> "thrustTime");
             if (getNumber (_cfgAmmo >> "weaponLockSystem") != 0) then {
-                private _maneuvrability = getNumber (_cfgAmmo >> "maxSpeed")^2 * getNumber (_cfgAmmo >> "maneuvrability") / 1500;
+                private _maneuvrability = getNumber (_cfgAmmo >> "maxSpeed")^1.8 * getNumber (_cfgAmmo >> "maneuvrability") / 200;
                 //if (_log) then {diag_log format ["thrust %1, maxSpeed %2, maneuvrability %3", _totThrust, getNumber (_cfgAmmo >> "maxSpeed"), getNumber (_cfgAmmo >> "maneuvrability")]};
                 _totThrust = _totThrust + _maneuvrability;
             };
@@ -121,12 +127,13 @@ private _fnc_ammoPriceCalculator = {
     };
 
     // hit & indirHit for final projectile (assuming original doesn't matter for subProjectile)
-    private _payload = [_cfgAmmo, _log] call _fnc_payloadValue;
-    private _totPayload = _payload * _subCount + _guidanceMod;
+    [_cfgAmmo, _probablyHEAT, _log] call _fnc_payloadValue params ["_varPayload", "_fixedPayload"];
+    private _varTotal = _varPayload * _subCount^0.8 + _guidanceMod;
+    private _varCost = 0.00019 * (500 + _velocity + _totThrust) * _varTotal;
 
-    // Normalized to 5.56/6.5mm ~= 1
-    private _price = 0.0002 * (450 + _velocity + _totThrust) * _totPayload;
-    //if (_log) then {diag_log format ["Payload %1, vMul %2, Price %3, end", _totPayload, 450 + _velocity + _totThrust, _price]};
+    // guidance applies twice, once as payload weight and then as direct expense
+    private _price = _varCost + (_fixedPayload * _subCount^0.8) + _guidanceMod;
+    //if (_log) then {diag_log format ["VCost %1, FCost %2, Vmul %3, Price %4, end", _varCost, _fixedPayload*_subCount^0.8, 1 + (_velocity + _totThrust) / 500, _price]};
     _price;
 };
 
