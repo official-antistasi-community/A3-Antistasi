@@ -78,6 +78,10 @@ if (_side in [Occupants, Invaders]) then {
     };
     _faction set ["vehiclesLightArmedTroop", _lightArmedTroop];
 
+    private _cargoCapable = (_faction get "vehiclesTrucks") + (_faction get "vehiclesCargoTrucks") + (_faction get "vehiclesMilitiaTrucks")
+        select { [_x] call A3A_Logistics_fnc_getVehCapacity > 1 };
+    _faction set ["vehiclesCargo", _cargoCapable];
+
     private _noType = [];
     if ((_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack") + (_faction get "vehiclesHelisTransport")
         + (_faction get "vehiclesHelisLight") isEqualTo []) then { _noType pushBack "heli" };

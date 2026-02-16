@@ -119,6 +119,10 @@ OccAndInv("vehiclesTrucks")
 + Reb("vehiclesTruck");
 setVar("vehiclesTrucks", _vehTrucks);
 
+//trucks that can carry logistics cargo
+setVar("vehiclesCargoTrucks", OccAndInv("vehiclesCargoTrucks"));        // flatbeds
+setVar("vehiclesCargo", OccAndInv("vehiclesCargo"));            // includes inf trucks with cargo capability
+
 //Armed cars
 private _carsArmed =
 OccAndInv("vehiclesLightArmed")
@@ -155,9 +159,6 @@ private _vehReb =
     + Reb("vehiclesHelis") + Reb("vehiclesPlane") + Reb("vehiclesMedical") + Reb("vehiclesAA");
 setVar("vehiclesReb", _vehReb);
 
-//trucks that can cary logistics cargo
-private _vehCargoTrucks = (_vehTrucks + OccAndInv("vehiclesCargoTrucks")) select { [_x] call A3A_Logistics_fnc_getVehCapacity > 1 };
-setVar("vehiclesCargoTrucks", _vehCargoTrucks);
 
 private _vehUtilityTrucks = 
 OccAndInv("vehiclesAmmoTrucks")

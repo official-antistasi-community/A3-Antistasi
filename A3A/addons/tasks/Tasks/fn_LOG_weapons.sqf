@@ -52,11 +52,7 @@ A3A_activeTasks pushBack "LOG";			// backwards compat with missionRequest
 
 // Create the truck
 private _faction = Faction(_side);
-private _truckType = call {
-    private _types = (_faction get "vehiclesTrucks") + (_faction get "vehiclesCargoTrucks");
-    _types = _types select { _x in FactionGet(all,"vehiclesCargoTrucks") };         // avoid troops-only trucks. Should prebuild?
-    selectRandom _types;
-};
+private _truckType = selectRandom (_faction get "vehiclesCargo");
 private _truck = objNull;
 isNil {
     _truck = createVehicle [_truckType, _placePos, [], 0, "CAN_COLLIDE"];
@@ -68,9 +64,9 @@ _task set ["_truck", _truck];
 
 // Create & load the crate
 private _crate = createVehicle [_faction get "ammobox", _placePos vectorAdd [0,0,-200], [], 0, "CAN_COLLIDE"];
-[_crate] call A3A_Logistics_fnc_addLoadAction;
 private _nodes = [_truck, _crate] call A3A_Logistics_fnc_canLoad;
 (_nodes + [true]) call A3A_Logistics_fnc_load;
+[_crate] call A3A_Logistics_fnc_addLoadAction;
 [_crate] spawn A3A_fnc_fillLootCrate;
 _task set ["_crate", _crate];
 
