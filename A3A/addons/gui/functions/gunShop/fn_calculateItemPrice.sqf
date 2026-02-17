@@ -23,9 +23,9 @@ private _fnc_payloadValue = {
         _hit = _hit min _penetration*1.5;  // hack to workaround RHS AT weirdness
 
         private _indirPayload = _indirHit*_indirRange;
-        _indirPayload = if (_simType in _mineSims) then { _indirPayload^0.7 } else { 0.8*_indirPayload^0.9 };
+        _indirPayload = if (_simType in _mineSims) then { _indirPayload^0.7 } else { 0.6*_indirPayload^0.9 };
 
-        private _fuseCost = 2.5*_indirPayload^0.4;		// use to buff cost of small HE rounds
+        private _fuseCost = 2.4*_indirPayload^0.4;		// use to buff cost of small HE rounds
         if (_isHEAT or getNumber (_cfgAmmo >> "explosive") > 0) then { _fuseCost = _fuseCost + _penetration^0.6 };		// add on HEAT rounds
 
         private _guidanceMod = [0, 50] select (getNumber (_cfgAmmo >> "weaponLockSystem") != 0);
@@ -131,7 +131,7 @@ private _fnc_ammoPriceCalculator = {
     // hit & indirHit for final projectile (assuming original doesn't matter for subProjectile)
     [_cfgAmmo, _probablyHEAT, _log] call _fnc_payloadValue params ["_varPayload", "_fixedPayload"];
     private _varTotal = _varPayload * _subCount^0.8 + _guidanceMod;
-    private _varCost = 0.00019 * (500 + _velocity + _totThrust) * _varTotal;
+    private _varCost = 0.000175 * (600 + _velocity + _totThrust) * _varTotal;
 
     // guidance applies twice, once as payload weight and then as direct expense
     private _price = _varCost + (_fixedPayload * _subCount^0.8) + _guidanceMod;
