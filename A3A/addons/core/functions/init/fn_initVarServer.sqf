@@ -457,7 +457,7 @@ private _vehicleResourceCosts = createHashMap;
 { _vehicleResourceCosts set [_x, 60] } forEach FactionGet(all, "vehiclesLightAPCs") + FactionGet(all, "vehiclesGunBoats");
 { _vehicleResourceCosts set [_x, 100] } forEach FactionGet(all, "vehiclesAPCs");
 { _vehicleResourceCosts set [_x, 150] } forEach FactionGet(all, "vehiclesAA") + FactionGet(all, "vehiclesArtillery") + FactionGet(all, "vehiclesIFVs") + FactionGet(all, "vehiclesLightTanks");
-{ _vehicleResourceCosts set [_x, 230] } forEach FactionGet(all, "vehiclesTanks") + FactionGet(all, "vehiclesSAM");
+{ _vehicleResourceCosts set [_x, 230] } forEach FactionGet(all, "vehiclesTanks") + FactionGet(all, "vehiclesSAM") + FactionGet(all, "vehiclesRadar");
 { _vehicleResourceCosts set [_x, 300] } forEach FactionGet(all, "vehiclesHeavyTanks");
 
 { _vehicleResourceCosts set [_x, 70] } forEach FactionGet(all, "vehiclesHelisLight") + FactionGet(all, "vehiclesAirPatrol");
@@ -477,7 +477,7 @@ private _groundVehicleThreat = createHashMap;
 
 { _groundVehicleThreat set [_x, 120] } forEach FactionGet(all, "vehiclesAPCs");
 { _groundVehicleThreat set [_x, 200] } forEach FactionGet(all, "vehiclesAA") + FactionGet(all, "vehiclesArtillery") + FactionGet(all, "vehiclesIFVs") + FactionGet(all, "vehiclesLightTanks");
-{ _groundVehicleThreat set [_x, 300] } forEach FactionGet(all, "vehiclesTanks") + FactionGet(all, "vehiclesSAM");
+{ _groundVehicleThreat set [_x, 300] } forEach FactionGet(all, "vehiclesTanks") + FactionGet(all, "vehiclesSAM") + FactionGet(all, "vehiclesRadar");
 { _groundVehicleThreat set [_x, 500] } forEach FactionGet(all, "vehiclesHeavyTanks"); //Expect these to mostly exist in templates which lack good access of most things to deal with tanks, ie WW2
 
 
@@ -543,6 +543,7 @@ A3A_validVehicles = createHashMap;
 
 	_valid set ["vehicleAA", _x get "vehiclesAA"];
 	_valid set ["vehicleSAM", _x get "vehiclesSAM"];
+	_valid set ["vehicleRadar", _x get "vehiclesRadar"];
 	_valid set ["vehicleArty", _x get "vehiclesArtillery"];
 	_valid set ["vehiclePolice", _x get "vehiclesPolice"];
 	_valid set ["vehicleTruck", (_x get "vehiclesTrucks") + (_x get "vehiclesCargoTrucks") + (_x get "vehiclesAmmoTrucks")
