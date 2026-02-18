@@ -42,7 +42,7 @@ if (_targside == teamPlayer) then {
 // Generate reveal value for the attack wave notifications
 private _reveal = call {
     if (_targside != teamPlayer) exitWith {0};
-    private _reveal = [_targPos] call A3A_fnc_calculateSupportCallReveal;
+    private _reveal = [_targPos, _side] call A3A_fnc_calculateSupportCallReveal;
     [_side, _targPos, _reveal] call A3A_fnc_useRadioKey;
 };
 

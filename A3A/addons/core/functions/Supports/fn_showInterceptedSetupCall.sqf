@@ -34,81 +34,8 @@ if (_reveal <= 0.5) then
 }
 else
 {
-    switch (toupper _supportType) do
-    {
-        case ("MAJORATTACK"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_MAJORATTACK", _sideName];
-        };
-        case ("COUNTERATTACK"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_COUNTERATTACK", _sideName];
-        };
-        case ("QRFAIR"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_QRFAIR", _sideName];
-        };
-        case ("QRFLAND"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_QRFLAND", _sideName];
-        };
-        case ("TANK"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_TANK", _sideName];
-        };
-        case ("AIRSTRIKE"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_AIRSTRIKE", _sideName];
-        };
-        case ("MORTAR"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_MORTAR", _sideName];
-        };
-        case ("ARTILLERY"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_ARTILLERY", _sideName];
-        };
-        case ("ORBITALSTRIKE"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_ORBITALSTRIKE", _sideName];
-        };
-        case ("CRUISEMISSILE"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_CRUISEMISSILE", _sideName];
-        };
-        case ("SAM"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_SAM", _sideName];
-        };
-        case ("CARPETBOMBS"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_CARPETBOMBS", _sideName];
-        };
-        case ("ASF"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_ASF", _sideName];
-        };
-        case ("CAS"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_CAS", _sideName]; 
-        };
-        case ("GUNSHIP"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_GUNSHIP", _sideName];
-        };
-        case ("UAV"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_UAV", _sideName];
-        };
-        case ("SEAD"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_SEAD", _sideName];
-        };
-        default
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntStpCll_default", _sideName, _supportType];
-        };
-    };
+    _text = format [localize format ["STR_A3A_fn_support_showIntStpCll_%1", toUpper _supportType], _sideName];
+    if (_text isEqualTo "") then {_text = format [localize "STR_A3A_fn_support_showIntStpCll_default", _sideName, _supportType]};
 };
 
 // Randomise setup time less with higher reveal value

@@ -10264,7 +10264,7 @@
         <Russian>Истребитель атакует цель</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntSPTCll_CARPETBOMBSLONG">
-        <Original>A %1 heavy bomber is performing a carpet bombing.</Original>
+        <Original>%1 planes are performing a carpet bombing.</Original>
         <Korean>%1 세력의 중폭격기가 융단폭격을 수행함</Korean>
         <Russian>Тяжелый бомбардировщик %1 выполняет ковровую бомбардировку.</Russian>
       </Key>
@@ -10400,7 +10400,7 @@
         <Russian>%1 готовит истребитель для завоевания превосходства в воздухе.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntStpCll_CARPETBOMBS">
-        <Original>A %1 heavy bomber is on the way.</Original>
+        <Original>%1 is preparing a carpet bombing strike.</Original>
         <Korean>%1 세력이 중폭격기를 보냄</Korean>
         <Russian>Тяжелый бомбардировщик %1 уже в пути.</Russian>
       </Key>
@@ -10415,7 +10415,7 @@
         <Russian>%1 только что отправил силы для контратаки.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntStpCll_CRUISEMISSILE">
-        <Original>A %1 launcher is preparing to launch a cruise missile.</Original>
+        <Original>%1 is preparing to launch a cruise missile.</Original>
         <Korean>%1 세력이 순항 미사일 발사를 준비 중</Korean>
         <Russian>Пусковая установка %1 готовится к запуску крылатой ракеты.</Russian>
       </Key>
