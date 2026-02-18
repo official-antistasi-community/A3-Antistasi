@@ -71,4 +71,7 @@ class mehland {
     size = 20.5;
     cityCount = 103;
     airbaseCount = 5;
+    class MapParams {
+		distanceSPWN = 800;
+	};
 };

@@ -35,4 +35,7 @@ class SPE_Normandy {
 	size = 12.3;
 	cityCount = 92;
 	airbaseCount = 5;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };
