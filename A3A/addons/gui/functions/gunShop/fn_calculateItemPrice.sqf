@@ -22,9 +22,7 @@ private _fnc_payloadValue = {
         private _penetration = (15/1000) * _caliber * _subVelocity;		// should be mm of RHS steel
         _hit = _hit min _penetration*1.5;  // hack to workaround RHS AT weirdness
 
-        private _indirPayload = _indirHit*_indirRange;
-        _indirPayload = if (_simType in _mineSims) then { _indirPayload^0.7 } else { 0.6*_indirPayload^0.9 };
-
+		private _indirPayload = 0.8*_indirHit^0.75*_indirRange^1.2;
         private _fuseCost = 2.4*_indirPayload^0.4;		// use to buff cost of small HE rounds
         if (_isHEAT or getNumber (_cfgAmmo >> "explosive") > 0) then { _fuseCost = _fuseCost + _penetration^0.6 };		// add on HEAT rounds
 
