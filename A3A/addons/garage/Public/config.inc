@@ -40,7 +40,7 @@ HR_GRG_Cnd_isAirbase = {
 
 // Return lock limit for specified player
 HR_GRG_getLockLimit = {
-    [HR_GRG_LockLimit_Guest, HR_GRG_LockLimit_Member] select (_this call A3A_fnc_isMember);
+    round ([HR_GRG_LockLimit_Guest, HR_GRG_LockLimit_Member] select (_this call A3A_fnc_isMember));
 };
 
 //Lock on garaged vehicles ( Values: [{""}, { getPlayerUID player }] )

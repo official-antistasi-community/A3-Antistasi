@@ -47,8 +47,8 @@ switch(_selectedTab) do
 
     _pictureBox = [0, 0, 6, 6];
     _displayBox = [7.5, 0, 55.5, 3];
-    _priceBox = [13, 3, 61, 3];
-    _stockBox = [20, 3, 54, 3];
+    _priceBox = [9, 3, 8, 3];
+    _stockBox = [18, 3, 16, 3];
     _logoBox = [70, 0, 6, 6];
     _addBox = [76, 0, 24, 6];
 
@@ -119,7 +119,7 @@ private _createdCtrls = [];
 
 {
     private _className = _x;
-    _y params ["_itemPrice", "_stock"];
+    _y params ["_itemPrice", "_stockGS", "_stockArsenal"];
 
     private _configClass = _config >> _className;
     private _displayName = getText (_configClass >> "displayName");
@@ -162,13 +162,23 @@ private _createdCtrls = [];
 
     private _displayStock = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
     _displayStock ctrlSetPosition _stockBox;
-    private _stockStr = str _stock + " in stock";           // TODO: stringtable
+    private _stockStr = format [localize "STR_antistasi_gun_shop_stock_gs", _stockGS];
+    private _stockArsenalStr = switch true do {
+        case (_stockArsenal isEqualTo -1): { format [localize "STR_antistasi_gun_shop_stock_arsenal", "Unlocked"] }; // just in case, but unlocked items shouldn't be here
+        case (minWeaps isEqualTo -1): { format [localize "STR_antistasi_gun_shop_stock_arsenal" + "; " + localize "STR_antistasi_gun_shop_unlocks_disabled", _stockArsenal] };
+        case (_className in AllMissileLaunchers && {allowGuidedLaunchers isEqualTo 0});
+        case (_className in AllRocketLaunchers && {allowUnguidedLaunchers isEqualTo 0});
+        case (_className in AllExplosives && {allowUnlockedExplosives isEqualTo 0}): { format [localize "STR_antistasi_gun_shop_stock_arsenal" + "; " + localize "STR_antistasi_gun_shop_unlocks_disabled_specific", _stockArsenal] };
+        default { format [localize "STR_antistasi_gun_shop_stock_arsenal" + "; ", _stockArsenal] + format [localize "STR_antistasi_gun_shop_unlock_amount", minWeaps] };
+    };
     _displayStock ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#63DDFF' shadow='2'>%1</t>", _stockStr]);
+    _displayStock ctrlSetTooltip _stockArsenalStr;
     _displayStock ctrlCommit 0;
 
     private _displayPrice = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
     _displayPrice ctrlSetPosition _priceBox;
-    _displayPrice ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _itemPrice]);
+    private _priceAlign = ["left", "right"] select (_columnCount == 1);
+    _displayPrice ctrlSetStructuredText parseText (format ["<t size='0.65' align='%2' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _itemPrice, _priceAlign]);
     _displayPrice ctrlCommit 0;
 
     private _modLogo = _display ctrlCreate ["A3A_PictureStroke", -1, _itemControlsGroup];
@@ -184,17 +194,17 @@ private _createdCtrls = [];
     _button setVariable ["className", _className];
     _button setVariable ["selectedTabIDC", _selectedTabIDC];
     _button setVariable ["price", _itemPrice];
-    _button setVariable ["stock", _stock];
+    _button setVariable ["stock", _stockGS];
 
     _button ctrladdeventhandler ["ButtonClick", {
         params ["_control"];
         private _className = _control getVariable ["className", ""];
         private _selectedTabIDC = _control getVariable ["selectedTabIDC", ""];
         private _price = _control getVariable ["price", ""];
-        private _stock = _control getVariable ["stock", 0];
+        private _stockGS = _control getVariable ["stock", 0];
         if(_className isEqualTo "" || _selectedTab isEqualTo "") exitwith {};
 
-        [_className, _price, 1, _stock] call A3A_GUI_fnc_addToCart;
+        [_className, _price, 1, _stockGS] call A3A_GUI_fnc_addToCart;
 
         call A3A_GUI_fnc_updateCartNumber;
 

@@ -62,4 +62,7 @@ class pulau {
 	size = 12.3;
 	cityCount = 21;
 	airbaseCount = 2;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

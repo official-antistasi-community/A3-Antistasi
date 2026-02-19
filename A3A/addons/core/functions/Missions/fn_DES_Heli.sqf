@@ -11,9 +11,11 @@
 */
 if (!isServer and hasInterface) exitWith{};
 
-private _missionOrigin = _this select 0;
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+
+params ["_missionOrigin", "_posCrashOrigin"];
+
 private _difficult = if (random 10 < tierWar) then {true} else {false};
 private _bonus = if (_difficult) then {2} else {1};
 private _missionOriginPos = getMarkerPos _missionOrigin;
@@ -21,25 +23,7 @@ private _sideX = if (sidesX getVariable [_missionOrigin,sideUnknown] == Occupant
 private _faction = Faction(_sideX);
 Debug_3("Origin: %1, Hardmode: %2, Controlling Side: %3", _missionOrigin, _difficult, _sideX);
 
-//finding crash position
-private _ang = random 360;
-private _countX = 0;
-private _dist = if (_difficult) then {2000} else {3000};
-private _posCrashOrigin = [];
-while {true} do {
-    _posCrashOrigin = _missionOriginPos getPos [_dist,_ang];
-    private _notOutOfBounds = (_posCrashOrigin select [0,2]) findIf { (_x < 0 + 1000) || (_x > worldSize -1000)} isEqualTo -1; //1k grace for refinement search later
-    if ((!surfaceIsWater _posCrashOrigin) and (_posCrashOrigin distance (getMarkerPos respawnTeamPlayer) < 4000) and (_posCrashOrigin distance (getMarkerPos respawnTeamPlayer) > 1000) and _notOutOfBounds) exitWith {};
-    _ang = _ang + 1;
-    _countX = _countX + 1;
-    if (_countX > 360) then
-        {
-        _countX = 0;
-        _dist = _dist - 500;
-        };
-};
-
-// selecting Aircraft
+// Determine the heli type
 private _light = _faction get "vehiclesHelisLight";
 private _transport = _faction get "vehiclesHelisTransport";
 private _lightAttack = _faction get "vehiclesHelisLightAttack";
@@ -49,10 +33,6 @@ if (_light isNotEqualTo []) then {_typePool append [_light, 1]};
 if (_transport isNotEqualTo []) then {_typePool append [_transport, 1]};
 if (_lightAttack isNotEqualTo []) then {_typePool append [_lightAttack, 2]};
 if (_fullAttack isNotEqualTo []) then {_typePool append [_fullAttack, 1]};
-if (_typePool isEqualTo []) exitWith {
-    Error("No aircrafts in arrays vehiclesHelisLight, vehiclesHelisTransport or vehiclesHelisAttack. Reselecting DES mission");
-    ["DES"] remoteExec ["A3A_fnc_missionRequest",2];
-};
 private _heliType = selectRandomWeighted _typePool;
 private _typeVehH = selectRandom _heliType;
 private _isAttackHeli = _typeVehH in (_fullAttack + _lightAttack);
@@ -61,7 +41,7 @@ private _isAttackHeli = _typeVehH in (_fullAttack + _lightAttack);
 private _flatPos = [_posCrashOrigin, 0, 1000, 0, 0, 0.1] call BIS_fnc_findSafePos;
 private _posCrash = _flatPos findEmptyPosition [0,100,_typeVehH];
 if (count _posCrash == 0) then {_posCrash = _posCrashOrigin};//if no pos use _posCrashOrigin
-if (!isMultiplayer) then {{ _x hideObject true } foreach (nearestTerrainObjects [_posCrash,["tree","bush", "ROCKS"],50])} else {{[_x,true] remoteExec ["hideObjectGlobal",2]} foreach (nearestTerrainObjects [_posCrash,["tree","bush", "ROCKS"],50])};//clears area of trees and bushes
+{[_x,true] remoteExec ["hideObjectGlobal",2]} foreach (nearestTerrainObjects [_posCrash,["tree","bush", "ROCKS"],50]);//clears area of trees and bushes
 Debug_2("Crash Location: %1, Aircraft: %2", _posCrash, _typeVehH);
 
 //creating array for cleanup

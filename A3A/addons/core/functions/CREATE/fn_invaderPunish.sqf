@@ -133,10 +133,7 @@ if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time 
         Invaders revealMine _mineX;
     };
     [_mrkDest] call A3A_fnc_destroyCity;
-    // Putting this stuff here is a bit gross, but currently there's no cityFlip function. Usually done by resourceCheck.
-    sidesX setVariable [_mrkDest, Invaders, true];
-	[_mrkDest, Invaders] remoteExecCall ["A3A_fnc_garrisonServer_changeSide", 2];
-    [_mrkDest] call A3A_fnc_mrkUpdate;
+    [_mrkDest, Invaders] remoteExecCall ["A3A_fnc_citySideChange", 2];
     [] spawn A3A_fnc_checkCampaignEnd; // If a town is destroyed, check for loss
 };
 

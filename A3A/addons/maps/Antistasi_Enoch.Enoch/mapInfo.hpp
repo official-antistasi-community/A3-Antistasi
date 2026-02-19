@@ -35,4 +35,7 @@ class enoch {
 	size = 12.8;
 	cityCount = 28;
 	airbaseCount = 4;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

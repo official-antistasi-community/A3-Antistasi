@@ -27,7 +27,7 @@ private _typeWeights = createHashMapFromArray [["staticMortar", 1], ["staticAT",
 private _noPlaceTypes = _faction get "noPlaceTypes";
 
 private _enemyAirfieldPositions = airportsX select {sidesX getVariable _x != _side} apply { markerPos _x };
-private _reinfMarkers = markersX + controlsX + (destroyedSites select { _x in citiesX });
+private _reinfMarkers = airportsX + resourcesX + factories + outposts + seaports + controlsX + (destroyedSites select { _x in citiesX });
 
 
 private _markers = [];         // [marker, type, numReq]
@@ -122,7 +122,7 @@ while {_totalReinf > 0} do
     };
 
     private _siteType = A3A_garrison get _marker get "type";
-    private _quality = [_siteType, _side, random 0.4] call A3A_fnc_getSiteTroopQuality;
+    private _quality = [_siteType, _marker, _side] call A3A_fnc_getSiteTroopQuality;
     private _numTroops = [4, 8] select (_needed > 4 and _totalReinf > 40 and random 1 > 0.3);
     _totalReinf = _totalReinf - _numTroops*10;
 

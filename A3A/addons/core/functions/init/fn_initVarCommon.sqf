@@ -298,4 +298,11 @@ A3A_strongUniformsHM = _strongUniforms createHashMapFromArray [];		// fills with
 medicAnims = ["AinvPknlMstpSnonWnonDnon_medic_1","AinvPknlMstpSnonWnonDnon_medic0","AinvPknlMstpSnonWnonDnon_medic1","AinvPknlMstpSnonWnonDnon_medic2"];
 
 
+////////////////////////////////////
+//      OTHER LOOKUP TABLES      ///
+////////////////////////////////////
+
+A3A_markerPrefixHM = createHashMapFromArray [["airport", "airp_"], ["outpost", "outp_"], ["resource", "reso_"], ["factory", "fact_"], ["seaport", "seap_"]];
+
+
 Info("initVarCommon completed");

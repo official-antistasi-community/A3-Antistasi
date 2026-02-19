@@ -37,4 +37,7 @@ population numbers are reasonable, hence no need to manually adapt them
 	size = 10.2;
 	cityCount = 26;
 	airbaseCount = 5;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

@@ -41,8 +41,9 @@ private _text = call {
         if (_marker in destroyedSites) exitWith { format [localize "STR_A3A_fn_init_cityinfo_destr", _marker] };
 
         (A3A_cityData getVariable _marker) params ["_numCiv", "_suppReb"];
+        private _enemyName = if (_side == teamPlayer) then { FactionGet(occ,"name") } else { _nameFaction };
         private _text = format [localize "STR_A3A_fn_init_cityinfo_overview_2",
-            _marker, _numCiv, 100-_suppReb toFixed 0, _suppReb toFixed 0, "%", FactionGet(occ,"name"), FactionGet(reb,"name")];
+            _marker, _numCiv, 100-_suppReb toFixed 0, _suppReb toFixed 0, "%", _enemyName, FactionGet(reb,"name")];
 
         private _power = call {
             private _antenna = A3A_antennaMap get _marker;

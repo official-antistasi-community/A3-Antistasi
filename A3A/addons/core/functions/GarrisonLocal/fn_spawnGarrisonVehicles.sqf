@@ -108,7 +108,7 @@ private _fnc_isBlocked = {
     private _unitType = if (_side != teamPlayer) then {
         if (_storedTroops#0 == 0) then { sleep 0.1; continue };
         _storedTroops set [0, (_storedTroops#0) - 1];
-        _faction get (["unitPoliceGrunt", "unitGrunt", "unitMilitiaGrunt", "unitMilitiaGrunt"] select floor (_storedTroops#1 + random 0.99));
+        _faction get (["unitPoliceGrunt", "unitMilitiaGrunt", "unitGrunt", "unitGrunt"] select floor (_storedTroops#1 + random 0.99));
     } else {
         private _index = _storedTroops find (_faction get "unitCrew");
         if (_index == -1) then { _index = _storedTroops find (_faction get "unitRifle") };

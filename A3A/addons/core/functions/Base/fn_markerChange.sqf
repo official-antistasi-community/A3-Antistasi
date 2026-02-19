@@ -23,7 +23,7 @@ Info_3("Changing side of %1 from %2 to %3", _markerX, _loser, _winner);
 sidesX setVariable [_markerX,_winner,true];
 
 // Do the garrison update
-[_markerX, _winner] call A3A_fnc_garrisonServer_changeSide;
+[_markerX, _winner, _loser] call A3A_fnc_garrisonServer_changeSide;
 
 // Sort out war tier if necessary
 if (teamPlayer in [_loser, _winner]) then { [] call A3A_fnc_tierCheck };

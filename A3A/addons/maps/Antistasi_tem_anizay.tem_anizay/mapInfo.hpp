@@ -35,4 +35,7 @@ class tem_anizay {
 	size = 10.2;
 	cityCount = 34;
 	airbaseCount = 3;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };
