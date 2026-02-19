@@ -102,10 +102,12 @@ if (_vehicle getVariable ['A3A_canGarage', false]) exitwith {
 if !((_vehicle getVariable ["SA_Tow_Ropes",objNull]) isEqualTo objNull) exitWith {["STR_HR_GRG_Feedback_addVehicle_SATow"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     //crewed
+private _isUAV = unitIsUAV _vehicle;
 private _exit = false;
 if ( ( {alive _x} count (crew _vehicle) ) > 0) then { _exit = true };
 { if ( ( {alive _x} count (crew _x) ) > 0) exitWith {_exit = true} } forEach attachedObjects _vehicle;
-if (_exit) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Crewed"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+if (_exit && (!_isUAV)) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Crewed"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+if (_isUAV && (crew _vehicle isNotEqualTo [] && {side _vehicle isNotEqualTo side player})) exitWith {  ["STR_HR_GRG_Feedback_addVehicle_HostileUAV"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     // valid vehicle for garage
 private _cat = [_class] call HR_GRG_fnc_getCatIndex;
@@ -201,6 +203,8 @@ private _catsRequiringUpdate = [];
     if (typeOf _x in ["ACE_Wheel", "ACE_Track"]) then { continue };
     [_x, _vehicle] call ace_cargo_fnc_unloadItem;
 } forEach (_vehicle getVariable ["ace_cargo_loaded", []]);
+
+if (_isUAV) then {{deleteVehicle _x} forEach (crew _vehicle)};
 
 // Can only deal correctly with static weapons here. Drop everything else where it is.
 {
