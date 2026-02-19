@@ -6,7 +6,6 @@ private _nearVehicles = (nearestObjects [_targPos, ["LandVehicle", "ThingX"], _r
 };
 
 if (_vehType isEqualTo "pylon") then {_vehType = "rearm"};
-private _cargoVar = format ["A3A_%1Cargo", _vehType];
 private _index = _nearVehicles findIf {([_x, _vehType] call A3A_fnc_getResourceCargo) > -1};
 if (_index isEqualTo -1) exitWith {[objNull, -1]};
 private _selVeh = _nearVehicles#_index;

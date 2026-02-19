@@ -65,7 +65,7 @@ switch (_mode) do {
         {
             
 
-            _x params ["_name", "_roundsToBuy", "_orderPrice", "", "", "", ["_turretPath", [0]]];
+            _x params ["_name", "_roundsToBuy", "_orderPrice", "", "", "", ["_turretPath", [-1]]];
             
             // icky part
             // Ok so we need to figure out how many full mags are needed and how many bullets are in the last partial mag
@@ -84,15 +84,9 @@ switch (_mode) do {
                 _partialMagSize = _roundsPerMag;
             };
             // this might hit locality issues with addMagazines
-            if (allTurrets _veh isEqualTo []) then {
-                _veh removeMagazines _name;
-                _veh addMagazines [_name, _fullBoxes];
-                _veh addMagazine [_name, _partialMagSize];
-            } else {
-                _veh removeMagazinesTurret [_name, _turretPath];
-                _veh addMagazinesTurret [_name, _turretPath, _fullBoxes];
-                _veh addMagazineTurret [_name, _turretPath, _partialMagSize];
-            };
+            _veh removeMagazinesTurret [_name, _turretPath];
+            _veh addMagazinesTurret [_name, _turretPath, _fullBoxes];
+            _veh addMagazineTurret [_name, _turretPath, _partialMagSize];
             
         } forEach _purchaseList;
     };
