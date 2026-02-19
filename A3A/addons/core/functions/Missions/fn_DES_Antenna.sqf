@@ -37,16 +37,15 @@ _bonus = if (_difficultX) then {2} else {1};
 if (dateToNumber date > _dateLimitNum) then
 	{
 	[_taskId, "DES", "FAILED"] call A3A_fnc_taskSetState;
-	[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+	[-10,theBoss] call A3A_fnc_playerScoreAdd;
 	}
 else
 	{
 	sleep 15;
 	[_taskId, "DES", "SUCCEEDED"] call A3A_fnc_taskSetState;
-    [_side, 10, 120] remoteExec ["A3A_fnc_addAggression", 2];
+	[_side, 10, 120] remoteExec ["A3A_fnc_addAggression", 2];
 	[400*_bonus, _side] remoteExec ["A3A_fnc_timingCA",2];
-	{if (_x distance _positionX < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-	[10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+	[20*_bonus, false, _positionX, 500] call A3A_tasks_fnc_rewardPlayers;     // any players within 500m
 	};
 
 deleteMarker _mrkFinal;

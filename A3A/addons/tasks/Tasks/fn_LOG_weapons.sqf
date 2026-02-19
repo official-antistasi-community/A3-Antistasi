@@ -108,21 +108,25 @@ _patrolGroup deleteGroupWhenEmpty true;
     [_group] spawn A3A_fnc_enemyReturnToBase;
 };
 
-// Support vehicle
-private _suppType = selectRandomWeighted ([_side, tierWar, false] call A3A_fnc_getVehiclesGroundTransport);
-//params ["_vehicleType", "_troopType", "_resPool", "_landPosBlacklist", "_side", "_markerOrigin", "_posDestination", ["_seaPath", []]];
-private _suppData = [_suppType, "Normal", "legacy", [], _side, _destMrk, getPosATL _truck] call A3A_fnc_createAttackVehicle;
-_task set ["_suppData", _suppData];
+// Spawn independent support vehicle
+[_side, _destMrk, _truck] spawn {
+    params ["_side", "_destMrk", "_truck"];
 
-// Needs supportSpends otherwise it'll send QRFs on top
-private _resources = (A3A_vehicleResourceCosts getOrDefault [_suppType, 0]) + 10 * count crew (_suppData#0);
-A3A_supportStrikes pushBack [_side, "TROOPS", getPosATL _truck, time + 3600, 3600, _resources];
-A3A_supportSpends pushBack [_side, getPosATL _truck, getPosATL _truck, _resources, time];
+    sleep 300;
+    private _suppType = selectRandomWeighted call {
+        if (random 1 < 0.5) exitWith { [_side, tierWar, false] call A3A_fnc_getVehiclesGroundTransport };
+        [_side, tierWar, false] call A3A_fnc_getVehiclesGroundSupport;
+    };
+    //params ["_vehicleType", "_troopType", "_resPool", "_landPosBlacklist", "_side", "_markerOrigin", "_posDestination", ["_seaPath", []]];
+    private _suppData = [_suppType, "Normal", "legacy", [], _side, _destMrk, getPosATL _truck] call A3A_fnc_createAttackVehicle;
+    _suppData params ["_vehicle", "_crewGroup", "_cargoGroup"];
 
-// Basic behaviour for support vehicle group
-[_suppData#0, _suppData#1, _suppData#2, _truck] spawn
-{
-    params ["_vehicle", "_crewGroup", "_cargoGroup", "_truck"];
+    // Needs supportSpends otherwise it'll send QRFs on top
+    private _resources = (A3A_vehicleResourceCosts getOrDefault [_suppType, 0]) + 10 * count crew _vehicle;
+    A3A_supportStrikes pushBack [_side, "TROOPS", getPosATL _truck, time + 3600, 3600, _resources];
+    A3A_supportSpends pushBack [_side, getPosATL _truck, getPosATL _truck, _resources, time];
+
+    // Basic behaviour for support vehicle group
     private _truckSpawn = getPosATL _truck;
     private _soldiers = units _cargoGroup;			// should always have units
     while { _truck distance2d _truckSpawn < 200 } do
@@ -274,17 +278,7 @@ _task set ["s_crateWatch",
 }];
 
 _task set ["s_succeeded", {
-    // find closest player to the crate (driver? who knows)
-    private _crate = _this get "_crate";
-    private _players = (allPlayers - entities "HeadlessClient_F") inAreaArray [_crate, 100, 100];
-    _distances = _players apply { _x distance2d _crate };
-    private _nearPlayer = _players select (_distances find selectMin _distances);
-
-    if (!isNil "_nearPlayer") then {
-        private _count = count units group _nearPlayer;
-        { [20 / _count, _x] call A3A_fnc_playerScoreAdd } forEach units group _nearPlayer;
-    };
-    [5, theBoss] call A3A_fnc_playerScoreAdd;
+    [20, true, _this get "_crate", 100] call FUNC(rewardPlayers);     // grouped players within 100m
     [0, 200] remoteExec ["A3A_fnc_resourcesFIA", 2];
 
     [_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;

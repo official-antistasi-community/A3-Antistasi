@@ -158,9 +158,8 @@ if (_pointSum >= _neededPoints) then {
     ["Large", _side] remoteExec ["A3A_fnc_selectIntel", 2];
     {
         [localize "STR_A3A_fn_intel_title2", localize "STR_A3A_fn_intel_encr_success"] call A3A_fnc_customHint;
-        [10,_x] call A3A_fnc_playerScoreAdd;
-    } forEach ([50,0,_intel,teamPlayer] call A3A_fnc_distanceUnits);
-    [5, theBoss] call A3A_fnc_playerScoreAdd;
+    } forEach ([100,0,_intel,teamPlayer] call A3A_fnc_distanceUnits);
+    [200, false, _intel, 100] call A3A_tasks_fnc_rewardPlayers;     // players within 100m of intel
 } else {
     _intel remoteExecCall ["removeAllActions", 0, _intel];
     [_intel, "Intel_Large"] remoteExec ["A3A_fnc_flagaction",0, _intel];

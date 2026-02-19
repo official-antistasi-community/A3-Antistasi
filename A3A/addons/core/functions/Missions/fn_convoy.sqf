@@ -337,11 +337,9 @@ private _fnc_applyResults =
     _taskState1 = if (_success1) then { "SUCCEEDED" } else { "FAILED" };
 
     [_adjustCA, _sideX] remoteExec ["A3A_fnc_timingCA", 2];
-    [_adjustScore, theBoss] call A3A_fnc_playerScoreAdd;
     if (_adjustScore > 0) then {
-        {
-            if (isPlayer _x) then { [_adjustScore,_x] call A3A_fnc_playerScoreAdd };
-        } forEach ([500,0,_vehObj,teamPlayer] call A3A_fnc_distanceUnits);
+        private _target = [_crate, _vehObj] select isNull _crate;
+        [30*_adjustScore, true, _target] call A3A_tasks_fnc_rewardPlayers;      // all players in group nearest to target
     };
 
     [_sideX, _aggroMod, _aggroTime] remoteExec ["A3A_fnc_addAggression", 2];

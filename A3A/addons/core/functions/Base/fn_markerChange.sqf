@@ -97,6 +97,7 @@ if (_markerX in airportsX) then
 			_prestigeInvaders = [50, 150];
 		};
 		[] spawn A3A_fnc_checkCampaignEnd; // If an airport is taken by rebels, check for victory
+		[36, false, _positionX, 500] call A3A_tasks_fnc_rewardPlayers;      // players within 500m of flag
 	}
 	else
 	{
@@ -154,6 +155,7 @@ if (_markerX in outposts) then
             _prestigeOccupants = [-15, 90];
             _prestigeInvaders = [30, 150];
         };
+        [20, false, _positionX, 300] call A3A_tasks_fnc_rewardPlayers;      // players within 300m of flag
 	};
 	["TaskSucceeded", ["", localize "STR_A3A_fn_base_markerChange_yesOutpost"]] remoteExec ["BIS_fnc_showNotification",_winner];
 	["TaskFailed", ["", localize "STR_A3A_fn_base_markerChange_noOutpost"]] remoteExec ["BIS_fnc_showNotification",_loser];
@@ -173,6 +175,7 @@ if (_markerX in seaports) then
         {
             _prestigeInvaders = [20, 120];
         };
+        [15, false, _positionX, 300] call A3A_tasks_fnc_rewardPlayers;      // players within 300m of flag
 	};
 	["TaskSucceeded", ["", localize "STR_A3A_fn_base_markerChange_yesSeaport"]] remoteExec ["BIS_fnc_showNotification",_winner];
 	["TaskFailed", ["", localize "STR_A3A_fn_base_markerChange_noSeaport"]] remoteExec ["BIS_fnc_showNotification",_loser];
@@ -191,6 +194,7 @@ if (_markerX in factories) then
         {
             _prestigeInvaders = [20, 120];
         };
+        [10, false, _positionX, 300] call A3A_tasks_fnc_rewardPlayers;      // players within 300m of flag
 	};
 	["TaskSucceeded", ["", localize "STR_A3A_fn_base_markerChange_yesFactory"]] remoteExec ["BIS_fnc_showNotification",_winner];
 	["TaskFailed", ["", localize "STR_A3A_fn_base_markerChange_noFactory"]] remoteExec ["BIS_fnc_showNotification",_loser];
@@ -209,6 +213,7 @@ if (_markerX in resourcesX) then
         {
             _prestigeInvaders = [20, 120];
         };
+        [10, false, _positionX, 300] call A3A_tasks_fnc_rewardPlayers;      // players within 300m of flag
 	};
 	["TaskSucceeded", ["", localize "STR_A3A_fn_base_markerChange_yesResource"]] remoteExec ["BIS_fnc_showNotification",_winner];
 	["TaskFailed", ["", localize "STR_A3A_fn_base_markerChange_noResource"]] remoteExec ["BIS_fnc_showNotification",_loser];

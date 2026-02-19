@@ -14,6 +14,7 @@ class CfgFunctions {
             class minutesFromNow {};
             class nearFriendlyMarkers {};
             class nearHostileMarkers {};
+            class rewardPlayers {};
             class taskNotifyNear {};
         };
         class CityParams {  // params getters for city tasks  |  take city marker as input, unlike other params functions

@@ -114,8 +114,7 @@ if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time 
 
     A3A_punishmentDefBuff = A3A_punishmentDefBuff + 1.25;
     [Occupants, -10, 90] remoteExec ["A3A_fnc_addAggression",2];
-    {if (isPlayer _x) then {[10,_x] call A3A_fnc_playerScoreAdd}} forEach ([500,0,_posDest,teamPlayer] call A3A_fnc_distanceUnits);
-    [10,theBoss] call A3A_fnc_playerScoreAdd;
+    [30, false, markerPos _mrkDest, 500] call A3A_tasks_fnc_rewardPlayers;
 } else {
     Info_1("Rebels lost a punishment attack against %1", _mrkDest);
     [_taskId, "invaderPunish", "FAILED"] call A3A_fnc_taskSetState;

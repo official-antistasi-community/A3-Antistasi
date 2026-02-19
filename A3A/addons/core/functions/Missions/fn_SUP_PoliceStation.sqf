@@ -36,8 +36,7 @@ else
 	[_taskId, "SUPP", "SUCCEEDED"] call A3A_fnc_taskSetState;
     [0,200] remoteExec ["A3A_fnc_resourcesFIA",2];
     [20, _marker, false] remoteExecCall ["A3A_fnc_citySupportChange", 2];           // no scaling? hmm
-    {if (isPlayer _x) then {[10,_x] call A3A_fnc_playerScoreAdd}} forEach ([300,0,_taskPos,teamPlayer] call A3A_fnc_distanceUnits);
-    [10,theBoss] call A3A_fnc_playerScoreAdd;
+    [20, true, _policeStation, 500] call A3A_tasks_fnc_rewardPlayers;           // players in nearest group within 500m
 };
 
 private _delay = 0 min (_startTime + 1200 - time);

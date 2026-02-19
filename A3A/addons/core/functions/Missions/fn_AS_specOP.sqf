@@ -38,9 +38,8 @@ else
 	[_taskId, "AS", "SUCCEEDED"] call A3A_fnc_taskSetState;
 	[0,200*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
 	[800*_bonus, _sideX] remoteExec ["A3A_fnc_timingCA",2];
-	{if (isPlayer _x) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach ([500,0,_positionX,teamPlayer] call A3A_fnc_distanceUnits);
-	[10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
-    [_sideX, 10, 60] remoteExec ["A3A_fnc_addAggression", 2];
+	[20*_bonus, false, _positionX, 500] call A3A_tasks_fnc_rewardPlayers;     // any players within 500m
+	[_sideX, 10, 60] remoteExec ["A3A_fnc_addAggression", 2];
 	["TaskFailed", ["", format [localize "STR_A3A_fn_mission_AS_specOP_dec",_nameDest]]] remoteExec ["BIS_fnc_showNotification",_sideX];
 };
 

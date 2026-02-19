@@ -5,7 +5,7 @@
     Arguments:
         <STRING> Marker
 
-	Public: Yes
+    Public: Yes
     Example:
         ["airport"] call A3A_fnc_DES_Heli;
 */
@@ -78,7 +78,7 @@ if (!_isAttackHeli) then {
     _ammoBox = [_faction get "ammobox", _posCrash, 10, 5, true] call A3A_fnc_safeVehicleSpawn; // Allegedly there's alternative syntax that allows you to check which classnames can be slingloaded
     // For that alternative syntax, no results are accurate for the ammoboxes we use so I'm spawning it to test it
     if !(_heli canSlingLoad _ammoBox) exitWith {
-    	deleteVehicle _ammoBox;
+        deleteVehicle _ammoBox;
     };
     // Otherwise when destroyed, ammoboxes sink 100m underground and are never cleared up
     _ammoBox addEventHandler ["Killed", { [_this#0] spawn { sleep 10; deleteVehicle (_this#0) } }];
@@ -365,18 +365,21 @@ if ((not alive _heli) || (_heli distance (getMarkerPos respawnTeamPlayer) < 100)
     if (alive _heli) then {
         Debug_1("%1 was captured", _heli);
     } else {
-        Debug_1("%1 was captured", _heli);
+        Debug_1("%1 was destroyed", _heli);
     };
     [_taskId, "DES", "SUCCEEDED"] call A3A_fnc_taskSetState;
     [0,300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
     [600*_bonus, _sideX] remoteExec ["A3A_fnc_timingCA",2];
-    {if (_x distance _heli < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-    [10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+    if (isPlayer driver _heli) then {
+        [30*_bonus, group driver _heli] call A3A_tasks_fnc_rewardPlayers;     // any players in heli group
+    } else {
+        [30*_bonus, false, _heli, 500] call A3A_tasks_fnc_rewardPlayers;     // players within 500m of wreck
+    };
 } else {
     Debug_2("%1 was successfully recovered by %2, mission failed", _heli, _sideX);
     [_taskId, "DES", "FAILED"] call A3A_fnc_taskSetState;
     [-200, _sideX] remoteExec ["A3A_fnc_timingCA",2];
-    [-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+    [-10,theBoss] call A3A_fnc_playerScoreAdd;
     if (_isAttackHeli) then {[-200, _sideX] remoteExec ["A3A_fnc_timingCA",2]};
 };
 Info("Downed Heli mission completed");

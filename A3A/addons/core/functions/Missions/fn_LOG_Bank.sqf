@@ -87,7 +87,7 @@ if ((dateToNumber date > _dateLimitNum) or (!alive _truckX)) then
 else
 	{
 	_countX = 120*_bonus;//120
-    [_enemySide, _truckX, _positionX, 4] remoteExec ["A3A_fnc_requestSupport", 2];
+	[_enemySide, _truckX, _positionX, 4] remoteExec ["A3A_fnc_requestSupport", 2];
 	["TaskFailed", ["", format ["Bank of %1 being assaulted",_nameDest]]] remoteExec ["BIS_fnc_showNotification",_enemySide];
 	{_friendX = _x;
 	if (_friendX distance _truckX < 300) then
@@ -132,11 +132,10 @@ if ((_truckX distance _posbase < 50) and (dateToNumber date < _dateLimitNum)) th
 	{
 	[_taskId, "LOG", "SUCCEEDED"] call A3A_fnc_taskSetState;
 	[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-    Debug("aggroEvent | Rebels won a bank mission");
+	Debug("aggroEvent | Rebels won a bank mission");
 	[_enemySide, 10, 120] remoteExec ["A3A_fnc_addAggression",2];
 	[400*_bonus, _enemySide] remoteExec ["A3A_fnc_timingCA",2];
-	{if (_x distance _truckX < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-	[10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+	[20*_bonus, true, _truckX] call A3A_tasks_fnc_rewardPlayers;     // any players in driver group
 	waitUntil {sleep 1; speed _truckX == 0};
 
 	[_truckX] call A3A_fnc_empty;
