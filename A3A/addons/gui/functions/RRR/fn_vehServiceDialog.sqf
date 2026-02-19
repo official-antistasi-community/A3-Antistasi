@@ -62,9 +62,7 @@ private _pylonPictureGroup = _display displayCtrl A3A_IDC_VEHSERVICE_PYLONPICTUR
 private _fnc_calculateAmmo = {
     params ["_magName", "_roundCount", "_magCount"];
     private _roundsPerMag = getNumber (configFile >> "CfgMagazines" >> _magName >> "count");
-    private _maxTotalRounds = _magCount * _roundsPerMag;
-    private _percentRemaining = _roundCount / _maxTotalRounds;
-    [_percentRemaining, _maxTotalRounds];
+    _magCount * _roundsPerMag;
 };
 private _fnc_getName = {
     params ["_name", ["_cfg", "CfgMagazines"]];
@@ -167,6 +165,7 @@ switch (_mode) do
                     _rowCount = _rowCount + 1;
 
                     _x params ["_magName", "_roundCount", "_magCount"];
+                    private _maxRounds = _x call _fnc_calculateAmmo;
 
                     private _data = [_x];
                     private _textCtrl = _display ctrlCreate ["A3A_Text_Small", -1, _dynamicTable];
@@ -199,8 +198,10 @@ switch (_mode) do
                     private _sliderCtrl = _display ctrlCreate ["A3A_Slider", _rowCount + A3A_IDC_SETUP_PARAMSROWS, _dynamicTable];
                     _sliderCtrl ctrlAddEventHandler ["sliderPosChanged", {["onAmmoSliderChanged", _this] spawn A3A_GUI_fnc_vehServiceDialog}];
                     _sliderCtrl ctrlSetPosition [GRID_W*67, GRID_H*_rowCount*6, GRID_W*30, GRID_H*4];
-                    _sliderCtrl sliderSetRange [0, 1];
+                    _sliderCtrl sliderSetRange [0, _maxRounds];
+                    _sliderCtrl sliderSetSpeed [1 max 0.01*_maxRounds, 1, 1];
                     _sliderCtrl ctrlCommit 0;
+
                     _data pushBack _sliderCtrl;
                     _data pushBack _textCtrl;
                     _dataList pushBack _data;
@@ -208,11 +209,10 @@ switch (_mode) do
                 } forEach _magsCombined;
 
                 _display setVariable ["rearmData", _dataList];
+
+                // initialize slider positions
                 {
-                    private _slider = _x#2;
-                    ["onAmmoSliderChanged", [_slider, -1]] call A3A_GUI_fnc_vehServiceDialog;
-                    ((_x#0) call _fnc_calculateAmmo) params ["_percentRemaining", "_maxTotalRounds"];
-                    _slider sliderSetSpeed [0.01, 0.01, 1/_maxTotalRounds];
+                    ["onAmmoSliderChanged", [_x#2, -1]] call A3A_GUI_fnc_vehServiceDialog;
                 } forEach _dataList;
 
                 ["calculateCosts"] call A3A_GUI_fnc_vehServiceDialog; // init
@@ -345,25 +345,22 @@ switch (_mode) do
         if (_rearmData isEqualTo []) exitWith {}; // possible to quit mid update cycle
         private _index = _rearmData findIf {(_x#2) isEqualTo _control};
         (_rearmData#_index) params ["_ammoData", "_percentCtrl", "_sliderCtrl"];
-        (_ammoData call _fnc_calculateAmmo) params ["_percentRemaining", "_maxTotalRounds"];
+        private _maxRounds = _ammoData call _fnc_calculateAmmo;
         _ammoData params ["_magName", "_roundCount", "_magCount"];
-        private _currentAmmoLevel = _roundCount / _maxTotalRounds;
-        if (_newValue < _currentAmmoLevel) then {
-            _control sliderSetPosition _currentAmmoLevel; 
-            _newValue = _currentAmmoLevel
+        if (_newValue < _roundCount) then {
+            _control sliderSetPosition _roundCount;         // apparently this doesn't call the EH?
+            _newValue = _roundCount;
         };
-        private _sliderValue = floor ((sliderPosition _sliderCtrl) * 100);
-        private _prettyOutput = if (_newValue > _currentAmmoLevel) then {
-             private _startingPercent = floor (_currentAmmoLevel * 100);
-             private _addedPercent = _sliderValue - _startingPercent;
-             [format ["%1%2 + %3%4", _startingPercent, "%", _addedPercent, "%"], format ["%1 + %2 / %3", _roundCount, (_maxTotalRounds * _addedPercent)/100, _maxTotalRounds]];
+        private _sliderPercent = floor (100 * _newValue / _maxRounds);
+        if (_newValue > _roundCount) then {
+            private _startingPercent = floor (100 * _roundCount / _maxRounds);
+            _percentCtrl ctrlSetText format ["%1%2 + %3%4", _startingPercent, "%", _sliderPercent - _startingPercent, "%"];
+            _percentCtrl ctrlSetTooltip format ["%1 + %2 / %3", _roundCount, _newValue - _roundCount, _maxRounds];
         } else {
-            [format ["%1%2", _sliderValue, "%"], format ["%1 / %2", _roundCount, _maxTotalRounds]];
+            _percentCtrl ctrlSetText format ["%1%2", _sliderPercent, "%"];
+            _percentCtrl ctrlSetTooltip format ["%1 / %2", _roundCount, _maxRounds];
         };
-        _percentCtrl ctrlSetText (_prettyOutput#0);
-        //_sliderCtrl sliderSetPosition (floor (_percentRemaining * 100) / 100); // 2 points of accuracy
-        _percentCtrl ctrlSetTooltip (_prettyOutput#1);
-        // recalulate
+        // recalculate
         if (_isInit) exitWith {};
         ["calculateCosts"] call A3A_GUI_fnc_vehServiceDialog;
     };
@@ -395,17 +392,10 @@ switch (_mode) do
                 {
                     _x params ["_ammoData", "_percentCtrl", "_sliderCtrl", "_textCtrl"];
                     _ammoData params ["_magName", "_roundCount", "_magCount"];
-                    (_ammoData call _fnc_calculateAmmo) params ["_percentRemaining", "_maxTotalRounds"];
 
                     private _curSel = sliderPosition _sliderCtrl;
-                    private _percentDiff = _curSel - _percentRemaining;
-                    if (_percentDiff == 0) then {continue};
-
-                    private _roundsToBuy = if (_curSel == 1) then {
-                        _maxTotalRounds - _roundCount
-                    } else {
-                        _maxTotalRounds * _percentDiff
-                    };
+                    private _roundsToBuy = _curSel - _roundCount;
+                    if (_roundsToBuy == 0) then {continue};
 
                     private _ammoName = getText (configFile >> "CfgMagazines" >> _magName >> "ammo");
                     private _roundPrice = [_ammoName, "ammo"] call A3A_GUI_fnc_calculateItemPrice;
@@ -584,8 +574,9 @@ switch (_mode) do
                 if (_controls isEqualTo []) exitWith {};
                 private _sliders = _controls apply {_x#2};
                 {
-                    _x sliderSetPosition 1;
-                    ["onAmmoSliderChanged", [_x, 1]] spawn A3A_GUI_fnc_vehServiceDialog;
+                    private _maxValue = sliderRange _x # 1;
+                    ["onAmmoSliderChanged", [_x, _maxValue]] call A3A_GUI_fnc_vehServiceDialog;
+                    _x sliderSetPosition _maxValue;
                 } forEach _sliders;
             };
             case ("pylon"): {
