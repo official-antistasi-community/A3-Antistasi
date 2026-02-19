@@ -27,7 +27,8 @@ class lingor3 {
 		{"jodido",13},{"pescito",34},{"ramona",36},{"gritto",44},{"vissa",35}
 		};
 	disabledTowns[] = {
-		"chupinka","mvv","mvt","pmalargo","vissa","pancho","pintosa"
+		"chupinka","mvv","mvt","pmalargo","vissa","pancho","pintosa","elcanto","lagosa","aguado","barro",
+		"gomez","conoteta","mairango","haciendos","garibosa","pachi","cabara","ayan","mercielo","cordo","pocobay"
 
 	};
 	antennas[] = {
@@ -50,12 +51,13 @@ class lingor3 {
 		{2628.78,9817.92,-0.349384},{1818.24,497.806,9.91821e-05},
 		{1230.3,787.588,0.20536},{507.015,9934.24,0}
 	};
-	antennasBlacklistIndex[] = {0,1,2,3,4,5,6,9,11,12,13,14,15,18,20,21,23,26,27,28,29,30,32,33,34,
+	antennasBlacklistIndex[] = {0,1,2,3,4,5,6,8,9,12,13,14,15,18,20,21,23,26,27,28,29,30,32,33,34,
 
 	};
-	banks[] = {{4326.05,4930.17,0},{3757.44,1390.48,0},{3019.46,5950.92,0},{6717.83,6060.44,0},{6941.92,6399.69,0}}; //no suitable building available
+	banks[] = {{4326.05,4930.17,0},{3757.44,1390.48,0},{3019.46,5950.92,0},{6717.83,6060.44,0},{6941.92,6399.69,0}};
+	// Note: City marker names use the text name, not config class for some reason
 	garrison[] = {
-		{},{"airport_6","factory_1","outpost_19","outpost_17","outpost_8","resource","control","control_1","control_2"},
+		{},{"airport_6","factory_1","outpost_17","outpost_8","resource","control","control_1","control_2","Medlina","Mercadio","Alma","Zuela","Drassen","Verto","Matacan"},
 		{},{"control","control_1","control_2"}
 	};
 	fuelStationTypes[] = {"Land_A_FuelStation_Feed","Land_Ind_FuelStation_Feed_EP1","Land_FuelStation_Feed_PMC","Land_Fuelstation","Land_Fuelstation_army","Land_Benzina_schnell"};
@@ -64,15 +66,24 @@ class lingor3 {
 		{"Land_fortified_nest_big_EP1", 300}, {"Land_Fort_Watchtower_EP1", 300}, {"Fortress2", 200}, {"Fortress1", 100}, {"Fort_Nest", 60},
 		{"Land_Shed_09_F", 120}, {"Land_Shed_10_F", 140}, {"ShedBig", 100}, {"Shed", 100}, {"ShedSmall", 60}, {"Land_GuardShed", 30},
 		// CUP sandbag walls
-		{"Land_BagFenceLong", 10}, {"Land_BagFenceShort", 10}, {"Land_BagFenceRound", 10},        //{"Land_BagFenceEnd", 0, 5}, 
+		{"Land_BagFenceLong", 10}, {"Land_BagFenceShort", 10}, {"Land_BagFenceRound", 10}, {"Land_BagFenceEnd", 0, 5}, 
 		// Other CUP fences
 		{"Land_fort_artillery_nest_EP1", 200}, {"Land_fort_rampart_EP1", 50}, {"Fort_Barricade", 50}, {"Fence", 20}, {"FenceWood", 10}, {"FenceWoodPalet", 10}, 
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
 	policeStationTypes[] = {
 		"Land_HouseV2_04_interier", "Land_HouseV2_02_Interier", "Land_A_Pub_01",
 		"Land_a_stationhouse", "Land_HouseV_1I4", "Land_Mil_Guardhouse"
+	};
+	requiredMods = "Lingor/Dingor Island";
+	size = 10.2;
+	cityCount = 50;
+	airbaseCount = 9;
+class MapParams {
+		distanceSPWN = 800;
 	};
 };
