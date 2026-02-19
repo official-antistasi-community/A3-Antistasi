@@ -28,11 +28,14 @@ private _vehCfg = if (_vehicle isEqualType objNull) then {
 
 if (_vehicle isEqualType objNull) then {
     if (isNull _vehicle) exitWith {false};
-    if ([_vehicle, "rearm"] call HR_GRG_getResourceCargo < 1) exitWith {false};                    // vanilla
-    if (_vehicle getVariable ["ace_rearm_currentSupply", 0] < 0) exitWith {false};          // ACE but used up
-    if (getAmmoCargo _vehicle > 0) exitWith {true};         
-    if (getNumber (_vehCfg/"ace_rearm_defaultSupply") > 0) exitWith {true}; // ace
-    if (getNumber (_vehCfg/"transportAmmo") > 0) exitWith {true};           // vanilla
+    if (HR_GRG_useNewRearmSys) exitWith {
+        if ([_vehicle, "rearm"] call HR_GRG_getResourceCargo < 1) exitWith {false}; // antistasi
+        if (getNumber (_vehCfg/"transportAmmo") > 0) exitWith {true};               // vanilla
+        false;
+    };
+    if (_vehicle getVariable ["ace_rearm_currentSupply", 0] < 0) exitWith {false};  // ACE but used up
+    if (getAmmoCargo _vehicle > 0) exitWith {true};                                 // vanilla
+    if (getNumber (_vehCfg/"ace_rearm_defaultSupply") > 0) exitWith {true};         // ace
     false;
 } else {
     if (!isClass _vehCfg) exitWith {false}; //invalid class string passed
