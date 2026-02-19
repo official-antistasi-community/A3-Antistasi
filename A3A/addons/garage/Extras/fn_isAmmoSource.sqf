@@ -35,8 +35,8 @@ if (_vehicle isEqualType objNull) then {
     if (getNumber (_vehCfg/"transportAmmo") > 0) exitWith {true};           // vanilla
     false;
 } else {
+    if (!isClass _vehCfg) exitWith {false}; //invalid class string passed
     if (getNumber (_vehCfg/"ace_rearm_defaultSupply") > 0) exitWith {true}; // ace
     if (getNumber (_vehCfg/"transportAmmo") > 0) exitWith {true};           // vanilla
-    if (!isClass _vehCfg) exitWith {false}; //invalid class string passed
     false;
 };
