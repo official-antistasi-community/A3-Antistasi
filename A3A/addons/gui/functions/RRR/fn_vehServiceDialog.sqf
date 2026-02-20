@@ -29,7 +29,7 @@ License: APL-ND
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-#define BLACKLISTED_MAGS []
+#define BLACKLISTED_MAGS ["FakeWeapon", "FakeMagazine"]
 #define BLACKLISTED_SIMS ["laserDesignate"]
 
 params[
@@ -110,6 +110,7 @@ switch (_mode) do
         _dynamicTableBackground ctrlshow (!_isPylon);
         private _pylonControls = _display getVariable ["pylonControls", []];
         if (count _pylonControls > 0) then {{ctrlDelete (_x#0)} foreach _pylonControls};
+        _pylonControls = [];
         private _ammoControls = flatten ((_display getVariable ["rearmData", []]) apply {[_x#1, _x#2, _x#3]});
         if (count _ammoControls > 0) then {{ctrlDelete _x} foreach _ammoControls};
         _display setVariable ["pylonControls", []];
@@ -178,7 +179,7 @@ switch (_mode) do
                         private _selWeapon = _weapons select _index;
                         _prettyName = [_selWeapon, "CfgWeapons"] call _fnc_getName;
                     };
-                    if (_turret isNotEqualTo [-1]) then { _prettyName = _prettyName + " " + str _turret };
+                    if (_turret isNotEqualTo [-1]) then { _textCtrl ctrlSetTooltip format ["Turret path %1", _turret] };
                     _textCtrl ctrlSetText _prettyName;
 
                     // this doesnt actually kick out useful info
@@ -557,7 +558,7 @@ switch (_mode) do
         closeDialog 0;
         if (player distance _veh > 25) exitWith {[localize "STR_antistasi_vehService_hintTitle", localize [format "STR_antistasi_vehService_tooFar%1", _stringSuffix]] spawn A3A_fnc_customHint};
         private _supplyVic = _display getVariable ["A3A_supplyVehicle", objNull];
-        [_veh, _mode, _supplyVic, _purchaseList, _totalCost] spawn A3A_fnc_serviceVehicle;
+        [_veh, _mode, _supplyVic, _purchaseList, _totalCost max 0] spawn A3A_fnc_serviceVehicle;
     };
 
     case ("reset"):
