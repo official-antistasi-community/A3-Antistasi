@@ -25,6 +25,7 @@ private _troops = _garrison get "troops";
 private _groups = _garrison get "groups";
 private _isRebel = (_garrison get "side") == teamPlayer;
 
+
 // If anyone is in a vehicle (static weapon, later?), get them out
 // Might have units occupying statics that aren't in this garrison, so we do this the daft way for now
 {

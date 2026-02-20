@@ -66,7 +66,7 @@ private _reloadTime = [_selectedBattery] call A3A_fnc_getReloadTime;
 private _roundType = "HE";
 
 // Set Artillery to busy
-_selectedBattery setVariable ["PATCOM_ArtilleryBusy", true, true];
+_selectedBattery setVariable ["PATCOM_ArtilleryBusy", true];
 
 /////// CHECK IF UNITS ARE IN DANGER CLOSE PROXIMITY \\\\\\\
 if ([_targetPos, _area, _side] call A3A_fnc_artilleryDangerClose) then {
@@ -75,9 +75,9 @@ if ([_targetPos, _area, _side] call A3A_fnc_artilleryDangerClose) then {
     };
 
     if (_dayState == "EVENING" || {_dayState == "NIGHT"}) then {
-        _roundType = "Flare"; // Need to add flare into templates.
+        _roundType = "FLARE"; // Need to add flare into templates.
     } else {
-        _roundType = "Smoke";
+        _roundType = "SMOKE";
     };
 };
 Trace_1("Round type %1", _roundType);
@@ -90,15 +90,13 @@ if (_batteryClass in (_faction get "vehiclesArtillery")) then {
     _shellType = (_shellArray # 0);
 };
 if (_shellType == "" and _batteryClass isKindOf "StaticMortar") then {
-    private _mags = [_batteryClass] call A3A_fnc_getMortarMags;
-    {
-        if (_y#0 == _roundType) exitWith {_shellType = _x};
-    } forEach _mags;
+    private _mags = [_batteryClass] call A3A_fnc_getMortarMags select 1;
+    _shellType = _mags getOrDefault [_roundType, ""];
 };
 
 if (_shellType == "") exitWith {
     ServerDebug_2("Unable to find ammoType %1 for %2", _roundType, _batteryClass);
-    _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false, true];
+    _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false];
 };
 Trace_1("Shell type %1", _shellType);
 
@@ -108,7 +106,7 @@ if !(_targetPos inRangeOfArtillery [[_selectedBattery], _shellType]) exitWith {
     If (PATCOM_DEBUG) then {
         [leader _group, "OUT OF RANGE", 5, "Red"] call A3A_fnc_debugText3D;
     };
-    _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false, true];
+    _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false];
 };
 
 /////// DO ARTILLERY FIRE \\\\\\\
@@ -127,5 +125,5 @@ if !(_targetPos inRangeOfArtillery [[_selectedBattery], _shellType]) exitWith {
         sleep (_reloadTime + (2 + (random 4)));
     };
 
-    _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false, true];
+    _selectedBattery setVariable ["PATCOM_ArtilleryBusy", false];
 };

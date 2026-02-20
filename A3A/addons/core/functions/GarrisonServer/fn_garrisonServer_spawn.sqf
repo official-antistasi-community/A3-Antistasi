@@ -17,7 +17,7 @@ params ["_marker"];
 
 Trace_1("Called with params %1", _this);
 
-if (_marker in A3A_garrisonMachine) exitWith {
+if (spawner getVariable _marker != 2) exitWith {
     Error_1("Garrison %1 already spawned", _marker);
 };
 if (_marker in A3A_markersToDelete) exitWith {
@@ -26,8 +26,10 @@ if (_marker in A3A_markersToDelete) exitWith {
 
 spawner setVariable [_marker, 0, true];
 
-private _machineID = if (_marker == "Synd_HQ") then { 2 } else { call A3A_fnc_chooseMachineForGarrison };
-A3A_garrisonMachine set [_marker, _machineID];
+if !(_marker in A3A_garrisonMachine) then {
+    private _machineID = if (_marker == "Synd_HQ") then { 2 } else { call A3A_fnc_chooseMachineForGarrison };
+    A3A_garrisonMachine set [_marker, _machineID];
+};
 
 private _data = A3A_garrison get _marker;
 if ("_civ" in _marker) then {

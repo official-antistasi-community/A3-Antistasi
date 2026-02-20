@@ -7,9 +7,11 @@ Arguments:
     <STRING> Classname of mortar vehicle
 
 Returns:
-    <HASHMAP> keys of magazine names, values [type, round count, round short description, round detail]. 
-    Type in ["HE", "Smoke", "Flare", "Unknown"]. 
-    Detail is [explosion radius, burn life time, light life time] depending on type
+    <ARRAY> containing two hashmaps:
+        <HASHMAP> keys of magazine names, values [type, round count, round short description, round detail]. 
+            Type in ["HE", "SMOKE", "FLARE", "Unknown"]. 
+            Detail is [explosion radius, burn life time, light life time] depending on type
+        <HASHMAP> Possible keys "HE", "SMOKE", "FLARE"; values is best magazine of that type
 
 Examples:
     ["B_Mortar_01_F"] call A3A_fnc_getMortarMags;
@@ -47,6 +49,8 @@ private _simTrans = createHashMapFromArray [ // simulation <-> [type, code for s
     ["shotsmoke",           ["SMOKE",   {getNumber (_this >> "timeToLive")}]]
 ]; // add any custom cases to this HM as well
 
+private _bestMags = createHashMap;
+private _bestVals = ["HE", "FLARE", "SMOKE"] createHashMapFromArray [0, 0, 0];
 private _output = createHashMap;
 private _magazines = getArray (_weaponCfg >> "magazines");
 {
@@ -69,9 +73,13 @@ private _magazines = getArray (_weaponCfg >> "magazines");
     private _detail = _ammoCfg call _detailCode;
 
 	_output set [_x, [_type, _roundCount, _description, _detail]];
+    if (_type in _bestVals and {_detail > _bestVals get _type}) then {
+        _bestMags set [_type, _x];
+        _bestVals set [_type, _detail];
+    };
 
 } forEach _magazines;
 
-A3A_artyMagHM set [_vehType, _output];
+A3A_artyMagHM set [_vehType, [_output, _bestMags]];
 
-_output;
+[_output, _bestMags];
