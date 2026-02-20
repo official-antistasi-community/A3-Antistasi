@@ -58,6 +58,7 @@ private _pylonPicture = _display displayCtrl A3A_IDC_VEHSERVICE_PYLONPICTURE;
 private _pylonPresets = _display displayCtrl A3A_IDC_VEHSERVICE_PYLONPRESETS;
 private _dynamicTableBackground = _display displayCtrl A3A_IDC_VEHSERVICE_DYNAMICTABLEBACKGROUND;
 private _pylonPictureGroup = _display displayCtrl A3A_IDC_VEHSERVICE_PYLONPICTUREGROUP;
+private _globalControlGroup = _display displayCtrl A3A_IDC_VEHSERVICE_CONTROLGROUP;
 
 private _fnc_calculateAmmo = {
     params ["_magName", "_roundCount", "_magCount"];
@@ -234,6 +235,7 @@ switch (_mode) do
                 _pylonPicture ctrlEnable false;
                 (ctrlPosition _pylonPicture) params ["_pictureX", "_pictureY", "_pictureW", "_pictureH"]; // direct UI positions are needed
                 _pylonList = "true" configClasses (_pylonConfig >> "Pylons");
+                (ctrlPosition _globalControlGroup) params ["_groupX", "_groupY"];
 
                 private _cfgMagazines = configFile >> "CfgMagazines";
                 private _currentMagazines = getPylonMagazines _veh;
@@ -245,8 +247,8 @@ switch (_mode) do
 
                     _uiPos params ["_uiPosX", "_uiPosY"];
 
-                    private _posX = (-7 * GRID_W) + _pictureX + _uiPosX * _pictureW * 1.5; // magic numbers. think I had to derive this for smth else. applicable outside of this menu?
-                    private _posY = (0.5 * GRID_H) + _pictureY + _uiPosY * _pictureH * 1.6667; // 1.6
+                    private _posX = (-7 * GRID_W) + _pictureX - _groupX + _uiPosX * _pictureW * 1.5; // magic numbers. think I had to derive this for smth else. applicable outside of this menu?
+                    private _posY = (0.5 * GRID_H) + _pictureY - _groupY + _uiPosY * _pictureH * 1.6667; // 1.6
 
                     private _mirroredIndex = getNumber (_x >> "mirroredMissilePos") - 1;
                     private _defaultTurretPath = getArray (_x >> "turret");
@@ -256,7 +258,7 @@ switch (_mode) do
                         _defaultTurretPath = [-1];
                     };
 
-                    private _ctrlCombo = _display ctrlCreate ["ctrlCombo", -1];
+                    private _ctrlCombo = _display ctrlCreate ["ctrlCombo", -1, _globalControlGroup];
                     _ctrlCombo ctrlSetPosition [_posX, _posY, (55 * GRID_W)/3, 3 * GRID_H];
                     _ctrlCombo ctrlCommit 0;
 
@@ -295,7 +297,7 @@ switch (_mode) do
                     private _ctrlTurret = controlNull;
 
                     if (_hasGunner) then {
-                        _ctrlTurret = _display ctrlCreate ["ctrlButtonPictureKeepAspect", -1];
+                        _ctrlTurret = _display ctrlCreate ["ctrlButtonPictureKeepAspect", -1, _globalControlGroup];
                         _ctrlTurret ctrlSetPosition [_posX - (5 * GRID_W), _posY, 5 * GRID_W, 5 * GRID_H];
                         _ctrlTurret ctrlCommit 0;
 

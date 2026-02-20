@@ -52,9 +52,9 @@ class A3A_VehServiceDialog
             h = 5 * GRID_H;
         };
 
-        class Controls : A3A_DefaultControlsGroup
+        class ControlGroup : A3A_DefaultControlsGroup           // why is everything in the same control group?
         {
-            idc = -1;
+            idc = A3A_IDC_VEHSERVICE_CONTROLGROUP;
             x = DIALOG_X;
             y = DIALOG_Y;
             w = DIALOG_W * GRID_W;
