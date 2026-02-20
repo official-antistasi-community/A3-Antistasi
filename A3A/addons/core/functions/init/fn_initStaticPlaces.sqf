@@ -25,11 +25,11 @@ _veh setDir (180 + getDir _building);
 
 // Data collection. Place statics on building, then run this while looking at building:
 _building = cursorObject;
-_statics = [];
+_statics = [[typeof _building]];
 {
 	_pos = _building worldToModel (getPosATL _x);
 	_dir = getDir _x - getDir _building;
-	_statics pushBack ["staticMG", _pos, _dir];
+	_statics pushBack ["MG", _pos, _dir];
 } forEach vehicles;
 _statics;
 */
@@ -60,6 +60,29 @@ private _buildingData = [
         ["MG", [-4.435,-4.998,4.973], -180]
     ],
 
+    // Livonia control/guard tower
+    [["Land_ControlTower_01_F"],
+        ["MG", [2.269,-1.918,1.769], 90],
+        ["MG",[-0.589,-2.299,1.769], 270],
+        ["MG",[0.627,-2.290,-1.331], 180]
+    ],
+
+    // Livonia control tower
+    [["Land_ControlTower_02_F"],
+        ["MG", [7.363,1.998,2.801], 45],
+        ["MG", [1.940,-2.295,2.799], -135]
+    ],
+
+    // Tall Livonia MG platform
+    [["Land_Sawmill_01_illuminati_tower_F"],
+        ["MG", [-0.213,-0.213,10.321], 180]
+    ],
+
+    // Livonia castle bastion
+    [["Land_CastleRuins_01_bastion_F"],
+        ["MG", [2.271,1.360,2.949], 90]
+    ],
+
     // Ground-level vanilla sandbag bunkers. Offset for some reason?
     [["Land_BagBunker_Small_F", "Land_BagBunker_01_small_green_F", "Land_vn_bagbunker_01_small_green_f", "Land_vn_bagbunker_small_f", "Land_vn_bunker_small_01"], 
         ["MG", [-0.998,-0.249,-0.946], 180]
@@ -75,9 +98,11 @@ private _buildingData = [
         ["MG", [-0.243,-0.100,-0.951], 180]
     ],
 
-    // Some sort of military building with open roof. Tanoa? VN not tested
+    // Some sort of military building with open roof. Common on Stubbhult. VN version not tested.
     [["Land_Radar_01_HQ_F", "Land_vn_radar_01_hq_f"],
-        ["AA", [-0.016,-0.031,3.841], 0]
+        ["AA", [-0.016,-0.031,3.841], 0],
+        ["MG", [-9.538,3.258,3.841], -45],
+        ["MG", [4.977,-10.323,3.841], 135]
     ],
 
     // Camouflaged wooden tower

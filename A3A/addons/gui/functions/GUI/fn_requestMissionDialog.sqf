@@ -63,7 +63,7 @@ switch (_mode) do
         };
 
         // Request mission
-        [_missionType, clientOwner] remoteExec ["A3A_fnc_missionRequest", 2];
+        [_missionType, clientOwner] remoteExec ["A3A_Tasks_fnc_requestTask", 2];
 
         closeDialog 1;
 

@@ -19,3 +19,4 @@ Maintainer: DoomMetal
 #include "communityAdDialog.hpp"
 #include "optionsDialog.hpp"
 #include "remarksDialog.hpp"
+#include "vehServiceDialog.hpp"

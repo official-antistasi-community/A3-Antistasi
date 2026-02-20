@@ -8,7 +8,7 @@
 
     Return Value:
     <Array>
-        <Int> Vanilla ammo cargo
+        <Int> Vanilla ammo cargo OR Antistasi ammo cargo
         <Int> ACE ammo cargo
     ] Ammo cargo data
 
@@ -23,7 +23,11 @@
 */
 params [["_veh", objNull, [objNull]]];
 
-private _baseAmmoCargo = getAmmoCargo _veh;
+private _baseAmmoCargo = if (HR_GRG_useNewRearmSys) then {
+    [_veh, "rearm"] call HR_GRG_getResourceCargo;
+} else {
+    getAmmoCargo _veh;
+};
 private _currentACEAmmoCargo = if (A3A_hasAce) then { [_veh] call ace_rearm_fnc_getSupplyCount } else { -1 };
 
 [_baseAmmoCargo,_currentACEAmmoCargo];

@@ -86,8 +86,9 @@ if !(_garrisonType in ["hq", "city", "roadblock", "camp", "rebpost"]) then
 };
 
 
-// Spawn everything else now so that statics etc don't get spawn-blocked
 private _storedTroops = +(_garrisonData get "troops");
+// If it's an enemy roadblock or camp then don't mix the troop types
+if (_garrisonType in ["roadblock", "camp"]) then { _storedTroops set [1, round (_storedTroops#1)] };
 
 // Subtract units spawned as vehAction crews
 if (_side != teamPlayer) then {

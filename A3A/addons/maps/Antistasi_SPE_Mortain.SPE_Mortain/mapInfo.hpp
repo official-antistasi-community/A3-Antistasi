@@ -35,4 +35,7 @@ class SPE_Mortain {
 	size = 8.2;
 	cityCount = 27;
 	airbaseCount = 6;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

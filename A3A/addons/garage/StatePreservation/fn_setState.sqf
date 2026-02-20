@@ -42,7 +42,7 @@
             ] Ammo Data
 
             <Array>
-                <Int> Vanilla ammo cargo
+                <Int> Vanilla ammo cargo OR Antistasi ammo cargo
                 <Int> ACE ammo cargo
             ] Ammo cargo data
 

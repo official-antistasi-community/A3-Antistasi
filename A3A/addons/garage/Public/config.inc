@@ -40,7 +40,7 @@ HR_GRG_Cnd_isAirbase = {
 
 // Return lock limit for specified player
 HR_GRG_getLockLimit = {
-    [HR_GRG_LockLimit_Guest, HR_GRG_LockLimit_Member] select (_this call A3A_fnc_isMember);
+    round ([HR_GRG_LockLimit_Guest, HR_GRG_LockLimit_Member] select (_this call A3A_fnc_isMember));
 };
 
 //Lock on garaged vehicles ( Values: [{""}, { getPlayerUID player }] )
@@ -166,4 +166,21 @@ HR_GRG_getVehicleSellPrice = {
 };
 
 
+// antistasi resource cargo
+
+HR_GRG_useNewPylonSys = true; // new rearm system, blocks pylons entirely. turn off for old behavior
+HR_GRG_useNewRearmSys = true; // new rearm system
+HR_GRG_useNewRepairSys = false; // new repair system
+HR_GRG_useNewRefuelSys = false; // new refuel system
+
+HR_GRG_getResourceCargo = {
+    params ["_veh", "_search"];
+    [_veh, _search, false] call A3A_fnc_getResourceCargo;
+};
+
+HR_GRG_setResourceCargo = {
+    params ["_veh", "_search", "_value"];
+    private _searchVar = format ["A3A_%1Cargo", _search];
+    _veh setVariable [_searchVar, _value, true];
+};
 
