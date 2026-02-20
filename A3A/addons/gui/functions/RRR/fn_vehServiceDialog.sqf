@@ -109,12 +109,11 @@ switch (_mode) do
         _dynamicTableBackground ctrlshow (!_isPylon);
         private _pylonControls = _display getVariable ["pylonControls", []];
         if (count _pylonControls > 0) then {{ctrlDelete (_x#0)} foreach _pylonControls};
-        _pylonControls = [];
         private _ammoControls = flatten ((_display getVariable ["rearmData", []]) apply {[_x#1, _x#2, _x#3]});
         if (count _ammoControls > 0) then {{ctrlDelete _x} foreach _ammoControls};
         _display setVariable ["pylonControls", []];
         _display setVariable ["rearmData", []];
-        
+
         switch (_selectedTab) do {
             case ("rearm"): {
                 (["rearm", getPosATL player, 25] call A3A_fnc_lookForSupplyVehicle) params ["_selSupplyVehicle", "_remCargo"];
@@ -127,14 +126,15 @@ switch (_mode) do
                 
 
                 // controls list with magazine names and sliders
-                private _mags = magazinesAllTurrets cursorObject select {!("pylon" in toLower (_x#0))} apply { [[_x#0, _x#2]] }; //[magName, ammo]
+                private _mags = magazinesAllTurrets cursorObject select {!("pylon" in toLower (_x#0))}; // apply { [_x#0, _x#2]] }; //[magName, ammo]
                 // not sorting these seems to return an intuitive order. edit: lies, its based on the last mag added.
                 //the good way to do this is to match it up with config which is not happening. most I can do is make it deterministic and dumb
                 _mags sort true;
 
+                // new format? [magclass, turret, bulletCount, magCount], was [magclass, bullets, mags]
                 private _magsCombined = []; 
                 {
-                    private _mag = _x#0#0;
+                    _x params ["_mag", "_turret", "_bullets"];
                     // blacklist
                     if (_mag in BLACKLISTED_MAGS) then {continue};
                     // check for laser
@@ -143,16 +143,13 @@ switch (_mode) do
                     if (_sim in BLACKLISTED_SIMS) then {continue};
 
                     // blacklist over
-                    private _currentMagIndex = _magsCombined findIf {(_x#0) isEqualTo _mag};
-                    private _magExists =  (_currentMagIndex > -1);
-                    private _currentMagInfo = if (_magExists) then {_magsCombined#_currentMagIndex} else {[_mag, 0, 0]};
-                    
-                    _magsCombined deleteAt _currentMagIndex;
-                    _magsCombined insert [_currentMagIndex, [[_mag, _currentMagInfo#1 + (_x#0#1), _currentMagInfo#2 + 1]]];
-
+                    private _currentMagIndex = _magsCombined findIf {_x#0 == _mag and _x#3 isEqualTo _turret};
+                    if (_currentMagIndex == -1) then { _magsCombined pushBack [_mag, 0, 0, _turret] };
+                    private _currentMagInfo = _magsCombined select _currentMagIndex;        // select -1 picks last element                    
+                    _currentMagInfo set [1, _currentMagInfo#1 + _bullets];
+                    _currentMagInfo set [2, _currentMagInfo#2 + 1];
                 } forEach _mags;
 
-                
 
                 // need to filter out weapons that dont need rearm
                 // left out for debugging
@@ -164,7 +161,7 @@ switch (_mode) do
                 {
                     _rowCount = _rowCount + 1;
 
-                    _x params ["_magName", "_roundCount", "_magCount"];
+                    _x params ["_magName", "_roundCount", "_magCount", "_turret"];
                     private _maxRounds = _x call _fnc_calculateAmmo;
 
                     private _data = [_x];
@@ -180,6 +177,7 @@ switch (_mode) do
                         private _selWeapon = _weapons select _index;
                         _prettyName = [_selWeapon, "CfgWeapons"] call _fnc_getName;
                     };
+                    if (_turret isNotEqualTo [-1]) then { _prettyName = _prettyName + " " + str _turret };
                     _textCtrl ctrlSetText _prettyName;
 
                     // this doesnt actually kick out useful info
@@ -391,7 +389,7 @@ switch (_mode) do
                 private _rearmData = _display getVariable "rearmData";
                 {
                     _x params ["_ammoData", "_percentCtrl", "_sliderCtrl", "_textCtrl"];
-                    _ammoData params ["_magName", "_roundCount", "_magCount"];
+                    _ammoData params ["_magName", "_roundCount", "_magCount", "_turret"];
 
                     private _curSel = sliderPosition _sliderCtrl;
                     private _roundsToBuy = _curSel - _roundCount;
@@ -402,7 +400,7 @@ switch (_mode) do
                     private _orderPrice = _roundPrice * _roundsToBuy;
                     _totalCost = _totalCost + _orderPrice;
 
-                    _purchaseList pushBack [_magName, _roundsToBuy, _orderPrice, ctrlText _textCtrl];
+                    _purchaseList pushBack [_magName, _roundsToBuy, _orderPrice, ctrlText _textCtrl, nil, nil, _turret];
 
                 } forEach _rearmData;
 
@@ -438,7 +436,7 @@ switch (_mode) do
                             _totalCost = _totalCost + _oldOrderPrice;
                             _purchaseList pushBack [_magName, _oldRoundsToBuy, _oldOrderPrice, [_magName] call _fnc_getName, false, _pylonIndex, _turretPath]; 
                         };
-                        continue 
+                        continue;
                     };
 
                     // if last mag != "" then refund last mag
