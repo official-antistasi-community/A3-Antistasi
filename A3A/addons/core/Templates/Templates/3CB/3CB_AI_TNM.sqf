@@ -128,7 +128,7 @@ _loadoutData set ["heavyATLaunchers", [
     "uk3cb_m47"
 ]];
 _loadoutData set ["AALaunchers", ["UK3CB_Blowpipe", "rhs_weap_fim92"]];
-_loadoutData set ["sidearms", ["UK3CB_BHP","rhsusf_weap_m1911a1"]];
+_loadoutData set ["sidearms", []];
 
 _loadoutData set ["ATMines", ["rhs_mine_M19_mag"]];
 _loadoutData set ["APMines", ["rhs_mine_m2a3b_trip_mag","rhs_mine_m2a3b_press_mag", "rhs_mine_M3_tripwire_mag","rhs_mine_m3_pressure_mag","rhs_mine_Mk2_tripwire_mag","rhs_mine_mk2_pressure_mag","rhsusf_mine_m49a1_3m_mag","rhsusf_mine_m49a1_6m_mag","rhsusf_mine_m49a1_10m_mag"]];
@@ -310,7 +310,6 @@ _militaryLoadoutData set ["sniperRifles", [
     ["UK3CB_M1903A1_unertl", "", "", "", ["UK3CB_M1903A1_3006_5rnd_Magazine", "UK3CB_M1903A1_3006_5rnd_Magazine_RT", "UK3CB_M1903A1_3006_5rnd_Magazine_R"], [], ""],
     ["UK3CB_M14", "", "", "uk3cb_optic_artel_m14", ["UK3CB_M14_20rnd_762x51", "UK3CB_M14_20rnd_762x51_R", "UK3CB_M14_20rnd_762x51_RT"], [], ""]
 ]];
-_militaryLoadoutData set ["sidearms", ["rhsusf_weap_m1911a1", "", ""]];
 
 ///////////////////////////////
 //    Police Loadout Data    //
@@ -400,7 +399,6 @@ _militiaLoadoutData set ["marksmanRifles", [
 _militiaLoadoutData set ["sniperRifles", [
     ["UK3CB_M1903A1_unertl", "", "", "", ["UK3CB_M1903A1_3006_5rnd_Magazine", "UK3CB_M1903A1_3006_5rnd_Magazine_RT", "UK3CB_M1903A1_3006_5rnd_Magazine_R"], [], ""]
 ]];
-_militiaLoadoutData set ["sidearms", ["rhsusf_weap_m1911a1", "", ""]];
 
 _militiaLoadoutData set ["traitorRifle", [
     "uk3cb_m1_advisor_carbine"
