@@ -91,14 +91,17 @@ class CfgFunctions
             class fillLootCrate {};
             class generateRebelGear {};
             class getRadio {};
+            class getResourceCargo {};
             class hasARadio {};
             class itemConfig {};
             class itemConfigMass {};
             class itemSort {};
             class itemType {};
             class launcherInfo {};
+            class lookForSupplyVehicle {};
             class loot {};
             class randomRifle {};
+            class serviceVehicle {};
             class setCargoItems {};
             class setRebelLoadouts {};
             class transfer {};
