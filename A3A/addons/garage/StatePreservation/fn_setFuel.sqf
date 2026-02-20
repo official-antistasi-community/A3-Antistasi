@@ -10,6 +10,8 @@
             <Int> Fuel cargo
             <Int> Ace Fuel cargo
         ] Fuel state
+        or
+        <Scalar> Fuel
 
     Return Value: <nil>
 
@@ -24,6 +26,8 @@
 */
 params ["_vehicle", "_fuelStats"];
 if !(local _vehicle) exitWith {};
+if (_fuelStats isEqualType 0) exitWith {_vehicle setFuel _fuel};
+
 _fuelStats params [["_fuel",1, [0]], ["_fuelCargo",-1,[0]], "_aceFuel"];
 _vehicle setFuel _fuel;
 _vehicle setFuelCargo _fuelCargo;
