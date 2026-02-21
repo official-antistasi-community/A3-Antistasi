@@ -47,8 +47,6 @@ HR_GRG_previewVehState = _veh#4;
 [HR_GRG_previewVeh, HR_GRG_previewVehState] call HR_GRG_fnc_setState;
 HR_GRG_previewVeh allowDamage false;
 
-Trace_1("Preview vehicle Fuel: %1", fuel HR_GRG_previewVeh);
-
 //set customisation
 private _customisation = _veh param [6, [false,false]];
 ([HR_GRG_previewVeh]+_customisation) call BIS_fnc_initVehicle;
