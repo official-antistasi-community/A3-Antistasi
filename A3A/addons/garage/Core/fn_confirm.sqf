@@ -33,11 +33,42 @@ private _fnc_placed = {
     [clientOwner, player, _fnc] remoteExecCall ["HR_GRG_fnc_execForGarageUsers", 2]; //run code on server as HR_GRG_Users is maintained ONLY on the server
 };
 
-//get mounts state
-HR_GRG_Mounts apply {
-    private _static = (HR_GRG_Vehicles#HR_GRG_STATICINDEX) get (_x#1);
-    _x pushBack (_static#4);
-    _x
+//get mounts state and customisation
+HR_GRG_Mounts = HR_GRG_Mounts apply {
+    _x params ["_mountClass", "_mountUID"];
+    
+    private _mountData = nil;
+    private _mountCategoryID = -1;
+    
+    {
+        private _categoryIndex = _forEachIndex;
+        private _category = HR_GRG_vehicles param [_categoryIndex, createHashMap];
+        
+        if (_mountUID in keys _category) then {
+            _mountData = _category get _mountUID;
+            _mountCategoryID = _categoryIndex;
+        };
+    } forEach [0, 1, 2, 5, 6, 7];
+    
+    if (isNil "_mountData") then {
+        [_mountClass, _mountUID, [], []];
+    } else {
+        private _stateData = [];
+        if (count _mountData >= 5) then {
+            _stateData = _mountData param [4, []];
+        };
+        
+        private _customisation = [];
+        if (_mountCategoryID == 7 && count _mountData >= 8) then {
+            _customisation = _mountData param [7, []];
+        } else {
+            if (_mountCategoryID != 7 && count _mountData >= 7) then {
+                _customisation = _mountData param [6, []];
+            };
+        };
+        
+        [_mountClass, _mountUID, _stateData, _customisation];
+    };
 };
 
 [
@@ -45,7 +76,7 @@ HR_GRG_Mounts apply {
     , _fnc_placed
     , {[false]}
     , []
-    , HR_GRG_Mounts
+    , HR_GRG_Mounts  // Now it contains [class, UID, state, customisation]
     , if (
             HR_GRG_Pylons_Enabled //Pylon editing enabled
             && { HR_GRG_hasAmmoSource } //or ammo source registered
