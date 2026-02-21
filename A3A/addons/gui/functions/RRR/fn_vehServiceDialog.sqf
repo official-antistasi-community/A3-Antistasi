@@ -123,7 +123,7 @@ switch (_mode) do
                     _resVehicle ctrlSetText "None found";
                 } else {
                     private _vehicleName = [typeOf _selSupplyVehicle, "CfgVehicles"] call _fnc_getName;
-                    _resVehicle ctrlSetText format ["%1 (%2 points)", _vehicleName, _remCargo];
+                    _resVehicle ctrlSetText format ["%1 (%2 points)", _vehicleName, round _remCargo];
                 };
                 
 

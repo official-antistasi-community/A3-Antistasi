@@ -69,7 +69,8 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 
 ["vehicleFuelDrum", ["SPE_Fuel_Barrel_US_01", 150]] call _fnc_saveToTemplate;
 ["vehicleFuelTank", ["", 1000]] call _fnc_saveToTemplate;
-["vehicleAmmoStation", ["", 5000]] call _fnc_saveToTemplate;
+["vehicleAmmoStation", ["", 3000]] call _fnc_saveToTemplate;
+["vehicleAmmoContainer", ["", 12000]] call _fnc_saveToTemplate;
 ["vehicleHealthStation", ["", 75]] call _fnc_saveToTemplate;
 ["vehicleRepairStation", ["", 5000]] call _fnc_saveToTemplate;
 
