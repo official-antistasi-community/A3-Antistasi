@@ -48,7 +48,7 @@
         <Original>You can't garage an object that's attached to another vehicle</Original>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_badLocation">
-        <Original>You and the vehicle need to be in a %1 garrisons surroundings in order to garage a it</Original>
+        <Original>You and the vehicle need to be in a %1 garrison's surroundings in order to garage it</Original>
         <German>Du musst dich mit dem Fahrzeug in der Nähe eines 1% Standorts befinden um es in einer Garage zu parken.</German>
         <Italian>Tu e il veicolo dovete essere nelle %1 vicinanze di una guarnigione per poter inserirlo nel garage</Italian>
         <Spanish>Usted y su vehículo necesitan estar en los alrededores de una guarnición de %1 para almacenarlo</Spanish>
@@ -189,6 +189,9 @@
         <Portuguese>Não podes guardar isto</Portuguese>
         <Turkish>Bunu garaja koyamazsın</Turkish>
         <Chinesesimp>你不能存放这个</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Feedback_addVehicle_inCombat">
+        <Original>You can't garage a vehicle that's fired its weapons or recently been in combat.&lt;br/&gt;&lt;br/&gt;This vehicle can be garaged in %1.</Original>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_inVehicle">
         <Original>You can't garage a vehicle while in another vehicle</Original>

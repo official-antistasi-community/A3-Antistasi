@@ -317,6 +317,7 @@ class CfgFunctions
             class combatModeChangedEH {};
             class enemyUnitDeletedEH {};
             class enemyUnitKilledEH {};
+            class rebelFiredManEH {};
             class rebelUnitKilledEH {};
             class vehicleDeletedEH {};
         };
