@@ -60,6 +60,7 @@ class CfgMissions
             A3A_Mission(UMB_Colombia)
             A3A_Mission(vn_khe_sanh)
             A3A_Mission(vt7)
+            A3A_Mission(Yulakia)
     #if __A3_DEBUG__
             A3A_Mission(Stratis)
     #endif
@@ -96,6 +97,7 @@ class CfgMissions
         A3A_Mission(UMB_Colombia)
         A3A_Mission(vn_khe_sanh)
         A3A_Mission(vt7)
+        A3A_Mission(Yulakia)
 #if __A3_DEBUG__
         A3A_Mission(Stratis)
 #endif
