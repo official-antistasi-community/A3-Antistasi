@@ -102,7 +102,7 @@ while {true} do
 
 	[] spawn A3A_fnc_reinforcementsAI;
 
-	{
+/*	{
 	_veh = _x;
 	if ((_veh isKindOf "StaticWeapon") and ({isPlayer _x} count crew _veh == 0) and (alive _veh)) then
 		{
@@ -110,6 +110,7 @@ while {true} do
 		[_veh,1] remoteExec ["setVehicleAmmo",_veh];
 		};
 	} forEach vehicles;
+*/
 	sleep 3;
 
 	// 20% chance of spawning a radio tower repair mission

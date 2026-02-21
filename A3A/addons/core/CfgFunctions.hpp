@@ -82,6 +82,7 @@ class CfgFunctions
             class categoryOverrides {};
             class checkRadiosUnlocked {};
             class configSort {};
+            class clampVehicleAmmo {};
             class dress {};
             class empty {};
             class equipmentClassToCategories {};

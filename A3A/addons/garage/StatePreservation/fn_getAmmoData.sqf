@@ -47,19 +47,26 @@ private _pylonsCfg = (configOf _veh >> "Components" >> "TransportPylonsComponent
 scopeName "main";
 if (!isClass _pylonsCfg and HR_GRG_reduceState) then {
     private _blacklistMags = ["FakeWeapon", "FakeMagazine"];
-    private _allMags = magazinesAllTurrets _veh select {!(_x#0 in _blacklistMags)};
-    if (count _allMags == 0) then { [] breakOut "main"};        // may as well keep this one
+    private _turrets = typeof _veh call BIS_fnc_allTurrets;         // need to use config because setVehicleAmmo deletes mags
+    private _configs = _turrets apply {[_veh, _x] call BIS_fnc_turretConfig};
+    private _mags = _configs apply {getArray (_x >> "magazines")};
+    private _originalMags = flatten _mags + getArray (configOf _veh >> "magazines") select {!(_x in _blacklistMags)};
+    if (count _originalMags == 0) then { [] breakOut "main" };        // may as well keep this one
 
-    private _totalRounds = 0;
     private _maxRounds = 0;
     {
+        _maxRounds = _maxRounds + getNumber (configFile >> "CfgMagazines" >> _x >> "count");
+    } forEach _originalMags;
+
+    private _curMags = magazinesAllTurrets _veh select {!(_x#0 in _blacklistMags)};
+    private _totalRounds = 0;
+    {
         _totalRounds = _totalRounds + _x#2;
-        _maxRounds = _maxRounds + getNumber (configFile >> "CfgMagazines" >> _x#0 >> "count");
-    } forEach _allMags;
+    } forEach _curMags;
 
     // If the ammo can be set with setVehicleAmmo (no pylons, [0, 1] or all same magazine), just return scalar
-    private _magName = _allMags#0#0;
-    if (_maxRounds in [0, _totalRounds] or _allMags findIf {_magName != _x#0} == -1) then {
+    private _magName = _originalMags#0;
+    if (_totalRounds in [0, _maxRounds] or _originalMags findIf {_magName != _x} == -1) then {
         _totalRounds / (_maxRounds max 1) breakOut "main";
     };
 };
