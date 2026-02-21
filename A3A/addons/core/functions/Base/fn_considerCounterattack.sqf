@@ -13,7 +13,7 @@ FIX_LINE_NUMBERS()
 params ["_target", "_enemySide"];
 
 // okay. So sleep for some random time first... Balance dependent?
-//sleep (random 120);
+sleep (random 120);
 
 private _targetsAndWeights = [teamPlayer, _enemySide, [_target]] call A3A_fnc_findAttackTargets;
 _targetsAndWeights params ["_targets", "_weights"];
