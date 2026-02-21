@@ -15,10 +15,13 @@ FIX_LINE_NUMBERS()
 
 params ["_target", "_side", "_maxSpend", "_availTypes"];
 
-private _isValidTarget = (isVehicleRadarOn _target);
-if (!_isValidTarget) then { // early exit for AA tanks with their radars on
+private _isValidTarget = if (typeof _target in FactionGet(all,"vehiclesSAM")) then { // can be a standalone system operated remotely with a datalinked radar
     private _radarEmitters = (8 allObjects 1) select {isVehicleRadarOn _x && {vehicleReportRemoteTargets _x && (side _x != _side)}};
-    _isValidTarget = (_radarEmitters isNotEqualTo []);
+    (_radarEmitters isNotEqualTo []);
+} else {
+    if !(typeOf _target in (FactionGet(all,"vehiclesRadar") + FactionGet(all,"vehiclesAA") + FactionGet(all,"staticAA"))) exitWith {false};
+    if !(isVehicleRadarOn _target) exitWith {false};
+    true;
 };
 
 if (!_isValidTarget) exitWith { 0 };
