@@ -184,6 +184,7 @@ _sellPrice = [localize "STR_HR_GRG_InfoPanel_salePrice",_sellPrice] joinString "
 
 //state indicator
 private _getPercentageAmmo = {
+    if (_this isEqualType 0) exitWith {_this};
     if (count _this isEqualTo 0) exitWith {0};
     private _sumPercent = 0;
     private _weaponsWithAmmo = 0;
@@ -204,8 +205,8 @@ private _getPercentageAmmo = {
 
 private _hasAmmo = (HR_GRG_previewVehState#2) isNotEqualTo [];//Preview state >> Ammo data
 private _avgAmmo = (HR_GRG_previewVehState#2) call _getPercentageAmmo; //Preview state >> Ammo data
-private _avgFuel = HR_GRG_previewVehState#0#0; //Preview state >> Fuel data >> Fuel
-private _avgDmg = 1 - (HR_GRG_previewVehState#1#0); //Preview state >> Damage data >> Damage
+private _avgFuel = fuel HR_GRG_previewVeh;      //HR_GRG_previewVehState#0#0; //Preview state >> Fuel data >> Fuel
+private _avgDmg = 1 - damage HR_GRG_previewVeh; //(HR_GRG_previewVehState#1#0); //Preview state >> Damage data >> Damage
 private _selectStateColor = {
     switch true do {
         case (_this > 0.5): {"#ffffff"}; // white

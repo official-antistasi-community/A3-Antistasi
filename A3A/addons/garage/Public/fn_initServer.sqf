@@ -23,6 +23,9 @@ if !(isClass (missionConfigFile/"A3A")) exitWith {};//not A3 Antistasi mission
 #include "config.inc"
 #include "defines.inc"
 FIX_LINE_NUMBERS()
+
+HR_GRG_defaultMags = createHashMap;
+
 if (!isServer) exitWith {};
 
 Trace("Running server init");
