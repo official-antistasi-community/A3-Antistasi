@@ -132,6 +132,7 @@ class CfgFunctions
             class citySideChange {};
             class citySupportChange {};
             class commsMP {};
+            class considerCounterattack {};
             class createBreachChargeText {};
             class createOutpostsFIA {};
             class createPetros {};

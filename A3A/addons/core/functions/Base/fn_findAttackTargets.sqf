@@ -5,6 +5,7 @@ Maintainer: John Jordan
 Arguments:
     <SIDE> Target side
     <SIDE> Attacking side
+    <ARRAY> Optional: List of target locations to check. Must match target side
 
 Return Value:
     <ARRAY,ARRAY> [targets, weights]
@@ -14,20 +15,22 @@ Return Value:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_targetSide", "_side"];
+params ["_targetSide", "_side", "_possibleTargets"];
 
 
 private _possibleStartBases = airportsX select {sidesX getVariable [_x, sideUnknown] == _side} select { [_x] call A3A_fnc_airportCanAttack };
 _possibleStartBases pushBack (["NATO_carrier", "CSAT_carrier"] select (_side == Invaders));
 private _airportPositions = _possibleStartBases apply { markerPos _x };
 
-private _possibleTargets = airportsX + outposts + seaports + factories + resourcesX + (citiesX - destroyedSites);
-//if (_targetSide == teamPlayer) then {_possibleTargets = _possibleTargets + citiesX};      // enemy cities are now valid targets
-_possibleTargets = _possibleTargets select {sidesX getVariable [_x,sideUnknown] == _targetSide};
+if (isNil "_possibleTargets") then {
+    _possibleTargets = airportsX + outposts + seaports + factories + resourcesX + (citiesX - destroyedSites);
+    //if (_targetSide == teamPlayer) then {_possibleTargets = _possibleTargets + citiesX};      // enemy cities are now valid targets
+    _possibleTargets = _possibleTargets select {sidesX getVariable _x == _targetSide};
 
-// Add rebel HQ as attack target if the enemy side knows about it
-private _hqInfo = [A3A_curHQInfoOcc, A3A_curHQInfoInv] select (_side == Invaders);
-if (_targetSide == teamPlayer and _hqInfo >= 1) then { _possibleTargets pushBack "Synd_HQ" };
+    // Add rebel HQ as attack target if the enemy side knows about it
+    private _hqInfo = [A3A_curHQInfoOcc, A3A_curHQInfoInv] select (_side == Invaders);
+    if (_targetSide == teamPlayer and _hqInfo >= 1) then { _possibleTargets pushBack "Synd_HQ" };
+};
 
 if (count _possibleTargets == 0 || count _possibleStartBases == 0) exitWith {
     Info("Attack found no suitable targets or no suitable start bases, aborting!"); [[], []];
@@ -49,7 +52,7 @@ private _maxThreatDist = distanceForAirAttack + 1000;
     private _garrison = A3A_garrison get _x;
     private _threat = if (_markerSide == teamPlayer) then {
         private _threat = 10 * count (_garrison get "troops");
-        _threat + 50 * count (_garrison get "vehicles");          // TODO: do this properly
+        _threat + 50 * count (_garrison get "vehicles");          // TODO: do this properly. Tricky to tell what's crewed though
     } else {
         // based on typical static count
         private _threat = 10 * (_garrison get "troops" select 0);
@@ -63,7 +66,7 @@ private _maxThreatDist = distanceForAirAttack + 1000;
     //Debug_2("Marker %1, threat %2", _x, _threat);           // temp, disable for release
     if (_threat == 0) then { continue };
     _markersXYT pushBack [markerPos _x # 0, markerPos _x # 1, _threat];
-} forEach (markersX + controlsX + outpostsFIA);
+} forEach (markersX);       // + controlsX + outpostsFIA);      Remove roadblocks from threat, causes odd decisions
 
 
 private _lowAir = Faction(_side) getOrDefault ["attributeLowAir", false];
