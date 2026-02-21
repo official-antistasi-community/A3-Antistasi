@@ -35,7 +35,9 @@ A3A_spawnPlaceStats = createHashMap;
             case "staticMG": { floor (_garrSize / 8) };
             case "staticAA": { [1, 2] select _isAirport };
             case "staticMortar": { [1, 2] select _isAirport };
-            case "vehicleAA": { [0, 1] select _isAirport };
+            case "vehicleAA";
+            case "vehicleArty";
+            case "vehicleSAM": { [0, 1] select _isAirport };
             case "vehicleTruck": { 1 };
             case "vehicle": { [0, 6 min ceil (_maxPlaces / 2)] select _isAirport };
             case "heli": { ceil (_garrSize / 15) };
@@ -45,7 +47,7 @@ A3A_spawnPlaceStats = createHashMap;
         };
         _markerStats set [_placeType, [_indexes, _maxPlaces, _parPlaces min _maxPlaces]];
 
-    } forEach ["staticMG", "staticAA", "staticMortar", "vehicleAA", "vehicleTruck", "vehicle", "heli", "plane", "runway", "boat"];
+    } forEach ["staticMG", "staticAA", "staticMortar", "vehicleAA", "vehicleArty", "vehicleSAM", "vehicleTruck", "vehicle", "heli", "plane", "runway", "boat"];
 
     A3A_spawnPlaceStats set [_x, _markerStats];
 

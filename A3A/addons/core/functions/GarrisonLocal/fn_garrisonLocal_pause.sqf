@@ -18,7 +18,7 @@ Trace_1("Called with %1", _this);
 params ["_marker"];
 
 private _garrison = A3A_activeGarrison get _marker;
-_garrison set ["paused", true];
+_garrison set ["state", "paused"];
 
 // don't bother with buildings? or hideobject only?
 private _toChange = (_garrison get "troops") + (_garrison get "civs") + (_garrison get "vehicles");

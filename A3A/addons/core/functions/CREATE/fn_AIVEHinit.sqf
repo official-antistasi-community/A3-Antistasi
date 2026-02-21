@@ -41,6 +41,8 @@ if (_side == teamPlayer) then
 	clearBackpackCargoGlobal _veh;
 };
 
+_veh setAmmoCargo 0; // disable vanilla rearm
+
 // Sync the vehicle textures if necessary
 // Removed 4-5-25 as trial. Vanilla vehicles seem to be fixed at least
 //_veh call A3A_fnc_vehicleTextureSync;

@@ -40,4 +40,18 @@ if (_side != teamPlayer) then {
 };
 
 ["despawn", [_marker]] call A3A_fnc_garrisonOp;
-A3A_garrisonMachine deleteAt _marker;       // clear machine ID
+
+// If support vehicles are marked as broken then we fix them on despawn
+private _garrison = A3A_garrison get _marker;
+private _supportVehicles = _garrison get "supportVehicles";
+private _supportsBusy = false;
+{
+    if (_y#0 == "broken") then {_y set [0, "ready"]};
+    if (_y#0 == "busy") then {_supportsBusy = true};
+} forEach _supportVehicles;
+
+// If all the support vehicles are inactive then we can clear the machine ID
+if (!_supportsBusy) then {
+    Trace_1("Clearing machine ID for %1");
+    A3A_garrisonMachine deleteAt _marker;       // clear machine ID
+};

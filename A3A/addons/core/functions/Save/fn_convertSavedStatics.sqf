@@ -44,7 +44,7 @@ private _posHQ = if (count _varValue > 3) then {_varValue select 0} else {_varVa
 		continue;
 	};
 
-	if (isNil "_state") then { _garrisonArray pushBack [_typeVeh, _posVeh, _vecDir, _vecUp] }
-		else { _garrisonArray pushBack [_typeVeh, _posVeh, _vecDir, _vecUp, _state] };
+	if (isNil "_state") then { _garrisonArray pushBack [_typeVeh, [_posVeh, _vecDir, _vecUp]] }
+		else { _garrisonArray pushBack [_typeVeh, [_posVeh, _vecDir, _vecUp], _state] };
 
 } forEach (["staticsX"] call A3A_fnc_returnSavedStat);

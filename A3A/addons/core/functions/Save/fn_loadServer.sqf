@@ -85,6 +85,16 @@ if (isServer) then {
 	private _garrisonCompat = isNil "A3A_garrison";
 	if (_garrisonCompat) then { call A3A_fnc_convertSavedGarrisons };		// Creates & fills A3A_garrison
 
+	// Convert to internal vehicle format
+	if (!_garrisonCompat) then {			// TODO: Change save format after another version  => and A3A_saveVersion < 31200
+		{
+			{
+				_x set [1, [_x#1, _x#2, _x#3]];				// pos/dir/up
+				if (count _x == 5) then { _x set [2, _x#4]; _x resize 3 } else { _x resize 2 };		// move state & cap
+			} forEach (_y get "vehicles" select { _x#1 isEqualType [] });
+		} forEach A3A_garrison;
+	};
+
 	// Fill out any garrison that hasn't already been filled
 	// This might happen with map changes so we do it here rather than convertSavedGarrisons
 	private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["vehicles", []], ["buildings", []] ];
@@ -106,11 +116,12 @@ if (isServer) then {
 	// Fill out city civ component if missing (should be done after police stations because they share vehicle places)
 	{ [_x] call A3A_fnc_buildCity } forEach citiesX;
 
-	// Add type info to markers
-	call A3A_fnc_initMarkerTypes;
-
 	// Move saved statics & buildings into the correct garrisons
 	if (_garrisonCompat) then { call A3A_fnc_convertSavedStatics };
+
+	// Add type info to markers (also some spawn place stuff apparently)
+	call A3A_fnc_initMarkerTypes;
+
 
 	// **********************************************************************************************
 
