@@ -28,7 +28,7 @@ params ["_vehicle", "_dmgStats"];
 if !(local _vehicle) exitWith {};
 
 private _restoreState = [0,1] select (HR_GRG_hasRepairSource && !HR_GRG_ServiceDisabled_Repair);
-if (_dmgStats isEqualType 0) exitWith { _vehicle setDamage ([_dmg, 0] # _restoreState) };
+if (_dmgStats isEqualType 0) exitWith { _vehicle setDamage ([_dmgStats, 0] # _restoreState) };
 
 _dmgStats params [["_dmg",0,[0]], ["_hitDmg", [], [[]]], ["_repairCargo", -1, [0]]];
 _vehicle setDamage ([_dmg, 0] # _restoreState);
