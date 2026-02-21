@@ -14,6 +14,8 @@ private _markerPrefix = _marker call A3A_fnc_getMarkerPrefix;
 
 //Sort markers
 private _markerPos = getMarkerPos _marker;
+private _flagMarker = _markerPrefix + "flag";
+private _flagPos = if (markerShape _flagMarker == "") then {_markerPos} else {markerPos _flagMarker};
 {
     private _first = (_x splitString "_") select 0;
     private _fullName = format ["%1%2", _markerPrefix, _x];
@@ -146,11 +148,29 @@ private _mortarSpawns = [];
 // Final spawn place format is [placetype, pos, dir, (building)]
 private _spawnPlaces = [];
 
-// Vehicle slot special cases
-if ("airport" in _marker and _vehicleSpawns isNotEqualTo []) then {
-    private _aaPlace = _vehicleSpawns deleteAt 0;
-    _spawnPlaces pushBack ["vehicleAA", _aaPlace#0, _aaPlace#1];
+if ("airport" in _marker) then {
+    // Add runway spawn marker
+    private _runwaySpawn = [_marker] call A3A_fnc_getRunwayTakeoffForAirportMarker;
+    if (_runwaySpawn isNotEqualTo []) then { _spawnPlaces pushBack ["runway", _runwaySpawn#0, _runwaySpawn#1] }; 
+
+    // Find suitable artillery/SAM spawn places
+    private _exclude = (_vehicleSpawns + _mortarSpawns + _planeSpawns + _heliSpawns) apply { _x#0 };
+    if (_runwaySpawn isNotEqualTo []) then { _exclude pushBack _runwaySpawn#0 };
+
+    private _artySpot = [_flagPos, 20, 150, _exclude] call A3A_fnc_findArtilleryPos;
+    if (_artySpot isEqualType []) then { _spawnPlaces pushBack ["vehicleArty", _artySpot, random 360]; _exclude pushBack _artySpot };
+
+    private _samSpot = [_flagPos, 20, 150, _exclude] call A3A_fnc_findArtilleryPos;
+    if (_samSpot isEqualType []) then { _spawnPlaces pushBack ["vehicleSAM", _samSpot, random 360] };
+
+    // AA vehicle uses the first vehicle place
+    if (_vehicleSpawns isNotEqualTo []) then {
+        private _aaPlace = _vehicleSpawns deleteAt 0;
+        _spawnPlaces pushBack ["vehicleAA", _aaPlace#0, _aaPlace#1];
+    };
 };
+
+// Cargo truck uses first (remaining) vehicle place
 if (_vehicleSpawns isNotEqualTo []) then {
     private _truckPlace = _vehicleSpawns deleteAt 0;
     _spawnPlaces pushBack ["vehicleTruck", _truckPlace#0, _truckPlace#1];
@@ -161,10 +181,6 @@ private _nearSeaSpawns = seaSpawn inAreaArrayIndexes [markerPos _marker, _marker
     if !(markerPos _x inArea _marker) then { continue };
     _spawnPlaces pushBack ["boat", markerPos _x, markerDir _x];
 } forEach _nearSeaSpawns;
-
-// Add runway spawn marker
-private _runwaySpawn = [_marker] call A3A_fnc_getRunwayTakeoffForAirportMarker;
-if (_runwaySpawn isNotEqualTo []) then { _spawnPlaces pushBack ["runway", _runwaySpawn#0, _runwaySpawn#1] }; 
 
 {
     private _placeType = _x#1;

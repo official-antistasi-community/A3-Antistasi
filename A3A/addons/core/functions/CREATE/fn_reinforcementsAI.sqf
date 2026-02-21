@@ -122,6 +122,7 @@ if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balanceP
     private _fnc_changeVehicle = {
         private _vehEntry = selectRandom _vehicles;
         if (isNil "_vehEntry") exitWith {};
+        if (_vehEntry#0 in A3A_supportVehTypes) then {continue};        // too much faff, don't bother
 
         private _placeType = _spawnPlaces#(_vehEntry#1)#0;
         if !("static" in _placeType) then {

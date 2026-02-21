@@ -19,7 +19,6 @@ params ["_marker"];
 
 private _garrison = A3A_activeGarrison get _marker;
 private _side = _garrison get "side";
-A3A_activeGarrison deleteAt _marker;
 
 // Timing arguable...
 //["locationSpawned", [_marker, "RebelOutpost", false]] call EFUNC(Events,triggerEvent);
@@ -67,3 +66,15 @@ if ("ammoBox" in _garrison) then {
     };
     deleteVehicle _ammoBox;
 };
+
+if (_garrison get "vehActions" isEqualTo []) exitWith {
+    A3A_activeGarrison deleteAt _marker;
+};
+
+// If there are active supports then we need to clear out the garrison state
+_garrison set ["state", "disabled"];
+_garrison set ["vehicles", []];
+_garrison set ["troops", []];
+_garrison set ["groups", []];
+_garrison set ["civs", []];
+_garrison set ["civGroups", []];
