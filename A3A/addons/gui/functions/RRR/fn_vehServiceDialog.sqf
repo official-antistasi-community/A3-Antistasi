@@ -385,7 +385,6 @@ switch (_mode) do
 
         ([_mode, getPosATL player, 25] call A3A_fnc_lookForSupplyVehicle) params ["_selSupplyVehicle", "_remCargo"];
         _display setVariable ["A3A_supplyVehicle", _selSupplyVehicle];
-        if (isNil "A3A_itemPriceCache") then { A3A_itemPriceCache = createHashMap };
 
         switch (_mode) do {
             case "rearm": {

@@ -67,6 +67,7 @@ class CfgFunctions
             class getAmmoCargo {};
             class getAmmoData {};
             class getDamage {};
+            class getDefaultMags {};
             class getFuel {};
             class getState {};
             class prepPylons {};

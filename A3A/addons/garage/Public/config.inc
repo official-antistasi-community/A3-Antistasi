@@ -172,6 +172,7 @@ HR_GRG_useNewPylonSys = true; // new rearm system, blocks pylons entirely. turn 
 HR_GRG_useNewRearmSys = true; // new rearm system
 HR_GRG_useNewRepairSys = false; // new repair system
 HR_GRG_useNewRefuelSys = false; // new refuel system
+HR_GRG_reduceState = true;      // Compress stored state (not fully backwards compatible)
 
 HR_GRG_getResourceCargo = {
     params ["_veh", "_search"];

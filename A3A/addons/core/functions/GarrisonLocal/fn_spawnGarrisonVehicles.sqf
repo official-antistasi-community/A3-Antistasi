@@ -38,6 +38,7 @@ private _fullCrewTypes = ["vehicleAA", "vehicleArty", "vehicleSAM", "boat"];
 private _supportVehIDs = _garrison get "vehActions" apply { _x#0 };
 
 private _potentialBlockers = (_markerPos nearEntities 700) + (allDead inAreaArray [_markerPos, 700, 700]);
+if (_marker == "Synd_HQ") then { _potentialBlockers = _potentialBlockers - [boxX, flagX, vehicleBox, fireX, mapX, petros] };
 
 // pass in _pos, _class and _marker
 private _fnc_isBlocked = {

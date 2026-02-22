@@ -21,6 +21,9 @@ A3A_vestDamageAdj = createHashMap;
 // Data to prevent over-using the same loadouts
 A3A_loadoutShuffleBuffers = createHashMap;
 
+// Price cache for mags & weapons
+A3A_itemPriceCache = createHashMap;
+
 ////////////////////////////////////
 //     BEGIN SIDES AND COLORS    ///
 ////////////////////////////////////
