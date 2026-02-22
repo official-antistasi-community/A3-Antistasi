@@ -71,6 +71,7 @@ setVar("vehiclesHeavyTanks", OccAndInv("vehiclesHeavyTanks"));
 setVar("vehiclesAA", OccAndInv("vehiclesAA"));
 setVar("vehiclesArtillery", OccAndInv("vehiclesArtillery"));
 setVar("vehiclesSAM", OccAndInv("vehiclesSAM"));
+setVar("vehiclesRadar", OccAndInv("vehiclesRadar"));
 setVar("vehiclesTransportAir", OccAndInv("vehiclesHelisLight") + OccAndInv("vehiclesHelisTransport") + OccAndInv("vehiclesPlanesTransport") );
 setVar("vehiclesHelisLight", OccAndInv("vehiclesHelisLight"));
 setVar("vehiclesHelisLightAttack", OccAndInv("vehiclesHelisLightAttack"));

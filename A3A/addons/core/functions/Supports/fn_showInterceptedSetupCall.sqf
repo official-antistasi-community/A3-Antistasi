@@ -100,6 +100,10 @@ else
         {
             _text = format [localize "STR_A3A_fn_support_showIntStpCll_UAV", _sideName];
         };
+        case ("SEAD"):
+        {
+            _text = format [localize "STR_A3A_fn_support_showIntStpCll_SEAD", _sideName];
+        };
         default
         {
             _text = format [localize "STR_A3A_fn_support_showIntStpCll_default", _sideName, _supportType];
