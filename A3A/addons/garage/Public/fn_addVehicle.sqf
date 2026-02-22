@@ -127,6 +127,14 @@ if (
     }) && {!_isNearHelipad} // near helipad
 ) exitWith {["STR_HR_GRG_Feedback_addVehicle_airBlocked", [FactionGet(reb,"name")]] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
+private _remTime = _vehicle getVariable ["A3A_lastFiredTime", -3600];
+private _timeDiff = (time - _remTime);
+if (_timeDiff < 300) exitWith {
+    private _prettyTime = [300 - _timeDiff,1,1,false,2,false,true] call A3A_fnc_timeSpan_format;
+    ["STR_HR_GRG_Feedback_addVehicle_inCombat", [_prettyTime]] remoteExec ["HR_GRG_fnc_Hint", _client];
+    false
+};
+
 //here to allow adaption of external Antistasi system without needing to addapt code under APL-ND
 private _broadcastReportedVehsAndStaticsToSave = {
 };

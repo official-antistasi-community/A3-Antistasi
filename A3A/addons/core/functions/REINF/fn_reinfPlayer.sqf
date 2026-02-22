@@ -19,6 +19,9 @@ if (player == theBoss) then {
 [_titleStr, localize "STR_A3A_fn_reinf_reinfPlayer_recruited"] call A3A_fnc_customHint;
 
 [_unit] spawn A3A_fnc_FIAinit;
+
+_unit addEventHandler ["FiredMan", A3A_fnc_rebelFiredManEH];
+
 _unit disableAI "AUTOCOMBAT";
 sleep 1;
 petros directSay "SentGenReinforcementsArrived";
