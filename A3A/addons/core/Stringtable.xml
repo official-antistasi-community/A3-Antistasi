@@ -16391,6 +16391,9 @@
         <Turkish>Cephane İstasyonu</Turkish>
         <Chinesesimp>弹药站</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Utility_Items_Name_ammocontainer">
+        <Original>Ammo Container</Original>
+      </Key>
       <Key ID="STR_A3A_Utility_Items_Name_buildboxlarge">
         <Original>Large construction kit</Original>
         <Italian>Kit di costruzioni grande</Italian>

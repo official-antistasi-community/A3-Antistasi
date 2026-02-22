@@ -208,7 +208,6 @@ switch (_mode) do
 	case ("startMPGame"):
 	{
 		_map = _mapLB lbData lbCurSel _mapLB;
-		_params params ["_map"];
 		hostMission [configFile >> "CfgMissions" >> "MPMissions" >> format ["Antistasi_%1", _map], _display];
 	};
 	case ("handleBackButton"):

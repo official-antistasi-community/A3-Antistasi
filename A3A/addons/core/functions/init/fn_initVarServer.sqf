@@ -623,8 +623,8 @@ private _rearmHM = createHashMap;
 } forEach [A3A_faction_occ get "vehiclesAmmoTrucks", A3A_faction_inv get "vehiclesAmmoTrucks"];
 
 {
-	_rearmHM set [_x, 25000];
-} forEach [A3A_faction_reb get "vehicleAmmoStation"];
+	_rearmHM set [_x#0, (_x#1) * 5];
+} forEach [(A3A_faction_reb get "vehicleAmmoStation"), (A3A_faction_reb get "vehicleAmmoContainer")];
 //+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
 _resourceVehValues set ["rearm", _rearmHM];
 

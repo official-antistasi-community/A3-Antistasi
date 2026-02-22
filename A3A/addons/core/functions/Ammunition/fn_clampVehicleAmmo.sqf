@@ -20,7 +20,7 @@ if (count _allMags == 0) exitWith {};
 
 private _magPrice = 0;
 {
-    _magPrice = _magPrice + 0.25 * ([_x, "mag"] call A3A_GUI_fnc_calculateItemPrice);
+    _magPrice = _magPrice + 0.2 * ([_x, "mag"] call A3A_GUI_fnc_calculateItemPrice);
 } forEach _allMags;
 
 if (_vehPrice < _magPrice) then {
