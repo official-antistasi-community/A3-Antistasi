@@ -25,7 +25,7 @@ private _vehicleType = if (_isLand) then {
 } else {
 	private _transportPlanes = _faction get "vehiclesPlanesTransport";
 	private _transportHelis = _faction get "vehiclesHelisTransport";
-	if (count _groupType <= 4 and count _faction get "vehiclesHelisLight" > 0) then { _transportHelis = (_faction get "vehiclesHelisLight") };
+	if (count _groupType <= 4 and (count (_faction get "vehiclesHelisLight")) > 0) then { _transportHelis = (_faction get "vehiclesHelisLight") };
 
 	private _transportsWeighted = [];
 	{ _transportsWeighted append [_x, 1 / count _transportPlanes] } forEach _transportPlanes;
