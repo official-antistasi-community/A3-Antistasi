@@ -17,7 +17,8 @@ class CfgFunctions
             class getLockCount {};
             class onLoad {};
             class onUnload {};
-            class reciveBroadcast {};
+            class receiveBroadcast {};
+            class receiveVehicles {};
             class releaseAllVehicles {};
             class reloadCategory {};
             class reloadPreview {};
@@ -82,7 +83,7 @@ class CfgFunctions
             class broadcastStateUpdate {};
             class getTotalFuelCargo {};
             class prefix {};
-            class reciveStateUpdate {};
+            class receiveStateUpdate {};
             class refuelVehicleFromSources {};
         };
 

@@ -75,18 +75,7 @@ _disp displayAddEventHandler ["MouseButtonUp", "if ((_this#1) isEqualTo 1) then 
 _disp displayAddEventHandler ["MouseMoving", "if (HR_GRG_RMouseBtnDown) then {_this call HR_GRG_fnc_updateCamPos};"];
 _disp displayAddEventHandler ["MouseZChanged","if !(HR_GRG_RMouseBtnDown) exitWith {}; HR_GRG_camDist = 0.9 max (HR_GRG_camDist - (_this#1)*0.1) min 2; [nil,0,0] call HR_GRG_fnc_updateCamPos; HR_GRG_previewLight setLightBrightness 1.1 * HR_GRG_camDist;"];
 
-//add veh pool modified EH
-"HR_GRG_Event" addPublicVariableEventHandler {
-    if (isNil "HR_GRG_Vehicles") exitWith {};
-    (_this#1) call HR_GRG_fnc_reciveBroadcast;
-};
-"HR_GRG_Vehicles" addPublicVariableEventHandler {
-    call HR_GRG_fnc_updateVehicleCount;
-    private _disp = findDisplay HR_GRG_IDD_Garage;
-    private _index = HR_GRG_Cats findIf {ctrlShown _x};
-    private _ctrl = HR_GRG_Cats#_index;
-    [_ctrl, _index] call HR_GRG_fnc_reloadCategory;
-};
+
 //add player to broadcast recipient list
 [clientOwner] remoteExecCall ["HR_GRG_fnc_addUser", 2]; //add to recipient
 waitUntil {!isNil "HR_GRG_Vehicles"};//wait for server response
