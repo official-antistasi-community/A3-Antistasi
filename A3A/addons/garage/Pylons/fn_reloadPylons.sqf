@@ -68,7 +68,7 @@ private _presetComboCtrl = _disp displayCtrl HR_GRG_IDC_ExtraPylonsPresetsCombo;
 lbClear _presetComboCtrl;
 private _index = _presetComboCtrl lbAdd localize "STR_HR_GRG_Pylons_CustomPreset";
 _presetComboCtrl lbSetData [_index, "[]"];
-HR_GRG_DefaultMags = [];
+HR_GRG_DefaultPylons = [];
 {
     private _displayName = getText (_x >> "displayName");
     private _attachement = getArray (_x >> "attachment");
@@ -77,7 +77,7 @@ HR_GRG_DefaultMags = [];
 
     //get all mags used by default presets
     _loadoutMags = _attachement apply { getText (configFile >> "CfgMagazines" >> _x >> "pylonWeapon") };
-    {HR_GRG_DefaultMags pushBackUnique _x} forEach _loadoutMags;
+    {HR_GRG_DefaultPylons pushBackUnique _x} forEach _loadoutMags;
 
 } forEach (configProperties [(_pylonsCfg >> "Presets")]);
 

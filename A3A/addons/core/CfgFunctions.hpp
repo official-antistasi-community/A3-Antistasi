@@ -82,6 +82,7 @@ class CfgFunctions
             class categoryOverrides {};
             class checkRadiosUnlocked {};
             class configSort {};
+            class clampVehicleAmmo {};
             class dress {};
             class empty {};
             class equipmentClassToCategories {};
@@ -91,14 +92,17 @@ class CfgFunctions
             class fillLootCrate {};
             class generateRebelGear {};
             class getRadio {};
+            class getResourceCargo {};
             class hasARadio {};
             class itemConfig {};
             class itemConfigMass {};
             class itemSort {};
             class itemType {};
             class launcherInfo {};
+            class lookForSupplyVehicle {};
             class loot {};
             class randomRifle {};
+            class serviceVehicle {};
             class setCargoItems {};
             class setRebelLoadouts {};
             class transfer {};
@@ -339,6 +343,8 @@ class CfgFunctions
             class garrisonLocal_spawnUnitCount {};
             class garrisonLocal_unpause {};
             class garrisonLocal_updateStatics {};
+            class garrisonLocal_vehAction {};
+            class garrisonLocal_vehActionEnd {};
             class garrisonLocal_zoneCheck {};
             class garrisonOpLoop {};
             class getGarrisonLimit {};
@@ -347,6 +353,8 @@ class CfgFunctions
             class spawnGarrisonSquads {};
             class spawnGarrisonVehicles {};
             class spawnPoliceStation {};
+            class vehActionArty {};
+            class vehActionSAM {};
         };
 
         class GarrisonServer {
@@ -373,6 +381,8 @@ class CfgFunctions
             class garrisonServer_sendData {};
             class garrisonServer_spawn {};
             class garrisonServer_updateVehData {};
+            class garrisonServer_vehAction {};
+            class garrisonServer_vehActionSetState {};
             class getSiteTroopQuality {};
             class rebelVehPlacedWorker {};
             class selectGarrisonVehicleType {};
@@ -723,7 +733,6 @@ class CfgFunctions
             class SUP_gunshipSpawn {};
             class SUP_mortar {};
             class SUP_mortarAvailable {};
-            class SUP_mortarRoutine {};
             class SUP_orbitalStrike {};
             class SUP_orbitalStrikeAvailable {};
             class SUP_orbitalStrikeImpactEffects {};
@@ -736,7 +745,9 @@ class CfgFunctions
             class SUP_QRFRoutine {};
             class SUP_SAM {};
             class SUP_SAMAvailable {};
-            class SUP_SAMRoutine {};
+            class SUP_SEAD {};
+            class SUP_SEADAvailable {};
+            class SUP_SEADRoutine {};
             class SUP_tank {};
             class SUP_tankAvailable {};
             class SUP_tankRoutine {};

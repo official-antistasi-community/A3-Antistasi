@@ -124,4 +124,7 @@ class cup_chernarus_A3 {
 	size = 15.4;
 	cityCount = 72;
 	airbaseCount = 3;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

@@ -46,4 +46,7 @@ class kunduz {
 	size = 5.1;
 	cityCount = 12;
 	airbaseCount = 1;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

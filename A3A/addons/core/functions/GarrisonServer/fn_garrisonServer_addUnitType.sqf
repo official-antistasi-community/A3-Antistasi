@@ -59,7 +59,7 @@ _troops pushBack _unitType;
 if (sidesX getVariable _marker == teamPlayer) then { [_marker] call A3A_fnc_mrkUpdate };
 
 // Add real unit if garrison is spawned
-if (_marker in A3A_garrisonMachine) then {
+if (spawner getVariable _marker != 2) then {
     ["spawnUnit", [_marker, _unitType]] call A3A_fnc_garrisonOp;
 };
 

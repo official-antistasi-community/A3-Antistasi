@@ -46,7 +46,7 @@ if ((_side == Occupants or _side == Invaders) and _vehCost > 0) then
 	};
 
 	// Hmm. Shouldn't be added for a capture?
-	[_side, getPosATL _veh, 2*_vehCost/3, _killer] remoteExec ["A3A_fnc_addRecentDamage", 2];		// other third applied in HandleDamage
+	[_side, getPosATL _veh, 2*_vehCost/3, _killer] remoteExecCall ["A3A_fnc_addRecentDamage", 2];		// other third applied in HandleDamage
 
 	if (_sideEnemy != teamPlayer) exitWith {};
 

@@ -88,6 +88,7 @@ if (_side in [Occupants, Invaders]) then {
     if (_faction get "staticAT" isEqualTo []) then { _noType pushBack "staticAT" };
     if (_faction get "vehiclesGunBoats" isEqualTo []) then { _noType pushBack "boat" };
     if ((_faction get "vehiclesPlanesAA") + (_faction get "vehiclesPlanesCAS") isEqualTo []) then { _noType append ["plane", "runway"] };
+    if (_faction get "vehiclesArtillery" isEqualTo []) then { _noType pushBack "vehicleArty" };
     _faction set ["noPlaceTypes", _noType];
 };
 

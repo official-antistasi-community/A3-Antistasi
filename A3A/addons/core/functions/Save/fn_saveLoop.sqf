@@ -141,7 +141,22 @@ private _saveGarrison = +A3A_garrison;
 {
 	// Add other stuff we're not saving in here
 	_y deleteAt "spawnedBuildings";
+	_y deleteAt "supportVehicles";
 	_y deleteAt "type";
+	_y deleteAt "nextVehID";
+
+	// Convert vehicles to older storage format
+	// TODO: Simplify this to one line after another version
+	if ("_civ" in _x) then { continue };		// civ internal format didn't change
+	{
+		if (_x#1 isEqualType 0) then {
+			_x resize ([3,2] select isNil {_x#2});		// remove ID, and state if nil
+		} else {
+			if !(isNil {_x#2}) then { _x set [4, _x#2] };		// Move state to the end
+			_x#1 params ["_pos", "_vecDir", "_vecUp"];			// flatten the position stuff
+			_x set [1, _pos]; _x set [2, _vecDir]; _x set [3, _vecUp];
+		};
+	} forEach (_y get "vehicles");
 } forEach _saveGarrison;
 
 ["newGarrison", _saveGarrison] call A3A_fnc_setStatVariable;

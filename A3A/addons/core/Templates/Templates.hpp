@@ -318,6 +318,24 @@ class Templates
         forceDLC[] = {"vn"};
     };
 
+    class VN_USMC : VN_Base
+    {
+        side = "Inv";
+        flagTexture = "vn\objects_f_vietnam\flags\data\vn_flag_01_usmc_co.paa";
+        name = "VN USMC";
+        file = "VN_AI_USMC";
+        shortName = "USMC";
+    };
+
+    class VN_ANZAC : VN_Base
+    {
+        side = "Inv";
+        flagTexture = "vn\objects_f_vietnam\flags\data\vn_flag_01_aus_co.paa";
+        name = "VN ANZAC";
+        file = "VN_AI_ANZAC";
+        shortName = "ANZAC";
+    };
+
     class VN_MACV : VN_Base
     {
         side = "Inv";

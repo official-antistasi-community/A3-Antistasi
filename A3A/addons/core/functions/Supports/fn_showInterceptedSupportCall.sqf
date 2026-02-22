@@ -95,6 +95,11 @@ else
             _text = format [localize "STR_A3A_fn_support_showIntSPTCll_GUNSHIPLONG", _sideName];
             _markerText = localize "STR_A3A_fn_support_showIntSPTCll_GUNSHIPTITLE";
         };
+        case ("SEAD"):
+        {
+            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_SEADLONG", _sideName];
+            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_SEADTITLE";
+        };
         default
         {
             _text = format [localize "STR_A3A_fn_support_showIntSPTCll_UNKNOWNLONG", _sideName, _supportType];

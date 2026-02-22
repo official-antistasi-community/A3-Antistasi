@@ -70,6 +70,8 @@ setVar("vehiclesTanks", OccAndInv("vehiclesTanks"));
 setVar("vehiclesHeavyTanks", OccAndInv("vehiclesHeavyTanks"));
 setVar("vehiclesAA", OccAndInv("vehiclesAA"));
 setVar("vehiclesArtillery", OccAndInv("vehiclesArtillery"));
+setVar("vehiclesSAM", OccAndInv("vehiclesSAM"));
+setVar("vehiclesRadar", OccAndInv("vehiclesRadar"));
 setVar("vehiclesTransportAir", OccAndInv("vehiclesHelisLight") + OccAndInv("vehiclesHelisTransport") + OccAndInv("vehiclesPlanesTransport") );
 setVar("vehiclesHelisLight", OccAndInv("vehiclesHelisLight"));
 setVar("vehiclesHelisLightAttack", OccAndInv("vehiclesHelisLightAttack"));
@@ -166,6 +168,7 @@ OccAndInv("vehiclesAmmoTrucks")
 + OccAndInv("vehiclesFuelTrucks")
 + OccAndInv("vehiclesMedical");
 setVar("vehiclesUtilityTrucks", _vehUtilityTrucks);
+
 
 missionNamespace setVariable ["A3A_faction_all", A3A_faction_all, true];
 A3A_faction_all
