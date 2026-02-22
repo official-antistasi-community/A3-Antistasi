@@ -99,15 +99,6 @@ if (_side != teamPlayer) then {
     _storedTroops set [0, 0 max ((_storedTroops#0) - _countSpawned)];
 };
 
-// Subtract units spawned as vehAction crews
-if (_side != teamPlayer) then {
-    private _countSpawned = 0;
-    {
-        _countSpawned = _countSpawned + ({alive _x} count units (_x#2));
-    } forEach (_garrison get "vehActions");
-    _storedTroops set [0, 0 max ((_storedTroops#0) - _countSpawned)];
-};
-
 // Spawn vehicles (including statics)
 [_garrison, _marker, _side, _storedTroops, _garrisonData get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
 
