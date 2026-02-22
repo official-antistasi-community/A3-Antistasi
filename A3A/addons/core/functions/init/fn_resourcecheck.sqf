@@ -15,9 +15,7 @@ while {true} do
 	private _resAdd = 50;//0
 	private _hrAdd = 2; // A3A_balancePlayerScaleBase;
 
-	private _suppBoost = 0.5 * (1+ ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count seaports));
-	private _resBoost = 1 + (0.25*({(sidesX getVariable [_x,sideUnknown] == teamPlayer) and !(_x in destroyedSites)} count factories));
-
+	//private _suppBoost = 0.5 * (1+ ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count seaports));
 	{
 		private _city = _x;
 		if (_city in destroyedSites) then { continue };
@@ -26,7 +24,7 @@ while {true} do
 		_cityData params ["_numCiv", "_supportReb"];
 
 		private _ownerMul = [0.5, 1] select (sidesX getVariable _city == teamPlayer);
-		private _resAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100);
+		private _resAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100) * A3A_rebelCashPopMult;
 		private _hrAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100) * A3A_rebelHRTickMult;
 
 		_resAdd = _resAdd + _resAddCity;
@@ -37,12 +35,12 @@ while {true} do
 	[] call A3A_fnc_tierCheck;
 	[] spawn A3A_fnc_checkCampaignEnd; // check for population win
 
-	{
-		if ((sidesX getVariable [_x,sideUnknown] == teamPlayer) and !(_x in destroyedSites)) then
-		{
-			_resAdd = _resAdd + (300 * _resBoost);
-		};
-	} forEach resourcesX;
+	private _resourcesRebel = {sidesX getVariable _x == teamPlayer and !(_x in destroyedSites)} count resourcesX;
+	_resAdd = _resAdd + _resourcesRebel * A3A_rebelCashResMult;
+
+	private _factoriesRebel = {sidesX getVariable _x == teamPlayer and !(_x in destroyedSites)} count factories;
+	private _resBoost = 1 + _factoriesRebel * A3A_rebelCashFactMult;
+	_resAdd = _resAdd * _resBoost;
 
 	Debug_2("Occupant radio keys: %1 - Invader radio keys: %2", occRadioKeys, invRadioKeys);
 
