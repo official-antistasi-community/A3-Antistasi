@@ -26,8 +26,8 @@ private _isValidTarget = if (typeof _target in FactionGet(all,"vehiclesSAM")) th
 
 if (!_isValidTarget) exitWith { 0 };
 
-// CAS and TANK are _threat/80
-
 private _threat = A3A_groundVehicleThreat getOrDefault [typeOf _target, 0];
-_threat / 20; // 4:1:1 for SEAD, CAS, TANK. 2/3 chance to send SEAD overall against confirmed AA asset
+_threat = 0.5 * (_threat + (_target getVariable ["A3A_killThreat", 0]));
+
+0 max ((_threat - 50) / 25);
 

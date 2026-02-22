@@ -7,7 +7,7 @@ Arguments:
     <SIDE> The side from which the support should be sent (occupants or invaders)
     <STRING> Resource pool used for this support. Should be "attack" or "defence"
     <SCALAR> Maximum resources to spend. Not used here
-    <OBJECT|BOOL> Target of the support. False for none
+    <OBJECT> Target of the support
     <POSITION> Position of radar
     <SCALAR> Reveal value 0-1, higher values mean more information provided about support
     <SCALAR> Setup delay time in seconds, if negative will calculate based on war tier
