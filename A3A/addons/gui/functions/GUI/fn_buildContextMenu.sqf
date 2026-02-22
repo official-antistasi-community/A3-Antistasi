@@ -78,19 +78,7 @@ switch (true) do {
         _vehicleNameLabel ctrlEnable false;
 
         _vehiclePicture ctrlSetText _editorPreview;
-
-        // button type decisions
-        // all vehicles: garage
-        // aircraft: add to air support, repair/rearm
-        // statics: block AI usage
-        // all other vehicles: add to garrison
-        // Commander only actions to bottom right where possible
-        // button layout: single buttons
-        //  1 2
-        //  3 4
-        // button layout: horiz buttons
-        //   1
-        //   2
+        
         private _garageContextOptions = switch (true) do {
             case (_vehType in [3,4]): {
                 _containerTitle = localize "STR_antistasi_dialogs_main_context_title_aircraft";
@@ -98,13 +86,13 @@ switch (true) do {
             };
             _containerTitle = localize "STR_antistasi_dialogs_main_context_title_vehicle";
             case ((_vehType != 7) && {(_vehicle isNil "markerX")}): {
-                [["garage", _contextHoriz1Button], ["addToGarrison", _contextHoriz2Button]];
+                [["garage", _contextHoriz1Button], ["RRR", _contextSingle3Button], ["addToGarrison", _contextSingle4Button]];
             };
             case ((_vehType == 7) || {!(_vehicle isNil "markerX")}): {
-                [["garage", _contextHoriz1Button], ["toggleAI", _contextHoriz2Button]];
+                [["garage", _contextHoriz1Button], ["RRR", _contextSingle3Button], ["toggleAI", _contextSingle4Button]];
             };
             default {
-                [["garage", _contextHoriz1Button], ["empty", _contextHoriz2Button]];
+                [["garage", _contextHoriz1Button], ["RRR", _contextHoriz2Button]];
             };
         };
 
@@ -144,7 +132,9 @@ switch (true) do {
                 };
                 case ("RRR"): {
                     _button ctrlSetText "RRR";
-                    _button ctrlSetTooltip "Coming soon";
+                    _button ctrlAddEventHandler ["ButtonClick", {closeDialog 0; createDialog "A3A_vehServiceDialog"}];
+                    _button ctrlSetTooltip "Rearm, repair, or refuel vehicles";
+                    _button ctrlEnable true;
                 };
                 case ("airSupport"): {
                     _button ctrlSetText localize "STR_antistasi_dialogs_main_context_button_addBombRun";

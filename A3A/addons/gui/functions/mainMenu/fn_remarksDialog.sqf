@@ -70,7 +70,7 @@ switch (_mode) do
         {
             private _index = _targetCombo lbAdd (name _x);
             _targetCombo lbSetData [_index, getPlayerUID _x];
-        } forEach (allPlayers - (entities "HeadlessClient_F"));
+        } forEach (allPlayers - player - (entities "HeadlessClient_F"));
         _targetCombo lbSetCurSel 0;
         private _savedDetails = profileNamespace getVariable ["A3A_lastRemarkDetails",""];
         _detailsEdit ctrlSetText _savedDetails;

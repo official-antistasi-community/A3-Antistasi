@@ -44,6 +44,6 @@ private _usedVehicles = [];
     };
     // Update pos/dir, in case it got nudged
     _x set [1, [getPosWorld _veh, vectorDir _veh, vectorUp _veh]];
-    if !(_veh isKindOf "StaticWeapon") then { _x set [4, _veh call HR_GRG_fnc_getState] };
+    _x set [2, _veh call HR_GRG_fnc_getState];
     _usedVehicles pushBack _veh;
 } forEach (_garrison get "vehicles");

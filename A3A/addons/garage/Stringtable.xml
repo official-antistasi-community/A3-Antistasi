@@ -683,7 +683,7 @@
         <Turkish>Bağlar</Turkish>
         <Chinesesimp>挂载</Chinesesimp>
       </Key>
-      <Key ID="STR_HR_GRG_Generic_PylonDisabled">
+      <Key ID="STR_HR_GRG_Generic_PylonDisabled_noAmmo">
         <Original>Pylons require an ammo source to edit</Original>
         <German>Pylonen benötigen Munitionspunkt zum anpassen.</German>
         <Italian>I piloni necessitano di una fonte di munizioni per essere modificati</Italian>
@@ -696,6 +696,12 @@
         <Portuguese>Torres necessitam de uma fonte de munição para serem editadas</Portuguese>
         <Turkish>Direkler, düzenlemek için bir cephane kaynağı gerektirir</Turkish>
         <Chinesesimp>编辑挂架需要可用弹药来源</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_PylonDisabled_setting">
+        <Original>Pylon editing is disabled on this server</Original>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_PylonDisabled_newSys">
+        <Original>Pylon editing is now done through the battle menu.\n\nLook at a vehicle and use the RRR button to change pylons</Original>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Pylons">
         <Original>Pylons</Original>

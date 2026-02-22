@@ -47,8 +47,8 @@ switch(_selectedTab) do
 
     _pictureBox = [0, 0, 6, 6];
     _displayBox = [7.5, 0, 55.5, 3];
-    _priceBox = [13, 3, 6, 3];
-    _stockBox = [20, 3, 30, 3];
+    _priceBox = [9, 3, 8, 3];
+    _stockBox = [18, 3, 16, 3];
     _logoBox = [70, 0, 6, 6];
     _addBox = [76, 0, 24, 6];
 
@@ -177,7 +177,8 @@ private _createdCtrls = [];
 
     private _displayPrice = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
     _displayPrice ctrlSetPosition _priceBox;
-    _displayPrice ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _itemPrice]);
+    private _priceAlign = ["left", "right"] select (_columnCount == 1);
+    _displayPrice ctrlSetStructuredText parseText (format ["<t size='0.65' align='%2' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _itemPrice, _priceAlign]);
     _displayPrice ctrlCommit 0;
 
     private _modLogo = _display ctrlCreate ["A3A_PictureStroke", -1, _itemControlsGroup];

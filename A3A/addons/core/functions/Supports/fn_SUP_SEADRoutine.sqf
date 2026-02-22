@@ -25,7 +25,7 @@ sleep _sleepTime;
 
 private _spawnPos = (getMarkerPos _airport) vectorAdd [0, 0, 500];
 private _plane = createVehicle [_planeType, _spawnPos, [], 0, "FLY"];     // FLY forces 100m alt
-private _tgtObjPos = getPos _targetObj;
+private _tgtObjPos = getPosATL _targetObj;
 private _targDir = _spawnPos getDir _tgtObjPos;
 _plane setDir _targDir;
 _plane setPosATL _spawnPos;                                           // setPosATL kills velocity
@@ -107,7 +107,6 @@ private _missileEH = _plane addEventHandler ["Fired", {
 
 private _targetWP = _group addWaypoint [_targetObj, 0];
 _targetWP setWaypointType "DESTROY";
-_targetWP setWaypointSpeed "FULL";
 _targetWP setWaypointBehaviour "CARELESS"; // helps stop them firing both mi
 _targetWP setWaypointCombatMode "BLUE";
 
@@ -122,7 +121,7 @@ sleep 10; // give a reasonable time to know its there and react if it spawns clo
 
 waitUntil { sleep 1; ((currentWaypoint _group > 1) or (time > _timeOut)) || ((_targetObj distance _plane) <  _launchDistance) };
 
-while {count waypoints _group > 0} do { deleteWaypoint [_group, 0] };
+{ deleteWaypoint _x } forEachReversed (waypoints _group);
 private _loiterWP = _group addWaypoint [_targetObj, 0];
 _loiterWP setWaypointType "LOITER";
 _loiterWP setWaypointBehaviour "AWARE";
@@ -155,7 +154,7 @@ if (((_targetObj distance _plane) <  _launchDistance) && (alive _targetObj)) the
     _plane fire _armWeapon;
 };
 
-while {count waypoints _group > 0} do { deleteWaypoint [_group, 0] };
+{ deleteWaypoint _x } forEachReversed (waypoints _group);
 private _rtbWP = _group addWaypoint [getMarkerPos _airport, 0];
 _rtbWP setWaypointType "MOVE";
 _rtbWP setWaypointBehaviour "CARELESS";
