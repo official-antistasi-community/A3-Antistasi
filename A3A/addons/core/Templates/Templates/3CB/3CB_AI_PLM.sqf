@@ -62,7 +62,7 @@
 ["uavsPortable", []] call _fnc_saveToTemplate;
 
 //Config special vehicles
-["vehiclesMilitiaLightArmed", ["UK3CB_PLM_O_MB4WD_LMG"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["UK3CB_PLM_I_UAZ_MG"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaTrucks", ["UK3CB_PLM_O_Zil131_Open"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["UK3CB_PLM_O_Datsun_Open"]] call _fnc_saveToTemplate;
 

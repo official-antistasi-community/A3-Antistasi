@@ -30,11 +30,11 @@
 ["vehiclesFuelTrucks", ["UK3CB_TNM_B_LR_Softtop_Refuel_Closed","UK3CB_TNM_B_LR_Softtop_Refuel_Open","UK3CB_TNM_B_LR_Opentop_Refuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["UK3CB_TNM_B_LR_Softtop_Reammo_Closed","UK3CB_TNM_B_LR_Softtop_Reammo_Open","UK3CB_TNM_B_LR_Opentop_Reammo"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["a3a_rhs_m113_hidf_M240", "rhsgref_hidf_m113a3_m2"]] call _fnc_saveToTemplate;
-["vehiclesAPCs", []] call _fnc_saveToTemplate;
-["vehiclesIFVs", ["UK3CB_B_LAV25_HIDF"]] call _fnc_saveToTemplate;
+["vehiclesAPCs", ["UK3CB_B_LAV25_HIDF"]] call _fnc_saveToTemplate;
+["vehiclesIFVs", []] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", []] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["UK3CB_B_M60A1_HIDF", "UK3CB_TNM_B_T55"]] call _fnc_saveToTemplate;
-["vehiclesHeavyTanks", []] call _fnc_saveToTemplate;             // Just to push up the T-72 probability at higher war levels
+["vehiclesHeavyTanks", []] call _fnc_saveToTemplate;
 ["vehiclesAA", ["a3a_green_M270_Avenger"]] call _fnc_saveToTemplate;
 
 
@@ -47,10 +47,10 @@
 ["vehiclesPlanesTransport", ["UK3CB_B_C47_Late_HIDF"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["rhs_uh1h_hidf_unarmed"]] call _fnc_saveToTemplate;
-["vehiclesHelisTransport", ["rhs_uh1h_hidf"]] call _fnc_saveToTemplate; //Mi24Vt has 1x 12.7mm turret, and disabled pylons
+["vehiclesHelisTransport", ["rhs_uh1h_hidf"]] call _fnc_saveToTemplate;
 // Should be capable of dealing damage to ground targets without additional scripting
-["vehiclesHelisLightAttack", ["rhs_uh1h_hidf_gunship"]] call _fnc_saveToTemplate;      // Mi24P lacks a gun turret
-["vehiclesHelisAttack", []] call _fnc_saveToTemplate;           // Proper attack helis: Apache, Hind etc
+["vehiclesHelisLightAttack", ["rhs_uh1h_hidf_gunship"]] call _fnc_saveToTemplate;
+["vehiclesHelisAttack", []] call _fnc_saveToTemplate;
 
 ["vehiclesAirPatrol", ["rhs_uh1h_hidf", "UK3CB_B_Cessna_T41_HIDF"]] call _fnc_saveToTemplate;
 
