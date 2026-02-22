@@ -51,30 +51,10 @@ if (_scripted) exitWith {
 	if (_winner != teamPlayer) then { [_markerX] call A3A_fnc_buildEnemyGarrison };
 };
 
-// Generate counterattack
-/*if (_winner == teamPlayer) then
-{
-	// Cap to 0.6 max to reward captures without previous support calls
-	private _resources = [_loser, teamPlayer, _markerX, 0.6] call A3A_fnc_maxDefenceSpend;
-
-	// Don't send anything if it'd be too small
-	private _minAttack = (1 + random 0.5) * A3A_balanceResourceRate;
-	if (_resources < _minAttack) exitWith {
-		Debug_2("Available resources (%1) below minimum attack (%2), sending no counterattack", _resources, _minAttack);
-	};
-
-	private _vehCount = round (random 0.5 + _resources / A3A_balanceVehicleCost);
-	private _reveal = [markerPos _markerX] call A3A_fnc_calculateSupportCallReveal;
-	_reveal = [_loser, markerPos _markerX, _reveal] call A3A_fnc_useRadioKey;
-
-	// Run on server for now because it needs availableBases functions
-	[_markerX, _loser, _vehCount, _reveal] spawn A3A_fnc_singleAttack;
-
-	// just estimates here. 
-	A3A_supportStrikes pushBack [_loser, "TROOPS", markerPos _markerX, time + 2700, 2700, _resources];
-    A3A_supportSpends pushBack [_loser, markerPos _markerX, markerPos _markerX, _resources, time];
+// Generate counterattack if appropriate
+if (_winner == teamPlayer) then {
+	[_markerX, _loser] spawn A3A_fnc_considerCounterattack;
 };
-*/
 
 private _loserName = Faction(_loser) get "name";
 private _prestigeOccupants = [0, 0];
