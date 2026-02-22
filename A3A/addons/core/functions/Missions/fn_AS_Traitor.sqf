@@ -75,7 +75,7 @@ while {count _roads == 0} do
 _road = _roads select 0;
 _posroad = getPos _road;
 _roadcon = roadsConnectedto _road; if (count _roadCon == 0) then {
-    Error_1("Road has no connection :%1.",position _road);
+	Error_1("Road has no connection :%1.",position _road);
 	};
 if (count _roadCon > 0) then
 	{
@@ -165,27 +165,15 @@ if (!([_traitor] call A3A_fnc_canFight) || traitorIntel) then
 
 	_factor = 1;
 	if(_difficultX) then {_factor = 2;};
-    Debug("aggroEvent | Rebels won a traitor mission");
+	Debug("aggroEvent | Rebels won a traitor mission");
 	[_enemySide, 15 * _factor, 120] remoteExec ["A3A_fnc_addAggression",2];
 	[0,300 * _factor] remoteExec ["A3A_fnc_resourcesFIA",2];
-	{
-		if (!isPlayer _x) then
-		{
-			_skill = skill _x;
-			_skill = _skill + 0.1;
-			_x setSkill _skill;
-		}
-		else
-		{
-			[10 * _factor,_x] call A3A_fnc_playerScoreAdd;
-		};
-	} forEach ([_radiusX,0,_positionX,teamPlayer] call A3A_fnc_distanceUnits);
-	[5 * _factor,theBoss] call A3A_fnc_playerScoreAdd;
+	[30 * _factor, false, _traitor, 300] call A3A_tasks_fnc_rewardPlayers;     // any players within 300m
 }
 else
 {
 	[_taskId, "AS", "FAILED", false] call A3A_fnc_taskSetState;
-	if (_difficultX) then {[-10,theBoss] call A3A_fnc_playerScoreAdd} else {[-10,theBoss] call A3A_fnc_playerScoreAdd};
+	[-10,theBoss] call A3A_fnc_playerScoreAdd;
 	if (dateToNumber date > _dateLimitNum) then
 	{
 		_hrT = server getVariable "hr";

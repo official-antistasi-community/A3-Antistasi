@@ -59,12 +59,10 @@ _task set ["s_waitForKill", {
 
 _task set ["s_success", {
     private _target = _this get "_target";
-    private _value = [4, 8] select (alive _target);
-	private _playersInRange = units teamPlayer inAreaArray [getPosATL _target, 200, 200];
-	{[_value/2, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[_value/4, theBoss] call A3A_fnc_playerScoreAdd;
+    private _value = [5, 10] select (alive _target);
+    [_value, false, _target, 200] call FUNC(rewardPlayers);     // players within 200m
 
-	[_value, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+    [_value, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 
     [_this get "_taskId", "SUCCEEDED", getPosATL _target, 200] call FUNC(taskNotifyNear);
 	[_this get "_taskId", "SUCCEEDED", false] call BIS_fnc_taskSetState;

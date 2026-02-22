@@ -6,4 +6,4 @@ private _valid = _potentials inAreaArrayIndexes ["Synd_HQ", distanceMission, dis
     select { sidesX getVariable _x != teamPlayer } select { spawner getVariable _x != 0 };
 
 if (_valid isEqualTo []) exitWith {false};
-[1, [selectRandom _valid]];
+[tierWar/10, [selectRandom _valid]];

@@ -161,6 +161,15 @@
       <Key ID="STR_A3A_Tasks_LOG_Supplies_failed">
         <Original>Supply delivery failed.</Original>
       </Key>
+      <Key ID="STR_A3A_Tasks_LOG_Weapons_title">
+        <Original>Weapons Truck</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_Weapons_desc">
+        <Original>Rebel observers have reported that an enemy truck carrying valuable weapons has broken down, and repairs won't be completed until %1. Steal the crate from the truck and return it to our HQ.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_LOG_Weapons_escape">
+        <Original>The enemy have been alerted and may try to escape with the cargo. Don't let them.</Original>
+      </Key>
       <Key ID="STR_A3A_Tasks_hostage_title">
         <Original>Rescue hostage</Original>
       </Key>

@@ -44,9 +44,7 @@ if (_placeType == "staticMG") exitWith { selectRandom (_faction get "staticMGs")
 if (_placeType == "vehicleTruck") exitWith {
     if (random 1 < 0.1) exitWith { selectRandom (_faction get "vehiclesRepairTrucks") };
     if (random 1 < 0.1) exitWith { selectRandom (_faction get "vehiclesFuelTrucks") };
-    private _types = (_faction get "vehiclesTrucks") + (_faction get "vehiclesCargoTrucks");
-    _types = _types select { _x in FactionGet(all,"vehiclesCargoTrucks") };         // avoid troops-only trucks. Should prebuild?
-    selectRandom _types;
+    selectRandom (_faction get "vehiclesCargo");
 };
 if (_placeType == "vehicle") exitWith {
     if (random 1 < 0.2) exitWith { [["vehiclesRepairTrucks","vehiclesFuelTrucks","vehiclesAmmoTrucks"], [1,1,1]] call _fnc_selectFromLists };

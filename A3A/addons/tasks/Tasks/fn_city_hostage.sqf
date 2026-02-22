@@ -125,11 +125,8 @@ _task set ["s_transit", {
 }];
 
 _task set ["s_success", {
-	private _playersInRange = playableUnits inAreaArray [_this get "_hostage", 100, 100];
-	{[10 / count _playersInRange, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[2, theBoss] call A3A_fnc_playerScoreAdd;
-
-	[10, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+    [10, true, _this get "_hostage", 100] call FUNC(rewardPlayers);     // grouped players within 100m
+    [10, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
     [2, 0] remoteExec ["A3A_fnc_resourcesFIA", 2];        // direct HR reward
 
     [_this get "_taskId", "SUCCEEDED", getPosATL (_this get "_hostage"), 100] call FUNC(taskNotifyNear);

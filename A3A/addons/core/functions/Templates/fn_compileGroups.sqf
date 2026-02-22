@@ -43,6 +43,7 @@ _faction set ["unitTraitor", unit(other, "Traitor")];
 _faction set ["unitCrew", unit(other, "Crew")];
 _faction set ["unitUnarmed", unit(other, "Unarmed")];
 _faction set ["unitPilot", unit(other, "Pilot")];
+_faction set ["unitEngineer", unit(military, "Engineer")];
 
 _faction set ["unitMilitiaGrunt", unit(militia, "Rifleman")];
 _faction set ["unitMilitiaMarksman", unit(militia, "Marksman")];

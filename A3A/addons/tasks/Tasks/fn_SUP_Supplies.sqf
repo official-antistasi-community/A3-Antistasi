@@ -178,11 +178,7 @@ _task set ["s_succeeded", {
 	private _bonus = _this get "_difficulty";
 	private _marker = _this get "_marker";
 
-	// TODO: pull this shit out
-	private _playersInRange = (allPlayers - (entities "HeadlessClient_F")) inAreaArray [markerPos _marker, 250, 250];
-	{[5*_bonus, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[5*_bonus, theBoss] call A3A_fnc_playerScoreAdd;
-
+	[20 * _bonus, false, markerPos _marker, 250] call FUNC(rewardPlayers);     // any players within 250m
 	[15 * _bonus, _marker] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 	[0, 200 * _bonus] remoteExec ["A3A_fnc_resourcesFIA", 2];
 

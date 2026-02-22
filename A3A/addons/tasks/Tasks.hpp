@@ -76,7 +76,7 @@ class Tasks {
         weight = 1;
         isLegacy = 1;
     };
-    class LOG_Ammo {
+/*    class LOG_Ammo {
         category = "LOG";
         func = QFUNCMAIN(LOG_Ammo);
         params = QFUNC(LOG_Ammo_p);
@@ -84,7 +84,7 @@ class Tasks {
         weight = 1;
         isLegacy = 1;
     };
-    class LOG_Bank {
+*/    class LOG_Bank {
         category = "LOG";
         func = QFUNCMAIN(LOG_Bank);
         params = QFUNC(LOG_Bank_p);
@@ -131,6 +131,14 @@ class Tasks {
         version = 1;
         weight = 1;
         isLegacy = 1;
+    };
+    class LOG_Weapons {
+        category = "LOG";
+        func = QFUNC(LOG_Weapons);
+        params = QFUNC(LOG_Weapons_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 0;
     };
     class SUP_Supplies {
         category = "SUPP";

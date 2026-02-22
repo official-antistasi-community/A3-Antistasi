@@ -300,10 +300,8 @@ _task set ["s_victory",
     private _marker = _this get "_marker";
     [_marker, teamPlayer, 80] remoteExecCall ["A3A_fnc_citySideChange", 2];
 
-    // TODO: scale with city size
-	private _playersInRange = (allPlayers - entities "HeadlessClient_F") inAreaArray [markerPos _marker, 500, 500];
-	{[10, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[10, theBoss] call A3A_fnc_playerScoreAdd;
+    private _reward = 2 * sqrt (A3A_cityPop get _marker);
+    [_reward, false, markerPos _marker, markerSize _marker # 0] call FUNC(rewardPlayers);     // all players within marker radius
 
 	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
     _this set ["state", "s_cleanup"]; false;
