@@ -275,6 +275,12 @@ A3A_rebelHRTickMult = 10 / _sumPop;
 // Goal for lump sum is to fill garrisons
 A3A_rebelHRLumpMult = _reqGarrison / _sumPop;
 
+// Goal for resources is ~4k per tick lategame, most from resources
+// Factories multiply by 2x total, so 1k + 1.5k
+A3A_rebelCashPopMult = 1000 / _sumPop;
+A3A_rebelCashResMult = 1500 / count resourcesX;
+A3A_rebelCashFactMult = 1.4 / count factories;
+
 // Set typical number of city battles equal to number of outposts
 private _allPops = citiesX apply { sqrt (A3A_cityPop get _x) };
 _allPops sort false;		// largest first

@@ -43,7 +43,7 @@ _unit setVariable ["downedTimeout", time + 1200];
 if((isNil "_killer") || {(isNull _killer) || {side (group _killer) == side _group}}) exitWith {};
 
 // Add the unit to recent kills for reaction purposes
-[side _group, getPosATL _unit, 10, _killer] remoteExec ["A3A_fnc_addRecentDamage", 2];
+[side _group, getPosATL _unit, 10, _killer] remoteExecCall ["A3A_fnc_addRecentDamage", 2];
 
 if (_marker != "") then {
     // Fire this one even if group was eliminated, garrison expects regular response from group

@@ -82,6 +82,7 @@ class CfgFunctions
             class categoryOverrides {};
             class checkRadiosUnlocked {};
             class configSort {};
+            class clampVehicleAmmo {};
             class dress {};
             class empty {};
             class equipmentClassToCategories {};
@@ -744,6 +745,9 @@ class CfgFunctions
             class SUP_QRFRoutine {};
             class SUP_SAM {};
             class SUP_SAMAvailable {};
+            class SUP_SEAD {};
+            class SUP_SEADAvailable {};
+            class SUP_SEADRoutine {};
             class SUP_tank {};
             class SUP_tankAvailable {};
             class SUP_tankRoutine {};

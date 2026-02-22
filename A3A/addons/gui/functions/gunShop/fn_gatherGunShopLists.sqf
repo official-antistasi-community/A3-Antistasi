@@ -35,9 +35,6 @@ private _fnc_generateList = {
 // Clear the data, so other functions know it's in progress
 A3A_gunShopData = createHashMap;
 
-// Set up the item price cache
-if (isNil "A3A_itemPriceCache") then { A3A_itemPriceCache = createHashMap };
-
 // Build arsenal item quantity lookup table
 private _arsenalCountHM = createHashMap;
 { _arsenalCountHM insert _x } forEach ((jna_dataList select [0,3]) + (jna_dataList select [18,9]));

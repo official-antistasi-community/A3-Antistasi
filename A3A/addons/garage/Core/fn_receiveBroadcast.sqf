@@ -19,13 +19,14 @@
     Public: [No]
     Dependencies:
 
-    Example: (_this#1) call HR_GRG_fnc_reciveBroadcast;
+    Example: (_this#1) call HR_GRG_fnc_receiveBroadcast;
 
     License: APL-ND
 */
 #include "defines.inc"
 FIX_LINE_NUMBERS()
-Trace_1("Reciving broadcast: %1",_this);
+if (isNil "HR_GRG_Vehicles") exitWith {};       // might be sent shortly after garage is unloaded on client
+Trace_1("Receiving broadcast: %1",_this);
 params ["_lockUID", "_checkoutUID", "_catIndex", "_vehUID", "_player", "_switch", "_time"];
 
 private _cat = HR_GRG_Vehicles#_catIndex;
