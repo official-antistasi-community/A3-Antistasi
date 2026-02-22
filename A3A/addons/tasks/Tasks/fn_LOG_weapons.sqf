@@ -84,6 +84,12 @@ _mechanic disableAI "ANIM";
 _mechanic playMoveNow medicAnims#1;
 _task set ["_crewGroup", _crewGroup];
 _task set ["_crewTroops", [_driver, _mechanic]];
+{
+    _x addEventHandler ["Hit", {
+        _this#0 setVariable ["A3A_unitHit", true];
+        _this#0 removeEventHandler [_thisEvent, _thisEventHandler];
+    }];
+} foreach [_driver, _mechanic];
 
 // 2-man patrol
 private _spawnPos = [getPosATL _truck, 10, 50, 3] call A3A_fnc_findPatrolPos;
@@ -213,7 +219,7 @@ _task set ["s_waitForRepair",
     };
 
     // If one or more of crew group is down then get out of here
-    if (_this get "_crewTroops" findIf { !(_x call A3A_fnc_canFight) } != -1) exitWith {
+    if (_this get "_crewTroops" findIf { _x getVariable ["A3A_unitHit", false] } != -1) exitWith {
         if (canMove _truck) then {
             [_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Weapons_escape", getPosATL _truck, 300] call FUNC(hintNear);
         };
