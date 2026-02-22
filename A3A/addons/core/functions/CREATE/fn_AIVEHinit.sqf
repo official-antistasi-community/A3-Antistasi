@@ -173,7 +173,7 @@ if (_side == Invaders or _side == Occupants) then
 
 		// Add 1/3 cost to recent casualties list on server
 		private _vehCost = A3A_vehicleResourceCosts getOrDefault [typeof _veh, 0];
-		[_veh getVariable "ownerSide", getPos _veh, _vehCost/3, _source] remoteExec ["A3A_fnc_addRecentDamage", 2];
+		[_veh getVariable "ownerSide", getPosATL _veh, _vehCost/3, _source] remoteExecCall ["A3A_fnc_addRecentDamage", 2];
 
 		// Attempt to call for support if there's a crew. Assume local, should be true
 		if !(isNull group _veh) then { [group _veh, _source] spawn A3A_fnc_callForSupport };

@@ -98,6 +98,13 @@ while {true} do
 	private _missionChance = 5 * A3A_activePlayerCount;
 	if ((!bigAttackInProgress) and (random 100 < _missionChance)) then {["ANY"] spawn A3A_Tasks_fnc_requestTask};
 
+	// Enemies forget about vehicle threat eventually 
+	{
+		private _killThreat = _x getVariable "A3A_killThreat";
+		if (_killThreat < 20) then { _x setVariable ["A3A_killThreat", nil]; continue };
+		_x setVariable ["A3A_killThreat", _killThreat - 20];
+	} forEach (vehicles select {!(_x isNil "A3A_killThreat")});
+
 	[] spawn A3A_fnc_reinforcementsAI;
 
 /*	{
