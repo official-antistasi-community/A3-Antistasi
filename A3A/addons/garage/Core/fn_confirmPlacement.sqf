@@ -302,7 +302,17 @@ HR_GRG_EH_keyDown = findDisplay 46 displayAddEventHandler ["KeyDown", {
                 _veh setPylonLoadout [_pylonIndex, _mag, _forced, _turret]
             } forEach HR_GRG_CP_pylons;
         };
-        _veh spawn {sleep 0.5;_this allowDamage true;_this enableSimulation true; { _x allowDamage true; } forEach (attachedObjects _this); };
+        _veh spawn {
+            sleep 0.5;
+            _this allowDamage true;
+            _this enableSimulation true; 
+            { _x allowDamage true; } forEach (attachedObjects _this);
+            if (unitIsUAV _this) then {
+                private _group = createGroup side player;
+                createVehicleCrew _this;
+                crew _this joinSilent _group;
+            };
+        };
         ([_veh] + HR_GRG_CP_callBackArgs) call HR_GRG_CP_callbackPlace;
     };
 
