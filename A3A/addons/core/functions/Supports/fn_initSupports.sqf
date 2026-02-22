@@ -67,7 +67,7 @@ private _fnc_buildSupportHM =
         if (_suppType == "SAM" and _noSAM) then { continue };
 
         private _weight = [_weight, _lowAirWeight] select _lowAir;
-        _suppHM set [_suppType, [_baseType, _weight, _effRadius, _strikepower]];
+        _suppHM set [_suppType, [_baseType, _weight, _effRadius, _strikepower, _flags]];
     } forEach _initData;
     _suppHM;
 };
