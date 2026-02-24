@@ -376,6 +376,7 @@ class CfgFunctions
             class garrisonServer_clear {};
             class garrisonServer_delete {};
             class garrisonServer_despawn {};
+            class garrisonServer_initVIDs {};
             class garrisonServer_looted {};
             class garrisonServer_remUnit {};
             class garrisonServer_remUnitType {};

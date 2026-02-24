@@ -38,6 +38,12 @@ if ("_civ" in _marker) exitWith
             continue;
         };
 
+        // Temporary fix for boats being mangled in 3.10.3
+        if (_slotNum isEqualType [] and {_slotNum#0 isEqualType []}) then {
+            Debug_3("Fixing incorrect boat format for %1, pos %2, dir %3", _vehType, _slotNum#0, _slotNum#1);
+            _x set [2, _slotNum#1]; _x set [1, _slotNum#0];
+        };
+
         private _slotType = if (_slotNum isEqualType []) then { "civBoat" } else { _places # _slotNum # 0 };
         if !(_vehType in (_valid get _slotType)) then {
             Debug_2("%1 (slot type %2) not valid, swapping", _vehType, _slotType);
@@ -72,6 +78,7 @@ private _places = A3A_spawnPlacesHM get _marker;
 private _valid = A3A_validVehicles get _side;
 private _isAirport = _marker in airportsX;
 
+private _usedSlots = [];
 private _vehicles = _garrison get "vehicles";
 {
     _x params ["_vehType", "_slotNum", "", "_vehID"];
@@ -83,6 +90,14 @@ private _vehicles = _garrison get "vehicles";
         Debug_1("Refunding %1", _vehType);
         continue;
     };
+
+    // Temporary code to clean up 3.10.3 reinf bugs
+    if (_slotNum in _usedSlots) then {
+        _vehicles deleteAt _forEachIndex;
+        (_garrison get "supportVehicles") deleteAt _vehID;
+        Debug_2("Clearing excess vehicle %1 in slot %2", _vehType, _slotNum);
+    };
+    _usedSlots pushBack _slotNum;
 
     private _slotType = _places # _slotNum # 0;
     if !(_vehType in (_valid get _slotType)) then {

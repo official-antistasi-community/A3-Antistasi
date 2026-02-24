@@ -36,7 +36,7 @@ private _siteType = call {
 private _quality = [_siteType, _marker, _side] call A3A_fnc_getSiteTroopQuality;
 
 // Might be used to rebuild a garrison after a sim capture, so keep the old static info if it exists
-private _garrison = A3A_garrison getOrDefaultCall [_marker, {createHashMap}];
+private _garrison = A3A_garrison getOrDefaultCall [_marker, {createHashMap}, true];
 _garrison set ["buildings", []];
 private _troopCount = (0.7 + random 0.3) * (A3A_garrisonSize get _marker);
 _garrison set ["troops", [ceil _troopCount, _quality]];
@@ -60,6 +60,10 @@ private _vehicles = [];
 } forEach _spawnPlaceStats;
 
 _garrison set ["vehicles", _vehicles];
-A3A_garrison set [_marker, _garrison];
+
+if (!isNil "serverInitDone") then {
+    // If we're using this function after init then we need recreate the vehicle IDs
+    [_marker] call A3A_fnc_garrisonServer_initVIDs;
+};
 
 _garrison;
