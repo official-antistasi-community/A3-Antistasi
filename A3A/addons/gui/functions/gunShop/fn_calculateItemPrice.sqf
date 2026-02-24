@@ -32,13 +32,13 @@ private _fnc_payloadValue = {
         private _payloadVal = 0.1*(_hit + _penetration)^1.2 + _indirPayload + _fuseCost/2 + _guidanceMod/2;
         [_payloadVal, _fuseCost + _guidanceMod];
     };
-    if (_simType == "shotilluminating") exitWith {
+    /*if (_simType == "shotilluminating") exitWith {
         private _intensity = getNumber (_cfgAmmo >> "intensity");
         private _brightness = 2500 * getNumber (_cfgAmmo >> "brightness") ^ 2;
         private _timeToLive = getNumber (_cfgAmmo >> "timeToLive");
         //if (_log) then {diag_log format ["Intensity %1, brightness %2, ttl %3", _intensity, _brightness, _timeToLive]};
         [_timeToLive * (_intensity max _brightness) / 80000, 0];
-    };
+    };*/
     if (_simType == "shotcm") exitWith { [100, 0] };
     [120, 0];		// Smokes are all the same?
 };
