@@ -60,11 +60,6 @@ private _dynamicTableBackground = _display displayCtrl A3A_IDC_VEHSERVICE_DYNAMI
 private _pylonPictureGroup = _display displayCtrl A3A_IDC_VEHSERVICE_PYLONPICTUREGROUP;
 private _globalControlGroup = _display displayCtrl A3A_IDC_VEHSERVICE_CONTROLGROUP;
 
-private _fnc_calculateAmmo = {
-    params ["_magName", "_roundCount", "_magCount"];
-    private _roundsPerMag = getNumber (configFile >> "CfgMagazines" >> _magName >> "count");
-    _magCount * _roundsPerMag;
-};
 private _fnc_getName = {
     params ["_name", ["_cfg", "CfgMagazines"]];
     getText (configFile >> _cfg >> _name >> "displayName");
@@ -127,14 +122,9 @@ switch (_mode) do
                 };
                 
 
-                // controls list with magazine names and sliders
-                private _mags = magazinesAllTurrets cursorObject select {!("pylon" in toLower (_x#0))}; // apply { [_x#0, _x#2]] }; //[magName, ammo]
-                // not sorting these seems to return an intuitive order. edit: lies, its based on the last mag added.
-                //the good way to do this is to match it up with config which is not happening. most I can do is make it deterministic and dumb
-                _mags sort true;
-
-                // new format? [magclass, turret, bulletCount, magCount], was [magclass, bullets, mags]
-                private _magsCombined = []; 
+                // new format? [magclass, turret, bulletCount, origCount]
+                private _originalMags = typeOf cursorObject call HR_GRG_fnc_getDefaultMags;
+                private _magsCombinedHM = createHashMap;
                 {
                     _x params ["_mag", "_turret", "_bullets"];
                     // blacklist
@@ -144,14 +134,21 @@ switch (_mode) do
                     private _sim = getText(configFile >> "CfgAmmo" >> _ammo >> "simulation");
                     if (_sim in BLACKLISTED_SIMS) then {continue};
 
-                    // blacklist over
-                    private _currentMagIndex = _magsCombined findIf {_x#0 == _mag and _x#3 isEqualTo _turret};
-                    if (_currentMagIndex == -1) then { _magsCombined pushBack [_mag, 0, 0, _turret] };
-                    private _currentMagInfo = _magsCombined select _currentMagIndex;        // select -1 picks last element                    
-                    _currentMagInfo set [1, _currentMagInfo#1 + _bullets];
-                    _currentMagInfo set [2, _currentMagInfo#2 + 1];
-                } forEach _mags;
+                    private _key = tolower _mag + str _turret;        // RHS lol
+                    private _val = _magsCombinedHM getOrDefault [_key, [_mag, _turret, 0, 0], true];
+                    _val set [3, (_val#3) + _bullets];
+                } forEach _originalMags;
 
+                {
+                    _x params ["_mag", "_turret", "_bullets"];
+                    private _key = tolower _mag + str _turret;
+                    if !(_key in _magsCombinedHM) then {continue};          // Ignore anything that isn't in original loadout (could be pylon, blacklist, whatever)
+                    private _val = _magsCombinedHM get _key;
+                    _val set [2, (_val#2) + _bullets];
+                } forEach magazinesAllTurrets cursorObject;
+
+                private _magsCombined = values _magsCombinedHM;
+                _magsCombined sort true;
 
                 // need to filter out weapons that dont need rearm
                 // left out for debugging
@@ -163,8 +160,7 @@ switch (_mode) do
                 {
                     _rowCount = _rowCount + 1;
 
-                    _x params ["_magName", "_roundCount", "_magCount", "_turret"];
-                    private _maxRounds = _x call _fnc_calculateAmmo;
+                    _x params ["_magName", "_turret", "_roundCount", "_maxRounds"];
 
                     private _data = [_x];
                     private _textCtrl = _display ctrlCreate ["A3A_Text_Small", -1, _dynamicTable];
@@ -346,8 +342,7 @@ switch (_mode) do
         if (_rearmData isEqualTo []) exitWith {}; // possible to quit mid update cycle
         private _index = _rearmData findIf {(_x#2) isEqualTo _control};
         (_rearmData#_index) params ["_ammoData", "_percentCtrl", "_sliderCtrl"];
-        private _maxRounds = _ammoData call _fnc_calculateAmmo;
-        _ammoData params ["_magName", "_roundCount", "_magCount"];
+        _ammoData params ["_magName", "_turret", "_roundCount", "_maxRounds"];
         if (_newValue < _roundCount) then {
             _control sliderSetPosition _roundCount;         // apparently this doesn't call the EH?
             _newValue = _roundCount;
@@ -391,7 +386,7 @@ switch (_mode) do
                 private _rearmData = _display getVariable "rearmData";
                 {
                     _x params ["_ammoData", "_percentCtrl", "_sliderCtrl", "_textCtrl"];
-                    _ammoData params ["_magName", "_roundCount", "_magCount", "_turret"];
+                    _ammoData params ["_magName", "_turret", "_roundCount", "_maxRounds"];
 
                     private _curSel = sliderPosition _sliderCtrl;
                     private _roundsToBuy = _curSel - _roundCount;
