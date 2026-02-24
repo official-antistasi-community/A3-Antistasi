@@ -228,7 +228,7 @@ switch (_mode) do
                     _resVehicle ctrlSetText "None found";
                 } else {
                     private _vehicleName = [typeOf _selSupplyVehicle, "CfgVehicles"] call _fnc_getName;
-                    _resVehicle ctrlSetText format ["%1 (%2 points)", _vehicleName, _remCargo];
+                    _resVehicle ctrlSetText format ["%1 (%2 points)", _vehicleName, round _remCargo];
                 };
 
                 _pylonPicture ctrlSetText getText (_pylonConfig >> "uiPicture");
@@ -297,6 +297,7 @@ switch (_mode) do
                     // Create turret button if aircraft has a gunner position
                     private _ctrlTurret = controlNull;
 
+                    /*
                     if (_hasGunner) then {
                         _ctrlTurret = _display ctrlCreate ["ctrlButtonPictureKeepAspect", -1, _globalControlGroup];
                         _ctrlTurret ctrlSetPosition [_posX - (5 * GRID_W), _posY, 5 * GRID_W, 5 * GRID_H];
@@ -305,7 +306,6 @@ switch (_mode) do
                         private _turretPath = [_veh, _forEachIndex] call EFUNC(common,getPylonTurret);
                         _ctrlTurret setVariable ["turretPath", _turretPath];
                         _ctrlTurret setVariable ["index", _forEachIndex];
-                        /*
                         _ctrlTurret call FUNC(handleTurretButton);
 
                         // Toggle the pylon's turret when the button is clicked
@@ -314,8 +314,8 @@ switch (_mode) do
 
                             [_ctrlTurret, true] call FUNC(handleTurretButton);
                         }];
-                        */
                     };
+                    */
                     ctrlSetFocus _ctrlCombo;
 
                     _pylonControls pushBack [_ctrlCombo, _ctrlTurret, _mirroredIndex, _defaultTurretPath];
