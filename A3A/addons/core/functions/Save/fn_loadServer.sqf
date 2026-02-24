@@ -88,6 +88,7 @@ if (isServer) then {
 	// Convert to internal vehicle format
 	if (!_garrisonCompat) then {			// TODO: Change save format after another version  => and A3A_saveVersion < 31200
 		{
+			if ("_civ" in _x) then {continue};			// city formats unchanged
 			{
 				_x set [1, [_x#1, _x#2, _x#3]];				// pos/dir/up
 				if (count _x == 5) then { _x set [2, _x#4]; _x resize 3 } else { _x resize 2 };		// move state & cap

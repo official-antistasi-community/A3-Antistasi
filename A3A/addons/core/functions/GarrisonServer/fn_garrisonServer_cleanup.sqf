@@ -72,6 +72,7 @@ private _places = A3A_spawnPlacesHM get _marker;
 private _valid = A3A_validVehicles get _side;
 private _isAirport = _marker in airportsX;
 
+private _usedSlots = [];
 private _vehicles = _garrison get "vehicles";
 {
     _x params ["_vehType", "_slotNum", "", "_vehID"];
@@ -83,6 +84,14 @@ private _vehicles = _garrison get "vehicles";
         Debug_1("Refunding %1", _vehType);
         continue;
     };
+
+    // Temporary code to clean up 3.10.3 reinf bugs
+    if (_slotNum in _usedSlots) then {
+        _vehicles deleteAt _forEachIndex;
+        (_garrison get "supportVehicles") deleteAt _vehID;
+        Debug_2("Clearing excess vehicle %1 in slot %2", _vehType, _slotNum);
+    };
+    _usedSlots pushBack _slotNum;
 
     private _slotType = _places # _slotNum # 0;
     if !(_vehType in (_valid get _slotType)) then {
