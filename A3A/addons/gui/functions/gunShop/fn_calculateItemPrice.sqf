@@ -220,7 +220,7 @@ private _fnc_weaponPriceCalculator = {
 
     // fire mode availability? maybe unnecessary with type mod
 
-    (_basePrice * _dispMul) + _glMod;
+    0.5 * ((_basePrice * _dispMul) + _glMod);
 };
 
 private _fnc_itemPriceCalculator = {
@@ -230,7 +230,7 @@ private _fnc_itemPriceCalculator = {
     if (isNumber (_config >> "A3A_price")) exitWith { getNumber (_config >> "A3A_price") };
 
     private _cats = _className call A3A_fnc_equipmentClassToCategories;
-    switch (_cats#0) do {
+    private _itemPrice = switch (_cats#0) do {
         case "MuzzleAttachments": {
             private _cost = 100;
             private _isMuzzle = isNumber (_config >> "ItemInfo" >> "AmmoCoef" >> "audibleFire");
@@ -277,6 +277,7 @@ private _fnc_itemPriceCalculator = {
             1000;
         };
     };
+    0.5 * _itemPrice;
 };
 
 private _price = call {
