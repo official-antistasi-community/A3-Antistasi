@@ -39,6 +39,11 @@ if ("_civ" in _marker) exitWith
         };
 
         private _slotType = if (_slotNum isEqualType []) then { "civBoat" } else { _places # _slotNum # 0 };
+        // Temporary fix for boats being mangled in 3.10.3
+        if (_slotType == "civBoat" and {_slotNum#0 isEqualType []}) then {
+            Debug_3("Fixing incorrect boat format for %1, pos %2, dir %3", _vehType, _slotNum#0, _slotNum#1);
+            _x set [2, _slotNum#1]; _x set [1, _slotNum#0];
+        };
         if !(_vehType in (_valid get _slotType)) then {
             Debug_2("%1 (slot type %2) not valid, swapping", _vehType, _slotType);
             if (_slotType == "civCar") exitWith { _x set [0, selectRandomWeighted civVehiclesWeighted] };
