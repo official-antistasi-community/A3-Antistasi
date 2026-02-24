@@ -53,15 +53,7 @@ private _vehiclesPlanesAA = ["vn_b_air_f4c_cap"];
 ["vehiclesPlanesTransport", []] call _fnc_saveToTemplate;
 private _vehiclesAirPatrol = ["vn_b_air_uh1d_02_01"];
 
-if (isClass (configFile >> "vnx_credits")) then {
-	_vehiclesPlanesCAS = ["vnx_b_air_a4e_ran_cas", "vnx_b_air_a4e_ran_cas", "vnx_b_air_a4e_rnzaf_cas", "vnx_b_air_ov10a_aus_covey"];
-	_vehiclesPlanesAA = ["vnx_b_air_a4e_ran_cap", "vnx_b_air_a4e_ran_cap", "vnx_b_air_a4e_rnzaf_cap"];
-	_vehiclesAirPatrol append ["vnx_b_air_ov10a_aus_covey"];
-};
 
-["vehiclesAirPatrol", _vehiclesAirPatrol] call _fnc_saveToTemplate;
-["vehiclesPlanesCAS", _vehiclesPlanesCAS] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["vn_b_air_uh1c_07_06"]] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", ["vn_b_air_uh1d_02_06"]] call _fnc_saveToTemplate;
@@ -73,8 +65,20 @@ if (isClass (configFile >> "vnx_credits")) then {
 ["vn_b_nz_army_static_m101_02", ["vn_cannon_m101_mag_he_x8", "vn_cannon_m101_mag_ab_x8", "vn_cannon_m101_mag_wp_x8"]]
 ]] call _fnc_saveToTemplate;
 
-["uavsAttack", ["vnx_b_air_ov10a_aus_covey"]] call _fnc_saveToTemplate;
+private _uavsAttack = ["vn_b_air_oh6a_01"];
 ["uavsPortable", []] call _fnc_saveToTemplate;
+
+if (isClass (configFile >> "vnx_credits")) then {
+	_vehiclesPlanesCAS = ["vnx_b_air_a4e_ran_cas", "vnx_b_air_a4e_ran_cas", "vnx_b_air_a4e_rnzaf_cas", "vnx_b_air_ov10a_aus_covey"];
+	_vehiclesPlanesAA = ["vnx_b_air_a4e_ran_cap", "vnx_b_air_a4e_ran_cap", "vnx_b_air_a4e_rnzaf_cap"];
+	_vehiclesAirPatrol append ["vnx_b_air_ov10a_aus_covey"];
+	_uavsAttack = ["vnx_b_air_ov10a_aus_covey"];
+};
+
+["vehiclesAirPatrol", _vehiclesAirPatrol] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", _vehiclesPlanesCAS] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
+["uavsAttack", _uavsAttack] call _fnc_saveToTemplate;
 
 //Config special vehicles
 ["vehiclesMilitiaLightArmed", ["vn_b_wheeled_m151_mg_02_nz_army", "vn_b_wheeled_lr2a_mg_01_nz_army"]] call _fnc_saveToTemplate;
@@ -268,7 +272,6 @@ _militaryLoadoutData set ["binoculars", ["vn_mk21_binocs"]];
 
 _militaryLoadoutData set ["rifles", [
 ["vn_m16", "", "", "", ["vn_m16_20_mag", "vn_m16_20_mag", "vn_m16_20_t_mag"], [], ""],
-["vn_m16_camo", "", "", "", ["vn_m16_20_mag", "vn_m16_20_mag", "vn_m16_20_t_mag"], [], ""],
 ["vn_l1a1_01", "", "vn_b_l1a1", "", ["vn_l1a1_20_mag", "vn_l1a1_20_mag", "vn_l1a1_20_t_mag"], [], ""],
 ["vn_l1a1_01", "", "vn_b_l1a1", "", ["vn_l1a1_20_mag", "vn_l1a1_20_mag", "vn_l1a1_20_t_mag"], [], ""],
 ["vn_l1a1_01_camo", "", "vn_b_l1a1", "", ["vn_l1a1_20_mag", "vn_l1a1_20_mag", "vn_l1a1_20_t_mag"], [], ""],
@@ -276,7 +279,6 @@ _militaryLoadoutData set ["rifles", [
 ]];
 _militaryLoadoutData set ["slRifles", [
 ["vn_m16", "", "", "vn_o_4x_m16", ["vn_m16_30_mag", "vn_m16_30_mag", "vn_m16_30_t_mag"], [], ""],
-["vn_m16_camo", "", "", "", ["vn_m16_20_mag", "vn_m16_20_mag", "vn_m16_20_t_mag"], [], ""],
 ["vn_m16_camo", "", "", "", ["vn_m16_20_mag", "vn_m16_20_mag", "vn_m16_20_t_mag"], [], ""],
 ["vn_l34a1", "", "", "", ["vn_f1_smg_mag", "vn_f1_smg_mag", "vn_f1_smg_t_mag"], [], ""],
 ["vn_l1a1_03", "", "", "", ["vn_l1a1_20_mag", "vn_l1a1_20_mag", "vn_l1a1_20_t_mag"], [], ""]
@@ -289,7 +291,7 @@ _militaryLoadoutData set ["SMGs", [
 ]];
 _militaryLoadoutData set ["grenadeLaunchers", [
 ["vn_m79", "", "", "", ["vn_40mm_m381_he_mag", "vn_40mm_m433_hedp_mag", "vn_40mm_m397_ab_mag", "vn_40mm_m680_smoke_w_mag"], ["vn_40mm_m576_buck_mag"], ""],
-["vn_l1a1_01_gl", "", "", "", ["vn_l1a1_20_mag", "vn_l1a1_20_mag", "vn_l1a1_20_t_mag"], ["vn_22mm_m61_frag_mag", "vn_22mm_m61_frag_mag", "vn_22mm_n94_heat_mag"], ""],
+["vn_m79", "", "", "", ["vn_40mm_m381_he_mag", "vn_40mm_m433_hedp_mag", "vn_40mm_m397_ab_mag", "vn_40mm_m680_smoke_w_mag"], ["vn_40mm_m576_buck_mag"], ""],
 ["vn_l1a1_01_gl", "", "", "", ["vn_l1a1_20_mag", "vn_l1a1_20_mag", "vn_l1a1_20_t_mag"], ["vn_22mm_m61_frag_mag", "vn_22mm_m61_frag_mag", "vn_22mm_n94_heat_mag"], ""],
 ["vn_l1a1_01_gl", "", "", "", ["vn_l1a1_20_mag", "vn_l1a1_20_mag", "vn_l1a1_20_t_mag"], ["vn_22mm_m61_frag_mag", "vn_22mm_m61_frag_mag", "vn_22mm_n94_heat_mag"], ""],
 ["vn_l1a1_xm148", "", "", "", ["vn_l1a1_20_mag", "vn_l1a1_20_mag", "vn_l1a1_20_t_mag"], ["vn_40mm_m381_he_mag", "vn_40mm_m680_smoke_w_mag", "vn_40mm_m661_flare_g_mag"], ""]
@@ -457,6 +459,8 @@ private _squadLeaderTemplate = {
 	[selectRandom ["grenadeLaunchers", "slRifles"]] call _fnc_setPrimary;
 	["primary", 8] call _fnc_addMagazines;
 	["primary", 4] call _fnc_addAdditionalMuzzleMagazines;
+
+	["lightATLaunchers"] call _fnc_setLauncher;
 
 	["sidearms"] call _fnc_setHandgun;
 	["handgun", 4] call _fnc_addMagazines;

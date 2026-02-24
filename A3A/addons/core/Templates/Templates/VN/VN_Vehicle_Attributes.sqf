@@ -20,18 +20,22 @@
     ["vn_b_air_f100d_cap", ["cost", 200]],
     
     // PT76 with slightly better armor and gunner
-    ["vn_o_armor_type63_01", ["cost", 180]],
-
-    // skyhawks, worse across the board than either of the real planes + restricted to aim9ds
-    ["vnx_b_air_a4e_usmc_cas", ["cost", 180]],
-    ["vnx_b_air_a4e_ran_cas", ["cost", 180]],
-    ["vnx_b_air_a4e_rnzaf_cas", ["cost", 180]],
-    ["vnx_b_air_a4e_ran_cap", ["cost", 200]],
-    ["vnx_b_air_a4e_rnzaf_cap", ["cost", 200]],
-
-    // silly COIN plane with MMG main guns, no guided munitions
-    ["vnx_b_air_ov10a_mr", ["cost", 140]],
-    ["vnx_b_air_ov10a_usmc_mr", ["cost", 140]],
-    ["vnx_b_air_ov10a_aus_covey", ["cost", 140]]
-
+    ["vn_o_armor_type63_01", ["cost", 180]]
 ]] call _fnc_saveToTemplate;
+
+// S.O.G. Nickel Steel
+if (isClass (configFile >> "CfgPatches" >> "vnx_credits")) then {
+    (["attributesVehicles"] call _fnc_getFromTemplate) append [
+        // skyhawks, worse across the board than either of the real planes + restricted to aim9ds
+        ["vnx_b_air_a4e_usmc_cas", ["cost", 180]],
+        ["vnx_b_air_a4e_ran_cas", ["cost", 180]],
+        ["vnx_b_air_a4e_rnzaf_cas", ["cost", 180]],
+        ["vnx_b_air_a4e_ran_cap", ["cost", 200]],
+        ["vnx_b_air_a4e_rnzaf_cap", ["cost", 200]],
+
+        // silly COIN plane with MMG main guns, no guided munitions
+        ["vnx_b_air_ov10a_mr", ["cost", 140]],
+        ["vnx_b_air_ov10a_usmc_mr", ["cost", 140]],
+        ["vnx_b_air_ov10a_aus_covey", ["cost", 140]]     
+    ];
+};

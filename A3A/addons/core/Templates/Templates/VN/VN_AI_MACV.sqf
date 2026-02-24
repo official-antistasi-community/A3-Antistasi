@@ -65,7 +65,7 @@ private _vehiclesAirPatrol = ["vn_b_air_oh6a_07", "vn_b_air_uh1d_02_01"];
 ["vn_b_army_static_m101_02", ["vn_cannon_m101_mag_he_x8", "vn_cannon_m101_mag_ab_x8", "vn_cannon_m101_mag_wp_x8"]]
 ]] call _fnc_saveToTemplate;
 
-["uavsAttack", ["vn_b_air_oh6a_01"]] call _fnc_saveToTemplate;				// scout helis are fine for this
+private _uavsAttack = ["vn_b_air_oh6a_01"]; // scout helis are fine for this
 ["uavsPortable", []] call _fnc_saveToTemplate;
 
 //Config special vehicles
@@ -90,6 +90,7 @@ if (isClass (configFile >> "vnx_credits")) then {
 	_vehiclesAirPatrol append ["vn_b_air_oh6a_07", "vn_b_air_uh1d_02_01", "vnx_b_air_ov10a_covey", "vnx_b_air_hh1h_01_01", "vnx_b_air_hh1h_02_01"];
 	_vehiclesPlanesCAS append ["vnx_b_air_ov10a_mr"];
 	_vehiclesPlanesTransport append ["vnx_b_air_ac119_02_01"];
+	_uavsAttack append ["vnx_b_air_ov10a_covey", "vnx_b_air_ov10a_covey"];
 };
 
 ["vehiclesLightArmed", _vehiclesLightArmed] call _fnc_saveToTemplate;
@@ -97,6 +98,7 @@ if (isClass (configFile >> "vnx_credits")) then {
 ["vehiclesAirPatrol", _vehiclesAirPatrol] call _fnc_saveToTemplate;
 ["vehiclesPlanesCAS", _vehiclesPlanesCAS] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", _vehiclesPlanesTransport] call _fnc_saveToTemplate;
+["uavsAttack", _uavsAttack] call _fnc_saveToTemplate;
 
 //Minefield definition
 //CFGVehicles variant of Mines are needed "ATMine", "APERSTripMine", "APERSMine"
@@ -497,6 +499,8 @@ private _squadLeaderTemplate = {
 	[selectRandom ["grenadeLaunchers", "slRifles"]] call _fnc_setPrimary;
 	["primary", 8] call _fnc_addMagazines;
 	["primary", 4] call _fnc_addAdditionalMuzzleMagazines;
+
+	["lightATLaunchers"] call _fnc_setLauncher;
 
 	[["slSidearms", "sidearms"] call _fnc_fallback] call _fnc_setHandgun;
 	["handgun", 4] call _fnc_addMagazines;
