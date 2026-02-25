@@ -138,3 +138,7 @@ Maintainer: DoomMetal
 #define A3A_Icon_shopping_cart       A3A_GUI_QTEXTURE_PATH_OF(shopping_cart_ca.paa)
 #define A3A_Icon_filter         A3A_GUI_QTEXTURE_PATH_OF(filter_ca.paa)
 #define A3A_Icon_list           A3A_GUI_QTEXTURE_PATH_OF(list_ca.paa)
+
+//service dialog
+#define A3A_Icon_Driver "\a3\ui_f\data\igui\cfg\commandbar\imagedriver_ca.paa"
+#define A3A_Icon_Gunner "\a3\ui_f\data\igui\cfg\commandbar\imagegunner_ca.paa"

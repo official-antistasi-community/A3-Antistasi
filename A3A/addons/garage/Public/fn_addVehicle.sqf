@@ -78,7 +78,7 @@ private _utilityRefund = {
             _feedBack = "STR_HR_GRG_Feedback_addVehicle_Fuel_sold";
         };
         case ("ammo" in _flags): {
-            _toRefund = floor (([_object, "rearm"] call A3A_fnc_getResourceCargo) / 5);
+            _toRefund = floor ([_object, "rearm"] call A3A_fnc_getResourceCargo);
             _feedBack = "STR_HR_GRG_Feedback_addVehicle_Ammo_sold";
         };
         default {

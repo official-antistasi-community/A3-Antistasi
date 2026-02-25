@@ -119,10 +119,22 @@ switch (_mode) do {
         } forEach _purchaseList;
         */
 
+        private _fnc_changePylon = {
+            params ["_veh","_index", "_magName", "_turretPath", ["_rounds", -1]];
+            if (_rounds isEqualTo -1) then {
+                _veh setPylonLoadout [_pylonIndex, "", true, _turretPath];
+            } else {
+                _veh setPylonLoadout [_pylonIndex, _magName, true, _turretPath];
+                _veh setAmmoOnPylon [_pylonIndex, _rounds];
+            };
+        };
+
+        private _changedPylons = []; 
         private _removedWeapons = [];
         {
             _x params ["_magName", "_rounds", "_orderPrice", "_prettyName", "_isRefund", "_pylonIndex", "_turretPath"];
-            _veh setPylonLoadout [_pylonIndex, "", true, _turretPath];
+            [[_veh, _pylonIndex, _magName, _turretPath], _fnc_changePylon] remoteExecCall ["call", _veh];
+            _changedPylons pushBack _pylonIndex;
             _removedWeapons pushBackUnique (getText (configFile >> "CfgMagazines" >> _magName >> "pylonWeapon"));
         } forEach ((_purchaseList get "refund") + ((_purchaseList get "swap") apply {_x#0}));
 
@@ -139,10 +151,16 @@ switch (_mode) do {
         {
             _x params ["_magName", "_rounds", "_orderPrice", "_prettyName", "_isRefund", "_pylonIndex", "_turretPath"];
             private _currentCount = if ((_magInfo#(_pylonIndex - 1)) isEqualTo _magName) then {_veh ammoOnPylon _pylonIndex} else {0};
-
-            _veh setPylonLoadout [_pylonIndex, _magName, true, _turretPath];
-            _veh setAmmoOnPylon [_pylonIndex, _rounds + _currentCount];
+            [[_veh, _pylonIndex, _magName, _turretPath, _currentCount + _rounds], _fnc_changePylon] remoteExecCall ["call", _veh];
+            _changedPylons pushBack _pylonIndex;
         } forEach (((_purchaseList get "swap") apply {_x#1}) + (_purchaseList get "purchase"));
+
+        {
+            // array of turret paths
+            private _pylonIndex = _forEachIndex + 1;
+            if (_pylonIndex in _changedPylons) then {continue};
+            [[_veh, _pylonIndex, _magInfo#_forEachIndex, _x, _veh ammoOnPylon _pylonIndex], _fnc_changePylon] remoteExecCall ["call", _veh];
+        } forEach (_purchaseList get "owner");
     };
     case "repair":
     {

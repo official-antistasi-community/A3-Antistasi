@@ -31,6 +31,7 @@ FIX_LINE_NUMBERS()
 
 #define BLACKLISTED_MAGS ["FakeWeapon", "FakeMagazine"]
 #define BLACKLISTED_SIMS ["laserDesignate"]
+#define PRICE_MUL 0.2
 
 params[
     ["_mode","onLoad"],
@@ -63,6 +64,12 @@ private _globalControlGroup = _display displayCtrl A3A_IDC_VEHSERVICE_CONTROLGRO
 private _fnc_getName = {
     params ["_name", ["_cfg", "CfgMagazines"]];
     getText (configFile >> _cfg >> _name >> "displayName");
+};
+
+private _fnc_getPrice = {
+    params ["_mag"];
+    private _price = [_mag, "mag"] call A3A_GUI_fnc_calculateItemPrice;
+    _price * PRICE_MUL
 };
 
 switch (_mode) do
@@ -104,7 +111,7 @@ switch (_mode) do
         _pylonPresets ctrlShow (_isPylon);
         _dynamicTableBackground ctrlshow (!_isPylon);
         private _pylonControls = _display getVariable ["pylonControls", []];
-        if (count _pylonControls > 0) then {{ctrlDelete (_x#0)} foreach _pylonControls};
+        if (count _pylonControls > 0) then {{ctrlDelete (_x#0); ctrlDelete (_x#1)} foreach _pylonControls};
         _pylonControls = [];
         private _ammoControls = flatten ((_display getVariable ["rearmData", []]) apply {[_x#1, _x#2, _x#3]});
         if (count _ammoControls > 0) then {{ctrlDelete _x} foreach _ammoControls};
@@ -269,7 +276,7 @@ switch (_mode) do
                     };
 
                     _magazines sort true;
-                    _magazines insert [0, [["<do not change>", "This option will not rearm or change the pylon", "doNotChange"], ["<rearm>", "This option will rearm this specific pylon", "rearm"], [localize "STR_3DEN_Attributes_PylonEmpty_text", "This option will leave the pylon empty", ""]]];
+                    _magazines insert [0, [["<ignore>", "This option will not rearm or change the pylon", "doNotChange"], ["<rearm>", "This option will rearm this specific pylon", "rearm"], [localize "STR_3DEN_Attributes_PylonEmpty_text", "This option will leave the pylon empty", ""]]];
 
                     // Add compatible magazines to the combo box and select the current one
                     private _currentMagazine = _currentMagazines select _forEachIndex;
@@ -293,29 +300,38 @@ switch (_mode) do
                     // Create turret button if aircraft has a gunner position
                     private _ctrlTurret = controlNull;
 
-                    /*
                     if (_hasGunner) then {
                         _ctrlTurret = _display ctrlCreate ["ctrlButtonPictureKeepAspect", -1, _globalControlGroup];
-                        _ctrlTurret ctrlSetPosition [_posX - (5 * GRID_W), _posY, 5 * GRID_W, 5 * GRID_H];
+                        _ctrlTurret ctrlSetPosition [_posX - (3 * GRID_W), _posY, 3 * GRID_W, 3 * GRID_H];
                         _ctrlTurret ctrlCommit 0;
 
-                        private _turretPath = [_veh, _forEachIndex] call EFUNC(common,getPylonTurret);
+                        private _turretPath = [_veh, _forEachIndex] call HR_GRG_fnc_getPylonTurret;
                         _ctrlTurret setVariable ["turretPath", _turretPath];
                         _ctrlTurret setVariable ["index", _forEachIndex];
-                        _ctrlTurret call FUNC(handleTurretButton);
+                        ["handleTurretButton", [_ctrlTurret]] call A3A_GUI_fnc_vehServiceDialog;
 
                         // Toggle the pylon's turret when the button is clicked
                         _ctrlTurret ctrlAddEventHandler ["ButtonClick", {
                             params ["_ctrlTurret"];
-
-                            [_ctrlTurret, true] call FUNC(handleTurretButton);
+                            ["handleTurretButton", [_ctrlTurret, true]] call A3A_GUI_fnc_vehServiceDialog;
                         }];
                     };
-                    */
-                    ctrlSetFocus _ctrlCombo;
 
                     _pylonControls pushBack [_ctrlCombo, _ctrlTurret, _mirroredIndex, _defaultTurretPath];
                 } forEach _pylonList;
+
+                // Add the aircraft's pylons presets to the presets combo box
+                _pylonPresets lbAdd localize "STR_Radio_Custom";
+                _pylonPresets lbSetCurSel 0;
+
+                {
+                    private _index = _pylonPresets lbAdd getText (_x >> "displayName");
+                    _pylonPresets setVariable [str _index, getArray (_x >> "attachment")];
+                } forEach configProperties [_pylonConfig >> "Presets", "isClass _x"];
+
+                // Update pylons when a preset is selected
+                _pylonPresets ctrlAddEventHandler ["LBSelChanged", {["handlePreset", _this] call A3A_GUI_fnc_vehServiceDialog}];
+
                 _display setVariable ["pylonControls", _pylonControls];
                 _display setVariable ["A3A_building", false];
                 ["calculateCosts"] call A3A_GUI_fnc_vehServiceDialog;
@@ -393,7 +409,7 @@ switch (_mode) do
                     if (_roundsToBuy == 0) then {continue};
 
                     private _count = getNumber (configFile >> "CfgMagazines" >> _magName >> "count") max 1;
-                    private _roundPrice = ([_magName, "mag"] call A3A_GUI_fnc_calculateItemPrice) / _count;
+                    private _roundPrice = ([_magName] call _fnc_getPrice) / _count;
                     private _orderPrice = _roundPrice * _roundsToBuy;
                     _totalCost = _totalCost + _orderPrice;
 
@@ -408,12 +424,14 @@ switch (_mode) do
             };
             case ("pylon"): {
                 private _controlsList = _display getVariable "pylonControls";
+                private _ownershipList = _controlsList apply {(_x#1) getVariable ["turretPath", [-1]]};
                 private _uiMagList = _controlsList apply {(_x#0) lbData (lbCurSel (_x#0))};
                 private _vehDataList = getAllPylonsInfo _veh;
                 {  
-                    _x params ["_pylonIndex", "_pylonName", "_turretPath", "_magName", "_countRounds"];
+                    _x params ["_pylonIndex", "_pylonName", "", "_magName", "_countRounds"];
                     if (_countRounds < 0) then {_countRounds = 0};
                     private _uiMag = _uiMagList#_forEachIndex;
+                    _turretPath = _ownershipList#_forEachIndex;
                     if (_uiMag isEqualTo "doNotChange") then { continue };
 
                     // old: currently on the plane
@@ -422,7 +440,7 @@ switch (_mode) do
                     private _oldMaxRounds = getNumber (configFile >> "CfgMagazines" >> _magName >> "count");
 
                     private _count = getNumber (configFile >> "CfgMagazines" >> _magName >> "count") max 1;
-                    private _oldRoundPrice = ([_magName, "mag"] call A3A_GUI_fnc_calculateItemPrice) / _count;
+                    private _oldRoundPrice = ([_magName] call _fnc_getPrice) / _count;
                     private _oldRoundsToBuy = _oldMaxRounds - _countRounds;
                     private _oldOrderPrice = _oldRoundPrice * _oldRoundsToBuy;
 
@@ -447,10 +465,8 @@ switch (_mode) do
                     };
 
                     if (_uiMag isNotEqualTo "") then {
-                        private _newAmmoName = getText (configFile >> "CfgMagazines" >> _uiMag >> "ammo");
-                        private _newRoundPrice = [_newAmmoName, "ammo"] call A3A_GUI_fnc_calculateItemPrice;
                         private _newMaxRounds = getNumber (configFile >> "CfgMagazines" >> _uiMag >> "count");
-                        private _newOrderPrice = _newRoundPrice * _newMaxRounds;
+                        private _newOrderPrice = [_uiMag] call _fnc_getPrice;
                         _totalCost = _totalCost + _newOrderPrice;
                         _purchaseList pushBack [_uiMag, _newMaxRounds, _newOrderPrice, [_uiMag] call _fnc_getName, false, _pylonIndex, _turretPath];
                     };
@@ -485,17 +501,19 @@ switch (_mode) do
                 } forEach _pairs;
                 {
                     _x params ["_name", "_roundsToBuy", "_orderPrice", "_prettyName"];
-                    _prettyPurchaseList pushBack format [localize format ["STR_antistasi_vehService_cost%1", _stringSuffix], _roundsToBuy, _prettyName, floor _orderPrice];
+                    _prettyPurchaseList pushBack format [localize format ["STR_antistasi_vehService_cost%1", _stringSuffix], _roundsToBuy, _prettyName, ceil _orderPrice];
                 } forEach _purchases;
                 {
                     _x params ["_name", "_roundsToBuy", "_orderPrice", "_prettyName"];
-                    _prettyPurchaseList pushBack format [localize "STR_antistasi_vehService_refund", _roundsToBuy, _prettyName, floor _orderPrice, "80%"];
+                    _prettyPurchaseList pushBack format [localize "STR_antistasi_vehService_refund", _roundsToBuy, _prettyName, ceil _orderPrice, "80%"];
                 } forEach _refunds;
 
+                private _ownershipList = _controlsList apply {(_x#1) getVariable ["turretPath", [-1]]};
                 _purchaseList = createHashMapFromArray [
                     ["swap", _pairs],
                     ["refund", _refunds],
-                    ["purchase", _purchases]
+                    ["purchase", _purchases],
+                    ["owner", _ownershipList]
                 ];
             };
 
@@ -512,7 +530,7 @@ switch (_mode) do
             };
         };
 
-        _applyButton ctrlSetText format [localize format ["STR_antistasi_vehService_apply%1", ["points", "refuel"] select (_mode isEqualTo "refuel")], (round _totalCost) max 0];
+        _applyButton ctrlSetText format [localize format ["STR_antistasi_vehService_apply%1", ["points", "refuel"] select (_mode isEqualTo "refuel")], (ceil _totalCost) max 0];
         private _response = switch (true) do {
             case (_purchaseList isEqualTo []);
             case (_purchaseList isEqualType createHashMap && {flatten (values _purchaseList) isEqualTo []}): {
@@ -544,6 +562,7 @@ switch (_mode) do
     
     case ("checkout"):
     {
+        ["calculateCosts"] call A3A_GUI_fnc_vehServiceDialog;
         private _purchaseList = _display getVariable ["purchaseList", []];
         private _totalCost = _display getVariable ["totalCost", 0];
         private _mode = _display getVariable "currentMode";
@@ -581,8 +600,82 @@ switch (_mode) do
                     _x lbSetCurSel 1
                 } forEach _comboList;
             };
+        };  
+    };
+
+    case ("handleTurretButton"):
+    {
+        // Adapted ZEN function, stripped of ACE dependency. Full credits to mharris001 for this function
+        _params params ["_ctrlTurret", ["_toggle", false]];
+
+        private _turretPath = _ctrlTurret getVariable "turretPath";
+
+        // Toggle between driver and gunner turret if required
+        if (_toggle) then {
+            _turretPath = [[-1], [0]] select (_turretPath isEqualTo [-1]);
+            _ctrlTurret setVariable ["turretPath", _turretPath];
+
+            /*
+            // Handle toggling the state of the mirrored pylon's button
+            if (cbChecked (_display displayCtrl IDC_MIRROR)) then {
+                private _pylonIndex = _ctrlTurret getVariable "index";
+
+                {
+                    _x params ["", "_ctrlTurretMirrored", "_mirroredIndex"];
+
+                    if (_mirroredIndex == _pylonIndex) exitWith {
+                        _ctrlTurretMirrored setVariable ["turretPath", _turretPath];
+                        _ctrlTurretMirrored call A3A_GUI_fnc_handleTurretButton;
+                    };
+                } forEach (_display getVariable "pylonControls");
+            };
+            */
         };
-        
+
+        // Update the button's icon and tooltip
+        if (_turretPath isEqualTo [-1]) then {
+            _ctrlTurret ctrlSetText A3A_Icon_Driver;
+            _ctrlTurret ctrlSetTooltip localize "STR_Driver";
+        } else {
+            _ctrlTurret ctrlSetText A3A_Icon_Gunner;
+            _ctrlTurret ctrlSetTooltip localize "STR_Gunner";
+        };
+    };
+
+    case ("handlePreset"):
+    {
+        // Adapted ZEN function, stripped of ACE dependency. Full credits to mharris001 for this function
+        _params params ["_ctrlPresets", "_selectedIndex"];
+
+        // Exit on custom pylon configuration
+        if (_selectedIndex == 0) exitWith {};
+
+        /*
+        // Disable mirroring when selecting a preset
+        private _display = ctrlParent _ctrlPresets;
+        [_display, false] call FUNC(handleMirror);
+
+        private _ctrlMirror = _display displayCtrl IDC_MIRROR;
+        _ctrlMirror cbSetChecked false;
+        */
+
+        // Select the preset's magazines and default pylon turrets
+        private _presetMagazines = _ctrlPresets getVariable str _selectedIndex;
+
+        {
+            _x params ["_ctrlCombo", "_ctrlTurret", "", "_turretPath"];
+
+            private _magazine = _presetMagazines param [_forEachIndex, ""];
+
+            for "_index" from 0 to (lbSize _ctrlCombo - 1) do {
+                if (_ctrlCombo lbData _index == _magazine) exitWith {
+                    _ctrlCombo lbSetCurSel _index;
+                };
+            };
+
+            _ctrlTurret setVariable ["turretPath", _turretPath];
+            ["handleTurretButton", [_ctrlTurret]] call A3A_GUI_fnc_vehServiceDialog;
+        } forEach (_display getVariable "pylonControls");
     };
 
     case ("onUnload"):
