@@ -74,6 +74,9 @@
 ["staticAA", ["PRACS_Infantry_Stinger_Pod"]] call _fnc_saveToTemplate;
 ["staticMortars", ["RHS_M252_WD"]] call _fnc_saveToTemplate;
 
+["vehiclesSAM", ["PRACS_MiM23_HAWK", "PRACS_MiM23_HAWK", "PRACS_MiM23_HAWK", "PRACS_M727_IHAWK", "PRACS_M727_SEM_IHAWK"]] call _fnc_saveToTemplate;
+["vehiclesRadar", ["PRACS_MPQ64_Sentinel"]] call _fnc_saveToTemplate;
+
 ["mortarMagazineHE", "rhs_12Rnd_m821_HE"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["mortarMagazineFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
