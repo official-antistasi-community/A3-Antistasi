@@ -325,12 +325,14 @@ _task set ["s_cleanup",
     { [_x] spawn A3A_fnc_VEHDespawner } forEach (_this get "_vehicles");
     { [_x] spawn A3A_fnc_enemyReturnToBase } forEach ((_this get "_crewGroups") + (_this get "_cargoGroups"));
 
-    // When the city marker is despawned, get rid of the civilians
-    [_this get "_marker", _this get "_civilians", _this get "_civGroups"] spawn {
-        params ["_marker", "_civilians", "_civGroups"];
-        waitUntil {sleep 5; (spawner getVariable _marker != 0)};
-        {deleteVehicle _x} forEach _civilians;
-        {deleteGroup _x} forEach _civGroups;
+    // When the city marker is despawned, get rid of the civilians if spawned
+    if ("_civilians" in _this) then {
+        [_this get "_marker", _this get "_civilians", _this get "_civGroups"] spawn {
+            params ["_marker", "_civilians", "_civGroups"];
+            waitUntil {sleep 5; (spawner getVariable _marker != 0)};
+            {deleteVehicle _x} forEach _civilians;
+            {deleteGroup _x} forEach _civGroups;
+        };
     };
 
     // Remove from active city battles after 10min (added on call)
