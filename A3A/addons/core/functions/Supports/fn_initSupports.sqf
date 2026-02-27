@@ -55,9 +55,10 @@ private _initData = [
 // Generate support type hashmap for a faction, suppType -> [baseType, weight, effRadius, strikepower]
 private _fnc_buildSupportHM = 
 {
-    params ["_faction"];
-    private _lowAir = _faction getOrDefault ["attributeLowAir", false];
-    private _noSAM = _faction getOrDefault ["attributeNoSAM", false];
+    params ["_faction", "_side"];
+    private _year = [_side, "year", 2000] call A3A_fnc_getConfigTemplate;
+    private _lowAir = (_faction getOrDefault ["attributeLowAir", false]) || (_year < 1950);
+    private _noSAM = (_faction getOrDefault ["attributeNoSAM", false]) || (_year < 1950);
     private _suppHM = createHashMap;
     {
         _x params ["_suppType", "_baseType", "_weight", "_lowAirWeight", "_effRadius", "_strikepower", "_flags", "_reqType"];
@@ -72,8 +73,8 @@ private _fnc_buildSupportHM =
     _suppHM;
 };
 
-A3A_supportTypesOcc = A3A_faction_occ call _fnc_buildSupportHM;
-A3A_supportTypesInv = A3A_faction_inv call _fnc_buildSupportHM;
+A3A_supportTypesOcc = [A3A_faction_occ, Occupants] call _fnc_buildSupportHM;
+A3A_supportTypesInv = [A3A_faction_inv, Invaders] call _fnc_buildSupportHM;
 
 // Generate anti-air support threshold for a faction, based on average ASF plane cost
 private _fnc_getAirThreshold =

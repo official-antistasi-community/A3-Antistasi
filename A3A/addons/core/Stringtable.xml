@@ -10570,6 +10570,27 @@
         <Original>The Takistani Army is backed by a variety of sources, which are represented as individual templates in the faction selector. This faction uses primarily Western, or United States, vehicles and weaponry.</Original>
         <Russian>Такистанская армия опирается на различные источники, которые представлены в виде отдельных шаблонов в селекторе фракций. Эта фракция использует в основном западные, или американские, транспортные средства и оружие.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_CSAT_BRU">
+        <Original>The CSAT coalition has several member states that use similar vehicles and different infantry gear. The Belarusian forces use a variety of AKs and Russian weaponry.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_CSAT_CHI">
+        <Original>The CSAT coalition has several member states that use similar vehicles and different infantry gear. The Chinese forces use homegrown gear like the QBZ; many of the guns in this faction require the Apex DLC to use.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_CSAT_FRE">
+        <Original>The CSAT coalition has several member states that use similar vehicles and different infantry gear. The French / North African forces primarily use the FAL and a few other weapons of US and Russian make.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_CSAT_PER">
+        <Original>The CSAT coalition has several member states that use similar vehicles and different infantry gear. The Persian forces, led by Iran, primarily use the homegrown KH2002 as their service rifle of choice.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CBF_GAF">
+        <Original>The Grozovian Armed Forces are vying for control alongside Takistan and Chernarus in the Arma 2 world. The use primarily imported Serbian weaponry, which includes licensed Russian equipment and homegrown weaponry.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CBF_PLM">
+        <Original>The People's Liberation Militia are a fictional Chinese military, supplied by Soviet gear, vying for control over the Horizon Islands and other Pacific islands. They use very early Cold War gear like the SKS and AKMN.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CBF_TNM">
+        <Original>The Tanoa National Militia is a militia supplied by an unknown western proxy that is dedicated to fighting the PLM should they encroach on their territory. They use more modern vehicles but a wider variety of WW2 and early Cold War weapons like the M2 Carbine and AR-10</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_3CB_Reb_CCM">
         <Original>The Chernorussian Communist Militia is quite similar to NAPA, with a group of citizens that takes faith in the old ways of the Soviet Union over the modern ideology of capitalism. Similar to NAPA, they scavenge whatever Soviet weapons they can.</Original>
         <Russian>Чернорусское коммунистическое ополчение очень похоже на NAPA. Это группа граждан, которые верят в старый путь Советского Союза, а не в современную идеологию капитализма. Как и NAPA, они собирают все советское оружие, которое могут найти.</Russian>
@@ -10594,6 +10615,21 @@
         <Original>The Armed Forces of the Russian Federation are the current-age Russian Army. Equipping a variety of cutting edge and Cold-War era vehicles, the AFRF typically use homegrown AK assault rifles chambered in 5.45 and 7.62 calibers.</Original>
         <Russian>Вооруженные силы Российской Федерации - это современная российская армия. Оснащенные разнообразной новейшей техникой времен холодной войны, ВС РФ обычно используют отечественные автоматы АК калибров 5,45 и 7,62.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_Aegis_Iran">
+        <Original>Iran is one of the primary members of the CSAT coalition, providing a large amount of manpower and funding. They primarily use standardized CSAT technology. Their service rifle is the Katiba, chambered in 6.5x39mm Caseless.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_Aegis_China">
+        <Original>China is one of the primary members of the CSAT coalition, providing much of the technological innovation, funding, and special forces talent. They primarily use standardized CSAT technology, and their service rifle is the CTAR.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_Aegis_Russia">
+        <Original>Russia is considering joining the CSAT coalition but has officially not joined yet. They export and use a wide variety of vehicles commonly known as CSAT technology, and they use the AK series of rifles as their primary service weapons.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_Aegis_US">
+        <Original>The US military in 2035 uses many NATO-common vehicles and is attempting to buy into the NATO modernization program with MXs for its conventional infantry, but until then uses the SCAR series of rifles.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_AMF_France">
+        <Original>The French Army uses a wide variety of homegrown equipment and vehicles, including things like aircraft that other countries would often import. They most often use the FAMAS rifle.</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_BAF">
         <Original>The British Armed Forces have quite the history, and their unique assortment of weaponry and equipment clearly shows it. They typically use the L85 series of assault rifles, chambered in 5.56 NATO.</Original>
         <Russian>Британские вооруженные силы имеют богатую историю, о чем ярко свидетельствует их уникальный ассортимент оружия и снаряжения. Как правило, они используют штурмовые винтовки серии L85 под патрон 5,56 НАТО.</Russian>
@@ -10614,6 +10650,9 @@
         <Original>No rebellion is won without the support of the civilians, whether they choose to report information to the rebels or volunteer to fight for what is right. Whatever their role may be, the rebellion is always fighting for their freedom.</Original>
         <Russian>Ни одно восстание не победит без поддержки мирных жителей, независимо от того, решают ли они сообщать информацию повстанцам или добровольно сражаются за правое дело. Какова бы ни была их роль, повстанцы всегда борются за свою свободу.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_CRO_Croatia">
+        <Original>The Croatian Army is in the process of changing over to NATO equipment. They use many homegrown vehicles, with their Air Force stuck with Soviet craft, and primarily field their own assault rifle, the VHS-D2.</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_CSAT">
         <Original>A coalition of Middle-Eastern and Asian nations led by Iran and China, the Canton protocol Strategic Alliance Treaty's meteoric rise rivals the power of the western NATO coalition. CSAT forces prefer to use the Katiba assault rifle, chambered in 6.5x39mm Caseless.</Original>
         <Russian>Коалиция ближневосточных и азиатских стран во главе с Ираном и Китаем, стремительный взлет которой по Кантонскому протоколу Договора о стратегическом союзе соперничает с мощью западной коалиции НАТО. Силы CSAT предпочитают использовать штурмовую винтовку Katiba под патрон 6,5x39 мм Caseless.</Russian>
@@ -10625,6 +10664,12 @@
       <Key ID="STR_A3A_templates_lore_CSATEnoch">
         <Original>CSAT forces operating in Livonia are Russian-based and use modern Russian gear along with weapons from other nations in the alliance. They typically use the Katiba assault rifle, similar to traditional CSAT doctrine.</Original>
         <Russian>Силы CSAT, действующие в Ливонии, базируются в России и используют современное российское снаряжение, а также оружие других стран, входящих в альянс. Как правило, они используют штурмовую винтовку "Катиба", что соответствует традиционной доктрине CSAT.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CSLA_AI_AFMC">
+        <Original>The Armed Forces of the Midland Coalition are a coalition of small militaries of countries located over the north Chernarusian border. They primarily use Western / US Cold War equipment with a healthy sprinkling of FAL rifles.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CSLA_AI_CSLA">
+        <Original>The Czechoslovak People's Army is dedicated to fending off a western invasion into their country. They use mostly homegrown vehicles backed by Soviet military strength, with the SA-58 rifle as their primary of choice.</Original>
       </Key>
       <Key ID="STR_A3A_templates_lore_CUP_AI_BW">
         <Original>The Bundesweher are the current armed forces for Germany. They frequently use domestically produced rifles, such as the G36, HK416, and HK417 for small arms. Their armored units are rounded out with many NATO and U.S. produced vehicles.</Original>
@@ -10705,6 +10750,15 @@
         <Original>Since its founding in 1949, the North Atlantic Treaty Organization has been dedicated to ensuring the safety and security of all nations involved in the alliance, with this regiment hailing from the United Kingdom and using the SPAR-16 and SPAR-17 rifles.</Original>
         <Russian>С момента своего основания в 1949 году Организация Североатлантического договора призвана обеспечивать безопасность всех стран, входящих в альянс. Полк, в котором используются винтовки SPAR-16 и SPAR-17, дислоцируется в Великобритании.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_PRACS_RACS">
+        <Original>The Royal Army Corps of Sahrani is a powerful, self sufficient military on the island of Sahrani. They import many US / French aircraft and use many homegrown vehicles alongside a variety of different rifles, from Germany, Israel, and the US.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_PRACS_SLA">
+        <Original>The Sahrani Liberation Army is the military on Sahrani dedicated to fighting to what they see as the unjust RACS occupation. They almost entirely use Russian vehicles and weaponry, including the ubiquitous AK platform.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_PRACS_SLA_Guards">
+        <Original>The SLA Revolutionary Guards are the premier forces of the SLA, fielding much more advanced gear than their normal SLA counterparts. They also use Russian gear, but much more modern vehicles and gear.</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_RHS_AI_ChDKZ">
         <Original>The Chernarussian Movement of the Red Star is a pro-Russian separatist movement that quickly evolved to an active civilian militia to a powerful force capable of challenging governments directly. They normally use Cold-War era Soviet equipment and vehicles.</Original>
         <Russian>Чернарусское движение Красной Звезды - это пророссийское сепаратистское движение, которое быстро превратилось из активного гражданского ополчения в мощную силу, способную бросить прямой вызов правительству. Они обычно используют советское оборудование и транспортные средства времен холодной войны.</Russian>
@@ -10759,6 +10813,9 @@
         <Original>The Tanoa Liberation Army is built on the dreams of hundreds, even thousands of soldiers to return the volcanic island of Tanoa to its former glory. They are very poorly funded, and typically use some of the oldest Cold War Soviet technology.</Original>
         <Russian>Освободительная армия Таноа построена на мечтах сотен и даже тысяч солдат вернуть вулканическому острову Таноа его былую славу. Они очень плохо финансируются и обычно используют самые старые советские технологии времен холодной войны.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_TMT_Turkish_Army">
+        <Original>The Turkish Army are the mainland forces of Turkey, transitioning into being a NATO-backed country. They use many unique vehicles and guns, with many of their rifles being built in Turkey, such as the MKE MPT series of rifles.</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_UNS_AI_PAVN">
         <Original>The People's Army of Vietnam are the citizens and militia of Vietnam dedicated to fighting the invasion of the US, with weapons funded from surrounding Eastern countries such as China and the Soviet Union. They typically use Type 56 assault rifles and the SKS battle rifle.</Original>
         <Russian>Народная армия Вьетнама - это граждане и ополченцы Вьетнама, призванные бороться против вторжения США, с оружием, полученным от окружающих восточных стран, таких как Китай и Советский Союз. Как правило, они используют штурмовые винтовки Тип 56 и боевую винтовку СКС.</Russian>
@@ -10776,12 +10833,18 @@
         <Russian>Армия Соединенных Штатов - одна из самых опасных военных сверхдержав в мире, а их союз с НАТО делает их сложной угрозой. Как правило, они производят и используют значительное количество оружия НАТО, включая калибры 5,56 STANAG и 7,62.</Russian>
       </Key>
       <Key ID="STR_A3A_templates_lore_USMC">
-        <Original>The United States Marine Corps are the primary branch of the US military deployed overseas. They retain the same lethality as their domestic counterparts, with equipment fitted for operating on the high seas. Their small arms are predominantly the same as the standard US Army.</Original>
+        <Original>The United States Marine Corps are the primary branch of the US military deployed alongside the Army for beach landings, with equipment fitted for operating navally. Their small arms are predominantly the same as the standard US Army.</Original>
         <Russian>Корпус морской пехоты США - основное подразделение вооруженных сил США, развернутое за рубежом. Они сохраняют ту же смертоносность, что и их отечественные коллеги, а их снаряжение приспособлено для действий в открытом море. Их стрелковое оружие в основном такое же, как и в армии США.</Russian>
       </Key>
       <Key ID="STR_A3A_templates_lore_VDV">
-        <Original>The Russian Air Forces fill a vital gap in the AFRF's capability of cohesive aerial assaults. They typically use standard issue Russian equipment, but their vehicles and gear are modified to be more lightweight for ease of aerial operations.</Original>
+        <Original>The Russian Airborne Forces fill a vital gap in the AFRF's capability of cohesive aerial assaults. They typically use standard issue Russian equipment, but their vehicles and gear are modified to be more lightweight for ease of aerial operations.</Original>
         <Russian>Российские ВВС заполняют жизненно важный пробел в возможностях ВСРФ по проведению сплоченных воздушных десантов. Как правило, они используют стандартное российское оборудование, но их машины и снаряжение модифицированы для облегчения воздушных операций.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_VN_AI_ANZAC">
+        <Original>The Australian and New Zealand Army Corps didn't technically exist during the Vietnam war, but it is the name assigned to the military support that the two countries provided. They field many British-adopted weapons, primarily the L1A1, referred to as the FAL in many parts of the world.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_VN_AI_USMC">
+        <Original>The United States Marine Corps played a vital role in the Vietnam War, securing any territory the traditional military was too thinly stretched to cover. They use many older small arms like the M1 Garand and M14, and field some unique vehicles but are predominately similar to the US Army.</Original>
       </Key>
       <Key ID="STR_A3A_templates_lore_VN_AI_MACV">
         <Original>The Military Assistance Command, Vietnam are the operational group of the US military tasked with invading Vietnam. They normally use later World War II weapons with a few fresh faces, like the M14, M16, and M60.</Original>
