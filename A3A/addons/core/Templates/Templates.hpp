@@ -23,7 +23,7 @@ class Templates
         file = "Vanilla_AI_CSAT_Arid";                                  // name of the file in the basepath folder. can be anything, but convention is faction_(AI/Reb/Civ)_Faction_Camo
         climate[] = {"arid", "arctic"};                                 // climates this faction will appear as available in. available climates:
                                                                         // climate[]  = {"arid", "arctic", "temperate", "tropical"}
-        maps[] = {};                                                    // the maps where this faction will be prioritized. think the AAF appearing first on Altis.
+        maps[] = {};                                                    // the maps where this faction will be prioritized. think the AAF appearing first on Altis. map needs to be full lowercase
         shortName = "CSAT";                                             // the name shown in the faction info title
         lore = "What acronym means, supplying country, service rifle."; // lore will go into the bottom left information section. should have an explanation of the acronym and what common vehicles / weapons are used
         supportSide = -1;                                               // the alignment of the faction, based on the side. -1 for east, 1 for west. can be any number in between. this decides the supports the faction uses.
