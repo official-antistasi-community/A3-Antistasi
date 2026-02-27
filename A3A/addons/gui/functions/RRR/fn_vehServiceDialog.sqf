@@ -240,9 +240,9 @@ switch (_mode) do
                 (ctrlPosition _pylonPicture) params ["_pictureX", "_pictureY", "_pictureW", "_pictureH"]; // direct UI positions are needed
                 _pylonList = "true" configClasses (_pylonConfig >> "Pylons");
                 (ctrlPosition _globalControlGroup) params ["_groupX", "_groupY"];
-
                 private _cfgMagazines = configFile >> "CfgMagazines";
-                private _currentMagazines = getPylonMagazines _veh;
+                private _pylonInfo = getAllPylonsInfo _veh;
+                private _currentMagazines = _pylonInfo apply {_x#3};
                 private _hasGunner = [0] in allTurrets [_veh, false];
                 {
                     private _uiPos = getArray (_x >> "UIposition") apply {
@@ -304,8 +304,7 @@ switch (_mode) do
                         _ctrlTurret = _display ctrlCreate ["ctrlButtonPictureKeepAspect", -1, _globalControlGroup];
                         _ctrlTurret ctrlSetPosition [_posX - (3 * GRID_W), _posY, 3 * GRID_W, 3 * GRID_H];
                         _ctrlTurret ctrlCommit 0;
-
-                        private _turretPath = [_veh, _forEachIndex] call HR_GRG_fnc_getPylonTurret;
+                        private _turretPath = _pylonInfo param [_forEachIndex, []] param [2, [-1]];
                         _ctrlTurret setVariable ["turretPath", _turretPath];
                         _ctrlTurret setVariable ["index", _forEachIndex];
                         ["handleTurretButton", [_ctrlTurret]] call A3A_GUI_fnc_vehServiceDialog;
