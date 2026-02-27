@@ -8,7 +8,8 @@ switch (_mode) do {
         _veh addMagazineTurret [_name, _turretPath, _partialMagSize];
     };
     case ("pylon"): {
-        _data params ["_index", "_magName", "_turretPath", ["_rounds", -1]];
+        diag_log _data;
+        _data params ["_pylonIndex", "_turretPath", "_magName", ["_rounds", -1]];
         if (_rounds isEqualTo -1) then {
             _veh setPylonLoadout [_pylonIndex, "", true, _turretPath];
         } else {

@@ -570,7 +570,7 @@ switch (_mode) do
         closeDialog 0;
         if (player distance _veh > 25) exitWith {[localize "STR_antistasi_vehService_hintTitle", localize [format "STR_antistasi_vehService_tooFar%1", _stringSuffix]] spawn A3A_fnc_customHint};
         private _supplyVic = _display getVariable ["A3A_supplyVehicle", objNull];
-        [_veh, _mode, _supplyVic, _purchaseList, _totalCost max 0] spawn A3A_fnc_serviceVehicle;
+        [_veh, _mode, _supplyVic, _purchaseList, _totalCost max 0] spawn A3A_GUI_fnc_serviceVehicle;
     };
 
     case ("reset"):
