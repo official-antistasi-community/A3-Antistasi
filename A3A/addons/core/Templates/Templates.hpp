@@ -176,6 +176,7 @@ class Templates
         name = "A3 Altian Civilians";
         file = "Vanilla_Civ";
         shortName = "Altian";
+        climate[] = {"arid"};
         maps[] = {"altis"};
         lore = $STR_A3A_templates_lore_CIV;
     };
@@ -187,6 +188,7 @@ class Templates
         name = "A3 Livonian Civilians";
         file = "Vanilla_Civ_LIV";
         shortName = "Livonian";
+        climate[] = {"temperate", "arctic"};
         maps[] = {"enoch","vt7"};
         lore = $STR_A3A_templates_lore_CIV;
     };
@@ -198,6 +200,7 @@ class Templates
         name = "A3 Tanoan Civilians";
         file = "Vanilla_Civ_TNA";
         shortName = "Tanoan";
+        climate[] = {"tropical"};
         maps[] = {"tanoa"};
         lore = $STR_A3A_templates_lore_CIV;
     };
