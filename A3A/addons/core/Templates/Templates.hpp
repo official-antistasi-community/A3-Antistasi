@@ -2060,12 +2060,12 @@ class Templates
         priority = 70;
     };
 
-    class CSLA_AI_US_Army_temperate  : CSLA_Base
+    class CSLA_AI_US_Army_temperate : CSLA_Base
     {
         side = "Inv"; //the side the faction defaults to, one of the following: Inv, Occ, Reb, Civ
         flagTexture = "a3\data_f\flags\flag_us_co.paa"; //path to an icon to be displayed in the selector
         name = "US Army Temperate"; //the name shown in the selector
-        file = "CSLA_AI_US_Army_temperate "; //the template file name
+        file = "CSLA_AI_US_Army_temperate"; //the template file name
         climate[] = {"temperate"}; //climate that the template is meant for
         shortName = "US Army";
     };

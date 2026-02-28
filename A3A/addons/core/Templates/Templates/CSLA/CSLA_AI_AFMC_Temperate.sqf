@@ -65,8 +65,8 @@
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["mortarMagazineFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
 
-["minefieldAT", ["US85_M87A1Mine_mag"]] call _fnc_saveToTemplate;
-["minefieldAPERS", ["US85_M14Mine_mag"]] call _fnc_saveToTemplate;
+["minefieldAT", ["AFMC_ATMine"]] call _fnc_saveToTemplate;
+["minefieldAPERS", ["US85_M14Mine"]] call _fnc_saveToTemplate;
 
 #include "CSLA_Vehicle_Attributes.sqf"
 
