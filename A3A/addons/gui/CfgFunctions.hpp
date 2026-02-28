@@ -59,6 +59,7 @@ class CfgFunctions {
 
         class mainMenu {
             file = QPATHTOFOLDER(functions\mainMenu);
+            class bugReportDialog {};
             class communityAdDialog {};
             class mapSelectorDialog {};
             class optionsDialog {};

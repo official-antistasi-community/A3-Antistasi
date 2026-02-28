@@ -16,7 +16,7 @@ private _doShow = if (!isClass (missionConfigFile/"A3A") ) then {
 } else {
     switch (_button) do {
         case ("options"): { true };
-        case ("remarks"): { (!isNil "A3A_useRemarks" && {A3A_useRemarks > 0})};
+        case ("community"): { (!isNil "A3A_isCommunityServer" && {A3A_isCommunityServer > 0})};
         default { true };
     };
 };
