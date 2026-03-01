@@ -97,7 +97,7 @@ if (currentWaypoint _group > 0) then
     _crate attachTo [_parachute, [0, 0, 0]];
 
     // Now the patrol can see the parachute, send them in the right direction
-    [_patrolGroup, "Patrol_Area", 0, 200, 200, true, _targPos] call A3A_fnc_patrolLoop;
+    [_patrolGroup, "Patrol_Area", 0, 200, -1, true, _targPos] call A3A_fnc_patrolLoop;
 
     // Now wait for the crate to hit the ground
     waitUntil {sleep 1; diag_log velocity _parachute; getPosATL _crate#2 < 1};

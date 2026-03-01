@@ -102,7 +102,7 @@ private _spawnPosition = [markerPos _city, 0, 200, 2] call A3A_fnc_findPatrolPos
 private _patrolTypes = Faction(_enemySide) get (["groupsSmall", "groupSpecOpsRandom"] select (tierWar > random 12));
 private _patrolGroup = [_spawnPosition, _enemySide, selectRandom _patrolTypes, false, true] call A3A_fnc_spawnGroup;
 {[_x, ""] call A3A_fnc_NATOinit} forEach units _patrolGroup;
-[_patrolGroup, "Patrol_Area", 0, 200, 200, true, markerPos _city] call A3A_fnc_patrolLoop;
+[_patrolGroup, "Patrol_Area", 0, 200, -1, true, markerPos _city] call A3A_fnc_patrolLoop;
 
 
 private _timeout = time + 3600;

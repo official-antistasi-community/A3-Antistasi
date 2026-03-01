@@ -24,7 +24,7 @@ private _fnc_canHelp = {
     params ["_unit"];
     if ((isPlayer _unit) or (vehicle _unit != _unit) or (_unit distance _target > 100)) exitWith { false };
     if !([_unit] call A3A_fnc_canFight) exitWith { false };
-    if (currentCommand _unit == "STOP") exitWith { false };
+    if (currentCommand _unit == "STOP" and _unit isNil "A3A_forcedStance") exitWith { false };          // unit probably stopped by player, won't respond to doMove
     if ((_unit getVariable ["maneuvering", false]) or (_unit getVariable ["helping", false]) or (_unit getVariable ["rearming", false])) exitWith { false };
     if (_unitNeedsFAK and {count (_firstAidKits arrayIntersect items _unit) == 0}) exitWith { false };
     true;

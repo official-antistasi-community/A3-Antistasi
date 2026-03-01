@@ -50,8 +50,9 @@ private _highGroupTypes = _faction get (_patrolGroupTypes # (ceil _quality));
 private _highPatrols = round (_numPatrols * (_quality%1));
 
 private _minRad = 0;
-private _maxRad = markerSize _marker # 0 min markerSize _marker # 1;
-if (_type != "city") then { _minRad = _maxRad; _maxRad = _maxRad + 200 };
+private _maxRad = selectMax markerSize _marker;
+private _isCity = _type == "city";
+if (!_isCity) then { _minRad = _maxRad; _maxRad = _maxRad + 200 };
 private _station = _activeGarrison getOrDefault ["policeStation", objNull];     // in local garrison data it's an object
 
 for "_i" from 1 to _numPatrols do
@@ -77,7 +78,7 @@ for "_i" from 1 to _numPatrols do
         sleep 0.1;
     };
 
-    [_group, "Patrol_Area", _minRad, _maxRad, -1, true, _markerPos, false, false] call A3A_fnc_patrolLoop;
+    [_group, "Patrol_Area", _minRad, _maxRad, -1, true, _markerPos, _isCity, false] call A3A_fnc_patrolLoop;
 };
 
 _storedTroops set [0, (_troopCount) - 2*_numPatrols];
