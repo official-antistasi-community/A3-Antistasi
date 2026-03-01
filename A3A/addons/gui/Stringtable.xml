@@ -5023,6 +5023,9 @@
       <Key ID="STR_antistasi_mapSelector_description_stratis">
         <Original>Stratis is not intended for play with Antistasi, but is compatible for testing purposes and for those who dare.</Original>
       </Key>
+      <Key ID="STR_antistasi_mapSelector_description_stubbhult">
+        <Original>Stubbhult is a smaller Scandinavian map with similar vibes to Livonia, with rolling forests, lakes, and wheat fields. The map serves well for a short but lively campaign.</Original>
+      </Key>
       <Key ID="STR_antistasi_mapSelector_description_takistan">
         <Original>Takistan is the most frequent Middle-Eastern Antistasi map, compact but with enough objectives to service a short but full campaign. Rolling hills encourage long-range tactics.</Original>
       </Key>

@@ -83,11 +83,7 @@ switch (_mode) do {
                 _fullBoxes = _fullBoxes - 1;
                 _partialMagSize = _roundsPerMag;
             };
-            // this might hit locality issues with addMagazines
-            _veh removeMagazinesTurret [_name, _turretPath];
-            _veh addMagazinesTurret [_name, _turretPath, _fullBoxes];
-            _veh addMagazineTurret [_name, _turretPath, _partialMagSize];
-            
+            [_veh, "rearm", [_name, _turretPath, _fullBoxes, _partialMagSize]] remoteExec ["A3A_GUI_fnc_serviceVehicleGlobal", 0];
         } forEach _purchaseList;
     };
     case "pylon":
@@ -119,30 +115,48 @@ switch (_mode) do {
         } forEach _purchaseList;
         */
 
+        private _changedPylons = []; 
         private _removedWeapons = [];
         {
             _x params ["_magName", "_rounds", "_orderPrice", "_prettyName", "_isRefund", "_pylonIndex", "_turretPath"];
-            _veh setPylonLoadout [_pylonIndex, "", true, _turretPath];
-            _removedWeapons pushBackUnique (getText (configFile >> "CfgMagazines" >> _magName >> "pylonWeapon"));
+            [_veh, "pylon", [_pylonIndex, _turretPath, _magName]] remoteExecCall ["A3A_GUI_fnc_serviceVehicleGlobal", 0];
+            _changedPylons pushBack _pylonIndex;
+            _removedWeapons pushBackUnique [(getText (configFile >> "CfgMagazines" >> _magName >> "pylonWeapon")), _turretPath];
         } forEach ((_purchaseList get "refund") + ((_purchaseList get "swap") apply {_x#0}));
 
+        private _pylonInfo = getAllPylonsInfo _veh;
         private _magInfo = getPylonMagazines _veh;
-
-        if (_removedWeapons isNotEqualTo []) then { // only runs for pylon removal
-            {
-                private _possibleMags = getArray (configFile >> "CfgWeapons" >> _x >> "magazines");
-                private _foundMagIndex = _magInfo findIf {_x in _possibleMags};
-                if (_foundMagIndex isEqualTo -1) then {_veh removeWeaponGlobal _x};
-            } forEach _removedWeapons;
-        };
-
+        
         {
             _x params ["_magName", "_rounds", "_orderPrice", "_prettyName", "_isRefund", "_pylonIndex", "_turretPath"];
             private _currentCount = if ((_magInfo#(_pylonIndex - 1)) isEqualTo _magName) then {_veh ammoOnPylon _pylonIndex} else {0};
-
-            _veh setPylonLoadout [_pylonIndex, _magName, true, _turretPath];
-            _veh setAmmoOnPylon [_pylonIndex, _rounds + _currentCount];
+            [_veh, "pylon", [_pylonIndex, _turretPath, _magName, _currentCount + _rounds]] remoteExecCall ["A3A_GUI_fnc_serviceVehicleGlobal", 0];
+            _changedPylons pushBack _pylonIndex;
         } forEach (((_purchaseList get "swap") apply {_x#1}) + (_purchaseList get "purchase"));
+
+        {
+            // array of turret paths
+            private _newTurretPath = _x;
+            private _pylonIndex = _forEachIndex + 1;
+            if (_pylonIndex in _changedPylons) then { continue };
+            private _oldTurretPath = _pylonInfo#_forEachIndex#2;
+            if (_oldTurretPath isEqualTo _newTurretPath) then { continue };
+            private _currentMag = _magInfo#_forEachIndex;
+            _removedWeapons pushBackUnique [(getText (configFile >> "CfgMagazines" >> _currentMag>> "pylonWeapon")), _oldTurretPath];
+            [_veh, "pylon", [_pylonIndex, _newTurretPath, _currentMag, _veh ammoOnPylon _pylonIndex]] remoteExecCall ["A3A_GUI_fnc_serviceVehicleGlobal", 0];
+            _changedPylons pushBack _pylonIndex;
+        } forEach (_purchaseList get "owner");
+
+        if (_removedWeapons isEqualTo []) exitwith {};
+
+        // removeWeaponTurret needs to run local to the turret. turretOwner can only be found from the server.
+        // magazine / turret path information isnt updated until the earlier serviceVehicle remoteExecs go through
+        // everything is awful
+        // can just throw a dumb sleep in here. whatever.
+
+        sleep 1;
+        
+        [_veh, _removedWeapons] remoteExec ["A3A_GUI_fnc_clearEmptyWeapons", 2];
     };
     case "repair":
     {

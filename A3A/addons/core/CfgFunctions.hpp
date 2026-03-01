@@ -102,7 +102,6 @@ class CfgFunctions
             class lookForSupplyVehicle {};
             class loot {};
             class randomRifle {};
-            class serviceVehicle {};
             class setCargoItems {};
             class setRebelLoadouts {};
             class transfer {};

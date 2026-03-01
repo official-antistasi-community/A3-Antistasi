@@ -70,4 +70,7 @@ class stubbhult {
 	size = 12.3;
 	cityCount = 26;
 	airbaseCount = 4;
+    class MapParams {
+		distanceSPWN = 800;
+	};	
 };

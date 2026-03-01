@@ -61,4 +61,7 @@ class vn_khe_sanh {
 	size = 15.4;
 	cityCount = 92;
 	airbaseCount = 4;
+	class MapParams {
+		distanceSPWN = 800;
+	};	
 };

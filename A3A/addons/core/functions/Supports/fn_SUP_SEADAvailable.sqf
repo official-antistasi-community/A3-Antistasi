@@ -16,6 +16,7 @@ FIX_LINE_NUMBERS()
 params ["_target", "_side", "_maxSpend", "_availTypes"];
 
 private _isValidTarget = if (typeof _target in FactionGet(all,"vehiclesSAM")) then { // can be a standalone system operated remotely with a datalinked radar
+    if (isVehicleRadarOn _target) exitWith {true}; // or have its own radar on
     private _radarEmitters = (8 allObjects 1) select {isVehicleRadarOn _x && {vehicleReportRemoteTargets _x && (side _x != _side)}};
     (_radarEmitters isNotEqualTo []);
 } else {
