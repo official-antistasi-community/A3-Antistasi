@@ -63,22 +63,12 @@ if (!isClass _pylonsCfg and HR_GRG_reduceState) then {
     };
 };
 
-private _nonPylon = magazinesAllTurrets _veh select {!("pylon" in toLower (_x#0))} apply { [false, [_x#0,_x#1,_x#2]] }; //[is Pylon, [magName, path, ammo]]
+// Ok do this properly for a change
+private _pylonMags = getAllPylonsInfo _veh select {_x#3 != ""} apply {[_x#3, _x#2, _x#4]};      // [magName, path, ammo]
+private _allMags = magazinesAllTurrets _veh apply {_x select [0,3]};        // matched formats
+_pylonMags apply {_allMags deleteAt (_allMags find _x)};
+private _nonPylon = _allMags apply {[false, _x]};       // [isPylon, [magname, path, ammo]]
 
-private _pylonAmmo = [];
-private _magName = getPylonMagazines _veh;
-{
-    private _pylonIndex = _forEachIndex + 1;
-    _pylonAmmo pushBack [
-        true
-        , [
-            _pylonIndex
-            , configName _x
-            , [_veh, _forEachIndex] call HR_GRG_fnc_getPylonTurret
-            , _magName#_forEachIndex
-            , _veh ammoOnPylon _pylonIndex
-        ]
-    ];
-} forEach ("true" configClasses (_pylonsCfg >> "Pylons"));
-
+private _pylonAmmo = getAllPylonsInfo _veh apply {[true, _x select [0, 5]]};            // lol code reduction
+{ if (_x#1#2 isEqualTo [-1]) then {_x#1 set [2, []]} } forEach _pylonAmmo;                  // maintain previous behaviour, but it doesn't seem to matter now
 _nonPylon + _pylonAmmo
