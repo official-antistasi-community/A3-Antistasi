@@ -39,9 +39,10 @@ _group lockWP true;         // hmm
     _x params ["_placePos", "_placeDir"];
 
     private _unit = _units deleteAt 0;
-    _unit setPosATL _placePos;
+    _unit setPosASL AGLtoASL _placePos;
     _unit setdir _placeDir;
     _unit setUnitPos "UP";
+    _unit setVariable ["A3A_forcedStance", "UP"];
     _unit disableAI "TARGET";           // should stop them being ordered to search 300m away...
     dostop _unit;
     if (_units isEqualTo []) exitWith {};       // ran out of units before places

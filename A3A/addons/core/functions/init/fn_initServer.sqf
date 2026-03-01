@@ -13,7 +13,13 @@ Info_1("Server version: %1", QUOTE(VERSION_FULL));
 
 if (isClass (missionConfigFile/"CfgFunctions"/"A3A")) exitWith {};          // Pre-mod mission will break. Messaging handled in initPreJIP
 if (!requiredVersion QUOTE(REQUIRED_VERSION)) exitWith { Error("Arma version is out of date") };
-if (call A3A_fnc_modBlacklist) exitWith {};
+
+// Clear out the singleplayer AI and HCs as soon as possible
+if !(isMultiplayer) then {
+    private _hcs = entities "HeadlessClient_F";
+    private _units = units group player;
+    {deleteVehicle _x} forEach (_hcs + _units - [player] );
+};
 
 // hide all the HQ objects
 {
@@ -38,6 +44,11 @@ enableSaving [false,false];
 //Disable VN music
 if (isClass (configFile/"CfgVehicles"/"vn_module_dynamicradiomusic_disable")) then {
     A3A_VN_MusicModule = (createGroup sideLogic) createUnit ["vn_module_dynamicradiomusic_disable", [worldSize, worldSize,0], [],0,"NONE"];
+};
+
+if !(hasInterface) then {       // Only needs client call on localhost
+    Info("Checking for blacklisted mods on server");
+    [] call A3A_fnc_modBlacklist;
 };
 
 // Shouldn't be anything with dependencies in here
@@ -76,6 +87,7 @@ A3A_backgroundInitDone = true;
 
 Info("Server Initialising PATCOM Variables");
 [] call A3A_fnc_patrolInit;
+
 
 // **************** Starting game, param-dependent init *******************************
 
@@ -161,6 +173,7 @@ else
 
     Info("Initial arsenal unlocks completed");
     call A3A_fnc_checkRadiosUnlocked;
+    [] call A3A_fnc_arsenalManage;
 
     // HQ placement setup
     private _posHQ = A3A_saveData get "startPos";
@@ -197,6 +210,9 @@ if (isClass (configFile >> "AntistasiServerMembers")) then
     // Load data from the classes
     private _memberClasses = "true" configClasses (configFile >> "AntistasiServerMembers" >> "MembersClasses");
     {membersX pushBackUnique (getText (_x >> "uid"))} forEach _memberClasses;
+
+    // Load remark setting
+    if (isNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks") || {debug}) then {A3A_useRemarks = getNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks")};
 };
 
 // TODO: Do we need this? maybe...
@@ -218,8 +234,11 @@ addMissionEventHandler ["OnUserAdminStateChanged", {
 }];
 
 publicVariable "membersX";
+publicVariable "A3A_useRemarks";
 publicVariable "theBoss";       // need to publish this even if empty
 
+// Setup buildable objects. Needed for HQ radius in initSupports
+call A3A_fnc_initBuildableObjects;
 
 // Needs params + factions. Might depend on saved data in the future
 call A3A_fnc_initSupports;
@@ -302,16 +321,6 @@ addMissionEventHandler ["EntityKilled", {
         ["", _object] call A3A_fnc_garrisonServer_addVehicle;
     }] call CBA_fnc_addEventHandler;
 };*/
-
-if ((isClass (configfile >> "CBA_Extended_EventHandlers")) && (
-    isClass (configfile >> "CfgPatches" >> "lambs_danger"))) then {
-    // disable lambs danger fsm entrypoint
-    ["CAManBase", "InitPost", {
-        params ["_unit"];
-        (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
-        _unit setVariable ["lambs_danger_disableAI", true];
-    }] call CBA_fnc_addClassEventHandler;
-};
 
 // Could replace these with entityCreated handler instead...
 if(A3A_hasZen) then {

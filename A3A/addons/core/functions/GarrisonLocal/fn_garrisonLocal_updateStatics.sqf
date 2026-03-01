@@ -22,6 +22,7 @@ private _side = _garrison get "side";
 private _faction = Faction(_side);
 private _crewVar = ["A3A_crewed", "A3A_rebCrewed"] select (_side == teamPlayer);
 private _statics = _garrison get "vehicles";
+private _groups = _garrison get "groups";
 
 private _nearEnemies = call {
     private _enemySides = [teamPlayer, Occupants, Invaders] - [_side];
@@ -94,7 +95,7 @@ private _fnc_mountStatic = {
     private _isMortar = _x isKindOf "StaticMortar";
     private _groupType = ["staticGroup", "mortarGroup"] select _isMortar;
     private _group = _garrison get _groupType;
-    if (isNull _group) then { _group = createGroup _side; _garrison set [_groupType, _group] };
+    if (isNull _group) then { _group = createGroup _side; _groups pushBack _group; _garrison set [_groupType, _group] };
 
     [_unit] joinSilent _group;
     [_unit, _x, _isMortar] spawn _fnc_mountStatic;

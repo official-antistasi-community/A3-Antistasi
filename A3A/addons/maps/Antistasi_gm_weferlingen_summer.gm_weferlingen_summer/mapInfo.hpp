@@ -33,7 +33,9 @@ class gm_weferlingen_summer {
 		//small bunker
 		{"Land_Bunker_02_double_F", 500},
 		//big bunker
-		{"land_gm_bunker_command_01", 5000}
+		{"land_gm_bunker_command_01", 5000},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
 	policeStationTypes[] = {
 		"land_gm_euro_house_11_d", "land_gm_euro_house_11_e", "land_gm_euro_house_11_w", "land_gm_euro_house_02_d", "land_gm_euro_house_02_e", "land_gm_euro_house_02_w",
@@ -41,4 +43,8 @@ class gm_weferlingen_summer {
 		"land_gm_euro_house_10_w", "land_gm_euro_house_10_d", "land_gm_euro_house_10_e", "land_gm_euro_house_12_d", "land_gm_euro_house_12_e", "land_gm_euro_house_12_w",
 		"land_gm_euro_house_08_w", "land_gm_euro_house_08_d", "land_gm_euro_house_08_e"
 	};
+	requiredMods = "Global Mobilization CDLC";
+	size = 20.5;
+	cityCount = 49;
+	airbaseCount = 4;
 };

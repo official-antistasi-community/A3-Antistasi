@@ -1163,7 +1163,7 @@ class mission_menu 		{
 			y = 0.317959 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0; [""AS"", clientOwner] remoteExec [""A3A_fnc_missionRequest"", 2]";
+			action = "closeDialog 0; [""AS"", clientOwner] remoteExec [""A3A_Tasks_fnc_requestTask"", 2]";
 		};
 		class HQ_button_CONV: A3A_core_BattleMenuRedButton
 		{
@@ -1173,7 +1173,7 @@ class mission_menu 		{
 			y = 0.415981 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0; [""CONVOY"", clientOwner] remoteExec [""A3A_fnc_missionRequest"", 2]";
+			action = "closeDialog 0; [""CONVOY"", clientOwner] remoteExec [""A3A_Tasks_fnc_requestTask"", 2]";
 		};
 		class HQ_button_DES: A3A_core_BattleMenuRedButton
 		{
@@ -1183,7 +1183,7 @@ class mission_menu 		{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0; [""DES"", clientOwner] remoteExec [""A3A_fnc_missionRequest"", 2]";
+			action = "closeDialog 0; [""DES"", clientOwner] remoteExec [""A3A_Tasks_fnc_requestTask"", 2]";
 		};
 		class HQ_button_vehicle: A3A_core_BattleMenuRedButton
 		{
@@ -1193,7 +1193,7 @@ class mission_menu 		{
 			y = 0.612025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0; [""CON"", clientOwner] remoteExec [""A3A_fnc_missionRequest"", 2]";
+			action = "closeDialog 0; [""CON"", clientOwner] remoteExec [""A3A_Tasks_fnc_requestTask"", 2]";
 		};
 		class HQ_button_LOG: A3A_core_BattleMenuRedButton
 		{
@@ -1204,7 +1204,7 @@ class mission_menu 		{
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_mission_menu_logistics_missions_tooltip;
-			action = "closeDialog 0; [""LOG"", clientOwner] remoteExec [""A3A_fnc_missionRequest"", 2]";
+			action = "closeDialog 0; [""LOG"", clientOwner] remoteExec [""A3A_Tasks_fnc_requestTask"", 2]";
 		};
 		class HQ_button_SUPP: A3A_core_BattleMenuRedButton
 		{
@@ -1215,7 +1215,7 @@ class mission_menu 		{
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = $STR_antistasi_dialogs_mission_menu_support_missions_tooltip;
-			action = "closeDialog 0; [""SUPP"", clientOwner] remoteExec [""A3A_fnc_missionRequest"", 2]";
+			action = "closeDialog 0; [""SUPP"", clientOwner] remoteExec [""A3A_Tasks_fnc_requestTask"", 2]";
 		};
 		class HQ_button_RES: A3A_core_BattleMenuRedButton
 		{
@@ -1225,7 +1225,7 @@ class mission_menu 		{
 			y = 0.514003 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			action = "closeDialog 0; [""RES"", clientOwner] remoteExec [""A3A_fnc_missionRequest"", 2]";
+			action = "closeDialog 0; [""RES"", clientOwner] remoteExec [""A3A_Tasks_fnc_requestTask"", 2]";
 		};
 		class HQ_button_exit: A3A_core_BattleMenuRedButton
 		{
@@ -1318,7 +1318,7 @@ class radio_comm 		{
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
 			tooltip = "Experimental Battle Menu. Work in Progress."; // Don't localize, tempory button.
-			action = "closeDialog 0; createDialog ""A3A_MainDialog""";
+			action = "0 spawn {closeDialog 0; sleep 0.01; ['newgui'] call A3A_fnc_keyActions}";
 		};
 		class 8slots_L3: A3A_core_BattleMenuRedButton
 		{
@@ -1807,13 +1807,12 @@ class commander_comm 		{
 		class 10slots_L4: A3A_core_BattleMenuRedButton
 		{
 			idc = -1;
-			text = $STR_antistasi_dialogs_commander_comm_roadblock_delete;
+			text = $STR_antistasi_dialogs_main_persistent_save_button;
 			x = 0.272481 * safezoneW + safezoneX;
 			y = 0.562025 * safezoneH + safezoneY;
 			w = 0.175015 * safezoneW;
 			h = 0.0560125 * safezoneH;
-			tooltip = $STR_antistasi_dialogs_commander_comm_roadblock_delete_tooltip;
-			action = "if (player == theBoss) then {closeDialog 0; [""delete""] spawn A3A_fnc_outpostDialog} else {[""Outposts/Roadblocks"", ""You're not the Commander!""] call A3A_fnc_customHint;};";
+			action = "if (player == theBoss) then {closeDialog 0; [] remoteExecCall ['A3A_fnc_saveLoop', 2];}";
 		};
 		class 10slots_R4: A3A_core_BattleMenuRedButton
 		{

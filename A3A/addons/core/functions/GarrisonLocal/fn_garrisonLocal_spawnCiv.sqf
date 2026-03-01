@@ -25,6 +25,7 @@ private _vehicles = [];
 {
     // Boats use special [class, pos, dir] format
     private _class = _x#0;
+    private _vehID = _x#3;
     private _spawnPlace = _x;
     if (_x#1 isEqualType 0) then {
         _spawnPlace = (A3A_spawnPlacesHM get _spawnKey) # (_x#1);
@@ -47,6 +48,7 @@ private _vehicles = [];
 
     _vehicles pushBack _vehicle;
     _vehicle setVariable ["markerX", _spawnKey, true];
+    _vehicle setVariable ["A3A_vehID", _vehID, 2];
     [_vehicle, civilian] call A3A_fnc_AIVEHinit;
 
 } forEach (_newGarrison get "vehicles");

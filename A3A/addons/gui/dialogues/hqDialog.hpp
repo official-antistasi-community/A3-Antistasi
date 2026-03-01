@@ -1417,7 +1417,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     h = 12 * GRID_H;
                 };
 
-                /*
+                
                 // Build / Remove outpost buttons
                 class BuildWatchpostButton : A3A_ShortcutButton
                 {
@@ -1425,16 +1425,18 @@ class A3A_HqDialog : A3A_DefaultDialog
                     text = $STR_antistasi_dialogs_hq_garrisons_build_watchpost_button;
                     onButtonClick = "[""buildWatchpost""] spawn A3A_GUI_fnc_hqDialog"; // TODO UI-update: Replace placeholder when merging
                     x = 10 * GRID_W;
-                    y = 80 * GRID_H;
+                    y = 64 * GRID_H;
                     w = 22 * GRID_W;
                     h = 12 * GRID_H;
                 };
 
+                /*
+                // Feature is depreciated, find another use for this button
                 class RemoveWatchpostButton : A3A_ShortcutButton
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_hq_garrisons_remove_watchpost_button;
-                    onButtonClick = "[""removeWatchpost""] spawn A3A_GUI_fnc_hqDialog"; // TODO UI-update: Replace placeholder when merging
+                    onButtonClick = "[""removeWatchpost""] spawn A3A_GUI_fnc_hqDialog";
                     x = 38 * GRID_W;
                     y = 80 * GRID_H;
                     w = 22 * GRID_W;

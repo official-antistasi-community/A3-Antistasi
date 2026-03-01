@@ -16,7 +16,7 @@
 FIX_LINE_NUMBERS()
 
 private _updateOps = ["updateStatics", "zoneCheck"];
-private _spawnOps = ["spawn", "spawnCiv"];
+private _spawnOps = ["spawn", "spawnCiv", "vehAction", "vehActionEnd", "changeSide"];
 
 while {true} do
 {

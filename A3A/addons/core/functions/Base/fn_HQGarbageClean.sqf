@@ -4,8 +4,10 @@ FIX_LINE_NUMBERS()
 // Faster GC that only cleans up essential stuff near HQ. Bodies and burning wrecks primarily as well as junk items.
 #define CLEANDIST 100
 
-[localize "STR_A3A_fn_base_gc_title", "Cleaning the HQ area of garbage..."] remoteExec ["A3A_fnc_customHint", 0];
-Info("Cleaning garbage...");
+private _playersNearHQ = (allPlayers - entities "HeadlessClient_F") select {_x distance2D markerPos "Synd_HQ" < 100};
+_playersNearHQ pushBackUnique theBoss;
+[localize "STR_A3A_fn_base_gc_title", localize "STR_A3A_fn_base_gc_hq_running"] remoteExec ["A3A_fnc_customHint", _playersNearHQ];
+Info("Cleaning garbage near HQ...");
 
 private _cleanPos = getMarkerPos "Synd_HQ";
 
@@ -31,7 +33,8 @@ Debug("Moving dead solders out of vehicles at HQ...")
 Debug("Finished moving soldiers out of vehicles at HQ; executing garbage clean.")
 sleep 0.5;
 
-[allDead, true] call _fnc_objNearHQ;
+[allDeadMen, true] call _fnc_objNearHQ;
+[vehicles select {!alive _x}, true] call _fnc_objNearHQ;				// allDead doesn't include 0-crew vehicles like the large fuel tank
 [allMissionObjects "WeaponHolder", true] call _fnc_objNearHQ;
 [allMissionObjects "WeaponHolderSimulated", true] call _fnc_objNearHQ;
 

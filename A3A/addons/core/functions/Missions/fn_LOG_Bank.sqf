@@ -7,6 +7,10 @@ FIX_LINE_NUMBERS()
 _banco = _this select 0;
 _markerX = [citiesX,_banco] call BIS_fnc_nearestPosition;
 
+private _enemySide = sidesX getVariable _markerX; 
+if (_enemySide == teamPlayer) then {_enemySide == Occupants};
+private _faction = Faction(_enemySide);
+
 _difficultX = if (random 10 < tierWar) then {true} else {false};
 _leave = false;
 _contactX = objNull;
@@ -58,8 +62,8 @@ _groups = [];
 _soldiers = [];
 for "_i" from 1 to 4 do
 	{
-	private _groupType = if (_difficultX) then { FactionGet(occ, "groupSentry") } else { FactionGet(occ, "groupPolice") };
-	_groupX = [_positionX,Occupants,_groupType] call A3A_fnc_spawnGroup;
+	private _groupType = if (_difficultX) then { _faction get "groupSentry" } else { _faction get "groupPolice" };
+	_groupX = [_positionX,_enemySide,_groupType] call A3A_fnc_spawnGroup;
 	sleep 1;
 
 	[_groupX, "Patrol_Area", 25, 50, 100, true, _positionX, true] call A3A_fnc_patrolLoop;
@@ -72,32 +76,31 @@ for "_i" from 1 to 4 do
 private _bb = flatten boundingBoxReal _banco apply { abs _x };
 private _bankDistMax = selectMin _bb + 10;
 
-waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (!alive _truckX) or (_truckX distance _banco < _bankDistMax)};
+waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (!alive _truckX) or (_truckX distance2d _banco < _bankDistMax)};
 _bonus = if (_difficultX) then {2} else {1};
 if ((dateToNumber date > _dateLimitNum) or (!alive _truckX)) then
 	{
 	[_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState;
-	[-200, Occupants] remoteExec ["A3A_fnc_timingCA",2];
+	[-200, _enemySide] remoteExec ["A3A_fnc_timingCA",2];
 	[-10,theBoss] call A3A_fnc_playerScoreAdd;
 	}
 else
 	{
 	_countX = 120*_bonus;//120
-    private _reveal = [_positionX, Occupants] call A3A_fnc_calculateSupportCallReveal;
-    [Occupants, _truckX, _positionX, 4, _reveal] remoteExec ["A3A_fnc_requestSupport", 2];
-	["TaskFailed", ["", format ["Bank of %1 being assaulted",_nameDest]]] remoteExec ["BIS_fnc_showNotification",Occupants];
+	[_enemySide, _truckX, _positionX, 4] remoteExec ["A3A_fnc_requestSupport", 2];
+	["TaskFailed", ["", format ["Bank of %1 being assaulted",_nameDest]]] remoteExec ["BIS_fnc_showNotification",_enemySide];
 	{_friendX = _x;
 	if (_friendX distance _truckX < 300) then
 		{
 		if ((captive _friendX) and (isPlayer _friendX)) then {[_friendX,false] remoteExec ["setCaptive",0,_friendX]; _friendX setCaptive false};
-		{if (side _x == Occupants) then {_x reveal [_friendX,4]};
+		{if (side _x == _enemySide) then {_x reveal [_friendX,4]};
 		} forEach allUnits;
 		};
 	} forEach ([distanceSPWN,0,_positionX,teamPlayer] call A3A_fnc_distanceUnits);
 	_exit = false;
-	while {(_countX > 0) or (_truckX distance _banco < _bankDistMax) and (alive _truckX) and (dateToNumber date < _dateLimitNum)} do
+	while {(_countX > 0) or (_truckX distance2d _banco < _bankDistMax) and (alive _truckX) and (dateToNumber date < _dateLimitNum)} do
 		{
-		while {(_countX > 0) and (_truckX distance _banco < _bankDistMax) and (alive _truckX)} do
+		while {(_countX > 0) and (_truckX distance2d _banco < _bankDistMax) and (alive _truckX)} do
 			{
 			_formatX = format ["%1", _countX];
 			{if (isPlayer _x) then {[petros,"countdown",_formatX] remoteExec ["A3A_fnc_commsMP",_x]}} forEach ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits);
@@ -107,8 +110,8 @@ else
 		if (_countX > 0) then
 			{
 			_countX = 120*_bonus;//120
-			if (_truckX distance _banco > _bankDistMax-1) then {{[petros,"hint",localize "STR_A3A_fn_mission_log_bank_hint_text2", localize "STR_A3A_fn_mission_log_bank_hint_title1"] remoteExec ["A3A_fnc_commsMP",_x]} forEach ([200,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits)};
-			waitUntil {sleep 1; (!alive _truckX) or (_truckX distance _banco < _bankDistMax) or (dateToNumber date < _dateLimitNum)};
+			if (_truckX distance2d _banco > _bankDistMax-1) then {{[petros,"hint",localize "STR_A3A_fn_mission_log_bank_hint_text2", localize "STR_A3A_fn_mission_log_bank_hint_title1"] remoteExec ["A3A_fnc_commsMP",_x]} forEach ([200,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits)};
+			waitUntil {sleep 1; (!alive _truckX) or (_truckX distance2d _banco < _bankDistMax) or (dateToNumber date < _dateLimitNum)};
 			}
 		else
 			{
@@ -117,7 +120,7 @@ else
 				{if (isPlayer _x) then {[petros,"hint",localize "STR_A3A_fn_mission_log_bank_hint_text3", localize "STR_A3A_fn_mission_log_bank_hint_title1"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits);
 				_exit = true;
 				};
-			//waitUntil {sleep 1; (!alive _truckX) or (_truckX distance _banco > _bankDistMax) or (dateToNumber date < _dateLimitNum)};
+			//waitUntil {sleep 1; (!alive _truckX) or (_truckX distance2d _banco > _bankDistMax) or (dateToNumber date < _dateLimitNum)};
 			};
 		if (_exit) exitWith {};
 		};
@@ -129,11 +132,10 @@ if ((_truckX distance _posbase < 50) and (dateToNumber date < _dateLimitNum)) th
 	{
 	[_taskId, "LOG", "SUCCEEDED"] call A3A_fnc_taskSetState;
 	[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-    Debug("aggroEvent | Rebels won a bank mission");
-	[Occupants, 10, 120] remoteExec ["A3A_fnc_addAggression",2];
-	[400*_bonus, Occupants] remoteExec ["A3A_fnc_timingCA",2];
-	{if (_x distance _truckX < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-	[10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+	Debug("aggroEvent | Rebels won a bank mission");
+	[_enemySide, 10, 120] remoteExec ["A3A_fnc_addAggression",2];
+	[400*_bonus, _enemySide] remoteExec ["A3A_fnc_timingCA",2];
+	[20*_bonus, true, _truckX] call A3A_tasks_fnc_rewardPlayers;     // any players in driver group
 	waitUntil {sleep 1; speed _truckX == 0};
 
 	[_truckX] call A3A_fnc_empty;

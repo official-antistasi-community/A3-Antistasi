@@ -25,7 +25,8 @@ private _fnc_defaultLimit = { jna_minItemMember select _this;};
 
 private _display = findDisplay A3A_IDD_ARSENALLIMITSDIALOG;
 private _listBox = _display displayCtrl A3A_IDC_ARSLIMLISTBOX;
-
+private _name = name player;
+private _uid = getPlayerUID player;
 
 switch (_mode) do
 {
@@ -114,10 +115,19 @@ switch (_mode) do
         private _class = _valCtrl getVariable "A3A_class";
         A3A_arsenalLimits getOrDefault [_class, [_defLimit, _defLimit]] params ["_curVal", "_memberVal"];
 
+        
         private _newVal = call {
-            if (_adjust isEqualTo "R") exitWith { _defLimit };
-            if (_adjust isEqualTo "U") exitWith { [minWeaps, 100] select (minWeaps < 0) };
-            (_curVal + _adjust) max 0 min 100;
+            if (_adjust isEqualTo "R") exitWith { 
+                ServerInfo_3("Item %1 was set to guest limit by %2 (UID: %3)", _class, _name, _uid);
+                _defLimit 
+            };
+            if (_adjust isEqualTo "U") exitWith { 
+                ServerInfo_3("Item %1 was set to unlock limit by %2 (UID: %3)", _class, _name, _uid);
+                [minWeaps, 100] select (minWeaps < 0) 
+            };
+            _return = (_curVal + _adjust) max 0 min 100;
+            ServerInfo_4("Item %1 was set to manual limit %2 by %3 (UID: %4)", _class, _return, _name, _uid);
+            _return
         };
         // If we're not a member, then cap to member limit.
         if !(player call A3A_fnc_isMember) then {
@@ -139,6 +149,7 @@ switch (_mode) do
         {
             A3A_arsenalLimits deleteAt (_x#0);
         } forEach (jna_datalist#_typeIndex);
+        ServerInfo_3("Category %1 arsenal limit reset by %2 [UID: %3]",_typeIndex,_name,_uid);
 
         ["typeSelect", [_typeIndex + A3A_IDC_ARSLIMTYPESBASE]] call A3A_GUI_fnc_arsenalLimitsDialog;          // refresh the display
     };

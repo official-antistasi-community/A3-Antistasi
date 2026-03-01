@@ -55,8 +55,8 @@ else
 };
 
 // Add to the live garrison
-private _machineID = A3A_garrisonMachine get _marker;
-if (!isNil "_machineID") then {
+if (spawner getVariable _marker != 2) then {
+    private _machineID = A3A_garrisonMachine get _marker;
     _group setGroupOwner _machineID;            // should outpace the garrison op?
 
     {

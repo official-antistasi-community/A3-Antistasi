@@ -18,7 +18,8 @@ if (_marker == "") exitWith {
         (A3A_cityData getVariable _x) params ["_numCiv", "_suppReb"];
         _pop = _pop + _numCiv;
         if (_x in destroyedSites) then { _popDead = _popDead + _numCiv; continue };
-        _popReb = _popReb + (_numCiv * (_suppReb / 100));
+        private _ownerMul = [0.5, 1] select (sidesX getVariable _x == teamPlayer);
+        _popReb = _popReb + _ownerMul * _numCiv * _suppReb / 100;
     } forEach citiesX;
     _popReb = round _popReb;
     _popOcc = round (_pop - _popReb - _popDead);
@@ -40,8 +41,9 @@ private _text = call {
         if (_marker in destroyedSites) exitWith { format [localize "STR_A3A_fn_init_cityinfo_destr", _marker] };
 
         (A3A_cityData getVariable _marker) params ["_numCiv", "_suppReb"];
+        private _enemyName = if (_side == teamPlayer) then { FactionGet(occ,"name") } else { _nameFaction };
         private _text = format [localize "STR_A3A_fn_init_cityinfo_overview_2",
-            _marker, _numCiv, 100-_suppReb toFixed 0, _suppReb toFixed 0, "%", FactionGet(occ,"name"), FactionGet(reb,"name")];
+            _marker, _numCiv, 100-_suppReb toFixed 0, _suppReb toFixed 0, "%", _enemyName, FactionGet(reb,"name")];
 
         private _power = call {
             private _antenna = A3A_antennaMap get _marker;

@@ -74,19 +74,20 @@ if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balanceP
     private _placeStats = A3A_spawnPlaceStats get _spawnKey;
     _placeStats get "civCar" params ["_places", "_max", "_par"];
 
-    private _vehicles = A3A_garrison get _spawnKey get "vehicles";
-    private _usedPlaces = _vehicles select {_x#1 in _places} apply {_x#1};		// warning, _x#1 might be position
+    isNil {
+        private _vehicles = A3A_garrison get _spawnKey get "vehicles";
+        private _usedPlaces = _vehicles select {_x#1 isEqualType 0} apply {_x#1};
 
-    // Each missing car has a ~1/100 chance of being replaced each tick at tier 1
-    private _chance = 50 * (1 + tierWar);
-    if (random _chance > _par - count _usedPlaces) then { continue };
+        // Each missing car has a ~1/100 chance of being replaced each tick at tier 1
+        private _chance = 50 * (1 + tierWar);
+        if (random _chance > _par - count _usedPlaces) exitWith {};     // continue does not work inside isNil
 
-    // Add a car
-    private _type = selectRandomWeighted civVehiclesWeighted;
-    private _placeNum = selectRandom (_places - _usedPlaces);
-    _vehicles pushBack [_type, _placeNum];
-    Debug_2("Added car %1 at %2", _type, _x);
-
+        // Add a car
+        private _type = selectRandomWeighted civVehiclesWeighted;
+        private _placeNum = selectRandom (_places - _usedPlaces);
+        [_spawnKey, _type, _placeNum] call A3A_fnc_garrisonServer_addVehicleType;
+        Debug_2("Added car %1 at %2", _type, _x);
+    };
 } forEach (citiesX - destroyedSites);
 
 
@@ -107,21 +108,14 @@ if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balanceP
     if (_curTroops < (A3A_garrisonSize get _marker) * 0.8) then { continue };
 
     private _siteType = _garrison get "type";
-    private _newQuality = [_siteType, _side, 0.2] call A3A_fnc_getSiteTroopQuality;
+    private _newQuality = [_siteType, _marker, _side] call A3A_fnc_getSiteTroopQuality;
     Debug_3("Adjusting troop quality from %1 to %2 at %3", _quality, _newQuality, _marker);
     _garrison get "troops" set [1, _newQuality * 0.2 + _quality * 0.8];
-
-    private _vehicles = _garrison get "vehicles";
-    private _spawnStats = A3A_spawnPlaceStats get _marker;
-    if (_vehicles isEqualTo [] or isNil "_spawnStats") then { continue };
-
-    private _spawnPlaces = A3A_spawnPlacesHM get _marker;
-    private _usedPlaces = _vehicles select {count _x == 2} apply {_x#1};		// filter not necessary as it's despawned, but whatever
-    private _faction = [A3A_faction_occ, A3A_faction_inv] select (_side == Invaders);
 
     private _fnc_changeVehicle = {
         private _vehEntry = selectRandom _vehicles;
         if (isNil "_vehEntry") exitWith {};
+        if (_vehEntry#0 in A3A_supportVehTypes) exitWith {};        // too much faff, don't bother
 
         private _placeType = _spawnPlaces#(_vehEntry#1)#0;
         if !("static" in _placeType) then {
@@ -140,7 +134,18 @@ if (AAFpatrols < round (3 * A3A_balancePlayerScale) and (random 2 < A3A_balanceP
         _vehEntry set [1, selectRandom _places];
         Debug_3("Moving %1 to place %2 at %3", _vehEntry#0, _vehEntry#1, _marker); 
     };
-    call _fnc_changeVehicle;
-    if (_siteType == "airport") then { call _fnc_changeVehicle; call _fnc_changeVehicle };
 
+    // Lockout so garrison can't change underneath us
+    isNil {
+        private _vehicles = _garrison get "vehicles";
+        private _spawnStats = A3A_spawnPlaceStats get _marker;
+        if (_vehicles isEqualTo [] or isNil "_spawnStats") exitWith {};     // continue doesn't work in isNil
+
+        private _spawnPlaces = A3A_spawnPlacesHM get _marker;
+        private _usedPlaces = _vehicles select {_x#1 isEqualType 0} apply {_x#1};
+        private _faction = [A3A_faction_occ, A3A_faction_inv] select (_side == Invaders);
+
+        call _fnc_changeVehicle;
+        if (_siteType == "airport") then { call _fnc_changeVehicle; call _fnc_changeVehicle };
+    };
 } forEach markersX;

@@ -6,6 +6,7 @@
 //For example the SdKfz251 and the M3 Halftrack are used in the APC category despite only being suitable as lightAPCs, 
 //putting them there though skews the weighting too much in their favour.
 ["attributesVehicles", [
+    ["LIB_T34_76", ["cost", 230], ["threat", 300]],
     ["LIB_M4A3_75", ["cost", 230], ["threat", 300]],
     ["LIB_SdKfz_7_AA", ["cost", 80]],
     ["LIB_Zis5v_61K", ["cost", 60]], //There's a lack of AA vehicles in IFA for not-germany, fortunately AA vehicles aren't that important with IFA
@@ -15,6 +16,7 @@
     ["LIB_US_M3_Halftrack", ["cost", 60]],
     ["LIB_SOV_M3_Halftrack", ["cost", 60]],
     ["LIB_UK_M3_Halftrack", ["cost", 60]],
+    ["LIB_UniversalCarrier", ["cost", 40], ["threat", 300]],
     ["LIB_M8_Greyhound", ["cost", 80]],
     ["LIB_Ju87", ["cost", 75]],
     ["LIB_Pe2", ["cost", 75]],
@@ -47,3 +49,5 @@ if (isClass (configFile >> "CfgPatches" >> "FA_WW2_Tanks")) then {
         ["FA_T26", ["cost", 60]]
     ];
 };
+
+#include "..\..\AircraftLoadouts\SAB\SAB_Vehicle_Attributes.sqf"

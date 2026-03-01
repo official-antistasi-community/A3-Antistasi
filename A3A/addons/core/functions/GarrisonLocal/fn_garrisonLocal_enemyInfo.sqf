@@ -5,9 +5,10 @@
 
     Arguments:
     <STRING> Marker name.
-    <STRING> Event type, can be "detect" or "damage".
+    <STRING> Event type, can be "detect", "damage", "mortar" or "mission".
     <OBJECT> Enemy object that triggered the event.
     <NUMBER> Knowsabout value for enemy object.
+    <NUMBER> Optional: Extra threat to add.
 
     Copyright 2025 John Jordan. All Rights Reserved.
     Used and distributed by the Antistasi Community project with permission.
@@ -18,12 +19,10 @@ FIX_LINE_NUMBERS()
 
 Trace_1("Called with %1", _this);
 
-params ["_marker", "_type", "_enemy", "_knowsAbout"];
+params ["_marker", "_type", "_enemy", "_knowsAbout", ["_threatBoost", 0]];
 
 // If we're firing a static attached to a truck, then the static is more important
 if (_enemy isKindOf "Man" and !(isNull objectParent _enemy)) then { _enemy = objectParent _enemy };
-
-Debug_1("Enemy type %1", _enemy);
 
 private _garrison = A3A_activeGarrison get _marker;
 
@@ -56,7 +55,7 @@ _defenders = _defenders select { _x getVariable ["PATCOM_Patrol_Params", [""]] s
 
 // Only include mortars that are far enough and aren't busy
 private _mortars = [];
-if (_type != "detect") then {
+if (_type in ["damage", "mortar"]) then {
     private _mortarUnits = units (_garrison get "mortarGroup") select { _x call A3A_fnc_canFight };
     _mortars = _mortarUnits apply { vehicle _x } select { _x isKindOf "StaticMortar" };
 
@@ -73,22 +72,16 @@ if (abs _threat > 0.01) then {
     // time falloff towards zero (even if negative)
     _threat = _threat - ((time - _threatTime) / 60) * _threat / abs _threat;
 };
-_threat = (_threat max 0) + ([1, 3] select (_type == "mortar"));
-_garrison set ["threatTime", time];
-_garrison set ["threat", _threat];
+_threat = (_threat max 0) + ([1, 3] select (_type == "mortar")) + _threatBoost;
 
 Trace_2("%1 current threat %2", _marker, _threat);
-
-if (_defenders isEqualTo [] and _mortars isEqualTo []) exitWith {
-    ServerDebug_1("No defensive units available at %1", _marker);
-};
-
 
 if (_threat > random 3) then
 {
     // Send a response
     private _minDist = selectMin markerSize _marker;
     private _group = call {
+        if (_enemy isKindOf "Air") exitWith {};             // garrison can't deal with air
         private _dist = _enemy distance2d markerPos _marker;
         // At very long range, restrict to mortars
         if (_dist > _minDist + 200 + random 300) exitWith { selectRandom _mortars };
@@ -98,6 +91,10 @@ if (_threat > random 3) then
     };
     if (isNil "_group") exitWith {
         ServerDebug_1("Nothing usable within range at %1", _marker);
+        private _side = _garrison get "side";
+        if (_type == "detect" or _side == teamPlayer) exitWith {};             // Do not call cheap supports vs spotted targets
+        [_side, _enemy, markerPos _marker, _knowsAbout, 0.7] remoteExec ["A3A_fnc_requestSupport", 2];
+        _threat = 0;                  // don't spam support calls
     };
 
     private _precisionOff = random (60 - (_knowsAbout / 4) * 50);
@@ -117,4 +114,5 @@ if (_threat > random 3) then
     };
 };
 
+_garrison set ["threatTime", time];
 _garrison set ["threat", _threat];

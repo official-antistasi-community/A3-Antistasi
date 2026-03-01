@@ -11,7 +11,7 @@ class altis {
 		{16586.6,12834.5,-0.638584},{16545.8,12784.5,-0.485485},{16633.3,12807,-0.635017},{3717.34,13391.2,-0.164862},{3692.49,13158.3,-0.0462074},{3664.31,12826.5,-0.379545},{3536.99,13006.6,-0.508585},{3266.42,12969.9,-0.549738}
 	};
 	garrison[] = {
-		{},{"airport_2","seaport_4","outpost_5","control_52","control_33"},{},{"control_52","control_33"}
+		{},{"airport_2","seaport_4","seaport_6","outpost_5","control_145","control_108","control_52","control_51","control_50","control_33"},{},{"control_145","control_108","control_52","control_51","control_50","control_33"}
 	};
 	fuelStationTypes[] = {
 		"Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_01_pump_F","Land_FuelStation_02_pump_F","Land_FuelStation_03_pump_F"
@@ -25,10 +25,17 @@ class altis {
 		{"Land_BagFence_Long_F", 10}, {"Land_BagFence_Round_F", 10}, {"Land_BagFence_Short_F", 10},
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
 	policeStationTypes[] = {
 		"Land_i_House_Big_01_V1_F", "Land_i_House_Big_01_V2_F", "Land_i_House_Big_01_V3_F",
 		"Land_i_House_Big_02_V1_F", "Land_i_House_Big_02_V2_F", "Land_i_House_Big_02_V3_F"
 	};
+	distanceForLandAttack = 4000;
+	requiredMods = "";
+	size = 30.7;
+	cityCount = 48;
+	airbaseCount = 6;
 };

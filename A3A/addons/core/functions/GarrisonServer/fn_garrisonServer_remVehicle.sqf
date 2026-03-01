@@ -29,27 +29,32 @@ private _arrayType = call {
     "buildings";
 };
 
-// Search for closest vehicle of correct type
-private _spawnPlaces = A3A_spawnPlacesHM get _marker;
-private _index = -1;
-private _minDist = 1e6;
-{
-    if (typeof _vehicle != _x#0) then { continue };     // wrong vehicle type
-    private _placePos = if (_x#1 isEqualType 0) then { _spawnPlaces#(_x#1)#1 } else { _x#1 };
-    private _dist = _vehicle distance2d _placePos;
-    if (_dist < _minDist) then { _index = _forEachIndex; _minDist = _dist };
-} forEach (_garrison get _arrayType);
-
+private _vehID = -1;
+private _index = if (_arrayType == "buildings") then {
+    // Search for close building of correct type
+    _garrison get "buildings" findIf { _x#0 == typeOf _vehicle and {getPosWorld _vehicle distance2d _x#1 < 0.1} };
+} else {
+    // Just find the vehicle with the right ID
+    if (_vehicle isNil "A3A_vehID") exitWith {-1};
+    _vehID = _vehicle getVariable "A3A_vehID";
+    _garrison get "vehicles" findIf { _x#3 == _vehID };
+};
 if (_index < 0) exitWith { Error_2("Vehicle type %1 not found in garrison %2", typeof _vehicle, _marker) };
 
 // Remove from server garrison data
 (_garrison get _arrayType) deleteAt _index;
 _vehicle setVariable ["markerX", nil, true];
+_garrison get "supportVehicles" deleteAt _vehID;            // Remove from support vehicles array, if it's in there
+
+// Recalculate HQ building reveal value
+// exitWith because HQ buildings are managed on the server side
+if (_arrayType == "buildings" && (_marker == "Synd_HQ")) exitWith {call A3A_fnc_calcBuildingReveal};
 
 // No local updates for civ as they don't need to manage anything atm
 if ("_civ" in _marker) exitWith {};
 
 // Remove from active garrison if spawned
+// TODO: Need to handle support vehicles if we start using this for non-rebels
 if (_marker in A3A_garrisonMachine) then {
     ["remVehicle", [_marker, _vehicle]] call A3A_fnc_garrisonOp;
 };

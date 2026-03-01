@@ -4,7 +4,7 @@
 
 // All of bellow are optional overrides.
 ["firstAidKits", ["vn_o_item_firstaidkit"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
-["mediKits", ["vn_o_item_medikit_01"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
+["mediKits", ["vn_b_item_medikit_01"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
 
 //////////////////////////
 //       Vehicles       //
@@ -145,7 +145,7 @@ private _prefix = "militia";
 private _unitTypes = [
     ["Press", _pressTemplate],
     ["Worker", _workerTemplate],
-    ["Man", _manTemplate]
+    ["Man", _manTemplate, nil, 10]
 ];
 
 [_prefix, _unitTypes, _loadoutData] call _fnc_generateAndSaveUnitsToTemplate;

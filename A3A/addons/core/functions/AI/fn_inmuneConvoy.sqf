@@ -68,7 +68,7 @@ while {alive _veh} do
 					if (!isNull _road) then
 						{
 						_veh setPos getPos _road;
-						if (!isMultiplayer) then {{ _x hideObject true } foreach (nearestTerrainObjects [position _road,["tree","bush"],15])} else {{[_x,true] remoteExec ["hideObjectGlobal",2]} foreach (nearestTerrainObjects [position _road,["tree","bush"],15])};
+						{[_x,true] remoteExec ["hideObjectGlobal",2]} foreach (nearestTerrainObjects [position _road,["tree","bush"],15]);
 						};
 					};
 				};

@@ -43,7 +43,7 @@ _object setVariable ["A3A_canGarage", true, true];
 _object setVariable ["A3A_itemPrice", _price, true];
 
 if ("save" in _flags) then {
-    ["", _object] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
+    [_object] remoteExec ["A3A_fnc_rebelVehPlacedWorker", 2];
     [_object] remoteExecCall ["A3A_fnc_addVehAttachDetachEH", 2];
 };
 
@@ -53,4 +53,4 @@ if ([typeOf _object] call A3A_Logistics_fnc_isLoadable) then {[_object] call A3A
 
 // All other object actions, hopefully
 private _jipKey = "A3A_initObject_" + ((str _object splitString ":") joinString "");
-[_object, _jipKey] remoteExec ["A3A_fnc_initObjectRemote", 0, _jipKey]; 
+[_object, _jipKey] remoteExecCall ["A3A_fnc_initObjectRemote", 0, _jipKey]; 

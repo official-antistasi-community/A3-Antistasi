@@ -130,24 +130,22 @@ _cargoGroup spawn A3A_fnc_attackDrillAI;
 
 if(!canMove _helicopter || !alive _driver) exitWith { deleteVehicle _landPad };
 
-// Dirty hack to stop the heli lurching around near the ground
-private _dismountTime = 5 + count units _cargoGroup;
-[_helicopter, time + _dismountTime, _midHeight, _landPad] spawn {
-    params ["_heli", "_endTime", "_flyHeight", "_landPad"];
-    while { time < _endTime } do {
-        _heli setVelocity [0,0,-0.5];
-        sleep 1;
-    };
-    _heli flyInHeight _flyHeight;
-    deleteVehicle _landPad;
-};
 [_helicopter] call A3A_fnc_smokeCoverAuto;          // Already done by GetOut handler in AIVehInit?
 
-sleep _dismountTime;
+private _timeout = time + 5 + count units _cargoGroup;
+while {units _cargoGroup findIf { _x in _helicopter } != -1 and time < _timeout} do {
+    _helicopter setVelocity [0,0,-0.5];           // bit of help to keep the thing stable
+    sleep 1;
+};
 
 // Heli RTB
+deleteVehicle _landPad;
+_helicopter flyInHeight _midHeight;
+
 private _vehWP1 = _crewGroup addWaypoint [_originPos, 0];
 _vehWP1 setWaypointType "MOVE";
 _vehWP1 setWaypointStatements ["true", "if (local this and alive this) then { deleteVehicle (vehicle this); {deleteVehicle _x} forEach thisList }"];
 _vehWP1 setWaypointBehaviour "CARELESS";
 _crewGroup setCurrentWaypoint _vehWP1;
+
+driver _helicopter action ["engineOn", _helicopter];        // needed for some helis (eg Ghost Hawk)

@@ -148,8 +148,8 @@ A3A_markersToDelete = [];		// list of markers to be cleared after despawning
 
 A3A_activeCityBattles = createHashMap;		// list of markers with active city battle missions
 
-A3A_cityTaskTimer = createHashMap;			// maybe temporary. List of times after which a city task can spawn
-{ [_x, 0, 900] call A3A_fnc_setCityTaskDelay } forEach citiesX; 			// 0-15min for pop 100 city
+A3A_cityTaskTimer = createHashMap;			// Accumulators for city task chance
+{ A3A_cityTaskTimer set [_x, -0.1] } forEach citiesX;
 
 // These are silly, should be nil/true and local-defined only
 resourcesIsChanging = false;
@@ -176,6 +176,8 @@ membersX = [];					// These two published later by startGame
 theBoss = objNull;
 
 createHashMap call A3A_fnc_setRebelLoadouts;		// sets version times, no dependencies
+
+A3A_useRemarks = 0;
 
 ///////////////////////////////////////////
 //     INITIALISING ITEM CATEGORIES     ///
@@ -455,7 +457,7 @@ private _vehicleResourceCosts = createHashMap;
 { _vehicleResourceCosts set [_x, 60] } forEach FactionGet(all, "vehiclesLightAPCs") + FactionGet(all, "vehiclesGunBoats");
 { _vehicleResourceCosts set [_x, 100] } forEach FactionGet(all, "vehiclesAPCs");
 { _vehicleResourceCosts set [_x, 150] } forEach FactionGet(all, "vehiclesAA") + FactionGet(all, "vehiclesArtillery") + FactionGet(all, "vehiclesIFVs") + FactionGet(all, "vehiclesLightTanks");
-{ _vehicleResourceCosts set [_x, 230] } forEach FactionGet(all, "vehiclesTanks");
+{ _vehicleResourceCosts set [_x, 230] } forEach FactionGet(all, "vehiclesTanks") + FactionGet(all, "vehiclesSAM");
 { _vehicleResourceCosts set [_x, 300] } forEach FactionGet(all, "vehiclesHeavyTanks");
 
 { _vehicleResourceCosts set [_x, 70] } forEach FactionGet(all, "vehiclesHelisLight") + FactionGet(all, "vehiclesAirPatrol");
@@ -475,7 +477,7 @@ private _groundVehicleThreat = createHashMap;
 
 { _groundVehicleThreat set [_x, 120] } forEach FactionGet(all, "vehiclesAPCs");
 { _groundVehicleThreat set [_x, 200] } forEach FactionGet(all, "vehiclesAA") + FactionGet(all, "vehiclesArtillery") + FactionGet(all, "vehiclesIFVs") + FactionGet(all, "vehiclesLightTanks");
-{ _groundVehicleThreat set [_x, 300] } forEach FactionGet(all, "vehiclesTanks");
+{ _groundVehicleThreat set [_x, 300] } forEach FactionGet(all, "vehiclesTanks") + FactionGet(all, "vehiclesSAM");
 { _groundVehicleThreat set [_x, 500] } forEach FactionGet(all, "vehiclesHeavyTanks"); //Expect these to mostly exist in templates which lack good access of most things to deal with tanks, ie WW2
 
 
@@ -492,14 +494,18 @@ _fnc_setPriceIfValid =
 };
 
 { [_rebelVehicleCosts, _x, 50] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesBasic");
-{ [_rebelVehicleCosts, _x, 200] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesCivCar") + FactionGet(reb, "vehiclesCivBoat");
+{ [_rebelVehicleCosts, _x, 300] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesCivCar") + FactionGet(reb, "vehiclesCivBoat");
 { [_rebelVehicleCosts, _x, 600] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesCivTruck") + FactionGet(reb, "vehiclesMedical");
 { [_rebelVehicleCosts, _x, 300] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesTruck");
-{ [_rebelVehicleCosts, _x, 200] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesLightUnarmed");
-{ [_rebelVehicleCosts, _x, 700] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesLightArmed") + FactionGet(reb, "vehiclesAT");
-{ [_rebelVehicleCosts, _x, 400] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticMGs") + FactionGet(reb, "vehiclesBoat");
-{ [_rebelVehicleCosts, _x, 800] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticAT") + FactionGet(reb, "staticAA") + FactionGet(reb, "staticMortars");
-{ [_rebelVehicleCosts, _x, 1200] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesAA");
+{ [_rebelVehicleCosts, _x, 150] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesLightUnarmed");
+{ [_rebelVehicleCosts, _x, 700] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesLightArmed");
+{ [_rebelVehicleCosts, _x, 150] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesBoat");
+{ [_rebelVehicleCosts, _x, 400] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticMGs");
+{ [_rebelVehicleCosts, _x, 1300] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesAT");
+{ [_rebelVehicleCosts, _x, 1000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticAT");
+{ [_rebelVehicleCosts, _x, 1600] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticAA");
+{ [_rebelVehicleCosts, _x, 2000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesAA");
+{ [_rebelVehicleCosts, _x, 1600] call _fnc_setPriceIfValid } forEach FactionGet(reb, "staticMortars");
 { [_rebelVehicleCosts, _x, 5000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesCivHeli");
 { [_rebelVehicleCosts, _x, 5000] call _fnc_setPriceIfValid } forEach FactionGet(reb, "vehiclesPlane") + FactionGet(reb, "vehiclesCivPlane");
 
@@ -533,9 +539,11 @@ A3A_validVehicles = createHashMap;
 	_valid set ["staticMG", FactionGet(all, "staticMGs")];			// allow cross-faction use
 	_valid set ["staticAA", _x get "staticAA"];
 	_valid set ["staticAT", _x get "staticAT"];
-	_valid set ["staticMortar", _x get "staticMortar"];
+	_valid set ["staticMortar", _x get "staticMortars"];
 
 	_valid set ["vehicleAA", _x get "vehiclesAA"];
+	_valid set ["vehicleSAM", _x get "vehiclesSAM"];
+	_valid set ["vehicleArty", _x get "vehiclesArtillery"];
 	_valid set ["vehiclePolice", _x get "vehiclesPolice"];
 	_valid set ["vehicleTruck", (_x get "vehiclesTrucks") + (_x get "vehiclesCargoTrucks") + (_x get "vehiclesAmmoTrucks")
 		+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
@@ -544,6 +552,7 @@ A3A_validVehicles = createHashMap;
 		+ (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks") + (_x get "vehiclesMilitiaLightArmed")];
 
 	_valid set ["plane", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA") + (_x get "vehiclesPlanesTransport")];
+	_valid set ["runway", _valid get "plane"];
 	_valid set ["heli", (_x get "vehiclesHelisLight") + (_x get "vehiclesHelisTransport") + (_x get "vehiclesHelisLightAttack") + (_x get "vehiclesHelisAttack")];
 	_valid set ["boat", (_x get "vehiclesTransportBoats") + (_x get "vehiclesGunBoats")];
 
@@ -552,6 +561,17 @@ A3A_validVehicles = createHashMap;
 } forEach [A3A_faction_occ, A3A_faction_inv];
 
 A3A_validVehicles set [civilian, createHashMapFromArray [["civCar", arrayCivVeh], ["civBoat", civBoats]] ];
+
+
+// Create support vehicle types hashmap for garrisons
+// Used on garrison-local side as well as server
+private _supportVehTypes = createHashMap;
+{ _supportVehTypes set [_x, "vehiclesAA"] } forEach FactionGet(all, "vehiclesAA");
+{ _supportVehTypes set [_x, "vehiclesSAM"] } forEach FactionGet(all, "vehiclesSAM");
+{ _supportVehTypes set [_x, "vehiclesArtillery"] } forEach FactionGet(all, "vehiclesArtillery");
+{ _supportVehTypes set [_x, "staticMortars"] } forEach FactionGet(all, "staticMortars");
+
+DECLARE_SERVER_VAR(A3A_supportVehTypes, _supportVehTypes);
 
 ///////////////////////////
 //     MOD TEMPLATES    ///
@@ -589,6 +609,26 @@ Info("Creating pricelist");
 	server setVariable [_x, _y, true];
 } forEach A3A_rebelVehicleCosts;
 
+////////////////////////////////////
+//     UNIT AND VEHICLE CARGO    ///
+////////////////////////////////////
+
+private _resourceVehValues = createHashMap;
+
+private _rearmHM = createHashMap;
+{
+	{
+		_rearmHM set [_x, 25000];
+	} forEach _x;
+} forEach [A3A_faction_occ get "vehiclesAmmoTrucks", A3A_faction_inv get "vehiclesAmmoTrucks"];
+
+{
+	_rearmHM set [_x#0, (_x#1) * 5];
+} forEach [(A3A_faction_reb get "vehicleAmmoStation"), (A3A_faction_reb get "vehicleAmmoContainer")];
+//+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
+_resourceVehValues set ["rearm", _rearmHM];
+
+DECLARE_SERVER_VAR(A3A_resourceVehValues, _resourceVehValues);
 
 /////////////////////////////////////////
 //     SYNCHRONISE SERVER VARIABLES   ///

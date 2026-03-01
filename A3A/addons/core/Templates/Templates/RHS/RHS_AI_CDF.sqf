@@ -65,7 +65,7 @@
 ["staticMGs", ["rhsgref_cdf_b_DSHKM"]] call _fnc_saveToTemplate;
 ["staticAT", ["rhsgref_cdf_b_SPG9M"]] call _fnc_saveToTemplate;
 ["staticAA", ["rhsgref_cdf_b_Igla_AA_pod", "rhsgref_cdf_b_ZU23"]] call _fnc_saveToTemplate;
-["staticMortars", ["rhsgref_cdf_b_reg_M252"]] call _fnc_saveToTemplate;
+["staticMortars", ["a3a_RHS_M252"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "rhs_12Rnd_m821_HE"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;

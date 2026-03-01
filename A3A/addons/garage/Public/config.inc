@@ -27,19 +27,20 @@ HR_GRG_canOverrideLock = {
 
 //condition to automatically close garage/placement as if canceled
 HR_GRG_CP_closeCnd = {
+    params [["_closeDistance", 25]];
     (!([player] call A3A_fnc_canFight))
     || {(!isNull HR_GRG_accessPoint)
-        && {player distance HR_GRG_accessPoint > 25}
+        && {player distance HR_GRG_accessPoint > _closeDistance}
     }
 };
 
-HR_GRG_Cnd_canAccessAir = {
+HR_GRG_Cnd_isAirbase = {
     count (airportsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (HR_GRG_accessPoint inArea _x)}) > 0
 };
 
 // Return lock limit for specified player
 HR_GRG_getLockLimit = {
-    [HR_GRG_LockLimit_Guest, HR_GRG_LockLimit_Member] select (_this call A3A_fnc_isMember);
+    round ([HR_GRG_LockLimit_Guest, HR_GRG_LockLimit_Member] select (_this call A3A_fnc_isMember));
 };
 
 //Lock on garaged vehicles ( Values: [{""}, { getPlayerUID player }] )
@@ -66,7 +67,10 @@ if (isNil "HR_GRG_ServiceDisabled_Repair") then {HR_GRG_ServiceDisabled_Repair =
 HR_GRG_blackListCamo = ["IDAP", "African Desert Extremists", "African Desert Extremists 01", "African Desert Extremists 02",
 "African Desert Extremists Alt", "Middle East Extremists", "Middle East Extremists Alt", "Middle East Extremists 1", "Middle East Extremists 2",
 "Middle East Extremists 3", "Middle East Extremists 4", "Middle East Extremists 5", "Middle East Extremists 6",
-"Middle East Extremists 01", "Middle East Extremists 02", "Middle East Extremists 03", "Middle East Extremists 04", "Middle East Extremists 05", "Middle East Extremists 06"];
+"Middle East Extremists 01", "Middle East Extremists 02", "Middle East Extremists 03", "Middle East Extremists 04", "Middle East Extremists 05", "Middle East Extremists 06",
+// East Asia War
+"Azog Battalion", "ZOV", "Yuki", "George", "Alya", "Z", "Taihou", "Wagner", "Brain Enlightenment", "Brain Force Infowars", "Trump Brandon"
+];
 //proxies"Middle East Extremists 01"
 
 // Banned vehicles. These will be deleted instead of being added to the garage. Internal name, case sensitive
@@ -82,7 +86,7 @@ HR_GRG_fnc_vehInit = {
     // Add to garrison if placed within one
     _this setVariable ["ownerX",getPlayerUID player,true];
     [_this, TeamPlayer] call A3A_fnc_AIVEHinit;
-    ["", _this] remoteExecCall ["A3A_fnc_garrisonServer_addVehicle", 2];
+    [_this] remoteExec ["A3A_fnc_rebelVehPlacedWorker", 2];
 }; //is passed vehicle as _this
 HR_GRG_onOpenEvent = {
     //hide Antistasi's top information string as it has no use in the Garage
@@ -162,4 +166,22 @@ HR_GRG_getVehicleSellPrice = {
 };
 
 
+// antistasi resource cargo
+
+HR_GRG_useNewPylonSys = true; // new rearm system, blocks pylons entirely. turn off for old behavior
+HR_GRG_useNewRearmSys = true; // new rearm system
+HR_GRG_useNewRepairSys = false; // new repair system
+HR_GRG_useNewRefuelSys = false; // new refuel system
+HR_GRG_reduceState = true;      // Compress stored state (not fully backwards compatible)
+
+HR_GRG_getResourceCargo = {
+    params ["_veh", "_search"];
+    [_veh, _search, false] call A3A_fnc_getResourceCargo;
+};
+
+HR_GRG_setResourceCargo = {
+    params ["_veh", "_search", "_value"];
+    private _searchVar = format ["A3A_%1Cargo", _search];
+    _veh setVariable [_searchVar, _value, true];
+};
 

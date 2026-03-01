@@ -31,7 +31,7 @@
         <Chinesesimp>&lt;img image='\A3\ui_f\data\GUI\Rsc\RscDisplayArsenal\spaceGarage_ca.paa'&gt;&lt;/img&gt; 车库 %1</Chinesesimp>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_airBlocked">
-        <Original>You can't garage an aircraft while you are not near an Airport which belongs to %1. Please move your aircraft to an Airport under your control to garage it</Original>
+        <Original>You can't garage an aircraft while you are not near an airbase which belongs to %1, or a built helipad for helicopters.</Original>
         <German>Du kannst kein Flugzeug einparken solange du nicht in der Nähe eines Flughafens bist, der %1 gehört. Bitte bewegen dein Flugzeug zu einem Flughafen, den du kontrollierst, um es zu parken.</German>
         <Italian>Non puoi inserire un veivolo nel garage se ti trovi lontano da un Aereoporto di appartenenza %1. Per favore sposta il veivolo ad un aereoporto sotto il controllo alleato in modo da poter conservarlo nel garage</Italian>
         <Spanish>No puede almacenar una aeronave si no está cerca de un aeropuerto que pertenezca a %1. Por favor, mueva su aeronave a un aeropuerto bajo su control para almacenarla</Spanish>
@@ -48,7 +48,7 @@
         <Original>You can't garage an object that's attached to another vehicle</Original>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_badLocation">
-        <Original>You and the vehicle need to be in a %1 garrisons surroundings in order to garage a it</Original>
+        <Original>You and the vehicle need to be in a %1 garrison's surroundings in order to garage it</Original>
         <German>Du musst dich mit dem Fahrzeug in der Nähe eines 1% Standorts befinden um es in einer Garage zu parken.</German>
         <Italian>Tu e il veicolo dovete essere nelle %1 vicinanze di una guarnigione per poter inserirlo nel garage</Italian>
         <Spanish>Usted y su vehículo necesitan estar en los alrededores de una guarnición de %1 para almacenarlo</Spanish>
@@ -159,6 +159,9 @@
         <Turkish>Düşmanlar yakınınızdayken araçları garaja koyamazsınız</Turkish>
         <Chinesesimp>你不能在敌人附近存放载具</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Feedback_addVehicle_HostileUAV">
+        <Original>You can't garage a drone that doesnt belong to your side. Hack this drone before trying to garage it.</Original>
+      </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_Ammo_sold">
         <Original>Ammo crate sold</Original>
       </Key>
@@ -189,6 +192,9 @@
         <Portuguese>Não podes guardar isto</Portuguese>
         <Turkish>Bunu garaja koyamazsın</Turkish>
         <Chinesesimp>你不能存放这个</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Feedback_addVehicle_inCombat">
+        <Original>You can't garage a vehicle that's fired its weapons or recently been in combat.&lt;br/&gt;&lt;br/&gt;This vehicle can be garaged in %1.</Original>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_inVehicle">
         <Original>You can't garage a vehicle while in another vehicle</Original>
@@ -528,6 +534,9 @@
         <Turkish>Uçaklara yalnızca dost bir hava üssünden erişebilirsiniz.</Turkish>
         <Chinesesimp>你仅能在友方空军基地内存取飞行器</Chinesesimp>
       </Key>
+      <Key ID="STR_HR_GRG_Generic_HelipadDisabled">
+        <Original>You can only access garaged helicopters from helipads</Original>
+      </Key>
       <Key ID="STR_HR_GRG_Generic_Anim">
         <Original>Customize</Original>
         <German>Anpassen</German>
@@ -680,7 +689,7 @@
         <Turkish>Bağlar</Turkish>
         <Chinesesimp>挂载</Chinesesimp>
       </Key>
-      <Key ID="STR_HR_GRG_Generic_PylonDisabled">
+      <Key ID="STR_HR_GRG_Generic_PylonDisabled_noAmmo">
         <Original>Pylons require an ammo source to edit</Original>
         <German>Pylonen benötigen Munitionspunkt zum anpassen.</German>
         <Italian>I piloni necessitano di una fonte di munizioni per essere modificati</Italian>
@@ -693,6 +702,12 @@
         <Portuguese>Torres necessitam de uma fonte de munição para serem editadas</Portuguese>
         <Turkish>Direkler, düzenlemek için bir cephane kaynağı gerektirir</Turkish>
         <Chinesesimp>编辑挂架需要可用弹药来源</Chinesesimp>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_PylonDisabled_setting">
+        <Original>Pylon editing is disabled on this server</Original>
+      </Key>
+      <Key ID="STR_HR_GRG_Generic_PylonDisabled_newSys">
+        <Original>Pylon editing is now done through the battle menu.\n\nLook at a vehicle and use the RRR button to change pylons</Original>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Pylons">
         <Original>Pylons</Original>
