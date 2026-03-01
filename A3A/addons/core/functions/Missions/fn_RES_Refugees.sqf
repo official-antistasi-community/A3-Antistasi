@@ -114,7 +114,7 @@ if (!_destroyed) then
 	[_veh, _sideX] call A3A_fnc_AIVEHinit;
 	private _aggro = [aggressionInvaders, aggressionOccupants] select (_sideX == Occupants);
 	private _squadQuality = ([0, 1] select _difficultX) + ([0, 1] select (random 100 < _aggro));
-	private _squadTypes = [[_faction get "groupPoliceSquad"], _faction get "groupsMilitaSquads", _faction get "groupsSquads"] select _squadQuality;
+	private _squadTypes = [[_faction get "groupPoliceSquad"], _faction get "groupsMilitiaSquads", _faction get "groupsSquads"] select _squadQuality;
 	private _squadPos = _houseX getPos [10 + random 40, random 360];
 	_groupX = [_squadPos, _sideX, selectRandom _squadTypes] call A3A_fnc_spawnGroup;
 	sleep 1;

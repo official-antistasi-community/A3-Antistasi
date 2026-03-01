@@ -246,7 +246,7 @@ if(_pointSum >= _neededPoints) then
     {
         [petros,"hint",localize "STR_A3A_fn_intel_laptop_success", localize "STR_A3A_fn_intel_title2"] remoteExec ["A3A_fnc_commsMP",_x];
     } forEach ([100,0,_intel,teamPlayer] call A3A_fnc_distanceUnits);
-    [200, false, _intel, 100] call A3A_tasks_fnc_rewardPlayers;     // players within 100m of intel
+    [20, false, _intel, 100] call A3A_tasks_fnc_rewardPlayers;     // players within 100m of intel
 }
 else
 {

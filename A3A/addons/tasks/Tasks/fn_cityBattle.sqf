@@ -68,6 +68,7 @@ private _fnc_spawnLeader = {
     _leader setCaptive true;		// don't let him get shot for now
     _leader disableAI "ALL";
     _this set ["_leader", _leader];
+    _this set ["_civilians", [_leader]];
 
     // Add global start battle action to the leader
     private _addActionCode = {
@@ -85,10 +86,10 @@ private _fnc_spawnRebels = {
     private _numCiv = _this get "_numCiv";
     private _marker = _this get "_marker";
     private _leader = _this get "_leader";
+    private _civilians = _this get "_civilians";
     private _fnc_spawnCivAtPos = _this get "_fnc_spawnCivAtPos";
 
     private _buildingPlaces = [_marker, 200, _numCiv, 4] call A3A_fnc_patrolGetBuildingPlaces;
-    private _civilians = [_leader];
     private _civGroups = [group _leader];
     private _curGroup = group _leader;
     while {count _civilians < _numCiv} do
@@ -102,8 +103,6 @@ private _fnc_spawnRebels = {
         _civilians pushBack ([_curGroup, _place#0, _place#1] call _fnc_spawnCivAtPos);
         sleep 0.1;
     };
-    _this set ["_civilians", _civilians];
-    _this set ["_civGroups", _civGroups];
 
     _leader setCaptive false;
     _leader enableAI "ALL";
@@ -325,12 +324,11 @@ _task set ["s_cleanup",
     { [_x] spawn A3A_fnc_VEHDespawner } forEach (_this get "_vehicles");
     { [_x] spawn A3A_fnc_enemyReturnToBase } forEach ((_this get "_crewGroups") + (_this get "_cargoGroups"));
 
-    // When the city marker is despawned, get rid of the civilians
-    [_this get "_marker", _this get "_civilians", _this get "_civGroups"] spawn {
-        params ["_marker", "_civilians", "_civGroups"];
+    // When the city marker is despawned, get rid of the civilians (might only be leader)
+    [_this get "_marker", _this get "_civilians"] spawn {
+        params ["_marker", "_civilians"];
         waitUntil {sleep 5; (spawner getVariable _marker != 0)};
         {deleteVehicle _x} forEach _civilians;
-        {deleteGroup _x} forEach _civGroups;
     };
 
     // Remove from active city battles after 10min (added on call)

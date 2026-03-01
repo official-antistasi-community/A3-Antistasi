@@ -9,7 +9,7 @@ private _buildings = [];
 private _spawnPlaces = [];
 
 // war tier dependence?
-private _troopQuality = ["camp", "", _side] call A3A_fnc_getSiteTroopQuality;
+private _troopQuality = ["roadblock", "", _side] call A3A_fnc_getSiteTroopQuality;
 _garrison set ["troops", [6, _troopQuality]];
 
 private _faction = [A3A_faction_occ, A3A_faction_inv] select (_side == Invaders);

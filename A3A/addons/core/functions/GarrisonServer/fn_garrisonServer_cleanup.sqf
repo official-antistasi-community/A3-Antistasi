@@ -39,9 +39,9 @@ if ("_civ" in _marker) exitWith
         };
 
         // Temporary fix for boats being mangled in 3.10.3
-        if (_slotNum isEqualType [] and {_slotNum#0 isEqualType []}) then {
+        while {_slotNum isEqualType [] and {_slotNum#0 isEqualType []}} do {
             Debug_3("Fixing incorrect boat format for %1, pos %2, dir %3", _vehType, _slotNum#0, _slotNum#1);
-            _x set [2, _slotNum#1]; _x set [1, _slotNum#0];
+            _x set [2, _slotNum#1]; _x set [1, _slotNum#0]; _slotNum = _x#1;
         };
 
         private _slotType = if (_slotNum isEqualType []) then { "civBoat" } else { _places # _slotNum # 0 };
