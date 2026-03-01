@@ -67,7 +67,7 @@ _posbase = getMarkerPos _base;
 
 if (_typePatrol == "AIR") then
 {
-	_arrayDestinations = markersX select {sidesX getVariable [_x,sideUnknown] == _sideX};
+	_arrayDestinations = markersX inAreaArray ["Synd_HQ", 4000, 4000] select {sidesX getVariable _x == _sideX};
 	_distanceX = 200;
 }
 else
@@ -134,6 +134,7 @@ if (_typeCar in (_faction get "vehiclesLightUnarmed")) then
 
 //if (_typePatrol == "LAND") then {_veh forceFollowRoad true};
 
+private _startTime = time;
 while {alive _veh} do
 {
 	if (count _arrayDestinations < 2) exitWith {};
@@ -154,9 +155,10 @@ while {alive _veh} do
 	private _timeout = time + (_veh distance2d _posDestination) / 6 + 300;			// stuck detection
 	waitUntil {sleep 60; (_veh distance _posDestination < _distanceX) or (time > _timeout) or ({[_x] call A3A_fnc_canFight} count _soldiers == 0) or (!canMove _veh)};
 	if !(_veh distance _posDestination < _distanceX) exitWith {};
+	if (time - _startTime - 1800 > random 3600) exitWith {};				// random 30 to 90 minute max patrol time
 	if (_typePatrol == "AIR") then
 	{
-		_arrayDestinations = markersX select {sidesX getVariable [_x,sideUnknown] == _sideX};
+		_arrayDestinations = markersX inAreaArray ["Synd_HQ", 4000, 4000] select {sidesX getVariable _x == _sideX};
 	}
 	else
 	{

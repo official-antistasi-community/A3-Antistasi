@@ -65,16 +65,16 @@ If (PATCOM_DEBUG) then {
     ServerDebug_3("PATCOM | Group: %1 | Current Orders: %2 | Group State: %3", _group, _currentOrders, _group getVariable "PATCOM_Group_State");
 };
 
+if (_currentOrders == "Patrol_Area") exitWith {
+    [_group, _patrolParams#1, _patrolParams#2, _patrolParams#3, _patrolParams#4, _patrolParams#5, _patrolParams#6] call A3A_fnc_patrolArea;
+};
+
 if (_currentOrders == "Patrol_Attack") exitWith {
     [_group, _patrolParams#2, _patrolParams#5] call A3A_fnc_patrolAttack;
 };
 
 if (_currentOrders == "Patrol_Defend") exitWith {
     [_group, _patrolParams#1, _patrolParams#2, _patrolParams#4, _patrolParams#5] call A3A_fnc_patrolDefend;
-};
-
-if (_currentOrders == "Patrol_Area") exitWith {
-    [_group, _patrolParams#1, _patrolParams#2, _patrolParams#3, _patrolParams#4, _patrolParams#5, _patrolParams#6] call A3A_fnc_patrolArea;
 };
 
 if (_currentOrders == "Patrol_Water") exitWith {
