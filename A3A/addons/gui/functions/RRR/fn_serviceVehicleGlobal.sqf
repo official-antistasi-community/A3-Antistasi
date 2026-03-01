@@ -1,17 +1,17 @@
 params ["_veh", "_mode", "_data"];
-_data params ["_pylonIndex", "_turret", "_mag", "_ammo"];
 
 if (_mode isEqualTo "pylon") then {
+    _data params ["_pylonIndex", "_turret", "_mag", "_ammo"];
     _veh setPylonLoadout [_pylonIndex, _mag, true, _turret];
     if (local _veh) then {
         _veh setAmmoOnPylon [_pylonIndex, _ammo];
     };
 } else {
+    _data params ["_magName", "_turret", "_fullBoxes", "_partialSize"];
     if (_veh turretLocal _turret) then {
-        // variables are misnamed here
-        _veh removeMagazinesTurret [_pylonIndex, _turret];
-        _veh addMagazinesTurret [_pylonIndex, _turret, _mag];
-        _veh addMagazineTurret [_pylonIndex, _turret, _mag];
+        _veh removeMagazinesTurret [_magName, _turret];
+        _veh addMagazinesTurret [_magName, _turret, _fullBoxes];
+        _veh addMagazineTurret [_magName, _turret, _partialSize];
     };
 };
 
