@@ -83,7 +83,7 @@ switch (_mode) do {
                 _fullBoxes = _fullBoxes - 1;
                 _partialMagSize = _roundsPerMag;
             };
-            [_veh, "rearm", [_name, _turretPath, _fullBoxes, _partialMagSize]] remoteExec ["A3A_GUI_fnc_serviceVehicle", _veh];
+            [_veh, "rearm", [_name, _turretPath, _fullBoxes, _partialMagSize]] remoteExec ["A3A_GUI_fnc_serviceVehicleGlobal", 0];
         } forEach _purchaseList;
     };
     case "pylon":
