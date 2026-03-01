@@ -17,9 +17,9 @@ class DOUBLES(ADDON,Nodes)
     #include "Nodes\RF.hpp"
     #include "Nodes\RHS.hpp"
     #include "Nodes\RNT.hpp"
-    #include "Nodes\SEP.hpp"
     #include "Nodes\SFP.hpp"
     #include "Nodes\SPE.hpp"
+    #include "Nodes\SEP.hpp" //Dependent on SPE.hpp
     #include "Nodes\UNS.hpp"
     #include "Nodes\Vanilla.hpp"
     #include "Nodes\VN.hpp"
