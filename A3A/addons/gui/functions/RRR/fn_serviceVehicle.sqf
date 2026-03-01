@@ -119,7 +119,7 @@ switch (_mode) do {
         private _removedWeapons = [];
         {
             _x params ["_magName", "_rounds", "_orderPrice", "_prettyName", "_isRefund", "_pylonIndex", "_turretPath"];
-            [_veh, "pylon", [_pylonIndex, _turretPath, _magName]] remoteExecCall ["A3A_GUI_fnc_serviceVehicleServer", _veh];
+            [_veh, "pylon", [_pylonIndex, _turretPath, _magName]] remoteExecCall ["A3A_GUI_fnc_serviceVehicleGlobal", 0];
             _changedPylons pushBack _pylonIndex;
             _removedWeapons pushBackUnique [(getText (configFile >> "CfgMagazines" >> _magName >> "pylonWeapon")), _turretPath];
         } forEach ((_purchaseList get "refund") + ((_purchaseList get "swap") apply {_x#0}));
@@ -130,7 +130,7 @@ switch (_mode) do {
         {
             _x params ["_magName", "_rounds", "_orderPrice", "_prettyName", "_isRefund", "_pylonIndex", "_turretPath"];
             private _currentCount = if ((_magInfo#(_pylonIndex - 1)) isEqualTo _magName) then {_veh ammoOnPylon _pylonIndex} else {0};
-            [_veh, "pylon", [_pylonIndex, _turretPath, _magName, _currentCount + _rounds]] remoteExecCall ["A3A_GUI_fnc_serviceVehicleServer", _veh];
+            [_veh, "pylon", [_pylonIndex, _turretPath, _magName, _currentCount + _rounds]] remoteExecCall ["A3A_GUI_fnc_serviceVehicleGlobal", 0];
             _changedPylons pushBack _pylonIndex;
         } forEach (((_purchaseList get "swap") apply {_x#1}) + (_purchaseList get "purchase"));
 
@@ -143,7 +143,7 @@ switch (_mode) do {
             if (_oldTurretPath isEqualTo _newTurretPath) then { continue };
             private _currentMag = _magInfo#_forEachIndex;
             _removedWeapons pushBackUnique [(getText (configFile >> "CfgMagazines" >> _currentMag>> "pylonWeapon")), _oldTurretPath];
-            [_veh, "pylon", [_pylonIndex, _newTurretPath, _currentMag, _veh ammoOnPylon _pylonIndex]] remoteExecCall ["A3A_GUI_fnc_serviceVehicleServer", _veh];
+            [_veh, "pylon", [_pylonIndex, _newTurretPath, _currentMag, _veh ammoOnPylon _pylonIndex]] remoteExecCall ["A3A_GUI_fnc_serviceVehicleGlobal", 0];
             _changedPylons pushBack _pylonIndex;
         } forEach (_purchaseList get "owner");
 
