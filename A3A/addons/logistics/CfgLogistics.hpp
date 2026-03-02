@@ -8,7 +8,11 @@ class DOUBLES(ADDON,Nodes)
 
     #include "Nodes\3CBBAF.hpp"
     #include "Nodes\3CBFactions.hpp"
+    #include "Nodes\AMF.hpp"
+    #include "Nodes\CRO.hpp"
+    #include "Nodes\CSLA.hpp"
     #include "Nodes\CUP.hpp"
+    #include "Nodes\CWR.hpp"
     #include "Nodes\EAW.hpp"
     #include "Nodes\D3S.hpp"
     #include "Nodes\GM.hpp"
@@ -18,17 +22,14 @@ class DOUBLES(ADDON,Nodes)
     #include "Nodes\RF.hpp"
     #include "Nodes\RHS.hpp"
     #include "Nodes\RNT.hpp"
+    #include "Nodes\SFP.hpp"
     #include "Nodes\SPE.hpp"
+    #include "Nodes\SEP.hpp" //Dependent on SPE.hpp
+    #include "Nodes\TMT.hpp"
     #include "Nodes\UNS.hpp"
     #include "Nodes\Vanilla.hpp"
     #include "Nodes\VN.hpp"
     #include "Nodes\WS.hpp"
-    #include "Nodes\SFP.hpp"
-    #include "Nodes\CRO.hpp"
-    #include "Nodes\AMF.hpp"
-    #include "Nodes\TMT.hpp"
-    #include "Nodes\CWR.hpp"
-    #include "Nodes\CSLA.hpp"
 };
 
 class DOUBLES(ADDON,Cargo)
