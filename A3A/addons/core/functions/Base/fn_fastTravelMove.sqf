@@ -75,21 +75,50 @@ _ftUnits = _ftUnits select { _x == vehicle _x };
 
 
 // Do the actual teleport. Vehicles before units, try to place everything in proximity.
-private _destPos = markerPos _base getPos [10, random 360];
+private _destPos = markerPos _base getPos [30, random 360];
 {
-	private _radiusX = 10;
-	while {true} do {
-		private _roads = _destPos nearRoads _radiusX;
-		if (count _roads > 0) exitWith { _destPos = getPosATL (_roads select 0) };
-		_radiusX = _radiusX + 10;
-		if (_radiusX > 100) exitWith {};
+	private _vehPlace = false;
+	if !(_x isKindOf "StaticWeapon") then {
+		// attempt to place on a road section
+		private _emptyRoads = _destPos nearRoads 20 select { _x nearEntities 10 isEqualTo [] };
+		if (_emptyRoads isEqualTo []) then { _emptyRoads = _destPos nearRoads 50 select { _x nearEntities 10 isEqualTo [] } };
+		if (_emptyRoads isEqualTo []) then { _emptyRoads = _destPos nearRoads 100 select { _x nearEntities 10 isEqualTo [] } };
+		if (_emptyRoads isNotEqualTo []) then {
+			private _road = selectRandom _emptyRoads;
+			private _pos1 = getRoadInfo _road # 6;
+			private _pos2 = getRoadInfo _road # 7;
+			private _dir = if (_pos1 distance2d _destPos < _pos2 distance2d _destPos) then { _pos2 getDir _pos1 } else { _pos1 getDir _pos2 };
+			_vehPlace = [getPosATL _road, _dir];
+		};
 	};
-	private _vehPos = _destPos findEmptyPosition [0,100,typeOf _x];
-	_x setVehiclePosition [_vehPos, [], 5, "NONE"];
+	if (_vehPlace isEqualType false) then {
+		// go find a random empty position instead
+		private _testDir = random 360;
+		private _pos = [_destPos, _x, _testDir, 5, 20, 20] call A3A_fnc_findEmptyPosCar;
+		if (_pos isNotEqualTo []) exitWith { _vehPlace = [_pos, _testDir] };
+		_pos = [_destPos, _x, _testDir, 20, 30, 30] call A3A_fnc_findEmptyPosCar;
+		if (_pos isNotEqualTo []) exitWith { _vehPlace = [_pos, _testDir] };
+		_pos = [_destPos, _x, _testDir, 50, 100, 50] call A3A_fnc_findEmptyPosCar;
+		if (_pos isNotEqualTo []) exitWith { _vehPlace = [_pos, _testDir] };
+	};
+	if (_vehPlace isEqualType false) then {
+		[_titleStr, localize "STR_A3A_fn_dialogs_ftradio_fail"] call A3A_fnc_customHint;
+		continue;
+	};
+	isNil {
+		// Actually move vehicle
+		_x setPosATL _vehPlace#0;
+		_x setDir _vehPlace#1;
+		_x allowDamage false;
+	};
+	// Update destPos to last non-static vehicle
+	if !(_x isKindOf "StaticWeapon") then { _destPos = _vehPlace # 0 }; 
+
 } forEach _ftVehicles;
 
 {
-	private _unitPos = _destPos findEmptyPosition [1,50,typeOf _x];
+	private _unitPos = _destPos findEmptyPosition [5,50,typeOf _x];
+	if (_unitPos isEqualTo []) then { _unitPos = _destPos getPos [5 + 45 * sqrt random 1, random 360] };		// whatever, units are pretty safe
 	_x setPosATL _unitPos;
 	if (!isPlayer _x and !(_x getVariable ["incapacitated",false])) then {
 		_x setVariable ["rearming",false];
@@ -98,7 +127,6 @@ private _destPos = markerPos _base getPos [10, random 360];
 	};
 } forEach _ftUnits;
 
-
 if (!_isHC) then {
 	disableUserInput false;
 	cutText [localize "STR_A3A_fn_dialogs_fastTravelRadio_end","BLACK IN",1]
@@ -106,3 +134,6 @@ if (!_isHC) then {
 	[_titleStr, format [localize "STR_A3A_fn_dialogs_ftradio_grp_arrived", groupID _groupX]] call A3A_fnc_customHint;
 };
 [] call A3A_fnc_playerLeashRefresh;
+
+sleep 5;
+{ _x allowDamage true } forEach _ftVehicles;
