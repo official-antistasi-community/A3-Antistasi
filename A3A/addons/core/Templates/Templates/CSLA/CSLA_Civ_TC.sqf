@@ -13,7 +13,6 @@
     , "CUP_C_Datsun_Plain", 0.5
     , "CUP_C_Datsun_Tubeframe", 0.5
     , "CUP_C_S1203_CIV_CR", 0.5
-    , "CSLA_CIV_V3S", 0.5
     ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
