@@ -27,11 +27,11 @@ if (_index == -1) then {
     // Normal error because support might be terminated locally and then externally
     Trace_1("Vehicle ID %1 not found in active supports");
 };
-_vehActions deleteAt _index params ["", "_vehicle", "_crewGroup"];
+_vehActions deleteAt _index params ["", "_vehicle", "_crewGroup", "_scriptHandle"];
 
 
 // First kill function if it's running
-// TODO, no functions yet
+terminate _scriptHandle;
 
 // If garrison isn't spawned, delete the vehicle & crew
 if (_garrison get "state" == "disabled") exitWith {
