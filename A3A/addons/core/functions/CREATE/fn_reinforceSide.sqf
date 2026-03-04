@@ -109,7 +109,7 @@ while {_totalReinf > 0} do
     };
 
     //Find a suitable site to reinforce
-    private _rebelsNear = _rebelSpawners inAreaArray [markerPos _marker, distanceSPWN * 1.5, distanceSPWN * 1.5] isNotEqualTo [];
+    private _rebelsNear = _rebelSpawners inAreaArray [markerPos _marker, distanceSPWN, distanceSPWN] isNotEqualTo [];
     private _isLand = true;
     private _source = call {
         if (!_rebelsNear and _marker in airportsX) exitWith { _marker };
