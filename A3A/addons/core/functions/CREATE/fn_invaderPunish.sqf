@@ -114,8 +114,7 @@ if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time 
 
     A3A_punishmentDefBuff = A3A_punishmentDefBuff + 1.25;
     [Occupants, -10, 90] remoteExec ["A3A_fnc_addAggression",2];
-    {if (isPlayer _x) then {[10,_x] call A3A_fnc_playerScoreAdd}} forEach ([500,0,_posDest,teamPlayer] call A3A_fnc_distanceUnits);
-    [10,theBoss] call A3A_fnc_playerScoreAdd;
+    [30, false, markerPos _mrkDest, 500] call A3A_tasks_fnc_rewardPlayers;
 } else {
     Info_1("Rebels lost a punishment attack against %1", _mrkDest);
     [_taskId, "invaderPunish", "FAILED"] call A3A_fnc_taskSetState;
@@ -133,10 +132,7 @@ if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time 
         Invaders revealMine _mineX;
     };
     [_mrkDest] call A3A_fnc_destroyCity;
-    // Putting this stuff here is a bit gross, but currently there's no cityFlip function. Usually done by resourceCheck.
-    sidesX setVariable [_mrkDest, Invaders, true];
-	[_mrkDest, Invaders] remoteExecCall ["A3A_fnc_garrisonServer_changeSide", 2];
-    [_mrkDest] call A3A_fnc_mrkUpdate;
+    [_mrkDest, Invaders] remoteExecCall ["A3A_fnc_citySideChange", 2];
     [] spawn A3A_fnc_checkCampaignEnd; // If a town is destroyed, check for loss
 };
 

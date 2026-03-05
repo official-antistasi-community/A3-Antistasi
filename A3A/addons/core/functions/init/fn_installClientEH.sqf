@@ -1,26 +1,4 @@
-
-player addEventHandler ["FiredMan", {
-    _player = _this select 0;
-    if (!captive _player) exitWith {false};
-
-    //if ({((side _x== Invaders) or (side _x== Occupants)) and (_x knowsAbout player > 1.4)} count allUnits > 0) then
-    if ({if (((side _x == Occupants) or (side _x == Invaders)) and (_x distance player < 300)) exitWith {1}} count allUnits > 0) then {
-        _player setCaptive false;
-    }
-    else {
-        _city = [citiesX,_player] call BIS_fnc_nearestPosition;
-        _size = [_city] call A3A_fnc_sizeMarker;
-        _cityData = A3A_cityData getVariable _city;
-        if (random 100 > _cityData select 1) then {            // reb support
-            if (_player distance getMarkerPos _city < _size * 1.5) then {
-                _player setCaptive false;
-                if (vehicle _player != _player) then {
-                    {if (isPlayer _x) then {[_x,false] remoteExec ["setCaptive",_x]}} forEach ((assignedCargo (vehicle _player)) + (crew (vehicle _player)) - [player]);
-                };
-            };
-        };
-    };
-}];
+player addEventHandler ["FiredMan", A3A_fnc_rebelFiredManEH];
 
 player addEventHandler ["InventoryOpened", {
     private ["_playerX","_containerX","_typeX"];
@@ -114,3 +92,17 @@ player addEventHandler ["WeaponDisassembled", {
         [_veh] remoteExecCall ["A3A_fnc_garrisonServer_remVehicle", 2];
     };
 }];
+
+
+// Actions dont persist across respawns so they're temporarily stuck here
+
+// allow player to open any nearby helipads
+player addAction ["Open Heli Garage", 
+"
+        if ([getPosATL player] call A3A_fnc_enemyNearCheck) exitWith {[localize 'STR_A3A_fn_init_initclient_helipad',localize 'STR_A3A_fn_init_initclient_helipad_enemies'] call A3A_fnc_customHint};
+        _helipad = (nearestObjects [player, ['a3a_helipad'], 8, true])#0;
+        HR_GRG_accessPoint = _helipad;
+        HR_GRG_accessLimit = 'helipad';
+        createDialog 'HR_GRG_VehicleSelect';
+", nil, 4, true, true, "","(count (nearestObjects [player, ['a3a_helipad'], 8, true]) > 0) && {((isNil 'HR_GRG_Placing') || {!HR_GRG_Placing}) && player isEqualTo vehicle player && _this == _this getVariable ['owner',objNull]}"
+];

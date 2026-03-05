@@ -1,5 +1,16 @@
 class CfgAmmo 
 {
+    // Custom harm
+    class ammo_Missile_HARM;
+    
+    class A3A_customHARM : ammo_Missile_HARM {
+        manualControl = 1;
+        thrustTime = 8;
+        maxControlRange = 24000;
+        missileLockMaxDistance = 24000;
+        hardPoints[] = {};
+    };
+
     // Price overrides for gun shop
     // ASP-1 ammo
     class BulletBase;

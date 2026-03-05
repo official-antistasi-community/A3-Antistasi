@@ -99,6 +99,18 @@ _roadblockPairs = [];
         _lastPos = _newPos;
     } forEach _route;
 
+/*    // another pass to find midpoint? Untested
+    private _remDist = 0.5*_totalDist;
+    _lastPos = navGrid#_firstNode#0;
+    private _midpoint = _lastPos;
+    {
+        _newPos = navGrid#_x#0;
+        _dist = _lastPos distance2d _newPos;
+        if (_remDist < _dist) exitWith { _midpoint = vectorLinearConversion [0, 1, _remDist/_dist, _lastPos, _newPos] };
+        _remDist = _remDist - _dist;
+        _lastPos = _newPos;
+    } forEach _route;
+*/
     // TODO: road quality check?
     private _freshRatio = _freshDist / _totalDist;
     if (_freshratio > 0.25) then { _roadblockPairs pushBack [_mrk1, _mrk2, _freshRatio * _directDist] };
@@ -122,10 +134,12 @@ private _markerConn = createHashMap;
 
 } forEach _roadblockPairs;
 
+// This works poorly in the case where a high-value site has a single short link to a low-value site.
+// Should rework to "bubble" the value down somehow
+
 // Calculate value of each marker
 // Mostly ripped from findAttackTargets
 private _markerVal = createHashMap;
-private _radioTowers = antennas + antennasDead;
 {
     // Do we still special-case cities?
     if (_x in citiesX) then {
@@ -134,7 +148,7 @@ private _radioTowers = antennas + antennasDead;
         continue;
     };
     private _value = call {
-        if (_x in outposts) exitWith { [20, 25] select (count (_radioTowers inAreaArray _x) > 0) };
+        if (_x in outposts) exitWith { [20, 25] select (_x in A3A_antennaMap) };
         if (_x in seaports) exitWith { 20 };
         if (_x in airportsX) exitWith { 60 };
         if (_x in factories) exitWith { 15 };

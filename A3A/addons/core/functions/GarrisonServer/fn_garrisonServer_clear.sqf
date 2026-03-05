@@ -41,7 +41,7 @@ if (sidesX getVariable _marker != teamPlayer) exitWith
     _garrison set ["troops", []];           // rebel format, which is correct because we're flipping the side in deleteMinorSite
     _garrison set ["vehicles", []];
 
-    if (_marker in A3A_garrisonMachine) then {
+    if (spawner getVariable _marker != 2) then {
         ["clear", [_marker, false, false]] call A3A_fnc_garrisonOp;
         [_marker] call A3A_garrisonServer_despawn;      // could just send the garrison op, but function should be ok too
     };
@@ -86,7 +86,7 @@ if (_safe) then {
     [_hr, _costs] spawn A3A_fnc_resourcesFIA;        // TODO: should turn this thing into unscheduled
 };
 
-if (_marker in A3A_garrisonMachine) then {
+if (spawner getVariable _marker != 2) then {
     private _troopsOnly = !(_delete or _hqMove);
     ["clear", [_marker, _troopsOnly, _safe]] call A3A_fnc_garrisonOp;
     if (_delete) then { [_marker] call A3A_garrisonServer_despawn };

@@ -52,11 +52,9 @@ _groupLeader setskill ["commanding", _oldCourage];
 //If the group leader survived the call, proceed
 if(_groupLeader call A3A_fnc_canFight) then
 {
-    // why here? Are we intercepting the radio traffic?
-    private _revealed = [getPosATL _groupLeader, side _group] call A3A_fnc_calculateSupportCallReveal;
     //Starting the support
-    ServerDebug_2("%1 managed to request support, reveal value is %2", _group, _revealed);
-    [_side, _target, getPosATL _groupLeader, _group knowsAbout _target, _revealed] remoteExec ["A3A_fnc_requestSupport", 2];
+    ServerDebug_1("%1 managed to request support", _group);
+    [_side, _target, getPosATL _groupLeader, _group knowsAbout _target] remoteExec ["A3A_fnc_requestSupport", 2];
 }
 else
 {

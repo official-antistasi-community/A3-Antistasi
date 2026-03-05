@@ -13,11 +13,9 @@ while {true} do
     waitUntil {sleep 10; A3A_activePlayerCount > 0};
 
 	private _resAdd = 50;//0
-	private _hrAdd = 3; // A3A_balancePlayerScaleBase;
+	private _hrAdd = 2; // A3A_balancePlayerScaleBase;
 
-	private _suppBoost = 0.5 * (1+ ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count seaports));
-	private _resBoost = 1 + (0.25*({(sidesX getVariable [_x,sideUnknown] == teamPlayer) and !(_x in destroyedSites)} count factories));
-
+	//private _suppBoost = 0.5 * (1+ ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count seaports));
 	{
 		private _city = _x;
 		if (_city in destroyedSites) then { continue };
@@ -26,8 +24,8 @@ while {true} do
 		_cityData params ["_numCiv", "_supportReb"];
 
 		private _ownerMul = [0.5, 1] select (sidesX getVariable _city == teamPlayer);
-		private _resAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100);
-		private _hrAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 10000);
+		private _resAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100) * A3A_rebelCashPopMult;
+		private _hrAddCity = _ownerMul * sqrt _numCiv * (_supportReb / 100) * A3A_rebelHRTickMult;
 
 		_resAdd = _resAdd + _resAddCity;
 		_hrAdd = _hrAdd + _hrAddCity;
@@ -37,12 +35,12 @@ while {true} do
 	[] call A3A_fnc_tierCheck;
 	[] spawn A3A_fnc_checkCampaignEnd; // check for population win
 
-	{
-		if ((sidesX getVariable [_x,sideUnknown] == teamPlayer) and !(_x in destroyedSites)) then
-		{
-			_resAdd = _resAdd + (300 * _resBoost);
-		};
-	} forEach resourcesX;
+	private _resourcesRebel = {sidesX getVariable _x == teamPlayer and !(_x in destroyedSites)} count resourcesX;
+	_resAdd = _resAdd + _resourcesRebel * A3A_rebelCashResMult;
+
+	private _factoriesRebel = {sidesX getVariable _x == teamPlayer and !(_x in destroyedSites)} count factories;
+	private _resBoost = 1 + _factoriesRebel * A3A_rebelCashFactMult;
+	_resAdd = _resAdd * _resBoost;
 
 	Debug_2("Occupant radio keys: %1 - Invader radio keys: %2", occRadioKeys, invRadioKeys);
 
@@ -98,11 +96,18 @@ while {true} do
 	A3A_oldHQInfoInv = A3A_oldHQInfoInv select { _x set [2, _x#2 - 0.1]; _x#2 > 0 };
 
 	private _missionChance = 5 * A3A_activePlayerCount;
-	if ((!bigAttackInProgress) and (random 100 < _missionChance)) then {[] spawn A3A_fnc_missionRequest};
+	if ((!bigAttackInProgress) and (random 100 < _missionChance)) then {["ANY"] spawn A3A_Tasks_fnc_requestTask};
+
+	// Enemies forget about vehicle threat eventually 
+	{
+		private _killThreat = _x getVariable "A3A_killThreat";
+		if (_killThreat < 20) then { _x setVariable ["A3A_killThreat", nil]; continue };
+		_x setVariable ["A3A_killThreat", _killThreat - 20];
+	} forEach (vehicles select {!(_x isNil "A3A_killThreat")});
 
 	[] spawn A3A_fnc_reinforcementsAI;
 
-	{
+/*	{
 	_veh = _x;
 	if ((_veh isKindOf "StaticWeapon") and ({isPlayer _x} count crew _veh == 0) and (alive _veh)) then
 		{
@@ -110,28 +115,26 @@ while {true} do
 		[_veh,1] remoteExec ["setVehicleAmmo",_veh];
 		};
 	} forEach vehicles;
+*/
 	sleep 3;
-    _numWreckedAntennas = count antennasDead;
-	//Probability of spawning a mission in.
-    _shouldSpawnRepairThisTick = round(random 100) < 20;
-    if ((_numWreckedAntennas > 0) && _shouldSpawnRepairThisTick && !("REP" in A3A_activeTasks)) then
+
+	// 20% chance of spawning a radio tower repair mission
+    if ({ !alive _x } count A3A_antennas > 0 && round random 100 < 20 && !("REP" in A3A_activeTasks)) then
+	{
+		private _potentials = [];
 		{
-		_potentials = [];
-		{
-		_markerX = [markersX, _x] call BIS_fnc_nearestPosition;
-		if ((sidesX getVariable [_markerX,sideUnknown] == Occupants) and (spawner getVariable _markerX == 2)) exitWith
-			{
-			_potentials pushBack [_markerX,_x];
+			private _marker = A3A_antennaMap get netId _x;
+			if (sidesX getVariable _marker == Occupants and spawner getVariable _marker == 2) then {
+				_potentials pushBack [_marker, _x];
 			};
-		} forEach antennasDead;
-		if (count _potentials > 0) then
-			{
-			_potential = selectRandom _potentials;
-			[[_potential select 0,_potential select 1],"A3A_fnc_REP_Antenna"] call A3A_fnc_scheduler;
-			};
-		}
+		} forEach (A3A_antennas select { !alive _x });
+
+		if (_potentials isEqualTo []) exitWith {};
+		private _missionTarg = selectRandom _potentials;
+		_missionTarg spawn A3A_fnc_REP_Antenna;
+	}
 	else
-		{
+	{
 		_changingX = false;
 		{
 		_chance = 5;
@@ -146,7 +149,7 @@ while {true} do
 			};
 		} forEach ((destroyedSites - citiesX) select {sidesX getVariable [_x,sideUnknown] != teamPlayer});
 		if (_changingX) then {publicVariable "destroyedSites"};
-		};
+	};
 
 	sleep 4;
 };

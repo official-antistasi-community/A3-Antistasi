@@ -18,6 +18,7 @@ class CfgPatches {
 class A3A {
     #include "Templates.hpp"
     #include "Params.hpp"
+    #include "clientOptions.hpp"
 
 #if __A3_DEBUG__
     #include "CfgFunctions.hpp"
@@ -30,6 +31,16 @@ class A3A {
                 file = QPATHTOFOLDER(functions\debug);
                 class prepFunctions { preInit = 1; };
                 class runPostInitFuncs { postInit = 1; };
+            };
+        };
+        class A3A_GUI {
+            class mainMenu {
+                file = QPATHTOFOLDER(functions\mainMenu);
+                class communityAdDialog {};
+                class mapSelectorDialog {};
+                class optionsDialog {};
+                class remarksDialog {};
+                class showInterruptButtons {};
             };
         };
     };

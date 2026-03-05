@@ -2,6 +2,12 @@
 
 class CfgWeapons 
 {
+    class weapon_HARMLauncher;
+
+    class A3A_customHARMLauncher : weapon_HARMLauncher {
+        magazines[] = {"A3A_customHARMPylon"};
+    };
+
     // Price overrides for gun shop
     // Type 115, extra muzzle
     class Rifle_Base_F;

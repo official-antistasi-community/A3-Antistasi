@@ -7,19 +7,28 @@ private _lowAir = _faction getOrDefault ["attributeLowAir", false];
 private _posDest = getMarkerPos _mrkDest;
 private _posOrigin = getMarkerPos _mrkOrigin;
 
-private _squadTypes = [[_faction get "groupPoliceSquad"], (_faction get "groupsMilitiaSquads") + (_faction get "groupsMilitiaMedium"),
-	(_faction get "groupsSquads") + (_faction get "groupsMedium"), _faction get "groupSpecOpsRandom"];
+private _squadTypes = if (_numTroops <= 4) then {
+	[[_faction get "groupPoliceSquad"], _faction get "groupsMilitiaMedium", _faction get "groupsMedium", _faction get "groupSpecOpsRandom"];
+} else {
+	[[_faction get "groupPoliceSquad"], _faction get "groupsMilitiaSquads", _faction get "groupsSquads", _faction get "groupSpecOpsRandom"];
+};
 private _groupType = selectRandom (_squadTypes select round _quality);
 
 ServerInfo_5("Spawning PatrolReinf. Dest:%1 Orig:%2 Size:%3 Side:%4 Land:%5",_mrkDest,_mrkOrigin,_numTroops,_side,_isLand);
 
 private _vehicleType = if (_isLand) then {
 	[_mrkOrigin, 1] call A3A_fnc_addTimeForIdle;
-	selectRandom (_faction get "vehiclesTrucks");
+	private _transportTruck = selectRandom ((_faction get "vehiclesTrucks") + (_faction get "vehiclesLightArmedTroop"));
+	if (count _groupType <= 4) then { _transportTruck = selectRandom (_faction get "vehiclesMilitiaCars") } //Militia cars has the capacity, military usual includes Hunter/M-ATV and similar with only 3 cargo seats
+	else
+	{
+		if (round _quality < 2) then { _transportTruck = selectRandom (_faction get "vehiclesMilitiaTrucks") } //low quality gets the militia truck
+	};
+	_transportTruck;
 } else {
 	private _transportPlanes = _faction get "vehiclesPlanesTransport";
 	private _transportHelis = _faction get "vehiclesHelisTransport";
-	if (count _groupType <= 4) then { _transportHelis append (_faction get "vehiclesHelisLight") };
+	if (count _groupType <= 4 and count (_faction get "vehiclesHelisLight") > 0) then { _transportHelis = _faction get "vehiclesHelisLight" };
 
 	private _transportsWeighted = [];
 	{ _transportsWeighted append [_x, 1 / count _transportPlanes] } forEach _transportPlanes;

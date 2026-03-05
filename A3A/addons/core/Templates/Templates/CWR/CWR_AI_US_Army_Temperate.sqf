@@ -43,7 +43,7 @@
 ["vehiclesHelisLight", ["cwr3_b_mh6j"]] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", ["cwr3_b_uh1", "cwr3_b_uh1", "cwr3_b_uh1_armed", "cwr3_b_uh60_unarmed", "cwr3_b_uh60_unarmed", "cwr3_b_uh60_m240", "cwr3_b_uh60_m240", "cwr3_b_uh60_m2", "cwr3_b_uh60_m2", "cwr3_b_uh60"]] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", ["cwr3_b_kiowa_m2", "cwr3_b_kiowa_dyn", "cwr3_b_uh1_gunship", "cwr3_b_uh60_x4_esss", "cwr3_b_ah6j"]] call _fnc_saveToTemplate;
-["vehiclesHelisAttack", ["cwr3_b_ah1f"]] call _fnc_saveToTemplate;
+["vehiclesHelisAttack", ["cwr3_b_ah1f", "cwr3_b_ah64"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["cwr3_b_m119"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [["cwr3_b_m119", ["CUP_30Rnd_105mmHE_M119_M"]]]] call _fnc_saveToTemplate;
@@ -107,7 +107,8 @@ _loadoutData set ["AALaunchers", [
     ["cwr3_launch_redeye", "", "", "", [""], [], ""]
 ]];
 _loadoutData set ["ATLaunchers", [
-    ["cwr3_launch_m67_rcl", "", "", "", ["cwr3_m67_rcl_heat_m", "cwr3_m67_rcl_heat_m"], [], ""]
+    ["cwr3_launch_m67_rcl", "", "", "", ["cwr3_m67_rcl_heat_m", "cwr3_m67_rcl_heat_m"], [], ""],
+    ["cwr3_launch_carlgustaf", "", "", "CUP_optic_MAAWS_Scope", ["cwr3_carlgustaf_heat_m", "cwr3_carlgustaf_hedp_m"], [], ""]
 ]];
 _loadoutData set ["sidearms", []];
 

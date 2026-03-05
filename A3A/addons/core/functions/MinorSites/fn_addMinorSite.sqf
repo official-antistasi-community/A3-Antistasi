@@ -8,6 +8,7 @@ params ["_pos", "_type", "_side", "_ref"];
 private _name = _type + mapGridPosition _pos;
 A3A_minorSitesHM set [_name, [_pos, _type, _side, _ref]];
 
+
 Info_3("Added %1 %2 for %3", _type, _name, _side);
 
 private _mrkSize = [30, 300] select (_type == "camp");
@@ -28,8 +29,14 @@ if (!isNil "A3A_garrison") then {      // Otherwise it's a load-from-save and ga
     } else {
         [_name, _side] call A3A_fnc_buildRoadblock;
     };
+    if (!isNil "serverInitDone") then {             // If the game's started then we need to add the VIDs
+        [_name] call A3A_fnc_garrisonServer_initVIDs;
+    };
 };
 
+if (_name in A3A_markersToDelete) then {
+    A3A_markersToDelete = A3A_markersToDelete - [_name];
+};
 sidesX setVariable [_name, _side, true];
 controlsX pushBack _name;
 spawner setVariable [_name, 2, true];

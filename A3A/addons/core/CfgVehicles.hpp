@@ -147,4 +147,13 @@ class CfgVehicles
     class C_Man_1;
     class a3a_unit_civ : C_Man_1 {};
 
+    // Player
+    class a3a_unit_player : I_G_Soldier_F {
+        displayName = $STR_A3A_role_names_rebel;
+
+        backpack = "";
+        linkedItems[] = {"ItemMap","ItemCompass","ItemWatch"};
+        magazines[] = {};
+        weapons[] = {"Throw","Put"};
+    };
 };

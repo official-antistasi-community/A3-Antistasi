@@ -32,6 +32,9 @@ params [
     , ["_vehicle", objNull, [objNull]]
 ];
 
+// Clamp vehicle ammo according to price, if excessive mags
+[_vehicle] call A3A_fnc_clampVehicleAmmo;
+
 //calculate base cost
 private _cost = if (isNull _vehicle) then { 0 } else { [typeOf _vehicle] call A3A_fnc_vehiclePrice };
 private _costHR = 0;
@@ -92,6 +95,7 @@ switch _special do {
     //vehicle squad
     case "BuildAA": {
         private _static = ((attachedObjects _vehicle) select {typeOf _x in FactionGet(reb,"staticAA")})#0;
+        [_static] call A3A_fnc_clampVehicleAmmo;
         (_units # (_countUnits -1)) moveInDriver _vehicle;
         (_units # _countUnits) moveInGunner _static;
         call _initVeh;

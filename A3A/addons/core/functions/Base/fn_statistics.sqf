@@ -26,7 +26,7 @@ if (_player != theBoss) then
 	}
 else
 	{
-	_textX = format ["<t size='0.67' shadow='2'>" + localize "STR_A3A_fn_base_statistics_isComm", (server getVariable "hr") toFixed 0, (server getVariable "resourcesFIA") toFixed 0, [aggressionLevelOccupants] call A3A_fnc_getAggroLevelString,[aggressionLevelInvaders] call A3A_fnc_getAggroLevelString,rank _player, (_player getVariable "moneyX") toFixed 0,tierWar,FactionGet(occ,"name"),FactionGet(inv,"name"),FactionGet(reb,"name"),_ucovertxt];
+	_textX = format ["<t size='0.67' shadow='2'>" + localize "STR_A3A_fn_base_statistics_isComm", (server getVariable "hr") toFixed 0, (server getVariable "resourcesFIA") toFixed 0, [aggressionLevelOccupants] call A3A_fnc_getAggroLevelString,[aggressionLevelInvaders] call A3A_fnc_getAggroLevelString,rank _player, (_player getVariable "moneyX") toFixed 0,floor bombRuns,tierWar,FactionGet(occ,"name"),FactionGet(inv,"name"),FactionGet(reb,"name"),_ucovertxt];
 	};
 
 //if (captive player) then {_textX = format ["%1 ON",_textX]} else {_textX = format ["%1 OFF",_textX]};

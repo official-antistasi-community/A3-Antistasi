@@ -31,7 +31,7 @@ private _vehicle = if (_vehicleType isKindOf "Ship") then {
     _veh setDir (_seaPath#-1 getDir _seaPath#1);
     _veh;
 } else {
-    [_markerOrigin, _vehicleType] call A3A_fnc_spawnVehicleAtMarker;
+    [_markerOrigin, _vehicleType, _posDestination] call A3A_fnc_spawnVehicleAtMarker;
 };
 if(isNull _vehicle) exitWith {objNull};
 

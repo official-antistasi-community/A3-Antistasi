@@ -25,10 +25,15 @@ private _garrisonType = _garrisonData get "type";
 Info_2("Spawning %2 garrison at marker %1", _marker, _side);
 Debug_1("Garrison data: %1", _garrisonData);
 
-private _garrison = createHashMapFromArray [["troops", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []],
-    ["side", _side], ["type", _garrisonType], ["buildingGroup", grpNull], ["staticGroup", grpNull], ["mortarGroup", grpNull] ];
-A3A_activeGarrison set [_marker, _garrison];
-
+// May already have entry if there are active supports
+private _garrison = A3A_activeGarrison get _marker;
+if (isNil "_garrison") then {
+    _garrison = createHashMapFromArray [ ["troops", []], ["vehicles", []], ["buildings", []], ["groups", []], ["civs", []], ["civGroups", []], ["vehActions", []],
+        ["side", _side], ["buildingGroup", grpNull], ["staticGroup", grpNull], ["mortarGroup", grpNull] ];
+    A3A_activeGarrison set [_marker, _garrison];
+};
+_garrison set ["state", "enabled"];
+_garrison set ["type", _garrisonType];      // Won't be set by vehicle actions
 
 // Merge in spawn places & garrison size for minor sites if we haven't done so yet
 if !(_marker in A3A_spawnPlacesHM) then { A3A_spawnPlacesHM set [_marker, _garrisonData get "spawnPlaces"] };
@@ -52,6 +57,7 @@ if !(_garrisonType == "hq") then {
             private _building = createVehicle [_class, _posWorld, [], 0, "CAN_COLLIDE"];
             _building setPosWorld _posWorld;
             _building setVectorDirAndUp [_vecDir, _vecUp];
+            _building setVariable ["A3A_building", true, true];
             _buildings pushBack _building;
         };
     } forEach (_garrisonData getOrDefault ["buildings", []]);
@@ -61,10 +67,17 @@ if !(_garrisonType == "hq") then {
 };
 
 
+// If a flag marker is provided, use that for flag & ammobox
+private _flagPos = _markerPos;
+if (_garrisonType in A3A_markerPrefixHM) then {
+    private _flagMarker = (_marker call A3A_fnc_getMarkerPrefix) + "flag";
+    if (markerShape _flagMarker != "") then { _flagPos = markerPos _flagMarker };
+};
+
 // Spawn flagpole
 if !(_garrisonType in ["hq", "city", "roadblock", "camp", "rebpost"]) then
 {
-    private _flag = createVehicle [_faction get "flag", _markerPos, [], 0, "NONE"];
+    private _flag = createVehicle [_faction get "flag", _flagPos, [], 0, "NONE"];
     _flag setFlagTexture (_faction get "flagTexture");
     _flag allowDamage false;
     _garrison set ["flag", _flag];
@@ -73,11 +86,31 @@ if !(_garrisonType in ["hq", "city", "roadblock", "camp", "rebpost"]) then
 };
 
 
-// Spawn everything else now so that statics etc don't get spawn-blocked
 private _storedTroops = +(_garrisonData get "troops");
+// If it's an enemy roadblock or camp then don't mix the troop types
+if (_garrisonType in ["roadblock", "camp"]) then { _storedTroops set [1, round (_storedTroops#1)] };
+
+// Subtract units spawned as vehAction crews
+if (_side != teamPlayer) then {
+    private _countSpawned = 0;
+    {
+        _countSpawned = _countSpawned + ({alive _x} count units (_x#2));
+    } forEach (_garrison get "vehActions");
+    _storedTroops set [0, 0 max ((_storedTroops#0) - _countSpawned)];
+};
 
 // Spawn vehicles (including statics)
 [_garrison, _marker, _side, _storedTroops, _garrisonData get "vehicles"] call A3A_fnc_spawnGarrisonVehicles;
+
+// Spawn a radar system if there's an AA launcher in the garrison
+if (_side != teamPlayer and _garrisonType == "airport") then {
+    private _factionSAMs = _faction get "vehiclesSAM";
+    if (_factionSAMs isEqualTo [] or _faction get "vehiclesRadar" isEqualTo []) exitWith {};
+    if (_garrisonData get "vehicles" findIf { _x#0 in _factionSAMs } == -1) exitWith {};
+    private _radarPos = [_flagPos, 150, 20] call A3A_fnc_findArtilleryPos;
+    private _radar = createVehicle [selectRandom (_faction get "vehiclesRadar"), _radarPos, [], 0, "NONE"];
+    _garrison get "vehicles" pushBack _radar;
+};
 
 // If there's a police station, spawn items & troops
 if (_garrisonData getOrDefault ["policeStation", false] isEqualType []) then {
@@ -110,7 +143,7 @@ if (_side != teamPlayer and _garrisonType in ["airport", "outpost", "seaport"]) 
 
     // Spawn loot crate if it's off cooldown
     if (_garrison getOrDefault ["lootCD", 0] > 0) exitWith {};
-	private _ammoBox = [_faction get "ammobox", _markerPos, 15, 5, true] call A3A_fnc_safeVehicleSpawn;
+	private _ammoBox = [_faction get "ammobox", _flagPos, 10, 5, true] call A3A_fnc_safeVehicleSpawn;
     [_ammoBox, true, _garrison, _marker] call A3A_fnc_setupLootCrate;
 };
 

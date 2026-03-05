@@ -21,6 +21,9 @@ A3A_vestDamageAdj = createHashMap;
 // Data to prevent over-using the same loadouts
 A3A_loadoutShuffleBuffers = createHashMap;
 
+// Price cache for mags & weapons
+A3A_itemPriceCache = createHashMap;
+
 ////////////////////////////////////
 //     BEGIN SIDES AND COLORS    ///
 ////////////////////////////////////
@@ -171,6 +174,84 @@ A3A_sniperBuildings = createHashMapFromArray [
 ];
 
 ////////////////////////////////////
+//    PLAYER UNIT DEFINITONS     ///
+////////////////////////////////////
+
+A3A_roleTraitHM = createHashMapFromArray [
+    ["rifleman", createHashMapFromArray [
+            ["camouflageCoef", 1.0],
+            ["audibleCoef", 1.0],
+            ["loadCoef", 1.0],
+            ["medic", false],
+            ["explosiveSpecialist", false],
+            ["UAVHacker", true],
+            ["engineer", false]
+        ]
+    ],
+    ["teamleader", createHashMapFromArray [
+            ["camouflageCoef", 0.8],
+            ["audibleCoef", 0.8],
+            ["loadCoef", 1.4],
+            ["medic", false],
+            ["explosiveSpecialist", false],
+            ["UAVHacker", false],
+            ["engineer", false]
+        ]
+    ],
+    ["grenadier", createHashMapFromArray [
+            ["camouflageCoef", 1.2],
+            ["audibleCoef", 1.0],
+            ["loadCoef", 0.8],
+            ["medic", false],
+            ["explosiveSpecialist", false],
+            ["UAVHacker", false],
+            ["engineer", false]
+        ]
+    ],
+    ["autorifleman", createHashMapFromArray [
+            ["camouflageCoef", 1.0],
+            ["audibleCoef", 1.2],
+            ["loadCoef", 0.8],
+            ["medic", false],
+            ["explosiveSpecialist", false],
+            ["UAVHacker", false],
+            ["engineer", false]
+        ]
+    ],
+    ["medic", createHashMapFromArray [
+            ["camouflageCoef", 1.0],
+            ["audibleCoef", 1.0],
+            ["loadCoef", 1.0],
+            ["medic", true],
+            ["explosiveSpecialist", false],
+            ["UAVHacker", false],
+			["engineer", false]
+        ]
+    ],
+    ["engineer", createHashMapFromArray [
+            ["camouflageCoef", 0.9],
+            ["audibleCoef", 0.9],
+            ["loadCoef", 1.4],
+            ["medic", false],
+            ["explosiveSpecialist", true],
+            ["UAVHacker", false],
+            ["engineer", true]
+        ]
+    ],
+    ["commander", createHashMapFromArray [
+            ["camouflageCoef", 0.8],
+            ["audibleCoef", 0.8],
+            ["loadCoef", 1.4],
+            ["medic", true],
+            ["explosiveSpecialist", true],
+            ["UAVHacker", true],
+            ["engineer", true]
+        ]
+    ]
+];
+
+
+////////////////////////////////////
 //     SOUNDS AND ANIMATIONS     ///
 ////////////////////////////////////
 Info("Compiling sounds and animations");
@@ -218,6 +299,13 @@ private _strongUniforms = ["U_O_CombatUniform_ocamo","U_O_GhillieSuit","U_O_Pilo
 A3A_strongUniformsHM = _strongUniforms createHashMapFromArray [];		// fills with nils, which is fine
 
 medicAnims = ["AinvPknlMstpSnonWnonDnon_medic_1","AinvPknlMstpSnonWnonDnon_medic0","AinvPknlMstpSnonWnonDnon_medic1","AinvPknlMstpSnonWnonDnon_medic2"];
+
+
+////////////////////////////////////
+//      OTHER LOOKUP TABLES      ///
+////////////////////////////////////
+
+A3A_markerPrefixHM = createHashMapFromArray [["airport", "airp_"], ["outpost", "outp_"], ["resource", "reso_"], ["factory", "fact_"], ["seaport", "seap_"]];
 
 
 Info("initVarCommon completed");

@@ -30,9 +30,6 @@ _veh addEventHandler ["GetOut", {
     if (crew _veh isNotEqualTo []) exitWith {};             // empty vehicles only
     if !(_veh isNil "markerX") exitWith {};                 // already in a garrison
 
-    if (!A3A_petrosMoving and { _veh inArea "Synd_HQ" }) then {
-    	["Synd_HQ", _veh] call A3A_fnc_garrisonServer_addVehicle;
-        _veh setVariable ["lockedForAI", true, true];
-    };
+    [_veh] spawn A3A_fnc_rebelVehPlacedWorker;          // In theory we might have jumped out of a moving vehicle...
 }];
 

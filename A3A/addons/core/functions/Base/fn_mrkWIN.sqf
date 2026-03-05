@@ -116,14 +116,7 @@ player removeAction _cancelActionID;
 player playMove "";
 
 {
-    if (isPlayer _x) then
-    {
-        [5,_x] remoteExec ["A3A_fnc_playerScoreAdd",_x];
-        if (captive _x) then
-        {
-            [_x,false] remoteExec ["setCaptive",_x];
-        };
-    }
+    if (isPlayer _x and captive _x) then { [_x,false] remoteExec ["setCaptive", _x] };
 } forEach ([_capRadius,0,_markerPos,teamPlayer] call A3A_fnc_distanceUnits);
 
 ServerInfo_3("Outpost at %1 (%2): Flag capture completed by %3", _outpostGridSquare, _markerX, str player);

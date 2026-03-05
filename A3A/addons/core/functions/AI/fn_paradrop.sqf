@@ -98,10 +98,14 @@ private _lastJumper = objNull;
     if (!alive _x or _x getVariable ["incapacitated", false]) then { continue };
     _lastJumper = _x;
 
-    unAssignVehicle _x;
     //Move them into alternating left/right positions, so their parachutes are less likely to kill each other
     private _pos = if (_forEachIndex % 2 == 0) then {_vehicle modeltoWorld [7, -20, -5]} else {_vehicle modeltoWorld [-7, -20, -5]};
-    _x setPosASL AGLtoASL _pos;
+    isNil {
+        unassignVehicle _x;
+        moveOut _x;
+        _x setPosASL AGLtoASL _pos;
+        _x setVelocity [0,0,0];
+    };
     _x spawn
     {
         sleep (getPosATL _this # 2 / 70);      // can't fall faster than that, save some checks

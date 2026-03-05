@@ -57,7 +57,8 @@ if (isNil "ace_interact_menu_fnc_compileMenu" || isNil "ace_interact_menu_fnc_co
 // Need to compile the menus first, because ACE delays creating menus until a unit of that class is created
 
 // Player units
-private _unitTypes = ["I_G_soldier_F", "I_G_Soldier_TL_F", "I_G_Soldier_AR_F", "I_G_medic_F", "I_G_engineer_F", "I_G_Soldier_GL_F"];
+private _unitTypes = ["a3a_unit_player", // current player type
+"I_G_soldier_F", "I_G_Soldier_TL_F", "I_G_Soldier_AR_F", "I_G_medic_F", "I_G_engineer_F", "I_G_Soldier_GL_F"]; // kept for extender compat
 // AI units
 _unitTypes append ["a3a_unit_west", "a3a_unit_east", "a3a_unit_civ", "a3a_unit_reb", "a3a_unit_reb_unarmed", "a3a_unit_reb_medic", "a3a_unit_reb_sniper", "a3a_unit_reb_marksman",
     "a3a_unit_reb_lat", "a3a_unit_reb_mg", "a3a_unit_reb_exp", "a3a_unit_reb_gl", "a3a_unit_reb_sl", "a3a_unit_reb_eng", "a3a_unit_reb_at", "a3a_unit_reb_aa", "a3a_unit_reb_petros"];

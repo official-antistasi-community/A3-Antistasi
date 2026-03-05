@@ -42,7 +42,7 @@ if (_targside == teamPlayer) then {
 // Generate reveal value for the attack wave notifications
 private _reveal = call {
     if (_targside != teamPlayer) exitWith {0};
-    private _reveal = [_targPos] call A3A_fnc_calculateSupportCallReveal;
+    private _reveal = [_targPos, _side] call A3A_fnc_calculateSupportCallReveal;
     [_side, _targPos, _reveal] call A3A_fnc_useRadioKey;
 };
 
@@ -182,9 +182,7 @@ if (_victory) then {
 
     if (_targSide != teamPlayer) exitWith {};
     [_taskId, "rebelAttack", "SUCCEEDED"] call A3A_fnc_taskSetState;
-    private _nearRebels = [500, 0, markerPos _mrkDest, teamPlayer] call A3A_fnc_distanceUnits;
-    { if (isPlayer _x) then { [10, _x] call A3A_fnc_playerScoreAdd } } forEach _nearRebels;
-    [10, theBoss] call A3A_fnc_playerScoreAdd;
+    [50, false, markerPos _mrkDest, 500] call A3A_tasks_fnc_rewardPlayers;
 };
 [_taskId, "rebelAttack", 30] spawn A3A_fnc_taskDelete;
 

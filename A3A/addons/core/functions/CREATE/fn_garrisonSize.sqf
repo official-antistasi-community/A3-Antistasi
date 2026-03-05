@@ -19,7 +19,7 @@ private _size = [_markerX] call A3A_fnc_sizeMarker;
 private _groups = 0;
 if (_markerX in airportsX) then
 {
-    _groups = 2 + round (_size/30);
+    _groups = 3 + round (_size/30);
     _groups = _groups min 11;
     if (_frontierX) then {_groups = _groups + 3};
 }

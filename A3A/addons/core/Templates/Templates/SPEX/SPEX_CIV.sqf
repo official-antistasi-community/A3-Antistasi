@@ -3,15 +3,17 @@
 //////////////////////////    
 
 ["vehiclesCivCar", [
-    "SPE_GER_R200_Unarmed", 1, 
-    "SPE_GER_R200_Hood", 2,
-    "SPE_US_G503_MB_Open", 1, 
-    "SPE_US_G503_MB", 2 
-    ]] call _fnc_saveToTemplate;
+    "a3a_SPE_R200", 0.5, 
+    "a3a_SPE_R200_Hood", 1.5,
+    "a3a_SPE_G503_MB_Open", 1.5, 
+    "a3a_SPE_G503_MB", 0.5 
+]] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
-    "SPE_OpelBlitz_Open", 0.5, 
-    "SPE_OpelBlitz", 0.5 
+    "SPEX_GER_Bedford_MWD", 0.25, 
+    "SPEX_GER_Bedford_MWD_Open", 0.75,
+    "SPEX_DAK_Bedford_MWD", 0.5, 
+    "SPEX_DAK_Bedford_MWD_Open", 1.5 
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivBoat", [
@@ -22,6 +24,11 @@
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivMedical", [
+    "SPE_OpelBlitz_Ambulance", 1.5, 
+    "SPE_CCKW_353_Ambulance", 1.5,
+    "SPE_FFI_OpelBlitz_Ambulance", 0.5, 
+    "SPEX_CW_G503_MB_Ambulance", 0.125,
+    "SPEX_CW_Trop_G503_MB_Ambulance", 0.125
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivFuel", [
@@ -60,7 +67,29 @@ private _civUniforms = [
     "U_SPE_CIV_Citizen_6_trop",
     "U_SPE_CIV_Citizen_7",
     "U_SPE_CIV_Citizen_7_tie",
-    "U_SPE_CIV_Citizen_7_trop"
+    "U_SPE_CIV_Citizen_7_trop",
+    "U_SPE_CIV_Swetr_1",
+    "U_SPE_CIV_Swetr_1_vest",
+    "U_SPE_CIV_Swetr_2",
+    "U_SPE_CIV_Swetr_2_vest",
+    "U_SPE_CIV_Swetr_3",
+    "U_SPE_CIV_Swetr_3_vest",
+    "U_SPE_CIV_Swetr_4",
+    "U_SPE_CIV_Swetr_4_vest",
+    "U_SPE_CIV_Swetr_5",
+    "U_SPE_CIV_Swetr_5_vest",
+    "U_SPE_CIV_Worker_1",
+    "U_SPE_CIV_Worker_1_tie",
+    "U_SPE_CIV_Worker_1_trop",
+    "U_SPE_CIV_Worker_2",
+    "U_SPE_CIV_Worker_2_tie",
+    "U_SPE_CIV_Worker_2_trop",
+    "U_SPE_CIV_Worker_3",
+    "U_SPE_CIV_Worker_3_tie",
+    "U_SPE_CIV_Worker_3_trop",
+    "U_SPE_CIV_Worker_4",
+    "U_SPE_CIV_Worker_4_tie",
+    "U_SPE_CIV_Worker_4_trop"
 ];
 
 private _pressUniforms = [
@@ -91,10 +120,16 @@ private _workerUniforms = [
     "U_SPE_CIV_Worker_4_tie",
     "U_SPE_CIV_Worker_4_trop",
     "U_SPE_CIV_Worker_Coverall_1",
+    "U_SPE_CIV_Worker_Coverall_1",
+    "U_SPE_CIV_Worker_Coverall_1_trop",
     "U_SPE_CIV_Worker_Coverall_1_trop",
     "U_SPE_CIV_Worker_Coverall_2",
+    "U_SPE_CIV_Worker_Coverall_2",
+    "U_SPE_CIV_Worker_Coverall_2_trop",
     "U_SPE_CIV_Worker_Coverall_2_trop",
     "U_SPE_CIV_Worker_Coverall_3",
+    "U_SPE_CIV_Worker_Coverall_3",
+    "U_SPE_CIV_Worker_Coverall_3_trop",
     "U_SPE_CIV_Worker_Coverall_3_trop"
     ];           //Uniforms given to Workers at Factories/Resources
 
@@ -157,8 +192,8 @@ private _pressTemplate = {
 private _prefix = "militia";
 private _unitTypes = [
     ["Press", _pressTemplate],
-    ["Worker", _workerTemplate],
-    ["Man", _manTemplate]
+    ["Worker", _workerTemplate, nil, 10],
+    ["Man", _manTemplate, nil, 10]
 ];
 
 [_prefix, _unitTypes, _loadoutData] call _fnc_generateAndSaveUnitsToTemplate;

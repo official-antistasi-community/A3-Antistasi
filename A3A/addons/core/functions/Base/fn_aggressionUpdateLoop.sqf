@@ -73,6 +73,7 @@ while {true} do
         A3A_resourcesDefenceOcc = (A3A_resourcesDefenceOcc + _resRateDef) min _maxDef;
         A3A_resourcesAttackOcc = A3A_resourcesAttackOcc + _resRateAtk;
 
+        A3A_choosingAttack = true;
         if (A3A_resourcesAttackOcc > 0 && !bigAttackInProgress) then
         {
             private _success = [Occupants] call A3A_fnc_chooseAttack;
@@ -81,6 +82,7 @@ while {true} do
                 A3A_resourcesAttackOcc = A3A_resourcesAttackOcc - _resRateAtk*10;
             };
         };
+        A3A_choosingAttack = nil;
     };
 
     if (gameMode != 3) then
@@ -102,6 +104,7 @@ while {true} do
         A3A_resourcesDefenceInv = (A3A_resourcesDefenceInv + _resRateDef) min _maxDef;
         A3A_resourcesAttackInv = A3A_resourcesAttackInv + _resRateAtk;
 
+        A3A_choosingAttack = true;
         if (A3A_resourcesAttackInv > 0 && !bigAttackInProgress) then
         {
             private _success = [Invaders] call A3A_fnc_chooseAttack;
@@ -110,12 +113,21 @@ while {true} do
                 A3A_resourcesAttackInv = A3A_resourcesAttackInv - _resRateAtk*10;
             };
         };
+        A3A_choosingAttack = nil;
     };
 
-    // Check whether we should add city tasks
     {
+        if (sidesX getVariable _x == teamPlayer) then { continue };
+        if (_x in destroyedSites) then { continue };
+
+        // General idea: city with 100 pop regenerates 5 cops per hour?
+        private _reinfCount = sqrt (A3A_cityPop get _x) * sqrt A3A_balancePlayerScale / 120;
+        isNil { [_x, _reinfCount] call A3A_fnc_garrisonServer_cityReinf };
+
+        // Check whether we should add city tasks
         if (spawner getVariable (_x + "_civ") != 0) then { continue };
         [_x] call A3A_tasks_fnc_selectCityTask;
+
     } forEach citiesX;
 
     sleep 60;

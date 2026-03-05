@@ -121,6 +121,6 @@ class CfgVehicles
     
     //Tan-Camo
     class a3a_Heli_Attack_01_pylons_dynamicLoadout_sand_F : B_Heli_Attack_01_pylons_dynamicLoadout_F {
-        hiddenSelectionTextures[] = {"\lxWS\air_f_lxWS\Data\NATO\lxWS_Heli_Attack_01_sand_CO.paa"};
+        hiddenSelectionsTextures[] = {"\lxWS\air_f_lxWS\Data\NATO\lxWS_Heli_Attack_01_sand_CO.paa"};
     };
 };
