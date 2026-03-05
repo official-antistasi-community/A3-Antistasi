@@ -854,6 +854,7 @@ class CfgFunctions
             class deleteNamespace {};
             class filterAndWeightArray {};
             class findEmptyPos {};
+            class findEmptyPosCar {};
             class findPosNearHouse {};
             class getAdmin {};
             class isEngineer {};
