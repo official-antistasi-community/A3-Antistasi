@@ -100,7 +100,8 @@ if (currentWaypoint _group > 0) then
     [_patrolGroup, "Patrol_Area", 0, 200, -1, true, _targPos] call A3A_fnc_patrolLoop;
 
     // Now wait for the crate to hit the ground
-    waitUntil {sleep 1; diag_log velocity _parachute; getPosATL _crate#2 < 1};
+    sleep 5;
+    waitUntil {sleep 1; vectorMagnitude velocity _parachute < 0.1};
     sleep 3;
     detach _parachute;
     deleteVehicle _parachute;
