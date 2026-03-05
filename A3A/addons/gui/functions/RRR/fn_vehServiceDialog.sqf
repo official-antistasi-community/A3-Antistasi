@@ -132,11 +132,11 @@ switch (_mode) do
                 // new format? [magclass, turret, bulletCount, origCount]
                 private _originalMags = typeOf cursorObject call HR_GRG_fnc_getDefaultMags;
                 private _magsCombinedHM = createHashMap;
-                private _pylonMags = getAllPylonsInfo _veh apply {_x#3};
+                private _pylonMags = getAllPylonsInfo _veh select {_x#3 != ""} apply {[_x#3, _x#2, _x#4]};      // [magName, path, ammo]
+                private _allMags = magazinesAllTurrets _veh apply {_x select [0,3]};        // matched formats
+                _pylonMags apply {_allMags deleteAt (_allMags find _x)};
                 {
                     _x params ["_mag", "_turret", "_bullets"];
-                    // check for pylon
-                    if (_mag in _pylonMags) then {continue};
                     // blacklist
                     if (_mag in BLACKLISTED_MAGS) then {continue};
                     // check for laser
@@ -149,7 +149,7 @@ switch (_mode) do
                     private _val = _magsCombinedHM getOrDefault [_key, [_mag, _turret, 0, 0], true];
                     _val set [2, (_val#2) + _bullets];
                     _val set [3, (_val#3) + _count];
-                } forEach magazinesAllTurrets cursorObject;
+                } forEach _allMags;
 
                 private _magsCombined = values _magsCombinedHM;
                 _magsCombined sort true;
