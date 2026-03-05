@@ -132,8 +132,11 @@ switch (_mode) do
                 // new format? [magclass, turret, bulletCount, origCount]
                 private _originalMags = typeOf cursorObject call HR_GRG_fnc_getDefaultMags;
                 private _magsCombinedHM = createHashMap;
+                private _pylonMags = getAllPylonsInfo _veh apply {_x#3};
                 {
                     _x params ["_mag", "_turret", "_bullets"];
+                    // check for pylon
+                    if (_mag in _pylonMags) then {continue};
                     // blacklist
                     if (_mag in BLACKLISTED_MAGS) then {continue};
                     // check for laser
