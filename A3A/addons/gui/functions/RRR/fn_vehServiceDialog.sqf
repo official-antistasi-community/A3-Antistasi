@@ -138,20 +138,14 @@ switch (_mode) do
                     if (_mag in BLACKLISTED_MAGS) then {continue};
                     // check for laser
                     private _ammo = getText(configFile >> "CfgMagazines" >> _mag >> "ammo");
+                    private _count = getNumber (configFile >> "CfgMagazines" >> _mag >> "count");
                     private _sim = getText(configFile >> "CfgAmmo" >> _ammo >> "simulation");
                     if (_sim in BLACKLISTED_SIMS) then {continue};
 
                     private _key = tolower _mag + str _turret;        // RHS lol
                     private _val = _magsCombinedHM getOrDefault [_key, [_mag, _turret, 0, 0], true];
-                    _val set [3, (_val#3) + _bullets];
-                } forEach _originalMags;
-
-                {
-                    _x params ["_mag", "_turret", "_bullets"];
-                    private _key = tolower _mag + str _turret;
-                    if !(_key in _magsCombinedHM) then {continue};          // Ignore anything that isn't in original loadout (could be pylon, blacklist, whatever)
-                    private _val = _magsCombinedHM get _key;
                     _val set [2, (_val#2) + _bullets];
+                    _val set [3, (_val#3) + _count];
                 } forEach magazinesAllTurrets cursorObject;
 
                 private _magsCombined = values _magsCombinedHM;
