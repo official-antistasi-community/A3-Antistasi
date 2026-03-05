@@ -14908,7 +14908,7 @@
         <Chinesesimp>仅限指挥官使用。设置每个服务器或无头客户端的最大AI数量。不超过200个AI时, AI表现应当正常。</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_journal_entry_text_Options_3">
-        <Original>Commander Only. You may save the game at your HQ Map. This will allow you to continue playing upon mission update or server restart, preserving stats, player's equipment, conquered zones, enemy asset availability and many more things. WARNING: Normal save and load runs badly in this mission. This system is your only guarantee of saving the game properly</Original>
+        <Original>Commander Only. You may save the game in the Y-menu, in the Commander or Admin tabs. This will allow you to continue playing upon mission update or server restart, preserving stats, player's equipment, conquered zones, enemy asset availability and many more things. WARNING: Normal save and load runs badly in this mission. This system is your only guarantee of saving the game properly</Original>
         <Italian>Solo per il comandante. Puoi salvare il gioco sulla mappa del quartier generale. Ciò ti consentirà di continuare a giocare dopo l'aggiornamento della missione o il riavvio del server, preservando le statistiche, l'equipaggiamento del giocatore, le zone conquistate, la disponibilità delle risorse nemiche e molte altre cose. ATTENZIONE: il salvataggio e il caricamento normali funzionano male in questa missione. Questo sistema è la tua unica garanzia per salvare il gioco correttamente</Italian>
         <Spanish>Solo para el Comandante. Puedes guardar la partida en tu Mapa del CG. Esto te permite continuar en caso de actualización o reseteo del servidor, preservando las estadísticas, el equipo del jugador, zonas conquistadas, disponibilidad de equipo del enemigo y otras muchas cosas. ATENCIÓN: Guardar y cargar el juego de forma habitual no funciona de forma correcta en esta misión. Este método es tu única garantia de guardar el juego de forma apropiada.</Spanish>
         <French>Commandant seulement. Vous pouvez enregistrer le jeu sur votre carte au QG. Cela vous permettra de continuer à jouer après la mise à jour de la mission ou le redémarrage du serveur, en préservant les statistiques, l'équipement du joueur, les zones conquises, la disponibilité des ressources ennemies et bien d'autres choses. AVERTISSEMENT: la sauvegarde et le chargement normaux fonctionnent mal dans cette mission. Ce système est votre seule garantie de sauvegarder correctement le jeu</French>
@@ -15039,15 +15039,15 @@
         <Chinesesimp>按下 End 启用/禁用耳塞。使用ACE时无法使用。</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_journal_entry_text_SpecialK_6">
-        <Original>Press ALT+HOME to show / hide information bar at the top of the screen.</Original>
-        <Italian>Premi ALT+HOME per visualizzare / nascondere la barra informazioni in alto allo schermo.</Italian>
-        <Spanish>Presiona ALT + HOME para mostrar / ocultar la barra de información arriba de la pantalla.</Spanish>
-        <French>Appuyez sur ALT+HOME pour montrer / cacher la barre d'information en haut de l'écran.</French>
+        <Original>Press CTRL+F12 to show / hide information bar at the top of the screen. This can be rebound in your Arma Controls menu.</Original>
+        <Italian>Premi CTRL+F12 per visualizzare / nascondere la barra informazioni in alto allo schermo.</Italian>
+        <Spanish>Presiona CTRL+F12 para mostrar / ocultar la barra de información arriba de la pantalla.</Spanish>
+        <French>Appuyez sur CTRL+F12 pour montrer / cacher la barre d'information en haut de l'écran.</French>
         <Korean>알트 + 홈 키를 눌러 화면 상단의 정보 표시줄을 표시하거나 숨깁니다.</Korean>
-        <Russian>Нажмите ALT+HOME, чтобы отобразить/скрыть информационную строку в верхней части экрана.</Russian>
-        <Polish>Naciśnij klawisze ALT+HOME, aby wyświetlić/ukryć pasek informacyjny u góry ekranu.</Polish>
-        <Czech>Stisknout ALT+HOME k zobrazení / skrytí info lišty v horní části obrazovky</Czech>
-        <Chinesesimp>按ALT+HOME来显示/隐藏顶部信息栏。</Chinesesimp>
+        <Russian>Нажмите CTRL+F12, чтобы отобразить/скрыть информационную строку в верхней части экрана.</Russian>
+        <Polish>Naciśnij klawisze CTRL+F12, aby wyświetlić/ukryć pasek informacyjny u góry ekranu.</Polish>
+        <Czech>Stisknout CTRL+F12 k zobrazení / skrytí info lišty v horní části obrazovky</Czech>
+        <Chinesesimp>按CTRL+F12E来显示/隐藏顶部信息栏。</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_journal_entry_text_tutorial_1">
         <Original>Don't expect to be able to conquer anything in the early stages. First you have to gather enough resources (HR and Money) in order to be able to conquer and hold your positions. This mission tries to simulate real life guerilla situations. If in doubt, ask yourself what would you do in real life. Don't expect to win every time. Hit and Run is the basic manoeuvre here. Earn every resource, weapon and ammunition to gather enough assets in order to be a real challenge for the enemy. In the meantime, disturb its operations and gain support from the population.</Original>

@@ -13,11 +13,10 @@ switch (_key) do {
     // Actions below here aren't valid until the game is started and client init is complete
     if (isNil "initClientDone") exitWith {};
 
-    case ("newgui");
     case QGVAR(battleMenu): {
         if (player getVariable ["incapacitated",false]) exitWith {};
         if (player getVariable ["owner",player] != player) exitWith {};
-        if (GVAR(keys_battleMenu) && !(_key == "newgui")) exitWith {};         // fucking thing actually refires on closeDialog?
+        if (GVAR(keys_battleMenu)) exitWith {};         // fucking thing actually refires on closeDialog?
         if (dialog) exitWith {};
         GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
 
@@ -28,47 +27,32 @@ switch (_key) do {
         // Problem 4: Unless there's a dialog open, the default Y key bind will also open or ping Zeus.
         // Problem 5: Arma likes to refire the key events when you close a dialog.
         // tl;dr: Do not rearrange this logic or clowns will eat your children.
-        if (A3A_GUIDevPreview || (_key == "newgui")) then {
-            createDialog "A3A_dummyDialog";
-            player setVariable ["autoSwitchGroups", [hcSelected player, false]];
-            [] spawn {
-                closeDialog 0;
-                waitUntil { showCommandingMenu ""; hcSelected player isEqualTo [] };
-                createDialog "A3A_MainDialog";
-                sleep 1; 
-                GVAR(keys_battleMenu) = false;
-            };
-        } else {
+        createDialog "A3A_dummyDialog";
+        player setVariable ["autoSwitchGroups", [hcSelected player, false]];
+        [] spawn {
             closeDialog 0;
-            createDialog "radio_comm";
-            [] spawn { sleep 1; GVAR(keys_battleMenu) = false; };   
-        */
+            waitUntil { showCommandingMenu ""; hcSelected player isEqualTo [] };
+            createDialog "A3A_MainDialog";
+            sleep 1; 
+            GVAR(keys_battleMenu) = false;
+        };
     };
 
-    // Old Battle Menu function
-    /*
     case QGVAR(artyMenu): {
         if (player getVariable ["incapacitated",false]) exitWith {};
         if (player getVariable ["owner",player] != player) exitWith {};
         if (player isEqualTo theBoss) then {
-            if (A3A_GUIDevPreview) then {
-                [] spawn {
-                    player setVariable ["autoSwitchGroups", [hcSelected player, true]];
-                    showCommandingMenu "";                          // clear the command menu so that we have the scroll wheel  
-                    private _timeout = time;  
-                    waitUntil { hcSelected player isEqualTo [] or time - _timeout > 1 };  
-                    createDialog "A3A_MainDialog";  
-                    sleep 1;  
-                    player setVariable ["autoSwitchGroups", []];  
-                };  
-            } else {
-                GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
-                [] spawn A3A_fnc_artySupport;
-                [] spawn { sleep 1; GVAR(keys_battleMenu) = false;};
-            };
+            [] spawn {
+                player setVariable ["autoSwitchGroups", [hcSelected player, true]];
+                showCommandingMenu "";                          // clear the command menu so that we have the scroll wheel  
+                private _timeout = time;  
+                waitUntil { hcSelected player isEqualTo [] or time - _timeout > 1 };  
+                createDialog "A3A_MainDialog";  
+                sleep 1;  
+                player setVariable ["autoSwitchGroups", []];  
+            };  
         };
     };
-    */
 
     case QGVAR(infoBar): {
         if (isNull (uiNameSpace getVariable "H8erHUD")) exitWith {};
