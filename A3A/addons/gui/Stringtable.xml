@@ -5085,7 +5085,6 @@
       <Key ID="STR_antistasi_commad_creditsMain">
         <Original>Use the forward and backward buttons to view images from the community servers.\n\nAntistasi Banner\nComposed by %1\nImages by %1, %2\nSoldiers from %3, %4</Original>
       </Key>
-      </Container>
       <Container name="options_dialog">
       <Key ID="STR_antistasi_clientOptions_title">
         <Original>ANTISTASI OPTIONS</Original>

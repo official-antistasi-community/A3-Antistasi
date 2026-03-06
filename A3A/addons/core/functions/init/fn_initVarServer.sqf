@@ -317,13 +317,15 @@ Info("Reading templates");
 {
     private _side = [west, east, resistance, civilian] # _forEachIndex;
     Info_2("Loading template %1 for side %2", _x, _side);
-	private _type = ["Occ", "Inv", "Reb", "Civ"] # _forEachIndex;
-    missionNamespace setVariable ["A3A_"+_type+"_template", _x];			// don't actually need this atm, but whatever
 
 	private _cfg = configFile/"A3A"/"Templates"/_x;
 	private _basepath = getText (_cfg/"basepath") + "\";
 	private _file = getText (_cfg/"file") + ".sqf";
     [_basepath + _file, _side] call A3A_fnc_compatibilityLoadFaction;
+
+    private _type = ["Occ", "Inv", "Reb", "Civ"] # _forEachIndex;
+    missionNamespace setVariable ["A3A_"+_type+"_template", _x];			// don't actually need this atm, but whatever
+
 } forEach (_saveData get "factions");
 
 {

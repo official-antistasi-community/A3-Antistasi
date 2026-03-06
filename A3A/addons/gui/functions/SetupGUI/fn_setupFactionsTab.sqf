@@ -28,12 +28,6 @@ Return Value:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-#if __A3_DEBUG__
-    private _a3Debug = true;
-#else
-    private _a3Debug = false;
-#endif
-
 params ["_mode", "_params"];
 
 Debug_1("setupFactionsTab called with mode %1", _mode);
@@ -74,9 +68,6 @@ if (isNil {_display getVariable "validFactions"}) then
     private _factTypeHM = createHashMapFromArray [["Occ", 0], ["Inv", 1], ["Reb", 2], ["Civ", 3]];
     {
         if (getText (_x/"side") == "") then { continue };
-        private _scope = if (isNumber (_x/"scope")) then {getNumber (_x/"scope")} else { 2 };
-        if (_scope isEqualTo 0) then { continue };
-        if (_scope isEqualTo 1 && (!_a3Debug)) then { continue };
         private _factIndex = _factTypeHM get getText (_x/"side");
         (_factions select _factIndex) pushBack _x;
     } forEach ("true" configClasses (A3A_SETUP_CONFIGFILE/"A3A"/"Templates"));

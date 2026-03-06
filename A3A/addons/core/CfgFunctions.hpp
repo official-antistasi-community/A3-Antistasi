@@ -764,7 +764,6 @@ class CfgFunctions
             class compatibilityLoadFaction {};
             class compileGroups {};
             class compileMissionAssets {};
-            class getConfigTemplate {};
             class getLoadout {};
             class loadFaction {};
             class ifaModCompat {};

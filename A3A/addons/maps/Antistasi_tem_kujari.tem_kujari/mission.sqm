@@ -322,7 +322,7 @@ class Mission
 {
 	class Intel
 	{
-        briefingName=$STR_antistasi_mission_info_tem_kujari_mapname_text;
+        briefingName=$STR_antistasi_mission_info_kujari_mapname_text;
 		resistanceWest=0;
 		startWind=0.1;
 		forecastWind=0.1;

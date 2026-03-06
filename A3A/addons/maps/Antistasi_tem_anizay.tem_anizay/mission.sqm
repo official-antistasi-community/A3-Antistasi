@@ -262,7 +262,7 @@ class Mission
 	assetType="Free";
 	class Intel
 	{
-		briefingName=$STR_antistasi_mission_info_tem_anizay_mapname_text;
+		briefingName=$STR_antistasi_mission_info_anizay_mapname_text;
 		resistanceWest=0;
 		year=2035;
 		month=6;
