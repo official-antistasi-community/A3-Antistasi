@@ -9,7 +9,8 @@ class Templates
         logo = "a3\ui_f\data\logos\arma3_white_ca.paa";                 // the path to the icon logo for this modset
         basepath = QPATHTOFOLDER(Templates\Templates\Vanilla);          // the path to the template folder
         priority = 10;                                                  // how high in the faction selector this faction should appear
-        equipFlags[] = {"vanilla"};                                     // any special flags this modset should use
+        equipFlags[] = {"vanilla"};                                     // any special flags this modset should use. lowTech is the only one you should use without messing with random stuff. available options:
+                                                                        // {"vanilla","lowTech","replaceCompass","replaceWatch","specialGM"}
         year = 2035;                                                    // the approximate year that this faction/modset was operational in, based on gear. can vary per faction
         scope = 2;                                                      // 0 = not shown, 1 = shown only in debug mode, 2 = always visible. default 2. Should not need to include this line.
     };
@@ -20,7 +21,9 @@ class Templates
         flagTexture = "A3\Data_F\Flags\Flag_CSAT_CO.paa";               // path to the texture of the flag
         name = "A3 CSAT Arid";                                          // name as it should show up in the faction selector. prefix faction camo
         file = "Vanilla_AI_CSAT_Arid";                                  // name of the file in the basepath folder. can be anything, but convention is faction_(AI/Reb/Civ)_Faction_Camo
-        climate[] = {"arid", "arctic"};                                 // climates this faction will appear as available in
+        climate[] = {"arid", "arctic"};                                 // climates this faction will appear as available in. available climates:
+                                                                        // climate[]  = {"arid", "arctic", "temperate", "tropical"}
+        maps[] = {};                                                    // the maps where this faction will be prioritized. think the AAF appearing first on Altis.
         shortName = "CSAT";                                             // the name shown in the faction info title
         lore = "What acronym means, supplying country, service rifle."; // lore will go into the bottom left information section. should have an explanation of the acronym and what common vehicles / weapons are used
         supportSide = -1;                                               // the alignment of the faction, based on the side. -1 for east, 1 for west. can be any number in between. this decides the supports the faction uses.
