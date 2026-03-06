@@ -82,6 +82,22 @@ if (_side in [Occupants, Invaders]) then {
         select { [_x] call A3A_Logistics_fnc_getVehCapacity > 1 };
     _faction set ["vehiclesCargo", _cargoCapable];
 
+    private _faction = Faction(_side);
+    private _noSAM = _faction getOrDefault ["attributeNoSAM", false];
+    if (!_noSAM) then {
+        private _configSide = [_side, "supportSide", 0] call A3A_fnc_getConfigTemplate;
+        private _SAMs = _faction get "vehiclesSAM";
+        if (_SAMs isEqualTo [] && (!_noSAM)) then {
+            private _selectedSAM = ["O_SAM_System_04_F", "B_SAM_System_03_F"] select (_configSide > 0);
+            _faction set ["vehiclesSAM", [_selectedSAM]];
+        };
+        private _radars = _faction get "vehiclesRadar";
+        if (_radars isEqualTo []) then {
+            private _selectedRadar = ["O_Radar_System_02_F", "B_Radar_System_01_F"] select (_configSide > 0);
+            _faction set ["vehiclesRadar", [_selectedRadar]];
+        };
+    };
+
     private _noType = [];
     if ((_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack") + (_faction get "vehiclesHelisTransport")
         + (_faction get "vehiclesHelisLight") isEqualTo []) then { _noType pushBack "heli" };

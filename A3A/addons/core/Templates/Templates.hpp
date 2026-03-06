@@ -1,6 +1,38 @@
 
 class Templates
 {
+    // ***************************** Template ***************************
+    /*
+    class Prefix_Base
+    {
+        requiredAddons[] = {};                                          // the required CfgPatches entries for this faction to work properly. minimum required, soft dependencies are done in the file itself
+        logo = "a3\ui_f\data\logos\arma3_white_ca.paa";                 // the path to the icon logo for this modset
+        basepath = QPATHTOFOLDER(Templates\Templates\Vanilla);          // the path to the template folder
+        priority = 10;                                                  // how high in the faction selector this faction should appear
+        equipFlags[] = {"vanilla"};                                     // any special flags this modset should use
+        year = 2035;                                                    // the approximate year that this faction/modset was operational in, based on gear. can vary per faction
+        scope = 2;                                                      // 0 = not shown, 1 = shown only in debug mode, 2 = always visible. default 2. Should not need to include this line.
+    };
+
+    class Prefix_Faction_Camo : Template_Base
+    {
+        side = "Occ";                                                   // one of "Occ", "Inv", "Reb", "Civ" depending on side
+        flagTexture = "A3\Data_F\Flags\Flag_CSAT_CO.paa";               // path to the texture of the flag
+        name = "A3 CSAT Arid";                                          // name as it should show up in the faction selector. prefix faction camo
+        file = "Vanilla_AI_CSAT_Arid";                                  // name of the file in the basepath folder. can be anything, but convention is faction_(AI/Reb/Civ)_Faction_Camo
+        climate[] = {"arid", "arctic"};                                 // climates this faction will appear as available in
+        shortName = "CSAT";                                             // the name shown in the faction info title
+        lore = "What acronym means, supplying country, service rifle."; // lore will go into the bottom left information section. should have an explanation of the acronym and what common vehicles / weapons are used
+        supportSide = -1;                                               // the alignment of the faction, based on the side. -1 for east, 1 for west. can be any number in between. this decides the supports the faction uses.
+                                                                        // generally west should be considered as the US and allied nations and east should be whatever nations oppose them.
+                                                                        // so west would be US / Allies in WW2, NATO countries in Cold War / 2035. East could be Germany in WW2, Soviets / Warsaw Pact powers in Cold War, and CSAT in 2035.
+                                                                        // a faction that doesn't really fit here, say an african faction, should be 0 to avoid using heavy items from either side. NATO or Warsaw countries that dont use the full extent of gear should be less, like 0.5.
+                                                                        // this value allows more specialized supports to be used, like Scuds exclusively for Eastern factions
+                                                                        // soft rules: superpowers should be 1, countries in a coalition (Allies, NATO, Warsaw, CSAT) should be > 0.5. major non-allies or backed countries should be 0.4-0.5. Countries with divided stuff should be no more than 0.3
+        supports = {[], []};                                            // special cases where a faction use/not use a certain support despite their SIDE and YEAR (dis)allowing it. generally can ignore
+    };
+    */
+
     // ***************************** Vanilla *****************************
     class Vanilla_Base
     {
@@ -9,6 +41,7 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\Vanilla); //the path to the template folder
         priority = 10;
         equipFlags[] = {"vanilla"};
+        year = 2035;
     };
 
     class Vanilla_CSAT_Arid : Vanilla_Base
@@ -20,6 +53,7 @@ class Templates
         climate[] = {"arid", "arctic"};
         shortName = "CSAT";
         lore = $STR_A3A_templates_lore_CSAT;
+        supportSide = -1;
     };
     class Vanilla_CSAT_Temperate : Vanilla_CSAT_Arid
     {
@@ -53,6 +87,7 @@ class Templates
         climate[] = {"arid"};
         shortName = "NATO";
         lore = $STR_A3A_templates_lore_NATO;
+        supportSide = 1;
     };
     class Vanilla_NATO_Tropical : Vanilla_NATO_Arid
     {
@@ -107,6 +142,7 @@ class Templates
         forceDLC[] = {"enoch"};
         shortName = "LDF";
         lore = $STR_A3A_templates_lore_LDF;
+        supportSide = 0.6;
     };
 
     class Vanilla_AAF : Vanilla_Base
@@ -119,6 +155,7 @@ class Templates
         climate[] = {"arid"};
         shortName = "AAF";
         lore = $STR_A3A_templates_lore_AAF;
+        supportSide = -0.2;
     };
     class Vanilla_ION : Vanilla_Base
     {
@@ -131,6 +168,7 @@ class Templates
         priority = 5;
         shortName = "ION";
         lore = $STR_A3A_templates_lore_ION;
+        supportSide = 0.2;
     };
 
     class Vanilla_FIA : Vanilla_Base
@@ -221,6 +259,7 @@ class Templates
         file = "WS_AI_ION";
         shortName = "ION";
         lore = $STR_A3A_templates_lore_WS_AI_ION;
+        supportSide = 0.2;
     };
     class WS_SIFA : WS_Base
     {
@@ -230,6 +269,7 @@ class Templates
         file = "WS_AI_SFIA";
         shortName = "SFIA";
         lore = $STR_A3A_templates_lore_WS_AI_SIFA;
+        supportSide = -0.8;
     };
     class WS_ADF : WS_Base
     {
@@ -239,6 +279,7 @@ class Templates
         file = "WS_AI_ADF";
         shortName = "ADF";
         lore = $STR_A3A_templates_lore_WS_AI_ADF;
+        supportSide = 0.7;
     };
     class WS_CSAT : WS_Base
     {
@@ -248,6 +289,7 @@ class Templates
         file = "WS_AI_CSAT_NAfrica";
         shortName = "CSAT";
         lore = $STR_A3A_templates_lore_CSAT;
+        supportSide = -1;
     };
     class WS_TURA : WS_Base
     {
@@ -274,7 +316,8 @@ class Templates
         name = "WS NATO Desert";
         file = "WS_AI_NATO_Desert";
         shortName = "NATO";
-        lore = $STR_A3A_templates_lore_NATO;     
+        lore = $STR_A3A_templates_lore_NATO;
+        supportSide = 1; 
     };
 
     // ***************************** EF *****************************
@@ -297,6 +340,7 @@ class Templates
         shortName = "MJTF";
         lore = $STR_A3A_templates_lore_NATO;     
         climate[] = {"arid", "arctic"};
+        supportSide = 1;
     };
     
     class EF_MJTF_Temperate : EF_MJTF_Arid
@@ -316,6 +360,7 @@ class Templates
         priority = 20;
         equipFlags[] = {"lowTech","replaceCompass","replaceWatch"};
         forceDLC[] = {"vn"};
+        year = 1970;
     };
 
     class VN_USMC : VN_Base
@@ -325,6 +370,8 @@ class Templates
         name = "VN USMC";
         file = "VN_AI_USMC";
         shortName = "USMC";
+        lore = $STR_A3A_templates_lore_VN_AI_USMC;
+        supportSide = 1;
     };
 
     class VN_ANZAC : VN_Base
@@ -334,6 +381,8 @@ class Templates
         name = "VN ANZAC";
         file = "VN_AI_ANZAC";
         shortName = "ANZAC";
+        lore = $STR_A3A_templates_lore_VN_AI_ANZAC;
+        supportSide = 0.7;
     };
 
     class VN_MACV : VN_Base
@@ -344,6 +393,7 @@ class Templates
         file = "VN_AI_MACV";
         shortName = "MACV";
         lore = $STR_A3A_templates_lore_VN_AI_MACV;
+        supportSide = 1;
     };
 
     class VN_PAVN : VN_Base
@@ -354,6 +404,7 @@ class Templates
         file = "VN_AI_PAVN";
         shortName = "PAVN";
         lore = $STR_A3A_templates_lore_VN_AI_PAVN;
+        supportSide = -0.7;
     };
 
     class VN_POF : VN_Base
@@ -392,6 +443,8 @@ class Templates
         name = "Aegis Iran";
         file = "Aegis_AI_Iran";
         climate[] = {"arid", "arctic"};
+        lore = $STR_A3A_templates_lore_Aegis_Iran;
+        supportSide = -1;
     };
     class Aegis_China : Aegis_Iran
     {
@@ -400,6 +453,8 @@ class Templates
         file = "Aegis_AI_China";
         climate[] = {"tropical"};
         forceDLC[] = {"expansion"};
+        lore = $STR_A3A_templates_lore_Aegis_China;
+        supportSide = -1;
     };
     class Aegis_Russia : Aegis_Iran
     {
@@ -408,6 +463,8 @@ class Templates
         file = "Aegis_AI_Russia";
         climate[] = {"temperate"};
         forceDLC[] = {"enoch"};
+        lore = $STR_A3A_templates_lore_Aegis_Russia;
+        supportSide = -0.8;
     };
     class Aegis_US_Arid : Aegis_Base
     {
@@ -416,6 +473,8 @@ class Templates
         name = "Aegis US Arid";
         file = "Aegis_AI_US_Arid";
         climate[] = {"arid"};
+        lore = $STR_A3A_templates_lore_Aegis_US;
+        supportSide = 0.9;
     };
     class Aegis_US_Tropical : Aegis_US_Arid
     {
@@ -437,6 +496,8 @@ class Templates
         file = "Aegis_AI_BAF_Arid";
         climate[] = {"arid"};
         forceDLC[] = {"enoch"};
+        lore = $STR_A3A_templates_lore_BAF;
+        supportSide = 0.8;
     };
     class Aegis_BAF_Tropical : Aegis_BAF_Arid
     {
@@ -461,6 +522,8 @@ class Templates
         maps[] = {"enoch","vt7"};
         climate[] = {"temperate"};
         forceDLC[] = {"enoch"};
+        lore = $STR_A3A_templates_lore_LDF;
+        supportSide = 0.6;
     };
     class Aegis_AAF : Aegis_Base
     {
@@ -470,6 +533,8 @@ class Templates
         file = "Aegis_AI_AAF";
         maps[] = {"altis"};
         climate[] = {"arid"};
+        lore = $STR_A3A_templates_lore_AAF;
+        supportSide = -0.2;
     };
 
     class Aegis_FIA : Aegis_Base
@@ -478,6 +543,7 @@ class Templates
         flagTexture = "a3\data_f\flags\flag_fia_co.paa";
         name = "Aegis FIA";
         file = "Aegis_Reb_FIA";
+        lore = $STR_A3A_templates_lore_FIA;
     };
 
     class Aegis_SDK : Aegis_Base
@@ -489,6 +555,7 @@ class Templates
         maps[] = {"tanoa"};
         climate[] = {"tropical"};
         forceDLC[] = {"expansion"};
+        lore = $STR_A3A_templates_lore_SDK;
     };
 
     class Aegis_Civ : Aegis_Base
@@ -497,6 +564,7 @@ class Templates
         flagTexture = "a3\data_f\flags\flag_aaf_co.paa";
         name = "Aegis";
         file = "Aegis_Civ";
+        lore = $STR_A3A_templates_lore_CIV;
     };
 
     // ***************************** RHS *****************************
@@ -507,6 +575,7 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\RHS);
         logo = "\rhsusf\addons\rhsusf_main\data\rhs_logo_ca.paa";
         priority = 30;
+        year = 2005;
     };
 
     class RHS_AFRF_Arid : RHS_Base
@@ -519,6 +588,7 @@ class Templates
         climate[] = {"arid"};
         shortName = "AFRF";
         lore = $STR_A3A_templates_lore_AFRF;
+        supportSide = -1;
     };
     class RHS_AFRF_Temperate : RHS_AFRF_Arid
     {
@@ -537,6 +607,7 @@ class Templates
         logo = "\rhsafrf\addons\rhs_main\data\rhs_logo_ca.paa";
         shortName = "VDV";
         lore = $STR_A3A_templates_lore_VDV;
+        supportSide = -1;
     };
 
     class RHS_VDV_Arid : RHS_VDV_Temperate
@@ -556,6 +627,8 @@ class Templates
         logo = "\rhsgref\addons\rhsgref_main\data\rhs_logo_ca.paa";
         shortName = "ChDKZ";
         lore = $STR_A3A_templates_lore_RHS_AI_ChDKZ;
+        supportSide = -0.8;
+        year = 1995;
     };
     class RHS_HIDF : RHS_Base
     {
@@ -568,6 +641,8 @@ class Templates
         logo = "\rhsgref\addons\rhsgref_main\data\rhs_logo_ca.paa";
         shortName = "HIDF";
         lore = $STR_A3A_templates_lore_3CB_AI_HIDF;
+        supportSide = 0.5;
+        year = 1990;
     };
     
     class RHS_TLA : RHS_Base
@@ -581,6 +656,8 @@ class Templates
         logo = "\rhsgref\addons\rhsgref_main\data\rhs_logo_ca.paa";
         shortName = "TLA";
         lore = $STR_A3A_templates_lore_TLA;
+        supportSide = -0.5;
+        year = 1990;
     };
     
     class RHS_CDF : RHS_Base
@@ -592,6 +669,8 @@ class Templates
         maps[] = {"chernarus_summer","chernarus_winter","chernarus"};
         shortName = "CDF";
         lore = $STR_A3A_templates_lore_CDF;
+        supportSide = -0.6; // still militarily completely soviet
+        year = 1995;
     };
 
     class RHS_USAF_Army_Arid : RHS_Base
@@ -603,6 +682,7 @@ class Templates
         climate[] = {"arid"};
         shortName = "US Army";
         lore = $STR_A3A_templates_lore_USAF;
+        supportSide = 1;
     };
     class RHS_USAF_Army_Temperate : RHS_USAF_Army_Arid
     {
@@ -641,6 +721,7 @@ class Templates
         file = "RHS_Reb_SDK";
         maps[] = {"tanoa"};
         climate[] = {"tropical"};
+        lore = $STR_A3A_templates_lore_SDK;
     };
 
     class RHS_Civ : RHS_Base
@@ -653,12 +734,9 @@ class Templates
         lore = $STR_A3A_templates_lore_CIV;
     };
 
-    class RHS_SAF_Base
+    class RHS_SAF_Base : RHS_Base
     {
         requiredAddons[] = {"rhssaf_main"};
-        basepath = QPATHTOFOLDER(Templates\Templates\RHS);
-        logo = "\rhssaf\addons\rhssaf_main\data\rhs_logo_ca.paa";
-        priority = 30;
     };
     class RHS_SAF : RHS_SAF_Base
     {
@@ -668,6 +746,7 @@ class Templates
         file = "RHS_AI_SAF";
         shortName = "SAF";
         lore = $STR_A3A_templates_lore_RHS_AI_SAF;
+        supportSide = -0.5;
     };
 	
 
@@ -680,6 +759,7 @@ class Templates
 	    flagTexture = "\sfp_config\data\flag_sweden_co.paa";
         priority = 70;
         shortName = "SDF";
+        supportSide = 0.7;
     };
     class SFP_SAF00 : SFP_Base
     {
@@ -688,30 +768,26 @@ class Templates
         file = "SFP_AI_SWE_early";
         climate[] = {"temperate","tropical","arid"};
         lore = $STR_A3A_templates_lore_SFP_SAF00;
+        year = 2000;
     };
-    class SFP_SAF00_Arctic : SFP_Base
+    class SFP_SAF00_Arctic : SFP_SAF00
     {
-	    side = "Occ";
         name = "SFP Early SDF ARCTIC";
         file = "SFP_AI_SWE_early_snow";
         climate[] = {"arctic"};
-        lore = $STR_A3A_templates_lore_SFP_SAF00;
     };
-    class SFP_SAF15 : SFP_Base
+    class SFP_SAF15 : SFP_SAF00
     {
-	    side = "Occ";
         name = "SFP Modern SDF";
         file = "SFP_AI_SWE";
-        climate[] = {"temperate","tropical","arid"};
         lore = $STR_A3A_templates_lore_SFP_SAF15;
+        year = 2015;
     };
-    class SFP_SAF15_Arctic : SFP_Base
+    class SFP_SAF15_Arctic : SFP_SAF15
     {
-	    side = "Occ";
         name = "SFP Modern SDF ARCTIC";
         file = "SFP_AI_SWE_snow";
         climate[] = {"arctic"};
-        lore = $STR_A3A_templates_lore_SFP_SAF15;
     };
     //************* 3CB Factions ***************************************************
 
@@ -726,6 +802,8 @@ class Templates
     class 3CBF_CSAT_Base : 3CBF_Base
     {
         basepath = QPATHTOFOLDER(Templates\Templates\3CB\3CB_CSAT);
+        supportSide = -1;
+        year = 2015;
     };
     
     class 3CB_CSAT_BRU : 3CBF_CSAT_Base {
@@ -736,6 +814,7 @@ class Templates
         flagTexture = "uk3cb_factions\addons\uk3cb_factions_cst\flag\csat_w_regiment_flag_co.paa";
         name = "3CB CSAT BEAR";
         file = "3CB_AI_CSAT_Bru";
+        lore = $STR_A3A_templates_lore_3CB_CSAT_BRU;
     };
     
     class 3CB_CSAT_CHI : 3CBF_CSAT_Base {
@@ -746,6 +825,7 @@ class Templates
         flagTexture = "uk3cb_factions\addons\uk3cb_factions_cst\flag\csat_g_regiment_flag_co.paa";
         name = "3CB CSAT VIPER";
         file = "3CB_AI_CSAT_Chi";
+        lore = $STR_A3A_templates_lore_3CB_CSAT_CHI;
     };
     
     class 3CB_CSAT_FRE : 3CBF_CSAT_Base {
@@ -756,6 +836,7 @@ class Templates
         flagTexture = "uk3cb_factions\addons\uk3cb_factions_cst\flag\csat_a_regiment_flag_co.paa";
         name = "3CB CSAT SCIMITAR";
         file = "3CB_AI_CSAT_Fre";
+        lore = $STR_A3A_templates_lore_3CB_CSAT_FRE;
     };
     
     class 3CB_CSAT_PER : 3CBF_CSAT_Base {
@@ -766,6 +847,7 @@ class Templates
         flagTexture = "uk3cb_factions\addons\uk3cb_factions_cst\flag\csat_b_regiment_flag_co.paa";
         name = "3CB CSAT GRYPHON";
         file = "3CB_AI_CSAT_Per";
+        lore = $STR_A3A_templates_lore_3CB_CSAT_PER;
     };
 
     class 3CBF_ADA : 3CBF_Base
@@ -777,6 +859,8 @@ class Templates
         climate[] = {"arid"};
         shortName = "ADA";
         lore = $STR_A3A_templates_lore_3CB_AI_ADA;
+        supportSide = 0.1;
+        year = 1980;
     };
 
     class 3CBF_ANA : 3CBF_Base
@@ -788,6 +872,8 @@ class Templates
         climate[] = {"arid"};
         shortName = "ANA";
         lore = $STR_A3A_templates_lore_3CB_AI_ANA;
+        supportSide = 0.2;
+        year = 2000;
     };
 
     class 3CBF_CW_SOV : 3CBF_Base
@@ -799,6 +885,8 @@ class Templates
         climate[] = {"temperate","tropical","arctic"};
         shortName = "CW SOV";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_Sov;
+        supportSide = -1;
+        year = 1985;
     };
 	
     class 3CBF_TLA : 3CBF_Base
@@ -809,6 +897,9 @@ class Templates
         file = "3CB_AI_TLA";
         maps[] = {"tanoa"};
         climate[] = {"tropical"};
+        lore = $STR_A3A_templates_lore_TLA;
+        supportSide = -0.5;
+        year = 1980;
     };
 	
     class 3CBF_PLM : 3CBF_Base
@@ -819,6 +910,9 @@ class Templates
         file = "3CB_AI_PLM";
         maps[] = {"tanoa"};
         climate[] = {"tropical"};
+        lore = $STR_A3A_templates_lore_3CBF_PLM;
+        supportSide = -0.5;
+        year = 1970;
     };
 	
     class 3CBF_TNM : 3CBF_Base
@@ -829,6 +923,9 @@ class Templates
         file = "3CB_AI_TNM";
         maps[] = {"tanoa"};
         climate[] = {"tropical"};
+        lore = $STR_A3A_templates_lore_3CBF_TNM;
+        supportSide = 0.5;
+        year = 1970;
     };
 
     class 3CBF_CW_US : 3CBF_Base
@@ -840,6 +937,8 @@ class Templates
         climate[] = {"temperate","tropical","arctic"};
         shortName = "CW US";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_US;
+        supportSide = 1;
+        year = 1985;
     };
 
     class 3CBF_HIDF : 3CBF_Base
@@ -852,6 +951,8 @@ class Templates
         climate[] = {"temperate","tropical","arctic"};
         shortName = "HIDF";
         lore = $STR_A3A_templates_lore_3CB_AI_HIDF;
+        supportSide = 0.5;
+        year = 1980;
     };
 
     class 3CBF_MDF : 3CBF_Base
@@ -864,6 +965,8 @@ class Templates
         climate[] = {"arid"};
         shortName = "MDF";
         lore = $STR_A3A_templates_lore_3CB_AI_MDF;
+        supportSide = 0.5;
+        year = 1990;
     };
 
     class 3CBF_TKA_East : 3CBF_Base
@@ -876,6 +979,8 @@ class Templates
         climate[] = {"arid"};
         shortName = "TKA East";
         lore = $STR_A3A_templates_lore_3CB_AI_TKA_East;
+        supportSide = -0.6;
+        year = 2000;
     };
     class 3CBF_TKA_West : 3CBF_TKA_East
     {
@@ -884,6 +989,7 @@ class Templates
         file = "3CB_AI_TKA_West";
         shortName = "TKA West";
         lore = $STR_A3A_templates_lore_3CB_AI_TKA_West;
+        supportSide = 0.6;
     };
     class 3CBF_TKA_Mix : 3CBF_TKA_East
     {
@@ -893,6 +999,7 @@ class Templates
         priority = 39;               // not default anywhere
         shortName = "TKA Mix";
         lore = $STR_A3A_templates_lore_3CB_AI_TKA_Mix;
+        supportSide = 0;
     };
 
     class 3CBF_AAF : 3CBF_Base
@@ -905,17 +1012,13 @@ class Templates
         climate[] = {"arid"};
         shortName = "AAF";
         lore = $STR_A3A_templates_lore_3CB_AAF;
+        supportSide = 0.4;
+        year = 2015;
     };
-    class 3CBF_AAF_arid : 3CBF_Base
+    class 3CBF_AAF_arid : 3CBF_AAF
     {
-        side = "Occ";
-        flagTexture = "a3\data_f\flags\flag_aaf_co.paa";
         name = "3CB AAF Brown";
         file = "3CB_AI_AAF_arid";
-        maps[] = {"altis"};
-        climate[] = {"arid"};
-        shortName = "AAF";
-        lore = $STR_A3A_templates_lore_3CB_AAF;
     };
 
     class 3CBF_LDF : 3CBF_Base
@@ -928,6 +1031,8 @@ class Templates
         climate[] = {"temperate"};
         shortName = "LDF";
         lore = $STR_A3A_templates_lore_3CB_AI_LDF;
+        year = 2015;
+        supportSide = 0.6;
     };
 
     class 3CB_GAF : 3CBF_Base
@@ -937,6 +1042,9 @@ class Templates
         name = "3CB GAF Temperate";
         file = "3CB_AI_GAF";
         climate[] = {"temperate"};
+        lore = $STR_A3A_templates_lore_3CBF_GAF;
+        year = 2005;
+        supportSide = -0.3;
     };
 
     class 3CBF_KRG : 3CBF_Base
@@ -948,6 +1056,8 @@ class Templates
         climate[] = {"arid"};
         shortName = "KRG";
         lore = $STR_A3A_templates_lore_3CB_AI_KRG;
+        supportSide = 0.4;
+        year = 2005;
     };
     class 3CB_Marines_Temperate : 3CBF_Base
     {
@@ -956,6 +1066,9 @@ class Templates
         name = "3CB Marines Temperate";
         file = "3CB_AI_Marines_Temperate";
         climate[] = {"temperate"};
+        lore = $STR_A3A_templates_lore_USMC;
+        supportSide = 1;
+        year = 2010;
     };
     class 3CBF_ION_Arid : 3CBF_Base
     {
@@ -966,14 +1079,16 @@ class Templates
         climate[] = {"arid"};
         shortName = "ION";
         lore = $STR_A3A_templates_lore_ION;
+        supportSide = 0.2;
+        year = 2010;
     };
-        class 3CBF_ION_Temperate : 3CBF_ION_Arid
+    class 3CBF_ION_Temperate : 3CBF_ION_Arid
     {
         name = "3CB ION Temperate";
         file = "3CB_AI_ION_Temperate";
         climate[] = {"temperate","tropical"};
     };
-        class 3CBF_ION_Arctic : 3CBF_ION_Arid
+    class 3CBF_ION_Arctic : 3CBF_ION_Arid
     {
         name = "3CB ION Arctic";
         file = "3CB_AI_ION_Arctic";
@@ -1029,6 +1144,7 @@ class Templates
         file = "3CB_Reb_SDK";
         climate[] = {"tropical"};
         maps[] = {"tanoa", "umb_colombia", "pulau"};
+        lore = $STR_A3A_templates_lore_FIA;
     };
     class 3CB_Reb_LSM : 3CBF_Base
     {
@@ -1121,6 +1237,8 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\3CB);
         logo = "\UK3CB_BAF_Weapons\addons\UK3CB_BAF_Weapons_Ammo\data\ui\logo_small_3cb_ca.paa";
         priority = 50;
+        supportSide = 0.8;
+        year = 2010;
     };
 
     class 3CBBAF_Arid : 3CBBAF_Base
@@ -1161,6 +1279,7 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\CUP);
         logo = "\CUP\Creatures\People\CUP_Creatures_People_Core\ui\logo_cup_ca_small.paa";
         priority = 60;
+        year = 2000;
     };
 
     class CUP_ACR_Arid : CUP_Base
@@ -1172,6 +1291,7 @@ class Templates
         climate[] = {"arid"};
         shortName = "ACR";
         lore = $STR_A3A_templates_lore_ACR;
+        supportSide = 0.6;
     };
     class CUP_ACR_Temperate : CUP_ACR_Arid
     {
@@ -1189,6 +1309,7 @@ class Templates
         climate[] = {"arid"};
         shortName = "AFRF";
         lore = $STR_A3A_templates_lore_AFRF;
+        supportSide = -1;
     };
     class CUP_AFRF_Temperate : CUP_AFRF_Arid
     {
@@ -1218,6 +1339,7 @@ class Templates
         climate[] = {"arid"};
         shortName = "BAF";
         lore = $STR_A3A_templates_lore_BAF;
+        supportSide = 0.8;
     };
     class CUP_BAF_Temperate : CUP_BAF_Arid
     {
@@ -1236,6 +1358,7 @@ class Templates
         maps[] = {"chernarus_winter"};
         shortName = "CDF";
         lore = $STR_A3A_templates_lore_CDF;
+        supportSide = -0.7;
     };
     class CUP_CDF_Temperate : CUP_CDF_Arctic
     {
@@ -1255,6 +1378,7 @@ class Templates
         maps[] = {"sara"};
         shortName = "RACS";
         lore = $STR_A3A_templates_lore_CUP_AI_RACS;
+        supportSide = 0.6;
     };
     class CUP_RACS_Tropical : CUP_RACS_Arid
     {
@@ -1274,6 +1398,7 @@ class Templates
         maps[] = {"sara"};
         shortName = "SLA";
         lore = $STR_A3A_templates_lore_CUP_AI_SLA;
+        supportSide = -0.6;
     };
 
     class CUP_TKA : CUP_Base
@@ -1286,6 +1411,7 @@ class Templates
         maps[] = {"takistan","kunduz"};
         shortName = "TKA";
         lore = $STR_A3A_templates_lore_CUP_AI_TKA;
+        supportSide = -0.4;
     };
 
     class CUP_USAF_Arid : CUP_Base
@@ -1297,6 +1423,7 @@ class Templates
         climate[] = {"arid"};
         shortName = "US Army";
         lore = $STR_A3A_templates_lore_USAF;
+        supportSide = 1;
     };
     class CUP_USAF_Temperate : CUP_USAF_Arid
     {
@@ -1314,6 +1441,7 @@ class Templates
         climate[] = {"arid"};
         shortName = "US Marines";
         lore = $STR_A3A_templates_lore_USMC;
+        supportSide = 1;
     };
     class CUP_USMC_Temperate : CUP_USMC_Arid
     {
@@ -1331,6 +1459,7 @@ class Templates
         climate[] = {"arid","temperate","tropical"};
         shortName = "ION";
         lore = $STR_A3A_templates_lore_ION;
+        supportSide = 0.5;
     };
     class CUP_ION_Temperate : CUP_ION_Arid
     {
@@ -1348,14 +1477,15 @@ class Templates
         climate[] = {"arid"};
         shortName = "BW";
         lore = $STR_A3A_templates_lore_CUP_AI_BW;
+        supportSide = 0.8;
     };
-        class CUP_BW_Temperate : CUP_BW_Arid
+    class CUP_BW_Temperate : CUP_BW_Arid
     {
         name = "CUP BW Temperate";
         file = "CUP_AI_BW_Temperate";
         climate[] = {"arctic","temperate","tropical"};
     };
-        class CUP_HIL : CUP_Base
+    class CUP_HIL : CUP_Base
     {
         side = "Occ";
         flagTexture = "a3\data_f_exp\flags\flag_tanoa_co.paa";
@@ -1364,6 +1494,7 @@ class Templates
         climate[] = {"temperate","tropical"};
         shortName = "HIL";
         lore = $STR_A3A_templates_lore_CUP_AI_HIL;
+        supportSide = 0.5;
     };
     class CUP_TKM : CUP_Base
     {
@@ -1411,6 +1542,7 @@ class Templates
         logo = "\uns_main\data\unsung_logo.paa";
         priority = 70;
         equipFlags[] = {"lowTech"};
+        year = 1970;
     };
 
     class UNS_US : UNS_Base
@@ -1421,6 +1553,7 @@ class Templates
         file = "UNS_AI_US";
         shortName = "US";
         lore = $STR_A3A_templates_lore_UNS_AI_US;
+        supportSide = 1;
     };
 
     class UNS_PAVN : UNS_Base
@@ -1431,6 +1564,7 @@ class Templates
         file = "UNS_AI_PAVN";
         shortName = "PAVN";
         lore = $STR_A3A_templates_lore_UNS_AI_PAVN;
+        supportSide = -0.8;
     };
 
     class UNS_VC : UNS_Base
@@ -1463,6 +1597,7 @@ class Templates
         priority = 80;
         equipFlags[] = {"specialGM"};
         forceDLC[] = {"gm"};
+        year = 1985;
     };
 
     class GM_NVA : GM_Base
@@ -1474,27 +1609,22 @@ class Templates
         climate[] = {"temperate","tropical"};
         shortName = "NVA";
         lore = $STR_A3A_templates_lore_GM_AI_NVA;
+        supportSide = -0.7;
     };
 
-    class GM_NVA_Arctic : GM_Base
+    class GM_NVA_Arctic : GM_NVA
     {
-        side = "Inv";
-        flagTexture = "\gm\gm_core\data\flags\gm_flag_gc_co";
         name = "GM NVA Arctic";
         file = "GM_AI_NVA_arctic";
         climate[] = {"arctic"};
-        shortName = "NVA";
         lore = $STR_A3A_templates_lore_GM_AI_NVA;
     };
 
-    class GM_NVA_Desert : GM_Base
+    class GM_NVA_Desert : GM_NVA
     {
-        side = "Inv";
-        flagTexture = "\gm\gm_core\data\flags\gm_flag_gc_co";
         name = "GM NVA Desert";
         file = "GM_AI_NVA_desert";
         climate[] = {"arid"};
-        shortName = "NVA";
         lore = $STR_A3A_templates_lore_GM_AI_NVA;
     };
 
@@ -1507,27 +1637,22 @@ class Templates
         climate[] = {"temperate","tropical"};
         shortName = "BW";
         lore = $STR_A3A_templates_lore_GM_AI_BW;
+        supportSide = 0.8;
     };
 
-    class GM_BW_Arctic : GM_Base
+    class GM_BW_Arctic : GM_BW
     {
-        side = "Occ";
-        flagTexture = "\gm\gm_core\data\flags\gm_flag_ge_co";
         name = "GM BW Arctic";
         file = "GM_AI_BW_arctic";
         climate[] = {"arctic"};
-        shortName = "BW";
         lore = $STR_A3A_templates_lore_GM_AI_BW;
     };
 
-    class GM_BW_Desert : GM_Base
+    class GM_BW_Desert : GM_BW
     {
-        side = "Occ";
-        flagTexture = "\gm\gm_core\data\flags\gm_flag_ge_co";
         name = "GM BW Desert";
         file = "GM_AI_BW_desert";
         climate[] = {"arid"};
-        shortName = "BW";
         lore = $STR_A3A_templates_lore_GM_AI_BW;
     };
 
@@ -1559,6 +1684,8 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\BWA3);
         logo = QPATHTOFOLDER(Templates\Templates\BWA3\bwa3_logo.paa);
         priority = 65;
+        supportSide = 0.8;
+        year = 2010;
     };
 
     class BWA3_BW_Arid : BWA3_Base
@@ -1579,7 +1706,7 @@ class Templates
     };
     
     // ***************************** Spe *****************************
-/*    //Commented out as no vehiclesPlanesTransport exist and the templates don't work without them
+
     class SPE_Base
     {
         requiredAddons[] = {"ww2_spe_assets_c_characters_germans_c"};
@@ -1588,6 +1715,8 @@ class Templates
         priority = 80;
         equipFlags[] = {"lowTech"};
         forceDLC[] = {"spe"};
+        year = 1945;
+        scope = 0; //Disabled as no vehiclesPlanesTransport exist and the templates don't work without them
     };
 
     class SPE_US : SPE_Base
@@ -1596,6 +1725,7 @@ class Templates
         flagTexture = QPATHTOFOLDER(Templates\Templates\SPE\flag_us.paa);
         name = "SPE US";
         file = "SPE_AI_US";
+        supportSide = 1;
     };
 
     class SPE_WEH : SPE_Base
@@ -1604,6 +1734,7 @@ class Templates
         flagTexture = QPATHTOFOLDER(Templates\Templates\SPE\flag_ger.paa);
         name = "SPE WEH";
         file = "SPE_AI_WEH";
+        supportSide = -1;
     };
 
     class SPE_Reb : SPE_Base
@@ -1621,7 +1752,7 @@ class Templates
         name = "SPE Civs";
         file = "SPE_CIV";
     };
-*/
+
     // ***************************** IFA *****************************
     class IFA_Base
     {
@@ -1632,6 +1763,7 @@ class Templates
         equipFlags[] = {"lowTech"};
         //climate[] = {"temperate","tropical"};
         forceDLC[] = {};
+        year = 1945;
     };
     class IFA_WEH : IFA_Base
     {
@@ -1642,6 +1774,7 @@ class Templates
         file = "IFA_AI_WEH";
         shortName = "WEH";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_WEH;
+        supportSide = -1;
     };
     class IFA_SOV : IFA_Base
     {
@@ -1651,6 +1784,7 @@ class Templates
         file = "IFA_AI_SOV";
         shortName = "SOV";
         lore = $STR_A3A_templates_lore_IFA_AI_SOV;
+        supportSide = 0.6; // this one pains me
     };
     class IFA_ALLIES : IFA_Base
     {
@@ -1661,6 +1795,7 @@ class Templates
         file = "IFA_AI_ALLIES";
         shortName = "ALLIES";
         lore = $STR_A3A_templates_lore_IFA_AI_ALLIES;
+        supportSide = 1;
     };
     class IFA_US : IFA_Base
     {
@@ -1670,6 +1805,7 @@ class Templates
         file = "IFA_AI_US";
         shortName = "US";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
+        supportSide = 1;
     };
     class IFA_USMC : IFA_US
     {
@@ -1679,6 +1815,7 @@ class Templates
         file = "IFA_AI_USMC";
         shortName = "USMC";
         lore = $STR_A3A_templates_lore_IFA_AI_USMC;
+        supportSide = 1;
     };
     class IFA_UK : IFA_Base
     {
@@ -1688,6 +1825,7 @@ class Templates
         file = "IFA_AI_UK";
         shortName = "UK";
         lore = $STR_A3A_templates_lore_IFA_AI_UK;
+        supportSide = 1;
     };
     class IFA_FFI : IFA_Base
     {
@@ -1742,6 +1880,7 @@ class Templates
         logo = "";
         priority = 70;
         lore = "";
+        year = 1940;
     };
     class EAW_IJA : EAW_Base
     {
@@ -1751,6 +1890,7 @@ class Templates
         file = "EAW_AI_IJA";
         shortName = "EAW IJA";
         lore = "Imperial Japanese Army";
+        supportSide = -0.8;
     };
     class EAW_NRA : EAW_Base
     {
@@ -1760,6 +1900,7 @@ class Templates
         file = "EAW_AI_NRA";
         shortName = "EAW NRA";
         lore = "National Revolutionary Army";
+        supportSide = 0;
     };
     class EAW_PLA : EAW_Base
     {
@@ -1769,6 +1910,7 @@ class Templates
         file = "EAW_AI_PLA";
         shortName = "EAW PLA";
         lore = "People's Liberation Army";
+        supportSide = 0.8;
     };
     class EAW_Reb : EAW_Base
     {
@@ -1798,6 +1940,7 @@ class Templates
         priority = 80;
         equipFlags[] = {"lowTech"};
         forceDLC[] = {"spe"};
+        year = 1945;
     };
 
     class SPE_IFA_US : SPE_IFA_Base
@@ -1808,6 +1951,7 @@ class Templates
         file = "SPE_IFA_AI_US";
         shortName = "US";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
+        supportSide = 1;
     };
 
     class SPE_IFA_WEH : SPE_IFA_Base
@@ -1818,6 +1962,7 @@ class Templates
         file = "SPE_IFA_AI_WEH";
         shortName = "WEH";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_WEH;
+        supportSide = -1;
     };
 
     class SPE_IFA_Reb : SPE_IFA_Base
@@ -1850,6 +1995,7 @@ class Templates
         priority = 80;
         equipFlags[] = {"lowTech"};
         forceDLC[] = {"spe"};
+        year = 1945;
     };
 
     class SPEX_US : SPEX_Base
@@ -1860,6 +2006,7 @@ class Templates
         file = "SPEX_AI_US";
         shortName = "US";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
+        supportSide = 1;
     };
 
     class SPEX_CW : SPEX_Base
@@ -1870,6 +2017,7 @@ class Templates
         file = "SPEX_AI_CW_Temperate";
         shortName = "CW";
         lore = $STR_A3A_templates_lore_IFA_AI_UK;
+        supportSide = 0.9;
     };
 
     class SPEX_CW_Trop : SPEX_CW
@@ -1888,6 +2036,7 @@ class Templates
         file = "SPEX_AI_WEH";
         shortName = "WEH";
         lore = $STR_A3A_templates_lore_SPE_IFA_AI_WEH;
+        supportSide = -1;
     };
 
     class SPEX_WEH_Trop : SPEX_WEH
@@ -1926,6 +2075,7 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\CWR);
         logo = "\cwr3\general\cwr3_core\data\cwr3_logo_128_ca.paa";
         priority = 70;
+        year = 1985;
     };
 
      class CWR_US_Temprate : CWR_Base
@@ -1936,6 +2086,7 @@ class Templates
         file = "CWR_AI_US_Army_Temperate";
         shortName = "US Army";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_US;
+        supportSide = 1;
     };
     
     class CWR_USSR_Temprate : CWR_Base
@@ -1946,6 +2097,7 @@ class Templates
         file = "CWR_AI_USSR_Temperate";
         shortName = "USSR";
         lore = $STR_A3A_templates_lore_3CB_AI_CW_Sov;
+        supportSide = -1;
     };
 
     class CWR_FIA : CWR_Base
@@ -1965,6 +2117,7 @@ class Templates
         name = "CWR CHC";
         file = "CWR_Civ_CHC";
         shortName = "Civilian";
+        lore = $STR_A3A_templates_lore_Civ;
     };
 
      // ***************************** CWR Brits *****************************
@@ -1975,6 +2128,7 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\CWRBAF);
         logo = "\cwr3\general\cwr3_core\data\cwr3_logo_128_ca.paa";
         priority = 70;
+        year = 1985;
     };
 
     class CWR_BAF_Temprate : CWRB_Base
@@ -1985,6 +2139,7 @@ class Templates
         file = "CWR_AI_BAF_Temperate";
         shortName = "BAF";
         lore = $STR_A3A_templates_lore_BAF;
+        supportSide = 0.8;
     };
   
     // ***************************** CRO *****************************
@@ -1995,6 +2150,7 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\CRO);
         logo = "\cro_base\data\cromil_ca.paa";
         priority = 80;
+        year = 2015;
     };
 
     class CRO_Croatia : CRO_Base
@@ -2005,7 +2161,8 @@ class Templates
         file = "CRO_AI_Croatia";
         climate[] = {};
         shortName = "Croatian Army";
-        lore = "";
+        lore = $STR_A3A_templates_lore_CRO_Croatia;
+        supportSide = 0.3;
     };
 
     // ***************************** AMF *****************************
@@ -2016,6 +2173,7 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\AMF);
         logo = "\AMF_Pack_Corps\Logos\AMF\AMF_services_128.paa";
         priority = 80;
+        year = 2015;
     };
 
     class AMF_France : AMF_Base
@@ -2026,7 +2184,9 @@ class Templates
         file = "AMF_AI_France";
         climate[] = {};
         shortName = "French Army";
-        lore = "";
+        lore = $STR_A3A_templates_lore_AMF_France;
+        supportSide = 0.6;
+        scope = 0; // disabled until someone can fix the classnames
     };
 
     // ***************************** TMT *****************************
@@ -2037,6 +2197,7 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\TMT);
         logo = "\TMT\TMT_Core\Data\TMT_Logo.paa";
         priority = 80;
+        year = 2015;
     };
 
      class TMT_Turkish_Army : TMT_Base
@@ -2047,7 +2208,8 @@ class Templates
         file = "TMT_AI_Turkish_Army";
         climate[] = {};
         shortName = "Turkish Army";
-        lore = "";
+        lore = $STR_A3A_templates_lore_TMT_Turkish_Army;
+        supportSide = 0.5;
     };
   
      // ***************************** CSLA *****************************
@@ -2058,9 +2220,10 @@ class Templates
         basepath = QPATHTOFOLDER(Templates\Templates\CSLA);
         logo = "\CSLA_cfg\Logos\csla_logo.paa";
         priority = 70;
+        year = 1985;
     };
 
-    class CSLA_AI_US_Army_temperate  : CSLA_Base
+    class CSLA_AI_US_Army_Temperate  : CSLA_Base
     {
         side = "Inv"; //the side the faction defaults to, one of the following: Inv, Occ, Reb, Civ
         flagTexture = "a3\data_f\flags\flag_us_co.paa"; //path to an icon to be displayed in the selector
@@ -2068,49 +2231,51 @@ class Templates
         file = "CSLA_AI_US_Army_temperate "; //the template file name
         climate[] = {"temperate"}; //climate that the template is meant for
         shortName = "US Army";
+        lore = $STR_A3A_templates_lore_USAF;
+        supportSide = 1;
     };
 
-    class CSLA_AI_US_Army_Arid : CSLA_Base
+    class CSLA_AI_US_Army_Arid : CSLA_AI_US_Army_Temperate
     {
-        side = "Inv";
-        flagTexture = "a3\data_f\flags\flag_us_co.paa";
         name = "US Army Arid";
         file = "CSLA_AI_US_Army_Arid";
         climate[] = {"arid"};
         shortName = "US Army";
     };
     
-    class CSLA_AI_CSLA_temperate : CSLA_Base
+    class CSLA_AI_CSLA_Temperate : CSLA_Base
     {
         side = "Occ";
         flagTexture = "\A3\ui_f\data\map\markers\flags\CzechRepublic_ca.paa";
-        name = "CSLA temperate";
+        name = "CSLA Temperate";
         file = "CSLA_AI_CSLA_temperate";
         climate[] = {"temperate"};
         shortName = "CSLA";
+        lore = $STR_A3A_templates_lore_CSLA_AI_CSLA;
+        supportSide = -0.7;
     };
 
-    class CSLA_AI_CSLA_Arid : CSLA_Base
+    class CSLA_AI_CSLA_Arid : CSLA_AI_CSLA_Temperate
     {
-        side = "Occ";
-        flagTexture = "\A3\ui_f\data\map\markers\flags\CzechRepublic_ca.paa";
         name = "CSLA Arid";
         file = "CSLA_AI_CSLA_Arid";
         climate[] = {"arid"};
         shortName = "CSLA";
     };
 
-    class CSLA_AI_AFMC_temperate : CSLA_Base
+    class CSLA_AI_AFMC_Temperate : CSLA_Base
     {
         side = "Inv";
         flagTexture = "\A3\ui_f\data\map\markers\flags\nato_ca.paa";
-        name = "AFMC temperate";
+        name = "AFMC Temperate";
         file = "CSLA_AI_AFMC_temperate";
         climate[] = {"temperate"};
         shortName = "AFMC";
+        lore = $STR_A3A_templates_lore_CSLA_AI_AFMC;
+        supportSide = 0.8;
     };
 
-    class CSLA_AI_FIA_temperate : CSLA_Base
+    class CSLA_AI_FIA_Temperate : CSLA_Base
     {
         side = "Occ";
         flagTexture = "a3\data_f\flags\flag_fia_co.paa";
@@ -2118,6 +2283,8 @@ class Templates
         file = "CSLA_AI_FIA_temperate";
         climate[] = {"temperate"};
         shortName = "FIA";
+        lore = $STR_A3A_templates_lore_FIA;
+        supportSide = 0;
     };
 
     class CSLA_Reb_NAPA : CSLA_Base
@@ -2128,6 +2295,7 @@ class Templates
         file = "CSLA_Reb_NAPA";
         climate[] = {"temperate"};
         shortName = "NAPA";
+        lore = $STR_A3A_templates_lore_NAPA;
     };
 
     class CSLA_Civ_TC : CSLA_Base
@@ -2138,6 +2306,7 @@ class Templates
         file = "CSLA_Civ_TC";
         climate[] = {"temperate"};
         shortName = "FIA";
+        lore = $STR_A3A_templates_lore_Civ;
     };
   
     // **************** PRACS *****************
@@ -2149,6 +2318,8 @@ class Templates
         logo = "PRACS_Core\Logo\ProjectRACS_mod_ca.paa"; // to be done
         maps[] = {"sara"};
         priority = 80;
+        supportSide = 0.7;
+        year = 2005;
     };
 
     class RACS_Arid : PRACS_RACS_Base
@@ -2159,7 +2330,7 @@ class Templates
         file = "PRACS_AI_RACS_Arid";
         climate[] = {"arid"};
         shortName = "RACS";
-        lore = $STR_A3A_templates_lore_CUP_AI_RACS;
+        lore = $STR_A3A_templates_lore_PRACS_RACS;
     };
 
     class RACS_Temperate : RACS_Arid
@@ -2176,6 +2347,8 @@ class Templates
         logo = "PRACS_SLA_Core\Logo\pracs_sla_mod_ca.paa";
         maps[] = {"sara"};
         priority = 80;
+        supportSide = -0.8;
+        year = 2005;
     };
 
     class SLA_Arid : PRACS_SLA_Base
@@ -2186,7 +2359,7 @@ class Templates
         climate[] = {"arid"};
         file = "PRACS_AI_SLA_Arid";
         shortName = "SLA";
-        lore = $STR_A3A_templates_lore_CUP_AI_SLA;
+        lore = $STR_A3A_templates_lore_PRACS_SLA;
     };
 
     class SLA_Temperate : SLA_Arid
@@ -2204,7 +2377,7 @@ class Templates
         climate[] = {"arid"};
         file = "PRACS_AI_SLA_Rev_Guards_Arid";
         shortName = "SLA Guards";
-        lore = $STR_A3A_templates_lore_CUP_AI_SLA;
+        lore = $STR_A3A_templates_lore_PRACS_SLA_Guards;
     };
 
     class SLA_Rev_Guards_Temperate : SLA_Rev_Guards_Arid
