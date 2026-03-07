@@ -2054,9 +2054,9 @@ class Templates
 
     class AMF_Base
     {
-        requiredAddons[] = {"AMF_FAMAS","CUP_AirVehicles_Core"};       
+        requiredAddons[] = {"AMF_A_E_B_F","CUP_AirVehicles_Core"};       
         basepath = QPATHTOFOLDER(Templates\Templates\AMF);
-        logo = "\AMF_Pack_Corps\Logos\AMF\AMF_services_128.paa";
+        logo = "\AMF_Pack_Corps\Logos\AMF\AMF_AIO_128.paa";
         priority = 80;
     };
 
