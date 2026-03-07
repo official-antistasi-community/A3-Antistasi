@@ -9,9 +9,9 @@
 ["flagMarkerType", "flag_Tanoa"] call _fnc_saveToTemplate;
 
 ["vehiclesBasic", ["UK3CB_FIA_I_TT650"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["UK3CB_FIA_I_Datsun_Open", "UK3CB_FIA_I_Hilux_Open"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["UK3CB_FIA_I_Datsun_Open"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["UK3CB_I_G_LandRover_WMIK_M2", "UK3CB_I_G_LandRover_SF_WMIK_M2_M240"]] call _fnc_saveToTemplate;
-["vehiclesTruck", ["UK3CB_KDF_I_Gaz66_Covered","UK3CB_KDF_I_Gaz66_Open"]] call _fnc_saveToTemplate;
+["vehiclesTruck", ["UK3CB_KDF_I_Gaz66_Covered","UK3CB_KDF_I_Gaz66_Open", "UK3CB_FIA_I_Hilux_Open"]] call _fnc_saveToTemplate;
 ["vehiclesAT", ["UK3CB_MDF_I_MB4WD_AT", "UK3CB_I_G_LandRover_Opentop_SPG9"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["UK3CB_KDF_I_Gaz66_ZU23"]] call _fnc_saveToTemplate;
 
