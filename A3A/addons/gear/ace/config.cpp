@@ -64,15 +64,37 @@ class CfgWeapons {
 };
 
 class ace_medical_treatment {
-    class IV {
-        class BloodIV;
-        class a3a_coffeeIV : BloodIV {
-            ratio[] = {"a3a_coffee",1};
-            gui_message = $STR_A3A_Medical_Treatment_receivingCoffee;
-            type = "Saline";
+    class Medication {
+        class a3a_coffeeIV{
             dose = 4;
             maxDose = 18;
             timeInSystem = 1800;
+            timeTillMaxEffect = 30;
+            hrIncreaseHigh[] = {0,20};
+            hrIncreaseLow[] = {0,20};
+            hrIncreaseNormal[] = {0,20};
+        }
+        class a3a_coffeeIV_500 : a3a_coffeeIV {
+            dose = 2;
+            timeInSystem = 900;
+            volume = 500;
+        }
+        class a3a_coffeeIV_250 : a3a_coffeeIV {
+            dose = 1;
+            timeInSystem = 450;
+            volume = 250;
+        }
+    }
+    class IV {
+        class BloodIV;
+        class a3a_coffeeIV : BloodIV {
+            ratio[] = {"Saline",0.5, "a3a_coffee",0.5};
+            gui_message = $STR_A3A_Medical_Treatment_receivingCoffee;
+            type = "a3a_coffee";
+            dose = 4;
+            maxDose = 18;
+            timeInSystem = 1800;
+            timeTillMaxEffect = 30;
             hrIncreaseHigh[] = {0,20};
             hrIncreaseLow[] = {0,20};
             hrIncreaseNormal[] = {0,20};
@@ -97,6 +119,7 @@ class ace_medical_treatment_actions {
             displayName = $STR_A3A_ESPRESSO_1000_GIVE;
             displayNameProgress = $STR_A3A_ESPRESSO_ACTION;
             items[] = {"a3a_coffeeIV"};
+            callbackSuccess = "A3A_fnc_coffeeIV";
         }
         class a3a_coffeeIV_500 : a3a_coffeeIV {
             displayName = $STR_A3A_ESPRESSO_500_GIVE;
@@ -107,3 +130,14 @@ class ace_medical_treatment_actions {
             items[] = {"a3a_coffeeIV_250"};
         }
 }
+
+class CfgFunctions
+{
+    class A3A
+    {
+        class medical {
+            file = "x\A3A\addons\gear\ace\functions";
+            class coffeeIV {};
+        };
+    };
+};
