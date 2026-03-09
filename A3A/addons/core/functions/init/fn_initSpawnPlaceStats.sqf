@@ -15,11 +15,14 @@ FIX_LINE_NUMBERS()
 
 params ["_markers"];
 
+// Assume one police car place for now. initPoliceStations may remove it later
+private _policeSpawnStats = createHashMapFromArray [ ["vehiclePolice", [[0], 1, 1]] ];
+
 A3A_spawnPlaceStats = createHashMap;
 {
+    if (_x in citiesX) then { A3A_spawnPlaceStats set [_x, _policeSpawnStats]; continue };
     private _marker = _x;
     private _markerStats = createHashMap;
-    if (_marker in citiesX) then { A3A_spawnPlaceStats set [_x, _markerStats]; continue };
 
     private _spawnPlaces = A3A_spawnPlacesHM get _marker;
     private _isAirport = _marker in airportsX;

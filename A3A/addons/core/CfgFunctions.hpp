@@ -409,6 +409,7 @@ class CfgFunctions
             class initACEUnconsciousHandler {};
             class initBases {};
             class initCivSpawnPlaces {};
+            class initCivSpawnPlaceStats {};
             class initGarrisons {};
             class initMarkerTypes {};
             class initPoliceStations {};
@@ -659,8 +660,10 @@ class CfgFunctions
         class Save {
             file = QPATHTOFOLDER(functions\Save);
             class collectSaveData {};
+            class convert310Vehicles {};
             class convertSavedGarrisons {};
             class convertSavedStatics {};
+            class convertVehiclesToInternal {};
             class deleteSave {};
             class exportSave {};
             class finalizeSave {};
