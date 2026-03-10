@@ -25,20 +25,20 @@ FIX_LINE_NUMBERS()
 
         private _places = +(A3A_spawnPlaceStats get _marker get _placeType select 0);
         {
-            if (_x#1 in _places) then { _allVehicles pushBack _x; _places deleteAt (_places find _x#1); continue };
+            private _vehEntry = +_x;
+            if (_x#1 in _places) then { _allVehicles pushBack _vehEntry; _places deleteAt (_places find _x#1); continue };
             if (_places isEqualTo []) exitWith { Error_2("No places of type %1 left in %2", _placeType, _marker) };
 
             // Saved place type mismatch, replace
             Info_3("Place mismatch for vehicle %1, place %2 in %3, moving", _x#0, _placeType, _marker);
             private _placeIndex = if (_placeType == "vehicle") then { _places deleteAt 0 }
                 else { _places deleteAt floor random count _places };
-            _x set [1, _placeIndex]; _allVehicles pushBack _x;
+            _vehEntry set [1, _placeIndex]; _allVehicles pushBack _vehEntry;
 
         } forEach _y;           // _y is the vehicle array for that place type. Guaranteed _x#1 number here
 
     } forEach (_garrison get "vehicles2");
 
     _garrison set ["vehicles", _allVehicles];
-    // TODO: remove this after testing
-    // _garrison deleteAt "vehicles2"
+    _garrison deleteAt "vehicles2"
 } forEach A3A_garrison;

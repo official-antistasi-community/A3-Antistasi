@@ -47,12 +47,13 @@ if (!_vehiclesOnly) then {
 // Note: spawnPlaceStats has detailed place names (eg staticAA, vehicleTruck), garrison puts everything into vehicles
 private _vehicles = [];
 {
-    if (_x in ["vehicleArty", "vehicleSAM"]) then { continue };
     private _placeType = _x;
     _y params ["_indexes", "_max", "_par"];
+    private _vehCount = floor (random 0.99 + _par * (0.7 + random 0.3));
+    //diag_log format ["Spawning %1 of %2 type %3", _vehCount, _par, _placeType];
 
     private _remIndexes = +_indexes;
-    for "_i" from 1 to _par do {
+    for "_i" from 1 to _vehCount do {
         private _vehType = [_faction, _placeType, "airport" in _marker] call A3A_fnc_selectGarrisonVehicleType;
         if (isNil "_vehType") exitWith {};      // faction doesn't have vehicles of that type
 

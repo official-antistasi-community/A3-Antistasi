@@ -26,6 +26,7 @@ A3A_spawnPlaceStats = createHashMap;
 
     private _spawnPlaces = A3A_spawnPlacesHM get _marker;
     private _isAirport = _marker in airportsX;
+    private _isOutpost = _marker in outposts;
     private _garrSize = A3A_garrisonSize get _marker;
     {
         private _placeType = _x;
@@ -36,13 +37,13 @@ A3A_spawnPlaceStats = createHashMap;
         private _maxPlaces = count _indexes;
         private _parPlaces = switch (_placeType) do {
             case "staticMG": { floor (_garrSize / 8) };
-            case "staticAA": { [1, 2] select _isAirport };
-            case "staticMortar": { [1, 2] select _isAirport };
-            case "vehicleAA";
-            case "vehicleArty";
-            case "vehicleSAM": { [0, 1] select _isAirport };
+            case "staticAA": { if _isAirport exitWith {2}; [0, 1] select _isOutpost };
+            case "staticMortar": { if _isAirport exitWith {2}; [0, 1] select _isOutpost };
             case "vehicleTruck": { 1 };
             case "vehicle": { [0, 6 min ceil (_maxPlaces / 2)] select _isAirport };
+            case "vehicleAA": { [0, 1] select _isAirport };
+            case "vehicleArty": { [0, 0.2] select _isAirport };
+            case "vehicleSAM": { [0, 0.3] select _isAirport };
             case "heli": { ceil (_garrSize / 15) };
             case "plane": { [0, 3] select _isAirport };         // in case outposts overlap airports
             case "runway": { [0, 1] select _isAirport };
