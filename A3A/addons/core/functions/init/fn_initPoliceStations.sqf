@@ -58,7 +58,7 @@ if (_policeStationTypes isEqualTo []) exitWith {
 
     private _distances = _nearPlaces apply { _x#1 distance2d _stationPos };
     private _minPlace = _nearPlaces select (_distances find selectMin _distances);
-    _garrison set ["spawnPlaces", [["vehiclesPolice", _minPlace#1, _minPlace#2]] ];
+    _garrison set ["spawnPlaces", [["vehiclePolice", _minPlace#1, _minPlace#2]] ];
 
     private _citySide = sidesX getVariable _city;
     if (_citySide != teamPlayer) then {
