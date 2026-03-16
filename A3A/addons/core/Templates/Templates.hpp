@@ -217,6 +217,7 @@ class Templates
         name = "A3 Altian Civilians";
         file = "Vanilla_Civ";
         shortName = "Altian";
+        climate[] = {"arid"};
         maps[] = {"altis"};
         lore = $STR_A3A_templates_lore_CIV;
     };
@@ -228,6 +229,7 @@ class Templates
         name = "A3 Livonian Civilians";
         file = "Vanilla_Civ_LIV";
         shortName = "Livonian";
+        climate[] = {"temperate", "arctic"};
         maps[] = {"enoch","vt7"};
         lore = $STR_A3A_templates_lore_CIV;
     };
@@ -239,6 +241,7 @@ class Templates
         name = "A3 Tanoan Civilians";
         file = "Vanilla_Civ_TNA";
         shortName = "Tanoan";
+        climate[] = {"tropical"};
         maps[] = {"tanoa"};
         lore = $STR_A3A_templates_lore_CIV;
     };
@@ -1707,7 +1710,6 @@ class Templates
         file = "BWA3_AI_BW_Temperate";
         climate[] = {"temperate","tropical","arctic"};
     };
-    
     // ***************************** Spe *****************************
 
     class SPE_Base
@@ -1755,8 +1757,8 @@ class Templates
         name = "SPE Civs";
         file = "SPE_CIV";
     };
-
     // ***************************** IFA *****************************
+
     class IFA_Base
     {
         requiredAddons[] = {"IFA3_Core"};
@@ -2068,6 +2070,88 @@ class Templates
         file = "SPEX_CIV";
         shortName = "Civilian";
         lore = $STR_A3A_templates_lore_SPE_IFA_CIV;
+    };
+    // ***************************** SPE with SPEX and SEP *****************************
+
+    class SEP_Base : SPEX_Base
+    {
+        requiredAddons[] = {"ww2_spe_assets_c_characters_germans_c","WW2_SPEX_Assets_c_Characters_Americans_c", "SEP_I_CW_Core"};
+        basepath = QPATHTOFOLDER(Templates\Templates\SPE_SEP);
+        logo = "SEP_MISC\data\SEP_LogoOver_ca.paa";
+        priority = 85;
+    };
+
+    class SEP_US_Winter : SEP_Base
+    {
+        side = "Occ";
+        flagTexture = "\WW2\SPE_Core_t\Data_t\Flags\flag_USA_co.paa";
+        name = "SEP US Winter";
+        file = "SEP_AI_US_Winter";
+        shortName = "US";
+        lore = $STR_A3A_templates_lore_SPE_IFA_AI_US;
+        climate[] = {"arctic"};
+    };
+
+    class SEP_ACAF : SEP_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\Data_F\Flags\Flag_AltisColonial_CO.paa";
+        file = "SEP_AI_ACAF";
+        name = "SEP Altis Colonial Armed Forces";
+        shortName = "ACAF";
+        lore = "The Altis Colonial Armed Forces occupies the islands of Altis and Stratis on behalf of the British Empire";
+        climate[] = {"arid"};
+    };
+
+    class SEP_IHAC : SEP_Base
+    {
+        side = "Occ";
+        flagTexture = "\SEP_MISC\data\SEP_Flag_FrenchTanoa_co.paa";
+        name = "SEP Horizon Island Colonial Army";
+        file = "SEP_AI_IHAC";
+        shortName = "ÎHAC";
+        lore = "Îles Horizon Armée Coloniales, French Colonial Army of Tanoa and the Horizon Islands";
+        climate[] = {"tropical"};
+    };
+
+    class SEP_WEH_Core : SEP_Base
+    {
+        side = "Inv";
+        flagTexture = "\WW2\SPE_Core_t\Data_t\Flags\flag_GER_co.paa";
+        name = "SEP Wehrmacht Central";
+        file = "SEP_AI_WEH_Core";
+        shortName = "WEH";
+        lore = "The homeland command of the German army";
+        climate[] = {"temperate"};
+    };
+
+    class SEP_WEH_Winter : SEP_WEH_Core
+    {
+        name = "SEP Wehrmacht Central Winter";
+        file = "SEP_AI_WEH_Winter";
+        climate[] = {"arctic"};
+    };
+
+    class SEP_Reb_AK : SEP_Base
+    {
+        side = "Reb";
+        flagTexture = "\x\A3A\addons\core\Pictures\Flags\ifa_ak.paa";
+        name = "SEP AK";
+        file = "SEP_REB_AK";
+        shortName = "AK"; 
+        lore = $STR_A3A_templates_IFA_REB_AK;
+        climate[] = {"temperate","arctic"};
+    };
+
+    class SEP_Reb_FRAS : SEP_Base
+    {
+        side = "Reb";
+        flagTexture = "\A3\Data_F\Flags\Flag_Altis_CO.paa";
+        name = "SEP FRAS";
+        file = "SEP_REB_FRAS";
+        shortName = "FRAS"; // Free Republic of Altis and Stratis
+        lore = "The Free Republic of Altis and Stratis";
+        climate[] = {"tropical","arid"};
     };
 
      // ***************************** CWR *****************************

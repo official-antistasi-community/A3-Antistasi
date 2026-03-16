@@ -102,7 +102,6 @@ class CfgFunctions
             class lookForSupplyVehicle {};
             class loot {};
             class randomRifle {};
-            class serviceVehicle {};
             class setCargoItems {};
             class setRebelLoadouts {};
             class transfer {};
@@ -855,6 +854,7 @@ class CfgFunctions
             class deleteNamespace {};
             class filterAndWeightArray {};
             class findEmptyPos {};
+            class findEmptyPosCar {};
             class findPosNearHouse {};
             class getAdmin {};
             class isEngineer {};

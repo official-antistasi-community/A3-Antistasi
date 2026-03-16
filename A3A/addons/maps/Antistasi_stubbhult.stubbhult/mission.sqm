@@ -177,56 +177,6 @@ class ScenarioData
 		maxPlayers=55;
 	};
 };
-class CustomAttributes
-{
-	class Category0
-	{
-		name="Multiplayer";
-		class Attribute0
-		{
-			property="RespawnTemplates";
-			expression="true";
-			class Value
-			{
-				class data
-				{
-					singleType="ARRAY";
-					class value
-					{
-						items=1;
-						class Item0
-						{
-							class data
-							{
-								singleType="STRING";
-								value="Counter";
-							};
-						};
-					};
-				};
-			};
-		};
-		nAttributes=1;
-	};
-	class Category1
-	{
-		name="Scenario";
-		class Attribute0
-		{
-			property="EnableDebugConsole";
-			expression="true";
-			class Value
-			{
-				class data
-				{
-					singleType="SCALAR";
-					value=1;
-				};
-			};
-		};
-		nAttributes=1;
-	};
-};
 class Mission
 {
 	class Intel
@@ -1597,7 +1547,6 @@ class Mission
 									colorName="ColorPink";
 									a=50;
 									b=50;
-									angle=279.02454;
 									id=1857;
 								};
 								class Item21
@@ -1608,7 +1557,6 @@ class Mission
 									text="Your Headquarters";
 									type="hd_flag";
 									colorName="ColorGUER";
-									angle=279.02454;
 									id=1858;
 								};
 							};

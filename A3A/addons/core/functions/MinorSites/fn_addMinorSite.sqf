@@ -29,6 +29,9 @@ if (!isNil "A3A_garrison") then {      // Otherwise it's a load-from-save and ga
     } else {
         [_name, _side] call A3A_fnc_buildRoadblock;
     };
+    if (!isNil "serverInitDone") then {             // If the game's started then we need to add the VIDs
+        [_name] call A3A_fnc_garrisonServer_initVIDs;
+    };
 };
 
 if (_name in A3A_markersToDelete) then {

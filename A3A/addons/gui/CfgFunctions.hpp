@@ -78,6 +78,9 @@ class CfgFunctions {
 
         class RRR {
             file = QPATHTOFOLDER(functions\RRR);
+            class clearEmptyWeapons {};
+            class serviceVehicle {};
+            class serviceVehicleGlobal {};
             class vehServiceDialog {};
         };
 

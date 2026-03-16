@@ -38,4 +38,7 @@ class cam_lao_nam {
 	size = 20.5;
 	cityCount = 58;
 	airbaseCount = 6;
+	class MapParams {
+		distanceSPWN = 800;
+	};	
 };

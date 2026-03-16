@@ -2974,6 +2974,9 @@
         <Turkish>Yolculuk etmek istediğiniz bölgeye tıklayın.</Turkish>
         <Chinesesimp>选择你所想要前往的区域</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_dialogs_ftradio_failed">
+        <Original>Failed to find an empty position in your target area. You should probably drive.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_grp_arrived">
         <Original>Group %1 arrived to destination.</Original>
         <Italian>Gruppo %1 è arrivato a destinazione.</Italian>

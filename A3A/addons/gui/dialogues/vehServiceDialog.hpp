@@ -14,7 +14,7 @@ class A3A_VehServiceDialog
     onUnload = "[""onUnload""] call A3A_GUI_fnc_vehServiceDialog";
 
     #define DIALOG_W 104
-    #define DIALOG_H 82
+    #define DIALOG_H 84
     #define DIALOG_X CENTER_X(DIALOG_W) // Global x pos of dialog
     #define DIALOG_Y CENTER_Y(DIALOG_H) // Global y pos of dialog
 
@@ -32,10 +32,10 @@ class A3A_VehServiceDialog
             idc = A3A_IDC_VEHSERVICE_PYLONPICTURE;
             text = "";
             onLoad = "(_this#0) ctrlEnable false";
-            x = DIALOG_X + 27 * GRID_W;
+            x = DIALOG_X + 7 * GRID_W;
             y = DIALOG_Y + 16 * GRID_H;
-            w = 50 * GRID_W;
-            h = 49 * GRID_H;
+            w = 90 * GRID_W;
+            h = 51 * GRID_H;
         };
     };
 
@@ -120,7 +120,7 @@ class A3A_VehServiceDialog
                 class ResourceVehicleData : A3A_Text
                 {
                     idc = A3A_IDC_VEHSERVICE_RESOURCEVEHICLEDATA;
-                    text = "HEMTT Ammo (88888 points remaining)";
+                    text = "None";
                     style = ST_RIGHT;
                     x = 26 * GRID_W;
                     y = 9 * GRID_H;
@@ -134,7 +134,7 @@ class A3A_VehServiceDialog
                     text = "Reset Changes";
                     onButtonClick = "[""reset""] call A3A_GUI_fnc_vehServiceDialog;";
                     x = 2 * GRID_W;
-                    y = 74 * GRID_H;
+                    y = 76 * GRID_H;
                     w = 27 * GRID_W;
                     h = 6 * GRID_H;
                 };
@@ -145,7 +145,7 @@ class A3A_VehServiceDialog
                     text = "Full Rearm";
                     onButtonClick = "[""fullRestore""] call A3A_GUI_fnc_vehServiceDialog;";
                     x = 31 * GRID_W;
-                    y = 74 * GRID_H;
+                    y = 76 * GRID_H;
                     w = 22 * GRID_W;
                     h = 6 * GRID_H;
                 };
@@ -153,10 +153,10 @@ class A3A_VehServiceDialog
                 class ApplyButton : A3A_Button
                 {
                     idc = A3A_IDC_VEHSERVICE_APPLYBUTTON;
-                    text = "Apply (cost: 88888 points)";
+                    text = "Apply (cost: 0 points)";
                     onButtonClick = "[""checkout""] call A3A_GUI_fnc_vehServiceDialog;";
                     x = 55 * GRID_W;
-                    y = 74 * GRID_H;
+                    y = 76 * GRID_H;
                     w = 47 * GRID_W;
                     h = 6 * GRID_H;
                 };
@@ -165,7 +165,7 @@ class A3A_VehServiceDialog
                 {
                     idc = A3A_IDC_VEHSERVICE_PYLONPRESETS;
                     x = 2 * GRID_W;
-                    y = 67 * GRID_H;
+                    y = 69 * GRID_H;
                     w = 41 * GRID_W;
                     h = 5 * GRID_H;
                 };
@@ -179,7 +179,7 @@ class A3A_VehServiceDialog
                     x = 2 * GRID_W;
                     y = 16 * GRID_H;
                     w = 100 * GRID_W;
-                    h = 56 * GRID_H;
+                    h = 58 * GRID_H;
                 };
                 class DynamicTable : A3A_ControlsGroup
                 {
@@ -187,7 +187,7 @@ class A3A_VehServiceDialog
                     x = 2 * GRID_W;
                     y = 16 * GRID_H;
                     w = 100 * GRID_W;
-                    h = 56 * GRID_H;
+                    h = 58 * GRID_H;
                 };
 
                 // refuel
