@@ -323,7 +323,7 @@ Info("Reading templates");
 	private _file = getText (_cfg/"file") + ".sqf";
     [_basepath + _file, _side] call A3A_fnc_compatibilityLoadFaction;
 
-	private _type = ["Occ", "Inv", "Reb", "Civ"] # _forEachIndex;
+    private _type = ["Occ", "Inv", "Reb", "Civ"] # _forEachIndex;
     missionNamespace setVariable ["A3A_"+_type+"_template", _x];			// don't actually need this atm, but whatever
 
 } forEach (_saveData get "factions");
