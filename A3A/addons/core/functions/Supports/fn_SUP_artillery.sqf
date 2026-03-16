@@ -56,7 +56,7 @@ isNil {
 
         private _artyPos = if (_posData isEqualType []) then { _posData#0 } else { A3A_spawnPlacesHM get _base select _posData select 1 };
         private _artyDist = _artyPos distance2d _targPos;
-        if ([_vehType, _artyDist, 100] call _fnc_checkArtyRange) exitWith { _artyData = [_base, _vehID] };
+        if ([_vehType, _artyDist, 400] call _fnc_checkArtyRange) exitWith { _artyData = [_base, _vehID] };
     };
 
     // Extra aggro/tier based delay. Need now so we can increase it
@@ -68,7 +68,7 @@ isNil {
     {
         private _vehType = selectRandom (Faction(_side) get "vehiclesArtillery");
         private _freeBases = (_bases - _usedBases) select { spawner getVariable _x == 2 }
-            select { [_vehType, markerPos _x distance2d _targPos, 500] call _fnc_checkArtyRange };
+            select { [_vehType, markerPos _x distance2d _targPos, 700] call _fnc_checkArtyRange };
         if (count _freeBases == 0) exitWith { Debug("No free airbases to spawn artillery") };
         private _base = selectRandom _freeBases;
 
