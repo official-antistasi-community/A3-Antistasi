@@ -22,7 +22,7 @@ while {_airports isNotEqualTo []} do
         _testPos = _originPos getPos [_dist, _ang];
         private _inBounds = _testPos#0 > 1000 and _testPos#1 > 1000 and _testPos#0 < _worldMax and _testPos#1 < _worldMax;
         private _distToHQ = _testPos distance2d markerPos "Synd_HQ";
-        if (!surfaceIsWater _testPos and _distToHQ < distanceMission and _distToHQ > 1000 and _inBounds) exitWith {};
+        if (!surfaceIsWater _testPos and _distToHQ < distanceMission and _distToHQ > 1500 and _inBounds) exitWith {};
         _ang = (_ang + 5) % 360;
         _dist = _dist - 7;              // about four circuits in a descending spiral 
     };
