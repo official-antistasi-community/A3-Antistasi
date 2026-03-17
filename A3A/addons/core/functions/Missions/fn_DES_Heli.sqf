@@ -30,7 +30,7 @@ private _lightAttack = _faction get "vehiclesHelisLightAttack";
 private _fullAttack = _faction get "vehiclesHelisAttack";
 private _typePool = [];
 if (_light isNotEqualTo []) then {_typePool append [_light, 1]};
-if (_transport isNotEqualTo []) then {_typePool append [_transport, 2]};
+if (_transport isNotEqualTo []) then {_typePool append [_transport, 1]};
 if (_lightAttack isNotEqualTo []) then {_typePool append [_lightAttack, 2]};
 if (_fullAttack isNotEqualTo []) then {_typePool append [_fullAttack, 1]};
 private _heliType = selectRandomWeighted _typePool;
