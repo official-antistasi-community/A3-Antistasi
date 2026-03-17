@@ -129,8 +129,9 @@ if (
 
 private _remTime = _vehicle getVariable ["A3A_lastFiredTime", -3600];
 private _timeDiff = (time - _remTime);
-if (_timeDiff < 300) exitWith {
-    private _prettyTime = [300 - _timeDiff,1,1,false,2,false,true] call A3A_fnc_timeSpan_format;
+private _blockTime = A3A_garageBlockTimer * 60;
+if (_timeDiff < _blockTime) exitWith {
+    private _prettyTime = [_blockTime - _timeDiff,1,1,false,2,false,true] call A3A_fnc_timeSpan_format;
     ["STR_HR_GRG_Feedback_addVehicle_inCombat", [_prettyTime]] remoteExec ["HR_GRG_fnc_Hint", _client];
     false
 };
