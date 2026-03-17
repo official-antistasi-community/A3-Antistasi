@@ -192,7 +192,7 @@ _sfLoadoutData set ["medVests", ["AMF_CRY_JPC_V2_TAN"]];
 _sfLoadoutData set ["backpacks", ["AMF_rush24_MTC", "AMF_rush24_RG"]];
 _sfLoadoutData set ["slBackpacks", ["AMF_Quadrocopter_Backpack_F"]];
 _sfLoadoutData set ["atBackpacks", ["B_AMF_A_E_B_bag_F"]];
-_sfLoadoutData set ["helmets", ["AMF_TC801_FS_TAN_EARPROT_TAN", "AMF_TC801_GRN_EARPROT_TAN_2", "AMF_TC801_EARPROT_TAN_2"]];
+_sfLoadoutData set ["helmets", ["AMF_OPSCORE2_BLACK", "AMF_OPSCORE2_BLACK_2"]];
 _sfLoadoutData set ["slHat", ["AMF_BERET_TRANSMISSION"]];
 _sfLoadoutData set ["sniHats", ["H_Booniehat_mcamo"]];
 _sfLoadoutData set ["NVGs", ["AMF_ONYX_NVG"]];
@@ -206,7 +206,7 @@ _sfLoadoutData set ["slRifles", [
 ]];
 _sfLoadoutData set ["rifles", [  
     ["AMF_SCAR_L_02_F", "muzzle_snds_M", "AMF_AN_PEQ_15_black", "AMF_exps3", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], [], ""],
-    ["AMF_614_short_FS4_BLK", "AMF_ROTEX_III", "AMF_LASER_PIRATE", "AMF_Aimpoint_CompM5", ["30Rnd_556x45_Stanag_Tracer_Red"], [], ""]
+    ["AMF_614_short_FS4_BLK", "AMF_ROTEX_III", "AMF_AN_PEQ_15_black", "AMF_Aimpoint_CompM5", ["30Rnd_556x45_Stanag_Tracer_Red"], [], ""]
 ]];
 _sfLoadoutData set ["carbines", [  
     ["amf_sig552", "AMF_ROTEX_V", "AMF_AN_PEQ_15_black", "AMF_EOTECH_553", ["AMF_30Rnd_556x45_SIG_BO_BT_M196"], [], ""]
@@ -219,10 +219,10 @@ _sfLoadoutData set ["SMGs", [
     ["amf_hk_mp5_01_f", "muzzle_snds_L", "", "", ["AMF_30Rnd_9x19_MP5_BO_123GR"], [], ""]
 ]];
 _sfLoadoutData set ["machineGuns", [
-    ["FN_Minimi_MK3", "", "", "AMF_specter", ["150Rnd_MINI_MG_mag"], [], "Minimi_Grip_MK2"]
+    ["FN_Minimi_MK3", "", "", "AMF_specter", ["AMF_100Rnd_556x45_Minimi_BO_BT_SS109_OD"], [], "Minimi_Grip_MK2"]
 ]];
 _sfLoadoutData set ["marksmanRifles", [
-    ["AMF_SCAR_H_01_F", "muzzle_snds_B", "", "AMF_specter_tan", ["20Rnd_762x51_Mag"], [], ""]
+    ["AMF_SCAR_H_01_F", "muzzle_snds_B", "", "AMF_specter_tan", ["AMF_20Rnd_762x51_SCAR_BLK_BO_F3"], [], ""]
 ]];
 _sfLoadoutData set ["sniperRifles", [   
     ["AMF_PGM_Hecate_II_Poly_RIS", "", "", "AMF_SB_PM2_P4FL", ["AMF_7Rnd_127x99_HECATE2_CBC_770GR_BSS"], [], ""]
