@@ -1198,6 +1198,7 @@ class Templates
         //requiredAddons[] = {"CUP_AirVehicles_Core"};        // vehicles requires units & weapons
         basepath = QPATHTOFOLDER(Templates\Templates\CUP);
         logo = "\CUP\Creatures\People\CUP_Creatures_People_Core\ui\logo_cup_ca_small.paa";
+        priority = 60;
     };
 
     class CUP_ACR_Arid : CUP_Base
@@ -2135,7 +2136,6 @@ class Templates
         climate[] = {};
         shortName = "French Army";
         lore = $STR_A3A_templates_lore_AMF_France;
-        scope = 0; // disabled until someone can fix the classnames
     };
 
     // ***************************** TMT *****************************
