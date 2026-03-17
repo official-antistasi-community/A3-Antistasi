@@ -9181,6 +9181,9 @@
       <Key ID="STR_A3A_Params_garageAccessTimer_title">
         <Original>Simulate logistics by blocking flag functions after capture for X minutes</Original>
       </Key>
+      <Key ID="STR_A3A_Params_garageBlockTimer_title">
+        <Original>Combat timer for armed vehicles engaging</Original>
+      </Key>
       <Key ID="STR_A3A_Params_gcMaxObjects_title">
         <Original>Maximum number of corpses and wrecks</Original>
         <Russian>Максимальное количество трупов и обломков</Russian>
