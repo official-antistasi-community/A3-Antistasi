@@ -70,7 +70,7 @@ private _scriptHandle = [_group] spawn {
     while {true} do {
         if ((isNull _group) || (({alive _x} count units _group) < 1)) exitWith {};
 
-        if ((side leader _group) == civilian) then {                // causes this to run on military groups after they're all downed. Bad?
+        if ((side _group) == civilian) then {
             [_group] call A3A_fnc_patrolCivilianCommander;
         } else {
             [_group] call A3A_fnc_patrolCommander;
