@@ -232,8 +232,12 @@ _task set ["s_waitForRepair",
         _this set ["state", "s_boardTruck"]; false;
     };
 
-    // Box isn't in the truck
     private _crate = _this get "_crate";
+    if (!alive _crate) exitWith {
+        _this set ["state", "s_boardTruck"]; false;
+    };
+
+    // Box isn't in the truck
     if (attachedTo _crate != _truck) then {
         if (!isNull attachedTo _crate) exitWith {
             // players managed to get crate into another vehicle. Abort.
@@ -263,7 +267,7 @@ _task set ["s_crateWatch",
 {
     // crate was despawned by truck despawn
     private _crate = _this get "_crate";
-    if (isNull _crate) exitWith {
+    if !(alive _crate) exitWith {
         _this set ["state", "s_failed"]; false;
     };
 

@@ -24,7 +24,7 @@ private _side = _garrison get "side";
 // Should just work with the main function now
 // Don't install crew? Probably should send them with it...
 // Or delete some wanderers afterwards...
-[_garrison, _marker, _side, [0, 0], [_class, _slotNum, nil, _idNum]] call A3A_fnc_spawnGarrisonVehicles;
+[_garrison, _marker, _side, [0, 0], [[_class, _slotNum, nil, _idNum]]] call A3A_fnc_spawnGarrisonVehicles;
 
 // Doesn't really hurt
 [_marker] call A3A_fnc_garrisonLocal_updateStatics;

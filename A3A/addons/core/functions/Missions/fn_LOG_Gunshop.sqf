@@ -15,8 +15,8 @@ if (!isServer) exitWith {};
 
 params ["_city"];
 
-private _enemySide = sidesX getVariable _city; 
-if (_enemySide == teamPlayer) then {_enemySide == Occupants};
+private _citySide = sidesX getVariable _city; 
+private _enemySide = [_citySide, Occupants] select (_citySide == teamPlayer);
 
 private _nameDest = [_city] call A3A_fnc_localizar;
 private _textX = format [localize "STR_A3A_fn_mission_gunshop_text_meet", _nameDest];
@@ -99,7 +99,7 @@ private _addActionCode = {
 
 // Create a wandering patrol
 private _spawnPosition = [markerPos _city, 0, 200, 2] call A3A_fnc_findPatrolPos;
-private _patrolTypes = Faction(_enemySide) get (["groupsSmall", "groupSpecOpsRandom"] select (tierWar > random 12));
+private _patrolTypes = Faction(_enemySide) get (["groupsSmall", "groupSpecOpsRandom"] select (tierWar > random 12 or _citySide == teamPlayer));
 private _patrolGroup = [_spawnPosition, _enemySide, selectRandom _patrolTypes, false, true] call A3A_fnc_spawnGroup;
 {[_x, ""] call A3A_fnc_NATOinit} forEach units _patrolGroup;
 [_patrolGroup, "Patrol_Area", 0, 200, -1, true, markerPos _city] call A3A_fnc_patrolLoop;
@@ -172,11 +172,17 @@ if (_noCrate and _convoyPair isNotEqualTo []) exitWith
 };
 
 
-// Try to find a position that isn't on water or near houses
+// Try to find a position that isn't near water or houses
 private _dropPos = getPosATL _coolerPetros;
 for "_i" from 1 to 10 do {
     private _testPos = _dropPos getPos [random 400 + 400, random 360];
+    _testPos set [0, 400 max _testPos#0 min (worldSize-400)];
+    _testPos set [1, 400 max _testPos#1 min (worldSize-400)];           // clamp to prevent dropping near/beyond map edge
+
     if (surfaceIsWater _testPos) then { continue };
+    private _nearWater = [0,90,180,270] apply { surfaceIsWater (_testPos getPos [100, _x]) };
+    if (true in _nearWater) then { continue };
+
     private _nearHouses = _testPos nearObjects ["House", 50];
     if (_nearHouses isEqualTo []) exitWith { _dropPos = _testPos };
 };
