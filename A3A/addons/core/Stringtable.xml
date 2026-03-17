@@ -2790,6 +2790,12 @@
         <Korean>페트로스 보호</Korean>
         <Russian>Защитить Петроса</Russian>
       </Key>
+      <Key ID="STR_A3A_fn_base_counterattack_long">
+        <Original>%1 forces are hastily pulling together a counterattack against the recently captured zone at %2. Defend the zone if you can, or fall back to friendly territory.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_counterattack_title">
+        <Original>%1 Counterattack</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_craicts_rbDestr">
         <Original>Roadblock Destroyed</Original>
         <French>Barrage routier Détruit</French>
@@ -2818,7 +2824,7 @@
         <Russian>Блокпост потерян</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_wavedAttack_long">
-        <Original>%1 is launching a major attack against our garrison at %2. Stop them if you can, or live to fight another day.</Original>
+        <Original>%1 is launching a major attack against our garrison at %2. Stop the enemy's combined arms assault if you can, or live to fight another day.</Original>
         <Korean>%1 세력이 %2에 있는 우리 주둔군을 상대로 대대적인 공격을 시작하고 있습니다. 가능하면 그들을 저지하거나, 살아남아 다른 날에 싸우십시오.</Korean>
         <Russian>%1 начинает крупную атаку на %2. Остановите их, если сможете, или доживите до следующего дня.</Russian>
       </Key>
