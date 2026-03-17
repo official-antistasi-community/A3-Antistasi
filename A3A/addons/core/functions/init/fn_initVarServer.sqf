@@ -177,7 +177,7 @@ theBoss = objNull;
 
 createHashMap call A3A_fnc_setRebelLoadouts;		// sets version times, no dependencies
 
-A3A_useRemarks = 0;
+A3A_isCommunityServer = 0;
 
 ///////////////////////////////////////////
 //     INITIALISING ITEM CATEGORIES     ///

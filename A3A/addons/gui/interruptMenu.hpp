@@ -20,13 +20,21 @@ class A3A_OptionsBase : RscButtonMenu
 	};
     */
 };
+class A3A_BugReportBase : A3A_OptionsBase 
+{
+	idc = -1;
+	action = "['requestOpen'] spawn (uiNamespace getVariable 'A3A_GUI_fnc_bugReportDialog')";
+	text = "Antistasi - Leave Feedback";
+	onLoad = "[_this#0, 'community'] call (uiNamespace getVariable 'A3A_GUI_fnc_showInterruptButtons');";
+	y = "3 * 			(			(			((safezoneW / safezoneH)) / 40)) + (safeZoneY)";
+};
 class A3A_RemarksBase : A3A_OptionsBase 
 {
 	idc = A3A_IDC_INTERRUPT_REMARKBUTTON;
 	action = "['requestOpen'] spawn (uiNamespace getVariable 'A3A_GUI_fnc_remarksDialog')";
 	text = "Antistasi - Send Remark";
-	onLoad = "[_this#0, 'remarks'] call (uiNamespace getVariable 'A3A_GUI_fnc_showInterruptButtons');";
-	y = "3 * 			(			(			((safezoneW / safezoneH)) / 40)) + (safeZoneY)";
+	onLoad = "[_this#0, 'community'] call (uiNamespace getVariable 'A3A_GUI_fnc_showInterruptButtons');";
+	y = "5 * 			(			(			((safezoneW / safezoneH)) / 40)) + (safeZoneY)";
     /*
 	class TextPos 
 	{
@@ -43,6 +51,7 @@ class RscDisplayInterrupt : RscStandardDisplay
 	class controls
 	{
 		class A3A_Options: A3A_OptionsBase {};
+		class A3A_BugReport: A3A_BugReportBase {};
 		class A3A_Remarks: A3A_RemarksBase {};
 	};
 };
@@ -51,6 +60,7 @@ class RscDisplayMPInterrupt : RscStandardDisplay
 	class controls
 	{
 		class A3A_Options: A3A_OptionsBase {};
+		class A3A_BugReport: A3A_BugReportBase {};
 		class A3A_Remarks: A3A_RemarksBase {};
 	};
 };
