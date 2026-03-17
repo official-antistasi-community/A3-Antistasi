@@ -20,22 +20,31 @@ params ["_spawnKey", "_newGarrison"];
 
 // just a list of vehicles, or do we want other stuff?
 
+private _marker = _spawnKey select [0, _spawnKey find "_civ"];
+private _policeCarPos = A3A_cityPoliceData get _marker select 1;
+
 private _garrison = createHashMap;
+private _places = A3A_spawnPlacesHM get _spawnKey;
 private _vehicles = [];
 {
-    // Boats use special [class, pos, dir] format
-    private _class = _x#0;
-    private _vehID = _x#3;
-    private _spawnPlace = _x;
+    _x params ["_class", "_posData", "", "_vehID"];
+    private ["_pos", "_dir"];
     if (_x#1 isEqualType 0) then {
-        _spawnPlace = (A3A_spawnPlacesHM get _spawnKey) # (_x#1);
+        _spawnPlace = _places # (_x#1);
+        _pos = _spawnPlace#1; _dir = _spawnPlace#2;
+    } else {
+        // Boats use [pos, dir] posdata format
+        _pos = _posData#0; _dir = _posData#1;
     };
-    _spawnPlace params ["_type", "_pos", "_dir"];
 
     // Block if there are any near entities at all?
     private _blockers = _pos nearEntities 8;
     if (_blockers isNotEqualTo []) then {
         Error_3("Spawn of %1 in %2 blocked by %3", _class, _spawnKey, typeof (_blockers#0));
+        continue;
+    };
+    if (_policeCarPos isEqualType [] and {_policeCarPos distance2d _pos < 10}) then {
+        Debug_1("Spawn of %1 in %2 blocked by police", _class, _spawnKey);
         continue;
     };
 

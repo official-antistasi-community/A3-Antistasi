@@ -541,6 +541,7 @@ A3A_validVehicles = createHashMap;
 	_valid set ["staticAT", _x get "staticAT"];
 	_valid set ["staticMortar", _x get "staticMortars"];
 
+	_valid set ["vehicleRB", _x get "vehiclesMilitiaLightArmed"];
 	_valid set ["vehicleAA", _x get "vehiclesAA"];
 	_valid set ["vehicleSAM", _x get "vehiclesSAM"];
 	_valid set ["vehicleArty", _x get "vehiclesArtillery"];
@@ -551,8 +552,8 @@ A3A_validVehicles = createHashMap;
 		+ (_x get "vehiclesLightAPCs") + (_x get "vehiclesAPCs") + (_x get "vehiclesAA") + (_x get "vehiclesArtillery") + (_x get "vehiclesIFVs")
 		+ (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks") + (_x get "vehiclesMilitiaLightArmed")];
 
-	_valid set ["plane", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA") + (_x get "vehiclesPlanesTransport")];
-	_valid set ["runway", _valid get "plane"];
+	_valid set ["plane", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA")];
+	_valid set ["runway", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA") + (_x get "vehiclesPlanesTransport")];
 	_valid set ["heli", (_x get "vehiclesHelisLight") + (_x get "vehiclesHelisTransport") + (_x get "vehiclesHelisLightAttack") + (_x get "vehiclesHelisAttack")];
 	_valid set ["boat", (_x get "vehiclesTransportBoats") + (_x get "vehiclesGunBoats")];
 

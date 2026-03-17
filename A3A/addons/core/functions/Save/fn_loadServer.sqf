@@ -85,15 +85,19 @@ if (isServer) then {
 	private _garrisonCompat = isNil "A3A_garrison";
 	if (_garrisonCompat) then { call A3A_fnc_convertSavedGarrisons };		// Creates & fills A3A_garrison
 
-	// Convert to internal vehicle format
-	if (!_garrisonCompat) then {			// TODO: Change save format after another version  => and A3A_saveVersion < 31200
-		{
-			if ("_civ" in _x) then {continue};			// city formats unchanged
-			{
-				_x set [1, [_x#1, _x#2, _x#3]];				// pos/dir/up
-				if (count _x == 5) then { _x set [2, _x#4]; _x resize 3 } else { _x resize 2 };		// move state & cap
-			} forEach (_y get "vehicles" select { _x#1 isEqualType [] });
-		} forEach A3A_garrison;
+	if (!_garrisonCompat) then {
+		// Garrisons might become orphaned with map changes
+		private _deadGarrisons = keys A3A_garrison select { !("_civ" in _x) and markerShape _x == "" };
+		if (_deadGarrisons isNotEqualTo []) then {
+			{ A3A_garrison deleteAt _x; A3A_garrison deleteAt (_x + "_civ") } forEach _deadGarrisons;
+			Info_1("Cleared out obsolete garrisons %1", _deadGarrisons);
+		};
+
+		// If version < 031004 then convert to newer vehicle save format
+		if !("vehicles2" in (A3A_garrison get "Synd_HQ")) then { call A3A_fnc_convert310Vehicles };
+
+		// Then convert to current internal format
+		call A3A_fnc_convertVehiclesToInternal;
 	};
 
 	// Fill out any garrison that hasn't already been filled

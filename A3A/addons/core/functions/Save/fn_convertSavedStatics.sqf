@@ -44,6 +44,7 @@ private _posHQ = if (count _varValue > 3) then {_varValue select 0} else {_varVa
 		continue;
 	};
 
+	if (_arrayType == "buildings") then { _garrisonArray pushBack [_typeVeh, _posVeh, _vecDir, _vecUp]; continue };
 	if (isNil "_state") then { _garrisonArray pushBack [_typeVeh, [_posVeh, _vecDir, _vecUp]] }
 		else { _garrisonArray pushBack [_typeVeh, [_posVeh, _vecDir, _vecUp], _state] };
 

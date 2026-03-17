@@ -53,7 +53,7 @@ isNil {
         private _magType = _magHM getOrDefault ["HE", ""];
 
         ([_vehType, _magType] call A3A_fnc_getArtilleryRanges) params ["_minRange", "_maxRange"];
-        if (_mortarDist > _minRange and _mortarDist < _maxRange) exitWith { _mortarData = [_base, _vehID] };
+        if (_mortarDist > _minRange+200 and _mortarDist < _maxRange-200) exitWith { _mortarData = [_base, _vehID] };
     };
     if (_mortarData isEqualTo []) exitwith { Debug("No bases found for mortar support") };
 

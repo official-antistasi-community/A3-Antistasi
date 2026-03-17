@@ -108,6 +108,9 @@ private _savedParamsHM = createHashMapFromArray (A3A_saveData get "params");
     missionNamespace setVariable [configName _x, _val, true];                   // just publish them all, doesn't really hurt
 } forEach ("true" configClasses (configFile/"A3A"/"Params"));
 
+// Depends on civTraffic param
+call A3A_fnc_initCivSpawnPlaceStats;
+
 // Might have params dependency at some point
 if (A3A_hasACEMedical) then { call A3A_fnc_initACEUnconsciousHandler };
 

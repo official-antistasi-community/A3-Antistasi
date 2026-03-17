@@ -14,33 +14,15 @@
 
 params ["_marker"];
 
-private _spawnKey = _marker + "_civ";
-private _numCiv = 15 * sqrt (A3A_cityPop get _marker);
-
-private _spawnPlaces = A3A_spawnPlacesHM get _spawnKey;
-private _carPlaces = [];
-private _boatPlaces = [];
-{
-    if (_x#0 == "civCar") then { _carPlaces pushBack _forEachIndex; continue };
-    if (_x#0 == "civBoat") then { _boatPlaces pushBack _forEachIndex };
-} forEach _spawnPlaces;
-
-private _numParked = _numCiv * (1/50) * civTraffic;
-_numParked = (ceil _numParked) min count _carPlaces;
-
-private _numBoats = (_numCiv / 50) min count _boatPlaces;
-
-private _markerStats = createHashMap;
-_markerStats set ["civCar", [_carPlaces, count _carPlaces, _numParked]];
-_markerStats set ["civBoat", [_boatPlaces, count _boatPlaces, _numBoats]];
-
-A3A_spawnPlaceStats set [_spawnKey, _markerStats];
-
-
 // If city vehicle data was loaded from save, just bail now
-if (_spawnKey in A3A_garrison) then { continue };           
+private _spawnKey = _marker + "_civ";
+if (_spawnKey in A3A_garrison) then { continue };
 private _garrison = createHashMap;
 private _vehicles = [];
+
+private _spawnPlaces = A3A_spawnPlacesHM get _spawnKey;
+A3A_spawnPlaceStats get _spawnKey get "civCar" params ["_carPlaces", "", "_numParked"];
+A3A_spawnPlaceStats get _spawnKey get "civBoat" params ["_boatPlaces", "", "_numBoats"];
 
 for "_i" from 1 to _numParked do {
     private _type = selectRandomWeighted civVehiclesWeighted;
@@ -53,7 +35,7 @@ for "_i" from 1 to _numBoats do {
     private _type = selectRandomWeighted civBoatsWeighted;
     private _placeNum = _boatPlaces deleteAt floor random count _boatPlaces;
     (_spawnPlaces # _placeNum) params ["", "_pos", "_dir"];
-    _vehicles pushBack [_type, _pos, _dir];
+    _vehicles pushBack [_type, [_pos, _dir]];
 };
 
 _garrison set ["vehicles", _vehicles];
