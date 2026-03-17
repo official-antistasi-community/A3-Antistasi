@@ -13,7 +13,7 @@ FIX_LINE_NUMBERS()
 params ["_target", "_enemySide"];
 
 // okay. So sleep for some random time first... Balance dependent?
-//sleep (random 120);
+sleep (random 120);
 
 private _targetsAndWeights = [teamPlayer, _enemySide, [_target]] call A3A_fnc_findAttackTargets;
 _targetsAndWeights params ["_targets", "_weights"];
@@ -23,13 +23,11 @@ private _valueProb = linearConversion [0.2, 0.7, _total, 0, 1, true];
 private _attackResources = [A3A_resourcesAttackOcc, A3A_resourcesAttackInv] select (_enemySide == Invaders);
 private _resourceProb = linearConversion [-1000, -200, _attackResources, 0, 1, true];
 
-/*
 Debug_3("Checking counterAttack against %1 with %2 valueProb and %3 resourceProb", _target, _valueProb, _resourceProb);
 if (_attackResources > -200) exitWith { Debug_1("Aborted counterattack vs %1 because attack is nearly ready", _target) };
 if (_valueProb * _resourceProb < 0.3 + random 0.4) exitWith {
     Debug_1("Aborted counterattack vs %1 due to low value", _target);
 };
-*/
 
 isNil {
     if (!isNil "A3A_choosingAttack") exitWith { Debug_1("Aborted counterattack vs %1 due to choosing attack", _target) };
