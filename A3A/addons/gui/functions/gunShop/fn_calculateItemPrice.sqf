@@ -74,10 +74,12 @@ private _fnc_ammoPriceCalculator = {
     };
 
     // Add in thrust for rockets and maneuvrability for guided missiles (iron bombs are missile sim, so need to check guidance)
-    private _velocity = A3A_ammoInitSpeed getOrDefault [_className, 0];
+    private _muzzVelocity = A3A_ammoInitSpeed getOrDefault [_className, 0];
+    private _subVelocity = _muzzVelocity;
     private _totThrust = 0;
     if (_simType in _rocketSims) then {
         _totThrust = getNumber (_cfgAmmo >> "thrust") * getNumber (_cfgAmmo >> "thrustTime");
+        _subVelocity = _subVelocity + _totThrust;           // need this for some retarded KEP ammo
         if (_guidanceMod > 0) then {
             private _manHigh = getNumber (_cfgAmmo >> "maxSpeed")^1.8 * getNumber (_cfgAmmo >> "maneuvrability") / 175;
             private _manLow = getNumber (_cfgAmmo >> "maxSpeed") * getNumber (_cfgAmmo >> "maneuvrability") / 2;
@@ -85,13 +87,12 @@ private _fnc_ammoPriceCalculator = {
             _totThrust = _totThrust + (_manHigh max _manLow);
         };
     };
-    //if (_log) then {diag_log format ["Sim %1, velocity %2, thrust %3, guidanceMod %4", _simType, _velocity, _totThrust, _guidanceMod]};
+    //if (_log) then {diag_log format ["Sim %1, velocity %2, thrust %3, guidanceMod %4", _simType, _muzzVelocity, _totThrust, _guidanceMod]};
 
     // submunitionAmmo can be either [type, prob, type2, prob2] array or just type string
     private _subAmmoType = getText (_cfgAmmo >> "submunitionAmmo");
     if (isArray (_cfgAmmo >> "submunitionAmmo")) then { _subAmmoType = getArray (_cfgAmmo >> "submunitionAmmo") # 0 };
 
-    private _subVelocity = _velocity;	   // used for payload value later
     private _subCount = 1;
     private _probablyHEAT = false;
     while {_subAmmoType != ""} do
@@ -102,10 +103,9 @@ private _fnc_ammoPriceCalculator = {
             _subCount = _subCount * _thisSubCount;
         };
         _probablyHEAT = count _subConeType < 2;										// single projectile so treat as HEAT warhead later
-        if (getNumber (_cfgAmmo >> "submunitionInitSpeed") > 0) then {				// _simType != "shotdeploy" ? Not sure which is correct
-            _subVelocity = getNumber (_cfgAmmo >> "submunitionInitSpeed");
-            _totThrust = _totThrust + (_subVelocity - _velocity);
-        };
+        private _subVelDiff = 0 max (getNumber (_cfgAmmo >> "submunitionInitSpeed") - _subVelocity);
+        _subVelocity = _subVelocity + _subVelDiff;                      // Tested with CUP CRV7 and Rocket_04_AP
+        _totThrust = _totThrust + _subVelDiff;
 
         // Submunitions can have thrust/guidance/maneuver too. Add that in.
         _cfgAmmo = configFile >> "CfgAmmo" >> _subAmmoType;			// replace main ammo
@@ -129,11 +129,11 @@ private _fnc_ammoPriceCalculator = {
     // hit & indirHit for final projectile (assuming original doesn't matter for subProjectile)
     [_cfgAmmo, _probablyHEAT, _log] call _fnc_payloadValue params ["_varPayload", "_fixedPayload"];
     private _varTotal = _varPayload * _subCount^0.8 + _guidanceMod;
-    private _varCost = 0.000175 * (600 + _velocity + _totThrust) * _varTotal;
+    private _varCost = 0.000175 * (600 + _muzzVelocity + _totThrust) * _varTotal;
 
     // guidance applies twice, once as payload weight and then as direct expense
     private _price = _varCost + (_fixedPayload * _subCount^0.8) + _guidanceMod;
-    //if (_log) then {diag_log format ["VCost %1, FCost %2, Vmul %3, Price %4, end", _varCost, _fixedPayload*_subCount^0.8, 1 + (_velocity + _totThrust) / 500, _price]};
+    //if (_log) then {diag_log format ["VCost %1, FCost %2, Vmul %3, Price %4, end", _varCost, _fixedPayload*_subCount^0.8, 1 + (_muzzVelocity + _totThrust) / 600, _price]};
     _price;
 };
 
