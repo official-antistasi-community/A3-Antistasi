@@ -112,7 +112,7 @@ if (({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3) or (time 
     [_taskId, "invaderPunish", "SUCCEEDED"] call A3A_fnc_taskSetState;
     [_posDest, 20, 3000] call _fnc_adjustNearCities;
 
-    A3A_punishmentDefBuff = A3A_punishmentDefBuff + 1.25;
+    A3A_punishmentDefBuff = A3A_punishmentDefBuff + 1;
     [Occupants, -10, 90] remoteExec ["A3A_fnc_addAggression",2];
     [30, false, markerPos _mrkDest, 500] call A3A_tasks_fnc_rewardPlayers;
 } else {

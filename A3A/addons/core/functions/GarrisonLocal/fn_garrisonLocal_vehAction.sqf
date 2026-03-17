@@ -68,7 +68,6 @@ private _group = createGroup [side group gunner _vehicle, true];            // d
 crew _vehicle joinSilent _group;
 _garrison set ["groups", (_garrison get "groups") - [grpNull]];             // prevent this growing indefinitely
 _garrison set ["troops", (_garrison get "troops") - crew _vehicle];
-_garrison get "vehActions" pushBack [_vehID, _vehicle, _group];
 
 // might need units instead for accounting? dead guys will be removed
 // But dead units get removed on server side anyway, so it mostly works...
@@ -87,7 +86,8 @@ if (_garrison get "state" == "paused") then {
 private _vehType = A3A_supportVehTypes getOrDefault [typeOf _vehicle, "none"];
 Trace_1("Running vehicle action %1", _vehType);
 
-switch (_vehType) do {
+isNil {
+private _scriptHandle = switch (_vehType) do {
     case "staticMortars": {
         [_marker, _vehID, _vehicle, _actionData, false] spawn A3A_fnc_vehActionArty;
     };
@@ -105,4 +105,7 @@ switch (_vehType) do {
             A3A_garrisonOps pushBack ["vehActionEnd", _this];
         };
     };
+};
+
+_garrison get "vehActions" pushBack [_vehID, _vehicle, _group, _scriptHandle];
 };

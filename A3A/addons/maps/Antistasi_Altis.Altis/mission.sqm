@@ -9156,6 +9156,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
+								createAsSimpleObject=1;
 							};
 							id=3128;
 							type="Land_FieldToilet_F";
@@ -9172,6 +9173,7 @@ class Mission
 							side="Empty";
 							class Attributes
 							{
+								createAsSimpleObject=1;
 								disableSimulation=1;
 							};
 							id=3129;
@@ -9190,6 +9192,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
+								createAsSimpleObject=1;
 								disableSimulation=1;
 							};
 							id=3130;
@@ -9208,6 +9211,7 @@ class Mission
 							flags=4;
 							class Attributes
 							{
+								createAsSimpleObject=1;
 								disableSimulation=1;
 							};
 							id=3131;
@@ -17009,6 +17013,7 @@ class Mission
 							class Attributes
 							{
 								skill=0.2;
+								createAsSimpleObject=1;
 								disableSimulation=1;
 							};
 							id=2947;
@@ -17028,6 +17033,7 @@ class Mission
 							class Attributes
 							{
 								skill=0.2;
+								createAsSimpleObject=1;
 								disableSimulation=1;
 							};
 							id=2948;
@@ -23741,6 +23747,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
+								createAsSimpleObject=1;
 							};
 							id=2745;
 							type="Land_FieldToilet_F";
@@ -23758,6 +23765,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
+								createAsSimpleObject=1;
 							};
 							id=2746;
 							type="Land_FieldToilet_F";
@@ -23774,6 +23782,7 @@ class Mission
 							flags=5;
 							class Attributes
 							{
+								createAsSimpleObject=1;
 							};
 							id=2747;
 							type="Land_FieldToilet_F";
@@ -24195,84 +24204,14 @@ class Mission
 								angles[]={4.7134881,4.688199,5.5170035};
 							};
 							side="Empty";
-							flags=5;
+							flags=4;
 							class Attributes
 							{
-								disableSimulation=1;
+								createAsSimpleObject=1;
 							};
 							id=3292;
 							type="Land_FieldToilet_F";
 							atlOffset=-0.74199986;
-							class CustomAttributes
-							{
-								class Attribute0
-								{
-									property="allowDamage";
-									expression="_this allowdamage _value;";
-									class Value
-									{
-										class data
-										{
-											singleType="BOOL";
-											value=0;
-										};
-									};
-								};
-								class Attribute1
-								{
-									property="DoorStates";
-									expression="['init',_this,_value] call bis_fnc_3DENAttributeDoorStates;";
-									class Value
-									{
-										class data
-										{
-											singleType="ARRAY";
-											class value
-											{
-												items=3;
-												class Item0
-												{
-													class data
-													{
-														singleType="SCALAR";
-														value=0;
-													};
-												};
-												class Item1
-												{
-													class data
-													{
-														singleType="SCALAR";
-														value=0;
-													};
-												};
-												class Item2
-												{
-													class data
-													{
-														singleType="SCALAR";
-														value=0;
-													};
-												};
-											};
-										};
-									};
-								};
-								class Attribute2
-								{
-									property="hideObject";
-									expression="if !(is3DEN) then {_this hideobjectglobal _value;};";
-									class Value
-									{
-										class data
-										{
-											singleType="BOOL";
-											value=1;
-										};
-									};
-								};
-								nAttributes=3;
-							};
 						};
 						class Item169
 						{
@@ -28204,6 +28143,7 @@ class Mission
 			flags=1;
 			class Attributes
 			{
+				createAsSimpleObject=1;
 			};
 			id=3779;
 			type="MemorialWreath_01_Altis_Standing_F";
@@ -28221,6 +28161,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
+				createAsSimpleObject=1;
 			};
 			id=3780;
 			type="Land_CampingTable_F";
@@ -28238,6 +28179,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
+				createAsSimpleObject=1;
 			};
 			id=3781;
 			type="Land_CampingChair_V2_F";

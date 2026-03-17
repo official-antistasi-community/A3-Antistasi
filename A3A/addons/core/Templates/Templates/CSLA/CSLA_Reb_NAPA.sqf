@@ -8,7 +8,7 @@
 ["flagTexture", "cup\baseconfigs\cup_baseconfigs\data\flags\flag_napa_co.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "Faction_CUP_NAPA"] call _fnc_saveToTemplate;
 
-["vehiclesBasic", ["I_Quadbike_01_F", "US85_TT650", "CSLA_CIV_JARA250"]] call _fnc_saveToTemplate;
+["vehiclesBasic", ["I_Quadbike_01_F", "US85_TT650"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["CUP_B_UAZ_Open_CDF"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["CUP_O_Datsun_PK"]] call _fnc_saveToTemplate;
 ["vehiclesTruck", ["CUP_V3S_Open_NAPA"]] call _fnc_saveToTemplate;
@@ -17,13 +17,13 @@
 ["vehiclesBoat", ["I_G_Boat_Transport_01_F", "CUP_I_RHIB_RACS"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlane", ["CSLA_CIV_An2_1"]] call _fnc_saveToTemplate;       // replace from civ varient s
-["vehiclesCivPlane", ["CUP_I_CESSNA_T41_UNARMED_LDF", "CUP_C_C47_CIV"]] call _fnc_saveToTemplate;
+["vehiclesCivPlane", ["CSLA_CIV_An2_1", "CUP_C_C47_CIV"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["CUP_I_LR_Ambulance_RACS"]] call _fnc_saveToTemplate;
 
 
-["vehiclesCivCar", ["CUP_C_Datsun_4seat","CSLA_CIV_AZU"]] call _fnc_saveToTemplate;
+["vehiclesCivCar", ["CUP_C_Datsun_4seat","CSLA_CIV_AZU", "CSLA_CIV_JARA250"]] call _fnc_saveToTemplate;
 ["vehiclesCivTruck", ["CUP_C_V3S_Covered_TKC"]] call _fnc_saveToTemplate;
-["vehiclesCivHeli", ["CUP_C_412"]] call _fnc_saveToTemplate;
+["vehiclesCivHeli", ["CUP_C_Mi17_Civilian_RU","CUP_C_MI6T_RU"]] call _fnc_saveToTemplate;
 ["vehiclesCivBoat", ["C_Rubberboat"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["CSLA_UK59L_Stat"]] call _fnc_saveToTemplate;
@@ -35,8 +35,8 @@
 ["staticMortarMagSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["staticMortarMagFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
 
-["mineAT", "CSLA_PtMiBa3_mag", "US85_M87A1Mine_mag"] call _fnc_saveToTemplate;
-["mineAPERS", "CSLA_PPMiSr2_mag", "US85_M14Mine_mag"] call _fnc_saveToTemplate;
+["mineAT", "CSLA_PtMiBa3Mine", "CSLA_PTMiDMine"] call _fnc_saveToTemplate;
+["mineAPERS", "US85_M14Mine", "US85_M67Exp"] call _fnc_saveToTemplate;
 
 ["breachingExplosivesAPC", [["SatchelCharge_Remote_Mag", 1], ["US85_SatchelCharge_Mag", 1], ["CSLA_IVZ", 1], ["DemoCharge_Remote_Mag", 1], ["CSLA_TNT0100g", 2]]] call _fnc_saveToTemplate;
 ["breachingExplosivesTank", [["SatchelCharge_Remote_Mag", 1], ["CSLA_IVZ", 1], ["CSLA_TNT0100g", 4], ["DemoCharge_Remote_Mag", 4], ["US85_SatchelCharge_Mag", 1]]] call _fnc_saveToTemplate;
@@ -51,7 +51,7 @@ private _initialRebelEquipment = [
     "CUP_sgun_slamfire", "CSLA_OP54",
     "CUP_1Rnd_12Gauge_Pellets_No00_Buck", "CUP_1Rnd_12Gauge_Pellets_No3_Buck", "CSLA_OP54_5rnd_7_62Odst59",
     "CSLA_Pi82", "CSLA_Pi82_12rnd_9Pi82",
-    ["CUP_launch_RPG18", 50],
+    ["CUP_launch_RPG26", 50],
     ["IEDUrbanSmall_Remote_Mag", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],
     "CSLA_URG86o", "SmokeShell",
     "CSLA_grUah61", "CSLA_gr60bnt", "CSLA_gr60Sa24base", "CSLA_gr60emp",

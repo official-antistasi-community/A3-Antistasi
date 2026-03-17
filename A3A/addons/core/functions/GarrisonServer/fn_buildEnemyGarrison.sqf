@@ -14,7 +14,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_marker"];
+params ["_marker", ["_vehiclesOnly", false]];
 
 if !(_marker in markersX) exitWith {
     Error_1("Marker %1 is not a major marker", _marker);
@@ -26,30 +26,35 @@ if (isNil "_spawnPlaceStats") then {
     Error_1("Marker %1 not found in spawnPlaceStats", _marker);
 };
 
-private _siteType = call {
-    if (_marker in citiesX) exitWith {"city"};
-    if (_marker in airportsX) exitWith {"airport"};
-    if (_marker in outposts) exitWith {"outpost"};
-    if (_marker in seaports) exitWith {"seaport"};
-    "factory";
-};
-private _quality = [_siteType, _marker, _side] call A3A_fnc_getSiteTroopQuality;
-
 // Might be used to rebuild a garrison after a sim capture, so keep the old static info if it exists
 private _garrison = A3A_garrison getOrDefaultCall [_marker, {createHashMap}, true];
-_garrison set ["buildings", []];
-private _troopCount = (0.7 + random 0.3) * (A3A_garrisonSize get _marker);
-_garrison set ["troops", [ceil _troopCount, _quality]];
+
+if (!_vehiclesOnly) then {
+    private _siteType = call {
+        if (_marker in citiesX) exitWith {"city"};
+        if (_marker in airportsX) exitWith {"airport"};
+        if (_marker in outposts) exitWith {"outpost"};
+        if (_marker in seaports) exitWith {"seaport"};
+        "factory";
+    };
+    private _quality = [_siteType, _marker, _side] call A3A_fnc_getSiteTroopQuality;
+
+    _garrison set ["buildings", []];
+    private _troopCount = (0.7 + random 0.3) * (A3A_garrisonSize get _marker);
+    _garrison set ["troops", [ceil _troopCount, _quality]];
+};
 
 // Note: spawnPlaceStats has detailed place names (eg staticAA, vehicleTruck), garrison puts everything into vehicles
 private _vehicles = [];
 {
     private _placeType = _x;
     _y params ["_indexes", "_max", "_par"];
+    private _vehCount = floor (random 0.99 + _par * (0.7 + random 0.3));
+    //diag_log format ["Spawning %1 of %2 type %3", _vehCount, _par, _placeType];
 
     private _remIndexes = +_indexes;
-    for "_i" from 1 to _par do {
-        private _vehType = [_faction, _placeType, _siteType == "airport"] call A3A_fnc_selectGarrisonVehicleType;
+    for "_i" from 1 to _vehCount do {
+        private _vehType = [_faction, _placeType, "airport" in _marker] call A3A_fnc_selectGarrisonVehicleType;
         if (isNil "_vehType") exitWith {};      // faction doesn't have vehicles of that type
 
         // Use places in order for vehicles, otherwise randomly

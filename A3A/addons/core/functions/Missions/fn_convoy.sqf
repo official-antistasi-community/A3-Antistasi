@@ -191,7 +191,7 @@ private _fnc_spawnConvoyVehicle = {
 
 private _fnc_spawnEscortVehicle = {
     private _typeVehEsc = selectRandomWeighted _vehPool;
-    private _veh = [_typeVehEsc, "Convoy Escort", _spawnSF] call _fnc_spawnConvoyVehicle;
+    private _veh = [_typeVehEsc, "Convoy Escort"] call _fnc_spawnConvoyVehicle;
 };
 
 private _fnc_spawnEscortHeli = {
