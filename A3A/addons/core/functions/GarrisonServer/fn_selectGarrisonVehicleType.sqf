@@ -64,7 +64,7 @@ if (_placeType == "plane") exitWith {
 if (_placeType == "vehiclePolice") exitWith { selectRandom (_faction get "vehiclesPolice") };
 if (_placeType == "vehicleAA") exitWith { selectRandom (_faction get "vehiclesAA") };
 if (_placeType == "vehicleArty") exitWith { selectRandom (_faction get "vehiclesArtillery") };
-if (_placeType == "vehicleSAM") exitWith { "B_SAM_System_03_F" };
+if (_placeType == "vehicleSAM") exitWith { selectRandom (_faction get "vehiclesSAM") };
 if (_placeType == "runway") exitWith {
     [["vehiclesPlanesAA", "vehiclesPlanesCAS", "vehiclesPlanesTransport"], [1,2,3]] call _fnc_selectFromLists;
 };
