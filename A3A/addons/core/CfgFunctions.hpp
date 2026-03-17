@@ -70,6 +70,7 @@ class CfgFunctions
             class vehicleConvoyHeliTravel{};
             class vehicleConvoyTravel {};
             class vehicleMarkers {};
+            class waypointMonitor {};
         };
 
         class Ammunition {
