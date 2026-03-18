@@ -29,7 +29,7 @@ class pulau {
 	};
 	antennasBlacklistIndex[] = {};
 	banks[] = {
-        {5934.3,5828.19,0}
+        {5934.3,5828.19,0},{4869.73,7291.42,0}
 	};
 	garrison[] = {
 		{},{"seaport_1","outpost_1","outpost_18"},{},{"control_0","control_1","control_2","control_10","control_11"}
