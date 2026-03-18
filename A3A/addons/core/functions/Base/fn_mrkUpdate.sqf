@@ -23,6 +23,10 @@ private _mrkText = call {
     if (_marker in resourcesX) exitWith { "Resources" };
     if (_marker in factories) exitWith { "Factory" };
     if (_marker in seaports) exitWith { "Sea Port" };
+    if (_marker in outpostsFIA) exitWith { 
+        private _strTable = ["STR_A3A_fn_base_croutpFIA_watchpost", "STR_A3A_fn_base_croutpFIA_roadblock"] select (isOnRoad markerPos _mrkD);
+        format [localize _strTable, _faction get "name"];
+    };
     ""; 		// city
 };
 

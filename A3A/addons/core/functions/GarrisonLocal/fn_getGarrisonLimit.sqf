@@ -41,6 +41,9 @@ private _limit = switch (true) do {
     case (_marker in factories || {_marker in resourcesX}): {
         round (A3A_rebelGarrisonLimit * 0.5)
     };
+    case (_marker in outpostsFIA): {
+        round (A3A_rebelGarrisonLimit * 0.33)
+    };
     default {
         A3A_rebelGarrisonLimit
     };

@@ -141,7 +141,7 @@ if (isServer) then {
 	// Should have garrison data for this now
 	{
 		[_x] call A3A_fnc_mrkUpdate
-	} forEach markersX;
+	} forEach (markersX + outpostsFIA);
 
 
 	// Spawn in HQ buildings before we potentially place HQ objects on them
