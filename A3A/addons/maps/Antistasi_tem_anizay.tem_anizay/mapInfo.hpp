@@ -7,7 +7,7 @@ class tem_anizay {
 	antennasBlacklistIndex[] = {}; //all antennas good
 	banks[] = {
 		{3735.79,8194.18,0},{477.111,7106.39,0},{3825.56,7336.85,0},{8468.98,5327.45,0},{3503.69,2860.89,0}
-	}; //no suitable building available
+	};
 	garrison[] = {
 		{},{"outpost_8","factory_4","control_19","control_44","control_45"},{},{"control_19","control_44","control_45"}
 	};

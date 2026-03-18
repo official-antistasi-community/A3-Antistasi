@@ -9,7 +9,7 @@ class isladuala3 {
 	antennasBlacklistIndex[] = {0,1};
 	banks[] = {
 		{2466.36,9832.23,0},{4622.61,8358.19,0},{4477.06,6572.49,0},{4408.39,6377.25,0},{8101.74,5664.45,0},{4837.95,5107.81,0},{3274.86,3630.74,0},{5311.55,3386.14,0},{8576.62,3529.19,0},{6344.66,2286.4,0},{3753.02,2608.04,0},{2610.32,1793.97,0},{1710.12,1455.26,0}
-	}; //no suitable building available (What is a suitable building?)
+	};
 	garrison[] = {
 		{},{"airport_1","seaport_1","seaport_9","resource_1","resource_19","factory_1","outpost_1","outpost_2","outpost_3"},{},{"control_130","control_131","control_132","control_133","control_134","control_135","control_136","control_137","control_138","control_143","control_63","control_74","control_76","control_77","control_78","control_79","control_80","control_81","control_82"}
 	};

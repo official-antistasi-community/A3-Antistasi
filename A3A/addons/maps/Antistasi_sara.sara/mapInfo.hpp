@@ -9,7 +9,7 @@ class sara {
 	antennasBlacklistIndex[] = {1,3,4,5,9,11,13,16,17};
 	banks[] = {
 		{10650.2,9247.39,0},{10560.8,9475.46,0},{9394,5933.41,0},{11255.9,5881.95,0},{13595.6,9050.26,0},{14293.1,12407.8,0}
-	}; //no suitable building available
+	};
 	garrison[] = {
 		{},{"airport_1","seaport_6","outpost_22","outpost_15","resource_9","outpost_19","outpost_14","resource_11"},{},{"control_28","control_27"}
 	};

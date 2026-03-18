@@ -11,7 +11,7 @@ class SPE_Normandy {
 	antennasBlacklistIndex[] = {};
 	banks[] = {
 		{4383.47,8344.03,0},{5786.47,8210.45,0},{4263.44,5973.51,0},{6411.84,6997.81,0},{1793.75,11864.4,0},{11288.3,897.351,0},{8422.58,11625.5,0},{5123.56,1662.73,0},{8422.48,7566.02,0},{9151.63,8342.18,0}
-	}; //no suitable/defined buildings
+	};
 	garrison[] = {
 		{},{"airport_3","outpost_1","outpost_10","factory_6","resource_1","resource_2","control_17","control_18","control_19","control_32","control_33","control_51","control_56","control_57"},
 		{},{"control_17","control_18","control_19","control_32","control_33","control_51","control_56","control_57"}
