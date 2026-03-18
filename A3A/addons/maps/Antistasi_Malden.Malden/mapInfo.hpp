@@ -7,7 +7,7 @@ class malden {
 	antennasBlacklistIndex[] = {2,5,7};
 	banks[] = {
 		{7130.2,8982.43,0},{7298.3,7843.23,0},{7136.8,6053.84,0},{3116.27,6297.14,0},{8168.9,3111.65,0}
-	}; //only one possible building but directly next to a factory
+	}; //buildings with ATM attached
 	garrison[] = {{},{"airport","seaport_7"},{},{}};
 	fuelStationTypes[] = {
 		"Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_01_pump_F","Land_FuelStation_02_pump_F","Land_FuelStation_03_pump_F"

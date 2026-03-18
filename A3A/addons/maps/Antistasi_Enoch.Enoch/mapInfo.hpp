@@ -9,7 +9,7 @@ class enoch {
 	antennasBlacklistIndex[] = {2,3,4,6,8,10,11,12,13,14};
 	banks[] = {
 		{10707.2,10987.7,0},{11383.6,9618.34,0},{11468.6,4557.46,0},{6258.79,10144.1,0},{6051.4,4189.77,0},{3057.75,6831.12,0},{908.698,5477.62,0},{1370.77,7356.06,0},{1507.29,9768.09,0}
-	}; //no suitable building available
+	}; //mostly market buildings
 	garrison[] = {{},{"airport_3","control_14"},{},{"control_14"}};
 	fuelStationTypes[] = {
 		"Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_01_pump_F","Land_FuelStation_02_pump_F","Land_FuelStation_03_pump_F"

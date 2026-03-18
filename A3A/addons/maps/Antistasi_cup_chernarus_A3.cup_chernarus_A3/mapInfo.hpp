@@ -94,7 +94,9 @@ class cup_chernarus_A3 {
 		{7756.32,14820.1,0.00469971}
 	};
 	antennasBlacklistIndex[] = {2,8,9,13,14};
-	banks[] = {}; //no suitable building available
+	banks[] = {
+		{3230.63,13057.2,0},{3074.75,12668.3,0},{11835.9,14351.5,0},{11563.7,14744.5,0},{13875.4,13117.6,0},{8017.28,12752.7,0},{12030.9,9160.35,0},{10642,8015.76,0},{10419.8,2364.62,0},{6536.84,2306.07,0},{2669.99,5277.14,0},{3065.14,7971.5,0},{3813.16,8946.77,0}
+	}; //no suitable building available
 	garrison[] = {
 		{},{"outpost_22","outpost_23","factory_5","factory_6","resource_5","resource_10","control_41","control_42","control_43","control_52","control_53","control_55","control_56"},{},{"control_41","control_42","control_43","control_52","control_53","control_55","control_56"}
 	};
