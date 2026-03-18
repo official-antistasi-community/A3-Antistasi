@@ -103,7 +103,8 @@ private _majorMarkers = (airportsX + resourcesX + factories + outposts + seaport
 // Autogenerate stuff like helipad placements for markers that don't have any defined spawn places
 A3A_spawnPlacesHM = createHashMap;
 {
-    [_x, _placeMarkers getOrDefault [_x, []]] call A3A_fnc_initSpawnPlaces;
+    // Need the tolower here to preserve original behaviour matching Outpost_1 to outp_1_vehicle
+    [_x, _placeMarkers getOrDefault [toLower _x, []]] call A3A_fnc_initSpawnPlaces;
 } forEach _majorMarkers;
 
 
