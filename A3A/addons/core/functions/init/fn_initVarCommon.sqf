@@ -305,7 +305,9 @@ medicAnims = ["AinvPknlMstpSnonWnonDnon_medic_1","AinvPknlMstpSnonWnonDnon_medic
 //      OTHER LOOKUP TABLES      ///
 ////////////////////////////////////
 
-A3A_markerPrefixHM = createHashMapFromArray [["airport", "airp_"], ["outpost", "outp_"], ["resource", "reso_"], ["factory", "fact_"], ["seaport", "seap_"]];
+// Cherno 2020 has one miscased factory, VT7 has all outposts and seaports. Provide both cases to preserve original behaviour
+A3A_markerPrefixHM = createHashMapFromArray [["airport", "airp_"], ["outpost", "outp_"], ["resource", "reso_"], ["factory", "fact_"], ["seaport", "seap_"],
+    ["Airport", "airp_"], ["Outpost", "outp_"], ["Resource", "reso_"], ["Factory", "fact_"], ["Seaport", "seap_"]];
 
 
 Info("initVarCommon completed");
