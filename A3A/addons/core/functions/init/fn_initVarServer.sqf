@@ -546,11 +546,11 @@ A3A_validVehicles = createHashMap;
 	_valid set ["vehicleSAM", _x get "vehiclesSAM"];
 	_valid set ["vehicleArty", _x get "vehiclesArtillery"];
 	_valid set ["vehiclePolice", _x get "vehiclesPolice"];
-	_valid set ["vehicleTruck", (_x get "vehiclesTrucks") + (_x get "vehiclesCargoTrucks") + (_x get "vehiclesAmmoTrucks")
-		+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
-	_valid set ["vehicle", (_valid get "vehicleTruck") + (_x get "vehiclesLightUnarmed") + (_x get "vehiclesLightArmed") + (_x get "vehiclesMilitiaCars")
-		+ (_x get "vehiclesLightAPCs") + (_x get "vehiclesAPCs") + (_x get "vehiclesAA") + (_x get "vehiclesArtillery") + (_x get "vehiclesIFVs")
-		+ (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks") + (_x get "vehiclesMilitiaLightArmed")];
+	_valid set ["vehicleTruck", (_x get "vehiclesCargo") + (_x get "vehiclesAmmoTrucks") + (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
+	_valid set ["vehicle", (_x get "vehiclesTrucks") + (_x get "vehiclesAmmoTrucks") + (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")
+		+ (_x get "vehiclesCargoTrucks") + (_x get "vehiclesMilitiaTrucks") + (_x get "vehiclesLightUnarmed") + (_x get "vehiclesLightArmed")
+		+ (_x get "vehiclesMilitiaCars") + (_x get "vehiclesMilitiaLightArmed") + (_x get "vehiclesLightAPCs") + (_x get "vehiclesAPCs") + (_x get "vehiclesAA") 
+		+ (_x get "vehiclesIFVs") + (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks")];
 
 	_valid set ["plane", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA")];
 	_valid set ["runway", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA") + (_x get "vehiclesPlanesTransport")];

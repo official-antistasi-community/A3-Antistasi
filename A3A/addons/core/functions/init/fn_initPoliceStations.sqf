@@ -56,15 +56,10 @@ if (_policeStationTypes isEqualTo []) exitWith {
     private _nearPlaces = _placePositions inAreaArrayIndexes [_stationPos, 50, 50] apply { _places # _x };
     if (_nearPlaces isEqualTo []) then { _garrison set ["spawnPlaces", []]; continue };
 
+    // buildEnemyGarrison will have already added the vehicle entry, just need to set up the place
     private _distances = _nearPlaces apply { _x#1 distance2d _stationPos };
     private _minPlace = _nearPlaces select (_distances find selectMin _distances);
     _garrison set ["spawnPlaces", [["vehiclePolice", _minPlace#1, _minPlace#2]] ];
-
-    private _citySide = sidesX getVariable _city;
-    if (_citySide != teamPlayer) then {
-        private _carType = selectRandom (Faction(_citySide) get "vehiclesPolice");
-        _garrison get "vehicles" pushBack [_carType, 0];
-    };
 
 } forEach citiesX;
 
@@ -85,7 +80,7 @@ A3A_cityPoliceData = createHashMap;
     private _carPlacePos = if (_spawnPlaces isEqualTo []) then {false} else {_spawnPlaces#0#1};
     if (_carPlacePos isEqualType false) then {
         A3A_spawnPlaceStats set [_city, createHashMap];
-        _garrison set ["vehicles", []];                 // probably is already, but whatever
+        _garrison set ["vehicles", []];
     };
 
     // If we're loading from a save, police station might already be destroyed
