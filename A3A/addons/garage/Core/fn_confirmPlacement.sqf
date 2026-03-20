@@ -307,11 +307,6 @@ HR_GRG_EH_keyDown = findDisplay 46 displayAddEventHandler ["KeyDown", {
             _this allowDamage true;
             _this enableSimulation true; 
             { _x allowDamage true; } forEach (attachedObjects _this);
-            if (unitIsUAV _this) then {
-                private _group = createGroup side player;
-                createVehicleCrew _this;
-                crew _this joinSilent _group;
-            };
         };
         ([_veh] + HR_GRG_CP_callBackArgs) call HR_GRG_CP_callbackPlace;
     };

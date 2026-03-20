@@ -1,7 +1,7 @@
 ["attributesVehicles", [
 
     // In AA arrays but really light-armed
-    ["vn_b_wheeled_m54_mg_02", ["cost", 60], ["threat", 80]],
+    ["a3a_vn_b_wheeled_m54_mg_02", ["cost", 60], ["threat", 80]],
     ["vn_o_wheeled_btr40_mg_03", ["cost", 60], ["threat", 80]],
     ["vn_o_wheeled_z157_mg_02", ["cost", 60], ["threat", 80]],
 
