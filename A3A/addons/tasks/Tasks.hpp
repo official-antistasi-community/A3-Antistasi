@@ -110,8 +110,8 @@ class Tasks {
     };
     class RES_Prisoners {
         category = "RES";
-        func = QFUNCMAIN(SUP_Prisoners);
-        params = QFUNC(SUP_Prisoners_p);
+        func = QFUNCMAIN(RES_Prisoners);
+        params = QFUNC(RES_Prisoners_p);
         version = 1;
         weight = 1;
         isLegacy = 1;

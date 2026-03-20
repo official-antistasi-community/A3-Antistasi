@@ -133,7 +133,7 @@ private _finalWeights = [];
     _localThreat = _localThreat + 10 * count (_rebelAISpawners inAreaArray [_targpos, 500, 500]);
 
     // Supply convoys shortcut
-    if (_x in citiesX and _side == Occupants) then {
+    if (_x in citiesX and _side == Occupants and _targetSide == teamPlayer) then {
         private _landBase = [_x] call A3A_fnc_findBasesForConvoy;
         if (_landBase == "") then { continue };             // no suitable base found 
         _finalTargets pushBack [_target, _landBase, _value, _localThreat, 0, 1];
