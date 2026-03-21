@@ -66,22 +66,23 @@ class CfgWeapons {
 class ace_medical_treatment {
     class Medication {
         class a3a_coffeeIV{
-            dose = 4;
-            maxDose = 18;
-            timeInSystem = 1800;
-            timeTillMaxEffect = 30;
-            hrIncreaseHigh[] = {0,20};
-            hrIncreaseLow[] = {0,20};
-            hrIncreaseNormal[] = {0,20};
+            dose = 1;
+            maxDose = 4;
+            maxDoseDeviation = 2;
+            timeInSystem = 3600;
+            timeTillMaxEffect = 10;
+            hrIncreaseLow[] = {10, 20};
+            hrIncreaseNormal[] = {10, 50};
+            hrIncreaseHigh[] = {10, 40};
         }
         class a3a_coffeeIV_500 : a3a_coffeeIV {
-            dose = 2;
-            timeInSystem = 900;
+            dose = 0.5;
+            timeInSystem = 1800;
             volume = 500;
         }
         class a3a_coffeeIV_250 : a3a_coffeeIV {
-            dose = 1;
-            timeInSystem = 450;
+            dose = 0.25;
+            timeInSystem = 900;
             volume = 250;
         }
     }
@@ -91,21 +92,12 @@ class ace_medical_treatment {
             ratio[] = {"Saline",0.5, "a3a_coffee",0.5};
             gui_message = $STR_A3A_Medical_Treatment_receivingCoffee;
             type = "a3a_coffee";
-            dose = 4;
-            maxDose = 18;
-            timeInSystem = 1800;
-            timeTillMaxEffect = 30;
-            hrIncreaseHigh[] = {0,20};
-            hrIncreaseLow[] = {0,20};
-            hrIncreaseNormal[] = {0,20};
         }
         class a3a_coffeeIV_500 : a3a_coffeeIV {
-            dose = 2;
             timeInSystem = 900;
             volume = 500;
         }
         class a3a_coffeeIV_250 : a3a_coffeeIV {
-            dose = 1;
             timeInSystem = 450;
             volume = 250;
         }
