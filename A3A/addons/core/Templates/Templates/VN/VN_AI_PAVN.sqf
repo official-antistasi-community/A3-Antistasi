@@ -76,8 +76,11 @@
 
 ["staticMGs", ["vn_o_nva_static_dshkm_high_01", "vn_o_nva_static_rpd_high", "vn_o_nva_static_pk_high"]] call _fnc_saveToTemplate;
 ["staticAT", ["vn_o_vc_static_type56rr"]] call _fnc_saveToTemplate;
-["staticAA", ["vn_o_nva_static_zpu4", "vn_o_nva_static_zgu1_01"]] call _fnc_saveToTemplate;
+["staticAA", ["vn_o_nva_static_zpu4", "a3a_vn_o_nva_static_zgu1_01"]] call _fnc_saveToTemplate;
 ["staticMortars", ["vn_o_nva_65_static_mortar_type63"]] call _fnc_saveToTemplate;
+
+["vehiclesSAM", ["vn_sa2"]] call _fnc_saveToTemplate;
+["vehiclesRadar", ["vn_o_static_rsna75"]] call _fnc_saveToTemplate;
 
 ["uavsAttack", []] call _fnc_saveToTemplate;
 ["uavsPortable", []] call _fnc_saveToTemplate;

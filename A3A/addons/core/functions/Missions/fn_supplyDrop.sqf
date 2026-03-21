@@ -33,7 +33,8 @@ private _flightAlt = [500, 500] select _isHeli;         // too much drift above 
 
 // Adjust drop position *partially* for current wind & drop altitude
 // real drop speed is ~4.3m/s but the wind isn't reliable, so this is a better worst-case
-private _dropPos = _targPos vectorAdd (wind vectorMultiply -_flightAlt / 10);
+// Removed for now, x/y velocity constrained instead
+private _dropPos = _targPos;        //_targPos vectorAdd (wind vectorMultiply -_flightAlt / 10);
 
 // Spawn transport plane or heli at airfield with usual crew (but no cargo)
 private _airport = [_side, _dropPos] call A3A_fnc_availableBasesAir;
@@ -100,7 +101,13 @@ if (currentWaypoint _group > 0) then
     [_patrolGroup, "Patrol_Area", 0, 200, -1, true, _targPos] call A3A_fnc_patrolLoop;
 
     // Now wait for the crate to hit the ground
-    waitUntil {sleep 1; diag_log velocity _parachute; getPosATL _crate#2 < 1};
+    sleep 5;
+    waitUntil {
+        sleep 1;
+        private _pvel = velocity _parachute;
+        _parachute setVelocity [-1 max _pvel#0 min 1, -1 max _pvel#1 min 1, _pvel#2];          // clamp x/y velocity
+        _pvel#2 > -0.1;
+    };
     sleep 3;
     detach _parachute;
     deleteVehicle _parachute;

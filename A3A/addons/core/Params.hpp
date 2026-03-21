@@ -154,6 +154,13 @@ class Params
         texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min, $STR_A3A_Params_generic_20min};
         default = 5;
     };
+    class A3A_garageBlockTimer
+    {
+        title = $STR_A3A_Params_garageBlockTimer_title;
+        values[] = {0,3,5,10};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min};
+        default = 5;
+    };
 
     class SpacerMembership
     {

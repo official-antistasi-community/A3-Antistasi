@@ -24,6 +24,7 @@ class A3A {
             
             class RHS_A10;
             class UK3CB_CW_US_B_EARLY_A10 : RHS_A10{};
+            class UK3CB_CW_US_B_LATE_A10 : RHS_A10{};
             
             class RHS_Su25SM_vvsc;
             class UK3CB_TKA_B_Su25SM_CAS : RHS_Su25SM_vvsc{};

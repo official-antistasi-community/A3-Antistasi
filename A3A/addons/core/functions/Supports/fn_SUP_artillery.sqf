@@ -20,19 +20,29 @@ FIX_LINE_NUMBERS()
 
 params ["_supportName", "_side", "_resPool", "_maxSpend", "_target", "_targPos", "_reveal", "_delay"];
 
+// Pass in vehicle type and range, returns true if reachable
+private _fnc_checkArtyRange = {
+    params ["_vehType", "_dist", ["_margin", 0]];
+    private _magHM = [_vehType] call A3A_fnc_getMortarMags select 1;
+    private _magType = _magHM getOrDefault ["HE", ""];
+    [_vehType, _magType] call A3A_fnc_getArtilleryRanges params ["_minRange", "_maxRange"];
+    _minRange + _margin < _dist and _maxRange - _margin > _dist;
+};
+
 // Uses server-side garrison support vehicle data to find suitable vehicle
 // Should be done unscheduled because something else might use the selected artillery
 private _success = false;
 isNil {
-
     // First search enemy airports for artillery
     private _bases = airportsX select { sidesX getVariable _x == _side };
+    private _usedBases = [];
     private _artillery = [];          // [_marker, _vehEntry]
     {
         if (markerPos _x distance2d _targPos < 700) then { continue };      // Don't use local artillery
         private _base = _x;
         {
-            if (_y#0 != "ready" or _y#1 != "vehiclesArtillery") then { continue };
+            if (_y#1 != "vehiclesArtillery") then { continue };
+            if (_y#0 != "ready") then { _usedBases pushBack _base; continue };      // might need this later 
             _artillery pushBack [_base, _y#2];
         } forEach (A3A_garrison get _base get "supportVehicles");
     } forEach _bases;
@@ -46,29 +56,44 @@ isNil {
 
         private _artyPos = if (_posData isEqualType []) then { _posData#0 } else { A3A_spawnPlacesHM get _base select _posData select 1 };
         private _artyDist = _artyPos distance2d _targPos;
-
-        private _magHM = [_vehType] call A3A_fnc_getMortarMags select 1;
-        private _magType = _magHM getOrDefault ["HE", ""];
-
-        ([_vehType, _magType] call A3A_fnc_getArtilleryRanges) params ["_minRange", "_maxRange"];
-        if (_artyDist > _minRange and _artyDist < _maxRange) exitWith { _artyData = [_base, _vehID] };
+        if ([_vehType, _artyDist, 400] call _fnc_checkArtyRange) exitWith { _artyData = [_base, _vehID] };
     };
-    if (_artyData isEqualTo []) exitwith { Debug("No bases found for artillery support") };
 
-    // Extra aggro/tier based delay
+    // Extra aggro/tier based delay. Need now so we can increase it
     private _aggro = if(_side == Occupants) then {aggressionOccupants} else {aggressionInvaders};
     if (_delay < 0) then { _delay = (0.5 + random 1) * (150 - 5*tierWar - 0.5*_aggro) };
 
-    Info_5("Artillery support %1 against %2 with delay %3 will be carried out by mortar ID %4 from %5", _supportName, _targPos, _delay, _artyData#0, _artyData#1);
+    // If none, then add one at a suitable airfield
+    if (_artyData isEqualTo []) then
+    {
+        private _vehType = selectRandom (Faction(_side) get "vehiclesArtillery");
+        private _freeBases = (_bases - _usedBases) select { spawner getVariable _x == 2 }
+            select { [_vehType, markerPos _x distance2d _targPos, 700] call _fnc_checkArtyRange };
+        if (count _freeBases == 0) exitWith { Debug("No free airbases to spawn artillery") };
+        private _base = selectRandom _freeBases;
 
-    // Any point in this for single-target?
-    //[_reveal, _side, "ARTILLERY", _targPos, _delay] spawn A3A_fnc_showInterceptedSetupCall;
+        if ([_base, _vehType, "vehicleArty"] call A3A_fnc_garrisonServer_addVehicleType) then
+        {
+            // Successfully added the vehicle. It'll be on the end of the vehicle array
+            [-(A3A_vehicleResourceCosts get _vehType), _side, _resPool] call A3A_fnc_addEnemyResources;
+            private _vehEntry = A3A_garrison get _base get "vehicles" select -1;
+            _artyData = [_base, _vehEntry#3];
+
+            if (_delay != 0) then { _delay = _delay + 120 };
+            [_reveal, _side, "ARTILLERY", _targPos, _delay] spawn A3A_fnc_showInterceptedSetupCall;
+        };
+    };
+    if (_artyData isEqualTo []) exitwith {};
+    _artyData params ["_base", "_vehID"];
+
+    Info_5("Artillery support %1 against %2 with delay %3 will be carried out by vehicle ID %4 from %5", _supportName, _targPos, _delay, _vehID, _base);
 
     A3A_supportStrikes pushBack [_side, "AREA", _targPos, time + 20*60, 20*60, 200];
 
-    [_artyData#0, _artyData#1, [_targPos, _delay, _reveal]] call A3A_fnc_garrisonServer_vehAction;
+    [_base, _vehID, [_targPos, _delay, _reveal]] call A3A_fnc_garrisonServer_vehAction;
     _success = true;
 };
 
 // Per-volley cost
 [-1, 80] select _success;
+

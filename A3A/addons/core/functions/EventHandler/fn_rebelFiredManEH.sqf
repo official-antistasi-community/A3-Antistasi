@@ -24,6 +24,6 @@ if (isPlayer _unit && (captive _unit)) then {
 if (!isNull _vehicle) then {
     private _currentTime = _currentVeh getVariable ["A3A_lastFiredTime", 0];
     if ((time - _currentTime) < 20) exitWith {};
-    _currentVeh setVariable ["A3A_lastFiredTime", time, true];
+    _currentVeh setVariable ["A3A_lastFiredTime", time, [2, clientOwner]];
 };
 

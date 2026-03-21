@@ -42,7 +42,7 @@
 ["vehiclesAPCs", ["vn_b_armor_m113_01_aus_army"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["vn_b_armor_m67_01_01"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["vn_b_armor_m48_01_01"]] call _fnc_saveToTemplate;
-["vehiclesAA", ["vn_b_wheeled_m54_mg_02"]] call _fnc_saveToTemplate;
+["vehiclesAA", ["a3a_vn_b_wheeled_m54_mg_02"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["vn_o_boat_02_01", "vn_b_boat_10_01", "vn_b_boat_09_01"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["vn_b_boat_13_02", "vn_b_boat_06_02", "vn_b_boat_05_02", "vn_b_boat_12_02"]] call _fnc_saveToTemplate;
@@ -89,7 +89,7 @@ if (isClass (configFile >> "vnx_credits")) then {
 
 ["staticMGs", ["vn_b_aus_army_static_m60_high", "vn_b_aus_army_static_m2_high"]] call _fnc_saveToTemplate;
 ["staticAT", ["vn_b_aus_army_static_m40a1rr"]] call _fnc_saveToTemplate;
-["staticAA", ["vn_b_army_static_m45"]] call _fnc_saveToTemplate;
+["staticAA", ["a3a_vn_b_army_static_m45"]] call _fnc_saveToTemplate;
 ["staticMortars", ["a3a_vn_b_static_mortar_m2"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "vn_mortar_m2_mag_he_x8"] call _fnc_saveToTemplate;

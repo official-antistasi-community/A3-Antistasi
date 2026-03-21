@@ -20,37 +20,59 @@ FIX_LINE_NUMBERS()
 
 params ["_supportName", "_side", "_resPool", "_maxSpend", "_target", "_targPos", "_reveal", "_delay"];
 
+// Pass in vehicle posATL and target, returns true if reachable
+private _fnc_checkSAMPath = {
+    params ["_pos", "_target"];
+    private _targDir = _pos getDir _target;
+    private _intercept = ATLtoASL _pos vectorAdd [300*sin _targDir, 300*cos _targDir, 200];
+    if (terrainIntersectASL [_intercept, getPosASL _target]) exitWith {false};
+    _pos distance2d _target > 1500;
+};
+private _bases = airportsX inAreaArray [_target, 10000, 10000] select { sidesX getVariable _x == _side }
+    select { [markerPos _x, _target] call _fnc_checkSAMPath };
+
 private _success = false;
 isNil {
-    private _bases = airportsX inAreaArray [_target, 10000, 10000] select { sidesX getVariable _x == _side };
+    private _usedBases = [];
     private _weightedBases = [];
     {
-        private _base = _x;
-        private _pos = markerPos _x;
-        private _dist = _pos distance2D _targPos;
-        if (_dist < 1500) then {continue};
-
         // Check if there's a SAM available at that base and find vehID for it
-        private _vehID = -1;
+        private _base = _x;
         {
-            if (_y#0 == "ready" and _y#1 == "vehiclesSAM") exitWith { _vehID = _x };
+            if (_y#1 != "vehiclesSAM") then { continue };
+            if (_y#0 != "ready") exitWith { _usedBases pushBack _base };      // strictly one SAM per airport... 
+            _weightedBases pushBack [_base, _x];
+            _weightedBases pushBack (1e8 / (markerPos _base distance2d _target)^2);       // prefer more distant bases
         } forEach (A3A_garrison get _base get "supportVehicles");
-        if (_vehID == -1) then { continue };
-
-        // Check if there's a firing path from the target to the airport (proxy for SAM position)
-        private _targDir = _pos getDir _targPos;
-        private _intercept = ATLtoASL _pos vectorAdd [300*sin _targDir, 300*cos _targDir, 200];
-        if (terrainIntersectASL [_intercept, getPosASL _target]) then { continue };
-
-        _weightedBases pushBack [_base, _vehID];
-        _weightedBases pushBack (1e8 / _dist^2);       // prefer more distant bases
     } forEach _bases;
 
-    if (_weightedBases isEqualTo []) exitWith { Debug("No bases found for SAM support") };
-    selectRandomWeighted _weightedBases params ["_marker", "_vehID"];
-
+    // Extra aggro/tier based delay. Need now so we can increase it
     private _aggro = if(_side == Occupants) then {aggressionOccupants} else {aggressionInvaders};
-    if (_delay < 0) then { _delay = (0.5 + random 1) * (100 - _aggro + 22*A3A_enemyResponseTime) };
+    if (_delay < 0) then { _delay = (0.5 + random 1) * (150 - 5*tierWar - 0.5*_aggro) };
+
+    private _samData = [];
+    if (_weightedBases isNotEqualTo []) then {
+        _samData = selectRandomWeighted _weightedBases
+    } else {
+        // If none, then add one at a suitable airfield
+        private _vehType = selectRandom (Faction(_side) get "vehiclesSAM");
+        private _freeBases = (_bases - _usedBases) select { spawner getVariable _x == 2 };
+        if (count _freeBases == 0) exitWith { Debug("No suitable airbases to spawn SAM") };
+        private _base = selectRandom _freeBases;
+
+        if ([_base, _vehType, "vehicleSAM"] call A3A_fnc_garrisonServer_addVehicleType) then
+        {
+            // Successfully added the vehicle. It'll be on the end of the vehicle array
+            [-(A3A_vehicleResourceCosts get _vehType), _side, _resPool] call A3A_fnc_addEnemyResources;
+            private _vehEntry = A3A_garrison get _base get "vehicles" select -1;
+            _samData = [_base, _vehEntry#3];
+
+            if (_delay != 0) then { _delay = _delay + 12*A3A_enemyResponseTime };
+            [_reveal, _side, "SAM", getPosATL _target, _delay] spawn A3A_fnc_showInterceptedSetupCall;
+        };
+    };
+    if (_samData isEqualTo []) exitwith {};
+    _samData params ["_marker", "_vehID"];
 
     A3A_supportStrikes pushBack [_side, "TARGET", _target, time + 1200, 1200, 100];
 
@@ -60,8 +82,5 @@ isNil {
     _success = true;
 };
 
-//[_reveal, _side, "SAM", _targPos, _delay] spawn A3A_fnc_showInterceptedSetupCall;
-
-// Vehicle cost + extra support cost for balance
-//(A3A_vehicleResourceCosts get _launcherType) + 100;
+// Per-volley cost
 [-1, 80] select _success;

@@ -24,7 +24,7 @@ private _garrison = A3A_activeGarrison get _marker;
 
 // Terminate any active supports
 {
-    [_marker, _x#0] call A3A_garrisonLocal_vehActionEnd;
+    [_marker, _x#0] call A3A_fnc_garrisonLocal_vehActionEnd;
 } forEachReversed (_garrison get "vehActions");
 
 // In this case, marker should no longer exist in A3A_activeGarrison and we're done here

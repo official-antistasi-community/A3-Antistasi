@@ -17,13 +17,11 @@ _marker setMarkerShapeLocal "ELLIPSE";
 _marker setMarkerSizeLocal [30,30];
 _marker setMarkerAlpha 0;
 
-// Visible marker
-private _strTable = ["STR_A3A_fn_base_croutpFIA_watchpost", "STR_A3A_fn_base_croutpFIA_roadblock"] select (isOnRoad _pos);
+// Visible marker (text & broadcast needs to be set after outpostsFIA)
 _iconMarker = createMarkerLocal [format ["Dum%1", _marker], _pos];
 _iconMarker setMarkerShapeLocal "ICON";
 _iconMarker setMarkerTypeLocal "loc_bunker";
 _iconMarker setMarkerColorLocal colorTeamPlayer;
-_iconMarker setMarkerText format [localize _strTable, FactionGet(reb,"name")];;
 
 private _garrison = createHashMapFromArray [ ["troops", _troopTypes], ["vehicles", []], ["buildings", []], ["type", "rebpost"] ];
 
@@ -45,8 +43,12 @@ sidesX setVariable [_marker, teamPlayer, true];
 spawner setVariable [_marker, 2, true];         // start despawned
 outpostsFIA = outpostsFIA + [_marker];
 
-// Load-from-save usage, troops are later. Don't spam publicVariable.
-if (_troopTypes isNotEqualTo []) then { publicVariable "outpostsFIA" };
+if (_troopTypes isNotEqualTo []) then {
+    // If used from a save then outpostsFIA and markers are updated later (after adding garrison)
+    // If it's live then set the text & broadcast immediately, needs outpostsFIA & side
+    publicVariable "outpostsFIA";
+    [_marker] call A3A_fnc_mrkUpdate;
+};
 
 ["RebelControlCreated", [_marker, isOnRoad _pos]] call EFUNC(Events,triggerEvent);
 

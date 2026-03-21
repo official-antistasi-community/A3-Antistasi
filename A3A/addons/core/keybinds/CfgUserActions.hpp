@@ -7,11 +7,14 @@ class CfgUserActions {
         onActivate = ACTION(battleMenu);
     };
 
+    // Old Menu Keybind
+    /*
     class GVAR(artyMenu) {
         displayName = $STR_A3A_keybinds_CfgUserAct_artyMenu_DN;
         tooltip = $STR_A3A_keybinds_CfgUserAct_artyMenu_tip;
         onActivate = ACTION(artyMenu);
     };
+    */
 
     class GVAR(respawn) {
         displayName = $STR_A3A_keybinds_CfgUserAct_respawn_DN;

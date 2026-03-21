@@ -33,23 +33,26 @@ if ("_civ" in _marker) exitWith
     {
         _x params ["_vehType", "_slotNum"];
 
+        // Shouldn't trigger now that save is checked
         if (_slotNum isEqualType 0 and { _slotNum >= count _places }) then {
+            Error_1("Slot number above slot count for %1 in %2", _x, _marker);
             _vehicles deleteAt _forEachIndex;
             continue;
         };
 
         // Temporary fix for boats being mangled in 3.10.3
-        while {_slotNum isEqualType [] and {_slotNum#0 isEqualType []}} do {
-            Debug_3("Fixing incorrect boat format for %1, pos %2, dir %3", _vehType, _slotNum#0, _slotNum#1);
-            _x set [2, _slotNum#1]; _x set [1, _slotNum#0]; _slotNum = _x#1;
-        };
+        // Incorrect since boat format changed
+//        while {_slotNum isEqualType [] and {_slotNum#0 isEqualType []}} do {
+//            Error_3("Fixing incorrect boat format for %1, pos %2, dir %3", _vehType, _slotNum#0, _slotNum#1);
+//            _x set [2, _slotNum#1]; _x set [1, _slotNum#0]; _slotNum = _x#1;
+//        };
 
         private _slotType = if (_slotNum isEqualType []) then { "civBoat" } else { _places # _slotNum # 0 };
         if !(_vehType in (_valid get _slotType)) then {
             Debug_2("%1 (slot type %2) not valid, swapping", _vehType, _slotType);
             if (_slotType == "civCar") exitWith { _x set [0, selectRandomWeighted civVehiclesWeighted] };
             if (_slotType == "civBoat") exitWith { _x set [0, selectRandomWeighted civBoatsWeighted] };
-            _vehicles deleteAt _forEachIndex;
+            _vehicles deleteAt _forEachIndex;       // vehiclePolice case
         };
     } forEachReversed (_garrison get "vehicles");
 };
@@ -61,8 +64,9 @@ if (_side == teamPlayer) exitWith {};           // nothing to do here at the mom
 private _troops = _garrison get "troops";
 private _excess = (_troops#0) - (A3A_garrisonSize get _marker);
 if (_excess > 0) then {
+    Debug_2("Clearing %1 excess troops in %2", _excess, _marker);
     _troops set [0, _troops#0 - _excess];
-    [10*_excess, _side, "defence"] call A3A_fnc_addEnemyResources;
+    if (_garrison get "type" != "city") then { [10*_excess, _side, "defence"] call A3A_fnc_addEnemyResources };
 };
 
 if (_troopsOnly) exitWith { Trace("Completed") };

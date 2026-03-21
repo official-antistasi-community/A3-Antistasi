@@ -145,9 +145,19 @@ private _saveGarrison = +A3A_garrison;
 	_y deleteAt "type";
 	_y deleteAt "nextVehID";
 
+	private _places = A3A_spawnPlacesHM getOrDefault [_x, []];
+	private _vehicles2 = createHashMap;
+	_y set ["vehicles2", _vehicles2];
+	{
+		private _cat = if (_x#1 isEqualType 0) then {_places#(_x#1)#0} else {"free"};
+		//_cat = _catTranslate getOrDefault [_cat, _cat];
+		private _catData = _vehicles2 getOrDefault [_cat, [], true];
+		_catData pushBack (if (isNil {_x#2}) then {_x select [0, 2]} else {_x select [0, 3]}); 
+	} forEach (_y deleteAt "vehicles");
+
 	// Convert vehicles to older storage format
 	// TODO: Simplify this to one line after another version
-	if ("_civ" in _x) then { continue };		// civ internal format didn't change
+/*	if ("_civ" in _x) then { continue };		// civ internal format didn't change
 	{
 		if (_x#1 isEqualType 0) then {
 			_x resize ([3,2] select isNil {_x#2});		// remove ID, and state if nil
@@ -157,6 +167,7 @@ private _saveGarrison = +A3A_garrison;
 			_x set [1, _pos]; _x set [2, _vecDir]; _x set [3, _vecUp];
 		};
 	} forEach (_y get "vehicles");
+*/
 } forEach _saveGarrison;
 
 ["newGarrison", _saveGarrison] call A3A_fnc_setStatVariable;

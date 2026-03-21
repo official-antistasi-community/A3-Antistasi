@@ -37,8 +37,8 @@ private _APCs = ["a3a_B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F"];   
 ["vehiclesGunBoats", ["B_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["a3a_B_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["B_Plane_CAS_01_dynamicLoadout_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["B_Plane_Fighter_01_F"]] call _fnc_saveToTemplate;
+private _vehiclesPlanesCAS = ["B_Plane_CAS_01_dynamicLoadout_F"];
+private _vehiclesPlanesAA = ["B_Plane_Fighter_01_F"];
 ["vehiclesPlanesTransport", ["B_T_VTOL_01_infantry_F","B_T_VTOL_01_infantry_blue_F"]] call _fnc_saveToTemplate;
 
 private _vehiclesHelisLight = ["B_Heli_Light_01_F"];
@@ -53,7 +53,7 @@ private _vehiclesHelisLightAttack = ["B_Heli_Light_01_dynamicLoadout_F","B_Heli_
     ["B_MBT_01_mlrs_F",["12Rnd_230mm_rockets"]]
 ]] call _fnc_saveToTemplate;//this line determines artillery magazines -- Example: ["magazines", createHashMapFromArray [["B_MBT_01_arty_F", ["32Rnd_155mm_Mo_shells"]]]] -- Array, can contain multiple assets
 
-["uavsAttack", ["B_UAV_02_dynamicLoadout_F", "B_UAV_05_F"]] call _fnc_saveToTemplate;
+private _uavsAttack = ["B_UAV_02_dynamicLoadout_F", "B_UAV_05_F"];
 ["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles - militia vehicles are mostly used in the early game, police cars are being used by troops around cities -- Example:
@@ -113,6 +113,9 @@ if ("ef" in A3A_enabledDLC) then {
     ["vehiclesAA", ["B_APC_Tracked_01_AA_F", "EF_B_MRAP_01_LAAD_NATO"]] call _fnc_saveToTemplate;
     ["vehiclesGunBoats", ["EF_B_CombatBoat_HMG_NATO", "EF_B_CombatBoat_AT_NATO"]] call _fnc_saveToTemplate;
     ["vehiclesHelisAttack", ["B_Heli_Attack_01_dynamicLoadout_F", "EF_B_AH99J_NATO"]] call _fnc_saveToTemplate;
+    _vehiclesPlanesCAS append ["B_Plane_CAS_01_dynamicLoadout_F", "EF_QAV80_MJTF_Des"];
+    _vehiclesPlanesAA append ["B_Plane_Fighter_01_F", "B_Plane_Fighter_01_F", "EF_QAV80_MJTF_Des"];
+    _uavsAttack append ["EF_QAV80_Stealth_MJTF_Des"];
 };
 ["vehiclesHelisLight", _vehiclesHelisLight] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", _vehiclesHelisLightAttack] call _fnc_saveToTemplate;
@@ -124,6 +127,11 @@ if ("ef" in A3A_enabledDLC) then {
 ["vehiclesAPCs", _APCs] call _fnc_saveToTemplate;
 
 ["vehiclesHelisTransport", _HelisTransport] call _fnc_saveToTemplate;
+
+["vehiclesPlanesCAS", _vehiclesPlanesCAS] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
+
+["uavsAttack", _uavsAttack] call _fnc_saveToTemplate;
 
 ["vehiclesMilitiaCars", _vehiclesMilitiaCars] call _fnc_saveToTemplate;
 ["vehiclesMilitiaLightArmed", _vehiclesMilitiaLightArmed] call _fnc_saveToTemplate;
@@ -543,7 +551,6 @@ if ("ef" in A3A_enabledDLC) then {
     ["arifle_MXM_F", "", "acc_pointer_IR", "ef_optic_mbs_sand", ["30Rnd_65x39_caseless_mag", "30Rnd_65x39_caseless_mag", "30Rnd_65x39_caseless_mag_Tracer"], [], "bipod_01_F_snd"],
     ["srifle_EBR_F", "", "acc_pointer_IR", "ef_optic_mbs", [], [], "bipod_01_F_snd"]
     ];
-
     (_sfLoadoutData get "marksmanRifles") append [
     ["arifle_MXM_F", "", "acc_pointer_IR", "ef_optic_mbs_sand", ["30Rnd_65x39_caseless_mag", "30Rnd_65x39_caseless_mag", "30Rnd_65x39_caseless_mag_Tracer"], [], "bipod_01_F_snd"],
     ["srifle_EBR_F", "", "acc_pointer_IR", "ef_optic_mbs", [], [], "bipod_01_F_snd"]

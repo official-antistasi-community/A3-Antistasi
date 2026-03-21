@@ -108,6 +108,9 @@ private _savedParamsHM = createHashMapFromArray (A3A_saveData get "params");
     missionNamespace setVariable [configName _x, _val, true];                   // just publish them all, doesn't really hurt
 } forEach ("true" configClasses (configFile/"A3A"/"Params"));
 
+// Depends on civTraffic param
+call A3A_fnc_initCivSpawnPlaceStats;
+
 // Might have params dependency at some point
 if (A3A_hasACEMedical) then { call A3A_fnc_initACEUnconsciousHandler };
 
@@ -212,7 +215,7 @@ if (isClass (configFile >> "AntistasiServerMembers")) then
     {membersX pushBackUnique (getText (_x >> "uid"))} forEach _memberClasses;
 
     // Load remark setting
-    if (isNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks") || {debug}) then {A3A_useRemarks = getNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks")};
+    if (isNumber (configFile >> "AntistasiServerMembers" >> "isCommunityServer") || {debug}) then {A3A_isCommunityServer = getNumber (configFile >> "AntistasiServerMembers" >> "isCommunityServer")};
 };
 
 // TODO: Do we need this? maybe...
@@ -234,7 +237,7 @@ addMissionEventHandler ["OnUserAdminStateChanged", {
 }];
 
 publicVariable "membersX";
-publicVariable "A3A_useRemarks";
+publicVariable "A3A_isCommunityServer";
 publicVariable "theBoss";       // need to publish this even if empty
 
 // Setup buildable objects. Needed for HQ radius in initSupports

@@ -8,11 +8,9 @@
     Used and distributed by the Antistasi Community project with permission.
 */
 
-// Used if A3A_garrison doesn't have a police station entry already: Usually new campaigns or compat loading
-// A3A_garrison should exist with empty vehicles array already
-
-// Need to run this shit even if it's an old game, and civ spawns might be different
-// Already have empty spawnPlaceStats and empty vehicles (or full for saves) but not spawnPlaces
+// Need to run this shit even if it's a saved game, because police station options might improve
+// spawnPlaceStats is initialized to 1-vehicle
+// police station pos, spawnplaces and vehicles may exist in saves, should be coherent
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
@@ -26,117 +24,74 @@ if (_policeStationTypes isEqualTo []) exitWith {
 	Error("No police station types found in mapInfo for this map. No police stations will be generated");
 };
 
-private _minPop = getNumber (_mapInfo/"policeStationMinPop");
-
-private _policeSpawnStats = createHashMapFromArray [ ["vehiclePolice", [[0], 1, 1]] ];
-
-// netId -> city marker name for destruction detection
-A3A_policeStations = createHashMap;
-
-// Alternative: Do not save spawn places for police stations
-// Regen here and delete the vehicles if it disappeared
-// Fewer code paths, better?
+// Create police station data if there isn't one in the city
 {
 	private _city = _x;
     private _garrison = A3A_garrison get _city;
-    _garrison set ["spawnPlaces", []];                                      // not initialized elsewhere
+    if ("policeStation" in _garrison) then { continue };
     if (A3A_garrisonSize get _city < 10) then { continue };                 // don't generate for small towns
 
-    private _stationPos = _garrison get "policeStation";
-    if (isNil "_stationPos") then {
-        private _buildings = nearestTerrainObjects [markerPos _city, ["House", "Building"], 100];       // CUP needs "Building"
-        _buildings = _buildings select { typeOf _x in _policeStationTypes } select { alive _x };        // isKindOf matching would pick up abandoned buildings
-        if (_buildings isEqualTo []) then {
-            // Try again with slightly larger radius
-            Trace_1("Expanding search radius in %1", _city);
-            _buildings = nearestTerrainObjects [markerPos _city, ["House", "Building"], 150];
-            _buildings = _buildings select { typeOf _x in _policeStationTypes } select { alive _x };
-        };
-        if (_buildings isEqualTo []) then {
-            Info_1("No suitable buildings for police station in %1", _city);
-            continue;
-        };
-
-        private _types = _buildings apply { typeOf _x };
-        Trace_2("Police stations types in %1: %2", _city, _types arrayIntersect _types);
-
-        _stationPos = getPosATL selectRandom _buildings;
-        _garrison set ["policeStation", _stationPos];         // only need one entry? Hmm. LootCD & intelCD go elsewhere.
-
-        private _citySide = sidesX getVariable _city;
-        if (_citySide != teamPlayer) then {
-            private _carType = selectRandom (Faction(_citySide) get "vehiclesPolice");
-            _garrison get "vehicles" pushBack [_carType, 0];
-        };
-    };
-    // If we're loading from a save, police station might already be destroyed
-    if (_stationPos isEqualType false) then { continue };
-
-    private _station = nearestBuilding _stationPos;
-    A3A_policeStations set [netId _station, _city];          // So we can detect destruction
-
-    // Use closest city spawn place within 50m for police car
-    private _places = A3A_spawnPlacesHM get (_city + "_civ") select { _x#0 == "civCar" };
-    private _placePositions = _places apply { _x#1 };
-    private _nearPlaces = _placePositions inAreaArrayIndexes [getPosATL _station, 50, 50] apply { _places # _x };
-    if (_nearPlaces isEqualTo []) then { _garrison set ["vehicles", []]; continue };
-
-    private _distances = _nearPlaces apply { _x#1 distance2d _station };
-    private _minPlace = _nearPlaces select (_distances find selectMin _distances);
-
-    _minPlace set [0, "vehiclePolice"];                         // no longer civCar, so buildCity won't use it
-    _garrison set ["spawnPlaces", [_minPlace]];                 // need this because it's post-initZones
-    A3A_spawnPlaceStats set [_city, _policeSpawnStats];
-    A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) + 4];     // need more police to fill a station
-
-} forEach citiesX;
-
-
-/*
-{
-	private _city = _x;
-    if (A3A_garrisonSize get _city < 10) then { continue };                 // don't generate for small towns
-
-    private _garrison = A3A_garrison get _city;
-    private _stationPos = 
-    if ("policeStation" in _garrison) then {
-        // Need to mark off civ spawn places if matching
-        A3A_spawnPlaceStats set [_city, _policeSpawnStats];
-        private _policePositions = (_garrison get "spawnPlaces") apply {_x#1};
-        private _civPlaces = A3A_spawnPlacesHM get (_city + "_civ") select { _x#0 == "civCar" };
-        {
-            if (_policePositions inAreaArray [_x#0, 10, 10] isEqualTo []) then { continue };
-            _x set [0, "vehiclePolice"];
-        } forEach _civPlaces;
-        continue;
-    };
-
-    private _buildings = nearestTerrainObjects [markerPos _city, ["House"], 100];
+    private _buildings = nearestTerrainObjects [markerPos _city, ["House", "Building"], 100];       // CUP needs "Building"
     _buildings = _buildings select { typeOf _x in _policeStationTypes } select { alive _x };        // isKindOf matching would pick up abandoned buildings
+    if (_buildings isEqualTo []) then {
+        // Try again with slightly larger radius
+        Trace_1("Expanding search radius in %1", _city);
+        _buildings = nearestTerrainObjects [markerPos _city, ["House", "Building"], 150];
+        _buildings = _buildings select { typeOf _x in _policeStationTypes } select { alive _x };
+    };
     if (_buildings isEqualTo []) then {
         Info_1("No suitable buildings for police station in %1", _city);
         continue;
     };
-    private _station = selectRandom _buildings;		            // or do we try to do priority order?
-    _garrison set ["policeStation", getPosATL _station];         // only need one entry? Hmm. LootCD & intelCD go elsewhere.
 
-    _station setVariable ["A3A_policeStation", _city];          // So we can detect destruction
+    private _types = _buildings apply { typeOf _x };
+    Trace_2("Police stations types in %1: %2", _city, _types arrayIntersect _types);
+
+    _stationPos = getPosATL selectRandom _buildings;
+    _garrison set ["policeStation", _stationPos];         // only need one entry? Hmm. LootCD & intelCD go elsewhere.
 
     // Use closest city spawn place within 50m for police car
     private _places = A3A_spawnPlacesHM get (_city + "_civ") select { _x#0 == "civCar" };
     private _placePositions = _places apply { _x#1 };
-    private _nearPlaces = _placePositions inAreaArrayIndexes [getPosATL _station, 50, 50] apply { _places # _x };
-    if (_nearPlaces isEqualTo []) then { continue };
+    private _nearPlaces = _placePositions inAreaArrayIndexes [_stationPos, 50, 50] apply { _places # _x };
+    if (_nearPlaces isEqualTo []) then { _garrison set ["spawnPlaces", []]; continue };
 
-    private _distances = _nearPlaces apply { _x#1 distance2d _station };
+    // buildEnemyGarrison will have already added the vehicle entry, just need to set up the place
+    private _distances = _nearPlaces apply { _x#1 distance2d _stationPos };
     private _minPlace = _nearPlaces select (_distances find selectMin _distances);
-
-    _minPlace set [0, "vehiclePolice"];       // no longer civCar
-    _garrison set ["spawnPlaces", [_minPlace]];                 // need this because it's post-initZones
-    A3A_spawnPlaceStats set [_city, _policeSpawnStats];
-
-    private _carType = selectRandom (A3A_faction_occ get "vehiclesPolice");
-    _garrison set ["vehicles", [[_carType, 0]] ];
+    _garrison set ["spawnPlaces", [["vehiclePolice", _minPlace#1, _minPlace#2]] ];
 
 } forEach citiesX;
-*/
+
+
+// netId -> city marker name for destruction detection
+A3A_policeStations = createHashMap;
+
+// city marker -> [stationPos, carPos] mostly for client undercover
+A3A_cityPoliceData = createHashMap;
+
+// Then update the temporary accounting data
+{
+	private _city = _x;
+    private _garrison = A3A_garrison get _city;
+
+    // need to clear spawnPlaceStats & vehicles here if there isn't a car pos...
+    private _spawnPlaces = _garrison getOrDefault ["spawnPlaces", []];
+    private _carPlacePos = if (_spawnPlaces isEqualTo []) then {false} else {_spawnPlaces#0#1};
+    if (_carPlacePos isEqualType false) then {
+        A3A_spawnPlaceStats set [_city, createHashMap];
+        _garrison set ["vehicles", []];
+    };
+
+    // If we're loading from a save, police station might already be destroyed
+    private _stationPos = _garrison getOrDefault ["policeStation", false];
+    if (_stationPos isEqualType []) then {
+        A3A_garrisonSize set [_city, (A3A_garrisonSize get _city) + 4];             // need more police to fill a station
+        A3A_policeStations set [netId nearestBuilding _stationPos, _city];          // So we can detect destruction
+    };
+
+    A3A_cityPoliceData set [_city, [_stationPos, _carPlacePos]];
+
+} forEach citiesX;
+
+publicVariable "A3A_cityPoliceData";

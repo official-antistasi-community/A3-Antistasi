@@ -38,7 +38,7 @@ private _typeVehH = selectRandom _heliType;
 private _isAttackHeli = _typeVehH in (_fullAttack + _lightAttack);
 
 //refining crash spawn position, to avoid exploding on spawn or "Armaing" during mission
-private _flatPos = [_posCrashOrigin, 0, 1000, 0, 0, 0.1] call BIS_fnc_findSafePos;
+private _flatPos = [_posCrashOrigin, 0, 500, 0, 0, 0.1] call BIS_fnc_findSafePos;
 private _posCrash = _flatPos findEmptyPosition [0,100,_typeVehH];
 if (count _posCrash == 0) then {_posCrash = _posCrashOrigin};//if no pos use _posCrashOrigin
 {[_x,true] remoteExec ["hideObjectGlobal",2]} foreach (nearestTerrainObjects [_posCrash,["tree","bush", "ROCKS"],50]);//clears area of trees and bushes
@@ -50,9 +50,14 @@ private _groups = [];
 
 //creating crashed helicopter
 private _crater = "CraterLong" createVehicle _posCrash;
-private _heli = createVehicle [_typeVehH, [_posCrash select 0, _posCrash select 1, 0.9], [], 0, "CAN_COLLIDE"];
+private _heli = objNull;
+isNil {
+    _heli = createVehicle [_typeVehH, [_posCrash select 0, _posCrash select 1, 1.2], [], 0, "CAN_COLLIDE"];
+    _heli setDamage 0.8;
+    _heli allowDamage false;
+    _heli spawn { sleep 5; _this allowDamage true };
+};
 private _smoke = "test_EmptyObjectForSmoke" createVehicle _posCrash; _smoke attachTo [_heli,[0,1.5,-1]];
-_heli setDamage 0.8;
 _vehicles append [_heli,_crater];
 
 //creating cover
@@ -75,7 +80,9 @@ while {_counter != _counterLimit} do {
 //creating ammobox if not armed
 _ammoBox = objNull;
 if (!_isAttackHeli) then {
-    _ammoBox = [_faction get "ammobox", _posCrash, 10, 5, true] call A3A_fnc_safeVehicleSpawn; // Allegedly there's alternative syntax that allows you to check which classnames can be slingloaded
+    private _posBox = [_posCrash, 6, 12, 1.5, 20] call A3A_fnc_findEmptyPos;
+    if (_posBox isEqualTo []) then { _posBox = _posCrash getPos [8 + random 4, random 360] };
+    _ammoBox = createVehicle [_faction get "ammobox", _posBox, [], 0, "CAN_COLLIDE"];
     // For that alternative syntax, no results are accurate for the ammoboxes we use so I'm spawning it to test it
     if !(_heli canSlingLoad _ammoBox) exitWith {
         deleteVehicle _ammoBox;

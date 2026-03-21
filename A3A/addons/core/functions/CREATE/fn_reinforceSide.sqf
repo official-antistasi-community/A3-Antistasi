@@ -23,7 +23,9 @@ private _totalReinf = 0.2 * ([A3A_resourcesDefenceOcc, A3A_resourcesDefenceInv] 
 Debug_2("%1 has %2 resources available for reinforcements", _side, _totalReinf);
 if (_totalReinf <= 0) then {continue};
 
-private _typeWeights = createHashMapFromArray [["staticMortar", 1], ["staticAT", 1], ["staticAA", 1], ["staticMG", 1], ["vehicleAA", 1], ["vehicleArty", 0.3], ["vehicleSAM", 0.5], ["vehicleTruck", 1], ["vehicle", 0.4], ["heli", 0.3], ["plane", 0.3], ["runway", 0.3], ["boat", 0.6]];
+private _typeWeights = createHashMapFromArray [["staticMortar", 0.3], ["staticAT", 0.3], ["staticAA", 0.4], ["staticMG", 0.3],
+    ["vehicleAA", 0.5], ["vehicleArty", 0.2], ["vehicleSAM", 0.2], ["vehicleTruck", 1], ["vehicle", 0.2],
+    ["heli", 0.2], ["plane", 0.2], ["runway", 0.2], ["boat", 0.4]];
 private _noPlaceTypes = _faction get "noPlaceTypes";
 
 private _enemyAirfieldPositions = airportsX select {sidesX getVariable _x != _side} apply { markerPos _x };
@@ -48,7 +50,7 @@ private _weights = [];
     private _par = A3A_garrisonSize get _marker;                                     // no variance currently?
     private _cur = _garrison get "troops" select 0;          // [count, quality]
     if (_cur < _par) then {
-        _weights pushBack (1 - _cur / _par);            // troop base weight is 1
+        _weights pushBack (_par - _cur) / 10;                           // troop base weight is 1 per 10
         _markers pushBack [_marker, "troops", _par - _cur];
     };
     if !(_marker in A3A_spawnPlaceStats) then { continue };     // roadblock/camp don't reinforce vehicles atm
@@ -62,7 +64,7 @@ private _weights = [];
 
         private _countUsed = count (_places arrayIntersect _usedPlaces);
         if (_countUsed >= _par) then { continue };
-        _weights pushBack (_typeWeights get _x) * (1 - _countUsed / _par);
+        _weights pushBack (_typeWeights get _x) * (_par - _countUsed);          // weight for vehicles is multiplied by par count
         _markers pushBack [_marker, _x, _par - _countUsed];
 
     } forEach (A3A_spawnPlaceStats get _marker);        // hashmap, place type (_x) to [placeindexes, max, par]
@@ -104,7 +106,7 @@ while {_totalReinf > 0} do
 
         // Fix up weights for next pass
         _targData set [2, _needed-1];
-        _weights set [_index, _weight * (_needed-1) / _needed];
+        _weights set [_index, _weight * (_needed-1 max 0) / _needed];
         continue;
     };
 
@@ -137,7 +139,7 @@ while {_totalReinf > 0} do
         [_marker, _numTroops, _quality] remoteExecCall ["A3A_fnc_garrisonServer_addUnitCount", 2];
         continue;
     };
-    if (_rebelsNear or _rebelSpawners inAreaArray [markerPos _source, 1000, 1000] isNotEqualTo [] or 
+    if (_rebelsNear or _rebelSpawners inAreaArray [markerPos _source, distanceSPWN * 1.5, distanceSPWN * 1.5] isNotEqualTo [] or 
         ((markerPos _marker distance2d markerPos "Synd_HQ" < distanceMission) and (count units Invaders + count units Occupants < 30 + random 120))) then {
         // If rebels are near the target or source, send a real reinforcement
         [[_marker, _source, _isLand, _numTroops, _quality, _side], "A3A_fnc_patrolReinf"] call A3A_fnc_scheduler;      // TODO: patrolReinf needs update
