@@ -21,7 +21,9 @@ class tem_kujari {
 		{3028.17,15750.5,0.0923653}
 	};
 	antennasBlacklistIndex[] = {}; 
-	banks[] = {}; //no suitable building available
+	banks[] = {
+		{9046.59,12041.8,0},{15056.6,7360.78,0},{15056.6,7360.78,0}
+	};
 	garrison[] = {
 		{},{"airport_5","outpost_8","outpost_16","outpost_19","resource_1","resource_2","resource_13"},{},{"control_1","control_2","control_3","control_4","control_5","control_6","control_7","control_8"}
 	};
