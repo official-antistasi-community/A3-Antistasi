@@ -65,6 +65,23 @@ class CfgWeapons {
 
 class ace_medical_treatment {
     class Medication {
+        class ACE_Can_Spirit {
+            dose = 1;
+            maxDose = 40;
+            maxDoseDeviation = 2;
+            timeInSystem = 3600;
+            timeTillMaxEffect = 120;
+            hrIncreaseLow[] = {0, 5};
+            hrIncreaseNormal[] = {0, 5};
+            hrIncreaseHigh[] = {0, 5};
+        };
+        class ACE_Can_Franta : ACE_Can_Spirit {};
+        class ACE_Can_RedGull : ACE_Can_Spirit {
+            maxDose = 10;
+            hrIncreaseLow[] = {5, 15};
+            hrIncreaseNormal[] = {5, 15};
+            hrIncreaseHigh[] = {5, 15};
+        };
         class a3a_coffeeIV{
             dose = 1;
             maxDose = 4;
@@ -94,11 +111,9 @@ class ace_medical_treatment {
             type = "a3a_coffee";
         }
         class a3a_coffeeIV_500 : a3a_coffeeIV {
-            timeInSystem = 900;
             volume = 500;
         }
         class a3a_coffeeIV_250 : a3a_coffeeIV {
-            timeInSystem = 450;
             volume = 250;
         }
     }
@@ -121,6 +136,29 @@ class ace_medical_treatment_actions {
             displayName = $STR_A3A_ESPRESSO_250_GIVE;
             items[] = {"a3a_coffeeIV_250"};
         }
+        class Painkillers;
+        class ACE_Can_Spirit : Painkillers{
+            condition = "params ['_medic', '_patient']; _medic == _patient;";
+            displayName = "Drink can of Spirit";
+            displayNameProgress = "Drinking";
+            items[] = {"ACE_Can_Spirit"};
+            animationMedic = "";
+            animationMedicProne = "";
+            animationMedicSelf = ace_field_rations_drinkCrouchCan;
+            animationMedicSelfProne = ace_field_rations_drinkProneCan;
+            sounds[] = {"ace_field_rations_drinkCan1", "ace_field_rations_drinkCan1", "ace_field_rations_drinkCan2"};
+            litter[] = {{"ACE_Can_Spirit_Item"}};
+        };
+        class ACE_Can_Franta : ACE_Can_Spirit {            
+            displayName = "Drink can of Franta";
+            items[] = {"ACE_Can_Franta"};
+            litter[] = {{"ACE_Can_Franta_Item"}};
+        };
+        class ACE_Can_RedGull : ACE_Can_Spirit {
+            displayName = "Drink can of RedGull";
+            items[] = {"ACE_Can_RedGull"};
+            litter[] = {{"ACE_Can_RedGull_Item"}};
+        };
 }
 
 class CfgFunctions
