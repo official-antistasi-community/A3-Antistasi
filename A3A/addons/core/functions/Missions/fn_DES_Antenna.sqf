@@ -2,10 +2,9 @@
 if (!isServer and hasInterface) exitWith{};
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-private ["_antenna","_positionX","_timeLimit","_markerX","_nameDest","_mrkFinal","_tsk"];
+private ["_positionX","_timeLimit","_nameDest","_mrkFinal","_tsk"];
 
-_antenna = _this select 0;
-_markerX = [markersX,_antenna] call BIS_fnc_nearestPosition;
+params ["_markerX", "_antenna"];
 
 _difficultX = if (random 10 < tierWar) then {true} else {false};
 _leave = false;
@@ -30,7 +29,7 @@ _mrkFinal setMarkerShape "ICON";
 private _taskId = "DES" + str A3A_taskCount;
 [[teamPlayer,civilian],_taskId,[format [localize "STR_A3A_fn_mission_des_ante_text",_nameDest,_displayTime,FactionGet(occ,"name")],localize "STR_A3A_fn_mission_des_ante_titel",_mrkFinal],_positionX,false,0,true,"Destroy",true] call BIS_fnc_taskCreate;
 [_taskId, "DES", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
-waitUntil {sleep 1;(dateToNumber date > _dateLimitNum) or (not alive _antenna) or (not(sidesX getVariable [_markerX,sideUnknown] == Occupants))};
+waitUntil {sleep 1;(dateToNumber date > _dateLimitNum) or (not alive _antenna) or (sidesX getVariable _markerX == teamPlayer)};
 
 _bonus = if (_difficultX) then {2} else {1};
 

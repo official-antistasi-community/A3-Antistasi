@@ -6,8 +6,8 @@ private _possible = [];
 {
     private _nearbyMarker = A3A_antennaMap get netId _x;
     if (sidesX getVariable _nearbyMarker == teamPlayer) then {continue};
-    _possible pushBack _x;
+    _possible pushBack [_nearbyMarker, _x];
 } forEach _nearAntennas;
 
 if (_possible isEqualTo []) exitWith {false};
-[1, [selectRandom _possible]];
+[1, selectRandom _possible];
