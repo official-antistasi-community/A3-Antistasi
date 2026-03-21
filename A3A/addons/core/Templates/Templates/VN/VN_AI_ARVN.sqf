@@ -50,7 +50,7 @@ If anyone wants to pick up here, the vehicles are already setup, just need to wo
 ["vehiclesIFVs", ["vn_i_armor_m67_01_01", "vn_i_armor_type63_01"]] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", ["vn_i_armor_m41_01"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["vn_i_armor_m48_01_01", "vn_i_armor_type63_01"]] call _fnc_saveToTemplate;
-private _vehiclesAA = ["vn_b_wheeled_m54_mg_02"];
+private _vehiclesAA = ["a3a_vn_b_wheeled_m54_mg_02"];
 
 ["vehiclesTransportBoats", ["vn_o_boat_02_01", "vn_b_boat_10_01", "vn_b_boat_09_01"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["vn_b_boat_13_02", "vn_b_boat_06_02", "vn_b_boat_05_02", "vn_b_boat_12_02"]] call _fnc_saveToTemplate;
@@ -83,7 +83,7 @@ private _vehiclesAirPatrol = ["vn_i_air_uh1d_02_01"];
 
 ["staticMGs", ["vn_i_static_m1919a4_high", "vn_i_static_m60_high"]] call _fnc_saveToTemplate;
 ["staticAT", ["vn_b_army_static_m40a1rr"]] call _fnc_saveToTemplate;
-["staticAA", ["vn_i_static_m45"]] call _fnc_saveToTemplate;
+["staticAA", ["a3a_vn_b_army_static_m45"]] call _fnc_saveToTemplate;
 ["staticMortars", ["a3a_vn_b_static_mortar_m2"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "vn_mortar_m2_mag_he_x8"] call _fnc_saveToTemplate;
