@@ -34,3 +34,10 @@ _array deleteAt (_array find _vehicle);
 {
     if (_x getVariable ["markerX", ""] == _marker) then { unassignVehicle _x; moveOut _x };
 } forEach crew _vehicle;
+
+// Can happen with dismounted HC squad vehicles
+if (_garrison get "state" == "paused") then {
+    _vehicle enableSimulationGlobal true;
+    _vehicle allowDamage true;
+    [_vehicle, false] remoteExecCall ["hideObjectGlobal", 2];
+};
