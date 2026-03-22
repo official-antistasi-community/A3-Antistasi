@@ -40,7 +40,7 @@ _object addAction [
     true,
     true,
     "",
-    "",
+    "isNull attachedTo _originalTarget",
     3
 ];
 
@@ -54,7 +54,7 @@ _object addAction [
     true,
     true,
     "",
-    "",
+    "isNull attachedTo _originalTarget",
     3
 ];
 
