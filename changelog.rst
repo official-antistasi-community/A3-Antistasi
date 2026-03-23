@@ -3,6 +3,144 @@ Changelog
 ==========
 
 
+Version 3.11.0
+===============
+
+.. note::
+   22th March 2026
+
+.. admonition:: Major
+   
+   * :issue:`3765` Added map Stubbhult
+   * :issue:`3773` Antistasi can be played in true singleplayer:
+      - On the main menu, access the Antistasi dropdown on the Singleplayer section and select "Play Solo"
+      - This mode is still experimental, but allows you to always pause and use time acceleration
+   * :issue:`3789` Invaders can now take towns
+   * :issue:`3791` Militia forces are more common, including invading forces using militia now
+   * :issue:`3800` Rework to vehicle ammo economy:
+      - Each ammo truck has points that are consumed by rearming vehicles
+      - Use the RRR button in the New Battle Menu when looking at a vehicle to access the rearm / pylons panel
+   * :issue:`3812` SAMs, radars, mortars, and artillery are now persistent and capturable
+   * :issue:`3816` Added a new weapons truck mission and split ammo trucks (ammo trucks have vehicle rearm, weapons trucks have small arms)
+   * :issue:`3820` Enemy SEAD support to destroy radars and AA tanks
+   * :issue:`3825` Added a 5-minute combat timer for vehicles where they cannot be garaged
+   * :issue:`3826` Rebalanced income from resources/factories to no longer be map dependent
+   * :issue:`3827` Re-added counterattacks, relatively rare events that pull from the attack resource budget
+   
+
+.. admonition:: Minor
+   
+   * :issue:`3622` Removed access to the Old Battle Menu
+   * :issue:`3783` Arsenal / unlock quantity is now shown for each entry in the gun shop.
+   * :issue:`3785` Reinforcements will now sometimes be real and interceptable instead of entirely virtual
+   * :issue:`3789` Changed enemy response logic to the City Supplies mission
+   * :issue:`3801` Added more spots for statics on some Livonia / Stubbhult buildings
+   * :issue:`3805` Police should now spawn and patrol much closer to the actual city
+   * :issue:`3807` New ammo price algorithm to cover vehicle weapons
+   * :issue:`3822` Lowered delays on airstrike and carpet bombing supports
+   * :issue:`3822` Unfair / futuristic support notifications will always be shown, and unfair supports get a reveal bonus
+   * :issue:`3823` Made UAVs garageable
+   * :issue:`3828` Reduced the ammo station price to $3000 and added a larger ammo container for $12000
+   * :issue:`3830` Vehicle threat accumulation mechanic extended to all vehicles
+   * :issue:`3837` Gun shop prices halved
+   * :issue:`3844` Added a bug report / feedback form on the community servers
+   * :issue:`3848` Major improvements to fast travel logic
+   * :issue:`3849` Various PRs to improve patrol behavior; they now only spawn within mission distance
+   * :issue:`3850` Increased chances of physical reinforcements being sent
+   * :issue:`3854` Made punishments slightly more common (affected by invader town changes)
+   * :issue:`3858` Rebalanced selection for different types of reinforcement
+   * :issue:`3860` Improved pathing and choices for AI vehicles
+   * :issue:`3865` Updated icons and descriptions for contact reports, counterattacks, and major attacks
+   * :issue:`3870` Reduced amount of troops that can be garrisoned on rebel watchposts and roadblocks
+   * :issue:`3878` Loot crate actions can now be used when carrying the box
+   
+
+.. admonition:: Template updates
+
+   * :issue:`3469` Added Spearhead Expansion Project mod support (new factions ACAF, IHAC, US Winter, WEH, WEH Winter, AK, FRAS)
+   * :issue:`3797` Rework to SOG factions, including two new factions (ANZAC, USMC) and modifications to existing factions
+   * :issue:`3810` Updated the 3CB Factions templates to mod version 9.0.1 with additional vehicles and weapons
+   * :issue:`3813` Updated the CUP templates to mod version 1.19.1 with additional vehicles and weapons
+   * :issue:`3817` Added additional faction support and fixed some existing 3CB Factions (new factions PLM and TLM)
+   * :issue:`3845` Default climates added to the vanilla civilian factions
+   * :issue:`3846` Various fixes to the CSLA templates
+   * :issue:`3856` Replaced more faction's Assault Boats with RHIBs
+   * :issue:`3857` Updated the since-broken AMF template to the most recent release
+   * :issue:`3862` Added appropriate SAMs and radars to S.O.G. and PRACS factions
+   * :issue:`3862` Updated lore entries for many factions
+   * :issue:`3871` Updated the Vanilla/EF templates to the EF CDLC 1.2 update
+   * :issue:`3873` Nerfed some overpowered S.O.G. AA guns
+   
+   
+.. admonition:: Terrain updates
+
+   * :issue:`3759` Added more locations, built up existing locations, and generally brought Altis up to a modern standard
+   * :issue:`3855` Minor bugfixes to the Normandy map from Spearhead
+   * :issue:`3862` Fixed a broken mission name on Anizay and Kujari
+   * :issue:`3869` Added banks to almost every map
+
+
+.. admonition:: Bugfixes
+
+   * :issue:`3789` Fixed a bug where enemy attack selection wouldn't account for garrison strength
+   * :issue:`3790` Fixed units sometimes getting stuck in the unconscious animation after a self revive
+   * :issue:`3793` Removed some RHS hats that could be exploited for free helmets at game start
+   * :issue:`3794` Fixed a gun shop divide by zero error with certain mods
+   * :issue:`3796` Fixed a bug where some rebel mortar crews would quit after one shot
+   * :issue:`3802` Fixed a bug where garrisons could spawn underwater if a building was on a pier
+   * :issue:`3803` Fixed a bug where airstrike plane bombs could spawn above the plane if the target was over water
+   * :issue:`3804` Fixed a bug where some tall bank buildings wouldn't work for the mission
+   * :issue:`3808` Fixed a bug where players could remark themselves
+   * :issue:`3815` Fixed a bug where mounting statics in the garage didn't work on dedicated servers
+   * :issue:`3819` Fixed a bug where the shown garage lock setting could mismatch the actual value
+   * :issue:`3821` Fixed a bug where some two seater CAS planes wouldn't fire certain weapons
+   * :issue:`3822` Updated some out-of-date or not useful support notification strings
+   * :issue:`3824` Fixed a bug where garrison vehicle state wasn't saved, statics should also be saved now
+   * :issue:`3832` Fixed some non-impacting config logged errors
+   * :issue:`3838` Fixed a bug where the garage wouldn't persist aircraft loadouts
+   * :issue:`3847` Fixed a case where some garrison patrols wouldn't engage the enemy
+   * :issue:`3854` Fixed multiple issues with the gun shop mission
+   * :issue:`3854` Fixed multiple issues with the destroy heli mission
+   * :issue:`3858` Fixed a bug where mortars could stall if they fired ranging shots near max range
+   * :issue:`3870` Fixed a bug where rebel outposts/roadblocks wouldn't have names on the map
+   * :issue:`3872` Fixed a bug where enemy roadblocks wouldn't get reinforced correctly
+   * :issue:`3874` Fixed a broken loadout on a 3CB CAS plane
+   * :issue:`3876` Fixed a bug where high command squads could get stuck in the garrison paused state
+
+
+.. admonition:: Groundwork
+
+   * :issue:`3699` Default spawn distance can be set per-map in mapInfo.hpp
+   * :issue:`3761` A custom flag position can now be set with a map marker when building terrain ports
+   * :issue:`3843` Added additional values in the template config for supports
+   * :issue:`3862` Added a scope entry to template config
+   
+
+.. admonition:: Localization
+
+   * [No PRs] - Unfortunately no updates due to pipeline issues.
+
+
+.. admonition:: Tools
+
+   * :issue:`3775` Added integration to the autotest Arma parameter for fast config testing
+
+
+.. admonition:: Refactor
+
+   * :issue:`3795` Refactored the mission request framework to support mission weights and old/new framework tasks
+   * :issue:`3838` Updated some pylon code to use newer Arma commands
+   * :issue:`3858` Changed the vehicle save data structure in garrisons
+
+.. warning::
+
+   * Please note that this changelog may contain both spelling/grammatical errors and/or factual errors. Should any factual errors exist, we apologise but with the sheer number of changes made per version it can be easy to lose or mistake a change when writing up the changelog.
+
+|
+
+-----
+
+
 Version 3.10.2
 ===============
 

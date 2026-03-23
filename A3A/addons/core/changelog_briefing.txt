@@ -1,4 +1,132 @@
-Version 3.10.2
+Version 3.11.0
+<br/>
+<br/>
+<br/>Major
+<br/>
+<br/>Added map Stubbhult
+<br/>Antistasi can be played in true singleplayer:
+<br/>- On the main menu, access the Antistasi dropdown on the Singleplayer section and select "Play Solo"
+<br/>- This mode is still experimental, but allows you to always pause and use time acceleration
+<br/>Invaders can now take towns
+<br/>Militia forces are more common, including invading forces using militia now
+<br/>Rework to vehicle ammo economy:
+<br/>- Each ammo truck has points that are consumed by rearming vehicles
+<br/>- Use the RRR button in the New Battle Menu when looking at a vehicle to access the rearm / pylons panel
+<br/>SAMs, radars, mortars, and artillery are now persistent and capturable
+<br/>Added a new weapons truck mission and split ammo trucks (ammo trucks have vehicle rearm, weapons trucks have small arms)
+<br/>Enemy SEAD support to destroy radars and AA tanks
+<br/>Added a 5-minute combat timer for vehicles where they cannot be garaged
+<br/>Rebalanced income from resources/factories to no longer be map dependent
+<br/>Re-added counterattacks, relatively rare events that pull from the attack resource budget
+<br/>
+<br/>
+<br/>Minor
+<br/>
+<br/>Removed access to the Old Battle Menu
+<br/>Arsenal / unlock quantity is now shown for each entry in the gun shop.
+<br/>Reinforcements will now sometimes be real and interceptable instead of entirely virtual
+<br/>Changed enemy response logic to the City Supplies mission
+<br/>Added more spots for statics on some Livonia / Stubbhult buildings
+<br/>Police should now spawn and patrol much closer to the actual city
+<br/>New ammo price algorithm to cover vehicle weapons
+<br/>Lowered delays on airstrike and carpet bombing supports
+<br/>Unfair / futuristic support notifications will always be shown, and unfair supports get a reveal bonus
+<br/>Made UAVs garageable
+<br/>Reduced the ammo station price to $3000 and added a larger ammo container for $12000
+<br/>Vehicle threat accumulation mechanic extended to all vehicles
+<br/>Gun shop prices halved
+<br/>Added a bug report / feedback form on the community servers
+<br/>Major improvements to fast travel logic
+<br/>Various PRs to improve patrol behavior; they now only spawn within mission distance
+<br/>Increased chances of physical reinforcements being sent
+<br/>Made punishments slightly more common (affected by invader town changes)
+<br/>Rebalanced selection for different types of reinforcement
+<br/>Improved pathing and choices for AI vehicles
+<br/>Updated icons and descriptions for contact reports, counterattacks, and major attacks
+<br/>Reduced amount of troops that can be garrisoned on rebel watchposts and roadblocks
+<br/>Loot crate actions can now be used when carrying the box
+<br/>
+<br/>
+<br/>Template updates
+<br/>
+<br/>Added Spearhead Expansion Project mod support (new factions ACAF, IHAC, US Winter, WEH, WEH Winter, AK, FRAS)
+<br/>Rework to SOG factions, including two new factions (ANZAC, USMC) and modifications to existing factions
+<br/>Updated the 3CB Factions templates to mod version 9.0.1 with additional vehicles and weapons
+<br/>Updated the CUP templates to mod version 1.19.1 with additional vehicles and weapons
+<br/>Added additional faction support and fixed some existing 3CB Factions (new factions PLM and TLM)
+<br/>Default climates added to the vanilla civilian factions
+<br/>Various fixes to the CSLA templates
+<br/>Replaced more faction's Assault Boats with RHIBs
+<br/>Updated the since-broken AMF template to the most recent release
+<br/>Added appropriate SAMs and radars to S.O.G. and PRACS factions
+<br/>Updated lore entries for many factions
+<br/>Updated the Vanilla/EF templates to the EF CDLC 1.2 update
+<br/>Nerfed some overpowered S.O.G. AA guns
+<br/>
+<br/>
+<br/>Terrain updates
+<br/>
+<br/>Added more locations, built up existing locations, and generally brought Altis up to a modern standard
+<br/>Minor bugfixes to the Normandy map from Spearhead
+<br/>Fixed a broken mission name on Anizay and Kujari
+<br/>Added banks to almost every map
+<br/>
+<br/>
+<br/>Bugfixes
+<br/>
+<br/>Fixed a bug where enemy attack selection wouldn't account for garrison strength
+<br/>Fixed units sometimes getting stuck in the unconscious animation after a self revive
+<br/>Removed some RHS hats that could be exploited for free helmets at game start
+<br/>Fixed a gun shop divide by zero error with certain mods
+<br/>Fixed a bug where some rebel mortar crews would quit after one shot
+<br/>Fixed a bug where garrisons could spawn underwater if a building was on a pier
+<br/>Fixed a bug where airstrike plane bombs could spawn above the plane if the target was over water
+<br/>Fixed a bug where some tall bank buildings wouldn't work for the mission
+<br/>Fixed a bug where players could remark themselves
+<br/>Fixed a bug where mounting statics in the garage didn't work on dedicated servers
+<br/>Fixed a bug where the shown garage lock setting could mismatch the actual value
+<br/>Fixed a bug where some two seater CAS planes wouldn't fire certain weapons
+<br/>Updated some out-of-date or not useful support notification strings
+<br/>Fixed a bug where garrison vehicle state wasn't saved, statics should also be saved now
+<br/>Fixed some non-impacting config logged errors
+<br/>Fixed a bug where the garage wouldn't persist aircraft loadouts
+<br/>Fixed a case where some garrison patrols wouldn't engage the enemy
+<br/>Fixed multiple issues with the gun shop mission
+<br/>Fixed multiple issues with the destroy heli mission
+<br/>Fixed a bug where mortars could stall if they fired ranging shots near max range
+<br/>Fixed a bug where rebel outposts/roadblocks wouldn't have names on the map
+<br/>Fixed a bug where enemy roadblocks wouldn't get reinforced correctly
+<br/>Fixed a broken loadout on a 3CB CAS plane
+<br/>Fixed a bug where high command squads could get stuck in the garrison paused state
+<br/>
+<br/>
+<br/>Groundwork
+<br/>
+<br/>Default spawn distance can be set per-map in mapInfo.hpp
+<br/>A custom flag position can now be set with a map marker when building terrain ports
+<br/>Added additional values in the template config for supports
+<br/>Added a scope entry to template config
+<br/>
+<br/>
+<br/>Localization
+<br/>
+<br/>Unfortunately no updates due to pipeline issues.
+<br/>
+<br/>
+<br/>Tools
+<br/>
+<br/>Added integration to the autotest Arma parameter for fast config testing
+<br/>
+<br/>
+<br/>Refactor
+<br/>
+<br/>Refactored the mission request framework to support mission weights and old/new framework tasks
+<br/>Updated some pylon code to use newer Arma commands
+<br/>Changed the vehicle save data structure in garrisons
+<br/>
+<br/>
+<br/>
+<br/>Version 3.10.2
 <br/>
 <br/>
 <br/>Minor
