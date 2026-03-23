@@ -1,26 +1,4 @@
-
-player addEventHandler ["FiredMan", {
-    _player = _this select 0;
-    if (!captive _player) exitWith {false};
-
-    //if ({((side _x== Invaders) or (side _x== Occupants)) and (_x knowsAbout player > 1.4)} count allUnits > 0) then
-    if ({if (((side _x == Occupants) or (side _x == Invaders)) and (_x distance player < 300)) exitWith {1}} count allUnits > 0) then {
-        _player setCaptive false;
-    }
-    else {
-        _city = [citiesX,_player] call BIS_fnc_nearestPosition;
-        _size = [_city] call A3A_fnc_sizeMarker;
-        _cityData = A3A_cityData getVariable _city;
-        if (random 100 > _cityData select 1) then {            // reb support
-            if (_player distance getMarkerPos _city < _size * 1.5) then {
-                _player setCaptive false;
-                if (vehicle _player != _player) then {
-                    {if (isPlayer _x) then {[_x,false] remoteExec ["setCaptive",_x]}} forEach ((assignedCargo (vehicle _player)) + (crew (vehicle _player)) - [player]);
-                };
-            };
-        };
-    };
-}];
+player addEventHandler ["FiredMan", A3A_fnc_rebelFiredManEH];
 
 player addEventHandler ["InventoryOpened", {
     private ["_playerX","_containerX","_typeX"];

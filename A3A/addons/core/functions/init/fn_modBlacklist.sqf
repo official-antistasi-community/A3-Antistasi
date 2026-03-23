@@ -16,7 +16,9 @@ private _blacklistedHM = createHashMapFromArray [ // ["Mod Name As Seen On Steam
     ["Werthles' Headless Module", [{isClass (configfile >> "CfgPatches" >> "Werthles_WHK")}, "Antistasi is reliant on its own scripts for using headless clients"]],
     ["Advanced Rappelling", [{isClass (configfile >> "CfgPatches" >> "AR_AdvancedRappelling") && (isServer && (productVersion # 6) isEqualTo "Linux")}, "Breaks AI movement on Linux servers"]],
     ["Advanced Urban Rappelling", [{isClass (configfile >> "CfgPatches" >> "AUR_AdvancedUrbanRappelling") && (isServer && (productVersion # 6) isEqualTo "Linux")}, "Breaks AI movement on Linux servers"]],
-    ["ACE Medical", [{isClass (configFile >> "CfgSounds" >> "ACE_heartbeat_fast_3") && {!isMultiplayer}}, "Breaks respawning in singleplayer. Download the ACE No Medical mod to get the rest of the ACE features without the broken medical"]] // broken only in real sp
+    ["ACE Medical", [{isClass (configFile >> "CfgSounds" >> "ACE_heartbeat_fast_3") && {!isMultiplayer}}, "Breaks respawning in singleplayer. Download the ACE No Medical mod to get the rest of the ACE features without the broken medical"]], // broken only in real sp
+    ["Antistasi Plus", [{isClass (configFile >> "CfgPatches" >> "A3A_scrt") && (!isClass (configFile >> "CfgPatches" >> "A3A_ultimate"))}, "Multiple versions of Antistasi cannot be ran at once. Please remove Antistasi Plus from your modlist to play"]],
+    ["Antistasi Ultimate - Mod", [{isClass (configFile >> "CfgPatches" >> "A3A_ultimate")}, "Multiple versions of Antistasi cannot be ran at once. Please remove Antistasi Ultimate - Mod from your modlist to play"]]
 ];
 
 // First show bad mods running on server, if there are any

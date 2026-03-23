@@ -132,6 +132,7 @@ else            // ground vehicle
         _attackWP setWaypointType "SAD";
         _attackWP setWaypointBehaviour "COMBAT";
 
+        [_vehicle] spawn A3A_fnc_waypointMonitor;
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
 
@@ -155,6 +156,7 @@ else            // ground vehicle
         private _attackWP = _cargoGroup addWaypoint [_posDestination, 0];
         _attackWP setWaypointBehaviour "AWARE";
 
+        [_vehicle] spawn A3A_fnc_waypointMonitor;
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
 
@@ -182,6 +184,7 @@ else            // ground vehicle
         //Link the dismount waypoints
         _vehWP0 synchronizeWaypoint [_cargoWP0];
 
+        [_vehicle] spawn A3A_fnc_waypointMonitor;
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
 
@@ -214,6 +217,7 @@ else            // ground vehicle
         //Link the dismount waypoints
         _vehWP0 synchronizeWaypoint [_cargoWP0];
 
+        [_vehicle] spawn A3A_fnc_waypointMonitor;
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
 };

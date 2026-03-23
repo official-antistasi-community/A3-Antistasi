@@ -38,13 +38,14 @@ private _addActionCode = {
 [_hostage, _addActionCode] remoteExec ["call", 0, _hostage];
 
 // Create cops
+private _enemySide = sidesX getVariable _marker;
 private _groupType = ["groupsPoliceSmall", "groupsMilitiaSmall"] select (random 8 < tierWar);
-private _policeGroup = createGroup [Occupants, true];
+private _policeGroup = createGroup [_enemySide, true];
 {
     private _pos = _positions deleteAt (floor random count _positions);
     private _unit = [_policeGroup, _x, _pos, [], 0, "NONE"] call A3A_fnc_createUnit;
     [_unit, "", false, "legacy"] call A3A_fnc_NATOinit;
-} forEach selectRandom (A3A_faction_occ get _groupType);
+} forEach selectRandom (Faction(_enemySide) get _groupType);
 _task set ["_policeGroup", _policeGroup];
 
 // Create the task
@@ -124,11 +125,8 @@ _task set ["s_transit", {
 }];
 
 _task set ["s_success", {
-	private _playersInRange = playableUnits inAreaArray [_this get "_hostage", 100, 100];
-	{[10 / count _playersInRange, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[2, theBoss] call A3A_fnc_playerScoreAdd;
-
-	[10, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+    [10, true, _this get "_hostage", 100] call FUNC(rewardPlayers);     // grouped players within 100m
+    [10, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
     [2, 0] remoteExec ["A3A_fnc_resourcesFIA", 2];        // direct HR reward
 
     [_this get "_taskId", "SUCCEEDED", getPosATL (_this get "_hostage"), 100] call FUNC(taskNotifyNear);

@@ -85,6 +85,21 @@ if (isServer) then {
 	private _garrisonCompat = isNil "A3A_garrison";
 	if (_garrisonCompat) then { call A3A_fnc_convertSavedGarrisons };		// Creates & fills A3A_garrison
 
+	if (!_garrisonCompat) then {
+		// Garrisons might become orphaned with map changes
+		private _deadGarrisons = keys A3A_garrison select { !("_civ" in _x) and markerShape _x == "" };
+		if (_deadGarrisons isNotEqualTo []) then {
+			{ A3A_garrison deleteAt _x; A3A_garrison deleteAt (_x + "_civ") } forEach _deadGarrisons;
+			Info_1("Cleared out obsolete garrisons %1", _deadGarrisons);
+		};
+
+		// If version < 031004 then convert to newer vehicle save format
+		if !("vehicles2" in (A3A_garrison get "Synd_HQ")) then { call A3A_fnc_convert310Vehicles };
+
+		// Then convert to current internal format
+		call A3A_fnc_convertVehiclesToInternal;
+	};
+
 	// Fill out any garrison that hasn't already been filled
 	// This might happen with map changes so we do it here rather than convertSavedGarrisons
 	private _emptyGarrison = createHashMapFromArray [ ["troops", []], ["vehicles", []], ["buildings", []] ];
@@ -106,11 +121,12 @@ if (isServer) then {
 	// Fill out city civ component if missing (should be done after police stations because they share vehicle places)
 	{ [_x] call A3A_fnc_buildCity } forEach citiesX;
 
-	// Add type info to markers
-	call A3A_fnc_initMarkerTypes;
-
 	// Move saved statics & buildings into the correct garrisons
 	if (_garrisonCompat) then { call A3A_fnc_convertSavedStatics };
+
+	// Add type info to markers (also some spawn place stuff apparently)
+	call A3A_fnc_initMarkerTypes;
+
 
 	// **********************************************************************************************
 
@@ -125,7 +141,7 @@ if (isServer) then {
 	// Should have garrison data for this now
 	{
 		[_x] call A3A_fnc_mrkUpdate
-	} forEach markersX;
+	} forEach (markersX + outpostsFIA);
 
 
 	// Spawn in HQ buildings before we potentially place HQ objects on them

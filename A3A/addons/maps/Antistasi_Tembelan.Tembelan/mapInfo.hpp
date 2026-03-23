@@ -12,7 +12,9 @@ population numbers are reasonable, hence no need to manually adapt them
 		{9542.17,5029,0.0381298},{9191.69,6012.89,0},{9238.39,6075.66,0.160484},{5780,6207.91,0.00521088}
 	};
 	antennasBlacklistIndex[] = {1,4,6,8,9};
-	banks[] = {};
+	banks[] = {
+		{7170.38,4092.19,0},{9086.9,5310.66,0},{5083.37,5922.73,0},{7531.09,4512.53,0},{4577.21,2654.55,0}
+	};
 	garrison[] = {{},{"airport_2", "airport_4", "outpost_10", "seaport_2"},{},{}};
 	fuelStationTypes[] = {"Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_malevil_F"};
 	climate = "temperate";
@@ -37,4 +39,7 @@ population numbers are reasonable, hence no need to manually adapt them
 	size = 10.2;
 	cityCount = 26;
 	airbaseCount = 5;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

@@ -68,6 +68,7 @@ private _fnc_spawnLeader = {
     _leader setCaptive true;		// don't let him get shot for now
     _leader disableAI "ALL";
     _this set ["_leader", _leader];
+    _this set ["_civilians", [_leader]];
 
     // Add global start battle action to the leader
     private _addActionCode = {
@@ -85,10 +86,10 @@ private _fnc_spawnRebels = {
     private _numCiv = _this get "_numCiv";
     private _marker = _this get "_marker";
     private _leader = _this get "_leader";
+    private _civilians = _this get "_civilians";
     private _fnc_spawnCivAtPos = _this get "_fnc_spawnCivAtPos";
 
     private _buildingPlaces = [_marker, 200, _numCiv, 4] call A3A_fnc_patrolGetBuildingPlaces;
-    private _civilians = [_leader];
     private _civGroups = [group _leader];
     private _curGroup = group _leader;
     while {count _civilians < _numCiv} do
@@ -102,8 +103,6 @@ private _fnc_spawnRebels = {
         _civilians pushBack ([_curGroup, _place#0, _place#1] call _fnc_spawnCivAtPos);
         sleep 0.1;
     };
-    _this set ["_civilians", _civilians];
-    _this set ["_civGroups", _civGroups];
 
     _leader setCaptive false;
     _leader enableAI "ALL";
@@ -164,11 +163,12 @@ _task set ["s_spawnEnemies",
     // Not executed at init because it's fairly slow
     private _marker = _this get "_marker";
     private _vehCount = round (0.7 + random 0.5 + 0.13 * sqrt (A3A_cityPop get _marker) + 1.3 * A3A_balancePlayerScale);
+    private _enemySide = sidesX getVariable _marker;
 
-    private _airbase = [Occupants, markerPos _marker] call A3A_fnc_availableBasesAir;
+    private _airbase = [_enemySide, markerPos _marker] call A3A_fnc_availableBasesAir;
 
     //params ["_side", "_airbase", "_target", "_resPool", "_vehCount", "_delay", "_modifiers", "_attackType", "_reveal"];
-    private _data = [Occupants, _airbase, _marker, "defence", _vehCount, 300, ["lowair"]] call A3A_fnc_createAttackForceMixed;
+    private _data = [_enemySide, _airbase, _marker, "defence", _vehCount, 300, ["lowair"]] call A3A_fnc_createAttackForceMixed;
     _data params ["_resources", "_vehicles", "_crewGroups", "_cargoGroups"];
     _this set ["_vehicles", _vehicles];
     _this set ["_crewGroups", _crewGroups];
@@ -176,8 +176,8 @@ _task set ["s_spawnEnemies",
     _this set ["_troops", flatten (_cargoGroups apply { units _x })];
 
     // May as well do it properly here. Unlike actual attacks, needs supportSpends otherwise it'll send QRFs on top
-    A3A_supportStrikes pushBack [Occupants, "TROOPS", markerPos _marker, time + 3600, 3600, _resources];
-    A3A_supportSpends pushBack [Occupants, markerPos _marker, markerPos _marker, _resources, time];
+    A3A_supportStrikes pushBack [_enemySide, "TROOPS", markerPos _marker, time + 3600, 3600, _resources];
+    A3A_supportSpends pushBack [_enemySide, markerPos _marker, markerPos _marker, _resources, time];
 
     _task set ["state", "s_waitForStart"];
     _task set ["interval", 10];
@@ -297,12 +297,10 @@ _task set ["s_victory",
 {
     // flip the town
     private _marker = _this get "_marker";
-    [_marker, true, 80] remoteExecCall ["A3A_fnc_citySideChange", 2];
+    [_marker, teamPlayer, 80] remoteExecCall ["A3A_fnc_citySideChange", 2];
 
-    // TODO: scale with city size
-	private _playersInRange = (allPlayers - entities "HeadlessClient_F") inAreaArray [markerPos _marker, 500, 500];
-	{[10, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[10, theBoss] call A3A_fnc_playerScoreAdd;
+    private _reward = 2 * sqrt (A3A_cityPop get _marker);
+    [_reward, false, markerPos _marker, markerSize _marker # 0] call FUNC(rewardPlayers);     // all players within marker radius
 
 	[_this get "_taskId", "SUCCEEDED"] call BIS_fnc_taskSetState;
     _this set ["state", "s_cleanup"]; false;
@@ -326,12 +324,11 @@ _task set ["s_cleanup",
     { [_x] spawn A3A_fnc_VEHDespawner } forEach (_this get "_vehicles");
     { [_x] spawn A3A_fnc_enemyReturnToBase } forEach ((_this get "_crewGroups") + (_this get "_cargoGroups"));
 
-    // When the city marker is despawned, get rid of the civilians
-    [_this get "_marker", _this get "_civilians", _this get "_civGroups"] spawn {
-        params ["_marker", "_civilians", "_civGroups"];
+    // When the city marker is despawned, get rid of the civilians (might only be leader)
+    [_this get "_marker", _this get "_civilians"] spawn {
+        params ["_marker", "_civilians"];
         waitUntil {sleep 5; (spawner getVariable _marker != 0)};
         {deleteVehicle _x} forEach _civilians;
-        {deleteGroup _x} forEach _civGroups;
     };
 
     // Remove from active city battles after 10min (added on call)

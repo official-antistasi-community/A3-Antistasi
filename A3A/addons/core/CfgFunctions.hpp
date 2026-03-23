@@ -67,10 +67,10 @@ class CfgFunctions
             class undercoverAI {};
             class unitGetToCover {};
             class useFlares {};
-            class VANTinfo {};
             class vehicleConvoyHeliTravel{};
             class vehicleConvoyTravel {};
             class vehicleMarkers {};
+            class waypointMonitor {};
         };
 
         class Ammunition {
@@ -83,6 +83,7 @@ class CfgFunctions
             class categoryOverrides {};
             class checkRadiosUnlocked {};
             class configSort {};
+            class clampVehicleAmmo {};
             class dress {};
             class empty {};
             class equipmentClassToCategories {};
@@ -92,12 +93,14 @@ class CfgFunctions
             class fillLootCrate {};
             class generateRebelGear {};
             class getRadio {};
+            class getResourceCargo {};
             class hasARadio {};
             class itemConfig {};
             class itemConfigMass {};
             class itemSort {};
             class itemType {};
             class launcherInfo {};
+            class lookForSupplyVehicle {};
             class loot {};
             class randomRifle {};
             class setCargoItems {};
@@ -130,6 +133,7 @@ class CfgFunctions
             class citySideChange {};
             class citySupportChange {};
             class commsMP {};
+            class considerCounterattack {};
             class createBreachChargeText {};
             class createOutpostsFIA {};
             class createPetros {};
@@ -192,7 +196,6 @@ class CfgFunctions
             class sellVehicle {};
             class setMarkerAlphaForSide {};
             class setPlaneLoadout {};
-            class singlePlayerBlackScreenWarning {};
             class sizeMarker {};
             class splitVehicleCrewIntoOwnGroups {};
             class startBreachVehicle {};
@@ -249,6 +252,7 @@ class CfgFunctions
             class createVehicleCrew {};
             class createVehicleQRFBehaviour {};
             class crewTypeForVehicle {};
+            class enemyCityAttack {};
             class FIAinitBases {};
             class fillVehicleCrewCargo {};
             class garrisonSize {};
@@ -315,6 +319,7 @@ class CfgFunctions
             class combatModeChangedEH {};
             class enemyUnitDeletedEH {};
             class enemyUnitKilledEH {};
+            class rebelFiredManEH {};
             class rebelUnitKilledEH {};
             class vehicleDeletedEH {};
         };
@@ -340,6 +345,8 @@ class CfgFunctions
             class garrisonLocal_spawnUnitCount {};
             class garrisonLocal_unpause {};
             class garrisonLocal_updateStatics {};
+            class garrisonLocal_vehAction {};
+            class garrisonLocal_vehActionEnd {};
             class garrisonLocal_zoneCheck {};
             class garrisonOpLoop {};
             class getGarrisonLimit {};
@@ -348,6 +355,8 @@ class CfgFunctions
             class spawnGarrisonSquads {};
             class spawnGarrisonVehicles {};
             class spawnPoliceStation {};
+            class vehActionArty {};
+            class vehActionSAM {};
         };
 
         class GarrisonServer {
@@ -367,6 +376,7 @@ class CfgFunctions
             class garrisonServer_clear {};
             class garrisonServer_delete {};
             class garrisonServer_despawn {};
+            class garrisonServer_initVIDs {};
             class garrisonServer_looted {};
             class garrisonServer_remUnit {};
             class garrisonServer_remUnitType {};
@@ -374,6 +384,8 @@ class CfgFunctions
             class garrisonServer_sendData {};
             class garrisonServer_spawn {};
             class garrisonServer_updateVehData {};
+            class garrisonServer_vehAction {};
+            class garrisonServer_vehActionSetState {};
             class getSiteTroopQuality {};
             class rebelVehPlacedWorker {};
             class selectGarrisonVehicleType {};
@@ -393,10 +405,12 @@ class CfgFunctions
             class checkCampaignEnd {};
             class clientIdleChecker {};
             class credits {};
+            class getMarkerPrefix {};
             class initACE {};
             class initACEUnconsciousHandler {};
             class initBases {};
             class initCivSpawnPlaces {};
+            class initCivSpawnPlaceStats {};
             class initGarrisons {};
             class initMarkerTypes {};
             class initPoliceStations {};
@@ -412,6 +426,7 @@ class CfgFunctions
             class initZeusLogging {};
             class installClientEH {};
             class modBlacklist {};
+            class newPlayerSetup {};
             class playerMarkers {};
             class prepareMarkerArrays {};
             class resourcecheck {};
@@ -471,20 +486,18 @@ class CfgFunctions
             class AS_specOP {};
             class AS_Traitor {};
             class CON_Outpost {};
-            class CON_PoliceStation {};
             class convoy {};
             class DES_Antenna {};
             class DES_Heli {};
             class DES_Vehicle {};
-            class GSMission {};
+            class LOG_Gunshop {};
             class LOG_Ammo {};
             class LOG_Bank {};
-            class LOG_Supplies {};
             class LOG_Salvage {};
-            class missionRequest {};
             class REP_Antenna {};
             class RES_Prisoners {};
             class RES_Refugees {};
+            class SUP_PoliceStation {};
             class supplyDrop {};
             class taskDelete {};
             class taskSetState {};
@@ -648,8 +661,10 @@ class CfgFunctions
         class Save {
             file = QPATHTOFOLDER(functions\Save);
             class collectSaveData {};
+            class convert310Vehicles {};
             class convertSavedGarrisons {};
             class convertSavedStatics {};
+            class convertVehiclesToInternal {};
             class deleteSave {};
             class exportSave {};
             class finalizeSave {};
@@ -724,7 +739,6 @@ class CfgFunctions
             class SUP_gunshipSpawn {};
             class SUP_mortar {};
             class SUP_mortarAvailable {};
-            class SUP_mortarRoutine {};
             class SUP_orbitalStrike {};
             class SUP_orbitalStrikeAvailable {};
             class SUP_orbitalStrikeImpactEffects {};
@@ -737,7 +751,9 @@ class CfgFunctions
             class SUP_QRFRoutine {};
             class SUP_SAM {};
             class SUP_SAMAvailable {};
-            class SUP_SAMRoutine {};
+            class SUP_SEAD {};
+            class SUP_SEADAvailable {};
+            class SUP_SEADRoutine {};
             class SUP_tank {};
             class SUP_tankAvailable {};
             class SUP_tankRoutine {};
@@ -834,6 +850,7 @@ class CfgFunctions
             class adminData {};
             class basicBackpack {};
             class boxCollisionCheck {};
+            class checkRoadPlace {};
             class classNameToModel {};
             class countAttachedObjects {};
             class createDataObject {};
@@ -841,6 +858,7 @@ class CfgFunctions
             class deleteNamespace {};
             class filterAndWeightArray {};
             class findEmptyPos {};
+            class findEmptyPosCar {};
             class findPosNearHouse {};
             class getAdmin {};
             class isEngineer {};

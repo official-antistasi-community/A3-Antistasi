@@ -1,6 +1,7 @@
 /*
     Garrison-local function for retreat/surrender of defeated garrison
     Troops retreat/surrender, civs are retained, statics and vehicle switch side
+    Can be called on unspawned garrison
 
     Environment: Scheduled. Should only be called by garrisonOpLoop.
 
@@ -20,6 +21,14 @@ Trace_1("Called with %1", _this);
 params ["_marker", "_newSide"];
 
 private _garrison = A3A_activeGarrison get _marker;
+
+// Terminate any active supports
+{
+    [_marker, _x#0] call A3A_fnc_garrisonLocal_vehActionEnd;
+} forEachReversed (_garrison get "vehActions");
+
+// In this case, marker should no longer exist in A3A_activeGarrison and we're done here
+if (_garrison get "state" == "disabled") exitWith {};
 
 // Handle retreat/surrender of troops. Don't touch vehicles.
 [_marker, true, false] call A3A_fnc_garrisonLocal_clear;

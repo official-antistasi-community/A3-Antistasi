@@ -28,3 +28,8 @@ A3A_garrison get "Synd_HQ" set ["type", "hq"];
     };
     A3A_spawnPlacesHM set [_x, A3A_garrison get _x get "spawnPlaces"];
 } forEach controlsX;
+
+{
+    // Add numerical ID to each garrison vehicle for tracking
+    [_x] call A3A_fnc_garrisonServer_initVIDs;
+} forEach A3A_garrison;

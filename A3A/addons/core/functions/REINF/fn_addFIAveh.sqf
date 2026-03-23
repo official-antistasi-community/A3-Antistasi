@@ -12,18 +12,11 @@ if (_typeVehX == "") exitWith {[_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_
 
 private _cost = [_typeVehX] call A3A_fnc_vehiclePrice;
 
-private _resourcesFIA = 0;
-if (!isMultiPlayer) then {_resourcesFIA = server getVariable "resourcesFIA"} else
-	{
-	if (player != theBoss) then
-		{
-		_resourcesFIA = player getVariable "moneyX";
-		}
-	else
-		{
-		_resourcesFIA = server getVariable "resourcesFIA";
-		};
-	};
+private _resourcesFIA = if (player != theBoss) then {
+	player getVariable ["moneyX", 0];
+} else {
+	server getVariable ["resourcesFIA", 0];
+};
 
 if (_resourcesFIA < _cost) exitWith {[_titleStr, format [localize "STR_A3A_fn_reinf_addFIAVeh_no_money",_cost]] call A3A_fnc_customHint;};
 private _nearestMarker = [markersX select {sidesX getVariable [_x,sideUnknown] == teamPlayer},player] call BIS_fnc_nearestPosition;
@@ -41,6 +34,7 @@ private _fnc_placed = {
 		_vehicle setVariable ["ownerX",getPlayerUID player,true];
 	};
 	_vehicle setFuel random [0.10, 0.175, 0.25];
+	[_vehicle] call A3A_fnc_clampVehicleAmmo;
 	[_vehicle, teamPlayer] call A3A_fnc_AIVehInit;
 	[_vehicle] remoteExec ["A3A_fnc_rebelVehPlacedWorker", 2];
 };

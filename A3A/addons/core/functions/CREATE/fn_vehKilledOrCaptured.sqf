@@ -46,7 +46,7 @@ if ((_side == Occupants or _side == Invaders) and _vehCost > 0) then
 	};
 
 	// Hmm. Shouldn't be added for a capture?
-	[_side, getPosATL _veh, 2*_vehCost/3, _killer] remoteExec ["A3A_fnc_addRecentDamage", 2];		// other third applied in HandleDamage
+	[_side, getPosATL _veh, 2*_vehCost/3, _killer] remoteExecCall ["A3A_fnc_addRecentDamage", 2];		// other third applied in HandleDamage
 
 	if (_sideEnemy != teamPlayer) exitWith {};
 
@@ -71,7 +71,7 @@ if (_side == civilian) then
 			[_thief, false] remoteExec ["setCaptive", _thief];
 		};
 		{
-			if ((side _x == Occupants) and (_x distance _pos < distanceSPWN2)) then {_x reveal _thief};
+			if ((side _x != teamPlayer) and (_x distance _pos < distanceSPWN2)) then {_x reveal _thief};
 		} forEach allUnits;
 	} forEach crew _veh;
 

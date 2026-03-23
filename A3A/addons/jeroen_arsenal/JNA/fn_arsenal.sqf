@@ -1813,9 +1813,9 @@ switch _mode do {
 					[_index, _oldItem] call jn_fnc_arsenal_addItem;
 
 					//add new weapon
-					if (_item != "") then {
+					if (_item != "" and isClass (configFile >> "CfgWeapons" >> _item)) then {
 						//give player new weapon
-						[player,_item,0] call bis_fnc_addweapon;
+						player addWeapon _item;
 						[_index, _item]call jn_fnc_arsenal_removeItem;
 
 						//Remove any attachments that spawn *with* the weapon.

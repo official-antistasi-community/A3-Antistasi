@@ -70,10 +70,8 @@ switch (_mode) do
         {
             private _index = _targetCombo lbAdd (name _x);
             _targetCombo lbSetData [_index, getPlayerUID _x];
-        } forEach (allPlayers - (entities "HeadlessClient_F"));
+        } forEach (allPlayers - [player] - (entities "HeadlessClient_F"));
         _targetCombo lbSetCurSel 0;
-        private _savedDetails = profileNamespace getVariable ["A3A_lastRemarkDetails",""];
-        _detailsEdit ctrlSetText _savedDetails;
     };
     case ("targetSelChanged"):
 	{
@@ -117,7 +115,6 @@ switch (_mode) do
 
         private _endStr = [_prefix, _type, _senderUID, _senderName, _targetUID, _targetName, _filtered] joinString DELIMITER;
         ServerInfo(_endStr)
-        _detailsEdit ctrlSetText "";
         _display closeDisplay 0;
 	};
 	case ("handleBackButton"):
@@ -127,7 +124,6 @@ switch (_mode) do
 	};
 	case ("onUnload"):
 	{
-        profileNamespace setVariable ["A3A_lastRemarkDetails", ctrlText _detailsEdit];
-        saveprofilenamespace;
+        
 	};
 };

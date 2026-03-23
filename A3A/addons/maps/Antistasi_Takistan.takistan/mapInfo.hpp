@@ -7,7 +7,9 @@ class takistan {
 		{5137.9,6030.18,-0.00238037},{5578.24,9072.21,-0.842239},{5249.37,3709.48,-0.353882},{8547.92,3897.03,-0.56076},{3126.7,8223.88,-0.649429},{4014.64,3089.66,0.150574},{11710.2,9825.85,0.0984039},{2239.98,12630.7,-0.575844}
 	};
 	antennasBlacklistIndex[] = {}; //no antennas that need to be blacklisted
-	banks[] = {}; //no suitable building available
+	banks[] = {
+		{1804.62,11905.9,0},{3069.29,9924.49,0},{9903.63,11481.5,0},{5314.42,6166.68,0},{10167.9,2319.06,0},{6367.64,11252.4,0}
+	};
 	garrison[] = {
 		{},{"airport_1","outpost_5","outpost_6","outpost_7","outpost_8","resource","resource_5","resource_6"},{},{"control","control_1","control_2","control_5","control_13","control_20","control_21","control_22","control_24","control_25","control_31"}
 	};

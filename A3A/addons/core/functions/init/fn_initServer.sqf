@@ -14,6 +14,13 @@ Info_1("Server version: %1", QUOTE(VERSION_FULL));
 if (isClass (missionConfigFile/"CfgFunctions"/"A3A")) exitWith {};          // Pre-mod mission will break. Messaging handled in initPreJIP
 if (!requiredVersion QUOTE(REQUIRED_VERSION)) exitWith { Error("Arma version is out of date") };
 
+// Clear out the singleplayer AI and HCs as soon as possible
+if !(isMultiplayer) then {
+    private _hcs = entities "HeadlessClient_F";
+    private _units = units group player;
+    {deleteVehicle _x} forEach (_hcs + _units - [player] );
+};
+
 // hide all the HQ objects
 {
     _x enableRopeAttach false;
@@ -100,6 +107,9 @@ private _savedParamsHM = createHashMapFromArray (A3A_saveData get "params");
     };
     missionNamespace setVariable [configName _x, _val, true];                   // just publish them all, doesn't really hurt
 } forEach ("true" configClasses (configFile/"A3A"/"Params"));
+
+// Depends on civTraffic param
+call A3A_fnc_initCivSpawnPlaceStats;
 
 // Might have params dependency at some point
 if (A3A_hasACEMedical) then { call A3A_fnc_initACEUnconsciousHandler };
@@ -205,7 +215,7 @@ if (isClass (configFile >> "AntistasiServerMembers")) then
     {membersX pushBackUnique (getText (_x >> "uid"))} forEach _memberClasses;
 
     // Load remark setting
-    if (isNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks") || {debug}) then {A3A_useRemarks = getNumber (configFile >> "AntistasiServerMembers" >> "allowRemarks")};
+    if (isNumber (configFile >> "AntistasiServerMembers" >> "isCommunityServer") || {debug}) then {A3A_isCommunityServer = getNumber (configFile >> "AntistasiServerMembers" >> "isCommunityServer")};
 };
 
 // TODO: Do we need this? maybe...
@@ -227,7 +237,7 @@ addMissionEventHandler ["OnUserAdminStateChanged", {
 }];
 
 publicVariable "membersX";
-publicVariable "A3A_useRemarks";
+publicVariable "A3A_isCommunityServer";
 publicVariable "theBoss";       // need to publish this even if empty
 
 // Setup buildable objects. Needed for HQ radius in initSupports

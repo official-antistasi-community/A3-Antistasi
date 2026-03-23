@@ -142,8 +142,8 @@ _loadoutData set ["longRangeRadios", []];
 _loadoutData set ["atBackpacks", []];
 _loadoutData set ["slBackpacks", []];
 _loadoutData set ["helmets", []];
-_loadoutData set ["slHat", ["AMF_BERET_LEGION_1REC"]];
-_loadoutData set ["sniHats", ["AMF_TARTE_CHASSEUR"]];
+_loadoutData set ["slHat", ["AMF_BERET_FRANCO_ALLEMAND"]];
+_loadoutData set ["sniHats", ["AMF_BERET_LEGION_1REC"]];
 
 //Item *set* definitions. These are added in their entirety to unit loadouts. No randomisation is applied.
 _loadoutData set ["items_medical_basic", ["BASIC"] call A3A_fnc_itemset_medicalSupplies];
@@ -186,50 +186,49 @@ _loadoutData set ["items_unarmed_extras", []];
 
 private _sfLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _sfLoadoutData set ["uniforms", ["amf_uniform_04_MTP"]];
-_sfLoadoutData set ["vests", ["amf_JPC_01_MTP"]];
-_sfLoadoutData set ["mgVests", ["amf_JPC_03_MTP"]];
-_sfLoadoutData set ["medVests", ["amf_jpc_02_MTP"]];
-_sfLoadoutData set ["glVests", ["amf_DCS_05_MTP"]];
-_sfLoadoutData set ["backpacks", ["AMF_rush24_01_MTP", "amf_tecpack_30L"]];
+_sfLoadoutData set ["vests", ["AMF_CRY_JPC_V1_MTC"]];
+_sfLoadoutData set ["mgVests", ["AMF_CRY_JPC_V3_MG_MTC"]];
+_sfLoadoutData set ["medVests", ["AMF_CRY_JPC_V2_TAN"]];
+_sfLoadoutData set ["backpacks", ["AMF_rush24_MTC", "AMF_rush24_RG"]];
 _sfLoadoutData set ["slBackpacks", ["AMF_Quadrocopter_Backpack_F"]];
-_sfLoadoutData set ["atBackpacks", ["amf_tecpack_70L_TAN"]];
-_sfLoadoutData set ["helmets", ["AMF_TC801_FS_TAN_EARPROT_TAN", "AMF_TC801_GRN_EARPROT_TAN_2", "AMF_TC801_EARPROT_TAN_2"]];
+_sfLoadoutData set ["atBackpacks", ["B_AMF_A_E_B_bag_F"]];
+_sfLoadoutData set ["helmets", ["AMF_OPSCORE2_BLACK", "AMF_OPSCORE2_BLACK_2"]];
 _sfLoadoutData set ["slHat", ["AMF_BERET_TRANSMISSION"]];
 _sfLoadoutData set ["sniHats", ["H_Booniehat_mcamo"]];
 _sfLoadoutData set ["NVGs", ["AMF_ONYX_NVG"]];
 _sfLoadoutData set ["binoculars", ["AMF_OB72_SOPHIE"]];
 
 _sfLoadoutData set ["slRifles", [
-    ["AMF_614_long_FS_TAN2", "AMF_ROTEX_V", "", "AMF_specter_painted", ["30Rnd_556x45_Stanag_Tracer_Red", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Green"], [], "amf_acc_614_grip13"],
-    ["AMF_614_short_FS_TAN2", "AMF_ROTEX_V", "", "AMF_schmidt_benderx4", ["30Rnd_556x45_Stanag_Tracer_Red", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Green"], [], "amf_acc_614_grip6"],
-    ["AMF_614_short_FS5_TAN", "AMF_ROTEX_V", "AMF_WMX200_TAN", "AMF_xps3_magnifier_side_painted", ["30Rnd_556x45_Stanag_Tracer_Red", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Green"], [], "amf_acc_614_grip12"],
-    ["AMF_614_short_FS5_TAN", "AMF_ROTEX_V", "AMF_AN_PEQ_15_painted", "AMF_exps3_painted", ["30Rnd_556x45_Stanag_Tracer_Red", "30Rnd_556x45_Stanag_Tracer_Yellow", "30Rnd_556x45_Stanag_Tracer_Green"], [], "amf_acc_614_grip7"]
+    ["AMF_614_short_FS4_TAN", "AMF_ROTEX_V", "", "AMF_specter_tan", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], [], "amf_acc_614_grip5"],
+    ["AMF_614_short_FS_TAN2", "AMF_ROTEX_V", "", "AMF_schmidt_benderx4", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], [], "amf_acc_614_grip5"],
+    ["AMF_614_short_FS_TAN", "AMF_ROTEX_V", "AMF_WMX200_TAN", "AMF_exps3_magnifier_side_painted", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], [], "amf_acc_614_grip4"],
+    ["AMF_614_short_FS_TAN", "AMF_ROTEX_V", "AMF_AN_PEQ_15_painted", "AMF_exps3_painted", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], [], "amf_acc_614_grip4"]
 ]];
 _sfLoadoutData set ["rifles", [  
-    ["AMF_714_long_tan_f", "muzzle_snds_B", "AMF_WMX200", "AMF_xps3_tan", ["20Rnd_762x51_HK417_mag", "20Rnd_762x51_HK417_Tracer_green_mag", "20Rnd_762x51_HK417_Tracer_red_mag"], [], "amf_acc_714_long_grip5"],
-    ["AMF_614_long_FS5_TAN", "AMF_ROTEX_V", "AMF_LASER_PIRATE", "AMF_AIMPOINT_MICRO_T2", ["30Rnd_556x45_Stanag_Tracer_Red"], [], ""]
+    ["AMF_SCAR_L_02_F", "muzzle_snds_M", "AMF_AN_PEQ_15_black", "AMF_exps3", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], [], ""],
+    ["AMF_614_short_FS4_BLK", "AMF_ROTEX_III", "AMF_AN_PEQ_15_black", "AMF_Aimpoint_CompM5", ["30Rnd_556x45_Stanag_Tracer_Red"], [], ""]
 ]];
 _sfLoadoutData set ["carbines", [  
-    ["amf_sig552", "AMF_ROTEX_V", "AMF_AN_PEQ_15_black", "AMF_Eotech_552", ["30Rnd_556x45_Stanag_Tracer_Red"], [], ""]
+    ["amf_sig552", "AMF_ROTEX_V", "AMF_AN_PEQ_15_black", "AMF_EOTECH_553", ["AMF_30Rnd_556x45_SIG_BO_BT_M196"], [], ""]
 ]];
 _sfLoadoutData set ["grenadeLaunchers", [
-    ["AMF_614_long_01_F", "AMF_ROTEX_V", "", "AMF_xps3_magnifier_side", ["30Rnd_556x45_Stanag_Tracer_Green"], ["AMF_RFG_AC58", "AMF_RFG_APAV40"], ""],
-    ["AMF_614_long_HK269_01_F", "muzzle_snds_M", "", "AMF_schmidt_benderx4", ["30Rnd_556x45_Stanag_Tracer_Red"], ["1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
+    ["AMF_614_long_HK269_01_F", "", "", "AMF_exps3_magnifier_side", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], ["1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
+    ["AMF_614_long_HK269_01_F", "", "", "AMF_schmidt_benderx4", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], ["1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
 ]];
 _sfLoadoutData set ["SMGs", [
-    ["amf_hk_mp5_01_f", "muzzle_snds_L", "", "", ["30Rnd_9x19_mag_red_Tracer"], [], ""]
+    ["amf_hk_mp5_01_f", "muzzle_snds_L", "", "", ["AMF_30Rnd_9x19_MP5_BO_123GR"], [], ""]
 ]];
 _sfLoadoutData set ["machineGuns", [
-    ["amf_mini_mg_tactical_mk3", "", "", "AMF_specter", ["150Rnd_MINI_MG_mag"], [], "amf_acc_mini_grip2"]
+    ["FN_Minimi_MK3", "", "", "AMF_specter", ["AMF_100Rnd_556x45_Minimi_BO_BT_SS109_OD"], [], "Minimi_Grip_MK2"]
 ]];
 _sfLoadoutData set ["marksmanRifles", [
-    ["AMF_SCAR_H_01_F", "muzzle_snds_B", "", "AMF_specter_tan", ["20Rnd_762x51_Mag"], [], ""]
+    ["AMF_SCAR_H_01_F", "muzzle_snds_B", "", "AMF_specter_tan", ["AMF_20Rnd_762x51_SCAR_BLK_BO_F3"], [], ""]
 ]];
 _sfLoadoutData set ["sniperRifles", [   
-    ["AMF_PGM_ULTIMA_RATIO_01_F", "", "", "AMF_schmidt_benderx4", ["10Rnd_762x51_Mag"], [], ""]
+    ["AMF_PGM_Hecate_II_Poly_RIS", "", "", "AMF_SB_PM2_P4FL", ["AMF_7Rnd_127x99_HECATE2_CBC_770GR_BSS"], [], ""]
 ]];
 _sfLoadoutData set ["sidearms", [
-    ["AMF_Glock_17", "muzzle_snds_L", "", "", ["16Rnd_9x21_Mag"], [], ""]
+    ["AMF_Glock_17_Gen4", "muzzle_snds_L", "", "", ["AMF_17Rnd_9x19_Glock"], [], ""]
 ]];
 
 /////////////////////////////////
@@ -237,51 +236,51 @@ _sfLoadoutData set ["sidearms", [
 /////////////////////////////////
 
 private _militaryLoadoutData = _loadoutData call _fnc_copyLoadoutData;
-_militaryLoadoutData set ["uniforms", ["amf_uniform_02_NG_CE_HS", "amf_uniform_02_CE_HS"]];
-_militaryLoadoutData set ["vests", ["amf_SMB_AUXSAN_TDF", "amf_SMB_AUXSAN_FAMAS_TDF"]];
-_militaryLoadoutData set ["mgVests", ["amf_SMB_ART_TDF"]];
-_militaryLoadoutData set ["glVests", ["amf_SMB_GRE_TDF"]];
-_militaryLoadoutData set ["engVests", ["amf_SMB_TDF"]];
-_militaryLoadoutData set ["backpacks", ["AMF_rush24_01_TDF", "amf_tecpack_30L", "AMF_FELIN_BACKPACK"]];
+_militaryLoadoutData set ["uniforms", ["amf_uniform_01_CE_MD", "amf_uniform_01_NG_CE_MD"]];
+_militaryLoadoutData set ["vests", ["amf_SMB_AUXSAN_FAMAS", "amf_SMB_AUXSAN"]];
+_militaryLoadoutData set ["mgVests", ["amf_SMB_ART"]];
+_militaryLoadoutData set ["glVests", ["amf_SMB_GRE"]];
+_militaryLoadoutData set ["engVests", ["amf_SMB"]];
+_militaryLoadoutData set ["backpacks", ["AMF_rush24_RG", "AMF_FELIN_BACKPACK", "AMF_FELIN_BACKPACK_LIGHT_TDF"]];
 _militaryLoadoutData set ["atBackpacks", ["AMF_Bergen_F2"]];
 _militaryLoadoutData set ["helmets", ["AMF_FELIN_05_CE", "AMF_FELIN_L05_CE", "AMF_FELIN_06_CE", "AMF_FELIN_L06_CE", "AMF_FELIN_03_CE"]];
-_militaryLoadoutData set ["sniHats", ["H_Booniehat_oli"]];
+_militaryLoadoutData set ["sniHats", ["AMF_BERET_LEGION_1REC"]];
 _militaryLoadoutData set ["binoculars", ["AMF_APX_M241"]];
 
 _militaryLoadoutData set ["slRifles", [
-    ["AMF_614_short_01_F", "", "", "AMF_Aimpoint_CompM", ["30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Yellow"], [], "amf_acc_614_grip3"],
-    ["AMF_Samas_G2_01_F", "", "", "AMF_Eotech_552", ["30Rnd_556x45_Stanag"], [], ""],
-    ["AMF_714_short_01_F", "", "", "AMF_schmidt_benderx4", ["20Rnd_762x51_HK417_Tracer_yellow_mag"], [], "amf_acc_714_grip3"]
+    ["AMF_614_short_01_F", "", "", "AMF_AIMPOINT_MICRO_T1", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], [], "amf_acc_614_grip2"],
+    ["Famas_G2", "", "", "AMF_exps3", ["AMF_30Rnd_556x45_M193_Stanag"], [], ""],
+    ["AMF_HK417_Short", "", "", "AMF_schmidt_benderx4", ["AMF_20Rnd_762x51_HK417_IMI_175GR"], [], "amf_acc_714_long_grip3"]
 ]];
 _militaryLoadoutData set ["rifles", [
-    ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag", "25Rnd_samas_f1_mag_Tracer_green", "25Rnd_samas_f1_mag_Tracer_yellow", "25Rnd_samas_f1_mag_Tracer_red"], [], ""],
-    ["AMF_Samas_FELIN_01_F", "", "", "", ["25Rnd_samas_f1_mag", "25Rnd_samas_f1_mag_Tracer_green", "25Rnd_samas_f1_mag_Tracer_yellow", "25Rnd_samas_f1_mag_Tracer_red"], [], ""],
-    ["AMF_Samas_G2_01_F", "", "", "", ["30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag_Tracer_Green"], [], ""]
+    ["Famas_F1_PGMP", "", "", "", ["AMF_25Rnd_BO_BT_MEN_M193", "AMF_25Rnd_BO_BT_MEN_SS109"], [], ""],
+    ["Famas_FELIN", "", "", "", ["AMF_25Rnd_BO_BT_MEN_M193", "AMF_25Rnd_BO_BT_MEN_SS109"], [], ""],
+    ["Famas_G2", "", "", "", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M193_Stanag"], [], ""]
 ]];
 _militaryLoadoutData set ["carbines", [
-    ["AMF_Samas_VALO_01_F", "", "", "AMF_Red_Dot_Sight", ["25Rnd_samas_f1_mag"], [], ""],
-    ["AMF_614_short_01_F", "", "", "AMF_EOTECH_553", ["30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag_Tracer_Green", "30Rnd_556x45_Stanag_Tracer_Red", "30Rnd_556x45_Stanag_Sand_Tracer_Red"], [], ""]
+    ["Famas_Valo", "", "", "AMF_Red_Dot_Sight", ["AMF_25Rnd_BO_BT_MEN_M193", "AMF_25Rnd_BO_BT_MEN_SS109"], [], ""],
+    ["AMF_614_short_01_F", "", "", "AMF_xps3", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], [], ""]
 ]];
 _militaryLoadoutData set ["grenadeLaunchers", [
-    ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag", "25Rnd_samas_f1_mag_Tracer_green", "25Rnd_samas_f1_mag_Tracer_yellow", "25Rnd_samas_f1_mag_Tracer_red"], ["AMF_RFG_AC58", "AMF_RFG_APAV40"], ""],
-    ["AMF_614_long_HK269_01_F", "", "", "AMF_Aimpoint_Pro_Patrol", ["30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag_Tracer_Green"], ["1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
+    ["Famas_F1", "", "", "", ["AMF_25Rnd_BO_BT_MEN_M193", "AMF_25Rnd_BO_BT_MEN_SS109"], ["AMF_RFG_AC58", "AMF_RFG_APAV40"], ""],
+    ["AMF_614_long_HK269_01_F", "", "", "AMF_Aimpoint_Pro_Patrol", ["AMF_30Rnd_556x45_M193_Stanag", "AMF_30Rnd_556x45_M196_Tracer_Stanag"], ["1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
 ]];
 _militaryLoadoutData set ["SMGs", [
-    ["amf_hk_mp5_01_f", "", "", "", ["30Rnd_9x19_mag", "30Rnd_9x19_mag_red_Tracer"], [], ""]
+    ["amf_hk_mp5_02_f", "", "", "", ["AMF_30Rnd_9x19_MP5_BO_123GR"], [], ""]
 ]];
 _militaryLoadoutData set ["machineGuns", [
-    ["amf_aanf1_01_f", "", "", "", ["50Rnd_762x51_band"], [], ""],
-    ["CUP_lmg_FNMAG_RIS_modern", "", "", "", ["CUP_100Rnd_TE4_LRT4_Red_Tracer_762x51_Belt_M"], [], ""],
-    ["amf_mini_mg_01_f", "", "", "", ["150Rnd_MINI_MG_mag_tracer_yellow"], [], "amf_acc_mini_grip5"]
+    ["amf_aanf1_01_f", "", "", "", ["AMF_100Rnd_762x51_AANF1_BO_F3"], [], ""],
+    ["amf_mag58_01_f", "", "", "", ["AMF_75Rnd_762x51_MAG58_BO_F3"], [], ""],
+    ["FN_Minimi_FELIN", "", "", "", ["AMF_100Rnd_556x45_Minimi_BO_BT_SS109_DCP"], [], "Minimi_Handguard_Grip"]
 ]];
 _militaryLoadoutData set ["marksmanRifles", [
-    ["AMF_RFF2_01_F", "", "", "AMF_Scrome_J8", ["10Rnd_762x51_Mag"], [], ""]
+    ["AMF_SCAR_H_01_F", "", "", "AMF_schmidt_benderx4_tan", ["AMF_20Rnd_308WIN_SCAR_TAN_CBC_168GR_HPBT"], [], ""]
 ]];
 _militaryLoadoutData set ["sniperRifles", [
-    ["AMF_PGM_ULTIMA_RATIO_01_F", "", "", "AMF_schmidt_benderx4", ["10Rnd_762x51_Mag"], [], ""]
+    ["AMF_PGM_ULTIMA_RATIO_F", "", "", "AMF_SB_PM2_P3L", ["AMF_10Rnd_762x51_UR_IMI_175GR"], [], ""]
 ]];
 _militaryLoadoutData set ["sidearms", [
-    ["AMF_Pamas", "", "", "", ["15Rnd_9x21_Mag"], [], ""]
+    ["AMF_Pamas", "", "", "", ["AMF_15Rnd_9x19_PAMAS"], [], ""]
 ]];
 
 ///////////////////////////////
@@ -295,10 +294,10 @@ _policeLoadoutData set ["vests", ["V_TacVest_gen_F"]];
 _policeLoadoutData set ["helmets", ["H_MilCap_blue"]];
 
 _policeLoadoutData set ["SMGs", [
-    ["amf_hk_mp5_02_f", "", "", "AMF_Red_Dot_Sight", ["30Rnd_9x19_mag_red_Tracer"], [], ""]
+    ["amf_hk_mp5_02_f", "", "", "AMF_Red_Dot_Sight", ["AMF_30Rnd_9x19_MP5_BO_123GR"], [], ""]
 ]];
 _policeLoadoutData set ["sidearms", [
-    ["AMF_Glock_17", "", "", "", ["16Rnd_9x21_Mag"], [], ""]
+    ["AMF_Glock_17_Gen4", "", "", "", ["AMF_17Rnd_9x19_Glock"], [], ""]
 ]];
 
 ////////////////////////////////
@@ -307,35 +306,35 @@ _policeLoadoutData set ["sidearms", [
 
 private _militiaLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _militiaLoadoutData set ["uniforms", ["amf_uniform_01_RE_NG_SE_MD", "amf_uniform_01_RE_SE_MD"]];
-_militiaLoadoutData set ["vests", ["amf_Belt_TAN", "V_TacVest_oli", "V_BandollierB_rgr"]];
-_militiaLoadoutData set ["backpacks", ["AMF_rush24_01"]];
-_militiaLoadoutData set ["atBackpacks", ["amf_tecpack_70L_BME"]];
-_militiaLoadoutData set ["helmets", ["AMF_Casque_F1", "AMF_Casque_F1_CE", "AMF_Casque_F1_DA", "AMF_Casque_F1_Olive", "AMF_kepi_legio_01", "AMF_kepi_legio_03"]];
+_militiaLoadoutData set ["vests", ["amf_Belt", "V_TacVest_oli", "V_BandollierB_rgr"]];
+_militiaLoadoutData set ["backpacks", ["amf_tecpack_30L"]];
+_militiaLoadoutData set ["atBackpacks", ["AMF_FELIN_BACKPACK_LIGHT_TDF"]];
+_militiaLoadoutData set ["helmets", ["AMF_kepi_legio_01", "AMF_kepi_legio_03", "AMF_kepi_legio_02", "AMF_TCNVG", "AMF_SPECTRA", "AMF_SPECTRA_CE"]];
 
 _militiaLoadoutData set ["rifles", [
-    ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag"], [], ""]
+    ["Famas_F1", "", "", "", ["AMF_25Rnd_BO_MEN_M193"], [], ""]
 ]];
 _militiaLoadoutData set ["carbines", [
-    ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag"], [], ""]
+    ["Famas_Valo", "", "", "", ["AMF_25Rnd_BO_MEN_SS109"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
-    ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag"], ["AMF_RFG_AC58"], ""],
-    ["AMF_Samas_F1_01_F", "", "", "", ["25Rnd_samas_f1_mag"], ["AMF_RFG_APAV40"], ""]
+    ["Famas_F1_PGMP", "", "", "", ["AMF_25Rnd_BO_BT_MEN_M193"], ["AMF_RFG_AC58"], ""],
+    ["Famas_F1_PGMP", "", "", "", ["AMF_25Rnd_BO_BT_MEN_M193"], ["AMF_RFG_APAV40"], ""]
 ]];
 _militiaLoadoutData set ["SMGs", [
-    ["amf_hk_mp5_01_f", "", "", "", ["30Rnd_9x19_mag"], [], ""]
+    ["amf_hk_mp5_01_f", "", "", "", ["AMF_30Rnd_9x19_MP5_BO_123GR"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
-    ["amf_aanf1_01_f", "", "", "", ["50Rnd_762x51_band"], [], ""]
+    ["amf_aanf1_01_f", "", "", "", ["AMF_100Rnd_762x51_AANF1_BO_F3"], [], ""]
 ]];
 _militiaLoadoutData set ["marksmanRifles", [
-    ["AMF_RFF2_01_F", "", "", "AMF_Scrome_J8", ["10Rnd_762x51_Mag"], [], ""]
+    ["AMF_RFF2_01_F", "", "", "ScromeJ8_NoCover", ["AMF_10Rnd_762x51_IMI_175GR"], [], ""]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
-    ["AMF_PGM_ULTIMA_RATIO_01_F", "", "", "AMF_schmidt_benderx4", ["10Rnd_762x51_Mag"], [], ""]
+    ["AMF_PGM_ULTIMA_RATIO_F", "", "", "AMF_SB_PM2_P3L", ["AMF_10Rnd_762x51_UR_IMI_175GR"], [], ""]
 ]];
 _militiaLoadoutData set ["sidearms", [
-    ["AMF_Glock_17", "", "", "", ["16Rnd_9x21_Mag"], [], ""]
+    ["AMF_Glock_17_Gen4", "", "", "", ["AMF_17Rnd_9x19_Glock"], [], ""]
 ]];
 
 //////////////////////////
@@ -349,8 +348,8 @@ _crewLoadoutData set ["helmets", ["AMF_ELNO_DH_586", "AMF_ELNO_DH_586_TAN"]];
 
 private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["uniforms", ["amf_pilot_01_f"]];
-_pilotLoadoutData set ["vests", ["amf_Belt_TDF"]];
-_pilotLoadoutData set ["helmets", ["AMF_ALPHA900", "AMF_ALPHA900_02", "AMF_LA100", "AMF_topowl"]];
+_pilotLoadoutData set ["vests", ["AMF_Pilot_Vest"]];
+_pilotLoadoutData set ["helmets", ["AMF_topowl", "AMF_LA100", "AMF_ALPHA900", "AMF_ALPHA900_02"]];
 
 
 /////////////////////////////////

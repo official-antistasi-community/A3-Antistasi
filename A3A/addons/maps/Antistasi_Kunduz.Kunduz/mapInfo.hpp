@@ -24,7 +24,7 @@ class kunduz {
 		{2664.34,2084.35,0.334126},{1413.97,3697.13,0.018425},{3965.45,4639.7,0.00327492}
 	};
 	antennasBlacklistIndex[] = {};
-	banks[] = {};
+	banks[] = {}; // no suitable building available, cities too small.
 	garrison[] = {{},{"outpost"},{},{}};
 	fuelStationTypes[] = {
 		"Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_01_pump_F","Land_FuelStation_02_pump_F","Land_FuelStation_03_pump_F"
@@ -46,4 +46,7 @@ class kunduz {
 	size = 5.1;
 	cityCount = 12;
 	airbaseCount = 1;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

@@ -33,17 +33,26 @@ if ("_civ" in _marker) exitWith
     {
         _x params ["_vehType", "_slotNum"];
 
+        // Shouldn't trigger now that save is checked
         if (_slotNum isEqualType 0 and { _slotNum >= count _places }) then {
+            Error_1("Slot number above slot count for %1 in %2", _x, _marker);
             _vehicles deleteAt _forEachIndex;
             continue;
         };
+
+        // Temporary fix for boats being mangled in 3.10.3
+        // Incorrect since boat format changed
+//        while {_slotNum isEqualType [] and {_slotNum#0 isEqualType []}} do {
+//            Error_3("Fixing incorrect boat format for %1, pos %2, dir %3", _vehType, _slotNum#0, _slotNum#1);
+//            _x set [2, _slotNum#1]; _x set [1, _slotNum#0]; _slotNum = _x#1;
+//        };
 
         private _slotType = if (_slotNum isEqualType []) then { "civBoat" } else { _places # _slotNum # 0 };
         if !(_vehType in (_valid get _slotType)) then {
             Debug_2("%1 (slot type %2) not valid, swapping", _vehType, _slotType);
             if (_slotType == "civCar") exitWith { _x set [0, selectRandomWeighted civVehiclesWeighted] };
             if (_slotType == "civBoat") exitWith { _x set [0, selectRandomWeighted civBoatsWeighted] };
-            _vehicles deleteAt _forEachIndex;
+            _vehicles deleteAt _forEachIndex;       // vehiclePolice case
         };
     } forEachReversed (_garrison get "vehicles");
 };
@@ -55,8 +64,9 @@ if (_side == teamPlayer) exitWith {};           // nothing to do here at the mom
 private _troops = _garrison get "troops";
 private _excess = (_troops#0) - (A3A_garrisonSize get _marker);
 if (_excess > 0) then {
+    Debug_2("Clearing %1 excess troops in %2", _excess, _marker);
     _troops set [0, _troops#0 - _excess];
-    [10*_excess, _side, "defence"] call A3A_fnc_addEnemyResources;
+    if (_garrison get "type" != "city") then { [10*_excess, _side, "defence"] call A3A_fnc_addEnemyResources };
 };
 
 if (_troopsOnly) exitWith { Trace("Completed") };
@@ -72,9 +82,10 @@ private _places = A3A_spawnPlacesHM get _marker;
 private _valid = A3A_validVehicles get _side;
 private _isAirport = _marker in airportsX;
 
+private _usedSlots = [];
 private _vehicles = _garrison get "vehicles";
 {
-    _x params ["_vehType", "_slotNum"];
+    _x params ["_vehType", "_slotNum", "", "_vehID"];
 
     if (_slotNum isEqualType [] or { _slotNum >= count _places }) then {
         _vehicles deleteAt _forEachIndex;
@@ -84,10 +95,23 @@ private _vehicles = _garrison get "vehicles";
         continue;
     };
 
+    // Temporary code to clean up 3.10.3 reinf bugs
+    if (_slotNum in _usedSlots) then {
+        _vehicles deleteAt _forEachIndex;
+        (_garrison get "supportVehicles") deleteAt _vehID;
+        Debug_2("Clearing excess vehicle %1 in slot %2", _vehType, _slotNum);
+    };
+    _usedSlots pushBack _slotNum;
+
     private _slotType = _places # _slotNum # 0;
     if !(_vehType in (_valid get _slotType)) then {
         // Arguably should refund this case if it's not a save?
         _x set [0, [_faction, _slotType, _isAirport] call A3A_fnc_selectGarrisonVehicleType];
+        if (_x#0 in A3A_supportVehTypes) then {
+            (_garrison get "supportVehicles") set [_vehID, ["ready", A3A_supportVehTypes get _x#0, _x]];
+        } else {
+            (_garrison get "supportVehicles") deleteAt _vehID;
+        };
         Debug_3("%1 (slot type %2) not valid, swapping to %3", _vehType, _slotType, _x#0);
     };
 } forEachReversed _vehicles;

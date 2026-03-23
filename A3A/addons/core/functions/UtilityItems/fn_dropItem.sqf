@@ -12,15 +12,14 @@
 
 params ["_player"];
 
-// Possible to fire this off twice at high script load
-private _dropID = _player getVariable "A3A_actionIDdrop";
-if (isNil "_dropID") exitWith {};
-
 // Go unscheduled to keep the state consistent
 isNil {
-    // Clear drop action
-    _player removeAction _dropID;
-    _player setVariable ["A3A_actionIDdrop", nil];
+    // Possible to fire this off twice at high script load
+    if (_player isNil "A3A_carryActionIDs") exitWith {};
+
+    // Clear drop/loot actions
+    { _player removeAction _x } forEach (_player getVariable "A3A_carryActionIDs");
+    _player setVariable ["A3A_carryActionIDs", nil];
 
     // Clear GetInMan EH
     private _eventIDcarry = _player getVariable "A3A_eventIDcarry";
@@ -62,6 +61,7 @@ isNil {
 
     [_item, true] remoteExecCall ["enableSimulationGlobal", 2];
 
+    _item lockInventory false;
     if (_item isKindOf "StaticWeapon") then { _item lock false };
 
     _item spawn {

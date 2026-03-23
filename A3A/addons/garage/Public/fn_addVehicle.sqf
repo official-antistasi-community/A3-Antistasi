@@ -78,7 +78,7 @@ private _utilityRefund = {
             _feedBack = "STR_HR_GRG_Feedback_addVehicle_Fuel_sold";
         };
         case ("ammo" in _flags): {
-            _toRefund = floor (([_object] call A3A_fnc_remainingAmmo) * _itemPrice);
+            _toRefund = floor ([_object, "rearm"] call A3A_fnc_getResourceCargo);
             _feedBack = "STR_HR_GRG_Feedback_addVehicle_Ammo_sold";
         };
         default {
@@ -102,10 +102,12 @@ if (_vehicle getVariable ['A3A_canGarage', false]) exitwith {
 if !((_vehicle getVariable ["SA_Tow_Ropes",objNull]) isEqualTo objNull) exitWith {["STR_HR_GRG_Feedback_addVehicle_SATow"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     //crewed
+private _isUAV = unitIsUAV _vehicle;
 private _exit = false;
 if ( ( {alive _x} count (crew _vehicle) ) > 0) then { _exit = true };
 { if ( ( {alive _x} count (crew _x) ) > 0) exitWith {_exit = true} } forEach attachedObjects _vehicle;
-if (_exit) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Crewed"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+if (_exit && (!_isUAV)) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Crewed"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+if (_isUAV && (crew _vehicle isNotEqualTo [] && {side _vehicle isNotEqualTo side _player})) exitWith {  ["STR_HR_GRG_Feedback_addVehicle_HostileUAV"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     // valid vehicle for garage
 private _cat = [_class] call HR_GRG_fnc_getCatIndex;
@@ -124,6 +126,15 @@ if (
     && {count (airportsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (_player inArea _x)}) < 1 //no airports
     }) && {!_isNearHelipad} // near helipad
 ) exitWith {["STR_HR_GRG_Feedback_addVehicle_airBlocked", [FactionGet(reb,"name")]] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+
+private _remTime = _vehicle getVariable ["A3A_lastFiredTime", -3600];
+private _timeDiff = (time - _remTime);
+private _blockTime = A3A_garageBlockTimer * 60;
+if (_timeDiff < _blockTime) exitWith {
+    private _prettyTime = [_blockTime - _timeDiff,1,1,false,2,false,true] call A3A_fnc_timeSpan_format;
+    ["STR_HR_GRG_Feedback_addVehicle_inCombat", [_prettyTime]] remoteExec ["HR_GRG_fnc_Hint", _client];
+    false
+};
 
 //here to allow adaption of external Antistasi system without needing to addapt code under APL-ND
 private _broadcastReportedVehsAndStaticsToSave = {
@@ -201,6 +212,8 @@ private _catsRequiringUpdate = [];
     if (typeOf _x in ["ACE_Wheel", "ACE_Track"]) then { continue };
     [_x, _vehicle] call ace_cargo_fnc_unloadItem;
 } forEach (_vehicle getVariable ["ace_cargo_loaded", []]);
+
+if (_isUAV) then {{deleteVehicle _x} forEach (crew _vehicle)};
 
 // Can only deal correctly with static weapons here. Drop everything else where it is.
 {

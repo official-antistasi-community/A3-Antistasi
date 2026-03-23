@@ -71,6 +71,9 @@
 ["staticAA", ["PRACS_SLA_Igla_pod", "PRACS_SLA_ZPU4", "PRACS_SLA_ZU23", "PRACS_SLA_S60"]] call _fnc_saveToTemplate;
 ["staticMortars", ["rhs_2b14_82mm_msv"]] call _fnc_saveToTemplate;
 
+["vehiclesSAM", ["PRACS_SLA_Sa2", "PRACS_SLA_Sa2", "PRACS_SLA_SA6"]] call _fnc_saveToTemplate;
+["vehiclesRadar", ["PRACS_SLA_1S91"]] call _fnc_saveToTemplate;
+
 ["mortarMagazineHE", "rhs_mag_3vo18_10"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "rhs_mag_d832du_10"] call _fnc_saveToTemplate;
 ["mortarMagazineFlare", "rhs_mag_3vs25m_10"] call _fnc_saveToTemplate;

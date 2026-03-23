@@ -25,7 +25,9 @@ class vn_khe_sanh {
 		{11235.1,14857.8,0.000335693}, {412.002,509.969,0.00694847}, {6019.46,4247.75,0.429047}, {2565.96,3428.66,0.506516}
 	};
 	antennasBlacklistIndex[] = {};
-	banks[] = {};
+	banks[] = {
+		{10914.4,3894.31,0}
+	};
 	garrison[] = {
 		{},
 		{
@@ -61,4 +63,7 @@ class vn_khe_sanh {
 	size = 15.4;
 	cityCount = 92;
 	airbaseCount = 4;
+	class MapParams {
+		distanceSPWN = 800;
+	};	
 };

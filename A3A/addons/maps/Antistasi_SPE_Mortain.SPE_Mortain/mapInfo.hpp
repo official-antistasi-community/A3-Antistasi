@@ -9,7 +9,9 @@ class SPE_Mortain {
 		{3952.95,5297.37,0.00991821},{5179.92,3040.97,0.0291138},{4223.79,7540.87,0.0480347},{542.119,4122.41,0.0940552},{7802.82,6414.54,0.131439}
 	};
 	antennasBlacklistIndex[] = {};
-	banks[] = {}; //no suitable/defined buildings
+	banks[] = {
+		{4402.28,3012.09,0},{2657.34,1996.69,0}
+	};
 	garrison[] = {
 		{},{"airport_6","outpost_8","outpost_9","outpost_15","factory_3","resource_5","resource_6","resource_10","control_5","control_10","control_19","control_20","control_21","control_25","control_28","control_30"},
 		{},{"control_5","control_10","control_19","control_20","control_21","control_25","control_28","control_30"}
@@ -35,4 +37,7 @@ class SPE_Mortain {
 	size = 8.2;
 	cityCount = 27;
 	airbaseCount = 6;
+	class MapParams {
+		distanceSPWN = 800;
+	};
 };

@@ -17,6 +17,7 @@ class CfgVehicles
         displayName = "Mig (Faux)";
         faction = "UK3CB_CW_SOV_O_EARLY";
         side = 0;
+        textureList[] = {"MIG",1};
     };
     class a3a_UK3CB_Fake_Sabre : UK3CB_MDF_O_Mystere {
         hiddenSelectionsMaterials[] = {"UK3CB_Factions\addons\UK3CB_Factions_Vehicles\air\UK3CB_Factions_Vehicles_Mystere\data\sabre.rvmat"};
@@ -25,6 +26,7 @@ class CfgVehicles
         displayName = "Sabre (Faux)";
         faction = "UK3CB_CW_US_B_EARLY";
         side = 1;
+        textureList[] = {"SABRE",1};
     };
 };
 

@@ -8,6 +8,7 @@ class clientOptions
         default = 0;
         stateChange = "[_this] spawn A3A_fnc_musica";
     };
+    /*
     class toggleUI
     {
         title = $STR_antistasi_client_options_useNewUI;
@@ -16,6 +17,7 @@ class clientOptions
         default = 1;
         stateChange = "A3A_GUIDevPreview = _this isEqualTo 1; if (_this isEqualTo 0) then {[localize 'STR_antistasi_client_options_useNewUI_title',localize 'STR_antistasi_client_options_useNewUI_body'] spawn A3A_fnc_customHint};";
     };
+    */
     class hideCorpses
     {
         title = $STR_antistasi_client_options_hideCorpses;

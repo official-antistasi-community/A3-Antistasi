@@ -129,14 +129,12 @@ _task set ["s_transit", {
 
 _task set ["s_success", {
     // TODO: Reward should probably be based on distance
-	private _playersInRange = playableUnits inAreaArray [_this get "_passenger", 100, 100];
-	{[10 / count _playersInRange, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[2, theBoss] call A3A_fnc_playerScoreAdd;
+    [10, true, _this get "_passenger", 100] call FUNC(rewardPlayers);     // grouped players within 100m
 
     // TODO: Maybe both ends?
     private _distance = markerPos (_this get "_marker") distance2d (_this get "_destPos");
-	[5 + _distance/400, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
-	[0, 200] remoteExec ["A3A_fnc_resourcesFIA", 2];            // some faction cash
+    [5 + _distance/400, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+    [0, 200] remoteExec ["A3A_fnc_resourcesFIA", 2];            // some faction cash
 
     [_this get "_taskId", "SUCCEEDED", getPosATL (_this get "_passenger"), 100] call FUNC(taskNotifyNear);
 	[_this get "_taskId", "SUCCEEDED", false] call BIS_fnc_taskSetState;

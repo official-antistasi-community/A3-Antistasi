@@ -5,6 +5,7 @@ Maintainer: John Jordan
 Arguments:
     <SIDE> Target side
     <SIDE> Attacking side
+    <ARRAY> Optional: List of target locations to check. Must match target side
 
 Return Value:
     <ARRAY,ARRAY> [targets, weights]
@@ -14,20 +15,22 @@ Return Value:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_targetSide", "_side"];
+params ["_targetSide", "_side", "_possibleTargets"];
 
 
 private _possibleStartBases = airportsX select {sidesX getVariable [_x, sideUnknown] == _side} select { [_x] call A3A_fnc_airportCanAttack };
 _possibleStartBases pushBack (["NATO_carrier", "CSAT_carrier"] select (_side == Invaders));
 private _airportPositions = _possibleStartBases apply { markerPos _x };
 
-private _possibleTargets = airportsX + outposts + seaports + factories + resourcesX;
-if (_targetSide == teamPlayer) then {_possibleTargets = _possibleTargets + citiesX};
-_possibleTargets = _possibleTargets select {sidesX getVariable [_x,sideUnknown] == _targetSide};
+if (isNil "_possibleTargets") then {
+    _possibleTargets = airportsX + outposts + seaports + factories + resourcesX + (citiesX - destroyedSites);
+    //if (_targetSide == teamPlayer) then {_possibleTargets = _possibleTargets + citiesX};      // enemy cities are now valid targets
+    _possibleTargets = _possibleTargets select {sidesX getVariable _x == _targetSide};
 
-// Add rebel HQ as attack target if the enemy side knows about it
-private _hqInfo = [A3A_curHQInfoOcc, A3A_curHQInfoInv] select (_side == Invaders);
-if (_targetSide == teamPlayer and _hqInfo >= 1) then { _possibleTargets pushBack "Synd_HQ" };
+    // Add rebel HQ as attack target if the enemy side knows about it
+    private _hqInfo = [A3A_curHQInfoOcc, A3A_curHQInfoInv] select (_side == Invaders);
+    if (_targetSide == teamPlayer and _hqInfo >= 1) then { _possibleTargets pushBack "Synd_HQ" };
+};
 
 if (count _possibleTargets == 0 || count _possibleStartBases == 0) exitWith {
     Info("Attack found no suitable targets or no suitable start bases, aborting!"); [[], []];
@@ -47,22 +50,23 @@ private _maxThreatDist = distanceForAirAttack + 1000;
     if (_airportPositions inAreaArray [markerPos _x, _maxThreatDist, _maxThreatDist] isEqualTo []) then { continue };
 
     private _garrison = A3A_garrison get _x;
-    private _threat = 10 * count (_garrison get "troops");
-    if (_markerSide == teamPlayer) then {
-        _threat = _threat + 50 * count (_garrison get "vehicles");          // TODO: do this properly
+    private _threat = if (_markerSide == teamPlayer) then {
+        private _threat = 10 * count (_garrison get "troops");
+        _threat + 50 * count (_garrison get "vehicles");          // TODO: do this properly. Tricky to tell what's crewed though
     } else {
         // based on typical static count
-        _threat = _threat + call {
+        private _threat = 10 * (_garrison get "troops" select 0);
+        _threat + call {
             if (_x in controlsX or _x in seaports) exitWith { 50 };
             if (_x in outposts) exitWith { 150 };
             if (_x in airportsX) exitWith { 600 };
             0;
         };
     };
-    //Debug_2("Marker %1, threat %2", _x, _threat);
+    //Debug_2("Marker %1, threat %2", _x, _threat);           // temp, disable for release
     if (_threat == 0) then { continue };
     _markersXYT pushBack [markerPos _x # 0, markerPos _x # 1, _threat];
-} forEach (markersX + controlsX + outpostsFIA);
+} forEach (markersX);       // + controlsX + outpostsFIA);      Remove roadblocks from threat, causes odd decisions
 
 
 private _lowAir = Faction(_side) getOrDefault ["attributeLowAir", false];
@@ -89,8 +93,9 @@ private _finalWeights = [];
 
     // Target value calc
     private _value = if (_x in citiesX) then {
+        if (_targetSide != teamPlayer) exitWith { A3A_garrisonSize get _x };        // enemies treat each other's towns as a military target
         // just base this on population?
-        private _baseValue = sqrt (A3A_cityPop get _x);                   // Low-value but threat is probably low too due to lack of garrison
+        private _baseValue = 1.5 * sqrt (A3A_cityPop get _x);                   // Low-value but threat is probably low too due to lack of garrison
         if (_side == Occupants) exitWith { _baseValue * (1.5 - tierWar / 10) };    // Occupants more likely to care about towns at low tiers
         _baseValue * (tierWar / 5) / (1 + A3A_punishmentDefBuff);                  // Invaders more likely to care at high tiers but devalued by failed punishments
     } else {
@@ -102,7 +107,7 @@ private _finalWeights = [];
             if (_x in factories) exitWith { 15 };
             10;     // resources
         };
-        _baseValue + ([_x, true] call A3A_fnc_garrisonSize) / 2;         // Bit of preference for large/defensible targets. Don't use frontline adjustment here
+        _baseValue + (A3A_garrisonSize get _x) / 2;         // Bit of preference for large/defensible targets. Don't use frontline adjustment here
     };
 
     // calculate local target difficulty
@@ -128,7 +133,7 @@ private _finalWeights = [];
     _localThreat = _localThreat + 10 * count (_rebelAISpawners inAreaArray [_targpos, 500, 500]);
 
     // Supply convoys shortcut
-    if (_x in citiesX and _side == Occupants) then {
+    if (_x in citiesX and _side == Occupants and _targetSide == teamPlayer) then {
         private _landBase = [_x] call A3A_fnc_findBasesForConvoy;
         if (_landBase == "") then { continue };             // no suitable base found 
         _finalTargets pushBack [_target, _landBase, _value, _localThreat, 0, 1];

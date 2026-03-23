@@ -59,6 +59,7 @@ class CfgFunctions {
 
         class mainMenu {
             file = QPATHTOFOLDER(functions\mainMenu);
+            class bugReportDialog {};
             class communityAdDialog {};
             class mapSelectorDialog {};
             class optionsDialog {};
@@ -74,6 +75,14 @@ class CfgFunctions {
         class roleSelect {
             file = QPATHTOFOLDER(functions\roleSelect);
             class roleSelectDialog {};
+        };
+
+        class RRR {
+            file = QPATHTOFOLDER(functions\RRR);
+            class clearEmptyWeapons {};
+            class serviceVehicle {};
+            class serviceVehicleGlobal {};
+            class vehServiceDialog {};
         };
 
         class gunShop {

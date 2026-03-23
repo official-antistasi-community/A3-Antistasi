@@ -1402,6 +1402,9 @@
       <Key ID="STR_antistasi_dialogs_main_convertToSquad_button">
         <Original>Convert To HC Squad</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_artilleryInUse">
+        <Original>One or more selected artillery pieces is already firing. Wait for it to finish.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_commanderOnly">
         <Original>Only Player Commander has access to this function.</Original>
       </Key>
@@ -4896,6 +4899,21 @@
       <Key ID="STR_antistasi_gun_shop_total_cost_text">
         <Original>Total:</Original>
       </Key>
+      <Key ID="STR_antistasi_gun_shop_stock_gs">
+        <Original>%1 in stock</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_stock_arsenal">
+        <Original>%1 in arsenal</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_unlock_amount">
+        <Original>%1 to unlock</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_unlocks_disabled">
+        <Original>Unlocks disabled</Original>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_unlocks_disabled_specific">
+        <Original>Unlocks disabled for this equipment type</Original>
+      </Key>
     </Container>
     <Container name="map_selector">
       <Key ID="STR_antistasi_mapSelector_onload_text">
@@ -4906,9 +4924,6 @@
       </Key>
       <Key ID="STR_antistasi_mapSelector_information_text2">
         <Original>Select any map from the left-hand list to view information on it. Switch between Banner and Map Board views with the top buttons. Launch your mission with the Play buttons.</Original>
-      </Key>
-      <Key ID="STR_antistasi_mapSelector_noSP_text">
-        <Original>To play a solo game, select "Host Game" and use the default options. Due to internal technical limitations, Antistasi cannot be played in a true singleplayer, scenario-like mode and you must instead host a game, but unless you set it up specifically, no one outside your local network can join it. This restriction may be resolved over the coming versions - stay tuned!</Original>
       </Key>
       <Key ID="STR_antistasi_mapSelector_mainTitle">
         <Original>ANTISTASI</Original>
@@ -5008,6 +5023,9 @@
       <Key ID="STR_antistasi_mapSelector_description_stratis">
         <Original>Stratis is not intended for play with Antistasi, but is compatible for testing purposes and for those who dare.</Original>
       </Key>
+      <Key ID="STR_antistasi_mapSelector_description_stubbhult">
+        <Original>Stubbhult is a smaller Scandinavian map with similar vibes to Livonia, with rolling forests, lakes, and wheat fields. The map serves well for a short but lively campaign.</Original>
+      </Key>
       <Key ID="STR_antistasi_mapSelector_description_takistan">
         <Original>Takistan is the most frequent Middle-Eastern Antistasi map, compact but with enough objectives to service a short but full campaign. Rolling hills encourage long-range tactics.</Original>
       </Key>
@@ -5070,6 +5088,7 @@
       <Key ID="STR_antistasi_commad_creditsMain">
         <Original>Use the forward and backward buttons to view images from the community servers.\n\nAntistasi Banner\nComposed by %1\nImages by %1, %2\nSoldiers from %3, %4</Original>
       </Key>
+      </Container>
       <Container name="options_dialog">
       <Key ID="STR_antistasi_clientOptions_title">
         <Original>ANTISTASI OPTIONS</Original>
@@ -5087,6 +5106,68 @@
       </Key>
       <Key ID="STR_antistasi_admincopyid_main">
         <Original>Copy the user's ID from the box by highlighting it and using Ctrl + C.</Original>
+      </Key>
+    </Container>
+    <Container name="veh_service_dialog">
+      <Key ID="STR_antistasi_vehService_hintTitle">
+        <Original>Service Vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_applyPoints">
+        <Original>APPLY (%1 POINTS)</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_applyRefuel">
+        <Original>APPLY (%1 LITERS)</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_nothingRearm">
+        <Original>Nothing to rearm or all selected pylons are full on ammo</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_nothingRepair">
+        <Original>Nothing to repair</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_nothingRefuel">
+        <Original>Nothing to refuel</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noNearRearm">
+        <Original>No ammo truck in vicinity</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noNearRepair">
+        <Original>No repair truck in vicinity</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noNearRefuel">
+        <Original>No fuel truck in vicinity</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noCargoRearm">
+        <Original>The ammo truck %1 %2m away only has %3 points left</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noCargoRepair">
+        <Original>The repair truck %1 %2m away only has %3 points left</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noCargoRefuel">
+        <Original>The fuel truck %1 %2m away only has %3 liters of fuel left</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_costRearm">
+        <Original>Buying %1 rounds of %2 for %3 points</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_refund">
+        <Original>Selling %1 rounds of %2 for %4 value of %3 points</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_swapping">
+        <Original>Swapping %1 between hardpoints</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_costRepair">
+        <Original>%1 points to repair %3</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_costRefuel">
+        <Original>%1 liters to refuel the vehicle</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_tooFarRearm">
+        <Original>The target vehicle was moved too far away and cannot be rearmed.</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_tooFarRepair">
+        <Original>The target vehicle was moved too far away and cannot be repaired.</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_tooFarRefuel">
+        <Original>The target vehicle was moved too far away and cannot be refueled.</Original>
       </Key>
     </Container>
   </Package>

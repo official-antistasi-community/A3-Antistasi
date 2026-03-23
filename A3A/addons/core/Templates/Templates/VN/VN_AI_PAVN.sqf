@@ -19,7 +19,7 @@
 
 // All fo bellow are optional overrides
 ["firstAidKits", ["vn_o_item_firstaidkit"]] call _fnc_saveToTemplate;
-["mediKits", ["vn_o_item_medikit_01"]] call _fnc_saveToTemplate;
+["mediKits", ["vn_b_item_medikit_01"]] call _fnc_saveToTemplate;
 
 ["placeIntel_desk", ["Land_vn_us_common_table_01",0]] call _fnc_saveToTemplate;
 ["placeIntel_itemMedium", ["Land_vn_file1_f",-25,false]] call _fnc_saveToTemplate;
@@ -76,8 +76,11 @@
 
 ["staticMGs", ["vn_o_nva_static_dshkm_high_01", "vn_o_nva_static_rpd_high", "vn_o_nva_static_pk_high"]] call _fnc_saveToTemplate;
 ["staticAT", ["vn_o_vc_static_type56rr"]] call _fnc_saveToTemplate;
-["staticAA", ["vn_o_nva_static_zpu4", "vn_o_nva_static_zgu1_01"]] call _fnc_saveToTemplate;
+["staticAA", ["vn_o_nva_static_zpu4", "a3a_vn_o_nva_static_zgu1_01"]] call _fnc_saveToTemplate;
 ["staticMortars", ["vn_o_nva_65_static_mortar_type63"]] call _fnc_saveToTemplate;
+
+["vehiclesSAM", ["vn_sa2"]] call _fnc_saveToTemplate;
+["vehiclesRadar", ["vn_o_static_rsna75"]] call _fnc_saveToTemplate;
 
 ["uavsAttack", []] call _fnc_saveToTemplate;
 ["uavsPortable", []] call _fnc_saveToTemplate;
@@ -390,7 +393,7 @@ if (isClass (configFile >> "vnx_credits")) then {
     "vnx_c96"
     ];
     (_militaryLoadoutData get "sidearms") append [
-    "vnx_c96"
+    "vnx_c96", "vnx_p08"
     ];
     (_sfLoadoutData get "sidearms") append [
     "vnx_c96"
@@ -426,6 +429,17 @@ if (isClass (configFile >> "vnx_credits")) then {
     ];
     (_militaryLoadoutData get "sniperRifles") append [
     "vnx_no4_sniper"
+    ];
+    _militiaLoadoutData set ["machineGuns",[
+    ["vnx_tul1", "", "", "", [], ["vn_type56_t_mag", "vn_type56_mag", "vn_type56_mag"], ""]
+    ]];
+    (_militaryLoadoutData get "machineGuns") append [
+    ["vnx_tul1", "", "", "", [], ["vnx_rpk_40_t_mag", "vn_type56_t_mag", "vn_type56_mag"], ""],
+    ["vnx_tul1", "", "", "", [], ["vnx_rpk_75_mag", "vn_type56_vnx_rpk_40_mag", "vn_type56_mag"], ""]
+    ];
+    (_sfLoadoutData get "machineGuns") append [
+    ["vnx_tul1", "", "", "", [], ["vnx_rpk_75_t_mag", "vnx_rpk_75_mag", "vnx_rpk_40_t_mag"], ""],
+    ["vnx_tul1", "", "", "", [], ["vnx_rpk_75_mag", "vnx_rpk_75_t_mag", "vnx_rpk_40_mag"], ""]
     ];
 };
 

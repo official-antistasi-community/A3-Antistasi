@@ -57,9 +57,6 @@ private _deprecisionRange = random (100 - (_precision/4) * 80);
 private _targPos = _target getPos [_deprecisionRange, random 360];
 Debug_2("Final target %1 at position %2", _target, _targPos);
 
-// Get the reveal value while we have the call position
-private _reveal = [_caller, _side] call A3A_fnc_calculateSupportCallReveal;
-
 
 // Determine maximum resource spend with this target & caller
 private _maxSpend = [_side, _target, _caller, _maxResMod] call A3A_fnc_maxDefenceSpend;
@@ -176,7 +173,7 @@ while {_supportCreated == "" and _weightedSupports isNotEqualTo []} do
     _weightedSupports deleteAt _index;
     _weightedSupports deleteAt _index;            // delete both type and weight
 
-    _supportCreated = [_supportChoice, _side, _caller, _maxSpend, _target, _targPos, _reveal, nil] call A3A_fnc_createSupport;
+    _supportCreated = [_supportChoice, _side, _caller, _maxSpend, _target, _targPos, nil, nil] call A3A_fnc_createSupport;
 };
 
 if (_supportCreated == "") then {

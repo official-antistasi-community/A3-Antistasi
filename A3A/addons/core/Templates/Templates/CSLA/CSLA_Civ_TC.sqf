@@ -8,12 +8,11 @@
     , "CSLA_CIV_AZU", 0.2
     , "CSLA_civ_CATOR", 0.3
     , "CSLA_CIV_Sarka1200", 0.5
-    , "CSLA_CIV_Sarka1200PO", 0.5
+    , "CSLA_CIV_JARA250", 0.5
     , "CSLA_CIV_Sarka1200VB", 0.5
     , "CUP_C_Datsun_Plain", 0.5
     , "CUP_C_Datsun_Tubeframe", 0.5
     , "CUP_C_S1203_CIV_CR", 0.5
-    , "CUP_C_Octavia_CIV", 0.5
     ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [

@@ -1,4 +1,3 @@
-//if (!isMultiplayer) exitWith {};
 if ((side player == Occupants) or (side player == Invaders)) exitWith {};
 private ["_pointsX","_playerX","_pointsXJ","_moneyJ"];
 _pointsX = _this select 0;

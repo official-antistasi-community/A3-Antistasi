@@ -18,7 +18,6 @@ FIX_LINE_NUMBERS()
 params ["_marker", "_vehicle", ["_doRevealCalc", true]];
 
 Trace_1("Called with params %1", _this);
-Trace_1("Vehicle position %1", getPosATL _vehicle);
 
 private _oldMarker = _vehicle getVariable "markerX";
 if (!isNil "_oldMarker") then { [_vehicle] call A3A_fnc_garrisonServer_remVehicle };
@@ -33,19 +32,35 @@ private _arrayType = call {
     "buildings";
 };
 
-if (_arrayType == "buildings" and _marker == "Synd_HQ") then {
-    _garrison get "spawnedBuildings" pushBack _vehicle;
-    if (_doRevealCalc) then {call A3A_fnc_calcBuildingReveal};
-};
+private _vehID = -1;
+if (_arrayType == "buildings") then {
+    if (_marker == "Synd_HQ") then {
+        _garrison get "spawnedBuildings" pushBack _vehicle;
+        if (_doRevealCalc) then {call A3A_fnc_calcBuildingReveal};
+    };
+    (_garrison get "buildings") pushBack [typeof _vehicle, getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle];
+} else {
+    // Need a global(ish) ID for this vehicle
+    _vehID = _garrison get "nextVehID";
+    _vehicle setVariable ["A3A_vehID", _vehID];
+    private _vehEntry = [typeof _vehicle, [getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle], nil, _vehID];
+    (_garrison get "vehicles") pushBack _vehEntry;
+    _garrison set ["nextVehID", _vehID+1];
 
-(_garrison get _arrayType) pushBack [typeOf _vehicle, getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle];
+    // Add to garrison support vehicles
+    if (typeOf _vehicle in A3A_supportVehTypes) then {
+        (_garrison get "supportVehicles") set [_vehID, ["ready", A3A_supportVehTypes get typeOf _vehicle, _vehEntry]];
+    };
+};
 
 _vehicle setVariable ["markerX", _marker, true];
 _vehicle setVariable ["A3A_resPool", "garrison", true];
 
 // Add to active garrison if spawned
-if (_marker in A3A_garrisonMachine) then {
-    _vehicle setOwner (A3A_garrisonMachine get _marker);           // TODO: potential driver issues?
+if (spawner getVariable _marker != 2) then {
+    private _machine = A3A_garrisonMachine get _marker;
+    if (_vehID >= 0) then { _vehicle setVariable ["A3A_vehID", _vehID, _machine] };
+    _vehicle setOwner _machine;           // TODO: potential driver issues?
     ["addVehicle", [_marker, _vehicle]] call A3A_fnc_garrisonOp;
 } else {
     deleteVehicle _vehicle;

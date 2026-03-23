@@ -27,8 +27,6 @@ Trace("Closing Garage");
 [] call HR_GRG_onCloseEvent;
 
 [clientOwner] remoteExecCall ["HR_GRG_fnc_removeUser",2];
-"HR_GRG_Event" addPublicVariableEventHandler {};
-"HR_GRG_Vehicles" addPublicVariableEventHandler {};
 HR_GRG_SelectedVehicles = [-1, -1, ''];
 removeMissionEventHandler ["EachFrame", HR_GRG_EachFrame];
 

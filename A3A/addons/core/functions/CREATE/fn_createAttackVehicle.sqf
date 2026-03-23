@@ -44,10 +44,10 @@ ServerDebug_5("Spawn Performed: Created vehicle %1 with %2 crew (%3) and %4 carg
 if (_vehicleType isKindOf "Land") then {
 
     private _spawnPos = getPosATL _vehicle;
-    private _spawnTime = time + 10;
-    waitUntil { _spawnPos distance2d _vehicle > 10 or time > _spawnTime };
+    private _spawnTime = time + 20;
+    waitUntil { _spawnPos distance2d _vehicle > 20 or time > _spawnTime };
 
-    if (_spawnPos distance2d _vehicle < 10) then {
+    if (_spawnPos distance2d _vehicle < 20) then {
         Error_2("Vehicle %1 failed to clear spawn at %2", _vehicle, _markerOrigin);
         // teleport to first waypoint
         // arguably should just return empty array...

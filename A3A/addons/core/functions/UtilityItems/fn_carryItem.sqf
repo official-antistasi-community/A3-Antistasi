@@ -19,13 +19,14 @@ Example:
 
 params ["_item", "_player"];         // standard addAction
 
-// Redo the checks, because this function might be delayed by script load
-if ((!isNull attachedTo _item) or (call A3A_fnc_isCarrying) or (!isNull objectParent _player)) exitWith {};
-if (_item isKindOf "StaticWeapon" and count crew _item != 0) exitWith {};
-
 // Go unscheduled to keep the state consistent
 isNil {
+    // Redo the checks, because this function might be delayed by script load
+    if ((!isNull attachedTo _item) or (call A3A_fnc_isCarrying) or (!isNull objectParent _player)) exitWith {};
+    if (_item isKindOf "StaticWeapon" and count crew _item != 0) exitWith {};
+
     if (_item isKindOf "StaticWeapon") then { _item lock true };
+    _item lockInventory true;
 
     // Prevent killing players with item
     if (isNil {_item getVariable "A3A_originalMass"}) then { _item setVariable ["A3A_originalMass", getMass _item] };
@@ -49,9 +50,24 @@ isNil {
 
     private _dropID = _player addAction [
         localize "STR_A3A_fn_UtilItem_dropOb_addact_drop",
-        { (_this#1) call A3A_fnc_dropItem }, _item, 4, true, true, "", "true"
+        { (_this#1) call A3A_fnc_dropItem }, _item, 5, true, true, "", "true"
     ];
-    _player setVariable ["A3A_actionIDdrop", _dropID];
+    private _actionIDs = [_dropID];
+
+    // Add loot actions if it's a loot crate
+    private _isUtility = typeOf _item in A3A_utilityItemHM;
+    if (_isUtility and {"loot" in (A3A_utilityItemHM get typeOf _item) # 4}) then
+    {
+        _actionIDs pushBack (_player addAction [
+            localize "STR_A3A_fn_ltc_init_addact_ltc",
+            { [_this#3, clientOwner] remoteExecCall ["A3A_fnc_canLoot", 2] }, _item, 4, true, true, "", "true"
+        ]);
+        _actionIDs pushBack (_player addAction [
+            localize "STR_A3A_fn_ltc_init_addact_ltv",
+        { [_this#3, clientOwner] remoteExecCall ["A3A_fnc_canTransfer", 2] }, _item, 3, true, true, "", "true"
+        ]);
+    };
+    _player setVariable ["A3A_carryActionIDs", _actionIDs];
 
     [_player, _item] spawn {
         params ["_player", "_item"];

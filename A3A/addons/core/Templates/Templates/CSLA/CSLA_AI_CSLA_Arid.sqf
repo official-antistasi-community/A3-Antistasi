@@ -65,8 +65,8 @@
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["mortarMagazineFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
 
-["minefieldAT", ["CSLA_PtMiBa3_mag"]] call _fnc_saveToTemplate;
-["minefieldAPERS", ["CSLA_PPMiSr2_mag"]] call _fnc_saveToTemplate;
+["minefieldAT", ["CSLA_PTMiDMine"]] call _fnc_saveToTemplate;
+["minefieldAPERS", ["CSLA_PPMiSr2Mine"]] call _fnc_saveToTemplate;
 
 #include "CSLA_Vehicle_Attributes.sqf"
 
@@ -192,9 +192,8 @@ _sfLoadoutData set ["items_sniper_extras", (_mmItems + _sfmmItems)];
 _sfLoadoutData set ["uniforms", ["FIA_uniDES"]];
 _sfLoadoutData set ["vests", ["CSLA_gr85lrrBase", "CSLA_gr85lrrBino"]];
 _sfLoadoutData set ["mgVests", ["CSLA_gr85ptMg"]];
-_sfLoadoutData set ["medVests", ["CSLA_gr85lrrUTON"]];
 _sfLoadoutData set ["backpacks", ["CSLA_bp85", "CSLA_bp85msn", "CSLA_bp85Lrr"]];
-_sfLoadoutData set ["slBackpacks", ["CSLA_bp85RF10", "CSLA_bpWpR129", "CSLA_bpWpRF10"]];
+_sfLoadoutData set ["slBackpacks", ["CSLA_bpWpRF10", "CSLA_bpWpR129", "US85_bpPRC77"]];
 _sfLoadoutData set ["atBackpacks", ["CSLA_bpRPG7"]];
 _sfLoadoutData set ["helmets", ["CSLA_helmet53G", "CSLA_helmet53"]];
 _sfLoadoutData set ["slHat", ["CSLA_beretR"]];
@@ -247,8 +246,8 @@ _militaryLoadoutData set ["vests", ["CSLA_gr60rfl", "FIA_gr60_Sa58"]];
 _militaryLoadoutData set ["mgVests", ["CSLA_gr60UK59"]];
 _militaryLoadoutData set ["medVests", ["CSLA_gr60medic"]];
 _militaryLoadoutData set ["slVests", ["CSLA_gr60ofc1"]];
-_militaryLoadoutData set ["glVests", ["CSLA_gr60tankPi82"]];
-_militaryLoadoutData set ["backpacks", ["FIA_bpPack", "CSLA_bp60"]];
+_militaryLoadoutData set ["glVests", ["CSLA_gr60brr"]];
+_militaryLoadoutData set ["backpacks", ["CSLA_bp85msn", "CSLA_bp60"]];
 _militaryLoadoutData set ["slBackpacks", ["CSLA_bpWpRF10"]];
 _militaryLoadoutData set ["atBackpacks", ["CSLA_bpRPG7"]];
 _militaryLoadoutData set ["helmets", ["CSLA_helmet53Des", "CSLA_helmet53Des","FIA_helmet53Des"]];
@@ -313,8 +312,8 @@ _policeLoadoutData set ["sidearms", [
 
 private _militiaLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 _militiaLoadoutData set ["uniforms", ["FIA_uniwld11"]];
-_militiaLoadoutData set ["vests", ["CSLA_gr85ptBase", "FIA_gr60_Sa58", "CSLA_gr60rfl"]];
-_militiaLoadoutData set ["backpacks", ["CSLA_bp61"]];
+_militiaLoadoutData set ["vests", ["FIA_gr60_Sa58", "CSLA_gr60rfl"]];
+_militiaLoadoutData set ["backpacks", ["CSLA_bp85msn"]];
 _militiaLoadoutData set ["slBackpacks", ["CSLA_bpWpR129"]];
 _militiaLoadoutData set ["atBackpacks", ["CSLA_bpRPG7"]];
 _militiaLoadoutData set ["helmets", ["CSLA_helmet53m", "CSLA_helmet53mG"]];

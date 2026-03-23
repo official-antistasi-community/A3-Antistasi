@@ -40,13 +40,14 @@ _car setHitPointDamage ["hitEngine", 1.0];
 _task set ["_car", _car];
 
 // Create a goon patrol
+private _enemySide = sidesX getVariable _marker;
 private _policePos = [getPosATL _car, 5, 30, 2] call A3A_fnc_findPatrolPos;
 private _groupType = ["groupsPoliceSmall", "groupsMilitiaSmall"] select (random 8 < tierWar);
-private _policeGroup = createGroup [Occupants, true];
+private _policeGroup = createGroup [_enemySide, true];
 {
     private _unit = [_policeGroup, _x, _policePos, [], 0, "NONE"] call A3A_fnc_createUnit;
     [_unit, "", false, "legacy"] call A3A_fnc_NATOinit;
-} forEach selectRandom (A3A_faction_occ get _groupType);
+} forEach selectRandom (Faction(_enemySide) get _groupType);
 
 [_policeGroup, "Patrol_Area", 5, 30, -1, false, getPosATL _car, false, false] call A3A_fnc_patrolLoop;
 _task set ["_policeGroup", _policeGroup];
@@ -166,11 +167,9 @@ _task set ["s_defendMechanic", {
 
 _task set ["s_success", {
     private _car = _this get "_car";
-	private _playersInRange = allPlayers inAreaArray [getPosATL _car, 100, 100];
-	{[5, _x] call A3A_fnc_playerScoreAdd} forEach _playersInRange;
-	[5, theBoss] call A3A_fnc_playerScoreAdd;
+    [10, true, _car, 100] call FUNC(rewardPlayers);     // grouped players within 100m
 
-	[8, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+    [8, _this get "_marker"] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 
     // Fix up the car and add some explosives to the cargo
     _car setHitPointDamage ["hitEngine", 0];

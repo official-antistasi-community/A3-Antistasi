@@ -9,24 +9,24 @@
 ["flagMarkerType", "flag_Tanoa"] call _fnc_saveToTemplate;
 
 ["vehiclesBasic", ["UK3CB_FIA_I_TT650"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["UK3CB_MDF_I_MB4WD_Unarmed", "UK3CB_FIA_I_LR_Closed", "UK3CB_FIA_I_LR_Open", "UK3CB_FIA_I_Datsun_Open"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["UK3CB_I_G_LandRover_M2", "UK3CB_MDF_I_MB4WD_LMG","UK3CB_I_G_LandRover_SF_M2"]] call _fnc_saveToTemplate;
-["vehiclesTruck", ["UK3CB_KDF_I_Gaz66_Covered","UK3CB_KDF_I_Gaz66_Open"]] call _fnc_saveToTemplate;
-["vehiclesAT", ["UK3CB_MDF_I_MB4WD_AT", "UK3CB_I_G_LandRover_SPG9"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["UK3CB_FIA_I_Datsun_Open"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["UK3CB_I_G_LandRover_WMIK_M2", "UK3CB_I_G_LandRover_SF_WMIK_M2_M240"]] call _fnc_saveToTemplate;
+["vehiclesTruck", ["UK3CB_KDF_I_Gaz66_Covered","UK3CB_KDF_I_Gaz66_Open", "UK3CB_FIA_I_Hilux_Open"]] call _fnc_saveToTemplate;
+["vehiclesAT", ["UK3CB_MDF_I_MB4WD_AT", "UK3CB_I_G_LandRover_Opentop_SPG9"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["UK3CB_KDF_I_Gaz66_ZU23"]] call _fnc_saveToTemplate;
 
 ["vehiclesBoat", ["I_C_Boat_Transport_02_F", "UK3CB_I_G_Fishing_Boat_SPG9", "UK3CB_CHD_I_Fishing_Boat_Zu23_front"]] call _fnc_saveToTemplate;
 
-["vehiclesPlane", ["UK3CB_I_G_Antonov_An2_Armed", "UK3CB_FIA_I_C400"]] call _fnc_saveToTemplate;
+["vehiclesPlane", ["UK3CB_FIA_I_Cessna_T41_Armed_M2", "UK3CB_FIA_I_C400", "UK3CB_FIA_I_Bell412_Utility"]] call _fnc_saveToTemplate;
 ["vehiclesCivPlane", ["UK3CB_C_Cessna_172"]] call _fnc_saveToTemplate;
-["vehiclesMedical", ["UK3CB_FIA_I_Hilux_Ambulance"]] call _fnc_saveToTemplate;
+["vehiclesMedical", ["UK3CB_FIA_I_LR_Softtop_Ambulance_Open"]] call _fnc_saveToTemplate;
 
-["vehiclesCivCar", ["C_Offroad_02_unarmed_F", "UK3CB_C_LandRover_Closed", "UK3CB_C_LandRover_Open", "UK3CB_C_Datsun_Open", "UK3CB_C_Gaz24", "UK3CB_C_Skoda", "UK3CB_C_S1203", "UK3CB_C_MMT"]] call _fnc_saveToTemplate;
-["vehiclesCivTruck", ["RHS_Ural_Open_Civ_02","C_Van_01_transport_F", "C_Van_02_transport_F", "C_Van_02_vehicle_F"]] call _fnc_saveToTemplate;
-["vehiclesCivHeli", ["UK3CB_C_Mi8AMT_ADC"]] call _fnc_saveToTemplate;
+["vehiclesCivCar", ["UK3CB_C_Datsun_Open", "UK3CB_C_Sedan", "UK3CB_C_Skoda", "UK3CB_C_S1203", "UK3CB_C_MMT"]] call _fnc_saveToTemplate;
+["vehiclesCivTruck", ["UK3CB_C_LandRover_Closed", "UK3CB_C_LandRover_Open", "RHS_Ural_Open_Civ_02", "C_Offroad_02_unarmed_F", "C_Van_01_transport_F", "C_Van_02_transport_F", "C_Van_02_vehicle_F"]] call _fnc_saveToTemplate;
+["vehiclesCivHeli", ["UK3CB_CHC_I_Mi8AMT"]] call _fnc_saveToTemplate;
 ["vehiclesCivBoat", ["UK3CB_CHC_C_Fishing_Boat", "C_Rubberboat", "rhsgref_civ_canoe"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["rhsgref_tla_g_DSHKM",  "rhsgref_tla_g_DSHKM_Mini_TriPod", "rhsgref_hidf_m2_static_minitripod", "UK3CB_NAP_I_PKM_High",  "UK3CB_NAP_I_PKM_Low"]] call _fnc_saveToTemplate;
+["staticMGs", ["rhsgref_tla_g_DSHKM", "rhsgref_tla_g_DSHKM_Mini_TriPod", "rhsgref_hidf_m2_static_minitripod", "UK3CB_NAP_I_PKM_High", "UK3CB_NAP_I_PKM_Low"]] call _fnc_saveToTemplate;
 ["staticAT", ["rhsgref_tla_g_SPG9"]] call _fnc_saveToTemplate;
 ["staticAA", ["rhsgref_tla_g_ZU23"]] call _fnc_saveToTemplate;
 
@@ -47,19 +47,19 @@
 ///////////////////////////
 
 private _initialRebelEquipment = [
-"rhs_weap_makarov_pm", "rhs_weap_tt33", "rhs_weap_Izh18",
+"a3a_rhs_weap_pb_6p9_noSup", "rhsusf_weap_m1911a1", "rhs_weap_Izh18",
 ["IEDUrbanSmall_Remote_Mag", 10], ["IEDLandSmall_Remote_Mag", 10], ["IEDUrbanBig_Remote_Mag", 3], ["IEDLandBig_Remote_Mag", 3],["rhs_weap_rpg18", 5],
-"rhs_mag_9x18_8_57N181S", "rhs_mag_762x25_8", "rhsgref_1Rnd_00Buck", "rhsgref_1Rnd_Slug", "rhs_mag_f1", "rhs_grenade_mki_mag", "rhs_mag_rdg2_black", "rhs_grenade_m15_mag",
+"rhs_mag_9x18_8_57N181S", "rhsusf_mag_7x45acp_MHP", "rhsgref_1Rnd_00Buck", "rhsgref_1Rnd_Slug", "rhs_mag_f1", "rhs_grenade_mki_mag", "rhs_mag_rdg2_black", "rhs_grenade_m15_mag",
 "B_FieldPack_blk", "B_FieldPack_cbr", "B_FieldPack_green_F", "B_FieldPack_khk", "B_FieldPack_oli",
 "rhsgref_chestrig", "rhsgref_chicom", "rhs_vydra_3m", "rhs_vest_pistol_holster", "rhs_vest_commander", "rhs_6sh46", "rhsgref_alice_webbing",
 "rhs_acc_2dpZenit", "Binocular",
-"rhs_weap_rsp30_white",
-"rhs_weap_rsp30_green",
-"rhs_weap_rsp30_red"
+"rhs_weap_rsp30_white","rhs_weap_rsp30_green","rhs_weap_rsp30_red"
 ];
 
-_initialRebelEquipment append ["uk3cb_enfield_no4","uk3cb_enfield_no4_walnut","uk3cb_no4_enfield_303_10Rnd_magazine_Y","uk3cb_no4_enfield_303_10Rnd_magazine_YT",
-["uk3cb_1rnd_riflegrenade_mas_at_l", 60], ["uk3cb_1rnd_riflegrenade_mas_wp", 15], "uk3cb_1rnd_riflegrenade_mas_flare"];
+_initialRebelEquipment append [
+    "uk3cb_enfield_no4","uk3cb_enfield_no4_walnut","uk3cb_no4_enfield_303_10Rnd_magazine_Y","uk3cb_no4_enfield_303_10Rnd_magazine_YT",
+    ["uk3cb_1rnd_riflegrenade_mas_at_l", 60], ["uk3cb_1rnd_riflegrenade_mas_wp", 15], "uk3cb_1rnd_riflegrenade_mas_flare"
+];
 
 if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr", "tf_anprc154"]};
 if (A3A_hasTFAR && startWithLongRangeRadio) then {_initialRebelEquipment append ["tf_anprc155", "tf_anprc155_coyote"]};
@@ -70,16 +70,16 @@ if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment app
 ["initialRebelEquipment", _initialRebelEquipment] call _fnc_saveToTemplate;
 
 private _rebUniforms = [
-    "U_I_C_Soldier_Bandit_4_F",
     "U_I_C_Soldier_Bandit_1_F",
     "U_I_C_Soldier_Bandit_2_F",
-    "U_I_C_Soldier_Bandit_5_F",
     "U_I_C_Soldier_Bandit_3_F",
+    "U_I_C_Soldier_Bandit_4_F",
+    "U_I_C_Soldier_Bandit_5_F",
+    "U_I_C_Soldier_Para_1_F",
     "U_I_C_Soldier_Para_2_F",
     "U_I_C_Soldier_Para_3_F",
-    "U_I_C_Soldier_Para_5_F",
     "U_I_C_Soldier_Para_4_F",
-    "U_I_C_Soldier_Para_1_F",
+    "U_I_C_Soldier_Para_5_F",
     "U_I_C_Soldier_Camo_F"
 ];
 

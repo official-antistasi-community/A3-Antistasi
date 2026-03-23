@@ -21,6 +21,9 @@ A3A_vestDamageAdj = createHashMap;
 // Data to prevent over-using the same loadouts
 A3A_loadoutShuffleBuffers = createHashMap;
 
+// Price cache for mags & weapons
+A3A_itemPriceCache = createHashMap;
+
 ////////////////////////////////////
 //     BEGIN SIDES AND COLORS    ///
 ////////////////////////////////////
@@ -296,6 +299,15 @@ private _strongUniforms = ["U_O_CombatUniform_ocamo","U_O_GhillieSuit","U_O_Pilo
 A3A_strongUniformsHM = _strongUniforms createHashMapFromArray [];		// fills with nils, which is fine
 
 medicAnims = ["AinvPknlMstpSnonWnonDnon_medic_1","AinvPknlMstpSnonWnonDnon_medic0","AinvPknlMstpSnonWnonDnon_medic1","AinvPknlMstpSnonWnonDnon_medic2"];
+
+
+////////////////////////////////////
+//      OTHER LOOKUP TABLES      ///
+////////////////////////////////////
+
+// Cherno 2020 has one miscased factory, VT7 has all outposts and seaports. Provide both cases to preserve original behaviour
+A3A_markerPrefixHM = createHashMapFromArray [["airport", "airp_"], ["outpost", "outp_"], ["resource", "reso_"], ["factory", "fact_"], ["seaport", "seap_"],
+    ["Airport", "airp_"], ["Outpost", "outp_"], ["Resource", "reso_"], ["Factory", "fact_"], ["Seaport", "seap_"]];
 
 
 Info("initVarCommon completed");

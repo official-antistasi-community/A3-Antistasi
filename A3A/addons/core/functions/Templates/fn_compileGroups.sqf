@@ -43,6 +43,7 @@ _faction set ["unitTraitor", unit(other, "Traitor")];
 _faction set ["unitCrew", unit(other, "Crew")];
 _faction set ["unitUnarmed", unit(other, "Unarmed")];
 _faction set ["unitPilot", unit(other, "Pilot")];
+_faction set ["unitEngineer", unit(military, "Engineer")];
 
 _faction set ["unitMilitiaGrunt", unit(militia, "Rifleman")];
 _faction set ["unitMilitiaMarksman", unit(militia, "Marksman")];
@@ -123,24 +124,16 @@ _faction set ["groupsSpecOpsSmall", [_faction get "groupSpecOpsSniper"]];
 //militia
 _faction set ["groupsMilitiaSmall", [
     [unit(militia, "Grenadier"), unit(militia, "Rifleman")]
+    , [unit(militia, "Engineer"), unit(militia, "Rifleman")]
     , [unit(militia, "Marksman"), unit(militia, "Rifleman")]
-    , [unit(militia, "Marksman"), unit(militia, "Grenadier")]
 ]];
 
-private _militiaMid = [];
-for "_i" from 1 to 6 do {
-    _militiaMid pushBack [
-        unit(militia, "SquadLeader"),
-        unit(militia, "Grenadier"),
-        unit(militia, "MachineGunner"),
-        selectRandom [
-            unit(militia, "LAT"),
-            unit(militia, "Marksman"),
-            unit(militia, "Engineer")
-        ]
-    ];
-};
-_faction set ["groupsMilitiaMedium", _militiaMid];
+_faction set ["groupsMilitiaMedium", [
+    [unit(militia, "SquadLeader"), unit(militia, "Grenadier"), unit(militia, "MachineGunner"), unit(militia, "LAT")],
+    [unit(militia, "SquadLeader"), unit(militia, "Grenadier"), unit(militia, "MachineGunner"), unit(militia, "Marksman")],
+    [unit(militia, "SquadLeader"), unit(militia, "Grenadier"), unit(militia, "MachineGunner"), unit(militia, "Engineer")]
+]];
+
 /*
 private _militiaSquads = [];
 for "_i" from 1 to 5 do {

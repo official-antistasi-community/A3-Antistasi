@@ -77,7 +77,7 @@ _resourcesBackground = server getVariable "resourcesFIA";
 	_friendX = _x;
 	if ((_friendX getVariable ["spawner",false]) and (side group _friendX == teamPlayer))then {
 		if ((alive _friendX) and (!isPlayer _friendX)) then {
-			if (((isPlayer leader _friendX) and (!isMultiplayer)) or (group _friendX in (hcAllGroups theBoss)) and (not((group _friendX) getVariable ["esNATO",false]))) then {
+			if ((group _friendX in hcAllGroups theBoss) and !((group _friendX) getVariable ["esNATO",false])) then {
 				_resourcesBackground = _resourcesBackground + (server getVariable [(_friendX getVariable "unitType"),0]) / 2;
 				_backpck = backpack _friendX;
 				if (_backpck != "") then {
@@ -89,7 +89,7 @@ _resourcesBackground = server getVariable "resourcesFIA";
 					_typeVehX = typeOf _veh;
 					if (isNil {_veh getVariable "markerX"}) then {
 						if ((_veh isKindOf "StaticWeapon") or (driver _veh == _friendX)) then {
-							if ((group _friendX in (hcAllGroups theBoss)) or (!isMultiplayer)) then {
+							if (group _friendX in hcAllGroups theBoss) then {
 								_resourcesBackground = _resourcesBackground + ([_typeVehX] call A3A_fnc_vehiclePrice);
 								if (count attachedObjects _veh != 0) then {{_resourcesBackground = _resourcesBackground + ([typeOf _x] call A3A_fnc_vehiclePrice)} forEach attachedObjects _veh};
 							};
@@ -141,7 +141,33 @@ private _saveGarrison = +A3A_garrison;
 {
 	// Add other stuff we're not saving in here
 	_y deleteAt "spawnedBuildings";
+	_y deleteAt "supportVehicles";
 	_y deleteAt "type";
+	_y deleteAt "nextVehID";
+
+	private _places = A3A_spawnPlacesHM getOrDefault [_x, []];
+	private _vehicles2 = createHashMap;
+	_y set ["vehicles2", _vehicles2];
+	{
+		private _cat = if (_x#1 isEqualType 0) then {_places#(_x#1)#0} else {"free"};
+		//_cat = _catTranslate getOrDefault [_cat, _cat];
+		private _catData = _vehicles2 getOrDefault [_cat, [], true];
+		_catData pushBack (if (isNil {_x#2}) then {_x select [0, 2]} else {_x select [0, 3]}); 
+	} forEach (_y deleteAt "vehicles");
+
+	// Convert vehicles to older storage format
+	// TODO: Simplify this to one line after another version
+/*	if ("_civ" in _x) then { continue };		// civ internal format didn't change
+	{
+		if (_x#1 isEqualType 0) then {
+			_x resize ([3,2] select isNil {_x#2});		// remove ID, and state if nil
+		} else {
+			if !(isNil {_x#2}) then { _x set [4, _x#2] };		// Move state to the end
+			_x#1 params ["_pos", "_vecDir", "_vecUp"];			// flatten the position stuff
+			_x set [1, _pos]; _x set [2, _vecDir]; _x set [3, _vecUp];
+		};
+	} forEach (_y get "vehicles");
+*/
 } forEach _saveGarrison;
 
 ["newGarrison", _saveGarrison] call A3A_fnc_setStatVariable;

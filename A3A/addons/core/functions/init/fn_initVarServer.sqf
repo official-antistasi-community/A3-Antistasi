@@ -177,7 +177,7 @@ theBoss = objNull;
 
 createHashMap call A3A_fnc_setRebelLoadouts;		// sets version times, no dependencies
 
-A3A_useRemarks = 0;
+A3A_isCommunityServer = 0;
 
 ///////////////////////////////////////////
 //     INITIALISING ITEM CATEGORIES     ///
@@ -457,7 +457,7 @@ private _vehicleResourceCosts = createHashMap;
 { _vehicleResourceCosts set [_x, 60] } forEach FactionGet(all, "vehiclesLightAPCs") + FactionGet(all, "vehiclesGunBoats");
 { _vehicleResourceCosts set [_x, 100] } forEach FactionGet(all, "vehiclesAPCs");
 { _vehicleResourceCosts set [_x, 150] } forEach FactionGet(all, "vehiclesAA") + FactionGet(all, "vehiclesArtillery") + FactionGet(all, "vehiclesIFVs") + FactionGet(all, "vehiclesLightTanks");
-{ _vehicleResourceCosts set [_x, 230] } forEach FactionGet(all, "vehiclesTanks");
+{ _vehicleResourceCosts set [_x, 230] } forEach FactionGet(all, "vehiclesTanks") + FactionGet(all, "vehiclesSAM");
 { _vehicleResourceCosts set [_x, 300] } forEach FactionGet(all, "vehiclesHeavyTanks");
 
 { _vehicleResourceCosts set [_x, 70] } forEach FactionGet(all, "vehiclesHelisLight") + FactionGet(all, "vehiclesAirPatrol");
@@ -477,7 +477,7 @@ private _groundVehicleThreat = createHashMap;
 
 { _groundVehicleThreat set [_x, 120] } forEach FactionGet(all, "vehiclesAPCs");
 { _groundVehicleThreat set [_x, 200] } forEach FactionGet(all, "vehiclesAA") + FactionGet(all, "vehiclesArtillery") + FactionGet(all, "vehiclesIFVs") + FactionGet(all, "vehiclesLightTanks");
-{ _groundVehicleThreat set [_x, 300] } forEach FactionGet(all, "vehiclesTanks");
+{ _groundVehicleThreat set [_x, 300] } forEach FactionGet(all, "vehiclesTanks") + FactionGet(all, "vehiclesSAM");
 { _groundVehicleThreat set [_x, 500] } forEach FactionGet(all, "vehiclesHeavyTanks"); //Expect these to mostly exist in templates which lack good access of most things to deal with tanks, ie WW2
 
 
@@ -539,17 +539,21 @@ A3A_validVehicles = createHashMap;
 	_valid set ["staticMG", FactionGet(all, "staticMGs")];			// allow cross-faction use
 	_valid set ["staticAA", _x get "staticAA"];
 	_valid set ["staticAT", _x get "staticAT"];
-	_valid set ["staticMortar", _x get "staticMortar"];
+	_valid set ["staticMortar", _x get "staticMortars"];
 
+	_valid set ["vehicleRB", _x get "vehiclesMilitiaLightArmed"];
 	_valid set ["vehicleAA", _x get "vehiclesAA"];
+	_valid set ["vehicleSAM", _x get "vehiclesSAM"];
+	_valid set ["vehicleArty", _x get "vehiclesArtillery"];
 	_valid set ["vehiclePolice", _x get "vehiclesPolice"];
-	_valid set ["vehicleTruck", (_x get "vehiclesTrucks") + (_x get "vehiclesCargoTrucks") + (_x get "vehiclesAmmoTrucks")
-		+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
-	_valid set ["vehicle", (_valid get "vehicleTruck") + (_x get "vehiclesLightUnarmed") + (_x get "vehiclesLightArmed") + (_x get "vehiclesMilitiaCars")
-		+ (_x get "vehiclesLightAPCs") + (_x get "vehiclesAPCs") + (_x get "vehiclesAA") + (_x get "vehiclesArtillery") + (_x get "vehiclesIFVs")
-		+ (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks") + (_x get "vehiclesMilitiaLightArmed")];
+	_valid set ["vehicleTruck", (_x get "vehiclesCargo") + (_x get "vehiclesAmmoTrucks") + (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
+	_valid set ["vehicle", (_x get "vehiclesTrucks") + (_x get "vehiclesAmmoTrucks") + (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")
+		+ (_x get "vehiclesCargoTrucks") + (_x get "vehiclesMilitiaTrucks") + (_x get "vehiclesLightUnarmed") + (_x get "vehiclesLightArmed")
+		+ (_x get "vehiclesMilitiaCars") + (_x get "vehiclesMilitiaLightArmed") + (_x get "vehiclesLightAPCs") + (_x get "vehiclesAPCs") + (_x get "vehiclesAA") 
+		+ (_x get "vehiclesIFVs") + (_x get "vehiclesLightTanks") + (_x get "vehiclesTanks") + (_x get "vehiclesHeavyTanks")];
 
-	_valid set ["plane", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA") + (_x get "vehiclesPlanesTransport")];
+	_valid set ["plane", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA")];
+	_valid set ["runway", (_x get "vehiclesPlanesCAS") + (_x get "vehiclesPlanesAA") + (_x get "vehiclesPlanesTransport")];
 	_valid set ["heli", (_x get "vehiclesHelisLight") + (_x get "vehiclesHelisTransport") + (_x get "vehiclesHelisLightAttack") + (_x get "vehiclesHelisAttack")];
 	_valid set ["boat", (_x get "vehiclesTransportBoats") + (_x get "vehiclesGunBoats")];
 
@@ -558,6 +562,17 @@ A3A_validVehicles = createHashMap;
 } forEach [A3A_faction_occ, A3A_faction_inv];
 
 A3A_validVehicles set [civilian, createHashMapFromArray [["civCar", arrayCivVeh], ["civBoat", civBoats]] ];
+
+
+// Create support vehicle types hashmap for garrisons
+// Used on garrison-local side as well as server
+private _supportVehTypes = createHashMap;
+{ _supportVehTypes set [_x, "vehiclesAA"] } forEach FactionGet(all, "vehiclesAA");
+{ _supportVehTypes set [_x, "vehiclesSAM"] } forEach FactionGet(all, "vehiclesSAM");
+{ _supportVehTypes set [_x, "vehiclesArtillery"] } forEach FactionGet(all, "vehiclesArtillery");
+{ _supportVehTypes set [_x, "staticMortars"] } forEach FactionGet(all, "staticMortars");
+
+DECLARE_SERVER_VAR(A3A_supportVehTypes, _supportVehTypes);
 
 ///////////////////////////
 //     MOD TEMPLATES    ///
@@ -595,6 +610,26 @@ Info("Creating pricelist");
 	server setVariable [_x, _y, true];
 } forEach A3A_rebelVehicleCosts;
 
+////////////////////////////////////
+//     UNIT AND VEHICLE CARGO    ///
+////////////////////////////////////
+
+private _resourceVehValues = createHashMap;
+
+private _rearmHM = createHashMap;
+{
+	{
+		_rearmHM set [_x, 5000];
+	} forEach _x;
+} forEach [A3A_faction_occ get "vehiclesAmmoTrucks", A3A_faction_inv get "vehiclesAmmoTrucks"];
+
+{
+	_rearmHM set _x;
+} forEach [(A3A_faction_reb get "vehicleAmmoStation"), (A3A_faction_reb get "vehicleAmmoContainer")];
+//+ (_x get "vehiclesFuelTrucks") + (_x get "vehiclesRepairTrucks")];
+_resourceVehValues set ["rearm", _rearmHM];
+
+DECLARE_SERVER_VAR(A3A_resourceVehValues, _resourceVehValues);
 
 /////////////////////////////////////////
 //     SYNCHRONISE SERVER VARIABLES   ///

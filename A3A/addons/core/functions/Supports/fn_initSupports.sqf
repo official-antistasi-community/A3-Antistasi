@@ -47,6 +47,7 @@ private _initData = [
     ["CARPETBOMBS",     "AREA", 0.5, 0.1, 200,   0, "u", "vehiclesPlanesCAS"],            // balanced against airstrikes
     ["SAM",           "TARGET", 1.0, 1.0,   0, 100,  "", ""],                             // balanced against ASF
     ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""],
+    ["SEAD",          "TARGET", 0.5, 0.5,   0, 100,  "", "vehiclesPlanesAA"],
     ["UAV",             "AREA", 0.0, 0.0,   0,   0,  "", "uavsAttack"]                    // Not used for support calls 
 //    ["GUNSHIP",    ["AREA",   0.2,  50,   0]],                 // uh. Does AREA work for this? Only lasts 5 minutes so maybe...
 ];
@@ -66,7 +67,7 @@ private _fnc_buildSupportHM =
         if (_suppType == "SAM" and _noSAM) then { continue };
 
         private _weight = [_weight, _lowAirWeight] select _lowAir;
-        _suppHM set [_suppType, [_baseType, _weight, _effRadius, _strikepower]];
+        _suppHM set [_suppType, [_baseType, _weight, _effRadius, _strikepower, _flags]];
     } forEach _initData;
     _suppHM;
 };

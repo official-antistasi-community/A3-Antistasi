@@ -31,55 +31,41 @@
 
 ["vehiclesBasic", ["vn_b_wheeled_m151_01"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["vn_b_wheeled_m151_01", "vn_b_wheeled_m151_02", "vn_b_wheeled_m274_01_01"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed",["vn_b_wheeled_m151_mg_02", "vn_b_wheeled_m151_mg_03", "vn_b_wheeled_m151_mg_04", "vn_b_wheeled_m151_mg_05", "vn_b_wheeled_m54_mg_02", "vn_b_wheeled_m274_mg_01_01"]] call _fnc_saveToTemplate;
+private _vehiclesLightArmed = ["vn_b_wheeled_m151_mg_02", "vn_b_wheeled_m151_mg_03", "vn_b_wheeled_m151_mg_04", "vn_b_wheeled_m151_mg_05", "a3a_vn_b_wheeled_m54_mg_02", "vn_b_wheeled_m274_mg_01_01"];
+
 ["vehiclesTrucks", ["vn_b_wheeled_m54_01", "vn_b_wheeled_m54_02"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", []] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["vn_b_wheeled_m54_ammo"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["vn_b_wheeled_m54_repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["vn_b_wheeled_m54_fuel"]] call _fnc_saveToTemplate;
-["vehiclesMedical", []] call _fnc_saveToTemplate;
+["vehiclesMedical", ["vn_b_armor_m577_02"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", ["vn_b_wheeled_m54_mg_03", "vn_b_wheeled_m54_mg_01", "vn_b_armor_m113_01"]] call _fnc_saveToTemplate;
-private _vehiclesAPCs = ["vn_b_armor_m113_acav_04", "vn_b_armor_m113_acav_02", "vn_b_armor_m113_acav_01", "vn_b_armor_m113_acav_06", "vn_b_armor_m113_acav_03", "vn_b_armor_m113_acav_05"];
+["vehiclesAPCs", ["vn_b_armor_m113_acav_04", "vn_b_armor_m113_acav_02", "vn_b_armor_m113_acav_01", "vn_b_armor_m113_acav_06", "vn_b_armor_m113_acav_03", "vn_b_armor_m113_acav_05"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["vn_b_armor_m67_01_01"]] call _fnc_saveToTemplate;
-["vehiclesLightTanks", ["vn_b_armor_m41_01_02"]] call _fnc_saveToTemplate;
+["vehiclesLightTanks", ["vn_b_armor_m41_01_01"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["vn_b_armor_m48_01_01"]] call _fnc_saveToTemplate;
-private _vehiclesAA = ["vn_b_wheeled_m54_mg_02"];
+private _vehiclesAA = ["a3a_vn_b_wheeled_m54_mg_02"];
 
 ["vehiclesTransportBoats", ["vn_o_boat_02_01", "vn_b_boat_10_01", "vn_b_boat_09_01"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["vn_b_boat_13_02", "vn_b_boat_06_02", "vn_b_boat_05_02", "vn_b_boat_12_02"]] call _fnc_saveToTemplate;
-["vehiclesAmphibious", []] call _fnc_saveToTemplate;
+["vehiclesAmphibious", ["vn_b_armor_m113_01", "vn_b_armor_m113_acav_04", "vn_b_armor_m113_acav_02", "vn_b_armor_m113_acav_01", "vn_b_armor_m113_acav_06", "vn_b_armor_m113_acav_03", "vn_b_armor_m113_acav_05"]] call _fnc_saveToTemplate;
 
-private _vehiclesPlanesCAS = ["vn_b_air_f4c_at", "vn_b_air_f100d_at"];
-
+private _vehiclesPlanesCAS = ["vn_b_air_f4c_at", "vn_b_air_f100d_at", "vn_b_air_f100d_at", "vn_b_air_f100d_at"];
 ["vehiclesPlanesAA", ["vn_b_air_f4c_cap", "vn_b_air_f100d_cap"]] call _fnc_saveToTemplate;
 private _vehiclesPlanesTransport = [];
-private _vehiclesAirPatrol = ["vn_b_air_uh1d_02_01"];
+private _vehiclesAirPatrol = ["vn_b_air_oh6a_07", "vn_b_air_uh1d_02_01"];
 
-if (isClass (configFile >> "vnx_credits")) then {
-	_vehiclesAPCs append ["vnx_b_armor_lvtp5_01"];
-	_vehiclesAA append ["vnx_b_armor_m163_01"];
-	_vehiclesPlanesCAS append ["vnx_b_air_ov10a_usmc_mr"];
-	_vehiclesPlanesTransport append ["vnx_b_air_ac119_02_01"];
-	_vehiclesAirPatrol append ["vnx_b_air_ov10a_covey"];
-};
-
-["vehiclesAPCs", _vehiclesAPCs] call _fnc_saveToTemplate;
-["vehiclesAA", _vehiclesAA] call _fnc_saveToTemplate;
-["vehiclesAirPatrol", _vehiclesAirPatrol] call _fnc_saveToTemplate;
-["vehiclesPlanesCAS", _vehiclesPlanesCAS] call _fnc_saveToTemplate;
-["vehiclesPlanesTransport", _vehiclesPlanesTransport] call _fnc_saveToTemplate;
-
-["vehiclesHelisLight", ["vn_b_air_ch34_01_01"]] call _fnc_saveToTemplate;
-["vehiclesHelisTransport", ["vn_b_air_uh1c_07_01", "vn_b_air_uh1d_02_01", "vn_b_air_ch34_01_01", "vn_b_air_ch34_03_01", "vn_b_air_ch47_04_02", "vn_b_air_ch47_01_02"]] call _fnc_saveToTemplate;
-["vehiclesHelisLightAttack", ["vn_b_air_uh1c_01_01", "vn_b_air_uh1c_02_01", "vn_b_air_uh1c_03_01","vn_b_air_ach47_04_01","vn_b_air_ach47_03_01","vn_b_air_ach47_05_01","vn_b_air_ach47_01_01","vn_b_air_ach47_02_01"]] call _fnc_saveToTemplate;
-["vehiclesHelisAttack", ["vn_b_air_ah1g_02", "vn_b_air_ah1g_03", "vn_b_air_ah1g_04", "vn_b_air_ah1g_07", "vn_b_air_ah1g_08", "vn_b_air_ah1g_09"]] call _fnc_saveToTemplate;
+["vehiclesHelisLight", ["vn_b_air_uh1c_07_01"]] call _fnc_saveToTemplate; // this is a uh-1b
+["vehiclesHelisTransport", ["vn_b_air_ch47_04_01", "vn_b_air_ch47_04_01", "vn_b_air_ch47_01_02", "vn_b_air_uh1d_02_01", "vn_b_air_uh1d_02_01", "vn_b_air_uh1d_02_01", "vn_b_air_uh1d_02_01", "vn_b_air_uh1d_02_01", "vn_b_air_uh1d_02_01", "vn_b_air_uh1d_02_01", "vn_b_air_uh1d_02_01", "vn_b_air_uh1c_07_01", "vn_b_air_uh1c_07_01"]] call _fnc_saveToTemplate;
+["vehiclesHelisLightAttack", ["vn_b_air_oh6a_06", "vn_b_air_ach47_04_01", "vn_b_air_uh1c_01_01", "vn_b_air_uh1c_01_01", "vn_b_air_uh1c_01_01", "vn_b_air_uh1c_02_01", "vn_b_air_uh1c_02_01"]] call _fnc_saveToTemplate;
+["vehiclesHelisAttack", ["vn_b_air_ach47_04_01", "vn_b_air_ach47_03_01", "vn_b_air_ah1g_01", "vn_b_air_ah1g_01", "vn_b_air_ah1g_01", "vn_b_air_ah1g_03", "vn_b_air_ah1g_03"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["vn_b_army_static_m101_02"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
 ["vn_b_army_static_m101_02", ["vn_cannon_m101_mag_he_x8", "vn_cannon_m101_mag_ab_x8", "vn_cannon_m101_mag_wp_x8"]]
 ]] call _fnc_saveToTemplate;
 
-["uavsAttack", ["vn_b_air_oh6a_01"]] call _fnc_saveToTemplate;				// scout helis are fine for this
+private _uavsAttack = ["vn_b_air_oh6a_01"]; // scout helis are fine for this
 ["uavsPortable", []] call _fnc_saveToTemplate;
 
 //Config special vehicles
@@ -89,14 +75,30 @@ if (isClass (configFile >> "vnx_credits")) then {
 
 ["vehiclesPolice", ["vn_b_wheeled_m151_02_mp"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["vn_b_army_static_m2_high", "vn_b_army_static_m2_high", "vn_b_army_static_m60_high", "vn_b_army_static_m1919a4_high"]] call _fnc_saveToTemplate;
-["staticAT", ["vn_b_army_static_tow", "vn_b_army_static_m40a1rr"]] call _fnc_saveToTemplate;
-["staticAA", ["vn_b_army_static_m45", "vn_b_navy_static_l70mk2", "vn_b_navy_static_l60mk3"]] call _fnc_saveToTemplate;
+["staticMGs", ["vn_b_army_static_m60_high", "vn_b_army_static_m1919a4_high", "vn_b_army_static_m2_high"]] call _fnc_saveToTemplate;
+["staticAT", ["vn_b_army_static_m40a1rr", "vn_b_army_static_tow"]] call _fnc_saveToTemplate;
+["staticAA", ["a3a_vn_b_army_static_m45"]] call _fnc_saveToTemplate;
 ["staticMortars", ["a3a_vn_b_static_mortar_m2"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "vn_mortar_m2_mag_he_x8"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "vn_mortar_m2_mag_wp_x8"] call _fnc_saveToTemplate;
 ["mortarMagazineFlare", "vn_mortar_m2_mag_lume_x8"] call _fnc_saveToTemplate;
+
+if (isClass (configFile >> "vnx_credits")) then {
+	_vehiclesLightArmed append ["vn_b_wheeled_m151_mg_02", "vn_b_wheeled_m151_mg_03", "vn_b_wheeled_m151_mg_04", "vn_b_wheeled_m151_mg_05", "vnx_b_armor_m50_01", "vnx_b_armor_m50a1_01"];
+	_vehiclesAA append ["vnx_b_armor_m163_01"];
+	_vehiclesAirPatrol append ["vn_b_air_oh6a_07", "vn_b_air_uh1d_02_01", "vnx_b_air_ov10a_covey", "vnx_b_air_hh1h_01_01", "vnx_b_air_hh1h_02_01"];
+	_vehiclesPlanesCAS append ["vnx_b_air_ov10a_mr"];
+	_vehiclesPlanesTransport append ["vnx_b_air_ac119_02_01"];
+	_uavsAttack append ["vnx_b_air_ov10a_covey", "vnx_b_air_ov10a_covey"];
+};
+
+["vehiclesLightArmed", _vehiclesLightArmed] call _fnc_saveToTemplate;
+["vehiclesAA", _vehiclesAA] call _fnc_saveToTemplate;
+["vehiclesAirPatrol", _vehiclesAirPatrol] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", _vehiclesPlanesCAS] call _fnc_saveToTemplate;
+["vehiclesPlanesTransport", _vehiclesPlanesTransport] call _fnc_saveToTemplate;
+["uavsAttack", _uavsAttack] call _fnc_saveToTemplate;
 
 //Minefield definition
 //CFGVehicles variant of Mines are needed "ATMine", "APERSTripMine", "APERSMine"
@@ -361,8 +363,7 @@ _militaryLoadoutData set ["sniperRifles", [
 ]];
 _militaryLoadoutData set ["sidearms", [
 "vn_m1911",
-"vn_mx991_m1911",
-"vn_p38s"
+"vn_mx991_m1911"
 ]];
 
 ///////////////////////////////
@@ -427,8 +428,8 @@ _militiaLoadoutData set ["grenadeLaunchers", [
 ["vn_m16_xm148", "", "", "", ["vn_m16_20_mag", "vn_m16_20_mag", "vn_m16_20_t_mag"], ["vn_40mm_m381_he_mag", "vn_40mm_m680_smoke_w_mag", "vn_40mm_m661_flare_g_mag"], ""],
 ["vn_m79", "", "", "", ["vn_40mm_m381_he_mag", "vn_40mm_m433_hedp_mag", "vn_40mm_m397_ab_mag", "vn_40mm_m680_smoke_w_mag"], ["vn_40mm_m576_buck_mag"], ""],
 ["vn_m79", "", "", "", ["vn_40mm_m381_he_mag", "vn_40mm_m680_smoke_w_mag", "vn_40mm_m661_flare_g_mag"], ["vn_40mm_m576_buck_mag"], ""],
-["vn_m1_garand", "", "", "", ["vn_m1_garand_mag", "vn_m1_garand_mag", "vn_m1_garand_t_mag"], ["vn_22mm_m1a2_frag_mag", "vn_22mm_m22_smoke_mag", "vn_22mm_m19_wp_mag"], ""],
-["vn_m1_garand", "", "", "", ["vn_m1_garand_mag", "vn_m1_garand_mag", "vn_m1_garand_t_mag"], ["vn_22mm_m1a2_frag_mag", "vn_22mm_m22_smoke_mag", "vn_22mm_lume_mag"], ""]
+["vn_m1_garand_gl", "", "", "", ["vn_m1_garand_mag", "vn_m1_garand_mag", "vn_m1_garand_t_mag"], ["vn_22mm_m1a2_frag_mag", "vn_22mm_m22_smoke_mag", "vn_22mm_m19_wp_mag"], ""],
+["vn_m1_garand_gl", "", "", "", ["vn_m1_garand_mag", "vn_m1_garand_mag", "vn_m1_garand_t_mag"], ["vn_22mm_m1a2_frag_mag", "vn_22mm_m22_smoke_mag", "vn_22mm_lume_mag"], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
 ["vn_m60", "", "", "", [], [], ""]
@@ -466,8 +467,8 @@ if (isClass (configFile >> "vnx_credits")) then {
 	["vnx_m77e_shorty", "", "", "", ["vnx_m77e_fl_mag","vnx_m77e_buck_mag"], [], ""]
 	];
 	(_militaryLoadoutData get "SMGs") append [
-	["vnx_m50_smg", "", "", "", ["vnx_m50_smg_t_mag", "vnx_m50_smg_mag"], [], ""],
-	["vnx_m12_smg", "", "", "", ["vnx_m12_smg_32_t_mag", "vnx_m12_smg_32_mag", "vnx_m12_smg_20_mag"], [], ""],
+	["vn_m3a1", "", "", "", ["vn_m3a1_mag", "vn_m3a1_mag", "vn_m3a1_t_mag"], [], ""],
+	["vn_m3a1", "", "", "", ["vn_m3a1_mag", "vn_m3a1_mag", "vn_m3a1_t_mag"], [], ""],
 	["vnx_m45_sf", "", "", "", ["vn_m45_t_mag", "vn_m45_mag"], [], ""]
 	];
 	(_sfLoadoutData get "slRifles") append [
@@ -523,8 +524,6 @@ private _riflemanTemplate = {
 	["helmets"] call _fnc_setHelmet;
 	["vests"] call _fnc_setVest;
 	["uniforms"] call _fnc_setUniform;
-
-	["lightATLaunchers"] call _fnc_setLauncher;
 
 	[selectRandom ["rifles", "carbines"]] call _fnc_setPrimary;
 	["primary", 8] call _fnc_addMagazines;
