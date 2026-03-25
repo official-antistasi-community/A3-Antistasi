@@ -1,7 +1,7 @@
 //Mission: Logistics bank mission
 //el sitio de la boxX es el 21
 if (!isServer and hasInterface) exitWith {};
-private ["_banco","_markerX","_difficultX","_leave","_contactX","_groupContact","_tsk","_posHQ","_citiesX","_city","_radiusX","_positionX","_posHouse","_nameDest","_timeLimit","_dateLimit","_dateLimitNum","_posBase","_pos","_truckX","_countX","_mrkFinal","_mrk","_soldiers"];
+private ["_banco","_markerX","_difficultX","_leave","_contactX","_groupContact","_tsk","_citiesX","_city","_radiusX","_positionX","_posHouse","_nameDest","_timeLimit","_dateLimit","_dateLimitNum","_pos","_truckX","_countX","_mrkFinal","_mrk","_soldiers"];
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 _banco = _this select 0;
@@ -17,8 +17,6 @@ _contactX = objNull;
 _groupContact = grpNull;
 _tsk = "";
 _positionX = getPosATL _banco;
-
-_posbase = getMarkerPos respawnTeamPlayer;
 
 _timeLimit = if (_difficultX) then {60} else {120};
 if (A3A_hasIFA) then {_timeLimit = _timeLimit * 2};
@@ -127,8 +125,8 @@ else
 	};
 
 
-waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (!alive _truckX) or (_truckX distance _posbase < 50)};
-if ((_truckX distance _posbase < 50) and (dateToNumber date < _dateLimitNum)) then
+waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (!alive _truckX) or (_truckX distance markerPos "Synd_HQ" < 50)};
+if ((_truckX distance markerPos "Synd_HQ" < 50) and (dateToNumber date < _dateLimitNum)) then
 	{
 	[_taskId, "LOG", "SUCCEEDED"] call A3A_fnc_taskSetState;
 	[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
