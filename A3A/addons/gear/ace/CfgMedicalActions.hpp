@@ -43,6 +43,7 @@ class ace_medical_treatment_actions {
             animationMedicSelfProne = "";
             litter[] = {{"Land_Can_V1_F"},{"Land_Can_Dented_F"},{"Land_Can_Dented_F"}};
             callbackStart = "A3A_fnc_drinkMed";
+            callbackSuccess = "ace_medical_treatment_medicationLocal";
             treatmentTime = 10;
         };
         class ACE_Can_Franta : ACE_Can_Spirit {            
