@@ -1,15 +1,16 @@
 
 class ace_medical_treatment {
     class Medication {
+		
 		class Epinephrine;
 		class a3a_coagulant : Epinephrine{
-            painReduce = -0.2;
+            painReduce = -0.5;
             hrIncreaseLow[] = {-5, -10};
             hrIncreaseNormal[] = {-5, -15};
             hrIncreaseHigh[] = {-5, -18};
-            viscosityChange = 100;
-            timeInSystem = 600;
-            timeTillMaxEffect = 90;
+            viscosityChange = 150;
+            timeInSystem = 300;
+            timeTillMaxEffect = 60;
 		};
 		class a3a_adrenaline : Epinephrine{
             painReduce = 0.8;
@@ -49,7 +50,7 @@ class ace_medical_treatment {
             hrIncreaseLow[] = {10, 20};
             hrIncreaseNormal[] = {10, 50};
             hrIncreaseHigh[] = {10, 40};
-        }
+        };
         class a3a_coffeeIV_500 : a3a_coffeeIV {
             dose = 0.5;
             timeTillMaxEffect = 80;
@@ -58,7 +59,7 @@ class ace_medical_treatment {
             hrIncreaseLow[] = {5, 10};
             hrIncreaseNormal[] = {5, 25};
             hrIncreaseHigh[] = {5, 20};
-        }
+        };
         class a3a_coffeeIV_250 : a3a_coffeeIV {
             dose = 0.25;
             timeTillMaxEffect = 40;
@@ -67,20 +68,20 @@ class ace_medical_treatment {
             hrIncreaseLow[] = {2.5, 5};
             hrIncreaseNormal[] = {2.5, 12.5};
             hrIncreaseHigh[] = {2.5, 10};
-        }
-    }
+        };
+    };
     class IV {
         class BloodIV;
         class a3a_coffeeIV : BloodIV {
             ratio[] = {"Saline",0.5, "a3a_coffee",0.5};
             gui_message = $STR_A3A_Medical_Treatment_receivingCoffee;
             type = "a3a_coffee";
-        }
+        };
         class a3a_coffeeIV_500 : a3a_coffeeIV {
             volume = 500;
-        }
+        };
         class a3a_coffeeIV_250 : a3a_coffeeIV {
             volume = 250;
-        }
-    }
-}
+        };
+    };
+};

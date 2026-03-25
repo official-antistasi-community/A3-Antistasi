@@ -21,7 +21,7 @@ class CfgPatches
     };
 };
 
-#include "CfgFunctions.hpp";
-#include "CfgMedicalActions.hpp";
-#include "CfgMedicalTreatment.hpp";
-#include "CfgWeapons.hpp";
+#include "CfgFunctions.hpp"
+#include "CfgMedicalActions.hpp"
+#include "CfgMedicalTreatment.hpp"
+#include "CfgWeapons.hpp"

@@ -2,7 +2,6 @@
 class CfgWeapons {
 
 	class ACE_adenosine;
-	class ACE_atropine;
 
 	class a3a_coagulant : ACE_adenosine {
         author = AUTHOR;
@@ -10,7 +9,7 @@ class CfgWeapons {
         descriptionShort = "Autoinjector labled Combat Stim C";
         descriptionUse = "A autoinjector with unknown content simply labled Combat Stim composition C";
 	};
-	class a3a_adrenaline : ACE_atropine {
+	class a3a_adrenaline : ACE_adenosine {
         author = AUTHOR;
 	    displayName = "Combat Stim A";
         descriptionShort = "Autoinjector labled Combat Stim A";

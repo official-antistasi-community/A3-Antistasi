@@ -3,13 +3,13 @@ class ace_medical_treatment_actions {
     
 		class Epinephrine;
 		class a3a_coagulant : Epinephrine {
-            condition = "params ['_medic', '_patient']; _medic == _patient;";
+            //condition = "params ['_medic', '_patient']; _medic == _patient;";
             displayName = "Inject Comp C";
             displayNameProgress = "Injecting Comp C";
             items[] = {"a3a_coagulant"};
 		};
 		class a3a_adrenaline : Epinephrine {
-            condition = "params ['_medic', '_patient']; _medic == _patient;";
+            //condition = "params ['_medic', '_patient']; _medic == _patient;";
             displayName = "Inject Comp A";
             displayNameProgress = "Injecting Comp A";
             items[] = {"a3a_adrenaline"};
@@ -55,4 +55,4 @@ class ace_medical_treatment_actions {
             items[] = {"ACE_Can_RedGull"};
             litter[] = {{"Land_Can_V3_F"},{"Land_Can_V3_F"},{"Land_Can_V3_F"}};
         };
-}
+};
