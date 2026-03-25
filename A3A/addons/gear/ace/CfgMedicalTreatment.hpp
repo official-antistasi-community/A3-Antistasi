@@ -4,12 +4,12 @@ class ace_medical_treatment {
 		
 		class Epinephrine;
 		class a3a_coagulant : Epinephrine{
-            painReduce = -0.5;
+            painReduce = -0.5; //This doesn't work right now but can be left for now
             hrIncreaseLow[] = {-5, -10};
             hrIncreaseNormal[] = {-5, -15};
             hrIncreaseHigh[] = {-5, -18};
             viscosityChange = 150;
-            timeInSystem = 300;
+            timeInSystem = 120;
             timeTillMaxEffect = 60;
 		};
 		class a3a_adrenaline : Epinephrine{
