@@ -18,12 +18,12 @@ if (_reveal >= 0.8) exitWith { _reveal };
 
 if(_position distance2D markerPos "Synd_HQ" < distanceMission) then
 {
-    if(_side == Occupants && occupantsRadioKeys > 0) then {
-        occupantsRadioKeys = occupantsRadioKeys - 1;
+    if(_side == Occupants && occRadioKeys > 0) then {
+        occRadioKeys = occRadioKeys - 1;
         _reveal = 1;
     };
-    if(_side == Invaders && invaderRadioKeys > 0) then {
-        invaderRadioKeys = invaderRadioKeys - 1;
+    if(_side == Invaders && invRadioKeys > 0) then {
+        invRadioKeys = invRadioKeys - 1;
         _reveal = 1;
     };
 };

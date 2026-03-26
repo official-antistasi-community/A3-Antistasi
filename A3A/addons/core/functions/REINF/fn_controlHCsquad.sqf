@@ -58,6 +58,7 @@ hcShowBar false;
 hcShowBar true;
 
 _unit setVariable ["owner",player,true];
+private _owner = player;
 _eh1 = player addEventHandler ["HandleDamage",
 	{
 	_unit = _this select 0;
@@ -81,6 +82,7 @@ _eh2 = _unit addEventHandler ["HandleDamage",
 	nil;
 	}];
 selectPlayer _unit;
+_owner disableAI "ALL";
 
 _timeX = 180;
 
@@ -88,6 +90,7 @@ _unit addAction [localize "STR_A3A_fn_reinf_controlHQSquad_return",{selectPlayer
 
 waitUntil {sleep 1;[_titleStr, format [localize "STR_A3A_fn_reinf_controlHQSquad_return_time", _timeX]] call A3A_fnc_customHint; _timeX = _timeX - 1; (_timeX < 0) or (isPlayer theBoss)};
 
+_owner enableAI "ALL";
 removeAllActions _unit;
 if (!isPlayer (_unit getVariable ["owner",_unit])) then {selectPlayer (_unit getVariable ["owner",_unit])};
 //_unit setVariable ["owner",nil,true];

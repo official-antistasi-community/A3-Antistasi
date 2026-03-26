@@ -32,18 +32,18 @@ private _APCs = ["EF_B_AAV9_MJTF_Des", "EF_B_AAV9_MJTF_Des"];
 private _Tanks = ["B_MBT_01_TUSK_F"];
 ["vehiclesAA", ["EF_B_MRAP_01_LAAD_MJTF_Des", "B_APC_Tracked_01_AA_F"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F", "I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["EF_B_CombatBoat_HMG_MJTF_Des", "EF_B_CombatBoat_AT_MJTF_Des"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["a3a_B_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["B_Plane_CAS_01_dynamicLoadout_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["B_Plane_Fighter_01_F"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["EF_QAV80_MJTF_Des"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["B_Plane_Fighter_01_F", "B_Plane_Fighter_01_F", "EF_QAV80_MJTF_Des"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["B_T_VTOL_01_infantry_blue_F"]] call _fnc_saveToTemplate;
 
 private _vehiclesHelisLight = ["a3a_Heli_Light_01_ION_F"];
-private _HelisTransport = ["EF_B_Heli_Transport_01_MJTF_Des"];
-private _vehiclesHelisLightAttack = ["a3a_Heli_Light_01_dynamicLoadout_ION_F"]; //Black, not ION livery
-private _vehiclesHelisAttack = ["EF_B_AH99J_MJTF_Des"];
+private _HelisTransport = ["EF_B_Heli_Transport_01_MJTF_Des", "EF_B_Heli_Transport_01_MJTF_Des", "EF_B_Heli_Transport_01_MJTF_Des", "EF_B_Heli_Transport_01_MJTF_Des", "EF_B_Heli_Transport_01_MJTF_Des", "a3a_grey_unarmed_ch67_EF", "a3a_grey_unarmed_ch67_EF", "a3a_grey_armed_ch67_EF"];
+private _vehiclesHelisLightAttack = ["a3a_Heli_Light_01_dynamicLoadout_ION_F", "EF_B_Heli_Transport_01_pylons_MJTF_Des"];
+private _vehiclesHelisAttack = ["EF_B_AH99J_MJTF_Des", "EF_B_AH99J_MJTF_Des", "EF_B_Heli_Attack_01_dynamicLoadout_MJTF_Wdl"];
 
 ["vehiclesArtillery", ["B_MBT_01_mlrs_F"]] call _fnc_saveToTemplate; //this line determines artillery vehicles -- Example: ["vehiclesArtillery", ["B_MBT_01_arty_F"]] -- Array, can contain multiple assets
 //new magazines storing methode, all vehicle magazines should be defined here in format [Vehicle class, [magazines]],
@@ -51,7 +51,7 @@ private _vehiclesHelisAttack = ["EF_B_AH99J_MJTF_Des"];
     ["B_MBT_01_mlrs_F",["12Rnd_230mm_rockets"]]
 ]] call _fnc_saveToTemplate;//this line determines artillery magazines -- Example: ["magazines", createHashMapFromArray [["B_MBT_01_arty_F", ["32Rnd_155mm_Mo_shells"]]]] -- Array, can contain multiple assets
 
-["uavsAttack", ["B_UAV_02_dynamicLoadout_F", "B_UAV_05_F"]] call _fnc_saveToTemplate;
+["uavsAttack", ["B_UAV_02_dynamicLoadout_F", "B_UAV_05_F", "EF_QAV80_Stealth_MJTF_Des", "EF_QAV80_Stealth_MJTF_Des"]] call _fnc_saveToTemplate;
 ["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles - militia vehicles are mostly used in the early game, police cars are being used by troops around cities -- Example:
@@ -95,7 +95,7 @@ if ("orange" in A3A_enabledDLC) then {
 if ("rf" in A3A_enabledDLC) then {
     _vehiclesPolice append ["a3a_police_Pickup_rf", "B_GEN_Pickup_covered_rf", "a3a_police_Pickup_comms_rf"];
     _vehiclesHelisLight = ["a3a_navy_Heli_light_03_unarmed_rf"];
-    _HelisTransport append ["a3a_navy_Heli_EC_04_military_rf"];
+    _HelisTransport append ["a3a_navy_Heli_EC_04_military_rf", "a3a_navy_Heli_EC_04_military_rf"];
     _vehiclesHelisLightAttack = ["a3a_navy_Heli_light_03_dynamicLoadout_rf","a3a_navy_Heli_EC_03_rf"];
     _vehiclesHelisAttack append ["a3a_navy_Heli_EC_02_rf"];
     _vehiclesMilitiaCars append ["B_Pickup_rf"];
@@ -245,7 +245,7 @@ _sfLoadoutData set ["slRifles", [
 ["arifle_MX_Black_F", "ef_snds_mxar", "acc_pointer_IR", "optic_MRCO", ["30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag_Tracer"], [], ""],
 ["ef_arifle_mxar_black", "ef_snds_mxar", "acc_pointer_IR", "ef_optic_mbs", ["30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag_Tracer"], [], ""],
 ["arifle_MX_GL_Black_F", "ef_snds_mxar", "acc_pointer_IR", "optic_MRCO", ["30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag_Tracer"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
-["ef_arifle_mxar_gl_black", "ef_snds_mxar", "acc_pointer_IR", "optic_Hamr", ["30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag_Tracer"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
+["ef_arifle_mx_grip_black", "ef_snds_mxar", "acc_pointer_IR", "optic_Hamr", ["30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag", "30Rnd_65x39_caseless_black_mag_Tracer"], [], ""],
 ["srifle_EBR_F", "muzzle_snds_B", "acc_pointer_IR", "optic_Holosight_blk_F", [], [], ""]
 ]];
 _sfLoadoutData set ["rifles", [
@@ -261,7 +261,10 @@ _sfLoadoutData set ["grenadeLaunchers", [
 ]];
 _sfLoadoutData set ["SMGs", [
 ["SMG_01_F", "muzzle_snds_acp", "", "optic_Holosight_smg_blk_F", [], [], ""],
-["SMG_01_F", "muzzle_snds_acp", "", "ef_optic_microsight", [], [], ""]
+["SMG_01_F", "muzzle_snds_acp", "", "ef_optic_microsight", [], [], ""],
+["EF_smg_Diplomat", "ef_snds_diplomat", "acc_pointer_IR", "optic_Aco_smg", [], [], ""],
+["EF_smg_Diplomat", "ef_snds_diplomat", "acc_pointer_IR", "ef_optic_microsight", [], [], ""],
+["EF_smg_Diplomat", "ef_snds_diplomat", "acc_pointer_IR", "optic_Holosight_smg_blk_F", [], [], ""]
 ]];
 _sfLoadoutData set ["machineGuns", [
 ["arifle_MX_SW_Black_F", "ef_snds_mxar", "acc_pointer_IR", "optic_Holosight_blk_F", ["100Rnd_65x39_caseless_black_mag", "100Rnd_65x39_caseless_black_mag", "100Rnd_65x39_caseless_black_mag_tracer"], [], "bipod_01_F_blk"],
@@ -304,7 +307,7 @@ _militaryLoadoutData set ["slRifles", [
 ["ef_arifle_mx_coy", "", "EF_acc_pointer_IR_coy", "optic_MRCO", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""],
 ["ef_arifle_mxar_coy", "", "EF_acc_pointer_IR_coy", "optic_Hamr", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""],
 ["ef_arifle_mx_gl_coy", "", "acc_pointer_IR", "optic_MRCO", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
-["ef_arifle_mxar_gl_coy", "", "acc_pointer_IR", "optic_Hamr", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
+["ef_arifle_mx_grip_coy", "", "acc_pointer_IR", "optic_Hamr", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""],
 ["srifle_EBR_F", "", "acc_pointer_IR", "optic_Holosight_blk_F", [], [], ""]
 ]];
 _militaryLoadoutData set ["rifles", [
@@ -313,7 +316,7 @@ _militaryLoadoutData set ["rifles", [
 ["ef_arifle_mxar_coy", "", "acc_pointer_IR", "optic_Aco", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""]
 ]];
 _militaryLoadoutData set ["carbines", [
-["ef_arifle_mx_coy", "", "acc_pointer_IR", "ef_optic_Holosight_coy", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""],
+["ef_arifle_mx_grip_coy", "", "acc_pointer_IR", "ef_optic_Holosight_coy", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""],
 ["ef_arifle_mx_coy", "", "acc_pointer_IR", "ef_optic_Holosight_coy", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""],
 ["ef_arifle_mxc_coy", "", "acc_pointer_IR", "optic_Aco", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""],
 ["ef_arifle_mxc_coy", "", "acc_pointer_IR", "optic_Aco", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""],
@@ -447,8 +450,7 @@ _officerLoadoutData set ["vests", ["V_TacVest_oli", "V_LegStrapBag_coyote_F"]];
 _officerLoadoutData set ["helmets", ["H_ParadeDressCap_01_US_F", "H_Beret_Colonel"]];
 _officerLoadoutData set ["backpacks", []];
 _officerLoadoutData set ["SMGs", [
-["ef_arifle_mxc_coy", "", "acc_pointer_IR", "ef_optic_Holosight_coy", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""],
-["ef_arifle_mxc_coy", "", "acc_pointer_IR", "optic_Aco", ["EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag", "EF_30Rnd_65x39_caseless_coy_mag_Tracer"], [], ""]
+["EF_smg_Diplomat_Coy", "", "", "ef_optic_microsight_coy", [], [], ""]
 ]];
 
 if ("mark" in A3A_enabledDLC) then {

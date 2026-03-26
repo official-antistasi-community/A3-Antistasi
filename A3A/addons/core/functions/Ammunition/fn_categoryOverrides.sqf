@@ -9,8 +9,17 @@ private _categoryOverrideTable = [
 ["launch_NLAW_F", ["MissileLaunchers","Weapons","AT"]],
 ["hgun_PDW2000_F", ["SMGs","Weapons"]],
 ["hgun_Pistol_Signal_F", ["Unknown","Weapons"]],
+["arifle_RPK12_F", ["MachineGuns","Weapons"]],
+["arifle_RPK12_arid_F", ["MachineGuns","Weapons"]],
+["arifle_RPK12_lush_F", ["MachineGuns","Weapons"]],
+["hgun_esd_01_F", ["Unknown","Weapons"]],		// spectrum device
 
 //RHS
+["rhs_weap_m76", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_LB", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_LB_Folded", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_USA_LB", ["SniperRifles","Weapons"]],
+["rhs_weap_SCARH_USA_LB_Folded", ["SniperRifles","Weapons"]],
 ["rhs_weap_vss", ["SniperRifles","Weapons"]],
 ["rhs_weap_vss_grip", ["SniperRifles","Weapons"]],
 ["rhs_weap_vss_npz", ["SniperRifles","Weapons"]],
@@ -52,6 +61,9 @@ private _categoryOverrideTable = [
 ["rhs_weap_rsp30_white", ["Unknown","Weapons"]],
 ["rhs_weap_rsp30_green", ["Unknown","Weapons"]],
 ["rhs_weap_rsp30_red", ["Unknown","Weapons"]],
+
+//Some sort of periscope
+["rhs_weap_tr8", ["Unknown","Weapons"]],
 
 // These have a rifle grenade muzzle but with no magazines or wells defined
 ["rhs_weap_m70b1", ["Rifles","Weapons"]],
@@ -226,7 +238,7 @@ private _categoryOverrideTable = [
 ["CUP_glaunch_Mk13", ["GrenadeLaunchers","Weapons"]],
 ["CUP_glaunch_M32", ["GrenadeLaunchers","Weapons"]],
 
-["CUP_launch_M136", ["RocketLaunchers","Weapons","AT"]],
+["CUP_launch_M136", ["RocketLaunchers","Weapons","AT","Disposable"]],
 ["CUP_launch_NLAW", ["RocketLaunchers","Weapons","AT"]],
 
 /*
@@ -463,14 +475,86 @@ private _categoryOverrideTable = [
 ["SPE_M2_Tripod", ["StaticWeaponParts","Items"]],
 ["SPE_GrW278_1_Barrel", ["StaticWeaponParts","Items"]],
 ["SPE_MLE_27_31_Stand", ["StaticWeaponParts","Items"]],
+["SPE_M3_Tripod", ["StaticWeaponParts","Items"]],
+["SPE_M2_50", ["StaticWeaponParts","Items"]],
+["SPEX_M2_60_Stand", ["StaticWeaponParts","Items"]],
+
+["SPE_Carbine_pouch", ["Unknown", "Weapons"]],
+["SPE_Carbine_pouch_od7", ["Unknown", "Weapons"]],
+
 ["SPE_Flammenwerfer41", ["Unknown", "Weapons"]],
 ["SPE_M2_Flamethrower", ["Unknown", "Weapons"]],
+
 ["SPE_K98_GW", ["Rifles","Weapons","GrenadeLaunchers"]],
 ["SPE_K98_Late_GW", ["Rifles","Weapons","GrenadeLaunchers"]],
 ["SPE_M1903A3_Springfield_M1_GL", ["Rifles","Weapons","GrenadeLaunchers"]],
 ["SPE_M1_Carbine_M8", ["Rifles","Weapons","GrenadeLaunchers"]],
-["SPE_M1_Garand_M7", ["Rifles","Weapons","GrenadeLaunchers"]] 
+["SPE_M1_Garand_M7", ["Rifles","Weapons","GrenadeLaunchers"]],
 
+// WS
+["glaunch_GLX_lxWS", ["GrenadeLaunchers","Weapons"]],
+["glaunch_GLX_camo_lxWS", ["GrenadeLaunchers","Weapons"]],
+["glaunch_GLX_ghex_lxWS", ["GrenadeLaunchers","Weapons"]],
+["glaunch_GLX_hex_lxWS", ["GrenadeLaunchers","Weapons"]],
+["glaunch_GLX_tan_lxWS", ["GrenadeLaunchers","Weapons"]],
+["glaunch_GLX_snake_lxWS", ["GrenadeLaunchers","Weapons"]],
+
+// SFP
+["sfp_flashlight", ["Unknown", "Weapons"]],
+["sfp_imgint_1010", ["Unknown", "Weapons"]],
+
+//East Asia War
+["EAW_Type30", ["Melee","Weapons"]],
+["EAW_Type95", ["Melee","Weapons"]],
+["EAW_Dao", ["Melee","Weapons"]],
+["EAW_Hanyang_Bayonet", ["Melee","Weapons"]],
+
+["EAW_Type11_Base",["MachineGuns","Weapons"]],
+["EAW_Type96",["MachineGuns","Weapons"]],
+["EAW_Type99",["MachineGuns","Weapons"]],
+["EAW_FN30_Base",["MachineGuns","Weapons"]],
+["EAW_ZB26_Base",["MachineGuns","Weapons"]],
+
+["EAW_C96_Carbine",["SMGs","Weapons"]],
+["EAW_C96_Auto_Carbine",["SMGs","Weapons"]],
+["EAW_MP28",["SMGs","Weapons"]],
+
+["EAW_Type97_Sniper",["SniperRifles","Weapons"]],
+["EAW_Type97_Sniper_Stock2",["SniperRifles","Weapons"]],
+
+//WebKnight Melee
+["Pipe_aluminium", ["Melee","Weapons"]],
+["WBK_axe", ["Melee","Weapons"]],
+["Bat_Clear", ["Melee","Weapons"]],
+["Bat_Spike", ["Melee","Weapons"]],
+["WBK_BrassKnuckles", ["Melee","Weapons"]],
+["WBK_brush_axe", ["Melee","Weapons"]],
+["WBK_craftedAxe", ["Melee","Weapons"]],
+["Crowbar", ["Melee","Weapons"]],
+["CrudeAxe", ["Melee","Weapons"]],
+["FireAxe", ["Melee","Weapons"]],
+["WBK_survival_weapon_1", ["Melee","Weapons"]],
+["WBK_survival_weapon_2", ["Melee","Weapons"]],
+["IceAxe", ["Melee","Weapons"]],
+["WBK_Katana", ["Melee","Weapons"]],
+["Weap_melee_knife", ["Melee","Weapons"]],
+["Knife_kukri", ["Melee","Weapons"]],
+["Knife_m3", ["Melee","Weapons"]],
+["WBK_pipeStyledSword", ["Melee","Weapons"]],
+["Police_Bat", ["Melee","Weapons"]],
+["Rod", ["Melee","Weapons"]],
+["Sashka_Russian", ["Melee","Weapons"]],
+["Shovel_Russian", ["Melee","Weapons"]],
+["Shovel_Russian_Rotated", ["Melee","Weapons"]],
+["Axe", ["Melee","Weapons"]],
+["WBK_SmallHammer", ["Melee","Weapons"]],
+["WBK_ww1_Club", ["Melee","Weapons"]],
+["UNSC_Knife", ["Melee","Weapons"]],
+["UNSC_Knife_reversed", ["Melee","Weapons"]],
+["WBK_survival_weapon_4", ["Melee","Weapons"]],
+["WBK_survival_weapon_4_r", ["Melee","Weapons"]],
+["WBK_survival_weapon_3", ["Melee","Weapons"]],
+["WBK_survival_weapon_3_r", ["Melee","Weapons"]]
 ];
 
 

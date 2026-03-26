@@ -1,4 +1,4 @@
-/*  Sets up a mortar support
+/*  Finds a garrison mortar to perform a mortar strike on a position
 
 Environment: Server, scheduled, internal
 
@@ -7,7 +7,7 @@ Arguments:
     <SIDE> The side from which the support should be sent
     <STRING> Resource pool used for this support. Should be "attack" or "defence"
     <SCALAR> Maximum resources to spend. Not used here.
-    <OBJECT|BOOL> Target of the support, or objNull for positional strike. "false" creates with no initial target
+    <OBJECT|BOOL> Ignored now
     <POS2D> Target position for initial mortar strike
     <SCALAR> 0-1, higher values more information provided about support
     <SCALAR> Setup delay time in seconds, if negative will calculate based on war tier
@@ -21,66 +21,56 @@ FIX_LINE_NUMBERS()
 
 params ["_supportName", "_side", "_resPool", "_maxSpend", "_target", "_targPos", "_reveal", "_delay"];
 
-private _faction = Faction(_side);
-private _vehType = selectRandom (_faction get "staticMortars");
-private _shellType = _faction get "mortarMagazineHE";
-([_vehType, _shellType] call A3A_fnc_getArtilleryRanges) params ["_minRange", "_maxRange"];
 
-Info_6("Mortar support %1 against %2 will be carried out by a %3 with %4 mags, min range %5 max %6", _supportName, _targPos, _vehType, _shellType, _minRange, _maxRange);
+// Search outpost and airport garrisons within 4km for available garrison mortars
+// Should be done unscheduled because something else might use the selected mortar
 
-//Search for a outpost, that isnt more than 3 kilometers away, which isnt spawned
-private _possibleBases = (outposts + airportsX) select
-{
-    (sidesX getVariable [_x, sideUnknown] == _side) &&
-    {(markerPos _x distance2D _targPos <= _maxRange) &&
-    {(markerPos _X distance2D _targPos > _minRange) &&
-    {spawner getVariable _x == 2}}}
-};
-if(count _possibleBases == 0) exitWith { Debug("No bases found for mortar support"); -1 };
+private _success = false;
+isNil {
 
-//Search for an outpost with a designated mortar position if possible
-private _spawnRadius = 0;
-private _spawnParams = false;
-{
-    _spawnParams = [_x, "Mortar"] call A3A_fnc_findSpawnPosition;
-    if (_spawnParams isEqualType []) exitWith {};
-} forEach _possibleBases;
+    // First search enemy bases for mortars
+    private _bases = (outposts + airportsX) inAreaArray [_targPos, 4000, 4000] select { sidesX getVariable _x == _side };
+    private _mortars = [];          // [_marker, _vehEntry]
+    {
+        if (markerPos _x distance2d _targPos < 700) then { continue };      // Don't use local mortars
+        private _base = _x;
+        {
+            if (_y#0 != "ready" or _y#1 != "staticMortars") then { continue };
+            _mortars pushBack [_base, _y#2];
+        } forEach (A3A_garrison get _base get "supportVehicles");
+    } forEach _bases;
 
-// Otherwise just put it somewhere near the flag
-if !(_spawnParams isEqualType []) then 
-{
-    private _base = selectRandom _possibleBases;
-    _spawnParams = [markerPos _base, 0, nil];
-    _spawnRadius = 10;
-};
+    // Then pick a random one that's within range
+    private _mortarData = [];
+    while {_mortars isNotEqualTo []} do {
+        (_mortars deleteAt floor random count _mortars) params ["_base", "_vehEntry"];
+        _vehEntry params ["_vehType", "_posData", "", "_vehID"];
 
+        private _mortarPos = if (_posData isEqualType []) then { _posData#0 } else { A3A_spawnPlacesHM get _base select _posData select 1 };
+        private _mortarDist = _mortarPos distance2d _targPos;
 
-// Spawn in mortar
-private _vehicle = [_vehType, _spawnParams#0, _spawnRadius, 5, true] call A3A_fnc_safeVehicleSpawn;
-_vehicle setVariable ["spawnPlace", _spawnParams#2];
-_vehicle setVariable ["shellType", _shellType];
-[_vehicle, _side, _resPool] call A3A_fnc_AIVehInit;
+        private _magHM = [_vehType] call A3A_fnc_getMortarMags select 1;
+        private _magType = _magHM getOrDefault ["HE", ""];
 
-// Spawn in crew
-private _group = [_side, _vehicle] call A3A_fnc_createVehicleCrew;
-{ [_x, nil, false, _resPool] call A3A_fnc_NATOinit } forEach units _group;
-_group deleteGroupWhenEmpty true;
+        ([_vehType, _magType] call A3A_fnc_getArtilleryRanges) params ["_minRange", "_maxRange"];
+        if (_mortarDist > _minRange+200 and _mortarDist < _maxRange-200) exitWith { _mortarData = [_base, _vehID] };
+    };
+    if (_mortarData isEqualTo []) exitwith { Debug("No bases found for mortar support") };
 
-private _aggro = if(_side == Occupants) then {aggressionOccupants} else {aggressionInvaders};
-if (_delay < 0) then { _delay = (0.5 + random 1) * (250 - 10*tierWar - 1*_aggro) };
+    // Should probably remove the extra 30 seconds at the far end...
+    private _aggro = if(_side == Occupants) then {aggressionOccupants} else {aggressionInvaders};
+    if (_delay < 0) then { _delay = (0.5 + random 1) * (120 - 5*tierWar - 0.5*_aggro) };
 
-private _targArray = [];
-if (_target isEqualType objNull) then {
+    Info_5("Mortar support %1 against %2 with delay %3 will be carried out by mortar ID %4 from %5", _supportName, _targPos, _delay, _mortarData#0, _mortarData#1);
+
+    // Any point in this for single-target?
+    //[_reveal, _side, "MORTAR", _targPos, _delay] spawn A3A_fnc_showInterceptedSetupCall;
+
     A3A_supportStrikes pushBack [_side, "AREA", _targPos, time + 20*60, 20*60, 100];
-    _targArray = [_target, _targPos];
+
+    [_mortarData#0, _mortarData#1, [_targPos, _delay, _reveal]] call A3A_fnc_garrisonServer_vehAction;
+    _success = true;
 };
 
-// name, side, suppType, pos, radius, remTargets, targets
-private _suppData = [_supportName, _side, "MORTAR", _spawnParams#0, _maxRange, _targArray, _minRange];
-A3A_activeSupports pushBack _suppData;
-[_suppData, _vehicle, _group, _delay, _reveal, false] spawn A3A_fnc_SUP_mortarRoutine;
-
-[_reveal, _side, "MORTAR", _targPos, _delay] spawn A3A_fnc_showInterceptedSetupCall;
-
-// Mortar cost (might be free?) + extra support cost for balance
-(A3A_vehicleResourceCosts getOrDefault [_vehType, 0]) + (10 * count units _group) + 100;
+// Per-volley cost
+[-1, 40] select _success;

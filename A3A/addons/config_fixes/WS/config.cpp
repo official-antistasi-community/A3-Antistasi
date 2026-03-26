@@ -22,7 +22,6 @@ class CfgPatches
 
 // Uncomment when needed
 #include "CfgVehicles.hpp"
-#include "CfgMarkers.hpp"
 #include "CfgWeapons.hpp"
 
 #endif      // __has_include("\lxws\data_f_lxws\config.bin")

@@ -15,7 +15,7 @@ private _vehiclesLightArmed = ["I_G_Offroad_01_armed_F", "I_C_Offroad_02_LMG_F"]
 private _vehiclesAT = ["I_C_Offroad_02_AT_F", "I_G_Offroad_01_AT_F"];
 private _vehicleAA = [];
 
-["vehiclesBoat", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesBoat", ["I_C_Boat_Transport_01_F","I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlane", ["I_C_Plane_Civil_01_F"]] call _fnc_saveToTemplate;
 
@@ -82,7 +82,7 @@ private _initialRebelEquipment = [
 "Binocular","hgun_Pistol_Signal_F","6Rnd_GreenSignal_F","6Rnd_RedSignal_F",
 "acc_flashlight","acc_flashlight_smg_01","acc_flashlight_pistol"
 ];
-_initialRebelEquipment append [["launch_RPG7_F", 15], ["RPG7_F", 45]];
+_initialRebelEquipment append [["launch_RPG7_F", 10], ["RPG7_F", 25]];
 
 if ("enoch" in A3A_enabledDLC) then {
     _initialRebelEquipment append ["sgun_HunterShotgun_01_F", "sgun_HunterShotgun_01_sawedoff_F", "2Rnd_12Gauge_Pellets", "2Rnd_12Gauge_Slug"];

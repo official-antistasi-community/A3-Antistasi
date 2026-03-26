@@ -33,84 +33,10 @@ if (_reveal <= 0.5) then
 }
 else
 {
-    switch (toupper _supportType) do
-    {
-        case ("QRFLAND"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_QRFLANDLONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_QRFLANDTITLE";
-        };
-        case ("QRFAIR"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_QRFAIRLONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_QRFAIRTITLE";
-        };
-        case ("AIRSTRIKE"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_AIRSTRIKELONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_AIRSTRIKETITLE";
-        };
-        case ("ARTILLERY"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_ARTILLERYLONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_ARTILLERYTITLE";
-        };
-        case ("MORTAR"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_MORTARLONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_MORTARTITLE";
-        };
-        case ("ORBITALSTRIKE"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_ORBITALSTRIKELONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_ORBITALSTRIKETITLE";
-        };
-        case ("CRUISEMISSILE"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_CRUISEMISSILELONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_CRUISEMISSILETITLE";
-        };
-        case ("SAM"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_SAMLONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_SAMTITLE";
-        };
-        case ("CARPETBOMBS"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_CARPETBOMBSLONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_CARPETBOMBSTITLE";
-        };
-        case ("ASF"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_ASFLONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_ASFTITLE";
-        };
-        case ("CAS"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_CASLONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_CASTITLE";
-        };
-        case ("GUNSHIP"):
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_GUNSHIPLONG", _sideName];
-            _markerText = localize "STR_A3A_fn_support_showIntSPTCll_GUNSHIPTITLE";
-        };
-        case ("UAV"):
-        {
-            _text = format [localize "STR_notifiers_SUP_execute_UAV", _sideName];
-            _markerText = localize "STR_notifiers_SUP_execute_UAV_marker";
-        };
-        case ("UAVAttack"):
-        {
-            _text = format [localize "STR_notifiers_SUP_execute_UAVAttack", _sideName];
-            _markerText = localize "STR_notifiers_SUP_execute_UAVAttack_marker";
-        };
-        default
-        {
-            _text = format [localize "STR_A3A_fn_support_showIntSPTCll_UNKNOWNLONG", _sideName, _supportType];
-            _markerText = format [localize "STR_A3A_fn_support_showIntSPTCll_UNKNOWNTITLE", _supportType];
-        };
-    };
+    _text = format [localize format ["STR_A3A_fn_support_showIntSPTCll_%1LONG", toUpper _supportType], _sideName];
+    if (_text isEqualTo "") then {_text = format [localize "STR_A3A_fn_support_showIntSPTCll_UNKNOWNLONG", _sideName, _supportType]};
+    _markerText = localize format ["STR_A3A_fn_support_showIntSPTCll_%1TITLE", toUpper _supportType];
+    if (_markerText isEqualTo "") then {_markerText = format [localize "STR_A3A_fn_support_showIntSPTCll_UNKNOWNTITLE", _supportType]};
 
     if(_reveal < 0.8) exitWith {};
 

@@ -8,6 +8,7 @@ class I_Plane_Fighter_03_dynamicLoadout_F;
 class I_Plane_Fighter_04_F;
 class O_Heli_Light_02_dynamicLoadout_F;
 class O_Heli_Light_02_unarmed_F;
+class B_Heli_Transport_01_pylons_F;
 
 //Black
 class a3a_Heli_Light_02_black_F : O_Heli_Light_02_dynamicLoadout_F
@@ -70,4 +71,9 @@ class a3a_C_Heli_Transport_02_F : I_Heli_Transport_02_F
     side = 3;
     textureList[] = {"ION",0,"AAF",0,"IDAP",0,"Dahoman",1};
     hiddenSelectionsTextures[] = {"a3\air_f_beta\heli_transport_02\data\skins\heli_transport_02_1_dahoman_co.paa","a3\air_f_beta\heli_transport_02\data\skins\heli_transport_02_2_dahoman_co.paa","a3\air_f_beta\heli_transport_02\data\skins\heli_transport_02_3_dahoman_co.paa","a3\air_f_beta\heli_transport_02\data\heli_transport_02_int_02_co.paa"};
+};
+
+//Green
+class a3a_Heli_Transport_01_pylons_green_F : B_Heli_Transport_01_pylons_F {
+    hiddenSelectionsTextures[] = {"\A3\Air_F_Beta\Heli_Transport_01\Data\Heli_Transport_01_ext01_BLUFOR_CO.paa","\A3\Air_F_Beta\Heli_Transport_01\Data\Heli_Transport_01_ext02_BLUFOR_CO.paa","\a3\Air_F_Beta\heli_transport_01\data\heli_transport_01_ext01_add_BLUFOR_co.paa"};
 };

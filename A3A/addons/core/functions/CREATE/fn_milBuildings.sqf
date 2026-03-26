@@ -21,13 +21,24 @@ _groupX = createGroup _sideX;
 _typeUnit = _faction get "unitStaticCrew";
 
 //New system to place helis, does not care about heli types currently
-private _helicopterTypes = [];
-_helicopterTypes append (_faction get "vehiclesHelisLight");
+private _ratio = [];
+private _light = _faction get "vehiclesHelisLight";
+private _transport = _faction get "vehiclesHelisTransport";
+private _lightAttack = _faction get "vehiclesHelisLightAttack";
+private _fullAttack = _faction get "vehiclesHelisAttack";
+if(_markerX in airportsX) then {
+    _ratio = [_light,3,_transport,1,_lightAttack,1,_fullAttack,0];
+
+} else {
+    _ratio = [_light,1,_transport,0,_lightAttack,0,_fullAttack,0];
+};
+
 private _count = 1 + round (random 3); //Change these numbers as you want, first number is minimum, max is first plus second number
 while {_count > 0} do
 {
-    if (_helicopterTypes isEqualTo []) exitWith {}; //no helis to pick from
-    _typeVehX = selectRandom _helicopterTypes;
+    private _heliList = selectRandomWeighted _ratio;
+    if (_heliList isEqualTo []) exitWith {}; //no helis to pick from
+    _typeVehX = selectRandom _heliList;
     private _spawnParameter = [_markerX, "Heli"] call A3A_fnc_findSpawnPosition;
     if !(_spawnParameter isEqualType []) exitWith {};       // out of spawn places
     _spawnsUsed pushBack _spawnParameter#2;

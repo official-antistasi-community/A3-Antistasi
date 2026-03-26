@@ -5,7 +5,9 @@ class tem_anizay {
 		{6029.91,3991.35,-0.00282288},{2256.28,6232.65,-0.207352},{4769.32,8327.64,0.0103607},{8476.38,4978.83,-0.191177},{8304.16,7129.67,0},{3086.77,8396.11,0.0198364},{943.493,4638.36,0.00810242},{3833.18,832.105,-0.103607}
 	};
 	antennasBlacklistIndex[] = {}; //all antennas good
-	banks[] = {}; //no suitable building available
+	banks[] = {
+		{3735.79,8194.18,0},{477.111,7106.39,0},{3825.56,7336.85,0},{8468.98,5327.45,0},{3503.69,2860.89,0}
+	};
 	garrison[] = {
 		{},{"outpost_8","factory_4","control_19","control_44","control_45"},{},{"control_19","control_44","control_45"}
 	};
@@ -22,6 +24,20 @@ class tem_anizay {
 		{"Land_fort_artillery_nest_EP1", 200}, {"Land_fort_rampart_EP1", 50}, {"Fort_Barricade", 50}, {"Fence", 20}, {"FenceWood", 10}, {"FenceWoodPalet", 10}, 
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
+	};
+	policeStationTypes[] = {
+		// From Takistan
+		"Land_House_C_3_EP1", "Land_House_C_10_EP1", "Land_House_C_4_EP1", "Land_House_C_9_EP1",
+		"Land_House_K_8_EP1", "Land_House_K_7_EP1", "Land_House_K_3_EP1", "Land_House_L_6_EP1", "Land_House_L_7_EP1"
+	};
+	requiredMods = "Anizay and CUP Terrains - Core";
+	size = 10.2;
+	cityCount = 34;
+	airbaseCount = 3;
+	class MapParams {
+		distanceSPWN = 800;
 	};
 };

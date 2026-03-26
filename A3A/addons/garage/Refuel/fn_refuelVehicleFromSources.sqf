@@ -41,8 +41,12 @@ while {count (HR_GRG_Sources#1) > 0} do {
     Trace_1("Needed capacity: %1", _neededCapacity);
 
     private _sourceUID = HR_GRG_Sources#1#0;
-    private "_sourceData";
-    for "_i" from 0 to 4 do { _sourceData = (HR_GRG_Vehicles#_i) get _sourceUID; if (!isNil "_sourceData") exitWith {}; }; //find vehicles in categorys, typically cat 0 "cars"
+    private _sourceData = (HR_GRG_Vehicles#HR_GRG_SOURCEINDEX) get _sourceUID;
+    if (isNil "_sourceData") exitWith {
+        // Shouldn't happen, but don't 10,000-cycle loop if it does
+        Error_1("Fuel source vehicle %1 not found in source category", _sourceUID);
+    };
+
     private _fuelData = _sourceData#4#0; //vehicle data >> statePreservation data >> Fuel data
     private _transportFuel = getNumber (configFile/"CfgVehicles"/_sourceData#1/"transportFuel");
     private _fuelCargo = if (A3A_hasAce) then {

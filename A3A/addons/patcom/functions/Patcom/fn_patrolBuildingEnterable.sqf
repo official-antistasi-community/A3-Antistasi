@@ -1,5 +1,5 @@
 /*
-    Author: [Hazey]
+    Author: [Hazey] and John Jordan
     Description:
         Checks if building is enterable and validates it with a blacklist
 
@@ -23,13 +23,13 @@ FIX_LINE_NUMBERS()
 
 params ["_house"];
 
-private _enterable = !((_house buildingPos 0) isEqualTo [0,0,0]);
+// No building positions
+if (_house buildingPos -1 isEqualTo []) exitWith { false };
 
 // Check if the house is blacklisted
-if (_enterable && !((count PATCOM_Building_Blacklist) == 0)) then {
-    if ((typeOf _house) in PATCOM_Building_Blacklist) then {
-        _enterable = false;
-    };
-};
+if (typeOf _house in PATCOM_Building_Blacklist) exitWith { false };
 
-_enterable
+// Don't place units in destroyed buildings
+if (damage _house >= 1 or isObjectHidden _house) exitWith { false };
+
+true;

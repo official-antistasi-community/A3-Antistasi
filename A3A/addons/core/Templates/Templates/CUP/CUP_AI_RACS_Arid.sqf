@@ -32,7 +32,7 @@
 ["vehiclesTanks", ["CUP_B_M1A2C_Desert_US_Army", "CUP_B_M1A2C_TUSK_II_Desert_US_Army", "CUP_B_M1A2C_TUSK_Desert_US_Army", "CUP_I_M60A3_RACS", "CUP_I_M60A3_TTS_RACS", "CUP_B_M1A2SEP_RACS", "CUP_B_M1A2SEP_TUSK_RACS", "CUP_I_T72_RACS"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["CUP_B_M6LineBacker_USA_D", "CUP_I_M163_Vulcan_RACS"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["CUP_B_RHIB2Turret_USMC"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["CUP_I_LAV25_RACS", "CUP_I_LAV25M240_RACS", "CUP_I_AAV_RACS"]] call _fnc_saveToTemplate;
 

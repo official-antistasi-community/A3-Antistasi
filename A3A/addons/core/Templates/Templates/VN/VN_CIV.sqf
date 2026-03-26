@@ -4,19 +4,25 @@
 
 // All of bellow are optional overrides.
 ["firstAidKits", ["vn_o_item_firstaidkit"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
-["mediKits", ["vn_o_item_medikit_01"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
+["mediKits", ["vn_b_item_medikit_01"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
 
 //////////////////////////
 //       Vehicles       //
 //////////////////////////
 
-["vehiclesCivCar", [
+private _vehiclesCivCar = [
     "vn_c_wheeled_m151_02", 1.8
     ,"vn_c_wheeled_m151_01", 1.8
     ,"vn_c_car_02_01", 1.5
     ,"vn_c_car_03_01", 1
     ,"vn_c_car_01_01", 0.8
-    ,"vn_c_bicycle_01", 0.2]] call _fnc_saveToTemplate;
+    ,"vn_c_bicycle_01", 0.2];
+
+if (isClass (configFile >> "vnx_credits")) then {
+	_vehiclesCivCar append ["vnx_c_wheeled_tuktuk_01_01", 2];
+};
+
+["vehiclesCivCar", _vehiclesCivCar] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
     "vn_b_wheeled_m54_01_airport", 0.2
@@ -139,7 +145,7 @@ private _prefix = "militia";
 private _unitTypes = [
     ["Press", _pressTemplate],
     ["Worker", _workerTemplate],
-    ["Man", _manTemplate]
+    ["Man", _manTemplate, nil, 10]
 ];
 
 [_prefix, _unitTypes, _loadoutData] call _fnc_generateAndSaveUnitsToTemplate;

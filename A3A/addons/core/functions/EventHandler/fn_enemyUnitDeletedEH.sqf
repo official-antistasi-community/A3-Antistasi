@@ -17,6 +17,9 @@ FIX_LINE_NUMBERS()
 
 params ["_unit"];
 
+// Garrison units should be handled by despawn function
+if (!isNil {_unit getVariable "markerX"}) exitWith {};
+
 // Everything here should already be handled if unit was killed
 if (!alive _unit) exitWith {};
 
@@ -41,9 +44,4 @@ else
     if (_pool == "legacy") then {
         [-10, _side, _pool] remoteExecCall ["A3A_fnc_addEnemyResources", 2];
     };
-
-    // Remove from garrison if it belongs to one
-    private _marker = _victim getVariable "markerX";
-    if (isNil "_marker" or { sidesX getVariable [_marker, sideUnknown] != _side }) exitWith {};
-    [_victim getVariable "unitType", _side, _marker,-1] remoteExec ["A3A_fnc_garrisonUpdate", 2];
 };

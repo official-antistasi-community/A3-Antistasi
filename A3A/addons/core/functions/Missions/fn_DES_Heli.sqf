@@ -5,15 +5,17 @@
     Arguments:
         <STRING> Marker
 
-	Public: Yes
+    Public: Yes
     Example:
         ["airport"] call A3A_fnc_DES_Heli;
 */
 if (!isServer and hasInterface) exitWith{};
 
-private _missionOrigin = _this select 0;
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
+
+params ["_missionOrigin", "_posCrashOrigin"];
+
 private _difficult = if (random 10 < tierWar) then {true} else {false};
 private _bonus = if (_difficult) then {2} else {1};
 private _missionOriginPos = getMarkerPos _missionOrigin;
@@ -21,38 +23,25 @@ private _sideX = if (sidesX getVariable [_missionOrigin,sideUnknown] == Occupant
 private _faction = Faction(_sideX);
 Debug_3("Origin: %1, Hardmode: %2, Controlling Side: %3", _missionOrigin, _difficult, _sideX);
 
-//finding crash position
-private _ang = random 360;
-private _countX = 0;
-private _dist = if (_difficult) then {2000} else {3000};
-private _posCrashOrigin = [];
-while {true} do {
-    _posCrashOrigin = _missionOriginPos getPos [_dist,_ang];
-    private _notOutOfBounds = (_posCrashOrigin select [0,2]) findIf { (_x < 0 + 1000) || (_x > worldSize -1000)} isEqualTo -1; //1k grace for refinement search later
-    if ((!surfaceIsWater _posCrashOrigin) and (_posCrashOrigin distance (getMarkerPos respawnTeamPlayer) < 4000) and (_posCrashOrigin distance (getMarkerPos respawnTeamPlayer) > 1000) and _notOutOfBounds) exitWith {};
-    _ang = _ang + 1;
-    _countX = _countX + 1;
-    if (_countX > 360) then
-        {
-        _countX = 0;
-        _dist = _dist - 500;
-        };
-};
-
-// selecting Aircraft
-private _heliPool = (_faction get "vehiclesHelisLight") + (_faction get "vehiclesHelisTransport") + (_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack");
-private _typeVehH = selectRandom (_heliPool select {_x isKindOf "Helicopter"});
-if (isNil "_typeVehH") exitWith {
-    Error("No aircrafts in arrays vehiclesHelisLight, vehiclesHelisTransport or vehiclesHelisAttack. Reselecting DES mission");
-    ["DES"] remoteExec ["A3A_fnc_missionRequest",2];
-};
-private _isAttackHeli = _typeVehH in ((_faction get "vehiclesHelisAttack") + (_faction get "vehiclesHelisLightAttack"));
+// Determine the heli type
+private _light = _faction get "vehiclesHelisLight";
+private _transport = _faction get "vehiclesHelisTransport";
+private _lightAttack = _faction get "vehiclesHelisLightAttack";
+private _fullAttack = _faction get "vehiclesHelisAttack";
+private _typePool = [];
+if (_light isNotEqualTo []) then {_typePool append [_light, 1]};
+if (_transport isNotEqualTo []) then {_typePool append [_transport, 1]};
+if (_lightAttack isNotEqualTo []) then {_typePool append [_lightAttack, 2]};
+if (_fullAttack isNotEqualTo []) then {_typePool append [_fullAttack, 1]};
+private _heliType = selectRandomWeighted _typePool;
+private _typeVehH = selectRandom _heliType;
+private _isAttackHeli = _typeVehH in (_fullAttack + _lightAttack);
 
 //refining crash spawn position, to avoid exploding on spawn or "Armaing" during mission
-private _flatPos = [_posCrashOrigin, 0, 1000, 0, 0, 0.1] call BIS_fnc_findSafePos;
+private _flatPos = [_posCrashOrigin, 0, 500, 0, 0, 0.1] call BIS_fnc_findSafePos;
 private _posCrash = _flatPos findEmptyPosition [0,100,_typeVehH];
 if (count _posCrash == 0) then {_posCrash = _posCrashOrigin};//if no pos use _posCrashOrigin
-if (!isMultiplayer) then {{ _x hideObject true } foreach (nearestTerrainObjects [_posCrash,["tree","bush", "ROCKS"],50])} else {{[_x,true] remoteExec ["hideObjectGlobal",2]} foreach (nearestTerrainObjects [_posCrash,["tree","bush", "ROCKS"],50])};//clears area of trees and bushes
+{[_x,true] remoteExec ["hideObjectGlobal",2]} foreach (nearestTerrainObjects [_posCrash,["tree","bush", "ROCKS"],50]);//clears area of trees and bushes
 Debug_2("Crash Location: %1, Aircraft: %2", _posCrash, _typeVehH);
 
 //creating array for cleanup
@@ -61,9 +50,14 @@ private _groups = [];
 
 //creating crashed helicopter
 private _crater = "CraterLong" createVehicle _posCrash;
-private _heli = createVehicle [_typeVehH, [_posCrash select 0, _posCrash select 1, 0.9], [], 0, "CAN_COLLIDE"];
+private _heli = objNull;
+isNil {
+    _heli = createVehicle [_typeVehH, [_posCrash select 0, _posCrash select 1, 1.2], [], 0, "CAN_COLLIDE"];
+    _heli setDamage 0.8;
+    _heli allowDamage false;
+    _heli spawn { sleep 5; _this allowDamage true };
+};
 private _smoke = "test_EmptyObjectForSmoke" createVehicle _posCrash; _smoke attachTo [_heli,[0,1.5,-1]];
-_heli setDamage 0.8;
 _vehicles append [_heli,_crater];
 
 //creating cover
@@ -86,10 +80,12 @@ while {_counter != _counterLimit} do {
 //creating ammobox if not armed
 _ammoBox = objNull;
 if (!_isAttackHeli) then {
-    _ammoBox = [_faction get "ammobox", _posCrash, 10, 5, true] call A3A_fnc_safeVehicleSpawn; // Allegedly there's alternative syntax that allows you to check which classnames can be slingloaded
+    private _posBox = [_posCrash, 6, 12, 1.5, 20] call A3A_fnc_findEmptyPos;
+    if (_posBox isEqualTo []) then { _posBox = _posCrash getPos [8 + random 4, random 360] };
+    _ammoBox = createVehicle [_faction get "ammobox", _posBox, [], 0, "CAN_COLLIDE"];
     // For that alternative syntax, no results are accurate for the ammoboxes we use so I'm spawning it to test it
     if !(_heli canSlingLoad _ammoBox) exitWith {
-    	deleteVehicle _ammoBox;
+        deleteVehicle _ammoBox;
     };
     // Otherwise when destroyed, ammoboxes sink 100m underground and are never cleared up
     _ammoBox addEventHandler ["Killed", { [_this#0] spawn { sleep 10; deleteVehicle (_this#0) } }];
@@ -376,18 +372,21 @@ if ((not alive _heli) || (_heli distance (getMarkerPos respawnTeamPlayer) < 100)
     if (alive _heli) then {
         Debug_1("%1 was captured", _heli);
     } else {
-        Debug_1("%1 was captured", _heli);
+        Debug_1("%1 was destroyed", _heli);
     };
     [_taskId, "DES", "SUCCEEDED"] call A3A_fnc_taskSetState;
     [0,300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
     [600*_bonus, _sideX] remoteExec ["A3A_fnc_timingCA",2];
-    {if (_x distance _heli < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-    [10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+    if (isPlayer driver _heli) then {
+        [30*_bonus, group driver _heli] call A3A_tasks_fnc_rewardPlayers;     // any players in heli group
+    } else {
+        [30*_bonus, false, _heli, 500] call A3A_tasks_fnc_rewardPlayers;     // players within 500m of wreck
+    };
 } else {
     Debug_2("%1 was successfully recovered by %2, mission failed", _heli, _sideX);
     [_taskId, "DES", "FAILED"] call A3A_fnc_taskSetState;
     [-200, _sideX] remoteExec ["A3A_fnc_timingCA",2];
-    [-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+    [-10,theBoss] call A3A_fnc_playerScoreAdd;
     if (_isAttackHeli) then {[-200, _sideX] remoteExec ["A3A_fnc_timingCA",2]};
 };
 Info("Downed Heli mission completed");

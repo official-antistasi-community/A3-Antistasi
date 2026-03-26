@@ -7,7 +7,9 @@ class chernarus {
 		{3029.11,2350.27,0.229149},{4547.68,3132.05,0.693176},{3715.81,5984.25,0},{6563.68,3405.56,0.0547333},{5264.35,5314.45,-0.00253296},{6443.78,6545.48,0.0928955},{4967.81,9966.56,0},{8127.52,9151.57,0},{13477.6,3345.84,0.0730896},{13010.1,5964.96,-0.0163116},{12937,12763.6,0.164017},{11241.9,4261.85,-0.0175781}
 	};
 	antennasBlacklistIndex[] = {0,4,8,9};
-	banks[] = {}; //no suitable building available
+	banks[] = {
+		{12030,9159.61,0},{10419.9,2364.61,0},{6537.72,2300.6,0},{2584.86,5069.88,0},{3064.77,7972.52,0},{3812.08,8946.91,0},{10642.2,8015.63,0}
+	}; 
 	garrison[] = {
 		{},{"outpost_21","control_30","resource_5"},{},{"control_30"}
 	};
@@ -22,6 +24,25 @@ class chernarus {
 		{"Land_fort_artillery_nest_EP1", 200}, {"Land_fort_rampart_EP1", 50}, {"Fort_Barricade", 50}, {"Fence", 20}, {"FenceWood", 10}, {"FenceWoodPalet", 10}, 
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
+	};
+	policeStationTypes[] = {
+// Use different houses if CUP interiors is loaded
+#if __has_include("\z\LSR\addons\patch_contact_in_cup_c\config.bin")
+		"Land_HouseV_2L", "Land_HouseV2_02", "Land_HouseV2_03B", "Land_HouseV2_04_interier", "Land_houseV_2T1", "Land_houseV_2T2", "Land_HouseV2_01A", "Land_HouseV2_01B",
+		"Land_HouseV_2I", "Land_HouseV_3I4"," Land_HouseV_1T", "Land_HouseV_1I2", "Land_HouseV_3I2", "Land_HouseV_1L1", "Land_HouseV_1L2", "Land_A_Pub_01"
+#else
+		"Land_HouseV2_04_interier", "Land_HouseV2_02_Interier", "Land_A_Pub_01",
+		"Land_a_stationhouse", "Land_HouseV_1I4", "Land_Mil_Guardhouse"
+#endif
+	};
+	requiredMods = "CUP Terrains - Core and CUP Terrains - Maps";
+	size = 15.4;
+	cityCount = 46;
+	airbaseCount = 3;
+	class MapParams {
+		distanceSPWN = 800;
 	};
 };

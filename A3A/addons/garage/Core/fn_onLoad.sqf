@@ -75,28 +75,19 @@ _disp displayAddEventHandler ["MouseButtonUp", "if ((_this#1) isEqualTo 1) then 
 _disp displayAddEventHandler ["MouseMoving", "if (HR_GRG_RMouseBtnDown) then {_this call HR_GRG_fnc_updateCamPos};"];
 _disp displayAddEventHandler ["MouseZChanged","if !(HR_GRG_RMouseBtnDown) exitWith {}; HR_GRG_camDist = 0.9 max (HR_GRG_camDist - (_this#1)*0.1) min 2; [nil,0,0] call HR_GRG_fnc_updateCamPos; HR_GRG_previewLight setLightBrightness 1.1 * HR_GRG_camDist;"];
 
-//add veh pool modified EH
-"HR_GRG_Event" addPublicVariableEventHandler {
-    if (isNil "HR_GRG_Vehicles") exitWith {};
-    (_this#1) call HR_GRG_fnc_reciveBroadcast;
-};
-"HR_GRG_Vehicles" addPublicVariableEventHandler {
-    private _disp = findDisplay HR_GRG_IDD_Garage;
-    private _index = HR_GRG_Cats findIf {ctrlShown _x};
-    private _ctrl = HR_GRG_Cats#_index;
-    [_ctrl, _index] call HR_GRG_fnc_reloadCategory;
-};
+
 //add player to broadcast recipient list
 [clientOwner] remoteExecCall ["HR_GRG_fnc_addUser", 2]; //add to recipient
 waitUntil {!isNil "HR_GRG_Vehicles"};//wait for server response
 
 //define list of controls coresponding with list index
-HR_GRG_Cats = [HR_GRG_IDC_CatUndercoverCar,HR_GRG_IDC_CatCar,HR_GRG_IDC_CatAPC,HR_GRG_IDC_CatArmored,HR_GRG_IDC_CatAA,HR_GRG_IDC_CatArty,HR_GRG_IDC_CatHeli, HR_GRG_IDC_CatPlane,HR_GRG_IDC_CatBoat,HR_GRG_IDC_CatSource,HR_GRG_IDC_CatStatic] apply {_disp displayCtrl _x}; //,HR_GRG_IDC_CatUnmanned,HR_GRG_IDC_CatVTOL
+HR_GRG_Cats = HR_GRG_CATIDCS apply {_disp displayCtrl _x}; //,HR_GRG_IDC_CatUnmanned,HR_GRG_IDC_CatVTOL
 {
     _x ctrlShow false;
     _x ctrlEnable false;
 } forEach HR_GRG_Cats;
-[0] call HR_GRG_fnc_switchCategory;
+private _defaultCat = [0, HR_GRG_HELIPADACCESSIBLE#0] select (HR_GRG_accessLimit == "helipad");
+[_defaultCat] call HR_GRG_fnc_switchCategory;
 
 //sell button init
 
@@ -104,15 +95,17 @@ if (HR_GRG_disableSellButton) then {
     _disp displayCtrl HR_GRG_IDC_SellVeh ctrlEnable false;
 };
 
-//extras list init
-if (
-    !HR_GRG_Pylons_Enabled //Pylon editing disabled
-    || {!HR_GRG_hasAmmoSource} //or ammo source not registered
-) then {
+private _pylonsDisabled = switch (true) do {
+    case HR_GRG_useNewPylonSys: {"newSys"};
+    case !HR_GRG_Pylons_Enabled: {"setting"};
+    case !HR_GRG_hasAmmoSource: {"noAmmo"};
+    default {""};
+};
+if (_pylonsDisabled isNotEqualTo "") then {
     private _pylonBttn = _disp displayCtrl HR_GRG_IDC_BttnPylons;
     _pylonBttn ctrlEnable false;
     _pylonBttn ctrlSetTextColor [0.7,0,0,1];
-    _pylonBttn ctrlSetTooltip localize "STR_HR_GRG_Generic_PylonDisabled";
+    _pylonBttn ctrlSetTooltip localize format ["STR_HR_GRG_Generic_PylonDisabled_%1", _pylonsDisabled];
 };
 [false] call HR_GRG_fnc_reloadExtras;
 

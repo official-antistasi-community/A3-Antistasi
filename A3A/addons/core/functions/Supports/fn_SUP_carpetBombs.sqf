@@ -28,7 +28,7 @@ private _dir = (_targPos getDir markerPos _airport) + random 10;
 private _offset = 25 + (random 20);
 private _planeType = selectRandom (Faction(_side) get "vehiclesPlanesCAS");
 private _aggroValue = if(_side == Occupants) then {aggressionOccupants} else {aggressionInvaders};
-if (_delay < 0) then { _delay = (0.5 + random 1) * (350 - 15*tierWar - 1*_aggroValue) };
+if (_delay < 0) then { _delay = (0.5 + random 1) * (300 - 10*tierWar - 1*_aggroValue) };
 
 // ["_side", "_basetype", "_target", "_endtime", "_duration", "_power"]
 A3A_supportStrikes pushBack [_side, "AREA", _targPos, time + 1200, 1200, 300];

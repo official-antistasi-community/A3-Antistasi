@@ -45,12 +45,14 @@ switch (_mode) do
         _backButton ctrlShow true;
 
         // Display remaining air support points
-        private _airSupportPoints = bombRuns;
+        private _airSupportPoints = floor bombRuns;
+        private _strikeCap = (4 + tierWar*2);
+        private _airStrikeCapInfo = format ["%1/%2",str _airSupportPoints,str _strikeCap];
         private _airSupportPointsText = _display displayCtrl A3A_IDC_AIRSUPPORTPOINTSTEXT;
-        _airSupportPointsText ctrlSetText str _airSupportPoints;
+        _airSupportPointsText ctrlSetText _airStrikeCapInfo;
 
         // Display name of aircraft used
-        private _aircraftName = getText (configFile >> "CfgVehicles" >> vehSDKPlane >> "displayName");
+        private _aircraftName = getText (configFile >> "CfgVehicles" >> ((FactionGet(reb,"vehiclesPlane")) # 0) >> "displayName");
         private _airSupportAircraftText = _display displayCtrl A3A_IDC_AIRSUPPORTAIRCRAFTTEXT;
         _airSupportAircraftText ctrlSetText _aircraftName;
 
@@ -61,27 +63,38 @@ switch (_mode) do
         private _carpetButton = _display displayCtrl A3A_IDC_AIRSUPPORTCARPETBUTTON;
         private _napalmIcon = _display displayCtrl A3A_IDC_AIRSUPPORTNAPALMICON;
         private _napalmButton = _display displayCtrl A3A_IDC_AIRSUPPORTNAPALMBUTTON;
+        _heButton ctrlSetStructuredText parseText localize "STR_antistasi_dialogs_main_air_support_he_bombs";
+        _carpetButton ctrlSetStructuredText parseText localize "STR_antistasi_dialogs_main_air_support_carpet_bombing";
+        _napalmButton ctrlSetStructuredText parseText localize "STR_antistasi_dialogs_main_air_support_napalm";
 
-        // Check if there are enough air support points
-        if (_airSupportPoints < 1) then
+        private _bombRunCosts = createHashMapFromArray [
+            ["HE",1],
+            ["CARPET",1],
+            ["NAPALM",3]
+        ];
+        private _hasNoAirport = ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0);
+        private _colorDisabled = ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
         {
-            Trace("No air support points, disabling buttons");
-            _heIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            _heIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-            _heButton ctrlEnable false;
-            _heButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-            _carpetIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            _carpetIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-            _carpetButton ctrlEnable false;
-            _carpetButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-            _napalmIcon ctrlSetTextColor ([A3A_COLOR_BUTTON_BACKGROUND_DISABLED] call FUNC(configColorToArray));
-            _napalmIcon ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-            _napalmButton ctrlEnable false;
-            _napalmButton ctrlSetTooltip localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
-        };
-
-        // TODO UI-update: Check for controlled airbases
-        // {sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0
+            _x params ["_type","_button","_icon"];
+            private _cost = _bombRunCosts get _type;
+            private _cannotAfford = (_cost > _airSupportPoints);
+            if (_cannotAfford || _hasNoAirport) then
+            {
+                private _failMessage = "";
+                if (_cannotAfford) then
+                {
+                    Trace_1("No air support points, disabling button %1",_type);
+                    _failMessage = localize "STR_antistasi_dialogs_main_air_support_no_points_tooltip";
+                } else {
+                    Trace_1("No airports, disabling button %1",_type);
+                    _failMessage = localize "STR_antistasi_dialogs_main_air_support_no_base_tooltip";
+                };
+                _icon ctrlSetTextColor _colorDisabled;
+                _icon ctrlSetTooltip _failMessage;
+                _button ctrlEnable false;
+                _button ctrlSetTooltip _failMessage;
+            };
+        } forEach [["HE",_heButton,_heIcon],["CARPET",_carpetButton,_carpetIcon],["NAPALM",_napalmButton,_napalmIcon]];
     };
 
     default

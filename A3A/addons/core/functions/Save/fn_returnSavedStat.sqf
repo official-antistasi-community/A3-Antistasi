@@ -2,7 +2,10 @@
 FIX_LINE_NUMBERS()
 
 params ["_varname"];
-A3A_saveTarget params ["_serverID", "_campaignID", "_map"];
+A3A_saveTarget params ["_serverID", "_campaignID", "_map", "_jsonData"];
+
+// If we have JSON data then just return that
+if (_jsonData isEqualType createHashMap) exitWith { _jsonData get _varName };
 
 // Simple version for new missionProfileNamespace saves
 if (_serverID isEqualType false) exitWith {

@@ -41,6 +41,12 @@ class A3A {
         class CAPPlane
         {
             class baseCAP;
+            class SPE_P47 : baseCAP {
+                loadout[] = {"SPE_425rnd_M2_P47","SPE_425rnd_M2_P47","SPE_425rnd_M2_P47","SPE_425rnd_M2_P47","SPE_425rnd_M2_P47","SPE_425rnd_M2_P47","SPE_425rnd_M2_P47","SPE_425rnd_M2_P47","","","","",""};
+            };
+            class SPE_FW190F8 : baseCAP {
+                loadout[] = {"SPE_250Rnd_MG151","SPE_250Rnd_MG151","SPE_400Rnd_MG131","SPE_400Rnd_MG131","","","","",""};
+            };
         };
     };
 };

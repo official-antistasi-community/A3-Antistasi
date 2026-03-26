@@ -49,13 +49,32 @@ _eh2 = _unit addEventHandler ["HandleDamage",
 	nil;
 	}];
 selectPlayer _unit;
+_owner disableAI "ALL";
 
 _timeX = 60;
 
 _unit addAction [localize "STR_A3A_fn_reinf_controlunit_return",{selectPlayer leader (group (_this select 0))}];
 
+// must not be in danger and player must not be in danger
+private _fnc_fastTravel = {
+	private _targUnit = player getVariable "owner";
+	private _travelUnit = player;
+	private _titleStr = localize "STR_A3A_fn_reinf_controlunit_title";
+	if ([getPosATL _travelUnit] call A3A_fnc_enemyNearCheck) exitWith { [_titleStr, localize "STR_A3A_fn_reinf_controlunit_ft_enemynear"] call A3A_fnc_customHint };
+	if ([getPosATL _targUnit] call A3A_fnc_enemyNearCheck) exitWith { [_titleStr, localize "STR_A3A_fn_reinf_controlunit_ft_enemynear2"] call A3A_fnc_customHint };
+
+	selectPlayer _targUnit;
+	[player, [_travelUnit], getPosATL _targUnit] call A3A_fnc_calculateFastTravelCost params ["_cost", "_travTime"];
+	[_titleStr, format [localize "STR_A3A_fn_reinf_controlunit_ft_traveltime", name _travelUnit, _travTime]] call A3A_fnc_customHint;
+	sleep _travTime;
+	_travelUnit setPosATL (_targUnit getPos [3, random 360]);
+};
+
+_unit addAction [localize "STR_A3A_fn_reinf_controlunit_fasttravel", _fnc_fastTravel];
+
 waitUntil {sleep 1; [_titleStr, format [localize "STR_A3A_fn_reinf_controlunit_return_time", _timeX]] call A3A_fnc_customHint; _timeX = _timeX - 1; (_timeX == -1) or (isPlayer (leader group player))};
 
+_owner enableAI "ALL";
 removeAllActions _unit;
 selectPlayer (_unit getVariable ["owner",_unit]);
 //_unit setVariable ["owner",nil,true];

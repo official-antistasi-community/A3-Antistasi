@@ -57,7 +57,7 @@ if (time >= _bleedOutTime) exitWith
 if (alive _unit) then
 {
 	_unit setUnconscious false;
-	_unit playMoveNow "unconsciousoutprone";
+	//_unit playMoveNow "unconsciousoutprone";
 	_unit setVariable ["A3A_downedBy", nil];
 
 	if (_unit getVariable ["surrendering", false]) exitWith {

@@ -40,9 +40,7 @@ _object addAction [
     true,
     true,
     "",
-    "(
-        (attachedTo _originalTarget isEqualTo objNull)
-    )",
+    "isNull attachedTo _originalTarget",
     3
 ];
 
@@ -56,9 +54,7 @@ _object addAction [
     true,
     true,
     "",
-    "(
-        (attachedTo _originalTarget isEqualTo objNull)
-    )",
+    "isNull attachedTo _originalTarget",
     3
 ];
 

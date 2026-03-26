@@ -17,7 +17,8 @@ class CfgFunctions
             class getLockCount {};
             class onLoad {};
             class onUnload {};
-            class reciveBroadcast {};
+            class receiveBroadcast {};
+            class receiveVehicles {};
             class releaseAllVehicles {};
             class reloadCategory {};
             class reloadPreview {};
@@ -63,11 +64,14 @@ class CfgFunctions
         class StatePreservation
         {
             file = QPATHTOFOLDER(StatePreservation);
+            class getAmmoCargo {};
             class getAmmoData {};
             class getDamage {};
+            class getDefaultMags {};
             class getFuel {};
             class getState {};
             class prepPylons {};
+            class setAmmoCargo {};
             class setAmmoData {};
             class setDamage {};
             class setFuel {};
@@ -80,7 +84,7 @@ class CfgFunctions
             class broadcastStateUpdate {};
             class getTotalFuelCargo {};
             class prefix {};
-            class reciveStateUpdate {};
+            class receiveStateUpdate {};
             class refuelVehicleFromSources {};
         };
 
