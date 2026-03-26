@@ -17,5 +17,5 @@ params ["_target", "_side", "_maxSpend", "_availTypes"];
 
 if (_target isKindOf "Air") exitWith { 0 };     // UAV can kinda hit air, but lets not
 
-if (tierWar < 3) exitWith { 0 };
+if (tierWar < 5) exitWith { 0 }; //or 4
 -0.025 * tierWar + 0.75; // 60% at tier 6 to 50% at tier 10

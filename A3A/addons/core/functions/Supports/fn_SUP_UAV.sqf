@@ -42,4 +42,4 @@ A3A_activeSupports pushBack _suppData;
 
 [_reveal, _side, "UAV", _targPos, _delay] spawn A3A_fnc_showInterceptedSetupCall;
 
-(A3A_vehicleResourceCosts get _planeType) + 100;
+(A3A_vehicleResourceCosts get _planeType); //no additional cost for non combat support

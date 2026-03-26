@@ -49,7 +49,7 @@ private _initData = [
     ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""],
     ["SEAD",          "TARGET", 0.5, 0.5,   0, 100,  "", "vehiclesPlanesAA"],
     ["UAVAttack",           "TARGET", 0.3, 0.2,   0, 80,  "u", "uavsAttack"],
-    ["UAV",             "AREA", 0.0, 0.0,   0,   0,  "", "uavsAttack"]                    // Not used for support calls 
+    ["UAV",             "AREA", 0.0, 0.0,   0,   0,  "", "uavsAttack"]                    // Not used for support calls //it could be though, to help ai spot rebel players
 //    ["GUNSHIP",    ["AREA",   0.2,  50,   0]],                 // uh. Does AREA work for this? Only lasts 5 minutes so maybe...
 ];
 

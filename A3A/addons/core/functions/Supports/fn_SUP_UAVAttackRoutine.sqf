@@ -46,7 +46,7 @@ _groupVeh setCurrentWaypoint _wp;
 _uav flyInHeight 350;           // maybe not necessary if we lock the waypoint
 _groupVeh lockWP true;          // prevent exiting the SAD waypoint
 
-private _timeout = time + 900;
+private _timeout = time + 300;
 private _enemySide = [Occupants, Invaders] select (_side == Invaders);
 _uav addEventHandler
 [
