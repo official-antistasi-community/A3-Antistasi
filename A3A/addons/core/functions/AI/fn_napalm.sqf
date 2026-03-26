@@ -4,6 +4,7 @@ Author: Caleb Serafin
 
 Arguments:
     <POS3|POS2> AGL centre of effect.
+    <SIDE> Side that deals the napalm damage
     <STRING> CancellationTokenUUID. Provisioning for implementation of cancellationTokens (Default = "");
 
 Return Value:
@@ -36,6 +37,7 @@ Example:
 */
 params [
     ["_pos",[],[ [] ], [2,3]],
+    ["_side",sideUnknown,[sideUnknown]],
     ["_cancellationTokenUUID","",[ "" ]]
 ];
 if (!isServer) exitWith {false};
@@ -101,7 +103,7 @@ while {_endTime > serverTime && !([_cancellationTokenUUID] call _fnc_cancelReque
     {
         private _owner = owner _x;
         if (_owner isEqualTo 0) then { _owner = 2; };
-        [_x, true,_cancellationTokenUUID] remoteExecCall ["A3A_fnc_napalmDamage",_owner];
+        [_x, true, _side,_cancellationTokenUUID] remoteExecCall ["A3A_fnc_napalmDamage",_owner];
     } forEach _victims;
 
     uiSleep 5;

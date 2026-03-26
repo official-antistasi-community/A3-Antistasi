@@ -51,9 +51,14 @@
     ["gm_ge_army_leopard1a3a1_wiw", ["cost", 170], ["threat", 230]],
     ["gm_ge_army_leopard1a3a1_win", ["cost", 170], ["threat", 230]],
     ["gm_ge_army_leopard1a3a1_un", ["cost", 170], ["threat", 230]],
+    ["gm_ge_army_Leopard1a4", ["cost", 170], ["threat", 230]],
+    ["gm_ge_army_leopard1a4_win", ["cost", 170], ["threat", 230]],
+    ["gm_ge_army_leopard1a4_un", ["cost", 170], ["threat", 230]],
     ["gm_ge_army_Leopard1a5", ["cost", 170], ["threat", 230]],
     ["gm_ge_army_leopard1a5_wiw", ["cost", 170], ["threat", 230]],
     ["gm_ge_army_leopard1a5_win", ["cost", 170], ["threat", 230]],
-    ["gm_ge_army_leopard1a5_un", ["cost", 170], ["threat", 230]]
-
+    ["gm_ge_army_leopard1a5_un", ["cost", 170], ["threat", 230]],
+    ["gm_dk_army_leopard1a5dk1_dozer", ["cost", 170], ["threat", 230]],
+    ["gm_dk_army_leopard1a5dk1_dozer_wiw", ["cost", 170], ["threat", 230]],
+    ["gm_dk_army_leopard1a5dk1_dozer_win", ["cost", 170], ["threat", 230]]
 ]] call _fnc_saveToTemplate;

@@ -61,17 +61,15 @@ if (spawner getVariable _markerX != 2) then
 	if (not alive _veh || {sidesX getVariable [_markerX,sideUnknown] == teamPlayer}) then
 		{
 		[_taskId, "REP", "SUCCEEDED"] call A3A_fnc_taskSetState;
-        [Occupants, 15, 90] remoteExec ["A3A_fnc_addAggression", 2];
-        [Invaders, 5, 60] remoteExec ["A3A_fnc_addAggression", 2];
+		[Occupants, 15, 90] remoteExec ["A3A_fnc_addAggression", 2];
+		[Invaders, 5, 60] remoteExec ["A3A_fnc_addAggression", 2];
 		[500, Occupants] remoteExec ["A3A_fnc_timingCA",2];
-		{if (_x distance _veh < 500) then {[10,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-		[10,theBoss] call A3A_fnc_playerScoreAdd;
+		[20*_bonus, false, _veh, 500] call A3A_tasks_fnc_rewardPlayers;     // any players within 500m
 		};
 	};
 if (dateToNumber date > _dateLimitNum) then
 	{
 	[_taskId, "REP", "FAILED"] call A3A_fnc_taskSetState;
-	//[5,0,_positionX] remoteExec ["A3A_fnc_citySupportChange",2];
 	[-200, Occupants] remoteExec ["A3A_fnc_timingCA",2];
 	[-10,theBoss] call A3A_fnc_playerScoreAdd;
 	[_antennaDead] remoteExec ["A3A_fnc_rebuildRadioTower", 2];

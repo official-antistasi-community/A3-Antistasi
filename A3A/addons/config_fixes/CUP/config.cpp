@@ -21,5 +21,6 @@ class CfgPatches
 
 // Uncomment when needed
 //#include "CfgMagazines.hpp"
+#include "CfgAmmo.hpp"
 #include "CfgVehicles.hpp"
-//#include "CfgWeapons.hpp"
+#include "CfgWeapons.hpp"

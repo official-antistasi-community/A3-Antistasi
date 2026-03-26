@@ -15,7 +15,7 @@ private _vehiclesLightArmed = ["I_G_Offroad_01_armed_F"];
 private _vehiclesAT = ["I_G_Offroad_01_AT_F"];
 private _vehicleAA = [];
 
-["vehiclesBoat", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesBoat", ["I_C_Boat_Transport_01_F","I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlane", ["I_C_Plane_Civil_01_F"]] call _fnc_saveToTemplate;
 
@@ -91,9 +91,9 @@ private _initialRebelEquipment = [
 "acc_flashlight","acc_flashlight_smg_01","acc_flashlight_pistol"];
 
 if ("expansion" in A3A_enabledDLC) then {
-    _initialRebelEquipment append [["launch_RPG7_F", 15], ["RPG7_F", 45], "SMG_05_F", "hgun_Pistol_01_F", "10Rnd_9x21_Mag"];
+    _initialRebelEquipment append [["launch_RPG7_F", 10], ["RPG7_F", 25], "SMG_05_F", "hgun_Pistol_01_F", "10Rnd_9x21_Mag"];
 } else {
-    _initialRebelEquipment append [["launch_RPG32_F", 15], ["RPG32_F", 30]];
+    _initialRebelEquipment append [["launch_RPG32_F", 5], ["RPG32_F", 15]];
 };
 if ("rf" in A3A_enabledDLC) then {
     _initialRebelEquipment append ["srifle_h6_tan_rf","10Rnd_556x45_AP_Stanag_red_Tan_RF","10Rnd_556x45_AP_Stanag_Tan_RF","10Rnd_556x45_AP_Stanag_green_Tan_RF"];

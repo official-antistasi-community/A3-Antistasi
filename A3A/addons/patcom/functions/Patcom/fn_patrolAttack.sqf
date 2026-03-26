@@ -5,13 +5,8 @@
 
     Arguments:
         <Group> Group you want to run an attack.
-        <Array> List of KnownEnemies.
-        <Number> Minimum Radius from Center to Patrol.
-        <Number> Maximum Radius from Center to Patrol.
-        <Number> Distance from nearest object to create waypoint.
-        <Number> 0 - No Water, 1 - land & water, 2 - water only
-        <Number> Max Gradient to create waypoint on. Used to avoid super hilly maps.
-        <Number> Should be on the shore or not.
+        <Number> Maximum search radius
+        <Array> ATL position of target enemy position.
 
     Return Value:
         N/A
@@ -29,21 +24,9 @@
 FIX_LINE_NUMBERS()
 params [
     "_group", 
-    "_knownEnemies",
-    ["_minimumRadius", 25], 
-    ["_maximumRadius", 50], 
-    ["_objectDistance", 2], 
-    ["_waterMode", 0], 
-    ["_maxGradient", -1], 
-    ["_shoreMode", 0]
+    "_maximumRadius",
+    "_targetPos"
 ];
-
-if (count _knownEnemies < 1) exitWith {
-    ServerDebug_1("PATCOM | patrolAttack | Previous orders on Group: %1", _group);
-    private _previousOrders = _group getVariable "PATCOM_Previous_Orders";
-    _group setVariable ["PATCOM_Current_Orders", _previousOrders];
-    _group setVariable ["PATCOM_Group_State", "CALM"];
-};
 
 [_group, "COMBAT", "FULL", "COLUMN", "RED", "AUTO"] call A3A_fnc_patrolSetCombatModes;
 
@@ -60,12 +43,27 @@ if (PATCOM_AI_STATICS) then {
 private _waypointName = "PATCOM_PATROL_ATTACK";
 
 if ((waypointType [_group, currentWaypoint _group] != "SAD") || ((waypointName [_group, currentWaypoint _group]) != _waypointName)) then {
-    // Select random group in the array to attack.
-    private _targetGroup = selectRandom _knownEnemies;
-
+    
     // Instead of taking the Perceived Position and creating a waypoint from there. We opt to get our own waypoint so we can add some variation.
     // Center Position | Min Radius | Max Radius | Min Object Distance | Water Mode | Max Gradient | ShoreMode
-    private _nextWaypointPos = [getPosATL (leader _targetGroup), _minimumRadius, _maximumRadius, _objectDistance, _waterMode, _maxGradient, _shoreMode] call A3A_fnc_getSafePos;
+    private _nextWaypointPos = [_targetPos, 0, _maximumRadius, 2, 0, -1, 0] call A3A_fnc_getSafePos;
     
     [_group, _nextWaypointPos, "SAD", _waypointName, -1, 50] call A3A_fnc_patrolCreateWaypoint;
+};
+
+// Revert to previous order if we're close to the target zone and without enemies
+private _wpPos = waypointPosition [_group, currentWaypoint _group];
+Trace_2("Group %1 distance to waypoint %2", _group, leader _group distance2d _wpPos);
+
+if (leader _group distance2d _wpPos < 50) then {
+    private _knownEnemies = _group targets [true, PATCOM_VISUAL_RANGE, [], PATCOM_TARGET_TIME];
+    if (_knownEnemies isNotEqualTo []) exitWith {};
+
+    // If we didn't have previous orders then just throw some safe garbage in
+    private _previousOrders = _group getVariable "PATCOM_Previous_Orders";
+    if (isNil "_previousOrders") then { 
+        _previousOrders = ["Patrol_Area", 0, 100, -1, false, _group getVariable "PATCOM_Patrol_Home", false];
+    };
+    _group setVariable ["PATCOM_Patrol_Params", _previousOrders];
+    _group setVariable ["PATCOM_Group_State", "CALM"];
 };

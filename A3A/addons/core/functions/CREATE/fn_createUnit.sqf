@@ -39,7 +39,13 @@ private _unit = if (_unitDefinition isEqualTo []) then {
 } else {
     _unitDefinition params ["_loadouts", "_traits", "_unitClass"];
     private _u = _group createUnit [_unitClass, _position, _markers, _placement, _special];
-    _u setUnitLoadout selectRandom _loadouts;
+
+    // shuffle select, uses each entry once until empty, then refills
+    private _buffer = A3A_loadoutShuffleBuffers getOrDefault [_type, [], true];
+    if (_buffer isEqualTo []) then { _buffer append _loadouts };
+	private _loadout = _buffer deleteAt floor random count _buffer;
+
+    _u setUnitLoadout _loadout;
     { _u setUnitTrait _x } forEach _traits;
     _u;
 };

@@ -2,6 +2,7 @@
 FIX_LINE_NUMBERS()
 private ["_morty0","_mortarX","_pos","_typeX","_b0","_b1","_morty1"];
 
+private _savedMags = -1;
 _groupX = _this select 0;
 _morty0 = units _groupX select 0;
 _morty1 = units _groupX select 1;
@@ -16,6 +17,12 @@ while {(alive _morty0) and (alive _morty1)} do
 	_mortarX = _typeX createVehicle _pos;
 	removeBackpackGlobal _morty0;
 	removeBackpackGlobal _morty1;
+
+	if (_savedMags isNotEqualTo -1) then {
+		[_mortarX, _savedMags] call HR_GRG_fnc_setAmmoData;
+	} else {
+		[_mortarX] call A3A_fnc_clampVehicleAmmo;
+	};
 
 // Removed as workaround for probable Arma AI bug with Podnos mortar + long distance (~200m) moves
 // After a long move, non-gunner will attempt to move into the second mortar seat unless this is removed
@@ -36,6 +43,7 @@ while {(alive _morty0) and (alive _morty1)} do
 		};
 		unassignVehicle _morty1;
 		moveOut _morty1;
+		_savedMags = [_mortarX] call HR_GRG_fnc_getAmmoData;
 		deleteVehicle _mortarX;
 		};
 	};

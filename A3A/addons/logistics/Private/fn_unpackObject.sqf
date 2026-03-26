@@ -15,23 +15,31 @@ Example:
 #include "..\script_component.hpp"
 
 params  [
-    ["_object", objNull, [objNull]]
+    ["_package", objNull, [objNull]]
 ];
 
 // don't unpack if attached.
-if !(isNull attachedTo _object) exitWith {};
+if !(isNull attachedTo _package) exitWith {};
 
 //get data 
-private _itemClassName = _object getVariable "A3A_packedObject";
-if (isNil "_itemClassName") exitwith { Error_1("No packed object for item type %1", typeof _object) };
+private _object = _package getVariable "A3A_packedObject";
+if (isNil "_object") exitwith { Error_1("No packed object for item type %1", typeof _package) };
 
 private _fnc_placed = {
-    params ["_item", "_oldItem"];
-    if (isNull _item) exitWith { _oldItem hideObject false };          // placement cancelled
- 
-    deleteVehicle _oldItem;
-    _item call A3A_fnc_initObject;
+    params ["_placedItem", "_package", "_object"];
+    if (isNull _placedItem) exitWith { _package hideObject false };          // placement cancelled
+
+    isNil {
+        detach _object;
+        _object setPosWorld getPosWorld _placedItem;
+        _object setVectorDirAndUp [vectorDir _placedItem, vectorUp _placedItem];
+        deleteVehicle _placedItem;
+        deleteVehicle _package;
+    };
+
+// It's already initialised
+//    _item call A3A_fnc_initObject;
 };
 
-_object hideObject true;
-[_itemClassName, _fnc_placed, {[false]}, [_object]] call HR_GRG_fnc_confirmPlacement;
+_package hideObject true;
+[typeof _object, _fnc_placed, {[false]}, [_package, _object]] call HR_GRG_fnc_confirmPlacement;

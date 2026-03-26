@@ -61,6 +61,7 @@ if (A3A_hasACE) then {
     }] call CBA_fnc_addEventHandler;
     ["ace_explosives_place", {
         params ["_explosive","_dir","_pitch","_unit"];
+        if !(local _unit) exitWith {}; // ace_explosives_place is a globally executed EH
         [_unit,"Put",_explosive] call A3A_fnc_punishment_FF_checkNearHQ;
     }] call CBA_fnc_addEventHandler;
     ["ace_throwableThrown", {

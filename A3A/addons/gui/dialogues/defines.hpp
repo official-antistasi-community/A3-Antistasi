@@ -208,6 +208,13 @@ Maintainer: DoomMetal
 #define A3A_COLOR_ELIGIBLE {0.7,0.7,0.7,1}
 #define A3A_COLOR_INELIGIBLE {0.5,0.5,0.5,1}
 
+// Membership
+#define A3A_COLOR_GUEST_SQF [0.7,0.7,0.7,1]
+#define A3A_COLOR_MEMBER_SQF [0.2,0.6,0.2,1]
+
+// Unit price
+#define A3A_COLOR_UNITPRICE {1,1,1,0.25}
+
 
 ///////////
 // FONTS //

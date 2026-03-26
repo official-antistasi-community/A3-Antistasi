@@ -1,45 +1,29 @@
-//Repairs a destroyed building.
-//Parameter can either be the ruin of a building, or the building itself buried underneath the ruins.
+// Repairs a destroyed building.
+// Currently only used by building placer, which reads the building from the ruin anyway, so it's trivial
+
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 if (!isServer) exitWith { Error("Server-only function miscalled") };
 
-params ["_target"];
+params ["_building"];
 
-private _buildingToRepair = objNull;
-private _ruins = objNull;
-
-if (_target isKindOf "Ruins") then {
-	//If it's been killed during play, it's  stored in here.
-	_buildingToRepair = _target getVariable ["building", objNull];
-	//Check if it's been made into a ruin by BIS_fnc_createRuin, rather than killed during play.
-	if (isNull _buildingToRepair) then {
-		_buildingToRepair = _target getVariable ["BIS_fnc_createRuin_object", objNull];
-	};
-	_ruins = _target;
-} else {
-	_buildingToRepair = _target;
-	//If it's been killed during play, it's  stored in here.
-	_ruins = _target getVariable ["ruins", objNull];
-	//Check if it's been made into a ruin by BIS_fnc_createRuin
-	if (isNull _ruins) then {
-		_ruins = _target getVariable ["BIS_fnc_createRuin_ruin", objNull];
-	};
+/*if !(_target isKindOf "Ruins") exitWith {
+ 	// This can't work reliably because you can't store vars on a streamed object
+	Error_1("Attempted to repair building %1 by passing the original building", _target);
+	false;
 };
 
+// Should be registered from buildingChanged EH, if it's a repairable object
+private _building = _target getVariable ["building", objNull];
+
 //Haven't located the matching building - abort!
-if (isNull _buildingToRepair || isNull _ruins) exitWith {false;};
+if (isNull _building) exitWith {
+	Error_1("Couldn't find original building at %1", getPosATL _target);
+	false;
+};
+*/
 
-_buildingToRepair setDammage 0;
-
-deleteVehicle _ruins;
-
-private _oldPos = getPos _buildingToRepair;
-_buildingToRepair setPos [_oldPos select 0, _oldPos select 1, 0];
-
-//Make sure we unhide, in case it was hidden by BIS_fnc_createRuin
-[_buildingToRepair, false] remoteExec ["hideObject", 0, _buildingToRepair];
-
-destroyedBuildings = destroyedBuildings - [_buildingToRepair];
-
+_building setDamage 0;
+//deleteVehicle _target;
+A3A_destroyedBuildings = A3A_destroyedBuildings - [_building];		// should probably check if it's in here...
 true;

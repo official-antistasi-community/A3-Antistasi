@@ -61,16 +61,7 @@ for "_i" from 1 to _vehCount do {
     if (_isTransport) then { _numTransports = _numTransports + 1 };
     _isTransport = _vehAttackCount == 0 or (_numTransports / _i) < _transportRatio;
 
-    sleep 10;
-};
-
-_vehicles spawn {
-    sleep 60;
-    // Free spawn places for any vehicles that still exist
-    private _vehicles = _this select { !isNull _x };
-    private _spawnPlaces = _vehicles apply { _x getVariable "spawnPlace" };
-    _spawnPlaces call A3A_fnc_freeSpawnPositions;
-    { _x setVariable ["spawnPlace", nil] } forEach _vehicles;
+    //sleep 10      // shouldn't be necessary now due to spawn checks
 };
 
 [_resourcesSpent, _vehicles, _crewGroups, _cargoGroups];

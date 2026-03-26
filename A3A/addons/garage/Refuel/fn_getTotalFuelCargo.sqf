@@ -19,8 +19,9 @@ License: APL-ND
 */
 private _totalFuelCargo = 0;
 {
+    private _fuelSource = _x;
     private "_vehData";
-    for "_i" from 0 to 10 do { _vehData = (HR_GRG_Vehicles#_i) get _x; if (!isNil "_vehdata") exitWith {}; }; //find vehicles in categorys, typically cat 0 "cars"
+    {_vehData = _x get _fuelSource; if (!isNil "_vehdata") exitWith {}; } forEach HR_GRG_Vehicles; //find vehicles in categorys, typically cat 0 "cars"
     private _fuelData = _vehData#4#0;
     _totalFuelCargo = _totalFuelCargo + (if (A3A_hasAce) then {
         private _aceFuelCargo = _fuelData#2;

@@ -43,7 +43,10 @@ while {count units _group > 0} do
 		private _pos = position _leader;
 		{
 			if (_x distance2d _pos < 100) then {
-				if (vehicle _x != _x) then { deleteVehicle (vehicle _x) };
+				if (vehicle _x != _x) then {
+					{ deleteVehicle _x } forEach attachedObjects vehicle _x;
+					deleteVehicle (vehicle _x);
+				};
 				deleteVehicle _x;
 			};
 		} forEach units _group;

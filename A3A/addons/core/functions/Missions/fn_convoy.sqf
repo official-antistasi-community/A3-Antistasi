@@ -3,9 +3,10 @@ FIX_LINE_NUMBERS()
 
 //Mission: Capture/destroy the convoy
 if (!isServer and hasInterface) exitWith {};
-params ["_mrkDest", "_mrkOrigin", ["_convoyType", ""], ["_resPool", "legacy"], ["_startDelay", -1]];
+params ["_mrkDest", "_mrkOrigin", ["_convoyType", ""], ["_resPool", "legacy"], ["_startDelay", -1], "_gunshopItems"];
 
 private _difficult = if (random 10 < tierWar) then {true} else {false};
+private _spawnSF = ([5, 0] select (_convoyType == "GunShop")) + random 10 < tierWar;
 private _sideX = if (sidesX getVariable [_mrkOrigin,sideUnknown] == Occupants) then {Occupants} else {Invaders};
 private _faction = Faction(_sideX);
 
@@ -19,9 +20,10 @@ private _POWS = [];
 private _reinforcementsX = [];
 
 
+
 // Setup start time
 
-if (_startDelay < 0) then { _startDelay = random 5 + ([10, 5] select _difficult) }; 		// start delay, 5-10 or 15-20 mins real time
+if (_startDelay < 0) then { _startDelay = random 5 + 5 }; 		// start delay, 5-10 mins real time
 private _startDateNum = dateToNumber date + _startDelay * timeMultiplier / (365*24*60);
 private _startDate = numberToDate [date select 0, _startDateNum];
 private _displayTime = [_startDate] call A3A_fnc_dateToTimeString;
@@ -37,7 +39,6 @@ private _convoyTypes = [];
 if ((_mrkDest in airportsX) or (_mrkDest in outposts)) then
 {
     _convoyTypes = ["Ammunition","Armor"];
-    if (_mrkDest in outposts) then {if (((count (garrison getVariable [_mrkDest, []]))/2) >= [_mrkDest] call A3A_fnc_garrisonSize) then {_convoyTypes pushBack "Reinforcements"}};
 }
 else
 {
@@ -48,7 +49,6 @@ else
     else
     {
         if ((_mrkDest in resourcesX) or (_mrkDest in factories)) then {_convoyTypes = ["Money"]} else {_convoyTypes = ["Prisoners"]};
-        if (((count (garrison getVariable [_mrkDest, []]))/2) >= [_mrkDest] call A3A_fnc_garrisonSize) then {_convoyTypes pushBack "Reinforcements"};
     };
 };
 
@@ -68,7 +68,7 @@ switch (tolower _convoyType) do
         _textX = format [localize "STR_A3A_fn_mission_conv_ammo_text",_nameOrigin,_displayTime,_nameDest];
         _taskTitle = localize "STR_A3A_fn_mission_conv_ammo_titel";
         _taskIcon = "rearm";
-        _typeVehObj = selectRandom (_faction get "vehiclesAmmoTrucks");
+        _typeVehObj = selectRandom (_faction get "vehiclesCargo");
     };
     case "armor":
     {
@@ -105,8 +105,14 @@ switch (tolower _convoyType) do
         _taskIcon = "heal";
         _typeVehObj = selectRandom (FactionGet(reb, "vehiclesCivSupply"));
     };
+    case "gunshop":
+    {
+        _textX = format [localize "STR_A3A_fn_mission_conv_gunshop_text",_nameOrigin,_displayTime,_nameDest];
+        _taskTitle = localize "STR_A3A_fn_mission_conv_gunshop_title";
+        _taskIcon = "rearm";
+        _typeVehObj = selectRandom (_faction get "vehiclesCargo");
+    };
 };
-
 
 // Find suitable nav points for origin/dest
 private _posOrigin = navGrid select ([_mrkOrigin] call A3A_fnc_getMarkerNavPoint) select 0;
@@ -126,14 +132,23 @@ private _route = [_posOrigin, _posDest] call A3A_fnc_findPath;
 _route = _route apply { _x select 0 };			// reduce to position array
 if (_route isEqualTo []) then { _route = [_posOrigin, _posDest] };
 
+
+private _startOutpost = createMarkerLocal ["start_pos_convoy", _route#0];
+_startOutpost setMarkerShapeLocal "ICON";
+_startOutpost setMarkerTypeLocal "hd_start";
+_startOutpost setMarkerColorLocal "ColorBlack";
+_startOutpost setMarkerText localize "STR_A3A_fn_mission_conv_start_location";
+
+
 private _vehPool = ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundTransport) + ([_sideX, tierWar] call A3A_fnc_getVehiclesGroundSupport);
+private _heliPool = [_sideX, tierWar, true] call A3A_fnc_getVehiclesAirSupport;
 private _pathState = [];			// Set the scope so that state is preserved between findPosOnRoute calls
 private _resourcesSpent = 0;
 
 // Spawning worker functions
 
 private _fnc_spawnConvoyVehicle = {
-    params ["_vehType", "_markName"];
+    params ["_vehType", "_markName", ["_noCargo", false]];
     ServerDebug_1("Spawning vehicle type %1", _vehType);
 
     // Find location down route
@@ -144,18 +159,30 @@ private _fnc_spawnConvoyVehicle = {
         _pathState = [_route, 10, _pathState] call A3A_fnc_findPosOnRoute;
     };
 
-    private _veh = createVehicle [_vehType, ASLtoAGL (_pathState#0) vectorAdd [0,0,0.5]];               // Give it a little air
-    private _vecUp = (_pathState#1) vectorCrossProduct [0,0,1] vectorCrossProduct (_pathState#1);       // correct pitch angle
-    _veh setVectorDirAndUp [_pathState#1, _vecUp];
-    _veh allowDamage false;
+    private _veh = objNull;
+    isNil {
+        private _vecUp = (_pathState#1) vectorCrossProduct [0,0,1] vectorCrossProduct (_pathState#1);       // correct pitch angle
+        _veh = createVehicle [_vehType, ASLtoAGL (_pathState#0) vectorAdd [0,0,0.5]];               // Give it a little air
+        _veh setVectorDirAndUp [_pathState#1, _vecUp];
+        _veh allowDamage false;
+    };
 
-    private _group = [_sideX, _veh] call A3A_fnc_createVehicleCrew;
-    { [_x, nil, nil, _resPool] call A3A_fnc_NATOinit; _x allowDamage false; _x disableAI "MINEDETECTION" } forEach (units _group);
-    _soldiers append (units _group);
+    private _crewGroup = if (_noCargo) then {
+        private _crewGroup = [_sideX, _veh, nil, false] call A3A_fnc_createVehicleCrew;
+        { [_x, nil, nil, _resPool] call A3A_fnc_NATOinit } forEach units _crewGroup;
+        [_veh, _sideX, _resPool] call A3A_fnc_AIVEHinit;
+        _soldiers append units _crewGroup;
+        _crewGroup;
+    } else {
+        private _troopType = if(_spawnSF) then {"Specops"} else {"Normal"};
+        [_veh, _troopType, _resPool, _sideX] call A3A_fnc_fillVehicleCrewCargo params ["_crewGroup", "_cargoGroup"];
+        _soldiers append (units _crewGroup + units _cargoGroup);
+        _crewGroup;
+    };
+    { _x allowDamage false; _x disableAI "MINEDETECTION" } forEach units _crewGroup;
     (driver _veh) stop true;
-    deleteWaypoint [_group, 0];													// groups often start with a bogus waypoint
+    deleteWaypoint [_crewGroup, 0];													// groups often start with a bogus waypoint
 
-    [_veh, _sideX, _resPool] call A3A_fnc_AIVEHinit;
     if (_vehType in FactionGet(all,"vehiclesArmor")) then { _veh allowCrewInImmobile true };			// move this to AIVEHinit at some point?
     _vehiclesX pushBack _veh;
     _markNames pushBack _markName;
@@ -165,12 +192,21 @@ private _fnc_spawnConvoyVehicle = {
 private _fnc_spawnEscortVehicle = {
     private _typeVehEsc = selectRandomWeighted _vehPool;
     private _veh = [_typeVehEsc, "Convoy Escort"] call _fnc_spawnConvoyVehicle;
+};
 
-    private _typeGroup = [_typeVehEsc, _sideX] call A3A_fnc_cargoSeats;
-    if (count _typeGroup == 0) exitWith {};
-    private _groupEsc = [_posSpawn, _sideX, _typeGroup] call A3A_fnc_spawnGroup;				// Unit limit?
-    {[_x, nil, nil, _resPool] call A3A_fnc_NATOinit;_x assignAsCargo _veh;_x moveInCargo _veh;} forEach units _groupEsc;
-    _soldiers append (units _groupEsc);
+private _fnc_spawnEscortHeli = {
+    private _typeVehEsc = selectRandomWeighted _heliPool;
+    private _airbase = [_sideX, _posSpawn] call A3A_fnc_availableBasesAir;
+    private _heli = [_airbase, _typeVehEsc] call A3A_fnc_spawnVehicleAtMarker;
+
+    // Legacy here so we don't need to worry about accounting
+    private _crewGroup = [_sideX, _heli] call A3A_fnc_createVehicleCrew;
+    { [_x, nil, nil, "legacy"] call A3A_fnc_NATOinit } forEach units _crewGroup;
+    [_heli, _sideX, "legacy"] call A3A_fnc_AIVEHinit;
+
+    [_heli, _vehObj, 30] spawn A3A_fnc_vehicleConvoyHeliTravel;
+    // This does its own cleanup once _vehObj is deleted/destroyed, don't add vehicles & soldiers
+    ServerInfo_1("Spawn performed: Convoy escort heli %1", _typeVehEsc);
 };
 
 
@@ -180,7 +216,8 @@ private _fnc_spawnEscortVehicle = {
 // Objective vehicle
 sleep 2;
 private _objText = if (_difficult) then {" Convoy Objective"} else {"Convoy Objective"};
-private _vehObj = [_typeVehObj, _objText] call _fnc_spawnConvoyVehicle;
+private _noCargo = tolower _convoyType in ["ammunition", "gunshop"];
+private _vehObj = [_typeVehObj, _objText, _noCargo] call _fnc_spawnConvoyVehicle;
 
 //if (_convoyType == "Armor") then {_vehObj allowCrewInImmobile true;};
 if (_convoyType == "Prisoners") then
@@ -214,15 +251,30 @@ if ((_convoyType == "Money") or (_convoyType == "Supplies")) then
 {
     _vehObj setVariable ["A3A_reported", true, true];
 };
-if (_convoyType == "Ammunition") then
+private _crate = objNull;
+if (tolower _convoyType in ["ammunition", "gunshop"]) then 
 {
-    [_vehObj] spawn A3A_fnc_fillLootCrate;
+    isNil {
+        _crate = createVehicle [_faction get "ammobox", getPosATL _vehObj vectorAdd [0,0,-200], [], 0, "CAN_COLLIDE"];
+        private _nodes = [_vehObj, _crate] call A3A_Logistics_fnc_canLoad;
+        (_nodes + [true]) call A3A_Logistics_fnc_load;
+    };
+    [_crate] call A3A_Logistics_fnc_addLoadAction;
+
+    if (_convoyType == "Ammunition") exitWith { [_crate] spawn A3A_fnc_fillLootCrate };
+    [_crate, _gunshopItems] call A3A_fnc_setCargoItems;
 };
 
 // Initial escort vehicles, 0-1 for SP, 1-2 for 10+
 private _countX = round ((A3A_balancePlayerScale min 1.5) + random 0.5 + ([-0.75, 0.25] select _difficult));
-for "_i" from 1 to _countX do
-{
+if(_convoyType == "GunShop") then {_countX = _countX + 1};
+
+// _countX = 2 => 60% chance of one heli at tierWar 6
+// _countX = 1 => 20% chance of one heli at tierWar 6
+private _heliCount = floor (random 0.5 + (_countX*3 + tierWar) / 15);
+if (_heliPool isEqualTo []) then { _heliCount = 0 };
+
+for "_i" from 1 to (_countX - _heliCount) do {
     sleep 2;
     [] call _fnc_spawnEscortVehicle;
 };
@@ -246,9 +298,15 @@ sleep 2;
 ServerInfo_2("Spawn performed: %1 ground vehicles, %2 soldiers", count _vehiclesX, count _soldiers);
 
 
-// Send the vehicles after the delay
+// 60 seconds before start time, send the helis
+private _heliDelay = [60, 0] select (_startDelay == 0);
+sleep (60 * _startDelay - _heliDelay);
+for "_i" from 1 to _heliCount do {
+    sleep 2;
+    [] call _fnc_spawnEscortHeli;
+};
 
-sleep (60*_startDelay);
+sleep _heliDelay;
 _route = _route select [_pathState#2, count _route];        // remove navpoints that we already passed while spawning
 ServerInfo("Convoy mission under way");
 
@@ -279,15 +337,14 @@ private _fnc_applyResults =
     _taskState1 = if (_success1) then { "SUCCEEDED" } else { "FAILED" };
 
     [_adjustCA, _sideX] remoteExec ["A3A_fnc_timingCA", 2];
-    [_adjustScore, theBoss] call A3A_fnc_playerScoreAdd;
     if (_adjustScore > 0) then {
-        {
-            if (isPlayer _x) then { [_adjustScore,_x] call A3A_fnc_playerScoreAdd };
-        } forEach ([500,0,_vehObj,teamPlayer] call A3A_fnc_distanceUnits);
+        private _target = [_crate, _vehObj] select isNull _crate;
+        [30*_adjustScore, true, _target] call A3A_tasks_fnc_rewardPlayers;      // all players in group nearest to target
     };
 
     [_sideX, _aggroMod, _aggroTime] remoteExec ["A3A_fnc_addAggression", 2];
 
+    // pvp code
     if !(_success1) then {
         _killZones = killZones getVariable [_mrkOrigin,[]];
         _killZones = _killZones + [_mrkDest,_mrkDest];
@@ -296,24 +353,6 @@ private _fnc_applyResults =
 
 #define CONVOY_MISSION_STATUS_ARRAY ["lost", "won"]
     ServerDebug_2("Rebels %1 a %2 convoy mission", CONVOY_MISSION_STATUS_ARRAY select _success, _type);
-};
-
-if (_convoyType == "Ammunition") then
-{
-    waitUntil {sleep 1; (time > _timeout) or (_vehObj distance _posDest < _arrivalDist) or (not alive _vehObj) or (side group driver _vehObj != _sideX)};
-    if ((_vehObj distance _posDest < _arrivalDist) or (time > _timeout)) then
-    {
-        [false, true, -200, -10, 0, 0, "ammo"] call _fnc_applyResults;
-        clearMagazineCargoGlobal _vehObj;
-        clearWeaponCargoGlobal _vehObj;
-        clearItemCargoGlobal _vehObj;
-        clearBackpackCargoGlobal _vehObj;
-    }
-    else
-    {
-        [true, false, 400*_bonus, 10*_bonus, 10, 120, "ammo"] call _fnc_applyResults;
-        [0,300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-    };
 };
 
 if (_convoyType == "Armor") then
@@ -327,7 +366,6 @@ if (_convoyType == "Armor") then
     else
     {
         [true, false, 400*_bonus, 10*_bonus, 10, 120, "armor"] call _fnc_applyResults;
-        [0,5*_bonus,_posDest] remoteExec ["A3A_fnc_citySupportChange",2];
     };
 };
 
@@ -353,7 +391,6 @@ if (_convoyType == "Prisoners") then
             [true, false, 400*_bonus, _bonus*_countX/2, 10, 120, "prisoner"] call _fnc_applyResults;
 
             [_countX,_countX*300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-            [0,10*_bonus,_posSpawn] remoteExec ["A3A_fnc_citySupportChange",2];
         };
     };
 };
@@ -364,7 +401,6 @@ if (_convoyType == "Reinforcements") then
     if ({_x call A3A_fnc_canFight} count _reinforcementsX == 0) then
     {
         [true, false, 400*_bonus, 10*_bonus, 10, 120, "reinforcement"] call _fnc_applyResults;
-        [0,10*_bonus,_posSpawn] remoteExec ["A3A_fnc_citySupportChange",2];
     }
     else
     {
@@ -425,21 +461,42 @@ if (_convoyType == "Supplies") then
             if (_vehObj distance _posDest < _arrivalDist) then
             {
                 [true, false, 200*_bonus, 10*_bonus, 5, 120, "supply"] call _fnc_applyResults;
-                [0,15*_bonus,_mrkDest] remoteExec ["A3A_fnc_citySupportChange",2];
+                [15*_bonus, _mrkDest] remoteExecCall ["A3A_fnc_citySupportChange", 2];
             }
             else
             {
                 [false, false, 0, -5, 0, 0, "supply"] call _fnc_applyResults;
-                [0,-5*_bonus,_mrkDest] remoteExec ["A3A_fnc_citySupportChange",2];
+                [-5, _mrkDest] remoteExecCall ["A3A_fnc_citySupportChange", 2];
             };
         }
         else
         {
             [false, true, 0, -10, 0, 0, "supply"] call _fnc_applyResults;
-            [15*_bonus,0,_mrkDest] remoteExec ["A3A_fnc_citySupportChange",2];
+            [-15, _mrkDest] remoteExecCall ["A3A_fnc_citySupportChange", 2];
         };
     };
 };
+
+if (tolower _convoyType in ["ammunition", "gunshop"]) then
+{
+    private _resultType = ["ammo", "gunshop"] select (_convoyType == "GunShop");
+    waitUntil {sleep 1; (time > _timeout) or (_crate distance _posDest < _arrivalDist) or (side group driver _vehObj != _sideX) or (attachedTo _crate != _vehObj)};
+    if ((_crate distance _posDest < _arrivalDist) or (time > _timeout)) then
+    {
+        [false, true, 0, -5, 0, 0, _resultType] call _fnc_applyResults;
+        // Relying on truck delete to get rid of the crate. Questionable
+    }
+    else
+    {
+        waitUntil {sleep 1; (_crate distance _posHQ < 100) or (!alive _crate) or (time > _timeout)};
+        if (!alive _crate or time > _timeout) then {
+            [false, false, 0, 0, 5, 60, _resultType] call _fnc_applyResults;
+        } else {
+            [true, false, 0, 10, 10, 60, _resultType] call _fnc_applyResults;
+        };
+    };
+};
+
 
 [_taskId, "CONVOY", _taskState] call A3A_fnc_taskSetState;
 [_taskId+"B",_taskState1] call BIS_fnc_taskSetState;		// Do this manually because both sides can fail
@@ -450,6 +507,8 @@ if (_convoyType == "Supplies") then
 { deleteVehicle _x } forEach _POWs;
 
 [_taskId, "CONVOY", 600, true] spawn A3A_fnc_taskDelete;
+
+deleteMarker _startOutpost;
 
 // Clear this array so the vehicleConvoyTravel spawns exit and merge groups
 _convoyVehicles resize 0;

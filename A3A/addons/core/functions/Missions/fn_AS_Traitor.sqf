@@ -34,25 +34,29 @@ _posSol2 = (_houseX buildingExit 0);
 
 _nameDest = [_markerX] call A3A_fnc_localizar;
 
-_groupTraitor = createGroup Occupants;
+private _enemySide = sidesX getVariable _markerX;
+if (_enemySide == teamPlayer) then {_enemySide = Occupants};
+private _faction = Faction(_enemySide);
 
-_arrayAirports = airportsX select {sidesX getVariable [_x,sideUnknown] == Occupants};
+_groupTraitor = createGroup _enemySide;
+
+_arrayAirports = airportsX select {sidesX getVariable [_x,sideUnknown] == _enemySide};
 _base = [_arrayAirports, _positionX] call BIS_Fnc_nearestPosition;
 _posBase = getMarkerPos _base;
 
-private _traitorIdentity = [A3A_faction_reb, FactionGet(occ,"unitTraitor")] call A3A_fnc_createRandomIdentity;
+private _traitorIdentity = [A3A_faction_reb, _faction get "unitTraitor"] call A3A_fnc_createRandomIdentity;
 _traitorIdentity set ["speaker", "NoVoice"];
-_traitor = [_groupTraitor, FactionGet(occ,"unitTraitor"), _posTraitor, [], 0, "NONE", _traitorIdentity] call A3A_fnc_createUnit;
+_traitor = [_groupTraitor, _faction get "unitTraitor", _posTraitor, [], 0, "NONE", _traitorIdentity] call A3A_fnc_createUnit;
 _traitor allowDamage false;
 _traitor setPos _posTraitor;
-_sol1 = [_groupTraitor, FactionGet(occ,"unitBodyguard"), _posSol1, [], 0, "NONE"] call A3A_fnc_createUnit;
-_sol2 = [_groupTraitor, FactionGet(occ,"unitBodyguard"), _posSol2, [], 0, "NONE"] call A3A_fnc_createUnit;
+_sol1 = [_groupTraitor, _faction get "unitBodyguard", _posSol1, [], 0, "NONE"] call A3A_fnc_createUnit;
+_sol2 = [_groupTraitor, _faction get "unitBodyguard", _posSol2, [], 0, "NONE"] call A3A_fnc_createUnit;
 _groupTraitor selectLeader _traitor;
 
 _posTsk = (position _houseX) getPos [random 100, random 360];
 
 private _taskId = "AS" + str A3A_taskCount;
-[[teamPlayer,civilian],_taskID,[format [localize "STR_A3A_fn_mission_as_traitor_text",_nameDest,_displayTime,FactionGet(occ,"name")],localize "STR_A3A_fn_mission_as_traitor_titel",_markerX],_posTsk,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
+[[teamPlayer,civilian],_taskID,[format [localize "STR_A3A_fn_mission_as_traitor_text",_nameDest,_displayTime,_faction get "name"],localize "STR_A3A_fn_mission_as_traitor_titel",_markerX],_posTsk,false,0,true,"Kill",true] call BIS_fnc_taskCreate;
 [_taskId, "AS", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 
 traitorIntel = false; publicVariable "traitorIntel";
@@ -71,7 +75,7 @@ while {count _roads == 0} do
 _road = _roads select 0;
 _posroad = getPos _road;
 _roadcon = roadsConnectedto _road; if (count _roadCon == 0) then {
-    Error_1("Road has no connection :%1.",position _road);
+	Error_1("Road has no connection :%1.",position _road);
 	};
 if (count _roadCon > 0) then
 	{
@@ -89,7 +93,7 @@ _veh setDir _dirVeh;
 sleep 15;
 _veh allowDamage true;
 _traitor allowDamage true;
-[_veh, Occupants] call A3A_fnc_AIVEHinit;
+[_veh, _enemySide] call A3A_fnc_AIVEHinit;
 {_x disableAI "MOVE"; _x setUnitPos "UP"} forEach units _groupTraitor;
 
 _mrk = createMarkerLocal [format ["%1patrolarea", floor random 100], getPos _houseX];
@@ -100,8 +104,8 @@ _mrk setMarkerColorLocal "ColorRed";
 _mrk setMarkerBrushLocal "DiagGrid";
 _mrk setMarkerAlphaLocal 0;
 
-_typeGroup = if (random 10 < tierWar) then {selectRandom FactionGet(occ,"groupsSquads")} else {FactionGet(occ,"groupPoliceSquad")};
-_groupX = [_positionX,Occupants, _typeGroup] call A3A_fnc_spawnGroup;
+_typeGroup = if (random 10 < tierWar) then {selectRandom (_faction get "groupsSquads")} else {_faction get "groupPoliceSquad"};
+_groupX = [_positionX,_enemySide,_typeGroup] call A3A_fnc_spawnGroup;
 sleep 1;
 if (random 10 < 2.5) then
 	{
@@ -161,27 +165,15 @@ if (!([_traitor] call A3A_fnc_canFight) || traitorIntel) then
 
 	_factor = 1;
 	if(_difficultX) then {_factor = 2;};
-    Debug("aggroEvent | Rebels won a traitor mission");
-	[Occupants, 15 * _factor, 120] remoteExec ["A3A_fnc_addAggression",2];
+	Debug("aggroEvent | Rebels won a traitor mission");
+	[_enemySide, 15 * _factor, 120] remoteExec ["A3A_fnc_addAggression",2];
 	[0,300 * _factor] remoteExec ["A3A_fnc_resourcesFIA",2];
-	{
-		if (!isPlayer _x) then
-		{
-			_skill = skill _x;
-			_skill = _skill + 0.1;
-			_x setSkill _skill;
-		}
-		else
-		{
-			[10 * _factor,_x] call A3A_fnc_playerScoreAdd;
-		};
-	} forEach ([_radiusX,0,_positionX,teamPlayer] call A3A_fnc_distanceUnits);
-	[5 * _factor,theBoss] call A3A_fnc_playerScoreAdd;
+	[30 * _factor, false, _traitor, 300] call A3A_tasks_fnc_rewardPlayers;     // any players within 300m
 }
 else
 {
 	[_taskId, "AS", "FAILED", false] call A3A_fnc_taskSetState;
-	if (_difficultX) then {[-10,theBoss] call A3A_fnc_playerScoreAdd} else {[-10,theBoss] call A3A_fnc_playerScoreAdd};
+	[-10,theBoss] call A3A_fnc_playerScoreAdd;
 	if (dateToNumber date > _dateLimitNum) then
 	{
 		_hrT = server getVariable "hr";
@@ -190,8 +182,12 @@ else
 	}
 	else
 	{
-		// Add some rebel HQ info to occupants. Must be done on server.
-		{ A3A_curHQInfoOcc = A3A_curHQInfoOcc + 0.25 + random 0.5 } remoteExecCall ["call", 2];
+		// Add some rebel HQ info. Must be done on server.
+		if (_enemySide == Invaders) then {
+			{ A3A_curHQInfoInv = A3A_curHQInfoInv + 0.25 + random 0.5 } remoteExecCall ["call", 2];
+		} else {
+			{ A3A_curHQInfoOcc = A3A_curHQInfoOcc + 0.25 + random 0.5 } remoteExecCall ["call", 2];
+		};
 	};
 
 /*		if (isPlayer theBoss) then

@@ -60,7 +60,7 @@
 
 ["vehiclesCivMedical", [
     "UK3CB_TKC_C_S1203_Amb", 0.1
-    ,"UK3CB_C_Hilux_Ambulance", 0.1
+    ,"UK3CB_MEC_C_Hilux_Ambulance", 0.1
     ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivFuel", [
@@ -164,7 +164,7 @@ private _prefix = "militia";
 private _unitTypes = [
     ["Press", _pressTemplate],
     ["Worker", _workerTemplate],
-    ["Man", _manTemplate]
+    ["Man", _manTemplate, nil, 10]
 ];
 
 [_prefix, _unitTypes, _loadoutData] call _fnc_generateAndSaveUnitsToTemplate;

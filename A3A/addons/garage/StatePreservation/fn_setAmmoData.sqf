@@ -26,6 +26,8 @@
             ] Pylon data
         ]
     ] Ammo Data
+    or
+    <Scalar> Total vehicle ammo
 
     Return Value:
     <Nil>
@@ -42,7 +44,10 @@
 params ["_vehicle", "_ammoData"];
 if !(local _vehicle) exitWith {};
 if (_ammoData isEqualTo []) exitWith {};
-if (HR_GRG_hasAmmoSource && !HR_GRG_ServiceDisabled_Rearm) exitWith {};
+if (HR_GRG_hasAmmoSource && !(HR_GRG_ServiceDisabled_Rearm || HR_GRG_useNewRearmSys)) exitWith {};
+
+if (_ammoData isEqualType 0) exitWith { _vehicle setVehicleAmmo _ammoData };
+
 private _weaponData = _ammoData select {!(_x#0)};
 private _pylonData = _ammoData - _weaponData;
 

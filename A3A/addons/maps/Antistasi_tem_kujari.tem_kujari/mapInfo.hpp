@@ -21,7 +21,9 @@ class tem_kujari {
 		{3028.17,15750.5,0.0923653}
 	};
 	antennasBlacklistIndex[] = {}; 
-	banks[] = {}; //no suitable building available
+	banks[] = {
+		{9046.59,12041.8,0},{15056.6,7360.78,0},{15056.6,7360.78,0}
+	};
 	garrison[] = {
 		{},{"airport_5","outpost_8","outpost_16","outpost_19","resource_1","resource_2","resource_13"},{},{"control_1","control_2","control_3","control_4","control_5","control_6","control_7","control_8"}
 	};
@@ -38,6 +40,16 @@ class tem_kujari {
 		{"Land_fort_artillery_nest_EP1", 200}, {"Land_fort_rampart_EP1", 50}, {"Fort_Barricade", 50}, {"Fence", 20}, {"FenceWood", 10}, {"FenceWoodPalet", 10}, 
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"Land_House_C_3_EP1", "Land_House_C_10_EP1", "Land_House_C_4_EP1", "Land_House_C_9_EP1",
+		"Land_House_K_8_EP1", "Land_House_K_7_EP1", "Land_House_K_3_EP1", "Land_House_L_6_EP1", "Land_House_L_7_EP1"
+	};
+	requiredMods = "Kujari and CUP Terrains - Core";
+	size = 16.4;
+	cityCount = 60;
+	airbaseCount = 5;
 };

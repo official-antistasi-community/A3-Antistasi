@@ -1,7 +1,9 @@
-private ["_pool","_veh","_typeVehX"];
+params [["_veh",objNull]];
 private _titleStr = localize "STR_A3A_fn_base_unlockveh_unlockveh";
 
-_veh = cursorObject;
+if (_veh isEqualTo objNull) then {
+    _veh = cursorObject;
+};
 
 if (isNull _veh) exitWith {[_titleStr, localize "STR_A3A_fn_base_unlockveh_no_looking"] call A3A_fnc_customHint;};
 

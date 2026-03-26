@@ -3,19 +3,20 @@ if !(isServer) exitWith {};
 FIX_LINE_NUMBERS()
 params [["_newBoss", objNull], ["_silent", false]];
 
-if (!isNull theBoss) then
-{
-    Debug_1("Removing %1 from Boss roles.", name theBoss);
-
-	bossHCGroupsTransfer = hcAllGroups theBoss;
-	hcRemoveAllGroups theBoss;
-
-	theBoss synchronizeObjectsRemove [HC_commanderX];
-	HC_commanderX synchronizeObjectsRemove [theBoss];
-};
-
+private _oldBoss = theBoss;
 theBoss = _newBoss;
 publicVariable "theBoss";
+
+if (!isNull _oldBoss) then {
+    Debug_1("Removing %1 from Boss roles.", name _oldBoss);
+
+	bossHCGroupsTransfer = hcAllGroups _oldBoss;
+	hcRemoveAllGroups _oldBoss;
+
+	_oldBoss synchronizeObjectsRemove [HC_commanderX];
+	HC_commanderX synchronizeObjectsRemove [_oldBoss];
+	[nil,true] remoteExecCall ["A3A_fnc_unitTraits", _oldBoss];
+};
 
 if (isNull _newBoss) exitWith {
 	[_silent] spawn {
@@ -52,6 +53,7 @@ else {
 		};
 	} forEach allGroups;
 };
+["commander",true] remoteExecCall ["A3A_fnc_unitTraits", theBoss];
 
 Debug_1("New boss %1 set.", name theBoss);
 

@@ -28,8 +28,12 @@ Info("initACEUnconsciousHandler started");
             };
         };
 
-		if (_realSide == Occupants || _realSide == Invaders) then {
+		// In theory this might be called for civilians?
+		if (_realSide == Occupants || _realSide == Invaders) exitWith {
 			[_unit, group _unit, _unit getVariable ["ace_medical_lastDamageSource", objNull]] spawn A3A_fnc_AIReactOnKill;
+		};
+		if (_realSide == teamPlayer) exitWith {
+			[_unit, group _unit, _unit getVariable ["ace_medical_lastDamageSource", objNull]] spawn A3A_fnc_rebelReactOnKill;
 		};
 	};
 
@@ -43,6 +47,9 @@ Info("initACEUnconsciousHandler started");
 	if (isPlayer _unit) exitWith {};					// don't force surrender with players
 	if (_realSide != Occupants && _realSide != Invaders) exitWith {};
 	if (_unit getVariable ["surrendered", false]) exitWith {};		// don't surrender twice
+
+	// surrender if we woke up while retreating
+	if !(_unit isNil "retreating") exitWith { [_unit] spawn A3A_fnc_surrenderAction };
 
 	// surrender if we don't have a primary weapon
 	if (primaryWeapon _unit == "") exitWith { [_unit] spawn A3A_fnc_surrenderAction };

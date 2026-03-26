@@ -1,6 +1,6 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-params [["_hr",""],["_resourcesFIA",""]]; // nil protection
+params [["_hr",""],["_resourcesFIA",""],["_silent",false]]; // nil protection
 
 if !(_hr isEqualType 0) exitWith {Error("The first parameter, the added HR, must be a number");};
 if !(_resourcesFIA isEqualType 0) exitWith {Error("The second parameter, the added money, must be a number");};
@@ -14,12 +14,19 @@ private _resourcesFIAT = server getVariable "resourcesFIA";
 _hrT = _hrT + _hr;
 _resourcesFIAT = round (_resourcesFIAT + _resourcesFIA);
 
-if (_hrT < 0) then {_hrT = 0};
+if (_hrT < 0) then {
+	// If we're using more HR than we have (eg. player respawn at 0 HR) then hurt nearby city support
+	private _nearCity = citiesX select selectRandom (citiesX inAreaArrayIndexes [markerPos "Synd_HQ", distanceMission, distanceMission]);
+	[_hrT, _nearCity] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+	_hrT = 0;
+};
 if (_resourcesFIAT < 0) then {_resourcesFIAT = 0};
 
 server setVariable ["hr",_hrT,true];
 server setVariable ["resourcesFIA",_resourcesFIAT,true];
 resourcesIsChanging = false;
+
+if (_silent) exitWith {};
 
 _textX = "";
 _hrSim = "";

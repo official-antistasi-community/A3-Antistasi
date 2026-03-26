@@ -10,9 +10,10 @@ Arguments:
 
 params ["_target", ["_finished", true]];
 
-//remove from list
+// Remove from list. Let it clear out nulls
 A3A_unbuiltObjects deleteAt (A3A_unbuiltObjects find _target);
 publicVariable "A3A_unbuiltObjects";
+if (isNull _target) exitWith {};            // Possible if two engineers attempted to construct the same object, or a zeus delete
 deleteVehicle _target;
 
 // Cancel case
@@ -32,7 +33,11 @@ private _building = createVehicle [_target getVariable "A3A_build_class", [0,0,0
 _building setPosWorld (_target getVariable "A3A_build_pos");
 _building setVectorDirAndUp (_target getVariable "A3A_build_dir");
 _building setVariable ["A3A_building", true, true];            // Used to identify removable buildings
-A3A_buildingsToSave pushBack _building;
+
+// Add to garrison data if it's within one
+private _marker = [getPosATL _building] call A3A_fnc_getMarkerForPos;
+if (sidesX getVariable _marker == teamPlayer) then { [_marker, _building] call A3A_fnc_garrisonServer_addVehicle }
+    else { A3A_buildingsToSave pushBack _building };
 
 // Allowing flagpole construction is probably not a good idea due to how markerChange handles flags atm
 if (_className isEqualTo (A3A_faction_reb get "flag")) then {

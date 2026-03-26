@@ -32,7 +32,7 @@ private _APCs = ["O_R_APC_Wheeled_02_rcws_v2_F", "a3a_O_R_APC_Wheeled_04_cannon_
 private _Tanks = ["O_R_MBT_02_cannon_F"];
 private _AA = ["O_R_APC_Tracked_02_AA_F"];
 
-["vehiclesTransportBoats", ["O_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["O_Boat_Armed_01_hmg_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 

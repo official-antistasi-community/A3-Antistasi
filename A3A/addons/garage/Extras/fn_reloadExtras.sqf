@@ -73,7 +73,7 @@ if (_vehNodes isEqualType []) then {
             _ctrlExtraMounts lbSetTextRight [_index, format ["Size: %1", _size]];
             Trace_4("Mount Added to list | Class: %1 | UID: %2 | Checked: %3 | Size: %4", _staticClass, _x, (_checkedOut isEqualTo HR_GRG_PlayerUID), _type);
         };
-    } forEach (HR_GRG_Vehicles#10);//statics
+    } forEach (HR_GRG_Vehicles#HR_GRG_STATICINDEX);//statics
     lbSort _ctrlExtraMounts;
 };
 if (_reloadMounts) then { [] call HR_GRG_fnc_reloadMounts };
@@ -115,12 +115,12 @@ HR_GRG_curAnims = _customisation#1;
 [HR_GRG_previewVeh, HR_GRG_curTexture, HR_GRG_curAnims] call BIS_fnc_initVehicle;
 
 //update source panel
-_ctrlSourcePanelAmmo ctrlSetStructuredText composeText ["   ", image RearmIcon, " ", image (checkboxTextures select (HR_GRG_hasAmmoSource && !HR_GRG_ServiceDisabled_Rearm))];
+_ctrlSourcePanelAmmo ctrlSetStructuredText composeText ["   ", image RearmIcon, " ", image (checkboxTextures select (HR_GRG_hasAmmoSource && !(HR_GRG_ServiceDisabled_Rearm || HR_GRG_useNewRearmSys)))];
 _ctrlSourcePanelAmmo ctrlSetTooltip ([
     localize "STR_HR_GRG_SourcePanel_toolTip_Ammo_Unavailable"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Ammo_Available"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Ammo_Disabled"
-] select (if (HR_GRG_ServiceDisabled_Rearm) then {2} else {HR_GRG_hasAmmoSource}));
+] select (if (HR_GRG_ServiceDisabled_Rearm || HR_GRG_useNewRearmSys) then {2} else {HR_GRG_hasAmmoSource}));
 
 _ctrlSourcePanelFuel ctrlSetStructuredText composeText ["   ", image RefuelIcon, " ", image (checkboxTextures select (HR_GRG_hasFuelSource && !HR_GRG_ServiceDisabled_Refuel))];
 _ctrlSourcePanelFuel ctrlSetTooltip ([
@@ -184,6 +184,7 @@ _sellPrice = [localize "STR_HR_GRG_InfoPanel_salePrice",_sellPrice] joinString "
 
 //state indicator
 private _getPercentageAmmo = {
+    if (_this isEqualType 0) exitWith {_this};
     if (count _this isEqualTo 0) exitWith {0};
     private _sumPercent = 0;
     private _weaponsWithAmmo = 0;
@@ -204,8 +205,8 @@ private _getPercentageAmmo = {
 
 private _hasAmmo = (HR_GRG_previewVehState#2) isNotEqualTo [];//Preview state >> Ammo data
 private _avgAmmo = (HR_GRG_previewVehState#2) call _getPercentageAmmo; //Preview state >> Ammo data
-private _avgFuel = HR_GRG_previewVehState#0#0; //Preview state >> Fuel data >> Fuel
-private _avgDmg = 1 - (HR_GRG_previewVehState#1#0); //Preview state >> Damage data >> Damage
+private _avgFuel = fuel HR_GRG_previewVeh;      //HR_GRG_previewVehState#0#0; //Preview state >> Fuel data >> Fuel
+private _avgDmg = 1 - damage HR_GRG_previewVeh; //(HR_GRG_previewVehState#1#0); //Preview state >> Damage data >> Damage
 private _selectStateColor = {
     switch true do {
         case (_this > 0.5): {"#ffffff"}; // white

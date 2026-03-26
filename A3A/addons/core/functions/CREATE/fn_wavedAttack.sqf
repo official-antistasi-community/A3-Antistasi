@@ -14,7 +14,7 @@ Arguments:
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_mrkDest", "_mrkOrigin", "_maxWaves"];
+params ["_mrkDest", "_mrkOrigin", "_maxWaves", ["_isCounterattack", false]];
 
 Info_3("Creating waved attack against %1 from %2 with %3 waves", _mrkDest, _mrkOrigin, _maxWaves);
 
@@ -31,8 +31,9 @@ private _nameDest = [_mrkDest] call A3A_fnc_localizar;
 private _nameEnemy = _faction get "name";
 private _taskId = "wavedAttack" + str A3A_taskCount;
 if (_targside == teamPlayer) then {
-    private _taskStr = format [localize "STR_A3A_fn_base_wavedAttack_long", _nameEnemy, _nameDest];
-    [true,_taskId,[_taskStr,format [localize "STR_A3A_fn_base_wavedAttack_title",_nameEnemy],_mrkDest],markerPos _mrkDest,false,0,true,"Defend",true] call BIS_fnc_taskCreate;
+    private _taskIcon = ["Attack", "Defend"] select _isCounterattack;
+    private _taskStr = format [localize (["STR_A3A_fn_base_wavedAttack_long", "STR_A3A_fn_base_counterAttack_long"] select _isCounterattack), _nameEnemy, _nameDest];
+    [true,_taskId,[_taskStr,format [localize (["STR_A3A_fn_base_wavedAttack_title", "STR_A3A_fn_base_counterattack_title"] select _isCounterattack), _nameEnemy],_mrkDest],markerPos _mrkDest,false,0,true,_taskIcon,true] call BIS_fnc_taskCreate;
     [_taskId, "rebelAttack", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
 } else {
     private _text = format [localize "STR_A3A_fn_base_wavedAttack_other", _nameEnemy, Faction(_targside) get "name", _nameDest];
@@ -42,7 +43,7 @@ if (_targside == teamPlayer) then {
 // Generate reveal value for the attack wave notifications
 private _reveal = call {
     if (_targside != teamPlayer) exitWith {0};
-    private _reveal = [_targPos] call A3A_fnc_calculateSupportCallReveal;
+    private _reveal = [_targPos, _side] call A3A_fnc_calculateSupportCallReveal;
     [_side, _targPos, _reveal] call A3A_fnc_useRadioKey;
 };
 
@@ -167,7 +168,7 @@ while {_wave <= _maxWaves and !_victory} do
         };
 
         // Attempt to flip marker
-        [_mrkDest, _markerSide] remoteExec ["A3A_fnc_zoneCheck", 2];
+        ["zoneCheck", [_mrkDest, true]] remoteExecCall ["A3A_fnc_garrisonOp", 2];       // just make sure this is unscheduled
         sleep 10;
     };
     _wave = _wave + 1;
@@ -182,9 +183,7 @@ if (_victory) then {
 
     if (_targSide != teamPlayer) exitWith {};
     [_taskId, "rebelAttack", "SUCCEEDED"] call A3A_fnc_taskSetState;
-    private _nearRebels = [500, 0, markerPos _mrkDest, teamPlayer] call A3A_fnc_distanceUnits;
-    { if (isPlayer _x) then { [10, _x] call A3A_fnc_playerScoreAdd } } forEach _nearRebels;
-    [10, theBoss] call A3A_fnc_playerScoreAdd;
+    [50, false, markerPos _mrkDest, 500] call A3A_tasks_fnc_rewardPlayers;
 };
 [_taskId, "rebelAttack", 30] spawn A3A_fnc_taskDelete;
 

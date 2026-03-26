@@ -38,7 +38,10 @@ else
 	_text = localize "STR_A3A_fn_orgp_tBTogEli_eligible_yes";
 };
 
+
 [_titleStr, _text] remoteExec ["A3A_fnc_customHint", _playerX];
 
 // Will remove current boss if now ineligible
 [_forceElection] call A3A_fnc_assignBossIfNone;
+
+["update"] remoteExecCall ["A3A_GUI_fnc_playerTab", _playerX];
