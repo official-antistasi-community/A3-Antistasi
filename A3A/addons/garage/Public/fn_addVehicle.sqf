@@ -107,7 +107,7 @@ private _exit = false;
 if ( ( {alive _x} count (crew _vehicle) ) > 0) then { _exit = true };
 { if ( ( {alive _x} count (crew _x) ) > 0) exitWith {_exit = true} } forEach attachedObjects _vehicle;
 if (_exit && (!_isUAV)) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Crewed"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
-if (_isUAV && (crew _vehicle isNotEqualTo [] && {side _vehicle isNotEqualTo side _player})) exitWith {  ["STR_HR_GRG_Feedback_addVehicle_HostileUAV"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+if (_isUAV && (crew _vehicle isNotEqualTo [] && {side _vehicle isNotEqualTo teamPlayer})) exitWith {  ["STR_HR_GRG_Feedback_addVehicle_HostileUAV"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     // valid vehicle for garage
 private _cat = [_class] call HR_GRG_fnc_getCatIndex;
