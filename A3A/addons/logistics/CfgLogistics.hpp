@@ -30,6 +30,7 @@ class DOUBLES(ADDON,Nodes)
     #include "Nodes\Vanilla.hpp"
     #include "Nodes\VN.hpp"
     #include "Nodes\WS.hpp"
+     #include "Nodes\PED.hpp"
 };
 
 class DOUBLES(ADDON,Cargo)

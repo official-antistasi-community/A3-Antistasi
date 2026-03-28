@@ -2324,4 +2324,21 @@ class Templates
         file = "PRACS_AI_SLA_Rev_Guards_Temperate";
         climate[] = {"temperate"};
     };
+    // ***************************** PED *****************************
+    class PED_Base
+    {
+        requiredAddons[] = {"CUP_Creatures_People_Civil_Russia", "CUP_BaseConfigs", "CUP_AirVehicles_Core"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\PED);
+        logo = "\CUP\Creatures\People\CUP_Creatures_People_Core\ui\logo_cup_ca_small.paa";
+        priority = 70;
+    };
+    class PED_IAF_Temprate : PED_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\Italy_ca.paa";
+        name = "Italian Army Temperate";
+        file = "PED_AI_IAF_Temperate";
+        climate[] = {"Temperate"};
+        shortName = "IAF";
+        };
 };
