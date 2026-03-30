@@ -21,7 +21,8 @@
 ["vehicleFuelDrum", ["FlexibleTank_01_forest_F", 150]] call _fnc_saveToTemplate;
 ["vehicleFuelTank", ["B_Slingload_01_Fuel_F", 1000]] call _fnc_saveToTemplate;
 ["vehicleRepairStation", ["Land_RepairDepot_01_green_F", 5000]] call _fnc_saveToTemplate;
-["vehicleAmmoStation", ["Box_IND_AmmoVeh_F", 5000]] call _fnc_saveToTemplate;
+["vehicleAmmoStation", ["Box_IND_AmmoVeh_F", 3000]] call _fnc_saveToTemplate;
+["vehicleAmmoContainer", ["B_Slingload_01_Ammo_F", 12000]] call _fnc_saveToTemplate;
 ["vehicleHealthStation", ["Land_MedicalTent_01_MTP_closed_F", 75]] call _fnc_saveToTemplate;
 
 private _medBox = ["Box_AAF_Equip_F", 5];

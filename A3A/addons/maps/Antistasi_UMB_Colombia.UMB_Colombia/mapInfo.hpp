@@ -25,6 +25,7 @@ class umb_colombia {
 	};
 	antennasBlacklistIndex[] = {0,2,3,6,7,8,11,12,13,16,17,18,19,20,21,22,23,24,25,28,29,30,32,34,36,37,38,40,41,42,44,45,47,48,51,52,53,55,56,57,58,60,63,65,66,67,68,69,70,72};
 	banks[] = {
+		{9494.17,10657.4,0},{15892.3,2970.71,0},{11768.7,209.813,0},{7669.3,12297.6,0},{7379.39,14541,0}
 	};
 	garrison[] = {
 		{},{"airport_7", "factory_8", "outpost_37", "outpost_42", "outpost_45", "outpost_48", "seaport_4", "control_9", "control_10", "control_18", "control_19", "control_20", "control_21", "control_22"},{},
@@ -42,6 +43,19 @@ class umb_colombia {
 		{"Land_BagFence_01_short_green_F", 10}, {"Land_BagFence_01_round_green_F", 10}, {"Land_BagFence_01_long_green_F", 10},
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		// Malden types
+		"Land_i_House_Big_01_V1_F", "Land_i_House_Big_01_V2_F", "Land_i_House_Big_01_V3_F", "Land_i_House_Big_01_b_whiteblue_F", "Land_i_House_Big_01_b_blue_F", "Land_i_House_Big_01_b_pink_F", "Land_i_House_Big_01_b_yellow_F", "Land_i_House_Big_01_b_brown_F",
+		"Land_i_House_Big_02_V1_F", "Land_i_House_Big_02_V2_F", "Land_i_House_Big_02_V3_F",	"Land_i_House_Big_02_b_whiteblue_F", "Land_i_House_Big_02_b_blue_F", "Land_i_House_Big_02_b_pink_F", "Land_i_House_Big_02_b_yellow_F", "Land_i_House_Big_02_b_brown_F",
+		// Tanoa types
+		"Land_House_Big_04_F", "Land_House_Big_03_F", "Land_House_Big_01_F", "Land_House_Small_01_F", "Land_House_Small_02_F"
+	};
+	requiredMods = "UMB Colombia";
+	size = 20.5;
+	cityCount = 40;
+	airbaseCount = 7;
 };

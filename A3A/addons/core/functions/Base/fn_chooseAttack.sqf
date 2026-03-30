@@ -15,6 +15,8 @@ params ["_side"];
 
 Info_1("Starting attack choice script for side %1", _side);
 
+// Decrease the punishment defence adjustment a bit each time invaders generate an attack
+if (_side == Invaders) then { A3A_punishmentDefBuff = 0 max (A3A_punishmentDefBuff - 0.25) };
 
 // Make a weighted list of rebel attack targets
 private _targetsAndWeights = [teamPlayer, _side] call A3A_fnc_findAttackTargets;
@@ -87,8 +89,9 @@ if (sidesX getVariable _originMrk != _side) exitWith {
     false;
 };
 
-
-if (_targetMrk in citiesX) exitWith {
+// Special cases for attacks against rebel towns
+private _isCity = _targetMrk in citiesX;
+if (_isCity and sidesX getVariable _targetMrk == teamPlayer) exitWith {
     if (_side == Invaders) then {
         // Punishment, unsimulated
         Info_2("Starting punishment mission from %1 to %2", _originMrk, _targetMrk);
@@ -116,47 +119,49 @@ if (_targetMrk == "Synd_HQ") exitWith {
 // Otherwise it's a major attack. Then we need to decide whether to simulate:
 if((spawner getVariable _targetMrk) != 2 || (sidesX getVariable _targetMrk) == teamPlayer) then
 {
+    if (_isCity) exitWith {             // can't be rebel target here, so must be spawned
+        Info_2("Starting city attack from %1 to %2", _originMrk, _targetMrk);
+        [-150, _side, "attack"] call A3A_fnc_addEnemyResources;
+        bigAttackInProgress = true; publicVariable "bigAttackInProgress";
+        [_targetMrk, _originMrk] spawn A3A_fnc_enemyCityAttack;
+        true;
+    };
+
     // Sending real attack, execute the fight
     private _waves = round (1 + random 1 + _localThreat / 1000);         // TODO: magic number
     Info_3("Starting waved attack with %1 waves from %2 to %3", _waves, _originMrk, _targetMrk);
-    [-400, _side, "attack"] call A3A_fnc_addEnemyResources;
+    [-150*_waves, _side, "attack"] call A3A_fnc_addEnemyResources;
     bigAttackInProgress = true; publicVariable "bigAttackInProgress";
     [_targetMrk, _originMrk, _waves] spawn A3A_fnc_wavedAttack;
     true;
 }
 else
 {
-    // Get the available defence resources
-    private _defSide = [Occupants, Invaders] select (_side == Occupants);
-    private _defResources = [_defSide, _side, _targetMrk, 1] call A3A_fnc_maxDefenceSpend;      // might need multiplier?
+    isNil {
+        if (sidesX getVariable _targetMrk == teamPlayer) exitWith {false};           // in case a marker just flipped
+        private _defSide = [Occupants, Invaders] select (_side == Occupants);
+        // Get the available defence resources
+        private _defResources = [_defSide, _side, _targetMrk, 0.7] call A3A_fnc_maxDefenceSpend;
 
-    // subtract that from defender and equal quantity for attacker
-    [-_defResources, _defSide, "defence"] call A3A_fnc_addEnemyResources;
+        // subtract that from defender and equal quantity for attacker
+        [-_defResources, _defSide, "defence"] call A3A_fnc_addEnemyResources;
 
-    // land units are a bit cheaper, attack is generally more expensive than defence
-    private _atkResources = _defResources + _localThreat + _flyoverThreat;
-    _atkResources = 400 + _atkResources * (0.75 + 2^(-_countLandAttackBases));
-    [-_atkResources, _side, "attack"] call A3A_fnc_addEnemyResources;
+        // land units are a bit cheaper, attack is generally more expensive than defence
+        private _atkResources = _defResources + _localThreat + _flyoverThreat;
+        _atkResources = ([400, 150] select _isCity) + _atkResources * (0.75 + 2^(-_countLandAttackBases));
+        [-_atkResources, _side, "attack"] call A3A_fnc_addEnemyResources;
 
-    // Flip marker and add garrison once flipped
-    [_side, _targetMrk] spawn A3A_fnc_markerChange;        // add simulation param here? or just rely on spawn status?
-    Info_4("Simulated capture of %1 by %2, atk resources %3, def resources %4", _targetMrk, _side, _atkResources, _defResources);
+        // Flip marker and add garrison once flipped
+        if (_isCity) then {
+            [_targetMrk, _side] call A3A_fnc_citySideChange;
+        } else {
+            [_side, _targetMrk, false] call A3A_fnc_markerChange;
+        };
+        Info_4("Simulated capture of %1 by %2, atk resources %3, def resources %4", _targetMrk, _side, _atkResources, _defResources);
 
-    sleep 10;
-    if (sidesX getVariable _targetMrk != _side) exitWith {
-        Error_2("%1 still not switched to side %2 after 10 seconds", _targetMrk, _side);
-        false;
+        // Get the garrison for free because we already paid for them in the simulated attack
+        [_targetMrk] call A3A_fnc_buildEnemyGarrison;
+        true;
     };
-
-    // Get the garrison for free because we already paid for them in the simulated attack
-    private _maxTroops = 12 max round ((0.5 + random 0.5) * ([_targetMrk] call A3A_fnc_garrisonSize));
-    private _soldiers = [];
-    private _faction = Faction(_side);
-    while {count _soldiers < _maxTroops} do {
-        _soldiers append selectRandom ((_faction get "groupsSquads") + (_faction get "groupsMedium"));
-    };
-    _soldiers resize _maxTroops;
-    [_soldiers, _side, _targetMrk, 0] spawn A3A_fnc_garrisonUpdate;
-    true;
 };
 

@@ -34,5 +34,23 @@ class CfgWeapons
         };
         modes[] = {"FullAuto","Ai_Burst"};
     };
+	
+	class rhs_weap_makarov_pm;
+	class rhs_weap_pb_6p9 : rhs_weap_makarov_pm {
+		baseWeapon = "a3a_rhs_weap_pb_6p9_noSup";
+	};
+	class a3a_rhs_weap_pb_6p9_noSup : rhs_weap_pb_6p9 {
+		class LinkedItems{};
+	};
+
+    // Price overrides for gun shop
+    // Subsonic sniper
+    class rhs_weap_ak74m;
+    class rhs_weap_asval : rhs_weap_ak74m {
+        A3A_price = 750;
+    };
+    class rhs_weap_vss : rhs_weap_asval {
+        A3A_price = 900;
+    };
 };
 

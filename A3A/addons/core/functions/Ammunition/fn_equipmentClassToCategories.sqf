@@ -163,8 +163,8 @@ call {
         if (getNumber (_config >> "rhs_disposable") == 1 or _mainmag == "CBA_fakeLauncherMagazine") then {
             _categories pushBack "Disposable";
             if (getNumber (_config >> "scope") == 1) exitWith { _categories set [0, "UsedLaunchers"] };
-            if (_mainmag == "CBA_fakeLauncherMagazine" and !isNil "cba_disposable_normalLaunchers") then {
-                _mainmag = (cba_disposable_normalLaunchers getVariable _classname) # 1;     // format is [realLauncher, magazine]
+            if (_mainmag == "CBA_fakeLauncherMagazine" and !isNil "cba_disposable_normalLaunchers" and {typeName cba_disposable_normalLaunchers == "HASHMAP"}) then {
+                _mainmag = (cba_disposable_normalLaunchers get _classname) # 1;     // format is [realLauncher, magazine]
             };
         };
         if (_categories#0 == "UsedLaunchers") exitWith {};

@@ -11,14 +11,14 @@
 
 ["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 ["attributeLowAir", true] call _fnc_saveToTemplate;
-["placeIntel_itemLarge", ["Intel_File2_F",-155,false]] call _fnc_saveToTemplate;
+["placeIntel_itemLarge", ["Land_File1_F",-155,false]] call _fnc_saveToTemplate;
 
 //////////////////////////
 //       Vehicles       //
 //////////////////////////
 
 ["ammobox", "LIB_WeaponsBox_Big_SU"] call _fnc_saveToTemplate;
-["surrenderCrate", "LIB_BasicAmmunitionBox_US"] call _fnc_saveToTemplate;
+["surrenderCrate", "LIB_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
 ["equipmentBox", "WW2_Cle_Container"] call _fnc_saveToTemplate;
 
 // vehicles can be placed in more than one category if they fit between both. Cost will be derived by the higher category
@@ -33,22 +33,27 @@
 ["vehiclesMedical", ["LIB_US_GMC_Ambulance"]] call _fnc_saveToTemplate;
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["LIB_US_M3_Halftrack", "LIB_US_M3_Halftrack"]] call _fnc_saveToTemplate;
-["vehiclesIFVs", ["LIB_Cromwell_Mk4"]] call _fnc_saveToTemplate;                  // capable of surviving multiple rockets, cannon armed, with 6-8 passengers
+["vehiclesIFVs", ["LIB_Cromwell_Mk4","LIB_Churchill_Mk7_Howitzer", "LIB_Churchill_Mk7_AVRE"]] call _fnc_saveToTemplate;                  // capable of surviving multiple rockets, cannon armed, with 6-8 passengers
 
 private _vehiclesLightTanks = ["LIB_M8_Greyhound", "LIB_M3A3_Stuart","LIB_M5A1_Stuart"];        //There's an argument to be made to put the Greyhound in lightArmed too, leaving it here for the moment though
 private _vehiclesTanks = ["LIB_M4A4_FIREFLY","LIB_Cromwell_Mk4","LIB_Cromwell_Mk4","LIB_Cromwell_Mk4"];
-private _vehiclesHeavyTanks = ["LIB_Churchill_Mk7","LIB_Churchill_Mk7_Crocodile","LIB_Churchill_Mk7_Howitzer"];
+private _vehiclesHeavyTanks = ["LIB_Churchill_Mk7","LIB_Churchill_Mk7_Crocodile"];
 
 ["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
 
 
-["vehiclesTransportBoats", ["LIB_LCA"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["LIB_UK_LCI"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["LIB_RAF_P39"]] call _fnc_saveToTemplate;             // Will be used with CAS script, must be defined in setPlaneLoadout. Needs fixed gun and either rockets or missiles
 ["vehiclesPlanesAA", ["LIB_RAF_P39"]] call _fnc_saveToTemplate;              // 
 ["vehiclesPlanesTransport", ["LIB_C47_RAF"]] call _fnc_saveToTemplate;
+
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    ["vehiclesPlanesCAS", ["sab_fl_dh98", "sab_fl_tempest", "sab_fl_hurricane_2", "sab_fl_hurricane_trop"]] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", ["sab_fl_hurricane","sab_fl_tempest","sab_fl_spitfire_mk1","sab_fl_spitfire_mk5","sab_fl_spitfire_mkxiv"]] call _fnc_saveToTemplate;
+};
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;            // ideally fragile & unarmed helis seating 4+
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
@@ -215,7 +220,8 @@ _sfLoadoutData set ["slWeapons", [
 ["LIB_M1928_Thompson", "", "", "", ["LIB_50Rnd_45ACP", "LIB_30Rnd_45ACP"], [], ""]
 ]];
 _sfLoadoutData set ["rifles", [
-"LIB_M1A1_Carbine"
+"LIB_M1A1_Carbine",
+"a3a_lib_M2_Carbine"
 ]];
 _sfLoadoutData set ["carbines", [
 "LIB_M1A1_Carbine", 

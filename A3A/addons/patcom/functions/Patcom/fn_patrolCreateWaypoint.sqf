@@ -76,6 +76,6 @@ if (waypointType _waypoint != _waypointType) then {
     _waypoint setWaypointType _waypointType;
 };
 
-// Set Waypoint time 5 minutes into the future.
-private _waypointTime = serverTime + 300;
+// Allow enough time to reach the next waypoint
+private _waypointTime = time + 30 + (_position distance leader _group);
 _group setVariable ["PATCOM_WaypointTime", _waypointTime];

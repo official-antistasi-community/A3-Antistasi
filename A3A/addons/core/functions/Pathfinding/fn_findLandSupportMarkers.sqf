@@ -41,7 +41,7 @@ private _nearLand = A3A_outpostAirportXYI inAreaArray [NavGrid#_navIndex#0, _max
 private _supportMrk = [];
 {
     private _suppMrk = markersX#(_x#2);
-    if (spawner getVariable (_suppMrk + "_spawns") select 0 isEqualTo []) then {continue};        // any vehicle spawn places on base. huh.
+    if !("vehicle" in (A3A_spawnPlaceStats get _suppMrk)) then {continue};           // no vehicle spawn places
     private _suppNavIndex = _suppMrk call A3A_fnc_getMarkerNavPoint;
 
     private _navDist = [_navIndex, _suppNavIndex, _maxLandDist+500] call A3A_fnc_findNavDistance;

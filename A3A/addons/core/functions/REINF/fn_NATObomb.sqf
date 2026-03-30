@@ -2,11 +2,20 @@
 FIX_LINE_NUMBERS()
 private _titleStr = localize "STR_A3A_fn_reinf_NatoBomb_title";
 
-if (bombRuns < 1) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_lack_supp"] call A3A_fnc_customHint;};
+
+private _bombRunCosts = createHashMapFromArray [
+    ["HE",1],
+    ["CLUSTER",1],
+    ["NAPALM",3]
+];
+params [["_typeX","HE"]];
+private _cost = _bombRunCosts get _typeX;
+
+if (bombRuns < _cost) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_lack_supp"] call A3A_fnc_customHint;};
 //if (!allowPlayerRecruit) exitWith {hint "Server is very loaded. <br/>Wait one minute or change FPS settings in order to fulfill this request"};
 if (!([player] call A3A_fnc_hasRadio)) exitWith {if !(A3A_hasIFA) then {[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_no_radio"] call A3A_fnc_customHint;} else {[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_no_radio2"] call A3A_fnc_customHint;}};
 if ({sidesX getVariable [_x,sideUnknown] == teamPlayer} count airportsX == 0) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_no_control"] call A3A_fnc_customHint;};
-_typeX = _this select 0;
+
 
 positionTel = [];
 
@@ -41,11 +50,33 @@ if (!visibleMap) exitWith {deleteMarker _mrkOrig};
 _pos2 = positionTel;
 positionTel = [];
 
-ServerInfo_6("Commander %1 [%2] called %3 airstrike from %4 to %5, %6m from HQ", name theBoss, getPlayerUID theBoss, _typeX, _pos1, _pos2, _pos1 distance markerPos "Synd_HQ");
+private _posHQ = markerPos "Synd_HQ";
+_posHQ set [2,0]; // convert to 3d for vector calc
+private _distanceToHQ = [_pos1, _pos2, _posHQ] call {
+    // Find closest approach of A->B to C
+    params ["_posA", "_posB", "_posC"];
+
+    private _relA = _posC vectorDiff _posA;
+    private _relB = _posC vectorDiff _posB;
+    private _dir = _posA vectorFromTo _posB;
+
+    if (_relA vectorDotProduct _dir <= 0) exitWith { _posA distance _posC };
+    if (_relB vectorDotProduct _dir >= 0) exitWith { _posB distance _posC };
+    vectorMagnitude (_relA vectorCrossProduct _dir);
+};
+
+ServerInfo_6("Commander %1 [%2] called %3 airstrike from %4 to %5, %6m from HQ", name theBoss, getPlayerUID theBoss, _typeX, _pos1, _pos2, _distanceToHQ);
+
+
+if ((tkPunish > 0) && (_distanceToHQ < 100)) exitWith {
+    [_titleStr, localize "STR_A3A_fn_reinf_NatoBomb_no_distanceHQ"] call A3A_fnc_customHint;
+    deleteMarkerLocal _mrkOrig;
+    ServerInfo("Rebel airstrike canceled due to distance from HQ");
+};
 
 _ang = [_pos1,_pos2] call BIS_fnc_dirTo;
 
-bombRuns = bombRuns - 1;
+bombRuns = bombRuns - _cost;
 publicVariable "bombRuns";
 [] spawn A3A_fnc_statistics;
 
@@ -83,7 +114,7 @@ if (!_isHelicopter) then { _wp1 setWaypointSpeed "LIMITED" };
 _wp1 setWaypointBehaviour "CARELESS";
 
 if(_typeX == "NAPALM" && !napalmEnabled) then {_typeX == "HE"};
-private _bombParams = [_plane, _typeX, 4, (_pos1 distance2D _pos2)];
+private _bombParams = [_plane, _typeX, [4,2] select (_typeX == "NAPALM"), (_pos1 distance2D _pos2)];
 (driver _plane) setVariable ["bombParams", _bombParams, true];
 
 [_pos1, driver _plane] spawn
@@ -108,7 +139,7 @@ waitUntil { sleep 2; (currentWaypoint group _plane == 4) or (time > _timeOut) or
 deleteMarkerLocal _mrkOrig;
 deleteMarkerLocal _mrkDest;
 
-if !(canMove _plane) then { sleep cleantime };		// let wreckage hang around for a bit
+if !(canMove _plane) then { sleep 3600 };		// let wreckage hang around for a bit
 deleteVehicle _plane;
 {deleteVehicle _x} forEach _planeCrew;
 deleteGroup _groupPlane;

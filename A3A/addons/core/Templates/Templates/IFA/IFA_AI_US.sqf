@@ -11,20 +11,20 @@
 
 ["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 ["attributeLowAir", true] call _fnc_saveToTemplate;
-["placeIntel_itemLarge", ["Intel_File2_F",-155,false]] call _fnc_saveToTemplate;
+["placeIntel_itemLarge", ["Land_File1_F",-155,false]] call _fnc_saveToTemplate;
 
 //////////////////////////
 //       Vehicles       //
 //////////////////////////
 
 ["ammobox", "LIB_WeaponsBox_Big_SU"] call _fnc_saveToTemplate;
-["surrenderCrate", "LIB_BasicAmmunitionBox_US"] call _fnc_saveToTemplate;
+["surrenderCrate", "LIB_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
 ["equipmentBox", "WW2_Cle_Container"] call _fnc_saveToTemplate;
 
 // vehicles can be placed in more than one category if they fit between both. Cost will be derived by the higher category
 ["vehiclesBasic", ["LIB_US_Willys_MB"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["LIB_US_Willys_MB", "LIB_US_Willys_MB_Hood"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["LIB_US_Willys_MB_M1919", "LIB_US_Scout_M3_FFV"]] call _fnc_saveToTemplate;             // Should be armed, unarmoured to lightly armoured, with 0-4 passengers
+["vehiclesLightArmed", ["LIB_US_Willys_MB_M1919", "LIB_US_Scout_M3_FFV", "LIB_M8_Greyhound"]] call _fnc_saveToTemplate;             // Should be armed, unarmoured to lightly armoured, with 0-4 passengers
 ["vehiclesTrucks", ["LIB_US_GMC_Tent","LIB_US_GMC_Tent"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["LIB_US_GMC_Tent","LIB_US_GMC_Open"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["LIB_US_GMC_Ammo"]] call _fnc_saveToTemplate;
@@ -36,20 +36,30 @@
 ["vehiclesIFVs", ["LIB_M4A3_75"]] call _fnc_saveToTemplate;                  // capable of surviving multiple rockets, cannon armed, with 6-8 passengers
 
 private _vehiclesLightTanks = ["LIB_M8_Greyhound", "LIB_M3A3_Stuart","LIB_M5A1_Stuart"];        //There's an argument to be made to put the Greyhound in lightArmed too, leaving it here for the moment though
-private _vehiclesTanks = ["LIB_M4A3_76","LIB_M4A3_76_HVSS","LIB_M4A3_75","LIB_M4A3_75"];
-private _vehiclesHeavyTanks = [];
+private _vehiclesTanks = ["LIB_M4A3_76","LIB_M4A3_75","LIB_M4A3_75"];
+private _vehiclesHeavyTanks = ["LIB_M4A3_76_HVSS"];
 
 
 ["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate; //Fake "truck with bofors"
 
 
-["vehiclesTransportBoats", ["LIB_LCA", "LIB_LCVP"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["LIB_LCI"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["LIB_P47","LIB_US_P39"]] call _fnc_saveToTemplate;             // Will be used with CAS script, must be defined in setPlaneLoadout. Needs fixed gun and either rockets or missiles
 ["vehiclesPlanesAA", ["LIB_P47","LIB_US_P39","LIB_US_P39_2"]] call _fnc_saveToTemplate;              // 
 ["vehiclesPlanesTransport", ["LIB_C47_Skytrain"]] call _fnc_saveToTemplate;
+
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    private _CAS = ["LIB_P47","sab_fl_p51b","sab_fl_p51d"];
+
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        _CAS = _CAS + ["LIB_P47","sab_fl_p51b","sab_fl_p51d", "sab_sw_p40","sab_sw_p38","sab_sw_p61"];
+    };
+    ["vehiclesPlanesCAS", _CAS] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", ["LIB_P47","sab_fl_p51b","sab_fl_p51d"]] call _fnc_saveToTemplate;
+};
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;       
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
@@ -212,7 +222,7 @@ _sfLoadoutData set ["lightATLaunchers", [
 ["LIB_M1_Garand_M7", "LIB_ACC_GL_M7", "", "", [], ["LIB_1Rnd_G_M9A1"], ""]
 ]];
 _sfLoadoutData set ["slWeapons", ["LIB_M1928_Thompson", "LIB_M1928A1_Thompson", "LIB_M1_Garand", "LIB_M1A1_Carbine", "LIB_M1A1_Carbine"]];
-_sfLoadoutData set ["rifles", ["LIB_M1_Garand", "LIB_M1A1_Carbine"]];
+_sfLoadoutData set ["rifles", ["LIB_M1_Garand", "LIB_M1A1_Carbine","a3a_lib_M2_Carbine"]];
 _sfLoadoutData set ["carbines", ["LIB_M1A1_Carbine","a3a_lib_M2_Carbine"]];
 _sfLoadoutData set ["grenadeLaunchers", [
 ["LIB_M1_Garand_M7", "LIB_ACC_GL_M7", "", "", [], ["LIB_1Rnd_G_Mk2"], ""],

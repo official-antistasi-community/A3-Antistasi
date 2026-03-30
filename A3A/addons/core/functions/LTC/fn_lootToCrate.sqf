@@ -29,17 +29,17 @@ private _titleStr = localize "STR_A3A_fn_ltc_title";
 //break undercover
 player setCaptive false;
 
+ //block postmortem on surrender crates
+_container setVariable ["stopPostmortem", true, true];
+
 private "_unlocked";
 if (LTCLootUnlocked) then {
     _unlocked = [];
 } else {
     _unlocked = (unlockedHeadgear + unlockedVests + unlockedNVGs + unlockedOptics + unlockedItems + unlockedWeapons + unlockedBackpacks + unlockedMagazines);
+    _unlocked = _unlocked createHashMapFromArray [];
 };
 
-_targets = nearestObjects [getposATL _container, ["Man"], LootToCrateRadius];
-_weaponHolders = nearestObjects [getposATL _container, ["WeaponHolder","WeaponHolderSimulated"], LootToCrateRadius];
-
-_container setVariable ["stopPostmortem", true, true]; //block postmortem on surrender crates
 
 //----------------------------//
 //Loot Bodies
@@ -96,109 +96,102 @@ _lootBodies = {
     _unit forceAddUniform _uniform;
 
     //try to add items to container
-    _remaining = [[],[],[],[]];
     {
         if ((_container canAdd _x) and !(_x in _unlocked)) then {
             _container addWeaponCargoGlobal [_x,1];
-        } else {(_remaining#0) pushBack _x};
+        } else {(_leftovers#0) pushBack [_x, 1]};
     } forEach (_gear#0);
 
     {
         _x params ["_magType", "_ammoCount"];
         if ((_container canAdd _magType) and !(_magType in _unlocked)) then {
             _container addMagazineAmmoCargo [_magType, 1, _ammoCount];
-        } else {(_remaining#1) pushBack _x};
+        } else {(_leftovers#1) pushBack [_magType, 1, _ammoCount, 0]};                 // format compatible with lootFromContainer output        
     } forEach (_gear#1);
 
     {
         if ((_container canAdd _x) and !(_x in _unlocked)) then {
             _container addItemCargoGlobal [_x,1];
-        } else {(_remaining#2) pushBack _x};
+        } else {(_leftovers#2) pushBack [_x,1]};
     } forEach (_gear#2);
 
     {
         if ((_container canAdd _x) and !(_x in _unlocked)) then {
             _container addBackpackCargoGlobal [_x,1];
-        } else {(_remaining#3) pushBack _x};
+        } else {(_leftovers#3) pushBack [_x,1]};
     } forEach (_gear#3);
-
-    //Deal with leftovers
-    if (_remaining isEqualTo [[],[],[],[]]) exitWith {};
-    _pos = getPos _unit;
-    _container = "GroundWeaponHolder" createVehicle _pos;
-    [_container, true] remoteExec ["A3A_fnc_postmortem", 2];        // clean up once players move away
-    {
-        _container addWeaponCargoGlobal [_x, 1];
-    } forEach (_remaining#0);
-
-    {
-        _container addMagazineAmmoCargo [(_x#0), 1, (_x#1)];
-    } forEach (_remaining#1);
-
-    {
-        _container addItemCargoGlobal [_x, 1];
-    } forEach (_remaining#2);
-
-    {
-        _container addBackpackCargoGlobal [_x, 1];
-    } forEach (_remaining#3);
-    _container setPos _pos;
 };
 
-_targets = _targets select {!alive _x};
-{[_x, _container] call _lootBodies} forEach _targets;
+
+private _leftovers = [[],[],[],[]];
+
+private _units = nearestObjects [getposATL _container, ["Man"], LootToCrateRadius];
+_units = _units select {!alive _x};
+{[_x, _container, _leftovers] call _lootBodies} forEach _units;
+
 
 //----------------------------//
 //pickup weapons on the ground
 //----------------------------//
 
-_allUnlockedArray = [];
+private _weaponHolders = nearestObjects [getposATL _container, ["WeaponHolder","WeaponHolderSimulated"], LootToCrateRadius];
+
 {
-    _pos = getPosATL _x;
-    _return = [_x, _container] call A3A_fnc_lootFromContainer;
-    _return params ["_remainder", "_allUnlocked"];
-    _allUnlockedArray pushBack _allUnlocked;
+    private _return = [_x, _container] call A3A_fnc_lootFromContainer;
+    deleteVehicle _x;
 
-    if !(_remainder isEqualTo [[],[],[],[]]) then {
+    // Merge leftovers
+    {
+        (_leftovers#_forEachIndex) append _x;
+    } forEach (_return#0);
 
-        _newContainer = "GroundWeaponHolder" createVehicle _pos;
-        [_newContainer, true] remoteExec ["A3A_fnc_postmortem", 2];        // clean up once players move away
-
-        _remainder params ["_weaponsArray", "_magsArray", "_itemsArray", "_backpacksArray"];
-
-        {
-            _x params ["_type", "_count"];
-            if !(_type in _unlocked) then {_allUnlocked = false};
-            _newContainer addWeaponCargoGlobal [_type, _count];
-        } forEach _weaponsArray;
-
-        {
-            _x params ["_type", "_count", "_max", "_remainder"];
-            if !(_type in _unlocked) then {_allUnlocked = false};
-            _newContainer addMagazineAmmoCargo [_type, _count, _max];
-            if !(_remainder isEqualTo 0) then {
-                _newContainer addMagazineAmmoCargo [_type, 1, _remainder];
-            };
-        } forEach _magsArray;
-
-        {
-            _x params ["_type", "_count"];
-            if !(_type in _unlocked) then {_allUnlocked = false};
-            _newContainer addItemCargoGlobal [_type, _count];
-        } forEach _itemsArray;
-
-        {
-            _x params ["_type", "_count"];
-            if !(_type in _unlocked) then {_allUnlocked = false};
-            _newContainer addBackpackCargoGlobal [_type, _count];
-        } forEach _backpacksArray;
-
-        _allUnlockedArray pushBack _allUnlocked;
-        _newContainer setPosATL _pos;
-    };
 } forEach _weaponHolders;
 
-if ((_allUnlockedArray findIf {!_x} isEqualTo -1)) then {
+
+//--------------------------------------------//
+//create weapon holder under box for leftovers
+//--------------------------------------------//
+
+private _allUnlocked = true;
+if !(_leftovers isEqualTo [[],[],[],[]]) then {
+
+    private _pos = (getPosATL _container) getPos [1, random 360];
+    private _newContainer = "GroundWeaponHolder" createVehicle _pos;
+
+    _leftovers params ["_weaponsArray", "_magsArray", "_itemsArray", "_backpacksArray"];
+
+    {
+        _x params ["_type", "_count"];
+        if !(_type in _unlocked) then {_allUnlocked = false};
+        _newContainer addWeaponCargoGlobal [_type, _count];
+    } forEach _weaponsArray;
+
+    {
+        _x params ["_type", "_count", "_max", "_remainder"];
+        if !(_type in _unlocked) then {_allUnlocked = false};
+        _newContainer addMagazineAmmoCargo [_type, _count, _max];
+        if !(_remainder isEqualTo 0) then {
+            _newContainer addMagazineAmmoCargo [_type, 1, _remainder];
+        };
+    } forEach _magsArray;
+
+    {
+        _x params ["_type", "_count"];
+        if !(_type in _unlocked) then {_allUnlocked = false};
+        _newContainer addItemCargoGlobal [_type, _count];
+    } forEach _itemsArray;
+
+    {
+        _x params ["_type", "_count"];
+        if !(_type in _unlocked) then {_allUnlocked = false};
+        _newContainer addBackpackCargoGlobal [_type, _count];
+    } forEach _backpacksArray;
+
+    _newContainer setPosATL _pos;
+    [_newContainer, _allUnlocked] remoteExec ["A3A_fnc_postmortem", 2];        // If all unlocked, priority clean up
+};
+
+if (_allUnlocked) then {
     [_titleStr, localize "STR_A3A_fn_ltc_ltc_transfered"] call A3A_fnc_customHint;
 } else {
     [_titleStr, localize "STR_A3A_fn_ltc_ltc_notrans"] call A3A_fnc_customHint;

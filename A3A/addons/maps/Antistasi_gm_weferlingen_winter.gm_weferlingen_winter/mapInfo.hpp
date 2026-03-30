@@ -8,6 +8,7 @@ class gm_weferlingen_winter {
 	};
 	antennasBlacklistIndex[] = {};
 	banks[] = {
+		{9482.54,16294.2,0},{5632.18,3452.44,0},{18481.8,366.847,0},{15444,530.332,0},{19565.5,8487.71,0},{10624.8,11363.7,0},{15892,14334.9,0},{10364.2,7738.25,0},{3733.85,15091.6,0},{8163.97,4320.44,0},{5820.69,14076.6,0},{17148.9,17916.4,0},{16373.1,9702.76,0},{4836.31,18740.4,0},{13918.3,4853.75,0},{13049.1,8443.13,0}
 	};
 	garrison[] = {
 		{},{"airport_4","outpost_8","outpost_16","outpost_19","resource_6","resource_7","control_3","control_4","control_8","control_9","control_10","control_29"},{},{"control_3","control_4","control_8","control_9","control_10","control_29"}
@@ -33,6 +34,18 @@ class gm_weferlingen_winter {
 		//small bunker
 		{"Land_Bunker_02_light_double_F", 500},
 		//big bunker
-		{"gm_bunker_command_01_plain", 5000}
+		{"gm_bunker_command_01_plain", 5000},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"land_gm_euro_house_11_d_win", "land_gm_euro_house_11_e_win", "land_gm_euro_house_11_w_win", "land_gm_euro_house_02_d_win", "land_gm_euro_house_02_e_win", "land_gm_euro_house_02_w_win",
+		"land_gm_euro_house_06_w_win", "land_gm_euro_house_06_d_win", "land_gm_euro_house_06_e_win", "land_gm_euro_house_09_d_win", "land_gm_euro_house_09_e_win", "land_gm_euro_house_09_w_win",
+		"land_gm_euro_house_10_w_win", "land_gm_euro_house_10_d_win", "land_gm_euro_house_10_e_win", "land_gm_euro_house_12_d_win", "land_gm_euro_house_12_e_win", "land_gm_euro_house_12_w_win",
+		"land_gm_euro_house_08_w_win", "land_gm_euro_house_08_d_win", "land_gm_euro_house_08_e_win"
+	};
+	requiredMods = "Global Mobilization CDLC";
+	size = 20.5;
+	cityCount = 49;
+	airbaseCount = 4;
 };

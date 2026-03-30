@@ -32,7 +32,7 @@ private _taskId = "DEF_HQ" + str A3A_taskCount;
 private _uavSupp = ["UAV", _side, "attack", 500, objNull, _targPos, 0, 0] call A3A_fnc_createSupport;
 
 // Create the attacking force
-private _vehCount = round (1 + random 1 + 2 * A3A_balancePlayerScale + ([0, 0.5] select (_uavSupp == "")));
+private _vehCount = round (1.5 + random 1 + 2 * A3A_balancePlayerScale + ([0, 0.5] select (_uavSupp == "")));
 
 // Give smaller player groups a bit more time to respond
 if (isNil "_delay") then { _delay = 300 / A3A_balancePlayerScale };

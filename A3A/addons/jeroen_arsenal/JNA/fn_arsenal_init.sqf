@@ -76,7 +76,7 @@ if(hasInterface)then{
         true,
         false,
         "",
-        "alive _target && {_target distance _this < 5}"
+        "alive _target && {_target distance _this < 5} && _this == _this getVariable ['owner',objNull]"
     ];
 
 

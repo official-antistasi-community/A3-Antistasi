@@ -41,8 +41,8 @@ params ["_map"];
     _markerColor = (configFile >> "CfgmarkerColors" >> getmarkerColor _x >> "color") call BIS_fnc_colorConfigToRGBA;
 
     // Check for line markers
-    private _markerPolyline = markerPolyline _x;
-    if (_markerPolyline isEqualto []) then
+    private _polyline = markerPolyline _x;
+    if (_polyline isEqualto []) then
     {
         // not a line marker
         // Get marker data
@@ -63,18 +63,11 @@ params ["_map"];
         ];
     } else {
         // Marker is a line marker
-
-        // Convert polyLine array to coordinates
-        _lineCoords = [];
-        for [{ _i = 0 }, { _i < ((count _markerPolyline) - 1)}, { _i = _i + 2 }] do
-        {
-            _lineCoords pushBack [_markerPolyline # _i, _markerPolyline # (_i + 1)];
-        };
-
-        // Draw line Segments
-        for [{ _i = 0 }, { _i < ((count _lineCoords) - 2)}, { _i = _i + 1 }] do
-        {
-            _map drawLine [_lineCoords # _i, _lineCoords # (_i + 1), _markerColor];
+        private _lastPoint = [_polyLine#0, _polyLine#1];
+        for "_i" from 2 to (count _polyline - 2 min 200) step 2 do {
+            private _newPoint = [_polyLine#_i, _polyLine#(_i+1)];
+            _map drawLine [_lastPoint, _newPoint, _markerColor];
+            _lastPoint = _newPoint;
         };
     };
 } forEach allMapMarkers;

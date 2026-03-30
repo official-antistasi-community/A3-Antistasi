@@ -14,8 +14,11 @@ _roads = [];
 private _players = allPlayers - entities "HeadlessClient_F";
 private _bases = (seaports + airportsX + outposts) select {
 	call {
-		if ((_players inAreaArray [markerPos _x, 2000, 2000] isEqualTo [])) exitWith {false};
-		if (!(_players inAreaArray [markerPos _x, 350, 350] isEqualTo [])) exitWith {false};
+		private _maxRange = distanceMission / 2;  //Former max distance 2000, with default mission radius is now 2000
+		private _minRange = distanceMission / 10; //Former min distance 350, with default mission radius is now 400
+		if(_x in airportsX) then {_maxRange = _maxRange * 2; _minRange = _minRange * 2; }; //double max and min for airbases, helicopters are seen & heard from further and travel faster
+		if ((_players inAreaArray [markerPos _x, _maxRange, _maxRange] isEqualTo [])) exitWith {false};
+		if (!(_players inAreaArray [markerPos _x, _minRange, _minRange] isEqualTo [])) exitWith {false};
 		private _side = sidesX getVariable [_x, sideUnknown];
 		if (_side == teamPlayer) exitWith {false};
 		if (_x in seaports and Faction(_side) get "vehiclesGunBoats" isEqualTo []) exitWith {false};
@@ -67,7 +70,7 @@ _posbase = getMarkerPos _base;
 
 if (_typePatrol == "AIR") then
 {
-	_arrayDestinations = markersX select {sidesX getVariable [_x,sideUnknown] == _sideX};
+	_arrayDestinations = markersX inAreaArray ["Synd_HQ", distanceMission * 1.25, distanceMission * 1.25] select {sidesX getVariable _x == _sideX};
 	_distanceX = 200;
 }
 else
@@ -114,6 +117,7 @@ _vehicle=[_posBase, 0,_typeCar, _sideX] call A3A_fnc_spawnVehicle;
 _veh = _vehicle select 0;
 [_veh, _sideX] call A3A_fnc_AIVEHinit;
 [_veh,"Patrol"] spawn A3A_fnc_inmuneConvoy;
+_veh setVehicleRadar 2; // might help them avoid getting distracted
 _vehCrew = _vehicle select 1;
 // Forced non-spawner for performance reasons. They can travel a lot through rebel territory.
 {[_x,"",false] call A3A_fnc_NATOinit} forEach _vehCrew;
@@ -133,6 +137,7 @@ if (_typeCar in (_faction get "vehiclesLightUnarmed")) then
 
 //if (_typePatrol == "LAND") then {_veh forceFollowRoad true};
 
+private _startTime = time;
 while {alive _veh} do
 {
 	if (count _arrayDestinations < 2) exitWith {};
@@ -153,9 +158,10 @@ while {alive _veh} do
 	private _timeout = time + (_veh distance2d _posDestination) / 6 + 300;			// stuck detection
 	waitUntil {sleep 60; (_veh distance _posDestination < _distanceX) or (time > _timeout) or ({[_x] call A3A_fnc_canFight} count _soldiers == 0) or (!canMove _veh)};
 	if !(_veh distance _posDestination < _distanceX) exitWith {};
+	if (time - _startTime - 1800 > random 3600) exitWith {};				// random 30 to 90 minute max patrol time
 	if (_typePatrol == "AIR") then
 	{
-		_arrayDestinations = markersX select {sidesX getVariable [_x,sideUnknown] == _sideX};
+		_arrayDestinations = markersX inAreaArray ["Synd_HQ", distanceMission * 1.25, distanceMission * 1.25] select {sidesX getVariable _x == _sideX};
 	}
 	else
 	{

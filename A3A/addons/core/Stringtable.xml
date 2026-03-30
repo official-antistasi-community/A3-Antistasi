@@ -47,6 +47,7 @@
     <Container name="A3A_fn_ai">
       <Key ID="STR_A3A_fn_ai_artySupport_artyStrike">
         <Original>Mortar Strike</Original>
+        <German>Mörserschlag</German>
         <French>Frappe d'artillerie</French>
         <Korean>포병 타격</Korean>
         <Russian>Артиллерийский удар</Russian>
@@ -54,9 +55,11 @@
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_barrageHintHE">
         <Original>Mortar barrage is inbound, starting grid %1.</Original>
+        <Russian>Надвигается минометный обстрел, начало сетки %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_barrageHintSmoke">
         <Original>Smoke barrage is inbound, starting grid %1.</Original>
+        <Russian>Надвигается дымовая завеса, начало сетки %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_busy">
         <Original>Selected battery is busy right now.</Original>
@@ -153,9 +156,11 @@
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_precisionHintHE">
         <Original>Mortar fire support is inbound, grid %1</Original>
+        <Russian>Идет поддержка минометным огнем, сетка %1</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_precisionHintSmoke">
         <Original>Smoke rounds are inbound, grid %1.</Original>
+        <Russian>Прибывают дымовые снаряды, сетка %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_select">
         <Original>You must select an artillery group.</Original>
@@ -244,7 +249,7 @@
         <Chinesesimp>收到. 重炮火力投送中. 预计%1 秒后首发着弹.</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_ai_artySupport_yesSingle">
-        <Original>Acknowledged. Fire mission is inbound. %2 %3 fired. ETA %1 secs.</Original>
+        <Original>Acknowledged. Fire mission is inbound. ETA %1 secs to impact.</Original>
         <Korean>확인. 사격 임무 시작. %2 %3 사격했다. 착탄 예상 시간은 %1초다.</Korean>
         <Russian>Принято. Огневая поддержка на подходе. %2 %3 выстрелов. Ждите %1 сек.</Russian>
         <Chinesesimp>收到. 重炮火力投送中.%2 %3 发射完毕. 预计%1 秒后着弹.</Chinesesimp>
@@ -495,7 +500,7 @@
         <Chinesesimp>同志,这里是 %1. 我受伤了！</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_ai_heal_ready">
-        <Original>You are ready %1.</Original>
+        <Original>You are ready, %1.</Original>
         <Korean>치료가 끝났다, %1.</Korean>
         <Russian>Вы готовы %1.</Russian>
         <Chinesesimp>你已经痊愈了%1</Chinesesimp>
@@ -1118,6 +1123,9 @@
         <Turkish>Savaş Seviyesi Değişti&lt;br/&gt;&lt;br/&gt;Şu anki Seviye: %1</Turkish>
         <Chinesesimp>战争等级变动&lt;br/&gt;&lt;br/&gt;当前等级为: %1</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_createoutpfia_alreadynear">
+        <Original>There's already a rebel outpost near that position</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_createoutpfia_create">
         <Original>Create Outpost</Original>
         <German>Aussenposten erstellen</German>
@@ -1157,6 +1165,9 @@
         <Korean>%1 관측초소</Korean>
         <Russian>%1 Наблюдательный пост</Russian>
       </Key>
+      <Key ID="STR_A3A_fn_base_enemyCityAttack">
+        <Original>%1 is attempting to take %3 from %2</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_flagaction_asset_move">
         <Original>Move this asset</Original>
         <German>Diesen Gegenstand bewegen</German>
@@ -1170,6 +1181,12 @@
         <Portuguese>Mover este recurso</Portuguese>
         <Turkish>Bu eşyayı hareket ettir</Turkish>
         <Chinesesimp>移动此物品</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_buylootbox">
+        <Original>Buy Loot Box</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_buylootbox_enemies">
+        <Original>You cannot purchase loot boxes when enemies are nearby.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_flagaction_buyveh">
         <Original>Buy Vehicle</Original>
@@ -1295,6 +1312,9 @@
         <Portuguese>Descansar por 8 horas</Portuguese>
         <Turkish>8 saat boyunca dinlen</Turkish>
         <Chinesesimp>休息8个小时</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_garage">
+        <Original>Garage</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_flagaction_heal_carry">
         <Original>Carry %1</Original>
@@ -1526,6 +1546,9 @@
         <Turkish>Kasayı kamyona aktar</Turkish>
         <Chinesesimp>将弹药箱转移到运输载具上面</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_base_flagaction_vehicle_garrison">
+        <Original>Add vehicle to garrison</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_flagaction_vehiclebuy">
         <Original>Buy Vehicle</Original>
         <German>Fahrzeug kaufen</German>
@@ -1570,6 +1593,9 @@
         <Portuguese>Lixo apagado.&lt;br/&gt;Última LL foi há %1</Portuguese>
         <Turkish>Çöp Temizlendi. &lt;br/&gt;Son ÇT %1 kadar önceydi.</Turkish>
         <Chinesesimp>杂物清理完毕.&lt;br/&gt;距离上次杂物清理已过去%1.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_base_gc_hq_running">
+        <Original>Cleaning the HQ area of garbage...</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_gc_title">
         <Original>Garbage Cleaner</Original>
@@ -1669,6 +1695,12 @@
         <French>Poste d'observation près de %1</French>
         <Korean>%1 인근 관측초소</Korean>
         <Russian>Наблюдательный пост рядом с %1</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_base_manageFlagAccess_title">
+        <Original>Service Access</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_manageFlagAccess_main">
+        <Original>The rebel logistics network needs more time to connect to this recently captured area.&lt;br/&gt;&lt;br/&gt;You can access the %1 menu in %2.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_markerChange_noAirbase">
         <Original>Airbase Lost</Original>
@@ -2144,17 +2176,7 @@
         <Chinesesimp>总部位置</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_marker">
-        <Original>You must click near a rebel map marker.</Original>
-        <Italian>Devi cliccare vicino a un marcatore sulla mappa.</Italian>
-        <Spanish>Debe clicar cerca de un marcador de mapa.</Spanish>
-        <French>Vous devez cliquer à côté d'un marqueur de carte.</French>
-        <Korean>맵 마커 근처를 클릭해야합니다.</Korean>
-        <Russian>Вы должны щелкнуть рядом с маркером на карте.</Russian>
-        <Polish>Musisz kliknąć w pobliżu znacznika na mapie.</Polish>
-        <Czech>Musíš kliknout blízko značky na mapě.</Czech>
-        <Portuguese>Precisas de clicar perto de um marcador do mapa.</Portuguese>
-        <Turkish>Harita İşaretlerinden birine tıklamanız gerek.</Turkish>
-        <Chinesesimp>你需要在地图标记附近单击</Chinesesimp>
+        <Original>You must select a rebel map marker.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_click_zone">
         <Original>Click on the zone you want to rebuild.</Original>
@@ -2197,19 +2219,6 @@
         <Turkish>Radyo Kulesi yeniden yapıldı.</Turkish>
         <Chinesesimp>通信塔已被重建</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_base_rebasset_no_nothing">
-        <Original>There is nothing to rebuild on this site.</Original>
-        <Italian>Non puoi ricostruire ciò.</Italian>
-        <Spanish>No puede reconstruir esto.</Spanish>
-        <French>Vous ne pouvez pas reconstruire ceci.</French>
-        <Korean>그것은 재건축할 수 없습니다.</Korean>
-        <Russian>Вы не можете восстановить это.</Russian>
-        <Polish>Nie można tego odbudować.</Polish>
-        <Czech>Toto nemůžeš znovu postavit.</Czech>
-        <Portuguese>Não podes reconstruir isso.</Portuguese>
-        <Turkish>Bunu yeniden yapamazsınız.</Turkish>
-        <Chinesesimp>你无法重建这个</Chinesesimp>
-      </Key>
       <Key ID="STR_A3A_fn_base_rebasset_no_money">
         <Original>You do not have enough money to rebuild any Asset. You need 5.000 €.</Original>
         <Italian>Non hai abbastanza denaro per ricostruire alcuna risorsa. Necessiti 5.000 €.</Italian>
@@ -2222,6 +2231,9 @@
         <Portuguese>Não tens dinheiro suficiente para reconstruir qualquer Ativo. Precisas de 5.000€.</Portuguese>
         <Turkish>Yeni ekipman yapmak için yeterinde paranız yok. 5.000 €'ya ihtiyacınız var.</Turkish>
         <Chinesesimp>你当前的资金不足以重建任何资产. 你需要 5.000 €.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_base_rebasset_no_nothing">
+        <Original>There is nothing to rebuild on this site.</Original>
       </Key>
       <Key ID="STR_A3A_fn_base_rebasset_title">
         <Original>Rebuild Assets</Original>
@@ -2275,7 +2287,7 @@
         <Russian>%1 Ресурсы</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_sellveh_no_closer">
-        <Original>Vehicle must be closer than 50 meters to the HQ marker.</Original>
+        <Original>You must be near a friendly marker in order to sell vehicles.</Original>
         <Italian>Il veicolo deve essere entro 50 metri dal marcatore del quartier generale.</Italian>
         <Spanish>El vehículo debe estar a 50 metros o menos del marcador del CG.</Spanish>
         <French>Le Véhicule doit être à moins de 50 mètres du marqueur du quartier général.</French>
@@ -2566,6 +2578,9 @@
         <Korean>최대</Korean>
         <Russian>Экстрим</Russian>
       </Key>
+      <Key ID="STR_A3A_fn_base_gc_hqCleaned">
+        <Original>HQ garbage deleted.</Original>
+      </Key>
     </Container>
     <Container name="A3A_fn_convoy">
       <Key ID="STR_A3A_fn_convoy_convdebug_admin">
@@ -2775,6 +2790,12 @@
         <Korean>페트로스 보호</Korean>
         <Russian>Защитить Петроса</Russian>
       </Key>
+      <Key ID="STR_A3A_fn_base_counterattack_long">
+        <Original>%1 forces are hastily pulling together a counterattack against the recently captured zone at %2. Defend the zone if you can, or fall back to friendly territory.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_base_counterattack_title">
+        <Original>%1 Counterattack</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_craicts_rbDestr">
         <Original>Roadblock Destroyed</Original>
         <French>Barrage routier Détruit</French>
@@ -2803,7 +2824,7 @@
         <Russian>Блокпост потерян</Russian>
       </Key>
       <Key ID="STR_A3A_fn_base_wavedAttack_long">
-        <Original>%1 is launching a major attack against our garrison at %2. Stop them if you can, or live to fight another day.</Original>
+        <Original>%1 is launching a major attack against our garrison at %2. Stop the enemy's combined arms assault if you can, or live to fight another day.</Original>
         <Korean>%1 세력이 %2에 있는 우리 주둔군을 상대로 대대적인 공격을 시작하고 있습니다. 가능하면 그들을 저지하거나, 살아남아 다른 날에 싸우십시오.</Korean>
         <Russian>%1 начинает крупную атаку на %2. Остановите их, если сможете, или доживите до следующего дня.</Russian>
       </Key>
@@ -2887,9 +2908,7 @@
         <Chinesesimp>清除树林</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_createDialog_SLPS_line1">
-        <Original>Antistasi has a custom save system similar to other CTIs.&lt;br/&gt;&lt;br/&gt;To Save: Your commander needs to go to the &lt;t color='#f0d498'&gt;Map Board&lt;/t&gt;, scroll-select &lt;t color='#f0d498'&gt;""Game Options""&lt;/t&gt; and click on the &lt;t color='#f0d498'&gt;""Persistent Save""&lt;/t&gt; button.</Original>
-        <Korean>안티스타시에는 다른 CTI 모드와 유사한 사용자 정의 저장 시스템이 있습니다.&lt;br/&gt;&lt;br/&gt;저장 방법: 지휘관은 &lt;t color='#f0d498'&gt;지도 화이트보드&lt;/t&gt;로 이동하여 스크롤 선택으로&lt;t color='#f0d498'&gt;""게임 설정""&lt;/t&gt;을 선택하고 &lt;t color='#f0d498'&gt;""영구 저장""&lt;/t&gt; 버튼을 누르십시오.</Korean>
-        <Russian>В Antistasi есть собственная система сохранения, похожая на другие CTI.&lt;br/&gt;&lt;br/&gt; Чтобы сохранить: Ваш командир должен подойти к &lt;t color='#f0d498'&gt;Карте&lt;/t&gt;, открыть &lt;t color='#f0d498'&gt;""Параметры""&lt;/t&gt; и нажать на кнопку &lt;t color='#f0d498'&gt;""Сохранение""&lt;/t&gt;.</Russian>
+        <Original>Antistasi has a custom save system similar to other CTIs.&lt;br/&gt;&lt;br/&gt;To Save: Go to the &lt;t color='#f0d498'&gt;Battle Menu (%1)&lt;/t&gt;, select the Commander or Admin tab and then click the &lt;t color='#f0d498'&gt;"Persistent Save"&lt;/t&gt; button.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_createDialog_SLPS_line2">
         <Original>Current parameters are configured to auto-save every %1 minutes.</Original>
@@ -2915,7 +2934,7 @@
       <Key ID="STR_A3A_fn_dialogs_fastTravelRadio_begin">
         <Original>Fast traveling, travel time: %1, please wait.</Original>
         <Korean>빠른 이동 중. 도착 시간까지: %1초, 잠시만 기다려 주십시오...</Korean>
-        <Russian>Быстрое перемещение: пожалуйста, подождите %1 сек.</Russian>
+        <Russian>Быстрое перемещение: пожалуйста, подождите %1.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_fastTravelRadio_end">
         <Original>You arrived at the destination.</Original>
@@ -2961,6 +2980,9 @@
         <Turkish>Yolculuk etmek istediğiniz bölgeye tıklayın.</Turkish>
         <Chinesesimp>选择你所想要前往的区域</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_dialogs_ftradio_failed">
+        <Original>Failed to find an empty position in your target area. You should probably drive.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_grp_arrived">
         <Original>Group %1 arrived to destination.</Original>
         <Italian>Gruppo %1 è arrivato a destinazione.</Italian>
@@ -2986,6 +3008,9 @@
         <Portuguese>A mover grupo %1 para o destino.</Portuguese>
         <Turkish>Grup %1 hedefe ilerliyor.</Turkish>
         <Chinesesimp>正在将组 %1 移动至目标。</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_dialogs_ftradio_generic_fail">
+        <Original>You cannot Fast Travel while: </Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_grp_select">
         <Original>You can select one group only to Fast Travel.</Original>
@@ -3111,18 +3136,11 @@
         <Turkish>Oyuncu grupları sadece Karargah ya da Hava üslerine hızlı yolculuk yapabilirler.</Turkish>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_no_other">
-        <Original>You cannot Fast Travel if you don't have a driver in all your vehicles or your vehicles are damaged and cannot move or your group is in a boat.</Original>
-        <Italian>Non puoi effettuare il Viaggio Rapido se non hai un guidatore in tutti i tuoi veicoli o i tuoi veicoli sono danneggiati e non possono muoversi o il tuo gruppo si trova in un'imbarcazione.</Italian>
-        <Spanish>No puede usar el viaje rápido si no tiene un conductor en todos sus vehículos o sus vehículos están dañados y no pueden moverse o su grupo está en una embarcación.</Spanish>
-        <French>Vous ne pouvez pas voyager rapidement si vous n'avez pas de chauffeur dans tous vos véhicules ou si vos véhicules sont endommagés et ne peuvent pas bouger ou si votre groupe est dans un bateau.</French>
-        <Korean>당신은 모든 차량에 운전수가 없거나 차량이 고장나서 이동이 불가능한 경우 또는 그룹이 배에 탄 경우 빠른 이동을 할 수 없습니다.</Korean>
-        <Russian>Если у вас нет водителя во всех транспортных средствах, если ваши транспортные средства повреждены и не могут двигаться, или если ваш отряд находится в лодке, вы не можете совершать быстрые перемещение.</Russian>
-        <Polish>Nie można podróżować szybko, jeśli nie ma kierowcy we wszystkich pojazdach, pojazdy są uszkodzone i nie mogą się poruszać lub grupa znajduje się na łodzi.</Polish>
-        <Czech>Nemůžeš rychle cestovat pokud nemáš řidiče ve všech svých vozidlech, vozidla jsou požkozené a nemohou se hýbat nebo tvoje skupina je na lodi.</Czech>
-        <Portuguese>Não podes fazer Viagem Rápida se não tens um condutor em todos os veículos ou os veículos estão danificados e não se conseguem mexer ou o grupo está num barco.</Portuguese>
+        <Original>You cannot Fast Travel if your vehicle cannot move or isn't a land vehicle.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_no_param">
         <Original>Fast travel is disabled for this server.</Original>
+        <Russian>Быстрое перемещение отключено на этом сервере.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_no_tow">
         <Original>You cannot Fast Travel with your Tow Rope out or a Vehicle attached.</Original>
@@ -3133,6 +3151,9 @@
         <Russian>Вы не можете быстро перемещаться, когда буксировочный трос вытащен или к нему присоединено транспортное средство.</Russian>
         <Polish>Nie można szybko podróżować z wyciągniętą liną holowniczą lub podłączonym pojazdem.</Polish>
         <Czech>Nemůžeš rychle cestovat pokud tažné lano je vytažené nebo na něm je připojené vozidlo.</Czech>
+      </Key>
+      <Key ID="STR_A3A_fn_dialogs_ftradio_not_driver">
+        <Original>Fast travel of a vehicle must be initiated by the driver.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_ftradio_title">
         <Original>Fast Travel</Original>
@@ -3421,19 +3442,12 @@
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius">
         <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;&lt;br/&gt;More than 10 players are absent from HQ currently.</Original>
-        <Italian>Tutti i giocatori devono trovarsi entro 100m dal QG per riposare.</Italian>
-        <Spanish>Todos los jugadores deben estar en un radio de 100m del CG para poder descansar.</Spanish>
-        <French>Tous les joueurs doivent se trouver dans un rayon de 100 m du QG pour pouvoir se reposer.</French>
-        <Korean>모든 플레이어가 본부로부터 100미터 이내에 있어야 쉴 수 있습니다.</Korean>
-        <Russian>Все игроки должны находиться в радиусе 100 метров от штаба, чтобы иметь возможность отдохнуть.</Russian>
-        <Polish>Wszyscy gracze muszą znajdować się w promieniu 100 m od siedziby głównej, aby móc odpocząć.</Polish>
-        <Czech>Všichni hráči musí být v okruhu 100M od HQ abys mohl pustit odpočinek.</Czech>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius_players">
         <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;The following players are not at HQ: %1, and %2.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_no_radius_singleplayer">
-        <Original>All players must be in a 100m radius from HQ to be able to rest.&lt;br/&gt;&lt;br/&gt;%1 is currently not at HQ.</Original>
+        <Original>All players must be in a 100m radius from HQ to be able to rest.\n\n%1 is currently not at HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_dialogs_skiptime_title">
         <Original>Skip Time / Rest</Original>
@@ -3889,6 +3903,9 @@
         <Russian>Лимит гражданских:</Russian>
         <Chinesesimp>平民限制:</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_init_initclient_gameOpt_obsolete">
+        <Original>The game options have moved! Run a persistent save from the Commander or Admin menus on the new battle menu, adjust the AI limits from the Admin tab, or adjust your client settings in the Escape menu.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_init_initclient_gameOpt_limFT">
         <Original>Limited Fast Travel:</Original>
         <Italian>Limite Viaggio Rapido:</Italian>
@@ -3955,6 +3972,12 @@
         <Czech>Obecné informace</Czech>
         <Turkish>Genel bilgi</Turkish>
         <Chinesesimp>基本信息</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_init_initclient_helipad">
+        <Original>Helipad</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_init_initclient_helipad_enemies">
+        <Original>You cannot access the helipad garage while enemies are nearby.</Original>
       </Key>
       <Key ID="STR_A3A_fn_init_initclient_member_admin">
         <Original>You are not in the member's list, but as you are Server Admin, you have been added. Welcome!</Original>
@@ -4116,6 +4139,9 @@
         <Original>Taxes Income&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;Manpower: +%1&lt;br/&gt;Money: +%2 €</Original>
         <Korean>세금 획득&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;인력: +%1&lt;br/&gt;자금: +%2 </Korean>
         <Russian>Доход&lt;br/&gt; &lt;t size='0.5' color='#C1C0BB'&gt;&lt;br/&gt;HR: +%1&lt;br/&gt;Деньги: +%2 €</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_init_initClient_addAct_recruitSquad">
+        <Original>Squad Recruitment</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_intel">
@@ -4834,6 +4860,12 @@
         <Russian>Защита Оперативной зоны</Russian>
         <Chinesesimp>肃清区域</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_mission_conq_police_text">
+        <Original>A police station is disturbing our operations in %1. Go there and destroy it before %2. You can ransack it for loot and intel first.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conq_police_title">
+        <Original>Destroy the police station</Original>
+      </Key>
       <Key ID="STR_A3A_fn_mission_conv_ammo_text">
         <Original>A convoy from %1 is about to depart at %2. It will provide ammunition to %3. Try to intercept it. Steal or destroy that truck before it reaches its destination.</Original>
         <Italian>Un convoglio da %1 è in procinto di partire alle %2. Trasporta munizioni verso %3. Prova ad intercettarlo. Ruba o distruggi i veicoli prima che raggiungano la destinazione.</Italian>
@@ -4960,6 +4992,43 @@
         <Polish>Konwój z zaopatrzeniem</Polish>
         <Czech>Konvoj se zásobami.</Czech>
         <Chinesesimp>补给运输车队</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conv_gunshop_text">
+        <Original>Our shipment of weapons has  been intercepted by the local authorities, and is being redirected as supplies for an %3. It's about to leave at %2 from an %1. Take the shipment back by any means.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conv_gunshop_title">
+        <Original>Recover Gun Shipment</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_conv_start_location">
+        <Original>convoy start</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_title">
+        <Original>Gun Shop</Original>
+        <German>Waffenladen</German>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_text_meet">
+        <Original>My distant cousin Solomon Maru has contacted us. Rumor is that he sells items stolen from the enemy. He is in %1, go and meet him. He will only speak to the commander.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_text_wait">
+        <Original>Wait a few minutes for Solomon to arrange delivery of the goods.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_airdrop">
+        <Original>A friend is airdropping the cargo. I've marked the position on your map. Good luck.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_intercept">
+        <Original>Unfortunately enemies have intercepted your shipment. But you still have a chance to acquire it. Good luck.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_nomoney">
+        <Original>You can't afford these items. Stop wasting my time.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_gunshop_wait">
+        <Original>Wait around while I arrange delivery of the goods. It shouldn't take long.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_supplydrop_title">
+        <Original>Supply Drop</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_mission_supplydrop_text">
+        <Original>An enemy plane is airdropping supplies on this position. Get there with a truck and recover the crate. Be careful not to shoot down the plane!</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_des_ante_text">
         <Original>We need to destroy or take a Radio Tower in %1. This will interrupt the coverage of %3 radio propaganda. Do it before %2.</Original>
@@ -5313,7 +5382,7 @@
         <Chinesesimp>战俘</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_res_refu_text1">
-        <Original>A group of smugglers have been arrested in %1 and they are about to be sent to prison. Go there and free them in order to make them join our cause. Do this before %2.</Original>
+        <Original>A group of smugglers have been arrested in %1 and they are about to be sent to prison. Go there, free them, and bring them back to HQ in order to make them join our cause. Do this before %2.</Original>
         <Italian>Un gruppo di contrabbandieri è stato arrestato a %1 e stanno per essere incarcerati. Recati sul posto e liberali per reclutarli. Fallo entro %2.</Italian>
         <Spanish>Un grupo de contrabandistas ha sido arrestado en %1 y están a punto de ser enviados a prisión. Ve allí y libéralos para que se unan a nuestra causa. Hazlo antes de las %2.</Spanish>
         <French>Un groupe de contrebandiers a été arrêté à %1 et sont sur le point d'être envoyés en prison. Allez là bas et liberez-les afin de les faire rejoindre notre cause. Faites le avant %2.</French>
@@ -5629,7 +5698,7 @@
         <Chinesesimp>%1 没有足以能够拿取的资源</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_tBSteal_grab_yes">
-        <Original>You grabbed 100 € from the %1 Money Pool.&lt;br/&gt;&lt;br/&gt;This will affect your prestige and status among %1 forces.</Original>
+        <Original>You grabbed %1 € from the %2 Money Pool.&lt;br/&gt;&lt;br/&gt;This will affect your prestige and status among %2 forces.</Original>
         <Italian>Hai preso 100 € dal fondo %1.&lt;br/&gt;&lt;br/&gt;Ciò influirà sul tuo status tra le forze %1.</Italian>
         <French>Vous aves pris 100 € de la réserve d'argent de %1. &lt;br/&gt;&lt;br/&gt; Cela va affecter votre prestige et votre statut au sein des forces de %1.</French>
         <Korean>당신은 %1의 공동 자금에서 100€를 가져갔습니다.&lt;br/&gt;&lt;br/&gt;이는 %1의 군 내에서 당신의 지위와 위신에 영향을 미칠 것입니다.</Korean>
@@ -5730,8 +5799,8 @@
         <Russian>Командир подал в отставку. Подходящего командира нет.</Russian>
         <Chinesesimp>指挥官已离线.目前没有合适的指挥官.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifle1">
-        <Original>Autorifleman role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifleman_1">
+        <Original>Autorifleman role</Original>
         <Italian>Ruolo Fuciliere Automatico.</Italian>
         <French>Rôle de Mitrailleur.</French>
         <Korean>자동소총수 역할</Korean>
@@ -5741,8 +5810,8 @@
         <Turkish>Makinalı Tüfek rolü</Turkish>
         <Chinesesimp>自动步枪手</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifle2">
-        <Original>Autoriflemen have a slight bonus on carry capacity, but make more noise when they move</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_autorifleman_2">
+        <Original>Autoriflemen have a slight bonus on carry capacity, but make more noise when they move.</Original>
         <Italian>I Fucilieri Automatici hanno un piccolo bonus sulla capacità di trasporto, però fanno troppo rumore quando si muovono.</Italian>
         <French>Les Mitrailleurs ont un léger bonus de capacité de transport, mais sont plus bruyants quand ils se déplacent.</French>
         <Korean>자동소총수는 운반 용량에 약간의 보너스를 가지지만, 이동할 때 더 큰 소리를 냅니다.</Korean>
@@ -5751,8 +5820,8 @@
         <Czech>Kulometčíci mají menší bonus k maximální váze, kterou unesou, ale dělají větší hluk při pohybu</Czech>
         <Chinesesimp>自动步枪手在携带重量上略带优势, 但是在移动时会发出更大的动静.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_commander1">
-        <Original>Commander role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_commander_1">
+        <Original>Commander role</Original>
         <Italian>Ruolo Comandante.</Italian>
         <French>Rôle de Commandant.</French>
         <Korean>지휘관 역할</Korean>
@@ -5762,8 +5831,8 @@
         <Turkish>Komutan rolü</Turkish>
         <Chinesesimp>指挥官</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_commander2">
-        <Original>The commander is a lightweight unit with increased camouflage, medical and engineering capabilities</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_commander_2">
+        <Original>The commander is a lightweight unit with increased camouflage, medical and engineering capabilities.</Original>
         <Italian>Il comandante è un'unità leggera con capacità mimetiche, mediche e di genio aumentate.</Italian>
         <French>Le commandant est une unité légère avec des capacités de camouflage, médical et d'ingéniérie augmentées.</French>
         <Korean>지휘관은 위장, 의료, 공병 능력이 향상된 경량 유닛입니다.</Korean>
@@ -5772,8 +5841,8 @@
         <Czech>Velitel je lehká jednotka se zvýšenou kamufláží, a lékařskými a inženýrskými schopnostmi</Czech>
         <Chinesesimp>指挥官是一个高伪装，兼备医疗以及工程才能一体的轻量化单位</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_engi1">
-        <Original>Engineer role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_engineer_1">
+        <Original>Engineer role</Original>
         <Italian>Ruolo Geniere.</Italian>
         <French>Rôle d'Ingénieur.</French>
         <Korean>공병 역할</Korean>
@@ -5783,8 +5852,8 @@
         <Turkish>Mühendis rolü</Turkish>
         <Chinesesimp>工程师</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_engi2">
-        <Original>Engineers do not have any bonus or penalties, but have the ability to use Toolkits for vehicle repair</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_engineer_2">
+        <Original>Engineers do not have any bonus or penalties, but have the ability to use Toolkits for vehicle repair.</Original>
         <Italian>I Genieri non hanno bonus o penalità, ma hanno l'abilità di usare i Kit di Riparazioni per riparare i veicoli.</Italian>
         <French>Les Ingénieurs n'ont pas de bonus ou de malus, mais ils ont la capacité d'utiliser des Kits de Réparation pour réparer les véhicules.</French>
         <Korean>공병은 아무 보너스나 패널티가 없지만, 차량 수리를 위해 도구모음을 사용할 수 있는 능력이 있습니다.</Korean>
@@ -5793,8 +5862,8 @@
         <Czech>Inženýři nemají žádné bonusy ani penalizace, ale můžou používat opravovací sady na opravení vozidel</Czech>
         <Chinesesimp>工程师并没什么特殊的长处或短处，但是他们可以使用修理包来为载具提供修理</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier1">
-        <Original>Grenadier role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier_1">
+        <Original>Grenadier role</Original>
         <Italian>Ruolo Granatiere.</Italian>
         <French>Rôle de Grenadier.</French>
         <Korean>유탄수 역할</Korean>
@@ -5804,8 +5873,8 @@
         <Turkish>Bomba Atar rolü</Turkish>
         <Chinesesimp>榴弹手</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier2">
-        <Original>Grenadiers have a slight bonus on carry capacity, but are easy to spot</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_grenadier_2">
+        <Original>Grenadiers have a slight bonus on carry capacity, but are easy to spot.</Original>
         <Italian>I granatieri hanno un piccolo bonus sulla capacità di trasporto, ma sono facili da avvistare.</Italian>
         <French>Les Grenadiers ont un léger bonus de capacité de transport, mais sont facile à réperer.</French>
         <Korean>유탄수는 운반 용량에 보너스를 가지지만, 발견되기 더 쉬워집니다.</Korean>
@@ -5814,8 +5883,8 @@
         <Czech>Granátometčíci mají menší bonus k váze kterou unesou, ale dají se jednodušeji spatřit</Czech>
         <Chinesesimp>榴弹手在携带重量上略带优势, 但是更容易被敌人发现.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_medic1">
-        <Original>Medic role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_medic_1">
+        <Original>Medic role</Original>
         <Italian>Ruolo Medico.</Italian>
         <French>Rôle de Médecin.</French>
         <Korean>의무병 역할</Korean>
@@ -5825,8 +5894,8 @@
         <Turkish>Sıhıye rolü</Turkish>
         <Chinesesimp>卫生员</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_medic2">
-        <Original>Medics do not have any bonus or penalties, but have the ability to use certain medical items for full health restoration</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_medic_2">
+        <Original>Medics do not have any bonus or penalties, but have the ability to use certain medical items for full health restoration.</Original>
         <Italian>I Medici non hanno bonus o penalità, ma sono in grado di usare determinati oggetti medici per rigenerare totalmente la salute.</Italian>
         <French>Les Médecins n'ont pas de bonus ou de malus, mais ils ont la capacité d'utiliser certains objets médicaux afin de prodiguer des soins complets.</French>
         <Korean>의무병은 보너스나 패널티가 없지만, 완치를 위해 특정한 의료품을 사용할 수 있는 능력이 있습니다.</Korean>
@@ -5835,8 +5904,8 @@
         <Czech>Doktoři nemají žádné bonusy ani penalizace, ale můžou používat některé lékařské předměty k doplnění plného zdraví</Czech>
         <Chinesesimp>卫生员并没有什么额外的奖励或者处罚特长，但是他们可以使用特定的医疗物品进行全面的医疗救助.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_rifle1">
-        <Original>Rifleman role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_rifleman_1">
+        <Original>Rifleman role</Original>
         <Italian>Ruolo Fuciliere.</Italian>
         <French>Rôle de Fusilier.</French>
         <Korean>소총수 역할</Korean>
@@ -5846,8 +5915,8 @@
         <Turkish>Piyade rolü</Turkish>
         <Chinesesimp>步枪兵</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_rifle2">
-        <Original>Riflemen do not have any bonus or penalties but can hack drones</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_rifleman_2">
+        <Original>Riflemen do not have any bonus or penalties but can hack drones.</Original>
         <Italian>I Fucilieri non hanno bonus o penalità ma possono hackerare i droni.</Italian>
         <French>Les Fusiliers n'ont pas de bonus ou de malus mais ils peuvent hacker des drones.</French>
         <Korean>소총수는 보너스나 패널티가 없지만, 무인기를 해킹할 수 있습니다.</Korean>
@@ -5856,8 +5925,8 @@
         <Czech>Střelci nemají žádné bonusy ani penalizace, ale můžou hackovat drony</Czech>
         <Chinesesimp>步枪兵并没什么额外的奖励以及处罚特长，但是他们可以骇入无人机.</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_teamlead1">
-        <Original>Teamleader role.</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_teamleader_1">
+        <Original>Teamleader role</Original>
         <Italian>Ruolo Caposquadra.</Italian>
         <French>Rôle de Chef d'équipe.</French>
         <Korean>조장 역할</Korean>
@@ -5867,8 +5936,8 @@
         <Turkish>Tim Komutan rolü</Turkish>
         <Chinesesimp>小组组长</Chinesesimp>
       </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_teamlead2">
-        <Original>Teamleader are more lightweight units with increased camouflage capabilities</Original>
+      <Key ID="STR_A3A_fn_orgp_unitTraits_teamleader_2">
+        <Original>Teamleader are more lightweight units with increased camouflage capabilities.</Original>
         <Italian>I Caposquadra sono unità leggere con capacità mimetiche aumentate.</Italian>
         <French>Les Chefs d'équipe sont des unités légères avec des capacités de camouflage augmentées.</French>
         <Korean>조장은 위장 능력이 향상된 경량 유닛입니다.</Korean>
@@ -5876,16 +5945,6 @@
         <Polish>Dowódcy sekcji to lżejsze jednostki o zwiększonych możliwościach kamuflażu.</Polish>
         <Czech>Velitel týmu je lehká jednotka se zvýšenou kamufláží</Czech>
         <Chinesesimp>小组组长是一个高伪装的轻量化单位</Chinesesimp>
-      </Key>
-      <Key ID="STR_A3A_fn_orgp_unitTraits_titel">
-        <Original>Unit Traits</Original>
-        <Italian>Caratteristiche Unità</Italian>
-        <French>Attributs d'Unité</French>
-        <Korean>유닛 특성</Korean>
-        <Russian>Роль</Russian>
-        <Polish>Cechy jednostek</Polish>
-        <Czech>Vlastnosti jednotky</Czech>
-        <Chinesesimp>单位特长</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_unitTraits_title">
         <Original>Unit Traits</Original>
@@ -5898,7 +5957,7 @@
         <Chinesesimp>单位特长</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_orgp_unitTraits_you">
-        <Original>You have selected %1.</Original>
+        <Original>You have selected the %1.</Original>
         <Italian>Hai selezionato %1.</Italian>
         <French>Vous avez sélectionné %1.</French>
         <Korean>당신은 %1을(를) 선택했습니다.</Korean>
@@ -6473,6 +6532,9 @@
         <Czech>Ty a letecké vozidlo musí být v oblasti %1 letiště nebo HQ aby jsi ho mohl převést na body leteckého úderu.</Czech>
         <Chinesesimp>你在友军控制范围内的机场或者总部才能将空中载具转换成空中打击.</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_reinf_bombrun_no_cap">
+        <Original>You cannot convert this vehicle as it would give you %1 airstrike points, which brings you over the cap of %2 points.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_reinf_bombrun_no_destr">
         <Original>You can't convert a destroyed Air vehicle to Airstrikes.</Original>
         <Italian>Non puoi convertire Velivoli distrutt in Attacchi Aerei.</Italian>
@@ -6816,6 +6878,18 @@
         <Polish>Kontroluj oddział</Polish>
         <Chinesesimp>控制班组</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_reinf_controlunit_fasttravel">
+        <Original>Fast travel to player</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_controlunit_ft_enemynear">
+        <Original>You cannot fast travel while engaged by enemies.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_controlunit_ft_enemynear2">
+        <Original>You cannot fast travel to a target position that's engaged by enemies.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_controlunit_ft_traveltime">
+        <Original>%1 will arrive in %2 seconds.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_reinf_controlunit_no_belong">
         <Original>You cannot control a unit which does not belong to %1.</Original>
         <Italian>Non puoi controllare un'unità che non appartiene a %1.</Italian>
@@ -7108,7 +7182,7 @@
         <Chinesesimp>这地方不存在可以调除的驻军</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_reinf_garrDia_no_wPost">
-        <Original>Additional garrison units cannot be added to observation posts.</Original>
+        <Original>Additional garrison units cannot be added to watchposts.</Original>
         <French>Les unités de garnison supplémentaires ne peuvent pas être ajoutées aux postes d'observation.</French>
         <Korean>관측소에는 주둔군을 더 추가할 수 없습니다.</Korean>
         <Russian>Дополнительные гарнизонные подразделения не могут быть добавлены к наблюдательным постам.</Russian>
@@ -7201,6 +7275,9 @@
         <Polish>Aby spełnić tą prośbe, musisz kontrolować lotnisko.</Polish>
         <Czech>Pro splnění tohoto požadavku musíte ovládat letiště.</Czech>
         <Chinesesimp>该请求要求你控制最起码一座机场.</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_fn_reinf_NatoBomb_no_distanceHQ">
+        <Original>Airstrike called off, this position is too close to HQ.</Original>
       </Key>
       <Key ID="STR_A3A_fn_reinf_NatoBomb_no_radio">
         <Original>You need a radio in your inventory to be able to give orders to other squads.</Original>
@@ -8485,6 +8562,12 @@
         <Turkish>Seçilen birlikleri garnizon olarak göndereceğiniz bölgeyi seçin.</Turkish>
         <Chinesesimp>选择您将作为驻军发送的区域。</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_garrison_vehicle_added">
+        <Original>Vehicle added to garrison. Cargo and inventory may not be preserved when you leave the area. Entering the vehicle will remove it from the garrison.</Original>
+      </Key>
+      <Key ID="STR_A3A_garrison_vehicle_outside">
+        <Original>This vehicle is not within a rebel garrison.</Original>
+      </Key>
       <Key ID="STR_A3A_garrisons_header">
         <Original>Garrisons</Original>
         <German>Garnisonen</German>
@@ -8714,6 +8797,9 @@
         <Russian>[Экспериментальная] Разрешить противнику использовать сильную поддержку</Russian>
         <Polish>[Eksperymentalne] Pozwól wrogowi wykorzystać futurystyczne wsparcie</Polish>
         <Chinesesimp>实验性] 允许敌人使用未来科技化支援</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_Params_allowUnguidedLaunchers_title">
+        <Original>Should Rocket Launchers become unlocked?</Original>
       </Key>
       <Key ID="STR_A3A_Params_allowGuidedLaunchers_title">
         <Original>Should Guided Launchers become unlocked?</Original>
@@ -9101,6 +9187,12 @@
         <Polish>Tryb gry - NIE zmieniaj tego w trakcie misji</Polish>
         <Chinesesimp>游玩模式 - 请勿在游玩过程中改变此选项</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Params_garageAccessTimer_title">
+        <Original>Simulate logistics by blocking flag functions after capture for X minutes</Original>
+      </Key>
+      <Key ID="STR_A3A_Params_garageBlockTimer_title">
+        <Original>Combat timer for armed vehicles engaging</Original>
+      </Key>
       <Key ID="STR_A3A_Params_gcMaxObjects_title">
         <Original>Maximum number of corpses and wrecks</Original>
         <Russian>Максимальное количество трупов и обломков</Russian>
@@ -9200,6 +9292,9 @@
         <Russian>2 минуты</Russian>
         <Polish>2 minuty</Polish>
         <Chinesesimp>2 分钟</Chinesesimp>
+      </Key>
+      <Key ID="STR_A3A_Params_generic_3min">
+        <Original>3 minutes</Original>
       </Key>
       <Key ID="STR_A3A_Params_generic_30min">
         <Original>30 minutes</Original>
@@ -10187,7 +10282,7 @@
         <Russian>Истребитель атакует цель</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntSPTCll_CARPETBOMBSLONG">
-        <Original>A %1 heavy bomber is performing a carpet bombing.</Original>
+        <Original>%1 planes are performing a carpet bombing.</Original>
         <Korean>%1 세력의 중폭격기가 융단폭격을 수행함</Korean>
         <Russian>Тяжелый бомбардировщик %1 выполняет ковровую бомбардировку.</Russian>
       </Key>
@@ -10272,7 +10367,7 @@
         <Russian>Спецназ</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntSPTCll_SAMLONG">
-        <Original>Confirmed launch of %1 SAM.</Original>
+        <Original>%1 SAM is acquiring a target.</Original>
         <Korean>%1 세력의 지대공미사일 발사가 확인됨</Korean>
         <Russian>Подтверждена работа ЗРК %1</Russian>
       </Key>
@@ -10280,6 +10375,12 @@
         <Original>Projected SAM target</Original>
         <Korean>지대공미사일 예상 표적</Korean>
         <Russian>Подтверждена работа ЗРК</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_support_showIntSPTCll_SEADLONG">
+        <Original>A %1 SEAD strike is on the way.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_support_showIntSPTCll_SEADTITLE">
+        <Original>SEAD target</Original>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntSPTCll_TARGET">
         <Original>Target marked on map!</Original>
@@ -10317,7 +10418,7 @@
         <Russian>%1 готовит истребитель для завоевания превосходства в воздухе.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntStpCll_CARPETBOMBS">
-        <Original>A %1 heavy bomber is on the way.</Original>
+        <Original>%1 is preparing a carpet bombing strike.</Original>
         <Korean>%1 세력이 중폭격기를 보냄</Korean>
         <Russian>Тяжелый бомбардировщик %1 уже в пути.</Russian>
       </Key>
@@ -10332,7 +10433,7 @@
         <Russian>%1 только что отправил силы для контратаки.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntStpCll_CRUISEMISSILE">
-        <Original>A %1 launcher is preparing to launch a cruise missile.</Original>
+        <Original>%1 is preparing to launch a cruise missile.</Original>
         <Korean>%1 세력이 순항 미사일 발사를 준비 중</Korean>
         <Russian>Пусковая установка %1 готовится к запуску крылатой ракеты.</Russian>
       </Key>
@@ -10354,7 +10455,7 @@
       <Key ID="STR_A3A_fn_support_showIntStpCll_MORTAR">
         <Original>%1 is setting up a mortar position.</Original>
         <Korean>%1 세력이 박격포를 준비 중</Korean>
-        <Russian>%1 минирует позицию.</Russian>
+        <Russian>%1 устанавливает позицию для миномета.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntStpCll_ORBITALSTRIKE">
         <Original>A %1 satellite is charging an orbital strike.</Original>
@@ -10375,6 +10476,9 @@
         <Original>%1 is setting up a SAM launcher.</Original>
         <Korean>%1 세력이 지대공미사일 발사기를 준비 중</Korean>
         <Russian>%1 готовит пусковую установку ЗРК.</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_support_showIntStpCll_SEAD">
+        <Original>%1 is preparing a SEAD strike package.</Original>
       </Key>
       <Key ID="STR_A3A_fn_support_showIntStpCll_setupTime">
         <Original>Estimated setup: %1 minutes.</Original>
@@ -10414,6 +10518,9 @@
         <Original>%1 Destroyed</Original>
         <Korean>%1 파괴됨</Korean>
         <Russian>%1 уничтожен</Russian>
+      </Key>
+      <Key ID="STR_A3A_fn_supports_seadDown">
+        <Original>SEAD Plane Destroyed</Original>
       </Key>
     </Container>
     <Container name="A3A_templates">
@@ -10481,6 +10588,27 @@
         <Original>The Takistani Army is backed by a variety of sources, which are represented as individual templates in the faction selector. This faction uses primarily Western, or United States, vehicles and weaponry.</Original>
         <Russian>Такистанская армия опирается на различные источники, которые представлены в виде отдельных шаблонов в селекторе фракций. Эта фракция использует в основном западные, или американские, транспортные средства и оружие.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_CSAT_BRU">
+        <Original>The CSAT coalition has several member states that use similar vehicles and different infantry gear. The Belarusian forces use a variety of AKs and Russian weaponry.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_CSAT_CHI">
+        <Original>The CSAT coalition has several member states that use similar vehicles and different infantry gear. The Chinese forces use homegrown gear like the QBZ; many of the guns in this faction require the Apex DLC to use.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_CSAT_FRE">
+        <Original>The CSAT coalition has several member states that use similar vehicles and different infantry gear. The North African coalition members primarily use the FAL and a few other weapons of US and Russian make.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CB_CSAT_PER">
+        <Original>The CSAT coalition has several member states that use similar vehicles and different infantry gear. The Iranian forces primarily use the homegrown KH2002 as their service rifle of choice.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CBF_GAF">
+        <Original>The Grozovian Armed Forces are vying for control alongside Takistan and Chernarus in the Arma 2 world. The use primarily imported Serbian weaponry, which includes licensed Russian equipment and homegrown weaponry.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CBF_PLM">
+        <Original>The People's Liberation Militia are a fictional Chinese military, supplied by Soviet gear, vying for control over the Horizon Islands and other Pacific islands. They use very early Cold War gear like the SKS and AKMN.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_3CBF_TNM">
+        <Original>The Tanoa National Militia is a militia supplied by an unknown western proxy that is dedicated to fighting the PLM should they encroach on their territory. They use more modern vehicles but a wider variety of WW2 and early Cold War weapons like the M2 Carbine and AR-10.</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_3CB_Reb_CCM">
         <Original>The Chernorussian Communist Militia is quite similar to NAPA, with a group of citizens that takes faith in the old ways of the Soviet Union over the modern ideology of capitalism. Similar to NAPA, they scavenge whatever Soviet weapons they can.</Original>
         <Russian>Чернорусское коммунистическое ополчение очень похоже на NAPA. Это группа граждан, которые верят в старый путь Советского Союза, а не в современную идеологию капитализма. Как и NAPA, они собирают все советское оружие, которое могут найти.</Russian>
@@ -10505,6 +10633,21 @@
         <Original>The Armed Forces of the Russian Federation are the current-age Russian Army. Equipping a variety of cutting edge and Cold-War era vehicles, the AFRF typically use homegrown AK assault rifles chambered in 5.45 and 7.62 calibers.</Original>
         <Russian>Вооруженные силы Российской Федерации - это современная российская армия. Оснащенные разнообразной новейшей техникой времен холодной войны, ВС РФ обычно используют отечественные автоматы АК калибров 5,45 и 7,62.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_Aegis_Iran">
+        <Original>Iran is one of the primary members of the CSAT coalition, providing a large amount of manpower and funding. They primarily use standardized CSAT technology. Their service rifle is the Katiba, chambered in 6.5x39mm Caseless.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_Aegis_China">
+        <Original>China is one of the primary members of the CSAT coalition, providing much of the technological innovation, funding, and special forces talent. They primarily use standardized CSAT technology, and their service rifle is the CTAR.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_Aegis_Russia">
+        <Original>Russia is considering joining the CSAT coalition but has officially not joined yet. They export and use a wide variety of vehicles commonly known as CSAT technology, and they use the AK series of rifles as their primary service weapons.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_Aegis_US">
+        <Original>The US military in 2035 uses many NATO-common vehicles and is attempting to buy into the NATO modernization program with MXs for its conventional infantry, but until then uses the SCAR series of rifles.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_AMF_France">
+        <Original>The French Army uses a wide variety of homegrown equipment and vehicles, including things like aircraft that other countries would often import. They most often use the FAMAS rifle.</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_BAF">
         <Original>The British Armed Forces have quite the history, and their unique assortment of weaponry and equipment clearly shows it. They typically use the L85 series of assault rifles, chambered in 5.56 NATO.</Original>
         <Russian>Британские вооруженные силы имеют богатую историю, о чем ярко свидетельствует их уникальный ассортимент оружия и снаряжения. Как правило, они используют штурмовые винтовки серии L85 под патрон 5,56 НАТО.</Russian>
@@ -10525,6 +10668,9 @@
         <Original>No rebellion is won without the support of the civilians, whether they choose to report information to the rebels or volunteer to fight for what is right. Whatever their role may be, the rebellion is always fighting for their freedom.</Original>
         <Russian>Ни одно восстание не победит без поддержки мирных жителей, независимо от того, решают ли они сообщать информацию повстанцам или добровольно сражаются за правое дело. Какова бы ни была их роль, повстанцы всегда борются за свою свободу.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_CRO_Croatia">
+        <Original>The Croatian Army is in the process of changing over to NATO equipment. They use many homegrown vehicles, with their Air Force stuck with Soviet craft, and primarily field their own assault rifle, the VHS-D2.</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_CSAT">
         <Original>A coalition of Middle-Eastern and Asian nations led by Iran and China, the Canton protocol Strategic Alliance Treaty's meteoric rise rivals the power of the western NATO coalition. CSAT forces prefer to use the Katiba assault rifle, chambered in 6.5x39mm Caseless.</Original>
         <Russian>Коалиция ближневосточных и азиатских стран во главе с Ираном и Китаем, стремительный взлет которой по Кантонскому протоколу Договора о стратегическом союзе соперничает с мощью западной коалиции НАТО. Силы CSAT предпочитают использовать штурмовую винтовку Katiba под патрон 6,5x39 мм Caseless.</Russian>
@@ -10536,6 +10682,12 @@
       <Key ID="STR_A3A_templates_lore_CSATEnoch">
         <Original>CSAT forces operating in Livonia are Russian-based and use modern Russian gear along with weapons from other nations in the alliance. They typically use the Katiba assault rifle, similar to traditional CSAT doctrine.</Original>
         <Russian>Силы CSAT, действующие в Ливонии, базируются в России и используют современное российское снаряжение, а также оружие других стран, входящих в альянс. Как правило, они используют штурмовую винтовку "Катиба", что соответствует традиционной доктрине CSAT.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CSLA_AI_AFMC">
+        <Original>The Armed Forces of the Midland Coalition are a coalition of small militaries of countries located over the north Chernarusian border. They primarily use Western / US Cold War equipment with a healthy sprinkling of FAL rifles.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_CSLA_AI_CSLA">
+        <Original>The Czechoslovak People's Army is dedicated to fending off a western invasion into their country. They use mostly homegrown vehicles backed by Soviet military strength, with the SA-58 rifle as their primary of choice.</Original>
       </Key>
       <Key ID="STR_A3A_templates_lore_CUP_AI_BW">
         <Original>The Bundesweher are the current armed forces for Germany. They frequently use domestically produced rifles, such as the G36, HK416, and HK417 for small arms. Their armored units are rounded out with many NATO and U.S. produced vehicles.</Original>
@@ -10589,6 +10741,9 @@
         <Original>The United Kingdom was at the forefront of World War II, a final show of force from a once-great empire. They commonly use a variety of home-grown weapons like the Sten and Enfield, mixed with a variety of American export weaponry.</Original>
         <Russian>Великобритания была на переднем крае Второй мировой войны - последняя демонстрация силы некогда великой империи. Они обычно используют различные виды отечественного оружия, такие как "Стен" и "Энфилд", в сочетании с американским экспортным оружием.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_IFA_AI_USMC">
+        <Original>The United States Marine Corps fought in the Pacific campaign during World War II. The US Marines prefer their Springfield rifles and Browning Automatics.</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_ION">
         <Original>Ruthless and willing to do anything for a quick buck, the private military corporation of ION Services, Incorporated and it's diverse set of contractors believe every job has a reasonable price. The company buys assets in bulk for dirt-cheap, and there is no standard-issue rifle.</Original>
         <Russian>Безжалостная и готовая на все ради быстрой наживы частная военная корпорация ION Services, Incorporated и ее разнообразные подрядчики считают, что у каждой работы есть разумная цена. Компания закупает имущество оптом и по дешевке, а стандартных винтовок не существует.</Russian>
@@ -10612,6 +10767,15 @@
       <Key ID="STR_A3A_templates_lore_NATOUK">
         <Original>Since its founding in 1949, the North Atlantic Treaty Organization has been dedicated to ensuring the safety and security of all nations involved in the alliance, with this regiment hailing from the United Kingdom and using the SPAR-16 and SPAR-17 rifles.</Original>
         <Russian>С момента своего основания в 1949 году Организация Североатлантического договора призвана обеспечивать безопасность всех стран, входящих в альянс. Полк, в котором используются винтовки SPAR-16 и SPAR-17, дислоцируется в Великобритании.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_PRACS_RACS">
+        <Original>The Royal Army Corps of Sahrani is a powerful, self sufficient military on the island of Sahrani. They import many US / French aircraft and use many homegrown vehicles alongside a variety of different rifles, from Germany, Israel, and the US.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_PRACS_SLA">
+        <Original>The Sahrani Liberation Army is the military on Sahrani dedicated to fighting to what they see as the unjust RACS occupation. They almost entirely use Russian vehicles and weaponry, including the ubiquitous AK platform.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_PRACS_SLA_Guards">
+        <Original>The SLA Revolutionary Guards are the premier forces of the SLA, fielding much more advanced gear than their normal SLA counterparts. They also use Russian gear, but much more modern vehicles and gear.</Original>
       </Key>
       <Key ID="STR_A3A_templates_lore_RHS_AI_ChDKZ">
         <Original>The Chernarussian Movement of the Red Star is a pro-Russian separatist movement that quickly evolved to an active civilian militia to a powerful force capable of challenging governments directly. They normally use Cold-War era Soviet equipment and vehicles.</Original>
@@ -10653,6 +10817,12 @@
         <Original>The remainder of the civilians who were unable to evacuate the combat zone, the Takistani civilians are always on alert and have learned not to trust anyone. Make sure you restore peace to their lands.</Original>
         <Russian>Оставшиеся мирные жители, которые не смогли эвакуироваться из зоны боевых действий, - такистанцы всегда начеку и научились никому не доверять. Убедитесь, что вы восстановили мир на их землях.</Russian>
       </Key>
+      <Key ID="STR_A3A_templates_lore_MEC">
+        <Original>While the civilians are used to endless war, they are looking to live in peace.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_ADC">
+        <Original>Nothing less then the cradle of humanity, the last remnants won't flee from hostilities.</Original>
+      </Key>
       <Key ID="STR_A3A_templates_lore_TKM">
         <Original>The Takistani militia is an unexpectedly well-armed group of civilians who hold a significant opposition to the foreign occupation and support the acting government is attempting to use to bolster its ranks. They use a variety of scavenged weapons, commonly relying on bolt-action rifles.</Original>
         <Russian>Такистанское ополчение - неожиданно хорошо вооруженная группа гражданских лиц, выступающих против иностранной оккупации и поддержки, которую действующее правительство пытается использовать для укрепления своих рядов. Они используют разнообразное оружие, добытое в мусорных баках, в основном полагаясь на винтовки с продольно-скользящим затвором.</Russian>
@@ -10660,6 +10830,9 @@
       <Key ID="STR_A3A_templates_lore_TLA">
         <Original>The Tanoa Liberation Army is built on the dreams of hundreds, even thousands of soldiers to return the volcanic island of Tanoa to its former glory. They are very poorly funded, and typically use some of the oldest Cold War Soviet technology.</Original>
         <Russian>Освободительная армия Таноа построена на мечтах сотен и даже тысяч солдат вернуть вулканическому острову Таноа его былую славу. Они очень плохо финансируются и обычно используют самые старые советские технологии времен холодной войны.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_TMT_Turkish_Army">
+        <Original>The Turkish Army are the mainland forces of Turkey, transitioning into being a NATO-backed country. They use many unique vehicles and guns, with many of their rifles being built in Turkey, such as the MKE MPT series of rifles.</Original>
       </Key>
       <Key ID="STR_A3A_templates_lore_UNS_AI_PAVN">
         <Original>The People's Army of Vietnam are the citizens and militia of Vietnam dedicated to fighting the invasion of the US, with weapons funded from surrounding Eastern countries such as China and the Soviet Union. They typically use Type 56 assault rifles and the SKS battle rifle.</Original>
@@ -10678,12 +10851,18 @@
         <Russian>Армия Соединенных Штатов - одна из самых опасных военных сверхдержав в мире, а их союз с НАТО делает их сложной угрозой. Как правило, они производят и используют значительное количество оружия НАТО, включая калибры 5,56 STANAG и 7,62.</Russian>
       </Key>
       <Key ID="STR_A3A_templates_lore_USMC">
-        <Original>The United States Marine Corps are the primary branch of the US military deployed overseas. They retain the same lethality as their domestic counterparts, with equipment fitted for operating on the high seas. Their small arms are predominantly the same as the standard US Army.</Original>
+        <Original>The United States Marine Corps are the primary branch of the US military deployed alongside the Army for beach landings, with equipment fitted for operating navally. Their small arms are predominantly the same as the standard US Army.</Original>
         <Russian>Корпус морской пехоты США - основное подразделение вооруженных сил США, развернутое за рубежом. Они сохраняют ту же смертоносность, что и их отечественные коллеги, а их снаряжение приспособлено для действий в открытом море. Их стрелковое оружие в основном такое же, как и в армии США.</Russian>
       </Key>
       <Key ID="STR_A3A_templates_lore_VDV">
-        <Original>The Russian Air Forces fill a vital gap in the AFRF's capability of cohesive aerial assaults. They typically use standard issue Russian equipment, but their vehicles and gear are modified to be more lightweight for ease of aerial operations.</Original>
+        <Original>The Russian Airborne Forces fill a vital gap in the AFRF's capability of cohesive aerial assaults. They typically use standard issue Russian equipment, but their vehicles and gear are modified to be more lightweight for ease of aerial operations.</Original>
         <Russian>Российские ВВС заполняют жизненно важный пробел в возможностях ВСРФ по проведению сплоченных воздушных десантов. Как правило, они используют стандартное российское оборудование, но их машины и снаряжение модифицированы для облегчения воздушных операций.</Russian>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_VN_AI_ANZAC">
+        <Original>The Australian and New Zealand Army Corps didn't technically exist during the Vietnam war, but it is the name assigned to the military support that the two countries provided. They field many British-adopted weapons, primarily the L1A1, referred to as the FAL in many parts of the world.</Original>
+      </Key>
+      <Key ID="STR_A3A_templates_lore_VN_AI_USMC">
+        <Original>The United States Marine Corps played a vital role in the Vietnam War, securing any territory the traditional military was too thinly stretched to cover. They use many older small arms like the M1 Garand and M14, and field some unique vehicles but are predominately similar to the US Army.</Original>
       </Key>
       <Key ID="STR_A3A_templates_lore_VN_AI_MACV">
         <Original>The Military Assistance Command, Vietnam are the operational group of the US military tasked with invading Vietnam. They normally use later World War II weapons with a few fresh faces, like the M14, M16, and M60.</Original>
@@ -11320,20 +11499,8 @@
         <Turkish>Karakol - Kontrol Noktası</Turkish>
         <Chinesesimp>观察哨 - 路障</Chinesesimp>
       </Key>
-      <Key ID="STR_antistasi_dialogs_commander_comm_roadblock_delete">
-        <Original>Outpost-Roadblock Delete</Original>
-        <Italian>Elimina Punto di osservazione - Posti di Blocco</Italian>
-        <Spanish>Borrar P. Observación - Bloqueo</Spanish>
-        <French>Suppression de Poste d'Obs. - Barrage routier</French>
-        <Korean>감시초소 - 검문소 제거</Korean>
-        <Russian>Удалить НП / БП</Russian>
-        <Polish>Usuń Stanowisko Obserwacyjne - Blokade Drogową</Polish>
-        <Czech>O.Post-Odstranit zátaras</Czech>
-        <Turkish>Karakol - Kontrol Noktası Kaldır</Turkish>
-        <Chinesesimp>拆除观察哨/路障</Chinesesimp>
-      </Key>
       <Key ID="STR_antistasi_dialogs_commander_comm_roadblock_delete_tooltip">
-        <Original>Remove selected observation post or roadblock, the money spent will be refunded</Original>
+        <Original>Remove selected watchpost or roadblock, the money spent will be refunded</Original>
         <Italian>Rimuovi il posto di osservazione o il posto di blocco selezionato, i soldi verranno rimborsati</Italian>
         <Spanish>Borra el punto de observación o bloqueo de carretera, el dinero sera reembolsado</Spanish>
         <French>Supprimer le poste d'observation ou le barrage routier sélectionné, l'argent sera remboursé</French>
@@ -13045,6 +13212,12 @@
         <Turkish>Performansı etkiler. Lütfen bunu dikkatli kullanın. Antistasi'nin kötü çalıştığını düşünüyorsanız daha düşük mesafelere ayarlayın.</Turkish>
         <Chinesesimp>影响性能。请小心使用。如果你觉得 Antistasi 运行不够流畅, 把它调到更低的距离。</Chinesesimp>
       </Key>
+      <Key ID="STR_antistasi_dialogs_maps_toggle_ui">
+        <Original>Toggle UI mode</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_maps_toggle_ui_tooltip">
+        <Original>Switch between opening old and new UI dialogs by default.</Original>
+      </Key>
     </Container>
     <Container name="gameMode_menu">
       <Key ID="STR_antistasi_dialogs_gameMode_menu">
@@ -13315,7 +13488,7 @@
         <Chinesesimp>出售载具</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_journal_entry_header_commander_12">
-        <Original>Observation Post</Original>
+        <Original>Watchpost</Original>
         <German>Beobachtungsposten</German>
         <Italian>Posto di Osservazione</Italian>
         <Spanish>Puesto de observación</Spanish>
@@ -14816,7 +14989,7 @@
         <Chinesesimp>仅限指挥官使用。设置每个服务器或无头客户端的最大AI数量。不超过200个AI时, AI表现应当正常。</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_journal_entry_text_Options_3">
-        <Original>Commander Only. You may save the game at your HQ Map. This will allow you to continue playing upon mission update or server restart, preserving stats, player's equipment, conquered zones, enemy asset availability and many more things. WARNING: Normal save and load runs badly in this mission. This system is your only guarantee of saving the game properly</Original>
+        <Original>Commander Only. You may save the game in the Y-menu, in the Commander or Admin tabs. This will allow you to continue playing upon mission update or server restart, preserving stats, player's equipment, conquered zones, enemy asset availability and many more things. WARNING: Normal save and load runs badly in this mission. This system is your only guarantee of saving the game properly</Original>
         <Italian>Solo per il comandante. Puoi salvare il gioco sulla mappa del quartier generale. Ciò ti consentirà di continuare a giocare dopo l'aggiornamento della missione o il riavvio del server, preservando le statistiche, l'equipaggiamento del giocatore, le zone conquistate, la disponibilità delle risorse nemiche e molte altre cose. ATTENZIONE: il salvataggio e il caricamento normali funzionano male in questa missione. Questo sistema è la tua unica garanzia per salvare il gioco correttamente</Italian>
         <Spanish>Solo para el Comandante. Puedes guardar la partida en tu Mapa del CG. Esto te permite continuar en caso de actualización o reseteo del servidor, preservando las estadísticas, el equipo del jugador, zonas conquistadas, disponibilidad de equipo del enemigo y otras muchas cosas. ATENCIÓN: Guardar y cargar el juego de forma habitual no funciona de forma correcta en esta misión. Este método es tu única garantia de guardar el juego de forma apropiada.</Spanish>
         <French>Commandant seulement. Vous pouvez enregistrer le jeu sur votre carte au QG. Cela vous permettra de continuer à jouer après la mise à jour de la mission ou le redémarrage du serveur, en préservant les statistiques, l'équipement du joueur, les zones conquises, la disponibilité des ressources ennemies et bien d'autres choses. AVERTISSEMENT: la sauvegarde et le chargement normaux fonctionnent mal dans cette mission. Ce système est votre seule garantie de sauvegarder correctement le jeu</French>
@@ -14947,15 +15120,15 @@
         <Chinesesimp>按下 End 启用/禁用耳塞。使用ACE时无法使用。</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_journal_entry_text_SpecialK_6">
-        <Original>Press ALT+HOME to show / hide information bar at the top of the screen.</Original>
-        <Italian>Premi ALT+HOME per visualizzare / nascondere la barra informazioni in alto allo schermo.</Italian>
-        <Spanish>Presiona ALT + HOME para mostrar / ocultar la barra de información arriba de la pantalla.</Spanish>
-        <French>Appuyez sur ALT+HOME pour montrer / cacher la barre d'information en haut de l'écran.</French>
+        <Original>Press CTRL+F12 to show / hide information bar at the top of the screen. This can be rebound in your Arma Controls menu.</Original>
+        <Italian>Premi CTRL+F12 per visualizzare / nascondere la barra informazioni in alto allo schermo.</Italian>
+        <Spanish>Presiona CTRL+F12 para mostrar / ocultar la barra de información arriba de la pantalla.</Spanish>
+        <French>Appuyez sur CTRL+F12 pour montrer / cacher la barre d'information en haut de l'écran.</French>
         <Korean>알트 + 홈 키를 눌러 화면 상단의 정보 표시줄을 표시하거나 숨깁니다.</Korean>
-        <Russian>Нажмите ALT+HOME, чтобы отобразить/скрыть информационную строку в верхней части экрана.</Russian>
-        <Polish>Naciśnij klawisze ALT+HOME, aby wyświetlić/ukryć pasek informacyjny u góry ekranu.</Polish>
-        <Czech>Stisknout ALT+HOME k zobrazení / skrytí info lišty v horní části obrazovky</Czech>
-        <Chinesesimp>按ALT+HOME来显示/隐藏顶部信息栏。</Chinesesimp>
+        <Russian>Нажмите CTRL+F12, чтобы отобразить/скрыть информационную строку в верхней части экрана.</Russian>
+        <Polish>Naciśnij klawisze CTRL+F12, aby wyświetlić/ukryć pasek informacyjny u góry ekranu.</Polish>
+        <Czech>Stisknout CTRL+F12 k zobrazení / skrytí info lišty v horní části obrazovky</Czech>
+        <Chinesesimp>按CTRL+F12E来显示/隐藏顶部信息栏。</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_journal_entry_text_tutorial_1">
         <Original>Don't expect to be able to conquer anything in the early stages. First you have to gather enough resources (HR and Money) in order to be able to conquer and hold your positions. This mission tries to simulate real life guerilla situations. If in doubt, ask yourself what would you do in real life. Don't expect to win every time. Hit and Run is the basic manoeuvre here. Earn every resource, weapon and ammunition to gather enough assets in order to be a real challenge for the enemy. In the meantime, disturb its operations and gain support from the population.</Original>
@@ -15416,7 +15589,7 @@
         <Chinesesimp>使用该选项将你面前的玩家从会员列表中移除</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_toggle_info_bar_body_off">
-        <Original>You've turned off the top information bar. To enable it, press %1.</Original>
+        <Original>You've turned off the top information bar. To enable it, press %1.&lt;br/&gt;&lt;br/&gt;Use the Options button in the escape menu to turn off this hint.</Original>
         <Italian>Hai disabilitato la Barra Informazioni. Per abilitarla, premi %1.</Italian>
         <Spanish>Has ocultado la barra de información superior. Para activarla, pulsa %1</Spanish>
         <French>Vous avez désactivé la barre d'informations supérieure. Pour l'activer, appuyez sur %1.</French>
@@ -15427,7 +15600,7 @@
         <Chinesesimp>你关闭了顶部信息栏。 要启用它，请按%1。</Chinesesimp>
       </Key>
       <Key ID="STR_antistasi_dialogs_toggle_info_bar_body_on">
-        <Original>You've turned on the top information bar. To disable it, press %1.</Original>
+        <Original>You've turned on the top information bar. To disable it, press %1.&lt;br/&gt;&lt;br/&gt;Use the Options button in the escape menu to turn off this hint.</Original>
         <Italian>Hai abilitato la Barra Informazioni. Per disabilitarla, premi %1.</Italian>
         <Spanish>Has activado la barra de información superior. Para ocultarla, pulsa %1</Spanish>
         <French>Vous avez activé la barre d'informations supérieure. Pour la désactiver, appuyez sur %1.</French>
@@ -15721,7 +15894,7 @@
         <Chinesesimp>服务器加载完毕</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_feedback_serverinfo_mismatch">
-        <Original>Version mismatch error:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;Client: %2</Original>
+        <Original>Error: Version mismatch on client and server:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;&lt;br/&gt;Client: %2&lt;br/&gt;&lt;br/&gt;Ensure you are running the most recent version of Antistasi - The Mod on the server and your computer.</Original>
         <Italian>Errore, versione non corrispondente:&lt;br/&gt;&lt;br/&gt;Server: %1&lt;br/&gt;Client: %2</Italian>
         <Spanish>Error de discordancia de versión:&lt;br&gt;&lt;br/&gt;Servidor: %1&lt;br/&gt;Cliente: %2</Spanish>
         <French>Erreur d'incohérence de version :&lt;br/&gt;&lt;br/&gt;Serveur : %1&lt;br/&gt;Client : %2</French>
@@ -16299,6 +16472,9 @@
         <Turkish>Cephane İstasyonu</Turkish>
         <Chinesesimp>弹药站</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Utility_Items_Name_ammocontainer">
+        <Original>Ammo Container</Original>
+      </Key>
       <Key ID="STR_A3A_Utility_Items_Name_buildboxlarge">
         <Original>Large construction kit</Original>
         <Italian>Kit di costruzioni grande</Italian>
@@ -16534,6 +16710,83 @@
         <Polish>Opcje związane z zarządzaniem pojazdami w oddziałach kontrolowanych przez HC</Polish>
         <Czech>Možnosti související se správou vozidel v jednotkách kontrolovaných HC</Czech>
         <Chinesesimp>与指挥部班组车辆管理相关的选项</Chinesesimp>
+      </Key>
+    </Container>
+    <Container name="client_options">
+      <Key ID="STR_antistasi_client_options_useMusic">
+        <Original>Use Music</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_useNewUI">
+        <Original>Use New UI</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_useNewUI_title">
+        <Original>Development</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_useNewUI_body">
+        <Original>The old UI menus do not have all of the features of the new UI and may be removed at any time. It is recommended to use the new UI, but the old UI will remain available in case of bugs.</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_hideCorpses">
+        <Original>Hide far corpses in this radius to save performance</Original>
+      </Key>
+      <Key ID="STR_antistasi_client_options_hideInfobarHint">
+        <Original>Hide hints for info bar toggle</Original>
+      </Key>
+    </Container>
+    <Container name="intelfeed">
+      <Key ID="STR_A3A_intelfeed_title_attack_imminent">
+        <Original>%1 attack imminent</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_attack_imminent">
+        <Original>Our sources believe that %1 forces will begin a major attack within the next 5 minutes.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_attack_time">
+        <Original>%2 mins until %1 attack</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_attack_time">
+        <Original>%1 is reported to have the resources to launch an attack in %2 if our calculations are right.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_def_resources">
+        <Original>%1 resources: %2</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_def_resources">
+        <Original>our sources report that %1 has %2 defence resources.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_decryption_key">
+        <Original>%1 decryption key found</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_decryption_key">
+        <Original>we found a %1 decryption key, it will be useful for decoding their radio transmissions.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_key_pack">
+        <Original>%1 key pack found</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_key_pack">
+        <Original>we found a pack of %1 decryption keys, they will be very helpful in reading their support calls.</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_title_weapon_unlock">
+        <Original>Weapon unlock</Original>
+      </Key>
+      <Key ID="STR_A3A_intelfeed_desc_weapon_unlock">
+        <Original>we found supply data for the %1, and it has been made available in the arsenal.</Original>
+      </Key>
+    </Container>
+    <Container name="role_names">
+      <Key ID="STR_A3A_role_names_rebel">
+        <Original>Rebel</Original>
+      </Key>
+    </Container>
+    <Container name="mod_blacklist">
+      <Key ID="STR_A3A_mod_blacklist_title">
+        <Original>Blacklisted Mod Detected!</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_titleServer">
+        <Original>Blacklisted Mod On Server!</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_text">
+        <Original>Antistasi has detected a blacklisted mod on your client:&lt;br/&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;It is highly recommended that you remove this mod; it may break the gamemode in unpredictable ways.&lt;br/&gt;&lt;br/&gt;Dev comment: %2</Original>
+      </Key>
+      <Key ID="STR_A3A_mod_blacklist_textServer">
+        <Original>Antistasi has detected a blacklisted mod on your server:&lt;br/&gt;&lt;br/&gt;%1&lt;br/&gt;&lt;br/&gt;It is highly recommended that you remove this mod; it may break the gamemode in unpredictable ways.&lt;br/&gt;&lt;br/&gt;Dev comment: %2</Original>
       </Key>
     </Container>
   </Package>

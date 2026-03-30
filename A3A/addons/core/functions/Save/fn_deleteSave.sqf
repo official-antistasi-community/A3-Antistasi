@@ -4,8 +4,6 @@ FIX_LINE_NUMBERS()
 
 params ["_serverID", "_campaignID", "_worldname", ["_gametype", "Greenfor"]];
 
-Info_1("Deleting saved game with parameters %1", _this);
-
 private _namespace = [profileNamespace, missionProfileNamespace] select (_serverID isEqualType false);
 
 private _postfix = if (_serverID isEqualTo false) then { _campaignID } else
@@ -29,16 +27,11 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 		private _varName = format ["player_%1_%2", _playerID, _x];
 		_namespace setVariable [_varname + _postfix, nil];
 
-	} forEach ["loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage", "moneyX"];
+	} forEach ["loadoutPlayer", "scorePlayer", "rankPlayer", "personalGarage", "moneyX","missionsCompleted"];
 
 } forEach _savedPlayers;
 
-
-// Delete all server data for specified campaign
-{
-	_namespace setVariable [_x + _postfix, nil];
-
-} forEach ["countCA", "gameMode", "difficultyX", "bombRuns", "smallCAmrk", "membersX", "antennas",
+private _varsToDelete = ["json", "countCA", "gameMode", "difficultyX", "bombRuns", "smallCAmrk", "membersX", "antennas",
 	"mrkSDK", "mrkCSAT", "posHQ", "dateX", "skillFIA", "destroyedSites", "distanceSPWN", "civPerc",
 	"chopForest", "maxUnits", "nextTick", "weather", "destroyedBuildings", "aggressionOccupants",
 	"aggressionInvaders", "resourcesFIA", "hr", "vehInGarage", "staticsX", "jna_datalist",
@@ -46,8 +39,14 @@ private _savedPlayers = _namespace getVariable ["savedPlayers" + _postfix, []];
 	"outpostsFIA", "tasks", "idlebases", "idleassets", "killZones", "controlsSDK", "params",
 	"attackCountdownOccupants", "attackCountdownInvaders", "prestigeNATO", "prestigeCSAT",
 	"savedPlayers", "testingTimerIsActive", "HR_Garage", "A3A_fuelAmountleftArray", "HQKnowledge", "enemyResources",
-	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC", "arsenalLimits"];
+	"version", "name", "saveTime", "ended", "factions", "addonVics", "DLC", "arsenalLimits", "rebelLoadouts",
+	"minorSites", "newGarrison", "radioKeys", "cityData"];
 
+// Delete all server data for specified campaign
+{
+	_namespace setVariable [_x + _postfix, nil];
+
+} forEach _varsToDelete;
 
 // Remove this campaign from the save list, if present
 private _saveList = [_namespace getVariable "antistasiSavedGames"] param [0, [], [[]]];

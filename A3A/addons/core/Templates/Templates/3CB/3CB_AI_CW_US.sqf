@@ -32,7 +32,7 @@
 ["vehiclesTanks", ["UK3CB_CW_US_B_EARLY_M1A1", "UK3CB_CW_US_B_EARLY_M60a3", "UK3CB_CW_US_B_EARLY_M60a1"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["RHS_M6_wd"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["UK3CB_TKA_B_RHIB_Gunboat", "UK3CB_TKA_B_RHIB"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["UK3CB_CW_US_B_LATE_LAV25", "UK3CB_CW_US_B_LATE_AAV"]] call _fnc_saveToTemplate;
 
@@ -66,7 +66,7 @@
 ["staticMGs", ["RHS_M2StaticMG_D"]] call _fnc_saveToTemplate;
 ["staticAT", ["RHS_TOW_TriPod_D"]] call _fnc_saveToTemplate;
 ["staticAA", ["RHS_Stinger_AA_pod_D"]] call _fnc_saveToTemplate;
-["staticMortars", ["RHS_M252_D"]] call _fnc_saveToTemplate;
+["staticMortars", ["a3a_RHS_M252"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "rhs_12Rnd_m821_HE"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;

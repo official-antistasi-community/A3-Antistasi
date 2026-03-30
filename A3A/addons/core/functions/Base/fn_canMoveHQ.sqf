@@ -8,7 +8,7 @@ Arguments:
 Return Value:
     <ARRAY> If the HQ can be moved right now, first element bool, every other afterwards string, at least 2 elements
 
-Scope: Local
+Scope: Anywhere
 Environment: Any
 Public: Yes
 Dependencies:
@@ -17,13 +17,15 @@ Dependencies:
     <OBJECT> petros
 
 Example:
-[] call A3A_fnc_canMoveHQ;
+[player] call A3A_fnc_canMoveHQ;
 */
+
+params ["_player"];
 
 private _result = [false];
 private _titleStr = localize "STR_A3A_fn_base_canmovehq_title";
 
-if (player != theBoss) then
+if (_player != theBoss) then
 {
     [_titleStr, localize "STR_A3A_fn_base_canmovehq_no_comm"] call A3A_fnc_customHint;
     _result pushBack localize "STR_A3A_fn_base_canmovehq_comm_only";

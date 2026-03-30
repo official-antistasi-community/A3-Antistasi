@@ -32,7 +32,7 @@
 ["vehiclesTanks", ["rhsusf_m1a1fep_wd","rhsusf_m1a1aimwd_usarmy","rhsusf_m1a1aim_tuski_wd","rhsusf_m1a2sep1wd_usarmy","rhsusf_m1a2sep1tuskiiwd_usarmy","rhsusf_m1a2sep2wd_usarmy"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["RHS_M6_wd"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["UK3CB_BAF_RHIB_HMG_DPMT", "UK3CB_BAF_RHIB_GPMG_DPMT"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
@@ -63,7 +63,7 @@
 ["staticMGs", ["RHS_M2StaticMG_WD"]] call _fnc_saveToTemplate;
 ["staticAT", ["RHS_TOW_TriPod_WD"]] call _fnc_saveToTemplate;
 ["staticAA", ["RHS_Stinger_AA_pod_WD"]] call _fnc_saveToTemplate;
-["staticMortars", ["RHS_M252_WD"]] call _fnc_saveToTemplate;
+["staticMortars", ["a3a_RHS_M252"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "rhs_12Rnd_m821_HE"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;

@@ -52,8 +52,8 @@ class Params
     class distanceSPWN
     {
         title = $STR_A3A_Params_distanceSPWN_title;
-        values[] = {700,800,900,1000,1100,1200};
-        texts[] = {"700","800","900","1000","1100","1200"};
+        values[] = {600,700,800,900,1000,1100,1200};
+        texts[] = {"600","700","800","900","1000","1100","1200"};
         default = 1000;
     };
     class enemyNearDistance
@@ -153,6 +153,20 @@ class Params
         values[] = {0,1};
         texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip,$STR_antistasi_dialogs_generic_button_yes_text};
         default = 0;
+    };
+    class A3A_flagGarageBlock
+    {
+        title = $STR_A3A_Params_garageAccessTimer_title;
+        values[] = {0,3,5,10,20};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min, $STR_A3A_Params_generic_20min};
+        default = 5;
+    };
+    class A3A_garageBlockTimer
+    {
+        title = $STR_A3A_Params_garageBlockTimer_title;
+        values[] = {0,3,5,10};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_3min, $STR_A3A_Params_generic_5min, $STR_A3A_Params_generic_10min};
+        default = 5;
     };
 
     class SpacerMembership
@@ -321,8 +335,8 @@ class Params
     class minWeaps
     {
         title = $STR_A3A_Params_minWeaps_title;
-        values[] = {15,25,40,-1};
-        texts[] = {"15","25","40", $STR_A3A_Params_generic_nounlocks};
+        values[] = {5,10,15,25,40,50,-1};
+        texts[] = {"5","10","15","25","40","50", $STR_A3A_Params_generic_nounlocks};
         default = 25;
     };
     class A3A_guestItemLimit
@@ -336,6 +350,14 @@ class Params
     {
         attr[] = {"server"};
         title = $STR_A3A_Params_unlockedUnlimitedAmmo_title;
+        values[] = {1,0};
+        texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
+        default = 0;
+    };
+    class allowUnguidedLaunchers
+    {
+        attr[] = {"server"};
+        title = $STR_A3A_Params_allowUnguidedLaunchers_title;
         values[] = {1,0};
         texts[] = {$STR_antistasi_dialogs_generic_button_yes_text,$STR_antistasi_dialogs_generic_button_no_tooltip};
         default = 0;
@@ -576,12 +598,5 @@ class Params
         values[] = {-1,1,2};
         texts[] = {$STR_A3A_Params_generic_none, $STR_A3A_Params_logDebugConsole_nondev, $STR_A3A_Params_generic_all};
         default = 1;
-    };
-    class A3A_GUIDevPreview
-    {
-        title = $STR_A3A_Params_GUIDevPreview_title;
-        values[] = {0,1};
-        texts[] = {$STR_antistasi_dialogs_generic_button_no_tooltip, $STR_antistasi_dialogs_generic_button_yes_text};
-        default = 0;
     };
 };

@@ -58,6 +58,7 @@ private _availParams = [_target, _side, 200, keys _supportTypesHM];
 {
     _y params ["_class", "_typeWeight", "_effRadius"];
     if (_class != "AREA") then { continue };            // only care about area-effect for requestArtillery
+    if (_typeWeight == 0) then { continue };            // special cases (eg. UAV) not used here
 
     // call the availability function for each support type
     private _availFunc = missionNamespace getVariable format ["A3A_fnc_SUP_%1Available", _x];

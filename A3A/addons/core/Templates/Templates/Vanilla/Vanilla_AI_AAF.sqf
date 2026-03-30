@@ -32,7 +32,7 @@ private _cargoTrucks = ["I_Truck_02_transport_F", "I_Truck_02_covered_F"];
 ["vehiclesTanks", ["I_MBT_03_cannon_F"]] call _fnc_saveToTemplate;
 private _AA = ["I_LT_01_AA_F"];
 
-["vehiclesTransportBoats", ["I_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["I_APC_Wheeled_03_cannon_F", "I_MRAP_03_hmg_F", "I_MRAP_03_gmg_F", "I_MRAP_03_F"]] call _fnc_saveToTemplate;
 
@@ -43,7 +43,7 @@ private _AA = ["I_LT_01_AA_F"];
 private _vehiclesHelisLight = ["I_Heli_light_03_unarmed_F"];
 private _vehiclesHelisTransport = ["I_Heli_Transport_02_F"];
 private _vehiclesHelisLightAttack = ["I_Heli_light_03_dynamicLoadout_F"];
-private _vehiclesHelisAttack = ["B_Heli_Attack_01_dynamicLoadout_F"];
+private _vehiclesHelisAttack = ["B_Heli_Attack_01_dynamicLoadout_F","B_Heli_Attack_01_dynamicLoadout_F","B_Heli_Attack_01_pylons_dynamicLoadout_F"];
 
 ["vehiclesArtillery", ["I_Truck_02_MRL_F", "B_MBT_01_arty_F"]] call _fnc_saveToTemplate;
 ["magazines", createHashMapFromArray [
@@ -94,6 +94,9 @@ if ("enoch" in A3A_enabledDLC) then {
 if ("orange" in A3A_enabledDLC) then {
     _vehiclesPolice append ["B_GEN_Van_02_vehicle_F","B_GEN_Van_02_transport_F"];
 };
+if ("ef" in A3A_enabledDLC) then {
+    ["vehiclesGunBoats", ["EF_I_CombatBoat_HMG_AAF", "EF_I_CombatBoat_AT_AAF"]] call _fnc_saveToTemplate;
+};
 if ("rf" in A3A_enabledDLC) then {
     _vehiclesPolice append ["a3a_police_Pickup_rf", "B_GEN_Pickup_covered_rf", "a3a_police_Pickup_comms_rf"];
     _vehiclesHelisTransport append ["I_Heli_EC_01A_military_RF"];
@@ -101,8 +104,10 @@ if ("rf" in A3A_enabledDLC) then {
     _vehiclesHelisLightAttack append ["a3a_AAF_Heli_light_03_dynamicLoadout_rf"];
     _vehiclesHelisAttack = ["a3a_AAF_Heli_EC_02_rf"];
     _vehiclesMilitiaCars append ["I_Pickup_rf"];
-    _vehiclesMilitiaLightArmed append ["I_Pickup_mmg_rf","I_Pickup_hmg_rf"];
+    _vehiclesMilitiaLightArmed append ["I_Pickup_mmg_rf","I_Pickup_hmg_rf","I_Pickup_rcws_rf"];
+    _lightArmed append ["I_Pickup_rcws_rf"];
 };
+
 ["vehiclesHelisLight", _vehiclesHelisLight] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", _vehiclesHelisTransport] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", _vehiclesHelisLightAttack] call _fnc_saveToTemplate;
@@ -140,7 +145,8 @@ _loadoutData set ["machineGuns", []];
 _loadoutData set ["marksmanRifles", []];
 _loadoutData set ["sniperRifles", []];
 
-_loadoutData set ["lightATLaunchers", [
+_loadoutData set ["lightATLaunchers", ["launch_NLAW_F"]];
+_loadoutData set ["ATLaunchers", [
 ["launch_MRAWS_green_F", "", "acc_pointer_IR", "", ["MRAWS_HE_F", "MRAWS_HEAT55_F"], [], ""],
 ["launch_MRAWS_green_F", "", "acc_pointer_IR", "", ["MRAWS_HEAT_F", "MRAWS_HEAT55_F"], [], ""],
 ["launch_MRAWS_green_F", "", "acc_pointer_IR", "", ["MRAWS_HEAT_F", "MRAWS_HE_F"], [], ""],
@@ -148,7 +154,6 @@ _loadoutData set ["lightATLaunchers", [
 ["launch_MRAWS_green_rail_F", "", "acc_pointer_IR", "", ["MRAWS_HEAT_F", "MRAWS_HEAT55_F"], [], ""],
 ["launch_MRAWS_green_rail_F", "", "acc_pointer_IR", "", ["MRAWS_HEAT_F", "MRAWS_HE_F"], [], ""]
 ]];
-_loadoutData set ["ATLaunchers", ["launch_NLAW_F"]];
 _loadoutData set ["missileATLaunchers", [
 ["launch_I_Titan_short_F", "", "acc_pointer_IR", "", ["Titan_AT"], [], ""]
 ]];
@@ -371,15 +376,12 @@ _militiaLoadoutData set ["backpacks", ["B_TacticalPack_oli", "B_FieldPack_oli", 
 _militiaLoadoutData set ["helmets", ["H_HelmetIA"]];
 
 _militiaLoadoutData set ["rifles", [
-["arifle_Mk20_F", "", "", "", ["30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag_Tracer_Yellow"], [], ""],
 ["arifle_TRG21_F", "", "", "", ["30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag_Tracer_Yellow"], [], ""]
 ]];
 _militiaLoadoutData set ["carbines", [
-["arifle_Mk20C_F", "", "", "", ["30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag_Tracer_Yellow"], [], ""],
 ["arifle_TRG20_F", "", "", "", ["30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag_Tracer_Yellow"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
-["arifle_Mk20_GL_F", "", "", "", ["30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag_Tracer_Yellow"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""],
 ["arifle_TRG21_GL_F", "", "", "", ["30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag", "30Rnd_556x45_Stanag_Tracer_Yellow"], ["1Rnd_HE_Grenade_shell", "1Rnd_HE_Grenade_shell", "1Rnd_Smoke_Grenade_shell"], ""]
 ]];
 _militiaLoadoutData set ["SMGs", ["SMG_01_F", "SMG_02_F", "SMG_03_black", "SMG_03C_black"]];
@@ -405,6 +407,17 @@ private _pilotLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
 _pilotLoadoutData set ["uniforms", ["U_I_HeliPilotCoveralls"]];
 _pilotLoadoutData set ["vests", ["V_TacVest_oli"]];
 _pilotLoadoutData set ["helmets", ["H_PilotHelmetHeli_I", "H_CrewHelmetHeli_I"]];
+_pilotLoadoutData set ["facewear", ["G_Aviator","G_Squares_Tinted","G_Tactical_Black"]];
+
+private _officerLoadoutData = _militaryLoadoutData call _fnc_copyLoadoutData;
+_officerLoadoutData set ["uniforms", ["U_I_ParadeUniform_01_AAF_F", "U_B_ParadeUniform_01_US_decorated_F"]];
+_officerLoadoutData set ["vests", ["V_TacVest_blk", "V_LegStrapBag_olive_F"]];
+_officerLoadoutData set ["helmets", ["H_ParadeDressCap_01_AAF_F"]];
+_officerLoadoutData set ["backpacks", []];
+_officerLoadoutData set ["SMGs", [
+["hgun_PDW2000_F", "", "", "optic_Holosight_blk_F", [], [], ""],
+["arifle_Mk20C_plain_F", "", "acc_pointer_IR", "optic_Aco", [], [], ""]
+]];
 
 if ("mark" in A3A_enabledDLC) then {
 
@@ -445,13 +458,14 @@ if ("rf" in A3A_enabledDLC) then {
     ["SMG_01_black_RF", "", "", "optic_Holosight", [], [], ""],
     ["SMG_01_black_RF", "", "", "optic_Aco_smg", [], [], ""]
     ];
-    (_militiaLoadoutData get "SMGs") append [
+    (_militiaLoadoutData get "SMGs") append [ 
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "", [], [], ""]
     ];
     (_policeLoadoutData get "SMGs") append [
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Holosight", [], [], ""],
     ["SMG_01_black_RF", "", "acc_flashlight_smg_01", "optic_Aco_smg", [], [], ""]
     ];
+    _policeLoadoutData set ["vests", ["V_TacVest_gen_holster_RF"]];
     (_sfLoadoutData get "helmets") append [
     "H_HelmetIA_sb_digital_RF",
     "H_HelmetHeavy_Olive_RF",
@@ -459,6 +473,25 @@ if ("rf" in A3A_enabledDLC) then {
     "H_HelmetHeavy_VisorUp_Olive_RF"];
     (_militaryLoadoutData get "helmets") append ["H_HelmetIA_sb_digital_RF"];
     (_militiaLoadoutData get "helmets") append ["H_HelmetIA_sb_digital_RF"];
+    // AAF hold onto a lot of stockpile PSRL launchers and warheads and issues them everywhere
+    private _lightLaunchersAppend = [ // 2/3 chance of LAT being psrl against NLAW
+    ["launch_PSRL1_digi_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""]
+    ];
+    private _medLaunchersSet = [ // 3/4 chance of MAT being psrl
+    ["launch_PSRL1_digi_RF", "", "", "", ["PSRL1_FRAG_RF", "PSRL1_HE_RF", "PSRL1_AT_RF"], [], ""], // issued for anti structure
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_AT_RF", "PSRL1_AT_RF", "PSRL1_HE_RF"], [], ""],
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_PSRL1_PWS_digi_RF", "", "", "", ["PSRL1_HEAT_RF", "PSRL1_AT_RF", "PSRL1_FRAG_RF"], [], ""],
+    ["launch_MRAWS_green_rail_F", "", "acc_pointer_IR", "", ["MRAWS_HEAT_F", "MRAWS_HEAT55_F"], [], ""],
+    ["launch_MRAWS_green_F", "", "acc_pointer_IR", "", ["MRAWS_HEAT_F", "MRAWS_HE_F"], [], ""]
+    ];
+    {
+        (_x get "lightATLaunchers") append _lightLaunchersAppend;
+        _x set ["ATLaunchers", _medLaunchersSet];
+    } forEach [_militiaLoadoutData, _militaryLoadoutData, _sfLoadoutData];
 };
 
 
@@ -972,7 +1005,7 @@ private _unitTypes = [
 
 ["other", [["Pilot", _crewTemplate]], _pilotLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the unit used in the "kill the official" mission
-["other", [["Official", _squadLeaderTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
+["other", [["Official", _policeTemplate]], _officerLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "kill the traitor" mission
 ["other", [["Traitor", _traitorTemplate]], _militaryLoadoutData] call _fnc_generateAndSaveUnitsToTemplate;
 //The following lines are determining the loadout for the AI used in the "Invader Punishment" mission

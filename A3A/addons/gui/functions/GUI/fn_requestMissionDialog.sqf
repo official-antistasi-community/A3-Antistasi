@@ -35,9 +35,9 @@ switch (_mode) do
         Trace("Request mission button clicked");
 
         // Check for member / commander
-        if !(([player] call A3A_fnc_isMember) or (not(isPlayer theBoss))) exitWith
+        if !(([player] call A3A_fnc_isMember) || (player isEqualTo theBoss)) exitWith 
         {
-            ["Mission Request", "Only Player Commander has access to this function."] call A3A_fnc_customHint; // TODO UI-update: Stringtable this
+            [localize "STR_antistasi_dialogs_mission_request_title", localize "STR_antistasi_dialogs_mission_request_noCommander"] call A3A_fnc_customHint;
             closeDialog 2;
         };
 
@@ -63,7 +63,7 @@ switch (_mode) do
         };
 
         // Request mission
-        [_missionType, clientOwner] remoteExec ["A3A_fnc_missionRequest", 2];
+        [_missionType, clientOwner] remoteExec ["A3A_Tasks_fnc_requestTask", 2];
 
         closeDialog 1;
 

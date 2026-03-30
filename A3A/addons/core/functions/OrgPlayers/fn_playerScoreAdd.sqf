@@ -1,4 +1,3 @@
-//if (!isMultiplayer) exitWith {};
 if ((side player == Occupants) or (side player == Invaders)) exitWith {};
 private ["_pointsX","_playerX","_pointsXJ","_moneyJ"];
 _pointsX = _this select 0;
@@ -21,6 +20,10 @@ if (isMultiplayer) exitWith
 			_textX = format ["<br/><br/><br/><br/><br/><br/>" + localize "STR_A3A_fn_orgp_playerScoreAdd_money" + " €",_pointsX*10];
 			[petros,"income",_textX] remoteExec ["A3A_fnc_commsMP",_playerX];
 			//[] remoteExec ["A3A_fnc_statistics",_playerX];
+			if (_pointsX >= 10) then { // Dumb way to track mission completion without changing every mission file
+				private _missions = _playerX getVariable ["missionsCompleted",0];
+				_playerX setVariable ["missionsCompleted",_missions + 1];
+			}
 			};
 		};
 	_pointsX = _pointsX + _pointsXJ;

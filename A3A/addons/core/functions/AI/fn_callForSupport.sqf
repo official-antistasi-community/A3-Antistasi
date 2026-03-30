@@ -1,6 +1,6 @@
 /*  Simulates the call for support by a group by making the teamleader a bit more dumb for a time
 
-    Execution on: HC or Server
+    Execution on: HC or Server, group-local
 
     Scope: Internal
 
@@ -21,6 +21,10 @@ private _side = side _group;
 if(_side != Occupants and _side != Invaders) exitWith {
     Error_2("Non-enemy group %1 of side %2 managed to call callForSupport", _group, _side);
 };
+
+// Don't call support against units unless there's slightly more information than damage dealt
+// Should rule out calls for mines/charges but still pick up snipers (maybe only after the second kill)
+if (_target isKindOf "CAManBase" and { _group knowsAbout _target <= 1.5 }) exitWith {};
 
 //If groupleader is down, dont call support
 if !(_groupLeader call A3A_fnc_canFight) exitWith {};
@@ -48,11 +52,9 @@ _groupLeader setskill ["commanding", _oldCourage];
 //If the group leader survived the call, proceed
 if(_groupLeader call A3A_fnc_canFight) then
 {
-    // why here? Are we intercepting the radio traffic?
-    private _revealed = [getPosATL _groupLeader, side _group] call A3A_fnc_calculateSupportCallReveal;
     //Starting the support
-    ServerDebug_2("%1 managed to request support, reveal value is %2", _group, _revealed);
-    [_side, _target, getPosATL _groupLeader, _group knowsAbout _target, _revealed] remoteExec ["A3A_fnc_requestSupport", 2];
+    ServerDebug_1("%1 managed to request support", _group);
+    [_side, _target, getPosATL _groupLeader, _group knowsAbout _target] remoteExec ["A3A_fnc_requestSupport", 2];
 }
 else
 {

@@ -7,9 +7,11 @@ class isladuala3 {
 		{5406.87,5050.04,-1.5221},{5821.55,4264.93,-1.54266},{5792.85,6096.85,0},{4794.71,7644.3,-1.54266},{4232.13,2146.34,1.90735e-006},{2769.18,9614.3,0},{1559.72,5362.99,0},{2662.63,1237.69,0},{532.415,7337.52,0},{8352.21,8884.22,0},{8638.09,362.661,0},{4317.45,4702.65,0}
 	};
 	antennasBlacklistIndex[] = {0,1};
-	banks[] = {}; //no suitable building available (What is a suitable building?)
+	banks[] = {
+		{2466.36,9832.23,0},{4622.61,8358.19,0},{4477.06,6572.49,0},{4408.39,6377.25,0},{8101.74,5664.45,0},{4837.95,5107.81,0},{3274.86,3630.74,0},{5311.55,3386.14,0},{8576.62,3529.19,0},{6344.66,2286.4,0},{3753.02,2608.04,0},{2610.32,1793.97,0},{1710.12,1455.26,0}
+	};
 	garrison[] = {
-		{},{"airport_1","seaport_1","seaport_9","resource_1","resource_19","factory_1","outpost_1","outpost_2","outpost_3"},{},{"control_130","control_131","control_132","control_133","control_134","control_135","control_136","control_137","control_138","control_139","control_143","control_63","control_74","control_75","control_76","control_77","control_78","control_79","control_80","control_81","control_82"}
+		{},{"airport_1","seaport_1","seaport_9","resource_1","resource_19","factory_1","outpost_1","outpost_2","outpost_3"},{},{"control_130","control_131","control_132","control_133","control_134","control_135","control_136","control_137","control_138","control_143","control_63","control_74","control_76","control_77","control_78","control_79","control_80","control_81","control_82"}
 	};
 	fuelStationTypes[] = {"Land_A_FuelStation_Feed","Land_Ind_FuelStation_Feed_EP1","Land_FuelStation_Feed_PMC","Land_Fuelstation","Land_Fuelstation_army","Land_Benzina_schnell"};
 	climate = "arid";
@@ -22,6 +24,18 @@ class isladuala3 {
 		{"Land_fort_artillery_nest_EP1", 200}, {"Land_fort_rampart_EP1", 50}, {"Fort_Barricade", 50}, {"Fence", 20}, {"FenceWood", 10}, {"FenceWoodPalet", 10}, 
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		// middle-eastern buildings from Sahrani
+		"Land_Dum_istan3_hromada2", "Land_Dum_olez_istan1_open2", "Land_Dum_olez_istan1",
+		// Rooms above garage and pillar house from Takistan
+		"Land_House_C_10_EP1", "Land_House_C_4_EP1"
+	};
+	requiredMods = "Isla Duala and CUP Terrains - Core";
+	size = 10.2;
+	cityCount = 55;
+	airbaseCount = 6;
 };

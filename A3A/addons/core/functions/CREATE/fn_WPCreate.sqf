@@ -53,7 +53,7 @@ private _culledPath = [_prevPos];
 private _distToPrev = 0;
 {
     _distToPrev = _distToPrev + (_prevPos distance2d _x);
-    if (_distToPrev >= 400) then {
+    if (_distToPrev >= 200) then {
         _culledPath pushBack _x;
         _distToPrev = 0;
     };

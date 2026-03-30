@@ -61,7 +61,8 @@ switch (_mode) do
 		{
 			_x params [
 				["_className", "Land_Tyres_F"],
-				["_price", 0]
+				["_price", 0],
+				["_ability",""]
 			];
 
 			private _configClass = configFile >> "CfgVehicles" >> _className;
@@ -97,6 +98,10 @@ switch (_mode) do
 			_button setVariable ["model", _model];
 			_button setVariable ["price", _price];
 			_button ctrlCommit 0;
+			if (_ability isEqualTo "helipad" && {((((["Synd_HQ"] + outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}) apply {getMarkerPos _x}) inAreaArray [getPosATL player, 75, 75]) isEqualTo []}) then {
+				_button ctrlEnable false;
+				_button ctrlSetTooltip localize "STR_antistasi_teamleader_placer_cannotBuildHelipad";
+			};
 
 			_button ctrlAddEventHandler ["ButtonDown", {
 				params ["_control"];

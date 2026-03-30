@@ -55,16 +55,14 @@ if (not alive _official) then
 		{
 		[0,600] remoteExec ["A3A_fnc_resourcesFIA",2];
 		[2400, _sideX] remoteExec ["A3A_fnc_timingCA",2];
-		{if (isPlayer _x) then {[20,_x] call A3A_fnc_playerScoreAdd}} forEach ([500,0,_positionX,teamPlayer] call A3A_fnc_distanceUnits);
-		[20,theBoss] call A3A_fnc_playerScoreAdd;
+		[60, false, _official, 500] call A3A_tasks_fnc_rewardPlayers;     // any players within 500m
 		[_markerX,60] call A3A_fnc_addTimeForIdle;
 		}
 	else
 		{
 		[0,300] remoteExec ["A3A_fnc_resourcesFIA",2];
 		[1800, _sideX] remoteExec ["A3A_fnc_timingCA",2];
-		{if (isPlayer _x) then {[10,_x] call A3A_fnc_playerScoreAdd}} forEach ([500,0,_positionX,teamPlayer] call A3A_fnc_distanceUnits);
-		[10,theBoss] call A3A_fnc_playerScoreAdd;
+		[30, false, _official, 500] call A3A_tasks_fnc_rewardPlayers;     // any players within 500m
 		[_markerX,30] call A3A_fnc_addTimeForIdle;
 		};
 	}

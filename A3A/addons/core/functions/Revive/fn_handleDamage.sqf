@@ -59,6 +59,8 @@ private _makeUnconscious =
 
     private _fromside = if (!isNull _injurer) then {side group _injurer} else {sideUnknown};
     [_unit, _fromside, _fatalWound] spawn A3A_fnc_unconscious;
+
+    [_unit, group _unit, _injurer] spawn A3A_fnc_rebelReactOnKill;
 };
 
 //diag_log format ["%1 damage on part %2, hitpoint %3", _damage, _part, _hitpoint];
