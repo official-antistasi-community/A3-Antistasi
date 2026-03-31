@@ -9,5 +9,6 @@ _can setVectorDirAndUp [[0.536966,-0.00438141,-0.843605],[0.1,1,0]];
 [_can] spawn {
 	params ["_can"];
 	sleep 10;
+	detach _can;
 	deleteVehicle _can;
 };
