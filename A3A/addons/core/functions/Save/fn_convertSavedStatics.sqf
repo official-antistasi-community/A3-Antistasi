@@ -9,11 +9,6 @@ if (A3A_saveVersion < 20401) exitWith {};
 // Nothing to do for new saves
 if (A3A_saveVersion >= 31000) exitWith {};
 
-// Need to get Synd_HQ position now, otherwise this stuff won't go into the garrison
-private _varValue = ["posHQ"] call A3A_fnc_returnSavedStat;
-private _posHQ = if (count _varValue > 3) then {_varValue select 0} else {_varValue};
-"Synd_HQ" setMarkerPos _posHQ;
-
 {
 	_x params ["_typeVeh", "_posVeh", "_vecUp", "_vecDir", "_state"];
 

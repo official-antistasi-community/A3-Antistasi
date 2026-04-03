@@ -23,53 +23,6 @@ onMapSingleClick "";
 
 if (!visibleMap) exitWith {};
 
-_positionTel = positionTel;
-_pos = [];
-
-if ((_typeX == "delete") and (count outpostsFIA < 1)) exitWith {[_titleStr, localize "STR_A3A_fn_base_outpdiag_no_delete"] call A3A_fnc_customHint;};
-if ((_typeX == "delete") and ({(alive _x) and (!captive _x) and ((side _x == Occupants) or (side _x == Invaders)) and (_x distance _positionTel < 500)} count allUnits > 0)) exitWith {[_titleStr, localize "STR_A3A_fn_base_outpdiag_no_enemies"] call A3A_fnc_customHint;};
-
-_costs = 0;
-_hr = 0;
-
-if (_typeX != "delete") then
-	{
-	_isRoad = isOnRoad _positionTel;
-
-	_typeGroup = FactionGet(reb,"groupSniper");
-
-	if (_isRoad) then
-		{
-		_typeGroup = FactionGet(reb,"groupAT");
-		_costs = _costs + ([(FactionGet(reb,"vehiclesLightArmed")) # 0] call A3A_fnc_vehiclePrice) + (server getVariable FactionGet(reb,"unitCrew"));
-		_hr = _hr + 1;
-		};
-
-	//_formatX = (configfile >> "CfgGroups" >> "teamPlayer" >> "Guerilla" >> "Infantry" >> _typeGroup);
-	//_unitsX = [_formatX] call groupComposition;
-	{_costs = _costs + (server getVariable _x); _hr = _hr +1} forEach _typeGroup;
-	}
-else
-	{
-	_mrk = [outpostsFIA,_positionTel] call BIS_fnc_nearestPosition;
-	_pos = getMarkerPos _mrk;
-	if (_positionTel distance _pos >10) exitWith {[_titleStr, localize "STR_A3A_fn_base_outpdiag_no_post"] call A3A_fnc_customHint;};
-	};
-//if ((_typeX == "delete") and (_positionTel distance _pos >10)) exitWith {hint "No post nearby"};
-
-
 if (_typeX == "delete") exitWith {[_titleStr, localize "STR_A3A_fn_base_createoutpfia_outdated"] call A3A_fnc_customHint;};
 
-// Check for both marker name collision and nearby rebel posts
-private _nearPosts = outpostsFIA inAreaArrayIndexes [_positionTel, 300, 300];
-private _isNearMrk = markerShape format ["RebPost%1", mapGridPosition _positionTel] != "";
-if (count _nearPosts > 0 or _isNearMrk) exitWith {
-	[_titleStr, localize "STR_A3A_fn_base_createoutpfia_alreadynear"] call A3A_fnc_customHint;
-};
-
-_resourcesFIA = server getVariable "resourcesFIA";
-_hrFIA = server getVariable "hr";
-if (_resourcesFIA < _costs or _hrFIA < _hr) exitWith {[_titleStr, format [localize "STR_A3A_fn_base_outpdiag_no_resources",_hr,_costs]] call A3A_fnc_customHint;};
-[-_hr,-_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
-
-[_typeX,_positionTel] remoteExec ["A3A_fnc_createOutpostsFIA", 2];
+[positionTel] remoteExec ["A3A_fnc_createOutpostsFIA", 2];
