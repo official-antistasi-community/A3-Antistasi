@@ -210,18 +210,16 @@ _task set ["s_cleanup", {
 
 	// reverse-engineer task start time
 	private _startTime = (_this get "_endTime") - 60 * (15 + 30*(_this get "_difficulty"));
-	private _clearTime = 60 max ((_startTime + 1200) - time);
+	private _clearTime = 120 max ((_startTime + 1200) - time);
 	Trace_3("Start time %1; time %2; clearTime %3", _startTime, time, _clearTime);
-	_clearTime spawn {
-		sleep _this;
+	[_clearTime, _this get "_taskId"] spawn {
+		params ["_delay", "_taskId"];
+		sleep _delay;
 		A3A_activeTasks deleteAt (A3A_activeTasks find "SUPP");
 		publicVariable "A3A_activeTasks";
+		[_taskId, true, true] call BIS_fnc_deleteTask;
 	};
 
-	(_this get "_taskId") spawn {
-		sleep 120;
-		[_this, true, true] call BIS_fnc_deleteTask;
-	};
 	true;		// delete the damned task
 }];
 

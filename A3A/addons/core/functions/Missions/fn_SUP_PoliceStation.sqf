@@ -39,5 +39,5 @@ else
     [20, true, _policeStation, 500] call A3A_tasks_fnc_rewardPlayers;           // players in nearest group within 500m
 };
 
-private _delay = 60 max (_startTime + 1200 - time);
+private _delay = 120 max (_startTime + 1200 - time);
 [_taskId, "SUPP", _delay] spawn A3A_fnc_taskDelete;
