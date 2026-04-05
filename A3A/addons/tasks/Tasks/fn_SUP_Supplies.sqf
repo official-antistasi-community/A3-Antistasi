@@ -210,7 +210,7 @@ _task set ["s_cleanup", {
 
 	// reverse-engineer task start time
 	private _startTime = (_this get "_endTime") - 60 * (15 + 30*(_this get "_difficulty"));
-	private _clearTime = 0 max ((_startTime + 1200) - time);
+	private _clearTime = 60 max ((_startTime + 1200) - time);
 	Trace_3("Start time %1; time %2; clearTime %3", _startTime, time, _clearTime);
 	_clearTime spawn {
 		sleep _this;
