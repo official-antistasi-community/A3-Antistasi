@@ -15,7 +15,6 @@
 
 ["attributeLowAir", true] call _fnc_saveToTemplate;             // Use fewer air units in general
 ["attributeMoreTrucks", true] call _fnc_saveToTemplate;         // Use more truck for transports
-["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 
 ["ammobox", "B_supplyCrate_F"] call _fnc_saveToTemplate;
 ["surrenderCrate", "SPE_Mine_AmmoBox_US"] call _fnc_saveToTemplate;
@@ -37,6 +36,7 @@
 ["vehiclesTanks", ["SPEX_CW_Cromwell_Mk5","SPEX_CW_Cromwell_Mk5","SPEX_CW_Sherman_II_late","SPEX_CW_Sherman_I"]] call _fnc_saveToTemplate;
 ["vehiclesHeavyTanks", ["SPEX_CW_Sherman_Ic_Hybrid","SPEX_CW_Sherman_Ic"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["SPE_US_M16_Halftrack"]] call _fnc_saveToTemplate;
+["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
