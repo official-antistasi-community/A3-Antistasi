@@ -60,23 +60,41 @@ allCivilianVests deleteAt (allCivilianVests find "vn_b_vest_seal_01");
 //WHY is there no clean list?
 //allArmoredHeadgear = allHeadgear select {getNumber (configfile >> "CfgWeapons" >> _x >> "ItemInfo" >> "HitpointsProtectionInfo" >> "Head" >> "armor") > 0};
 allCosmeticHeadgear = allHeadgear - allArmoredHeadgear;
-{allCosmeticHeadgear deleteAt (allCosmeticHeadgear find _x)} forEach [
-	"H_SPE_GER_ST_M40_cap",
-	"H_SPE_GER_ST_M40_cap_hp",
-	"H_SPE_GER_ST_M40_cap_Offz",
-	"H_SPE_GER_ST_M40_cap_Offz_hp",
-	"H_SPE_GER_ST_M40_cap_Offz_2",
-	"H_SPE_GER_ST_M40_Pz_cap",
-	"H_SPE_GER_ST_M40_Pz_cap_headset",
-	'H_SPE_GER_ST_M40_Pz_cap_Offz',
-	"H_SPE_GER_ST_M40_Pz_cap_Offz_headset",
-	"H_SPE_GER_ST_M40_Pz_cap_Offz_2",
-	"H_SPE_GER_ST_M40_Pz_cap_2",
-	"H_SPE_GER_ST_M40_cap_2",
-	"rhs_fieldcap_helm",
-	"rhs_fieldcap_helm_ml",
-	"rhs_fieldcap_helm_digi"
+
+private _costmeticHeadgearBlacklist = [
+	"H_Cap_Black_IDAP_F",
+	"H_Cap_Orange_IDAP_F",
+	"H_Cap_White_IDAP_F"
 ];
+
+if ((isClass (configFile >> "CfgPatches" >> "IFA3_Core")) or (isClass (configFile >> "CfgPatches" >> "ww2_spe_assets_c_characters_germans_c"))) then {
+	_costmeticHeadgearBlacklist append [
+		//SPE
+		"H_SPE_Milice_beret_1",
+		"H_SPE_Milice_beret_2"
+	];
+	{
+		private _hatClass = _x; 
+		{
+			if (_x in _hatClass) then {
+				_costmeticHeadgearBlacklist pushBackUnique _hatClass;
+			};
+		} forEach ["_DAK_", "_GER_", "_US_", "_NKVD_", "_SOV_", "_UK_", "_CW_", "_CAN_", "_PL_HSAT_"]; //HSAT has no armour for some reason
+		
+	} forEach allCosmeticHeadgear;
+	//Doing IFA and SPE at the same time because of the keyword overlap between the two
+};
+
+if (isClass (configFile >> "CfgPatches" >> "rhsgref_main")) then {
+	_costmeticHeadgearBlacklist append [
+		"rhs_fieldcap_helm",
+		"rhs_fieldcap_helm_ml",
+		"rhs_fieldcap_helm_digi"
+	];
+};
+
+{allCosmeticHeadgear deleteAt (allCosmeticHeadgear find _x)} forEach _costmeticHeadgearBlacklist;
+
 
 //////////////////
 //   Glasses   ///
