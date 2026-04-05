@@ -33,7 +33,9 @@ class ace_medical_treatment_actions {
         class FieldDressing;
         class ACE_Can_Spirit : FieldDressing {
             allowedSelections[] = {"Head"};
+            category = "medication";
             condition = "params ['_medic', '_patient']; _medic == _patient;";
+            consumeItem = 1; //Handled in callbackStart
             displayName = "Drink can of Spirit";
             displayNameProgress = "Drinking";
             items[] = {"ACE_Can_Spirit"};
@@ -43,7 +45,7 @@ class ace_medical_treatment_actions {
             animationMedicSelfProne = "";
             litter[] = {{"Land_Can_V1_F"},{"Land_Can_Dented_F"},{"Land_Can_Dented_F"}};
             callbackStart = "A3A_fnc_drinkMed";
-            callbackSuccess = "ace_medical_treatment_medicationLocal";
+            callbackSuccess = "ace_medical_treatment_fnc_medication";
             treatmentTime = 10;
         };
         class ACE_Can_Franta : ACE_Can_Spirit {            
