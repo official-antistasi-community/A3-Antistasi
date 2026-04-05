@@ -33,11 +33,13 @@
       <Key ID="STR_antistasi_arsenal_limits_dialog_guest_warning">
         <Original>As a guest commander you can't reduce arsenal limits below default, or below values set by members.</Original>
         <Russian>Как приглашенный командир, вы не можете уменьшать лимиты арсенала ниже значений по умолчанию или ниже значений, установленных участниками.</Russian>
+        <Spanish>Como comandante invitado, no puedes reducir los límites del arsenal por debajo del valor predeterminado, ni por debajo de los valores establecidos por los miembros.</Spanish>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_hint_title">
         <Original>Arsenal Guest Limits</Original>
         <German>Arsenal Gast Limit</German>
         <Russian>Лимит Арсенала гостей</Russian>
+        <Spanish>Límite de invitados del Arsenal</Spanish>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_limit">
         <Original>Limit</Original>
@@ -70,6 +72,7 @@
       <Key ID="STR_antistasi_arsenal_limits_dialog_reset_tooltip">
         <Original>Reset all items in this category to the default guest limit</Original>
         <Russian>Сбросьте для всех товаров в этой категории лимит гостей по умолчанию</Russian>
+        <Spanish>Restablecer todos los elementos de esta categoría al límite de invitados predeterminado.</Spanish>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_step">
         <Original>STEP</Original>
@@ -125,12 +128,13 @@
       </Key>
       <Key ID="STR_antistasi_teamleader_placer_cannotBuildHelipad">
         <Original>You can only build helipads at captured friendly markers or HQ.</Original>
+        <Spanish>Solo puedes construir helipuertos en marcadores aliados capturados o en el cuartel general.</Spanish>
       </Key>
       <Key ID="STR_antistasi_teamleader_placer_e_key">
         <Original>E: Rotate counter-clockwise</Original>
         <German>E: Gegen Uhrzeigersinn rotieren</German>
         <Italian>E: Ruota in senso anti-orario</Italian>
-        <Spanish>E: Rotar antihorario</Spanish>
+        <Spanish>E: Rotar en sentido antihorario</Spanish>
         <French>E: Tourner dans le sens inverse des aiguilles</French>
         <Korean>E: 반시계 방향으로 돌리기</Korean>
         <Russian>E: Поворот против часовой стрелки</Russian>
@@ -141,7 +145,7 @@
         <Original>R: Rotate clockwise </Original>
         <German>R: Mit Ihrzeigersinn rotieren</German>
         <Italian>R: Ruota in senso orario</Italian>
-        <Spanish>R: Rotar horario</Spanish>
+        <Spanish>R: Rotar en sentido horario</Spanish>
         <French>R: Tourner dans le sens des aiguilles</French>
         <Korean>R: 시계 방향으로 돌리기</Korean>
         <Russian>R: Поворот по часовой стрелке</Russian>
@@ -152,7 +156,7 @@
         <Original>SHIFT: Unsafe placement mode</Original>
         <German>UMSCHALT: Unsicherer Platzierungsmodus </German>
         <Italian>SHIFT: Metodo di piazzamento non sicuro</Italian>
-        <Spanish>SHIFT: Modo de colocación insegura</Spanish>
+        <Spanish>SHIFT: Modo de colocación inseguro</Spanish>
         <French>SHIFT: Mode de placement non sécurisé</French>
         <Korean>쉬프트: 불안전한 배치 모드</Korean>
         <Russian>SHIFT: Режим небезопасного размещения</Russian>
@@ -184,7 +188,7 @@
         <Original>Teamleader Builder</Original>
         <German>Truppführer-Baukasten</German>
         <Italian>Costruttore Teamleader</Italian>
-        <Spanish>Teamleader Builder</Spanish>
+        <Spanish>Líder de equipo constructor</Spanish>
         <French>Chef d'équipe de constructeurs</French>
         <Korean>조장 빌더</Korean>
         <Czech>Velitel týmu Stavitel</Czech>
@@ -196,7 +200,7 @@
         <Original>Only the Commander may buy this item.</Original>
         <German>Nur der Kommandant kann diesen Gegenstand kaufen.</German>
         <Italian>Solo il Comandante può comprare questo oggetto.</Italian>
-        <Spanish>Solo el comandante puede comprar este objeto.</Spanish>
+        <Spanish>Solo el Comandante puede comprar este objeto.</Spanish>
         <French>Seul le Commandant peut acheter cet objet</French>
         <Korean>지휘관만 이 아이템을 살 수 있습니다.</Korean>
         <Russian>Только Командующий может купить это</Russian>
@@ -322,7 +326,7 @@
         <Original>FFV seat</Original>
         <German>FFV Sitze</German>
         <Italian>Sedile FFV</Italian>
-        <Spanish>Asiento de tirador</Spanish>
+        <Spanish>Asiento FFV</Spanish>
         <French>Siège FFV</French>
         <Korean>사격가능좌석</Korean>
         <Russian>Место стрелка</Russian>
@@ -336,7 +340,7 @@
         <Original>%1 Gunners</Original>
         <German>%1 Schütze</German>
         <Italian>%1 Artiglieri</Italian>
-        <Spanish>%1 tiradores</Spanish>
+        <Spanish>%1 Tiradores</Spanish>
         <French>%1 Tireurs</French>
         <Korean>%1 사수석</Korean>
         <Russian>Количество мест стрелка: %1</Russian>
@@ -364,7 +368,7 @@
         <Original>This item can collect loot\n%1 max load is %2</Original>
         <German>Dieser Gegenstand kann Beute laden\n%1 maximale Kapazität ist %2</German>
         <Italian>Quest'oggetto può accumulare loot\nil carico massimo di %1 è %2</Italian>
-        <Spanish>Este objeto puede recolectar loot\nLa carga máxima de %1 es %2</Spanish>
+        <Spanish>Este objeto puede recoger botín\nLa carga máxima de %1 es %2</Spanish>
         <French>Cet objet peut collecter du butin\n%1 charge max est %2</French>
         <Korean>이 아이템은 전리품을 수집할 수 있습니다.\n%1의 최대 수용량은 %2입니다.</Korean>
         <Russian>Этот объект может собирать вещи\n%1 с максимальной вместимостью в %2</Russian>
@@ -482,7 +486,7 @@
         <Original>Other</Original>
         <German>Andere</German>
         <Italian>Altro</Italian>
-        <Spanish>Otras</Spanish>
+        <Spanish>Otros</Spanish>
         <French>Autres</French>
         <Korean>그 외</Korean>
         <Russian>Другое</Russian>
@@ -525,6 +529,7 @@
       <Key ID="STR_A3A_fn_GUI_hqDialog_DEF_HQ">
         <Original>You cannot rest while our HQ is under attack.</Original>
         <Italian>Non puoi riposare mentre il QG è sott'attacco.</Italian>
+        <Spanish>No puedes descansar mientras tu CG está bajo ataque</Spanish>
         <French>Vous ne pouvez vous reposer alors que notre QG est attaqué.</French>
         <Korean>우리 본부가 공격받는 동안에는 쉴 수 없습니다.</Korean>
         <Russian>Вы не можете отдыхать, пока наша штаб-квартира находится под атакой.</Russian>
@@ -534,6 +539,7 @@
       <Key ID="STR_A3A_fn_GUI_hqDialog_enemiesNear">
         <Original>You cannot rest while enemies are near our HQ.</Original>
         <Italian>Non puoi riposare quando ci sono nemici nelle vicinanze del QG.</Italian>
+        <Spanish>No puedes descansar mientras haya enemigos cerca de tu CG</Spanish>
         <French>Vous ne pouvez vous reposer alors que des ennemis sont près de notre QG.</French>
         <Korean>적들이 우리 본부 근처에 있는 동안에는 쉴 수 없습니다.</Korean>
         <Russian>Вы не можете отдыхать, пока враги находятся рядом с нашей штаб-квартирой.</Russian>
@@ -543,6 +549,7 @@
       <Key ID="STR_A3A_fn_GUI_hqDialog_invaderPunish">
         <Original>You cannot rest while %1 is attacking civilians.</Original>
         <Italian>Non puoi riposare mentre %1 sta attaccando i civili.</Italian>
+        <Spanish>No puedes descansar mientras %1 esta atacando civiles</Spanish>
         <French>Vous ne pouvez vous reposer alors que %1 attaque des civils.</French>
         <Korean>%1 세력이 민간인을 공격하는 동안에는 쉴 수 없습니다.</Korean>
         <Russian>Вы не можете отдыхать, пока %1 нападает на мирных жителей.</Russian>
@@ -552,6 +559,7 @@
       <Key ID="STR_A3A_fn_GUI_hqDialog_notBoss">
         <Original>Only the commander can skip time.</Original>
         <Italian>Solo il comandante può fare avanzare il tempo.</Italian>
+        <Spanish>Solo el comandante puede avanzar el tiempo</Spanish>
         <French>Seul le commandant peut passer le temps.</French>
         <Korean>지휘관만이 시간을 스킵할 수 있습니다.</Korean>
         <Russian>Только командир может пропустить время.</Russian>
@@ -561,6 +569,7 @@
       <Key ID="STR_A3A_fn_GUI_hqDialog_playersNotAtHQ">
         <Original>All players must be within 100m of the HQ marker to skip time.</Original>
         <Italian>Tutti i giocatori devono essere entro 100m dal segnalino del QG per far avanzare il tempo.</Italian>
+        <Spanish>Todos los jugadores deben estar a menos de 100m del marcador del CG para avanzar el tiempo</Spanish>
         <French>Tous les joueurs doivent se trouver à moins de 100 m du marqueur du QG pour passer le temps.</French>
         <Korean>시간을 스킵하려면 모든 플레이어가 본부 마커로부터 100m 이내에 있어야 합니다.</Korean>
         <Russian>Все игроки должны находиться в пределах 100 метров от флага штаба, чтобы пропустить время.</Russian>
@@ -570,6 +579,7 @@
       <Key ID="STR_A3A_fn_GUI_hqDialog_rebelAttack">
         <Original>You cannot rest while the enemy is launching a major attack.</Original>
         <Italian>Non puoi riposare mentre il nemico sta lanciando un attacco principale.</Italian>
+        <Spanish>No puedes descansar mientras el enemigo está lanzando una ofensiva mayor</Spanish>
         <French>Vous ne pouvez vous reposer alors que l'ennemi déclenche une attaque majeur.</French>
         <Korean>적이 대규모 공격을 가하는 동안에는 쉴 수 없습니다.</Korean>
         <Russian>Вы не можете отдыхать, пока враг предпринимает крупную атаку.</Russian>
@@ -579,6 +589,7 @@
       <Key ID="STR_A3A_fn_GUI_hqDialog_title">
         <Original>Skip Time / Rest</Original>
         <Italian>Passa il Tempo / Riposa</Italian>
+        <Spanish>Avanzar el tiempo / Descansar</Spanish>
         <French>Passer le Temps / Repos</French>
         <Korean>시간 스킵 / 휴식</Korean>
         <Russian>Пропустить время</Russian>
@@ -687,7 +698,7 @@
         <Original>Controlled outposts</Original>
         <German>Kontrollierte Außenposten</German>
         <Italian>Avamposti Controllati</Italian>
-        <Spanish>Bases controladas</Spanish>
+        <Spanish>Bases avanzadas controladas</Spanish>
         <French>Avant-postes contrôlés</French>
         <Korean>통제된 전초 기지</Korean>
         <Russian>Контролируемые аванпосты</Russian>
@@ -795,7 +806,7 @@
         <Original>Invader aggression</Original>
         <German>Angreifer Aggression</German>
         <Italian>Aggressione dell'Invasore</Italian>
-        <Spanish>Agresión de Invasores</Spanish>
+        <Spanish>Agresión de los Invasores</Spanish>
         <French>Agression de l'envahisseur</French>
         <Korean>침략군 공격성</Korean>
         <Russian>Агрессия захватчика</Russian>
@@ -837,7 +848,7 @@
         <Original>Occupants aggression</Original>
         <German>Verteidiger Aggression</German>
         <Italian>Aggressione degli Occupanti:</Italian>
-        <Spanish>Agresión Ocupante</Spanish>
+        <Spanish>Agresión del Ocupante</Spanish>
         <French>Agressivité des occupants</French>
         <Korean>점령군 공격성</Korean>
         <Russian>Агрессия оккупантов</Russian>
@@ -971,9 +982,11 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_train_tooltip">
         <Original>This will cost € %1</Original>
+        <Spanish>Esto costará € %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_train_maxed">
         <Original>Rebel training maxed!</Original>
+        <Spanish>Entrenamiento rebelde al máximo</Spanish>
       </Key>
     </Container>
     <Container name="dialog_hq_garrisons">
@@ -981,7 +994,7 @@
         <Original>Light AT</Original>
         <German>AT</German>
         <Italian>AT</Italian>
-        <Spanish>AT</Spanish>
+        <Spanish>AT ligero</Spanish>
         <French>AT</French>
         <Korean>대전차병</Korean>
         <Russian>Гранатометчик</Russian>
@@ -1203,9 +1216,11 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_rest_notime_text">
         <Original>No rest for the wicked...</Original>
+        <Spanish>No hay descanso para los malvados...</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_rest_notime_tooltip">
         <Original>You must select a period of time to sleep for</Original>
+        <Spanish>Debes seleccionar un período de tiempo para dormir.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_wakeup_text">
         <Original>Time will be %2 when you wake up.</Original>
@@ -1223,12 +1238,15 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_garrisons_atMissile">
         <Original>AT Missile</Original>
+        <Spanish>Missil anti-tanque</Spanish>
       </Key>
       <Key ID="STR_antistasi_hq_garrisons_aaMissile">
         <Original>AA Missile</Original>
+        <Spanish>Missil anti-aéreo</Spanish>
       </Key>
       <Key ID="STR_A3A_garrison_error_no_weapons">
         <Original>Not enough weapons for this unit type</Original>
+        <Spanish>No hay suficientes armas para este tipo de unidad</Spanish>
       </Key>
     </Container>
     <Container name="dialog_hq_minefields">
@@ -1392,21 +1410,27 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_persistent_save_button">
         <Original>Persistent Save</Original>
+        <Spanish>Guardado Persistente</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_garrisons_button">
         <Original>Garrisons</Original>
+        <Spanish>Guarniciones</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_squads_button">
         <Original>High Command Squads</Original>
+        <Spanish>Escuadrones de Alto Mando</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_convertToSquad_button">
         <Original>Convert To HC Squad</Original>
+        <Spanish>Convertir a escuadra de alto mando</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_artilleryInUse">
         <Original>One or more selected artillery pieces is already firing. Wait for it to finish.</Original>
+        <Spanish>Una o más piezas de artillería seleccionadas ya están disparando. Espere a que termine.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_commanderOnly">
         <Original>Only Player Commander has access to this function.</Original>
+        <Spanish>Solo el Jugador Comandante tiene acceso a esta función.</Spanish>
       </Key>
     </Container>
     <Container name="dialog_main_admin">
@@ -1610,7 +1634,7 @@
         <Original>PlayerUID</Original>
         <German>SpielerUID</German>
         <Italian>UIDGiocatore</Italian>
-        <Spanish>PlayerUID</Spanish>
+        <Spanish>UIDJugador</Spanish>
         <French>JoueurUID</French>
         <Korean>플레이어의 UID</Korean>
         <Russian>UID Игрока</Russian>
@@ -1664,9 +1688,11 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_admin_take_command_button">
         <Original>Take Command</Original>
+        <Spanish>Tomar el Control</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_admin_take_command_self">
         <Original>You cannot take command from yourself</Original>
+        <Spanish>No puedes tomar el control de ti mismo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_admin_tp_arsenal_box_button">
         <Original>Arsenal Box</Original>
@@ -1799,6 +1825,7 @@
       <Key ID="STR_A3A_fn_GUI_aiManaagement_noAI">
         <Original>No AIs in group. Recruit some at an allied marker's flag.</Original>
         <Italian>Nessuna IA nel gruppo. Reclutale al segnalino di una bandiera alleata.</Italian>
+        <Spanish>No hay IA en el grupo. Recluta algunas en la bandera de un marcador aliado.</Spanish>
         <French>Pas d'IA dans ce groupe. Recruter en au drapeau d'un marqueur allié.</French>
         <Korean>그룹에 AI가 없습니다. 아군 마커의 깃발에서 AI를 모집하십시오.</Korean>
         <Russian>В группе нет ИИ. Наймите кого-нибудь у флага штаба.</Russian>
@@ -1928,6 +1955,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip_petros">
         <Original>You cannot remote control Petros</Original>
+        <Spanish>No puedes controlar a Petros de manera remota</Spanish>
       </Key>
     </Container>
     <Container name="dialog_main_air_support">
@@ -2003,6 +2031,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_no_base_tooltip">
         <Original>You have no airbases under your control</Original>
+        <Spanish>No tienes ninguna base aerea bajo tu control</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_no_points_tooltip">
         <Original>You do not have enough air support points</Original>
@@ -2207,6 +2236,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_he_detail">
         <Original>Impact radius</Original>
+        <Spanish>Radio de Impacto</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_smoke">
         <Original>Smoke</Original>
@@ -2224,9 +2254,11 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_smoke_detail">
         <Original>Cover time</Original>
+        <Spanish>Tiempo de covertura</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_flare_detail">
         <Original>Burn time</Original>
+        <Spanish>Tiempo de combustión</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_button">
         <Original>Fire Mission</Original>
@@ -2496,21 +2528,27 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_type_suppress">
         <Original>Suppress</Original>
+        <Spanish>Supresión</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_type_cont">
         <Original>Cont</Original>
+        <Spanish>Cont</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_desc_point">
         <Original>Strike a point with as many rounds as asked as fast as possible.\n\nUsed for directly engaging any target of opportunity.\n\nUseful shells: HE, Smoke</Original>
+        <Spanish>Ataca un punto con tantas rondas como se te pidan, lo más rápido posible.\n\nSe utiliza para atacar directamente cualquier objetivo de oportunidad.\n\nProyectiles útiles: HE, Humo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_desc_barrage">
         <Original>Create a rolling barrage between two points with 10-meter dispersion between impacts.\n\nUsed for routing enemies out of a specific area or street.\n\nUseful shells: HE, Smoke</Original>
+        <Spanish>Crea una andanada móvil entre dos puntos con una dispersión de 10 metros entre impactos.\n\nSe utiliza para desalojar a los enemigos de un área o calle específica.\n\nProyectiles útiles: HE, Humo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_desc_suppress">
         <Original>Suppress an area as many rounds as needed with a 10-second delay between impacts.\n\nUsed for clearing large areas and buying time to move.\n\nUseful shells: HE</Original>
+        <Spanish>Suprime un área con tantas rondas como sea necesario, con un retraso de 10 segundos entre impactos.\n\nSe utiliza para despejar grandes áreas y ganar tiempo para moverse.\n\nProyectiles útiles: HE</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_desc_cont">
         <Original>Continuously fire several rounds on a target over a long period of time.\n\nUsed to continuously illuminate an area with flares during nighttime.\n\nUseful shells: Illumination / Flare</Original>
+        <Spanish>Dispara continuamente varias rondas sobre un objetivo durante un largo período de tiempo.\n\Se utiliza para iluminar continuamente un área con bengalas durante la noche.\nCartuchos útiles: Iluminación / Bengala</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_garrison">
         <Original>Garrison</Original>
@@ -2706,18 +2744,23 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_arsenal_limits_button">
         <Original>Arsenal Limits</Original>
+        <Spanish>Limites del Arsenal</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_customize_loadouts_button">
         <Original>Customize Loadouts</Original>
+        <Spanish>Personaliza tus equipamientos</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_garrisons_button">
         <Original>Garrisons</Original>
+        <Spanish>Guarniciónes</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_recruit_squad_button">
         <Original>Recruit Squad</Original>
+        <Spanish>Reclutar Escuadrón</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_commander_no_marker">
         <Original>Select a rebel marker to remove garrison</Original>
+        <Spanish>Seleccione un marcador rebelde para eliminar la guarnición.</Spanish>
       </Key>
     </Container>
     <Container name="dialog_main_donate">
@@ -2865,9 +2908,11 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_fast_travel_cost">
         <Original>This action will cost</Original>
+        <Spanish>Esta acción costará</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_fast_travel_noMoney">
         <Original>You cannot afford this.</Original>
+        <Spanish>No puedes permitirte esto</Spanish>
       </Key>
     </Container>
     <Container name="dialog_main_player">
@@ -2955,7 +3000,7 @@
         <Original>Set Ineligible</Original>
         <German>Nicht-Verfügbar setzen</German>
         <Italian>Renditi non Disponibile</Italian>
-        <Spanish>Ser Inelegible</Spanish>
+        <Spanish>Set Inelegible</Spanish>
         <French>Devenir Inéligible</French>
         <Korean>박탈하기</Korean>
         <Russian>Выключить возможность встать на должность Командующего</Russian>
@@ -3163,6 +3208,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_player_money_text">
         <Original>Current money: € %1</Original>
+        <Spanish>Dinero actual: € %1</Spanish>
         <Russian>Текущий баланс: € %1</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_sell_vehicle">
@@ -3209,142 +3255,187 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatustooltip">
         <Original>View available intel and information about the game</Original>
+        <Spanish>Consulta la información y los datos disponibles sobre el juego</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_context_title">
         <Original>Context Actions</Original>
+        <Spanish>Acciones de contexto</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_timeAlive">
         <Original>Time alive:</Original>
+        <Spanish>Tiempo vivo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_missions">
         <Original>Missions:</Original>
+        <Spanish>Misiones</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_kills">
         <Original>Kills:</Original>
+        <Spanish>Bajas</Spanish>
       </Key>
     </Container>
     <Container name="dialog_main_context">
       <Key ID="STR_antistasi_dialogs_main_context_title_main">
         <Original>Context Actions</Original>
+        <Spanish>Acciones de contexto</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_title_vehicle">
         <Original>Vehicle</Original>
+        <Spanish>Vehiculo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_title_aircraft">
         <Original>Aircraft</Original>
+        <Spanish>Aeronave</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_title_construction">
         <Original>Construction</Original>
+        <Spanish>Construcción</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_title_HQ">
         <Original>HQ</Original>
+        <Spanish>CG</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_label_construction">
         <Original>Construction</Original>
+        <Spanish>Construcción</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_label_HQ">
         <Original>Headquarters</Original>
+        <Spanish>Cuartel General</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_hideActions">
         <Original>Hide Removal Actions</Original>
+        <Spanish>Ocultar acciones de eliminación</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_showActions">
         <Original>Show Removal Actions</Original>
+        <Spanish>Mostrar acciones de eliminación</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_hideIcons">
         <Original>Hide Unbuilt Icons</Original>
+        <Spanish>Ocultar iconos no construidos</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_showIcons">
         <Original>Show Unbuilt Icons</Original>
+        <Spanish>Mostrar iconos no construidos</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_addBombRun">
         <Original>Add to air support</Original>
+        <Spanish>Añadir a soporte aéreo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_garage">
         <Original>Garage Vehicle</Original>
+        <Spanish>Almacenar vehículo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_toggleAI1">
         <Original>Allow AI to use</Original>
+        <Spanish>Permitir uso a la IA</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_toggleAI2">
         <Original>Block AI from using</Original>
+        <Spanish>Bloquear uso a la IA</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_addToGarrison">
         <Original>Add vehicle to garrison</Original>
+        <Spanish>Abrir</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_garage_away">
         <Original>Must be near friendly marker to garage</Original>
+        <Spanish>Debes estar cerca de un punto amigo para almacenar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_garage_airbase_helipad">
         <Original>Must be near friendly airbase or helipad to garage</Original>
+        <Spanish>Debes estar cerca de una base aérea o helipuerto amigo para almacenar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_garage_airbase">
         <Original>Must be near friendly airbase to garage</Original>
+        <Spanish>Debes estar cerca de una base aérea amiga para almacenar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_garage_utility">
         <Original>Garaging this will delete it and refund the full cost</Original>
+        <Spanish>Almacenar esto hará que se borre y reingrese el precio total</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_addBombRun_nearValid">
         <Original>Must be near airbase or HQ to add to air support</Original>
+        <Spanish>Debes estar cerca de una base aérea o CG para añadir soporte aéreo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_gen_notRebVic">
         <Original>Vehicle is not a rebel vehicle</Original>
+        <Spanish>Vehículo no es un vehiculo rebelde</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_addToGarrison_alreadyIn">
         <Original>Vehicle is already in a garrison</Original>
+        <Spanish>Vehículo ya está en la guarnición</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_addToGarrison_crewed">
         <Original>Vehicle must be uncrewed</Original>
+        <Spanish>El vehículo debe estar sin tripulación</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_HQ_changeRole">
         <Original>Change Role</Original>
+        <Spanish>Cambiar Rol</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_HQ_vehArsenal">
         <Original>Vehicle Arsenal</Original>
+        <Spanish>Arsenal de Vehículo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_HQ_beDriver">
         <Original>Must be driver of a vehicle to modify its inventory</Original>
+        <Spanish>Debe ser conductor de un vehículo para modificar su inventario</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_construction_needEngineer">
         <Original>Must be an engineer</Original>
+        <Spanish>Debes ser un ingeniero</Spanish>
       </Key>
     </Container>
     <Container name="dialog_main_war_status">
       <Key ID="STR_antistasi_dialogs_main_warstatus_main">
         <Original>War Status</Original>
+        <Spanish>Estado de la Guerra</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_occupants">
         <Original>Occupants</Original>
+        <Spanish>Ocupantes</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_invaders">
         <Original>Invaders</Original>
+        <Spanish>Invasores</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_rebels">
         <Original>Rebels</Original>
+        <Spanish>Rebeldes</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_intelfeed">
         <Original>Intel Feed</Original>
+        <Spanish>Fuente de Información</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_aggro">
         <Original>Aggression: %1</Original>
+        <Spanish>Aggressioón %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_resources">
         <Original>Resources: %1</Original>
+        <Spanish>Recursos %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_lastResourcesUpdate">
         <Original>Time since last update: %1</Original>
+        <Spanish>Tiempo desde la última actualización %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_noResourcesUpdate">
         <Original>No known resource information</Original>
+        <Spanish>No se conoce información sobre los recursos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_radioKeys">
         <Original>Radio Keys: %1</Original>
+        <Spanish>Codigos de Radio: %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_money">
         <Original>Money: %1€</Original>
+        <Spanish>Dinero %1€</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_HR">
         <Original>HR: %1</Original>
+        <Spanish>RH: %1</Spanish>
       </Key>
     </Container>
     <Container name="dialog_mission_request">
@@ -3462,9 +3553,11 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_mission_request_noCommander">
         <Original>Only the Commander has access to this function.</Original>
+        <Spanish>Solo el Comandantetiene acceso a esta función</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_mission_request_title">
         <Original>Mission Request</Original>
+        <Spanish>Solicitud de Misión</Spanish>
       </Key>
     </Container>
     <Container name="dialog_recruit_squad">
@@ -3565,6 +3658,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_mg_car">
         <Original>MG Car</Original>
+        <Spanish>Coche de Ametralladora</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_squad_mg_team">
         <Original>MG Team</Original>
@@ -3624,14 +3718,17 @@
       </Key>
       <Key ID="STR_antistasi_recruit_squad_error">
         <Original>You do not have enough money or HR for this group type</Original>
+        <Spanish>No tienes suficiente dinero ni recursos humanos para este tipo de grupo.</Spanish>
       </Key>
       <Key ID="STR_antistasi_recruit_squad_notCompatible">
         <Original>This squad type is not compatible with this modset</Original>
+        <Spanish>Este tipo de escuadrón no es compatible con este conjunto de mods.</Spanish>
       </Key>
     </Container>
     <Container name="dialog_recruit_units">
       <Key ID="STR_antistasi_dialogs_recruit_units_antitank">
         <Original>Anti-Tank</Original>
+        <Spanish>Anti-tanque</Spanish>
         <Korean>대전차병</Korean>
         <Russian>Гранатометчик</Russian>
         <Czech>Protitankový střelec</Czech>
@@ -3751,9 +3848,11 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_units_error">
         <Original>You do not have enough money or HR for this unit type</Original>
+        <Spanish>No tienes suficiente dinero ni recursos humanos para este tipo de unidad.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_units_noWeapons">
         <Original>You do not have the weapons necessary to equip this unit</Original>
+        <Spanish>No tienes las armas necesarias para equipar esta unidad.</Spanish>
       </Key>
     </Container>
     <Container name="dialogs_generic">
@@ -4213,11 +4312,13 @@
     <Container name="setup_dialog">
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_badFactions">
         <Original>The currently selected factions are not loaded.\nGo to the Factions tab and select available factions.</Original>
+        <Spanish>Las facciones seleccionadas actualmente no están cargadas.\nVaya a la pestaña Facciones y seleccione las facciones disponibles.</Spanish>
         <Russian>Выбранные в данный момент фракции не загружены.\nПерейдите на вкладку Фракции и выберите доступные фракции.</Russian>
       </Key>
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_copy">
         <Original>Copy game with ID %1</Original>
         <Italian>Copia partita con ID %1</Italian>
+        <Spanish>Copia la partida con ID %1</Spanish>
         <French>Copier le jeu avec l'ID %1</French>
         <Korean>게임 ID %1 복사</Korean>
         <Russian>Копировать игру с ID %1</Russian>
@@ -4226,6 +4327,7 @@
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_create">
         <Original>Create new game with</Original>
         <Italian>Crea nuova partita con</Italian>
+        <Spanish>Crear una nueva partida con</Spanish>
         <French>Créer une nouvelle partie avec</French>
         <Korean>다음으로 새 게임 생성:</Korean>
         <Russian>Создать новую игру с помощью</Russian>
@@ -4234,6 +4336,7 @@
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_delete">
         <Original>Are you sure you want to delete game ID %1 on %2?</Original>
         <Italian>Sei sicuro di volere eliminare la partita con ID %1 su %2</Italian>
+        <Spanish>¿Estás seguro de que quieres eliminar el juego con ID %1 en %2?</Spanish>
         <French>Êtes-vous sûr de vouloir supprimer l'ID de jeu %1 sur %2 ?</French>
         <Korean>%2에서 게임 ID %1을(를) 삭제하시겠습니까?</Korean>
         <Russian>Вы уверены, что хотите удалить игру ID %1 с %2?</Russian>
@@ -4242,6 +4345,7 @@
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_load">
         <Original>Load game with ID %1</Original>
         <Italian>Carica partita con ID %1</Italian>
+        <Spanish>Cargar juego con ID %1</Spanish>
         <French>Charger le jeu avec l'ID %1</French>
         <Korean>게임 ID %1 불러오기</Korean>
         <Russian>Загрузить игру с ID %1</Russian>
@@ -4250,6 +4354,7 @@
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_loadName">
         <Original>name ""%1""</Original>
         <Italian>nome ""%1""</Italian>
+        <Spanish>nombre ""%1""</Spanish>
         <French>nom ""%1""</French>
         <Korean>이름 ""%1""</Korean>
         <Russian>название ""%1""</Russian>
@@ -4258,6 +4363,7 @@
       <Key ID="STR_A3A_fn_GUI_setupLoadgameTab_occInv">
         <Original>%1 occupants and %2 invaders?</Original>
         <Italian>%1 occupanti e %2 invasori?</Italian>
+        <Spanish>¿% 1 ocupantes y% 2 invasores?</Spanish>
         <French>%1 occupants et %2 envahisseurs ?</French>
         <Korean>%1이(가) 점령군이고 %2이(가) 침략군입니까?</Korean>
         <Russian>%1 оккупанты и %2 захватчики?</Russian>
@@ -4349,6 +4455,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_copy_old_game_tooltip">
         <Original>Load an old campaign with a new ID. This option can be used to move a campaign to or from the new save method, or just to make an additional copy for experiments. The new game won't exist on disk until it's saved.</Original>
+        <Spanish>Carga una campaña antigua con un ID nuevo. Esta opción permite transferir una campaña al nuevo método de guardado o desde él, o simplemente crear una copia adicional para experimentar. La nueva partida no existirá en el disco hasta que se guarde.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_create_new_game">
         <Original>Create new game</Original>
@@ -4380,10 +4487,12 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_dlc">
         <Original>DLC and Addons</Original>
+        <Spanish>DLC y Addons</Spanish>
         <Russian>DLC и Аддоны</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_exportSave">
         <Original>Export Save</Original>
+        <Spanish>Exportar Partida Guardada</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_faction_tab_button">
         <Original>Factions</Original>
@@ -4401,16 +4510,20 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_factionInfo">
         <Original>Faction Information</Original>
+        <Spanish>Información de la facción</Spanish>
         <Russian>Информация о фракции</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_importButton">
         <Original>IMPORT</Original>
+        <Spanish>Importar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_importSave">
         <Original>Import Save</Original>
+        <Spanish>Importar y guardar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_infoPanel_header">
         <Original>%1 Information</Original>
+        <Spanish>%1 información</Spanish>
         <Russian>%1 Информация</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_invaders">
@@ -4443,6 +4556,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_load_old_params_tooltip">
         <Original>Use the parameters from the selected campaign when creating the new one.</Original>
+        <Spanish>Utilice los parámetros de la campaña seleccionada al crear la nueva.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_loadgame_tab_button">
         <Original>Load Game</Original>
@@ -4460,9 +4574,11 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_noExportOld">
         <Original>Only saves of version 3.10.0 or later can be exported. Load a game and run a persistent save to upgrade the version</Original>
+        <Spanish>Solo se pueden exportar las partidas guardadas de la versión 3.10.0 o posterior. Carga una partida y ejecuta una partida guardada persistente para actualizar la versión</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_noExportSel">
         <Original>No save selected</Original>
+        <Spanish>No se ha seleccionado ninguna opción de guardar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_new_save_name">
         <Original>New save name</Original>
@@ -4550,6 +4666,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_prettyAddons">
         <Original>Required Addons: %1</Original>
+        <Spanish>Addons necesarios: %1</Spanish>
         <Russian>Требуется аддон: %1</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_rebels">
@@ -4666,29 +4783,37 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_title_saveTransfer">
         <Original>SAVE TRANSFER</Original>
+        <Spanish>GUARDAR TRANSFERENCIA</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_toggleAddons_addons">
         <Original>Switch to Addons</Original>
+        <Spanish>Cambiar a Addons</Spanish>
         <Russian>Переключить на аддон</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_toggleAddons_DLC">
         <Original>Switch to DLCs</Original>
+        <Spanish>Cambiar a DLCs</Spanish>
         <Russian>Переключить на ДЛС</Russian>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_downloading">
         <Original>Downloading data for save %1 with ID %2 from server, please wait...</Original>
+        <Spanish>Descargando datos para la partida %1 con ID %2 desde el servidor, por favor espere...</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_exportReady">
         <Original>Exporting save %1 with ID %2.&lt;br /&gt;&lt;br /&gt;Select the text box and use Ctrl-A and then Ctrl-C to copy the save to clipboard.</Original>
+        <Spanish>Exportando el archivo %1 con ID %2.<br /><br />Seleccione el cuadro de texto y use Ctrl+A y luego Ctrl+C para copiar el archivo al portapapeles.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_importConfirm">
         <Original>Confirm import of save %1?</Original>
+        <Spanish>¿Confirmar importación del archivo %1?</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_importFail">
         <Original>Invalid save data</Original>
+        <Spanish>Datos de guardado no válidos</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_importReady">
         <Original>Paste your save into the text box below and use the %1 button to import it.</Original>
+        <Spanish>Pega tu archivo guardado en el cuadro de texto de abajo y usa el botón %1 para importarlo.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_use_new_namespace">
         <Original>New save method</Original>
@@ -4706,468 +4831,617 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_use_new_namespace_tooltip">
         <Original>Save the new campaign to AntistasiCommunity.vars instead of the main profile vars file. Warning: This may not work correctly on Linux servers due to an Arma bug.</Original>
+        <Spanish>Guarda la nueva campaña en AntistasiCommunity.vars en lugar del archivo principal de variables del perfil. Advertencia: Es posible que esto no funcione correctamente en servidores Linux debido a un error de Arma.</Spanish>
       </Key>
     </Container>
     <Container name="role_select">
       <Key ID="STR_antistasi_dialogs_roleselect_role_rifleman">
         <Original>Rifleman</Original>
+        <Spanish>Fusilero</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_rifleman">
         <Original>The Rifleman is the backbone of every army. Fast and versatile, riflemen are able to go anywhere and do anything.</Original>
+        <Spanish>El fusilero es la columna vertebral de todo ejército. Rápidos y versátiles, los fusileros pueden ir a cualquier parte y hacer cualquier cosa.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_rifleman">
         <Original>Riflemen incur no bonuses or penalties, but are able to hack enemy UAVs if they are found capturable.</Original>
+        <Spanish>Los fusileros no reciben bonificaciones ni penalizaciones, pero pueden piratear los UAV enemigos si los encuentran capturables.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_autorifleman">
         <Original>Autorifleman</Original>
+        <Spanish>Fusilero automatico</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_autorifleman">
         <Original>Autoriflemen provide the most basic and effective form of fire support: suppression with machine guns.</Original>
+        <Spanish>DLC y Addons</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_autorifleman">
         <Original>Autoriflemen have better stamina and recovery (can carry more items over distance), but are loud when they move, alerting enemies.</Original>
+        <Spanish>Los fusileros automáticos proporcionan la forma más básica y eficaz de apoyo de fuego: la supresión con ametralladoras.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_grenadier">
         <Original>Grenadier</Original>
+        <Spanish>Granadero</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_grenadier">
         <Original>Grenadiers carry grenade launchers to supplement the offensive with explosive, smoke, or flare rounds.</Original>
+        <Spanish>Los granaderos portan lanzagranadas para complementar la ofensiva con proyectiles explosivos, de humo o de bengalas.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_grenadier">
         <Original>Grenadiers have better stamina and recovery, but are more easily visible to enemies.</Original>
+        <Spanish>Los granaderos tienen mayor resistencia y capacidad de recuperación, pero son más visibles para los enemigos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_medic">
         <Original>Medic</Original>
+        <Spanish>Medico</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_medic">
         <Original>Medics will always keep the squad in the fight, no matter what happens. They are the most important unit in the squad, and should be protected.</Original>
+        <Spanish>Los médicos siempre mantendrán al equipo en combate, pase lo que pase. Son la unidad más importante del equipo y deben ser protegidos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_medic">
         <Original>Medics can do a variety of medical actions faster and also have expanded medical abilities. However, they have worse stamina and are spotted easier.</Original>
+        <Spanish>Los médicos pueden realizar diversas acciones médicas con mayor rapidez y poseen habilidades médicas ampliadas. Sin embargo, tienen menor resistencia y son detectados con mayor facilidad.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_engineer">
         <Original>Engineer</Original>
+        <Spanish>Ingeniero</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_engineer">
         <Original>Engineers work day and night to keep the rebellion and their tech alive, with a good engineer saving tons of time for the squad.</Original>
+        <Spanish>Los ingenieros trabajan día y noche para mantener viva la rebelión y su tecnología, y un buen ingeniero ahorra muchísimo tiempo al escuadrón.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_engineer">
         <Original>Engineers can repair vehicles, breach enemy armor, build fortifications, defuse mines, and more. They incur a penalty to stamina and a buff to stealth.</Original>
+        <Spanish>Los ingenieros pueden reparar vehículos, perforar blindajes enemigos, construir fortificaciones, desactivar minas y mucho más. Sufren una penalización en resistencia y una mejora en sigilo.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_teamleader">
         <Original>Team Leader</Original>
+        <Spanish>Lider de Equipo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_teamleader">
         <Original>A band of rebels without a team leader is barely more than a mob. Team leaders pull their units together and lead their squads to victory.</Original>
+        <Spanish>Un grupo de rebeldes sin un líder de equipo no es más que una turba. Los líderes de equipo reúnen a sus unidades y las guían hacia la victoria.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_teamleader">
         <Original>Team leaders are quite stealthy with buffs to visual and audible stealth, but have worse stamina.</Original>
+        <Spanish>Los líderes de equipo son bastante sigilosos, con mejoras en el sigilo visual y auditivo, pero tienen menor resistencia.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_commander">
         <Original>Commander</Original>
+        <Spanish>Comandante</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_commander">
         <Original>The commander is the top ranking soldier in the field. They manage the rebellion's affairs, while being able to perform medical and engineer tasks.</Original>
+        <Spanish>El comandante es el soldado de mayor rango en el campo de batalla. Gestiona los asuntos de la rebelión y, además, puede realizar tareas médicas y de ingeniería.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_commander">
         <Original>Commanders handle AI and garrisons as well as coordinating fire support when needed. They have superior stealth for recon but suffer a stamina penalty.</Original>
+        <Spanish>Los comandantes gestionan la IA y las guarniciones, además de coordinar el apoyo de fuego cuando sea necesario. Poseen una capacidad de sigilo superior para el reconocimiento, pero sufren una penalización en su resistencia.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsRifleman">
         <Original>Riflemen: %1 (*)</Original>
+        <Spanish>Fusileros: %1 (*)</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capExplanationRifleman">
         <Original>There is no cap to the number of Rifleman players.</Original>
+        <Spanish>No hay límite en el número de jugadores de fusilero.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsCommander">
         <Original>%1 is the current faction Commander (*)</Original>
+        <Spanish>%1 es el comandante de facción actual (*)</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderNone">
         <Original>The faction currently has no Commander (*)</Original>
+        <Spanish>Actualmente, la facción no tiene comandante (*).</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderSelf">
         <Original>You are currently the faction's Commander (*)</Original>
+        <Spanish>Actualmente eres el Comandante de la facción (*)</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capExplanationCommander">
         <Original>The faction can only have one commander, and you must be assigned the spot.</Original>
+        <Spanish>La facción solo puede tener un comandante, y se te debe asignar ese puesto.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slots">
         <Original>%1: %2/%3  (*)</Original>
+        <Spanish>%1: %2/%3  (*)</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capExplanation">
         <Original>The cap of slots per role (excluding riflemen and the commander) increases as the player count increases. The number per role increases linearly from 3 slots at 3 players to 6 slots at 38 players.</Original>
+        <Spanish>El número máximo de espacios por rol (excluyendo a los fusileros y al comandante) aumenta a medida que aumenta el número de jugadores. El número de espacios por rol aumenta linealmente de 3 a 6 con 38 jugadores.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capNames">
         <Original>Players in this role:</Original>
+        <Spanish>Jugadores en este rol:</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_welcome">
         <Original>Welcome to Antistasi! To get started, select a role from the list on the left and use "set role". You can revisit this screen any time by opening the Battle Menu with Y.</Original>
+        <Spanish>¡Bienvenido a Antistasi! Para empezar, selecciona un rol de la lista de la izquierda y usa "establecer rol". Puedes volver a esta pantalla cuando quieras abriendo el menú de batalla con Y.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_welcomeNew">
         <Original>Each role has different traits and quirks, so it is recommended to start as a rifleman if you are new to the game. Note that no role has locked weapons; the roles simply determine what traits you start with.</Original>
+        <Spanish>Cada rol tiene características y peculiaridades diferentes, por lo que se recomienda empezar como fusilero si eres nuevo en el juego. Ten en cuenta que ningún rol tiene armas fijas; los roles simplemente determinan las características con las que empiezas.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_hasRole">
         <Original>You are currently a %1.</Original>
+        <Spanish>Actualmente eres un %1.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_isCommander">
         <Original>However, since you are the commander, you have the traits listed in the "Commander" tab until you resign.</Original>
+        <Spanish>Sin embargo, dado que usted es el comandante, posee las características que se enumeran en la pestaña "Comandante" hasta que renuncie.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_cannotTakeRoleFull">
         <Original>This role is full.</Original>
+        <Spanish>Este rol está lleno</Spanish>
       </Key>
     </Container>
     <Container name="custom_loadouts">
       <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
         <Original>Custom AI Loadouts</Original>
+        <Spanish>Equipamientos de IA personalizados</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_priWeapon">
         <Original>Primary weapon</Original>
+        <Spanish>Arma Primaria</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_secWeapon">
         <Original>Secondary weapon</Original>
+        <Spanish>Arma Secundaria</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_ammoQuant">
         <Original>Ammo quantity</Original>
+        <Spanish>Cantidad de munición</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_priOptic">
         <Original>Primary optic</Original>
+        <Spanish>Óptica primaria</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_uniform">
         <Original>Uniform</Original>
+        <Spanish>Uniformes</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_vest">
         <Original>Vest</Original>
+        <Spanish>Chaleco</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_backpack">
         <Original>Backpack</Original>
+        <Spanish>Mochila</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_headgear">
         <Original>Headgear</Original>
+        <Spanish>Equipación de Cabeza</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_close">
         <Original>Close</Original>
+        <Spanish>Cerrar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_copyToAll">
         <Original>Copy To All</Original>
+        <Spanish>Copiar a todos</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_resetRole">
         <Original>Reset Role</Original>
+        <Spanish>Resetear Rol</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_resetAll">
         <Original>Reset All</Original>
+        <Spanish>Resetear todos</Spanish>
       </Key>
     </Container>
     <Container name="dialog_gun_shop_dialog">
       <Key ID="STR_antistasi_gun_shop_title">
         <Original>Gun Shop</Original>
+        <Spanish>Tienda de armas</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_rifle_tab_button">
         <Original>Primary</Original>
+        <Spanish>Primaria</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_handguns_tab_button">
         <Original>Handguns</Original>
+        <Spanish>Pistolas</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_launchers_tab_button">
         <Original>Secondary</Original>
+        <Spanish>Secundaria</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_grenades_tab_button">
         <Original>Grenades</Original>
+        <Spanish>Granadas</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_explosives_tab_button">
         <Original>Explosives</Original>
+        <Spanish>Explosivos</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_magazines_tab_button">
         <Original>Magazines</Original>
+        <Spanish>Cargadores</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_optics_tab_button">
         <Original>Optics</Original>
+        <Spanish>Opticas</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_rails_tab_button">
         <Original>Rails</Original>
+        <Spanish>Railes</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_muzzles_tab_button">
         <Original>Muzzles</Original>
+        <Spanish>Bozal</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_bipods_tab_button">
         <Original>Bipods</Original>
+        <Spanish>Bipodes</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_add_to_cart_button_text">
         <Original>Add to Cart</Original>
+        <Spanish>Añadir al Carrito</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_checkout_button_text">
         <Original>Checkout</Original>
+        <Spanish>Caja</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_total_cost_text">
         <Original>Total:</Original>
+        <Spanish>Total:</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_stock_gs">
         <Original>%1 in stock</Original>
+        <Spanish>%1 en stock</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_stock_arsenal">
         <Original>%1 in arsenal</Original>
+        <Spanish>%1 en el arsenal</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_unlock_amount">
         <Original>%1 to unlock</Original>
+        <Spanish>%1 para desbloquear</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_unlocks_disabled">
         <Original>Unlocks disabled</Original>
+        <Spanish>Desbloqueos deshabilitados</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_unlocks_disabled_specific">
         <Original>Unlocks disabled for this equipment type</Original>
+        <Spanish>Desbloqueo desactivado para este tipo de equipo.</Spanish>
       </Key>
     </Container>
     <Container name="map_selector">
       <Key ID="STR_antistasi_mapSelector_onload_text">
         <Original>Welcome to Antistasi!&lt;br /&gt;Use the information button to view basic gamemode info or select a map on the left side to start a game.</Original>
+        <Spanish>¡Bienvenido a Antistasi! &lt;br /&gt; Usa el botón de información para ver información básica sobre el modo de juego o selecciona un mapa en el lado izquierdo para comenzar una partida.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_information_text">
         <Original>Welcome to Antistasi! Antistasi is a gamemode where you play as a small rebel force fighting the tyrannical occupants and ruthless invaders, attempting to kick them both out and regain the country for yourself and your people. The first step to playing is selecting your preferred map. Beginners are recommended to start on Altis.</Original>
+        <Spanish>¡Bienvenidos a Antistasi! Antistasi es un modo de juego donde encarnas a una pequeña fuerza rebelde que lucha contra los tiranos ocupantes y los despiadados invasores, intentando expulsarlos y recuperar el país para ti y tu pueblo. El primer paso para jugar es seleccionar tu mapa preferido. Se recomienda a los principiantes comenzar en Altis.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_information_text2">
         <Original>Select any map from the left-hand list to view information on it. Switch between Banner and Map Board views with the top buttons. Launch your mission with the Play buttons.</Original>
+        <Spanish>Selecciona cualquier mapa de la lista de la izquierda para ver su información. Cambia entre la vista de banner y la de tablero de mapa con los botones superiores. Inicia tu misión con los botones de juego.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_mainTitle">
         <Original>ANTISTASI</Original>
+        <Spanish>ANTISTASI</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_infoTitle">
         <Original>INFORMATION</Original>
+        <Spanish>INFORMACIÓN</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_bannerTitle">
         <Original>BANNER</Original>
+        <Spanish>BANNER</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_mapTitle">
         <Original>MAP</Original>
+        <Spanish>MAPA</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_backButton">
         <Original>Back</Original>
+        <Spanish>Atrás</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_playSPButton">
         <Original>Play Solo</Original>
+        <Spanish>Jugar Solo</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_playMPButton">
         <Original>Host Game</Original>
+        <Spanish>Anfitrión del Juego</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_reqMods">
         <Original>Required mods: %1</Original>
+        <Spanish>Mods Requeridos: %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_noReqMods">
         <Original>None</Original>
+        <Spanish>Ninguno</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_failReqMods">
         <Original>You cannot play %1 as the required mod(s) are not loaded.\nRequired mods: %2</Original>
+        <Spanish>No puedes jugar a %1 porque no se han cargado los mods necesarios.\nMods necesarios: %2</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_mapStats">
         <Original>Climate: %1&lt;br /&gt;&lt;br /&gt;Map size:&lt;br /&gt;%2km x %2km&lt;br /&gt;&lt;br /&gt;Cities: %3&lt;br /&gt;&lt;br /&gt;Banks: %4&lt;br /&gt;&lt;br /&gt;Airbases: %5</Original>
+        <Spanish>Clima: %1&lt;br /&gt;&lt;br /&gt;Tamaño del mapa:&lt;br /&gt;%2km x %2km&lt;br /&gt;&lt;br /&gt;Ciudades: %3&lt;br /&gt;&lt;br /&gt;Bancos: %4&lt;br /&gt;&lt;br /&gt;Bases aereas: %5</Spanish>
       </Key>
     </Container>
     <Container name="map_descriptions">
       <Key ID="STR_antistasi_mapSelector_description_altis">
         <Original>Altis is the classic Antistasi map, great for beginners and veterans alike, featuring a variety of terrain and strategies. This map is quite large and has something for everyone.</Original>
+        <Spanish>Altis es el mapa clásico de Antistasi, ideal tanto para principiantes como para veteranos, con una gran variedad de terrenos y estrategias. Este mapa es bastante grande y ofrece algo para todos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_cam_lao_nam">
         <Original>Cam Lao Nam is the traditional Vietnam map, with dense jungles and entrenched outposts that require a unique gameplay style to tackle and conquer.</Original>
+        <Spanish>Cam Lao Nam es el mapa tradicional de Vietnam, con densas selvas y puestos de avanzada fortificados que requieren un estilo de juego único para afrontarlos y conquistarlos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_chernarus">
         <Original>Chernarus is the classic DayZ and Arma 2 map, small enough to allow for a quick completion but varied enough to keep the experience engaging for beginners and veterans alike.</Original>
+        <Spanish>Chernarus es el mapa clásico de DayZ y Arma 2, lo suficientemente pequeño como para permitir una rápida finalización, pero lo suficientemente variado como para mantener la experiencia atractiva tanto para principiantes como para veteranos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_chernarus_summer">
         <Original>A variation of the classic Chernarus map, in a lively summer season.</Original>
+        <Spanish>Una variación del clásico mapa de Chernarus, en plena temporada de verano</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_chernarus_winter">
         <Original>A variation of the classic Chernarus map, with a few inches of snow to boot.</Original>
+        <Spanish>Una variación del clásico mapa de Chernarus, con unos centímetros de nieve añadidos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_cup_chernarus_A3">
         <Original>Chernarus 2020 is a sequel to the classic Chernarus map, with new assets, reworked terrain features, and a slightly larger map. This map may have client performance issues.</Original>
+        <Spanish>Chernarus 2020 es la secuela del clásico mapa Chernarus, con nuevos elementos, características del terreno rediseñadas y un mapa ligeramente más grande. Este mapa podría presentar problemas de rendimiento en el cliente.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_enoch">
         <Original>Livonia is split between forests and rolling wheat fields, with urban environments and open areas benefiting long-range and close-quarters gameplay.</Original>
+        <Spanish>Livonia se divide entre bosques y ondulantes campos de trigo, con entornos urbanos y zonas abiertas que favorecen tanto el juego a larga distancia como el de corta distancia.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_gm_weferlingen_summer">
         <Original>Weferlingen is a large map, sparsely populated with objectives and composed of open fields for long-range and armored combat. This version takes place in a lively summer season.</Original>
+        <Spanish>Weferlingen es un mapa extenso, con pocos objetivos y compuesto por campos abiertos ideales para el combate a larga distancia y con vehículos blindados. Esta versión se desarrolla durante una animada temporada de verano.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_gm_weferlingen_winter">
         <Original>Weferlingen is a large map, sparsely populated with objectives and composed of open fields for long-range and armored combat. This is the winter version, with a thick snow coating.</Original>
+        <Spanish>Weferlingen es un mapa grande, con pocos objetivos y compuesto por campos abiertos para el combate a larga distancia y con vehículos blindados. Esta es la versión de invierno, con una gruesa capa de nieve.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_isladuala3">
         <Original>Isla Duala is a country split by war, with deserts and tropical environments across a very objective-dense map. New players may struggle with the density of the map.</Original>
+        <Spanish>Isla Duala es un país dividido por la guerra, con desiertos y entornos tropicales en un mapa repleto de objetivos. Los jugadores novatos podrían tener dificultades con la densidad del mapa.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_kunduz">
         <Original>Kunduz is a tiny, cramped map desert map. This map is good for a very quick run from start to end of Antistasi, without any fluff. It is not recommended for long-term play.</Original>
+        <Spanish>Kunduz es un mapa desértico pequeño y estrecho. Es ideal para completar Antistasi rápidamente, sin complicaciones. No se recomienda para partidas largas.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_malden">
         <Original>Malden is a compact, dense map with plenty of urban areas, close quarters combat, and a highly accessible road network that may make the map difficult to new players.</Original>
+        <Spanish>Malden es un mapa compacto y denso, con muchas zonas urbanas, combates cuerpo a cuerpo y una red de carreteras muy accesible que puede dificultar el juego a los nuevos jugadores.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_mehland">
         <Original>Mehland is a Scandinavian map with plenty of water, modern urban areas, and bridges. The features of the map are quite unique, but new players may struggle with the size.</Original>
+        <Spanish>Mehland es un mapa escandinavo con mucha agua, zonas urbanas modernas y puentes. Sus características son bastante singulares, pero los jugadores novatos podrían tener dificultades con su tamaño.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_Napf">
         <Original>Napf is a Swiss specialty of rolling hills and dense forests. With sparse objectives and forgiving terrain, new players should consider this map.</Original>
+        <Spanish>Napf es un mapa típico suizo, caracterizado por sus colinas onduladas y densos bosques. Con pocos objetivos y un terreno indulgente, este mapa es ideal para jugadores principiantes.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_NapfWinter">
         <Original>This is a version of Napf, in a rainy or winter environment.</Original>
+        <Spanish>Esta es una versión de Napf, adaptada a un entorno lluvioso o invernal.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_pulau">
         <Original>Pulau is split into 2 islands in a dense tropical jungle, similar to Tanoa, where close-quarters combat reigns supreme. New players may struggle with the thick jungle foliage.</Original>
+        <Spanish>Pulau está dividida en dos islas en una densa selva tropical, similar a Tanoa, donde el combate cuerpo a cuerpo es la norma. Los jugadores novatos podrían tener dificultades con la espesa vegetación de la jungla.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_regero">
         <Original>Regero consists mainly of arid terrain and sharp hills. With a variety of terrain, it provides interesting gameplay for infantry but aircraft may struggle with the elevation.</Original>
+        <Spanish>Regero se compone principalmente de terreno árido y colinas escarpadas. Gracias a la variedad de su terreno, ofrece una jugabilidad interesante para la infantería, pero las aeronaves pueden tener dificultades con la elevación.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_sara">
         <Original>Sahrani is a varied terrain where all types of gameplay can flourish on an open sandbox. However, like many CUP terrains, many of the buildings are non-functional.</Original>
+        <Spanish>Sahrani es un terreno variado donde todo tipo de jugabilidad puede prosperar en un entorno abierto. Sin embargo, al igual que muchos terrenos de CUP, muchos de los edificios no son funcionales.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_SPE_Mortain">
         <Original>Mortain is a World War II themed map, with enough hedges, walls, and village houses to keep engagement distances to a minimum in true World War II style.</Original>
+        <Spanish>Mortain es un mapa ambientado en la Segunda Guerra Mundial, con suficientes setos, muros y casas de pueblo para mantener las distancias de combate al mínimo, al más puro estilo de la Segunda Guerra Mundial.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_SPE_Normandy">
         <Original>Normandy is similar to Mortain with additional varied terrain in places, with fields and orchards, but the wholehearted focus is still on World War II assaults.</Original>
+        <Spanish>Normandía es similar a Mortain, con un terreno más variado en algunos lugares, con campos y huertos, pero la atención principal sigue centrada en los asaltos de la Segunda Guerra Mundial.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_stratis">
         <Original>Stratis is not intended for play with Antistasi, but is compatible for testing purposes and for those who dare.</Original>
+        <Spanish>Stratis no está diseñado para jugar con Antistasi, pero es compatible con fines de prueba y para aquellos que se atrevan.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_stubbhult">
         <Original>Stubbhult is a smaller Scandinavian map with similar vibes to Livonia, with rolling forests, lakes, and wheat fields. The map serves well for a short but lively campaign.</Original>
+        <Spanish>Stubbhult es un mapa escandinavo más pequeño con una atmósfera similar a la de Livonia, con bosques ondulados, lagos y campos de trigo. El mapa es ideal para una campaña corta pero dinámica.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_takistan">
         <Original>Takistan is the most frequent Middle-Eastern Antistasi map, compact but with enough objectives to service a short but full campaign. Rolling hills encourage long-range tactics.</Original>
+        <Spanish>Takistán es el mapa de Antistasi ambientado en Oriente Medio más frecuente; es compacto pero cuenta con suficientes objetivos para una campaña corta pero completa. Sus colinas onduladas fomentan las tácticas de largo alcance.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_tanoa">
         <Original>Tanoa is split between 5 islands, with thick jungles leading to close-quarters fights. Performance may struggle and new players may struggle with the visibility AI has.</Original>
+        <Spanish>Tanoa se divide en 5 islas, con densas selvas que propician combates cuerpo a cuerpo. El rendimiento puede verse afectado y los jugadores nuevos pueden tener dificultades con la visibilidad de la IA.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_tembelan">
         <Original>Tembelan Island is an extremely dense island, with a few forests and plenty of urban areas. Close quarters combat and large-scale assaults are frequent sights here.</Original>
+        <Spanish>La isla de Tembelan es extremadamente densa, con algunos bosques y numerosas zonas urbanas. Los combates cuerpo a cuerpo y los asaltos a gran escala son frecuentes en esta isla.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_tem_anizay">
         <Original>Anizay is a compact desert map with a massive urban city to the northwest, leading to a variety of tactics and gameplay styles. Its size leads to many short campaigns.</Original>
+        <Spanish>Anizay es un mapa desértico compacto con una enorme ciudad al noroeste, lo que da lugar a una variedad de tácticas y estilos de juego. Su tamaño propicia muchas campañas cortas.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_tem_kujari">
         <Original>Kujari is an African map with sparse forests, open areas, and enough cities to provide a new experience every time you play. It's large enough to sustain a longer campaign.</Original>
+        <Spanish>Kujari es un mapa africano con bosques dispersos, zonas abiertas y suficientes ciudades para ofrecer una experiencia diferente cada vez que juegues. Es lo suficientemente grande como para dar cabida a una campaña larga.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_umb_colombia">
         <Original>Colombia is one of the few South American maps, with dense jungles and open fields interspersed. New players may struggle with the thickness of the foliage against AI.</Original>
+        <Spanish>Colombia es uno de los pocos mapas sudamericanos, con densas selvas y campos abiertos intercalados. Los jugadores nuevos pueden tener dificultades con la espesa vegetación contra la IA.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_vn_khe_sanh">
         <Original>Khe Sanh is a similar trademark Vietnam map to Cam Lao Nam, with slightly less dense jungles in a more compact and ruthless terrain. New players may struggle with this map.</Original>
+        <Spanish>Khe Sanh es un mapa de Vietnam similar a Cam Lao Nam, con selvas un poco menos densas y un terreno más compacto e implacable. Los jugadores novatos podrían tener dificultades con este mapa.</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_description_vt7">
         <Original>Virolahti is dominated by forests and mainly flat terrain, requiring new strategies with less cover and concealment. Veteran players may enjoy this map.</Original>
+        <Spanish>Virolahti se caracteriza por sus bosques y terreno mayormente llano, lo que exige nuevas estrategias con menos cobertura y ocultación. Los jugadores veteranos podrían disfrutar de este mapa.</Spanish>
       </Key>
     </Container>
     <Container name="community_advertisement">
       <Key ID="STR_antistasi_commad_splashText">
         <Original>The Antistasi Official Community servers are the best place to drop in and play Antistasi, 24/7. The community maintains two servers that rotate through the most popular maps and modsets, with a large playerbase keeping the servers active.&lt;br /&gt;Use the Links button to download the modset, or join the servers now if you've loaded the correct mods.</Original>
+        <Spanish>Los servidores oficiales de la comunidad de Antistasi son el mejor lugar para entrar y jugar Antistasi las 24 horas del día, los 7 días de la semana. La comunidad mantiene dos servidores que rotan entre los mapas y conjuntos de mods más populares, con una gran base de jugadores que mantiene los servidores activos.&lt;br /&gt;Usa el botón Enlaces para descargar el conjunto de mods, o únete a los servidores ahora si has cargado los mods correctos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_linkText">
         <Original>Antistasi Discord: discord.gg/antistasi&lt;br /&gt;Teamspeak (required to play servers): %1&lt;br /&gt;Main server address: %2&lt;br /&gt;Ports: %3</Original>
+        <Spanish>Antistasi Discord: discord.gg/antistasi&lt;br /&gt;Teamspeak (requerido para jugar en los servidores): %1&lt;br /&gt;Dirección servidor principal: %2&lt;br /&gt;Puertos: %3</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_showTestServers">
         <Original>Show Test Servers</Original>
+        <Spanish>Mostrar servidores de prueba</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_joinMain1">
         <Original>Join Main Server 1</Original>
+        <Spanish>Unirse al servidor principal 1</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_joinTest1">
         <Original>Join Test Server 1</Original>
+        <Spanish>Unirse al servidor de prueba 1</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_joinMain2">
         <Original>Join Main Server 2</Original>
+        <Spanish>Unirse al servidor de prueba 2</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_joinTest2">
         <Original>Join Test Server 2</Original>
+        <Spanish>Unirse al servidor de prueba 2</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_back">
         <Original>Back</Original>
+        <Spanish>Atrás</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_links">
         <Original>Links</Original>
+        <Spanish>Enlaces</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_switchTooltip">
         <Original>Links</Original>
+        <Spanish>Enlaces</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_credits">
         <Original>Credits: %1</Original>
+        <Spanish>Creditos: %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_creditsMain">
         <Original>Use the forward and backward buttons to view images from the community servers.\n\nAntistasi Banner\nComposed by %1\nImages by %1, %2\nSoldiers from %3, %4</Original>
+        <Spanish>Usa los botones de avance y retroceso para ver imágenes de los servidores de la comunidad.\n\nBanner de Antistasi\nCompuesto por %1\nImágenes de %1, %2\nSoldados de %3, %4</Spanish>
       </Key>
       </Container>
       <Container name="options_dialog">
       <Key ID="STR_antistasi_clientOptions_title">
         <Original>ANTISTASI OPTIONS</Original>
+        <Spanish>ANTISTASI OPCIONES</Spanish>
       </Key>
       <Key ID="STR_antistasi_clientOptions_backButton">
         <Original>Back</Original>
+        <Spanish>Atrás</Spanish>
       </Key>
       <Key ID="STR_antistasi_clientoptions_saveButton">
         <Original>Save</Original>
+        <Spanish>Guardar</Spanish>
       </Key>
     </Container>
     <Container name="admin_copy_id">
       <Key ID="STR_antistasi_admincopyid_title">
         <Original>COPY USER ID</Original>
+        <Spanish>Copiar ID de usuario</Spanish>
       </Key>
       <Key ID="STR_antistasi_admincopyid_main">
         <Original>Copy the user's ID from the box by highlighting it and using Ctrl + C.</Original>
+        <Spanish>Copia el ID del usuario del cuadro seleccionándolo y usando Ctrl + C.</Spanish>
       </Key>
     </Container>
     <Container name="veh_service_dialog">
       <Key ID="STR_antistasi_vehService_hintTitle">
         <Original>Service Vehicle</Original>
+        <Spanish>Vehículo de servicio</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_applyPoints">
         <Original>APPLY (%1 POINTS)</Original>
+        <Spanish>APLICAR (%1 PUNTOS)</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_applyRefuel">
         <Original>APPLY (%1 LITERS)</Original>
+        <Spanish>APLICAR (%1 Litros)</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_nothingRearm">
         <Original>Nothing to rearm or all selected pylons are full on ammo</Original>
+        <Spanish>No hay nada que rearmar o todos los pilones seleccionados están llenos de munición.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_nothingRepair">
         <Original>Nothing to repair</Original>
+        <Spanish>Nada que arreglar</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_nothingRefuel">
         <Original>Nothing to refuel</Original>
+        <Spanish>Nada que repostar</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noNearRearm">
         <Original>No ammo truck in vicinity</Original>
+        <Spanish>No hay ningún camión de municiones en las inmediaciones.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noNearRepair">
         <Original>No repair truck in vicinity</Original>
+        <Spanish>No hay ningún camión de reparación en las inmediaciones.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noNearRefuel">
         <Original>No fuel truck in vicinity</Original>
+        <Spanish>No hay ningún camión cisterna en las inmediaciones.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noCargoRearm">
         <Original>The ammo truck %1 %2m away only has %3 points left</Original>
+        <Spanish>Al camión de municiones de %1 %2m de distancia solo le quedan %3 puntos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noCargoRepair">
         <Original>The repair truck %1 %2m away only has %3 points left</Original>
+        <Spanish>El camión de reparación que está a %1 %2m de distancia solo tiene %3 puntos restantes.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noCargoRefuel">
         <Original>The fuel truck %1 %2m away only has %3 liters of fuel left</Original>
+        <Spanish>Al camión cisterna que está a %1 o %2 metros solo le quedan %3 litros de combustible.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_costRearm">
         <Original>Buying %1 rounds of %2 for %3 points</Original>
+        <Spanish>Comprar %1 rondas de %2 por %3 puntos</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_refund">
         <Original>Selling %1 rounds of %2 for %4 value of %3 points</Original>
+        <Spanish>Vender %1 rondas de %2 por un valor de %4 de %3 puntos</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_swapping">
         <Original>Swapping %1 between hardpoints</Original>
+        <Spanish>Intercambio de %1 entre puntos de anclaje</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_costRepair">
         <Original>%1 points to repair %3</Original>
+        <Spanish>%1 puntos para reparar %3</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_costRefuel">
         <Original>%1 liters to refuel the vehicle</Original>
+        <Spanish>%1 litros para repostar el vehículo</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_tooFarRearm">
         <Original>The target vehicle was moved too far away and cannot be rearmed.</Original>
+        <Spanish>El vehículo objetivo fue trasladado demasiado lejos y no puede ser rearmado.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_tooFarRepair">
         <Original>The target vehicle was moved too far away and cannot be repaired.</Original>
+        <Spanish>El vehículo objetivo fue movido demasiado lejos y no puede ser reparado.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_tooFarRefuel">
         <Original>The target vehicle was moved too far away and cannot be refueled.</Original>
+        <Spanish>El vehículo objetivo se ha alejado demasiado y no se puede repostar.</Spanish>
       </Key>
     </Container>
   </Package>
