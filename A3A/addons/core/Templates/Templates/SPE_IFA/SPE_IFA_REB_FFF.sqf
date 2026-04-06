@@ -13,8 +13,8 @@
 //////////////////////////
 
 // All of bellow are optional overrides.
-["firstAidKits", ["SPE_US_FirstAidKit", "SPE_GER_FirstAidKit"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
-["mediKits", ["SPE_US_Medkit", "SPE_GER_Medkit"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
+["firstAidKits", ["SPE_US_FirstAidKit", "SPE_GER_FirstAidKit", "SPEX_CW_FirstAidKit"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
+["mediKits", ["SPE_US_Medkit", "SPE_GER_Medkit", "SPEX_CW_Medkit"]] call _fnc_saveToTemplate;  // Relies on autodetection. However, item is tested for for help and reviving.
 ["toolKits", ["SPE_ToolKit"]] call _fnc_saveToTemplate;  // Relies on autodetection.
 
 ["diveGear", ["U_SPE_FR_Tank_Crew"]] call _fnc_saveToTemplate;
