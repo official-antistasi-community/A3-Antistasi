@@ -36,10 +36,21 @@ _mrkFinal setMarkerShape "ICON";
 //_mrkFinal setMarkerText "Bank";
 
 private _bankVehicleClass = selectRandom (FactionGet(reb, "vehiclesCivSupply"));
+private _truckX = createVehicle [_bankVehicleClass, markerPos "Synd_HQ" vectorAdd [0,0,-1000], [], 0, "CAN_COLLIDE"];
+_truckX enableSimulation false;
+call {
+	private _testDir = random 360;
+	private _pos = [markerPos "Synd_HQ", _truckX, _testDir, 0, 50, 50] call A3A_fnc_findEmptyPosCar;
+	if (_pos isEqualTo []) then { _pos = markerPos "Synd_HQ" findEmptyPosition [1,50,_bankVehicleClass] };
+	isNil {
+		_truckX setPosATL _pos;
+		_truckX setDir _testDir;
+		_truckX allowDamage false;
+		_truckX enableSimulation true;
+	};
+	_truckX spawn { sleep 3; _this allowDamage true };
+};
 
-_pos = (getMarkerPos respawnTeamPlayer) findEmptyPosition [1,50,_bankVehicleClass];
-
-_truckX = _bankVehicleClass createVehicle _pos;
 {_x reveal _truckX} forEach (allPlayers - (entities "HeadlessClient_F"));
 [_truckX, teamPlayer] call A3A_fnc_AIVEHinit;
 _truckX setVariable ["destinationX",_nameDest,true];
