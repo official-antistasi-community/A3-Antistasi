@@ -4861,7 +4861,7 @@
         <Chinesesimp>肃清区域</Chinesesimp>
       </Key>
       <Key ID="STR_A3A_fn_mission_conq_police_text">
-        <Original>A police station is disturbing our operations in %1. Go there and destroy it before %2. You can ransack it for loot and intel first.</Original>
+        <Original>A police station in %1 is disrupting our efforts to convert the population. Go there and destroy it before %2 for an extra reward. You can ransack it for loot and intel first.</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_conq_police_title">
         <Original>Destroy the police station</Original>
@@ -5031,7 +5031,7 @@
         <Original>An enemy plane is airdropping supplies on this position. Get there with a truck and recover the crate. Be careful not to shoot down the plane!</Original>
       </Key>
       <Key ID="STR_A3A_fn_mission_des_ante_text">
-        <Original>We need to destroy or take a Radio Tower in %1. This will interrupt the coverage of %3 radio propaganda. Do it before %2.</Original>
+        <Original>We need to destroy or capture a Radio Tower in %1. This will interrupt the coverage of %3 radio propaganda and assist our efforts to convert nearby towns to the rebel cause. Do it before %2 for an extra reward.</Original>
         <Italian>Dobbiamo distruggere o catturare la Torre Radio a %1. Ciò interromperà la Rete di Propaganda %3. Falla entro %2.</Italian>
         <French>Nous devons détruire ou capturer une Tour Radio dans %1. Cela va interrompre le reseau de propagande de %3. Faites le avant %2.</French>
         <Korean>%1에 있는 파괴하거나 점령해야 합니다. 그러면 %3의 프로파간다 네트워크 송신이 중단됩니다. %2 전까지 수행하십시오.</Korean>
