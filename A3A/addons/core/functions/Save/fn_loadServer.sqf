@@ -153,6 +153,7 @@ if (isServer) then {
 			_veh setPosWorld _posVeh;
 			_veh setVectorDirAndUp [_vecDir, _vecUp];
 			_veh setVariable ["A3A_building", true, true];
+			_veh setVariable ["markerX", "Synd_HQ"];
 			_spawnedBuildings pushBack _veh;
 		};
 	} forEach (A3A_garrison get "Synd_HQ" get "buildings");
