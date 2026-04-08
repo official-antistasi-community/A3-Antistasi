@@ -44,7 +44,7 @@ if (_typeX != "delete") then
 		};
 
 	{_costs = _costs + (server getVariable _x); _hr = _hr +1} forEach _typeGroup;
-	}
+	};
 
 
 // Check for both marker name collision and nearby rebel posts
