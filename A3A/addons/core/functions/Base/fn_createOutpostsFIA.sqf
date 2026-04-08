@@ -2,27 +2,19 @@
 FIX_LINE_NUMBERS()
 if (!isServer) exitWith {};
 
-private ["_groupX","_unit","_radiusX","_roads","_road","_pos","_truckX","_textX","_mrk","_unitsX","_formatX"];
+private ["_typeX","_costs","_groupX","_unit","_radiusX","_roads","_road","_pos","_truckX","_textX","_mrk","_hr","_unitsX","_formatX"];
 
-params ["_positionTel"];
+_typeX = _this select 0;
+_positionTel = _this select 1;
 
-private _titleStr = localize "STR_A3A_fn_base_outpdiag_title";
+_isRoad = isOnRoad _positionTel;
 
-// Check for both marker name collision and nearby rebel posts
-// Moved from outpostDialog because we need server data
-private _nearPosts = outpostsFIA inAreaArrayIndexes [_positionTel, 300, 300];
-private _mrkName = format ["RebPost%1", mapGridPosition _positionTel];
-private _isNearMrk = markerShape _mrkName != "" and !(_mrkName in A3A_markersToDelete);
-if (count _nearPosts > 0 or _isNearMrk) exitWith {
-	[_titleStr, localize "STR_A3A_fn_base_createoutpfia_alreadynear"] remoteExecCall ["A3A_fnc_customHint", theBoss];
-};
+_typeGroup = FactionGet(reb,"groupSniper");
+_typeVehX = (FactionGet(reb,"vehiclesBasic")) # 0;
+_taskData = localize "STR_A3A_fn_createOutpostsFIA_OP_data";
+_taskTitle = localize "STR_A3A_fn_createOutpostsFIA_OP_title";
+private _tsk = "";
 
-private _typeGroup = FactionGet(reb,"groupSniper");
-private _typeVehX = (FactionGet(reb,"vehiclesBasic")) # 0;
-private _taskData = localize "STR_A3A_fn_createOutpostsFIA_OP_data";
-private _taskTitle = localize "STR_A3A_fn_createOutpostsFIA_OP_title";
-
-private _isRoad = isOnRoad _positionTel;
 if (_isRoad) then {
 	_typeGroup = FactionGet(reb,"groupAT") + [FactionGet(reb,"unitCrew")];
 	_typeVehX = (FactionGet(reb,"vehiclesTruck")) # 0;
@@ -30,17 +22,8 @@ if (_isRoad) then {
 	_taskTitle = localize "STR_A3A_fn_createOutpostsFIA_RB_title";
 };
 
-private _hr = 0;
-private _cost = if (_isRoad) then { [FactionGet(reb,"vehiclesLightArmed") # 0] call A3A_fnc_vehiclePrice } else { 0 };
-{_cost = _cost + (server getVariable _x); _hr = _hr + 1} forEach _typeGroup;
-if (server getVariable "resourcesFIA" < _cost or server getVariable "hr" < _hr) exitWith {
-	[_titleStr, format [localize "STR_A3A_fn_base_outpdiag_no_resources",_hr,_cost]] remoteExecCall ["A3A_fnc_customHint", theBoss];
-};
-[-_hr, -_cost] spawn A3A_fnc_resourcesFIA;
-
-
-private _dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + 60];
-private _dateLimitNum = dateToNumber _dateLimit;
+_dateLimit = [date select 0, date select 1, date select 2, date select 3, (date select 4) + 60];
+_dateLimitNum = dateToNumber _dateLimit;
 private _taskId = "outpostsFIA" + str A3A_taskCount;
 [[teamPlayer,civilian],_taskId,[_taskData,_taskTitle],_positionTel,false,0,true,"Move",true] call BIS_fnc_taskCreate;
 [_taskId, "outpostsFIA", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
