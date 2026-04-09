@@ -18,6 +18,8 @@ switch (_key) do {
         if (player getVariable ["owner",player] != player) exitWith {};
         if (GVAR(keys_battleMenu)) exitWith {};         // fucking thing actually refires on closeDialog?
         if (dialog) exitWith {};
+        if (!isNull (uiNamespace getVariable ["arsanalDisplay", displayNull])) exitWith {};            // JNA open
+
         GVAR(keys_battleMenu) = true; //used to block certain actions when menu is open
 
         // So what the fuck is going on here? Let's see...
