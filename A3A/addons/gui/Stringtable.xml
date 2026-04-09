@@ -987,6 +987,7 @@
       <Key ID="STR_antistasi_dialogs_hq_train_tooltip">
         <Original>This will cost € %1</Original>
         <Czech>Toto bude stát € %1</Czech>
+        <Spanish>Esto costará € %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_train_maxed">
         <Original>Rebel training maxed!</Original>
@@ -1222,6 +1223,7 @@
       <Key ID="STR_antistasi_dialogs_hq_rest_notime_text">
         <Original>No rest for the wicked...</Original>
         <Czech>Žádný odpočinek pro nepřátele...</Czech>
+        <Spanish>No hay descanso para los malvados...</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_rest_notime_tooltip">
         <Original>You must select a period of time to sleep for</Original>
@@ -3450,6 +3452,7 @@
       <Key ID="STR_antistasi_dialogs_main_warstatus_main">
         <Original>War Status</Original>
         <Czech>Válečný status</Czech>
+        <Spanish>Estado de la Guerra</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_occupants">
         <Original>Occupants</Original>
