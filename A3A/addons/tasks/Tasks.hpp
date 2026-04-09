@@ -76,6 +76,14 @@ class Tasks {
         weight = 1;
         isLegacy = 1;
     };
+    class DES_Vehicle {
+        category = "DES";
+        func = QFUNC(DES_Vehicle);
+        params = QFUNC(DES_Vehicle_p);
+        version = 1;
+        weight = 1;
+        isLegacy = 1;
+    };
 /*    class LOG_Ammo {
         category = "LOG";
         func = QFUNCMAIN(LOG_Ammo);
