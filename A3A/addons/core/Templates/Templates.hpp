@@ -2327,7 +2327,7 @@ class Templates
     // ***************************** PED *****************************
     class PED_Base
     {
-        requiredAddons[] = {"CUP_Creatures_People_Civil_Russia", "CUP_BaseConfigs", "CUP_AirVehicles_Core"};       
+        requiredAddons[] = {"CUP_Creatures_People_Civil_Russia", "CUP_BaseConfigs", "CUP_AirVehicles_Core", "ASZ_Main_A3"};       
         basepath = QPATHTOFOLDER(Templates\Templates\PED);
         logo = "\CUP\Creatures\People\CUP_Creatures_People_Core\ui\logo_cup_ca_small.paa";
         priority = 70;
