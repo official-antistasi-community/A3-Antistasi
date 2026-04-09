@@ -4951,11 +4951,12 @@
       <Key ID="STR_antistasi_dialogs_roleselect_info_autorifleman">
         <Original>Autoriflemen provide the most basic and effective form of fire support: suppression with machine guns.</Original>
         <Czech>Kulometčíci poskytují nejvíce základní a efektivní formu palebné podpory: potlačení s kulometem.</Czech>
+        <Spanish>Los fusileros automáticos proporcionan la forma más básica y eficaz de apoyo de fuego: la supresión con ametralladoras.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_autorifleman">
         <Original>Autoriflemen have better stamina and recovery (can carry more items over distance), but are loud when they move, alerting enemies.</Original>
         <Czech>Kulometčíci mají lepší staminu a zotavení (můžou nést více itemů přes dálky), ale jsou hlasití když se pohybují, upozorňují nepřátele.</Czech>
-        <Spanish>Los fusileros automáticos proporcionan la forma más básica y eficaz de apoyo de fuego: la supresión con ametralladoras.</Spanish>
+        <Spanish>Los fusileros automáticos tienen mayor resistencia y recuperación (pueden transportar más objetos a distancia), pero son ruidosos al moverse, alertando a los enemigos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_grenadier">
         <Original>Grenadier</Original>
