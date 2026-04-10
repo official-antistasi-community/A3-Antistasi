@@ -17,18 +17,25 @@ Example:
 
 License: APL-ND
 */
+
+#include "defines.inc"
+FIX_LINE_NUMBERS()
+
 private _totalFuelCargo = 0;
 {
-    private _fuelSource = _x;
-    private "_vehData";
-    {_vehData = _x get _fuelSource; if (!isNil "_vehdata") exitWith {}; } forEach HR_GRG_Vehicles; //find vehicles in categorys, typically cat 0 "cars"
+    private _sourceUID = _x;
+    private _vehData = (HR_GRG_Vehicles#HR_GRG_SOURCEINDEX) get _sourceUID;
+    if (isNil "_vehData") exitWith {
+        Error_1("Fuel source vehicle %1 not found in source category", _sourceUID);
+    };
+
     private _fuelData = _vehData#4#0;
     _totalFuelCargo = _totalFuelCargo + (if (A3A_hasAce) then {
         private _aceFuelCargo = _fuelData#2;
-        if (isNil "_aceFuelCargo") then {0} else {_aceFuelCargo}
+        if (isNil "_aceFuelCargo") then {0} else {0 max _aceFuelCargo}
     } else {
         private _transportFuel = getNumber (configFile/"CfgVehicles"/_vehData#1/"transportFuel");
-        (_fuelData#1) * _transportFuel
+        (0 max _fuelData#1) * _transportFuel
     });
 } forEach (HR_GRG_Sources#1);
 
