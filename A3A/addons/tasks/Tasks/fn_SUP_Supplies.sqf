@@ -166,7 +166,7 @@ _task set ["s_boxPlaced",
 
 	// Show the countdown if blocked on last check
 	if ("_blockTime" in _this) then {
-		private _nearPlayers = playableUnits inAreaArray [getPosATL _box, 300, 300];
+		private _nearPlayers = call A3A_fnc_playableUnits inAreaArray [getPosATL _box, 300, 300];
 		private _endTime = serverTime + _countdown;
 		[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_countdown", _endTime, _box, 50] remoteExec ["A3A_fnc_customHintCountdown", _nearPlayers];
 		_this deleteAt "_blockTime";

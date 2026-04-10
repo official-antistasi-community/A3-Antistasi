@@ -9,6 +9,6 @@ FIX_LINE_NUMBERS()
 
 params ["_title", "_bodyText", "_center", "_radius"];
 
-private _nearPlayers = playableUnits inAreaArray [_center, _radius, _radius];
+private _nearPlayers = call A3A_fnc_playableUnits inAreaArray [_center, _radius, _radius];
 if (_nearPlayers isEqualTo []) exitWith {};
 [_title, _bodyText] remoteExecCall ["A3A_fnc_customHint", _nearPlayers];
