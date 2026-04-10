@@ -112,6 +112,11 @@ if (isServer) then {
 
 	// outpostsFIA should be fully handled by convertSavedGarrisons
 
+	// Need to get Synd_HQ position now, so roadblocks aren't generated nearby and compat statics go into the right garrison
+	private _posHQ = ["posHQ"] call A3A_fnc_returnSavedStat;
+	if (count _posHQ > 3) then { _posHQ = _posHQ select 0 };
+	"Synd_HQ" setMarkerPos _posHQ;
+
 	// Sync minor site data & generate if missing
 	call A3A_fnc_initMinorSites;
 
