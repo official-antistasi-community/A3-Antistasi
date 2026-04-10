@@ -33,12 +33,14 @@
       <Key ID="STR_antistasi_arsenal_limits_dialog_guest_warning">
         <Original>As a guest commander you can't reduce arsenal limits below default, or below values set by members.</Original>
         <Russian>Как приглашенный командир, вы не можете уменьшать лимиты арсенала ниже значений по умолчанию или ниже значений, установленных участниками.</Russian>
+        <Czech>Jako návštěvnický velitel nemůžete snížit limity arzenálu pod výchozí hodnotu ani pod hodnoty stanovené členy.</Czech>
         <Spanish>Como comandante invitado, no puedes reducir los límites del arsenal por debajo del valor predeterminado, ni por debajo de los valores establecidos por los miembros.</Spanish>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_hint_title">
         <Original>Arsenal Guest Limits</Original>
         <German>Arsenal Gast Limit</German>
         <Russian>Лимит Арсенала гостей</Russian>
+        <Czech>Limit arzenálu pro hosty</Czech>
         <Spanish>Límite de invitados del Arsenal</Spanish>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_limit">
@@ -72,6 +74,7 @@
       <Key ID="STR_antistasi_arsenal_limits_dialog_reset_tooltip">
         <Original>Reset all items in this category to the default guest limit</Original>
         <Russian>Сбросьте для всех товаров в этой категории лимит гостей по умолчанию</Russian>
+        <Czech>Resetovat všechny předměty v této kategorii na základní limit pro návštěvníky</Czech>
         <Spanish>Restablecer todos los elementos de esta categoría al límite de invitados predeterminado.</Spanish>
       </Key>
       <Key ID="STR_antistasi_arsenal_limits_dialog_step">
@@ -128,6 +131,7 @@
       </Key>
       <Key ID="STR_antistasi_teamleader_placer_cannotBuildHelipad">
         <Original>You can only build helipads at captured friendly markers or HQ.</Original>
+        <Czech>Můžete stavět helipady jenom na zabráných přátelských značkách nebo HQ.</Czech>
         <Spanish>Solo puedes construir helipuertos en marcadores aliados capturados o en el cuartel general.</Spanish>
       </Key>
       <Key ID="STR_antistasi_teamleader_placer_e_key">
@@ -982,10 +986,12 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_train_tooltip">
         <Original>This will cost € %1</Original>
+        <Czech>Toto bude stát € %1</Czech>
         <Spanish>Esto costará € %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_train_maxed">
         <Original>Rebel training maxed!</Original>
+        <Czech>Rebelský výcvik na maximu!</Czech>
         <Spanish>Entrenamiento rebelde al máximo</Spanish>
       </Key>
     </Container>
@@ -1216,10 +1222,12 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_rest_notime_text">
         <Original>No rest for the wicked...</Original>
+        <Czech>Žádný odpočinek pro nepřátele...</Czech>
         <Spanish>No hay descanso para los malvados...</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_rest_notime_tooltip">
         <Original>You must select a period of time to sleep for</Original>
+        <Czech>Musíte zvolit na jak dlouho chcete spát</Czech>
         <Spanish>Debes seleccionar un período de tiempo para dormir.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_wakeup_text">
@@ -1238,14 +1246,17 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_hq_garrisons_atMissile">
         <Original>AT Missile</Original>
+        <Czech>Protitanková střela</Czech>
         <Spanish>Missil anti-tanque</Spanish>
       </Key>
       <Key ID="STR_antistasi_hq_garrisons_aaMissile">
         <Original>AA Missile</Original>
+        <Czech>Protiletadlová střela</Czech>
         <Spanish>Missil anti-aéreo</Spanish>
       </Key>
       <Key ID="STR_A3A_garrison_error_no_weapons">
         <Original>Not enough weapons for this unit type</Original>
+        <Czech>Nedostatek zbraní pro tuto jednotku</Czech>
         <Spanish>No hay suficientes armas para este tipo de unidad</Spanish>
       </Key>
     </Container>
@@ -1414,6 +1425,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_garrisons_button">
         <Original>Garrisons</Original>
+        <Czech>Kasárny</Czech>
         <Spanish>Guarniciones</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_squads_button">
@@ -1426,10 +1438,12 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_artilleryInUse">
         <Original>One or more selected artillery pieces is already firing. Wait for it to finish.</Original>
+        <Czech>Jedna nebo více zvolených artilerijí už střílejí. Počkejte než dostřílí.</Czech>
         <Spanish>Una o más piezas de artillería seleccionadas ya están disparando. Espere a que termine.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_commanderOnly">
         <Original>Only Player Commander has access to this function.</Original>
+        <Czech>Jenom hráčský velitel má přístup k této funkci.</Czech>
         <Spanish>Solo el Jugador Comandante tiene acceso a esta función.</Spanish>
       </Key>
     </Container>
@@ -1688,10 +1702,12 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_admin_take_command_button">
         <Original>Take Command</Original>
+        <Czech>Převzít velení</Czech>
         <Spanish>Tomar el Control</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_admin_take_command_self">
         <Original>You cannot take command from yourself</Original>
+        <Czech>Nemůžete převzít velení sami od sebe</Czech>
         <Spanish>No puedes tomar el control de ti mismo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_admin_tp_arsenal_box_button">
@@ -1955,6 +1971,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_ai_management_no_ai_control_tooltip_petros">
         <Original>You cannot remote control Petros</Original>
+        <Czech>Nemůžete dálkově ovládat Petros</Czech>
         <Spanish>No puedes controlar a Petros de manera remota</Spanish>
       </Key>
     </Container>
@@ -2031,6 +2048,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_no_base_tooltip">
         <Original>You have no airbases under your control</Original>
+        <Czech>Nemáte žádné letecké základny pod vaší kontrolou</Czech>
         <Spanish>No tienes ninguna base aerea bajo tu control</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_air_support_no_points_tooltip">
@@ -2205,6 +2223,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_out_of_range_tooltip">
         <Original>Position out of range</Original>
+        <Czech>Pozice mimo dosah</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo">
         <Original>Ammo</Original>
@@ -2236,6 +2255,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_he_detail">
         <Original>Impact radius</Original>
+        <Czech>Rádius dopadu</Czech>
         <Spanish>Radio de Impacto</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_smoke">
@@ -2254,10 +2274,12 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_smoke_detail">
         <Original>Cover time</Original>
+        <Czech>Čas krytí</Czech>
         <Spanish>Tiempo de covertura</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_ammo_flare_detail">
         <Original>Burn time</Original>
+        <Czech>Čas hoření</Czech>
         <Spanish>Tiempo de combustión</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_button">
@@ -2528,14 +2550,17 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_type_suppress">
         <Original>Suppress</Original>
+        <Czech>Potlačení</Czech>
         <Spanish>Supresión</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_type_cont">
         <Original>Cont</Original>
+        <Czech>Cont</Czech>
         <Spanish>Cont</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_desc_point">
         <Original>Strike a point with as many rounds as asked as fast as possible.\n\nUsed for directly engaging any target of opportunity.\n\nUseful shells: HE, Smoke</Original>
+        <Czech> Trefit bod s kolika náboji kolik je tázáno co nejrychleji.\n\nPoužíváno pro přímé napadení jakéhokoliv cíle.\n\nUžitečné střely: HE, Kouř</Czech>
         <Spanish>Ataca un punto con tantas rondas como se te pidan, lo más rápido posible.\n\nSe utiliza para atacar directamente cualquier objetivo de oportunidad.\n\nProyectiles útiles: HE, Humo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_fire_mission_desc_barrage">
@@ -2908,10 +2933,12 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_fast_travel_cost">
         <Original>This action will cost</Original>
+        <Czech>Tato akce bude stát</Czech>
         <Spanish>Esta acción costará</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_fast_travel_noMoney">
         <Original>You cannot afford this.</Original>
+        <Czech>Toto si nemůžete dovolit.</Czech>
         <Spanish>No puedes permitirte esto</Spanish>
       </Key>
     </Container>
@@ -3255,154 +3282,191 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatustooltip">
         <Original>View available intel and information about the game</Original>
+        <Czech>Prohlédnout dostupný intel a informace o hře</Czech>
         <Spanish>Consulta la información y los datos disponibles sobre el juego</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_context_title">
         <Original>Context Actions</Original>
+        <Czech>Kontextové akce</Czech>
         <Spanish>Acciones de contexto</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_timeAlive">
         <Original>Time alive:</Original>
+        <Czech>Čas naživu:</Czech>
         <Spanish>Tiempo vivo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_missions">
         <Original>Missions:</Original>
+        <Czech>Mise:</Czech>
         <Spanish>Misiones</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_player_kills">
         <Original>Kills:</Original>
+        <Czech>Zabití:</Czech>
         <Spanish>Bajas</Spanish>
       </Key>
     </Container>
     <Container name="dialog_main_context">
       <Key ID="STR_antistasi_dialogs_main_context_title_main">
         <Original>Context Actions</Original>
+        <Czech>Kontextové Akce</Czech>
         <Spanish>Acciones de contexto</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_title_vehicle">
         <Original>Vehicle</Original>
+        <Czech>Vozidlo</Czech>
         <Spanish>Vehiculo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_title_aircraft">
         <Original>Aircraft</Original>
+        <Czech>Letoun</Czech>
         <Spanish>Aeronave</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_title_construction">
         <Original>Construction</Original>
+        <Czech>Stavba</Czech>
         <Spanish>Construcción</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_title_HQ">
         <Original>HQ</Original>
+        <Czech>HQ</Czech>
         <Spanish>CG</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_label_construction">
         <Original>Construction</Original>
+        <Czech>Stavba</Czech>
         <Spanish>Construcción</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_label_HQ">
         <Original>Headquarters</Original>
+        <Czech>Velitelství</Czech>
         <Spanish>Cuartel General</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_hideActions">
         <Original>Hide Removal Actions</Original>
+        <Czech>Schovat odstraňovací akce</Czech>
         <Spanish>Ocultar acciones de eliminación</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_showActions">
         <Original>Show Removal Actions</Original>
+        <Czech>Ukázat odstraňovací akce</Czech>
         <Spanish>Mostrar acciones de eliminación</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_hideIcons">
         <Original>Hide Unbuilt Icons</Original>
+        <Czech>Schovat nepostavěné Ikony</Czech>
         <Spanish>Ocultar iconos no construidos</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_showIcons">
         <Original>Show Unbuilt Icons</Original>
+        <Czech>Ukázat nepostavěné ikony</Czech>
         <Spanish>Mostrar iconos no construidos</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_addBombRun">
         <Original>Add to air support</Original>
+        <Czech>Přidat do vzdušné podpory</Czech>
         <Spanish>Añadir a soporte aéreo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_garage">
         <Original>Garage Vehicle</Original>
+        <Czech>Přidat vozidlo do garáže</Czech>
         <Spanish>Almacenar vehículo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_toggleAI1">
         <Original>Allow AI to use</Original>
+        <Czech>Povolit AI aby používali</Czech>
         <Spanish>Permitir uso a la IA</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_toggleAI2">
         <Original>Block AI from using</Original>
+        <Czech>Zablokovat AI aby používali</Czech>
         <Spanish>Bloquear uso a la IA</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_button_addToGarrison">
         <Original>Add vehicle to garrison</Original>
+        <Czech>Přidat vozidlo do kasárny</Czech>
         <Spanish>Abrir</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_garage_away">
         <Original>Must be near friendly marker to garage</Original>
+        <Czech>Musí být blízko přátelského značení na přidání do garáže</Czech>
         <Spanish>Debes estar cerca de un punto amigo para almacenar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_garage_airbase_helipad">
         <Original>Must be near friendly airbase or helipad to garage</Original>
+        <Czech>Musí být blízko přátelské letecké základny nebo helipady na přidání do garáže</Czech>
         <Spanish>Debes estar cerca de una base aérea o helipuerto amigo para almacenar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_garage_airbase">
         <Original>Must be near friendly airbase to garage</Original>
+        <Czech>Musí být blízko přátelské letecké základny na přidání do garáže</Czech>
         <Spanish>Debes estar cerca de una base aérea amiga para almacenar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_garage_utility">
         <Original>Garaging this will delete it and refund the full cost</Original>
+        <Czech>Garážování tohoto to smaže a uhradí plnou cenu</Czech>
         <Spanish>Almacenar esto hará que se borre y reingrese el precio total</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_addBombRun_nearValid">
         <Original>Must be near airbase or HQ to add to air support</Original>
+        <Czech>Musí být blízko letecké základny nebo HQ na přidání do letecké podpory</Czech>
         <Spanish>Debes estar cerca de una base aérea o CG para añadir soporte aéreo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_gen_notRebVic">
         <Original>Vehicle is not a rebel vehicle</Original>
+        <Czech>Vozidlo není rebelské</Czech>
         <Spanish>Vehículo no es un vehiculo rebelde</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_addToGarrison_alreadyIn">
         <Original>Vehicle is already in a garrison</Original>
+        <Czech>Vozidlo je již v kasárnách</Czech>
         <Spanish>Vehículo ya está en la guarnición</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_addToGarrison_crewed">
         <Original>Vehicle must be uncrewed</Original>
+        <Czech>Vozidlo nesmí mít posádku</Czech>
         <Spanish>El vehículo debe estar sin tripulación</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_HQ_changeRole">
         <Original>Change Role</Original>
+        <Czech>Změnit roli</Czech>
         <Spanish>Cambiar Rol</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_HQ_vehArsenal">
         <Original>Vehicle Arsenal</Original>
+        <Czech>Vozidlová zbrojnice</Czech>
         <Spanish>Arsenal de Vehículo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_HQ_beDriver">
         <Original>Must be driver of a vehicle to modify its inventory</Original>
+        <Czech>Musíte být řidič vozidla na upravení jeho inventáře</Czech>
         <Spanish>Debe ser conductor de un vehículo para modificar su inventario</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_context_construction_needEngineer">
         <Original>Must be an engineer</Original>
+        <Czech>Musíte být engineer</Czech>
         <Spanish>Debes ser un ingeniero</Spanish>
       </Key>
     </Container>
     <Container name="dialog_main_war_status">
       <Key ID="STR_antistasi_dialogs_main_warstatus_main">
         <Original>War Status</Original>
+        <Czech>Válečný status</Czech>
         <Spanish>Estado de la Guerra</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_occupants">
         <Original>Occupants</Original>
+        <Czech>Okupanti</Czech>
         <Spanish>Ocupantes</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_invaders">
         <Original>Invaders</Original>
+        <Czech>Vetřelci</Czech>
         <Spanish>Invasores</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_rebels">
         <Original>Rebels</Original>
+        <Czech>Rebelové</Czech>
         <Spanish>Rebeldes</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_intelfeed">
@@ -3411,30 +3475,37 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_aggro">
         <Original>Aggression: %1</Original>
+        <Czech>Agrese: %1</Czech>
         <Spanish>Aggressioón %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_resources">
         <Original>Resources: %1</Original>
+        <Czech>Zdroje: %1</Czech>
         <Spanish>Recursos %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_lastResourcesUpdate">
         <Original>Time since last update: %1</Original>
+        <Czech>Čas od poslední aktualizace: %1</Czech>
         <Spanish>Tiempo desde la última actualización %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_noResourcesUpdate">
         <Original>No known resource information</Original>
-        <Spanish>No se conoce información sobre los recursos.</Spanish>
+        <Czech>Žádná známa zdrojová informace</Czech>
+        <Spanish>No se conoce información sobre los recursos</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_radioKeys">
         <Original>Radio Keys: %1</Original>
+        <Czech>Rádiové Klíče: %1</Czech>
         <Spanish>Codigos de Radio: %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_money">
         <Original>Money: %1€</Original>
+        <Czech>Peníze: %1€</Czech>
         <Spanish>Dinero %1€</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_warstatus_HR">
         <Original>HR: %1</Original>
+        <Czech>HR: %1</Czech>
         <Spanish>RH: %1</Spanish>
       </Key>
     </Container>
@@ -3848,10 +3919,12 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_units_error">
         <Original>You do not have enough money or HR for this unit type</Original>
+        <Czech>Nemáte dostatek peněz nebo HR pro tento typ jednotky</Czech>
         <Spanish>No tienes suficiente dinero ni recursos humanos para este tipo de unidad.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_recruit_units_noWeapons">
         <Original>You do not have the weapons necessary to equip this unit</Original>
+        <Czech>Nemáte dostatek zbraní potřebných na použití této jednotky</Czech>
         <Spanish>No tienes las armas necesarias para equipar esta unidad.</Spanish>
       </Key>
     </Container>
@@ -4455,6 +4528,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_copy_old_game_tooltip">
         <Original>Load an old campaign with a new ID. This option can be used to move a campaign to or from the new save method, or just to make an additional copy for experiments. The new game won't exist on disk until it's saved.</Original>
+        <Czech>Načíst starou kampaň s novým ID. Tato možnost může být použita na přesunutí kampaně do nebo z nové ukládací metody, nebo prostě na udělání přídavné kopie pro experimenty. Nová hra prostě nebude existovat na disku dokud není uložena.</Czech>
         <Spanish>Carga una campaña antigua con un ID nuevo. Esta opción permite transferir una campaña al nuevo método de guardado o desde él, o simplemente crear una copia adicional para experimentar. La nueva partida no existirá en el disco hasta que se guarde.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_create_new_game">
@@ -4489,9 +4563,11 @@
         <Original>DLC and Addons</Original>
         <Spanish>DLC y Addons</Spanish>
         <Russian>DLC и Аддоны</Russian>
+        <Czech>DLC a Přídavky</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_exportSave">
         <Original>Export Save</Original>
+        <Czech>Exportovat Uložení</Czech>
         <Spanish>Exportar Partida Guardada</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_faction_tab_button">
@@ -4512,19 +4588,23 @@
         <Original>Faction Information</Original>
         <Spanish>Información de la facción</Spanish>
         <Russian>Информация о фракции</Russian>
+        <Czech>Informace o Frakci</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_importButton">
         <Original>IMPORT</Original>
+        <Czech>IMPORTOVAT</Czech>
         <Spanish>Importar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_importSave">
         <Original>Import Save</Original>
+        <Czech>Importovat Uložení</Czech>
         <Spanish>Importar y guardar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_infoPanel_header">
         <Original>%1 Information</Original>
         <Spanish>%1 información</Spanish>
         <Russian>%1 Информация</Russian>
+        <Czech>%1 Informace</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_invaders">
         <Original>Invaders</Original>
@@ -4556,6 +4636,7 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_load_old_params_tooltip">
         <Original>Use the parameters from the selected campaign when creating the new one.</Original>
+        <Czech>Použít parametry z vybrané kampaně při dělání nové.</Czech>
         <Spanish>Utilice los parámetros de la campaña seleccionada al crear la nueva.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_loadgame_tab_button">
@@ -4574,10 +4655,12 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_noExportOld">
         <Original>Only saves of version 3.10.0 or later can be exported. Load a game and run a persistent save to upgrade the version</Original>
+        <Czech>Jenom uložení z verze 3.10.0 nebo pozdější můžou být exportovány. Načtěte hru a zapněte uložení na aktualizování verze</Czech>
         <Spanish>Solo se pueden exportar las partidas guardadas de la versión 3.10.0 o posterior. Carga una partida y ejecuta una partida guardada persistente para actualizar la versión</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_noExportSel">
         <Original>No save selected</Original>
+        <Czech>Žádné uložení vybráno</Czech>
         <Spanish>No se ha seleccionado ninguna opción de guardar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_new_save_name">
@@ -4668,6 +4751,7 @@
         <Original>Required Addons: %1</Original>
         <Spanish>Addons necesarios: %1</Spanish>
         <Russian>Требуется аддон: %1</Russian>
+        <Czech>Potřebné přídavky: %1</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_rebels">
         <Original>Rebels</Original>
@@ -4783,36 +4867,44 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_title_saveTransfer">
         <Original>SAVE TRANSFER</Original>
+        <Czech>PŘESUNUTÍ ULOŽENÍ</Czech>
         <Spanish>GUARDAR TRANSFERENCIA</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_toggleAddons_addons">
         <Original>Switch to Addons</Original>
         <Spanish>Cambiar a Addons</Spanish>
         <Russian>Переключить на аддон</Russian>
+        <Czech>Přepnout na Přídavky</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_toggleAddons_DLC">
         <Original>Switch to DLCs</Original>
         <Spanish>Cambiar a DLCs</Spanish>
         <Russian>Переключить на ДЛС</Russian>
+        <Czech>Přepnout na DLC</Czech>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_downloading">
         <Original>Downloading data for save %1 with ID %2 from server, please wait...</Original>
+        <Czech>Stahuji data z uložení %1 s ID %2 ze serveru, prosím počkejte...</Czech>
         <Spanish>Descargando datos para la partida %1 con ID %2 desde el servidor, por favor espere...</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_exportReady">
         <Original>Exporting save %1 with ID %2.&lt;br /&gt;&lt;br /&gt;Select the text box and use Ctrl-A and then Ctrl-C to copy the save to clipboard.</Original>
-        <Spanish>Exportando el archivo %1 con ID %2.<br /><br />Seleccione el cuadro de texto y use Ctrl+A y luego Ctrl+C para copiar el archivo al portapapeles.</Spanish>
+        <Czech>Exportuji uložení %1 s ID %2.&lt;br /&gt;&lt;br /&gt;Vyberte další textové pole a použíjte Ctrl-A a potom Ctrl-C na zkopírování uložení do schránky.</Czech>
+        <Spanish>Exportando el archivo %1 con ID %2.&lt;br /&gt;&lt;br /&gt;Seleccione el cuadro de texto y use Ctrl+A y luego Ctrl+C para copiar el archivo al portapapeles.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_importConfirm">
         <Original>Confirm import of save %1?</Original>
+        <Czech>Potvrdit importování uložení %1?</Czech>
         <Spanish>¿Confirmar importación del archivo %1?</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_importFail">
         <Original>Invalid save data</Original>
+        <Czech>Invalidní data uložení</Czech>
         <Spanish>Datos de guardado no válidos</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_transfer_importReady">
         <Original>Paste your save into the text box below and use the %1 button to import it.</Original>
+        <Czech>Vložte vaše uložení do textového pole dole a použíjte %1 tlačítko na importování.</Czech>
         <Spanish>Pega tu archivo guardado en el cuadro de texto de abajo y usa el botón %1 para importarlo.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_use_new_namespace">
@@ -4831,236 +4923,293 @@
       </Key>
       <Key ID="STR_antistasi_dialogs_setup_use_new_namespace_tooltip">
         <Original>Save the new campaign to AntistasiCommunity.vars instead of the main profile vars file. Warning: This may not work correctly on Linux servers due to an Arma bug.</Original>
+        <Czech>Uložit kampaň do AntistasiCommunity.vars místo do hlavního profilo vars souboru. Varování: Toto nemusí fungovat správně na Linux serverech díky Arma bugu.</Czech>
         <Spanish>Guarda la nueva campaña en AntistasiCommunity.vars en lugar del archivo principal de variables del perfil. Advertencia: Es posible que esto no funcione correctamente en servidores Linux debido a un error de Arma.</Spanish>
       </Key>
     </Container>
     <Container name="role_select">
       <Key ID="STR_antistasi_dialogs_roleselect_role_rifleman">
         <Original>Rifleman</Original>
+        <Czech>Střelec</Czech>
         <Spanish>Fusilero</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_rifleman">
         <Original>The Rifleman is the backbone of every army. Fast and versatile, riflemen are able to go anywhere and do anything.</Original>
+        <Czech>Střelec je páteř každé armády. Rychlý a všestranný, střelci můžou také jít kamkoliv a dělat cokoliv.</Czech>
         <Spanish>El fusilero es la columna vertebral de todo ejército. Rápidos y versátiles, los fusileros pueden ir a cualquier parte y hacer cualquier cosa.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_rifleman">
         <Original>Riflemen incur no bonuses or penalties, but are able to hack enemy UAVs if they are found capturable.</Original>
+        <Czech>Střelci nemají žádné bonusy nebo penalty, ale jsou schopní hacknout nepřátelské drony jestli můžou být zajati,</Czech>
         <Spanish>Los fusileros no reciben bonificaciones ni penalizaciones, pero pueden piratear los UAV enemigos si los encuentran capturables.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_autorifleman">
         <Original>Autorifleman</Original>
+        <Czech>Kulometčík</Czech>
         <Spanish>Fusilero automatico</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_autorifleman">
         <Original>Autoriflemen provide the most basic and effective form of fire support: suppression with machine guns.</Original>
-        <Spanish>DLC y Addons</Spanish>
+        <Czech>Kulometčíci poskytují nejvíce základní a efektivní formu palebné podpory: potlačení s kulometem.</Czech>
+        <Spanish>Los fusileros automáticos proporcionan la forma más básica y eficaz de apoyo de fuego: la supresión con ametralladoras.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_autorifleman">
         <Original>Autoriflemen have better stamina and recovery (can carry more items over distance), but are loud when they move, alerting enemies.</Original>
-        <Spanish>Los fusileros automáticos proporcionan la forma más básica y eficaz de apoyo de fuego: la supresión con ametralladoras.</Spanish>
+        <Czech>Kulometčíci mají lepší staminu a zotavení (můžou nést více itemů přes dálky), ale jsou hlasití když se pohybují, upozorňují nepřátele.</Czech>
+        <Spanish>Los fusileros automáticos tienen mayor resistencia y recuperación (pueden transportar más objetos a distancia), pero son ruidosos al moverse, alertando a los enemigos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_grenadier">
         <Original>Grenadier</Original>
+        <Czech>Granátník</Czech>
         <Spanish>Granadero</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_grenadier">
         <Original>Grenadiers carry grenade launchers to supplement the offensive with explosive, smoke, or flare rounds.</Original>
+        <Czech>Granátníci nesou granátomety aby zásobovali ofenzívu s výbušninama, kouřem, nebo světlicovýma nábojema.</Czech>
         <Spanish>Los granaderos portan lanzagranadas para complementar la ofensiva con proyectiles explosivos, de humo o de bengalas.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_grenadier">
         <Original>Grenadiers have better stamina and recovery, but are more easily visible to enemies.</Original>
+        <Czech>Granátníci mají lepší staminu a zotavení, ale jsou jednoduše viditelní pro nepřátele.</Czech>
         <Spanish>Los granaderos tienen mayor resistencia y capacidad de recuperación, pero son más visibles para los enemigos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_medic">
         <Original>Medic</Original>
+        <Czech>Zdravotník</Czech>
         <Spanish>Medico</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_medic">
         <Original>Medics will always keep the squad in the fight, no matter what happens. They are the most important unit in the squad, and should be protected.</Original>
+        <Czech>Zdravotníci vždycky drží družstvo v boji, nezáleží co se stane. Jsou nejvíce důležitou jednotkou v družstvu, a měli by být chráněni.</Czech>
         <Spanish>Los médicos siempre mantendrán al equipo en combate, pase lo que pase. Son la unidad más importante del equipo y deben ser protegidos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_medic">
         <Original>Medics can do a variety of medical actions faster and also have expanded medical abilities. However, they have worse stamina and are spotted easier.</Original>
+        <Czech>Zdravotníci umí spoustu zdravotnických akcí rychleji a taky mají rozšířené zdravotnické schopnosti. Ačkoliv, mají horší staminu a jsou spatřeni jednodušeji.</Czech>
         <Spanish>Los médicos pueden realizar diversas acciones médicas con mayor rapidez y poseen habilidades médicas ampliadas. Sin embargo, tienen menor resistencia y son detectados con mayor facilidad.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_engineer">
         <Original>Engineer</Original>
+        <Czech>Engineer</Czech>
         <Spanish>Ingeniero</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_engineer">
         <Original>Engineers work day and night to keep the rebellion and their tech alive, with a good engineer saving tons of time for the squad.</Original>
+        <Czech>Engineeři pracují dnem i nocí aby udrželi rebeli a jejich techniku naživu, s dobrým engineerem šetří tuny času pro družstvo.</Czech>
         <Spanish>Los ingenieros trabajan día y noche para mantener viva la rebelión y su tecnología, y un buen ingeniero ahorra muchísimo tiempo al escuadrón.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_engineer">
         <Original>Engineers can repair vehicles, breach enemy armor, build fortifications, defuse mines, and more. They incur a penalty to stamina and a buff to stealth.</Original>
+        <Czech>Engineeři můžou opravovat vozidla, prorazit nepřátelský pancíř, stavět opevnění, zneškodňovat miny, a další. Mají penaltu na staminu a vylepšení plížení.</Czech>
         <Spanish>Los ingenieros pueden reparar vehículos, perforar blindajes enemigos, construir fortificaciones, desactivar minas y mucho más. Sufren una penalización en resistencia y una mejora en sigilo.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_teamleader">
         <Original>Team Leader</Original>
+        <Czech>Vedoucí Týmu</Czech>
         <Spanish>Lider de Equipo</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_teamleader">
         <Original>A band of rebels without a team leader is barely more than a mob. Team leaders pull their units together and lead their squads to victory.</Original>
+        <Czech>Skupina rebelů bez týmového vedoucího je sotva víc než mafie. Vedoucí týmu berou své jednotky k sobě a vedou je k výhře.</Czech>
         <Spanish>Un grupo de rebeldes sin un líder de equipo no es más que una turba. Los líderes de equipo reúnen a sus unidades y las guían hacia la victoria.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_teamleader">
         <Original>Team leaders are quite stealthy with buffs to visual and audible stealth, but have worse stamina.</Original>
+        <Czech>Vedoucí týmu jsou vcelku dobří v plížení s vylepšeníma na vizuální a sluchové plížení, ale mají horší staminu.</Czech>
         <Spanish>Los líderes de equipo son bastante sigilosos, con mejoras en el sigilo visual y auditivo, pero tienen menor resistencia.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_role_commander">
         <Original>Commander</Original>
+        <Czech>Velitel</Czech>
         <Spanish>Comandante</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_info_commander">
         <Original>The commander is the top ranking soldier in the field. They manage the rebellion's affairs, while being able to perform medical and engineer tasks.</Original>
+        <Czech>Velitel je nejvyšší hodnost u vojáků v poli. Spravují rebelské záležitosti, mezi tím jsou schopní dělat zdravotnické a engeneerské úkoly.</Czech>
         <Spanish>El comandante es el soldado de mayor rango en el campo de batalla. Gestiona los asuntos de la rebelión y, además, puede realizar tareas médicas y de ingeniería.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_utility_commander">
         <Original>Commanders handle AI and garrisons as well as coordinating fire support when needed. They have superior stealth for recon but suffer a stamina penalty.</Original>
+        <Czech>Velitelé spravují AI a kasárny a také koordinují střeleckou podporu když je potřeba. Mají výborné plížení pro průzkum ale trpí penaltu staminy.</Czech>
         <Spanish>Los comandantes gestionan la IA y las guarniciones, además de coordinar el apoyo de fuego cuando sea necesario. Poseen una capacidad de sigilo superior para el reconocimiento, pero sufren una penalización en su resistencia.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsRifleman">
         <Original>Riflemen: %1 (*)</Original>
+        <Czech>Střelec: %1 (*)</Czech>
         <Spanish>Fusileros: %1 (*)</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capExplanationRifleman">
         <Original>There is no cap to the number of Rifleman players.</Original>
+        <Czech>Není žádný limit počtu hráčských střelců.</Czech>
         <Spanish>No hay límite en el número de jugadores de fusilero.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsCommander">
         <Original>%1 is the current faction Commander (*)</Original>
+        <Czech>%1 je aktuální velitel frakce (*)</Czech>
         <Spanish>%1 es el comandante de facción actual (*)</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderNone">
         <Original>The faction currently has no Commander (*)</Original>
+        <Czech>Frakce aktuálně nemá žádného Velitele (*)</Czech>
         <Spanish>Actualmente, la facción no tiene comandante (*).</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slotsCommanderSelf">
         <Original>You are currently the faction's Commander (*)</Original>
+        <Czech>Jste momentální Velitel Frakce (*)</Czech>
         <Spanish>Actualmente eres el Comandante de la facción (*)</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capExplanationCommander">
         <Original>The faction can only have one commander, and you must be assigned the spot.</Original>
+        <Czech>Frakce může mít jenom jednoho velitele, a musí mu být přiřazeno místo.</Czech>
         <Spanish>La facción solo puede tener un comandante, y se te debe asignar ese puesto.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_slots">
         <Original>%1: %2/%3  (*)</Original>
+        <Czech>%1: %2/%3  (*)</Czech>
         <Spanish>%1: %2/%3  (*)</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capExplanation">
         <Original>The cap of slots per role (excluding riflemen and the commander) increases as the player count increases. The number per role increases linearly from 3 slots at 3 players to 6 slots at 38 players.</Original>
+        <Czech>Kapacita slotů pro role (kromě střelců a velitele) zvyšuje se když se počet hráčů zvyšuje. Číslo rolí se zvyšuje lineálně od 3 slotů na 3 hráčích na 6 slotů na 38 hráčích.</Czech>
         <Spanish>El número máximo de espacios por rol (excluyendo a los fusileros y al comandante) aumenta a medida que aumenta el número de jugadores. El número de espacios por rol aumenta linealmente de 3 a 6 con 38 jugadores.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_capNames">
         <Original>Players in this role:</Original>
+        <Czech>Hráči v této roli:</Czech>
         <Spanish>Jugadores en este rol:</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_welcome">
         <Original>Welcome to Antistasi! To get started, select a role from the list on the left and use "set role". You can revisit this screen any time by opening the Battle Menu with Y.</Original>
+        <Czech>Vítejte v Antistasi! Aby jste začali, vyberte roli z listu nalevo a použijte "vybrat roli". Můžete navštívit tuto obrazovku kdykoliv otevřením Battle Menu pomocí Y.</Czech>
         <Spanish>¡Bienvenido a Antistasi! Para empezar, selecciona un rol de la lista de la izquierda y usa "establecer rol". Puedes volver a esta pantalla cuando quieras abriendo el menú de batalla con Y.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_welcomeNew">
         <Original>Each role has different traits and quirks, so it is recommended to start as a rifleman if you are new to the game. Note that no role has locked weapons; the roles simply determine what traits you start with.</Original>
+        <Czech>Každá role má odlišné vlastnosti a zhoršení, takže je doporučeno startovat jako střelec jestli jste nový do hry. Mějte na vědomí že žádná role nemá zamčené zbraně; role jednoduše označují jakýma vlastnostma startujete.</Czech>
         <Spanish>Cada rol tiene características y peculiaridades diferentes, por lo que se recomienda empezar como fusilero si eres nuevo en el juego. Ten en cuenta que ningún rol tiene armas fijas; los roles simplemente determinan las características con las que empiezas.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_hasRole">
         <Original>You are currently a %1.</Original>
+        <Czech>Momentálně jste na %1.</Czech>
         <Spanish>Actualmente eres un %1.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_isCommander">
         <Original>However, since you are the commander, you have the traits listed in the "Commander" tab until you resign.</Original>
+        <Czech>Ačkoliv, jelikož jste velitel, máte vlastnosti vypsané v "Velitel" kolonce dokud nerezignujete.</Czech>
         <Spanish>Sin embargo, dado que usted es el comandante, posee las características que se enumeran en la pestaña "Comandante" hasta que renuncie.</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_roleselect_cannotTakeRoleFull">
         <Original>This role is full.</Original>
+        <Czech>Tato role je plná.</Czech>
         <Spanish>Este rol está lleno</Spanish>
       </Key>
     </Container>
     <Container name="custom_loadouts">
       <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
         <Original>Custom AI Loadouts</Original>
+        <Czech>Custom AI Loadouts</Original>
         <Spanish>Equipamientos de IA personalizados</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_priWeapon">
         <Original>Primary weapon</Original>
+        <Czech>Primární zbraň</Czech>
         <Spanish>Arma Primaria</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_secWeapon">
         <Original>Secondary weapon</Original>
+        <Czech>Sekundární zbraň</Czech>
         <Spanish>Arma Secundaria</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_ammoQuant">
         <Original>Ammo quantity</Original>
+        <Czech>Počet nábojů</Czech>
         <Spanish>Cantidad de munición</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_priOptic">
         <Original>Primary optic</Original>
+        <Czech>Primární optika</Czech>
         <Spanish>Óptica primaria</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_uniform">
         <Original>Uniform</Original>
+        <Czech>Uniforma</Czech>
         <Spanish>Uniformes</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_vest">
         <Original>Vest</Original>
+        <Czech>Vesta</Czech>
         <Spanish>Chaleco</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_backpack">
         <Original>Backpack</Original>
+        <Czech>Batoh</Czech>
         <Spanish>Mochila</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_headgear">
         <Original>Headgear</Original>
+        <Czech>Čepiče</Czech>
         <Spanish>Equipación de Cabeza</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_close">
         <Original>Close</Original>
+        <Czech>Zavřít</Czech>
         <Spanish>Cerrar</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_copyToAll">
         <Original>Copy To All</Original>
+        <Czech>Zkopírovat do všech</Czech>
         <Spanish>Copiar a todos</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_resetRole">
         <Original>Reset Role</Original>
+        <Czech>Resetovat Roli</Czech>
         <Spanish>Resetear Rol</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_resetAll">
         <Original>Reset All</Original>
-        <Spanish>Resetear todos</Spanish>
+        <Czech>Resetovat Všechno</Czech>
+        <Spanish>Resetear Todos</Spanish>
       </Key>
     </Container>
     <Container name="dialog_gun_shop_dialog">
       <Key ID="STR_antistasi_gun_shop_title">
         <Original>Gun Shop</Original>
+        <Czech>Obchod se Zbraněma</Czech>
         <Spanish>Tienda de armas</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_rifle_tab_button">
         <Original>Primary</Original>
+        <Czech>Primary</Czech>
         <Spanish>Primaria</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_handguns_tab_button">
         <Original>Handguns</Original>
+        <Czech>Pistole</Czech>
         <Spanish>Pistolas</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_launchers_tab_button">
         <Original>Secondary</Original>
+        <Czech>Secondary</Czech>
         <Spanish>Secundaria</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_grenades_tab_button">
         <Original>Grenades</Original>
+        <Czech>Granáty</Czech>
         <Spanish>Granadas</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_explosives_tab_button">
         <Original>Explosives</Original>
+        <Czech>Výbušniny</Czech>
         <Spanish>Explosivos</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_magazines_tab_button">
         <Original>Magazines</Original>
+        <Czech>Zásobníky</Czech>
         <Spanish>Cargadores</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_optics_tab_button">
         <Original>Optics</Original>
+        <Czech>Optiky</Czech>
         <Spanish>Opticas</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_rails_tab_button">
@@ -5069,42 +5218,52 @@
       </Key>
       <Key ID="STR_antistasi_gun_shop_muzzles_tab_button">
         <Original>Muzzles</Original>
+        <Czech>Hlavně</Czech>
         <Spanish>Bozal</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_bipods_tab_button">
         <Original>Bipods</Original>
+        <Czech>Dvojnožky</Czech>
         <Spanish>Bipodes</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_add_to_cart_button_text">
         <Original>Add to Cart</Original>
+        <Czech>Přidat do Košíku</Czech>
         <Spanish>Añadir al Carrito</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_checkout_button_text">
         <Original>Checkout</Original>
+        <Czech>Pokladna</Czech>
         <Spanish>Caja</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_total_cost_text">
         <Original>Total:</Original>
+        <Czech>Celkem:</Czech>
         <Spanish>Total:</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_stock_gs">
         <Original>%1 in stock</Original>
+        <Czech>%1 na skladě</Czech>
         <Spanish>%1 en stock</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_stock_arsenal">
         <Original>%1 in arsenal</Original>
+        <Czech>%1 v arzenálu</Czech>
         <Spanish>%1 en el arsenal</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_unlock_amount">
         <Original>%1 to unlock</Original>
+        <Czech>%1 na odemčení</Czech>
         <Spanish>%1 para desbloquear</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_unlocks_disabled">
         <Original>Unlocks disabled</Original>
+        <Czech>Odemkne vypnuté</Czech>
         <Spanish>Desbloqueos deshabilitados</Spanish>
       </Key>
       <Key ID="STR_antistasi_gun_shop_unlocks_disabled_specific">
         <Original>Unlocks disabled for this equipment type</Original>
+        <Czech>Odemyká vypnuté pro tento druh vybavení</Czech>
         <Spanish>Desbloqueo desactivado para este tipo de equipo.</Spanish>
       </Key>
     </Container>
@@ -5123,46 +5282,57 @@
       </Key>
       <Key ID="STR_antistasi_mapSelector_mainTitle">
         <Original>ANTISTASI</Original>
+        <Czech>ANTISTASI</Czech>
         <Spanish>ANTISTASI</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_infoTitle">
         <Original>INFORMATION</Original>
+        <Czech>INFORMACE</Czech>
         <Spanish>INFORMACIÓN</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_bannerTitle">
         <Original>BANNER</Original>
+        <Czech>BANNER</Czech>
         <Spanish>BANNER</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_mapTitle">
         <Original>MAP</Original>
+        <Czech>MAPA</Czech>
         <Spanish>MAPA</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_backButton">
         <Original>Back</Original>
+        <Czech>Zpátky</Czech>
         <Spanish>Atrás</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_playSPButton">
         <Original>Play Solo</Original>
+        <Czech>Hrát Sám</Czech>
         <Spanish>Jugar Solo</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_playMPButton">
         <Original>Host Game</Original>
+        <Czech>Založit Hru</Czech>
         <Spanish>Anfitrión del Juego</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_reqMods">
         <Original>Required mods: %1</Original>
+        <Czech>Požadované mody: %1</Czech>
         <Spanish>Mods Requeridos: %1</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_noReqMods">
         <Original>None</Original>
+        <Czech>Žádné</Czech>
         <Spanish>Ninguno</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_failReqMods">
         <Original>You cannot play %1 as the required mod(s) are not loaded.\nRequired mods: %2</Original>
+        <Czech>Nemůžete hrát %1 jelikož požadované mody nejsou načteny.\nRequired mods: %2</Czech>
         <Spanish>No puedes jugar a %1 porque no se han cargado los mods necesarios.\nMods necesarios: %2</Spanish>
       </Key>
       <Key ID="STR_antistasi_mapSelector_mapStats">
         <Original>Climate: %1&lt;br /&gt;&lt;br /&gt;Map size:&lt;br /&gt;%2km x %2km&lt;br /&gt;&lt;br /&gt;Cities: %3&lt;br /&gt;&lt;br /&gt;Banks: %4&lt;br /&gt;&lt;br /&gt;Airbases: %5</Original>
+        <Czech>Climate: %1&lt;br /&gt;&lt;br /&gt;Map size:&lt;br /&gt;%2km x %2km&lt;br /&gt;&lt;br /&gt;Cities: %3&lt;br /&gt;&lt;br /&gt;Banks: %4&lt;br /&gt;&lt;br /&gt;Letecké základny: %5</Czech>
         <Spanish>Clima: %1&lt;br /&gt;&lt;br /&gt;Tamaño del mapa:&lt;br /&gt;%2km x %2km&lt;br /&gt;&lt;br /&gt;Ciudades: %3&lt;br /&gt;&lt;br /&gt;Bancos: %4&lt;br /&gt;&lt;br /&gt;Bases aereas: %5</Spanish>
       </Key>
     </Container>
@@ -5365,58 +5535,72 @@
     <Container name="veh_service_dialog">
       <Key ID="STR_antistasi_vehService_hintTitle">
         <Original>Service Vehicle</Original>
+        <Czech>Servisovat Vozidlo</Czech>
         <Spanish>Vehículo de servicio</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_applyPoints">
         <Original>APPLY (%1 POINTS)</Original>
+        <Czech>APLIKOVAT (%1 BOD)</Czech>
         <Spanish>APLICAR (%1 PUNTOS)</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_applyRefuel">
         <Original>APPLY (%1 LITERS)</Original>
+        <Czech>APLIKOVAT (%1 LITR)</Czech>
         <Spanish>APLICAR (%1 Litros)</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_nothingRearm">
         <Original>Nothing to rearm or all selected pylons are full on ammo</Original>
-        <Spanish>No hay nada que rearmar o todos los pilones seleccionados están llenos de munición.</Spanish>
+        <Czech>Není co přezbrojit všechny vybrané pylony jsou plné</Czech>
+        <Spanish>No hay nada que rearmar o todos los pilones seleccionados están llenos de munición</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_nothingRepair">
         <Original>Nothing to repair</Original>
+        <Czech>Není co opravovat</Czech>
         <Spanish>Nada que arreglar</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_nothingRefuel">
         <Original>Nothing to refuel</Original>
+        <Czech>Není co dotankovat</Czech>
         <Spanish>Nada que repostar</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noNearRearm">
         <Original>No ammo truck in vicinity</Original>
-        <Spanish>No hay ningún camión de municiones en las inmediaciones.</Spanish>
+        <Czech>Žádný naklaďák s náboji v okolí</Czech>
+        <Spanish>No hay ningún camión de municiones en las inmediaciones</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noNearRepair">
         <Original>No repair truck in vicinity</Original>
-        <Spanish>No hay ningún camión de reparación en las inmediaciones.</Spanish>
+        <Czech>Žádný náklaďák na opravy v okolí</Czech>
+        <Spanish>No hay ningún camión de reparación en las inmediaciones</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noNearRefuel">
         <Original>No fuel truck in vicinity</Original>
-        <Spanish>No hay ningún camión cisterna en las inmediaciones.</Spanish>
+        <Czech>Žádný náklaďák s palivem v okolí</Czech>
+        <Spanish>No hay ningún camión cisterna en las inmediaciones</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noCargoRearm">
         <Original>The ammo truck %1 %2m away only has %3 points left</Original>
-        <Spanish>Al camión de municiones de %1 %2m de distancia solo le quedan %3 puntos.</Spanish>
+        <Czech>Náklaďák s náboji %1 %2m daleko má jenom %3 zbývající body</Czech>
+        <Spanish>Al camión de municiones de %1 %2m de distancia solo le quedan %3 puntos</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noCargoRepair">
         <Original>The repair truck %1 %2m away only has %3 points left</Original>
-        <Spanish>El camión de reparación que está a %1 %2m de distancia solo tiene %3 puntos restantes.</Spanish>
+        <Czech>Náklaďák na opravy %1 %2m daleko má jenom %3 zbývající body</Czech>
+        <Spanish>El camión de reparación que está a %1 %2m de distancia solo tiene %3 puntos restantes</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_noCargoRefuel">
         <Original>The fuel truck %1 %2m away only has %3 liters of fuel left</Original>
-        <Spanish>Al camión cisterna que está a %1 o %2 metros solo le quedan %3 litros de combustible.</Spanish>
+        <Czech>Náklaďák s palivem %1 %2m daleko má jenom %3 litry paliva</Czech>
+        <Spanish>Al camión cisterna que está a %1 o %2 metros solo le quedan %3 litros de combustible</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_costRearm">
         <Original>Buying %1 rounds of %2 for %3 points</Original>
+        <Czech>Kupujete %1 nábojů %2 za %3 bodů</Czech>
         <Spanish>Comprar %1 rondas de %2 por %3 puntos</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_refund">
         <Original>Selling %1 rounds of %2 for %4 value of %3 points</Original>
+        <Czech>Prodáváte %1 nábojů %2 za %4 cenu %3 bodů</Czech>
         <Spanish>Vender %1 rondas de %2 por un valor de %4 de %3 puntos</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_swapping">
@@ -5425,22 +5609,27 @@
       </Key>
       <Key ID="STR_antistasi_vehService_costRepair">
         <Original>%1 points to repair %3</Original>
+        <Czech>%1 bodů na opravu %3</Czech>
         <Spanish>%1 puntos para reparar %3</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_costRefuel">
         <Original>%1 liters to refuel the vehicle</Original>
+        <Czech>%1 litrů na dotankování vozidla</Czech>
         <Spanish>%1 litros para repostar el vehículo</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_tooFarRearm">
         <Original>The target vehicle was moved too far away and cannot be rearmed.</Original>
+        <Czech>Vozidlo je moc daleko a nemůže být dozbrojeno.</Czech>
         <Spanish>El vehículo objetivo fue trasladado demasiado lejos y no puede ser rearmado.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_tooFarRepair">
         <Original>The target vehicle was moved too far away and cannot be repaired.</Original>
+        <Czech>Vozidlo je moc daleko a nemůže být opraveno.</Czech>
         <Spanish>El vehículo objetivo fue movido demasiado lejos y no puede ser reparado.</Spanish>
       </Key>
       <Key ID="STR_antistasi_vehService_tooFarRefuel">
         <Original>The target vehicle was moved too far away and cannot be refueled.</Original>
+        <Czech>Vozidlo je moc daleko a nemůže být dotankováno.</Czech>
         <Spanish>El vehículo objetivo se ha alejado demasiado y no se puede repostar.</Spanish>
       </Key>
     </Container>
