@@ -50,40 +50,46 @@ _supplyVeh setVariable [_cargoVar, _newStock, true];
 switch (_mode) do {
     case "rearm":
     {
-        private _mags = magazinesAllTurrets cursorObject select {!("pylon" in toLower (_x#0))} apply { [[_x#0, _x#2]] }; //[magName, ammo]
-        private _magsCombined = []; 
+        // Get current & max rounds for each class+turret
+        // Don't worry about blacklisting here, handled in the UI
+        private _originalMags = typeOf _veh call HR_GRG_fnc_getDefaultMags;
+        private _magsCombinedHM = createHashMap;
         {
-            private _mag = _x#0#0;
-            private _currentMagIndex = _magsCombined findIf {(_x#0) isEqualTo _mag};
-            private _magExists =  (_currentMagIndex > -1);
-            private _currentMagInfo = if (_magExists) then {_magsCombined#_currentMagIndex} else {[_mag, 0, 0]};
-            
-            _magsCombined deleteAt _currentMagIndex;
-            _magsCombined insert [_currentMagIndex, [[_mag, _currentMagInfo#1 + (_x#0#1), _currentMagInfo#2 + 1]]];
+            _x params ["_mag", "_turret", "_bullets"];
+            private _key = tolower _mag + str _turret;        // RHS lol
+            private _val = _magsCombinedHM getOrDefault [_key, [_mag, _turret, 0, 0], true];
+            _val set [3, (_val#3) + _bullets];
+        } forEach _originalMags;
 
-        } forEach _mags;
         {
-            
+            _x params ["_mag", "_turret", "_bullets"];
+            private _key = tolower _mag + str _turret;
+            if !(_key in _magsCombinedHM) then {continue};          // Ignore anything that isn't in original loadout (could be pylon, blacklist, whatever)
+            private _val = _magsCombinedHM get _key;
+            _val set [2, (_val#2) + _bullets];
+        } forEach magazinesAllTurrets _veh;
 
+        {
             _x params ["_name", "_roundsToBuy", "_orderPrice", "", "", "", ["_turretPath", [-1]]];
             
-            // icky part
-            // Ok so we need to figure out how many full mags are needed and how many bullets are in the last partial mag
-            // this is complicated by the fact that any number of these mags could be partial mags
-            // fuck it, figure out how many rounds the vic should have, remove all magazines, add full mags, add partial mag
-            private _magData = _magsCombined select (_magsCombined findif {_x#0 isEqualTo _name}); // really is just _forEachIndex
-            _magData params ["_magName", "_totalAmmo", "_magCount"];
+            private _key = tolower _name + str _turretPath;
+            if !(_key in _magsCombinedHM) then { Error_3("Magazine type %1 turret %2 not found in %3", _name, _turretPath, typeOf _veh); continue };
+            _magsCombinedHM get _key params ["_magName", "_turret", "_curRounds", "_maxRounds"];
+            private _targetRounds = _roundsToBuy + _curRounds;
+            if (_targetRounds > _maxRounds) then {
+                // shouldn't happen unless multiple people use UI on the same vehicle concurrently
+                ["Service Vehicle", format ["Attempted to overfill magazine %1, capped.", getText (configFile >> "CfgMagazines" >> _name >> "displayName")]] spawn A3A_fnc_customHint;
+                _targetRounds = _maxRounds;
+            };
+
             private _roundsPerMag = getNumber (configFile >> "CfgMagazines" >> _name >> "count");
-            private _maxTotalRounds = _magCount * _roundsPerMag;
-            private _targetRounds = _roundsToBuy + _totalAmmo;
-            if (_targetRounds > _maxTotalRounds) then {["Service Vehicle", format ["Rearming this vehicle with %1 rounds of %2 would over-fill it. Continuing with next order.", _roundsToBuy, getText (configFile >> "CfgMagazines" >> _name >> "displayName")]] spawn A3A_fnc_customHint; continue};
             private _fullBoxes = floor (_targetRounds / _roundsPerMag);
             private _partialMagSize = _targetRounds % _roundsPerMag;
             if (_partialMagSize isEqualTo 0) then { // case to load gun with full magazine
                 _fullBoxes = _fullBoxes - 1;
                 _partialMagSize = _roundsPerMag;
             };
-            [_veh, "rearm", [_name, _turretPath, _fullBoxes, _partialMagSize]] remoteExec ["A3A_GUI_fnc_serviceVehicleGlobal", 0];
+            [_veh, "rearm", [_name, _turretPath, _fullBoxes, _partialMagSize]] remoteExecCall ["A3A_GUI_fnc_serviceVehicleGlobal", 0];
         } forEach _purchaseList;
     };
     case "pylon":
