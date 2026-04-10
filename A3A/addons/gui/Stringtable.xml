@@ -1426,7 +1426,7 @@
       <Key ID="STR_antistasi_dialogs_main_garrisons_button">
         <Original>Garrisons</Original>
         <Czech>Kasárny</Czech>
-        <Spanish>Guarniciones</Spanish>
+        <Spanish>Guarniciónes</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_hc_squads_button">
         <Original>High Command Squads</Original>
@@ -2774,10 +2774,6 @@
       <Key ID="STR_antistasi_dialogs_main_customize_loadouts_button">
         <Original>Customize Loadouts</Original>
         <Spanish>Personaliza tus equipamientos</Spanish>
-      </Key>
-      <Key ID="STR_antistasi_dialogs_main_garrisons_button">
-        <Original>Garrisons</Original>
-        <Spanish>Guarniciónes</Spanish>
       </Key>
       <Key ID="STR_antistasi_dialogs_main_recruit_squad_button">
         <Original>Recruit Squad</Original>
