@@ -8,7 +8,7 @@
 ["flagTexture", "\A3\Data_F_exp\Flags\Flag_Synd_CO.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "flag_Syndicat"] call _fnc_saveToTemplate;
 
-["vehiclesBasic", "I_G_Quadbike_01_F"] call _fnc_saveToTemplate;
+["vehiclesBasic", ["I_G_Quadbike_01_F"]] call _fnc_saveToTemplate;
 private _vehiclesLightUnarmed = ["I_C_Offroad_02_unarmed_F", "I_G_Offroad_01_F"];
 private _vehiclesLightArmed = ["I_G_Offroad_01_armed_F", "I_C_Offroad_02_LMG_F"];
 ["vehiclesTruck", ["I_C_Van_01_transport_F"]] call _fnc_saveToTemplate;
