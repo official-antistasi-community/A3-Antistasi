@@ -286,16 +286,15 @@ addMissionEventHandler ["EntityKilled", {
         Debug_2("%1 killed by %2", typeof _victim, _killerSide);
     };
 
-    private _marker = _victim getVariable "markerX";
-    if (!isNil "_marker") then {
-        if (_victim isKindOf "CAManBase") exitWith { [_marker, _victim] call A3A_fnc_garrisonServer_remUnit };
-        [_victim] call A3A_fnc_garrisonServer_remVehicle;
-    };
-
-    if !(isNil {_victim getVariable "ownerSide"}) then {
-        // Antistasi-created vehicle
+    if !(_victim isNil "ownerSide") then {
+        // Antistasi-created vehicle. Must be called before garrison removal
         [_victim, _killerSide, false, _killer] call A3A_fnc_vehKilledOrCaptured;
         [_victim] spawn A3A_fnc_postmortem;
+    };
+
+    if !(_victim isNil "markerX") then {
+        if (_victim isKindOf "CAManBase") exitWith { [_victime getVariable "markerX", _victim] call A3A_fnc_garrisonServer_remUnit };
+        [_victim] call A3A_fnc_garrisonServer_remVehicle;
     };
 }];
 
