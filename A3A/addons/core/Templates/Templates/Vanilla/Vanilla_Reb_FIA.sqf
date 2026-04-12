@@ -102,6 +102,13 @@ if ("rf" in A3A_enabledDLC) then {
 if ("enoch" in A3A_enabledDLC) then {
     _initialRebelEquipment append ["sgun_HunterShotgun_01_F", "sgun_HunterShotgun_01_sawedoff_F", "2Rnd_12Gauge_Pellets", "2Rnd_12Gauge_Slug"];
 };
+if ("AoW" in A3A_enabledDLC) then {
+    _initialRebelEquipment append ["B_CivilianBackpack_01_Sport_Red_F", "B_CivilianBackpack_01_Sport_Green_F", "B_CivilianBackpack_01_Sport_Blue_F", "B_CivilianBackpack_01_Everyday_Vrana_F", "B_CivilianBackpack_01_Everyday_Black_F", "B_CivilianBackpack_01_Everyday_Astra_F"];
+};
+if ("Orange" in A3A_enabledDLC) then {
+    _initialRebelEquipment append ["V_Safety_blue_F", "V_Safety_orange_F", "V_Safety_yellow_F", "V_Pocketed_olive_F", "V_Pocketed_coyote_F", "V_Pocketed_black_F", "V_LegStrapBag_olive_F", "V_LegStrapBag_coyote_F", "V_LegStrapBag_black_F"];
+    _initialRebelEquipment append ["B_Messenger_Olive_F", "B_Messenger_Gray_F", "B_Messenger_Coyote_F", "B_Messenger_Black_F", "B_LegStrapBag_olive_F", "B_LegStrapBag_coyote_F", "B_LegStrapBag_black_F"];
+};
 
 
 if (A3A_hasTFAR) then {_initialRebelEquipment append ["tf_microdagr","tf_anprc154"]};
@@ -110,7 +117,7 @@ if (A3A_hasTFARBeta) then {_initialRebelEquipment append ["TFAR_microdagr","TFAR
 if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote", "TFAR_anarc164", "a3a_TFAR_rt1523g_rhs", "a3a_TFAR_rt1523g_bwmod", "a3a_TFAR_rt1523g"]};
 if (A3A_hasTFARBeta && startWithLongRangeRadio) then {_initialRebelEquipment append ["TFAR_anprc155", "TFAR_anprc155_coyote", "TFAR_anarc164", "a3a_TFAR_rt1523g_rhs", "a3a_TFAR_rt1523g_bwmod", "a3a_TFAR_rt1523g"]};
 if (A3A_hasTFARBeta && startWithLongRangeRadio && ("enoch" in A3A_enabledDLC)) then {
-    _initialRebelEquipment append ["B_RadioBag_01_black_F", "B_RadioBag_01_digi_F", "a3a_B_RadioBag_01_oucamo_F", "a3a_B_RadioBag_01_wdl_F"]};
+_initialRebelEquipment append ["B_RadioBag_01_black_F", "B_RadioBag_01_digi_F", "a3a_B_RadioBag_01_oucamo_F", "a3a_B_RadioBag_01_wdl_F"]};
 _initialRebelEquipment append ["Chemlight_blue","Chemlight_green","Chemlight_red","Chemlight_yellow"];
 ["initialRebelEquipment", _initialRebelEquipment] call _fnc_saveToTemplate;
 
