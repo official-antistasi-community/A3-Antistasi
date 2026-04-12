@@ -90,10 +90,10 @@ if ("rf" in A3A_enabledDLC) then {
     _initialRebelEquipment append ["srifle_h6_oli_rf","10Rnd_556x45_AP_Stanag_red_khk_RF","10Rnd_556x45_AP_Stanag_khk_RF","10Rnd_556x45_AP_Stanag_green_khk_RF"];
     _initialRebelEquipment = _initialRebelEquipment - ["SMG_05_F", "30Rnd_9x21_Mag_SMG_02"];
 };
-if ("AoW" in A3A_enabledDLC) then {
+if ("aow" in A3A_enabledDLC) then {
     _initialRebelEquipment append ["B_CivilianBackpack_01_Sport_Red_F", "B_CivilianBackpack_01_Sport_Green_F", "B_CivilianBackpack_01_Sport_Blue_F", "B_CivilianBackpack_01_Everyday_Vrana_F", "B_CivilianBackpack_01_Everyday_Black_F", "B_CivilianBackpack_01_Everyday_Astra_F"];
 };
-if ("Orange" in A3A_enabledDLC) then {
+if ("orange" in A3A_enabledDLC) then {
     _initialRebelEquipment append ["V_Safety_blue_F", "V_Safety_orange_F", "V_Safety_yellow_F", "V_Pocketed_olive_F", "V_Pocketed_coyote_F", "V_Pocketed_black_F", "V_LegStrapBag_olive_F", "V_LegStrapBag_coyote_F", "V_LegStrapBag_black_F"];
     _initialRebelEquipment append ["B_Messenger_Olive_F", "B_Messenger_Gray_F", "B_Messenger_Coyote_F", "B_Messenger_Black_F", "B_LegStrapBag_olive_F", "B_LegStrapBag_coyote_F", "B_LegStrapBag_black_F"];
 };
