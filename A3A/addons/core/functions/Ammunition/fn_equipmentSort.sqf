@@ -79,7 +79,7 @@ if ((isClass (configFile >> "CfgPatches" >> "IFA3_Core")) or (isClass (configFil
 			if (_x in _hatClass) then {
 				_costmeticHeadgearBlacklist pushBackUnique _hatClass;
 			};
-		} forEach ["_DAK_", "_GER_", "_US_", "_NKVD_", "_SOV_", "_UK_", "_CW_", "_CAN_", "_PL_HSAT_"]; //HSAT has no armour for some reason
+		} forEach ["_DAK_", "_GER_", "_NKVD_", "_SOV_", "_PL_HSAT_"]; //PL HSAT's have no armour for some reason
 		
 	} forEach allCosmeticHeadgear;
 	//Doing IFA and SPE at the same time because of the keyword overlap between the two
