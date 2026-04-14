@@ -36,7 +36,7 @@ while {_fails < 2} do
     // If we reached a timeout and there are no players near then attempt to bounce vehicle
     if (time > _timeout) then {
         _fails = _fails + 1;
-        if (units teamPlayer inAreaArray [_vehicle, 500, 500]) exitWith {};
+        if (units teamPlayer inAreaArray [_vehicle, 500, 500] isNotEqualTo []) exitWith {};
         private _emptyPos = [getPosATL _vehicle, _vehicle, getDir _vehicle, 10, 30, 20] call A3A_fnc_findEmptyPosCar;
         if (_emptyPos isEqualTo []) exitWith {};
         _vehicle setPosATL _emptyPos;
