@@ -49,10 +49,10 @@ if (_garrison get "state" == "disabled") exitWith {
 if (_garrison get "state" == "paused") then {
     {
         if (!alive _x) then {continue};
-        _x enableSimulationGlobal true;
-        _x allowDamage true;
-        if (clientOwner == 2) then {_x hideObjectGlobal false} else {[_x, false] remoteExecCall ["hideObjectGlobal", 2]};
-    } forEach (units _crewGroup + _vehicle);
+        _x enableSimulationGlobal false;
+        _x allowDamage false;
+        if (clientOwner == 2) then {_x hideObjectGlobal true} else {[_x, true] remoteExecCall ["hideObjectGlobal", 2]};
+    } forEach (units _crewGroup + [_vehicle]);
 };
 
 // If garrison is spawned, move vehicle & crew back to active garrison data
