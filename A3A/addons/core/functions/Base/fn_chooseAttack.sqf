@@ -103,7 +103,7 @@ if (_isCity and sidesX getVariable _targetMrk == teamPlayer) exitWith {
         // Do we allow these even if there's already a convoy? Probably not harmful.
         Info_2("Sending supply convoy from %1 to %2", _originMrk, _targetMrk);
         [-200, _side, "attack"] call A3A_fnc_addEnemyResources;
-        [[_targetMrk, _originMrk, "Supplies", "attack"],"A3A_fnc_convoy"] call A3A_fnc_scheduler;
+        [_targetMrk, _originMrk, "Supplies", "attack"] spawn A3A_fnc_convoy;
     };
     true;
 };
