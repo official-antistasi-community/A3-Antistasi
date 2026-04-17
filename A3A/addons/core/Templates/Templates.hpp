@@ -2324,4 +2324,22 @@ class Templates
         file = "PRACS_AI_SLA_Rev_Guards_Temperate";
         climate[] = {"temperate"};
     };
+
+    // **************** VME *****************
+
+    class VME_Base
+    {
+        requiredAddons[] = {"vme_pla_factions_c", "CUP_BaseConfigs"}; 
+        basepath = QPATHTOFOLDER(Templates\Templates\VME); 
+        logo = "\A3\ui_f\data\map\markers\flags\CSAT_ca.paa"; // to be done
+        priority = 80;
+    };
+
+    class VME_PLA : VME_Base
+    {
+        side = "Occ";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\CSAT_ca.paa";
+        name = "VME PLA";
+        file = "VME_AI_PLA";
+    };
 };
