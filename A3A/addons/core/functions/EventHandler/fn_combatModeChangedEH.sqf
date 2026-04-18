@@ -19,7 +19,7 @@ if (isNil "_marker") exitWith {};       // might be ex-garrison? Unlikely
     // Find target that this group knows most about
     private _targets = _group targets [true];
     if (_targets isEqualTo []) exitWith { Debug_1("Group %1 changed combat mode without targets", _group) };
-    private _knowledge = _targets apply { _group knowsAbout _x };
+    private _knowledge = _targets apply { (_group knowsAbout _x) min 4 };           // sometimes returns max-float
     private _index = _knowledge find selectMax _knowledge;
 
     A3A_garrisonOps pushBack ["enemyInfo", [_marker, "detect", _targets#_index, _knowledge#_index]];
