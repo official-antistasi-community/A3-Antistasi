@@ -131,9 +131,9 @@ switch (true) do {
                     _button ctrlEnable true;
                 };
                 case ("RRR"): {
-                    _button ctrlSetText "RRR";
+                    _button ctrlSetText "REARM";
                     _button ctrlAddEventHandler ["ButtonClick", {closeDialog 0; createDialog "A3A_vehServiceDialog"}];
-                    _button ctrlSetTooltip "Rearm, repair, or refuel vehicles";
+                    _button ctrlSetTooltip "Rearm this vehicle";
                     _button ctrlEnable true;
                 };
                 case ("airSupport"): {
