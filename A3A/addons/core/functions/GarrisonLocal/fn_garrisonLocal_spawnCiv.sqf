@@ -57,7 +57,7 @@ private _vehicles = [];
 
     _vehicles pushBack _vehicle;
     _vehicle setVariable ["markerX", _spawnKey, true];
-    _vehicle setVariable ["A3A_vehID", _vehID, 2];
+    _vehicle setVariable ["A3A_vehID", _vehID, [2, clientOwner]];
     [_vehicle, civilian] call A3A_fnc_AIVEHinit;
 
 } forEach (_newGarrison get "vehicles");
