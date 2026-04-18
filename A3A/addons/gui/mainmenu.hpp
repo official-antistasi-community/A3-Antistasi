@@ -158,17 +158,17 @@ class RscDisplayMain : RscStandardDisplay
                 class Background: Background {
 					idc = -1;
 					angle = 0;
-					x = (0.4) * 	(pixelW * pixelGrid * 2);
+					x = (0) * 	(pixelW * pixelGrid * 2);
 				};
                 class BackgroundIcon: BackgroundIcon {
 					idc = -1;
 					angle = 0;
-					x = (0.4) * 	(pixelW * pixelGrid * 2);
+					x = (0) * 	(pixelW * pixelGrid * 2);
 				};
                 class Icon: Icon {
 					idc = -1;
                     text = QPATHTOFOLDER(dialogues\textures\extIcons\steam.paa);
-					x = (0.4) * 	(pixelW * pixelGrid * 2);
+					x = (0) * 	(pixelW * pixelGrid * 2);
                 };
 				class Button: Button {
 					idc = -1;
@@ -177,6 +177,8 @@ class RscDisplayMain : RscStandardDisplay
 				};
 				class Text: News {
 					idc = -1;
+					x = (2.4) * 	(pixelW * pixelGrid * 2);
+					style = ST_LEFT;
 					text = "Steam Workshop";
 				};
 			};
@@ -196,6 +198,8 @@ class RscDisplayMain : RscStandardDisplay
 					url = "https://github.com/official-antistasi-community/A3-Antistasi";
 				};
 				class Text: News {
+					x = (2.4) * 	(pixelW * pixelGrid * 2);
+					style = ST_LEFT;
 					text = "Antistasi GitHub";
 				};
 			};
@@ -215,6 +219,8 @@ class RscDisplayMain : RscStandardDisplay
 					url = "https://antistasi.de";
 				};
 				class Text: News {
+					x = (2.4) * 	(pixelW * pixelGrid * 2);
+					style = ST_LEFT;
 					text = "Antistasi Website";
 				};
 
