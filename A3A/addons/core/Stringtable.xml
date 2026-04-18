@@ -1666,6 +1666,9 @@
         <Korean>%1 인근 숲</Korean>
         <Russian>Лес рядом с %1</Russian>
       </Key>
+      <Key ID="STR_A3A_fn_base_localizar_HQ">
+        <Original>Our rebel HQ</Original>
+      </Key>
       <Key ID="STR_A3A_fn_base_localizar_outpost">
         <Original>Outpost near %1</Original>
         <French>Avant-poste près de %1</French>
