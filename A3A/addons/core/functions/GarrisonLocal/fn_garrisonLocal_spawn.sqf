@@ -58,7 +58,7 @@ if !(_garrisonType == "hq") then {
             _building setPosWorld _posWorld;
             _building setVectorDirAndUp [_vecDir, _vecUp];
             _building setVariable ["A3A_building", true, true];
-            _building setVariable ["markerX", _marker, 2];
+            _building setVariable ["markerX", _marker, [2, clientOwner]];
             _buildings pushBack _building;
         };
     } forEach (_garrisonData getOrDefault ["buildings", []]);
