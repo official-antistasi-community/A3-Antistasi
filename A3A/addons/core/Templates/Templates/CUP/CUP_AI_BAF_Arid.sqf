@@ -29,7 +29,7 @@
 ["vehiclesLightAPCs", ["CUP_B_FV432_Bulldog_GB_D", "CUP_B_FV432_Bulldog_GB_D", "CUP_B_Mastiff_HMG_GB_D", "CUP_B_Mastiff_LMG_GB_D", "CUP_B_Mastiff_GMG_GB_D"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["CUP_B_FV432_Bulldog_GB_D_RWS", "CUP_B_FV432_Bulldog_GB_D_RWS", "CUP_B_FV510_GB_D", "CUP_B_MCV80_GB_D"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["CUP_B_FV510_GB_D", "CUP_B_FV510_GB_D_SLAT", "CUP_B_MCV80_GB_D", "CUP_B_MCV80_GB_D_SLAT"]] call _fnc_saveToTemplate;
-["vehiclesTanks", ["CUP_B_Challenger2_Desert_BAF"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["CUP_B_Leopard2A6DST_GER"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["CUP_B_M6LineBacker_USA_D", "CUP_B_M163_Vulcan_USA"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
