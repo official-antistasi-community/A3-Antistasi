@@ -20,7 +20,7 @@
 
 
 <p align="center">
-    <a href="https://discord.gg/antistasi">Discord</a> | <a href="https://official-antistasi-community.github.io/A3-Antistasi-Docs/index.html">Guide (up to date)</a>
+    <a href="https://discord.gg/4YFuAD8bv8">Discord</a> | <a href="https://official-antistasi-community.github.io/A3-Antistasi-Docs/index.html">Guide (up to date)</a>
 </p>
 </div>
 

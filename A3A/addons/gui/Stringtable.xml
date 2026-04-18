@@ -5460,8 +5460,8 @@
         <Spanish>Los servidores oficiales de la comunidad de Antistasi son el mejor lugar para entrar y jugar Antistasi las 24 horas del día, los 7 días de la semana. La comunidad mantiene dos servidores que rotan entre los mapas y conjuntos de mods más populares, con una gran base de jugadores que mantiene los servidores activos.&lt;br /&gt;Usa el botón Enlaces para descargar el conjunto de mods, o únete a los servidores ahora si has cargado los mods correctos.</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_linkText">
-        <Original>Antistasi Discord: discord.gg/antistasi&lt;br /&gt;Teamspeak (required to play servers): %1&lt;br /&gt;Main server address: %2&lt;br /&gt;Ports: %3</Original>
-        <Spanish>Antistasi Discord: discord.gg/antistasi&lt;br /&gt;Teamspeak (requerido para jugar en los servidores): %1&lt;br /&gt;Dirección servidor principal: %2&lt;br /&gt;Puertos: %3</Spanish>
+        <Original>Antistasi Discord: discord.gg/%1&lt;br /&gt;Teamspeak (required to play servers): %2&lt;br /&gt;Main server address: %3&lt;br /&gt;Ports: %4</Original>
+        <Spanish>Antistasi Discord: discord.gg/%1&lt;br /&gt;Teamspeak (requerido para jugar en los servidores): %2&lt;br /&gt;Dirección servidor principal: %3&lt;br /&gt;Puertos: %4</Spanish>
       </Key>
       <Key ID="STR_antistasi_commad_showTestServers">
         <Original>Show Test Servers</Original>
