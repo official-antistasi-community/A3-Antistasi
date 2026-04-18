@@ -5,7 +5,7 @@
 
 <p align="center">
     <a href="https://github.com/official-antistasi-community/A3-Antistasi/releases/latest">
-        <img src="https://img.shields.io/badge/Latest_Version-3.11.0-blue.svg?style=flat-square" alt="Antistasi Version">
+        <img src="https://img.shields.io/badge/Latest_Version-3.11.1-blue.svg?style=flat-square" alt="Antistasi Version">
     </a>
     <a href="https://github.com/official-antistasi-community/A3-Antistasi/issues">
         <img src="https://img.shields.io/github/issues/official-antistasi-community/A3-Antistasi?style=flat-square" alt="Issues">
@@ -20,7 +20,7 @@
 
 
 <p align="center">
-    <a href="https://discord.gg/antistasi">Discord</a> | <a href="https://official-antistasi-community.github.io/A3-Antistasi-Docs/index.html">Guide (up to date)</a>
+    <a href="https://discord.gg/4YFuAD8bv8">Discord</a> | <a href="https://official-antistasi-community.github.io/A3-Antistasi-Docs/index.html">Guide (up to date)</a>
 </p>
 </div>
 

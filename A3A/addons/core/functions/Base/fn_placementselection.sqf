@@ -76,10 +76,10 @@ player allowDamage true;
 
 //If we're still in the map, we chose a place.
 if (visiblemap) then {
-	_controlsX = controlsX select {!(isOnRoad (getMarkerPos _x))};
+	_controlsX = controlsX select {!isOnRoad getMarkerPos _x};
 	{
-		if (getMarkerPos _x distance _positionClicked < distanceSPWN) then {
-			sidesX setVariable [_x,teamPlayer,true];
+		if (getMarkerPos _x distance _positionClicked < 700) then {
+			[_x, true] remoteExecCall ["A3A_fnc_garrisonServer_clear", 2]
 		};
 	} forEach _controlsX;
 	[_positionClicked] remoteExecCall ["A3A_fnc_createPetros", 2];

@@ -339,7 +339,7 @@ private _fnc_applyResults =
     [_adjustCA, _sideX] remoteExec ["A3A_fnc_timingCA", 2];
     if (_adjustScore > 0) then {
         private _target = [_crate, _vehObj] select isNull _crate;
-        [30*_adjustScore, true, _target] call A3A_tasks_fnc_rewardPlayers;      // all players in group nearest to target
+        [3*_adjustScore, true, _target] call A3A_tasks_fnc_rewardPlayers;      // all players in group nearest to target
     };
 
     [_sideX, _aggroMod, _aggroTime] remoteExec ["A3A_fnc_addAggression", 2];
@@ -388,7 +388,7 @@ if (_convoyType == "Prisoners") then
         else
         {
             _countX = {(alive _x) and (_x distance _posHQ < 150)} count _POWs;
-            [true, false, 400*_bonus, _bonus*_countX/2, 10, 120, "prisoner"] call _fnc_applyResults;
+            [true, false, 400*_bonus, _bonus*_countX, 10, 120, "prisoner"] call _fnc_applyResults;
 
             [_countX,_countX*300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
         };

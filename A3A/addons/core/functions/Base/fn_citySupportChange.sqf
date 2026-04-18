@@ -15,8 +15,8 @@ if (_pos isEqualTo "") exitWith {Error("The second parameter, the position, must
 private _city = if (_pos in citiesX) then {_pos} else {
 	// Other enemies still count if within city marker for now
 	if (_pos isEqualType "") then { _pos = markerPos _pos };			// could be passed non-city marker
-	private _nearCities = citiesX inAreaArrayIndexes [_pos, 500, 500] apply { citiesX#_x };
-	private _nearCities = _nearCities select { _pos inArea _x };
+	private _nearCities = citiesX inAreaArray [_pos, 700, 700];
+	private _nearCities = _nearCities select { (markerSize _x # 0) + 200 > (markerPos _x distance2d _pos) };
 	selectRandom _nearCities;
 };
 if (isNil "_city") exitWith {};			// Unit not in city

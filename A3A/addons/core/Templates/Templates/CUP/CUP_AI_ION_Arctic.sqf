@@ -29,7 +29,7 @@
 ["vehiclesLightAPCs", ["CUP_I_RG31_Mk19_W_ION", "CUP_I_RG31E_M2_W_ION", "CUP_I_RG31_M2_W_ION", "CUP_I_RG31_M2_W_GC_ION"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["CUP_I_BTR80A_ION", "CUP_I_BTR80_ION", "CUP_B_FV432_Bulldog_GB_W_RWS"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["CUP_B_FV510_GB_W_SLAT"]] call _fnc_saveToTemplate;
-["vehiclesTanks", ["CUP_B_Challenger2_Snow_BAF"]] call _fnc_saveToTemplate;
+["vehiclesTanks", ["CUP_B_Leopard_1A3SNOW_GER"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["CUP_B_M163_Vulcan_USA"]] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["CUP_B_Zodiac_USMC"]] call _fnc_saveToTemplate;

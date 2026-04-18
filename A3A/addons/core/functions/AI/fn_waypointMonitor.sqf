@@ -18,7 +18,7 @@ private _error = call {
 if (!isNil "_error") exitWith { Error(_error) };
 
 private _group = group driver _vehicle;
-private _timeout = time + 20 + (_vehicle distance2d waypointPosition [_group, currentWaypoint _group]);
+private _timeout = time + 20 + 0.2*(_vehicle distance2d waypointPosition [_group, currentWaypoint _group]);
 private _fails = 0;
 while {_fails < 2} do
 {
@@ -30,13 +30,14 @@ while {_fails < 2} do
     // If next waypoint position is close then switch to next one
     if (waypointPosition [_group, _curWP] distance2d _vehicle < 50) then {
         _group setCurrentWaypoint [_group, _curWP + 1];
-        _timeout = time + 20 + (_vehicle distance2d waypointPosition [_group, _curWP + 1]);
+        _timeout = time + 20 + 0.2*(_vehicle distance2d waypointPosition [_group, _curWP + 1]);
     };
 
     // If we reached a timeout and there are no players near then attempt to bounce vehicle
     if (time > _timeout) then {
         _fails = _fails + 1;
-        if (units teamPlayer inAreaArray [_vehicle, 500, 500]) exitWith {};
+        if (units teamPlayer inAreaArray [_vehicle, 500, 500] isNotEqualTo []) exitWith {};
+        Debug_2("Vehicle %1 at %2 stuck, bumping it", _vehicle, getPosATL _vehicle);
         private _emptyPos = [getPosATL _vehicle, _vehicle, getDir _vehicle, 10, 30, 20] call A3A_fnc_findEmptyPosCar;
         if (_emptyPos isEqualTo []) exitWith {};
         _vehicle setPosATL _emptyPos;

@@ -46,6 +46,7 @@
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_Attached">
         <Original>You can't garage an object that's attached to another vehicle</Original>
+        <Spanish>No puedes guardar en el garaje un objeto que esté unido a otro vehículo</Spanish>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_badLocation">
         <Original>You and the vehicle need to be in a %1 garrison's surroundings in order to garage it</Original>
@@ -161,9 +162,11 @@
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_HostileUAV">
         <Original>You can't garage a drone that doesnt belong to your side. Hack this drone before trying to garage it.</Original>
+        <Spanish>No puedes guardar en el garaje un dron que no te pertenece. Hackea este dron antes de intentar guardarlo.</Spanish>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_Ammo_sold">
         <Original>Ammo crate sold</Original>
+        <Spanish>Caja de munición vendida</Spanish>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_Fuel_sold">
         <Original>Fuel sold</Original>
@@ -195,6 +198,7 @@
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_inCombat">
         <Original>You can't garage a vehicle that's fired its weapons or recently been in combat.&lt;br/&gt;&lt;br/&gt;This vehicle can be garaged in %1.</Original>
+        <Spanish>No puedes guardar en el garaje un vehículo que haya disparado sus armas o que haya estado recientemente en combate.&lt;br/&gt;&lt;br/&gt;Este vehículo se puede guardar en el garaje en %1.</Spanish>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_addVehicle_inVehicle">
         <Original>You can't garage a vehicle while in another vehicle</Original>
@@ -436,6 +440,7 @@
       </Key>
       <Key ID="STR_HR_GRG_Feedback_LockedToolTip_Ago">
         <Original>%1: %2 ago</Original>
+        <Spanish>%1: %2 hace</Spanish>
         <French>%1: %2 il y a</French>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_requestMount_Denied">
@@ -454,21 +459,25 @@
       </Key>
       <Key ID="STR_HR_GRG_Feedback_sellVehicle_comOnly">
         <Original>Only the Commander can sell vehicles.</Original>
+        <Spanish>Solo el Comandante puede vender vehículos.</Spanish>
         <French>Seul le Commandant peux vendre des véhicules.</French>
         <Russian>Только командующий может продавать технику.</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_sellVehicle_locked">
         <Original>You cannot sell a locked vehicle. If this is your vehicle, make sure to unlock it first.</Original>
+        <Spanish>No se puede vender un vehículo bloqueado. Si este es su vehículo, asegúrese de desbloquearlo primero.</Spanish>
         <French>Vous ne pouvez vendre de véhicule vérrouiller. Si c'est votre véhicule, dévérouiller le d'abord.</French>
         <Russian>Вы не можете продать заблокированный автомобиль. Если это ваш автомобиль, сначала разблокируйте его.</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_sellVehicle_noPrice">
         <Original>This vehicle is not suitable for our marketplace.</Original>
+        <Spanish>Este vehículo no es adecuado para nuestro mercado.</Spanish>
         <French>Ce véhicule n'est pas adapté pour notre marché.</French>
         <Russian>Этот автомобиль не подходит для нашего рынка</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Feedback_sellVehicle_sold">
         <Original>Vehicle sold for %1 €.</Original>
+        <Spanish>Vehículo vendido por %1 €.</Spanish>
         <French>Véhicule vendu pour %1 €.</French>
         <Russian>Техника продана за %1 €.</Russian>
       </Key>
@@ -488,6 +497,7 @@
       </Key>
       <Key ID="STR_HR_GRG_Generic_Unmanned">
         <Original>Unmanned</Original>
+        <Spanish>No tripulado</Spanish>
         <Russian>Беспилотники</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Air">
@@ -506,18 +516,22 @@
       </Key>
       <Key ID="STR_HR_GRG_Generic_Cars_Сivilian">
         <Original>Сivilian vehicles</Original>
+        <Spanish>Vehículos civiles</Spanish>
         <Russian>Гражданская техника</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Heli">
         <Original>Helicopters</Original>
+        <Spanish>Helicopteros</Spanish>
         <Russian>Вертолёты</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Plane">
         <Original>Planes</Original>
+        <Spanish>Aviones</Spanish>
         <Russian>Самолёты</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Generic_VTOL">
         <Original>VTOL</Original>
+        <Spanish>VTOL</Spanish>
         <Russian>СВВП</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Generic_AirDisabled">
@@ -536,6 +550,7 @@
       </Key>
       <Key ID="STR_HR_GRG_Generic_HelipadDisabled">
         <Original>You can only access garaged helicopters from helipads</Original>
+        <Spanish>Solo se puede acceder a los helicópteros estacionados en garajes desde los helipuertos.</Spanish>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Anim">
         <Original>Customize</Original>
@@ -705,9 +720,11 @@
       </Key>
       <Key ID="STR_HR_GRG_Generic_PylonDisabled_setting">
         <Original>Pylon editing is disabled on this server</Original>
+        <Spanish>La edición de pilones está deshabilitada en este servidor.</Spanish>
       </Key>
       <Key ID="STR_HR_GRG_Generic_PylonDisabled_newSys">
-        <Original>Pylon editing is now done through the battle menu.\n\nLook at a vehicle and use the RRR button to change pylons</Original>
+        <Original>Pylon editing is now done through the battle menu.\n\nLook at a vehicle and use the 'Rearm' button to change pylons</Original>
+        <Spanish>La edición de pilones ahora se realiza a través del menú de batalla.\n\nMira un vehículo y usa el botón 'Rearm' para cambiar los pilones.</Spanish>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Pylons">
         <Original>Pylons</Original>
@@ -727,6 +744,7 @@
         <Original>Sell Vehicle</Original>
         <German>Fahrzeug verkaufen</German>
         <French>Vendre véhicule</French>
+        <Spanish>Vender Vehiculo</Spanish>
         <Russian>Продать</Russian>
       </Key>
       <Key ID="STR_HR_GRG_Generic_Static">
@@ -788,6 +806,7 @@
       <Key ID="STR_HR_GRG_InfoPanel_cannotBeSold">
         <Original>Cannot be sold.</Original>
         <French>Ne peux pas être vendu.</French>
+        <Spanish>No puede ser vendido.</Spanish>
         <Russian>Не может быть продан.</Russian>
       </Key>
       <Key ID="STR_HR_GRG_InfoPanel_Capacity">
@@ -904,6 +923,7 @@
       </Key>
       <Key ID="STR_HR_GRG_InfoPanel_salePrice">
         <Original>Sell Price:</Original>
+        <Spanish>Precio de venta:</Spanish>
       </Key>
       <Key ID="STR_HR_GRG_InfoPanel_Seats">
         <Original>Seats:</Original>
@@ -1247,6 +1267,7 @@
         <Original>Base capacity of the garage at War Level 1.</Original>
         <Italian>Capacità del garage della base at Livello Guerra 1.</Italian>
         <French>Capacité de base du garage au niveau de guerre 1.</French>
+        <Spanish>Capacidad base del garaje en el Nivel de Guerra 1.</Spanish>
         <Korean>전쟁 레벨 1의 기본 차고 수용량입니다.</Korean>
         <Russian>Базовая вместимость гаража на 1 уровне войны.</Russian>
         <Czech>Základní kapacita garáže v úrovni války 1.</Czech>
@@ -1254,6 +1275,7 @@
       <Key ID="STR_A3A_inc_public_config_baseCapTitle">
         <Original>Base Capacity</Original>
         <Italian>Capienza della Base</Italian>
+        <Spanish>Capacidad de la Base</Spanish>
         <French>Capacité de Base</French>
         <Korean>기본 수용량</Korean>
         <Russian>Базовая вместимость</Russian>
@@ -1264,6 +1286,7 @@
         <Original>Capacity increase per War Level for the garage.</Original>
         <Italian>Capacità del garage incrementata per Livello Guerra.</Italian>
         <French>Augmentation de la capacité du garage par niveau de guerre.</French>
+        <Spanish>Aumento de capacidad por nivel de guerra para el garaje.</Spanish>
         <Korean>전쟁 레벨이 오를 때마다 차고의 수용량이 증가합니다.</Korean>
         <Russian>Увеличение вместимости гаража за каждый уровень войны.</Russian>
         <Czech>Zvýšení kapacity garáže dle úrovně války.</Czech>
@@ -1271,6 +1294,7 @@
       <Key ID="STR_A3A_inc_public_config_capIncTitle">
         <Original>Capacity Increase</Original>
         <Italian>Incremento Capacità</Italian>
+        <Spanish>Incremento de Capacidad</Spanish>
         <French>Augmentation de la capacité</French>
         <Korean>수용량 증가</Korean>
         <Russian>Увеличение вместимости</Russian>
@@ -1279,6 +1303,7 @@
       <Key ID="STR_A3A_inc_public_config_disableRearmLong">
         <Original>Vehicles won't be rearmed when taken from the garage.</Original>
         <Italian>I veicoli non saranno riarmati quando lasceranno il garage.</Italian>
+        <Spanish>Los vehículos no se rearmarán al sacarlos del garaje.</Spanish>
         <French>Les Véhicules ne sont pas réarmé quand ils sont pris du garage.</French>
         <Korean>차고에서 차량을 가져오면 차량이 재무장되지 않습니다.</Korean>
         <Russian>Техника не будет перевооружена при выводе из гаража.</Russian>
@@ -1287,6 +1312,7 @@
       <Key ID="STR_A3A_inc_public_config_disableRearmTitle">
         <Original>Disable garage rearm</Original>
         <Italian>Disabilita riarmamento garage</Italian>
+        <Spanish>Desactivar el rearme del garaje</Spanish>
         <French>Désactiver le réarmement depuis le garage</French>
         <Korean>차고 재무장 비활성화</Korean>
         <Russian>Выключить перевооружение в гараже</Russian>
@@ -1295,6 +1321,7 @@
       <Key ID="STR_A3A_inc_public_config_disableRefuelLong">
         <Original>Vehicles won't be refueled when taken from the garage.</Original>
         <Italian>I veicoli non saranno riforniti quando lasceranno il garage.</Italian>
+        <Spanish>Los vehículos no serán repostados al ser retirados del garaje.</Spanish>
         <French>Les véhicules ne seront pas ravitaillés en carburant lorsqu'ils seront sortis du garage.</French>
         <Korean>차고에서 차량을 가져오면 차량이 재급유되지 않습니다.</Korean>
         <Russian>Техника не будет заправляться при выводе из гаража.</Russian>
@@ -1303,6 +1330,7 @@
       <Key ID="STR_A3A_inc_public_config_disableRefuelTitle">
         <Original>Disable garage refuel</Original>
         <Italian>Disabilita rifornimento garage</Italian>
+        <Spanish>Desactivar el repostaje en garaje</Spanish>
         <French>Désactiver le ravitaillement depuis le garage</French>
         <Korean>차고 재급유 비활성화</Korean>
         <Russian>Выключить заправку в гараже</Russian>
@@ -1311,6 +1339,7 @@
       <Key ID="STR_A3A_inc_public_config_disableRepairLong">
         <Original>Vehicles won't be repaired when taken from the garage.</Original>
         <Italian>I veicoli non saranno riparati quando lasceranno il garage.</Italian>
+        <Spanish>Los vehículos no serán reparados una vez retirados del taller.</Spanish>
         <French>Les véhicules ne sont pas réparés lorsqu'ils sont retirés du garage.</French>
         <Korean>차고에서 차량을 가져오면 차량이 수리되지 않습니다.</Korean>
         <Russian>Техника не будет отремонтирована при выводе из гаража.</Russian>
@@ -1319,6 +1348,7 @@
       <Key ID="STR_A3A_inc_public_config_disableRepairTitle">
         <Original>Disable garage repair</Original>
         <Italian>Disabilita riparazione garage</Italian>
+        <Spanish>Deshabilitar la reparación del garaje</Spanish>
         <French>Désactiver la réparation depuis le garage</French>
         <Korean>차량 수리 비활성화</Korean>
         <Russian>Выключить ремонт в гараже</Russian>
@@ -1327,6 +1357,7 @@
       <Key ID="STR_A3A_inc_public_config_guestLimitLong">
         <Original>Maximum number of vehicles that can be locked by a guest at once.</Original>
         <Italian>Massimo numero di veicoli che possono essere chiusi da un ospite all'unisono.</Italian>
+        <Spanish>NNúmero máximo de vehículos que un invitado puede bloquear simultáneamente</Spanish>
         <French>Nombre maximum de véhicules pouvant être verrouillés simultanément par un invité.</French>
         <Korean>게스트가 한 번에 잠글 수 있는 최대 차량 수입니다.</Korean>
         <Russian>Максимальное количество транспортных средств, которые гость может заблокировать одновременно.</Russian>
@@ -1335,6 +1366,7 @@
       <Key ID="STR_A3A_inc_public_config_guestLimitTitle">
         <Original>Guest lock limit</Original>
         <Italian>Limite chiusura ospiti</Italian>
+        <Spanish>límite de bloqueo de invitados</Spanish>
         <French>Limire de verrouillage pour les invités</French>
         <Korean>게스트 잠금 제한</Korean>
         <Russian>Лимит блокировки техники гостем</Russian>
@@ -1343,6 +1375,7 @@
       <Key ID="STR_A3A_inc_public_config_lockOnGarageLong">
         <Original>Lock vehicles automatically when garaged.</Original>
         <Italian>Chiudi veicoli automaticamente quando parcheggiati nel garage.</Italian>
+        <Spanish>Los vehículos se bloquean automáticamente al entrar en el garaje.</Spanish>
         <French>Verrouiller automatiquement les véhicules lorsqu'ils sont garés.</French>
         <Korean>차고로 이동하면 자동으로 차량을 잠급니다.</Korean>
         <Russian>Автоматически запирать технику, когда она находятся в гараже.</Russian>
@@ -1351,6 +1384,7 @@
       <Key ID="STR_A3A_inc_public_config_lockOnGarageTitle">
         <Original>Lock garaged vehicles</Original>
         <Italian>Chiudi veicoli parcheggiati nel garage</Italian>
+        <Spanish>vehículos estacionados en garaje</Spanish>
         <French>Verrouiller les véhicules garés</French>
         <Korean>차고로 간 차량 잠금</Korean>
         <Russian>Запирать технику в гараже</Russian>
@@ -1359,6 +1393,7 @@
       <Key ID="STR_A3A_inc_public_config_memberLimitLong">
         <Original>Maximum number of vehicles that can be locked by a member at once.</Original>
         <Italian>Massimo numero di veicoli che possono essere chiusi da un membro all'unisono.</Italian>
+        <Spanish>Número máximo de vehículos que un miembro puede bloquear simultáneamente.</Spanish>
         <French>Nombre maximum de véhicules pouvant être verrouillés simultanément par un membre.</French>
         <Korean>멤버가 한 번에 잠글 수 있는 최대 차량 수입니다.</Korean>
         <Russian>Максимальное количество транспортных средств, которые участником может заблокировать одновременно.</Russian>
@@ -1367,6 +1402,7 @@
       <Key ID="STR_A3A_inc_public_config_memberLimitTitle">
         <Original>Member lock limit</Original>
         <Italian>Limite chiusura membri</Italian>
+        <Spanish>Límite de bloqueo de miembros</Spanish>
         <French>Limire de verrouillage pour les membres</French>
         <Korean>멤버 잠금 제한</Korean>
         <Russian>Лимит блокировки техники участником</Russian>
@@ -1375,6 +1411,7 @@
       <Key ID="STR_A3A_inc_public_config_placeRaysLong">
         <Original>Debug setting: Enables the placement rays used to check for vehicle collision.</Original>
         <Italian>Settaggio debug: Abilità il posizionamento di raggi uttilizzati per controllare le collisioni veicolari.</Italian>
+        <Spanish>Configuración de depuración: Habilita los rayos de posicionamiento que se utilizan para comprobar si hay colisión entre vehículos.</Spanish>
         <French>Paramètre de débogage : Active les rayons de placement utilisés pour vérifier les collisions de véhicules.</French>
         <Korean>디버그 설정: 차량 충돌을 확인하는 데 사용되는 배치선을 활성화합니다.</Korean>
         <Russian>Настройка отладки: Включает лучи размещения, используемые для проверки на столкновение транспортного средства.</Russian>
@@ -1383,6 +1420,7 @@
       <Key ID="STR_A3A_inc_public_config_placeRaysTitle">
         <Original>Render placement rays</Original>
         <Italian>Renderizza raggi di posizionamento</Italian>
+        <Spanish>Renderizar rayos de posicionamiento</Spanish>
         <French>Rendu des rayons de placement</French>
         <Korean>배치선 활성화</Korean>
         <Russian>Показывать лучи размещения</Russian>
@@ -1391,6 +1429,7 @@
       <Key ID="STR_A3A_inc_public_config_pylonEditingLong">
         <Original>Allows pylons to be edited in the arsenal, as long as an ammo source is available.</Original>
         <Italian>Permetti di modificare i piloni nell'arsenale, finché vi è una fonte di munizioni disponibile.</Italian>
+        <Spanish>Permite editar los pilones en el arsenal, siempre que haya una fuente de munición disponible.</Spanish>
         <French>Permet d'éditer des pylônes dans l'arsenal, à condition qu'une source de munitions soit disponible.</French>
         <Korean>탄약 공급원이 있는 한 무기고에서 무장창을 편집하는 것을 허용합니다.</Korean>
         <Russian>Позволяет редактировать пилоны в арсенале, если доступен источник боеприпасов.</Russian>
@@ -1399,6 +1438,7 @@
       <Key ID="STR_A3A_inc_public_config_pylonEditingTitle">
         <Original>Allow pylon editing</Original>
         <Italian>Permetti la modifica dei piloni</Italian>
+        <Spanish>Permitir la edición de pilones</Spanish>
         <French>Permettre l'édition des pylônes</French>
         <Korean>무장창 편집 허용</Korean>
         <Russian>Разрешить редактирование пилона</Russian>

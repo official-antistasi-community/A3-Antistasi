@@ -49,16 +49,20 @@ if (_vehicleType isKindOf "Land") then {
 
     if (_spawnPos distance2d _vehicle < 20) then {
         Error_2("Vehicle %1 failed to clear spawn at %2", _vehicle, _markerOrigin);
-        // teleport to first waypoint
-        // arguably should just return empty array...
-        private _wayPos = waypointPosition (waypoints _crewGroup # 0);
+
+        // If it jammed hard then just move the thing somewhere safe
+        if (currentWaypoint _crewGroup >= count waypoints _crewGroup) exitWith {
+            Error_1("Vehicle %1 has no waypoints; dumping it", _vehicle);
+            private _emptyPos = [getPosATL _vehicle, _vehicle, getDir _vehicle, 50, 100, 20] call A3A_fnc_findEmptyPosCar;
+            if (_emptyPos isEqualTo []) then { _emptyPos = getPos [100, random 360] };
+            _vehicle setPosATL _emptyPos;
+        };
+
+        // teleport to next waypoint
+        private _wayPos = waypointPosition [_crewGroup, currentWaypoint _crewGroup];
         _vehicle setVehiclePosition [_wayPos, [], 10, "NONE"];
-        _crewGroup setCurrentWaypoint [_crewGroup, 1];
     };
 };
 
 [_vehicle, _crewGroup, _cargoGroup, _landPosBlacklist];
-
-
-
 

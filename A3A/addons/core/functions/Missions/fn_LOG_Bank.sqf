@@ -1,7 +1,7 @@
 //Mission: Logistics bank mission
 //el sitio de la boxX es el 21
 if (!isServer and hasInterface) exitWith {};
-private ["_banco","_markerX","_difficultX","_leave","_contactX","_groupContact","_tsk","_posHQ","_citiesX","_city","_radiusX","_positionX","_posHouse","_nameDest","_timeLimit","_dateLimit","_dateLimitNum","_posBase","_pos","_truckX","_countX","_mrkFinal","_mrk","_soldiers"];
+private ["_banco","_markerX","_difficultX","_leave","_contactX","_groupContact","_tsk","_citiesX","_city","_radiusX","_positionX","_posHouse","_nameDest","_timeLimit","_dateLimit","_dateLimitNum","_pos","_truckX","_countX","_mrkFinal","_mrk","_soldiers"];
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 _banco = _this select 0;
@@ -17,8 +17,6 @@ _contactX = objNull;
 _groupContact = grpNull;
 _tsk = "";
 _positionX = getPosATL _banco;
-
-_posbase = getMarkerPos respawnTeamPlayer;
 
 _timeLimit = if (_difficultX) then {60} else {120};
 if (A3A_hasIFA) then {_timeLimit = _timeLimit * 2};
@@ -36,10 +34,21 @@ _mrkFinal setMarkerShape "ICON";
 //_mrkFinal setMarkerText "Bank";
 
 private _bankVehicleClass = selectRandom (FactionGet(reb, "vehiclesCivSupply"));
+private _truckX = createVehicle [_bankVehicleClass, markerPos "Synd_HQ" vectorAdd [0,0,-1000], [], 0, "CAN_COLLIDE"];
+_truckX enableSimulation false;
+call {
+	private _testDir = random 360;
+	private _pos = [markerPos "Synd_HQ", _truckX, _testDir, 0, 50, 50] call A3A_fnc_findEmptyPosCar;
+	if (_pos isEqualTo []) then { _pos = markerPos "Synd_HQ" findEmptyPosition [1,50,_bankVehicleClass] };
+	isNil {
+		_truckX setPosATL _pos;
+		_truckX setDir _testDir;
+		_truckX allowDamage false;
+		_truckX enableSimulation true;
+	};
+	_truckX spawn { sleep 3; _this allowDamage true };
+};
 
-_pos = (getMarkerPos respawnTeamPlayer) findEmptyPosition [1,50,_bankVehicleClass];
-
-_truckX = _bankVehicleClass createVehicle _pos;
 {_x reveal _truckX} forEach (allPlayers - (entities "HeadlessClient_F"));
 [_truckX, teamPlayer] call A3A_fnc_AIVEHinit;
 _truckX setVariable ["destinationX",_nameDest,true];
@@ -127,8 +136,8 @@ else
 	};
 
 
-waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (!alive _truckX) or (_truckX distance _posbase < 50)};
-if ((_truckX distance _posbase < 50) and (dateToNumber date < _dateLimitNum)) then
+waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (!alive _truckX) or (_truckX distance markerPos "Synd_HQ" < 50)};
+if ((_truckX distance markerPos "Synd_HQ" < 50) and (dateToNumber date < _dateLimitNum)) then
 	{
 	[_taskId, "LOG", "SUCCEEDED"] call A3A_fnc_taskSetState;
 	[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];

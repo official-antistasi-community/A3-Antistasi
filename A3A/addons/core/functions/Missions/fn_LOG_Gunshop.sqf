@@ -164,8 +164,7 @@ if (_noCrate and _convoyPair isNotEqualTo []) exitWith
     [_coolerPetros, localize "STR_A3A_fn_mission_gunshop_intercept"] remoteExec ["globalChat", _nearPlayers];
     
     sleep 5;
-    private _args = _convoyPair + ["GunShop","legacy",-1, _gunshopList];
-    [_args, "A3A_fnc_convoy"] remoteExec ["A3A_fnc_scheduler", 2];
+    (_convoyPair + ["GunShop", "legacy", -1, _gunshopList]) spawn A3A_fnc_convoy;
 
     [_patrolGroup] spawn A3A_fnc_enemyReturnToBase;
     _coolerPetros spawn _fnc_despawner;

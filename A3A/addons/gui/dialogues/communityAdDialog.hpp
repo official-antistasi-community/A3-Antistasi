@@ -164,7 +164,7 @@ class A3A_CommunityAdvertisement
                     y = 95 * GRID_H;
                     w = 34 * GRID_W;
                     h = 5 * GRID_H;
-                    onButtonClick = "connectToServer ['217.217.30.252', 2382, '']";
+                    onButtonClick = "connectToServer ['217.217.30.252', 2482, '']";
                     text = $STR_antistasi_commad_joinMain2;
                 };
                 class TestServer2Button : A3A_Button
