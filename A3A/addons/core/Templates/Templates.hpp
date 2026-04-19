@@ -1246,6 +1246,12 @@ class Templates
         file = "CUP_AI_AFRF_Desert";
         climate[] = {"arid"};
     };
+    class CUP_VDV_Temperate : CUP_AFRF_Arid
+    {
+        name = "CUP VDV Temperate";
+        file = "CUP_AI_VDV_Temperate";
+        climate[] = {"temperate","tropical"};
+    };
 
     class CUP_BAF_Arid : CUP_Base
     {
