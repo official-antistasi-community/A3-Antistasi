@@ -2324,4 +2324,24 @@ class Templates
         file = "PRACS_AI_SLA_Rev_Guards_Temperate";
         climate[] = {"temperate"};
     };
+
+      // ***************************** GSB *****************************
+
+    class GSB_Base
+    {
+        requiredAddons[] = {"rhsgref_main","gsb_main"};
+        basepath = QPATHTOFOLDER(Templates\Templates\RHS);
+        logo = "\rhsusf\addons\rhsusf_main\data\rhs_logo_ca.paa";
+    };
+
+    class RHS_GSB_Temperate : GSB_Base
+    {
+        side = "Inv";
+        flagTexture = "\rhsgref\addons\rhsgref_main\data\Flags\flag_cdf_co.paa";
+        logo = "\rhsafrf\addons\rhs_main\data\rhs_logo_ca.paa";
+        name = "RHS GSB";
+        file = "RHS_AI_GSB_Temperate";
+        climate[] = {"Temperate"};
+        shortName = "GSB";
+    };
 };
