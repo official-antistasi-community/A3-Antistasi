@@ -2324,4 +2324,23 @@ class Templates
         file = "PRACS_AI_SLA_Rev_Guards_Temperate";
         climate[] = {"temperate"};
     };
+
+    // **************** FFAA *****************
+
+    class FFAA_Base
+    {
+        requiredAddons[] = {"ffaa_et_vamtac"}; 
+        basepath = QPATHTOFOLDER(Templates\Templates\FFAA); 
+        logo = "\CUP\Creatures\People\CUP_Creatures_People_Core\ui\logo_cup_ca_small.paa"; // to be done
+    };
+
+    class FFAA_Spain_Temperate : FFAA_Base
+    {
+        side = "Inv";
+        flagTexture = "\A3\ui_f\data\map\markers\flags\Spain_ca.paa";
+        name = "Spain_Temperate";
+        file = "FFAA_AI_Spain_Temperate";
+        climate[] = {};
+        shortName = "FFAA";
+    };
 };
