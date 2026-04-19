@@ -131,7 +131,7 @@ _loadoutData set ["watches", ["ItemWatch"]];
 _loadoutData set ["compasses", ["ItemCompass"]];
 _loadoutData set ["radios", ["ItemRadio"]];
 _loadoutData set ["gpses", ["ItemGPS"]];
-_loadoutData set ["NVGs", []];
+_loadoutData set ["NVGs", ["rhs_1PN138","rhsusf_ANPVS_14"]];
 _loadoutData set ["binoculars", ["Binocular"]];
 _loadoutData set ["rangefinders", ["rhs_pdu4"]];
 
@@ -179,7 +179,7 @@ _sfLoadoutData set ["backpacks", ["gsb_rhs_22_bp_kitbag","gsb_rhs_22_bp_compact"
 _sfLoadoutData set ["helmets", ["gsb_rhs_22_opscore_cover_pelt"]];
 _sfLoadoutData set ["slRifles", [
 ["rhs_weap_ak74mr","rhs_acc_tgpa","","rhsusf_acc_ACOG_RMR",["rhs_30Rnd_545x39_7N10_AK"],[],""],
-["rhs_weap_ak74mr_gp25","rhs_acc_tgpa","","rhs_acc_1p87",["rhs_30Rnd_545x39_7N10_AK"],["rhs_VOG25"],""],
+["rhs_weap_ak74mr_gp25","rhs_acc_tgpa","","rhs_acc_1p87",["rhs_30Rnd_545x39_7N10_AK"],["rhs_gsb_KVG10","rhs_gsb_BFO13","rhs_VG40OP_white"],""],
 ["rhs_weap_ak74m_zenitco01_b33","rhs_acc_tgpa","","rhs_acc_okp7_picatinny",["rhs_30Rnd_545x39_7N22_AK"],[],"rhs_acc_grip_ffg2"]
 ]];
 _sfLoadoutData set ["rifles", [
@@ -191,8 +191,8 @@ _sfLoadoutData set ["carbines", [
 ["rhs_weap_asval_grip_npz","","","rhs_acc_rakursPM",["rhs_20rnd_9x39mm_SP5"],[],""]
 ]];
 _sfLoadoutData set ["grenadeLaunchers", [
-["rhs_weap_ak74mr_gp25","rhs_acc_tgpa","","rhsusf_acc_ACOG3_USMC",["rhs_30Rnd_545x39_7N10_AK"],["rhs_VOG25"],""],
-["rhs_weap_ak74mr_gp25","rhs_acc_tgpa","","rhsusf_acc_g33_xps3",["rhs_30Rnd_545x39_7N10_AK"],["rhs_VOG25"],""]
+["rhs_weap_ak74mr_gp25","rhs_acc_tgpa","","rhsusf_acc_ACOG3_USMC",["rhs_30Rnd_545x39_7N10_AK"],["rhs_gsb_KVG10","rhs_gsb_BFO13","rhs_VG40OP_white"],""],
+["rhs_weap_ak74mr_gp25","rhs_acc_tgpa","","rhsusf_acc_g33_xps3",["rhs_30Rnd_545x39_7N10_AK"],["rhs_gsb_KVG10","rhs_gsb_BFO13","rhs_VG40OP_white"],""]
 ]];
 _sfLoadoutData set ["SMGs", [
 ["GSB_NMG_weapons_vpo","","","rhsusf_acc_T1_high",["GSB_71rnd_762mm_psh_nmg"],[],""]
@@ -309,9 +309,9 @@ _militiaLoadoutData set ["carbines", [
 ["GSB_char98_Rail_short","","","",["30Rnd_580x42_Mag_AK"],[],""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
-["GSB_char98_Rail_GL","","","",["30Rnd_580x42_Mag_AK"],["rhs_VOG25"],""],
-["GSB_charm_545_GL","","","",["rhs_30Rnd_545x39_7N6M_AK"],["rhs_VOG25"],""],
-["GSB_charm_556_GL","","","",["rhs_mag_30Rnd_556x45_M855A1_Stanag"],["rhs_VOG25"],""]
+["GSB_char98_Rail_GL","","","",["30Rnd_580x42_Mag_AK"],["rhs_gsb_KVG10","rhs_gsb_BFO13","rhs_VG40OP_white"],""],
+["GSB_charm_545_GL","","","",["rhs_30Rnd_545x39_7N6M_AK"],["rhs_gsb_KVG10","rhs_gsb_BFO13","rhs_VG40OP_white"],""],
+["GSB_charm_556_GL","","","",["rhs_mag_30Rnd_556x45_M855A1_Stanag"],["rhs_gsb_KVG10","rhs_gsb_BFO13","rhs_VG40OP_white"],""]
 ]];
 _militiaLoadoutData set ["SMGs", [
 ["GSB_NMG_weapons_vpo","","","",["GSB_71rnd_762mm_psh_nmg"],[],""]
