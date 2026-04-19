@@ -127,7 +127,7 @@ _loadoutData set ["watches", ["ItemWatch"]];
 _loadoutData set ["compasses", ["ItemCompass"]];
 _loadoutData set ["radios", ["ItemRadio"]];
 _loadoutData set ["gpses", ["ItemGPS"]];
-_loadoutData set ["NVGs", ["NVGoggles_INDEP"]];
+_loadoutData set ["NVGs", ["ffaa_nvgoggles"]];
 _loadoutData set ["binoculars", ["Binocular"]];
 _loadoutData set ["rangefinders", ["Laserdesignator"]];
 
