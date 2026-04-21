@@ -1,6 +1,6 @@
 class cwr3_vehicles_cwr3_m939_cwr3_m939_closed_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-        class Nodes
+    class Nodes
     {
         class Node1
         {
@@ -34,7 +34,7 @@ class cwr3_vehicles_cwr3_m939_cwr3_m939_open_p3d : cwr3_vehicles_cwr3_m939_cwr3_
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_NewHMMWV_model_CUP_nM1025_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-        class Nodes
+    class Nodes
     {
         class Node1
         {
@@ -45,7 +45,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_NewHMMWV_model_CUP_nM1025_p3d : TR
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_NewHMMWV_model_CUP_nM1025_m2_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-        class Nodes
+    class Nodes
     {
         class Node1
         {
@@ -58,7 +58,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_NewHMMWV_model_CUP_nM1025_mk19_p3d
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_M151_con85_M151 : TRIPLES(ADDON,Nodes,Base)
 {
-        class Nodes
+    class Nodes
     {
         class Node1
         {
@@ -70,7 +70,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_M151_con85_M151 : TRIPLES(ADDON,No
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_NewM998_model_CUP_nM1038_4s_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-        class Nodes
+    class Nodes
     {
         class Node1
         {
@@ -81,7 +81,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_NewM998_model_CUP_nM1038_4s_p3d : 
 
 class cwr3_vehicles_cwr3_m939_cwr3_m939_empty_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-        class Nodes
+    class Nodes
     {
         class Node1
         {
@@ -108,7 +108,7 @@ class cwr3_vehicles_cwr3_m939_cwr3_m939_empty_p3d : TRIPLES(ADDON,Nodes,Base)
 
 class cwr3_vehicles_cwr3_uaz452_cwr3_uaz452_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-        class Nodes
+    class Nodes
     {
         class Node1
         {
@@ -125,7 +125,7 @@ class cwr3_vehicles_cwr3_uaz452_cwr3_uaz452_p3d : TRIPLES(ADDON,Nodes,Base)
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_UAZ_CUP_UAZ_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-        class Nodes
+    class Nodes
     {
         class Node1
         {
@@ -137,7 +137,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_UAZ_CUP_UAZ_p3d : TRIPLES(ADDON,No
 
 class CUP_WheeledVehicles_CUP_WheeledVehicles_UAZ_CUP_UAZ_open_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-        class Nodes
+    class Nodes
     {
         class Node1
         {
@@ -149,7 +149,7 @@ class CUP_WheeledVehicles_CUP_WheeledVehicles_UAZ_CUP_UAZ_open_p3d : TRIPLES(ADD
 
 class cwr3_vehicles_cwr3_ural_cwr3_ural_flatbed_p3d : TRIPLES(ADDON,Nodes,Base)
 {
-        class Nodes
+    class Nodes
     {
         class Node1
         {
