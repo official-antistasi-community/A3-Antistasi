@@ -68,7 +68,7 @@ lootVest append allArmoredVests + allCivilianVests;
 //   Device Bags  ///
 /////////////////////
 lootDevice = allBackpacksRadio;
-private _quantity = ceil (count allBackpacksRadio / (count rebelBackpackDevice max 1));
+private _quantity = 1 max ceil (count allBackpacksRadio / (count rebelBackpackDevice max 1));
 for "_i" from 1 to _quantity do {
      lootDevice append rebelBackpackDevice;
 };
