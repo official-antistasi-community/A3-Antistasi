@@ -489,7 +489,6 @@ class CfgFunctions
             class convoy {};
             class DES_Antenna {};
             class DES_Heli {};
-            class DES_Vehicle {};
             class LOG_Gunshop {};
             class LOG_Ammo {};
             class LOG_Bank {};

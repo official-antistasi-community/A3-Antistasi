@@ -23,7 +23,17 @@ private _side = _veh getVariable ["ownerSide", teamPlayer];			// default because
 if (_captured && (_side == _sideEnemy or !alive _veh)) exitWith {};
 
 private _act = if (_captured) then {"captured"} else {"destroyed"};
-ServerDebug_4("%1 of %2 %3 by %4", _type, _side, _act, _sideEnemy);
+Debug_4("%1 of %2 %3 by %4", _type, _side, _act, _sideEnemy);
+
+// Signal missions that need to trigger on this vehicle
+if !(_veh isNil "markerX") then {
+	private _missionKey = (_veh getVariable "markerX") + "_vid" + str (_veh getVariable ["A3A_vehID", -1]);
+	if !(_missionKey in A3A_missionVehicles) exitWith {};
+	Debug_1("Signalling mission for vehicle event %1", _missionKey);
+	(A3A_missionVehicles get _missionKey) params ["_func", "_args"];
+	[_args, _veh, _sideEnemy, _captured, _killer] call _func;
+	A3A_missionVehicles deleteAt _missionKey;
+};
 
 // Kick units out of vehicles when destroyed & touching ground
 if (!_captured and count crew _veh > 0) then {

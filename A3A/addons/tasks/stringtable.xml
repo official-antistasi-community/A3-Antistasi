@@ -140,6 +140,12 @@
       <Key ID="STR_A3A_Tasks_cityBattle_defeatDesc">
         <Original>The uprising has been defeated. We will need to rebuild support in %1 before we have another chance to take it.</Original>
       </Key>
+      <Key ID="STR_A3A_Tasks_DES_Vehicle_desc">
+        <Original>We know an enemy support vehicle (%3) is stationed in %1. We have an opportunity to steal or destroy the vehicle before it becomes a problem. Do it before %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_Tasks_DES_Vehicle_title">
+        <Original>Steal or Destroy Vehicle</Original>
+      </Key>
       <Key ID="STR_A3A_Tasks_LOG_Supplies_title">
         <Original>City Supplies</Original>
       </Key>

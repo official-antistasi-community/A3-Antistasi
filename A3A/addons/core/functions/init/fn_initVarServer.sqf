@@ -163,6 +163,7 @@ A3A_destroyedBuildings = [];		// server side only now
 testingTimerIsActive = false;
 
 A3A_tasksData = [];
+A3A_missionVehicles = createHashMap;		// keys are marker+vehID, value is function to call when vehicle is killed or captured
 
 A3A_buildingsToSave = [];
 

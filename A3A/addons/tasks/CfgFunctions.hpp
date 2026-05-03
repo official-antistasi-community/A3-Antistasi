@@ -54,5 +54,9 @@ class CfgFunctions {
             class SUP_Supplies {};
             class LOG_Weapons {};
         };
+        class TasksSimple {
+            file = QPATHTOFOLDER(TasksSimple);
+            class DES_Vehicle {};
+        };
     };
 };
