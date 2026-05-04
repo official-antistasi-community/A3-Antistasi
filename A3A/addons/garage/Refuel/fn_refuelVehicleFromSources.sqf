@@ -50,9 +50,9 @@ while {count (HR_GRG_Sources#1) > 0} do {
     private _fuelData = _sourceData#4#0; //vehicle data >> statePreservation data >> Fuel data
     private _transportFuel = getNumber (configFile/"CfgVehicles"/_sourceData#1/"transportFuel");
     private _fuelCargo = if (A3A_hasAce) then {
-        _fuelData # 2;
+        if (isNil {_fuelData#2}) then {0} else {0 max _fuelData#2}
     } else {
-        (_fuelData # 1) * _transportFuel;
+        (0 max _fuelData#1) * _transportFuel
     };
     Trace_1("Fuel cargo: %1", _fuelCargo);
 
