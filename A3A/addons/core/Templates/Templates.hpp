@@ -2324,4 +2324,61 @@ class Templates
         file = "PRACS_AI_SLA_Rev_Guards_Temperate";
         climate[] = {"temperate"};
     };
+
+    class E22RAF_Base
+    {
+        requiredAddons[] = {"Data_F_RAF"};       
+        basepath = QPATHTOFOLDER(Templates\Templates\E22);
+        logo = "data_f_raf\Logos\arma3_raf_logo_ca.paa";
+        priority = 20;
+    };
+
+    class E22RAF_RAF_Arid : E22RAF_Base
+    {
+        side = "Inv";
+        flagTexture = "\a3\UI_F_Enoch\Data\CfgMarkers\Russia_CA.paa";
+        name = "E22 Russia Arid";
+        file = "E22RAF_AI_RAF_Arid";
+        climate[] = {"arid"};
+        shortName = "Russia";
+        lore = "";
+    };
+
+    class E22RAF_RAF_Temperate : E22RAF_RAF_Arid
+    {
+        name = "E22 Russia";
+        file = "E22RAF_AI_RAF_Temperate";
+        climate[] = {"temperate", "tropic"};
+    };  
+
+    class E22RAF_RAF_Arctic : E22RAF_RAF_Arid
+    {
+        name = "E22 Russia Arctic";
+        file = "E22RAF_AI_RAF_Arctic";
+        climate[] = {"arctic"};
+    };  
+
+    class E22JCA_Base : E22RAF_Base
+    {
+        requiredAddons[] = {"Data_F_Levi", "Weapons_1_F_lxWS", "Data_F_JCA_IA", "Data_F_JCA_LS"};       
+        logo = "data_f_levi\Logos\arma3_levi_icon_ca.paa";
+    };
+
+    class E22JCA_JCOM_Arid : E22JCA_Base
+    {
+        side = "Occ";
+        flagTexture = "data_f_levi\Logos\arma3_levi_logoOver_ca.paa";
+        name = "E22 JointCom Arid";
+        file = "E22JCA_AI_JCOM_Arid";
+        climate[] = {"arid"};
+        shortName = "JCOM";
+        lore = "";
+    };
+
+    class E22JCA_JCOM_Temperate : E22JCA_JCOM_Arid
+    {
+        name = "E22 JointCom";
+        file = "E22JCA_AI_JCOM_Temperate";
+        climate[] = {"temperate","tropic"};
+    };
 };
