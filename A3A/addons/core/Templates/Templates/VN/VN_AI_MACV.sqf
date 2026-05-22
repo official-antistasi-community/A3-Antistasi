@@ -39,7 +39,7 @@ private _vehiclesLightArmed = ["vn_b_wheeled_m151_mg_02", "vn_b_wheeled_m151_mg_
 ["vehiclesRepairTrucks", ["vn_b_wheeled_m54_repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["vn_b_wheeled_m54_fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["vn_b_armor_m577_02"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["vn_b_wheeled_m54_mg_03", "vn_b_wheeled_m54_mg_01", "vn_b_armor_m113_01"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["vn_b_wheeled_m54_mg_03", "vn_b_wheeled_m54_mg_01", "vn_b_armor_m113_01", "vn_b_armor_m113_01"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["vn_b_armor_m113_acav_04", "vn_b_armor_m113_acav_02", "vn_b_armor_m113_acav_01", "vn_b_armor_m113_acav_06", "vn_b_armor_m113_acav_03", "vn_b_armor_m113_acav_05"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["vn_b_armor_m67_01_01"]] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", ["vn_b_armor_m41_01_01"]] call _fnc_saveToTemplate;
@@ -77,7 +77,7 @@ private _uavsAttack = ["vn_b_air_oh6a_01"]; // scout helis are fine for this
 
 ["staticMGs", ["vn_b_army_static_m60_high", "vn_b_army_static_m1919a4_high", "vn_b_army_static_m2_high"]] call _fnc_saveToTemplate;
 ["staticAT", ["vn_b_army_static_m40a1rr", "vn_b_army_static_tow"]] call _fnc_saveToTemplate;
-["staticAA", ["a3a_vn_b_army_static_m45"]] call _fnc_saveToTemplate;
+["staticAA", ["a3a_vn_b_army_static_m45", "a3a_vn_b_army_static_m45", "a3a_vn_b_army_static_m45", "vn_b_navy_static_l70mk2", "vn_b_navy_static_l60mk3"]] call _fnc_saveToTemplate;
 ["staticMortars", ["a3a_vn_b_static_mortar_m2"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "vn_mortar_m2_mag_he_x8"] call _fnc_saveToTemplate;
