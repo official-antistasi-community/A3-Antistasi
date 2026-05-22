@@ -51,7 +51,7 @@
 ["vehiclesGunBoats", ["vn_o_boat_04_02"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["vn_o_air_mig19_at", "vn_o_air_mig21_cas"]] call _fnc_saveToTemplate;
+["vehiclesPlanesCAS", ["vn_o_air_mig19_at", "vn_o_air_mig19_at", "vn_o_air_mig21_cas"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesAA", ["vn_o_air_mig19_cap", "vn_o_air_mig21_cap"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", []] call _fnc_saveToTemplate;
 
