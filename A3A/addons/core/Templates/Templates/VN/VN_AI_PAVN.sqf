@@ -117,8 +117,9 @@ _loadoutData set ["machineGuns", []];
 _loadoutData set ["marksmanRifles", []];
 _loadoutData set ["sniperRifles", []];
 
-_loadoutData set ["ATLaunchers", ["vn_rpg2", "vn_rpg7"]];
-_loadoutData set ["AALaunchers", ["vn_sa7", "vn_sa7b"]];
+_loadoutData set ["lightATLaunchers", ["vn_rpg2", "vn_rpg2", "vn_rpg7"]];
+_loadoutData set ["ATLaunchers", ["vn_rpg2", "vn_rpg7", "vn_rpg7"]];
+_loadoutData set ["AALaunchers", ["vn_sa7", "vn_sa7", "vn_sa7b"]];
 _loadoutData set ["sidearms", []];
 
 _loadoutData set ["ATMines", ["vn_mine_tripwire_f1_04_mag"]];
@@ -620,7 +621,7 @@ private _latTemplate = {
     [selectRandom ["rifles", "SMGs"]] call _fnc_setPrimary;
     ["primary", 6] call _fnc_addMagazines;
 
-    ["ATLaunchers"] call _fnc_setLauncher;
+    ["lightATLaunchers"] call _fnc_setLauncher;
     ["launcher", 2] call _fnc_addMagazines;
 
     ["sidearms"] call _fnc_setHandgun;
@@ -648,7 +649,7 @@ private _atTemplate = {
     ["primary", 6] call _fnc_addMagazines;
 
     ["ATLaunchers"] call _fnc_setLauncher;
-    ["launcher", 2] call _fnc_addMagazines;
+    ["launcher", 4] call _fnc_addMagazines;
 
     ["sidearms"] call _fnc_setHandgun;
     ["handgun", 2] call _fnc_addMagazines;
