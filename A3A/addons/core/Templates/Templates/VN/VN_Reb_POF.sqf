@@ -82,6 +82,7 @@ private _initialRebelEquipment = [
 "vn_izh54_shorty", "vn_izh54",
 "vn_m_mk2_knife_01", "vn_m_axe_01", "vn_b_type56", "vn_b_sks", "vn_b_m38", "vn_b_camo_m9130", "vn_b_camo_m40a1", "vn_b_camo_m14",
 "vn_m127", ["vn_m72", 5], ["vn_m72_mag", 5],
+["vn_mine_tripwire_m49_02_mag", 5], ["vn_mine_tripwire_arty_mag", 3], ["IEDLandSmall_Remote_Mag", 3],
 "vn_m10_mag", "vn_m1895_mag", "vn_welrod_mag", "vn_izh54_mag", "vn_izh54_so_mag", "vn_t67_grenade_mag", "vn_rdg2_mag", "vn_molotov_grenade_mag", "vn_m127_mag", "vn_mine_punji_03_mag",
 "vn_c_pack_01",
 "vn_o_vest_05", "vn_b_vest_usarmy_01",
