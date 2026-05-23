@@ -46,7 +46,7 @@ private _vehiclesAPCs = ["vn_b_armor_m113_acav_01", "vn_b_armor_m113_acav_03", "
 ["vehiclesTanks", ["vn_b_armor_m48_01_02"]] call _fnc_saveToTemplate;
 private _vehiclesAA = ["a3a_vn_b_wheeled_m54_mg_02"];
 
-["vehiclesTransportBoats", ["vn_o_boat_02_01", "vn_b_boat_10_01", "vn_b_boat_09_01"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["vn_b_boat_09_01"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["vn_b_boat_13_02", "vn_b_boat_06_02", "vn_b_boat_05_02", "vn_b_boat_12_02"]] call _fnc_saveToTemplate;
 private _vehiclesAmphibious = ["vn_b_armor_m113_acav_01", "vn_b_armor_m113_acav_03", "vn_b_armor_m113_acav_06"];
 
