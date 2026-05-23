@@ -29,9 +29,9 @@
 
 ["vehiclesBasic", ["vn_c_bicycle_01", "vn_b_wheeled_m274_02_03"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["vn_i_wheeled_m151_02", "vn_b_wheeled_m274_01_02"]] call _fnc_saveToTemplate;
-private _vehiclesLightArmed = ["vn_o_car_04_mg_01", "vn_b_wheeled_m274_mg_01_02"];
+private _vehiclesLightArmed = ["vn_o_wheeled_btr40_mg_01_pl", "vn_o_car_04_mg_01", "vn_b_wheeled_m274_mg_01_02", "vn_o_wheeled_z157_mg_01_pl"];
 ["vehiclesTruck", ["vn_i_wheeled_m54_01"]] call _fnc_saveToTemplate;
-["vehiclesAT", ["vn_b_wheeled_m151_mg_05", "vn_b_wheeled_m274_mg_02_02"]] call _fnc_saveToTemplate;
+["vehiclesAT", ["vn_o_wheeled_btr40_mg_05_pl", "vn_b_wheeled_m274_mg_02_02"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["a3a_vn_b_wheeled_m54_mg_02"]] call _fnc_saveToTemplate;
 
 ["vehiclesBoat", ["vn_o_boat_02_01","vn_b_boat_09_01"]] call _fnc_saveToTemplate;
@@ -53,7 +53,7 @@ if (isClass (configFile >> "vnx_credits")) then {
 ["vehiclesCivBoat", ["vn_c_boat_08_01"]] call _fnc_saveToTemplate;
 
 ["staticMGs", ["vn_i_static_m60_high","vn_i_static_m1919a4_high","vn_o_kr_static_m1910_high_01","vn_i_static_m2_high", "vn_b_army_static_m2_scoped_high"]] call _fnc_saveToTemplate;
-["staticAT", ["vn_o_vc_static_type56rr","vn_i_static_m101_01"]] call _fnc_saveToTemplate;
+["staticAT", ["vn_o_vc_static_type56rr", "vn_b_army_static_m40a1rr","vn_i_static_m101_01"]] call _fnc_saveToTemplate;
 ["staticAA", ["a3a_vn_o_nva_static_zgu1_01"]] call _fnc_saveToTemplate;
 ["staticMortars", ["a3a_vn_b_static_mortar_m2", "a3a_vn_b_static_mortar_m29"]] call _fnc_saveToTemplate;
 ["staticMortarMagHE", "vn_mortar_m2_mag_he_x8"] call _fnc_saveToTemplate;
@@ -78,15 +78,19 @@ if (isClass (configFile >> "vnx_credits")) then {
 ///////////////////////////
 
 private _initialRebelEquipment = [
-"vn_p38s", "vn_welrod",
-"vn_m38",
+"vn_m10", "vn_p38s", "vn_welrod", "vn_izh54_p", "vn_m1895", 
+"vn_izh54_shorty", "vn_izh54",
 "vn_m_mk2_knife_01", "vn_m_axe_01", "vn_b_type56", "vn_b_sks", "vn_b_m38", "vn_b_camo_m9130", "vn_b_camo_m40a1", "vn_b_camo_m14",
-"vn_m127",
-"vn_m10_mag", "vn_welrod_mag", "vn_m38_t_mag", "vn_m38_mag", "vn_t67_grenade_mag", "vn_rdg2_mag", "vn_molotov_grenade_mag", "vn_m127_mag", "vn_mine_punji_03_mag",
+"vn_m127", ["vn_m72", 5], ["vn_m72_mag", 5],
+["vn_mine_tripwire_m49_02_mag", 5], ["vn_mine_tripwire_arty_mag", 3], ["IEDLandSmall_Remote_Mag", 3],
+"vn_m10_mag", "vn_m1895_mag", "vn_welrod_mag", "vn_izh54_mag", "vn_izh54_so_mag", "vn_t67_grenade_mag", "vn_rdg2_mag", "vn_molotov_grenade_mag", "vn_m127_mag", "vn_mine_punji_03_mag",
 "vn_c_pack_01",
 "vn_o_vest_05", "vn_b_vest_usarmy_01",
 "vn_m19_binocs_grey", "vn_mx991", "vn_mx991_red"
 ];
+if (isClass (configFile >> "vnx_credits")) then {
+    _initialRebelEquipment append ["vnx_hd_02","vnx_hd_02_mag"];
+};
 
 _initialRebelEquipment append ["Chemlight_blue","Chemlight_green","Chemlight_red","Chemlight_yellow"];
 ["initialRebelEquipment", _initialRebelEquipment] call _fnc_saveToTemplate;

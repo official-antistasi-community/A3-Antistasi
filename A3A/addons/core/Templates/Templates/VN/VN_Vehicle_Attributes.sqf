@@ -19,7 +19,8 @@
     ["vn_b_air_f100d_at", ["cost", 210]],
     ["vn_b_air_f100d_cap", ["cost", 200]],
     
-    // PT76 with slightly better armor and gunner
+    ["vn_b_armor_m41_01_02", ["cost", 150], ["threat", 200]],
+    // PT76 with slightly better armor and gunner //Is the armour actually better, is it not tinfoil?
     ["vn_o_armor_type63_01", ["cost", 180]]
 ]] call _fnc_saveToTemplate;
 
