@@ -130,7 +130,7 @@ _loadoutData set ["sniperRifles", []];
 
 _loadoutData set ["lightATLaunchers", ["vn_m72"]];
 _loadoutData set ["ATLaunchers", [
-"vn_m20a1b1_01"
+"vn_m20a1b1_01",
 ["vn_m20a1b1_01", "", "", "", ["vn_m20a1b1_heat_mag", "vn_m20a1b1_heat_mag", "vn_m20a1b1_wp_mag"], [], ""]
 ]];
 _loadoutData set ["sidearms", []];

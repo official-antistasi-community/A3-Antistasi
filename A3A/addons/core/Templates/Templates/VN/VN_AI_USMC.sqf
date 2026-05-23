@@ -153,7 +153,7 @@ _loadoutData set ["sniperRifles", []];
 
 _loadoutData set ["lightATLaunchers", ["vn_m72"]];
 _loadoutData set ["ATLaunchers", [
-"vn_m20a1b1_01"
+"vn_m20a1b1_01",
 ["vn_m20a1b1_01", "", "", "", ["vn_m20a1b1_heat_mag", "vn_m20a1b1_heat_mag", "vn_m20a1b1_wp_mag"], [], ""]
 ]];
 _loadoutData set ["sidearms", []];
@@ -465,7 +465,7 @@ _militiaLoadoutData set ["marksmanRifles", [
 ["vn_m14", "", "vn_b_m14", "vn_o_9x_m14", ["vn_m14_10_mag", "vn_m14_10_mag", "vn_m14_10_t_mag"], [], "vn_b_camo_m14"]
 ]];
 _militiaLoadoutData set ["sniperRifles", [
-["vn_m1903", "", "", "vn_o_8x_m1903", ["vn_m1903_mag", "vn_m1903_mag", "vn_m1903_t_mag"], [], "vn_b_camo_m1903"]
+["vn_m1903", "", "", "vn_o_8x_m1903", ["vn_m1903_mag", "vn_m1903_mag", "vn_m1903_t_mag"], [], "vn_b_camo_m1903"],
 ["vn_m40a1_camo", "", "", "vn_o_9x_m40a1", ["vn_m40a1_mag", "vn_m40a1_mag", "vn_m40a1_t_mag"], [], "vn_b_camo_m40a1"],
 ["vn_m40a1_camo", "", "", "vn_o_9x_m40a1", ["vn_m40a1_mag", "vn_m40a1_mag", "vn_m40a1_t_mag"], [], ""]
 ]];
