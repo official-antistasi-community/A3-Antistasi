@@ -92,10 +92,21 @@ private _pressUniforms = [
 ["uniforms", _civUniforms + _pressUniforms] call _fnc_saveToTemplate;
 
 private _civhats = [
+    "vn_o_pl_cap_02_02",
+    "vn_o_pl_cap_02_02",
+    "vn_c_headband_04",
     "vn_c_headband_04",
     "vn_c_headband_03",
+    "vn_c_headband_03",
     "vn_c_headband_02",
-    "vn_c_headband_01"
+    "vn_c_headband_02",
+    "vn_c_headband_01",
+    "vn_c_headband_01",
+    "H_Bandanna_gry",
+    "H_StrawHat_dark",
+    "H_HeadBandage_clean_F",
+    "H_HeadBandage_stained_F",
+    "H_HeadBandage_bloody_F"
 ];
 
 ["headgear", _civHats] call _fnc_saveToTemplate;
@@ -104,8 +115,10 @@ private _loadoutData = call _fnc_createLoadoutData;
 
 _loadoutData set ["uniforms", _civUniforms];
 _loadoutData set ["pressUniforms", _pressUniforms];
-_loadoutData set ["workerHelmets", ["vn_c_conehat_02"]];
+_loadoutData set ["workerHelmets", ["vn_c_conehat_01", "vn_c_conehat_02"]];
 _loadoutData set ["helmets", _civHats];
+_loadoutData set ["backpack1", ["vn_c_pack_01"]];
+_loadoutData set ["backpack2", ["vn_c_pack_02"]];
 
 _loadoutData set ["maps", ["ItemMap"]];
 _loadoutData set ["watches", ["ItemWatch"]];
@@ -115,6 +128,9 @@ _loadoutData set ["compasses", ["ItemCompass"]];
 private _manTemplate = {
     ["helmets"] call _fnc_setHelmet;
     ["uniforms"] call _fnc_setUniform;
+    if(random 10 > 8) then {
+        ["backpack2"] call _fnc_setBackpack;
+    };
 
     ["items_medical_standard"] call _fnc_addItemSet;
 
@@ -125,6 +141,9 @@ private _manTemplate = {
 private _workerTemplate = {
     ["workerHelmets"] call _fnc_setHelmet;
     ["uniforms"] call _fnc_setUniform;
+    if(random 10 > 8) then {
+        ["backpack1"] call _fnc_setBackpack;
+    };
 
     ["items_medical_standard"] call _fnc_addItemSet;
 
@@ -144,7 +163,7 @@ private _pressTemplate = {
 private _prefix = "militia";
 private _unitTypes = [
     ["Press", _pressTemplate],
-    ["Worker", _workerTemplate],
+    ["Worker", _workerTemplate, nil, 10],
     ["Man", _manTemplate, nil, 10]
 ];
 
