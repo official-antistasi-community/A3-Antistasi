@@ -30,18 +30,19 @@
 //////////////////////////
 
 ["attributeLowAir", true] call _fnc_saveToTemplate;             // Use fewer air units in general
+["attributeMoreTrucks", true] call _fnc_saveToTemplate;         // Use more truck for transports
 
 ["vehiclesBasic", ["vn_o_bicycle_01"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["vn_o_wheeled_btr40_01"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed",["vn_o_wheeled_btr40_mg_02", "vn_o_wheeled_btr40_mg_01", "vn_o_wheeled_btr40_mg_03", "vn_o_wheeled_z157_mg_02", "vn_o_wheeled_z157_mg_01"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed",["vn_o_wheeled_btr40_mg_02", "vn_o_wheeled_btr40_mg_01", "vn_o_wheeled_btr40_mg_03", "vn_o_wheeled_z157_mg_02", "vn_o_wheeled_z157_mg_01", "vn_o_wheeled_btr40_mg_06", "vn_o_wheeled_btr40_mg_05"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["vn_o_wheeled_z157_01", "vn_o_wheeled_z157_02"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", []] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["vn_o_wheeled_z157_ammo"]] call _fnc_saveToTemplate;
 ["vehiclesRepairTrucks", ["vn_o_wheeled_z157_repair"]] call _fnc_saveToTemplate;
 ["vehiclesFuelTrucks", ["vn_o_wheeled_z157_fuel"]] call _fnc_saveToTemplate;
 ["vehiclesMedical", ["vn_o_wheeled_btr40_02", "vn_o_armor_btr50pk_03"]] call _fnc_saveToTemplate;
-["vehiclesLightAPCs", ["vn_o_wheeled_z157_01", "vn_o_wheeled_z157_02", "vn_o_armor_m113_01", "vn_o_armor_btr50pk_02", "vn_o_armor_btr50pk_01"]] call _fnc_saveToTemplate;             // Fill out with trucks to make the tier scaling look more plausible
-["vehiclesAPCs", ["vn_o_wheeled_z157_01", "vn_o_wheeled_z157_02", "vn_o_armor_m113_acav_01","vn_o_armor_m113_acav_03"]] call _fnc_saveToTemplate;
+["vehiclesLightAPCs", ["vn_o_armor_m113_01", "vn_o_armor_btr50pk_02"]] call _fnc_saveToTemplate;             // Fill out with trucks to make the tier scaling look more plausible
+["vehiclesAPCs", ["vn_o_armor_m113_acav_01","vn_o_armor_m113_acav_03"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["vn_o_armor_pt76a_01","vn_o_armor_pt76b_01","vn_o_armor_type63_01"]] call _fnc_saveToTemplate;
 ["vehiclesLightTanks", ["vn_o_armor_m41_01","vn_o_armor_pt76a_01","vn_o_armor_pt76b_01"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["vn_o_armor_type63_01","vn_o_armor_t54b_01","vn_o_armor_ot54_01"]] call _fnc_saveToTemplate;
@@ -74,10 +75,11 @@
 
 ["vehiclesPolice", ["vn_i_wheeled_m151_02_mp"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["vn_o_nva_static_dshkm_high_01", "vn_o_nva_static_rpd_high", "vn_o_nva_static_pk_high"]] call _fnc_saveToTemplate;
+["staticMGs", ["vn_o_nva_static_dshkm_high_02", "vn_o_nva_static_dshkm_high_01", "vn_o_nva_static_rpd_high", "vn_o_nva_static_pk_high"]] call _fnc_saveToTemplate;
 ["staticAT", ["vn_o_vc_static_type56rr"]] call _fnc_saveToTemplate;
-["staticAA", ["vn_o_nva_static_zpu4", "a3a_vn_o_nva_static_zgu1_01"]] call _fnc_saveToTemplate;
+["staticAA", ["vn_o_nva_static_zpu4", "a3a_vn_o_nva_static_zgu1_01", "vn_o_nva_navy_static_v11m", "vn_o_nva_static_dshkm_high_02"]] call _fnc_saveToTemplate;
 ["staticMortars", ["vn_o_nva_65_static_mortar_type63"]] call _fnc_saveToTemplate;
+
 
 ["vehiclesSAM", ["vn_sa2"]] call _fnc_saveToTemplate;
 ["vehiclesRadar", ["vn_o_static_rsna75"]] call _fnc_saveToTemplate;
@@ -672,7 +674,7 @@ private _aaTemplate = {
     ["uniforms"] call _fnc_setUniform;
     ["backpacks"] call _fnc_setBackpack;
 
-    [selectRandom ["rifles", "SMGs"]] call _fnc_setPrimary;
+    ["SMGs"] call _fnc_setPrimary;
     ["primary", 6] call _fnc_addMagazines;
 
     ["AALaunchers"] call _fnc_setLauncher;
