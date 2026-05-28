@@ -125,7 +125,31 @@ _lootBodies = {
 
 private _leftovers = [[],[],[],[]];
 
-private _units = nearestObjects [getposATL _container, ["Man"], LootToCrateRadius];
+private _lootToCrateRadius = LootToCrateRadius;
+
+// Extend loot collection only when the area around the crate is clear.
+// The check radius is twice the collection radius to avoid pulling loot
+// from areas that may still have nearby enemies.
+if (A3A_lootToCrateUncontestedRange > LootToCrateRadius) then {
+    private _uncontestedRange = A3A_lootToCrateUncontestedRange;
+    private _uncontestedCheckRange = _uncontestedRange * 2;
+
+    private _nearEnemies = (units Occupants + units Invaders) inAreaArray [
+        getPosATL _container,
+        _uncontestedCheckRange,
+        _uncontestedCheckRange
+    ];
+
+    _nearEnemies = _nearEnemies select {
+        alive _x && {_x call A3A_fnc_canFight}
+    };
+
+    if (_nearEnemies isEqualTo []) then {
+        _lootToCrateRadius = _uncontestedRange;
+    };
+};
+
+private _units = nearestObjects [getposATL _container, ["Man"], _lootToCrateRadius];
 _units = _units select {!alive _x};
 {[_x, _container, _leftovers] call _lootBodies} forEach _units;
 
@@ -134,7 +158,7 @@ _units = _units select {!alive _x};
 //pickup weapons on the ground
 //----------------------------//
 
-private _weaponHolders = nearestObjects [getposATL _container, ["WeaponHolder","WeaponHolderSimulated"], LootToCrateRadius];
+private _weaponHolders = nearestObjects [getposATL _container, ["WeaponHolder","WeaponHolderSimulated"], _lootToCrateRadius];
 
 {
     private _return = [_x, _container] call A3A_fnc_lootFromContainer;
