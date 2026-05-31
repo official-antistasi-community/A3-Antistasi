@@ -19,6 +19,7 @@ class A3A {
     #include "Templates.hpp"
     #include "Params.hpp"
     #include "clientOptions.hpp"
+    #include "staticPlaces.hpp"
 
 #if __A3_DEBUG__
     #include "CfgFunctions.hpp"
