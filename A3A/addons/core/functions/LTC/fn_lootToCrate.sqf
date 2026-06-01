@@ -126,10 +126,8 @@ _lootBodies = {
 private _leftovers = [[],[],[],[]];
 
 private _lootToCrateRadius = LootToCrateRadius;
+private _lootToCrateRangeFeedback = "";
 
-// Extend loot collection only when the area around the crate is clear.
-// The check radius is twice the collection radius to avoid pulling loot
-// from areas that may still have nearby enemies.
 if (A3A_lootToCrateUncontestedRange > LootToCrateRadius) then {
     private _uncontestedRange = A3A_lootToCrateUncontestedRange;
     private _uncontestedCheckRange = _uncontestedRange * 2;
@@ -146,6 +144,7 @@ if (A3A_lootToCrateUncontestedRange > LootToCrateRadius) then {
 
     if (_nearEnemies isEqualTo []) then {
         _lootToCrateRadius = _uncontestedRange;
+        _lootToCrateRangeFeedback = localize "STR_A3A_fn_ltc_ltc_extendedRangeUsed";
     };
 };
 
@@ -215,10 +214,16 @@ if !(_leftovers isEqualTo [[],[],[],[]]) then {
     [_newContainer, _allUnlocked] remoteExec ["A3A_fnc_postmortem", 2];        // If all unlocked, priority clean up
 };
 
+private _message = localize "STR_A3A_fn_ltc_ltc_notrans";
 if (_allUnlocked) then {
-    [_titleStr, localize "STR_A3A_fn_ltc_ltc_transfered"] call A3A_fnc_customHint;
-} else {
-    [_titleStr, localize "STR_A3A_fn_ltc_ltc_notrans"] call A3A_fnc_customHint;
+    _message = localize "STR_A3A_fn_ltc_ltc_transfered";
 };
+
+if !(_lootToCrateRangeFeedback isEqualTo "") then {
+    _message = _message + " " + _lootToCrateRangeFeedback;
+};
+
+[_titleStr, _message] call A3A_fnc_customHint;
+
 
 [_container, clientOwner, true] remoteExecCall ["A3A_fnc_canLoot", 2];

@@ -4716,6 +4716,9 @@
         <Polish>Pobliski łup przeniesiony do skrzyni.</Polish>
         <Czech>Nejbližší loot přesunut do bedny.</Czech>
       </Key>
+      <Key ID="STR_A3A_fn_ltc_ltc_extendedRangeUsed">
+        <Original>Extended Loot to Crate range used.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_ltc_title">
         <Original>Loot crate</Original>
         <Italian>Cassa delle spoglie</Italian>
