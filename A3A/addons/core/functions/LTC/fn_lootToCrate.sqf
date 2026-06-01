@@ -125,7 +125,30 @@ _lootBodies = {
 
 private _leftovers = [[],[],[],[]];
 
-private _units = nearestObjects [getposATL _container, ["Man"], LootToCrateRadius];
+private _lootToCrateRadius = LootToCrateRadius;
+private _lootToCrateRangeFeedback = "";
+
+if (A3A_lootToCrateUncontestedRange > LootToCrateRadius) then {
+    private _uncontestedRange = A3A_lootToCrateUncontestedRange;
+    private _uncontestedCheckRange = _uncontestedRange * 2;
+
+    private _nearEnemies = (units Occupants + units Invaders) inAreaArray [
+        getPosATL _container,
+        _uncontestedCheckRange,
+        _uncontestedCheckRange
+    ];
+
+    _nearEnemies = _nearEnemies select {
+        alive _x && {_x call A3A_fnc_canFight}
+    };
+
+    if (_nearEnemies isEqualTo []) then {
+        _lootToCrateRadius = _uncontestedRange;
+        _lootToCrateRangeFeedback = localize "STR_A3A_fn_ltc_ltc_extendedRangeUsed";
+    };
+};
+
+private _units = nearestObjects [getposATL _container, ["Man"], _lootToCrateRadius];
 _units = _units select {!alive _x};
 {[_x, _container, _leftovers] call _lootBodies} forEach _units;
 
@@ -134,7 +157,7 @@ _units = _units select {!alive _x};
 //pickup weapons on the ground
 //----------------------------//
 
-private _weaponHolders = nearestObjects [getposATL _container, ["WeaponHolder","WeaponHolderSimulated"], LootToCrateRadius];
+private _weaponHolders = nearestObjects [getposATL _container, ["WeaponHolder","WeaponHolderSimulated"], _lootToCrateRadius];
 
 {
     private _return = [_x, _container] call A3A_fnc_lootFromContainer;
@@ -191,10 +214,16 @@ if !(_leftovers isEqualTo [[],[],[],[]]) then {
     [_newContainer, _allUnlocked] remoteExec ["A3A_fnc_postmortem", 2];        // If all unlocked, priority clean up
 };
 
+private _message = localize "STR_A3A_fn_ltc_ltc_notrans";
 if (_allUnlocked) then {
-    [_titleStr, localize "STR_A3A_fn_ltc_ltc_transfered"] call A3A_fnc_customHint;
-} else {
-    [_titleStr, localize "STR_A3A_fn_ltc_ltc_notrans"] call A3A_fnc_customHint;
+    _message = localize "STR_A3A_fn_ltc_ltc_transfered";
 };
+
+if !(_lootToCrateRangeFeedback isEqualTo "") then {
+    _message = _message + " " + _lootToCrateRangeFeedback;
+};
+
+[_titleStr, _message] call A3A_fnc_customHint;
+
 
 [_container, clientOwner, true] remoteExecCall ["A3A_fnc_canLoot", 2];
