@@ -83,7 +83,7 @@ for "_i" from 1 to 4 do
 	};
 
 private _bb = flatten boundingBoxReal _banco apply { abs _x };
-private _bankDistMax = selectMin _bb + 10;
+private _bankDistMax = selectMin [_bb#0, _bb#1, _bb#3, _bb#4] + 10;		// smallest x/y value + 10m
 
 waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (!alive _truckX) or (_truckX distance2d _banco < _bankDistMax)};
 _bonus = if (_difficultX) then {2} else {1};
