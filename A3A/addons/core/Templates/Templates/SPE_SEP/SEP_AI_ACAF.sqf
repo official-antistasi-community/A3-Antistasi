@@ -71,7 +71,7 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 
 ["vehiclesPolice", ["SPE_US_G503_MB"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["SPE_M1919A6_Bipod"]] call _fnc_saveToTemplate;
+["staticMGs", ["a3a_hmg_02_high"]] call _fnc_saveToTemplate;
 ["staticAT", ["SPEX_CW_Trop_QF_6_Pounder"]] call _fnc_saveToTemplate;
 ["staticAA", ["SPE_FR_M45_Quadmount"]] call _fnc_saveToTemplate;
 ["staticMortars", ["SPE_M1_81"]] call _fnc_saveToTemplate;
@@ -189,6 +189,11 @@ _loadoutData set ["medUniforms", []];
 _loadoutData set ["engUniforms", []];
 _loadoutData set ["slUniforms", []];
 
+_loadoutData set ["flamethrower", ["SPE_M2_Flamethrower"]];
+_loadoutData set ["flamethrowerPack", ["B_SPE_US_M2Flamethrower"]];
+_loadoutData set ["flamethrowerSuit", ["U_SPE_US_S31_erla_boot"]];
+_loadoutData set ["flamethrowerMask", ["G_SPE_GER_GM30"]];
+
 _loadoutData set ["vests", ["V_SPEX_CW_Vest_P37_N61_Rifle","V_SPEX_CW_Vest_P37_N61_Rifle_golok"]];
 _loadoutData set ["glVests", ["V_SPEX_CW_Vest_P37_N61_golok", "V_SPEX_CW_Vest_P37_N61"]];
 _loadoutData set ["sniVests", ["V_SPEX_cw_vest_p37_N61_P41_binoc"]];
@@ -282,9 +287,11 @@ _sfLoadoutData set ["machineGuns", [
     ["SPEX_LMG_303_Mk1", "", "", "", ["SPE_30Rnd_770x56_MKVIII"], [], ""]
 ]];
 _sfLoadoutData set ["marksmanRifles", [
+    ["SPE_M1903A4_Springfield", "", "", "", ["SPE_5Rnd_762x63", "SPE_5Rnd_762x63_t", "SPE_5Rnd_762x63_M1", "SPE_5Rnd_762x63_M2_AP"], [], ""],
     ["SPEX_No4_Mk1_Enfield_Scoped_dunkel", "", "", "", ["SPEX_10Rnd_770x56_AP_MKI"], [], ""]
 ]];
 _sfLoadoutData set ["sniperRifles", [
+    ["SPE_M1903A4_Springfield", "", "", "", ["SPE_5Rnd_762x63", "SPE_5Rnd_762x63_t", "SPE_5Rnd_762x63_M1", "SPE_5Rnd_762x63_M2_AP"], [], ""],
     ["SPEX_No4_Mk1_Enfield_Scoped_dunkel", "", "", "", ["SPEX_10Rnd_770x56_AP_MKI"], [], ""]
 ]];
 _sfLoadoutData set ["sidearms", ["SPE_M1911"]];
@@ -315,7 +322,7 @@ _policeLoadoutData set ["shotGuns", [
     ["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""],
     ["SPE_Model_37_Riotgun", "", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""]
 ]];
-_policeLoadoutData set ["sidearms", ["SPEX_Enfield_No2_late", "SPEX_Enfield_No2"]];
+_policeLoadoutData set ["sidearms", ["SEP_WP_PPK", "SEP_WP_PPK_PW"]];
 _policeLoadoutData set ["slSidearms", ["SPEX_Enfield_No2_late", "SPEX_Enfield_No2"]];
 
 ////////////////////////////////
@@ -545,32 +552,68 @@ private _explosivesExpertTemplate = {
     ["Flashlight"] call _fnc_addNVGs;
 };
 
-private _engineerTemplate = {
+VAR_ACAF_FlamerThrower = 0;
+private _flamethrowerTemplate = {
     ["helmets"] call _fnc_setHelmet;
     [["engVests", "vests"] call _fnc_fallback] call _fnc_setVest;
-    [["engUniforms", "uniforms"] call _fnc_fallback] call _fnc_setUniform;
-    [["engBackpacks", "backpacks"] call _fnc_fallback] call _fnc_setBackpack;
 
-    [selectRandom ["shotGuns", "shotGuns", "carbines", "SMGs"]] call _fnc_setPrimary;
-    ["primary", 8] call _fnc_addMagazines;
+    ["flamethrowerSuit"] call _fnc_setUniform;
+    ["flamethrowerPack"] call _fnc_setBackpack;
+    ["flamethrowerMask"] call _fnc_setFacewear;
+
+    ["flamethrower"] call _fnc_setPrimary;
+
+    ["primary", 2] call _fnc_addMagazines;
 
     ["slSidearms"] call _fnc_setHandgun;
-    ["handgun", 2] call _fnc_addMagazines;
+    ["handgun", 4] call _fnc_addMagazines;
 
     ["items_medical_standard"] call _fnc_addItemSet;
-    ["items_engineer_extras"] call _fnc_addItemSet;
     ["items_miscEssentials"] call _fnc_addItemSet;
 
-    if (random 1 > 0.5) then {["lightExplosives", 3] call _fnc_addItem;};
-
-    ["antiInfantryGrenades", 1] call _fnc_addItem;
-    ["smokeGrenades", 2] call _fnc_addItem;
+    ["antiInfantryGrenades", 2] call _fnc_addItem;
+    ["smokeGrenades", 4] call _fnc_addItem;
 
     ["maps"] call _fnc_addMap;
     ["watches"] call _fnc_addWatch;
     ["compasses"] call _fnc_addCompass;
     ["radios"] call _fnc_addRadio;
     ["Flashlight"] call _fnc_addNVGs;
+};
+
+private _engineerTemplate = {
+    VAR_ACAF_FlamerThrower = VAR_ACAF_FlamerThrower + 1;
+    if (VAR_ACAF_FlamerThrower == 5 OR VAR_ACAF_FlamerThrower == 10) then {
+        call _flamethrowerTemplate;
+    } 
+    else 
+    {    
+        ["helmets"] call _fnc_setHelmet;
+        [["engVests", "vests"] call _fnc_fallback] call _fnc_setVest;
+        [["engUniforms", "uniforms"] call _fnc_fallback] call _fnc_setUniform;
+        [["engBackpacks", "backpacks"] call _fnc_fallback] call _fnc_setBackpack;
+
+        [selectRandom ["shotGuns", "shotGuns", "carbines", "SMGs"]] call _fnc_setPrimary;
+        ["primary", 8] call _fnc_addMagazines;
+
+        ["slSidearms"] call _fnc_setHandgun;
+        ["handgun", 2] call _fnc_addMagazines;
+
+        ["items_medical_standard"] call _fnc_addItemSet;
+        ["items_engineer_extras"] call _fnc_addItemSet;
+        ["items_miscEssentials"] call _fnc_addItemSet;
+
+        if (random 1 > 0.5) then {["lightExplosives", 3] call _fnc_addItem;};
+
+        ["antiInfantryGrenades", 1] call _fnc_addItem;
+        ["smokeGrenades", 2] call _fnc_addItem;
+
+        ["maps"] call _fnc_addMap;
+        ["watches"] call _fnc_addWatch;
+        ["compasses"] call _fnc_addCompass;
+        ["radios"] call _fnc_addRadio;
+        ["Flashlight"] call _fnc_addNVGs;
+    };
 };
 
 private _latTemplate = {

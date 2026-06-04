@@ -156,7 +156,7 @@ _loadoutData set ["sniperRifles", [
 
 _loadoutData set ["lightATLaunchers", ["SPE_PzFaust_60m", "SPE_PzFaust_30m", "SPE_Faustpatrone"]];
 _loadoutData set ["ATLaunchers", ["SPE_RPzB_43","SPE_RPzB_54"]];
-_loadoutData set ["sidearms", ["SPE_P08"]];
+_loadoutData set ["sidearms", ["SPE_P08", "SEP_WP_A300", "SEP_WP_A300_32ACP", "SEP_WP_PPK", "SEP_WP_PPK_PW"]];
 
 _loadoutData set ["ATMines", ["SPE_TMI_42_MINE_mag"]];
 _loadoutData set ["APMines", ["SPE_shumine_42_MINE_mag"]];
@@ -261,6 +261,11 @@ _sfLoadoutData set ["slRifles", [
 ["SPE_G43", "", "", "", ["SPE_10Rnd_792x57", "SPE_10Rnd_792x57", "SPE_10Rnd_792x57_T"], [], ""],
 ["SPE_STG44", "", "", "", ["SPE_30Rnd_792x33", "SPE_30Rnd_792x33", "SPE_30rnd_792x33_t"], [], ""]
 ]];
+_sfLoadoutData set ["SMGs", [
+["SPE_MP35", "", "", "", ["SPE_32rnd_MP35_9x19_t", "SPE_32Rnd_MP35_9x19", "SPE_24Rnd_MP35_9x19", "SPE_24rnd_MP35_9x19_t"], [], ""],
+["SPE_MP40", "", "", "", ["SPE_32Rnd_9x19", "SPE_32Rnd_9x19", "SPE_32rnd_9x19_t"], [], ""],
+["SEP_WP_MP28", "", "", "", ["SEP_WP_MP28_Mag"], [], ""]
+]];
 _sfLoadoutData set ["grenadeLaunchers", [
 ["SPE_K98_Late_GW", "SPE_ACC_GW_SB_Empty", "", "", ["SPE_5Rnd_792x57_SMK", "SPE_5Rnd_792x57_SMK", "SPE_5Rnd_792x57_t"], ["SPE_1Rnd_G_PZGR_30", "SPE_1Rnd_G_SPRGR_30", "SPE_1Rnd_G_FLGR", "SPE_1Rnd_G_NBGR_42"], ""],
 ["SPE_K98_Late_GW", "SPE_ACC_GW_SB_Empty", "", "", ["SPE_5Rnd_792x57_SMK", "SPE_5Rnd_792x57_SMK", "SPE_5Rnd_792x57_t"], ["SPE_1Rnd_G_PZGR_40", "SPE_1Rnd_G_SPRGR_30", "SPE_1Rnd_G_FLGR", "SPE_1Rnd_G_NBGR_42"], ""]
@@ -298,7 +303,7 @@ _militaryLoadoutData set ["tankBackpack", ["B_SPE_GER_Flammenwerfer_41"]];
 
 private _policeLoadoutData = _loadoutData call _fnc_copyLoadoutData;
 
-_policeLoadoutData set ["uniforms", ["SEP_B_GER_U_Mantel_M36_Gaiters"]];
+_policeLoadoutData set ["uniforms", ["SEP_B_GER_LW_U_Mantel", "SEP_B_GER_LW_U_Mantel_Gaiters"]];
 _policeLoadoutData set ["vests", ["V_SPE_FFI_Vest_rifle", "V_SPE_FFI_Vest_rifle_frag","V_SPE_FFI_Vest_rifle_pouch"]];
 _policeLoadoutData set ["helmets", ["SEP_B_GER_H_Stahlhelm_M35_gry"]];
 _policeLoadoutData set ["slHelmets", ["SEP_B_GER_H_Stahlhelm_M35_gry"]];
@@ -347,7 +352,7 @@ _militiaLoadoutData set ["slHelmets", ["SEP_B_GER_H_FieldCap_Gry"]];
 _militiaLoadoutData set ["facewear", []];
 
 _militiaLoadoutData set ["ATLaunchers", []];
-_militiaLoadoutData set ["sidearms", []];
+_militiaLoadoutData set ["sidearms", ["SEP_WP_A300", "SEP_WP_A300_32ACP", "SEP_WP_PPK", "SEP_WP_PPK_PW"]];
 
 _militiaLoadoutData set ["rifles", [
 ["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr98_Bayo", "", "", [], [], ""],
@@ -367,6 +372,7 @@ _militiaLoadoutData set ["slRifles", [
 ["SPE_MP40", "", "", "", ["SPE_32Rnd_9x19"], [], ""]
 ]];
 _militiaLoadoutData set ["grenadeLaunchers", [
+["SPE_K98_GW", "SPE_ACC_GW_SB_Empty", "", "", ["SPE_5Rnd_792x57", "SPE_5Rnd_792x57", "SPE_5Rnd_792x57_t"], ["SPE_1Rnd_G_SPRGR_30", "SPE_1Rnd_G_SPRGR_30", "SPE_1Rnd_G_FLGR", "SPE_1Rnd_G_NBGR_42"], ""],
 ["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr98_Bayo", "", "", [], [], ""],
 ["SEP_WP_Gewehr98", "", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
@@ -386,8 +392,9 @@ _militiaLoadoutData set ["SMGs", [
 ["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],
 ["SPE_K98", "", "", "", [], [], ""],
 ["SPE_K98_Late", "", "", "", [], [], ""],
-["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""],
-["SPE_Sten_Mk2", "", "", "", ["SPE_32Rnd_9x19_Sten"], [], ""]
+["SEP_WP_MP18", "", "", "", ["SEP_WP_MP18_Mag"], [], ""],
+["SEP_WP_MP18", "", "", "", ["SEP_WP_MP18_Mag"], [], ""],
+["SEP_WP_MP18", "", "", "", ["SEP_WP_MP18_Mag"], [], ""]
 ]];
 _militiaLoadoutData set ["machineGuns", [
 ["SEP_WP_Gewehr98", "SEP_WP_ACC_Gewehr9805_Bayo", "", "", [], [], ""],

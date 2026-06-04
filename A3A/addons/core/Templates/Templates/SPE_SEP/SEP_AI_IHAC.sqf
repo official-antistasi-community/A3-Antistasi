@@ -79,7 +79,7 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 
 ["vehiclesPolice", ["SEP_I_IHTC_G503_MB"]] call _fnc_saveToTemplate;
 
-["staticMGs", ["SEP_I_IHTC_FM24_M24_Bipod"]] call _fnc_saveToTemplate;
+["staticMGs", ["a3a_hmg_02_high"]] call _fnc_saveToTemplate;
 ["staticAT", ["SPE_57mm_M1"]] call _fnc_saveToTemplate;
 ["staticAA", ["SPE_FR_M45_Quadmount"]] call _fnc_saveToTemplate;
 ["staticMortars", ["SEP_I_IHTC_MLE_27_31"]] call _fnc_saveToTemplate;
@@ -113,7 +113,7 @@ private _loadoutData = call _fnc_createLoadoutData;
 _loadoutData set ["rifles", [
 ["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54_35P_AP", "SPE_5Rnd_75x54", "SPE_5Rnd_75x54", "SPE_5Rnd_75x54"], [], ""],
 ["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54_35P_AP", "SPE_5Rnd_75x54", "SPE_5Rnd_75x54", "SPE_5Rnd_75x54"], [], ""],
-["SEP_WP_W_M1917_Enfield", "", "", "", ["SPE_5Rnd_762x63", "SPE_5Rnd_762x63", "SPE_5Rnd_762x63", "SPE_5Rnd_762x63_t", "SPE_5Rnd_762x63_M1", "SPE_5Rnd_762x63_M2_AP"], [], ""]
+["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56", "SPE_5Rnd_770x56_MKVIII", "SPE_5Rnd_770x56_AP_MKI"], [], ""]
 ]];
 _loadoutData set ["slRifles", [
 ["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54_35P_AP", "SPE_5Rnd_75x54", "SPE_5Rnd_75x54", "SPE_5Rnd_75x54"], [], ""],
@@ -186,6 +186,11 @@ _loadoutData set ["uniforms", ["SEP_I_IHTC_U_HBT_Rolled_Khk", "SEP_I_IHTC_U_HBT_
 _loadoutData set ["medUniforms", ["SEP_I_IHTC_U_HBT_Medic_Khk", "SEP_I_IHTC_U_HBT_Medic_Rolled_Khk", "SEP_I_IHTC_U_HBT_Medic_Rolled_Khk"]];
 _loadoutData set ["engUniforms", []];
 _loadoutData set ["slUniforms", []];
+
+_loadoutData set ["flamethrower", ["SPE_M2_Flamethrower"]];
+_loadoutData set ["flamethrowerPack", ["B_SPE_US_M2Flamethrower"]];
+_loadoutData set ["flamethrowerSuit", ["U_SPE_US_S31_erla_boot"]];
+_loadoutData set ["flamethrowerMask", ["G_SPE_GER_GM30"]];
 
 _loadoutData set ["vests", ["V_SPE_US_Vest_Carbine", "V_SPE_US_Vest_Garand", "V_SPE_US_Vest_Garand_M43"]];
 _loadoutData set ["glVests", ["V_SPE_US_Vest_Grenadier"]];
@@ -325,7 +330,7 @@ _militiaLoadoutData set ["ATLaunchers", []];
 _militiaLoadoutData set ["sidearms", []];
 
 _militiaLoadoutData set ["rifles", [
-["SEP_WP_W_M1917_Enfield", "", "", "", ["SPE_5Rnd_762x63_t"], [], ""],
+["SPE_No3_Mk1_Enfield", "", "", "", ["SPE_5Rnd_770x56", "SPE_5Rnd_770x56_MKVIII"], [], ""],
 ["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""],
 ["SPE_MAS_36", "", "", "", ["SPE_5Rnd_75x54"], [], ""],
 ["SPE_Model_37_Trenchgun", "SPE_ACC_M1917_Bayo", "", "", ["SPE_5Rnd_12x70_Slug", "SPE_5Rnd_12x70_Pellets", "SPE_5Rnd_12x70_Slug"], [], ""]
@@ -521,10 +526,10 @@ private _explosivesExpertTemplate = {
     ["items_explosivesExpert_extras"] call _fnc_addItemSet;
     ["items_miscEssentials"] call _fnc_addItemSet;
 
-    ["lightExplosives", 4] call _fnc_addItem;
-    if (random 1 > 0.5) then {["heavyExplosives", 2] call _fnc_addItem;};
-    if (random 1 > 0.5) then {["atMines", 2] call _fnc_addItem;};
-    if (random 1 > 0.5) then {["apMines", 2] call _fnc_addItem;};
+    ["lightExplosives", 2 + round(random 2)] call _fnc_addItem;
+    ["heavyExplosives", round(random 2)] call _fnc_addItem;
+    ["atMines", round(random 2)] call _fnc_addItem;
+    ["apMines", round(random 2)] call _fnc_addItem;
 
     ["antiInfantryGrenades", 1] call _fnc_addItem;
     ["smokeGrenades", 1] call _fnc_addItem;
@@ -536,32 +541,68 @@ private _explosivesExpertTemplate = {
     ["Flashlight"] call _fnc_addNVGs;
 };
 
-private _engineerTemplate = {
+VAR_IHAC_FlamerThrower = 0;
+private _flamethrowerTemplate = {
     ["helmets"] call _fnc_setHelmet;
     [["engVests", "vests"] call _fnc_fallback] call _fnc_setVest;
-    [["engUniforms", "uniforms"] call _fnc_fallback] call _fnc_setUniform;
-    [["engBackpacks", "backpacks"] call _fnc_fallback] call _fnc_setBackpack;
 
-    [selectRandom ["shotGuns", "shotGuns", "carbines", "SMGs"]] call _fnc_setPrimary;
-    ["primary", 8] call _fnc_addMagazines;
+    ["flamethrowerSuit"] call _fnc_setUniform;
+    ["flamethrowerPack"] call _fnc_setBackpack;
+    ["flamethrowerMask"] call _fnc_setFacewear;
 
-    ["sidearms"] call _fnc_setHandgun;
-    ["handgun", 2] call _fnc_addMagazines;
+    ["flamethrower"] call _fnc_setPrimary;
+
+    ["primary", 2] call _fnc_addMagazines;
+
+    ["slSidearms"] call _fnc_setHandgun;
+    ["handgun", 4] call _fnc_addMagazines;
 
     ["items_medical_standard"] call _fnc_addItemSet;
-    ["items_engineer_extras"] call _fnc_addItemSet;
     ["items_miscEssentials"] call _fnc_addItemSet;
 
-    if (random 1 > 0.5) then {["lightExplosives", 3] call _fnc_addItem;};
-
-    ["antiInfantryGrenades", 1] call _fnc_addItem;
-    ["smokeGrenades", 2] call _fnc_addItem;
+    ["antiInfantryGrenades", 2] call _fnc_addItem;
+    ["smokeGrenades", 4] call _fnc_addItem;
 
     ["maps"] call _fnc_addMap;
     ["watches"] call _fnc_addWatch;
     ["compasses"] call _fnc_addCompass;
     ["radios"] call _fnc_addRadio;
     ["Flashlight"] call _fnc_addNVGs;
+};
+
+private _engineerTemplate = {
+    VAR_IHAC_FlamerThrower = VAR_IHAC_FlamerThrower + 1;
+    if (VAR_IHAC_FlamerThrower == 5 OR VAR_IHAC_FlamerThrower == 10) then {
+        call _flamethrowerTemplate;
+    } 
+    else 
+    {    
+        ["helmets"] call _fnc_setHelmet;
+        [["engVests", "vests"] call _fnc_fallback] call _fnc_setVest;
+        [["engUniforms", "uniforms"] call _fnc_fallback] call _fnc_setUniform;
+        [["engBackpacks", "backpacks"] call _fnc_fallback] call _fnc_setBackpack;
+
+        [selectRandom ["shotGuns", "shotGuns", "carbines", "SMGs"]] call _fnc_setPrimary;
+        ["primary", 8] call _fnc_addMagazines;
+
+        ["sidearms"] call _fnc_setHandgun;
+        ["handgun", 2] call _fnc_addMagazines;
+
+        ["items_medical_standard"] call _fnc_addItemSet;
+        ["items_engineer_extras"] call _fnc_addItemSet;
+        ["items_miscEssentials"] call _fnc_addItemSet;
+
+        if (random 1 > 0.5) then {["lightExplosives", 1 + round(random 2.6)] call _fnc_addItem;};
+
+        ["antiInfantryGrenades", 1] call _fnc_addItem;
+        ["smokeGrenades", 2] call _fnc_addItem;
+
+        ["maps"] call _fnc_addMap;
+        ["watches"] call _fnc_addWatch;
+        ["compasses"] call _fnc_addCompass;
+        ["radios"] call _fnc_addRadio;
+        ["Flashlight"] call _fnc_addNVGs;
+    };
 };
 
 private _latTemplate = {
