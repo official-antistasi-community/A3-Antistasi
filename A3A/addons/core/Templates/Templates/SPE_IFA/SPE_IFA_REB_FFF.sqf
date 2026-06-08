@@ -45,6 +45,11 @@
 ["vehiclesCivBoat", ["B_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
 ["vehiclesCivPlane", []] call _fnc_saveToTemplate;
 
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    ["vehiclesPlane", ["sab_fl_ju52", "sab_fl_yak3"]] call _fnc_saveToTemplate;
+    ["vehiclesBasic", ["SPE_FFI_R200_Unarmed","sab_fl_airfieldtractor","sab_fl_scooter_53"]] call _fnc_saveToTemplate;
+};
+
 ["staticMGs", ["SPE_MG34_Lafette_Deployed"]] call _fnc_saveToTemplate;
 ["staticAT", ["SPE_FR_57mm_M1"]] call _fnc_saveToTemplate;
 ["staticAA", ["SPE_FR_M45_Quadmount"]] call _fnc_saveToTemplate;
