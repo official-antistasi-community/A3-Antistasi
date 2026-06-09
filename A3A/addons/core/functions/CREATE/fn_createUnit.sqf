@@ -38,11 +38,15 @@ private _unit = if (_unitDefinition isEqualTo []) then {
     _group createUnit [_type, _position, _markers, _placement, _special];
 } else {
     _unitDefinition params ["_loadouts", "_traits", "_unitClass"];
-    private _u = _group createUnit [_unitClass, _position, _markers, _placement, _special];
-    if !(_unitClass in A3A_customUnitClasses) then {
-        [_u] joinSilent grpNull;
-        (group _u) deleteGroupWhenEmpty true;
+    _u = if (_unitClass in A3A_customSkeletonClasses) then {
+        private _targetSide = side _group;
+        private _tempGroup = createGroup _targetSide;
+        _u = _tempGroup createUnit [_unitClass, _position, _markers, _placement, _special];
+        _tempGroup deleteGroupWhenEmpty true;
         [_u] joinSilent _group;
+        _u;
+    } else {
+        _group createUnit [_unitClass, _position, _markers, _placement, _special];
     };
 
     // shuffle select, uses each entry once until empty, then refills
@@ -56,7 +60,7 @@ private _unit = if (_unitDefinition isEqualTo []) then {
 };
 
 _unit setVariable ["unitType", _type, true];
-
+diag_log ["_side2", side _unit];
 private _identity = if (isNil "_identity") then {
     [Faction(side _unit), _type] call A3A_fnc_createRandomIdentity;
 } else {

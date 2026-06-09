@@ -64,11 +64,15 @@ private _allDefinitions = _faction get "loadouts";
 {
     private _loadoutName = _x;
     private _unitDef = +_y;
-    if (_unitDef # 2 == "") then {
+    private _customClass = _unitDef # 2;
+    if (_customClass == "") then {
         _unitDef set [2, _unitClassMap getOrDefault [_loadoutName, _baseUnitClass]];
+    } else {
+        A3A_customSkeletonClasses pushBackUnique _customClass;
     };
     [_loadoutsPrefix + _loadoutName, _unitDef] call A3A_fnc_registerUnitType;
 } forEach _allDefinitions;
+publicVariable "A3A_customSkeletonClasses";
 
 #if __A3_DEBUG__
     [_faction, _side, _file] call A3A_fnc_TV_verifyAssets;

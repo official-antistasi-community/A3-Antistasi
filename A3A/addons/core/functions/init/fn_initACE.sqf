@@ -62,5 +62,5 @@ if (isNil "ace_interact_menu_fnc_compileMenu" || isNil "ace_interact_menu_fnc_co
     [_x, 0, ["ACE_ApplyHandcuffs"]] call ace_interact_menu_fnc_removeActionFromClass;
     [_x, 1, ["ACE_SelfActions", "ACE_TeamManagement", "ACE_LeaveGroup"]] call ace_interact_menu_fnc_removeActionFromClass;
     [_x, 0, ["ACE_MainActions", "ACE_JoinGroup"]] call ace_interact_menu_fnc_removeActionFromClass;
-} forEach A3A_customUnitClasses;			// TODO: add raw unit types from new templates
+} forEach (A3A_customUnitClasses + A3A_customSkeletonClasses);
 
