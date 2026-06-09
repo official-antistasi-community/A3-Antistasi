@@ -60,7 +60,6 @@ private _unit = if (_unitDefinition isEqualTo []) then {
 };
 
 _unit setVariable ["unitType", _type, true];
-diag_log ["_side2", side _unit];
 private _identity = if (isNil "_identity") then {
     [Faction(side _unit), _type] call A3A_fnc_createRandomIdentity;
 } else {
