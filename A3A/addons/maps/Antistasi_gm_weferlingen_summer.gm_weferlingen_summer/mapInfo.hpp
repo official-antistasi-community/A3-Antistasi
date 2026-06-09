@@ -1,6 +1,6 @@
 class gm_weferlingen_summer {
 	population[] = {
-		{"gm_name_grasleben",250},{"gm_name_weferlingen",420},{"gm_name_doehren",150},{"gm_name_seggerde",50},{"gm_name_belsdorf",110},{"gm_name_behnsdorf",2010},{"gm_name_eschenrode",125},{"gm_name_walbeck",215},{"gm_name_beendorf",175},{"gm_name_mariental",100},{"gm_name_querenhorst",110},{"gm_name_bahrdorf",275},{"DefaultKeyPoint53",90},{"DefaultKeyPoint1",160},{"DefaultKeyPoint2",65},{"DefaultKeyPoint3",120},{"DefaultKeyPoint4",218},{"DefaultKeyPoint5",147},{"DefaultKeyPoint6",325},{"DefaultKeyPoint7",100},{"DefaultKeyPoint8",201},{"DefaultKeyPoint9",164},{"DefaultKeyPoint10",194},{"DefaultKeyPoint11",104},{"DefaultKeyPoint12",121},{"DefaultKeyPoint13",94},{"DefaultKeyPoint14",43},{"DefaultKeyPoint15",70},{"DefaultKeyPoint17",69},{"DefaultKeyPoint18",179},{"DefaultKeyPoint19",152},{"DefaultKeyPoint20",88},{"DefaultKeyPoint21",97},{"DefaultKeyPoint22",135},{"DefaultKeyPoint23",50},{"DefaultKeyPoint24",52},{"DefaultKeyPoint25",57},{"DefaultKeyPoint26",89},{"DefaultKeyPoint27",147},{"DefaultKeyPoint28",240},{"DefaultKeyPoint29",124},{"DefaultKeyPoint30",75},{"DefaultKeyPoint44",133},{"DefaultKeyPoint157",180},{"DefaultKeyPoint158",42},{"DefaultKeyPoint159",142},{"DefaultKeyPoint160",69},{"DefaultKeyPoint161",72},{"DefaultKeyPoint162",59}
+		{"gm_name_grasleben",250},{"gm_name_weferlingen",420},{"gm_name_doehren",150},{"gm_name_seggerde",50},{"gm_name_belsdorf",110},{"gm_name_behnsdorf",130},{"gm_name_eschenrode",125},{"gm_name_walbeck",215},{"gm_name_beendorf",175},{"gm_name_mariental",100},{"gm_name_querenhorst",110},{"gm_name_bahrdorf",275},{"DefaultKeyPoint53",90},{"DefaultKeyPoint1",160},{"DefaultKeyPoint2",65},{"DefaultKeyPoint3",120},{"DefaultKeyPoint4",218},{"DefaultKeyPoint5",147},{"DefaultKeyPoint6",325},{"DefaultKeyPoint7",100},{"DefaultKeyPoint8",201},{"DefaultKeyPoint9",164},{"DefaultKeyPoint10",194},{"DefaultKeyPoint11",104},{"DefaultKeyPoint12",121},{"DefaultKeyPoint13",94},{"DefaultKeyPoint14",43},{"DefaultKeyPoint15",70},{"DefaultKeyPoint17",69},{"DefaultKeyPoint18",179},{"DefaultKeyPoint19",152},{"DefaultKeyPoint20",88},{"DefaultKeyPoint21",97},{"DefaultKeyPoint22",135},{"DefaultKeyPoint23",50},{"DefaultKeyPoint24",52},{"DefaultKeyPoint25",57},{"DefaultKeyPoint26",89},{"DefaultKeyPoint27",147},{"DefaultKeyPoint28",240},{"DefaultKeyPoint29",124},{"DefaultKeyPoint30",75},{"DefaultKeyPoint44",133},{"DefaultKeyPoint157",180},{"DefaultKeyPoint158",42},{"DefaultKeyPoint159",142},{"DefaultKeyPoint160",69},{"DefaultKeyPoint161",72},{"DefaultKeyPoint162",59}
 	};
 	disabledTowns[] = {}; //no towns that need to be disabled
 	antennas[] = {
@@ -8,6 +8,7 @@ class gm_weferlingen_summer {
 	};
 	antennasBlacklistIndex[] = {};
 	banks[] = {
+		{9482.54,16294.2,0},{5632.18,3452.44,0},{18481.8,366.847,0},{15444,530.332,0},{19565.5,8487.71,0},{10624.8,11363.7,0},{15892,14334.9,0},{10364.2,7738.25,0},{3733.85,15091.6,0},{8163.97,4320.44,0},{5820.69,14076.6,0},{17148.9,17916.4,0},{16373.1,9702.76,0},{4836.31,18740.4,0},{13918.3,4853.75,0},{13049.1,8443.13,0}
 	};
 	garrison[] = {
 		{},{"airport_4","outpost_8","outpost_16","outpost_19","resource_6","resource_7","control_3","control_4","control_8","control_9","control_10","control_29"},{},{"control_3","control_4","control_8","control_9","control_10","control_29"}
@@ -15,7 +16,7 @@ class gm_weferlingen_summer {
 	fuelStationTypes[] = {
 		"Land_Fuelstation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_03_pump_F","Land_FuelStation_02_pump_F","land_gm_euro_fuelpump_01_e","land_gm_euro_fuelpump_02_e","land_gm_euro_fuelpump_02_w","land_gm_euro_fuelpump_01_w"
 	};
-	climate = "arid";
+	climate = "temperate";
 	buildObjects[] = {
 		//barbed wire
 		{"land_gm_barbedwire_01", 5},{"land_gm_barbedwire_02", 5},
@@ -33,6 +34,18 @@ class gm_weferlingen_summer {
 		//small bunker
 		{"Land_Bunker_02_double_F", 500},
 		//big bunker
-		{"land_gm_bunker_command_01", 5000}
+		{"land_gm_bunker_command_01", 5000},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"land_gm_euro_house_11_d", "land_gm_euro_house_11_e", "land_gm_euro_house_11_w", "land_gm_euro_house_02_d", "land_gm_euro_house_02_e", "land_gm_euro_house_02_w",
+		"land_gm_euro_house_06_w", "land_gm_euro_house_06_d", "land_gm_euro_house_06_e", "land_gm_euro_house_09_d", "land_gm_euro_house_09_e", "land_gm_euro_house_09_w",
+		"land_gm_euro_house_10_w", "land_gm_euro_house_10_d", "land_gm_euro_house_10_e", "land_gm_euro_house_12_d", "land_gm_euro_house_12_e", "land_gm_euro_house_12_w",
+		"land_gm_euro_house_08_w", "land_gm_euro_house_08_d", "land_gm_euro_house_08_e"
+	};
+	requiredMods = "Global Mobilization CDLC";
+	size = 20.5;
+	cityCount = 49;
+	airbaseCount = 4;
 };

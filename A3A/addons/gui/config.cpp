@@ -15,14 +15,41 @@ class CfgPatches {
     };
 };
 
+class A3A {
 #if __A3_DEBUG__
-    class A3A {
-        #include "CfgFunctions.hpp"
+    #include "CfgFunctions.hpp"
+#endif
+};
+
+#if __A3_DEBUG__
+    class CfgFunctions {
+        class A3A_GUI {
+            class mainMenu {
+                file = QPATHTOFOLDER(functions\mainMenu);
+                class bugReportDialog {};
+                class communityAdDialog {};
+                class mapSelectorDialog {};
+                class optionsDialog {};
+                class remarksDialog {};
+                class showInterruptButtons {};
+            };
+        };
     };
 #else
     #include "CfgFunctions.hpp"
 #endif
 
+class CfgCommands
+{
+	allowedHTMLLoadURIs[] +=
+	{
+		"https://github.com/official-antistasi-community/*",
+		"https://antistasi.de",
+        "https://antistasi.de/*",
+		"https://discord.gg/*",
+        "https://twitter.com/antistasio"
+	};
+};
 
 // Whether order should be maintained is unknown.
 #include "dialogues\defines.hpp"
@@ -30,3 +57,6 @@ class CfgPatches {
 #include "dialogues\controls.hpp"
 #include "dialogues\dialogs.hpp"
 #include "dialogues\rsc.hpp"
+
+#include "mainmenu.hpp"
+#include "interruptMenu.hpp"

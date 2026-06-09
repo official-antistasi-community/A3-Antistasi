@@ -69,7 +69,13 @@ if (_bodyText isEqualType parseText"") then {
 
 if (A3A_customHintEnable) then {
     private _index = A3A_customHint_MSGs findIf {(_x #0) isEqualTo _headerText}; // Temporary solution until an programming-interface is added for counters and timers.
-    if (_index isEqualTo -1) then {
+
+    // If we updated the message then bring it to the top
+    if (_index != -1) then { A3A_customHint_MSGs deleteAt _index };
+    A3A_customHint_MSGs pushBack [_headerText,_structuredText,_isSilent];
+    A3A_customHint_UpdateTime = serverTime;
+
+/*    if (_index isEqualTo -1) then {
         A3A_customHint_MSGs pushBack [_headerText,_structuredText,_isSilent];
     } else {
         A3A_customHint_MSGs set [_index,[_headerText,_structuredText,_isSilent]];
@@ -78,6 +84,7 @@ if (A3A_customHintEnable) then {
     if (A3A_customHint_MSGs #(_lastMSGIndex)#0 isEqualTo _headerText) then {
         A3A_customHint_UpdateTime = serverTime;
     };
+*/
 } else {
     _structuredText = composeText [parseText ("<img size='2.1' color='#ffffffff' shadowOffset='0.06' image='"+ QPATHTOFOLDER(functions\UI\images\logo.paa) + "' /><br/>"),_structuredText];
     if (_isSilent) then {

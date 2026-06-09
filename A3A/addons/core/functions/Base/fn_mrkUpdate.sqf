@@ -23,18 +23,20 @@ private _mrkText = call {
     if (_marker in resourcesX) exitWith { "Resources" };
     if (_marker in factories) exitWith { "Factory" };
     if (_marker in seaports) exitWith { "Sea Port" };
+    if (_marker in outpostsFIA) exitWith { 
+        private _strTable = ["STR_A3A_fn_base_croutpFIA_watchpost", "STR_A3A_fn_base_croutpFIA_roadblock"] select (isOnRoad markerPos _mrkD);
+        format [localize _strTable, _faction get "name"];
+    };
     ""; 		// city
 };
 
 if (_mrkSide == teamPlayer) then {
-    private _numTroops = count (garrison getVariable [_marker, []]);
+    private _numTroops = count (A3A_garrison get _marker get "troops");
     private _limit = [_marker] call A3A_fnc_getGarrisonLimit;
     if (_numTroops > 0) then { 
-        _mrkText = format ["%1: %2%3", 
-            _mrkText, 
-            _numTroops, 
+        _mrkText = format ["%1: %2%3", _mrkText, _numTroops, 
             if (_limit != -1) then {format ["/%1", _limit]} else {""}
-        ]; 
+        ];
     };
 };
 _mrkD setMarkerText _mrkText;

@@ -12,7 +12,7 @@ Returns:
     <ARRAY> Navgrid indices from start to end, or false if none found or max dist exceeded
 */
 
-params ["_start", "_end", ["_maxDist", 1e5]];
+params ["_start", "_end", ["_maxDist", 1e5], ["_debug", false]];
 
 private _startIndex = if (_start isEqualType 0) then { _start } else { [_start] call A3A_fnc_getNearestNavPoint };
 private _endIndex = if (_end isEqualType 0) then { _end } else { [_end] call A3A_fnc_getNearestNavPoint };
@@ -26,11 +26,11 @@ if (NavGrid#_startIndex#1 != NavGrid#_endIndex#1) exitWith { false };          /
 private _endPos = NavGrid#_endIndex#0;
 private _curEntry = [0, _startIndex, 0, 0, false];            // curGH is really (NavGrid#_startIndex#0 distance2d _endPos), but not accessed here
 private _open = [];
-private _touched = createHashMapFromArray [[_startIndex, true]];
+private _touched = createHashMapFromArray [[_startIndex, 0]];
 private _success = false;
 
 private ["_newIndex", "_newG", "_newH", "_newRealG"];      // optimization
-private _roadTypeMul = [2,1,0.5];               // road type to distance multiplier lookup
+private _roadTypeMul = [1,0.8,0.6];               // road type to distance multiplier lookup
 
 scopeName "main";
 while {!isNil "_curEntry"} do
@@ -46,7 +46,7 @@ while {!isNil "_curEntry"} do
         _newRealG = _realG + (_x#2);
         _newH = 1.2*(NavGrid#_newIndex#0 distance _endPos);
         if (_newRealG + _newH < _maxDist) then { _open pushBack [_newG + _newH, _newIndex, _newG, _newRealG, _curEntry] };
-        _touched set [_newIndex, true];
+        _touched set [_newIndex, count _touched];
 
     } forEach (NavGrid#_curIndex#3);
 
@@ -67,4 +67,20 @@ while {_curEntry#4 isEqualType []} do {
 };
 _route pushBack _startIndex;
 reverse _route;
+
+if (_debug) then {
+    for "_i" from 0 to (ras_count-1) do { deleteMarker format ["ras_r%1", _i] };
+    ras_count = count _touched;
+    {
+        _marker = createMarkerLocal [format ["ras_r%1", _forEachIndex], navGrid#_x#0];
+        _marker setMarkerTypeLocal "mil_dot";
+        _marker setMarkerTextLocal str _y;
+        private _color = call {
+            if (_x in [_startIndex, _endIndex]) exitWith {"colorblue"};
+            ["colorblack","colorgreen"] select (_x in _route);
+        };
+        _marker setMarkerColor _color;
+    } forEach _touched;
+};
+
 _route;

@@ -16,7 +16,6 @@ private _toDelete = [];
     {
         _y params ["_pos", "_type", "_siteSide", "_pairRef"];
         if (_side != _siteSide) then { continue };
-        if (spawner getVariable _x != 2) then { continue };         // only delete unspawned sites, because createAIcontrols can't handle it
 
         if (_enemyMarkers inAreaArrayIndexes [_pos, 700, 700] isNotEqualTo []) then { _toDelete pushBack _x; continue };
         if (_enemyAirports inAreaArrayIndexes [_pos, 1000, 1000] isNotEqualTo []) then { _toDelete pushBack _x; continue };
@@ -35,10 +34,6 @@ private _toDelete = [];
     } forEach A3A_minorSitesHM;
 } forEach [Occupants, Invaders];
 
-if (_toDelete isNotEqualTo []) then {
-    Info_1("Deleting minor markers %1", _toDelete);
-    { [_x] call A3A_fnc_deleteMinorSite } forEach _toDelete;
-};
 
 // Some placeholder stuff to add new roadblocks & camps
 _mainMarkers append airportsX;
@@ -65,7 +60,13 @@ _mainMarkers append airportsX;
 	};
 } forEach [Invaders, Occupants];
 
-if (_sitesChanged) then {
+if (_sitesChanged and _toDelete isEqualTo []) exitWith {
 	publicVariable "controlsX";
-	publicVariable "markersX";
 };
+
+// Hacky workaround: Delete sites after adding so that it doesn't re-add the same one and fuck up the marker accounting
+Info_1("Deleting minor markers %1", _toDelete);
+{
+    if (_x in A3A_markersToDelete) then { continue };
+    isNil { [_x, true] call A3A_fnc_garrisonServer_clear };         // calls deleteMinorSite after clearing garrison
+} forEach _toDelete;

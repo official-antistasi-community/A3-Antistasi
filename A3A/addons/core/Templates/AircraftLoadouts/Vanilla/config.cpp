@@ -85,6 +85,10 @@ class A3A {
                 loadout[] = { "PylonRack_4Rnd_LG_scalpel","PylonRack_20Rnd_Rocket_03_HE_F","PylonRack_20Rnd_Rocket_03_AP_F","PylonRack_4Rnd_LG_scalpel" };
             };
             class O_Heli_Attack_02_dynamicLoadout_black_F : O_Heli_Attack_02_dynamicLoadout_F {};
+            class B_Heli_Transport_01_pylons_F : baseHelicopter {
+                loadout[] = { "PylonRack_12Rnd_missiles","PylonRack_12Rnd_missiles","PylonRack_12Rnd_missiles","PylonRack_12Rnd_missiles" };
+            };
+            class a3a_Heli_Transport_01_pylons_green_F : B_Heli_Transport_01_pylons_F {};
         };
     };
 };

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="A3-Antistasi">
+  <Package name="Medical_Treatment">
+      <Key ID="STR_A3A_ESPRESSO_SHORT">
+        <Original>Espresso IV, for restoring a patients coffee levels</Original>
+      </Key>
+      <Key ID="STR_A3A_ESPRESSO_USE">
+        <Original>High quality Espresso, freshly brewed. Stored in a standard IV bag. Made with Guatemalan beans.</Original>
+      </Key>
+      <Key ID="STR_A3A_ESPRESSO_ACTION">
+        <Original>Transfusing Espresso...</Original>
+      </Key>
+      <Key ID="STR_A3A_ESPRESSO_1000">
+        <Original>Espresso (1000ml)</Original>
+      </Key>
+      <Key ID="STR_A3A_ESPRESSO_500">
+        <Original>Espresso (500ml)</Original>
+      </Key>
+      <Key ID="STR_A3A_ESPRESSO_250">
+        <Original>Espresso (250ml)</Original>
+      </Key>
+      <Key ID="STR_A3A_ESPRESSO_1000_GIVE">
+        <Original>Give Espresso IV (1000ml)</Original>
+      </Key>
+      <Key ID="STR_A3A_ESPRESSO_500_GIVE">
+        <Original>Give Espresso IV (500ml)</Original>
+      </Key>
+      <Key ID="STR_A3A_ESPRESSO_250_GIVE">
+        <Original>Give Espresso IV (250ml)</Original>
+      </Key>
+      <Key ID="STR_A3A_Medical_Treatment_receivingCoffee">
+          <Original>Receiving Espresso IV [%1ml]</Original>
+          <English>Receiving Espresso IV [%1ml]</English>
+      </Key>
+  </Package>
+</Project>

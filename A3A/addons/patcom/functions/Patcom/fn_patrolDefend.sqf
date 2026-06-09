@@ -35,7 +35,7 @@ params [
 
 private _leader = leader _group;
 
-[_group, "SAFE", "LIMITED", "COLUMN", "WHITE", "AUTO"] call A3A_fnc_patrolSetCombatModes;
+[_group, "SAFE", "NORMAL", "COLUMN", "YELLOW", "AUTO"] call A3A_fnc_patrolSetCombatModes;
 _group setVariable ["PATCOM_Group_State", "CALM"];
 
 if (PATCOM_DEBUG) then {

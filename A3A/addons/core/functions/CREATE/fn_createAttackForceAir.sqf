@@ -48,6 +48,7 @@ private _supportPool = [_side, tierWar+_tierMod] call A3A_fnc_getVehiclesAirSupp
 
 private _numTransports = 0;
 private _isTransport = _vehAttackCount < _vehCount;            // normal case, first vehicle should be a transport
+private _landPosBlacklist = [];
 
 for "_i" from 1 to _vehCount do {
     private _vehType = selectRandomWeighted ([_supportPool, _transportPool] select _isTransport);
@@ -56,7 +57,7 @@ for "_i" from 1 to _vehCount do {
         // no reveal because it's a sub-support, delay because it's faster than the helis
         [_vehType, _side, _resPool, 500, false, _targPos, 0, 60] remoteExec ["A3A_fnc_createSupport", 2];
     } else {
-        private _vehData = [_vehType, _troopType, _resPool, [], _side, _base, _targPos] call A3A_fnc_createAttackVehicle;
+        private _vehData = [_vehType, _troopType, _resPool, _landPosBlacklist, _side, _base, _targPos] call A3A_fnc_createAttackVehicle;
         if !(_vehData isEqualType []) exitWith {};          // couldn't create for some reason. Not sure why for air vehicles.
 
         _vehicles pushBack (_vehData#0);

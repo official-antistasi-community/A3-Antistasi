@@ -65,7 +65,7 @@
 ["staticMGs", ["UK3CB_ADA_I_DSHKM"]] call _fnc_saveToTemplate;
 ["staticAT", ["RHS_TOW_TriPod_WD"]] call _fnc_saveToTemplate;
 ["staticAA", ["UK3CB_ADA_I_Igla_AA_pod", "UK3CB_TKA_O_ZU23"]] call _fnc_saveToTemplate;
-["staticMortars", ["RHS_M252_D"]] call _fnc_saveToTemplate;
+["staticMortars", ["a3a_RHS_M252"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "rhs_12Rnd_m821_HE"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;

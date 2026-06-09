@@ -29,7 +29,7 @@ for "_i" from 0 to (_countX - 1) do
 	_unit allowDamage false;
 	if (_i <= _countRanks) then { _unit setRank (_ranks select _i) };
 	if ((_typesX select _i) in FactionGet(all,"SquadLeaders")) then {_groupX selectLeader _unit};
-	sleep 0.25;
+	sleep 0.1;
 };
 {_x allowDamage true} forEach units _groupX;
 _groupX

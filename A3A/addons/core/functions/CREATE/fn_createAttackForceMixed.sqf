@@ -12,7 +12,7 @@ Arguments:
     <STRING> Resource pool to use
     <INTEGER> Total number of vehicles to create
     <SCALAR> Minimum arrival delay in seconds. -1 will force immediate spawn, otherwise will attempt to sync air/ground arrival  
-    <ARRAY> Array of modifier strings: ["tierboost", "specops", "airboost", "noairsupport"]
+    <ARRAY> Array of modifier strings: ["tierboost", "specops", "airboost", "noairsupport", "lowair"]
     <STRING> Optional: Attack type for showInterceptedSetupCall. Won't show anything if missing
     <SCALAR> Optional: Reveal value for showInterceptedSetupCall
 
@@ -30,7 +30,7 @@ private _targPos = if (_target isEqualType []) then { _target } else { markerPos
 // _modifiers ["tierboost", "specops", "airboost", "noairsupport"]
 
 private _faction = Faction(_side);
-private _lowAir = _faction getOrDefault ["attributeLowAir", false];
+private _lowAir = _faction getOrDefault ["attributeLowAir", false] or ("lowair" in _modifiers);
 private _tier = [0,2] select ("tierboost" in _modifiers);
 
 private _resourcesSpent = 0;
@@ -53,8 +53,6 @@ if (_boatCount > 0 && _target isEqualType "" && (_faction get "vehiclesGunBoats"
         _maxSpeed = _speed max _maxSpeed;
     } forEach (_faction get "vehiclesGunBoats");
     _seaTime = 3600 * 2 / _maxSpeed; // speed in km/h, 2km to travel, convert to seconds
-
-    _vehCount = 0 max (_vehCount - _boatCount);
 };
 
 
@@ -88,7 +86,7 @@ private _landRatio = if ("airboost" in _modifiers) then {     // punishment, HQ 
     };
 };
 ServerDebug_4("Land ratio %1 out of vehicle count %2 due to lowAir %3 and modifiers %4", _landRatio, _vehCount, _lowAir, _modifiers);
-private _landCount = round (_landRatio * _vehCount);
+private _landCount = round (_landRatio * (_vehCount - count _vehicles));
 
 if (_landCount > 0) then
 {

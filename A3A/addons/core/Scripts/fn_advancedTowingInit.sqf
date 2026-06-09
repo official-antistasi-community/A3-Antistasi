@@ -378,9 +378,10 @@ SA_Attach_Tow_Ropes = {
 					[_helper, [0,0,0], [0,0,-1]] ropeAttachTo (_towRopes select 0);
 					[_vehicle,_vehicleHitch,_cargo,_cargoHitch,_ropeLength] spawn SA_Simulate_Towing;
 
-					// capture empty vehicles when attached
+					// Capture and ungarrison empty vehicles when attached
 					if (count crew _cargo == 0) then {
 						[_cargo, side group _player, true] remoteExec ["A3A_fnc_vehKilledOrCaptured", 2];
+						if !(_cargo isNil "markerX") then { [_cargo] remoteExecCall ["A3A_fnc_garrisonServer_remVehicle", 2] };
 					};
 				};
 			};
@@ -412,6 +413,10 @@ SA_Pickup_Tow_Ropes = {
 	if(local _vehicle) then {
 		private ["_attachedObj","_helper"];
 		{
+			// When helper is deleted, check for adding to HQ garrison
+			private _cargo = _x getVariable "SA_Cargo";
+			if (alive _cargo) then { [_cargo] remoteExec ["A3A_fnc_rebelVehPlacedWorker", 2] };
+
 			_attachedObj = _x;
 			{
 				_attachedObj ropeDetach _x;
@@ -436,8 +441,7 @@ SA_Pickup_Tow_Ropes = {
 SA_Drop_Tow_Ropes = {
 	params ["_vehicle","_player"];
 	if(local _vehicle) then {
-		private ["_helper"];
-		_helper = (_player getVariable ["SA_Tow_Ropes_Pick_Up_Helper", objNull]);
+		private _helper = (_player getVariable ["SA_Tow_Ropes_Pick_Up_Helper", objNull]);
 		if(!isNull _helper) then {
 			{
 				_helper ropeDetach _x;

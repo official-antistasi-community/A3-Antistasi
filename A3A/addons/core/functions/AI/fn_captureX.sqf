@@ -64,6 +64,12 @@ if (alive _unit && {!(_unit getVariable ["incapacitated", false])}) then
 	if (_modHR) then { [1,0] remoteExec ["A3A_fnc_resourcesFIA",2] };
 };
 
+// If they escaped or were downed then record in the garrison. Deaths should already be recorded
+private _marker = _unit getVariable "markerX";
+if (!isNil "_marker" and alive _unit) then {
+	[_marker, _unit] remoteExecCall ["A3A_fnc_garrisonServer_remUnit", 2];
+};
+
 deleteVehicle _unit;
 deleteGroup _group;
 	

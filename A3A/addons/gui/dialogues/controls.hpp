@@ -102,6 +102,12 @@ class A3A_SectionLabelRight : A3A_SectionLabelLeft
     style = ST_LEFT;
 };
 
+class A3A_SectionLabelCenter : A3A_SectionLabelLeft
+{
+    style = ST_CENTER;
+};
+
+
 class A3A_InfoTextLeft : A3A_Text
 {
     sizeEx = GUI_TEXT_SIZE_SMALL;

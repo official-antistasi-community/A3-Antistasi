@@ -8,7 +8,7 @@ class tanoa {
 	};
 	antennasBlacklistIndex[] = {9,14};
 	banks[] = {
-		{5893.41,10253.1,-0.687263},{9507.5,13572.9,0.133848}
+		{5893.41,10253.1,-0.687263},{9507.5,13572.9,0.133848},{9265.56,13719.6,0},{6288.89,12795.8,0},{5633.44,11050.1,0},{5080.98,8717.93,0},{12756,7316.64,0},{7967.03,7602.75,0},{7381.41,7995.68,0},{937.534,7698.66,0},{11214,5251.66,0},{9418.9,4039.57,0}
 	};
 	garrison[] = {
 		{},{"airport_1","seaport_5","outpost_10"},{},{"control_20"}
@@ -25,6 +25,16 @@ class tanoa {
 		{"Land_BagFence_01_short_green_F", 10}, {"Land_BagFence_01_round_green_F", 10}, {"Land_BagFence_01_long_green_F", 10},
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
 	};
+	policeStationTypes[] = {
+		"Land_House_Big_04_F", "Land_House_Big_03_F", "Land_House_Big_01_F", "Land_Shop_Town_01_F", "Land_Shop_Town_03_F",
+		"Land_House_Small_01_F", "Land_House_Small_02_F"
+	};
+	requiredMods = "Apex DLC";
+	size = 15.4;
+	cityCount = 56;
+	airbaseCount = 4;
 };

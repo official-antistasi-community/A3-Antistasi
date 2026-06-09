@@ -45,6 +45,10 @@ if(_pathCount > 5) then
     };
 };
 
+_path apply {_x#0};
+
+/*
+// Removes everything except junctions
 private _simplifiedPath = [];
 {
     if(_x select 1) then

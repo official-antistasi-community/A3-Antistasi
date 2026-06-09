@@ -31,7 +31,9 @@
 #define HR_GRG_CATIDCS [HR_GRG_IDC_CatUndercoverCar,HR_GRG_IDC_CatCar,HR_GRG_IDC_CatArmor,HR_GRG_IDC_CatHeli, HR_GRG_IDC_CatPlane,HR_GRG_IDC_CatBoat,HR_GRG_IDC_CatSource,HR_GRG_IDC_CatStatic]
 #define HR_GRG_SOURCEINDEX 6
 #define HR_GRG_STATICINDEX 7
+#define HR_GRG_HELIPADACCESSIBLE [3]
 #define HR_GRG_BLOCKAIRINDEX [3,4]
+#define HR_GRG_BOATINDEX [5]
 
 #define HR_GRG_IDC_BttnCars 1700111
 #define HR_GRG_IDC_BttnArmor 1700112
@@ -58,7 +60,8 @@
 #define HR_GRG_IDC_ExtraPylonsMirrorCheckbox 1700154
 #define HR_GRG_IDC_ExtraPylonsMirrorLabel 1700155
 #define HR_GRG_IDC_ExtraPylonsPresetsCombo 1700156
-#define HR_GRG_IDC_ExtraPylons 1700157 // Controlsgroup containing all the actual pylons
+#define HR_GRG_IDC_ExtraPylonsNewSysWarning 1700157
+#define HR_GRG_IDC_ExtraPylons 1700158 // Controlsgroup containing all the actual pylons
 #define HR_GRG_IDC_PylonsFirstIDC 1715300
 #define checkboxTextures [tolower gettext (configfile >> "RscCheckBox" >> "textureUnchecked"),tolower gettext (configfile >> "RscCheckBox" >> "textureChecked")]
 

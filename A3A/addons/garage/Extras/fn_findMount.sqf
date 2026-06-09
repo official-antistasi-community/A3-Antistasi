@@ -44,5 +44,5 @@ if !((_mount#3) in ["", _UID]) exitWith _failed; //Checked out by someone else
 
 //check out mount
 _mount set [3, _CheckedUID];
-[nil, _CheckedUID, 4, _vehUID, _player, false] call HR_GRG_fnc_broadcast;
+[nil, _CheckedUID, HR_GRG_STATICINDEX, _vehUID, _player, false] call HR_GRG_fnc_broadcast;
 true;

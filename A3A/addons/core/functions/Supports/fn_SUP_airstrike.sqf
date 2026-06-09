@@ -31,7 +31,7 @@ private _weightNapalm = if (napalmEnabled) then {_weightCluster} else {0};
 private _bombType = selectRandomWeighted ["HE", _weightHE, "CLUSTER", _weightCluster, "NAPALM", _weightNapalm];
 
 private _planeType = selectRandom (Faction(_side) get "vehiclesPlanesCAS");
-if (_delay < 0) then { _delay = (0.5 + random 1) * (300 - 15*tierWar - 1*_aggroValue) };
+if (_delay < 0) then { _delay = (0.5 + random 1) * (240 - 10*tierWar - 1*_aggroValue) };
 
 Debug_3("Airstrike will be carried out with aircraft type %1, bombType %2 and setup time %3", _planeType, _bombType, _delay);
 

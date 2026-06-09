@@ -124,14 +124,13 @@ private _bonus = if (_difficultX) then {2} else {1};
 if (_timeout && alive _box) then {
 	[_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState;
 	[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
-    Info("Mission Failed");
+	Info("Mission Failed");
 	deleteVehicle _box;
 } else {
 	[_taskId, "LOG", "SUCCEEDED"] call A3A_fnc_taskSetState;
 	[0,300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-	{if (_x distance _box < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-	[5*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
-    Info("Mission Succeeded");
+	[30*_bonus, true, _box, 500] call A3A_tasks_fnc_rewardPlayers;     // any players in retrieval group within 500m
+	Info("Mission Succeeded");
 };
 
 [_taskId, "LOG", 1200] spawn A3A_fnc_taskDelete;

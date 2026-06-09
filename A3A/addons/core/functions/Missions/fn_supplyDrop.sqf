@@ -1,4 +1,4 @@
-/*  "Mission" that uses an occupant plane to airdrop supplies 
+/*  "Mission" that uses an enemy plane to airdrop supplies
 
 Scope: Server or HC
 Environment: Spawned
@@ -7,12 +7,13 @@ Arguments:
     <POSITION> Attempted drop position
     <ARRAY> Contains [classname, amount] pairs of items to put in crate
     <GROUP> Patrol group to move towards the drop after the chute deploys
+    <SIDE> Side to generate plane for
 */
 
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_targPos", "_gear", "_patrolGroup"];
+params ["_targPos", "_gear", "_patrolGroup", "_side"];
 
 // Not a real mission but we should have a task so everyone knows about it
 private _taskText = localize "STR_A3A_fn_mission_supplydrop_text";
@@ -25,17 +26,18 @@ while { [_taskId] call BIS_fnc_taskExists } do { _taskId = "SupplyDrop" + str fl
 [[teamPlayer,civilian],_taskId,[_taskText,_taskTitle,""],_targPos,false,0,true,_taskIcon,true] call BIS_fnc_taskCreate;
 
 // Use a transport plane if possible
-private _planeType = selectRandom (A3A_faction_occ get "vehiclesPlanesTransport");
-if (isNil "_planeType") then { _planeType = selectRandom (A3A_faction_occ get "vehiclesHelisTransport") };
+private _planeType = selectRandom (Faction(_side) get "vehiclesPlanesTransport");
+if (isNil "_planeType") then { _planeType = selectRandom (Faction(_side) get "vehiclesHelisTransport") };
 private _isHeli = _planeType isKindOf "Helicopter";
 private _flightAlt = [500, 500] select _isHeli;         // too much drift above 500...
 
 // Adjust drop position *partially* for current wind & drop altitude
 // real drop speed is ~4.3m/s but the wind isn't reliable, so this is a better worst-case
-private _dropPos = _targPos vectorAdd (wind vectorMultiply -_flightAlt / 10);
+// Removed for now, x/y velocity constrained instead
+private _dropPos = _targPos;        //_targPos vectorAdd (wind vectorMultiply -_flightAlt / 10);
 
 // Spawn transport plane or heli at airfield with usual crew (but no cargo)
-private _airport = [Occupants, _dropPos] call A3A_fnc_availableBasesAir;
+private _airport = [_side, _dropPos] call A3A_fnc_availableBasesAir;
 private _spawnPos = if (isNil "_airport") then { 
     Error("No airport found for supply drop");
     _dropPos getPos [5000, random 360];
@@ -50,9 +52,9 @@ _plane setDir _targDir;
 _plane setPosATL _spawnPos;                                           // setPosATL kills velocity
 _plane setVelocityModelSpace [0, [100, 50] select _isHeli, 0];
 _plane flyInHeight _flightAlt;
-[_plane, Occupants, "legacy"] call A3A_fnc_AIVEHInit;
+[_plane, _side, "legacy"] call A3A_fnc_AIVEHInit;
 
-private _group = [Occupants, _plane] call A3A_fnc_createVehicleCrew;
+private _group = [_side, _plane] call A3A_fnc_createVehicleCrew;
 _group deleteGroupWhenEmpty true;
 {
     [_x, nil, false, "legacy"] call A3A_fnc_NATOinit; 
@@ -96,10 +98,16 @@ if (currentWaypoint _group > 0) then
     _crate attachTo [_parachute, [0, 0, 0]];
 
     // Now the patrol can see the parachute, send them in the right direction
-    [_patrolGroup, "Patrol_Area", 0, 200, 200, true, _targPos] call A3A_fnc_patrolLoop;
+    [_patrolGroup, "Patrol_Area", 0, 200, -1, true, _targPos] call A3A_fnc_patrolLoop;
 
     // Now wait for the crate to hit the ground
-    waitUntil {sleep 1; diag_log velocity _parachute; getPosATL _crate#2 < 1};
+    sleep 5;
+    waitUntil {
+        sleep 1;
+        private _pvel = velocity _parachute;
+        _parachute setVelocity [-1 max _pvel#0 min 1, -1 max _pvel#1 min 1, _pvel#2];          // clamp x/y velocity
+        _pvel#2 > -0.1;
+    };
     sleep 3;
     detach _parachute;
     deleteVehicle _parachute;

@@ -77,15 +77,14 @@ if (spawner getVariable _markerX == 0) then
 			["TaskFailed", ["", format ["AA Stolen in %1",_nameDest]]] remoteExec ["BIS_fnc_showNotification",_sideX]; //stringtable? this might be obsolete
 			};
 		[0,300*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-        [_sideX, 5, 60] remoteExec ["A3A_fnc_addAggression", 2];
+		[_sideX, 5, 60] remoteExec ["A3A_fnc_addAggression", 2];
 		[400*_bonus, _sideX] remoteExec ["A3A_fnc_timingCA",2];
-		{if (_x distance _veh < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-		[10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+		[30*_bonus, false, _veh, 500] call A3A_tasks_fnc_rewardPlayers;     // any players within 500m of vehicle
 		};
 	}
 else
 	{
-    [_taskId, "DES", "FAILED"] call A3A_fnc_taskSetState;
+	[_taskId, "DES", "FAILED"] call A3A_fnc_taskSetState;
 	[-200, _sideX] remoteExec ["A3A_fnc_timingCA",2];
 	[-10,theBoss] call A3A_fnc_playerScoreAdd;
 	};

@@ -23,9 +23,9 @@
 
     License: APL-ND
 */
+#include "defines.inc"
+FIX_LINE_NUMBERS()
 if !(isServer) exitWith {false};
-HR_GRG_Event = _this;
-{
-    _x publicVariableClient "HR_GRG_Event";
-} forEach HR_GRG_Users;
+Trace_2("Broadcasting %1 to users %2",_this,HR_GRG_Users);
+_this remoteExecCall ["HR_GRG_fnc_receiveBroadcast", HR_GRG_Users];
 true

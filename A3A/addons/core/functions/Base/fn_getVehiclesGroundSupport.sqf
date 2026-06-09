@@ -10,7 +10,10 @@ Return value:
     <ARRAY> [vehType, weight, vehType2, weight2, ...]
 */
 params ["_side", "_level", ["_tanksOnly", false]];
+
+if (_side == Invaders) then {_level = _level + 1};
 _level = (_level max 1 min 10) - 1;
+
 private _faction = [A3A_faction_occ, A3A_faction_inv] select (_side == Invaders);
 
 private _fnc_addArrayToWeights = {
@@ -44,10 +47,7 @@ if (_faction get "vehiclesTanks" isEqualTo []) then { _ltWeight = _ltWeight + _t
 [_faction get "vehiclesHeavyTanks", _hvytWeight] call _fnc_addArrayToWeights;
 if (_tanksOnly) exitWith { _vehWeights };
 
-// only occupants use militia vehicles?
-if (_side == Occupants) then {
-    [_faction get "vehiclesMilitiaLightArmed", _milCarWeight] call _fnc_addArrayToWeights;
-};
+[_faction get "vehiclesMilitiaLightArmed", _milCarWeight] call _fnc_addArrayToWeights;
 [_faction get "vehiclesLightArmed", _carWeight] call _fnc_addArrayToWeights;
 [_vehAA, _aaWeight] call _fnc_addArrayToWeights;
 

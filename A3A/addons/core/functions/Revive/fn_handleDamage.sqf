@@ -59,6 +59,8 @@ private _makeUnconscious =
 
     private _fromside = if (!isNull _injurer) then {side group _injurer} else {sideUnknown};
     [_unit, _fromside, _fatalWound] spawn A3A_fnc_unconscious;
+
+    [_unit, group _unit, _injurer] spawn A3A_fnc_rebelReactOnKill;
 };
 
 //diag_log format ["%1 damage on part %2, hitpoint %3", _damage, _part, _hitpoint];
@@ -90,6 +92,11 @@ if (_part == "") then
 
         if (_overall > 1) exitWith
         {
+            // SP case, player cannot be allowed to die
+            if (!isMultiplayer and _unit == player) exitWith {
+                [player] spawn A3A_fnc_respawn;
+                _damage = 0.9;
+            };
             _unit setDamage 1;
             // Don't remove for players because it's transferred on respawn
             if (!isPlayer _unit) then { _unit removeAllEventHandlers "HandleDamage" };

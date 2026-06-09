@@ -4,8 +4,8 @@ private _titleStr = localize "STR_A3A_fn_reinf_FIASkAdd_title";
 
 if (player != theBoss) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_FIASkAdd_no_commander"] call A3A_fnc_customHint;};
 
-if (skillFIA > 20) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_FIASkAdd_training_max"] call A3A_fnc_customHint;};
-if (skillFIA > (tierWar*2)) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_FIASkAdd_no_wl"] call A3A_fnc_customHint;};
+if (skillFIA >= 20) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_FIASkAdd_training_max"] call A3A_fnc_customHint;};
+if (skillFIA >= (tierWar*2)) exitWith {[_titleStr, localize "STR_A3A_fn_reinf_FIASkAdd_no_wl"] call A3A_fnc_customHint;};
 _resourcesFIA = server getVariable "resourcesFIA";
 _costs = 1000 + (1.5*(skillFIA *750));
 if (_resourcesFIA < _costs) exitWith {[_titleStr, format [localize "STR_A3A_fn_reinf_FIASkAdd_no_money",_costs]] call A3A_fnc_customHint;};

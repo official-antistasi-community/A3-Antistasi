@@ -122,6 +122,22 @@ class CfgWorlds {
                 radiusB = 150;
                 type = "NameVillage";
             };
+            // Position changes for police stations
+            class vil_Bubendorf {
+                position[] = {3951.35,14350.5};
+                radiusA = 200;
+                radiusB = 200;
+            };
+            class vil_Lausen {
+                position[] = {12062.1,15421.9};
+                radiusA = 200;
+                radiusB = 200;
+            };
+            class vil_Wolhusen {
+                position[] = {14191.2,12738.4};
+                radiusA = 150;
+                radiusB = 150;
+            };
         };
     };
     class NapfWinter : CAWorld {
@@ -224,6 +240,22 @@ class CfgWorlds {
                 radiusA = 150;
                 radiusB = 150;
                 type = "NameVillage";
+            };
+            // Position changes for police stations
+            class vil_Bubendorf {
+                position[] = {3951.35,14350.5};
+                radiusA = 200;
+                radiusB = 200;
+            };
+            class vil_Lausen {
+                position[] = {12062.1,15421.9};
+                radiusA = 200;
+                radiusB = 200;
+            };
+            class vil_Wolhusen {
+                position[] = {14191.2,12738.4};
+                radiusA = 150;
+                radiusB = 150;
             };
         };
     };

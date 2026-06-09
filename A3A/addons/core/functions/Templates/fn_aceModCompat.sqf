@@ -60,7 +60,10 @@ aceMedItems = [
 	"ACE_splint",
 	"ACE_bodyBag",
 	"ACE_personalAidKit",
-	"ACE_suture"
+	"ACE_suture",
+	"a3a_coffeeIV",
+	"a3a_coffeeIV_500",
+	"a3a_coffeeIV_250"
 ];
 
 aceMedItemsNonKat = [

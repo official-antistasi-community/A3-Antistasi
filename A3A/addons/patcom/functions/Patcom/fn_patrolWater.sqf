@@ -40,21 +40,15 @@ params [
 private _groupHomePosition = _group getVariable "PATCOM_Patrol_Home";
 private _patrolParams = _group getVariable "PATCOM_Patrol_Params";
 
-[_group, "SAFE", "LIMITED", "COLUMN", "WHITE", "AUTO"] call A3A_fnc_patrolSetCombatModes;
+[_group, "SAFE", "LIMITED", "COLUMN", "YELLOW", "AUTO"] call A3A_fnc_patrolSetCombatModes;
 _group setVariable ["PATCOM_Group_State", "CALM"];
 
 if (PATCOM_DEBUG) then {
     [leader _group, "PATROL WATER", 10, "White"] call A3A_fnc_debugText3D;
 };
 
-// We check to see if the waypoint is still active after 3 minutes. If waypoint isn't complete the unit is likely stuck.
-if (_group getVariable "PATCOM_WaypointTime" < serverTime) exitWith {
-    // Return home
-    [_group, _groupHomePosition, "MOVE", "PATCOM_PATROL_WATER", -1, _patrolParams # 1] call A3A_fnc_patrolCreateWaypoint;
-};
-
-// Check for current waypoints and make sure they are type MOVE for patrol
-if (currentWaypoint _group == count waypoints _group || waypointType [_group, currentWaypoint _group] != "MOVE") then {
+// Check if waypoint is reached or timeout has expired
+if (currentWaypoint _group == count waypoints _group || waypointType [_group, currentWaypoint _group] != "MOVE" || time > _group getVariable ["PATCOM_WaypointTime", 0]) then {
     if (_maxPatrolDistance != -1) then {
         if ((leader _group) distance _groupHomePosition > _maxPatrolDistance) exitWith {
             // Return home

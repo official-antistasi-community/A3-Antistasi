@@ -240,4 +240,4 @@ private _crew = crew _vehicle;
     };
 } forEach _crew;
 
-[_vehicle, teamPlayer, true] call A3A_fnc_vehKilledOrCaptured;
+[_vehicle, teamPlayer, true] remoteExecCall ["A3A_fnc_vehKilledOrCaptured", _vehicle];

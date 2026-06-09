@@ -10,7 +10,7 @@ private _playerNear = false;
 private _group = group _unit;
 private _side = side _group;
 
-if (playableUnits inAreaArray [getPosATL _unit, distanceSPWN2, distanceSPWN2] isNotEqualTo []) then
+if (call A3A_fnc_playableUnits inAreaArray [getPosATL _unit, distanceSPWN2, distanceSPWN2] isNotEqualTo []) then
 {
 	_playerNear = true;
 	[_unit,"heal"] remoteExec ["A3A_fnc_flagaction",0,_unit];
@@ -57,7 +57,7 @@ if (time >= _bleedOutTime) exitWith
 if (alive _unit) then
 {
 	_unit setUnconscious false;
-	_unit playMoveNow "unconsciousoutprone";
+	//_unit playMoveNow "unconsciousoutprone";
 	_unit setVariable ["A3A_downedBy", nil];
 
 	if (_unit getVariable ["surrendering", false]) exitWith {

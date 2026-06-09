@@ -50,16 +50,19 @@ if (_vehicle isKindOf "Air") exitWith
                 [_vehicle, _cargoGroup, _posDestination, _markerOrigin] spawn A3A_fnc_paradrop;
             };
         };
+        _landPosBlacklist;
     };
     if (_vehType in FactionGet(all,"vehiclesHelisAttack") + FactionGet(all,"vehiclesHelisLightAttack")) exitWith 
     {
         //Attack helicopter
         [_vehicle, _crewGroup, _posDestination] spawn A3A_fnc_attackHeli;
+        _landPosBlacklist;
     };
     if (_vehType in FactionGet(all,"vehiclesTransportAir")) exitWith
     {
         //Dropship with para units
         [_vehicle, _cargoGroup, _posDestination, _markerOrigin] spawn A3A_fnc_paradrop;
+        _landPosBlacklist;
     };
 
     Error_1("Obsolete/unidentified vehicle type %1", _vehType);
@@ -69,7 +72,6 @@ if (_vehicle isKindOf "Air") exitWith
     _vehWP0 setWaypointType "SAD";
     _crewGroup setCombatMode "RED";
     _landPosBlacklist;
-
 };
 
 if (_vehicle isKindOf "Ship") then {
@@ -130,6 +132,7 @@ else            // ground vehicle
         _attackWP setWaypointType "SAD";
         _attackWP setWaypointBehaviour "COMBAT";
 
+        [_vehicle] spawn A3A_fnc_waypointMonitor;
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
 
@@ -153,6 +156,7 @@ else            // ground vehicle
         private _attackWP = _cargoGroup addWaypoint [_posDestination, 0];
         _attackWP setWaypointBehaviour "AWARE";
 
+        [_vehicle] spawn A3A_fnc_waypointMonitor;
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
 
@@ -180,6 +184,7 @@ else            // ground vehicle
         //Link the dismount waypoints
         _vehWP0 synchronizeWaypoint [_cargoWP0];
 
+        [_vehicle] spawn A3A_fnc_waypointMonitor;
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
 
@@ -212,6 +217,7 @@ else            // ground vehicle
         //Link the dismount waypoints
         _vehWP0 synchronizeWaypoint [_cargoWP0];
 
+        [_vehicle] spawn A3A_fnc_waypointMonitor;
         [_vehicle, _typeName] spawn A3A_fnc_inmuneConvoy;
     };
 };

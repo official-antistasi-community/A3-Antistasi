@@ -20,7 +20,7 @@
 ["vehiclesBasic", ["gm_gc_army_p601"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["gm_gc_army_uaz469_cargo_des", "gm_gc_army_uaz469_cargo_des", "gm_gc_army_btr60pu12_des", "gm_gc_army_brdm2um_des"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed",["gm_gc_army_uaz469_dshkm_des", "gm_gc_army_brdm2_des", "gm_gc_army_uaz469_dshkm_des", "CUP_O_GAZ_Vodnik_BPPU_RU", 
-    "CUP_O_GAZ_Vodnik_KPVT_RU", "gm_gc_army_brdm2rkh_des"]] call _fnc_saveToTemplate;
+    "CUP_O_GAZ_Vodnik_KPVT_RU", "gm_gc_army_brdm2rkh_des","gm_gc_army_brdm2_9p133_des"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["gm_gc_army_ural4320_cargo_des", "gm_gc_army_ural375d_cargo_des", "gm_gc_army_btr60pa_des"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["gm_gc_army_ural4320_cargo_des", "gm_gc_army_ural44202_des", "gm_gc_army_ural375d_cargo_des"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["gm_gc_army_ural4320_reammo_des"]] call _fnc_saveToTemplate;
@@ -30,7 +30,7 @@
 ["vehiclesLightAPCs", ["gm_gc_army_btr60pb_des", "gm_gc_army_btr60pb_des", "CUP_O_GAZ_Vodnik_Unarmed_RU", "CUP_O_GAZ_Vodnik_PK_RU", "CUP_O_GAZ_Vodnik_AGS_RU",
     "gm_gc_army_btr60pa_dshkm_des"]] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["gm_pl_army_ot64a_oli", "CUP_O_BTR80_DESERT_RU", "CUP_O_BTR80A_DESERT_RU", "gm_gc_army_bmp1sp2_des"]] call _fnc_saveToTemplate;
-["vehiclesIFVs", ["gm_gc_army_bmp1sp2_des", "CUP_O_BMP2_RU", "CUP_O_BMP3_RU"]] call _fnc_saveToTemplate;
+["vehiclesIFVs", ["gm_gc_army_bmp1sp2_des", "gm_gc_army_bmp1p_des", "CUP_O_BMP2_RU", "CUP_O_BMP3_RU"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["gm_gc_army_pt76b_des", "gm_gc_army_t55_des", "gm_gc_army_t55a_des", "gm_gc_army_t55ak_des", "gm_gc_army_t55am2_des", "gm_gc_army_t55am2b_des"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["gm_gc_army_zsu234v1_des", "CUP_O_Ural_ZU23_RU"]] call _fnc_saveToTemplate;
 
@@ -203,10 +203,10 @@ _loadoutData set ["items_unarmed_extras", []];
 
 private _sfLoadoutData = _loadoutData call _fnc_copyLoadoutData; // touch and shit breaks
 _sfLoadoutData set ["uniforms", ["gm_gc_army_uniform_soldier_80_str", "gm_gc_army_uniform_soldier_gloves_80_str"]];
-_sfLoadoutData set ["vests", ["gm_gc_army_vest_80_rifleman_str", "gm_gc_vest_combatvest3_str"]];
+_sfLoadoutData set ["vests", ["gm_pl_army_vest_armor_01_akm_80_bg"]];
 _sfLoadoutData set ["glVests", ["gm_gc_army_vest_80_at_str"]];
 _sfLoadoutData set ["mgVests", ["gm_gc_army_vest_80_lmg_str"]];
-_sfLoadoutData set ["slVests", ["gm_gc_army_vest_80_leader_str"]];
+_sfLoadoutData set ["slVests", ["gm_pl_army_vest_armor_01_akm_80_bg"]];
 _sfLoadoutData set ["backpacks", ["gm_gc_army_backpack_80_assaultpack_empty_str"]];
 _sfLoadoutData set ["mgBackpacks", ["gm_gc_army_backpack_80_assaultpack_lmg_str", "gm_gc_army_backpack_80_lmg_str"]];
 _sfLoadoutData set ["glBackpacks", ["gm_gc_army_backpack_80_at_str"]];

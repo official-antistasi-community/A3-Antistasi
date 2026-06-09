@@ -4,6 +4,8 @@ Author: Wurzel0701
 
 Arguments:
     <POSITION> The position from which the reveal value should be calculated
+    <SIDE> The side of the caller
+    <STRING> The type of support being called
 
 Return Value:
     <NUMBER> The calculated reveal value (range 0 - 1)
@@ -24,7 +26,9 @@ Example:
 
 params
 [
-    ["_position", [0,0,0], [[]]]
+    ["_position", [0,0,0], [[]]],
+    ["_side", Occupants],
+    ["_type", "", [""]]
 ];
 
 private _result = 0;
@@ -58,8 +62,9 @@ if(sidesX getVariable [_nearestAirport, sideUnknown] == teamPlayer) then
 };
 
 //If nearest antenna is owned by rebels increase chance, if near increase even more
-private _nearestAntenna = [antennas, _position] call BIS_fnc_nearestPosition;
-private _antennaMarker = [outposts + airportsX, _position] call BIS_fnc_nearestPosition;
+private _liveAntennas = A3A_antennas select { alive _x };
+private _nearestAntenna = [_liveAntennas, _position] call BIS_fnc_nearestPosition;
+private _antennaMarker = A3A_antennaMap get netId _nearestAntenna;
 if(sidesX getVariable [_antennaMarker, sideUnknown] == teamPlayer) then
 {
     _hardValue = _hardValue + 10;
@@ -70,9 +75,23 @@ if(sidesX getVariable [_antennaMarker, sideUnknown] == teamPlayer) then
         _softValue = _softValue + 10;
     };
 };
+private _flags = "";
+if (_type isNotEqualTo "") then {
+    private _supportTypesHM = [A3A_supportTypesOcc, A3A_supportTypesInv] select (_side isEqualTo Invaders);
+    private _supData = _supportTypesHM get _type;
+    _flags = _supData param [4, ""];
+    if ("u" in _flags) then {
+        _hardValue = _hardValue + 15;
+        _softValue = _softValue + 10;
+    };
+};
+
 
 //Calculate results
 _result = _hardValue + (round (random _softValue));
+if ("u" in _flags || ("f" in _flags)) then {
+    _result = _result max 51;
+};
 _result = (_result / 100) min 1;
 
 _result;

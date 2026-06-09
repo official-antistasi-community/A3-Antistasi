@@ -33,7 +33,7 @@
 ["vehiclesTanks", ["rhs_t72be_tv", "rhs_t72bd_tv", "rhs_t90sab_tv", "rhs_t90a_tv", "rhs_t90sm_tv"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["rhs_zsu234_aa"]] call _fnc_saveToTemplate;
 
-["vehiclesTransportBoats", ["O_G_Boat_Transport_01_F"]] call _fnc_saveToTemplate;
+["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["rhsusf_mkvsoc"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["rhs_btr80_vdv", "rhs_btr80a_vdv"]] call _fnc_saveToTemplate; 
 

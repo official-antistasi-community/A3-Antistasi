@@ -18,7 +18,7 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_type", "_side", "_caller", "_maxSpend", "_target", "_targPos", "_reveal", ["_delay", -1]];
+params ["_type", "_side", "_caller", "_maxSpend", "_target", "_targPos", ["_reveal", -1], ["_delay", -1]];
 private _resPool = ["defence", _caller] select (_caller isEqualType "");
 
 // Check if the support type exists for this faction. Ok to fail silently, just asking the question
@@ -46,6 +46,11 @@ A3A_supportCount = A3A_supportCount + 1;
 private _supportName = format ["%1%2", _type, A3A_supportCount];
 
 Info_5("Creating support %1 with side %2, pool %3, target %4 and delay %5", _supportName, _side, _resPool, _target, _delay);
+
+if (_reveal isEqualTo -1) then {
+    private _revealCalcPos = if (_caller isEqualType "") then {_targPos} else {_caller};
+    _reveal = [_revealCalcPos, _side, _type] call A3A_fnc_calculateSupportCallReveal;
+};
 
 // Spend radio key to boost support's reveal value if available
 _reveal = [_side, _targPos, _reveal] call A3A_fnc_useRadioKey;

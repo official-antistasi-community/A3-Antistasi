@@ -26,6 +26,7 @@ _unit disableAI "MOVE";
 _unit disableAI "AUTOTARGET";
 _unit disableAI "TARGET";
 _unit disableAI "ANIM";
+_unit disableAI "CHECKVISIBLE";
 _unit setSkill 0;
 unassignVehicle _unit;			// stop them getting back into vehicles
 [_unit] orderGetin false;
@@ -37,13 +38,13 @@ _unit setSpeaker "NoVoice";
 if (_unit getVariable ["spawner", false]) then { _unit setVariable ["spawner", nil, true] };
 
 // find or create suitable group for surrendered unit
-private _grpIdx = allGroups findIf { local _x && (side _x == _unitSide) && {_x getVariable ["surrenderGroup", false]} };
-if (_grpIdx == -1) then {
-	private _grp = createGroup _unitSide;
-	_grp setVariable ["surrenderGroup", true, true];
+private _surrenderGroup = groups _unitSide select { _x getVariable ["surrenderGroup", false] } select 0;
+if (isNil "_surrenderGroup") then {
+	private _grp = createGroup _unitSide;			// intentionally don't clear this up
+	_grp setVariable ["surrenderGroup", true];		// ...and keep this local so that we don't mix localities
 	[_unit] joinSilent _grp;
 } else {
-	[_unit] joinSilent (allGroups select _grpIdx);
+	[_unit] joinSilent _surrenderGroup;
 };
 
 // create surrender box
@@ -73,14 +74,13 @@ if (_backpack != "") then {
 _unit setUnitLoadout [ [], [], [], [uniform _unit, []], [], [], "", "", [], ["","","","","",""] ];
 
 
-if (_unitSide == Occupants) then {
-	[-2, 0, getPos _unit] remoteExec ["A3A_fnc_citySupportChange", 2];
+private _marker = _unit getVariable "markerX";
+if !(isNil "_marker") then {
+    [1, _marker] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+    A3A_garrisonOps pushBack ["zoneCheck", [_marker]];          // should always be local for marker units
 } else {
-	[0, 1, getPos _unit] remoteExec ["A3A_fnc_citySupportChange", 2];
+    [1, getPosATL _unit] remoteExecCall ["A3A_fnc_citySupportChange", 2];
 };
-
-private _markerX = _unit getVariable "markerX";
-if (!isNil "_markerX") then { [_markerX, _unitSide] remoteExec ["A3A_fnc_zoneCheck", 2] };
 
 
 // timed cleanup functions
@@ -95,6 +95,7 @@ _unit addEventHandler ["HandleDamage", {
 	if (_damage < 0.2) exitWith {};
 	[_unit, "remove"] remoteExec ["A3A_fnc_flagaction", [teamPlayer, civilian], _unit];
 	[_unit, side group _unit] spawn A3A_fnc_fleeToSide;
+	_unit spawn { sleep 100; deleteVehicle _this };
 	_unit removeEventHandler ["HandleDamage", _thisEventHandler];
 	nil;
 }];

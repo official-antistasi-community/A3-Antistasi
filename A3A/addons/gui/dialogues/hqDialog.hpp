@@ -82,7 +82,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                 {
                     idc = A3A_IDC_MOVEHQBUTTON;
                     text = $STR_antistasi_dialogs_hq_move_hq_button;
-                    onButtonClick = "[] spawn A3A_fnc_moveHQ; closeDialog 0";
+                    onButtonClick = "[player] remoteExecCall ['A3A_fnc_moveHQ', 2]; closeDialog 0";
                     sizeEx = GUI_TEXT_SIZE_LARGE;
                     x = 20 * GRID_W;
                     y = 53 * GRID_H;
@@ -1113,83 +1113,13 @@ class A3A_HqDialog : A3A_DefaultDialog
                             };
                         };
 
-                        class MortarLabel : A3A_Text
-                        {
-                            idc = -1;
-                            text = $STR_antistasi_dialogs_hq_garrisons_mortar;
-                            font = "RobotoCondensedLight";
-                            x = 0 * GRID_W;
-                            y = 25 * GRID_H;
-                            w = 26 * GRID_W;
-                            h = 4 * GRID_H;
-                        };
-
-                        class MortarPrice : RiflemanPrice
-                        {
-                            idc = A3A_IDC_MORTARPRICE;
-                            x = 26 * GRID_W;
-                            y = 25 * GRID_H;
-                            w = 8 * GRID_W;
-                            h = 4 * GRID_H;
-                        };
-
-                        class MortarNumber : A3A_Text
-                        {
-                            idc = A3A_IDC_MORTARNUMBER;
-                            text = "0";
-                            style = ST_RIGHT;
-                            font = "RobotoCondensedLight";
-                            x = 34 * GRID_W;
-                            y = 25 * GRID_H;
-                            w = 6 * GRID_W;
-                            h = 4 * GRID_H;
-                        };
-
-                        class MortarRemove : A3A_ShortcutButton
-                        {
-                            idc = A3A_IDC_MORTARSUBBUTTON;
-                            text = "-";
-                            onButtonClick = "[""garrisonRemove"",[""mortar""]] spawn A3A_GUI_fnc_hqDialog";
-                            x = 41 * GRID_W;
-                            y = 25 * GRID_H;
-                            w = 4 * GRID_W;
-                            h = 4 * GRID_H;
-                            size = GUI_TEXT_SIZE_LARGE;
-                            class textPos
-                            {
-                                left = 1.5 * GRID_W;
-                                right = 0;
-                                top = -1 * GRID_H;
-                                bottom = 0;
-                            };
-                        };
-
-                        class MortarAdd : A3A_ShortcutButton
-                        {
-                            idc = A3A_IDC_MORTARADDBUTTON;
-                            text = "+";
-                            onButtonClick = "[""garrisonAdd"",[""mortar""]] spawn A3A_GUI_fnc_hqDialog";
-                            x = 46 * GRID_W;
-                            y = 25 * GRID_H;
-                            w = 4 * GRID_W;
-                            h = 4 * GRID_H;
-                            size = GUI_TEXT_SIZE_LARGE;
-                            class textPos
-                            {
-                                left = 1.5 * GRID_W;
-                                right = 0;
-                                top = -1 * GRID_H;
-                                bottom = 0;
-                            };
-                        };
-
                         class MarksmanLabel : A3A_Text
                         {
                             idc = -1;
                             text = $STR_antistasi_dialogs_hq_garrisons_marksman;
                             font = "RobotoCondensedLight";
                             x = 0 * GRID_W;
-                            y = 30 * GRID_H;
+                            y = 25 * GRID_H;
                             w = 26 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1198,7 +1128,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                         {
                             idc = A3A_IDC_MARKSMANPRICE;
                             x = 26 * GRID_W;
-                            y = 30 * GRID_H;
+                            y = 25 * GRID_H;
                             w = 8 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1210,7 +1140,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             style = ST_RIGHT;
                             font = "RobotoCondensedLight";
                             x = 34 * GRID_W;
-                            y = 30 * GRID_H;
+                            y = 25 * GRID_H;
                             w = 6 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1221,7 +1151,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = "-";
                             onButtonClick = "[""garrisonRemove"",[""marksman""]] spawn A3A_GUI_fnc_hqDialog";
                             x = 41 * GRID_W;
-                            y = 30 * GRID_H;
+                            y = 25 * GRID_H;
                             w = 4 * GRID_W;
                             h = 4 * GRID_H;
                             size = GUI_TEXT_SIZE_LARGE;
@@ -1240,7 +1170,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = "+";
                             onButtonClick = "[""garrisonAdd"",[""marksman""]] spawn A3A_GUI_fnc_hqDialog";
                             x = 46 * GRID_W;
-                            y = 30 * GRID_H;
+                            y = 25 * GRID_H;
                             w = 4 * GRID_W;
                             h = 4 * GRID_H;
                             size = GUI_TEXT_SIZE_LARGE;
@@ -1259,7 +1189,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = $STR_antistasi_dialogs_hq_garrisons_at;
                             font = "RobotoCondensedLight";
                             x = 0 * GRID_W;
-                            y = 35 * GRID_H;
+                            y = 30 * GRID_H;
                             w = 26 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1268,7 +1198,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                         {
                             idc = A3A_IDC_ATPRICE;
                             x = 26 * GRID_W;
-                            y = 35 * GRID_H;
+                            y = 30 * GRID_H;
                             w = 8 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1280,7 +1210,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             style = ST_RIGHT;
                             font = "RobotoCondensedLight";
                             x = 34 * GRID_W;
-                            y = 35 * GRID_H;
+                            y = 30 * GRID_H;
                             w = 6 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1291,7 +1221,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = "-";
                             onButtonClick = "[""garrisonRemove"",[""at""]] spawn A3A_GUI_fnc_hqDialog";
                             x = 41 * GRID_W;
-                            y = 35 * GRID_H;
+                            y = 30 * GRID_H;
                             w = 4 * GRID_W;
                             h = 4 * GRID_H;
                             size = GUI_TEXT_SIZE_LARGE;
@@ -1310,7 +1240,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = "+";
                             onButtonClick = "[""garrisonAdd"",[""at""]] spawn A3A_GUI_fnc_hqDialog";
                             x = 46 * GRID_W;
-                            y = 35 * GRID_H;
+                            y = 30 * GRID_H;
                             w = 4 * GRID_W;
                             h = 4 * GRID_H;
                             size = GUI_TEXT_SIZE_LARGE;
@@ -1329,7 +1259,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = $STR_antistasi_dialogs_hq_garrisons_atMissile;
                             font = "RobotoCondensedLight";
                             x = 0 * GRID_W;
-                            y = 40 * GRID_H;
+                            y = 35 * GRID_H;
                             w = 26 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1338,7 +1268,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                         {
                             idc = A3A_IDC_ATMISSILEPRICE;
                             x = 26 * GRID_W;
-                            y = 40 * GRID_H;
+                            y = 35 * GRID_H;
                             w = 8 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1350,7 +1280,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             style = ST_RIGHT;
                             font = "RobotoCondensedLight";
                             x = 34 * GRID_W;
-                            y = 40 * GRID_H;
+                            y = 35 * GRID_H;
                             w = 6 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1361,7 +1291,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = "-";
                             onButtonClick = "[""garrisonRemove"",[""atMissile""]] spawn A3A_GUI_fnc_hqDialog";
                             x = 41 * GRID_W;
-                            y = 40 * GRID_H;
+                            y = 35 * GRID_H;
                             w = 4 * GRID_W;
                             h = 4 * GRID_H;
                             size = GUI_TEXT_SIZE_LARGE;
@@ -1380,7 +1310,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = "+";
                             onButtonClick = "[""garrisonAdd"",[""atMissile""]] spawn A3A_GUI_fnc_hqDialog";
                             x = 46 * GRID_W;
-                            y = 40 * GRID_H;
+                            y = 35 * GRID_H;
                             w = 4 * GRID_W;
                             h = 4 * GRID_H;
                             size = GUI_TEXT_SIZE_LARGE;
@@ -1399,7 +1329,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = $STR_antistasi_hq_garrisons_aaMissile;
                             font = "RobotoCondensedLight";
                             x = 0 * GRID_W;
-                            y = 45 * GRID_H;
+                            y = 40 * GRID_H;
                             w = 26 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1408,7 +1338,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                         {
                             idc = A3A_IDC_AAMISSILEPRICE;
                             x = 26 * GRID_W;
-                            y = 45 * GRID_H;
+                            y = 40 * GRID_H;
                             w = 8 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1420,7 +1350,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             style = ST_RIGHT;
                             font = "RobotoCondensedLight";
                             x = 34 * GRID_W;
-                            y = 45 * GRID_H;
+                            y = 40 * GRID_H;
                             w = 6 * GRID_W;
                             h = 4 * GRID_H;
                         };
@@ -1431,7 +1361,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = "-";
                             onButtonClick = "[""garrisonRemove"",[""aaMissile""]] spawn A3A_GUI_fnc_hqDialog";
                             x = 41 * GRID_W;
-                            y = 45 * GRID_H;
+                            y = 40 * GRID_H;
                             w = 4 * GRID_W;
                             h = 4 * GRID_H;
                             size = GUI_TEXT_SIZE_LARGE;
@@ -1450,7 +1380,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                             text = "+";
                             onButtonClick = "[""garrisonAdd"",[""aaMissile""]] spawn A3A_GUI_fnc_hqDialog";
                             x = 46 * GRID_W;
-                            y = 45 * GRID_H;
+                            y = 40 * GRID_H;
                             w = 4 * GRID_W;
                             h = 4 * GRID_H;
                             size = GUI_TEXT_SIZE_LARGE;
@@ -1487,7 +1417,7 @@ class A3A_HqDialog : A3A_DefaultDialog
                     h = 12 * GRID_H;
                 };
 
-                /*
+                
                 // Build / Remove outpost buttons
                 class BuildWatchpostButton : A3A_ShortcutButton
                 {
@@ -1495,16 +1425,18 @@ class A3A_HqDialog : A3A_DefaultDialog
                     text = $STR_antistasi_dialogs_hq_garrisons_build_watchpost_button;
                     onButtonClick = "[""buildWatchpost""] spawn A3A_GUI_fnc_hqDialog"; // TODO UI-update: Replace placeholder when merging
                     x = 10 * GRID_W;
-                    y = 80 * GRID_H;
+                    y = 64 * GRID_H;
                     w = 22 * GRID_W;
                     h = 12 * GRID_H;
                 };
 
+                /*
+                // Feature is depreciated, find another use for this button
                 class RemoveWatchpostButton : A3A_ShortcutButton
                 {
                     idc = -1;
                     text = $STR_antistasi_dialogs_hq_garrisons_remove_watchpost_button;
-                    onButtonClick = "[""removeWatchpost""] spawn A3A_GUI_fnc_hqDialog"; // TODO UI-update: Replace placeholder when merging
+                    onButtonClick = "[""removeWatchpost""] spawn A3A_GUI_fnc_hqDialog";
                     x = 38 * GRID_W;
                     y = 80 * GRID_H;
                     w = 22 * GRID_W;

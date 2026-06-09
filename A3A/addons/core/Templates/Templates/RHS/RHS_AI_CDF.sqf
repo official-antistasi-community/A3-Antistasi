@@ -65,7 +65,7 @@
 ["staticMGs", ["rhsgref_cdf_b_DSHKM"]] call _fnc_saveToTemplate;
 ["staticAT", ["rhsgref_cdf_b_SPG9M"]] call _fnc_saveToTemplate;
 ["staticAA", ["rhsgref_cdf_b_Igla_AA_pod", "rhsgref_cdf_b_ZU23"]] call _fnc_saveToTemplate;
-["staticMortars", ["rhsgref_cdf_b_reg_M252"]] call _fnc_saveToTemplate;
+["staticMortars", ["a3a_RHS_M252"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "rhs_12Rnd_m821_HE"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
@@ -102,17 +102,16 @@ _loadoutData set ["shotGuns", []];
 _loadoutData set ["machineGuns", []];
 _loadoutData set ["marksmanRifles", []];
 _loadoutData set ["sniperRifles", []];
-_loadoutData set ["lightATLaunchers", ["rhs_weap_rpg26", "rhs_weap_rshg2"]];
-_loadoutData set ["lightATLaunchers", [
+_loadoutData set ["lightATLaunchers", ["rhs_weap_rpg26", "rhs_weap_rpg26", "rhs_weap_rshg2"]];
+_loadoutData set ["ATLaunchers", [
 ["rhs_weap_rpg7", "", "", "rhs_acc_pgo7v3",["rhs_rpg7_PG7V_mag", "rhs_rpg7_PG7VL_mag"], [], ""],
 ["rhs_weap_rpg7", "", "", "rhs_acc_pgo7v3",["rhs_rpg7_PG7VM_mag", "rhs_rpg7_PG7VL_mag"], [], ""],
 ["rhs_weap_rpg7", "", "", "rhs_acc_pgo7v3",["rhs_rpg7_PG7VL_mag", "rhs_rpg7_type69_airburst_mag", "rhs_rpg7_OG7V_mag"], [], ""]
 ]];
-_loadoutData set ["ATLaunchers", ["rhs_weap_rpg26", "rhs_weap_rshg2"]];
 _loadoutData set ["heavyATLaunchers", [
-["rhs_weap_rpg7", "", "", "rhs_acc_pgo7v3",["rhs_rpg7_PG7VR_mag"], [], ""],
+["rhs_weap_rpg7", "", "", "rhs_acc_pgo7v3",["rhs_rpg7_PG7VR_mag", "rhs_rpg7_PG7VR_mag", "rhs_rpg7_PG7VS_mag"], [], ""],
 ["rhs_weap_rpg7", "", "", "rhs_acc_pgo7v3",["rhs_rpg7_PG7VS_mag"], [], ""],
-["rhs_weap_rpg7", "", "", "rhs_acc_pgo7v3",["rhs_rpg7_TBG7V_mag"], [], ""]
+["rhs_weap_rpg7", "", "", "rhs_acc_pgo7v3",["rhs_rpg7_TBG7V_mag", "rhs_rpg7_TBG7V_mag", "rhs_rpg7_PG7VM_mag"], [], ""]
 ]];
 _loadoutData set ["AALaunchers", ["rhs_weap_igla"]];
 _loadoutData set ["sidearms", ["rhs_weap_6p53", "rhs_weap_makarov_pm"]];

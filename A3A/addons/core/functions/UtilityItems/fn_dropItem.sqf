@@ -12,15 +12,14 @@
 
 params ["_player"];
 
-// Possible to fire this off twice at high script load
-private _dropID = _player getVariable "A3A_actionIDdrop";
-if (isNil "_dropID") exitWith {};
-
 // Go unscheduled to keep the state consistent
 isNil {
-    // Clear drop action
-    _player removeAction _dropID;
-    _player setVariable ["A3A_actionIDdrop", nil];
+    // Possible to fire this off twice at high script load
+    if (_player isNil "A3A_carryActionIDs") exitWith {};
+
+    // Clear drop/loot actions
+    { _player removeAction _x } forEach (_player getVariable "A3A_carryActionIDs");
+    _player setVariable ["A3A_carryActionIDs", nil];
 
     // Clear GetInMan EH
     private _eventIDcarry = _player getVariable "A3A_eventIDcarry";
@@ -54,14 +53,14 @@ isNil {
     [_item, surfaceNormal position _item] remoteExecCall ["setVectorUp", _item];
 
     // Place on closest surface
-    private _pos = getPosASL _item;
-    private _intersects = lineIntersectsSurfaces [_pos, _pos vectorAdd [0,0,-100], _item];
+    private _intersects = lineIntersectsSurfaces [getPosWorld _item, getPosASL _item vectorAdd [0,0,-0.3], _item];
     if (count _intersects > 0) then {
-        _item setPosASL (_intersects select 0 select 0);
+        _item setPosASL (_intersects#0#0 vectorAdd [0,0,0.3]);
     };
 
     [_item, true] remoteExecCall ["enableSimulationGlobal", 2];
 
+    _item lockInventory false;
     if (_item isKindOf "StaticWeapon") then { _item lock false };
 
     _item spawn {

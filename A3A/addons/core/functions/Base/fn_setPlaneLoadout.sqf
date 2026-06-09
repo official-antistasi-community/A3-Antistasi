@@ -46,7 +46,7 @@ if !(_loadout isEqualTo []) then
 {
     Debug_2("Selected new loadout for %1, now equipping %2 with it",typeOf _plane, _plane);
     {
-        _plane setPylonLoadout [_forEachIndex + 1, _x, true];
+        _plane setPylonLoadout [_forEachIndex + 1, _x, true, [-1]];
         _plane setVariable ["loadout", _loadout];
     } forEach _loadout;
 };

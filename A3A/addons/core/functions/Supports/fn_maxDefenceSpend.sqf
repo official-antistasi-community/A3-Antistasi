@@ -40,7 +40,7 @@ if (_curResources < 0) exitWith { 0 };
 if (_target isEqualType objNull and {_target isKindOf "Air"}) exitWith
 {
     private _targThreat = A3A_vehicleResourceCosts getOrDefault [typeOf _target, 0];
-    _targThreat = _targThreat + (_target getVariable ["A3A_airKills", 0]);
+    _targThreat = 0.5 * (_targThreat + (_target getVariable ["A3A_killThreat", 0]));
 
     private _targSpend = 0;
     {
@@ -120,7 +120,8 @@ else
         if (vehicle _x isKindOf "Air") then { continue };
         _enemyStr = _enemyStr + ([10, 30] select isPlayer _x);          // TODO: parameterize player multiplier
         if (vehicle _x != _x and {_x == gunner vehicle _x}) then {
-            _enemyStr = _enemyStr + (A3A_groundVehicleThreat getOrDefault [typeOf vehicle _x, 0]);
+            private _vehThreat = A3A_groundVehicleThreat getOrDefault [typeOf vehicle _x, 0];
+            _enemyStr = _enemyStr + 0.5 * (_vehThreat + (vehicle _x getVariable ["A3A_killThreat", 0]));
         };
     } forEach _nearEnemies;
 
@@ -128,7 +129,7 @@ else
     if (_targetSide == teamPlayer) then {
         private _maxSpendProp = 0.1 + (_enemyStr / (1 + 30 * A3A_activePlayerCount)) ^ 0.6;
         Debug_1("Max spend by rebel threat proportion: %1", _maxSpendProp);
-        _maxSpendLoc = _maxSpendLoc min _maxSpendProp;
+        _maxSpendLoc = _maxSpendLoc * _maxSpendProp;
     };
 
     // Prevent overreacting to threats: recentDamage + enemyStr - friendlyStr

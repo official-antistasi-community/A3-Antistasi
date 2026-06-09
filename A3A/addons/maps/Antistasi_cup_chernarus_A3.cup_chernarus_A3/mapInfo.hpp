@@ -94,7 +94,9 @@ class cup_chernarus_A3 {
 		{7756.32,14820.1,0.00469971}
 	};
 	antennasBlacklistIndex[] = {2,8,9,13,14};
-	banks[] = {}; //no suitable building available
+	banks[] = {
+		{3230.63,13057.2,0},{3074.75,12668.3,0},{11835.9,14351.5,0},{11563.7,14744.5,0},{13875.4,13117.6,0},{8017.28,12752.7,0},{12030.9,9160.35,0},{10642,8015.76,0},{10419.8,2364.62,0},{6536.84,2306.07,0},{2669.99,5277.14,0},{3065.14,7971.5,0},{3813.16,8946.77,0}
+	};
 	garrison[] = {
 		{},{"outpost_22","outpost_23","factory_5","factory_6","resource_5","resource_10","control_41","control_42","control_43","control_52","control_53","control_55","control_56"},{},{"control_41","control_42","control_43","control_52","control_53","control_55","control_56"}
 	};
@@ -109,6 +111,22 @@ class cup_chernarus_A3 {
 		{"Land_fort_artillery_nest_EP1", 200}, {"Land_fort_rampart_EP1", 50}, {"Fort_Barricade", 50}, {"Fence", 20}, {"FenceWood", 10}, {"FenceWoodPalet", 10}, 
 		// Non-camo vanilla stuff
 		{"Land_SandbagBarricade_01_half_F", 20}, {"Land_SlumWall_01_s_2m_F", 5}, {"Land_PillboxBunker_01_hex_F", 200},
-		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10}
+		{"Land_Barricade_01_4m_F", 30}, {"Land_GuardBox_01_brown_F", 80}, {"Land_Tyres_F", 10},
+		// Helipad
+		{"a3a_helipad", 1500, "helipad"}
+	};
+	policeStationTypes[] = {
+		// From Livonia
+		"Land_PoliceStation_01_F", "Land_House_2B01_F", "Land_House_2B02_F", "Land_House_2B03_F", "Land_House_2B04_F",
+		"Land_House_2W01_F", "Land_House_2W02_F", "Land_House_2W03_F", "Land_House_2W04_F", "Land_House_2W05_F",
+		"Land_House_1B01_F", "Land_House_1W11_F", "Land_House_1W12_F", "Land_House_1W07_F",
+		"Land_House_1W02_F", "Land_House_1W09_F", "Land_House_1W05_F", "Land_House_1W06_F"
+	};
+	requiredMods = "CUP Terrains - Core and CUP Terrains - Maps 2.0";
+	size = 15.4;
+	cityCount = 72;
+	airbaseCount = 3;
+	class MapParams {
+		distanceSPWN = 800;
 	};
 };

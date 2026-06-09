@@ -18,8 +18,8 @@
 ["equipmentBox", "Box_NATO_Equip_F"] call _fnc_saveToTemplate;
 
 ["vehiclesBasic", ["UK3CB_ION_B_Desert_Quadbike"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["UK3CB_ION_B_Desert_Hilux", "UK3CB_ION_B_Desert_Hilux_Open", "UK3CB_ION_B_Desert_Landcruiser", "UK3CB_ION_B_Desert_LR_Closed", "UK3CB_ION_B_Desert_LR_Open", "UK3CB_ION_B_Desert_M1025", "UK3CB_ION_B_Desert_M998_2DR", "UK3CB_ION_B_Desert_M998_4DR", "UK3CB_ION_B_Desert_Offroad", "UK3CB_ION_B_Desert_Pickup", "UK3CB_ION_B_Desert_SUV", "UK3CB_ION_B_Desert_SUV_Armoured", "UK3CB_ION_B_Desert_Transit_Transport"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["UK3CB_ION_B_Desert_M1025_M2", "UK3CB_ION_B_Desert_M1025_TOW", "UK3CB_ION_B_Desert_Offroad_M2", "UK3CB_ION_B_Desert_Pickup_M2", "UK3CB_ION_B_Desert_SUV_Armed"]] call _fnc_saveToTemplate;
+["vehiclesLightUnarmed", ["UK3CB_ION_B_Desert_Hilux", "UK3CB_ION_B_Desert_Hilux_Open", "UK3CB_ION_B_Desert_Landcruiser", "UK3CB_ION_B_Desert_LR_Closed", "UK3CB_ION_B_Desert_LR_Open", "UK3CB_ION_B_Desert_M1025", "UK3CB_ION_B_Desert_M998_2DR", "UK3CB_ION_B_Desert_M998_4DR", "UK3CB_ION_B_Desert_Offroad", "UK3CB_ION_B_Desert_Pickup", "UK3CB_ION_B_Desert_SUV", "UK3CB_ION_B_Desert_SUV_Armoured", "UK3CB_ION_B_Desert_Transit_Transport", "UK3CB_ION_B_Urban_Dingo", "UK3CB_ION_B_Urban_LR_SF_WMIK_FFV", "UK3CB_ION_B_Urban_LR_WMIK_FFV"]] call _fnc_saveToTemplate;
+["vehiclesLightArmed", ["UK3CB_ION_B_Desert_M1025_M2", "UK3CB_ION_B_Desert_M1025_TOW", "UK3CB_ION_B_Desert_Offroad_M2", "UK3CB_ION_B_Desert_Pickup_M2", "UK3CB_ION_B_Desert_SUV_Armed", "UK3CB_ION_B_Urban_Dingo_GMG", "UK3CB_ION_B_Urban_Dingo_HMG", "UK3CB_ION_B_Urban_Dingo_MG3", "UK3CB_ION_B_Urban_LR_Opentop_M240", "UK3CB_ION_B_Urban_LR_Opentop_MG3", "UK3CB_ION_B_Urban_LR_SF_WMIK_MILAN_M240", "UK3CB_ION_B_Urban_LR_SF_WMIK_MK19_M240", "UK3CB_ION_B_Urban_LR_SF_WMIK_M240_M240", "UK3CB_ION_B_Urban_LR_SF_WMIK_M2_M240", "UK3CB_ION_B_Urban_MaxxPro_M2", "UK3CB_ION_B_Urban_MaxxPro_MK19"]] call _fnc_saveToTemplate;
 ["vehiclesTrucks", ["UK3CB_ION_B_Desert_T810_Closed", "UK3CB_ION_B_Desert_T810_Open", "UK3CB_ION_B_Desert_Transit_Transport"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["UK3CB_ION_B_Desert_T810_Recovery", "UK3CB_ION_B_Desert_Transit_Cargo"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["UK3CB_ION_B_Desert_M113_supply", "UK3CB_ION_B_Desert_T810_Reammo"]] call _fnc_saveToTemplate;
@@ -37,12 +37,12 @@
 ["vehiclesAmphibious", ["UK3CB_B_AAV_US_WDL"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["UK3CB_KDF_B_Su25SM_CAS", "UK3CB_ION_B_Desert_T28Trojan_CAS"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["UK3CB_KDF_B_MIG29SM"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["UK3CB_ADA_I_L39_PYLON", "UK3CB_KDF_B_MIG29SM"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["RHS_C130J"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["UK3CB_ION_B_Desert_Bell412_Utility", "UK3CB_ION_B_Desert_MELB_H6M", "UK3CB_ION_B_Desert_UH1H", "UK3CB_ION_B_Desert_Unarmed_MH9"]] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", ["UK3CB_ION_B_Desert_Benches_MH9", "UK3CB_ION_B_Desert_Merlin", "UK3CB_ION_B_Desert_Orca", "UK3CB_ION_B_Desert_UH1H_M240"]] call _fnc_saveToTemplate;
-["vehiclesHelisLightAttack", ["UK3CB_ION_B_Desert_UH1H_GUNSHIP", "UK3CB_ION_B_Desert_Orca_Armed_AT", "UK3CB_ION_B_Desert_Orca_Armed_CAS", "UK3CB_ION_B_Desert_Bell412_Armed", "UK3CB_ION_B_Desert_Bell412_Armed_AT", "UK3CB_ION_B_Desert_MELB_AH6M_H"]] call _fnc_saveToTemplate;
+["vehiclesHelisLightAttack", ["UK3CB_ION_B_Urban_MELB_AH6M_L", "UK3CB_ION_B_Urban_MELB_AH6M_H", "UK3CB_ION_B_Urban_AH9", "UK3CB_ION_B_Urban_Bell412_Armed_dynamicLoadout", "UK3CB_ION_B_Urban_Orca_Armed_AT", "UK3CB_ION_B_Urban_UH1H_GUNSHIP", "UK3CB_ION_B_Urban_Bell412_Armed_AT"]] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", ["UK3CB_CW_US_B_LATE_AH1Z_GS", "UK3CB_CW_US_B_LATE_AH1Z", "UK3CB_CW_US_B_LATE_AH1Z_CS"]] call _fnc_saveToTemplate;
 
 ["vehiclesArtillery", ["rhsusf_m109_usarmy", "UK3CB_B_M270_MLRS_HE_WDL", "UK3CB_B_M270_MLRS_Cluster_WDL"]] call _fnc_saveToTemplate;
@@ -53,7 +53,7 @@
 ]] call _fnc_saveToTemplate;
 
 ["uavsAttack", ["B_UAV_02_dynamicLoadout_F"]] call _fnc_saveToTemplate;
-["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
+["uavsPortable", ["UK3CB_ION_B_Urban_Drone_Bombs"]] call _fnc_saveToTemplate;
 
 //Config special vehicles
 ["vehiclesMilitiaLightArmed", ["UK3CB_ION_B_Urban_LR_M2", "UK3CB_ION_B_Urban_M1025_M2", "UK3CB_ION_B_Urban_Offroad_M2", "UK3CB_ION_B_Urban_SUV_Armed"]] call _fnc_saveToTemplate;
@@ -65,7 +65,7 @@
 ["staticMGs", ["RHS_M2StaticMG_D"]] call _fnc_saveToTemplate;
 ["staticAT", ["RHS_TOW_TriPod_D"]] call _fnc_saveToTemplate;
 ["staticAA", ["RHS_Stinger_AA_pod_D"]] call _fnc_saveToTemplate;
-["staticMortars", ["RHS_M252_D"]] call _fnc_saveToTemplate;
+["staticMortars", ["a3a_RHS_M252"]] call _fnc_saveToTemplate;
 
 ["mortarMagazineHE", "rhs_12Rnd_m821_HE"] call _fnc_saveToTemplate;
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
@@ -327,12 +327,14 @@ _militaryLoadoutData set ["binoculars", ["Laserdesignator"]];
 _militaryLoadoutData set ["slRifles", [
 ["UK3CB_G36V", "", "rhsusf_acc_anpeq16a", "rhsusf_acc_su230_mrds", ["UK3CB_G36_30rnd_556x45", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_RT"], [], ""],
 ["UK3CB_G3A3V_RIS", "", "", "rhsusf_acc_su230a_mrds", ["UK3CB_G3_20rnd_762x51_GT", "UK3CB_G3_20rnd_762x51_G", "UK3CB_G3_20rnd_762x51_G"], [], ""],
+["UK3CB_AK12", "", "rhsusf_acc_anpeq15A", "rhsusf_acc_ACOG_USMC", ["UK3CB_AK12_30rnd_Magazine", "UK3CB_AK12_30rnd_Magazine_Y", "UK3CB_AK12_30rnd_Magazine_W", "UK3CB_AK12_30rnd_Magazine_R"], [], "rhs_acc_grip_rk2"],
 ["rhs_weap_hk416d145", "", "rhsusf_acc_anpeq16a", "rhsusf_acc_su230_mrds", ["rhs_mag_30Rnd_556x45_M855A1_Stanag_Tracer_Red", "rhs_mag_30Rnd_556x45_M855A1_Stanag", "rhs_mag_30Rnd_556x45_M855A1_Stanag"], [], ""],
 ["UK3CB_AG36V", "", "", "rhsusf_acc_su230_mrds", ["UK3CB_G36_30rnd_556x45", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_RT"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""],
 ["rhs_weap_hk416d145_m320", "", "", "rhsusf_acc_su230_mrds", ["rhs_mag_30Rnd_556x45_M855A1_Stanag_Tracer_Red", "rhs_mag_30Rnd_556x45_M855A1_Stanag", "rhs_mag_30Rnd_556x45_M855A1_Stanag"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""]
 ]];
 _militaryLoadoutData set ["rifles", [
 ["UK3CB_G36V", "", "rhsusf_acc_anpeq16a", "rhsusf_acc_eotech_552", ["UK3CB_G36_30rnd_556x45", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_RT"], [], ""],
+["UK3CB_AK12", "", "rhsusf_acc_anpeq15A", "rhsusf_acc_eotech_552", ["UK3CB_AK12_30rnd_Magazine", "UK3CB_AK12_30rnd_Magazine_Y", "UK3CB_AK12_30rnd_Magazine_W", "UK3CB_AK12_30rnd_Magazine_R"], [], ""],
 ["UK3CB_G36V", "", "rhsusf_acc_anpeq16a", "rhsusf_acc_compm4", ["UK3CB_G36_30rnd_556x45", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_RT"], [], ""],
 ["UK3CB_G3A3V_RIS", "", "", "rhsusf_acc_eotech_552", ["UK3CB_G3_20rnd_762x51_GT", "UK3CB_G3_20rnd_762x51_G", "UK3CB_G3_20rnd_762x51_G"], [], ""]
 ]];
@@ -347,6 +349,7 @@ _militaryLoadoutData set ["SMGs", [
 _militaryLoadoutData set ["grenadeLaunchers", [
 ["UK3CB_AG36V", "", "", "rhsusf_acc_eotech_552", ["UK3CB_G36_30rnd_556x45", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_RT"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""],
 ["UK3CB_AG36V", "", "", "rhsusf_acc_compm4", ["UK3CB_G36_30rnd_556x45", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_R", "UK3CB_G36_30rnd_556x45_RT"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""],
+["UK3CB_AK12_GL", "", "", "rhsusf_acc_mrds", ["UK3CB_AK12_30rnd_Magazine", "UK3CB_AK12_30rnd_Magazine_Y", "UK3CB_AK12_30rnd_Magazine_W", "UK3CB_AK12_30rnd_Magazine_R"], ["rhs_VOG25", "rhs_VOG25P", "rhs_VG40OP_white", "rhs_GRD40_White"], ""],
 ["rhs_weap_hk416d145_m320", "", "", "rhsusf_acc_eotech_552", ["rhs_mag_30Rnd_556x45_M855A1_Stanag_Tracer_Red", "rhs_mag_30Rnd_556x45_M855A1_Stanag", "rhs_mag_30Rnd_556x45_M855A1_Stanag"], ["rhs_mag_M441_HE", "rhs_mag_M441_HE", "rhs_mag_M433_HEDP", "rhs_mag_m714_White"], ""]
 ]];
 _militaryLoadoutData set ["machineGuns", [
@@ -390,6 +393,7 @@ _policeLoadoutData set ["helmets", ["UK3CB_H_Cap_APD", "UK3CB_H_Radio_Cap_APD", 
 _policeLoadoutData set ["glasses", ["rhs_googles_black", "rhs_googles_clear", "rhs_googles_orange", "rhs_googles_yellow", "rhsusf_oakley_goggles_clr", "rhsusf_oakley_goggles_ylw", "rhsusf_oakley_goggles_blk", "G_Shades_Black"]];
 _policeLoadoutData set ["shotGuns", [
 ["rhs_weap_M590_8RD", "", "", "", ["rhsusf_8Rnd_00Buck", "rhsusf_8Rnd_Slug"], [], ""],
+["UK3CB_AA12", "", "", "", ["uk3cb_aa12_20rnd_12g_buckshot_magazine", "uk3cb_aa12_20rnd_12g_slug_magazine"], [], ""],
 ["rhs_weap_M590_5RD", "", "", "", ["rhsusf_5Rnd_00Buck", "rhsusf_5Rnd_Slug"], [], ""]
 ]];
 _policeLoadoutData set ["SMGs", ["UK3CB_P90_black", "UK3CB_P90C_black", "UK3CB_MP5A4"]];

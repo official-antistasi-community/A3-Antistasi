@@ -124,6 +124,9 @@ player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry
 _nameXMiss = if (A3A_hasIFA) then {"Armia Krajowa"} else {if (worldName == "Tanoa") then {"Warlords of the Pacific"} else {"Antistasi"}};
 player createDiaryRecord ["Diary",[format [localize "STR_antistasi_journal_entry_header_Default_1"],format [localize "STR_antistasi_journal_entry_text_Default_1",_nameXMiss]]];
 
+_index =player createDiarySubject ["Changelog","Antistasi Changelog"];
+player createDiaryRecord ["Changelog",["Changelog",loadFile QPATHTOFOLDER(changelog_briefing.txt)]];
+
 // Always include the Credits. It's important!
 _index =player createDiarySubject ["Credits","Credits"];
 player createDiaryRecord ["Credits",[format [localize "STR_antistasi_journal_entry_header_Credits_3"],format [localize "STR_antistasi_journal_entry_text_Credits_3"]]];

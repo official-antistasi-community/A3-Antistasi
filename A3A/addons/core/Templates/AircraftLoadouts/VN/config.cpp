@@ -6,7 +6,7 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"vn_weapons"};
+        requiredAddons[] = {"loadorder_f_vietnam"};
         skipWhenMissingDependencies = 1;
         author = AUTHOR;
         authors[] = { AUTHORS };
@@ -22,16 +22,16 @@ class A3A {
         {
             class baseCAS;
             class vn_b_air_f4c_at : baseCAS {
-                loadout[] = {"vn_missile_f4_out_agm45_mag_x1","vn_missile_f4_out_agm45_mag_x1","vn_rocket_ffar_f4_lau3_m229_he_x57","vn_rocket_ffar_f4_lau3_m229_he_x57","vn_bomb_f4_out_750_blu1b_fb_mag_x3","vn_missile_f4_lau7_aim9e_mag_x2","vn_missile_f4_lau7_aim9e_mag_x2","vn_missile_aim7e2_mag_x1","vn_missile_aim7e2_mag_x1","vn_missile_aim7e2_mag_x1","vn_missile_aim7e2_mag_x1"};
+                loadout[] = {"vn_missile_f4_out_agm12c_mag_x1","vn_missile_f4_out_agm12c_mag_x1","vn_rocket_ffar_f4_lau3_m229_he_x57","vn_rocket_ffar_f4_lau3_m229_he_x57","vn_bomb_f4_out_750_blu1b_fb_mag_x3","vn_missile_f4_lau7_aim9e_mag_x2","vn_missile_f4_lau7_aim9e_mag_x2","vn_missile_aim7e2_mag_x1","vn_missile_aim7e2_mag_x1","vn_missile_aim7e2_mag_x1","vn_missile_aim7e2_mag_x1"};
                 rocketLauncher[] = {"vn_rocket_ffar_275in_launcher_m229"};
-                missileLauncher[] = {"vn_missile_agm45_launcher"};
+                missileLauncher[] = {"vn_missile_agm12c_launcher"};
             };
             
             class vn_b_air_f100d_at : baseCAS {
-                loadout[] = {"vn_rocket_ffar_f4_lau59_m229_he_x21","vn_rocket_ffar_f4_lau59_m229_he_x21","vn_fuel_f100_335_camo_01_mag","vn_fuel_f100_335_camo_01_mag","vn_missile_agm45_03_mag_x1","vn_missile_agm45_03_mag_x1"};
+                loadout[] = {"vn_rocket_ffar_f4_lau59_m229_he_x21","vn_rocket_ffar_f4_lau59_m229_he_x21","vn_fuel_f100_335_camo_01_mag","vn_fuel_f100_335_camo_01_mag","vn_missile_agm12c_mag_01_x1","vn_missile_agm12c_mag_01_x1"};
                 mainGun[] = {"vn_m39a1_v_quad"};
                 rocketLauncher[] = {"vn_rocket_ffar_275in_launcher_m229"};
-                missileLauncher[] = {"vn_missile_agm45_launcher"};
+                missileLauncher[] = {"vn_missile_agm12c_launcher"};
             };
             
             class vn_o_air_mig19_at : baseCAS {

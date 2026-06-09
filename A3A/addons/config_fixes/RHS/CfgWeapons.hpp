@@ -34,6 +34,14 @@ class CfgWeapons
         };
         modes[] = {"FullAuto","Ai_Burst"};
     };
+	
+	class rhs_weap_makarov_pm;
+	class rhs_weap_pb_6p9 : rhs_weap_makarov_pm {
+		baseWeapon = "a3a_rhs_weap_pb_6p9_noSup";
+	};
+	class a3a_rhs_weap_pb_6p9_noSup : rhs_weap_pb_6p9 {
+		class LinkedItems{};
+	};
 
     // Price overrides for gun shop
     // Subsonic sniper

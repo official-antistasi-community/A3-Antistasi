@@ -18,7 +18,7 @@ params ["_target", "_side", "_maxSpend", "_availTypes"];
 if !(_target isKindOf "Air") exitWith { 0 };     // can't hit anything except air
 
 private _targThreat = A3A_vehicleResourceCosts getOrDefault [typeOf _target, 0];
-_targThreat = _targThreat + (_target getVariable ["A3A_airKills", 0]);
+_targThreat = 0.5 * (_targThreat + (_target getVariable ["A3A_killThreat", 0]));
 
 // Avoid using SAMs against low-threat targets unless it's a low air faction
 private _lowAir = Faction(_side) getOrDefault ["attributeLowAir", false];

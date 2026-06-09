@@ -21,5 +21,8 @@ while {alive _veh} do
 		true;
 	};
 
-	if (_despawn) exitWith { deleteVehicle _veh };
+	if (_despawn) exitWith {
+		{ deleteVehicle _x } forEach attachedObjects _veh;
+		deleteVehicle _veh;
+	};
 };

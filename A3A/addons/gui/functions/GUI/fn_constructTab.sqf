@@ -52,9 +52,6 @@ switch (_mode) do
             ctrlDelete _x;
         } forEach allControls _constructControlsGroup;
 
-        // Get list of buildings along with construction times and costs
-        private _constructionsList = [] call A3A_fnc_initBuildableObjects;
-
         private _added = 0;
         {
             private _className = _x select 0;

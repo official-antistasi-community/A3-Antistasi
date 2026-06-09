@@ -45,6 +45,7 @@ switch (_mode) do
         _display setVariable ["savedFactions", [[], [], []]];
         _display setVariable ["savedParams", []];
         _listboxCtrl setVariable ["rowIndex", -1];
+        (_display displayCtrl A3A_IDC_SETUP_NAMESPACECHECKBOX) cbSetChecked (!A3A_setup_isLinux);
 
         // Do these programmatically so that we can reuse the column data
         private _headerCtrl = _display displayCtrl A3A_IDC_SETUP_SAVESHEADER;
@@ -100,6 +101,23 @@ switch (_mode) do
                 ["fillParams"] call A3A_GUI_fnc_setupParamsTab;
             };
         };
+
+        private _index = _listboxCtrl getVariable ["rowIndex", -1];
+        private _exportButton = _display displayCtrl A3A_IDC_SETUP_EXPORTBUTTON;
+        if (_index == -1) exitWith {
+            _exportButton ctrlEnable false;
+            _exportButton ctrlSetTooltip localize "STR_antistasi_dialogs_setup_noExportSel";
+        };
+
+        private _saveData = A3A_setup_saveData select _index;
+        private _saveHasJSON = _saveData getOrDefault ["json",false];
+        if !(_saveHasJSON) exitWith {
+            _exportButton ctrlEnable false;
+            _exportButton ctrlSetTooltip localize "STR_antistasi_dialogs_setup_noExportOld";
+        };
+        
+        _exportButton ctrlEnable true;
+        _exportButton ctrlSetTooltip "";
     };
 
     case ("setSaveData"):
@@ -151,7 +169,8 @@ switch (_mode) do
     {
         private _saveData = createHashMap;
         private _confirmText = "";
-        if (cbChecked _newGameCtrl and !cbChecked _copyGameCtrl) then {
+        private _isNewGame = (cbChecked _newGameCtrl and !cbChecked _copyGameCtrl);
+        if (_isNewGame) then {
             _saveData set ["startType", "new"];
             _saveData set ["name", ctrlText (_display displayCtrl A3A_IDC_SETUP_NAMEEDITBOX)];
             _saveData set ["startPos", markerPos "Synd_HQ"];
@@ -231,6 +250,23 @@ switch (_mode) do
     case ("setHQPos"):
     {
         createDialog "A3A_SetupHQPosDialog";
+    };
+
+    case ("exportSave"):
+    {
+        private _index = _listboxCtrl getVariable ["rowIndex", -1];
+        private _button = _display displayCtrl A3A_IDC_SETUP_EXPORTBUTTON;
+        if (_index == -1) exitWith {_button};
+
+        private _saveData = A3A_setup_saveData select _index;
+        _display setVariable ["exportSave", _saveData];
+        createDialog "A3A_SetupTransferDialog";
+    };
+
+    case ("importSave"):
+    {
+        _display setVariable ["exportSave", nil];
+        createDialog "A3A_SetupTransferDialog";
     };
 
     case ("deleteGame"):

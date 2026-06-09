@@ -33,6 +33,7 @@ addons[]=
 	"A3_Structures_F_Mil_Helipads",
 	"A3_Structures_F_Mil_Cargo",
 	"A3_Modules_F",
+	"A3A_core",
 	"A3_Ui_F",
 	"A3_Structures_F_Ind_Transmitter_Tower",
 	"A3_Structures_F_Civ_Lamps",
@@ -81,7 +82,7 @@ class AddonsMetaData
 {
 	class List
 	{
-		items=27;
+		items=28;
 		class Item0
 		{
 			className="A3_Structures_F_Mil";
@@ -247,6 +248,12 @@ class AddonsMetaData
 			className="CUP_Misc_e_Config";
 			name="CUP_Misc_e_Config";
 		};
+		class Item27
+		{
+			className="A3A_core";
+			name="A3A - core";
+			author="Antistasi Dev Team";
+		};
 	};
 };
 randomSeed=10030831;
@@ -255,7 +262,7 @@ class Mission
 	assetType="Free";
 	class Intel
 	{
-		briefingName=$STR_antistasi_mission_info_anizay_mapname_text;
+		briefingName=$STR_antistasi_mission_info_tem_anizay_mapname_text;
 		resistanceWest=0;
 		year=2035;
 		month=6;
@@ -19880,8 +19887,6 @@ class Mission
 									flags=3;
 									class Attributes
 									{
-										name="commanderX";
-										description="Default Commander";
 										isPlayer=1;
 										isPlayable=1;
 										class Inventory
@@ -19890,38 +19895,8 @@ class Mission
 										};
 									};
 									id=2639;
-									type="I_G_Soldier_TL_F";
+									type="a3a_unit_player";
 									atlOffset=2.2093964;
-									class CustomAttributes
-									{
-										class Attribute0
-										{
-											property="speaker";
-											expression="_this setspeaker _value;";
-											class Value
-											{
-												class data
-												{
-													singleType="STRING";
-													value="Male04GRE";
-												};
-											};
-										};
-										class Attribute1
-										{
-											property="pitch";
-											expression="_this setpitch _value;";
-											class Value
-											{
-												class data
-												{
-													singleType="SCALAR";
-													value=1;
-												};
-											};
-										};
-										nAttributes=2;
-									};
 								};
 								class Item1
 								{
@@ -19941,7 +19916,7 @@ class Mission
 										};
 									};
 									id=2640;
-									type="I_G_Soldier_TL_F";
+									type="a3a_unit_player";
 									atlOffset=1.5630188;
 								};
 								class Item2
@@ -19962,7 +19937,7 @@ class Mission
 										};
 									};
 									id=2641;
-									type="I_G_Soldier_TL_F";
+									type="a3a_unit_player";
 									atlOffset=1.4959564;
 								};
 								class Item3
@@ -19983,7 +19958,7 @@ class Mission
 										};
 									};
 									id=2642;
-									type="I_G_Soldier_TL_F";
+									type="a3a_unit_player";
 									atlOffset=1.405426;
 								};
 								class Item4
@@ -20004,7 +19979,7 @@ class Mission
 										};
 									};
 									id=2643;
-									type="I_G_Soldier_TL_F";
+									type="a3a_unit_player";
 									atlOffset=1.3078613;
 								};
 								class Item5
@@ -20025,7 +20000,7 @@ class Mission
 										};
 									};
 									id=2644;
-									type="I_G_Soldier_TL_F";
+									type="a3a_unit_player";
 									atlOffset=1.2042542;
 								};
 								class Item6
@@ -20046,7 +20021,7 @@ class Mission
 										};
 									};
 									id=2645;
-									type="I_G_Soldier_F";
+									type="a3a_unit_player";
 									atlOffset=1.1147766;
 								};
 								class Item7
@@ -20067,7 +20042,7 @@ class Mission
 										};
 									};
 									id=2646;
-									type="I_G_Soldier_F";
+									type="a3a_unit_player";
 									atlOffset=1.0294037;
 								};
 								class Item8
@@ -20088,7 +20063,7 @@ class Mission
 										};
 									};
 									id=2647;
-									type="I_G_Soldier_F";
+									type="a3a_unit_player";
 									atlOffset=1.1350403;
 								};
 								class Item9
@@ -20109,7 +20084,7 @@ class Mission
 										};
 									};
 									id=2648;
-									type="I_G_Soldier_F";
+									type="a3a_unit_player";
 									atlOffset=1.0546265;
 								};
 								class Item10
@@ -20130,7 +20105,7 @@ class Mission
 										};
 									};
 									id=2649;
-									type="I_G_Soldier_F";
+									type="a3a_unit_player";
 									atlOffset=0.96520996;
 								};
 								class Item11
@@ -20151,7 +20126,7 @@ class Mission
 										};
 									};
 									id=2650;
-									type="I_G_Soldier_F";
+									type="a3a_unit_player";
 									atlOffset=0.87738037;
 								};
 								class Item12
@@ -20172,7 +20147,7 @@ class Mission
 										};
 									};
 									id=2651;
-									type="I_G_Soldier_F";
+									type="a3a_unit_player";
 									atlOffset=0.78245544;
 								};
 								class Item13
@@ -20193,7 +20168,7 @@ class Mission
 										};
 									};
 									id=2652;
-									type="I_G_Soldier_F";
+									type="a3a_unit_player";
 									atlOffset=0.67633057;
 								};
 								class Item14
@@ -20214,7 +20189,7 @@ class Mission
 										};
 									};
 									id=2653;
-									type="I_G_Soldier_AR_F";
+									type="a3a_unit_player";
 									atlOffset=1.0090179;
 								};
 								class Item15
@@ -20235,7 +20210,7 @@ class Mission
 										};
 									};
 									id=2654;
-									type="I_G_Soldier_AR_F";
+									type="a3a_unit_player";
 									atlOffset=0.91348267;
 								};
 								class Item16
@@ -20256,7 +20231,7 @@ class Mission
 										};
 									};
 									id=2655;
-									type="I_G_Soldier_AR_F";
+									type="a3a_unit_player";
 									atlOffset=0.8175354;
 								};
 								class Item17
@@ -20277,7 +20252,7 @@ class Mission
 										};
 									};
 									id=2656;
-									type="I_G_Soldier_AR_F";
+									type="a3a_unit_player";
 									atlOffset=0.70054626;
 								};
 								class Item18
@@ -20298,7 +20273,7 @@ class Mission
 										};
 									};
 									id=2657;
-									type="I_G_Soldier_AR_F";
+									type="a3a_unit_player";
 									atlOffset=0.56147766;
 								};
 								class Item19
@@ -20319,7 +20294,7 @@ class Mission
 										};
 									};
 									id=2658;
-									type="I_G_Soldier_AR_F";
+									type="a3a_unit_player";
 									atlOffset=0.42988586;
 								};
 								class Item20
@@ -20340,7 +20315,7 @@ class Mission
 										};
 									};
 									id=2659;
-									type="I_G_Soldier_GL_F";
+									type="a3a_unit_player";
 									atlOffset=0.88264465;
 								};
 								class Item21
@@ -20361,7 +20336,7 @@ class Mission
 										};
 									};
 									id=2660;
-									type="I_G_Soldier_GL_F";
+									type="a3a_unit_player";
 									atlOffset=0.79734802;
 								};
 								class Item22
@@ -20382,7 +20357,7 @@ class Mission
 										};
 									};
 									id=2661;
-									type="I_G_Soldier_GL_F";
+									type="a3a_unit_player";
 									atlOffset=0.64068604;
 								};
 								class Item23
@@ -20403,7 +20378,7 @@ class Mission
 										};
 									};
 									id=2662;
-									type="I_G_Soldier_GL_F";
+									type="a3a_unit_player";
 									atlOffset=0.51522827;
 								};
 								class Item24
@@ -20424,7 +20399,7 @@ class Mission
 										};
 									};
 									id=2663;
-									type="I_G_Soldier_GL_F";
+									type="a3a_unit_player";
 									atlOffset=0.35932922;
 								};
 								class Item25
@@ -20445,7 +20420,7 @@ class Mission
 										};
 									};
 									id=2664;
-									type="I_G_Soldier_GL_F";
+									type="a3a_unit_player";
 									atlOffset=0.23213196;
 								};
 								class Item26
@@ -20466,7 +20441,7 @@ class Mission
 										};
 									};
 									id=2665;
-									type="I_G_medic_F";
+									type="a3a_unit_player";
 									atlOffset=0.64480591;
 								};
 								class Item27
@@ -20487,7 +20462,7 @@ class Mission
 										};
 									};
 									id=2666;
-									type="I_G_medic_F";
+									type="a3a_unit_player";
 									atlOffset=0.57946777;
 								};
 								class Item28
@@ -20508,7 +20483,7 @@ class Mission
 										};
 									};
 									id=2667;
-									type="I_G_medic_F";
+									type="a3a_unit_player";
 									atlOffset=0.40800476;
 								};
 								class Item29
@@ -20529,7 +20504,7 @@ class Mission
 										};
 									};
 									id=2668;
-									type="I_G_medic_F";
+									type="a3a_unit_player";
 									atlOffset=0.28741455;
 								};
 								class Item30
@@ -20550,7 +20525,7 @@ class Mission
 										};
 									};
 									id=2669;
-									type="I_G_medic_F";
+									type="a3a_unit_player";
 									atlOffset=0.14077759;
 								};
 								class Item31
@@ -20571,7 +20546,7 @@ class Mission
 										};
 									};
 									id=2670;
-									type="I_G_medic_F";
+									type="a3a_unit_player";
 									atlOffset=0.0065917969;
 								};
 								class Item32
@@ -20592,7 +20567,7 @@ class Mission
 										};
 									};
 									id=2671;
-									type="I_G_engineer_F";
+									type="a3a_unit_player";
 									atlOffset=0.3659668;
 								};
 								class Item33
@@ -20613,7 +20588,7 @@ class Mission
 										};
 									};
 									id=2672;
-									type="I_G_engineer_F";
+									type="a3a_unit_player";
 									atlOffset=0.27748108;
 								};
 								class Item34
@@ -20634,7 +20609,7 @@ class Mission
 										};
 									};
 									id=2673;
-									type="I_G_engineer_F";
+									type="a3a_unit_player";
 									atlOffset=0.13031006;
 								};
 								class Item35
@@ -20655,7 +20630,7 @@ class Mission
 										};
 									};
 									id=2674;
-									type="I_G_engineer_F";
+									type="a3a_unit_player";
 									atlOffset=0.022338867;
 								};
 								class Item36
@@ -20676,7 +20651,7 @@ class Mission
 										};
 									};
 									id=2675;
-									type="I_G_engineer_F";
+									type="a3a_unit_player";
 									atlOffset=-0.11579895;
 								};
 								class Item37
@@ -20697,7 +20672,7 @@ class Mission
 										};
 									};
 									id=2676;
-									type="I_G_engineer_F";
+									type="a3a_unit_player";
 									atlOffset=-0.25114441;
 								};
 							};
@@ -20748,49 +20723,6 @@ class Mission
 									id=766;
 									type="I_G_officer_F";
 									atlOffset=-1.5258789e-005;
-									class CustomAttributes
-									{
-										class Attribute0
-										{
-											property="speaker";
-											expression="_this setspeaker _value;";
-											class Value
-											{
-												class data
-												{
-													singleType="STRING";
-													value="Male06GRE";
-												};
-											};
-										};
-										class Attribute1
-										{
-											property="pitch";
-											expression="_this setpitch _value;";
-											class Value
-											{
-												class data
-												{
-													singleType="SCALAR";
-													value=1;
-												};
-											};
-										};
-										class Attribute2
-										{
-											property="face";
-											expression="_this setface _value;";
-											class Value
-											{
-												class data
-												{
-													singleType="STRING";
-													value="";
-												};
-											};
-										};
-										nAttributes=3;
-									};
 								};
 							};
 							class Attributes

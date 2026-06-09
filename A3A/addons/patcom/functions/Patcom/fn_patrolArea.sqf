@@ -46,8 +46,14 @@ private _patrolParams = _group getVariable "PATCOM_Patrol_Params";
 if ((side leader _group) == civilian) then {
     [_group, "CARELESS", "NORMAL", "LINE", "BLUE", "AUTO"] call A3A_fnc_patrolSetCombatModes;
 } else {
-    [_group, "SAFE", "LIMITED", "COLUMN", "WHITE", "AUTO"] call A3A_fnc_patrolSetCombatModes;
-    _group setVariable ["PATCOM_Group_State", "CALM"];
+    private _knownEnemies = _group targets [true, 0, [], PATCOM_TARGET_TIME];
+    if (_knownEnemies isEqualTo []) then {
+        [_group, "SAFE", "LIMITED", "COLUMN", "YELLOW", "AUTO"] call A3A_fnc_patrolSetCombatModes;
+        _group setVariable ["PATCOM_Group_State", "CALM"];
+    } else {
+        [_group, "COMBAT", "NORMAL", "WEDGE", "RED", "AUTO"] call A3A_fnc_patrolSetCombatModes;
+        _group setVariable ["PATCOM_Group_State", "COMBAT"];
+    };
 };
 
 if (PATCOM_DEBUG) then {
@@ -58,14 +64,9 @@ if (PATCOM_DEBUG) then {
     };
 };
 
-// We check to see if the waypoint is still active after 3 minutes. If waypoint isn't complete the unit is likely stuck.
-if (_group getVariable "PATCOM_WaypointTime" < serverTime) exitWith {
-    // Return home
-    [_group, _groupHomePosition, "MOVE", "PATCOM_PATROL_AREA", -1, _patrolParams # 1] call A3A_fnc_patrolCreateWaypoint;
-};
 
-// Check for current waypoints and make sure they are type MOVE for patrol
-if (currentWaypoint _group == count waypoints _group || waypointType [_group, currentWaypoint _group] != "MOVE") then {
+// Check if waypoint was reached, wasn't MOVE (from previous attack order) or timed out
+if (currentWaypoint _group == count waypoints _group || waypointType [_group, currentWaypoint _group] != "MOVE" || time > _group getVariable ["PATCOM_WaypointTime", 0]) then {
     if (_searchBuildings) then {
         // Percentage chance on searching a nearby building.
         if (15 > random 100) exitWith {

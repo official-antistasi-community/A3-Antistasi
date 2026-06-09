@@ -67,13 +67,11 @@ lootVest append allArmoredVests + allCivilianVests;
 /////////////////////
 //   Device Bags  ///
 /////////////////////
-private _lootDeviceBag = [];
-
-switch (teamPlayer) do {
-     case independent: {_lootDeviceBag append rebelBackpackDevice};
-     default {_lootDeviceBag append occupantBackpackDevice};
+lootDevice = allBackpacksRadio;
+private _quantity = ceil (count allBackpacksRadio / (count rebelBackpackDevice max 1));
+for "_i" from 1 to _quantity do {
+     lootDevice append rebelBackpackDevice;
 };
-lootDevice append _lootDeviceBag + allBackpacksRadio;
 
 ////////////////////////////////////
 //      REBEL STARTING ITEMS     ///

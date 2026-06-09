@@ -2,10 +2,9 @@
 if (!isServer and hasInterface) exitWith{};
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-private ["_antenna","_positionX","_timeLimit","_markerX","_nameDest","_mrkFinal","_tsk"];
+private ["_positionX","_timeLimit","_nameDest","_mrkFinal","_tsk"];
 
-_antenna = _this select 0;
-_markerX = [markersX,_antenna] call BIS_fnc_nearestPosition;
+params ["_markerX", "_antenna"];
 
 _difficultX = if (random 10 < tierWar) then {true} else {false};
 _leave = false;
@@ -30,23 +29,22 @@ _mrkFinal setMarkerShape "ICON";
 private _taskId = "DES" + str A3A_taskCount;
 [[teamPlayer,civilian],_taskId,[format [localize "STR_A3A_fn_mission_des_ante_text",_nameDest,_displayTime,FactionGet(occ,"name")],localize "STR_A3A_fn_mission_des_ante_titel",_mrkFinal],_positionX,false,0,true,"Destroy",true] call BIS_fnc_taskCreate;
 [_taskId, "DES", "CREATED"] remoteExecCall ["A3A_fnc_taskUpdate", 2];
-waitUntil {sleep 1;(dateToNumber date > _dateLimitNum) or (not alive _antenna) or (not(sidesX getVariable [_markerX,sideUnknown] == Occupants))};
+waitUntil {sleep 1;(dateToNumber date > _dateLimitNum) or (not alive _antenna) or (sidesX getVariable _markerX == teamPlayer)};
 
 _bonus = if (_difficultX) then {2} else {1};
 
 if (dateToNumber date > _dateLimitNum) then
 	{
 	[_taskId, "DES", "FAILED"] call A3A_fnc_taskSetState;
-	[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+	[-10,theBoss] call A3A_fnc_playerScoreAdd;
 	}
 else
 	{
 	sleep 15;
 	[_taskId, "DES", "SUCCEEDED"] call A3A_fnc_taskSetState;
-    [_side, 10, 120] remoteExec ["A3A_fnc_addAggression", 2];
+	[_side, 10, 120] remoteExec ["A3A_fnc_addAggression", 2];
 	[400*_bonus, _side] remoteExec ["A3A_fnc_timingCA",2];
-	{if (_x distance _positionX < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
-	[10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
+	[20*_bonus, false, _positionX, 500] call A3A_tasks_fnc_rewardPlayers;     // any players within 500m
 	};
 
 deleteMarker _mrkFinal;

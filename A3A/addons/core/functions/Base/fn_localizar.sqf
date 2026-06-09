@@ -32,5 +32,6 @@ else
 			_textX = format [localize "STR_A3A_fn_base_localizar_forest",_city]
 			};
 		};
+	if (_siteX == "Synd_HQ") then {_textX = localize "STR_A3A_fn_base_localizar_HQ"};
 	};
 _textX

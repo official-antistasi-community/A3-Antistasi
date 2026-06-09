@@ -30,3 +30,6 @@ force ace_ui_groupBar = true;
 
 //ACE Headless
 force acex_headless_enabled = false;
+
+// ACE Rearm
+force ace_rearm_enabled = false;

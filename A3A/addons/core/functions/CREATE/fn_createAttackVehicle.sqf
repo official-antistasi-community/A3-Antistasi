@@ -2,6 +2,7 @@
 
     Execution on: HC or Server
 
+    Environment: Scheduled. Land vehicles delay after spawning until place is cleared
     Scope: Internal
 
     Parameters:
@@ -30,7 +31,7 @@ private _vehicle = if (_vehicleType isKindOf "Ship") then {
     _veh setDir (_seaPath#-1 getDir _seaPath#1);
     _veh;
 } else {
-    [_markerOrigin, _vehicleType] call A3A_fnc_spawnVehicleAtMarker;
+    [_markerOrigin, _vehicleType, _posDestination] call A3A_fnc_spawnVehicleAtMarker;
 };
 if(isNull _vehicle) exitWith {objNull};
 
@@ -39,8 +40,29 @@ if(isNull _vehicle) exitWith {objNull};
 _landPosBlacklist = [_vehicle, _crewGroup, _cargoGroup, _posDestination, _markerOrigin, _landPosBlacklist, _seaPath] call A3A_fnc_createVehicleQRFBehaviour;
 ServerDebug_5("Spawn Performed: Created vehicle %1 with %2 crew (%3) and %4 cargo (%5)", typeof _vehicle, count units _crewGroup, _crewGroup, count units _cargoGroup, _cargoGroup);
 
+// Wait until land vehicle has cleared the spawn place.
+if (_vehicleType isKindOf "Land") then {
+
+    private _spawnPos = getPosATL _vehicle;
+    private _spawnTime = time + 20;
+    waitUntil { _spawnPos distance2d _vehicle > 20 or time > _spawnTime };
+
+    if (_spawnPos distance2d _vehicle < 20) then {
+        Error_2("Vehicle %1 failed to clear spawn at %2", _vehicle, _markerOrigin);
+
+        // If it jammed hard then just move the thing somewhere safe
+        if (currentWaypoint _crewGroup >= count waypoints _crewGroup) exitWith {
+            Error_1("Vehicle %1 has no waypoints; dumping it", _vehicle);
+            private _emptyPos = [getPosATL _vehicle, _vehicle, getDir _vehicle, 50, 100, 20] call A3A_fnc_findEmptyPosCar;
+            if (_emptyPos isEqualTo []) then { _emptyPos = getPos [100, random 360] };
+            _vehicle setPosATL _emptyPos;
+        };
+
+        // teleport to next waypoint
+        private _wayPos = waypointPosition [_crewGroup, currentWaypoint _crewGroup];
+        _vehicle setVehiclePosition [_wayPos, [], 10, "NONE"];
+    };
+};
+
 [_vehicle, _crewGroup, _cargoGroup, _landPosBlacklist];
-
-
-
 

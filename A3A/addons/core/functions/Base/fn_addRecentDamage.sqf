@@ -18,12 +18,13 @@ if (!isServer) exitWith { Error("Server-only function miscalled") };
 
 params ["_side", "_pos", "_value", "_killer"];
 
-if (_killer isKindOf "Air") exitWith {
+if !(_killer isKindOf "Man") then {
     Debug_2("Adding %1 threat to vehicle %2", _value, typeof _killer);
 
-    private _extraThreat = _killer getVariable ["A3A_airKills", 0];
-    _killer setVariable ["A3A_airKills", _extraThreat + _value];
+    private _extraThreat = _killer getVariable ["A3A_killThreat", 0];
+    _killer setVariable ["A3A_killThreat", _extraThreat + _value];
 };
+if (_killer isKindOf "Air") exitWith {};            // air vehicles move too fast for recent damage positions to be useful
 
 if (_side != Occupants && _side != Invaders) exitWith { Error_1("Called with invalid side: %1", _side) };
 

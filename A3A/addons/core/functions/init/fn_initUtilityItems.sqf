@@ -16,6 +16,7 @@ private _fuelTank = FactionGet(reb,"vehicleFuelTank");
 private _medCrate = FactionGet(reb,"vehicleMedicalBox");
 private _medTent = FactionGet(reb,"vehicleHealthStation");
 private _ammoStation = FactionGet(reb,"vehicleAmmoStation");
+private _ammoContainer = FactionGet(reb,"vehicleAmmoContainer");
 private _repairStation = FactionGet(reb,"vehicleRepairStation");
 
 // TODO: Name should be stringtabled somewhere
@@ -25,7 +26,8 @@ private _items = [
     [_fuelDrum#0, _fuelDrum#1, "fueldrum", "refuel", ["fuel", "move", "save"]],
     [_fuelTank#0, _fuelTank#1, "fueltank", "refuel", ["cmmdr", "fuel", "place", "move", "rotate", "save"]],
     [_medTent#0, _medTent#1, "medicaltent", "heal", ["place", "move", "rotate", "pack"]],
-    [_ammoStation#0, _ammoStation#1, "ammostation", "rearm", ["cmmdr", "ammo", "place", "move", "rotate", "save"]],
+    [_ammoStation#0, _ammoStation#1, "ammostation", "rearm", ["ammo", "place", "move", "rotate", "save"]],
+    [_ammoContainer#0, _ammoContainer#1, "ammocontainer", "rearm", ["cmmdr", "ammo", "place", "move", "rotate", "save"]],
     [_repairStation#0, _repairStation#1, "repairstation", "repair", ["cmmdr", "place", "move", "rotate", "pack", "save"]],
     [FactionGet(reb,"vehicleLightSource"), 25, "light", "", ["move"]],           // note: If we do want this saved, need to switch saveLoop to nearObjects
     ["Land_PlasticCase_01_medium_F", 100, "buildboxsmall", "", ["place", "move", "build"]],

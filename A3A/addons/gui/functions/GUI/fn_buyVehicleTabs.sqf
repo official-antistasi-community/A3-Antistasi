@@ -445,7 +445,7 @@ if  (_tab in ["other"]) then
         if (_className in [(A3A_faction_reb get 'vehicleMedicalBox')#0, (A3A_faction_reb get 'vehicleHealthStation')#0]) then {
             _itemPic ctrlSetTooltip localize "STR_antistasi_dialogs_buy_vehicle_med_tooltip";
         };
-        if (_className isEqualTo (FactionGet(reb,"vehicleAmmoStation")#0)) then {
+        if (_className in [FactionGet(reb,"vehicleAmmoStation")#0, FactionGet(reb,"vehicleAmmoContainer")#0]) then {
             _itemPic ctrlSetTooltip localize "STR_antistasi_dialogs_buy_vehicle_ammo_tooltip";
         };
         if (_className isEqualTo (FactionGet(reb,"vehicleRepairStation")#0)) then {
