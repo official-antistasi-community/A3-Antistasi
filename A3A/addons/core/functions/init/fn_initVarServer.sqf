@@ -344,6 +344,8 @@ call A3A_fnc_compileMissionAssets;
     publicVariable ("A3A_faction_"+_x);
 } forEach ["occ", "inv", "reb", "civ", "all"]; // ["A3A_faction_occ", "A3A_faction_inv", "A3A_faction_reb", "A3A_faction_civ", "A3A_faction_all"]
 
+publicVariable "A3A_customSkeletonClasses";
+
 // Set template-dependent map stuff
 
 flagX setFlagTexture FactionGet(reb,"flagTexture");                 // HQ flag, should be local here

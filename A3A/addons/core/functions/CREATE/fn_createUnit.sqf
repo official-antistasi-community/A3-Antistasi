@@ -38,11 +38,10 @@ private _unit = if (_unitDefinition isEqualTo []) then {
     _group createUnit [_type, _position, _markers, _placement, _special];
 } else {
     _unitDefinition params ["_loadouts", "_traits", "_unitClass"];
-    _u = if (_unitClass in A3A_customSkeletonClasses) then {
+    private _u = if (_unitClass in A3A_customSkeletonClasses) then {
         private _targetSide = side _group;
-        private _tempGroup = createGroup _targetSide;
+        private _tempGroup = createGroup [_targetSide, true];
         _u = _tempGroup createUnit [_unitClass, _position, _markers, _placement, _special];
-        _tempGroup deleteGroupWhenEmpty true;
         [_u] joinSilent _group;
         _u;
     } else {

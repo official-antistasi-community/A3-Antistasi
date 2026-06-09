@@ -72,7 +72,6 @@ private _allDefinitions = _faction get "loadouts";
     };
     [_loadoutsPrefix + _loadoutName, _unitDef] call A3A_fnc_registerUnitType;
 } forEach _allDefinitions;
-publicVariable "A3A_customSkeletonClasses";
 
 #if __A3_DEBUG__
     [_faction, _side, _file] call A3A_fnc_TV_verifyAssets;
