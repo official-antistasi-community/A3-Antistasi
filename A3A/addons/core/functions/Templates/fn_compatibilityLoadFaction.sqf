@@ -63,8 +63,14 @@ private _allDefinitions = _faction get "loadouts";
 //Register loadouts globally.
 {
     private _loadoutName = _x;
-    private _unitClass = _unitClassMap getOrDefault [_loadoutName, _baseUnitClass];
-    [_loadoutsPrefix + _loadoutName, _y + [_unitClass]] call A3A_fnc_registerUnitType;
+    private _unitDef = +_y;
+    private _customClass = _unitDef # 2;
+    if (_customClass == "") then {
+        _unitDef set [2, _unitClassMap getOrDefault [_loadoutName, _baseUnitClass]];
+    } else {
+        A3A_customSkeletonClasses pushBackUnique _customClass;
+    };
+    [_loadoutsPrefix + _loadoutName, _unitDef] call A3A_fnc_registerUnitType;
 } forEach _allDefinitions;
 
 #if __A3_DEBUG__

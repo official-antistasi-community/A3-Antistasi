@@ -314,6 +314,7 @@ Debug_1("Extra equip mod paths: %1", A3A_extraEquipMods);
 //         TEMPLATE LOADING        ///
 //////////////////////////////////////
 Info("Reading templates");
+A3A_customSkeletonClasses = [];
 {
     private _side = [west, east, resistance, civilian] # _forEachIndex;
     Info_2("Loading template %1 for side %2", _x, _side);
@@ -343,6 +344,8 @@ call A3A_fnc_compileMissionAssets;
 { //broadcast the templates to the clients
     publicVariable ("A3A_faction_"+_x);
 } forEach ["occ", "inv", "reb", "civ", "all"]; // ["A3A_faction_occ", "A3A_faction_inv", "A3A_faction_reb", "A3A_faction_civ", "A3A_faction_all"]
+
+publicVariable "A3A_customSkeletonClasses";
 
 // Set template-dependent map stuff
 
