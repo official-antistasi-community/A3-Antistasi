@@ -32,11 +32,19 @@
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["SPE_US_M3_Halftrack","SPE_M20_AUC"]] call _fnc_saveToTemplate; //These got no protected  turret, sufficent troop capacity, cost reduced
 ["vehiclesIFVs", ["SPE_M4A0_75_Early", "SPE_M4A0_75","SPE_M4A0_composite","SPE_M4A0_105","SPE_M4A3_105","SPE_M10"]] call _fnc_saveToTemplate;
-["vehiclesLightTanks",["SPE_M18_Hellcat","SPE_M18_Hellcat","SPE_M10"]] call _fnc_saveToTemplate;
+private _vehiclesLightTanks = ["SPE_M18_Hellcat","SPE_M18_Hellcat","SPE_M10"];
 ["vehiclesTanks", ["SPE_M4A1_75_erla","SPE_M4A1_76", "SPE_M4A1_75","SPE_M4A3_75","SPE_M4A3_76"]] call _fnc_saveToTemplate;
 ["vehiclesHeavyTanks", ["SPE_M4A1_T34_Calliope_Direct","SPE_M4A3_T34_Calliope_Direct"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["SPE_US_M16_Halftrack"]] call _fnc_saveToTemplate;
 ["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
+
+if (isClass (configFile >> "CfgPatches" >> "MWB_M24Chaffee")) then {
+    _vehiclesLightTanks append ["MWB_M24Chaffee", "MWB_M24Chaffee", "MWB_M24Chaffee"];
+};
+if (isClass (configFile >> "CfgPatches" >> "MWB_M36Jackson")) then {
+    _vehiclesLightTanks append ["MWB_M36", "MWB_M36B1"];
+};
+["vehiclesLightTanks", _vehiclesLightTanks] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
