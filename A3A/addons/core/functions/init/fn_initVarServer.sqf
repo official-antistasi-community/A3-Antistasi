@@ -314,6 +314,7 @@ Debug_1("Extra equip mod paths: %1", A3A_extraEquipMods);
 //         TEMPLATE LOADING        ///
 //////////////////////////////////////
 Info("Reading templates");
+A3A_customSkeletonClasses = [];
 {
     private _side = [west, east, resistance, civilian] # _forEachIndex;
     Info_2("Loading template %1 for side %2", _x, _side);
