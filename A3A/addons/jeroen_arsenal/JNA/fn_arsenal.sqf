@@ -2654,13 +2654,19 @@ switch _mode do {
 		// unifrom
 		_itemsUnifrom = [];
 		if(A3A_hasACEMedical)then{
-			_itemsUnifrom pushBack ["ACE_elasticBandage",2];
-			_itemsUnifrom pushBack ["ACE_packingBandage",2];
+			if(A3A_hasACM)then{
+				_itemsUnifrom pushBack ["ACM_ElasticWrap",2];
+				_itemsUnifrom pushBack ["ACM_PressureBandage",2];
+				_itemsUnifrom pushBack ["ACM_SAMSplint", 1];
+			}else{
+				_itemsUnifrom pushBack ["ACE_elasticBandage",2];
+				_itemsUnifrom pushBack ["ACE_packingBandage",2];
+				_itemsUnifrom pushBack ["ACE_splint", 1];
+			};
 			_itemsUnifrom pushBack ["ACE_morphine",1];
 			_itemsUnifrom pushBack ["ACE_epinephrine",1];
 			_itemsUnifrom pushBack ["ACE_adenosine", 1];
 			_itemsUnifrom pushBack ["ACE_tourniquet",1];
-			_itemsUnifrom pushBack ["ACE_splint", 1];
 		}else{
 			_itemsUnifrom pushBack ["FirstAidKit",2];
 			if(A3A_hasACE) then {
@@ -2703,8 +2709,13 @@ switch _mode do {
 		if([player] call A3A_fnc_isMedic)then{
 
 			if(A3A_hasACEMedical) then { //Medic equipment
-				_itemsBackpack pushBack ["ACE_elasticBandage",15];
-				_itemsBackpack pushBack ["ACE_packingBandage",15];
+				if(A3A_hasACM)then{
+					_itemsBackpack pushBack ["ACM_ElasticWrap",15];
+					_itemsBackpack pushBack ["ACM_PressureBandage",15];
+				}else{
+					_itemsBackpack pushBack ["ACE_elasticBandage",15];
+					_itemsBackpack pushBack ["ACE_packingBandage",15];
+				};
 				_itemsBackpack pushBack ["ACE_tourniquet",5];
 				_itemsBackpack pushBack ["ACE_personalAidKit",1];
 				_itemsBackpack pushBack ["ACE_adenosine", 10];
@@ -2716,14 +2727,20 @@ switch _mode do {
 			};
 		} else {
 		 		if(A3A_hasACEMedical) then {
-					_itemsBackpack pushBack ["ACE_fieldDressing",5];
-					_itemsBackpack pushBack ["ACE_packingBandage",5];
-					_itemsBackpack pushBack ["ACE_elasticBandage",5];
+					if(A3A_hasACM)then{
+						_itemsBackpack pushBack ["ACM_PressureBandage",10];
+						_itemsBackpack pushBack ["ACM_ElasticWrap",5];
+						_itemsBackpack pushBack ["ACM_SAMSplint", 2];
+					}else{
+						_itemsBackpack pushBack ["ACE_fieldDressing",5];
+						_itemsBackpack pushBack ["ACE_packingBandage",5];
+						_itemsBackpack pushBack ["ACE_elasticBandage",5];
+						_itemsBackpack pushBack ["ACE_splint", 2];
+					};
 					_itemsBackpack pushBack ["ACE_morphine",3];
 					_itemsBackpack pushBack ["ACE_epinephrine",2];
 					_itemsBackpack pushBack ["ACE_adenosine", 2];
 					_itemsBackpack pushBack ["ACE_tourniquet",2];
-					_itemsBackpack pushBack ["ACE_splint", 2];
 			} else { //Vanilla FAK for soldiers
 				_itemsBackpack pushBack ["FirstAidKit",5];
 			};
