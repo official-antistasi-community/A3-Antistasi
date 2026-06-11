@@ -128,6 +128,10 @@ if (A3A_hasACEMedical && isClass (configFile >> "CfgPatches" >> "adv_aceCPR")) t
 A3A_hasKAT = false;
 if(A3A_hasACEMedical && isClass (configFile >> "CfgWeapons" >> "kat_scalpel")) then {A3A_hasKAT = true; Info("KAT MED Detected.") };
 
+//ACM medical detection. KAT and ACM are incompatible systems so A3A_hasKAT is set to false here, albiet ACM itself already throws an error if it detects that KAT is loaded.
+A3A_hasACM = false;
+if(A3A_hasACEMedical && isClass (configFile >> "CfgWeapons" >> "ACM_OPA")) then {A3A_hasACM = true; A3A_hasKAT = false; Info("ACM Detected.") };
+
 A3A_hasIFA = false;			// this one is everywhere, just mark it false and remove later
 
 // Zeus enhanced

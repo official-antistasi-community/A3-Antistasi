@@ -23,7 +23,27 @@ private _factionData = if (_side in [west, east, independent, civilian]) then {	
 
 if (_level == "MEDIC") exitWith {
 	switch (true) do {
-		case (A3A_hasACEMedical): {
+		case (A3A_hasACEMedical && A3A_hasACM): {
+			[
+				["ACE_surgicalKit",1],
+
+				["ACM_PressureBandage",25],
+				["ACM_ElasticWrap",10],
+
+				["ACE_morphine",5],
+				["ACE_epinephrine",5],
+				["ACE_adenosine",5],
+
+				["ACE_plasmaIV_250",5],
+				["ACE_salineIV_500",3],
+				["ACM_BloodBag_ON_1000",1],
+				["ACM_IV_16g",1],
+
+				["ACE_tourniquet",3],
+				["ACM_SAMSplint",4]
+			]
+		};
+		case (A3A_hasACEMedical && !A3A_hasACM): {
 			[
 				["ACE_surgicalKit",1],
 
@@ -56,7 +76,20 @@ if (_level == "MEDIC") exitWith {
 
 	if (_level == "STANDARD") exitWith {
 	switch (true) do {
-		case (A3A_hasACEMedical): {
+		case (A3A_hasACEMedical && A3A_hasACM): {
+			[
+				["ACE_tourniquet",1],
+				["ACE_salineIV_500",1],
+				["ACM_IV_16g",1],
+				["ACE_morphine",2],
+				["ACE_epinephrine",2],
+				["ACE_adenosine",2],
+				["ACM_PressureBandage",8],
+				["ACM_ElasticWrap",3],
+				["ACM_SAMSplint", 2]
+			]
+		};
+		case (A3A_hasACEMedical && !A3A_hasACM): {
 			[
 				["ACE_tourniquet",1],
 				["ACE_salineIV_500",1],
@@ -79,7 +112,14 @@ if (_level == "MEDIC") exitWith {
 };
 //If neither of them, return minimal medical supplies
 switch (true) do {
-	case (A3A_hasACEMedical): {
+	case (A3A_hasACEMedical && A3A_hasACM): {
+		[
+			["ACE_morphine",1],
+			["ACE_epinephrine",1],
+			["ACM_PressureBandage",3]
+		]
+	};
+	case (A3A_hasACEMedical && !A3A_hasACM): {
 		[
 			["ACE_morphine",1],
 			["ACE_epinephrine",1],
