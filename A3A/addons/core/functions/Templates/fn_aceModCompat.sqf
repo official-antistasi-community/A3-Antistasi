@@ -42,10 +42,6 @@ aceItems = [
 ];
 
 aceMedItems = [
-	"ACE_fieldDressing",
-	"ACE_elasticBandage",
-	"ACE_packingBandage",
-	"ACE_quikclot",
 	"ACE_plasmaIV",
 	"ACE_plasmaIV_500",
 	"ACE_plasmaIV_250",
@@ -66,11 +62,18 @@ aceMedItems = [
 	"a3a_coffeeIV_250"
 ];
 
-aceMedItemsNonKat = [
+aceDefaultBloodItems = [
 	"ACE_bloodIV",
 	"ACE_bloodIV_250",
 	"ACE_bloodIV_500",
 	"ACE_painkillers"
+];
+
+aceDefaultBandages = [ //ACM is intended to be used with its own bandage items.
+	"ACE_fieldDressing",
+	"ACE_elasticBandage",
+	"ACE_packingBandage",
+	"ACE_quikclot"
 ];
 
 advItems = [
@@ -189,6 +192,106 @@ katMedItems = [ //Support and tested with KAM 2.13.3 Stable
 	"kat_stretcherBag"	//KAT Misc - Vehicle (Backpack)
 ];
 
+acmMedItems = [ //Support and tested with ACM 1.4.7 Stable
+	"ACM_PressureBandage", //ACM Catastrophic Bleeding - Item
+	"ACM_EmergencyTraumaDressing", //ACM Catastrophic Bleeding - Item
+	"ACM_ElasticWrap", //ACM Catastrophic Bleeding - Item
+
+	"ACM_ACCUVAC", //ACM Airway Management - Item
+	"ACM_CricKit", //ACM Airway Management - Item
+	"ACM_IGel", //ACM Airway Management - Item
+	"ACM_NPA", //ACM Airway Management - Item
+	"ACM_OPA", //ACM Airway Management - Item
+	"ACM_SuctionBag", //ACM Airway Management - Item
+
+	"ACM_BVM", //ACM Breathing - Item
+	"ACM_ChestSeal", //ACM Breathing - Item
+	"ACM_ChestTubeKit", //ACM Breathing - Item
+	"ACM_NCDKit", //ACM Breathing - Item
+	"ACM_OxygenTank_425", //ACM Breathing - Magazine
+	"ACM_OxygenTank_425_Empty", //ACM Breathing - Item
+	"ACM_PocketBVM", //ACM Breathing - Item
+	"ACM_PulseOximeter", //ACM Breathing - Item
+	"ACM_Stethoscope", //ACM Breathing - Item
+	"ACM_ThoracostomyKit", //ACM Breathing - Item
+
+	"ACM_IV_14g", //ACM Circulation - Item
+	"ACM_IV_16g", //ACM Circulation - Item
+	"ACM_AED", //ACM Circulation - Item
+	"ACM_IO_EZ", //ACM Circulation - Item
+	"ACM_IO_FAST", //ACM Circulation - Item
+	"ACM_PressureCuff", //ACM Circulation - Item
+	"ACM_Syringe_1", //ACM Circulation - Item
+	"ACM_Syringe_3", //ACM Circulation - Item
+	"ACM_Syringe_5", //ACM Circulation - Item
+	"ACM_Syringe_10", //ACM Circulation - Item
+	"ACM_Syringe_10_Epinephrine", //ACM Circulation - Magazine. This class is also used for other medications
+
+	"ACM_BloodBag_A_250", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_A_500", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_A_1000", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_AN_250", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_AN_500", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_AN_1000", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_AB_250", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_AB_500", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_AB_1000", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_ABN_250", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_ABN_500", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_ABN_1000", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_B_250", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_B_500", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_B_1000", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_BN_250", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_BN_500", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_BN_1000", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_O_250", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_O_500", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_O_1000", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_ON_250", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_ON_500", //ACM Fluid Transfusion - Item
+	"ACM_BloodBag_ON_1000", //ACM Fluid Transfusion - Item
+	
+	"ACM_FieldBloodTransfusionKit_250", //ACM Fluid Transfusion - Item
+	"ACM_FieldBloodTransfusionKit_500", //ACM Fluid Transfusion - Item
+	"ACM_FreshBloodBag_250", //ACM Fluid Transfusion - Item
+	"ACM_FreshBloodBag_500", //ACM Fluid Transfusion - Item
+
+	"ACM_Vial_Adenosine", //ACM Medication - Item
+	"ACM_Vial_Amiodarone", //ACM Medication - Item
+	"ACM_Vial_Atropine", //ACM Medication - Item
+	"ACM_Vial_CalciumChloride", //ACM Medication - Item
+	"ACM_Vial_Epinephrine", //ACM Medication - Item
+	"ACM_Vial_Etrapenem", //ACM Medication - Item
+	"ACM_Vial_Esmolol", //ACM Medication - Item
+	"ACM_Vial_Fentanyl", //ACM Medication - Item
+	"ACM_Vial_Ketamine", //ACM Medication - Item
+	"ACM_Vial_Lidocaine", //ACM Medication - Item
+	"ACM_Vial_Morphine", //ACM Medication - Item
+	"ACM_Vial_Ondansetron", //ACM Medication - Item
+	"ACM_Vial_TXA", //ACM Medication - Item
+
+	"ACM_AmmoniaInhalant", //ACM Medication - Magazine
+	"ACM_Autoinjector_ATNA", //ACM Medication - Item
+	"ACM_Lozenge_Fentanyl", //ACM Medication - Item
+	"ACM_Autoinjector_Midazolam", //ACM Medication - Item
+	"ACM_Spray_Naloxone", //ACM Medication - Item
+	"ACM_Paracetamol", //ACM Medication - Magazine
+	"ACM_Paracetamol_SinglePack", //ACM Medication - Item
+	"ACM_Paracetamol_DoublePack", //ACM Medication - Magazine
+	"ACM_Inhaler_Penthrox", //ACM Medication - Magazine
+
+	"ACM_SAMSplint", //ACM Disability
+
+	//"ACM_Grenade_CS", //ACM CBRN - Magazine
+	//"ACM_Grenade_Shell_CS", //ACM CBRN - Magazine
+	//"ACM_Mortar_Shell_8Rnd_CS", //ACM CBRN - Magazine
+	//"ACM_Mortar_Shell_8Rnd_Chlorine", //ACM CBRN - Magazine
+	//"ACM_Mortar_Shell_8Rnd_Sarin", //ACM CBRN - Magazine
+	//"ACM_Mortar_Shell_8Rnd_Lewisite", //ACM CBRN - Magazine
+	"ACM_GasMaskFilter" //ACM CBRN - Item
+];
+
 aceCoolingItems = [
 	"ACE_Canteen",
 	"ACE_Canteen_Half",
@@ -232,18 +335,25 @@ FactionGet(reb,"initialRebelEquipment") append aceItems;
 
 
 //ACE medical starting items
-if (A3A_hasACEMedical && !A3A_hasKAT) then {
+if (A3A_hasACEMedical && !A3A_hasKAT && !A3A_hasACM) then {
 	FactionGet(reb,"initialRebelEquipment") append aceMedItems;
-	FactionGet(reb,"initialRebelEquipment") append aceMedItemsNonKat;
+	FactionGet(reb,"initialRebelEquipment") append aceDefaultBloodItems;
+	FactionGet(reb,"initialRebelEquipment") append aceDefaultBandages;
 };
 
 if (A3A_hasADV) then {
 	FactionGet(reb,"initialRebelEquipment") append advItems;
 };
 
-if (A3A_hasKAT && A3A_hasACEMedical) then {
+if (A3A_hasKAT && A3A_hasACEMedical && !A3A_hasACM) then {
 	FactionGet(reb,"initialRebelEquipment") append aceMedItems;
 	FactionGet(reb,"initialRebelEquipment") append katMedItems;
+	FactionGet(reb,"initialRebelEquipment") append aceDefaultBandages;
+};
+
+if (A3A_hasACM && A3A_hasACEMedical && !A3A_hasKAT) then {
+	FactionGet(reb,"initialRebelEquipment") append aceMedItems;
+	FactionGet(reb,"initialRebelEquipment") append acmMedItems;
 };
 
 FactionGet(reb,"initialRebelEquipment") append aceCoolingItems;
