@@ -139,29 +139,29 @@ private _minItemsMember = {
 };
 
 private _antistasiBerets = ["a3a_g_beret_01", "a3a_g_beret_02", "a3a_g_beret_03", "a3a_g_beret_04"];
-private _alphabeticalSort = {
-	params ["_ctrlList", "_prefixBerets"];
+private _defaultSort = {
+	params ["_ctrlList"];
 
 	private _itemCount = lbSize _ctrlList;
 	private _type = (ctrltype _ctrlList == 102);
 
-	private _displayNameArray = [];
-	private _dataArray = [];
+	private _lbTextArray = [];
+    private _dataArray = [];
 
 	//Iterate in reverse order to avoid a lot of array resizes in _dataArray;
 	for "_i" from (_itemCount - 1) to 0 step -1 do {
-		private _dataStr = if _type then {_ctrlList lnbdata [_i,0]} else {_ctrlList lbdata _i};
+		private _dataStr = if _type then{_ctrlList lnbdata [_i,0]}else{_ctrlList lbdata _i};
 
 		if (_dataStr != "") then {
 			private _data = call compile _dataStr;
-			private _displayName = _data select 2;
+			private _lbText = if _type then{_ctrlList lnbText [_i,0]}else{_ctrlList lbText _i};
 
-			_displayNameArray pushBack _displayName;
+			_lbTextArray pushBack _lbText;
 			_dataArray set [_i, _data];
 		};
 	};
 
-	_displayNameArray sort true;
+	_lbTextArray sort true;
 
 	for "_i" from 0 to (_itemCount - 1) do {
 		private _data = _dataArray select _i;
@@ -172,11 +172,11 @@ private _alphabeticalSort = {
 				_ctrlList lbSetValue [_i, -100];
 			} else {
 				private _beretIndex = _antistasiBerets find _item;
-				if (_prefixBerets && _beretIndex != -1) then {
+				if (_beretIndex != -1) then {
 					_ctrlList lbSetValue [_i, -99 + _beretIndex];
 				} else {
-					private _displayName = _data select 2;
-					_ctrlList lbSetValue [_i, _displayNameArray find _displayName];
+					private _lbText = if _type then{_ctrlList lnbText [_i,0]}else{_ctrlList lbText _i};
+					_ctrlList lbSetValue [_i, _lbTextArray find _lbText];
 				};
 			};
 		};
@@ -523,7 +523,35 @@ switch _mode do {
 
     switch (_sortType) do {
       case SORT_ALPHABETICAL: {
-        [_ctrlList, false] call _alphabeticalSort;
+        private _displayNameArray = [];
+        private _dataArray = [];
+
+        //Iterate in reverse order to avoid a lot of array resizes in _dataArray;
+        for "_i" from (_itemCount - 1) to 0 step -1 do {
+          private _dataStr = if _type then{_ctrlList lnbdata [_i,0]}else{_ctrlList lbdata _i};
+
+          if (_dataStr != "") then {
+            private _data = call compile _dataStr;
+            private _item = _data select 0;
+            private _amount = _data select 1;
+            private _displayName = _data select 2;
+
+            _displayNameArray pushBack _displayName;
+            _dataArray set [_i, _data];
+          };
+        };
+
+        _displayNameArray sort true;
+
+        for "_i" from 0 to (_itemCount - 1) do {
+          private _data = _dataArray select _i;
+          if (!isNil "_data") then {
+            private _displayName = _data select 2;
+            _ctrlList lbSetValue [_i, _displayNameArray find _displayName];
+          };
+        };
+
+        lbSortByValue _ctrlList;
       };
       case SORT_AMOUNT: {
         for "_i" from 0 to (_itemCount - 1) do {
@@ -542,12 +570,12 @@ switch _mode do {
 
             _ctrlList lbSetValue [_i, _amount];
           };
-
-          lbSortByValue _ctrlList;
         };
+
+		lbSortByValue _ctrlList;
       };
       case SORT_DEFAULT: {
-		[_ctrlList, true] call _alphabeticalSort;
+		_ctrlList call _defaultSort;
       };
   };
 
@@ -664,7 +692,7 @@ switch _mode do {
 
 			if (_active) then {
 				_ctrlList = _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + _idc);
-				[_ctrlList, true] call _alphabeticalSort;
+				_ctrlList call _defaultSort;
 
 				_ctrlLineTabLeft = _display displayctrl IDC_RSCDISPLAYARSENAL_LINETABLEFT;
 				_ctrlLineTabLeft ctrlsetfade 0;
