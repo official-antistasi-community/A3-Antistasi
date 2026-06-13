@@ -54,6 +54,16 @@ if (isClass (configFile >> "CfgPatches" >> "MWB_M36Jackson")) then {
 ["vehiclesPlanesAA", ["SPE_P47"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["LIB_C47_Skytrain"]] call _fnc_saveToTemplate;
 
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    private _CAS = ["SPE_P47","sab_fl_p51b","sab_fl_p51d", "sab_fl_f4u"];
+
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        _CAS = _CAS + ["sab_sw_p40","sab_sw_p38","sab_sw_p61"];
+    };
+    ["vehiclesPlanesCAS", _CAS] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", ["SPE_P47","sab_fl_p51b","sab_fl_p51d"]] call _fnc_saveToTemplate;
+};
+
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", []] call _fnc_saveToTemplate;
