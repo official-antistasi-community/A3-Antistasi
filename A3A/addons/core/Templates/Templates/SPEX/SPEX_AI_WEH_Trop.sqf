@@ -73,6 +73,7 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 ]] call _fnc_saveToTemplate;
 
 if (isClass (configFile >> "CfgPatches" >> "23pzd_ifa_251_1_c")) then {
+    ["attributeMoreTrucks", false] call _fnc_saveToTemplate;
     _vehiclesLightArmed append ["SPEX_DAK_SdKfz250_1", "SPEX_DAK_SdKfz250_1", "SPEX_DAK_R200_MG34", "SPEX_DAK_OpelBlitz_Flak38", "23pzd_SdKfz251_10", "23pzd_SdKfz251_16", "23pzd_SdKfz251_17", "23pzd_SdKfz251_21", "23pzd_SdKfz251_22", "23pzd_SdKfz251_23", "23pzd_SdKfz251_3", "23pzd_SdKfz251_9"]; //8 vanilla SPE light armed to 8 Sd.Kfz251 halftracks with random armaments
     ["vehiclesMedical", ["SPEX_DAK_OpelBlitz_Ambulance", "23pzd_SdKfz251_8"]] call _fnc_saveToTemplate;
     ["vehiclesAPCs", ["23pzd_SdKfz251", "23pzd_SdKfz251", "23pzd_SdKfz251", "23pzd_SdKfz251_10", "23pzd_SdKfz251_17"]] call _fnc_saveToTemplate; //10 and 17 weighed against regular due to stronger armament and fewer seats
