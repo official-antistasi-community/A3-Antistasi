@@ -32,11 +32,19 @@
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["SEP_I_IHTC_M20_AUC","SEP_I_IHTC_M3A1_Halftrack","SEP_I_IHTC_M3A1_Halftrack"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", []] call _fnc_saveToTemplate;
-["vehiclesLightTanks",["SEP_I_IHTC_M8_LAC","SEP_I_IHTC_M8_LAC_ringMount"]] call _fnc_saveToTemplate;
+private _vehiclesLightTanks = ["SEP_I_IHTC_M8_LAC","SEP_I_IHTC_M8_LAC_ringMount"];
 ["vehiclesTanks", ["SEP_I_IHTC_M4A1_75"]] call _fnc_saveToTemplate;
 ["vehiclesHeavyTanks", []] call _fnc_saveToTemplate;
 ["vehiclesAA", ["SPE_US_M16_Halftrack"]] call _fnc_saveToTemplate;
 ["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
+
+if (isClass (configFile >> "CfgPatches" >> "MWB_M24Chaffee")) then {
+    _vehiclesLightTanks append ["a3a_MWB_M24Chaffee_French", "a3a_MWB_M24Chaffee_French", "a3a_MWB_M24Chaffee_French"];
+};
+if (isClass (configFile >> "CfgPatches" >> "MWB_M36Jackson")) then {
+    ["vehiclesTanks", ["SEP_I_IHTC_M4A1_75", "SEP_I_IHTC_M4A1_75", "a3a_MWB_M36B2_French", "a3a_MWB_M36B1_French"]] call _fnc_saveToTemplate;
+};
+["vehiclesLightTanks", _vehiclesLightTanks] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;

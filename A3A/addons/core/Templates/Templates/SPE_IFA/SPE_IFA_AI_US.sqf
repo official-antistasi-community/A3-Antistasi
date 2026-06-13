@@ -39,10 +39,10 @@ private _vehiclesLightTanks = ["SPE_M18_Hellcat","SPE_M18_Hellcat","SPE_M10"];
 ["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
 
 if (isClass (configFile >> "CfgPatches" >> "MWB_M24Chaffee")) then {
-    _vehiclesLightTanks append ["MWB_M24Chaffee", "MWB_M24Chaffee", "MWB_M24Chaffee"];
+    _vehiclesLightTanks append ["a3a_MWB_M24Chaffee_US", "a3a_MWB_M24Chaffee_US", "a3a_MWB_M24Chaffee_US"];
 };
 if (isClass (configFile >> "CfgPatches" >> "MWB_M36Jackson")) then {
-    _vehiclesLightTanks append ["MWB_M36", "MWB_M36B1"];
+    _vehiclesLightTanks append ["a3a_MWB_M36_US", "a3a_MWB_M36B1_US"];
 };
 ["vehiclesLightTanks", _vehiclesLightTanks] call _fnc_saveToTemplate;
 
