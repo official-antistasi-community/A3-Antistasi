@@ -5,8 +5,8 @@
 ["vehiclesCivCar", [
     "a3a_SPE_R200", 0.5, 
     "a3a_SPE_R200_Hood", 1.5,
-    "a3a_SPE_G503_MB_Open", 1.5, 
-    "a3a_SPE_G503_MB", 0.5 
+    "a3a_SPE_G503_MB_Open", 3.0, 
+    "a3a_SPE_G503_MB", 1.5 
 ]] call _fnc_saveToTemplate;
 
 ["vehiclesCivIndustrial", [
