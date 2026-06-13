@@ -22,7 +22,7 @@
 
 ["vehiclesBasic", ["SPEX_DAK_R200_Unarmed"]] call _fnc_saveToTemplate;
 ["vehiclesLightUnarmed", ["SPEX_DAK_R200_Unarmed","SPEX_DAK_R200_Hood"]] call _fnc_saveToTemplate;
-["vehiclesLightArmed", ["SPEX_DAK_SdKfz250_1", "SPEX_DAK_SdKfz250_1", "SPEX_DAK_R200_MG34", "SPEX_DAK_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
+private _vehiclesLightArmed = ["SPEX_DAK_SdKfz250_1", "SPEX_DAK_SdKfz250_1", "SPEX_DAK_R200_MG34", "SPEX_DAK_OpelBlitz_Flak38"];
 ["vehiclesTrucks", ["SPEX_DAK_OpelBlitz", "SPEX_DAK_OpelBlitz_Open"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["SPEX_DAK_OpelBlitz_Open"]] call _fnc_saveToTemplate;
 ["vehiclesAmmoTrucks", ["SPEX_DAK_OpelBlitz_Ammo"]] call _fnc_saveToTemplate;
@@ -71,6 +71,21 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 ["magazines", createHashMapFromArray [
 ["SPE_leFH18", ["SPE_20x_Shell_105L28_Gr38_HE"]]
 ]] call _fnc_saveToTemplate;
+
+if (isClass (configFile >> "CfgPatches" >> "23pzd_ifa_251_1_c")) then {
+    _vehiclesLightArmed append ["SPEX_DAK_SdKfz250_1", "SPEX_DAK_SdKfz250_1", "SPEX_DAK_R200_MG34", "SPEX_DAK_OpelBlitz_Flak38", "23pzd_SdKfz251_10", "23pzd_SdKfz251_16", "23pzd_SdKfz251_17", "23pzd_SdKfz251_21", "23pzd_SdKfz251_22", "23pzd_SdKfz251_23", "23pzd_SdKfz251_3", "23pzd_SdKfz251_9"]; //8 vanilla SPE light armed to 8 Sd.Kfz251 halftracks with random armaments
+    ["vehiclesMedical", ["SPEX_DAK_OpelBlitz_Ambulance", "23pzd_SdKfz251_8"]] call _fnc_saveToTemplate;
+    ["vehiclesAPCs", ["23pzd_SdKfz251", "23pzd_SdKfz251", "23pzd_SdKfz251", "23pzd_SdKfz251_10", "23pzd_SdKfz251_17"]] call _fnc_saveToTemplate; //10 and 17 weighed against regular due to stronger armament and fewer seats
+    ["vehiclesAA", ["SPEX_DAK_OpelBlitz_Flak38", "SPEX_DAK_OpelBlitz_Flak38", "23pzd_SdKfz251_21", "23pzd_SdKfz251_21", "23pzd_SdKfz251_17", "23pzd_SdKfz251_23"]] call _fnc_saveToTemplate; //2 flak 38 + 2 sd.kfz /21 against two variants with single 20mm autocannons
+
+    ["vehiclesArtillery", ["SPE_leFH18", "SPE_leFH18", "SPE_leFH18", "23pzd_SdKfz251_W40", "23pzd_SdKfz251_W40", "23pzd_SdKfz251_2"]] call _fnc_saveToTemplate;
+    ["magazines", createHashMapFromArray [
+    ["SPE_leFH18", ["SPE_20x_Shell_105L28_Gr38_HE"]],
+    ["23pzd_SdKfz251_W40", ["SPE_6Rnd_Wurfrahmen_40","SPE_6Rnd_Wurfrahmen_40"]],
+    ["23pzd_SdKfz251_2", ["SPE_8Rnd_81mm_FA_Mle_1932_HE","SPE_8Rnd_81mm_FA_Mle_1932_HE","SPE_8Rnd_81mm_FA_Mle_1932_Smoke","SPE_8Rnd_81mm_FA_Mle_1932_Illu"]]
+    ]] call _fnc_saveToTemplate;
+};
+["vehiclesLightArmed", _vehiclesLightArmed] call _fnc_saveToTemplate;
 
 ["uavsAttack", []] call _fnc_saveToTemplate;
 ["uavsPortable", []] call _fnc_saveToTemplate;
