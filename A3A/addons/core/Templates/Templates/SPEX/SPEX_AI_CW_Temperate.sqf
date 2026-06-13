@@ -41,6 +41,9 @@ private _vehiclesLightTanks = ["SPEX_CW_Cromwell_Mk6","SPEX_CW_Humber_MkIV","SPE
 if (isClass (configFile >> "CfgPatches" >> "MWB_M24Chaffee")) then {
     _vehiclesLightTanks append ["a3a_MWB_M24Chaffee_UK", "a3a_MWB_M24Chaffee_UK", "a3a_MWB_M24Chaffee_UK"];
 };
+if (isClass (configFile >> "CfgPatches" >> "SPEV_SPEX")) then {
+    _vehiclesLightTanks append ["SPEV_CW_T17E1", "SPEV_CW_T17E1"];
+};
 ["vehiclesLightTanks", _vehiclesLightTanks] call _fnc_saveToTemplate;
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;

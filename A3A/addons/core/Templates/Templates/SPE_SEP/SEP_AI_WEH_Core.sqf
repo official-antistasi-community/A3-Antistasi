@@ -85,6 +85,10 @@ if (isClass (configFile >> "CfgPatches" >> "23pzd_ifa_251_1_c")) then {
     ["23pzd_SdKfz251_2", ["SPE_8Rnd_81mm_FA_Mle_1932_HE","SPE_8Rnd_81mm_FA_Mle_1932_HE","SPE_8Rnd_81mm_FA_Mle_1932_Smoke","SPE_8Rnd_81mm_FA_Mle_1932_Illu"]]
     ]] call _fnc_saveToTemplate;
 };
+if (isClass (configFile >> "CfgPatches" >> "SPEV_Core")) then {
+    _vehiclesLightArmed append ["SPEV_Sdkfz234_1", "SPEV_Sdkfz234_1", "SPEV_Sdkfz234_4"];
+    ["vehiclesLightTanks",["SPE_ST_PzKpfwIII_N", "SPE_ST_PzKpfwIII_L", "SPE_ST_PzKpfwIII_M", "SPE_ST_PzKpfwIII_J", "SPE_ST_StuG_III_G_Late", "SPE_Nashorn","SPEV_Sdkfz234_2", "SPEV_Sdkfz234_2", "SPEV_Sdkfz234_2", "SPEV_Sdkfz234_4", "SPEV_Sdkfz234_4"]] call _fnc_saveToTemplate;
+};
 ["vehiclesLightArmed", _vehiclesLightArmed] call _fnc_saveToTemplate;
 
 ["uavsAttack", []] call _fnc_saveToTemplate;
