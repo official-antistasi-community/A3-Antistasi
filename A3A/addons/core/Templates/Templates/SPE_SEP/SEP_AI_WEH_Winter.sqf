@@ -74,6 +74,7 @@ if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
 ]] call _fnc_saveToTemplate;
 
 if (isClass (configFile >> "CfgPatches" >> "23pzd_ifa_251_1_c")) then {
+    //Too many classes for me to have the energy to create winter camo classes for.
     _vehiclesLightArmed append ["SEP_B_GER_WIN_SdKfz_2501", "SEP_B_GER_WIN_SdKfz_2501", "SEP_B_GER_Sturm_WIN_R200_MG34", "SEP_B_GER_WIN_OpelBlitz_Flak38", "23pzd_SdKfz251_10", "23pzd_SdKfz251_16", "23pzd_SdKfz251_17", "23pzd_SdKfz251_21", "23pzd_SdKfz251_22", "23pzd_SdKfz251_23", "23pzd_SdKfz251_3", "23pzd_SdKfz251_9"]; //8 vanilla SPE light armed to 8 Sd.Kfz251 halftracks with random armaments
     ["vehiclesMedical", ["SEP_B_GER_WIN_OpelBlitz_Ambulance", "23pzd_SdKfz251_8"]] call _fnc_saveToTemplate;
     ["vehiclesAPCs", ["23pzd_SdKfz251", "23pzd_SdKfz251", "23pzd_SdKfz251", "23pzd_SdKfz251_10", "23pzd_SdKfz251_17"]] call _fnc_saveToTemplate; //10 and 17 weighed against regular due to stronger armament and fewer seats
