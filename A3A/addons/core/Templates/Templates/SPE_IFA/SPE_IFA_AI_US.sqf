@@ -32,19 +32,37 @@
 ["vehiclesLightAPCs", []] call _fnc_saveToTemplate;
 ["vehiclesAPCs", ["SPE_US_M3_Halftrack","SPE_M20_AUC"]] call _fnc_saveToTemplate; //These got no protected  turret, sufficent troop capacity, cost reduced
 ["vehiclesIFVs", ["SPE_M4A0_75_Early", "SPE_M4A0_75","SPE_M4A0_composite","SPE_M4A0_105","SPE_M4A3_105","SPE_M10"]] call _fnc_saveToTemplate;
-["vehiclesLightTanks",["SPE_M18_Hellcat","SPE_M18_Hellcat","SPE_M10"]] call _fnc_saveToTemplate;
+private _vehiclesLightTanks = ["SPE_M18_Hellcat","SPE_M18_Hellcat","SPE_M10"];
 ["vehiclesTanks", ["SPE_M4A1_75_erla","SPE_M4A1_76", "SPE_M4A1_75","SPE_M4A3_75","SPE_M4A3_76"]] call _fnc_saveToTemplate;
 ["vehiclesHeavyTanks", ["SPE_M4A1_T34_Calliope_Direct","SPE_M4A3_T34_Calliope_Direct"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["SPE_US_M16_Halftrack"]] call _fnc_saveToTemplate;
 ["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
 
+if (isClass (configFile >> "CfgPatches" >> "MWB_M24Chaffee")) then {
+    _vehiclesLightTanks append ["a3a_MWB_M24Chaffee_US", "a3a_MWB_M24Chaffee_US", "a3a_MWB_M24Chaffee_US"];
+};
+if (isClass (configFile >> "CfgPatches" >> "MWB_M36Jackson")) then {
+    _vehiclesLightTanks append ["a3a_MWB_M36_US", "a3a_MWB_M36B1_US"];
+};
+["vehiclesLightTanks", _vehiclesLightTanks] call _fnc_saveToTemplate;
+
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
-["vehiclesGunBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
+["vehiclesGunBoats", ["LIB_LCI"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", []] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["SPE_P47"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesAA", ["SPE_P47"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["LIB_C47_Skytrain"]] call _fnc_saveToTemplate;
+
+if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
+    private _CAS = ["SPE_P47","sab_fl_p51b","sab_fl_p51d", "sab_fl_f4u"];
+
+    if (isClass (configFile >> "CfgPatches" >> "sab_sw_tbf")) then {
+        _CAS = _CAS + ["sab_sw_p40","sab_sw_p38","sab_sw_p61"];
+    };
+    ["vehiclesPlanesCAS", _CAS] call _fnc_saveToTemplate;
+    ["vehiclesPlanesAA", ["SPE_P47","sab_fl_p51b","sab_fl_p51d"]] call _fnc_saveToTemplate;
+};
 
 ["vehiclesHelisLight", []] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", []] call _fnc_saveToTemplate;

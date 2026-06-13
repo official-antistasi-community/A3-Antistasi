@@ -28,7 +28,7 @@
 //       Vehicles       //
 //////////////////////////
 
-["vehiclesBasic", ["SPE_FFI_R200_Unarmed"]] call _fnc_saveToTemplate;
+private _vehiclesBasic = ["SPE_FFI_R200_Unarmed"];
 ["vehiclesLightUnarmed", ["SPE_FFI_R200_Hood"]] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", ["SPE_FFI_R200_MG34"]] call _fnc_saveToTemplate;
 ["vehiclesTruck", ["SPE_FFI_OpelBlitz", "SPE_FFI_OpelBlitz_Open"]] call _fnc_saveToTemplate;
@@ -41,8 +41,12 @@
 
 if (isClass (configFile >> "CfgPatches" >> "sab_flyinglegends")) then {
     ["vehiclesPlane", ["sab_fl_ju52", "sab_fl_yak3"]] call _fnc_saveToTemplate;
-    ["vehiclesBasic", ["SPE_FFI_R200_Unarmed","sab_fl_airfieldtractor","sab_fl_scooter_53"]] call _fnc_saveToTemplate;
+    _vehiclesBasic append ["sab_fl_airfieldtractor","sab_fl_scooter_53"];
 };
+if (isClass (configFile >> "CfgPatches" >> "23pzd_ifa_251_1_c")) then {
+    _vehiclesBasic insert [0, "23pzd_SdKfz2"];
+};
+["vehiclesBasic", _vehiclesBasic] call _fnc_saveToTemplate;
 
 ["vehiclesCivCar", []] call _fnc_saveToTemplate;
 ["vehiclesCivTruck", ["SPEX_GER_Bedford_MWD", "SPEX_GER_Bedford_MWD_Open"]] call _fnc_saveToTemplate;
