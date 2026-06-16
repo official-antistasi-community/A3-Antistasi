@@ -54,7 +54,7 @@ switch (_mode) do
         };
 
         if (_selectedTabIDC == -1) exitWith {
-            Error("Attempted to access tab without permission : %1", _selectedTab);
+            Error_1("Attempted to access tab without permission : %1", _selectedTab);
         };
 
         private _allTabs = [

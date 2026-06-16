@@ -25,7 +25,7 @@ _task set ["_taskId", _taskId];
 _task set ["state", "s_waitForKill"];
 _task set ["interval", 1];
 
-Trace_1("Initial data: %1" _task);
+Trace_1("Initial data: %1", _task);
 
 _task set ["s_waitForKill", {
     private _target = _this get "_target";

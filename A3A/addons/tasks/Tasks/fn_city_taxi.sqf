@@ -65,7 +65,7 @@ _task set ["_fnc_getOut", {
 _task set ["state", "s_waitForPickup"];
 _task set ["interval", 1];
 
-Trace_1("Initial data: %1" _task);
+Trace_1("Initial data: %1", _task);
 
 /////////////////////
 // State functions //

@@ -248,17 +248,20 @@ private _fuelStationTypes = getArray (_mapInfo/"fuelStationTypes");
 if( _fuelStationTypes isEqualTo [] ) then {_fuelStationTypes = ["Land_FuelStation_Feed_F","Land_fs_feed_F","Land_FuelStation_01_pump_malevil_F","Land_FuelStation_01_pump_F","Land_FuelStation_02_pump_F","Land_FuelStation_03_pump_F","Land_A_FuelStation_Feed","Land_Ind_FuelStation_Feed_EP1","Land_FuelStation_Feed_PMC","Land_Fuelstation","Land_Fuelstation_army","Land_Benzina_schnell","Land_vn_b_prop_fueldrum_01","Land_vn_usaf_fueltank_75_01","Land_vn_fuelstation_feed_f","Land_vn_fuelstation_01_pump_f","Land_vn_fuelstation_02_pump_f"]};
 A3A_fuelStationTypes = _fuelStationTypes;
 A3A_fuelStations = nearestObjects [[worldSize/2, worldSize/2], _fuelStationTypes, worldSize];
-A3A_fuelStations apply {
-	_mrkFinalFuel = createMarkerLocal [format ["Fuel%1", mapGridPosition _x], position _x];
+{
+	if(A3A_hasACE) then {
+		[_x, 250] call ace_refuel_fnc_setFuel; // only call on fuels that are not blacklisted and first zone init.
+	};
+
+	private _mrkFinalFuel = format ["Fuel%1", mapGridPosition _x];
+	if (markerShape _mrkFinalFuel != "") then {continue};				// Might have multiple pumps on same map grid 
+	createMarkerLocal [_mrkFinalFuel, getPosATL _x];
 	_mrkFinalFuel setMarkerShapeLocal "ICON";
 	_mrkFinalFuel setMarkerTypeLocal "loc_Fuelstation";
 	_mrkFinalFuel setMarkerColorLocal "ColorWhite";
 	_mrkFinalFuel setMarkerTextLocal "Fuel station";
 	_mrkFinalFuel setMarkerAlpha 0.75;
-	if(A3A_hasACE) then {
-		[_x, 250] call ace_refuel_fnc_setFuel; // only call on fuels that are not blacklisted and first zone init.
-	};
-};
+} forEach A3A_fuelStations;
 
 // Generate rebel resource multipliers based on the map
 private _reqGarrison = 0;

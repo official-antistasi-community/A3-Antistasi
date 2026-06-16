@@ -44,7 +44,7 @@ private _vehicles = [];
         continue;
     };
     if (_policeCarPos isEqualType [] and {_policeCarPos distance2d _pos < 10}) then {
-        Debug_1("Spawn of %1 in %2 blocked by police", _class, _spawnKey);
+        Debug_2("Spawn of %1 in %2 blocked by police", _class, _spawnKey);
         continue;
     };
 

@@ -29,7 +29,7 @@ private _troops = _activeGarrison get "troops";
 // No patrols if there are enemy markers nearby (TODO: should be size-dependent?)
 private _indexes = markersX inAreaArrayIndexes [markerPos _marker, 300, 300] select { sidesX getVariable markersX#_x != _side };
 if (_type != "city" and _indexes isNotEqualTo []) exitWith {
-    Debug_2("Not spawning patrols for %1 due to enemy sites nearby");
+    Debug_1("Not spawning patrols for %1 due to enemy sites nearby", _marker);
 };
 
 private _numPatrols = call {

@@ -10,7 +10,7 @@ FIX_LINE_NUMBERS()
 
 params["_mode", "_params"];
 
-Debug("Params dialog called with mode %1", _mode);
+Debug_1("Params dialog called with mode %1", _mode);
 
 // Get display
 private _display = findDisplay A3A_IDD_SETUPDIALOG;

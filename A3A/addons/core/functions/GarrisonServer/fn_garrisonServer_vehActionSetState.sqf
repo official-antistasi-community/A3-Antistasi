@@ -31,6 +31,6 @@ if !(_vehID in _supportVehicles) then {
 // If all support vehicles are ready, and garrison isn't spawned, then we can drop the machine ID
 if (spawner getVariable _marker != 2) exitWith {};
 if (values _supportVehicles findIf { _x#0 != "ready" } == -1) then {
-    Trace_1("Clearing machine ID for %1");
+    Trace_1("Clearing machine ID for %1", _marker);
     A3A_garrisonMachine deleteAt _marker;       // clear machine ID
 };

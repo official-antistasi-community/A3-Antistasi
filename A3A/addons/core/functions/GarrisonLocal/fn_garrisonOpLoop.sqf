@@ -26,7 +26,7 @@ while {true} do
     _nextOp params ["_opType", "_params"];
 
     if (_opType in _updateOps and {_nextOp in A3A_garrisonOps}) then {
-        Debug_1("Skipping %1 (%2) due to duplicates", _opType, _params);
+        Debug_2("Skipping %1 (%2) due to duplicates", _opType, _params);
         continue;
     };
 

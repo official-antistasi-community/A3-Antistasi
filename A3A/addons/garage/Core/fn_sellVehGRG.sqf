@@ -29,7 +29,7 @@ if (!isServer) exitWith {Error("Not server executed")};
 if !(_player call HR_GRG_canSell) exitWith {["STR_HR_GRG_Feedback_sellVehicle_comOnly"] remoteExecCall ["HR_GRG_fnc_hint", _player];};
 _selectedVehicle params [["_catIndex", -1], ["_vehUID", -1], ["_class", ""]];
 if ( (_catIndex isEqualTo -1) || (_vehUID isEqualTo -1) ) exitWith {};
-Trace_2("Attempting to sell vehicle at cat: %1 | Vehicle ID: %2 | Classname: %3", _catIndex, _vehUID, _class);
+Trace_3("Attempting to sell vehicle at cat: %1 | Vehicle ID: %2 | Classname: %3", _catIndex, _vehUID, _class);
 
 private _refund = [_class] call HR_GRG_getVehicleSellPrice;
 if (_refund == 0) exitWith {["STR_HR_GRG_Feedback_sellVehicle_noPrice"] remoteExecCall ["HR_GRG_fnc_hint", _player];};

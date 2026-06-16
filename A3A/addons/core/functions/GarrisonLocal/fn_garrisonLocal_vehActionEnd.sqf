@@ -25,7 +25,7 @@ private _vehActions = _garrison get "vehActions";
 private _index = _vehActions findIf { _x#0 == _vehID };
 if (_index == -1) then {
     // Normal error because support might be terminated locally and then externally
-    Trace_1("Vehicle ID %1 not found in active supports");
+    Trace_1("Vehicle ID %1 not found in active supports", _vehID);
 };
 _vehActions deleteAt _index params ["", "_vehicle", "_crewGroup", "_scriptHandle"];
 

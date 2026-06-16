@@ -26,7 +26,7 @@ if (!alive _unit) exitWith {};
 private _pool = _unit getVariable ["A3A_resPool", "legacy"];
 private _side = _unit getVariable ["originalSide", sideUnknown];
 if (_side != Occupants and _side != Invaders) then {
-    Error_2("Wrong unit had delete handler, side %1, type %2, pool %3", _side, _unit getVariable "UnitType", _pool);
+    Error_3("Wrong unit had delete handler: side %1 type %2 pool %3", _side, _unit getVariable "UnitType", _pool);
 };
 
 //Debug_3("Enemy delete handler called with side %1, type %2, pool %3", _side, _unit getVariable "UnitType", _pool)

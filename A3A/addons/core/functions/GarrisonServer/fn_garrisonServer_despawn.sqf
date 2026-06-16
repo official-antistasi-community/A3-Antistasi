@@ -52,6 +52,6 @@ private _supportsBusy = false;
 
 // If all the support vehicles are inactive then we can clear the machine ID
 if (!_supportsBusy) then {
-    Trace_1("Clearing machine ID for %1");
+    Trace_1("Clearing machine ID for %1", _marker);
     A3A_garrisonMachine deleteAt _marker;       // clear machine ID
 };
