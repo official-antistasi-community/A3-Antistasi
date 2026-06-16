@@ -94,7 +94,7 @@ private _fnc_onAutoGC = {
 
     private _timeSinceLastGC = [[serverTime-A3A_lastGarbageCleanTime] call A3A_fnc_secondsToTimeSpan,0,0,false,2] call A3A_fnc_timeSpan_format;
 
-    Debug_2("Garbage Cleaner Tracker has ran a gc as players reached threshold, time since last gc: %1", _timeSinceLastGC);
+    Debug_1("Garbage Cleaner Tracker has ran a gc as players reached threshold, time since last gc: %1", _timeSinceLastGC);
 };
 
 // Noop function just to be safe and to not break the Context Queue format.

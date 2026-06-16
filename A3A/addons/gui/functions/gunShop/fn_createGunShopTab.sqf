@@ -101,10 +101,10 @@ switch(_selectedTab) do
 
 
 if (_selectedTabIDC == -1) ExitWith {
-    Error("Tried to access a tab, might not exist: %1",_selectedTab);
+    Error_1("Tried to access a tab that might not exist: %1",_selectedTab);
 };
 if (_selectedTabCtrl == -1) ExitWith {
-    Error("Tried to assign a ctrl group, might not exist: %1",_selectedTab);
+    Error_1("Tried to assign a ctrl group that might not exist: %1",_selectedTab);
 };
 
 private _controlsGroup = _display displayCtrl _selectedTabCtrl;

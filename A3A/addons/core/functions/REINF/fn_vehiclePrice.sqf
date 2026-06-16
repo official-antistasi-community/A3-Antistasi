@@ -7,7 +7,7 @@ private _costs = 0;
 
 if (isNil "_typeX") then
 {
-	Error_1("Vehicle does not exist.");
+	Error("Vehicle does not exist.");
 	_costs = 0;
 }
 else

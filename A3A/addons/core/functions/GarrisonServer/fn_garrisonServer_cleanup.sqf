@@ -35,7 +35,7 @@ if ("_civ" in _marker) exitWith
 
         // Shouldn't trigger now that save is checked
         if (_slotNum isEqualType 0 and { _slotNum >= count _places }) then {
-            Error_1("Slot number above slot count for %1 in %2", _x, _marker);
+            Error_2("Slot number above slot count for %1 in %2", _x, _marker);
             _vehicles deleteAt _forEachIndex;
             continue;
         };

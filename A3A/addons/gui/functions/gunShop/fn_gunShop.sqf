@@ -70,7 +70,7 @@ switch (_mode) do
         };
 
         if (_selectedTabIDC == -1) ExitWith {
-            Error("Tried to access a tab, might not exist: %1", _selectedTab);
+            Error_1("Tried to access a tab that might not exist: %1", _selectedTab);
         };
 
         private _allTabs = [
@@ -127,7 +127,7 @@ switch (_mode) do
         };
 
         if (_selectedTabIDC == -1) ExitWith {
-            Error("Tried to access a tab, might not exist: %1", _selectedTab);
+            Error_1("Tried to access a tab that might not exist: %1", _selectedTab);
         };
 
         private _allTabs = [

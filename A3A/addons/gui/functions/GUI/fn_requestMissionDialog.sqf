@@ -42,7 +42,7 @@ switch (_mode) do
         };
 
         // Check param count
-        if (count _params != 1) exitWith {Error("Invalid parameter count for missionButtonClicked. Got %1, expected 1", count _params)};
+        if (count _params != 1) exitWith {Error_1("Invalid parameter count for missionButtonClicked. Got %1; expected 1", count _params)};
         private _missionType = _params select 0;
 
         // Check if mission type exists

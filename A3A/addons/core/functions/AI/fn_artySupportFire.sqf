@@ -58,7 +58,7 @@ private _ang = if (_strikeType == "barrage") then {_startPos getDir _detail} els
 			waitUntil { sleep 0.1; !(_piece isNil "A3A_artyFired") or time > _timeout };
 			if (_piece isNil "A3A_artyFired") exitWith {
 				private _weaponState = weaponState [_piece, [0]];
-				Error_2("Arty failed to fire round #%1; order %2; state %3", _r, _this, _weaponState);
+				Error_3("Arty failed to fire round #%1; order %2; state %3", _r, _this, _weaponState);
 			};
 			waitUntil {
 				sleep 0.1;
