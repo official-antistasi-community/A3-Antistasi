@@ -37,7 +37,7 @@ private _Tanks = ["B_T_MBT_01_TUSK_F", "B_T_MBT_01_cannon_F"];
 ["vehiclesAmphibious", ["a3a_B_T_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["B_Plane_CAS_01_dynamicLoadout_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["B_Plane_Fighter_01_F"]] call _fnc_saveToTemplate;
+private _vehiclesPlanesAA = ["a3a_Plane_Fighter_03_grey_F"];
 ["vehiclesPlanesTransport", ["B_T_VTOL_01_infantry_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["B_Heli_Light_01_F"]] call _fnc_saveToTemplate;
@@ -75,6 +75,9 @@ private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 ["minefieldAT", ["ATMine"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["APERSMine"]] call _fnc_saveToTemplate;
 
+if ("jets" in A3A_enabledDLC) then {
+	_vehiclesPlanesAA = ["B_Plane_Fighter_01_F"];
+};
 //If Western Sahara DLC
 if ("ws" in A3A_enabledDLC) then {
     _APCs append ["B_T_APC_Wheeled_01_atgm_lxWS", "a3a_T_APC_Wheeled_01_command_lxWS"];
@@ -112,6 +115,8 @@ if ("ef" in A3A_enabledDLC) then {
     ["vehiclesGunBoats", ["EF_B_CombatBoat_HMG_CTRG", "EF_B_CombatBoat_AT_CTRG"]] call _fnc_saveToTemplate;
     ["vehiclesHelisAttack", ["B_Heli_Attack_01_dynamicLoadout_F", "EF_B_AH99J_NATO"]] call _fnc_saveToTemplate;
 };
+
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;
 
 ["vehiclesLightArmed", _LightArmed] call _fnc_saveToTemplate;

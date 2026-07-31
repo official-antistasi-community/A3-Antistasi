@@ -38,7 +38,7 @@ private _vehiclesAA = ["O_SFIA_APC_Tracked_02_AA_lxWS"];
 ["vehiclesAmphibious", ["O_SFIA_APC_Wheeled_02_hmg_lxWS"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["O_Plane_CAS_02_dynamicLoadout_F", "a3a_Plane_Fighter_03_grey_F", "a3a_Plane_Fighter_03_grey_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["O_Plane_Fighter_02_F"]] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", ["a3a_Plane_Fighter_03_hex_F"]] call _fnc_saveToTemplate;
 ["vehiclesPlanesTransport", ["O_T_VTOL_02_infantry_hex_F"]] call _fnc_saveToTemplate; 
 
 ["vehiclesHelisLight", ["O_Heli_Light_02_unarmed_F"]] call _fnc_saveToTemplate;

@@ -39,7 +39,7 @@ private _Tanks = ["B_MBT_01_TUSK_F", "B_MBT_01_cannon_F"];
 ["vehiclesAmphibious", ["a3a_APC_Wheeled_03_cannon_blufor_F","a3a_B_APC_Wheeled_01_cannon_F", "APC_Wheeled_01_atgm_base_lxWS", "a3a_APC_Wheeled_01_command_lxWS"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["B_D_Plane_CAS_01_dynamicLoadout_lxWS", "a3a_Plane_Fighter_03_grey_F"]] call _fnc_saveToTemplate;             // Will be used with CAS script, must be defined in setPlaneLoadout. Needs fixed gun and either rockets or missiles
-["vehiclesPlanesAA", ["a3a_Plane_Fighter_04_grey_F"]] call _fnc_saveToTemplate;              // 
+private _vehiclesPlanesAA = ["a3a_Plane_Fighter_03_grey_F"];
 ["vehiclesPlanesTransport", ["B_T_VTOL_01_infantry_blue_F"]] call _fnc_saveToTemplate;
 
 private _vehiclesHelisLight = ["O_Heli_Light_02_unarmed_F", "a3a_Heli_Light_01_ION_F"]; // ideally fragile & unarmed helis seating 4+
@@ -74,7 +74,9 @@ private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["mortarMagazineFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
 
-
+if ("jets" in A3A_enabledDLC) then {
+	_vehiclesPlanesAA = ["a3a_Plane_Fighter_04_grey_F"];
+};
 if ("enoch" in A3A_enabledDLC) then {
 	_vehiclesPolice append ["B_GEN_Offroad_01_comms_F","B_GEN_Offroad_01_covered_F"];
 	_vehiclesMilitiaCars append ["a3a_Offroad_01_covered_tan_F","a3a_Offroad_01_comms_tan_F"];
@@ -108,6 +110,7 @@ if ("rf" in A3A_enabledDLC) then {
     _vehiclesHelisAttack = ["a3a_Heli_EC_02_rf"];
 };
 
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
 ["vehiclesHelisLight", _vehiclesHelisLight] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", _vehiclesHelisAttack] call _fnc_saveToTemplate;
 ["vehiclesMilitiaLightArmed", _vehiclesMilitiaLightArmed] call _fnc_saveToTemplate;
