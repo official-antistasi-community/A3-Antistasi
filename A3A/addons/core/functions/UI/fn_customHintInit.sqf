@@ -32,6 +32,7 @@ if !(isNil {A3A_customHint_InitComplete}) exitWith {false;};
 A3A_customHint_MSGs = [];  // Operates as a upside-down stack (new messages pushed-Back are displayed.)
 A3A_customHint_UpdateTime = 0;
 A3A_customHint_RenderFrameCount = 1;
+A3A_customHint_WasShowing = false;  // true while an A3A hint occupies the hint box; cleared when queue drains.
 if (isNil {A3A_customHintEnable}) then {A3A_customHintEnable = true}; // isNil check in case value was set before this initialises.
 
 A3A_customHint_hexChars = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
@@ -60,6 +61,7 @@ All public created variables:
 | A3A_customHintEnable              | BOOLEAN       | Local     | missionNamespace  | Whether queuing and dismissing is enabled. Defined on all, not synced.|
 | A3A_customHint_UpdateTime         | SCALAR        | Client    | missionNamespace  | ServerTime of last update to the visible message.                     |
 | A3A_customHint_RenderFrameCount   | SCALAR        | Client    | missionNamespace  | Determines intensity of hint footer fading.                           |
+| A3A_customHint_WasShowing         | BOOLEAN       | Client    | missionNamespace  | True while A3A owns the hint box. Prevents clearing external hints.   |
 
 Worker processes:
 | Script Name                       | Machine   | Description                                                                               |
