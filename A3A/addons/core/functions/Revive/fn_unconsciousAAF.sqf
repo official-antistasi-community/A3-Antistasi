@@ -10,7 +10,7 @@ private _playerNear = false;
 private _group = group _unit;
 private _side = side _group;
 
-if (playableUnits inAreaArray [getPosATL _unit, distanceSPWN2, distanceSPWN2] isNotEqualTo []) then
+if (call A3A_fnc_playableUnits inAreaArray [getPosATL _unit, distanceSPWN2, distanceSPWN2] isNotEqualTo []) then
 {
 	_playerNear = true;
 	[_unit,"heal"] remoteExec ["A3A_fnc_flagaction",0,_unit];

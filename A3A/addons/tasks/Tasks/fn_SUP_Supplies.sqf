@@ -166,7 +166,7 @@ _task set ["s_boxPlaced",
 
 	// Show the countdown if blocked on last check
 	if ("_blockTime" in _this) then {
-		private _nearPlayers = playableUnits inAreaArray [getPosATL _box, 300, 300];
+		private _nearPlayers = call A3A_fnc_playableUnits inAreaArray [getPosATL _box, 300, 300];
 		private _endTime = serverTime + _countdown;
 		[_this get "_hintTitle", localize "STR_A3A_Tasks_LOG_Supplies_countdown", _endTime, _box, 50] remoteExec ["A3A_fnc_customHintCountdown", _nearPlayers];
 		_this deleteAt "_blockTime";
@@ -210,18 +210,16 @@ _task set ["s_cleanup", {
 
 	// reverse-engineer task start time
 	private _startTime = (_this get "_endTime") - 60 * (15 + 30*(_this get "_difficulty"));
-	private _clearTime = 0 max ((_startTime + 1200) - time);
+	private _clearTime = 120 max ((_startTime + 1200) - time);
 	Trace_3("Start time %1; time %2; clearTime %3", _startTime, time, _clearTime);
-	_clearTime spawn {
-		sleep _this;
+	[_clearTime, _this get "_taskId"] spawn {
+		params ["_delay", "_taskId"];
+		sleep _delay;
 		A3A_activeTasks deleteAt (A3A_activeTasks find "SUPP");
 		publicVariable "A3A_activeTasks";
+		[_taskId, true, true] call BIS_fnc_deleteTask;
 	};
 
-	(_this get "_taskId") spawn {
-		sleep 120;
-		[_this, true, true] call BIS_fnc_deleteTask;
-	};
 	true;		// delete the damned task
 }];
 

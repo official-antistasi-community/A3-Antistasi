@@ -36,7 +36,7 @@ private _badTargets = _group targets [true] select { !(side _x in _enemySides) }
     };
 
     // Find target that this group knows most about
-    private _knowledge = _targets apply { _group knowsAbout _x };
+    private _knowledge = _targets apply { (_group knowsAbout _x) min 4 };           // sometimes returns max-float
     private _index = _knowledge find selectMax _knowledge;
 
     A3A_garrisonOps pushBack ["enemyInfo", [_marker, "detect", _targets#_index, _knowledge#_index]];

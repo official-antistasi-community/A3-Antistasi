@@ -79,7 +79,7 @@ if (_garrison get "state" == "paused") then {
         _x enableSimulationGlobal true;
         _x allowDamage true;
         if (clientOwner == 2) then {_x hideObjectGlobal false} else {[_x, false] remoteExecCall ["hideObjectGlobal", 2]};
-    } forEach (crew _vehicle + _vehicle);
+    } forEach (crew _vehicle + [_vehicle]);
 };
 
 // Fire off vehicle action function

@@ -85,7 +85,7 @@ else
 {
 	if (_veh isKindOf "Air") then
 	{
-		_veh addEventHandler ["GetIn",
+		/*_veh addEventHandler ["GetIn",
 		{
 			if (_this select 1 != "driver") exitWith {};
 			_unit = _this select 2;
@@ -94,7 +94,7 @@ else
 				moveOut _unit;
 				[localize "STR_A3A_fn_create_aivehinit_general", localize "STR_A3A_fn_create_aivehinit_no_human"] call A3A_fnc_customHint;
 			};
-		}];
+		}];*/
 
 		if (_veh isKindOf "Helicopter") then
 		{

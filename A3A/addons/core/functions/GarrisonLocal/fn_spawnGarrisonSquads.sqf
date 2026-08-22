@@ -114,7 +114,7 @@ else
 
     // Replace garrison squad with snipers for high positions
     for "_i" from 1 to (_sniperCount min count _garrSquad) do {
-        _garrSquad set [_i, _faction get "unitMarksman"];
+        _garrSquad set [_i-1, _faction get "unitMarksman"];
     };
 };
 Debug_1("Squads: %1", _squads);

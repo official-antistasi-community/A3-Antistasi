@@ -9,7 +9,6 @@
 ["flagTexture", "\x\A3A\addons\core\Pictures\Flags\ifa_weh.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "a3a_flag_WEH"] call _fnc_saveToTemplate;
 
-["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 ["attributeLowAir", true] call _fnc_saveToTemplate;
 ["placeIntel_itemLarge", ["Land_File1_F",-155,false]] call _fnc_saveToTemplate;
 
@@ -40,6 +39,7 @@ private _vehiclesLightTanks = ["a3a_lib_PzKpfwIV_noShield"];
 ["vehiclesHeavyTanks", ["LIB_PzKpfwVI_E","LIB_PzKpfwVI_E_1","LIB_PzKpfwVI_B"]] call _fnc_saveToTemplate;
 
 ["vehiclesAA", ["LIB_FlakPanzerIV_Wirbelwind", "LIB_FlakPanzerIV_Wirbelwind", "LIB_SdKfz_7_AA"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
+["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
 
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;

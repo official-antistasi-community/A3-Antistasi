@@ -50,6 +50,7 @@ class RscDisplayMain : RscStandardDisplay
 		delete BackgroundSpotlightRight;
 		delete BackgroundSpotlightLeft;
 		delete BackgroundSpotlight;
+		*/
 
         class Logo : RscActivePicture
 		{	
@@ -63,13 +64,12 @@ class RscDisplayMain : RscStandardDisplay
 			text = QPATHTOFOLDER(dialogues\textures\banner\mainMenuLogo.paa);
 			tooltip="Click to start an Antistasi game!";
 			x="0.5 - 	5 * 	(pixelW * pixelGrid * 2)";
-			y="safezoneY + (3 - 0.25 * 	5) * 	(pixelH * pixelGrid * 2)";
+			y="safezoneY + (3 - 0.25 * 	10.5) * 	(pixelH * pixelGrid * 2)";
 			w="2 * 	5 * 	(pixelW * pixelGrid * 2)";
-			h="0.5 * 	5 * 	(pixelH * pixelGrid * 2)";
+			h="1 * 	5 * 	(pixelH * pixelGrid * 2)";
 			onButtonClick="finddisplay 0 createDisplay 'A3A_MapSelectorDialog';";
 			onLoad="";
 		};
-		*/
 
 		class GroupSingleplayer : RscControlsGroupNoScrollbars 
 		{
@@ -109,7 +109,7 @@ class RscDisplayMain : RscStandardDisplay
 
             };
         };
-		/* ts doesnt work cause CBA. worth splitting, real settings menu if CBA loaded and option here if not? worth effort?
+		/*
 		class GroupOptions : GroupSingleplayer
         {
             h = "(7 * 	1.5) * 	(pixelH * pixelGrid * 2)";
@@ -125,9 +125,7 @@ class RscDisplayMain : RscStandardDisplay
                 };
             };
         };
-		/*
-
-		/*
+		*/
 		// ok so none of this shit fucking works. possible arma level issues. big ?????
 
 		// Inherit from InfoNews
@@ -160,17 +158,17 @@ class RscDisplayMain : RscStandardDisplay
                 class Background: Background {
 					idc = -1;
 					angle = 0;
-					x = (0.4) * 	(pixelW * pixelGrid * 2);
+					x = (0) * 	(pixelW * pixelGrid * 2);
 				};
                 class BackgroundIcon: BackgroundIcon {
 					idc = -1;
 					angle = 0;
-					x = (0.4) * 	(pixelW * pixelGrid * 2);
+					x = (0) * 	(pixelW * pixelGrid * 2);
 				};
                 class Icon: Icon {
 					idc = -1;
                     text = QPATHTOFOLDER(dialogues\textures\extIcons\steam.paa);
-					x = (0.4) * 	(pixelW * pixelGrid * 2);
+					x = (0) * 	(pixelW * pixelGrid * 2);
                 };
 				class Button: Button {
 					idc = -1;
@@ -179,6 +177,8 @@ class RscDisplayMain : RscStandardDisplay
 				};
 				class Text: News {
 					idc = -1;
+					x = (2.4) * 	(pixelW * pixelGrid * 2);
+					style = ST_LEFT;
 					text = "Steam Workshop";
 				};
 			};
@@ -198,7 +198,9 @@ class RscDisplayMain : RscStandardDisplay
 					url = "https://github.com/official-antistasi-community/A3-Antistasi";
 				};
 				class Text: News {
-					text = "Antistasi Github";
+					x = (2.4) * 	(pixelW * pixelGrid * 2);
+					style = ST_LEFT;
+					text = "Antistasi GitHub";
 				};
 			};
 		};
@@ -217,6 +219,8 @@ class RscDisplayMain : RscStandardDisplay
 					url = "https://antistasi.de";
 				};
 				class Text: News {
+					x = (2.4) * 	(pixelW * pixelGrid * 2);
+					style = ST_LEFT;
 					text = "Antistasi Website";
 				};
 
@@ -240,7 +244,7 @@ class RscDisplayMain : RscStandardDisplay
 				class Button: Button {
 					idc = -1;
 					tooltip = "Join the Discord to find other Antistasi players and get support";
-					url = "https://discord.gg/antistasi";
+					url = "https://discord.gg/YYQFPwUW48";
 				};
 				class Text: News {
 					idc = -1;
@@ -265,7 +269,7 @@ class RscDisplayMain : RscStandardDisplay
 					url = "https://github.com/official-antistasi-community/A3-Antistasi/releases";
 				};
 				class Text: News {
-					text = "0.00.0";
+					text = VERSION;
 				};
 			};
 		};
@@ -281,21 +285,14 @@ class RscDisplayMain : RscStandardDisplay
                     text = QPATHTOFOLDER(dialogues\textures\icon_garrison.paa);
                 };
 				class Button: Button {
-					tooltip = "Join the community servers for 24/7 Antistasi!";
-					url = "https://dev.arma3.com/latest/sitrep";
+					tooltip = "Join the community servers for 24/7 large-scale Antistasi!";
+					onButtonClick = "finddisplay 0 createDisplay 'A3A_CommunityAdvertisement'";
+					url = "";
 				};
 				class Text: News {
 					text = "Community Servers";
 				};
 			};
 		};
-		*/
 	};
 };
-
-/*
-class RscDisplayMultiplayerSetup : RscStandardDisplay
-{
-     onLoad = "[""onLoad"",_this,""RscDisplayMultiplayerSetup"",'GUI'] call (uinamespace getvariable 'A3A_GUI_fnc_manageMultiplayerSetupDisplay')";
-}; // stupid fucking overwrite
-*/

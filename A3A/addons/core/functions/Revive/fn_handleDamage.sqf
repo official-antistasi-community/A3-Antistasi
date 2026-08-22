@@ -92,6 +92,11 @@ if (_part == "") then
 
         if (_overall > 1) exitWith
         {
+            // SP case, player cannot be allowed to die
+            if (!isMultiplayer and _unit == player) exitWith {
+                [player] spawn A3A_fnc_respawn;
+                _damage = 0.9;
+            };
             _unit setDamage 1;
             // Don't remove for players because it's transferred on respawn
             if (!isPlayer _unit) then { _unit removeAllEventHandlers "HandleDamage" };

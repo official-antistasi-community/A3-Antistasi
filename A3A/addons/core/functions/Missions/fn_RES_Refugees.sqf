@@ -17,17 +17,17 @@ _positionX = getMarkerPos _markerX;
 _POWs = [];
 
 _radiusX = [_markerX] call A3A_fnc_sizeMarker;
-//_houses = nearestObjects [_positionX, ["house"], _radiusX];
-_houses = (nearestObjects [_positionX, ["house"], _radiusX]) select {!((typeOf _x) in A3A_buildingBlacklist)};
+_houses = nearestObjects [_positionX, ["house"], _radiusX] select {!((typeOf _x) in A3A_buildingBlacklist)};
+if (_houses isEqualTo []) exitWith { Error_1("%1 has no houses?", _markerX) };
 _posHouse = [];
 _houseX = _houses select 0;
-while {count _posHouse < 4} do
-	{
-	_houseX = selectRandom _houses;
-	_posHouse = _houseX buildingPos -1;
-	if (count _posHouse < 4) then {_houses = _houses - [_houseX]};
-	};
-
+while {count _posHouse < 4 and _houses isNotEqualTo []} do
+{
+	// Find first house with 4+ positions, or best one as fallback
+	private _testHouse = _houses deleteAt (floor random count _houses);
+	private _positions = _testHouse buildingPos -1;
+	if (count _positions > count _posHouse) then { _posHouse = _positions; _houseX = _testHouse };
+};
 
 _nameDest = [_markerX] call A3A_fnc_localizar;
 _timeLimit = if (_difficultX) then {30} else {60};

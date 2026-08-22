@@ -17,7 +17,7 @@
 ["equipmentBox", "Box_NATO_Equip_F"] call _fnc_saveToTemplate; //Changeing this from default will require you to define logistics attachement offset for the box type
 
 ["vehiclesBasic", ["B_Quadbike_01_F"]] call _fnc_saveToTemplate;
-["vehiclesLightUnarmed", ["O_Tura_Offroad_armor_lxWS"]] call _fnc_saveToTemplate;
+private _lightUnarmed = ["O_Tura_Offroad_armor_lxWS"];
 private _lightArmed = ["O_Tura_Offroad_armor_AT_lxWS","O_Tura_Offroad_armor_armed_lxWS", "O_Tura_Offroad_armor_armed_lxWS", "O_SFIA_Truck_02_aa_lxWS"];
 ["vehiclesTrucks", ["O_SFIA_Truck_02_transport_lxWS","O_SFIA_Truck_02_covered_lxWS"]] call _fnc_saveToTemplate;
 ["vehiclesCargoTrucks", ["O_SFIA_Truck_02_flatbed_lxWS","O_SFIA_Truck_02_cargo_lxWS","O_SFIA_Truck_02_transport_lxWS","O_SFIA_Truck_02_covered_lxWS"]] call _fnc_saveToTemplate;
@@ -101,6 +101,7 @@ if ("ef" in A3A_enabledDLC) then {
     _vehiclesLightTanks append ["EF_O_Gyra_Armed_SFIA"];
 };
 
+["vehiclesLightUnarmed", _lightUnarmed] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", _lightArmed] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", _vehiclesHelisAttack] call _fnc_saveToTemplate;
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;

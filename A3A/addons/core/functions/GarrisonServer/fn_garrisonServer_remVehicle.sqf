@@ -6,6 +6,7 @@
 
     Arguments:
     <OBJECT> Vehicle to remove from garrison (garrison autodetected).
+    <BOOL> Optional: True to delete vehicle after removing from garrison.
 
     Copyright 2025 John Jordan. All Rights Reserved.
     Used and distributed by the Antistasi Community project with permission.
@@ -14,12 +15,15 @@
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
 
-params ["_vehicle"];
+params ["_vehicle", ["_delete", false]];
 
 Trace_1("Called with params %1", _this);
 
 private _marker = _vehicle getVariable "markerX";
-if (isNil "_marker") exitWith { Error_1("Vehicle %1 not in a garrison", _vehicle) };
+if (isNil "_marker") exitWith {
+    if (_delete) exitWith { deleteVehicle _vehicle };           // Speculative use allowed for buildings
+    Error_1("Vehicle %1 not in a garrison", _vehicle);
+};
 
 private _garrison = A3A_garrison get _marker;
 
@@ -43,8 +47,9 @@ if (_index < 0) exitWith { Error_2("Vehicle type %1 not found in garrison %2", t
 
 // Remove from server garrison data
 (_garrison get _arrayType) deleteAt _index;
-_vehicle setVariable ["markerX", nil, true];
-_garrison get "supportVehicles" deleteAt _vehID;            // Remove from support vehicles array, if it's in there
+_vehicle setVariable ["markerX", nil, _arrayType == "vehicles"];        // Only set on server for buildings
+_garrison get "supportVehicles" deleteAt _vehID;                        // Remove from support vehicles array, if it's in there
+if (_delete) then { deleteVehicle _vehicle };                           // ideally wouldn't fire the garrison op after this, but whatever
 
 // Recalculate HQ building reveal value
 // exitWith because HQ buildings are managed on the server side

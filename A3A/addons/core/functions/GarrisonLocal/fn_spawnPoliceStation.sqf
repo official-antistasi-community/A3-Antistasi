@@ -83,7 +83,7 @@ if (_intelPos isNotEqualTo [] and _garrisonData getOrDefault ["intelCD", 0] <= 0
     _furniture pushBack _intel;
 };
 
-_station setVariable ["A3A_furniture", _furniture, 2];          // broadcast to server so it can be deleted on destruction
+_station setVariable ["A3A_furniture", _furniture, [2, clientOwner]];          // broadcast to server (inc SP, fuck Arma) so it can be deleted on destruction
 _activeGarrison get "buildings" append _furniture;
 
 

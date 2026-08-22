@@ -24,8 +24,8 @@ private _markerPos = markerPos _marker;
 private _type = _garrison get "type";
 private _side = _garrison get "side";
 
-if (_type in ["hq", "city"]) exitWith {};          // No action required
-if (_type in ["camp", "roadblock", "rebpost"]) exitWith
+if (_type in ["hq", "city", "rebpost"]) exitWith {};          // No action required
+if (_type in ["camp", "roadblock"]) exitWith
 {
     // Minor site case, remove if empty
     private _remTroops = _troops select { _x call A3A_fnc_canFight };

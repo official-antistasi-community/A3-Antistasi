@@ -9,7 +9,6 @@
 ["flagTexture", "\ca\data\flag_usmc_co.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "Faction_USMC"] call _fnc_saveToTemplate;
 
-["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 ["attributeMoreTrucks", true] call _fnc_saveToTemplate;         // Use more truck for transports
 ["attributeLowAir", true] call _fnc_saveToTemplate;
 ["placeIntel_itemLarge", ["Land_File1_F",-155,false]] call _fnc_saveToTemplate;
@@ -41,6 +40,7 @@
 ["vehiclesHeavyTanks", ["LIB_M4A3_75"]] call _fnc_saveToTemplate;
 
 ["vehiclesAA", ["LIB_US_M3_Halftrack"]] call _fnc_saveToTemplate; //Fake "truck with bofors"
+["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
 
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;

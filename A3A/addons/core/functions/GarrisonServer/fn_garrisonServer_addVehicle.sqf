@@ -34,12 +34,17 @@ private _arrayType = call {
 
 private _vehID = -1;
 if (_arrayType == "buildings") then {
+    _vehicle setVariable ["markerX", _marker];        // don't need to publish for buildings
+
     if (_marker == "Synd_HQ") then {
         _garrison get "spawnedBuildings" pushBack _vehicle;
         if (_doRevealCalc) then {call A3A_fnc_calcBuildingReveal};
     };
     (_garrison get "buildings") pushBack [typeof _vehicle, getPosWorld _vehicle, vectorDir _vehicle, vectorUp _vehicle];
 } else {
+    _vehicle setVariable ["markerX", _marker, true];
+    _vehicle setVariable ["A3A_resPool", "garrison", true];
+
     // Need a global(ish) ID for this vehicle
     _vehID = _garrison get "nextVehID";
     _vehicle setVariable ["A3A_vehID", _vehID];
@@ -53,8 +58,6 @@ if (_arrayType == "buildings") then {
     };
 };
 
-_vehicle setVariable ["markerX", _marker, true];
-_vehicle setVariable ["A3A_resPool", "garrison", true];
 
 // Add to active garrison if spawned
 if (spawner getVariable _marker != 2) then {

@@ -53,8 +53,8 @@ private _invalidVictim = false;
 switch (true) do {
     case (_victim isKindOf "CAManBase"): {  // Man includes everything biological, even animals such as goats ect...
         if (_victim == petros and _side in [Occupants, Invaders]) then {
-            _victim setVariable ["A3A_napalmHit", true, 2];         // Need to set in advance so it's there when the unit dies
-            _fnc_final = _fnc_final + 'if (alive _victim and !(_victim getVariable ["incapacitated", false])) then { _victim setVariable ["A3A_napalmHit", nil, 2] };';
+            _victim setVariable ["A3A_napalmHit", true, [2, clientOwner]];         // Need to set in advance so it's there when the unit dies
+            _fnc_final = _fnc_final + 'if (alive _victim and !(_victim getVariable ["incapacitated", false])) then { _victim setVariable ["A3A_napalmHit", nil, [2, clientOwner]] };';
         };
         if (A3A_hasACEMedical) then {
             _fnc_onTick = _fnc_onTick +

@@ -3,6 +3,78 @@ Changelog
 ==========
 
 
+Version 3.11.1
+===============
+
+.. note::
+   18th April 2026
+   
+.. admonition:: Minor
+   
+   * :issue:`3875` Added some custom, not so serious ACE medical items
+   * :issue:`3902` Allowed rebel AI to mount and use aircraft
+   * :issue:`3926` Added some buttons to the main menu and changed the main logo
+   
+
+.. admonition:: Template updates
+
+   * :issue:`3894` Fixed an issue with the EF Gyras in some templates
+   * :issue:`3904` Added some medical items from SPEX to the SPE templates
+   * :issue:`3908` Fixed a bug with the basic vehicles in Aegis SDK
+   * :issue:`3928` Rebalanced AT in the RHS CDF faction
+   * :issue:`3932` Removed some CUP Challenger 2 MBTs with near-invincible damage models from BAF / ION
+   
+   
+.. admonition:: Terrain updates
+
+   * :issue:`3936` Changed the climate on Weferlingen Summer to Temperate
+   * :issue:`3936` Fixed a bugged hamlet on Weferlingen that had a population of 2010
+   
+
+.. admonition:: Bugfixes
+
+   * :issue:`3881` Fixed a bug where the SP mission would end if a player was shot while downed
+   * :issue:`3882` Fixed a bug where the bank mission wouldn't update if HQ moved
+   * :issue:`3886` Fixed some inconsistencies related to garrison spawning and towing
+   * :issue:`3887` Fixed a few leftover bugs with SP
+   * :issue:`3889` Fixed a bug where convoy rewards would be 10x too high
+   * :issue:`3892` Fixed a bug where SAMs would spawn at airbases in WW2 games
+   * :issue:`3893` Fixed a bug where the wrong units would be placed in radio towers
+   * :issue:`3895` Fixed several bugs relating to rebel roadblocks
+   * :issue:`3896` Fixed a bug where garaging would break the available ammo to rearm
+   * :issue:`3898` The Y menu will no longer open when you're in the arsenal
+   * :issue:`3899` Fixed a bug where completed missions would disappear too quickly
+   * :issue:`3900` Fixed a bug where HQ could be detected from farther distances
+   * :issue:`3901` Improved the spawning of the bank mission vehicle to clip objects less
+   * :issue:`3905` Fixed a bug where buildings would not be cleared from the garrison when removed
+   * :issue:`3906` Fixed a bug where city support wouldn't account correctly for farther away units
+   * :issue:`3906` Fixed some mission texts to clarify their importance for flipping cities
+   * :issue:`3912` Fixed a duplicate localization string
+   * :issue:`3916` Fixed a bug with SF points near HQ
+   * :issue:`3920` Fixed several bugs with crewed garrison vehicles
+   * :issue:`3921` Fixed a bug where the refugee mission would break in towns with no usable buildings
+   * :issue:`3922` Fixed a syntax error with the vehicle path monitor
+   * :issue:`3923` Fixed a bug where SF points would break after a Petros death
+   * :issue:`3924` Fixed a bug where convoys would not run on the server
+   * :issue:`3925` Fixed a bug where the traitor mission would break with no airbases to retreat to
+   * :issue:`3929` Fixed multiple locality-related bugs in singleplayer, including one where civilian cars would despawn while driven
+   * :issue:`3930` Fixed a bug with rewards on the Tower Rebuild Disrupt
+   * :issue:`3931` Adjusted the RRR text to say "Rearm" to be more clear
+   * :issue:`3933` Fixed a bug where contact reports at HQ would read incorrectly
+   * :issue:`3934` Fixed a bug relating to a case where AI could spot artillery targets
+   * :issue:`3938` Fixed a bug where statics could get destroyed when placed on cargo towers
+   
+
+.. admonition:: Localization
+
+   * :issue:`3891` Added/updated Spanish translations in the GUI and garage (from Js)
+   * :issue:`3910` Added/updated Czech translations (from Jirka)
+
+|
+
+-----
+
+
 Version 3.11.0
 ===============
 

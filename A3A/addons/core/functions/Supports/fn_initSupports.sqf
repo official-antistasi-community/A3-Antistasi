@@ -45,7 +45,7 @@ private _initData = [
     ["QRFLAND",       "TROOPS", 1.0, 1.4,   0,   0,  "", ""],
     ["QRFAIR",        "TROOPS", 0.5, 0.1,   0,   0,  "", ""],
     ["CARPETBOMBS",     "AREA", 0.5, 0.1, 200,   0, "u", "vehiclesPlanesCAS"],            // balanced against airstrikes
-    ["SAM",           "TARGET", 1.0, 1.0,   0, 100,  "", ""],                             // balanced against ASF
+    ["SAM",           "TARGET", 1.0, 1.0,   0, 100,  "", "vehiclesSAM"],                  // balanced against ASF
     ["ORBITALSTRIKE",   "AREA", 0.2, 0.0, 300,   0, "f", ""],
     ["SEAD",          "TARGET", 0.5, 0.5,   0, 100,  "", "vehiclesPlanesAA"],
     ["UAV",             "AREA", 0.0, 0.0,   0,   0,  "", "uavsAttack"]                    // Not used for support calls 
@@ -57,7 +57,7 @@ private _fnc_buildSupportHM =
 {
     params ["_faction"];
     private _lowAir = _faction getOrDefault ["attributeLowAir", false];
-    private _noSAM = _faction getOrDefault ["attributeNoSAM", false];
+    private _noSAM = _faction getOrDefault ["attributeNoSAM", false];               // backwards compat
     private _suppHM = createHashMap;
     {
         _x params ["_suppType", "_baseType", "_weight", "_lowAirWeight", "_effRadius", "_strikepower", "_flags", "_reqType"];

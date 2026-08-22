@@ -64,7 +64,7 @@ if (spawner getVariable _markerX != 2) then
 		[Occupants, 15, 90] remoteExec ["A3A_fnc_addAggression", 2];
 		[Invaders, 5, 60] remoteExec ["A3A_fnc_addAggression", 2];
 		[500, Occupants] remoteExec ["A3A_fnc_timingCA",2];
-		[20*_bonus, false, _veh, 500] call A3A_tasks_fnc_rewardPlayers;     // any players within 500m
+		[20, false, _veh, 500] call A3A_tasks_fnc_rewardPlayers;     // any players within 500m
 		};
 	};
 if (dateToNumber date > _dateLimitNum) then

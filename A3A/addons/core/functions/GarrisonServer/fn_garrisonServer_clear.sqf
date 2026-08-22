@@ -75,7 +75,9 @@ if (_delete) then {
 
 if (_hqMove) then {
     // HQ is going elsewhere so need to disconnect everything
-    A3A_buildingsToSave append (_garrison get "spawnedBuildings");
+    private _hqBuildings = _garrison get "spawnedBuildings";
+    A3A_buildingsToSave append _hqBuildings;
+    { _x setVariable ["markerX", nil] } forEach _hqBuildings;
     _garrison set ["spawnedBuildings", []];
     _garrison set ["buildings", []];
     _garrison set ["vehicles", []];

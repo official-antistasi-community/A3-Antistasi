@@ -53,10 +53,9 @@ isNil {
     [_item, surfaceNormal position _item] remoteExecCall ["setVectorUp", _item];
 
     // Place on closest surface
-    private _pos = getPosASL _item;
-    private _intersects = lineIntersectsSurfaces [_pos, _pos vectorAdd [0,0,-100], _item];
+    private _intersects = lineIntersectsSurfaces [getPosWorld _item, getPosASL _item vectorAdd [0,0,-0.3], _item];
     if (count _intersects > 0) then {
-        _item setPosASL (_intersects select 0 select 0);
+        _item setPosASL (_intersects#0#0 vectorAdd [0,0,0.3]);
     };
 
     [_item, true] remoteExecCall ["enableSimulationGlobal", 2];

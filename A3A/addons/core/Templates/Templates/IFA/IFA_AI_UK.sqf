@@ -9,7 +9,6 @@
 ["flagTexture", "\A3\Data_F\Flags\flag_uk_co.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "flag_UK"] call _fnc_saveToTemplate;
 
-["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 ["attributeLowAir", true] call _fnc_saveToTemplate;
 ["placeIntel_itemLarge", ["Land_File1_F",-155,false]] call _fnc_saveToTemplate;
 
@@ -40,6 +39,7 @@ private _vehiclesTanks = ["LIB_M4A4_FIREFLY","LIB_Cromwell_Mk4","LIB_Cromwell_Mk
 private _vehiclesHeavyTanks = ["LIB_Churchill_Mk7","LIB_Churchill_Mk7_Crocodile"];
 
 ["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
+["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
 
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;

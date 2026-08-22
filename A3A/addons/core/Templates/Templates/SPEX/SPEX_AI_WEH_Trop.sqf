@@ -15,7 +15,6 @@
 
 ["attributeLowAir", true] call _fnc_saveToTemplate;             // Use fewer air units in general
 ["attributeMoreTrucks", true] call _fnc_saveToTemplate;         // Use more truck for transports
-["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 
 ["ammobox", "B_supplyCrate_F"] call _fnc_saveToTemplate;
 ["surrenderCrate", "SPE_Weaponcrate_MP40_GER"] call _fnc_saveToTemplate;
@@ -37,6 +36,7 @@
 ["vehiclesTanks", ["SPEX_DAK_PzKpfwIII_L", "SPEX_DAK_PzKpfwIII_L", "SPEX_DAK_PzKpfwIV_G"]] call _fnc_saveToTemplate;
 ["vehiclesHeavyTanks", ["SPEX_DAK_PzKpfwVI_H1"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["SPEX_DAK_OpelBlitz_Flak38"]] call _fnc_saveToTemplate;
+["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;

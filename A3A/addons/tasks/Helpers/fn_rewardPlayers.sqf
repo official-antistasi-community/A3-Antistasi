@@ -17,7 +17,7 @@ private _rewardPlayers = call {
     if (_group isEqualType grpNull) exitWith {
         units _group inAreaArray [_position, _radius, _radius] select { isPlayer _x };
     };
-    private _allPlayers = playableUnits;        // probably don't want to reward corpses
+    private _allPlayers = call A3A_fnc_playableUnits;        // probably don't want to reward corpses
     if (!_group) exitWith {
         _allPlayers inAreaArray [_position, _radius, _radius];
     };

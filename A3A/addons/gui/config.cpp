@@ -39,6 +39,17 @@ class A3A {
     #include "CfgFunctions.hpp"
 #endif
 
+class CfgCommands
+{
+	allowedHTMLLoadURIs[] +=
+	{
+		"https://github.com/official-antistasi-community/*",
+		"https://antistasi.de",
+        "https://antistasi.de/*",
+		"https://discord.gg/*",
+        "https://twitter.com/antistasio"
+	};
+};
 
 // Whether order should be maintained is unknown.
 #include "dialogues\defines.hpp"

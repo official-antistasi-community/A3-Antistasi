@@ -9,7 +9,6 @@
 ["flagTexture", "\x\A3A\addons\core\Pictures\Flags\ifa_sov.paa"] call _fnc_saveToTemplate;
 ["flagMarkerType", "a3a_flag_SOV"] call _fnc_saveToTemplate;
 
-["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 ["attributeLowAir", true] call _fnc_saveToTemplate;
 ["placeIntel_itemLarge", ["Land_File1_F",-155,false]] call _fnc_saveToTemplate;
 
@@ -39,6 +38,7 @@ private _vehiclesLightTanks = ["LIB_T34_76"];
 private _vehiclesHeavyTanks = ["LIB_JS2_43"];
 
 ["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
+["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
 
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;

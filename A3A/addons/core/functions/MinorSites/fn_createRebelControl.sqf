@@ -10,12 +10,18 @@ params ["_pos", "_troopTypes", "_vehTypes"];
 // Adjust position to road if there is one
 if (isOnRoad _pos) then { _pos = getPosATL roadAt _pos };
 
-// Create underlying shape marker
-_marker = createMarkerLocal [format ["RebPost%1", mapGridPosition _pos], _pos];
-if (_marker == "") exitWith { Error_1("Already a rebel post at %1", _pos) };            // should be impossible
-_marker setMarkerShapeLocal "ELLIPSE";
-_marker setMarkerSizeLocal [30,30];
-_marker setMarkerAlpha 0;
+// If previous marker with the same name was deleted, clear that and move the old one
+private _marker = format ["RebPost%1", mapGridPosition _pos];
+if (markerShape _marker != "") then {
+    A3A_markersToDelete = A3A_markersToDelete - [_marker];
+    _marker setMarkerPos _pos;
+} else {
+    // Create underlying shape marker
+    createMarkerLocal [_marker, _pos];
+    _marker setMarkerShapeLocal "ELLIPSE";
+    _marker setMarkerSizeLocal [30,30];
+    _marker setMarkerAlpha 0;
+};
 
 // Visible marker (text & broadcast needs to be set after outpostsFIA)
 _iconMarker = createMarkerLocal [format ["Dum%1", _marker], _pos];
@@ -46,6 +52,7 @@ outpostsFIA = outpostsFIA + [_marker];
 if (_troopTypes isNotEqualTo []) then {
     // If used from a save then outpostsFIA and markers are updated later (after adding garrison)
     // If it's live then set the text & broadcast immediately, needs outpostsFIA & side
+    [_marker] call A3A_fnc_garrisonServer_initVIDs;
     publicVariable "outpostsFIA";
     [_marker] call A3A_fnc_mrkUpdate;
 };

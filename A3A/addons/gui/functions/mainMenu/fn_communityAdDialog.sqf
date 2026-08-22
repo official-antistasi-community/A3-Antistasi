@@ -27,6 +27,7 @@ FIX_LINE_NUMBERS()
 
 #define MAINADDRESS "217.217.30.252"
 #define TSADDRESS "217.217.30.250"
+#define DISCORD_INVITE "antistasi"
 
 private _thisFunc = (uiNamespace getVariable "A3A_GUI_fnc_communityAdDialog");
 
@@ -86,7 +87,7 @@ switch (_mode) do
             _mainText ctrlSetStructuredText parseText localize "STR_antistasi_commad_splashText";
         } else {
             _toggleButton ctrlSetText "Info";
-            _mainText ctrlSetStructuredText parseText format [localize "STR_antistasi_commad_linkText", TSADDRESS, MAINADDRESS, (_ports apply {format ["%1: %2", _x#0, _x#1]}) joinString ", "];
+            _mainText ctrlSetStructuredText parseText format [localize "STR_antistasi_commad_linkText", DISCORD_INVITE, TSADDRESS, MAINADDRESS, (_ports apply {format ["%1: %2", _x#0, _x#1]}) joinString ", "];
         };
     };
     case ("testCBChecked"):

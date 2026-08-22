@@ -1,4 +1,71 @@
-Version 3.11.0
+Version 3.11.1
+<br/>
+<br/>
+<br/>Minor
+<br/>
+<br/>Added some custom, not so serious ACE medical items
+<br/>Allowed rebel AI to mount and use aircraft
+<br/>Added some buttons to the main menu and changed the main logo
+<br/>
+<br/>
+<br/>
+<br/>Template updates
+<br/>
+<br/>Fixed an issue with the EF Gyras in some templates
+<br/>Added some medical items from SPEX to the SPE templates
+<br/>Fixed a bug with the basic vehicles in Aegis SDK
+<br/>Rebalanced AT in the RHS CDF faction
+<br/>Removed some CUP Challenger 2 MBTs with near-invincible damage models from BAF / ION
+<br/>
+<br/>
+<br/>Terrain updates
+<br/>
+<br/>Changed the climate on Weferlingen Summer to Temperate
+<br/>Fixed a bugged hamlet on Weferlingen that had a population of 2010
+<br/>
+<br/>
+<br/>Bugfixes
+<br/>
+<br/>Fixed a bug where the SP mission would end if a player was shot while downed
+<br/>Fixed a bug where the bank mission wouldn't update if HQ moved
+<br/>Fixed some inconsistencies related to garrison spawning and towing
+<br/>Fixed a few leftover bugs with SP
+<br/>Fixed a bug where convoy rewards would be 10x too high
+<br/>Fixed a bug where SAMs would spawn at airbases in WW2 games
+<br/>Fixed a bug where the wrong units would be placed in radio towers
+<br/>Fixed several bugs relating to rebel roadblocks
+<br/>Fixed a bug where garaging would break the available ammo to rearm
+<br/>The Y menu will no longer open when you're in the arsenal
+<br/>Fixed a bug where completed missions would disappear too quickly
+<br/>Fixed a bug where HQ could be detected from farther distances
+<br/>Improved the spawning of the bank mission vehicle to clip objects less
+<br/>Fixed a bug where buildings would not be cleared from the garrison when removed
+<br/>Fixed a bug where city support wouldn't account correctly for farther away units
+<br/>Fixed some mission texts to clarify their importance for flipping cities
+<br/>Fixed a duplicate localization string
+<br/>Fixed a bug with SF points near HQ
+<br/>Fixed several bugs with crewed garrison vehicles
+<br/>Fixed a bug where the refugee mission would break in towns with no usable buildings
+<br/>Fixed a syntax error with the vehicle path monitor
+<br/>Fixed a bug where SF points would break after a Petros death
+<br/>Fixed a bug where convoys would not run on the server
+<br/>Fixed a bug where the traitor mission would break with no airbases to retreat to
+<br/>Fixed multiple locality-related bugs in singleplayer, including one where civilian cars would despawn while driven
+<br/>Fixed a bug with rewards on the Tower Rebuild Disrupt
+<br/>Adjusted the RRR text to say "Rearm" to be more clear
+<br/>Fixed a bug where contact reports at HQ would read incorrectly
+<br/>Fixed a bug relating to a case where AI could spot artillery targets
+<br/>Fixed a bug where statics could get destroyed when placed on cargo towers
+<br/>
+<br/>
+<br/>Localization
+<br/>
+<br/>Added/updated Spanish translations in the GUI and garage (from Js)
+<br/>Added/updated Czech translations (from Jirka)
+<br/>
+<br/>
+<br/>
+<br/>Version 3.11.0
 <br/>
 <br/>
 <br/>Major

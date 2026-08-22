@@ -159,7 +159,7 @@ A3A_buildingBlacklist = [
 	"Land_vn_quonset_02_01","Land_vn_quonset_02","Land_vn_quonset_01","Land_vn_hootch_01","Land_vn_hootch_02","Land_vn_barracks_02","Land_vn_barracks_02_01","Land_vn_barracks_04","Land_vn_b_trench_bunker_03_03","Land_vn_tent_mash_01_01","Land_vn_tent_mash_01_02","Land_vn_tent_01_03","Land_vn_tent_01_01","Land_vn_tent_01_02","Land_vn_tent_01_04",
 	"Land_vn_barracks_04_01","Land_vn_barracks_04_02","Land_vn_b_trench_bunker_01_03","Land_vn_b_trench_bunker_03_04","Land_vn_tent_mash_01_04","Land_vn_tent_02_01","Land_vn_tent_02_02","Land_vn_tent_mash_01","Land_vn_tent_mash_02_03","Land_vn_tent_mash_02_04","Land_vn_hut_old02","Land_vn_tent_02_04","Land_vn_tent_02_03","Land_vn_tent_mash_02_02",
 	"Land_vn_tent_mash_02_01","Land_vn_tent_mash_01_03","Land_vn_army_hut_storrage","Land_vn_army_hut_int","Land_vn_wf_field_hospital_east","Land_vn_army_hut2_int","Land_vn_army_hut3_long_int", "Land_vn_o_prop_cong_cage_01", "Land_vn_o_prop_cong_cage_02", "Land_vn_o_prop_cong_cage_03",
-	"Land_SPE_bocage_long_mound", "Land_SPE_bocage_short_mound", "Land_SPE_bocage_short_mound_lc", "Land_SPE_bocage_long_mound_lc"
+	"Land_SPE_bocage_long_mound", "Land_SPE_bocage_short_mound", "Land_SPE_bocage_short_mound_lc", "Land_SPE_bocage_long_mound_lc", "Land_TTowerBig_1_F", "Land_TTowerBig_2_F"
 ];
 //Lights and Lamps array used for 'Blackout'
 A3A_lampTypes = [

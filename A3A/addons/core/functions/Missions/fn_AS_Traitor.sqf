@@ -2,7 +2,7 @@
 if (!isServer and hasInterface) exitWith{};
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
-_markerX = _this select 0;
+params ["_markerX", "_base"];
 
 _difficultX = if (random 10 < tierWar) then {true} else {false};
 
@@ -40,8 +40,6 @@ private _faction = Faction(_enemySide);
 
 _groupTraitor = createGroup _enemySide;
 
-_arrayAirports = airportsX select {sidesX getVariable [_x,sideUnknown] == _enemySide};
-_base = [_arrayAirports, _positionX] call BIS_Fnc_nearestPosition;
 _posBase = getMarkerPos _base;
 
 private _traitorIdentity = [A3A_faction_reb, _faction get "unitTraitor"] call A3A_fnc_createRandomIdentity;

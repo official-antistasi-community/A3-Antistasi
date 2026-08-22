@@ -11,7 +11,6 @@
 
 ["attributeLowAir", true] call _fnc_saveToTemplate;             // Use fewer air units in general
 ["attributeMoreTrucks", true] call _fnc_saveToTemplate;         // Use more truck for transports
-["attributeNoSAM", true] call _fnc_saveToTemplate;              // Don't use SAM supports
 ["placeIntel_itemLarge", ["Land_File1_F",-155,false]] call _fnc_saveToTemplate;
 
 
@@ -40,6 +39,7 @@
 ["vehiclesTanks", ["EAW_ChiHa", "EAW_ChiHa_Kai"]] call _fnc_saveToTemplate;
 ["vehiclesHeavyTanks", ["LIB_T34_76"]] call _fnc_saveToTemplate;
 ["vehiclesAA", ["LIB_Zis5v_61K"]] call _fnc_saveToTemplate;                    // ideally heavily armed with anti-ground capability and enclosed turret. Passengers will be ignored
+["vehiclesSAM", []] call _fnc_saveToTemplate;                               // do not spawn SAMs or use SAM supports
 
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
