@@ -70,6 +70,7 @@ for "_i" from 1 to _numPatrols do
     _group deleteGroupWhenEmpty true;
     _groups pushBack _group;
     _troops append units _group;
+    _group addEventHandler ["CombatModeChanged", A3A_fnc_combatModeChangedEH];
 
     if ((random 10 < 2.5) and !("Sniper" in _typeGroup#0)) then {
         private _dog = [_group, "Fin_random_F", _spawnPos, [], 0, "FORM"] call A3A_fnc_createUnit;

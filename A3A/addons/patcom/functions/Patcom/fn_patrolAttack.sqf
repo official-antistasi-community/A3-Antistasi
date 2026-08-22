@@ -28,7 +28,8 @@ params [
     "_targetPos"
 ];
 
-[_group, "COMBAT", "FULL", "COLUMN", "RED", "AUTO"] call A3A_fnc_patrolSetCombatModes;
+if (combatBehaviour _group == "SAFE") then { _group setCombatBehaviour "AWARE"};
+_group setVariable ["PATCOM_safeCheckTime", time+60];
 
 if (PATCOM_DEBUG) then {
     [leader _group, "ATTACK", 10, "White"] call A3A_fnc_debugText3D;
@@ -65,5 +66,4 @@ if (leader _group distance2d _wpPos < 50) then {
         _previousOrders = ["Patrol_Area", 0, 100, -1, false, _group getVariable "PATCOM_Patrol_Home", false];
     };
     _group setVariable ["PATCOM_Patrol_Params", _previousOrders];
-    _group setVariable ["PATCOM_Group_State", "CALM"];
 };

@@ -171,7 +171,6 @@ if (_garrisonType == "camp") then {
 {
     if (_side == teamPlayer) then { _x allowFleeing 0 };
     _x deleteGroupWhenEmpty true;
-    _x addEventHandler ["CombatModeChanged", A3A_fnc_combatModeChangedEH];
 } forEach (_garrison get "groups");
 
 
