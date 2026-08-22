@@ -67,7 +67,6 @@ if ((side leader _group) == civilian) then {
     };
 
     _group setVariable ["PATCOM_Patrol_Home", getPosATL (leader _group)];
-    _group setVariable ["PATCOM_Group_State", "CALM"];
 
     // Set Group to being controlled by PATCOM so we don't init variables again.
     _group setVariable ["PATCOM_Controlled", true];

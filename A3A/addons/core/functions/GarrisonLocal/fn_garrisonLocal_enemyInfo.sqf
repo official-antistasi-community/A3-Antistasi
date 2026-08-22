@@ -25,6 +25,7 @@ params ["_marker", "_type", "_enemy", "_knowsAbout", ["_threatBoost", 0]];
 if (_enemy isKindOf "Man" and !(isNull objectParent _enemy)) then { _enemy = objectParent _enemy };
 
 private _garrison = A3A_activeGarrison get _marker;
+if (_garrison get "state" != "enabled") exitWith {};        // possible with vehActions
 
 // ignore mode changes that are triggered by related events
 if (_type == "detect" and _garrison getOrDefault ["ignoreModeChange", 0] > time) exitWith {};
@@ -50,8 +51,8 @@ if (_type == "detect") then { _garrison set ["ignoreModeChange", time + 30] };
 // Do really dumb damage vs orders calc for now?
 
 private _defenders = (_garrison get "groups") - [_garrison get "mortarGroup", _garrison get "staticGroup", _garrison get "buildingGroup"];
-_defenders = _defenders select { leader _x call A3A_fnc_canFight };
-_defenders = _defenders select { _x getVariable ["PATCOM_Patrol_Params", [""]] select 0 != "Patrol_Attack" };
+_defenders = _defenders select { leader _x call A3A_fnc_canFight } select { !(_x isNil "PATCOM_Patrol_Params") };       // exclude parked vehicle crews
+_defenders = _defenders select { _x getVariable "PATCOM_Patrol_Params" select 0 != "Patrol_Attack" };
 
 // Only include mortars that are far enough and aren't busy
 private _mortars = [];

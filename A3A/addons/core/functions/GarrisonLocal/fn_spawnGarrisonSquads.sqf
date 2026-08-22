@@ -131,6 +131,7 @@ private _fnc_initUnit = [A3A_fnc_NATOinit, A3A_fnc_FIAinitBases] select (_side =
     } forEach _x;
     _groups pushBack _curGroup;
     _troops append units _curGroup;
+    _curGroup addEventHandler ["CombatModeChanged", A3A_fnc_combatModeChangedEH];
 
     if (_garrSize > 0 and _forEachIndex == 0) then {
         Debug_2("Placing squad in buildings: %1, %2", _x, _buildingPlaces);

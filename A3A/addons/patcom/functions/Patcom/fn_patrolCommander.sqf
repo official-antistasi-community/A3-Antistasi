@@ -41,14 +41,16 @@ private _patrolParams = _group getVariable "PATCOM_Patrol_Params";
 private _currentOrders = _patrolParams # 0;
 
 // Handle Patrol Formations, Exits if already set and time not expired.
-[leader _group] call A3A_fnc_patrolHandleFormation;
+// 3.12: Disabled for now
+//[leader _group] call A3A_fnc_patrolHandleFormation;
 
 
 // If autoattack is enabled, check if enemies are near and change to attack orders
 if (_group getVariable ["PATCOM_AutoAttack", true]) then {
     if (_currentOrders in ["Patrol_Attack", "Patrol_Water"]) exitWith {};
 
-    private _knownEnemies = _group targets [true, PATCOM_VISUAL_RANGE, [], PATCOM_TARGET_TIME];
+    private _enemySides = [Occupants, Invaders, teamPlayer] - [side _group];
+    private _knownEnemies = _group targets [true, PATCOM_VISUAL_RANGE, [], PATCOM_TARGET_TIME] select { side _x in _enemySides };
     if (_knownEnemies isEqualTo []) exitWith {};
     private _distances = _knownEnemies apply { _x distance2d leader _group };
     private _nearEnemy = _knownEnemies select (_distances find selectMin _distances);       // fuck Arma
@@ -57,12 +59,20 @@ if (_group getVariable ["PATCOM_AutoAttack", true]) then {
     _group setVariable ["PATCOM_Previous_Orders", _patrolParams];
     _patrolParams = ["Patrol_Attack", 0, 50, -1, false, getPosATL _nearEnemy, false];     // mostly irrelevant
     _currentOrders = _patrolParams # 0;
-    _group setVariable ["PATCOM_Group_State", "COMBAT"];            // what does this do?
+};
+
+
+// Force switch down to SAFE if there are no recent enemies. AUTOCOMBAT is too buggy for this
+if (combatBehaviour _group == "AWARE" and { time > _group getVariable ["PATCOM_safeCheckTime", 0] }) then {
+    private _enemySides = [Occupants, Invaders, teamPlayer] - [side _group];
+    private _knownEnemies = _group targets [true, 0, [], PATCOM_TARGET_TIME] select { side _x in _enemySides };
+    if (_knownEnemies isNotEqualTo []) exitWith { _group setVariable ["PATCOM_safeCheckTime", time+60] };
+    _group setBehaviourStrong "SAFE";
 };
 
 
 If (PATCOM_DEBUG) then {
-    ServerDebug_3("PATCOM | Group: %1 | Current Orders: %2 | Group State: %3", _group, _currentOrders, _group getVariable "PATCOM_Group_State");
+    ServerDebug_3("PATCOM | Group: %1 | Current Orders: %2 | Group State: %3", _group, _currentOrders, combatBehaviour _group);
 };
 
 if (_currentOrders == "Patrol_Area") exitWith {
