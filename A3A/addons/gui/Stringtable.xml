@@ -5628,6 +5628,21 @@
         <Czech>Vozidlo je moc daleko a nemůže být dotankováno.</Czech>
         <Spanish>El vehículo objetivo se ha alejado demasiado y no se puede repostar.</Spanish>
       </Key>
+      <Key ID="STR_antistasi_vehService_personalMoneyLabel">
+        <Original>Pay with personal money</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_personalMoneyTooltip">
+        <Original>Pay for this order with your own money at %1 € (instead of 1 €) per point, without taking from the box.</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_applyMoney">
+        <Original>APPLY (%1 €)</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_noMoney">
+        <Original>This order costs %1 € but you only have %2 €</Original>
+      </Key>
+      <Key ID="STR_antistasi_vehService_insufficientPoints">
+        <Original>The supply vehicle does not have the %1 points needed for this request, it only has %2 points</Original>
+      </Key>
     </Container>
   </Package>
 </Project>

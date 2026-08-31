@@ -14,7 +14,7 @@ class A3A_VehServiceDialog
     onUnload = "[""onUnload""] call A3A_GUI_fnc_vehServiceDialog";
 
     #define DIALOG_W 104
-    #define DIALOG_H 84
+    #define DIALOG_H 92
     #define DIALOG_X CENTER_X(DIALOG_W) // Global x pos of dialog
     #define DIALOG_Y CENTER_Y(DIALOG_H) // Global y pos of dialog
 
@@ -128,13 +128,33 @@ class A3A_VehServiceDialog
                     h = 5 * GRID_H;
                 };
 
+                class PersonalMoneyCheckBox : A3A_CheckBox
+                {
+                    idc = A3A_IDC_VEHSERVICE_PERSONALMONEYCHECKBOX;
+                    onCheckedChanged = "[""calculateCosts""] call A3A_GUI_fnc_vehServiceDialog;";
+                    x = 61 * GRID_W;
+                    y = 77 * GRID_H;
+                    w = 4 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                class PersonalMoneyLabel : A3A_Text
+                {
+                    idc = -1;
+                    text = $STR_antistasi_vehService_personalMoneyLabel;
+                    x = 67 * GRID_W;
+                    y = 76 * GRID_H;
+                    w = 33 * GRID_W;
+                    h = 6 * GRID_H;
+                };
+
                 class ResetButton : A3A_Button
                 {
                     idc = -1;
                     text = "Reset Changes";
                     onButtonClick = "[""reset""] call A3A_GUI_fnc_vehServiceDialog;";
                     x = 2 * GRID_W;
-                    y = 76 * GRID_H;
+                    y = 84 * GRID_H;
                     w = 27 * GRID_W;
                     h = 6 * GRID_H;
                 };
@@ -145,7 +165,7 @@ class A3A_VehServiceDialog
                     text = "Full Rearm";
                     onButtonClick = "[""fullRestore""] call A3A_GUI_fnc_vehServiceDialog;";
                     x = 31 * GRID_W;
-                    y = 76 * GRID_H;
+                    y = 84 * GRID_H;
                     w = 22 * GRID_W;
                     h = 6 * GRID_H;
                 };
@@ -156,7 +176,7 @@ class A3A_VehServiceDialog
                     text = "Apply (cost: 0 points)";
                     onButtonClick = "[""checkout""] call A3A_GUI_fnc_vehServiceDialog;";
                     x = 55 * GRID_W;
-                    y = 76 * GRID_H;
+                    y = 84 * GRID_H;
                     w = 47 * GRID_W;
                     h = 6 * GRID_H;
                 };
