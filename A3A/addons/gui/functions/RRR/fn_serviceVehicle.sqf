@@ -10,7 +10,7 @@ Unfortunately we are currently in crunch time and I dont have time for unresolve
 The framework for time-based stuff is here, the shopping list is split into swaps / purchases / refunds, just not implemented
 */
 
-params ["_veh", ["_mode", ""], ["_supplyVeh", objNull], ["_purchaseList", []], ["_totalCost", 0]];
+params ["_veh", ["_mode", ""], ["_supplyVeh", objNull], ["_purchaseList", []], ["_totalCost", 0], ["_personalMoneyCost", 0]];
 // acts as instant fix button without params
 if (_purchaseList isEqualTo []) exitWith {
     if (_mode in ["", "repair"]) then {_veh setDamage 0};
@@ -39,13 +39,21 @@ private _fnc_actionTimer = {
 */
 
 private _currentStock = _supplyVeh getVariable [_cargoVar, 0];
-private _newStock = _currentStock - _totalCost;
-if (_newStock < 0) exitWith {
-    private _magName = getText (configFile >> "CfgMagazines" >> _name >> "displayName");
-    ["Service Vehicle", format ["The supply vehicle does not have the %1 points needed for this request, the vehicle has %2 points", _orderPrice, _totalCost]] spawn A3A_fnc_customHint;
+
+// When paying out of pocket the whole order is billed to the player and the supply vehicle is left untouched.
+if (_personalMoneyCost > 0 && {(player getVariable ["moneyX", 0]) < _personalMoneyCost}) exitWith {
+    [localize "STR_antistasi_vehService_hintTitle", format [localize "STR_antistasi_vehService_noMoney", _personalMoneyCost, player getVariable ["moneyX", 0]]] spawn A3A_fnc_customHint;
 };
 
-_supplyVeh setVariable [_cargoVar, _newStock, true];
+if (_personalMoneyCost <= 0 && {_currentStock < _totalCost}) exitWith {
+    [localize "STR_antistasi_vehService_hintTitle", format [localize "STR_antistasi_vehService_insufficientPoints", ceil _totalCost, _currentStock]] spawn A3A_fnc_customHint;
+};
+
+if (_personalMoneyCost > 0) then {
+    [-_personalMoneyCost] call A3A_fnc_resourcesPlayer;
+} else {
+    _supplyVeh setVariable [_cargoVar, _currentStock - _totalCost, true];
+};
 
 switch (_mode) do {
     case "rearm":
