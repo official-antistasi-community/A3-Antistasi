@@ -54,7 +54,7 @@
 ["uavsPortable", ["B_UAV_01_F"]] call _fnc_saveToTemplate;
 
 //Config special vehicles
-["vehiclesMilitiaLightArmed", ["rhsgref_tla_g_offroad_armed", "UK3CB_I_G_LandRover_M2", "UK3CB_I_G_LandRover_SF_M2"]] call _fnc_saveToTemplate;
+["vehiclesMilitiaLightArmed", ["rhsgref_tla_g_offroad_armed", "UK3CB_I_G_LandRover_M2", "UK3CB_I_G_LandRover_SF_WMIK_M2_M240"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaTrucks", ["UK3CB_I_G_Ural_Covered", "UK3CB_I_G_Ural_Open", "I_G_Van_01_transport_F"]] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", ["rhsgref_tla_g_offroad", "UK3CB_I_G_LandRover_Closed"]] call _fnc_saveToTemplate;
 
