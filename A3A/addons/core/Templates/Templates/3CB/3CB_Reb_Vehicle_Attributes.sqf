@@ -36,7 +36,7 @@
     
     //Rebel Light Armed
     ["UK3CB_MDF_I_MB4WD_LMG", ["rebCost", 500]],        //5.56 LMG
-    ["UK3CB_I_G_LandRover_SF_M2", ["rebCost", 800]],
+    ["UK3CB_I_G_LandRover_SF_WMIK_M2_M240", ["rebCost", 800]],
     ["UK3CB_ION_B_Winter_M1025_M2", ["rebCost", 900]],
     ["UK3CB_ION_B_Winter_SUV_Armed", ["rebCost", 1200]],
     ["UK3CB_LSM_B_Hilux_Mortar", ["rebCost", 2000]],
