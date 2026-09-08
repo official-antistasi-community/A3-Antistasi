@@ -64,8 +64,8 @@
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["mortarMagazineFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
 
-["minefieldAT", []] call _fnc_saveToTemplate;
-["minefieldAPERS", []] call _fnc_saveToTemplate;
+["minefieldAT", ["CUP_Mine"]] call _fnc_saveToTemplate;
+["minefieldAPERS", ["APERSMine"]] call _fnc_saveToTemplate;
 
 #include "CUP_Vehicle_Attributes.sqf"
 
