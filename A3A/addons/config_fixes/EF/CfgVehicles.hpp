@@ -35,6 +35,10 @@ class CfgVehicles {
         textureList[] = {"MJTF Camo",1};
         hiddenSelectionsTextures[] = {"\ef\ef_fa181\Data\Fighter_01_ext_01_camo_CO.paa","\ef\ef_fa181\Data\Fighter_01_ext_02_camo_CO.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_glass_01_ca.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_01_co.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_02_co.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_03_co.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_05_co.paa"};
     };
+    // Remove for 3.13 release
+    class a3a_wdl_camo_FA181_EF : a3a_Plane_Fighter_01_wdl_F {
+        scope = 1;
+    };
     class a3a_grey_unarmed_ch67_EF : B_Heli_Transport_03_unarmed_F {
         textureList[] = {"Dark Grey",1};
         hiddenSelectionsTextures[] = {"\ef\ef_ch67\data\Heli_Transport_03_ext_01_MJTF_CO.paa","\ef\ef_ch67\data\Heli_Transport_03_ext_02_MJTF_CO.paa"};
