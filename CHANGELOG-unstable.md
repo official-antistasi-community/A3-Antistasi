@@ -4,6 +4,11 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-09-08 - Larger loot to crate radius options
+
+### Added
+- The **Loot to crate radius** setting now also offers 50 m and 100 m, next to the existing 10, 15 and 20 m options.
+
 ## 2026-09-05 - Garrison resupply trucks and static ammo readouts
 
 ### Added

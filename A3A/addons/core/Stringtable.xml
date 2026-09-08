@@ -9302,6 +9302,12 @@
         <Polish>20 metrów</Polish>
         <Chinesesimp>20 米</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_Params_generic_50m">
+        <Original>50 meters</Original>
+      </Key>
+      <Key ID="STR_A3A_Params_generic_100m">
+        <Original>100 meters</Original>
+      </Key>
       <Key ID="STR_A3A_Params_generic_20min">
         <Original>20 minutes</Original>
         <Italian>20 minuti </Italian>

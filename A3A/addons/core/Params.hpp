@@ -397,8 +397,8 @@ class Params
     class LootToCrateRadius
     {
         title = $STR_A3A_Params_LootToCrateRadius_title;
-        values[] = {0,10,15,20};
-        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_10m, $STR_A3A_Params_generic_15m, $STR_A3A_Params_generic_20m};
+        values[] = {0,10,15,20,50,100};
+        texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_10m, $STR_A3A_Params_generic_15m, $STR_A3A_Params_generic_20m, $STR_A3A_Params_generic_50m, $STR_A3A_Params_generic_100m};
         default = 10;
     };
     class LTCLootUnlocked
