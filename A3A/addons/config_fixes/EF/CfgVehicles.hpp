@@ -31,9 +31,13 @@ class CfgVehicles {
         textureList[] = {"Black",1};
         hiddenSelectionsTextures[] = {"ef\ef_gyra_t\data\gyra_hull_1_black_co.paa","ef\ef_gyra_t\data\gyra_details_1_black_co.paa","ef\ef_gyra_t\data\gyra_int_1_black_co.paa","ef\ef_gyra_t\data\gyra_hmg_1_black_co.paa","ef\ef_gyra_t\data\gyra_rws_1_black_co.paa","ef\ef_gyra_t\data\gyra_turret_1_black_co.paa","ef\ef_gyra_t\data\gyra_mortar_1_black_co.paa","a3\armor_f\data\camonet_CSAT_HEX_Desert_CO.paa"};
     };
-    class a3a_wdl_camo_FA181_EF : B_Plane_Fighter_01_F {
+    class a3a_Plane_Fighter_01_wdl_F : B_Plane_Fighter_01_F {
         textureList[] = {"MJTF Camo",1};
         hiddenSelectionsTextures[] = {"\ef\ef_fa181\Data\Fighter_01_ext_01_camo_CO.paa","\ef\ef_fa181\Data\Fighter_01_ext_02_camo_CO.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_glass_01_ca.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_01_co.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_02_co.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_03_co.paa","a3\air_f_jets\plane_fighter_01\data\fighter_01_cockpit_05_co.paa"};
+    };
+    // Remove for 3.13 release
+    class a3a_wdl_camo_FA181_EF : a3a_Plane_Fighter_01_wdl_F {
+        scope = 1;
     };
     class a3a_grey_unarmed_ch67_EF : B_Heli_Transport_03_unarmed_F {
         textureList[] = {"Dark Grey",1};

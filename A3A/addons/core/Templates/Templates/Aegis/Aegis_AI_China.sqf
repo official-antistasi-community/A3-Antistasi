@@ -37,7 +37,7 @@ private _vehiclesIFVs = ["a3a_O_T_APC_Tracked_02_cannon_ghex_F", "O_T_APC_Tracke
 ["vehiclesAmphibious", ["O_T_APC_Wheeled_02_rcws_v2_ghex_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["O_T_Plane_CAS_02_dynamicLoadout_ghex_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["O_T_Plane_Fighter_02_ghex_F"]] call _fnc_saveToTemplate;
+private _vehiclesPlanesAA = ["a3a_Plane_Fighter_03_hex_F"];
 ["vehiclesPlanesTransport", ["O_T_Plane_Transport_01_infantry_ghex_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["O_T_Heli_Light_02_unarmed_F"]] call _fnc_saveToTemplate;
@@ -74,6 +74,9 @@ private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 ["minefieldAT", ["ATMine"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["APERSMine"]] call _fnc_saveToTemplate;
 
+if ("jets" in A3A_enabledDLC) then {
+	_vehiclesPlanesAA = ["O_T_Plane_Fighter_02_ghex_F"];
+};
 //If Western Sahara DLC
 if ("ws" in A3A_enabledDLC) then {
     _cargoTrucks append ["O_T_Truck_02_cargo_lxWS","O_T_Truck_02_flatbed_lxWS"];
@@ -96,6 +99,7 @@ if ("rf" in A3A_enabledDLC) then {
     _vehiclesMilitiaLightArmed append ["a3a_ghex_Pickup_mmg_rf"];
 };
 
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", _vehiclesMilitiaCars] call _fnc_saveToTemplate;
 ["vehiclesMilitiaLightArmed", _vehiclesMilitiaLightArmed] call _fnc_saveToTemplate;
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;

@@ -38,7 +38,7 @@ private _vehiclesAA = ["a3a_ION_Truck_02_zu23_F"];
 ["vehiclesAmphibious", ["a3a_ION_APC_Wheeled_01_command_lxWS","a3a_ION_APC_Wheeled_01_cannon_lxWS", "a3a_ION_APC_Wheeled_01_atgm"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["a3a_Plane_Fighter_03_grey_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["a3a_Plane_Fighter_04_grey_F"]] call _fnc_saveToTemplate;
+private _vehiclesPlanesAA = ["a3a_Plane_Fighter_03_grey_F"];
 ["vehiclesPlanesTransport", ["B_T_VTOL_01_infantry_blue_F"]] call _fnc_saveToTemplate;
 
 private _vehiclesHelisLight = ["O_Heli_Light_02_unarmed_F", "B_ION_Heli_Light_02_unarmed_lxWS", "a3a_Heli_Light_01_ION_F"];
@@ -72,6 +72,9 @@ private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["mortarMagazineFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
 
+if ("jets" in A3A_enabledDLC) then {
+	_vehiclesPlanesAA = ["a3a_Plane_Fighter_04_grey_F"];
+};
 if ("expansion" in A3A_enabledDLC) then {
     _vehiclesMilitiaCars append ["a3a_Offroad_02_black_unarmed_F"];
     _vehiclesMilitiaLightArmed append ["a3a_Offroad_02_black_AT_F","a3a_Offroad_02_LMG_black_F","a3a_Offroad_02_LMG_black_F"];
@@ -98,6 +101,7 @@ if ("rf" in A3A_enabledDLC) then {
     _vehiclesLightArmed append ["B_ION_Pickup_mmg_rf","B_ION_Pickup_mmg_rf","a3a_ION_Pickup_hmg_rf","B_ION_Pickup_rcws_rf"];
     _vehiclesHelisAttack append ["a3a_ION_Heli_EC_02_rf"];
 };
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
 ["vehiclesHelisLight", _vehiclesHelisLight] call _fnc_saveToTemplate;
 ["vehiclesHelisAttack", _vehiclesHelisAttack] call _fnc_saveToTemplate;
 ["vehiclesAA", _vehiclesAA] call _fnc_saveToTemplate;
