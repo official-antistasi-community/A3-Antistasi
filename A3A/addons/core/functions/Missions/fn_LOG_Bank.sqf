@@ -8,7 +8,7 @@ _banco = _this select 0;
 _markerX = [citiesX,_banco] call BIS_fnc_nearestPosition;
 
 private _enemySide = sidesX getVariable _markerX; 
-if (_enemySide == teamPlayer) then {_enemySide == Occupants};
+if (_enemySide == teamPlayer) then {_enemySide = Occupants};
 private _faction = Faction(_enemySide);
 
 _difficultX = if (random 10 < tierWar) then {true} else {false};
@@ -51,12 +51,14 @@ call {
 
 {_x reveal _truckX} forEach (allPlayers - (entities "HeadlessClient_F"));
 [_truckX, teamPlayer] call A3A_fnc_AIVEHinit;
-_truckX setVariable ["destinationX",_nameDest,true];
+_truckX setVariable ["A3A_noGarage", true, true];			// garaging would delete the mission truck
+// Driver hint for the current mission phase, swapped to the return-to-HQ hint once the bank is robbed
+_truckX setVariable ["A3A_bankHintText", format [localize "STR_A3A_fn_mission_log_bank_hint_text1", _nameDest], true];
 _truckX addEventHandler ["GetIn",
 	{
 	if (_this select 1 == "driver") then
 		{
-		_textX = format [localize "STR_A3A_fn_mission_log_bank_hint_text1",(_this select 0) getVariable "destinationX"];
+		private _textX = (_this select 0) getVariable ["A3A_bankHintText", ""];
 		[localize "STR_A3A_fn_mission_log_bank_hint_title1", _textX] remoteExecCall ["A3A_fnc_customHint", _this select 2];
 		};
 	}];
@@ -87,7 +89,8 @@ private _bankDistMax = selectMin _bb + 10;
 
 waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (!alive _truckX) or (_truckX distance2d _banco < _bankDistMax)};
 _bonus = if (_difficultX) then {2} else {1};
-if ((dateToNumber date > _dateLimitNum) or (!alive _truckX)) then
+private _robbed = false;
+if((dateToNumber date > _dateLimitNum) or (!alive _truckX)) then
 	{
 	[_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState;
 	[-200, _enemySide] remoteExec ["A3A_fnc_timingCA",2];
@@ -106,9 +109,11 @@ else
 		} forEach allUnits;
 		};
 	} forEach ([distanceSPWN,0,_positionX,teamPlayer] call A3A_fnc_distanceUnits);
-	_exit = false;
-	while {(_countX > 0) or (_truckX distance2d _banco < _bankDistMax) and (alive _truckX) and (dateToNumber date < _dateLimitNum)} do
+	// Countdown runs while the truck is alive and parked at the bank. Driving away resets it
+	// The mission deadline is held while the truck is at the bank
+	while {true} do
 		{
+		private _holdStart = dateToNumber date;
 		while {(_countX > 0) and (_truckX distance2d _banco < _bankDistMax) and (alive _truckX)} do
 			{
 			_formatX = format ["%1", _countX];
@@ -116,47 +121,58 @@ else
 			sleep 1;
 			_countX = _countX - 1;
 			};
-		if (_countX > 0) then
-			{
-			_countX = 120*_bonus;//120
-			if (_truckX distance2d _banco > _bankDistMax-1) then {{[petros,"hint",localize "STR_A3A_fn_mission_log_bank_hint_text2", localize "STR_A3A_fn_mission_log_bank_hint_title1"] remoteExec ["A3A_fnc_commsMP",_x]} forEach ([200,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits)};
-			waitUntil {sleep 1; (!alive _truckX) or (_truckX distance2d _banco < _bankDistMax) or (dateToNumber date < _dateLimitNum)};
-			}
-		else
-			{
-			if (alive _truckX) then
-				{
-				{if (isPlayer _x) then {[petros,"hint",localize "STR_A3A_fn_mission_log_bank_hint_text3", localize "STR_A3A_fn_mission_log_bank_hint_title1"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits);
-				_exit = true;
-				};
-			//waitUntil {sleep 1; (!alive _truckX) or (_truckX distance2d _banco > _bankDistMax) or (dateToNumber date < _dateLimitNum)};
-			};
-		if (_exit) exitWith {};
+		_dateLimitNum = _dateLimitNum + (dateToNumber date - _holdStart);
+		if ((_countX <= 0) or (!alive _truckX)) exitWith {};
+
+		_countX = 120*_bonus;//120
+		if (_truckX distance2d _banco > _bankDistMax-1) then {{[petros,"hint",localize "STR_A3A_fn_mission_log_bank_hint_text2", localize "STR_A3A_fn_mission_log_bank_hint_title1"] remoteExec ["A3A_fnc_commsMP",_x]} forEach ([200,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits)};
+		waitUntil {sleep 1; (!alive _truckX) or (_truckX distance2d _banco < _bankDistMax) or (dateToNumber date > _dateLimitNum)};
+		if ((!alive _truckX) or (dateToNumber date > _dateLimitNum)) exitWith {};
+		};
+
+	_robbed = (_countX <= 0) and (alive _truckX);
+	if (_robbed) then
+		{
+		// Original deadline only covers reaching the bank, so add time for the drive back
+		private _returnTime = _timeLimit / 2;
+		_dateLimitNum = _dateLimitNum + (dateToNumber [date select 0, date select 1, date select 2, date select 3, (date select 4) + _returnTime] - dateToNumber date);
+		_displayTime = [numberToDate [date select 0, _dateLimitNum]] call A3A_fnc_dateToTimeString;
+		private _textX = format [localize "STR_A3A_fn_mission_log_bank_hint_text3", _displayTime];
+		_truckX setVariable ["A3A_bankHintText", _textX, true];
+		{if (isPlayer _x) then {[petros,"hint",_textX, localize "STR_A3A_fn_mission_log_bank_hint_title1"] remoteExec ["A3A_fnc_commsMP",_x]}} forEach ([80,0,_truckX,teamPlayer] call A3A_fnc_distanceUnits);
+		}
+	else
+		{
+		[_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState;
 		};
 	};
 
 
-waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (!alive _truckX) or (_truckX distance markerPos "Synd_HQ" < 50)};
-if ((_truckX distance markerPos "Synd_HQ" < 50) and (dateToNumber date < _dateLimitNum)) then
+if (_robbed) then
 	{
-	[_taskId, "LOG", "SUCCEEDED"] call A3A_fnc_taskSetState;
-	[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
-	Debug("aggroEvent | Rebels won a bank mission");
-	[_enemySide, 10, 120] remoteExec ["A3A_fnc_addAggression",2];
-	[400*_bonus, _enemySide] remoteExec ["A3A_fnc_timingCA",2];
-	[20*_bonus, true, _truckX] call A3A_tasks_fnc_rewardPlayers;     // any players in driver group
-	waitUntil {sleep 1; speed _truckX == 0};
+	waitUntil {sleep 1; (dateToNumber date > _dateLimitNum) or (!alive _truckX) or (_truckX distance markerPos "Synd_HQ" < 50)};
+	if ((alive _truckX) and (_truckX distance markerPos "Synd_HQ" < 50) and (dateToNumber date < _dateLimitNum)) then
+		{
+		[_taskId, "LOG", "SUCCEEDED"] call A3A_fnc_taskSetState;
+		[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
+		Debug("aggroEvent | Rebels won a bank mission");
+		[_enemySide, 10, 120] remoteExec ["A3A_fnc_addAggression",2];
+		[400*_bonus, _enemySide] remoteExec ["A3A_fnc_timingCA",2];
+		[20*_bonus, true, _truckX] call A3A_tasks_fnc_rewardPlayers;     // any players in driver group
+		waitUntil {sleep 1; speed _truckX == 0};
 
-	[_truckX] call A3A_fnc_empty;
+		[_truckX] call A3A_fnc_empty;
+		}
+	else
+		{
+		[_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState;
+		//[400*_bonus, Occupants] remoteExec ["A3A_fnc_timingCA",2];
+		};
 	};
-if (!alive _truckX) then
-	{
-	[_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState;
-	//[400*_bonus, Occupants] remoteExec ["A3A_fnc_timingCA",2];
-	};
 
 
-deleteVehicle _truckX;
+// Leave wrecks in place so players can see what happened
+if (alive _truckX) then { deleteVehicle _truckX };
 
 [_taskId, "LOG", 1200] spawn A3A_fnc_taskDelete;
 
