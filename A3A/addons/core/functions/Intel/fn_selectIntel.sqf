@@ -64,12 +64,12 @@ if (_intelType == "Small") then
             if(_nextAttack < 5) then
             {
                 _text = format [localize "STR_A3A_fn_intel_select_time_1", _sideName];
-                ["attack_imminent", _side, [[_sideName], [_sideName]]] call A3A_fnc_updateIntelFeed;
+                ["attack_imminent", _side, [[_sideName], [_sideName]]] remoteExecCall ["A3A_fnc_updateIntelFeed", 0];
             }
             else
             {
                 _text = format [localize "STR_A3A_fn_intel_select_time_2", _sideName, round (_nextAttack)];
-                ["attack_time", _side, [[_sideName, round (_nextAttack)], [_sideName, round (_nextAttack)]]] call A3A_fnc_updateIntelFeed;
+                ["attack_time", _side, [[_sideName, round (_nextAttack)], [_sideName, round (_nextAttack)]]] remoteExecCall ["A3A_fnc_updateIntelFeed", 0];
             }; 
         };
         case (DEF_RESOURCES):
@@ -86,7 +86,7 @@ if (_intelType == "Small") then
                 [localize "STR_A3A_fn_intel_select_reso_5", "Empty"];
             };
             _text = format [_fmt#0, _sideName];
-            ["def_resources", _side, [[_sideName, _fmt#1], [_sideName, _fmt#1], _fmt#1]] call A3A_fnc_updateIntelFeed;
+            ["def_resources", _side, [[_sideName, _fmt#1], [_sideName, _fmt#1], _fmt#1]] remoteExecCall ["A3A_fnc_updateIntelFeed", 0];
 
         };
         case (DECRYPTION_KEY):
@@ -99,8 +99,10 @@ if (_intelType == "Small") then
             {
                 invRadioKeys = invRadioKeys + 1;
             };
+            publicVariable "occRadioKeys";
+            publicVariable "invRadioKeys";
             _text = format [localize "STR_A3A_fn_intel_select_decry_1", _sideName];
-            ["decryption_key", _side, [[_sideName], [_sideName]]] call A3A_fnc_updateIntelFeed;
+            ["decryption_key", _side, [[_sideName], [_sideName]]] remoteExecCall ["A3A_fnc_updateIntelFeed", 0];
         };
         case (CONVOY):
         {
@@ -144,8 +146,10 @@ if (_intelType == "Medium") then
             {
                 invRadioKeys = invRadioKeys + _keyCount;
             };
+            publicVariable "occRadioKeys";
+            publicVariable "invRadioKeys";
             _text = format [localize "STR_A3A_fn_intel_select_decry_2", _sideName];
-            ["key_pack", _side, [[_sideName], [_sideName]]] call A3A_fnc_updateIntelFeed;
+            ["key_pack", _side, [[_sideName], [_sideName]]] remoteExecCall ["A3A_fnc_updateIntelFeed", 0];
         };
 /*
         // These are meaningless at the moment
@@ -212,7 +216,7 @@ if (_intelType == "Large") then
 
             private _weaponName = getText (configFile >> "CfgWeapons" >> _newWeapon >> "displayName");
             _text = format [localize "STR_A3A_fn_intel_select_weap_1", _weaponName];
-            ["weapon_unlock", _side, [[], [_weaponName]]] call A3A_fnc_updateIntelFeed;
+            ["weapon_unlock", _side, [[], [_weaponName]]] remoteExecCall ["A3A_fnc_updateIntelFeed", 0];
         };
         case (MONEY):
         {

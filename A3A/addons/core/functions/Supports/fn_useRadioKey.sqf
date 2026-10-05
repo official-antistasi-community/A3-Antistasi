@@ -26,6 +26,8 @@ if(_position distance2D markerPos "Synd_HQ" < distanceMission) then
         invRadioKeys = invRadioKeys - 1;
         _reveal = 1;
     };
+    publicVariable "occRadioKeys";
+    publicVariable "invRadioKeys";
 };
 
 _reveal;

@@ -66,6 +66,8 @@ if (_varName in _specialVarLoads) then {
     {
         occRadioKeys = _varValue#0;
         invRadioKeys = _varValue#1;
+        publicVariable "occRadioKeys";
+        publicVariable "invRadioKeys";
     };
     if (_varName == 'aggressionOccupants') then
     {
