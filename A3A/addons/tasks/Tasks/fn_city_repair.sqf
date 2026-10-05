@@ -191,7 +191,7 @@ _task set ["s_failure", {
 
 _task set ["s_cleanup", {
     // Get rid of the marker
-    deleteMarker (_task get "_houseMrk");
+    deleteMarker (_this get "_houseMrk");
 
     // Clean up the mechanic
     private _mechanic = _this get "_mechanic";

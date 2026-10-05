@@ -83,7 +83,7 @@ else
 		};
 	};
 
-{deleteVehicle _x} forEach units _grp;
-deleteGroup _grp;
+// Don't vanish the bodyguards mid-fight; despawn once players are gone
+[_grp] spawn A3A_fnc_groupDespawner;
 
 [_taskId, "AS", 1200] spawn A3A_fnc_taskDelete;

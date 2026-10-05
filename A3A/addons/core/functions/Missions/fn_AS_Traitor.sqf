@@ -17,14 +17,11 @@ _displayTime = [_dateLimit] call A3A_fnc_dateToTimeString;//Converts the time po
 
 _radiusX = [_markerX] call A3A_fnc_sizeMarker;
 _houses = (nearestObjects [_positionX, ["house"], _radiusX]) select {!((typeOf _x) in A3A_buildingBlacklist)};
-_posHouse = [];
-_houseX = _houses select 0;
-while {count _posHouse < 3} do
-	{
-	_houseX = selectRandom _houses;
-	_posHouse = _houseX buildingPos -1;
-	if (count _posHouse < 3) then {_houses = _houses - [_houseX]};
-	};
+// Need 3+ building positions for the traitor and a bodyguard. Params function should guarantee one exists
+_houses = _houses select { count (_x buildingPos -1) >= 3 };
+if (_houses isEqualTo []) exitWith { Error_1("No house with 3+ building positions in %1, aborting mission", _markerX) };
+_houseX = selectRandom _houses;
+_posHouse = _houseX buildingPos -1;
 
 _max = (count _posHouse) - 1;
 _rnd = floor random _max;

@@ -121,7 +121,8 @@ if (dateToNumber date > _dateLimitNum) then {
 
 private _bonus = if (_difficultX) then {2} else {1};
 
-if (_timeout && alive _box) then {
+// Success only if the crate actually made it to HQ
+if !((alive _box) && {(_box distance2D posHQ) < 100}) then {
 	[_taskId, "LOG", "FAILED"] call A3A_fnc_taskSetState;
 	[-10*_bonus,theBoss] call A3A_fnc_playerScoreAdd;
 	Info("Mission Failed");

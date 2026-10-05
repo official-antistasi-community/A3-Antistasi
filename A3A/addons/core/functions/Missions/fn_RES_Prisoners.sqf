@@ -113,11 +113,13 @@ if (dateToNumber date > _dateLimitNum) then
 		};
 	};
 
-waitUntil {sleep 1; ({alive _x} count _POWs == 0) or ({(alive _x) and (_x distance getMarkerPos respawnTeamPlayer < 50)} count _POWs > 0)};
+// Grace period for POWs already on their way to HQ. Without a limit, abandoned live POWs would block RES missions forever
+private _graceEnd = time + 3600;
+waitUntil {sleep 1; ({alive _x} count _POWs == 0) or ({(alive _x) and (_x distance getMarkerPos respawnTeamPlayer < 50)} count _POWs > 0) or (time > _graceEnd)};
 
 _bonus = if (_difficultX) then {2} else {1};
 
-if ({alive _x} count _POWs == 0) then
+if ({(alive _x) and (_x distance getMarkerPos respawnTeamPlayer < 50)} count _POWs == 0) then
 	{
 	[_taskId, "RES", "FAILED"] call A3A_fnc_taskSetState;
 	{[_x,false] remoteExec ["setCaptive",0,_x]; _x setCaptive false} forEach _POWs;

@@ -275,6 +275,11 @@ _task set ["s_crateWatch",
         _this set ["state", "s_succeeded"]; false;
     };
 
+    // Hard limit. A crate left in a rebel vehicle or near rebel AI never times out below, which would block LOG missions forever
+    if (time > (_this get "_endTime") + 60*60) exitWith {
+        _this set ["state", "s_failed"]; false;
+    };
+
     // Prevent the crate despawning if it's been in recent rebel possession
     private _rebelsNear = units teamPlayer inAreaArray [_crate, 200, 200] isNotEqualTo [];      // shouldn't include corpses?
     if (_rebelsNear) then { _this set ["_crateTimeout", time + 10*60] };

@@ -179,8 +179,8 @@ _task set ["s_spawnEnemies",
     A3A_supportStrikes pushBack [_enemySide, "TROOPS", markerPos _marker, time + 3600, 3600, _resources];
     A3A_supportSpends pushBack [_enemySide, markerPos _marker, markerPos _marker, _resources, time];
 
-    _task set ["state", "s_waitForStart"];
-    _task set ["interval", 10];
+    _this set ["state", "s_waitForStart"];
+    _this set ["interval", 10];
     false;
 }];
 
