@@ -80,13 +80,14 @@ _previewButton ctrlCommit 0;
 
 private _displayText = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
 _displayText ctrlSetPosition [1 * GRID_W, 11 * GRID_H, 23 * GRID_W, 3 * GRID_H];
-_displayText ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' shadow='2'>%1</t>", _displayName]);
+// Escaped for structured text, eg. "Smith & Wesson"
+_displayText ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' shadow='2'>%1</t>", (_displayName regexReplace ["&", "&amp;"] regexReplace ["<", "&lt;"] regexReplace [">", "&gt;"])]);
 _displayText ctrlSetTooltip _className;
 _displayText ctrlCommit 0;
 
 private _totalCost = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
 _totalCost ctrlSetPosition [1 * GRID_W, 14 * GRID_H, 11 * GRID_W, 3 * GRID_H];
-_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _price]);
+_totalCost ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#52D273' shadow='2'>€ %1</t>", _price * _amountAdd]);
 _totalCost ctrlCommit 0;
 
 private _stockText = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
@@ -96,7 +97,7 @@ _stockText ctrlCommit 0;
 
 private _amountText = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
 _amountText ctrlSetPosition [6 * GRID_W, 20 * GRID_H, 13 * GRID_W, 5 * GRID_H];
-_amountText ctrlSetStructuredText parseText (format ["<t size='0.75' align='left' valign='middle' align='center' shadow='2'>%1</t>", _amountAdd]);
+_amountText ctrlSetStructuredText parseText (format ["<t size='0.75' align='left' valign='middle' align='center' color='#E5C454' shadow='2'>%1</t>", _amountAdd]);
 _amountText ctrlCommit 0;
 
 private _buttonMinus = _display ctrlCreate ["A3A_Button_Small", -1, _itemControlsGroup];
@@ -109,27 +110,30 @@ _buttonPlus ctrlSetPosition [19 * GRID_W, 20 * GRID_H, 5 * GRID_W,  4 * GRID_H];
 _buttonPlus ctrlSetText "+";
 _buttonPlus ctrlCommit 0;
 
-_buttonMinus setVariable ["className", _className];
-
-_buttonPlus setVariable ["className", _className];
-
+// Click: 1, shift 5, ctrl 10, both 25 (like the arsenal). ButtonClick doesn't pass modifier keys,
+// so they're recorded on mouse down
+{
+	_x setVariable ["className", _className];
+	_x setVariable ["price", _price];
+	_x setVariable ["stock", _stock];
+	_x ctrlAddEventHandler ["MouseButtonDown", {
+		params ["_control", "_mouseButton", "", "", "_shift", "_ctrl"];
+		_control setVariable ["modifiers", [_shift, _ctrl]];
+	}];
+} forEach [_buttonMinus, _buttonPlus];
 
 _buttonPlus ctrladdeventhandler ["ButtonClick", {
 	params ["_control"];
-	private _className = _control getVariable ["className", ""];
-	if(_className isEqualTo "" || _selectedTab isEqualTo "") exitwith {};
-
-	[_className, 0, 1] call A3A_GUI_fnc_addToCart;
-
+	(_control getVariable ["modifiers", [false, false]]) params ["_shift", "_ctrl"];
+	[_control, [[1, 10], [5, 25]] select _shift select _ctrl] call A3A_GUI_fnc_addToCartButton;
 }];
 
 _buttonMinus ctrladdeventhandler ["ButtonClick", {
 	params ["_control"];
 	private _className = _control getVariable ["className", ""];
-	if(_className isEqualTo "" || _selectedTab isEqualTo "") exitwith {};
-
-	[_className, 0, -1] call A3A_GUI_fnc_addToCart;
-
+	if (_className isEqualTo "") exitwith {};
+	(_control getVariable ["modifiers", [false, false]]) params ["_shift", "_ctrl"];
+	[_className, 0, -([[1, 10], [5, 25]] select _shift select _ctrl)] call A3A_GUI_fnc_addToCart;
 }];
 
 

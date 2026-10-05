@@ -125,6 +125,42 @@ private _minItemsMember = {
 	_min;
 };
 
+// Functional variants (colour/camo versions etc.) share one arsenal entry. jnva_variants tracks which
+// variants are loaded: arsenal class -> hashmap of [variant class, amount], so the vehicle gets them back.
+private _fnc_preferredVariant = {
+	params ["_item"];
+	private _variants = [_item] call A3A_fnc_itemVariants;
+	if (count _variants == 1) exitWith { _item };
+	if (isNil "jna_variantPrefs") then {
+		jna_variantPrefs = createHashMapFromArray (profileNamespace getVariable ["A3A_arsenalVariantPrefs", []]);
+	};
+	private _pref = jna_variantPrefs getOrDefault [_item, _item];
+	[_item, _pref] select (_pref in _variants);
+};
+private _fnc_trackVariant = {
+	params ["_item", "_count", "_add"];
+	private _counts = jnva_variants getOrDefaultCall [_item, {createHashMap}, true];
+	private _chosen = [_item] call _fnc_preferredVariant;
+	if (_add) exitWith { _counts set [_chosen, (_counts getOrDefault [_chosen, 0]) + _count] };
+	// Removing takes the chosen variant first
+	{
+		if (_count <= 0) exitWith {};
+		private _taken = (_counts getOrDefault [_x, 0]) min _count;
+		if (_taken > 0) then { _counts set [_x, (_counts get _x) - _taken]; _count = _count - _taken };
+	} forEach ([_chosen] + (keys _counts - [_chosen]));
+};
+// Splits a loaded amount of an arsenal entry into [[variant class, amount], ...]
+private _fnc_splitVariants = {
+	params ["_item", "_amount"];
+	private _split = [];
+	{
+		private _taken = _y min _amount;
+		if (_taken > 0) then { _split pushBack [_x, _taken]; _amount = _amount - _taken };
+	} forEach (jnva_variants getOrDefault [_item, createHashMap]);
+	if (_amount > 0) then { _split pushBack [_item, _amount] };
+	_split;
+};
+
 _mode = [_this,0,"Open",[displaynull,""]] call bis_fnc_param;
 _this = [_this,1,[]] call bis_fnc_param;
 
@@ -137,8 +173,11 @@ switch _mode do {
 
 		diag_log ["CustomInit VehicleArsenal",_display];
 
-		//save crap in array
+		//save crap in array, remembering which variants were loaded
+		jna_cargoVariants = createHashMap;
 		jnva_loadout = ((vehicle player) call jn_fnc_arsenal_cargoToArray);
+		jnva_variants = jna_cargoVariants;
+		jna_cargoVariants = nil;
 		jnva_loadout_mass = ["getMass"] call jn_fnc_vehicleArsenal;
        	clearMagazineCargoGlobal _veh;
         clearItemCargoGlobal _veh;
@@ -147,6 +186,7 @@ switch _mode do {
 
 		["customGUI",[_display]] call jn_fnc_vehicleArsenal;
 		["customEvents",[_display]] call jn_fnc_vehicleArsenal;
+		["CreateVariantCombos",[_display]] call jn_fnc_arsenal;
 		["ColorTabs",[_display]] call jn_fnc_vehicleArsenal;
 
 		['showMessage',[_display, localize "STR_A3A_JNA_vehicle_title"]] call jn_fnc_arsenal;
@@ -514,6 +554,7 @@ switch _mode do {
 			IDC_RSCDISPLAYARSENAL_FRAMERIGHT,
 			IDC_RSCDISPLAYARSENAL_BACKGROUNDRIGHT
 		];
+		["UpdateVariantCombos",[_display]] call jn_fnc_arsenal;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -587,6 +628,7 @@ switch _mode do {
 		_index = jnca_tab_selected;
 
 		["updateItemInfo",[ _display,_ctrlList,_index]] call jn_fnc_arsenal;
+		["UpdateVariantCombos",[_display]] call jn_fnc_arsenal;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////////////////// event
@@ -668,6 +710,7 @@ switch _mode do {
 						jnva_loadout_mass = _mass;
 						//[_index, _item, _count] remoteExecCall ["jn_fnc_arsenal_removeItem"];
 						[_index, _item, _count] call jn_fnc_arsenal_removeItem; //Sparker: why execute it on all clients?
+						[_item, _count, true] call _fnc_trackVariant;
 					};
 				};
 
@@ -688,12 +731,14 @@ switch _mode do {
 					jnva_loadout_mass = jnva_loadout_mass - _mass;
 					//[_index, _item, _count] remoteExecCall ["jn_fnc_arsenal_addItem"];
 					[_index, _item, _count] call jn_fnc_arsenal_addItem; //Sparker: why execute it on all clients?
+					[_item, _count, false] call _fnc_trackVariant;
 				};
 			};
 		};
 
 		["ColorTabs",[_display]] call jn_fnc_vehicleArsenal;
 		['showMessage',[_display,(localize "STR_A3A_JNA_vehicle_mass_load"+str round (jnva_loadout_mass/_max *100)+"%")]] call jn_fnc_arsenal;
+		["UpdateVariantCombos",[_display]] call jn_fnc_arsenal;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////////////////// event
@@ -836,6 +881,7 @@ switch _mode do {
 		diag_log jnva_loadout;
         jnva_loadout remoteExecCall ["jn_fnc_arsenal_addItem",2];
        	jnva_loadout = ((vehicle player) call jn_fnc_arsenal_cargoToArray);
+       	jnva_variants = createHashMap;
        	diag_log jnva_loadout;
 
        	_list = missionnamespace getVariable ["jnca_tab_selected",-1];
@@ -854,9 +900,7 @@ switch _mode do {
 		{
 			_list = jnva_loadout select _x;
 			{
-				_item = _x select 0;
-				_amount = _x select 1;
-				_veh addWeaponCargoGlobal [_item,_amount];
+				{ _veh addWeaponCargoGlobal _x } forEach (_x call _fnc_splitVariants);
 			} forEach _list;
 		} forEach [
 			IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON,
@@ -868,9 +912,7 @@ switch _mode do {
 		{
 			_list = jnva_loadout select _x;
 			{
-				_item = _x select 0;
-				_amount = _x select 1;
-				_veh addItemCargoGlobal [_item,_amount];
+				{ _veh addItemCargoGlobal _x } forEach (_x call _fnc_splitVariants);
 			} forEach _list;
 		} forEach [
 			IDC_RSCDISPLAYARSENAL_TAB_UNIFORM,
@@ -895,14 +937,15 @@ switch _mode do {
 		{
 			_list = jnva_loadout select _x;
 			{
-				_item = _x select 0;
-				_amount = _x select 1;
-				_count = getNumber (configfile >> "CfgMagazines" >> _item >> "count");
+				{
+					_x params ["_item", "_amount"];
+					_count = getNumber (configfile >> "CfgMagazines" >> _item >> "count");
 
-				while{_amount>0}do{
-					_veh addMagazineAmmoCargo [_item,1,_amount];
-					_amount = _amount - _count;
-				};
+					while{_amount>0}do{
+						_veh addMagazineAmmoCargo [_item,1,_amount min _count];
+						_amount = _amount - _count;
+					};
+				} forEach (_x call _fnc_splitVariants);
 			} forEach _list;
 		} forEach [
 			IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL,
@@ -914,9 +957,7 @@ switch _mode do {
 		{
 			_list = jnva_loadout select _x;
 			{
-				_item = _x select 0;
-				_amount = _x select 1;
-				_veh addBackpackCargoGlobal [_item,_amount];
+				{ _veh addBackpackCargoGlobal _x } forEach (_x call _fnc_splitVariants);
 			} forEach _list;
 		} forEach [
 			IDC_RSCDISPLAYARSENAL_TAB_BACKPACK
@@ -924,6 +965,7 @@ switch _mode do {
 
 
 		jnva_loadout = nil;
+		jnva_variants = nil;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////

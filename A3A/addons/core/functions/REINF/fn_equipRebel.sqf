@@ -57,34 +57,49 @@ private _unitType = _unit getVariable "unitType";
 private _typeTag = _unitType splitString "_" select 3;
 private _customLoadout = A3A_rebelLoadouts getOrDefaultCall [_typeTag, {createHashMap}];
 
+// Rebel gear holds one class per group of functional variants (colours, camo etc.)
+// Pick a random one for some visual variety
+private _fnc_randomVariant = {
+    if (isNil "_this" or { _this isEqualTo "" }) exitWith { _this };
+    selectRandom ([_this] call A3A_fnc_itemVariantsDistinct);
+};
+// Custom loadout entries are an exact class, or any variant of it if "<tag>AnyVariant" is set
+private _fnc_customItem = {
+    params ["_tag"];
+    private _class = _customLoadout get _tag;
+    if (isNil "_class") exitWith { nil };
+    if (_customLoadout getOrDefault [_tag + "AnyVariant", false]) then { _class = _class call _fnc_randomVariant };
+    _class;
+};
+
 private _radio = selectRandomWeighted (A3A_rebelGear get "Radios");
 if (!isNil "_radio") then {_unit linkItem _radio};
 
 if ("Uniform" in _customLoadout) then {
-    _unit forceAddUniform (_customLoadout get "Uniform");
+    _unit forceAddUniform (["Uniform"] call _fnc_customItem);
 };
 
 if ("Headgear" in _customLoadout) then {
-    _unit addHeadgear (_customLoadout get "Headgear");
+    _unit addHeadgear (["Headgear"] call _fnc_customItem);
 } else {
     private _helmet = selectRandomWeighted (A3A_rebelGear get "ArmoredHeadgear");
     if (_helmet == "") then { _helmet = selectRandom (A3A_faction_reb get "headgear") };
-    _unit addHeadgear _helmet;
+    _unit addHeadgear (_helmet call _fnc_randomVariant);
 };
 
 if ("Vest" in _customLoadout) then {
-    _unit addVest (_customLoadout get "Vest");
+    _unit addVest (["Vest"] call _fnc_customItem);
 } else {
     private _vest = selectRandomWeighted (A3A_rebelGear get "ArmoredVests");
     if (_vest == "") then { _vest = selectRandomWeighted (A3A_rebelGear get "CivilianVests") };
-    _unit addVest _vest;
+    _unit addVest (_vest call _fnc_randomVariant);
 };
 
 if ("Backpack" in _customLoadout) then {
-    _unit addBackpack (_customLoadout get "Backpack");
+    _unit addBackpack (["Backpack"] call _fnc_customItem);
 } else {
     private _backpack = selectRandomWeighted (A3A_rebelGear get "BackpacksCargo");
-    if !(isNil "_backpack") then { _unit addBackpack _backpack };
+    if !(isNil "_backpack") then { _unit addBackpack (_backpack call _fnc_randomVariant) };
 };
 
 private _smokes = A3A_rebelGear get "SmokeGrenades";
@@ -95,7 +110,7 @@ if (_grenades isNotEqualTo []) then { _unit addMagazines [selectRandomWeighted _
 
 private _ammoMod = if (_customLoadout getOrDefault ["AmmoQuant", "Normal"] == "Normal") then {1} else {1.5};
 
-private _priWeapon = _customLoadout get "PriWeapon";
+private _priWeapon = ["PriWeapon"] call _fnc_customItem;
 if (isNil "_priWeapon") then {
     private _weaponType = switch (_typeTag) do {
         case ("Sniper"); case ("Marksman"): { "SniperRifles" };
@@ -104,10 +119,10 @@ if (isNil "_priWeapon") then {
         case ("Medic"): { "SMGs" };
         default { "Rifles" };
     };
-    if (!isNil "_weaponType") then { _priWeapon = _weaponType call A3A_fnc_randomRifle };
+    if (!isNil "_weaponType") then { _priWeapon = (_weaponType call A3A_fnc_randomRifle) call _fnc_randomVariant };
 };
 
-private _launcher = _customLoadout get "SecWeapon";
+private _launcher = ["SecWeapon"] call _fnc_customItem;
 if (isNil "_launcher") then {
     private _weaponType = switch (_typetag) do
     {
@@ -115,7 +130,7 @@ if (isNil "_launcher") then {
         case ("AT"): { "MissileLaunchersAT" };
         case ("AA"): { "MissileLaunchersAA" };
     };
-    if (!isNil "_weaponType") then { _launcher = selectRandomWeighted (A3A_rebelGear get _weaponType) };
+    if (!isNil "_weaponType") then { _launcher = (selectRandomWeighted (A3A_rebelGear get _weaponType)) call _fnc_randomVariant };
 };
 
 switch (_typeTag) do
@@ -191,7 +206,7 @@ switch (_typeTag) do
 };
 
 private _nvg = selectRandomWeighted (A3A_rebelGear get "NVGs");
-if (_nvg != "") then { _unit linkItem _nvg }
+if (_nvg != "") then { _unit linkItem (_nvg call _fnc_randomVariant) }
 else {
     private _weapon = primaryWeapon _unit;
     private _compatLights = A3A_rebelFlashlightsCache get _weapon;

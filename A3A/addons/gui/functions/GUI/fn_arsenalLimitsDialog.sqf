@@ -63,7 +63,7 @@ switch (_mode) do
         { ctrlDelete _x } forEach allControls _listBox;
         {
             _x params ["_class", "_count"];
-            private _itemName = getText (_cfgCat / _class / "displayName");
+            private _itemName = [_class] call A3A_fnc_itemVariantName;         // shared name of functional variants
             private _limit = A3A_arsenalLimits getOrDefault [_class, [_defLimit]] select 0;
             if (_typeIndex == 26) then {
                 private _capacity = 1 max getNumber (_cfgCat / _class / "count");

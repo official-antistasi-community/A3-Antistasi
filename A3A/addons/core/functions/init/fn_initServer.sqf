@@ -1,4 +1,5 @@
 #include "..\..\script_component.hpp"
+#include "\A3\Ui_f\hpp\defineResinclDesign.inc"     // jna_datalist indices
 FIX_LINE_NUMBERS()
 
 //Define and publish logLevel first thing, so we can start logging appropriately.
@@ -164,20 +165,38 @@ else
 
     // Do initial arsenal filling
     private _categoriesToPublish = createHashMap;
-    private _addedClasses = createHashMap;       // dupe proofing
+    private _addedClasses = createHashMap;       // arsenal class -> [tab, count]. Merges variants & dupes
     {
         _x params ["_class", ["_count", -1]];
-        if (_class in _addedClasses) then { continue };
-        _addedClasses set [_class, nil];
+        private _arsenalClass = [_class] call jn_fnc_arsenal_baseItem;
+        private _entry = _addedClasses get _arsenalClass;
+        if (!isNil "_entry") then {
+            if (_entry#1 != -1) then { _entry set [1, [(_entry#1) + _count, -1] select (_count == -1)] };
+            continue;
+        };
+        _addedClasses set [_arsenalClass, [_arsenalClass call jn_fnc_arsenal_itemType, _count]];
 
-        private _arsenalTab = _class call jn_fnc_arsenal_itemType;
-        jna_dataList#_arsenalTab pushBack [_class, _count];         // direct add to avoid O(N^2) issue
-
-        private _categories = _class call A3A_fnc_equipmentClassToCategories;
-        { (missionNamespace getVariable ("unlocked" + _x)) pushBack _class } forEach _categories;
-        _categoriesToPublish insert [true, _categories, []];
+        // Variants can be in different categories (eg. rifle vs MG, which Antistasi derives from the crosshair)
+        {
+            private _variant = _x;
+            private _categories = _variant call A3A_fnc_equipmentClassToCategories;
+            { (missionNamespace getVariable ("unlocked" + _x)) pushBack _variant } forEach _categories;
+            _categoriesToPublish insert [true, _categories, []];
+        } forEach ([_arsenalClass] call A3A_fnc_itemVariants);
 
     } foreach FactionGet(reb,"initialRebelEquipment");
+
+    // direct add to avoid O(N^2) issue
+    { jna_dataList#(_y#0) pushBack [_x, _y#1] } forEach _addedClasses;
+
+    // Unlimited magazines also unlock smaller ones with the same ammo
+    {
+        if (_y#1 != -1) then { continue };
+        {
+            if ([jna_dataList#IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, _x] call jn_fnc_arsenal_itemCount == -1) then { continue };
+            _categoriesToPublish insert [true, [_x, true, false, true] call A3A_fnc_unlockEquipment, []];
+        } forEach (A3A_magUnlockCascade getOrDefault [_x, []]);
+    } forEach _addedClasses;
 
     // Publish the unlocked categories (once each)
     { publicVariable ("unlocked" + _x) } forEach keys _categoriesToPublish;

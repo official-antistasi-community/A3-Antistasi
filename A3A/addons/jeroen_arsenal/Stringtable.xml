@@ -436,6 +436,18 @@
         <Turkish>Bu eşyadan az sayıda var, sadece üyeler kullanabilir</Turkish>
         <Chinesesimp>此物品短缺,只限服务器会员使用</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_JNA_variant">
+        <Original>Variant</Original>
+      </Key>
+      <Key ID="STR_A3A_JNA_variants_count">
+        <Original>(%1v)</Original>
+      </Key>
+      <Key ID="STR_A3A_JNA_variant_tooltip">
+        <Original>Functionally identical versions of this item (colours, camo patterns etc). They share one arsenal stock and unlock together.</Original>
+      </Key>
+      <Key ID="STR_A3A_JNA_variant_incompatible">
+        <Original>That variant doesn't fit this weapon</Original>
+      </Key>
     </Container>
     <Container name="JND">
       <Key ID="STR_A3A_JND_button_del">

@@ -138,6 +138,39 @@ private _minItemsMember = {
 	_min;
 };
 
+// Functional variants (colour/camo versions etc.) share one arsenal entry, stored under the
+// representative class. These pick which variant actually gets equipped or added.
+private _fnc_variantPrefs = {
+	if (isNil "jna_variantPrefs") then {
+		jna_variantPrefs = createHashMapFromArray (profileNamespace getVariable ["A3A_arsenalVariantPrefs", []]);
+	};
+	jna_variantPrefs;
+};
+
+// Player's last chosen variant of an arsenal item that passes the filter, else the first that does
+private _fnc_preferredVariant = {
+	params ["_item", ["_filter", {true}]];
+	private _variants = [_item] call A3A_fnc_itemVariants;
+	if (count _variants == 1) exitWith { _item };
+	private _pref = (call _fnc_variantPrefs) get _item;
+	if (!isNil "_pref" and { _pref in _variants } and { _pref call _filter }) exitWith { _pref };
+	private _index = _variants findIf { _x call _filter };
+	_variants select (_index max 0);
+};
+
+private _fnc_itemCfg = {
+	params ["_index", "_item"];
+	switch _index do {
+		case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK:	{configfile >> "cfgvehicles" 	>> _item};
+		case IDC_RSCDISPLAYARSENAL_TAB_GOGGLES:		{configfile >> "cfgglasses" 	>> _item};
+		case IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG;
+		case IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL;
+		case IDC_RSCDISPLAYARSENAL_TAB_CARGOTHROW;
+		case IDC_RSCDISPLAYARSENAL_TAB_CARGOPUT: 	{configfile >> "cfgmagazines" 	>> _item};
+		default										{configfile >> "cfgweapons" 	>> _item};
+	};
+};
+
 _mode = [_this,0,"Open",[displaynull,""]] call bis_fnc_param;
 _this = [_this,1,[]] call bis_fnc_param;
 //if!(_mode in ["draw3D","ListCurSel"])then{diag_log ("jna call "+_mode);};
@@ -273,6 +306,7 @@ switch _mode do {
 		_display = _this select 0;
 		["ReplaceBaseItems",[_display]] call jn_fnc_arsenal;
 		["customEvents",[_display]] call jn_fnc_arsenal;
+		["CreateVariantCombos",[_display]] call jn_fnc_arsenal;
 		["CreateListAll", [_display]] call jn_fnc_arsenal;
 		['showMessage',[_display, localize "STR_A3A_JNA_title"]] call jn_fnc_arsenal;
 		["HighlightMissingIcons",[_display]] call jn_fnc_arsenal;
@@ -761,6 +795,7 @@ switch _mode do {
 		];
 
 		//["updateItemInfo",[_display,_ctrlList, _index]] call jn_fnc_arsenal;
+		["UpdateVariantCombos",[_display]] call jn_fnc_arsenal;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -819,7 +854,7 @@ switch _mode do {
 					IDC_RSCDISPLAYARSENAL_TAB_ITEMBIPOD
 				] find _index;
 
-				_item = _weaponItems select _accIndex;
+				_item = [_weaponItems select _accIndex] call jn_fnc_arsenal_baseItem;
 				["UpdateItemAdd",[_index,_item,0]] call jn_fnc_arsenal;
 				["ListSelectCurrent",[_display,_index,_item]] call jn_fnc_arsenal;
 			};
@@ -843,18 +878,18 @@ switch _mode do {
 				{
 					_type = _x call jn_fnc_arsenal_itemType;
 					if(_type == _index || (_type == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL &&  _index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG))then{
-						_itemsUnique pushBackUnique _x;
+						_itemsUnique pushBackUnique ([_x] call jn_fnc_arsenal_baseItem);
 					};
 				}foreach _items;
 
 				_inventory = if(_index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG)then{
+					private _usableMagazines = [];
+					{ _usableMagazines append compatibleMagazines _x } forEach ([primaryweapon player, secondaryweapon player, handgunweapon player] - [""]);
 					{
-						{
-							if([_itemsUnique, _x] call _arrayContains)then{
-								["UpdateItemAdd",[_index,_x,0]] call jn_fnc_arsenal;
-							}
-						} forEach (getarray (configfile >> "cfgweapons" >> _x >> "magazines"));
-					}forEach [primaryweapon player, secondaryweapon player, handgunweapon player];
+						if ([_usableMagazines, _x] call _arrayContains) then {
+							["UpdateItemAdd",[_index,_x,0]] call jn_fnc_arsenal;
+						};
+					} forEach _itemsUnique;
 				}else{
 					{
 						["UpdateItemAdd",[_index,_x,0]] call jn_fnc_arsenal;
@@ -927,11 +962,12 @@ switch _mode do {
 						default {objNull};
 					};
 
+					// Counted under the arsenal class, so all variants add up in one row
 					_items = if (!isNull _container) then {
 						if(_idc == IDC_RSCDISPLAYARSENAL_TAB_CARGOMISC)then{
-							itemCargo _container;
+							itemCargo _container apply { [_x] call jn_fnc_arsenal_baseItem };
 						} else {
-							magazinesAmmoCargo _container;
+							magazinesAmmoCargo _container apply { [(_x#0) call A3A_fnc_itemVariantRep, _x#1] };
 						};
 					} else {
 						[];
@@ -964,6 +1000,7 @@ switch _mode do {
 			_ctrlIconBackground = _display displayctrl (IDC_RSCDISPLAYARSENAL_ICONBACKGROUND + _idc);
 			_ctrlIconBackground ctrlshow _active;
 		} foreach [IDCS_RIGHT];
+		["UpdateVariantCombos",[_display]] call jn_fnc_arsenal;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -983,8 +1020,9 @@ switch _mode do {
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
+	// Returns the arsenal class of the item worn in a tab, or the worn class itself if _raw is true
 	case "ListCurSel":{
-		private _index = _this select 0;
+		_this params ["_index", ["_raw", false]];
 
 		_return = switch _index do {
 			case IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON: {
@@ -1048,6 +1086,9 @@ switch _mode do {
 				_return1;
 			};
 		};
+		// switch returns true when no case matches (eg. attachment tabs)
+		if (isNil "_return" or { !(_return isEqualType "") }) then { _return = "" };
+		if (!_raw) then { _return = [_return] call jn_fnc_arsenal_baseItem };
 		_return;
 	};
 
@@ -1147,6 +1188,7 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////  GLOBAL
 	case "UpdateItemAdd":{
 		params ["_index","_item","_amount",["_updateDataList",false]];
+		_item = _item call A3A_fnc_itemVariantRep;
 
 		//update datalist
 		if(_updateDataList)then
@@ -1209,6 +1251,7 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////  GLOBAL
 	case "UpdateItemRemove":{
 		params ["_index","_item","_amount",["_updateDataList",false]];
+		_item = _item call A3A_fnc_itemVariantRep;
 
 		//update datalist
 		if(_updateDataList)then{
@@ -1289,17 +1332,14 @@ switch _mode do {
 		private _item = _this select 3;			if(_item isEqualTo "")exitWith{};
 		private _amount = _this select 4;
 
-		private _xCfg = switch _index do {
-			case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK:	{configfile >> "cfgvehicles" 	>> _item};
-			case IDC_RSCDISPLAYARSENAL_TAB_GOGGLES:		{configfile >> "cfgglasses" 	>> _item};
-			case IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG;
-			case IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL;
-			case IDC_RSCDISPLAYARSENAL_TAB_CARGOTHROW;
-			case IDC_RSCDISPLAYARSENAL_TAB_CARGOPUT: 	{configfile >> "cfgmagazines" 	>> _item};
-			case IDC_RSCDISPLAYARSENAL_TAB_CARGOMISC:	{configfile >> "cfgweapons" 	>> _item};
-			default										{configfile >> "cfgweapons" 	>> _item};
+		private _xCfg = [_index, _item] call _fnc_itemCfg;
+		private _variants = [_item] call A3A_fnc_itemVariants;
+		private _distinctCount = count ([_item] call A3A_fnc_itemVariantsDistinct);
+		private _displayName = if (count _variants > 1) then {
+			[_item] call A3A_fnc_itemVariantName;			// variant count is shown in front, see UpdateItemGui
+		} else {
+			gettext (_xCfg >> "displayName");
 		};
-		private _displayName = gettext (_xCfg >> "displayName");
 		private _data = str [_item,_amount,_displayName];
 		private _lbAdd = 0;
 
@@ -1343,12 +1383,15 @@ switch _mode do {
 					case (ctrlenabled (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_HANDGUN))): {handgunweapon player};
 					default {""};
 				};
-				_compatibleItems = compatibleItems _weapon;
-				if not (({_x == _item} count _compatibleItems > 0) || _item isequalto "")exitwith{
+				_compatibleItems = compatibleItems _weapon apply { toLower _x };
+				if (_variants findIf { toLower _x in _compatibleItems } == -1 && _item isNotEqualTo "") exitwith{
 					_ctrlList lbSetColor [_lbAdd, [1,1,1,0.25]];
 				};
 			};
 
+			if (_distinctCount > 1) then {
+				_ctrlList lbSetTooltip [_lbAdd, localize "STR_A3A_JNA_variant_tooltip"];
+			};
 		};
 
 		//["UpdateItemGui",[_display,_index,_lbAdd]] call jn_fnc_arsenal;
@@ -1402,6 +1445,10 @@ switch _mode do {
 			("[ " + _prefix + (str _amount) + _suffix + " ]  ");
 		};
 
+		// Number of variants goes in front of the name, so long names can't hide it
+		private _distinctCount = count ([_item] call A3A_fnc_itemVariantsDistinct);
+		if (_distinctCount > 1) then { _displayName = format [localize "STR_A3A_JNA_variants_count", _distinctCount] + " " + _displayName };
+
 		//grayout items for non members, right items are done in selectRight
 		// Except in the vehicle arsenal, where this function is used for the right items too
 		_grayout = false;
@@ -1446,7 +1493,7 @@ switch _mode do {
 				_ammoTotal = 0;
 				//_compatableMagazines = server getVariable [format ["%1_mags", _item],[]];//TODO marker for changed entry
 				scopeName "updateWeapon";//TODO marker for changed entry
-				_compatableMagazines = getarray (configfile >> "cfgweapons" >> _item >> "magazines");
+				_compatableMagazines = compatibleMagazines _item;
 
 				{
 					private ["_amount"];
@@ -1568,8 +1615,13 @@ switch _mode do {
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
+	// _forceVariant: swap the worn item to this variant of the same arsenal entry (from the variant combo)
 	case "SelectItem": {
-		params ["_display","_ctrlList","_index"];
+		params ["_display","_ctrlList","_index", ["_forceVariant", ""]];
+
+		// Lists are refilled programmatically (eg. when reopening the arsenal) while the user input flag
+		// may still be set from an earlier click. Only the open tabs can really be selected from.
+		if (!ctrlEnabled _ctrlList and _forceVariant isEqualTo "") exitWith {};
 
 		private _cursel = lbcursel _ctrlList;
 		private _type = (ctrltype _ctrlList == 102);
@@ -1579,6 +1631,22 @@ switch _mode do {
 		private _amount = _data select 1;
 		private _displayName = _data select 2;
 
+		// Swapping between variants of the worn item doesn't change arsenal stock
+		private _isVariantSwap = _forceVariant != "";
+		if (_isVariantSwap) then { _item = _forceVariant call A3A_fnc_itemVariantRep };
+
+		// Variant to actually equip for the selected arsenal entry
+		private _fnc_equipVariant = {
+			if (_isVariantSwap) exitWith { _forceVariant };
+			[_item, _this] call _fnc_preferredVariant;
+		};
+		// Whether the worn item needs replacing. Reselecting the worn item's entry keeps the worn variant
+		private _fnc_needsChange = {
+			params ["_oldItem", "_equipItem"];
+			if (_isVariantSwap) exitWith { _oldItem != _equipItem };
+			([_oldItem] call jn_fnc_arsenal_baseItem) != _item;
+		};
+
 		private _oldItem = "";
 
 		private _ctrlListPrimaryWeapon = _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON);
@@ -1586,7 +1654,7 @@ switch _mode do {
 		private _ctrlListHandgun = _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_HANDGUN);
 
 		// Prevent equipping item when there aren't any left
-		if (_amount == 0 and _item != "") exitWith{
+		if (_amount == 0 and _item != "" and !_isVariantSwap) exitWith{
 			if(missionnamespace getvariable ["jna_reselect_item",true])then{//prefent loop when unavalable item was worn and a other unavalable item was selected
 				missionnamespace setvariable ["jna_reselect_item",false];
 				["ListSelectCurrent",[_display,_index]] call jn_fnc_arsenal;
@@ -1596,7 +1664,7 @@ switch _mode do {
 
 		//check if weapon is unlocked
 		private _min = [_index, _item] call _minItemsMember;
-		if ((_amount <= _min) AND (_amount != -1) AND (_item !="") AND !([player] call A3A_fnc_isMember) AND !_type) exitWith{
+		if ((_amount <= _min) AND (_amount != -1) AND (_item !="") AND !_isVariantSwap AND !([player] call A3A_fnc_isMember) AND !_type) exitWith{
 			['showMessage',[_display,localize "STR_A3A_JNA_weapon_low"]] call jn_fnc_arsenal;
 
 			//reset _cursel
@@ -1616,8 +1684,9 @@ switch _mode do {
 					case IDC_RSCDISPLAYARSENAL_TAB_VEST:{ vest player;};
 					case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK:{ backpack player;};
 				};
+				private _equipItem = {true} call _fnc_equipVariant;
 
-				if (_oldItem != _item) then {
+				if ([_oldItem, _equipItem] call _fnc_needsChange) then {
 
 					_container = switch _index do{
 						case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM:{uniformContainer player;};
@@ -1652,13 +1721,13 @@ switch _mode do {
 					if (_item != "") then{
 						switch _index do{
 							case IDC_RSCDISPLAYARSENAL_TAB_UNIFORM:{
-								player forceaddUniform _item;
+								player forceaddUniform _equipItem;
 							};
 							case IDC_RSCDISPLAYARSENAL_TAB_VEST:{
-								player addVest _item;
+								player addVest _equipItem;
 							};
 							case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {
-								player addbackpack _item;
+								player addbackpack _equipItem;
 								//Some glitchy backpacks aren't empty. Make sure they are. NO FREE ITEMS.
 								clearAllItemsFromBackpack player;
 							};
@@ -1725,11 +1794,12 @@ switch _mode do {
 			};
 			case IDC_RSCDISPLAYARSENAL_TAB_HEADGEAR: {
 				_oldItem = headgear player;
-				if (_oldItem != _item) then {
+				private _equipItem = {true} call _fnc_equipVariant;
+				if ([_oldItem, _equipItem] call _fnc_needsChange) then {
 					removeheadgear player;
 					[_index, _oldItem] call jn_fnc_arsenal_addItem;
 					if (_item != "") then{
-						player addheadgear _item;
+						player addheadgear _equipItem;
 						[_index, _item]call jn_fnc_arsenal_removeItem;
 					};
 				};
@@ -1738,37 +1808,46 @@ switch _mode do {
 			};
 			case IDC_RSCDISPLAYARSENAL_TAB_GOGGLES: {
 				_oldItem = goggles player;
-				if (_oldItem != _item) then {
+				private _equipItem = {true} call _fnc_equipVariant;
+				if ([_oldItem, _equipItem] call _fnc_needsChange) then {
 					removeGoggles player;
 					[_index, _oldItem] call jn_fnc_arsenal_addItem;
 					if (_item != "") then{
-						player addGoggles _item;
+						player addGoggles _equipItem;
 						[_index, _item]call jn_fnc_arsenal_removeItem;
 					};
 				};
 			};
 			case IDC_RSCDISPLAYARSENAL_TAB_NVGS:{
 				_oldItem = hmd player;
-				if (_oldItem != _item) then {
+				private _equipItem = {true} call _fnc_equipVariant;
+				if ([_oldItem, _equipItem] call _fnc_needsChange) then {
 					player removeWeaponGlobal _oldItem;
 					[_index, _oldItem] call jn_fnc_arsenal_addItem;
 					if (_item != "") then{
-						player addweapon _item;
+						player addweapon _equipItem;
 						[_index, _item]call jn_fnc_arsenal_removeItem;
 					};
 				};
 			};
 			case IDC_RSCDISPLAYARSENAL_TAB_BINOCULARS: {
 				_oldItem = binocular player;
-				if (_oldItem != _item) then {
+				private _equipItem = {true} call _fnc_equipVariant;
+				if ([_oldItem, _equipItem] call _fnc_needsChange) then {
+					private _loadedBattery = (getUnitLoadout player select 8) param [4, []];
 					player removeWeaponGlobal _oldItem;
 					[_index,_oldItem] call jn_fnc_arsenal_addItem;
 					if (_item != "") then{
-						player addweapon _item;
-						_magazines = getarray (configfile >> "cfgweapons" >> _item >> "magazines");
+						player addweapon _equipItem;
+						_magazines = getarray (configfile >> "cfgweapons" >> _equipItem >> "magazines");
+						// Variant swap keeps the loaded battery
+						if (_isVariantSwap) then {
+							if (_loadedBattery isNotEqualTo []) then { player addBinocularItem (_loadedBattery#0) };
+							_magazines = [];
+						};
 						if (count _magazines > 0) then {
 							_mag = (_magazines select 0);
-							if([jna_dataList select IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, _mag] call jn_fnc_arsenal_itemCount > 0)then{
+							if([jna_dataList select IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, _mag call A3A_fnc_itemVariantRep] call jn_fnc_arsenal_itemCount > 0)then{
 								if((player canAddItemToUniform _mag)||(player canAddItemToVest _mag)||(player canAddItemToBackpack _mag))then{
 									player addmagazine _mag;
 									[IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, _mag]call jn_fnc_arsenal_removeItem;
@@ -1792,8 +1871,9 @@ switch _mode do {
 					case IDC_RSCDISPLAYARSENAL_TAB_HANDGUN: {handgunweapon player};
 					default {""};
 				};
+				private _equipItem = {true} call _fnc_equipVariant;
 
-				if (_oldItem != _item) then {
+				if ([_oldItem, _equipItem] call _fnc_needsChange) then {
 					_oldAttachments = switch _index do {
 						case IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON: {primaryweaponitems player};
 						case IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON: {secondaryweaponitems player};
@@ -1813,9 +1893,9 @@ switch _mode do {
 					[_index, _oldItem] call jn_fnc_arsenal_addItem;
 
 					//add new weapon
-					if (_item != "" and isClass (configFile >> "CfgWeapons" >> _item)) then {
+					if (_item != "" and isClass (configFile >> "CfgWeapons" >> _equipItem)) then {
 						//give player new weapon
-						player addWeapon _item;
+						player addWeapon _equipItem;
 						[_index, _item]call jn_fnc_arsenal_removeItem;
 
 						//Remove any attachments that spawn *with* the weapon.
@@ -1841,7 +1921,7 @@ switch _mode do {
 					_loadout set[_index, _loadoutNew select _index];
 					player setUnitLoadout _loadout;
 					_oldCompatableMagazines = getarray (configfile >> "cfgweapons" >> _oldItem >> "magazines");
-					_newCompatableMagazines = getarray (configfile >> "cfgweapons" >> _item >> "magazines");
+					_newCompatableMagazines = getarray (configfile >> "cfgweapons" >> _equipItem >> "magazines");
 					{
 						_magazine = _x select 0;
 						_amount = _x select 1;
@@ -1852,7 +1932,7 @@ switch _mode do {
 								(_location == 4 && _index == IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON) ||
 								(_location == 2 && _index == IDC_RSCDISPLAYARSENAL_TAB_HANDGUN))
 							then{
-								player addweaponitem [_item,[_magazine,_amount]];
+								player addweaponitem [_equipItem,[_magazine,_amount]];
 							};
 						}else{
 							if([_oldCompatableMagazines, _magazine] call _arrayContains)then{
@@ -1943,12 +2023,13 @@ switch _mode do {
 					};
 				};
 
-				if (_oldItem != _item) then {
+				private _equipItem = {true} call _fnc_equipVariant;
+				if ([_oldItem, _equipItem] call _fnc_needsChange) then {
 					player unassignitem _OldItemUnequal;
 					player removeitem _OldItemUnequal;
 					[_index, _oldItem] call jn_fnc_arsenal_addItem;
 					if (_item != "") then {
-						player linkitem _item;
+						player linkitem _equipItem;
 						[_index, _item]call jn_fnc_arsenal_removeItem;
 					};
 				};
@@ -1966,8 +2047,12 @@ switch _mode do {
 				};
 
 				//prevent selecting grey items, needs to be this complicated because bis_fnc_compatibleItems returns some crap resolts like optic_aco instead of Optic_Aco
-				_compatibleItems = compatibleItems _weapon;
-				if not (({_x == _item} count _compatibleItems > 0) || _item isequalto "")exitwith{
+				// Equips the preferred variant that fits the weapon
+				_compatibleItems = compatibleItems _weapon apply { toLower _x };
+				private _fnc_fits = { toLower _this in _compatibleItems };
+				private _equipItem = _fnc_fits call _fnc_equipVariant;
+				if (_item isNotEqualTo "" and { !(_equipItem call _fnc_fits) }) exitwith{
+					if (_isVariantSwap) then { ['showMessage',[_display, localize "STR_A3A_JNA_variant_incompatible"]] call jn_fnc_arsenal };
 					['TabSelectRight',[_display,_index]] call jn_fnc_arsenal;
 				};
 
@@ -1982,33 +2067,33 @@ switch _mode do {
 				case (ctrlenabled _ctrlListPrimaryWeapon): {
 
 						_oldItem = (primaryWeaponItems player select _accIndex);
-						if (_oldItem != _item) then {
+						if ([_oldItem, _equipItem] call _fnc_needsChange) then {
 							player removeprimaryweaponitem _oldItem;
 							[_index, _oldItem] call jn_fnc_arsenal_addItem;
 							if (_item != "") then {
-								player addprimaryweaponitem _item;
+								player addprimaryweaponitem _equipItem;
 								[_index, _item]call jn_fnc_arsenal_removeItem;
 							};
 						};
 					};
 					case (ctrlenabled _ctrlListSecondaryWeapon): {
 						_oldItem = (secondaryWeaponItems player select _accIndex);
-						if (_oldItem != _item) then {
+						if ([_oldItem, _equipItem] call _fnc_needsChange) then {
 							player removesecondaryweaponitem _oldItem;
 							[_index, _oldItem] call jn_fnc_arsenal_addItem;
 							if (_item != "") then {
-								player addsecondaryweaponitem _item;
+								player addsecondaryweaponitem _equipItem;
 								[_index, _item]call jn_fnc_arsenal_removeItem;
 							};
 						};
 					};
 					case (ctrlenabled _ctrlListHandgun): {
 						_oldItem = (handgunitems player select _accIndex);
-						if (_oldItem != _item) then {
+						if ([_oldItem, _equipItem] call _fnc_needsChange) then {
 							player removehandgunitem _oldItem;
 							[_index, _oldItem] call jn_fnc_arsenal_addItem;
 							if (_item != "") then {
-								player addhandgunitem _item;
+								player addhandgunitem _equipItem;
 								[_index, _item]call jn_fnc_arsenal_removeItem;
 							};
 						};
@@ -2028,6 +2113,7 @@ switch _mode do {
 
 		["updateItemInfo",[ _display,_ctrlList,_index]] call jn_fnc_arsenal;
 		["HighlightMissingIcons",[_display]] call jn_fnc_arsenal;
+		["UpdateVariantCombos",[_display]] call jn_fnc_arsenal;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -2057,8 +2143,9 @@ switch _mode do {
 			case IDC_RSCDISPLAYARSENAL_TAB_BACKPACK: {
 				backpack _center
 			};
-			default {0};
+			default {""};
 		};
+		if (_indexLeft == -1) exitWith {};			// no container tab open
 
 		_maximumLoad = getnumber (configfile >> "CfgVehicles" >> _supply >> "maximumLoad");
 
@@ -2140,6 +2227,8 @@ switch _mode do {
 		private _magBullets = if (_isMag) then { getNumber (configFile >> "CfgMagazines" >> _item >> "count") } else { 1 };
 
 		private _change = 0;				// Amount we need to add to arsenal (in bullets, for mags)
+		// Rows are arsenal entries. Add the chosen variant, remove any variant (chosen one first)
+		private _variantItem = [_item] call _fnc_preferredVariant;
 		if (_add > 0) then {//add
 
 			if (_amount == 0) exitWith {};
@@ -2157,25 +2246,26 @@ switch _mode do {
 				private _magCount = floor (_count / _magBullets);
 				private _remCount = _count % _magBullets;
 
-				while {_magCount > 0 and !(_container canAdd [_item, _magCount])} do { _magCount = _magCount - 1 };
-				_container addItemCargoGlobal [_item, _magCount];
+				while {_magCount > 0 and !(_container canAdd [_variantItem, _magCount])} do { _magCount = _magCount - 1 };
+				_container addItemCargoGlobal [_variantItem, _magCount];
 				_change = _change - _magCount*_magBullets;
 
-				if (_remCount > 0 and _container canAdd _item) then {
-					_container addMagazineAmmoCargo [_item, 1, _remCount];
+				if (_remCount > 0 and _container canAdd _variantItem) then {
+					_container addMagazineAmmoCargo [_variantItem, 1, _remCount];
 					_change = _change - _remCount;
 				};
 			} else {
-				while {_count > 0 and !(_container canAdd [_item, _count])} do { _count = _count - 1 };
-				_container addItemCargoGlobal [_item, _count];				// works on magazines too
+				while {_count > 0 and !(_container canAdd [_variantItem, _count])} do { _count = _count - 1 };
+				_container addItemCargoGlobal [_variantItem, _count];				// works on magazines too
 				_change = _change - _count;
 			};
 		} else {//remove
 			if (_isMag) then {
 				private _mags = magazinesAmmoCargo _container;
+				_mags = (_mags select { _x#0 == _variantItem }) + (_mags select { _x#0 != _variantItem });
 				clearMagazineCargoGlobal _container;
 				{
-					if(_x#0 isEqualTo _item && _count > 0) then {
+					if((_x#0 call A3A_fnc_itemVariantRep) isEqualTo _item && _count > 0) then {
 						_change = _change + _x#1;		// count the bullets removed
 						_count = _count - 1;
 					} else {
@@ -2185,9 +2275,10 @@ switch _mode do {
 			} else {
 				//save items in list and remove them, then re-add
 				private _items = itemCargo _container;
+				_items = (_items select { _x == _variantItem }) + (_items select { _x != _variantItem });
 				clearItemCargoGlobal _container;
 				{
-					if(_x isEqualTo _item && _count > 0) then {
+					if(([_x] call jn_fnc_arsenal_baseItem) isEqualTo _item && _count > 0) then {
 						_change = _change + 1;
 						_count = _count - 1;
 					} else {
@@ -2216,6 +2307,141 @@ switch _mode do {
 		_ctrlLoadCargo progresssetposition _load;
 
 		["SelectItemRight",[_display,_ctrlList,_index]] call jn_fnc_arsenal;
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Variant selection: a combo beside the left and right lists, shown when the worn item (or the
+	// selected cargo row) has functionally identical variants. They share one arsenal entry.
+	case "CreateVariantCombos": {
+		_this params ["_display"];
+		private _posLeft = ctrlPosition (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON));
+		private _posRight = ctrlPosition (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG));
+		private _posSort = ctrlPosition (_display displayctrl (IDC_RSCDISPLAYARSENAL_SORT + IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON));
+		private _height = _posSort#3;
+		private _gap = _height * 0.25;
+		// Wide enough for long names, without the left and right combos overlapping
+		private _space = (_posRight#0) - ((_posLeft#0) + (_posLeft#2));
+		private _width = ((_posLeft#2) * 1.3) min ((_space - 3 * _gap) / 2);
+		{
+			_x params ["_side", "_posX"];
+			private _label = _display ctrlCreate ["RscText", -1];
+			_label ctrlSetPosition [_posX, _posSort#1, _width, _height];
+			_label ctrlSetText localize "STR_A3A_JNA_variant";
+			_label ctrlSetBackgroundColor [0,0,0,0.5];
+			_label ctrlCommit 0;
+
+			private _combo = _display ctrlCreate ["RscCombo", -1];
+			_combo ctrlSetPosition [_posX, (_posSort#1) + _height, _width, _height];
+			_combo ctrlSetTooltip localize "STR_A3A_JNA_variant_tooltip";
+			_combo ctrlCommit 0;
+			_combo setVariable ["jna_side", _side];
+			_combo ctrlAddEventHandler ["LBSelChanged", {
+				params ["_combo", "_lbIndex"];
+				if (uiNamespace getVariable ["jna_variantComboUpdating", false]) exitWith {};
+				["VariantSelected", [ctrlParent _combo, _combo getVariable "jna_side", _combo lbData _lbIndex]] call jn_fnc_arsenal;
+			}];
+
+			{ _x ctrlShow false } forEach [_label, _combo];
+			uiNamespace setVariable ["jna_variantCombo" + _side, [_label, _combo]];
+		} forEach [["Left", (_posLeft#0) + (_posLeft#2) + _gap], ["Right", (_posRight#0) - _gap - _width]];
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "UpdateVariantCombos": {
+		_this params ["_display"];
+		private _isVehicleArsenal = (UINamespace getVariable ["jn_type",""]) isEqualTo "vehicleArsenal";
+
+		// _current: the worn (or to be added) class. Hidden if empty or without variants
+		private _fnc_fill = {
+			params ["_side", "_index", "_current", ["_filter", {true}]];
+			(uiNamespace getVariable ["jna_variantCombo" + _side, [controlNull, controlNull]]) params ["_label", "_combo"];
+			if (isNull _combo) exitWith {};
+			private _variants = if (_current isEqualTo "") then { [] } else { [_current, _current] call A3A_fnc_itemVariantsDistinct };
+			private _show = count _variants > 1;
+			{ _x ctrlShow _show } forEach [_label, _combo];
+			if (!_show) exitWith {};
+
+			uiNamespace setVariable ["jna_variantComboUpdating", true];
+			lbClear _combo;
+			private _selected = 0;
+			{
+				private _cfg = [_index, _x] call _fnc_itemCfg;
+				private _lbAdd = _combo lbAdd getText (_cfg >> "displayName");
+				_combo lbSetData [_lbAdd, _x];
+				// Combo pictures are square, which squashes long items like rifles
+				if !(_index in [IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON, IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON, IDC_RSCDISPLAYARSENAL_TAB_HANDGUN, IDC_RSCDISPLAYARSENAL_TAB_BINOCULARS]) then {
+					_combo lbSetPicture [_lbAdd, getText (_cfg >> "picture")];
+				};
+				if !(_x call _filter) then { _combo lbSetColor [_lbAdd, [1,1,1,0.25]] };
+				if (_x == _current) then { _selected = _lbAdd };
+			} forEach _variants;
+			_combo lbSetCurSel _selected;
+			uiNamespace setVariable ["jna_variantComboUpdating", false];
+		};
+
+		// Vehicle arsenal: the selected row of the active list, choosing what gets loaded
+		if (_isVehicleArsenal) exitWith {
+			private _tab = missionNamespace getVariable ["jnca_tab_selected", -1];
+			private _isLeft = _tab in [IDCS_LEFT];
+			private _ctrlList = _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + ([IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG, IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL] select _isLeft));
+			private _row = lnbCurSelRow _ctrlList;
+			private _item = if (_tab == -1 or _row < 0) then { "" } else { (call compile (_ctrlList lnbData [_row, 0])) select 0 };
+			[["Right", "Left"] select _isLeft, _tab, [_item] call _fnc_preferredVariant] call _fnc_fill;
+			[["Left", "Right"] select _isLeft, _tab, ""] call _fnc_fill;
+		};
+
+		private _fnc_activeTab = {
+			private _tabs = _this;
+			private _i = _tabs findIf { ctrlEnabled (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + _x)) };
+			if (_i == -1) exitWith { -1 };
+			_tabs select _i;
+		};
+
+		// Left: worn item of the open tab
+		private _index = [IDCS_LEFT] call _fnc_activeTab;
+		private _worn = if (_index == -1) then { "" } else { ["ListCurSel", [_index, true]] call jn_fnc_arsenal };
+		["Left", _index, _worn] call _fnc_fill;
+
+		// Right: attachment on the open weapon, or the variant added by the selected cargo row
+		_index = [IDCS_RIGHT] call _fnc_activeTab;
+		switch (true) do {
+			case (_index in [IDC_RSCDISPLAYARSENAL_TAB_ITEMMUZZLE, IDC_RSCDISPLAYARSENAL_TAB_ITEMACC, IDC_RSCDISPLAYARSENAL_TAB_ITEMOPTIC, IDC_RSCDISPLAYARSENAL_TAB_ITEMBIPOD]): {
+				private _weapon = "";
+				private _weaponItems = ["","","",""];
+				switch (true) do {
+					case (ctrlEnabled (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON))): { _weapon = primaryWeapon player; _weaponItems = primaryWeaponItems player };
+					case (ctrlEnabled (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON))): { _weapon = secondaryWeapon player; _weaponItems = secondaryWeaponItems player };
+					case (ctrlEnabled (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + IDC_RSCDISPLAYARSENAL_TAB_HANDGUN))): { _weapon = handgunWeapon player; _weaponItems = handgunItems player };
+				};
+				private _accIndex = [IDC_RSCDISPLAYARSENAL_TAB_ITEMMUZZLE, IDC_RSCDISPLAYARSENAL_TAB_ITEMACC, IDC_RSCDISPLAYARSENAL_TAB_ITEMOPTIC, IDC_RSCDISPLAYARSENAL_TAB_ITEMBIPOD] find _index;
+				private _compatibleItems = compatibleItems _weapon apply { toLower _x };
+				["Right", _index, _weaponItems param [_accIndex, ""], { toLower _this in _compatibleItems }] call _fnc_fill;
+			};
+			case (_index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG, IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, IDC_RSCDISPLAYARSENAL_TAB_CARGOTHROW, IDC_RSCDISPLAYARSENAL_TAB_CARGOPUT, IDC_RSCDISPLAYARSENAL_TAB_CARGOMISC]): {
+				private _ctrlList = _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + _index);
+				private _row = lnbCurSelRow _ctrlList;
+				private _item = if (_row < 0) then { "" } else { (call compile (_ctrlList lnbData [_row, 0])) select 0 };
+				["Right", _index, [_item] call _fnc_preferredVariant] call _fnc_fill;
+			};
+			default { ["Right", _index, ""] call _fnc_fill };
+		};
+	};
+
+	///////////////////////////////////////////////////////////////////////////////////////////
+	case "VariantSelected": {
+		_this params ["_display", "_side", "_variant"];
+		if (_variant isEqualTo "") exitWith {};
+		(call _fnc_variantPrefs) set [_variant call A3A_fnc_itemVariantRep, _variant];
+		if ((UINamespace getVariable ["jn_type",""]) isEqualTo "vehicleArsenal") exitWith {};		// only changes what gets loaded
+
+		private _tabs = [[IDCS_RIGHT], [IDCS_LEFT]] select (_side == "Left");
+		private _i = _tabs findIf { ctrlEnabled (_display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + _x)) };
+		if (_i == -1) exitWith {};
+		private _index = _tabs select _i;
+
+		// For cargo rows the choice only affects what gets added
+		if (_index in [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG, IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL, IDC_RSCDISPLAYARSENAL_TAB_CARGOTHROW, IDC_RSCDISPLAYARSENAL_TAB_CARGOPUT, IDC_RSCDISPLAYARSENAL_TAB_CARGOMISC]) exitWith {};
+		["SelectItem", [_display, _display displayctrl (IDC_RSCDISPLAYARSENAL_LIST + _index), _index, _variant]] call jn_fnc_arsenal;
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -2638,6 +2864,12 @@ switch _mode do {
 		_display = _this select 0;
 
 		["RestoreTFAR"] call jn_fnc_arsenal;
+
+		// Remember chosen variants between sessions
+		if (!isNil "jna_variantPrefs") then {
+			profileNamespace setVariable ["A3A_arsenalVariantPrefs", keys jna_variantPrefs apply { [_x, jna_variantPrefs get _x] }];
+			saveProfileNamespace;
+		};
 
 		//remove missing item message
 		titleText["", "PLAIN"];

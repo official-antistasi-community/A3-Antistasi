@@ -7,6 +7,9 @@
 	Parameter(s):
 	VEHICLE with a inventory
 
+	If jna_cargoVariants is a hashmap, the classes behind each arsenal entry are counted into it:
+	arsenal class -> hashmap of [variant class, amount]
+
 	Returns:
 	ARRAY of arrays of arrays of items and amounts
 */
@@ -29,7 +32,16 @@ _addToArray = {
 	_amount = _this select 3;
 
 	if!(_index == -1 || _item isEqualTo ""|| _amount == 0)then{
+		private _rawItem = _item;
+		_item = [_item] call jn_fnc_arsenal_baseItem;
 		_array set [_index,[_array select _index,[_item,_amount]] call jn_fnc_arsenal_addToArray];
+
+		// Optionally record which variants are behind each arsenal entry (used by the vehicle arsenal)
+		if (!isNil "jna_cargoVariants") then {
+			if !(_rawItem in ([_item] call A3A_fnc_itemVariants)) then { _rawItem = _item };
+			private _counts = jna_cargoVariants getOrDefaultCall [_item, {createHashMap}, true];
+			_counts set [_rawItem, (_counts getOrDefault [_rawItem, 0]) + _amount];
+		};
 	};
 };
 

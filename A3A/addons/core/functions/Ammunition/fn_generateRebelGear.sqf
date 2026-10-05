@@ -257,6 +257,16 @@ if (_midCount < ITEM_MAX*2) then {
     };
 };
 
+// Attachment lists are intersected with weapon compatibility, so include every variant of each
+private _fnc_withVariants = {
+    private _list = [];
+    { _list append ([_x] call A3A_fnc_itemVariants) } forEach _this;
+    _list;
+};
+_opticClose = _opticClose call _fnc_withVariants;
+_opticMid = _opticMid call _fnc_withVariants;
+_opticLong = _opticLong call _fnc_withVariants;
+
 _rebelGear set ["OpticsClose", _opticClose];
 _rebelGear set ["OpticsMid", _opticMid];
 _rebelGear set ["OpticsLong", _opticLong];
@@ -271,7 +281,7 @@ private _lights = [];
     if ("LightAttachments" in _categories) then { _lights pushBack _class };
 } forEach (jna_dataList select IDC_RSCDISPLAYARSENAL_TAB_ITEMACC);
 
-_rebelGear set ["LightAttachments", _lights];
+_rebelGear set ["LightAttachments", _lights call _fnc_withVariants];
 
 // Update everything while unscheduled so that version numbers match
 isNil {
