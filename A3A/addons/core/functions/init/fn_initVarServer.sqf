@@ -163,6 +163,7 @@ A3A_destroyedBuildings = [];		// server side only now
 testingTimerIsActive = false;
 
 A3A_tasksData = [];
+A3A_taskCooldowns = createHashMap;			// task type -> serverTime when a finished task stops blocking that type
 
 A3A_buildingsToSave = [];
 
