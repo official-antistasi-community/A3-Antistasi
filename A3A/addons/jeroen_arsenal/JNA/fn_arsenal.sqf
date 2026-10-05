@@ -2572,11 +2572,11 @@ switch _mode do {
 
 			//--- Save
 			case (_key == DIK_S): {
-				if (_ctrl && (vehicle player isEqualTo player)) then {['buttonSave',[_display]] call jn_fnc_arsenal;};
+				if (_ctrl && (vehicle player isEqualTo player) && {isNull (missionNamespace getVariable ['jnva_container', objNull])}) then {['buttonSave',[_display]] call jn_fnc_arsenal;};
 			};
 			//--- Open
 			case (_key == DIK_O): {
-				if (_ctrl && (vehicle player isEqualTo player)) then {['buttonLoad',[_display]] call jn_fnc_arsenal;};
+				if (_ctrl && (vehicle player isEqualTo player) && {isNull (missionNamespace getVariable ['jnva_container', objNull])}) then {['buttonLoad',[_display]] call jn_fnc_arsenal;};
 			};
 
 			//--- Vision mode

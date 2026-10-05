@@ -93,8 +93,7 @@ if(hasInterface)then{
 
             _type = UINamespace getVariable ["jn_type",""];
             if(_type isEqualTo "arsenal")then{
-                _veh = vehicle player;
-                if((_veh != player) && driver _veh == player)then{
+                if(!isNull (missionNamespace getVariable ["jnva_container", objNull]))then{
                     ["CustomInit", [uiNamespace getVariable "arsanalDisplay"]] call jn_fnc_vehicleArsenal;
                     UINamespace setVariable ["jn_type","vehicleArsenal"];
                 }else{

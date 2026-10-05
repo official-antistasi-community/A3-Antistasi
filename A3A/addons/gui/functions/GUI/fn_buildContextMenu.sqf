@@ -85,6 +85,10 @@ switch (true) do {
                 [["garage", _contextHoriz1Button], ["RRR", _contextSingle3Button], ["airSupport", _contextSingle4Button]];
             };
             _containerTitle = localize "STR_antistasi_dialogs_main_context_title_vehicle";
+            // Crates that can be filled from the arsenal (loot box, ACE medical crate)
+            case ("arsenal" in ((A3A_utilityItemHM getOrDefault [typeOf _vehicle, []]) param [4, []])): {
+                [["garage", _contextHoriz1Button], ["vehArsenal", _contextHoriz2Button]];
+            };
             case ((_vehType != 7) && {(_vehicle isNil "markerX")}): {
                 [["garage", _contextHoriz1Button], ["RRR", _contextSingle3Button], ["addToGarrison", _contextSingle4Button]];
             };
@@ -134,6 +138,15 @@ switch (true) do {
                     _button ctrlSetText "REARM";
                     _button ctrlAddEventHandler ["ButtonClick", {closeDialog 0; createDialog "A3A_vehServiceDialog"}];
                     _button ctrlSetTooltip "Rearm this vehicle";
+                    _button ctrlEnable true;
+                };
+                case ("vehArsenal"): {
+                    _button ctrlSetText localize "STR_antistasi_dialogs_main_context_HQ_vehArsenal";
+                    if (_vehicle distance markerPos "Synd_HQ" > 75) exitWith {
+                        _button ctrlSetTooltip localize "STR_antistasi_dialogs_main_context_vehArsenal_awayHQ";
+                    };
+                    _button setVariable ["vehicle", _vehicle];
+                    _button ctrlAddEventHandler ["ButtonClick", {closeDialog 0; [nil, nil, nil, (_this#0) getVariable "vehicle"] call JN_fnc_arsenal_handleAction}];
                     _button ctrlEnable true;
                 };
                 case ("airSupport"): {

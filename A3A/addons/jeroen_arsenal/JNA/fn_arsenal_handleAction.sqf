@@ -9,6 +9,11 @@
 **/
 
 if (!arsenalInit) exitWith {};
+
+// Vehicle arsenal target: a container passed as the action argument (eg. a crate at HQ), or the vehicle the player is driving
+jnva_container = _this param [3, objNull];
+if !(jnva_container isEqualType objNull) then { jnva_container = objNull };
+if (isNull jnva_container && {vehicle player != player && {driver vehicle player == player}}) then { jnva_container = vehicle player };
 //start loading screen
 ["jn_fnc_arsenal", "Loading Nutz™ Arsenal"] call bis_fnc_startloadingscreen;
 [] spawn {
@@ -60,4 +65,4 @@ missionNamespace setVariable ["jna_containerCargo_init", _attachmentsContainers]
 UINamespace setVariable ["jn_type","arsenal"];
 
 //request server to open arsenal
-[clientOwner] remoteExecCall ["jn_fnc_arsenal_requestOpen",2];
+[clientOwner, jnva_container] remoteExecCall ["jn_fnc_arsenal_requestOpen",2];

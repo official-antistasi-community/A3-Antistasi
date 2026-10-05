@@ -133,12 +133,15 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "CustomInit":{
 		_display = _this select 0;
-		_veh = vehicle player;
+		_veh = jnva_container;
 
 		diag_log ["CustomInit VehicleArsenal",_display];
 
-		//save crap in array
-		jnva_loadout = ((vehicle player) call jn_fnc_arsenal_cargoToArray);
+		//save crap in array, remembering which variants were loaded
+		jna_cargoVariants = createHashMap;
+		jnva_loadout = ((jnva_container) call jn_fnc_arsenal_cargoToArray);
+		jnva_variants = jna_cargoVariants;
+		jna_cargoVariants = nil;
 		jnva_loadout_mass = ["getMass"] call jn_fnc_vehicleArsenal;
        	clearMagazineCargoGlobal _veh;
         clearItemCargoGlobal _veh;
@@ -151,12 +154,20 @@ switch _mode do {
 
 		['showMessage',[_display, localize "STR_A3A_JNA_vehicle_title"]] call jn_fnc_arsenal;
 		["jn_fnc_arsenal"] call BIS_fnc_endLoadingScreen;
+
+		// Close if the container goes away (garaged, deleted, destroyed). Closing returns its cargo to the arsenal
+		[_display, _veh] spawn {
+			disableSerialization;
+			params ["_display", "_veh"];
+			waitUntil { sleep 0.5; isNull _display || {!alive _veh} };
+			if (!isNull _display) then { _display closeDisplay 2 };
+		};
 	};
 
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "getMass":{
 		_massTotal = 0;
-		_loadout = ((vehicle player) call jn_fnc_arsenal_cargoToArray);
+		_loadout = ((jnva_container) call jn_fnc_arsenal_cargoToArray);
 		{
 			_index = _forEachIndex;
 			{
@@ -355,7 +366,7 @@ switch _mode do {
 		_index = _this select 1;
 		_ctrlList = ctrlnull;
 		jnca_tab_selected = _index;
-		_veh  = vehicle player;
+		_veh  = jnva_container;
 		_isSelectedLeft = _index in [IDCS_LEFT];
 		_listSelected = [IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG,IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL] select _isSelectedLeft;
 
@@ -524,10 +535,10 @@ switch _mode do {
 		_index = _this select 2;
 		_center = (missionnamespace getvariable ["BIS_fnc_arsenal_center",player]);
 		_type = (ctrltype _ctrlList == 102);
-		_veh = vehicle player;
+		_veh = jnva_container;
 
 
-		_maximumLoad = getNumber(configfile >> "CfgVehicles" >> (typeOf _veh) >> "maximumLoad");
+		_maximumLoad = maxLoad _veh;
 
 		_ctrlLoadCargo = _display displayctrl IDC_RSCDISPLAYARSENAL_LOADCARGO;
 		_load = _maximumLoad * (1 - progressposition _ctrlLoadCargo);
@@ -594,7 +605,7 @@ switch _mode do {
 		_display = _this select 0;
 		_add = _this select 1;
 
-		_veh = vehicle player;
+		_veh = jnva_container;
 		_index = jnca_tab_selected;
 
 		if(_index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG)then{_index = IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL};
@@ -612,11 +623,11 @@ switch _mode do {
 		_load = 0;
 		_items = [];
 
-		_container = vehicle player;
+		_container = jnva_container;
 
 		_ctrlLoadCargo = _display displayctrl IDC_RSCDISPLAYARSENAL_LOADCARGO;
 		//save old weight
-		_max = getNumber(configfile >> "CfgVehicles" >> (typeOf _veh) >> "maximumLoad");
+		_max = maxLoad _veh;
 
 		_amountOld = parseNumber (_ctrlList lnbtext [_lbcursel,2]);
 		//remove or add
@@ -835,7 +846,8 @@ switch _mode do {
 		jnva_loadout_mass = 0;
 		diag_log jnva_loadout;
         jnva_loadout remoteExecCall ["jn_fnc_arsenal_addItem",2];
-       	jnva_loadout = ((vehicle player) call jn_fnc_arsenal_cargoToArray);
+       	jnva_loadout = ((jnva_container) call jn_fnc_arsenal_cargoToArray);
+       	jnva_variants = createHashMap;
        	diag_log jnva_loadout;
 
        	_list = missionnamespace getVariable ["jnca_tab_selected",-1];
@@ -848,8 +860,16 @@ switch _mode do {
 	///////////////////////////////////////////////////////////////////////////////////////////
 	case "Close": {
 		jnva_loadout_mass = nil;
-		_veh = vehicle player;
+		_veh = jnva_container;
 		jnca_tab_selected = nil;
+		jnva_container = objNull;
+		// Container gone (deleted, garaged) while the arsenal was open: return the items instead of losing them
+		if (isNull _veh) exitWith {
+			titleText [localize "STR_A3A_JNA_vehicle_gone", "PLAIN"];
+			jnva_loadout remoteExecCall ["jn_fnc_arsenal_addItem",2];
+			jnva_loadout = nil;
+			jnva_variants = nil;
+		};
 		//weapons
 		{
 			_list = jnva_loadout select _x;
@@ -895,14 +915,16 @@ switch _mode do {
 		{
 			_list = jnva_loadout select _x;
 			{
-				_item = _x select 0;
-				_amount = _x select 1;
-				_count = getNumber (configfile >> "CfgMagazines" >> _item >> "count");
+				{
+					_x params ["_item", "_amount"];
+					_count = getNumber (configfile >> "CfgMagazines" >> _item >> "count") max 1;
 
-				while{_amount>0}do{
-					_veh addMagazineAmmoCargo [_item,1,_amount];
-					_amount = _amount - _count;
-				};
+					// Full mags work on remote containers (eg. crates). The partial one is added where the container is local
+					private _full = floor (_amount / _count);
+					if (_full > 0) then { _veh addMagazineCargoGlobal [_item, _full] };
+					private _rest = _amount - _full * _count;
+					if (_rest > 0) then { [_veh, [_item, 1, _rest]] remoteExecCall ["addMagazineAmmoCargo", _veh] };
+				} forEach (_x call _fnc_splitVariants);
 			} forEach _list;
 		} forEach [
 			IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL,
