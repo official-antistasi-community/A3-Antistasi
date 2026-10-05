@@ -36,8 +36,9 @@ if (_change > 0) then {
 		private _antSide = sidesX getVariable (A3A_antennaMap get netId _antenna);
 		_change = _change * ([1, 2] select (_antSide == teamPlayer));
 	};
-	private _stationPos = A3A_garrison get _site getOrDefault ["policeStation", false];
-	if (_stationPos isEqualTo []) then { _change = _change * 1.5 };
+	// policeStation: position = intact, false = destroyed, missing = town never had one
+	private _stationPos = A3A_garrison get _city getOrDefault ["policeStation", 0];
+	if (_stationPos isEqualTo false) then { _change = _change * 1.5 };
 };
 
 Trace_2("City %1 change %2", _city, _change);
