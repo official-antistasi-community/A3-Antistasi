@@ -13,9 +13,26 @@ FIX_LINE_NUMBERS()
 
 params ["_className", "_itemType"];
 
+// RHS, CBA (CUP, ACE NLAW) and 3CB each flag disposable launchers in their own way
+private _fnc_isDisposable = {
+    params ["_config"];
+    getNumber (_config >> "rhs_disposable") == 1
+    or {getArray (_config >> "magazines") param [0, ""] == "CBA_fakeLauncherMagazine"}
+    or {getText (_config >> "UK3CB_used_launcher") != ""}
+    or {getText (_config >> "ace_UsedTube") != ""}
+};
+
 // First check if the item has hardcoded categories
 private _categories = A3A_categoryOverrides getVariable [_className, []];
-if (count _categories > 0) exitWith { _categories };
+if (count _categories > 0) exitWith {
+    // Overrides fix the base category, but whether a launcher is disposable can depend on other mods (eg. ACE NLAW)
+    if (_categories#0 in ["RocketLaunchers", "MissileLaunchers"] and {!("Disposable" in _categories)}
+        and {(configFile >> "CfgWeapons" >> _className) call _fnc_isDisposable}) then {
+        _categories = _categories + ["Disposable"];
+        A3A_categoryOverrides setVariable [_className, _categories];
+    };
+    _categories
+};
 
 if (isNil "_itemType") then { _itemType = _className call A3A_fnc_itemType };
 
@@ -150,7 +167,7 @@ call {
     if (_baseCategory == "RocketLaunchers") exitWith {
         _categories pushBack "AT";
         private _config = configFile >> "CfgWeapons" >> _classname; 
-        if (getNumber (_config >> "rhs_disposable") == 1 or {getArray (_config >> "magazines") # 0 == "CBA_fakeLauncherMagazine"}) then {
+        if (_config call _fnc_isDisposable) then {
             // Need to consider scope 1 stuff in case it ends up in arsenal, or this function is used on equipped/dropped items
             if (getNumber (_config >> "scope") == 1) then { _categories set [0, "UsedLaunchers"] };
             _categories pushBack "Disposable";
@@ -159,8 +176,8 @@ call {
 
     if (_baseCategory == "MissileLaunchers") exitWith {
         private _config = configFile >> "CfgWeapons" >> _classname; 
-        private _mainmag = getArray (_config >> "Magazines") # 0;
-        if (getNumber (_config >> "rhs_disposable") == 1 or _mainmag == "CBA_fakeLauncherMagazine") then {
+        private _mainmag = getArray (_config >> "Magazines") param [0, ""];
+        if (_config call _fnc_isDisposable) then {
             _categories pushBack "Disposable";
             if (getNumber (_config >> "scope") == 1) exitWith { _categories set [0, "UsedLaunchers"] };
             if (_mainmag == "CBA_fakeLauncherMagazine" and !isNil "cba_disposable_normalLaunchers" and {typeName cba_disposable_normalLaunchers == "HASHMAP"}) then {
