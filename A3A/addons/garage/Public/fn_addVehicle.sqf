@@ -59,11 +59,6 @@ private _utilityRefund = {
     // canGarage true means it's in the utilityItem lists
     private _flags = (A3A_utilityItemHM get typeof _object) # 4;
 
-    if ("cmmdr" in _flags && _player isNotEqualTo theBoss) exitWith {
-        ["STR_HR_GRG_Feedback_addVehicle_commander_only"] remoteExec ["HR_GRG_fnc_Hint", _client];
-        false;
-    };
-
     private _toRefund = 0;
     private _feedBack = "STR_HR_GRG_Feedback_addVehicle_Item_Stored";
     private _itemPrice = _object getVariable ['A3A_itemPrice', 0];
@@ -84,6 +79,12 @@ private _utilityRefund = {
         default {
             _toRefund = _itemPrice;
         };
+    };
+
+    // Anyone can clear away a commander-only item that's worth nothing (eg. an empty fuel tank)
+    if ("cmmdr" in _flags && {_player isNotEqualTo theBoss} && {_toRefund > 0}) exitWith {
+        ["STR_HR_GRG_Feedback_addVehicle_commander_only"] remoteExec ["HR_GRG_fnc_Hint", _client];
+        false;
     };
 
     deleteVehicle _object;
