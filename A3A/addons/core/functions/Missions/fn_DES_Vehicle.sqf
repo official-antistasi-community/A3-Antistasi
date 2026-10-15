@@ -80,6 +80,12 @@ if (spawner getVariable _markerX == 0) then
 		[_sideX, 5, 60] remoteExec ["A3A_fnc_addAggression", 2];
 		[400*_bonus, _sideX] remoteExec ["A3A_fnc_timingCA",2];
 		[30*_bonus, false, _veh, 500] call A3A_tasks_fnc_rewardPlayers;     // any players within 500m of vehicle
+		}
+	else
+		{
+		[_taskId, "DES", "FAILED"] call A3A_fnc_taskSetState;
+		[-200, _sideX] remoteExec ["A3A_fnc_timingCA",2];
+		[-10,theBoss] call A3A_fnc_playerScoreAdd;
 		};
 	}
 else

@@ -59,7 +59,7 @@ _task set ["_taskId", _taskId];
 // Function to be run passenger-local on completion
 _task set ["_fnc_getOut", {
     params ["_passenger", "_destPos"];
-    terminate (_unit getVariable ["A3A_AIScriptHandle", scriptNull]);
+    terminate (_passenger getVariable ["A3A_AIScriptHandle", scriptNull]);
     unassignVehicle _passenger;
     moveOut _passenger;
     _passenger doMove _destPos;
