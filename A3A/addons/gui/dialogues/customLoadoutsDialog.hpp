@@ -130,6 +130,20 @@ class A3A_CustomLoadoutsDialog {
                     idc = A3A_IDC_CUSLOAD_HEADGEAR;
                     y = 58*GRID_H;
                 };
+                class ShowVariantsText : PriWeaponText {
+                    text = $STR_antistasi_dialogs_custom_loadouts_showVariants;
+                    tooltip = $STR_antistasi_dialogs_custom_loadouts_showVariants_tooltip;
+                    y = 64*GRID_H;
+                };
+                class ShowVariantsCheckBox : A3A_CheckBox {
+                    idc = A3A_IDC_CUSLOAD_SHOWVARIANTS;
+                    tooltip = $STR_antistasi_dialogs_custom_loadouts_showVariants_tooltip;
+                    x = 76*GRID_W;
+                    y = 64.5*GRID_H;
+                    w = 4*GRID_W;
+                    h = 4*GRID_H;
+                    onCheckedChanged = "['toggleVariants', [_this#1 == 1]] call A3A_GUI_fnc_customLoadoutsDialog";
+                };
 
                 class CloseButton : A3A_Button {
                     idc = A3A_IDC_CUSLOAD_CLOSEBUTTON;

@@ -67,6 +67,7 @@ private _categoriesToPublish = createHashMap;
 		if (unlockedUnlimitedAmmo == 1 && ("Weapons" in _categories)) then {
 			private _weaponMagazine = (getArray (configFile / "CfgWeapons" / _item / "magazines") select 0);
 			if (!isNil "_weaponMagazine") then {
+				_weaponMagazine = _weaponMagazine call A3A_fnc_itemVariantRep;
 				if (not(_weaponMagazine in unlockedMagazines)) then {
 					_updated = format ["%1%2<br/>",_updated,getText (configFile >> "CfgMagazines" >> _weaponMagazine >> "displayName")];
 					private _categories = [_weaponMagazine, true] call A3A_fnc_unlockEquipment;

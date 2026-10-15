@@ -19,13 +19,16 @@ private _fnc_roundPrice = {
 private _fnc_generateList = {
     params ["_cfgType", "_minCount", "_maxStock", "_allItems"];
 
+    // One entry per group of functional variants, so recolours don't crowd out other items
+    _allItems = keys (createHashMapFromArray (_allItems apply { [_x call A3A_fnc_itemVariantRep, 0] }));
+
     private _itemPriceList = createHashMap;
     private _itemCount = _minCount + round (random 0.2 * count _allItems);
     while {_itemCount > 0 and _allItems isNotEqualTo []} do {
         private _item = _allItems deleteAt floor random count _allItems;
         private _price = [_item, _cfgType] call A3A_GUI_fnc_calculateItemPrice;
         private _stockGS = ceil (_maxStock * (0.3 + random 0.7));
-        private _stockArsenal = _arsenalCountHM getOrDefault [_item, 0];
+        private _stockArsenal = _arsenalCountHM getOrDefault [_item call A3A_fnc_itemVariantRep, 0];
         _itemPriceList set [_item, [_price call _fnc_roundPrice, _stockGS, _stockArsenal]];
         _itemCount = _itemCount - 1;
     };
@@ -70,9 +73,14 @@ if (_minCount >= 100) then {
         private _mag = if (random 1 < 0.5) then {_allMags#0} else {selectRandom _allMags};      // first-mag bias
         if !(_mag in allMagazines) then {continue};     // use Antistasi blacklisting? kinda expensive but whatever
 
+        // One entry per group of functional variants, and none that are already unlimited
+        _mag = _mag call A3A_fnc_itemVariantRep;
+        if (_mag in _magsPrices) then {continue};
+        private _stockArsenal = _arsenalCountHM getOrDefault [_mag, 0];
+        if (_stockArsenal isEqualTo -1) then {continue};
+
         private _price = [_mag, "mag"] call A3A_GUI_fnc_calculateItemPrice;
         private _stockGS = ceil (15 + random 15);
-        private _stockArsenal = _arsenalCountHM getOrDefault [_mag, 0];
         private _capacity = getNumber (configFile >> "CfgMagazines" >> _mag >> "count") max 1;
         if (_stockArsenal isNotEqualTo -1) then { _stockArsenal = _stockArsenal / _capacity };
         _magsPrices set [_mag, [_price call _fnc_roundPrice, _stockGS, _stockArsenal]];

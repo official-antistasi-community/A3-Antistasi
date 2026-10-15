@@ -43,16 +43,51 @@ if (isServer) then {
 	["minorSites"] call A3A_fnc_getStatVariable;
 	//===========================================================================
 
+	// Merge arsenal entries saved under other classes of the same item (functional variants,
+	// preset weapons, radio instances). Variant groups can change with the modset, so always done.
+	{
+		private _merged = createHashMap;
+		{
+			_x params ["_class", "_amount"];
+			private _arsenalClass = [_class] call jn_fnc_arsenal_baseItem;
+			private _old = _merged get _arsenalClass;
+			if (isNil "_old") then { _merged set [_arsenalClass, _amount]; continue };
+			_merged set [_arsenalClass, [_old + _amount, -1] select (_old == -1 or _amount == -1)];
+		} forEach _x;
+		jna_dataList set [_forEachIndex, keys _merged apply { [_x, _merged get _x] }];
+	} forEach jna_dataList;
+
+	// Same for per-item guest limits. Keep the limit already set on the arsenal class, if any
+	{
+		private _arsenalClass = [_x] call jn_fnc_arsenal_baseItem;
+		if (_arsenalClass == _x) then { continue };
+		A3A_arsenalLimits deleteAt _x;
+		if !(_arsenalClass in A3A_arsenalLimits) then { A3A_arsenalLimits set [_arsenalClass, _y] };
+	} forEach +A3A_arsenalLimits;
+	publicVariable "A3A_arsenalLimits";
+
 	//RESTORE THE STATE OF THE 'UNLOCKED' VARIABLES USING JNA_DATALIST
-	private _categoriesToPublish = createHashMap;
+	// Same as A3A_fnc_unlockEquipment (without adding to the arsenal), but collected in hashmaps first:
+	// with every variant unlocked, pushBackUnique into the large arrays gets slow
+	private _categoriesToPublish = createHashMap;          // category -> hashmap of unlocked classes
 	{
 		private _arsenalTabDataArray = _x;
 		private _unlockedItemsInTab = _arsenalTabDataArray select { _x select 1 == -1 } apply { _x select 0 };
 		{
-			private _categories = [_x, true, true] call A3A_fnc_unlockEquipment;
-			_categoriesToPublish insert [true, _categories, []];
+			{
+				private _variant = _x;
+				{
+					if (isNil { missionNamespace getVariable ("unlocked" + _x) }) then { continue };
+					_categoriesToPublish getOrDefaultCall [_x, {createHashMap}, true] set [_variant, true];
+				} forEach (_variant call A3A_fnc_equipmentClassToCategories);
+			} forEach ([_x] call A3A_fnc_itemVariants);
 		} forEach _unlockedItemsInTab;
 	} forEach jna_dataList;
+	{
+		private _unlocked = missionNamespace getVariable ("unlocked" + _x);
+		_y insert [true, _unlocked, []];
+		missionNamespace setVariable ["unlocked" + _x, keys _y];
+	} forEach _categoriesToPublish;
 
 	Info_1("Categories to publish: %1", keys _categoriesToPublish);
 

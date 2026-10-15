@@ -5101,6 +5101,15 @@
       </Key>
     </Container>
     <Container name="custom_loadouts">
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_anyVariant">
+        <Original>%1 (any variant)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_showVariants">
+        <Original>Show variants</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_custom_loadouts_showVariants_tooltip">
+        <Original>List every colour/camo variant, to pick an exact one. Otherwise units get a random variant of the chosen item.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_custom_loadouts_title">
         <Original>Custom AI Loadouts</Original>
         <Czech>Custom AI Loadouts</Original>
@@ -5221,6 +5230,9 @@
         <Original>Bipods</Original>
         <Czech>Dvojnožky</Czech>
         <Spanish>Bipodes</Spanish>
+      </Key>
+      <Key ID="STR_antistasi_gun_shop_add_to_cart_button_tooltip">
+        <Original>Click: add 1 (Shift: 5, Ctrl: 10, both: 25)&#10;Right-click: add enough to unlock, or as many as possible</Original>
       </Key>
       <Key ID="STR_antistasi_gun_shop_add_to_cart_button_text">
         <Original>Add to Cart</Original>

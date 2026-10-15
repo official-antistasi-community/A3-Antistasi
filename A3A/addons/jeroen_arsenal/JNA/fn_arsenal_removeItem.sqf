@@ -22,6 +22,9 @@ if(typeName (_this select 0) isEqualTo "SCALAR")then{//[_index, _item] or [_inde
 			if(_index == -1)exitWith{["ERROR in additemarsenal: %1", _this] call BIS_fnc_error};
 			if(_index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG)then{_index = IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL};
 
+			// Variants are stored under their representative
+			_item = _item call A3A_fnc_itemVariantRep;
+
 			//update
 			private _playersInArsenal = +(server getVariable ["jna_playersInArsenal",[]]);
 			if!(0 in _playersInArsenal)then{_playersInArsenal pushBackUnique 2;};

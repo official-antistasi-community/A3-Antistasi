@@ -7,6 +7,8 @@ _arrayTaken = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]
 _arrayMissing = [];
 _arrayReplaced = [];
 
+// Arsenal arrays are keyed by the arsenal class (base weapon, variant representative etc.)
+// Saved loadouts keep the exact variant, which is what gets equipped.
 _addToArray = {
 	private ["_array","_index","_item","_amount"];
 	_array = _this select 0;
@@ -15,6 +17,7 @@ _addToArray = {
 	_amount = _this select 3;
 
 	if!(_index == -1 || _item isEqualTo ""||_amount == 0)then{
+		_item = [_item] call jn_fnc_arsenal_baseItem;
 		_array set [_index,[_array select _index,[_item,_amount]] call jn_fnc_arsenal_addToArray];
 	};
 };
@@ -27,8 +30,15 @@ _removeFromArray = {
 	_amount = _this select 3;
 
 	if!(_index == -1 || _item isEqualTo ""|| _amount == 0)then{
+		_item = [_item] call jn_fnc_arsenal_baseItem;
 		_array set [_index,[_array select _index,[_item,_amount]] call jn_fnc_arsenal_removeFromArray];
 	};
+};
+
+// Arsenal count of an item, looked up by its arsenal class
+_itemCount = {
+	params ["_array", "_item"];
+	[_array, [_item] call jn_fnc_arsenal_baseItem] call jn_fnc_arsenal_itemCount;
 };
 
 _addArrays = {
@@ -209,14 +219,14 @@ _assignedItems = ((_inventory select 9) + [_inventory select 3] + [_inventory se
 		_isBino = _item call _isItemBino;
 
 		call {
-			if ([_itemCounts select _index, _item] call jn_fnc_arsenal_itemCount == -1) exitWith {
+			if ([_itemCounts select _index, _item] call _itemCount == -1) exitWith {
 				if (_isBino) then {
 					player addWeapon _item;
 				} else {
 					player linkItem _item;
 				};
 			};
-			if ([_availableItems select _index, _item] call jn_fnc_arsenal_itemCount > 0) then {
+			if ([_availableItems select _index, _item] call _itemCount > 0) then {
 				if (_isBino) then {
 					player addWeapon _item;
 				} else {
@@ -238,7 +248,7 @@ if (binocular player != "" && count (binocularMagazine player) == 0) then {
 		_item = _x;
 		_index = _item call jn_fnc_arsenal_itemType;
 
-		if ([_itemCounts select _index, _item] call jn_fnc_arsenal_itemCount == -1) exitWith {
+		if ([_itemCounts select _index, _item] call _itemCount == -1) exitWith {
 			player addBinocularItem _item;
 		};
 	} forEach (getArray (configFile >> "CfgWeapons" >> (binocular player) >> "magazines"));
@@ -263,11 +273,11 @@ _weapons = [_inventory select 6,_inventory select 7,_inventory select 8];
 
 		//add ammo to backpack, which need to be loaded in the gun.
 		call {
-			if ([_itemCounts select _indexMag, _itemMag] call jn_fnc_arsenal_itemCount == -1) exitWith {
+			if ([_itemCounts select _indexMag, _itemMag] call _itemCount == -1) exitWith {
 				player addMagazine [_itemMag, _amountMag];
 			};
 
-			_amountMagAvailable = [_availableItems select _indexMag, _itemMag] call jn_fnc_arsenal_itemCount;
+			_amountMagAvailable = [_availableItems select _indexMag, _itemMag] call _itemCount;
 			if (_amountMagAvailable > 0) then {
 				if (_amountMagAvailable < _amountMag) then {
 					_arrayMissing = [_arrayMissing,[_itemMag,_amountMag]] call jn_fnc_arsenal_addToArray;
@@ -283,11 +293,11 @@ _weapons = [_inventory select 6,_inventory select 7,_inventory select 8];
 
 		//adding the gun
 		call {
-			if ((_index != -1) AND ([_itemCounts select _index, _item] call jn_fnc_arsenal_itemCount == -1)) exitWith {
+			if ((_index != -1) AND ([_itemCounts select _index, _item] call _itemCount == -1)) exitWith {
 				player addWeapon _item;
 			};
 
-			if ((_index != -1) AND {[_availableItems select _index, _item] call jn_fnc_arsenal_itemCount > 0}) then {
+			if ((_index != -1) AND {[_availableItems select _index, _item] call _itemCount > 0}) then {
 				player addWeapon _item;
 				[_arrayTaken,_index,_item,_amount] call _addToArray;
 				[_availableItems,_index,_item,_amount] call _removeFromArray;
@@ -308,7 +318,7 @@ _weapons = [_inventory select 6,_inventory select 7,_inventory select 8];
 					diag_log "_itemCounts";
 					diag_log [_itemCounts];
 					diag_log [_indexAcc];
-					if ((_indexAcc != -1) AND ([_itemCounts select _indexAcc, _itemAcc] call jn_fnc_arsenal_itemCount == -1)) exitWith {
+					if ((_indexAcc != -1) AND ([_itemCounts select _indexAcc, _itemAcc] call _itemCount == -1)) exitWith {
 						switch _index do{
 							case IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON:{player addPrimaryWeaponItem _itemAcc;};
 							case IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON:{player addSecondaryWeaponItem _itemAcc;};
@@ -316,7 +326,7 @@ _weapons = [_inventory select 6,_inventory select 7,_inventory select 8];
 						};
 					};
 
-					if ((_indexAcc != -1) AND {[_availableItems select _indexAcc, _itemAcc] call jn_fnc_arsenal_itemCount > 0}) then {
+					if ((_indexAcc != -1) AND {[_availableItems select _indexAcc, _itemAcc] call _itemCount > 0}) then {
 						switch _index do{
 							case IDC_RSCDISPLAYARSENAL_TAB_PRIMARYWEAPON:{player addPrimaryWeaponItem _itemAcc;};
 							case IDC_RSCDISPLAYARSENAL_TAB_SECONDARYWEAPON:{player addSecondaryWeaponItem _itemAcc;};
@@ -364,11 +374,11 @@ private _addContainerFuncs = [
 		_addContainerFunc = (_addContainerFuncs select _foreachindex);
 		
 		call {
-			if ([_itemCounts select _index, _item] call jn_fnc_arsenal_itemCount == -1) exitWith {
+			if ([_itemCounts select _index, _item] call _itemCount == -1) exitWith {
 				[_item] call _addContainerFunc;
 			};
 
-			if ([_availableItems select _index, _item] call jn_fnc_arsenal_itemCount > 0) then {
+			if ([_availableItems select _index, _item] call _itemCount > 0) then {
 				[_item] call _addContainerFunc;
 				[_arrayTaken,_index,_item,_amount] call _addToArray;
 				[_availableItems,_index,_item,_amount] call _removeFromArray;
@@ -409,11 +419,11 @@ _addItemToContainer = {
 			_amount = 1; // we will never know the ammo count in the magazines anymore :c
 			_arrayMissing = [_arrayMissing,[_item,_amount]] call jn_fnc_arsenal_addToArray;
 		} else {
-			_amountAvailable = [_availableItems select _index, _item] call jn_fnc_arsenal_itemCount;
+			_amountAvailable = [_availableItems select _index, _item] call _itemCount;
 			if (_index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL) then {
 				_amount = getNumber (configfile >> "CfgMagazines" >> _item >> "count");
 				call {
-					if ([_itemCounts select _index, _item] call jn_fnc_arsenal_itemCount == -1) exitWith {
+					if ([_itemCounts select _index, _item] call _itemCount == -1) exitWith {
 						_container addMagazineAmmoCargo  [_item,1, _amount];
 					};
 
@@ -429,7 +439,7 @@ _addItemToContainer = {
 			} else {
 				_amount = 1;
 				call {
-					if ([_itemCounts select _index, _item] call jn_fnc_arsenal_itemCount == -1) exitWith {
+					if ([_itemCounts select _index, _item] call _itemCount == -1) exitWith {
 						[_containerIndex, _item] call _addItemToContainer;
 					};
 

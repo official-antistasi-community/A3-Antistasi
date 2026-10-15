@@ -80,6 +80,7 @@ class CfgFunctions
             class allMagazines {};
             class ammunitionTransfer {};
             class arsenalManage {};
+            class buildItemVariants {};
             class categoryOverrides {};
             class checkRadiosUnlocked {};
             class configSort {};
@@ -99,6 +100,10 @@ class CfgFunctions
             class itemConfigMass {};
             class itemSort {};
             class itemType {};
+            class itemVariantName {};
+            class itemVariantRep {};
+            class itemVariants {};
+            class itemVariantsDistinct {};
             class launcherInfo {};
             class lookForSupplyVehicle {};
             class loot {};

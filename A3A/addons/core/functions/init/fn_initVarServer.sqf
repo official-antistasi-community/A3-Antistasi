@@ -417,6 +417,8 @@ Info("Categorizing equipment classes");
 [] call A3A_fnc_equipmentSort;
 Info("Sorting grouped class categories");
 [] call A3A_fnc_itemSort;
+// Needs allX arrays. Must be done before the arsenal is filled or loaded
+[] call A3A_fnc_buildItemVariants;
 Info("Building loot lists");
 [] call A3A_fnc_loot;
 

@@ -5,6 +5,7 @@ class CfgFunctions {
 			class arsenal {};
 			class arsenal_addItem {};
 			class arsenal_addToArray {};
+			class arsenal_baseItem {};
 			class arsenal_cargoToArray {};
 			class arsenal_cargoToArsenal {};
 			class arsenal_handleAction {};

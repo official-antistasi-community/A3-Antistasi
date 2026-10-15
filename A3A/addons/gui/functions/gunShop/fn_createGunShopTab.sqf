@@ -151,12 +151,14 @@ private _createdCtrls = [];
         //_button ctrlSetFontHeight ((ctrlFontHeight _button) * (4 / _columnCount));
     //};
     _button ctrlSetText localize "STR_antistasi_gun_shop_add_to_cart_button_text";
+    _button ctrlSetTooltip localize "STR_antistasi_gun_shop_add_to_cart_button_tooltip";
     _button ctrlCommit 0;
 
 
     private _displayText = _display ctrlCreate ["A3A_StructuredText", -1, _itemControlsGroup];
     _displayText ctrlSetPosition _displayBox;
-    _displayText ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#E5C454' shadow='2'>%1</t>", _displayName]);
+    // Escaped for structured text, eg. "Smith & Wesson"
+    _displayText ctrlSetStructuredText parseText (format ["<t size='0.65' align='left' valign='middle' color='#E5C454' shadow='2'>%1</t>", (_displayName regexReplace ["&", "&amp;"] regexReplace ["<", "&lt;"] regexReplace [">", "&gt;"])]);
     _displayText ctrlSetTooltip _className;
     _displayText ctrlCommit 0;
 
@@ -196,19 +198,33 @@ private _createdCtrls = [];
     _button setVariable ["price", _itemPrice];
     _button setVariable ["stock", _stockGS];
 
-    _button ctrladdeventhandler ["ButtonClick", {
+    // Amount needed to unlock the item, or -1 if it can't be unlocked
+    private _unlockDisabled = minWeaps < 0 or { _stockArsenal isEqualTo -1 }
+        or { _className in AllMissileLaunchers and allowGuidedLaunchers isEqualTo 0 }
+        or { _className in AllRocketLaunchers and allowUnguidedLaunchers isEqualTo 0 }
+        or { _className in AllExplosives and allowUnlockedExplosives isEqualTo 0 };
+    _button setVariable ["toUnlock", [0 max (minWeaps - floor _stockArsenal), -1] select _unlockDisabled];
+
+    // Click: 1, shift 5, ctrl 10, both 25 (like the arsenal). Right-click: enough to unlock, or as many as possible
+    // ButtonClick doesn't pass modifier keys, so they're recorded on mouse down
+    _button ctrlAddEventHandler ["MouseButtonDown", {
+        params ["_control", "_mouseButton", "", "", "_shift", "_ctrl"];
+        _control setVariable ["modifiers", [_shift, _ctrl]];
+    }];
+    _button ctrlAddEventHandler ["ButtonClick", {
         params ["_control"];
+        (_control getVariable ["modifiers", [false, false]]) params ["_shift", "_ctrl"];
+        private _amount = [[1, 10], [5, 25]] select _shift select _ctrl;
+        [_control, _amount] call A3A_GUI_fnc_addToCartButton;
+    }];
+    _button ctrlAddEventHandler ["MouseButtonUp", {
+        params ["_control", "_mouseButton"];
+        if (_mouseButton != 1) exitWith {};
         private _className = _control getVariable ["className", ""];
-        private _selectedTabIDC = _control getVariable ["selectedTabIDC", ""];
-        private _price = _control getVariable ["price", ""];
-        private _stockGS = _control getVariable ["stock", 0];
-        if(_className isEqualTo "" || _selectedTab isEqualTo "") exitwith {};
-
-        [_className, _price, 1, _stockGS] call A3A_GUI_fnc_addToCart;
-
-        call A3A_GUI_fnc_updateCartNumber;
-
-        //[_selectedTab, _className] call A3A_fnc_addItems;
+        private _inCart = (A3A_shoppingCart getOrDefault [_className, createHashMap]) getOrDefault ["_amount", 0];
+        private _toUnlock = _control getVariable ["toUnlock", -1];
+        private _amount = if (_toUnlock < 0) then { 1e6 } else { _toUnlock - _inCart };
+        [_control, _amount] call A3A_GUI_fnc_addToCartButton;
     }];
 
     _itemControlsGroup ctrlSetFade 0;

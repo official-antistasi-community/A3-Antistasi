@@ -26,22 +26,8 @@ if(typeName (_this select 0) isEqualTo "SCALAR")then{//[_index, _item] and [_ind
 				if(_index == -1)exitWith{["Antistasi: ERROR in additemarsenal: %1", _this] call BIS_fnc_error};
 				if(_index == IDC_RSCDISPLAYARSENAL_TAB_CARGOMAG)then{_index = IDC_RSCDISPLAYARSENAL_TAB_CARGOMAGALL};
 
-				//TFAR fix
-				private _radioName = getText(configfile >> "CfgWeapons" >> _item >> "tf_parent");
-				if!(_radioName isEqualTo "")then{_item = _radioName};
-
-				//Weapon Stack fix
-				if (isClass (configFile >> "CfgWeapons" >> _item)) then {
-					_item = _item call bis_fnc_baseWeapon;
-				};
-
-				//RHS Sight Stack fix
-				private _sightname = getText(configfile >> "CfgWeapons" >> _item >> "rhs_optic_base");
-				if!(_sightname isEqualTo "")then{_item = _sightname};
-				
-				//ACRE fix
-				private _radioName = getText(configfile >> "CfgVehicles" >> _item >> "acre_baseClass");
-				if!(_radioName isEqualTo "")then{_item = _radioName};
+				//TFAR/ACRE, weapon stack, RHS sight and functional variant fixes
+				_item = [_item] call jn_fnc_arsenal_baseItem;
 
 				// Update server immediately if local. Avoids lag after unlockEquipment
 				if (isServer) then { ["UpdateItemAdd",[_index, _item, _amount,true]] call jn_fnc_arsenal }
