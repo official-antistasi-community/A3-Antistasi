@@ -3,6 +3,7 @@
 // display useful information through the feed.
 
 // no saving, no nothing. This just processes intel
+// Runs on every machine (remoteExec'd by A3A_fnc_selectIntel on the server)
 
 #define INTELCAP 50
 
@@ -14,9 +15,9 @@ switch (toLowerANSI _type) do {
     case "def_resources": {
         private _resources = _params#2;
         if (_side == Occupants) then {
-            A3A_resourcesLastOcc = [_resources, _time];
+            A3A_resourcesLastOcc = [_resources, serverTime];      // compared against serverTime by the war menu
         } else {
-            A3A_resourcesLastInv = [_resources, _time];
+            A3A_resourcesLastInv = [_resources, serverTime];
         };
     };
     default {};

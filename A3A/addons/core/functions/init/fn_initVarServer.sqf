@@ -109,9 +109,9 @@ DECLARE_SERVER_VAR(A3A_unbuiltObjects, []);
 //We shouldn't need to sync these.
 Info("Setting server only variables");
 
-// Don't need to be distributed
-occRadioKeys = 0;
-invRadioKeys = 0;
+// Shown in the war menu, so clients need them too. Re-broadcast wherever they change
+DECLARE_SERVER_VAR(occRadioKeys, 0);
+DECLARE_SERVER_VAR(invRadioKeys, 0);
 
 // New garrison data structure
 A3A_garrison = createHashMap;
