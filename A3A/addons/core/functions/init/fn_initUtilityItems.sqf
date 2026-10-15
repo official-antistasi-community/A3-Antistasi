@@ -22,7 +22,7 @@ private _repairStation = FactionGet(reb,"vehicleRepairStation");
 // TODO: Name should be stringtabled somewhere
 
 private _items = [
-    [FactionGet(reb,"surrenderCrate"), 10, "lootbox", "gear", ["move", "loot"]],
+    [FactionGet(reb,"surrenderCrate"), 10, "lootbox", "gear", ["move", "loot", "arsenal"]],
     [_fuelDrum#0, _fuelDrum#1, "fueldrum", "refuel", ["fuel", "move", "save"]],
     [_fuelTank#0, _fuelTank#1, "fueltank", "refuel", ["cmmdr", "fuel", "place", "move", "rotate", "save"]],
     [_medTent#0, _medTent#1, "medicaltent", "heal", ["place", "move", "rotate", "pack"]],
@@ -41,7 +41,7 @@ private _items = [
 if (LootToCrateRadius == 0) then { _items deleteAt 0 };
 
 if(A3A_hasACE) then {
-    _items pushBack [_medCrate#0, _medCrate#1, "medicalbox", "heal", ["noclear", "move"]];
+    _items pushBack [_medCrate#0, _medCrate#1, "medicalbox", "heal", ["noclear", "move", "arsenal"]];
     _items pushBack ["ACE_Wheel", 5, "", "", []];
     _items pushBack ["ACE_Track", 5, "", "", []];       // check names
 };

@@ -17,3 +17,5 @@ params ["_clientOwner"];
 _temp = server getVariable ["jna_playersInArsenal",[]];
 _temp = _temp - [_clientOwner];
 server setVariable ["jna_playersInArsenal",_temp,true];
+
+[_clientOwner] call jn_fnc_arsenal_releaseContainer;

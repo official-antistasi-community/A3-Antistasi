@@ -27,6 +27,9 @@ params ["_crate", ["_owner",2], ["_done", false]];
 private _titleStr = localize "STR_A3A_fn_ltc_title";
 
 if (isNil "LTCTransferringCrates") then {LTCTransferringCrates = []};
+if (!_done && {(_crate getVariable ["jna_lockedBy", -1]) in (server getVariable ["jna_playersInArsenal", []])}) exitWith {
+    [_titleStr, localize "STR_A3A_fn_ltc_cant_arsenal"] remoteExec ["A3A_fnc_customHint", _owner];
+};
 if (!_done) then {
 
     if !(_crate in LTCTransferringCrates) then {

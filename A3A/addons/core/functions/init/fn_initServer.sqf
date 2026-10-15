@@ -261,9 +261,7 @@ addMissionEventHandler ["HandleDisconnect",{_this call A3A_fnc_onPlayerDisconnec
 //PlayerDisconnected doesn't get access to the unit, so we shouldn't use it to handle saving.
 addMissionEventHandler ["PlayerDisconnected",{
     // Remove player from arsenal in case they disconnected while in it
-    private _temp = server getVariable ["jna_playersInArsenal",[]];
-    _temp = _temp - [param [4]];
-    server setVariable ["jna_playersInArsenal",_temp,true];
+    [param [4]] call jn_fnc_arsenal_requestClose;
     _this call A3A_fnc_onHeadlessClientDisconnect;
     false;
 }];

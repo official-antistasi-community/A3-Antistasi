@@ -18,7 +18,7 @@ if (isNil {	// Run in unschedule scope.
 
 _ammunition= [];
 _items = [];
-_ammunition = magazineCargo _originX;
+_ammunition = magazinesAmmoCargo _originX;
 _items = itemCargo _originX;
 _weaponsX = [];
 _weaponsItemsCargo = weaponsItemsCargo _originX;
@@ -35,7 +35,7 @@ if (count _containers > 0) then
 	{
 	for "_i" from 0 to (count _containers) - 1 do
 		{
-		_subObject = magazineCargo ((_containers select _i) select 1);
+		_subObject = magazinesAmmoCargo ((_containers select _i) select 1);
 		if (!isNil "_subObject") then {_ammunition = _ammunition + _subObject} else {Error_1("Error from %1",magazineCargo (_containers select _i))};
 		//_ammunition = _ammunition + (magazineCargo ((_containers select _i) select 1));
 		_items = _items + (itemCargo ((_containers select _i) select 1));
@@ -61,7 +61,7 @@ if (!isNil "_weaponsItemsCargo") then
 					{
 					if (count _thingX > 0) then
 						{
-						_ammunition pushBack (_thingX select 0);
+						_ammunition pushBack [_thingX select 0, _thingX select 1];
 						};
 					};
 				};
@@ -69,6 +69,10 @@ if (!isNil "_weaponsItemsCargo") then
 		} forEach _weaponsItemsCargo;
 		};
 	};
+
+// Container is open in someone's vehicle arsenal: they already hold its cargo and put it back on close
+private _arsenalLocked = (_originX getVariable ["jna_lockedBy", -1]) in (server getVariable ["jna_playersInArsenal", []]);
+if (_arsenalLocked) then { _weaponsX = []; _ammunition = []; _items = []; _backpcks = [] };
 
 _weaponsFinal = [];
 _weaponsFinalCount = [];
@@ -89,8 +93,8 @@ if (count _weaponsFinal > 0) then
 		};
 	};
 
-_ammunitionFinal = [];
-_ammunitionFinalCount = [];
+// Magazines are [class, rounds]. Total the rounds per class so partly used magazines don't come back full
+private _ammunitionRounds = createHashMap;
 if (isNil "_ammunition") then
 	{
         Error_4("Ammunition transmission error. I had this: %1 and these containers: %2, the originX was a %3 and the objectX is defined as: %4", magazineCargo _originX, everyContainer _originX,typeOf _originX,_originX);
@@ -98,23 +102,22 @@ if (isNil "_ammunition") then
 else
 	{
 	{
-	_weaponX = _x;
-	if ((not(_weaponX in _ammunitionFinal)) and (not(_weaponX in unlockedMagazines))) then
-		{
-		_ammunitionFinal pushBack _weaponX;
-		_ammunitionFinalCount pushBack ({_x == _weaponX} count _ammunition);
-		};
-	} forEach  _ammunition;
+	_x params ["_magazine", "_rounds"];
+	if !(_magazine in unlockedMagazines) then { _ammunitionRounds set [_magazine, (_ammunitionRounds getOrDefault [_magazine, 0]) + _rounds] };
+	} forEach _ammunition;
 	};
 
-
-if (count _ammunitionFinal > 0) then
-	{
-	for "_i" from 0 to (count _ammunitionFinal) - 1 do
-		{
-		_destinationX addMagazineCargoGlobal [_ammunitionFinal select _i,_ammunitionFinalCount select _i];
-		};
+// Repack into full magazines plus one partial. addMagazineAmmoCargo is run where the destination is local
+{
+	private _size = getNumber (configFile >> "CfgMagazines" >> _x >> "count") max 1;
+	private _full = floor (_y / _size);
+	if (_full > 0) then { _destinationX addMagazineCargoGlobal [_x, _full] };
+	private _rest = _y - _full * _size;
+	if (_rest > 0) then {
+		if (local _destinationX) then { _destinationX addMagazineAmmoCargo [_x, 1, _rest] }
+		else { [_destinationX, [_x, 1, _rest]] remoteExecCall ["addMagazineAmmoCargo", _destinationX] };
 	};
+} forEach _ammunitionRounds;
 
 _itemsFinal = [];
 _itemsFinalCount = [];
@@ -160,6 +163,7 @@ if (count _this > 2) then
 	}
 else
 	{
+	if (_arsenalLocked) exitWith {};
 	clearMagazineCargoGlobal _originX;
 	clearWeaponCargoGlobal _originX;
 	clearItemCargoGlobal _originX;

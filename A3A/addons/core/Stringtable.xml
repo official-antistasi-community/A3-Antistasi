@@ -4631,6 +4631,9 @@
         <Czech>Odpočet je stále aktivní.</Czech>
         <Chinesesimp>冷却仍在进行中.</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_fn_ltc_cant_arsenal">
+        <Original>Someone is loading this container from the arsenal.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_ltc_cant_already">
         <Original>Already transfering.</Original>
         <Italian>Già in trasferimento.</Italian>

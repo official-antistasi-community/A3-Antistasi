@@ -3438,6 +3438,9 @@
         <Czech>Musíte být řidič vozidla na upravení jeho inventáře</Czech>
         <Spanish>Debe ser conductor de un vehículo para modificar su inventario</Spanish>
       </Key>
+      <Key ID="STR_antistasi_dialogs_main_context_vehArsenal_awayHQ">
+        <Original>Must be at HQ to load from the arsenal</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_main_context_construction_needEngineer">
         <Original>Must be an engineer</Original>
         <Czech>Musíte být engineer</Czech>

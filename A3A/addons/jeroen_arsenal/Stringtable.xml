@@ -408,6 +408,9 @@
         <Turkish>Yükle</Turkish>
         <Chinesesimp>装载</Chinesesimp>
       </Key>
+      <Key ID="STR_A3A_JNA_vehicle_gone">
+        <Original>The container is gone. Its cargo was returned to the arsenal.</Original>
+      </Key>
       <Key ID="STR_A3A_JNA_vehicle_title">
         <Original>Vehicle inventory</Original>
         <German>Fahrzeug Inventar</German>
