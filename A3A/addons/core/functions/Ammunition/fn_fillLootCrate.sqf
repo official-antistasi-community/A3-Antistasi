@@ -204,6 +204,16 @@ if (_crateWepTypeMax != 0) then {
             Verbose_2("Adding %1 weapons of type %2", _amount, _loot);
 
 			private _magazines = compatibleMagazines _loot;
+			if (_loot in allDisposable) then {
+				// Disposables can't be reloaded, so bring ammo for a reusable launcher of the same kind instead (without the launcher)
+				private _launcherPool = [allMissileLaunchers, allRocketLaunchers] select (_loot in allRocketLaunchers);
+				private _ammoOptions = [];
+				{
+					private _mags = (A3A_launcherLootAmmo getOrDefault [_x, []]) - unlockedMagazines;
+					if (_mags isNotEqualTo []) then { _ammoOptions pushBack _mags };
+				} forEach _launcherPool;
+				_magazines = if (_ammoOptions isEqualTo []) then { [] } else { selectRandom _ammoOptions };
+			};
 			if (count _magazines < 1) exitWith {};
 			if (_loot in allShotguns) then { _magazines = [_magazines select 0] };		// prevent doomsday
 
