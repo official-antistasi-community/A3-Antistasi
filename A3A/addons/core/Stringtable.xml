@@ -5128,7 +5128,7 @@
         <Czech>Nevzdaluj se s náklaďákem od banky nebo se odpočet restartuje.</Czech>
       </Key>
       <Key ID="STR_A3A_fn_mission_log_bank_hint_text3">
-        <Original>Drive the Truck back to base to finish this mission.</Original>
+        <Original>Drive the Truck back to base before %1 to finish this mission.</Original>
         <Italian>Porta il Camion alla base per terminare la missione.</Italian>
         <French>Ramenez le Camion à la base pour finir cette mission.</French>
         <Korean>임무를 완수하려면 트럭을 본부로 다시 가져가십시오.</Korean>

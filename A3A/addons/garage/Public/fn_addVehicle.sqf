@@ -36,6 +36,7 @@ if (locked _vehicle > 1) exitWith { ["STR_HR_GRG_Feedback_addVehicle_Locked"] re
 if (_player isNotEqualTo vehicle _player) exitWith { ["STR_HR_GRG_Feedback_addVehicle_inVehicle"] remoteExec ["HR_GRG_fnc_Hint", _client] ; false };
 if (_player distance _vehicle > 25) exitWith {["STR_HR_GRG_Feedback_addVehicle_Distance"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 if (!isNull attachedTo _vehicle) exitWith {["STR_HR_GRG_Feedback_addVehicle_Attached"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
+if (_vehicle getVariable ["A3A_noGarage", false]) exitWith {["STR_HR_GRG_Feedback_addVehicle_MissionVehicle"] remoteExec ["HR_GRG_fnc_Hint", _client]; false };
 
     //Valid area
 private _friendlyMarkers = (["Synd_HQ"] +outposts + seaports + airportsX + factories + resourcesX) select {sidesX getVariable [_x,sideUnknown] == teamPlayer}; //rebel locations with a flag
