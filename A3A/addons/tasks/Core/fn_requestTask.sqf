@@ -15,7 +15,15 @@ A3A_taskRequestInProgress = true;
 private _titleStr = localize "STR_A3A_Tasks_requestTask_title";
 
 if (_type in A3A_activeTasks) exitWith {
-    if (!_silent) then {[petros,"globalChat",localize "STR_A3A_Tasks_requestTask_existing"] remoteExec ["A3A_fnc_commsMP",_requester]};
+    // A finished task blocks its type for a while. Say how long, rather than pointing at the task menu
+    private _running = A3A_tasksData findIf { (_x#1) isEqualTo _type and count _x < 5 } != -1;
+    private _clearTime = A3A_taskCooldowns getOrDefault [_type, 0];
+    private _message = if (!_running and _clearTime > serverTime) then {
+        format [localize "STR_A3A_Tasks_requestTask_cooldown", ceil ((_clearTime - serverTime) / 60)]
+    } else {
+        localize "STR_A3A_Tasks_requestTask_existing"
+    };
+    if (!_silent) then {[petros,"globalChat",_message] remoteExec ["A3A_fnc_commsMP",_requester]};
     A3A_taskRequestInProgress = nil;
 };
 

@@ -12,6 +12,9 @@
         <Korean>이미 해당 유형의 임무를 주었습니다. 임무 메뉴를 확인하십시오.</Korean>
         <Russian>Я уже давал вам задания такого типа, проверьте свое меню задач.</Russian>
       </Key>
+      <Key ID="STR_A3A_Tasks_requestTask_cooldown">
+        <Original>That type of mission only just wrapped up. I'll have another one for you in about %1 min.</Original>
+      </Key>
       <Key ID="STR_A3A_Tasks_requestTask_no_AS">
         <Original>I have no assassination missions for you.</Original>
       </Key>

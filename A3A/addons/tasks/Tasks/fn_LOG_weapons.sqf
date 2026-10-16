@@ -302,6 +302,7 @@ _task set ["s_failed", {
 }];
 
 _task set ["s_cleanup", {
+    A3A_taskCooldowns set ["LOG", serverTime + 120];
     (_this get "_taskId") spawn {
         sleep 120;
         [_this, true, true] call BIS_fnc_deleteTask;

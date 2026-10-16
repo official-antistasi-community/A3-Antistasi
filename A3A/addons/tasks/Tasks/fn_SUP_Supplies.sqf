@@ -214,6 +214,7 @@ _task set ["s_cleanup", {
 	Trace_3("Start time %1; time %2; clearTime %3", _startTime, time, _clearTime);
 	[_clearTime, _this get "_taskId"] spawn {
 		params ["_delay", "_taskId"];
+		A3A_taskCooldowns set ["SUPP", serverTime + _delay];
 		sleep _delay;
 		A3A_activeTasks deleteAt (A3A_activeTasks find "SUPP");
 		publicVariable "A3A_activeTasks";
