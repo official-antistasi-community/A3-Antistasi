@@ -40,7 +40,7 @@ private _vehiclesAA = ["B_APC_Tracked_01_AA_F"];
 ["vehiclesAmphibious", ["a3a_APC_Wheeled_03_cannon_blufor_F","a3a_B_APC_Wheeled_01_cannon_F","B_APC_Wheeled_01_cannon_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["a3a_Plane_Fighter_03_grey_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["a3a_Plane_Fighter_04_grey_F"]] call _fnc_saveToTemplate;
+private _vehiclesPlanesAA = ["a3a_Plane_Fighter_03_grey_F"];
 ["vehiclesPlanesTransport", ["B_T_VTOL_01_infantry_blue_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesHelisLight", ["O_Heli_Light_02_unarmed_F", "a3a_Heli_Light_01_ION_F"]] call _fnc_saveToTemplate;
@@ -73,6 +73,9 @@ private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 ["mortarMagazineSmoke", "8Rnd_82mm_Mo_Smoke_white"] call _fnc_saveToTemplate;
 ["mortarMagazineFlare", "8Rnd_82mm_Mo_Flare_white"] call _fnc_saveToTemplate;
 
+if ("jets" in A3A_enabledDLC) then {
+	_vehiclesPlanesAA = ["a3a_Plane_Fighter_04_grey_F"];
+};
 if ("tanks" in A3A_enabledDLC) then {
 	["vehiclesHeavyTanks", ["a3a_MBT_04_cannon_black_F", "a3a_MBT_04_cannon_black_F", "a3a_MBT_04_command_black_F"]] call _fnc_saveToTemplate;
 };
@@ -106,6 +109,7 @@ if ("ef" in A3A_enabledDLC) then {
     _vehiclesLightTanks append ["a3a_black_Gyra_Armed_EF"];
 };
 
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;
 ["vehiclesMilitiaCars", _vehiclesMilitiaCars] call _fnc_saveToTemplate;
 ["vehiclesMilitiaLightArmed", _vehiclesMilitiaLightArmed] call _fnc_saveToTemplate;

@@ -39,7 +39,7 @@ class A3A {
             };
             class EF_QAV80_MJTF_Wdl : EF_QAV80_MJTF_Des {};
             class B_Plane_Fighter_01_F;
-            class a3a_wdl_camo_FA181_EF : B_Plane_Fighter_01_F {};
+            class a3a_Plane_Fighter_01_wdl_F : B_Plane_Fighter_01_F {};
         };
         class Helicopter
         {

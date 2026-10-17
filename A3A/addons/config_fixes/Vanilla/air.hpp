@@ -62,6 +62,11 @@ class a3a_Plane_Fighter_03_grey_F : I_Plane_Fighter_03_dynamicLoadout_F
     textureList[] = {"Grey",1,"Green",0,"Hex",0};
     hiddenSelectionsTextures[] = {"a3\air_f_gamma\plane_fighter_03\data\plane_fighter_03_body_1_greyhex_co.paa","a3\air_f_gamma\plane_fighter_03\data\plane_fighter_03_body_2_greyhex_co.paa"};
 };
+class a3a_Plane_Fighter_03_hex_F : I_Plane_Fighter_03_dynamicLoadout_F
+{
+    textureList[] = {"Grey",0,"Green",0,"Hex",1};
+    hiddenSelectionsTextures[] = {"\a3\Air_F_Gamma\Plane_Fighter_03\Data\Plane_Fighter_03_body_1_brownhex_CO.paa","\a3\Air_F_Gamma\Plane_Fighter_03\Data\Plane_Fighter_03_body_2_brownhex_CO.paa"};
+};
 
 //Civilian
 class a3a_C_Heli_Transport_02_F : I_Heli_Transport_02_F

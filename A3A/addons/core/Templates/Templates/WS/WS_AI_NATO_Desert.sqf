@@ -36,7 +36,7 @@ private _Tanks = ["B_MBT_01_TUSK_F", "B_MBT_01_cannon_F"];
 ["vehiclesGunBoats", ["B_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["B_D_Plane_CAS_01_dynamicLoadout_lxWS"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["B_Plane_Fighter_01_F"]] call _fnc_saveToTemplate;
+private _vehiclesPlanesAA = ["a3a_Plane_Fighter_03_grey_F"];
 ["vehiclesPlanesTransport", ["B_T_VTOL_01_infantry_blue_F"]] call _fnc_saveToTemplate;
 
 private _vehiclesHelisLight = ["B_D_Heli_Light_01_lxWS", "B_Heli_Light_01_F"];
@@ -72,6 +72,9 @@ private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 ["minefieldAT", ["ATMine"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["APERSMine"]] call _fnc_saveToTemplate;
 
+if ("jets" in A3A_enabledDLC) then {
+	_vehiclesPlanesAA = ["B_Plane_Fighter_01_F"];
+};
 if ("enoch" in A3A_enabledDLC) then {
 	_vehiclesPolice append ["B_GEN_Offroad_01_comms_F","B_GEN_Offroad_01_covered_F"];
 	_vehiclesMilitiaCars append ["a3a_Offroad_01_covered_tan_F","a3a_Offroad_01_comms_tan_F"];
@@ -103,6 +106,8 @@ if ("ef" in A3A_enabledDLC) then {
     ["vehiclesGunBoats", ["EF_B_CombatBoat_HMG_NATO", "EF_B_CombatBoat_AT_NATO"]] call _fnc_saveToTemplate;
     ["vehiclesHelisAttack", ["B_D_Heli_Attack_01_dynamicLoadout_lxWS", "EF_B_AH99J_NATO_Des"]] call _fnc_saveToTemplate;
 };
+
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
 ["vehiclesHelisLight", _vehiclesHelisLight] call _fnc_saveToTemplate;
 
 ["vehiclesMilitiaLightArmed", _vehiclesMilitiaLightArmed] call _fnc_saveToTemplate;

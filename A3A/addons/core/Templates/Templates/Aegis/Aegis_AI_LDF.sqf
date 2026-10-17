@@ -36,8 +36,8 @@ private _APCs = ["Aegis_I_E_APC_Wheeled_01_cannon_v2_F", "a3a_Aegis_I_E_APC_Whee
 ["vehiclesGunBoats", ["I_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["Aegis_I_E_APC_Wheeled_01_cannon_v2_F"]] call _fnc_saveToTemplate;
 
-["vehiclesPlanesCAS", ["I_E_Plane_Fighter_04_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["I_E_Plane_Fighter_04_F"]] call _fnc_saveToTemplate;
+private _vehiclesPlanesCAS = ["a3a_Plane_Fighter_03_grey_F"];
+private _vehiclesPlanesAA = ["a3a_Plane_Fighter_03_grey_F"];
 ["vehiclesPlanesTransport", ["B_T_Plane_Transport_01_infantry_F"]] call _fnc_saveToTemplate;
 
 private _vehiclesHelisLight = ["I_E_Heli_light_03_unarmed_F"];
@@ -74,6 +74,10 @@ private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F","B_GEN_Offroad_01_comms_F","
 ["minefieldAPERS", ["APERSMine"]] call _fnc_saveToTemplate;
 
 //If DLC
+if ("jets" in A3A_enabledDLC) then {
+	_vehiclesPlanesCAS = ["I_E_Plane_Fighter_04_F"];
+	_vehiclesPlanesAA = ["I_E_Plane_Fighter_04_F"];
+};
 if ("ws" in A3A_enabledDLC) then {
     _cargoTrucks append ["I_E_Truck_02_cargo_lxWS","I_E_Truck_02_flatbed_lxWS"];
 	_APCs append ["Aegis_I_E_APC_Wheeled_01_atgm_v2"];
@@ -95,6 +99,8 @@ if ("rf" in A3A_enabledDLC) then {
     _vehiclesMilitiaLightArmed append ["a3a_LDF_Pickup_mmg_rf"];
 };
 
+["vehiclesPlanesCAS", _vehiclesPlanesAA] call _fnc_saveToTemplate;
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", _HelisTransport] call _fnc_saveToTemplate;
 ["vehiclesHelisLight", _vehiclesHelisLight] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", _vehiclesHelisLightAttack] call _fnc_saveToTemplate;

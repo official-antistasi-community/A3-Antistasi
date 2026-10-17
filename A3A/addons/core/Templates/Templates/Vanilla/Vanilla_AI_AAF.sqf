@@ -30,14 +30,14 @@ private _cargoTrucks = ["I_Truck_02_transport_F", "I_Truck_02_covered_F"];
 ["vehiclesAPCs", ["a3a_APC_Wheeled_03_cannon_F", "a3a_APC_Wheeled_03_cannon_F", "I_APC_tracked_03_cannon_F"]] call _fnc_saveToTemplate;
 ["vehiclesIFVs", ["a3a_APC_tracked_03_cannon_F"]] call _fnc_saveToTemplate;
 ["vehiclesTanks", ["I_MBT_03_cannon_F"]] call _fnc_saveToTemplate;
-private _AA = ["I_LT_01_AA_F"];
+private _AA = ["B_T_APC_Tracked_01_AA_F"];
 
 ["vehiclesTransportBoats", ["I_C_Boat_Transport_02_F"]] call _fnc_saveToTemplate;
 ["vehiclesGunBoats", ["I_Boat_Armed_01_minigun_F"]] call _fnc_saveToTemplate;
 ["vehiclesAmphibious", ["I_APC_Wheeled_03_cannon_F", "I_MRAP_03_hmg_F", "I_MRAP_03_gmg_F", "I_MRAP_03_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["I_Plane_Fighter_03_dynamicLoadout_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["I_Plane_Fighter_04_F"]] call _fnc_saveToTemplate;
+private _vehiclesPlanesAA = ["I_Plane_Fighter_03_dynamicLoadout_F"];
 ["vehiclesPlanesTransport", []] call _fnc_saveToTemplate;
 
 private _vehiclesHelisLight = ["I_Heli_light_03_unarmed_F"];
@@ -74,10 +74,14 @@ private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 ["minefieldAT", ["ATMine"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["APERSMine"]] call _fnc_saveToTemplate;
 
+if ("jets" in A3A_enabledDLC) then {
+	_vehiclesPlanesAA = ["I_Plane_Fighter_04_F"];
+};
 //If Tank DLC
 if ("tanks" in A3A_enabledDLC) then {
     // No seats so can't be APC
     _lightArmed append ["I_LT_01_AT_F", "I_LT_01_cannon_F"];
+    _AA = ["I_LT_01_AA_F"];
 };
 //If Western Sahara DLC
 if ("ws" in A3A_enabledDLC) then {
@@ -108,6 +112,7 @@ if ("rf" in A3A_enabledDLC) then {
     _lightArmed append ["I_Pickup_rcws_rf"];
 };
 
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
 ["vehiclesHelisLight", _vehiclesHelisLight] call _fnc_saveToTemplate;
 ["vehiclesHelisTransport", _vehiclesHelisTransport] call _fnc_saveToTemplate;
 ["vehiclesHelisLightAttack", _vehiclesHelisLightAttack] call _fnc_saveToTemplate;

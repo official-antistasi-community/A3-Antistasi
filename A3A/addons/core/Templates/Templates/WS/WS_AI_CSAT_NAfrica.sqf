@@ -38,7 +38,7 @@ private _vehiclesAA = ["O_APC_Tracked_02_AA_F"];
 ["vehiclesAmphibious", ["a3a_APC_Wheeled_02_rcws_v2_F"]] call _fnc_saveToTemplate;
 
 ["vehiclesPlanesCAS", ["O_Plane_CAS_02_dynamicLoadout_F"]] call _fnc_saveToTemplate;
-["vehiclesPlanesAA", ["O_Plane_Fighter_02_F"]] call _fnc_saveToTemplate;
+private _vehiclesPlanesAA = ["a3a_Plane_Fighter_03_hex_F"];
 ["vehiclesPlanesTransport", ["O_T_VTOL_02_infantry_hex_F"]] call _fnc_saveToTemplate; 
 
 ["vehiclesHelisLight", ["O_Heli_Light_02_unarmed_F"]] call _fnc_saveToTemplate;
@@ -74,6 +74,9 @@ private _vehiclesPolice = ["B_GEN_Offroad_01_gen_F"];
 ["minefieldAT", ["ATMine"]] call _fnc_saveToTemplate;
 ["minefieldAPERS", ["APERSBoundingMine", "APERSMine"]] call _fnc_saveToTemplate;
 
+if ("jets" in A3A_enabledDLC) then {
+	_vehiclesPlanesAA = ["O_Plane_Fighter_02_F"];
+};
 if ("enoch" in A3A_enabledDLC) then
 {
     _vehiclesPolice append ["B_GEN_Offroad_01_comms_F","B_GEN_Offroad_01_covered_F"];
@@ -106,9 +109,10 @@ if ("ef" in A3A_enabledDLC) then {
     _lightUnarmed append ["EF_O_Gyra_OPF"];
     _vehiclesLightTanks append ["EF_O_Gyra_Armed_OPF"];
 };
+
+["vehiclesPlanesAA", _vehiclesPlanesAA] call _fnc_saveToTemplate;
 ["vehiclesPolice", _vehiclesPolice] call _fnc_saveToTemplate;
 ["vehiclesMilitiaLightArmed", _vehiclesMilitiaLightArmed] call _fnc_saveToTemplate;
-
 ["vehiclesLightUnarmed", _LightUnarmed] call _fnc_saveToTemplate;
 ["vehiclesLightArmed", _LightArmed] call _fnc_saveToTemplate;
 ["vehiclesTanks", _Tanks] call _fnc_saveToTemplate; 

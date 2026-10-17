@@ -59,6 +59,7 @@ class A3A {
                 loadout[] = {"PylonRack_1Rnd_AAA_missiles","PylonRack_1Rnd_Missile_AA_04_F","PylonRack_1Rnd_GAA_missiles","PylonWeapon_300Rnd_20mm_shells","PylonRack_1Rnd_GAA_missiles","PylonRack_1Rnd_Missile_AA_04_F","PylonRack_1Rnd_AAA_missiles"};
             };
             class a3a_Plane_Fighter_03_grey_F : I_Plane_Fighter_03_dynamicLoadout_F{};
+            class a3a_Plane_Fighter_03_hex_F : I_Plane_Fighter_03_dynamicLoadout_F{};
 
         };
         class Helicopter
