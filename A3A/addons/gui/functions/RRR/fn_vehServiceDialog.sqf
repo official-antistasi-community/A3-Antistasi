@@ -32,6 +32,8 @@ FIX_LINE_NUMBERS()
 #define BLACKLISTED_MAGS ["FakeWeapon", "FakeMagazine"]
 #define BLACKLISTED_SIMS ["laserDesignate"]
 #define PRICE_MUL 0.2
+// Money charged per rearm point when paying out of pocket
+#define PERSONAL_MONEY_PER_POINT 1.2
 
 params[
     ["_mode","onLoad"],
@@ -60,6 +62,7 @@ private _pylonPresets = _display displayCtrl A3A_IDC_VEHSERVICE_PYLONPRESETS;
 private _dynamicTableBackground = _display displayCtrl A3A_IDC_VEHSERVICE_DYNAMICTABLEBACKGROUND;
 private _pylonPictureGroup = _display displayCtrl A3A_IDC_VEHSERVICE_PYLONPICTUREGROUP;
 private _globalControlGroup = _display displayCtrl A3A_IDC_VEHSERVICE_CONTROLGROUP;
+private _personalMoneyCheckBox = _display displayCtrl A3A_IDC_VEHSERVICE_PERSONALMONEYCHECKBOX;
 
 private _fnc_getName = {
     params ["_name", ["_cfg", "CfgMagazines"]];
@@ -83,6 +86,7 @@ switch (_mode) do
         _refuelButton ctrlEnable false;
         _repairButton ctrlSetTooltip "Feature coming soon";
         _refuelButton ctrlSetTooltip "Feature coming soon";
+        _personalMoneyCheckBox ctrlSetTooltip (format [localize "STR_antistasi_vehService_personalMoneyTooltip", PERSONAL_MONEY_PER_POINT]);
         private _usePylons = isClass _pylonConfig;
         if !(_usePylons) then {
             _pylonButton ctrlEnable false;
@@ -529,7 +533,17 @@ switch (_mode) do
             };
         };
 
-        _applyButton ctrlSetText format [localize format ["STR_antistasi_vehService_apply%1", ["points", "refuel"] select (_mode isEqualTo "refuel")], (ceil _totalCost) max 0];
+        // When paying out of pocket the entire order is billed to the player and the supply source is left alone.
+        private _costPoints = 0 max ceil _totalCost;        // pylon refunds can drive the net cost negative
+        private _usePersonalMoney = cbChecked _personalMoneyCheckBox;
+        private _personalMoney = player getVariable ["moneyX", 0];
+        private _personalMoneyCost = [0, 0 max ceil (_totalCost * PERSONAL_MONEY_PER_POINT)] select _usePersonalMoney;
+
+        if (_usePersonalMoney) then {
+            _applyButton ctrlSetText format [localize "STR_antistasi_vehService_applyMoney", _personalMoneyCost];
+        } else {
+            _applyButton ctrlSetText format [localize format ["STR_antistasi_vehService_apply%1", ["points", "refuel"] select (_mode isEqualTo "refuel")], _costPoints];
+        };
         private _response = switch (true) do {
             case (_purchaseList isEqualTo []);
             case (_purchaseList isEqualType createHashMap && {flatten (values _purchaseList) isEqualTo []}): {
@@ -538,7 +552,10 @@ switch (_mode) do
             case (isNull _selSupplyVehicle): {
                 localize format ["STR_antistasi_vehService_noNear%1", _stringSuffix];
             };
-            case (_remCargo < _totalCost): {
+            case (_usePersonalMoney && {_personalMoneyCost > _personalMoney}): {
+                format [localize "STR_antistasi_vehService_noMoney", _personalMoneyCost, _personalMoney];
+            };
+            case (!_usePersonalMoney && {_remCargo < _totalCost}): {
                 private _ammoTruckName = [typeOf _selSupplyVehicle, "CfgVehicles"] call _fnc_getName;
                 format [localize format ["STR_antistasi_vehService_noCargo%1", _stringSuffix], _ammoTruckName, round (player distance _selSupplyVehicle), _remCargo];
             };
@@ -557,6 +574,7 @@ switch (_mode) do
 
         _display setVariable ["purchaseList", _purchaseList];
         _display setVariable ["totalCost", _totalCost];
+        _display setVariable ["personalMoneyCost", _personalMoneyCost];
     };
     
     case ("checkout"):
@@ -564,13 +582,14 @@ switch (_mode) do
         ["calculateCosts"] call A3A_GUI_fnc_vehServiceDialog;
         private _purchaseList = _display getVariable ["purchaseList", []];
         private _totalCost = _display getVariable ["totalCost", 0];
+        private _personalMoneyCost = _display getVariable ["personalMoneyCost", 0];
         private _mode = _display getVariable "currentMode";
         private _stringSuffix = [_mode, "rearm"] select (_mode isEqualTo "pylon");
         if (count _purchaseList == 0) exitWith {};
         closeDialog 0;
         if (player distance _veh > 25) exitWith {[localize "STR_antistasi_vehService_hintTitle", localize [format "STR_antistasi_vehService_tooFar%1", _stringSuffix]] spawn A3A_fnc_customHint};
         private _supplyVic = _display getVariable ["A3A_supplyVehicle", objNull];
-        [_veh, _mode, _supplyVic, _purchaseList, _totalCost max 0] spawn A3A_GUI_fnc_serviceVehicle;
+        [_veh, _mode, _supplyVic, _purchaseList, _totalCost max 0, _personalMoneyCost] spawn A3A_GUI_fnc_serviceVehicle;
     };
 
     case ("reset"):
