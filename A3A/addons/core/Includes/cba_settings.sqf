@@ -33,3 +33,4 @@ force acex_headless_enabled = false;
 
 // ACE Rearm
 force ace_rearm_enabled = false;
+force ace_pylons_enabledFromAmmoTrucks = false;
