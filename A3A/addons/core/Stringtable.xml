@@ -4716,6 +4716,9 @@
         <Polish>Pobliski łup przeniesiony do skrzyni.</Polish>
         <Czech>Nejbližší loot přesunut do bedny.</Czech>
       </Key>
+      <Key ID="STR_A3A_fn_ltc_ltc_extendedRangeUsed">
+        <Original>Extended Loot to Crate range used.</Original>
+      </Key>
       <Key ID="STR_A3A_fn_ltc_title">
         <Original>Loot crate</Original>
         <Italian>Cassa delle spoglie</Italian>
@@ -4724,6 +4727,12 @@
         <Russian>Ящик с вооружением</Russian>
         <Polish>Skrzynia z łupami</Polish>
         <Czech>Bedna</Czech>
+      </Key>
+      <Key ID="STR_A3A_Params_lootToCrateUncontestedRange_title">
+        <Original>Uncontested Area Loot to Crate Range</Original>
+      </Key>
+      <Key ID="STR_A3A_Params_lootToCrateUncontestedRange_tooltip">
+        <Original>Optionally extends the Loot to Crate collection range when the area around the crate is clear of living enemies. Enemies are checked within twice the selected range. Disabled preserves the normal Loot to Crate radius.</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_mission">

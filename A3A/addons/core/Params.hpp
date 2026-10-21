@@ -401,6 +401,24 @@ class Params
         texts[] = {$STR_A3A_Params_generic_disabled, $STR_A3A_Params_generic_10m, $STR_A3A_Params_generic_15m, $STR_A3A_Params_generic_20m};
         default = 10;
     };
+
+    class A3A_lootToCrateUncontestedRange
+    {
+        title = $STR_A3A_Params_lootToCrateUncontestedRange_title;
+        tooltip = $STR_A3A_Params_lootToCrateUncontestedRange_tooltip;
+        values[] = {0,60,100,150,200,300,400};
+        texts[] = {
+            $STR_A3A_Params_generic_disabled,
+            "60m",
+            "100m",
+            "150m",
+            "200m",
+            "300m",
+            "400m"
+        };
+        default = 0;
+    };
+
     class LTCLootUnlocked
     {
         title = $STR_A3A_Params_LTCLootUnlocked_title;
