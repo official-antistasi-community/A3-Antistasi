@@ -37,6 +37,23 @@ lootGrenade append allGrenades + allMagShell + allIRGrenades + allMagSmokeShell 
 ////////////////////
 lootMagazine append allMagBullet + allMagShotgun + allMagMissile + allMagRocket + lootGrenade;
 
+// Disposable launchers can't be reloaded, so rockets that only fit them are useless as loot.
+// CBA disposables fire from a hidden "loaded" class, so check those too.
+private _disposableMags = createHashMap;
+{
+    { _disposableMags set [_x, true] } forEach compatibleMagazines _x;
+} forEach (allDisposable + ((configProperties [configFile >> "CBA_DisposableLaunchers", "isArray _x"]) apply {configName _x}));
+
+// Reusable launcher -> loot magazines it can fire. Used to swap in useful ammo when crates roll a disposable
+A3A_launcherLootAmmo = createHashMap;
+{
+    private _mags = compatibleMagazines _x arrayIntersect lootMagazine;
+    { _disposableMags deleteAt _x } forEach _mags;
+    if (_mags isNotEqualTo []) then { A3A_launcherLootAmmo set [_x, _mags] };
+} forEach (allRocketLaunchers + allMissileLaunchers - allDisposable);
+
+lootMagazine = lootMagazine - keys _disposableMags;
+
 ///////////////////
 //  Explosives  ///
 ///////////////////
