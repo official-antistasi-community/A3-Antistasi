@@ -40,9 +40,6 @@ params [
 private _groupHomePosition = _group getVariable "PATCOM_Patrol_Home";
 private _patrolParams = _group getVariable "PATCOM_Patrol_Params";
 
-[_group, "SAFE", "LIMITED", "COLUMN", "YELLOW", "AUTO"] call A3A_fnc_patrolSetCombatModes;
-_group setVariable ["PATCOM_Group_State", "CALM"];
-
 if (PATCOM_DEBUG) then {
     [leader _group, "PATROL WATER", 10, "White"] call A3A_fnc_debugText3D;
 };

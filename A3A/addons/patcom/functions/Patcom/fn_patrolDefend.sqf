@@ -35,9 +35,6 @@ params [
 
 private _leader = leader _group;
 
-[_group, "SAFE", "NORMAL", "COLUMN", "YELLOW", "AUTO"] call A3A_fnc_patrolSetCombatModes;
-_group setVariable ["PATCOM_Group_State", "CALM"];
-
 if (PATCOM_DEBUG) then {
     [leader _group, "DEFEND", 10, "White"] call A3A_fnc_debugText3D;
 };
@@ -45,7 +42,7 @@ if (PATCOM_DEBUG) then {
 private _patrolParams = _group getVariable "PATCOM_Patrol_Params";
 private _waypointName = "PATCOM_PATROL_DEFEND";
 
-if ((waypointType [_group, currentWaypoint _group] != "MOVE") || ((waypointName [_group, currentWaypoint _group]) != _waypointName)) then {
+if (waypointType [_group, currentWaypoint _group] != "MOVE" || (waypointName [_group, currentWaypoint _group]) != _waypointName || time > _group getVariable ["PATCOM_WaypointTime", 0]) then {
     // If Enabled, allows AI to check for statics near their position.
     // Happens once per waypoint completion.
     if (PATCOM_AI_STATICS) then {

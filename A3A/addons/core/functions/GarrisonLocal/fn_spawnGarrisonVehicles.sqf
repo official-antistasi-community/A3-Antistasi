@@ -27,8 +27,8 @@ private _groups = _garrison get "groups";
 private _vehicles = _garrison get "vehicles";
 private _troops = _garrison get "troops";
 
-private _fullCrewed = [];           // boats, SAMs, arty, AA tanks
-private _parked = [];               // TODO: other airport vehicles, might be crewed too
+private _fullCrewed = [];           // boats & AA tanks
+private _parked = [];               // other airport vehicles, might be crewed too
 
 private _crewVar = ["A3A_crewed", "A3A_rebCrewed"] select (_side == teamPlayer);
 private _places = A3A_spawnPlacesHM get _marker;
@@ -116,7 +116,12 @@ private _fnc_isBlocked = {
 
     private _groupType = ["staticGroup", "mortarGroup"] select (_vehicle isKindOf "StaticMortar");
     private _group = _garrison get _groupType;
-    if (isNull _group) then { _group = createGroup [_side, true]; _groups pushBack _group; _garrison set [_groupType, _group] };
+    if (isNull _group) then {
+        _group = createGroup [_side, true];
+        _groups pushBack _group;
+        _garrison set [_groupType, _group];
+        _group addEventHandler ["CombatModeChanged", A3A_fnc_combatModeChangedEH];
+    };
 
     private _unit = [_group, _unitType, _markerPos, [], 0, "NONE"] call A3A_fnc_createUnit;
     _unit assignAsGunner _vehicle;
@@ -132,13 +137,18 @@ private _fnc_isBlocked = {
 // Rebels don't full-crew anything
 if (_side == teamPlayer) exitWith {};
 
-/*
-// If it's an airbase, add extra defending vehicles (2 more if there's no AA vehicle)
+
+// If it's an airbase, add extra defending vehicles
 if (_garrison get "type" == "airport") then {
     // Only want to crew armed vehicles, so we use threat as weight
     private _weights = _parked apply { A3A_groundVehicleThreat getOrDefault [typeOf _x, 0] };
-Debug_2("Parked %1; weights %2", _parked, _weights);
-    while { count _fullCrewed < 2 } do {
+    Debug_2("Parked %1; weights %2", _parked, _weights);
+
+    // If there's an AA tank in the garrison then we only generate 1 extra vehicle
+    private _hasAA = -1 != _storedVehicles findIf { _x#1 isEqualType 0 and { _places#(_x#1)#0 == "vehicleAA" } };
+    private _maxCrewed = count _fullCrewed + ([2, 1] select _hasAA);
+
+    while { count _fullCrewed < _maxCrewed } do {
         private _vehicle = _parked selectRandomWeighted _weights;
         if (isNil "_vehicle") exitWith {};
         _weights set [_parked find _vehicle, 0];            // zero weight so that it won't be selected again
@@ -146,7 +156,7 @@ Debug_2("Parked %1; weights %2", _parked, _weights);
     };
 };
 Debug_1("Fullcrewed %1", _fullCrewed);
-*/
+
 
 // Fill the fully-crewed vehicles
 {
@@ -160,18 +170,19 @@ Debug_1("Fullcrewed %1", _fullCrewed);
     _troops append units _group;
     _groups pushBack _group;
     _group deleteGroupWhenEmpty true;
+    _group addEventHandler ["CombatModeChanged", A3A_fnc_combatModeChangedEH];
 
     switch (_vehicle getVariable ["A3A_vehPlaceType", "none"]) do {
         case "vehicleAA": {
+            // AA vehicle actively patrols
             [_group, "Patrol_Area", 25, 100, 250, true, _markerPos, false, false] call A3A_fnc_patrolLoop;
         };
-        case "vehicles": {
-            // Otherwise move the units out of the vehicle
-            //[_vehicle] call A3A_fnc_setupParkedCrew;
+        case "vehicle": {
+            // Move the units out of the vehicle
+            [_vehicle, _marker] call A3A_fnc_setupParkedCrew;
         };
-        // Arty & SAM just sit there
+        // Arty, SAM and boats just sit there
     };
 
     sleep 0.3; continue;
 } forEach _fullCrewed;
-

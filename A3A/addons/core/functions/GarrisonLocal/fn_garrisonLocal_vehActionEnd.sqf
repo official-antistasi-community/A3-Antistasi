@@ -67,7 +67,6 @@ if (!isNull _crewGroup) then {
         units _crewGroup joinSilent (_garrison get _groupType);
     } else {
         _groups pushBack _crewGroup;
-        _crewGroup addEventHandler ["CombatModeChanged", A3A_fnc_combatModeChangedEH];
     };
 };
 

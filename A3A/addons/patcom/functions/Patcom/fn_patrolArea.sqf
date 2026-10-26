@@ -42,20 +42,6 @@ params [
 private _groupHomePosition = _group getVariable "PATCOM_Patrol_Home";
 private _patrolParams = _group getVariable "PATCOM_Patrol_Params";
 
-// This is the only place we handle civilians in this Commander.
-if ((side leader _group) == civilian) then {
-    [_group, "CARELESS", "NORMAL", "LINE", "BLUE", "AUTO"] call A3A_fnc_patrolSetCombatModes;
-} else {
-    private _knownEnemies = _group targets [true, 0, [], PATCOM_TARGET_TIME];
-    if (_knownEnemies isEqualTo []) then {
-        [_group, "SAFE", "LIMITED", "COLUMN", "YELLOW", "AUTO"] call A3A_fnc_patrolSetCombatModes;
-        _group setVariable ["PATCOM_Group_State", "CALM"];
-    } else {
-        [_group, "COMBAT", "NORMAL", "WEDGE", "RED", "AUTO"] call A3A_fnc_patrolSetCombatModes;
-        _group setVariable ["PATCOM_Group_State", "COMBAT"];
-    };
-};
-
 if (PATCOM_DEBUG) then {
     if ((side leader _group) == civilian) then {
         [leader _group, "CIVILIAN THINGS", 10, "White"] call A3A_fnc_debugText3D;

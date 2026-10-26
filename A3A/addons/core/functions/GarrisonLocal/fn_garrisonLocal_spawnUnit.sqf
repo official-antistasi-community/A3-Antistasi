@@ -29,9 +29,8 @@ private _group = grpNull;
 
 
 if (isNull _group) then {
-    Info("Creating new group");
-    _group = createGroup teamPlayer;
-    _group deleteGroupWhenEmpty true;
+    Trace("Creating new infantry group");
+    _group = createGroup [teamPlayer, true];
     _group addEventHandler ["CombatModeChanged", A3A_fnc_combatModeChangedEH];
     _groups pushBack _group;
     [_group, "Patrol_Defend", 0, 150, -1, true, markerPos _marker, false, false] spawn A3A_fnc_patrolLoop;        // won't run until after the isNil

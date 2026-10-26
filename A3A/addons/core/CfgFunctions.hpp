@@ -351,6 +351,7 @@ class CfgFunctions
             class garrisonOpLoop {};
             class getGarrisonLimit {};
             class setupLootCrate {};
+            class setupParkedCrew {};
             class spawnGarrisonPatrols {};
             class spawnGarrisonSquads {};
             class spawnGarrisonVehicles {};

@@ -1,15 +1,11 @@
 /*
-    Author: [Hazey]
+    Author: John Jordan
     Description:
-    Set bulky combat modes.
+    Set speed/formation/combat mode based on group behaviour
 
     Arguments:
     <Group> Group to handle orders on.
-    <String> Behaviour to set on group
-    <String> Speed Mode to set on group
-    <String> Formation to give group
-    <String> Combat Mode to set on group
-    <String> Set the units stance "AUTO" default.
+    <String> Behaviour to use
 
     Return Value:
       N/A
@@ -19,30 +15,30 @@
     Public: No
 
     Example: 
-    [_group] call A3A_fnc_patrolSetCombatModes;
+    [_group, "SAFE"] call A3A_fnc_patrolSetCombatModes;
 
     License: MIT License
 */
 
-params ["_group", ["_behaviour", "SAFE"], ["_speedMode", "NORMAL"], ["_formation", "COLUMN"], ["_combatMode", "GREEN"], ["_stance", "AUTO"]];
+params ["_group", "_behaviour"];
 
-if ((behaviour leader _group != _behaviour) || (speedMode _group != _speedMode) || (formation _group != _formation) || (combatMode _group != _combatMode)) then {
-    _group setVariable ["PATCOM_Combat_Modes_Set", false];
+if (_behaviour == "CARELESS") exitWith {};          // only use careless for forced movement special cases
+
+if (_behaviour == "SAFE") then {
+    // Sometimes groups enter SAFE and leave their units in AWARE. Looks weird.
+    { if (behaviour _x != "SAFE") then {_x setBehaviour "SAFE"} } forEach units _group;
+} else {
+    // If group switched to AWARE or COMBAT then don't switch back for a while
+    _group setVariable ["PATCOM_safeCheckTime", time+120];
 };
 
-// Avoid Changing the units combat modes unless we set the variable to false again to change stance.
-if (_group getVariable "PATCOM_Combat_Modes_Set") exitWith {};
+private _modeParams = switch (_behaviour) do {
+    case "COMBAT": { ["NORMAL", "WEDGE", "RED"] };
+    case "AWARE": { ["NORMAL", "WEDGE", "YELLOW"] };
+    case "SAFE": { ["LIMITED", "COLUMN", "YELLOW"] };
+};
+_modeParams params ["_speedMode", "_formation", "_combatMode"];
 
-_group setBehaviour _behaviour;
 _group setSpeedMode _speedMode;
 _group setFormation _formation;
 _group setCombatMode _combatMode;
-
-// You can't set stance by group, so we have to run through each unit.
-if (_stance != "AUTO") then {
-    {
-        _x setUnitPos _stance;
-    } forEach units _group;
-};
-
-_group setVariable ["PATCOM_Combat_Modes_Set", true];

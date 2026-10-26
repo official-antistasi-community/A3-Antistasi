@@ -57,6 +57,20 @@ if (side _group != civilian) then {
     _group setVariable ["PATCOM_Previous_Orders", _group getVariable "PATCOM_Patrol_Params"];
     _group setVariable ["PATCOM_Patrol_Params", [_patrolType, _minDist, _maxDist, _dist, _fromCenter, _centerPos, _searchBuildings]];
     _group setVariable ["PATCOM_AutoAttack", _autoAttack];
+
+    // Note: Triggers on any *group* behaviour change
+    _group addEventHandler ["CombatModeChanged", {
+        params ["_group", "_newMode"];
+        [_group, _newMode] call A3A_fnc_patrolSetCombatModes;
+    }];
+
+    // Default states same for everything at the moment. Rely on engine to mode switch
+    // Iffy in some cases at the moment? Hopefully it switches rapidly to combat if there are enemies visible
+    _group setBehaviourStrong "SAFE";
+} else {
+    _group setBehaviourStrong "CARELESS";
+    _group setFormation "LINE";
+    _group setCombatMode "BLUE";
 };
 
 // Will not run unless PATCOM_Controlled is set to false.
