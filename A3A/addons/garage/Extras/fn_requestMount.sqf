@@ -25,7 +25,7 @@ private _index = lbCurSel _ctrl;
 _ctrl lbSetCurSel -1;
 if (_index isEqualTo -1) exitWith {};
 
-private _newIconIndex = checkboxTextures findIf { !( _x isEqualTo (_ctrl lbPicture _index) ) };
+private _newIconIndex = checkboxTextures findIf { (_x isNotEqualTo (_ctrl lbPicture _index)) };
 
 //check if can load static
 private _class = _ctrl lbData _index;

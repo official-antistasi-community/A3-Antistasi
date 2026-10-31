@@ -1,3 +1,5 @@
+#ifndef HR_GRG_CFGDEFINES_INC
+#define HR_GRG_CFGDEFINES_INC
 //-- display --\\
 #define HR_GRG_IDD_Garage 17001
 
@@ -63,7 +65,7 @@
 #define HR_GRG_IDC_ExtraPylonsNewSysWarning 1700157
 #define HR_GRG_IDC_ExtraPylons 1700158 // Controlsgroup containing all the actual pylons
 #define HR_GRG_IDC_PylonsFirstIDC 1715300
-#define checkboxTextures [tolower gettext (configfile >> "RscCheckBox" >> "textureUnchecked"),tolower gettext (configfile >> "RscCheckBox" >> "textureChecked")]
+#define checkboxTextures [toLower getText (configFile >> "RscCheckBox" >> "textureUnchecked"),toLower getText (configFile >> "RscCheckBox" >> "textureChecked")]
 
 //-- General --\\
 #define HR_GRG_IDC_Cancel 170011
@@ -121,10 +123,11 @@
 
 //Cfg macros
 #define cfgPreview(className) getText(configfile >> "CfgVehicles" >> className >> "editorPreview")
-#define cfgIcon(className) getText(configfile >> "CfgVehicles" >> className >> "picture")
-#define cfgDispName(className) getText(configfile >> "CfgVehicles" >> className >> "displayName")
+#define cfgIcon(className) getText(configFile >> "CfgVehicles" >> className >> "picture")
+#define cfgDispName(className) getText(configFile >> "CfgVehicles" >> className >> "displayName")
 #define cfgVehClass(className) getText(configfile >> "CfgVehicles" >> className >> "vehicleClass")
-#define cfgEditorCat(className) getText(configfile >> "CfgVehicles" >> className >> "editorSubCategory")
-#define cfgMaxSpeed(className) getNumber(configfile >> "CfgVehicles" >> className >> "maxSpeed")
-#define cfgEnginePower(className) getNumber(configfile >> "CfgVehicles" >> className >> "enginePower")
-#define cfgAceCargo(className) getNumber(configfile >> "CfgVehicles" >> className >> "ace_cargo_space")
+#define cfgEditorCat(className) getText(configFile >> "CfgVehicles" >> className >> "editorSubCategory")
+#define cfgMaxSpeed(className) getNumber(configFile >> "CfgVehicles" >> className >> "maxSpeed")
+#define cfgEnginePower(className) getNumber(configFile >> "CfgVehicles" >> className >> "enginePower")
+#define cfgAceCargo(className) getNumber(configFile >> "CfgVehicles" >> className >> "ace_cargo_space")
+#endif

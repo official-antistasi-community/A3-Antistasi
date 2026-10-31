@@ -29,7 +29,7 @@ if (!isServer) exitWith {Error("Not server executed")};
 if !(_player call HR_GRG_canSell) exitWith {["STR_HR_GRG_Feedback_sellVehicle_comOnly"] remoteExecCall ["HR_GRG_fnc_hint", _player];};
 _selectedVehicle params [["_catIndex", -1], ["_vehUID", -1], ["_class", ""]];
 if ( (_catIndex isEqualTo -1) || (_vehUID isEqualTo -1) ) exitWith {};
-Trace_2("Attempting to sell vehicle at cat: %1 | Vehicle ID: %2 | Classname: %3", _catIndex, _vehUID, _class);
+Trace_3("Attempting to sell vehicle at cat: %1 | Vehicle ID: %2 | Classname: %3",_catIndex,_vehUID,_class);
 
 private _refund = [_class] call HR_GRG_getVehicleSellPrice;
 if (_refund == 0) exitWith {["STR_HR_GRG_Feedback_sellVehicle_noPrice"] remoteExecCall ["HR_GRG_fnc_hint", _player];};
@@ -37,7 +37,7 @@ if (_refund == 0) exitWith {["STR_HR_GRG_Feedback_sellVehicle_noPrice"] remoteEx
 private _cat = HR_GRG_Vehicles#_catIndex;
 private _veh = _cat get _vehUID;
 private _lock = _veh#2;
-if !(_lock isEqualTo "") exitWith {["STR_HR_GRG_Feedback_sellVehicle_locked"] remoteExecCall ["HR_GRG_fnc_hint", _player];};
+if (_lock isNotEqualTo "") exitWith {["STR_HR_GRG_Feedback_sellVehicle_locked"] remoteExecCall ["HR_GRG_fnc_hint", _player];};
 
 private _recipients = +HR_GRG_Users;
 _recipients pushBackUnique 2; // to avoid double-calling the function on localhost
@@ -48,4 +48,4 @@ private _removeStatics = (_catIndex != HR_GRG_STATICINDEX);
 [_refund] spawn HR_GRG_addResources;
 
 ["STR_HR_GRG_Feedback_sellVehicle_sold",[str _refund]] remoteExecCall ["HR_GRG_fnc_hint", _player];
-Info_4("Vehicle UID %1 sold by %2 for %3. Vehicle classname: %4.", _vehUID, name _player, _refund,_class);
+Info_4("Vehicle UID %1 sold by %2 for %3. Vehicle classname: %4.",_vehUID,name _player,_refund,_class);

@@ -37,6 +37,6 @@ switch (true) do {
     case (_number <= 1e-2): {str (floor (_number*1e2)) + "c" + _baseUnit};
     case (_number <= 1e-1): {str (floor (_number*1e1)) + "d" + _baseUnit};
     */
-    Default {str (floor _number) + _baseUnit};
+    default {str (floor _number) + _baseUnit};
 
 };

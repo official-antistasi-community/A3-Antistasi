@@ -22,7 +22,7 @@
 FIX_LINE_NUMBERS()
 params [ ["_UID" ,"", [""]]];
 if (_UID isEqualTo "") exitWith {false};
-Trace_1("Releasing all vehicles with UID: %1", _UID);
+Trace_1("Releasing all vehicles with UID: %1",_UID);
 
 //release all vehicles in all HR_GRG_categories
 {

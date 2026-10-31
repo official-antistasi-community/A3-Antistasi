@@ -38,14 +38,14 @@ Trace("Clearing old pylon controls");
 Trace("Prepping base info");
 private _baseOffset = 0;
 private _IDCCount = 1;
-private _pylonsCfg = (configFile >> "CfgVehicles" >> typeOf HR_GRG_previewVeh >> "Components" >> "TransportPylonsComponent");
+private _pylonsCfg = (configOf HR_GRG_previewVeh >> "Components" >> "TransportPylonsComponent");
 HR_GRG_PylonData = [];
 HR_GRG_Turrets = [];
 private _fullCrew = fullCrew [HR_GRG_previewVeh,"",true];
 {
     if (
         ((_x#2) isEqualTo -1) //not cargo turret
-        && !((_x#3) isEqualTo [])
+        && (_x#3) isNotEqualTo []
     ) then { HR_GRG_Turrets pushBack (_x#3) };
 } forEach _fullCrew;
 
@@ -92,7 +92,7 @@ HR_GRG_Pylon_GeneralCtrls = [_cbCtrl, _presetComboCtrl];
 Trace("Starting to add pylons controls, consists of controls for text, turret button and pylon mag combo box");
 private _curPylons = getPylonMagazines HR_GRG_previewVeh;
 {
-    Trace_1("Adding pylon controls for pylon: %1", configName _x);
+    Trace_1("Adding pylon controls for pylon: %1",configName _x);
     //general info
     private _mags = HR_GRG_previewVeh getCompatiblePylonMagazines (_forEachIndex + 1);
     private _pylonMag = _curPylons#_forEachIndex;
@@ -166,7 +166,8 @@ if (_IDCCount isEqualTo 1) then {
         , 37 * GRID_NOUISCALE_W
         , 37 * GRID_NOUISCALE_H
     ];
-    _textCtrl ctrlSetStructuredText composeText [localize "STR_HR_GRG_Pylons_noPylons", lineBreak,"    ", cfgDispName(typeOf HR_GRG_previewVeh)];
+    private _vehClass = typeOf HR_GRG_previewVeh;
+    _textCtrl ctrlSetStructuredText composeText [localize "STR_HR_GRG_Pylons_noPylons", lineBreak,"    ", cfgDispName(_vehClass)];
     _textCtrl ctrlCommit 0;
 };
 

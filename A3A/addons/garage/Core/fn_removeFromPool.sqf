@@ -23,7 +23,7 @@
 #include "defines.inc"
 FIX_LINE_NUMBERS()
 params [["_UID", "", [""]], ["_player", objNull, [objNull]], ["_removeMounts",false,[false]]];
-Trace_1("Removing vehicles from garage with UID: %1", _UID);
+Trace_1("Removing vehicles from garage with UID: %1",_UID);
 if (_UID isEqualTo "") exitWith {false};
 
 //find vehicles to remove
@@ -71,7 +71,7 @@ if (!isNull player) then {
 //logging is low priority do it after done modifying the pool
 {
     (_x#2) params ["_dispName", "", "", "_UID"];
-    Info_4("By: %1 [%2] | Type: %3 | Vehicle ID: %4", name _player, _UID, _dispName, _x#1);
+    Info_4("By: %1 [%2] | Type: %3 | Vehicle ID: %4",name _player,_UID,_dispName,_x#1);
 } forEach _toRemove;
 
 true

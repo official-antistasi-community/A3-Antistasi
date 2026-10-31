@@ -38,7 +38,7 @@ private _HR_GRG_SelectedVehicles = [-1,-1,""];
     _ctrl lbSetPictureColorSelected [_index, [0.85, 0.85, 0.55, 1]];
 
     private _tooltipText = "";
-    if !( _checkedOut isEqualTo "" ) then {
+    if (_checkedOut isNotEqualTo "") then {
         private _color = [1,0.1,0.1,1];
         if ( (HR_GRG_SelectedVehicles#1) isEqualTo _x ) then {
             _selected = _index;
@@ -49,7 +49,7 @@ private _HR_GRG_SelectedVehicles = [-1,-1,""];
         _tooltipText = format ["%1 %2 %3", name (_checkedOut call BIS_fnc_getUnitByUID), ( localize "STR_HR_GRG_Feedback_checkedOutToolTip" ), parseText "\n"];
     };
 
-    if !( _lockedUID isEqualTo "" ) then {
+    if (_lockedUID isNotEqualTo "") then {
         private _color = if ( _lockedUID isEqualTo HR_GRG_PlayerUID ) then { [1,1,1,1] } else { [1,0.1,0.1,1] }; //white, red
         _ctrl lbSetPictureRight [_index, LockIcon];
         _ctrl lbSetPictureRightColor [_index, _color];

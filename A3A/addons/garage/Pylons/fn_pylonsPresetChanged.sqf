@@ -35,7 +35,7 @@ for "_i" from 1 to lbSize _presetCtrl -1 do {
 
 private _equiped = [];
 { _equiped pushBack (_x#1) } forEach HR_GRG_Pylons;
-if ( ( { !(_x isEqualTo "") } count _equiped ) isEqualTo 0 ) then { _equiped = [] };
+if ( ( { (_x isNotEqualTo "") } count _equiped ) isEqualTo 0 ) then { _equiped = [] };
 
 //if we are updating from new pylons
 if (_blockPylonChange) exitWith {

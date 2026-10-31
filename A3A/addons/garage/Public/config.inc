@@ -35,7 +35,7 @@ HR_GRG_CP_closeCnd = {
 };
 
 HR_GRG_Cnd_isAirbase = {
-    count (airportsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (HR_GRG_accessPoint inArea _x)}) > 0
+    (airportsX select {(sidesX getVariable [_x,sideUnknown] == teamPlayer) and (HR_GRG_accessPoint inArea _x)}) isNotEqualTo []
 };
 
 // Return lock limit for specified player
@@ -104,11 +104,11 @@ HR_GRG_isCivilian = {
         ["_class", ""]
     ];
 
-    [1, 0] select (_class in undercoverVehicles);
+    parseNumber !(_class in undercoverVehicles);
 };
 
 //CBA settings
-if (isClass (configfile >> "CBA_Extended_EventHandlers")) then {
+if (isClass (configFile >> "CBA_Extended_EventHandlers")) then {
 
     ["HR_GRG_dLock", "CHECKBOX", [localize "STR_A3A_inc_public_config_lockOnGarageTitle", localize "STR_A3A_inc_public_config_lockOnGarageLong"], [HR_GRG_Prefix,"Garage"], (HR_GRG_dLock isEqualTo {getPlayerUID player}), false, {
         HR_GRG_dLock = [{""}, { getPlayerUID player }] select _this;

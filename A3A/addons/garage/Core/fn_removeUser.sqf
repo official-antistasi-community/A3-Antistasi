@@ -29,6 +29,6 @@ if (
     || {!(_client isEqualType 0)}
 ) exitWith {false};
 
-Trace_1("Removing user: %1", _client);
+Trace_1("Removing user: %1",_client);
 HR_GRG_Users deleteAt (HR_GRG_Users find _client);
 true

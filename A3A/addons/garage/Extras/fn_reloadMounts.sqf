@@ -43,7 +43,7 @@ for "_i" from 0 to (lbSize _ctrl) -1 do {
 HR_GRG_Mounts = HR_GRG_Mounts select { _x in _newMounts };
 HR_GRG_Mounts append (_newMounts - HR_GRG_Mounts);
 
-Trace_1("reloadMounts - Remaining mounts | %1", HR_GRG_Mounts);
+Trace_1("reloadMounts - Remaining mounts | %1",HR_GRG_Mounts);
 
 
 //add new statics

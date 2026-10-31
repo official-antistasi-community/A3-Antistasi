@@ -25,7 +25,7 @@
     License: APL-ND
 */
 params ["_vehicle"];
-private _restoreState = [0,1] select (HR_GRG_hasRepairSource && !HR_GRG_ServiceDisabled_Repair);
+private _restoreState = parseNumber (HR_GRG_hasRepairSource && !HR_GRG_ServiceDisabled_Repair);
 
 private _output = [damage _vehicle min 0.89];
 private _hitPointDamage = getAllHitPointsDamage _vehicle;

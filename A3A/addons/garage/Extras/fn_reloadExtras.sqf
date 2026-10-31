@@ -42,7 +42,7 @@ if (!isClass (configFile >> "CfgVehicles" >> _class)) exitWith {
 
 private _nodeCfg = [HR_GRG_previewVeh] call A3A_Logistics_fnc_getNodeConfig;
 private _vehNodes = [HR_GRG_previewVeh] call A3A_Logistics_fnc_getVehicleNodes;
-private _vehModel = getText (configFile >> "CfgVehicles" >> typeOf HR_GRG_previewVeh >> "model");
+private _vehModel = getText (configOf HR_GRG_previewVeh >> "model");
 if (_vehNodes isEqualType []) then {
     private _capacity = count _vehNodes;
     {
@@ -69,9 +69,9 @@ if (_vehNodes isEqualType []) then {
             private _index = _ctrlExtraMounts lbAdd _displayName;
             _ctrlExtraMounts lbSetData [_index, _staticClass];
             _ctrlExtraMounts lbSetValue [_index, _x];
-            _ctrlExtraMounts lbsetpicture [_index,checkboxTextures select (_checkedOut isEqualTo HR_GRG_PlayerUID)];
+            _ctrlExtraMounts lbSetPicture [_index,checkboxTextures select (_checkedOut isEqualTo HR_GRG_PlayerUID)];
             _ctrlExtraMounts lbSetTextRight [_index, format ["Size: %1", _size]];
-            Trace_4("Mount Added to list | Class: %1 | UID: %2 | Checked: %3 | Size: %4", _staticClass, _x, (_checkedOut isEqualTo HR_GRG_PlayerUID), _type);
+            Trace_4("Mount Added to list | Class: %1 | UID: %2 | Checked: %3 | Size: %4",_staticClass,_x,(_checkedOut isEqualTo HR_GRG_PlayerUID),_type);
         };
     } forEach (HR_GRG_Vehicles#HR_GRG_STATICINDEX);//statics
     lbSort _ctrlExtraMounts;
@@ -84,22 +84,22 @@ HR_GRG_curTexture = _customisation#0;
 private _badInit = HR_GRG_curTexture isEqualTo [];
 {
     private _displayName = getText (_x >> "displayName");
-    private _cfgName = configname _x;
+    private _cfgName = configName _x;
     if (_displayName != "" && {!(_displayName in HR_GRG_blackListCamo)}) then {
         private _index = _ctrlExtraTexture lbAdd _displayName;
-        _ctrlExtraTexture lbsetdata [_index,_cfgName];
+        _ctrlExtraTexture lbSetData [_index,_cfgName];
         if (_badInit) then {
-            _ctrlExtraTexture lbsetpicture [_index,checkboxTextures#0];
+            _ctrlExtraTexture lbSetPicture [_index,checkboxTextures#0];
         } else {
-            _ctrlExtraTexture lbsetpicture [_index,checkboxTextures select ((HR_GRG_curTexture#0) isEqualTo _cfgName)];
+            _ctrlExtraTexture lbSetPicture [_index,checkboxTextures select ((HR_GRG_curTexture#0) isEqualTo _cfgName)];
         };
     };
-} foreach (configProperties [(configfile >> "CfgVehicles" >> _class >> "textureSources"),"isclass _x",true]);
+} forEach (configProperties [(configFile >> "CfgVehicles" >> _class >> "textureSources"),"isclass _x",true]);
 lbSort _ctrlExtraTexture;
 
 //animations
 {
-    _configName = configname _x;
+    _configName = configName _x;
     _displayName = getText (_x >> "displayName");
     if (_displayName != "") then {
         _textures = getArray (_x >> "textures");
@@ -108,7 +108,7 @@ lbSort _ctrlExtraTexture;
         private _phase = ceil (HR_GRG_PreviewVeh animationPhase _configName);
         _ctrlExtraAnim lbSetPicture [_index,checkboxTextures#_phase];
     };
-} foreach (configProperties [(configfile >> "CfgVehicles" >> _class >> "animationSources"),"isclass _x",true]);
+} forEach (configProperties [(configFile >> "CfgVehicles" >> _class >> "animationSources"),"isclass _x",true]);
 lbSort _ctrlExtraAnim;
 
 HR_GRG_curAnims = _customisation#1;
@@ -120,21 +120,21 @@ _ctrlSourcePanelAmmo ctrlSetTooltip ([
     localize "STR_HR_GRG_SourcePanel_toolTip_Ammo_Unavailable"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Ammo_Available"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Ammo_Disabled"
-] select (if (HR_GRG_ServiceDisabled_Rearm || HR_GRG_useNewRearmSys) then {2} else {HR_GRG_hasAmmoSource}));
+] select ([HR_GRG_hasAmmoSource, 2] select (HR_GRG_ServiceDisabled_Rearm || HR_GRG_useNewRearmSys)));
 
 _ctrlSourcePanelFuel ctrlSetStructuredText composeText ["   ", image RefuelIcon, " ", image (checkboxTextures select (HR_GRG_hasFuelSource && !HR_GRG_ServiceDisabled_Refuel))];
 _ctrlSourcePanelFuel ctrlSetTooltip ([
     localize "STR_HR_GRG_SourcePanel_toolTip_Fuel_Unavailable"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Fuel_Available"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Fuel_Disabled"
-] select (if (HR_GRG_ServiceDisabled_Refuel) then {2} else {HR_GRG_hasFuelSource}));
+] select ([HR_GRG_hasFuelSource, 2] select (HR_GRG_ServiceDisabled_Refuel)));
 
 _ctrlSourcePanelRepair ctrlSetStructuredText composeText ["   ", image RepairIcon, " ", image (checkboxTextures select (HR_GRG_hasRepairSource && !HR_GRG_ServiceDisabled_Repair))];
 _ctrlSourcePanelRepair ctrlSetTooltip ([
     localize "STR_HR_GRG_SourcePanel_toolTip_Repair_Unavailable"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Repair_Available"
     , localize "STR_HR_GRG_SourcePanel_toolTip_Repair_Disabled"
-] select (if (HR_GRG_ServiceDisabled_Repair) then {2} else {HR_GRG_hasRepairSource}));
+] select ([HR_GRG_hasRepairSource, 2] select (HR_GRG_ServiceDisabled_Repair)));
 
 if (isNull HR_GRG_previewVeh) exitWith {};
 //update info panel
@@ -145,21 +145,21 @@ private _topBar = composeText [
 
 //update Origins panel
 private _Origins = _disp displayCtrl HR_GRG_IDC_OriginsPanel;
-private _itemCfg = configfile >> "cfgvehicles" >> _class;
+private _itemCfg = configFile >> "cfgvehicles" >> _class;
 private _dlc = "";
-private _addons = configsourceaddonlist _itemCfg;
-if (count _addons > 0) then {
-	private _mods = configsourcemodlist (configfile >> "CfgPatches" >> _addons select 0);
-	if (count _mods > 0) then {
+private _addons = configSourceAddonList _itemCfg;
+if (_addons isNotEqualTo []) then {
+	private _mods = configSourceModList (configFile >> "CfgPatches" >> _addons select 0);
+	if (_mods isNotEqualTo []) then {
 		_dlc = _mods select 0;
 	};
 };
 private _dlcParams = modParams [_dlc,["logo","logoOver"]];
 private _logo = _dlcParams param [0,""];
 private _logoOver = _dlcParams param [1,""];
-private _fieldManualTopicAndHint = getarray (configfile >> "cfgMods" >> _dlc >> "fieldManualTopicAndHint");
-_Origins ctrlsetfade 0;
-_Origins ctrlseteventhandler ["buttonclick",format ["if (count %1 > 0) then {(%1 + [ctrlparent (_this select 0)]) call bis_fnc_openFieldManual;};",_fieldManualTopicAndHint]];
+private _fieldManualTopicAndHint = getArray (configFile >> "cfgMods" >> _dlc >> "fieldManualTopicAndHint");
+_Origins ctrlSetFade 0;
+_Origins ctrlSetEventHandler ["buttonclick",format ["if (count %1 > 0) then {(%1 + [ctrlparent (_this select 0)]) call bis_fnc_openFieldManual;};",_fieldManualTopicAndHint]];
 private _OriginsText = composeText [
     image _logo, " ",[_itemCfg,_Origins] call bis_fnc_overviewauthor
 ];
@@ -220,7 +220,7 @@ private _vehFuelState = composeText [image RefuelIcon, " " + str round (_avgFuel
 private _vehDmgState = composeText [image RepairIcon, " " + str round (_avgDmg * 100) + " %"];
 
 private _vehicleState = composeText [
-    _vehAmmoState setAttributes ["color", (if (_hasAmmo) then {_avgAmmo} else {1}) call _selectStateColor]
+    _vehAmmoState setAttributes ["color", ([1, _avgAmmo] select (_hasAmmo)) call _selectStateColor]
     , "    "
     , _vehFuelState setAttributes ["color", _avgFuel call _selectStateColor]
     , "    "
@@ -229,7 +229,7 @@ private _vehicleState = composeText [
 
 // update remainingfuel from sources available for refueling
 private _availableFuel = call HR_GRG_fnc_getTotalFuelCargo;
-private _maxFuel = getNumber ( configOf HR_GRG_previewVeh / (if (A3A_hasACE) then {"ace_refuel_fuelCapacity"} else {"fuelCapacity"}) );
+private _maxFuel = getNumber ( configOf HR_GRG_previewVeh / (["fuelCapacity", "ace_refuel_fuelCapacity"] select (A3A_hasACE)) );
 private _requiredFuel = _maxFuel - (fuel HR_GRG_previewVeh * _maxFuel);
 private _refuelHintText = if (_requiredFuel < _availableFuel) then {
     localize "STR_HR_GRG_Refuel_fullRefuel" + " " + str _requiredFuel + "L"

@@ -28,10 +28,10 @@ if (isNil "HR_GRG_Vehicles") then { [] call HR_GRG_fnc_initServer };
 private _catsRequiringUpdate = [];
 private _cfg = configFile >> "CfgVehicles";
 {
-    if (!isClass (_cfg >> _x)) then {Info_1("Invalid class: %1", str _x); continue};
+    if (!isClass (_cfg >> _x)) then {Info_1("Invalid class: %1",str _x); continue};
     private _cat = [_x] call HR_GRG_fnc_getCatIndex;
     _catsRequiringUpdate pushBackUnique _cat;
-    if (_cat < 0) then {Info_1("Unsoported category: %1", str _x); continue};
+    if (_cat < 0) then {Info_1("Unsoported category: %1",str _x); continue};
     private _vehUID = [] call HR_GRG_fnc_genVehUID;
     (HR_GRG_Vehicles#_cat) set [_vehUID, [cfgDispName(_x), _x, _lockUID, "", [[1,-1,nil],[0,[[],[]],-1],[]], "", [false, false]]];
 
@@ -46,7 +46,7 @@ private _cfg = configFile >> "CfgVehicles";
         [_sourceIndex] call HR_GRG_fnc_declairSources;
     }; //register vehicle as a source
 
-    Info_2("Vehicle added to garage: %1 | Lock UID: %2", str _x, str _lockUID);
+    Info_2("Vehicle added to garage: %1 | Lock UID: %2",str _x,str _lockUID);
 } forEach _vehicles;
 
 //refresh category for active users
@@ -63,7 +63,7 @@ private _refreshCode = {
     call HR_GRG_fnc_updateVehicleCount;
 };
 
-if !(HR_GRG_Users isEqualTo []) then {
+if (HR_GRG_Users isNotEqualTo []) then {
     [ _catsRequiringUpdate, _refreshCode ] remoteExecCall ["call", HR_GRG_Users];
 };
 

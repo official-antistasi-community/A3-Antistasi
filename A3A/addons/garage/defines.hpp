@@ -68,8 +68,6 @@
 #define ST_PICTURE        0x30
 #define ST_FRAME          0x40
 #define ST_BACKGROUND     0x50
-#define ST_GROUP_BOX      0x60
-#define ST_GROUP_BOX2     0x70
 #define ST_HUD_BACKGROUND 0x80
 #define ST_TILE_PICTURE   0x90
 #define ST_WITH_RECT      0xA0
@@ -157,7 +155,7 @@ class HR_GRG_RscStructuredText
         color = "#FFFFFF";
         align = "left";
         valign = "middle";
-        shadow = false;
+        shadow = 0;
         shadowColor = "#F5F5F5";
         size = "1";
     };
@@ -220,7 +218,6 @@ class HR_GRG_RscButton
     onMouseEnter = "(_this select 0) ctrlSetTextColor [0.85,0.85,0.55,1]";
     onMouseExit = "(_this select 0) ctrlSetTextColor [1,1,1,1]";
 };
-class ctrlButtonPictureKeepAspect;
 
 class HR_GRG_RscFrame
 {
@@ -399,7 +396,7 @@ class HR_GRG_RscCombo
     colorSelectBackground[] = {0.53,0.53,0.53,0.75};
     arrowEmpty = "\A3\ui_f\data\GUI\RscCommon\RscCombo\arrow_combo_ca.paa";
     arrowFull = "\A3\ui_f\data\GUI\RscCommon\RscCombo\arrow_combo_active_ca.paa";
-    wholeHeight = 0.45 * safeZoneH;
+    wholeHeight = QUOTE(0.45 * safeZoneH);
     colorActive[] = {1,0,0,1};
 };
 class HR_GRG_RscComboBlckBG : HR_GRG_RscCombo

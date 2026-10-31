@@ -26,12 +26,12 @@ private _index = lbCurSel _ctrl;
 _ctrl lbSetCurSel -1;
 if (_index isEqualTo -1) exitWith {false};
 
-private _newIconIndex = checkboxTextures findIf { !( _x isEqualTo (_ctrl lbPicture _index) ) };
+private _newIconIndex = checkboxTextures findIf { (_x isNotEqualTo (_ctrl lbPicture _index)) };
 _ctrl lbSetPicture [_index, checkboxTextures#_newIconIndex];
 private _anims = [];
-for "_i" from 0 to (lbsize _ctrl - 1) do {
-    _anims pushback (_ctrl lbdata _i);
-    _anims pushback (checkboxTextures find (_ctrl lbpicture _i));
+for "_i" from 0 to (lbSize _ctrl - 1) do {
+    _anims pushBack (_ctrl lbData _i);
+    _anims pushBack (checkboxTextures find (_ctrl lbPicture _i));
 };
 HR_GRG_curAnims = _anims;
 

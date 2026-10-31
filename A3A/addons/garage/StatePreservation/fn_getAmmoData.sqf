@@ -48,7 +48,7 @@ scopeName "main";
 if (!isClass _pylonsCfg and HR_GRG_reduceState) then {
     private _blacklistMags = ["FakeWeapon", "FakeMagazine"];
     private _originalMags = (typeOf _veh call HR_GRG_fnc_getDefaultMags) select {!(_x#0 in _blacklistMags)};
-    if (count _originalMags == 0) then { [] breakOut "main" };        // may as well keep this one
+    if (_originalMags isEqualTo []) then { [] breakOut "main" };        // may as well keep this one
 
     private _curMags = magazinesAllTurrets _veh select {!(_x#0 in _blacklistMags)};
     private _totalRounds = 0;

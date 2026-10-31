@@ -38,13 +38,13 @@ private _sourceEmptied = false;
 private _stateChanges = [];
 while {count (HR_GRG_Sources#1) > 0} do {
     if (_neededCapacity == 0) exitWith {};
-    Trace_1("Needed capacity: %1", _neededCapacity);
+    Trace_1("Needed capacity: %1",_neededCapacity);
 
     private _sourceUID = HR_GRG_Sources#1#0;
     private _sourceData = (HR_GRG_Vehicles#HR_GRG_SOURCEINDEX) get _sourceUID;
     if (isNil "_sourceData") exitWith {
         // Shouldn't happen, but don't 10,000-cycle loop if it does
-        Error_1("Fuel source vehicle %1 not found in source category", _sourceUID);
+        Error_1("Fuel source vehicle %1 not found in source category",_sourceUID);
     };
 
     private _fuelData = _sourceData#4#0; //vehicle data >> statePreservation data >> Fuel data
@@ -54,11 +54,11 @@ while {count (HR_GRG_Sources#1) > 0} do {
     } else {
         (_fuelData # 1) * _transportFuel;
     };
-    Trace_1("Fuel cargo: %1", _fuelCargo);
+    Trace_1("Fuel cargo: %1",_fuelCargo);
 
     if (_fuelCargo < _neededCapacity) then {
         _neededCapacity = _neededCapacity - _fuelCargo;
-        _fuelData set [if (A3A_hasAce) then {2} else {1}, 0];
+        _fuelData set [[1, 2] select (A3A_hasAce), 0];
         (HR_GRG_Sources#1) deleteAt ((HR_GRG_Sources#1) find _sourceUID);
         _sourceEmptied = true;
     } else {
@@ -80,5 +80,5 @@ if (_sourceEmptied) then { [1] call HR_GRG_fnc_declairSources; };
     _vehicle, 1 - (_neededCapacity / _maxFuel)/*convert needed fuel to precentage so fuel can be applied*/
 ] remoteExecCall ["setFuel", owner _vehicle];
 
-Trace_1("setting vehicle fuel to %1", 1 - (_neededCapacity/_maxFuel));
+Trace_1("setting vehicle fuel to %1",1 - (_neededCapacity/_maxFuel));
 true;

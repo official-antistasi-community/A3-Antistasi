@@ -30,7 +30,7 @@ private _pylonLoudout = [];
     _pylonLoudout pushBack [_forEachIndex + 1, _data, false, _button getVariable ["HR_GRG_turret", []] ];
 } forEach HR_GRG_PylonData;
 HR_GRG_Pylons = _pylonLoudout;
-Trace_1("Pylon Loadout: %1", HR_GRG_Pylons);
+Trace_1("Pylon Loadout: %1",HR_GRG_Pylons);
 [controlNull, -1, true] call HR_GRG_fnc_PylonsPresetChanged;
 
 //update preview pylon loudout

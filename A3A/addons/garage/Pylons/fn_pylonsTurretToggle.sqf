@@ -26,7 +26,7 @@
 FIX_LINE_NUMBERS()
 params ["_ctrl", "_switch", "_turret"];
 
-if (_switch && !(HR_GRG_Turrets isEqualTo [])) then {
+if (_switch && HR_GRG_Turrets isNotEqualTo []) then {
     _turret = [[0], []] select ((_ctrl getVariable "HR_GRG_turret") isEqualTo [0]);
 
     {

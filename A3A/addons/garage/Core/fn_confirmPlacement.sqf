@@ -25,6 +25,7 @@
 
     License: APL-ND
 */
+#pragma hemtt ignore_variables ["HR_GRG_keyHint"]
 #include "defines.inc"
 #include "\a3\ui_f\hpp\definedikcodes.inc"
 params [
@@ -41,7 +42,7 @@ params [
 if (!isClass (configFile >> "CfgVehicles" >> _class)) exitWith {HR_GRG_placing = false};
 if (isNil "HR_GRG_curTexture") then {HR_GRG_curTexture = []};
 if (isNil "HR_GRG_curAnims") then {HR_GRG_curAnims = []};
-if (!isNil "HR_GRG_placing" && {HR_GRG_placing}) exitWith {Error_1("already placing, params: %1", _this)};
+if (!isNil "HR_GRG_placing" && {HR_GRG_placing}) exitWith {Error_1("already placing, params: %1",_this)};
 HR_GRG_placing = true;
 
 //define global variables
@@ -296,7 +297,7 @@ HR_GRG_EH_keyDown = findDisplay 46 displayAddEventHandler ["KeyDown", {
         } forEach HR_GRG_CP_mounts;
 
         //set pylons loudout
-        if !(HR_GRG_CP_pylons isEqualTo []) then {
+        if (HR_GRG_CP_pylons isNotEqualTo []) then {
             {
                 _x params ["_pylonIndex", "_mag", "_forced", "_turret"];
                 _veh setPylonLoadout [_pylonIndex, _mag, _forced, _turret]
@@ -367,7 +368,7 @@ HR_GRG_EH_EF = addMissionEventHandler ["EachFrame", {
         _square params ["_a","_b"];
         _nearObjects = HR_GRG_dispVehicle nearObjects ["CAManBase", _diameter];
         private _inArea = _nearObjects inAreaArray [HR_GRG_dispVehicle modelToWorldVisual _adjustment, _a, _b, HR_GRG_dir, true];
-        if !(_inArea isEqualTo []) exitWith { true call _hide; HR_GRG_validPlacement = 2 };
+        if (_inArea isNotEqualTo []) exitWith { true call _hide; HR_GRG_validPlacement = 2 };
 
         HR_GRG_validPlacement = 0;
         false call _hide;

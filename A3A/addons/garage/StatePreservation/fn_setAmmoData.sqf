@@ -56,6 +56,6 @@ private _pylonData = _ammoData - _weaponData;
 
 {
     (_x#1) params ["_index", "", "_turret", "_mag", "_count"];
-    _vehicle setPylonLoadOut [_index, _mag, false, _turret]; //claims effect local, actually global
+    _vehicle setPylonLoadout [_index, _mag, false, _turret]; //claims effect local, actually global
     _vehicle setAmmoOnPylon [_index, _count]; //global effect
 } forEach _pylonData;

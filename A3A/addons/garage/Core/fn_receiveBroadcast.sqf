@@ -49,7 +49,7 @@ if (!isNil "_checkoutUID") then {
 private _isPlayer = _player isEqualTo player;
 if (_isPlayer) then {
     if (_switch) then {
-        Trace_3("Setting selected vehicle | Cat: %1 | UID: %2 | Class: %3", _catIndex, _vehUID, _vehicles#1);
+        Trace_3("Setting selected vehicle | Cat: %1 | UID: %2 | Class: %3",_catIndex,_vehUID,_vehicles#1);
         HR_GRG_SelectedVehicles = [_catIndex, _vehUID, _vehicle#1];
         [] call HR_GRG_fnc_reloadPreview;
         if (
@@ -64,7 +64,7 @@ if (_isPlayer) then {
 //refresh the category display
 private _disp = findDisplay HR_GRG_IDD_Garage;
 private _ctrl = HR_GRG_Cats#_catIndex;
-Trace_2("r.Broadcast - Ctrl: %1 | Active: %2" , _ctrl, ctrlEnabled _ctrl);
+Trace_2("r.Broadcast - Ctrl: %1 | Active: %2",_ctrl,ctrlEnabled _ctrl);
 if (ctrlEnabled _ctrl) then {
     [_ctrl, _catIndex] call HR_GRG_fnc_reloadCategory;
 };

@@ -27,7 +27,7 @@
 #include "defines.inc"
 FIX_LINE_NUMBERS()
 params ["_UID", "_vehUID", "_newIconIndex", "_owner", "_player"];
-Trace_4("Finding available mount | UID: %1 | Vehicle ID: %2 | Reserving: %3 | Client: %4", _UID, _vehUID, _newIconIndex, _owner);
+Trace_4("Finding available mount | UID: %1 | Vehicle ID: %2 | Reserving: %3 | Client: %4",_UID,_vehUID,_newIconIndex,_owner);
 private _failed = { ["STR_HR_GRG_Feedback_requestMount_Denied"] remoteExec ["HR_GRG_fnc_Hint", _owner]; [true] remoteExecCall ["HR_GRG_fnc_toggleConfirmBttn", _owner]; false };
 if (!isServer) exitWith _failed;
 

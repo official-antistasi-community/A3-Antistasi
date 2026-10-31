@@ -40,5 +40,5 @@ private _toRemove = [];
 
 } forEach _turrets;
 
-Trace_1("Removing pylon weapons: %1", _toRemove);
+Trace_1("Removing pylon weapons: %1",_toRemove);
 { _veh removeWeaponTurret _x } forEach _toRemove;

@@ -21,7 +21,7 @@
 #include "defines.inc"
 FIX_LINE_NUMBERS()
 params ["_class"]; // [["_class", "_vehicle", [""]]]
-if ( !isClass (configFile >> "CfgVehicles" >> _class) ) exitWith { Error_1("Invalid Input: %1", _class); -1 };
+if ( !isClass (configFile >> "CfgVehicles" >> _class) ) exitWith { Error_1("Invalid Input: %1",_class); -1 };
 
 /* _vtol = "getNumber (_x >> 'vtol') >= 0" configClasses (configFile >> "CfgVehicles");
 _class in [_vtol]; */ 

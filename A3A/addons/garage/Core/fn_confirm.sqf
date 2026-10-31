@@ -29,7 +29,7 @@ private _fnc_placed = {
     };
     _veh call HR_GRG_fnc_vehInit;
 
-    private _fnc = if (!isNull _veh) then {"HR_GRG_fnc_removeFromPool"} else {"HR_GRG_fnc_releaseAllVehicles"};
+    private _fnc = ["HR_GRG_fnc_releaseAllVehicles", "HR_GRG_fnc_removeFromPool"] select (!isNull _veh);
     [clientOwner, player, _fnc] remoteExecCall ["HR_GRG_fnc_execForGarageUsers", 2]; //run code on server as HR_GRG_Users is maintained ONLY on the server
 };
 
