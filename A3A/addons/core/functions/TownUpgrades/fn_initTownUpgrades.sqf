@@ -53,7 +53,7 @@ A3A_townUpgradeOrder = ["clinic", "market", "recruit", "radio", "militia", "safe
 A3A_townUpgradeCrateClass = ["kit crate", ["Land_PaperBox_01_open_boxes_F", "Land_PlasticCase_01_medium_F"]] call _fnc_pickClass;
 
 // Maximum distance from the town centre marker at which an upgrade can be built
-A3A_townUpgradeRadius = 100;
+A3A_townUpgradeRadius = 400;
 
 // Civilian deaths in a town with a clinic cost this fraction of the normal support loss (server only)
 A3A_townUpgradeClinicDeathMult = 0.5;

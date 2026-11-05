@@ -43,7 +43,7 @@ _crate addAction [
     format [localize "STR_A3A_fn_townUpgrades_action_install", _name],
     { [_this # 0] spawn A3A_fnc_townKitInstallStart },
     nil, 1.6, true, true, "",
-    "(isNull attachedTo _originalTarget) and {_originalTarget distance2D markerPos ((_originalTarget getVariable ['A3A_townKit', ['', '']]) # 1) < 250}", 8
+    "(isNull attachedTo _originalTarget) and {_originalTarget distance2D markerPos ((_originalTarget getVariable ['A3A_townKit', ['', '']]) # 1) < A3A_townUpgradeRadius + 150}", 8
 ];
 
 // Return at HQ for a refund, commander only
