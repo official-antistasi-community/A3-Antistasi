@@ -4,6 +4,17 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-11-05 - Town upgrades merged into three
+
+### Changed
+- Towns now have three upgrades instead of six:
+  - **Clinic** (clinic + radio relay, €6000 base): +0.1 support every income tick, civilian deaths hurt support half as much, and it counts as a rebel radio tower (support gains x2).
+  - **Militia post** (militia post + safehouse, €3500 base): garrison limit **x3** (was x1.5), free and 2x faster fast travel that ends at the post, and the 'lie low' action.
+  - **City office** (market + recruitment office, €5500 base): money and HR income from the town x1.5.
+- Town upgrades can be built up to **400 m** from the town centre (was 100 m).
+- **Existing saves** are converted on load. A radio relay becomes a clinic, a safehouse becomes a militia post and a recruitment office becomes a city office, each where the old building stood. **Markets are removed** without a refund. A town that already has the merged upgrade keeps its own building.
+- Kits not yet built are switched to the merged upgrade and keep the price paid, so returning one at HQ refunds it in full. Market kits become city office kits.
+
 ## 2026-10-22 - More junkyard wildcards
 
 ### Changed
