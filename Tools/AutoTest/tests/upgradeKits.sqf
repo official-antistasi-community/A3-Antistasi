@@ -4,6 +4,12 @@
 // @world: Altis
 #include "\x\A3A_autotest\test.hpp"
 
+// Side changes in earlier tests spawn faction money updates. A3A_fnc_resourcesFIA is not atomic in scheduled code,
+// so let them finish before this test measures money
+sleep 3;
+private _settled = WAIT_UNTIL(!resourcesIsChanging, 10);
+if (!_settled) exitWith { FAIL("faction money still changing") };
+
 // State changed by the test, restored at the end
 private _city = citiesX select { !(_x in destroyedSites) } select 0;
 private _oldSide = sidesX getVariable [_city, sideUnknown];
