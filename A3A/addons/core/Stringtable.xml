@@ -16986,38 +16986,20 @@
       <Key ID="STR_A3A_fn_townUpgrades_name_clinic">
         <Original>Clinic</Original>
       </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_name_market">
-        <Original>Market</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_name_recruit">
-        <Original>Recruitment office</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_name_radio">
-        <Original>Radio relay</Original>
-      </Key>
       <Key ID="STR_A3A_fn_townUpgrades_name_militia">
         <Original>Militia post</Original>
       </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_name_safehouse">
-        <Original>Safehouse</Original>
+      <Key ID="STR_A3A_fn_townUpgrades_name_office">
+        <Original>City office</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_desc_clinic">
-        <Original>+%1 support every income tick. Civilian deaths in this town hurt support half as much.</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_desc_market">
-        <Original>Money income from this town x%1.</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_desc_recruit">
-        <Original>HR income from this town x%1.</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_desc_radio">
-        <Original>Counts as a rebel radio tower: support gains in this town x%1.</Original>
+        <Original>+%1 support every income tick. Its radio relay counts as a rebel radio tower: support gains x%2. Civilian deaths in this town hurt support half as much.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_desc_militia">
-        <Original>Garrison limit of this town x%1.</Original>
+        <Original>Garrison limit x%1. Fast travel to this town is free and %2 times faster. Lie low here to shake off the enemy after being spotted.</Original>
       </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_desc_safehouse">
-        <Original>Fast travel to this town is free and %1 times faster. Lie low here to shake off the enemy after being spotted.</Original>
+      <Key ID="STR_A3A_fn_townUpgrades_desc_office">
+        <Original>Money income from this town x%1, HR income x%2.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_kitLabelTo">
         <Original>TO %1</Original>

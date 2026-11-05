@@ -31,15 +31,14 @@ while {true} do
 
 		// Town upgrades, only present while the town is rebel-held
 		private _upgrades = A3A_cityInvest getOrDefault [_city, createHashMap];
-		if ("market" in _upgrades) then {
-			private _bonus = _resAddCity * (((A3A_townUpgradeHM get "market") # 4) - 1);
-			_resAddCity = _resAddCity + _bonus;
-			_upgradeRes = _upgradeRes + _bonus;
-		};
-		if ("recruit" in _upgrades) then {
-			private _bonus = _hrAddCity * (((A3A_townUpgradeHM get "recruit") # 4) - 1);
-			_hrAddCity = _hrAddCity + _bonus;
-			_upgradeHR = _upgradeHR + _bonus;
+		if ("office" in _upgrades) then {
+			(A3A_townUpgradeHM get "office") params ["", "", "", "", "_moneyMult", "_hrMult"];
+			private _bonusRes = _resAddCity * (_moneyMult - 1);
+			_resAddCity = _resAddCity + _bonusRes;
+			_upgradeRes = _upgradeRes + _bonusRes;
+			private _bonusHR = _hrAddCity * (_hrMult - 1);
+			_hrAddCity = _hrAddCity + _bonusHR;
+			_upgradeHR = _upgradeHR + _bonusHR;
 		};
 		if ("clinic" in _upgrades) then {
 			[(A3A_townUpgradeHM get "clinic") # 4, _city, false] remoteExecCall ["A3A_fnc_citySupportChange", 2];

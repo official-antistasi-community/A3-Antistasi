@@ -1,6 +1,6 @@
 /*
 Maintainer: Shoter
-    Adds the local player actions to a town upgrade prop: dismantle (commander) and, for the safehouse, lie low.
+    Adds the local player actions to a town upgrade prop: dismantle (commander) and, for the militia post, lie low.
     Called by the server through remoteExec with a JIP id when the prop is created, so late joiners get it too.
 
 Arguments:
@@ -44,7 +44,7 @@ private _name = localize format ["STR_A3A_fn_townUpgrades_name_%1", _id];
     6
 ] call BIS_fnc_holdActionAdd;
 
-if (_id != "safehouse") exitWith {};
+if (_id != "militia") exitWith {};
 
 // Shake off pursuit after being spotted, only when no enemies are around
 [

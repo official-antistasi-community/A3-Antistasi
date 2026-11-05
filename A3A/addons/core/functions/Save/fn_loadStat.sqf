@@ -70,6 +70,7 @@ if (_varName in _specialVarLoads) then {
         publicVariable "A3A_junkyardClockOffset";
     };
     if (_varName == 'cityInvest') then {
+        _varValue = ["cityInvest", _varValue] call A3A_fnc_townUpgradeMigrate;      // pre 2026-11 saves: six upgrades merged into three
         // city -> (id -> [posWorld, vectorDir, vectorUp]). Entries that no longer make sense (map change, town lost) are skipped
         {
             private _city = _x;
@@ -85,6 +86,7 @@ if (_varName in _specialVarLoads) then {
         } forEach _varValue;
     };
     if (_varName == 'townKits') then {
+        _varValue = ["townKits", _varValue] call A3A_fnc_townUpgradeMigrate;
         {
             _x params ["_id", "_city", "_paid", "_pos", "_dir"];
             if !(_id in A3A_townUpgradeHM and {_city in citiesX}) then { Error_2("Skipping saved town kit %1 for %2", _id, _city); continue };

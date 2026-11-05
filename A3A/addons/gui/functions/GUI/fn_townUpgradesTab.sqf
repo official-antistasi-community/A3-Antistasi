@@ -52,11 +52,11 @@ switch (_mode) do
 
         {
             private _id = _x;
-            (A3A_townUpgradeHM get _id) params ["_className", "", "", "", "_bonus"];
+            (A3A_townUpgradeHM get _id) params ["_className", "", "", "", "_bonus", ["_bonus2", 0]];
             private _editorPreview = getText (configFile >> "CfgVehicles" >> _className >> "editorPreview");
             if (!fileExists _editorPreview) then { _editorPreview = A3A_PlaceHolder_NoVehiclePreview };
             private _name = localize format ["STR_A3A_fn_townUpgrades_name_%1", _id];
-            private _description = format [localize format ["STR_A3A_fn_townUpgrades_desc_%1", _id], _bonus];
+            private _description = format [localize format ["STR_A3A_fn_townUpgrades_desc_%1", _id], _bonus, _bonus2];
 
             private _itemXpos = CARD_GAP_X * GRID_W + ((CARD_GAP_X + CARD_W) * GRID_W) * (_forEachIndex mod 3);
             private _itemYpos = CARD_GAP_Y * GRID_H + (floor (_forEachIndex / 3)) * ((CARD_H + CARD_GAP_Y) * GRID_H);

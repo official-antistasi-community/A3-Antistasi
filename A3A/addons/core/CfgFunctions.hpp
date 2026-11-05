@@ -567,6 +567,7 @@ class CfgFunctions
             class townUpgradeDismantle {};
             class townUpgradeHas {};
             class townUpgradeInstall {};
+            class townUpgradeMigrate {};
             class townUpgradePrice {};
             class townUpgradeRemove {};
             class townUpgradeSabotage {};
