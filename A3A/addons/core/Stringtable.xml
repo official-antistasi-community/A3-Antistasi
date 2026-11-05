@@ -16979,6 +16979,41 @@
         <Original>You bought a repaired %1 for %2 €.</Original>
       </Key>
     </Container>
+    <Container name="A3A_fn_upgradeKits">
+      <Key ID="STR_A3A_fn_upgradeKits_title">
+        <Original>Upgrade kits</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_upgradeKits_membersOnly">
+        <Original>Only members and the commander can buy or return upgrade kits.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_upgradeKits_action_install">
+        <Original>Install %1</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_upgradeKits_action_return">
+        <Original>Return kit to HQ (refund)</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_upgradeKits_placingKit">
+        <Original>Buying %1 kit for %2 for %3 €.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_upgradeKits_returned">
+        <Original>%1 kit for %2 returned, %3 € refunded.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_upgradeKits_notAtHQ">
+        <Original>Kits are delivered at HQ only.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_upgradeKits_returnNotAtHQ">
+        <Original>Kits can only be returned at HQ.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_upgradeKits_noMoney">
+        <Original>Not enough faction funds. This kit costs %1 €.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_upgradeKits_kitExists">
+        <Original>A %1 kit for %2 is already on its way.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_upgradeKits_notAKit">
+        <Original>This crate is not a valid upgrade kit.</Original>
+      </Key>
+    </Container>
     <Container name="A3A_fn_townUpgrades">
       <Key ID="STR_A3A_fn_townUpgrades_title">
         <Original>Town upgrades</Original>
@@ -17004,29 +17039,17 @@
       <Key ID="STR_A3A_fn_townUpgrades_kitLabelTo">
         <Original>TO %1</Original>
       </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_action_install">
-        <Original>Install %1</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_action_return">
-        <Original>Return kit to HQ (refund)</Original>
-      </Key>
       <Key ID="STR_A3A_fn_townUpgrades_action_dismantle">
         <Original>Dismantle %1</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_action_lieLow">
         <Original>Lie low</Original>
       </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_placingKit">
-        <Original>Buying %1 kit for %2 for %3 €.</Original>
-      </Key>
       <Key ID="STR_A3A_fn_townUpgrades_placing">
         <Original>Placing %1 for %2. Build within %3 m of the town centre.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_bought">
         <Original>%1 kit for %2 bought for %3 €. Haul the crate to %2 and install it within %4 m of the town centre.</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_returned">
-        <Original>%1 kit for %2 returned, %3 € refunded.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_installed">
         <Original>%1 built in %2 by %3.</Original>
@@ -17046,26 +17069,11 @@
       <Key ID="STR_A3A_fn_townUpgrades_lostAll_destroyed">
         <Original>%1 was destroyed. Upgrades lost: %2.</Original>
       </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_commanderOnly">
-        <Original>Only the commander can buy town upgrades.</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_notAtHQ">
-        <Original>Kits are delivered at HQ only.</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_returnNotAtHQ">
-        <Original>Kits can only be returned at HQ.</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_noMoney">
-        <Original>Not enough faction funds. This kit costs %1 €.</Original>
-      </Key>
       <Key ID="STR_A3A_fn_townUpgrades_townNotRebel">
         <Original>%1 is not under rebel control.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_alreadyInstalled">
         <Original>%1 already has a %2.</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_kitExists">
-        <Original>A %1 kit for %2 is already on its way.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_tooFar">
         <Original>Too far from the centre of %1. Build within %2 m.</Original>
@@ -17075,9 +17083,6 @@
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_enemyNear">
         <Original>Enemies nearby, you cannot build now.</Original>
-      </Key>
-      <Key ID="STR_A3A_fn_townUpgrades_notAKit">
-        <Original>This crate is not a valid upgrade kit.</Original>
       </Key>
       <Key ID="STR_A3A_fn_townUpgrades_lieLow_ok">
         <Original>You lie low for a while. The enemy has stopped looking for you.</Original>

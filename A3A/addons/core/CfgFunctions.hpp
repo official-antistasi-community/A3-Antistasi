@@ -551,16 +551,24 @@ class CfgFunctions
             class scrapWorkAI {};
         };
 
+        class UpgradeKits {
+            file = QPATHTOFOLDER(functions\UpgradeKits);
+            class initUpgradeKits {};
+            class upgradeKitAddActions {};
+            class upgradeKitAllowed {};
+            class upgradeKitBuy {};
+            class upgradeKitCall {};
+            class upgradeKitCreate {};
+            class upgradeKitPurchase {};
+            class upgradeKitRemove {};
+            class upgradeKitReturn {};
+        };
+
         class TownUpgrades {
             file = QPATHTOFOLDER(functions\TownUpgrades);
             class initTownUpgrades {};
-            class townKitAddActions {};
-            class townKitBuy {};
-            class townKitCreate {};
+            class townKitHandlers {};
             class townKitInstallStart {};
-            class townKitPurchase {};
-            class townKitRemove {};
-            class townKitReturn {};
             class townUpgradeAddActions {};
             class townUpgradeClearCity {};
             class townUpgradeCreate {};

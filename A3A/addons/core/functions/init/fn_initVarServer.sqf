@@ -166,9 +166,8 @@ Info("Setting server only variables");
 occRadioKeys = 0;
 invRadioKeys = 0;
 
-// Town upgrades: registered prop objects (city|id -> object) and kit crates in transit
+// Town upgrades: registered prop objects (city|id -> object). Kit crates in transit are in A3A_upgradeKits (A3A_fnc_initUpgradeKits)
 A3A_townUpgradeObjects = createHashMap;
-A3A_townKits = [];
 // Chronicle entries [seq, campaign time, type, target, params, actor, server date-time], clients get them through A3A_fnc_campaignLogRequest
 A3A_campaignLog = [];
 A3A_campaignLogMajority = false;    // whether the last population check found a rebel majority, restored from the log on load
@@ -512,12 +511,18 @@ call A3A_fnc_initUtilityItems;
 ONLY_DECLARE_SERVER_VAR(A3A_utilityItemList);
 ONLY_DECLARE_SERVER_VAR(A3A_utilityItemHM);
 
-// Town upgrade catalogue
+// Shared upgrade kit layer, before the modules that register their kit kinds
+call A3A_fnc_initUpgradeKits;
+ONLY_DECLARE_SERVER_VAR(A3A_upgradeKitCrateClass);
+
+// Town upgrade catalogue, also registers the "town" kit kind
 call A3A_fnc_initTownUpgrades;
 ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeHM);
 ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeOrder);
-ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeCrateClass);
 ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeRadius);
+
+// After every kind is registered
+ONLY_DECLARE_SERVER_VAR(A3A_upgradeKitKinds);
 
 //fast ropes are hard defined here, because of old fixed offsets.
 //fastrope needs to be rewritten and then we can get get ridd of this

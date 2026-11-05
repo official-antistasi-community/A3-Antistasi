@@ -3,6 +3,7 @@ Maintainer: Shoter
     Client side of installing a town upgrade from its kit crate. Pre-checks, then the garage placement ghost for the prop.
     Placement is rejected beyond A3A_townUpgradeRadius from the bound town's centre, when the town is no longer rebel-held,
     or when the upgrade got installed meanwhile. On placement the server is asked to build the prop and consume the crate.
+    Started by the "installStart" mode of A3A_fnc_townKitHandlers, from the install action of the shared kit layer.
 
 Arguments:
     <OBJECT> The kit crate
@@ -25,8 +26,8 @@ params [["_crate", objNull, [objNull]]];
 private _titleStr = localize "STR_A3A_fn_townUpgrades_title";
 
 if (isNull _crate or {!isNull attachedTo _crate}) exitWith {};
-(_crate getVariable ["A3A_townKit", ["", ""]]) params ["_id", "_city"];
-if (_id == "" or {!(_id in A3A_townUpgradeHM)}) exitWith { Error_1("Kit crate %1 carries no valid kit data", _crate) };
+(_crate getVariable ["A3A_upgradeKit", ["", "", ""]]) params ["_kind", "_id", "_city"];
+if (_kind != "town" or {!(_id in A3A_townUpgradeHM)}) exitWith { Error_1("Kit crate %1 carries no valid kit data", _crate) };
 
 if (!isNil "HR_GRG_placing" && {HR_GRG_placing}) exitWith { [_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_no_placing"] call A3A_fnc_customHint };
 if (player != player getVariable ["owner", player]) exitWith { [_titleStr, localize "STR_A3A_fn_reinf_addFIAVeh_no_control"] call A3A_fnc_customHint };

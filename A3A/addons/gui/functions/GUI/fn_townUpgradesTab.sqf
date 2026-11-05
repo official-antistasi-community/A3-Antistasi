@@ -14,7 +14,7 @@ Scope: Clients, Local Arguments, Local Effect
 Environment: Scheduled for onLoad (called from the dialog onLoad), Unscheduled otherwise
 Public: No
 Dependencies:
-    A3A_townUpgradeHM, A3A_townUpgradeOrder, A3A_cityInvest, A3A_fnc_townUpgradePrice, A3A_fnc_townUpgradeHas, A3A_fnc_townKitBuy
+    A3A_townUpgradeHM, A3A_townUpgradeOrder, A3A_cityInvest, A3A_fnc_townUpgradePrice, A3A_fnc_townUpgradeHas, A3A_fnc_upgradeKitAllowed, A3A_fnc_upgradeKitBuy
 
 Example:
     ["onLoad"] call A3A_GUI_fnc_townUpgradesTab;
@@ -107,7 +107,7 @@ switch (_mode) do
     {
         private _index = lbCurSel _combo;
         private _city = if (_index < 0) then { "" } else { _combo lbData _index };
-        private _isBoss = player == theBoss;
+        private _canBuy = [player] call A3A_fnc_upgradeKitAllowed;          // members and the commander
         private _funds = server getVariable ["resourcesFIA", 0];
 
         if (_city == "") then {
@@ -131,9 +131,9 @@ switch (_mode) do
 
             // Empty reason means the card can be bought
             private _blocker = call {
-                if (!_isBoss) exitWith { localize "STR_A3A_fn_townUpgrades_commanderOnly" };
+                if (!_canBuy) exitWith { localize "STR_A3A_fn_upgradeKits_membersOnly" };
                 if ([_city, _id] call A3A_fnc_townUpgradeHas) exitWith { format [localize "STR_A3A_fn_townUpgrades_alreadyInstalled", _city, _name] };
-                if (_funds < _price) exitWith { format [localize "STR_A3A_fn_townUpgrades_noMoney", _price] };
+                if (_funds < _price) exitWith { format [localize "STR_A3A_fn_upgradeKits_noMoney", _price] };
                 "";
             };
             _button ctrlEnable (_blocker == "");
@@ -150,7 +150,7 @@ switch (_mode) do
         if (_id == "" or _index < 0) exitWith {};
         private _city = _combo lbData _index;
         closeDialog 2;
-        [_id, _city] spawn A3A_fnc_townKitBuy;
+        ["town", _id, _city] spawn A3A_fnc_upgradeKitBuy;
     };
 
     default

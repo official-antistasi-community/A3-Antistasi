@@ -89,8 +89,9 @@ if (_varName in _specialVarLoads) then {
         _varValue = ["townKits", _varValue] call A3A_fnc_townUpgradeMigrate;
         {
             _x params ["_id", "_city", "_paid", "_pos", "_dir"];
-            if !(_id in A3A_townUpgradeHM and {_city in citiesX}) then { Error_2("Skipping saved town kit %1 for %2", _id, _city); continue };
-            [_id, _city, _pos, _dir, _paid] call A3A_fnc_townKitCreate;
+            if !(["town", "valid", [_id, _city]] call A3A_fnc_upgradeKitCall) then { Error_2("Skipping saved town kit %1 for %2", _id, _city); continue };
+            // Same format as before the shared kit layer, the crate keeps the price paid for its refund
+            ["town", _id, _city, _paid, _pos, _dir] call A3A_fnc_upgradeKitCreate;
         } forEach _varValue;
     };
     if (_varName == 'rewardShares') then {

@@ -16,7 +16,7 @@ Return Value:
 Scope: Server
 Environment: Unscheduled
 Public: No
-Dependencies: A3A_fnc_townUpgradeCreate, A3A_fnc_townKitRemove
+Dependencies: A3A_fnc_townUpgradeCreate, A3A_fnc_upgradeKitRemove
 
 Example:
     [_crate, _posWorld, _vecDir, _vecUp, player] remoteExecCall ["A3A_fnc_townUpgradeInstall", 2];
@@ -35,9 +35,9 @@ private _fnc_fail = {
     Info_2("Town upgrade install by %1 failed: %2", name _player, _text);
 };
 
-if (isNull _crate or {!alive _crate} or {!(_crate in A3A_townKits)}) exitWith { [localize "STR_A3A_fn_townUpgrades_notAKit"] call _fnc_fail };
-(_crate getVariable ["A3A_townKit", ["", ""]]) params ["_id", "_city"];
-if (_id == "" or {!(_id in A3A_townUpgradeHM)}) exitWith { [localize "STR_A3A_fn_townUpgrades_notAKit"] call _fnc_fail };
+if (isNull _crate or {!alive _crate} or {!(_crate in A3A_upgradeKits)}) exitWith { [localize "STR_A3A_fn_upgradeKits_notAKit"] call _fnc_fail };
+(_crate getVariable ["A3A_upgradeKit", ["", "", ""]]) params ["_kind", "_id", "_city"];
+if (_kind != "town" or {!(_id in A3A_townUpgradeHM)}) exitWith { [localize "STR_A3A_fn_upgradeKits_notAKit"] call _fnc_fail };
 private _name = localize format ["STR_A3A_fn_townUpgrades_name_%1", _id];
 
 if (_posWorld distance2D _crate > 150) exitWith { [localize "STR_A3A_fn_townUpgrades_tooFarFromCrate"] call _fnc_fail };
@@ -46,7 +46,7 @@ if (sidesX getVariable [_city, sideUnknown] != teamPlayer or {_city in destroyed
 if ([_city, _id] call A3A_fnc_townUpgradeHas) exitWith { [format [localize "STR_A3A_fn_townUpgrades_alreadyInstalled", _city, _name]] call _fnc_fail };
 if ([ASLToATL _posWorld] call A3A_fnc_enemyNearCheck) exitWith { [localize "STR_A3A_fn_townUpgrades_enemyNear"] call _fnc_fail };
 
-[_crate] call A3A_fnc_townKitRemove;
+[_crate] call A3A_fnc_upgradeKitRemove;
 private _prop = [_city, _id, _posWorld, _vecDir, _vecUp] call A3A_fnc_townUpgradeCreate;
 if (isNull _prop) exitWith { Error_2("Town upgrade %1 in %2 could not be created", _id, _city) };
 

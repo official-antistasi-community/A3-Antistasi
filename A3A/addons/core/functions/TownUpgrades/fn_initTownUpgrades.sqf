@@ -1,7 +1,8 @@
 /*
 Maintainer: Shoter
     Builds the town upgrade catalogue and the constants used by the bonus hooks.
-    Called from initVarServer, the catalogue variables are broadcast with the other server variables.
+    Called from initVarServer after A3A_fnc_initUpgradeKits, the catalogue variables are broadcast with the other server variables.
+    Registers the "town" kind of the shared upgrade kit layer, handled by A3A_fnc_townKitHandlers.
 
     A3A_townUpgradeHM: id -> [propClass, basePrice, markerType, letterCode, bonusValue, bonusValue2]
     bonusValue, bonusValue2 per id:
@@ -47,8 +48,8 @@ A3A_townUpgradeHM = createHashMapFromArray [
 // Display order, hashmap keys are unordered
 A3A_townUpgradeOrder = ["clinic", "militia", "office"];
 
-// Kit crate class. Needs a logistics cargo entry (logistics\Cargo) so it can be loaded into vehicles
-A3A_townUpgradeCrateClass = ["kit crate", ["Land_PaperBox_01_open_boxes_F", "Land_PlasticCase_01_medium_F"]] call _fnc_pickClass;
+// Kits are bought, carried and returned through the shared kit layer (UpgradeKits), crate class A3A_upgradeKitCrateClass
+A3A_upgradeKitKinds set ["town", "A3A_fnc_townKitHandlers"];
 
 // Maximum distance from the town centre marker at which an upgrade can be built
 A3A_townUpgradeRadius = 400;
