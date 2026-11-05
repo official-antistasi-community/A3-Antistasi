@@ -40,7 +40,7 @@ private _fnc_pickClass = {
 A3A_townUpgradeHM = createHashMapFromArray [
     // Prices are the sums of the two upgrades each one replaced (clinic 2500 + radio relay 3500, and so on)
     ["clinic",  [["clinic",  ["Land_MedicalTent_01_white_IDAP_open_F", "Land_MedicalTent_01_aaf_generic_open_F", "Land_MedicalTent_01_MTP_closed_F"]] call _fnc_pickClass, 6000, "loc_Hospital", "C", 0.1, 2]],
-    ["militia", [["militia", ["Land_BagBunker_Tower_F", "Land_HBarrier_01_big_tower_green_F"]] call _fnc_pickClass,                                                    3500, "loc_Bunker",   "P", 1.5, 2]],
+    ["militia", [["militia", ["Land_BagBunker_Tower_F", "Land_HBarrier_01_big_tower_green_F"]] call _fnc_pickClass,                                                    3500, "loc_Bunker",   "P", 3, 2]],
     ["office",  [["office",  ["Land_Cargo_House_V1_F", "Land_Cargo_House_V2_F"]] call _fnc_pickClass,                                                                 5500, "n_service",    "O", 1.5, 1.5]]
 ];
 
