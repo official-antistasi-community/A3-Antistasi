@@ -4,11 +4,21 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
-## 2026-11-06 - Members can buy town upgrades
+## 2026-11-06 - Site upgrades and member town kits
+
+### Added
+- **Site upgrades** for resources, factories and sea ports. Open the Buy Vehicle dialog at HQ, go to the new **Site upgrades** tab and click a rebel-held site on the map. Each level comes as a kit crate: haul it to the site and install it within 250 m of its centre.
+- Every level adds **10%** to that site's income and **20%** to its garrison limit. The extra money appears on the upgrade line of the income report, and the level shows on the site's map marker and in its site info.
+- When the enemy takes an upgraded site, it **loses one level**. Its levels give nothing while the enemy holds it or while it is destroyed, and work again once you retake it. A kit bought for the old level can only be returned at HQ for a refund.
+- One kit per site can be on its way at a time.
+- Levels 1 and 2 are on sale now. Levels 3 to 7, with their bonuses, come in later updates.
 
 ### Changed
-- **Members** can now buy town upgrade kits in the Town upgrades tab and return them at HQ for a refund, not only the commander. With membership off, every player can. Dismantling a built upgrade is still commander-only.
-- Saves are not affected: kits on their way to a town load as before and keep the price paid.
+- **Members** can now buy town upgrade kits and site kits and return them at HQ for a refund, not only the commander. With membership off, every player can. Dismantling a built town upgrade is still commander-only.
+- The Buy Vehicle tab buttons are narrower to make room for the sixth tab.
+
+### Save
+- **The save is affected.** Site levels and site kits are saved with the campaign. Older saves load with every site at level 0. A save made with this version loses its site levels and site kits if loaded in an older version. Town kits load as before and keep the price paid.
 
 ## 2026-11-05 - Town upgrades merged into three
 
