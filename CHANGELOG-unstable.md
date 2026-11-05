@@ -4,6 +4,12 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-11-06 - Members can buy town upgrades
+
+### Changed
+- **Members** can now buy town upgrade kits in the Town upgrades tab and return them at HQ for a refund, not only the commander. With membership off, every player can. Dismantling a built upgrade is still commander-only.
+- Saves are not affected: kits on their way to a town load as before and keep the price paid.
+
 ## 2026-11-05 - Town upgrades merged into three
 
 ### Changed
