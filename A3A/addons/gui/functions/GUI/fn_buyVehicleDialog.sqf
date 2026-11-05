@@ -53,6 +53,8 @@ switch (_mode) do
             {_selectedTabIDC = A3A_IDC_BUYOTHERMAIN;};
             case("townupgrades"):
             {_selectedTabIDC = A3A_IDC_BUYTOWNUPGRADESMAIN;};
+            case("siteupgrades"):
+            {_selectedTabIDC = A3A_IDC_BUYSITEUPGRADESMAIN;};
         };
 
         if (_selectedTabIDC == -1) exitWith {
@@ -65,6 +67,8 @@ switch (_mode) do
             A3A_IDC_BUYSTATICMAIN,
             A3A_IDC_BUYOTHERMAIN,
             A3A_IDC_BUYTOWNUPGRADESMAIN,
+            A3A_IDC_BUYSITEUPGRADESMAIN,
+            A3A_IDC_SITEUPGRADESMAP,
             A3A_IDC_BUYVEHICLEPREVIEW
         ];
 
@@ -80,6 +84,12 @@ switch (_mode) do
         Debug("Showing selected tab");
         private _selectedTabCtrl = _display displayCtrl _selectedTabIDC;
         _selectedTabCtrl ctrlShow true;
+
+        // The site picker map lives outside the tab group, it is shown with its tab and the panel is refreshed
+        if (_selectedTabIDC == A3A_IDC_BUYSITEUPGRADESMAIN) then {
+            (_display displayCtrl A3A_IDC_SITEUPGRADESMAP) ctrlShow true;
+            ["update"] call A3A_GUI_fnc_siteUpgradesTab;
+        };
     };
 
     case ("onLoad"):
@@ -113,6 +123,7 @@ switch (_mode) do
         ["vehicles", [A3A_IDC_BUYSTATICMAIN, A3A_IDC_STATICSGROUP, _statics]] call A3A_GUI_fnc_buyVehicleTabs;
         ["other"] call A3A_GUI_fnc_buyVehicleTabs;
         ["onLoad"] call A3A_GUI_fnc_townUpgradesTab;
+        ["onLoad"] call A3A_GUI_fnc_siteUpgradesTab;
 
         // show the vehicle tab so that user don't freak out
         _defaultTab = [A3A_IDC_BUYCIVVEHICLEMAIN, A3A_IDC_BUYREBVEHICLEMAIN] select (count _civilianVehicles == 0);

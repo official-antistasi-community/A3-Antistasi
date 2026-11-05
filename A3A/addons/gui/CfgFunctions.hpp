@@ -52,6 +52,7 @@ class CfgFunctions {
             class subCommandersDialog {};
             class teamLeaderRTSPlacerDialog {};
             class townsTab {};
+            class siteUpgradesTab {};
             class townUpgradesTab {};
             class warStatusTab {};
         };

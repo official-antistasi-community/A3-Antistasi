@@ -7049,6 +7049,50 @@
         <Original>Finish repairs (admin)</Original>
       </Key>
     </Container>
+    <Container name="dialog_buy_site_upgrades">
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_tab_button">
+        <Original>Site upgrades</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_no_site">
+        <Original>No site selected</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_help">
+        <Original>Click a resource, factory or sea port on the map. Each level adds 10% to the site's income and 20% to its garrison limit. The kit is delivered at HQ and has to be hauled to the site. When the enemy takes an upgraded site, it loses one level.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_level">
+        <Original>Level %1 of %2</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_bonus">
+        <Original>Current bonus: +%1% income, +%2% garrison limit</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_enemy">
+        <Original>The enemy holds this site. Its levels give nothing until you retake it.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_destroyed">
+        <Original>The site is destroyed. Its levels give nothing until it is rebuilt.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_funds">
+        <Original>Faction funds: %1 €</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_cap">
+        <Original>Levels on sale for now: up to level %1. Higher levels come in later updates.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_haul">
+        <Original>The kit crate appears next to you at HQ. Haul it to the site and install it there.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_max">
+        <Original>This site is at the highest level.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_buy">
+        <Original>Buy level %1 (%2 €)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_buy_none">
+        <Original>No level to buy</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_buy_tooltip">
+        <Original>Buy a level %1 kit for %2 €. Haul the crate to the site and install it within %3 m of its centre.</Original>
+      </Key>
+    </Container>
     <Container name="dialog_buy_town_upgrades">
       <Key ID="STR_antistasi_dialogs_buy_town_upgrades_tab_button">
         <Original>Town upgrades</Original>

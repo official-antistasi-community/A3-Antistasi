@@ -32,7 +32,7 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                     onButtonClick = "[""switchTab"", [""civilian""]] call A3A_GUI_fnc_buyVehicleDialog";
                     x = 0;
                     y = 0;
-                    w = 30 * GRID_W;
+                    w = 26 * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -41,9 +41,9 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                     idc = -1;
                     text = $STR_antistasi_dialogs_vehicle_tab_reb;
                     onButtonClick = "[""switchTab"", [""rebel""]] call A3A_GUI_fnc_buyVehicleDialog";
-                    x = 30 * GRID_W;
+                    x = 26.5 * GRID_W;
                     y = 0;
-                    w = 30 * GRID_W;
+                    w = 26 * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -52,9 +52,9 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                     idc = -1;
                     text = $STR_antistasi_dialogs_vehicle_tab_static;
                     onButtonClick = "[""switchTab"", [""static""]] call A3A_GUI_fnc_buyVehicleDialog";
-                    x = 60 * GRID_W;
+                    x = 53 * GRID_W;
                     y = 0;
-                    w = 30 * GRID_W;
+                    w = 26 * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -63,9 +63,9 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                     idc = -1;
                     text = $STR_antistasi_dialogs_vehicle_tab_other;
                     onButtonClick = "[""switchTab"", [""other""]] call A3A_GUI_fnc_buyVehicleDialog";
-                    x = 90 * GRID_W;
+                    x = 79.5 * GRID_W;
                     y = 0;
-                    w = 30 * GRID_W;
+                    w = 26 * GRID_W;
                     h = 5 * GRID_H;
                 };
 
@@ -74,9 +74,20 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                     idc = -1;
                     text = $STR_antistasi_dialogs_buy_town_upgrades_tab_button;
                     onButtonClick = "[""switchTab"", [""townupgrades""]] call A3A_GUI_fnc_buyVehicleDialog";
-                    x = 120 * GRID_W;
+                    x = 106 * GRID_W;
                     y = 0;
-                    w = 30 * GRID_W;
+                    w = 26 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class SiteUpgradesTabButton : A3A_Button
+                {
+                    idc = -1;
+                    text = $STR_antistasi_dialogs_buy_site_upgrades_tab_button;
+                    onButtonClick = "[""switchTab"", [""siteupgrades""]] call A3A_GUI_fnc_buyVehicleDialog";
+                    x = 132.5 * GRID_W;
+                    y = 0;
+                    w = 26 * GRID_W;
                     h = 5 * GRID_H;
                 };
             };
@@ -202,6 +213,67 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                     h = PX_H(DIALOG_H) - 10 * GRID_H;
                 };
             };
+        };
+
+        // Site upgrade kits for resources, factories and seaports. The left panel is this group, the map is
+        // SiteUpgradesMap below: a map must not sit inside or under a controls group, so this group stops left of it.
+        // A3A_GUI_fnc_siteUpgradesTab fills the panel, A3A_GUI_fnc_buyVehicleDialog "switchTab" shows and hides both.
+        class SiteUpgradesTab : A3A_DefaultControlsGroup
+        {
+            idc = A3A_IDC_BUYSITEUPGRADESMAIN;
+            show = false;
+            w = 52 * GRID_W;
+
+            class Controls
+            {
+                class SiteTitle : A3A_SectionLabelRight
+                {
+                    idc = A3A_IDC_SITEUPGRADESTITLE;
+                    text = "";
+                    x = 2 * GRID_W;
+                    y = 3 * GRID_H;
+                    w = 48 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                class SiteInfo : A3A_StructuredText
+                {
+                    idc = A3A_IDC_SITEUPGRADESINFO;
+                    text = "";
+                    x = 2 * GRID_W;
+                    y = 10 * GRID_H;
+                    w = 48 * GRID_W;
+                    h = 72 * GRID_H;
+                };
+
+                class BuyButton : A3A_Button
+                {
+                    idc = A3A_IDC_SITEUPGRADESBUY;
+                    text = "";
+                    onButtonClick = "[""buyClicked""] call A3A_GUI_fnc_siteUpgradesTab";
+                    x = 2 * GRID_W;
+                    y = 86 * GRID_H;
+                    w = 48 * GRID_W;
+                    h = 8 * GRID_H;
+                };
+            };
+        };
+
+        // Site picker of the Site upgrades tab, right of SiteUpgradesTab. Top level on purpose, see A3A_MapControl.
+        // Hidden with the tabs in "switchTab", shown only together with SiteUpgradesTab.
+        class SiteUpgradesMap : A3A_MapControl
+        {
+            idc = A3A_IDC_SITEUPGRADESMAP;
+            show = false;
+            onMouseButtonClick = "if (_this select 1 == 0) then { [""mapClicked"", [[_this select 2, _this select 3]]] call A3A_GUI_fnc_siteUpgradesTab }";
+            x = DIALOG_X + 54 * GRID_W;
+            y = DIALOG_Y + 2 * GRID_H;
+            w = 104 * GRID_W;
+            h = 96 * GRID_H;
+
+            maxSatelliteAlpha = 0.75;
+            alphaFadeStartScale = 3.0;
+            alphaFadeEndScale = 3.0;
         };
 
         class CloseButton : A3A_CloseButton
