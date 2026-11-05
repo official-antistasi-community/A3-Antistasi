@@ -17014,6 +17014,80 @@
         <Original>This crate is not a valid upgrade kit.</Original>
       </Key>
     </Container>
+    <Container name="A3A_fn_siteUpgrades">
+      <Key ID="STR_A3A_fn_siteUpgrades_title">
+        <Original>Site upgrades</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_type_resource">
+        <Original>Resources</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_type_factory">
+        <Original>Factory</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_type_seaport">
+        <Original>Sea port</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_siteName">
+        <Original>%1 near %2</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_notRebel">
+        <Original>%1 is not under rebel control.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_destroyed">
+        <Original>%1 is destroyed. Rebuild it before upgrading it.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_atCap">
+        <Original>%1 is at level %2, the highest level available for now.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_wrongLevel">
+        <Original>%1 is at level %2, only a level %3 kit fits it.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_kitInTransit">
+        <Original>A kit for %1 is already on its way. Install or return it first.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_levelName">
+        <Original>Level %1</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_bought">
+        <Original>Level %1 kit for %2 bought for %3 €. Haul the crate to the site and install it within %4 m of its centre.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_kitLabel">
+        <Original>SITE UPGRADE LEVEL %1</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_kitStale">
+        <Original>This level %1 kit no longer fits %2, the site's level has changed. Return it at HQ for a refund.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_tooFar">
+        <Original>Too far from the centre of %1. Install within %2 m.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_installing">
+        <Original>Installing level %1 at %2: %3 s left. Stay next to the crate.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_installCancelled">
+        <Original>Installation cancelled.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_placing">
+        <Original>Placing the level %1 building for %2. Build within %3 m of the site centre.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_installed">
+        <Original>%1 raised to level %2 by %3.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_levelLost">
+        <Original>%1 fell to the enemy and lost a level, it is now level %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_markerLevel">
+        <Original>%1 (Lv %2)</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_info_level">
+        <Original>Upgrade level: %1</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_info_next">
+        <Original>Next level (%1): %2 €</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_info_max">
+        <Original>Highest upgrade level available for now.</Original>
+      </Key>
+    </Container>
     <Container name="A3A_fn_townUpgrades">
       <Key ID="STR_A3A_fn_townUpgrades_title">
         <Original>Town upgrades</Original>

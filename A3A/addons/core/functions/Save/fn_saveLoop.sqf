@@ -69,6 +69,10 @@ if (!isNull A3A_deployedFlag) then {
 ([] call A3A_fnc_townUpgradeSaveData) params ["_cityInvestSave", "_townKitsSave"];
 ["cityInvest", _cityInvestSave] call A3A_fnc_setStatVariable;
 ["townKits", _townKitsSave] call A3A_fnc_setStatVariable;
+// Site upgrades: levels of every site, their buildings and kit crates still in transit
+([] call A3A_fnc_siteUpgradeSaveData) params ["_siteUpgradesSave", "_siteKitsSave"];
+["siteUpgrades", _siteUpgradesSave] call A3A_fnc_setStatVariable;
+["siteKits", _siteKitsSave] call A3A_fnc_setStatVariable;
 ["campaignLog", A3A_campaignLog] call A3A_fnc_setStatVariable;
 ["weather",[fogParams,rain]] call A3A_fnc_setStatVariable;
 ["arsenalLimits", A3A_arsenalLimits] call A3A_fnc_setStatVariable;

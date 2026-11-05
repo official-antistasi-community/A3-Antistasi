@@ -32,6 +32,9 @@ call {
 // Do the garrison update
 [_markerX, _winner, _loser] call A3A_fnc_garrisonServer_changeSide;
 
+// Site upgrades: a resource, factory or seaport taken from the rebels loses one level, also on a scripted change
+if (_loser == teamPlayer and {[_markerX] call A3A_fnc_siteType != ""}) then { [_markerX] call A3A_fnc_siteLevelDrop };
+
 // Sort out war tier if necessary
 if (teamPlayer in [_loser, _winner]) then { [] call A3A_fnc_tierCheck };
 

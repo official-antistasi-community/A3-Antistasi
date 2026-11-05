@@ -521,6 +521,17 @@ ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeHM);
 ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeOrder);
 ONLY_DECLARE_SERVER_VAR(A3A_townUpgradeRadius);
 
+// Site upgrades: levels of resources, factories and seaports, registers the "site" kit kind
+call A3A_fnc_initSiteUpgrades;
+ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeMaxLevel);
+ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeTypeBase);
+ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeWeights);
+ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeMapScale);
+ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeRadius);
+ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeLevelCap);
+ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeBuildings);
+ONLY_DECLARE_SERVER_VAR(A3A_siteLevels);
+
 // After every kind is registered
 ONLY_DECLARE_SERVER_VAR(A3A_upgradeKitKinds);
 

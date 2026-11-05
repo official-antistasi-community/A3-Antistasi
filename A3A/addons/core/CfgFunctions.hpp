@@ -564,6 +564,26 @@ class CfgFunctions
             class upgradeKitReturn {};
         };
 
+        class SiteUpgrades {
+            file = QPATHTOFOLDER(functions\SiteUpgrades);
+            class initSiteUpgrades {};
+            class siteBuildingCreate {};
+            class siteKitHandlers {};
+            class siteKitInstallStart {};
+            class siteKitInTransit {};
+            class siteLevel {};
+            class siteLevelDrop {};
+            class siteLevelSet {};
+            class siteName {};
+            class siteType {};
+            class siteUpgradeIncome {};
+            class siteUpgradeInstall {};
+            class siteUpgradeLoad {};
+            class siteUpgradePrice {};
+            class siteUpgradeRefusal {};
+            class siteUpgradeSaveData {};
+        };
+
         class TownUpgrades {
             file = QPATHTOFOLDER(functions\TownUpgrades);
             class initTownUpgrades {};

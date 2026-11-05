@@ -30,6 +30,10 @@ private _mrkText = call {
     ""; 		// city
 };
 
+// Site upgrade level, shown whichever side holds the site
+private _siteLevel = [_marker, false] call A3A_fnc_siteLevel;
+if (_siteLevel > 0) then { _mrkText = format [localize "STR_A3A_fn_siteUpgrades_markerLevel", _mrkText, _siteLevel] };
+
 if (_mrkSide == teamPlayer) then {
     private _numTroops = count (A3A_garrison get _marker get "troops");
     private _limit = [_marker] call A3A_fnc_getGarrisonLimit;

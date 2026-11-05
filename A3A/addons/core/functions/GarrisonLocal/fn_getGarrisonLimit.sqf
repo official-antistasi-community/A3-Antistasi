@@ -43,8 +43,12 @@ private _limit = switch (true) do {
     case (_marker in airportsX): {
         round (A3A_rebelGarrisonLimit * 1.5)
     };
+    // Site upgrade levels add 20% of the base limit each
     case (_marker in factories || {_marker in resourcesX}): {
-        round (A3A_rebelGarrisonLimit * 0.5)
+        round (A3A_rebelGarrisonLimit * 0.5 * (1 + 0.2 * ([_marker] call A3A_fnc_siteLevel)))
+    };
+    case (_marker in seaports): {
+        round (A3A_rebelGarrisonLimit * (1 + 0.2 * ([_marker] call A3A_fnc_siteLevel)))
     };
     case (_marker in outpostsFIA): {
         round (A3A_rebelGarrisonLimit * 0.33)

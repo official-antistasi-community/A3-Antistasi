@@ -52,13 +52,14 @@ while {true} do
 	[] call A3A_fnc_tierCheck;
 	[] spawn A3A_fnc_checkCampaignEnd; // check for population win
 
-	private _resourcesRebel = {sidesX getVariable _x == teamPlayer and !(_x in destroyedSites)} count resourcesX;
-	_resAdd = _resAdd + _resourcesRebel * A3A_rebelCashResMult;
-
-	private _factoriesRebel = {sidesX getVariable _x == teamPlayer and !(_x in destroyedSites)} count factories;
-	private _seaportsRebel = {sidesX getVariable _x == teamPlayer and !(_x in destroyedSites)} count seaports;
-	private _resBoost = 1 + _factoriesRebel * A3A_rebelCashFactMult + _seaportsRebel * A3A_rebelCashSeaportMult;
-	_resAdd = _resAdd * _resBoost;
+	// Resources add money, factories and seaports the multiplier. Each site upgrade level adds 10% of the site's part
+	([] call A3A_fnc_siteUpgradeIncome) params ["_siteRes", "_siteFact", "_siteSea", "_siteHR", "_baseRes", "_baseFact", "_baseSea"];
+	private _resBoost = 1 + _siteFact + _siteSea;
+	// What the site levels added, after the multiplier, goes into the report's upgrade line
+	_upgradeRes = _upgradeRes + (_resAdd + _siteRes) * _resBoost - (_resAdd + _baseRes) * (1 + _baseFact + _baseSea);
+	_resAdd = (_resAdd + _siteRes) * _resBoost;
+	_hrAdd = _hrAdd + _siteHR;
+	_upgradeHR = _upgradeHR + _siteHR;
 
 	Debug_2("Occupant radio keys: %1 - Invader radio keys: %2", occRadioKeys, invRadioKeys);
 

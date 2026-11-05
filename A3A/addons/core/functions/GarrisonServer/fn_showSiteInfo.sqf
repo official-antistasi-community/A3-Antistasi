@@ -75,6 +75,18 @@ private _text = call {
     };
 };
 
+// Site upgrade level and the price of the next one, whichever side holds the site
+private _siteType = [_marker] call A3A_fnc_siteType;
+if (_siteType != "") then {
+    private _level = [_marker, false] call A3A_fnc_siteLevel;
+    private _next = if (_level >= A3A_siteUpgradeLevelCap getOrDefault [_siteType, 0]) then {
+        localize "STR_A3A_fn_siteUpgrades_info_max"
+    } else {
+        format [localize "STR_A3A_fn_siteUpgrades_info_next", _level + 1, [_marker, _level + 1] call A3A_fnc_siteUpgradePrice]
+    };
+    _text = format ["%1<br/>%2<br/>%3", _text, format [localize "STR_A3A_fn_siteUpgrades_info_level", _level], _next];
+};
+
 // Add on the garrison info if it's rebel
 if (_side == teamPlayer) then {
     private _garrInfo = [_marker] call A3A_fnc_garrisonInfo;
