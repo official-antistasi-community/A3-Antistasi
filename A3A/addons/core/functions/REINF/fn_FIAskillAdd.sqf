@@ -10,11 +10,11 @@ _resourcesFIA = server getVariable "resourcesFIA";
 _costs = 1000 + (1.5*(skillFIA *750));
 if (_resourcesFIA < _costs) exitWith {[_titleStr, format [localize "STR_A3A_fn_reinf_FIASkAdd_no_money",_costs]] call A3A_fnc_customHint;};
 
-_resourcesFIA = _resourcesFIA - _costs;
 skillFIA = skillFIA + 1;
 [_titleStr, format [localize "STR_A3A_fn_reinf_FIASkAdd_upgraded",skillFIA,FactionGet(reb,"name")]] call A3A_fnc_customHint;
 publicVariable "skillFIA";
-server setVariable ["resourcesFIA",_resourcesFIA,true];
+// The server takes the cost from the current money. Writing the value read above would undo any change made since
+[0, -_costs, true] remoteExecCall ["A3A_fnc_resourcesFIA", 2];
 
 //update tooltip
 _display = findDisplay 100;
