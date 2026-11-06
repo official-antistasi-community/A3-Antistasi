@@ -4,6 +4,19 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-11-06 - Site upgrades: Workshop and Landing point
+
+### Added
+- **Factories** can now be upgraded to **level 3**. **Workshop:** while you hold a level 3 factory, vehicles cost 10% less, on top of the sea port or war tier discount, at most 40% together.
+- **Sea port level 7, Landing point:** AI recruits cost 10% less per level 7 sea port, at most 50%. HR cost is unchanged. Every price shown for recruits, squads and garrisons includes it.
+
+### Changed
+- **Refunds never pay more than you paid.** Dismissing recruits and squads, removing garrison troops, and the refund for units and vehicles when the game is saved all pay their usual share of the price paid, or of today's price if that is lower. Units and vehicles bought before this version are refunded as before.
+- Vehicles keep their price paid in the garage.
+
+### Save
+- **The save is affected.** Garrisons keep the prices paid for their troops and garage vehicles keep theirs. Older saves load with no prices, which refund as before.
+
 ## 2026-11-06 - Site upgrades: resources and seaports up to level 7
 
 ### Added
