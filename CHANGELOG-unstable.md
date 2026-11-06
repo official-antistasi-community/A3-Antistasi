@@ -13,6 +13,12 @@ publishes it as the Workshop change note, so write it for players. Format and ru
 - If the enemy takes the factory, the build is lost. If the garage is full, finished vehicles wait until a slot is free.
 - Factories can now be upgraded to **level 7**. The site info shows what a factory is building and the time left.
 
+### Also in this update
+- The previous update never reached the Workshop, so it arrives now: factory level 3 **Workshop** (vehicles 10% cheaper), sea port level 7 **Landing point** (recruits 10% cheaper per port), and refunds that never pay more than you paid. The save is affected: garrisons and garage vehicles keep the prices paid.
+
+### Fixed
+- Faction money and HR changes that happened at the same moment could overwrite each other, so a purchase or an income tick was sometimes lost or undone.
+
 ### Save
 - **The save is affected.** Running builds and vehicles waiting for the garage are saved. A save made with this version loses them if loaded in an older version.
 
