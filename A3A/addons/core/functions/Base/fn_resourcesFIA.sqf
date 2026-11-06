@@ -4,27 +4,26 @@ params [["_hr",""],["_resourcesFIA",""],["_silent",false]]; // nil protection
 
 if !(_hr isEqualType 0) exitWith {Error("The first parameter, the added HR, must be a number");};
 if !(_resourcesFIA isEqualType 0) exitWith {Error("The second parameter, the added money, must be a number");};
-waitUntil {!resourcesIsChanging};
-resourcesIsChanging = true;
+if ((floor _resourcesFIA == 0) and (floor _hr == 0)) exitWith {};
 
-if ((floor _resourcesFIA == 0) and (floor _hr == 0)) exitWith {resourcesIsChanging = false};
-private _hrT = server getVariable "hr";
-private _resourcesFIAT = server getVariable "resourcesFIA";
+// The read-modify-write runs unscheduled, so concurrent calls cannot read the same old value and overwrite each
+// other. The old resourcesIsChanging flag was checked and set in two scheduled statements, which let two calls in.
+// resourcesIsChanging stays declared, and false, for scripts that wait on it.
+isNil {
+	private _hrT = (server getVariable "hr") + _hr;
+	private _resourcesFIAT = round ((server getVariable "resourcesFIA") + _resourcesFIA);
 
-_hrT = _hrT + _hr;
-_resourcesFIAT = round (_resourcesFIAT + _resourcesFIA);
+	if (_hrT < 0) then {
+		// If we're using more HR than we have (eg. player respawn at 0 HR) then hurt nearby city support
+		private _nearCity = citiesX select selectRandom (citiesX inAreaArrayIndexes [markerPos "Synd_HQ", distanceMission, distanceMission]);
+		[_hrT, _nearCity] remoteExecCall ["A3A_fnc_citySupportChange", 2];
+		_hrT = 0;
+	};
+	if (_resourcesFIAT < 0) then {_resourcesFIAT = 0};
 
-if (_hrT < 0) then {
-	// If we're using more HR than we have (eg. player respawn at 0 HR) then hurt nearby city support
-	private _nearCity = citiesX select selectRandom (citiesX inAreaArrayIndexes [markerPos "Synd_HQ", distanceMission, distanceMission]);
-	[_hrT, _nearCity] remoteExecCall ["A3A_fnc_citySupportChange", 2];
-	_hrT = 0;
+	server setVariable ["hr",_hrT,true];
+	server setVariable ["resourcesFIA",_resourcesFIAT,true];
 };
-if (_resourcesFIAT < 0) then {_resourcesFIAT = 0};
-
-server setVariable ["hr",_hrT,true];
-server setVariable ["resourcesFIA",_resourcesFIAT,true];
-resourcesIsChanging = false;
 
 if (_silent) exitWith {};
 
