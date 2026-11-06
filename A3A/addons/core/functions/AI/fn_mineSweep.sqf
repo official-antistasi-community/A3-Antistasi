@@ -6,7 +6,7 @@ private ["_costs","_groupX","_unit","_minesX","_radiusX","_roads","_truckX","_mi
 
 private _typeExp = FactionGet(reb,"unitExp");
 private _typeVeh = (FactionGet(reb,"vehiclesLightUnarmed")) # 0;
-_costs = (server getVariable _typeExp) + ([_typeVeh] call A3A_fnc_vehiclePrice);
+_costs = (([_typeExp] call A3A_fnc_rebelUnitPrice)) + ([_typeVeh] call A3A_fnc_vehiclePrice);
 
 [-1,-1*_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
 

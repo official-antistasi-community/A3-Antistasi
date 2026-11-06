@@ -22,6 +22,7 @@ Trace_1("Called with params %1", _this);
 // Other stuff is left alone?
 private _garrison = A3A_garrison get _marker;
 _garrison set ["troops", [[0,0], []] select (_newSide == teamPlayer)];
+["clear", _marker] call A3A_fnc_garrisonPaid;
 
 // Forget what a won attack left behind, see attackJoinGarrison
 _garrison deleteAt "extraTroops";

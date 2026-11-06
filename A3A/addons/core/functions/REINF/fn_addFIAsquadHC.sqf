@@ -34,7 +34,7 @@ private _resourcesFIA = server getVariable "resourcesFIA";
 
 if (_typeGroup isEqualType []) then {
     _formatX = _typeGroup;
-	{ _costs = _costs + (server getVariable _x); _costHR = _costHR +1 } forEach _typeGroup;
+	{ _costs = _costs + (([_x] call A3A_fnc_rebelUnitPrice)); _costHR = _costHR +1 } forEach _typeGroup;
 
 	if (_withBackpck == "MG") then {_costs = _costs + ([(FactionGet(reb,"staticMGs")) # 0] call A3A_fnc_vehiclePrice)};
 	if (_withBackpck == "Mortar") then {_costs = _costs + ([(FactionGet(reb,"staticMortars")) # 0] call A3A_fnc_vehiclePrice)};
@@ -42,7 +42,7 @@ if (_typeGroup isEqualType []) then {
 
 } else {
     private _typeCrew = FactionGet(reb,"unitCrew");
-	_costs = 2*(server getVariable _typeCrew) + ([_typeGroup] call A3A_fnc_vehiclePrice);
+	_costs = 2*(([_typeCrew] call A3A_fnc_rebelUnitPrice)) + ([_typeGroup] call A3A_fnc_vehiclePrice);
 	if (_typeGroup in FactionGet(reb,"staticAA")) then { _costs = _costs + ([(FactionGet(reb,"vehiclesTruck")) # 0] call A3A_fnc_vehiclePrice) };
     _formatX = [_typeCrew, _typeCrew];
 	_costHR = 2;

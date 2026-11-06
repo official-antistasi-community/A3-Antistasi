@@ -65,5 +65,6 @@ if (isNull _vehicle) exitWith {};
     [_vehicle] call HR_GRG_fnc_getFuel,
     [_vehicle] call HR_GRG_fnc_getDamage,
     [_vehicle] call HR_GRG_fnc_getAmmoData,
-    [_vehicle] call HR_GRG_fnc_getAmmoCargo
+    [_vehicle] call HR_GRG_fnc_getAmmoCargo,
+    _vehicle getVariable ["A3A_pricePaid", -1]      // Antistasi: price paid, caps refunds (A3A_fnc_refundBase). -1 = unknown
 ];

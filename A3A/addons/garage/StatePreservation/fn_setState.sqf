@@ -61,7 +61,9 @@
 */
 params [["_vehicle", objNull, [objNull]], ["_state", [], [[]]]];
 if (isNull _vehicle) exitWith {};
-_state params [["_fuelStats", 1, [[],0]], ["_dmgStats", 0, [[],0]], ["_ammoStats", [], [[],0]], ["_ammoCargo", [], [[]]]];
+_state params [["_fuelStats", 1, [[],0]], ["_dmgStats", 0, [[],0]], ["_ammoStats", [], [[],0]], ["_ammoCargo", [], [[]]], ["_pricePaid", -1, [0]]];
+// Antistasi: price paid, missing in states saved before it was added
+if (_pricePaid >= 0) then { _vehicle setVariable ["A3A_pricePaid", _pricePaid, true] };
 
 [_vehicle, _fuelStats] call HR_GRG_fnc_setFuel;
 [_vehicle, _dmgStats] call HR_GRG_fnc_setDamage;

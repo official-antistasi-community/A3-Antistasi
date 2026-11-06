@@ -54,14 +54,14 @@ disableSerialization;
 _display = findDisplay 100;
 if (!isNull _display) then
 {
-	(_display displayCtrl 104) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitRifle")];
-	(_display displayCtrl 105) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitMG")];
-	(_display displayCtrl 126) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitMedic")];
-	(_display displayCtrl 107) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitSL")];
-//	(_display displayCtrl 108) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitCrew")];		// TODO: replace with something else?
-	(_display displayCtrl 109) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitGL")];
-	(_display displayCtrl 110) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitSniper")];
-	(_display displayCtrl 111) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitLAT")];
-	(_display displayCtrl 112) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitAT")];
-	(_display displayCtrl 113) ctrlSetTooltip format ["Cost: %1 €",server getVariable FactionGet(reb,"unitAA")];
+	(_display displayCtrl 104) ctrlSetTooltip format ["Cost: %1 €",([FactionGet(reb,"unitRifle")] call A3A_fnc_rebelUnitPrice)];
+	(_display displayCtrl 105) ctrlSetTooltip format ["Cost: %1 €",([FactionGet(reb,"unitMG")] call A3A_fnc_rebelUnitPrice)];
+	(_display displayCtrl 126) ctrlSetTooltip format ["Cost: %1 €",([FactionGet(reb,"unitMedic")] call A3A_fnc_rebelUnitPrice)];
+	(_display displayCtrl 107) ctrlSetTooltip format ["Cost: %1 €",([FactionGet(reb,"unitSL")] call A3A_fnc_rebelUnitPrice)];
+//	(_display displayCtrl 108) ctrlSetTooltip format ["Cost: %1 €",([FactionGet(reb,"unitCrew")] call A3A_fnc_rebelUnitPrice)];		// TODO: replace with something else?
+	(_display displayCtrl 109) ctrlSetTooltip format ["Cost: %1 €",([FactionGet(reb,"unitGL")] call A3A_fnc_rebelUnitPrice)];
+	(_display displayCtrl 110) ctrlSetTooltip format ["Cost: %1 €",([FactionGet(reb,"unitSniper")] call A3A_fnc_rebelUnitPrice)];
+	(_display displayCtrl 111) ctrlSetTooltip format ["Cost: %1 €",([FactionGet(reb,"unitLAT")] call A3A_fnc_rebelUnitPrice)];
+	(_display displayCtrl 112) ctrlSetTooltip format ["Cost: %1 €",([FactionGet(reb,"unitAT")] call A3A_fnc_rebelUnitPrice)];
+	(_display displayCtrl 113) ctrlSetTooltip format ["Cost: %1 €",([FactionGet(reb,"unitAA")] call A3A_fnc_rebelUnitPrice)];
 };

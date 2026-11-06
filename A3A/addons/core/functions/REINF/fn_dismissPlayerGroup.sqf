@@ -48,7 +48,7 @@ _weaponsX = [];
 if ([_unit] call A3A_fnc_canFight) then
 	{
 	// Units recruited on the faction funds (commander, sub-commanders) pay back into them, the rest into the player's pocket
-	private _refund = (server getVariable (_unit getVariable "unitType")) / 2;
+	private _refund = ([_unit] call A3A_fnc_refundBase) / 2;
 	if (_unit getVariable ["A3A_factionFunded", false]) then { _factionRefund = _factionRefund + _refund } else { _resourcesFIA = _resourcesFIA + _refund };
 	_hr = _hr +1;
 	{if (not(([_x] call BIS_fnc_baseWeapon) in unlockedWeapons)) then {_weaponsX pushBack ([_x] call BIS_fnc_baseWeapon)}} forEach weapons _unit;

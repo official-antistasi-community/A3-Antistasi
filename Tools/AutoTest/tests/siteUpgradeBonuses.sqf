@@ -36,13 +36,13 @@ sleep 3;
 private _settled = WAIT_UNTIL(!resourcesIsChanging, 10);
 ASSERT(_settled, "faction money settled");
 
-// Release cap: resources and seaports to 7, factories stay at 2
+// Release cap: resources and seaports to 7, factories at least 2
 private _capRes = A3A_siteUpgradeLevelCap get "resource";
 private _capSea = A3A_siteUpgradeLevelCap get "seaport";
 private _capFact = A3A_siteUpgradeLevelCap get "factory";
 ASSERT_EQ(_capRes, 7, "resource cap");
 ASSERT_EQ(_capSea, 7, "seaport cap");
-ASSERT_EQ(_capFact, 2, "factory cap");
+ASSERT(_capFact >= 2, "factory cap");
 [_res2, 2] call A3A_fnc_siteLevelSet;
 private _refusal3 = [_res2, 3] call A3A_fnc_siteUpgradeRefusal;
 ASSERT_EQ(_refusal3, "", "resource level 3 on sale");

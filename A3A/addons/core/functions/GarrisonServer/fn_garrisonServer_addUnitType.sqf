@@ -33,7 +33,7 @@ if (_hr < 1) exitWith {
 };
 
 private _resourcesFIA = server getVariable "resourcesFIA";
-private _costs = server getVariable _unitType;
+private _costs = ([_unitType] call A3A_fnc_rebelUnitPrice);
 if (_costs > _resourcesFIA) exitWith {
 	[_titleStr,  format [localize "STR_A3A_garrison_error_no_money", _costs]] remoteExecCall ["A3A_fnc_customHint", _client];
 };
@@ -54,6 +54,7 @@ if (_limit != -1 && {count _troops >= _limit}) exitWith {
 
 // Add unit to server garrison data
 _troops pushBack _unitType;
+["add", _marker, _unitType, _costs] call A3A_fnc_garrisonPaid;
 
 // Update the marker text if it's rebel
 if (sidesX getVariable _marker == teamPlayer) then { [_marker] call A3A_fnc_mrkUpdate };

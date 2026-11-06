@@ -39,11 +39,11 @@ if (_typeX != "delete") then
 	if (_isRoad) then
 		{
 		_typeGroup = FactionGet(reb,"groupAT");
-		_costs = _costs + ([(FactionGet(reb,"vehiclesLightArmed")) # 0] call A3A_fnc_vehiclePrice) + (server getVariable FactionGet(reb,"unitCrew"));
+		_costs = _costs + ([(FactionGet(reb,"vehiclesLightArmed")) # 0] call A3A_fnc_vehiclePrice) + (([FactionGet(reb,"unitCrew")] call A3A_fnc_rebelUnitPrice));
 		_hr = _hr + 1;
 		};
 
-	{_costs = _costs + (server getVariable _x); _hr = _hr +1} forEach _typeGroup;
+	{_costs = _costs + (([_x] call A3A_fnc_rebelUnitPrice)); _hr = _hr +1} forEach _typeGroup;
 	};
 
 

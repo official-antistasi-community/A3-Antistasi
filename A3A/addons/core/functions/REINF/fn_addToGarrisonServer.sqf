@@ -23,8 +23,7 @@ if (_limit != -1 and _newGarrisonCount >= _limit) then {
 
     private _refundMoney = 0;
     {
-        private _unitType = _x getVariable "unitType";
-        _refundMoney = _refundMoney + (server getVariable _unitType);
+        _refundMoney = _refundMoney + ([_x] call A3A_fnc_refundBase);
         deleteVehicle _x;
     } forEach _unitsToRefund;
 

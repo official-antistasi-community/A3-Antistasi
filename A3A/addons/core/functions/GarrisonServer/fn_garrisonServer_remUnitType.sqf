@@ -40,7 +40,8 @@ if (_troops find _unitType == -1) exitWith {
 };
 
 // ugh
-[1, (server getVariable [_unitType, 0]) / 2] spawn A3A_fnc_resourcesFIA;
+// Half the price paid, never more than half today's price
+[1, (["take", _marker, _unitType] call A3A_fnc_garrisonPaid) / 2] spawn A3A_fnc_resourcesFIA;
 
 // Remove unit from server garrison data
 _troops deleteAt (_troops find _unitType);

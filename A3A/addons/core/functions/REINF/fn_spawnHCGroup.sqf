@@ -39,7 +39,7 @@ params [
 private _cost = if (isNull _vehicle) then { 0 } else { [typeOf _vehicle] call A3A_fnc_vehiclePrice };
 private _costHR = 0;
 {
-    _cost = _cost + (server getVariable _x); _costHR = _costHR +1
+    _cost = _cost + (([_x] call A3A_fnc_rebelUnitPrice)); _costHR = _costHR +1
 } forEach _unitTypes;
 
 //spawn group
@@ -49,6 +49,9 @@ _group setGroupIdGlobal [_idFormat + str ({side (leader _x) == teamPlayer} count
 
 private _units = units _group;
 {[_x] call A3A_fnc_FIAinit} forEach _units;
+// Refunds pay at most the price paid, see A3A_fnc_refundBase
+{ _x setVariable ["A3A_pricePaid", [_x getVariable ["unitType", ""]] call A3A_fnc_rebelUnitPrice, true] } forEach _units;
+if (!isNull _vehicle) then { _vehicle setVariable ["A3A_pricePaid", [typeOf _vehicle] call A3A_fnc_vehiclePrice, true] };
 // The squad answers to whoever recruited it: the commander or a sub-commander. Falls back to the commander if the role was lost while placing.
 private _hcOwner = if ([player] call A3A_fnc_isCommandStaff) then { player } else { theBoss };
 _hcOwner hcSetGroup [_group];

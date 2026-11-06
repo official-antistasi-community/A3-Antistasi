@@ -395,6 +395,7 @@ class CfgFunctions
             class garrisonServer_initVIDs {};
             class garrisonServer_looted {};
             class garrisonServer_remUnit {};
+            class garrisonPaid {};
             class garrisonServer_remUnitType {};
             class garrisonServer_remVehicle {};
             class garrisonServer_sendCounts {};
@@ -801,6 +802,8 @@ class CfgFunctions
             class spawnHCGroup {};
             class spawnHCVeh {};
             class vehiclePrice {};
+            class rebelUnitPrice {};
+            class refundBase {};
             class vehStats {};
         };
 

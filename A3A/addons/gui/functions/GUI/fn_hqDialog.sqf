@@ -521,15 +521,15 @@ switch (_mode) do
         if (_aaMissile < 1) then {_aaMissileSubButton ctrlEnable false};
 
         // Get prices
-        _riflemanPrice = server getVariable (FactionGet(reb,"unitRifle"));
-        _squadLeaderPrice = server getVariable (FactionGet(reb,"unitSL"));
-        _autoriflemanPrice = server getVariable (FactionGet(reb,"unitMG"));
-        _grenadierPrice = server getVariable (FactionGet(reb,"unitGL"));
-        _medicPrice = server getVariable (FactionGet(reb,"unitMedic"));
-        _marksmanPrice = server getVariable (FactionGet(reb,"unitSniper"));
-        _atPrice = server getVariable (FactionGet(reb,"unitLAT"));
-        _atMissilePrice = server getVariable (FactionGet(reb,"unitAT"));
-        _aaMissilePrice = server getVariable (FactionGet(reb,"unitAA"));
+        _riflemanPrice = [FactionGet(reb,"unitRifle")] call A3A_fnc_rebelUnitPrice;
+        _squadLeaderPrice = [FactionGet(reb,"unitSL")] call A3A_fnc_rebelUnitPrice;
+        _autoriflemanPrice = [FactionGet(reb,"unitMG")] call A3A_fnc_rebelUnitPrice;
+        _grenadierPrice = [FactionGet(reb,"unitGL")] call A3A_fnc_rebelUnitPrice;
+        _medicPrice = [FactionGet(reb,"unitMedic")] call A3A_fnc_rebelUnitPrice;
+        _marksmanPrice = [FactionGet(reb,"unitSniper")] call A3A_fnc_rebelUnitPrice;
+        _atPrice = [FactionGet(reb,"unitLAT")] call A3A_fnc_rebelUnitPrice;
+        _atMissilePrice = [FactionGet(reb,"unitAT")] call A3A_fnc_rebelUnitPrice;
+        _aaMissilePrice = [FactionGet(reb,"unitAA")] call A3A_fnc_rebelUnitPrice;
 
         // Update price labels
         _riflemanPriceText = _display displayCtrl A3A_IDC_RIFLEMANPRICE;

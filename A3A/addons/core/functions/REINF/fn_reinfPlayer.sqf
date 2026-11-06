@@ -8,7 +8,9 @@ if (_error isNotEqualTo "") exitWith {[_titleStr, _error] call A3A_fnc_customHin
 
 private _unit = [group player, _typeUnit, position player, [], 0, "NONE"] call A3A_fnc_createUnit;
 
-private _costs = server getVariable _typeUnit;
+private _costs = ([_typeUnit] call A3A_fnc_rebelUnitPrice);
+// Refunds pay at most this, see A3A_fnc_refundBase
+_unit setVariable ["A3A_pricePaid", _costs, true];
 
 // The commander and sub-commanders recruit on the faction funds, everyone else pays from their own pocket
 if ([player] call A3A_fnc_isCommandStaff) then {

@@ -58,10 +58,11 @@ private _costs = 0;
 private _hr = 0;
 {
     _hr = _hr + 1;
-    _costs = _costs + 0.5 * (server getVariable [_x,0]);
+    _costs = _costs + 0.5 * (["take", _marker, _x] call A3A_fnc_garrisonPaid);
 } forEach (_garrison get "troops");
 
 _garrison set ["troops", []];
+["clear", _marker] call A3A_fnc_garrisonPaid;
 
 if (_delete) then {
     // Also refund statics & vehicles if we're deleting the site 

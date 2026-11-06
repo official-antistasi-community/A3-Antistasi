@@ -67,7 +67,7 @@ ServerDebug_1("Group %1 escaping to rebel territory", _group);
         if (_x getVariable ["incapacitated", false]) then { _x setDamage 1; continue };
 
         _refundHR = _refundHR + 1;
-        _refundCash = _refundCash + 0.5 * (server getVariable [_x getVariable "unitType", 0]);
+        _refundCash = _refundCash + 0.5 * ([_x] call A3A_fnc_refundBase);
         deleteVehicle _x;
 
     } forEach units _group;

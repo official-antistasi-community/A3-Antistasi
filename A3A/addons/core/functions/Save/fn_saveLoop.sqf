@@ -111,7 +111,7 @@ _resourcesBackground = server getVariable "resourcesFIA";
 	if ((_friendX getVariable ["spawner",false]) and (side group _friendX == teamPlayer))then {
 		if ((alive _friendX) and (!isPlayer _friendX)) then {
 			if ((group _friendX in _hcGroups) and !((group _friendX) getVariable ["esNATO",false])) then {
-				_resourcesBackground = _resourcesBackground + (server getVariable [(_friendX getVariable "unitType"),0]) / 2;
+				_resourcesBackground = _resourcesBackground + ([_friendX] call A3A_fnc_refundBase) / 2;
 				_backpck = backpack _friendX;
 				if (_backpck != "") then {
                     private _assemblesTo = getText (configFile/"CfgVehicles"/_backpck/"assembleInfo"/"assembleTo");
@@ -123,8 +123,8 @@ _resourcesBackground = server getVariable "resourcesFIA";
 					if (isNil {_veh getVariable "markerX"}) then {
 						if ((_veh isKindOf "StaticWeapon") or (driver _veh == _friendX)) then {
 							if (group _friendX in _hcGroups) then {
-								_resourcesBackground = _resourcesBackground + ([_typeVehX] call A3A_fnc_vehiclePrice);
-								if (count attachedObjects _veh != 0) then {{_resourcesBackground = _resourcesBackground + ([typeOf _x] call A3A_fnc_vehiclePrice)} forEach attachedObjects _veh};
+								_resourcesBackground = _resourcesBackground + ([_veh] call A3A_fnc_refundBase);
+								if (count attachedObjects _veh != 0) then {{_resourcesBackground = _resourcesBackground + ([_x] call A3A_fnc_refundBase)} forEach attachedObjects _veh};
 							};
 						};
 					};
@@ -141,7 +141,7 @@ _resourcesBackground = server getVariable "resourcesFIA";
 	if (group _player in _hcGroups) then { continue };
 	{
 		if (alive _x && {_x != _player} && {_x getVariable ["owner", objNull] == _player} && {_x getVariable ["A3A_factionFunded", false]}) then {
-			_resourcesBackground = _resourcesBackground + (server getVariable [_x getVariable "unitType", 0]);
+			_resourcesBackground = _resourcesBackground + ([_x] call A3A_fnc_refundBase);
 		};
 	} forEach units group _player;
 } forEach (call A3A_fnc_playableUnits);

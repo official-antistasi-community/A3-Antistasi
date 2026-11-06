@@ -66,13 +66,13 @@ if (_globalSave) then
 		{
 			// Units recruited on the faction funds go back to them, A3A_fnc_saveLoop counts those
 			if (_x != _playerUnit && {!(_x getVariable ["A3A_factionFunded", false])}) then {
-				private _unitPrice = server getVariable [_x getVariable "unitType", 0];
+				private _unitPrice = [_x] call A3A_fnc_refundBase;
 				_totalMoney = _totalMoney + _unitPrice;
 			};
 			private _veh = vehicle _x;
 			if (_veh == _x || !isNil {_veh getVariable "markerX"}) exitWith {};
 			if (_x == driver _veh || {_x == gunner _veh && _veh isKindOf "StaticWeapon"}) then {
-				private _vehPrice = [typeof _veh] call A3A_fnc_vehiclePrice;
+				private _vehPrice = [_veh] call A3A_fnc_refundBase;
 				_totalMoney = _totalMoney + _vehPrice;
 			};
 		};

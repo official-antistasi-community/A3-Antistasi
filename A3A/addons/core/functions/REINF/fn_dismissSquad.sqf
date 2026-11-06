@@ -47,7 +47,7 @@ private _assignedVehicles =	[];
 		if (alive _x) then
 		{
 			_hr = _hr + 1;
-			_resourcesFIA = _resourcesFIA + (server getVariable [_x getVariable "unitType",0]) / 2;
+			_resourcesFIA = _resourcesFIA + ([_x] call A3A_fnc_refundBase) / 2;
 			if (!isNull (assignedVehicle _x) and {isNull attachedTo (assignedVehicle _x)}) then
 			{
 				_assignedVehicles pushBackUnique (assignedVehicle _x);
@@ -73,10 +73,10 @@ private _assignedVehicles =	[];
 {
 	private _veh = _x;
 	if !(typeOf _veh in FactionGet(all,"vehiclesReb")) then { continue };
-	_resourcesFIA = _resourcesFIA + ([typeOf _veh] call A3A_fnc_vehiclePrice);
+	_resourcesFIA = _resourcesFIA + ([_veh] call A3A_fnc_refundBase);
 	{
 		if !(typeOf _x in FactionGet(all,"vehiclesReb")) then { continue };
-		_resourcesFIA = _resourcesFIA + ([typeOf _x] call A3A_fnc_vehiclePrice);
+		_resourcesFIA = _resourcesFIA + ([_x] call A3A_fnc_refundBase);
 		deleteVehicle _x;
 	} forEach attachedObjects _veh;
 	deleteVehicle _veh;

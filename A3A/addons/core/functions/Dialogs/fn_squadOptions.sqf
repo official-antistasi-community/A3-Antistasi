@@ -23,26 +23,26 @@ if (str (_display) != "no display") then
 	_ChildControl = _display displayCtrl 104;
 	_costs = 0;
 	_costHR = 0;
-	{_costs = _costs + (server getVariable _x); _costHR = _costHR +1} forEach FactionGet(reb,"groupSquad");
+	{_costs = _costs + (([_x] call A3A_fnc_rebelUnitPrice)); _costHR = _costHR +1} forEach FactionGet(reb,"groupSquad");
 	_ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_dialogs_squadOptions",_costs,_costHR];
 
 	_ChildControl = _display displayCtrl 105;
 	_costs = 0;
 	_costHR = 0;
-	{_costs = _costs + (server getVariable _x); _costHR = _costHR +1} forEach FactionGet(reb,"groupSquadEng");
+	{_costs = _costs + (([_x] call A3A_fnc_rebelUnitPrice)); _costHR = _costHR +1} forEach FactionGet(reb,"groupSquadEng");
 	_ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_dialogs_squadOptions",_costs,_costHR];
 
 	_ChildControl = _display displayCtrl 106;
 	_costs = 0;
 	_costHR = 0;
-	{_costs = _costs + (server getVariable _x); _costHR = _costHR +1} forEach FactionGet(reb,"groupSquadSupp");
+	{_costs = _costs + (([_x] call A3A_fnc_rebelUnitPrice)); _costHR = _costHR +1} forEach FactionGet(reb,"groupSquadSupp");
 	_costs = _costs + ([(FactionGet(reb,"staticMGs")) # 0] call A3A_fnc_vehiclePrice);
 	_ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_dialogs_squadOptions",_costs,_costHR];
 
 	_ChildControl = _display displayCtrl 107;
 	_costs = 0;
 	_costHR = 0;
-	{_costs = _costs + (server getVariable _x); _costHR = _costHR +1} forEach FactionGet(reb,"groupSquadSupp");
+	{_costs = _costs + (([_x] call A3A_fnc_rebelUnitPrice)); _costHR = _costHR +1} forEach FactionGet(reb,"groupSquadSupp");
 	_costs = _costs + ([(FactionGet(reb,"staticMortars"))# 0] call A3A_fnc_vehiclePrice);
 	_ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_dialogs_squadOptions",_costs,_costHR];
 };

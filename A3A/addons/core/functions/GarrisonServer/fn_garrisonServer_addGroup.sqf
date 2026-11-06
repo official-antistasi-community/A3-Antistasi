@@ -27,6 +27,7 @@ if (sidesX getVariable _marker == teamPlayer) then
     // If it's rebel, just append the unit types and update the marker
     private _unitTypes = units _group apply { _x getVariable "unitType" };
     (A3A_garrison get _marker get "troops") append _unitTypes;
+    { ["add", _marker, _x getVariable ["unitType", ""], _x getVariable ["A3A_pricePaid", -1]] call A3A_fnc_garrisonPaid } forEach units _group;
 
     [_marker] call A3A_fnc_mrkUpdate;
 }

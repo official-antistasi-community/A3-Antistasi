@@ -58,7 +58,7 @@ switch (_mode) do
             private _key = _x;
             private _y = _forEachIndex * ROW_HEIGHT;
             private _isLeader = _key == "unitSL";
-            private _price = server getVariable [FactionGet(reb,_key), 0];
+            private _price = [FactionGet(reb,_key)] call A3A_fnc_rebelUnitPrice;
 
             private _nameCtrl = _display ctrlCreate ["A3A_Text", -1, _list];
             _nameCtrl ctrlSetPosition [1 * GRID_W, _y, 44 * GRID_W, ROW_HEIGHT];

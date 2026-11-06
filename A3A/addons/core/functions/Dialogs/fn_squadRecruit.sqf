@@ -17,7 +17,7 @@ sleep 1;
 disableSerialization;
 
 _display = findDisplay 100;
-private _crewCost = server getVariable FactionGet(reb,"unitCrew");
+private _crewCost = ([FactionGet(reb,"unitCrew")] call A3A_fnc_rebelUnitPrice);
 
 if (str (_display) != "no display") then
 {
@@ -28,19 +28,19 @@ if (str (_display) != "no display") then
 	_ChildControl = _display displayCtrl 105;
 	_costs = 0;
 	_costHR = 0;
-	{_costs = _costs + (server getVariable _x); _costHR = _costHR +1} forEach FactionGet(reb,"groupMedium");
+	{_costs = _costs + (([_x] call A3A_fnc_rebelUnitPrice)); _costHR = _costHR +1} forEach FactionGet(reb,"groupMedium");
 	_ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_dialogs_squadOptions",_costs,_costHR];
 
 	_ChildControl = _display displayCtrl 106;
 	_costs = 0;
 	_costHR = 0;
-	{_costs = _costs + (server getVariable _x); _costHR = _costHR +1} forEach FactionGet(reb,"groupAT");
+	{_costs = _costs + (([_x] call A3A_fnc_rebelUnitPrice)); _costHR = _costHR +1} forEach FactionGet(reb,"groupAT");
 	_ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_dialogs_squadOptions",_costs,_costHR];
 
 	_ChildControl = _display displayCtrl 107;
 	_costs = 0;
 	_costHR = 0;
-	{_costs = _costs + (server getVariable _x); _costHR = _costHR +1} forEach FactionGet(reb,"groupSniper");
+	{_costs = _costs + (([_x] call A3A_fnc_rebelUnitPrice)); _costHR = _costHR +1} forEach FactionGet(reb,"groupSniper");
 	_ChildControl  ctrlSetTooltip format [localize "STR_A3A_fn_dialogs_squadOptions",_costs,_costHR];
 
 

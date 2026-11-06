@@ -12,11 +12,11 @@ else {[_titleStr, localize "STR_A3A_fn_dialogs_minediag_no_radioman"] call A3A_f
 
 _typeX = _this select 0;
 
-_costs = 2*(server getVariable FactionGet(reb,"unitExp")) + ([(FactionGet(reb,"vehiclesTruck")) # 0] call A3A_fnc_vehiclePrice);
+_costs = 2*(([FactionGet(reb,"unitExp")] call A3A_fnc_rebelUnitPrice)) + ([(FactionGet(reb,"vehiclesTruck")) # 0] call A3A_fnc_vehiclePrice);
 _hr = 2;
 if (_typeX == "delete") then
 	{
-	_costs = _costs - (server getVariable FactionGet(reb,"unitExp"));
+	_costs = _costs - (([FactionGet(reb,"unitExp")] call A3A_fnc_rebelUnitPrice));
 	_hr = 1;
 	};
 if ((server getVariable "resourcesFIA" < _costs) or (server getVariable "hr" < _hr)) exitWith {[_titleStr, format [localize "STR_A3A_fn_dialogs_minediag_no_resource",_costs,_hr]] call A3A_fnc_customHint;};

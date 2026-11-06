@@ -17100,7 +17100,7 @@
         <Original>Company town: the nearest rebel town within 2 km gets +1 support per tick and loses half as much from civilian deaths</Original>
       </Key>
       <Key ID="STR_A3A_fn_siteUpgrades_bonus_factory_3">
-        <Original>Workshop: 10% off vehicles</Original>
+        <Original>Workshop: 10% off vehicles while you hold one, added to the sea port discount, at most 40%</Original>
       </Key>
       <Key ID="STR_A3A_fn_siteUpgrades_bonus_factory_5">
         <Original>Production of wheeled APCs, armoured cars and boats</Original>
@@ -17115,7 +17115,7 @@
         <Original>Foreign volunteers: +0.5 HR per tick</Original>
       </Key>
       <Key ID="STR_A3A_fn_siteUpgrades_bonus_seaport_7">
-        <Original>Landing point: cheaper AI recruits</Original>
+        <Original>Landing point: 10% off AI recruits per level 7 sea port, at most 50%</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_townUpgrades">

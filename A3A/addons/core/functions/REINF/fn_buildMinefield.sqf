@@ -8,7 +8,7 @@ _typeX = _this select 0;
 _positionTel = _this select 1;
 _quantity = _this select 2;
 private _typeExp = FactionGet(reb,"unitExp");
-_costs = 2*(server getVariable _typeExp) + ([(FactionGet(reb,"vehiclesTruck")) # 0] call A3A_fnc_vehiclePrice);
+_costs = 2*(([_typeExp] call A3A_fnc_rebelUnitPrice)) + ([(FactionGet(reb,"vehiclesTruck")) # 0] call A3A_fnc_vehiclePrice);
 [-2,(-1*_costs)] remoteExec ["A3A_fnc_resourcesFIA",2];
 
 if (_typeX == "ATMine") then
