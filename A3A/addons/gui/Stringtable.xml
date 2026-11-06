@@ -7080,6 +7080,18 @@
       <Key ID="STR_antistasi_dialogs_buy_site_upgrades_haul">
         <Original>The kit crate appears next to you at HQ. Haul it to the site and install it there.</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_bonuses">
+        <Original>Level bonuses, a site keeps those of lower levels:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_bonus_line">
+        <Original>Level %1: %2</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_bonus_active">
+        <Original>(active)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_bonus_later">
+        <Original>(in a later update)</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_buy_site_upgrades_max">
         <Original>This site is at the highest level.</Original>
       </Key>

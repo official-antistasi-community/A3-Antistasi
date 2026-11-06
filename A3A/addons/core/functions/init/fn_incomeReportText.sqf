@@ -12,6 +12,7 @@ Arguments:
     <SCALAR> Reward tax collected since the last report
     <BOOL> Whether the reward tax line is shown even when nothing was collected
     <STRING> Names of newly unlocked arsenal items, "" when nothing was unlocked
+    <SCALAR> Magazines the Smugglers of upgraded seaports added (0 hides the line) [DEFAULT = 0]
 
 Return Value:
     <STRING> Structured text for A3A_fnc_commsMP "taxRep"
@@ -32,7 +33,8 @@ params [
     ["_upgradeHR", 0, [0]],
     ["_taxCollected", 0, [0]],
     ["_showTax", false, [false]],
-    ["_textArsenal", "", [""]]
+    ["_textArsenal", "", [""]],
+    ["_smuggled", 0, [0]]
 ];
 
 private _textX = "<t size='0.6' color='#C1C0BB'>" + format [localize "STR_A3A_fn_init_resourceCheck_income", _hrAdd toFixed 1, ceil _resAdd];
@@ -41,6 +43,9 @@ if (_upgradeRes > 0 or _upgradeHR > 0) then {
 };
 if (_taxCollected > 0 or _showTax) then {
     _textX = _textX + "<br/>" + format [localize "STR_A3A_fn_init_resourceCheck_tax", round _taxCollected];
+};
+if (_smuggled > 0) then {
+    _textX = _textX + "<br/>" + format [localize "STR_A3A_fn_siteUpgrades_smugglers", _smuggled];
 };
 if (_textArsenal != "") then {
     _textX = _textX + "<br/>" + localize "STR_A3A_fn_init_resourceCheck_arsenal" + "<br/><br/>" + _textArsenal;

@@ -18,7 +18,7 @@ Scope: Clients, Local Arguments, Local Effect
 Environment: Scheduled for onLoad (called from the dialog onLoad), Unscheduled otherwise
 Public: No
 Dependencies:
-    A3A_siteLevels, A3A_siteUpgradeLevelCap, A3A_fnc_siteType, A3A_fnc_siteLevel, A3A_fnc_siteName, A3A_fnc_siteUpgradePrice,
+    A3A_siteLevels, A3A_siteUpgradeLevelCap, A3A_siteUpgradeBonusesActive, A3A_fnc_siteType, A3A_fnc_siteLevel, A3A_fnc_siteName, A3A_fnc_siteUpgradePrice,
     A3A_fnc_siteUpgradeRefusal, A3A_fnc_upgradeKitAllowed, A3A_fnc_upgradeKitBuy
 
 Example:
@@ -99,8 +99,25 @@ switch (_mode) do
         _lines pushBack format [localize "STR_antistasi_dialogs_buy_site_upgrades_bonus", 10 * _stored, 20 * _stored];
         if (_side != teamPlayer) then { _lines pushBack localize "STR_antistasi_dialogs_buy_site_upgrades_enemy" };
         if (_marker in destroyedSites) then { _lines pushBack localize "STR_antistasi_dialogs_buy_site_upgrades_destroyed" };
+
+        // Bonuses of levels 3, 5 and 7: active ones in green, ones not shipped yet in grey
+        private _effective = [_marker] call A3A_fnc_siteLevel;
+        private _bonusLines = [localize "STR_antistasi_dialogs_buy_site_upgrades_bonuses"];
+        {
+            private _text = format [localize "STR_antistasi_dialogs_buy_site_upgrades_bonus_line", _x, localize format ["STR_A3A_fn_siteUpgrades_bonus_%1_%2", _type, _x]];
+            private _later = !([_type, _x] in A3A_siteUpgradeBonusesActive);
+            _text = switch (true) do {
+                case (_later): { format ["<t color='#9a9a9a'>%1 %2</t>", _text, localize "STR_antistasi_dialogs_buy_site_upgrades_bonus_later"] };
+                case (_effective >= _x): { format ["<t color='#7fd27f'>%1 %2</t>", _text, localize "STR_antistasi_dialogs_buy_site_upgrades_bonus_active"] };
+                default { _text };
+            };
+            _bonusLines pushBack _text;
+        } forEach [3, 5, 7];
+        // Smaller than the rest of the panel so the list fits above the buy button
+        _lines pushBack format ["<t size='0.7'>%1</t>", _bonusLines joinString "<br/>"];
+
         _lines pushBack format [localize "STR_antistasi_dialogs_buy_site_upgrades_funds", _funds];
-        _lines pushBack format [localize "STR_antistasi_dialogs_buy_site_upgrades_cap", _cap];
+        if (_cap < A3A_siteUpgradeMaxLevel) then { _lines pushBack format [localize "STR_antistasi_dialogs_buy_site_upgrades_cap", _cap] };
         _lines pushBack localize "STR_antistasi_dialogs_buy_site_upgrades_haul";
 
         _title ctrlSetText ([_marker] call A3A_fnc_siteName);

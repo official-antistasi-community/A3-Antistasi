@@ -17085,7 +17085,37 @@
         <Original>Next level (%1): %2 €</Original>
       </Key>
       <Key ID="STR_A3A_fn_siteUpgrades_info_max">
-        <Original>Highest upgrade level available for now.</Original>
+        <Original>No higher upgrade level is on sale.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_smugglers">
+        <Original>Smugglers at upgraded sea ports brought %1 enemy magazines into the arsenal.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_bonus_resource_3">
+        <Original>Local workers: up to 3 HR per tick, shared over all resources of the map</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_bonus_resource_5">
+        <Original>Fortified compound: +50% garrison limit, rebuilding the destroyed site is free</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_bonus_resource_7">
+        <Original>Company town: the nearest rebel town within 2 km gets +1 support per tick and loses half as much from civilian deaths</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_bonus_factory_3">
+        <Original>Workshop: 10% off vehicles</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_bonus_factory_5">
+        <Original>Production of wheeled APCs, armoured cars and boats</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_bonus_factory_7">
+        <Original>Production of every vehicle</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_bonus_seaport_3">
+        <Original>Smugglers: enemy magazines for the arsenal every second tick</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_bonus_seaport_5">
+        <Original>Foreign volunteers: +0.5 HR per tick</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_bonus_seaport_7">
+        <Original>Landing point: cheaper AI recruits</Original>
       </Key>
     </Container>
     <Container name="A3A_fn_townUpgrades">

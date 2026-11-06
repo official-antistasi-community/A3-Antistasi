@@ -87,8 +87,10 @@ while {true} do
 	private _taxCollected = missionNamespace getVariable ["A3A_rewardTaxCollected", 0];
 	private _showTax = (missionNamespace getVariable ["A3A_rewardTaxPercent", 0]) > 0;
 	A3A_rewardTaxCollected = 0;
+	// Company town support and Smugglers magazines, before the unlock check so smuggled magazines can unlock
+	private _smuggled = [] call A3A_fnc_siteUpgradeTickBonuses;
 	private _textArsenal = [] call A3A_fnc_arsenalManage;
-	private _textX = [_hrAdd, _resAdd, _upgradeRes, _upgradeHR, _taxCollected, _showTax, _textArsenal] call A3A_fnc_incomeReportText;
+	private _textX = [_hrAdd, _resAdd, _upgradeRes, _upgradeHR, _taxCollected, _showTax, _textArsenal, _smuggled] call A3A_fnc_incomeReportText;
 	[petros, "taxRep", _textX] remoteExec ["A3A_fnc_commsMP", [teamPlayer, civilian]];
 
 	[] call A3A_fnc_generateRebelGear;

@@ -57,7 +57,19 @@ A3A_siteUpgradeMapScale = createHashMapFromArray [
 A3A_siteUpgradeRadius = 250;
 
 // Highest level sold per type. Raised release by release, the save keeps any level up to 7
-A3A_siteUpgradeLevelCap = createHashMapFromArray [["resource", 2], ["factory", 2], ["seaport", 2]];
+A3A_siteUpgradeLevelCap = createHashMapFromArray [["resource", 7], ["factory", 2], ["seaport", 7]];
+
+// Level bonuses. Resources: 3 Local workers, 5 Fortified compound, 7 Company town.
+// Seaports: 3 Smugglers, 5 Foreign volunteers, 7 Landing point (not active yet)
+A3A_siteUpgradeResHRPool = 3;               // Local workers: this HR per tick shared over all resources of the map
+A3A_siteUpgradeSeaHR = 0.5;                 // Foreign volunteers: HR per tick per seaport
+A3A_siteUpgradeHRCap = 5;                   // Most HR per tick from site upgrades
+A3A_siteUpgradeFortifiedGarrison = 0.5;     // Fortified compound: added to the garrison limit multiplier
+A3A_siteUpgradeCompanyTownRange = 2000;     // Company town: the nearest rebel town within this range
+A3A_siteUpgradeSmugglerMags = 5;            // Smugglers: magazines per seaport every second tick
+A3A_siteCompanyTowns = [];                  // Towns that got Company town support last tick (server)
+// [type, level] of the level 3, 5 and 7 bonuses that work in this version, the tab marks the others as coming later
+A3A_siteUpgradeBonusesActive = [["resource", 3], ["resource", 5], ["resource", 7], ["seaport", 3], ["seaport", 5]];
 
 // Levels 3, 5 and 7 place a building that takes no damage
 A3A_siteUpgradeBuildings = createHashMap;

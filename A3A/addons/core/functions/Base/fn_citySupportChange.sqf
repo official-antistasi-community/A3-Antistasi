@@ -24,7 +24,8 @@ if (A3A_cityData isNil _city) exitWith {Error_1("City %1 not found in city data"
 if (_city in destroyedSites) exitWith {};
 
 private _cityData = A3A_cityData getVariable _city;
-_cityData params ["_numCiv", "_supportReb", "_accumHR", "_taskDelay"];		// add task delay? Could save it then...
+// New towns have three entries (fn_initZones), the default keeps the write below from using an undefined variable
+_cityData params ["_numCiv", "_supportReb", "_accumHR", ["_taskDelay", 0]];		// add task delay? Could save it then...
 
 if (_scaled) then {
 	_change = 10 * _change / sqrt _numCiv;			// normalized to 1 = 1% at size 100
@@ -32,7 +33,9 @@ if (_scaled) then {
 
 // Town upgrades (rebel-held towns only, cleared when the town is lost)
 private _upgrades = A3A_cityInvest getOrDefault [_city, createHashMap];
-if (_isCivDeath and _change < 0 and "clinic" in _upgrades) then {
+// A Company town (level 7 resource nearby) halves them like a clinic
+private _companyTown = _city in (missionNamespace getVariable ["A3A_siteCompanyTowns", []]);
+if (_isCivDeath and _change < 0 and {"clinic" in _upgrades or _companyTown}) then {
 	_change = _change * A3A_townUpgradeClinicDeathMult;
 };
 

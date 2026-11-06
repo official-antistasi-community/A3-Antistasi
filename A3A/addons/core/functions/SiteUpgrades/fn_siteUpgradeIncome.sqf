@@ -3,6 +3,8 @@ Maintainer: Shoter
     Income parts of resources, factories and seaports for one income tick, with their upgrade levels.
     Every rebel-held, not destroyed site adds its base contribution times (1 + 0.1 x level).
     The level 0 sums are returned too, so the income tick can report what the levels added.
+    HR: Local workers give A3A_siteUpgradeResHRPool / (number of resources) per resource at level 3 or more,
+    Foreign volunteers A3A_siteUpgradeSeaHR per seaport at level 5 or more, together at most A3A_siteUpgradeHRCap.
 
 Arguments:
     None
@@ -12,7 +14,7 @@ Return Value:
         0: <SCALAR> money from resources, with levels
         1: <SCALAR> factory part of the income multiplier, with levels
         2: <SCALAR> seaport part of the income multiplier, with levels
-        3: <SCALAR> HR from site upgrades (0 until the level 3 and 5 bonuses exist)
+        3: <SCALAR> HR from site upgrades
         4: <SCALAR> money from resources at level 0
         5: <SCALAR> factory multiplier part at level 0
         6: <SCALAR> seaport multiplier part at level 0
@@ -21,7 +23,8 @@ Scope: Server
 Environment: Any
 Public: No
 Dependencies: A3A_fnc_siteLevel
-    A3A_rebelCashResMult, A3A_rebelCashFactMult, A3A_rebelCashSeaportMult
+    A3A_rebelCashResMult, A3A_rebelCashFactMult, A3A_rebelCashSeaportMult,
+    A3A_siteUpgradeResHRPool, A3A_siteUpgradeSeaHR, A3A_siteUpgradeHRCap
 
 Example:
     ([] call A3A_fnc_siteUpgradeIncome) params ["_resMoney", "_factMult", "_seaMult", "_hr", "_baseRes", "_baseFact", "_baseSea"];
@@ -46,4 +49,11 @@ private _fnc_sum = {
 ([factories, A3A_rebelCashFactMult] call _fnc_sum) params ["_factMult", "_baseFact"];
 ([seaports, A3A_rebelCashSeaportMult] call _fnc_sum) params ["_seaMult", "_baseSea"];
 
-[_resMoney, _factMult, _seaMult, 0, _baseRes, _baseFact, _baseSea];
+// siteLevel is 0 for enemy-held and destroyed sites, so only working sites count
+private _workers = { [_x] call A3A_fnc_siteLevel >= 3 } count resourcesX;
+private _volunteers = { [_x] call A3A_fnc_siteLevel >= 5 } count seaports;
+private _hr = 0;
+if (_workers > 0) then { _hr = _workers * A3A_siteUpgradeResHRPool / count resourcesX };
+_hr = (_hr + _volunteers * A3A_siteUpgradeSeaHR) min A3A_siteUpgradeHRCap;
+
+[_resMoney, _factMult, _seaMult, _hr, _baseRes, _baseFact, _baseSea];

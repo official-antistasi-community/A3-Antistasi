@@ -577,6 +577,7 @@ class CfgFunctions
             class siteName {};
             class siteType {};
             class siteUpgradeIncome {};
+            class siteUpgradeTickBonuses {};
             class siteUpgradeInstall {};
             class siteUpgradeLoad {};
             class siteUpgradePrice {};
