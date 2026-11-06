@@ -4,6 +4,15 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-11-06 - Training money fix
+
+### Fixed
+- Buying a training upgrade could undo a money change that happened at the same moment, such as a purchase or income. The cost is now taken from the current faction money.
+
+### Internal
+- The junkyard and factory vehicle list is built once at server start instead of twice.
+- The upgrade kit AutoTest no longer fails at random, so Workshop uploads are no longer skipped because of it.
+
 ## 2026-11-06 - Factories build vehicles
 
 ### Added
