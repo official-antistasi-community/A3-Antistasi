@@ -4,6 +4,23 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-11-06 - Site upgrades: resources and seaports up to level 7
+
+### Added
+- **Resources** and **sea ports** can now be upgraded to **level 7**. Levels 3, 5 and 7 place a building at the site and give a bonus; a site keeps the bonuses of its lower levels. Factories stay at level 2 for now.
+- **Resource level 3, Local workers:** up to 3 HR per tick, shared over all resources of the map.
+- **Resource level 5, Fortified compound:** +50% garrison limit, and rebuilding the destroyed site from the HQ menu is free.
+- **Resource level 7, Company town:** the nearest rebel town within 2 km gets +1 support every tick and loses half as much support from civilian deaths.
+- **Sea port level 3, Smugglers:** every second tick, 5 enemy magazines per port go into the arsenal. They count towards unlocks.
+- **Sea port level 5, Foreign volunteers:** +0.5 HR per tick. HR from site upgrades is capped at 5 per tick.
+- Sea port level 7 can be bought, but its **Landing point** bonus (cheaper AI recruits) comes in a later update.
+- The Site upgrades tab lists the level 3, 5 and 7 bonuses of the selected site and marks the active ones.
+
+### Fixed
+- Support changes in towns of a new campaign no longer log an 'undefined variable' script error.
+
+Saves are not affected.
+
 ## 2026-11-06 - Site upgrades and member town kits
 
 ### Added
