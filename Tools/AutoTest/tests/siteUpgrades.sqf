@@ -1,4 +1,4 @@
-// @description: Site upgrade levels: prices, install through kits, income, garrison limit, release cap, capture drop, save and load
+// @description: Site upgrade levels: prices, install through kits, income, garrison limit, capture drop, save and load
 // @timeout: 90
 // @start: new
 // @world: Altis
@@ -67,13 +67,9 @@ private _resLevel = [_res] call A3A_fnc_siteLevel;
 ASSERT_EQ(_resLevel, 2, "resource at level 2");
 ASSERT_EQ(A3A_siteLevels get _res, 2, "level stored in A3A_siteLevels");
 
-// Level 1 again is the wrong level, level 3 is above the R2 cap
+// Level 1 again is the wrong level
 private _again = ["site", 1, _res, _cratePos, 0, _buyer] call A3A_fnc_upgradeKitPurchase;
 ASSERT(isNull _again, "an old level cannot be bought again");
-private _capRefusal = [_res, 3] call A3A_fnc_siteUpgradeRefusal;
-ASSERT(_capRefusal != "", "level 3 refused by the release cap");
-private _overCap = ["site", 3, _res, _cratePos, 0, _buyer] call A3A_fnc_upgradeKitPurchase;
-ASSERT(isNull _overCap, "level 3 purchase refused");
 
 // One crate per site: a second kit for the same site is refused while the first is in transit
 _buyer setPosATL (markerPos _fact);
@@ -100,7 +96,7 @@ if (A3A_rebelGarrisonLimit != -1) then {
     ASSERT(_limit2 >= _limit0, "garrison limit did not shrink");
 };
 
-// A level 3 building (set directly, R2 does not sell level 3): the drop removes only the lost level's building
+// A level 3 building (set directly, factories are capped at 2): the drop removes only the lost level's building
 [_fact, 3] call A3A_fnc_siteLevelSet;
 private _bPos = AGLToASL ((markerPos _fact) vectorAdd [20, 20, 0]);
 private _building = [_fact, 3, _bPos, [0,1,0], [0,0,1]] call A3A_fnc_siteBuildingCreate;
