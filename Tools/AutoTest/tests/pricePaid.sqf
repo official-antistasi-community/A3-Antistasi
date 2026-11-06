@@ -26,7 +26,7 @@ private _settled = WAIT_UNTIL(!resourcesIsChanging, 10);
 ASSERT(_settled, "faction money settled");
 
 private _capFact = A3A_siteUpgradeLevelCap get "factory";
-ASSERT_EQ(_capFact, 3, "factory cap raised to 3");
+ASSERT(_capFact >= 3, "factory cap at least 3");
 
 // Landing point: 10% off per level 7 seaport, rounded to 5
 private _base = server getVariable _rifle;

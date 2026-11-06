@@ -538,6 +538,8 @@ class CfgFunctions
             class junkyardLoop {};
             class junkyardPrice {};
             class junkyardPurchase {};
+            class junkyardComplexity {};
+            class junkyardPools {};
             class junkyardRefresh {};
             class junkyardRepairAdd {};
             class junkyardRepairAdminFinish {};
@@ -579,6 +581,10 @@ class CfgFunctions
             class siteType {};
             class siteUpgradeIncome {};
             class siteUpgradeTickBonuses {};
+            class factoryBuildable {};
+            class factoryBuildRefusal {};
+            class factoryBuildStart {};
+            class factoryBuildTick {};
             class siteUpgradeInstall {};
             class siteUpgradeLoad {};
             class siteUpgradePrice {};

@@ -382,6 +382,7 @@ A3A_garrisonOps = [];
 [] spawn A3A_fnc_resourcecheck;                     // 10-minute loop
 [] spawn A3A_fnc_aggressionUpdateLoop;              // 1-minute loop
 [] spawn A3A_fnc_garbageCleanerTracker;             // 5-minute loop
+[] spawn A3A_fnc_factoryBuildable;                  // Factory production list, broadcast when ready
 [] spawn A3A_fnc_junkyardLoop;                      // Junkyard restock, hourly
 [] spawn { while {true} do { sleep 30; call A3A_fnc_processBuildingTimeouts } };      // Auto-build constructions left unbuilt
 [] spawn A3A_tasks_fnc_boardLoop;                   // Mission board, new missions every 15 minutes

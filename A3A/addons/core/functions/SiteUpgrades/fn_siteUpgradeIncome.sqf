@@ -2,6 +2,7 @@
 Maintainer: Shoter
     Income parts of resources, factories and seaports for one income tick, with their upgrade levels.
     Every rebel-held, not destroyed site adds its base contribution times (1 + 0.1 x level).
+    A factory that is building a vehicle adds nothing: the lost income is the price of the vehicle.
     The level 0 sums are returned too, so the income tick can report what the levels added.
     HR: Local workers give A3A_siteUpgradeResHRPool / (number of resources) per resource at level 3 or more,
     Foreign volunteers A3A_siteUpgradeSeaHR per seaport at level 5 or more, together at most A3A_siteUpgradeHRCap.
@@ -46,7 +47,7 @@ private _fnc_sum = {
 };
 
 ([resourcesX, A3A_rebelCashResMult] call _fnc_sum) params ["_resMoney", "_baseRes"];
-([factories, A3A_rebelCashFactMult] call _fnc_sum) params ["_factMult", "_baseFact"];
+([factories select { !(_x in A3A_factoryBuilds) }, A3A_rebelCashFactMult] call _fnc_sum) params ["_factMult", "_baseFact"];
 ([seaports, A3A_rebelCashSeaportMult] call _fnc_sum) params ["_seaMult", "_baseSea"];
 
 // siteLevel is 0 for enemy-held and destroyed sites, so only working sites count

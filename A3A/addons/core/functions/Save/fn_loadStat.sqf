@@ -37,7 +37,7 @@ private _specialVarLoads = [
     "bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "enemyResources", "HQKnowledge",
     "testingTimerIsActive", "version", "HR_Garage", "A3A_fuelAmountleftArray", "arsenalLimits", "rebelLoadouts",
     "minorSites", "newGarrison", "radioKeys", "cityData", "deployedFlag", "junkyard", "cityInvest", "townKits", "rewardShares", "campaignLog", "subCommanders", "missionArea", "customSquads",
-    "siteUpgrades", "siteKits"
+    "siteUpgrades", "siteKits", "factoryBuilds"
 ];
 
 private _varName = _this select 0;
@@ -95,7 +95,7 @@ if (_varName in _specialVarLoads) then {
             ["town", _id, _city, _paid, _pos, _dir] call A3A_fnc_upgradeKitCreate;
         } forEach _varValue;
     };
-    if (_varName in ['siteUpgrades', 'siteKits']) then { [_varName, _varValue] call A3A_fnc_siteUpgradeLoad };
+    if (_varName in ['siteUpgrades', 'siteKits', 'factoryBuilds']) then { [_varName, _varValue] call A3A_fnc_siteUpgradeLoad };
     if (_varName == 'rewardShares') then {
         _varValue params [["_taxPercent", 0, [0]], ["_cutPercent", 20, [0]]];
         A3A_rewardTaxPercent = 0 max round _taxPercent min 50;

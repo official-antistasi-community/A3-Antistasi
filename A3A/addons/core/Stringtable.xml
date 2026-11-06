@@ -17090,6 +17090,36 @@
       <Key ID="STR_A3A_fn_siteUpgrades_smugglers">
         <Original>Smugglers at upgraded sea ports brought %1 enemy magazines into the arsenal.</Original>
       </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_buildStarted">
+        <Original>%1 started building %2, ready in about %3 h of play. Ordered by %4.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_buildFinished">
+        <Original>%1 finished building %2.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_buildDelivered">
+        <Original>%1 was delivered to the faction garage.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_buildWaiting">
+        <Original>The faction garage is full: %1 built vehicles wait for a free slot.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_buildNeedsLevel">
+        <Original>%1 has to be at least level 1 to build vehicles.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_buildBusy">
+        <Original>%1 is already building a vehicle.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_buildListPending">
+        <Original>The production list is still being prepared. Try again in a moment.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_buildUnknown">
+        <Original>This vehicle cannot be built.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_buildLevelTooLow">
+        <Original>%1 needs a higher level to build this vehicle.</Original>
+      </Key>
+      <Key ID="STR_A3A_fn_siteUpgrades_info_build">
+        <Original>Building %1: %2 h left</Original>
+      </Key>
       <Key ID="STR_A3A_fn_siteUpgrades_bonus_resource_3">
         <Original>Local workers: up to 3 HR per tick, shared over all resources of the map</Original>
       </Key>
@@ -17103,10 +17133,10 @@
         <Original>Workshop: 10% off vehicles while you hold one, added to the sea port discount, at most 40%</Original>
       </Key>
       <Key ID="STR_A3A_fn_siteUpgrades_bonus_factory_5">
-        <Original>Production of wheeled APCs, armoured cars and boats</Original>
+        <Original>Builds wheeled APCs, armoured cars and boats too. From level 1 a factory builds light cars and trucks</Original>
       </Key>
       <Key ID="STR_A3A_fn_siteUpgrades_bonus_factory_7">
-        <Original>Production of every vehicle</Original>
+        <Original>Builds every vehicle, tracked and air included</Original>
       </Key>
       <Key ID="STR_A3A_fn_siteUpgrades_bonus_seaport_3">
         <Original>Smugglers: enemy magazines for the arsenal every second tick</Original>

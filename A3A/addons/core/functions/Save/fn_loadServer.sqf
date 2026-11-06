@@ -182,6 +182,7 @@ if (isServer) then {
 	// Site upgrade levels before their kits, saves without them leave every site at level 0
 	["siteUpgrades"] call A3A_fnc_getStatVariable;
 	["siteKits"] call A3A_fnc_getStatVariable;
+	["factoryBuilds"] call A3A_fnc_getStatVariable;
 	["rewardShares"] call A3A_fnc_getStatVariable;
 	["subCommanders"] call A3A_fnc_getStatVariable;
 	["missionArea"] call A3A_fnc_getStatVariable;

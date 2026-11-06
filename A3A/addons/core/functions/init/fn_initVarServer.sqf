@@ -539,6 +539,8 @@ ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeLandingDiscount);
 ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeLandingCap);
 ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeWorkshopDiscount);
 ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeVehicleDiscountCap);
+ONLY_DECLARE_SERVER_VAR(A3A_factoryLevelBands);
+ONLY_DECLARE_SERVER_VAR(A3A_factoryBuilds);
 ONLY_DECLARE_SERVER_VAR(A3A_siteUpgradeBuildings);
 ONLY_DECLARE_SERVER_VAR(A3A_siteLevels);
 

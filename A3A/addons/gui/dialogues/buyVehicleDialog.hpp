@@ -236,6 +236,8 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                     h = 5 * GRID_H;
                 };
 
+                // Overlaps the factory production controls below on purpose: fn_siteUpgradesTab "update" shrinks it
+                // to h = 36 * GRID_H while a factory is selected, and sets it back to 72 for other sites
                 class SiteInfo : A3A_StructuredText
                 {
                     idc = A3A_IDC_SITEUPGRADESINFO;
@@ -244,6 +246,68 @@ class A3A_BuyVehicleDialog : A3A_TabbedDialog
                     y = 10 * GRID_H;
                     w = 48 * GRID_W;
                     h = 72 * GRID_H;
+                };
+
+                // Factory production, shown by fn_siteUpgradesTab "update" only while a factory is selected.
+                // All five start hidden, "update" sets the visibility of each one after the tab group is shown.
+                class BuildLabel : A3A_Text
+                {
+                    idc = A3A_IDC_SITEBUILDLABEL;
+                    show = false;
+                    text = $STR_antistasi_dialogs_buy_site_upgrades_build_label;
+                    x = 2 * GRID_W;
+                    y = 47 * GRID_H;
+                    w = 48 * GRID_W;
+                    h = 4 * GRID_H;
+                };
+
+                // Shares its rectangle with BuildStatus: BuildSearch and BuildList are shown when the factory can
+                // build, BuildStatus instead when it is busy or cannot build (fn_siteUpgradesTab "update")
+                class BuildSearch : A3A_Edit
+                {
+                    idc = A3A_IDC_SITEBUILDSEARCH;
+                    show = false;
+                    onKeyUp = "[""searchChanged""] call A3A_GUI_fnc_siteUpgradesTab; false";
+                    x = 2 * GRID_W;
+                    y = 52 * GRID_H;
+                    w = 48 * GRID_W;
+                    h = 5 * GRID_H;
+                };
+
+                // Shares its rectangle with BuildStatus, see BuildSearch
+                class BuildList : A3A_Listbox
+                {
+                    idc = A3A_IDC_SITEBUILDLIST;
+                    show = false;
+                    onLBSelChanged = "[""listChanged""] call A3A_GUI_fnc_siteUpgradesTab";
+                    x = 2 * GRID_W;
+                    y = 58 * GRID_H;
+                    w = 48 * GRID_W;
+                    h = 20 * GRID_H;
+                };
+
+                // Shares its rectangle with BuildSearch and BuildList, see BuildSearch
+                class BuildStatus : A3A_StructuredText
+                {
+                    idc = A3A_IDC_SITEBUILDSTATUS;
+                    show = false;
+                    text = "";
+                    x = 2 * GRID_W;
+                    y = 52 * GRID_H;
+                    w = 48 * GRID_W;
+                    h = 26 * GRID_H;
+                };
+
+                class BuildButton : A3A_Button
+                {
+                    idc = A3A_IDC_SITEBUILDBUTTON;
+                    show = false;
+                    text = $STR_antistasi_dialogs_buy_site_upgrades_build;
+                    onButtonClick = "[""buildClicked""] call A3A_GUI_fnc_siteUpgradesTab";
+                    x = 2 * GRID_W;
+                    y = 79 * GRID_H;
+                    w = 48 * GRID_W;
+                    h = 6 * GRID_H;
                 };
 
                 class BuyButton : A3A_Button

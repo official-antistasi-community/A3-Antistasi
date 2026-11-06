@@ -31,6 +31,12 @@ if (_level == 0) exitWith { 0 };
 private _newLevel = _level - 1;
 [_marker, _newLevel] call A3A_fnc_siteLevelSet;
 
+// A factory lost mid-build loses the build. Finished vehicles waiting for the garage are kept
+if (_marker in A3A_factoryBuilds) then {
+    A3A_factoryBuilds deleteAt _marker;
+    publicVariable "A3A_factoryBuilds";
+};
+
 if (_level in [3, 5, 7]) then {
     private _key = format ["%1|%2", _marker, _level];
     private _building = A3A_siteBuildings getOrDefault [_key, objNull];

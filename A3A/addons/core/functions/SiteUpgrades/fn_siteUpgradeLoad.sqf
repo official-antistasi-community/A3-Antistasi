@@ -56,4 +56,21 @@ if (_varName == "siteKits") exitWith {
     } forEach _varValue;
 };
 
+if (_varName == "factoryBuilds") exitWith {
+    _varValue params [["_version", 0, [0]], ["_builds", [], [[]]], ["_queue", [], [[]]]];
+    if (_version != 1) exitWith { Error_1("Unknown factory build save version %1, builds not loaded", _version) };
+    {
+        _x params [["_marker", "", [""]], ["_class", "", [""]], ["_ticksLeft", 1, [0]], ["_ticksTotal", 1, [0]]];
+        // A build at a factory the rebels no longer hold was lost with it
+        if !(_marker in factories) then { continue };
+        if (sidesX getVariable [_marker, sideUnknown] != teamPlayer or {!isClass (configFile >> "CfgVehicles" >> _class)}) then {
+            Info_2("Dropping saved factory build %1 at %2", _class, _marker); continue
+        };
+        A3A_factoryBuilds set [_marker, [_class, _ticksLeft max 1, _ticksTotal max 1]];
+    } forEach _builds;
+    publicVariable "A3A_factoryBuilds";
+    A3A_factoryDeliveryQueue = _queue select { _x isEqualType "" and {isClass (configFile >> "CfgVehicles" >> _x)} };
+    Info_2("Factory builds loaded: %1, waiting for the garage: %2", A3A_factoryBuilds, A3A_factoryDeliveryQueue);
+};
+
 Error_1("Unknown site upgrade save key %1", _varName);

@@ -10,15 +10,16 @@ Return Value:
     <ARRAY>
         0: <ARRAY> siteUpgrades value: [version, levels [[marker, level], ...], buildings [[marker, level, posWorld, vecDir, vecUp], ...]]
         1: <ARRAY> siteKits value: [[level, marker, pricePaid, posATL, dir], ...], the same layout as townKits
+        2: <ARRAY> factoryBuilds value: [version, builds [[marker, class, ticksLeft, ticksTotal], ...], delivery queue [class, ...]]
 
 Scope: Server
 Environment: Any
 Public: No
 Dependencies:
-    A3A_siteLevels, A3A_siteBuildingData, A3A_upgradeKits
+    A3A_siteLevels, A3A_siteBuildingData, A3A_upgradeKits, A3A_factoryBuilds, A3A_factoryDeliveryQueue
 
 Example:
-    ([] call A3A_fnc_siteUpgradeSaveData) params ["_siteUpgrades", "_siteKits"];
+    ([] call A3A_fnc_siteUpgradeSaveData) params ["_siteUpgrades", "_siteKits", "_factoryBuilds"];
 */
 #include "..\..\script_component.hpp"
 FIX_LINE_NUMBERS()
@@ -42,4 +43,7 @@ private _kits = [];
     _kits pushBack [_level, _marker, _paid, getPosATL _x, getDir _x];
 } forEach A3A_upgradeKits;
 
-[[1, _levels, _buildings], _kits];
+private _builds = [];
+{ _builds pushBack ([_x] + _y) } forEach A3A_factoryBuilds;
+
+[[1, _levels, _buildings], _kits, [1, _builds, +A3A_factoryDeliveryQueue]];

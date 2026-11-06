@@ -87,6 +87,8 @@ while {true} do
 	private _taxCollected = missionNamespace getVariable ["A3A_rewardTaxCollected", 0];
 	private _showTax = (missionNamespace getVariable ["A3A_rewardTaxPercent", 0]) > 0;
 	A3A_rewardTaxCollected = 0;
+	// Factory builds advance one tick, finished vehicles go to the garage
+	[] call A3A_fnc_factoryBuildTick;
 	// Company town support and Smugglers magazines, before the unlock check so smuggled magazines can unlock
 	private _smuggled = [] call A3A_fnc_siteUpgradeTickBonuses;
 	private _textArsenal = [] call A3A_fnc_arsenalManage;

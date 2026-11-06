@@ -57,10 +57,10 @@ A3A_siteUpgradeMapScale = createHashMapFromArray [
 A3A_siteUpgradeRadius = 250;
 
 // Highest level sold per type. Raised release by release, the save keeps any level up to 7
-A3A_siteUpgradeLevelCap = createHashMapFromArray [["resource", 7], ["factory", 3], ["seaport", 7]];
+A3A_siteUpgradeLevelCap = createHashMapFromArray [["resource", 7], ["factory", 7], ["seaport", 7]];
 
 // Level bonuses. Resources: 3 Local workers, 5 Fortified compound, 7 Company town.
-// Seaports: 3 Smugglers, 5 Foreign volunteers, 7 Landing point. Factories: 3 Workshop, 5 and 7 production (not active yet)
+// Seaports: 3 Smugglers, 5 Foreign volunteers, 7 Landing point. Factories: 3 Workshop, 5 and 7 more vehicles to build
 A3A_siteUpgradeResHRPool = 3;               // Local workers: this HR per tick shared over all resources of the map
 A3A_siteUpgradeSeaHR = 0.5;                 // Foreign volunteers: HR per tick per seaport
 A3A_siteUpgradeHRCap = 5;                   // Most HR per tick from site upgrades
@@ -73,7 +73,17 @@ A3A_siteUpgradeWorkshopDiscount = 0.1;      // Workshop: off vehicle prices whil
 A3A_siteUpgradeVehicleDiscountCap = 0.4;    // Workshop plus the seaport or war tier vehicle discount
 A3A_siteCompanyTowns = [];                  // Towns that got Company town support last tick (server)
 // [type, level] of the level 3, 5 and 7 bonuses that work in this version, the tab marks the others as coming later
-A3A_siteUpgradeBonusesActive = [["resource", 3], ["resource", 5], ["resource", 7], ["seaport", 3], ["seaport", 5], ["seaport", 7], ["factory", 3]];
+A3A_siteUpgradeBonusesActive = [["resource", 3], ["resource", 5], ["resource", 7], ["seaport", 3], ["seaport", 5], ["seaport", 7], ["factory", 3], ["factory", 5], ["factory", 7]];
+
+// Factory production. Bands of A3A_factoryBuildList a factory level can build, index = level
+A3A_factoryLevelBands = [0, 1, 1, 1, 1, 2, 2, 3];
+A3A_factoryLightArmor = 150;                // cars below this config armor are band 1, the rest band 2
+A3A_factoryBuildMinHours = 2;
+A3A_factoryBuildMaxHours = 30;
+A3A_factoryBuilds = createHashMap;          // factory marker -> [class, ticks left, ticks total] (broadcast)
+A3A_factoryDeliveryQueue = [];              // finished classes waiting for a garage slot (server)
+// A3A_factoryBuildList is built by A3A_fnc_factoryBuildable after the server init and broadcast
+
 
 // Levels 3, 5 and 7 place a building that takes no damage
 A3A_siteUpgradeBuildings = createHashMap;

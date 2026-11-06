@@ -85,6 +85,12 @@ if (_siteType != "") then {
         format [localize "STR_A3A_fn_siteUpgrades_info_next", _level + 1, [_marker, _level + 1] call A3A_fnc_siteUpgradePrice]
     };
     _text = format ["%1<br/>%2<br/>%3", _text, format [localize "STR_A3A_fn_siteUpgrades_info_level", _level], _next];
+    // Factory production: what is built and the time left, never the income it costs
+    if (_marker in A3A_factoryBuilds) then {
+        (A3A_factoryBuilds get _marker) params ["_class", "_ticksLeft"];
+        private _name = getText (configFile >> "CfgVehicles" >> _class >> "displayName");
+        _text = format ["%1<br/>%2", _text, format [localize "STR_A3A_fn_siteUpgrades_info_build", _name, (_ticksLeft / 6) toFixed 1]];
+    };
 };
 
 // Add on the garrison info if it's rebel

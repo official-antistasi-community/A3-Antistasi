@@ -7092,6 +7092,24 @@
       <Key ID="STR_antistasi_dialogs_buy_site_upgrades_bonus_later">
         <Original>(in a later update)</Original>
       </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_build_label">
+        <Original>Build a vehicle, search by name:</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_build_row">
+        <Original>%1 (%2 h)</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_build">
+        <Original>Build</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_build_tooltip">
+        <Original>Builds %1 in about %2 h of play, for free. While it builds, this factory adds nothing to the faction income. The vehicle goes to the faction garage.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_build_select">
+        <Original>Select a vehicle in the list first.</Original>
+      </Key>
+      <Key ID="STR_antistasi_dialogs_buy_site_upgrades_build_running">
+        <Original>Building %1, %2 h left. It goes to the faction garage when it is done. Only one vehicle at a time.</Original>
+      </Key>
       <Key ID="STR_antistasi_dialogs_buy_site_upgrades_max">
         <Original>This site is at the highest level.</Original>
       </Key>

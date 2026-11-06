@@ -19,7 +19,7 @@ Return Value:
 Scope: Server
 Environment: Any
 Public: No
-Dependencies: A3A_fnc_junkyardClock, A3A_fnc_junkyardPrice, A3A_fnc_getVehicleWeaponTiers, HR_GRG_fnc_getCatIndex
+Dependencies: A3A_fnc_junkyardClock, A3A_fnc_junkyardPrice, A3A_fnc_junkyardComplexity, HR_GRG_fnc_getCatIndex
 
 Example:
     [typeOf _wreck, _price] call A3A_fnc_junkyardRepairAdd;
@@ -39,17 +39,8 @@ if (_cat < 0 or _cat == 7) exitWith { Info_1("Junkyard repair: %1 cannot be plac
 
 if (_junkPrice < 0) then { _junkPrice = [_class] call A3A_fnc_junkyardPrice };
 
-// Repair complexity 0..1. Mostly the junkyard price on a log scale, from 300 € (civilian car) to 200000 € (jet),
-// which already carries vehicle tier, armament and armor. Tracked and air vehicles take a little longer,
-// boats a little less, every extra weapon system adds some, and a random part keeps similar vehicles apart.
-private _complexity = (log ((_junkPrice max 300) / 300)) / (log (200000 / 300));
-_complexity = _complexity + call {
-    if (_class isKindOf "Air") exitWith { 0.1 };
-    if (_class isKindOf "Tank") exitWith { 0.1 };
-    if (_class isKindOf "Ship") exitWith { -0.05 };
-    0;
-};
-_complexity = _complexity + ((0.03 * count ([_class] call A3A_fnc_getVehicleWeaponTiers)) min 0.15);
+// Repair complexity 0..1 (A3A_fnc_junkyardComplexity), plus a random part that keeps similar vehicles apart
+private _complexity = [_class, _junkPrice] call A3A_fnc_junkyardComplexity;
 _complexity = ((_complexity - 0.1 + random 0.2) max 0) min 1;
 private _repairTime = 3600 * (A3A_junkyardRepairMinHours + (A3A_junkyardRepairMaxHours - A3A_junkyardRepairMinHours) * _complexity);
 
