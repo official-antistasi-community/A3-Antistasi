@@ -64,7 +64,11 @@ private _inv = [];
 _occ = _occ call _fnc_cleanPool;
 _inv = _inv call _fnc_cleanPool;
 
-// Everything drivable that is loaded, scanned once per session
+// Everything drivable that is loaded, scanned once per session. At server start the junkyard and factory production
+// ask at the same time: the first caller scans, a scheduled second caller waits for its result
+private _scan = false;
+isNil { if (isNil "A3A_junkyardWildcardScan") then { A3A_junkyardWildcardScan = true; _scan = true } };
+if (!_scan && canSuspend) then { waitUntil { sleep 0.5; !isNil "A3A_junkyardWildcardPool" } };
 if (isNil "A3A_junkyardWildcardPool") then {
     private _candidates = "getNumber (_x >> 'scope') == 2
         and {toLower getText (_x >> 'simulation') in ['carx', 'tankx', 'helicopterrtd', 'helicopterx', 'airplanex', 'shipx', 'submarinex']}
