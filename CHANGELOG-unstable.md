@@ -4,6 +4,18 @@ Every push to `unstable` adds one entry at the top of this file, newest first. T
 publishes the top entry as the body of the push's GitHub release and the Steam workflow
 publishes it as the Workshop change note, so write it for players. Format and rules: [CLAUDE.md](CLAUDE.md).
 
+## 2026-11-06 - Factories build vehicles
+
+### Added
+- **Factories build vehicles.** Select a rebel factory in the **Site upgrades** tab of the Buy Vehicle dialog, search the list by name and press **Build**. The finished vehicle goes to the faction garage.
+- What a factory can build depends on its level: from level 1 light cars and trucks, from level 5 also wheeled APCs, armoured cars and boats, at level 7 every vehicle the junkyard can offer, tracked and air included.
+- A build costs no money. While it runs, that factory adds nothing to the faction income. Builds take about 2 to 30 hours of play, rebel faction vehicles half as long, and only advance while players are online. Each factory builds one vehicle at a time.
+- If the enemy takes the factory, the build is lost. If the garage is full, finished vehicles wait until a slot is free.
+- Factories can now be upgraded to **level 7**. The site info shows what a factory is building and the time left.
+
+### Save
+- **The save is affected.** Running builds and vehicles waiting for the garage are saved. A save made with this version loses them if loaded in an older version.
+
 ## 2026-11-06 - Site upgrades: Workshop and Landing point
 
 ### Added
