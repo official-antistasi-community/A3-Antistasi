@@ -4,11 +4,8 @@
 // @world: Altis
 #include "\x\A3A_autotest\test.hpp"
 
-// Side changes in earlier tests spawn faction money updates. A3A_fnc_resourcesFIA is not atomic in scheduled code,
-// so let them finish before this test measures money
+// Side changes in earlier tests spawn faction money updates, let them finish before this test measures money
 sleep 3;
-private _settled = WAIT_UNTIL(!resourcesIsChanging, 10);
-if (!_settled) exitWith { FAIL("faction money still changing") };
 
 // State changed by the test, restored at the end
 private _city = citiesX select { !(_x in destroyedSites) } select 0;
@@ -51,20 +48,31 @@ ASSERT_EQ(call _funds, _before, "refused purchase takes no money");
 // Member purchase takes exactly the town price, computed on the server
 private _key = ["town", "clinic", _city];
 private _price = ["clinic", _city] call A3A_fnc_townUpgradePrice;
-_before = call _funds;
-private _crate = ["town", "clinic", _city, _cratePos, 0, _member] call A3A_fnc_upgradeKitPurchase;
+// The measured steps run unscheduled, so no other script can change the money between the two reads
+private _crate = objNull;
+private _spent = 0;
+isNil {
+    _before = call _funds;
+    _crate = ["town", "clinic", _city, _cratePos, 0, _member] call A3A_fnc_upgradeKitPurchase;
+    _spent = _before - (call _funds);
+};
 ASSERT(!isNull _crate, "member purchase creates the crate");
-ASSERT_EQ(_before - (call _funds), _price, "purchase takes the town upgrade price");
+ASSERT_EQ(_spent, _price, "purchase takes the town upgrade price");
 private _record = _crate getVariable ["A3A_upgradeKit", []];
 private _expectedRecord = ["town", "clinic", _city, _price];
 ASSERT_EQ(_record, _expectedRecord, "crate kit record");
 ASSERT(_crate in A3A_upgradeKits, "crate tracked in A3A_upgradeKits");
 
 // A second crate for the same upgrade and town is refused
-_before = call _funds;
-private _second = ["town", "clinic", _city, _cratePos vectorAdd [2, 0, 0], 0, _member] call A3A_fnc_upgradeKitPurchase;
+private _second = objNull;
+private _duplicateSpent = 0;
+isNil {
+    _before = call _funds;
+    _second = ["town", "clinic", _city, _cratePos vectorAdd [2, 0, 0], 0, _member] call A3A_fnc_upgradeKitPurchase;
+    _duplicateSpent = _before - (call _funds);
+};
 ASSERT(isNull _second, "duplicate purchase refused");
-ASSERT_EQ(call _funds, _before, "duplicate purchase takes no money");
+ASSERT_EQ(_duplicateSpent, 0, "duplicate purchase takes no money");
 ASSERT_EQ(count (_key call _kitsOf), 1, "still one crate for the upgrade");
 
 // Save and load: the townKits format is unchanged and the crate keeps its price paid
