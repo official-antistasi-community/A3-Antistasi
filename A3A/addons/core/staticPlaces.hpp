@@ -129,6 +129,13 @@ class StaticPlaces {
         };
     };
 
+    // SPE MG position. Not compatible with other modsets
+    class Land_SPE_Sandbag_Nest {
+        places[] = {
+            {"MG", {0.0065918,-0.489746,-0.417223}, 0}
+        };
+    };
+
     // Two-level bunker
     class Land_vn_b_trench_bunker_04_01 {
         places[] = {
